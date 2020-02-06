@@ -14,7 +14,7 @@ import tasks.Task;
 import tasks.TaskList;
 
 /**
- * Handle the loading and saving of task lists to the hard disk.
+ * Handles the loading and saving of task lists to the hard disk.
  */
 public class Storage {
     static Gson gson = new GsonBuilder()
@@ -25,26 +25,26 @@ public class Storage {
     static String userDirectory = System.getProperty("user.dir");
 
     /**
-     * Search for an existing file with a previous task list store.
+     * Searches for an existing file with a previous task list store.
      * If no such file found, create a new task list.
      */
-    public static void readFromFile() {
+    public static TaskList readFromFile() {
         try {
             FileReader fileReader = new FileReader(userDirectory + "/data.json");
-            TaskList.initializeArray(gson.fromJson(fileReader, new TypeToken<List<Task>>() {
+            return new TaskList(gson.fromJson(fileReader, new TypeToken<List<Task>>() {
             }.getType()));
         } catch (FileNotFoundException e) {
-            TaskList.initializeArray(new ArrayList<Task>());
+            return new TaskList(new ArrayList<Task>());
         }
     }
 
     /**
-     * Write task list into hard drive.
+     * Writes task list into hard drive.
      */
-    public static void saveFile() {
+    public static void saveFile(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(userDirectory + "/data.json");
-            gson.toJson(TaskList.getList(), fileWriter);
+            gson.toJson(taskList.getList(), fileWriter);
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException io) {

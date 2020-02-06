@@ -9,37 +9,40 @@ import java.util.ArrayList;
  * and delete tasks.
  */
 public class TaskList {
-    public static ArrayList<Task> list;
+    public ArrayList<Task> list;
 
     /**
-     * Initialize the task list.
+     * Initializes the task list.
      */
-    public static void initializeArray(ArrayList<Task> currentList) {
+    public TaskList(ArrayList<Task> currentList) {
         list = currentList;
     }
 
     /**
-     * Retrieve this task list.
+     * Retrieves this task list.
+     *
      * @return this task list.
      */
-    public static ArrayList<Task> getList() {
+    public ArrayList<Task> getList() {
         return list;
     }
 
     /**
-     * Add task to this task list.
+     * Adds task to this task list.
+     *
      * @param taskToAdd task to add to the list.
      */
-    public static void addTask(Task taskToAdd) {
+    public void addTask(Task taskToAdd) {
         list.add(taskToAdd);
     }
 
     /**
-     * Delete task with the specified task number from this task list.
+     * Deletes task with the specified task number from this task list.
+     *
      * @param taskNumber task to be deleted.
      * @return deleted task.
      */
-    public static Task deleteTask(int taskNumber) {
+    public Task deleteTask(int taskNumber) {
         if (taskNumber > list.size()) {
             throw new DukeException("☹ OOPS!!! There is no such task.");
         }
@@ -49,18 +52,19 @@ public class TaskList {
     }
 
     /**
-     * Clear all tasks from this task list.
+     * Clears all tasks from this task list.
      */
-    public static void clearAll() {
+    public void clearAll() {
         list.clear();
     }
 
     /**
-     * Mark task with specified task number as done.
+     * Marks task with specified task number as done.
+     *
      * @param taskNumber task to be marked as done.
      * @return task marked as done.
      */
-    public static Task markAsDone(int taskNumber) {
+    public Task markAsDone(int taskNumber) {
         if (taskNumber > list.size()) {
             throw new DukeException("☹ OOPS!!! There is no such task.");
         }
@@ -69,26 +73,29 @@ public class TaskList {
     }
 
     /**
-     * Return total number of tasks in this task list.
+     * Returns total number of tasks in this task list.
+     *
      * @return total number of tasks in this task list.
      */
-    public static int getTotalTasks() {
+    public int getTotalTasks() {
         return list.size();
     }
 
     /**
      * Checks if this task list is empty.
+     *
      * @return true if task list is empty and false otherwise.
      */
-    public static boolean isEmpty() {
+    public boolean isEmpty() {
         return list.isEmpty();
     }
 
     /**
-     * Return information on the number of tasks in the list.
+     * Returns information on the number of tasks in the list.
+     *
      * @return the string of the total number of tasks in the list.
      */
-    public static String printTotalTasks() {
+    public String printTotalTasks() {
         if (getTotalTasks() == 0) {
             return "\tNow you have no tasks in the list.";
         } else if (getTotalTasks() == 1) {
@@ -99,10 +106,11 @@ public class TaskList {
     }
 
     /**
-     * Print all tasks in this task list containing the keyword in a numbered order.
+     * Prints all tasks in this task list containing the keyword in a numbered order.
+     *
      * @return the string of all tasks containing the keyword in this task list.
      */
-    public static String findTaskContainingKeyword(String keyword) {
+    public String findTaskContainingKeyword(String keyword) {
         String printedList = "";
         int taskNumber = 1;
         for (Task task : list) {
@@ -115,10 +123,11 @@ public class TaskList {
     }
 
     /**
-     * Print all tasks in this task list in a numbered order.
+     * Prints all tasks in this task list in a numbered order.
+     *
      * @return the string of all tasks in this task list.
      */
-    public static String printList() {
+    public String printList() {
         String printedList = "";
         int taskNumber = 1;
         for (Task task : list) {

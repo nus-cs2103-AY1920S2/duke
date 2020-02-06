@@ -6,7 +6,7 @@ package tasks;
 public class Todo extends Task {
 
     /**
-     * Create a task without any date/time attached to it.
+     * Creates a task without any date/time attached to it.
      *
      * @param description task to be completed.
      */

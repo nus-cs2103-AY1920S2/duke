@@ -1,14 +1,14 @@
 package tasks;
 
 /**
- * Specify main attributes and methods for tasks.
+ * Specifies main attributes and methods for tasks.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Create a task object with a description.
+     * Creates a task object with a description.
      *
      * @param description of the task.
      */
@@ -19,7 +19,8 @@ public class Task {
     }
 
     /**
-     * Return description of the task.
+     * Returns the description of the task.
+     *
      * @return task description.
      */
     public String getDescription() {
@@ -27,7 +28,7 @@ public class Task {
     }
 
     /**
-     * Return a tick for tasks marked as done and a cross for tasks not done.
+     * Returns a tick for tasks marked as done and a cross for tasks not done.
      *
      * @returna tick for tasks marked as done and a cross for tasks not done.
      */
@@ -37,7 +38,7 @@ public class Task {
     }
 
     /**
-     * Change the status of the task to done.
+     * Changes the status of the task to done.
      */
     public void setDone() {
         isDone = true;

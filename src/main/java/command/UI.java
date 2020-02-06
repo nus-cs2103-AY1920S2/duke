@@ -14,5 +14,4 @@ public class UI {
     public static final String LIST = "\tHere are the tasks in your list:";
     public static final String REMOVE = "\tNoted. I've removed this task:\n\t\t";
     public static final String START = "Hello from\n" + LOGO;
-
 }
