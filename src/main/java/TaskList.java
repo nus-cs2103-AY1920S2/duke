@@ -100,6 +100,22 @@ public class TaskList {
     }
 
     /**
+     * Finds and displays tasks that contain the query string.
+     *
+     * @param query The query string.
+     */
+    public void find(String query) {
+        ui.print("Here are the matching tasks in your list:");
+        int count = 1;
+        for (Task t : taskList) {
+            if (t.toString().contains(query)) {
+                ui.print(count + "." + t);
+                count++;
+            }
+        }
+    }
+
+    /**
      * Marks task at index i (starts at 1) in task list as done.
      *
      * @param i Index of task to mark as done.
