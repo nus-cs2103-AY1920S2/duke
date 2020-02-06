@@ -154,7 +154,7 @@ public class Ui {
     /**
      * Prints goodbye message.
      */
-    protected void goodbye() {
+    public void goodbye() {
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation("Goodbye friend.");
         printTextWithIndentation(HORIZONTAL_BAR);

@@ -69,7 +69,6 @@ public class Duke {
                 ui.showExceptionMessage(dukeException);
             }
         }
-        ui.goodbye();
     }
 
     public Storage getStorage() {

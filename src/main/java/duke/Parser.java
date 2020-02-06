@@ -20,7 +20,7 @@ import java.util.HashMap;
  */
 public class Parser {
     protected static HashMap<String, String> commandDelimiter = setupCommandDelimiter();
-    protected static HashMap<String, String> commandTypeFormatInfo = setupCommandTypeFormatInfo();;
+    protected static HashMap<String, String> commandTypeFormatInfo = setupCommandTypeFormatInfo();
 
     /**
      * Creates a new command based on given input string.

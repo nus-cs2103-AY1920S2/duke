@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -35,6 +36,9 @@ public class MainWindow extends AnchorPane {
     private Image mrRobotIcon = new Image(
             this.getClass().getResourceAsStream("/images/mr-robot-logo.jpg"));
 
+    /**
+     * GUI start up.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -73,5 +77,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, mrRobotIcon)
         );
         userInput.clear();
+        if (response.equals("Goodbye friend.")) {
+            Platform.exit();
+        }
     }
 }
