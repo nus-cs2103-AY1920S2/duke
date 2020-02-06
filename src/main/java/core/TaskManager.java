@@ -1,6 +1,7 @@
 package core;
 
 import dukexception.DukeException;
+import task.RecurringTask;
 import task.Task;
 
 import java.util.ArrayList;
@@ -26,13 +27,20 @@ public class TaskManager {
     }
 
     /**
-     * Marks the task as done.
-     *
-     * @param index indicate the specific task.
-     * @throws DukeException when index is invalid.
+     * Marks the task to be done, or recurs the task if the task is recursive.
+     * @param index index of the task in task list.
+     * @return if the task has recurs.
+     * @throws DukeException if the index is out of bound or task list is empty.
      */
-    public void markDone(int index) throws DukeException {
-        getTask(index).setDone();
+    public boolean markDone(int index) throws DukeException {
+        Task task=getTask(index);
+        if(task instanceof RecurringTask){
+            ((RecurringTask)task).recurs();
+            return true;
+        }else{
+            task.setDone();
+            return false;
+        }
     }
 
     /**
@@ -66,7 +74,6 @@ public class TaskManager {
         }
         return matchingTasks;
     }
-
 
     /**
      * Obtains the task.

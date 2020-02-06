@@ -12,6 +12,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import task.Deadline;
 import task.Event;
+import task.RecurringTask;
 import task.Task;
 import task.ToDo;
 
@@ -86,6 +87,7 @@ public class DataParser {
             map.put("T", ToDo.class);
             map.put("D", Deadline.class);
             map.put("E", Event.class);
+            map.put("R", RecurringTask.class);
         }
 
         @Override
@@ -93,7 +95,7 @@ public class DataParser {
                                      JsonSerializationContext context) {
             Class c = map.get(src.getTypeIcon().charAt(1));
             if (c == null) {
-                throw new RuntimeException("Unknow class: " + src.getTypeIcon().charAt(1));
+                throw new RuntimeException("Unknown class: " + src.getTypeIcon().charAt(1));
             }
             return context.serialize(src, c);
         }
@@ -105,7 +107,7 @@ public class DataParser {
             String type = jsonObject.get("typeIcon").getAsString();
             Class c = map.get(type);
             if (c == null) {
-                throw new RuntimeException("Unknow class: " + type);
+                throw new RuntimeException("Unknown class: " + type);
             }
             return context.deserialize(json, c);
         }

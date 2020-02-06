@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 
 import command.AddDeadlineCommand;
 import command.AddEventCommand;
+import command.AddRecurringCommand;
 import command.AddToDoCommand;
 import command.Command;
 import command.DeleteCommand;
@@ -48,6 +49,8 @@ public class Parser {
                 return parseDeadline(information);
             case "event":
                 return parseEvent(information);
+            case "recurring":
+                return parseRecurring(information);
             case "find":
                 return parseFind(information);
             default:
@@ -155,6 +158,24 @@ public class Parser {
             throw new DukeException(ErrorMessage.LACK_TIME.toString());
         }
         return new AddEventCommand(description, parseDate(time));
+    }
+
+    private Command parseRecurring(String information) throws DukeException {
+        final String AT = " /at ";
+        if (!information.contains(AT)) {
+            throw new DukeException(ErrorMessage.LACK_INPUT.toString() + AT);
+        }
+
+        String description = information.substring(0, information.indexOf(AT));
+        if (description.trim().length() == 0) {
+            throw new DukeException(ErrorMessage.LACK_DESCRIPTION.toString());
+        }
+
+        String time = information.substring(information.indexOf(AT) + 5);
+        if (time.trim().length() == 0) {
+            throw new DukeException(ErrorMessage.LACK_TIME.toString());
+        }
+        return new AddRecurringCommand(description, parseDate(time));
     }
 
     private LocalDate parseDate(String date) throws DukeException {

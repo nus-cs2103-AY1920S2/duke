@@ -32,8 +32,6 @@ public class Duke {
      */
     public void run() {
 
-        ui.preLog();
-
         boolean isExit = false;
 
         while (!isExit) {
@@ -46,7 +44,6 @@ public class Duke {
                 ui.errorLog(e.getMessage());
             }
         }
-
     }
 
     public static void main(String[] args) {
@@ -67,6 +64,5 @@ public class Duke {
             return e.getMessage();
         }
     }
-
 
 }
