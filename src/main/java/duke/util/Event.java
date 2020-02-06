@@ -31,7 +31,7 @@ public class Event extends Task {
      */
 
     public Event(String description, String atSchedule) throws DukeInvalidDateFormatException {
-        super(description);
+        super(description, "E");
         this.atSchedule = TaskSchedule.parseSchedule(atSchedule);
     }
 
@@ -53,6 +53,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E] [%s] %s (at: %s)", getStatusIcon(), this.description, this.atSchedule);
+        return String.format("[%s] [%s] %s (at: %s)", this.type, getStatusIcon(), this.description, this.atSchedule);
     }
 }

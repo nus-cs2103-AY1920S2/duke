@@ -20,16 +20,19 @@ package duke.util;
 
 public abstract class Task {
     protected String description;
+    protected String type;
     protected boolean isDone;
 
     /**
      * Constructs a Task instance with isDone variable set to be
      * false.
      * @param description The description or the details of the task.
+     * @param type The type of the task.
      */
 
-    public Task(String description) {
+    public Task(String description, String type) {
         this.description = description;
+        this.type = type;
         this.isDone = false;
     }
 
