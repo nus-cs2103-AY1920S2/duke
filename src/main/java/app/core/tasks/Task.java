@@ -28,7 +28,7 @@ public class Task {
     }
     
     /**
-     * Creates a Task based on the format stored in storage
+     * Creates a Task based on the format stored in storage.
      * @param data Storage data
      * @return A new Task object
      */
@@ -59,7 +59,7 @@ public class Task {
     }
     
     /**
-     * Returns a String in the format used to save the task in storage
+     * Returns a String in the format used to save the task in storage.
      * @return a String in the storage format
      */
     public String toStorage() {
@@ -67,7 +67,7 @@ public class Task {
     }
 
     /**
-     * Returns a String representation of the Task
+     * Returns a String representation of the Task.
      * @return a String representation of the Task
      */
     @Override

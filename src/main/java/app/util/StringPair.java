@@ -2,12 +2,12 @@ package app.util;
 
 /**
  * This class is a special child of the Pair class,
- * where it only holds two String values
+ * where it only holds two String values.
  */
 public final class StringPair extends Pair {
 
     /**
-     * Initializes a new StringPair object with two strings
+     * Initializes a new StringPair object with two strings.
      * @param firstValue The first string
      * @param secondValue The second string
      */
@@ -15,8 +15,8 @@ public final class StringPair extends Pair {
         super(firstValue, secondValue);
     }
 
-     /**
-     * Returns the first string of the StringPair object
+    /**
+     * Returns the first string of the StringPair object.
      * @return the first string of the StringPair object
      */
     @Override
@@ -25,7 +25,7 @@ public final class StringPair extends Pair {
     }
     
     /**
-    * Returns the second string of the StringPair object
+    * Returns the second string of the StringPair object.
     * @return the second string of the StringPair object
     */
     @Override

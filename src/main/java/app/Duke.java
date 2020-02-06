@@ -13,12 +13,12 @@ import app.core.tasks.TaskManager;
  */
 public final class Duke {
     /**
-     * Welcome message that is printed upon starting Duke
+     * Welcome message that is printed upon starting Duke.
      */
     public static final String WELCOME_MESSAGE = "Wussup Dawggg! I'm Dukeee\nWhat you want me do?";
 
     /**
-     * Goodbye message that is printed right before the program exits
+     * Goodbye message that is printed right before the program exits.
      */
     public static final String GOODBYE_MESSAGE = "Bye!\nStay cool bruh! (((:";
     public static final String UNEXPECTED_ERROR_MESSAGE = "Caught some other exception! Notify developer!";
@@ -35,7 +35,7 @@ public final class Duke {
     }
     
     /**
-     * Starts Duke
+     * Starts Duke.
      */
     public void start() {
         ConsoleInterface console = new ConsoleInterface();
@@ -64,6 +64,14 @@ public final class Duke {
         console.render(GOODBYE_MESSAGE);
     }
 
+    /**
+     * Processes the input based on Duke's configurations
+     *     and returns the corresponding result.
+     * @param input The input to be processed.
+     * @return A Pair object containing the output values.
+     * @throws BaseException If any exceptions occur during the execution
+     *     of the input.
+     */
     public Pair executeInput(String input) throws BaseException {
         Command command = this.commandManager.getCommand(input);
         Pair output = command.execute(this.taskManager);

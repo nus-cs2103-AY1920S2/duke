@@ -2,7 +2,7 @@ package app.util;
 
 /**
  * This class provides various utility functionalities 
- * to parse a String
+ * to parse a String.
  */
 public final class Parser {
     /**
@@ -11,7 +11,7 @@ public final class Parser {
      * containing the first word and the rest of the string.
      * @param input The input string
      * @return A StringPair object containing the first word and 
-     * the rest of the string.
+     *     the rest of the string.
      */
     public static StringPair parse(String input) {
         String command = input;

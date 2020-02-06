@@ -9,7 +9,7 @@ public class Pair {
     protected Object secondValue;
 
     /**
-     * Initializes a new Pair object with two values
+     * Initializes a new Pair object with two values.
      * @param firstValue The first value of the object
      * @param secondValue The second value of the object
      */
@@ -19,7 +19,7 @@ public class Pair {
     }
 
     /**
-     * Returns the first value of the Pair object
+     * Returns the first value of the Pair object.
      * @return the first value of the Pair object
      */
     public Object getFirstValue() {
@@ -27,7 +27,7 @@ public class Pair {
     }
 
     /**
-     * Returns the second value of the Pair object
+     * Returns the second value of the Pair object.
      * @return the second value of the Pair object
      */
     public Object getSecondValue() {

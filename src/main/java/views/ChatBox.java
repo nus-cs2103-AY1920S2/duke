@@ -42,6 +42,8 @@ public class ChatBox {
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * @param node The node to flip.
+     * @return The flipped node.
      */
     private static HBox flip(HBox node) {
         ObservableList<Node> tmp = FXCollections.observableArrayList(node.getChildren());
@@ -50,6 +52,12 @@ public class ChatBox {
         return node;
     }
 
+    /**
+     * Creates a user-sided ChatBox based on the input text and image.
+     * @param text The text to show.
+     * @param img The display image to show.
+     * @return The node to be displayed.
+     */
     public static HBox getUserDialog(String text, Image img) {
         try {
             HBox node = ChatBox.getDialog(text, img);
@@ -60,6 +68,12 @@ public class ChatBox {
         }
     }
 
+    /**
+     * Creates a duke-sided ChatBox based on the input text and image.
+     * @param text The text to show.
+     * @param img The display image to show.
+     * @return The node to be displayed.
+     */
     public static HBox getDukeDialog(String text, Image img) {
         try {
             HBox node = ChatBox.getDialog(text, img);
@@ -71,7 +85,7 @@ public class ChatBox {
         }
     }
 
-    public static HBox getDialog(String text, Image img) throws IOException {
+    private static HBox getDialog(String text, Image img) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ChatBox.class.getResource("/views/ChatBox.fxml"));
         HBox node = fxmlLoader.load();
         fxmlLoader.<ChatBox>getController().setDialog(text);

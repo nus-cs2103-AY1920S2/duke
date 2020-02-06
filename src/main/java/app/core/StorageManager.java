@@ -12,20 +12,19 @@ import app.core.tasks.Task;
 import app.exceptions.StorageFileException;
 
 /**
- * This class manages all storage related tasks in Duke
+ * This class manages all storage related tasks in Duke.
  */
 public final class StorageManager {
     /**
-     * Default Storage Directory
+     * Default Storage Directory.
      */
     public static final String STORAGE_DIR = "./data/";
     public static final String STORAGE_FILENAME = "tasks.txt";
     private static final String STORAGE_FILEPATH = STORAGE_DIR + STORAGE_FILENAME;
 
     /**
-     * Saves a list of tasks in storage
+     * Saves a list of tasks in storage.
      * @param tasks The list of tasks
-     * @return True if the process is successful, False otherwise
      */
     public void save(List<Task> tasks) throws StorageFileException {
         try {
@@ -43,13 +42,13 @@ public final class StorageManager {
         } catch (IOException e) {
             throw new StorageFileException(String.format("An error was found while writing to the storage file!\n"
                 + "The file may be corrupted. "
-                + "Please check the file at %s"
-            , STORAGE_FILEPATH));
+                + "Please check the file at %s",
+            STORAGE_FILEPATH));
         }
     }
 
     /**
-     * Loads a list of tasks from the storage
+     * Loads a list of tasks from the storage.
      * @return a parsed list of tasks
      */
     public List<Task> load() {
