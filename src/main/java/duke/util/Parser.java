@@ -1,6 +1,7 @@
 package duke.util;
 
 import duke.command.AddCommand;
+import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -40,6 +41,7 @@ public class Parser {
             put("event", Keyword.EVENT);
             put("delete", Keyword.DELETE);
             put("find", Keyword.FIND);
+            put("bye", Keyword.BYE);
         }
     };
 
@@ -97,6 +99,9 @@ public class Parser {
         case DEADLINE:
             command = checkValidDeadlineArgument(details);
             break;
+        case BYE:
+            command = checkValidByeArgument(details);
+            break;
         default:
             command = checkValidEventArgument(details);
             break;
@@ -121,6 +126,7 @@ public class Parser {
      * Verifies whether the Argument instance
      * is a valid "list" argument. It will throw an exception if
      * the argument is not valid.
+     * @param details The details of the command.
      * @throws DukeInvalidArgumentFormatException If the argument is not a valid argument.
      */
 
@@ -137,6 +143,8 @@ public class Parser {
      * is a valid "done" argument. It will throw an exception if
      * the argument is not valid (i.e. if the argument is empty or
      * not a number).
+     * @param details The details of the command.
+     * @param taskList The list of the tasks.
      * @return The index of the done argument, if the argument is valid.
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
@@ -162,6 +170,8 @@ public class Parser {
      * is a valid "delete" argument. It will throw an exception if
      * the argument is not valid (i.e. if the argument is empty or
      * not a number).
+     * @param details The details of the command.
+     * @param taskList The list of the tasks.
      * @return The index of the delete argument, if the argument is valid.
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
@@ -187,6 +197,7 @@ public class Parser {
      * is a valid "todo" argument. It will throw an exception if
      * the argument is not valid (i.e. if the argument has no
      * description).
+     * @param details The details of the command.
      * @return The description of the todo argument, if the argument is valid.
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
@@ -204,6 +215,7 @@ public class Parser {
      * is a valid "deadline" argument. It will throw an exception if
      * the argument is not valid (i.e. if the argument has no description,
      * or the due date, or the format of the command is not proper).
+     * @param details The details of the command.
      * @return The Pair of String, regarding to the description and the due date.
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
@@ -230,6 +242,7 @@ public class Parser {
      * is a valid "event" argument. It will throw an exception if
      * the argument is not valid (i.e. if the argument has no description,
      * or the event date, or the format of the command is not proper).
+     * @param details The details of the command.
      * @return The Pair of String, regarding to the description and the event date.
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
@@ -254,11 +267,21 @@ public class Parser {
     /**
      * Verifies that the command entered by the client is a valid
      * find command.
-     * @param details The keyword that the client enters
+     * @param details The details of the command.
      * @return The FindCommand instance of the corresponding input.
      */
 
     private FindCommand checkValidFindArgument(String details) {
         return new FindCommand(details);
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid bye command.
+     * @param details The details of the command.
+     * @return The ByeCommand instance of the corresponding input.
+     */
+
+    private ByeCommand checkValidByeArgument(String details) {
+        return new ByeCommand();
     }
 }

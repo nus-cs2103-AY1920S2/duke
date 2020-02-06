@@ -27,7 +27,8 @@ public enum Keyword {
      * <li>EVENT</li>
      * <li>DELETE</li>
      * <li>FIND</li>
+     * <li>BYE</li>
      */
 
-    LIST, DONE, TODO, DEADLINE, EVENT, DELETE, FIND;
+    LIST, DONE, TODO, DEADLINE, EVENT, DELETE, FIND, BYE;
 }
