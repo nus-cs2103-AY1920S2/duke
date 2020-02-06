@@ -11,7 +11,7 @@ public class Ui {
      * This method prints the greeting string at the start of the program.
      */
     public String greeting() {
-        String greeting = " Hello! I'm Duke\n" + space + " What can I do for you?\n";
+        String greeting = "Hello! I'm Duke\n" + " What can I do for you?\n";
         return greeting;
     }
 
@@ -31,7 +31,7 @@ public class Ui {
      * This method prints the string at the end of the program.
      */
     public String bye() {
-        String bye = space + " Bye. Hope to see you again soon!\n";
+        String bye = " Bye. Hope to see you again soon!\n";
         return bye;
     }
 
@@ -41,16 +41,16 @@ public class Ui {
     }
 
     public String searchTask() {
-        return "\n" + space + "Here are the matching tasks in your list:\n";
+        return "Here are the matching tasks in your list:\n";
     }
 
     public String addTask(TaskList list) {
         return (" Got it. I've added this task:\n" + space + list.items.get(list.items.size() - 1)
-                + space + " Now you have " + list.count + " task");
+                + " Now you have " + list.count + " task");
     }
 
     public String markDone(Item item) {
-        return space + "Nice! I've marked this task as done:\n" + space + item;
+        return "Nice! I've marked this task as done:\n" + space + item;
     }
 
     public void printIOerr() {

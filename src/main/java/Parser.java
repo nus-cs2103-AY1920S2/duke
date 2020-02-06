@@ -31,7 +31,7 @@ public class Parser {
             String[] tmp = temp.split(" ");
             String task = append(tmp);
             if (temp.equals("list")) {
-                return ui.space + list.toString();
+                return list.toString();
             } else if (temp.equals("bye")) {
                 return ui.bye();
             } else if (tmp[0].equals("done") || tmp[0].equals("delete")) {

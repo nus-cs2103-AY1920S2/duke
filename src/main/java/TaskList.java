@@ -47,9 +47,8 @@ public class TaskList {
         if (count < 1) {
             return "No current task in the list";
         } else {
-            String temp = ui.space + " Here are the tasks in your list:\n";
+            String temp = " Here are the tasks in your list:\n";
             for (int i = 0; i < count; i++) {
-                temp += ui.space;
                 temp += " ";
                 temp += Integer.toString(i + 1);
                 temp += this.items.get(i);
