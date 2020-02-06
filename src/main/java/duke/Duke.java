@@ -202,4 +202,9 @@ public class Duke {
         taskList.addTask(task);
         ui.showAdd(task, taskList.getTaskList());
     }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
 }
