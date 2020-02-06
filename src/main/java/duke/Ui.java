@@ -12,7 +12,7 @@ public class Ui {
     }
 
     /**
-     * Asks the user for input
+     * Asks the user for input.
      *
      * @return String representation of said input.
      */
@@ -34,7 +34,7 @@ public class Ui {
         System.out.println("----------------------------");
     }
 
-    /** Prints a small line */
+    /** Prints a small line. */
     public void printSmallLine() {
         System.out.println("    -----");
     }
@@ -47,7 +47,7 @@ public class Ui {
     }
 
     /**
-     * Prints the task list
+     * Prints the task list.
      *
      * @param tasks the task list
      */

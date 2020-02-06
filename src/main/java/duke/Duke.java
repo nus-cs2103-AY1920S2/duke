@@ -3,7 +3,11 @@ package duke;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.exception.*;
+import duke.exception.InvalidIndexException;
+import duke.exception.MissingParameterException;
+import duke.exception.MissingTimeException;
+import duke.exception.TimeFormatException;
+import duke.exception.UnknownCommandException;
 
 /** Class Duke, the driver class of the program. */
 public class Duke {
@@ -52,27 +56,39 @@ public class Duke {
                     ui.showList(taskList.getTaskList(), "Here are the tasks in your list:");
                     break;
                 case "search":
-                    if (keywords.length == 1) throw new MissingParameterException("Search");
+                    if (keywords.length == 1) {
+                        throw new MissingParameterException("Search");
+                    }
                     handleSearch(keywords[1]);
                     break;
                 case "done":
-                    if (keywords.length == 1) throw new MissingParameterException("Done");
+                    if (keywords.length == 1) {
+                        throw new MissingParameterException("Done");
+                    }
                     handleDone(keywords[1]);
                     break;
                 case "delete":
-                    if (keywords.length == 1) throw new MissingParameterException("Delete");
+                    if (keywords.length == 1) {
+                        throw new MissingParameterException("Delete");
+                    }
                     handleDelete(keywords[1]);
                     break;
                 case "todo":
-                    if (keywords.length == 1) throw new MissingParameterException("Todo");
+                    if (keywords.length == 1) {
+                        throw new MissingParameterException("Todo");
+                    }
                     handleTodo(keywords[1]);
                     break;
                 case "event":
-                    if (keywords.length == 1) throw new MissingParameterException("Event");
+                    if (keywords.length == 1) {
+                        throw new MissingParameterException("Event");
+                    }
                     handleEvent(keywords[1]);
                     break;
                 case "deadline":
-                    if (keywords.length == 1) throw new MissingParameterException("Deadline");
+                    if (keywords.length == 1) {
+                        throw new MissingParameterException("Deadline");
+                    }
                     handleDeadline(keywords[1]);
                     break;
                 default:
@@ -95,7 +111,7 @@ public class Duke {
     }
 
     /**
-     * Handles the searching for key in the task list
+     * Handles the searching for key in the task list.
      *
      * @param key String that we want to look for in the task.
      */
@@ -143,13 +159,15 @@ public class Duke {
     }
 
     /**
-     * Handles the event command
+     * Handles the event command.
      *
      * @param description String containing both the name and time of the task.
      */
     public void handleEvent(String description) {
         String[] strArr = description.split(" /at ", 2);
-        if (strArr.length == 1) throw new MissingTimeException("Event");
+        if (strArr.length == 1) {
+            throw new MissingTimeException("Event");
+        }
         String todo = strArr[0];
         String time = strArr[1];
         Event task = new Event(todo, parser.stringToTime(time));
@@ -158,7 +176,7 @@ public class Duke {
     }
 
     /**
-     * Handles the todo command
+     * Handles the todo command.
      *
      * @param description String containing the task name.
      */
@@ -169,13 +187,15 @@ public class Duke {
     }
 
     /**
-     * Handles the deadline command
+     * Handles the deadline command.
      *
      * @param description String containing both the name and time of the task.
      */
     public void handleDeadline(String description) {
         String[] strArr = description.split(" /by ", 2);
-        if (strArr.length == 1) throw new MissingTimeException("Deadline");
+        if (strArr.length == 1) {
+            throw new MissingTimeException("Deadline");
+        }
         String todo = strArr[0];
         String time = strArr[1];
         Deadline task = new Deadline(todo, parser.stringToTime(time));

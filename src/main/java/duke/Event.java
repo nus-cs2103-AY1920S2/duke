@@ -28,6 +28,7 @@ public class Event extends Task {
         String timeStr = this.time.format(DateTimeFormatter.ofPattern("HH:mm, MMM d yyyy"));
         return String.format("[E]%s (at: %s)", super.toString(), timeStr);
     }
+    
     /**
      * Returns String representation of the event object to be saved.
      *

@@ -3,7 +3,7 @@ package duke;
 /** Class representing todo task. */
 public class Todo extends Task {
     /**
-     * Creates a Todo object
+     * Creates a Todo object.
      *
      * @param task String containing what to do.
      */

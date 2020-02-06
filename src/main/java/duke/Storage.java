@@ -1,6 +1,12 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 
 /** Class representing a Store, to save and load from file. */
@@ -41,28 +47,30 @@ public class Storage {
      */
     public void loadBaby(TaskList taskList, Parser parser) throws IOException {
         File file = new File(path);
-        if (file.createNewFile()) return;
+        if (file.createNewFile()) {
+            return;
+        }
         BufferedReader taskLoader = new BufferedReader(new FileReader(path));
         String longCommand = taskLoader.readLine();
         while (longCommand != null) {
             String[] keywords = longCommand.split(" \\|\\| ");
             Task cur = null;
             switch (keywords[1]) {
-                case "todo":
-                    cur = new Todo(keywords[2]);
-                    taskList.getTaskList().add(cur);
-                    break;
-                case "deadline":
-                    cur = new Deadline(keywords[2], parser.stringToTime(keywords[3]));
-                    taskList.getTaskList().add(cur);
-                    break;
-                case "event":
-                    cur = new Event(keywords[2], parser.stringToTime(keywords[3]));
-                    taskList.getTaskList().add(cur);
-                    break;
-                default:
-                    System.out.println("error");
-                    break;
+            case "todo":
+                cur = new Todo(keywords[2]);
+                taskList.getTaskList().add(cur);
+                break;
+            case "deadline":
+                cur = new Deadline(keywords[2], parser.stringToTime(keywords[3]));
+                taskList.getTaskList().add(cur);
+                break;
+            case "event":
+                cur = new Event(keywords[2], parser.stringToTime(keywords[3]));
+                taskList.getTaskList().add(cur);
+                break;
+            default:
+                System.out.println("error");
+                break;
             }
             if (keywords[0].equals("1")) {
                 assert cur != null;
