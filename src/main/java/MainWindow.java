@@ -31,6 +31,7 @@ public class MainWindow extends AnchorPane {
 
     public void setAR(AutoResponder ar) {
         this.ar = ar;
+        this.ar.loadList();
     }
 
     /**

@@ -3,7 +3,7 @@ public interface Task {
 
     boolean getCompletion();
 
-    Task makeCompleted();
+    void makeCompleted();
 
     String writeFormat();
 }

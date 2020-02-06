@@ -1,18 +1,6 @@
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -21,9 +9,9 @@ import java.util.stream.Collectors;
  * Main driver class of AutoResponder chat.
  */
 public class AutoResponder {
-    private final List<Task> taskList;
+    private List<Task> taskList;
     private StringBuilder toPrint;
-    private final Ui ui;
+    private Storage storage;
     static Pattern PATTERN_DEADLINE = Pattern.compile("^deadline (.+) /by (.+)");
     static Pattern PATTERN_EVENT = Pattern.compile("^event (.+) /at (.+)");
     static Pattern PATTERN_TODO = Pattern.compile("^todo (.+)");
@@ -35,14 +23,6 @@ public class AutoResponder {
     static Pattern PATTERN_FIND = Pattern.compile("^find (.+)");
     static Pattern PATTERN_BYE = Pattern.compile("^bye\\s*$");
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
 
     /**
      * Initialiser for empty AutoResponder object.
@@ -50,13 +30,7 @@ public class AutoResponder {
     public AutoResponder() {
         this.taskList = new ArrayList<>();
         this.toPrint = new StringBuilder();
-        this.ui = new Ui();
-    }
-
-    private AutoResponder(List<Task> taskList, StringBuilder toPrint) {
-        this.taskList = taskList;
-        this.toPrint = toPrint;
-        this.ui = new Ui();
+        this.storage = new Storage();
     }
 
     private String printToConsole() {
@@ -124,23 +98,8 @@ public class AutoResponder {
     }
 
     private String saveList() {
-        StringBuilder writeContents = new StringBuilder();
-        for (Task v : taskList) {
-            writeContents.append(v.writeFormat());
-            writeContents.append("\n");
-        }
-        if (!Files.exists(Paths.get("./data"))) {
-            boolean ok = new File("./data").mkdir();
-            if (!ok) {
-                System.err.println("Error in creating directory.\n");
-            }
-        }
-        File f = new File("./data/duke.txt");
-        String path = f.getAbsolutePath();
         try {
-            FileWriter fw = new FileWriter(path);
-            fw.write(writeContents.toString());
-            fw.close();
+            storage.saveList(taskList);
             toPrint.append("Tasks saved successfully.\n");
         } catch (IOException e) {
             toPrint.append("Tasks not loaded");
@@ -148,27 +107,13 @@ public class AutoResponder {
         return this.printToConsole();
     }
 
-    private String loadList() {
+    /**
+     * Loads list from default storage location. Public to ensure initialisation step occurs.
+     * @return String with error/success message
+     */
+    public String loadList() {
         try {
-            File f = new File("./data/duke.txt");
-            Scanner sc = new Scanner(f);
-            String s;
-            while (sc.hasNextLine()) {
-                s = sc.nextLine();
-                switch (s.charAt(0)) {
-                case 'T':
-                    taskList.add(Todo.readFormat(s));
-                    break;
-                case 'D':
-                    taskList.add(Deadline.readFormat(s));
-                    break;
-                case 'E':
-                    taskList.add(Event.readFormat(s));
-                    break;
-                default:
-                    throw new IllegalArgumentException("No corresponding command found");
-                }
-            }
+            taskList = storage.loadList();
             toPrint.append("Task file loaded successfully!\n");
         } catch (Exception e) {
             toPrint.append("Task file not loaded. Check if file exists or is corrupted.\n");

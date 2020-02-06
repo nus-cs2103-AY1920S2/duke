@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Todo implements Task {
     private final String name;
-    private final boolean isCompleted;
+    private boolean isCompleted;
 
     public Todo(String name) {
         this.name = name;
@@ -30,8 +30,8 @@ public class Todo implements Task {
         return this.isCompleted;
     }
 
-    public Todo makeCompleted() {
-        return new Todo(this, true);
+    public void makeCompleted() {
+        this.isCompleted = true;
     }
 
     public String writeFormat() {

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Deadline implements Task {
     private final String name;
-    private final boolean isCompleted;
+    private boolean isCompleted;
     private final LocalDateTime deadline;
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
 
@@ -46,8 +46,8 @@ public class Deadline implements Task {
         this.deadline = deadline.getDeadline();
     }
 
-    public Deadline makeCompleted() {
-        return new Deadline(this, true);
+    public void makeCompleted() {
+        this.isCompleted = true;
     }
 
     public String getName() {
