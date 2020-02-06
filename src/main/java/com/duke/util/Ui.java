@@ -3,7 +3,6 @@ package com.duke.util;
 import com.duke.task.Task;
 import com.duke.task.TaskList;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,8 +10,8 @@ import java.util.Scanner;
  * Represents the handler of inputs and outputs of the user interface.
  */
 public class Ui {
-    private String space = "     ";
-    private String line = space + "_____________________________________________";
+    private static final String SPACE = "     ";
+    private static final String LINE = SPACE + "_____________________________________________";
     Scanner scanner = new Scanner(System.in);
 
     /**
@@ -20,34 +19,38 @@ public class Ui {
      * there is a problem loading data from storage.
      */
     public void showLoadingError() {
-        System.out.println(space + "OOPS! There is a problem loading save file");
+        System.out.println(getLoadingErrorMessage());
     }
 
+    /**
+     * Outputs a String of the error message to the user to communicate that
+     * there is a problem loading data from storage.
+     * @return the error message to the user to communicate that
+     * there is a problem loading data from storage.
+     */
     public String getLoadingErrorMessage() {
-        return space + "OOPS! There is a problem loading save file";
+        return SPACE + "OOPS! There is a problem loading save file";
     }
 
     /**
      * Prints the welcome message when Duke starts up.
      */
     public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke" + "\n" + space + "What can I do for you?");
+        System.out.println(getWelcomeMessage());
 
     }
 
+    /**
+     * Gets the welcome message when Duke starts up.
+     * @return A string of the welcome message when Duke starts up.
+     */
     public String getWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String out = "Hello from\n" + logo + "\n" + "Hello! I'm Duke" + "\n" + space + "What can I do for you?";
+        String out = "Hello from\n" + logo + "\n" + "Hello! I'm Duke" + "\n" + SPACE + "What can I do for you?";
         return out;
     }
 
@@ -55,11 +58,15 @@ public class Ui {
      * Prints a line which is used for the formatting of the user interface.
      */
     public void showLine() {
-        System.out.println(line);
+        System.out.println(getLine());
     }
 
+    /**
+     * Gets a line which is used for the formatting of the user interface.
+     * @return A line which is used for the formatting of the user interface.
+     */
     public String getLine() {
-        return line;
+        return LINE;
     }
 
     /**
@@ -69,11 +76,17 @@ public class Ui {
      * @param msg the error message associated with a <code>DukeException</code>DukeException object.
      */
     public void showError(String msg) {
-        System.out.println(space + msg);
+        System.out.println(getErrorMessage(msg));
     }
 
-    public String gerErrorMessage(String msg) {
-        return space + msg;
+    /**
+     * Gets the error message associated with a <code>DukeException</code>DukeException object.
+     * Invoked when a DukeException is caught.
+     * @param msg the error message associated with a <code>DukeException</code>DukeException object.
+     * @return the error message associated with a <code>DukeException</code>DukeException object.
+     */
+    public String getErrorMessage(String msg) {
+        return SPACE + msg;
     }
 
     /**
@@ -89,11 +102,15 @@ public class Ui {
      * Prints the farewell message when Duke terminates.
      */
     public void showGoodbye() {
-        System.out.println(space + "Bye. Hope to see you again soon!");
+        System.out.println(getGoodbyeMessage());
     }
 
+    /**
+     * Gets the farewell message when Duke terminates.
+     * @return The farewell message when Duke terminates.
+     */
     public String getGoodbyeMessage() {
-        return space + "Bye. Hope to see you again soon!";
+        return SPACE + "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -104,21 +121,23 @@ public class Ui {
      *              tasks in the current session.
      */
     public void showList(TaskList tasks) {
-        String output = space + "Here are the tasks in your list: ";
-        int noOfTasks = tasks.tasks.size();
-        for (int i = 0; i < noOfTasks; i++) {
-            int index = i + 1;
-            output += "\n" + space + index + ". " + tasks.tasks.get(i);
-        }
-        System.out.println(output);
+        System.out.println(getListMessage(tasks));
     }
 
+    /**
+     * Gets the list of tasks on the current task list. Invoked when
+     * the command input is "list".
+     *
+     * @param tasks the <code>TaskList</code> object that stores the list of
+     *              tasks in the current session.
+     * @return the list of tasks on the current task list.
+     */
     public String getListMessage(TaskList tasks) {
-        String output = space + "Here are the tasks in your list: ";
+        String output = SPACE + "Here are the tasks in your list: ";
         int noOfTasks = tasks.tasks.size();
         for (int i = 0; i < noOfTasks; i++) {
             int index = i + 1;
-            output += "\n" + space + index + ". " + tasks.tasks.get(i);
+            output += "\n" + SPACE + index + ". " + tasks.tasks.get(i);
         }
         return output;
     }
@@ -126,17 +145,20 @@ public class Ui {
     /**
      * Prints the message that the <code>Task</code> t is successfully marked as done.
      *
-     * @param t the <code>Task</code> to be marked as done.
+     * @param t The <code>Task</code> to be marked as done.
      */
     public void showDone(Task t) {
-        String output = space + "Nice! I've marked this task as done: "
-                + "\n" + space + t;
-        System.out.println(output);
+        System.out.println(getDoneMessage(t));
     }
 
+    /**
+     * gets the message that the <code>Task</code> t is successfully marked as done.
+     * @param t The <code>Task</code> to be marked as done.
+     * @return The message that the <code>Task</code> t is successfully marked as done.
+     */
     public String getDoneMessage(Task t) {
-        String output = space + "Nice! I've marked this task as done: "
-                + "\n" + space + t;
+        String output = SPACE + "Nice! I've marked this task as done: "
+                + "\n" + SPACE + t;
         return output;
     }
 
@@ -148,15 +170,20 @@ public class Ui {
      * @param count the number of task left on the task list.
      */
     public void showDelete(Task t, int count) {
-        String output = space + "Noted. I've removed this task: "
-                + "\n" + space + "  " + t + "\n" + space + "Now you have " + count
-                + " tasks in your list.";
-        System.out.println(output);
+        System.out.println(getDeleteMessage(t,count));
     }
 
+    /**
+     * Prints the message that a task t is deleted from the task list, and
+     * indicate the number of task left on the list.
+     * @param t     the task of be removed from the list.
+     * @param count the number of task left on the task list.
+     * @return The message that a task t is deleted from the task list, and
+     * indicate the number of task left on the list.
+     */
     public String getDeleteMessage(Task t, int count) {
-        String output = space + "Noted. I've removed this task: "
-                + "\n" + space + "  " + t + "\n" + space + "Now you have " + count
+        String output = SPACE + "Noted. I've removed this task: "
+                + "\n" + SPACE + "  " + t + "\n" + SPACE + "Now you have " + count
                 + " tasks in your list.";
         return output;
     }
@@ -165,19 +192,23 @@ public class Ui {
      * Prints the message that a task t is added to the task list, and
      * indicate the number of task on the list.
      *
-     * @param t     the task of be added to the list.
-     * @param count the number of task on the task list.
+     * @param t     The task of be added to the list.
+     * @param count The number of task on the task list.
      */
     public void showAdd(Task t, int count) {
-        String out = space + "Got it. I've added this task: " + "\n" + space
-                + "  " + t + "\n" + space + "Now you have " + count
-                + " tasks in your list.";
-        System.out.println(out);
+        System.out.println(getAddMessage(t, count));
     }
 
+    /**
+     * Gets the message that a task t is added to the task list, and
+     * indicate the number of task on the list.
+     * @param t     The task of be added to the list.
+     * @param count The number of task on the task list.
+     * @return The message that a task t is added to the task list.
+     */
     public String getAddMessage(Task t, int count) {
-        String out = space + "Got it. I've added this task: " + "\n" + space
-                + "  " + t + "\n" + space + "Now you have " + count
+        String out = SPACE + "Got it. I've added this task: " + "\n" + SPACE
+                + "  " + t + "\n" + SPACE + "Now you have " + count
                 + " tasks in your list.";
         return out;
     }
@@ -188,20 +219,21 @@ public class Ui {
      * @param tasks The list of tasks that contain the keyword.
      */
     public void showFind(ArrayList<Task> tasks) {
-        String out = space + "Here are the matching tasks in your list: ";
-        int index = 1;
-        for (Task t : tasks) {
-            out += "\n" + space + index + ". " + t;
-            index++;
-        }
-        System.out.println(out);
+        System.out.println(getFindMessage(tasks));
     }
 
+    /**
+     * Gets the list of tasks found in the storage that contains the
+     * keyword specified in a Find command.
+     * @param tasks The list of tasks that contain the keyword.
+     * @return The list of tasks found in the storage that contains the
+     * keyword specified in a Find command.
+     */
     public String getFindMessage(ArrayList<Task> tasks) {
-        String out = space + "Here are the matching tasks in your list: ";
+        String out = SPACE + "Here are the matching tasks in your list: ";
         int index = 1;
         for (Task t : tasks) {
-            out += "\n" + space + index + ". " + t;
+            out += "\n" + SPACE + index + ". " + t;
             index++;
         }
         return out;

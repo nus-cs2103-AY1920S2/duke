@@ -1,24 +1,11 @@
 package com.duke;
 
 import com.duke.command.Command;
-import com.duke.command.ExitCommand;
 import com.duke.task.TaskList;
 import com.duke.util.DukeException;
 import com.duke.util.Parser;
 import com.duke.util.Storage;
 import com.duke.util.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.io.FileNotFoundException;
 
@@ -84,7 +71,7 @@ public class Duke {
             message = ui.getLine() + "\n" + message + "\n";
             return message;
         } catch (DukeException e) {
-            String message = ui.gerErrorMessage(e.getMessage());
+            String message = ui.getErrorMessage(e.getMessage());
             assert message !=null:"output message is empty";
             message = ui.getLine() + "\n" + message + "\n";
             return message;
