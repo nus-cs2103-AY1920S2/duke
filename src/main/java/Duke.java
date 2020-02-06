@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
+
 public class Duke {
 
     private Store lib;
@@ -103,7 +104,7 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        new Duke("D:/duke/data/duke.txt").run();
+        new Duke("D:/duke/data/d.txt").run();
     }
 
 

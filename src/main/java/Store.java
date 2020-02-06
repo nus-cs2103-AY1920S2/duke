@@ -40,7 +40,7 @@ public class Store {
      * This method prints the elements in the ArrayList<Task>.
      */
     public void list() {
-        System.out.println(ui.line());
+        System.out.print(ui.line());
         for(int i = 0; i < Storage.size(); i++) {
             String data = String.format("%d.",i+1) + Storage.get(i).toString();
             System.out.println(data);

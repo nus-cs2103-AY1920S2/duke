@@ -30,7 +30,7 @@ public class Ui {
      * @return String This is the bye message.
      */
     public String byeMessgae(){
-        return line() + "Bye. Hope to see you again soon!" + line();
+        return line() + "Bye. Hope to see you again soon!\n" + line();
     }
 
     /**

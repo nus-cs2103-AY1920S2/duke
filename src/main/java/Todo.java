@@ -17,7 +17,7 @@ public class Todo extends Task {
      * This method indicates that a new Task has been added to the ArrayList in Store.
      */
     public void Output(){
-        System.out.println(super.line);
+        System.out.print(super.line);
         System.out.println("Got it. I've added this task: ");
         System.out.println(" [T]" + super.toString());
     }
