@@ -61,6 +61,7 @@ public class Ui {
     }
 
     public String getResponse() {
+        assert !response.isEmpty();
         return response;
     }
 
