@@ -30,20 +30,17 @@ public class View {
      *         the application.
      */
     public Region initialize() {
-        /**
-         * scrollPane is a container that displays its contents as a scrollable list.
-         */
+        /** scrollPane is a container that displays its contents in a scrollable pane. */
         scrollPane = new ScrollPane();
         /** Contents are displayed as a vertical list. */
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
+        dialogContainer.setSpacing(5); // Add padding between each DialogBox
 
         userInput = new TextField();
         sendButton = new Button("Send");
 
-        /**
-         * mainLayout is the root node which nests all the other elements in the view.
-         */
+        /** mainLayout is the root node which nests all the other elements in the view. */
         final AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
