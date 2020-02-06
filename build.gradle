@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 checkstyle {
@@ -17,7 +18,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "com.duke.Duke"
+    mainClassName = "com.duke.Launcher"
 }
 
 run {
@@ -54,4 +55,9 @@ dependencies {
 }
 
 
-
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.2.0"
+    archiveClassifier = null
+    archiveAppendix = null
+}

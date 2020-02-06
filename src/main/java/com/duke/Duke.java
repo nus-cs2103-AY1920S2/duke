@@ -1,6 +1,7 @@
 package com.duke;
 
 import com.duke.command.Command;
+import com.duke.command.ExitCommand;
 import com.duke.task.TaskList;
 import com.duke.util.DukeException;
 import com.duke.util.Parser;
@@ -77,12 +78,14 @@ public class Duke {
     private String runOnGui(String input) {
         try {
             Command c = Parser.parse(input);
-            ui.showGoodbye();
+            assert c != null: "command fails to be meaningful";
             String message = c.executeOnGui(tasks, ui, storage);
+            assert message != null: "output message is empty";
             message = ui.getLine() + "\n" + message + "\n";
             return message;
         } catch (DukeException e) {
             String message = ui.gerErrorMessage(e.getMessage());
+            assert message !=null:"output message is empty";
             message = ui.getLine() + "\n" + message + "\n";
             return message;
         }

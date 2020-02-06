@@ -23,7 +23,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Contructs a <code>Storage</code> object with the given filePath.
+     * Constructs a <code>Storage</code> object with the given filePath.
      *
      * @param filePath the file path to store into and extract data from.
      */
