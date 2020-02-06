@@ -45,6 +45,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints goodbye message.
+     */
     public static void exit() {
         ui.print("Bye. Hope to serve you again soon!");
     }
