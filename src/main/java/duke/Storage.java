@@ -36,6 +36,7 @@ public class Storage {
                 ObjectInputStream oit = new ObjectInputStream(fin);
                 taskList = (ArrayList<Task>) oit.readObject();
             }
+
         } catch (Exception ex) {
             Ui ui = new Ui();
             ui.showLoadingError();

@@ -47,6 +47,7 @@ public class Parser {
             try {
                 checkAction(arr[0]);
                 taskList.add(arr);
+
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
             }

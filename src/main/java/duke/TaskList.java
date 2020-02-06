@@ -61,6 +61,7 @@ public class TaskList {
                     LocalDateTime localDateTime = LocalDateTime.parse(time);
                     newTask = new Event(task, localDateTime);
                     this.tasks.add(newTask);
+
                 } catch (DateTimeParseException ex) {
                     ui.showDateTimeError();
                 }
