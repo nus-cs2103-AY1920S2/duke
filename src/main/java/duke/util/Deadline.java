@@ -54,6 +54,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        assert bySchedule != null : "The due date should be entered to this task.";
         return String.format("[D] [%s] %s (by: %s)", getStatusIcon(), this.description, this.bySchedule);
     }
 }

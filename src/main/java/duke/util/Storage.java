@@ -3,6 +3,7 @@ package duke.util;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeInvalidTaskFormatException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ public class Storage {
      */
 
     public Storage(String filePath) {
+        assert (new File(filePath)).exists() : "The storage file does not exist.";
         this.reader = new TaskReader(filePath);
         this.writer = new TaskWriter(filePath);
     }
