@@ -1,14 +1,22 @@
 package duke;
 public class Ui {
+    private static String content;
+
     public static void greet() {
-        System.out.println("Greeting, traveler. My name is Andrew. What can I do for you?");
+        content = "Greeting, traveler. My name is Andrew. What can I do for you?";
+        System.out.println(content);
+    }
+
+    public static String getContent() {
+        return content;
     }
 
     /**
      * Prints a goodbye message.
      */
     public static void goodbye() {
-        System.out.println("I shall not trouble you anymore. Farewell, partner.");
+        content = "I shall not trouble you anymore. Farewell, partner.";
+        System.out.println(content);
     }
 
     /**
@@ -18,8 +26,8 @@ public class Ui {
      * @param size the number of Task objects in the current list after the addition.
      */
     public static void printAdd(String str, int size) {
-        System.out.printf("Added:\t %s\n", str);
-        System.out.printf("You now have %d tasks in your list\n", size);
+        content = String.format("Added:\t %s\nYou now have %d tasks in your list\n", str, size);
+        System.out.println(content);
     }
 
     /**
@@ -29,8 +37,9 @@ public class Ui {
      * @param size the number of Task objects in the current list after the deletion.
      */
     public static void printDel(String str, int size) {
-        System.out.printf("Your burden has been lifted, removed: \n\t %s\n", str);
-        System.out.printf("You now have %d tasks in your list\n", size);
+        content = String.format("Your burden has been lifted, removed: \n\t %s\nYou now have %d tasks in your list\n"
+                , str, size);
+        System.out.println(content);
     }
 
     /**
@@ -40,8 +49,9 @@ public class Ui {
      * @param size the number of Task objects in the current list after the completion.
      */
     public static void printDone(String str, int size) {
-        System.out.printf("Task successfully completed: \n\t %s\n", str);
-        System.out.printf("You now have %d tasks in your list\n", size);
+        content = String.format("Task successfully completed: \n\t %s\nYou now have %d tasks in your list\n"
+                , str, size);
+        System.out.println(content);
     }
 
     /*
@@ -49,7 +59,9 @@ public class Ui {
      * @param str the keyword provided
      */
     public static void printFindPre(String str) {
-        System.out.printf("Tasks that contain %s in your list\n", str);
+        content = String.format("Tasks that contain %s in your list\n", str);
+
+        System.out.println(content);
     }
 
     /**
@@ -57,7 +69,9 @@ public class Ui {
      * @param size the number of matches
      */
     public static void printFindPost(int size) {
-        System.out.printf("%d %s in total.\n", size, size > 1 ? "entries" : "entry");
+        content = String.format("%d %s in total.\n", size, size > 1 ? "entries" : "entry");
+
+        System.out.println(content);
     }
 
     /**
@@ -66,7 +80,8 @@ public class Ui {
      * @param e an Exception.
      */
     public static void printError(Exception e) {
-        System.out.println(e.getMessage());
+        content = e.getMessage();
+        System.out.println(content);
     }
 
     /**

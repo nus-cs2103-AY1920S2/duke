@@ -1,13 +1,17 @@
 package duke;
 
 import duke.command.Command;
+import gui.GuiController;
+import gui.components.DialogBox;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -24,7 +28,7 @@ import java.util.Scanner;
  */
 public class Duke extends Application {
     private Controller controller;
-
+    private GuiController guiController;
 
     private Image user;
     private Image duke;
@@ -37,6 +41,7 @@ public class Duke extends Application {
     public Duke(String filePath) {
         Storage storageController = new Storage(filePath);
         this.controller = new Controller(storageController);
+        this.guiController = new GuiController(storageController);
     }
 
     public Duke() {
@@ -73,16 +78,17 @@ public class Duke extends Application {
         }
     }
 
-    private void run(String input) {
-        try {
-            Optional<Command> parsed = Parser.parse(input);
-            if (parsed.isPresent()) {
-                Command command = parsed.get();
-                controller.execute(command);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    private String runGui(String input) throws Exception {
+
+        Optional<Command> parsed = Parser.parse(input);
+        if (parsed.isPresent()) {
+            Command command = parsed.get();
+            return guiController.executeGui(command);
+        } else {
+            return "Sorry I do not understand you";
         }
+
+
     }
 
 
@@ -133,31 +139,36 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-//        sendButton.setOnMouseClicked((event) -> {
-//            handleUserInput(userInput, dialogContainer);
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            handleUserInput(userInput, dialogContainer);
-//        });
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput(userInput, dialogContainer);
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput(userInput, dialogContainer);
+        });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
     }
 
-//    private void handleUserInput(TextField userInput, VBox dialogContainer) {
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(user)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
-//    }
-//
-//    private String getResponse(String text) {
-//        return this.run(text);
-//    }
+    private void handleUserInput(TextField userInput, VBox dialogContainer) {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    private String getResponse(String text) {
+        try {
+            return this.runGui(text);
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 
 
 }
