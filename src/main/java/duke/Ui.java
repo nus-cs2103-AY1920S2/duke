@@ -17,14 +17,14 @@ public class Ui {
             + "I'm feeling good and ready to go!\n"
             + "What can I do for you?\n"
             + "Here, you can do the following:\n"
-            + "todo <task name>\n"
-            + "event <event name> /at <event date>\n"
-            + "deadline <deadlined task name> /by <deadline date>"
-            + "list\n"
-            + "done <task number>\n"
-            + "delete <task number>\n"
-            + "find <keyword>\n"
-            + "bye\n"
+            + "1. todo <task name> (adds a Task to do)\n"
+            + "2. event <event name> /at <event date> (adds an event with a date)\n"
+            + "3. deadline <deadlined task name> /by <deadline date> (adds a task with a deadline)\n"
+            + "4. list (lists down all current tasks)\n"
+            + "5. done <task number> (marks task labelled <task number> as done)\n"
+            + "6. delete <task number> (deletes task labelled <task number> from the list)\n"
+            + "7. find <keywords separated by space> (finds the tasks in the list with the keyword(s)) \n"
+            + "8. bye (duke says bye to you :) )\n"
             + Constant.FORMAT_LINE;
     }
 

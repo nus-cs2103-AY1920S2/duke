@@ -54,22 +54,6 @@ public abstract class Task {
     }
 
     /**
-     * Prints a horizontal formatting line.
-     */
-    protected final void printLine() {
-        print(TasksConstant.FORMAT_LINE);
-    }
-
-    /**
-     * Prints a given String.
-     *
-     * @param s String to be printed.
-     */
-    protected final void print(String s) {
-        System.out.println(s);
-    }
-
-    /**
      * Finds out if a Task is done or not.
      *
      * @return whether a task has been done.
