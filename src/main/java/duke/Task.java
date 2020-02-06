@@ -62,6 +62,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return ("[" + (isDone ? "✓" : "✗") + "] " + name);
+        return ("[" + (isDone ? "\u2713" : "\u2718") + "] " + name);
     }
 }
