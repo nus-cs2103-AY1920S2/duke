@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import app.Duke;
@@ -32,7 +31,8 @@ public class MainWindow {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        this.scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        this.renderDuke(Duke.WELCOME_MESSAGE);
     }
 
     public void setDuke(Duke duke) {
@@ -45,7 +45,7 @@ public class MainWindow {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = this.userInput.getText();
         
         try {
             Pair output = this.duke.executeInput(input);
@@ -53,22 +53,31 @@ public class MainWindow {
             boolean shutdown = (boolean) output.getSecondValue();
             
             if (shutdown) {
+                this.renderDuke(Duke.GOODBYE_MESSAGE);
                 Platform.exit();
             } else {
-                this.render(input, message);
+                this.renderUser(input);
+                this.renderDuke(message);
             }
         } catch (BaseException e) {
-            this.render(input, e.getMessage());
+            this.renderUser(input);
+            this.renderDuke(e.getMessage());
         } catch (Exception e) {
-            this.render(input, Duke.UNEXPECTED_ERROR_MESSAGE);
+            this.renderUser(input);
+            this.renderDuke(Duke.UNEXPECTED_ERROR_MESSAGE);
         } finally {
             userInput.clear();
         }
     }
 
-    private void render(String input, String message) {
-        this.dialogContainer.getChildren().addAll(
-            ChatBox.getUserDialog(input, this.userImage),
+    private void renderUser(String message) {
+        this.dialogContainer.getChildren().add(
+            ChatBox.getUserDialog(message, this.userImage)
+        );
+    }
+
+    private void renderDuke(String message) {
+        this.dialogContainer.getChildren().add(
             ChatBox.getDukeDialog(message, this.dukeImage)
         );
     }
