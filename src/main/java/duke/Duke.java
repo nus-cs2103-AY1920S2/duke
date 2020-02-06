@@ -15,15 +15,17 @@ public class Duke {
     /**
      * Constructs a new Duke object.
      *
-     * @param filePath File path of the data (text) file.
-     * @throws IOException If there is an IO error.
      */
-    public Duke(String filePath) throws IOException {
-        ui = new Ui();
-        parser = new Parser();
+    public Duke() {
+        try {
+            ui = new Ui();
+            parser = new Parser();
 
-        storage = new Storage(filePath);
-        taskList = storage.load();
+            storage = new Storage(Storage.DUKE_TXT_FILE_PATH);
+            taskList = storage.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -31,11 +33,15 @@ public class Duke {
      *
      * @param t Task to be added to the list.
      * @param taskList Current collection of all Tasks so far.
+     * @return The task that was added to list.
+     * @throws IOException If IO error occurred.
      */
-    private void addAndPrintTask(Task t, TaskList taskList) {
+    private String addPrintStoreTask(Task t, TaskList taskList) throws IOException {
         taskList.addTask(t);
 
-        ui.printAddedTask(t, taskList);
+        storage.saveTasksToFile(taskList);
+
+        return ui.printAddedTask(t, taskList);
     }
 
     /**
@@ -49,90 +55,61 @@ public class Duke {
     }
 
     /**
-     * Provides the main-entry point to the application.
-     *
-     * @throws IOException If IO error occurs.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() throws IOException {
-        ui.printWelcomeMsg();
-
+    public String getResponse(String input) throws IOException {
         Task t;
         TaskList foundTaskList;
         int index;
 
-        while (true) {
-            try {
-                t = null;
-                Command command = parser.parse(ui.readCmd(), taskList);
-
-                switch (command.getCommandType()) {
-                case LIST_CMD:
-                    ui.printTaskList(taskList);
-                    break;
-                case DONE_CMD:
-                    index = extractTaskIndexFromCmdParam(command);
-
-                    t = taskList.getTask(index);
-                    taskList.markAsDone(index);
-                    ui.printTaskMarkedDone(t);
-
-                    storage.saveTasksToFile(taskList);
-                    break;
-                case DELETE_CMD:
-                    index = extractTaskIndexFromCmdParam(command);
-
-                    t = taskList.getTask(index);
-                    taskList.deleteTask(index);
-
-                    ui.printTaskDeleted(t, taskList);
-
-                    storage.saveTasksToFile(taskList);
-                    break;
-                case TODO_CMD:
-                    t = new Todo(command.getParams()[0]);
-                    addAndPrintTask(t, taskList);
-
-                    storage.saveTasksToFile(taskList);
-                    break;
-                case DEADLINE_CMD:
-                    t = new Deadline(command.getParams()[0], LocalDate.parse(command.getParams()[1]));
-                    addAndPrintTask(t, taskList);
-
-                    storage.saveTasksToFile(taskList);
-                    break;
-                case EVENT_CMD:
-                    t = new Event(command.getParams()[0], LocalDate.parse(command.getParams()[1]));
-                    addAndPrintTask(t, taskList);
-
-                    storage.saveTasksToFile(taskList);
-                    break;
-                case FIND_CMD:
-                    foundTaskList = taskList.findByKeyword(command.getParams()[0]);
-
-                    ui.printFoundTaskList(foundTaskList);
-                    break;
-                case BYE_CMD:
-                    ui.printByeMsg();
-                    return;
-                default:
-                    break;
-                }
-            } catch (DukeException e) {
-                ui.printLine(e + Ui.LF);
-            }
-        }
-    }
-
-    /**
-     * Provides the main-entry point to the application.
-     *
-     * @param args Command-Line arguments.
-     */
-    public static void main(String[] args) {
         try {
-            new Duke(Storage.DUKE_TXT_FILE_PATH).run();
-        } catch (IOException e) {
-            ui.printLine("Sorry, an IO error has occurred:");
+            t = null;
+            Command command = parser.parse(ui.readCmd(input), taskList);
+
+            switch (command.getCommandType()) {
+            case LIST_CMD:
+                return ui.printTaskList(taskList);
+            case DONE_CMD:
+                index = extractTaskIndexFromCmdParam(command);
+
+                t = taskList.getTask(index);
+                taskList.markAsDone(index);
+                storage.saveTasksToFile(taskList);
+                return ui.printTaskMarkedDone(t);
+            case DELETE_CMD:
+                index = extractTaskIndexFromCmdParam(command);
+
+                t = taskList.getTask(index);
+                taskList.deleteTask(index);
+
+                storage.saveTasksToFile(taskList);
+                return ui.printTaskDeleted(t, taskList);
+            case TODO_CMD:
+                t = new Todo(command.getParams()[0]);
+
+                return addPrintStoreTask(t, taskList);
+            case DEADLINE_CMD:
+                t = new Deadline(command.getParams()[0], LocalDate.parse(command.getParams()[1]));
+
+                return addPrintStoreTask(t, taskList);
+            case EVENT_CMD:
+                t = new Event(command.getParams()[0], LocalDate.parse(command.getParams()[1]));
+
+                return addPrintStoreTask(t, taskList);
+            case FIND_CMD:
+                foundTaskList = taskList.findByKeyword(command.getParams()[0]);
+
+                return ui.printFoundTaskList(foundTaskList);
+            case BYE_CMD:
+                return ui.printByeMsg();
+            default:
+                break;
+            }
+        } catch (DukeException e) {
+            return ui.printLine(e + Ui.LF);
         }
+
+        return "error";
     }
 }
