@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -44,7 +42,6 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
 
-
     @FXML
     private void handleUserInput() {
 
@@ -55,10 +52,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-
-
-
-
 
     }
 }

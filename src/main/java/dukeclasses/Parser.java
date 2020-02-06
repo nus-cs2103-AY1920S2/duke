@@ -41,6 +41,7 @@ public class Parser {
      */
 
     public String[] handleFindCommands(String textEntered) {
+
         return textEntered.split(" ");
     }
 

@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 /**
  * Handles all the issues related to Tasks.
- * Similar to TaskList
  */
 public class TaskManager {
 
@@ -49,7 +48,7 @@ public class TaskManager {
     }
 
     /**
-     * lists down all tasks.
+     * Lists down all tasks.
      */
     public void listAllTasks() {
         System.out.println("Here are your tasks in your list: ");
