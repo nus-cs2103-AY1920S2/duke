@@ -114,6 +114,8 @@ public class Duke {
                 case BYE_CMD:
                     ui.printByeMsg();
                     return;
+                default:
+                    break;
                 }
             } catch (DukeException e) {
                 ui.printLine(e + Ui.LF);
