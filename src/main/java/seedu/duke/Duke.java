@@ -1,6 +1,8 @@
 package seedu.duke;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
@@ -59,6 +61,21 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+//            if (!parser.hasNextCommand()) {
+//                break;
+//            }
+        // Create a stream to hold the output
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+
+        Parser parser = new Parser();
+        String[] inputs = input.split(" ", 2);
+        parser.handleCommands(inputs, taskList);
+
+        System.out.flush();
+        System.setOut(old);
+        return baos.toString();
     }
 }

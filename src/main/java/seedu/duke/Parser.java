@@ -24,42 +24,56 @@ public class Parser {
             } else if (command.equals("bye")) {
                 hasNextCommand = false;
                 sayBye();
-            } else {
+            } else if (command.equals("todo")) {
                 if (inputs.length == 1) {
                     throw new EmptyDescriptionException();
-                } else if (command.equals("todo")) {
-                    String desc = inputs[1];
-                    taskList.addTodo(desc, "N");
-                } else if (command.equals("deadline")) {
-                    String desc = inputs[1];
-                    taskList.addDeadline(desc, "N");
-                } else if (command.equals("event")) {
-                    String desc = inputs[1];
-                    taskList.addEvent(desc, "N");
-                } else if (command.equals("done")) {
-                    if (!isNumeric(inputs[1])) {
-                        throw new InvalidTaskInputException();
-                    }
-                    int index = Integer.parseInt(inputs[1]);
-                    if (index < 1 || index > taskList.getTasks().size()) {
-                        throw new TaskIndexOutOfBoundsException();
-                    }
-                    taskList.markTaskAsDone(index);
-                } else if (command.equals("delete")) {
-                    if (!isNumeric(inputs[1])) {
-                        throw new InvalidTaskInputException();
-                    }
-                    int index = Integer.parseInt(inputs[1]);
-                    if (index < 1 || index > taskList.getTasks().size()) {
-                        throw new TaskIndexOutOfBoundsException();
-                    }
-                    taskList.deleteTask(index);
-                } else if (command.equals("find")) {
-                    String desc = inputs[1];
-                    taskList.findTask(desc);
-                } else {
-                    throw new InvalidCommandException();
                 }
+                String desc = inputs[1];
+                taskList.addTodo(desc, "N");
+            } else if (command.equals("deadline")) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                String desc = inputs[1];
+                taskList.addDeadline(desc, "N");
+            } else if (command.equals("event")) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                String desc = inputs[1];
+                taskList.addEvent(desc, "N");
+            } else if (command.equals("done")) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                if (!isNumeric(inputs[1])) {
+                    throw new InvalidTaskInputException();
+                }
+                int index = Integer.parseInt(inputs[1]);
+                if (index < 1 || index > taskList.getTasks().size()) {
+                    throw new TaskIndexOutOfBoundsException();
+                }
+                taskList.markTaskAsDone(index);
+            } else if (command.equals("delete")) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                if (!isNumeric(inputs[1])) {
+                    throw new InvalidTaskInputException();
+                }
+                int index = Integer.parseInt(inputs[1]);
+                if (index < 1 || index > taskList.getTasks().size()) {
+                    throw new TaskIndexOutOfBoundsException();
+                }
+                taskList.deleteTask(index);
+            } else if (command.equals("find")) {
+                if (inputs.length == 1) {
+                    throw new EmptyDescriptionException();
+                }
+                String desc = inputs[1];
+                taskList.findTask(desc);
+            } else {
+                throw new InvalidCommandException();
             }
         } catch (DukeException | IOException e) {
             System.out.println(e.toString());
