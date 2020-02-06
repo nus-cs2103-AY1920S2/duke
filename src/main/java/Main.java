@@ -12,6 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
@@ -19,15 +20,21 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            fxmlLoader.<MainWindow>getController().sendWelcomeText();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            duke.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
+/*
     public static void main(String[] args) throws Exception {
 
         Duke duke = new Duke();
 
         duke.run();
-    }
+    }*/
 }

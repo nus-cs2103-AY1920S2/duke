@@ -26,6 +26,7 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Stage stage;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/kitty.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/kitty.png"));
@@ -37,19 +38,9 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
-        this.storage = new Storage();
-        this.ui = new Ui();
-
-        System.out.println(ui.welcomeMessage());
-
-        this.list = storage.readFile();
-        this.latest_index = storage.returnInitialIndex();
-
-        TaskList tasklist = new TaskList(list, latest_index, storage);
-        parser = new Parser(tasklist);
 
         //Step 1. Setting up required components
-
+        this.stage = stage;
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -68,9 +59,9 @@ public class Duke extends Application {
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setResizable(true);
+        stage.setMinHeight(700.0);
+        stage.setMinWidth(600.0);
 
         mainLayout.setPrefSize(400.0, 600.0);
 
@@ -97,6 +88,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -118,7 +110,6 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 
@@ -127,15 +118,6 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    /*private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }*/
 
     private void handleUserInput() {
         String input = userInput.getText();
@@ -143,12 +125,15 @@ public class Duke extends Application {
         try {
             response = getResponse(input);
         } catch (Exception e) {
-            response = e.toString();
+            response = "There is an error please enter another command ><";
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, user),
                 DialogBox.getDukeDialog(response, duke)
         );
+        if (input.equals("bye")) {
+            stage.close();
+        }
         userInput.clear();
     }
 
@@ -158,7 +143,7 @@ public class Duke extends Application {
      */
     public String getResponse(String input) throws Exception {
         if (input.equals("start")) {
-            System.out.println("runs");
+
             return ui.welcomeMessage();
         }
         return parser.parse(input);
@@ -171,13 +156,10 @@ public class Duke extends Application {
         this.storage = new Storage();
         this.ui = new Ui();
 
-        System.out.println(ui.welcomeMessage());
-
         this.list = storage.readFile();
         this.latest_index = storage.returnInitialIndex();
 
         TaskList tasklist = new TaskList(list, latest_index, storage);
-        Parser parser = new Parser(tasklist);
-        //parser.parse();
+        this.parser = new Parser(tasklist);
     }
 }

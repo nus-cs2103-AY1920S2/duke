@@ -8,12 +8,12 @@ public class Ui {
         return "There is nothing in your list now";
     }
 
-    public String welcomeMessage() {
+    public static String welcomeMessage() {
         return "Hello ! I'm Ashley Bot\nOi What u want\n";
     }
 
     public String lineBarrier() {
-        return "--------------------------------------------------------------";
+        return "---------------------------------------";
     }
 
     public String sayBye() {
