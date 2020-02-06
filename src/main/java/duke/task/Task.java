@@ -62,8 +62,6 @@ public abstract class Task {
         }
         isDone = true;
     }
-
-
     /**
      * Generates a Task object based on the input. The Task object can be a DeadlineTask, an EventTask, or a TodoTask.
      *
