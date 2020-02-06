@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Event Task the user would record.
+ * Represents an Event Task the user would record.
  */
 public class Event extends Task {
     private LocalDate at;
