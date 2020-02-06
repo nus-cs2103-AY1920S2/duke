@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.ui.Ui;
 import duke.common.ErrorMessage;
 import duke.common.Message;
 import duke.task.Deadline;
@@ -49,7 +48,7 @@ public class AddCommand extends Command {
      * Executes the command. Check for the type of task to be added, and add
      * the relevant task to task list. The current list of tasks are then saved.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Storage storage)
             throws DukeException {
         Task task;
 
@@ -77,6 +76,6 @@ public class AddCommand extends Command {
                 + "  " + task + "\n"
                 + Message.DIVIDER + "\n"
                 + Message.showNumberOfTasks(tasks.getLength());
-        ui.showMessage(output);
+        return output;
     }
 }

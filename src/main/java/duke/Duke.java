@@ -4,7 +4,7 @@ import duke.DukeException;
 import duke.command.Command;
 import duke.common.Message;
 import duke.task.TaskList;
-import duke.ui.cli.Cli;
+import duke.cli.Cli;
 
 public class Duke {
 
@@ -25,6 +25,10 @@ public class Duke {
         }
     }
 
+    public String getResponse(Command command) throws DukeException {
+        return command.execute(tasks, storage);
+    }
+
     /**
      * Runs the Duke bot with an interface.
      * @param cli The command line interface.
@@ -42,9 +46,9 @@ public class Duke {
                 cli.newLine();
 
                 Command command = Parser.parse(userCommand);
-                command.execute(tasks, cli, storage);
+                cli.showMessage(command.execute(tasks, storage));
                 isExit = command.isExit();
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 cli.showMessage(e.getMessage());
             }
             cli.newLine();

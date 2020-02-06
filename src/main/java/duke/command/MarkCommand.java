@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.ui.Ui;
 import duke.common.ErrorMessage;
 import duke.common.Message;
 import duke.task.TaskList;
@@ -19,7 +18,7 @@ public class MarkCommand extends Command {
      * Executes the command and mark the index in the list as done.
      * Then, displays the response to the user.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Storage storage)
             throws DukeException {
         if (index < 1 || index > tasks.getLength()) {
             throw new DukeException(ErrorMessage.INVALID_INDEX);
@@ -32,7 +31,7 @@ public class MarkCommand extends Command {
                 + Message.DIVIDER + "\n"
                 + tasks.getTask(index) + "\n"
                 + Message.DIVIDER + "\n";
-        ui.showMessage(output);
+        return output;
     }
 }
 

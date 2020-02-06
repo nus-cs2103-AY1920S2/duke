@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.ui.Ui;
 import duke.common.ErrorMessage;
 import duke.common.Message;
 import duke.task.Task;
@@ -20,7 +19,7 @@ public class DeleteCommand extends Command {
      * Executes the command and deletes the task with the given index.
      * Then, displays the response to the user.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Storage storage)
             throws DukeException {
         if (index < 1 || index > tasks.getLength()) {
             throw new DukeException(ErrorMessage.INVALID_INDEX);
@@ -35,7 +34,8 @@ public class DeleteCommand extends Command {
                 + "  " + task + "\n"
                 + Message.DIVIDER + "\n"
                 + Message.showNumberOfTasks(tasks.getLength()) + "\n";
-        ui.showMessage(output);
+
+        return output;
     }
 }
 
