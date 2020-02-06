@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /** Entity class representing a task of type Deadline */
 public class Deadline extends Task {
@@ -22,6 +23,6 @@ public class Deadline extends Task {
     public String toString() {
         return String.format(
             "[D]%s (by: %s %s)", 
-            super.toString(), byDate.format(super.dateFormat), byTime);
+            super.toString(), byDate.format(DateTimeFormatter.ofPattern(super.dateFormat)), byTime);
     }
 }

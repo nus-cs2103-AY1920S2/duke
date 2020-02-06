@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 /** Class which handles interactions with the user such as input of commands and printing of result logs. */
 public class Ui {
+    static final String BORDER = "    ____________________________________________________________";
+
     Scanner in = new Scanner(System.in);
     String arguments;
 
@@ -28,16 +30,25 @@ public class Ui {
      * @param ss the list of strings to be printed.
      */
     public void out(String... ss) {
-        String border = "    ____________________________________________________________";
-        System.out.println(border);
+        
+        System.out.println(BORDER);
         for (String s : ss) {
             System.out.println("    " + s);
         }
-        System.out.println(border);
+        System.out.println(BORDER);
     }
 
     /** Shuts down the Ui object by closing all existing streams. */
     public void close() {
         in.close();
     }
+
+	public String respond(String[] ss) {
+        String response = "";
+        for (String s : ss) {
+            System.out.println(s);
+            response = response.concat(s + "\n");
+        }
+        return response;
+	}
 }

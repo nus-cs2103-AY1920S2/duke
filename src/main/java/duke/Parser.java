@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 
 import duke.exceptions.IncorrectArgumentException;
 import duke.exceptions.InvalidCommandException;
+import duke.exceptions.ShutdownException;
 
 /** 
  * Class which deals with making sense of the user command. 
@@ -15,7 +16,6 @@ import duke.exceptions.InvalidCommandException;
  * If no exceptions are thrown, it calls the respective classes to execute the command. 
  */
 class Parser {
-    private static final boolean SHUTDOWN = true;
     Storage storage;
     Ui ui;
     TaskList tasks;
@@ -37,74 +37,75 @@ class Parser {
      * Parses the entire comment line by verifying the command and arguments, and then passes on the command 
      * to the corresponding methods.
      * @param line the entire command line retrieved from Scanner.nextLine()
-     * @return true if the last command is a termination command, or 'bye', and false otherwise.
+     * @return A string describing duke's response.
      * @throws IncorrectArgumentException when the wrong number or type of arguments are supplied to the command.
      * @throws InvalidCommandException when a command is entered that does not exist.
      * @throws IOException when the Storage object fails in saving the TaskList to file.
      */
-    public boolean parse(String line) throws IncorrectArgumentException, InvalidCommandException, IOException {
+    public String[] parse(String line) throws IncorrectArgumentException, InvalidCommandException, IOException, ShutdownException {
         String[] cmd = line.split(" ", 2);
-        boolean isBye = false;
-        switch (cmd[0].toLowerCase()) {
-        case "bye":
-            isBye = bye();
-            break;
-        case "list":
-            isBye = list();
-            break;
-        case "done":
-            isBye = done(Integer.parseInt(cmd[1]));
-            break;
-        case "todo":
-            isBye = todo(cmd[1]);
-            break;
-        case "deadline":
-            isBye = deadline(cmd[1]);
-            break;
-        case "event":
-            isBye = event(cmd[1]);
-            break;
-        case "delete":
-            isBye = delete(Integer.parseInt(cmd[1]));
-            break;
-        case "find":
-            isBye = find(cmd[1]);
-            break;
-        default:
-            throw new InvalidCommandException("invalid command:\n      " + line + "\n    please try again");
+        String[] response;
+        try {
+            switch (cmd[0].toLowerCase()) {
+            case "bye":
+                throw new ShutdownException(bye());
+            case "list":
+                response = list();
+                break;
+            case "done":
+                response = done(Integer.parseInt(cmd[1]));
+                break;
+            case "todo":
+                response = todo(cmd[1]);
+                break;
+            case "deadline":
+                response = deadline(cmd[1]);
+                break;
+            case "event":
+                response = event(cmd[1]);
+                break;
+            case "delete":
+                response = delete(Integer.parseInt(cmd[1]));
+                break;
+            case "find":
+                response = find(cmd[1]);
+                break;
+            default:
+                throw new InvalidCommandException("invalid command:\n " + line + "\nplease try again");
+            }
+        } catch(ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            throw new IncorrectArgumentException("missing arguments!");
         }
         storage.saveToFile(tasks);
-        return isBye;
+        return response;
     }
 
-    private boolean bye() {
+    private String bye() {
         ui.out("Bye. Hope to see you again soon!");
         ui.close();
-        return SHUTDOWN;
+        return "Shutting Down...";
     }
 
-    private boolean list() {
-        ui.out(tasks.list());
-        return !SHUTDOWN;
+    private String[] list() {
+        return tasks.list();
     }
 
-    private boolean done(int i) {
-        ui.out(tasks.done(i));
-        return !SHUTDOWN;
+    private String[] done(int i) {
+        return tasks.done(i);
     }
 
-    private boolean todo(String args) throws IncorrectArgumentException {
+    private String[] todo(String args) throws IncorrectArgumentException {
         String[] argv = args.split("/");
         if (argv[0].equals("")) {
             throw new IncorrectArgumentException("Oops! Missing required arguments: Task Description");
         } else if (argv.length > 1) {
             throw new IncorrectArgumentException("Too many arguments!");
         }
-        ui.out(tasks.addTodo(argv[0]));
-        return !SHUTDOWN;
+        return tasks.addTodo(argv[0]);
     }
 
-    private boolean deadline(String args) throws IncorrectArgumentException {
+    private String[] deadline(String args) throws IncorrectArgumentException {
         String[] argv = args.split(" /by ");
         if (argv[0].equals("")) {
             throw new IncorrectArgumentException(
@@ -113,24 +114,25 @@ class Parser {
                     ? "Task Description, by.." 
                     : "Task Description"));
         } else if (argv.length < 2) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: /by..");
+            throw new IncorrectArgumentException("Oops! Missing required arguments: /by yyyy-MM-dd HHmm");
         } else if (argv.length > 2) {
             throw new IncorrectArgumentException("Too many arguments!");
         }
 
+        String[] resp;
         try {
             String[] textDateTime = argv[1].split(" ");
             LocalDate date = toDate(textDateTime[0]);
             LocalTime time = toTime(textDateTime[1]);
-            ui.out(tasks.addDeadline(argv[0], date, time));
+            resp = tasks.addDeadline(argv[0], date, time);
         } catch (DateTimeParseException e) {
             throw new IncorrectArgumentException("Incorrect Date/Time format!\n     Correct format: yyyy-MM-dd HHmm");
         }
 
-        return !SHUTDOWN;
+        return resp;
     }
 
-    private boolean event(String args) throws IncorrectArgumentException {
+    private String[] event(String args) throws IncorrectArgumentException {
         String[] argv = args.split(" /at ");
         if (argv[0].equals("")) {
             throw new IncorrectArgumentException(
@@ -139,30 +141,30 @@ class Parser {
                     ? "Task Description, at.."
                     : "Task Description"));
         } else if (argv.length < 2) {
-            throw new IncorrectArgumentException("Oops! Missing required arguments: /at..");
+            System.out.println(args);
+            throw new IncorrectArgumentException("Oops! Missing required arguments:\n/at yyyy-MM-dd HHmm");
         } else if (argv.length > 2) {
             throw new IncorrectArgumentException("Too many arguments!");
         }
 
+        String[] resp;
         try {
             String[] textDateTime = argv[1].split(" ");
             LocalDate date = toDate(textDateTime[0]);
             LocalTime time = toTime(textDateTime[1]);
-            ui.out(tasks.addEvent(argv[0], date, time));
+            resp = tasks.addEvent(argv[0], date, time);
         } catch (DateTimeParseException e) {
             throw new IncorrectArgumentException("Incorrect Date/Time format!\n     Correct format: yyyy-MM-dd HHmm");
         }
-        return !SHUTDOWN;
+        return resp;
     }
 
-    private boolean delete(int i) {
-        ui.out(tasks.delete(i));
-        return !SHUTDOWN;
+    private String[] delete(int i) {
+        return tasks.delete(i);
     }
 
-    private boolean find(String query) {
-        ui.out(tasks.find(query));
-        return !SHUTDOWN;
+    private String[] find(String query) {
+        return tasks.find(query);
     }
 
     /** Accepts a date in the format provided in the default formatter, DateTimeFormatter.ISO_LOCAL_DATE */ 
