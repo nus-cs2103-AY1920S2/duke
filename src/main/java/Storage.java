@@ -6,16 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a collection of methods to read and write files in the data folder.
+ * A <code>Storage</code> object corresponds to a file path represented as a String
+ * and a <code>File</code> object that accesses the file at the path.
+ */
 public class Storage {
     private String filePath;
     private File f;
-    private FileWriter fw;
 
     public Storage(String filePath) {
         this.filePath = filePath;
         f = new File(filePath);
     }
 
+    /**
+     * Retrieves and returns list of tasks from data folder.
+     *
+     * @return List of tasks.
+     * @throws FileNotFoundException If storage file cannot be found in data folder.
+     */
     public List<Task> getList() throws FileNotFoundException {
         List<Task> list = new ArrayList<>();
         Scanner sc = new Scanner(f);
@@ -40,6 +50,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Updates storage file in storage folder with list of tasks.
+     *
+     * @param list List of tasks.
+     * @throws IOException If there is an error with writing to storage file.
+     */
     public void writeTaskList(List<Task> list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task t : list)
