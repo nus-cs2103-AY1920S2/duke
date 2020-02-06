@@ -44,6 +44,16 @@ public class DeleteCommand extends Command {
     }
 
     /**
+     * Returns a boolean value of whether the Command is a ByeCommand instance.
+     * @return the boolean value of whether the instance is a ByeCommand.
+     */
+
+    @Override
+    public boolean isByeCommand() {
+        return false;
+    }
+
+    /**
      * Overrides the Object's equals method to compare
      * whether two DeleteCommand instances are equal.
      * @param object The object that wants to be compared.

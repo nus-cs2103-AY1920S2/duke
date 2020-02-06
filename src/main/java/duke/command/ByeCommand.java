@@ -4,42 +4,43 @@ import duke.util.Storage;
 import duke.util.TaskList;
 
 /*
- * ListCommand
+ * ByeCommand
  *
  * CS2103 AY19/20 Semester 2
  * Individual Project
  * Duke Project
  *
- * 28 Jan 2020
+ * 06 Feb 2020
  *
  */
 
 /**
- * <p>ListCommand extends the command abstract class
- * and it describes the behavior of the commands regarding
- * to list the tasks.</p>
+ * ByeCommand class extends a Command abstract class
+ * and it represents the terminating command when a user
+ * wants to end using Duke.
  * @author Mario Lorenzo
  */
 
-public class ListCommand extends Command {
+public class ByeCommand extends Command {
 
     /**
-     * Constructs a ListCommand instance.
+     * Constructs a ByeCommand instance.
      */
 
-    public ListCommand() {
+    public ByeCommand() {
 
     }
 
     /**
-     * Executes the list command.
+     * Executes the command by returning the exit message.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
-     * @return The String representing the outcome of the execution.
+     * @return The exit message.
      */
 
+    @Override
     public String execute(TaskList taskList, Storage storage) {
-        return taskList.listTasks();
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -49,6 +50,6 @@ public class ListCommand extends Command {
 
     @Override
     public boolean isByeCommand() {
-        return false;
+        return true;
     }
 }

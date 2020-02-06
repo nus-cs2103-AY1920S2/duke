@@ -42,4 +42,14 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, Storage storage) {
         return taskList.markDone(this.index, storage);
     }
+
+    /**
+     * Returns a boolean value of whether the Command is a ByeCommand instance.
+     * @return the boolean value of whether the instance is a ByeCommand.
+     */
+
+    @Override
+    public boolean isByeCommand() {
+        return false;
+    }
 }

@@ -21,11 +21,20 @@ import duke.util.TaskList;
  */
 
 public abstract class Command {
+
     /**
      * Executes the command.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
      * @return The String representing the outcome of the execution.
      */
+
     public abstract String execute(TaskList taskList, Storage storage);
+
+    /**
+     * Returns a boolean value of whether the Command is a ByeCommand instance.
+     * @return the boolean value of whether the instance is a ByeCommand.
+     */
+
+    public abstract boolean isByeCommand();
 }
