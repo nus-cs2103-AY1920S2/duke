@@ -17,6 +17,11 @@ public class Controller {
         this.storageController = storageController;
     }
 
+    public static void raiseException(Exception e) {
+        Ui.printError(e);
+    }
+
+
     /**
      * Executes the parametric Command object.
      *

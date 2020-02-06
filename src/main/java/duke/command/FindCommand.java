@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Controller;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
@@ -41,7 +42,7 @@ public class FindCommand extends Command {
                     .forEach(task -> System.out.printf("\t%d -%s\n", index.getAndIncrement(), task.toString()));
             Ui.printFindPost(index.get() - 1);
         } catch (Exception e) {
-            Ui.printError(e);
+            Controller.raiseException(e);
         }
         return false;
     }

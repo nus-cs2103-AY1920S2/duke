@@ -1,7 +1,7 @@
 package duke.command;
 
+import duke.Controller;
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class ListCommand extends Command {
                 System.out.printf("\t%d -%s\n", i + 1, storage.get(i));
             }
         } catch (Exception e) {
-            Ui.printError(e);
+            Controller.raiseException(e);
         }
         return false;
     }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Controller;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
@@ -36,7 +37,7 @@ public class DoneCommand extends Command {
             Ui.printDone(storage.get(index).toString(), storageSize);
             storageController.writeTask(storage);
         } catch (Exception e) {
-            Ui.printError(e);
+            Controller.raiseException(e);
         }
         return false;
     }

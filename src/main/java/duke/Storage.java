@@ -65,7 +65,7 @@ public class Storage {
                     .collect(Collectors.joining("\n"));
             writer.write(str);
         } catch (IOException e) {
-            e.printStackTrace();
+            Controller.raiseException(e);
         }
     }
 }

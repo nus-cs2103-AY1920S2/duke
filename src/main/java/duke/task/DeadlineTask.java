@@ -46,8 +46,6 @@ class DeadlineTask extends Task {
                     + time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
         }
     }
-
-
     /**
      * Returns the String representation of this DeadlineTask object.
      *

@@ -1,6 +1,5 @@
 package duke;
 
-import duke.Ui;
 import duke.command.*;
 import duke.task.Task;
 
@@ -23,34 +22,34 @@ public class Parser {
             switch (arr[0].toLowerCase()) {
             case "bye":
                 if (arr.length > 1) {
-                    Ui.printError(new Exception("A word of bye is enough"));
+                    Controller.raiseException(new Exception("A word of bye is enough"));
                 }
                 return Optional.of(new ExitCommand());
 
             case "delete":
                 index = Integer.parseInt(arr[1]) - 1;
                 if (arr.length > 2) {
-                    Ui.printError(new Exception("More content than needed for delete task"));
+                    Controller.raiseException(new Exception("More content than needed for delete task"));
                 }
                 return Optional.of(new DeleteCommand(index));
 
             case "done":
                 index = Integer.parseInt(arr[1]) - 1;
                 if (arr.length > 2) {
-                    Ui.printError(new Exception("More content than needed for done task"));
+                    Controller.raiseException(new Exception("More content than needed for done task"));
                 }
                 return Optional.of(new DoneCommand(index));
 
             case "find":
                 String keyword = arr[1];
                 if (arr.length > 2) {
-                    Ui.printError(new Exception("Sorry I can only handle one word at a time"));
+                    Controller.raiseException(new Exception("Sorry I can only handle one word at a time"));
                 }
                 return Optional.of(new FindCommand(keyword));
 
             case "list":
                 if (arr.length > 1) {
-                    Ui.printError(new Exception("A word of list is enough"));
+                    Controller.raiseException(new Exception("A word of list is enough"));
                 }
                 return Optional.of(new ListCommand());
 
@@ -58,7 +57,7 @@ public class Parser {
                 try {
                     return Optional.of(new AddCommand(Task.generateTask(arr)));
                 } catch (Exception e) {
-                    Ui.printError(e);
+                    Controller.raiseException(e);
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
