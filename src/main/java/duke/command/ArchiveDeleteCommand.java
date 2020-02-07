@@ -1,12 +1,7 @@
 package duke.command;
 
-import duke.util.ArchiveList;
-import duke.util.Storage;
-import duke.util.Task;
-import duke.util.TaskList;
-
 /*
- * ArchiveAddCommand
+ * ArchiveDeleteCommand
  *
  * CS2103 AY19/20 Semester 2
  * Individual Project
@@ -16,27 +11,32 @@ import duke.util.TaskList;
  *
  */
 
+import duke.util.ArchiveList;
+import duke.util.Storage;
+import duke.util.Task;
+import duke.util.TaskList;
+
 /**
- * <p>ArchiveAddCommand extends the command abstract class
+ * <p>ArchiveDeleteCommand extends the command abstract class
  * and it describes the behavior of the commands regarding
- * to add the task to the archive.</p>
+ * to deleting the archived tasks.</p>
  * @author Mario Lorenzo
  */
 
-public class ArchiveAddCommand extends Command {
+public class ArchiveDeleteCommand extends Command {
     private int index;
 
     /**
-     * Constructs an ArchiveAddCommand instance.
-     * @param index The index of the task that is wanted to be archived.
+     * Constructs an ArchiveDeleteCommand instance.
+     * @param index The index of the archived tasks.
      */
 
-    public ArchiveAddCommand(int index) {
+    public ArchiveDeleteCommand(int index) {
         this.index = index;
     }
 
     /**
-     * Executes the archive-add command.
+     * Executes the archive-delete command.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
      * @param archiveList The list of archived tasks.
@@ -45,9 +45,7 @@ public class ArchiveAddCommand extends Command {
      */
 
     public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage) {
-        Task task = taskList.getTask(this.index);
-        taskList.deleteTask(this.index, storage);
-        return archiveList.archiveTask(task,archiveStorage);
+        return archiveList.deleteArchivedTask(index, archiveStorage);
     }
 
     /**

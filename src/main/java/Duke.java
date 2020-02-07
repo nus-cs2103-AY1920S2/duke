@@ -87,6 +87,7 @@ public class Duke {
      *         <li><tt>find [keyword]</tt> - finds tasks using a keyword.</li>
      *         <li><tt>archive-list</tt> - lists all the archived tasks.</li>
      *         <li><tt>archive-add [index]</tt> - moves a task at a particular index to the archive.</li>
+     *         <li><tt>archive-delete [index]</tt> - deletes an archived task at a particular index.</li>
      *     </ul>
      * @param commands The instruction provided by the client.
      */
