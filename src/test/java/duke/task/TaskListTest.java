@@ -16,8 +16,8 @@ class TaskListTest {
             false, "event,0,project meeting,2020-01-01",
             doneStatusIcon, incompleteStatusIcon,
             "[E][" + incompleteStatusIcon + "] project meeting " + "(at: Jan 1 2020)");
-    static final String doneStatusIcon = "\u2713";
-    static final String incompleteStatusIcon = "\u2718";
+    static final String doneStatusIcon = "\u2713"; // Check mark icon
+    static final String incompleteStatusIcon = "\u2718"; // Cross mark icon
 
     @BeforeEach
     void init() {

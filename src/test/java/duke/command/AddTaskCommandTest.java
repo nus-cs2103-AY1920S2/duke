@@ -30,11 +30,11 @@ class AddTaskCommandTest {
     Storage storage;
     ByteArrayOutputStream output;
     String saveFile = "test.txt";
-    final String FILE_SEPARATOR = File.separator;
+    String fileSeparator = File.separator;
     // Map project path to the directory from which you run your program
-    final String PROJECT_ROOT_PATH = Paths.get("").toAbsolutePath().toString();
-    String dataDirectoryPath = PROJECT_ROOT_PATH + FILE_SEPARATOR + "data";
-    String saveFilePath = dataDirectoryPath + FILE_SEPARATOR + saveFile;
+    String projectRootPath = Paths.get("").toAbsolutePath().toString();
+    String dataDirectoryPath = projectRootPath + fileSeparator + "data";
+    String saveFilePath = dataDirectoryPath + fileSeparator + saveFile;
 
     static Stream<Arguments> generateEmptyState() {
         Task task = new Todo("Read book");

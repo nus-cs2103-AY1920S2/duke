@@ -29,13 +29,13 @@ class DeleteCommandTest {
     Storage storage;
     ByteArrayOutputStream output;
     String saveFile = "test.txt";
-    final String FILE_SEPARATOR = File.separator;
+    String fileSeparator = File.separator;
     // Map project path to the directory from which you run your program
-    final String PROJECT_ROOT_PATH = Paths.get("").toAbsolutePath().toString();
-    String dataDirectoryPath = PROJECT_ROOT_PATH + FILE_SEPARATOR + "data";
-    String saveFilePath = dataDirectoryPath + FILE_SEPARATOR + saveFile;
-    static final String doneStatusIcon = "\u2713";
-    static final String incompleteStatusIcon = "\u2718";
+    String projectRootPath = Paths.get("").toAbsolutePath().toString();
+    String dataDirectoryPath = projectRootPath + fileSeparator + "data";
+    String saveFilePath = dataDirectoryPath + fileSeparator + saveFile;
+    static final String doneStatusIcon = "\u2713"; // Check mark icon
+    static final String incompleteStatusIcon = "\u2718"; // Cross mark icon
     EventStub eventTask = new EventStub("project meeting", "2020-01-01",
             false, "event,0,project meeting,2020-01-01",
             doneStatusIcon, incompleteStatusIcon,
