@@ -12,7 +12,7 @@ public abstract class Task {
     protected String taskName = "";
 
     /** Whether the task is completed. */
-    protected boolean isDone;
+    protected boolean isDone = false;
 
     /** Date and time of the task (if any). */
     protected LocalDate dateTime;
@@ -27,7 +27,6 @@ public abstract class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.isDone = false;
     }
 
     /**
@@ -39,7 +38,6 @@ public abstract class Task {
      */
     public Task(String taskName, String dateTime) throws DukeException {
         this.taskName = taskName;
-        this.isDone = false;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             this.dateTime = LocalDate.parse(dateTime, formatter);
