@@ -1,3 +1,4 @@
+package Duke;
 public class ToDoCommand extends Command {
     protected String spli;
     public ToDoCommand(String spli) {

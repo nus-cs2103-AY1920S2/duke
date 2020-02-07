@@ -1,3 +1,5 @@
+import Duke.*;
+
 public class Duke {
 
     protected Ui ui;

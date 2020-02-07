@@ -1,3 +1,5 @@
+package Duke;
+
 public class DeleteCommand extends Command {
     protected String done;
     public DeleteCommand(String done) {

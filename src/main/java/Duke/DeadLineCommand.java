@@ -1,14 +1,17 @@
-public class EventCommand extends Command {
+package Duke;
+import java.time.LocalDateTime;
+
+public class DeadLineCommand extends Command {
     protected String spli;
     protected String des;
-    protected String date;
-    public EventCommand(String spli, String des, String date) {
+    protected LocalDateTime fin;
+    public DeadLineCommand(String spli, String des, LocalDateTime fin) {
         this.spli = spli;
         this.des = des;
-        this.date = date;
+        this.fin = fin;
     }
     public void execute(Ui ui, Storage storage, TaskList tasklist) {
-        Task t = new Event(getIndex(), date);
+        Task t = new Deadline(getIndex(), fin);
         tasklist.addTask(t);
         storage.store(tasklist.getEntireList());
         ui.printTodoComplete(t, tasklist.getTaskListSize());

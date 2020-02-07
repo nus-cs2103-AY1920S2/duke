@@ -1,3 +1,5 @@
+package Duke;
+
 public class DoneCommand extends Command {
 
     protected String done;

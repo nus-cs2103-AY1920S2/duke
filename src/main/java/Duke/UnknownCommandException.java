@@ -1,3 +1,4 @@
+package Duke;
 public class UnknownCommandException extends DukeException {
     @Override
     public String toString() {

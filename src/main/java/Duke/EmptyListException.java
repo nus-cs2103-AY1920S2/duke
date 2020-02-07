@@ -1,3 +1,5 @@
+package Duke;
+
 public class EmptyListException extends DukeException {
     @Override
     public String toString() {

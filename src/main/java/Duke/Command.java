@@ -1,3 +1,5 @@
+package Duke;
+
 public abstract class Command {
     protected Ui ui;
     protected Storage storage;
