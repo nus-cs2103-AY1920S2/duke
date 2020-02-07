@@ -41,6 +41,7 @@ public class Parser {
     /**
      * Returns the date in LocalDate form parsed from the String entered.
      * If the String format is wrong, will throw BadDateException.
+     *
      * @param str String to be parsed into a date.
      * @return date in LocalDate format.
      * @throws BadDateException if format of string is not aligned with write formatter.
@@ -57,6 +58,7 @@ public class Parser {
     /**
      * Returns the command in the form of enum class Command parsed from the String entered.
      * If String does not coincide with any command, will throw InvalidCommandException.
+     *
      * @param str String to be parsed into a command.
      * @return command in enum class Command format.
      * @throws InvalidCommandException String entered does not coincide with any command in enum class Command.
@@ -69,6 +71,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets a Command class object from a certain command type and description.
+     *
+     * @param commandType The type of command to return.
+     * @param description The description accompanying the command.
+     * @return The Command class object to be returned.
+     */
     public Command getCommand(CommandType commandType, String description) {
         Command command = new ListCommand(); //default command
         switch (commandType) {
@@ -105,6 +114,7 @@ public class Parser {
     /**
      * Execute commands to manipulate task list and calender. The method will create/delete task objects as required
      * and store/remove them from all data structures as needed.
+     *
      * @param commandType Command to be executed.
      * @throws DukeDescriptionException If command requires a description and it not given.
      * @throws BadDescriptionException If description provided does not match the format required by command.
@@ -229,9 +239,20 @@ public class Parser {
         }
     }
 
+    /**
+     * Constructs an empty Parser to be used in Duke GUI version.
+     */
     public Parser() {
     }
 
+    /**
+     * Constructs a Parser object with data objects associated with it to efficiently read Duke commands.
+     *
+     * @param taskList List of tasks in Duke.
+     * @param calender Calender of tasks in Duke.
+     * @param storage Storage object linked to the storage file of Duke.
+     * @param sc Scanner to read user input.
+     */
     public Parser(TaskList taskList, Calender calender, Storage storage, Scanner sc) {
         this.taskList = taskList;
         this.calender = calender;

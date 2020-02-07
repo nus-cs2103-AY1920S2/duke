@@ -8,12 +8,28 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Represents the dialog box in the dialog container of Duke's GUI.
+ */
 public class DialogBox extends HBox {
-
+    /**
+     * Creates a user dialog box representing the user.
+     *
+     * @param label The label that contains the String inputted by the user.
+     * @param imageView The image that represents the user.
+     * @return The user's dialog box.
+     */
     public static DialogBox getUserDialog(Label label, ImageView imageView) {
         return new DialogBox(label, imageView);
     }
 
+    /**
+     * Creates a Duke dialog box representing Duke.
+     *
+     * @param label The label that contains the response by Duke.
+     * @param imageView The image that represents Duke.
+     * @return Duke's dialog box.
+     */
     public static DialogBox getDukeDialog(Label label, ImageView imageView) {
         DialogBox db = new DialogBox(label, imageView);
         db.flip();
@@ -23,7 +39,7 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
-    public DialogBox(Label label, ImageView imageView) {
+    private DialogBox(Label label, ImageView imageView) {
         text = label;
         displayPicture = imageView;
 

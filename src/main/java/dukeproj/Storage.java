@@ -18,11 +18,13 @@ import java.util.Scanner;
  * Represents the storage file for DukeProject.
  */
 public class Storage {
+    /** File object that connects to Duke's storage file on the hard drive. */
     private File file;
 
     /**
      * Prints the file in storage into an ArrayList.
      * Takes in a calender to update the calender with the tasks in the file.
+     *
      * @param calender calender to be updated by tasks in storage file.
      * @return ArrayList made from tasks in storage file.
      */
@@ -66,6 +68,7 @@ public class Storage {
 
     /**
      * Writes the tasks in an ArrayList into the storage file.
+     *
      * @param tasks ArrayList of tasks to be written into the storage file.
      */
     public void writeListIntoFile(ArrayList<Task> tasks) {
@@ -100,6 +103,7 @@ public class Storage {
     /**
      * Constructs a Storage with the file pointing to the filepath provided.
      * Will make a directory if parent directory (default: data directory) is missing.
+     *
      * @param filepath filepath to be assigned to the storage.
      */
     public Storage (String filepath) {

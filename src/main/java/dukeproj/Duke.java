@@ -48,6 +48,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Generates Duke's response to a command.
+     *
+     * @param command The command provided.
+     * @return Duke's response.
+     */
     public String getResponse(Command command) {
         try {
             return command.execute(ui, taskList, storage, calender);
@@ -104,6 +110,7 @@ public class Duke {
 
     /**
      * Constructs a Duke object with a filepath to store the task list.
+     *
      * @param filepath Filepath of the Duke storage.
      */
     public Duke(String filepath, boolean isGui) {
@@ -119,6 +126,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke Project. If "text" is input within the CLI, this method will run the CLI version of Duke.
+     * Else, as default, it will run the GUI version of Duke.
+     *
+     * @param args Inputs by user on the CLI.
+     */
     public static void main(String[] args) {
         if (args.length > 0 && args[0].toUpperCase().equals("TEXT")) {
             new Duke("." + File.separator + "data" + File.separator + "Task.txt", false).run();

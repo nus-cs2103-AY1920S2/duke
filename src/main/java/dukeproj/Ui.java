@@ -6,9 +6,17 @@ import dukeproj.enums.SayType;
  * Represents the User Interface in DukeProject.
  */
 public class Ui {
+    /** Logo of Duke. */
     private String logo;
+    /** Pre-specified line break for use in CLI version of Duke. */
     private String lineBreak;
 
+    /**
+     * Returns Duke's response to a certain SayType.
+     *
+     * @param type The type of response to be returned.
+     * @return Duke's response.
+     */
     public String say(SayType type) {
         switch (type) {
         case INTRO:
