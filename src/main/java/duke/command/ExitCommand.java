@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.ui.Ui;
 import duke.common.Message;
 import duke.task.TaskList;
 
@@ -14,7 +13,7 @@ public class ExitCommand extends Command {
     /**
      * Executes the command and display an exit message.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage(Message.EXIT_MESSAGE);
+    public String execute(TaskList tasks, Storage storage) {
+        return Message.EXIT_MESSAGE;
     }
 }

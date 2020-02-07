@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.ui.Ui;
 import duke.common.Message;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -18,7 +17,7 @@ public class FindCommand extends Command {
      * Executes the command and display tasks that matches the search
      * string.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         String output = Message.FIND_MESSAGE + "\n";
         output += Message.DIVIDER + "\n";
 
@@ -34,6 +33,6 @@ public class FindCommand extends Command {
 
         output += Message.DIVIDER + "\n";
         output += Message.showNumberOfTasksFound(taskCount);
-        ui.showMessage(output);
+        return output;
     }
 }
