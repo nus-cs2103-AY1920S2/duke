@@ -47,13 +47,13 @@ public class Duke {
             switch (cmd) {
             case LIST:
                 if (tasks.getSize() == 0) {
-                    //return "The list is empty.";
+                    return "The list is empty.";
                 } else {
-                    String tmpList = "";
+                    String listOfTasks = "";
                     for (int i = 0; i < tasks.getDukeList().size(); i++) {
-                        tmpList = tmpList + (i + 1) + "." + tasks.getDukeList().get(i) + "\n";
+                        listOfTasks = listOfTasks + (i + 1) + "." + tasks.getDukeList().get(i) + "\n";
                     }
-                    return tmpList;
+                    return listOfTasks;
                 }
             case DONE:
                 num = parser.parseNum(fullCommand, tasks);
@@ -61,18 +61,22 @@ public class Duke {
 
                 if (num > 0) {
                     if (num > tasks.getSize()) {
-                        throw new DukeException("unable to mark done", num);
+                        //throw new DukeException("unable to mark done", num);
+                        throw new DukeException("Unable to mark task #" + num
+                                + " as done. Please try again with a valid task number.");
                     }
 
                     tasks.markDone(num);
                     return ui.printMarkDone(tasks, num);
                 } else {
                     if (num == 0) {
-                        throw new DukeException("unable to mark done", num);
+                        //throw new DukeException("unable to mark done", num);
+                        throw new DukeException("Unable to mark task #" + num
+                                + " as done. Please try again with a valid task number.");
                     } else if (num == -1) {
-                        throw new DukeException("done");
+                        throw new DukeException("The description of 「done」 cannot be empty!!");
                     } else {
-                        throw new DukeException("done argument too much");
+                        throw new DukeException("Please only provide one argument to mark as done.");
                     }
                 }
             case DELETE:
@@ -81,7 +85,9 @@ public class Duke {
 
                 if (num > 0) {
                     if (num > tasks.getSize()) {
-                        throw new DukeException("unable to delete from list", num);
+                        //throw new DukeException("unable to delete from list", num);
+                        throw new DukeException("Unable to delete " + num
+                                + " from the task. Please try again with a valid task number.");
                     }
 
                     Task taskToRemove = tasks.getDukeList().get(num - 1);
@@ -89,18 +95,22 @@ public class Duke {
                     return ui.printTaskRemoved(taskToRemove, num, tasks);
                 } else {
                     if (num == 0) {
-                        throw new DukeException("unable to delete from list", num);
+                        //throw new DukeException("unable to delete from list", num);
+                        throw new DukeException("Unable to delete " + num
+                                + " from the task. Please try again with a valid task number.");
                     } else if (num == -1) {
-                        throw new DukeException("delete");
+                        //throw new DukeException("delete");
+                        throw new DukeException("The description of 「delete」 cannot be empty!!");
                     } else {
-                        throw new DukeException("delete argument not found");
+                        //throw new DukeException("delete argument not found");
+                        throw new DukeException("Please provide a valid number to delete.");
                     }
                 }
             case TODO:
                 String tmp = parser.parseDescription(fullCommand);
 
                 if (tmp.equals("-1Error:0b9d4e")) {
-                    throw new DukeException("todo");
+                    throw new DukeException("The description of 「todo」 cannot be empty!!");
                 }
 
                 t = new ToDo(tmp);
@@ -109,12 +119,13 @@ public class Duke {
             case EVENT:
                 desc = parser.parseDescOfEventDeadline(fullCommand);
                 if (desc.equals("-1Error:21006a")) {
-                    throw new DukeException("event");
+                    throw new DukeException("The description of 「event」 cannot be empty!!");
                 }
 
                 by = parser.parseBy(fullCommand);
                 if (by.equals("-2error:21f3ad")) {
-                    throw new DukeException("event", "", "no slash");
+                    //throw new DukeException("event", "", "no slash");
+                    throw new DukeException("Please provide a valid deadline. For example, 「event read book /by 2020-09-20」.");
                 }
 
                 t = new Event(desc, by);
@@ -124,11 +135,12 @@ public class Duke {
             case DEADLINE:
                 desc = parser.parseDescOfEventDeadline(fullCommand);
                 if (desc.equals("-1Error:21006a")) {
-                    throw new DukeException("deadline");
+                    throw new DukeException("The description of 「deadline」 cannot be empty!!");
                 }
                 by = parser.parseBy(fullCommand);
                 if (by.equals("-2error:21f3ad")) {
-                    throw new DukeException("deadline", "", "no slash");
+                    //throw new DukeException("deadline", "", "no slash");
+                    throw new DukeException("Please provide a valid deadline. For example, 「deadline read book /by 2020-09-20」.");
                 }
 
                 t = new Deadline(desc, by);
@@ -137,7 +149,7 @@ public class Duke {
             case FIND:
                 String find = parser.parseDescription(fullCommand);
                 if (find.equals("-1Error:0b9d4e")) {
-                    throw new DukeException("find");
+                    throw new DukeException("The description of 「find」 cannot be empty!!");
                 }
                 String taskL = "";
 
@@ -151,9 +163,9 @@ public class Duke {
 
                 return ui.printMatchingTask(taskL.trim(), find);
             case ENTERCOMMAND:
-                throw new DukeException("enter command");
+                throw new DukeException("Please enter a command");
             default:
-                throw new DukeException("Don't understand");
+                throw new DukeException("Sumimasen, I can't understand what chu talking about. Try again?");
             }
 
         } catch (DukeException e) {

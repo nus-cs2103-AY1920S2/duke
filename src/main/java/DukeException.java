@@ -2,17 +2,20 @@
  * DukeException class handles the exception specific to Duke chatbot.
  */
 public class DukeException extends Exception {
-    public String tmp = "";
+    /*public String tmp = "";
     public int num = 0;
     public String tmp2 = "";
-    public String tmp3 = "";
+    public String tmp3 = ""; */
 
-    public DukeException(String tmp) {
-        super(tmp);
-        this.tmp = tmp;
+    public String errorMsg = "";
+
+    public DukeException(String errorMsg) {
+        super(errorMsg);
+        this.errorMsg = errorMsg;
+        //this.tmp = tmp;
     }
 
-    public DukeException(String tmp, int num) {
+    /*public DukeException(String tmp, int num) {
         super(tmp);
         this.tmp = tmp;
         this.num = num;
@@ -23,13 +26,17 @@ public class DukeException extends Exception {
         this.tmp = tmp;
         this.tmp2 = tmp2;
         this.tmp3 = tmp3;
-    }
+    } */
 
     /**
      * Prints out the exception.
      * @return String of the exception.
      */
     @Override
+    public String toString() {
+        return errorMsg;
+    }
+    /*@Override
     public String toString() {
         if (tmp.equals("delete argument not found")) {
             return "Please provide a valid number to delete.";
@@ -40,7 +47,7 @@ public class DukeException extends Exception {
         } else if (tmp.equals("unable to delete from list")) {
             return "Unable to delete " + num + " from the task. Please try again with a valid task number.";
         } else if (tmp.equals("unable to mark done")) {
-            return "Unable to mark task #" + num + " as done. Please try again with a valid task number.";
+            return "U"nable to mark task #" + num + " as done. Please try again with a valid task number.";
         } else if (tmp3.equals("no slash")) {
             return "Please provide a valid deadline. For example, 「" + tmp + " read book " + "/by 2020-09-20」.";
         } else if (tmp.equals("enter command")) {
@@ -48,5 +55,5 @@ public class DukeException extends Exception {
         } else {
             return "The description of 「" + tmp + "」 cannot be empty!!";
         }
-    }
+    } */
 }
