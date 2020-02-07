@@ -78,52 +78,63 @@ public class Duke extends Application {
 
             try {
                 String command = Parser.parseCommand(input);
+                assert !command.equalsIgnoreCase("bye");
                 String[] inputArr = input.split(" ");
                 try {
-                    if (command.equals("list")) {
-                        ui.showList(storage.loadList());
-                    } else if (command.equals("done")) {
-                        int taskIndex = Integer.parseInt(inputArr[1]) - 1;
-                        Task selected = tasks.getTaskList().get(taskIndex);
-                        tasks.markDone(taskIndex);
-                        ui.showDoneTask(selected);
-                        storage.save(tasks.getTaskList());
+                    int taskIndex;
+                    Task selected;
 
-                    } else if (command.equals("delete")) {
-                        int taskIndex = Integer.parseInt(inputArr[1]) - 1;
-                        Task selected = tasks.getTaskList().get(taskIndex);
-                        tasks.deleteTask(taskIndex);
-                        ui.showDeleteTask(selected, tasks.getTaskList());
-                        storage.save(tasks.getTaskList());
+                    switch(command) {
+                        case ("list"):
+                            ui.showList(storage.loadList());
+                            break;
 
-                    } else if (command.equals("find")) {
-                        String search = "";
-                        for (int i = 1; i < inputArr.length; i++) {
-                            search += inputArr[i];
-                            search += (i == inputArr.length - 1) ? "" : " ";
-                        }
-                        ArrayList<Task> foundTasks = tasks.findTask(search);
-                        ui.showFoundTasks(foundTasks);
-
-                    } else {
-                        assert command.equals("todo") || command.equals("event") || command.equals("deadline")
-                                : String.format("Goose no recognise %s\n", command);
-
-                        if (command.equals("todo")) {
-                            Todo added = tasks.createTodo(inputArr);
-                            ui.showAddTask(added, tasks.getTaskList());
+                        case ("done"):
+                            taskIndex = Integer.parseInt(inputArr[1]) - 1;
+                            selected = tasks.getTaskList().get(taskIndex);
+                            tasks.markDone(taskIndex);
+                            ui.showDoneTask(selected);
                             storage.save(tasks.getTaskList());
+                            break;
 
-                        } else if (command.equals("event")) {
-                            Event added = tasks.createEvent(input);
-                            ui.showAddTask(added, tasks.getTaskList());
+                        case ("delete"):
+                            taskIndex = Integer.parseInt(inputArr[1]) - 1;
+                            selected = tasks.getTaskList().get(taskIndex);
+                            tasks.deleteTask(taskIndex);
+                            ui.showDeleteTask(selected, tasks.getTaskList());
                             storage.save(tasks.getTaskList());
+                            break;
 
-                        } else if (command.equals("deadline")) {
-                            Deadline added = tasks.createDeadline(input);
-                            ui.showAddTask(added, tasks.getTaskList());
+                        case ("find"):
+                            String search = "";
+                            for (int i = 1; i < inputArr.length; i++) {
+                                search += inputArr[i];
+                                search += (i == inputArr.length - 1) ? "" : " ";
+                            }
+                            ArrayList<Task> foundTasks = tasks.findTask(search);
+                            ui.showFoundTasks(foundTasks);
+                            break;
+
+                        case ("todo"):
+                            Todo addedTodo = tasks.createTodo(inputArr);
+                            ui.showAddTask(addedTodo, tasks.getTaskList());
                             storage.save(tasks.getTaskList());
-                        }
+                            break;
+
+                        case ("event"):
+                            Event addedEvent = tasks.createEvent(input);
+                            ui.showAddTask(addedEvent, tasks.getTaskList());
+                            storage.save(tasks.getTaskList());
+                            break;
+
+                        case ("deadline"):
+                            Deadline addedDeadline = tasks.createDeadline(input);
+                            ui.showAddTask(addedDeadline, tasks.getTaskList());
+                            storage.save(tasks.getTaskList());
+                            break;
+
+                        default:
+                            ui.showError("Honk! Something went wrong.");
                     }
                 } catch (IOException e) {
                     ui.showError("Honk! Something went wrong.");
