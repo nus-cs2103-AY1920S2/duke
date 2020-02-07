@@ -1,0 +1,29 @@
+Hi there, I'm Dodo!
+How may I help you today?
+Gotcha. Added this to your list:
+[T][N] study hard
+Now you got 1 task in your list!
+Gotcha. Added this to your list:
+[D][N] finish tutorial 1 (by: Thursday 23th Jan)
+Now you got 2 tasks in your list!
+Gotcha. Added this to your list:
+[E][N] sis wedding (at: Sunday 26th Jan)
+Now you got 3 tasks in your list!
+Stop procrastinating. Do it now!
+1. [T][N] study hard
+2. [D][N] finish tutorial 1 (by: Thursday 23th Jan)
+3. [E][N] sis wedding (at: Sunday 26th Jan)
+Apologies, I'm too dumb to understand that!
+Good job! One off your chest!
+[D][Y] finish tutorial 1 (by: Thursday 23th Jan)
+Stop procrastinating. Do it now!
+1. [T][N] study hard
+2. [D][Y] finish tutorial 1 (by: Thursday 23th Jan)
+3. [E][N] sis wedding (at: Sunday 26th Jan)
+Good job! One off your chest!
+[E][Y] sis wedding (at: Sunday 26th Jan)
+Stop procrastinating. Do it now!
+1. [T][N] study hard
+2. [D][Y] finish tutorial 1 (by: Thursday 23th Jan)
+3. [E][Y] sis wedding (at: Sunday 26th Jan)
+Stop procrastinating. See you!
