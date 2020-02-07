@@ -4,10 +4,6 @@ import java.util.Scanner;
  * Ui class handles the bot's response to the user's input.
  */
 public class Ui {
-    public Ui() {
-
-    }
-
     /**
      * Function called when there is error loading the file.
      */
@@ -79,8 +75,8 @@ public class Ui {
         if (list.equals("")) {
             return "We have found nothing related to your search.";
         } else {
-            String msg = "Here are some matching tasks in your list: 「" + keyword + "」" + "\n" +
-                    list;
+            String msg = "Here are some matching tasks in your list: 「" +
+                    keyword + "」" + "\n" + list;
             return msg;
         }
     }

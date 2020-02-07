@@ -4,9 +4,6 @@ import java.time.format.DateTimeParseException;
  * Parser class takes care of the parsing of full commands that the user typed.
  */
 public class Parser {
-    public Parser() {
-
-    }
 
     /**
      * This function handles the parsing of command recognised by the bot.

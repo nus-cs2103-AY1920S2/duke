@@ -36,7 +36,8 @@ public class Storage {
             String line = sc.nextLine();
             String[] splitBySpace = line.split(" ");
             String[] splitBySlash;
-            if (splitBySpace[0].equals("D") || splitBySpace[0].equals("E")) {
+
+            if (splitBySpace[0].equals("D")) {
                 splitBySlash = line.split("/");
 
                 //Splits second time
@@ -46,31 +47,33 @@ public class Storage {
                     getDesc = getDesc + splitBySpace2[i] + " ";
                 }
 
-                if (splitBySpace[0].equals("D")) {
-                    t = new Deadline(getDesc.trim(), splitBySlash[1]);
-                    if (splitBySpace[1].equals("1")) {
-                        t.markAsDone();
-                    }
-                    dukeList.add(t);
-
-                } else if (splitBySpace[0].equals("E")) {
-                    t = new Event(getDesc.trim(), splitBySlash[1]);
-                    if (splitBySpace[1].equals("1")) {
-                        t.markAsDone();
-                    }
-                    dukeList.add(t);
+                t = new Deadline(getDesc.trim(), splitBySlash[1]);
+                if (splitBySpace[1].equals("1")) {
+                    t.markAsDone();
                 }
+                dukeList.add(t);
+            } else if (splitBySpace[0].equals("E")) {
+                splitBySlash = line.split("/");
+
+                //Splits second time
+                String[] splitBySpace2 = splitBySlash[0].split(" ");
+                String getDesc = "";
+                for (int i = 2; i < splitBySpace2.length; i++) {
+                    getDesc = getDesc + splitBySpace2[i] + " ";
+                }
+
+                t = new Event(getDesc.trim(), splitBySlash[1]);
+                if (splitBySpace[1].equals("1")) {
+                    t.markAsDone();
+                }
+                dukeList.add(t);
             } else {
                 String getDesc = "";
                 for (int i = 2; i < splitBySpace.length; i++) {
-                    if (i < splitBySpace.length - 1) {
-                        getDesc = getDesc + splitBySpace[i] + " ";
-                    } else {
-                        getDesc = getDesc + splitBySpace[i];
-                    }
+                    getDesc = getDesc + splitBySpace[i] + " ";
                 }
 
-                t = new ToDo(getDesc);
+                t = new ToDo(getDesc.trim());
                 if (splitBySpace[1].equals("1")) {
                     t.markAsDone();
                 }
@@ -82,7 +85,7 @@ public class Storage {
     }
 
     /**
-     * Write list of tasks into file.
+     * Writes list of tasks into file.
      *
      * @param tasks Contains list of tasks.
      * @throws IOException If unable to write file.

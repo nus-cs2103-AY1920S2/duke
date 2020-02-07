@@ -23,7 +23,7 @@ public class Duke {
         }
     }
 
-    public String run(String input) throws IOException, DukeException {
+    public String run(String input) throws IOException {
         String fullCommand = input;
         String newString = "";
         String[] splitBySpace;
@@ -61,20 +61,18 @@ public class Duke {
 
                 if (num > 0) {
                     if (num > tasks.getSize()) {
-                        //throw new DukeException("unable to mark done", num);
-                        throw new DukeException("Unable to mark task #" + num
-                                + " as done. Please try again with a valid task number.");
+                        throw new DukeException("Unable to mark task #" + num +
+                                " as done. Please try again with a valid task number.");
                     }
 
                     tasks.markDone(num);
                     return ui.printMarkDone(tasks, num);
                 } else {
                     if (num == 0) {
-                        //throw new DukeException("unable to mark done", num);
-                        throw new DukeException("Unable to mark task #" + num
-                                + " as done. Please try again with a valid task number.");
+                        throw new DukeException("Unable to mark task #" + num +
+                                " as done. Please try again with a valid task number.");
                     } else if (num == -1) {
-                        throw new DukeException("The description of 「done」 cannot be empty!!");
+                        throw new EmptyDescriptionException("done");
                     } else {
                         throw new DukeException("Please only provide one argument to mark as done.");
                     }
@@ -85,9 +83,8 @@ public class Duke {
 
                 if (num > 0) {
                     if (num > tasks.getSize()) {
-                        //throw new DukeException("unable to delete from list", num);
-                        throw new DukeException("Unable to delete " + num
-                                + " from the task. Please try again with a valid task number.");
+                        throw new DukeException("Unable to delete " + num +
+                                " from the task. Please try again with a valid task number.");
                     }
 
                     Task taskToRemove = tasks.getDukeList().get(num - 1);
@@ -95,14 +92,11 @@ public class Duke {
                     return ui.printTaskRemoved(taskToRemove, num, tasks);
                 } else {
                     if (num == 0) {
-                        //throw new DukeException("unable to delete from list", num);
-                        throw new DukeException("Unable to delete " + num
-                                + " from the task. Please try again with a valid task number.");
+                        throw new DukeException("Unable to delete " + num +
+                                " from the task. Please try again with a valid task number.");
                     } else if (num == -1) {
-                        //throw new DukeException("delete");
-                        throw new DukeException("The description of 「delete」 cannot be empty!!");
+                        throw new EmptyDescriptionException("delete");
                     } else {
-                        //throw new DukeException("delete argument not found");
                         throw new DukeException("Please provide a valid number to delete.");
                     }
                 }
@@ -110,7 +104,7 @@ public class Duke {
                 String tmp = parser.parseDescription(fullCommand);
 
                 if (tmp.equals("-1Error:0b9d4e")) {
-                    throw new DukeException("The description of 「todo」 cannot be empty!!");
+                    throw new EmptyDescriptionException("todo");
                 }
 
                 t = new ToDo(tmp);
@@ -119,13 +113,13 @@ public class Duke {
             case EVENT:
                 desc = parser.parseDescOfEventDeadline(fullCommand);
                 if (desc.equals("-1Error:21006a")) {
-                    throw new DukeException("The description of 「event」 cannot be empty!!");
+                    throw new EmptyDescriptionException("event");
                 }
 
                 by = parser.parseBy(fullCommand);
                 if (by.equals("-2error:21f3ad")) {
-                    //throw new DukeException("event", "", "no slash");
-                    throw new DukeException("Please provide a valid deadline. For example, 「event read book /by 2020-09-20」.");
+                    throw new DukeException("Please provide a valid deadline. " +
+                            "For example, 「event read book /by 2020-09-20」.");
                 }
 
                 t = new Event(desc, by);
@@ -135,12 +129,12 @@ public class Duke {
             case DEADLINE:
                 desc = parser.parseDescOfEventDeadline(fullCommand);
                 if (desc.equals("-1Error:21006a")) {
-                    throw new DukeException("The description of 「deadline」 cannot be empty!!");
+                    throw new EmptyDescriptionException("deadline");
                 }
                 by = parser.parseBy(fullCommand);
                 if (by.equals("-2error:21f3ad")) {
-                    //throw new DukeException("deadline", "", "no slash");
-                    throw new DukeException("Please provide a valid deadline. For example, 「deadline read book /by 2020-09-20」.");
+                    throw new DukeException("Please provide a valid deadline. " +
+                            "For example, 「deadline read book /by 2020-09-20」.");
                 }
 
                 t = new Deadline(desc, by);
@@ -149,7 +143,7 @@ public class Duke {
             case FIND:
                 String find = parser.parseDescription(fullCommand);
                 if (find.equals("-1Error:0b9d4e")) {
-                    throw new DukeException("The description of 「find」 cannot be empty!!");
+                    throw new EmptyDescriptionException("find");
                 }
                 String taskL = "";
 
