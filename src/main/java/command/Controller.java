@@ -34,7 +34,8 @@ public class Controller {
                         throw new DukeException("\t☹ OOPS!!! The task number cannot be empty.");
                     }
                     int deletedTaskNumber = Integer.parseInt(parsedInput[1]);
-                    Task deletedTask = taskList.deleteTask(deletedTaskNumber);
+                    Task deletedTask = taskList.getTask(deletedTaskNumber);
+                    taskList.deleteTask(deletedTaskNumber);
                     return UI.REMOVE + deletedTask;
                 case "clear":
                     taskList.clearAll();
@@ -44,7 +45,8 @@ public class Controller {
                         throw new DukeException("\t☹ OOPS!!! The task number cannot be empty.");
                     }
                     int doneTaskNumber = Integer.parseInt(parsedInput[1]);
-                    Task taskDone = taskList.markAsDone(doneTaskNumber);
+                    Task taskDone = taskList.getTask(doneTaskNumber);
+                    taskList.markAsDone(doneTaskNumber);
                     return UI.DONE + taskDone;
                 case "find":
                     if (parsedInput.length < 2) {

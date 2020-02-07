@@ -42,13 +42,11 @@ public class TaskList {
      * @param taskNumber task to be deleted.
      * @return deleted task.
      */
-    public Task deleteTask(int taskNumber) {
+    public void deleteTask(int taskNumber) {
         if (taskNumber > list.size()) {
             throw new DukeException("☹ OOPS!!! There is no such task.");
         }
-        Task deletedTask = list.get(taskNumber - 1);
         list.remove(taskNumber - 1);
-        return deletedTask;
     }
 
     /**
@@ -62,13 +60,21 @@ public class TaskList {
      * Marks task with specified task number as done.
      *
      * @param taskNumber task to be marked as done.
-     * @return task marked as done.
      */
-    public Task markAsDone(int taskNumber) {
+    public void markAsDone(int taskNumber) {
         if (taskNumber > list.size()) {
             throw new DukeException("☹ OOPS!!! There is no such task.");
         }
         list.get(taskNumber - 1).setDone();
+    }
+
+    /**
+     * Returns specified task number.
+     *
+     * @param taskNumber of the task requested.
+     * @return task with the corresponding task number.
+     */
+    public Task getTask(int taskNumber) {
         return list.get(taskNumber - 1);
     }
 
