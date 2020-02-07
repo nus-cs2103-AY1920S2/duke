@@ -19,7 +19,7 @@ public class DoneCommand extends Command {
      * @param ui the ui object to interact with user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputTokens = this.command.split(" ");
 
         // Mark the task with given index as done
@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
             if (!storage.save(tasks)) {
                 throw new DukeException("OOPS!!! Failed to save list!");
             }
-            ui.showLine("Nice! I've marked this task as done: \n"
+            return ui.showLine("Nice! I've marked this task as done: \n"
                     + "       " + task);
         } else {
             throw new DukeException("OOPS!!! No such task index!");

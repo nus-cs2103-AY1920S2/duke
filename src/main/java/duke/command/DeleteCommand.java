@@ -19,17 +19,17 @@ public class DeleteCommand extends Command {
      * @param ui the ui object to interact with user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputTokens = this.command.split(" ");
         int deleteIndex;
 
         try {
             deleteIndex = Integer.parseInt(inputTokens[1]) - 1;
             Task deleteTask = tasks.delete(deleteIndex);
-            ui.showDeleteTask(deleteTask, tasks.size());
             if (!storage.save(tasks)) {
                 throw new DukeException("OOPS!!! Failed to save list!");
             }
+            return ui.showDeleteTask(deleteTask, tasks.size());
         } catch (Exception e) {
             throw new DukeException("OOPS!!! No such task index!");
         }

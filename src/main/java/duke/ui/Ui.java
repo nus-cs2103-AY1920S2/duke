@@ -11,7 +11,7 @@ public class Ui {
     /**
      * Show the welcome message, which consists of the logo, and greeting.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,36 +19,33 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         // Start the duke program
-        System.out.println("Hello from\n" + logo);
-        System.out.println(
-                "    ____________________________________________________________\n"
-                        + "     Hey friend! I'm Duke V2.0.0 at your service\n"
-                        + "     What can I do for you today?\n"
-                        + "    ____________________________________________________________\n"
-        );
+        String start = "Hello from\n" + logo;
+        start += "    ____________________________________________________________\n"
+                    + "     Hey friend! I'm Duke V2.0.0 at your service\n"
+                    + "     What can I do for you today?\n"
+                    + "    ____________________________________________________________\n";
+        return start;
     }
 
     /**
      * Format the given line into a pretty format and print it.
      *
-     * @param  line   the line to be formatted
+     * @param line the line to be formatted
      */
-    private void prettyPrint(String line) {
-        System.out.println(
-                "    _____________________________DUKE___________________________\n"
-                        + "     "
-                        + line
-                        + "\n"
-                        + "    _________--__--__--__--__--__--__--__--__--__--__--_________\n"
-        );
+    private String prettyPrint(String line) {
+        return "    _____________________________DUKE___________________________\n"
+                    + "     "
+                    + line
+                    + "\n"
+                    + "    _________--__--__--__--__--__--__--__--__--__--__--_________\n";
     }
 
     /**
      * Format the given list into a pretty format and print it.
      *
-     * @param  tasks   the list of tasks to be formatted
+     * @param tasks the list of tasks to be formatted
      */
-    public void prettyPrintList(TaskList tasks) {
+    public String prettyPrintList(TaskList tasks) {
         String tasksString = "";
         int size = tasks.size();
 
@@ -63,18 +60,18 @@ public class Ui {
             }
         }
         tasksString = tasksString.equals("") ? "There is nothing on your list." : tasksString;
-        System.out.println(tasksString);
+        return tasksString;
     }
 
     /**
      * Format the task added into a pretty format and print it.
      *
-     * @param  task   the task added
-     * @param  size   the total number of tasks
+     * @param task the task added
+     * @param size the total number of tasks
      */
-    public void showAddTask(Task task, Integer size) {
+    public String showAddTask(Task task, Integer size) {
         String taskWord = (size > 1) ? "tasks" : "task";
-        showLine("Got it. I've added this task: \n"
+        return showLine("Got it. I've added this task: \n"
                 + "       " + task + "\n"
                 + "     Now you have " + size + " " + taskWord + " in the list.");
     }
@@ -82,12 +79,12 @@ public class Ui {
     /**
      * Format the task deleted into a pretty format and print it.
      *
-     * @param  task   the task deleted
-     * @param  size   the total number of tasks
+     * @param task the task deleted
+     * @param size the total number of tasks
      */
-    public void showDeleteTask(Task task, Integer size) {
+    public String showDeleteTask(Task task, Integer size) {
         String taskWord = (size > 1) ? "tasks" : "task";
-        showLine("Noted. I've removed this task: \n"
+        return showLine("Noted. I've removed this task: \n"
                 + "       "
                 + task
                 + "\n"
@@ -115,37 +112,37 @@ public class Ui {
     /**
      * Show on screen the top line, which is the line before the main message.
      */
-    public void showStartLine() {
-        System.out.println("    _____________________________DUKE___________________________");
+    public String showStartLine() {
+        return "    ______________________DUKE______________________";
     }
 
     /**
      * Show on screen the bottom line, which is the line after the main message.
      */
-    public void showEndLine() {
-        System.out.println("    _________--__--__--__--__--__--__--__--__--__--__--_________\n");
+    public String showEndLine() {
+        return "    ___--__--__--__--__--__--__--__--__--__--__--___\n";
     }
 
     /**
      * Show on screen the loading error, when the list could not be loaded from disk.
      */
-    public void showLoadingError() {
-        prettyPrint("OOPS!!! Failed to load list!");
+    public String showLoadingError() {
+        return prettyPrint("OOPS!!! Failed to load list!");
     }
 
     /**
      * Show on screen the goodbye message.
      */
-    public void showGoodBye() {
-        showLine("Aw goodbye for now! Hope to see you again soon :)");
+    public String showGoodBye() {
+        return showLine("Aw goodbye for now! Hope to see you again soon :)");
     }
 
     /**
      * Format the line and show on screen to user.
      *
-     * @param   line   the line to be formatted
+     * @param line the line to be formatted
      */
-    public void showLine(String line) {
-        System.out.println("     " + line);
+    public String showLine(String line) {
+        return "     " + line;
     }
 }

@@ -19,7 +19,7 @@ public class AddCommand extends Command {
      * @param ui the ui object to interact with user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputTokens = command.split(" ");
         Task task;
         switch (inputTokens[0]) {
@@ -47,6 +47,6 @@ public class AddCommand extends Command {
         if (!storage.save(tasks)) {
             throw new DukeException("OOPS!!! Failed to save list!");
         }
-        ui.showAddTask(task, tasks.size());
+        return ui.showAddTask(task, tasks.size());
     }
 }

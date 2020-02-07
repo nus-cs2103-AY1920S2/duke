@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      * @param ui the ui object to interact with user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showGoodBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showGoodBye();
     }
 }

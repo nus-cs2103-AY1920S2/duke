@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    public Ui ui;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -146,7 +146,7 @@ public class Duke extends Application {
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
-    private Label getDialogLabel(String text) {
+    public Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
@@ -174,7 +174,17 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String response = "";
+        try {
+            response += ui.showStartLine();
+            Command c = Parser.parse(input);
+            response += c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showStartLine() + ui.showLine(e.getMessage()) + ui.showEndLine();
+        } finally {
+            response += ui.showEndLine();
+        }
+        return response;
     }
 
     public static void main(String[] args) {

@@ -22,11 +22,11 @@ public class ListCommand extends Command {
      * @param ui the ui object to interact with user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String[] inputTokens = this.command.split(" ");
         String dateString = (inputTokens.length > 1) ? inputTokens[1] : "";
         TaskList filteredTasks = filterTasksByDate(tasks, dateString);
-        ui.prettyPrintList(filteredTasks);
+        return ui.prettyPrintList(filteredTasks);
     }
 
     /**
