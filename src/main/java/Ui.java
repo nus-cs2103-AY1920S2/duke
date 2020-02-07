@@ -3,111 +3,68 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    private Scanner scanner;
-    private String indent;
-
     public Ui() {
-        this.scanner = new Scanner(System.in);
-        this.indent = "      ";
+    }
+    public String greet() {
+        return "Hi dude! I'm your Dude\n" + "What do you want?\n";
     }
 
-    public void loadMachinePrompt() {
-        System.out.print("Dude: ");
+    public String showLoadingError(String message) {
+        return "Loading error: " + message;
     }
 
-    public void loadUserPrompt() {
-        System.out.print("dude: ");
+    public String showCommandError(String message) {
+        return "Command error: " + message;
     }
 
-    public void greet() {
-        loadMachinePrompt();
-        System.out.print("Hi dude! I'm your Dude\n"
-                + indent + "What do you want?\n");
-        loadUserPrompt();
+    public String showAddingError(String message) {
+        return "Adding error: " + message;
     }
 
-    public String readCommand() {
-        return this.scanner.nextLine();
+    public String showDeletingError(String message) {
+        return "Deleting error: " + message;
     }
 
-    public void showLoadingError(String message) {
-        loadMachinePrompt();
-        System.out.println("\n" + indent + "Loading error: " + message);
-        loadUserPrompt();
+    public String showMarkingAsDoneError(String message) {
+        return "Marking as done error: " + message;
     }
 
-    public void showCommandError(String message) {
-        loadMachinePrompt();
-        System.out.println("\n" + indent + "Command error: " + message);
-        loadUserPrompt();
+    public String printAddingMessage(TaskList tasks, Task task) {
+        return "Got it dude! I've added this task:" + "\n" + task
+                + printTaskListSize(tasks);
     }
 
-    public void showAddingError(String message) {
-        loadMachinePrompt();
-        System.out.println("\n" + indent + "Adding error: " + message);
-        loadUserPrompt();
+    public String printDoneMessage(Task task) {
+        return "Got it dude! I've marked this task as done:" + "\n" + task;
     }
 
-    public void showDeletingError(String message) {
-        loadMachinePrompt();
-        System.out.println("\n" + indent + "Deleting error: " + message);
-        loadUserPrompt();
+    public String printDeletingMessage(TaskList tasks, Task task) {
+        return "Got it dude! I've deleted this task:" + "\n" + task
+                + printTaskListSize(tasks);
     }
 
-    public void showMarkingAsDoneError(String message) {
-        loadMachinePrompt();
-        System.out.println("\n" + indent + "Marking as done error: " + message);
-        loadUserPrompt();
-    }
-
-    public void printAddingMessage(TaskList tasks, Task task) {
-        loadMachinePrompt();
-        System.out.println("Got it dude! I've added this task:" + "\n"
-                + indent + task);
-        printTaskListSize(tasks);
-        loadUserPrompt();
-    }
-
-    public void printDoneMessage(TaskList tasks, Task task) {
-        loadMachinePrompt();
-        System.out.println("Got it dude! I've marked this task as done:" + "\n"
-                + indent + task);
-        loadUserPrompt();
-    }
-
-    public void printDeletingMessage(TaskList tasks, Task task) {
-        loadMachinePrompt();
-        System.out.println("Got it dude! I've deleted this task:" + "\n"
-                + indent + task);
-        printTaskListSize(tasks);
-        loadUserPrompt();
-    }
-
-    public void printTaskListSize(TaskList tasks) {
+    public String printTaskListSize(TaskList tasks) {
         int size = tasks.getListSize();
-        System.out.println(indent + "Now you have " + size + " task(s) in the list.");
+        return "Now you have " + size + " task(s) in the list.";
     }
 
-    public void printEmptyListMessage() {
-        loadMachinePrompt();
-        System.out.println("Your list is currently empty dude.");
-        loadUserPrompt();
+    public String printEmptyListMessage() {
+        return "Your list is currently empty dude.";
     }
 
-    public void printTaskMessage() {
-        System.out.println("Here's your list of tasks dude:");
+    public String printTaskMessage() {
+        return "Here's your list of tasks dude:";
     }
 
-    public void printFoundTaskMessage() {
-        System.out.println("Okay dude here are what I found:");
+    public String printFoundTaskMessage() {
+        return "Okay dude here are what I found:";
     }
 
-    public void printTask(int i, Task task) {
-        System.out.println(indent + i + ". " + task);
+    public String printTask(int i, Task task) {
+        return i + ". " + task;
     }
 
-    public void exit() {
-        loadMachinePrompt();
-        System.out.println("Okay see ya dude!");
+    public String exit() {
+        return "Okay see ya dude!";
     }
 }

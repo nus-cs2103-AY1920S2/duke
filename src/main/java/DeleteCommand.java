@@ -10,14 +10,15 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException{
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException{
         Task task = tasks.getTask(this.deleteIndex);
         tasks.deleteTask(this.deleteIndex);
-        ui.printDeletingMessage(tasks, task);
+        String output = ui.printDeletingMessage(tasks, task);
         try {
             storage.update(tasks);
         } catch (IOException e) {
-            ui.showDeletingError(e.getMessage());
+            output += ui.showDeletingError(e.getMessage());
         }
+        return output;
     }
 }

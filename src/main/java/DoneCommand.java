@@ -10,14 +10,15 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException{
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException{
         Task task = tasks.getTask(this.doneIndex);
         tasks.markTaskAsDone(this.doneIndex);
-        ui.printDoneMessage(tasks, task);
+        String output = ui.printDoneMessage(task);
         try {
             storage.update(tasks);
         } catch (IOException e) {
-            ui.showMarkingAsDoneError(e.getMessage());
+            output += ui.showMarkingAsDoneError(e.getMessage());
         }
+        return output;
     }
 }

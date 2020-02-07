@@ -10,13 +10,14 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.addTask(commandWord, commands);
-        ui.printAddingMessage(tasks, task);
+        String output = ui.printAddingMessage(tasks, task);
         try {
             storage.update(tasks);
         } catch (IOException e) {
-            ui.showAddingError(e.getMessage());
+            output += ui.showAddingError(e.getMessage());
         }
+        return output;
     }
 }

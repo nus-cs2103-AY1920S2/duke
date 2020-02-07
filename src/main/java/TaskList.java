@@ -27,18 +27,19 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    public void printTaskList(Ui ui) {
+    public String printTaskList(Ui ui) {
+        String output;
         if (this.taskList.isEmpty()) {
-            ui.printEmptyListMessage();
+            output = ui.printEmptyListMessage();
         } else {
-            ui.loadMachinePrompt();
-            ui.printTaskMessage();
+            output = ui.printTaskMessage();
             for (int i = 1; i <= this.taskList.size(); i++) {
                 Task task = this.taskList.get(i - 1);
-                ui.printTask(i, task);
+                output += "\n";
+                output += ui.printTask(i, task);
             }
-            ui.loadUserPrompt();
         }
+        return output;
     }
 
     public Task addTask(String commandWord, String[] commands) {
@@ -72,15 +73,15 @@ public class TaskList {
         this.taskList.remove(deleteIndex );
     }
 
-    public void findTask(Ui ui, String keyword) {
-        ui.loadMachinePrompt();
-        ui.printFoundTaskMessage();
+    public String findTask(Ui ui, String keyword) {
+        String output = ui.printFoundTaskMessage();
         for (int i = 1; i <= this.taskList.size(); i++) {
             Task task = this.taskList.get(i - 1);
             if (task.getDescription().contains(keyword)) {
-                ui.printTask(i, task);
+                output += "\n";
+                output += ui.printTask(i, task);
             }
         }
-        ui.loadUserPrompt();
+        return output;
     }
 }

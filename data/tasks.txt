@@ -1,2 +1,1 @@
 T | false | read book
-T | false | borrow book

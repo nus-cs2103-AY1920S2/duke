@@ -10,6 +10,7 @@ public abstract class Command {
         return this instanceof ExitCommand;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
-    }
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
+        return "";
+    };
 }

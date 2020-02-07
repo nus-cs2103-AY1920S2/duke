@@ -42,21 +42,6 @@ public class Duke extends Application {
         }
     }
 
-    public void run() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showCommandError(e.getMessage());
-            }
-        }
-    }
-
     @Override
     public void start(Stage stage) {
         // Step 1. Setting up required components
@@ -147,10 +132,19 @@ public class Duke extends Application {
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String output = "";
+        try {
+            String fullCommand = input;
+            Command c = Parser.parse(fullCommand);
+            if (!c.isExit()) {
+                output = c.execute(tasks, ui, storage);
+            }
+        } catch (DukeException e) {
+            ui.showCommandError(e.getMessage());
+        }
+        return output;
     }
 
     public static void main(String[] args) {
-        new Duke().run();
     }
 }
