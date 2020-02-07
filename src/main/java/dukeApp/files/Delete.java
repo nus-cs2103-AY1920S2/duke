@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Delete extends Action {
     public Delete(int num, ArrayList<Task> arrList) {
         super(num, arrList);
-        assert num > 0 : "No negative index";
+        assert num > 0 : "No negative or 0 index";
     }
 
     /**
