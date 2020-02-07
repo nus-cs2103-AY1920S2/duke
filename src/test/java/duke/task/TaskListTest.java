@@ -12,6 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TaskListTest {
     TaskList tasks;
+    EventStub eventTask = new EventStub("project meeting", "2020-01-01",
+            false, "event,0,project meeting,2020-01-01",
+            doneStatusIcon, incompleteStatusIcon,
+            "[E][" + incompleteStatusIcon + "] project meeting " + "(at: Jan 1 2020)");
     static final String doneStatusIcon = "\u2713";
     static final String incompleteStatusIcon = "\u2718";
 
@@ -22,10 +26,6 @@ class TaskListTest {
 
     @Test
     void addTask_validTask_success() {
-        EventStub eventTask = new EventStub("project meeting", "2020-01-01",
-                false, "event,0,project meeting,2020-01-01",
-                doneStatusIcon, incompleteStatusIcon,
-                "[E][" + incompleteStatusIcon + "] project meeting " + "(at: Jan 1 2020)");
         assertEquals(0, tasks.size());
         tasks.addTask(eventTask);
         assertEquals(1, tasks.size());
@@ -43,7 +43,7 @@ class TaskListTest {
 
     @ParameterizedTest
     @ValueSource(ints = {20, -5, 5})
-    void remove_invalidIndex_IndexOutOfBoundsException(int index) {
+    void remove_invalidIndex_indexOutOfBoundsException(int index) {
         assertEquals(0, tasks.size());
         assertThrows(IndexOutOfBoundsException.class, () -> tasks.remove(index));
     }
@@ -52,10 +52,6 @@ class TaskListTest {
     @ValueSource(ints = {0, 1})
     void remove_validIndex_removeTask(int index) {
         // Add two tasks
-        EventStub eventTask = new EventStub("project meeting", "2020-01-01",
-                false, "event,0,project meeting,2020-01-01",
-                doneStatusIcon, incompleteStatusIcon,
-                "[E][" + incompleteStatusIcon + "] project meeting " + "(at: Jan 1 2020)");
         tasks.addTask(eventTask);
         tasks.addTask(eventTask);
         // Remove one task
@@ -63,23 +59,35 @@ class TaskListTest {
         assertEquals(1, tasks.size());
     }
 
-    @Test
-    void get() {
+    @ParameterizedTest
+    @ValueSource(ints = {0})
+    void get_validIndex_obtainTask(int index) {
+        // Check task list is empty
+        assertEquals(0, tasks.size());
+        // Add one task
+        tasks.addTask(eventTask);
+        // Check if task has been added
+        assertEquals(1, tasks.size());
+        Task obtainTask = tasks.get(index);
+        assertEquals(eventTask, obtainTask);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -2, 20})
+    void get_invalidIndex_indexOutOfBoundsException(int index) {
+        // Check task list is empty
+        assertEquals(0, tasks.size());
+        assertThrows(IndexOutOfBoundsException.class, () -> tasks.get(index));
     }
 
     @Test
     void size() {
-    }
-
-    @Test
-    void addTodoTask() {
-    }
-
-    @Test
-    void addEventTask() {
-    }
-
-    @Test
-    void addDeadlineTask() {
+        assertEquals(0, tasks.size());
+        // Add one task
+        tasks.addTask(eventTask);
+        assertEquals(1, tasks.size());
+        // Remove one task
+        tasks.remove(0);
+        assertEquals(0, tasks.size());
     }
 }
