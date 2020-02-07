@@ -18,7 +18,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duke duke = new Duke("Data/Duke.txt");;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -47,7 +47,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = this.getResponse(input); //potential bug
+        String response = this.getResponse(this.duke.run(input)); //potential bug
         this.dialogContainer.setStyle("-fx-border-color:GREEN;-fx-background-color:#ffb907");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

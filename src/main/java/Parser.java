@@ -31,7 +31,6 @@ public class Parser {
      * @return description of the user input
      */
     public String getDescription(){
-
         return description;
     }
 }
