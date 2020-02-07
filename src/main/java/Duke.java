@@ -94,7 +94,7 @@ public class Duke {
 
     public String processCommand(String commands) {
         try {
-            Command command = parser.parse(commands, taskList);
+            Command command = parser.parse(commands, taskList, archiveList);
             return command.execute(taskList, taskStorage, archiveList, archiveStorage);
         } catch (DukeException exc) {
             return exc.getMessage();
