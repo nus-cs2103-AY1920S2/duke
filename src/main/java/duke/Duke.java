@@ -64,6 +64,22 @@ public class Duke {
                     tasks.add(event);
                     ui.printTask(event, tasks.size());
                     break;
+                case LIST:
+                    if (tasks.size() == 0) {
+                        ui.print("There are no tasks now.");
+                    } else {
+                        ui.print(tasks.list());
+                    }
+                    break;
+                case FIND:
+                    String searchTerm = parser.parseSearchTerm(input);
+                    TaskList matchingTasks = tasks.find(searchTerm);
+                    if (matchingTasks.size() == 0) {
+                        ui.print("I didn't manage to find any matching tasks in your list :(");
+                    } else {
+                        ui.print("Here are the matching tasks in your list:\n" + matchingTasks.list());
+                    }
+                    break;
                 case DONE:
                     taskNumber = parser.parseTaskNumber(input);
                     Task completedTask = tasks.complete(taskNumber);
@@ -73,9 +89,6 @@ public class Duke {
                     taskNumber = parser.parseTaskNumber(input);
                     Task deletedTask = tasks.delete(taskNumber);
                     ui.print("Noted. I've removed this task:\n  " + deletedTask);
-                    break;
-                case LIST:
-                    ui.print(tasks.list());
                     break;
                 case BYE:
                     ui.exit();
