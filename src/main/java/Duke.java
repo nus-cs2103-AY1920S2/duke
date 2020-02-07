@@ -2,6 +2,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeInvalidTaskFormatException;
+import duke.util.ArchiveList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Task;
@@ -28,7 +29,9 @@ import java.util.ArrayList;
 
 public class Duke {
     private TaskList taskList;
-    private Storage storage;
+    private ArchiveList archiveList;
+    private Storage taskStorage;
+    private Storage archiveStorage;
     private Parser parser;
 
     /**
@@ -37,9 +40,12 @@ public class Duke {
      * that the Duke instance can perform, stored in a HashMap.
      */
 
-    private Duke(TaskList taskList, Storage storage, Parser parser) {
+    private Duke(TaskList taskList, ArchiveList archiveList,
+                 Storage taskStorage, Storage archiveStorage, Parser parser) {
         this.taskList = taskList;
-        this.storage = storage;
+        this.archiveList = archiveList;
+        this.taskStorage = taskStorage;
+        this.archiveStorage = archiveStorage;
         this.parser = parser;
     }
 
@@ -53,15 +59,19 @@ public class Duke {
      */
 
     public static Duke start() throws DukeInvalidTaskFormatException, DukeInvalidDateFormatException {
-        Storage storage = new Storage("./data/tasks.txt");
+        Storage taskStorage = new Storage("./data/tasks.txt");
+        Storage archiveStorage = new Storage("./data/archive.txt");
         ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> archives = new ArrayList<>();
         try {
-            tasks = storage.loadTasks();
+            tasks = taskStorage.loadTasks();
+            archives = archiveStorage.loadTasks();
         } catch (DukeInvalidTaskFormatException | DukeInvalidDateFormatException e) {
             throw e;
         }
         TaskList taskList = new TaskList(tasks);
-        return new Duke(taskList, storage, new Parser());
+        ArchiveList archiveList = new ArchiveList(archives);
+        return new Duke(taskList, archiveList, taskStorage, archiveStorage, new Parser());
     }
 
     /**
@@ -82,7 +92,7 @@ public class Duke {
     public String processCommand(String commands) {
         try {
             Command command = parser.parse(commands, taskList);
-            return command.execute(taskList, storage);
+            return command.execute(taskList, taskStorage, archiveList, archiveStorage);
         } catch (DukeException exc) {
             return exc.getMessage();
         }

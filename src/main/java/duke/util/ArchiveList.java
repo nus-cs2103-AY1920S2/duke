@@ -73,7 +73,7 @@ public class ArchiveList implements TaskListInterface {
      * @param index The index of the task in the archive to be deleted.
      */
 
-    public String deleteTask(int index, Storage storage) {
+    public String deleteArchivedTask(int index, Storage storage) {
         Task task = getTask(index);
         tasks.remove(index - 1);
         storage.rewriteTasksToFile(tasks);

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.util.ArchiveList;
 import duke.util.Storage;
 import duke.util.Task;
 import duke.util.TaskList;
@@ -43,7 +44,7 @@ public class AddCommand extends Command {
      * @return The String representing the outcome of the execution.
      */
 
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage) {
         return taskList.addTask(task, storage);
     }
 

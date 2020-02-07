@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.util.ArchiveList;
 import duke.util.Storage;
 import duke.util.TaskList;
 
@@ -29,7 +30,7 @@ public abstract class Command {
      * @return The String representing the outcome of the execution.
      */
 
-    public abstract String execute(TaskList taskList, Storage storage);
+    public abstract String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage);
 
     /**
      * Returns a boolean value of whether the Command is a ByeCommand instance.
