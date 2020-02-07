@@ -6,11 +6,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -21,7 +27,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Group imageGroup;
 
     private DialogBox(String text, Image img) {
         try {
@@ -32,9 +38,15 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Group rootGroup = new Group();
         dialog.setText(text);
-        displayPicture.setImage(img);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+        Circle circle = new Circle(49);
+        circle.setStroke(Color.LIGHTPINK);
+        circle.setFill(new ImagePattern(img));
+        circle.setEffect(new DropShadow(+25d, 0d, +2d, Color.DEEPPINK));
+        rootGroup.getChildren().add(circle);
+        imageGroup.getChildren().add(rootGroup);
     }
 
     /**
