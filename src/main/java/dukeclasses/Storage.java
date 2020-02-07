@@ -82,17 +82,26 @@ public class Storage {
                     if (temporary[1].contains("1")) {
                         t.markAsDone();
                     }
+                    if (temporary[3].contains("1")) {
+                        t.markAsHighPriority();
+                    }
                     listOfTasks.add(t);
                 } else if (temporary[0].contains("dukeClasses.Deadline")) {
                     Task t = new Deadline(temporary[2], LocalDate.parse(temporary[3]));
                     if (temporary[1].contains("1")) {
                         t.markAsDone();
                     }
+                    if (temporary[3].contains("1")) {
+                        t.markAsHighPriority();
+                    }
                     listOfTasks.add(t);
                 } else if (temporary[0].contains("dukeClasses.Event")) {
                     Task t = new Event(temporary[2], temporary[3]);
                     if (temporary[1].contains("1")) {
                         t.markAsDone();
+                    }
+                    if (temporary[3].contains("1")) {
+                        t.markAsHighPriority();
                     }
                     listOfTasks.add(t);
                 } else {

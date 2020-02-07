@@ -47,6 +47,12 @@ public class Ui {
 
     /**
      * Handles all the different kinds of inputs the user can have.
+     * For C-Priority I added the function to setTaskAsHighPriority, changed the way,
+     * I save my tasks so when it's saved into data.txt it retains the "isHighPriority".
+     * In that way when i reload my data when i start up my code again I wont lose,
+     * those high priority tasks.
+     * I also added a function "list urgent task" which lists all your urgent task.
+     * To make a task as high priority type "highpriority (index)".
      *
      * @param textEntered textEntered represents whatever the user types
      */
@@ -111,6 +117,8 @@ public class Ui {
                 System.out.println("There is no task with that index! ");
             }
 
+        } else if (textEntered.contains("list urgent task")) {
+            manager.listHighPriority();
         } else { //nonsense input
             try {
                 manager.nonsenseInput();

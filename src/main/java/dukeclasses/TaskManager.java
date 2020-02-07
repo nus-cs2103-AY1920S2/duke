@@ -174,6 +174,11 @@ public class TaskManager {
         System.out.println(textEntered);
     }
 
+    /**
+     * Set this task as high priority.
+     *
+     * @param index the index of task to be set as high priority.
+     */
     public void markTaskAsHighPriority(int index) {
 
         assert index > 0 : "index must be bigger than 0";
@@ -183,6 +188,20 @@ public class TaskManager {
         System.out.println("  " + listOfTasks.get(index - 1).toString());
 
     }
+
+    /**
+     * Lists all task of high priority.
+     */
+    public void listHighPriority() {
+        System.out.println("Here are your high priority tasks in your list: ");
+        for (int j = 0; j < this.listOfTasks.size(); j++) {
+            if (this.listOfTasks.get(j).isHighPriority == true) {
+                System.out.println("  " + (j + 1) + ". " + this.listOfTasks.get(j).toString());
+            }
+        }
+    }
+
+
 
 
     /**

@@ -9,6 +9,11 @@ public class Task {
     protected boolean isDone;
     protected boolean isHighPriority;
 
+    /**
+     * Consturctor for Task.
+     *
+     * @param s takes in a task's description
+     */
     public Task(String s) {
         this.description = s;
         this.isDone = false;
