@@ -1,5 +1,6 @@
 package dukebot.command;
 
+import dukebot.storage.AppStorage;
 import dukebot.storage.Storage;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
@@ -25,7 +26,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        TaskList taskList = appStorage.getTaskList();
         String toFind = String.join(" ", Arrays.copyOfRange(inpArr, 1, inpArr.length));
         if (toFind.length() == 0) {
             ui.sayLine(LineName.FIND_EMPTY);

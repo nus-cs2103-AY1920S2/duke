@@ -1,6 +1,7 @@
 package dukebot.command;
 
 import dukebot.exception.DukeException;
+import dukebot.storage.AppStorage;
 import dukebot.storage.Storage;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
@@ -26,15 +27,9 @@ public class NewTodoCommand extends Command {
         this.inpArr = inpArr;
     }
 
-    /**
-     * Executes the command.
-     *
-     * @param taskList TaskList to accept.
-     * @param ui Ui to accept.
-     * @param storage Storage to accept.
-     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        TaskList taskList = appStorage.getTaskList();
         String description;
         Task task;
         description = String.join(" ", Arrays.copyOfRange(inpArr, 1, inpArr.length));

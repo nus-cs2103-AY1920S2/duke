@@ -1,6 +1,7 @@
 package dukebot.command;
 
 import dukebot.exception.DukeException;
+import dukebot.storage.AppStorage;
 import dukebot.storage.Storage;
 import dukebot.tasklist.Event;
 import dukebot.tasklist.Task;
@@ -30,7 +31,8 @@ public class NewEventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        TaskList taskList = appStorage.getTaskList();
         String description;
         String time;
         Task event = null;

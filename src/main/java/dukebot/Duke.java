@@ -98,7 +98,7 @@ public class Duke {
     public String getResponse(String input) {
         ui.resetGuiOutput();
         Command c = parser.parse(input);
-        c.execute(tasks, ui, storage);
+        c.execute(appStorage, ui, storage);
 
         if (c.isExit()) {
             // Hack to delay program close.
@@ -124,7 +124,7 @@ public class Duke {
         while (!isExit) {
             String fullCommand = ui.readCommand();
             Command c = parser.parse(fullCommand);
-            c.execute(tasks, ui, storage);
+            c.execute(appStorage, ui, storage);
             isExit = c.isExit();
         }
         System.exit(0);

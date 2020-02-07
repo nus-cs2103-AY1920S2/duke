@@ -1,6 +1,7 @@
 package dukebot.command;
 
 import dukebot.exception.DukeException;
+import dukebot.storage.AppStorage;
 import dukebot.storage.Storage;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
@@ -30,7 +31,8 @@ public class RescheduleCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        TaskList taskList = appStorage.getTaskList();
         if (inpArr.length <= 2) {
             ui.sayLine(LineName.RESCHEDULE_EMPTY);
             return;

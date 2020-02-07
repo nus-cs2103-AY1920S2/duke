@@ -1,5 +1,6 @@
 package dukebot.command;
 
+import dukebot.storage.AppStorage;
 import dukebot.storage.Storage;
 import dukebot.tasklist.TaskList;
 import dukebot.ui.Ui;
@@ -11,11 +12,11 @@ public abstract class Command {
     /**
      * Executes the command.
      *
-     * @param taskList TaskList to accept.
+     * @param appStorage AppStorage to accept.
      * @param ui Ui to accept.
      * @param storage Storage to accept.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(AppStorage appStorage, Ui ui, Storage storage);
 
     /**
      * Returns true if command is ExitCommand, false otherwise.
