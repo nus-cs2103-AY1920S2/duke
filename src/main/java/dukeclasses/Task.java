@@ -7,10 +7,12 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    protected boolean isHighPriority;
 
     public Task(String s) {
         this.description = s;
         this.isDone = false;
+        this.isHighPriority = false;
     }
 
     /**
@@ -57,4 +59,10 @@ public class Task {
 
         return this.isDone;
     }
+
+    public void markAsHighPriority() {
+        this.isHighPriority = true;
+    }
+
+
 }

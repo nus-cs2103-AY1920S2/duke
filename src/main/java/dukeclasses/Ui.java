@@ -100,6 +100,17 @@ public class Ui {
             } catch (DukeException ex) {
                 System.out.println(ex);
             }
+        } else if (textEntered.contains("highpriority")) {
+            Parser parser = new Parser();
+            int indexOfTaskDone = parser.handleDoneCommands(textEntered);
+            try {
+                manager.markTaskAsHighPriority(indexOfTaskDone);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                System.out.println("highpriority must be followed by a number");
+            } catch (IndexOutOfBoundsException ex) {
+                System.out.println("There is no task with that index! ");
+            }
+
         } else { //nonsense input
             try {
                 manager.nonsenseInput();

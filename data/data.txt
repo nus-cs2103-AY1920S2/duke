@@ -1,4 +1,1 @@
-dukeClasses.ToDo|1|homework
-dukeClasses.ToDo|1|homework
-dukeClasses.ToDo|0|fsd
-dukeClasses.ToDo|0|f
+dukeClasses.ToDo|1|homework|1

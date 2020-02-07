@@ -174,6 +174,16 @@ public class TaskManager {
         System.out.println(textEntered);
     }
 
+    public void markTaskAsHighPriority(int index) {
+
+        assert index > 0 : "index must be bigger than 0";
+        listOfTasks.get(index - 1).markAsHighPriority();
+        storage.saveExistingData(listOfTasks);
+        System.out.println("Nice! I've marked this task as high priority:");
+        System.out.println("  " + listOfTasks.get(index - 1).toString());
+
+    }
+
 
     /**
      * Return list of Tasks.

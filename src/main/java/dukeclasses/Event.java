@@ -31,6 +31,8 @@ public class Event extends Task {
      */
     public String saveData() {
         String isItDone = this.isDone ? "1" : "0"; //1 is done, 0 is not done
-        return "dukeClasses.Event" + "|" + isItDone + "|" + this.description + "|" + this.at;
+        String isItHighPriority = this.isHighPriority? "1" : "0"; //1 is means high priority, 0 is means not
+        return "dukeClasses.Event" + "|" + isItDone + "|" + this.description + "|" + this.at
+                + "|" + isItHighPriority;
     }
 }
