@@ -24,6 +24,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String[] inputTokens = this.command.split(" ");
+        assert inputTokens[0] == "list";
         String dateString = (inputTokens.length > 1) ? inputTokens[1] : "";
         TaskList filteredTasks = filterTasksByDate(tasks, dateString);
         return ui.prettyPrintList(filteredTasks);
