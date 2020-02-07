@@ -15,7 +15,9 @@ public class Events extends Task {
      */
     public Events(String description, String at) {
         super(description);
+        assert description != null : " no date and timing for this event";
         this.at = at;
+        assert at != null : " no date and timing for this event";
     }
 
     String getAt() {
@@ -28,6 +30,7 @@ public class Events extends Task {
      * @return it as MMM d yyyy
      */
     String date(String at) {
+        assert at != null : " no date and timing available";
         String s = "";
         try {
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HHmm");

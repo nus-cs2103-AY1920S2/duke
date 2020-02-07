@@ -16,7 +16,9 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
+        assert description != null: "No description for this deadline";
         this.by = by;
+        assert by != null : " no date and timing for this deadline";
     }
 
     String getBy() {
@@ -29,6 +31,7 @@ public class Deadline extends Task {
      * @return it as MMM d yyyy
      */
     String getDate(String at) {
+        assert at != null : " no date and timing available";
         String s = "";
         try {
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HHmm");

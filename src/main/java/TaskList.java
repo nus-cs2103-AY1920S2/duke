@@ -46,6 +46,7 @@ public class TaskList {
 
     public String delete() {
         int num = Integer.parseInt(description.split(" ")[1]);
+        assert (num>=1 && num<=store.size()) : "This task does not exists";
         String toPrint = ui.remove(store.get(num - 1)) + "\n";
         store.remove(num - 1);
         toPrint += ui.storeSize(store.size());
@@ -93,6 +94,7 @@ public class TaskList {
 
     public String done() {
         int num = Integer.parseInt(description.split(" ")[1]);
+        assert (num >=1 && num<= store.size()) : "This task does not exists";
         Task t = store.get(num - 1);
         t.markAsDone();
         String toPrint = ui.doneTask() + "\n";
@@ -103,6 +105,7 @@ public class TaskList {
     public String find() {
         ui.matchingTask();
         String matching = description.substring(5);
+        assert (matching != "") : "user needs to input";
         String toPrint = "";
         for (int i = 0; i < store.size(); i++) {
             if (store.get(i).getDescription().contains(matching)) {
@@ -118,6 +121,7 @@ public class TaskList {
         for (int i = 0; i < store.size(); i++) {
             counter++;
             toPrint += "\n" + counter + ". " + store.get(i).toString();
+            assert store.get(i) != null : "No task available";
         }
         return toPrint;
     }
