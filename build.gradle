@@ -1,5 +1,4 @@
 plugins {
-    id 'java'
     id 'application'
     id 'checkstyle'
 }
@@ -10,15 +9,28 @@ checkstyle {
 }
 
 group 'seedu.duke'
-version '0.1.0'
+version '0.2.0'
 
 repositories {
     mavenCentral()
 }
 
+apply plugin: 'java'
+sourceCompatibility = 11
+targetCompatibility = 11
+
+
 application {
-    // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
+}
+
+jar {
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+
+    manifest {
+        attributes 'Main-Class': 'duke.Launcher',
+                'Class-Path': configurations.runtime.files.collect { "build/libs/$it.name" }.join(' ')
+    }
 }
 
 run {
