@@ -9,14 +9,14 @@ import java.util.List;
  */
 public class TaskList {
 
-    private List<Task> listOfTask;
+    private List<Task> tasks;
     private Ui ui;
     private Storage storage;
 
     public TaskList() {};
 
-    public TaskList(List<Task> listOfTask, Ui ui, Storage storage) {
-        this.listOfTask = listOfTask;
+    public TaskList(List<Task> tasks, Ui ui, Storage storage) {
+        this.tasks = tasks;
         this.ui = ui;
         this.storage = storage;
     }
@@ -27,8 +27,8 @@ public class TaskList {
      * @param mytask Task to be added.
      */
     public void add(Task mytask) {
-        listOfTask.add(mytask);
-        ui.addMessage((this.listOfTask).size(), mytask);
+        tasks.add(mytask);
+        ui.addMessage((this.tasks).size(), mytask);
         storage.store(this, ui);
     }
 
@@ -41,8 +41,8 @@ public class TaskList {
     public void delete(int index, Storage storage) {
         // Split the string to get the
         // index of the task to be deleted
-        ui.deletedTaskMessage(getsize() - 1, listOfTask.get(index));
-        listOfTask.remove(index); // Deletes from task list
+        ui.deletedTaskMessage(getsize() - 1, tasks.get(index));
+        tasks.remove(index); // Deletes from task list
 
         storage.store(this, ui);
     }
@@ -55,7 +55,7 @@ public class TaskList {
      */
     public void find(String word, Storage storage) {
         TaskList filteredlist= new TaskList(new ArrayList<Task>(), ui, storage);
-        for (Task task : this.listOfTask) {
+        for (Task task : this.tasks) {
             String description = ((task.getDesc()).toLowerCase());
 
             if (description.matches("(?i)" + "(" + word.toLowerCase() + ")" + ".*"))
@@ -71,7 +71,7 @@ public class TaskList {
      * @return List<Task> A list containing the Tasks.
      */
     public List<Task> getListOfTask() {
-        return listOfTask;
+        return tasks;
     }
 
     /**
@@ -80,6 +80,6 @@ public class TaskList {
      * @return int number of items in the list.
      */
     public int getsize() {
-        return listOfTask.size();
+        return tasks.size();
     }
 }

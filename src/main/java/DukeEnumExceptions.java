@@ -5,7 +5,7 @@ public enum DukeEnumExceptions {
      * @author Amos Cheong
      */
     LIST {
-        public void checkerror(String s1, String s2, TaskList list) throws DukeException {
+        public void checkError(String s1, String s2, TaskList list) throws DukeException {
             int numOfArgs = Integer.parseInt(s2);
             String[] allargs = s1.split("\\s+");
 
@@ -14,7 +14,7 @@ public enum DukeEnumExceptions {
         }
     },
     DONE {
-        public void checkerror(String s1, String s2, TaskList list) throws DukeException{
+        public void checkError(String s1, String s2, TaskList list) throws DukeException{
             int numOfArgs = Integer.parseInt(s2);
             String[] allargs = s1.split("\\s+");
 
@@ -27,7 +27,7 @@ public enum DukeEnumExceptions {
         }
     },
     TODO {
-        public void checkerror(String s1, String s2, TaskList list) throws DukeException {
+        public void checkError(String s1, String s2, TaskList list) throws DukeException {
             int numOfArgs = Integer.parseInt(s2);
             String[] allargs = s1.split("\\s+");
 
@@ -36,7 +36,7 @@ public enum DukeEnumExceptions {
         }
     },
     DEADLINE {
-        public void checkerror(String s1, String s2, TaskList list) throws DukeException {
+        public void checkError(String s1, String s2, TaskList list) throws DukeException {
             int limit = s1.lastIndexOf("/by") - 1;
 
             // The variable limit will be used as an argument for the method substring.
@@ -56,7 +56,7 @@ public enum DukeEnumExceptions {
         }
     },
     EVENT {
-        public void checkerror(String s1, String s2, TaskList list) throws DukeException {
+        public void checkError(String s1, String s2, TaskList list) throws DukeException {
             int limit = s1.lastIndexOf("/at") - 1;
 
             // The variable limit will be used as an argument for the method substring.
@@ -77,7 +77,7 @@ public enum DukeEnumExceptions {
     },
     DELETE {
         @Override
-        public void checkerror(String s1, String s2, TaskList list) throws DukeException {
+        public void checkError(String s1, String s2, TaskList list) throws DukeException {
             int numOfArgs = Integer.parseInt(s2);
             String[] allargs = s1.split("\\s+");
 
@@ -91,7 +91,7 @@ public enum DukeEnumExceptions {
     },
     FIND {
         @Override
-        public void checkerror(String s1, String s2, TaskList list) throws DukeException {
+        public void checkError(String s1, String s2, TaskList list) throws DukeException {
             int numOfArgs = Integer.parseInt(s2);
             String[] commandarr = s1.split("\\s+", 2);
 
@@ -101,5 +101,5 @@ public enum DukeEnumExceptions {
         }
     };
 
-    public abstract void checkerror(String s1, String s2, TaskList list) throws DukeException;
+    public abstract void checkError(String s1, String s2, TaskList list) throws DukeException;
 }

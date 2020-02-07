@@ -45,7 +45,7 @@ public class Parser {
 
             // Execute the error-checking
             DukeEnumExceptions.valueOf(arguments[0].toUpperCase())
-                    .checkerror(fullcommand, commandpairing.get((arguments[0]).toLowerCase()), tasklist);
+                    .checkError(fullcommand, commandpairing.get((arguments[0]).toLowerCase()), tasklist);
         } catch (DukeException ex){
             ui.showErrorMessage(ex.getMessage());
             return false;
