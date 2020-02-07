@@ -6,6 +6,7 @@ public class Task {
     protected boolean isDone;
 
     public Task(String description) {
+        assert !description.isEmpty();
         this.description = description;
         this.isDone = false;
     }
