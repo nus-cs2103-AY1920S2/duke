@@ -1,0 +1,100 @@
+Feb 05, 2020 12:25:19 AM seedu.address.MainApp init
+INFO: =============================[ Initializing AddressBook ]===========================
+Feb 05, 2020 12:25:19 AM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Feb 05, 2020 12:25:19 AM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: Json file config.json not found
+Feb 05, 2020 12:25:19 AM seedu.address.MainApp initPrefs
+INFO: Using prefs file : preferences.json
+Feb 05, 2020 12:25:19 AM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: Json file preferences.json not found
+Feb 05, 2020 12:25:19 AM seedu.address.commons.core.LogsCenter init
+INFO: currentLogLevel: INFO
+Feb 05, 2020 12:25:19 AM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: Json file data\addressbook.json not found
+Feb 05, 2020 12:25:19 AM seedu.address.MainApp initModelManager
+INFO: Data file not found. Will be starting with a sample AddressBook
+Feb 05, 2020 12:25:19 AM seedu.address.MainApp start
+INFO: Starting AddressBook V0.6.0ea
+Feb 05, 2020 12:25:19 AM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Feb 05, 2020 12:25:41 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][help]
+Feb 05, 2020 12:25:41 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Opened help window.
+Feb 05, 2020 12:25:51 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Feb 05, 2020 12:25:51 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Listed all persons
+Feb 05, 2020 12:26:11 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][addn/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01]
+Feb 05, 2020 12:26:11 AM seedu.address.ui.MainWindow executeCommand
+INFO: Invalid command: addn/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
+Feb 05, 2020 12:26:17 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01]
+Feb 05, 2020 12:26:17 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: New person added: John Doe Phone: 98765432 Email: johnd@example.com Address: John street, block 123, #01-01 Tags: 
+Feb 05, 2020 12:26:27 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 3]
+Feb 05, 2020 12:26:27 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Charlotte Oliveiro Phone: 93210283 Email: charlotte@example.com Address: Blk 11 Ang Mo Kio Street 74, #11-04 Tags: [neighbours]
+Feb 05, 2020 12:26:39 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][exit]
+Feb 05, 2020 12:26:39 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Exiting Address Book as requested ...
+Feb 05, 2020 12:26:39 AM seedu.address.MainApp stop
+INFO: ============================ [ Stopping Address Book ] =============================
+Feb 05, 2020 12:32:30 AM seedu.address.MainApp init
+INFO: =============================[ Initializing AddressBook ]===========================
+Feb 05, 2020 12:32:30 AM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Feb 05, 2020 12:32:30 AM seedu.address.MainApp initPrefs
+INFO: Using prefs file : preferences.json
+Feb 05, 2020 12:32:30 AM seedu.address.commons.core.LogsCenter init
+INFO: currentLogLevel: INFO
+Feb 05, 2020 12:32:30 AM seedu.address.MainApp start
+INFO: Starting AddressBook V0.6.0ea
+Feb 05, 2020 12:32:30 AM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Feb 05, 2020 12:32:33 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal]
+Feb 05, 2020 12:32:33 AM seedu.address.ui.MainWindow executeCommand
+INFO: Invalid command: n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal
+Feb 05, 2020 12:32:40 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal]
+Feb 05, 2020 12:32:40 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: New person added: Betsy Crowe Phone: 1234567 Email: betsycrowe@example.com Address: Newgate Prison Tags: [friend][criminal]
+Feb 05, 2020 12:32:46 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][edit 1 /n Alex]
+Feb 05, 2020 12:32:46 AM seedu.address.ui.MainWindow executeCommand
+INFO: Invalid command: edit 1 /n Alex
+Feb 05, 2020 12:33:13 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][edit 1 /nAlex]
+Feb 05, 2020 12:33:13 AM seedu.address.ui.MainWindow executeCommand
+INFO: Invalid command: edit 1 /nAlex
+Feb 05, 2020 12:33:19 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][edit 1]
+Feb 05, 2020 12:33:19 AM seedu.address.ui.MainWindow executeCommand
+INFO: Invalid command: edit 1
+Feb 05, 2020 12:33:37 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][edit 1 n/John]
+Feb 05, 2020 12:33:37 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Edited Person: John Phone: 87438807 Email: alexyeoh@example.com Address: Blk 30 Geylang Street 29, #06-40 Tags: [friends]
+Feb 05, 2020 12:33:45 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][edit 1 n/Alex Yeoh]
+Feb 05, 2020 12:33:45 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Edited Person: Alex Yeoh Phone: 87438807 Email: alexyeoh@example.com Address: Blk 30 Geylang Street 29, #06-40 Tags: [friends]
+Feb 05, 2020 12:33:59 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][find jOhn]
+Feb 05, 2020 12:33:59 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: 1 persons listed!
+Feb 05, 2020 12:34:11 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][find Betsy John Tim]
+Feb 05, 2020 12:34:11 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: 2 persons listed!
+Feb 05, 2020 1:25:13 AM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][exit]
+Feb 05, 2020 1:25:13 AM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Exiting Address Book as requested ...
+Feb 05, 2020 1:25:13 AM seedu.address.MainApp stop
+INFO: ============================ [ Stopping Address Book ] =============================

@@ -47,7 +47,7 @@ public class Duke {
      * @param tasks TaskList object to acces to list of tasks.
      * @param storage Storage object.
      */
-    public static void execcommand(String input, TaskList tasks, Ui ui, Storage storage) {
+    public static void execute(String input, TaskList tasks, Ui ui, Storage storage) {
         // Split arguments to get the first index
         String[] arguments = input.split(" ");
 
@@ -85,7 +85,7 @@ public class Duke {
                 // "read book" into the list, the user has to type
                 // "todo read book" instead of just typing "read book"
                 // as typing "read book" will cause the code to throw an exception
-                execcommand(line, tasks, ui, storage);
+                execute(line, tasks, ui, storage);
             // Wait for next input command
             line = sc.nextLine();
         }
@@ -100,6 +100,6 @@ public class Duke {
      * @return Nothing.
      **/
     public static void main(String[] args) {
-        new Duke("C:\\Users\\SOHNB101\\Documents\\myduke\\duke\\data\\duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 }
