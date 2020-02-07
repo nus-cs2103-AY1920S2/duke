@@ -60,6 +60,7 @@ public class Storage {
      * @return the Task associated with the line.
      */
     public Task translateTask(String line) {
+        assert line != null; //if not it will cause exceptions that will break code
         String[] contents = line.split("\\|");
         String taskType = contents[0];
         Task result;
@@ -93,6 +94,7 @@ public class Storage {
             FileWriter fw = new FileWriter(this.file);
             int counter = 0;
             String result = "";
+            assert tasks != null;
             for (Task t : tasks) {
                 result += this.convertTaskToString(t);
                 if (counter != tasks.size() - 1) {

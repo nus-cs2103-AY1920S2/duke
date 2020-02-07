@@ -69,6 +69,7 @@ public class Duke {
         UI ui = bot.getUI();
         try {
             Command command = parser.respondToUser(input, ui, list);
+            assert command != null; // assert that command not null
             String reply = command.execute(ui, list, storage).trim();
             return "\t" + reply;
         } catch (DukeException e) {

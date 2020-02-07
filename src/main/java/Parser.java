@@ -15,6 +15,7 @@ public class Parser {
      */
     public Command respondToUser(String command, UI ui, TaskList list) {
         // split the string
+        assert command != null; //if it is null, code breaks
         String[] inputCommand = command.trim().split(" ");
         switch (inputCommand[0]) {
         case "todo":
