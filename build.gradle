@@ -4,7 +4,7 @@ plugins {
     id 'checkstyle'
 }
 
-group 'seedu.duke'
+group 'duke'
 version '0.1.0'
 
 repositories {
@@ -24,6 +24,10 @@ checkstyle {
     toolVersion = '8.23'
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     String javaFxVersion = '11'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
@@ -38,4 +42,5 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
