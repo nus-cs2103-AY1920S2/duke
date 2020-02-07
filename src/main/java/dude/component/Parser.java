@@ -49,8 +49,32 @@ public class Parser {
     public static Command parse(String msg) throws ParsingException {
         msg = msg.strip();
 
-        // First match against simple (single word) commands
-        switch (msg) {
+        Command command = parseSingleWordCommand(msg);
+
+        if (command == null) {
+            String[] cmdAndBody = msg.split(WHITESPACE, 2);
+            try {
+                command = parseCommandWithArguments(cmdAndBody[0], cmdAndBody[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new ParsingException("Look's like your command is incomplete, mate",
+                        USAGES.get(cmdAndBody[0]));
+            }
+        }
+
+        if (command == null) {
+            throw new ParsingException("Sorry mate, I didn't catch your drift",
+                    USAGES.values().toArray(new String[0]));
+        }
+
+        return command;
+    }
+
+    /**
+     * Attempts to match the user's message with single word commands bye, list, today.
+     * Returns null otherwise.
+     */
+    private static Command parseSingleWordCommand(String command) {
+        switch (command) {
         case "bye":
             return new ByeCommand();
 
@@ -61,54 +85,56 @@ public class Parser {
             return new CheckDateCommand(LocalDate.now());
 
         default:
-            break;
+            return null;
         }
+    }
 
-        String[] cmdAndBody = msg.split(WHITESPACE, 2);
+    /**
+     * Attempts to match the user's message with a complex command with arguments.
+     * The possible commands are done, delete, check, todo, deadline, event and find.
+     * Returns null otherwise.
+     *
+     * @param command the command name
+     * @param args the argument body
+     * @return the parsed command or null if the command name does not match
+     * @throws ParsingException if the argument bodies are incorrect
+     * @throws ArrayIndexOutOfBoundsException if the incorrect argument count or format is given
+     */
+    private static Command parseCommandWithArguments(String command, String args) throws ParsingException {
+        switch (command) {
+        case "done":
+            int indexDone = parseNumericalArgument(args, "done");
+            return new DoneCommand(indexDone);
 
-        // Else command is complex, then first match command name then parse arguments
-        try {
-            switch (cmdAndBody[0]) {
-            case "done":
-                int indexDone = parseNumericalArgument(cmdAndBody[1], "done");
-                return new DoneCommand(indexDone);
+        case "delete":
+            int indexDelete = parseNumericalArgument(args, "delete");
+            return new DeleteCommand(indexDelete);
 
-            case "delete":
-                int indexDelete = parseNumericalArgument(cmdAndBody[1], "delete");
-                return new DeleteCommand(indexDelete);
+        case "check":
+            LocalDate checkDate = parseDate(args, "check");
+            return new CheckDateCommand(checkDate);
 
-            case "check":
-                LocalDate checkDate = parseDate(cmdAndBody[1], "check");
-                return new CheckDateCommand(checkDate);
+        case "todo":
+            return new AddTaskCommand(new Todo(args, false));
 
-            case "todo":
-                return new AddTaskCommand(new Todo(cmdAndBody[1], false));
+        case "deadline":
+            String[] deadlineArgs = args.split(WHITESPACE + "/by" + WHITESPACE, 2);
+            LocalDate by = parseDate(deadlineArgs[1], "deadline");
+            return new AddTaskCommand(new Deadline(deadlineArgs[0], by, false));
 
-            case "deadline":
-                String[] deadlineArgs = cmdAndBody[1].split(WHITESPACE + "/by" + WHITESPACE, 2);
-                LocalDate by = parseDate(deadlineArgs[1], "deadline");
-                return new AddTaskCommand(new Deadline(deadlineArgs[0], by, false));
+        case "event":
+            String[] eventArgs = args.split(WHITESPACE + "/from" + WHITESPACE, 2);
+            String[] eventDateStrings = eventArgs[1].split(WHITESPACE + "/to" + WHITESPACE, 2);
+            LocalDate from = parseDate(eventDateStrings[0], "event");
+            LocalDate to = parseDate(eventDateStrings[1], "event");
+            return new AddTaskCommand(new Event(eventArgs[0], from, to, false));
 
-            case "event":
-                String[] eventArgs = cmdAndBody[1].split(WHITESPACE + "/from" + WHITESPACE, 2);
-                String[] eventDateStrings = eventArgs[1].split(WHITESPACE + "/to" + WHITESPACE, 2);
-                LocalDate from = parseDate(eventDateStrings[0], "event");
-                LocalDate to = parseDate(eventDateStrings[1], "event");
-                return new AddTaskCommand(new Event(eventArgs[0], from, to, false));
+        case "find":
+            return new FindCommand(args);
 
-            case "find":
-                return new FindCommand(cmdAndBody[1]);
-
-            default:
-                throw new ParsingException("Sorry mate, I didn't catch your drift",
-                        USAGES.values().toArray(new String[USAGES.size()]));
-
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ParsingException("Look's like your command is incomplete, mate",
-                    USAGES.get(cmdAndBody[0]));
+        default:
+            return null;
         }
-
     }
 
     private static int parseNumericalArgument(String arg, String command) throws ParsingException {
@@ -126,6 +152,4 @@ public class Parser {
             throw new ParsingException("I don't understand this date: " + dateString, USAGES.get(command));
         }
     }
-
-
 }

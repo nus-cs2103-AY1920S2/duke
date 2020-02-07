@@ -18,7 +18,7 @@ public abstract class Task {
     }
 
     /**
-     * Sets isDone to true.
+     * Marks this task as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -36,7 +36,7 @@ public abstract class Task {
     /**
      * Indicates whether the task is completed.
      *
-     * @return isDone which is true if Task is complete, false otherwise.
+     * @return true if Task is complete, false otherwise.
      */
     public boolean isDone() {
         return isDone;
@@ -68,9 +68,9 @@ public abstract class Task {
     public abstract String storeFormat();
 
     /**
-     * Returns a string representation of the isDone status of the task, meant to be understood by users.
+     * Returns a string representation of the completion status of the task, meant to be understood by users.
      *
-     * @return "O" if this Task is complete (isDone is true), "X" otherwise.
+     * @return "O" if this Task is complete, "X" otherwise.
      */
     protected String getStatusIcon() {
         return (isDone ? "O" : "X"); 
