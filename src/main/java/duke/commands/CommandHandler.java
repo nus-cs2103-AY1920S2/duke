@@ -1,7 +1,6 @@
 package duke.commands;
 
 import java.util.HashMap;
-import java.io.IOException;
 
 import duke.ui.Ui;
 import duke.tasks.TaskList;
@@ -42,7 +41,6 @@ public class CommandHandler {
      * @param cmd User-entered string to be parsed.
      */
     public void executeCmd(String cmd) {
-        // First parse command
         String cmdWord;
         String arg;
 

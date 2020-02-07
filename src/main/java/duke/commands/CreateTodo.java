@@ -12,7 +12,7 @@ import duke.exceptions.DukeException;
 /**
  * Creates a <code>Todo</code> Task and adds it to the TaskList.
  */
-class CreateTodo implements Command, TaskCreation {
+class CreateTodo implements Command {
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arg.length() == 0) {
             throw new DukeException("Usage: todo [task name]");
@@ -30,6 +30,7 @@ class CreateTodo implements Command, TaskCreation {
         }
 
         // Display reply
-        ui.showReply(CreateTaskReply(newTask, tasks));
+        ui.showReply(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", newTask,
+                tasks.size()));
     }
 }

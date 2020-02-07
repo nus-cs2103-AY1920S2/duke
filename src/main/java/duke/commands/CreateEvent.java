@@ -13,7 +13,7 @@ import duke.exceptions.DukeException;
 /**
  * Creates an <code>Event</code> Task and adds it to the TaskList.
  */
-class CreateEvent implements Command, TaskCreation {
+class CreateEvent implements Command {
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Perform parsing of arguments
         String[] args = arg.split("/at");
@@ -39,6 +39,7 @@ class CreateEvent implements Command, TaskCreation {
         }
 
         // Display reply
-        ui.showReply(CreateTaskReply(newTask, tasks));
+        ui.showReply(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", newTask,
+                tasks.size()));
     }
 }

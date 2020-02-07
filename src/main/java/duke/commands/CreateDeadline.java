@@ -13,7 +13,7 @@ import duke.exceptions.DukeException;
 /**
  * Creates a <code>Deadline</code> Task and adds it to the TaskList.
  */
-class CreateDeadline implements Command, TaskCreation {
+class CreateDeadline implements Command {
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Perform parsing of arguments
         String[] args = arg.split("/by");
@@ -37,8 +37,9 @@ class CreateDeadline implements Command, TaskCreation {
         } catch (IOException e) {
             throw new DukeException("Error when saving to disk!");
         }
-        
+
         // Display reply
-        ui.showReply(CreateTaskReply(newTask, tasks));
+        ui.showReply(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", newTask,
+                tasks.size()));
     }
 }
