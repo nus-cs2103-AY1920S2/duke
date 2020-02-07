@@ -33,7 +33,7 @@ class Parser {
             command = Command.LIST;
             break;
         case "find":
-            if (parsedInput.length > 1) {
+            if (parsedInput.length < 2) {
                 throw new InvalidCommandException("Hmm... I'm not sure what you're looking for.");
             }
             command = Command.FIND;
