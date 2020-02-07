@@ -1,16 +1,23 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
-checkstyle {
-    toolVersion = '8.23'
+repositories {
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
 }
 
 application {
     mainClassName = "com.nus.duke.Duke"
+}
+
+javafx {
+    version = '11'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 shadowJar {
