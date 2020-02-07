@@ -2,38 +2,23 @@ package duke.command;
 
 import duke.util.ArchiveList;
 import duke.util.Storage;
+import duke.util.Task;
 import duke.util.TaskList;
 
-/*
- * ListCommand
- *
- * CS2103 AY19/20 Semester 2
- * Individual Project
- * Duke Project
- *
- * 28 Jan 2020
- *
- */
-
-/**
- * <p>ListCommand extends the command abstract class
- * and it describes the behavior of the commands regarding
- * to list the tasks.</p>
- * @author Mario Lorenzo
- */
-
-public class ListCommand extends Command {
+public class ArchiveAddCommand extends Command {
+    private int index;
 
     /**
-     * Constructs a ListCommand instance.
+     * Constructs an ArchiveAddCommand instance.
+     * @param index The index of the task that is wanted to be archived.
      */
 
-    public ListCommand() {
-
+    public ArchiveAddCommand(int index) {
+        this.index = index;
     }
 
     /**
-     * Executes the list command.
+     * Executes the archive-add command.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
      * @param archiveList The list of archived tasks.
@@ -42,7 +27,9 @@ public class ListCommand extends Command {
      */
 
     public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage) {
-        return taskList.listTasks();
+        Task task = taskList.getTask(this.index);
+        taskList.deleteTask(this.index, storage);
+        return archiveList.archiveTask(task,archiveStorage);
     }
 
     /**

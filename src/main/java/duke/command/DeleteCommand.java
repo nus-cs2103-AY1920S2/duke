@@ -37,6 +37,8 @@ public class DeleteCommand extends Command {
      * Executes the delete command.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
+     * @param archiveList The list of archived tasks.
+     * @param archiveStorage The storage of the archive.
      * @return The String representing the outcome of the execution.
      */
 

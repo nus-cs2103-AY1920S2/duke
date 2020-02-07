@@ -36,8 +36,10 @@ public class FindCommand extends Command {
 
     /**
      * Executes the find command.
-     * @param taskList The list of the tasks.
-     * @param storage The storage of the Duke.
+     * @param taskList The list of tasks.
+     * @param storage The writer to the hard disk.
+     * @param archiveList The list of archived tasks.
+     * @param archiveStorage The storage of the archive.
      * @return The outcome message.
      */
 
