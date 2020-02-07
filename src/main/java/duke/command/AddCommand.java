@@ -34,36 +34,39 @@ public class AddCommand extends Command {
      * Overwrites the execute method from Abstract class execute.
      * Check against the user's input then pass it to its respective task class.
      *
-     * @param storage Deals with loading tasks from file.
-     * @param ui Deals with interactions with the user
+     * @param storage  Deals with loading tasks from file.
+     * @param ui       Deals with interactions with the user
      * @param taskList List containing all the tasks
      * @throws DukeException Main exception method I have created
-     * @throws IOException For any potential Input/Output exceptions from incorrect file
+     * @throws IOException   For any potential Input/Output exceptions from incorrect file
      */
     @Override
-    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException, IOException {
+    public String execute(Storage storage, Ui ui, TaskList taskList)
+            throws DukeException, IOException {
         if (userInput.contains("deadline")) {
+            // Assert that the programmer accidently change the field in contains
+            assert (userInput.contains("deadline")) : "userInput should contain deadline!";
             Deadline newDeadLine = new Deadline(userInput);
             newDeadLine.setDescription(userInput);
             newDeadLine.setBy(newDeadLine.formatTasks(userInput));
             newDeadLine.setD1();
             taskList.addToList(newDeadLine);
             storage.saveTask(newDeadLine);
-            //  deadline_event_hash.addToHashMap(newDeadLine.d1.toLocalDate().toString(), newDeadLine);
             return ui.printTasks(newDeadLine, taskList.getList());
         } else if (userInput.contains("todo")) {
+            assert (userInput.contains("todo")) : "userInput should contain todo!";
             Task newTodoTask = new Todo(userInput);
             newTodoTask.setDescription(newTodoTask.formatTasks("todo"));
             taskList.addToList(newTodoTask);
             storage.saveTask(newTodoTask);
             return ui.printTasks(newTodoTask, taskList.getList());
         } else if (userInput.contains("event")) {
+            assert (userInput.contains("event")) : "userInput should contain event!";
             Event newEvent = new Event(userInput);
             newEvent.setDescription(userInput);
             newEvent.setAt(newEvent.formatTasks(userInput));
             newEvent.setD1();
             taskList.addToList(newEvent);
-            //deadline_event_hash.addToHashMap(newEvent.d1.toLocalDate().toString(), newEvent);
             storage.saveTask(newEvent);
             return ui.printTasks(newEvent, taskList.getList());
         } else {

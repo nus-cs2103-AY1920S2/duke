@@ -25,23 +25,23 @@ public class DoneCommand extends Command {
      * Overwrites the execute method from Abstract class execute.
      * Check against the user's input then pass it to its respective task class.
      *
-     * @param storage Deals with loading tasks from file.
-     * @param ui Deals with interactions with the user
+     * @param storage  Deals with loading tasks from file.
+     * @param ui       Deals with interactions with the user
      * @param taskList List containing all the tasks
      * @throws DukeException Main exception method I have created
      */
 
     @Override
     public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
-        Task finishedTask = taskList.getList().get(splitDoneString(" ", userInput, taskList, ui));
+        Task finishedTask = taskList.getList().get(obtainIndexToBeMarkedDone(" ", userInput, taskList, ui));
         finishedTask.setDone(true);
-        String answer = ui.printDone(finishedTask);
-        return answer;
+        return ui.printDone(finishedTask);
     }
 
     // To split the string coming in from done
     // Returns the index of the string after the word
-    private int splitDoneString(String regrexWanted, String userInput, TaskList taskList, Ui ui) throws DukeException {
+    private int obtainIndexToBeMarkedDone(String regrexWanted, String userInput,
+                                          TaskList taskList, Ui ui) throws DukeException {
         String[] splittedString = userInput.split(regrexWanted);
         Integer arrayIndex = Integer.valueOf(splittedString[1]);
 

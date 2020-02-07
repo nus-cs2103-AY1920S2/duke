@@ -11,10 +11,7 @@ import java.io.IOException;
  */
 public class Storage {
 
-    /**
-     * The File path.
-     */
-    String filePath;
+    private String filePath;
 
     /**
      * Instantiates a new Storage.
@@ -34,7 +31,7 @@ public class Storage {
     public void saveTask(Task task) throws IOException {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
-        FileWriter fw = new FileWriter(file,true);
+        FileWriter fw = new FileWriter(file, true);
         fw.write(task.toString() + System.lineSeparator());
         fw.close();
     }

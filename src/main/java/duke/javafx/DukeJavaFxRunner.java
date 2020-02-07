@@ -60,8 +60,6 @@ public class DukeJavaFxRunner extends Application {
 
         scene = new Scene(mainLayout);
 
-        scene.getStylesheets().addAll(this.getClass().getResource("../style.css").toExternalForm());
-
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -114,7 +112,7 @@ public class DukeJavaFxRunner extends Application {
         sendButton.setOnMouseClicked((event) -> {
             try {
                 mainWindow.handleUserInput();
-            } catch (DukeException | IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
@@ -122,7 +120,7 @@ public class DukeJavaFxRunner extends Application {
         userInput.setOnAction((event) -> {
             try {
                 mainWindow.handleUserInput();
-            } catch (DukeException | IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });

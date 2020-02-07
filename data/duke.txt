@@ -167,3 +167,9 @@ T |  ✘ | run
  [T] [✘] haha
  [T] [✘] run away
  [T] [✘] run
+ [T] [✘] shit
+ [T] [✘] hello
+ [T] [✘] run
+ [T] [✘] sup
+ [T] [✘] run
+ [T] [✘] s

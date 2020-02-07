@@ -34,7 +34,7 @@ public class DaysOfWeek {
     /**
      * Instantiates a new Days of week.
      */
-    DaysOfWeek() {
+    public DaysOfWeek() {
         hm.put("SUNDAY", 7);
         hm.put("SUN", 7);
         hm.put("MONDAY", 1);

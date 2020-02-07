@@ -13,7 +13,6 @@ public class Task {
 
     /**
      * The type d1.
-     *
      * d1 Formatted date and time which is being passed by the user
      */
     LocalDateTime d1;

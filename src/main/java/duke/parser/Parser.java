@@ -23,7 +23,7 @@ public class Parser {
      * @return the associated command
      * @throws DukeException the duke exception
      */
-    public static Command parse(String fullCommand, String userInput) throws DukeException {
+    public static Command parseCommand(String fullCommand, String userInput) throws DukeException {
         if (fullCommand.contains("Add")) {
             return new AddCommand(userInput);
         } else if (fullCommand.contains("Bye")) {

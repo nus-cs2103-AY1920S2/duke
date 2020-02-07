@@ -39,7 +39,8 @@ public class ByeCommand extends Command {
         try {
             String ans = ui.printBye();
             taskList.getList().clear();
-            Duke.breakChecker = true;
+            assert (taskList.getList().isEmpty())
+                    : "taskList should be empty by this point in ByeCommand";
             return ans;
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
