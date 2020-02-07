@@ -1,8 +1,12 @@
 import java.io.*;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
 
     private Store lib;
     private Ui ui = new Ui();
