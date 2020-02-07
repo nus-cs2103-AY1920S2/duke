@@ -26,12 +26,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class UiTest {
     Ui ui;
     ByteArrayOutputStream output;
-    static final String doneStatusIcon = "\u2713";
-    static final String incompleteStatusIcon = "\u2718";
-    final String INDENTATION = Ui.INDENTATION;
-    final String HORIZONTAL_BAR = Ui.HORIZONTAL_BAR;
-    final String NEWLINE = Ui.NEWLINE;
-    final String HORIZONTAL_DIVIDER = INDENTATION + HORIZONTAL_BAR + NEWLINE;
+    static String doneStatusIcon = "\u2713"; // Check mark icon
+    static String incompleteStatusIcon = "\u2718"; // Cross mark icon
+    String indentation = Ui.INDENTATION;
+    String horizontalBar = Ui.HORIZONTAL_BAR;
+    String newline = Ui.NEWLINE;
+    String horizontalDivider = indentation + horizontalBar + newline;
 
     static Stream<Arguments> generateAllTaskTypes() {
         return Stream.of(
@@ -101,7 +101,7 @@ class UiTest {
     @ParameterizedTest
     @ValueSource(strings = {"", "test", "    "})
     void printTextWithIndentation(String s) {
-        String expected = INDENTATION + s + NEWLINE;
+        String expected = indentation + s + newline;
         ui.printTextWithIndentation(s);
         assertEquals(expected, output.toString());
     }
@@ -111,44 +111,44 @@ class UiTest {
     void greet() {
         ui.greet();
         StringBuilder expected = new StringBuilder();
-        expected.append("  __  __        _____       _           _   ").append(NEWLINE);
-        expected.append(" |  \\/  |      |  __ \\     | |         | |  ").append(NEWLINE);
-        expected.append(" | \\  / |_ __  | |__) |___ | |__   ___ | |_ ").append(NEWLINE);
-        expected.append(" | |\\/| | '__| |  _  // _ \\| '_ \\ / _ \\| __|").append(NEWLINE);
-        expected.append(" | |  | | |    | | \\ \\ (_) | |_) | (_) | |_ ").append(NEWLINE);
-        expected.append(" |_|  |_|_|    |_|  \\_\\___/|_.__/ \\___/ \\__|").append(NEWLINE);
-        expected.append(HORIZONTAL_DIVIDER);
-        expected.append(INDENTATION).append("Hello friend. Hello friend?").append(NEWLINE);
-        expected.append(INDENTATION).append("That's lame. Maybe I should give you a name.").append(NEWLINE);
-        expected.append(INDENTATION).append("But that's a slippery slope, you're only in my head,").append(NEWLINE);
-        expected.append(INDENTATION).append("we have to remember that.").append(NEWLINE);
-        expected.append(HORIZONTAL_DIVIDER);
+        expected.append("  __  __        _____       _           _   ").append(newline);
+        expected.append(" |  \\/  |      |  __ \\     | |         | |  ").append(newline);
+        expected.append(" | \\  / |_ __  | |__) |___ | |__   ___ | |_ ").append(newline);
+        expected.append(" | |\\/| | '__| |  _  // _ \\| '_ \\ / _ \\| __|").append(newline);
+        expected.append(" | |  | | |    | | \\ \\ (_) | |_) | (_) | |_ ").append(newline);
+        expected.append(" |_|  |_|_|    |_|  \\_\\___/|_.__/ \\___/ \\__|").append(newline);
+        expected.append(horizontalDivider);
+        expected.append(indentation).append("Hello friend. Hello friend?").append(newline);
+        expected.append(indentation).append("That's lame. Maybe I should give you a name.").append(newline);
+        expected.append(indentation).append("But that's a slippery slope, you're only in my head,").append(newline);
+        expected.append(indentation).append("we have to remember that.").append(newline);
+        expected.append(horizontalDivider);
         assertEquals(expected.toString(), output.toString(), "Should display greeting message");
     }
 
     @Test
     void showLoadingError() {
-        String expected = HORIZONTAL_DIVIDER
-                + INDENTATION + "Unable to load storage data..." + NEWLINE
-                + HORIZONTAL_DIVIDER;
+        String expected = horizontalDivider
+                + indentation + "Unable to load storage data..." + newline
+                + horizontalDivider;
         ui.showLoadingError();
         assertEquals(expected, output.toString());
     }
 
     @Test
     void unableToReadUserInput() {
-        String expected = HORIZONTAL_DIVIDER
-                + INDENTATION + "Unable to read user input..." + NEWLINE
-                + HORIZONTAL_DIVIDER;
+        String expected = horizontalDivider
+                + indentation + "Unable to read user input..." + newline
+                + horizontalDivider;
         ui.unableToReadUserInput();
         assertEquals(expected, output.toString());
     }
 
     @Test
     void commandNotFound() {
-        String expected = HORIZONTAL_DIVIDER
-                + INDENTATION + "404 Not Found... Are you there?" + NEWLINE
-                + HORIZONTAL_DIVIDER;
+        String expected = horizontalDivider
+                + indentation + "404 Not Found... Are you there?" + newline
+                + horizontalDivider;
         ui.commandNotFound();
         assertEquals(expected, output.toString());
     }
@@ -157,16 +157,16 @@ class UiTest {
     @MethodSource("generateOneTaskList")
     void listTasks(TaskList tasks) {
         String listHeaderInformation = "Here are the tasks in your list:";
-        StringBuilder expected = new StringBuilder(HORIZONTAL_DIVIDER
-                + INDENTATION + listHeaderInformation + NEWLINE);
+        StringBuilder expected = new StringBuilder(horizontalDivider
+                + indentation + listHeaderInformation + newline);
         int taskCount = 1;
         for (Task task : tasks) {
-            expected.append(INDENTATION)
+            expected.append(indentation)
                     .append(taskCount).append(".").append(task.toString())
-                    .append(NEWLINE);
+                    .append(newline);
             taskCount++;
         }
-        expected.append(HORIZONTAL_DIVIDER);
+        expected.append(horizontalDivider);
         // Execute test function
         ui.listTasks(tasks, listHeaderInformation);
         assertEquals(expected.toString(), output.toString());
@@ -176,9 +176,9 @@ class UiTest {
     @MethodSource("generateDukeExceptions")
     void showExceptionMessage_dukeException(Exception exception) {
         ui.showExceptionMessage(exception);
-        String expected = HORIZONTAL_DIVIDER
-                + INDENTATION + exception.getMessage() + NEWLINE
-                + HORIZONTAL_DIVIDER;
+        String expected = horizontalDivider
+                + indentation + exception.getMessage() + newline
+                + horizontalDivider;
         assertEquals(expected, output.toString());
     }
 
@@ -186,11 +186,11 @@ class UiTest {
     @MethodSource("generateAllTaskTypesWithZeroTotalTasks")
     void printTaskAddition_allTaskTypes(Task task, int totalTasks) {
         String taskInfo = task.toString();
-        String expected = HORIZONTAL_DIVIDER
-                + INDENTATION + "Got it. I've added this task:" + NEWLINE
-                + INDENTATION + "  " + taskInfo + NEWLINE
-                + INDENTATION + "Now you have " + totalTasks + " tasks in the list." + NEWLINE
-                + HORIZONTAL_DIVIDER;
+        String expected = horizontalDivider
+                + indentation + "Got it. I've added this task:" + newline
+                + indentation + "  " + taskInfo + newline
+                + indentation + "Now you have " + totalTasks + " tasks in the list." + newline
+                + horizontalDivider;
         // Execute function for testing
         ui.printTaskAddition(task, totalTasks);
         assertEquals(expected, output.toString());
@@ -218,11 +218,11 @@ class UiTest {
     @ParameterizedTest
     @MethodSource("generateAllTaskTypesWithZeroTotalTasks")
     void printTaskDeletion_allTaskTypes(Task task, int totalTasks) {
-        String expected = HORIZONTAL_DIVIDER
-                + INDENTATION + "Noted. I've removed this task:" + NEWLINE
-                + INDENTATION + "  " + task.toString() + NEWLINE
-                + INDENTATION + "Now you have " + totalTasks + " tasks in the list." + NEWLINE
-                + HORIZONTAL_DIVIDER;
+        String expected = horizontalDivider
+                + indentation + "Noted. I've removed this task:" + newline
+                + indentation + "  " + task.toString() + newline
+                + indentation + "Now you have " + totalTasks + " tasks in the list." + newline
+                + horizontalDivider;
         ui.printTaskDeletion(task, totalTasks);
         assertEquals(expected, output.toString());
     }
@@ -231,9 +231,9 @@ class UiTest {
     @DisplayName("duke.Duke: Test for Goodbye message")
     void goodbye() {
         ui.goodbye();
-        String expected = HORIZONTAL_DIVIDER
-                + INDENTATION + "Goodbye friend." + NEWLINE
-                + HORIZONTAL_DIVIDER;
+        String expected = horizontalDivider
+                + indentation + "Goodbye friend." + newline
+                + horizontalDivider;
         assertEquals(expected, output.toString(), "Should print goodbye message");
     }
 }

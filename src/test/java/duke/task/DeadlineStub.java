@@ -10,6 +10,18 @@ public class DeadlineStub extends Deadline {
     protected String incompleteStatusIcon;
     protected String toString;
 
+    /**
+     * Returns a new instance of DeadlineStub.
+     *
+     * @param description information about deadline
+     * @param deadline time of deadline
+     * @param isDone deadline completion status
+     * @param stringToSaveToDisk used to save Deadline information to save file
+     * @param doneStatusIcon icon used for marking deadline as complete
+     * @param incompleteStatusIcon icon used for marking deadline as incomplete
+     * @param toString String representation of DeadlineStub
+     * @throws DateTimeException given deadline is not in required format
+     */
     public DeadlineStub(String description, String deadline, boolean isDone,
                         String stringToSaveToDisk, String doneStatusIcon, String incompleteStatusIcon,
                         String toString) throws DateTimeException {

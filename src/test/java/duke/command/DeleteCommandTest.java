@@ -2,14 +2,11 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
-import duke.task.Task;
+import duke.task.EventStub;
 import duke.task.TaskList;
-import duke.task.Todo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -20,12 +17,14 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class AddTaskCommandTest {
+
+class DeleteCommandTest {
+    TaskList tasks;
     Ui ui;
     Storage storage;
     ByteArrayOutputStream output;
@@ -35,13 +34,12 @@ class AddTaskCommandTest {
     String projectRootPath = Paths.get("").toAbsolutePath().toString();
     String dataDirectoryPath = projectRootPath + fileSeparator + "data";
     String saveFilePath = dataDirectoryPath + fileSeparator + saveFile;
-
-    static Stream<Arguments> generateEmptyState() {
-        Task task = new Todo("Read book");
-        TaskList tasks = new TaskList();
-        return Stream.of(
-                Arguments.of(task, tasks));
-    }
+    static final String doneStatusIcon = "\u2713"; // Check mark icon
+    static final String incompleteStatusIcon = "\u2718"; // Cross mark icon
+    EventStub eventTask = new EventStub("project meeting", "2020-01-01",
+            false, "event,0,project meeting,2020-01-01",
+            doneStatusIcon, incompleteStatusIcon,
+            "[E][" + incompleteStatusIcon + "] project meeting " + "(at: Jan 1 2020)");
 
     void deleteSaveFile() {
         try {
@@ -53,35 +51,40 @@ class AddTaskCommandTest {
 
     @BeforeEach
     void setUp() {
+        tasks = new TaskList();
         ui = new Ui();
-        output = new ByteArrayOutputStream();
         storage = new Storage(saveFile);
+        // Redirect stdout to own PrintStream
+        output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
     }
 
     @AfterEach
     void tearDown() {
-        // Delete save file
+        // Remove save file
         deleteSaveFile();
+        System.setOut(System.out);
     }
 
-    @ParameterizedTest
-    @MethodSource("generateEmptyState")
-    void execute(Task task, TaskList tasks) {
-        int tasksCount = tasks.size();
-        // Execute function for testing
-        Command command = new AddTaskCommand(task);
-        command.execute(tasks, ui, storage);
-        // Check addition of task is successful
-        assertEquals(task.getDescription(), tasks.get(tasksCount).getDescription());
-        assertEquals(tasksCount + 1, tasks.size());
-        // Check save file
+    @Test
+    void execute_validDeleteCommand() {
+        assertEquals(0, tasks.size());
+        // Add one task
+        tasks.addTask(eventTask);
+        assertEquals(1, tasks.size());
+        // Create a delete command and execute it
+        int taskNumber = 1;
+        DeleteCommand deleteCommand = new DeleteCommand(taskNumber);
+        deleteCommand.execute(tasks, ui, storage);
+        // Check save file, should be empty
         try (BufferedReader reader = new BufferedReader(new FileReader(saveFilePath))) {
-            assertEquals(task.stringToSaveToDisk(), reader.readLine());
+            assertNull(reader.readLine());
         } catch (FileNotFoundException e) {
             fail("Could not open save file");
         } catch (IOException e) {
             fail("Could not read save file");
         }
+        // Check size of task list
+        assertEquals(0, tasks.size());
     }
 }

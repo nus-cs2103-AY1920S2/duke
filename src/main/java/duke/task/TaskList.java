@@ -28,6 +28,9 @@ public class TaskList implements Iterable<Task> {
      * @return task addition success status
      */
     public boolean addTask(Task task) {
+        if (task == null) {
+            return false;
+        }
         return tasks.add(task);
     }
 

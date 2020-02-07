@@ -52,12 +52,14 @@ public class Duke {
      * @param reader used for user input
      */
     public void run(BufferedReader reader) {
+        assert reader != null : "BufferedReader given should not be null";
         ui.greet();
         boolean requestExit = false;
         while (!requestExit) {
             // Run process command, check if user has terminated program
             try {
                 Command c = Parser.parse(ui.readCommand(reader));
+                assert c != null : "Parser returned a null command";
                 c.execute(tasks, ui, storage);
                 requestExit = c.isExit();
             } catch (IOException ioException) {
@@ -67,7 +69,6 @@ public class Duke {
                 ui.showExceptionMessage(dukeException);
             }
         }
-        ui.goodbye();
     }
 
     public Storage getStorage() {
@@ -95,6 +96,7 @@ public class Duke {
         System.setOut(new PrintStream(output));
         try {
             Command command = Parser.parse(input);
+            assert command != null : "Parser returned a null command";
             command.execute(tasks, ui, storage);
         } catch (DukeException dukeException) {
             // Display error message

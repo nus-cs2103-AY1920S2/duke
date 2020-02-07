@@ -7,6 +7,16 @@ public class TodoStub extends Todo {
     protected String incompleteStatusIcon;
     protected String toString;
 
+    /**
+     * Returns a new instance of TodoStub.
+     *
+     * @param description information about TodoStub
+     * @param isDone whether TodoStub has been completed
+     * @param stringToSaveToDisk used to save TodoStub information to save file
+     * @param doneStatusIcon icon used to indicate TodoStub is complete
+     * @param incompleteStatusIcon icon used to indicate TodoStub is not complete
+     * @param toString String representation of TodoStub
+     */
     public TodoStub(String description, boolean isDone,
                     String stringToSaveToDisk, String doneStatusIcon,
                     String incompleteStatusIcon, String toString) {

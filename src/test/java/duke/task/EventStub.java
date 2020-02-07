@@ -10,6 +10,18 @@ public class EventStub extends Event {
     protected String incompleteStatusIcon;
     protected String toString;
 
+    /**
+     * Returns a new instance of EventStub.
+     *
+     * @param description information about event
+     * @param eventTime time of event
+     * @param isDone whether event has been marked as done
+     * @param stringToSaveToDisk used to represent event task in save file
+     * @param doneStatusIcon icon used to indicate event is complete
+     * @param incompleteStatusIcon icon used to indicate event is not complete
+     * @param toString String representation of EventStub
+     * @throws DateTimeException given event time is not in a valid format
+     */
     public EventStub(String description, String eventTime, boolean isDone,
                      String stringToSaveToDisk, String doneStatusIcon, String incompleteStatusIcon,
                      String toString) throws DateTimeException {
