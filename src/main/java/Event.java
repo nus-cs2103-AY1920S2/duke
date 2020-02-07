@@ -44,14 +44,17 @@ public class Event extends Task {
      * @return Time in 12-hour format
      */
     public String formatTime12Hour(String timeString) {
+        assert timeString.length() == 4 : "Honk! Invalid time.";
         int time = Integer.parseInt(timeString);
-        boolean isAM = time < 1200;
-        if (!isAM && time >= 1300) {
+        assert time > 0 && time <= 2359 : "Honk! Invalid time.";
+
+        boolean isAm = time < 1200;
+        if (!isAm && time >= 1300) {
             time = time - 1200;
         }
         int mins = time % 100;
         int hour = time / 100;
-        return hour + "." + String.format("%02d", mins) + (isAM ? "am" : "pm");
+        return hour + "." + String.format("%02d", mins) + (isAm ? "am" : "pm");
     }
 
     @Override

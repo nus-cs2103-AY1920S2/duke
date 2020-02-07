@@ -106,6 +106,9 @@ public class Duke extends Application {
                         ui.showFoundTasks(foundTasks);
 
                     } else {
+                        assert command.equals("todo") || command.equals("event") || command.equals("deadline")
+                                : String.format("Goose no recognise %s\n", command);
+
                         if (command.equals("todo")) {
                             Todo added = tasks.createTodo(inputArr);
                             ui.showAddTask(added, tasks.getTaskList());
@@ -124,7 +127,8 @@ public class Duke extends Application {
                     }
                 } catch (IOException e) {
                     ui.showError("Honk! Something went wrong.");
-                } catch (GooseTaskExistenceException | GooseEmptyDescriptionException | GooseIllegalFormatException e) {
+                } catch (GooseTaskExistenceException | GooseEmptyDescriptionException
+                        | GooseIllegalFormatException e) {
                     ui.showError(e.getMessage());
                 }
             } catch (GooseUnrecognisedException e) {
