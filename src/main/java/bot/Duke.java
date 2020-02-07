@@ -15,7 +15,6 @@ import bot.command.exception.InadequateArgumentsException;
 import bot.command.exception.TooManyArgumentsException;
 import bot.command.exception.UnknownInstructionException;
 
-
 import java.io.FileNotFoundException;
 
 import java.util.Scanner;
@@ -66,13 +65,11 @@ public class Duke {
         CommandParser parser = new CommandParser();
 
         // initialise TaskStorage
-        String fileDirectory = Duke.FILE_DIRECTORY;
-        String fileName = Duke.FILE_NAME;
         TaskStorage store = new TaskStorage();
 
         LoadAndSave<Task> botStore;
         try {
-            botStore = new TasksToDisk(fileDirectory, fileName);
+            botStore = new TasksToDisk(Duke.FILE_DIRECTORY, Duke.FILE_NAME);
         } catch (FileNotFoundException e) {
             botUi.showError(e);
             botStore = new DummyLoader<Task>();
