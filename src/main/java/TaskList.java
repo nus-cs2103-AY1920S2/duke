@@ -7,11 +7,11 @@ import java.util.List;
 
 public class TaskList {
 
-    String description;
-    List<String> allInstructions = new ArrayList<>();
+    private String description;
+    private List<String> allInstructions = new ArrayList<>();
     static List<Task> store = new ArrayList<>();
-    Ui ui = new Ui();
-    int counter = 0;
+    private Ui ui = new Ui();
+    private int counter = 0;
 
     public TaskList() {
         this.allInstructions = allInstructions;
@@ -84,7 +84,7 @@ public class TaskList {
         String at = description.split("/")[1].substring(3);
         at += "/" +description.split("/")[2] + "/" + description.split("/")[3];
         String d = description.split("/")[0].substring(6);
-        Task event = new Events(d, at);
+        Task event = new Event(d, at);
         store.add(event);
         String toPrint = ui.gotIt() + "\n";
         toPrint += event.toString();

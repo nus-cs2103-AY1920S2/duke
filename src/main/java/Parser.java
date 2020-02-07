@@ -3,7 +3,7 @@
  */
 public class Parser {
 
-    Ui ui = new Ui();
+    private Ui ui = new Ui();
 
     public Parser() {
     }
@@ -15,43 +15,43 @@ public class Parser {
     public String scan(String command) throws DukeException {
         String toPrint = "";
 
-            if(command.contains(("bye"))) {
+            if(command.startsWith("bye", 0)) {
                 toPrint = ui.bye();
             }
-            else if (command.contains("find")) {
+            else if (command.startsWith("find", 0)) {
                 TaskList task = new TaskList(command);
                 toPrint =task.find();
 
-            } else if (command.contains("delete")) {
+            } else if (command.startsWith("delete", 0)) {
                 TaskList task = new TaskList(command);
                 toPrint = task.delete();
 
-            } else if (!command.contains("todo")
-                    && !command.contains("deadline")
-                    && !command.contains("event")
-                    && !command.contains("done")
-                    && !command.contains("list")
-                    && !command.contains("delete")) {
+            } else if (!command.startsWith("todo", 0)
+                    && !command.startsWith("deadline", 0)
+                    && !command.startsWith("event", 0)
+                    && !command.startsWith("done", 0)
+                    && !command.startsWith("list", 0)
+                    && !command.startsWith("delete", 0)) {
                 throw new DukeException(" ))-: OOPS!!! I'm sorry, "
                         + "but I don't know what that means :-(");
 
-            } else if (command.contains("todo")) {
+            } else if (command.startsWith("todo", 0)) {
                 TaskList task = new TaskList(command);
                 toPrint = task.toDo();
 
-            } else if (command.contains("deadline")) {
+            } else if (command.startsWith("deadline", 0)) {
                 TaskList task = new TaskList(command);
                 toPrint = task.deadLine();
 
-            } else if (command.contains("event")) {
+            } else if (command.startsWith("event", 0)) {
                 TaskList task = new TaskList(command);
                 toPrint = task.event();
 
-            } else if (command.contains("done")) {
+            } else if (command.startsWith("done", 0)) {
                 TaskList task = new TaskList(command);
                 toPrint = task.done();
 
-            } else if (command.equals("list")) {
+            } else if (command.startsWith("list", 0)) {
                 TaskList task = new TaskList(command);
                 toPrint = task.printList();
 

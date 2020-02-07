@@ -3,12 +3,12 @@ import java.io.IOException;
 public class Duke {
     private Storage storage;
     private Parser parser = new Parser();
-    TaskList tasklist;
-    String allInst;
+    private TaskList tasklist;
+    private String allInst;
 
     /**
-     * initialises Storage and TaskList classes
-     * @param filePath file to be read / written to
+     * initialises Storage and TaskList classes.
+     * @param filePath file to be read / written to.
      */
     public Duke(String filePath) {
         try {

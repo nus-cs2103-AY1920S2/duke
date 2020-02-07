@@ -70,8 +70,8 @@ public class Storage {
                             + d.getBy() + System.lineSeparator();
                 }
 
-                if (t instanceof Events) {
-                    Events e = (Events) t;
+                if (t instanceof Event) {
+                    Event e = (Event) t;
                     tasks += "E | " + t.getIsTaskDone() + " | "
                             + t.getDescription() + " | "
                             + e.getAt() + System.lineSeparator();

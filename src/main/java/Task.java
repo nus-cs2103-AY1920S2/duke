@@ -1,14 +1,18 @@
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * contains information whether the task is done or not.
+     * @return return tick or X symbols
+     */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     public int getIsTaskDone() {

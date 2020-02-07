@@ -3,10 +3,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 
 /**
- * returns the toString of deadline
+ * Deadline stores the description of task and the deadline.
  */
 public class Deadline extends Task {
 
+    /**
+     * contains the date of the deadline.
+     */
     private String by;
 
     /**
