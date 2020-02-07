@@ -7,7 +7,7 @@ public class Event extends Task {
 
     protected String by;
     String dateAsString = "";
-    LocalDate d;
+    LocalDate date;
     String statement = "";
 
     public Event(String description, String by) throws DateTimeParseException {
@@ -18,7 +18,7 @@ public class Event extends Task {
         dateAsString = dateAsString + tmp[1];
 
         try {
-            d = LocalDate.parse(dateAsString);
+            date = LocalDate.parse(dateAsString);
         } catch (DateTimeParseException e) {
 
         }
@@ -33,7 +33,7 @@ public class Event extends Task {
     public String toString() throws NullPointerException {
         String str = "[E]" + super.toString() + " (" + statement + " ";
         try {
-            str = str + d.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            str = str + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } catch (NullPointerException e) {
             str = "[E]" + super.toString() + " (" + by + ")";
         }

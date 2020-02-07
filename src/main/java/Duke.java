@@ -25,22 +25,20 @@ public class Duke {
 
     public String run(String input) throws IOException {
         String fullCommand = input;
-        String newString = "";
         String[] splitBySpace;
         int num;
-        Task t;
+        Task task;
         String desc;
         String by;
 
         if (fullCommand.equals("bye")) {
             storage.writeData(tasks);
             isGoodbye = true;
-            return ui.goodbye();
+            return ui.printGoodbye();
         }
 
         try {
             Command cmd = parser.parseCommand(fullCommand);
-            newString = "";
             desc = "";
             by = "";
 
@@ -66,7 +64,7 @@ public class Duke {
                     }
 
                     tasks.markDone(num);
-                    return ui.printMarkDone(tasks, num);
+                    return ui.printMarkDone(tasks.getSize(), num, tasks.getDukeList().get(num - 1).toString());
                 } else {
                     if (num == 0) {
                         throw new DukeException("Unable to mark task #" + num +
@@ -89,7 +87,7 @@ public class Duke {
 
                     Task taskToRemove = tasks.getDukeList().get(num - 1);
                     tasks.removeTask(num);
-                    return ui.printTaskRemoved(taskToRemove, num, tasks);
+                    return ui.printTaskRemoved(tasks.getSize(), num, taskToRemove.toString());
                 } else {
                     if (num == 0) {
                         throw new DukeException("Unable to delete " + num +
@@ -101,15 +99,15 @@ public class Duke {
                     }
                 }
             case TODO:
-                String tmp = parser.parseDescription(fullCommand);
+                String todoDesc = parser.parseDescription(fullCommand);
 
-                if (tmp.equals("-1Error:0b9d4e")) {
+                if (todoDesc.equals("-1Error:0b9d4e")) {
                     throw new EmptyDescriptionException("todo");
                 }
 
-                t = new ToDo(tmp);
-                tasks.addTask(t);
-                return ui.printTaskAdded(tasks, t);
+                task = new ToDo(todoDesc);
+                tasks.addTask(task);
+                return ui.printTaskAdded(tasks.getSize(), task.toString());
             case EVENT:
                 desc = parser.parseDescOfEventDeadline(fullCommand);
                 if (desc.equals("-1Error:21006a")) {
@@ -122,10 +120,9 @@ public class Duke {
                             "For example, 「event read book /by 2020-09-20」.");
                 }
 
-                t = new Event(desc, by);
-                tasks.addTask(t);
-                return ui.printTaskAdded(tasks, t);
-
+                task = new Event(desc, by);
+                tasks.addTask(task);
+                return ui.printTaskAdded(tasks.getSize(), task.toString());
             case DEADLINE:
                 desc = parser.parseDescOfEventDeadline(fullCommand);
                 if (desc.equals("-1Error:21006a")) {
@@ -137,9 +134,9 @@ public class Duke {
                             "For example, 「deadline read book /by 2020-09-20」.");
                 }
 
-                t = new Deadline(desc, by);
-                tasks.addTask(t);
-                return ui.printTaskAdded(tasks, t);
+                task = new Deadline(desc, by);
+                tasks.addTask(task);
+                return ui.printTaskAdded(tasks.getSize(), task.toString());
             case FIND:
                 String find = parser.parseDescription(fullCommand);
                 if (find.equals("-1Error:0b9d4e")) {
@@ -161,11 +158,9 @@ public class Duke {
             default:
                 throw new DukeException("Sumimasen, I can't understand what chu talking about. Try again?");
             }
-
         } catch (DukeException e) {
             return e.toString();
         }
-
     }
 
     public Ui getUi() {
@@ -173,11 +168,7 @@ public class Duke {
     }
 
     public boolean toClose() {
-        if (isGoodbye) {
-            return true;
-        } else {
-            return false;
-        }
+        return isGoodbye ? true : false;
     }
 }
 

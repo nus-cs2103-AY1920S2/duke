@@ -6,7 +6,7 @@ public class Deadline extends Task {
 
     protected String by;
     String dateAsString = "";
-    LocalDate d;
+    LocalDate date;
     String statement = "";
 
     public Deadline(String description, String by) throws DateTimeParseException {
@@ -17,7 +17,7 @@ public class Deadline extends Task {
         dateAsString = dateAsString + tmp[1];
 
         try {
-            d = LocalDate.parse(dateAsString);
+            date = LocalDate.parse(dateAsString);
         } catch (DateTimeParseException e) {
 
         }
@@ -32,7 +32,7 @@ public class Deadline extends Task {
     public String toString() throws NullPointerException {
         String str = "[D]" + super.toString() + " (" + statement + " ";
         try {
-            str = str + d.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            str = str + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } catch (NullPointerException e) {
             str = "[D]" + super.toString() + " (" + by + ")";
         }
