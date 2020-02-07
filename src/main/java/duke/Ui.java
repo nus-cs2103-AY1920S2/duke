@@ -13,26 +13,23 @@ import java.util.ArrayList;
  * Responsible for user interaction in terms of input and output of system.
  */
 public class Ui {
-    private Scanner scan;
-    private String userName;
 
     public Ui() {
-        scan = new Scanner(System.in);
     }
 
     /**
      * Prints error in case file is not loaded properly.
      */
-    public void showLoadingError() {
-        System.out.println("A new save file has been initialised for you.");
+    public String showLoadingError() {
+        return "A new save file has been initialised for you." + "\n";
     }
 
     /**
      * Prints useful message to user on why exception was generated.
      * @param e Contains the message on why exception was generated.
      */
-    public void showError(DukeException e) {
-        System.out.println(e.toString());
+    public String showError(DukeException e) {
+        return e.toString();
     }
 
 
@@ -40,34 +37,24 @@ public class Ui {
      * Prints welcome message to user
      * @return the name of user, in String type
      */
-    public String printWelcomeMessageAndGetName() {
-        System.out.println("Hello there! I am Duke, your personal assistant. May I know your name?");
-        this.userName = scan.nextLine();
-        return userName;
+    public static String printWelcomeMessage() {
+        return "Hello there! I am Duke, your personal assistant. Do let me know what I can do for you!" +"\n";
     }
 
     /**
      * prints final message to user before program is terminated in Duke class.
      */
-    public void printFarewellMessage() {
-        System.out.println("\t" + "Adios. It was my pleasure assisting you. Keep smiling " + userName + ".");
+    public String printFarewellMessage() {
+        return "\t" + "Adios. It was my pleasure assisting you. Keep smiling." +"\n";
     }
 
-    /**
-     * gets user input for parser.
-     * @return user input, in String type.
-     */
-    public String getInstruction() {
-        System.out.println("How may I help you " + userName + "?");
-        return scan.nextLine();
-    }
 
     /**
      * outputs all tasks in taskList object to user.
      * @param taskList a list of tasks inputted by user.
      */
-    public void printList(TaskList taskList) {
-        System.out.println(taskList);
+    public String printList(TaskList taskList) {
+        return taskList.toString() + "\n";
     }
 
     /**
@@ -75,9 +62,9 @@ public class Ui {
      *
      * @param completed the task that is marked as completed.
      */
-    public void printDoneMessage(Task completed) {
-        System.out.println("\t" + "Hooray! You've finally managed to finish this task:");
-        System.out.println("\t\t" + completed);
+    public String printDoneMessage(Task completed) {
+        return "\t" + "Hooray! You've finally managed to finish this task:" + "\n" +
+                "\t\t" + completed.toString() + "\n";
     }
 
     /**
@@ -85,9 +72,9 @@ public class Ui {
      *
      * @param deleted the task that is to be deleted from taskList.
      */
-    public void printDeleteMessage(Task deleted) {
-        System.out.println("\t" + "Got it! I've removed this task:");
-        System.out.println("\t\t" + deleted);
+    public String printDeleteMessage(Task deleted) {
+        return "\t" + "Got it! I've removed this task:" + "\n" +
+        "\t\t" + deleted.toString() + "\n";
     }
 
     /**
@@ -95,14 +82,15 @@ public class Ui {
      *
      * @param tasks the tasks that are on the same day that is queried.
      */
-    public void printWhatsupMessage(ArrayList<Task> tasks) {
+    public String printWhatsupMessage(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            System.out.println("You have nothing assigned on that day.");
+            return "You have nothing assigned on that day.";
         } else {
-            System.out.println("\t" + "The tasks you have on that day are:");
+            String result = "\t" + "The tasks you have on that day are:" + "\n";
             for (Task task: tasks) {
-                System.out.println("\t\t" + task);
+                result += "\t\t" + task.toString() + "\n";
             }
+            return result;
         }
     }
 
@@ -111,7 +99,7 @@ public class Ui {
      *
      * @param newTask either a Event, Deadline or To-do task object
      */
-    public void printAddTaskMessage(Task newTask) {
+    public String printAddTaskMessage(Task newTask) {
         String identifier;
         if (newTask instanceof Todo) {
             identifier = "to do";
@@ -120,18 +108,19 @@ public class Ui {
         } else {
             identifier = "event";
         }
-        System.out.println("\t" + "Awesome! I've added this " + identifier + " :");
-        System.out.println("\t\t" + newTask);
+        return "\t" + "Awesome! I've added this " + identifier + " :" + "\n" +
+                "\t\t" + newTask.toString();
     }
 
-    public void printFindMessage(ArrayList<Task> tasks) {
+    public String printFindMessage(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            System.out.println("\t" + "There were no tasks matching what you said.");
+            return "\t" + "There were no tasks matching what you said.";
         } else {
-            System.out.println("\t" + "Here you go, this is probably what you were finding:");
+            String result = "\t" + "Here you go, this is probably what you were finding:" + "\n";
             for (Task task: tasks) {
-                System.out.println("\t\t" + task);
+                result += "\t\t" + task.toString() + "\n";
             }
+            return result;
         }
     }
 }

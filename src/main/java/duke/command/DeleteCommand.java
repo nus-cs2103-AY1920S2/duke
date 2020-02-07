@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         Task deleted;
         try {
             deleted = taskList.deleteTask(deletedTaskNumber);
@@ -21,7 +21,6 @@ public class DeleteCommand extends Command {
             throw new DukeException("There is no such task with the number you have specified. " +
                     "Kindly check list again.");
         }
-        ui.printDeleteMessage(deleted);
-        return true;
+        return ui.printDeleteMessage(deleted);
     }
 }

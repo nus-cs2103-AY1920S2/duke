@@ -25,26 +25,27 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
+        String result = "";
         switch (taskDescriptor) {
             case "todo":
                 Task newTodo = new Todo(taskName);
                 taskList.addTask(newTodo);
-                ui.printAddTaskMessage(newTodo);
+                result = ui.printAddTaskMessage(newTodo);
                 break;
 
             case "event":
                 Event newEvent = new Event(taskName, timePeriod);
                 taskList.addTask(newEvent);
-                ui.printAddTaskMessage(newEvent);
+                result = ui.printAddTaskMessage(newEvent);
                 break;
 
             case "deadline":
                 Deadline newDeadline = new Deadline(taskName, timePeriod);
                 taskList.addTask(newDeadline);
-                ui.printAddTaskMessage(newDeadline);
+                result = ui.printAddTaskMessage(newDeadline);
                 break;
         }
-        return true;
+        return result;
     }
 }

@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         Task toComplete;
         try {
             toComplete = taskList.getTask(completedTaskNumber);
@@ -22,7 +22,6 @@ public class DoneCommand extends Command {
                     "Kindly check list again.");
         }
         toComplete.completeStatus();
-        ui.printDoneMessage(toComplete);
-        return true;
+        return ui.printDoneMessage(toComplete);
     }
 }

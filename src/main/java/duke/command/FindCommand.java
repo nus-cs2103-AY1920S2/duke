@@ -20,7 +20,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         ArrayList<Task> queryTasks = new ArrayList<>();
         for (Task task: taskList.getList()) {
             if (task.toString().contains(keyword)) {
@@ -28,7 +28,6 @@ public class FindCommand extends Command {
             }
         }
 
-        ui.printFindMessage(queryTasks);
-        return true;
+        return ui.printFindMessage(queryTasks);
     }
 }

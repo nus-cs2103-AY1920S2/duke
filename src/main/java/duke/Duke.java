@@ -35,26 +35,17 @@ public class Duke {
      * A loop that continuously seeks commands from user and executes them.
      * If bye command is received, the loop terminates.
      */
-    public void run() {
-        ui.printWelcomeMessageAndGetName();
-        boolean isActive = true;
-
-        while (isActive) {
-            try {
-                String instruction = ui.getInstruction();
+    public String run(String instruction) {
+        String result = "";
+        try {
                 Command c = Parser.parse(instruction);
-                isActive = c.execute(tasks, ui);
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
+                result = c.execute(tasks, ui);
+        } catch (DukeException e) {
+                result = ui.showError(e);
         }
         storage.save(tasks.getList());
+        return result;
     }
-
-    public static void main(String[] args) {
-        new Duke("data\\duke.txt").run();
-    }
-
 
     /**
      * You should have your own function to generate a response to user input.

@@ -5,8 +5,7 @@ import duke.Ui;
 
 public class ListCommand extends Command {
     @Override
-    public boolean execute(TaskList taskList, Ui ui) {
-        ui.printList(taskList);
-        return true;
+    public String execute(TaskList taskList, Ui ui) {
+        return ui.printList(taskList);
     }
 }

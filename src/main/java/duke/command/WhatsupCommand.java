@@ -18,7 +18,7 @@ public class WhatsupCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         ArrayList<Task> queryTasks = new ArrayList<>();
         for (Task task: taskList.getList()) {
             if (task instanceof Deadline &&
@@ -29,8 +29,6 @@ public class WhatsupCommand extends Command {
                 queryTasks.add(task);
             }
         }
-
-        ui.printWhatsupMessage(queryTasks);
-        return true;
+        return ui.printWhatsupMessage(queryTasks);
     }
 }
