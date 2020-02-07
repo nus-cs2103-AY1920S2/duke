@@ -139,7 +139,7 @@ public class Parser {
                 command = checkValidArchiveListArgument(details);
                 break;
             case ARCHIVE_ADD:
-                command = checkValidArchiveAddArgument(details, archiveList);
+                command = checkValidArchiveAddArgument(details, taskList);
                 break;
             case ARCHIVE_DELETE:
                 command = checkValidArchiveDeleteArgument(details, archiveList);
