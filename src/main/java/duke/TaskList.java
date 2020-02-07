@@ -1,5 +1,7 @@
 package duke;
 
+import task.Task;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -9,7 +11,6 @@ import java.util.stream.Collectors;
  **/
 public class TaskList {
     public ArrayList<Task> taskList;
-
 
     /**
      * Constructs an empty array list.

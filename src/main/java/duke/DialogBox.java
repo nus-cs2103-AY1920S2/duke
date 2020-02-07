@@ -1,13 +1,13 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
 
@@ -38,11 +39,13 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        dialog.setPadding(new Insets(10));
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         dialog.setText(text);
         displayPicture.setImage(img);
         Circle clip = new Circle(49.5, 49.5, 49.5);
         displayPicture.setClip(clip);
+        this.setBackground(new Background(new BackgroundFill(Color.PINK, null, null)));
     }
 
     /**
@@ -50,6 +53,7 @@ public class DialogBox extends HBox {
      */
     public void flip() {
         this.setAlignment(Pos.TOP_LEFT);
+        dialog.setAlignment(Pos.BOTTOM_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);

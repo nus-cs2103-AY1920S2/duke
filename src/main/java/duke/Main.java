@@ -14,8 +14,12 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke("./data/duke.txt");
 
+    /**
+     * Starts the GUI of the bot by setting up the stage.
+     * @param stage The stage to be set up for the bot.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -25,6 +29,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            stage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,7 @@
 package duke;
 
+import command.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -8,24 +10,66 @@ import java.time.LocalTime;
  * This class takes care to interpret information from user's input.
  **/
 public class Parser {
-    private String command;
 
     /**
-     * Constructs a Parser which takes in a string by the user to be interpreted.
+     * Retrieves the command object to be generated
+     * according to user's input.
+     * @return Command object of the input from the user.
      **/
-    Parser(String next) {
-        this.command = next;
-    }
-
-    /**
-     * Retrieves the task type of the command.
-     * @return String of the task type of the command
-     **/
-    public String getTaskType() {
-        if (this.command.trim().contains(" ")) {
-            return this.command.trim().split(" ")[0];
+    public static Command parse(String command) {
+        String trimCommand = command.trim();
+        String firstCommand;
+        if (command.trim().contains(" ")) {
+            firstCommand = trimCommand.split(" ")[0];
         } else {
-            return this.command.trim();
+            firstCommand = command.trim();
+        }
+        if (firstCommand.equals("list")) {
+            return new ListCommand();
+        } else if (firstCommand.equals("bye")) {
+            return new ExitCommand();
+        } else if (firstCommand.equals("find")) {
+            return new FindCommand(Parser.getSecond(trimCommand));
+        } else if (firstCommand.equals("done")) {
+            try {
+                return new DoneCommand(Integer.valueOf(Parser.getSecond(trimCommand)));
+            } catch (IndexOutOfBoundsException e) {
+                return new ErrorCommand(new DukeException(
+                        "☹ OOPS!!! The description of a done cannot be empty."));
+            }
+        } else if (firstCommand.equals("delete")) {
+            try {
+                return new DeleteCommand(Integer.valueOf(Parser.getSecond(trimCommand)));
+            } catch (IndexOutOfBoundsException e) {
+                return new ErrorCommand(new DukeException(
+                        "☹ OOPS!!! The description of a delete cannot be empty."));
+            }
+        } else {
+            if (firstCommand.equals("todo")) {
+                try {
+                    return new AddToDoCommand(Parser.getTaskName(trimCommand));
+                } catch (IndexOutOfBoundsException e) {
+                    return new ErrorCommand(new DukeException(
+                            "☹ OOPS!!! The description of a todo cannot be empty."));
+                }
+            } else if (firstCommand.equals("deadline")) {
+                try {
+                    return new AddDeadlineCommand(Parser.getTaskName(trimCommand), Parser.getDate(trimCommand));
+                } catch (IndexOutOfBoundsException e) {
+                    return new ErrorCommand(new DukeException(
+                            "☹ OOPS!!! The description of a deadline cannot be empty."));
+                }
+            } else if (firstCommand.equals("event")) {
+                try {
+                    return new AddEventCommand(Parser.getTaskName(trimCommand), Parser.getDate(trimCommand));
+                } catch (IndexOutOfBoundsException e) {
+                    return new ErrorCommand(new DukeException(
+                            "☹ OOPS!!! The description of an event cannot be empty."));
+                }
+            } else {
+                return new ErrorCommand(new DukeException(
+                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+            }
         }
     }
 
@@ -33,20 +77,20 @@ public class Parser {
      * Retrieves the second argument of the command.
      * @return String of the second argument of the command
      **/
-    public String getSecond() {
-        return this.command.trim().split(" ")[1];
+    public static String getSecond(String text) {
+        return text.trim().split(" ")[1];
     }
 
     /**
      * Retrieves the third argument of the command.
      * @return String of the third argument of the command
      **/
-    public String getThird() {
-        if (this.command.contains("/")) {
-            return this.command.substring(this.command.indexOf(" ") + 1,
-                    this.command.indexOf("/") - 1);
+    public static String getTaskName(String text) {
+        if (text.contains("/")) {
+            return text.substring(text.indexOf(" ") + 1,
+                    text.indexOf("/") - 1);
         } else {
-            return this.command.trim().substring(5);
+            return text.trim().substring(5);
         }
     }
 
@@ -54,8 +98,8 @@ public class Parser {
      * Retrieves the date format of the command.
      * @return Date format of the of the command of the task
      **/
-    public LocalDateTime getDate() {
-        return extractDate(this.command.substring(this.command.indexOf("/") + 4));
+    public static LocalDateTime getDate(String text) {
+        return extractDate(text.substring(text.indexOf("/") + 4));
     }
 
     /**

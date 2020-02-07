@@ -1,5 +1,7 @@
 package duke;
 
+import task.Task;
+
 import java.io.IOException;
 
 /**
@@ -15,107 +17,102 @@ public class Ui {
     }
 
     /**
-     * Prints an error message of loading a file to the user.
+     * Shows an error message of loading a file to the user.
+     * @param e The exception to be shown.
+     * @return Message of the error.
      **/
-    void showLoadingError(IOException e) {
-        System.out.println(e);
+    String showLoadingError(IOException e) {
+        return e.toString();
     }
 
     /**
-     * Prints a greeting message to the user.
+     * Shows the task lists of the user.
+     * @return Message to show task list to the user.
      **/
-    void greetUser() {
-        String line = "   ____________________________________________________________";
-        System.out.println(line);
-        System.out.println("\tHello! I'm Duke");
-        System.out.println("\tWhat can I do for you?");
-        System.out.println(line);
-    }
-
-    /**
-     * Prints the task lists of the user.
-     **/
-    static void printList(TaskList tasks) {
-        String line = "   ____________________________________________________________";
-        System.out.println(line);
-        System.out.println("\tHere are the tasks in your list:");
+    public static String showList(TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         int i = 1;
         for (Task s : tasks.getTasks()) {
-            System.out.println("\t" + i + "." + s.toString());
+            sb.append(i + "." + s.toString() + "\n");
             i++;
         }
-        System.out.println(line);
+        return sb.toString();
     }
 
     /**
-     * Prints confirmation of task adding to the user.
+     * Shows confirmation of task adding to the user.
+     * @return The confirmation message about task adding.
      **/
-    static void printTask(Task newTask, int size) {
-        String line = "   ____________________________________________________________";
-        System.out.println(line);
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t\t" + newTask);
-        System.out.println("\tNow you have " + size + " tasks in the list.");
-        System.out.println(line);
+    public static String showTask(Task newTask, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:\n");
+        sb.append("\t" + newTask + "\n");
+        sb.append("Now you have " + size + " tasks in the list.\n");
+        return sb.toString();
     }
 
     /**
-     * Prints confirmation of changing task done status to done.
-     * to the user
+     * Prints confirmation of changing task done status to done
+     * to the user.
+     * @return The confirmation message about finished task.
      **/
-    static void printDone(Task updatedTask) {
-        String line = "   ____________________________________________________________";
-        System.out.println(line);
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t" + updatedTask);
-        System.out.println(line);
+    public static String showDone(Task updatedTask) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:");
+        sb.append("\t" + updatedTask + "\n");
+        return sb.toString();
     }
 
     /**
-     * Prints a farewell message to the user.
+     * Shows a farewell message to the user.
+     * @return Farewell message.
      **/
-    static void printBye() {
-        String line = "   ____________________________________________________________";
-        System.out.println(line);
-        System.out.println("\tBye. Hope to see you again soon!");
-        System.out.println(line);
+    public static String showBye() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Bye. Hope to see you again soon!");
+        return sb.toString();
     }
 
     /**
-     * Prints confirmation of removing task from the list.
-     * to the user
+     * Shows confirmation of removing task from the list
+     * to the user.
+     * @param removedTask Task that are to be removed from the list.
+     * @param size The new size of the list after task removal.
+     * @return Confirmation message of task removal.
      **/
-    static void printRemove(Task removedTask, int size) {
-        String line = "   ____________________________________________________________";
-        System.out.println(line);
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t\t" + removedTask);
-        System.out.println("\tNow you have " + size + " tasks in the list.");
-        System.out.println(line);
+    public static String showRemove(Task removedTask, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task:\n");
+        sb.append("\t" + removedTask + "\n");
+        sb.append("Now you have " + size + " tasks in the list.\n");
+        return sb.toString();
     }
 
     /**
-     * Prints an exception message to the user.
+     * Shows an exception message to the user.
+     * @param e The exception.
+     * @return Message of the exception.
      **/
-    static void printException(DukeException e) {
-        String line = "   ____________________________________________________________";
-        System.out.println(line);
-        System.out.println(e);
-        System.out.println(line);
+    public static String showException(DukeException e) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(e);
+        return sb.toString();
     }
 
     /**
-     * Prints the tasks that has related keywords.
+     * Shows the tasks that has related keywords.
+     * @param foundTasks List of tasks found with related keywords
+     * @return list of tasks with related keyword
      **/
-    static void printFindings(TaskList foundTasks) {
-        String line = "   ____________________________________________________________";
-        System.out.println(line);
-        System.out.println("\tHere are the matching tasks in your list:");
+    public static String showFindings(TaskList foundTasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
         int i = 1;
         for (Task s : foundTasks.getTasks()) {
-            System.out.println("\t" + i + "." + s.toString());
+            sb.append(i + "." + s.toString() + "\n");
             i++;
         }
-        System.out.println(line);
+        return sb.toString();
     }
 }

@@ -1,6 +1,7 @@
 package duke;
 
 import org.junit.Test;
+import task.ToDo;
 
 import static org.junit.Assert.assertEquals;
 

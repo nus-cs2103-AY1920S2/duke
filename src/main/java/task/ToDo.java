@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 /**
  * A todo object, has a name and a date of the event.

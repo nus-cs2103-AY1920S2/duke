@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 /**
  * An abstract object of task, has a name and a done status.
@@ -31,7 +31,7 @@ public abstract class Task {
      * @return The string of the task.
      */
     public String toString() {
-        String done = isDone ? "0xE2 0x9C 0x93" : "0xE2 0x9C 0x97";
+        String done = isDone ? "✓" : "✗";
         return "[" + done + "] " + name;
     }
 

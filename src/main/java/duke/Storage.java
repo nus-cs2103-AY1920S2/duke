@@ -1,5 +1,10 @@
 package duke;
 
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -81,7 +86,7 @@ public class Storage {
      *
      * @param updatedTask Task to be updated
      **/
-    static void updateDrive(Task updatedTask) {
+    public static void updateDrive(Task updatedTask) {
         String home = System.getProperty("user.home");
         Path path = java.nio.file.Paths.get(home, "duke", "data");
         boolean directoryExists = java.nio.file.Files.exists(path);
@@ -104,10 +109,9 @@ public class Storage {
     /**
      * Updates information to the file specified for this Storage
      * by removing on a new task object.
-     *
      * @param size The order of the task that are to be removed
      **/
-    static void deleteDrive(int size) {
+    public static void deleteDrive(int size) {
         ArrayList<String> tasks = new ArrayList<>();
         try {
             File file = new File("./data/duke.txt");

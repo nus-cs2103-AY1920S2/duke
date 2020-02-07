@@ -8,7 +8,7 @@ public class DukeException extends Exception {
      * Constructs an a exception specific to Duke.
      * @param message The message of the exception
      */
-    DukeException(String message) {
+    public DukeException(String message) {
         super(message);
     }
 
@@ -17,6 +17,6 @@ public class DukeException extends Exception {
      * @return The string of the message of the exception.
      */
     public String toString() {
-        return "\t" + getMessage();
+        return getMessage();
     }
 }
