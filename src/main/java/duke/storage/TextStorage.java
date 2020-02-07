@@ -23,6 +23,8 @@ public class TextStorage implements Storage {
 
     public TextStorage(String filePath) {
         this.filePath = filePath;
+        // Create directories if they do not exist
+        new File(filePath).getParentFile().mkdirs();
     }
 
     public List<Task> load() throws FileNotFoundException, DukeException {
@@ -55,9 +57,6 @@ public class TextStorage implements Storage {
     }
 
     public void save(List<Task> tasks) throws IOException, DukeException {
-        // Create directories if they do not exist
-        File f = new File(filePath);
-        f.getParentFile().mkdirs();
         // Save tasklist
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks) {

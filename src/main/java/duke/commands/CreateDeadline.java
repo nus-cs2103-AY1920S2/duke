@@ -1,9 +1,12 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.ui.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.Deadline;
+import duke.storage.Storage;
 import duke.parsers.DateTimeParser;
 import duke.exceptions.DukeException;
 
@@ -11,7 +14,7 @@ import duke.exceptions.DukeException;
  * Creates a <code>Deadline</code> Task and adds it to the TaskList.
  */
 class CreateDeadline implements Command, TaskCreation {
-    public void execute(String arg, TaskList tasks, Ui ui) throws DukeException {
+    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Perform parsing of arguments
         String[] args = arg.split("/by");
         if (args.length < 2) {
@@ -28,6 +31,13 @@ class CreateDeadline implements Command, TaskCreation {
         Task newTask = new Deadline(taskName, dtp.parse(dateTime));
         tasks.add(newTask);
 
+        // Save new Deadline to disk
+        try {
+            storage.save(tasks.getAllTasks());
+        } catch (IOException e) {
+            throw new DukeException("Error when saving to disk!");
+        }
+        
         // Display reply
         ui.showReply(CreateTaskReply(newTask, tasks));
     }

@@ -66,14 +66,11 @@ public class CommandHandler {
 
         // Execute parsed command
         try {
-            commands.get(cmdWord).execute(arg, tasks, ui);
-            storage.save(tasks.getAllTasks());
+            commands.get(cmdWord).execute(arg, tasks, ui, storage);
         } catch (NullPointerException e) {
             ui.showError("Command " + cmdWord + " does not exist!");
         } catch (DukeException e) {
             ui.showError(e.getMessage());
-        } catch (IOException e) {
-            ui.showError("Error when attempting to save file!");
         }
     }
 

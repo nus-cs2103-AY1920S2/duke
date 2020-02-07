@@ -5,10 +5,11 @@ import java.util.List;
 import duke.ui.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.storage.Storage;
 import duke.exceptions.DukeException;
 
 class FindTasks implements Command {
-    public void execute(String arg, TaskList tasks, Ui ui) throws DukeException {
+    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         StringBuilder sb = new StringBuilder();
         List<Task> matchingTasks = tasks.search(arg.strip());
         if (matchingTasks.isEmpty()) {
