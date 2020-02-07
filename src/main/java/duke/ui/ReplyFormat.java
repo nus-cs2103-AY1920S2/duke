@@ -29,6 +29,8 @@ public class ReplyFormat {
      */
     public void addSentence(String sentence, int numOfIndent) {
         message = message + indentationInFront + setAdditionalIndent(numOfIndent) + sentence + '\n';
+        assert message.contains(indentationInFront + setAdditionalIndent(numOfIndent) + sentence + '\n')
+                : "Message are not added inside";
     }
 
     /**
@@ -67,6 +69,7 @@ public class ReplyFormat {
      */
     public void addEmptyLine() {
         addSentence("", 0);
+        assert message.endsWith("\n"): "Newline is not added into message";
     }
 
     /**

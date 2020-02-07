@@ -47,13 +47,16 @@ public class TaskList {
      * @throws DukeException when no task found in that index
      */
     public void markDone(int num) throws DukeException {
+        Task task;
         try {
-            Task task = records.get(num - 1);
+            task = records.get(num - 1);
             task.setStatusDone();
             records.set(num - 1, task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No task found in that index!");
         }
+
+        assert task.getStatus(): "Done is not set";
     }
 
     /**
@@ -71,6 +74,7 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No task found in that index!");
         }
+        assert records.contains(task): "Task did not removed";
         return task;
     }
 

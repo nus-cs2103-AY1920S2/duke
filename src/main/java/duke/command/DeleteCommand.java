@@ -45,6 +45,9 @@ public class DeleteCommand extends Command {
             int num = Integer.parseInt(details.get(1));
             Task task = taskList.deleteTask(num);
             storage.saveTasks(taskList);
+
+            assert taskList.getTask(num).equals(task): "Task is not deleted from the taskList";
+
             return ui.replyDelete(task);
         } catch (NumberFormatException e) {
             throw new DukeException("Please give a valid number in this format: delete [number]");

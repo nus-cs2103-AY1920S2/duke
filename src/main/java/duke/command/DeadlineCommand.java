@@ -44,6 +44,9 @@ public class DeadlineCommand extends Command {
         Task task = new Deadline(details.get(1), details.get(2));
         taskList.addTask(task);
         storage.saveTasks(taskList);
+
+        assert taskList.getTask(taskList.getAmountOfTask()).equals(task): "Task is not added into taskList";
+
         return ui.replyAdded(taskList.getAmountOfTask(), task);
     }
 }

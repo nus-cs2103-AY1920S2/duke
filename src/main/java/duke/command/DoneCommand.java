@@ -43,6 +43,9 @@ public class DoneCommand extends Command {
             int num = Integer.parseInt(details.get(1));
             taskList.markDone(num);
             storage.saveTasks(taskList);
+
+            assert taskList.getTask(num).getStatus(): "Task is not mark done!";
+
             return ui.replyDone(taskList.getTask(num));
         } catch (NumberFormatException e) {
             throw new DukeException("Please input in this format: done [number]");
