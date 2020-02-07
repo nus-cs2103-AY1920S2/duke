@@ -85,6 +85,7 @@ public class Duke {
      *         <li><tt>deadline [description] /by [date]</tt> - adds the Deadline task to the list.</li>
      *         <li><tt>event [description] /at [date]</tt> - adds the Event task to the list.</li>
      *         <li><tt>find [keyword]</tt> - finds tasks using a keyword.</li>
+     *         <li><tt>archive-list</tt> - lists all the archived tasks.</li>
      *     </ul>
      * @param commands The instruction provided by the client.
      */
