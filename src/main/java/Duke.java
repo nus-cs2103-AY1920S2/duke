@@ -84,57 +84,57 @@ public class Duke extends Application {
                     int taskIndex;
                     Task selected;
 
-                    switch(command) {
-                        case ("list"):
-                            ui.showList(storage.loadList());
-                            break;
+                    switch (command) {
+                    case ("list"):
+                        ui.showList(storage.loadList());
+                        break;
 
-                        case ("done"):
-                            taskIndex = Integer.parseInt(inputArr[1]) - 1;
-                            selected = tasks.getTaskList().get(taskIndex);
-                            tasks.markDone(taskIndex);
-                            ui.showDoneTask(selected);
-                            storage.save(tasks.getTaskList());
-                            break;
+                    case ("done"):
+                        taskIndex = Integer.parseInt(inputArr[1]) - 1;
+                        selected = tasks.getTaskList().get(taskIndex);
+                        tasks.markDone(taskIndex);
+                        ui.showDoneTask(selected);
+                        storage.save(tasks.getTaskList());
+                        break;
 
-                        case ("delete"):
-                            taskIndex = Integer.parseInt(inputArr[1]) - 1;
-                            selected = tasks.getTaskList().get(taskIndex);
-                            tasks.deleteTask(taskIndex);
-                            ui.showDeleteTask(selected, tasks.getTaskList());
-                            storage.save(tasks.getTaskList());
-                            break;
+                    case ("delete"):
+                        taskIndex = Integer.parseInt(inputArr[1]) - 1;
+                        selected = tasks.getTaskList().get(taskIndex);
+                        tasks.deleteTask(taskIndex);
+                        ui.showDeleteTask(selected, tasks.getTaskList());
+                        storage.save(tasks.getTaskList());
+                        break;
 
-                        case ("find"):
-                            String search = "";
-                            for (int i = 1; i < inputArr.length; i++) {
-                                search += inputArr[i];
-                                search += (i == inputArr.length - 1) ? "" : " ";
-                            }
-                            ArrayList<Task> foundTasks = tasks.findTask(search);
-                            ui.showFoundTasks(foundTasks);
-                            break;
+                    case ("find"):
+                        String search = "";
+                        for (int i = 1; i < inputArr.length; i++) {
+                            search += inputArr[i];
+                            search += (i == inputArr.length - 1) ? "" : " ";
+                        }
+                        ArrayList<Task> foundTasks = tasks.findTask(search);
+                        ui.showFoundTasks(foundTasks);
+                        break;
 
-                        case ("todo"):
-                            Todo addedTodo = tasks.createTodo(inputArr);
-                            ui.showAddTask(addedTodo, tasks.getTaskList());
-                            storage.save(tasks.getTaskList());
-                            break;
+                    case ("todo"):
+                        Todo addedTodo = tasks.createTodo(inputArr);
+                        ui.showAddTask(addedTodo, tasks.getTaskList());
+                        storage.save(tasks.getTaskList());
+                        break;
 
-                        case ("event"):
-                            Event addedEvent = tasks.createEvent(input);
-                            ui.showAddTask(addedEvent, tasks.getTaskList());
-                            storage.save(tasks.getTaskList());
-                            break;
+                    case ("event"):
+                        Event addedEvent = tasks.createEvent(input);
+                        ui.showAddTask(addedEvent, tasks.getTaskList());
+                        storage.save(tasks.getTaskList());
+                        break;
 
-                        case ("deadline"):
-                            Deadline addedDeadline = tasks.createDeadline(input);
-                            ui.showAddTask(addedDeadline, tasks.getTaskList());
-                            storage.save(tasks.getTaskList());
-                            break;
+                    case ("deadline"):
+                        Deadline addedDeadline = tasks.createDeadline(input);
+                        ui.showAddTask(addedDeadline, tasks.getTaskList());
+                        storage.save(tasks.getTaskList());
+                        break;
 
-                        default:
-                            ui.showError("Honk! Something went wrong.");
+                    default:
+                        ui.showError("Honk! Something went wrong.");
                     }
                 } catch (IOException e) {
                     ui.showError("Honk! Something went wrong.");
