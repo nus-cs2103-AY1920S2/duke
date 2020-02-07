@@ -2,7 +2,10 @@ package dukebot;
 
 import dukebot.command.Command;
 import dukebot.command.Parser;
+import dukebot.contactlist.ContactDetails;
+import dukebot.contactlist.ContactList;
 import dukebot.exception.DukeException;
+import dukebot.storage.AppStorage;
 import dukebot.storage.Storage;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
@@ -19,6 +22,7 @@ public class Duke {
     private final Ui ui;
     private TaskList tasks;
     private final Parser parser;
+    private AppStorage appStorage;
 
     /**
      * Initialises Duke.
@@ -43,7 +47,17 @@ public class Duke {
             parser = new Parser(loadedAliasMap);
         }
 
-        // Load TaskList
+        // Load Contacts
+        ContactList contactList = new ContactList(new ArrayList<>());
+
+        tasks = loadTaskList(ui, storage, withGui);
+        appStorage = new AppStorage(tasks, contactList);
+    }
+
+    /**
+     * Loads the task list from storage.
+     */
+    private TaskList loadTaskList(Ui ui, Storage storage, Boolean withGui) {
         try {
             ArrayList<Task> taskArrayList = storage.loadTaskArrayList();
             tasks = new TaskList(taskArrayList);
@@ -63,6 +77,7 @@ public class Duke {
                 ui.sayLine(g.getErrorLineName());
             }
         }
+        return tasks;
     }
 
     /**
