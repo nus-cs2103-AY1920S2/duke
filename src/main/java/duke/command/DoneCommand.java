@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.exception.DukeNoSuchTaskException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -35,8 +36,8 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             return tasks.getTasks().get(taskNo).markAsDone();
-        } catch (Exception e) {
-            throw new DukeException("OOPS!!! Which task is done?");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeNoSuchTaskException();
         }
     }
 }

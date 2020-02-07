@@ -1,6 +1,7 @@
 package duke.storage;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidDateException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -89,7 +90,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("Loading error");
         } catch (DateTimeException e) {
-            throw new DukeException("OOPS!!! Please give me the date in yyyy-mm-dd format!");
+            throw new DukeInvalidDateException();
         }
         return tasks;
     }

@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeNoSuchTaskException;
 
 import java.util.ArrayList;
 
@@ -55,16 +55,16 @@ public class TaskList {
      *
      * @param taskNo the index to delete from the ArrayList of tasks.
      * @return acknowledgement message by Duke.
-     * @throws DukeException if the given index is out of bound of the ArrayList.
+     * @throws DukeNoSuchTaskException if the given index is out of bound of the ArrayList.
      */
-    public String deleteTask(int taskNo) throws DukeException {
+    public String deleteTask(int taskNo) throws DukeNoSuchTaskException {
         try {
             Task task = tasks.get(taskNo);
             tasks.remove(task);
             return "     Noted. I've removed this task:\n       " + task
                     + "\n     Now you have " + tasks.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Do you have this task number?");
+            throw new DukeNoSuchTaskException();
         }
     }
 

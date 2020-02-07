@@ -1,6 +1,6 @@
 package duke.parser;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;

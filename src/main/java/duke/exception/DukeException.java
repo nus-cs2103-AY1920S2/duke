@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Signals any error sent by Duke.

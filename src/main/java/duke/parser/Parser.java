@@ -1,6 +1,5 @@
 package duke.parser;
 
-import duke.DukeException;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -8,6 +7,11 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidCommandException;
+import duke.exception.DukeInvalidDateException;
+import duke.exception.DukeMissingInfoException;
+import duke.exception.DukeNumberFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -41,28 +45,28 @@ public class Parser {
             try {
                 toReturn = new DeleteCommand(Integer.parseInt(partialCommands[1]) - 1);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! Which task should I remove?");
+                throw new DukeMissingInfoException(partialCommands[0]);
             } catch (NumberFormatException e) {
-                throw new DukeException("OOPS!!! Please give me the task number to delete.");
+                throw new DukeNumberFormatException();
             }
             break;
         case "done":
             try {
                 toReturn = new DoneCommand(Integer.parseInt(partialCommands[1]) - 1);
             } catch (NumberFormatException e) {
-                throw new DukeException("OOPS!!! Please give me the task number.");
+                throw new DukeNumberFormatException();
             } catch (Exception e) {
-                throw new DukeException("OOPS!!! Which task is done?");
+                throw new DukeMissingInfoException(partialCommands[0]);
             }
             break;
         case "todo":
             try {
                 if (partialCommands[1].equals("")) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeMissingInfoException(partialCommands[0]);
                 }
                 toReturn = new AddCommand(new Todo(partialCommands[1]));
             } catch (Exception e) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeMissingInfoException(partialCommands[0]);
             }
             break;
         case "event":
@@ -70,9 +74,9 @@ public class Parser {
                 String[] details = partialCommands[1].split(" /at ");
                 toReturn = new AddCommand(new Event(details[0], LocalDate.parse(details[1])));
             } catch (DateTimeException e) {
-                throw new DukeException("OOPS!!! Please give me the date in yyyy-mm-dd format!");
+                throw new DukeInvalidDateException();
             } catch (Exception e) {
-                throw new DukeException("OOPS!!! Missing information regarding event.");
+                throw new DukeMissingInfoException(partialCommands[0]);
             }
             break;
         case "deadline":
@@ -80,23 +84,23 @@ public class Parser {
                 String[] details = partialCommands[1].split(" /by ");
                 toReturn = new AddCommand(new Deadline(details[0], LocalDate.parse(details[1])));
             } catch (DateTimeException e) {
-                throw new DukeException("OOPS!!! Please give me the date in yyyy-mm-dd format!");
+                throw new DukeInvalidDateException();
             } catch (Exception e) {
-                throw new DukeException("OOPS!!! Missing information regarding deadline.");
+                throw new DukeMissingInfoException(partialCommands[0]);
             }
             break;
         case "find":
             try {
                 if (partialCommands[1].equals("")) {
-                    throw new DukeException("OOPS!!! Please give me the keyword to look for!");
+                    throw new DukeMissingInfoException(partialCommands[0]);
                 }
                 toReturn = new FindCommand(partialCommands[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! Please give me the keyword to look for!");
+                throw new DukeMissingInfoException(partialCommands[0]);
             }
             break;
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeInvalidCommandException();
         }
         return toReturn;
     }

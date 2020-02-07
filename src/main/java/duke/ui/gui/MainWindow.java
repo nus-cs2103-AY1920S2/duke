@@ -1,6 +1,6 @@
 package duke.ui.gui;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.parser.Parser;
