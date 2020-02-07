@@ -13,3 +13,6 @@ src/main/resources/docs/
 *.iml
 bin/
 src/main/java/META-INF/MANIFEST.MF
+
+#data files
+src/main/java/duke/data/tasks.txt
