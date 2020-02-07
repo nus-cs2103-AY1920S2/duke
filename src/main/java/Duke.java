@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
-    public Ui ui;
+    private Ui ui;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -141,23 +141,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    public Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Create a DialogBox based on user input and duke's response
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
@@ -170,8 +154,9 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Get response from the duke after entering input
+     * @param input user input
+     * @return message to be displayed
      */
     public String getResponse(String input) {
         String response = "";
