@@ -15,10 +15,10 @@ class TaskListTest {
         TaskList x = new TaskList();
         x.addTask(task1);
         x.addTask(task2);
-        assertEquals(x.getAllTasks().size(), x.taskCount());
+        assertEquals(x.showFilteredTasks(task -> true).count(), x.taskCount());
         for (int i = 0; i < 144; i++) {
             x.addTask(task1);
-            assertEquals(x.getAllTasks().size(), x.taskCount());
+            assertEquals(x.showFilteredTasks(task -> true).count(), x.taskCount());
         }
     }
 

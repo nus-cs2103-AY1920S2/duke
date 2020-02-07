@@ -3,19 +3,19 @@ package dude.component;
 import dude.task.Task;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * TaskList is a thin wrapper over an ArrayList&lt;Task&gt; to hide implementation details.
+ * TaskList is a thin wrapper over an {@code ArrayList<Task>} to hide implementation details.
  * Notably, it provides 1-based indexing to mirror user input.
  */
 public class TaskList {
     private ArrayList<Task> taskList;
 
+    /** A nested class that carries both Task information and the Task's position in the TaskList. */
     private static class TaskListEntry {
         public int index;
         public Task task;
@@ -31,16 +31,6 @@ public class TaskList {
      */
     public TaskList() {
         this.taskList = new ArrayList<>(100);
-    }
-
-    /**
-     * Retrieves all the tasks currently in the list, according to their insertion order.
-     * A copy is made to prevent the private field from being exposed and possibly mutated externally.
-     *
-     * @return A copy of the internal taskList.
-     */
-    public List<Task> getAllTasks() {
-        return List.copyOf(this.taskList);
     }
 
     /**
@@ -76,25 +66,13 @@ public class TaskList {
     }
 
     /**
-     * Formats the current list of tasks into a form meant to be understood by users.
-     * Shows the task index next to each task to let users identify the indices,
-     * if they want to perform done or delete tasks. Task display format uses the Task.toString()
-     * methods.
+     * Produces a stream of filtered and formatted Task entry Strings for calling methods to consume.
      *
-     * @return an array of formatted strings which display each tasks' index and details.
-     * @see dude.task.Todo#toString()
-     * @see dude.task.Deadline#toString()
-     * @see dude.task.Event#toString()
+     * @param formatter bifunction that takes the index and task and produces the formatted Task string.
+     * @param predicate the filtering function.
+     * @return a stream of filtered and formatted Task entry Strings.
      */
-    public String[] showAllTasks() {
-        String[] result = new String[taskCount()];
-        for (int i = 1; i <= taskCount(); i++) {
-            result[i - 1] = String.format("%d.%s", i, getTask(i));
-        }
-        return result;
-    }
-
-    public Stream<String> showFilteredTasks(
+    public Stream<String> formatFilteredTasks(
             BiFunction<Integer, Task, String> formatter,
             Predicate<Task> predicate) {
 
@@ -102,6 +80,18 @@ public class TaskList {
                 .mapToObj(index -> new TaskListEntry(index, getTask(index)))
                 .filter(entry -> predicate.test(entry.task))
                 .map(entry -> formatter.apply(entry.index, entry.task));
+    }
+
+    /**
+     * Produces a stream of filtered and formatted Task entry Strings for calling methods to consume.
+     * Convenience method over <code>formatFilteredTasks</code> that uses default user-facing formatting
+     * {@code "<index>.<task.toString()>" }.
+     *
+     * @param predicate the filtering function.
+     * @return a stream of filtered and formatted Task entry Strings.
+     */
+    public Stream<String> showFilteredTasks(Predicate<Task> predicate) {
+        return formatFilteredTasks((index, task) -> String.format("%d.%s", index, task), predicate);
     }
 
     /**

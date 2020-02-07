@@ -16,6 +16,8 @@ public class Duke {
      * UI - greets user, initializes resources to obtain user input.
      * TextStorage - contains file object to read previous data from.
      * TaskList - Is initialized with tasks from saved session from storage.
+     *
+     * @param mainWindow the main window of the GUI app. Exposes input/output to GUI class.
      */
     public Duke(MainWindow mainWindow) {
         this.ui = new Gui(mainWindow);
@@ -25,6 +27,8 @@ public class Duke {
 
     /**
      * Saves the current TaskList by calling saveSession from the IStorage class used.
+     *
+     * @throws SecurityException if a security violation occurs while attempting to create the directory or save file.
      */
     public void saveState() {
         this.storage.saveSession(ui, tasks);

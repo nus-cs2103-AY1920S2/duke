@@ -26,11 +26,8 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, IUserInterface ui) {
         ui.respond(() -> {
             ui.speak("These are the matching tasks I found:");
-            for (int i = 1; i <= tasks.taskCount(); i++) {
-                if (tasks.getTask(i).getDetails().contains(keyword)) {
-                    ui.speak(String.format("%d.%s", i, tasks.getTask(i)));
-                }
-            }
+            tasks.showFilteredTasks(task -> task.getDetails().contains(keyword))
+                    .forEachOrdered(ui::speak);
         });
     }
 }
