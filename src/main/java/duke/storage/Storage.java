@@ -35,6 +35,7 @@ public class Storage {
             file.createNewFile();
             file = new File(filepath);
         }
+        assert this.file != null : "Filepath is null!";
     }
 
     /**

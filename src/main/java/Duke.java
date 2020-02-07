@@ -77,6 +77,8 @@ public class Duke {
         } catch (IOException e) {
             System.err.println(e.toString());
         }
+        assert this.storage != null : "Storage is null!";
+        assert this.taskList != null : "Task list is null!";
     }
 
     /**
