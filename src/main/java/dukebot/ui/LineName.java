@@ -1,8 +1,9 @@
 package dukebot.ui;
 
 /**
- * Name of lines to say.
- * Names with _WT (with task) suffix are to be used with the with task function.
+ * Name of lines to say with Ui.sayLine.
+ * The first word is usually the command in which the command appears in.
+ * The second is usually the context in which the line is called.
  */
 public enum LineName {
     ALIAS_ALREADY_EXISTS,
@@ -16,7 +17,6 @@ public enum LineName {
     DELETE_OUT_OF_INDEX,
     DONE_ALREADY,
     DONE_EMPTY,
-    DONE_SUCCESS,
     ERROR_PLACEHOLDER,
     EVENT_AT_MISSING,
     EVENT_EMPTY,
@@ -32,9 +32,6 @@ public enum LineName {
     NOT_A_NUMBER,
     NO_INPUT,
     RESCHEDULE_EMPTY,
-    RESCHEDULE_BAD_TASK_WT,
-    RESCHEDULE_OUT_OF_INDEX,
-    RESCHEDULE_SUCCESS_WT,
     RESET_STORAGE_INIT,
     RESET_STORAGE_SUCCESS,
     RESET_STORAGE_FAIL,

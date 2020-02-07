@@ -147,9 +147,6 @@ public class Ui {
             dukeExpression = DukeExpression.SURPRISED;
             dukeSays("Didn't Master already do that?");
             break;
-        case DONE_SUCCESS:
-            // use another function;
-            break;
         case NOT_A_NUMBER:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.WHAT, DukeVoice.THING_YOURE_INTO);
             dukeExpression = DukeExpression.BLUSH;
@@ -251,11 +248,6 @@ public class Ui {
             dukeExpression = DukeExpression.SAD;
             dukeSays("It was nice knowing Master... Duke'll go somewhere far away now...");
             break;
-        case RESCHEDULE_SUCCESS_WT:
-        case RESCHEDULE_BAD_TASK_WT:
-            // Should never be called in deployment
-            dukeSays("Error, no tasks given...");
-            break;
         case ERROR_PLACEHOLDER:
             // Purely for testing, should never be called in deployment
             // Fallthrough
@@ -290,16 +282,35 @@ public class Ui {
      * @param lineName Line to say.
      * @param task Task to use.
      */
-    public void sayLineWithTask(LineName lineName, Task task) {
+    public void sayLineWithTask(LineNameWithTask lineName, Task task) {
         switch (lineName) {
-        case RESCHEDULE_SUCCESS_WT:
+        case DELETE_SUCCESS:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,
+                    DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
+            dukeExpression = DukeExpression.BLUSH;
+            dukeSays("For Master, Duke can forget anything, even the:");
+            dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
+            break;
+        case DONE_SUCCESS:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.LAUGHTER, DukeVoice.OKAY);
+            dukeExpression = DukeExpression.HAPPY;
+            dukeSays("So Master finally completed " + task + "?");
+            dukeSays("Duke's really proud of Master!");
+            break;
+        case NEW_TASK_SUCCESS:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,
+                    DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
+            dukeExpression = DukeExpression.BLUSH;
+            dukeSays("So Master has " + task.getType() + ":\n" + task + "...");
+            break;
+        case RESCHEDULE_SUCCESS:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.LAUGHTER, DukeVoice.OKAY);
             dukeExpression = DukeExpression.HAPPY;
             dukeSays("Duke has rescheduled task:\n" + task.getDescription());
             dukeSays("to be at:\n" + task.dateTimeToString());
             dukeSays("Try not to forget it Master!");
             break;
-        case RESCHEDULE_BAD_TASK_WT:
+        case RESCHEDULE_BAD_TASK:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.HEY);
             dukeExpression = DukeExpression.BLUSH;
             dukeSays("Is Master teasing Duke?");
@@ -316,43 +327,6 @@ public class Ui {
             dukeSays("There is an unexpected error :(");
             break;
         }
-    }
-
-    /**
-     * Prints done success message.
-     *
-     * @param task Task to use.
-     */
-    public void doneSuccess(Task task) {
-        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.LAUGHTER, DukeVoice.OKAY);
-        dukeExpression = DukeExpression.HAPPY;
-        dukeSays("So Master finally completed " + task + "?");
-        dukeSays("Duke's really proud of Master!");
-    }
-
-    /**
-     * Prints new task successfully made message.
-     *
-     * @param task Task to use.
-     */
-    public void newTask(Task task) {
-        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,
-                DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
-        dukeExpression = DukeExpression.BLUSH;
-        dukeSays("So Master has " + task.getType() + ":\n" + task + "...");
-    }
-
-    /**
-     * Prints task successfully deleted message.
-     *
-     * @param task Task to use.
-     */
-    public void deleteSuccess(Task task) {
-        dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,
-                DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
-        dukeExpression = DukeExpression.BLUSH;
-        dukeSays("For Master, Duke can forget anything, even the:");
-        dukeSays("[" + task.getType() + "] " + task + (task.getDone() ? " [Done!]" : ""));
     }
 
     /**

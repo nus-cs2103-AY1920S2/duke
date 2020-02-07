@@ -25,6 +25,8 @@ public enum CommandList {
 
     /**
      * Gets the default command.
+     *
+     * @return The default string which refers to the command.
      */
     public String getDefaultCommand() {
         return defaultCommand;

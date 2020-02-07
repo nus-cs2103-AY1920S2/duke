@@ -5,6 +5,7 @@ import dukebot.storage.Storage;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
+import dukebot.ui.LineNameWithTask;
 import dukebot.ui.Ui;
 import dukebot.util.DateTimeParse;
 import dukebot.util.MiscUtils;
@@ -46,7 +47,7 @@ public class RescheduleCommand extends Command {
             return;
         }
         if (task.getDateTime() == null) {
-            ui.sayLine(LineName.RESCHEDULE_BAD_TASK_WT);
+            ui.sayLineWithTask(LineNameWithTask.RESCHEDULE_BAD_TASK, task);
             return;
         }
 
@@ -54,7 +55,7 @@ public class RescheduleCommand extends Command {
         try {
             LocalDateTime parsedDate = DateTimeParse.parseDate(time);
             task.setDateTime(parsedDate);
-            ui.sayLineWithTask(LineName.RESCHEDULE_SUCCESS_WT, task);
+            ui.sayLineWithTask(LineNameWithTask.RESCHEDULE_SUCCESS, task);
             storage.saveTaskList(taskList);
         } catch (DateTimeParseException e) {
             ui.sayLine(LineName.DATE_TIME_PARSE_FAIL);

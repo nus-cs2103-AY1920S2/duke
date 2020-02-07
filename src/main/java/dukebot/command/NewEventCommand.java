@@ -6,6 +6,7 @@ import dukebot.tasklist.Event;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
+import dukebot.ui.LineNameWithTask;
 import dukebot.ui.Ui;
 import dukebot.util.DateTimeParse;
 
@@ -55,7 +56,7 @@ public class NewEventCommand extends Command {
         try {
             taskList.addTask(event);
             storage.saveTaskList(taskList);
-            ui.newTask(event);
+            ui.sayLineWithTask(LineNameWithTask.NEW_TASK_SUCCESS, event);
         } catch (DukeException e) {
             ui.sayLine(e.getErrorLineName());
         }

@@ -6,6 +6,7 @@ import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
 import dukebot.tasklist.Todo;
 import dukebot.ui.LineName;
+import dukebot.ui.LineNameWithTask;
 import dukebot.ui.Ui;
 
 import java.util.Arrays;
@@ -35,18 +36,18 @@ public class NewTodoCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         String description;
-        Task event;
+        Task task;
         description = String.join(" ", Arrays.copyOfRange(inpArr, 1, inpArr.length));
         if (description.length() == 0) {
             ui.sayLine(LineName.TODO_EMPTY);
             return;
         }
-        event = new Todo(description);
+        task = new Todo(description);
 
         try {
-            taskList.addTask(event);
+            taskList.addTask(task);
             storage.saveTaskList(taskList);
-            ui.newTask(event);
+            ui.sayLineWithTask(LineNameWithTask.NEW_TASK_SUCCESS, task);
         } catch (DukeException e) {
             ui.sayLine(e.getErrorLineName());
         }

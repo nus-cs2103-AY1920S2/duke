@@ -5,7 +5,9 @@ import dukebot.storage.Storage;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
+import dukebot.ui.LineNameWithTask;
 import dukebot.ui.Ui;
+import dukebot.util.MiscUtils;
 
 /**
  * Command to delete a task.
@@ -26,21 +28,28 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (inpArr.length == 1) {
             ui.sayLine(LineName.DELETE_EMPTY);
-        } else {
-            try {
-                int taskInd = Integer.parseInt(inpArr[1]) - 1;
-                Task task = taskList.deleteTask(taskInd);
-                if (task == null) {
-                    ui.sayLine(LineName.DELETE_OUT_OF_INDEX);
-                } else {
-                    ui.deleteSuccess(task);
-                    storage.saveTaskList(taskList);
-                }
-            } catch (NumberFormatException e) {
-                ui.sayLine(LineName.NOT_A_NUMBER);
-            } catch (DukeException e) {
-                ui.sayLine(e.getErrorLineName());
-            }
+            return;
+        }
+
+        if (!MiscUtils.isInteger(inpArr[1])){
+            ui.sayLine(LineName.NOT_A_NUMBER);
+            return;
+        }
+
+        int taskInd = Integer.parseInt(inpArr[1]) - 1;
+        Task task = taskList.deleteTask(taskInd);
+
+        if (task == null) {
+            ui.sayLine(LineName.DELETE_OUT_OF_INDEX);
+            return;
+        }
+
+        ui.sayLineWithTask(LineNameWithTask.DELETE_SUCCESS, task);
+
+        try {
+            storage.saveTaskList(taskList);
+        } catch (DukeException e) {
+            ui.sayLine(e.getErrorLineName());
         }
     }
 }

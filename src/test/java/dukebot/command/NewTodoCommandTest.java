@@ -5,6 +5,7 @@ import dukebot.storage.Storage;
 import dukebot.tasklist.TaskList;
 import dukebot.tasklist.Todo;
 import dukebot.ui.LineName;
+import dukebot.ui.LineNameWithTask;
 import dukebot.ui.Ui;
 import org.junit.jupiter.api.Test;
 import org.powermock.api.mockito.PowerMockito;
@@ -46,7 +47,7 @@ class NewTodoCommandTest {
 
         verify(taskListMock).addTask(testTodo);
         verify(storageMock).saveTaskList(taskListMock);
-        verify(uiMock).newTask(testTodo);
+        verify(uiMock).sayLineWithTask(LineNameWithTask.NEW_TASK_SUCCESS, testTodo);
 
         verifyNoMoreInteractions(uiMock);
         verifyNoMoreInteractions(taskListMock);
