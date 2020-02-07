@@ -10,7 +10,7 @@ import duke.storage.Storage;
 import duke.exceptions.DukeException;
 
 /**
- * Creates a <code>Todo</code> Task and adds it to the TaskList.
+ * Creates a Todo Task and adds it to the TaskList.
  */
 class CreateTodo implements Command {
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {

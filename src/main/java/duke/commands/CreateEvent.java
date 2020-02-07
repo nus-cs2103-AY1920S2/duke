@@ -11,7 +11,7 @@ import duke.parsers.DateTimeParser;
 import duke.exceptions.DukeException;
 
 /**
- * Creates an <code>Event</code> Task and adds it to the TaskList.
+ * Creates an Event Task and adds it to the TaskList.
  */
 class CreateEvent extends TimedCommand {
 

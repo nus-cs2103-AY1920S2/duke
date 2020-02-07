@@ -11,7 +11,7 @@ import duke.parsers.DateTimeParser;
 import duke.exceptions.DukeException;
 
 /**
- * Creates a <code>Deadline</code> Task and adds it to the TaskList.
+ * Creates a Deadline Task and adds it to the TaskList.
  */
 class CreateDeadline extends TimedCommand {
 

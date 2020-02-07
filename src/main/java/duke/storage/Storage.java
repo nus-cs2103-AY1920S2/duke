@@ -8,7 +8,7 @@ import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
 /**
- * Allows <code>Duke</code> to persist data across sessions.
+ * Allows Duke to persist data across sessions.
  */
 public interface Storage {
     /**

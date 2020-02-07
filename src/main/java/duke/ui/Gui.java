@@ -92,6 +92,9 @@ public class Gui extends AnchorPane implements Ui {
 		}
     }
 
+    /**
+     * Passes a "bye" input to Duke's CommandHandler.
+     */
     public void bye() {
         userInput.setText("bye");
         inputLock.release();

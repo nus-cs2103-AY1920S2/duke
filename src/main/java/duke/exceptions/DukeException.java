@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * An <code>Exception</code> that occurs specifically in <code>Duke</code>.
+ * An Exception that occurs specifically in Duke.
  */
 public class DukeException extends Exception {
     public DukeException(String s) {

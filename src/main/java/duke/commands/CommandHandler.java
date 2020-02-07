@@ -9,7 +9,7 @@ import duke.parsers.DateTimeParser;
 import duke.exceptions.DukeException;
 
 /**
- * <code>CommandHandler</code> parses user-entered strings and executes them as <code>Commands</code>.
+ * Parses user-entered strings and executes them as Commands.
  * Remains active until user deactivates with "bye"
  */
 public class CommandHandler {
@@ -40,7 +40,7 @@ public class CommandHandler {
     }
 
     /**
-     * Parses the user string into a <code>Command</code> and executes it.
+     * Parses the user string into a Command and executes it.
      *
      * @param cmd User-entered string to be parsed.
      */
