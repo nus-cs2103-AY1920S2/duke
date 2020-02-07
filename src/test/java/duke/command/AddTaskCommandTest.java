@@ -11,7 +11,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
@@ -29,11 +35,6 @@ class AddTaskCommandTest {
     final String PROJECT_ROOT_PATH = Paths.get("").toAbsolutePath().toString();
     String dataDirectoryPath = PROJECT_ROOT_PATH + FILE_SEPARATOR + "data";
     String saveFilePath = dataDirectoryPath + FILE_SEPARATOR + saveFile;
-    // String formatting
-    final String INDENTATION = Ui.INDENTATION;
-    final String HORIZONTAL_BAR = Ui.HORIZONTAL_BAR;
-    final String NEWLINE = Ui.NEWLINE;
-    final String HORIZONTAL_DIVIDER = INDENTATION + HORIZONTAL_BAR + NEWLINE;
 
     static Stream<Arguments> generateEmptyState() {
         Task task = new Todo("Read book");
