@@ -11,7 +11,7 @@ public class Parse {
     }
 
     public void decode(TaskList tasks) throws DukeException{
-        String[] taskArray = new String[2];
+        String[] taskArray;
 
         try {
             if (statement.equals("list") && tasks.getSize() != 0) {
