@@ -17,6 +17,7 @@ public class Deadline extends Task {
     public Deadline(String taskName, String dateTime) throws DukeException {
         super(taskName.trim(), dateTime.trim());
         this.taskType = "D";
+        assert this.taskType != "" : "Deadline task type is empty!";
     }
 
     /**
