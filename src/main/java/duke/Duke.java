@@ -35,7 +35,7 @@ public class Duke {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
-        CommandHandler handler = new CommandHandler(tasks, ui);
+        CommandHandler handler = new CommandHandler(tasks, ui, storage);
         while (handler.isActive()) {
             if (inputLock != null) {
                 try {

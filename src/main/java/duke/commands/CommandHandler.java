@@ -1,9 +1,11 @@
 package duke.commands;
 
 import java.util.HashMap;
+import java.io.IOException;
 
 import duke.ui.Ui;
 import duke.tasks.TaskList;
+import duke.storage.Storage;
 import duke.exceptions.DukeException;
 
 /**
@@ -11,14 +13,16 @@ import duke.exceptions.DukeException;
  * Remains active until user deactivates with "bye"
  */
 public class CommandHandler {
-    protected TaskList tasks;
-    protected HashMap<String, Command> commands;
-    protected boolean isActive;
-    protected Ui ui;
+    private TaskList tasks;
+    private Ui ui;
+    private Storage storage;
+    private HashMap<String, Command> commands;
+    private boolean isActive;
 
-    public CommandHandler(TaskList tasks, Ui ui) {
+    public CommandHandler(TaskList tasks, Ui ui, Storage storage) {
         this.tasks = tasks;
         this.ui = ui;
+        this.storage = storage;
         this.commands = new HashMap<>();
         isActive = true;
 
@@ -63,10 +67,13 @@ public class CommandHandler {
         // Execute parsed command
         try {
             commands.get(cmdWord).execute(arg, tasks, ui);
+            storage.save(tasks.getAllTasks());
         } catch (NullPointerException e) {
             ui.showError("Command " + cmdWord + " does not exist!");
         } catch (DukeException e) {
             ui.showError(e.getMessage());
+        } catch (IOException e) {
+            ui.showError("Error when attempting to save file!");
         }
     }
 

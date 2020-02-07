@@ -55,6 +55,10 @@ public class TextStorage implements Storage {
     }
 
     public void save(List<Task> tasks) throws IOException, DukeException {
+        // Create directories if they do not exist
+        File f = new File(filePath);
+        f.getParentFile().mkdirs();
+        // Save tasklist
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks) {
             fw.write(toSaveable(task) + System.lineSeparator());
