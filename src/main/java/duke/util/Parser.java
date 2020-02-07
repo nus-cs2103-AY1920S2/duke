@@ -114,39 +114,39 @@ public class Parser {
             DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
         Command command;
         switch (keyword) {
-            case LIST:
-                command = checkValidListArgument(details);
-                break;
-            case DONE:
-                command = checkValidDoneArgument(details, taskList);
-                break;
-            case DELETE:
-                command = checkValidDeleteArgument(details, taskList);
-                break;
-            case FIND:
-                command = checkValidFindArgument(details);
-                break;
-            case TODO:
-                command = checkValidTodoArgument(details);
-                break;
-            case DEADLINE:
-                command = checkValidDeadlineArgument(details);
-                break;
-            case BYE:
-                command = checkValidByeArgument(details);
-                break;
-            case ARCHIVE_LIST:
-                command = checkValidArchiveListArgument(details);
-                break;
-            case ARCHIVE_ADD:
-                command = checkValidArchiveAddArgument(details, taskList);
-                break;
-            case ARCHIVE_DELETE:
-                command = checkValidArchiveDeleteArgument(details, archiveList);
-                break;
-            default:
-                command = checkValidEventArgument(details);
-                break;
+        case LIST:
+            command = checkValidListArgument(details);
+            break;
+        case DONE:
+            command = checkValidDoneArgument(details, taskList);
+            break;
+        case DELETE:
+            command = checkValidDeleteArgument(details, taskList);
+            break;
+        case FIND:
+            command = checkValidFindArgument(details);
+            break;
+        case TODO:
+            command = checkValidTodoArgument(details);
+            break;
+        case DEADLINE:
+            command = checkValidDeadlineArgument(details);
+            break;
+        case BYE:
+            command = checkValidByeArgument(details);
+            break;
+        case ARCHIVE_LIST:
+            command = checkValidArchiveListArgument(details);
+            break;
+        case ARCHIVE_ADD:
+            command = checkValidArchiveAddArgument(details, taskList);
+            break;
+        case ARCHIVE_DELETE:
+            command = checkValidArchiveDeleteArgument(details, archiveList);
+            break;
+        default:
+            command = checkValidEventArgument(details);
+            break;
         }
         return command;
     }
