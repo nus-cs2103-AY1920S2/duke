@@ -32,8 +32,8 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private GuiUi ui;
-    private String prevCommand;
-    private Task prevTask;
+    private ArrayList<String> prevCommands;
+    private ArrayList<Task> deletedTasks;
 
     /**
      * Class constructor.
@@ -41,8 +41,8 @@ public class Duke {
     public Duke() {
         ui = new GuiUi();
         storage = new Storage("data/duke.txt");
-        prevCommand = "";
-        prevTask = null;
+        prevCommands = new ArrayList<String>();
+        deletedTasks = new ArrayList<Task>();
     }
 
     /**
@@ -85,11 +85,13 @@ public class Duke {
 
             case "list":
                 response = ui.getList(tasks);
+                prevCommands.add(input);
                 break;
             case "done":
                 try {
                     int completedTask = parser.getTaskIndex(tasks.getSize());
                     response = markTaskDone(completedTask);
+                    prevCommands.add(input);
                 } catch (DukeException e) {
                     response = ui.getExceptionMessage(e);
                 }
@@ -98,7 +100,10 @@ public class Duke {
             case "delete":
                 try {
                     int removeTask = parser.getTaskIndex(tasks.getSize());
+                    deletedTasks.add(tasks.getTask(removeTask - 1));
+
                     response = deleteTask(removeTask);
+                    prevCommands.add(input);
                 } catch (DukeException e) {
                     response = ui.getExceptionMessage(e);
                 }
@@ -107,15 +112,15 @@ public class Duke {
             case "find":
                 try {
                     response = this.findTarget(parser);
+                    prevCommands.add(input);
                 } catch (DukeException exception) {
                     response = ui.getExceptionMessage(exception);
                 }
 
                 break;
             case "undo":
-                Parser prev = new Parser(prevCommand);
                 try {
-                    response = handleUndo(prev);
+                    response = handleUndo();
                 } catch (DukeException e) {
                     response = e.getMessage();
                 }
@@ -123,13 +128,15 @@ public class Duke {
                 break;
             default:
                 try {
-                    this.addTask(parser);
                     int originalNumOfTasks = tasks.getSize();
+                    this.addTask(parser);
 
                     assert tasks.getSize() == originalNumOfTasks + 1: "TaskList was not updated properly";
 
                     response = ui.getAddSuccess(tasks);
                     response = response.concat(ui.getStatusUpdate(tasks));
+
+                    prevCommands.add(input);
 
                 } catch (DukeException exception) {
                     response = ui.getExceptionMessage(exception);
@@ -143,7 +150,6 @@ public class Duke {
                 response = ui.getUpdateError(exception);
             }
 
-            prevCommand = input;
             return response;
         }
 
@@ -153,12 +159,17 @@ public class Duke {
     /**
      * Handle the undo command for Duke.
      *
-     * @param parser Parser handling the previous command input by the user.
      * @return Response message after the previous command have been reversed.
      * @throws DukeException Thrown when either the previous command cannot be reversed or does not exist.
      */
-    private String handleUndo (Parser parser) throws DukeException {
-        if (parser.isEmpty() || parser.getIdentifier().equals("undo") || parser.getIdentifier().equals("list")) {
+    private String handleUndo () throws DukeException {
+        if(prevCommands.isEmpty()) {
+            throw new DukeException("No previous commands to be undone.\n");
+        }
+
+        Parser parser = new Parser(prevCommands.remove(prevCommands.size() - 1));
+
+        if (parser.getIdentifier().equals("undo") || parser.getIdentifier().equals("list")) {
             throw new DukeException("Previous command cannot be undone.\n");
         }
 
@@ -166,7 +177,7 @@ public class Duke {
 
         switch (parser.getIdentifier()) {
         case "delete":
-            tasks.addTask(prevTask);
+            tasks.addTask(deletedTasks.remove(deletedTasks.size() - 1));
             response = response.concat(ui.getAddSuccess(tasks));
             response = response.concat(ui.getStatusUpdate(tasks));
 
@@ -217,11 +228,10 @@ public class Duke {
 
         String response = ui.getDeleteSuccess(tasks, removeTask - 1);
 
-        assert tasks.getSize() == originalNumOfTasks - 1: "TaskList was not updated properly";
-
-        prevTask = tasks.getTask(removeTask - 1);
         tasks.deleteTask(removeTask - 1);
         response = response.concat(ui.getStatusUpdate(tasks));
+
+        assert tasks.getSize() == originalNumOfTasks - 1: "TaskList was not updated properly";
 
         return response;
     }
