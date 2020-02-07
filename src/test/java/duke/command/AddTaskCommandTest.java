@@ -45,7 +45,7 @@ class AddTaskCommandTest {
 
     void deleteSaveFile() {
         try {
-            Files.deleteIfExists(Paths.get(dataDirectoryPath + FILE_SEPARATOR + saveFile));
+            Files.deleteIfExists(Paths.get(saveFilePath));
         } catch (IOException e) {
             e.printStackTrace();
         }
