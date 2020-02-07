@@ -90,27 +90,6 @@ public class Parser {
         newString = newString + splitBySpace2[splitBySpace2.length - 1];
 
         return newString;
-
-        /*try {
-            if (splitBySpace.length == 1) {
-                throw new DukeException(splitBySpace[0]);
-            }
-
-            splitBySlash = fullCommand.split("/");
-            String[] splitBySpace2 = splitBySlash[0].split(" ");
-
-            for (int i = 1; i < splitBySpace2.length - 1; i++) {
-                newString = newString + splitBySpace2[i] + " ";
-            }
-            newString = newString + splitBySpace2[splitBySpace2.length - 1];
-
-            return newString;
-
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
-
-        return null;*/
     }
 
     /**
@@ -131,20 +110,6 @@ public class Parser {
         }
 
         return splitBySlash[1];
-
-        /*try {
-            splitBySlash = fullCommand.split("/");
-            if (splitBySlash.length != 2) {
-                throw new DukeException(splitBySlash[0], "", "no slash");
-            }
-
-            return splitBySlash[1];
-
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
-
-        return null;*/
     }
 
     /**

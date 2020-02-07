@@ -35,12 +35,12 @@ public class TaskList {
      * @param num Specifies the index-1 to be removed.
      */
     public void removeTask(int num) {
-        dukeList.remove(num-1);
+        dukeList.remove(num - 1);
     }
 
     /**
      * Mark a task as done.
-     * @param num Specifies the index-1 to be marked as done.
+     * @param num Specifies the index - 1 to be marked as done.
      */
     public void markDone(int num) {
         dukeList.get(num - 1).markAsDone();

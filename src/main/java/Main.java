@@ -11,8 +11,6 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
-    //private Duke duke = new Duke();
     private Duke duke = new Duke("data/tasks.txt");
     private boolean isClose = false;
 
@@ -30,6 +28,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
-
 }
