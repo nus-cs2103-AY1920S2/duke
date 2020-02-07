@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * TaskList reads and do all the instructions, and returns them as Task
@@ -26,10 +28,8 @@ public class TaskList {
 
     public String convertToString() {
         String s = "";
-        for (int j = 0; j < allInstructions.size(); j++) {
-            s += allInstructions.get(j) + System.lineSeparator();
-        }
-        return s;
+        return allInstructions.stream().map(i -> i)
+                .collect(Collectors.joining("\n"));
     }
 
     public List<Task> getDoneTasks() {
@@ -106,12 +106,10 @@ public class TaskList {
         ui.matchingTask();
         String matching = description.substring(5);
         assert (matching != "") : "user needs to input";
-        String toPrint = "";
-        for (int i = 0; i < store.size(); i++) {
-            if (store.get(i).getDescription().contains(matching)) {
-                toPrint = store.get(i).toString();
-            }
-        }
+        String toPrint  = store.stream()
+                .filter( s -> s.getDescription().contains(matching))
+                .map(Task::toString)
+                .collect(Collectors.joining("\n"));
         return toPrint;
     }
 
