@@ -12,10 +12,12 @@ class FindTasks implements Command {
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         StringBuilder sb = new StringBuilder();
         List<Task> matchingTasks = tasks.search(arg.strip());
+
         if (matchingTasks.isEmpty()) {
             ui.showReply("No matching tasks found!");
             return;
         }
+
         int counter = 1;
         sb.append("Here are the matching tasks in your list:\n");
         for (Task task : matchingTasks) {
@@ -24,7 +26,7 @@ class FindTasks implements Command {
             sb.append("\n");
             counter += 1;
         }
-        
+
         ui.showReply(sb.toString());
     }
 }

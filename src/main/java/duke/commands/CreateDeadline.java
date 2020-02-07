@@ -25,6 +25,7 @@ class CreateDeadline extends TimedCommand {
         if (args.length < 2) {
             throw new DukeException("Usage: deadline [task name] /by [datetime]");
         }
+
         String taskName = args[0].strip();
         String dateTime = args[1].strip();
         if (taskName.length() == 0 || dateTime.length() == 0) {

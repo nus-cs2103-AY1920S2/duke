@@ -25,6 +25,7 @@ class CreateEvent extends TimedCommand {
         if (args.length < 2) {
             throw new DukeException("Usage: event [task name] /at [start datetime] to [end datetime]");
         }
+
         String taskName = args[0].strip();
         String[] dateTimes = args[1].strip().split("to");
         if (taskName.length() == 0 || dateTimes.length < 2) {
