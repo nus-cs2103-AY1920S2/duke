@@ -33,10 +33,10 @@ public class Greetings {
         System.out.println(UNDEFINED);
     }
 
-    public static String prettyPrint(String s) {
-        String formattedString = String.format(   "-----------------------------"
-                                                + "%s"
-                                                + "-----------------------------", s);
-        return formattedString;
+    public static void prettyPrint(String s) {
+        String formattedString = String.format(   "-----------------------------\n"
+                                                + "%s\n"
+                                                + "-----------------------------\n", s);
+        System.out.println(formattedString);
     }
 }
