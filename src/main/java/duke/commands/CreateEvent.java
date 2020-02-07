@@ -13,7 +13,12 @@ import duke.exceptions.DukeException;
 /**
  * Creates an <code>Event</code> Task and adds it to the TaskList.
  */
-class CreateEvent implements Command {
+class CreateEvent extends TimedCommand {
+
+    public CreateEvent(DateTimeParser dtParser) {
+        super(dtParser);
+    }
+
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Perform parsing of arguments
         String[] args = arg.split("/at");
@@ -27,8 +32,7 @@ class CreateEvent implements Command {
         }
 
         // Create parsed Event
-        DateTimeParser dtp = new DateTimeParser();
-        Task newTask = new Event(taskName, dtp.parse(dateTimes[0].strip()), dtp.parse(dateTimes[1].strip()));
+        Task newTask = new Event(taskName, dtParser.parse(dateTimes[0].strip()), dtParser.parse(dateTimes[1].strip()));
         tasks.add(newTask);
 
         // Save new Event to disk

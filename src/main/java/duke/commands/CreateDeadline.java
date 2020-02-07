@@ -13,7 +13,12 @@ import duke.exceptions.DukeException;
 /**
  * Creates a <code>Deadline</code> Task and adds it to the TaskList.
  */
-class CreateDeadline implements Command {
+class CreateDeadline extends TimedCommand {
+
+    public CreateDeadline(DateTimeParser dtParser) {
+        super(dtParser);
+    }
+
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Perform parsing of arguments
         String[] args = arg.split("/by");
@@ -27,8 +32,7 @@ class CreateDeadline implements Command {
         }
 
         // Create parsed Deadline
-        DateTimeParser dtp = new DateTimeParser();
-        Task newTask = new Deadline(taskName, dtp.parse(dateTime));
+        Task newTask = new Deadline(taskName, dtParser.parse(dateTime));
         tasks.add(newTask);
 
         // Save new Deadline to disk

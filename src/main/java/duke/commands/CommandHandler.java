@@ -5,6 +5,7 @@ import java.util.HashMap;
 import duke.ui.Ui;
 import duke.tasks.TaskList;
 import duke.storage.Storage;
+import duke.parsers.DateTimeParser;
 import duke.exceptions.DukeException;
 
 /**
@@ -25,12 +26,15 @@ public class CommandHandler {
         this.commands = new HashMap<>();
         isActive = true;
 
+        // Create parsers
+        DateTimeParser dtParser = new DateTimeParser();
+
         // Register commands
         commands.put("list", new ListAll());
         commands.put("done", new MarkTaskAsDone());
         commands.put("todo", new CreateTodo());
-        commands.put("deadline", new CreateDeadline());
-        commands.put("event", new CreateEvent());
+        commands.put("deadline", new CreateDeadline(dtParser));
+        commands.put("event", new CreateEvent(dtParser));
         commands.put("delete", new DeleteTask());
         commands.put("find", new FindTasks());
     }
