@@ -14,10 +14,27 @@ import dukeproj.tasks.Event;
 import dukeproj.tasks.Task;
 import dukeproj.tasks.Todo;
 
+/**
+ * Represents a command to add a task into Duke's task list.
+ */
 public class AddCommand extends Command {
+    /** The description of the task to be added. */
     private String description;
+    /** The type of the task to be added. */
     private CommandType type;
 
+    /**
+     * Executes an add command to add a certain task into Duke's task list.
+     *
+     * @param ui The user interface of Duke, used to return Duke's response.
+     * @param taskList The list of tasks to add to.
+     * @param storage The object to assist in writing the task list into the storage file.
+     * @param calender Duke's calender to be modified if added task is date sensitive.
+     * @return Duke's response in the form of a String.
+     * @throws BadDescriptionException If the description is missing a '/', for Event and Deadline cases only.
+     * @throws DukeDescriptionException If the description is empty.
+     * @throws BadDateException If the date provided does not follow the required date format.
+     */
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage, Calender calender)
             throws BadDescriptionException, DukeDescriptionException, BadDateException {
@@ -72,6 +89,12 @@ public class AddCommand extends Command {
         return output;
     }
 
+    /**
+     * Constructs an add command object.
+     *
+     * @param description Description of the task to be added.
+     * @param type Type of the task to be added.
+     */
     public AddCommand(String description, CommandType type) {
         this.description = description;
         this.type = type;

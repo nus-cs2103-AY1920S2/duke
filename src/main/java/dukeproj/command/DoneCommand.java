@@ -5,22 +5,36 @@ import dukeproj.Ui;
 import dukeproj.data.Calender;
 import dukeproj.data.TaskList;
 import dukeproj.enums.SayType;
-import dukeproj.exception.BadDateException;
 import dukeproj.exception.BadDescriptionException;
 import dukeproj.exception.DukeDescriptionException;
 
+/**
+ * Represents a command to mark a certain task as done.
+ */
 public class DoneCommand extends Command {
-    private String description;
+    /** The index of the task to be marked as done. */
+    private String index;
 
+    /**
+     * Executes the done command to mark the task, as specified in the description, as done.
+     *
+     * @param ui The user interface of Duke, used to return Duke's response.
+     * @param taskList The list of tasks to be marked from.
+     * @param storage The object to assist in writing the task list into the storage file.
+     * @param calender Duke's calender to be modified if done task is date sensitive.
+     * @return Duke's response in the form of a String.
+     * @throws BadDescriptionException If index is not in the form of an integer.
+     * @throws DukeDescriptionException If index is empty.
+     */
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage, Calender calender)
             throws BadDescriptionException, DukeDescriptionException {
         try {
-            if (description.isEmpty()) {
+            if (index.isEmpty()) {
                 throw new DukeDescriptionException("Empty Description");
             }
 
-            int done = Integer.parseInt(description);
+            int done = Integer.parseInt(index);
 
             if (done <= 0 || done > taskList.getSize()) {
                 throw new BadDescriptionException("Description for done cannot be "
@@ -36,7 +50,12 @@ public class DoneCommand extends Command {
         }
     }
 
-    public DoneCommand(String description) {
-        this.description = description;
+    /**
+     * Constructs a done command object.
+     *
+     * @param index The index of the task to be marked as done.
+     */
+    public DoneCommand(String index) {
+        this.index = index;
     }
 }
