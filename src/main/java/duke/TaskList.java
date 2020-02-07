@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -41,18 +43,24 @@ class TaskList {
     }
 
     String list() {
-        if (tasks.size() == 0) {
-            return "There are no tasks now.";
-        } else {
-            StringBuilder list = new StringBuilder();
-            for (int i = 0; i < tasks.size(); i++) {
-                if (i > 0) {
-                    list.append("\n");
-                }
-                list.append((i + 1) + ". " + tasks.get(i));
+        StringBuilder list = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (i > 0) {
+                list.append("\n");
             }
-            return list.toString();
+            list.append((i + 1) + ". " + tasks.get(i));
         }
+        return list.toString();
+    }
+
+    TaskList find(String searchTerm) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(searchTerm)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
     }
 
     int size() {

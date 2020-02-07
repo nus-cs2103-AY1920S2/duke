@@ -26,6 +26,18 @@ class Parser {
             }
             command = Command.EVENT;
             break;
+        case "list":
+            if (parsedInput.length > 1) {
+                throw new InvalidCommandException("Hmm... I don't understand. Try \"list\" instead.");
+            }
+            command = Command.LIST;
+            break;
+        case "find":
+            if (parsedInput.length > 1) {
+                throw new InvalidCommandException("Hmm... I'm not sure what you're looking for.");
+            }
+            command = Command.FIND;
+            break;
         case "done":
             if (parsedInput.length < 2) {
                 throw new InvalidCommandException("Oh no! The task number is missing.");
@@ -37,12 +49,6 @@ class Parser {
                 throw new InvalidCommandException("Oh no! The task number is missing.");
             }
             command = Command.DELETE;
-            break;
-        case "list":
-            if (parsedInput.length > 1) {
-                throw new InvalidCommandException("Hmm... I don't understand. Try \"list\" instead.");
-            }
-            command = Command.LIST;
             break;
         case "bye":
             if (parsedInput.length > 1) {
@@ -84,6 +90,10 @@ class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCommandException("Oh no! The time of the event is missing.");
         }
+    }
+
+    String parseSearchTerm(String input) {
+        return input.strip().split("\\s+", 2)[1];
     }
 
     int parseTaskNumber(String input) throws InvalidCommandException {
