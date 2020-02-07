@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.task;
 
 /**
  * Represents a Task object.

@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.task.Task;
+
 import java.util.List;
 
 /**
