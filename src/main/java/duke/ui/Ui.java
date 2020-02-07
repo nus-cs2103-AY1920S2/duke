@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 public class Ui {
     /**
      * Show the welcome message, which consists of the logo, and greeting.
+     * 
+     * @return message to be displayed
      */
     public String showWelcome() {
         String logo = " ____        _        \n"
@@ -31,6 +33,7 @@ public class Ui {
      * Format the given line into a pretty format and print it.
      *
      * @param line the line to be formatted
+     * @return message to be displayed
      */
     private String prettyPrint(String line) {
         return "    _____________________________DUKE___________________________\n"
@@ -44,6 +47,7 @@ public class Ui {
      * Format the given list into a pretty format and print it.
      *
      * @param tasks the list of tasks to be formatted
+     * @return message to be displayed
      */
     public String prettyPrintList(TaskList tasks) {
         String tasksString = "";
@@ -68,6 +72,7 @@ public class Ui {
      *
      * @param task the task added
      * @param size the total number of tasks
+     * @return message to be displayed
      */
     public String showAddTask(Task task, Integer size) {
         String taskWord = (size > 1) ? "tasks" : "task";
@@ -81,6 +86,7 @@ public class Ui {
      *
      * @param task the task deleted
      * @param size the total number of tasks
+     * @return message to be displayed
      */
     public String showDeleteTask(Task task, Integer size) {
         String taskWord = (size > 1) ? "tasks" : "task";
@@ -111,6 +117,8 @@ public class Ui {
 
     /**
      * Show on screen the top line, which is the line before the main message.
+     *
+     * @return message to be displayed
      */
     public String showStartLine() {
         return "    ______________________DUKE______________________";
@@ -118,6 +126,8 @@ public class Ui {
 
     /**
      * Show on screen the bottom line, which is the line after the main message.
+     *
+     * @return message to be displayed
      */
     public String showEndLine() {
         return "    ___--__--__--__--__--__--__--__--__--__--__--___\n";
@@ -125,6 +135,8 @@ public class Ui {
 
     /**
      * Show on screen the loading error, when the list could not be loaded from disk.
+     *
+     * @return message to be displayed
      */
     public String showLoadingError() {
         return prettyPrint("OOPS!!! Failed to load list!");
@@ -132,6 +144,7 @@ public class Ui {
 
     /**
      * Show on screen the goodbye message.
+     * @return message to be displayed
      */
     public String showGoodBye() {
         return showLine("Aw goodbye for now! Hope to see you again soon :)");
@@ -141,6 +154,7 @@ public class Ui {
      * Format the line and show on screen to user.
      *
      * @param line the line to be formatted
+     * @return message to be displayed
      */
     public String showLine(String line) {
         return "     " + line;

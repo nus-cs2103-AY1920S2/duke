@@ -15,6 +15,7 @@ public class ExitCommand extends Command {
      * @param tasks the task list
      * @param storage the storage object to save the list
      * @param ui the ui object to interact with user
+     * @return message to be displayed
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
