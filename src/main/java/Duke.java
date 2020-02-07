@@ -32,6 +32,8 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private GuiUi ui;
+    private String prevCommand;
+    private Task prevTask;
 
     /**
      * Class constructor.
@@ -39,6 +41,8 @@ public class Duke {
     public Duke() {
         ui = new GuiUi();
         storage = new Storage("data/duke.txt");
+        prevCommand = "";
+        prevTask = null;
     }
 
     /**
@@ -73,7 +77,6 @@ public class Duke {
      * @return Response to be printed on GUI depending on user command.
      */
     public String run(String input) {
-
         if (!input.equals("bye")) {
             Parser parser = new Parser(input);
             String response = "";
@@ -86,12 +89,7 @@ public class Duke {
             case "done":
                 try {
                     int completedTask = parser.getTaskIndex(tasks.getSize());
-                    tasks.getTask(completedTask - 1).setDone();
-
-                    assert tasks.getTask(completedTask - 1).getStatusIcon().equals("Y"):
-                            "Task was not marked done successfully";
-
-                    response = ui.getDoneSuccess(tasks, completedTask - 1);
+                    response = markTaskDone(completedTask);
                 } catch (DukeException e) {
                     response = ui.getExceptionMessage(e);
                 }
@@ -100,14 +98,7 @@ public class Duke {
             case "delete":
                 try {
                     int removeTask = parser.getTaskIndex(tasks.getSize());
-                    int originalNumOfTasks = tasks.getSize();
-
-                    response = ui.getDeleteSuccess(tasks, removeTask - 1);
-
-                    assert tasks.getSize() == originalNumOfTasks - 1: "TaskList was not updated properly";
-
-                    tasks.deleteTask(removeTask - 1);
-                    response = response.concat(ui.getStatusUpdate(tasks));
+                    response = deleteTask(removeTask);
                 } catch (DukeException e) {
                     response = ui.getExceptionMessage(e);
                 }
@@ -118,6 +109,15 @@ public class Duke {
                     response = this.findTarget(parser);
                 } catch (DukeException exception) {
                     response = ui.getExceptionMessage(exception);
+                }
+
+                break;
+            case "undo":
+                Parser prev = new Parser(prevCommand);
+                try {
+                    response = handleUndo(prev);
+                } catch (DukeException e) {
+                    response = e.getMessage();
                 }
 
                 break;
@@ -143,10 +143,87 @@ public class Duke {
                 response = ui.getUpdateError(exception);
             }
 
+            prevCommand = input;
             return response;
         }
 
         return ui.getExitGreeting();
+    }
+
+    /**
+     * Handle the undo command for Duke.
+     *
+     * @param parser Parser handling the previous command input by the user.
+     * @return Response message after the previous command have been reversed.
+     * @throws DukeException Thrown when either the previous command cannot be reversed or does not exist.
+     */
+    private String handleUndo (Parser parser) throws DukeException {
+        if (parser.isEmpty() || parser.getIdentifier().equals("undo") || parser.getIdentifier().equals("list")) {
+            throw new DukeException("Previous command cannot be undone.\n");
+        }
+
+        String response = ui.getUndoIdentifier(parser.getIdentifier());
+
+        switch (parser.getIdentifier()) {
+        case "delete":
+            tasks.addTask(prevTask);
+            response = response.concat(ui.getAddSuccess(tasks));
+            response = response.concat(ui.getStatusUpdate(tasks));
+
+            break;
+        case "done":
+            try {
+                int taskToBeReversed = parser.getTaskIndex(tasks.getSize());
+                tasks.getTask(taskToBeReversed - 1).resetPrevStatus();
+
+                response = response.concat(ui.getReverseDoneSuccess(tasks, taskToBeReversed - 1));
+            } catch (DukeException e) {
+                response = ui.getExceptionMessage(e);
+            }
+
+            break;
+        default:
+            response = response.concat(deleteTask(tasks.getSize()));
+            break;
+        }
+        return response;
+    }
+
+    /**
+     * Mark task specified by the user as done.
+     *
+     * @param completedTask Index of task to be marked done.
+     * @return Response message after a task has been successfully marked as done.
+     */
+    private String markTaskDone(int completedTask) {
+        tasks.getTask(completedTask - 1).setDone();
+
+        assert tasks.getTask(completedTask - 1).getStatusIcon().equals("Y"):
+                "Task was not marked done successfully";
+
+        String response = ui.getDoneSuccess(tasks, completedTask - 1);
+
+        return response;
+    }
+
+    /**
+     * Delete task specified by the user from the TaskList.
+     *
+     * @param removeTask Index of task to be removed.
+     * @return Response message after command is successfully carried out.
+     */
+    private String deleteTask(int removeTask) {
+        int originalNumOfTasks = tasks.getSize();
+
+        String response = ui.getDeleteSuccess(tasks, removeTask - 1);
+
+        assert tasks.getSize() == originalNumOfTasks - 1: "TaskList was not updated properly";
+
+        prevTask = tasks.getTask(removeTask - 1);
+        tasks.deleteTask(removeTask - 1);
+        response = response.concat(ui.getStatusUpdate(tasks));
+
+        return response;
     }
 
     /**
