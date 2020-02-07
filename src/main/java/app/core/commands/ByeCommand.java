@@ -6,6 +6,6 @@ import app.util.Pair;
 final class ByeCommand extends Command {
     @Override
     public Pair execute(TaskManager taskManager) {
-        return new Pair(null, true);
+        return new Pair("", true);
     }
 }

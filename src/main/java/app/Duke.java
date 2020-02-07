@@ -48,6 +48,9 @@ public final class Duke {
                 String message = (String) output.getFirstValue();
                 Boolean shutdown = (boolean) output.getSecondValue();
 
+                assert message != null : "Output message should not be null";
+                assert shutdown != null : "Shutdown status should not be null";
+
                 if (!shutdown) {
                     console.render(message);
                 } else {
@@ -75,6 +78,8 @@ public final class Duke {
     public Pair executeInput(String input) throws BaseException {
         Command command = this.commandManager.getCommand(input);
         Pair output = command.execute(this.taskManager);
+        
+        assert output != null : "Command execution should not be null";
         return output;
     }
 }
