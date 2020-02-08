@@ -25,13 +25,13 @@ public class FindCommand extends Command {
     /**
      * Executes FindCommand by searching tasks and list tasks that contains the keyword in the description.
      *
-     * @param tasks   TaskList of Duke.
+     * @param taskList   TaskList of Duke.
      * @param ui      The user interface.
      * @param storage To load from and save to the disk.
      * @return List of tasks that contains keyword.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return tasks.find(keyword);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.find(keyword);
     }
 }

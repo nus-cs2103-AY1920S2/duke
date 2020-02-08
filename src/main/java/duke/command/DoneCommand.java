@@ -26,16 +26,16 @@ public class DoneCommand extends Command {
     /**
      * Executes DoneCommand by marking the task as done.
      *
-     * @param tasks   TaskList of Duke.
+     * @param taskList   TaskList of Duke.
      * @param ui      The user interface.
      * @param storage To load from and save to the disk.
      * @return Acknowledgement message sent by Duke.
      * @throws DukeException if the given task number is out of bound of the task list.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
-            return tasks.getTasks().get(taskNo).markAsDone();
+            return taskList.getTasks().get(taskNo).markAsDone();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeNoSuchTaskException();
         }

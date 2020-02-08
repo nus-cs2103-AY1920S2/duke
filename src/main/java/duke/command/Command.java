@@ -21,12 +21,12 @@ public abstract class Command {
         this.isExit = isExit;
     }
 
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns a boolean on whether the command is an exit command.
      *
-     * @return true if the command is an exit command.
+     * @return whether the command is an exit command.
      */
     public boolean isExit() {
         return this.isExit;

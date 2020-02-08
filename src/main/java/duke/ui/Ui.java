@@ -46,13 +46,6 @@ public class Ui {
     }
 
     /**
-     * Prints exit message before terminating application.
-     */
-    public void showExit() {
-        System.out.println("     Bye. Hope to see you again soon!");
-    }
-
-    /**
      * Shows the loading error when there is error loading from disk.
      */
     public void showLoadingError() {

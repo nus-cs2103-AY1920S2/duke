@@ -70,7 +70,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         assert file.exists() : "The storage file doesn't exist.";
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
         try {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {

@@ -25,14 +25,14 @@ public class DeleteCommand extends Command {
     /**
      * Executes the DeleteCommand by deleting the given task number from the task list.
      *
-     * @param tasks   TaskList of Duke.
+     * @param taskList   TaskList of Duke.
      * @param ui      The user interface.
      * @param storage To load from and save to the disk.
      * @return Acknowledgement message sent by Duke.
      * @throws DukeException thrown from deleteTask in the class TaskList.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return tasks.deleteTask(taskNo);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return taskList.deleteTask(taskNo);
     }
 }

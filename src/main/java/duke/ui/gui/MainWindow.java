@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
 
     private Storage storage;
     private Ui ui;
-    private TaskList tasks;
+    private TaskList taskList;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
@@ -50,9 +50,9 @@ public class MainWindow extends AnchorPane {
         ui = new Ui();
         storage = new Storage("data/duke.txt");
         try {
-            tasks = new TaskList(storage.load());
+            taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         showWelcome();
@@ -65,7 +65,7 @@ public class MainWindow extends AnchorPane {
         PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
         String output = horizontalLine;
         ExitCommand c = new ExitCommand();
-        output += c.execute(tasks, ui, storage) + horizontalLine;
+        output += c.execute(taskList, ui, storage) + horizontalLine;
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(output, dukeImage));
         pause.setOnFinished(event -> {
             Platform.exit();
@@ -85,7 +85,7 @@ public class MainWindow extends AnchorPane {
         boolean isExit = false;
         try {
             Command c = Parser.parse(input);
-            output += c.execute(tasks, ui, storage);
+            output += c.execute(taskList, ui, storage);
             isExit = c.isExit();
         } catch (DukeException e) {
             output += "     " + e.getMessage();
