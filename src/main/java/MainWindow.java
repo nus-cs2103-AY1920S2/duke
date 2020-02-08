@@ -18,7 +18,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke = new Duke("Data/Duke.txt");;
+    private Duke duke = new Duke("Data/Duke.txt");
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) { // temp change to public
-        return "\n" + " 연인 <3: " + input;
+        return " 연인 <3: \n" + input ;
     }
 
     /**
@@ -47,20 +47,20 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        Parser parser = new Parser(input.split(" "));
+        String command = parser.getCommand();
         String response = this.getResponse(this.duke.run(input)); //potential bug
-        this.dialogContainer.setStyle("-fx-border-color:GREEN;-fx-background-color:#ffb907");
+        this.dialogContainer.setStyle("-fx-border-color:GREEN;-fx-background-color:#ffb508");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+       /* if(command.equals("bye")){
+            return;
+        }*/
     }
 
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     /* private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));

@@ -8,13 +8,13 @@
  */
 
 public class Ui {
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         Duke chatbot = new Duke("Data/Duke.txt");
         Ui.loadingCompleted();
         Ui.initiateGreetings();
         //Application.launch(Duke.class, args);
         chatbot.run();
-    }
+    }*/
     /**
      * Greet the user
      */
@@ -53,8 +53,8 @@ public class Ui {
     /**
      * Says goodbye to the user.
      */
-    public void initiateFareWell(){
+    public static String initiateFareWell(){
 
-        System.out.println("Bye. Hope to see you again soon!");
+        return ("Bye. Hope to see you again soon!");
     }
 }
