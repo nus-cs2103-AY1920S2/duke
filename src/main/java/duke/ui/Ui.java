@@ -25,7 +25,7 @@ public class Ui {
      *
      * @return The welcome message.
      */
-    public static String showWelcome() {
+    public static String generateWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -40,7 +40,7 @@ public class Ui {
      *
      * @return The exit message.
      */
-    public String showExit() {
+    public String generateExitMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -50,7 +50,7 @@ public class Ui {
      * @param msg The error message to be shown to user.
      * @return The error message.
      */
-    public String showError(String msg) {
+    public String generateErrorMessage(String msg) {
         return msg;
     }
 
@@ -59,7 +59,7 @@ public class Ui {
      *
      * @return The error message if failure to load tasks from storage.
      */
-    public String showLoadingError() {
+    public String generateLoadingErrorMessage() {
         return "OOPS!!! Fail to load data";
     }
 
@@ -85,7 +85,7 @@ public class Ui {
      * @param details The details including the task and size of list.
      * @return The messages to be shown to user for add command.
      */
-    public String showAddMessages(String[] details) {
+    public String generateAddMessage(String[] details) {
         String output = "Got it. I've added this task:\n";
         output += details[0] + "\n";
         output += "Now you have " + details[1] + " tasks in the list.";
@@ -98,7 +98,7 @@ public class Ui {
      * @param details The details including the task and size of list.
      * @return The messages to be shown to user for delete command.
      */
-    public String showDeleteMessages(String[] details) {
+    public String generateDeleteMessage(String[] details) {
         String output = "Noted. I've removed this task:\n";
         output += details[0] + "\n";
         output += "Now you have " + details[1] + " tasks in the list.";
@@ -111,7 +111,7 @@ public class Ui {
      * @param details The details including the task.
      * @return The messages to be shown to user for done command.
      */
-    public String showDoneMessages(String details) {
+    public String generateDoneMessage(String details) {
         String output = "Nice! I've marked this task as done:\n";
         output += details;
         return output;
@@ -123,7 +123,7 @@ public class Ui {
      * @param tasks The list of tasks.
      * @return The message that shows the list of tasks.
      */
-    public String showList(ArrayList<Task> tasks) {
+    public String generateListMessage(ArrayList<Task> tasks) {
         String output = "Here are the tasks in your list:\n";
         int size = tasks.size();
         for (int i = 0; i < size; i++) {
@@ -138,7 +138,7 @@ public class Ui {
      * @param tasks The list of matching tasks.
      * @return The message that shows the list of matching tasks.
      */
-    public String showMatchingList(ArrayList<Task> tasks) {
+    public String generateMatchingListMessage(ArrayList<Task> tasks) {
         String output = "Here are the matching tasks in your list:\n";
         int size = tasks.size();
         for (int i = 0; i < size; i++) {

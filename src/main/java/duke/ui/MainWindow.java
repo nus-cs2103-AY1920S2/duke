@@ -60,7 +60,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage)
+                DialogBox.getDukeDialog(Ui.generateWelcomeMessage(), dukeImage)
         );
     }
 
@@ -76,6 +76,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage)
         );
+        //pause awhile before duke replies.
         PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
         pause.setOnFinished(event -> dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -84,6 +85,7 @@ public class MainWindow extends AnchorPane {
 
         userInput.clear();
         if (duke.isExit()) {
+            //pause awhile before duke closes the application.
             pause = new PauseTransition(Duration.seconds(0.75));
             pause.setOnFinished(event -> Platform.exit());
             pause.play();

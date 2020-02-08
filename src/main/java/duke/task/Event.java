@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
-    protected LocalDate at;
+    protected LocalDate atDate;
     protected LocalTime atTime;
 
     /**
@@ -25,10 +25,11 @@ public class Event extends Task {
     public Event(String description, String at) throws DukeException {
         super(description);
         try {
-            String[] temp = at.split(" ");
-            this.at = LocalDate.parse(temp[0]);
-            if (temp.length == 2) {
-                this.atTime = LocalTime.parse(temp[1]);
+            String[] dateAndTime = at.split(" ");
+            this.atDate = LocalDate.parse(dateAndTime[0]);
+            //time is optional
+            if (dateAndTime.length == 2) {
+                this.atTime = LocalTime.parse(dateAndTime[1]);
             } else {
                 this.atTime = null;
             }
@@ -44,8 +45,8 @@ public class Event extends Task {
      */
     @Override
     public String toSaveName() {
-        return "E" + super.toSaveName() + " | " + this.at
-                + (atTime != null ? " " + atTime : "") + "\n";
+        String time = (atTime != null ? " " + atTime : "");
+        return "E" + super.toSaveName() + " | " + this.atDate + time + "\n";
     }
 
     /**
@@ -56,7 +57,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[MMM d yyyy][h:mma]");
-        return "[E]" + super.toString() + " (at: " +  at.format(formatter)
-                + (atTime != null ? " " + atTime.format(formatter) : "") + ")";
+        String time = (atTime != null ? " " + atTime.format(formatter) : "");
+        return "[E]" + super.toString() + " (at: " + atDate.format(formatter) + time + ")";
     }
 }
