@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,6 +39,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         records.add(task);
+        Collections.sort(records);
     }
 
     /**
@@ -52,6 +54,7 @@ public class TaskList {
             task = records.get(num - 1);
             task.setStatusDone();
             records.set(num - 1, task);
+            Collections.sort(records);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No task found in that index!");
         }
@@ -71,6 +74,7 @@ public class TaskList {
         try {
             task = records.get(num - 1);
             records.remove(num - 1);
+            Collections.sort(records);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No task found in that index!");
         }

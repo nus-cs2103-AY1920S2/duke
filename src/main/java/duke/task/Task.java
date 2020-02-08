@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Eng Xuan En
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected String description;
     protected String type;
     protected boolean isDone;
@@ -82,6 +82,34 @@ public class Task {
      */
     public String getType() {
         return type;
+    }
+
+    /**
+     * Compare the tasks based on their date and time, if applicable. If same date and time, sort by
+     * alphabetical order.
+     *
+     * @param other Another task to be compare to.
+     * @return Determine which task is at the top.
+     */
+    @Override
+    public int compareTo(Task other) {
+        int result;
+
+        if (this.getType().equals("todo") && other.getType().equals("todo")) {
+            result = 0;
+        } else if (this.getType().equals("todo")) {
+            result = 1;
+        } else if (other.getType().equals("todo")) {
+            result = -1;
+        } else {
+            result = this.getPeriod().compareTo(other.getPeriod());
+        }
+
+        if (result == 0) {
+            result = this.getDescription().compareTo(other.getDescription());
+        }
+
+        return result;
     }
 
     /**
