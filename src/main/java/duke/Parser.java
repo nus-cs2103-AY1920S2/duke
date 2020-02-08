@@ -32,7 +32,6 @@ public class Parser {
      */
     public static Optional<Command> parse(String fullCommand) throws DukeException {
         Optional<Command> outputCommand;
-        // Remove leading and trailing whitespace
         fullCommand = fullCommand.trim();
         String[] commandWords = fullCommand.split("\\s+");
         String firstCommandWord = commandWords[0];
@@ -50,65 +49,154 @@ public class Parser {
             outputCommand = Optional.of(new ListCommand());
             break;
         case "find":
-            if (numberOfCommandArguments == 0) {
-                throw new DukeException(DukeException.exceptionIcon
-                        + " The description of a find cannot be empty...");
-            }
-            outputCommand = Optional.of(new FindCommand(
-                    Parser.getDescription(fullCommand, commandWords)));
+            outputCommand = getFindCommand(fullCommand, commandWords, numberOfCommandArguments);
             break;
         case "done":
-            try {
-                int taskNumber = Integer.parseInt(commandWords[1]);
-                outputCommand = Optional.of(new DoneCommand(taskNumber));
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new DukeException("Invalid Task Number given!");
-            }
+            outputCommand = getDoneCommand(commandWords);
             break;
         case "todo":
-            if (numberOfCommandArguments == 0) {
-                throw new DukeException(DukeException.exceptionIcon
-                        + " The description of a todo cannot be empty...");
-            }
-            String todoDescription = Parser.getDescription(fullCommand, commandWords);
-            outputCommand = Optional.of(new AddTaskCommand(new Todo(todoDescription)));
+            outputCommand = getTodoCommand(fullCommand, commandWords, numberOfCommandArguments);
             break;
         case "deadline":
-            Parser.verifyDeadlineInput(fullCommand, commandWords);
-            String deadlineDescription = Parser.getDescription(fullCommand, commandWords);
-            String deadline = Parser.getDueDate(fullCommand, commandWords);
-            try {
-                outputCommand = Optional.of(new AddTaskCommand(
-                        new Deadline(deadlineDescription, deadline)));
-            } catch (DateTimeException e) {
-                throw new DukeException("Given deadline task due date was not in correct format"
-                        + ": [yyyy-mm-dd]");
-            }
+            outputCommand = getDeadlineCommand(fullCommand, commandWords);
             break;
         case "event":
-            Parser.verifyEventInput(fullCommand, commandWords);
-            String eventDescription = Parser.getDescription(fullCommand, commandWords);
-            String eventTime = Parser.getDueDate(fullCommand, commandWords);
-            try {
-                outputCommand = Optional.of(new AddTaskCommand(
-                        new Event(eventDescription, eventTime)));
-            } catch (DateTimeException e) {
-                throw new DukeException("Given event task due date was not in correct format"
-                        + ": [yyyy-mm-dd]");
-            }
+            outputCommand = getEventCommand(fullCommand, commandWords);
             break;
         case "delete":
-            try {
-                int taskNumberToDelete = Integer.parseInt(commandWords[1]);
-                outputCommand = Optional.of(new DeleteCommand(taskNumberToDelete));
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new DukeException("Invalid task number given for deletion...");
-            }
+            outputCommand = getDeleteCommand(commandWords);
             break;
         default:
             // First word of command does not match list of valid commands
-            throw new DukeException(DukeException.exceptionIcon
-                    + " OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(commandTypeFormatInfo.get("unknown"));
+        }
+        return outputCommand;
+    }
+
+    /**
+     * Returns an Optional Command representing a Todo Command.
+     *
+     * @param fullCommand              Entire Command
+     * @param commandWords             List of words present in Command
+     * @param numberOfCommandArguments Argument count for Command
+     * @return Optional Command representing Todo
+     * @throws DukeException Given command does not have a description
+     */
+    private static Optional<Command> getTodoCommand(String fullCommand, String[] commandWords,
+                                                    int numberOfCommandArguments) throws DukeException {
+        Optional<Command> outputCommand;
+        if (numberOfCommandArguments == 0) {
+            throw new DukeException(commandTypeFormatInfo.get("todo"));
+        }
+        String todoDescription = Parser.getDescription(fullCommand, commandWords);
+        outputCommand = Optional.of(new AddTaskCommand(new Todo(todoDescription)));
+        return outputCommand;
+    }
+
+    /**
+     * Returns an Optional Command representing a Find Command.
+     *
+     * @param fullCommand              Entire Command
+     * @param commandWords             List of words present in Command
+     * @param numberOfCommandArguments Argument count for Command
+     * @return Optional Command representing Find Command
+     * @throws DukeException Given command does not have a search term
+     */
+    private static Optional<Command> getFindCommand(String fullCommand, String[] commandWords,
+                                                    int numberOfCommandArguments) throws DukeException {
+        Optional<Command> outputCommand;
+        if (numberOfCommandArguments == 0) {
+            throw new DukeException(commandTypeFormatInfo.get("find"));
+        }
+        outputCommand = Optional.of(new FindCommand(
+                Parser.getDescription(fullCommand, commandWords)));
+        return outputCommand;
+    }
+
+    /**
+     * Returns an Optional Command representing a Done Command.
+     *
+     * @param commandWords Words present in Command
+     * @return Optional Command representing a Done Command
+     * @throws DukeException Given command does not have a valid task number
+     */
+    private static Optional<Command> getDoneCommand(String[] commandWords) throws DukeException {
+        Optional<Command> outputCommand;
+        if (commandWords.length == 1) {
+            throw new DukeException(commandTypeFormatInfo.get("missingTaskNumber"));
+        }
+        try {
+            int taskNumber = Integer.parseInt(commandWords[1]);
+            outputCommand = Optional.of(new DoneCommand(taskNumber));
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException(commandTypeFormatInfo.get("missingTaskNumber"));
+        }
+        return outputCommand;
+    }
+
+    /**
+     * Returns an Optional Command representing a Delete Command.
+     *
+     * @param commandWords Words present in Command
+     * @return Optional Command representing a Delete Command
+     * @throws DukeException Given command does not have a valid task number
+     */
+    private static Optional<Command> getDeleteCommand(String[] commandWords) throws DukeException {
+        Optional<Command> outputCommand;
+        if (commandWords.length == 1) {
+            throw new DukeException(commandTypeFormatInfo.get("missingTaskNumber"));
+        }
+        try {
+            int taskNumberToDelete = Integer.parseInt(commandWords[1]);
+            outputCommand = Optional.of(new DeleteCommand(taskNumberToDelete));
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException(commandTypeFormatInfo.get("missingTaskNumber"));
+        }
+        return outputCommand;
+    }
+
+    /**
+     * Returns an Optional Command representing an Event Command.
+     *
+     * @param fullCommand  Command given for parsing
+     * @param commandWords List of words present in Command
+     * @return Optional of Command representing Event Command
+     * @throws DukeException Given command does not have a valid date format
+     */
+    private static Optional<Command> getEventCommand(String fullCommand,
+                                                     String[] commandWords) throws DukeException {
+        Optional<Command> outputCommand;
+        Parser.verifyEventInput(fullCommand, commandWords);
+        String eventDescription = Parser.getDescription(fullCommand, commandWords);
+        String eventTime = Parser.getDueDate(fullCommand, commandWords);
+        try {
+            outputCommand = Optional.of(new AddTaskCommand(
+                    new Event(eventDescription, eventTime)));
+        } catch (DateTimeException e) {
+            throw new DukeException(commandTypeFormatInfo.get("event"));
+        }
+        return outputCommand;
+    }
+
+    /**
+     * Returns an Optional Command representing a Deadline.
+     *
+     * @param fullCommand  Command given for parsing
+     * @param commandWords List of words present in Command
+     * @return Optional of Command representing Deadline Command
+     * @throws DukeException Given command does not have a valid date format
+     */
+    private static Optional<Command> getDeadlineCommand(String fullCommand,
+                                                        String[] commandWords) throws DukeException {
+        Optional<Command> outputCommand;
+        Parser.verifyDeadlineInput(fullCommand, commandWords);
+        String deadlineDescription = Parser.getDescription(fullCommand, commandWords);
+        String deadline = Parser.getDueDate(fullCommand, commandWords);
+        try {
+            outputCommand = Optional.of(new AddTaskCommand(
+                    new Deadline(deadlineDescription, deadline)));
+        } catch (DateTimeException e) {
+            throw new DukeException(commandTypeFormatInfo.get("deadline"));
         }
         return outputCommand;
     }
@@ -118,29 +206,23 @@ public class Parser {
      *
      * @throws DukeException for invalid event command
      */
-    public static void verifyEventInput(String command, String[] commandWords) throws DukeException {
+    protected static void verifyEventInput(String command, String[] commandWords) throws DukeException {
         String eventDelimiter = commandDelimiter.get(commandWords[0]);
         int eventDelimiterIndex = command.indexOf(eventDelimiter);
         int eventDelimiterLength = eventDelimiter.length();
         int commandLength = command.length();
+        String errorMessage = commandTypeFormatInfo.get("event");
 
         if (commandLength == "event".length()) {
             // Empty event command given (e.g. "event")
-            throw new DukeException(DukeException.exceptionIcon
-                    + " Wrong input format for adding an event... "
-                    + "Format: event [description] /at [event time]");
+            throw new DukeException(errorMessage);
         }
         if (!command.contains(eventDelimiter)) {
-            // No delimiter present (e.g. "event project meeting Mon 2-4pm")
-            throw new DukeException(DukeException.exceptionIcon
-                    + " Wrong input format for adding an event... "
-                    + "Format: event [description] /at [event time]");
+            throw new DukeException(errorMessage);
         }
         if (eventDelimiterIndex + eventDelimiterLength == commandLength) {
             // Delimiter is at the end of command (e.g. "event /at")
-            throw new DukeException(DukeException.exceptionIcon
-                    + " Wrong input format for adding an event... "
-                    + "Format: event [description] /at [event time]");
+            throw new DukeException(errorMessage);
         }
     }
 
@@ -154,21 +236,18 @@ public class Parser {
         int deadlineDelimiterIndex = command.indexOf(deadlineDelimiter);
         int deadlineDelimiterLength = deadlineDelimiter.length();
         int commandLength = command.length();
+        String errorMessage = commandTypeFormatInfo.get("deadline");
 
         if (commandLength == "deadline".length()) {
             // Empty deadline command given (e.g. "deadline")
-            throw new DukeException(DukeException.exceptionIcon
-                    + " The description of a deadline cannot be empty...");
+            throw new DukeException(errorMessage);
         }
         if (!command.contains(deadlineDelimiter)) {
-            // No due date given (e.g. "deadline read book")
-            throw new DukeException(DukeException.exceptionIcon
-                    + " No deadline given... Format: deadline [description] /by [due by]");
+            throw new DukeException(errorMessage);
         }
         if (deadlineDelimiterIndex + deadlineDelimiterLength == commandLength) {
             // Delimiter is at the end of command (e.g. "deadline /by")
-            throw new DukeException(DukeException.exceptionIcon
-                    + " No deadline given... Format: deadline [description] /by [due by]");
+            throw new DukeException(errorMessage);
         }
     }
 
@@ -230,6 +309,11 @@ public class Parser {
                 + "[due date in yyyy-mm-dd]");
         commandTypeFormatInfo.put("todo", "Incorrect todo task format given... Correct format: todo "
                 + "[description]");
+        commandTypeFormatInfo.put("find", "Incorrect find task format given... Correct format: "
+                + "find [search term]");
+        commandTypeFormatInfo.put("unknown", DukeException.exceptionIcon
+                + " OOPS!!! I'm sorry, but I don't know what that means :-(");
+        commandTypeFormatInfo.put("missingTaskNumber", "Invalid Task Number given!");
         return commandTypeFormatInfo;
     }
 
