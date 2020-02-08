@@ -15,6 +15,7 @@ public abstract class TimedTask extends Task {
     }
 
     protected String formatTime(LocalDateTime dt) {
+        assert dtf != null : "DateTimeFormatter should be instantiated";
         return dtf.format(dt);
     }
 

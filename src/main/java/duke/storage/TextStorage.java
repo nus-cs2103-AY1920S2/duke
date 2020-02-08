@@ -54,7 +54,7 @@ public class TextStorage implements Storage {
         return tasks;
     }
 
-    public void save(List<Task> tasks) throws IOException, DukeException {
+    public void save(List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks) {
             fw.write(toSaveable(task) + System.lineSeparator());
@@ -62,18 +62,19 @@ public class TextStorage implements Storage {
         fw.close();
     }
 
-    private String toSaveable(Task task) throws DukeException {
+    private String toSaveable(Task task) {
+        assert task != null : "task should not be null";
         if (task instanceof Todo) {
             return String.format("todo\n%s\n%s", task.getName(), task.getIsDone());
         } else if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
             return String.format("deadline\n%s\n%s\n%s", deadline.getName(), deadline.getDateTime(),
                     deadline.getIsDone());
-        } else if (task instanceof Event) {
+        } else {
+            assert task instanceof Event;
             Event event = (Event) task;
             return String.format("event\n%s\n%s\n%s\n%s", event.getName(), event.getStart(), event.getEnd(),
                     event.getIsDone());
         }
-        throw new DukeException("Unknown task type found??");
     }
 }
