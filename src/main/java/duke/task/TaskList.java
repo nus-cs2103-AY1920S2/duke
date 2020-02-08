@@ -68,24 +68,27 @@ public class TaskList {
      *
      * @return Filtered urgent task list in appropriate string format.
      */
-//    public String getUrgentTasks() {
-//        LocalDate current = LocalDate.now();
-//        LocalDate oneWeekLater = current.plusDays(7);
-//        LocalDate twoWeeksLater = current.plusDays(14);
-//        String dueInAWeekTasks = "";
-//        String dueInTwoWeeksTasks = "";
-//        for (int i = 0; i < taskList.size(); i++) {
-//            Task task = taskList.get(i);
-//            LocalDate taskDate = task.getTaskDate();
-//            if (taskDate.compareTo(oneWeekLater) < 0) {
-//                // means this task is due in a week
-//                dueInAWeekTasks.add(task);
-//            } else if (taskDate.compareTo(twoWeeksLater) < 0) {
-//                // means this task is due more than a week later but within two weeks
-//                dueInTwoWeeksTasks.add(task);
-//            }
-//        }
-//    }
+    public String getUrgentTasks() {
+        LocalDate current = LocalDate.now();
+        LocalDate oneWeekLater = current.plusDays(7);
+        LocalDate twoWeeksLater = current.plusDays(14);
+        String dueThisWeekTasks = "Due this week" + System.lineSeparator();
+        String dueNextWeekTasks = "Due next week" + System.lineSeparator();
+        for (int i = 0; i < taskList.size(); i++) {
+            String count = (i + 1) + ". ";
+            Task task = taskList.get(i);
+            LocalDate taskDate = task.getTaskDate();
+            if (taskDate.compareTo(oneWeekLater) < 0) {
+                // means this task is due in a week
+                dueThisWeekTasks += count + task.toString() + System.lineSeparator();
+            } else if (taskDate.compareTo(twoWeeksLater) < 0) {
+                // means this task is due more than a week later but within two weeks
+                dueNextWeekTasks += count + task.toString() + System.lineSeparator();
+            }
+        }
+        String urgentTasks = dueThisWeekTasks + System.lineSeparator() + dueNextWeekTasks;
+        return urgentTasks;
+    }
 
     /**
      * Retrieves tasks that contain user keyword and format them into string in numbered order.

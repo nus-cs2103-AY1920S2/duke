@@ -144,6 +144,17 @@ public class Parser {
             break;
         }
 
+        case "urgent": {
+
+            // Pre-processing
+            int idx = input.indexOf(" ");
+            String keyword = input.substring(idx + 1);
+
+            command = new UrgentCommand();
+
+            break;
+        }
+
         case "list": {
             command = new ListCommand();
             break;

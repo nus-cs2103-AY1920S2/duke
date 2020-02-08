@@ -6,19 +6,17 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
-public class FindCommand extends Command {
+public class UrgentCommand extends Command {
 
-    private String keyword;
-
-    public FindCommand(String keyword) {
+    public UrgentCommand() {
         super();
-        this.keyword = keyword;
     }
 
     public String execute(Storage storage, TaskList taskList) throws IOException {
-        String message = "Here are the matching tasks in your list"
+        String message = "Here are urgent tasks in your list! "
                 + System.lineSeparator()
-                + taskList.searchTaskList(keyword);
+                + System.lineSeparator()
+                + taskList.getUrgentTasks();
         Ui.printMessage(message);
         return message;
     }
