@@ -81,6 +81,8 @@ public class Parser {
             // means that there is no description of date of task after the delimiter
             throw new DukeException("Date and time of the event/deadline cannot be empty!");
         }
+
+        //append the date and time onto the dateTime object
         for (int i = indexFound + 1; i < inputCommand.length; i++) {
             dateTime.append(inputCommand[i]);
             if (i != inputCommand.length - 1) {
