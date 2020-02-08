@@ -9,14 +9,15 @@ public class TimeHandler {
     /**
      * Returns an Optional of a Date object if the dateString is in the correct format of yyyy-MM-dd
      * Else returns Optional.empty
+     *
      * @param dateString
      * @return
      */
     public static Optional<Date> dateFromString(String dateString) {
-        try{
+        try {
             Date t = myDate.parse(dateString);
             return Optional.of(t);
-        }catch (ParseException e) {
+        } catch (ParseException e) {
 
         }
 

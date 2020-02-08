@@ -10,39 +10,41 @@ public class DeadlineTask extends Task {
 
     /**
      * Returns a task of type deadline which is a task with a due date
+     *
      * @param taskDescription the name of task or some description of the task to be done
-     * @param deadline should be of the form "by yyyy-MM-dd" else it will throw IvalidInputException
+     * @param deadline        should be of the form "by yyyy-MM-dd" else it will throw IvalidInputException
      * @throws InvalidInputException
      */
-    public DeadlineTask(String taskDescription, String deadline) throws InvalidInputException  {
+    public DeadlineTask(String taskDescription, String deadline) throws InvalidInputException {
         this.taskDescription = taskDescription;
 
         //breaks down the taskDescription and adds all words individually to the Hashset
         Scanner taskDesc = new Scanner(taskDescription);
-        while(taskDesc.hasNext()) {
+        while (taskDesc.hasNext()) {
             String keyword = taskDesc.next();
             wordsInDescription.add(keyword);
         }
 
         //checks if deadline is of the form "by yyyy-MM-dd"
         Scanner sc = new Scanner(deadline);
-        if(!sc.next().equals("by")) {
+        if (!sc.next().equals("by")) {
             throw new InvalidInputException("The deadline should start with [by]");
         }
         this.inputDeadline = sc.nextLine();
         this.deadline = TimeHandler.dateFromString(this.inputDeadline);
-        if(this.deadline.isEmpty()) {
+        if (this.deadline.isEmpty()) {
             throw new InvalidInputException("Wrong date format. Should be yyyy-MM-dd");
         }
     }
 
     /**
      * Used for saving the Task into a text file
+     *
      * @return a String of the form "deadline NAME / by yyyy-MM-dd / NUMBER indicating whether the task is done
      */
     public String formatToStore() {
         String format = "deadline " + taskDescription + " / by " + inputDeadline + " /";
-        if(isDone) {
+        if (isDone) {
             format += " 1";
         } else {
             format += " 0";
@@ -51,8 +53,8 @@ public class DeadlineTask extends Task {
     }
 
     public String toString() {
-        String taskWords =  "[D]";
-        if(isDone) {
+        String taskWords = "[D]";
+        if (isDone) {
             taskWords += tick;
         } else {
             taskWords += cross;

@@ -1,4 +1,5 @@
 public interface Action {
-    public String doSomething(TaskList tasks);
-    public boolean hasNextAction();
+    String doSomething(TaskList tasks);
+
+    boolean hasNextAction();
 }

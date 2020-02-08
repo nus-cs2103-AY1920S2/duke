@@ -12,7 +12,7 @@ public class TaskList {
 
     }
 
-    public List<Task> getList(){
+    public List<Task> getList() {
         return usrInputs;
     }
 
@@ -31,11 +31,12 @@ public class TaskList {
 
     /**
      * Sets the file at the specified index to done
+     *
      * @param index
      * @throws InvalidIndexException
      */
-    public String done(int index) throws InvalidIndexException{
-        if(index > usrInputs.size()) {
+    public String done(int index) throws InvalidIndexException {
+        if (index > usrInputs.size()) {
             throw new InvalidIndexException();
 
         }
@@ -47,11 +48,12 @@ public class TaskList {
 
     /**
      * Deletes the file at the specified index
+     *
      * @param index
      * @throws InvalidIndexException
      */
-    public String delete(int index) throws InvalidIndexException{
-        if(index > usrInputs.size()) {
+    public String delete(int index) throws InvalidIndexException {
+        if (index > usrInputs.size()) {
             throw new InvalidIndexException();
         }
 
@@ -62,12 +64,13 @@ public class TaskList {
 
     /**
      * Adds the task to the list of tasks
+     *
      * @param task
      */
-    public String add(Task task){
+    public String add(Task task) {
         usrInputs.add(task);
         return ("Got it! I've added the following task \n" + task +
-                "\nNow you have " + usrInputs.size() + " tasks\n" );
+                "\nNow you have " + usrInputs.size() + " tasks\n");
     }
 
     /**
@@ -76,15 +79,15 @@ public class TaskList {
     public void saveToDisk() {
         try {
             Storage.storeIntoFile(usrInputs);
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
 
-    public List<Task> find(String keyword){
+    public List<Task> find(String keyword) {
         List<Task> foundTasks = new ArrayList<>();
-        for(Task task : usrInputs) {
-            if(task.contains(keyword)) {
+        for (Task task : usrInputs) {
+            if (task.contains(keyword)) {
                 foundTasks.add(task);
             }
         }

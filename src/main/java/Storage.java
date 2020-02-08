@@ -13,12 +13,13 @@ public class Storage {
 
     /**
      * Attempts to store a list of tasks into a txt file.
+     *
      * @param tasks list of tasks to store
      * @throws IOException if file can't be found
      */
     public static void storeIntoFile(List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter("src/taskStore.txt");
-        for(Task task : tasks) {
+        for (Task task : tasks) {
             fw.write(task.formatToStore() + "\n");
         }
         fw.close();
@@ -28,6 +29,7 @@ public class Storage {
     /**
      * Attempts to read from a file which is used to save previous iterations of the list of tasks
      * and load it into a new list of tasks
+     *
      * @return a list of tasks if successfully loaded else returns an empty task list
      */
     public static List<Task> readFromFile() {
@@ -48,12 +50,11 @@ public class Storage {
                     System.out.println("Cannot parse from text file");
                 }
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("File unable to be found");
         }
         return tasks;
     }
-
 
 
 }

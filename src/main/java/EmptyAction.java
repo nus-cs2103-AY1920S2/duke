@@ -1,5 +1,5 @@
 public class EmptyAction implements Action {
-    public String doSomething(TaskList tasks){
+    public String doSomething(TaskList tasks) {
         return "I don't know what to do!";
     }
 

@@ -17,12 +17,8 @@ public abstract class Task {
 
     abstract public String formatToStore();
 
-    boolean contains(String keyword){
-        if(wordsInDescription.contains(keyword)) {
-            return true;
-        } else{
-            return false;
-        }
+    boolean contains(String keyword) {
+        return wordsInDescription.contains(keyword);
     }
 
 }
