@@ -11,6 +11,7 @@ public class Task {
 
     /**
      * Constructor for Task that takes in the description of the task.
+     *
      * @param description the description of the task.
      */
     public Task(String description) {
@@ -20,6 +21,7 @@ public class Task {
 
     /**
      * Returns a status icon indicating the task completion status.
+     *
      * @return a check if the task is completed, or a cross if it is not completed
      */
     public String getStatusIcon() {
@@ -36,9 +38,5 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
-    }
-
-    public String encode() {
-        return "";
     }
 }

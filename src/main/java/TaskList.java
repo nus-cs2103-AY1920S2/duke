@@ -17,6 +17,7 @@ public class TaskList {
 
     /**
      * Adds the given task to the list.
+     *
      * @param task the task to be added.
      */
     public void addTask(Task task) {
@@ -25,6 +26,7 @@ public class TaskList {
 
     /**
      * Deletes the task specified by the index.
+     *
      * @param index the index of the task to be deleted.
      * @return the deleted task
      */
@@ -34,6 +36,7 @@ public class TaskList {
 
     /**
      * Completes the task specified by the index.
+     *
      * @param index the index of the task to be completed.
      * @return the completed task
      */
@@ -49,6 +52,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the list.
+     *
      * @return the number of tasks in the list
      */
     public int getCount() {

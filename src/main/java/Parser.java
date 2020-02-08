@@ -7,7 +7,7 @@ public class Parser {
      * Returns a Command object based on the interpretation of the user-typed command.
      *
      * @param command the user-typed command
-     * @return
+     * @return a Command corresponding to the command interpreted
      */
     public static Command parse(String command) {
         try {

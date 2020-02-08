@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Constructor for Storage that takes in the path to the intended storage file.
+     *
      * @param filePath the path to the storage file.
      */
     public Storage(String filePath) {

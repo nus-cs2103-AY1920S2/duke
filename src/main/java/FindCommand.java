@@ -7,6 +7,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructor for FindCommand that takes in a search keyword.
+     *
      * @param keyword the search keyword
      */
     public FindCommand(String keyword) {
@@ -15,6 +16,7 @@ public class FindCommand extends Command {
 
     /**
      * Finds the tasks containing the keyword, and calls the UI to display them.
+     *
      * @param tasks the task list to operate on
      * @param ui the user interface
      * @param storage the storage for the task list

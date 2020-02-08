@@ -4,9 +4,6 @@ import java.util.Scanner;
  * Represents the CLI user interface that interacts with the user and acts as a view.
  */
 public class Ui {
-    /**
-     * The input channel.
-     */
     private Scanner scanner = new Scanner(System.in);
     private String message = "";
 
@@ -22,6 +19,7 @@ public class Ui {
 
     /**
      * Displays the list of tasks given.
+     *
      * @param tasks the list of tasks
      */
     public void showTasks(TaskList tasks) {
@@ -33,6 +31,7 @@ public class Ui {
 
     /**
      * Displays the deleted task.
+     *
      * @param task the deleted task
      */
     public void showDeletedTask(Task task) {
@@ -43,6 +42,7 @@ public class Ui {
 
     /**
      * Displays the task marked as completed.
+     *
      * @param task the completed task
      */
     public void showDonetask(Task task) {
@@ -53,6 +53,7 @@ public class Ui {
 
     /**
      * Displays the newly added task and the total number of tasks.
+     *
      * @param task the added task
      * @param count the total number of tasks
      */
@@ -103,6 +104,7 @@ public class Ui {
 
     /**
      * Displays the list of tasks containing the given keyword.
+     *
      * @param tasks the task containing the given keyword
      */
     public void showFoundTasks(TaskList tasks) {
@@ -114,6 +116,7 @@ public class Ui {
 
     /**
      * Retrieves the user command from the interface.
+     *
      * @return the user command
      */
     public String getCommand() {
@@ -121,10 +124,20 @@ public class Ui {
     }
 
 
+    /**
+     * Returns the last printed message.
+     *
+     * @return the last printed message
+     */
     protected String getResponse() {
         return message;
     }
 
+    /**
+     * Prints the speech with decorations.
+     *
+     * @param speech the message to be said
+     */
     protected void say(String speech) {
         message = speech;
         String separator = "\t============================================================\n";
