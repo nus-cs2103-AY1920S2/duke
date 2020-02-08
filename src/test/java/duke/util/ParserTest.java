@@ -7,6 +7,8 @@ import duke.exception.DukeUnknownKeywordException;
 import org.junit.jupiter.api.Test;
 import duke.stub.TaskListStub;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -35,8 +37,10 @@ public class ParserTest {
     @Test
     public void parse_validFormat_success() {
         try {
-            System.out.println(new Parser().parse("delete 1", new TaskListStub()));
-            assertEquals(new DeleteCommand(1), new Parser().parse("delete 1", new TaskListStub()));
+            System.out.println(new Parser().parse("delete 1",
+                    new TaskListStub(), new NoteList(new ArrayList<>())));
+            assertEquals(new DeleteCommand(1), new Parser().parse("delete 1",
+                    new TaskListStub(), new NoteList(new ArrayList<>())));
         } catch (DukeUnknownKeywordException | DukeInvalidArgumentFormatException | DukeInvalidDateFormatException e) {
             System.err.println(e);
         }
@@ -51,7 +55,7 @@ public class ParserTest {
     public void parse_invalidNumber_exceptionThrown() {
         try {
             assertEquals(new DeleteCommand(1), new Parser().parse("delete lol",
-                    new TaskListStub()));
+                    new TaskListStub(), new NoteList(new ArrayList<>())));
             fail();
         } catch (DukeUnknownKeywordException | DukeInvalidArgumentFormatException | DukeInvalidDateFormatException e) {
             assertEquals("☹ OOPS!!! "

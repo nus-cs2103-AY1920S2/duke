@@ -334,7 +334,7 @@ public class Parser {
      * @return The NoteDeleteCommand instance of the corresponding input.
      */
     private NoteDeleteCommand checkValidNoteDeleteArgument(String details, NoteList noteList) throws
-            DukeInvalidArgumentFormatException{
+            DukeInvalidArgumentFormatException {
         int index = -1;
         try {
             index = Integer.parseInt(details);
