@@ -21,18 +21,25 @@ public class Parser {
         }
 
         switch (command) {
+        case "l":
         case "list":
             return Command.LIST;
+        case "d":
         case "done":
             return Command.DONE;
+        case "del":
         case "delete":
             return Command.DELETE;
+        case "t":
         case "todo":
             return Command.TODO;
+        case "e":
         case "event":
             return Command.EVENT;
+        case "dl":
         case "deadline":
             return Command.DEADLINE;
+        case "f":
         case "find":
             return Command.FIND;
         default:
