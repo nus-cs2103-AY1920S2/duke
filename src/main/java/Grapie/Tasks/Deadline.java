@@ -1,23 +1,28 @@
-package Grapie;
+package Grapie.Tasks;
 
 import Grapie.Exceptions.GrapieExceptions;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
-    private String time;
+public class Deadline extends Task {
     private LocalDate localDate;
+    private LocalTime localTime;
+
+    String time;
+    boolean haveTime;
 
     /**
-     * Constructor for Grapie.Event object.
+     * Constructor to create Grapie.Tasks.Deadline object.
      *
-     * @param description Grapie.Event's description.
-     * @param time The time and date for the event.
+     * @param description The description for deadline.
+     * @param time        The time for the deadline task.
      * @throws GrapieExceptions Throws error for incorrect formatting.
      */
-    public Event(String description, String time) throws GrapieExceptions {
+    public Deadline(String description, String time) throws GrapieExceptions {
         super(description);
+        this.time = time;
 
         time = time.trim();
 
@@ -27,11 +32,17 @@ public class Event extends Task {
         } else {
             throw new GrapieExceptions("OOPS!!! Please format your date like this: YYYY-MM-DD TTTT");
         }
-    }
 
+    }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + localDate.format(DateTimeFormatter.ofPattern("MMM d "
+                + "yyyy")) + ")";
     }
 }
+
+
+
+
+

@@ -1,5 +1,5 @@
-import Grapie.Parser;
-import Grapie.Ui;
+import Grapie.Functions.Parser;
+import Grapie.Functions.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -28,8 +28,29 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+
+    /**
+     * Returns greetings to user.
+     */
+    public static String greetings() {
+        String intro = "Hello! I'm Grapie! \n"
+                + "   _____                 _      \n"
+                + "  / ____|               (_)     \n"
+                + " | |  __ _ __ __ _ _ __  _  ___ \n"
+                + " | | |_ | '__/ _` | '_ \\| |/ _ \\ \n"
+                + " | |__| | | | (_| | |_) | |  __/ \n"
+                + "  \\_____|_|  \\__,_| .__/|_|\\___| \n"
+                + "                  | |           \n"
+                + "                  |_|           \n"
+
+
+                + "What do ya need from me?\n";
+
+        return intro;
     }
 
     public void setDuke(Duke d) {

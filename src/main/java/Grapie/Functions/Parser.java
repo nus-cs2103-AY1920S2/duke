@@ -1,6 +1,7 @@
-package Grapie;
+package Grapie.Functions;
 
 
+import Grapie.Commands.CommandTypes;
 import Grapie.Exceptions.ErrorMsg;
 import Grapie.Exceptions.GrapieExceptions;
 
@@ -33,11 +34,11 @@ public class Parser {
      * @param command The user's input.
      * @return Returns a string stating if its a list, done, delete, or add (todo, event, deadline) command.
      */
-    public String makeSenseOfUserCommand(String command) throws GrapieExceptions {
+    public CommandTypes.Commands parseCommand(String command) throws GrapieExceptions {
         command = command.trim();
 
         if (command.equals("list")) {
-            return Ui.LIST;
+            return CommandTypes.Commands.LIST;
         } else {
             //ADD, DONE, DELETE,
             if (command.length() >= 4 && command.substring(0, 4).equals("done")) {
@@ -51,7 +52,7 @@ public class Parser {
                     boolean isANumber = isNumber(strNumberDone);
 
                     if (isANumber) {
-                        return Ui.DONE;
+                        return CommandTypes.Commands.DONE;
                     } else {
                         throw new GrapieExceptions(ErrorMsg.invalidNumberError);
                     }
@@ -60,7 +61,7 @@ public class Parser {
                 if (command.length() <= 5) {
                     throw new GrapieExceptions(ErrorMsg.emptyKeywordError);
                 } else {
-                    return Ui.FIND;
+                    return CommandTypes.Commands.FIND;
                 }
             } else if (command.length() >= 6 && command.substring(0, 6).equals("delete")) {
                 if (command.length() <= 7) {
@@ -74,14 +75,14 @@ public class Parser {
 
                         boolean isANumber = isNumber(strNumberDeleted);
                         if (isANumber) {
-                            return Ui.DELETE;
+                            return CommandTypes.Commands.DELETE;
                         } else {
                             throw new GrapieExceptions(ErrorMsg.invalidNumberError);
                         }
                     }
                 }
             } else {
-                return Ui.ADD;
+                return CommandTypes.Commands.ADD;
             }
         }
     }

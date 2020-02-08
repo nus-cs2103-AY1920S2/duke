@@ -1,10 +1,15 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import Grapie.Commands.CommandTypes;
 import Grapie.Exceptions.GrapieExceptions;
-import Grapie.Storage;
-import Grapie.TaskList;
-import Grapie.Ui;
+import Grapie.Functions.Parser;
+import Grapie.Functions.Storage;
+import Grapie.Commands.TaskList;
+import Grapie.Functions.Ui;
 
+import Grapie.Tasks.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -18,6 +23,9 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
+
+    private List<Task> storingList;
 
     //Layout
     private ScrollPane scrollPane;
@@ -32,14 +40,17 @@ public class Duke {
     /**
      * Main constructor for Duke.
      *
-     * @throws IOException Throws away the exception.
+     * @throws IOException      Throws away the exception.
      * @throws GrapieExceptions Throws Grapie.Exceptions.GrapieExceptions.
      */
     public Duke() throws IOException, GrapieExceptions {
         String filePath = "data/dukeStorage.txt";
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.load(), storage);
+        storingList = new ArrayList<Task>();
+        storage = new Storage(filePath, storingList);
+        storage.load();
+        tasks = new TaskList(storingList, storage);
         ui = new Ui();
+        parser = new Parser();
     }
 
     /**
@@ -47,48 +58,50 @@ public class Duke {
      *
      * @throws IOException Throws away exception.
      */
-    public String runDuke(String input) throws IOException, GrapieExceptions {
-        //loop
-        if (!input.equals("bye")) { //check for ending input
-            String result = ui.readCommand(input, tasks);
-            return result;
-            //nextStr = sc.nextLine();
-        } else {
-            return sayonara();
+    public String runDuke(String command) throws IOException, GrapieExceptions {
+        try {
+            CommandTypes.Commands typeResult = parser.parseCommand(command);
+
+            String result;
+
+            switch (typeResult) {
+                case LIST:
+                    String list = tasks.listTheList();
+                    return list;
+
+                case DONE:
+                    result = tasks.completeTask(command);
+                    return result;
+
+                case ADD:
+                    result = tasks.addToList(command);
+                    return result;
+
+                case DELETE:
+                    result = tasks.deleteTask(command);
+                    return result;
+
+                case FIND:
+                    result = tasks.findFromList(command);
+                    return result;
+
+                default:
+                    System.out.println("ERRORRR");
+                    break;
+            }
+
+        } catch (GrapieExceptions grapieExceptions) {
+            return grapieExceptions.toString();
         }
-    }
 
 
-    /**
-     * Greet the user.
-     */
-    public String greetings() {
-        String intro = "Hello! I'm Grapie! \n"
-                + "   _____                 _      \n"
-                + "  / ____|               (_)     \n"
-                + " | |  __ _ __ __ _ _ __  _  ___ \n"
-                + " | | |_ | '__/ _` | '_ \\| |/ _ \\ \n"
-                + " | |__| | | | (_| | |_) | |  __/ \n"
-                + "  \\_____|_|  \\__,_| .__/|_|\\___| \n"
-                + "                  | |           \n"
-                + "                  |_|           \n"
-
-
-                + "What do ya need from me?\n";
-
-        return intro;
-    }
-
-    /**
-     * Returns goodbye to the user.
-     */
-    public String sayonara() {
-        return "Okie!! Goodbye!";
+        return "OOPS!!! I do not understand you :(";
     }
 
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -108,10 +121,13 @@ public class Duke {
         //input is the user input
         String result = "";
         if (!input.equals("bye")) { //check for ending input
-            result = ui.readCommand(input, tasks);
-            //nextStr = sc.nextLine();
+            try {
+                result = runDuke(input);
+            } catch (GrapieExceptions grapieExceptions) {
+                return grapieExceptions.toString();
+            }
         } else {
-            result = sayonara();
+            result = ui.sayonara();
         }
 
         return result;

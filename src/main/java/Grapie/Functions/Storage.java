@@ -1,6 +1,10 @@
-package Grapie;
+package Grapie.Functions;
 
 import Grapie.Exceptions.GrapieExceptions;
+import Grapie.Tasks.Deadline;
+import Grapie.Tasks.Event;
+import Grapie.Tasks.Task;
+import Grapie.Tasks.Todo;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,29 +17,30 @@ import java.util.Scanner;
 
 public class Storage {
     private String filePath;
+    List<Task> storingList;
 
     /**
-     * Constructor for Grapie.Storage class.
+     * Constructor for Grapie.Functions.Storage class.
      *
      * @param filePath The filepath to get the Hard Disk data from.
      * @throws IOException Throws exception.
      */
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath, List<Task> storingList) throws IOException {
         // deals with loading tasks from the file and saving tasks in the dukeStorage.txt file.
         this.filePath = filePath;
         File file = new File(filePath);
         file.createNewFile();
+        this.storingList = storingList;
     }
 
     /**
-     * Load hard disk information into an ArrayList for Grapie.TaskList class to use.
+     * Load hard disk information into an ArrayList for Grapie.Command.TaskList class to use.
      *
-     * @return Returns an ArrayList of Grapie.Task, loaded from the Hard Disk.
+     * @return Returns an ArrayList of Grapie.Tasks.Task, loaded from the Hard Disk.
      * @throws FileNotFoundException Throws exception.
      * @throws GrapieExceptions Throws exception.
      */
     public List<Task> load() throws FileNotFoundException, GrapieExceptions {
-        List<Task> storingList = new ArrayList<>();
 
         File myObj = new File(filePath);
         Scanner myReader = new Scanner(myObj);
@@ -91,11 +96,11 @@ public class Storage {
      * Convert task into correct format, and store in dukeStorage.txt file.
      *
      * @param task The task to be converted into the new format.
-     * @param type Grapie.Todo, Grapie.Event or Grapie.Deadline.
+     * @param type Grapie.Tasks.Todo, Grapie.Tasks.Event or Grapie.Tasks.Deadline.
      * @param time The date and time for the Tasks.
      * @throws IOException Throws exception.
      */
-    public void convertToHardDiskFormatAndStore(Task task, String type, String time) throws IOException {
+    public void convertAndStore(Task task, String type, String time) throws IOException {
         String doneOrNotDone = "";
         if (task.isDone) {
             doneOrNotDone += "O";
@@ -115,7 +120,6 @@ public class Storage {
         File file = new File(filePath);
         FileWriter fr = new FileWriter(file, true);
 
-        //System.out.println("size of list is: " + storingList.size());
         if (file.length() == 0) {
             fr.write(newDescription);
         } else {
@@ -177,18 +181,15 @@ public class Storage {
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
 
-            if (counter == lineNumber) {
-                counter++;
-            } else {
+            if (counter != lineNumber) {
                 if (!isFirstLineDone) {
                     newData += data;
                     isFirstLineDone = true;
                 } else {
                     newData += "\n" + data;
                 }
-
-                counter++;
             }
+            counter++;
         }
 
         FileOutputStream fileOut = new FileOutputStream(filePath);

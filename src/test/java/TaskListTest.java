@@ -1,6 +1,6 @@
-import Grapie.Storage;
-import Grapie.Task;
-import Grapie.TaskList;
+import Grapie.Functions.Storage;
+import Grapie.Tasks.Task;
+import Grapie.Commands.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

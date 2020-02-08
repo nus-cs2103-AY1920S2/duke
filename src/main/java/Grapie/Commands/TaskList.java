@@ -1,7 +1,13 @@
-package Grapie;
+package Grapie.Commands;
 
 import Grapie.Exceptions.ErrorMsg;
 import Grapie.Exceptions.GrapieExceptions;
+import Grapie.Functions.Storage;
+import Grapie.Functions.Ui;
+import Grapie.Tasks.Deadline;
+import Grapie.Tasks.Event;
+import Grapie.Tasks.Task;
+import Grapie.Tasks.Todo;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,29 +17,17 @@ public class TaskList {
     private Storage storage;
 
     /**
-     * Constructor for Grapie.TaskList.
+     * Constructor for Grapie.Command.TaskList.
      *
-     * @param load    the arrayList obtained from Grapie.Storage class's load method. Contains task from
+     * @param load    the arrayList obtained from Grapie.Functions.Storage class's load method. Contains task from
      *                hard disk.
-     * @param storage Grapie.Storage class previously created from Duke.
+     * @param storage Grapie.Functions.Storage class previously created from Duke.
      */
     public TaskList(List<Task> load, Storage storage) {
         //contains the task list e.g., it has operations to add/delete tasks in the list
+
         storingList = load;
         this.storage = storage;
-    }
-
-    /**
-     * Format for printing the task added.
-     *
-     * @param task The task to be formatted.
-     */
-    public String printAddingTask(Task task) {
-        String printStr = "Alrighty. I've added this task: \n"
-                + task + "\n"
-                + "Now you have " + storingList.size() + " tasks in the list.";
-
-        return printStr;
     }
 
     /**
@@ -58,10 +52,10 @@ public class TaskList {
                 } else {
                     Task todo = new Todo(detailsStr);
                     storingList.add(todo);
-                    String result = printAddingTask(todo);
+                    String result = Ui.printAddingTask(todo, storingList.size());
 
                     //store into hard disk
-                    storage.convertToHardDiskFormatAndStore(todo, "T", "");
+                    storage.convertAndStore(todo, "T", "");
 
                     return result;
                 }
@@ -84,10 +78,10 @@ public class TaskList {
                     storingList.add(event);
 
                     //printing
-                    String result = printAddingTask(event);
+                    String result = Ui.printAddingTask(event, storingList.size());
 
                     //store into hard disk
-                    storage.convertToHardDiskFormatAndStore(event, "E", eventAndTime[1]);
+                    storage.convertAndStore(event, "E", eventAndTime[1]);
                     return result;
                 }
             } else {
@@ -107,10 +101,10 @@ public class TaskList {
                     storingList.add(deadline);
 
                     //print
-                    String result = printAddingTask(deadline);
+                    String result = Ui.printAddingTask(deadline, storingList.size());
 
                     //store into hard disk
-                    storage.convertToHardDiskFormatAndStore(deadline, "D", eventAndTime[1]);
+                    storage.convertAndStore(deadline, "D", eventAndTime[1]);
                     return result;
                 } else {
                     throw new GrapieExceptions(ErrorMsg.deadlineFormatError);
@@ -128,7 +122,7 @@ public class TaskList {
      * Help mark a task as completed (O).
      * Also checks if its a valid task number or if the task is already completed.
      *
-     * @param doneTaskStr Grapie.Task the user wants to be marked as complete.
+     * @param doneTaskStr Grapie.Tasks.Task the user wants to be marked as complete.
      * @throws GrapieExceptions Invalid task number, or already completed task thrown as error.
      * @throws IOException      Throws away the exception.
      */
@@ -138,6 +132,7 @@ public class TaskList {
         strNumberDone.replaceAll("\\s+", ""); //remove all white spaces
 
         int numDone = Integer.parseInt(strNumberDone); //convert to number
+
         if (storingList.size() >= numDone && numDone != 0) {
             if (storingList.get(numDone - 1).isDone) {
                 throw new GrapieExceptions(ErrorMsg.taskNumIsAlreadyDone(numDone));
@@ -183,7 +178,6 @@ public class TaskList {
             return toPrint;
         } else {
             throw new GrapieExceptions(ErrorMsg.numberDoNotExistError(numToDelete));
-
         }
 
 

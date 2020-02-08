@@ -1,13 +1,13 @@
-package Grapie;
+package Grapie.Tasks;
 
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    public String description;
+    public boolean isDone;
 
     /**
-     * Constructor for Grapie.Task class.
+     * Constructor for Grapie.Tasks.Task class.
      *
-     * @param description Description for Grapie.Task class.
+     * @param description Description for Grapie.Tasks.Task class.
      */
     public Task(String description) {
         this.description = description;
