@@ -16,14 +16,13 @@ public class ListCommand extends Command {
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.
      * @return A string with the message to be printed.
-     * @throws DukeException If the index is out of range (index < 1 || index > size()).
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.isEmpty()) {
-            return ui.showToUser("There are no tasks in the list.");
+            return Ui.MESSAGE_NO_TASK;
         } else {
-            return ui.showToUser("Here are the tasks in your list:", tasks.toString());
+            return ui.showToUser(Ui.MESSAGE_LIST, tasks.toString());
         }
     }
 }

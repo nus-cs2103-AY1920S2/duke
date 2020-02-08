@@ -1,11 +1,24 @@
 package duke.ui;
 
+import duke.TaskList;
+
 import java.util.Scanner;
 
 /**
  * Interacts with the user.
  */
 public class Ui {
+    public static final String INDENT = "  ";
+    public static final String MESSAGE_WELCOME = "Hello! I'm Duke. \nWhat can I do for you?";
+    public static final String MESSAGE_ADD = "Got it. I've added this task:";
+    public static final String MESSAGE_DONE = "Nice! I've marked this task as done: ";
+    public static final String MESSAGE_DELETE = "Noted. I've removed this task: ";
+    public static final String MESSAGE_FIND = "Here are the matching tasks in your list:";
+    public static final String MESSAGE_NO_MATCHING_TASK = "There are no matching tasks in your list.";
+    public static final String MESSAGE_LIST = "Here are the tasks in your list:";
+    public static final String MESSAGE_NO_TASK = "There are no tasks in the list.";
+    public static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
+
     private Scanner sc;
 
     /**
@@ -13,6 +26,15 @@ public class Ui {
      */
     public Ui() {
         sc = new Scanner(System.in);
+    }
+
+    /**
+     * Returns a string message with the number of tasks in the TaskList.
+     * @param tasks The TaskList of tasks.
+     * @return A string message with the number of tasks in the TaskList.
+     */
+    public static String getNumberOfTasksMessage(TaskList tasks) {
+        return "Now you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -29,7 +51,7 @@ public class Ui {
      * @return The welcome message when the duke application starts up.
      */
     public static String showWelcome() {
-        return "Hello! I'm Duke. \nWhat can I do for you?";
+        return MESSAGE_WELCOME;
     }
 
     /**
@@ -39,7 +61,7 @@ public class Ui {
      */
     public String showExit() {
         sc.close();
-        return "Bye. Hope to see you again soon!";
+        return MESSAGE_EXIT;
     }
 
     /**

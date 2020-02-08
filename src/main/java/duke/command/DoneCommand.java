@@ -36,6 +36,6 @@ public class DoneCommand extends Command {
         Task task = tasks.get(index);
         task.markAsDone();
         assert task.getStatusIcon().equals("Y"): "Task should be marked as done";
-        return ui.showToUser("Nice! I've marked this task as done: ", "  " + task);
+        return ui.showToUser(Ui.MESSAGE_DONE, Ui.INDENT + task);
     }
 }

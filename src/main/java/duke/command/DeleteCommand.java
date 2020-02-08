@@ -34,7 +34,6 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         assert index > 0 && index <= tasks.size(): "Index out of bounds";
         Task task = tasks.remove(index);
-        return ui.showToUser("Noted. I've removed this task: ", "  " + task,
-                "Now you have " + tasks.size() + " tasks in the list.");
+        return ui.showToUser(Ui.MESSAGE_DELETE, Ui.INDENT + task, Ui.getNumberOfTasksMessage(tasks));
     }
 }

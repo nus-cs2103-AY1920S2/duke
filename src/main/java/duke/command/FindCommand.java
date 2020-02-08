@@ -31,9 +31,9 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filteredTasks = tasks.find(keyword);
         if (filteredTasks.isEmpty()) {
-            return ui.showToUser("There are no matching tasks in your list.");
+            return Ui.MESSAGE_NO_MATCHING_TASK;
         } else {
-            return ui.showToUser("Here are the matching tasks in your list:", filteredTasks.toString());
+            return ui.showToUser(Ui.MESSAGE_FIND, filteredTasks.toString());
         }
     }
 }

@@ -76,7 +76,6 @@ public class AddCommand extends Command {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(task);
-        return ui.showToUser("Got it. I've added this task:", "  " + task,
-                "Now you have " + tasks.size() + " tasks in the list.");
+        return ui.showToUser(Ui.MESSAGE_ADD, Ui.INDENT + task, Ui.getNumberOfTasksMessage(tasks));
     }
 }
