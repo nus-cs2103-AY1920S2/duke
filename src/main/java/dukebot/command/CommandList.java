@@ -10,6 +10,7 @@ public enum CommandList {
     CONTACTS("contacts"),
     DEADLINE("deadline"),
     DELETE("delete"),
+    DELETE_CONTACT("delete_contact"),
     DONE("done"),
     EVENT("event"),
     FIND("find"),

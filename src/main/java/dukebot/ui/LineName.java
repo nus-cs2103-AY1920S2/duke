@@ -2,10 +2,11 @@ package dukebot.ui;
 
 /**
  * Name of lines to say with Ui.sayLine.
- * The first word is usually the command in which the command appears in.
- * The second is usually the context in which the line is called.
+ * The first words are usually the command in which the command appears in.
+ * The last part is usually the context in which the line is called.
  */
 public enum LineName {
+    ADD_CONTACT_EMPTY,
     ALIAS_ALREADY_EXISTS,
     ALIAS_COMMAND_FAIL,
     ALIAS_DOES_NOT_EXIST,

@@ -81,6 +81,13 @@ public class Ui {
         dukeExpression = DukeExpression.HAPPY;
         dukeVoice = DukeVoice.WHAT;
         switch (lineName) {
+        case ADD_CONTACT_EMPTY:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.HEY, DukeVoice.ACTUALLY);
+            dukeExpression = DukeExpression.BLUSH;
+            dukeSays("Duke doesn't understand the contact which Master wishes to add...");
+            dukeSays("To add a new contact, use:");
+            dukeSays("add_contact <name> number");
+            break;
         case ALIAS_ALREADY_EXISTS:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.HEY, DukeVoice.ACTUALLY);
             dukeExpression = DukeExpression.BLUSH;

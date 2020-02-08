@@ -26,7 +26,7 @@ public class AddContactCommand extends Command {
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
         ContactList contactList = appStorage.getContactList();
         if (inpArr.length <= 2) {
-            ui.sayLine(LineName.ERROR_PLACEHOLDER);
+            ui.sayLine(LineName.ADD_CONTACT_EMPTY);
             return;
         }
         if (!MiscUtils.isInteger(inpArr[2])) {
