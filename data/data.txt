@@ -1,2 +1,2 @@
 dukeClasses.ToDo|1|slap|1
-dukeClasses.Deadline|0|slapslap |2020-04-11|1
+dukeClasses.Deadline|1|slapslap |2020-04-11|1

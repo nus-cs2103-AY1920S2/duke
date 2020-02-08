@@ -65,7 +65,7 @@ public class TaskManager {
     public void setTaskAsDone(int index) {
 
         //To enable intellJ to run w assert go run > edit config > add the -ea under VM option
-        assert index > 0 : "index must be bigger than 0";
+        //assert index > 0 : "index must be bigger than 0";
 
         listOfTasks.get(index - 1).markAsDone();
         storage.saveExistingData(listOfTasks);
@@ -82,6 +82,7 @@ public class TaskManager {
     public void addTask(String textEntered) throws DukeException {
 
         Task newTask;
+        int currentNumberOfTasks = listOfTasks.size();
 
         if (textEntered.contains("todo")) { //Handles dukeClasses.Task that are dukeClasses.ToDos
 
@@ -124,6 +125,7 @@ public class TaskManager {
                 this.listOfTasks.add(newTask);
             }
         }
+        assert currentNumberOfTasks + 1 == listOfTasks.size() : "Task was not added properly";
         storage.saveExistingData(listOfTasks);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask.toString());
@@ -149,6 +151,7 @@ public class TaskManager {
      */
     public void deleteTask(int indexOfTaskToDelete) throws DukeException, IndexOutOfBoundsException {
 
+        int currentNumberOfTasks = listOfTasks.size();
         if (listOfTasks.size() == 0) {
             throw new DukeException("Nothing to delete because list is empty.");
         }
@@ -160,6 +163,7 @@ public class TaskManager {
             System.out.println("  " + listOfTasks.get(indexOfTaskToDelete).toString());
             System.out.println("Now you have " + (listOfTasks.size() - 1) + " tasks left in the list.");
             listOfTasks.remove(indexOfTaskToDelete);
+            assert currentNumberOfTasks - 1 == listOfTasks.size() : "Task not deleted properly";
             storage.saveExistingData(listOfTasks);
         }
     }

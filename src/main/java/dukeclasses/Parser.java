@@ -14,11 +14,17 @@ public class Parser {
      * @param textEntered user's input
      * @return indexOfTask done
      */
-    public int handleDoneCommands(String textEntered) {
-        assert textEntered.length() > 4 : "Must include a number after done.";
+    public int handleDoneCommands(String textEntered) throws DukeException {
+
         String[] temporary = textEntered.split(" ");
-        int indexOfTaskDone = Integer.parseInt(temporary[1]);
-        return indexOfTaskDone;
+        int indexOfTaskDone;
+        try {
+            indexOfTaskDone = Integer.parseInt(temporary[1]);
+            return indexOfTaskDone;
+        } catch (Exception ex) {
+            throw new DukeException("done must be followed by a number");
+        }
+
     }
 
     /**
@@ -45,5 +51,15 @@ public class Parser {
         return textEntered.split(" ");
     }
 
+
+
+    public int handleHighPriorityCommands(String textEntered)  {
+
+        String[] temporary = textEntered.split(" ");
+        int indexOfTaskDone = Integer.parseInt(temporary[1]);
+        return indexOfTaskDone;
+
+
+    }
 
 }

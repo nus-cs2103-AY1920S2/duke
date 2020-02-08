@@ -64,7 +64,13 @@ public class Ui {
             manager.listAllTasks();
         } else if (textEntered.contains("done")) {
             Parser parser = new Parser();
-            int indexOfTaskDone = parser.handleDoneCommands(textEntered);
+            int indexOfTaskDone = 0;
+            try {
+                indexOfTaskDone = parser.handleDoneCommands(textEntered);
+            } catch (DukeException ex) {
+                System.out.println("done must be followed by a number.");
+
+            }
             try {
                 manager.setTaskAsDone(indexOfTaskDone);
             } catch (ArrayIndexOutOfBoundsException ex) {
@@ -108,7 +114,7 @@ public class Ui {
             }
         } else if (textEntered.contains("highpriority")) {
             Parser parser = new Parser();
-            int indexOfTaskDone = parser.handleDoneCommands(textEntered);
+            int indexOfTaskDone = parser.handleHighPriorityCommands(textEntered);
             try {
                 manager.markTaskAsHighPriority(indexOfTaskDone);
             } catch (ArrayIndexOutOfBoundsException ex) {
