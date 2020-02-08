@@ -17,7 +17,8 @@ public class Duke {
             put("event", 2);
             put("todo", 3);
             put("deadline", 4);
-            put("invalid command", 5);
+            put("delete", 5);
+            put("invalid command", 6);
         }
     };
 
@@ -35,6 +36,8 @@ public class Duke {
                 return commandCodeMapping.get("list");
             } else if (firstCommandType.equals("done") && commandSplit.length == 2) {
                 return commandCodeMapping.get("mark done");
+            } else if (firstCommandType.equals("delete") && commandSplit.length == 2) {
+                return commandCodeMapping.get("delete");
             } else {
                 String taskType = command.split(" ", 2)[0];
                 if (taskType.equals("todo")) {
@@ -68,7 +71,12 @@ public class Duke {
             Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
             if (taskIndex < tasks.size()) {
                 tasks.get(taskIndex).markDone();
-                return;
+            }
+        } else if (commandCode == commandCodeMapping.get("delete")) {
+            Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
+            System.out.println("HIEU");
+            if (taskIndex < tasks.size()) {
+                tasks.remove(taskIndex.intValue());
             }
         } else if (commandCode == commandCodeMapping.get("todo")) {
             String todoContent = command.split(" ", 2)[1];
