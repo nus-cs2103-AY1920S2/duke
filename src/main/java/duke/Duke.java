@@ -87,7 +87,7 @@ public class Duke {
                 String input = ui.readInput();
                 handleUserInput(input);
             } catch (DukeNoSuchInputException e) {
-                hasTerminated = true;
+                setAsTerminated();
                 break;
             }
         }

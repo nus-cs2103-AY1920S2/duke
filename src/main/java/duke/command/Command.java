@@ -20,17 +20,20 @@ public class Command {
     private CommandMethod method;
 
     private static Pair<String,String[]> parseInput(String input) {
+        Pair<String,String[]> result;
         if (input.contains(" ")) {
             String[] parts = input.split(" ", 2);
             String name = parts[0];
             if (parts[1].contains(" ")) {
-                return Pair.of(name, parts[1].split(" "));
+                result = Pair.of(name, parts[1].split(" "));
             } else {
-                return Pair.of(name, new String[] {parts[1]});
+                result = Pair.of(name, new String[] {parts[1]});
             }
         } else {
-            return Pair.of(input, new String[0]);
+            result = Pair.of(input, new String[0]);
         }
+        assert result.getFirst() != null && result.getSecond() != null;
+        return result;
     }
 
     public static Command createCommand(String input) throws DukeException {
