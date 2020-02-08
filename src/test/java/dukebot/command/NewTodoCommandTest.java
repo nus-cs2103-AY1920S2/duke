@@ -1,6 +1,8 @@
 package dukebot.command;
 
+import dukebot.contactlist.ContactList;
 import dukebot.exception.DukeException;
+import dukebot.storage.AppStorage;
 import dukebot.storage.Storage;
 import dukebot.tasklist.TaskList;
 import dukebot.tasklist.Todo;
@@ -20,11 +22,12 @@ class NewTodoCommandTest {
     @Test
     void execute_inpArrNoTodoDescription_uiSayLineTodoEmpty() {
         TaskList taskListMock = mock(TaskList.class);
+        AppStorage appStorage = new AppStorage(taskListMock, mock(ContactList.class));
         Ui uiMock = mock(Ui.class);
         Storage storageMock = mock(Storage.class);
         NewTodoCommand newTodoCommand = new NewTodoCommand(new String[]{"todo"});
 
-        newTodoCommand.execute(taskListMock, uiMock, storageMock);
+        newTodoCommand.execute(appStorage, uiMock, storageMock);
 
         verify(uiMock).sayLine(LineName.TODO_EMPTY);
         verifyNoMoreInteractions(uiMock);
@@ -35,13 +38,14 @@ class NewTodoCommandTest {
     @Test
     void execute_TodoHasDescription_TodoAddedToTaskListStorageCalledUiCalled() throws Exception, DukeException {
         TaskList taskListMock = mock(TaskList.class);
+        AppStorage appStorage = new AppStorage(taskListMock, mock(ContactList.class));
         Ui uiMock = mock(Ui.class);
         Storage storageMock = mock(Storage.class);
 
         Todo testTodo = new Todo("test test2");
         NewTodoCommand newTodoCommand = new NewTodoCommand(new String[]{"todo", "test", "test2"});
 
-        newTodoCommand.execute(taskListMock, uiMock, storageMock);
+        newTodoCommand.execute(appStorage, uiMock, storageMock);
 
         PowerMockito.whenNew(Todo.class).withArguments("test test2").thenReturn(testTodo);
 

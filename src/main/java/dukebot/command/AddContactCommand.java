@@ -2,6 +2,7 @@ package dukebot.command;
 
 import dukebot.contactlist.ContactDetails;
 import dukebot.contactlist.ContactList;
+import dukebot.exception.DukeException;
 import dukebot.storage.AppStorage;
 import dukebot.storage.Storage;
 import dukebot.ui.LineName;
@@ -37,5 +38,11 @@ public class AddContactCommand extends Command {
         ContactDetails contactDetails = new ContactDetails(name, phoneNumber);
         contactList.add(contactDetails);
         ui.sayLineWithContact(LineNameWithContact.ADD_CONTACT_SUCCESS, contactDetails);
+
+        try {
+            storage.saveContactList(contactList);
+        } catch (DukeException e) {
+            ui.sayLine(e.getErrorLineName());
+        }
     }
 }

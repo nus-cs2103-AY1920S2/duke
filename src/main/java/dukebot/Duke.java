@@ -20,7 +20,6 @@ import java.util.HashMap;
 public class Duke {
     private final Storage storage;
     private final Ui ui;
-    private TaskList tasks;
     private final Parser parser;
     private AppStorage appStorage;
 
@@ -34,23 +33,25 @@ public class Duke {
         ui = new Ui(withGui);
 
         // Load Aliases
-        HashMap<String, String> loadedAliasMap = null;
+        Parser parserTemp;
         try {
-            loadedAliasMap = storage.loadAlias();
+            parserTemp = new Parser(storage.loadAlias());
         } catch (DukeException e) {
-            // Can ignore
-            // ui.sayLine(e.getErrorLineName());
+            // Can ignore the exception message
+            parserTemp = new Parser();
         }
-        if (loadedAliasMap == null) {
-            parser = new Parser();
-        } else {
-            parser = new Parser(loadedAliasMap);
-        }
+        parser = parserTemp;
 
         // Load Contacts
-        ContactList contactList = new ContactList(new ArrayList<>());
+        ContactList contactList;
+        try {
+            contactList = new ContactList(storage.loadContactArrayList());
+        } catch (DukeException e) {
+            // Can ignore the exception message
+            contactList = new ContactList(new ArrayList<>());
+        }
 
-        tasks = loadTaskList(ui, storage, withGui);
+        TaskList tasks = loadTaskList(ui, storage, withGui);
         appStorage = new AppStorage(tasks, contactList);
     }
 
@@ -58,6 +59,7 @@ public class Duke {
      * Loads the task list from storage.
      */
     private TaskList loadTaskList(Ui ui, Storage storage, Boolean withGui) {
+        TaskList tasks;
         try {
             ArrayList<Task> taskArrayList = storage.loadTaskArrayList();
             tasks = new TaskList(taskArrayList);

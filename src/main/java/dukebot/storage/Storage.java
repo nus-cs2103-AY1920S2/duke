@@ -1,6 +1,8 @@
 package dukebot.storage;
 
 import dukebot.command.CommandList;
+import dukebot.contactlist.ContactDetails;
+import dukebot.contactlist.ContactList;
 import dukebot.exception.DukeException;
 import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
@@ -23,6 +25,7 @@ public class Storage {
     private boolean saveAlreadyFailed = false;
     private String storageDirectory;
     private static final String TASK_LIST_FILEPATH = "/task-list.data";
+    private static final String CONTACT_LIST_FILEPATH = "/contact-list.data";
     private static final String ALIAS_FILEPATH = "/alias.data";
     // private static final String SMALL_TALK_FILEPATH = "/small-talk.data";
     // private static final String CONFIG_FILEPATH = "/config.data";
@@ -118,6 +121,60 @@ public class Storage {
             } catch (IOException | ClassNotFoundException e) {
                 // e.printStackTrace();
             }
+        }
+        throw new DukeException(LineName.LOAD_FAIL);
+    }
+
+    /**
+     * Saves contacts to drive.
+     *
+     * @param contactList The ContactList to save.
+     * @throws DukeException If save fails for the first time.
+     */
+    public void saveContactList(ContactList contactList) throws DukeException {
+        ArrayList<ContactDetails> contactDetails = contactList.getContactList();
+        if (!mkDataDir() && !saveAlreadyFailed) {
+            saveAlreadyFailed = true;
+            throw new DukeException(LineName.SAVE_FAIL);
+        }
+        try {
+            File file = new File(storageDirectory + CONTACT_LIST_FILEPATH);
+            FileOutputStream writeData = new FileOutputStream(file);
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+            ContactDetails[] contactArr = contactDetails.toArray(new ContactDetails[0]);
+            writeStream.writeObject(contactArr);
+            writeStream.flush();
+            writeStream.close();
+        } catch (IOException e) {
+            // e.printStackTrace();
+            if (!saveAlreadyFailed) {
+                saveAlreadyFailed = true;
+                throw new DukeException(LineName.SAVE_FAIL);
+            }
+        }
+    }
+
+    /**
+     * Loads contacts from drive.
+     *
+     * @return The saved ContactArrayList.
+     * @throws DukeException If no data is found.
+     */
+    public ArrayList<ContactDetails> loadContactArrayList() throws DukeException {
+        File file = new File(storageDirectory + CONTACT_LIST_FILEPATH);
+        if (!file.isFile()) {
+            throw new DukeException(LineName.LOAD_FAIL);
+        }
+
+        try {
+            FileInputStream readData = new FileInputStream(file);
+            ObjectInputStream readStream = new ObjectInputStream(readData);
+            Object obj = readStream.readObject();
+            if (obj instanceof ContactDetails[]) {
+                return new ArrayList<>(Arrays.asList((ContactDetails[]) obj));
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            // e.printStackTrace();
         }
         throw new DukeException(LineName.LOAD_FAIL);
     }
