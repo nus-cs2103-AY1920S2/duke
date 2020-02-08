@@ -26,13 +26,13 @@ public class Parser {
     /**
      * Creates a new command based on given input string.
      *
-     * @param fullCommand represents a user input command
+     * @param command represents a user input command
      * @return Optional instance of Command based on action to be performed
      * @throws DukeException when given input is not a valid command
      */
-    public static Optional<Command> parse(String fullCommand) throws DukeException {
+    public static Optional<Command> parse(String command) throws DukeException {
         Optional<Command> outputCommand;
-        fullCommand = fullCommand.trim();
+        String fullCommand = command.trim();
         String[] commandWords = fullCommand.split("\\s+");
         String firstCommandWord = commandWords[0];
         int numberOfCommandArguments = commandWords.length - 1;
