@@ -24,6 +24,15 @@ public class TaskDate implements Serializable {
     }
 
     /**
+     * Gets LocalDate.
+     *
+     * @return LocalDate.
+     */
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    /**
      * Gets date.
      *
      * @return date.
@@ -42,55 +51,80 @@ public class TaskDate implements Serializable {
     }
 
     private LocalDate generateLocalDate() {
-        String[] dateArr = this.dateString.split("/");
-        String day = dateArr[0];
-        String month = dateArr[1];
-        String year = dateArr[2].substring(0,4);
-        return LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day));
+        LocalDate temp = null;
+        try {
+            String[] dateArr = this.dateString.split("/");
+            String day = dateArr[0];
+            String month = dateArr[1];
+            String year = dateArr[2].substring(0, 4);
+            temp = LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("Check your format!");
+        } catch (NumberFormatException e) {
+            System.err.println("Use numbers, and check your format!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return temp;
     }
 
     private String generateDate() {
         String res = "";
-        Month month = this.localDate.getMonth();
-        String monthString = month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
-        res += String.valueOf(this.localDate.getDayOfMonth());
-        res += " ";
-        res += monthString;
-        res += " ";
-        res += String.valueOf(this.localDate.getYear());
-        return res;    }
+        try {
+            Month month = this.localDate.getMonth();
+            String monthString = month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+            res += String.valueOf(this.localDate.getDayOfMonth());
+            res += " ";
+            res += monthString;
+            res += " ";
+            res += String.valueOf(this.localDate.getYear());
+        } catch (NullPointerException e) {
+            System.err.println("Error in date.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 
     private String generateTime() {
-        int dateStringLen = this.dateString.length();
         String res = "";
-        String time24 = this.dateString.substring(dateStringLen - 4);
-        int timeInt = Integer.valueOf(time24);
-        String m = "am";
+        try {
+            int dateStringLen = this.dateString.length();
+            String time24 = this.dateString.substring(dateStringLen - 4);
+            int timeInt = Integer.valueOf(time24);
+            String m = "am";
 
-        int hour = Integer.valueOf(time24.substring(0,2));
-        if (timeInt >= 0 && timeInt <= 59) {
-            hour = 12;
-        } else if (timeInt >= 1200) {
-            if (timeInt <= 1259) {
+            int hour = Integer.valueOf(time24.substring(0,2));
+            if (timeInt >= 0 && timeInt <= 59) {
                 hour = 12;
-            } else {
-                hour -= 12;
+            } else if (timeInt >= 1200) {
+                if (timeInt <= 1259) {
+                    hour = 12;
+                } else {
+                    hour -= 12;
+                }
+                m = "pm";
             }
-            m = "pm";
-        }
-        String hourRes = String.valueOf(hour);
+            String hourRes = String.valueOf(hour);
 
-        String minutesRes = "";
-        int minutes = Integer.valueOf(time24.substring(2,4));
-        if (minutes < 10) {
-            minutesRes += "0";
-        }
-        minutesRes += String.valueOf(minutes);
+            String minutesRes = "";
+            int minutes = Integer.valueOf(time24.substring(2,4));
+            if (minutes < 10) {
+                minutesRes += "0";
+            }
+            minutesRes += String.valueOf(minutes);
 
-        res += hourRes;
-        res += ".";
-        res += minutesRes;
-        res += m;
+            res += hourRes;
+            res += ".";
+            res += minutesRes;
+            res += m;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("Check your format!");
+        } catch (NumberFormatException e) {
+            System.err.println("Use numbers, and check your format!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return res;
     }
 

@@ -47,12 +47,15 @@ public class TaskList implements Serializable {
      * @return task identified.
      */
     public Task getTaskFromString(String indexString) {
-        int index = Integer.valueOf(indexString) - 1;
+
         Task task = null;
         try {
+            int index = Integer.valueOf(indexString) - 1;
             task = this.lst.get(index);
         } catch (IndexOutOfBoundsException e) {
-            System.err.println(Ui.indent + "Task index out of range.");
+            System.err.println("Task index out of range.");
+        } catch (NumberFormatException e) {
+            System.err.println("Please input an integer.");
         }
         return task;
     }
@@ -63,7 +66,9 @@ public class TaskList implements Serializable {
      * @param task task to be added.
      */
     public void addTask(Task task) {
-        this.lst.add(task);
+        if (task != null) {
+            this.lst.add(task);
+        }
     }
 
     /**
@@ -72,14 +77,14 @@ public class TaskList implements Serializable {
      * @param indexString String index of task stored in TaskList.
      */
     public void doneTask(String indexString) {
-        int index = Integer.valueOf(indexString) - 1;
         try {
+            int index = Integer.valueOf(indexString) - 1;
             Task currTask = lst.get(index);
             currTask.setDone(true);
         } catch (NumberFormatException e) {
-            System.err.println(Ui.indent + "Please input an integer.");
+            System.err.println("Please input an integer.");
         } catch (IndexOutOfBoundsException e) {
-            System.err.println(Ui.indent + "Please try again, your number is out of range.");
+            System.err.println("Please try again, your number is out of range.");
         }
     }
 
@@ -89,14 +94,14 @@ public class TaskList implements Serializable {
      * @param indexString String index of task stored in TaskList.
      */
     public void deleteTask(String indexString) {
-        int index = Integer.valueOf(indexString) - 1;
         try {
+            int index = Integer.valueOf(indexString) - 1;
             Task currTask = lst.get(index);
             lst.remove(index);
         } catch (NumberFormatException e) {
-            System.err.println(Ui.indent + "Please input an integer.");
+            System.err.println("Please input an integer.");
         } catch (IndexOutOfBoundsException e) {
-            System.err.println(Ui.indent + "Please try again, your number is out of range.");
+            System.err.println("Please try again, your number is out of range.");
         }
     }
 

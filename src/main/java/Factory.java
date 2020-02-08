@@ -35,7 +35,12 @@ public class Factory {
      */
     public Task buildDeadlineFromCloud(String desc, String dateTimeStr) {
         TaskDate td = new TaskDate(dateTimeStr);
-        return new Deadline(desc, td);
+        if (td.getLocalDate() != null) {
+            return new Deadline(desc, td);
+        } else {
+            return null;
+        }
+
     }
 
     /**
@@ -49,7 +54,11 @@ public class Factory {
     public Task buildEventFromCloud(String desc, String dateTimeStr1, String dateTimeStr2) {
         TaskDate td = new TaskDate(dateTimeStr1);
         TaskDate td2 = new TaskDate(dateTimeStr2);
-        return new Event(desc, td, td2);
+        if (td.getLocalDate() != null && td2.getLocalDate() != null) {
+            return new Event(desc, td, td2);
+        } else {
+            return null;
+        }
     }
 
     /**
