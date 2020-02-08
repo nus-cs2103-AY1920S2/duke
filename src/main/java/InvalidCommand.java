@@ -2,6 +2,7 @@
  * Represents an invalid command.
  */
 public class InvalidCommand extends Command {
+
     /**
      * Calls the UI  to alert the user of an invalid command.
      *

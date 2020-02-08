@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
  * Enables task list data to be save dto or loaded from a file.
  */
 public class Storage {
+
     /**
      * Path specifying the location of the storage file.
      */

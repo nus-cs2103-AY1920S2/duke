@@ -2,6 +2,7 @@
  * Abstract class representing a command to be executed later.
  */
 public abstract class Command {
+
     /**
      * Describes whether the command is an exit command.
      */

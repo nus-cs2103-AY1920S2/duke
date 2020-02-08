@@ -2,6 +2,7 @@
  * Represents an improperly formatted command.
  */
 public class InvalidFormatCommand extends Command {
+
     /**
      * Calls the UI to alert the user that the format of the command is wrong.
      *

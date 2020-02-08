@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
  * Represents a Duke that is to be used on the GUI.
  */
 public class GuiDuke extends Duke {
+
     /**
      * Constructor for GuiDuke that takes in the path to the file that
      * contains the saved task list from previous sessions.

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
  * Represents a version of Duke to be used on the CLI side.
  */
 public class CliDuke extends Duke {
+
     /**
      * Constructor for CliDuke that takes in the path to the file that
      * contains the saved task list from previous sessions.

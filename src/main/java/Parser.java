@@ -3,6 +3,7 @@
  * returns the equivalent Command object.
  */
 public class Parser {
+
     /**
      * Returns a Command object based on the interpretation of the user-typed command.
      *

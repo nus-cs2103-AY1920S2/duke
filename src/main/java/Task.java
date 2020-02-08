@@ -3,6 +3,7 @@
  * an indicator for whether it is completed.
  */
 public class Task {
+
     /**
      * The description of the task.
      */

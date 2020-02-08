@@ -2,6 +2,10 @@
  * Represents a command to stop the chatbot, to be executed later.
  */
 public class ExitCommand extends Command {
+
+    /**
+     * Constructor for ExitCommand that marks the Command as an ExitCommand.
+     */
     public ExitCommand() {
         isExit = true;
     }
