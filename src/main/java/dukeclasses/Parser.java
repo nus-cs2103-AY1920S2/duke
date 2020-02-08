@@ -51,7 +51,12 @@ public class Parser {
         return textEntered.split(" ");
     }
 
-
+    /**
+     * Handles C-Priority addition.
+     *
+     * @param textEntered chooses which index of task to be set as high priority.
+     * @return index
+     */
 
     public int handleHighPriorityCommands(String textEntered)  {
 
