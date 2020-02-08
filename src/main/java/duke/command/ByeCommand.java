@@ -40,13 +40,12 @@ public class ByeCommand extends Command {
     public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
 
         try {
-            String ans = ui.printBye();
             taskList.getList().clear();
             assert (taskList.getList().isEmpty())
                     : "taskList should be empty by this point in ByeCommand";
             PauseTransition termination = new PauseTransition(Duration.seconds(0));
             termination.setOnFinished(event -> Platform.exit());
-            return ans;
+            return ui.printBye();
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }

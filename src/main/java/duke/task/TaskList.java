@@ -53,7 +53,7 @@ public class TaskList {
     // Delete the task from the list
     public void removeFromList(Task task) throws DukeException {
         try {
-            list.removeIf(x-> x.equals(task));
+            list.removeIf(x -> x.equals(task));
             //list.remove(task);
         } catch (NoSuchElementException e) {
             throw new DukeException("This task does not exist in the list :( ");

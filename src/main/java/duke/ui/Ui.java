@@ -18,11 +18,11 @@ public class Ui {
     /**
      * The Lines.
      */
-    private final String LINES = "        ________________________________________________________";
+    private static final String LINES = "        ________________________________________________________";
     /**
      * The Space.
      */
-    private final String SPACE = "        ";
+    private static final String SPACE = "        ";
 
     /**
      * Instantiates a new Ui.
@@ -58,7 +58,7 @@ public class Ui {
         throw new DukeException("You have entered an invalid number!");
     }
 
-    public String invalidAddTaskException() throws DukeException {
+    public String invalidAddTaskException() {
         return "You have entered a wrong AddTaskCommand";
     }
 
