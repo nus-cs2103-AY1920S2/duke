@@ -1,4 +1,4 @@
-/** Store temporary variables in runtime */
+/** Store temporary variables in runtime. */
 public enum Cloud {
     TEMP,
     TEMPDESC,

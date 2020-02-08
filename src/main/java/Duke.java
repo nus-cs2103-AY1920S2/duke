@@ -90,7 +90,7 @@ public class Duke {
                     break;
                 case DONE:
                     this.globalCommand = Command.DONE;
-                    res = "Enter the task number you want to mark as done.\n" + uiV2.sendList(lst) ;
+                    res = "Enter the task number you want to mark as done.\n" + uiV2.sendList(lst);
                     break;
                 case DELETE:
                     this.globalCommand = Command.DELETE;
@@ -99,7 +99,7 @@ public class Duke {
                 default:
                     throw new DukeException("Invalid Input");
                 }
-            } else if (currCommand == Command.ADD){
+            } else if (currCommand == Command.ADD) {
                 if (hm.get(Cloud.TEMP).equals("todo")) {
                     Task task = factory.buildTodoFromCloud(getInput);
                     lst.addTask(task);
@@ -116,7 +116,7 @@ public class Duke {
                     this.setGlobalCommand(Command.CREATEEVENT1);
                 }
 
-            } else if (currCommand == Command.CREATEDEADLINE1){
+            } else if (currCommand == Command.CREATEDEADLINE1) {
                 Task task = factory.buildDeadlineFromCloud(hm.get(Cloud.TEMPDESC), getInput);
                 lst.addTask(task);
                 res = uiV2.sendAddTask(task, lst.getSize());
@@ -125,12 +125,12 @@ public class Duke {
 
                 hm.put(Cloud.TEMPDESC, "");
 
-            } else if (currCommand == Command.CREATEEVENT1){
+            } else if (currCommand == Command.CREATEEVENT1) {
                 hm.put(Cloud.TEMPTD1, getInput);
                 res = "When does the event end? \nFormat: {dd/mm/yyyy hhmm}";
                 this.setGlobalCommand(Command.CREATEEVENT2);
 
-            } else if (currCommand == Command.CREATEEVENT2){
+            } else if (currCommand == Command.CREATEEVENT2) {
                 Task task = factory.buildEventFromCloud(hm.get(Cloud.TEMPDESC), hm.get(Cloud.TEMPTD1), getInput);
                 lst.addTask(task);
                 res = uiV2.sendAddTask(task, lst.getSize());
