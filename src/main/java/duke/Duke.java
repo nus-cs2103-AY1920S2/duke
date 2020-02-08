@@ -49,7 +49,7 @@ public class Duke {
                     e.printStackTrace();
                 }
             }
-            handler.executeCmd(ui.getInput());
+            handler.handleCommand(ui.getInput());
         }
 
         // Save to disk
@@ -61,7 +61,7 @@ public class Duke {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
-        
+
         ui.shutDown();
     }
 

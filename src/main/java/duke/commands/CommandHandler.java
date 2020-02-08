@@ -2,6 +2,8 @@ package duke.commands;
 
 import java.util.HashMap;
 
+import javafx.util.Pair;
+
 import duke.ui.Ui;
 import duke.tasks.TaskList;
 import duke.storage.Storage;
@@ -42,41 +44,48 @@ public class CommandHandler {
     /**
      * Parses the user string into a Command and executes it.
      *
-     * @param cmd User-entered string to be parsed.
+     * @param command User-entered string to be parsed.
      */
-    public void executeCmd(String cmd) {
-        String cmdWord;
-        String arg;
-
+    public void handleCommand(String command) {
         // Check if command is bye
-        if (cmd.equalsIgnoreCase("bye")) {
+        if (command.equalsIgnoreCase("bye")) {
             isActive = false;
             return;
         }
 
-        // Parse other types of commands
-        int spaceIndex = cmd.indexOf(" ");
-        if (spaceIndex == -1) {
-            // No spaces found, so must be single-word command
-            cmdWord = cmd.toLowerCase();
-            arg = "";
-        } else {
-            // Get first word from the cmd string
-            cmdWord = cmd.substring(0, spaceIndex).toLowerCase();
-            arg = cmd.substring(spaceIndex + 1);
-        }
+        // Extract out command word and arguments
+        Pair<String, String> commandAndArg = getCommandAndArg(command);
+        String commandWord = commandAndArg.getKey();
+        String arg = commandAndArg.getValue();
 
-        // Execute parsed command
-        try {
-            commands.get(cmdWord).execute(arg, tasks, ui, storage);
-        } catch (NullPointerException e) {
-            ui.showError("Command " + cmdWord + " does not exist!");
-        } catch (DukeException e) {
-            ui.showError(e.getMessage());
-        }
+        // Execute command
+        executeCommand(commandWord, arg);
     }
 
     public boolean isActive() {
         return isActive;
+    }
+
+    private Pair<String, String> getCommandAndArg(String str) {
+        int spaceIndex = str.indexOf(" ");
+        if (spaceIndex == -1) {
+            // No spaces found, so must be single-word command
+            return new Pair<String, String>(str.toLowerCase(), "");
+        } else {
+            // Split string into command word and arguments
+            String commandWord = str.substring(0, spaceIndex).toLowerCase();
+            String arg = str.substring(spaceIndex + 1);
+            return new Pair<String, String>(commandWord, arg);
+        }
+    }
+
+    private void executeCommand(String commandWord, String arg) {
+        try {
+            commands.get(commandWord).execute(arg, tasks, ui, storage);
+        } catch (NullPointerException e) {
+            ui.showError("Command " + commandWord + " does not exist!");
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
     }
 }
