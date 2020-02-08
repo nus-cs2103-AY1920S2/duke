@@ -20,14 +20,14 @@ public class EventCommandMethod implements CommandMethod {
         if (command.getArgumentList().length == 0) {
             throw new DukeNoArgumentsException(EventCommandMethod.NAME);
         }
-        String[] parts = command.getArgumentString().split(" /at ", 2);
-        if (parts.length != 2) {
+        String[] arguments = command.getArgumentString().split(" /at ", 2);
+        if (arguments.length != 2) {
             throw new DukeInvalidNumberOfArgumentsException(
-                    EventCommandMethod.NAME, 2, parts.length);
+                    EventCommandMethod.NAME, 2, arguments.length);
         }
-        String description = parts[0];
+        String description = arguments[0];
         try {
-            LocalDateTime at = LocalDateTime.parse(parts[1],
+            LocalDateTime at = LocalDateTime.parse(arguments[1],
                     EventTask.DATE_TIME_INPUT_FORMAT);
             EventTask newTask = new EventTask(description, at);
             String message = program.getTaskList().addTask(newTask);
@@ -35,7 +35,7 @@ public class EventCommandMethod implements CommandMethod {
             Storage storage = program.getStorage();
             storage.saveTaskList(program.getTaskList());
         } catch (DateTimeParseException e) {
-            throw new DukeInvalidDateTimeException(parts[1]);
+            throw new DukeInvalidDateTimeException(arguments[1]);
         }
     }
 }

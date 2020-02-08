@@ -1,6 +1,7 @@
 package duke.storage;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -27,7 +28,7 @@ public class Storage {
     private String filePath;
 
     public Storage() {
-        this.filePath = Storage.DEFAULT_FILE_PATH;
+        this(Storage.DEFAULT_FILE_PATH);
     }
 
     public Storage(String filePath) {
@@ -41,7 +42,7 @@ public class Storage {
     public TaskList loadTaskList() throws DukeException {
         TaskList tasks = new TaskList();
         try {
-            FileReader fr = new FileReader(filePath);
+            FileReader fr = new FileReader(getDataFile());
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
             while (line != null) {
@@ -60,6 +61,27 @@ public class Storage {
                 | DateTimeParseException e) {
             throw new DukeCorruptedFileException(filePath);
         }
+    }
+
+    public void saveTaskList(TaskList tasks) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(getDataFile());
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.getTask(i);
+                String line = task.toStringDelimited();
+                fw.write(line + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeWriteFileException(e);
+        }
+    }
+
+    private File getDataFile() throws IOException {
+        File f = new File(filePath);
+        f.getParentFile().mkdirs();
+        f.createNewFile();
+        return f;
     }
 
     private Task parseTask(String line)
@@ -92,19 +114,5 @@ public class Storage {
         }
         }
         return newTask;
-    }
-
-    public void saveTaskList(TaskList tasks) throws DukeException {
-        try {
-            FileWriter fw = new FileWriter(filePath);
-            for (int i = 0; i < tasks.size(); i++) {
-                Task task = tasks.getTask(i);
-                String line = task.toStringDelimited();
-                fw.write(line + "\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            throw new DukeWriteFileException(e);
-        }
     }
 }

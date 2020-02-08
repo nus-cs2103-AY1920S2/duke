@@ -13,7 +13,7 @@ public interface Ui {
             = String.format("Hello from \n%s", Ui.ASCII_LOGO);
     final String GOODBYE_MESSAGE = "Goodbye!";
 
-    void start();
+    void begin();
 
     String readInput() throws DukeNoSuchInputException;
 
@@ -21,5 +21,5 @@ public interface Ui {
 
     void printException(Exception e);
 
-    void exit();
+    void end();
 }
