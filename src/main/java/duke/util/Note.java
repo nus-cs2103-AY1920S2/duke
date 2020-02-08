@@ -1,6 +1,7 @@
 package duke.util;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /*
  * Note
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 public class Note {
     private String text;
     private LocalDateTime timestamp;
+    private static final String DATE_FORMAT = "dd-MM-yyyy HH:mm";
 
     /**
      * Constructs a Note instance.
@@ -31,5 +33,23 @@ public class Note {
     public Note(String text, LocalDateTime timestamp) {
         this.text = text;
         this.timestamp = timestamp;
+    }
+
+    /**
+     * Gets the text of the note.
+     * @return The note's content.
+     */
+
+    public String getText() {
+        return this.text;
+    }
+
+    /**
+     * Gets the date when the note is created.
+     * @return The String format of the timestamp.
+     */
+
+    public String getDate() {
+        return this.timestamp.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 }
