@@ -2,7 +2,10 @@ package duke.task;
 
 import duke.exception.DukeNoSuchTaskException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a TaskList.
@@ -75,14 +78,12 @@ public class TaskList {
      * @return the list of tasks that contains the keyword.
      */
     public String find(String keyword) {
+        List<Task> foundTasks =
+                tasks.parallelStream()
+                        .filter(task -> task.getDescription().contains(keyword))
+                        .collect(Collectors.toList());
         String output = "     Here are the matching tasks in your list:";
-        int counter = 1;
-        for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) {
-                output += "\n     " + counter + ". " + task;
-                counter++;
-            }
-        }
+        output += iterateTasks(foundTasks);
         return output;
     }
 
@@ -93,8 +94,51 @@ public class TaskList {
      */
     public String listTasks() {
         String output = "     Here are the tasks in your list:";
-        for (int i = 0; i < tasks.size(); i++) {
-            output += "\n     " + (i + 1) + ". " + tasks.get(i);
+        output += iterateTasks(tasks);
+        return output;
+    }
+
+    private String iterateTasks(List<? extends Task> listOfTasks) {
+        String output = "";
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            output += "\n     " + (i + 1) + ". " + listOfTasks.get(i);
+        }
+        return output;
+    }
+
+    /**
+     * Returns a list of overdue deadlines and a list of upcoming deadline.
+     *
+     * @return the reminder for deadlines.
+     */
+    public String getDeadlineReminder() {
+        List<Deadline> unDoneDeadlines =
+                tasks.parallelStream()
+                        .filter(task -> task instanceof Deadline)
+                        .filter(task -> !task.isDone)
+                        .map(task -> (Deadline) task)
+                        .collect(Collectors.toList());
+        List<Deadline> overdueDeadlines =
+                unDoneDeadlines.parallelStream()
+                        .filter(deadline -> deadline.by.compareTo(LocalDate.now()) < 0)
+                        .sorted()
+                        .collect(Collectors.toList());
+        List<Deadline> upcomingDeadlines =
+                unDoneDeadlines.parallelStream()
+                        .filter(deadline -> deadline.by.compareTo(LocalDate.now()) >= 0)
+                        .sorted()
+                        .collect(Collectors.toList());
+
+        String output = "";
+
+        if (!overdueDeadlines.isEmpty()) {
+            output += "     Here are your overdue deadlines:";
+            output += iterateTasks(overdueDeadlines);
+        }
+
+        if (!upcomingDeadlines.isEmpty()) {
+            output += "\n     Here are your upcoming deadlines:";
+            output += iterateTasks(upcomingDeadlines);
         }
         return output;
     }

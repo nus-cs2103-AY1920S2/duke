@@ -56,6 +56,7 @@ public class MainWindow extends AnchorPane {
         }
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         showWelcome();
+        showReminder();
     }
 
     /**
@@ -66,7 +67,7 @@ public class MainWindow extends AnchorPane {
         String output = horizontalLine;
         ExitCommand c = new ExitCommand();
         output += c.execute(taskList, ui, storage) + horizontalLine;
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(output, dukeImage));
+        getDukeDialog(output);
         pause.setOnFinished(event -> {
             Platform.exit();
         });
@@ -118,6 +119,19 @@ public class MainWindow extends AnchorPane {
                 + "|___/ \\__,_|_|\\_\\__|\n";
         String output = "Hello from\n" + logo + horizontalLine + "     Hello! I'm Duke\n     What can I do "
                 + "for you?" + horizontalLine;
+        getDukeDialog(output);
+    }
+
+    @FXML
+    private void showReminder() {
+        String reminder = taskList.getDeadlineReminder();
+        if (reminder.isBlank()) {
+            return;
+        }
+        getDukeDialog(horizontalLine + reminder + horizontalLine);
+    }
+
+    private void getDukeDialog(String output) {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(output, dukeImage));
     }
 
