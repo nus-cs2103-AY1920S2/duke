@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
      * @param storage Storage to save tasks in local storage
+     * @return reply to user the task has been deleted
      * @throws NoNumberDeleteException If task number to be deleted is not
      *                                 specified.
      * @throws UnableToSaveException   If unable to save to storage.
@@ -30,18 +31,16 @@ public class DeleteCommand extends Command {
             throws NoNumberDeleteException, NoSuchTaskException, UnableToSaveException {
         if (inputArr.length < 2) {
             throw new NoNumberDeleteException();
-        } else {
-            int taskToDelete = Integer.parseInt(inputArr[1]);
-            if (taskToDelete > tasks.size()) {
-                throw new NoSuchTaskException();
-            } else {
-                String whichTaskDelete = tasks.getTask(taskToDelete - 1).toString();
-                tasks.removeTask(taskToDelete - 1);
-                storage.saveToSave(tasks);
-                return ui.reply("Okcan. I will remove this task:\n" + Constant.SPACE + "  " + whichTaskDelete + "\n"
-                        + Constant.SPACE + "But you still have " + tasks.size() + " task(s) in the list.");
-            }
-        }
+        } 
+        int taskToDelete = Integer.parseInt(inputArr[1]);
+        if (taskToDelete > tasks.size()) {
+            throw new NoSuchTaskException();
+        } 
+        String whichTaskDelete = tasks.getTask(taskToDelete - 1).toString();
+        tasks.removeTask(taskToDelete - 1);
+        storage.saveToSave(tasks);
+        return ui.reply("Okcan. I will remove this task:\n" + Constant.SPACE + "  " + whichTaskDelete + "\n"
+                + Constant.SPACE + "But you still have " + tasks.size() + " task(s) in the list.");
     }
 
     @Override

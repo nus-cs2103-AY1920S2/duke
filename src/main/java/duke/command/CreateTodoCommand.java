@@ -22,13 +22,14 @@ public class CreateTodoCommand extends Command {
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
      * @param storage Storage to save tasks in local storage
+     * @return reply to user the todo has been created
      * @throws NoDescriptionException If no name for deadline is specified.
      * @throws UnableToSaveException  If unable to save to storage.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, UnableToSaveException {
-        int arrLength = inputArr.length;
         String saveReply = "Saving now....\n     ";
+        int arrLength = inputArr.length;
         String nameOfEvent = combineString(inputArr, 1, arrLength);
         if (nameOfEvent.equals("")) {
             throw new NoDescriptionException();

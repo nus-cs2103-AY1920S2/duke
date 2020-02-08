@@ -23,6 +23,7 @@ public class CreateEventCommand extends Command {
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
      * @param storage Storage to save tasks in local storage
+     * @return reply to user the event has been created
      * @throws NoDescriptionException If no name for deadline is specified.
      * @throws UnableToSaveException  If unable to save to storage.
      * @throws NoDateTimeException    If no date and time is specified.

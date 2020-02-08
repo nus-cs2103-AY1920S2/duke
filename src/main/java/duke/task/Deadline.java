@@ -38,13 +38,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String doneCheck = "[✓] ";
-        String notDoneCheck = "[✗] ";
-
         if (completed) {
-            return "[D]" + doneCheck + this.name + " (by: " + date.format(Constant.FORMATTER_OUTPUT_DATE) + ")";
+            return "[D]" + Constant.CHECK_DONE + this.name + " (by: " + date.format(Constant.FORMATTER_OUTPUT_DATE) + ")";
         } else {
-            return "[D]" + notDoneCheck + this.name + " (by: " + date.format(Constant.FORMATTER_OUTPUT_DATE) + ")";
+            return "[D]" + Constant.CHECK_NOTDONE + this.name + " (by: " + date.format(Constant.FORMATTER_OUTPUT_DATE) + ")";
         }
     }
 }
