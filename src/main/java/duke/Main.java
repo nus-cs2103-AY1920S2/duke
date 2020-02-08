@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -25,6 +26,9 @@ public class Main extends Application {
             stage.setTitle("Duke");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setOnCloseRequest((WindowEvent event) -> {
+                duke.getResponse("bye");
+            });
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

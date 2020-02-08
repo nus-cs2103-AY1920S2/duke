@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.Duke;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,12 +30,19 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialises the GUI to display the welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage));
     }
 
+    /**
+     * Sets the Duke object for the MainWindow.
+     * @param duke The Duke object to be set.
+     */
     public void setDuke(Duke duke) {
         this.duke = duke;
     }
@@ -52,7 +61,11 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (duke.isExit()) {
-            Platform.exit();
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(event -> {
+                Platform.exit();
+            });
+            pause.play();
         }
     }
 }

@@ -23,6 +23,7 @@ public class DoneCommand extends Command {
 
     /**
      * Marks the task at the specified index in the TaskList as done and returns an acknowledgement message.
+     *
      * @param tasks The TaskList where the task is to be marked as done.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.
@@ -31,8 +32,10 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert index > 0 && index <= tasks.size(): "Index out of bounds";
         Task task = tasks.get(index);
         task.markAsDone();
+        assert task.getStatusIcon().equals("Y"): "Task should be marked as done";
         return ui.showToUser("Nice! I've marked this task as done: ", "  " + task);
     }
 }

@@ -132,6 +132,7 @@ public class TaskList {
 
     /**
      * Returns a string representation of the TaskList.
+     *
      * @return A String representation of the TaskList.
      */
     @Override

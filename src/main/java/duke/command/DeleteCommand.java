@@ -23,6 +23,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes the task at the specified index in the TaskList and returns an acknowledgement message.
+     *
      * @param tasks The TaskList where the task is to be deleted.
      * @param ui The Ui that interacts with the user.
      * @param storage The Storage to load and save tasks into the data file.
@@ -31,6 +32,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert index > 0 && index <= tasks.size(): "Index out of bounds";
         Task task = tasks.remove(index);
         return ui.showToUser("Noted. I've removed this task: ", "  " + task,
                 "Now you have " + tasks.size() + " tasks in the list.");
