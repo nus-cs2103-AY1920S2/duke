@@ -31,9 +31,9 @@ public class ExitCommand extends Command {
         try {
             storage.saveTasksToStorage(tasks);
         } catch (DukeException e) {
-            return ui.showError(e.getMessage());
+            return ui.generateErrorMessage(e.getMessage());
         }
-        return ui.showExit();
+        return ui.generateExitMessage();
     }
 
 }

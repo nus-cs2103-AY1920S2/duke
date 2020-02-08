@@ -44,25 +44,26 @@ public class Storage {
             File f = new File(filePath);
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
-                String[] currentTask = s.nextLine().split(" \\| ");
-                Task temp = null;
-                switch (currentTask[0]) {
+                String[] taskDescription = s.nextLine().split(" \\| ");
+                Task currentTask = null;
+                switch (taskDescription[0]) {
                 case "T":
-                    temp = new ToDo(currentTask[2]);
+                    currentTask = new ToDo(taskDescription[2]);
                     break;
                 case "D":
-                    temp = new Deadline(currentTask[2], currentTask[3]);
+                    currentTask = new Deadline(taskDescription[2], taskDescription[3]);
                     break;
                 case "E":
-                    temp = new Event(currentTask[2], currentTask[3]);
+                    currentTask = new Event(taskDescription[2], taskDescription[3]);
                     break;
                 default:
                     break;
                 }
-                if (currentTask[1].equals("1")) {
-                    temp.markAsDone();
+
+                if (currentTask != null && taskDescription[1].equals("1")) {
+                    currentTask.markAsDone();
                 }
-                list.add(temp);
+                list.add(currentTask);
             }
             s.close();
         } catch (FileNotFoundException e) {

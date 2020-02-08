@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
 
-    protected LocalDate by;
+    protected LocalDate byDate;
     protected LocalTime byTime;
 
     /**
@@ -25,10 +25,11 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
-            String[] temp = by.split(" ");
-            this.by = LocalDate.parse(temp[0]);
-            if (temp.length == 2) {
-                this.byTime = LocalTime.parse(temp[1]);
+            String[] dateAndTime = by.split(" ");
+            this.byDate = LocalDate.parse(dateAndTime[0]);
+            //time is optional
+            if (dateAndTime.length == 2) {
+                this.byTime = LocalTime.parse(dateAndTime[1]);
             } else {
                 this.byTime = null;
             }
@@ -44,8 +45,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toSaveName() {
-        return "D" + super.toSaveName() + " | " + this.by
-                + (byTime != null ? " " + byTime : "") + "\n";
+        String time = (byTime != null ? " " + byTime : "");
+        return "D" + super.toSaveName() + " | " + this.byDate + time + "\n";
     }
 
     /**
@@ -56,7 +57,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[MMM d yyyy][h:mma]");
-        return "[D]" + super.toString() + " (by: " +  by.format(formatter)
-                + (byTime != null ? " " + byTime.format(formatter) : "") + ")";
+        String time = (byTime != null ? " " + byTime.format(formatter) : "");
+        return "[D]" + super.toString() + " (by: " + byDate.format(formatter) + time + ")";
     }
 }

@@ -55,7 +55,7 @@ public class DialogBox extends HBox {
     /**
      * Sets the style of dialog box of duke to be different from user's.
      */
-    private void setColourOfDuke() {
+    private void setStyleOfDuke() {
         dialog.setStyle("-fx-background-color: #FFC5A1; -fx-padding: 8;");
     }
 
@@ -80,7 +80,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setColourOfDuke();
+        db.setStyleOfDuke();
         return db;
     }
 }

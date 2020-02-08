@@ -41,7 +41,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
-        String[] taskDate;
+        String[] taskAndDate;
         String[] details;
         String output = "OOPS!!! Something went wrong.";
         switch (type) {
@@ -49,29 +49,31 @@ public class AddCommand extends Command {
             task = new ToDo(description);
             tasks.addTask(task);
             details = new String[] {" " + task.toString(), "" + tasks.getSize()};
-            output = ui.showAddMessages(details);
+            output = ui.generateAddMessage(details);
             break;
         case "deadline":
-            taskDate = description.split(" /by ");
-            if (taskDate.length == 1 || taskDate[0].trim().equals("")
-                    || taskDate[1].trim().equals("")) {
+            taskAndDate = description.split(" /by ");
+            boolean isEmptyDescription = taskAndDate[0].trim().equals("");
+            boolean isEmptyDate = taskAndDate.length == 1 || taskAndDate[1].trim().equals("");
+            if (isEmptyDescription || isEmptyDate) {
                 throw new DukeException("OOPS!!! The description or by of a deadline cannot be empty.");
             }
-            task = new Deadline(taskDate[0], taskDate[1]);
+            task = new Deadline(taskAndDate[0].trim(), taskAndDate[1].trim());
             tasks.addTask(task);
             details = new String[] {" " + task.toString(), "" + tasks.getSize()};
-            output = ui.showAddMessages(details);
+            output = ui.generateAddMessage(details);
             break;
         case "event":
-            taskDate = description.split(" /at ");
-            if (taskDate.length == 1 || taskDate[0].trim().equals("")
-                    || taskDate[1].trim().equals("")) {
+            taskAndDate = description.split(" /at ");
+            isEmptyDescription = taskAndDate[0].trim().equals("");
+            isEmptyDate = taskAndDate.length == 1 || taskAndDate[1].trim().equals("");
+            if (isEmptyDescription || isEmptyDate) {
                 throw new DukeException("OOPS!!! The description or at of an event cannot be empty.");
             }
-            task = new Event(taskDate[0], taskDate[1]);
+            task = new Event(taskAndDate[0].trim(), taskAndDate[1].trim());
             tasks.addTask(task);
             details = new String[] {" " + task.toString(), "" + tasks.getSize()};
-            output = ui.showAddMessages(details);
+            output = ui.generateAddMessage(details);
             break;
         default:
             break;
