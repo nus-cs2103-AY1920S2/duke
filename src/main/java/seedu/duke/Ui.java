@@ -21,11 +21,11 @@ public class Ui {
         System.out.println("Loading error. Try again!");
     }
 
-    protected void print(String str) {
+    public void print(String str) {
         System.out.println(str);
     }
 
-    protected void sayBye() {
+    public void sayBye() {
         System.out.println("Stop procrastinating. See you!");
     }
 
@@ -41,7 +41,7 @@ public class Ui {
         System.out.println("Okay, I have removed this task for you:");
     }
 
-    protected void printAddToList() {
+    public void printAddToList() {
         System.out.println("Gotcha. Added this to your list:");
     }
 
@@ -62,7 +62,7 @@ public class Ui {
      *
      * @param tasks The current list of tasks.
      */
-    protected void printNumTask(List<Task> tasks) {
+    public void printNumTask(List<Task> tasks) {
         String taskWord;
         if (tasks.size() <= 1) {
             taskWord = "task";

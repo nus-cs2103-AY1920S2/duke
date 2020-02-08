@@ -170,7 +170,7 @@ public class Storage {
      * @param task The task that user inputs which needs to be saved into the hard disk.
      * @throws IOException If an input or output exception occurred.
      */
-    protected void addToStorage(Task task) throws IOException {
+    public void addToStorage(Task task) throws IOException {
         File file = new File(path);
         FileWriter fw = new FileWriter(file, true);
         BufferedWriter bw = new BufferedWriter(fw);

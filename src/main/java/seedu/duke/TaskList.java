@@ -32,9 +32,14 @@ public class TaskList {
         ui = new Ui();
     }
 
-    protected List<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
+
+    public void addTasks(Task task) {
+        tasks.add(task);
+    }
+
     /**
      * Adds the user input of todo task into the task list.
      *
@@ -146,7 +151,7 @@ public class TaskList {
         return true;
     }
 
-    protected void printList() {
+    public void printList() {
         ui.printList(tasks);
     }
 
@@ -157,7 +162,7 @@ public class TaskList {
      * @param index The index number of the task that is marked as done.
      * @throws IOException If an input or output exception occurred.
      */
-    protected void markTaskAsDone(int index) throws IOException {
+    public void markTaskAsDone(int index) throws IOException {
         Task task = tasks.get(index - 1);
         task.markAsDone();
         assert task.isDone();
@@ -172,7 +177,7 @@ public class TaskList {
      * @param index The index number of the task that is being deleted.
      * @throws IOException If an input or output exception occurred.
      */
-    protected void deleteTask(int index) throws IOException {
+    public void deleteTask(int index) throws IOException {
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
         ui.printRemoveTask();
@@ -186,7 +191,7 @@ public class TaskList {
      *
      * @param desc A substring of a task that user wants to find.
      */
-    protected void findTask(String desc) {
+    public void findTask(String desc) {
         List<Task> foundTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDescription().contains(desc)) {

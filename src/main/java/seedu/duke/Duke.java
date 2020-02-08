@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -33,17 +35,25 @@ public class Duke {
     /**
      * Reads the user command and passes it to Ui to be processed accordingly.
      */
-    private void runDuke() {
+    private void runDuke() throws InvalidCommandException, EmptyDescriptionException,
+            InvalidTaskInputException, TaskIndexOutOfBoundsException, InvalidDateException, IOException {
         ui.greet();
         Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String input = sc.nextLine();
-            String[] inputs = input.split(" ", 2);
-            parser.handleCommands(inputs, taskList);
-            if (!parser.hasNextCommand()) {
-                ui.sayBye();
-                break;
+            Command cmd = null;
+            try {
+                String input = sc.nextLine();
+                String[] inputs = input.split(" ", 2);
+                cmd = parser.handleCommands(inputs, taskList);
+                if (!cmd.hasNextCommand()) {
+                    break;
+                }
+                cmd.execute(taskList, ui, storage);
+            } catch (DukeException e) {
+                ui.print(e.toString());
+            } catch (NullPointerException e) {
+
             }
         }
     }
@@ -51,7 +61,8 @@ public class Duke {
     /**
      * Main method to run Duke.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InvalidCommandException, EmptyDescriptionException,
+            InvalidTaskInputException, TaskIndexOutOfBoundsException, InvalidDateException {
         Duke duke;
         duke = new Duke();
         duke.runDuke();
@@ -61,7 +72,7 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    protected String getResponse(String input) {
+    protected String getResponse(String input) throws InvalidCommandException {
 //            if (!parser.hasNextCommand()) {
 //                break;
 //            }
