@@ -1,6 +1,8 @@
 package TestUtils;
 
-public class DeadlineTaskStub {
+import model.DeadLineTask;
+
+public class DeadlineTaskStub extends DeadLineTask {
     private static final String DEFAULT_DESCRIPTION = "form a project group";
     private static final String DEFAULT_DEADLINE = "week 3 tutorial";
 
@@ -13,13 +15,23 @@ public class DeadlineTaskStub {
         by = DEFAULT_DEADLINE;
     }
 
-    public DeadlineTaskStub setDescription(String description) {
+    public DeadlineTaskStub withDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public DeadlineTaskStub setTime(String by) {
+    public DeadlineTaskStub withTime(String by) {
         this.by = by;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return description + " by " + by;
+    }
+
+    @Override
+    public void markAsDone() {
+        this.isDone = true;
     }
 }

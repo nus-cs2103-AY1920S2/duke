@@ -1,6 +1,8 @@
 package TestUtils;
 
-public class EventTaskStub {
+import model.EventTask;
+
+public class EventTaskStub extends EventTask {
     private static final String DEFAULT_DESCRIPTION = "cs2103 lecture";
     private static final String DEFAULT_TIME = "week 3 tutorial";
 
@@ -11,15 +13,26 @@ public class EventTaskStub {
     public EventTaskStub() {
         description = DEFAULT_DESCRIPTION;
         at = DEFAULT_TIME;
+        isDone = false;
     }
 
-    public EventTaskStub setDescription(String description) {
+    public EventTaskStub withDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public EventTaskStub setTime(String at) {
-        this.at = at;
+    public EventTaskStub withTime(String time) {
+        this.at = time;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return description + " at " + at;
+    }
+
+    @Override
+    public void markAsDone() {
+        this.isDone = true;
     }
 }
