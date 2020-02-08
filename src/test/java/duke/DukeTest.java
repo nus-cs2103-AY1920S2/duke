@@ -1,13 +1,9 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.Arguments;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -18,8 +14,6 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.format.DateTimeFormatter;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,27 +28,9 @@ class DukeTest {
     private String horizontalBar =
             "____________________________________________________________";
     private String horizontalDivider = indentation + horizontalBar + newline;
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-    private String taskDoneIcon = "\u2713"; // Check mark icon
-    private String taskNotDoneIcon = "\u2718"; // Cross icon
     private String exceptionIcon = "\u2639"; // Sad face icon
     private Duke duke;
-    private PrintStream console = System.out;
     private ByteArrayOutputStream output;
-
-    private static Stream<Arguments> generateOneTodoTask() {
-        return Stream.of(Arguments.of(new Todo("read book", false)));
-    }
-
-    private static Stream<Arguments> generateOneDeadlineTask() {
-        return Stream.of(Arguments.of(
-                new Deadline("return book", "2020-12-03")));
-    }
-
-    private static Stream<Arguments> generateOneEventTask() {
-        return Stream.of(Arguments.of(
-                new Event("project meeting", "2020-01-25")));
-    }
 
     void deleteSaveFile() {
         try {
