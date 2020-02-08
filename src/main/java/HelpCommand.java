@@ -7,7 +7,9 @@ public class HelpCommand extends Command {
     @Override
     public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
         String helpCommands = "";
+        helpCommands += ui.getDecoration().trim() + "\n";
         helpCommands += "Command List \n";
+        helpCommands += ui.getDecoration().trim() + "\n";
         helpCommands += "1) todo [.....]: adds a todo task to task list [todo A].\n";
         helpCommands += "2) event [...] /at [....]: adds an event to task list [event X /at 21 Jan].\n";
         helpCommands += "3) deadline [...] /by [dd-MM-yyy HH:mm]: adds a deadline to task list.\n";
