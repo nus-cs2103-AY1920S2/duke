@@ -1,5 +1,7 @@
 package duke.util;
 
+import java.time.LocalDateTime;
+
 /*
  * Note
  *
@@ -19,13 +21,15 @@ package duke.util;
 
 public class Note {
     private String text;
+    private LocalDateTime timestamp;
 
     /**
      * Constructs a Note instance.
      * @param text The contain of the note.
      */
 
-    public Note(String text) {
+    public Note(String text, LocalDateTime timestamp) {
         this.text = text;
+        this.timestamp = timestamp;
     }
 }

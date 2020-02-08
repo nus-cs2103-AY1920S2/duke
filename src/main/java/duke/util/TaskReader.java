@@ -81,7 +81,7 @@ public class TaskReader implements IReader<Task> {
      * @throws DukeInvalidTaskFormatException If the task is not properly formatted.
      */
 
-    public Task parseTask(String line, int counter) throws DukeInvalidTaskFormatException,
+    private Task parseTask(String line, int counter) throws DukeInvalidTaskFormatException,
             DukeInvalidDateFormatException {
         String[] lineSplitted = line.split(" \\| ");
         try {
