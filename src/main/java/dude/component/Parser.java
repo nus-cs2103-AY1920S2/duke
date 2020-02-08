@@ -47,12 +47,12 @@ public class Parser {
      * @throws ParsingException if message is syntactically incorrect.
      */
     public static Command parse(String msg) throws ParsingException {
-        msg = msg.strip();
+        String[] cmdAndBody = msg.strip().split(WHITESPACE, 2);
+        Command command;
 
-        Command command = parseSingleWordCommand(msg);
-
-        if (command == null) {
-            String[] cmdAndBody = msg.split(WHITESPACE, 2);
+        if (cmdAndBody.length == 1) {
+            command = parseSingleWordCommand(cmdAndBody[0]);
+        } else {
             try {
                 command = parseCommandWithArguments(cmdAndBody[0], cmdAndBody[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -65,7 +65,6 @@ public class Parser {
             throw new ParsingException("Sorry mate, I didn't catch your drift",
                     USAGES.values().toArray(new String[0]));
         }
-
         return command;
     }
 

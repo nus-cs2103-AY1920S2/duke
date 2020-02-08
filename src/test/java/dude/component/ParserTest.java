@@ -21,7 +21,7 @@ class ParserTest {
             Parser.parse("");
             fail();
         } catch (ParsingException e) {
-            assertEquals("Look's like your command is incomplete, mate", e.getMessage());
+            assertEquals("Sorry mate, I didn't catch your drift", e.getMessage());
         }
     }
 

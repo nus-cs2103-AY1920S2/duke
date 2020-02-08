@@ -4,10 +4,6 @@ import dude.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * TaskList is a thin wrapper over an ArrayList&lt;Task&gt; to hide implementation details.
@@ -92,16 +88,6 @@ public class TaskList {
             result[i - 1] = String.format("%d.%s", i, getTask(i));
         }
         return result;
-    }
-
-    public Stream<String> showFilteredTasks(
-            BiFunction<Integer, Task, String> formatter,
-            Predicate<Task> predicate) {
-
-        return IntStream.rangeClosed(1, taskCount())
-                .mapToObj(index -> new TaskListEntry(index, getTask(index)))
-                .filter(entry -> predicate.test(entry.task))
-                .map(entry -> formatter.apply(entry.index, entry.task));
     }
 
     /**
