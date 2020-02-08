@@ -1,6 +1,9 @@
 package duke.util;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -146,6 +149,46 @@ public class TaskList implements TaskListInterface {
             message += String.format("\n%d. %s", i, filteredTasks.get(i - 1));
         }
 
+        return message;
+    }
+
+    /**
+     * Lists the reminder of the top 3 approaching deadline and event.
+     * @return The output message of the reminder.
+     */
+
+    public String listReminder() {
+        ArrayList<Deadline> filterDeadline = this.tasks.stream()
+                .filter(x -> (x instanceof Deadline) && !x.getStatus())
+                .map(x -> (Deadline)x)
+                .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Event> filterEvent = this.tasks.stream()
+                .filter(x -> (x instanceof Event) && !x.getStatus())
+                .map(x -> (Event)x)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        Collections.sort(filterDeadline, Comparator.comparing(Deadline::getDueDate));
+
+        Collections.sort(filterEvent, Comparator.comparing(Event::getEventSchedule));
+
+        String message = "Here is the approaching deadline:";
+        if (filterDeadline.size() == 0) {
+            message = "You have no approaching deadline.";
+        }
+
+        for (int i = 0; i < Math.min(filterDeadline.size(), 3); i++) {
+            message += String.format("\n%d. %s", i + 1, filterDeadline.get(i));
+        }
+
+        if (filterEvent.size() == 0) {
+            message += "\nAnd you don't have any upcoming event :)";
+        } else {
+            message += "\nAnd here is the approaching event:";
+        }
+
+        for (int i = 0; i < Math.min(filterEvent.size(), 3); i++) {
+            message += String.format("\n%d. %s", i + 1, filterEvent.get(i));
+        }
         return message;
     }
 

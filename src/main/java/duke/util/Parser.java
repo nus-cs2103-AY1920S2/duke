@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.ReminderCommand;
 import duke.exception.DukeInvalidArgumentFormatException;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeUnknownKeywordException;
@@ -42,6 +43,7 @@ public class Parser {
             put("delete", Keyword.DELETE);
             put("find", Keyword.FIND);
             put("bye", Keyword.BYE);
+            put("reminder", Keyword.REMINDER);
         }
     };
 
@@ -101,6 +103,9 @@ public class Parser {
             break;
         case BYE:
             command = checkValidByeArgument(details);
+            break;
+        case REMINDER:
+            command = checkValidReminderArgument(details);
             break;
         default:
             command = checkValidEventArgument(details);
@@ -283,5 +288,15 @@ public class Parser {
 
     private ByeCommand checkValidByeArgument(String details) {
         return new ByeCommand();
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid reminder command.
+     * @param details The details of the command.
+     * @return The ReminderCommand instance of the corresponding input.
+     */
+
+    private ReminderCommand checkValidReminderArgument(String details) {
+        return new ReminderCommand();
     }
 }

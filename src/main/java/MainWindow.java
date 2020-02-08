@@ -50,6 +50,10 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(getWelcomeMessage(), dukeImage),
+                DialogBox.getDukeDialog(getResponse("reminder"), dukeImage)
+        );
     }
 
     /**
@@ -77,5 +81,14 @@ public class MainWindow extends AnchorPane {
 
     private String getResponse(String input) {
         return duke.processCommand(input);
+    }
+
+    /**
+     * Gets the welcome message from Duke.
+     * @return The welcome message.
+     */
+
+    private String getWelcomeMessage() {
+        return "Hi! I'm Duke (actually, my real name is Alice lol). Please enter your command!";
     }
 }
