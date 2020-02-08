@@ -57,102 +57,48 @@ public class Duke {
                 num = parser.parseNum(fullCommand, tasks);
                 assert num <= -3 : "Unknown error has occurred.";
 
-                if (num > 0) {
-                    if (num > tasks.getSize()) {
-                        throw new DukeException("Unable to mark task #" + num +
-                                " as done. Please try again with a valid task number.");
-                    }
-
-                    tasks.markDone(num);
-                    return ui.printMarkDone(tasks.getSize(), num, tasks.getDukeList().get(num - 1).toString());
-                } else {
-                    if (num == 0) {
-                        throw new DukeException("Unable to mark task #" + num +
-                                " as done. Please try again with a valid task number.");
-                    } else if (num == -1) {
-                        throw new EmptyDescriptionException("done");
-                    } else {
-                        throw new DukeException("Please only provide one argument to mark as done.");
-                    }
-                }
+                tasks.markDone(num);
+                return ui.printMarkDone(tasks.getSize(), num, tasks.getDukeList().get(num - 1).toString());
             case DELETE:
                 num = parser.parseNum(fullCommand, tasks);
                 assert num <= -3 : "Unknown error has occurred.";
 
-                if (num > 0) {
-                    if (num > tasks.getSize()) {
-                        throw new DukeException("Unable to delete " + num +
-                                " from the task. Please try again with a valid task number.");
-                    }
-
-                    Task taskToRemove = tasks.getDukeList().get(num - 1);
-                    tasks.removeTask(num);
-                    return ui.printTaskRemoved(tasks.getSize(), num, taskToRemove.toString());
-                } else {
-                    if (num == 0) {
-                        throw new DukeException("Unable to delete " + num +
-                                " from the task. Please try again with a valid task number.");
-                    } else if (num == -1) {
-                        throw new EmptyDescriptionException("delete");
-                    } else {
-                        throw new DukeException("Please provide a valid number to delete.");
-                    }
-                }
+                Task taskToRemove = tasks.getDukeList().get(num - 1);
+                tasks.removeTask(num);
+                return ui.printTaskRemoved(tasks.getSize(), num, taskToRemove.toString());
             case TODO:
                 String todoDesc = parser.parseDescription(fullCommand);
-
-                if (todoDesc.equals("-1Error:0b9d4e")) {
-                    throw new EmptyDescriptionException("todo");
-                }
 
                 task = new ToDo(todoDesc);
                 tasks.addTask(task);
                 return ui.printTaskAdded(tasks.getSize(), task.toString());
             case EVENT:
                 desc = parser.parseDescOfEventDeadline(fullCommand);
-                if (desc.equals("-1Error:21006a")) {
-                    throw new EmptyDescriptionException("event");
-                }
-
-                by = parser.parseBy(fullCommand);
-                if (by.equals("-2error:21f3ad")) {
-                    throw new DukeException("Please provide a valid deadline. " +
-                            "For example, 「event read book /by 2020-09-20」.");
-                }
+                by = parser.parseBy(fullCommand, Command.EVENT);
 
                 task = new Event(desc, by);
                 tasks.addTask(task);
                 return ui.printTaskAdded(tasks.getSize(), task.toString());
             case DEADLINE:
                 desc = parser.parseDescOfEventDeadline(fullCommand);
-                if (desc.equals("-1Error:21006a")) {
-                    throw new EmptyDescriptionException("deadline");
-                }
-                by = parser.parseBy(fullCommand);
-                if (by.equals("-2error:21f3ad")) {
-                    throw new DukeException("Please provide a valid deadline. " +
-                            "For example, 「deadline read book /by 2020-09-20」.");
-                }
+                by = parser.parseBy(fullCommand, Command.DEADLINE);
 
                 task = new Deadline(desc, by);
                 tasks.addTask(task);
                 return ui.printTaskAdded(tasks.getSize(), task.toString());
             case FIND:
                 String find = parser.parseDescription(fullCommand);
-                if (find.equals("-1Error:0b9d4e")) {
-                    throw new EmptyDescriptionException("find");
-                }
-                String taskL = "";
+                String taskList = "";
 
                 for (int i = 0; i < tasks.getSize(); i++) {
                     Task cur = tasks.getDukeList().get(i);
 
                     if (cur.getDescription().contains(find)) {
-                        taskL = taskL + (i+1) + "." + tasks.getDukeList().get(i) + "\n";
+                        taskList = taskList + (i+1) + "." + tasks.getDukeList().get(i) + "\n";
                     }
                 }
 
-                return ui.printMatchingTask(taskL.trim(), find);
+                return ui.printMatchingTask(taskList.trim(), find);
             case ENTERCOMMAND:
                 throw new DukeException("Please enter a command");
             default:

@@ -14,12 +14,13 @@ public class Parser {
     public Command parseCommand(String fullCommand) throws DukeException {
         String[] splitBySpace;
         splitBySpace = fullCommand.split(" ");
+        String command = splitBySpace[0];
 
         if (fullCommand.equals("")) {
             return Command.ENTERCOMMAND;
         }
 
-        switch (splitBySpace[0]) {
+        switch (command) {
         case "list":
             return Command.LIST;
         case "done":
@@ -37,7 +38,6 @@ public class Parser {
         default:
             return Command.DONTUNDERSTAND;
         }
-
     }
 
     /**
@@ -45,21 +45,22 @@ public class Parser {
      * @param fullCommand Command that the user typed.
      * @return The description of todo command.
      */
-    public String parseDescription(String fullCommand) {
+    public String parseDescription(String fullCommand) throws DukeException {
         String[] splitBySpace;
         splitBySpace = fullCommand.split(" ");
-        String newString = "";
+        String description = "";
+        String command = splitBySpace[0];
 
         if (splitBySpace.length == 1) {
-            return "-1Error:0b9d4e";
+            throw new EmptyDescriptionException(command);
         }
 
         for (int i = 1; i < splitBySpace.length - 1; i++) {
-            newString = newString + splitBySpace[i] + " ";
+            description = description + splitBySpace[i] + " ";
         }
-        newString = newString + splitBySpace[splitBySpace.length - 1];
+        description = description + splitBySpace[splitBySpace.length - 1];
 
-        return newString;
+        return description;
     }
 
     /**
@@ -67,14 +68,15 @@ public class Parser {
      * @param fullCommand Command that the user typed.
      * @return Description of event and deadline command.
      */
-    public String parseDescOfEventDeadline(String fullCommand) {
+    public String parseDescOfEventDeadline(String fullCommand) throws DukeException {
         String[] splitBySpace;
         String[] splitBySlash;
         splitBySpace = fullCommand.split(" ");
-        String newString = "";
+        String description = "";
+        String command = splitBySpace[0];
 
         if (splitBySpace.length == 1) {
-            return "-1Error:21006a";
+            throw new EmptyDescriptionException(command);
         }
 
         splitBySlash = fullCommand.split("/");
@@ -82,11 +84,11 @@ public class Parser {
         String[] splitBySpace2 = splitBySlash[0].split(" ");
 
         for (int i = 1; i < splitBySpace2.length - 1; i++) {
-            newString = newString + splitBySpace2[i] + " ";
+            description = description + splitBySpace2[i] + " ";
         }
-        newString = newString + splitBySpace2[splitBySpace2.length - 1];
+        description = description + splitBySpace2[splitBySpace2.length - 1];
 
-        return newString;
+        return description;
     }
 
     /**
@@ -95,15 +97,18 @@ public class Parser {
      * @param fullCommand Command that the user typed.
      * @return The description of what the user typed to be deadline.
      */
-    public String parseBy(String fullCommand) {
-        String[] splitBySpace;
+    public String parseBy(String fullCommand, Command command) throws DukeException {
         String[] splitBySlash;
-        splitBySpace = fullCommand.split(" ");
-        String newString = "";
 
         splitBySlash = fullCommand.split("/");
         if (splitBySlash.length != 2) {
-            return "-2error:21f3ad";
+            if (command == Command.EVENT) {
+                throw new DukeException("Please provide a valid deadline. " +
+                        "For example, 「event read book /by 2020-09-20」.");
+            } else {
+                throw new DukeException("Please provide a valid deadline. " +
+                        "For example, 「deadline read book /by 2020-09-20」.");
+            }
         }
 
         return splitBySlash[1];
@@ -117,28 +122,37 @@ public class Parser {
      * @throws DukeException Exception is thrown if the criteria does not fit what delete or done command
      * is looking for.
      */
-    public int parseNum(String fullCommand, TaskList tasks) {
+    public int parseNum(String fullCommand, TaskList tasks) throws DukeException {
         String[] splitBySpace;
         splitBySpace = fullCommand.split(" ");
+        String command = splitBySpace[0];
+        int num;
 
         if (splitBySpace.length == 1) {
-            if (splitBySpace[0].equals("done")) {
-                return -1;
-            } else if (splitBySpace[0].equals("delete")) {
-                return -1;
-            }
+            throw new EmptyDescriptionException(command);
         } else if (splitBySpace.length != 2) {
-            if (splitBySpace[0].equals("done")) {
-                return -2;
-            } else if (splitBySpace[0].equals("delete")) {
-                return -2;
+            if (command.equals("done")) {
+                throw new DukeException("Please only provide one argument to mark as done.");
+            } else if (command.equals("delete")) {
+                throw new DukeException("Please provide a valid number to delete.");
             }
         }
 
-        int num = Integer.parseInt(splitBySpace[1]);
+        try {
+            num = Integer.parseInt(splitBySpace[1]);
+        } catch (NumberFormatException e) {
+            if (command.equals("done")) {
+                throw new DukeException("Sorrymasen, I only accept number to mark task as done :(");
+            } else {
+                throw new DukeException("Sorrymasen, I only accept number to delete :(");
+            }
+        }
+
+        if ((num > 0 && num > tasks.getSize()) || num == 0) {
+            throw new DukeException("Unable to mark task #" + num +
+                    " as done. Please try again with a valid task number.");
+        }
 
         return num;
     }
-
-
 }

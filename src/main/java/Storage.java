@@ -36,8 +36,9 @@ public class Storage {
             String line = sc.nextLine();
             String[] splitBySpace = line.split(" ");
             String[] splitBySlash;
+            String command = splitBySpace[0];
 
-            if (splitBySpace[0].equals("D")) {
+            if (command.equals("D")) {
                 splitBySlash = line.split("/");
 
                 //Splits second time
@@ -52,7 +53,7 @@ public class Storage {
                     t.markAsDone();
                 }
                 dukeList.add(t);
-            } else if (splitBySpace[0].equals("E")) {
+            } else if (command.equals("E")) {
                 splitBySlash = line.split("/");
 
                 //Splits second time
