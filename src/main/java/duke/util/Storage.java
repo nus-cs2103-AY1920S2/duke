@@ -67,7 +67,7 @@ public class Storage {
 
     public void writeTask(Task task, boolean isApppendMode) {
         try {
-            this.writer.writeTask(task, isApppendMode);
+            this.writer.write(task, isApppendMode);
         } catch (IOException e) {
             System.err.println(e);
         }
@@ -81,7 +81,7 @@ public class Storage {
         this.writer.setBlank();
         try {
             for (int i = 0; i < tasks.size(); i++) {
-                this.writer.writeTask(tasks.get(i), i != 0);
+                this.writer.write(tasks.get(i), i != 0);
             }
         } catch (IOException e) {
             System.err.println(e);
