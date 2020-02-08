@@ -4,9 +4,9 @@ class TaskTest {
     @Test
     public void runTest() {
         Task task = new Task("Test");
-        assert(task.getStatusIcon().equals("\u2718"));
+        assert(task.getStatusIcon().equals("X"));
         task.setDone(true);
-        assert(task.getStatusIcon().equals("\u2713"));
+        assert(task.getStatusIcon().equals("O"));
 
     }
 
