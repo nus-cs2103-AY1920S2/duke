@@ -21,6 +21,7 @@ public class DoneCommand extends Command {
 
     /**
      * DoneCommand constructor.
+     *
      * @param index of the task in collection to be set Done.
      */
     public DoneCommand(int index) {
@@ -29,6 +30,7 @@ public class DoneCommand extends Command {
 
     /**
      * Executes Done behaviour of setting given task to Done.
+     *
      * @param taskList to access collection of tasks.
      * @param storage to access save-load functionality.
      */
@@ -43,6 +45,7 @@ public class DoneCommand extends Command {
 
     /**
      * Inform if command is an exit command.
+     *
      * @return boolean indicating if command is an exit command.
      */
     public boolean isExit() {

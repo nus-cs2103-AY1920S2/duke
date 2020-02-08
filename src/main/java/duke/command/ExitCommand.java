@@ -19,6 +19,7 @@ public class ExitCommand extends Command {
 
     /**
      * Inform if command is an exit command.
+     *
      * @return boolean indicating if command is an exit command.
      */
     public boolean isExit() {

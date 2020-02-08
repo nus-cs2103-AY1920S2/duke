@@ -14,6 +14,7 @@ public abstract class Task {
 
     /**
      * Task constructor.
+     *
      * @param  name of the task.
      */
     public Task(String name) {
@@ -34,6 +35,7 @@ public abstract class Task {
 
     /**
      * Gets the save-string representation of the task.
+     *
      * @return the String representation of the task Storage can save.
      */
     public abstract String toSaveString();

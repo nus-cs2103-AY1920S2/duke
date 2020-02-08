@@ -10,7 +10,7 @@ public class DukeException {
 
     public static class InvalidCommand extends Exception {
         public InvalidCommand() {
-            super("Sorry, I don't know what you mean. Try again?");
+            super("Sorry, I don't know what you mean. Try the 'help' command?");
         }
     }
 
@@ -44,4 +44,9 @@ public class DukeException {
         }
     }
 
+    public static class InvalidDateTime extends Exception {
+        public  InvalidDateTime() {
+            super("Sorry, I'm gonna need a proper date. E.g. 2020-07-10");
+        }
+    }
 }

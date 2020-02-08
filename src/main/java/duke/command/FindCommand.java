@@ -22,6 +22,7 @@ public class FindCommand extends Command {
 
     /**
      * FindCommand constructor.
+     *
      * @param keyword of the word user wants to match.
      */
     public FindCommand(String keyword) {
@@ -30,6 +31,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes Find behaviour of finding all tasks containing a keyword.
+     *
      * @param taskList to access collection of tasks.
      * @param storage to access save-load functionality.
      */
@@ -60,6 +62,7 @@ public class FindCommand extends Command {
 
     /**
      * Inform if command is an exit command.
+     *
      * @return boolean indicating if command is an exit command.
      */
     public boolean isExit() {

@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.util.DateTimeUtil;
 import duke.util.DukeException;
 import duke.util.Storage;
 
@@ -27,6 +28,7 @@ public class TaskList {
 
     /**
      * Getter for a reference to the task list data structure.
+     *
      * @return the ArrayList collection of tasks.
      */
     public ArrayList<Task> getList() {
@@ -36,6 +38,7 @@ public class TaskList {
     /**
      * Adds to the task collection a task object generated
      * from the save-string representation.
+     *
      * @param taskString of a save-string representation of the task.
      */
     public void addSaveStringAsTask(String taskString) {
@@ -44,15 +47,15 @@ public class TaskList {
         String[] sep;
         switch (taskString.charAt(0)) {
         case 'T':
-            taskList.add(new ToDo(taskString.substring(2, taskString.length())));
+            taskList.add(new ToDo(taskString.substring(2)));
             break;
         case 'D':
-            taskInfo = taskString.substring(2, taskString.length());
+            taskInfo = taskString.substring(2);
             sep = taskInfo.split("@");
             taskList.add(new Deadline(sep[0], LocalDateTime.parse(sep[1])));
             break;
         case 'E':
-            taskInfo = taskString.substring(2, taskString.length());
+            taskInfo = taskString.substring(2);
             sep = taskInfo.split("@");
             taskList.add(new Event(sep[0], LocalDateTime.parse(sep[1])));
             break;
@@ -67,61 +70,23 @@ public class TaskList {
 
     /**
      * Adds to the task collection a new task object.
+     *
      * @param newTask name of the new task to add.
      * @param taskType for the type of task to add.
      * @param storage for saving the new task to file.
      * @return a String representing the task that was added, else an error message.
      */
     public String addTask(String newTask, Task.TaskType taskType, Storage storage) throws Exception {
-        String[] strArr;
-        String taskName;
         try {
             switch (taskType) {
             case TODO:
-                if (newTask.isBlank()) {
-                    throw new DukeException.EmptyToDo();
-                }
-                taskList.add(new ToDo(newTask));
+                addTodo(newTask);
                 break;
             case DEADLINE:
-                // newTask string consists of "<actual task name> /by <deadline>"
-                strArr = newTask.split("/by");
-                taskName = strArr[0].trim();
-                if (taskName.isBlank()) {
-                    throw new DukeException.EmptyDeadlineName();
-                }
-                String deadline;
-                try {
-                    deadline = strArr[1].trim();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    // This will occur when user did not use a /by command
-                    throw new DukeException.NoDeadlineTime();
-                }
-                // /by was used but is followed by blank
-                if (deadline.isBlank()) {
-                    throw new DukeException.NoDeadlineTime();
-                }
-                taskList.add(new Deadline(taskName, deadline));
+                addDeadline(newTask);
                 break;
             case EVENT:
-                // newTask string consists of "<actual task name> /at <datetime>"
-                strArr = newTask.split("/at");
-                taskName = strArr[0].trim();
-                if (taskName.isBlank()) {
-                    throw new DukeException.EmptyEvent();
-                }
-                String eventTime;
-                try {
-                    eventTime = strArr[1].trim();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    // This will occur when user did not use a /at command
-                    throw new DukeException.NoEventDatetime();
-                }
-                // /at was used but is followed by blank
-                if (eventTime.isBlank()) {
-                    throw new DukeException.NoEventDatetime();
-                }
-                taskList.add(new Event(taskName, eventTime));
+                addEvent(newTask);
                 break;
             default:
                 break;
@@ -138,7 +103,94 @@ public class TaskList {
     }
 
     /**
+     * Adds to the task collection a new Todo task.
+     *
+     * @param newTask name of the new task to add.
+     */
+    private void addTodo(String newTask) throws DukeException.EmptyToDo {
+        if (newTask.isBlank()) {
+            throw new DukeException.EmptyToDo();
+        }
+        taskList.add(new ToDo(newTask));
+    }
+
+    /**
+     * Adds to the task collection a new Deadline task.
+     *
+     * @param newTask name of the new task to add.
+     */
+    private void addDeadline(String newTask) throws DukeException.EmptyDeadlineName,
+            DukeException.NoDeadlineTime, DukeException.InvalidDateTime {
+        String taskName;
+        String[] strArr;
+
+        // newTask string consists of "<actual task name> /by <deadline>"
+        strArr = newTask.split("/by");
+        taskName = strArr[0].trim();
+        if (taskName.isBlank()) {
+            throw new DukeException.EmptyDeadlineName();
+        }
+        String deadline;
+        try {
+            deadline = strArr[1].trim();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // This will occur when user did not use a /by command
+            throw new DukeException.NoDeadlineTime();
+        }
+        // /by was used but is followed by blank
+        if (deadline.isBlank()) {
+            throw new DukeException.NoDeadlineTime();
+        }
+
+        // Check if valid date
+        try {
+            DateTimeUtil.checkStringValidDate(deadline);
+            taskList.add(new Deadline(taskName, deadline));
+        } catch (Exception e) {
+            throw new DukeException.InvalidDateTime();
+        }
+    }
+
+    /**
+     * Adds to the task collection a new Event task.
+     *
+     * @param newTask name of the new task to add.
+     */
+    private void addEvent(String newTask) throws DukeException.EmptyEvent,
+            DukeException.NoEventDatetime, DukeException.InvalidDateTime {
+        String taskName;
+        String[] strArr;
+
+        // newTask string consists of "<actual task name> /at <date>"
+        strArr = newTask.split("/at");
+        taskName = strArr[0].trim();
+        if (taskName.isBlank()) {
+            throw new DukeException.EmptyEvent();
+        }
+        String eventTime;
+        try {
+            eventTime = strArr[1].trim();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // This will occur when user did not use a /at command
+            throw new DukeException.NoEventDatetime();
+        }
+        // /at was used but is followed by blank
+        if (eventTime.isBlank()) {
+            throw new DukeException.NoEventDatetime();
+        }
+
+        // Check if valid date
+        try {
+            DateTimeUtil.checkStringValidDate(eventTime);
+            taskList.add(new Deadline(taskName, eventTime));
+        } catch (Exception e) {
+            throw new DukeException.InvalidDateTime();
+        }
+    }
+
+    /**
      * Updates a task object in collection to "Done".
+     *
      * @param taskIndex of the task (in collection) to be set "Done".
      * @return a boolean representing if task was found (set to done), else false
      */
@@ -154,6 +206,7 @@ public class TaskList {
 
     /**
      * Deletes a task object from collection.
+     *
      * @param taskIndex of the task (in collection) to be deleted.
      * @return a String representing the task that was deleted, else null.
      */

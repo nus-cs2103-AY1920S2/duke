@@ -25,6 +25,7 @@ public class AddCommand extends Command {
 
     /**
      * AddCommand constructor.
+     *
      * @param toAdd string name of new task.
      * @param taskType of the new task.
      */
@@ -35,6 +36,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes Add behaviour of adding a new task.
+     *
      * @param taskList to access collection of tasks.
      * @param storage to access save-load functionality.
      */
@@ -50,6 +52,7 @@ public class AddCommand extends Command {
 
     /**
      * Inform if command is an exit command.
+     *
      * @return boolean indicating if command is an exit command.
      */
     public boolean isExit() {

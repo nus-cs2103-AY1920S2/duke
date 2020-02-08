@@ -26,6 +26,7 @@ public class Parser {
     /**
      * Analyses a full command string and converts
      * to an executable Command object.
+     *
      * @param fullCommand read from user input.
      * @return Command object parsed from a full command string
      */

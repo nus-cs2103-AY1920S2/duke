@@ -11,7 +11,8 @@ public class ToDo extends Task {
 
     /**
      * ToDo constructor.
-     * @param  name of the ToDo task.
+     *
+     * @param name of the ToDo task.
      */
     public ToDo(String name) {
         super(name);
@@ -19,6 +20,7 @@ public class ToDo extends Task {
 
     /**
      * Gets the save-string representation of the task.
+     *
      * @return the String representation of the task Storage can save.
      */
     @Override

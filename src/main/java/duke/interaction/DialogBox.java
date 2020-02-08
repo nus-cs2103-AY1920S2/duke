@@ -51,6 +51,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a new DialogBox object with given String and Image.
+     *
      * @param text to print on the dialog box.
      * @param img for "speaker" of this dialog.
      * @return a new DialogBox object.
@@ -61,6 +62,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a new DialogBox object with given String and Image, flipped.
+     *
      * @param text to print on the dialog box.
      * @param img for "speaker" of this dialog.
      * @return a new DialogBox object.
