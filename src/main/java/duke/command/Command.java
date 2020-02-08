@@ -16,7 +16,18 @@ import duke.exception.DukeUnrecognisedCommandException;
 import duke.utils.Pair;
 
 public class Command {
-    private String name;
+    public static final CommandMethod[] COMMANDS = {
+        new HelpCommandMethod(),
+        new ListCommandMethod(),
+        new TodoCommandMethod(),
+        new DeadlineCommandMethod(),
+        new EventCommandMethod(),
+        new DeleteCommandMethod(),
+        new DoneCommandMethod(),
+        new FindCommandMethod(),
+        new ByeCommandMethod()
+    };
+
     private String[] arguments;
     private CommandMethod method;
 
@@ -41,52 +52,24 @@ public class Command {
         Pair<String,String[]> result = parseInput(input);
         String name = result.getFirst();
         String[] arguments = result.getSecond();
-        switch (name) {
-        case "": {
+        if (name.equals("")) {
             throw new DukeNoCommandException();
         }
-        case HelpCommandMethod.NAME: {
-            return new Command(name, arguments, new HelpCommandMethod());
+        for (CommandMethod method : Command.COMMANDS) {
+            if (name.equals(method.getCommandName())) {
+                return new Command(arguments, method);
+            }
         }
-        case TodoCommandMethod.NAME: {
-            return new Command(name, arguments, new TodoCommandMethod());
-        }
-        case EventCommandMethod.NAME: {
-            return new Command(name, arguments, new EventCommandMethod());
-        }
-        case DeadlineCommandMethod.NAME: {
-            return new Command(name, arguments,
-                    new DeadlineCommandMethod());
-        }
-        case ListCommandMethod.NAME: {
-            return new Command(name, arguments, new ListCommandMethod());
-        }
-        case DoneCommandMethod.NAME: {
-            return new Command(name, arguments, new DoneCommandMethod());
-        }
-        case DeleteCommandMethod.NAME: {
-            return new Command(name, arguments, new DeleteCommandMethod());
-        }
-        case FindCommandMethod.NAME: {
-            return new Command(name, arguments, new FindCommandMethod());
-        }
-        case ByeCommandMethod.NAME: {
-            return new Command(name, arguments, new ByeCommandMethod());
-        }
-        default: {
-            throw new DukeUnrecognisedCommandException(name);
-        }
-        }
+        throw new DukeUnrecognisedCommandException(name);
     }
 
-    private Command(String name, String[] arguments, CommandMethod method) {
-        this.name = name;
+    private Command(String[] arguments, CommandMethod method) {
         this.arguments = arguments;
         this.method = method;
     }
 
     public String getCommandName() {
-        return name;
+        return method.getCommandName();
     }
 
     public String[] getArgumentList() {

@@ -13,10 +13,12 @@ import duke.storage.Storage;
 import duke.task.EventTask;
 
 public class EventCommandMethod implements CommandMethod {
-    public static final String NAME = "event";
+    public String getCommandName() {
+        return "event";
+    }
 
     public String getFormat() {
-        return EventCommandMethod.NAME + " <description> /at <datetime>";
+        return getCommandName() + " <description> /at <datetime>";
     }
 
     public String getDescription() {
@@ -26,12 +28,12 @@ public class EventCommandMethod implements CommandMethod {
     public void execute(Command command) throws DukeException {
         Duke program = Duke.getProgram();
         if (command.getArgumentList().length == 0) {
-            throw new DukeNoArgumentsException(EventCommandMethod.NAME);
+            throw new DukeNoArgumentsException(getCommandName());
         }
         String[] arguments = command.getArgumentString().split(" /at ", 2);
         if (arguments.length != 2) {
             throw new DukeInvalidNumberOfArgumentsException(
-                    EventCommandMethod.NAME, 2, arguments.length);
+                    getCommandName(), 2, arguments.length);
         }
         String description = arguments[0];
         try {

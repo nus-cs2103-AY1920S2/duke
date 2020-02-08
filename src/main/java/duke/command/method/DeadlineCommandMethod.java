@@ -13,10 +13,12 @@ import duke.storage.Storage;
 import duke.task.DeadlineTask;
 
 public class DeadlineCommandMethod implements CommandMethod {
-    public static final String NAME = "deadline";
+    public String getCommandName() {
+        return "deadline";
+    }
 
     public String getFormat() {
-        return DeadlineCommandMethod.NAME + " <description> /by <datetime>";
+        return getCommandName() + " <description> /by <datetime>";
     }
 
     public String getDescription() {
@@ -26,12 +28,12 @@ public class DeadlineCommandMethod implements CommandMethod {
     public void execute(Command command) throws DukeException {
         Duke program = Duke.getProgram();
         if (command.getArgumentList().length == 0) {
-            throw new DukeNoArgumentsException(DeadlineCommandMethod.NAME);
+            throw new DukeNoArgumentsException(getCommandName());
         }
         String[] arguments = command.getArgumentString().split(" /by ", 2);
         if (arguments.length != 2) {
             throw new DukeInvalidNumberOfArgumentsException(
-                    DeadlineCommandMethod.NAME, 2, arguments.length);
+                    getCommandName(), 2, arguments.length);
         }
         String description = arguments[0];
         try {

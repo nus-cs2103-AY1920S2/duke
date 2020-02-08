@@ -4,10 +4,12 @@ import duke.command.Command;
 import duke.exception.DukeProgramTerminatedException;
 
 public class ByeCommandMethod implements CommandMethod {
-    public static final String NAME = "bye";
+    public String getCommandName() {
+        return "bye";
+    }
 
     public String getFormat() {
-        return ByeCommandMethod.NAME;
+        return getCommandName();
     }
 
     public String getDescription() {

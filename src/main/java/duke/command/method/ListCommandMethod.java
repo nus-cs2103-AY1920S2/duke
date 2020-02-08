@@ -4,10 +4,12 @@ import duke.Duke;
 import duke.command.Command;
 
 public class ListCommandMethod implements CommandMethod {
-    public static final String NAME = "list";
+    public String getCommandName() {
+        return "list";
+    }
 
     public String getFormat() {
-        return ListCommandMethod.NAME;
+        return getCommandName();
     }
 
     public String getDescription() {

@@ -10,10 +10,12 @@ import duke.storage.Storage;
 import duke.utils.TaskList;
 
 public class DeleteCommandMethod implements CommandMethod {
-    public static final String NAME = "delete";
+    public String getCommandName() {
+        return "delete";
+    }
 
     public String getFormat() {
-        return DeleteCommandMethod.NAME + " <index>";
+        return getCommandName() + " <index>";
     }
 
     public String getDescription() {
@@ -24,7 +26,7 @@ public class DeleteCommandMethod implements CommandMethod {
         Duke program = Duke.getProgram();
         TaskList tasks = program.getTaskList();
         if (command.getArgumentList().length == 0) {
-            throw new DukeNoArgumentsException(command.getCommandName());
+            throw new DukeNoArgumentsException(getCommandName());
         }
         if (tasks.isEmpty()) {
             throw new DukeEmptyTaskListException();

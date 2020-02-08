@@ -5,14 +5,12 @@ import duke.command.Command;
 import duke.task.Task;
 
 public class HelpCommandMethod implements CommandMethod {
-    public static final String NAME = "help";
-
-    private static final String other = ""
-            + "Datetime's must be in " + Task.DATE_TIME_INPUT_PATTERN + " format.\n"
-            + "Tasks are saved at " + Duke.getProgram().getStorage().getFilePath();
+    public String getCommandName() {
+        return "help";
+    }
 
     public String getFormat() {
-        return HelpCommandMethod.NAME;
+        return getCommandName();
     }
 
     public String getDescription() {
@@ -21,25 +19,15 @@ public class HelpCommandMethod implements CommandMethod {
 
     public void execute(Command command) {
         Duke program = Duke.getProgram();
-        CommandMethod[] commands = {
-            new HelpCommandMethod(),
-            new ListCommandMethod(),
-            new TodoCommandMethod(),
-            new DeadlineCommandMethod(),
-            new EventCommandMethod(),
-            new DeleteCommandMethod(),
-            new DoneCommandMethod(),
-            new FindCommandMethod(),
-            new ByeCommandMethod()
-        };
         StringBuilder output = new StringBuilder();
         output.append("Commands available:\n");
-        for (CommandMethod cm : commands) {
-            output.append(cm.getFormat() + "\n");
-            output.append("\t" + cm.getDescription() + "\n");
+        for (CommandMethod method : Command.COMMANDS) {
+            output.append(method.getFormat() + "\n");
+            output.append("\t" + method.getDescription() + "\n");
             output.append("\n");
         }
-        output.append(HelpCommandMethod.other);
+        output.append("Datetime's must be in " + Task.DATE_TIME_INPUT_PATTERN + " format.\n");
+        output.append("Tasks are saved at " + Duke.getProgram().getStorage().getFilePath());
         program.getUi().print(output.toString());
     }
 }

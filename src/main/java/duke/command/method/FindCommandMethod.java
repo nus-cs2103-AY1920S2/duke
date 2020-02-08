@@ -11,10 +11,12 @@ import duke.task.Task;
 import duke.utils.TaskList;
 
 public class FindCommandMethod implements CommandMethod {
-    public static final String NAME = "find";
+    public String getCommandName() {
+        return "find";
+    }
 
     public String getFormat() {
-        return FindCommandMethod.NAME + " <keyword>";
+        return getCommandName() + " <keyword>";
     }
 
     public String getDescription() {
@@ -25,7 +27,7 @@ public class FindCommandMethod implements CommandMethod {
         Duke program = Duke.getProgram();
         TaskList tasks = program.getTaskList();
         if (command.getArgumentList().length == 0) {
-            throw new DukeNoArgumentsException(command.getCommandName());
+            throw new DukeNoArgumentsException(getCommandName());
         }
         if (tasks.isEmpty()) {
             throw new DukeEmptyTaskListException();

@@ -11,10 +11,12 @@ import duke.task.Task;
 import duke.utils.TaskList;
 
 public class DoneCommandMethod implements CommandMethod {
-    public static final String NAME = "done";
+    public String getCommandName() {
+        return "done";
+    }
 
     public String getFormat() {
-        return DoneCommandMethod.NAME + " <index>";
+        return getCommandName() + " <index>";
     }
 
     public String getDescription() {
@@ -25,7 +27,7 @@ public class DoneCommandMethod implements CommandMethod {
         Duke program = Duke.getProgram();
         TaskList tasks = program.getTaskList();
         if (command.getArgumentList().length == 0) {
-            throw new DukeNoArgumentsException(command.getCommandName());
+            throw new DukeNoArgumentsException(getCommandName());
         }
         if (tasks.isEmpty()) {
             throw new DukeEmptyTaskListException();
