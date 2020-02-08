@@ -51,15 +51,15 @@ public class Ui {
      * @throws DukeInvalidTaskException If the list of tasks is empty.
      */
     public void displayTasks(List<Task> tasks) throws DukeInvalidTaskException {
-        if (tasks.size() != 0) {
-            print("Here are the tasks in your list:");
-            for (int i = 1; i <= tasks.size(); i++) {
-                print(i + "." + tasks.get(i - 1));
-            }
-            printLine();
-        } else {
+        if (tasks.size() == 0) {
             throw new DukeInvalidTaskException("There are no remaining tasks in the list");
         }
+
+        print("Here are the tasks in your list:");
+        for (int i = 1; i <= tasks.size(); i++) {
+            print(i + "." + tasks.get(i - 1));
+        }
+        printLine();
     }
 
     /**
@@ -69,15 +69,15 @@ public class Ui {
      * @throws DukeInvalidTaskException If the task is not found.
      */
     public void displayFoundTasks(List<Task> tasks) throws DukeInvalidTaskException {
-        if (tasks.size() != 0) {
-            print("Here are the matching tasks in your list:");
-            for (int i = 1; i <= tasks.size(); i++) {
-                print(i + "." + tasks.get(i - 1));
-            }
-            printLine();
-        } else {
+        if (tasks.size() == 0) {
             throw new DukeInvalidTaskException("There are no matching tasks in your list");
         }
+
+        print("Here are the matching tasks in your list:");
+        for (int i = 1; i <= tasks.size(); i++) {
+            print(i + "." + tasks.get(i - 1));
+        }
+        printLine();
     }
 
     /**
@@ -96,5 +96,15 @@ public class Ui {
     public void printInvalidDateFormatError() {
         print("Please enter the date as yyyy-mm-dd followed by the time e.g. 2020-01-01 2359");
         print("Try again.");
+    }
+
+    /**
+     * Displays the goodbye message.
+     * followed by a horizontal line.
+     */
+    public void printBye() {
+        print("Bye. Hope to see you again soon!");
+        printLine();
+        System.exit(0);
     }
 }

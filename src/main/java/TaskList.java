@@ -39,14 +39,14 @@ public class TaskList {
         int i = Integer.parseInt(command.split(" ")[1]) - 1;
         if (i >= tasks.size() || i < 0) {
             throw new DukeInvalidTaskException("There is no such task in the list!");
-        } else {
-            print("Noted. I've removed this task: ");
-            print("  " + tasks.get(i));
-            tasks.remove(tasks.get(i));
-            print("Now you have " + tasks.size() + " task(s) in the list.");
-            printLine();
-            return tasks;
         }
+
+        print("Noted. I've removed this task: ");
+        print("  " + tasks.get(i));
+        tasks.remove(tasks.get(i));
+        print("Now you have " + tasks.size() + " task(s) in the list.");
+        printLine();
+        return tasks;
     }
 
     /**
@@ -76,7 +76,7 @@ public class TaskList {
      *
      * @param command The string containing the description of the task to be added in the list.
      * @return The updated task list after the addition of the given task.
-     * @throws DateTimeParseException      If the date provided in the task description is in an invalid format.
+     * @throws DateTimeParseException If the date provided in the task description is in an invalid format.
      * @throws DukeInvalidCommandException If the description of the command entered is invalid.
      */
     public List<Task> addTask(String command) throws DateTimeParseException, DukeInvalidCommandException {
@@ -120,13 +120,13 @@ public class TaskList {
         int i = Integer.parseInt(command.split(" ")[1]) - 1;
         if (i >= tasks.size() || i < 0) {
             throw new DukeInvalidTaskException("There is no such task in the list!");
-        } else {
-            tasks.get(i).markAsDone();
-            print("Nice! I've marked this task as done: ");
-            print(tasks.get(i).toString());
-            printLine();
-            return tasks;
         }
+
+        tasks.get(i).markAsDone();
+        print("Nice! I've marked this task as done: ");
+        print(tasks.get(i).toString());
+        printLine();
+        return tasks;
     }
 
 }

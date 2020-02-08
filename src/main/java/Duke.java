@@ -26,7 +26,7 @@ public class Duke {
     }
 
 
-    private Boolean hasStart = false;
+    private Boolean haveGreeted = false;
 
     /**
      * Function to generate a response to user input.
@@ -40,18 +40,19 @@ public class Duke {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
+        // Save the old System.out!
         PrintStream old = System.out;
         // Tell Java to use your special stream
         System.setOut(ps);
 
         tasks = storage.loadFile();
-        if (!hasStart) {
+        if (!haveGreeted) {
             uI.greet();
-            hasStart = true;
+            haveGreeted = true;
         }
+
         if (input.contains("bye")) {
-            System.exit(0);
+            uI.printBye();
         } else {
             try {
                 run(input);
