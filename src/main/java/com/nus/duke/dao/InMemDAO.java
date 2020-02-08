@@ -1,12 +1,13 @@
 package com.nus.duke.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import com.nus.duke.tasks.Tasks;
 import static com.nus.duke.tasks.Tasks.TASK_STATUS;
 
 public class InMemDAO implements DAOInterface {
-    private ArrayList<Tasks> tasksList = new ArrayList<>();
+    private List<Tasks> tasksList = new ArrayList<>();
 
     @Override
     public Boolean add(Tasks task) {
@@ -37,7 +38,7 @@ public class InMemDAO implements DAOInterface {
     }
 
     @Override
-    public ArrayList<Tasks> getAll() {
+    public List<Tasks> getAll() {
         return this.tasksList;
     }
 }

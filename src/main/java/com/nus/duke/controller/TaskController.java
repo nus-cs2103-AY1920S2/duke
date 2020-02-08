@@ -5,7 +5,6 @@ import com.nus.duke.dao.InMemDAO;
 import com.nus.duke.tasks.Tasks;
 import com.nus.duke.ui.Greetings;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class TaskController {
@@ -30,7 +29,7 @@ public class TaskController {
     }
 
     public boolean listAllTasks() {
-        ArrayList<Tasks> Tasks = dataObj.getAll();
+        List<Tasks> Tasks = dataObj.getAll();
         List<String> taskString = Tasks.stream()
                                         .map(eachTask -> stringify(eachTask))
                                         .collect(Collectors.toList());
