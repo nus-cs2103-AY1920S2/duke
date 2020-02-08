@@ -72,7 +72,7 @@ public class Deadline implements Task {
      * @return Deadline object parsed from string information
      */
     public static Deadline readFormat(String input) {
-        // assert here such that first token is D
+        assert input.charAt(0) == 'D';
         List<String> list = Collections.list(new StringTokenizer(input, "|")).stream()
                 .map(token -> (String) token)
                 .collect(Collectors.toList());

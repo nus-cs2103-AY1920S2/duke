@@ -72,7 +72,7 @@ public class Event implements Task {
      * @return Event object parsed from string information
      */
     public static Event readFormat(String input) {
-        // assert here such that first token is D
+        assert input.charAt(0) == 'E';
         List<String> list = Collections.list(new StringTokenizer(input, "|")).stream()
                 .map(token -> (String) token)
                 .collect(Collectors.toList());

@@ -44,7 +44,7 @@ public class Todo implements Task {
      * @return todotask object parsed from string information
      */
     public static Todo readFormat(String input) {
-        // assert here such that first token is T
+        assert input.charAt(0) == 'T';
         List<String> list = Collections.list(new StringTokenizer(input, "|")).stream()
                 .map(token -> (String) token)
                 .collect(Collectors.toList());
