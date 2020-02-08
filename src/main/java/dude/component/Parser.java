@@ -118,16 +118,12 @@ public class Parser {
             return new AddTaskCommand(new Todo(args, false));
 
         case "deadline":
-            String[] deadlineArgs = args.split(WHITESPACE + "/by" + WHITESPACE, 2);
-            LocalDate by = parseDate(deadlineArgs[1], "deadline");
-            return new AddTaskCommand(new Deadline(deadlineArgs[0], by, false));
+            Deadline deadline = parseDeadline(args);
+            return new AddTaskCommand(deadline);
 
         case "event":
-            String[] eventArgs = args.split(WHITESPACE + "/from" + WHITESPACE, 2);
-            String[] eventDateStrings = eventArgs[1].split(WHITESPACE + "/to" + WHITESPACE, 2);
-            LocalDate from = parseDate(eventDateStrings[0], "event");
-            LocalDate to = parseDate(eventDateStrings[1], "event");
-            return new AddTaskCommand(new Event(eventArgs[0], from, to, false));
+            Event event = parseEvent(args);
+            return new AddTaskCommand(event);
 
         case "find":
             return new FindCommand(args);
@@ -151,5 +147,19 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new ParsingException("I don't understand this date: " + dateString, USAGES.get(command));
         }
+    }
+
+    private static Event parseEvent(String args) throws ParsingException {
+        String[] eventArgs = args.split(WHITESPACE + "/from" + WHITESPACE, 2);
+        String[] eventDateStrings = eventArgs[1].split(WHITESPACE + "/to" + WHITESPACE, 2);
+        LocalDate from = parseDate(eventDateStrings[0], "event");
+        LocalDate to = parseDate(eventDateStrings[1], "event");
+        return new Event(eventArgs[0], from, to, false);
+    }
+
+    private static Deadline parseDeadline(String args) throws ParsingException {
+        String[] deadlineArgs = args.split(WHITESPACE + "/by" + WHITESPACE, 2);
+        LocalDate by = parseDate(deadlineArgs[1], "deadline");
+        return new Deadline(deadlineArgs[0], by, false);
     }
 }
