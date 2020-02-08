@@ -1,15 +1,11 @@
-// packages imports
-import exceptions.EmptyDescriptionException;
-import exceptions.EmptySearchException;
-import exceptions.EmptyTimeException;
-import exceptions.InvalidTaskNumberException;
-import exceptions.InvalidActionException;
-import tasks.TaskList;
-import tasks.Task;
-import tasks.Deadline;
-import tasks.Todo;
-import tasks.Event;
-import ui.Ui;
+package duke;// packages imports
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.EmptySearchException;
+import duke.exceptions.EmptyTimeException;
+import duke.exceptions.InvalidTaskNumberException;
+import duke.exceptions.InvalidActionException;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 // java imports
 import java.io.IOException;

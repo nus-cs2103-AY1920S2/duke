@@ -1,6 +1,8 @@
+import duke.Parser;
+import duke.Storage;
 import org.junit.jupiter.api.Test;
-import tasks.TaskList;
-import ui.Ui;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 import java.util.Scanner;
 

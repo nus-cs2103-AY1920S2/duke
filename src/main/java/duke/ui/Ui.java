@@ -1,6 +1,6 @@
-package ui;
+package duke.ui;
 
-import tasks.Task;
+import duke.Task;
 
 import java.util.ArrayList;
 
@@ -20,6 +20,10 @@ public class Ui {
      */
     public void printFormattedOutput(String output) {
         System.out.println(bar + "    " + output + "\n" + bar);
+    }
+
+    public void printOutput(String output) {
+        MainWindow.dukeOutput(output);
     }
 
     /**

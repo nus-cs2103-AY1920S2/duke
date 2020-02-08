@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * Throws InvalidTaskNumberException when user inputs a task number

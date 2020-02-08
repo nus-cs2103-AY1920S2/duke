@@ -1,6 +1,8 @@
-package tasks;
+package duke.tasks;
 
-import ui.Ui;
+import duke.DateTask;
+import duke.Task;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

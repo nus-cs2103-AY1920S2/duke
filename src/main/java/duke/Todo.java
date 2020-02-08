@@ -1,4 +1,4 @@
-package tasks;
+package duke;
 
 /**
  * Represents a simple task with description only.

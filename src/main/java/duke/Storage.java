@@ -1,10 +1,6 @@
-// packages import
-import tasks.TaskList;
-import tasks.Task;
-import tasks.Todo;
-import tasks.Event;
-import tasks.Deadline;
-import ui.Ui;
+package duke;// packages import
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 // java imports
 import java.io.FileNotFoundException;
@@ -21,7 +17,7 @@ import java.io.IOException;
 public class Storage {
 
     /** File name of save file. */
-    private String saveFile = "save_file.txt";
+    private String saveFile = "duke/save_file.txt";
 
     /**
      * Saves into saveFile.

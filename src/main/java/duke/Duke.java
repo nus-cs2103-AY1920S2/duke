@@ -1,10 +1,9 @@
-// packages imports
-import tasks.TaskList;
-import ui.Ui;
+package duke;// packages imports
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 // java imports
 import java.io.IOException;
-import java.util.Scanner;
 import java.io.FileNotFoundException;
 
 // javafx imports
@@ -41,18 +40,6 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Controls for GUI
-     */
-//    private ScrollPane scrollPane;
-//    private VBox dialogContainer;
-//    private TextField userInput;
-//    private Button sendButton;
-//    private Scene scene;
-//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-
-    /**
      * Creates a bot with personalize user interface, storage, and task list.
      * Will create a new save file is there is no existing one.
      */
@@ -65,35 +52,6 @@ public class Duke {
         } catch (FileNotFoundException ex) {
             ui.printFormattedOutput("No saved task list found. Creating a new one...");
         }
-    }
-
-    /**
-     * Runs the main function that abstracts the chat bot's functionalities.
-     */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        Parser parser = new Parser(taskList, storage, ui, sc);
-
-        ui.printFormattedOutput("Hello! I'm Duke\n    What can I do for you?");
-
-//         Input-Response logic
-        String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            parser.parse(input);
-            input = sc.nextLine();
-        }
-
-        ui.printFormattedOutput("Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Entry point of the program from command line.
-     *
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-//        new Duke().run();
-        new Duke();
     }
 
     /**

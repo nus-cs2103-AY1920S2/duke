@@ -1,6 +1,7 @@
+import duke.Storage;
 import org.junit.jupiter.api.Test;
-import tasks.TaskList;
-import tasks.Todo;
+import duke.tasks.TaskList;
+import duke.Todo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
