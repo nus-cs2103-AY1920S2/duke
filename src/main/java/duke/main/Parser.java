@@ -22,7 +22,11 @@ public class Parser {
         } else if (inputArr[0].equals("find")) {
             return new FindCommand(inputArr);
         } else if (inputArr[0].equals("delete")) {
-            return new DeleteCommand(inputArr);
+            if (inputArr[1].equals("complete")){
+                return new ClearAllCompleteCommand(inputArr);
+            } else {
+                return new DeleteCommand(inputArr);
+            }
         } else if (inputArr[0].equals("todo")) {
             return new CreateTodoCommand(inputArr);
         } else if (inputArr[0].equals("event")) {
