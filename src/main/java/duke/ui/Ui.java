@@ -1,7 +1,5 @@
 package duke.ui;
 
-import javafx.scene.image.Image;
-
 /** User Interface Manager. */
 public class Ui {
 

@@ -122,7 +122,7 @@ public abstract class Task {
         if (this.dateTime.equals(LocalDate.MAX)) {
             return output;
         } else {
-            return String.format("%s (at: %s)", output, outputFormatter);
+            return String.format("%s (at: %s)", output, this.dateTime.format(outputFormatter));
         }
     }
 

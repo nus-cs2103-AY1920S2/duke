@@ -52,10 +52,6 @@ public class Duke {
             } catch (DukeException e) {
                 System.err.println(e.toString());
                 continue;
-            } catch (ArrayIndexOutOfBoundsException x) {
-                Exception e = new DukeException("Please enter a valid instruction!");
-                System.err.println(e.toString());
-                continue;
             } catch (IOException e) {
                 System.err.println(e.toString());
                 continue;

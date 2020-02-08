@@ -32,13 +32,13 @@ public class Parser {
         case "done": {
 
             if (inputArr.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please specify a task number to mark as done!");
+                throw new DukeException("Please specify a task number to mark as done!");
             }
 
             int taskNumber = Integer.parseInt(inputArr[1]);
 
             if (taskNumber > taskList.getSize()) {
-                throw new DukeException("☹ OOPS!!! Please specify a valid task number!");
+                throw new DukeException("Please specify a valid task number!");
             }
 
             command = new DoneCommand(taskNumber);
@@ -49,13 +49,13 @@ public class Parser {
         case "delete": {
 
             if (inputArr.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please specify a task number to be deleted!");
+                throw new DukeException("Please specify a task number to be deleted!");
             }
 
             int taskNumber = Integer.parseInt(inputArr[1]);
 
             if (taskNumber > taskList.getSize()) {
-                throw new DukeException("☹ OOPS!!! Please specify a valid task number!");
+                throw new DukeException("Please specify a valid task number!");
             }
 
             command = new DeleteCommand(taskNumber);
@@ -66,7 +66,7 @@ public class Parser {
         case "todo": {
 
             if (inputArr.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please enter the descriptions for your to-do list!");
+                throw new DukeException("Please enter the descriptions for your to-do!");
             }
 
             // Pre-processing
@@ -86,7 +86,7 @@ public class Parser {
         case "deadline": {
 
             if (inputArr.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please enter the descriptions for your to-do list!");
+                throw new DukeException("Please enter the description for your deadline!");
             }
 
             // Pre-processing
@@ -109,7 +109,7 @@ public class Parser {
         case "event": {
 
             if (inputArr.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please enter the descriptions for your to-do list!");
+                throw new DukeException("Please enter the description for your event!");
             }
 
             // Pre-processing
@@ -132,7 +132,7 @@ public class Parser {
         case "find": {
 
             if (inputArr.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please enter a keyword so that we can retrieve the appropriate task(s)!");
+                throw new DukeException("Please enter a keyword so that we can retrieve the appropriate task(s)!");
             }
 
             // Pre-processing
@@ -155,7 +155,7 @@ public class Parser {
         }
 
         default: {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
 
         }
