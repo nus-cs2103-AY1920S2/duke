@@ -147,6 +147,7 @@ public class Parser {
             break;
         case REMINDER:
             command = checkValidReminderArgument(details);
+            break;
         case ARCHIVE_LIST:
             command = checkValidArchiveListArgument(details);
             break;
@@ -155,6 +156,7 @@ public class Parser {
             break;
         case ARCHIVE_DELETE:
             command = checkValidArchiveDeleteArgument(details, archiveList);
+            break;
         case NOTE_LIST:
             command = checkValidNoteListArgument(details);
             break;
