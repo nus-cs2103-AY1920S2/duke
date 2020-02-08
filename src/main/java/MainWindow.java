@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        assert input.length() > 0 : "The user's input is not valid.";
         Parser parser = new Parser(input.split(" "));
         String command = parser.getCommand();
         String response = this.getResponse(this.duke.run(input)); //potential bug

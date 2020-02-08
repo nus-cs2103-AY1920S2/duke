@@ -70,6 +70,7 @@ public class Task {
      */
     @Override
     public String toString(){
-            return " [T][" + this.getStatusIcon() + "]" + this.description;
+        assert this.description.length() > 0 : "The description of the Task is not valid";
+        return " [T][" + this.getStatusIcon() + "]" + this.description;
     }
 }

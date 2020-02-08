@@ -35,6 +35,7 @@ public class Storage {
      */
     public void saveToDisk(ArrayList<Task> taskStorage) {
         String name = this.path;
+        assert name.length() > 0 : "The given path to store the list of Tasks is not valid.";
         try{
             FileWriter fw = new FileWriter(this.path);
             BufferedWriter bw = new BufferedWriter(fw);
