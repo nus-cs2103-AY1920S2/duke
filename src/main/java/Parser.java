@@ -76,6 +76,7 @@ public class Parser {
      * @param dateTime object to hold the result.
      */
     public void grabDateTime(int indexFound, String[] inputCommand, StringBuilder dateTime)  throws DukeException {
+        assert dateTime != null;
         if (indexFound == inputCommand.length - 1) {
             // means that there is no description of date of task after the delimiter
             throw new DukeException("Date and time of the event/deadline cannot be empty!");
