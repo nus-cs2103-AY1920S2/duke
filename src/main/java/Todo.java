@@ -18,7 +18,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Same as toString
+     * Same as toString.
      *
      * @return Todo toString
      */

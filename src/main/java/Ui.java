@@ -1,52 +1,52 @@
 public class Ui {
 
-    String logo = " ____        _        \n"
+    static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    String welcomeMessage = "Hello from\n" + logo + "\n I am at your service\n";
+    static String welcomeMessage = "Hello from\n" + logo + "\n I am at your service\n";
     //    System.out.println("Hello from\n" + logo + "\n I am at your service\n");
-    String botReplyLine = "----------------------------------------------";
+    static String botReplyLine = "----------------------------------------------";
 
     /**
      * Welcome message.
      */
-    public void showWelcome() {
+    public static void showWelcome() {
         System.out.println("Hello from\n" + logo + "\n I am at your service\n" + botReplyLine);
     }
 
     /**
      * Goodbye message.
      */
-    public void goodbyeMessage() {
+    public static void goodbyeMessage() {
         System.out.println(botReplyLine + "\n Duke: I'll say goodnight now \n" + botReplyLine);
     }
 
     /**
      * Shows ---------------------.
      */
-    public void showLine() {
+    public static void showLine() {
         System.out.println(botReplyLine);
     }
 
     /**
      * Message when TaskList is empty.
      */
-    public void emptyList() {
+    public static void emptyList() {
         showLine();
         System.out.println("You currently do not have anything in your list");
         showLine();
     }
 
     /**
-     * Done task command
+     * Done task command.
      *
      * @param taskList   Current TaskList
      * @param taskNumber Specified task number in TaskList
      */
-    public void doneTask(TaskList taskList, int taskNumber) {
+    public static void doneTask(TaskList taskList, int taskNumber) {
         showLine();
         System.out.println("Consider it done.");
         taskList.getTask(taskNumber).doneTask();
@@ -57,7 +57,7 @@ public class Ui {
     /**
      * Message when invalid task number specified.
      */
-    public void invalidTask() {
+    public static void invalidTask() {
         showLine();
         System.out.println("Invalid task number.");
         showLine();
@@ -83,7 +83,7 @@ public class Ui {
      *
      * @return Message of missing task number.
      */
-    public String missingTaskNumber() {
+    public static String missingTaskNumber() {
         return botReplyLine + "\n Missing task number \n" + botReplyLine;
     }
 
@@ -93,7 +93,7 @@ public class Ui {
      * @param str todo, deadline or event.
      * @return Message of incomplete command.
      */
-    public String incompleteCommand(String str) {
+    public static String incompleteCommand(String str) {
         return botReplyLine + "\n" + str + " not complete \n" + botReplyLine;
     }
 
@@ -102,30 +102,36 @@ public class Ui {
      *
      * @return Message of invalid command.
      */
-    public String invalidCommand() {
+    public static String invalidCommand() {
         return botReplyLine + " \n Sorry I do not understand. \n" + botReplyLine;
     }
 
     /**
      * Message when task is added.
      */
-    public void addedCommand() {
+    public static void addedCommand() {
         showLine();
         System.out.println("Duke: added your command. \n");
 
     }
 
     /**
-     * Message to show number of tasks in TaskList
+     * Message to show number of tasks in TaskList.
      *
      * @param listSize number of tasks in TaskList
      */
-    public void taskInList(int listSize) {
+    public static void taskInList(int listSize) {
         System.out.println("You have " + listSize + " task(s) in your list.");
         showLine();
     }
 
-    public void listCommand(TaskList taskList, StringBuilder sb) {
+    /**
+     * Message to show when list command activated.
+     *
+     * @param taskList TaskList provided.
+     * @param sb       StringBuilder object.
+     */
+    public static void listCommand(TaskList taskList, StringBuilder sb) {
         showLine();
         for (int i = 0; i < taskList.getTaskListSize(); i++) {
             System.out.println(i + 1 + ". " + taskList.getTask(i).toString());

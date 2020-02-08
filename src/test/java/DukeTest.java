@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
@@ -8,11 +7,11 @@ public class DukeTest {
         Todo taskTest = new Todo("testing");
         assertEquals("[T][✘] testing", taskTest.toString());
     }
-    
+
     @Test
-    public void uiTest(){
+    public void uiTest() {
         Ui ui = new Ui();
         assertEquals("----------------------------------------------", ui.botReplyLine);
     }
-    
+
 }

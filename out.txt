@@ -2,3 +2,4 @@
 [T][✘] testing
 [E][✓] ball (at: 2019-09-02)
 [T][✘] helloworld
+[T][✘] run

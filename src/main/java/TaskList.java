@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    Ui ui = new Ui();
-    public ArrayList<Task> tasks = new ArrayList<>();
-    
+    public ArrayList<Task> tasks = (ArrayList<Task>)new ArrayList<Task>();
+
     /**
      * Constructor for TaskList.
      *
@@ -20,7 +19,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
-        ui.addedCommand();
+        Ui.addedCommand();
         System.out.println(task.toString());
     }
 
@@ -52,24 +51,29 @@ public class TaskList {
         tasks.remove(taskNumber);
     }
 
+    /**
+     * Finds specified task in TaskList based on description.
+     *
+     * @param description Task description to find task in TaskList.
+     */
     public void findTask(String description) {
-        ArrayList<Task> foundTasks = new ArrayList<>();
+        ArrayList<Task> foundTasks = (ArrayList<Task>)new ArrayList<Task>();
         for (Task task : tasks) {
             if (task.description.contains(description)) {
                 foundTasks.add(task);
             }
         }
         if (foundTasks.size() != 0) {
-            ui.showLine();
+            Ui.showLine();
             System.out.println("Found your matching tasks in your list:");
             for (int i = 0; i < foundTasks.size(); i++) {
                 System.out.println(i + 1 + ". " + foundTasks.get(i).toString());
             }
-            ui.showLine();
+            Ui.showLine();
         } else {
-            ui.showLine();
+            Ui.showLine();
             System.out.println("There are no matching tasks in your list");
-            ui.showLine();
+            Ui.showLine();
         }
 
     }

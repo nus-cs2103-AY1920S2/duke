@@ -17,14 +17,14 @@ public class Task {
     }
 
     /**
-     * Returns tick icon or cross icon
+     * Returns tick icon or cross icon.
      *
-     * @return tick icon || cross icon
+     * @return tick icon || cross icon.
      */
     public String getStatusIcon() {
         return (isDone
-                ? "\u2713"
-                : "\u2718"); //return tick or X symbols
+                ? "\u2713" //return ✓ symbol.
+                : "\u2718"); //return X symbol.
     }
 
     /**
@@ -33,7 +33,7 @@ public class Task {
      * @param doneStatus Done status of a task.
      */
     public void isDone(String doneStatus) {
-        if (doneStatus.equalsIgnoreCase("\u2713]")) {
+        if (doneStatus.equalsIgnoreCase("\u2713]")) { //check if doneStatus = ✓ symbol.
             this.isDone = true;
         } else {
             this.isDone = false;

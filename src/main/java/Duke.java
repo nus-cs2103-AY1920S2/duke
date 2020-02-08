@@ -19,7 +19,7 @@ public class Duke {
     }
 
     /**
-     * Run duke
+     * Run duke.
      */
     public void run() {
         ui.showWelcome();
@@ -84,7 +84,8 @@ public class Duke {
                 } else if (arrString[0].equalsIgnoreCase("deadline")) {
                     try {
                         String[] deadlineString = arrString[1].split("/");
-                        Deadline deadline = new Deadline(deadlineString[0].strip(), deadlineString[1].substring(2).strip());
+                        Deadline deadline = new Deadline(deadlineString[0].strip(),
+                                deadlineString[1].substring(2).strip());
                         tasks.addTask(deadline);
                         ui.taskInList(tasks.getTaskListSize());
                     } catch (ArrayIndexOutOfBoundsException ex) {

@@ -7,10 +7,10 @@ public class Event extends Task {
     protected LocalDate formattedDate;
 
     /**
-     * Constructor for Event class
+     * Constructor for Event class.
      *
      * @param description Description for event.
-     * @param at          Date of event
+     * @param at          Date of event.
      * @throws DukeException If date/description not specified.
      */
     public Event(String description, String at) throws DukeException {
@@ -25,11 +25,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" +
-                super.toString() +
-                " (at: " +
-                formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-                ")";
+        return "[E]"
+                + super.toString() 
+                + " (at: " 
+                + formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+                + ")";
     }
 
 
@@ -39,10 +39,10 @@ public class Event extends Task {
      * @return Event toString.
      */
     public String saveToList() {
-        return "[E]" +
-                super.toString() +
-                " (at: " +
-                formattedDate +
-                ")";
+        return "[E]" 
+                + super.toString() 
+                + " (at: " 
+                + formattedDate 
+                + ")";
     }
 }

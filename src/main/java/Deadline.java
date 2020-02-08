@@ -7,7 +7,7 @@ public class Deadline extends Task {
     protected LocalDate formattedDate;
 
     /**
-     * Constructor for Deadline class
+     * Constructor for Deadline class.
      *
      * @param description Description for Deadline.
      * @param by          Date of Deadline
@@ -25,11 +25,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" +
-                super.toString() +
-                " (by: " +
-                formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-                ")";
+        return "[D]" 
+                + super.toString() 
+                + " (by: "
+                + formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+                + ")";
     }
 
     /**
@@ -38,10 +38,10 @@ public class Deadline extends Task {
      * @return Deadline toString.
      */
     public String saveToList() {
-        return "[D]" +
-                super.toString() +
-                " (by: " +
-                formattedDate +
-                ")";
+        return "[D]" 
+                + super.toString() 
+                + " (by: " 
+                + formattedDate 
+                + ")";
     }
 }
