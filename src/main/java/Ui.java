@@ -31,15 +31,15 @@ public class Ui {
     /**
      * Prints the goodbye statement for Duke.
      */
-    public void printGoodbye() {
-        System.out.println("Don't forget to fill out a patient questionnaire. Your feedback will be invaluable!");
+    public String printGoodbye() {
+        return "Don't forget to fill out a patient questionnaire. Your feedback will be invaluable!";
     }
 
     /**
      * Prints the message for when the list is empty.
      */
-    public void printEmptyListMessage() {
-        System.out.println("Whoops! You have 0 neuromods. Neuromods can be obtained from defeating Typhon or by fabrication using the Neuromod blueprint.");
+    public String printEmptyListMessage() {
+        return "Whoops! You have 0 neuromods. Neuromods can be obtained from defeating Typhon or by fabrication using the Neuromod blueprint.\n";
     }
 
     /**
@@ -53,21 +53,22 @@ public class Ui {
      * Prints out all the Tasks currently maintained in your TaskList.
      * @param tasks The TaskList of Tasks which you want to print.
      */
-    public void printList(TaskList tasks) {
-        System.out.println("Neuromods available: ");
+    public String printList(TaskList tasks) {
+        String lst = "Neuromods available: \n";
         for (int i = 0; i < tasks.getTaskListSize(); i++) {
             String counter = Integer.toString(i + 1);
             String completion_symbol = tasks.get(i).getCompletionStatusAsString();
             String task_type = tasks.get(i).getTaskType();
             String task_description = tasks.get(i).getDescription();
-            String line = counter + ". " + completion_symbol + " | [" + task_type + "] | " + task_description;
+            String line = counter + ". " + completion_symbol + " | [" + task_type + "] | " + task_description + "\n";
             if (task_type.equals("E") || task_type.equals("D")) {
                 String task_date = tasks.get(i).getDate();
-                line = counter + ". " + completion_symbol + " | [" + task_type + "] | " + task_description + " | " + task_date;
+                line = counter + ". " + completion_symbol + " | [" + task_type + "] | " + task_description + " | " + task_date + "\n";
             }
 
-            System.out.println(line);
+            lst = lst + line;
         }
+        return lst;
     }
 
     // These have got to do with the adding/deleting of tasks from the list ========================================
@@ -75,49 +76,49 @@ public class Ui {
     /**
      * Prints when a Task has been added to the TaskList.
      */
-    public void printAdd() {
-        System.out.println("Scan complete, new psionic aptitude available.");
+    public String printAdd() {
+        return "Scan complete, new psionic aptitude available.\n";
     }
 
     /**
      * Prints when a Task is deleted from the TaskList.
      */
-    public void printDelete() {
-        System.out.println("Neuromod installed. You have depleted 1 neuromod from your inventory:");
+    public String printDelete() {
+        return "Neuromod installed. You have depleted 1 neuromod from your inventory:\n";
     }
 
     /**
      * Prints the number of Tasks in your current TaskList.
      * @param tasks Tasks in your TaskList.
      */
-    public void printNumTasksInList(TaskList tasks) {
-        System.out.println("You currently have " + tasks.getTaskListSize() + " neuromods in your inventory.");
+    public String printNumTasksInList(TaskList tasks) {
+        return "You currently have " + tasks.getTaskListSize() + " neuromods in your inventory.\n";
     }
 
     /**
      * Prints the exception message.
      * @param exception Exception message.
      */
-    public void printExceptionMessage(DukeException exception) {
-        System.out.println(exception);
+    public String printExceptionMessage(DukeException exception) {
+        return exception.getMessage() + "\n";
     }
 
     /**
      * Prints the message when a specified task has been marked as completed.
      * @param task The Task object which has been completed.
      */
-    public void printMarkedAsDone(Task task) {
-        System.out.println("Mission complete:");
+    public String printMarkedAsDone(Task task) {
+        String lst = "Mission complete: \n";
 
         String completion_symbol = task.getCompletionStatusAsString();
         String task_type = task.getTaskType();
         String task_description = task.getDescription();
-        String line = completion_symbol + " | [" + task_type + "] | " + task_description;
+        String line = completion_symbol + " | [" + task_type + "] | " + task_description + "\n";
         if (task_type.equals("E") || task_type.equals("D")) {
             String task_date = task.getDate();
-            line = completion_symbol + " | [" + task_type + "] | " + task_description + " | " + task_date;
+            line = completion_symbol + " | [" + task_type + "] | " + task_description + " | " + task_date + "\n";
         }
-        System.out.println(line);
+        return lst + line;
     }
 
 }

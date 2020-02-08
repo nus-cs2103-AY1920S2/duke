@@ -36,7 +36,7 @@ public class Storage {
             if (split_task.length == 3) { // TODO
                 Todo new_todo = new Todo(split_task[2]);
                 if (split_task[0].contains("\u2713")) { // read the completion status
-                    new_todo.updateisCompleted(true);
+                    new_todo.updateIsCompleted(true);
                 }
                 tasks.add(new_todo);
             }
@@ -46,14 +46,14 @@ public class Storage {
                 if (split_task[1].contains("E")) {
                     Event new_event = new Event(split_task[2], date);
                     if (split_task[0].contains("\u2713")) { // read the completion status
-                        new_event.updateisCompleted(true);
+                        new_event.updateIsCompleted(true);
                     }
                     tasks.add(new_event);
                 }
                 else {
                     Deadline new_deadline = new Deadline(split_task[2], date);
                     if (split_task[0].contains("\u2713")) {
-                        new_deadline.updateisCompleted(true);
+                        new_deadline.updateIsCompleted(true);
                     }
                     tasks.add(new_deadline);
                 }

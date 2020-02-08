@@ -87,23 +87,24 @@ public class TaskList {
      * Finds the Tasks whose descriptions contain the keyword provided and prints them out.
      * @param keyword Keyword which we have to search for among the existing tasks.
      */
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         int counter = 1;
-        System.out.println("Here are the matching tasks in your list:"); // wanna change?
+        String lst = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < getTaskListSize(); i++) {
             if (get(i).getDescription().contains(keyword)) {
                 String completion_status = get(i).getCompletionStatusAsString();
                 String task_type = get(i).getTaskType();
                 String description = get(i).getDescription();
-                String line = completion_status + " | [" + task_type + "] | " + description;
+                String line = completion_status + " | [" + task_type + "] | " + description + "\n";
                 if (task_type.contains("E") || task_type.contains("D")) {
-                    line = completion_status + " | [" + task_type + "] | " + description + " | " + get(i).getDate();
+                    line = completion_status + " | [" + task_type + "] | " + description + " | " + get(i).getDate() + "\n";
                 }
-
-                System.out.println(Integer.toString(counter) + ". " + line);
+                line = Integer.toString(counter) + ". " + line;
                 counter++;
+                lst = lst + line;
             }
         }
+        return lst;
     }
 
 }
