@@ -27,6 +27,7 @@ checkstyle {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+
     String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'

@@ -32,7 +32,12 @@ public class FindCommand extends Command {
         String[] inputTokens = this.command.split(" ");
         assert inputTokens[0] == "find";
         String dateString = (inputTokens.length > 1) ? inputTokens[1] : "";
-        TaskList filteredTasks = filterByString(tasks, dateString);
+        TaskList filteredTasks;
+        try {
+            filteredTasks = filterByString(tasks, dateString);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
         return ui.prettyPrintList(filteredTasks);
 
     }
@@ -44,7 +49,7 @@ public class FindCommand extends Command {
      * @param filter the keyword to filter with
      * @return list the filtered task list
      */
-    public TaskList filterByString(TaskList tasks, String filter) {
+    public TaskList filterByString(TaskList tasks, String filter) throws DukeException {
         TaskList filteredTasks = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {

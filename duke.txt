@@ -1,5 +1,4 @@
 T | 1 | 123
-D | 1 | submit | 2019-12-12 19:00
 T | 0 | return book submit
 E | 0 | read | 2019-12-12 2-4pm
-T | 0 | add
+T | 1 | add

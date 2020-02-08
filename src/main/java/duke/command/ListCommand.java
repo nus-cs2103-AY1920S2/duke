@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -27,7 +28,12 @@ public class ListCommand extends Command {
         String[] inputTokens = this.command.split(" ");
         assert inputTokens[0] == "list";
         String dateString = (inputTokens.length > 1) ? inputTokens[1] : "";
-        TaskList filteredTasks = filterTasksByDate(tasks, dateString);
+        TaskList filteredTasks;
+        try {
+            filteredTasks = filterTasksByDate(tasks, dateString);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
         return ui.prettyPrintList(filteredTasks);
     }
 
@@ -38,7 +44,7 @@ public class ListCommand extends Command {
      * @param dateString the date criteria in string format
      * @return the filtered tasklist
      */
-    public static TaskList filterTasksByDate(TaskList tasks, String dateString) {
+    public static TaskList filterTasksByDate(TaskList tasks, String dateString) throws DukeException  {
         TaskList filteredTasks;
 
         // If there is a filter

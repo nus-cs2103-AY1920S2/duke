@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Objects;
+
 /**
  * The duke.task.Task class represents a task, which has a description and whether it is completed or not.
  */
@@ -54,5 +56,19 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "]" + " " + description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return isDone &&
+                Objects.equals(description, task.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone);
     }
 }

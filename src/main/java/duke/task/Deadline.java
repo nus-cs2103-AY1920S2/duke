@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * The duke.task.Deadline class represents a task that need to be
@@ -47,5 +48,19 @@ public class Deadline extends Task {
                 + " "
                 + time.format(DateTimeFormatter.ofPattern("HHmm"))
                 + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deadline deadline = (Deadline) o;
+        return Objects.equals(date, deadline.date) &&
+                Objects.equals(time, deadline.time);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, time);
     }
 }

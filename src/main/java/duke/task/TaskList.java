@@ -60,8 +60,21 @@ public class TaskList {
      *
      * @param task the task to be added
      */
-    public void add(Task task) {
-        tasks.add(task);
+    public void add(Task task) throws DukeException {
+        if (hasNoDuplicates(task)) {
+            tasks.add(task);
+        } else {
+            throw new DukeException("OOPS!!! Duplicate task detected!");
+        }
+    }
+
+    public boolean hasNoDuplicates(Task task) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).equals(task)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -78,7 +91,7 @@ public class TaskList {
             return new Todo(taskString.replaceFirst("^todo ", ""));
         }
 
-        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
     }
 
     /**
@@ -97,7 +110,7 @@ public class TaskList {
 
             // If there is a date and time
             if (dateOrTimeTokens.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Event tasks require a specific time and date.");
+                throw new DukeException("OOPS!!! Event tasks require a specific time and date.");
             }
 
             try {
@@ -105,11 +118,11 @@ public class TaskList {
                 String description = eventTokens[0].replaceFirst("^event ", "");
                 return new Event(description, date, dateOrTimeTokens[1]);
             } catch (Exception e) {
-                throw new DukeException("☹ OOPS!!! Cannot parse date or time.");
+                throw new DukeException("OOPS!!! Cannot parse date or time.");
             }
         }
 
-        throw new DukeException("☹ OOPS!!! Event tasks require a description, "
+        throw new DukeException("OOPS!!! Event tasks require a description, "
                 + "and a specific time and date (e.g. 2019-12-12 2-4pm).");
     }
 
@@ -129,7 +142,7 @@ public class TaskList {
 
             // If there is a date and time
             if (dateOrTimeTokens.length <= 1) {
-                throw new DukeException("☹ OOPS!!! Deadline tasks require a specific time and date.");
+                throw new DukeException("OOPS!!! Deadline tasks require a specific time and date.");
             }
 
             try {
@@ -138,11 +151,11 @@ public class TaskList {
                 String description = deadlineTokens[0].replaceFirst("^deadline ", "");
                 return new Deadline(description, date, time);
             } catch (Exception e) {
-                throw new DukeException("☹ OOPS!!! Cannot parse date or time.");
+                throw new DukeException("OOPS!!! Cannot parse date or time.");
             }
         }
 
-        throw new DukeException("☹ OOPS!!! Deadline tasks require a description, "
+        throw new DukeException("OOPS!!! Deadline tasks require a description, "
                 + "and a specific time and date (e.g. 2019-12-12 1800).");
     }
 }

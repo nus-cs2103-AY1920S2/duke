@@ -115,13 +115,13 @@ public class Duke extends Application {
 
         sendButton.setPrefWidth(55.0);
 
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setTopAnchor(scrollPane,1.0);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(sendButton,1.0);
+        AnchorPane.setRightAnchor(sendButton,1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput,1.0);
+        AnchorPane.setBottomAnchor(userInput,1.0);
 
         scene = new Scene(mainLayout);
 
@@ -141,7 +141,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Create a DialogBox based on user input and duke's response
+     * Create a DialogBox based on user input and duke's response.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
@@ -154,7 +154,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Get response from the duke after entering input
+     * Get response from the duke after entering input.
      * @param input user input
      * @return message to be displayed
      */
