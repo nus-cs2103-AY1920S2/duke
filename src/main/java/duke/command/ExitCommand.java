@@ -10,10 +10,13 @@ import duke.ui.Ui;
  */
 public class ExitCommand extends Command {
     /**
-     * Constructs an ExitCommand.
+     * Returns true if the command terminates the program.
+     *
+     * @return true if the command terminates the program.
      */
-    public ExitCommand() {
-        this.isExit = true;
+    @Override
+    public boolean isExit() {
+        return true;
     }
 
     /**

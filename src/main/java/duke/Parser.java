@@ -25,35 +25,35 @@ public class Parser {
      */
     public static Command parse(String command) throws DukeException {
         Command cmd;
-        String[] commandArr = command.split(" ", 2);
-        switch (commandArr[0]) {
+        String[] commandArray = command.split(" ", 2);
+        switch (commandArray[0]) {
         case "todo":
             try {
-                cmd = new AddCommand(commandArr[0], commandArr[1]);
+                cmd = new AddCommand(commandArray[0], commandArray[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
             break;
         case "deadline":
             try {
-                cmd = new AddCommand(commandArr[0], commandArr[1]);
+                cmd = new AddCommand(commandArray[0], commandArray[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("The description and due date of a deadline cannot be empty.");
             }
             break;
         case "event":
             try {
-                cmd = new AddCommand(commandArr[0], commandArr[1]);
+                cmd = new AddCommand(commandArray[0], commandArray[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("The description and date and time of an event cannot be empty.");
             }
             break;
         case "done":
             try {
-                if (commandArr[1].trim().equals("")) {
+                if (commandArray[1].trim().equals("")) {
                     throw new DukeException("The ID of the task done cannot be empty.");
                 }
-                cmd = new DoneCommand(Integer.parseInt(commandArr[1].trim()));
+                cmd = new DoneCommand(Integer.parseInt(commandArray[1].trim()));
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("The ID of the task done cannot be empty.");
             } catch (NumberFormatException e) {
@@ -62,10 +62,10 @@ public class Parser {
             break;
         case "delete":
             try {
-                if (commandArr[1].trim().equals("")) {
+                if (commandArray[1].trim().equals("")) {
                     throw new DukeException("The ID of the task to delete cannot be empty.");
                 }
-                cmd = new DeleteCommand(Integer.parseInt(commandArr[1].trim()));
+                cmd = new DeleteCommand(Integer.parseInt(commandArray[1].trim()));
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("The ID of the task to delete cannot be empty.");
             } catch (NumberFormatException e) {
@@ -74,10 +74,10 @@ public class Parser {
             break;
         case "get":
             try {
-                if (commandArr[1].trim().equals("")) {
+                if (commandArray[1].trim().equals("")) {
                     throw new DukeException("The date of tasks to retrieve cannot be empty.");
                 }
-                cmd = new GetCommand(LocalDate.parse(commandArr[1].trim()));
+                cmd = new GetCommand(LocalDate.parse(commandArray[1].trim()));
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("The date of tasks to retrieve cannot be empty.");
             } catch (DateTimeParseException e) {
@@ -86,10 +86,10 @@ public class Parser {
             break;
         case "find":
             try {
-                if (commandArr[1].trim().equals("")) {
+                if (commandArray[1].trim().equals("")) {
                     throw new DukeException("The keyword to search cannot be empty.");
                 }
-                cmd = new FindCommand(commandArr[1].trim());
+                cmd = new FindCommand(commandArray[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("The keyword to search cannot be empty.");
             }

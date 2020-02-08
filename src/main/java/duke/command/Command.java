@@ -9,7 +9,6 @@ import duke.ui.Ui;
  * Represents a command to be executed.
  */
 public abstract class Command {
-    protected boolean isExit = false;
 
     /**
      * Returns true if the command terminates the program.
@@ -17,7 +16,7 @@ public abstract class Command {
      * @return true if the command terminates the program.
      */
     public boolean isExit() {
-        return isExit;
+        return false;
     }
 
     /**
