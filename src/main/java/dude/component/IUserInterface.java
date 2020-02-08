@@ -52,10 +52,24 @@ public interface IUserInterface {
     }
 
     /**
+     * Displays an error message to the user when an invalid command is given.
+     *
+     * @param errorMsg A message describing the problem with the user's input.
+     */
+    default void respondError(String errorMsg) {
+        respond(errorMsg);
+    }
+
+    /**
      * Speaks a single sentence to the user.
      * The only primitive exposed to construct a response to pass to respond(Runnable r).
      *
      * @param str the sentence to speak to the user.
      */
     void speak(String str);
+
+    /**
+     * Closes resources associated with the UI
+     */
+    void close();
 }
