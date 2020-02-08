@@ -74,7 +74,7 @@ public class Parser {
      */
     private static Command getFindCommand(String[] partialCommands) throws DukeMissingInfoException {
         try {
-            if (partialCommands[1].equals("")) {
+            if (partialCommands[1].isBlank()) {
                 throw new DukeMissingInfoException(partialCommands[0]);
             }
             return new FindCommand(partialCommands[1]);
@@ -132,7 +132,7 @@ public class Parser {
      */
     private static Command getTodoCommand(String[] partialCommands) throws DukeMissingInfoException {
         try {
-            if (partialCommands[1].equals("")) {
+            if (partialCommands[1].isBlank()) {
                 throw new DukeMissingInfoException(partialCommands[0]);
             }
             return new AddCommand(new Todo(partialCommands[1]));

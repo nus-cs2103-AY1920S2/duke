@@ -33,11 +33,16 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
+
     /**
      * Runs the program until "bye" command is received.
      */
     public void run() {
         ui.showWelcome();
+        ui.showReminder(taskList.getDeadlineReminder());
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -53,9 +58,5 @@ public class Duke {
                 ui.showBottomLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }

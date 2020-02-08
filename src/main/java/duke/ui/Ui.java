@@ -78,4 +78,18 @@ public class Ui {
     public void showAcknowledgement(String acknowledgement) {
         System.out.println(acknowledgement);
     }
+
+    /**
+     * Prints the reminder for deadlines.
+     *
+     * @param reminder the list of overdue deadlines and upcoming deadlines.
+     */
+    public void showReminder(String reminder) {
+        if (reminder.isBlank()) {
+            return;
+        }
+        showTopLine();
+        System.out.println(reminder);
+        showBottomLine();
+    }
 }
