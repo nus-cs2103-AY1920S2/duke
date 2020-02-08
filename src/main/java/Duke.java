@@ -9,8 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
-public class Duke extends Application {{
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -19,6 +20,10 @@ public class Duke extends Application {{
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    public Duke(){
+        this("/Users/liuchao/duke/src/main/");
+    }
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -91,6 +96,8 @@ public class Duke extends Application {{
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        //scene = new Scene(helloWorld); // Setting the scene to be our Label
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -105,8 +112,8 @@ public class Duke extends Application {{
 
         scene = new Scene(mainLayout);
 
-        stage.setScene(scene);
-        stage.show();
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
 
     }
 }
