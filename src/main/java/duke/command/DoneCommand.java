@@ -34,6 +34,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert index < tasks.getSize() && index >= 0 : "Index out of range!";
         Task task = tasks.getTask(index);
         task.markAsDone();
         return ui.showDoneMessages(" " + task.toString());
