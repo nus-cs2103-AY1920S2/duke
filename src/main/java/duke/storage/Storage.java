@@ -68,7 +68,7 @@ public class Storage {
      * @throws DukeException if there are errors loading from file and/or converting data from file.
      */
     public ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
         try {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {

@@ -19,13 +19,13 @@ public class ListCommand extends Command {
     /**
      * Executes the ListCommand by listing all the tasks in the task list.
      *
-     * @param tasks   TaskList of Duke.
+     * @param taskList   TaskList of Duke.
      * @param ui      The user interface.
      * @param storage To load from and save to the disk.
      * @return List of tasks.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return tasks.listTasks();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.listTasks();
     }
 }

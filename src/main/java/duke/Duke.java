@@ -14,7 +14,7 @@ import duke.ui.Ui;
 public class Duke {
 
     private Storage storage;
-    private TaskList tasks;
+    private TaskList taskList;
     private Ui ui;
 
     /**
@@ -26,10 +26,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
     }
 
@@ -44,7 +44,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showTopLine();
                 Command c = Parser.parse(fullCommand);
-                String acknowledgement = c.execute(tasks, ui, storage);
+                String acknowledgement = c.execute(taskList, ui, storage);
                 ui.showAcknowledgement(acknowledgement);
                 isExit = c.isExit();
             } catch (DukeException e) {
