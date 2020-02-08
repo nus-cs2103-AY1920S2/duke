@@ -31,6 +31,10 @@ public class TaskList {
      * @return the deleted task
      */
     public Task deleteTask(int index) {
+        // check whether the index is within bounds
+        assert index >= 0;
+        assert index < tasks.size();
+
         return tasks.remove(index);
     }
 
@@ -41,6 +45,10 @@ public class TaskList {
      * @return the completed task
      */
     public Task completeTask(int index) {
+        // check whether the index is within bounds
+        assert index >= 0;
+        assert index < tasks.size();
+
         Task task = tasks.get(index);
         task.tick();
         return task;

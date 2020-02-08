@@ -23,6 +23,9 @@ public class Event extends Task {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm");
         String[] times = timeRange.split(" to ");
 
+        // check if two sets of time is present
+        assert times.length == 2;
+
         startTime = format.parse(times[0], new ParsePosition(0));
         endTime = format.parse(times[1], new ParsePosition(0));
     }
