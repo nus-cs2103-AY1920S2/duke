@@ -39,7 +39,7 @@ public class Ui {
      * @param taskList Task list as a String (ideally loaded from Storage)
      */
     public void showList(String taskList) {
-        System.out.println(wrapLine("Honk! Here's your task list: \n" + taskList));
+        System.out.println(wrapLine("Honk! Here's your current task list: \n" + taskList));
     }
 
     /**
@@ -61,6 +61,16 @@ public class Ui {
     public void showDoneTask(Task doneTask) {
         String doneHeader = "Good job! I've honked it as done:\n  ";
         System.out.println(wrapLine(doneHeader + doneTask));
+    }
+
+    /**
+     * Message to be displayed after task has been marked as undone.
+     *
+     * @param doneTask Task that was marked as undone
+     */
+    public void showUndoneTask(Task doneTask) {
+        String undoneHeader = "Hope you complete it soon! I've honked it as undone:\n  ";
+        System.out.println(wrapLine(undoneHeader + doneTask));
     }
 
     /**
@@ -96,6 +106,14 @@ public class Ui {
         }
 
         System.out.println(wrapLine(foundHeader + foundList));
+    }
+
+    /**
+     * Displays message after undo command has been executed.
+     */
+    public void showUndoMessage() {
+        System.out.println(wrapLine("I have unhonked your previous command.\n " +
+                "Use \'undo\' to undo your undo. Honk!"));
     }
 
     /**

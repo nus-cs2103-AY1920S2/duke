@@ -10,7 +10,9 @@ import java.util.Scanner;
  */
 public class Storage {
     private String listPath;
+    private String prevListPath;
     private String arrayPath;
+    private String prevArrayPath;
     private Ui ui;
 
     /**
@@ -19,9 +21,12 @@ public class Storage {
      * @param listPath Relative file path for storing the list
      * @param arrayPath Relative file path for storing the array
      */
-    public Storage(String listPath, String arrayPath) {
+    public Storage(String listPath, String prevListPath,
+                   String arrayPath, String prevArrayPath) {
         this.listPath = listPath;
+        this.prevListPath = prevListPath;
         this.arrayPath = arrayPath;
+        this.prevArrayPath = prevArrayPath;
         this.ui = new Ui();
     }
 
@@ -132,6 +137,48 @@ public class Storage {
         }
     }
 
+    private ArrayList<Task> loadPrevious() throws IOException {
+        File f = new File(prevArrayPath);
+        f.createNewFile();
+        File lf = new File(prevListPath);
+        lf.createNewFile();
+
+        Scanner s = new Scanner(f);
+        if (f.length() == 0) {
+            return new ArrayList<>();
+        } else {
+            ArrayList<Task> ml = new ArrayList<>();
+            while (s.hasNextLine()) {
+                String[] taskArr = s.nextLine().split("\\|");
+                String type = taskArr[0];
+                boolean isDone = Integer.parseInt(taskArr[1]) != 0;
+                String description = taskArr[2];
+
+                switch (type) {
+                    case "todo":
+                        Todo addTodo = new Todo(description, isDone);
+                        ml.add(addTodo);
+                        break;
+                    case "deadline":
+                        String byDate = taskArr[3];
+                        String deadlineTime = taskArr[4];
+                        Deadline addDeadline = new Deadline(description, byDate, deadlineTime, isDone);
+                        ml.add(addDeadline);
+                        break;
+                    case "event":
+                        String atDate = taskArr[3];
+                        String eventTime = taskArr[4];
+                        Event addEvent = new Event(description, atDate, eventTime, isDone);
+                        ml.add(addEvent);
+                        break;
+                    default:
+                        ui.showError("Format error! Honk!");
+                }
+            }
+            return ml;
+        }
+    }
+
     /**
      * Loads task list as a String.
      *
@@ -149,5 +196,83 @@ public class Storage {
             printedList += s.nextLine() + "\n";
         }
         return printedList;
+    }
+
+    /**
+     * Writes to respective prev list and prev array files to store the data in the hard disk before
+     * it was updated. This allows user to carry out the undo command.
+     *
+     * @param taskList Task list before update
+     * @throws IOException If error is encountered in FileWriter
+     */
+    public void saveLastState(ArrayList<Task> taskList) throws IOException {
+        // save prev mainList array
+        File arrayFile = new File(prevArrayPath);
+        arrayFile.createNewFile();
+
+        FileWriter af = new FileWriter(prevArrayPath);
+        String stringList = "";
+        for (Task task : taskList) {
+            if (task instanceof Event) {
+                Event e = (Event) task;
+                String doneStr = e.isDone ? "1" : "0";
+                String eventString = "event|" + doneStr + "|" + e.description + "|" + e.atDate + "|"
+                        + e.time24Hr + System.lineSeparator();
+                stringList += eventString;
+            } else if (task instanceof  Deadline) {
+                Deadline d = (Deadline) task;
+                String doneStr = d.isDone ? "1" : "0";
+                String deadlineString = "deadline|" + doneStr + "|" + d.description + "|" + d.byDate + "|"
+                        + d.time24Hr + System.lineSeparator();
+                stringList += deadlineString;
+            } else if (task instanceof Todo) {
+                Todo t = (Todo) task;
+                String doneStr = t.isDone ? "1" : "0";
+                String todoString = "todo|" + doneStr + "|" + t.description + System.lineSeparator();
+                stringList += todoString;
+            }
+        }
+        af.write(stringList);
+        af.close();
+
+        // save prev list
+        File listFile = new File(prevListPath);
+        listFile.createNewFile();
+
+        FileWriter fw = new FileWriter(prevListPath);
+        String text = "";
+        if (taskList.size() != 0) {
+            for (int i = 0; i < taskList.size(); i++) {
+                if (taskList.get(i) == null) {
+                    break;
+                }
+                int indexNum = i + 1;
+                String item = " " + indexNum + "." + taskList.get(i).toString();
+                if (i != taskList.size() - 1) {
+                    item += "\n";
+                }
+                text += item;
+            }
+        }
+        fw.write(text);
+        fw.close();
+    }
+
+    /**
+     * Saves the current state, as the previous state, and retrieves the saved state as the current state.
+     * When a user does 'undo' after an 'undo', the list goes back to its initial state before any 'undo'
+     * command was inputted.
+     *
+     * @return Updated ArrayList of tasks after the undo command
+     * @throws IOException When load() or loadPrevious() encounters IO error
+     */
+    public ArrayList<Task> undoAndLoad() throws IOException {
+        ArrayList<Task> currentTasks = new ArrayList<>(load());
+        ArrayList<Task> previousTasks = new ArrayList<>(loadPrevious());
+
+        save(previousTasks);
+        saveLastState(currentTasks);
+
+        return load();
     }
 }

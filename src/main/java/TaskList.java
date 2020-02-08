@@ -4,15 +4,18 @@ import java.util.ArrayList;
  * Represents task list in Duke.
  */
 public class TaskList {
+    private Ui ui;
     private ArrayList<Task> taskList;
 
     // load from storage
     public TaskList(ArrayList<Task> taskList) {
+        this.ui = new Ui();
         this.taskList = taskList;
     }
 
     // create new empty list
     public TaskList() {
+        this.ui = new Ui();
         this.taskList = new ArrayList<>();
     }
 
@@ -144,14 +147,39 @@ public class TaskList {
      * @return Updated task list as an ArrayList
      * @throws GooseTaskExistenceException If index is out of bounds
      */
-    public ArrayList<Task> markDone(int index) throws GooseTaskExistenceException {
+    public Boolean markDone(int index) throws GooseTaskExistenceException {
         if (index >= taskList.size() || index < 0) {
             throw new GooseTaskExistenceException("You trick Goose? This task doesn't exist. Honk...");
         }
 
         Task selected = taskList.get(index);
-        selected.markAsDone();
-        return this.taskList;
+        if (selected.getIsDone()) {
+            return false;
+        } else {
+            selected.markAsDone();
+            return true;
+        }
+    }
+
+    /**
+     * Marks task as undone from task list array based on the index provided.
+     *
+     * @param index Index of task to be marked as undone from task list
+     * @return Updated task list as an ArrayList
+     * @throws GooseTaskExistenceException If index is out of bounds
+     */
+    public Boolean markUndone(int index) throws GooseTaskExistenceException {
+        if (index >= taskList.size() || index < 0) {
+            throw new GooseTaskExistenceException("You trick Goose? This task doesn't exist. Honk...");
+        }
+
+        Task selected = taskList.get(index);
+        if (!selected.getIsDone()) {
+            return false;
+        } else {
+            selected.markAsUndone();
+            return true;
+        }
     }
 
     /**

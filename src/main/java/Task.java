@@ -26,10 +26,23 @@ public class Task {
     }
 
     /**
+     * Retrieves done status of the task.
+     *
+     * @return Boolean representing whether task has been marked as done.
+     */
+    public Boolean getIsDone() {
+        return this.isDone;
+    }
+
+    /**
      * Mark isDone as true.
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public void markAsUndone() {
+        this.isDone = false;
     }
 
     @Override
