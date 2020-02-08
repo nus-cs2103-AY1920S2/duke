@@ -1,10 +1,12 @@
 language: java
 jdk: openjdk11
-script: 
+script:
   - ./gradlew clean
   - ./gradlew check
   - ./gradlew test
-  - ./gradlew coveralls
+
+after_success:
+  - ./gradlew cobertura coveralls
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
