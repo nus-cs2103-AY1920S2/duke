@@ -18,6 +18,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(String keyword) {
         super(false);
+        assert keyword.equals("") : "There is no keyword to find.";
         this.keyword = keyword;
     }
 
