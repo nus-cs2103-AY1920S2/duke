@@ -1,23 +1,25 @@
 
 /**
- * CS2103 Individual Project
+ * CS2103 Individual Project.
+ * DukeException represents all the potential exceptions.
  * @author Wei Cheng
- * DukeException represents all the potential exceptions
  */
 public class DukeException extends IllegalArgumentException {
     /**
-     * Constructor
+     * Constructor.
      * @param message Error message
      */
+
     public DukeException(String message) {
         super(message);
     }
     /**
-     * String representation of the error
+     * String representation of the error.
      * @return String
      */
+
     @Override
-    public String toString(){
+    public String toString() {
         return getMessage();
     }
 }
