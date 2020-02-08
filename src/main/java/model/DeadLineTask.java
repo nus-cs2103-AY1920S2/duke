@@ -12,7 +12,7 @@ public class DeadLineTask extends Task {
     protected LocalDateTime by;
 
     public DeadLineTask(String description, LocalDateTime by) throws NoDescriptionException {
-        super(description);
+        super(description, TASK_TYPE_STRING);
         this.by = by;
     }
 

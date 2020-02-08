@@ -7,7 +7,7 @@ public class ToDoTask extends Task {
     static final String TASK_TYPE_CHA = "T";
 
     public ToDoTask(String description) throws NoDescriptionException {
-        super(description);
+        super(description, TASK_TYPE_STRING);
     }
 
     @Override
