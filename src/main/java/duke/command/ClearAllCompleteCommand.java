@@ -14,6 +14,7 @@ public class ClearAllCompleteCommand extends Command {
 
     /**
      * Returns a string of completed tasks that are deleted
+     * and saves to storage.
      * 
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
@@ -22,6 +23,12 @@ public class ClearAllCompleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws UnableToSaveException {
+        String reply = getCompletedTaskAndDelete(tasks);
+        storage.saveToSave(tasks);
+        return ui.reply(reply);
+    }
+
+    private String getCompletedTaskAndDelete(TaskList tasks) {
         String reply = "I have deleted all the completed tasks as shown below";
         int numbering = 1;
         for (int i = 0; i < tasks.size(); i++) { 
@@ -32,8 +39,7 @@ public class ClearAllCompleteCommand extends Command {
                 tasks.removeTask(i);
             }
         }
-        storage.saveToSave(tasks);
-        return ui.reply(reply);
+        return reply;
     }
 
     @Override

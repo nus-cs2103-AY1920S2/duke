@@ -28,8 +28,8 @@ public class CreateTodoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws NoDescriptionException, UnableToSaveException {
-        int arrLength = inputArr.length;
         String saveReply = "Saving now....\n     ";
+        int arrLength = inputArr.length;
         String nameOfEvent = combineString(inputArr, 1, arrLength);
         if (nameOfEvent.equals("")) {
             throw new NoDescriptionException();

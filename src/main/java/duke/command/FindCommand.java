@@ -20,6 +20,11 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String reply = getListWithKeyword(tasks);
+        return ui.reply(reply);
+    }
+
+    private String getListWithKeyword(TaskList tasks) {
         String toFind = inputArr[1];
         String reply = "Here are the tasks with the keyword you asked for..";
         int numbering = 1;
@@ -29,7 +34,7 @@ public class FindCommand extends Command {
                 reply += (tasks.getTask(i));
             }
         }
-        return ui.reply(reply);
+        return reply;
     }
 
     @Override
