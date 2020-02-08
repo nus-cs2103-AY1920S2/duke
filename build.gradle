@@ -14,6 +14,15 @@ pitest {
     outputFormats = ['XML']
 }
 
+coveralls {
+    sourceDirs = subprojects.sourceSets.main.allSource.srcDirs.flatten()
+    jacocoReportPath = "${projectDir}/http/build/reports/jacoco/test/jacocoTestReport.xml"
+}
+
+tasks.coveralls {
+    onlyIf { System.env.'CI' }
+}
+
 group 'seedu.duke'
 version '0.1.0'
 
