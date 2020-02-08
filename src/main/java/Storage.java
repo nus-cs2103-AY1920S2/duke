@@ -66,13 +66,13 @@ public class Storage {
         Task result;
         switch (taskType) {
         case "T":
-            result = new ToDo(contents[2]); //as the file is hardcoded, the contents[1] should be the description
+            result = new ToDo(contents[2], Integer.parseInt(contents[3])); //as the file is hardcoded, the contents[2] should be the description
             break;
         case "E":
-            result = new Event(contents[2], contents[3]);
+            result = new Event(contents[2], contents[3], Integer.parseInt(contents[4]));
             break;
         default:
-            result = new Deadline(contents[2], contents[3]); // means deadline
+            result = new Deadline(contents[2], contents[3], Integer.parseInt(contents[4])); // means deadline
         }
         if (contents[1].equals("1")) {
             result.setDone();
@@ -119,15 +119,15 @@ public class Storage {
         String result = "";
         switch (taskType) {
         case "T":
-            result += "T|" + this.returnDone(t) + "|" + t.getTaskName();
+            result += "T|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + t.getPriority();
             break;
         case "E":
             Event e = (Event) t;
-            result += "E|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + e.dateTime;
+            result += "E|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + e.dateTime + "|" + e.getPriority();
             break;
         case "D":
             Deadline d = (Deadline) t;
-            result += "D|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + d.dateTime;
+            result += "D|" + this.returnDone(t) + "|" + t.getTaskName() + "|" + d.dateTime + "|" + d.getPriority();
             break;
         default:
             break;

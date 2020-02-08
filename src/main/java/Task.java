@@ -7,6 +7,7 @@ public abstract class Task {
     private String taskName; //name of the given task
     private boolean isDone; //whether the task is done or not
     private String taskType;
+    private int priority; // 1 - low, 2 - medium, 3 - high
 
     /**
      * Constructor.
@@ -17,6 +18,14 @@ public abstract class Task {
         this.taskName = taskName;
         this.isDone = false;
         this.taskType = taskType;
+        this.priority = 2;
+    }
+
+    public Task(String taskName, String taskType, int priority) {
+        this.taskName = taskName;
+        this.taskType = taskType;
+        this.priority = priority;
+        this.isDone = false;
     }
 
     /**
@@ -50,5 +59,28 @@ public abstract class Task {
      */
     public String getTaskType() {
         return this.taskType;
+    }
+
+    public int getPriority() {
+        return this.priority;
+    }
+
+    public boolean setPriority(int priority) {
+        if (this.priority == priority) {
+            return false;
+        } else {
+            this.priority = priority;
+            return true;
+        }
+    }
+
+    public String getPriorityString() {
+        if (this.priority == 1) {
+            return "LOW";
+        } else if (this.priority == 2) {
+            return "MEDIUM";
+        } else {
+            return "HIGH";
+        }
     }
 }

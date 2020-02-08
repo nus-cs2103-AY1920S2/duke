@@ -18,6 +18,11 @@ public class Event extends Task {
         this.dateTime = dateTime;
     }
 
+    public Event(String taskName, String dateTime, int priority) {
+       super(taskName, "E", priority);
+       this.dateTime = dateTime;
+    }
+
     @Override
     /**
      * String representation.
@@ -32,6 +37,8 @@ public class Event extends Task {
             message += "[" + this.getTaskType() + "]" + "[" + "✗" + "] "
                     + this.getTaskName() + " (at: " + this.dateTime + ")";
         }
+
+        message += " Priority: " + this.getPriorityString();
         return message;
     }
 }

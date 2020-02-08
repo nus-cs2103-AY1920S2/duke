@@ -9,8 +9,6 @@ public class Parser {
      * Function that makes sense of the command.
      * Also carries out the necessary actions for each command in the database.
      * @param command command inputted by user.
-     * @param ui the UI class that handles all the aesthetics of the chatbot.
-     * @param list Tasklist class that keeps track of tasks in the list.
      * @return boolean True when the user has not "closed" the chatbot else False.
      */
     public Command respondToUser(String command) {
@@ -34,6 +32,8 @@ public class Parser {
             return new ListCommand(command, false);
         case "find":
             return new FindCommand(command, false);
+        case "priority":
+            return new SetPriorityCommand(command, false);
         default:
             return new InvalidCommand(command, false);
         }

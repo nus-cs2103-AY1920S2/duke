@@ -11,6 +11,10 @@ public class ToDo extends Task {
         super(taskName, "T");
     }
 
+    public ToDo(String taskName, int priority) {
+        super (taskName, "T", priority);
+    }
+
     @Override
     /**
      * String representation of the task.
@@ -23,6 +27,7 @@ public class ToDo extends Task {
         } else {
             message += "[" + this.getTaskType() + "]" + "[" + "✗" + "] " + this.getTaskName();
         }
+        message += " Priority: " + this.getPriorityString();
         return message;
     }
 }

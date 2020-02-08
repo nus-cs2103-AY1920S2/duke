@@ -23,6 +23,12 @@ public class Deadline extends Task {
         this.constructDate(dateTime);
     }
 
+    public Deadline(String taskName, String dateTime, int priority) {
+        super(taskName, "D", priority);
+        this.dateTime = dateTime;
+        this.constructDate(dateTime);
+    }
+
     /**
      * Helper function to create the LocalDateTime object from the given String.
      * @param dateTime the String that represents the date and time in the format dd-mm-yyy HH:mm.
@@ -48,6 +54,7 @@ public class Deadline extends Task {
             message +=  "[" + this.getTaskType() + "]" + "[" + "✗" + "] "
                     + this.getTaskName() + " (by: " + dateToBePrinted + ")";
         }
+        message += " Priority: " + this.getPriorityString();
         return message;
     }
 
