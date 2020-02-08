@@ -28,7 +28,10 @@ public enum Keyword {
      * <li>DELETE</li>
      * <li>FIND</li>
      * <li>BYE</li>
+     * <li>NOTE_LIST</li>
+     * <li>NOTE_ADD</li>
+     * <li>NOTE_DELETE</li>
      */
 
-    LIST, DONE, TODO, DEADLINE, EVENT, DELETE, FIND, BYE;
+    LIST, DONE, TODO, DEADLINE, EVENT, DELETE, FIND, BYE, NOTE_LIST, NOTE_ADD, NOTE_DELETE;
 }

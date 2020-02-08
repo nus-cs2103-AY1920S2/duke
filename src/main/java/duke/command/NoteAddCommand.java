@@ -4,9 +4,10 @@ import duke.util.NoteList;
 import duke.util.NoteStorage;
 import duke.util.Storage;
 import duke.util.TaskList;
+import duke.util.Note;
 
 /*
- * ListCommand
+ * NoteAddCommand
  *
  * CS2103 AY19/20 Semester 2
  * Individual Project
@@ -17,31 +18,33 @@ import duke.util.TaskList;
  */
 
 /**
- * <p>ListCommand extends the command abstract class
- * and it describes the behavior of the commands regarding
- * to list the tasks.</p>
+ * <p>NoteAddCommand extends the Command abstract class
+ * and it describes the behavior of a command regarding
+ * to adding notes.</p>
  * @author Mario Lorenzo
  */
 
-public class ListCommand extends Command {
+public class NoteAddCommand extends Command {
+    private Note note;
 
     /**
-     * Constructs a ListCommand instance.
+     * Constructs a NoteAddCommand instance.
+     * @param note The note that would like to be added to the list.
      */
-
-    public ListCommand() {
-
+    public NoteAddCommand(Note note) {
+        this.note = note;
     }
 
     /**
-     * Executes the list command.
+     * Executes the command by adding the note to noteList
+     * and write the details in the hard disk.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
      * @return The String representing the outcome of the execution.
      */
 
     public String execute(TaskList taskList, Storage storage, NoteList noteList, NoteStorage noteStorage) {
-        return taskList.listTasks();
+        return noteList.addNote(note, noteStorage);
     }
 
     /**

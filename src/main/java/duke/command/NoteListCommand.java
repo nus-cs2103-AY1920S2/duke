@@ -1,12 +1,7 @@
 package duke.command;
 
-import duke.util.NoteList;
-import duke.util.NoteStorage;
-import duke.util.Storage;
-import duke.util.TaskList;
-
 /*
- * ListCommand
+ * NoteListCommand
  *
  * CS2103 AY19/20 Semester 2
  * Individual Project
@@ -16,20 +11,24 @@ import duke.util.TaskList;
  *
  */
 
+import duke.util.NoteList;
+import duke.util.NoteStorage;
+import duke.util.Storage;
+import duke.util.TaskList;
+
 /**
- * <p>ListCommand extends the command abstract class
+ * <p>NoteListCommand extends the command abstract class
  * and it describes the behavior of the commands regarding
- * to list the tasks.</p>
+ * to list the notes.</p>
  * @author Mario Lorenzo
  */
 
-public class ListCommand extends Command {
-
+public class NoteListCommand extends Command {
     /**
-     * Constructs a ListCommand instance.
+     * Constructs a NoteListCommand instance.
      */
 
-    public ListCommand() {
+    public NoteListCommand() {
 
     }
 
@@ -41,13 +40,8 @@ public class ListCommand extends Command {
      */
 
     public String execute(TaskList taskList, Storage storage, NoteList noteList, NoteStorage noteStorage) {
-        return taskList.listTasks();
+        return noteList.listNotes();
     }
-
-    /**
-     * Returns a boolean value of whether the Command is a ByeCommand instance.
-     * @return the boolean value of whether the instance is a ByeCommand.
-     */
 
     @Override
     public boolean isByeCommand() {

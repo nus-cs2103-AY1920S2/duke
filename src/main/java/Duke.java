@@ -26,6 +26,8 @@ import java.util.ArrayList;
 public class Duke {
     private TaskList taskList;
     private Storage storage;
+    private NoteStorage noteStorage;
+    private NoteList noteList;
     private Parser parser;
 
     /**
@@ -34,9 +36,11 @@ public class Duke {
      * that the Duke instance can perform, stored in a HashMap.
      */
 
-    private Duke(TaskList taskList, Storage storage, Parser parser) {
+    private Duke(TaskList taskList, Storage storage, NoteList noteList, Parser parser, NoteStorage noteStorage) {
         this.taskList = taskList;
         this.storage = storage;
+        this.noteList = noteList;
+        this.noteStorage = noteStorage;
         this.parser = parser;
     }
 
@@ -61,7 +65,8 @@ public class Duke {
             throw e;
         }
         TaskList taskList = new TaskList(tasks);
-        return new Duke(taskList, storage, new Parser());
+        NoteList noteList = new NoteList(notes);
+        return new Duke(taskList, storage, noteList, new Parser(), noteStorage);
     }
 
     /**
@@ -82,7 +87,7 @@ public class Duke {
     public String processCommand(String commands) {
         try {
             Command command = parser.parse(commands, taskList);
-            return command.execute(taskList, storage);
+            return command.execute(taskList, storage, noteList, noteStorage);
         } catch (DukeException exc) {
             return exc.getMessage();
         }

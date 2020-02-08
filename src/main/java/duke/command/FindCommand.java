@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.util.NoteList;
+import duke.util.NoteStorage;
 import duke.util.Storage;
 import duke.util.TaskList;
 
@@ -41,7 +43,7 @@ public class FindCommand extends Command {
      */
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, NoteList noteList, NoteStorage noteStorage) {
         return taskList.findTask(key);
     }
 
