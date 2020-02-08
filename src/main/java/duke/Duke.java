@@ -27,7 +27,10 @@ public class Duke {
         assert filePath != null && filePath.length() > 0 : "filepath should not be empty";
         Storage storage = new TextStorage(filePath);
         TaskList tasks = new TaskList();
+
         ui.showGreeting();
+
+        // Load existing save file
         try {
             tasks.add(storage.load());
             ui.showReply("Save file loaded!");
@@ -36,7 +39,9 @@ public class Duke {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
-        CommandHandler handler = new CommandHandler(tasks, ui);
+
+        // Main loop of Duke to handle user commands
+        CommandHandler handler = new CommandHandler(tasks, ui, storage);
         while (handler.isActive()) {
             if (inputLock != null) {
                 try {
@@ -45,8 +50,10 @@ public class Duke {
                     e.printStackTrace();
                 }
             }
-            handler.executeCmd(ui.getInput());
+            handler.handleCommand(ui.getInput());
         }
+
+        // Save to disk
         try {
             storage.save(tasks.getAllTasks());
             ui.showReply("Save Success! See you next time!");
@@ -55,6 +62,7 @@ public class Duke {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
+
         ui.shutDown();
     }
 

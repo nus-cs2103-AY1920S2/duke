@@ -3,13 +3,14 @@ package duke.commands;
 import duke.ui.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.storage.Storage;
 import duke.exceptions.DukeException;
 
 /**
  * Displays all Tasks in the TaskList.
  */
 class ListAll implements Command {
-    public void execute(String arg, TaskList tasks, Ui ui) throws DukeException {
+    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.size() == 0) {
             throw new DukeException("There are currently no tasks.");
         }

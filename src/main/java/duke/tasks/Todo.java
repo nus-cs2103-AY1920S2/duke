@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * Represents a generic <code>Task</code>.
+ * Represents a generic Task.
  */
 public class Todo extends Task {
     public Todo(String name) {

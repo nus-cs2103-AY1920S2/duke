@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import duke.tasks.Task;
 
 /**
- * Represents a list of <code>Task</code>s.
+ * Represents a list of Tasks.
  */
 public class TaskList {
     private List<Task> tasks;
@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a <code>Task</code> to the TaskList.
+     * Adds a Task to the TaskList.
      * 
      * @param task Task to be added.
      */
@@ -29,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Adds multiple <code>Tasks</code> to the TaskList.
+     * Adds multiple Tasks to the TaskList.
      * 
      * @param moreTasks Tasks to be added.
      */
@@ -38,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Retrives all <code>Tasks</code> containing a keyword from the TaskList.
+     * Retrives all Tasks containing a keyword from the TaskList.
      * 
      * @param keyword Keyword to be checked (case-insensitive).
      * @return List of Tasks containing the keyword.
@@ -55,29 +55,29 @@ public class TaskList {
     }
 
     /**
-     * Retrives a specified <code>Task</code> from the TaskList.
+     * Retrives a specified Task from the TaskList.
      * 
-     * @param taskNo <code>Task</code> number to be retrieved.
-     * @return <code>Task</code> object specified.
+     * @param taskNo Task number to be retrieved.
+     * @return Task object specified.
      */
     public Task get(int taskNo) {
         return tasks.get(taskNo - 1);
     }
 
     /**
-     * Removes a specified <code>Task</code> from the TaskList
+     * Removes a specified Task from the TaskList
      * 
-     * @param taskNo <code>Task</code> number to be removed.
-     * @return <code>Task</code> object that has been removed.
+     * @param taskNo Task number to be removed.
+     * @return Task object that has been removed.
      */
     public Task remove(int taskNo) {
         return tasks.remove(taskNo - 1);
     }
 
     /**
-     * Retrives all <code>Task</code>s from the TaskList.
+     * Retrives all Task from the TaskList.
      * 
-     * @return <code>List</code> of all Tasks in the TaskList.
+     * @return List of all Tasks in the TaskList.
      */
     public List<Task> getAllTasks() {
         return tasks;

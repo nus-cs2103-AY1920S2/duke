@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import duke.ui.Gui;
 
 /**
@@ -24,10 +25,13 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Gui.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+
             Gui gui = fxmlLoader.<Gui>getController();
             gui.setDuke(duke);
+
             stage.setScene(scene);
             stage.resizableProperty().setValue(false);
+            // Handle case where user manually exits
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent event) {
                     event.consume();
@@ -35,6 +39,7 @@ public class Main extends Application {
                 }
             });
             stage.show();
+
             new Thread(() -> {
                 duke.run();
             }).start();

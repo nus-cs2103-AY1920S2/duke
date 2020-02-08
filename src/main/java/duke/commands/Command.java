@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.ui.Ui;
 import duke.tasks.TaskList;
+import duke.storage.Storage;
 import duke.exceptions.DukeException;
 
 /**
@@ -9,12 +10,12 @@ import duke.exceptions.DukeException;
  */
 public interface Command {
     /**
-     * Executes the <code>Command</code>.
+     * Parses the given argument string and executes the Command.
      * 
      * @param arg   Arguments for the command (may be empty).
      * @param tasks List of Tasks.
      * @param ui    User interface for Duke.
      * @throws DukeException If inputs are invalid.
      */
-    void execute(String arg, TaskList tasks, Ui ui) throws DukeException;
+    void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

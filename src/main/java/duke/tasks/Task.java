@@ -13,7 +13,7 @@ public abstract class Task {
     }
 
     /**
-     * Marks the <code>Task</code> as completed.
+     * Marks the Task as completed.
      */
     public void markAsDone() {
         isDone = true;
@@ -28,8 +28,7 @@ public abstract class Task {
     }
 
     /**
-     * @return a unicode tick or cross to represent <code>Task</code> completion
-     *         status.
+     * @return A unicode tick or cross to represent Task completion status.
      */
     public String getStatus() {
         return isDone ? "\u2713" : "\u2718";

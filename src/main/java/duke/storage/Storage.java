@@ -8,18 +8,19 @@ import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
 /**
- * Allows <code>Duke</code> to persist data across sessions.
+ * Allows Duke to persist data across sessions.
  */
 public interface Storage {
     /**
      * Saves data in the current session.
-     *
+     * Overwrites existing save file.
+     * 
      * @param tasks List of Tasks.
      */
     void save(List<Task> tasks) throws IOException, DukeException;
 
     /**
-     * Loads data from the previous session (if any).
+     * Loads data from the existing save file (if any).
      *
      * @return List of Tasks from previous session.
      */
