@@ -24,7 +24,7 @@ public class Task {
     }
 
     /**
-     * Converts Complete from true to False
+     * Converts Complete from true to False.
      * @return the task with complete as true
      */
     public Task completeTask() {

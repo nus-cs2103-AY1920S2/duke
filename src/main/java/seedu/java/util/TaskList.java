@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Handles Task and their operations.
- *
- * ArrayList<Task> getTaskArr()
+ *  getTaskArr()
  * String listToPrint()
  * String read()
  */
@@ -22,7 +21,7 @@ public class TaskList {
     }
 
     /**
-     * Returns its ArrayList of Tasks
+     * Returns its ArrayList of Tasks.
      * @return taskArr
      */
     public ArrayList<Task> getTaskArr() {
@@ -88,7 +87,7 @@ public class TaskList {
     private String findTask(String keyword) {
         ArrayList<Task> matchedTask = new ArrayList<>();
         for (Task x: taskArr) {
-            if(x.getTask().contains(keyword)) {
+            if (x.getTask().contains(keyword)) {
                 matchedTask.add(x);
             }
         }

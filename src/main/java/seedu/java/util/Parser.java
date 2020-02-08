@@ -9,10 +9,10 @@ package seedu.java.util;
  */
 public class Parser {
     /**
-     * Static method. Returns a Command (inferred instruction)
+     * Static method. Returns a Command (inferred instruction).
      * @param input from UI
      * @return Command
-     * @throws Exception
+     * @throws Exception your command got problem
      */
     public static Command readCommand(String input) throws Exception {
         return Command.convert(input.split(" ")[0]);
