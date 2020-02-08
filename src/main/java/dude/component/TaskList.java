@@ -12,6 +12,16 @@ import java.util.List;
 public class TaskList {
     private ArrayList<Task> taskList;
 
+    private static class TaskListEntry {
+        public int index;
+        public Task task;
+
+        public TaskListEntry(int index, Task task) {
+            this.index = index;
+            this.task = task;
+        }
+    }
+
     /**
      * Creates an empty TaskList.
      */
