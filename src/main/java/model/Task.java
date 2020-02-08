@@ -1,6 +1,6 @@
-package main.java.model;
+package model;
 
-import main.java.exceptions.NoDescriptionException;
+import exceptions.NoDescriptionException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

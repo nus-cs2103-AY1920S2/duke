@@ -1,8 +1,8 @@
-package main.java.parser;
+package parser;
 
-import main.java.exceptions.NoDescriptionException;
-import main.java.model.Task;
-import main.java.model.ToDoTask;
+import exceptions.NoDescriptionException;
+import model.Task;
+import model.ToDoTask;
 
 public class AddToDoCommand extends Command {
     protected String description;

@@ -1,8 +1,8 @@
-package main.java.parser;
+package parser;
 
-import main.java.exceptions.NoDescriptionException;
-import main.java.model.EventTask;
-import main.java.model.Task;
+import exceptions.NoDescriptionException;
+import model.EventTask;
+import model.Task;
 
 import java.time.LocalDateTime;
 

@@ -1,8 +1,6 @@
-package main.java.model;
+package model;
 
-import main.java.model.Task;
-
-import main.java.exceptions.NoDescriptionException;
+import exceptions.NoDescriptionException;
 
 public class ToDoTask extends Task {
     static final String TASK_TYPE_STRING = "todo task";

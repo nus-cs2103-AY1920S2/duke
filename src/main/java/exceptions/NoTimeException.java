@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package exceptions;
 
 public class NoTimeException extends Exception{
     public NoTimeException(String cause) {

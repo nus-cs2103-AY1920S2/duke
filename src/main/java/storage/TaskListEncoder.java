@@ -1,7 +1,7 @@
-package main.java.storage;
+package storage;
 
-import main.java.model.Task;
-import main.java.model.TaskList;
+import model.Task;
+import model.TaskList;
 
 import java.util.ArrayList;
 import java.util.List;

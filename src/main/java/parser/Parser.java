@@ -1,11 +1,11 @@
-package main.java.parser;
+package parser;
 
-import main.java.exceptions.IllegalDateTimeFormatException;
-import main.java.exceptions.NoCommandException;
-import main.java.exceptions.NoDescriptionException;
-import main.java.model.DeadLineTask;
-import main.java.model.EventTask;
-import main.java.model.ToDoTask;
+import exceptions.IllegalDateTimeFormatException;
+import exceptions.NoCommandException;
+import exceptions.NoDescriptionException;
+import model.DeadLineTask;
+import model.EventTask;
+import model.ToDoTask;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

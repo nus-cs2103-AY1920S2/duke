@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package exceptions;
 
 public class IllegalDateTimeFormatException extends Exception{
     public IllegalDateTimeFormatException(String cause) {

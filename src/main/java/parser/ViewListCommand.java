@@ -1,4 +1,4 @@
-package main.java.parser;
+package parser;
 
 public class ViewListCommand extends Command {
 

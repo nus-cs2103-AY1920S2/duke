@@ -1,7 +1,7 @@
-package main.java.parser;
+package parser;
 
-import main.java.exceptions.NoDescriptionException;
-import main.java.model.TaskList;
+import exceptions.NoDescriptionException;
+import model.TaskList;
 
 public class Command {
     protected TaskList taskList;

@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package exceptions;
 
 public class NoDescriptionException extends Exception  {
     public NoDescriptionException(String cause) {

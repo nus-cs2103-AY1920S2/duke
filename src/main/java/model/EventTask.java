@@ -1,12 +1,10 @@
-package main.java.model;
+package model;
 
-import main.java.model.Task;
-import main.java.exceptions.NoDescriptionException;
+import exceptions.NoDescriptionException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 
 public class EventTask extends Task{

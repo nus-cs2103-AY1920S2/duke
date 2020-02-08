@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package exceptions;
 
 public class NoCommandException extends Exception {
     public NoCommandException(String cause) {

@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package exceptions;
 
 import main.java.storage.Storage;
 

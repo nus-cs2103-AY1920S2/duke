@@ -1,14 +1,14 @@
-package main.java.storage;
+package storage;
 
-import static main.java.parser.Parser.parseDateTime;
-import static main.java.storage.TaskListEncoder.FINISHED_STATUS;
-import static main.java.parser.Parser.DATE_TIME_KEY;
+import static parser.Parser.parseDateTime;
+import static storage.TaskListEncoder.FINISHED_STATUS;
+import static parser.Parser.DATE_TIME_KEY;
 
 import jdk.jfr.Event;
-import main.java.exceptions.IllegalDateTimeFormatException;
-import main.java.exceptions.NoDescriptionException;
-import main.java.exceptions.StorageOperationException;
-import main.java.model.*;
+import exceptions.IllegalDateTimeFormatException;
+import exceptions.NoDescriptionException;
+import exceptions.StorageOperationException;
+import model.*;
 
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;

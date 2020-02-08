@@ -1,11 +1,10 @@
-package main.java.storage;
+package storage;
 
-import main.java.exceptions.IllegalDateTimeFormatException;
-import main.java.exceptions.InvalidStorageFilePathException;
-import main.java.exceptions.NoDescriptionException;
-import main.java.exceptions.StorageOperationException;
-import main.java.model.Task;
-import main.java.model.TaskList;
+import exceptions.IllegalDateTimeFormatException;
+import exceptions.InvalidStorageFilePathException;
+import exceptions.NoDescriptionException;
+import exceptions.StorageOperationException;
+import model.TaskList;
 
 import java.io.IOException;
 import java.nio.file.Files;

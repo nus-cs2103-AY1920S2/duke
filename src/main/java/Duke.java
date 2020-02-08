@@ -1,16 +1,16 @@
-package main.java;
+//package java;
 
-import main.java.exceptions.IllegalDateTimeFormatException;
-import main.java.parser.Command;
-import main.java.parser.ExitCommand;
-import main.java.parser.Parser;
-import main.java.exceptions.InvalidStorageFilePathException;
-import main.java.exceptions.NoCommandException;
-import main.java.exceptions.StorageOperationException;
-import main.java.model.TaskList;
+import exceptions.IllegalDateTimeFormatException;
+import parser.Command;
+import parser.ExitCommand;
+import parser.Parser;
+import exceptions.InvalidStorageFilePathException;
+import exceptions.NoCommandException;
+import exceptions.StorageOperationException;
+import model.TaskList;
 
-import main.java.exceptions.NoDescriptionException;
-import main.java.storage.Storage;
+import exceptions.NoDescriptionException;
+import storage.Storage;
 
 import java.io.IOException;
 
