@@ -4,6 +4,10 @@ public abstract class Task {
     public static final char COMPLETED = 'X';
     public static final char PENDING = ' ';
     public static final char DELIMITER = '|';
+    public static final String ALREADY_DONE_MESSAGE_TEMPLATE
+            = "'%s' has already been done";
+    public static final String MARK_AS_DONE_MESSAGE_TEMPLATE
+            = "Marked '%s' as done";
 
     protected String description;
     protected boolean isCompleted;
@@ -19,11 +23,12 @@ public abstract class Task {
 
     public String markAsCompleted() {
         if (isCompleted) {
-            return String.format("'%s' has already been done",
+            return String.format(Task.ALREADY_DONE_MESSAGE_TEMPLATE,
                     getDescription());
         } else {
             isCompleted = true;
-            return String.format("Marked '%s' as done", getDescription());
+            return String.format(Task.MARK_AS_DONE_MESSAGE_TEMPLATE,
+                    getDescription());
         }
     }
 

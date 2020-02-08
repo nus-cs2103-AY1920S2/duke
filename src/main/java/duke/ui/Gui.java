@@ -25,6 +25,7 @@ public class Gui extends Application implements Ui {
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
+    private AnchorPane mainLayout;
     private Scene scene;
 
     private Image userImage;
@@ -33,6 +34,8 @@ public class Gui extends Application implements Ui {
     private final String userImagePath = "/images/user.png";
     private final String replyImagePath = "/images/reply.png";
 
+    private final String stylesheetPath = "/style/stylesheet.css";
+
     public Gui() {
         userImage = new Image(getClass().getResourceAsStream(userImagePath));
         replyImage = new Image(getClass().getResourceAsStream(replyImagePath));
@@ -40,6 +43,15 @@ public class Gui extends Application implements Ui {
 
     @Override
     public void start(Stage stage) {
+        addElements(stage);
+        stage.show();
+        setStyle(stage);
+        addEventListeners();
+        Duke.getProgram().setUi(this);
+        print(Ui.WELCOME_MESSAGE + "\n");
+    }
+
+    private void addElements(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -47,16 +59,17 @@ public class Gui extends Application implements Ui {
         userInput = new TextField();
         sendButton = new Button("Send");
     
-        AnchorPane mainLayout = new AnchorPane();
+        mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-        scene.getStylesheets().add("/style/stylesheet.css");
+        scene.getStylesheets().add(stylesheetPath);
     
         stage.setScene(scene);
-        stage.show();
+    }
 
-        stage.setTitle("Duke");
+    private void setStyle(Stage stage) {
+        stage.setTitle(Duke.NAME);
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(500.0);
@@ -81,19 +94,16 @@ public class Gui extends Application implements Ui {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
         
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
+    private void addEventListeners() {
         sendButton.setOnMouseClicked((event) -> handleUserInput());
-        
         userInput.setOnAction((event) -> handleUserInput());
-
         dialogContainer.heightProperty().addListener((observable) -> {
             scrollPane.setVvalue(1.0);
         });
-
-        Duke.getProgram().setUi(this);
-        print(Ui.WELCOME_MESSAGE + "\n");
     }
 
     @Override
@@ -111,12 +121,12 @@ public class Gui extends Application implements Ui {
         Duke program = Duke.getProgram();
         program.handleUserInput(input);
         if (program.hasTerminated()) {
-            exit();
+            end();
         }
     }
 
     @Override
-    public void start() {
+    public void begin() {
         Application.launch(this.getClass());
     }
 
@@ -139,7 +149,7 @@ public class Gui extends Application implements Ui {
     }
 
     @Override
-    public void exit() {
+    public void end() {
         Platform.exit();
     }
 }

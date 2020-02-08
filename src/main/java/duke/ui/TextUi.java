@@ -13,7 +13,7 @@ public class TextUi implements Ui {
     }
 
     @Override
-    public void start() {
+    public void begin() {
         print(Ui.WELCOME_MESSAGE);
     }
 
@@ -37,7 +37,7 @@ public class TextUi implements Ui {
     }
 
     @Override
-    public void exit() {
+    public void end() {
         print(Ui.GOODBYE_MESSAGE);
         sc.close();
     }

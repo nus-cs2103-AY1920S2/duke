@@ -12,27 +12,31 @@ import duke.command.method.TodoCommandMethod;
 import duke.exception.DukeException;
 import duke.exception.DukeNoCommandException;
 import duke.exception.DukeUnrecognisedCommandException;
+import duke.utils.Pair;
 
 public class Command {
     private String name;
     private String[] arguments;
     private CommandMethod method;
 
-    public static Command createCommand(String input) throws DukeException {
-        String name;
-        String[] arguments;
+    private static Pair<String,String[]> parseInput(String input) {
         if (input.contains(" ")) {
-            String[] inputs = input.split(" ", 2);
-            name = inputs[0];
-            if (inputs[1].contains(" ")) {
-                arguments = inputs[1].split(" ");
+            String[] parts = input.split(" ", 2);
+            String name = parts[0];
+            if (parts[1].contains(" ")) {
+                return Pair.of(name, parts[1].split(" "));
             } else {
-                arguments = new String[] {inputs[1]};
+                return Pair.of(name, new String[] {parts[1]});
             }
         } else {
-            name = input;
-            arguments = new String[0];
+            return Pair.of(input, new String[0]);
         }
+    }
+
+    public static Command createCommand(String input) throws DukeException {
+        Pair<String,String[]> result = parseInput(input);
+        String name = result.getFirst();
+        String[] arguments = result.getSecond();
         switch (name) {
         case "": {
             throw new DukeNoCommandException();
@@ -63,10 +67,9 @@ public class Command {
             return new Command(name, arguments, new ByeCommandMethod());
         }
         default: {
-            break;
+            throw new DukeUnrecognisedCommandException(name);
         }
         }
-        throw new DukeUnrecognisedCommandException(name);
     }
 
     private Command(String name, String[] arguments, CommandMethod method) {

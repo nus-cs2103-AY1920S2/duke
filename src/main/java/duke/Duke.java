@@ -12,6 +12,8 @@ import duke.ui.Ui;
 import duke.utils.TaskList;
 
 public class Duke {
+    public static final String NAME = "DUKE";
+
     private static Duke program;
 
     private Ui ui;
@@ -79,7 +81,7 @@ public class Duke {
     }
 
     private void run() {
-        ui.start();
+        ui.begin();
         while (!hasTerminated) {
             try {
                 String input = ui.readInput();
@@ -89,7 +91,7 @@ public class Duke {
                 break;
             }
         }
-        ui.exit();
+        ui.end();
     }
 
     public static void main(String[] args) {
