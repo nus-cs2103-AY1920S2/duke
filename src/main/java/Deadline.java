@@ -3,17 +3,17 @@
  */
 public class Deadline extends Task {
 
-    protected String by;
+    protected String deadlineDate;
 
     /**
      * Creates a Deadline Task object.
      *
      * @param description A string representation of the task description.
-     * @param by A string representation of the deadline for the task.
+     * @param deadlineDate A string representation of the deadline for the task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String deadlineDate) {
         super(description);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
     }
 
     /**
@@ -23,6 +23,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + deadlineDate + ")";
     }
 }

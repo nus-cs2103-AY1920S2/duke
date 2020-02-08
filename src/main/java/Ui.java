@@ -63,11 +63,13 @@ public class Ui {
      */
     public String printFind(String keyWord) {
         int index = 1;
+        boolean runOnce = true;
         String temp = "";
         for (int i = 0; i < TaskList.size(); i++) {
             if (TaskList.getList().get(i).getDescription().toLowerCase().contains(keyWord)) {
-                if (index == 1) {
+                if (runOnce) {
                     temp += "Here are the matching tasks in your list:\n";
+                    runOnce = false;
                 }
                 temp += index + "." + TaskList.getList().get(i) + "\n";
                 index++;

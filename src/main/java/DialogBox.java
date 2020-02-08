@@ -47,10 +47,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the dialog box with user's image and corresponding text with it.
+     *
+     * @param text String representation of user's dialog.
+     * @param img JavaFX object of image that represents the face of the user.
+     * @return DialogBox that has user's image accompanied with its dialog.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns the dialog box with Duke's image and corresponding text with it.
+     *
+     * @param text String representation of Duke's dialog.
+     * @param img JavaFX object of image that represents the face of Duke.
+     * @return DialogBox that has Duke's image accompanied with its dialog.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

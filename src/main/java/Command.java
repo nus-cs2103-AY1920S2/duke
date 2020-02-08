@@ -31,8 +31,8 @@ public class Command {
             } else {
                 int number = Integer.parseInt(command[1].trim());
                 if (number < 1 || number > tasks.getList().size()) {
-                    assert number > 1: "Invalid index, cannot be smaller than 1!";
-                    assert number < tasks.getList().size(): "Invalid index, cannot be greater than list size!";
+                    assert number > 1 : "Invalid index, cannot be smaller than 1!";
+                    assert number < tasks.getList().size() : "Invalid index, cannot be greater than list size!";
                     return "The index inputted is not in the list! Please enter a valid index!";
                 }
                 if (tasks.getList().get(number - 1).isDone == false) {
@@ -48,10 +48,10 @@ public class Command {
                 return "OOPS! The description of a todo cannot be empty.";
             } else {
                 String taskName = command[1].trim();
-                Task t = new Todo(taskName);
+                Task todo = new Todo(taskName);
                 storage.addTodo(taskName);
-                tasks.add(t);
-                return ui.printAdd(t);
+                tasks.add(todo);
+                return ui.printAdd(todo);
             }
         case "deadline":
             if (command.length < 2 || command[1].trim().equals("")) {
@@ -91,8 +91,8 @@ public class Command {
             } else {
                 int deletionNumber = Integer.parseInt(command[1].trim());
                 if (deletionNumber < 1 || deletionNumber > tasks.getList().size()) {
-                    assert deletionNumber > 1: "Invalid index, cannot be smaller than 1!";
-                    assert deletionNumber < tasks.getList().size(): "Invalid index, cannot be greater than list size!";
+                    assert deletionNumber > 1 : "Invalid index, cannot be smaller than 1!";
+                    assert deletionNumber < tasks.getList().size() : "Invalid index, cannot be greater than list size!";
                     return "The index inputted is not in the list! Please enter a valid index!";
                 }
                 storage.delete(deletionNumber);
