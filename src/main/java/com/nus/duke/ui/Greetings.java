@@ -1,5 +1,7 @@
 package com.nus.duke.ui;
 
+import java.util.List;
+
 public class Greetings {
     private static final String WELCOME_LOGO    = " ____         _        \n"
                                                 + "|  _ \\ _  __| | _____ \n"
@@ -38,5 +40,13 @@ public class Greetings {
                                                 + "%s\n"
                                                 + "-----------------------------\n", s);
         System.out.println(formattedString);
+    }
+
+    public static void prettyPrint(List<String> strs) {
+        StringBuilder strBldr = new StringBuilder();
+        strBldr.append("-----------------------------");
+        strs.forEach(str -> strBldr.append(str));
+        strBldr.append("-----------------------------");
+        System.out.println(strBldr.toString());
     }
 }

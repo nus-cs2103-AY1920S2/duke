@@ -1,7 +1,9 @@
 package com.nus.duke;
 
+import com.nus.duke.controller.TaskController;
 import com.nus.duke.parser.Parser;
 import com.nus.duke.ui.Greetings;
+import com.nus.duke.tasks.Tasks;
 import java.util.Scanner;
 import javafx.util.Pair;
 
@@ -9,6 +11,7 @@ public class Duke {
     private static void poll(String[] args) {
         Scanner scan = new Scanner(System.in);
         Boolean contLoop = true;
+        TaskController controller = new TaskController();
 
         while(contLoop){
             String input = scan.nextLine();
@@ -16,11 +19,20 @@ public class Duke {
 
             switch(parsedInput.getKey()) {
             case "list":
-                Greetings.prettyPrint(parsedInput.getValue());
+                controller.listAllTasks();
                 break;
+
+            case "add":
+                controller.createNewTask(parsedInput.getValue());
+                break;
+
             case "mark":
                 Greetings.prettyPrint(parsedInput.getValue());
                 break;
+
+            case "delete":
+                break;
+
             case "quit":
                 Greetings.prettyPrint(parsedInput.getValue());
                 contLoop = false;
