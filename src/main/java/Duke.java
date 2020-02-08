@@ -101,8 +101,6 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        //scene = new Scene(helloWorld); // Setting the scene to be our Label
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
