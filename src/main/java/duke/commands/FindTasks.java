@@ -17,7 +17,7 @@ class FindTasks implements Command {
             ui.showReply("No matching tasks found!");
             return;
         }
-
+        assert matchingTasks.size() > 0;
         int counter = 1;
         sb.append("Here are the matching tasks in your list:\n");
         for (Task task : matchingTasks) {

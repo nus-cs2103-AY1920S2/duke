@@ -32,6 +32,7 @@ public class DateTimeParser {
      * @return LocalDateTime parsed from user input.
      */
     public LocalDateTime parse(String str) throws DukeException {
+        assert dtFormatters.size() > 0 : "There should be at least one DateTimeFormatter";
         for (DateTimeFormatter dtf : dtFormatters) {
             try {
                 TemporalAccessor ta = dtf.parseBest(str, LocalDateTime::from, LocalDate::from);

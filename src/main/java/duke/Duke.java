@@ -24,6 +24,7 @@ public class Duke {
      */
     public void run() {
         String filePath = "data/tasks.txt";
+        assert filePath != null && filePath.length() > 0 : "filepath should not be empty";
         Storage storage = new TextStorage(filePath);
         TaskList tasks = new TaskList();
 

@@ -20,7 +20,7 @@ class MarkTaskAsDone implements Command {
         } catch (NumberFormatException e) {
             throw new DukeException("Usage: done [int]");
         }
-        
+
         // Mark task as done
         try {
             Task task = tasks.get(taskNo);

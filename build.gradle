@@ -18,6 +18,7 @@ application {
 
 run {
     standardInput = System.in
+    enableAssertions = true
 }
 
 checkstyle {
