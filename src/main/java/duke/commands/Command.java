@@ -10,7 +10,7 @@ import duke.exceptions.DukeException;
  */
 public interface Command {
     /**
-     * Executes the Command.
+     * Parses the given argument string and executes the Command.
      * 
      * @param arg   Arguments for the command (may be empty).
      * @param tasks List of Tasks.
