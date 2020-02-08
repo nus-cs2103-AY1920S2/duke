@@ -1,3 +1,0 @@
-T | 0 | run
-E | 1 | project meeting | Feb 03 2020
-D | 0 | submission | Mar 05 2020
