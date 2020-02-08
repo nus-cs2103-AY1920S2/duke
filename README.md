@@ -1,26 +1,30 @@
-# Setting up
+# Duke
+
+[![Build Status](https://travis-ci.com/JeremyLoh/duke.svg?branch=master)](https://travis-ci.com/JeremyLoh/duke)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd6f84251f874eb7ad0e2a944755e4df)](https://www.codacy.com/manual/JeremyLoh/duke?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JeremyLoh/duke&amp;utm_campaign=Badge_Grade)
+
+### Setting up
 
 **Prerequisites**
-
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+  * JDK 11
+  * Recommended: IntelliJ IDE
+  * Fork this repo to your GitHub account and clone the fork to your computer
 
 **Importing the project into IntelliJ**
-
 1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
+
+2. Set up the correct JDK version.
    * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
    * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
    * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+3. Click `Import Project`.
+4. Locate the project directory and click `OK`.
+5. Select `Create project from existing sources` and click `Next`.
+6. Rename the project if you want. Click `Next`.
+7. Ensure that your src folder is checked. Keep clicking `Next`.
+8. Click `Finish`.
 
-# Tutorials 
+## Tutorials 
 
 duke.Duke Increment | Tutorial
 ---------------|---------------
@@ -33,7 +37,7 @@ duke.Duke Increment | Tutorial
 [fx3]: <tutorials/javaFxTutorialPart3.md>
 [fx4]: <tutorials/javaFxTutorialPart4.md>
 
-# Feedback, Bug Reports
-
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+## Feedback, Bug Reports
+  * If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se
+ -edu/duke/issues).
+  * We welcome pull requests too.

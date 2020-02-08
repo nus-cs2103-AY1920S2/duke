@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class TaskListTest {
-    TaskList tasks;
-    EventStub eventTask = new EventStub("project meeting", "2020-01-01",
+    private TaskList tasks;
+    private EventStub eventTask = new EventStub("project meeting", "2020-01-01",
             false, "event,0,project meeting,2020-01-01",
             doneStatusIcon, incompleteStatusIcon,
             "[E][" + incompleteStatusIcon + "] project meeting " + "(at: Jan 1 2020)");
-    static final String doneStatusIcon = "\u2713"; // Check mark icon
-    static final String incompleteStatusIcon = "\u2718"; // Cross mark icon
+    private static final String doneStatusIcon = "\u2713"; // Check mark icon
+    private static final String incompleteStatusIcon = "\u2718"; // Cross mark iconprivate
 
     @BeforeEach
     void init() {

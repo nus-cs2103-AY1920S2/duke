@@ -24,24 +24,24 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 
 class DeleteCommandTest {
-    TaskList tasks;
-    Ui ui;
-    Storage storage;
-    ByteArrayOutputStream output;
-    String saveFile = "test.txt";
-    String fileSeparator = File.separator;
+    private TaskList tasks;
+    private Ui ui;
+    private Storage storage;
+    private ByteArrayOutputStream output;
+    private String saveFile = "test.txt";
+    private String fileSeparator = File.separator;
     // Map project path to the directory from which you run your program
-    String projectRootPath = Paths.get("").toAbsolutePath().toString();
-    String dataDirectoryPath = projectRootPath + fileSeparator + "data";
-    String saveFilePath = dataDirectoryPath + fileSeparator + saveFile;
-    static final String doneStatusIcon = "\u2713"; // Check mark icon
-    static final String incompleteStatusIcon = "\u2718"; // Cross mark icon
-    EventStub eventTask = new EventStub("project meeting", "2020-01-01",
+    private String projectRootPath = Paths.get("").toAbsolutePath().toString();
+    private String dataDirectoryPath = projectRootPath + fileSeparator + "data";
+    private String saveFilePath = dataDirectoryPath + fileSeparator + saveFile;
+    private static final String doneStatusIcon = "\u2713"; // Check mark icon
+    private static final String incompleteStatusIcon = "\u2718"; // Cross mark iconprivate
+    private EventStub eventTask = new EventStub("project meeting", "2020-01-01",
             false, "event,0,project meeting,2020-01-01",
             doneStatusIcon, incompleteStatusIcon,
             "[E][" + incompleteStatusIcon + "] project meeting " + "(at: Jan 1 2020)");
 
-    void deleteSaveFile() {
+    private void deleteSaveFile() {
         try {
             Files.deleteIfExists(Paths.get(saveFilePath));
         } catch (IOException e) {

@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.Optional;
 
 /**
  * Driver for duke project.
@@ -17,6 +18,10 @@ public class Duke {
     protected TaskList tasks;
     private Ui ui;
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+    public static void main(String[] args) {
+        new Duke("duke.txt").run(reader);
+    }
 
     /**
      * Returns a new Duke instance, uses duke.txt for save file.
@@ -32,6 +37,10 @@ public class Duke {
      */
     public Duke(String saveFile) {
         ui = new Ui();
+        loadTasksFromSaveFile(saveFile);
+    }
+
+    private void loadTasksFromSaveFile(String saveFile) {
         storage = new Storage(saveFile);
         try {
             tasks = new TaskList(storage.load());
@@ -40,10 +49,6 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("duke.txt").run(reader);
     }
 
     /**
@@ -58,10 +63,10 @@ public class Duke {
         while (!requestExit) {
             // Run process command, check if user has terminated program
             try {
-                Command c = Parser.parse(ui.readCommand(reader));
-                assert c != null : "Parser returned a null command";
-                c.execute(tasks, ui, storage);
-                requestExit = c.isExit();
+                Optional<Command> c = Parser.parse(ui.readCommand(reader));
+                assert c.isPresent() : "Parser did not return a command";
+                c.get().execute(tasks, ui, storage);
+                requestExit = c.get().isExit();
             } catch (IOException ioException) {
                 ui.unableToReadUserInput();
             } catch (DukeException dukeException) {
@@ -69,18 +74,6 @@ public class Duke {
                 ui.showExceptionMessage(dukeException);
             }
         }
-    }
-
-    public Storage getStorage() {
-        return storage;
-    }
-
-    public TaskList getTasks() {
-        return tasks;
-    }
-
-    public Ui getUi() {
-        return ui;
     }
 
     /**
@@ -95,9 +88,9 @@ public class Duke {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
         try {
-            Command command = Parser.parse(input);
-            assert command != null : "Parser returned a null command";
-            command.execute(tasks, ui, storage);
+            Optional<Command> command = Parser.parse(input);
+            assert command.isPresent() : "Parser did not return a command";
+            command.get().execute(tasks, ui, storage);
         } catch (DukeException dukeException) {
             // Display error message
             System.out.print(dukeException.getMessage());
