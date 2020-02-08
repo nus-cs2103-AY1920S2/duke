@@ -31,6 +31,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        assert time != null : "A due time should be entered to this event.";
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                 + time + ")";
     }

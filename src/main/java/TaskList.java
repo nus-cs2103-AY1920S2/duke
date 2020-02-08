@@ -100,6 +100,7 @@ public class TaskList {
         default:
             throw new DukeInvalidCommandException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+        assert task != null : "task can't be null"; //redundant?
         tasks.add(task);
         print("Got it. I've added this task:");
         print("  " + task);

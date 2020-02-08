@@ -31,6 +31,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert date != null : "A due date should be entered to this deadline.";
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                 + time + ")";
     }
