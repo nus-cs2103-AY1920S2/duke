@@ -3,7 +3,6 @@ package com.nus.duke;
 import com.nus.duke.controller.TaskController;
 import com.nus.duke.parser.Parser;
 import com.nus.duke.ui.Greetings;
-import com.nus.duke.tasks.Tasks;
 import java.util.Scanner;
 import javafx.util.Pair;
 

@@ -2,7 +2,6 @@ package com.nus.duke.dao;
 
 import static com.nus.duke.tasks.Tasks.TASK_STATUS;
 import com.nus.duke.tasks.Tasks;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface DAOInterface{
