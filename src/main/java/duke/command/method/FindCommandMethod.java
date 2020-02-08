@@ -13,6 +13,14 @@ import duke.utils.TaskList;
 public class FindCommandMethod implements CommandMethod {
     public static final String NAME = "find";
 
+    public String getFormat() {
+        return FindCommandMethod.NAME + " <keyword>";
+    }
+
+    public String getDescription() {
+        return "Finds tasks whose description contains the given keyword, and lists them.";
+    }
+
     public void execute(Command command) throws DukeException {
         Duke program = Duke.getProgram();
         TaskList tasks = program.getTaskList();

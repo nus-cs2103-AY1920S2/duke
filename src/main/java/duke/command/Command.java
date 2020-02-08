@@ -7,6 +7,7 @@ import duke.command.method.DeleteCommandMethod;
 import duke.command.method.DoneCommandMethod;
 import duke.command.method.EventCommandMethod;
 import duke.command.method.FindCommandMethod;
+import duke.command.method.HelpCommandMethod;
 import duke.command.method.ListCommandMethod;
 import duke.command.method.TodoCommandMethod;
 import duke.exception.DukeException;
@@ -43,6 +44,9 @@ public class Command {
         switch (name) {
         case "": {
             throw new DukeNoCommandException();
+        }
+        case HelpCommandMethod.NAME: {
+            return new Command(name, arguments, new HelpCommandMethod());
         }
         case TodoCommandMethod.NAME: {
             return new Command(name, arguments, new TodoCommandMethod());

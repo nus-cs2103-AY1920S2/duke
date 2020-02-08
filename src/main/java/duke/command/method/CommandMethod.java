@@ -5,4 +5,6 @@ import duke.exception.DukeException;
 
 public interface CommandMethod {
     void execute(Command command) throws DukeException;
+    String getFormat();
+    String getDescription();
 }

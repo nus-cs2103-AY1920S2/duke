@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     public static final char COMPLETED = 'X';
     public static final char PENDING = ' ';
@@ -8,6 +10,14 @@ public abstract class Task {
             = "'%s' has already been done";
     public static final String MARK_AS_DONE_MESSAGE_TEMPLATE
             = "Marked '%s' as done";
+
+    public static final String DATE_TIME_INPUT_PATTERN = "dd/MM/yyyy HHmm";
+    public static final String DATE_TIME_OUTPUT_PATTERN
+            = "EE, dd MMM yyyy, HH:mm";
+    public static final DateTimeFormatter DATE_TIME_INPUT_FORMAT
+            = DateTimeFormatter.ofPattern(Task.DATE_TIME_INPUT_PATTERN);
+    public static final DateTimeFormatter DATE_TIME_OUTPUT_FORMAT
+            = DateTimeFormatter.ofPattern(Task.DATE_TIME_OUTPUT_PATTERN);
 
     protected String description;
     protected boolean isCompleted;

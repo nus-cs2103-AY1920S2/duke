@@ -10,6 +10,14 @@ import duke.task.TodoTask;
 public class TodoCommandMethod implements CommandMethod {
     public static final String NAME = "todo";
 
+    public String getFormat() {
+        return TodoCommandMethod.NAME + " <description>";
+    }
+
+    public String getDescription() {
+        return "Adds a new todo task with the given description.";
+    }
+
     public void execute(Command command) throws DukeException {
         Duke program = Duke.getProgram();
         if (command.getArgumentList().length == 0) {

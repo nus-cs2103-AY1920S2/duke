@@ -13,6 +13,14 @@ import duke.utils.TaskList;
 public class DoneCommandMethod implements CommandMethod {
     public static final String NAME = "done";
 
+    public String getFormat() {
+        return DoneCommandMethod.NAME + " <index>";
+    }
+
+    public String getDescription() {
+        return "Marks the task at the given index as done.";
+    }
+
     public void execute(Command command) throws DukeException {
         Duke program = Duke.getProgram();
         TaskList tasks = program.getTaskList();

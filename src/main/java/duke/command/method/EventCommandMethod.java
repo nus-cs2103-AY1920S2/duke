@@ -15,6 +15,14 @@ import duke.task.EventTask;
 public class EventCommandMethod implements CommandMethod {
     public static final String NAME = "event";
 
+    public String getFormat() {
+        return EventCommandMethod.NAME + " <description> /at <datetime>";
+    }
+
+    public String getDescription() {
+        return "Adds a new task with the given description and time of event.";
+    }
+
     public void execute(Command command) throws DukeException {
         Duke program = Duke.getProgram();
         if (command.getArgumentList().length == 0) {

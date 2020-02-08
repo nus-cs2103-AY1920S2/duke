@@ -1,10 +1,12 @@
 package duke.exception;
 
+import duke.task.Task;
+
 @SuppressWarnings("serial")
 public class DukeInvalidDateTimeException extends DukeException {
     public DukeInvalidDateTimeException(String dateTime) {
         super(String.format(
-                "'%s' is not a valid date-time (valid: '31/05/2019 2359')",
-                dateTime));
+                "'%s' is not in %s format",
+                dateTime, Task.DATE_TIME_INPUT_PATTERN));
     }
 }
