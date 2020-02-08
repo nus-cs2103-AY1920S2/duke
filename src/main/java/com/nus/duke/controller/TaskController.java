@@ -18,7 +18,9 @@ public class TaskController {
 
     public boolean createNewTask(String name) {
         Tasks task = new Tasks(name);
-        return this.dataObj.add(task);
+        Boolean result = this.dataObj.add(task);
+        Greetings.prettyPrint("Added: " + name);
+        return result;
     }
 
     public boolean listTask(String name) {
