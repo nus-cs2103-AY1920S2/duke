@@ -51,14 +51,17 @@ public class Storage {
 
                     switch (type) {
                     case "E":
+                        assert arr.length == 4 : "Entry of event should have E| |isCompleted| |name| |date and time";
                         others = arr[3];
                         tasks.add(new Event(name, completed, others));
                         break;
                     case "D":
+                        assert arr.length == 4 : "Entry of deadline should have D| |isCompleted| |name| |date";
                         others = arr[3];
                         tasks.add(new Deadline(name, completed, others));
                         break;
                     case "T":
+                        assert arr.length == 4 : "Entry of todo should have T| |isCompleted| |name";
                         tasks.add(new Todo(name, completed));
                         break;
                     default:
