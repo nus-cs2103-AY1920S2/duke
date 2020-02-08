@@ -1,8 +1,7 @@
 package duke.exception;
 
-import duke.main.Constant;
 
-public class NoSuchDeleteException extends DukeException {
+public class NoSuchTaskException extends DukeException {
 
     @Override
     public String toString() {
