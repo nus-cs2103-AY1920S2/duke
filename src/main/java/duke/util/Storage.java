@@ -50,7 +50,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
-            tasks = reader.loadTasks();
+            tasks = reader.load();
         } catch (IOException e) {
             System.err.println(e);
         } catch (DukeInvalidTaskFormatException | DukeInvalidDateFormatException e) {
