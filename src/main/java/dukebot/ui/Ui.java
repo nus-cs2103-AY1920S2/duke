@@ -120,6 +120,9 @@ public class Ui {
                     + "done <task index>\n-- Marks the task as done.\n\n"
                     + "delete <task index>\n-- Deletes the task.\n\n"
                     + "reschedule <task index> <time>\n-- Reschedules the task.\n\n"
+                    + "add_contact <name> <number>\n-- Adds a new contact.\n\n"
+                    + "contacts \n-- Displays your contact list.\n\n"
+                    + "delete_contact <task index>\n-- Deletes the contact.\n\n"
                     + "bye\n-- Exits this application.\n\n"
                     + "reset\n-- The forbidden Command. Please never use it... Duke'll forget everything."
             );
