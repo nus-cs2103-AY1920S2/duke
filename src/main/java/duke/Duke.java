@@ -100,9 +100,12 @@ public class Duke extends Application {
     @FXML
     protected void handleSendButtonAction(MouseEvent event) {
         try {
-            Command cmd = Parser.parse(this.userInput.getText());
-            cmd.execute(this.tasks, this.ui = new Gui(this.dialogContainer, this.userInput), this.storage);
-            this.ui.clearUserInput();
+            this.ui = new Gui(this.dialogContainer, this.userInput);
+            if(this.ui.hasNextLine()) {
+                Command cmd = Parser.parse(this.ui.nextLine());
+                cmd.execute(this.tasks, this.ui = new Gui(this.dialogContainer, this.userInput), this.storage);
+                this.ui.clearUserInput();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,9 +113,12 @@ public class Duke extends Application {
 
     @FXML
     protected void handleUserInputOnAction(Event event) {
-        Command cmd = Parser.parse(this.userInput.getText());
-        cmd.execute(this.tasks, this.ui = new Gui(this.dialogContainer, this.userInput), this.storage);
-        this.ui.clearUserInput();
+        this.ui = new Gui(this.dialogContainer, this.userInput);
+        if(this.ui.hasNextLine()) {
+            Command cmd = Parser.parse(this.ui.nextLine());
+            cmd.execute(this.tasks, this.ui = new Gui(this.dialogContainer, this.userInput), this.storage);
+            this.ui.clearUserInput();
+        }
     }
 
     @Override

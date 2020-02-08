@@ -98,7 +98,6 @@ public class Command {
      * @return task successfully executed?
      */
     public boolean execute(TaskList tasks, UiText ui, Storage storage) {
-        System.out.println("Starting duke");
         String first = this.terms.next();
 
         try {

@@ -106,7 +106,7 @@ public class Gui implements UiText {
     }
 
     public boolean hasNextLine() {
-        return this.userInput.getText().isEmpty();
+        return !this.userInput.getText().isEmpty();
     }
 
     private Label getDialogLabel(String text) {
