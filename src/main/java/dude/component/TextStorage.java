@@ -1,14 +1,12 @@
 package dude.component;
 
-import dude.task.Task;
 import dude.task.Todo;
 import dude.task.Deadline;
 import dude.task.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 import java.time.LocalDate;
@@ -50,30 +48,24 @@ public class TextStorage implements IStorage {
      *
      * @param ui User Interface which Dude chatbot uses to report errors when saving data.
      * @param session TaskList containing Tasks to save to data/dude.txt.
+     * @throws SecurityException if a security violation occurs while attempting to create the directory or save file.
      */
     @Override
     public void saveSession(IUserInterface ui, TaskList session) {
         // Create "/data/" directory if it doesn't exist
         if (!storeFile.getParentFile().exists()) {
-            try {
-                boolean isMkdirSuccessful = storeFile.getParentFile().mkdir();
-                if (!isMkdirSuccessful) {
-                    ui.respond("Warning: Could not create /data/ directory to save tasks",
-                            "I won't be able to save your tasks");
-                    return;
-                }
-            } catch (SecurityException e) {
-                ui.respond("Warning: A security violation occurred when trying to save your tasks",
+            boolean isMkdirSuccessful = storeFile.getParentFile().mkdir();
+            if (!isMkdirSuccessful) {
+                ui.respond("Warning: Could not create /data/ directory to save tasks",
                         "I won't be able to save your tasks");
                 return;
             }
         }
 
-        try (FileWriter fw = new FileWriter(storeFile)) {
-            for (Task task : session.getAllTasks()) {
-                fw.write(task.storeFormat() + System.lineSeparator());
-            }
-        } catch (IOException e) {
+        try (PrintWriter pw = new PrintWriter(storeFile)) {
+            session.formatFilteredTasks((index, task) -> task.storeFormat(), task -> true)
+                    .forEachOrdered(pw::println);
+        } catch (FileNotFoundException e) {
             ui.respond("Warning: An error occurred when saving your tasks. "
                     + "Some of your data may have been lost");
         }

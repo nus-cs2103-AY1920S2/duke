@@ -21,9 +21,8 @@ public class ListCommand extends Command {
 
         ui.respond(() -> {
             ui.speak("These are your tasks, dude:");
-            for (String t : tasks.showAllTasks()) {
-                ui.speak(t);
-            }
+            tasks.showFilteredTasks(task -> true)
+                    .forEachOrdered(ui::speak);
         });
     }
 }
