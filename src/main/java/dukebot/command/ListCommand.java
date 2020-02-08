@@ -2,9 +2,13 @@ package dukebot.command;
 
 import dukebot.storage.AppStorage;
 import dukebot.storage.Storage;
+import dukebot.tasklist.Task;
 import dukebot.tasklist.TaskList;
 import dukebot.ui.LineName;
+import dukebot.ui.LineNameWithTask;
 import dukebot.ui.Ui;
+
+import java.util.ArrayList;
 
 /**
  * Command to list all tasks.
@@ -16,9 +20,9 @@ public class ListCommand extends Command {
         TaskList taskList = appStorage.getTaskList();
         if (taskList.size() == 0) {
             ui.sayLine(LineName.LIST_EMPTY);
-        } else {
-            ui.sayLine(LineName.LIST_EXISTS);
-            ui.sayTasks(taskList.getTaskList());
+            return;
         }
+        ui.sayLine(LineName.LIST_EXISTS);
+        ui.sayTasks(taskList.getTaskList());
     }
 }

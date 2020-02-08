@@ -280,10 +280,26 @@ public class Ui {
     public void sayTasks(ArrayList<Task> tasks) {
         int i = 1;
         for (Task task : tasks) {
-            dukeSays(+i + ". "
+            dukeSays(i + ". "
                     + "[" + task.getType() + "] "
                     + task
                     + (task.getDone() ? " [Done!]" : "")
+            );
+            i += 1;
+        }
+    }
+
+    /**
+     * Prints array of tasks.
+     *
+     * @param contactList The array of contacts to print.
+     */
+    public void sayContacts(ArrayList<ContactDetails> contactList) {
+        int i = 1;
+        for (ContactDetails contact : contactList) {
+            dukeSays(i + ". "
+                    + contact.getName()
+                    + " [" + contact.getPhoneNumber() + "] "
             );
             i += 1;
         }
@@ -358,9 +374,6 @@ public class Ui {
             dukeSays("with the number:");
             dukeSays(Integer.toString(contact.getPhoneNumber()));
             dukeSays("into the contact list");
-            break;
-        case PRINT_CONTACT:
-            dukeSays(contact.getName() + "- " + Integer.toString(contact.getPhoneNumber()));
             break;
         case ERROR_PLACEHOLDER:
             // Purely for testing, should never be called in deployment
