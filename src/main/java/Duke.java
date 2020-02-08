@@ -33,6 +33,7 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    Parser parser;
 
     // just an empty constructor
     public Duke() {
@@ -54,6 +55,7 @@ public class Duke extends Application {
             ui.printLoadingError();
             tasks = new TaskList();
         }
+        parser = new Parser(tasks.getList());
     }
 
     /**
@@ -61,20 +63,7 @@ public class Duke extends Application {
      *
      * @throws IOException if there is error handling data in the file.
      */
-    public void run() throws IOException {
-        ui.printWelcome();
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-        Parser parser = new Parser(tasks.getList());
-        while (!command.equals("bye")) {
-            try {
-                parser.parse(command);
-                command = sc.nextLine();
-            } catch (DukeException exception) {
-                ui.printError(exception);
-                command = sc.nextLine();
-            }
-        }
+    public void updateFile() throws IOException {
         // update task list before exiting
         BufferedWriter writer = new BufferedWriter(new FileWriter(storage.getFile()));
         for (Task task: tasks.getList()) {
@@ -169,10 +158,14 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        return run(input);
     }
 
-    public static void main(String[] args) throws IOException {
-        new Duke("./src/main/data/duke.txt").run();
+    public String run(String command) {
+        return parser.parse(command);
+    }
+
+    public static void main(String[] args) {
+        new Duke("./src/main/data/duke.txt");
     }
 }
