@@ -41,6 +41,8 @@ public class DialogBox extends HBox {
         Group rootGroup = new Group();
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
+
+        // add circular frame to image of duke or user
         Circle circle = new Circle(49);
         circle.setStroke(Color.LIGHTPINK);
         circle.setFill(new ImagePattern(img));

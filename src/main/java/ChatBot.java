@@ -35,7 +35,7 @@ public class ChatBot {
         this.updateTaskList();
         while (sc.hasNextLine()) {
             inputCommand = sc.nextLine();
-            Command command = parser.respondToUser(inputCommand, this.ui, this.taskLists);
+            Command command = parser.respondToUser(inputCommand);
             try {
                 command.execute(this.ui, this.taskLists, this.storage);
                 if (command.getExitStatus()) {

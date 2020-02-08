@@ -11,12 +11,16 @@ public class AddDeadlineCommand extends Command {
     public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
         try {
             String[] inputParsed = this.getInputCommand().trim().split(" ");
+
+            // to check if the command violates any rules
             if (!this.getInputCommand().contains("/by")) {
                 throw new DukeException("Deadline command must contain [/by] as stated!");
             }
             if (inputParsed.length == 1) {
                 throw new DukeException("Deadline command description cannot be empty");
             }
+
+            // else extract out the important details and create new deadline task
             StringBuilder taskName = new StringBuilder();
             StringBuilder dateTime = new StringBuilder();
             int indexFound = parser.grabTaskName(taskName, inputParsed, "/by");
@@ -24,6 +28,8 @@ public class AddDeadlineCommand extends Command {
             Deadline.validDate(dateTime.toString());
             Deadline deadline = new Deadline(taskName.toString(), dateTime.toString());
             list.addTask(deadline);
+
+            //write to storage and print out output (for debugging)
             storage.writeToFile(list.getTaskList());
             return ui.prettyPrinting(taskName.toString() + " added!");
         } catch (DukeException e) {

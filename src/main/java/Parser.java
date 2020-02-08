@@ -13,7 +13,7 @@ public class Parser {
      * @param list Tasklist class that keeps track of tasks in the list.
      * @return boolean True when the user has not "closed" the chatbot else False.
      */
-    public Command respondToUser(String command, UI ui, TaskList list) {
+    public Command respondToUser(String command) {
         // split the string
         assert command != null; //if it is null, code breaks
         String[] inputCommand = command.trim().split(" ");
