@@ -50,6 +50,7 @@ public class Parser {
      * Processes raw user input and extracts the description.
      * This is only called when the command is an Event, or Deadline.
      * @return Extracted description of the Event or Deadline.
+     * @throws DukeException when there is no description
      */
     public String processDescriptionForEventOrDeadline() throws DukeException {
         if (splitStringLength() == 1) {
@@ -63,8 +64,9 @@ public class Parser {
     /**
      * Processes raw user input for Deadline Tasks, extracts the date of Task and converts it to a LocalDate object.
      * @return LocalDate object.
+     * @throws DukeException when there is no description
      */
-    public LocalDate deadlineProcessDate() {
+    public LocalDate processDateForDeadline() {
         int start_index = raw_user_input.indexOf("/");
         int end_index = raw_user_input.length();
         String unconverted_date = raw_user_input.substring(start_index, end_index).replace("/by ", "");
@@ -76,7 +78,7 @@ public class Parser {
      * Processes raw user input for Event Tasks, extracts the date of Task and converts it to a LocalDate object.
      * @return
      */
-    public LocalDate eventProcessDate() {
+    public LocalDate processDateForEvent() {
         int start_index = raw_user_input.indexOf("/");
         int end_index = raw_user_input.length();
         String unconverted_date = raw_user_input.substring(start_index, end_index).replace("/at ", "");

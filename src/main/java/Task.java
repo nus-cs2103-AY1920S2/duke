@@ -72,7 +72,7 @@ public class Task {
      * Updates the progress status of the Task.
      * @param update Current boolean status of whether or not the Task has been completed.
      */
-    public void updateisCompleted(boolean update) {
+    public void updateIsCompleted(boolean update) {
         this.isCompleted = update;
     }
 
