@@ -81,6 +81,7 @@ public class Storage {
         File f = new File(filePath);
         f.getParentFile().mkdirs();
         f.createNewFile();
+        assert f.exists();
         return f;
     }
 
@@ -113,6 +114,7 @@ public class Storage {
             throw new DukeUnrecognisedTaskTypeException(taskTypeString);
         }
         }
+        assert newTask.getDescription() != null;
         return newTask;
     }
 }
