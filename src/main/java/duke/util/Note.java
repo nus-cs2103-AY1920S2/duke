@@ -52,4 +52,13 @@ public class Note {
     public String getDate() {
         return this.timestamp.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
+
+    /**
+     * Overrides the Object's toString method.
+     * @return the String representation of the Note.
+     */
+
+    public String toString() {
+        return this.text;
+    }
 }

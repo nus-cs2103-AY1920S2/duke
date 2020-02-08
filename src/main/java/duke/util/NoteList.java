@@ -89,9 +89,9 @@ public class NoteList implements IList<Note> {
         Note task = getNote(index);
         notes.remove(index - 1);
         noteStorage.rewriteToFile(notes);
-        return "Noted. I've removed this task: \n "
+        return "Noted. I've removed this note: \n "
                 + String.format("    %s\n", task)
-                + String.format("Now you have %d task(s) in the list.", notes.size());
+                + String.format("Now you have %d note(s) in the list.", notes.size());
     }
 
     /**

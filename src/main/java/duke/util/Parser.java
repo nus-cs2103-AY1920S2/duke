@@ -7,10 +7,14 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.NoteAddCommand;
+import duke.command.NoteDeleteCommand;
+import duke.command.NoteListCommand;
 import duke.exception.DukeInvalidArgumentFormatException;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeUnknownKeywordException;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -42,6 +46,9 @@ public class Parser {
             put("delete", Keyword.DELETE);
             put("find", Keyword.FIND);
             put("bye", Keyword.BYE);
+            put("note-list", Keyword.NOTE_LIST);
+            put("note-add", Keyword.NOTE_ADD);
+            put("note-delete", Keyword.NOTE_DELETE);
         }
     };
 
@@ -62,8 +69,8 @@ public class Parser {
      * @throws DukeUnknownKeywordException If the command keyword (the first word) is invalid.
      */
 
-    public Command parse(String commandString, IList<Task> taskList) throws DukeUnknownKeywordException,
-            DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
+    public Command parse(String commandString, IList<Task> taskList, NoteList noteList)
+            throws DukeUnknownKeywordException, DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
         String[] splittedCommands = commandString.split(" ");
         String commandStr = splittedCommands[0];
         /*
@@ -101,6 +108,15 @@ public class Parser {
             break;
         case BYE:
             command = checkValidByeArgument(details);
+            break;
+        case NOTE_LIST:
+            command = checkValidNoteListArgument(details);
+            break;
+        case NOTE_ADD:
+            command = checkValidNoteAddArgument(details);
+            break;
+        case NOTE_DELETE:
+            command = checkValidNoteDeleteArgument(details, noteList);
             break;
         default:
             command = checkValidEventArgument(details);
@@ -283,5 +299,53 @@ public class Parser {
 
     private ByeCommand checkValidByeArgument(String details) {
         return new ByeCommand();
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid
+     * note-add command.
+     * @param details The details of the command.
+     * @return The NoteAddCommand instance of the corresponding input.
+     */
+
+    private NoteAddCommand checkValidNoteAddArgument(String details) {
+        return new NoteAddCommand(new Note(details, LocalDateTime.now()));
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid
+     * note-list command.
+     * @param details The details of the command.
+     * @return The NoteListCommand instance of the corresponding input.
+     */
+
+    private NoteListCommand checkValidNoteListArgument(String details) throws DukeInvalidArgumentFormatException {
+        if (!details.equals("")) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'list' command is invalid.");
+        }
+        return new NoteListCommand();
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid
+     * note-delete command.
+     * @param details The details of the command.
+     * @return The NoteDeleteCommand instance of the corresponding input.
+     */
+    private NoteDeleteCommand checkValidNoteDeleteArgument(String details, NoteList noteList) throws
+            DukeInvalidArgumentFormatException{
+        int index = -1;
+        try {
+            index = Integer.parseInt(details);
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'delete' command requires a number.");
+        }
+
+        if (index <= 0 || index > noteList.size()) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
+        }
+        return new NoteDeleteCommand(index);
     }
 }

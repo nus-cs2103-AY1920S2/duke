@@ -48,7 +48,7 @@ public class NoteWriter implements IWriter<Note> {
         }
 
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
-        String[] dataArray = new String[3];
+        String[] dataArray = new String[2];
 
         dataArray[0] = note.getText();
         dataArray[1] = note.getDate();
