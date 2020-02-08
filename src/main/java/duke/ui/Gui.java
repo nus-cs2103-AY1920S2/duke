@@ -72,11 +72,11 @@ public class Gui extends Application implements Ui {
         stage.setTitle(Duke.NAME);
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(500.0);
+        stage.setMinWidth(800.0);
         
-        mainLayout.setPrefSize(500.0, 600.0);
+        mainLayout.setPrefSize(800.0, 600.0);
         
-        scrollPane.setPrefSize(485.0, 530.0);
+        scrollPane.setPrefSize(785.0, 530.0);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         
@@ -85,7 +85,7 @@ public class Gui extends Application implements Ui {
         
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         
-        userInput.setPrefWidth(410.0);
+        userInput.setPrefWidth(700.0);
         
         sendButton.setPrefWidth(65.0);
         
