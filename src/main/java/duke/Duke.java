@@ -19,6 +19,10 @@ public class Duke {
     private Ui ui;
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+    public static void main(String[] args) {
+        new Duke("duke.txt").run(reader);
+    }
+
     /**
      * Returns a new Duke instance, uses duke.txt for save file.
      */
@@ -33,6 +37,10 @@ public class Duke {
      */
     public Duke(String saveFile) {
         ui = new Ui();
+        loadTasksFromSaveFile(saveFile);
+    }
+
+    private void loadTasksFromSaveFile(String saveFile) {
         storage = new Storage(saveFile);
         try {
             tasks = new TaskList(storage.load());
@@ -41,10 +49,6 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("duke.txt").run(reader);
     }
 
     /**
@@ -70,18 +74,6 @@ public class Duke {
                 ui.showExceptionMessage(dukeException);
             }
         }
-    }
-
-    public Storage getStorage() {
-        return storage;
-    }
-
-    public TaskList getTasks() {
-        return tasks;
-    }
-
-    public Ui getUi() {
-        return ui;
     }
 
     /**
