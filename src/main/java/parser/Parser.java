@@ -15,22 +15,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public static final String EXIT_KEY = "bye";
-    public static final String  VIEW_LIST_KEY = "list";
-    public static final String DELETE_KEY = "(delete)(\\s+)(\\d+)";
-    public static final String FINISH_KEY = "(done)(\\s+)(\\d+)";
-    public static final String TODO_KEY = "(todo)(.*)";
     public static final String DATE_TIME_KEY = "(\\d{4}-\\d{2}-\\d{2})\\s*(\\d{2}:\\d{2})*";
-    public static final String DEADLINE_KEY = "(deadline)\\s*(\\S*)\\s*\\/by\\s*" + DATE_TIME_KEY;
-    public static final String EVENT_KEY = "(event)\\s*(\\S*)\\s*\\/at\\s*" + DATE_TIME_KEY;
 
-    static final String DEFAULT_TIME = "23:59";
+    private static final String EXIT_KEY = "bye";
+    private static final String  VIEW_LIST_KEY = "list";
+    private static final String DELETE_KEY = "(delete)(\\s+)(\\d+)";
+    private static final String FINISH_KEY = "(done)(\\s+)(\\d+)";
+    private static final String TODO_KEY = "(todo)(.*)";
+    private static final String DEADLINE_KEY = "(deadline)\\s*(\\S*)\\s*\\/by\\s*" + DATE_TIME_KEY;
+    private static final String EVENT_KEY = "(event)\\s*(\\S*)\\s*\\/at\\s*" + DATE_TIME_KEY;
+    private static final String FIND_KEY = "(find)(.*)";
 
-    static final Pattern DELETE_PATTERN = Pattern.compile(DELETE_KEY);
-    static final Pattern FINISH_PATTERN = Pattern.compile(FINISH_KEY);
-    static final Pattern TODO_PATTERN = Pattern.compile(TODO_KEY);
-    static final Pattern DEADLINE_PATTERN = Pattern.compile(DEADLINE_KEY);
-    static final Pattern EVENT_PATTERN = Pattern.compile(EVENT_KEY);
+    private static final String DEFAULT_TIME = "23:59";
+
+    private static final Pattern DELETE_PATTERN = Pattern.compile(DELETE_KEY);
+    private static final Pattern FINISH_PATTERN = Pattern.compile(FINISH_KEY);
+    private static final Pattern TODO_PATTERN = Pattern.compile(TODO_KEY);
+    private static final Pattern DEADLINE_PATTERN = Pattern.compile(DEADLINE_KEY);
+    private static final Pattern EVENT_PATTERN = Pattern.compile(EVENT_KEY);
+    private static final Pattern FIND_PATTERN = Pattern.compile(FIND_KEY);
 
     public static LocalDateTime parseDateTime(String dateString, String timeString) throws IllegalDateTimeFormatException {
         //TODO: add a notification
@@ -96,6 +99,11 @@ public class Parser {
         return eventMatcher.find();
     }
 
+    private static boolean isFindKey(String input) {
+        Matcher findMatcher = FIND_PATTERN.matcher(input);
+        return findMatcher.find();
+    }
+
     public Command parseCommand(String userInput) throws
             NoCommandException, IllegalDateTimeFormatException{
         if (this.isExitKey(userInput)) {
@@ -125,6 +133,9 @@ public class Parser {
             String description = this.findDescription(EVENT_PATTERN, userInput);
             LocalDateTime at = this.findDateTime(EVENT_PATTERN, userInput);
             return new AddEventCommand(description, at);
+        }
+        else if (this.isFindKey(userInput)) {
+            throw new NoCommandException("OOPS!!! This command has not been implemented :-(\n");
         }
         else {
             throw new NoCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
