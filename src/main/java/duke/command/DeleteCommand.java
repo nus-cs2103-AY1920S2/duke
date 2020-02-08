@@ -21,8 +21,8 @@ public class DeleteCommand extends Command {
         try {
             deleted = taskList.deleteTask(deletedTaskNumber);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("There is no such task with the number you have specified. " +
-                    "Kindly check list again.");
+            throw new DukeException("There is no such task with the number you have specified. "
+                    + "Kindly check list again.");
         }
         return ui.showDeleteMessage(deleted);
     }

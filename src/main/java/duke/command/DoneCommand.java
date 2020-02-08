@@ -21,8 +21,8 @@ public class DoneCommand extends Command {
         try {
             toComplete = taskList.getTask(completedTaskNumber);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("There is no such task with the number you have specified. " +
-                    "Kindly check list again.");
+            throw new DukeException("There is no such task with the number you have specified. "
+                    + "Kindly check list again.");
         }
         toComplete.completeStatus();
         return ui.showDoneMessage(toComplete);

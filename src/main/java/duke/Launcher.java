@@ -7,7 +7,7 @@ import javafx.application.Application;
  * Contains the main method that launches Duke Application.
  */
 public class Launcher {
-        public static void main(String[] args) {
-            Application.launch(Main.class, args);
-        }
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
 }

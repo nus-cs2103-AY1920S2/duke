@@ -24,11 +24,11 @@ public class WhatsupCommand extends Command {
     public String execute(TaskList taskList, Ui ui) {
         ArrayList<Task> queryTasks = new ArrayList<>();
         for (Task task: taskList.getList()) {
-            if (task instanceof Deadline &&
-                    ((Deadline) task).getDueDate().toLocalDate().equals(date)) {
+            if (task instanceof Deadline
+                    && ((Deadline) task).getDueDate().toLocalDate().equals(date)) {
                 queryTasks.add(task);
-            } else if (task instanceof Event &&
-                    ((Event) task).getTimePeriod().toLocalDate().equals(date)) {
+            } else if (task instanceof Event
+                    && ((Event) task).getTimePeriod().toLocalDate().equals(date)) {
                 queryTasks.add(task);
             }
         }

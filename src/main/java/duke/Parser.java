@@ -48,8 +48,8 @@ public class Parser {
             try {
                 completedTaskNumber = Integer.parseInt(doneTokens[1]);
             } catch (NumberFormatException ne) {
-                throw new DukeException("\t" + "Please specify the number of the task that you" +
-                        " wish to mark as completed.");
+                throw new DukeException("\t" + "Please specify the number of the task that you"
+                        + " wish to mark as completed.");
             }
             return new DoneCommand(completedTaskNumber);
 
@@ -63,8 +63,8 @@ public class Parser {
             try {
                 deletedTaskNumber = Integer.parseInt(delTokens[1]);
             } catch (NumberFormatException ne) {
-                throw new DukeException("\t" + "Please specify the number of the task that you" +
-                        " wish to delete.");
+                throw new DukeException("\t" + "Please specify the number of the task that you"
+                        + " wish to delete.");
             }
             return new DeleteCommand(deletedTaskNumber);
 
@@ -75,8 +75,8 @@ public class Parser {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 queryDate = LocalDate.parse(whatsupTokens[1].trim(), formatter);
             } catch (DateTimeParseException e) {
-                throw new DukeException("\t" + "Please write the date in this format: " +
-                        "dd-MM-yyyy");
+                throw new DukeException("\t" + "Please write the date in this format: "
+                        + "dd-MM-yyyy");
             } catch (Exception e) {
                 throw new DukeException("\t" + "Please specify the Whatsup command in the right format.");
             }
@@ -125,22 +125,22 @@ public class Parser {
             }
             return new AddCommand("deadline", deadlineName, dueDate);
 
-            case "find":
-                String[] findTokens = instruction.split(" ");
-                String keyWord;
-                try {
-                    keyWord = findTokens[1];
-                    if (keyWord.equals("")) {
-                        throw new DukeException("\t" + "Please enter a keyword when finding.");
-                    }
-                } catch (ArrayIndexOutOfBoundsException aiobe) {
-                    throw new DukeException("\t" + "Please do not leave the find description empty.");
+        case "find":
+            String[] findTokens = instruction.split(" ");
+            String keyWord;
+            try {
+                keyWord = findTokens[1];
+                if (keyWord.equals("")) {
+                    throw new DukeException("\t" + "Please enter a keyword when finding.");
                 }
-                return new FindCommand(keyWord);
+            } catch (ArrayIndexOutOfBoundsException aiobe) {
+                throw new DukeException("\t" + "Please do not leave the find description empty.");
+            }
+            return new FindCommand(keyWord);
 
-            default:
-                throw new DukeException("\t" + "You have used an invalid instruction. " +
-                    "I am too dumb to understand you.");
+        default:
+            throw new DukeException("\t" + "You have used an invalid instruction. "
+                    + "I am too dumb to understand you.");
         }
     }
 }

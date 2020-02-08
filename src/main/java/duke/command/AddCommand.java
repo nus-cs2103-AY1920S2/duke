@@ -21,6 +21,12 @@ public class AddCommand extends Command {
         this.taskName = taskName;
     }
 
+    /**
+     * Constructor used for Events and Deadlines.
+     * @param descriptor Refers to type of Task.
+     * @param eventName Refers to name of Task.
+     * @param timePeriod Refers to time and date of Task.
+     */
     public AddCommand(String descriptor, String eventName, String timePeriod) {
         this.taskDescriptor = descriptor;
         this.taskName = eventName;
@@ -31,23 +37,26 @@ public class AddCommand extends Command {
     public String execute(TaskList taskList, Ui ui) throws DukeException {
         String result = "";
         switch (taskDescriptor) {
-            case "todo":
-                Task newTodo = new Todo(taskName);
-                taskList.addTask(newTodo);
-                result = ui.showAddTaskMessage(newTodo);
-                break;
+        case "todo":
+            Task newTodo = new Todo(taskName);
+            taskList.addTask(newTodo);
+            result = ui.showAddTaskMessage(newTodo);
+            break;
 
-            case "event":
-                Event newEvent = new Event(taskName, timePeriod);
-                taskList.addTask(newEvent);
-                result = ui.showAddTaskMessage(newEvent);
-                break;
+        case "event":
+            Event newEvent = new Event(taskName, timePeriod);
+            taskList.addTask(newEvent);
+            result = ui.showAddTaskMessage(newEvent);
+            break;
 
-            case "deadline":
-                Deadline newDeadline = new Deadline(taskName, timePeriod);
-                taskList.addTask(newDeadline);
-                result = ui.showAddTaskMessage(newDeadline);
-                break;
+        case "deadline":
+            Deadline newDeadline = new Deadline(taskName, timePeriod);
+            taskList.addTask(newDeadline);
+            result = ui.showAddTaskMessage(newDeadline);
+            break;
+
+        default:
+            break;
         }
         return result;
     }

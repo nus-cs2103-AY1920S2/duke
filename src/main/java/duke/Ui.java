@@ -33,17 +33,19 @@ public class Ui {
 
 
     /**
+     * Returns a welcome message.
      * @return Returns welcome message to user, upon initialisation.
      */
     public static String showWelcomeMessage() {
-        return "Hello there! I am Duke, your personal assistant. Do let me know what I can do for you!" +"\n";
+        return "Hello there! I am Duke, your personal assistant. Do let me know what I can do for you!" + "\n";
     }
 
     /**
+     * Returns a goodbye message.
      * @return Returns final message to user before program is terminated.
      */
     public String showFarewellMessage() {
-        return "Adios. It was my pleasure assisting you. Keep smiling." +"\n";
+        return "Adios. It was my pleasure assisting you. Keep smiling." + "\n";
     }
 
     /**
