@@ -10,7 +10,7 @@ import duke.task.TaskList;
 import java.util.ArrayList;
 
 /**
- * Command that finds a keyword from taskList
+ * Represents a Command that finds a keyword from taskList.
  */
 public class FindCommand extends Command {
     private String keyword;
@@ -28,6 +28,6 @@ public class FindCommand extends Command {
             }
         }
 
-        return ui.printFindMessage(queryTasks);
+        return ui.showFindMessage(queryTasks);
     }
 }

@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Task that has a specific end date.
+ */
 public class Deadline extends Task {
     protected LocalDateTime dueDate;
 
@@ -22,6 +25,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Gets the due date of a deadline.
+     * @return LocalDateTime object of the deadline's due date.
+     */
     public LocalDateTime getDueDate() {
         return this.dueDate;
     }

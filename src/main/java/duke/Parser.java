@@ -17,12 +17,11 @@ import java.time.format.DateTimeParseException;
  * Parser object reads user input strings and informs main Duke object of what command to execute.
  */
 public class Parser {
-
     /**
-     * returns the command to execute, based on user input.
+     * returns the Command to execute, based on user input.
      * @param instruction User input.
-     * @return command to execute.
-     * @throws DukeException if user input is invalid or does not follow specified format.
+     * @return Command to execute.
+     * @throws DukeException If user input is invalid or does not follow specified format.
      */
     public static Command parse(String instruction) throws DukeException {
         if (instruction.equals("")) {
@@ -30,7 +29,7 @@ public class Parser {
         }
 
         String keyword = instruction.split(" ")[0].toLowerCase();
-        // by default, result is a Bye Command
+
         switch (keyword) {
         case "bye":
             return new ByeCommand();
@@ -76,6 +75,8 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new DukeException("\t" + "Please write the date in this format:" +
                         "YYYY-MM-DD");
+            } catch (Exception e) {
+                throw new DukeException("\t" + "Please specify the Whatsup command in the right format.");
             }
             return new WhatsupCommand(queryDate);
 

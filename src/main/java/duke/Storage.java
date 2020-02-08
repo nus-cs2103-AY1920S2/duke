@@ -13,17 +13,21 @@ import java.util.ArrayList;
 
 /**
  * Responsible for storing and reading list data into/from disk respectively.
- *<code>filePath</code> is the location of the file with the list data.
+ *<code>filePath</code> is the location of the file with the user task list data.
  */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a Storage object.
+     * @param filePath Designated location of the file with user task list data.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Saves list data of Duke application into disk whenever bye command is executed.
+     * Saves list data of Duke application into disk.
      * @param list The list of tasks inputted by user.
      */
     public void save(ArrayList<Task> list) {
@@ -40,20 +44,19 @@ public class Storage {
 
     /**
      * Used when starting the Duke Application.
-     * @return List of Tasks stored in disk.
+     * @return List of tasks stored in disk.
      * @throws DukeException when filePath is incorrect.
      */
     @SuppressWarnings("unchecked")
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
+        File savedFile = new File(filePath);
+        File directory = new File(savedFile.getParent());
         try {
-            File savedFile = new File(filePath);
             // read from save file
-            if (!savedFile.exists()) {
-                File directory = new File(savedFile.getParent());
-                if (!directory.exists()) {
-                    boolean mkdirs = directory.mkdirs();
-                }
+            if (!savedFile.exists() && !directory.exists()) {
+                boolean mkdirs = directory.mkdirs();
+            } else if (!savedFile.exists()) {
                 boolean newFile = savedFile.createNewFile();
             } else {
                 FileInputStream readFile = new FileInputStream(savedFile);

@@ -10,23 +10,22 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * Responsible for user interaction in terms of input and output of system.
+ * Responsible for user interaction in terms of returning output to each user.
  */
 public class Ui {
 
-    public Ui() {
-    }
-
     /**
-     * Prints error in case file is not loaded properly.
+     * Returns message to user to inform a new save file was created, in the case no such file existed initially.
+     * @return Returns message to user to inform a new save file was created.
      */
     public String showLoadingError() {
         return "A new save file has been initialised for you." + "\n";
     }
 
     /**
-     * Prints useful message to user on why exception was generated.
+     * Returns useful message to user on why exception was generated.
      * @param e Contains the message on why exception was generated.
+     * @return Returns useful message to user on why exception was generated.
      */
     public String showError(DukeException e) {
         return e.toString();
@@ -34,72 +33,68 @@ public class Ui {
 
 
     /**
-     * Prints welcome message to user
-     * @return the name of user, in String type
+     * @return Returns welcome message to user, upon initialisation.
      */
-    public static String printWelcomeMessage() {
+    public static String showWelcomeMessage() {
         return "Hello there! I am Duke, your personal assistant. Do let me know what I can do for you!" +"\n";
     }
 
     /**
-     * prints final message to user before program is terminated in Duke class.
+     * @return Returns final message to user before program is terminated.
      */
-    public String printFarewellMessage() {
-        return "\t" + "Adios. It was my pleasure assisting you. Keep smiling." +"\n";
+    public String showFarewellMessage() {
+        return "Adios. It was my pleasure assisting you. Keep smiling." +"\n";
     }
 
-
     /**
-     * outputs all tasks in taskList object to user.
+     * Returns a String of all tasks in taskList object to user.
      * @param taskList a list of tasks inputted by user.
+     * @return a String of all tasks specified in the param.
      */
-    public String printList(TaskList taskList) {
+    public String showList(TaskList taskList) {
         return taskList.toString() + "\n";
     }
 
     /**
-     * outputs success of done command.
-     *
+     * Returns output of successful Done command.
      * @param completed the task that is marked as completed.
+     * @return An output of a completed Done command.
      */
-    public String printDoneMessage(Task completed) {
-        return "\t" + "Hooray! You've finally managed to finish this task:" + "\n" +
-                "\t\t" + completed.toString() + "\n";
+    public String showDoneMessage(Task completed) {
+        return "Hooray! You've finally managed to finish this task:" + "\n" + completed.toString() + "\n";
     }
 
     /**
-     * outputs success of delete command.
-     *
+     * Returns output of a successful Delete Command.
      * @param deleted the task that is to be deleted from taskList.
+     * @return An output of a completed Delete command.
      */
-    public String printDeleteMessage(Task deleted) {
-        return "\t" + "Got it! I've removed this task:" + "\n" +
-        "\t\t" + deleted.toString() + "\n";
+    public String showDeleteMessage(Task deleted) {
+        return "Got it! I've removed this task:" + "\n" + deleted.toString() + "\n";
     }
 
     /**
-     * outputs success of whatsup command.
-     *
+     * Returns output of a Whatsup Command.
      * @param tasks the tasks that are on the same day that is queried.
+     * @return An output of a completed Whatsup command.
      */
-    public String printWhatsupMessage(ArrayList<Task> tasks) {
+    public String showWhatsupMessage(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
             return "You have nothing assigned on that day.";
-        } else {
-            String result = "\t" + "The tasks you have on that day are:" + "\n";
-            for (Task task: tasks) {
-                result += "\t\t" + task.toString() + "\n";
-            }
-            return result;
         }
+        String result = "The tasks you have on that day are:" + "\n";
+        for (Task task: tasks) {
+            result += task.toString() + "\n";
+        }
+        return result;
     }
 
     /**
-     * outputs success of add task command.
-     *
-     * @param newTask either a Event, Deadline or To-do task object
+     * Returns output of a successful Add command.
+     * @param newTask either a Event, Deadline or To-do task object.
+     * @return An output of a successful Add command.
      */
-    public String printAddTaskMessage(Task newTask) {
+    public String showAddTaskMessage(Task newTask) {
         String identifier;
         if (newTask instanceof Todo) {
             identifier = "to do";
@@ -108,19 +103,22 @@ public class Ui {
         } else {
             identifier = "event";
         }
-        return "\t" + "Awesome! I've added this " + identifier + " :" + "\n" +
-                "\t\t" + newTask.toString();
+        return "Awesome! I've added this " + identifier + " :" + "\n" + newTask.toString();
     }
 
-    public String printFindMessage(ArrayList<Task> tasks) {
+    /**
+     * Returns output of a Find Command.
+     * @param tasks The list of tasks that match a keyword queried by user.
+     * @return A String of tasks that match what user queried.
+     */
+    public String showFindMessage(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            return "\t" + "There were no tasks matching what you said.";
-        } else {
-            String result = "\t" + "Here you go, this is probably what you were finding:" + "\n";
-            for (Task task: tasks) {
-                result += "\t\t" + task.toString() + "\n";
-            }
-            return result;
+            return "There were no tasks matching what you said.";
         }
+        String result = "Here you go, this is probably what you were finding:" + "\n";
+        for (Task task: tasks) {
+            result += task.toString() + "\n";
+        }
+        return result;
     }
 }

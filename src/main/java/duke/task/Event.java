@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that occurs on a certain date and time.
+ */
 public class Event extends Task {
     protected LocalDateTime timePeriod;
 
@@ -21,6 +24,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Gets Date and Time of event.
+     * @return A LocalDateTime object of an event.
+     */
     public LocalDateTime getTimePeriod() {
         return this.timePeriod;
     }

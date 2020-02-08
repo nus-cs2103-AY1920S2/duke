@@ -5,6 +5,9 @@ import duke.task.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Represents the Command used to complete a Task.
+ */
 public class DoneCommand extends Command {
     private int completedTaskNumber;
 
@@ -22,6 +25,6 @@ public class DoneCommand extends Command {
                     "Kindly check list again.");
         }
         toComplete.completeStatus();
-        return ui.printDoneMessage(toComplete);
+        return ui.showDoneMessage(toComplete);
     }
 }

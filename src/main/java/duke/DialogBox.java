@@ -26,6 +26,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor method that builds a DialogBox node with an Avatar icon and a String of text.
+     * @param text The String of text inside a DialogBox.
+     * @param img The Avatar icon in a DialogBox.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(duke.MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -51,15 +56,29 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates and returns a DialogBox for Duke User.
+     * @param text The user input.
+     * @param img The user icon.
+     * @return A DialogBox node for User.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color:POWDERBLUE");
+        db.setStyle("-fx-background-color:PALETURQUOISE");
 
         return db;
     }
 
+    /**
+     * Creates and returns a DialogBox for Duke.
+     * @param text The response by Duke to user input.
+     * @param img The Duke icon.
+     * @return A DialogBox node for Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: POWDERBLUE");
+
         db.flip();
         return db;
     }

@@ -15,6 +15,10 @@ public class Main extends Application {
 
     private Duke duke = new Duke("data\\duke.txt");
 
+    /**
+     * Sets scene for MainWindow node.
+     * @param stage The top level JavaFX Container for the GUI of the Duke Application.
+     */
     @Override
     public void start(Stage stage) {
         try {

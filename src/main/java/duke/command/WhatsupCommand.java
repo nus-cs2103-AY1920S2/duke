@@ -10,6 +10,9 @@ import duke.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the Command used to find tasks that occur on a specified date.
+ */
 public class WhatsupCommand extends Command {
     private LocalDate date;
 
@@ -29,6 +32,6 @@ public class WhatsupCommand extends Command {
                 queryTasks.add(task);
             }
         }
-        return ui.printWhatsupMessage(queryTasks);
+        return ui.showWhatsupMessage(queryTasks);
     }
 }

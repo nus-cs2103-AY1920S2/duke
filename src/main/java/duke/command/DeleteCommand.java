@@ -5,6 +5,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.Ui;
 
+/**
+ * Represents the Command used to delete a new Task.
+ */
 public class DeleteCommand extends Command {
     private int deletedTaskNumber;
 
@@ -21,6 +24,6 @@ public class DeleteCommand extends Command {
             throw new DukeException("There is no such task with the number you have specified. " +
                     "Kindly check list again.");
         }
-        return ui.printDeleteMessage(deleted);
+        return ui.showDeleteMessage(deleted);
     }
 }
