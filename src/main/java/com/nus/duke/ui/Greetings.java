@@ -1,5 +1,8 @@
 package com.nus.duke.ui;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Greetings {
     private static final String WELCOME_LOGO    = " ____         _        \n"
                                                 + "|  _ \\ _  __| | _____ \n"
@@ -38,5 +41,18 @@ public class Greetings {
                                                 + "%s\n"
                                                 + "-----------------------------\n", s);
         System.out.println(formattedString);
+    }
+
+    public static void prettyPrint(List<String> strs) {
+        final AtomicInteger ctr = new AtomicInteger();
+        StringBuilder strBldr = new StringBuilder();
+        strBldr.append("-----------------------------\n");
+
+        strs.forEach(str -> strBldr.append(String.format("%d. ", ctr.getAndIncrement()))
+                                    .append(str)
+                                    .append("\n"));
+
+        strBldr.append("-----------------------------\n");
+        System.out.println(strBldr.toString());
     }
 }
