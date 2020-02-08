@@ -11,6 +11,8 @@ public class DeadLineTask extends Task {
 
     protected LocalDateTime by;
 
+    public DeadLineTask() {}
+
     public DeadLineTask(String description, LocalDateTime by) throws NoDescriptionException {
         super(description, TASK_TYPE_STRING);
         this.by = by;
@@ -27,7 +29,6 @@ public class DeadLineTask extends Task {
                 this.description,
                 this.by.format(DATE_TIME_FORMAT)));
     }
-
 
     @Override
     public String toString() {

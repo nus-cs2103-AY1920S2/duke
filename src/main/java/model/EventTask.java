@@ -13,6 +13,8 @@ public class EventTask extends Task{
 
     protected LocalDateTime at;
 
+    public EventTask() {}
+
     public EventTask(String description, LocalDateTime at) throws NoDescriptionException {
         super(description, TASK_TYPE_STRING);
         this.at = at;

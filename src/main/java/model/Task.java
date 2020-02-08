@@ -15,6 +15,8 @@ public abstract class Task {
 
     public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    public Task() {}
+    
     public Task(String description) throws NoDescriptionException {
         if ("".equals(description)) {
             throw new NoDescriptionException("OOPS!!! The description of a " +

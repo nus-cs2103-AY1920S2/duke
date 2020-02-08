@@ -10,8 +10,7 @@ public class TaskList implements Iterable<Task> {
     static String viewListGreeting = "Here are the tasks in your list:\n";
     static String taskCompleteCongrats = "Nice! I've marked this task as done:\n";
 
-    public TaskList() {
-    }
+    public TaskList() {}
 
     public TaskList(Task... tasks) {
         final List<Task> initials = Arrays.asList(tasks);
