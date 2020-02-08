@@ -3,7 +3,9 @@ package dude;
 import java.io.IOException;
 
 import dude.component.Duke;
+import dude.component.DukeFactory;
 import dude.component.MainWindow;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,7 +29,7 @@ public class Main extends Application {
 
             // Wire up Duke class (main application logic) and UI components
             MainWindow mainWindow = fxmlLoader.getController();
-            this.duke = new Duke(mainWindow);
+            this.duke = DukeFactory.createDuke(mainWindow);
             mainWindow.setDuke(duke);
 
             stage.show();

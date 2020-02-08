@@ -1,5 +1,7 @@
 package dude.component;
 
+import javafx.application.Platform;
+
 /**
  * A class to handle dependencies/ownership between Duke which contains our application logic,
  * and the JavaFX Application/actual GUI components.
@@ -61,5 +63,13 @@ public class Gui implements IUserInterface {
     @Override
     public void speak(String str) {
         responseBuilder.append(str).append('\n');
+    }
+
+    /**
+     * Closes resources associated with the UI
+     */
+    @Override
+    public void close() {
+        Platform.exit();
     }
 }
