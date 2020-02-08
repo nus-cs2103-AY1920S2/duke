@@ -2,10 +2,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeInvalidTaskFormatException;
-import duke.util.Parser;
-import duke.util.Storage;
-import duke.util.Task;
-import duke.util.TaskList;
+import duke.util.*;
 
 import java.util.ArrayList;
 
@@ -54,9 +51,12 @@ public class Duke {
 
     public static Duke start() throws DukeInvalidTaskFormatException, DukeInvalidDateFormatException {
         Storage storage = new Storage("./data/tasks.txt");
+        NoteStorage noteStorage = new NoteStorage("./data/notes.txt");
         ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Note> notes = new ArrayList<>();
         try {
-            tasks = storage.loadTasks();
+            tasks = storage.load();
+            notes = noteStorage.load();
         } catch (DukeInvalidTaskFormatException | DukeInvalidDateFormatException e) {
             throw e;
         }
