@@ -12,7 +12,7 @@ public abstract class Command {
         this.command = command;
     }
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     protected void setExit() {
         this.isExit = true;

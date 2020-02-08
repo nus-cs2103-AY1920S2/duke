@@ -40,6 +40,7 @@ public class Parser {
             command = new AddTaskCommand(cmd, input);
             break;
         default:
+            command = new OtherCommand(input);
             break;
         }
         return command;

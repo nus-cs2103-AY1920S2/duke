@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -92,6 +94,7 @@ public class TaskList {
         case 'D':
             // case for Deadline
             StringBuilder sbd = new StringBuilder();
+            ArrayList<String> date = new ArrayList<>();
             for (int i = 1; i < temp.size(); i++) {
                 if (i != (temp.size() - 1)) {
                     String curr = temp.get(i);
@@ -99,11 +102,27 @@ public class TaskList {
                         //if equals to colon, replace it with /, don't add space behind
                         sbd.append("/by ");
                     } else {
-                        sbd.append(curr);
-                        sbd.append(" ");
+                        if (i >= (temp.size() - 3)) {
+                            date.add(temp.get(i));
+                        } else {
+                            sbd.append(curr);
+                            sbd.append(" ");
+                        }
                     }
                 } else {
-                    sbd.append(temp.get(i));
+                    // Reached the end of the temp array, means also that date array is complete
+                    date.add(temp.get(i));
+                    StringBuilder sb = new StringBuilder();
+                    for (int j = 0; j < date.size(); j++) {
+                        sb.append(date.get(j));
+                        if (j != (date.size() - 1)) {
+                            sb.append(" ");
+                        }
+                    }
+                    String dateString = sb.toString();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                    LocalDate d = LocalDate.parse(dateString, formatter);
+                    sbd.append(d.format(DateTimeFormatter.ofPattern("yyyy-MM-d")));
                 }
             }
             String descD =  sbd.toString();

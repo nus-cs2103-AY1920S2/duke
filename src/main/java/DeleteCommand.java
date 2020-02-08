@@ -20,14 +20,14 @@ public class DeleteCommand extends Command {
      * @throws DukeException Exception thrown by the method deleteTask if the task list is empty,
      *     or the task to delete does not exist.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             // Remove the task from the task list in tasks
             Task deletedTask = tasks.deleteTask(taskNumber);
             // Update the file by saving it
             storage.saveFile(tasks.getTaskList());
             // Update user on the deletion of the task
-            ui.printTaskDeleteSuccess(deletedTask, tasks.getTaskList().size());
+            return ui.taskDeleteSuccess(deletedTask, tasks.getTaskList().size());
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }

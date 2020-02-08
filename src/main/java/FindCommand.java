@@ -19,7 +19,8 @@ public class FindCommand extends Command {
      * @param ui Ui object from the driver Duke object.
      * @param storage Storage object from the driver Duke object
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder sb = new StringBuilder();
         ArrayList<Task> taskList = tasks.getTaskList();
         ArrayList<Task> foundList = new ArrayList<>();
         for (Task t: taskList) {
@@ -35,18 +36,6 @@ public class FindCommand extends Command {
                 }
             }
         }
-        ui.printLine();
-        // Check if the foundList is empty
-        if (foundList.size() > 0) {
-            // If not 0, then print all the tasks that are found
-            System.out.println("\t Here are the matching tasks in your list:");
-            for (int i = 0; i < foundList.size(); i++) {
-                System.out.println("\t " + (i + 1) + ". " + foundList.get(i).toString());
-            }
-        } else {
-            // Found list is empty, tell the user that cannot find the matching task
-            System.out.println("Sorry! No matching tasks found!");
-        }
-        ui.printLine();
+        return ui.findTaskSuccess(foundList);
     }
 }

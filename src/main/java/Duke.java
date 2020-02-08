@@ -9,6 +9,12 @@ public class Duke {
     private Parser parser;
 
     /**
+     * Constructor to run for JavaFX
+     */
+    public Duke() {
+        this("list.txt");
+    }
+    /**
      * Constructor for Duke that takes in a String representing the
      * name of the save file for the user's task list.
      * @param fileName String of the save file of the user's task list.
@@ -27,7 +33,6 @@ public class Duke {
      * Driver function that runs the Duke program.
      */
     public void run() {
-        ui.sayHello();
         boolean endInput = false;
         while (!endInput) {
             try {
@@ -37,14 +42,27 @@ public class Duke {
                 endInput = command.isExit();
             } catch (DukeException e) {
                 // Print any error that is thrown
-                ui.printLine();
-                System.out.println(e.getMessage());
-                ui.printLine();
+                StringBuilder sb = new StringBuilder(ui.getBreakLine());
+                sb.append(e.getMessage());
+                sb.append(ui.getBreakLine());
+                System.out.println(sb.toString());
             } catch (NullPointerException ne) {
                 ui.flagWrongCommand();
             }
         }
         ui.sayBye();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = parser.parse(input);
+            return command.execute(taskList, ui, store);
+        } catch (DukeException e) {
+            StringBuilder sb = new StringBuilder(ui.getBreakLine());
+            sb.append(e.getMessage());
+            sb.append(ui.getBreakLine());
+            return sb.toString();
+        }
     }
 
     public static void main(String[] args) {

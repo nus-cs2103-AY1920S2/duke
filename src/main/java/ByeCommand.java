@@ -12,7 +12,8 @@ public class ByeCommand extends Command {
      * @param ui Ui object from the driver Duke object
      * @param storage Storage object from the driver Duke object
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         super.setExit();
+        return ui.sayBye();
     }
 }

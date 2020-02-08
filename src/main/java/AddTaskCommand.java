@@ -21,7 +21,7 @@ public class AddTaskCommand extends Command {
      * @throws DukeException Exception thrown by the method generateTask,
      *     if the given input string is of the wrong format.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             // create and add the task to the task list
             Task taskToAdd = this.generateTask(this.input);
@@ -29,7 +29,7 @@ public class AddTaskCommand extends Command {
             // update and save the file
             storage.saveFile(tasks.getTaskList());
             // update the user of the new task list
-            ui.printTaskAddSuccess(taskToAdd, tasks.getTaskList().size());
+            return ui.taskAddSuccess(taskToAdd, tasks.getTaskList().size());
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }

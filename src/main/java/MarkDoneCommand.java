@@ -16,14 +16,14 @@ public class MarkDoneCommand extends Command {
      * @param storage Storage object from the driver Duke object.
      * @throws DukeException Exception thrown when the task to be marked done does not exist in the task list.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             // Mark the task as done
             Task taskDone = tasks.markTaskDone(taskNumber);
             // Update the file by saving it
             storage.saveFile(tasks.getTaskList());
             // Update the user
-            ui.printMarkDoneSuccess(taskDone);
+            return ui.markDoneSuccess(taskDone);
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }

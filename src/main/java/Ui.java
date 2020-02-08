@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Represents an object that handles user input and interaction through prompts such as welcome and farewell messages,
@@ -7,6 +8,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner sc;
+    private final String BREAKLINE = "____________________________________________________________\n";
 
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -18,25 +20,25 @@ public class Ui {
     }
 
     /**
-     * Prints a greeting message to the user.
+     * Prints and returns a greeting message to the user.
+     * @return String greeting message to the user.
      */
-    public void sayHello() {
-        // Print welcome message
-        this.printLine();
-        System.out.println("\tHello! I'm Duke");
-        System.out.println("\tWhat can I do for you?");
-        this.printLine();
+    public String sayHello() {
+        // Get welcome message
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hello! I'm Duke!\n");
+        sb.append("What can I do for you?\n");
+        return sb.toString();
     }
 
     /**
      * Prints a farewell message to the user.
      */
-    public void sayBye() {
+    public String sayBye() {
         // Print goodbye message
-        this.printLine();
-        System.out.println("\tBye. Hope to see you again soon!");
-        this.printLine();
-        System.out.println();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Bye. Hope to see you again soon!\n");
+        return sb.toString();
     }
 
 
@@ -45,12 +47,12 @@ public class Ui {
      * @param task Task object that was added.
      * @param taskListSize Size of the user's task list after addition.
      */
-    public void printTaskAddSuccess(Task task, int taskListSize) {
-        this.printLine();
-        System.out.println("\t Got it. I've added this task:");
-        System.out.println("\t  " + task);
-        System.out.println("\t Now you have " + taskListSize + " tasks in the list.");
-        this.printLine();
+    public String taskAddSuccess(Task task, int taskListSize) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:\n");
+        sb.append(task + "\n");
+        sb.append("Now you have " + taskListSize + " tasks in the list.");
+        return sb.toString();
     }
 
     /**
@@ -58,12 +60,12 @@ public class Ui {
      * @param task Task object that was deleted.
      * @param taskListSize Size of the user's task list after deletion.
      */
-    public void printTaskDeleteSuccess(Task task, int taskListSize) {
-        this.printLine();
-        System.out.println("\t Understood. I've deleted this task:");
-        System.out.println("\t " + task);
-        System.out.println("\t Now you have " + taskListSize + " tasks in the list.");
-        this.printLine();
+    public String taskDeleteSuccess(Task task, int taskListSize) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Understood. I've deleted this task:\n");
+        sb.append(" " + task + "\n");
+        sb.append("Now you have " + taskListSize + " tasks in the list.");
+        return sb.toString();
     }
 
     /**
@@ -71,30 +73,60 @@ public class Ui {
      * and showing the user the task that was marked.
      * @param task Task object that was marked as done.
      */
-    public void printMarkDoneSuccess(Task task) {
-        this.printLine();
-        System.out.println("\t Alright! I've marked this task as done:");
-        System.out.println("\t " + task);
-        this.printLine();
+    public String markDoneSuccess(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Alright! I've marked this task as done:\n");
+        sb.append(" " + task + "\n");
+        return sb.toString();
     }
 
     /**
      * Alerts the user of an incorrect command input.
      */
-    public void flagWrongCommand() {
-        this.printLine();
-        String sorryStr = "\t Sorry! You've entered a wrong command, please try again!\n";
-        String helpStr = "\t List of commands: \n" + "\t  todo\n" + "\t  event\n"
-                + "\t  deadline\n" + "\t  list\n";
-        System.out.println(sorryStr + helpStr);
-        this.printLine();
+    public String flagWrongCommand() {
+        StringBuilder sb = new StringBuilder();
+        String sorryStr = "Sorry! You've entered an invalid command, please try again!\n";
+        String helpStr = "List of commands: \n" + " todo\n" + " event\n"
+                + " deadline\n" + " list\n";
+        sb.append(sorryStr);
+        sb.append(helpStr);
+        return sb.toString();
     }
 
+    public String findTaskSuccess(ArrayList<Task> foundList) {
+        StringBuilder sb = new StringBuilder();
+        // Check if the foundList is empty
+        if (foundList.size() > 0) {
+            // If not 0, then print all the tasks that are found
+            sb.append("Here are the matching tasks in your list:\n");
+            for (int i = 0; i < foundList.size(); i++) {
+                sb.append("\t " + (i + 1) + ". " + foundList.get(i).toString());
+            }
+        } else {
+            // Found list is empty, tell the user that cannot find the matching task
+            sb.append("Sorry! No matching tasks found!");
+        }
+        return sb.toString();
+    }
 
-    /**
-     * Helper function to print separator lines.
-     */
-    public void printLine() {
-        System.out.println("\t____________________________________________________________");
+    public String printTaskList(ArrayList<Task> taskList) {
+        StringBuilder sb = new StringBuilder();
+        if (taskList.size() == 0) {
+            sb.append("Your task list is empty!\n");
+        } else {
+            sb.append("Here are the tasks in your list!\n");
+            for(int i = 0; i < taskList.size(); i++) {
+                String taskNum = (i + 1) + ".";
+                sb.append(taskNum);
+                Task currTask = taskList.get(i);
+                sb.append(currTask.toString());
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    public String getBreakLine() {
+        return this.BREAKLINE;
     }
 }
