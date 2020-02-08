@@ -92,6 +92,10 @@ public abstract class Task {
         return this.taskName;
     }
 
+    public LocalDate getTaskDate() {
+        return this.dateTime;
+    }
+
     /**
      * Returns icon to display completion status of the task.
      *
