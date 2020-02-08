@@ -18,15 +18,14 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.javafx.Launcher"
 }
-
 run {
     standardInput = System.in
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Duke"
     archiveVersion = "0.1.3"
     archiveClassifier = null
     archiveAppendix = null

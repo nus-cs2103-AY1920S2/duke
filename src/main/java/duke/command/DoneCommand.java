@@ -7,6 +7,9 @@ import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * The type Done command which makes the task done.
  */
@@ -43,7 +46,12 @@ public class DoneCommand extends Command {
     private int obtainIndexToBeMarkedDone(String regrexWanted, String userInput,
                                           TaskList taskList, Ui ui) throws DukeException {
         String[] splittedString = userInput.split(regrexWanted);
-        Integer arrayIndex = Integer.valueOf(splittedString[1]);
+
+        String indexAsString = Arrays.stream(splittedString)
+                .filter(x -> x.equals(splittedString[1]))
+                .collect(Collectors.joining());
+
+        Integer arrayIndex = Integer.valueOf(indexAsString);
 
         if (arrayIndex > taskList.sizeOfList()) {
             ui.invalidNumberException();

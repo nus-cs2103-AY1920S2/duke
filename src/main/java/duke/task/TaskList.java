@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * The type Task list.
@@ -52,7 +53,8 @@ public class TaskList {
     // Delete the task from the list
     public void removeFromList(Task task) throws DukeException {
         try {
-            list.remove(task);
+            list.removeIf(x-> x.equals(task));
+            //list.remove(task);
         } catch (NoSuchElementException e) {
             throw new DukeException("This task does not exist in the list :( ");
         }
@@ -63,10 +65,10 @@ public class TaskList {
      */
     // To print out every element in the list
     public String print_elements() {
-        String space = "";
-        for (int i = 0; i < list.size(); i++) {
-            space += i + 1 + "." + list.get(i) + System.lineSeparator();
-        }
-        return space;
+        String test;
+        test = list.stream().map(Task::toString)
+                .collect(Collectors.joining(System.lineSeparator()));
+
+        return test;
     }
 }

@@ -102,6 +102,7 @@ public class Task {
         String[] splittedString = s.split("/");
         String dayOfWeekInString = splittedString[0];
         days = dayOfWeekInString.split(" ");
+
         if (this.dm.getHm().containsKey(days[0].toUpperCase())) {
             isDay = true;
         }

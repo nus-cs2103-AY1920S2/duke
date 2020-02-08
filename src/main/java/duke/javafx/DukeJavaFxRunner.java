@@ -27,8 +27,6 @@ public class DukeJavaFxRunner extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Trump.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Putin.jpg"));
     private Duke dukes;
     private MainWindow mainWindow;
 
@@ -94,14 +92,15 @@ public class DukeJavaFxRunner extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1));
+
 
         //Tutorial 3: To print whatever you type
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1000000));
 
         userInput.setOnAction((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));

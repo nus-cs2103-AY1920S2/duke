@@ -6,6 +6,9 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.task.TaskList;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
 
 
 /**
@@ -41,6 +44,8 @@ public class ByeCommand extends Command {
             taskList.getList().clear();
             assert (taskList.getList().isEmpty())
                     : "taskList should be empty by this point in ByeCommand";
+            PauseTransition termination = new PauseTransition(Duration.seconds(0));
+            termination.setOnFinished(event -> Platform.exit());
             return ans;
         } catch (Exception e) {
             throw new DukeException(e.getMessage());

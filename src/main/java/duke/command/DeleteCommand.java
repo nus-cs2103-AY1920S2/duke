@@ -6,6 +6,11 @@ import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 /**
  * The type Delete command which deletes from the list.
  */
@@ -42,8 +47,14 @@ public class DeleteCommand extends Command {
 
     private int obtainIndexToBeDeleted(String regrexWanted, String userInput, TaskList taskList,
                                        Ui ui) throws DukeException {
+
         String[] splittedString = userInput.split(regrexWanted);
-        Integer arrayIndex = Integer.valueOf(splittedString[1]);
+
+        String stringValue = Arrays.stream(splittedString)
+                .filter(x -> x.equals(splittedString[1]))
+                .collect(Collectors.joining());
+
+        Integer arrayIndex = Integer.valueOf(stringValue);
 
         if (arrayIndex > taskList.sizeOfList()) {
             ui.invalidNumberException();

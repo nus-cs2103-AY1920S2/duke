@@ -6,6 +6,9 @@ import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class FindCommand extends Command {
     public FindCommand(String userInput) {
         super(userInput);
@@ -33,7 +36,9 @@ public class FindCommand extends Command {
 
     private String obtainItemToBeFound(String regrexWanted, String userInput) {
         String[] splittedString = userInput.split(regrexWanted);
-        return splittedString[1];
+        return Arrays.stream(splittedString)
+                .filter(x -> x.equals(splittedString[1]))
+                .collect(Collectors.joining());
     }
 
 }

@@ -12,6 +12,7 @@ import duke.task.Todo;
 
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 /**
  * Class which consists of Tasks which adds to the List
@@ -43,6 +44,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(Storage storage, Ui ui, TaskList taskList)
             throws DukeException, IOException {
+
         if (userInput.contains("deadline")) {
             // Assert that the programmer accidently change the field in contains
             assert (userInput.contains("deadline")) : "userInput should contain deadline!";
