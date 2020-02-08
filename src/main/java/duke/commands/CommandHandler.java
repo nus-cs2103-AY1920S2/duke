@@ -39,6 +39,7 @@ public class CommandHandler {
         commands.put("event", new CreateEvent(dtParser));
         commands.put("delete", new DeleteTask());
         commands.put("find", new FindTasks());
+        commands.put("reschedule", new RescheduleTask(dtParser));
     }
 
     /**
