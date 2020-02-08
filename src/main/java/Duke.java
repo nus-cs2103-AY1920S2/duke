@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A chatbot interface.
@@ -8,54 +9,85 @@ import java.util.ArrayList;
 public class Duke {
     static String terminateCommand = "bye";
     static ArrayList<Task> tasks = new ArrayList<Task>();
+    // Use a hashmap to store command key to prevent developer error in typing command keys across different functions
+    static HashMap<String, Integer> commandCodeMapping = new HashMap<String, Integer>() {
+        {
+            put("list", 0);
+            put("mark done", 1);
+            put("event", 2);
+            put("todo", 3);
+            put("deadline", 4);
+            put("invalid command", 5);
+        }
+    };
+
+    /**
+     * This function is to verify if command valid type (for later extension) so that main functions don't need to check
+     * anymore.
+     * @param command user command
+     * @return
+     */
+    private static Integer getCommandCode(String command) {
+        try {
+            String firstCommandType = command.split(" ")[0];
+            String[] commandSplit = command.split(" ");
+            if (command.equals("list")) {
+                return commandCodeMapping.get("list");
+            } else if (firstCommandType.equals("done") && commandSplit.length == 2) {
+                return commandCodeMapping.get("mark done");
+            } else {
+                String taskType = command.split(" ", 2)[0];
+                if (taskType.equals("todo")) {
+                    return commandCodeMapping.get("todo");
+                } else if (taskType.equals("deadline")) {
+                    return commandCodeMapping.get("deadline");
+                } else if (taskType.equals("event")) {
+                    return commandCodeMapping.get("event");
+                }
+            }
+        } catch (Exception e) {
+            return commandCodeMapping.get("invalid command");
+        }
+        return commandCodeMapping.get("invalid command");
+    }
 
     /**
      * Switching logic for different commands.
      * @param command user command
      */
     private static void commandProcessor(String command) {
-        switch (command.split(" ")[0]) {
-        case "list":
-            // In case command might be like : list all your homework, then it should be added as a task
-            if (command.equals("list")) {
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.printf("%s[%s][%c] %s\n",
-                            i, tasks.get(i).getShortName(),
-                            (char)(Integer.parseInt(tasks.get(i).getStatusIcon(), 16)),
-                            tasks.get(i).description);
-                }
+        Integer commandCode = getCommandCode(command);
+        if (commandCode == commandCodeMapping.get("list")) {
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.printf("%s[%s][%c] %s\n",
+                        i, tasks.get(i).getShortName(),
+                        (char) (Integer.parseInt(tasks.get(i).getStatusIcon(), 16)),
+                        tasks.get(i).description);
+            }
+        } else if (commandCode == commandCodeMapping.get("mark done")) {
+            Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
+            if (taskIndex < tasks.size()) {
+                tasks.get(taskIndex).markDone();
                 return;
             }
-            break;
-        case "done":
-            if (command.split(" ").length == 2) {
-                Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
-                if (taskIndex < tasks.size()) {
-                    tasks.get(taskIndex).markDone();
-                    return;
-                }
-            }
-            break;
-        default:
-            Task t;
-            String taskType = command.split(" ", 2)[0];
-            String content = command.split(" ", 2)[1];
-            if (taskType.equals("todo")) {
-                t = new Todo(content);
-            } else if (taskType.equals("deadline")) {
-                String desc = content.split("/by")[0];
-                String deadlineTime = content.split("/by")[1];
-                t = new Deadline(desc, deadlineTime);
-            } else if (taskType.equals("event")) {
-                String desc = content.split("/at")[0];
-                String eventTime = content.split("/at")[1];
-                t = new Event(desc, eventTime);
-            } else {
-                return;
-            }
-            tasks.add(t);
-            System.out.println("Got it. I've added this task: " + command);
-            System.out.printf("Now you have %s tasks in this list\n", tasks.size());
+        } else if (commandCode == commandCodeMapping.get("todo")) {
+            String todoContent = command.split(" ", 2)[1];
+            Task todo = new Todo(todoContent);
+            tasks.add(todo);
+        } else if (commandCode == commandCodeMapping.get("deadline")) {
+            String deadlineContent = command.split(" ", 2)[1];
+            String deadlineDesc = deadlineContent.split("/by")[0];
+            String deadlineTime = deadlineContent.split("/by")[1];
+            Task deadline = new Deadline(deadlineDesc, deadlineTime);
+            tasks.add(deadline);
+        } else if (commandCode == commandCodeMapping.get("event")) {
+            String eventContent = command.split(" ", 2)[1];
+            String eventDesc = eventContent.split("/at")[0];
+            String eventTime = eventContent.split("/at")[1];
+            Task event = new Event(eventDesc, eventTime);
+            tasks.add(event);
+        } else if (commandCode == commandCodeMapping.get("invalid command")) {
+            System.out.printf("OOPS Wrong command\n");
         }
     }
 
