@@ -37,10 +37,27 @@ public class Storage {
      * @param filePath path that the data store to.
      */
     public Storage(String filePath) throws DukeException {
-        String[] path = filePath.split("/");
+        setHomeAndFilePath(filePath.split("/"));
+        initialiseScanner();
+    }
+
+    /**
+     * Set home and file path based on the current directory and path given.
+     *
+     * @param path Indicate the path of the file located.
+     */
+    private void setHomeAndFilePath(String[] path) {
         this.home = System.getProperty("user.dir");
         this.filePath = Paths.get(this.home, "src", path[0], path[1]);
         this.absolutePath = this.filePath.toAbsolutePath().toString();
+    }
+
+    /**
+     * Initialise Scanner to the filepath, if file not exists, create new file.
+     *
+     * @throws DukeException Occur when file is not exist at that path.
+     */
+    private void initialiseScanner() throws DukeException {
         try {
             this.taskScanner = new Scanner(this.filePath);
         } catch (IOException e) {
@@ -74,40 +91,48 @@ public class Storage {
     public List<Task> getTaskListing() throws DukeException {
         String[] line;
         List<Task> listing = new ArrayList<>();
-        Task task;
         try {
             while (taskScanner.hasNext()) {
                 line = taskScanner.nextLine().split("\\s\\|\\s");
-                switch (line[0]) {
-                case "T":
-                    task = new Todo(line[2]);
-                    if (line[1].equals("1")) {
-                        task.setStatusDone();
-                    }
-                    listing.add(task);
-                    break;
-                case "E":
-                    task = new Event(line[2], line[3]);
-                    if (line[1].equals("1")) {
-                        task.setStatusDone();
-                    }
-                    listing.add(task);
-                    break;
-                case "D":
-                    task = new Deadline(line[2], line[3]);
-                    if (line[1].equals("1")) {
-                        task.setStatusDone();
-                    }
-                    listing.add(task);
-                    break;
-                default:
-                    throw new DukeException("Data corrupted! I am unable to determine which task it belongs to.");
-                }
+                listing.add(generateTaskBasedOnData(line));
             }
         } catch (NullPointerException e) {
             return listing;
         }
         return listing;
+    }
+
+    /**
+     * Determine which task it belong to and generate the task based on the data given.
+     *
+     * @param line Data use for processing.
+     * @return Task that is generated.
+     * @throws DukeException occurs when when wrong format of date and time found
+     */
+    private Task generateTaskBasedOnData(String[] line) throws DukeException {
+        Task task;
+        switch (line[0]) {
+        case "T":
+            task = new Todo(line[2]);
+            if (line[1].equals("1")) {
+                task.setStatusDone();
+            }
+            return task;
+        case "E":
+            task = new Event(line[2], line[3]);
+            if (line[1].equals("1")) {
+                task.setStatusDone();
+            }
+            return task;
+        case "D":
+            task = new Deadline(line[2], line[3]);
+            if (line[1].equals("1")) {
+                task.setStatusDone();
+            }
+            return task;
+        default:
+            throw new DukeException("Data corrupted! I am unable to determine which task it belongs to.");
+        }
     }
 
     /**

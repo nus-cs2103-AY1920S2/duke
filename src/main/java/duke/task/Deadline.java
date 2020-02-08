@@ -17,15 +17,18 @@ public class Deadline extends Task {
     DateTimeFormatter storeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     /**
-     * Class constructor for Deadline.
+     * Class constructor of Deadline.
      *
-     * @param description description of Deadline
+     * @param description description of the deadline
+     * @param due         date due for the deadline
+     * @throws DukeException Occur when date is invalid.
      */
     public Deadline(String description, String due) throws DukeException {
         super(description);
+        type = "deadline";
+
         try {
             period = LocalDate.parse(due);
-            type = "deadline";
         } catch (DateTimeParseException e) {
             throw new DukeException("Please give valid date in deadline [description] /by [yyyy-mm-dd] format.");
         }

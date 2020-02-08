@@ -21,25 +21,49 @@ public class Event extends Task {
     DateTimeFormatter storeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**
-     * Class constructor Event.
+     * \
+     * Class constructor of Event.
      *
-     * @param description description of Event
+     * @param description Description of the event
+     * @param duration    Duration of the event
+     * @throws DukeException Occur only when date and time format is wrong or invalid.
      */
     public Event(String description, String duration) throws DukeException {
         super(description);
+        type = "event";
+
         try {
-            String[] date = duration.split(" ");
-            period = LocalDate.parse(date[0]);
-            this.duration = period.atTime(Integer.parseInt(date[1].substring(0, 2)),
-                    Integer.parseInt(date[1].substring(2, 4)));
-            type = "event";
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Please give a valid duration in yyyy-mm-dd HHmm format.");
+            retrieveDateAndTime(duration);
         } catch (DateTimeException e) {
             throw new DukeException("Please give a valid duration in yyyy-mm-dd HHmm format.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please give a valid duration in yyyy-mm-dd HHmm format.");
+            throw new DukeException("Please input time in HHmm format at the end.");
         }
+    }
+
+    /**
+     * Retrieve the date and time from the input given.
+     *
+     * @param input Input from user
+     * @throws DateTimeException              Occur when date or time are invalid.
+     * @throws ArrayIndexOutOfBoundsException Occur when time is not provided.
+     */
+    private void retrieveDateAndTime(String input) throws DateTimeException, ArrayIndexOutOfBoundsException {
+        String[] data = input.split(" ");
+        this.period = LocalDate.parse(data[0]);
+        this.duration = addTimeIntoDate(data[1]);
+    }
+
+    /**
+     * Add Time into the date.
+     *
+     * @param time Time to be added.
+     * @return LocalDateTime object with the date and time stored.
+     * @throws DateTimeException Occur when time is invalid.
+     */
+    private LocalDateTime addTimeIntoDate(String time) throws DateTimeException {
+        return period.atTime(Integer.parseInt(time.substring(0, 2)),
+                Integer.parseInt(time.substring(2, 4)));
     }
 
     /**

@@ -25,13 +25,22 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Load the style from DialogBox.fxml and set the controller to this instance and load it. Set the text and image
-     * based on the arguments into the dialog box. Print out any IOException occurs in the terminal.
+     * Set the text and image based on the arguments into the dialog box.
      *
      * @param text text to display in dialog box
      * @param img  image to display in dialog box
      */
     private DialogBox(String text, Image img) {
+        loadFxml();
+        dialog.setText(text);
+        displayPicture.setImage(img);
+    }
+
+    /**
+     * Load the style from DialogBox.fxml and set the controller to this instance and load it.
+     * Print out any IOException occurs in the terminal.
+     */
+    private void loadFxml() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -40,9 +49,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        dialog.setText(text);
-        displayPicture.setImage(img);
     }
 
     /**

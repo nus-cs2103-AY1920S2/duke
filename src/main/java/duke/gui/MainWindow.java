@@ -55,12 +55,31 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        showDialogBoxes(input, response);
         userInput.clear();
 
+        checkIsExit(response);
+    }
+
+    /**
+     * Show both user dialog box and Duke dialog box with the images and message printed in GUI.
+     *
+     * @param userInput Input from user
+     * @param response  Reply message to user
+     */
+    private void showDialogBoxes(String userInput, String response) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userInput, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+    }
+
+    /**
+     * Check whether is it goodbye message, if yes, close gui.
+     *
+     * @param response Message reply to user
+     */
+    private void checkIsExit(String response) {
         if (response.equals("     Alright! See you next time!\n")) {
             Platform.exit();
         }

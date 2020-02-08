@@ -64,6 +64,7 @@ public class Parser {
      */
     public static List<String> processUserInput(String userInput) throws DukeException {
         List<String> result = new ArrayList<>();
+
         if (!userInput.equals(CommandType.BYE.getCommand())) {
             if (userInput.equals(CommandType.LIST.getCommand())) {
                 result.add(CommandType.LIST.getCommand());

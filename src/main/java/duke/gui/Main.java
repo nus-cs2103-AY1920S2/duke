@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,15 +27,37 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setScene(prepareScene(loadFxml()));
             stage.show();
+        } catch (DukeException e) {
+            System.out.print(e.getMessage());
+        }
+    }
+
+    /**
+     * Load the MainWindow fxml file and connect logic to MainWindow controller
+     *
+     * @return Ui style loaded.
+     */
+    private AnchorPane loadFxml() throws DukeException {
+        AnchorPane ap = null;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            ap = fxmlLoader.load();
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            throw new DukeException("Error loading the fxml file from MainWindow.fxml");
         }
+        return ap;
+    }
+
+    /**
+     * Prepare scene based on the component given.
+     */
+    private Scene prepareScene(AnchorPane component) {
+        return new Scene(component);
     }
 
     /**
