@@ -65,6 +65,7 @@ public class Duke {
      * @return The messages to be shown to user.
      */
     public String getResponse(String input) {
+        assert !input.equals("") : "Please input a command!";
         try {
             Command command = Parser.parse(input);
             isExit = command.isExit();
