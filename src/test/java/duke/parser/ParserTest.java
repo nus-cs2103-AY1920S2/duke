@@ -21,7 +21,7 @@ class ParserTest {
         try {
             Parser.parse("delete homework").execute(tasks, ui, storage);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! Please give me the task number to delete.", e.getMessage());
+            assertEquals("OOPS!!! Please give me the task number in Integer.", e.getMessage());
         }
         try {
             Parser.parse("delete").execute(tasks, ui, storage);
@@ -33,12 +33,12 @@ class ParserTest {
         try {
             Parser.parse("done homework").execute(tasks, ui, storage);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! Please give me the task number.", e.getMessage());
+            assertEquals("OOPS!!! Please give me the task number in Integer.", e.getMessage());
         }
         try {
             Parser.parse("done").execute(tasks, ui, storage);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! Which task is done?", e.getMessage());
+            assertEquals("OOPS!!! Please give me the task number.", e.getMessage());
         }
 
         // testing exception of todo

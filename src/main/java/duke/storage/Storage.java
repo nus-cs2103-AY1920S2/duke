@@ -50,6 +50,7 @@ public class Storage {
      * @param tasks the list of tasks to save.
      */
     public void writeToFile(ArrayList<Task> tasks) {
+        assert file.exists() : "The storage file doesn't exist.";
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : tasks) {
@@ -68,6 +69,7 @@ public class Storage {
      * @throws DukeException if there are errors loading from file and/or converting data from file.
      */
     public ArrayList<Task> load() throws DukeException {
+        assert file.exists() : "The storage file doesn't exist.";
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(file);
