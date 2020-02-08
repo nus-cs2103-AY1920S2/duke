@@ -19,7 +19,9 @@ public class ListCommand extends DukeCommand {
     }
 
     /**
-     * Prints out the current list of tasks from the DukeList
+     * Returns a string of the current list of tasks from the DukeList
+     *
+     * @return Formatted String of all the tasks
      *
      * @param dl DukeList from the main Duke program
      * @param ds DukeStorage from the main Duke program
@@ -27,17 +29,20 @@ public class ListCommand extends DukeCommand {
      * @throws InvalidEntryException
      */
     @Override
-    public void execute(DukeList dl, DukeStorage ds, DukeUI dui) throws InvalidEntryException {
+    public String execute(DukeList dl, DukeStorage ds, DukeUI dui) throws InvalidEntryException {
         this.toBePrinted = dl.getListForUI();
 
         if (toBePrinted.isEmpty()) {
-            dui.printCustomMessage("    There are 0 tasks in your list.");
+            dui.holdCurrentMessage("    There are 0 tasks in your list.");
 
         } else {
-            dui.printCustomMessage("    Here are the tasks in your list:");
-            dui.printListOfTasks(toBePrinted);
+            dui.holdCurrentMessage("    Here are the tasks in your list:");
+            dui.holdListOfTasks(toBePrinted);
         }
 
+        String output = dui.getCurrentMessage();
+        System.out.println("LisCom:\n" + output);
+        return output;
     }
 
     @Override

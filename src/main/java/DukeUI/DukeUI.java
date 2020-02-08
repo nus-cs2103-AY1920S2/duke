@@ -13,11 +13,12 @@ import java.util.Scanner;
  */
 
 public class DukeUI {
+    private String currMessage = "";
     private final Scanner in;
     private final PrintStream out;
     private final String line = "    ____________________________________________________________";
     private final String logo =
-            "     ____        _        \n"
+              "     ____         _        \n"
             + "    |  _ \\ _   _| | _____ \n"
             + "    | | | | | | | |/ / _ \\\n"
             + "    | |_| | |_| |   <  __/\n"
@@ -32,48 +33,40 @@ public class DukeUI {
         this.out = out;
     }
 
-    public void printLine() {
-        System.out.println(line);
+    public void holdCurrentMessage(String customM) {
+        currMessage += customM + "\n";
     }
 
-    public void printCustomMessage(String customM) {
-        System.out.println(customM);
-    }
-
-    /**
-     * Prints the welcome message for Duke.
-     */
-    public void showWelcomeMessage() {
-        printLine();
-        printCustomMessage(logo);
-        System.out.println("    Hello I'm Duke");
-        System.out.println("    What can I do for you?");
-        printLine();
+    public String getCurrentMessage() {
+        String temp = currMessage;
+        currMessage = "";
+        return temp;
     }
 
     /**
-     * Returns the user's written command as a string.
+     * Returns the welcome message as a String
      *
-     * @return User-typed input String
+     * @return String welcome message.
      */
-    public String readCommandString() {
-        return in.nextLine();
+    public String getWelcomeMessage() {
+        this.holdCurrentMessage(logo);
+        this.holdCurrentMessage("    Hello I'm Duke");
+        this.holdCurrentMessage("    What can I do for you?");
+        return this.getCurrentMessage();
     }
-
 
     /**
      * Prints out the error message from a DukeException.
      *
      * @param e DukeException
      */
-    public void showErrorMessage(DukeException e) {
-        System.out.println("    " + e.getMessage());
-        printLine();
+    public String getErrorMessage(DukeException e) {
+        return e.getMessage();
     }
 
-    public void printListOfTasks(ArrayList<String> inputList) {
+    public void holdListOfTasks(ArrayList<String> inputList) {
         for (String curr : inputList) {
-            this.printCustomMessage(curr);
+            this.holdCurrentMessage(curr);
         }
     }
 }

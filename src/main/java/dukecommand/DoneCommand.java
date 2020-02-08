@@ -19,7 +19,9 @@ public class DoneCommand extends DukeCommand {
 
     /**
      * Executes the done command by marking a task as done from the DukeList according to given index.
-     * DukeUI prints the marked task if available.
+     * returns the marked task if available.
+     *
+     * @return String Output message of a successful done command
      *
      * @param dl DukeList from the main Duke program
      * @param ds DukeStorage from the main Duke program
@@ -27,10 +29,12 @@ public class DoneCommand extends DukeCommand {
      * @throws DukeException Thrown when the list is empty or index >= 0, index > DukeList's size
      */
     @Override
-    public void execute (DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
+    public String execute (DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
         Task curr = dl.markTaskAsDone(doneIndex);
-        dui.printCustomMessage("    Nice! I've marked this task as done:");
-        dui.printCustomMessage("    " + curr);
+        dui.holdCurrentMessage("    Nice! I've marked this task as done:");
+        dui.holdCurrentMessage("    " + curr);
+
+        return dui.getCurrentMessage();
     }
 
     @Override

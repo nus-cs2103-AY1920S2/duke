@@ -16,15 +16,18 @@ public class HelpCommand extends DukeCommand {
     }
 
     /**
-     * Executes the help command by having the DukeUI print out the help message
+     * Executes the help command by having DukeUI return the help message
+     *
+     * @return  String message of help command
      *
      * @param dl DukeList from the main Duke program
      * @param ds DukeStorage from the main Duke program
      * @param dui DukeUI from the main Duke program
      */
     @Override
-    public void execute(DukeList dl, DukeStorage ds, DukeUI dui) throws InvalidEntryException {
-        dui.printCustomMessage(helpString);
+    public String execute(DukeList dl, DukeStorage ds, DukeUI dui) throws InvalidEntryException {
+        dui.holdCurrentMessage(helpString);
+        return dui.getCurrentMessage();
     }
 
     @Override

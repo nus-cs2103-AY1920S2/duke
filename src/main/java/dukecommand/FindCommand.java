@@ -24,14 +24,16 @@ public class FindCommand extends DukeCommand {
      * Searches iteratively in each task's description to find the keyword and prints out the list
      * of tasks that contains the keyword
      *
+     * @return String message of successful find command
+     *
      * @param dl  DukeList from main Duke program
      * @param ds  DukeStorage from main Duke program
      * @param dui DukeUI from main Duke program
      */
     @Override
-    public void execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
+    public String execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
         if (dl.isEmpty()) {
-            dui.printCustomMessage("    There's no list for me to search from. Your list is empty!");
+            dui.holdCurrentMessage("    There's no list for me to search from. Your list is empty!");
         } else {
             DukeList collectingDL = new DukeList();
             ArrayList<Task> searchSpace = dl.getListOfTasks();
@@ -44,12 +46,14 @@ public class FindCommand extends DukeCommand {
             }
 
             if (collectingDL.isEmpty()) {
-                dui.printCustomMessage("    There's no task description that matches your keyword!");
+                dui.holdCurrentMessage("    There's no task description that matches your keyword!");
             } else {
-                dui.printCustomMessage("    Here's the list of tasks that contains your keyword!");
-                dui.printListOfTasks(collectingDL.getListForUI());
+                dui.holdCurrentMessage("    Here's the list of tasks that contains your keyword!");
+                dui.holdListOfTasks(collectingDL.getListForUI());
             }
         }
+
+        return dui.getCurrentMessage();
     }
     @Override
     public boolean getIsExit() {

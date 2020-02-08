@@ -23,7 +23,7 @@ public class UnknownCommand extends DukeCommand {
      * @throws DukeException Thrown to represent an unknown command
      */
     @Override
-    public void execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
+    public String execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
         throw new UnknownCommandException("Sorry! I don't understand that command.");
     }
 

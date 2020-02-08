@@ -18,17 +18,23 @@ public class AddCommand extends DukeCommand {
 
     /**
      * Executes the requested command by adding the task to the list, saving the changes in the storage
-     * and printing the success message of adding the task
+     * and returns the success message of adding the task
+     *
+     * @return String output message of a successful add command
      *
      * @param dl DukeList from the main Duke program
      * @param ds DukeStorage from the main Duke program
      * @param dui DukeUI from the main Duke program
      */
-    public void execute(DukeList dl, DukeStorage ds, DukeUI dui) {
+    public String execute(DukeList dl, DukeStorage ds, DukeUI dui) {
         dl.addTask(toBeAdded);
         ds.save(dl);
-        dui.printCustomMessage("    Got it I've added this task:\n      " + toBeAdded);
-        System.out.printf("    Now you have %d tasks in the list.\n", dl.getNumOfTasks());
+
+        dui.holdCurrentMessage("    Got it I've added this task:");
+        dui.holdCurrentMessage("        " + toBeAdded.getTaskName());
+        String output = String.format("    Now you have %d tasks in the list.", dl.getNumOfTasks());
+        dui.holdCurrentMessage(output);
+        return dui.getCurrentMessage();
     }
 
     /**

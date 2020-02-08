@@ -33,7 +33,8 @@ public class DukeParser {
         DukeCommandEnums dukeCommand = getEnum(command);
         DukeCommand returnCommand = new DukeCommand() {
             @Override
-            public void execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
+            public String execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
+                return "";
             }
 
             @Override

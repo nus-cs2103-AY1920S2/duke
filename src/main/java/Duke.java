@@ -17,11 +17,12 @@ public class Duke {
     private DukeUI ui;
     private DukeParser parser;
 
+    /*
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
     }
-
+    */
     /**
      * Constructor for Duke. Each instantiation will create a new
      * DukeStorage, DukeList, DukeUI, DukeParser for the object.
@@ -37,35 +38,24 @@ public class Duke {
         }
     }
 
-    /**
-     * Drives the body of the code.
-     */
-    public void run() {
-        System.out.println("Started");
-        ui.showWelcomeMessage();
+    public String getResponse(String input) {
         String command;
-        boolean isMainExit = false;
+        String output = "";
 
-        while (!isMainExit) {
-            try {
-                command = ui.readCommandString();
-                ui.printLine();
-                DukeCommand currCommand = parser.handleCommand(command);
-                currCommand.execute(dl, ds, ui);
-                isMainExit = currCommand.getIsExit();
-                ui.printLine();
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            }
+        try {
+            command = input;
+            DukeCommand currCommand = parser.handleCommand(command);
+            output = currCommand.execute(dl, ds, ui);
+            System.out.println("Duke: \n" + output);
+        } catch (DukeException e) {
+            output = ui.getErrorMessage(e);
         }
+
+        return output;
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public DukeUI getUi() {
+        return this.ui;
     }
 
 }

@@ -20,7 +20,9 @@ public class DeleteCommand extends DukeCommand {
 
     /**
      * Executes the delete command by removing the task from the DukeList according to index.
-     * DukeUI prints the deleted task if available and the number of remaining tasks.
+     * DukeUI returns the deleted task if available and the number of remaining tasks.
+     *
+     * @return String DeleteCommand output message
      *
      * @param dl DukeList from the main Duke program
      * @param ds DukeStorage from the main Duke program
@@ -28,18 +30,20 @@ public class DeleteCommand extends DukeCommand {
      * @throws DukeException Thrown when the list is empty or index >= 0, index > DukeList's size
      */
     @Override
-    public void execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
+    public String execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
         Task removedTask = dl.deleteTask(deleteIndex);
         ds.save(dl);
-        dui.printCustomMessage("    The task requested has been successfully removed:");
-        dui.printCustomMessage("      " + removedTask);
+        dui.holdCurrentMessage("    The task requested has been successfully removed:");
+        dui.holdCurrentMessage("      " + removedTask);
 
         int remainingNum = dl.getNumOfTasks();
         if (remainingNum == 1) {
-            dui.printCustomMessage("    There is " + remainingNum + " task left.");
+            dui.holdCurrentMessage("    There is " + remainingNum + " task left.");
         } else {
-            dui.printCustomMessage("    There are " + remainingNum + " tasks left.");
+            dui.holdCurrentMessage("    There are " + remainingNum + " tasks left.");
         }
+
+        return dui.getCurrentMessage();
     }
 
     /**

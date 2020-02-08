@@ -16,16 +16,18 @@ public class ByeCommand extends DukeCommand {
 
 
     /**
-     * Executes the Bye Command by toggling the isExit boolean to true and printing the exit message via the DukeUI;
+     * Executes the Bye Command by toggling the isExit boolean to true
+     * and returning the exit message via the DukeUI;
      *
      * @param dl DukeList from the main Duke program
      * @param ds DukeStorage from the main Duke program
      * @param dui DukeUI from the main Duke program
      */
     @Override
-    public void execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
+    public String execute(DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
         this.isExit = true;
-        dui.printCustomMessage("    " + "Bye. Hope to see you again soon!");
+        dui.holdCurrentMessage("    " + "Bye. Hope to see you again soon!");
+        return dui.getCurrentMessage();
     }
 
 
