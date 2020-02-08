@@ -2,6 +2,8 @@ package duke.task;
 
 import java.time.LocalDate;
 
+import duke.main.Constant;
+
 public class Task {
     public final boolean completed;
     public final String name;
@@ -30,13 +32,10 @@ public class Task {
 
     @Override
     public String toString() {
-        final String doneCheck = "[✓] ";
-        final String notDoneCheck = "[✗] ";
-
         if (completed) {
-            return doneCheck + this.name;
+            return Constant.CHECK_DONE + this.name;
         } else {
-            return notDoneCheck + this.name;
+            return Constant.CHECK_NOTDONE + this.name;
         }
     }
 }

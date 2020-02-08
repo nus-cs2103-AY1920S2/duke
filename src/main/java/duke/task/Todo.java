@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.main.Constant;
+
 public class Todo extends Task {
 
     public Todo(String name) {
@@ -22,13 +24,10 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        String doneCheck = "[✓] ";
-        String notDoneCheck = "[✗] ";
-
         if (completed) {
-            return "[T]" + doneCheck + this.name;
+            return "[T]" + Constant.CHECK_DONE + this.name;
         } else {
-            return "[T]" + notDoneCheck + this.name;
+            return "[T]" + Constant.CHECK_NOTDONE + this.name;
         }
     }
 }

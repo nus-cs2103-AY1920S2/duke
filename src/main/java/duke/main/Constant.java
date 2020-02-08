@@ -11,4 +11,6 @@ public class Constant {
     public static final DateTimeFormatter FORMATTER_OUTPUT_DATE = DateTimeFormatter.ofPattern("dd MMM yyyy");
     public static final DateTimeFormatter FORMATTER_OUTPUT_DATE_TIME = DateTimeFormatter
             .ofPattern("dd MMM yyyy hh:mm a");
+    public static final String CHECK_DONE = "[✓] ";
+    public static final String CHECK_NOTDONE = "[✗] ";
 }

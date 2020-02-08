@@ -22,6 +22,7 @@ public class CreateTodoCommand extends Command {
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
      * @param storage Storage to save tasks in local storage
+     * @return reply to user the todo has been created
      * @throws NoDescriptionException If no name for deadline is specified.
      * @throws UnableToSaveException  If unable to save to storage.
      */

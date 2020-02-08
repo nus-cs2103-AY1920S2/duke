@@ -16,6 +16,7 @@ public class FindCommand extends Command {
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
      * @param storage Storage to save tasks in local storage
+     * @return reply to user the list of tasks specified
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

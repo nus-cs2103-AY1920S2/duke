@@ -20,6 +20,7 @@ public class DoneCommand extends Command {
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
      * @param storage Storage to save tasks in local storage
+     * @return reply to user the indicated task has been mark as done
      * @throws UnableToSaveException If unable to save to storage.
      */
     @Override

@@ -13,11 +13,12 @@ public class ClearAllCompleteCommand extends Command {
     }
 
     /**
-     * Returns a string all the tasks with the specified the keyword.
+     * Returns a string of completed tasks that are deleted
      * 
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
      * @param storage Storage to save tasks in local storage
+     * @return reply to user the completed tasks are deleted
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws UnableToSaveException {

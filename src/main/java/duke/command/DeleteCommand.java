@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
      * @param tasks   Existing Tasklist
      * @param ui      Ui for user interaction
      * @param storage Storage to save tasks in local storage
+     * @return reply to user the task has been deleted
      * @throws NoNumberDeleteException If task number to be deleted is not
      *                                 specified.
      * @throws UnableToSaveException   If unable to save to storage.
