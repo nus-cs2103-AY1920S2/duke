@@ -9,7 +9,8 @@ public class Parser {
      */
     public Command parse(String getInput) {
         Command command = null;
-        if (getInput.equals("todo") || getInput.equals("deadline") || getInput.equals("event")) {
+        if (getInput.equals("todo") || getInput.equals("deadline")
+                || getInput.equals("event") || getInput.equals("note")) {
             command = Command.ADD;
         } else if (getInput.equals("bye")) {
             command = Command.BYE;

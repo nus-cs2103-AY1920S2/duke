@@ -81,7 +81,7 @@ public class Duke {
                     break;
                 case ADD:
                     this.globalCommand = Command.ADD;
-                    hm.put(Cloud.TEMP, getInput); //todo, deadline, event
+                    hm.put(Cloud.TEMP, getInput); //todo, deadline, event, note
                     res = "What do you want to add?";
                     break;
                 case FIND:
@@ -114,6 +114,10 @@ public class Duke {
                     hm.put(Cloud.TEMPDESC, getInput);
                     res = "When does the event start? \nFormat: {dd/mm/yyyy hhmm}";
                     this.setGlobalCommand(Command.CREATEEVENT1);
+                } else if (hm.get(Cloud.TEMP).equals("note")) {
+                    hm.put(Cloud.TEMPDESC, getInput);
+                    res = "What is the information you want to store in this tag?";
+                    this.setGlobalCommand(Command.CREATENOTE1);
                 }
 
             } else if (currCommand == Command.CREATEDEADLINE1) {
@@ -139,6 +143,15 @@ public class Duke {
 
                 hm.put(Cloud.TEMPDESC, "");
                 hm.put(Cloud.TEMPTD1, "");
+
+            } else if (currCommand == Command.CREATENOTE1) {
+                Task task = factory.buildNoteFromCloud(hm.get(Cloud.TEMPDESC), getInput);
+                lst.addTask(task);
+                res = uiV2.sendAddTask(task, lst.getSize());
+                storage.save(lst);
+                this.setGlobalCommand(Command.DEFAULT);
+
+                hm.put(Cloud.TEMPDESC, "");
 
             } else if (currCommand == Command.FIND) {
                 TaskList tempLst = lst.findMatchingTasks(getInput);

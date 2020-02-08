@@ -10,4 +10,5 @@ public enum Command {
     CREATEEVENT1,
     CREATEEVENT2,
     CREATEDEADLINE1,
+    CREATENOTE1
 }

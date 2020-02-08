@@ -59,6 +59,7 @@ public class UiV2 {
                 + "\ntodo - adds a simple task "
                 + "\ndeadline - adds a task specifying a deadline"
                 + "\nevent - adds a task specifying a starting and ending date/time"
+                + "\nnote - adds a note tag and a corresponding note"
                 + "\nfind - I will compile all tasks with the specified keyword/s"
                 + "\nlist - I will display all your tasks"
                 + "\ndone - marks a chosen task as done"
