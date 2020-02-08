@@ -23,6 +23,11 @@ public class Event extends TimedTask {
         return end;
     }
 
+    public void reschedule(LocalDateTime start, LocalDateTime end) {
+        this.start = start;
+        this.end = end;
+    }
+
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s to %s)", getStatus(), name, formatTime(start), formatTime(end));

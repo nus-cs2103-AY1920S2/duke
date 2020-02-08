@@ -17,6 +17,10 @@ public class Deadline extends TimedTask {
         return dateTime;
     }
 
+    public void reschedule(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)", getStatus(), name, formatTime(dateTime));
