@@ -34,6 +34,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "Event: " + super.toString() + " (at: " + timePeriod + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy H:m");
+        return "Event: " + super.toString() + " (at: " + formatter.format(timePeriod) + ")";
     }
 }

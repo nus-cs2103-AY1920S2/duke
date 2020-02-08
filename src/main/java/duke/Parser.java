@@ -11,6 +11,7 @@ import duke.command.ListCommand;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -71,10 +72,11 @@ public class Parser {
             String[] whatsupTokens = instruction.split("/on ");
             LocalDate queryDate;
             try {
-                queryDate = LocalDate.parse(whatsupTokens[1].trim());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                queryDate = LocalDate.parse(whatsupTokens[1].trim(), formatter);
             } catch (DateTimeParseException e) {
-                throw new DukeException("\t" + "Please write the date in this format:" +
-                        "YYYY-MM-DD");
+                throw new DukeException("\t" + "Please write the date in this format: " +
+                        "dd-MM-yyyy");
             } catch (Exception e) {
                 throw new DukeException("\t" + "Please specify the Whatsup command in the right format.");
             }
