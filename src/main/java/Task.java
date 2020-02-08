@@ -1,7 +1,7 @@
 public abstract class Task {
     protected String description;
     protected boolean isDone;
-    protected String reply;
+    protected String markSymbol;
     protected static int taskNo = 0;
 
     public Task(String description) {
@@ -26,10 +26,10 @@ public abstract class Task {
 
     public String toString(){
         if(isDone) {
-            reply = "\u2713";
+            markSymbol  = "\u2713";
         } else {
-            reply = "\u2718";
+            markSymbol = "\u2718";
         }
-        return ("[" + reply + "] " + description); //return tick or X symbols
+        return ("[" + markSymbol + "] " + description); //return tick or X symbols
     }
 }

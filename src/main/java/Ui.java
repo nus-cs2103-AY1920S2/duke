@@ -37,16 +37,13 @@ public class Ui {
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public static void done2(TaskList tasks){
+    public static void done(TaskList tasks, String userInput){
+        int taskNo = Integer.parseInt(userInput.substring(userInput.indexOf(" ")+1));
+
         System.out.println("    ____________________________________________________________");
         System.out.println("     Nice! I've marked this task as done: ");
-        int i = 0;
-        while (i < tasks.totalTasksCount) {
-            if (tasks.totalTasks[i].getDone()) {
-                System.out.println("       " + tasks.totalTasks[i].getStatusIcon() + " " + tasks.totalTasks[i].getDescription());
-            }
-            i++;
-        }
+        tasks.totalTasks[taskNo - 1].markAsDone(); // to mark as done; -1 as since count in totalTasks starts from 0
+        System.out.println("       " + tasks.totalTasks[taskNo - 1].getStatusIcon() + " " + tasks.totalTasks[taskNo - 1].getDescription());
         System.out.println("    ____________________________________________________________");
     }
 }

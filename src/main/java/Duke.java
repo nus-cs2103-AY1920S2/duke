@@ -46,8 +46,13 @@ public class Duke extends Application {
             } else {
                 if (userInput.equals("list")) {
                     Ui.list(this.tasks);
-                } else if (userInput.equals("done 2")) {
-                    Ui.done2(this.tasks);
+                } else if (userInput.contains("done")) {
+                    Ui.done(this.tasks, userInput);
+                    try {
+                        storage.save(tasks);
+                    } catch (IOException e) {
+                        System.out.println("Cannot write file");
+                    }
                 } else if (userInput.contains("delete")) {
                     this.tasks.delete(userInput);
                     try {

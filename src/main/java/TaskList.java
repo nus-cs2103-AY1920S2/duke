@@ -71,8 +71,6 @@ public class TaskList {
                 part2 = part2.substring(0, part2.indexOf(" "));
                 String part3 = temp.substring(temp.length()-4, temp.length());
 
-
-
                 switch(part1){
                     case("Dec"):
                         part1 = "12";
@@ -117,6 +115,9 @@ public class TaskList {
                 System.out.println(temp);
                 this.event("event" + totalTasks[i].substring(totalTasks[i].indexOf(" "), totalTasks[i].indexOf("at:") - 1)
                         + "/at " + temp);
+            }
+            if(totalTasks[i].contains("\u2713")){
+                this.totalTasks[i].markAsDone();
             }
         }
     }
