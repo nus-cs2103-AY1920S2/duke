@@ -24,9 +24,9 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
-            String[] dateTimeArr = by.split(" ");
-            this.date = LocalDate.parse(dateTimeArr[0]);
-            this.time = LocalTime.parse(dateTimeArr[1]);
+            String[] dateTimeArray = by.split(" ");
+            this.date = LocalDate.parse(dateTimeArray[0]);
+            this.time = LocalTime.parse(dateTimeArray[1]);
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Incorrect date or time format. Format required: yyyy-mm-dd hh:mm");
         }
@@ -41,9 +41,9 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
-        String[] dateTimeArr = by.split(" ");
-        this.date = LocalDate.parse(dateTimeArr[0]);
-        this.time = LocalTime.parse(dateTimeArr[1]);
+        String[] dateTimeArray = by.split(" ");
+        this.date = LocalDate.parse(dateTimeArray[0]);
+        this.time = LocalTime.parse(dateTimeArray[1]);
     }
 
     /**
@@ -53,6 +53,22 @@ public class Deadline extends Task {
      */
     public LocalDate getDate() {
         return this.date;
+    }
+
+    /**
+     * Sets the date of the deadline to the specified date.
+     * @param date The date of the deadline.
+     */
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    /**
+     * Sets the time of the deadline to the specified time.
+     * @param time The time of the deadline.
+     */
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     /**

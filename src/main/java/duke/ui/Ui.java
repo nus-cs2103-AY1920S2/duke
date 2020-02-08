@@ -12,7 +12,8 @@ public class Ui {
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke.\nWhat can I do for you?";
     public static final String MESSAGE_ADD = "Got it. I've added this task:";
     public static final String MESSAGE_DONE = "Nice! I've marked this task as done:";
-    public static final String MESSAGE_DELETE = "Noted. I've removed this task: ";
+    public static final String MESSAGE_UPDATE = "Noted. I've updated this task:";
+    public static final String MESSAGE_DELETE = "Noted. I've removed this task:";
     public static final String MESSAGE_FIND = "Here are the matching tasks in your list:";
     public static final String MESSAGE_NO_MATCHING_TASK = "There are no matching tasks in your list.";
     public static final String MESSAGE_LIST = "Here are the tasks in your list:";

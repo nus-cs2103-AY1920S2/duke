@@ -25,11 +25,11 @@ public class Event extends Task {
     public Event(String description, String at) throws DukeException {
         super(description);
         try {
-            String[] dateTimeArr = at.split(" ");
-            this.date = LocalDate.parse(dateTimeArr[0]);
-            String[] timeArr = dateTimeArr[1].split("-");
-            this.startTime = LocalTime.parse(timeArr[0]);
-            this.endTime = LocalTime.parse(timeArr[1]);
+            String[] dateTimeArray = at.split(" ");
+            this.date = LocalDate.parse(dateTimeArray[0]);
+            String[] timeArray = dateTimeArray[1].split("-");
+            this.startTime = LocalTime.parse(timeArray[0]);
+            this.endTime = LocalTime.parse(timeArray[1]);
             if (startTime.isAfter(endTime)) {
                 throw new DukeException("Start time cannot be after end time.");
             }
@@ -47,11 +47,11 @@ public class Event extends Task {
      */
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
-        String[] dateTimeArr = at.split(" ");
-        this.date = LocalDate.parse(dateTimeArr[0]);
-        String[] timeArr = dateTimeArr[1].split("-");
-        this.startTime = LocalTime.parse(timeArr[0]);
-        this.endTime = LocalTime.parse(timeArr[1]);
+        String[] dateTimeArray = at.split(" ");
+        this.date = LocalDate.parse(dateTimeArray[0]);
+        String[] timeArray = dateTimeArray[1].split("-");
+        this.startTime = LocalTime.parse(timeArray[0]);
+        this.endTime = LocalTime.parse(timeArray[1]);
     }
 
     /**
@@ -61,6 +61,30 @@ public class Event extends Task {
      */
     public LocalDate getDate() {
         return this.date;
+    }
+
+    /**
+     * Sets the date of the event to the specified date.
+     * @param date The date of the event.
+     */
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    /**
+     * Sets the start time of the event to the specified time.
+     * @param time The start time of the event.
+     */
+    public void setStartTime(LocalTime time) {
+        this.startTime = time;
+    }
+
+    /**
+     * Sets the end time of the event to the specified time.
+     * @param time The end time of the event.
+     */
+    public void setEndTime(LocalTime time) {
+        this.endTime = time;
     }
 
     /**

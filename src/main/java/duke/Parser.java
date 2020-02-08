@@ -2,12 +2,13 @@ package duke;
 
 import duke.command.AddCommand;
 import duke.command.Command;
-import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.GetCommand;
 import duke.command.ListCommand;
+import duke.command.UpdateCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -58,6 +59,19 @@ public class Parser {
                 throw new DukeException("The ID of the task done cannot be empty.");
             } catch (NumberFormatException e) {
                 throw new DukeException("The ID of the task done should be a number.");
+            }
+            break;
+        case "update":
+            try {
+                if (commandArray[1].trim().equals("")) {
+                    throw new DukeException("The ID and details of the task to update cannot be empty.");
+                }
+                String[] splitArray = commandArray[1].trim().split(" ", 2);
+                cmd = new UpdateCommand(Integer.parseInt(splitArray[0].trim()), splitArray[1].trim());
+            }  catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("The ID and details of the task to update cannot be empty.");
+            } catch (NumberFormatException e) {
+                throw new DukeException("The ID of the task to update should be a number.");
             }
             break;
         case "delete":
