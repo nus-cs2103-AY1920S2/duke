@@ -78,8 +78,11 @@ public class TaskList {
      * @return The updated task list after the addition of the given task.
      * @throws DateTimeParseException If the date provided in the task description is in an invalid format.
      * @throws DukeInvalidCommandException If the description of the command entered is invalid.
+     * @throws DukeDuplicateTaskException If the description of the command matches an existing stored task.
      */
-    public List<Task> addTask(String command) throws DateTimeParseException, DukeInvalidCommandException {
+    public List<Task> addTask(String command)
+            throws DateTimeParseException, DukeInvalidCommandException, DukeDuplicateTaskException {
+
         Task task = null;
         String taskType = command.split(" ")[0];
         command = command.substring(command.indexOf(" "));
@@ -101,6 +104,11 @@ public class TaskList {
             throw new DukeInvalidCommandException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         assert task != null : "task can't be null"; //redundant?
+
+        if (tasks.contains(task)) {
+            throw new DukeDuplicateTaskException("OOPS!!! This task already exists in the list!");
+        }
+
         tasks.add(task);
         print("Got it. I've added this task:");
         print("  " + task);

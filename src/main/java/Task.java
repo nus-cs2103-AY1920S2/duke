@@ -50,4 +50,15 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * This method compares the equality of the current task with another task.
+     *
+     * @param obj The task that needs to be compared with the current task.
+     * @return True if this task is equal to obj task.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        Task temp = (Task) obj;
+        return this.description.equals(temp.description);
+    }
 }
