@@ -4,8 +4,10 @@ package dukebot.command;
  * List of commands.
  */
 public enum CommandList {
+    ADD_CONTACT("add_contact"),
     ALIAS("alias"),
     BYE("bye"),
+    CONTACTS("contacts"),
     DEADLINE("deadline"),
     DELETE("delete"),
     DONE("done"),

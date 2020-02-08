@@ -87,6 +87,8 @@ public class Parser {
         String command = inpArr[0].toLowerCase();
         if (aliasMap.containsKey(command)) {
             switch (aliasMap.get(command)) {
+            case ADD_CONTACT:
+                return new AddContactCommand(inpArr);
             case ALIAS:
                 return new AliasCommand(inpArr, aliasMap);
             case BYE:

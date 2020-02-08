@@ -1,5 +1,6 @@
 package dukebot.ui;
 
+import dukebot.contactlist.ContactDetails;
 import dukebot.gui.DukeExpression;
 import dukebot.gui.DukeVoice;
 import dukebot.tasklist.Task;
@@ -317,6 +318,34 @@ public class Ui {
             dukeSays("The task: " + task.getDescription());
             dukeSays("is a: " + task.getType());
             dukeSays("which does not have a scheduled time.");
+            break;
+        case ERROR_PLACEHOLDER:
+            // Purely for testing, should never be called in deployment
+            // Fallthrough
+        default:
+            // Purely for testing, should never be called in deployment
+            assert false;
+            dukeSays("There is an unexpected error :(");
+            break;
+        }
+    }
+
+    /**
+     * Prints message based on LineName with contact information.
+     *
+     * @param lineName Line to say.
+     * @param contact Contact to use.
+     */
+    public void sayLineWithContact(LineNameWithContact lineName, ContactDetails contact) {
+        switch (lineName) {
+        case ADD_CONTACT_SUCCESS:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.LAUGHTER, DukeVoice.OKAY);
+            dukeExpression = DukeExpression.HAPPY;
+            dukeSays("Duke has successfully added:");
+            dukeSays(contact.getName());
+            dukeSays("with the number:");
+            dukeSays(Integer.toString(contact.getPhoneNumber()));
+            dukeSays("into the contact list");
             break;
         case ERROR_PLACEHOLDER:
             // Purely for testing, should never be called in deployment

@@ -9,5 +9,7 @@ public class ContactList {
         this.contactList = contactList;
     }
 
-
+    public void add(ContactDetails contactDetails) {
+        contactList.add(contactDetails);
+    }
 }

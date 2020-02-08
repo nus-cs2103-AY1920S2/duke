@@ -11,6 +11,12 @@ public class ContactDetails {
         this.notes = notes;
     }
 
+    public ContactDetails(String name, int phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.notes = "";
+    }
+
     public String getName() {
         return name;
     }
