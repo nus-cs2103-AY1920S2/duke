@@ -37,4 +37,19 @@ public class ContactList {
     public int size() {
         return this.contactList.size();
     }
+
+    /**
+     * Deletes task at specified index.
+     *
+     * @param contactInd Index of task.
+     */
+    public ContactDetails deleteTask(int contactInd) {
+        if (contactInd >= size() || contactInd < 0) {
+            return null;
+        } else {
+            ContactDetails contactDetail = this.contactList.get(contactInd);
+            this.contactList.remove(contactInd);
+            return contactDetail;
+        }
+    }
 }

@@ -373,6 +373,13 @@ public class Ui {
      */
     public void sayLineWithContact(LineNameWithContact lineName, ContactDetails contact) {
         switch (lineName) {
+        case DELETE_CONTACT_SUCCESS:
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,
+                    DukeVoice.WHAT_YOU_LIKE, DukeVoice.OKAY);
+            dukeExpression = DukeExpression.BLUSH;
+            dukeSays("So Master had a falling out with " + contact.getName() + "?");
+            dukeSays("Will Master spend more time with Duke now?");
+            break;
         case ADD_CONTACT_SUCCESS:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.LAUGHTER, DukeVoice.OKAY);
             dukeExpression = DukeExpression.HAPPY;

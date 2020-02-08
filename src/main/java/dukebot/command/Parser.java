@@ -99,6 +99,8 @@ public class Parser {
                 return new NewDeadlineCommand(inpArr);
             case DELETE:
                 return new DeleteCommand(inpArr);
+            case DELETE_CONTACT:
+                return new DeleteContactCommand(inpArr);
             case DONE:
                 return new DoneCommand(inpArr);
             case EVENT:
