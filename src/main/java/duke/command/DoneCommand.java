@@ -32,10 +32,9 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        assert index > 0 && index <= tasks.size(): "Index out of bounds";
         Task task = tasks.get(index);
         task.markAsDone();
-        assert task.getStatusIcon().equals("Y"): "Task should be marked as done";
+        assert task.getStatusIcon().equals("Y") : "Task should be marked as done";
         return ui.showToUser(Ui.MESSAGE_DONE, Ui.INDENT + task);
     }
 }
