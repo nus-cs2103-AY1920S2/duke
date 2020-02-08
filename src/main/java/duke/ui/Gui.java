@@ -145,7 +145,7 @@ public class Gui extends Application implements Ui {
 
     @Override
     public void printException(Exception e) {
-        print(e.toString());
+        print(e.getMessage());
     }
 
     @Override

@@ -33,7 +33,7 @@ public class TextUi implements Ui {
 
     @Override
     public void printException(Exception e) {
-        print(e.toString());
+        print(e.getMessage());
     }
 
     @Override
