@@ -67,12 +67,12 @@ public class Common {
      * @throws DukeException when the index is invalid.
      */
     public String[] markAsDone(int index) throws DukeException {
-        boolean isRecurring=taskManager.markDone(index);
+        boolean isRecurring = taskManager.markDone(index);
         saveData();
-        if(isRecurring){
+        if (isRecurring) {
             return responseFormat("This task has recurs: ",
                     "" + taskManager.getTask(index));
-        }else{
+        } else {
             return responseFormat("Nice! I've marked this task as done: ",
                     "" + taskManager.getTask(index));
         }

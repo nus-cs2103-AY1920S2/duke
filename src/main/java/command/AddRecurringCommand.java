@@ -8,7 +8,7 @@ import java.time.LocalDate;
 /**
  * Specific type of command that add recurring task to the storage.
  */
-public class AddRecurringCommand extends AddTaskCommand{
+public class AddRecurringCommand extends AddTaskCommand {
     /**
      * Constructor for command that add a event task.
      *

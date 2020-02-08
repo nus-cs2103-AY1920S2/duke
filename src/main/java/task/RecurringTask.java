@@ -7,24 +7,24 @@ import java.time.LocalDate;
 /**
  * Specific type of task that contains description and recurs weekly.
  */
-public class RecurringTask extends Task{
+public class RecurringTask extends Task {
 
     private LocalDate date;
-    private final int daysInAWeek=7;
+    private final int daysInAWeek = 7;
 
     /**
      * Constructor for the event task.
      *
      * @param description is the detail of the task.
-     * @param date   is the event time of the task.
+     * @param date        is the event time of the task.
      */
-    public RecurringTask(String description, LocalDate date){
-        super(description,"R");
-        this.date=date;
+    public RecurringTask(String description, LocalDate date) {
+        super(description, "R");
+        this.date = date;
     }
 
-    public void recurs(){
-        date=date.plusDays(daysInAWeek);
+    public void recurs() {
+        date = date.plusDays(daysInAWeek);
     }
 
     /**

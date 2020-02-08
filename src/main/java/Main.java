@@ -21,7 +21,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            this.stage=stage;
+            this.stage = stage;
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
@@ -33,7 +33,7 @@ public class Main extends Application {
         }
     }
 
-    public static void close(){
+    public static void close() {
         stage.close();
     }
 

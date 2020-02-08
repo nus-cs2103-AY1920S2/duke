@@ -28,16 +28,17 @@ public class TaskManager {
 
     /**
      * Marks the task to be done, or recurs the task if the task is recursive.
+     *
      * @param index index of the task in task list.
      * @return if the task has recurs.
      * @throws DukeException if the index is out of bound or task list is empty.
      */
     public boolean markDone(int index) throws DukeException {
-        Task task=getTask(index);
-        if(task instanceof RecurringTask){
-            ((RecurringTask)task).recurs();
+        Task task = getTask(index);
+        if (task instanceof RecurringTask) {
+            ((RecurringTask) task).recurs();
             return true;
-        }else{
+        } else {
             task.setDone();
             return false;
         }
