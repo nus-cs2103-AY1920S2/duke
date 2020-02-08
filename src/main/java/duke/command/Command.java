@@ -15,6 +15,7 @@ public abstract class Command {
 
     /**
      * Abstract execute method for all Command subclasses.
+     *
      * @param taskList to access collection of tasks.
      * @param storage to access save-load functionality.
      */
@@ -22,6 +23,7 @@ public abstract class Command {
 
     /**
      * Abstract method for all Command subclasses.
+     *
      * @return boolean indicating if command is an exit command.
      */
     public abstract boolean isExit();

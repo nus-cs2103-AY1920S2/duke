@@ -21,6 +21,7 @@ public class Ui {
 
     /**
      * Prints the input with a set indentation.
+     *
      * @param toPrint user whats to print.
      */
     public static void printWithIndent(String toPrint) {
@@ -56,6 +57,7 @@ public class Ui {
 
     /**
      * Prints the exception for the user to see.
+     *
      * @param e of the exception that occurred.
      */
     public static void showError(Exception e) {
@@ -68,6 +70,7 @@ public class Ui {
     /**
      * Prints the information of the new task added
      * and the new number of tasks.
+     *
      * @param added task to be print.
      * @param total new count of tasks.
      */
@@ -87,6 +90,7 @@ public class Ui {
 
     /**
      * Prints the information of all the tasks in the TaskList object.
+     *
      * @param taskList for access to the collection of Task objects.
      */
     public static void showAllTasks(TaskList taskList) {
@@ -107,6 +111,7 @@ public class Ui {
 
     /**
      * Prints the information of the done task.
+     *
      * @param done task to be print.
      */
     public static void showTaskDone(Task done) {
@@ -121,6 +126,7 @@ public class Ui {
     /**
      * Prints the information of the deleted task
      * and the new number of tasks.
+     *
      * @param deleted task to be print.
      * @param total new count of tasks.
      */
@@ -151,6 +157,7 @@ public class Ui {
 
     /**
      * Reads next user's whole command and returns as a String.
+     *
      * @return string representation of the command.
      */
     public static String readCommand() {
@@ -168,6 +175,7 @@ public class Ui {
 
     /**
      * Prints the commands provided by the application.
+     *
      * @param commands varargs representing all commands to be printed.
      */
     public static void showAllCommands(Command... commands) {

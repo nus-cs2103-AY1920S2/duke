@@ -21,6 +21,7 @@ public class DeleteCommand extends Command {
 
     /**
      * DeleteCommand constructor.
+     *
      * @param index of the task in collection to be deleted.
      */
     public DeleteCommand(int index) {
@@ -29,6 +30,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes Delete behaviour of deleted task at given index.
+     *
      * @param taskList to access collection of tasks.
      * @param storage to access save-load functionality.
      */
@@ -45,6 +47,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Inform if command is an exit command.
+     *
      * @return boolean indicating if command is an exit command.
      */
     public boolean isExit() {

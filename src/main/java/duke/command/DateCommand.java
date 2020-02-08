@@ -2,8 +2,7 @@ package duke.command;
 
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Deadline;
-import duke.task.Event;
+import duke.task.DatedTask;
 import duke.interaction.Ui;
 import duke.util.Storage;
 
@@ -46,19 +45,12 @@ public class DateCommand extends Command {
             Ui.showLine();
             int count = 0;
             for (Task t: taskList.getList()) {
-                if (t instanceof Deadline) {
-                    Deadline d = (Deadline)t;
-                    if (d.getDeadline().toLocalDate().isEqual(date)) {
+                if (t instanceof DatedTask) {
+                    DatedTask datedTask = (DatedTask)t;
+                    if (datedTask.getDate().toLocalDate().isEqual(date)) {
                         count++;
-                        latestResponse += count + "." + d.toString() + "\n";
-                        Ui.printWithIndent(count + "." + d.toString());
-                    }
-                } else if (t instanceof Event) {
-                    Event e = (Event)t;
-                    if (e.getDatetime().toLocalDate().isEqual(date)) {
-                        count++;
-                        latestResponse += count + "." + e.toString() + "\n";
-                        Ui.printWithIndent(count + "." + e.toString());
+                        latestResponse += count + "." + datedTask.toString() + "\n";
+                        Ui.printWithIndent(count + "." + datedTask.toString());
                     }
                 }
             }

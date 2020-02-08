@@ -43,13 +43,13 @@ public class Duke {
      */
     private void loop() {
         boolean isExiting = false;
-        Command c;
+        Command command;
         do {
             String fullCommand = Ui.readCommand();
             try {
-                c = Parser.parse(fullCommand);
-                c.execute(taskList, storage);
-                isExiting = c.isExit();
+                command = Parser.parse(fullCommand);
+                command.execute(taskList, storage);
+                isExiting = command.isExit();
             } catch (DukeException.InvalidCommand invalidCommand) {
                 Ui.showError(invalidCommand);
             }
@@ -63,15 +63,15 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        Command c;
+        Command command;
         String output = "";
         boolean isExiting = false;
 
         try {
-            c = Parser.parse(input);
-            c.execute(taskList, storage);
+            command = Parser.parse(input);
+            command.execute(taskList, storage);
             output = Ui.getLatestResponse();
-            isExiting = c.isExit();
+            isExiting = command.isExit();
 
             if (isExiting) {
                 // TODO: Find a more graceful way to exit?
