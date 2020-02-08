@@ -14,6 +14,9 @@ public class Task implements Comparable<Task> {
     protected String type;
     protected boolean isDone;
     protected LocalDate period;
+    private final int EQUAL = 0;
+    private final int LOWER = 1;
+    private final int HIGHER = -1;
 
     /**
      * Class constructor of Task which takes in description in String format.
@@ -95,21 +98,46 @@ public class Task implements Comparable<Task> {
     public int compareTo(Task other) {
         int result;
 
-        if (this.getType().equals("todo") && other.getType().equals("todo")) {
-            result = 0;
-        } else if (this.getType().equals("todo")) {
-            result = 1;
-        } else if (other.getType().equals("todo")) {
-            result = -1;
-        } else {
-            result = this.getPeriod().compareTo(other.getPeriod());
-        }
+        result = sortingTask(this, other);
 
-        if (result == 0) {
-            result = this.getDescription().compareTo(other.getDescription());
+        if (result == EQUAL) {
+            result = sortByAlphabeticalOrder(this, other);
         }
 
         return result;
+    }
+
+    /**
+     * Sort todo at the bottom of the list and sort event and deadline based on their date and time.
+     *
+     * @param first Task to be compare.
+     * @param second Another task to be compare.
+     * @return Determine whether the first task is on top or below than the second task.
+     */
+    private int sortingTask(Task first, Task second) {
+        int result;
+        if (first.getType().equals("todo") && second.getType().equals("todo")) {
+            result = EQUAL;
+        } else if (first.getType().equals("todo")) {
+            result = LOWER;
+        } else if (second.getType().equals("todo")) {
+            result = HIGHER;
+        } else {
+            result = first.getPeriod().compareTo(second.getPeriod());
+        }
+
+        return result;
+    }
+
+    /**
+     * Sort the task by alphabetical order.
+     *
+     * @param first Task to be compare.
+     * @param second Another task to be compare.
+     * @return Determine whether the first task is on top or below than the second task.
+     */
+    private int sortByAlphabeticalOrder(Task first, Task second) {
+        return first.getDescription().compareTo(second.getDescription());
     }
 
     /**
