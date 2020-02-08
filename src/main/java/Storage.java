@@ -55,7 +55,7 @@ public class Storage {
      */
     public void save(TaskList lst) {
         try {
-            FileOutputStream fos = new FileOutputStream (filePath);
+            FileOutputStream fos = new FileOutputStream(filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(lst);
         } catch (IOException e) {

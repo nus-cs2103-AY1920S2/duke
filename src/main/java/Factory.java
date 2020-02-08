@@ -4,18 +4,6 @@ import java.util.Scanner;
 /** Creates task objects. */
 public class Factory {
 
-    public Task buildTask(String taskName, String input) {
-        Task task = null;
-        if (taskName.equals("todo")) {
-            task = createTodo(input);
-        } else if (taskName.equals("deadline")) {
-            task = createDeadline(input);
-        } else {
-            task = createEvent(input);
-        }
-        return task;
-    }
-
     /**
      * Create Todo object.
      *
@@ -109,9 +97,9 @@ public class Factory {
                 TaskDate tdStart = new TaskDate(at);
                 event = new Event(desc, tdStart, tdEnd);
 
-            } catch(ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException e) {
                 System.err.println("Invalid input, please follow the format {dd/mm/yyyy hhmm}");
-            } catch(DateTimeException e) {
+            } catch (DateTimeException e) {
                 System.err.println("Invalid date!");
             } catch (Exception e) {
                 e.printStackTrace();

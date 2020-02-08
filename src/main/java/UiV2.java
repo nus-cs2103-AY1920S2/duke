@@ -9,8 +9,8 @@ public class UiV2 {
      */
     public String sendAddTask(Task task, int size) {
         if (task != null) {
-            return ("Sure I will add this task.\n" + task +
-                    "\n" + "Now you have " + String.valueOf(size) + " tasks.");
+            return ("Sure I will add this task.\n" + task
+                    + "\n" + "Now you have " + String.valueOf(size) + " tasks.");
         } else {
             return "";
         }
