@@ -62,7 +62,7 @@ public class Parser {
      * @throws DukeUnknownKeywordException If the command keyword (the first word) is invalid.
      */
 
-    public Command parse(String commandString, TaskListInterface taskList) throws DukeUnknownKeywordException,
+    public Command parse(String commandString, IList<Task> taskList) throws DukeUnknownKeywordException,
             DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
         String[] splittedCommands = commandString.split(" ");
         String commandStr = splittedCommands[0];
@@ -149,7 +149,7 @@ public class Parser {
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
 
-    private DoneCommand checkValidDoneArgument(String details, TaskListInterface taskList) throws
+    private DoneCommand checkValidDoneArgument(String details, IList<Task> taskList) throws
             DukeInvalidArgumentFormatException {
         int index = -1;
         try {
@@ -176,7 +176,7 @@ public class Parser {
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
 
-    private DeleteCommand checkValidDeleteArgument(String details, TaskListInterface taskList) throws
+    private DeleteCommand checkValidDeleteArgument(String details, IList<Task> taskList) throws
             DukeInvalidArgumentFormatException {
         int index = -1;
         try {

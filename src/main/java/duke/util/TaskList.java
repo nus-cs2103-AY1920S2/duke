@@ -22,7 +22,7 @@ import java.util.stream.Stream;
  * @author Mario Lorenzo
  */
 
-public class TaskList implements TaskListInterface {
+public class TaskList implements IList<Task> {
     ArrayList<Task> tasks;
 
     /**
