@@ -31,6 +31,8 @@ public class Command {
             } else {
                 int number = Integer.parseInt(command[1].trim());
                 if (number < 1 || number > tasks.getList().size()) {
+                    assert number > 1: "Invalid index, cannot be smaller than 1!";
+                    assert number < tasks.getList().size(): "Invalid index, cannot be greater than list size!";
                     return "The index inputted is not in the list! Please enter a valid index!";
                 }
                 if (tasks.getList().get(number - 1).isDone == false) {
@@ -89,6 +91,8 @@ public class Command {
             } else {
                 int deletionNumber = Integer.parseInt(command[1].trim());
                 if (deletionNumber < 1 || deletionNumber > tasks.getList().size()) {
+                    assert deletionNumber > 1: "Invalid index, cannot be smaller than 1!";
+                    assert deletionNumber < tasks.getList().size(): "Invalid index, cannot be greater than list size!";
                     return "The index inputted is not in the list! Please enter a valid index!";
                 }
                 storage.delete(deletionNumber);
