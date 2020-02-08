@@ -1,0 +1,6 @@
+language: java
+jdk:
+  - openjdk11
+  - openjdk-ea
+  - oraclejdk11
+  - oraclejdk-ea       
