@@ -6,7 +6,7 @@ Gradle is a _build automation tool_ used to automate build processes. There are 
 * [Adding Gradle Support to Your Project](#adding-gradle-support-to-your-project)
 * [Adding Plugins](#adding-plugins)
   * [CheckStyle](#checkstyle)
-  * [Shadow](#shadow)
+    * [Shadow](#shadow)
 * [Adding Dependencies](#adding-dependencies)
   * [JUnit](#junit)
 * [Further Reading](#further-reading)

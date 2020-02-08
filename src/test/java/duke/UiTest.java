@@ -24,16 +24,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UiTest {
-    Ui ui;
-    ByteArrayOutputStream output;
-    static String doneStatusIcon = "\u2713"; // Check mark icon
-    static String incompleteStatusIcon = "\u2718"; // Cross mark icon
-    String indentation = Ui.INDENTATION;
-    String horizontalBar = Ui.HORIZONTAL_BAR;
-    String newline = Ui.NEWLINE;
-    String horizontalDivider = indentation + horizontalBar + newline;
+    private Ui ui;
+    private ByteArrayOutputStream output;
+    private static String doneStatusIcon = "\u2713"; // Check mark icon
+    private static String incompleteStatusIcon = "\u2718"; // Cross mark icon
+    private String indentation = Ui.INDENTATION;
+    private String horizontalBar = Ui.HORIZONTAL_BAR;
+    private String newline = Ui.NEWLINE;
+    private String horizontalDivider = indentation + horizontalBar + newline;
 
-    static Stream<Arguments> generateAllTaskTypes() {
+    private static Stream<Arguments> generateAllTaskTypes() {
         return Stream.of(
                 Arguments.of(new TodoStub("Read book", false,
                         "todo,0,Read book", doneStatusIcon,
@@ -48,7 +48,7 @@ class UiTest {
                         "[D][" + incompleteStatusIcon + "] Finish Coding Project (by: 2020-01-27)")));
     }
 
-    static Stream<Arguments> generateAllTaskTypesWithZeroTotalTasks() {
+    private static Stream<Arguments> generateAllTaskTypesWithZeroTotalTasks() {
         // Generates a stream of [Task] [task count]
         // [task count] is 0
         return Stream.of(
@@ -66,7 +66,7 @@ class UiTest {
                         0));
     }
 
-    static Stream<Arguments> generateDukeExceptions() {
+    private static Stream<Arguments> generateDukeExceptions() {
         return Stream.of(
                 Arguments.of(new DukeException("Invalid Task Number given!")),
                 Arguments.of(new DukeException("Invalid task number given for deletion...")),
@@ -74,7 +74,7 @@ class UiTest {
         );
     }
 
-    static Stream<Arguments> generateOneTaskList() {
+    private static Stream<Arguments> generateOneTaskList() {
         List<Task> tasks = new ArrayList<>();
         tasks.add(new TodoStub("Read book", false,
                 "todo,0,Read book", doneStatusIcon,

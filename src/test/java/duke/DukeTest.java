@@ -24,34 +24,34 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DukeTest {
-    String fileSeparator = File.separator;
+    private String fileSeparator = File.separator;
     // Map project path to the directory from which you run your program
-    String projectRootPath = Paths.get("").toAbsolutePath().toString();
-    String dataDirectoryPath = projectRootPath + fileSeparator + "data";
-    String saveFile = "test.txt";
-    String newline = System.lineSeparator();
-    String indentation = "    ";
-    String horizontalBar =
+    private String projectRootPath = Paths.get("").toAbsolutePath().toString();
+    private String dataDirectoryPath = projectRootPath + fileSeparator + "data";
+    private String saveFile = "test.txt";
+    private String newline = System.lineSeparator();
+    private String indentation = "    ";
+    private String horizontalBar =
             "____________________________________________________________";
-    String horizontalDivider = indentation + horizontalBar + newline;
-    final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-    String taskDoneIcon = "\u2713"; // Check mark icon
-    String taskNotDoneIcon = "\u2718"; // Cross icon
-    String exceptionIcon = "\u2639"; // Sad face icon
-    Duke duke;
-    PrintStream console = System.out;
-    ByteArrayOutputStream output;
+    private String horizontalDivider = indentation + horizontalBar + newline;
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+    private String taskDoneIcon = "\u2713"; // Check mark icon
+    private String taskNotDoneIcon = "\u2718"; // Cross icon
+    private String exceptionIcon = "\u2639"; // Sad face icon
+    private Duke duke;
+    private PrintStream console = System.out;
+    private ByteArrayOutputStream output;
 
-    static Stream<Arguments> generateOneTodoTask() {
+    private static Stream<Arguments> generateOneTodoTask() {
         return Stream.of(Arguments.of(new Todo("read book", false)));
     }
 
-    static Stream<Arguments> generateOneDeadlineTask() {
+    private static Stream<Arguments> generateOneDeadlineTask() {
         return Stream.of(Arguments.of(
                 new Deadline("return book", "2020-12-03")));
     }
 
-    static Stream<Arguments> generateOneEventTask() {
+    private static Stream<Arguments> generateOneEventTask() {
         return Stream.of(Arguments.of(
                 new Event("project meeting", "2020-01-25")));
     }
@@ -64,7 +64,7 @@ class DukeTest {
         }
     }
 
-    String greeting() {
+    private String greeting() {
         String logo = "  __  __        _____       _           _   " + newline
                 + " |  \\/  |      |  __ \\     | |         | |  " + newline
                 + " | \\  / |_ __  | |__) |___ | |__   ___ | |_ " + newline

@@ -26,24 +26,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class AddTaskCommandTest {
-    Ui ui;
-    Storage storage;
-    ByteArrayOutputStream output;
-    String saveFile = "test.txt";
-    String fileSeparator = File.separator;
+    private Ui ui;
+    private Storage storage;
+    private ByteArrayOutputStream output;
+    private String saveFile = "test.txt";
+    private String fileSeparator = File.separator;
     // Map project path to the directory from which you run your program
-    String projectRootPath = Paths.get("").toAbsolutePath().toString();
-    String dataDirectoryPath = projectRootPath + fileSeparator + "data";
-    String saveFilePath = dataDirectoryPath + fileSeparator + saveFile;
+    private String projectRootPath = Paths.get("").toAbsolutePath().toString();
+    private String dataDirectoryPath = projectRootPath + fileSeparator + "data";
+    private String saveFilePath = dataDirectoryPath + fileSeparator + saveFile;
 
-    static Stream<Arguments> generateEmptyState() {
+    private static Stream<Arguments> generateEmptyState() {
         Task task = new Todo("Read book");
         TaskList tasks = new TaskList();
         return Stream.of(
                 Arguments.of(task, tasks));
     }
 
-    void deleteSaveFile() {
+    private void deleteSaveFile() {
         try {
             Files.deleteIfExists(Paths.get(saveFilePath));
         } catch (IOException e) {
