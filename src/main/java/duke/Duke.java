@@ -38,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Generate a response to user input.
+     * Generates a response to user input.
      *
      * @param input String containing user input.
      * @return A string with the response to the user input.
@@ -57,7 +57,7 @@ public class Duke {
      * Runs the program.
      */
     public void run() {
-        ui.print(ui.showWelcome());
+        ui.print(Ui.showWelcome());
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
