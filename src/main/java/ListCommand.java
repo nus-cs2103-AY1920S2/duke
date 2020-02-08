@@ -26,7 +26,7 @@ public class ListCommand extends Command {
         for (Task task : list.getTaskList()) {
             listings += counter + "." + task.toString();
             if (counter != list.getSize()) {
-                listings += "\n\t";
+                listings += "\n";
             }
             counter++;
         }

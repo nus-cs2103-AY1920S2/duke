@@ -43,4 +43,7 @@ public class UI {
         return this.greetings;
     }
 
+    public String getDecoration() {
+        return decoration;
+    }
 }

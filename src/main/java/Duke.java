@@ -71,7 +71,7 @@ public class Duke {
             Command command = parser.respondToUser(input);
             assert command != null; // assert that command not null
             String reply = command.execute(ui, list, storage).trim();
-            return "\t" + reply;
+            return reply;
         } catch (DukeException e) {
             return e.toString();
         }

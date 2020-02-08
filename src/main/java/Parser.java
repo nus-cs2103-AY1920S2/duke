@@ -34,6 +34,10 @@ public class Parser {
             return new FindCommand(command, false);
         case "priority":
             return new SetPriorityCommand(command, false);
+        case "list-priority":
+            return new SortedListCommand(command, false);
+        case "help":
+            return new HelpCommand(command, false);
         default:
             return new InvalidCommand(command, false);
         }
