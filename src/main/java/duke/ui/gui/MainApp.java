@@ -33,12 +33,9 @@ public class MainApp extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setOnCloseRequest(new EventHandler<>() {
-                @Override
-                public void handle(WindowEvent event) {
-                    event.consume();
-                    fxmlLoader.<MainWindow>getController().closeWindowButtonClicked();
-                }
+            stage.setOnCloseRequest(event -> {
+                event.consume();
+                fxmlLoader.<MainWindow>getController().closeWindowButtonClicked();
             });
             stage.show();
         } catch (IOException e) {
