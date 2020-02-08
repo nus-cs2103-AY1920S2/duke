@@ -39,7 +39,7 @@ public class Parser {
 
 
     /**
-     * Removes redundant blank spaces before and/or after a string command.
+     * Trims the command of leading and trailing spaces.
      *
      * @param command The command string entered by the client.
      * @return The String, regarding the command entered.
