@@ -66,6 +66,7 @@ public class TaskList implements Serializable {
      * @param task task to be added.
      */
     public void addTask(Task task) {
+        assert (task != null) : "Task is null";
         if (task != null) {
             this.lst.add(task);
         }

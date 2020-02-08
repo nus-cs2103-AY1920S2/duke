@@ -173,7 +173,7 @@ public class Duke {
             res = "Read the instructions properly and try again... RESTART!";
         }
 
-        //assert (!res.equals(""));
+        assert (!res.equals("")) : "Something is wrong, result contains nothing.";
 
         return res;
     }
