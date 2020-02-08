@@ -1,6 +1,9 @@
 package duke.util;
 
 import duke.command.AddCommand;
+import duke.command.ArchiveAddCommand;
+import duke.command.ArchiveDeleteCommand;
+import duke.command.ArchiveListCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -44,6 +47,9 @@ public class Parser {
             put("find", Keyword.FIND);
             put("bye", Keyword.BYE);
             put("reminder", Keyword.REMINDER);
+            put("archive-list", Keyword.ARCHIVE_LIST);
+            put("archive-add", Keyword.ARCHIVE_ADD);
+            put("archive-delete", Keyword.ARCHIVE_DELETE);
         }
     };
 
@@ -64,10 +70,9 @@ public class Parser {
      * @throws DukeUnknownKeywordException If the command keyword (the first word) is invalid.
      */
 
-    public Command parse(String commandString, TaskListInterface taskList) throws DukeUnknownKeywordException,
-            DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
-        String[] splittedCommands = commandString.split(" ");
-        String commandStr = splittedCommands[0];
+    public Command parse(String commandString, TaskListInterface taskList, TaskListInterface archiveList)
+            throws DukeUnknownKeywordException, DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
+        String commandStr = getCommandKeyword(commandString);
         /*
          If optional_command is empty, it means that the command is not found.
          Therefore, it will throw the exception to inform the client.
@@ -77,10 +82,38 @@ public class Parser {
         Keyword keyword = optionalKeyword.orElseThrow(() ->
                 new DukeUnknownKeywordException("☹ OOPS!!! I'm sorry, "
                         + "but I don't know what that means :-("));
-        String details = splittedCommands.length > 1
+        String details = getDetails(commandString);
+
+        return validateCommand(keyword, details, taskList, archiveList);
+    }
+
+    /**
+     * Gets the keyword from the user input.
+     * @param commandString The user input.
+     * @return The command keyword.
+     */
+
+    private String getCommandKeyword(String commandString) {
+        String[] splittedCommands = commandString.split(" ");
+        return splittedCommands[0];
+    }
+
+    /**
+     * Gets the details from the user input.
+     * @param commandString The user input.
+     * @return The details or other particulars from the input.
+     */
+
+    private String getDetails(String commandString) {
+        String[] splittedCommands = commandString.split(" ");
+        return splittedCommands.length > 1
                 ? commandString.split(" ", 2)[1]
                 : "";
+    }
 
+    private Command validateCommand(Keyword keyword, String details, TaskListInterface taskList,
+                                    TaskListInterface archiveList) throws
+            DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
         Command command;
         switch (keyword) {
         case LIST:
@@ -106,6 +139,14 @@ public class Parser {
             break;
         case REMINDER:
             command = checkValidReminderArgument(details);
+        case ARCHIVE_LIST:
+            command = checkValidArchiveListArgument(details);
+            break;
+        case ARCHIVE_ADD:
+            command = checkValidArchiveAddArgument(details, taskList);
+            break;
+        case ARCHIVE_DELETE:
+            command = checkValidArchiveDeleteArgument(details, archiveList);
             break;
         default:
             command = checkValidEventArgument(details);
@@ -298,5 +339,64 @@ public class Parser {
 
     private ReminderCommand checkValidReminderArgument(String details) {
         return new ReminderCommand();
+    }
+    /**
+     * Verifies that the command entered by the client is a valid archive-list command.
+     * @param details The details of the command.
+     * @return The ArchiveListCommand instance of the corresponding input.
+     */
+
+    private ArchiveListCommand checkValidArchiveListArgument(String details) throws DukeInvalidArgumentFormatException {
+        if (!details.equals("")) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'archive-list' command is invalid.");
+        }
+        return new ArchiveListCommand();
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid archive-add command.
+     * @param details The details of the command.
+     * @param taskList The list of the archives.
+     * @return The ArchiveAddCommand instance of the corresponding input.
+     */
+
+    private ArchiveAddCommand checkValidArchiveAddArgument(String details, TaskListInterface taskList) throws
+            DukeInvalidArgumentFormatException {
+        int index = -1;
+        try {
+            index = Integer.parseInt(details);
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'done' command requires a number.");
+        }
+
+        if (index <= 0 || index > taskList.size()) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
+        }
+        return new ArchiveAddCommand(index);
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid archive-delete command.
+     * @param details The details of the command.
+     * @param taskList The list of the archives.
+     * @return The ArchiveDeleteCommand instance of the corresponding input.
+     */
+
+    private ArchiveDeleteCommand checkValidArchiveDeleteArgument(String details, TaskListInterface taskList) throws
+            DukeInvalidArgumentFormatException {
+        int index = -1;
+        try {
+            index = Integer.parseInt(details);
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'done' command requires a number.");
+        }
+
+        if (index <= 0 || index > taskList.size()) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
+        }
+        return new ArchiveDeleteCommand(index);
     }
 }

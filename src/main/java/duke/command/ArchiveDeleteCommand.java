@@ -1,39 +1,42 @@
 package duke.command;
 
-import duke.util.ArchiveList;
-import duke.util.Storage;
-import duke.util.TaskList;
-
 /*
- * ListCommand
+ * ArchiveDeleteCommand
  *
  * CS2103 AY19/20 Semester 2
  * Individual Project
  * Duke Project
  *
- * 28 Jan 2020
+ * 07 Feb 2020
  *
  */
 
+import duke.util.ArchiveList;
+import duke.util.Storage;
+import duke.util.Task;
+import duke.util.TaskList;
+
 /**
- * <p>ListCommand extends the command abstract class
+ * <p>ArchiveDeleteCommand extends the command abstract class
  * and it describes the behavior of the commands regarding
- * to list the tasks.</p>
+ * to deleting the archived tasks.</p>
  * @author Mario Lorenzo
  */
 
-public class ListCommand extends Command {
+public class ArchiveDeleteCommand extends Command {
+    private int index;
 
     /**
-     * Constructs a ListCommand instance.
+     * Constructs an ArchiveDeleteCommand instance.
+     * @param index The index of the archived tasks.
      */
 
-    public ListCommand() {
-
+    public ArchiveDeleteCommand(int index) {
+        this.index = index;
     }
 
     /**
-     * Executes the list command.
+     * Executes the archive-delete command.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
      * @param archiveList The list of archived tasks.
@@ -42,7 +45,7 @@ public class ListCommand extends Command {
      */
 
     public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage) {
-        return taskList.listTasks();
+        return archiveList.deleteArchivedTask(index, archiveStorage);
     }
 
     /**

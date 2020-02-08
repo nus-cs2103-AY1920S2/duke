@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.util.ArchiveList;
 import duke.util.Storage;
 import duke.util.Task;
 import duke.util.TaskList;
@@ -36,14 +37,15 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the command by adding the task to taskList
-     * and write the details in the hard disk.
+     * Executes the add command.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
+     * @param archiveList The list of archived tasks.
+     * @param archiveStorage The storage of the archive.
      * @return The String representing the outcome of the execution.
      */
 
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage) {
         return taskList.addTask(task, storage);
     }
 
