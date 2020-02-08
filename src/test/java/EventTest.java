@@ -10,7 +10,7 @@ public class EventTest {
     public void testStringConversion() {
         Event test = new Event("Event Test",
                 LocalDateTime.of(2020, 1, 1, 0, 0));
-        assertEquals("[E][✗] Event Test (at: Jan 1 2020 0000)", test.toString());
+        assertEquals("[E][\u2717] Event Test (at: Jan 1 2020 0000)", test.toString());
     }
 
     @Test
@@ -24,6 +24,7 @@ public class EventTest {
     public void checkCompletion_incompleteEvent_makeComplete() {
         Event test = new Event("Event Test",
                 LocalDateTime.of(2020, 1, 1, 0, 0));
-        assertEquals("E|Event Test|2020-01-01T00:00|1", test.makeCompleted().writeFormat());
+        test.makeCompleted();
+        assertEquals("E|Event Test|2020-01-01T00:00|1", test.writeFormat());
     }
 }

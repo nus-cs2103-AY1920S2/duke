@@ -18,12 +18,14 @@ public class TodoTest {
     @Test
     public void markCompleted_incompleteTodo_successfulChangeInCompleted() {
         Todo test = new Todo("Test AR", false);
-        assertEquals("T|Test AR|1", test.makeCompleted().writeFormat());
+        test.makeCompleted();
+        assertEquals("T|Test AR|1", test.writeFormat());
     }
 
     @Test
     public void markCompleted_completeTodo_noChange() {
         Todo test = new Todo("Test AR", true);
-        assertEquals(test.writeFormat(), test.makeCompleted().writeFormat());
+        test.makeCompleted();
+        assertEquals(test.writeFormat(), test.writeFormat());
     }
 }
