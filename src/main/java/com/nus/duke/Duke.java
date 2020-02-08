@@ -33,7 +33,7 @@ public class Duke {
                 break;
 
             case "quit":
-                Greetings.prettyPrint(parsedInput.getValue());
+                Greetings.tearDown();
                 contLoop = false;
                 break;
             default:
