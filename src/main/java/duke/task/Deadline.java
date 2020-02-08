@@ -15,9 +15,7 @@ public class Deadline extends Task {
      * @throws DukeException If date format is incorrect.
      */
     public Deadline(String taskName, String dateTime) throws DukeException {
-        super(taskName.trim(), dateTime.trim());
-        this.taskType = "D";
-        assert this.taskType != "" : "Deadline task type is empty!";
+        super(taskName, "D", dateTime);
     }
 
     /**
@@ -29,13 +27,7 @@ public class Deadline extends Task {
      * @throws DukeException If date format is incorrect.
      */
     public Deadline(String taskName, boolean isDone, String dateTime) throws DukeException {
-        super(taskName.trim(), isDone, dateTime.trim());
-        this.taskType = "D";
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.dateTime.format(DateTimeFormatter.ofPattern("dd MM yyyy")) + ")";
+        super(taskName, "D", isDone, dateTime);
     }
 
 }

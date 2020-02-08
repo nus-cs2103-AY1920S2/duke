@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -20,11 +21,13 @@ import javafx.scene.layout.HBox;
 public class DialogBox extends HBox {
 
     @FXML
+    private Label name;
+    @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String name, String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -33,9 +36,27 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        this.name.setText(name.toUpperCase() + ": ");
         dialog.setText(text);
         displayPicture.setImage(img);
+        // got from online
+        Rectangle clip = new Rectangle(
+            displayPicture.getFitWidth(), displayPicture.getFitHeight()
+        );
+        clip.setArcWidth(90);
+        clip.setArcHeight(90);
+        displayPicture.setClip(clip);
+    }
+
+    public static DialogBox getUserDialog(String name, String text, Image img) {
+        DialogBox db = new DialogBox(name, text, img);
+        return db;
+    }
+
+    public static DialogBox getDukeDialog(String name, String text, Image img) {
+        DialogBox db = new DialogBox(name, text, img);
+        db.setStyle("-fx-background-color: #e2dfdb");
+        return db;
     }
 
     /**
@@ -46,16 +67,6 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-    }
-
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
     }
 
 }

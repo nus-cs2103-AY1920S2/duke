@@ -13,11 +13,11 @@ public class Ui {
     }
 
     public static String wrap(String string) {
-        return "____________________________________________________________"
+        return "___________________________________________________"
                 + System.lineSeparator()
                 + string
                 + System.lineSeparator()
-                + "____________________________________________________________"
+                + "___________________________________________________"
                 + System.lineSeparator();
     }
 

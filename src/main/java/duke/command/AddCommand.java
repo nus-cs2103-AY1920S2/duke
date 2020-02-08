@@ -22,8 +22,8 @@ public class AddCommand extends Command {
                 + System.lineSeparator()
                 + task.toString()
                 + System.lineSeparator()
-                + "Now you have " + taskList.getSize()
-                + " tasks in the list.";
+                + System.lineSeparator()
+                + "Now you have " + taskList.getSize() + " tasks in the list.";
         Ui.printMessage(message);
         storage.saveTaskList(taskList);
         return message;

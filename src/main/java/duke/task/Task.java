@@ -12,40 +12,44 @@ public abstract class Task {
     protected String taskName = "";
 
     /** Whether the task is completed. */
-    protected boolean isDone;
+    protected boolean isDone = false;
 
     /** Date and time of the task (if any). */
-    protected LocalDate dateTime;
+    protected LocalDate dateTime = LocalDate.MAX;
 
     /** Type of task. */
     protected String taskType = "";
 
+    /** Standard input date formatter for Duke program */
+    protected final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    /** Standard output date formatter for Duke program */
+    protected final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
     /**
-     * Constructs a task.
+     * Constructs a task (for ToDo tasks).
      *
      * @param taskName Describes the nature of the task.
      */
-    public Task(String taskName) {
-        this.taskName = taskName;
-        this.isDone = false;
+    public Task(String taskName, String taskType) {
+        this.taskName = taskName.trim();
+        this.taskType = taskType;
     }
 
     /**
-     * Constructs a task with additional details.
+     * Constructs a task with additional details (for Event or Deadline tasks).
      *
      * @param taskName Describes the nature of the task.
      * @param dateTime The date and time of the task (if any).
      * @throws DukeException If date format is incorrect.
      */
-    public Task(String taskName, String dateTime) throws DukeException {
-        this.taskName = taskName;
-        this.isDone = false;
+    public Task(String taskName, String taskType, String dateTime) throws DukeException {
+        this.taskName = taskName.trim();
+        this.taskType = taskType;
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            this.dateTime = LocalDate.parse(dateTime, formatter);
+            this.dateTime = LocalDate.parse(dateTime.trim(), inputFormatter);
         } catch (Exception e) {
-            throw new DukeException("Please give the appropriate date format in yyyy-MM-dd " +
-                    "(if date is not applicable, please enter 2100-01-01)");
+            throw new DukeException("Please give the appropriate date format in yyyy-MM-dd!");
         }
     }
 
@@ -55,8 +59,9 @@ public abstract class Task {
      * @param taskName Describes the nature of the task.
      * @param isDone Indicates if the task is completed already.
      */
-    public Task(String taskName, boolean isDone) {
-        this.taskName = taskName;
+    public Task(String taskName, String taskType, boolean isDone) {
+        this.taskName = taskName.trim();
+        this.taskType = taskType;
         this.isDone = isDone;
     }
 
@@ -68,15 +73,14 @@ public abstract class Task {
      * @param dateTime The date and time of the task (if any).
      * @throws DukeException If date format is incorrect.
      */
-    public Task(String taskName, boolean isDone, String dateTime) throws DukeException {
-        this.taskName = taskName;
+    public Task(String taskName, String taskType, boolean isDone, String dateTime) throws DukeException {
+        this.taskName = taskName.trim();
+        this.taskType = taskType;
         this.isDone = isDone;
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            this.dateTime = LocalDate.parse(dateTime, formatter);
+            this.dateTime = LocalDate.parse(dateTime.trim(), inputFormatter);
         } catch (Exception e) {
-            throw new DukeException("Please give the appropriate date format in yyyy-MM-dd " +
-                    "(if date is not applicable, please enter 2100-01-01)");
+            throw new DukeException("Please give the appropriate date format in yyyy-MM-dd!");
         }
     }
 
@@ -84,9 +88,12 @@ public abstract class Task {
         this.isDone = true;
     }
 
-
     public String getTaskName() {
         return this.taskName;
+    }
+
+    public LocalDate getTaskDate() {
+        return this.dateTime;
     }
 
     /**
@@ -104,11 +111,23 @@ public abstract class Task {
      * @return Task in the appropriate string format for saving.
      */
     public String getSaveFormat() {
-        return this.taskType + "_" + this.isDone + "_" + this.taskName + "_" + this.dateTime;
+        return String.format("%s_%s_%s_%s", taskType, isDone, taskName, dateTime);
     }
 
+    /**
+     * Outputs date along with task if it is an event or deadline. If it is a to-do task, then just output task.
+     * Max value of local date is assigned for to-do task and used to differentiate between event and deadline from
+     * to-do task.
+     *
+     * @return Tasks in appropriate string output format.
+     */
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.taskName;
+        String output = String.format("[%s][%s] %s", taskType, getStatusIcon(), taskName);
+        if (this.dateTime.equals(LocalDate.MAX)) {
+            return output;
+        } else {
+            return String.format("%s (at: %s)", output, this.dateTime.format(outputFormatter));
+        }
     }
 
 }

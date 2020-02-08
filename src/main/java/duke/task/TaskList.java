@@ -2,6 +2,7 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -61,6 +62,30 @@ public class TaskList {
     public int getSize() {
         return this.taskList.size();
     }
+
+    /**
+     * Retrieves tasks that are due within the next two weeks.
+     *
+     * @return Filtered urgent task list in appropriate string format.
+     */
+//    public String getUrgentTasks() {
+//        LocalDate current = LocalDate.now();
+//        LocalDate oneWeekLater = current.plusDays(7);
+//        LocalDate twoWeeksLater = current.plusDays(14);
+//        String dueInAWeekTasks = "";
+//        String dueInTwoWeeksTasks = "";
+//        for (int i = 0; i < taskList.size(); i++) {
+//            Task task = taskList.get(i);
+//            LocalDate taskDate = task.getTaskDate();
+//            if (taskDate.compareTo(oneWeekLater) < 0) {
+//                // means this task is due in a week
+//                dueInAWeekTasks.add(task);
+//            } else if (taskDate.compareTo(twoWeeksLater) < 0) {
+//                // means this task is due more than a week later but within two weeks
+//                dueInTwoWeeksTasks.add(task);
+//            }
+//        }
+//    }
 
     /**
      * Retrieves tasks that contain user keyword and format them into string in numbered order.
