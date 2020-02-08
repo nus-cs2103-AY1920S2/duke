@@ -38,6 +38,7 @@ public class Storage {
                 System.err.println(e);
             }
         }
+        assert saveFile != null : " Save file was not created.";
     }
 
     /**
