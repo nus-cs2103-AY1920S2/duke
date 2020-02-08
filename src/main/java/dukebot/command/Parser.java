@@ -89,6 +89,8 @@ public class Parser {
             switch (aliasMap.get(command)) {
             case ADD_CONTACT:
                 return new AddContactCommand(inpArr);
+            case CONTACTS:
+                return new ListContactCommand();
             case ALIAS:
                 return new AliasCommand(inpArr, aliasMap);
             case BYE:

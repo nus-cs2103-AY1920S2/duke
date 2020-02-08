@@ -79,6 +79,7 @@ public class Ui {
      */
     public void sayLine(LineName lineName) {
         dukeExpression = DukeExpression.HAPPY;
+        dukeVoice = DukeVoice.WHAT;
         switch (lineName) {
         case ALIAS_ALREADY_EXISTS:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.HEY, DukeVoice.ACTUALLY);
@@ -123,6 +124,18 @@ public class Ui {
             break;
         case SAY_DUKE:
             dukeSays("Master!");
+            break;
+        case CONTACT_LIST_EMPTY:
+            dukeExpression = DukeExpression.BLUSH;
+            dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
+            dukeSays("Duke doesn't mind that Master doesn't have any friends...");
+            dukeSays("Duke'll be with Master forever...");
+            break;
+        case CONTACT_LIST_EXIST:
+            dukeExpression = DukeExpression.SURPRISED;
+            dukeVoice = DukeVoice.OKAY;
+            dukeSays("Master already has Duke right? Master doesn't need anyone else!");
+            dukeSays("But if Master really needs it... Duke cant deny it...\n");
             break;
         case LIST_EMPTY:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.ACTUALLY, DukeVoice.HEY);
@@ -236,7 +249,6 @@ public class Ui {
             dukeSays("Reschedule <task index> <time>");
             break;
         case RESET_STORAGE_INIT:
-            dukeVoice = DukeVoice.WHAT;
             dukeExpression = DukeExpression.SAD;
             dukeSays("Master wants to wipe Duke's memories? Please don't say yes...");
             break;
@@ -346,6 +358,9 @@ public class Ui {
             dukeSays("with the number:");
             dukeSays(Integer.toString(contact.getPhoneNumber()));
             dukeSays("into the contact list");
+            break;
+        case PRINT_CONTACT:
+            dukeSays(contact.getName() + "- " + Integer.toString(contact.getPhoneNumber()));
             break;
         case ERROR_PLACEHOLDER:
             // Purely for testing, should never be called in deployment
