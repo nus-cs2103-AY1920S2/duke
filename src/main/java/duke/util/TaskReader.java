@@ -30,7 +30,7 @@ import java.util.HashMap;
  * @author Mario Lorenzo
  */
 
-public class TaskReader {
+public class TaskReader implements IReader<Task> {
     private String filename;
     private static final HashMap<String, Keyword> KEYWORD = new HashMap<>() {
         {
@@ -57,7 +57,7 @@ public class TaskReader {
      * @throws DukeInvalidTaskFormatException If there is an error in the format.
      */
 
-    public ArrayList<Task> loadTasks() throws IOException, DukeInvalidTaskFormatException,
+    public ArrayList<Task> load() throws IOException, DukeInvalidTaskFormatException,
             DukeInvalidDateFormatException {
         FileInputStream fis = new FileInputStream(new File(filename));
         BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
@@ -81,7 +81,7 @@ public class TaskReader {
      * @throws DukeInvalidTaskFormatException If the task is not properly formatted.
      */
 
-    public Task parseTask(String line, int counter) throws DukeInvalidTaskFormatException,
+    private Task parseTask(String line, int counter) throws DukeInvalidTaskFormatException,
             DukeInvalidDateFormatException {
         String[] lineSplitted = line.split(" \\| ");
         try {

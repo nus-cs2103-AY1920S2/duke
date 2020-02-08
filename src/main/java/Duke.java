@@ -3,6 +3,9 @@ import duke.exception.DukeException;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeInvalidTaskFormatException;
 import duke.util.ArchiveList;
+import duke.util.Note;
+import duke.util.NoteList;
+import duke.util.NoteStorage;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Task;
@@ -32,6 +35,9 @@ public class Duke {
     private ArchiveList archiveList;
     private Storage taskStorage;
     private Storage archiveStorage;
+    private Storage storage;
+    private NoteStorage noteStorage;
+    private NoteList noteList;
     private Parser parser;
 
     /**
@@ -41,11 +47,14 @@ public class Duke {
      */
 
     private Duke(TaskList taskList, ArchiveList archiveList,
-                 Storage taskStorage, Storage archiveStorage, Parser parser) {
+                 Storage taskStorage, Storage archiveStorage, NoteList noteList,
+                 NoteStorage noteStorage, Parser parser) {
         this.taskList = taskList;
         this.archiveList = archiveList;
         this.taskStorage = taskStorage;
         this.archiveStorage = archiveStorage;
+        this.noteList = noteList;
+        this.noteStorage = noteStorage;
         this.parser = parser;
     }
 
@@ -61,17 +70,23 @@ public class Duke {
     public static Duke start() throws DukeInvalidTaskFormatException, DukeInvalidDateFormatException {
         Storage taskStorage = new Storage("./data/tasks.txt");
         Storage archiveStorage = new Storage("./data/archive.txt");
+        NoteStorage noteStorage = new NoteStorage("./data/notes.txt");
         ArrayList<Task> tasks = new ArrayList<>();
         ArrayList<Task> archives = new ArrayList<>();
+        ArrayList<Note> notes = new ArrayList<>();
+
         try {
-            tasks = taskStorage.loadTasks();
-            archives = archiveStorage.loadTasks();
+            tasks = taskStorage.load();
+            archives = archiveStorage.load();
+            notes = noteStorage.load();
         } catch (DukeInvalidTaskFormatException | DukeInvalidDateFormatException e) {
             throw e;
         }
+
         TaskList taskList = new TaskList(tasks);
         ArchiveList archiveList = new ArchiveList(archives);
-        return new Duke(taskList, archiveList, taskStorage, archiveStorage, new Parser());
+        NoteList noteList = new NoteList(notes);
+        return new Duke(taskList, archiveList, taskStorage, archiveStorage, noteList, noteStorage, new Parser());
     }
 
     /**
@@ -94,8 +109,8 @@ public class Duke {
 
     public String processCommand(String commands) {
         try {
-            Command command = parser.parse(commands, taskList, archiveList);
-            return command.execute(taskList, taskStorage, archiveList, archiveStorage);
+            Command command = parser.parse(commands, taskList, archiveList, noteList);
+            return command.execute(taskList, taskStorage, archiveList, archiveStorage, noteList, noteStorage);
         } catch (DukeException exc) {
             return exc.getMessage();
         }

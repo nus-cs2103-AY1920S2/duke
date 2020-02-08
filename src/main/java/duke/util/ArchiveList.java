@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * @author Mario Lorenzo
  */
 
-public class ArchiveList implements TaskListInterface {
+public class ArchiveList implements IList<Task> {
     ArrayList<Task> tasks;
 
     /**
@@ -61,7 +61,7 @@ public class ArchiveList implements TaskListInterface {
     public String archiveTask(Task task, Storage storage) {
         tasks.add(task);
         boolean isAppendMode = tasks.size() != 1;
-        storage.writeTask(task, isAppendMode);
+        storage.write(task, isAppendMode);
         return "Got it. I've archived this task: \n"
                 + String.format("    %s\n", task)
                 + String.format("Now you have %d archived task(s).", tasks.size());
@@ -76,7 +76,7 @@ public class ArchiveList implements TaskListInterface {
     public String deleteArchivedTask(int index, Storage storage) {
         Task task = getTask(index);
         tasks.remove(index - 1);
-        storage.rewriteTasksToFile(tasks);
+        storage.rewriteToFile(tasks);
         return "Noted. I've removed this task: \n "
                 + String.format("    %s\n", task)
                 + String.format("Now you have %d task(s) in the list.", tasks.size());

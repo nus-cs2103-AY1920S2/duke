@@ -6,68 +6,67 @@ import duke.exception.DukeInvalidTaskFormatException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 /*
- * Storage
+ * NoteStorage
  *
  * CS2103 AY19/20 Semester 2
  * Individual Project
  * Duke Project
  *
- * 23 Jan 2020
+ * 08 Feb 2020
  *
  */
 
 /**
- * Storage class abstracts the I/O method
- * of reading and writing tasks from a file.
+ * NoteStorage class abstracts the I/O method
+ * of reading and writing notes from a file.
  * @author Mario Lorenzo
  */
 
-public class Storage implements IStorage<Task> {
-    private TaskReader reader;
-    private TaskWriter writer;
+public class NoteStorage implements IStorage<Note> {
+    private NoteReader reader;
+    private NoteWriter writer;
 
     /**
-     * Constructs a Storage instance.
+     * Constructs a NoteStorage instance.
      * @param filePath The file path where the file is located.
      */
 
-    public Storage(String filePath) {
+    public NoteStorage(String filePath) {
         assert (new File(filePath)).exists() : "The storage file does not exist.";
-        this.reader = new TaskReader(filePath);
-        this.writer = new TaskWriter(filePath);
+        this.reader = new NoteReader(filePath);
+        this.writer = new NoteWriter(filePath);
     }
 
     /**
-     * Loads the tasks from the file.
-     * @return The ArrayList of all the tasks loaded from the file.
+     * Loads the notes from the file.
+     * @return The ArrayList of all the notes loaded from the file.
      * @throws DukeInvalidDateFormatException If there is a not properly formatted date.
      * @throws DukeInvalidTaskFormatException If there is a task there is not properly formatted.
      */
 
-    public ArrayList<Task> load() throws DukeInvalidDateFormatException, DukeInvalidTaskFormatException {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public ArrayList<Note> load() throws DukeInvalidDateFormatException, DukeInvalidTaskFormatException {
+        ArrayList<Note> notes = new ArrayList<>();
 
         try {
-            tasks = reader.load();
+            notes = reader.load();
         } catch (IOException e) {
             System.err.println(e);
         } catch (DukeInvalidTaskFormatException | DukeInvalidDateFormatException e) {
             throw e;
         }
-        return tasks;
+        return notes;
     }
 
     /**
-     * Writes the task to the file.
-     * @param task The task that wants to be added to the file.
+     * Writes the note to the file.
+     * @param note The task that wants to be added to the file.
      * @param isApppendMode Whether the file wants to be appended or resetted to blank.
      */
 
-    public void write(Task task, boolean isApppendMode) {
+    public void write(Note note, boolean isApppendMode) {
         try {
-            this.writer.write(task, isApppendMode);
+            this.writer.write(note, isApppendMode);
         } catch (IOException e) {
             System.err.println(e);
         }
@@ -75,14 +74,14 @@ public class Storage implements IStorage<Task> {
 
     /**
      * Rewrites the list of tasks to the file.
-     * @param tasks The ArrayList of the tasks.
+     * @param notes The ArrayList of notes.
      */
 
-    public void rewriteToFile(ArrayList<Task> tasks) {
+    public void rewriteToFile(ArrayList<Note> notes) {
         this.writer.setBlank();
         try {
-            for (int i = 0; i < tasks.size(); i++) {
-                this.writer.write(tasks.get(i), i != 0);
+            for (int i = 0; i < notes.size(); i++) {
+                this.writer.write(notes.get(i), i != 0);
             }
         } catch (IOException e) {
             System.err.println(e);

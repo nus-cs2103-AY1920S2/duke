@@ -1,7 +1,7 @@
 package duke.util;
 
 /*
- * TaskListInterface
+ * IList
  *
  * CS2103 AY19/20 Semester 2
  * Individual Project
@@ -12,11 +12,11 @@ package duke.util;
  */
 
 /**
- * TaskListInterface is an interface that defines TaskList.
+ * IList interface describes the behavior of the list.
  * @author Mario Lorenzo
  */
 
-public interface TaskListInterface {
+public interface IList<T> {
     /**
      * Returns the size of the task list.
      * @return the size of the task list.

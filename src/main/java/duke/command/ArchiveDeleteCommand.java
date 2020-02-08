@@ -1,5 +1,11 @@
 package duke.command;
 
+import duke.util.ArchiveList;
+import duke.util.NoteList;
+import duke.util.NoteStorage;
+import duke.util.Storage;
+import duke.util.TaskList;
+
 /*
  * ArchiveDeleteCommand
  *
@@ -10,11 +16,6 @@ package duke.command;
  * 07 Feb 2020
  *
  */
-
-import duke.util.ArchiveList;
-import duke.util.Storage;
-import duke.util.Task;
-import duke.util.TaskList;
 
 /**
  * <p>ArchiveDeleteCommand extends the command abstract class
@@ -44,7 +45,8 @@ public class ArchiveDeleteCommand extends Command {
      * @return The String representing the outcome of the execution.
      */
 
-    public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage) {
+    public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage,
+                          NoteList noteList, NoteStorage noteStorage) {
         return archiveList.deleteArchivedTask(index, archiveStorage);
     }
 

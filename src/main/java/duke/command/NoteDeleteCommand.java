@@ -7,46 +7,44 @@ import duke.util.Storage;
 import duke.util.TaskList;
 
 /*
- * ByeCommand
+ * NoteDeleteCommand
  *
  * CS2103 AY19/20 Semester 2
  * Individual Project
  * Duke Project
  *
- * 06 Feb 2020
+ * 08 Feb 2020
  *
  */
 
 /**
- * ByeCommand class extends a Command abstract class
- * and it represents the terminating command when a user
- * wants to end using Duke.
+ * <p>NoteDeleteCommand extends the command abstract class
+ * and it describes the behavior of the commands regarding
+ * to the deletion of a note.</p>
  * @author Mario Lorenzo
  */
 
-public class ByeCommand extends Command {
+public class NoteDeleteCommand extends Command {
+    private int index;
 
     /**
-     * Constructs a ByeCommand instance.
+     * Constructs the NoteDeleteCommand.
+     * @param index The index of the task.
      */
-
-    public ByeCommand() {
-
+    public NoteDeleteCommand(int index) {
+        this.index = index;
     }
 
     /**
-     * Executes the command by returning the exit message.
+     * Executes the note-delete command.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
-     * @param archiveList The list of archived tasks.
-     * @param archiveStorage The storage of the archive.
-     * @return The exit message.
+     * @return The String representing the outcome of the execution.
      */
 
-    @Override
     public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage,
                           NoteList noteList, NoteStorage noteStorage) {
-        return "Bye. Hope to see you again soon!";
+        return noteList.deleteNote(this.index, noteStorage);
     }
 
     /**
@@ -56,6 +54,6 @@ public class ByeCommand extends Command {
 
     @Override
     public boolean isByeCommand() {
-        return true;
+        return false;
     }
 }

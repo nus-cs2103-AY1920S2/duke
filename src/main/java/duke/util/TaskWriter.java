@@ -24,7 +24,7 @@ import java.io.OutputStreamWriter;
  * @author Mario Lorenzo
  */
 
-public class TaskWriter {
+public class TaskWriter implements IWriter<Task> {
     private String filename;
 
     /**
@@ -45,7 +45,7 @@ public class TaskWriter {
      * @throws IOException If there is an error in I/O.
      */
 
-    public void writeTask(Task task, boolean isAppendMode) throws IOException {
+    public void write(Task task, boolean isAppendMode) throws IOException {
         FileOutputStream fos;
         if (isAppendMode) {
             fos = new FileOutputStream(new File(filename), true);

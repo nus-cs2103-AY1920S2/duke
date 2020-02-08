@@ -11,10 +11,14 @@ import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ReminderCommand;
+import duke.command.NoteAddCommand;
+import duke.command.NoteDeleteCommand;
+import duke.command.NoteListCommand;
 import duke.exception.DukeInvalidArgumentFormatException;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeUnknownKeywordException;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -50,6 +54,9 @@ public class Parser {
             put("archive-list", Keyword.ARCHIVE_LIST);
             put("archive-add", Keyword.ARCHIVE_ADD);
             put("archive-delete", Keyword.ARCHIVE_DELETE);
+            put("note-list", Keyword.NOTE_LIST);
+            put("note-add", Keyword.NOTE_ADD);
+            put("note-delete", Keyword.NOTE_DELETE);
         }
     };
 
@@ -70,9 +77,10 @@ public class Parser {
      * @throws DukeUnknownKeywordException If the command keyword (the first word) is invalid.
      */
 
-    public Command parse(String commandString, TaskListInterface taskList, TaskListInterface archiveList)
+    public Command parse(String commandString, IList<Task> taskList, IList<Task> archiveList, IList<Note> noteList)
             throws DukeUnknownKeywordException, DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
         String commandStr = getCommandKeyword(commandString);
+
         /*
          If optional_command is empty, it means that the command is not found.
          Therefore, it will throw the exception to inform the client.
@@ -84,7 +92,7 @@ public class Parser {
                         + "but I don't know what that means :-("));
         String details = getDetails(commandString);
 
-        return validateCommand(keyword, details, taskList, archiveList);
+        return validateCommand(keyword, details, taskList, archiveList, noteList);
     }
 
     /**
@@ -111,8 +119,8 @@ public class Parser {
                 : "";
     }
 
-    private Command validateCommand(Keyword keyword, String details, TaskListInterface taskList,
-                                    TaskListInterface archiveList) throws
+    private Command validateCommand(Keyword keyword, String details, IList<Task> taskList,
+                                    IList<Task> archiveList, IList<Note> noteList) throws
             DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {
         Command command;
         switch (keyword) {
@@ -147,6 +155,14 @@ public class Parser {
             break;
         case ARCHIVE_DELETE:
             command = checkValidArchiveDeleteArgument(details, archiveList);
+        case NOTE_LIST:
+            command = checkValidNoteListArgument(details);
+            break;
+        case NOTE_ADD:
+            command = checkValidNoteAddArgument(details);
+            break;
+        case NOTE_DELETE:
+            command = checkValidNoteDeleteArgument(details, noteList);
             break;
         default:
             command = checkValidEventArgument(details);
@@ -195,7 +211,7 @@ public class Parser {
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
 
-    private DoneCommand checkValidDoneArgument(String details, TaskListInterface taskList) throws
+    private DoneCommand checkValidDoneArgument(String details, IList<Task> taskList) throws
             DukeInvalidArgumentFormatException {
         int index = -1;
         try {
@@ -222,7 +238,7 @@ public class Parser {
      * @throws DukeInvalidArgumentFormatException If the argument is not valid.
      */
 
-    private DeleteCommand checkValidDeleteArgument(String details, TaskListInterface taskList) throws
+    private DeleteCommand checkValidDeleteArgument(String details, IList<Task> taskList) throws
             DukeInvalidArgumentFormatException {
         int index = -1;
         try {
@@ -361,7 +377,7 @@ public class Parser {
      * @return The ArchiveAddCommand instance of the corresponding input.
      */
 
-    private ArchiveAddCommand checkValidArchiveAddArgument(String details, TaskListInterface taskList) throws
+    private ArchiveAddCommand checkValidArchiveAddArgument(String details, IList<Task> taskList) throws
             DukeInvalidArgumentFormatException {
         int index = -1;
         try {
@@ -384,19 +400,67 @@ public class Parser {
      * @return The ArchiveDeleteCommand instance of the corresponding input.
      */
 
-    private ArchiveDeleteCommand checkValidArchiveDeleteArgument(String details, TaskListInterface taskList) throws
+    private ArchiveDeleteCommand checkValidArchiveDeleteArgument(String details, IList<Task> taskList) throws
             DukeInvalidArgumentFormatException {
         int index = -1;
         try {
             index = Integer.parseInt(details);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
-                    + "The argument for 'done' command requires a number.");
+                    + "The argument for 'archive-delete' command requires a number.");
         }
 
         if (index <= 0 || index > taskList.size()) {
             throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
         }
         return new ArchiveDeleteCommand(index);
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid
+     * note-add command.
+     * @param details The details of the command.
+     * @return The NoteAddCommand instance of the corresponding input.
+     */
+
+    private NoteAddCommand checkValidNoteAddArgument(String details) {
+        return new NoteAddCommand(new Note(details, LocalDateTime.now()));
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid
+     * note-list command.
+     * @param details The details of the command.
+     * @return The NoteListCommand instance of the corresponding input.
+     */
+
+    private NoteListCommand checkValidNoteListArgument(String details) throws DukeInvalidArgumentFormatException {
+        if (!details.equals("")) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'list' command is invalid.");
+        }
+        return new NoteListCommand();
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid
+     * note-delete command.
+     * @param details The details of the command.
+     * @return The NoteDeleteCommand instance of the corresponding input.
+     */
+    private NoteDeleteCommand checkValidNoteDeleteArgument(String details, IList<Note> noteList) throws
+            DukeInvalidArgumentFormatException {
+        int index = -1;
+        try {
+            index = Integer.parseInt(details);
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'archive-delete' command requires a number.");
+        }
+
+        if (index <= 0 || index > noteList.size()) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
+        }
+        return new NoteDeleteCommand(index);
     }
 }

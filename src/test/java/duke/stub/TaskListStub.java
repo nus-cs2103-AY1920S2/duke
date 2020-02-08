@@ -1,7 +1,7 @@
 package duke.stub;
 
+import duke.util.IList;
 import duke.util.Task;
-import duke.util.TaskListInterface;
 import duke.util.Todo;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * @author Mario Lorenzo
  */
 
-public class TaskListStub implements TaskListInterface {
+public class TaskListStub implements IList<Task> {
     ArrayList<Task> tasks;
 
     /**

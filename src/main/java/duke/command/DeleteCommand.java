@@ -1,6 +1,8 @@
 package duke.command;
 
 import duke.util.ArchiveList;
+import duke.util.NoteList;
+import duke.util.NoteStorage;
 import duke.util.Storage;
 import duke.util.TaskList;
 
@@ -42,7 +44,8 @@ public class DeleteCommand extends Command {
      * @return The String representing the outcome of the execution.
      */
 
-    public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage) {
+    public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage,
+                          NoteList noteList, NoteStorage noteStorage) {
         return taskList.deleteTask(this.index, storage);
     }
 

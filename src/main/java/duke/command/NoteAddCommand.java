@@ -5,48 +5,48 @@ import duke.util.NoteList;
 import duke.util.NoteStorage;
 import duke.util.Storage;
 import duke.util.TaskList;
+import duke.util.Note;
 
 /*
- * ByeCommand
+ * NoteAddCommand
  *
  * CS2103 AY19/20 Semester 2
  * Individual Project
  * Duke Project
  *
- * 06 Feb 2020
+ * 28 Jan 2020
  *
  */
 
 /**
- * ByeCommand class extends a Command abstract class
- * and it represents the terminating command when a user
- * wants to end using Duke.
+ * <p>NoteAddCommand extends the Command abstract class
+ * and it describes the behavior of a command regarding
+ * to adding notes.</p>
  * @author Mario Lorenzo
  */
 
-public class ByeCommand extends Command {
+public class NoteAddCommand extends Command {
+    private Note note;
 
     /**
-     * Constructs a ByeCommand instance.
+     * Constructs a NoteAddCommand instance.
+     * @param note The note that would like to be added to the list.
      */
-
-    public ByeCommand() {
-
+    public NoteAddCommand(Note note) {
+        this.note = note;
     }
 
     /**
-     * Executes the command by returning the exit message.
+     * Executes the command by adding the note to noteList
+     * and write the details in the hard disk.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
-     * @param archiveList The list of archived tasks.
-     * @param archiveStorage The storage of the archive.
-     * @return The exit message.
+     * @return The String representing the outcome of the execution.
      */
 
-    @Override
     public String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage,
                           NoteList noteList, NoteStorage noteStorage) {
-        return "Bye. Hope to see you again soon!";
+        return noteList.addNote(note, noteStorage);
     }
 
     /**
@@ -56,6 +56,6 @@ public class ByeCommand extends Command {
 
     @Override
     public boolean isByeCommand() {
-        return true;
+        return false;
     }
 }

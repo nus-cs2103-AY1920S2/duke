@@ -25,7 +25,7 @@ import java.util.stream.Stream;
  * @author Mario Lorenzo
  */
 
-public class TaskList implements TaskListInterface {
+public class TaskList implements IList<Task> {
     ArrayList<Task> tasks;
 
     /**
@@ -58,7 +58,7 @@ public class TaskList implements TaskListInterface {
     public String markDone(int index, Storage storage) {
         Task task = getTask(index);
         task.markAsDone();
-        storage.rewriteTasksToFile(tasks);
+        storage.rewriteToFile(tasks);
 
         return "Nice! I've marked this task as done: \n"
                 + String.format("   %s\n", task.toString())
@@ -108,7 +108,7 @@ public class TaskList implements TaskListInterface {
     public String addTask(Task task, Storage storage) {
         tasks.add(task);
         boolean isAppendMode = tasks.size() != 1;
-        storage.writeTask(task, isAppendMode);
+        storage.write(task, isAppendMode);
         return "Got it. I've added this task: \n"
                 + String.format("    %s\n", task)
                 + String.format("Now you have %d task(s) in the list.", tasks.size());
@@ -123,7 +123,7 @@ public class TaskList implements TaskListInterface {
     public String deleteTask(int index, Storage storage) {
         Task task = getTask(index);
         tasks.remove(index - 1);
-        storage.rewriteTasksToFile(tasks);
+        storage.rewriteToFile(tasks);
         return "Noted. I've removed this task: \n "
                 + String.format("    %s\n", task)
                 + String.format("Now you have %d task(s) in the list.", tasks.size());
