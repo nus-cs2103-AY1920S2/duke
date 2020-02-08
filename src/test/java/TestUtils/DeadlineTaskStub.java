@@ -2,7 +2,7 @@ package TestUtils;
 
 import model.DeadLineTask;
 
-public class DeadlineTaskStub extends DeadLineTask {
+public class DeadLineTaskStub extends DeadLineTask {
     private static final String DEFAULT_DESCRIPTION = "form a project group";
     private static final String DEFAULT_DEADLINE = "week 3 tutorial";
 
@@ -10,17 +10,17 @@ public class DeadlineTaskStub extends DeadLineTask {
     //set the at as a string as the LocalDateTime object is only tested in task object.
     private String by;
 
-    public DeadlineTaskStub() {
+    public DeadLineTaskStub() {
         description = DEFAULT_DESCRIPTION;
         by = DEFAULT_DEADLINE;
     }
 
-    public DeadlineTaskStub withDescription(String description) {
+    public DeadLineTaskStub withDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public DeadlineTaskStub withTime(String by) {
+    public DeadLineTaskStub withTime(String by) {
         this.by = by;
         return this;
     }
