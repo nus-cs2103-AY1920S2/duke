@@ -14,6 +14,10 @@ import storage.Storage;
 
 import java.io.IOException;
 
+/**
+ * An application capable of recording the tasks and events to help the users
+ * manage the schedule.
+ */
 public class Duke {
 
     protected String user_name;
@@ -26,10 +30,10 @@ public class Duke {
         this.user_name = "";
     }
 
-    public Duke (String user_name) {
-        this.user_name = user_name;
-    }
-    
+    /**
+     * Load the storage from file into internal task list.
+     * Initiate other components.
+     */
     private void start() {
         this.ui = new Ui();
         try {
@@ -46,10 +50,16 @@ public class Duke {
         }
     }
 
+    /**
+     * exit with status 0.
+     */
     private void exit() {
         System.exit(0);
     }
 
+    /**
+     * Listen to the user input and start interactions.
+     */
     public void run() {
         Command command = new Command();
         this.start();
