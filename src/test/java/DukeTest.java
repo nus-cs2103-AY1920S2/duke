@@ -21,6 +21,7 @@ public class DukeTest {
         try {
             c = Parser.parse("bye");
         } catch (DukeException.InvalidCommand invalidCommand) {
+            System.out.println(invalidCommand.getMessage());
         }
         assertEquals(true, c.isExit());
     }

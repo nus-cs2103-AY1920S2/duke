@@ -10,7 +10,6 @@ import duke.interaction.Parser;
 /**
  * The Duke program implements an application that manipulates a collection of tasks.
  * This class contains overall behaviour functions like <code>loop</code> and <code>exit</code>.
- * This class contains the <code>main</code> function, as well.
  *
  * @author  Hardy Shein
  * @version 0.1
@@ -19,19 +18,6 @@ public class Duke {
 
     private TaskList taskList;
     private Storage storage;
-
-    /**
-     * Application's <code>main</code> method initializes a Duke object,
-     * greets the user via the UI and calls the behavioural <code>loop</code> method.
-     */
-    public static void main(String[] args) {
-        // Init Duke
-        Duke d = new Duke();
-        // Greet user on start
-        Ui.greet();
-        // Duke's behaviour loop
-        d.loop();
-    }
 
     /**
      * Duke's constructor initializes Storage and TaskList
