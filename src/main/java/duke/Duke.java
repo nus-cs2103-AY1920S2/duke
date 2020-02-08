@@ -13,6 +13,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private boolean isExit;
+    private History history;
 
     /**
      * Constructs a Duke with Storage, TaskList and Ui being initialised.
@@ -23,6 +24,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         isExit = false;
+        history = new History();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -69,7 +71,7 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             isExit = command.isExit();
-            return command.execute(tasks, ui, storage);
+            return command.execute(tasks, ui, storage, history);
         } catch (DukeException e) {
             return ui.generateErrorMessage(e.getMessage());
         }
@@ -86,7 +88,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line
                 Command c = Parser.parse(fullCommand);
-                System.out.println(c.execute(tasks, ui, storage));
+                System.out.println(c.execute(tasks, ui, storage, history));
                 isExit = c.isExit();
             } catch (DukeException e) {
                 System.out.println(ui.generateErrorMessage(e.getMessage()));

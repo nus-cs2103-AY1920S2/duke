@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UndoCommand;
 
 /**
  * Represents a Parser in Duke application.
@@ -22,10 +23,12 @@ public class Parser {
      * @throws DukeException If the command is invalid or in wrong format.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        if (fullCommand.equals("list")) {
+        if (fullCommand.trim().equals("list")) {
             return new ListCommand();
-        } else if (fullCommand.equals("bye")) {
+        } else if (fullCommand.trim().equals("bye")) {
             return new ExitCommand();
+        } else if (fullCommand.trim().equals("undo")) {
+            return new UndoCommand();
         } else {
             //Splitting the full command into command and details.
             String[] cmdAndDetails = fullCommand.split(" ", 2);

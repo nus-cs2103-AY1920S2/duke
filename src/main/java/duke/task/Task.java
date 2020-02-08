@@ -44,6 +44,13 @@ public class Task {
     }
 
     /**
+     * Marks the task as undone.
+     */
+    public void markAsUndone() {
+        this.isDone = false;
+    }
+
+    /**
      * Returns a string representation of the task that will be saved in storage.
      *
      * @return The string representation of the task that will be saved in storage.

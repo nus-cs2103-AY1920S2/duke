@@ -146,4 +146,20 @@ public class Ui {
         }
         return output;
     }
+
+    /**
+     * Returns the message that shows the list of tasks after undoing a command.
+     *
+     * @param tasks The list of tasks after undoing a command.
+     * @return The message that shows the list of tasks after undoing a command.
+     */
+    public String generateUndoMessage(ArrayList<Task> tasks) {
+        String output = "You have successfully undo the previous command.\n\n"
+                + "Here are the current tasks in your list:\n";
+        int size = tasks.size();
+        for (int i = 0; i < size; i++) {
+            output += (i + 1) + ". " + tasks.get(i).toString() + "\n";
+        }
+        return output;
+    }
 }
