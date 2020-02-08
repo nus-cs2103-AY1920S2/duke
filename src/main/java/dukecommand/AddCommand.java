@@ -1,6 +1,5 @@
 package dukecommand;
 
-import dukeexceptions.InvalidEntryException;
 import dukelist.DukeList;
 import dukestorage.DukeStorage;
 import duketasks.Task;

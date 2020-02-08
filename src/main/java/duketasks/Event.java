@@ -13,7 +13,8 @@ public class Event extends Task {
 
 
     public Event(String desc, LocalDate by) {
-        super(desc, eventTaskCode);
+        super(desc,
+                eventTaskCode);
         this.by = by;
     }
 

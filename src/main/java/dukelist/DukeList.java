@@ -1,8 +1,8 @@
 package dukelist;
 
-import duketasks.Task;
 import dukeexceptions.EmptyListException;
 import dukeexceptions.InvalidEntryException;
+import duketasks.Task;
 
 import java.util.ArrayList;
 

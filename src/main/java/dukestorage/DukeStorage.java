@@ -1,5 +1,11 @@
 package dukestorage;
 
+import dukelist.DukeList;
+import duketasks.Deadline;
+import duketasks.Event;
+import duketasks.Task;
+import duketasks.Todo;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,19 +14,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import duketasks.Deadline;
-import duketasks.Event;
-import duketasks.Task;
-import duketasks.Todo;
-import dukelist.DukeList;
-
 /**
  * Storage function used to save tasks whenever there is a change in the list items
  * and load tasks when Duke program starts up
  */
 
 public class DukeStorage {
-    private static final String defaultPath = "data\\duke.txt";
+    private static final String defaultPath = "data/duke.txt";
 
     public final Path path;
 
@@ -70,6 +70,7 @@ public class DukeStorage {
             DukeList output = new DukeList();
             try {
                 List<String> input = Files.readAllLines(path);
+                System.out.println("Successfully loaded");
                 return loadDecoder(input, output);
             } catch (IOException ioe) {
                 throw ioe;
