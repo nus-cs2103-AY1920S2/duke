@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-public class Deadline implements Task {
+public class Deadline extends Task {
     private final String name;
     private boolean isCompleted;
     private final LocalDateTime deadline;
@@ -35,17 +35,6 @@ public class Deadline implements Task {
         this.deadline = deadline;
     }
 
-    /**
-     * Takes in another Deadline object and modifies its isCompleted value.
-     * @param deadline reference deadline object whose name and deadline is cloned over
-     * @param isCompleted Boolean value if Deadline is completed or not.
-     */
-    public Deadline(Deadline deadline, boolean isCompleted) {
-        this.name = deadline.getName();
-        this.isCompleted = isCompleted;
-        this.deadline = deadline.getDeadline();
-    }
-
     public void makeCompleted() {
         this.isCompleted = true;
     }
@@ -63,7 +52,12 @@ public class Deadline implements Task {
     }
 
     public String writeFormat() {
-        return "D|" + name + "|" + deadline + "|" + (isCompleted ? "1" : "0");
+        StringBuilder output = new StringBuilder("D|" + name + "|" + deadline + "|" + (isCompleted ? "1" : "0"));
+        if (this.getTags().size() > 0) {
+            output.append("|");
+            this.getTags().forEach(x -> output.append("#").append(x));
+        }
+        return output.toString();
     }
 
     /**
@@ -76,12 +70,21 @@ public class Deadline implements Task {
         List<String> list = Collections.list(new StringTokenizer(input, "|")).stream()
                 .map(token -> (String) token)
                 .collect(Collectors.toList());
-        return new Deadline(list.get(1), LocalDateTime.parse(list.get(2)), Boolean.parseBoolean(list.get(3)));
+        Deadline deadline = new Deadline(list.get(1), LocalDateTime.parse(list.get(2)),
+                Boolean.parseBoolean(list.get(3)));
+        if (list.size() == 5) {
+            List<String> tags = Collections.list(new StringTokenizer(list.get(4), "#")).stream()
+                    .map(token -> (String) token)
+                    .collect(Collectors.toList());
+            tags.remove(0);
+            tags.forEach(deadline::addTag);
+        }
+        return deadline;
     }
 
     @Override
     public String toString() {
         return "[D][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name + " (by: "
-                + deadline.format(formatter) + ")";
+                + deadline.format(formatter) + ") " + super.toString();
     }
 }

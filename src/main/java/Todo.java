@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-public class Todo implements Task {
+public class Todo extends Task {
     private final String name;
     private boolean isCompleted;
 
@@ -14,11 +14,6 @@ public class Todo implements Task {
 
     public Todo(String name, boolean isCompleted) {
         this.name = name;
-        this.isCompleted = isCompleted;
-    }
-
-    public Todo(Todo t, boolean isCompleted) {
-        this.name = t.getName();
         this.isCompleted = isCompleted;
     }
 
@@ -35,7 +30,12 @@ public class Todo implements Task {
     }
 
     public String writeFormat() {
-        return "T|" + name + "|" + (isCompleted ? "1" : "0");
+        StringBuilder output = new StringBuilder("T|" + name + "|" + (isCompleted ? "1" : "0"));
+        if (this.getTags().size() > 0) {
+            output.append("|");
+            this.getTags().forEach(x -> output.append("#").append(x));
+        }
+        return output.toString();
     }
 
     /**
@@ -48,11 +48,19 @@ public class Todo implements Task {
         List<String> list = Collections.list(new StringTokenizer(input, "|")).stream()
                 .map(token -> (String) token)
                 .collect(Collectors.toList());
-        return new Todo(list.get(1), Boolean.parseBoolean(list.get(2)));
+        Todo todo = new Todo(list.get(1), Boolean.parseBoolean(list.get(2)));
+        if (list.size() == 4) {
+            List<String> tags = Collections.list(new StringTokenizer(list.get(3), "#")).stream()
+                    .map(token -> (String) token)
+                    .collect(Collectors.toList());
+            tags.remove(0);
+            tags.forEach(todo::addTag);
+        }
+        return todo;
     }
 
     @Override
     public String toString() {
-        return "[T][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name;
+        return "[T][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name + " " + super.toString();
     }
 }

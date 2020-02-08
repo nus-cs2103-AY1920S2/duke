@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-public class Event implements Task {
+public class Event extends Task {
     private final String name;
     private boolean isCompleted;
     private final LocalDateTime deadline;
@@ -21,17 +21,6 @@ public class Event implements Task {
         this.name = name;
         this.isCompleted = false;
         this.deadline = deadline;
-    }
-
-    /**
-     * Takes in another Event object and modifies its isCompleted value.
-     * @param event reference Event object whose name and deadline is cloned over
-     * @param isCompleted Boolean value if Event is completed or not.
-     */
-    public Event(Event event, boolean isCompleted) {
-        this.name = event.getName();
-        this.isCompleted = isCompleted;
-        this.deadline = event.getDeadline();
     }
 
     /**
@@ -63,7 +52,12 @@ public class Event implements Task {
     }
 
     public String writeFormat() {
-        return "E|" + name + "|" + deadline + "|" + (isCompleted ? "1" : "0");
+        StringBuilder output = new StringBuilder("E|" + name + "|" + deadline + "|" + (isCompleted ? "1" : "0"));
+        if (this.getTags().size() > 0) {
+            output.append("|");
+            this.getTags().forEach(x -> output.append("#").append(x));
+        }
+        return output.toString();
     }
 
     /**
@@ -76,12 +70,20 @@ public class Event implements Task {
         List<String> list = Collections.list(new StringTokenizer(input, "|")).stream()
                 .map(token -> (String) token)
                 .collect(Collectors.toList());
-        return new Event(list.get(1), LocalDateTime.parse(list.get(2)), Boolean.parseBoolean(list.get(3)));
+        Event event = new Event(list.get(1), LocalDateTime.parse(list.get(2)), Boolean.parseBoolean(list.get(3)));
+        if (list.size() == 5) {
+            List<String> tags = Collections.list(new StringTokenizer(list.get(4), "#")).stream()
+                    .map(token -> (String) token)
+                    .collect(Collectors.toList());
+            tags.remove(0);
+            tags.forEach(event::addTag);
+        }
+        return event;
     }
 
     @Override
     public String toString() {
         return "[E][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name + " (at: "
-                + deadline.format(formatter) + ")";
+                + deadline.format(formatter) + ") " + super.toString();
     }
 }

@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -17,11 +18,13 @@ public class AutoResponder {
     static Pattern PATTERN_TODO = Pattern.compile("^todo (.+)");
     static Pattern PATTERN_DONE = Pattern.compile("^done (\\d+)");
     static Pattern PATTERN_DELETE = Pattern.compile("^delete (\\d+)");
-    static Pattern PATTERN_EMPTY_COMMAND = Pattern.compile("^(todo|event|deadline|find|done|delete)\\s*$");
+    static Pattern PATTERN_EMPTY_COMMAND = Pattern.compile("^(todo|event|deadline|find|done|delete|tag)\\s*$");
     static Pattern PATTERN_LIST = Pattern.compile("^list\\s*$");
     static Pattern PATTERN_SAVE = Pattern.compile("^save\\s*$");
     static Pattern PATTERN_FIND = Pattern.compile("^find (.+)");
     static Pattern PATTERN_BYE = Pattern.compile("^bye\\s*$");
+    static Pattern PATTERN_TAG = Pattern.compile("^tag (\\d+) (#[^#]+)+");
+    static Pattern PATTERN_TAG_CLEAR = Pattern.compile("^tag [-/]c (\\d+)$");
 
 
     /**
@@ -85,6 +88,14 @@ public class AutoResponder {
         } else if (PATTERN_BYE.matcher(input).find()) {
             System.exit(0);
             return "";
+        } else if (PATTERN_TAG.matcher(input).find()) {
+            Matcher m = PATTERN_TAG.matcher(input);
+            m.find();
+            return this.tagTask(Integer.parseInt(m.group(1)), input);
+        } else if (PATTERN_TAG_CLEAR.matcher(input).find()) {
+            Matcher m = PATTERN_TAG_CLEAR.matcher(input);
+            m.find();
+            return this.clearTaskTags(Integer.parseInt(m.group(1)));
         } else {
             throw new IllegalArgumentException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -143,6 +154,34 @@ public class AutoResponder {
             taskList.remove(index);
         }
         return printToConsole();
+    }
+
+    private String tagTask(int index, String input) {
+        if (index < 0 || index >= taskList.size()) {
+            throw new IndexOutOfBoundsException("Index of " + (index + 1)
+                    + " does not correspond to task list of size " + taskList.size());
+        } else {
+            Scanner sc = new Scanner(input).useDelimiter("#");
+            sc.next();
+            while (sc.hasNext()) {
+                taskList.get(index).addTag(sc.next());
+            }
+            toPrint.append("Task tagged successfully.\nHere is the modified task:\n");
+            toPrint.append(taskList.get(index));
+            return this.printToConsole();
+        }
+    }
+
+    private String clearTaskTags(int index) {
+        if (index < 0 || index >= taskList.size()) {
+            throw new IndexOutOfBoundsException("Index of " + (index + 1)
+                    + " does not correspond to task list of size " + taskList.size());
+        } else {
+            taskList.get(index).clearTag();
+            toPrint.append("Tags cleared successfully.\nHere is the modified task:\n");
+            toPrint.append(taskList.get(index));
+            return this.printToConsole();
+        }
     }
 
     private String findTask(String description) {
