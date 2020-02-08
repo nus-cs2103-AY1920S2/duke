@@ -1,15 +1,8 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package LC.duke;
 
-public class Event extends Task {
-    protected LocalDate taskDate;
-
-    public Event(String description, String at) {
+public class Todo extends Task{
+    public Todo(String description) {
         super(description);
-        if(at.contains("/")){
-            at = at.replaceAll("/", "-");
-        }
-        this.taskDate = LocalDate.parse(at);
     }
 
     public void printInit(){
@@ -22,6 +15,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[T]" + super.toString();
     }
 }

@@ -1,15 +1,17 @@
+package LC.duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
     protected LocalDate taskDate;
 
-    public Deadline(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        if(by.contains("/")){
-            by = by.replaceAll("/", "-");
+        if(at.contains("/")){
+            at = at.replaceAll("/", "-");
         }
-        this.taskDate = LocalDate.parse(by);
+        this.taskDate = LocalDate.parse(at);
     }
 
     public void printInit(){
@@ -22,6 +24,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

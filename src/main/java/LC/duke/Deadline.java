@@ -1,6 +1,17 @@
-public class Todo extends Task{
-    public Todo(String description) {
+package LC.duke;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class Deadline extends Task {
+    protected LocalDate taskDate;
+
+    public Deadline(String description, String by) {
         super(description);
+        if(by.contains("/")){
+            by = by.replaceAll("/", "-");
+        }
+        this.taskDate = LocalDate.parse(by);
     }
 
     public void printInit(){
@@ -13,6 +24,6 @@ public class Todo extends Task{
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[D]" + super.toString() + " (by: " + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

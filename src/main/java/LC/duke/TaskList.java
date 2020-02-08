@@ -1,3 +1,5 @@
+package LC.duke;
+
 import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 

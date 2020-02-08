@@ -1,3 +1,5 @@
+package LC.duke;
+
 public class Parser {
     static boolean isProblem = false;
 
