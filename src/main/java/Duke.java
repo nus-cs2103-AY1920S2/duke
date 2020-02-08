@@ -37,7 +37,7 @@ public class Duke {
                 }
             } else if (command.toLowerCase().equals("done")) {
                 int index = parser.processIndex();
-                tasks.get(index).updateisCompleted(true);
+                tasks.get(index).updateIsCompleted(true);
                 ui.printMarkedAsDone(tasks.get(index));
             } else if (command.toLowerCase().equals("delete")) {
                 int index = parser.processIndex();
@@ -77,7 +77,7 @@ public class Duke {
             } else if (command.toLowerCase().equals("deadline")) {
                 try {
                     String description = parser.processDescriptionForEventOrDeadline();
-                    LocalDate date = parser.deadlineProcessDate();
+                    LocalDate date = parser.processDateForDeadline();
                     tasks.addDeadline(description, date);
                     ui.printAdd();
 
@@ -95,7 +95,7 @@ public class Duke {
             } else if (command.toLowerCase().equals("event")) {
                 try {
                     String description = parser.processDescriptionForEventOrDeadline();
-                    LocalDate date = parser.eventProcessDate();
+                    LocalDate date = parser.processDateForEvent();
                     tasks.addEvent(description, date);
                     ui.printAdd();
 
