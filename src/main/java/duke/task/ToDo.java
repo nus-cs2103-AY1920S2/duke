@@ -9,8 +9,7 @@ public class ToDo extends Task {
      * @param taskName Name of the task.
      */
     public ToDo(String taskName) {
-        super(taskName);
-        this.taskType = "T";
+        super(taskName, "T");
     }
 
     /**
@@ -20,13 +19,7 @@ public class ToDo extends Task {
      * @param isDone Indicates if the task is completed already.
      */
     public ToDo(String taskName, boolean isDone) {
-        super(taskName.trim(), isDone);
-        this.taskType = "T";
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
+        super(taskName, "T", isDone);
     }
 
 }

@@ -1,5 +1,7 @@
 package duke.ui;
 
+import javafx.scene.image.Image;
+
 /** User Interface Manager. */
 public class Ui {
 
@@ -13,11 +15,11 @@ public class Ui {
     }
 
     public static String wrap(String string) {
-        return "____________________________________________________________"
+        return "___________________________________________________"
                 + System.lineSeparator()
                 + string
                 + System.lineSeparator()
-                + "____________________________________________________________"
+                + "___________________________________________________"
                 + System.lineSeparator();
     }
 

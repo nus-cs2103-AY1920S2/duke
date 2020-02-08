@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -21,8 +22,11 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    protected final String userName = "Tom";
+    protected final String dukeName = "Jerry";
+
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/TomEvil.gif"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/JerryDrunk.jpg"));
 
     @FXML
     public void initialize() {
@@ -40,11 +44,21 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
+        if (!input.equals("")) {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userName, input, userImage),
+                    DialogBox.getDukeDialog(dukeName, response, dukeImage)
+            );
+            userInput.clear();
+        }
     }
+
+    protected void printGuiIntro() {
+        String intro = "hey bud waht cna i do for ku";
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog(dukeName, intro, dukeImage)
+        );
+    }
+
 }
