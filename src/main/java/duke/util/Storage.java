@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * @author Mario Lorenzo
  */
 
-public class Storage {
+public class Storage implements IStorage<Task> {
     private TaskReader reader;
     private TaskWriter writer;
 
@@ -46,7 +46,7 @@ public class Storage {
      * @throws DukeInvalidTaskFormatException If there is a task there is not properly formatted.
      */
 
-    public ArrayList<Task> loadTasks() throws DukeInvalidDateFormatException, DukeInvalidTaskFormatException {
+    public ArrayList<Task> load() throws DukeInvalidDateFormatException, DukeInvalidTaskFormatException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
@@ -65,7 +65,7 @@ public class Storage {
      * @param isApppendMode Whether the file wants to be appended or resetted to blank.
      */
 
-    public void writeTask(Task task, boolean isApppendMode) {
+    public void write(Task task, boolean isApppendMode) {
         try {
             this.writer.write(task, isApppendMode);
         } catch (IOException e) {
@@ -77,7 +77,7 @@ public class Storage {
      * Rewrites the list of tasks to the file.
      */
 
-    public void rewriteTasksToFile(ArrayList<Task> tasks) {
+    public void rewriteToFile(ArrayList<Task> tasks) {
         this.writer.setBlank();
         try {
             for (int i = 0; i < tasks.size(); i++) {
