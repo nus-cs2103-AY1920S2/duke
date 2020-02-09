@@ -17,6 +17,8 @@ class TaskListHistoryTest {
 
     @BeforeEach
     void setUp() {
+        // Reset stack
+        TaskListHistory.reset();
     }
 
     @AfterEach

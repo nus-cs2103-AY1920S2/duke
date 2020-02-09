@@ -4,7 +4,6 @@ import duke.DukeException;
 import duke.Storage;
 
 import java.util.ArrayList;
-import java.util.EmptyStackException;
 import java.util.Optional;
 import java.util.Stack;
 
@@ -26,6 +25,14 @@ public class TaskListHistory {
             initialTaskList = new TaskList(new ArrayList<>());
         }
         stack.add(initialTaskList);
+    }
+
+    /**
+     * Resets the state of stack.
+     */
+    public static void reset() {
+        stack = new Stack<>();
+        stack.push(initialTaskList);
     }
 
     public static Stack<TaskList> getStack() {
@@ -61,12 +68,8 @@ public class TaskListHistory {
             // Initial state of program
             return Optional.of(initialTaskList);
         }
-        try {
-            // Remove latest item
-            stack.pop();
-            return Optional.of(stack.peek());
-        } catch (EmptyStackException e) {
-            return Optional.empty();
-        }
+        // Remove latest item
+        stack.pop();
+        return Optional.of(stack.peek());
     }
 }

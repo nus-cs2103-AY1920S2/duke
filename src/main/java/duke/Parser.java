@@ -8,6 +8,7 @@ import duke.command.EmptyInputCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UndoCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -44,6 +45,9 @@ public class Parser {
         switch (firstCommandWord) {
         case "bye":
             outputCommand = Optional.of(new ExitCommand());
+            break;
+        case "undo":
+            outputCommand = Optional.of(new UndoCommand());
             break;
         case "list":
             outputCommand = Optional.of(new ListCommand());

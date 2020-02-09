@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
+import duke.task.TaskListHistory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,7 @@ class UndoCommandTest {
         tasks = mock(TaskList.class);
         ui = mock(Ui.class);
         storage = mock(Storage.class);
+        TaskListHistory.reset();
     }
 
     @AfterEach

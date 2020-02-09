@@ -4,6 +4,8 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
+import java.util.Optional;
+
 /**
  * Represents a command to list out all tasks in task list.
  */
@@ -14,14 +16,15 @@ public class ListCommand extends Command {
 
     /**
      * Prints out list of tasks.
-     *
-     * @param tasks list of tasks
+     *  @param tasks list of tasks
      * @param ui prints information to user
      * @param storage manages user save file
+     * @return TaskList required for indicating updating of tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public Optional<TaskList> execute(TaskList tasks, Ui ui, Storage storage) {
         // Print out all tasks
         ui.listTasks(tasks, "Here are the tasks in your list:");
+        return Optional.empty();
     }
 }

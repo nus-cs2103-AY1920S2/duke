@@ -1,5 +1,6 @@
 package duke;
 
+import duke.task.TaskListHistory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -69,6 +70,7 @@ class DukeTest {
         output = new ByteArrayOutputStream();
         // Change output stream
         System.setOut(new PrintStream(output));
+        TaskListHistory.reset();
     }
 
     @AfterEach

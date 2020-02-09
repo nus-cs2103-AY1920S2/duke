@@ -103,6 +103,17 @@ public class Ui {
     }
 
     /**
+     * Prints out message given to stdout.
+     *
+     * @param message message to be printed out
+     */
+    public void printMessage(String message) {
+        printTextWithIndentation(HORIZONTAL_BAR);
+        printTextWithIndentation(message);
+        printTextWithIndentation(HORIZONTAL_BAR);
+    }
+
+    /**
      * Prints out newly added task information.
      *
      * @param task used for printing information related to task
