@@ -10,6 +10,8 @@ public class Ui {
         this.line = line;
     }
 
+    public Ui() {}
+
     public String[] parseInput() {
         return line.split(" ", 2);
     }
@@ -26,26 +28,25 @@ public class Ui {
         return (this.parseInput())[1];
     }
 
-    public void showList() {
-        System.out.println("Here are the tasks in your list: ");
+    public  String showList() {
+        return "Here are the tasks in your list: ";
     }
 
     public String errmessage() {
         return "Invalid Input, Please check instructions";
     }
 
-    public void doneTask(Task task) {
-        System.out.println("-------------------------------------------------------------\nNice I have marked this task as done\n" +
-        " " + task.getDescription() + "\n-------------------------------------------------------------");
+    public String doneTask(Task task) {
+        return("Nice I have marked this task as done\n" +
+        " " + task.getDescription() + "\n");
     }
 
-    public void addedTask(Task todo) {
-        System.out.println("-------------------------------------------------------------\n" + todo.toString() +
-        "\n-------------------------------------------------------------\n");
+    public String addedTask(Task todo) {
+        return (todo.toString() + "\n");
     }
 
-    public void deleteTask(String task) {
-        System.out.println("Deleted task: " + task);
+    public String deleteTask(String task) {
+        return("Deleted task: " + task);
     }
 
 }

@@ -36,11 +36,11 @@ public class Task {
     /**
      * Marks this task as done
      */
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
         this.description = this.description.replace("["+"\u2718"+"]", "["+"\u2713"+"]");
         Ui ui = new Ui(this.getDescription());
-        ui.doneTask(this);
+        return ui.doneTask(this);
     }
 
     /**

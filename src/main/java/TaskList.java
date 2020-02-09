@@ -17,6 +17,10 @@ public class TaskList{
         this.TL = TL;
     }
 
+    public TaskList() {
+
+    }
+
     public void loadFromStorage() throws FileNotFoundException{
         Scanner s = new Scanner(new File(filepath));
         while(s.hasNextLine()) {

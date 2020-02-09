@@ -1,14 +1,6 @@
-[D][[✓]] hw /by 2020-12-12 03:402020-12-12 03:40
-
-
-[E][✘] wedding /at 2020-12-12 12:302020-12-12 12:30
-[T][[✓]] eat
-[T][[✓]] eat
-
-
-[T][[✓]] cook rice 
-
-[E][[✓]] make youtube video /at 2020-12-12 06:302020-12-12 06:30
-
-[D][[✓]] eat rice /by 2020-12-12 12:302020-12-12 12:30
-
+[E][✓]bday partee /at 2020-12-12 12:30
+[T][✓]luv timmy chalamet
+[T][✓]watch the king
+[D][✘]hw /by 2020-12-12 12:30
+[T][✓]blabla
+[T][✘]timmy hehheehheh
