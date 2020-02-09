@@ -2,8 +2,6 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * A chatbot interface.
@@ -24,53 +22,14 @@ public class Duke {
             put("invalid command", 6);
         }
     };
-
-    /**
-     * This function is to verify if command valid type (for later extension) so that main functions don't need to check
-     * anymore.
-     * This function solely aims for command validity check, for better extension in the future.
-     * @param command user command
-     * @return
-     */
-    private static Integer getCommandCode(String command) {
-        try {
-            String firstCommandType = command.split(" ")[0];
-            String[] commandSplit = command.split(" ");
-            if (command.equals("list")) {
-                return commandCodeMapping.get("list");
-            } else if (firstCommandType.equals("done") && commandSplit.length == 2) {
-                return commandCodeMapping.get("mark done");
-            } else if (firstCommandType.equals("delete") && commandSplit.length == 2) {
-                return commandCodeMapping.get("delete");
-            } else {
-                String taskType = command.split(" ", 2)[0];
-                if (taskType.equals("todo")) {
-                    return commandCodeMapping.get("todo");
-                } else {
-                    String content = command.split(" ", 2)[1];
-                    if (taskType.equals("deadline")) {
-                        String time = content.split("/by")[1];
-                        LocalDate.parse(time.trim(), DateTimeFormatter.BASIC_ISO_DATE);
-                        return commandCodeMapping.get("deadline");
-                    } else if (taskType.equals("event")) {
-                        String time = content.split("/at")[1];
-                        LocalDate.parse(time.trim(), DateTimeFormatter.BASIC_ISO_DATE);
-                        return commandCodeMapping.get("event");
-                    }
-                }
-            }
-        } catch (Exception e) {
-            return commandCodeMapping.get("invalid command");
-        }
-        return commandCodeMapping.get("invalid command");
-    }
+    static CommandParser commandParser = new CommandParser(commandCodeMapping);
 
     /**
      * Switching logic for different commands.
      * @param command user command
      */
     private static void commandProcessor(String command) {
-        Integer commandCode = getCommandCode(command);
+        Integer commandCode = commandParser.getCommandCode(command);
         if (commandCode == commandCodeMapping.get("list")) {
             for (int i = 0; i < taskCollection.size(); i++) {
                 System.out.printf(taskCollection.get(i).getFullDetail(i));
