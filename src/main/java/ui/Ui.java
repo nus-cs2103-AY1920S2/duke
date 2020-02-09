@@ -1,5 +1,9 @@
+package ui;
+
 import exception.CommandNotFoundException;
 import exception.InvalidIndexException;
+import task.Task;
+import task.TaskList;
 
 import java.util.Scanner;
 

@@ -1,4 +1,9 @@
 import exception.DukeException;
+import parser.Parser;
+import storage.Storage;
+import task.*;
+import ui.Ui;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -12,6 +17,7 @@ public class Duke {
 
     /**
      * Initializes Duke with its UI and file and load tasks into storage.
+     *
      * @throws IOException if there are file exceptions.
      */
     public Duke() throws IOException {
@@ -27,7 +33,8 @@ public class Duke {
     }
 
     /**
-     * Performs all functionalities of Duke chatbot.
+     * Performs all functionality of Duke chat bot.
+     *
      * @throws IOException if there are file exceptions.
      */
     public void run() throws IOException {
@@ -37,37 +44,38 @@ public class Duke {
             try {
                 String input = ui.getNextInput();
                 Parser p = new Parser(input);
-                if (p.getCommand().equals("bye")) {
+                String command = p.getCommand();
+                if (command.equals("bye")) {
                     ui.exit();
                     break;
-                } else if (p.getCommand().equals("list")) {
+                } else if (command.equals("list")) {
                     if (tasks.getSize() == 0) {
                         System.out.println("There is no task in your list. Please try again...");
                         continue;
                     }
                     ui.printTasks(tasks);
-                } else if (p.getCommand().equals("done")) {
+                } else if (command.equals("done")) {
                     ui.acknowledgeDone(tasks, p.getIndex(tasks));
                     storage.save(tasks);
-                } else if (p.getCommand().equals("deadline")) {
+                } else if (command.equals("deadline")) {
                     Deadline deadline = new Deadline(p.getTask(), p.getDate());
                     tasks.add(deadline);
                     ui.acknowledgeDeadline(tasks, deadline);
                     storage.save(tasks);
-                } else if (p.getCommand().equals("todo")) {
+                } else if (command.equals("todo")) {
                     Todo todo = new Todo(p.getTask());
                     tasks.add(todo);
                     ui.acknowledgeTodo(tasks, todo);
                     storage.save(tasks);
-                } else if (p.getCommand().equals("event")) {
+                } else if (command.equals("event")) {
                     Task event = new Event(p.getTask(), p.getDate());
                     tasks.add(event);
                     ui.acknowledgeEvent(tasks, event);
                     storage.save(tasks);
-                } else if (p.getCommand().equals("delete")) {
+                } else if (command.equals("delete")) {
                     ui.acknowledgeDelete(tasks, p.getIndex(tasks));
                     storage.save(tasks);
-                } else if (p.getCommand().equals("find")) {
+                } else if (command.equals("find")) {
                     ui.acknowledgeFound(tasks, p.getTask());
                 } else {
                     ui.printUnknownCommand();
