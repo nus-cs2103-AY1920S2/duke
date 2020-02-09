@@ -1,10 +1,17 @@
-import static java.lang.Integer.parseInt;
+package lcduke;
+
 import java.text.ParseException;
+import static java.lang.Integer.parseInt;
+
+/** Ths creates a TaskList object.
+ */
 
 public class TaskList {
     static Task[] totalTasks = new Task[100];
     static int totalTasksCount;
 
+    /** This is the constructor to create the TaskList Object.
+     */
     public TaskList() {
         totalTasksCount = 0;
     }

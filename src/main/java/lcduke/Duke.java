@@ -1,5 +1,7 @@
-import java.io.IOException;
+package lcduke;
+
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,9 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
+
+/** Ths creates a Duke object.
+ */
 
 public class Duke extends Application {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -25,6 +30,10 @@ public class Duke extends Application {
         this("/Users/liuchao/duke/src/main/");
     }
 
+    /** This is the constructor to create the Deadline Object.
+     *
+     * @param filePath File path of user's hard disk.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -45,18 +54,19 @@ public class Duke extends Application {
                 Parser.isProblem = false;
             } else {
                 if (userInput.equals("list")) {
-                    Ui.list(this.tasks);
+                    Ui.list();
+
                 } else if (userInput.contains("done")) {
-                    Ui.done(this.tasks, userInput);
+                    Ui.done(userInput);
                     try {
-                        storage.save(tasks);
+                        storage.save();
                     } catch (IOException e) {
                         System.out.println("Cannot write file");
                     }
                 } else if (userInput.contains("delete")) {
                     this.tasks.delete(userInput);
                     try {
-                        storage.save(tasks);
+                        storage.save();
                     } catch (IOException e) {
                         System.out.println("Cannot write file");
                     }
@@ -66,7 +76,7 @@ public class Duke extends Application {
                     this.tasks.toDo(userInput);
                     TaskList.totalTasks[TaskList.totalTasksCount -1].printInit();
                     try {
-                        storage.save(tasks);
+                        storage.save();
                     } catch (IOException e) {
                         System.out.println("Cannot write file");
                     }
@@ -74,7 +84,7 @@ public class Duke extends Application {
                     this.tasks.deadline(userInput);
                     TaskList.totalTasks[TaskList.totalTasksCount - 1].printInit();
                     try {
-                        storage.save(tasks);
+                        storage.save();
                     } catch (IOException e) {
                         System.out.println("Cannot write file");
                     }
@@ -82,7 +92,7 @@ public class Duke extends Application {
                     this.tasks.event(userInput);
                     TaskList.totalTasks[TaskList.totalTasksCount -1].printInit();
                     try {
-                        storage.save(tasks);
+                        storage.save();
                     } catch (IOException e) {
                         System.out.println("Cannot write file");
                     }
