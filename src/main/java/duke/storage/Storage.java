@@ -19,11 +19,9 @@ import duke.tasks.*;
 public class Storage {
 
     private String filePath;
-    private File f;
 
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.f = new File(filePath);
     }
 
     /**
@@ -34,6 +32,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
+        File f = new File(filePath);
 
         if (f.exists()) {
 
@@ -49,12 +48,14 @@ public class Storage {
             }
         } else {
             try {
-                f.createNewFile();
+                System.out.println("storage" + System.getProperty("user.dir"));
+                File f1 = new File(System.getProperty("user.dir"), "src/main/java/duke/data/text.txt");
+                f1.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("create new file error");
             }
-            throw new DukeException("Task list not found!");
+            throw new DukeException("Task list not found! Creating new task list");
         }
 
         return taskList;

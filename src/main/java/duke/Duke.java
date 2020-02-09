@@ -22,12 +22,14 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
+        System.out.println("duke" + System.getProperty("user.dir"));
+
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -51,6 +53,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("duke/data/tasks.txt").run();
+        new Duke("data/tasks.txt").run();
     }
 }
