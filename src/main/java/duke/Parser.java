@@ -63,18 +63,26 @@ public class Parser {
                 if (taskNumber < 1 || taskNumber > taskList.size()) {
                     throw new InvalidTaskNumberException(taskList.size());
                 }
+                assert taskNumber > 0 && taskNumber <= taskList.size(): "Task number should be between 1 and "
+                            + taskList.size();
+
                 return new DoneCommand(taskList, taskNumber - 1).execute();
             case "delete":
                 taskNumber = Integer.parseInt(input.split(" ")[1]);
                 if (taskNumber < 1 || taskNumber > taskList.size()) {
                     throw new InvalidTaskNumberException(taskList.size());
                 }
+                assert taskNumber > 0 && taskNumber <= taskList.size(): "Task number should be from 1 to "
+                        + taskList.size();
+
                 return new DeleteCommand(taskList, taskNumber - 1).execute();
             case "todo":
                 String[] fields = input.split("todo ");
                 if (fields.length < 2) {
                     throw new EmptyDescriptionException("todo");
                 }
+
+                assert fields.length > 1: "Number of inputs should be more than 1";
                 Task newTodo = new Todo(fields[1]);
                 return new AddCommand(taskList, newTodo).execute();
             case "event":
@@ -87,10 +95,12 @@ public class Parser {
                 String[] descAndTimeFields = action.equals("event")
                         ? fields[1].split(" /at ")
                         : fields[1].split(" /by ");
+                assert fields.length > 1: "Number of inputs should be more than 1";
 
                 if (descAndTimeFields.length < 2) {
                     throw new EmptyTimeException(action, descAndTimeFields);
                 }
+                assert descAndTimeFields.length > 1: "Number of inputs should be more than 1";
 
                 Task newTask = action.equals("event")
                         ? new Event(descAndTimeFields[0], descAndTimeFields[1])

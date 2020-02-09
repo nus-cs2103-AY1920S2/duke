@@ -1,5 +1,10 @@
 T | 1 | eat
 T | 1 | hi
-D | 0 | hw | 14:00 20/02/2020
-E | 0 | meeting | 14:00 03/02/2020
-T | 0 | message him
+D | 1 | hw | 14:00 20/02/2020
+E | 1 | meeting | 14:00 03/02/2020
+T | 0 | watch webcast
+E | 0 | CS2103T Meeting | 14:00 10/02/2020
+D | 0 | CS2103T Tutorial | 09:00 14/02/2020
+T | 0 | run
+T | 0 | walk
+T | 0 | eat

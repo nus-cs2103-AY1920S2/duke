@@ -18,6 +18,6 @@ public class DeleteCommand implements Command {
         taskList.delete(taskNumber);
         return "Noted. I've removes this task:\n"
                 + task
-                + "\nNow you have " + taskList.size() + "tasks on the list.";
+                + "\nNow you have " + taskList.size() + " tasks on the list.";
     }
 }

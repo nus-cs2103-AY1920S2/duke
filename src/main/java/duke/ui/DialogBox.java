@@ -34,8 +34,10 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        String[] lines = text.split("\r\n|\r|\n");
 
         dialog.setText(text);
+        dialog.setMinHeight(lines.length * 17.0);
         displayPicture.setImage(img);
     }
 
