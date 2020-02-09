@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Encapsulates a list of tasks.
@@ -73,5 +74,32 @@ public class TaskList {
      */
     public int size() {
         return tasks.size();
+    }
+
+    /**
+     * Sorts the tasks in the list in ascending task date.
+     * Tasks without a date (e.g. `Todo`) will be placed after all tasks with a date.
+     */
+    public void sort() {
+        Collections.sort(tasks, (taskA, taskB) -> {
+            if (taskA instanceof DatedTask) {
+                if (taskB instanceof DatedTask) {
+                    DatedTask u = (DatedTask)taskA;
+                    DatedTask v = (DatedTask)taskB;
+                    //return ((DatedTask)taskA).getDate().compare(((DatedTask)taskB).getDate());
+                    return u.getDate().compareTo(v.getDate());
+                } else {
+                    return -1;
+                }
+            }
+            
+            if (taskB instanceof DatedTask) {
+                return 1;
+            } else {
+                //Relative ordering of taskA and taskB is preserved
+                //since Collections.sort is a stable sort
+                return 0;
+            }
+        });
     }
 }

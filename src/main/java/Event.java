@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * Encapsulates an event task which has both a description and an event date.
  */
-public class Event extends Task {
+public class Event extends DatedTask {
     private LocalDate eventTime;
     
     /**
@@ -16,6 +16,14 @@ public class Event extends Task {
     public Event(String description, LocalDate eventTime) {
         super(description);
         this.eventTime = eventTime;
+    }
+
+    /**
+     * Returns the event date.
+     * @return Event date
+     */
+    public LocalDate getDate() {
+        return eventTime;
     }
     
     @Override

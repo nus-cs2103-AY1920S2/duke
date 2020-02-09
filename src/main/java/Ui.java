@@ -93,6 +93,12 @@ interface Ui {
     public void showMatchingTasksMessage();
     
     /**
+     * Displays a header message when tasks are sorted.
+     * This method only prints the header message.
+     */
+    public void showSortMessage();
+    
+    /**
      * Closes and cleans up resources held by the UI.
      */
     public void close();

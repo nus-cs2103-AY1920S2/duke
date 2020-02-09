@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * Encapsulates a deadline task which has both a description and a deadline date.
  */
-public class Deadline extends Task {
+public class Deadline extends DatedTask {
     private LocalDate deadline;
     
     /**
@@ -16,6 +16,14 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate deadline) {
         super(description);
         this.deadline = deadline;
+    }
+    
+    /**
+     * Returns the task deadline.
+     * @return Deadline for the task
+     */
+    public LocalDate getDate() {
+        return deadline;
     }
     
     @Override

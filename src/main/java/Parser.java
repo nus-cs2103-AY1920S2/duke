@@ -43,7 +43,8 @@ public class Parser {
                 this::eventCommand,
                 this::listCommand,
                 this::todoCommand,
-                this::findCommand)
+                this::findCommand,
+                this::sortCommand)
             .map(DukeOptionalCommand::get)
             .filter(Optional::isPresent)
             .map(Optional::get)
@@ -186,6 +187,16 @@ public class Parser {
             } else {
                 return Optional.of(new FindCommand(searchString));
             }
+        } else {
+            return Optional.empty();
+        }
+    }
+    
+    private Optional<Command> sortCommand() throws DukeException {
+        Pattern listPattern = Pattern.compile("^sort( .*)?$");
+        Matcher listMatcher = listPattern.matcher(command);
+        if (listMatcher.find()) {
+            return Optional.of(new SortCommand());
         } else {
             return Optional.empty();
         }

@@ -89,6 +89,8 @@ public class Duke extends Application {
             String command = ui.readCommandString();
             processCommand(command);
         }
+        
+        cleanup();
     }
     
     /**

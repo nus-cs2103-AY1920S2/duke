@@ -143,6 +143,14 @@ public class Cli implements Ui {
     }
     
     /**
+     * Displays a header message when tasks are sorted.
+     * This method only prints the header message.
+     */
+    public void showSortMessage() {
+        PrintUtil.indentedPrintln("Sorted tasks by date. Here are your tasks:");
+    }
+    
+    /**
      * Closes and cleans up resources held by the UI.
      * This method does nothing for the command-line interface.
      */
