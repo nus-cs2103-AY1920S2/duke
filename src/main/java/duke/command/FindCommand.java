@@ -29,6 +29,8 @@ public class FindCommand extends Command {
                 counter++;
             }
             response = response.substring(0, response.length() - 1);
+            // Last character of the response string shouldn't be a newline character
+            assert response.charAt(response.length() - 1) != '\n';
         }
         return response;
     }

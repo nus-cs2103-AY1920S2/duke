@@ -52,6 +52,8 @@ public class TaskList {
      */
     public Task removeTask(int i) {
         Task t = this.tasks.get(i);
+        // No error means idx is in range and task has been assigned
+        assert (i >= 0 && i < getNumTasks()) && (t != null);
         this.tasks.remove(i);
         return t;
     }
@@ -63,6 +65,8 @@ public class TaskList {
      */
     public Task markTaskAsDone(int i) {
         Task t = this.tasks.get(i);
+        // No error means idx is in range and task has been assigned
+        assert (i >= 0 && i < getNumTasks()) && (t != null);
         t.setDone();
         return t;
     }
