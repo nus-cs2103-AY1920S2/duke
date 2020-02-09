@@ -11,7 +11,6 @@ import java.util.List;
 public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
-    protected static List<Task> taskList = new ArrayList<>(100);
 
     /**
      * Constructor for task object.

@@ -13,8 +13,7 @@ import java.util.List;
  * A data structure serving Duke by storing a list of tasks.
  */
 public class TaskList {
-    // contains the task list e.g., it has operations to add/delete tasks in the list
-    private List<Task> tasks = new ArrayList<>(100);
+    private List<Task> tasks;
     private boolean isLoadedList;
 
     /**
