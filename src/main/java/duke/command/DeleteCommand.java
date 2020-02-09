@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
      * @param ui       Overall Ui handling the ui of Duke
      * @param storage  Storage handling the storage of the Tasks in TaskList
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.deleteTask(replyArr);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.deleteTask(replyArr);
     }
 }

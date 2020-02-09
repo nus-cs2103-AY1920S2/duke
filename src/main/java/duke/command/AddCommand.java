@@ -46,20 +46,18 @@ public class AddCommand extends Command {
      * @param ui       Overall Ui handling the ui of Duke
      * @param storage  Storage handling the storage of the Tasks in TaskList
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         switch (instruction) {
         case "todo":
-            handleTodo(details, taskList);
-            break;
+            return handleTodo(details, taskList);
         case "deadline":
-            handleDeadline(details, taskList);
-            break;
+            return handleDeadline(details, taskList);
         case "event":
-            handleEvent(details, taskList);
-            break;
+            return handleEvent(details, taskList);
         default:
             break;
         }
+        return null;
     }
 
     /**
@@ -74,10 +72,11 @@ public class AddCommand extends Command {
      * @throws DukeException If details of Deadline is invalid(i.e. insufficient arguments, argument in incorrect
      *                       format)
      */
-    public static void handleDeadline(String reply, TaskList taskList) throws DukeException {
+    public static String handleDeadline(String reply, TaskList taskList) throws DukeException {
         String[] taskReplyArr = reply.split("/by ");
         if (taskReplyArr.length < 2) {
-            Ui.throwDeadlineInputError();
+//            Ui.throwDeadlineInputError();
+            return Ui.deadlineInputError();
         }
         String[] taskInstrArr = taskReplyArr[0].split(" ");
         try {
@@ -94,29 +93,32 @@ public class AddCommand extends Command {
 
                     Deadline deadLine = new Deadline(task, formattedDate, formattedTime, false);
                     taskList.addTask(deadLine);
-                    Ui.showTaskAdded(deadLine, taskList);
+                    return Ui.showTaskAdded(deadLine, taskList);
                 } else {
-                    Ui.throwDeadlineInputError();
+//                    Ui.throwDeadlineInputError();
+                    return Ui.deadlineInputError();
                 }
             } else if (timeDateArr.length == 1) {
                 if (DATE_VALIDATOR.isValidDate(timeDateArr[0])) {
                     LocalDate formattedDate = LocalDate.parse(timeDateArr[0], DATE_FORMATTER);
                     Deadline deadLine = new Deadline(task, formattedDate, false);
                     taskList.addTask(deadLine);
-                    Ui.showTaskAdded(deadLine, taskList);
+                    return Ui.showTaskAdded(deadLine, taskList);
                 } else if (TIME_VALIDATOR.isValidTime(timeDateArr[0])) {
                     LocalTime formattedTime = LocalTime.parse(timeDateArr[0], TIME_FORMATTER);
                     Deadline deadLine = new Deadline(task, LocalDate.now(), formattedTime, false);
                     taskList.addTask(deadLine);
-                    Ui.showTaskAdded(deadLine, taskList);
+                    return Ui.showTaskAdded(deadLine, taskList);
                 } else {
-                    Ui.throwDeadlineInputError();
+//                    Ui.throwDeadlineInputError();
+                    return Ui.deadlineInputError();
                 }
-
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            Ui.throwDeadlineInputError();
+//            Ui.throwDeadlineInputError();
+            return Ui.deadlineInputError();
         }
+        return null;
     }
 
     /**
@@ -131,10 +133,12 @@ public class AddCommand extends Command {
      * @throws DukeException If details of Event is invalid(i.e. insufficient arguments, argument in incorrect
      *                       format)
      */
-    public static void handleEvent(String reply, TaskList taskList) throws DukeException {
+    public static String handleEvent(String reply, TaskList taskList) throws DukeException {
+        System.out.println(reply);
         String[] taskReplyArr = reply.split("/at ");
         if (taskReplyArr.length < 2) {
-            Ui.throwEventInputError();
+//            Ui.throwEventInputError();
+            return Ui.eventInputError();
         }
         String[] taskInstrArr = taskReplyArr[0].split(" ");
         try {
@@ -152,29 +156,32 @@ public class AddCommand extends Command {
 
                     Event event = new Event(task, formattedDate, formattedTime, false);
                     taskList.addTask(event);
-                    Ui.showTaskAdded(event, taskList);
+                    return Ui.showTaskAdded(event, taskList);
                 } else {
-                    Ui.throwEventInputError();
+//                    Ui.throwEventInputError();
+                    return Ui.eventInputError();
                 }
             } else if (timeDateArr.length == 1) {
                 if (DATE_VALIDATOR.isValidDate(timeDateArr[0])) {
                     LocalDate formattedDate = LocalDate.parse(timeDateArr[0], DATE_FORMATTER);
                     Event event = new Event(task, formattedDate, false);
                     taskList.addTask(event);
-                    Ui.showTaskAdded(event, taskList);
+                    return Ui.showTaskAdded(event, taskList);
                 } else if (TIME_VALIDATOR.isValidTime(timeDateArr[0])) {
                     LocalTime formattedTime = LocalTime.parse(timeDateArr[0], TIME_FORMATTER);
                     Event event = new Event(task, LocalDate.now(), formattedTime, false);
                     taskList.addTask(event);
-                    Ui.showTaskAdded(event, taskList);
+                    return Ui.showTaskAdded(event, taskList);
                 } else {
-                    Ui.throwEventInputError();
+//                    Ui.throwEventInputError();
+                    return Ui.eventInputError();
                 }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            Ui.throwEventInputError();
-
+//            Ui.throwEventInputError();
+            return Ui.eventInputError();
         }
+        return null;
     }
 
     /**
@@ -184,15 +191,20 @@ public class AddCommand extends Command {
      * @param taskList Overall TaskList of all the Tasks
      * @throws DukeException If details of Deadline is invalid(i.e. insufficient arguments)
      */
-    public static void handleTodo(String reply, TaskList taskList) throws DukeException {
-        if (!reply.equals("")) {
-            Todo toDo = new Todo(reply, false);
+    public static String handleTodo(String reply, TaskList taskList) throws DukeException {
+        String[] replyArr = reply.split(" ");
+        String replyWoSpace = "";
+        for(int i = 1; i < replyArr.length; i++) {
+            replyWoSpace += replyArr[i] + " ";
+//            System.out.println(replyWoSpace);
+        }
+        if (!replyWoSpace.equals("")) {
+            Todo toDo = new Todo(replyWoSpace, false);
             taskList.addTask(toDo);
-            Ui.showTaskAdded(toDo, taskList);
+            return Ui.showTaskAdded(toDo, taskList);
         } else {
-            Ui.throwTodoInputError();
+//            Ui.throwTodoInputError();
+            return Ui.todoInputError();
         }
     }
-
-
 }
