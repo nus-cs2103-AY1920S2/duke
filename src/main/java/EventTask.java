@@ -44,7 +44,7 @@ public class EventTask extends Task {
      * @return a String in the form "event TASKDESCRIPTIN / at yyyy-MM-dd / NUMBERtoINDICATEDONE
      */
     public String formatToStore() {
-        String format = "event " + taskDescription + " / at " + this.inputTiming + " /";
+        String format = "event " + taskDescription + " / at " + this.inputTiming.strip() + " /";
         if (isDone) {
             format += " 1";
         } else {
@@ -61,7 +61,10 @@ public class EventTask extends Task {
             taskWords += cross;
         }
         taskWords += " " + taskDescription + " ( at: " + timing.get() + ")";
-
+        taskWords += "\nTAGS: ";
+        for(Tag t : this.getTags()){
+            taskWords += t + ", ";
+        }
         return taskWords;
     }
 }

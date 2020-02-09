@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class Duke {
-
+    private boolean isExiting = false;
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
@@ -20,9 +20,14 @@ public class Duke {
     public String getResponse(String input) {
         Parser parser = new Parser();
         String output = parser.parse(input);
+        this.isExiting = parser.getIsExiting();
+
         assert(!output.isEmpty());
         return output;
     }
 
+    public boolean getIsExiting() {
+        return this.isExiting;
+    }
 
 }

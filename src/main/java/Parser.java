@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Parser {
     private TaskList tasks = new TaskList();
     private ActionHandler actions = new ActionHandler();
+    private boolean isExiting = false;
 
     /**
      * As long as the user hasn't said bye. The parser will continue to read inputs from the user and
@@ -14,9 +15,14 @@ public class Parser {
     public String parse(String input) {
         Action currentAction = actions.decideAction(input);
         String myResponse = currentAction.doSomething(tasks);
+        this.isExiting = !currentAction.hasNextAction();
 
         tasks.saveToDisk();
 
         return myResponse;
+    }
+
+    public boolean getIsExiting(){
+        return this.isExiting;
     }
 }

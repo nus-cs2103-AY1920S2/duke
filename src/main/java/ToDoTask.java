@@ -6,6 +6,9 @@ public class ToDoTask extends Task {
     public ToDoTask(String task) {
         this.task = task;
         //breaks down the taskDescription and adds all words individually to the Hashset
+        if(this.task.isEmpty()){
+            System.err.println("Todo task description cannot be empty");
+        }
         Scanner taskDesc = new Scanner(task);
         while (taskDesc.hasNext()) {
             String keyword = taskDesc.next();
@@ -36,6 +39,10 @@ public class ToDoTask extends Task {
             taskWords += cross;
         }
         taskWords += " " + task;
+        taskWords += "\nTAGS: ";
+        for(Tag t : this.getTags()){
+            taskWords += t + ", ";
+        }
 
         return taskWords;
     }

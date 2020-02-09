@@ -52,11 +52,22 @@ public class ActionHandler {
             try {
                 keyword = sc.next();
             } catch (NoSuchElementException e) {
-
+                System.out.println("Ketword cannot be empty");
             }
             myAction = new findAction(keyword);
             break;
+        case "tag":
+            String tagDescription;
+            try{
+                tagDescription = sc.next();
+            } catch (NoSuchElementException e){
+                System.out.println("Tag description cannot be empty");
+                break;
+            }
+            int tagIndex = sc.nextInt();
+            myAction = new tagAction(tagIndex, tagDescription);
         }
+
 
         for (allowedTask a : allowedTask.values()) {
             if (a.toString().equals(command)) {

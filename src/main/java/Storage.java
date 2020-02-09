@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Storage {
     //private static Path defaultPath = Paths.get("src", "main", "java", "src" , "taskStore.txt");
-
+    private static final String NEXT_TASK_TAG = "NEXT_TASK";
     /**
      * Attempts to store a list of tasks into a txt file.
      *
@@ -19,10 +19,18 @@ public class Storage {
      */
     public static void storeIntoFile(List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter("src/taskStore.txt");
+        FileWriter tagWriter =  new FileWriter("src/tagStore.txt");
         for (Task task : tasks) {
             fw.write(task.formatToStore() + "\n");
+            String tagToStore = "";
+            for(Tag t : task.getTags()){
+               tagToStore += t.toString() + "\n";
+            }
+            tagToStore += NEXT_TASK_TAG + "\n";
+            tagWriter.write(tagToStore);
         }
         fw.close();
+        tagWriter.close();
 
     }
 
@@ -37,7 +45,9 @@ public class Storage {
 
         try {
             File f = new File("src/taskStore.txt");
+            File tagFile = new File("src/tagStore.txt");
             Scanner s1 = new Scanner(f);
+            Scanner tagScan = new Scanner(tagFile);
             while (s1.hasNext()) {
                 String taskDes = s1.nextLine();
                 Scanner s2 = new Scanner(taskDes);
@@ -45,6 +55,7 @@ public class Storage {
                 String taskDescription = s2.nextLine();
                 try {
                     Task currentTask = TaskHandler.parseFromFile(taskType, taskDescription);
+                    Storage.readTags(currentTask, tagScan);
                     tasks.add(currentTask);
                 } catch (InvalidInputException e) {
                     System.out.println("Cannot parse from text file");
@@ -54,6 +65,14 @@ public class Storage {
             System.out.println("File unable to be found");
         }
         return tasks;
+    }
+
+    public static void readTags(Task myTask, Scanner sc){
+        String nextLine = sc.nextLine();
+        while(!nextLine.equals(NEXT_TASK_TAG)){
+            myTask.addTag(nextLine);
+            nextLine = sc.nextLine();
+        }
     }
 
 

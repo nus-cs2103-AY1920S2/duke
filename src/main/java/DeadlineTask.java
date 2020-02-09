@@ -43,7 +43,7 @@ public class DeadlineTask extends Task {
      * @return a String of the form "deadline NAME / by yyyy-MM-dd / NUMBER indicating whether the task is done
      */
     public String formatToStore() {
-        String format = "deadline " + taskDescription + " / by " + inputDeadline + " /";
+        String format = "deadline " + taskDescription + " / by " + inputDeadline.strip() + " /";
         if (isDone) {
             format += " 1";
         } else {
@@ -59,7 +59,11 @@ public class DeadlineTask extends Task {
         } else {
             taskWords += cross;
         }
-        taskWords += " " + taskDescription + " ( by: " + deadline.get() + ")";
+        taskWords += " " + taskDescription + " ( by: " + deadline.get() + ")\n";
+        taskWords += "TAGS: ";
+        for(Tag t : this.getTags()){
+            taskWords += t + ", ";
+        }
 
         return taskWords;
     }
