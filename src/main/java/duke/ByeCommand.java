@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * The type Bye command.
+ */
 public class ByeCommand implements Command {
 
     @Override

@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * The type List command.
+ */
 public class ListCommand implements Command {
 
     @Override

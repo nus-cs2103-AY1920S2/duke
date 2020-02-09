@@ -3,7 +3,16 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The type Main.
+ */
 public class Main {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws DukeException the duke exception
+     */
     public static void main(String[] args) throws DukeException{
 
         Scanner sc = new Scanner(System.in);

@@ -1,13 +1,28 @@
 package duke;
 
+/**
+ * The type Parser.
+ */
 public class Parser {
 
     private Ui ui;
 
+    /**
+     * Instantiates a new Parser.
+     *
+     * @param ui the ui
+     */
     public Parser(Ui ui) {
         this.ui = ui;
     }
 
+    /**
+     * Parses command given by the user.
+     *
+     * @param command the command
+     * @return the command
+     * @throws DukeException the duke exception
+     */
     public Command parseCommand(String command) throws DukeException {
         if (command.contains("deadline")) {
             return new AddCommand();

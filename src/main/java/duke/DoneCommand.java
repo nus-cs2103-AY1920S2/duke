@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * The type Done command.
+ */
 public class DoneCommand implements Command {
     @Override
     public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {

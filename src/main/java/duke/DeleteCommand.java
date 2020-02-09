@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * The type Delete command.
+ */
 public class DeleteCommand implements Command {
 
     @Override

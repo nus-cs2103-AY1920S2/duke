@@ -1,10 +1,25 @@
 package duke;
 
+/**
+ * The type Deadline.
+ */
 public class Deadline extends Task {
 
+    /**
+     * The Date and time.
+     */
     DateAndTime dateAndTime;
+    /**
+     * The Date.
+     */
     protected String date;
 
+    /**
+     * Instantiates a new Deadline.
+     *
+     * @param description the description
+     * @param date        the date
+     */
     public Deadline(String description, String date) {
         super(description);
         this.date = date;

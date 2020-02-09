@@ -9,12 +9,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * The type Storage.
+ */
 public class Storage {
 
+    /**
+     * The File path.
+     */
     String filePath = "data/duke.txt";
+    /**
+     * The Date input.
+     */
     SimpleDateFormat dateInput = new SimpleDateFormat("dd MMM yyyy");
+    /**
+     * The Date output.
+     */
     SimpleDateFormat dateOutput = new SimpleDateFormat("yyyy-MM-dd");
 
+    /**
+     * Loads file.
+     *
+     * @param myList the my list
+     */
     public void loadFile(MyList myList) {
         try {
             File file = new File(filePath);
@@ -54,6 +71,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves to file.
+     *
+     * @param string the string
+     * @throws IOException the io exception
+     */
     public void saveToFile(String string) throws IOException {
         File file = new File(filePath);
         FileWriter fileWriter = new FileWriter(file, true);
@@ -61,6 +84,12 @@ public class Storage {
         fileWriter.close();
     }
 
+    /**
+     * Saves the file upon using the bye command on duke.
+     *
+     * @param list the list
+     * @throws IOException the io exception
+     */
     public void newSave(MyList list) throws IOException {
         File file = new File(filePath);
         FileWriter fileWriter = new FileWriter(file, false);
