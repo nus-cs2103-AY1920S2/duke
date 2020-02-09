@@ -80,7 +80,7 @@ public class Ui {
      * @param keyword keyword to find.
      */
     public String printTasksFound(ArrayList<Task> taskList, String keyword) {
-        strToReturn = "I have found these matching items from your task list:";
+        strToReturn = "I have found these matching items from your task list:\n";
         for (Task task : taskList) {
             if (task.getCommand().contains(keyword)) {
                 strToReturn = strToReturn + task + "\n";
