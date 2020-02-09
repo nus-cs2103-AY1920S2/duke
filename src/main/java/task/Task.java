@@ -36,6 +36,8 @@ public class Task {
                 return new Event(typeLess);
             case "deadline":
                 return new Deadline(typeLess);
+            case "period":
+                return new PeriodTask(typeLess);
             default:
                 throw new DukeException("Task not recognized");
         }
@@ -58,6 +60,8 @@ public class Task {
                 return new Event(splitEntry);
             case "[D]":
                 return new Deadline(splitEntry);
+            case "[P]":
+                return new PeriodTask(splitEntry);
             default:
                 throw new DukeException("Task not recognized");
         }

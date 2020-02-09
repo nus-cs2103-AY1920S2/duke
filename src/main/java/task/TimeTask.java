@@ -9,8 +9,10 @@ public class TimeTask extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
-    public TimeTask(String type, String description) throws DukeException {
+    public TimeTask(String type, String description, String dateTime) throws DukeException {
         super(type, Parser.getContent(description));
+        this.time = Parser.getTime(dateTime);
+        this.date = Parser.getDate(dateTime);
     }
 
     public TimeTask(String type, String[] fromMemory) {

@@ -6,9 +6,10 @@ import parser.Parser;
 
 public class Deadline extends TimeTask {
     public Deadline(String description) throws DukeException {
-        super(Constant.DEADLINE.getType(), description);
-        this.time = Parser.getTime(description, Constant.DEADLINE.getTimeDelimiter());
-        this.date = Parser.getDate(description, Constant.DEADLINE.getTimeDelimiter());
+        super(
+                Constant.DEADLINE.getType(),
+                description,
+                Parser.getDateTime(description, Constant.DEADLINE.getTimeDelimiter()));
     }
 
     public Deadline(String[] fromMemory) {

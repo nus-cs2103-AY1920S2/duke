@@ -8,16 +8,23 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import task.Constant;
 
 public class Parser {
-    private static String[] taskTypes = {"todo", "event", "deadline"};
-
     /**
      * @param input raw input
      * @return Boolean returns true if input is a done/delete command
      * @throws DukeException if user input matches a done/delete command but it not properly
      *     formatted
      */
+    private static String[] timeRegex = {
+        "H:m", "Hmm", "H.m", "h.m a", "h.m a", "h:m a", "h:m a", "hmm a", "hmma", "h a", "ha", "H"
+    };
+
+    private static String[] dateRegex = {
+        "ddMMyyyy", "yyyyMMdd", "d-M-yyyy", "d/M/yyyy", "yyyy-M-d", "yyyy/M/d"
+    };
+
     public static Boolean isDoneDelete(String input) throws DukeException {
         if (Pattern.matches(
                 "(^(done|delete)\\s+.*|(.*\\s+(done|delete)\\s+.*)|.*\\s+(done|delete)$)", input)) {
@@ -60,7 +67,7 @@ public class Parser {
      */
     public static String getType(String input) throws DukeException {
         String lowerCaseInput = input.toLowerCase();
-        String acceptedTypes = String.format("(%s)", String.join("|", Parser.taskTypes));
+        String acceptedTypes = String.format("(%s)", String.join("|", Constant.taskTypes));
         if (Pattern.matches(
                 String.format(
                         "^%s\\s+.*|.*\\s+%s$|.*\\s+%s\\s+.*",
@@ -110,16 +117,35 @@ public class Parser {
         return dateTime;
     }
 
+    public static String[] getStartEndDateTime(String description, String regex1, String regex2)
+            throws DukeException {
+        Matcher matcher = Pattern.compile(regex1).matcher(description);
+        int index = matcher.find() ? matcher.start() : -1;
+        Matcher matcher2 = Pattern.compile(regex2).matcher(description);
+        int index2 = matcher2.find() ? matcher2.start() : -1;
+        if (index == -1 || index2 == -1) {
+            throw new DukeException(
+                    String.format("Please provide %s and %s for this event type", regex1, regex2));
+        }
+        String dateTime = description.substring(index + regex1.length(), index2).trim();
+        String dateTime2 = description.substring(index2 + regex2.length()).trim();
+
+        if (dateTime.length() == 0 || dateTime2.length() == 0)
+            throw new DukeException("Please provide a time");
+        String returnResult[] = {dateTime, dateTime2};
+        return returnResult;
+    }
+
     /**
      * @param description input without type
      * @param regex varies on whether it is event or deadline (/at or /by)
      * @return LocalTime turn String time to LocalTime
      * @throws DukeException if time input is poorly formatted
      */
-    public static LocalTime getTime(String description, String regex) throws DukeException {
+    public static LocalTime getTime(String dateTime) throws DukeException {
         String time;
         try {
-            String[] split = getDateTime(description, regex).split(" ");
+            String[] split = dateTime.split(" ");
             time =
                     String.join(" ", Arrays.copyOfRange(split, 1, split.length))
                             .trim()
@@ -129,12 +155,8 @@ public class Parser {
                     String.format(
                             "Missing time/date information %n please provide date then time separated by a space"));
         }
-        String[] timeRegex = {
-            "H:m", "Hmm", "H.m", "h.m a", "h.m a", "h:m a", "h:m a", "hmm a", "hmma", "h a", "ha",
-            "H"
-        };
 
-        for (String pattern : timeRegex) {
+        for (String pattern : Parser.timeRegex) {
             try {
                 return LocalTime.parse(time, DateTimeFormatter.ofPattern(pattern));
             } catch (DateTimeParseException err) {
@@ -150,12 +172,9 @@ public class Parser {
      * @return LocalDate turn String date to LocalDate
      * @throws DukeException if date input is poorly formatted
      */
-    public static LocalDate getDate(String description, String regex) throws DukeException {
-        String date = getDateTime(description, regex).split(" ")[0].trim();
-        String[] dateRegex = {
-            "ddMMyyyy", "yyyyMMdd", "d-M-yyyy", "d/M/yyyy", "yyyy-M-d", "yyyy/M/d"
-        };
-        for (String pattern : dateRegex) {
+    public static LocalDate getDate(String dateTime) throws DukeException {
+        String date = dateTime.split(" ")[0].trim();
+        for (String pattern : Parser.dateRegex) {
             try {
                 return LocalDate.parse(date, DateTimeFormatter.ofPattern(pattern));
             } catch (DateTimeParseException err) {
