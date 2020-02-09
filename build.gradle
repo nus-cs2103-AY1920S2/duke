@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-group 'seedu.duke'
+group 'lcduke.Duke'
 version '0.1.0'
 
 repositories {
