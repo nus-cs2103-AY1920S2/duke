@@ -74,6 +74,7 @@ public class TaskList {
      * @return Size of the task list.
      */
     public int size() {
+        assert taskList.size() < 0 : "List error";
         return taskList.size();
     }
 
