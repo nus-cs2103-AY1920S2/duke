@@ -13,16 +13,19 @@ public class Ui {
     /**
      * Welcome message.
      */
-    public static void showWelcome() {
+    public static String showWelcome() {
         System.out.println("Hello from\n" + logo + "\n I am at your service\n" + botReplyLine);
+        return ("Hello! I am at your service");
     }
 
     /**
      * Goodbye message.
      */
-    public static void goodbyeMessage() {
+    public static String goodbyeMessage() {
         System.out.println(botReplyLine + "\n Duke: I'll say goodnight now \n" + botReplyLine);
+        return ("I'll say goodnight now");
     }
+
 
     /**
      * Shows ---------------------.
@@ -34,10 +37,11 @@ public class Ui {
     /**
      * Message when TaskList is empty.
      */
-    public static void emptyList() {
+    public static String emptyList() {
         showLine();
         System.out.println("You currently do not have anything in your list");
         showLine();
+        return ("You currently do not have anything in your list");
     }
 
     /**
@@ -46,22 +50,23 @@ public class Ui {
      * @param taskList   Current TaskList
      * @param taskNumber Specified task number in TaskList
      */
-    public static void doneTask(TaskList taskList, int taskNumber) {
+    public static String doneTask(TaskList taskList, int taskNumber) {
         showLine();
         System.out.println("Consider it done.");
         taskList.getTask(taskNumber).doneTask();
         System.out.println(taskList.getTask(taskNumber).toString());
         showLine();
+        return ("Consider it done.\n" + taskList.getTask(taskNumber).toString());
     }
 
     /**
      * Message when invalid task number specified.
      */
-    public static void invalidTask() {
+    public static String invalidTask() {
         showLine();
         System.out.println("Invalid task number.");
         showLine();
-
+        return ("Invalid task number");
     }
 
     /**
@@ -70,12 +75,14 @@ public class Ui {
      * @param taskList   Current TaskList.
      * @param taskNumber Task number to be deleted from Task List.
      */
-    public void deletedTask(TaskList taskList, int taskNumber) {
+    public static String deletedTask(TaskList taskList, int taskNumber) {
         showLine();
         System.out.println("Consider it deleted.");
         System.out.println(taskList.getTask(taskNumber).toString());
+        String taskToBeDeleted = taskList.getTask(taskNumber).toString();
         taskList.deleteTask(taskNumber);
-        taskInList(taskList.getTaskListSize());
+        String tasksInList = taskInList(taskList.getTaskListSize());
+        return ("Consider it deleted. \n" + taskToBeDeleted + "\n"+ tasksInList);
     }
 
     /**
@@ -84,7 +91,7 @@ public class Ui {
      * @return Message of missing task number.
      */
     public static String missingTaskNumber() {
-        return botReplyLine + "\n Missing task number \n" + botReplyLine;
+        return "Missing task number.";
     }
 
     /**
@@ -94,7 +101,7 @@ public class Ui {
      * @return Message of incomplete command.
      */
     public static String incompleteCommand(String str) {
-        return botReplyLine + "\n" + str + " not complete \n" + botReplyLine;
+        return str + "not complete";
     }
 
     /**
@@ -103,15 +110,16 @@ public class Ui {
      * @return Message of invalid command.
      */
     public static String invalidCommand() {
-        return botReplyLine + " \n Sorry I do not understand. \n" + botReplyLine;
+        return "Sorry I do not understand.";
     }
 
     /**
      * Message when task is added.
      */
-    public static void addedCommand() {
+    public static String addedCommand() {
         showLine();
         System.out.println("Duke: added your command. \n");
+        return "Ooooh yeah! Can do!";
 
     }
 
@@ -120,9 +128,10 @@ public class Ui {
      *
      * @param listSize number of tasks in TaskList
      */
-    public static void taskInList(int listSize) {
+    public static String taskInList(int listSize) {
         System.out.println("You have " + listSize + " task(s) in your list.");
         showLine();
+        return "You have"  + listSize + " task(s) in your list.";
     }
 
     /**
@@ -131,13 +140,16 @@ public class Ui {
      * @param taskList TaskList provided.
      * @param sb       StringBuilder object.
      */
-    public static void listCommand(TaskList taskList, StringBuilder sb) {
+    public static String listCommand(TaskList taskList, StringBuilder sb) {
+        StringBuilder botReplySb = new StringBuilder();
         showLine();
         for (int i = 0; i < taskList.getTaskListSize(); i++) {
-            System.out.println(i + 1 + ". " + taskList.getTask(i).toString());
+            botReplySb.append(i + 1 + ". " + taskList.getTask(i).toString() + "\n");
+//            System.out.println(i + 1 + ". " + taskList.getTask(i).toString());
             sb.append(taskList.getTask(i).saveToList() + "\n");
         }
         showLine();
+        return botReplySb.toString();
     }
 
 

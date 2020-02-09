@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    public ArrayList<Task> tasks = (ArrayList<Task>)new ArrayList<Task>();
+    public ArrayList<Task> tasks = new ArrayList<Task>();
 
     /**
      * Constructor for TaskList.
@@ -57,7 +57,7 @@ public class TaskList {
      * @param description Task description to find task in TaskList.
      */
     public void findTask(String description) {
-        ArrayList<Task> foundTasks = (ArrayList<Task>)new ArrayList<Task>();
+        ArrayList<Task> foundTasks = new ArrayList<Task>();
         for (Task task : tasks) {
             if (task.description.contains(description)) {
                 foundTasks.add(task);
