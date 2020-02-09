@@ -1,7 +1,7 @@
 import duke.Deadline;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTest {
     String description = "desc";
@@ -10,7 +10,7 @@ class DeadlineTest {
 
     @Test
     void createdIncompleteTest() {
-        assertEquals(deadline.isDone, false, "deadline is initialized to incomplete");
+        assertEquals(deadline.isDone(), false, "deadline is initialized to incomplete");
     }
 
     @Test

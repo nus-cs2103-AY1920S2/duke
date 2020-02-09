@@ -8,7 +8,7 @@ class TodoTest {
 
     @Test
     void createdIncompleteTest() {
-        assertEquals(todo.isDone, false, "duke.Todo is initialized to incomplete");
+        assertEquals(todo.isDone(), false, "duke.Todo is initialized to incomplete");
     }
 
     @Test
