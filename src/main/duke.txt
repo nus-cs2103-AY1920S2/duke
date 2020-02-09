@@ -3,3 +3,6 @@
 [T]=[x]=hello
 [T]=[x]=sadsa
 [T]=[x]=helloworld
+[T]=[x]=slap 
+[T]=[x]=hello shaopeng
+[T]=[o]=slap shaopeng
