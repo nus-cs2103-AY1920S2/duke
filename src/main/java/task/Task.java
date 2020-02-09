@@ -1,6 +1,8 @@
 package task;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Timer;
 
 public class Task implements Serializable {
     protected String description;
@@ -29,5 +31,21 @@ public class Task implements Serializable {
 
     public String getFullDetail(Integer i) {
         return "";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Task task = (Task) obj;
+        return task.description == this.description;
+    }
+
+    public void setUpTimer(HashMap<String, Timer> taskTimerMapping) throws Exception {
+        return;
     }
 }

@@ -16,7 +16,9 @@ public class PersistentStorageObserver implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
-        ArrayList<Task> newTasks = (ArrayList<Task>) event.getNewValue();
-        FileUtility.save((Object) newTasks, "../../../tasks.tmp");
+        if (event.getPropertyName().equals("tasks updated")) {
+            ArrayList<Task> newTasks = (ArrayList<Task>) event.getNewValue();
+            FileUtility.save((Object) newTasks, "../../../tasks.tmp");
+        }
     }
 }

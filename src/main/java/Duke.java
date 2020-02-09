@@ -1,5 +1,6 @@
 import collection.TaskCollection;
 import storage.PersistentStorageObserver;
+import service.ReminderObserver;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -31,6 +32,7 @@ public class Duke extends Application {
     static String terminateCommand = "bye";
     static TaskCollection taskCollection = new TaskCollection();
     static PersistentStorageObserver persistentStorageObserver = new PersistentStorageObserver(taskCollection);
+    static ReminderObserver reminderObserver = new ReminderObserver(taskCollection);
     // Use a hashmap to store command key to prevent developer error in typing command keys across different functions
     static HashMap<String, Integer> commandCodeMapping = new HashMap<String, Integer>() {
         {
@@ -88,17 +90,13 @@ public class Duke extends Application {
                 taskCollection.add(todo);
                 output = output + "ADD " + todo.getFullDetail(0) + "\n";
             } else if (commandCode == commandCodeMapping.get("deadline")) {
-                String deadlineContent = command.split(" ", 2)[1];
-                String deadlineDesc = deadlineContent.split("/by")[0];
-                String deadlineTime = deadlineContent.split("/by")[1];
-                Task deadline = new Deadline(deadlineDesc, deadlineTime);
+                ArrayList<String> parsedParams = commandParser.parseTaskDescTime(command, "/by");
+                Task deadline = new Deadline(parsedParams.get(0), parsedParams.get(1), parsedParams.get(2));
                 taskCollection.add(deadline);
                 output = output + "ADD " + deadline.getFullDetail(0) + "\n";
             } else if (commandCode == commandCodeMapping.get("event")) {
-                String eventContent = command.split(" ", 2)[1];
-                String eventDesc = eventContent.split("/at")[0];
-                String eventTime = eventContent.split("/at")[1];
-                Task event = new Event(eventDesc, eventTime);
+                ArrayList<String> parsedParams = commandParser.parseTaskDescTime(command, "/by");
+                Task event = new Event(parsedParams.get(0), parsedParams.get(1), parsedParams.get(2));
                 taskCollection.add(event);
                 output = output + "ADD " + event.getFullDetail(0) + "\n";
             } else if (commandCode == commandCodeMapping.get("invalid command")) {

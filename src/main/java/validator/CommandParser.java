@@ -3,6 +3,9 @@ package validator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.time.LocalTime;
 
 public class CommandParser {
     public HashMap<String, Integer> commandCodeMapping;
@@ -22,6 +25,7 @@ public class CommandParser {
         try {
             String firstCommandType = command.split(" ")[0];
             String[] commandSplit = command.split(" ");
+            System.out.println(LocalTime.now());
             if (command.equals("list")) {
                 return this.commandCodeMapping.get("list");
             } else if (firstCommandType.equals("done") && commandSplit.length == 2) {
@@ -35,14 +39,15 @@ public class CommandParser {
                 if (taskType.equals("todo")) {
                     return this.commandCodeMapping.get("todo");
                 } else {
-                    String content = command.split(" ", 2)[1];
                     if (taskType.equals("deadline")) {
-                        String time = content.split("/by")[1];
-                        LocalDate.parse(time.trim(), DateTimeFormatter.BASIC_ISO_DATE);
+                        ArrayList<String> parsedParams = parseTaskDescTime(command, "/by");
+                        LocalDate.parse(parsedParams.get(1).trim(), DateTimeFormatter.BASIC_ISO_DATE);
+                        LocalTime.parse(parsedParams.get(2).trim(), DateTimeFormatter.ISO_TIME);
                         return this.commandCodeMapping.get("deadline");
                     } else if (taskType.equals("event")) {
-                        String time = content.split("/at")[1];
-                        LocalDate.parse(time.trim(), DateTimeFormatter.BASIC_ISO_DATE);
+                        ArrayList<String> parsedParams = parseTaskDescTime(command, "/at");
+                        LocalDate.parse(parsedParams.get(1).trim(), DateTimeFormatter.BASIC_ISO_DATE);
+                        LocalTime.parse(parsedParams.get(2).trim(), DateTimeFormatter.ISO_TIME);
                         return this.commandCodeMapping.get("event");
                     }
                 }
@@ -51,6 +56,15 @@ public class CommandParser {
             return this.commandCodeMapping.get("invalid command");
         }
         return this.commandCodeMapping.get("invalid command");
+    }
+
+    public ArrayList<String> parseTaskDescTime(String command, String seperator) {
+        String content = command.split(" ", 2)[1];
+        String desc = content.split(seperator)[0];
+        String dayTime = content.split(seperator)[1].trim();
+        String day = dayTime.split(" ")[0];
+        String time = dayTime.split(" ")[1];
+        return new ArrayList<String>(Arrays.asList(desc, day, time));
     }
 
 }

@@ -47,9 +47,9 @@ public class TaskCollection {
      * @param task object
      */
     public void add(Task task) {
-        ArrayList<Task> oldTasks = this.tasks;
+        ArrayList<Task> oldTasks = new ArrayList<Task>(this.tasks);
         this.tasks.add(task);
-        notifyListeners(this, "add", oldTasks, this.tasks);
+        notifyListeners(this, "tasks updated", oldTasks, this.tasks);
     }
 
     /**
@@ -57,9 +57,9 @@ public class TaskCollection {
      * @param taskIndex index of removed task
      */
     public void remove(Integer taskIndex) {
-        ArrayList<Task> oldTasks = this.tasks;
+        ArrayList<Task> oldTasks = new ArrayList<Task>(this.tasks);
         this.tasks.remove(taskIndex.intValue());
-        notifyListeners(this, "remove", oldTasks, this.tasks);
+        notifyListeners(this, "tasks updated", oldTasks, this.tasks);
     }
 
     /**
