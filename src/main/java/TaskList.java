@@ -1,3 +1,4 @@
+import java.io.InvalidClassException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,8 +55,43 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Completes the task specified by the index.
+     *
+     * @param index the index of the task to be completed.
+     * @return the completed task
+     */
+    public Task snoozeTask(int index, String time) throws InvalidClassException {
+        // check whether the index is within bounds
+        assert index >= 0;
+        assert index < tasks.size();
+
+        Task task = tasks.get(index);
+        if (task.isSnoozeable()) {
+            Task snoozedTask = task.snooze(time);
+            tasks.set(index, snoozedTask);
+            return snoozedTask;
+        } else {
+            throw new InvalidClassException("Task not snoozeable");
+        }
+    }
+
     public List<Task> getAllTasks() {
         return tasks;
+    }
+
+    /**
+     * Returns the task at the given index.
+     *
+     * @param index the index of the task to be retrieved
+     * @return the task at the index
+     */
+    public Task getTask(int index) {
+        // check whether index is within bounds
+        assert index >= 0;
+        assert index < tasks.size();
+
+        return tasks.get(index);
     }
 
     /**
