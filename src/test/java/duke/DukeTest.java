@@ -26,6 +26,10 @@ public class DukeTest {
         String filePath = "tasks_test.txt";
         String actual = storage.readAllBytes(filePath);
         String expected = "T|X|sleep 100 years\n";
+
+        System.out.println("Actual: " + actual);
+        System.out.println("Expected: " + expected);
+
         assertEquals(expected, actual);
     }
 
@@ -48,6 +52,10 @@ public class DukeTest {
         String actual = storage.readAllBytes(filePath);
         String expected = "T|V|sleep 100 years\n" +
                 "E|X|fireworks|12 Oct. 2019 20:00HRS to 12 Oct. 2019 21:00HRS\n";
+
+        System.out.println("Actual: " + actual);
+        System.out.println("Expected: " + expected);
+
         assertEquals(expected, actual);
     }
 
@@ -71,6 +79,10 @@ public class DukeTest {
         String expected = "T|X|study 24 hours\n" +
                 "D|V|get six packs|29 Feb. 2020 09:00HRS\n" +
                 "E|X|holidaysss|01 May 2020 20:00HRS to 01 Aug. 2019 21:00HRS\n";
+
+        System.out.println("Actual: " + actual);
+        System.out.println("Expected: " + expected);
+
         assertEquals(expected, actual);
     }
 
@@ -105,6 +117,10 @@ public class DukeTest {
                 "Here are the matching tasks in your list:\n" +
                 "1.[D][X] get six packs (by: 29 Feb. 2020 09:00HRS)\n" +
                 "2.[E][X] holidaysss (at: 01 May 2020 20:00HRS to 01 Aug. 2020 20:00HRS)\n";
+
+        System.out.println("Actual: " + actual);
+        System.out.println("Expected: " + expected);
+
         assertEquals(expected, actual);
     }
 
@@ -140,6 +156,10 @@ public class DukeTest {
                 "1.[T][X] study 24 hours\n" +
                 "2.[D][X] get six packs (by: 29 Feb. 2020 09:00HRS)\n" +
                 "3.[E][V] holidaysss (at: 01 May 2020 20:00HRS to 01 Aug. 2020 20:00HRS)\n";
+
+        System.out.println("Actual: " + actual);
+        System.out.println("Expected: " + expected);
+
         assertEquals(expected, actual);
     }
 
@@ -161,6 +181,10 @@ public class DukeTest {
 
         String actual = outputString.toString();
         String expected = "List of available commands: todo, event, deadline, list, find, done, delete, bye\n";
+
+        System.out.println("Actual: " + actual);
+        System.out.println("Expected: " + expected);
+        
         assertEquals(expected, actual);
     }
 }
