@@ -1,0 +1,4 @@
+TODO^_^0^_^todo
+DEADLINE^_^0^_^deadline^_^08/02/2020 1800
+EVENT^_^1^_^event^_^03/02/2020 1800 to 04/02/2020 1800
+DEADLINE^_^0^_^deadline^_^20/02/2020 1800

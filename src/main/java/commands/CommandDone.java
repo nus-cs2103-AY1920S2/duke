@@ -32,7 +32,7 @@ public class CommandDone implements Command {
             e.printStackTrace();
         }
 
-        String output = String.format("%s\n%s\n", "Great job on being productive! I've marked the following task as "
+        String output = String.format("%s\n%s\n\n", "Great job on being productive! I've marked the following task as "
                 + "completed:",
                 selectedTask.toString());
 

@@ -43,7 +43,6 @@ public class CommandListOn implements Command {
 
             return output;
         } catch (Exception e) {
-            e.printStackTrace();
             throw new DukeException("You've entered an incorrect date! Please follow this format: liston dd/MM/yyyy");
         }
 

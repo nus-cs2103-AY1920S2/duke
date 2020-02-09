@@ -62,6 +62,9 @@ public class Parser {
             checkFindFormat(input);
             command = Commander.createCommand(CommandType.FIND);
             break;
+        case "stats":
+            command = Commander.createCommand(CommandType.STATS);
+            break;
         default:
             command = Commander.createCommand(CommandType.INVALID);
         }

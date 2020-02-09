@@ -44,6 +44,9 @@ public class Commander {
         case FIND:
             command = new CommandFind();
             break;
+        case STATS:
+            command = new CommandStats();
+            break;
         default:
             command = new CommandInvalid();
         }
