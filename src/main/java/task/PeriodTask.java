@@ -3,14 +3,13 @@ package task;
 import exception.DukeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import parser.Parser;
 
-//TODO edit getDescription for PeriodTask
-
 public class PeriodTask extends TimeTask {
     protected LocalDate endDate;
-    protected LocalTime endTime;
+    protected LocalTime endTime; 
 
     public PeriodTask(String description) throws DukeException {
         super(
@@ -26,6 +25,12 @@ public class PeriodTask extends TimeTask {
             Constant.PERIODTASK.getEndTimeDelimiter());
         this.endDate = Parser.getDate(dateTimes[1]);
         this.endTime = Parser.getTime(dateTimes[1]);
+        LocalDateTime start = LocalDateTime.of(this.date, this.time);
+        LocalDateTime end = LocalDateTime.of(this.endDate, this.endTime);
+
+        if (end.isBefore(start)) {
+            throw new DukeException("End dates and time must be after start dates and time");
+        }
     }
 
     public PeriodTask(String[] fromMemory) {
