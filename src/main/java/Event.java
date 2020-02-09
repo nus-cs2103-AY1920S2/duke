@@ -28,7 +28,6 @@ public class Event extends Task {
      *
      * @return information about the task.
      */
-    @Override
     public String updateFile() {
         return "E - " + getDoneInt() + " - " + getCommand() + " - " + timing;
     }

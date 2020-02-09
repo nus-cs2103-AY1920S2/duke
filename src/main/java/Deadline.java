@@ -61,7 +61,6 @@ public class Deadline extends Task {
      *
      * @return information about the task.
      */
-    @Override
     public String updateFile() {
         return "D - " + getDoneInt() + " - " + getCommand() + " - " + getDeadlineDateAndTime();
     }

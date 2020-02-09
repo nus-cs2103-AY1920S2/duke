@@ -1,7 +1,7 @@
 /**
  * A Task object can be a Todo task, a Deadline task or a Event task.
  */
-public class Task {
+public abstract class Task {
     protected String command;
     protected boolean isDone;
 
@@ -43,7 +43,15 @@ public class Task {
         return command;
     }
 
-    protected String updateFile() {
-        return null;
+    /**
+     * Returns whether the task is marked done in int form instead of symbol form, to be displayed in the file
+     * saved in hard disk.
+     *
+     * @return 1 if task is marked done, or 0 if the task is marked undone.
+     */
+    public int getDoneInt() {
+        return isDone() ? 1 : 0;
     }
+
+    public abstract String updateFile();
 }

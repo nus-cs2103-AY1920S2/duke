@@ -66,7 +66,7 @@ public class Storage {
         }
     }
 
-    public void updateFile() throws IOException {
+    public void updateHD() throws IOException {
         // update task list before exiting
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         for (Task task: taskList) {

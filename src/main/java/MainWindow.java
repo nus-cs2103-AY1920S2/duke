@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
         if (input.equals("bye")) {
-            duke.getStorage().updateFile();
+            duke.getStorage().updateHD();
             Stage stage = (Stage) sendButton.getScene().getWindow();
             stage.close();
         }
