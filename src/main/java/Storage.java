@@ -19,10 +19,6 @@ public class Storage {
         this.taskList = new ArrayList<>();
     }
 
-    public File getFile() {
-        return file;
-    }
-
     /**
      * Returns task list stored in file on hard disk or throw an exception and create a new file to store task list.
      *
@@ -35,33 +31,8 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = br.readLine();
             while (line != null) {
-                String[] strArr = line.split(" - ");
-                switch (strArr[0]) {
-                case "T":
-                    Todo newTodoTask = new Todo(strArr[2]);
-                    taskList.add(newTodoTask);
-                    if (strArr[1].equals("1")) {
-                        newTodoTask.setDone();
-                    }
-                    break;
-                case "D":
-                    String[] deadlineArr = strArr[3].split(" ", 2);
-                    Deadline newDeadlineTask = new Deadline(strArr[2], deadlineArr[0], deadlineArr[1]);
-                    taskList.add(newDeadlineTask);
-                    if (strArr[1].equals("1")) {
-                        newDeadlineTask.setDone();
-                    }
-                    break;
-                case "E":
-                    Event newEventTask = new Event(strArr[2], strArr[3]);
-                    taskList.add(newEventTask);
-                    if (strArr[1].equals("1")) {
-                        newEventTask.setDone();
-                    }
-                    break;
-                default:
-                    break;
-                }
+                Parser dummyParser = new Parser(taskList);
+                dummyParser.loadText(line);
                 line = br.readLine();
             }
             return taskList;
