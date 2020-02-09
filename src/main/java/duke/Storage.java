@@ -29,6 +29,7 @@ public class Storage {
         // populate array with lines from file
         // create empty file if file does not exist
         File file = new File(filePath);
+        file.getParentFile().mkdirs();
         if (!file.createNewFile()) {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
