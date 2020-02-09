@@ -1,8 +1,18 @@
-package duke;
-
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Duke class represents a chatbot that keeps tracks of tasks.
@@ -23,6 +33,14 @@ public class Duke {
      * This is the main class.
      * @param args args
      */
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+
     public static void main(String[] args) {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
@@ -56,4 +74,13 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
 }

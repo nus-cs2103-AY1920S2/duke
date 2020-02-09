@@ -1,5 +1,3 @@
-package duke;
-
 /**
  * The Task class represents the task the user inputs into the Duke program.
  * Its attributes contain a boolean value, which tracks whether the task has been completed.

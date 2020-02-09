@@ -1,5 +1,3 @@
-package duke;
-
 public class ToDo extends Task {
 
     protected String at;

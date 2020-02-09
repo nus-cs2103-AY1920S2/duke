@@ -1,5 +1,3 @@
-package duke;
-
 /**
  * The Ui class handles most of the interaction with the user.
  * It contains methods: printList, markAsDone, printTask, printDeletedTask and printBye.
