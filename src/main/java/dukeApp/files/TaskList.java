@@ -21,13 +21,8 @@ public class TaskList {
      * Prints task in the list
      */
     public void printList() {
-        Task t;
         System.out.println("Here are the tasks in your list:");
-        for (int i=1; i <= aList.size(); i++) {
-            t = aList.get(i-1);
-            System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.toString());
-        }
-        System.out.println("");
+        print(aList);
     }
 
     /**
@@ -57,11 +52,19 @@ public class TaskList {
     public void find(String statement) {
         Find f = new Find(statement, aList);
         ArrayList<Task> matchTask = f.match();
-        Task t;
         System.out.println("Here are the matching tasks in your list:");
-        for (int i=1; i <= matchTask.size(); i++) {
-            t = matchTask.get(i-1);
-            System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.toString()+"\n");
+        print(matchTask);
+    }
+
+    /**
+     * Prints the corresponding list required
+     * @param listOfTask the required list of task
+     */
+    private void print(ArrayList<Task> listOfTask){
+        Task t;
+        for (int i=1; i <= listOfTask.size(); i++) {
+            t = listOfTask.get(i-1);
+            System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.toString());
         }
         System.out.println("");
     }
@@ -69,34 +72,41 @@ public class TaskList {
     //call to actions for different task type
     public void add(String taskType, String statement) {
         Task t;
-        statement = statement.substring(statement.indexOf(" "));
         if (!taskType.equals("todo")) {
-            String description = statement.split("\\(")[0];
-            String date = statement.split("\\(")[1];
-            String dateLine = date.substring(date.indexOf(" ") + 1, date.length()-1);
-            String newDate = dateLine.split(" ")[0];
-            String time = dateLine.split(" ")[1];
+            ArrayList<String> details = breakStatement(statement);
+            String description = details.get(0);
+            String date = details.get(1);
+            String time = details.get(2);
             try {
-                checkDate(newDate);
+                checkDate(date);
+                //print msg task added
                 if (taskType.equals("event")) {
-                    t = new Event(description, newDate, time);
-                    aList.add(t);
-                    printAdded(t, aList); //print msg task added
+                    t = new Event(description, date, time);
                 } else {
-                    t = new Deadline(description, newDate, time);
-                    aList.add(t);
-                    printAdded(t, aList); //print msg task added
+                    t = new Deadline(description, date, time);
                 }
+                aList.add(t);
+                printAdded(t, aList); //print msg task added
             } catch(DukeException e) {
                 System.out.println(e);
             }
-
         }
         else {
             t = new Todo(statement);
             aList.add(t);
             printAdded(t, aList); //print msg task added
         }
+    }
+
+    public ArrayList<String> breakStatement(String s) {
+        ArrayList<String> details = new ArrayList<>();
+        details.add(s.split("\\(")[0]); //store description string
+        String deadline = s.split("\\(")[1];
+        String dateStr = deadline.substring(4, deadline.length()-1); //includes date and time
+        details.add(dateStr.split(" ")[0]); //store date string
+        details.add(dateStr.split(" ")[1]); //store time string
+
+        return details;
     }
 
     /**

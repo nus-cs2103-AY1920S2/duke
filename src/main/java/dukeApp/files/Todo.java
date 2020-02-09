@@ -14,12 +14,9 @@ public class Todo extends Task {
         return "T";
     }
 
-    /**
-     * Returns only the task description without the date
-     * @return task description
-     */
+    @Override
     public String getDescription() {
-        return description;
+        return null;
     }
 
     /**
