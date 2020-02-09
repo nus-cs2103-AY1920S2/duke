@@ -2,9 +2,6 @@ package parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.text.ParseException;
 
 /**
  * Represents a time formatter which translates between forms of date representation.
@@ -31,16 +28,7 @@ public class TimeFormatter {
         if (this.strDate.trim().equals("")) {
             return false;
         }
-        SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date javaDate = sdFormat.parse(this.strDate);
-            if (Integer.valueOf(this.strDate.substring(5,7)) > 12) {
-                return false;
-            }
-            return true;
-        } catch (ParseException e) { /* Date format is invalid */
-            return false;
-        }
+        return Integer.parseInt(this.strDate.substring(5, 7)) <= 12;
     }
 
     /**

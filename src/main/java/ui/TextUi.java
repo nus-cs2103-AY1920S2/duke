@@ -186,7 +186,7 @@ public class TextUi {
         for (int i = 0; i < tasks.getList().size(); i++) {
             thisItem = tasks.getList().get(i).toString();
             if (thisItem.toLowerCase().contains(item.toLowerCase())) {
-                sb.append("     " + marker + ". " + thisItem + "\n");
+                sb.append("     ").append(marker).append(". ").append(thisItem).append("\n");
                 marker++;
             }
         }

@@ -30,9 +30,8 @@ public class Storage {
      * Reads from the storage file and generates an array list of task objects.
      *
      * @return an array list of tasks based on the file content
-     * @throws DukeException when file can not be located or written on
      */
-    public ArrayList<Task> readFromFile() throws DukeException {
+    public ArrayList<Task> readFromFile() {
         try {
             String thisLine;
             ArrayList<Task> builtList = new ArrayList<>();
@@ -62,7 +61,6 @@ public class Storage {
             }
             fw.close();
         } catch (IOException exp) {
-            System.out.println(exp);
             throw new DukeException("IOException detected");
         }
     }
