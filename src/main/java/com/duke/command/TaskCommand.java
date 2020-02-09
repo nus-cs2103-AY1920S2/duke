@@ -1,5 +1,6 @@
 package com.duke.command;
 
+import com.duke.tag.TagList;
 import com.duke.task.Task;
 import com.duke.task.TaskList;
 import com.duke.util.DukeException;
@@ -28,9 +29,10 @@ public class TaskCommand extends Command {
      * @param tasks   the TaskList of the current Duke session.
      * @param ui      the User Interface of the current Duke session.
      * @param storage the storage file of the current Duke session.
+     * @param tags
      * @throws DukeException when the saving of the file fails.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         try {
             tasks.addTask(task);
             storage.save(tasks);
@@ -41,7 +43,7 @@ public class TaskCommand extends Command {
     }
 
     @Override
-    public String executeOnGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeOnGui(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         try {
             tasks.addTask(task);
             storage.save(tasks);

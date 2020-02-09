@@ -20,7 +20,7 @@ public class Todo extends Task {
 
     @Override
     public String generateWriteFormat() {
-        int k = this.isDone ? 1 : 0;
-        return "T|" + k + "|" + description;
+        int k = this.isDone() ? 1 : 0;
+        return "T|" + k + "|" + description + "|" + super.generateWriteFormat();
     }
 }

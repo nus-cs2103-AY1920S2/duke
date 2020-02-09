@@ -1,5 +1,6 @@
 package com.duke.command;
 
+import com.duke.tag.TagList;
 import com.duke.task.TaskList;
 import com.duke.util.DukeException;
 import com.duke.util.Storage;
@@ -22,9 +23,10 @@ public abstract class Command {
      * @param tasks   the TaskList of the current Duke session.
      * @param ui      the User Interface of the current Duke session.
      * @param storage the storage file of the current Duke session.
+     * @param tags
      * @throws DukeException happens when there is a problem executing the command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException;
 
-    public abstract String executeOnGui(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String executeOnGui(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException;
 }

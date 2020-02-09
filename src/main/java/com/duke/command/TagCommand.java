@@ -1,5 +1,6 @@
 package com.duke.command;
 
+import com.duke.tag.Tag;
 import com.duke.tag.TagList;
 import com.duke.task.Task;
 import com.duke.task.TaskList;
@@ -9,26 +10,24 @@ import com.duke.util.Ui;
 
 import java.io.IOException;
 
-/**
- * Represents a command to delete a task.
- */
-public class DeleteCommand extends Command {
-    private int index;
+public class TagCommand extends Command {
+    String tagName;
+    int indexOfTask;
 
-    /**
-     * Creates a command that deletes the task at the given index.
-     * @param index the task index the command is to delete.
-     */
-    public DeleteCommand(int index) {
-        this.index = index;
+    public TagCommand(String tag, int index) {
+        this.tagName = tag;
+        this.indexOfTask = index;
     }
+
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         try {
-            Task t = tasks.deleteTask(index);
+            Tag tag = tags.addTag(tagName);
+            tasks.tagTask(indexOfTask, tag);
+            Task t = tasks.tasks.get(indexOfTask - 1);
             storage.save(tasks);
-            ui.showDelete(t, tasks.tasks.size());
+            ui.showTagTaskMessage(tag, t);
         } catch (IOException e) {
             throw new DukeException("OOPS!!! Data Save Failed");
         }
@@ -37,9 +36,11 @@ public class DeleteCommand extends Command {
     @Override
     public String executeOnGui(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         try {
-            Task t = tasks.deleteTask(index);
+            Tag tag = tags.addTag(tagName);
+            tasks.tagTask(indexOfTask, tag);
+            Task t = tasks.tasks.get(indexOfTask - 1);
             storage.save(tasks);
-            return ui.getDeleteMessage(t, tasks.tasks.size());
+            return ui.getTagTaskMessage(tag, t);
         } catch (IOException e) {
             throw new DukeException("OOPS!!! Data Save Failed");
         }

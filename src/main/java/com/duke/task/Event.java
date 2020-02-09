@@ -29,7 +29,7 @@ public class Event extends Task {
 
     @Override
     public String generateWriteFormat() {
-        int k = this.isDone ? 1 : 0;
-        return "E|" + k + "|" + description + "|" + at;
+        int k = this.isDone() ? 1 : 0;
+        return "E|" + k + "|" + description + "|" + at + "|" + super.generateWriteFormat();
     }
 }

@@ -1,5 +1,6 @@
 package com.duke.command;
 
+import com.duke.tag.TagList;
 import com.duke.task.Task;
 import com.duke.task.TaskList;
 import com.duke.util.DukeException;
@@ -24,7 +25,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         try {
             Task t = tasks.markTask(index);
             storage.save(tasks);
@@ -35,7 +36,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String executeOnGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeOnGui(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         try {
             Task t = tasks.markTask(index);
             storage.save(tasks);

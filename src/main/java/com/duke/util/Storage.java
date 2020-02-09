@@ -1,5 +1,7 @@
 package com.duke.util;
 
+import com.duke.tag.Tag;
+import com.duke.tag.TagList;
 import com.duke.task.Deadline;
 import com.duke.task.Task;
 import com.duke.task.TaskList;
@@ -23,12 +25,12 @@ public class Storage {
     private String filePath;
 
     /**
-     * Constructs a <code>Storage</code> object with the given filePath.
      *
-     * @param filePath the file path to store into and extract data from.
+     * @param taskfilePath
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String taskfilePath) {
+        this.filePath = taskfilePath;
+
     }
 
     /**
@@ -38,7 +40,7 @@ public class Storage {
      *         and their relevant status.
      * @throws FileNotFoundException If the file path provided is invalid.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> loadTaskList() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
 
@@ -59,23 +61,51 @@ public class Storage {
                     tba = new Event(st.nextToken(), st.nextToken());
                 }
                 if (status == 1) {
-                    tba.isDone = true;
+                    tba.setDone();
                 }
                 out.add(tba);
+                if (st.hasMoreTokens()) {
+                    loadTaskTag(tba, st.nextToken());
+                }
             }
             return out;
         }
     }
 
+    public void loadTaskTag(Task t, String tags) {
+        if (tags.equals("")) {
+            return;
+        }
+
+        String[] tagList = tags.split(",");
+        for (String tag: tagList) {
+            if (!tag.equals("")) {
+                t.setTag(tag);
+            }
+        }
+
+    }
+
+    public TagList loadTags(TaskList taskList) {
+        TagList tagList = new TagList();
+        for (Task t: taskList.tasks) {
+            for (String tag: t.getTags()) {
+                Tag temp = tagList.addTag(tag);
+                temp.addTaskToTag(t);
+            }
+        }
+        return tagList;
+    }
+
     /**
      * Saves the task data in the current Duke session into the hard-drive.
      *
-     * @param tl The task list that contains the updated task data.
+     * @param taskList The task list that contains the updated task data.
      * @throws IOException When the file path provided is invalid.
      */
-    public void save(TaskList tl) throws IOException {
+    public void save(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        List<Task> ts = tl.tasks;
+        List<Task> ts = taskList.tasks;
         int count = ts.size();
         if (count == 0) {
             fw.write("");
@@ -85,7 +115,6 @@ public class Storage {
                 fw.write('\n');
             }
             fw.write(ts.get(count - 1).generateWriteFormat());
-
             fw.close();
         }
     }

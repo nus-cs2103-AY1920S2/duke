@@ -1,5 +1,6 @@
 package com.duke.command;
 
+import com.duke.tag.TagList;
 import com.duke.task.TaskList;
 import com.duke.util.DukeException;
 import com.duke.util.Storage;
@@ -16,12 +17,12 @@ public class ExitCommand extends Command {
         isExit = true;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         ui.showGoodbye();
     }
 
     @Override
-    public String executeOnGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeOnGui(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         return ui.getGoodbyeMessage();
     }
 }

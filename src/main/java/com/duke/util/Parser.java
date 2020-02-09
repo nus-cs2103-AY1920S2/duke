@@ -1,13 +1,8 @@
 package com.duke.util;
 
 
-import com.duke.command.Command;
-import com.duke.command.DeleteCommand;
-import com.duke.command.DoneCommand;
-import com.duke.command.ExitCommand;
-import com.duke.command.FindCommand;
-import com.duke.command.ListCommand;
-import com.duke.command.TaskCommand;
+import com.duke.Duke;
+import com.duke.command.*;
 import com.duke.task.Deadline;
 import com.duke.task.Event;
 import com.duke.task.Task;
@@ -32,7 +27,7 @@ public class Parser {
     public static Command parse(String cmd) throws DukeException {
         StringTokenizer st = new StringTokenizer(cmd);
         String firstToken = st.nextToken();
-        Command output;
+        Command output = null;
 
         if (cmd.equals("bye")) {
             output = new ExitCommand();
@@ -63,7 +58,37 @@ public class Parser {
             } catch (Exception e) {
                 throw new DukeException("OOPS! Please specify keyword to find");
             }
-        } else {
+        } else if (firstToken.equals("tag")) {
+            try {
+                cmd = cmd.substring(4);
+                if (cmd.equals("")) {
+                    throw new DukeException("Enter 'tag <tag> <task_index>' to add tag" +
+                            " or 'tag <tag>' to query");
+                }
+                String[] temp = cmd.split(" ");
+
+                if (temp.length == 1) {
+                    String tag = temp[0];
+
+                    output = new FindTagCommand(tag);
+                } else if (temp.length == 2) {
+                    String tag = temp[0];
+                    int num = Integer.parseInt(temp[1]);
+                    output = new TagCommand(tag, num);
+                } else {
+                    throw new DukeException("Enter 'tag <tag> <task_index>' to add tag" +
+                            " or 'tag <tag>' to query");
+                }
+            } catch (DukeException e) {
+                throw e;
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("Enter 'tag <tag> <task_index>' to add tag" +
+                        " or 'tag <tag>' to query");
+            }
+        }
+
+
+        else {
             Task itemToAdd = null;
 
             if (firstToken.equals("deadline")) {

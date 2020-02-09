@@ -1,13 +1,19 @@
 package com.duke.task;
 
+import com.duke.tag.Tag;
+
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a task specified by the user.
  */
-public class Task {
+public abstract class Task {
     protected String description;
-    public boolean isDone;
+    private boolean isDone;
+    private List<String> tags = new ArrayList<>();
 
     public Task(String d) {
         this.description = d;
@@ -28,13 +34,42 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String generateWriteFormat() {
-        return null;
+    public String generateWriteFormat(){
+        String out = "";
+        for (String t:tags) {
+            out += t + ",";
+        }
+        return out;
     }
 
     public static LocalDate generateTime(String input) {
         return LocalDate.parse(input);
+    }
 
+    public void setDone() {
+        isDone = true;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setTag(String tag) {
+        for (String t: tags) {
+            if (t.equals(tag)) {
+                return;
+            }
+        }
+        tags.add(tag);
+
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void removeTag(String tag) {
+        tags.removeIf(a -> a.equals(tag));
     }
 
 }

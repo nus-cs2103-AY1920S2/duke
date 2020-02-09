@@ -1,6 +1,7 @@
 package com.duke;
 
 import com.duke.command.Command;
+import com.duke.tag.TagList;
 import com.duke.task.TaskList;
 import com.duke.util.DukeException;
 import com.duke.util.Parser;
@@ -17,6 +18,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private TagList tags;
 
     /**
      * Instantiate a new <code>Duke</code> object with the data file path
@@ -28,7 +30,8 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadTaskList());
+            tags = storage.loadTags(tasks);
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -47,7 +50,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, ui, storage, tags);
                 isExit = c.isExit;
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -66,7 +69,7 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             assert c != null: "command fails to be meaningful";
-            String message = c.executeOnGui(tasks, ui, storage);
+            String message = c.executeOnGui(tasks, ui, storage, tags);
             assert message != null: "output message is empty";
             message = ui.getLine() + "\n" + message + "\n";
             return message;

@@ -1,5 +1,7 @@
 package com.duke.task;
 
+import com.duke.tag.Tag;
+
 import java.util.ArrayList;
 
 /**
@@ -37,7 +39,7 @@ public class TaskList {
      */
     public Task markTask(int tindex) {
         Task out = tasks.get(tindex);
-        out.isDone = true;
+        out.setDone();
         return out;
     }
 
@@ -76,5 +78,11 @@ public class TaskList {
             }
         }
         return out;
+    }
+
+    public void tagTask(int index, Tag t) {
+        Task task = tasks.get(index - 1);
+        task.setTag(t.getTagName());
+        t.addTaskToTag(task);
     }
 }

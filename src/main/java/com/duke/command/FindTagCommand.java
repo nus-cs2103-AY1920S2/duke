@@ -1,27 +1,30 @@
 package com.duke.command;
 
+import com.duke.tag.Tag;
 import com.duke.tag.TagList;
 import com.duke.task.TaskList;
 import com.duke.util.DukeException;
 import com.duke.util.Storage;
 import com.duke.util.Ui;
 
-/**
- * Represents a command that queries the list of tasks.
- */
-public class ListCommand extends Command {
-    /**
-     * Creates a command that queries the list of tasks.
-     */
-    public ListCommand() {
-    }
+import java.util.List;
 
-    public void execute(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
-        ui.showList(tasks);
+public class FindTagCommand extends Command {
+    public String tagName;
+    public FindTagCommand(String tag) {
+        this.tagName = tag;
     }
 
     @Override
-    public String executeOnGui(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
-        return ui.getListMessage(tasks);
+    public void execute(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
+        Tag tag = tags.findTag(tagName);
+        ui.showFindTagMessage(tag);
     }
+    @Override
+    public String executeOnGui(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
+        Tag tag = tags.findTag(tagName);
+        return ui.getFindTagMessage(tag);
+    }
+
+
 }

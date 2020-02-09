@@ -1,9 +1,12 @@
 package com.duke.util;
 
+import com.duke.tag.Tag;
 import com.duke.task.Task;
 import com.duke.task.TaskList;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -238,4 +241,34 @@ public class Ui {
         }
         return out;
     }
+
+    public void showTagTaskMessage(Tag tag, Task t) {
+        System.out.println(getTagTaskMessage(tag, t));
+    }
+
+    public String getTagTaskMessage(Tag tag, Task t) {
+        String out = SPACE + "I have tagged the following task with tag '" + tag.getTagName() + "': "
+                + "\n" + SPACE + t;
+        return out;
+    }
+
+    public void showFindTagMessage(Tag tag) {
+        System.out.println(getFindTagMessage(tag));
+    }
+
+    public String getFindTagMessage(Tag tag) {
+        if (tag == null) {
+            return "The tag is not recognized.";
+        }
+
+        String out = SPACE + "Here are the tasks with tag '" + tag.getTagName() + "': ";
+        List<Task> tasks = tag.getTasks();
+        for (Task t:tasks) {
+            out += "\n" + SPACE + t;
+
+        }
+        return out;
+    }
+
+
 }

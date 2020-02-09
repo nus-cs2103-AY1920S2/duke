@@ -30,7 +30,7 @@ public class Deadline extends Task {
 
     @Override
     public String generateWriteFormat() {
-        int k = this.isDone ? 1 : 0;
-        return "D|" + k + "|" + description + "|" + by;
+        int k = this.isDone() ? 1 : 0;
+        return "D|" + k + "|" + description + "|" + by + "|" + super.generateWriteFormat();
     }
 }
