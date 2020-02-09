@@ -2,3 +2,6 @@ T | 1 | read book
 D | 0 | submit quiz | 3pm | 2020-02-06
 T | 1 | bloobloop
 E | 0 | lunch | 12pm | 2020-02-05
+T | 0 | borrow book
+T | 0 | watch lecture
+T | 0 | submit quiz
