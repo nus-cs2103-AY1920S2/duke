@@ -29,7 +29,8 @@ public class ExceptionGenerator {
         if (!input[0].equals("todo") && !input[0].equals("list")
                 && !input[0].equals("delete") && !input[0].equals("event")
                     && !input[0].equals("deadline") && !input[0].equals("done")
-                        && !input[0].equals("find") && !input[0].equals("bye")) {
+                        && !input[0].equals("find") && !input[0].equals("bye")
+                            && !input[0].equals("sort")) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }

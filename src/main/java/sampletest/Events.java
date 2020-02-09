@@ -45,6 +45,14 @@ public class Events extends Task {
                 + Integer.valueOf(this.date.getYear()).toString();
     }
 
+    public boolean isUrgent() {
+        return true;
+    }
+
+    public int getCompletionDate() {
+        return date.getDayOfMonth() * 1000000 + date.getMonthValue() * 10000 + date.getYear();
+    }
+
     /**
      * LocalDate representation.
      * @return localDate representation of the file.
