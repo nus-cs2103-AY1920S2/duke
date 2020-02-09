@@ -1,7 +1,8 @@
-package lc.duke;
+package lcduke;
+
+import java.text.ParseException;
 
 import static java.lang.Integer.parseInt;
-import java.text.ParseException;
 
 public class TaskList {
     static Task[] totalTasks = new Task[100];

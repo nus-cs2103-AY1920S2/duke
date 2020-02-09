@@ -1,4 +1,4 @@
-package lc.duke;
+package lcduke;
 
 public abstract class Task {
     protected String description;
@@ -14,9 +14,11 @@ public abstract class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
+
     public void markAsDone() {
         this.isDone = true;
     }
+
     public boolean getDone(){
         return isDone;
     }

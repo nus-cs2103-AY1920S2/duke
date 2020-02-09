@@ -1,4 +1,4 @@
-package lc.duke;
+package lcduke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
