@@ -120,11 +120,11 @@ public class GuiUi {
      * @param targets List of tasks that matches keyword.
      * @return List of tasks that matches keyword.
      */
-    public String getTargets(ArrayList<String> targets) {
+    public String getTargets(ArrayList<Task> targets) {
         String response = "Here are the matching tasks in your list:\n";
 
         for (int i = 1; i < targets.size() + 1; i++) {
-            response = response.concat(i + "." + targets.get(i - 1) + "\n");
+            response = response.concat(i + "." + targets.get(i - 1).obtainTaskInfo() + "\n");
         }
         return response;
     }
