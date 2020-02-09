@@ -84,7 +84,7 @@ public class Parser {
 
     private static Command parseSnooze(String details) {
         try {
-            String words[] = details.split(" ");
+            String[] words = details.split(" ");
             int index = Integer.parseInt(words[0]) - 1;
             String newTime = getDetails(details, words[0]);
 
