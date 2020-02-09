@@ -69,8 +69,10 @@ public class Parser {
     public LocalDate processDateForDeadline() {
         int start_index = raw_user_input.indexOf("/");
         int end_index = raw_user_input.length();
+
+        assert start_index <= end_index: "No date provided for the mission.";
+
         String unconverted_date = raw_user_input.substring(start_index, end_index).replace("/by ", "");
-        System.out.println(unconverted_date);
         return LocalDate.parse(unconverted_date);
     }
 
@@ -81,6 +83,9 @@ public class Parser {
     public LocalDate processDateForEvent() {
         int start_index = raw_user_input.indexOf("/");
         int end_index = raw_user_input.length();
+
+        assert start_index <= end_index: "No date provided for the mission.";
+
         String unconverted_date = raw_user_input.substring(start_index, end_index).replace("/at ", "");
         return LocalDate.parse(unconverted_date);
     }
@@ -92,6 +97,9 @@ public class Parser {
      */
     public int processIndex() {
         String[] split_str = raw_user_input.split(" ");
+
+        assert split_str.length != 1: "Which mission have you completed?";
+
         return Integer.parseInt(split_str[1]) - 1;
     }
 
@@ -102,6 +110,9 @@ public class Parser {
      */
     public String processKeyword() {
         String[] split_str = raw_user_input.split(" ");
+
+        assert split_str.length != 1: "Which mission are you trying to complete?";
+
         return split_str[1];
     }
 

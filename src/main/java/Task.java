@@ -21,6 +21,7 @@ public class Task {
      * @return Description of Task.
      */
     public String getDescription() {
+        assert this.description.length() != 0: "Your mission parameters have been wiped!";
         return this.description;
     }
 

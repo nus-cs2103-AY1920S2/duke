@@ -33,6 +33,10 @@ public class Storage {
 
             String[] split_task = task.split(" - ");
 
+            // The tasks inside the file should be stored in a format of completion status - task type - description - date
+            // Or, completion status - task type - description, if it's a TODO Task
+            assert split_task.length == 3 || split_task.length == 4: "Your memory is corrupted.";
+
             if (split_task.length == 3) { // TODO
                 Todo new_todo = new Todo(split_task[2]);
                 if (split_task[0].contains("\u2713")) { // read the completion status
@@ -40,7 +44,7 @@ public class Storage {
                 }
                 tasks.add(new_todo);
             }
-            else { // DEADLINE/EVENT
+            else { // EVENT
                 LocalDate date = LocalDate.parse(split_task[3]); // handle the date object
 
                 if (split_task[1].contains("E")) {
@@ -50,7 +54,7 @@ public class Storage {
                     }
                     tasks.add(new_event);
                 }
-                else {
+                else { // DEADLINE
                     Deadline new_deadline = new Deadline(split_task[2], date);
                     if (split_task[0].contains("\u2713")) {
                         new_deadline.updateIsCompleted(true);

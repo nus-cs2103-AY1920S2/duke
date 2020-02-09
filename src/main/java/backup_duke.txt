@@ -1,7 +1,6 @@
-[T][✓]  borrow book
-[D][✘]  return book  (by: June 6th )
-[E][✓]  project meeting  (at: Aug 6 2-4pm )
-[T][✘]  join sports club
-[E][✘]  dance party  (at: library)
-[D][✓]  do cs3244  (by: sunday)
-[T][✘]  homework
+[✓] - [T] - borrow book
+[✘] - [D] - return book - 2020-01-13
+[✓] - [E] - project meeting - 2020-01-02
+[✘] - [T] - join sports club
+[✘] - [E] - dance party - 2020-01-01
+[✘] - [D] - do cs3244 - 2019-12-29
