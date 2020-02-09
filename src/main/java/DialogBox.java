@@ -39,8 +39,6 @@ public class DialogBox extends HBox {
         }
 
         Circle circle = new Circle(40,22,22);
-        circle.setStroke(Color.ALICEBLUE);
-        circle.setFill(new ImagePattern(img));
 
         dialog.setText(text);
         displayPicture.setImage(img);
