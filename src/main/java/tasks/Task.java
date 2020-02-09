@@ -9,6 +9,7 @@ package tasks;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String note;
 
     public Task(String description) {
         this.description = description;
@@ -30,6 +31,14 @@ public class Task {
 
     public boolean contains(String keyword) {
         return this.description.contains(keyword);
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getNote() {
+        return this.note;
     }
 
     public void setStatus(String status) {

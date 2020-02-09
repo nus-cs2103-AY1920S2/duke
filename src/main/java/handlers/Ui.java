@@ -92,6 +92,18 @@ public class Ui {
         System.out.println(this.response);
     }
 
+    public void showAddedNote(Task noteAddedTask) {
+        setResponse("Nice! I've added a note to this task: ");
+        setResponse("  " + noteAddedTask.toString());
+        System.out.println(this.response);
+    }
+
+    public void showGetNote(Task taskGetNote, String note) {
+        setResponse("Note for " + taskGetNote.toString() + ": ");
+        setResponse("  " + note);
+        System.out.println(this.response);
+    }
+
     public void setResponse(String line) {
         this.response += line + "\n";
     }

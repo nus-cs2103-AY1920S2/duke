@@ -1,12 +1,6 @@
 package handlers;
 
-import commands.Command;
-import commands.AddCommand;
-import commands.ByeCommand;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.FindCommand;
-import commands.ListCommand;
+import commands.*;
 
 import exceptions.DeleteException;
 import exceptions.DoneException;
@@ -100,6 +94,21 @@ public class Parser {
                 // str[1] is the keyword to be found
                 FindCommand findCommand = new FindCommand(command, str[1]);
                 return findCommand;
+            }
+        } else if (str[0].equals("addNote")) {
+            if (command.length() <= 7) {
+                throw new EmptyException();
+            } else {
+                String[] stringSplit = command.split(" ", 3);
+                AddNoteCommand addNoteCommand = new AddNoteCommand(command, stringSplit[1], stringSplit[2]);
+                return addNoteCommand;
+            }
+        } else if (str[0].equals("note")) {
+            if (command.length() <= 4) {
+                throw new EmptyException();
+            } else {
+                NoteCommand noteCommand = new NoteCommand(command, str[1]);
+                return noteCommand;
             }
         } else {
             throw new UnknownException();
