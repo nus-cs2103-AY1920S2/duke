@@ -9,6 +9,7 @@ public class Task {
      */
     protected String description;
     protected boolean isDone;
+    protected boolean isSnoozeable;
 
     /**
      * Constructor for Task that takes in the description of the task.
@@ -18,6 +19,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.isSnoozeable = false;
     }
 
     /**
@@ -27,6 +29,21 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public boolean isSnoozeable() {
+        return isSnoozeable;
+    }
+
+    /**
+     * Returns a snoozed version of task.
+     *
+     * @param time the time after snoozing
+     * @return the snoozed version of task
+     */
+    public Task snooze(String time) {
+        // not snoozeable
+        return null;
     }
 
     /**

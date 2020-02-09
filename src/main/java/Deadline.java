@@ -21,10 +21,15 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadline) {
         super(description);
+        isSnoozeable = true;
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm");
-
         this.deadline = format.parse(deadline, new ParsePosition(0));
+    }
+
+    @Override
+    public Task snooze(String time) {
+        return new Deadline(description, time);
     }
 
     @Override

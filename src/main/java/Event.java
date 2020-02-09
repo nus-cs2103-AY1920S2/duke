@@ -20,6 +20,8 @@ public class Event extends Task {
     public Event(String description, String timeRange) {
         super(description);
 
+        isSnoozeable = true;
+
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm");
         String[] times = timeRange.split(" to ");
 
@@ -28,6 +30,17 @@ public class Event extends Task {
 
         startTime = format.parse(times[0], new ParsePosition(0));
         endTime = format.parse(times[1], new ParsePosition(0));
+    }
+
+    /**
+     * Returns a snoozed Event.
+     *
+     * @param time the time after snooze
+     * @return
+     */
+    @Override
+    public Task snooze(String time) {
+        return new Event(description, time);
     }
 
     @Override
