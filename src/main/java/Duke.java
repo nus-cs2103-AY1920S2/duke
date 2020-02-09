@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * A chatbot interface.
@@ -42,10 +44,17 @@ public class Duke {
                 String taskType = command.split(" ", 2)[0];
                 if (taskType.equals("todo")) {
                     return commandCodeMapping.get("todo");
-                } else if (taskType.equals("deadline")) {
-                    return commandCodeMapping.get("deadline");
-                } else if (taskType.equals("event")) {
-                    return commandCodeMapping.get("event");
+                } else {
+                    String content = command.split(" ", 2)[1];
+                    if (taskType.equals("deadline")) {
+                        String time = content.split("/by")[1];
+                        LocalDate.parse(time.trim(), DateTimeFormatter.BASIC_ISO_DATE);
+                        return commandCodeMapping.get("deadline");
+                    } else if (taskType.equals("event")) {
+                        String time = content.split("/at")[1];
+                        LocalDate.parse(time.trim(), DateTimeFormatter.BASIC_ISO_DATE);
+                        return commandCodeMapping.get("event");
+                    }
                 }
             }
         } catch (Exception e) {
@@ -59,43 +68,44 @@ public class Duke {
      * @param command user command
      */
     private static void commandProcessor(String command) {
-        Integer commandCode = getCommandCode(command);
-        if (commandCode == commandCodeMapping.get("list")) {
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.printf("%s[%s][%c] %s\n",
-                        i, tasks.get(i).getShortName(),
-                        (char) (Integer.parseInt(tasks.get(i).getStatusIcon(), 16)),
-                        tasks.get(i).description);
+        try {
+            Integer commandCode = getCommandCode(command);
+            if (commandCode == commandCodeMapping.get("list")) {
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.printf(tasks.get(i).getFullDetail(i));
+                }
+            } else if (commandCode == commandCodeMapping.get("mark done")) {
+                Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
+                if (taskIndex < tasks.size()) {
+                    tasks.get(taskIndex).markDone();
+                }
+            } else if (commandCode == commandCodeMapping.get("delete")) {
+                Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
+                System.out.println("HIEU");
+                if (taskIndex < tasks.size()) {
+                    tasks.remove(taskIndex.intValue());
+                }
+            } else if (commandCode == commandCodeMapping.get("todo")) {
+                String todoContent = command.split(" ", 2)[1];
+                Task todo = new Todo(todoContent);
+                tasks.add(todo);
+            } else if (commandCode == commandCodeMapping.get("deadline")) {
+                String deadlineContent = command.split(" ", 2)[1];
+                String deadlineDesc = deadlineContent.split("/by")[0];
+                String deadlineTime = deadlineContent.split("/by")[1];
+                Task deadline = new Deadline(deadlineDesc, deadlineTime);
+                tasks.add(deadline);
+            } else if (commandCode == commandCodeMapping.get("event")) {
+                String eventContent = command.split(" ", 2)[1];
+                String eventDesc = eventContent.split("/at")[0];
+                String eventTime = eventContent.split("/at")[1];
+                Task event = new Event(eventDesc, eventTime);
+                tasks.add(event);
+            } else if (commandCode == commandCodeMapping.get("invalid command")) {
+                System.out.printf("OOPS Wrong command\n");
             }
-        } else if (commandCode == commandCodeMapping.get("mark done")) {
-            Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
-            if (taskIndex < tasks.size()) {
-                tasks.get(taskIndex).markDone();
-            }
-        } else if (commandCode == commandCodeMapping.get("delete")) {
-            Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
-            System.out.println("HIEU");
-            if (taskIndex < tasks.size()) {
-                tasks.remove(taskIndex.intValue());
-            }
-        } else if (commandCode == commandCodeMapping.get("todo")) {
-            String todoContent = command.split(" ", 2)[1];
-            Task todo = new Todo(todoContent);
-            tasks.add(todo);
-        } else if (commandCode == commandCodeMapping.get("deadline")) {
-            String deadlineContent = command.split(" ", 2)[1];
-            String deadlineDesc = deadlineContent.split("/by")[0];
-            String deadlineTime = deadlineContent.split("/by")[1];
-            Task deadline = new Deadline(deadlineDesc, deadlineTime);
-            tasks.add(deadline);
-        } else if (commandCode == commandCodeMapping.get("event")) {
-            String eventContent = command.split(" ", 2)[1];
-            String eventDesc = eventContent.split("/at")[0];
-            String eventTime = eventContent.split("/at")[1];
-            Task event = new Event(eventDesc, eventTime);
-            tasks.add(event);
-        } else if (commandCode == commandCodeMapping.get("invalid command")) {
-            System.out.printf("OOPS Wrong command\n");
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

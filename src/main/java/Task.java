@@ -18,4 +18,8 @@ public class Task {
     public void markDone() {
         this.isDone = true;
     }
+
+    public String getFullDetail(Integer i) {
+        return "";
+    }
 }
