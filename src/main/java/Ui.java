@@ -22,9 +22,10 @@ public class Ui {
      * Prints error message.
      *
      * @param e Exception to print.
+     * @return Display message.
      */
-    public void showError(Exception e) {
-        System.out.println("Something went wrong: " + e.getMessage());
+    public String showError(Exception e) {
+        return "Something went wrong: " + e.getMessage();
     }
 
     /**

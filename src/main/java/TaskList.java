@@ -30,9 +30,10 @@ public class TaskList {
      * Adds task described in user input to task list.
      *
      * @param s Task to add.
+     * @return Display message.
      * @throws DukeException If string format is invalid.
      */
-    public void add(String s) throws DukeException {
+    public String add(String s) throws DukeException {
         String typeOfTask = s.split(" ", 2)[0];
         Task toAdd = new Task();
         if (typeOfTask.equals("todo")) {
@@ -60,74 +61,84 @@ public class TaskList {
             }
         }
         taskList.add(toAdd);
-        ui.print("Gotcha! Added this task:\n"
+        String msg = "Gotcha! Added this task:\n"
                 + "  " + toAdd + "\n"
-                + "Now you have " + taskList.size() + " tasks in the list.");
+                + "Now you have " + taskList.size() + " tasks in the list.";
         try {
             storage.writeTaskList(taskList);
         } catch (IOException e) {
-            ui.showError(e);
+            msg = ui.showError(e);
         }
+        return msg;
     }
 
     /**
      * Deletes task at index i (starts from 1) from task list.
      *
      * @param i Index of task to remove.
+     * @return Display message.
      */
-    public void delete(int i) {
+    public String delete(int i) {
         Task t = taskList.remove(i-1);
-        ui.print("Poof! This task is gone:\n"
+        String msg = "Poof! This task is gone:\n"
                 +  "  " + t + "\n"
-                + "Now you have " + taskList.size() + " tasks in the list.");
+                + "Now you have " + taskList.size() + " tasks in the list.";
         try {
             storage.writeTaskList(taskList);
         } catch (IOException e) {
-            ui.showError(e);
+            msg = ui.showError(e);
         }
+        return msg;
     }
 
     /**
      * Displays tasks in task list.
+     *
+     * @return Display message.
      */
-    public void showList() {
-        ui.print("Here are the tasks in your list:");
+    public String showList() {
+        String msg = "Here are the tasks in your list:";
         int count = 1;
         for (Task t : taskList) {
-            ui.print(count + "." + t);
+            msg += "\n" + count + "." + t;
             count++;
         }
+        return msg;
     }
 
     /**
      * Finds and displays tasks that contain the query string.
      *
      * @param query The query string.
+     * @return Display message.
      */
-    public void find(String query) {
-        ui.print("Here are the matching tasks in your list:");
+    public String find(String query) {
+        String msg = "Here are the matching tasks in your list:";
         int count = 1;
         for (Task t : taskList) {
             if (t.toString().contains(query)) {
-                ui.print(count + "." + t);
+                msg += "\n" + count + "." + t;
                 count++;
             }
         }
+        return msg;
     }
 
     /**
      * Marks task at index i (starts at 1) in task list as done.
      *
      * @param i Index of task to mark as done.
+     * @return Display message.
      */
-    public void done(int i) {
+    public String done(int i) {
         taskList.get(i-1).markAsDone();
-        ui.print("Nice! I've marked this task as done: \n" +
-                "  " + taskList.get(i-1));
+        String msg = "Nice! I've marked this task as done: \n" +
+                "  " + taskList.get(i-1);
         try {
             storage.writeTaskList(taskList);
         } catch (IOException e) {
-            ui.showError(e);
+            msg = ui.showError(e);
         }
+        return msg;
     }
 }

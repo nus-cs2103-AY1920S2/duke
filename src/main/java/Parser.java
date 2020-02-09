@@ -17,27 +17,32 @@ public class Parser {
      * Adds or removes tasks from task list according to instruction details.
      *
      * @param input User string input.
+     * @return Display message.
      * @throws DukeException  If first word of input (instruction) is unrecognised.
      */
-    public void parseInput(String input) throws DukeException {
+    public String parseInput(String input) throws DukeException {
+        String msg = "";
         if (input.equals("list")) {
-            taskList.showList();
+            msg = taskList.showList();
         } else if (input.split(" ")[0].equals("done")) {
             int taskNum = Integer.parseInt(input.split(" ")[1]);
-            taskList.done(taskNum);
+            msg = taskList.done(taskNum);
         } else if (input.split(" ")[0].equals("todo") ||
                 input.split(" ")[0].equals("event") ||
                 input.split(" ")[0].equals("deadline")) {
-            taskList.add(input);
+            msg = taskList.add(input);
         } else if (input.split(" ")[0].equals("delete")) {
             int taskNum = Integer.parseInt(input.split(" ")[1]);
-            taskList.delete(taskNum);
+            msg = taskList.delete(taskNum);
         } else if (input.split(" ")[0].equals("find")) {
             String query = input.split(" ")[1];
-            taskList.find(query);
+            msg = taskList.find(query);
+        } else if (input.split(" ")[0].equals("bye")) {
+            msg = "Bye. Hope to serve you again soon!";
         } else {
             throw new DukeException();
         }
+        return msg;
     }
 
     /**
