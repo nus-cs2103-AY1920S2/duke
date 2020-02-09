@@ -15,7 +15,6 @@ public class Ui {
     private static final String DIVIDER = new String(new char[50]).replace('\0', '_');
     private static final String WELCOME_MESSAGE = "Hello there!";
     private static final String EXIT_MESSAGE = "Goodbye, see you again!";
-    private static final String INPUT_PROMPT = "Enter your command: ";
     private final Scanner in;
 
     /**
@@ -34,26 +33,10 @@ public class Ui {
     }
 
     /**
-     * Prints a divider to for better visuals.
-     */
-    public String getLine() {
-        return DIVIDER;
-    }
-
-    /**
      * Bids user farewell.
      */
     public String getExitMessage() {
         return EXIT_MESSAGE;
-    }
-
-    /**
-     * Gets a command from user.
-     * @return String representation of user command.
-     */
-    public String getUserCommand() {
-        System.out.println(INPUT_PROMPT);
-        return in.nextLine().toLowerCase();
     }
 
 }

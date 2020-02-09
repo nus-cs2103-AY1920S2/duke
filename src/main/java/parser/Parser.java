@@ -10,8 +10,9 @@ import tasks.TaskList;
 public class Parser {
     /**
      * Parse commands and decide on how to handle them accordingly.
-     * @param text String of text describing our command.
-     * @param tasks The existing list of tasks.
+     * @param text String representing the command.
+     * @param tasks TaskList containing existing tasks.
+     * @return String representing response.
      */
     public String handleTaskCommand(String text, TaskList tasks) {
         String[] textArray = text.split(" ");
@@ -29,8 +30,7 @@ public class Parser {
             } else if ((instruction.equals("todo")
                     || instruction.equals("deadline")
                     || instruction.equals("event"))) {
-                tasks.addNewTask(textArray);
-                return "OK. Added your task.";
+                return tasks.addNewTask(textArray);
             } else {
                 throw new InvalidInstructionException("You have entered invalid input.");
             }
@@ -39,6 +39,7 @@ public class Parser {
         } catch (InvalidFormatException e) {
             return e.getMessage();
         }
+        assert !response.equals("") : "you should have a proper response by now";
         return response;
     }
 }

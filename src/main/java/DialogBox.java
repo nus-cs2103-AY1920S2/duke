@@ -47,10 +47,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox.
+     * This is a factory method that calls upon a private constructor.
+     * @param text String representing text to display.
+     * @param img Image to display beside string for identification.
+     * @return DialogBox for most recent message.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox.
+     * This is a factory method that calls upon a private constructor.
+     * @param text String representing text to display.
+     * @param img Image to display beside string for identification.
+     * @return DialogBox for most recent message.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

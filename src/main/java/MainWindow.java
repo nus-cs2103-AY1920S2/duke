@@ -31,6 +31,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets duke of MainWindow to an instance of our duke program.
+     * @param d Duke object that is created.
+     */
     public void setDuke(Duke d) {
         duke = d;
         DialogBox startBox = DialogBox.getDukeDialog(d.getIntro(), dukeImage);
@@ -45,10 +49,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         if (input.equals("bye")) {
-            DialogBox saveBox = DialogBox.getDukeDialog(duke.getIntro(), dukeImage);
-            dialogContainer.getChildren().add(saveBox);
-            // save file
-            DialogBox finishedBox = DialogBox.getDukeDialog(duke.getExit(), dukeImage);
+            DialogBox finishedBox = DialogBox.getDukeDialog(duke.save() + duke.getExit(), dukeImage);
             dialogContainer.getChildren().add(finishedBox);
             try {
                 TimeUnit.SECONDS.sleep(1);

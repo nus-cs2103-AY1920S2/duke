@@ -1,7 +1,3 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import parser.Parser;
 import storage.Storage;
 import tasks.TaskList;
@@ -31,16 +27,37 @@ public class Duke {
         this.parser = new Parser();
     }
 
-    // feed into parser, have to change our parser to return strings to output.
+    /**
+     * Returns a response to MainWindow to display in dialogBox.
+     * @param input String representing prompt.
+     * @return String to display.
+     */
     public String getResponse(String input) {
         return parser.handleTaskCommand(input, tasks);
     }
 
+    /**
+     * Returns a String representation of introduction message.
+     * @return String representing introduction message.
+     */
     public String getIntro() {
         return ui.getWelcomeMessage();
     }
 
+    /**
+     * Returns a String representation of exit message.
+     * @return String representing exit message.
+     */
     public String getExit() {
         return ui.getExitMessage();
+    }
+
+    /**
+     * Saves our current tasks and inform user about it.
+     * @return String saying instructions have been saved.
+     */
+    public String save() {
+        storage.save(tasks);
+        return "I have saved your instructions.\n";
     }
 }

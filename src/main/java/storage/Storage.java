@@ -39,7 +39,9 @@ public class Storage {
                 if (!directory.exists()) {
                     directory.mkdirs();
                 }
+                assert directory != null : "directory should be created";
                 file.createNewFile();
+                assert file != null : "new file should be created";
             } else {
                 FileInputStream fi = new FileInputStream(file);
                 ObjectInputStream oi = new ObjectInputStream(fi);
@@ -58,6 +60,7 @@ public class Storage {
      * @param tasks List of tasks to be saved.
      */
     public void save(TaskList tasks) {
+        assert new File(this.filePath) != null : "file you are saving to should exist.";
         try {
             FileOutputStream fo = new FileOutputStream(new File(this.filePath));
             ObjectOutputStream oo = new ObjectOutputStream(fo);

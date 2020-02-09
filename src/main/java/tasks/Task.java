@@ -32,11 +32,10 @@ public class Task implements Serializable {
 
     /**
      * Returns an string icon that suggests if a task is completed.
-     * @return String that is either a tick or cross.
+     * @return String that represents either a tick or cross.
      */
     public String getStatusIcon() {
-        // return (isDone ? "[\u2713]" : "[\u2718]"); // return tick or X symbols
-        return (isDone ? "[✓]" : "[✗]");    // the above did not work.
+        return (isDone ? "[/]" : "[x]");
     }
 
     /**
