@@ -34,85 +34,88 @@ public class Command {
      * @return Boolean describing if a bye command was executed
      */
     public String execute(TaskList taskList, UI ui) {
-        String outputString = "";
+        StringBuilder outputString = new StringBuilder();
+        assert command != null : "Command should not be null";
+        assert taskList != null : "taskList should not be null";
+        assert ui != null : "ui should not be null";
+
         switch (command) {
             case "bye":
-                outputString += ui.print("Bye. Hope to see you again soon!");
-                return outputString;
+                outputString.append(ui.print("Bye. Hope to see you again soon!"));
+                return outputString.toString();
             case "list":
                 ui.print("Here are the tasks in your list:");
                 for (int i = 0; i < taskList.size(); i++) {
-                    outputString += ui.print((i + 1) + "." + taskList.get(i));
+                    outputString.append(ui.print((i + 1) + "." + taskList.get(i)));
                 }
-                return outputString;
+                return outputString.toString();
             case "find":
-                outputString += ui.print("Here are the matching tasks in your list:");
+                outputString.append(ui.print("Here are the matching tasks in your list:"));
                 int count = 0;
                 for (int i = 0; i < taskList.size(); i++) {
                     if (taskList.get(i).containsString(arguments)) {
                         count++;
-                        outputString += ui.print(count + "." + taskList.get(i));
+                        outputString.append(ui.print(count + "." + taskList.get(i)));
                     }
                 }
-                return outputString;
+                return outputString.toString();
             case "done":
                 try {
                     int num = Integer.parseInt(arguments);
                     if (taskList.size() == 0) {
-                        outputString += ui.printError("=( OOPS!!! You have no tasks currently.");
+                        outputString.append(ui.printError("=( OOPS!!! You have no tasks currently."));
                     } else if (num <= 0) {
-                        outputString += ui.printError("=( OOPS!!! Task number cannot be equal to or less than 0");
+                        outputString.append(ui.printError("=( OOPS!!! Task number cannot be equal to or less than 0"));
                     } else if (num > taskList.size()) {
-                        outputString += ui.printError(
+                        outputString.append(ui.printError(
                                 "=( OOPS!!! The number of a done command cannot be greater than the number of tasks "
-                                        + "you have.");
+                                        + "you have."));
                     } else {
                         taskList.get(num - 1).markAsDone();
-                        outputString += ui.print("Nice! I've marked this task as done:");
-                        outputString += ui.print(taskList.get(num - 1).toString());
+                        outputString.append(ui.print("Nice! I've marked this task as done:"));
+                        outputString.append(ui.print(taskList.get(num - 1).toString()));
                     }
                 } catch (NumberFormatException ex) {
                     // handle exception here
-                    outputString += ui.printError("=( OOPS!!! Enter a valid number after done command");
+                    outputString.append(ui.printError("=( OOPS!!! Enter a valid number after done command"));
                 }
-                return outputString;
+                return outputString.toString();
             case "delete":
                 try {
                     int num = Integer.parseInt(arguments);
                     if (taskList.size() == 0) {
-                        outputString += ui.printError("=( OOPS!!! You have no tasks currently.");
+                        outputString.append(ui.printError("=( OOPS!!! You have no tasks currently."));
                     } else if (num <= 0) {
-                        outputString += ui.printError("=( OOPS!!! Task number cannot be equal to or less than 0");
+                        outputString.append(ui.printError("=( OOPS!!! Task number cannot be equal to or less than 0"));
                     } else if (num > taskList.size()) {
-                        outputString += ui.printError(
+                        outputString.append(ui.printError(
                                 "=( OOPS!!! The number of a delete command cannot be greater than the number of tasks "
-                                        + "you have.");
+                                        + "you have."));
                     } else {
                         Task removedTask = taskList.remove(num - 1);
-                        outputString += ui.print("Noted. I've removed this task: ");
-                        outputString += ui.print(removedTask.toString());
-                        outputString += ui.print("Now you have " + taskList.size() + " tasks in the list.");
+                        outputString.append(ui.print("Noted. I've removed this task: "));
+                        outputString.append(ui.print(removedTask.toString()));
+                        outputString.append(ui.print("Now you have " + taskList.size() + " tasks in the list."));
                     }
                 } catch (NumberFormatException ex) {
                     // handle exception here
-                    outputString += ui.printError("=( OOPS!!! Enter a valid number after done command");
+                    outputString.append(ui.printError("=( OOPS!!! Enter a valid number after done command"));
                 }
-                return outputString;
+                return outputString.toString();
             case "help":
-                outputString += ui.print("List of available commands: todo, event, deadline, list, find, done, delete, bye");
-                return outputString;
+                outputString.append(ui.print("List of available commands: todo, event, deadline, list, find, done, delete, bye"));
+                return outputString.toString();
             case "todo":
-                System.out.println("Arguments:" + arguments);
                 if (arguments.equals("todo")){
-                    outputString += ui.printError("=( OOPS!!! A ToDo cannot be empty.");
+                    outputString.append(ui.printError("=( OOPS!!! A ToDo cannot be empty."));
                 } else {
                     Task newToDo = new ToDos(arguments);
                     taskList.add(newToDo);
-                    outputString += ui.print("Got it. I've added this task:");
-                    outputString += ui.print(newToDo.toString());
-                    outputString += ui.print("Now you have " + taskList.size() + " tasks in the list.");
+                    outputString.append(ui.print("Got it. I've added this task:"));
+                    outputString.append(ui.print(newToDo.toString()));
+                    outputString.append(ui.print("Now you have " + taskList.size() + " tasks in the list."));
                 }
-                return outputString;
+                return outputString.toString();
             case "deadline":
                 try {
                     String description = arguments.split("/")[0].trim();
@@ -130,15 +133,15 @@ public class Command {
                             datetimeParsed.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mma"));
                     Task newDeadline = new Deadlines(description, newDateTime);
                     taskList.add(newDeadline);
-                    outputString += ui.print("Got it. I've added this task:");
-                    outputString += ui.print(newDeadline.toString());
-                    outputString += ui.print("Now you have " + taskList.size() + " tasks in the list.");
+                    outputString.append(ui.print("Got it. I've added this task:"));
+                    outputString.append(ui.print(newDeadline.toString()));
+                    outputString.append(ui.print("Now you have " + taskList.size() + " tasks in the list."));
                 } catch (Exception e){
-                    outputString += ui.printError(
+                    outputString.append(ui.printError(
                             "=( OOPS!!! Follow the format: deadline [activity] "
-                                    + "/by [year]-[month]-[day] [hour]:[minute]");
+                                    + "/by [year]-[month]-[day] [hour]:[minute]"));
                 }
-                return outputString;
+                return outputString.toString();
             case "event":
                 try {
                     String description = arguments.split("/")[0].trim();
@@ -170,18 +173,18 @@ public class Command {
 
                     Task newTask = new Events(description, newDateTime);
                     taskList.add(newTask);
-                    outputString += ui.print("Got it. I've added this task:");
-                    outputString += ui.print(newTask.toString());
-                    outputString += ui.print("Now you have " + taskList.size() + " tasks in the list.");
+                    outputString.append(ui.print("Got it. I've added this task:"));
+                    outputString.append(ui.print(newTask.toString()));
+                    outputString.append(ui.print("Now you have " + taskList.size() + " tasks in the list."));
                 } catch (Exception e){
-                    outputString += ui.printError(
-                        "=( OOPS!!! Follow the format: event [activity] /at [year]-[month]-[day]"
-                                +  " [hour]:[minute] to [year]-[month]-[day] [hour]:[minute]");
+                    outputString.append(ui.printError(
+                            "=( OOPS!!! Follow the format: event [activity] /at [year]-[month]-[day]"
+                                    + " [hour]:[minute] to [year]-[month]-[day] [hour]:[minute]"));
                 }
-                return outputString;
+                return outputString.toString();
             default:
-                outputString += ui.printError("=( OOPS!!! I'm sorry, but I don't know what that means.");
-                return outputString;
+                outputString.append(ui.printError("=( OOPS!!! I'm sorry, but I don't know what that means."));
+                return outputString.toString();
         }
     }
 }
