@@ -18,13 +18,13 @@ public class Ui {
     /**
      * Welcome message to be displayed to the user upon startup of the Duke program.
      */
-    public void welcomeMessage() {
+    public String welcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
+        return logo + "Hello! What can I do for you?";
     }
 
     /**

@@ -24,7 +24,7 @@ public class Storage {
      * Initialize the file with the filepath specified by user and saves the ui class.
      *
      * @param filepath The location where the program data will be saved or loaded from.
-     * @param ui The Storage class.
+     * @param ui The ui class.
      */
     public Storage(String filepath, Ui ui) {
         file = new File(new File(filepath).getAbsolutePath());

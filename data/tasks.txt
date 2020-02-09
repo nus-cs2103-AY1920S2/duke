@@ -1,4 +1,8 @@
 E | 1 | project meeting | Mar 3 2020
 D | 1 | return book | Mar 20 2020
-T | 1 | read book
-E | 0 | movie | Mar 12 2020
+D | 1 | add padding | Feb 10 2020
+T | 1 | another
+D | 0 | wowow  | Dec 12 2019
+D | 0 | ded                | Dec 12 2020
+D | 0 | norm | Dec 12 2020
+T | 0 | another task
