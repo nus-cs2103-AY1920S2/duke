@@ -31,6 +31,17 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+		events "passed", "skipped", "failed"
+        exceptionFormat "full"
+	}
 }
 
 group 'seedu.duke'
