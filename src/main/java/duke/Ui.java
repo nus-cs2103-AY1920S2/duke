@@ -57,15 +57,6 @@ public class Ui {
     }
 
     /**
-     * Prints out error when storage data cannot be loaded into program.
-     */
-    public void showLoadingError() {
-        printTextWithIndentation(HORIZONTAL_BAR);
-        printTextWithIndentation("Unable to load storage data...");
-        printTextWithIndentation(HORIZONTAL_BAR);
-    }
-
-    /**
      * Prints out error message for invalid user input.
      */
     public void unableToReadUserInput() {

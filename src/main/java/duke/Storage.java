@@ -72,9 +72,9 @@ public class Storage {
      * Returns a list of Tasks that represent the tasks saved in the save file.
      *
      * @return list of Tasks saved in specified save file when the Storage instance is created
-     * @throws DukeException the given save file could not be loaded
+     * @throws DukeStorageLoadException the given save file could not be loaded
      */
-    protected List<Task> load() throws DukeException {
+    public List<Task> load() throws DukeStorageLoadException {
         ArrayList<Task> tasks = new ArrayList<>();
         try (BufferedReader saveFile = new BufferedReader(new FileReader(saveFilePath))) {
             // Load data into tasks
@@ -109,7 +109,7 @@ public class Storage {
                 line = saveFile.readLine();
             }
         } catch (IOException e) {
-            throw new DukeException("Unable to load from given file...");
+            throw new DukeStorageLoadException();
         }
         return tasks;
     }

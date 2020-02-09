@@ -44,9 +44,9 @@ public class Duke {
         storage = new Storage(saveFile);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (DukeStorageLoadException e) {
             // Did not load tasks from save file
-            ui.showLoadingError();
+            ui.showExceptionMessage(e);
             tasks = new TaskList();
         }
     }

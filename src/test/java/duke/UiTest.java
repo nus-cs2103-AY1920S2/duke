@@ -127,15 +127,6 @@ class UiTest {
     }
 
     @Test
-    void showLoadingError() {
-        String expected = horizontalDivider
-                + indentation + "Unable to load storage data..." + newline
-                + horizontalDivider;
-        ui.showLoadingError();
-        assertEquals(expected, output.toString());
-    }
-
-    @Test
     void unableToReadUserInput() {
         String expected = horizontalDivider
                 + indentation + "Unable to read user input..." + newline
