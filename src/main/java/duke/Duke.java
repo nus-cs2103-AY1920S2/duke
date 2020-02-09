@@ -119,10 +119,11 @@ public class Duke {
         return response;
     }
 
-    private String formatResponse(String response) {
+    private String formatResponse(String input) {
         // Remove all horizontal divider present
         String indentation = Ui.INDENTATION;
         String horizontalBar = Ui.HORIZONTAL_BAR;
+        String response = input;
         while (response.contains(indentation)) {
             response = response.replace(indentation, "");
         }
