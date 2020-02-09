@@ -1,4 +1,4 @@
-package LC.duke;
+package lc.duke;
 
 import static java.lang.Integer.parseInt;
 import java.text.ParseException;

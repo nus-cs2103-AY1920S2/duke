@@ -1,4 +1,4 @@
-package LC.duke;
+package lc.duke;
 
 public abstract class Task {
     protected String description;

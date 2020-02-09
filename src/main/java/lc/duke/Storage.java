@@ -1,4 +1,4 @@
-package LC.duke;
+package lc.duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;

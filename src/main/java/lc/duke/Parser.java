@@ -1,4 +1,6 @@
-package LC.duke;
+package lc.duke;
+
+import lc.duke.DukeException;
 
 public class Parser {
     static boolean isProblem = false;
