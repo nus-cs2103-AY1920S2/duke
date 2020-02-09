@@ -1,3 +1,5 @@
 T | 1 | read book
 D | 0 | project report | 2020-02-12, 18:00
 E | 0 | birthday party | 2020-09-08, 17:00
+T | 0 | buy bread
+T | 0 | read book

@@ -52,6 +52,7 @@ public class Parser {
         LocalTime lt;
 
         try {
+            assert fullCommand.length() != 0 : "Assert error: No user input!";
             if (command.equals("delete")) {
                 Parser.checkInput(fullCommand, command, temp);
                 com = new DeleteCommand(Integer.parseInt(temp[1]));

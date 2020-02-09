@@ -50,7 +50,7 @@ public class Storage {
             DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             DateTimeFormatter inputTimeFormat = DateTimeFormatter.ofPattern("HH:mm");
             String line;
-
+            assert file != null : "Assert error: Error loading file, file not found";
             while ((line = br.readLine()) != null) {
                 String[] temp = line.split(" \\| ");
                 String task = temp[0];
@@ -95,6 +95,7 @@ public class Storage {
     public static void saveTasks(ArrayList<Task> tasks) throws SaveException {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
+            assert fw != null : "Assert error: Error saving into file, file not found!";
             for (Task t : tasks) {
                 fw.write(formatSavedFile(t) + "\n");
             }
@@ -111,6 +112,7 @@ public class Storage {
      * @return Formatted string.
      */
     private static String formatSavedFile(Task task) {
+        assert task != null : "Assert error: No new task to save!";
         String toAdd = "";
         int isDone = 0;
         if (task.isDone()) {

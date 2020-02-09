@@ -43,7 +43,7 @@ public class Ui {
      * Prints the error message when not able to load file.
      */
     public void showLoadingError() {
-        System.out.println("ERROD: Not able to load file.");
+        System.out.println("ERROR: Not able to load file.");
     }
 
     /**
@@ -64,6 +64,7 @@ public class Ui {
      * Prints the message to be shown to user.
      */
     public void printMsg(String msg) {
+        assert msg.length() != 0 : "Assert error: no message to print!";
         System.out.println(msg);
     }
 
