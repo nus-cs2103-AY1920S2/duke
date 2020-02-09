@@ -62,11 +62,9 @@ public class MainWindow extends AnchorPane {
                 if (tasks.getTaskListSize() == 0) {
                     handleDialogOutput(input, ui.emptyList());
                     saveToFile.usingFileWriter("");
-//                    ui.emptyList();
                 } else {
                     StringBuilder sb = new StringBuilder();
                     handleDialogOutput(input, ui.listCommand(tasks, sb));
-//                    ui.listCommand(tasks, sb);
                     saveToFile.usingFileWriter(sb.toString());
                 }
             } else if (arrString[0].equalsIgnoreCase("done")) {
@@ -74,10 +72,8 @@ public class MainWindow extends AnchorPane {
                     int taskNumber = Integer.parseInt(arrString[1].strip()) - 1;
                     if (taskNumber >= 0 && taskNumber < tasks.getTaskListSize()) {
                         handleDialogOutput(input, ui.doneTask(tasks, taskNumber));
-//                        ui.doneTask(tasks, taskNumber);
                     } else {
                         handleDialogOutput(input, ui.invalidTask());
-//                        ui.invalidTask();
                     }
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     handleDialogOutput(input, ui.missingTaskNumber());
@@ -89,10 +85,8 @@ public class MainWindow extends AnchorPane {
                     int taskNumber = Integer.parseInt(arrString[1].strip()) - 1;
                     if (taskNumber >= 0 && taskNumber < tasks.getTaskListSize()) {
                         handleDialogOutput(input, ui.deletedTask(tasks, taskNumber));
-//                        ui.deletedTask(tasks, taskNumber);
                     } else {
                         handleDialogOutput(input, ui.invalidTask());
-//                        ui.invalidTask();
                     }
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     handleDialogOutput(input, ui.missingTaskNumber());
@@ -104,7 +98,6 @@ public class MainWindow extends AnchorPane {
                     Todo todo = new Todo(arrString[1]);
                     tasks.addTask(todo);
                     handleDialogOutput(input, ui.taskInList(tasks.getTaskListSize()));
-//                    ui.taskInList(tasks.getTaskListSize());
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     handleDialogOutput(input, ui.incompleteCommand("Todo"));
                     throw new DukeException(ui.incompleteCommand("Todo"));
@@ -115,7 +108,6 @@ public class MainWindow extends AnchorPane {
                     Event event = new Event(eventString[0].strip(), eventString[1].substring(2).strip());
                     tasks.addTask(event);
                     handleDialogOutput(input, ui.taskInList(tasks.getTaskListSize()));
-//                    ui.taskInList(tasks.getTaskListSize());
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     handleDialogOutput(input, ui.incompleteCommand("Event"));
                     throw new DukeException(ui.incompleteCommand("Event"));
@@ -127,7 +119,6 @@ public class MainWindow extends AnchorPane {
                             deadlineString[1].substring(2).strip());
                     tasks.addTask(deadline);
                     handleDialogOutput(input, ui.taskInList(tasks.getTaskListSize()));
-//                    ui.taskInList(tasks.getTaskListSize());
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     handleDialogOutput(input, ui.incompleteCommand("Deadline"));
                     throw new DukeException(ui.incompleteCommand("Deadline"));
