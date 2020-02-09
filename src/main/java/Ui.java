@@ -21,15 +21,6 @@ public class Ui {
     }
 
     /**
-     * Prints out respective exception.
-     *
-     * @param exception DukeException resulted from user's command input.
-     */
-    public void printError(Exception exception) {
-        System.out.println(exception.toString());
-    }
-
-    /**
      * Prints goodbye message when user says bye.
      */
     public void printExitLine() {

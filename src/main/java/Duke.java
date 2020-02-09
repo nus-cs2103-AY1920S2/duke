@@ -148,7 +148,22 @@ public class Duke extends Application {
         return storage;
     }
 
+    /**
+     * Runs the Duke program.
+     *
+     */
+    public void run() {
+        ui.printWelcome();
+        Scanner sc = new Scanner(System.in);
+        String command = sc.nextLine();
+        while (!command.equals("bye")) {
+            System.out.println(parser.parse(command));
+            command = sc.nextLine();
+        }
+        ui.printExitLine();
+    }
+
     public static void main(String[] args) {
-        new Duke("./src/main/data/duke.txt");
+        new Duke("./src/main/data/duke.txt").run();
     }
 }
