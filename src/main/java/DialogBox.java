@@ -11,6 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -29,12 +33,18 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            dialog.setMinHeight(Region.USE_PREF_SIZE);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        Circle circle = new Circle(40,22,22);
+        circle.setStroke(Color.ALICEBLUE);
+        circle.setFill(new ImagePattern(img));
+
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(circle);
     }
 
     /**
@@ -60,6 +70,7 @@ public class DialogBox extends HBox {
      * @return DialogBox for duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
+
         var db = new DialogBox(text, img);
         db.flip();
         return db;
