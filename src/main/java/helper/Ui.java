@@ -61,6 +61,7 @@ public class Ui {
 
     public String printTaskList(ArrayList<Task> tList){
         String outputString = "";
+
         for (int i = 0; i < tList.size(); i++) {
             String temp = ((i + 1) + ". " + tList.get(i).toString())+"\n";
             outputString += temp;
