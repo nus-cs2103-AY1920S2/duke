@@ -1,10 +1,17 @@
+package duke;
+
 import java.io.IOException;
 
-public class ListCommand implements Command {
+public class DeleteCommand implements Command {
 
     @Override
     public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {
-        ui.showTaskList(taskList);
+
+        String[] split = task.split(" ");
+        int num = Integer.parseInt(split[1]);
+        taskList.deleteTask(num);
+        ui.showTaskDeletedMessage(num);
+
     }
 
     @Override

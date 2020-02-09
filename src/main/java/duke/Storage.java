@@ -1,4 +1,5 @@
-import java.awt.desktop.SystemEventListener;
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 
 public class DoneCommand implements Command {
