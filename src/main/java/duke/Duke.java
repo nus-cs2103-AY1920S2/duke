@@ -1,13 +1,13 @@
 package duke;
 
 import duke.Ui.Ui;
-import duke.command.IllegalCommandException;
+import duke.command.Command;
+import duke.parser.Parser;
 import duke.storage.TaskStorage;
 import duke.task.Task;
-import duke.task.TaskDispatch;
+import exception.IllegalTextException;
 
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class Duke {
     // attributes
@@ -29,11 +29,18 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(this.ui, this.taskStorage);
+        } catch (IllegalTextException | Exception e) {
+            return this.ui.showErrorMessage(e);
+        }
+
     }
 
     // Carry out Add, List, Done commands if entered by user
     // Terminates when user gives exit signal
+    /*
     private void runDuke() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -79,12 +86,12 @@ public class Duke {
 
             handleCommandAdd(t, nextInput);
         }
-    }
+    }*/
 
     // Print a closing message before stopping duke.Duke
-    private static void stopDuke() {
+    private static String stopDuke() {
         String closingMessage = "Bye. Hope to see you again soon!";
-        System.out.println("    " + closingMessage);
+        return "    " + closingMessage;
     }
 
     // duke.task.Todo: abstract away the following logic from main via new interface for command handlers
@@ -98,8 +105,8 @@ public class Duke {
         }
     }
 
-    private void handleCommandAdd(Task newTask, String nextInput) {
-        this.taskStorage.addToTaskList(newTask, nextInput);
+    private void handleCommandAdd(Task newTask) {
+        this.taskStorage.addToTaskList(newTask);
         System.out.println("    Got it. I've added this task:\n"
                 + "      " + newTask);
         System.out.println("    Now you have " + this.taskStorage.getTaskList().size() + " tasks in the list.");
@@ -119,6 +126,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().runDuke();
+        //new Duke().runDuke();
     }
 }

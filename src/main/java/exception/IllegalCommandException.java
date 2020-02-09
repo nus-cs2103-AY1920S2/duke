@@ -1,4 +1,4 @@
-package duke.command;
+package exception;
 
 public class IllegalCommandException extends Exception {
 
