@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Parser class. This class manages the input of the user.
@@ -110,7 +111,7 @@ public class Parser {
             if (input.equals("bye")) {
                 UI.printBye();
                 Storage.writeList();
-            } else if (input.equals("end")) {
+                TimeUnit.SECONDS.sleep(5);
                 System.exit(0);
             } else if (input.contains("find")) {
                 if (input.split(" ").length == 1) {
