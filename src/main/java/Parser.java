@@ -31,6 +31,8 @@ public class Parser {
                 return parseTodo(getDetails(command, firstWord));
             case "find":
                 return parseFind(getDetails(command, firstWord));
+            case "snooze":
+                return parseSnooze(getDetails(command, firstWord));
             default:
                 return new InvalidCommand();
             }
@@ -76,6 +78,18 @@ public class Parser {
             int index = Integer.parseInt(details) - 1;
             return new CompleteTaskCommand(index);
         } catch (NumberFormatException e) {
+            return new InvalidFormatCommand();
+        }
+    }
+
+    private static Command parseSnooze(String details) {
+        try {
+            String words[] = details.split(" ");
+            int index = Integer.parseInt(words[0]) - 1;
+            String newTime = getDetails(details, words[0]);
+
+            return new SnoozeCommand(index, newTime);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             return new InvalidFormatCommand();
         }
     }
