@@ -15,8 +15,6 @@ import duke.DukeException;
  */
 public class Event extends Task {
 
-    private String eventDateString;
-    private String eventTimeString;
     private LocalDate eventDate;
     private LocalTime eventTime;
 
@@ -36,10 +34,10 @@ public class Event extends Task {
                 throw new DukeException("dateTime");
             }
 
-            this.eventDateString = event[1];
-            this.eventTimeString = event[2];
-            this.eventDate = LocalDate.parse(this.eventDateString, dateFormatter);
-            this.eventTime = LocalTime.parse(this.eventTimeString, timeFormatter);
+            String eventDateString = event[1];
+            String eventTimeString = event[2];
+            this.eventDate = formatDate(eventDateString);
+            this.eventTime = formatTime(eventTimeString);
 
         } catch(Exception e) {
             throw new DukeException("dateTime");

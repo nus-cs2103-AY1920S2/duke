@@ -15,19 +15,16 @@ import duke.task.TaskList;
  */
 public class DukeUserInterface {
 
-    // Default greeting lines and format lines
     private static final String LINE = "    ____________________________________________________________";
     private static final String OPENING_GREETING = "     Hello! I'm Duke\n" + "     What can I do for you?";
     private static final String FAREWELL_CLOSING = LINE + "\n" + "     Bye. Hope to see you again soon!" + "\n" + LINE;
 
-    // Helps read in user input
     private InputStreamReader stringReader;
     private BufferedReader commandReader;
 
-    // Main variables to run the program
-    private Storage internalStorage; // Stores and loads saved data.
-    private Parser commandParser; // Reads commands and executes appropriate actions.
-    private TaskList listOfTasks; // Contains the list of tasks.
+    private Storage internalStorage;
+    private Parser commandParser;
+    private TaskList listOfTasks;
 
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -55,7 +52,7 @@ public class DukeUserInterface {
     }
 
     /**
-     *  Method to run the program.
+     *  Runs the Duke program.
      *  Reads in input Strings from the user.
      *  Terminates the program when "bye" command is given.
      */

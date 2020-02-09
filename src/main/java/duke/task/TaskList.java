@@ -100,7 +100,6 @@ public class TaskList {
             System.out.println(e);
         }
 
-        // Putting the output string together
         String output = LINE + "\n" +
                 TASK_ADD_MESSAGE + "\n" +
                 "       " + this.storageData.get(this.storageData.size() - 1) + "\n";
@@ -115,10 +114,8 @@ public class TaskList {
      */
     public void delete(String position) {
 
-        // Identify index to remove task from
         int indexPosition = Integer.parseInt(position);
 
-        // Putting output string together
         try {
             String output = LINE + "\n" + DELETE_MESSAGE + "\n" + "       " + this.storageData.get(indexPosition - 1) + "\n";
             output += "     Now you have " + (this.storageData.size() - 1) + " task(s) in the list." + "\n" + LINE;
@@ -138,7 +135,6 @@ public class TaskList {
     public void done(String position) {
         int task_Done = Integer.parseInt(position);
 
-        // Checks the task as 'Done'
         this.storageData.get(task_Done - 1).taskDone();
 
         System.out.println(LINE);

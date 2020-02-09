@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
@@ -14,18 +16,12 @@ import duke.DukeException;
  */
 public class Task implements Serializable {
 
-    // task = Full input line
-    // type = todo, event, or deadline
-    // done = done or not done
-
     String task;
     String type;
     boolean isDone = false;
     static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
-
-    // Tasks represented by their initials
     private final static String TODO = "T";
     private final static String DEADLINE = "D";
     private final static String EVENT = "E";
@@ -91,6 +87,28 @@ public class Task implements Serializable {
         } catch (Exception e) {
             throw new DukeException(type);
         }
+    }
+
+    /**
+     * Formats date into appropriate format.
+     *
+     * @param dateString Date input in String format.
+     * @return LocalDate object in proper format.
+     */
+    public LocalDate formatDate(String dateString) {
+
+        return LocalDate.parse(dateString, dateFormatter);
+    }
+
+    /**
+     * Formats time into appropriate format.
+     *
+     * @param timeString Time input in String format.
+     * @return LocalTime object in proper format.
+     */
+    public LocalTime formatTime(String timeString) {
+
+        return LocalTime.parse(timeString, timeFormatter);
     }
 
     /**

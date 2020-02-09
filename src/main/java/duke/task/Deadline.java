@@ -15,8 +15,6 @@ import duke.DukeException;
  */
 public class Deadline extends Task {
 
-    private String deadlineDateString;
-    private String deadlineTimeString;
     private LocalDate deadlineDate;
     private LocalTime deadlineTime;
 
@@ -38,10 +36,10 @@ public class Deadline extends Task {
                 throw new DukeException("dateTime");
             }
 
-            this.deadlineDateString = deadline[1];
-            this.deadlineTimeString = deadline[2];
-            this.deadlineDate = LocalDate.parse(this.deadlineDateString, dateFormatter);
-            this.deadlineTime = LocalTime.parse(this.deadlineTimeString, timeFormatter);
+            String deadlineDateString = deadline[1];
+            String deadlineTimeString = deadline[2];
+            this.deadlineDate = formatDate(deadlineDateString);
+            this.deadlineTime = formatTime(deadlineTimeString);
 
         } catch (Exception e) {
             throw new DukeException("dateTime");
