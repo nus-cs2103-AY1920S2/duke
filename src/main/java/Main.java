@@ -13,20 +13,27 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    private static Stage stageCopy;
 
     @Override
     public void start(Stage stage) {
         try {
+            stageCopy = stage;
             duke.setup();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setResizable(true);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void end() {
+        stageCopy.close();
     }
 
 }

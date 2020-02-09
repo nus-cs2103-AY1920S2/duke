@@ -1,3 +1,4 @@
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -62,6 +64,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
+
+        if(duke.getIsExit()) {
+
+            PauseTransition pause = new PauseTransition(Duration.seconds(2.0));
+            pause.setOnFinished(event -> Main.end());
+            pause.play();
+        }
 
     }
 }

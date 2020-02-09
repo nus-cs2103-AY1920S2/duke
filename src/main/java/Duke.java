@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 public class Duke {
 
     Ui ui;
+    boolean isExit;
 
     /**
      * Creates objects needed for the program and
@@ -35,6 +36,8 @@ public class Duke {
         Ui ui = new Ui(storage, taskList);
         this.ui = ui;
 
+        isExit = false;
+
     }
 
     /**
@@ -45,7 +48,15 @@ public class Duke {
      */
     String getResponse(String input) {
 
+        if(input.equals("bye")) {
+            isExit = true;
+        }
+
         return ui.frontDesk(input);
+    }
+
+    public boolean getIsExit() {
+        return isExit;
     }
 
 }
