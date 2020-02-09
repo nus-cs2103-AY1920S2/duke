@@ -8,7 +8,8 @@ import java.util.HashMap;
  */
 public class Duke {
     static String terminateCommand = "bye";
-    static ArrayList<Task> tasks = new ArrayList<Task>();
+    static TaskCollection taskCollection = new TaskCollection();
+    static PersistentStorageObserver persistentStorageObserver = new PersistentStorageObserver(taskCollection);
     // Use a hashmap to store command key to prevent developer error in typing command keys across different functions
     static HashMap<String, Integer> commandCodeMapping = new HashMap<String, Integer>() {
         {
@@ -61,39 +62,39 @@ public class Duke {
     private static void commandProcessor(String command) {
         Integer commandCode = getCommandCode(command);
         if (commandCode == commandCodeMapping.get("list")) {
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.printf("%s[%s][%c] %s\n",
-                        i, tasks.get(i).getShortName(),
-                        (char) (Integer.parseInt(tasks.get(i).getStatusIcon(), 16)),
-                        tasks.get(i).description);
+            for (int i = 0; i < taskCollection.size(); i++) {
+                System.out.printf("%s[%s][%c]%s\n",
+                        i, taskCollection.get(i).getShortName(),
+                        (char) (Integer.parseInt(taskCollection.get(i).getStatusIcon(), 16)),
+                        taskCollection.get(i).description);
             }
         } else if (commandCode == commandCodeMapping.get("mark done")) {
             Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
-            if (taskIndex < tasks.size()) {
-                tasks.get(taskIndex).markDone();
+            if (taskIndex < taskCollection.size()) {
+                taskCollection.get(taskIndex).markDone();
             }
         } else if (commandCode == commandCodeMapping.get("delete")) {
             Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
             System.out.println("HIEU");
-            if (taskIndex < tasks.size()) {
-                tasks.remove(taskIndex.intValue());
+            if (taskIndex < taskCollection.size()) {
+                taskCollection.remove(taskIndex.intValue());
             }
         } else if (commandCode == commandCodeMapping.get("todo")) {
             String todoContent = command.split(" ", 2)[1];
             Task todo = new Todo(todoContent);
-            tasks.add(todo);
+            taskCollection.add(todo);
         } else if (commandCode == commandCodeMapping.get("deadline")) {
             String deadlineContent = command.split(" ", 2)[1];
             String deadlineDesc = deadlineContent.split("/by")[0];
             String deadlineTime = deadlineContent.split("/by")[1];
             Task deadline = new Deadline(deadlineDesc, deadlineTime);
-            tasks.add(deadline);
+            taskCollection.add(deadline);
         } else if (commandCode == commandCodeMapping.get("event")) {
             String eventContent = command.split(" ", 2)[1];
             String eventDesc = eventContent.split("/at")[0];
             String eventTime = eventContent.split("/at")[1];
             Task event = new Event(eventDesc, eventTime);
-            tasks.add(event);
+            taskCollection.add(event);
         } else if (commandCode == commandCodeMapping.get("invalid command")) {
             System.out.printf("OOPS Wrong command\n");
         }
