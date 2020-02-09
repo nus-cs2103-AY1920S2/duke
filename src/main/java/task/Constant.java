@@ -7,6 +7,7 @@ public enum Constant {
     PERIODTASK("[P]", "/start", "/end");
 
     public static String[] taskTypes = {"todo", "event", "deadline", "period"};
+    public static String[] taskDelimiters = {"/at", "/by", "/start"};
     private final String type;
     private final String[] timeDelimiter;
 

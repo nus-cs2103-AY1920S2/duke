@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import parser.Parser;
 
+//TODO edit getDescription for PeriodTask
+
 public class PeriodTask extends TimeTask {
     protected LocalDate endDate;
     protected LocalTime endTime;

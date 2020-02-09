@@ -88,7 +88,7 @@ public class Parser {
      * @throws DukeException when content is empty, raise exception
      */
     public static String getContent(String description) throws DukeException {
-        Matcher matcher = Pattern.compile("(/by|/at)").matcher(description);
+        Matcher matcher = Pattern.compile(String.join("|", Constant.taskDelimiters)).matcher(description);
         int index = matcher.find() ? matcher.start() : -1;
         if (index == -1 && description.trim().length() > 0) {
             return description.trim();
