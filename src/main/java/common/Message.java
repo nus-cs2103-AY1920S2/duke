@@ -21,4 +21,6 @@ public class Message {
     public static final String MESSAGE_EMPTYLIST = "     The list is currently empty.";
     public static final String MESSAGE_FIND = "     Here are the matching tasks in your list:";
     public static final String MESSAGE_NULL = "     Sorry, but I cannot find matching items.";
+    public static final String MESSAGE_SHOWRELATED = "     Here are all related undone tasks:";
+    public static final String MESSAGE_NOTHING = "you have nothing left in the list.";
 }

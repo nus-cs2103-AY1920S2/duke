@@ -21,12 +21,7 @@ public class Duke {
     public Duke() {
         textUi = new TextUi();
         dukeStorage = new Storage("tasks.txt");
-        try {
-            tasks = new TaskList(dukeStorage.readFromFile());
-        } catch (exception.DukeException e) {
-            textUi.showError(e.getMessage());
-            tasks = new TaskList();
-        }
+        tasks = new TaskList(dukeStorage.readFromFile());
     }
 
     /**

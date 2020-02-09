@@ -6,6 +6,7 @@ import common.Message;
 import common.Storage;
 import task.Task;
 import task.TaskList;
+import task.Todo;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -163,9 +164,7 @@ public class TextUi {
             sb.append(Message.MESSAGE_LINE);
             return sb.toString();
         } else {
-            for (int i = 0; i < tasks.getList().size(); i++) {
-                sb.append("     " + (i + 1) + ". " + tasks.getList().get(i).toString() + "\n");
-            }
+            sb.append(tasks.toListString());
             sb.append(Message.MESSAGE_LINE);
         }
         return sb.toString();
@@ -192,6 +191,39 @@ public class TextUi {
         }
         if (marker == 1) {
             sb.append(Message.MESSAGE_NULL + "\n");
+        }
+        sb.append(Message.MESSAGE_LINE);
+        return sb.toString();
+    }
+
+    /**
+     * Shows a list of specified-type tasks that are undone.
+     *
+     * @param tasks the list of tasks stored in the text file
+     * @param taskType the specified type of tasks that are required
+     * @return a string of tasks that are required
+     */
+    public String remindTasks(TaskList tasks, char taskType) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Message.MESSAGE_LINE + "\n");
+        sb.append(Message.MESSAGE_SHOWRELATED + "\n");
+        if(taskType == 'A') {
+            sb.append(tasks.toUndoneListString());
+        } else {
+            int marker = 1;
+            Task thisTask;
+            for (int i = 0; i < tasks.getList().size(); i++) {
+                thisTask = tasks.getList().get(i);
+                if (thisTask.toString().charAt(1) == taskType && !thisTask.isDone) {
+                    sb.append("     ").append(marker).append(". ").append(thisTask).append("\n");
+                    marker++;
+                }
+            }
+            if (marker == 1) {
+                sb.append("     For this type, " + Message.MESSAGE_NOTHING + "\n");
+            } else {
+                sb.append("     Try to finish them soon ~" + "\n");
+            }
         }
         sb.append(Message.MESSAGE_LINE);
         return sb.toString();

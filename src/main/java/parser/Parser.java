@@ -8,6 +8,7 @@ import command.DisplayCommand;
 import command.ErrorCommand;
 import command.ExitCommand;
 import command.FindCommand;
+import command.ReminderCommand;
 import task.Todo;
 import task.Event;
 import task.Deadline;
@@ -39,6 +40,11 @@ public class Parser {
             String searchingItem = input.substring(5).trim();
             return new FindCommand(searchingItem);
         }
+
+        if(keyword.equalsIgnoreCase("reminders")) {
+            return handleReminder(words);
+        }
+
         if (keyword.equalsIgnoreCase("bye")) {
             return new ExitCommand();
         }
@@ -95,6 +101,25 @@ public class Parser {
                 return new ErrorCommand();
             }
             return new AddCommand(new Deadline(stamps[0].substring(9), ddlWords[1]));
+        } else {
+            return new ErrorCommand();
+        }
+    }
+
+    public static Command handleReminder(String[] words) {
+        if(words.length == 1){
+            return new ReminderCommand();
+        } else if (words.length == 2){
+            String taskType = words[1];
+            if (taskType.equalsIgnoreCase("todo")) {
+                return new ReminderCommand(1);
+            } else if (taskType.equalsIgnoreCase("event")) {
+                return new ReminderCommand(2);
+            } else if (taskType.equalsIgnoreCase("deadline")) {
+                return new ReminderCommand(3);
+            } else {
+                return new ErrorCommand();
+            }
         } else {
             return new ErrorCommand();
         }

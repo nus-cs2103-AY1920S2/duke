@@ -58,4 +58,35 @@ public class TaskList {
     public void done(int index) {
         this.list.get(index).markAsDone();
     }
+
+    /**
+     * Represents the list of tasks in one string.
+     *
+     * @return a string representing all the tasks in the list
+     */
+    public String toListString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.list.size(); i++) {
+            sb.append("     " + (i + 1) + ". " + this.list.get(i).toString() + "\n");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Represents the list of undone tasks in one string.
+     *
+     * @return a string representing all the undone tasks in the list
+     */
+    public String toUndoneListString() {
+        StringBuilder sb = new StringBuilder();
+        int marker = 1;
+        for (int i = 0; i < this.list.size(); i++) {
+            if (this.list.get(i).isDone) {
+                continue;
+            }
+            sb.append("     " + marker + ". " + this.list.get(i).toString() + "\n");
+            marker ++;
+        }
+        return sb.toString();
+    }
 }
