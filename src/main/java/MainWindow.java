@@ -41,9 +41,10 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException {
         String input = userInput.getText();
         if (input.equals("bye")) {
+            duke.getStorage().updateFile();
             Stage stage = (Stage) sendButton.getScene().getWindow();
             stage.close();
         }

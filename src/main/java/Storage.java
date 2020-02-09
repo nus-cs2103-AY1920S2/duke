@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -65,7 +62,16 @@ public class Storage {
             return taskList;
         } else {
             boolean isFileCreated = file.createNewFile();
-            throw new DukeException(8);
+            throw new DukeException("LOAD_ERROR");
         }
+    }
+
+    public void updateFile() throws IOException {
+        // update task list before exiting
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        for (Task task: taskList) {
+            writer.write(task.updateFile() + "\n");
+        }
+        writer.flush();
     }
 }

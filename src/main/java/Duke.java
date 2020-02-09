@@ -58,21 +58,6 @@ public class Duke extends Application {
         parser = new Parser(tasks.getList());
     }
 
-    /**
-     * Runs the Duke program.
-     *
-     * @throws IOException if there is error handling data in the file.
-     */
-    public void updateFile() throws IOException {
-        // update task list before exiting
-        BufferedWriter writer = new BufferedWriter(new FileWriter(storage.getFile()));
-        for (Task task: tasks.getList()) {
-            writer.write(task.updateFile() + "\n");
-        }
-        writer.flush();
-        ui.printExitLine();
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -94,7 +79,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("DukeBot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -157,12 +142,12 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        return run(input);
+    public String getResponse(String input) {
+        return parser.parse(input);
     }
 
-    public String run(String command) {
-        return parser.parse(command);
+    public Storage getStorage() {
+        return storage;
     }
 
     public static void main(String[] args) {
