@@ -17,10 +17,8 @@ public class HelpCommand extends Command {
         COMMAND_INFO.put("bye", "Exits the program");
         COMMAND_INFO.put("list", "Shows all current tasks");
         COMMAND_INFO.put("today", "Shows all tasks occurring on today");
-        COMMAND_INFO.put("done", "Marks the indicated task as done. "
-                + "Use list, today, check or find to see each tasks' index.");
-        COMMAND_INFO.put("delete", "Deletes the indicated task from the list. "
-                + "Use list, today, check or find to see each tasks' index.");
+        COMMAND_INFO.put("done", "Marks the indicated task as done.");
+        COMMAND_INFO.put("delete", "Deletes the indicated task from the list.");
         COMMAND_INFO.put("check", "Shows all tasks occurring on the given date.");
         COMMAND_INFO.put("todo", "Adds a new uncompleted todo task");
         COMMAND_INFO.put("deadline", "Adds a new uncompleted deadline with given due date");
@@ -106,7 +104,7 @@ public class HelpCommand extends Command {
         ui.respond("2. d MMM yyyy",
                 "Example: 2 Feb 2020",
                 "Even easier to remember and type!");
-        ui.respond("3. <day-of-week> [+number]",
+        ui.respond("3. dayOfWeek [+number]",
                 "Examples:", "Monday +4", "Tue", "Sun +3",
                 "If just a day of the week is given, say Tue or Wed, the date is "
                 + "taken to be the next closest day from today. Eg. 'Tue' refers to "

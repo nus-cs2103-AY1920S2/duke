@@ -120,7 +120,7 @@ public class Parser {
             return new DeleteCommand(indexDelete);
 
         case "check":
-            LocalDate checkDate = parseDate(args, "check");
+            LocalDate checkDate = DateParser.parse(args, "check");
             return new CheckDateCommand(checkDate);
 
         case "todo":
@@ -153,27 +153,17 @@ public class Parser {
         }
     }
 
-    private static LocalDate parseDate(String dateString, String command) throws ParsingException {
-        try {
-            return LocalDate.parse(dateString);
-        } catch (DateTimeParseException e) {
-            String errorMsg = "I don't understand this date: " + dateString
-                    + ". Type 'help -date' to see the date formats I accept.";
-            throw new ParsingException(errorMsg, USAGES.get(command));
-        }
-    }
-
     private static Event parseEvent(String args) throws ParsingException {
         String[] eventArgs = args.split(WHITESPACE + "/from" + WHITESPACE, 2);
         String[] eventDateStrings = eventArgs[1].split(WHITESPACE + "/to" + WHITESPACE, 2);
-        LocalDate from = parseDate(eventDateStrings[0], "event");
-        LocalDate to = parseDate(eventDateStrings[1], "event");
+        LocalDate from = DateParser.parse(eventDateStrings[0], "event");
+        LocalDate to = DateParser.parse(eventDateStrings[1], "event");
         return new Event(eventArgs[0], from, to, false);
     }
 
     private static Deadline parseDeadline(String args) throws ParsingException {
         String[] deadlineArgs = args.split(WHITESPACE + "/by" + WHITESPACE, 2);
-        LocalDate by = parseDate(deadlineArgs[1], "deadline");
+        LocalDate by = DateParser.parse(deadlineArgs[1], "deadline");
         return new Deadline(deadlineArgs[0], by, false);
     }
 }
