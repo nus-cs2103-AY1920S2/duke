@@ -120,8 +120,8 @@ public class Command {
             return instruction;
         default:
             try {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                        "Type 'help' to view available commands!" );
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                        + "Type 'help' to view available commands!");
             } catch (DukeException e) {
                 return e.getMessage();
             }
