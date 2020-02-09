@@ -11,6 +11,10 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public String getShortName() {
         return "task.Task";
     }
