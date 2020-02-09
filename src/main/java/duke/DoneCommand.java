@@ -1,3 +1,5 @@
+package duke;
+
 public class DoneCommand implements Command {
     private int doneIndex;  //doneIndex is 0-indexed
 

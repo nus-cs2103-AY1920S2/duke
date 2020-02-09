@@ -1,3 +1,5 @@
+package duke;
+
 public class UndefinedCommandException extends DukeException {
     @Override
     public String getErrorMessage() {

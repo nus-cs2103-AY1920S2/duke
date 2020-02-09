@@ -1,3 +1,4 @@
+import duke.Todo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,7 +8,7 @@ class TodoTest {
 
     @Test
     void createdIncompleteTest() {
-        assertEquals(todo.isDone, false, "Todo is initialized to incomplete");
+        assertEquals(todo.isDone, false, "duke.Todo is initialized to incomplete");
     }
 
     @Test

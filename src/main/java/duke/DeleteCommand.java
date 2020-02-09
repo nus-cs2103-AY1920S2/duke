@@ -1,3 +1,5 @@
+package duke;
+
 public class DeleteCommand implements Command {
     private int deleteIndex;  //deleteIndex is 0-indexed
 

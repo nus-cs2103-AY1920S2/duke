@@ -1,3 +1,5 @@
+package duke;
+
 public class InvalidCommand implements Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

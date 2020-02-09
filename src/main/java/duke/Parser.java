@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         int spaceIndex = fullCommand.indexOf(" ");
@@ -27,11 +29,11 @@ public class Parser {
                 return new Command.AddCommand(new Event(splitat[0], splitat[1]));
             } else if (firstArg.equals("done")) {
                 // assumes command is only "done" and an int
-                // the input is 1-indexed. DoneCommand takes in 0-indexed
+                // the input is 1-indexed. duke.DoneCommand takes in 0-indexed
                 return new DoneCommand(Integer.parseInt(otherArgs) - 1);
             } else if (firstArg.equals("delete")) {
                 // assumes command is only "delete" and an int
-                // the input is 1-indexed. DeleteCommand takes in 0-indexed
+                // the input is 1-indexed. duke.DeleteCommand takes in 0-indexed
                 return new DeleteCommand(Integer.parseInt(otherArgs) - 1);
             } else {
                 throw new UndefinedCommandException();
