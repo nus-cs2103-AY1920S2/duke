@@ -40,6 +40,10 @@ public class Task {
         }
     }
 
+    public boolean isTaskDone() {
+        return isDone;
+    }
+
     public String getDescription() {
         return description;
     }

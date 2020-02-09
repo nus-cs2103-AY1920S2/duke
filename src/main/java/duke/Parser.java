@@ -49,6 +49,7 @@ public class Parser {
                 if (inputs[0].equals("done")) {
                     try {
                         tasks.get(taskNumber).markAsDone();
+                        assert tasks.get(taskNumber).isTaskDone() : "Done command error.";
                     } catch (DukeException e) {
                         throw e;
 //                        ui.exceptionMessage(e);
@@ -56,7 +57,9 @@ public class Parser {
                     }
                     msg = "Nice! I've marked this task as done:\n    " + tasks.get(taskNumber);
                 } else {
+                    int size = tasks.size();
                     Task deletedTask = tasks.remove(taskNumber);
+                    assert (size - 1) == tasks.size() : "Delete command error";
                     msg = "Noted. I've removed this task: \n    " + deletedTask
                             + "\nNow you have " + tasks.size() + " tasks in the list.";
                 }
@@ -68,8 +71,10 @@ public class Parser {
             break;
         case "todo":
             try {
+                int size = tasks.size();
                 Task todo = new Todo(inputs[1]);
                 tasks.add(todo);
+                assert (size + 1) == tasks.size() : "Todo command error";
                 data = "T | 0 | " + inputs[1] + "\n";
                 storage.writeToFile(data);
                 msg = "Got it. I've added this task:\n    "
@@ -81,6 +86,7 @@ public class Parser {
             break;
         case "deadline":
             try {
+                int size = tasks.size();
                 String[] taskDetails = inputs[1].split(" /by ");
                 if (taskDetails[0].trim().isEmpty()) {
                     throw new IndexOutOfBoundsException();
@@ -89,6 +95,7 @@ public class Parser {
                     LocalDate date = LocalDate.parse(taskDetails[1]);
                     Task deadline = new Deadline(taskDetails[0], date);
                     tasks.add(deadline);
+                    assert (size + 1) == tasks.size() : "Deadline command error";
                     data = "D | 0 | " + taskDetails[0] + " | "
                             + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
                     storage.writeToFile(data);
@@ -111,6 +118,7 @@ public class Parser {
             break;
         case "event":
             try {
+                int size = tasks.size();
                 String[] taskDetails = inputs[1].split(" /at ");
                 if (taskDetails[0].trim().isEmpty()) {
                     throw new IndexOutOfBoundsException();
@@ -119,6 +127,7 @@ public class Parser {
                     LocalDate date = LocalDate.parse(taskDetails[1]);
                     Task event = new Event(taskDetails[0], date);
                     tasks.add(event);
+                    assert (size + 1) == tasks.size() : "Event command error";
                     data = "E | 0 | " + taskDetails[0] + " | "
                             + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
                     storage.writeToFile(data);
