@@ -7,3 +7,6 @@ T|X|yay
 T|X|awpdomwpdm
 T|X|watch a webcast of the lecture which i did not go for lmao
 T|X|k
+T|X|hey
+E|X|sleep|01 Oct. 2019 09:00am to 01 Oct. 2019 10:00am
+E|X|sleep|01 Oct. 2019 09:00am to 02 Oct. 2019 10:00am

@@ -4,14 +4,6 @@ package duke.tool;
  * Deals with making sense of the user command.
  */
 public class Parser {
-    private UI ui;
-    private TaskList taskList;
-
-    public Parser(UI ui, TaskList taskList) {
-        this.ui = ui;
-        this.taskList = taskList;
-    }
-
     /**
      * Parses the input string into a Command object.
      *

@@ -7,14 +7,6 @@ import java.util.Scanner;
  */
 public class UI {
     public static String UIString = "";
-    private static String indent = "    ";
-    private static String line = "    ____________________________________________________________";
-    private Storage storage;
-    private Scanner userScanner = new Scanner(System.in);
-
-    public UI(Storage storage) {
-        this.storage = storage;
-    }
 
     /**
      * UI prints the welcome message.
@@ -28,10 +20,6 @@ public class UI {
         return "Hello! I'm Snow\nWhat can I do for you?\n" + logo + "\n";
     }
 
-    public String printLine() {
-        UIString += line + "\n";
-        return line + "\n";
-    }
 
     public String print(String message) {
         UIString += message + "\n";

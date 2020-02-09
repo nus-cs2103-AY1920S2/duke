@@ -39,11 +39,11 @@ public class MainWindow extends AnchorPane {
         UI.UIString = "";
         taskList = new TaskList();
         storage = new Storage("tasks.txt", taskList);
-        ui = new UI(storage);
+        ui = new UI();
 
         storage.readFromFile();
 
-        parser = new Parser(ui, taskList);
+        parser = new Parser();
 
         String welcomeMessage = ui.printWelcomeMessage();
 
