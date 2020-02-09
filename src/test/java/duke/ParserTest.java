@@ -1,11 +1,14 @@
 package duke;
 
+import duke.command.Command;
+import duke.command.UndoCommand;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
 
@@ -19,11 +22,19 @@ class ParserTest {
     }
 
     @Test
-    void parse_undoCommandForEmptyTasks_dukeException() {
+    void parse_undoCommand_getUndoCommand() {
         String command = "undo";
-        DukeException exception = assertThrows(DukeException.class, () -> Parser.parse(command));
-        String expected = "Nothing to undo...";
-        assertEquals(expected, exception.getMessage());
+        try {
+            Optional<Command> undoCommand = Parser.parse(command);
+            if (undoCommand.isEmpty()) {
+                fail("Command was not returned from Parser");
+            }
+            if (!(undoCommand.get() instanceof UndoCommand)) {
+                fail("Command returned from Parser was not an Undo Command");
+            }
+        } catch (DukeException e) {
+            fail("DukeException was thrown");
+        }
     }
 
     @Test
