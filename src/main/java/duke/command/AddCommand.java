@@ -42,21 +42,21 @@ public class AddCommand extends Command {
 
             Parser parser = new Parser();
             LocalDateTime[] dateTime = parser.parseDateTime(taskDescriptionArr[2], taskDescriptionArr[0]);
-
+            String start = "Got it. I've added this task: \n";
 
             if (taskDescriptionArr[0].equals("todo")) {
 
-                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1],
+                return start + taskList.addTask(taskDescriptionArr[1],
                         dateTime, Task.Types.TODO) + "\n" + taskList.reportTotal();
 
             } else if (taskDescriptionArr[0].equals("deadline")) {
 
-                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1],
+                return start + taskList.addTask(taskDescriptionArr[1],
                         dateTime, Task.Types.DEADLINE) + "\n" + taskList.reportTotal();
 
             } else if (taskDescriptionArr[0].equals("event")) {
 
-                return "Got it. I've added this task: \n" + taskList.addTask(taskDescriptionArr[1],
+                return start + taskList.addTask(taskDescriptionArr[1],
                         dateTime, Task.Types.EVENT) + "\n" + taskList.reportTotal();
 
             }

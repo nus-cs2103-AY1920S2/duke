@@ -35,8 +35,8 @@ public class DeleteCommand extends Command {
     public String executeCommand(String[] taskDescriptionArr) {
 
         try {
-
-            return "Noted. I've removed this task: \n" + taskList.deleteTask(Integer.parseInt(taskDescriptionArr[1]))
+            String start = "Noted. I've removed this task: \n";
+            return start + taskList.deleteTask(Integer.parseInt(taskDescriptionArr[1]))
                     + "\n" + taskList.reportTotal();
 
         } catch (IOException e) {
