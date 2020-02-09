@@ -5,8 +5,6 @@ package duke.command;
  * 2/10/2019 2-4pm
  */
 public class Events extends Task {
-    protected String datetime = "";
-
     public Events(String description, String datetime) {
         super(description);
         this.datetime = datetime;

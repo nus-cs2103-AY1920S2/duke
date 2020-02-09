@@ -6,6 +6,7 @@ package duke.command;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String datetime = "";
 
     /**
      * Constructs a Task object.
@@ -41,4 +42,5 @@ public class Task {
     public boolean containsString(String keyword) {
         return this.toString().contains(keyword);
     }
+
 }
