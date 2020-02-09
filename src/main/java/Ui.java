@@ -16,24 +16,21 @@ public class Ui {
     /**
      * Prints all the tasks in the current list
      */
-    public void printList() {
+    public String printList() {
+        StringBuilder output = new StringBuilder();
         if (!tasks.isEmpty()) {
-            System.out.println("Here are the tasks in your list");
+            output.append("Here are the tasks in your list" + "\n");
         } else {
-            System.out.println("There are no tasks in your list");
+            return "There are no tasks in your list" + "\n";
         }
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i+1 + "." + tasks.get(i));
+            String currTask = i+1 + "." + tasks.get(i);
+            output.append(System.lineSeparator());
+            output.append(currTask);
         }
+        return output.toString();
     }
 
-    /**
-     * Prints the basic intro message when user opens up program
-     */
-    public void printIntro() {
-        System.out.println("Hello I am from North Korea\n" + "What can I do for you?");
-        System.out.println("____________________________________\n");
-    }
 
     /**
      * Prints the basic goodbye message when user has no more input

@@ -1,10 +1,13 @@
-import org.w3c.dom.ls.LSOutput;
+import javafx.collections.FXCollections;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+
+import javafx.scene.image.ImageView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -14,6 +17,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
+
 
     /**
      * Constructor for Duke to start the initialise the necessary variables
@@ -40,23 +44,35 @@ public class Duke {
      * @throws IOException if I/O error happens
      */
     public void run() throws IOException {
-        ui.printIntro();
+//        ui.printIntro();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
 
             Parser parser = new Parser();
-            parser.parse(input, ui, tasks);
+            String output = parser.parse(input, ui, tasks);
             storage.updateData(tasks);
 
             input = sc.nextLine();
         }
 
-
         ui.printGoodbye();
 
     }
+
+    public String getResponse(String input) throws IOException {
+
+        Parser parser = new Parser();
+        String output = parser.parse(input, ui, tasks);
+        storage.updateData(tasks);
+
+        // this is like the system.in shit
+        return output;
+    }
+
+
+
 
 
     /**

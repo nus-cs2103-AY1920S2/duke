@@ -1,3 +1,4 @@
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 
 public class Parser {
@@ -9,9 +10,10 @@ public class Parser {
      * @param ui current instance of ui so that ui can interact with user
      * @param tasks the tasks available in current Duke program
      */
-    public void parse(String input, Ui ui, TaskList tasks) {
+    public String parse(String input, Ui ui, TaskList tasks) {
+
         if (input.equals("list")) {
-            ui.printList();
+            return ui.printList();  // may need to update
         }
 
         String command = "";
@@ -28,51 +30,54 @@ public class Parser {
                 Todo todo = new Todo(task);
 
                 tasks.add(todo);
-                System.out.println("Got it, I've added the following task:\n" + "  " + todo + "\n"
-                        + "Now you have " + tasks.size() + " tasks in the list.");
-                break;
+                return "Got it, I've added the following task:\n" + "  " + todo + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.";
             }
             case "deadline": {
                 String by = input.substring(input.indexOf('/') + 4);
                 String task = input.substring(input.indexOf(' ') + 1, input.indexOf('/') - 1);
                 Deadline deadline = new Deadline(task, by);
                 tasks.add(deadline);
-                System.out.println("Got it, I've added the following task:\n" + "  " + deadline + "\n"
-                        + "Now you have " + tasks.size() + " tasks in the list.");
-                break;
+                return "Got it, I've added the following task:\n" + "  " + deadline + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.";
             }
             case "event": {
                 String at = input.substring(input.indexOf('/') + 4);
                 String task = input.substring(input.indexOf(' ') + 1, input.indexOf('/') - 1);
                 Event event = new Event(task, at);
                 tasks.add(event);
-                System.out.println("Got it, I've added the following task:\n" + "  " + event + "\n"
-                        + "Now you have " + tasks.size() + " tasks in the list.");
-                break;
+                return "Got it, I've added the following task:\n" + "  " + event + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.";
             }
             case "delete": {
                 int toDelete = Integer.parseInt(input.substring(input.indexOf(' ') + 1, input.length())) - 1;
                 Task task = tasks.get(toDelete);
                 tasks.remove(toDelete);
-                System.out.println("Noted, I've removed the following task:\n" + "  " + task + "\n"
-                        + "Now you have " + tasks.size() + " tasks in the list.");
-                break;
+                return "Noted, I've removed the following task:\n" + "  " + task + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.";
             }
             case "done": {
                 int toEdit = Integer.parseInt(input.substring(input.indexOf(' ') + 1, input.length())) - 1;
                 Task task = tasks.get(toEdit);
                 task.markAsDone();
-                break;
             }
             case "find": {
                 String keyword = input.substring(input.indexOf(' ') + 1);
+                StringBuilder output = new StringBuilder();
+
                 ArrayList<Task> matchingTasks = tasks.findTasks(keyword);
-                System.out.println("Here are the matching tasks in your list: ");
+
+                output.append("Here are the matching tasks in your list: ");
                 for (int i = 0; i < matchingTasks.size(); i++) {
-                    System.out.println(i+1 + "." + matchingTasks.get(i));
+                    String currTask = i+1 + "." + matchingTasks.get(i);
+                    output.append(System.lineSeparator());
+                    output.append(currTask);
                 }
+                return output.toString();
             }
         }
+
+        return "Invalid Command";
 
     }
 
