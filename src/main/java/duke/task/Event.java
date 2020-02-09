@@ -24,6 +24,18 @@ public class Event extends Task {
     }
 
     /**
+     * Gets the type of the task.
+     *
+     * @return type of task.
+     */
+    @Override
+    public Types getType() {
+
+        return Types.EVENT;
+
+    }
+
+    /**
      * Constructs a string representation of task.
      *
      * @return string representation of task.
@@ -39,17 +51,5 @@ public class Event extends Task {
                 + "[" + super.getStatus() + "]"
                 + " " + super.getTaskDescription()
                 + "(at:" + dateStart + " to " + dateEnd + ")";
-    }
-
-    /**
-     * Gets the type of the task.
-     *
-     * @return type of task.
-     */
-    @Override
-    public Types getType() {
-
-        return Types.EVENT;
-
     }
 }

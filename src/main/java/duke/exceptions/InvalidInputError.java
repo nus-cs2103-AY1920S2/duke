@@ -3,8 +3,8 @@ package duke.exceptions;
 /**
  * The InvalidInputError program is an error thrown when user inputs an invalid input.
  *
- * @version 1.0
- * @since 28/1/2020
+ * @version 1.1
+ * @since 9/2/2020
  */
 public class InvalidInputError extends Exceptions {
 
@@ -14,13 +14,13 @@ public class InvalidInputError extends Exceptions {
     }
 
     /**
-     * Constructs error message with respect the error.
+     * String representation of the exception.
      *
-     * @return error message of the error.
+     * @return error message.
      */
     @Override
-    public String errorMessage() {
+    public String toString() {
 
-        return "\nOOPS! I'm sorry, but I don't know what that means.";
+        return "OOPS! I'm sorry, but I don't know what that means.";
     }
 }
