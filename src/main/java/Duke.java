@@ -24,8 +24,10 @@ public class Duke {
         ui = new Ui();
         String filePath = "data/duke.txt";
         storage = new Storage(filePath);
+        assert this.storage != null : "storage should be instantiated";
         try {
             tasks = new TaskList(storage.load());
+            assert tasks.getSize() != 0 : "list of tasks should not be empty";
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -55,11 +57,15 @@ public class Duke {
                     }
                     ui.printTasks(tasks);
                 } else if (command.equals("done")) {
-                    ui.acknowledgeDone(tasks, p.getIndex(tasks));
+                    int taskIndex = p.getIndex();
+                    ui.acknowledgeDone(tasks, taskIndex);
+                    assert tasks.getTask(taskIndex).getStatus() == true : "Task should be marked as done.";
                     storage.save(tasks);
                 } else if (command.equals("deadline")) {
                     Deadline deadline = new Deadline(p.getTask(), p.getDate());
                     tasks.add(deadline);
+                    assert tasks.getTask(tasks.getSize() - 1).toString()
+                            .equals(deadline.toString()) : "Added task should be a deadline task.";
                     ui.acknowledgeDeadline(tasks, deadline);
                     storage.save(tasks);
                 } else if (command.equals("todo")) {
@@ -73,7 +79,7 @@ public class Duke {
                     ui.acknowledgeEvent(tasks, event);
                     storage.save(tasks);
                 } else if (command.equals("delete")) {
-                    ui.acknowledgeDelete(tasks, p.getIndex(tasks));
+                    ui.acknowledgeDelete(tasks, p.getIndex());
                     storage.save(tasks);
                 } else if (command.equals("find")) {
                     ui.acknowledgeFound(tasks, p.getTask());

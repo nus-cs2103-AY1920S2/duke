@@ -59,6 +59,7 @@ public class Ui {
 
     /**
      * Prints unknown command.
+     *
      * @throws CommandNotFoundException if command not recognised.
      */
     public void printUnknownCommand() throws CommandNotFoundException {
@@ -67,6 +68,7 @@ public class Ui {
 
     /**
      * Acknowledges once done task is done.
+     *
      * @param tasks arraylist of tasks.
      * @param index index of which task is done.
      * @throws InvalidIndexException index out of bound.
@@ -82,6 +84,7 @@ public class Ui {
 
     /**
      * Acknowledges once todo task is added.
+     *
      * @param tasks arraylist of tasks.
      * @param todo index of which task is done.
      */
@@ -93,6 +96,7 @@ public class Ui {
 
     /**
      * Acknowledges once deadline task is added.
+     *
      * @param tasks arraylist of tasks.
      * @param deadline time of deadline.
      */
@@ -104,6 +108,7 @@ public class Ui {
 
     /**
      * Acknowledges once event task is added.
+     *
      * @param tasks arraylist of tasks.
      * @param event time of event.
      */
@@ -114,7 +119,8 @@ public class Ui {
     }
 
     /**
-     * Acknowledge once task is deleted.
+     * Acknowledges once task is deleted.
+     *
      * @param tasks arraylist of tasks.
      * @param index index of task to be deleted.
      * @throws InvalidIndexException when index is out of bound.
@@ -132,7 +138,8 @@ public class Ui {
 
     /**
      * Acknowledges when the task is searched.
-     * @param tasks arraylist of tasks.
+     *
+     * @param tasks array list of tasks.
      * @param task String task to search for.
      */
     public void acknowledgeFound(TaskList tasks, String task) {

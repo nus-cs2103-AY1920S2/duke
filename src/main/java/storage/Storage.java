@@ -39,7 +39,7 @@ public class Storage {
 
     /**
      * Loads existing tasks in the file into array list of tasks.
-     * @return an arraylist of current tasks stored in file.
+     * @return an array list of current tasks stored in file.
      * @throws FileNotFoundException if the filePath is wrong.
      */
     public ArrayList<Task> load() throws FileNotFoundException {

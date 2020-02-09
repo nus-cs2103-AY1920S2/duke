@@ -17,10 +17,11 @@ public class Parser {
 
     /**
      * Returns the command such as "todo", "deadline", "event".
+     *
      * @return String command.
      */
     public String getCommand() {
-        inputs = input.split(" ");
+        inputs = input.split(" ", 2);
         command = inputs[0];
         return command;
     }
@@ -64,11 +65,11 @@ public class Parser {
 
     /**
      * Gets the index for commands "done" and "delete".
-     * @param tasks is the list of tasks.
+     *
      * @return an index integer for which task to manipulate.
      * @throws EmptyDescriptionException if command lacks index description.
      */
-    public int getIndex(TaskList tasks) throws EmptyDescriptionException {
+    public int getIndex() throws EmptyDescriptionException {
         if (input.split(" ").length == 1) {
             throw new EmptyDescriptionException("You forgot to mention the index!");
         }
