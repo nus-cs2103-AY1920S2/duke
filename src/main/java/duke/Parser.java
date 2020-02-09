@@ -18,13 +18,13 @@ public class Parser {
             String otherArgs = fullCommand.substring(spaceIndex + 1);
 
             if (firstArg.equals("todo")) {
-                return new AddCommand(new Todo(otherArgs));
+                return new Command.AddCommand(new Todo(otherArgs));
             } else if (firstArg.equals("deadline")) {
                 String[] splitby = otherArgs.split(" /by ");    //note surrounding spaces
-                return new AddCommand(new Deadline(splitby[0], splitby[1]));
+                return new Command.AddCommand(new Deadline(splitby[0], splitby[1]));
             } else if (firstArg.equals("event")) {
                 String[] splitat = otherArgs.split(" /at ");    //note surrounding spaces
-                return new AddCommand(new Event(splitat[0], splitat[1]));
+                return new Command.AddCommand(new Event(splitat[0], splitat[1]));
             } else if (firstArg.equals("done")) {
                 // assumes command is only "done" and an int
                 // the input is 1-indexed. DoneCommand takes in 0-indexed
