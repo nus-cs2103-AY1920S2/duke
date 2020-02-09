@@ -25,5 +25,5 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    abstract public String toDatabaseString();
+    abstract String toDatabaseString();
 }

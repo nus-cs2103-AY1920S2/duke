@@ -1,6 +1,12 @@
 package duke;
 
 public class Parser {
+    /**
+     * Parses a single string command from the user.
+     * @param fullCommand The the whole line of a user's input as read from Standard Input
+     * @return A Command that is capable of mutating the passed in TaskList, Ui, and Storage
+     * @throws DukeException a specialized DukeException that can be printed to the user.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         int spaceIndex = fullCommand.indexOf(" ");
 

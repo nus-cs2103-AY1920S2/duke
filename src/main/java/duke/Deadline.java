@@ -6,8 +6,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate by;
 
+    /**
+     * Constructs a Deadline task.
+     * @param description string description of the deadline to be created
+     * @param by due date in the format of yyyy-mm-dd
+     */
     public Deadline(String description, String by) {
-        // string by must be of format yyyy-mm-dd
         super(description);
         this.by = LocalDate.parse(by);
     }
@@ -19,7 +23,7 @@ public class Deadline extends Task {
 
     @Override
     public String toDatabaseString() {
-        return "D" + "|" + (this.isDone ? "1" : "0") + "|" + this.description +
-                "|" + this.by + "\n";
+        return "D" + "|" + (this.isDone ? "1" : "0") + "|" + this.description
+                + "|" + this.by + "\n";
     }
 }

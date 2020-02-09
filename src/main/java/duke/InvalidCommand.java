@@ -1,6 +1,6 @@
 package duke;
 
-public class InvalidCommand implements Command{
+public class InvalidCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         System.out.println("invalid command execute being called");

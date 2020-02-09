@@ -7,6 +7,9 @@ public class Ui {
         System.out.println("error loading from database. Starting with empty task list");
     }
 
+    /**
+     * Displays the welcome message with ASCII text spelling Duke to welcome the user.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

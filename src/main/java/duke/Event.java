@@ -15,7 +15,7 @@ public class Event extends Task {
 
     @Override
     public String toDatabaseString() {
-        return "E" + "|" + (this.isDone ? "1" : "0") + "|" + this.description +
-                "|" + this.at + "\n";
+        return "E" + "|" + (this.isDone ? "1" : "0") + "|" + this.description
+                + "|" + this.at + "\n";
     }
 }
