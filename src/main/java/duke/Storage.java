@@ -77,9 +77,9 @@ public class Storage {
                 if (fields[0].equals("T")) {
                     newTask = new Todo(fields[2]);
                 } else if (fields[0].equals("E")) {
-                    newTask = new Event(fields[2], fields[3]);
+                    newTask = new Event(fields[2], fields[3], fields[4]);
                 } else {
-                    newTask = new Deadline(fields[2], fields[3]);
+                    newTask = new Deadline(fields[2], fields[3], fields[4]);
                 }
 
                 // Set isDone status

@@ -2,13 +2,15 @@ package duke.commands;
 
 import duke.tasks.TaskList;
 
+import java.util.List;
+
 public class FindCommand implements Command {
     private TaskList tasklist;
     private String keyword;
 
-    public FindCommand(TaskList taskList, String keyword) {
+    public FindCommand(TaskList taskList, List<String> details) {
         this.tasklist = taskList;
-        this.keyword = keyword;
+        this.keyword = details.get(0);
     }
 
     public String execute() {

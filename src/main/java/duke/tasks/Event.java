@@ -24,24 +24,14 @@ public class Event extends DateTask {
      * At least time or date must be given.
      *
      * @param description Description of task.
-     * @param startAt Time and date of event.
+     * @param startAtTime Time of event.
+     * @param startAtDate Date of event.
      * @throws DateTimeException When there are insufficient parameters for startAt.
      */
-    public Event(String description, String startAt) throws DateTimeException {
+    public Event(String description, String startAtTime, String startAtDate) throws DateTimeException {
         super(description);
-
-        String[] fields = startAt.split(" ");
-        if (fields.length < 2) {
-            throw new DateTimeException("Insufficient parameters for date/time");
-        }
-
-        this.startAtTime = fields[0].equals("-")
-                ? null
-                : LocalTime.parse(fields[0]);
-
-        this.startAtDate = fields[1].equals("-")
-                ? LocalDate.now()
-                : LocalDate.parse(fields[1], dateFormatter);
+        this.startAtTime = LocalTime.parse(startAtTime);
+        this.startAtDate = LocalDate.parse(startAtDate, dateFormatter);
     }
 
     @Override
@@ -76,6 +66,6 @@ public class Event extends DateTask {
         String time = startAtTime == null ? "-" : startAtTime.toString();
 
         return "E | " + d + " | " + super.getDescription() + " | " + time
-                + " " + startAtDate.format(dateFormatter);
+                + " | " + startAtDate.format(dateFormatter);
     }
 }

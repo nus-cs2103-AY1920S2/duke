@@ -3,13 +3,15 @@ package duke.commands;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+import java.util.List;
+
 public class DeleteCommand implements Command {
     private TaskList taskList;
     private int taskNumber;
 
-    public DeleteCommand(TaskList taskList, int taskNumber) {
+    public DeleteCommand(TaskList taskList, List<String> details) {
         this.taskList = taskList;
-        this.taskNumber = taskNumber;
+        this.taskNumber = Integer.parseInt(details.get(0)) - 1;
     }
 
     @Override

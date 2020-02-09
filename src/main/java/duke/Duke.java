@@ -1,6 +1,7 @@
 package duke;
 
 // packages imports
+import duke.commands.Command;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -56,7 +57,8 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            String response = parser.parseAndExecuteToString(input);
+            Command command = parser.parse(input);
+            String response = command.execute();
             storage.save(taskList);
             return response;
         } catch (IOException ex) {

@@ -2,13 +2,15 @@ package duke.commands;
 
 import duke.tasks.TaskList;
 
+import java.util.List;
+
 public class DoneCommand implements Command {
     private TaskList taskList;
     private int taskIndex;
 
-    public DoneCommand(TaskList taskList, int taskIndex) {
+    public DoneCommand(TaskList taskList, List<String> details) {
         this.taskList = taskList;
-        this.taskIndex = taskIndex;
+        this.taskIndex = Integer.parseInt(details.get(0)) - 1;
     }
 
     @Override

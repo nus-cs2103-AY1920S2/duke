@@ -1,10 +1,13 @@
 T | 1 | eat
 T | 1 | hi
-D | 1 | hw | 14:00 20/02/2020
-E | 1 | meeting | 14:00 03/02/2020
+D | 1 | hw | 14:00 | 20/02/2020
+E | 1 | meeting | 14:00 | 03/02/2020
 T | 0 | watch webcast
-E | 0 | CS2103T Meeting | 14:00 10/02/2020
-D | 0 | CS2103T Tutorial | 09:00 14/02/2020
+E | 0 | CS2103T Meeting | 14:00 | 10/02/2020
+D | 0 | CS2103T Tutorial | 09:00 | 14/02/2020
 T | 0 | run
 T | 0 | walk
-T | 0 | eat
+T | 0 | swim
+E | 0 | dinner | 18:00 | 14/02/2020
+D | 0 | work | 18:00 | 10/02/2020
+E | 0 | meeting | 23:49 | 02/02/2020

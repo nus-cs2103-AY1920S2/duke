@@ -24,22 +24,13 @@ public class Deadline extends DateTask {
      * At least time or date must be given.
      *
      * @param description Description of task.
-     * @param finishBy Time and date of deadline.
+     * @param finishByTime Time of deadline.
+     * @param finishByDate Date of deadline.
      */
-    public Deadline(String description, String finishBy) {
+    public Deadline(String description, String finishByTime, String finishByDate) {
         super(description);
-
-        String[] fields = finishBy.split(" ");
-        if (fields.length < 2) {
-            throw new DateTimeException("Insufficient parameters for date/time");
-        }
-
-        this.finishByTime = fields[0].equals("-")
-                ? null
-                : LocalTime.parse(fields[0]);
-        this.finishByDate = fields[1].equals("-")
-                ? LocalDate.now()
-                : LocalDate.parse(fields[1], dateFormatter);
+        this.finishByTime = LocalTime.parse(finishByTime);
+        this.finishByDate = LocalDate.parse(finishByDate, dateFormatter);
     }
 
     @Override
@@ -73,6 +64,6 @@ public class Deadline extends DateTask {
 
         String time = finishByTime == null ? "-" : finishByTime.toString();
         return "D | " + d + " | " + super.getDescription() + " | " + time
-                + " " + finishByDate.format(dateFormatter);
+                + " | " + finishByDate.format(dateFormatter);
     }
 }
