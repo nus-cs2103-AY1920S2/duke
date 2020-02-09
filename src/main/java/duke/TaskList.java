@@ -20,11 +20,12 @@ public class TaskList {
     /**
      * List out all the tasks currently in the task list.
      */
-    public void list() {
-        System.out.println("Here are the tasks in your list:");
+    public String list() {
+        String msg = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + "." + tasks.get(i));
+            msg += i + 1 + "." + tasks.get(i) + "\n";
         }
+        return msg;
     }
 
     /**
@@ -68,13 +69,22 @@ public class TaskList {
      * @param keyword The keyword for the tasks to be matched against.
      * @return Returns the list of tasks with found matches.
      */
-    public ArrayList<Task> find(String keyword) {
+    public String find(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
         for (Task t : tasks) {
             if (t.getDescription().contains(keyword)) {
                 result.add(t);
             }
         }
-        return result;
+        String msg;
+        if (result.size() == 0) {
+            msg = "No match found.";
+        } else {
+            msg = "Here are the matching tasks in your list:\n";
+            for (int i = 0; i < result.size(); i++) {
+                msg += i + 1 + "." + result.get(i) + "\n";
+            }
+        }
+        return msg;
     }
 }
