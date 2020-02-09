@@ -145,6 +145,7 @@ public class Duke extends Application {
     }
 
     public Storage getStorage() {
+        assert storage != null: "Storage not initialised properly";
         return storage;
     }
 
@@ -164,6 +165,6 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke("../../src/main/data/duke.txt").run();
+        new Duke("./src/main/data/duke.txt").run();
     }
 }

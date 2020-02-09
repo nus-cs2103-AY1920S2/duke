@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -117,7 +118,7 @@ public class Parser {
                     return e.toString();
                 }
             }
-        } catch (ArrayIndexOutOfBoundsException | NumberFormatException exception) {
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException | DateTimeParseException exception) {
             return new DukeException("OTHERS").toString();
         }
     }
