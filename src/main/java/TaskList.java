@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
 
-// may have to import some date objects dk what stuff here
-
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -99,7 +97,7 @@ public class TaskList {
                 if (task_type.contains("E") || task_type.contains("D")) {
                     line = completion_status + " | [" + task_type + "] | " + description + " | " + get(i).getDate() + "\n";
                 }
-                line = Integer.toString(counter) + ". " + line;
+                line = counter + ". " + line;
                 counter++;
                 lst = lst + line;
             }

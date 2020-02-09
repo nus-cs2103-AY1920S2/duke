@@ -1,4 +1,3 @@
-// Storage class loads tasks and saves them in a file.
 import java.io.*;
 
 import java.time.LocalDate;

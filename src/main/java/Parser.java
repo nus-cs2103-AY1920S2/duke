@@ -1,5 +1,3 @@
-// Makes sense of the user command.
-
 import java.time.LocalDate;
 
 public class Parser {

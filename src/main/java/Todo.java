@@ -1,5 +1,3 @@
-// A "Todo" Task class
-
 public class Todo extends Task {
 
     /**

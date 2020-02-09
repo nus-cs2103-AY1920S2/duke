@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -14,7 +13,6 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
-    //@Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));

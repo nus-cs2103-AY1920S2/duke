@@ -1,4 +1,3 @@
-// A "Deadline" Task class
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
