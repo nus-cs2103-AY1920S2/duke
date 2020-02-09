@@ -1,5 +1,6 @@
 package main;
 
+import exceptions.DukeException;
 import processor.DukeProcessor;
 
 import java.util.Scanner;
