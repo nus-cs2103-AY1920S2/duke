@@ -12,9 +12,14 @@ import java.util.Scanner;
 public class Storage {
     protected String filePath;
     ArrayList<Task> arrList = new ArrayList<>();
+    ArrayList<Task> reminderList = new ArrayList<>();
 
     public Storage(String filePath) {
         this.filePath = filePath;
+    }
+
+    public ArrayList<Task> getReminders() {
+        return reminderList;
     }
 
     /**
@@ -48,6 +53,7 @@ public class Storage {
                 } else {
                     t = new Deadline(des, date, time);
                     arrList.add(t);
+                    reminderList.add(t);
                 }
             }
             if (isDone) {

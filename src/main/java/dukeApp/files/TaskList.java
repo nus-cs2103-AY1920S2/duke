@@ -6,9 +6,11 @@ import java.util.ArrayList;
 
 public class TaskList {
     public ArrayList<Task> aList;
+    public ArrayList<Task> reminderList;
 
-    public TaskList(ArrayList<Task> aList) {
+    public TaskList(ArrayList<Task> aList, ArrayList<Task> reminderList) {
         this.aList = aList;
+        this.reminderList = reminderList;
     }
 
     public TaskList() {}
@@ -25,15 +27,12 @@ public class TaskList {
         print(aList);
     }
 
+    /**
+     * Prints reminders for deadlines in the list
+     */
     public void reminderList() {
-        ArrayList<Task> reminder = new ArrayList<>();
-        for (int i = 0; i < aList.size(); i++) {
-            if ((aList.get(i).getType()).equals("D")) {
-                reminder.add(aList.get(i));
-            }
-        }
         System.out.println("Here are the upcoming deadlines in your list:");
-        print(reminder);
+        print(reminderList);
     }
 
     /**
@@ -95,6 +94,7 @@ public class TaskList {
                     t = new Event(description, date, time);
                 } else {
                     t = new Deadline(description, date, time);
+                    reminderList.add(t);
                 }
                 aList.add(t);
                 printAdded(t, aList); //print msg task added
