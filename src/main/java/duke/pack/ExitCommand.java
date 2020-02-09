@@ -9,7 +9,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Executes the exit command and stops the bot
+     * Executes the exit command and stops the bot.
      * @param tasks TaskList containing all the added tasks
      * @param ui UI that handles interactions with user
      * @param storage Storage that handles updating of tasks in hard disk
@@ -28,7 +28,7 @@ public class ExitCommand extends Command {
 
 
     /**
-     * indicates whether command is exit
+     * Indicates whether command is exit.
      * @return boolean true if it is an exit command, else false
      */
     public Boolean isExit() {

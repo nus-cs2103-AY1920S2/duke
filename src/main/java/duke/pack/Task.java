@@ -1,7 +1,7 @@
 package duke.pack;
 
 /**
- * represents a task of the user
+ * Represents a task of the user.
  */
 public class Task {
     protected String description;
@@ -9,7 +9,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * creates a task with the specified description
+     * Creates a task with the specified description.
      * @param description the task description
      * @param fullDesc the full description of the task
      */
@@ -20,7 +20,7 @@ public class Task {
     }
 
     /**
-     * gets the status of task, whether it is done or not
+     * Gets the status of task, whether it is done or not.
      * @return A string that shows the corresponding tick/cross symbol
      */
     public String getStatusIcon() {
@@ -28,7 +28,7 @@ public class Task {
     }
 
     /**
-     * gets description of task
+     * Gets description of task.
      * @return a string that is the task's description
      */
     public String getFullDesc() {
@@ -36,7 +36,7 @@ public class Task {
     }
 
     /**
-     * sets the task to done or not done
+     * Sets the task to done or not done.
      * @param b boolean that indicates whether the task is done
      */
     public void setDone(Boolean b) {
@@ -44,7 +44,7 @@ public class Task {
     }
 
     /**
-     * marks the task as done
+     * Marks the task as done.
      */
     public void markAsDone() {
         isDone = true;

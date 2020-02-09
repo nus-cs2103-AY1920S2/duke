@@ -1,7 +1,7 @@
 package duke.pack;
 
 /**
- * represents a command
+ * Represents a command.
  */
 public abstract class Command {
 

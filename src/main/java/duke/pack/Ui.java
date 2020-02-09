@@ -11,15 +11,15 @@ public class Ui {
     }
 
     /**
-     * prints error
-     * @param e DukeException thrown
+     * Prints error.
+     * @param e the DukeException thrown
      */
     public void showError(DukeException e) {
         System.out.println(e);
     }
 
     /**
-     * takes in user's input
+     * Takes in user's input.
      * @return string representing command
      */
     public String receiveInput() {
@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /**
-     * prints greeting to user
+     * Prints greeting to user.
      */
     public void greet() {
         System.out.println("    ------------------------------------------------------------------");
@@ -50,38 +50,38 @@ public class Ui {
     }
 
     /**
-     * prints formatting line
+     * Prints formatting line.
      */
     public void showLine() {
         System.out.println("    ------------------------------------------------------------------");
     }
 
     /**
-     * prints task added
-     * @param t
+     * Prints task added.
+     * @param t added task
      */
     public void showAdd(Task t) {
         System.out.println("    Alright! I have added: \n    " + t);
     }
 
     /**
-     * prints task marked as done
-     * @param t
+     * Prints task marked as done.
+     * @param t task marked as done
      */
     public void showDone(Task t) {
         System.out.println("    Fantastic job! I have marked this task as done: \n    " + t);
     }
 
     /**
-     * prints task deleted
-     * @param t
+     * Prints task deleted.
+     * @param t deleted task
      */
     public void showDelete(Task t) {
         System.out.println("    Yeet! I have tossed the task: \n    " + t);
     }
 
     /**
-     * prints total number of tasks
+     * Prints total number of tasks.
      * @param tasks the TaskList
      */
     public void showCount(TaskList tasks) {
@@ -93,7 +93,7 @@ public class Ui {
     }
 
     /**
-     * exits
+     * Exits.
      */
     public void exit() {
         System.out.println("    See you later! :)");

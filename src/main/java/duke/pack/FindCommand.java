@@ -3,7 +3,7 @@ package duke.pack;
 import java.util.ArrayList;
 
 /**
- * represents a command to find tasks matching user's input
+ * Represents a command to find tasks matching user's input.
  */
 public class FindCommand extends Command {
     protected String query;
@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the find command and prints matching tasks
+     * Executes the find command and prints matching tasks.
      * @param tasks TaskList containing all the added tasks
      * @param ui UI that handles interactions with user
      * @param storage Storage that handles updating of tasks in hard disk

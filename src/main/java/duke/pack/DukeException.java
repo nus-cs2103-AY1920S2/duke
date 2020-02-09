@@ -1,13 +1,13 @@
 package duke.pack;
 
 /**
- * represents an exception for Duke
+ * Represents an exception for Duke.
  */
 public class DukeException extends Exception {
     String s;
 
     /**
-     * creates an exception specific to Duke
+     * Creates an exception specific to Duke.
      * @param s description of exception
      */
     public DukeException(String s) {

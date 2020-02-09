@@ -12,12 +12,17 @@ import java.util.Scanner;
 
 
 /**
- * Handles the loading and updating of tasks to hard disk
+ * Handles the loading and updating of tasks to hard disk.
  */
 public class Storage {
     protected String filePath;
     protected File file;
 
+    /**
+     * Creates a storage.
+     * @param filePath String representing the path of data file
+     * @throws DukeException if file cannot be created
+     */
     public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
 
@@ -33,7 +38,7 @@ public class Storage {
     }
 
     /**
-     * loads tasks from the hard disk
+     * Loads tasks from the hard disk.
      * @return an ArrayList of the tasks
      * @throws DukeException if tasks cannot be loaded from hard disk
      */
@@ -85,7 +90,7 @@ public class Storage {
     }
 
     /**
-     * saves tasks to the hard disk
+     * Saves tasks to the hard disk.
      * @param tasks TaskList of all the tasks
      * @throws DukeException if tasks cannot be saved to hard disk
      */

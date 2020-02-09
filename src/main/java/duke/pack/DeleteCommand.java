@@ -1,7 +1,7 @@
 package duke.pack;
 
 /**
- * represents a command to delete a task
+ * Represents a command to delete a task.
  */
 public class DeleteCommand extends Command {
     protected int taskNum;
@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * indicates whether command is exit
+     * Indicates whether command is exit.
      * @return boolean true if it is an exit command, else false
      */
     public Boolean isExit() {

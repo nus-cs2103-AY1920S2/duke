@@ -1,7 +1,7 @@
 package duke.pack;
 
 /**
- * represents a command to mark a task as done.
+ * Represents a command to mark a task as done.
  */
 public class DoneCommand extends Command {
     protected int taskNum;
@@ -11,7 +11,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the done command and marks task as done
+     * Executes the done command and marks task as done.
      * @param tasks TaskList containing all the added tasks
      * @param ui UI that handles interactions with user
      * @param storage Storage that handles updating of tasks in hard disk
@@ -41,7 +41,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * indicates whether command is exit
+     * Indicates whether command is exit.
      * @return boolean true if it is an exit command, else false
      */
     public Boolean isExit() {

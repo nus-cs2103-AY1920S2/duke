@@ -3,13 +3,16 @@ package duke.pack;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a command to add an event type of task.
+ */
 public class Event extends Task {
     protected String fullDesc;
     protected String time;
     protected LocalDate date;
 
     /**
-     * creates an event type of task
+     * Creates an event type of task.
      * @param description task to be done
      * @param time time of event
      * @param date date of event
@@ -22,7 +25,7 @@ public class Event extends Task {
     }
 
     /**
-     * Formats the task to be saved in hard disk
+     * Formats the task to be saved in hard disk.
      * @return a string of the formatted task
      */
     @Override

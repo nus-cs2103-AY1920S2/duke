@@ -3,13 +3,16 @@ package duke.pack;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a command to add a deadline type of task.
+ */
 public class Deadline extends Task {
     protected String time;
     protected LocalDate date;
     protected String fullDesc;
 
     /**
-     * creates a deadline type of task
+     * Creates a deadline type of task.
      * @param description the task to be done
      * @param time the time the task is due
      * @param date the date the task is due
@@ -22,7 +25,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Formats the task to be saved in hard disk
+     * Formats the task to be saved in hard disk.
      * @return a string of the formatted task
      */
     @Override

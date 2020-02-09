@@ -3,7 +3,7 @@ package duke.pack;
 import java.util.ArrayList;
 
 /**
- * represents list of all the tasks
+ * Represents list of all the tasks.
  */
 public class TaskList {
     protected ArrayList<Task> list;
@@ -17,7 +17,7 @@ public class TaskList {
     }
 
     /**
-     * adds given task to the list
+     * Adds given task to the list.
      * @param task the task to be added
      */
     public void addTask(Task task) {
@@ -25,7 +25,7 @@ public class TaskList {
     }
 
     /**
-     * deletes given task from list
+     * Deletes given task from list.
      * @param taskNum integer value of the task to be deleted
      * @return the deleted task
      */
@@ -47,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * prints all the tasks in the list
+     * Prints all the tasks in the list.
      */
     public void printList() {
         System.out.println("    Here are your tasks:");

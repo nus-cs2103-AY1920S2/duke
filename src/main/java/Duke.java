@@ -8,7 +8,7 @@ import duke.pack.Ui;
 import javafx.fxml.FXML;
 
 /**
- * Represents the chatbot
+ * Represents the chatbot.
  */
 public class Duke {
     private Storage storage;
@@ -34,8 +34,8 @@ public class Duke {
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     * @param input user input command
      */
     public String getResponse(String input) {
         String resp = "";
@@ -55,8 +55,6 @@ public class Duke {
      * Starts to run the bot
      */
     public void run() {
-        // following code from module website
-
         ui.greet();
 
         boolean isExit = false;

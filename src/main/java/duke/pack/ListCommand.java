@@ -11,7 +11,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes the list command and prints all tasks from TaskList
+     * Executes the list command and prints all tasks from TaskList.
      * @param tasks TaskList containing all the added tasks
      * @param ui UI that handles interactions with user
      * @param storage Storage that handles updating of tasks in hard disk
@@ -32,7 +32,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * indicates whether command is exit
+     * Indicates whether command is exit.
      * @return boolean true if it is an exit command, else false
      */
     public Boolean isExit() {

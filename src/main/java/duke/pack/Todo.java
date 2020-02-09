@@ -1,10 +1,13 @@
 package duke.pack;
 
+/**
+ * Represents a to-do type of task.
+ */
 public class Todo extends Task {
     protected String fullDesc;
 
     /**
-     * creates a to-do type of task
+     * Creates a to-do type of task.
      * @param description task to be done
      * @param fullDesc the full description of the task
      */

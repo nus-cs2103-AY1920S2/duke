@@ -1,13 +1,15 @@
 package duke.pack;
 
-import java.util.ArrayList;
-
 /**
  * Represents a command to add a task.
  */
 public class AddCommand extends Command {
     protected Task task;
 
+    /**
+     * Creates an add command.
+     * @param task the task to be added
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
@@ -36,7 +38,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * indicates whether command is exit
+     * Indicates whether command is exit.
      * @return boolean true if it is an exit command, else false
      */
     public Boolean isExit() {
