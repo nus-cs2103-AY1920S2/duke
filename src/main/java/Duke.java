@@ -32,6 +32,8 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private GuiUi ui;
+    private ArrayList<String> prevCommands;
+    private ArrayList<Task> deletedTasks;
 
     /**
      * Class constructor.
@@ -39,6 +41,8 @@ public class Duke {
     public Duke() {
         ui = new GuiUi();
         storage = new Storage("data/duke.txt");
+        prevCommands = new ArrayList<String>();
+        deletedTasks = new ArrayList<Task>();
     }
 
     /**
@@ -73,7 +77,6 @@ public class Duke {
      * @return Response to be printed on GUI depending on user command.
      */
     public String run(String input) {
-
         if (!input.equals("bye")) {
             Parser parser = new Parser(input);
             String response = "";
@@ -82,13 +85,13 @@ public class Duke {
 
             case "list":
                 response = ui.getList(tasks);
+                prevCommands.add(input);
                 break;
             case "done":
                 try {
                     int completedTask = parser.getTaskIndex(tasks.getSize());
-                    tasks.getTask(completedTask - 1).setDone();
-
-                    response = ui.getDoneSuccess(tasks, completedTask - 1);
+                    response = markTaskDone(completedTask);
+                    prevCommands.add(input);
                 } catch (DukeException e) {
                     response = ui.getExceptionMessage(e);
                 }
@@ -97,11 +100,10 @@ public class Duke {
             case "delete":
                 try {
                     int removeTask = parser.getTaskIndex(tasks.getSize());
+                    deletedTasks.add(tasks.getTask(removeTask - 1));
 
-                    response = ui.getDeleteSuccess(tasks, removeTask - 1);
-
-                    tasks.deleteTask(removeTask - 1);
-                    response = response.concat(ui.getStatusUpdate(tasks));
+                    response = deleteTask(removeTask);
+                    prevCommands.add(input);
                 } catch (DukeException e) {
                     response = ui.getExceptionMessage(e);
                 }
@@ -110,6 +112,7 @@ public class Duke {
             case "find":
                 try {
                     response = this.findTarget(parser);
+                    prevCommands.add(input);
                 } catch (DukeException exception) {
                     response = ui.getExceptionMessage(exception);
                 }
@@ -117,10 +120,15 @@ public class Duke {
                 break;
             default:
                 try {
+                    int originalNumOfTasks = tasks.getSize();
                     this.addTask(parser);
+
+                    assert tasks.getSize() == originalNumOfTasks + 1: "TaskList was not updated properly";
 
                     response = ui.getAddSuccess(tasks);
                     response = response.concat(ui.getStatusUpdate(tasks));
+
+                    prevCommands.add(input);
 
                 } catch (DukeException exception) {
                     response = ui.getExceptionMessage(exception);
@@ -138,6 +146,42 @@ public class Duke {
         }
 
         return ui.getExitGreeting();
+    }
+
+    /**
+     * Mark task specified by the user as done.
+     *
+     * @param completedTask Index of task to be marked done.
+     * @return Response message after a task has been successfully marked as done.
+     */
+    private String markTaskDone(int completedTask) {
+        tasks.getTask(completedTask - 1).setDone();
+
+        assert tasks.getTask(completedTask - 1).getStatusIcon().equals("Y"):
+                "Task was not marked done successfully";
+
+        String response = ui.getDoneSuccess(tasks, completedTask - 1);
+
+        return response;
+    }
+
+    /**
+     * Delete task specified by the user from the TaskList.
+     *
+     * @param removeTask Index of task to be removed.
+     * @return Response message after command is successfully carried out.
+     */
+    private String deleteTask(int removeTask) {
+        int originalNumOfTasks = tasks.getSize();
+
+        String response = ui.getDeleteSuccess(tasks, removeTask - 1);
+
+        tasks.deleteTask(removeTask - 1);
+        response = response.concat(ui.getStatusUpdate(tasks));
+
+        assert tasks.getSize() == originalNumOfTasks - 1: "TaskList was not updated properly";
+
+        return response;
     }
 
     /**
@@ -178,6 +222,8 @@ public class Duke {
         String keyword = parser.getDescription();
 
         ArrayList<String> targets = tasks.findTargets(keyword);
+
+        System.out.println(targets.stream().allMatch(target -> target.contains(keyword)));
 
         return ui.getTargets(targets);
     }
