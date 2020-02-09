@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -82,4 +84,34 @@ public class Storage {
             // System.out.println("Something went wrong: " + e.getMessage());
         }
     }
+
+    /**
+     * Clears all tasks in the file
+     */
+    public void clearFile() {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write("");
+            fw.close();
+        } catch (IOException e) {
+            // System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public String readAllBytes(String filePath)
+    {
+        String content = "";
+
+        try
+        {
+            content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return content;
+    }
+
 }

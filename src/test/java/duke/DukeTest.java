@@ -1,147 +1,166 @@
 package duke;
 
-import static org.junit.Assert.assertEquals;
+import duke.tool.*;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class DukeTest {
 
-  @Test
-  public void testDelete() {
-    Duke duke = new Duke();
-    String actual = duke.run("todo sleep 100 years\ndelete 1\nlist", true);
-    String expected =
-        "    ____________________________________________________________\n"
-            + "    Got it. I've added this task:\n"
-            + "    [T][X] sleep 100 years\n"
-            + "    Now you have 1 tasks in the list.\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Noted. I've removed this task: \n"
-            + "    [T][X] sleep 100 years\n"
-            + "    Now you have 0 tasks in the list.\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Here are the tasks in your list:\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Bye. Hope to see you again soon!\n"
-            + "    ____________________________________________________________\n";
-    assertEquals(expected, actual);
-  }
+    @Test
+    public void testDelete() {
+        String[] actionsList = new String[]{"todo sleep 100 years", "todo toBeDeleted", "delete 2", "list"};
 
-  @Test
-  public void testDone() {
-    Duke duke = new Duke();
-    String actual =
-        duke.run(
-            "todo sleep 100 years\nevent fireworks /at 2019-10-12 20:00 to 2019-10-12 21:00\ndone 1\nlist",
-            true);
-    String expected =
-        "    ____________________________________________________________\n"
-            + "    Got it. I've added this task:\n"
-            + "    [T][X] sleep 100 years\n"
-            + "    Now you have 1 tasks in the list.\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Got it. I've added this task:\n"
-            + "    [E][X] fireworks (at: 12 Oct. 2019 20:00pm to 12 Oct. 2019 21:00pm)\n"
-            + "    Now you have 2 tasks in the list.\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Nice! I've marked this task as done:\n"
-            + "    [T][V] sleep 100 years\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Here are the tasks in your list:\n"
-            + "    1.[T][V] sleep 100 years\n"
-            + "    2.[E][X] fireworks (at: 12 Oct. 2019 20:00pm to 12 Oct. 2019 21:00pm)\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Bye. Hope to see you again soon!\n"
-            + "    ____________________________________________________________\n";
-    assertEquals(expected, actual);
-  }
+        Parser parser = new Parser();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage("tasks_test.txt", taskList);
+        UI ui = new UI();
+        storage.clearFile();
 
-  @Test
-  public void testTasks() {
-    Duke duke = new Duke();
-    String actual =
-        duke.run(
-            "todo study 24 hours\ndeadline get six packs /by 2020-02-29 09:00\nevent holidaysss /at 2020-05-01 20:00 to 2019-08-01 20:00\ndone 1\nlist",
-            true);
-    String expected =
-        "    ____________________________________________________________\n"
-            + "    Got it. I've added this task:\n"
-            + "    [T][X] study 24 hours\n"
-            + "    Now you have 1 tasks in the list.\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Got it. I've added this task:\n"
-            + "    [D][X] get six packs (by: 29 Feb. 2020 09:00am)\n"
-            + "    Now you have 2 tasks in the list.\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Got it. I've added this task:\n"
-            + "    [E][X] holidaysss (at: 01 May 2020 20:00pm to 01 Aug. 2019 20:00pm)\n"
-            + "    Now you have 3 tasks in the list.\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Nice! I've marked this task as done:\n"
-            + "    [T][V] study 24 hours\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Here are the tasks in your list:\n"
-            + "    1.[T][V] study 24 hours\n"
-            + "    2.[D][X] get six packs (by: 29 Feb. 2020 09:00am)\n"
-            + "    3.[E][X] holidaysss (at: 01 May 2020 20:00pm to 01 Aug. 2019 20:00pm)\n"
-            + "    ____________________________________________________________\n"
-            + "    ____________________________________________________________\n"
-            + "    Bye. Hope to see you again soon!\n"
-            + "    ____________________________________________________________\n";
-    assertEquals(expected, actual);
-  }
+        for (String action : actionsList) {
+            Command c = parser.parse(action);
+            c.execute(taskList, ui);
+            storage.saveToFile();
+        }
+
+        String filePath = "tasks_test.txt";
+        String actual = storage.readAllBytes(filePath);
+        String expected = "T|X|sleep 100 years\n";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDone() {
+        String[] actionsList = new String[]{"todo sleep 100 years", "event fireworks /at 2019-10-12 20:00 to 2019-10-12 21:00", "done 1"};
+        Parser parser = new Parser();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage("tasks_test.txt", taskList);
+        UI ui = new UI();
+        storage.clearFile();
+
+        for (String action : actionsList) {
+            Command c = parser.parse(action);
+            c.execute(taskList, ui);
+            storage.saveToFile();
+        }
+
+        String filePath = "tasks_test.txt";
+        String actual = storage.readAllBytes(filePath);
+        String expected = "T|V|sleep 100 years\n" +
+                "E|X|fireworks|12 Oct. 2019 20:00HRS to 12 Oct. 2019 21:00HRS\n";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testTasks() {
+        String[] actionsList = new String[]{"todo study 24 hours", "deadline get six packs /by 2020-02-29 09:00", "event holidaysss /at 2020-05-01 20:00 to 2019-08-01 21:00", "done 2"};
+        Parser parser = new Parser();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage("tasks_test.txt", taskList);
+        UI ui = new UI();
+        storage.clearFile();
+
+        for (String action : actionsList) {
+            Command c = parser.parse(action);
+            c.execute(taskList, ui);
+            storage.saveToFile();
+        }
+
+        String filePath = "tasks_test.txt";
+        String actual = storage.readAllBytes( filePath );
+        String expected = "T|X|study 24 hours\n" +
+                "D|V|get six packs|29 Feb. 2020 09:00HRS\n" +
+                "E|X|holidaysss|01 May 2020 20:00HRS to 01 Aug. 2019 21:00HRS\n";
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void testFind() {
-        Duke duke = new Duke();
-        String actual =
-                duke.run(
-                        "todo study 24 hours\ndeadline get six packs /by 2020-08-01 09:00\nevent holidaysss /at 2020-05-01 20:00 to 2020-08-01 20:00\ndone 1\nlist\nfind 01 Aug. 2020",
-                        true);
-        String expected =
-                "    ____________________________________________________________\n"
-                        + "    Got it. I've added this task:\n"
-                        + "    [T][X] study 24 hours\n"
-                        + "    Now you have 1 tasks in the list.\n"
-                        + "    ____________________________________________________________\n"
-                        + "    ____________________________________________________________\n"
-                        + "    Got it. I've added this task:\n"
-                        + "    [D][X] get six packs (by: 01 Aug. 2020 09:00am)\n"
-                        + "    Now you have 2 tasks in the list.\n"
-                        + "    ____________________________________________________________\n"
-                        + "    ____________________________________________________________\n"
-                        + "    Got it. I've added this task:\n"
-                        + "    [E][X] holidaysss (at: 01 May 2020 20:00pm to 01 Aug. 2020 20:00pm)\n"
-                        + "    Now you have 3 tasks in the list.\n"
-                        + "    ____________________________________________________________\n"
-                        + "    ____________________________________________________________\n"
-                        + "    Nice! I've marked this task as done:\n"
-                        + "    [T][V] study 24 hours\n"
-                        + "    ____________________________________________________________\n"
-                        + "    ____________________________________________________________\n"
-                        + "    Here are the tasks in your list:\n"
-                        + "    1.[T][V] study 24 hours\n"
-                        + "    2.[D][X] get six packs (by: 01 Aug. 2020 09:00am)\n"
-                        + "    3.[E][X] holidaysss (at: 01 May 2020 20:00pm to 01 Aug. 2020 20:00pm)\n"
-                        + "    ____________________________________________________________\n"
-                        + "    ____________________________________________________________\n"
-                        + "    Here are the matching tasks in your list:\n"
-                        + "    1.[D][X] get six packs (by: 01 Aug. 2020 09:00am)\n"
-                        + "    2.[E][X] holidaysss (at: 01 May 2020 20:00pm to 01 Aug. 2020 20:00pm)\n"
-                        + "    ____________________________________________________________\n"
-                        + "    ____________________________________________________________\n"
-                        + "    Bye. Hope to see you again soon!\n"
-                        + "    ____________________________________________________________\n";
+        String[] actionsList = new String[]{"todo study 24 hours", "deadline get six packs /by 2020-02-29 09:00", "event holidaysss /at 2020-05-01 20:00 to 2020-08-01 20:00", "done 1", "find 2020"};
+        Parser parser = new Parser();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage("tasks_test.txt", taskList);
+        UI ui = new UI();
+        storage.clearFile();
+        StringBuilder outputString = new StringBuilder();
+
+        for (String action : actionsList) {
+            Command c = parser.parse(action);
+            outputString.append(c.execute(taskList, ui));
+            storage.saveToFile();
+        }
+
+        String actual = outputString.toString();
+        String expected = "Got it. I've added this task:\n" +
+                "[T][X] study 24 hours\n" +
+                "Now you have 1 tasks in the list.\n" +
+                "Got it. I've added this task:\n" +
+                "[D][X] get six packs (by: 29 Feb. 2020 09:00HRS)\n" +
+                "Now you have 2 tasks in the list.\n" +
+                "Got it. I've added this task:\n" +
+                "[E][X] holidaysss (at: 01 May 2020 20:00HRS to 01 Aug. 2020 20:00HRS)\n" +
+                "Now you have 3 tasks in the list.\n" +
+                "Nice! I've marked this task as done:\n" +
+                "[T][V] study 24 hours\n" +
+                "Here are the matching tasks in your list:\n" +
+                "1.[D][X] get six packs (by: 29 Feb. 2020 09:00HRS)\n" +
+                "2.[E][X] holidaysss (at: 01 May 2020 20:00HRS to 01 Aug. 2020 20:00HRS)\n";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testList() {
+        String[] actionsList = new String[]{"todo study 24 hours", "deadline get six packs /by 2020-02-29 09:00", "event holidaysss /at 2020-05-01 20:00 to 2020-08-01 20:00", "done 3", "list"};
+        Parser parser = new Parser();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage("tasks_test.txt", taskList);
+        UI ui = new UI();
+        storage.clearFile();
+        StringBuilder outputString = new StringBuilder();
+
+        for (String action : actionsList) {
+            Command c = parser.parse(action);
+            outputString.append(c.execute(taskList, ui));
+            storage.saveToFile();
+        }
+
+        String actual = outputString.toString();
+        String expected = "Got it. I've added this task:\n" +
+                "[T][X] study 24 hours\n" +
+                "Now you have 1 tasks in the list.\n" +
+                "Got it. I've added this task:\n" +
+                "[D][X] get six packs (by: 29 Feb. 2020 09:00HRS)\n" +
+                "Now you have 2 tasks in the list.\n" +
+                "Got it. I've added this task:\n" +
+                "[E][X] holidaysss (at: 01 May 2020 20:00HRS to 01 Aug. 2020 20:00HRS)\n" +
+                "Now you have 3 tasks in the list.\n" +
+                "Nice! I've marked this task as done:\n" +
+                "[E][V] holidaysss (at: 01 May 2020 20:00HRS to 01 Aug. 2020 20:00HRS)\n" +
+                "Here are the tasks in your list:\n" +
+                "1.[T][X] study 24 hours\n" +
+                "2.[D][X] get six packs (by: 29 Feb. 2020 09:00HRS)\n" +
+                "3.[E][V] holidaysss (at: 01 May 2020 20:00HRS to 01 Aug. 2020 20:00HRS)\n";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testHelp() {
+        String[] actionsList = new String[]{"help"};
+        Parser parser = new Parser();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage("tasks_test.txt", taskList);
+        UI ui = new UI();
+        storage.clearFile();
+        StringBuilder outputString = new StringBuilder();
+
+        for (String action : actionsList) {
+            Command c = parser.parse(action);
+            outputString.append(c.execute(taskList, ui));
+            storage.saveToFile();
+        }
+
+        String actual = outputString.toString();
+        String expected = "List of available commands: todo, event, deadline, list, find, done, delete, bye\n";
         assertEquals(expected, actual);
     }
 }

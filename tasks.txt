@@ -1,12 +1,10 @@
-T|V|sleep
-D|V|do homework|10 Feb. 2019 09:00am
-D|V|watch show|10 Sep. 2019 09:00am
-T|X|watch fireworks
-T|X|todo
-T|X|yay
-T|X|awpdomwpdm
-T|X|watch a webcast of the lecture which i did not go for lmao
-T|X|k
-T|X|hey
-E|X|sleep|01 Oct. 2019 09:00am to 01 Oct. 2019 10:00am
-E|X|sleep|01 Oct. 2019 09:00am to 02 Oct. 2019 10:00am
+T|V|hi
+E|X|fireworks|12 Oct. 2019 20:00pm to 12 Oct. 2019 21:00pm
+D|X|fireworks|12 Oct. 2019 20:00pm
+E|X|fireworks|12 Oct. 2019 20:00 to 12 Oct. 2019 21:00
+E|X|fireworks|12 Oct. 2019 20:00HRS to 12 Oct. 2019 21:00HRS
+E|X|fireworks|12 Oct. 2019 20:00HRS to 12 Oct. 2019 21:00HRS
+D|X|sleep|09 Oct. 2019 09:00HRS
+T|X|study 24 hours
+D|X|get six packs|29 Feb. 2020 09:00HRS
+E|X|holidaysss|01 May 2020 20:00HRS to 01 Aug. 2020 20:00HRS

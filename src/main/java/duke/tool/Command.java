@@ -44,7 +44,7 @@ public class Command {
                 outputString.append(ui.print("Bye. Hope to see you again soon!"));
                 return outputString.toString();
             case "list":
-                ui.print("Here are the tasks in your list:");
+                outputString.append(ui.print("Here are the tasks in your list:"));
                 for (int i = 0; i < taskList.size(); i++) {
                     outputString.append(ui.print((i + 1) + "." + taskList.get(i)));
                 }
@@ -130,7 +130,7 @@ public class Command {
                     LocalDateTime datetimeParsed = timeParsed.atDate(dateParsed);
 
                     String newDateTime =
-                            datetimeParsed.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mma"));
+                            datetimeParsed.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")) + "HRS";
                     Task newDeadline = new Deadlines(description, newDateTime);
                     taskList.add(newDeadline);
                     outputString.append(ui.print("Got it. I've added this task:"));
@@ -166,13 +166,13 @@ public class Command {
                     String dateTimeFrom =
                             datetimeFromParsed.format(
                                     DateTimeFormatter.ofPattern(
-                                            "dd MMM yyyy HH:mma"));
+                                            "dd MMM yyyy HH:mm"));
                     String dateTimeTo =
                             datetimeToParsed.format(
                                     DateTimeFormatter.ofPattern(
-                                            "dd MMM yyyy HH:mma"));
+                                            "dd MMM yyyy HH:mm"));
 
-                    String newDateTime = dateTimeFrom + " to " + dateTimeTo;
+                    String newDateTime = dateTimeFrom + "HRS to " + dateTimeTo + "HRS";
 
                     Task newTask = new Events(description, newDateTime);
                     taskList.add(newTask);
