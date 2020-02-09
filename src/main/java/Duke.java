@@ -118,14 +118,6 @@ public class Duke {
                 }
 
                 break;
-            case "undo":
-                try {
-                    response = handleUndo();
-                } catch (DukeException e) {
-                    response = e.getMessage();
-                }
-
-                break;
             default:
                 try {
                     int originalNumOfTasks = tasks.getSize();
@@ -154,50 +146,6 @@ public class Duke {
         }
 
         return ui.getExitGreeting();
-    }
-
-    /**
-     * Handle the undo command for Duke.
-     *
-     * @return Response message after the previous command have been reversed.
-     * @throws DukeException Thrown when either the previous command cannot be reversed or does not exist.
-     */
-    private String handleUndo () throws DukeException {
-        if(prevCommands.isEmpty()) {
-            throw new DukeException("No previous commands to be undone.\n");
-        }
-
-        Parser parser = new Parser(prevCommands.remove(prevCommands.size() - 1));
-
-        if (parser.getIdentifier().equals("undo") || parser.getIdentifier().equals("list")) {
-            throw new DukeException("Previous command cannot be undone.\n");
-        }
-
-        String response = ui.getUndoIdentifier(parser.getIdentifier());
-
-        switch (parser.getIdentifier()) {
-        case "delete":
-            tasks.addTask(deletedTasks.remove(deletedTasks.size() - 1));
-            response = response.concat(ui.getAddSuccess(tasks));
-            response = response.concat(ui.getStatusUpdate(tasks));
-
-            break;
-        case "done":
-            try {
-                int taskToBeReversed = parser.getTaskIndex(tasks.getSize());
-                tasks.getTask(taskToBeReversed - 1).resetPrevStatus();
-
-                response = response.concat(ui.getReverseDoneSuccess(tasks, taskToBeReversed - 1));
-            } catch (DukeException e) {
-                response = ui.getExceptionMessage(e);
-            }
-
-            break;
-        default:
-            response = response.concat(deleteTask(tasks.getSize()));
-            break;
-        }
-        return response;
     }
 
     /**
@@ -273,9 +221,9 @@ public class Duke {
     public String findTarget(Parser parser) throws DukeException {
         String keyword = parser.getDescription();
 
-        ArrayList<Task> targets = tasks.findTargets(keyword);
+        ArrayList<String> targets = tasks.findTargets(keyword);
 
-        System.out.println(targets.stream().allMatch(target -> target.getDescription().contains(keyword)));
+        System.out.println(targets.stream().allMatch(target -> target.contains(keyword)));
 
         return ui.getTargets(targets);
     }

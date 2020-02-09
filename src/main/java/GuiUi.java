@@ -120,23 +120,12 @@ public class GuiUi {
      * @param targets List of tasks that matches keyword.
      * @return List of tasks that matches keyword.
      */
-    public String getTargets(ArrayList<Task> targets) {
+    public String getTargets(ArrayList<String> targets) {
         String response = "Here are the matching tasks in your list:\n";
 
         for (int i = 1; i < targets.size() + 1; i++) {
-            response = response.concat(i + "." + targets.get(i - 1).obtainTaskInfo() + "\n");
+            response = response.concat(i + "." + targets.get(i - 1) + "\n");
         }
-        return response;
-    }
-
-    public String getUndoIdentifier(String command) {
-        return "[Undo " + command + " command]: ";
-    }
-
-    public String getReverseDoneSuccess(TaskList tasks, int reverseTaskIndex) {
-        String response = "Nice! I've reversed the status of this task:\n";
-        response = response.concat("  " + tasks.getTask(reverseTaskIndex).obtainTaskInfo() + "\n");
-
         return response;
     }
 }
