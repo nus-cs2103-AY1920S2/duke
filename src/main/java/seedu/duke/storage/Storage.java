@@ -1,5 +1,7 @@
-package seedu.duke;
+package seedu.duke.storage;
 
+import seedu.duke.exception.InvalidDateException;
+import seedu.duke.exception.InvalidTaskInputException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -29,9 +31,8 @@ public class Storage {
      * Creates a hard disk to store and load the user's task list.
      *
      * @param path Relative path to the file that is being opened.
-     * @throws IOException If an input or output exception occurred.
      */
-    public Storage(String path) throws IOException {
+    public Storage(String path) {
         this.path = path;
     }
 
@@ -43,17 +44,17 @@ public class Storage {
      * @throws InvalidTaskInputException If an invalid task command is input.
      * @throws InvalidDateException If a date is input in a wrong format.
      */
-    protected List<Task> load() throws IOException, InvalidTaskInputException, InvalidDateException {
+    public List<Task> load() throws IOException, InvalidTaskInputException, InvalidDateException {
         tasks = new ArrayList<>();
         String inputLine;
         File file = new File(path);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         while ((inputLine = br.readLine()) != null) {
-            String[] input = inputLine.split("\\|", 3);
-            String type = input[0].trim();
-            String doneStatus = input[1].trim();
-            String desc = input[2].trim();
+            String[] inputs = inputLine.split("\\|", 3);
+            String type = inputs[0].trim();
+            String doneStatus = inputs[1].trim();
+            String desc = inputs[2].trim();
             if (type.equalsIgnoreCase("T")) {
                 addTodo(desc, doneStatus);
             } else if (type.equalsIgnoreCase("D")) {
@@ -197,7 +198,7 @@ public class Storage {
      * @param index The index number ot the task that is being modified.
      * @throws IOException If an input or output exception occurred.
      */
-    protected void changeToStorage(int index) throws IOException {
+    public void changeToStorage(int index) throws IOException {
         File file = new File(path);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -230,7 +231,7 @@ public class Storage {
      * @param index The index number ot the task that is being modified.
      * @throws IOException If an input or output exception occurred.
      */
-    protected void deleteInStorage(int index) throws IOException {
+    public void deleteInStorage(int index) throws IOException {
         File file = new File(path);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);

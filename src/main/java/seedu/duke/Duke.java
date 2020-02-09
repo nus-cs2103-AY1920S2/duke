@@ -1,6 +1,11 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.exception.DukeException;
+import seedu.duke.parser.Parser;
+import seedu.duke.storage.Storage;
+import seedu.duke.task.TaskList;
+import seedu.duke.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -18,7 +23,7 @@ public class Duke {
     /**
      * Constructor for Duke.
      *
-     * @throws IOException if an input or output exception occurred
+     * @throws IOException If an input or output exception occurred.
      */
     public Duke() throws IOException {
         String filePath = "data/duke.txt";
@@ -35,8 +40,7 @@ public class Duke {
     /**
      * Reads the user command and passes it to Ui to be processed accordingly.
      */
-    private void runDuke() throws InvalidCommandException, EmptyDescriptionException,
-            InvalidTaskInputException, TaskIndexOutOfBoundsException, InvalidDateException, IOException {
+    private void runDuke() {
         ui.greet();
         Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
@@ -50,9 +54,11 @@ public class Duke {
                     break;
                 }
                 cmd.execute(taskList, ui, storage);
-            } catch (DukeException e) {
-                ui.print(e.toString());
             } catch (NullPointerException e) {
+
+            } catch (IOException e) {
+
+            } catch (DukeException e) {
 
             }
         }
@@ -61,18 +67,19 @@ public class Duke {
     /**
      * Main method to run Duke.
      */
-    public static void main(String[] args) throws IOException, InvalidCommandException, EmptyDescriptionException,
-            InvalidTaskInputException, TaskIndexOutOfBoundsException, InvalidDateException {
+    public static void main(String[] args) throws IOException {
         Duke duke;
         duke = new Duke();
         duke.runDuke();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     *
+     * @param input The user input.
+     * @return Duke's response.
      */
-    protected String getResponse(String input) throws InvalidCommandException {
+    protected String getResponse(String input) {
 //            if (!parser.hasNextCommand()) {
 //                break;
 //            }

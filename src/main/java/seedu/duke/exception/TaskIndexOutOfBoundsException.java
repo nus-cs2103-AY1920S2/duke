@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.exception;
 
 public class TaskIndexOutOfBoundsException extends DukeException {
     @Override

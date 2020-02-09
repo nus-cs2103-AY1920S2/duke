@@ -1,5 +1,6 @@
-package seedu.duke;
+package seedu.duke.parser;
 
+import seedu.duke.task.TaskList;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DoneCommand;
@@ -8,6 +9,8 @@ import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.FindCommand;
 import seedu.duke.command.ByeCommand;
 import seedu.duke.enums.TaskTypes;
+import seedu.duke.exception.InvalidCommandException;
+import seedu.duke.ui.Ui;
 
 public class Parser {
     public Parser() {
@@ -16,6 +19,10 @@ public class Parser {
 
     /**
      * Displays, modifies, and finds the content of the list according to the user's command input.
+     *
+     * @param inputs The user input.
+     * @param taskList The TaskList object.
+     * @return The respective command.
      */
     public Command handleCommands(String[] inputs, TaskList taskList) {
         String command = inputs[0].trim();

@@ -1,7 +1,13 @@
 package seedu.duke.command;
 
-import seedu.duke.*;
+import seedu.duke.storage.Storage;
+import seedu.duke.task.TaskList;
+import seedu.duke.ui.Ui;
 import seedu.duke.enums.TaskTypes;
+import seedu.duke.exception.EmptyDescriptionException;
+import seedu.duke.exception.InvalidCommandException;
+import seedu.duke.exception.InvalidDateException;
+import seedu.duke.exception.InvalidTaskInputException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -12,15 +18,36 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
+/**
+ * Represents a command object to add task to the list.
+ */
 public class AddCommand extends Command {
     private TaskTypes taskType;
     private String[] inputs;
 
+    /**
+     * Represents an AddCommand object.
+     *
+     * @param taskType The type of the task.
+     * @param inputs The user input.
+     */
     public AddCommand(TaskTypes taskType, String[] inputs) {
         this.taskType = taskType;
         this.inputs = inputs;
     }
 
+    /**
+     * Adds a task into the list.
+     *
+     * @param taskList The TaskList object.
+     * @param ui The User Interface object.
+     * @param storage The hard disk object.
+     * @throws EmptyDescriptionException If the description of a task is empty.
+     * @throws InvalidCommandException If the command inputted is not todo, deadline, event, list, delete, or done.
+     * @throws InvalidTaskInputException If an invalid task command is input.
+     * @throws InvalidDateException If a date is input in a wrong format.
+     * @throws IOException If an input or output exception occurred.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws EmptyDescriptionException,
             InvalidCommandException, InvalidTaskInputException, InvalidDateException, IOException {
@@ -69,7 +96,7 @@ public class AddCommand extends Command {
             throw new InvalidCommandException();
         }
 
-        taskList.addTasks(task);
+        taskList.addTask(task);
         storage.addToStorage(task);
         ui.printAddToList();
         ui.print(task.toString());
