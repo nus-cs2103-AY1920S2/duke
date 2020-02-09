@@ -45,7 +45,7 @@ public class Ui {
      *
      * @param task the completed task
      */
-    public void showDonetask(Task task) {
+    public void showDoneTask(Task task) {
         String message = "Yay. You've finally done this task:\n\t" + task;
 
         say(message);
@@ -113,6 +113,31 @@ public class Ui {
 
         say(message);
     }
+
+    /**
+     * Displays the snoozed task.
+     *
+     * @param task the snoozed task
+     */
+    public void showSnoozedTask(Task task) {
+        String message = "I knew you would procrastinate even more. Here's delaying the inevitable:\n"
+                + task;
+
+        say(message);
+    }
+
+    /**
+     * Displays the snooze error message.
+     *
+     * @param task the task that cannot be snoozed
+     */
+    public void showInvalidSnooze(Task task) {
+        String message = "Yeah, can't snooze this task:\n"
+                + task;
+
+        say(message);
+    }
+
 
     /**
      * Retrieves the user command from the interface.
