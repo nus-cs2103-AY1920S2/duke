@@ -1,8 +1,15 @@
 package lcduke;
 
+/** Ths creates a Parser object, which is to check exception of user's input.
+ */
+
 public class Parser {
     static boolean isProblem = false;
 
+    /** This is the constructor to create the Storage Object.
+     *
+     * @param userInput Input by the user.
+     */
     public Parser(String userInput) {
         try {
             testMessage(userInput);

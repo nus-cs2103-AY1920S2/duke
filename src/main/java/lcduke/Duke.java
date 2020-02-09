@@ -4,11 +4,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
+/** Ths creates a Duke object.
+ */
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /** This is the constructor to create the Deadline Object.
+     *
+     * @param filePath File path of user's hard disk.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -31,7 +38,7 @@ public class Duke {
                 if (userInput.equals("list")) {
                     Ui.list(this.tasks);
                 } else if (userInput.equals("done 2")) {
-                    Ui.done2(this.tasks);
+                    Ui.done(this.tasks);
                 } else if (userInput.contains("delete")){
                     this.tasks.delete(userInput);
                     try {

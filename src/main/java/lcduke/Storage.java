@@ -6,10 +6,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/** Ths creates a Storage object.
+ */
+
 public class Storage {
     File savedTaskList;
     String filePath;
 
+    /** This is the constructor to create the Storage Object.
+     *
+     * @param filePath FilePath of user's hard disk.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.savedTaskList = new File(filePath);
