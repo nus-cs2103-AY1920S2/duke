@@ -53,18 +53,10 @@ public class Parser {
         }
 
         String description = inputs[1];
+        int dateIndex = this.getDateIndex();
 
-        if (inputs[0].equals("event") || inputs[0].equals("deadline")) {
-            int j = 2;
-
-            while (j != inputs.length && inputs[j].charAt(0) != '/') {
-                description = description.concat(" " + inputs[j]);
-                j++;
-            }
-        } else {
-            for (int i = 2; i < inputs.length; i++) {
-                description = description.concat(" " + inputs[i]);
-            }
+        for (int i = 2; i < dateIndex; i++) {
+            description = description.concat(" " + inputs[i]);
         }
 
         return description;

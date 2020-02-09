@@ -221,9 +221,9 @@ public class Duke {
     public String findTarget(Parser parser) throws DukeException {
         String keyword = parser.getDescription();
 
-        ArrayList<String> targets = tasks.findTargets(keyword);
+        ArrayList<Task> targets = tasks.findTargets(keyword);
 
-        System.out.println(targets.stream().allMatch(target -> target.contains(keyword)));
+        System.out.println(targets.stream().allMatch(target -> target.getDescription().contains(keyword)));
 
         return ui.getTargets(targets);
     }
