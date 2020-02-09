@@ -11,6 +11,8 @@ public class findAction implements Action {
         if (keyword.equals("")) {
             return "I need a keyword";
         }
+        assert(!keyword.isEmpty());
+
         List<Task> tasksWithKeyword = tasks.find(keyword);
         String myResponse = "The tasks matching the keyword are:\n";
         int numTasks = 1;

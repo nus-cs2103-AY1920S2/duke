@@ -19,7 +19,9 @@ public class Duke {
      */
     public String getResponse(String input) {
         Parser parser = new Parser();
-        return parser.parse(input);
+        String output = parser.parse(input);
+        assert(!output.isEmpty());
+        return output;
     }
 
 

@@ -26,6 +26,8 @@ public class EventTask extends Task {
         }
 
         Scanner sc = new Scanner(timing);
+        assert(!timing.isEmpty());
+
         if (!sc.next().equals("at")) {
             throw new InvalidInputException("The timing should start with keyword [at]");
         }

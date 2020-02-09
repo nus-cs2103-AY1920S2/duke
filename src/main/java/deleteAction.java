@@ -15,6 +15,7 @@ public class deleteAction implements Action {
         if (index < 0) {
             return "Invalid Index found";
         }
+        assert(index >= 0 && index <= tasks.getList().size());
         try {
             return tasks.delete(index);
         } catch (InvalidIndexException e) {
