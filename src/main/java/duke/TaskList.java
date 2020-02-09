@@ -63,7 +63,7 @@ public class TaskList {
                 return Ui.goodbye();
 
             case "list":
-                return Ui.listAllTasksMessage(this);
+                return listAllTasksMessages();
 
             case "delete":
                 return deleteTask(command);
@@ -149,11 +149,41 @@ public class TaskList {
             }
 
             // Print all options
-            return Ui.listAllTasksMessage(result);
+            String resultListAllTasks = result.listAllTasksMessages();
+            String warning = "Note: To get the Task Number for deletion, type 'list'";
+            return Ui.listMessage(resultListAllTasks + "\n" + warning);
         } catch (Exception e) {
             throw new EmptyTaskListException("");
         }
 
+    }
+
+    /**
+     * Gives a String representing all Tasks in a TaskList.
+     *
+     * @return String representing all Tasks in the TaskList.
+     * @throws EmptyTaskListException when the TaskList is currently empty.
+     */
+    private String listAllTasksMessages() throws EmptyTaskListException {
+        if (this.isEmpty()) {
+            throw new EmptyTaskListException("");
+        }
+        String result = "";
+        for (int i = 0; i < this.sizeOf(); i++) {
+            result += obtainTaskFromStoredMessage(i) + "\n";
+        }
+        return Ui.listMessage(result);
+    }
+
+    /**
+     * Gives the String representing an individual Task with current completion status, without formatting lines.
+     *
+     * @param i index of storage of the Task in the container/collection.
+     * @return String representing an individual Task with current completion status, without formatting lines.
+     */
+    private String obtainTaskFromStoredMessage(int i) {
+        String tickOrCross = this.getTask(i).obtainStatusIcon();
+        return String.valueOf(i + 1) + ". [" + tickOrCross + "] " + this.getTask(i);
     }
 
     /**

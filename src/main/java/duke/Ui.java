@@ -37,7 +37,8 @@ public class Ui {
      */
     public static String goodbye() {
         return Constant.FORMAT_LINE
-            + "====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D"
+            + "====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D\n"
+            + "Please exit by clicking the big red X button, unless you have more things to do."
             + Constant.FORMAT_LINE;
     }
 
@@ -59,13 +60,8 @@ public class Ui {
     /**
      * Gives the String for all Tasks, their number order, and their completion status for the list command.
      */
-    public static String listAllTasksMessage(TaskList allTasks) {
-        String result = Constant.FORMAT_LINE;
-        for (int i = 0; i < allTasks.sizeOf(); i++) {
-            result += obtainTaskFromStoredMessage(i, allTasks) + "\n";
-        }
-        result += Constant.FORMAT_LINE;
-        return result;
+    public static String listMessage(String tasks) {
+        return Constant.FORMAT_LINE + tasks + Constant.FORMAT_LINE;
     }
 
     /**
@@ -86,33 +82,21 @@ public class Ui {
     }
 
     /**
-     * Gives the String representing an individual Task with current completion status, without formatting lines.
-     *
-     * @param i index of storage of the Task in the container/collection.
-     * @param allTasks TaskList containing all the non-deleted Tasks for Duke.
-     * @return String representing an individual Task with current completion status, without formatting lines.
-     */
-    public static String obtainTaskFromStoredMessage(int i, TaskList allTasks) {
-        String tickOrCross = allTasks.getTask(i).obtainStatusIcon();
-        return String.valueOf(i + 1) + ". [" + tickOrCross + "] " + allTasks.getTask(i);
-    }
-
-    /**
      * Gives an exception message for an Exception.
      *
-     * @param e String for the exception message.
+     * @param exceptionType String for the exception message.
      */
-    public static String exceptionMessage(String e) {
-        return Constant.FORMAT_LINE + e + "\n" + Constant.FORMAT_LINE;
+    public static String exceptionMessage(String exceptionType) {
+        return Constant.FORMAT_LINE + exceptionType + "\n" + Constant.FORMAT_LINE;
     }
 
     /**
      * Provides a given String.
      *
-     * @param s String of interest.
+     * @param customMessage String of interest.
      */
-    public static String customMessage(String s) {
-        return s;
+    public static String customMessage(String customMessage) {
+        return Constant.FORMAT_LINE + customMessage + "\n" + Constant.FORMAT_LINE;
     }
 
 }
