@@ -8,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskTest {
     @Test
     public void testGetDoneOutput(){
-        lcduke.Task task1 = new lcduke.Todo("todo read book");
+        Task task1 = new Todo("todo read book");
         assertEquals(false, task1.getDone());
     }
 
     @Test
     public void testToStringOutput(){
-        lcduke.Task task1 = new lcduke.Todo("todo read book");
+        Task task1 = new Todo("todo read book");
         task1.markAsDone();
         assertEquals("[" + "\u2713" + "] " + "todo read book",
                 task1.toString());
