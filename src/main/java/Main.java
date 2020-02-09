@@ -27,13 +27,11 @@ public class Main extends Application {
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent event) {
                     event.consume();
-//                    gui.bye();
+                    duke.getUi().exitString();
+                    stage.close();
                 }
             });
             stage.show();
-            new Thread(() -> {
-                duke.run();
-            }).start();
         } catch (IOException e) {
             e.printStackTrace();
         }

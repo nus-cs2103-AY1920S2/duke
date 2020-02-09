@@ -24,17 +24,20 @@ public class Duke {
 //    private Image user = new Image(this.getClass().getResourceAsStream("/images/study-desk.jpg"));
 //    private Image duke = new Image(this.getClass().getResourceAsStream("/images/village.jpg"));
 
-    /**
-     * Constructor for Duke class.
-     * @param filePath Pathname of file where Duke tasks are being stored at
-     */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage);
-        ui.setTaskList(tasks);
-    }
+//    /**
+//     * Constructor for Duke class.
+//     * @param filePath Pathname of file where Duke tasks are being stored at
+//     */
+//    public Duke(String filePath) {
+//        ui = new Ui();
+//        storage = new Storage(filePath);
+//        tasks = new TaskList(storage);
+//        ui.setTaskList(tasks);
+//    }
 
+    /**
+     * Constructor for Duke class with default storage path at data/tasks.txt.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt"); //default filepath
@@ -42,10 +45,33 @@ public class Duke {
         ui.setTaskList(tasks);
     }
 
-    public void run() {
-        ui.awaitUserInput();
+    /**
+     * Get Duke's ui instance.
+     * @return
+     */
+    public Ui getUi() {
+        return this.ui;
     }
 
+    /**
+     * Set Duke's storage to a new storage. Does not copy over content to new storage.
+     * @param storage
+     */
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
+    /**
+     * Generates a response to user input.
+     */
+    String getResponse(String input) {
+        return ui.parseInput(input);
+    }
+
+//    public void run() {
+//        ui.awaitUserInput();
+//    }
+//
 //    @Override
 //    public void start(Stage stage) {
 //        scrollPane = new ScrollPane();
@@ -135,18 +161,9 @@ public class Duke {
 //        userInput.clear();
 //    }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    String getResponse(String input) {
-//        return "Duke heard: " + input;
-        return ui.parseInput(input);
-    }
-
-    public static void main(String[] args) {
-        Duke newDuke = new Duke("data/tasks.txt");
-        newDuke.run();
-    }
+//    public static void main(String[] args) {
+//        Duke newDuke = new Duke("data/tasks.txt");
+//        newDuke.run();
+//    }
 
 }
