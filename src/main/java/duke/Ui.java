@@ -27,8 +27,10 @@ public class Ui {
         System.out.println("You now have " + taskList.getArraySize() + " task");
     }
 
-    public void showTaskDeletedMessage(int taskNumber) {
-        System.out.println("I shall delete task " + taskNumber);
+    public void showTaskDeletedMessage(MyList taskList, int taskNumber) {
+        Task taskToDelete = taskList.getTask(taskNumber);
+        String taskName = taskToDelete.getItem();
+        System.out.println("I shall delete task: " + taskName);
     }
 
     public String showWrongCommandError() {
@@ -45,5 +47,9 @@ public class Ui {
 
     public String showTodoDescriptionError() {
         return "Sorry, the description of todo cannot be empty";
+    }
+
+    public String showTaskDoesNotExistMessage() {
+        return "Unable to delete a task that does not exist";
     }
 }

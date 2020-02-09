@@ -23,6 +23,8 @@ public class Main {
                 Command command = parser.parseCommand(word);
                 command.execute(word, taskList, ui, storage);
                 isExit = command.isExit();
+            } catch(DukeException e) {
+                System.out.println(e.getMessage());
             } catch(IOException e) {
                 System.out.println(e.getMessage());
             }
