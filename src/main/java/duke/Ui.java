@@ -109,4 +109,19 @@ public class Ui {
     public String showTaskDoesNotExistMessage() {
         return "Unable to delete a task that does not exist";
     }
+
+    /**
+     * Show found results message.
+     */
+    public void showFoundResultsMessage() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    /**
+     * Shows message if no task matches the find.
+     */
+    public void showNoTaskFoundMessage() {
+        System.out.println("No task found that matches your description");
+    }
+
 }

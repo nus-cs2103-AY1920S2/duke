@@ -45,6 +45,9 @@ public class Parser {
         else if(command.contains("list")) {
             return new ListCommand();
         }
+        else if(command.contains("find")){
+            return new FindCommand();
+        }
         else {
             throw new DukeException(ui.showWrongCommandError());
         }
