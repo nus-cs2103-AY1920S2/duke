@@ -49,6 +49,7 @@ public class MainWindow extends AnchorPane {
             stage.close();
         }
         String response = duke.getResponse(input);
+        assert !(response.equals(input)): "Parser not working properly";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
