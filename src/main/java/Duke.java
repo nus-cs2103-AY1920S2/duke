@@ -8,7 +8,6 @@ import javafx.scene.layout.VBox;
 import sampletest.Task;
 import sampletest.Events;
 import sampletest.Deadlines;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
