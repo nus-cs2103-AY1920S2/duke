@@ -1,7 +1,5 @@
 package lcduke;
 
-import lcduke.Task;
-import lcduke.Todo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
