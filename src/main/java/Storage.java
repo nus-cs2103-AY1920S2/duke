@@ -48,7 +48,8 @@ public class Storage {
             String isDone = inputs[1];
             String description = inputs[2];
 
-            if (taskType.equals("D") || taskType.equals("E")) {
+            switch (taskType) {
+            case "D":
                 String date = inputs[3];
                 String time = inputs[4];
 
@@ -58,18 +59,38 @@ public class Storage {
                 formatter = DateTimeFormatter.ofPattern("hh:mm a");
                 LocalTime localTime = LocalTime.parse(time, formatter);
 
-                if (taskType.equals("D")) {
+                if (isDone.equals("X")) {
                     tasks.add(new Deadline(description, taskType, localDate, localTime, false));
                 } else {
-                    tasks.add(new Event(description, taskType, localDate, localTime, false));
+                    tasks.add(new Deadline(description, taskType, localDate, localTime, true));
                 }
 
-            } else {
-                tasks.add(new ToDo(description, taskType, false));
-            }
+                break;
+            case "E":
+                String eventDate = inputs[3];
+                String eventTime = inputs[4];
 
-            if (isDone.equals("Y")) {
-                tasks.get(tasks.size() - 1).setDone();
+                DateTimeFormatter forFormatting = DateTimeFormatter.ofPattern("MMM d yyyy");
+                LocalDate localEventDate = LocalDate.parse(eventDate, forFormatting);
+
+                forFormatting = DateTimeFormatter.ofPattern("hh:mm a");
+                LocalTime localEventTime = LocalTime.parse(eventTime, forFormatting);
+
+                if (isDone.equals("X")) {
+                    tasks.add(new Event(description, taskType, localEventDate, localEventTime, false));
+                } else {
+                    tasks.add(new Event(description, taskType, localEventDate, localEventTime, true));
+                }
+
+                break;
+            default:
+                if (isDone.equals("X")) {
+                    tasks.add(new ToDo(description, taskType, false));
+                } else {
+                    tasks.add(new ToDo(description, taskType, true));
+                }
+
+                break;
             }
         }
         return tasks;
