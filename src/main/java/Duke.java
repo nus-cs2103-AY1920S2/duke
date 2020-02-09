@@ -88,9 +88,6 @@ public class Duke {
                     int completedTask = parser.getTaskIndex(tasks.getSize());
                     tasks.getTask(completedTask - 1).setDone();
 
-                    assert tasks.getTask(completedTask - 1).getStatusIcon().equals("Y"):
-                            "Task was not marked done successfully";
-
                     response = ui.getDoneSuccess(tasks, completedTask - 1);
                 } catch (DukeException e) {
                     response = ui.getExceptionMessage(e);
@@ -100,11 +97,8 @@ public class Duke {
             case "delete":
                 try {
                     int removeTask = parser.getTaskIndex(tasks.getSize());
-                    int originalNumOfTasks = tasks.getSize();
 
                     response = ui.getDeleteSuccess(tasks, removeTask - 1);
-
-                    assert tasks.getSize() == originalNumOfTasks - 1: "TaskList was not updated properly";
 
                     tasks.deleteTask(removeTask - 1);
                     response = response.concat(ui.getStatusUpdate(tasks));
@@ -124,9 +118,6 @@ public class Duke {
             default:
                 try {
                     this.addTask(parser);
-                    int originalNumOfTasks = tasks.getSize();
-
-                    assert tasks.getSize() == originalNumOfTasks + 1: "TaskList was not updated properly";
 
                     response = ui.getAddSuccess(tasks);
                     response = response.concat(ui.getStatusUpdate(tasks));
@@ -187,8 +178,6 @@ public class Duke {
         String keyword = parser.getDescription();
 
         ArrayList<String> targets = tasks.findTargets(keyword);
-
-        System.out.println(targets.stream().allMatch(target -> target.contains(keyword)));
 
         return ui.getTargets(targets);
     }
