@@ -1,5 +1,7 @@
 package dukeApp.files;
 
+import dukeApp.parse.Parse;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -35,16 +37,16 @@ public class Storage {
             }
             else {
                 String statement = s.nextLine();
-                String des = statement.split("\\(")[0];
-                String date = statement.split("\\(")[1];
-                String dateLine = date.substring(date.indexOf(" ") + 1, date.length()-1);
-                String newDate = dateLine.split(" ")[0];
-                String time = dateLine.split(" ")[1];
+                TaskList tasks = new TaskList();
+                ArrayList<String> details = tasks.breakStatement(statement);
+                String des = details.get(0);
+                String date = details.get(1);
+                String time = details.get(2);
                 if (c.equals("E")) {
-                    t = new Event(des, newDate, time);
+                    t = new Event(des, date, time);
                     arrList.add(t);
                 } else {
-                    t = new Deadline(des, newDate, time);
+                    t = new Deadline(des, date, time);
                     arrList.add(t);
                 }
             }
@@ -65,20 +67,14 @@ public class Storage {
         StringBuilder s = new StringBuilder();
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < newList.size(); i++) {
-            if ((newList.get(i).getType()).equals("T")) {
-                s.append(newList.get(i).getType()).append(" ").append(newList.get(i).getDone())
-                        .append(newList.get(i).getDescription());
-            }
-            else if ((newList.get(i).getType()).equals("E")) {
+            if ((newList.get(i).getType()).equals("E")) {
                 ((Event)newList.get(i)).changeDate();
-                s.append(newList.get(i).getType()).append(" ").append(newList.get(i).getDone())
-                        .append(newList.get(i).toString());
             }
-            else {
+            else if ((newList.get(i).getType()).equals("D")){
                 ((Deadline)newList.get(i)).changeDate();
-                s.append(newList.get(i).getType()).append(" ").append(newList.get(i).getDone())
-                        .append(newList.get(i).toString());
             }
+            s.append(newList.get(i).getType()).append(" ").append(newList.get(i).getDone())
+                    .append(newList.get(i).toString());
             if (i != newList.size()-1) {
                 s.append(System.lineSeparator());
             }
