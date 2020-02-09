@@ -1,6 +1,6 @@
 package tasks;
 
-import duke.Todo;
+import duke.tasks.Todo;
 import duke.tasks.TaskList;
 import org.junit.jupiter.api.Test;
 

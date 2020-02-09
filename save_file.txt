@@ -1,3 +1,5 @@
-T | 0 | eat
-T | 0 | return book
-E | 0 | project meeting | 16:00 2019-01-29
+T | 1 | eat
+T | 1 | hi
+D | 0 | hw | 14:00 20/02/2020
+E | 0 | meeting | 14:00 03/02/2020
+T | 0 | message him

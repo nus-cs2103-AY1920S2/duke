@@ -1,4 +1,4 @@
-package duke;
+package duke.tasks;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -13,6 +13,8 @@ public class Deadline extends DateTask {
     private LocalTime finishByTime;
     /** Date of deadline. */
     private LocalDate finishByDate;
+    /** Format of LocalFate */
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
      * Creates a deadline task with the given description and time.
@@ -28,7 +30,7 @@ public class Deadline extends DateTask {
         super(description);
 
         String[] fields = finishBy.split(" ");
-        if (fields.length != 2) {
+        if (fields.length < 2) {
             throw new DateTimeException("Insufficient parameters for date/time");
         }
 
@@ -37,15 +39,14 @@ public class Deadline extends DateTask {
                 : LocalTime.parse(fields[0]);
         this.finishByDate = fields[1].equals("-")
                 ? LocalDate.now()
-                : LocalDate.parse(fields[1]);
+                : LocalDate.parse(fields[1], dateFormatter);
     }
 
     @Override
     public String toString() {
-//        String date = this.finishByDate.toString();
-        String date = this.finishByDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String dateTime = this.finishByTime != null
-                ? this.finishByTime + ", " + date
+        String date = finishByDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        String dateTime = finishByTime != null
+                ? finishByTime + ", " + date
                 : date;
 
         return "[D]" + super.toString() + " (by: " + dateTime + ")";
@@ -58,7 +59,7 @@ public class Deadline extends DateTask {
      */
     @Override
     public LocalDate getDate() {
-        return this.finishByDate;
+        return finishByDate;
     }
 
     /**
@@ -70,8 +71,8 @@ public class Deadline extends DateTask {
     public String toSaveFormat() {
         char d = super.getIsDone() ? '1' : '0';
 
-        String time = this.finishByTime == null ? "-" : this.finishByTime.toString();
+        String time = finishByTime == null ? "-" : finishByTime.toString();
         return "D | " + d + " | " + super.getDescription() + " | " + time
-                + " " + this.finishByDate;
+                + " " + finishByDate.format(dateFormatter);
     }
 }

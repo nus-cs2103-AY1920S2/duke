@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.DateTask;
-import duke.Task;
 import duke.ui.Ui;
 
 import java.time.LocalDate;
@@ -36,12 +34,6 @@ public class TaskList {
      */
     public void add(Task t) {
         this.list.add(t);
-        ui.printNewTask(t, this.size());
-    }
-
-    public String addToString(Task t) {
-        this.list.add(t);
-        return "Added + t";
     }
 
     /**
@@ -61,13 +53,6 @@ public class TaskList {
     public void delete(int index) {
         Task t = this.list.get(index);
         this.list.remove(index);
-        ui.printDelete(t, this.size());
-    }
-
-    public String deleteToString(int index) {
-        Task t = this.list.get(index);
-        this.list.remove(index);
-        return "Deleted " + t;
     }
 
     /**
@@ -78,16 +63,7 @@ public class TaskList {
     public void markAsDone(int index) {
         Task t = this.list.get(index);
         t.markAsDone();
-        ui.printDone(t);
     }
-
-    public String markAsDoneToString(int index) {
-        Task t = this.list.get(index);
-        t.markAsDone();
-        return t + " marked as done";
-    }
-
-
 
     /**
      * Concatenate all tasks into format used in save file.
@@ -108,8 +84,8 @@ public class TaskList {
      *
      * @param date Date use for searching corresponding tasks.
      */
-    public void searchDateTask(LocalDate date) {
-        ArrayList<Task> dateTasks = new ArrayList<>();
+    public TaskList searchDateTask(LocalDate date) {
+        TaskList dateTasks = new TaskList();
 
         for (Task t : this.list) {
             if (t instanceof DateTask) {
@@ -118,20 +94,8 @@ public class TaskList {
                 }
             }
         }
-        ui.printList(dateTasks);
-    }
 
-    public String searchDateTaskToString(LocalDate date) {
-        ArrayList<Task> dateTasks = new ArrayList<>();
-
-        for (Task t : this.list) {
-            if (t instanceof DateTask) {
-                if (date.equals(((DateTask) t).getDate())) {
-                    dateTasks.add(t);
-                }
-            }
-        }
-        return dateTasks.toString();
+        return dateTasks;
     }
 
     /**
@@ -154,17 +118,17 @@ public class TaskList {
     /**
      * Searches the list for tasks with description containing the search word.
      *
-     * @param searchWord Word to search for.
+     * @param keyword Word to search for.
      * @return List of tasks with description containing the word.
      */
-    public ArrayList<Task> search(String searchWord) {
-        ArrayList<Task> searchList = new ArrayList<>();
+    public TaskList search(String keyword) {
+        TaskList successList = new TaskList();
         for (Task t : this.list) {
-            if (t.getDescription().contains(searchWord)) {
-                searchList.add(t);
+            if (t.getDescription().contains(keyword)) {
+                successList.add(t);
             }
         }
-        return searchList;
+        return successList;
     }
 
     @Override
@@ -172,6 +136,14 @@ public class TaskList {
         String s = "";
         for (Task t : this.list) {
             s += t.toString() + "\n";
+        }
+        return s;
+    }
+
+    public String orderedToString() {
+        String s = "";
+        for (int i = 0; i < list.size(); i++) {
+            s += (i + 1) + ")\t" + list.get(i).toString() + "\n";
         }
         return s;
     }

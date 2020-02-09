@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.Task;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -9,8 +9,13 @@ import java.util.ArrayList;
  */
 public class Ui {
     private String bar = "    **************************************************************\n";
+    private static MainWindow mainWindowController;
 
     public Ui() {
+    }
+
+    public static void setMainWindowController(MainWindow mainWindowController) {
+        Ui.mainWindowController = mainWindowController;
     }
 
     /**
@@ -22,8 +27,13 @@ public class Ui {
         System.out.println(bar + "    " + output + "\n" + bar);
     }
 
-    public void printOutput(String output) {
-        MainWindow.dukeOutput(output);
+    /**
+     * Prints given text as Duke's message in GUI.
+     *
+     * @param output Text for printing to GUI.
+     */
+    public static void printOutput(String output) {
+        mainWindowController.outputText(output);
     }
 
     /**

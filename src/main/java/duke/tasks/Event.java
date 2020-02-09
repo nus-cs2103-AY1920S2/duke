@@ -1,4 +1,4 @@
-package duke;
+package duke.tasks;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -13,6 +13,8 @@ public class Event extends DateTask {
     private LocalTime startAtTime;
     /** Date of event. */
     private LocalDate startAtDate;
+    /** Format of LocalFate */
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
      * Creates an event task with the given description and time.
@@ -29,7 +31,7 @@ public class Event extends DateTask {
         super(description);
 
         String[] fields = startAt.split(" ");
-        if (fields.length != 2) {
+        if (fields.length < 2) {
             throw new DateTimeException("Insufficient parameters for date/time");
         }
 
@@ -39,15 +41,15 @@ public class Event extends DateTask {
 
         this.startAtDate = fields[1].equals("-")
                 ? LocalDate.now()
-                : LocalDate.parse(fields[1]);
+                : LocalDate.parse(fields[1], dateFormatter);
     }
 
     @Override
     public String toString() {
 //        String date = this.startAtDate.toString();
-        String date = this.startAtDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String dateTime = this.startAtTime != null
-                ? this.startAtTime + ", " + date
+        String date = startAtDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        String dateTime = startAtTime != null
+                ? startAtTime + ", " + date
                 : date;
 
         return "[E]" + super.toString() + " (at: " + dateTime + ")";
@@ -60,7 +62,7 @@ public class Event extends DateTask {
      */
     @Override
     public LocalDate getDate() {
-        return this.startAtDate;
+        return startAtDate;
     }
 
     /**
@@ -72,9 +74,9 @@ public class Event extends DateTask {
     public String toSaveFormat() {
         char d = super.getIsDone() ? '1' : '0';
 
-        String time = this.startAtTime == null ? "-" : this.startAtTime.toString();
+        String time = startAtTime == null ? "-" : startAtTime.toString();
 
         return "E | " + d + " | " + super.getDescription() + " | " + time
-                + " " + this.startAtDate;
+                + " " + startAtDate.format(dateFormatter);
     }
 }

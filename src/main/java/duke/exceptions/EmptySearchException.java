@@ -14,6 +14,6 @@ public class EmptySearchException extends Exception {
 
     @Override
     public String toString() {
-        return ":( OOPS!!! You did not input the word to search for.";
+        return "You did not input the word/date to search for.";
     }
 }

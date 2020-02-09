@@ -1,5 +1,5 @@
 package duke;// packages import
-import duke.tasks.TaskList;
+import duke.tasks.*;
 import duke.ui.Ui;
 
 // java imports
@@ -17,7 +17,7 @@ import java.io.IOException;
 public class Storage {
 
     /** File name of save file. */
-    private String saveFile = "duke/save_file.txt";
+    private String saveFile = "save_file.txt";
 
     /**
      * Saves into saveFile.

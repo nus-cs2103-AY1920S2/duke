@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -22,6 +24,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Stage stage;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -38,6 +41,10 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -45,6 +52,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if(input.equals("bye")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog("Goodbye!", dukeImage)
+            );
+
+            stage.close();
+        }
+
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
@@ -53,15 +69,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    /**
-     * Outputs text argument as a Duke response.
-     *
-     * @param output Text to be outputted.
-     */
-    @FXML
-    public static void dukeOutput(String output) {
+    public void outputText(String text) {
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(output, dukeImage)
+                DialogBox.getDukeDialog(text, dukeImage)
         );
     }
 }
