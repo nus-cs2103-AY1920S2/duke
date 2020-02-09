@@ -62,6 +62,21 @@ public class TaskCollection {
         notifyListeners(this, "remove", oldTasks, this.tasks);
     }
 
+    /**
+     * Return match tasks containing keyword as substring.
+     * @param findKeyword keyword to search
+     * @return
+     */
+    public ArrayList<Task> find(String findKeyword) {
+        ArrayList<Task> matchTasks = new ArrayList<Task>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(findKeyword)) {
+                matchTasks.add(task);
+            }
+        }
+        return matchTasks;
+    }
+
     private void notifyListeners(Object object, String property, ArrayList<Task> oldTasks, ArrayList<Task> newTasks) {
         for (PropertyChangeListener name : listeners) {
             name.propertyChange(new PropertyChangeEvent(this, property, oldTasks, newTasks));

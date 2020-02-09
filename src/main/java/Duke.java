@@ -27,7 +27,8 @@ public class Duke {
             put("todo", 3);
             put("deadline", 4);
             put("delete", 5);
-            put("invalid command", 6);
+            put("find", 6);
+            put("invalid command", 7);
         }
     };
     static CommandParser commandParser = new CommandParser(commandCodeMapping);
@@ -50,9 +51,14 @@ public class Duke {
                 }
             } else if (commandCode == commandCodeMapping.get("delete")) {
                 Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
-                System.out.println("HIEU");
                 if (taskIndex < taskCollection.size()) {
                     taskCollection.remove(taskIndex.intValue());
+                }
+            } else if (commandCode == commandCodeMapping.get("find")) {
+                String findKeyword = command.split(" ")[1];
+                ArrayList<Task> matchTasks = taskCollection.find(findKeyword);
+                for (int i = 0; i < matchTasks.size(); i++) {
+                    System.out.printf(matchTasks.get(i).getFullDetail(i));
                 }
             } else if (commandCode == commandCodeMapping.get("todo")) {
                 String todoContent = command.split(" ", 2)[1];

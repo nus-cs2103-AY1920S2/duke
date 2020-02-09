@@ -28,6 +28,8 @@ public class CommandParser {
                 return this.commandCodeMapping.get("mark done");
             } else if (firstCommandType.equals("delete") && commandSplit.length == 2) {
                 return this.commandCodeMapping.get("delete");
+            } else if (firstCommandType.equals("find") && commandSplit.length == 2) {
+                return this.commandCodeMapping.get("find");
             } else {
                 String taskType = command.split(" ", 2)[0];
                 if (taskType.equals("todo")) {
