@@ -14,6 +14,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.time.LocalDateTime;
 import java.util.stream.*;
@@ -50,7 +51,7 @@ public class Duke extends Application {
     final File FILE = new File(FILEPATH);
     //final String SIZE = "/main/java/data/list.txt";
     //final File SIZEFILE = new File(SIZE);
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     Storage storage = new Storage(FILEPATH);
     TaskList tl = new TaskList(FILEPATH, Tasks);
     ArrayList<Task> TL = tl.getTL();
@@ -205,7 +206,7 @@ public class Duke extends Application {
                 assert isTaskListLoaded : "TaskList not loaded from storage";
                 String desc = ui.getDescription();
                 String date = (desc.split("/by "))[1];
-                LocalDateTime ldt = LocalDateTime.parse(date, formatter);
+                LocalDate ldt = LocalDate.parse(date, formatter);
                 String sldt = ldt.format(formatter);
                 Deadline deadline = new Deadline(desc, sldt);
                 tl.TL.add(deadline);
@@ -219,7 +220,7 @@ public class Duke extends Application {
                 assert isTaskListLoaded : "TaskList not loaded from storage";
                 String desc = ui.getDescription();
                 String date = (desc.split("/at "))[1];
-                LocalDateTime ldt = LocalDateTime.parse(date, formatter);
+                LocalDate ldt = LocalDate.parse(date, formatter);
                 String sldt = ldt.format(formatter);
                 Event event = new Event(desc, sldt);
                 tl.TL.add(event);
@@ -291,7 +292,20 @@ public class Duke extends Application {
             } catch (Exception e) {
                 e.getMessage();
             }
-        } else {
+        } else if (command.equals("viewschedule")) {
+            try {
+                assert isTaskListLoaded : "TaskList not loaded from storage";
+                String rest = ui.getDescription();
+                String date = (rest.split("/at "))[1];
+                LocalDate ldt = LocalDate.parse(date, formatter);
+                String sldt = ldt.format(formatter);
+                response = ("Here are the tasks scheduled for:" + sldt + "\n");
+                response += (tl.getTaskFromKeyword(sldt));
+            } catch (Exception e) {
+
+            }
+        }
+        else {
             try {
                 throw new  DukeException("IDK what you mean");
             } catch (Exception E) {
@@ -311,4 +325,5 @@ public class Duke extends Application {
  * do this week tasks
  * close the program when input = bye
  * add instructions upon startup
+ * add B-viewschedules
  */
