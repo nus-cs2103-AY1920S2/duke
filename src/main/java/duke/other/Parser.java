@@ -53,9 +53,7 @@ public class Parser {
     public static String stringifyDetails(String[] replyArr) {
         String details = "";
         for (int i = 1; i < replyArr.length; i++) {
-//            System.out.println(i + ". " + replyArr[i] + "\n");
             details += " " + replyArr[i];
-//            System.out.println(i + "." + details);
         }
         return details;
     }

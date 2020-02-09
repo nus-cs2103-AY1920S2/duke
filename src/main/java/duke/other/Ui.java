@@ -18,7 +18,7 @@ public class Ui {
      * Prints the welcome message when the user runs Duke.
      */
     public void showWelcome() {
-        String greeting = "Hey there! I'm DingDing!\n"
+        String greeting = "    Hey there! I'm DingDing!\n"
                 + "    What's up today? ;D";
         printWithBorder(greeting);
     }
@@ -152,7 +152,7 @@ public class Ui {
                 + "    Specify deadline with: /at <YYYY/MM/DD> <HH:MM>\n"
                 + "    i.e. deadline Project Meeting /by 2020/01/28 18:00";
         System.out.println(msg);
-        return(msg);
+        return msg;
     }
 
     /**
@@ -164,7 +164,7 @@ public class Ui {
                 + "    Specify event with: /at <YYYY/MM/DD> <HH:MM>\n"
                 + "    i.e. event Project Meeting /at 2020/01/28 18:00";
         System.out.println(msg);
-        return(msg);
+        return msg;
     }
 
     /**
@@ -182,7 +182,7 @@ public class Ui {
      *
      */
     public static String dateInputError() {
-        String msg ="    Please enter a valid date in <YYYY/M/D> format\n"
+        String msg = "    Please enter a valid date in <YYYY/M/D> format\n"
                 + "    i.e. 2020/10/28";
         System.out.println(msg);
         return msg;
@@ -207,11 +207,5 @@ public class Ui {
         System.out.println(msg);
         return msg;
     }
-
-
-
-
-
-
 }
 

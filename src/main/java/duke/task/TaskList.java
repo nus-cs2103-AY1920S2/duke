@@ -46,6 +46,7 @@ public class TaskList {
 
     /**
      * Prints out all the Tasks in the current TaskList.
+     * @return String of all the tasks
      */
     public String listTasks() {
         String completeList = "    Task(s) in your list:";
@@ -60,6 +61,7 @@ public class TaskList {
      * Prints out all the Tasks in the current TaskList that corresponds to the date.
      *
      * @param replyArr Array of the command + details of the command after splitting it by " "
+     * @return String of all tasks on the date
      * @throws DukeException If the input date is invalid (i.e. incorrect format)
      */
     public String showTaskOnDate(String[] replyArr) throws DukeException {
@@ -77,7 +79,7 @@ public class TaskList {
             System.out.println(tasksToday);
             return tasksToday;
         } else {
-//            Ui.throwDateInputError();
+            assert DATE_VALIDATOR.isValidDate(replyArr[1]) == false : replyArr[1];
             return Ui.dateInputError();
         }
     }
@@ -86,13 +88,13 @@ public class TaskList {
      * Marks the specified task as done.
      *
      * @param replyArr Array of the done command & task number of the element of the done command
+     * @return String of bot's response
      * @throws DukeException If task number specified does not exist in the TaskList (e.g. done 5 when there is only 4
      *                       tasks)
      */
     public String markTaskAsDone(String[] replyArr) throws DukeException {
         int taskNum = Integer.parseInt(replyArr[1]) - 1;
         if (taskNum > taskList.size() - 1) {
-//            Ui.throwDoneInputError();
             return Ui.doneInputError();
         } else {
             Task currTask = taskList.get(taskNum);
@@ -107,6 +109,7 @@ public class TaskList {
      * Deletes the specified task from the TaskList.
      *
      * @param replyArr Array of the delete command & task number of the element of the delete command
+     * @return String of bot's response
      * @throws DukeException If task number specified does not exist in the TaskList (e.g. delete 5 when there is only 4
      *                       tasks)
      */
@@ -120,7 +123,6 @@ public class TaskList {
             taskList.remove(taskNum);
             return deleteMsg;
         } catch (IndexOutOfBoundsException ex) {
-//            Ui.throwDeleteInputError();
             return Ui.deleteInputError();
         }
     }
@@ -128,12 +130,13 @@ public class TaskList {
     /**
      * Finds and prints out tasks with a certain keyword.
      * @param replyArr Array of the find command & the specified keyword
+     * @return String of all tasks with keyword(s)
      */
     public String findTaskByKeyword(String[] replyArr) {
         String keyword = replyArr[1];
         String taskWithKeyword = "";
-        for(Task task: taskList) {
-            if(task.getDescription().contains(keyword)) {
+        for (Task task: taskList) {
+            if (task.getDescription().contains(keyword)) {
                 taskWithKeyword += "    " + task.toString() + "\n";
             }
         }

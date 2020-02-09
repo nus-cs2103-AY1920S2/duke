@@ -35,17 +35,29 @@ public class MainWindow extends AnchorPane {
         welcomeMsg();
     }
 
+    /**
+     * Sets variable duke as current duke.
+     * @param d current duke
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
+
+    /**
+     * Sets variable stage as current stage.
+     * @param s current stage
+     */
     public void setStage(Stage s) {
         stage = s;
     }
 
+    /**
+     * Shows the welcome message in a DialogBox when the bot starts.
+     */
     public void welcomeMsg() {
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Hey there! I'm DingDing!\n"
+                DialogBox.getDukeDialog("    Hey there! I'm DingDing!\n"
                 + "    What's up today? ;D", dukeImage));
     }
 
@@ -58,7 +70,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
-        if(input.equals("bye")) {
+        if (input.equals("bye")) {
             stage.close();
         }
         dialogContainer.getChildren().addAll(
