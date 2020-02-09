@@ -35,7 +35,8 @@ public class TaskList {
         if (taskNum <= 0 || taskNum > tasks.size()) {
             throw new InvalidInstructionException(String.format("Task #%d does not exist", taskNum));
         }
-
+        
+        assert taskNum > 0 && taskNum <= tasks.size() : "task number is invalid";
         return tasks.get(taskNum - 1);
     }
 
@@ -68,6 +69,7 @@ public class TaskList {
             throw new InvalidInstructionException(String.format("Task #%d does not exist", taskNum));
         }
 
+        assert taskNum > 0 && taskNum <= tasks.size() : "task number is invalid";
         this.tasks.get(taskNum - 1).markAsDone();
     }
 
@@ -91,6 +93,7 @@ public class TaskList {
             throw new InvalidInstructionException(String.format("Task #%d does not exist", taskNum));
         }
 
+        assert taskNum > 0 && taskNum <= tasks.size() : "task number is invalid";
         this.tasks.remove(taskNum - 1);
     }
 
