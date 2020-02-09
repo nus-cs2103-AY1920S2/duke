@@ -10,6 +10,8 @@ public class Ui {
         this.line = line;
     }
 
+    public Ui() {}
+
     public String[] parseInput() {
         return line.split(" ", 2);
     }
@@ -26,8 +28,13 @@ public class Ui {
         return (this.parseInput())[1];
     }
 
+<<<<<<< HEAD
     public String showList() {
         return ("Here are the tasks in your list: ");
+=======
+    public  String showList() {
+        return "Here are the tasks in your list: ";
+>>>>>>> 23b7f1d0e01940f845a562962edf14088c038c89
     }
 
     public String errmessage() {
@@ -35,6 +42,7 @@ public class Ui {
     }
 
     public String doneTask(Task task) {
+<<<<<<< HEAD
         return ("-------------------------------------------------------------\nNice I have marked this task as done\n" +
         " " + task.getDescription() + "\n-------------------------------------------------------------");
     }
@@ -46,6 +54,18 @@ public class Ui {
 
     public String deleteTask(String task) {
         return ("Deleted task: " + task);
+=======
+        return("Nice I have marked this task as done\n" +
+        " " + task.getDescription() + "\n");
+    }
+
+    public String addedTask(Task todo) {
+        return (todo.toString() + "\n");
+    }
+
+    public String deleteTask(String task) {
+        return("Deleted task: " + task);
+>>>>>>> 23b7f1d0e01940f845a562962edf14088c038c89
     }
 
 }
