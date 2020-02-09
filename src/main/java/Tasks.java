@@ -16,6 +16,11 @@ public class Tasks {
         count++;
     }
 
+    public Tasks() {
+        this.status = "";
+        this.logo = "";
+    }
+
     public Message getMsg() {
         return msg;
     }
@@ -34,6 +39,10 @@ public class Tasks {
     public String removed() {
         Message output = new Message("Noted. I've removed this task:\n" + status + " " + msg.getMsg());
         return output.getMsg();
+    }
+
+    public boolean isEmpty() {
+        return status.equals("");
     }
 
     @Override

@@ -22,7 +22,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm());
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(duke, stage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

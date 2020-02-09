@@ -34,4 +34,8 @@ public class Duke {
         output = chatBox.reply(new Message(input));
         return "Duke heard: " + output;
     }
+
+    public boolean isClose() {
+        return chatBox.isClose();
+    }
 }

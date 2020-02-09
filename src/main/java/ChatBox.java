@@ -16,12 +16,11 @@ import java.util.Scanner;
 
 public class ChatBox {
     private Folder folder;
-    private boolean hasClosed;
+    private boolean hasClosed = false;
     private String location;
 
     public ChatBox(String location) {
         this.folder = new Folder();
-        this.hasClosed = true;
         this.location = location;
     }
 
@@ -30,20 +29,18 @@ public class ChatBox {
             File file = new File(location);
             Scanner data = new Scanner(file);
             while (data.hasNextLine()) {
-                String[] ms = data.nextLine().split("=");
-                String key = ms[0];
-                String status = ms[1];
-                Message message = new Message(ms[2]);
-                if(key.equals("[T]")) {
-                    folder.add(new ToDos(message, status));
-                } else if (key.equals("[E]")) {
-                    folder.add(new Events(message, status));
-                } else if (key.equals("[D]")) {
-                    folder.add(new Deadlines(message, status));
-                }
+                String[] retrieveMsg = data.nextLine().split("=");
+                String key = retrieveMsg[0];
+                String status = retrieveMsg[1];
+                String info = retrieveMsg[2];
+                Tasks tasks = categories(key, status, info);
+                folder.add(tasks);
             }
         } catch (FileNotFoundException errorMsg) {
             throw new DukeException(errorMsg.getMessage());
+        } catch (IllegalArgumentException e) {
+            String er = "OOPS!!! Dont understand what you are saying...";
+            throw new DukeException(er);
         }
     }
 
@@ -55,13 +52,14 @@ public class ChatBox {
 
     public String reply(Message input) {
         String replyMsg = "";
-        String[] msg = input.getMsg().split(" ");
+        String info = input.getMsg();
+        String[] msg = info.split(" ");
         String key = msg[0];
         try {
             switch (key) {
             case "bye":
+                hasClosed = true;
                 replyMsg = Message.end();
-                hasClosed = false;
                 save();
                 break;
             case "list":
@@ -69,11 +67,13 @@ public class ChatBox {
                 break;
             case "done":
                 int i = Integer.parseInt(msg[1]);
+                assert i >= 0 : "Index out of bounds";
                 replyMsg = folder.finishTasks(i);
                 save();
                 break;
             case "delete":
                 int b = Integer.parseInt(msg[1]);
+                assert b >= 0 : "Index out of bounds!";
                 replyMsg = folder.deleteTasks(b);
                 save();
                 break;
@@ -82,22 +82,7 @@ public class ChatBox {
                 break;
             default:
                 Tasks tasks;
-                if (key.equals("todo")) {
-                    String data = input.getMsg().split("todo ")[1];
-                    tasks = new ToDos(new Message(data));
-                } else if (key.equals("deadline")) {
-                    String s1 = input.getMsg().split("deadline ")[1];
-                    String s2 = s1.split("/by")[0];
-                    String s3 = s1.split("/by")[1];
-                    tasks = new Deadlines(new Message(s2 + "(by: " + s3 + ")"));
-                } else if (key.equals("event")) {
-                    String s1 = input.getMsg().split("event ")[1];
-                    String s2 = s1.split("/at")[0];
-                    String s3 = s1.split("/at")[1];
-                    tasks = new Events(new Message(s2 + "(at: " + s3 + ")"));
-                } else {
-                    throw new IllegalArgumentException("wrong liao");
-                }
+                tasks = categories(key, "", info);
                 folder.add(tasks);
                 replyMsg = tasks.added();
                 save();
@@ -113,6 +98,51 @@ public class ChatBox {
             System.out.println(new DukeException(er));
         }
         return replyMsg;
+    }
+
+    public Tasks categories(String key, String status, String input) throws IllegalArgumentException {
+        Tasks tasks = new Tasks();
+        Message message = new Message(input);
+
+        if (key.equals("todo")) {
+            String data = input.split("todo ")[1];
+            tasks = new ToDos(new Message(data));
+        }
+
+        if (key.equals("deadline")) {
+            String s1 = input.split("deadline ")[1];
+            String s2 = s1.split("/by")[0];
+            String s3 = s1.split("/by")[1];
+            tasks = new Deadlines(new Message(s2 + "(by: " + s3 + ")"));
+        }
+
+        if (key.equals("event")) {
+            String s1 = input.split("event ")[1];
+            String s2 = s1.split("/at")[0];
+            String s3 = s1.split("/at")[1];
+            tasks = new Events(new Message(s2 + "(at: " + s3 + ")"));
+        }
+
+        if (key.equals("[T]")) {
+            tasks = new ToDos(message, status);
+        }
+
+        if (key.equals("[E]")) {
+            tasks = new Events(message, status);
+        }
+
+        if (key.equals("[D]")) {
+            tasks = new Deadlines(message, status);
+        }
+
+        if (!tasks.isEmpty()) {
+           return tasks;
+        } else throw new IllegalArgumentException("wrong liao");
+
+    }
+
+    public boolean isClose() {
+        return this.hasClosed;
     }
 
     public String initialise() {
