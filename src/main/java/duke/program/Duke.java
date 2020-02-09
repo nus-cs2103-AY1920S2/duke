@@ -65,7 +65,7 @@ public class Duke {
     public String getResponse(String input) {
         Command command;
         String output = "";
-        boolean isExiting = false;
+        boolean isExiting;
 
         try {
             command = Parser.parse(input);

@@ -34,6 +34,13 @@ public abstract class Task {
     }
 
     /**
+     * Sets task's status to undone.
+     */
+    public void markAsUndone() {
+        isDone = false;
+    }
+
+    /**
      * Gets the save-string representation of the task.
      *
      * @return the String representation of the task Storage can save.

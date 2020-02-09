@@ -5,8 +5,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
 
-import java.util.ArrayList;
-
 /**
  * Represents the Command for the "add" input by the user.
  * It adds a new task to the task list.
@@ -45,6 +43,7 @@ public class AddCommand extends Command {
         try {
             output = taskList.addTask(toAdd, taskType, storage);
             Ui.showTaskAdded(output, taskList.getList().size());
+            UndoCommand.addUndoableCommand(new UndoAddCommand());
         } catch (Exception e) {
             Ui.showError(e);
         }

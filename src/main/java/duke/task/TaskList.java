@@ -67,6 +67,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds to the task collection a new task object.
+     *
+     * @param index within the list of this new task.
+     * @param task object representing the new task.
+     * @return a String representing the task that was added.
+     */
+    public String addTaskAt(int index, Task task) {
+        taskList.add(index, task);
+        return task.toString();
+    }
 
     /**
      * Adds to the task collection a new task object.
@@ -182,7 +193,7 @@ public class TaskList {
         // Check if valid date
         try {
             DateTimeUtil.checkStringValidDate(eventTime);
-            taskList.add(new Deadline(taskName, eventTime));
+            taskList.add(new Event(taskName, eventTime));
         } catch (Exception e) {
             throw new DukeException.InvalidDateTime();
         }
@@ -205,6 +216,22 @@ public class TaskList {
     }
 
     /**
+     * Updates a task object in collection to "Not Done".
+     *
+     * @param taskIndex of the task (in collection) to be set "Done".
+     * @return a boolean representing if task was found (set to done), else false
+     */
+    public boolean undoneTask(int taskIndex) {
+        if (taskIndex < taskList.size() && taskIndex >= 0) {
+            taskList.get(taskIndex).markAsUndone();
+            return true;
+        } else {
+            // Task does not exist
+            return false;
+        }
+    }
+
+    /**
      * Deletes a task object from collection.
      *
      * @param taskIndex of the task (in collection) to be deleted.
@@ -219,5 +246,14 @@ public class TaskList {
             // Task does not exist
             return null;
         }
+    }
+
+    /**
+     * Getter for a reference to the task at an index.
+     *
+     * @return the Task object at the index of the task list.
+     */
+    public Task getTask(int index) {
+        return taskList.get(index);
     }
 }

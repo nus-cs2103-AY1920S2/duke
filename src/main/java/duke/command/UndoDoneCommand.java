@@ -11,21 +11,17 @@ import duke.util.Storage;
  * @author  Hardy Shein
  * @version 0.1
  */
-public class DoneCommand extends Command {
+public class UndoDoneCommand extends Command {
 
-    int doneIndex;
-
-    public DoneCommand() {
-
-    }
+    int undoneIndex;
 
     /**
-     * DoneCommand constructor.
+     * UndoDoneCommand constructor.
      *
-     * @param index of the task in collection to be set Done.
+     * @param index of the task in collection to be set Not Done.
      */
-    public DoneCommand(int index) {
-        doneIndex = index;
+    public UndoDoneCommand(int index) {
+        undoneIndex = index;
     }
 
     /**
@@ -35,13 +31,9 @@ public class DoneCommand extends Command {
      * @param storage to access save-load functionality.
      */
     public void execute(TaskList taskList, Storage storage) {
-        if (taskList.doneTask(doneIndex)) {
-            UndoCommand.addUndoableCommand(new UndoDoneCommand(doneIndex));
-            storage.saveTaskListToFile(taskList);
-            Ui.showTaskDone(taskList.getList().get(doneIndex));
-        } else {
-            Ui.showTaskNotFound();
-        }
+        taskList.undoneTask(undoneIndex);
+        storage.saveTaskListToFile(taskList);
+        Ui.showTaskUndone(taskList.getList().get(undoneIndex));
     }
 
     /**

@@ -125,6 +125,20 @@ public class Ui {
     }
 
     /**
+     * Prints the information of the undone task.
+     *
+     * @param undone task to be print.
+     */
+    public static void showTaskUndone(Task undone) {
+        latestResponse = "Ok, I've marked this task as undone:\n";
+        latestResponse += undone.toString();
+        showLine();
+        printWithIndent("Ok, I've marked this task as undone:");
+        printWithIndent(undone.toString());
+        showLine();
+    }
+
+    /**
      * Prints the information of the deleted task
      * and the new number of tasks.
      *
@@ -150,6 +164,17 @@ public class Ui {
      */
     public static void showTaskNotFound() {
         latestResponse = "Sorry, mate! No such task.";
+
+        showLine();
+        printWithIndent(latestResponse);
+        showLine();
+    }
+
+    /**
+     * Prints to the user that there is nothing to undo.
+     */
+    public static void showNothingToUndo() {
+        latestResponse = "Nothing to undo.";
 
         showLine();
         printWithIndent(latestResponse);

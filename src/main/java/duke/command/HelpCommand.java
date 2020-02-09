@@ -21,7 +21,7 @@ public class HelpCommand extends Command {
      */
     public void execute(TaskList taskList, Storage storage) {
         Ui.showAllCommands(new AddCommand(), new ListCommand(), new DateCommand(), new DeleteCommand(),
-                new DoneCommand(), new ExitCommand(), new FindCommand(), this);
+                new DoneCommand(), new ExitCommand(), new FindCommand(), new UndoCommand(), this);
     }
 
     /**
