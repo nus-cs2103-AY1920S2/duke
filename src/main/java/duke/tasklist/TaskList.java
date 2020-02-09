@@ -138,6 +138,8 @@ public class TaskList {
 
         }
 
+        assert task != null : "Task should not be null";
+
         taskList.add(task);
 
         return task;

@@ -72,6 +72,10 @@ public class Ui {
 
             } else {
 
+                assert  taskDescriptionArr[0] == "todo" ||
+                        taskDescriptionArr[0] == "event" ||
+                        taskDescriptionArr[0] == "deadline": taskDescriptionArr[0];
+
                 c = new AddCommand(storage, taskList);
             }
 

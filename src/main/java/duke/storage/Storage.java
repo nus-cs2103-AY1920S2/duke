@@ -51,7 +51,6 @@ public class Storage {
 
         try {
             File f = new File(path);
-            f.createNewFile();
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
@@ -59,6 +58,7 @@ public class Storage {
             String[] contentArr = null;
             String type;
             String status;
+            int lines = 0;
 
             while (!((content = br.readLine()) == null)) {
 
@@ -81,6 +81,7 @@ public class Storage {
                                 LocalDateTime.parse(contentArr[4]),Task.Types.TODO, Task.Status.N);
 
                     }
+                    lines ++;
                     break;
 
                 case "DEADLINE":
@@ -96,6 +97,7 @@ public class Storage {
                                 LocalDateTime.parse(contentArr[4]),Task.Types.DEADLINE, Task.Status.N);
 
                     }
+                    lines ++;
                     break;
 
                 case "EVENT":
@@ -112,6 +114,7 @@ public class Storage {
                                 LocalDateTime.parse(contentArr[4]),Task.Types.EVENT, Task.Status.N);
 
                     }
+                    lines ++;
                     break;
 
                 default:
@@ -120,6 +123,9 @@ public class Storage {
                 }
 
             }
+
+            assert lines == taskList.getList().size() : "Number of tasks in file and taskList don't match";
+
         } catch (Exception e) {
 
             System.out.println(e);
@@ -135,6 +141,8 @@ public class Storage {
     public void updateFile() throws IOException {
 
         ArrayList<Task> list = taskList.getList();
+
+        assert list.size() > 0 : "list is empty";
 
         FileWriter writer = new FileWriter(new File(path));
         String input = null;
