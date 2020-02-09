@@ -1,6 +1,15 @@
 package duke;
 
-import command.*;
+import command.Command;
+import command.AddDeadlineCommand;
+import command.AddEventCommand;
+import command.AddToDoCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ErrorCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.ListCommand;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,7 +38,12 @@ public class Parser {
         } else if (firstCommand.equals("bye")) {
             return new ExitCommand();
         } else if (firstCommand.equals("find")) {
-            return new FindCommand(Parser.getSecond(trimCommand));
+            try {
+                return new FindCommand(Parser.getSecond(trimCommand));
+            } catch (IndexOutOfBoundsException e) {
+                return new ErrorCommand(new DukeException(
+                        "☹ OOPS!!! The keyword of a find cannot be empty."));
+            }
         } else if (firstCommand.equals("done")) {
             try {
                 return new DoneCommand(Integer.valueOf(Parser.getSecond(trimCommand)));
@@ -86,10 +100,13 @@ public class Parser {
      * @return String of the third argument of the command
      **/
     public static String getTaskName(String text) {
+        String taskType = text.trim().split(" ")[0];
         if (text.contains("/")) {
+            assert taskType.equals("deadline") || taskType.equals("event");
             return text.substring(text.indexOf(" ") + 1,
                     text.indexOf("/") - 1);
         } else {
+            assert taskType.equals("todo") : taskType;
             return text.trim().substring(5);
         }
     }
@@ -99,6 +116,8 @@ public class Parser {
      * @return Date format of the of the command of the task
      **/
     public static LocalDateTime getDate(String text) {
+        String beforeDate = text.substring(text.indexOf("/") + 1, text.indexOf("/") + 4);
+        assert beforeDate.equals("/by ");
         return extractDate(text.substring(text.indexOf("/") + 4));
     }
 

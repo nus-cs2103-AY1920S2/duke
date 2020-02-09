@@ -44,6 +44,8 @@ public class Deadline extends Task {
      * @return The string of deadline task to be written to the file and saved.
      */
     public String writeDrive() {
+        String a = "a";
+        assert a.equals("b");
         return "D|" + (super.isDone() ? "1|" : "0|") + this.name + "|"
                 + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHss"));
     }

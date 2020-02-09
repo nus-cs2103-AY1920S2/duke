@@ -1,5 +1,6 @@
 package command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -26,9 +27,13 @@ public class AddToDoCommand extends AddCommand {
      * @return String as the response of the execution.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Task newTask = new ToDo(this.taskName);
-        tasks.add(newTask);
-        storage.updateDrive(newTask);
-        return ui.showTask(newTask, tasks.size());
+        try {
+            Task newTask = new ToDo(this.taskName);
+            tasks.add(newTask);
+            storage.updateDrive(newTask);
+            return ui.showTask(newTask, tasks.size());
+        } catch (DukeException de) {
+            return ui.showException(de);
+        }
     }
 }
