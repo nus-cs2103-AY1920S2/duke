@@ -26,7 +26,7 @@ public class CompleteTaskCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task completedTask = tasks.completeTask(index);
-        ui.showDonetask(completedTask);
+        ui.showDoneTask(completedTask);
         storage.save(tasks);
     }
 }
