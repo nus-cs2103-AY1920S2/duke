@@ -127,35 +127,34 @@ public class Duke {
         System.out.println(ui.showDeleteTask(tasks, delTask));
     }
     
-    protected String processInstruction(String input) {
+    String processInstruction(String input) {
         try {
             Parser instruction = new Parser(input);
             Command command = instruction.getCommand();
 
             switch (command) {
                 case BYE:
-                    try {
-                        storage.writeToFile(tasks);
-                        return ui.showFarewell();
-                    } catch (IOException e) {
-                        return "Error: Unable to write to file.\n";
-                    }
+                    return ui.showFarewell();
                 case DONE: {
                     int taskNum = Integer.parseInt(instruction.getParameters());
                     tasks.setAsDone(taskNum);
+                    storage.writeToFile(tasks);
                     return ui.showSetAsDone(tasks, tasks.getTask(taskNum));
                 }
                 case TODO:
                     Task todo = new Todo(instruction.getParameters());
                     tasks.addTask(todo);
+                    storage.writeToFile(tasks);
                     return ui.showAddTask(tasks, todo);
                 case DEADLINE:
                     Task deadline = new Deadline(instruction.getParameters(), instruction.getDate());
                     tasks.addTask(deadline);
+                    storage.writeToFile(tasks);
                     return ui.showAddTask(tasks, deadline);
                 case EVENT:
                     Task event = new Event(instruction.getParameters(), instruction.getDate());
                     tasks.addTask(event);
+                    storage.writeToFile(tasks);
                     return ui.showAddTask(tasks, event);
                 case LIST:
                     return ui.showTasks(tasks);
@@ -163,6 +162,7 @@ public class Duke {
                     int taskNum = Integer.parseInt(instruction.getParameters());
                     Task delTask = tasks.getTask(taskNum);
                     tasks.deleteTask(taskNum);
+                    storage.writeToFile(tasks);
                     return ui.showDeleteTask(tasks, delTask);
                 case FIND:
                     return ui.showFound(tasks.findTasks(instruction.getParameters()));
@@ -171,6 +171,8 @@ public class Duke {
             }
         } catch (InvalidInstructionException e) {
             return String.format("Error: %s. Please try again.%n%n", e.getMessage());
+        } catch (IOException e) {
+            return "Error: Unable to write to file.\n";
         }
     }
 }
