@@ -2,14 +2,14 @@ package task;
 
 import exception.DukeException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import parser.Parser;
 
 public class PeriodTask extends TimeTask {
     protected LocalDate endDate;
-    protected LocalTime endTime; 
+    protected LocalTime endTime;
 
     public PeriodTask(String description) throws DukeException {
         super(
@@ -19,10 +19,11 @@ public class PeriodTask extends TimeTask {
                         description,
                         Constant.PERIODTASK.getTimeDelimiter(),
                         Constant.PERIODTASK.getEndTimeDelimiter())[0]);
-        String dateTimes[] = Parser.getStartEndDateTime(
-            description,
-            Constant.PERIODTASK.getTimeDelimiter(),
-            Constant.PERIODTASK.getEndTimeDelimiter());
+        String dateTimes[] =
+                Parser.getStartEndDateTime(
+                        description,
+                        Constant.PERIODTASK.getTimeDelimiter(),
+                        Constant.PERIODTASK.getEndTimeDelimiter());
         this.endDate = Parser.getDate(dateTimes[1]);
         this.endTime = Parser.getTime(dateTimes[1]);
         LocalDateTime start = LocalDateTime.of(this.date, this.time);
