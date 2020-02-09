@@ -14,6 +14,11 @@ public class Launcher extends Application {
     private TaskList taskList = new TaskList();
     private Duke duke = new Duke(taskList);
 
+    public static void main(String[] args) {
+
+        Launcher.launch(args);
+    }
+
     /**
      * Sets up the stage upon start of application.
      *

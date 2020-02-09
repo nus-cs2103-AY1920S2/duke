@@ -11,7 +11,7 @@ version '0.1.0'
 
 application {
     // Change this to your main class.
-    mainClassName = "Launcher"
+    mainClassName = "Main"
 }
 
 dependencies {
