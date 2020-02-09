@@ -35,8 +35,6 @@ public class Duke {
     // Carry out Add, List, Done commands if entered by user
     // Terminates when user gives exit signal
     private void runDuke() {
-        ui.showWelcome();
-
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String nextInput = scanner.nextLine();
