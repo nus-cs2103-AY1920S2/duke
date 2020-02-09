@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Task object.
+ * Represents an Event object.
  */
 public class Event extends Task {
     protected LocalDate eventDate;
 
     /**
-     * Represents a Task object.
+     * Represents an Event object.
      *
      * @param description The details of the event.
      * @param eventDate The date of the event.

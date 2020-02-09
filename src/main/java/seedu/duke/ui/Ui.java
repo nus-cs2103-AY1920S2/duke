@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.ui;
 
 import seedu.duke.task.Task;
 
@@ -13,35 +13,35 @@ public class Ui {
 
     }
 
-    protected void greet() {
+    public void greet() {
         System.out.println("Hi there, I'm Dodo!\nHow may I help you today?");
     }
 
-    protected void showLoadingError() {
+    public void showLoadingError() {
         System.out.println("Loading error. Try again!");
     }
 
-    protected void print(String str) {
+    public void print(String str) {
         System.out.println(str);
     }
 
-    protected void sayBye() {
+    public void sayBye() {
         System.out.println("Stop procrastinating. See you!");
     }
 
-    protected void printFoundTask() {
+    public void printFoundTask() {
         System.out.println("Here are the matching tasks in your list:");
     }
 
-    protected void printNoFoundTask() {
+    public void printNoFoundTask() {
         System.out.println("Sorry I can't find what you are looking for....");
     }
 
-    protected void printRemoveTask() {
+    public void printRemoveTask() {
         System.out.println("Okay, I have removed this task for you:");
     }
 
-    protected void printAddToList() {
+    public void printAddToList() {
         System.out.println("Gotcha. Added this to your list:");
     }
 
@@ -53,7 +53,7 @@ public class Ui {
         System.out.println("Stop procrastinating. Do it now!");
     }
 
-    protected void printTaskDone() {
+    public void printTaskDone() {
         System.out.println("Good job! One off your chest!");
     }
 
@@ -62,7 +62,7 @@ public class Ui {
      *
      * @param tasks The current list of tasks.
      */
-    protected void printNumTask(List<Task> tasks) {
+    public void printNumTask(List<Task> tasks) {
         String taskWord;
         if (tasks.size() <= 1) {
             taskWord = "task";
@@ -75,8 +75,10 @@ public class Ui {
 
     /**
      * Prints the list of tasks the user has.
+     *
+     * @param currTasks The list of tasks to be printed.
      */
-    protected void printList(List<Task> currTasks) {
+    public void printList(List<Task> currTasks) {
         if (currTasks.size() == 0) {
             printNoTaskYet();
         } else {

@@ -1,5 +1,12 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+import seedu.duke.exception.DukeException;
+import seedu.duke.parser.Parser;
+import seedu.duke.storage.Storage;
+import seedu.duke.task.TaskList;
+import seedu.duke.ui.Ui;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -16,7 +23,7 @@ public class Duke {
     /**
      * Constructor for Duke.
      *
-     * @throws IOException if an input or output exception occurred
+     * @throws IOException If an input or output exception occurred.
      */
     public Duke() throws IOException {
         String filePath = "data/duke.txt";
@@ -38,12 +45,21 @@ public class Duke {
         Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String input = sc.nextLine();
-            String[] inputs = input.split(" ", 2);
-            parser.handleCommands(inputs, taskList);
-            if (!parser.hasNextCommand()) {
-                ui.sayBye();
-                break;
+            Command cmd = null;
+            try {
+                String input = sc.nextLine();
+                String[] inputs = input.split(" ", 2);
+                cmd = parser.handleCommands(inputs, taskList);
+                if (!cmd.hasNextCommand()) {
+                    break;
+                }
+                cmd.execute(taskList, ui, storage);
+            } catch (NullPointerException e) {
+
+            } catch (IOException e) {
+
+            } catch (DukeException e) {
+
             }
         }
     }
@@ -58,8 +74,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     *
+     * @param input The user input.
+     * @return Duke's response.
      */
     protected String getResponse(String input) {
 //            if (!parser.hasNextCommand()) {

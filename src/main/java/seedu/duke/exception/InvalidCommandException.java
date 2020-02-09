@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.exception;
 
 public class InvalidCommandException extends DukeException {
     @Override
