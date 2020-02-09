@@ -7,21 +7,31 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * class which loading tasks from the file and saving tasks in the file into hard-disk
+ * class which loading tasks from the file and saving tasks in the file into hard-disk.
  */
 
 public class Storage {
+
+    /**
+     * arrayList of task and filePath (duke.txt).
+     */
     private ArrayList<Task> taskList;
     private String filePath;
 
     public Storage() {
     }
 
-    public Storage(ArrayList<Task> taskList, String filePath) {
+    public Storage(ArrayList<Task> taskList, String filePathDefault) {
         this.taskList = taskList;
-        this.filePath = filePath;
+        this.filePath = filePathDefault;
     }
 
+    /**
+     * method that read and display all the task recorded in duke.txt.
+     *
+     * @return command and task entered by user.
+     * @throws FileNotFoundException
+     */
     public String readFile() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -32,6 +42,10 @@ public class Storage {
         }
         return fileData + "\n" + data;
     }
+
+    /**
+     * method that write all the command and task into duke.txt.
+     */
 
     public void saveIntoFile() {
         try {

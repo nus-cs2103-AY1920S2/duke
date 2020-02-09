@@ -9,12 +9,25 @@ import exception.IncorrectInputException;
 public class Parser {
     private Ui uiHelper;
 
+    /**
+     * Constructor of Ui class
+     *
+     * @param uiHelper
+     */
     public Parser(Ui uiHelper) {
         this.uiHelper = uiHelper;
     }
 
+    /**
+     * This method will parser user input into command and task
+     * Example of command : event,todo,deadline,done...
+     * Example of task : read book, project meeting
+     *
+     * @param userInput string enterd by user
+     * @return Command object
+     */
     public Command parse(String userInput) {
-      
+
         try {
             assert !userInput.equalsIgnoreCase("") : "Please Enter a Command and Task !!";
             if (!userInput.equalsIgnoreCase("list") && !userInput.equalsIgnoreCase("bye")) {

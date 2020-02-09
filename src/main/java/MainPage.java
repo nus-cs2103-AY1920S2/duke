@@ -1,17 +1,14 @@
 
-
-
 import helper.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import task.Task;
+import helper.Command;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -20,6 +17,9 @@ import java.util.ArrayList;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainPage extends AnchorPane {
+    /**
+     * object needed for MainPage
+     */
     private Parser parser;
     private Storage storage;
     private ArrayList<Task> arrTask;
@@ -42,7 +42,7 @@ public class MainPage extends AnchorPane {
     public void initialize() throws FileNotFoundException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         arrTask = new ArrayList<Task>();
-        storage = new Storage(arrTask,"duke.txt");
+        storage = new Storage(arrTask, "duke.txt");
         uiHelper = new Ui();
 
         String fileData = storage.readFile();
@@ -51,14 +51,11 @@ public class MainPage extends AnchorPane {
         String welcomeMessage = uiHelper.welcomeMessage();
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeMessage+"\n"+fileData, dukeImage)
+                DialogBox.getDukeDialog(welcomeMessage + "\n" + fileData, dukeImage)
         );
     }
 
 
-    /**
-     * Gets response from Duke.
-     */
 
     public String getResponse(String input) throws Exception {
         Command c = parser.parse(input);
