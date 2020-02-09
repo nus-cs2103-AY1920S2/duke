@@ -54,6 +54,7 @@ public class Duke extends Application {
     Storage storage = new Storage(FILEPATH);
     TaskList tl = new TaskList(FILEPATH, Tasks);
     ArrayList<Task> TL = tl.getTL();
+    private boolean isTaskListLoaded = false;
 
 
     private ScrollPane scrollPane;
@@ -190,6 +191,7 @@ public class Duke extends Application {
         if (command.equals("todo")) {
             try {
                 //response = "todo";
+                assert isTaskListLoaded : "TaskList not loaded from storage";
                 Todo todo = new Todo(ui.getDescription());
                 tl.TL.add(todo);
                 response = ui.addedTask(todo);
@@ -199,6 +201,7 @@ public class Duke extends Application {
         } else if (command.equals("deadline")) {
             try {
                 //response = "deadline";
+                assert isTaskListLoaded : "TaskList not loaded from storage";
                 String desc = ui.getDescription();
                 String date = (desc.split("/by "))[1];
                 LocalDateTime ldt = LocalDateTime.parse(date, formatter);
@@ -212,6 +215,7 @@ public class Duke extends Application {
         } else if (command.equals("event")) {
             try {
                 //response = "event";
+                assert isTaskListLoaded : "TaskList not loaded from storage";
                 String desc = ui.getDescription();
                 String date = (desc.split("/at "))[1];
                 LocalDateTime ldt = LocalDateTime.parse(date, formatter);
@@ -225,6 +229,7 @@ public class Duke extends Application {
         } else if (command.equals("done")) {
             try {
                 //response = "done";
+                assert isTaskListLoaded : "TaskList not loaded from storage";
                 int taskNum = Integer.parseInt(ui.getNumber());
                 Task t = tl.TL.get(taskNum - 1);
                 response = t.markAsDone();
@@ -234,6 +239,7 @@ public class Duke extends Application {
         } else if (command.equals("delete")) {
             try {
                 //response = "delete";
+                assert isTaskListLoaded : "TaskList not loaded from storage";
                 int taskNum = Integer.parseInt(ui.getNumber());
                 Task t = tl.TL.get(taskNum - 1);
                 response = ui.deleteTask(t.toString());
@@ -244,6 +250,7 @@ public class Duke extends Application {
         } else if (command.equals("find")) {
             try {
                 //response = "find";
+                assert isTaskListLoaded : "TaskList not loaded from storage";
                 String rest = ui.getDescription();
                 response = ("Here are the tasks in your list that matches:" + rest + "\n");
                 response += (tl.getTaskFromKeyword(rest));
@@ -265,6 +272,7 @@ public class Duke extends Application {
             }
         } else if (command.equals("list")) {
             try {//response = "list";
+                assert isTaskListLoaded : "TaskList not loaded from storage";
                 response = (ui.showList()+"\n");
                 //storage.printFileContents(FILEPATH);
 
@@ -278,6 +286,7 @@ public class Duke extends Application {
         } else if (command.equals("begin")) {
             try {
                 tl.loadFromStorage();
+                isTaskListLoaded = true;
             } catch (Exception e) {
                 e.getMessage();
             }
