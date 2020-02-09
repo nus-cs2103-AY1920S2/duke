@@ -53,6 +53,8 @@ public class Parser {
         if (cmdAndBody.length == 1) {
             command = parseSingleWordCommand(cmdAndBody[0]);
         } else {
+            assert cmdAndBody.length == 2 :
+                    "If length of array from String.split with limit 2 != 1, it should be 2";
             try {
                 command = parseCommandWithArguments(cmdAndBody[0], cmdAndBody[1]);
             } catch (ArrayIndexOutOfBoundsException e) {

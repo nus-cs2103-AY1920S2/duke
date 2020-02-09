@@ -47,6 +47,7 @@ public class Gui implements IUserInterface {
      */
     @Override
     public void respond(Runnable r) {
+        assert responseBuilder.length() == 0 : "Buffer should be empty";
         r.run();
         mainWindow.displayResponse(responseBuilder.toString());
         responseBuilder.setLength(0); // resets the buffer
