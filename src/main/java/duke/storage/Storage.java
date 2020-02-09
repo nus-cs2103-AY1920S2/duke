@@ -53,6 +53,7 @@ public class Storage {
         default:
             throw new LoadingException();
         }
+        assert t != null;
         return t;
     }
 
@@ -73,6 +74,8 @@ public class Storage {
         while (s.hasNextLine()) {
             String currLine = s.nextLine();
             String[] taskElements = currLine.split(" \\| ");
+            // String format of task should have at least 3 components: type, isDone, description
+            assert taskElements.length >= 3;
             tasks.add(this.getNextTask(taskElements));
         }
         return tasks;
@@ -121,6 +124,9 @@ public class Storage {
             taskString += " | " + ((DateTimeTask) t).getDateTime();
         }
         taskString += "\n";
+        // There must be either 2 or 3 pipe characters '|' in taskString
+        long countPipes = taskString.chars().filter(ch -> ch == '|').count();
+        assert (countPipes == 2 || countPipes == 3);
         return taskString;
     }
 

@@ -21,6 +21,8 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task t = tasks.removeTask(this.idx);
+            // No error means idx is in range and task has been assigned
+            assert (this.idx >= 0 && this.idx < tasks.getNumTasks()) && (t != null);
             storage.save(tasks.getTasks());
             String response = "Noted. I've removed this task:\n" + t + '\n';
             response += "Now you have " + tasks.getNumTasks() + " tasks in the list.";
