@@ -1,5 +1,6 @@
 package dude.component;
 
+import dude.parser.ParsingException;
 import dude.task.Todo;
 import dude.task.Deadline;
 import dude.task.Event;

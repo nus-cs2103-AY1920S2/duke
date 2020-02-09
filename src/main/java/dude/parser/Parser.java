@@ -1,4 +1,4 @@
-package dude.component;
+package dude.parser;
 
 import dude.command.AddTaskCommand;
 import dude.command.ByeCommand;
@@ -7,6 +7,7 @@ import dude.command.Command;
 import dude.command.DeleteCommand;
 import dude.command.DoneCommand;
 import dude.command.FindCommand;
+import dude.command.HelpCommand;
 import dude.command.ListCommand;
 
 import dude.task.Deadline;
@@ -16,23 +17,26 @@ import dude.task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Parser {
     /** Mappings from commands to their usage messages. */
-    private static final Map<String, String> USAGES =
-            Map.of(
-                    "bye", "bye",
-                    "list", "list",
-                    "today", "today",
-                    "done", "done index_of_task",
-                    "delete", "delete index_of_task",
-                    "check", "check yyyy-mm-dd",
-                    "todo", "todo description",
-                    "deadline", "deadline description /by yyyy-mm-dd",
-                    "event", "event description /from yyyy-mm-dd /to yyyy-mm-dd",
-                    "find", "find word"
-            );
+    public static final Map<String, String> USAGES = new LinkedHashMap<>();
+
+    static {
+        USAGES.put("help", "help [command | -date]");
+        USAGES.put("bye", "bye");
+        USAGES.put("list", "list");
+        USAGES.put("today", "today");
+        USAGES.put("done", "done index_of_task");
+        USAGES.put("delete", "delete index_of_task");
+        USAGES.put("check", "check yyyy-mm-dd");
+        USAGES.put("todo", "todo description");
+        USAGES.put("deadline", "deadline description /by yyyy-mm-dd");
+        USAGES.put("event", "event description /from yyyy-mm-dd /to yyyy-mm-dd");
+        USAGES.put("find", "find word");
+    }
 
     /** Regex for whitespace, for greater clarity. */
     private static final String WHITESPACE = "\\s+";
@@ -65,13 +69,14 @@ public class Parser {
 
         if (command == null) {
             throw new ParsingException("Sorry mate, I didn't catch your drift",
-                    USAGES.values().toArray(new String[0]));
+                    USAGES.get("help"));
         }
+
         return command;
     }
 
     /**
-     * Attempts to match the user's message with single word commands bye, list, today.
+     * Attempts to match the user's message with single word commands bye, list, today, help
      * Returns null otherwise.
      */
     private static Command parseSingleWordCommand(String command) {
@@ -85,6 +90,9 @@ public class Parser {
         case "today":
             return new CheckDateCommand(LocalDate.now());
 
+        case "help":
+            return new HelpCommand();
+
         default:
             return null;
         }
@@ -92,7 +100,7 @@ public class Parser {
 
     /**
      * Attempts to match the user's message with a complex command with arguments.
-     * The possible commands are done, delete, check, todo, deadline, event and find.
+     * The possible commands are done, delete, check, todo, deadline, event, find and help.
      * Returns null otherwise.
      *
      * @param command the command name
@@ -129,6 +137,9 @@ public class Parser {
         case "find":
             return new FindCommand(args);
 
+        case "help":
+            return new HelpCommand(args);
+
         default:
             return null;
         }
@@ -146,7 +157,9 @@ public class Parser {
         try {
             return LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new ParsingException("I don't understand this date: " + dateString, USAGES.get(command));
+            String errorMsg = "I don't understand this date: " + dateString
+                    + ". Type 'help -date' to see the date formats I accept.";
+            throw new ParsingException(errorMsg, USAGES.get(command));
         }
     }
 

@@ -2,6 +2,8 @@ package dude.component;
 
 import dude.command.Command;
 import dude.command.CommandExecutionException;
+import dude.parser.Parser;
+import dude.parser.ParsingException;
 
 public class Duke {
 
@@ -44,7 +46,7 @@ public class Duke {
                 ui.close();
             }
         } catch (ParsingException e) {
-            ui.respondParsingError(e.getMessage(), e.getUsageMsgs());
+            ui.respondParsingError(e.getMessage(), e.getUsageMsg());
         } catch (CommandExecutionException e) {
             ui.respondError(e.getMessage());
         }

@@ -36,25 +36,19 @@ public interface IUserInterface {
      * Displays an error message to the user when an incorrect command is given.
      * Tells the user what was wrong and gives the proper usage of the command.
      *
-     * @param errorMsg A message describing the problem with the user's input.
-     * @param usageMsgs variable number of strings describing the correct format of input.
+     * @param errorMsg a message describing the problem with the user's input.
+     * @param usageMsg a string describing the correct format of input.
      */
-    default void respondParsingError(String errorMsg, String... usageMsgs) {
-        respond(() -> {
-            speak(errorMsg);
-            speak("Just tell me what you want to do like this:" + System.lineSeparator());
-            for (String usageMsg : usageMsgs) {
-                speak("  " + usageMsg);
-            }
-            speak("");
-            speak("Then we're chill");
-        });
+    default void respondParsingError(String errorMsg, String usageMsg) {
+        respond(errorMsg,
+                "Maybe you could try this:" + System.lineSeparator(),
+                "  " + usageMsg);
     }
 
     /**
      * Displays an error message to the user when an invalid command is given.
      *
-     * @param errorMsg A message describing the problem with the user's input.
+     * @param errorMsg a message describing the problem with the user's input.
      */
     default void respondError(String errorMsg) {
         respond(errorMsg);

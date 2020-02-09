@@ -95,7 +95,7 @@ class DukeTest {
         }
 
         @Override
-        public void respondParsingError(String errorMsg, String... usageMsgs) {
+        public void respondParsingError(String errorMsg, String usageMsg) {
             this.isParseError = true;
         }
 
