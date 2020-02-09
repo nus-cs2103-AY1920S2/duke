@@ -92,6 +92,7 @@ public class Duke {
                     break;
                 case FIND:
                     System.out.println(ui.showFound(tasks.findTasks(instruction.getParameters())));
+                    break;
                 default:
                     ;
                 }
