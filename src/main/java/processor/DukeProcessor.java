@@ -24,9 +24,15 @@ public class DukeProcessor {
      * Initiates startup, creating a TaskList and setting Duke to be active, after which Duke says hello.
      */
     private void init() {
-        taskList = new TaskList(this);
         parser = new Parser(this);
+        assert parser == null : "Parser initialisation error";
+      
+        taskList = new TaskList(this);
+        assert taskList == null : "Task list initialisation error";
+
         isActive = true;
+        assert isActive == false : "isActive initialisation error";
+      
         sayHello();
     }
 

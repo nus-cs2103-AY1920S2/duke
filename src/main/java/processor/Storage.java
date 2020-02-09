@@ -92,6 +92,7 @@ public class Storage {
      * @return Task object in the form of a packaged String, ready to be stored.
      */
     private static String packageTask(Task task) {
+        assert task == null : "Task was not passed into method properly";
         String output = "";
         int doneIndicator = 0;
 
@@ -120,6 +121,7 @@ public class Storage {
      * @throws DukeException Throws an exception if unable to create a Task object.
      */
     private static Task processPackagedTask(String taskString) throws DukeException {
+        assert taskString == "" : "Incorrect task string passed into method";
         Task outputTask;
         String[] taskArray = taskString.split("\\^_\\^", 4);
 
