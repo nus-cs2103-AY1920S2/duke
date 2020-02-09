@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * A chatbot interface.
@@ -44,10 +46,17 @@ public class Duke {
                 String taskType = command.split(" ", 2)[0];
                 if (taskType.equals("todo")) {
                     return commandCodeMapping.get("todo");
-                } else if (taskType.equals("deadline")) {
-                    return commandCodeMapping.get("deadline");
-                } else if (taskType.equals("event")) {
-                    return commandCodeMapping.get("event");
+                } else {
+                    String content = command.split(" ", 2)[1];
+                    if (taskType.equals("deadline")) {
+                        String time = content.split("/by")[1];
+                        LocalDate.parse(time.trim(), DateTimeFormatter.BASIC_ISO_DATE);
+                        return commandCodeMapping.get("deadline");
+                    } else if (taskType.equals("event")) {
+                        String time = content.split("/at")[1];
+                        LocalDate.parse(time.trim(), DateTimeFormatter.BASIC_ISO_DATE);
+                        return commandCodeMapping.get("event");
+                    }
                 }
             }
         } catch (Exception e) {
@@ -64,10 +73,7 @@ public class Duke {
         Integer commandCode = getCommandCode(command);
         if (commandCode == commandCodeMapping.get("list")) {
             for (int i = 0; i < taskCollection.size(); i++) {
-                System.out.printf("%s[%s][%c]%s\n",
-                        i, taskCollection.get(i).getShortName(),
-                        (char) (Integer.parseInt(taskCollection.get(i).getStatusIcon(), 16)),
-                        taskCollection.get(i).description);
+                System.out.printf(taskCollection.get(i).getFullDetail(i));
             }
         } else if (commandCode == commandCodeMapping.get("mark done")) {
             Integer taskIndex = Integer.parseInt(command.split(" ")[1]);

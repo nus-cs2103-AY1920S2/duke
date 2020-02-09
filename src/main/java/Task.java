@@ -20,4 +20,8 @@ public class Task implements Serializable {
     public void markDone() {
         this.isDone = true;
     }
+
+    public String getFullDetail(Integer i) {
+        return "";
+    }
 }
