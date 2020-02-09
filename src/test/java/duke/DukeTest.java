@@ -9,7 +9,28 @@ public class DukeTest {
 
     @Test
     public void testDelete() {
-        assertEquals("Hi", "Hi");
+        String[] actionsList = new String[]{"todo sleep 100 years", "todo toBeDeleted", "delete 2", "list"};
+
+        Parser parser = new Parser();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage("tasks_test.txt", taskList);
+        UI ui = new UI();
+        storage.clearFile();
+
+        for (String action : actionsList) {
+            Command c = parser.parse(action);
+            c.execute(taskList, ui);
+            storage.saveToFile();
+        }
+
+        String filePath = "tasks_test.txt";
+        String actual = storage.readAllBytes(filePath);
+        String expected = "T|X|sleep 100 years\n";
+
+        System.out.println("Actual: " + actual);
+        System.out.println("Expected: " + expected);
+
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -170,6 +191,6 @@ public class DukeTest {
         System.out.println("Actual: " + actual);
         System.out.println("Expected: " + expected);
 
-        assertEquals(expected, "c");
+        assertEquals(expected, actual);
     }
 }
