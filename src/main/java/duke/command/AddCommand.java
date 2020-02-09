@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exceptions.Exceptions;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -63,16 +62,10 @@ public class AddCommand extends Command {
 
         } catch (Exception e) {
 
-            if (e instanceof Exceptions) {
-
-                return ((Exceptions) e).errorMessage();
-
-            } else {
-
-                return e.toString();
+            return e.toString();
 
             }
-        }
+
         return "";
     }
 }

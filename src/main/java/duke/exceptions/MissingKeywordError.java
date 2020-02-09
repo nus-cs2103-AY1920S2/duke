@@ -3,8 +3,8 @@ package duke.exceptions;
 /**
  * The MissingKeyword program is an error thrown when user input is missing required keyword.
  *
- * @version 1.0
- * @since 28/1/2020
+ * @version 1.1
+ * @since 9/2/2020
  */
 public class MissingKeywordError extends Exceptions {
 
@@ -17,15 +17,15 @@ public class MissingKeywordError extends Exceptions {
 
     }
 
+
     /**
-     * Constructs error message with respect the error.
+     * String representation of the exception.
      *
-     * @return error message of the error.
+     * @return error message.
      */
     @Override
-    public String errorMessage() {
+    public String toString() {
 
-        return "\nOOPS! I'm sorry, the keyword is missing.";
-
+        return "OOPS! I'm sorry, the keyword is missing.";
     }
 }

@@ -3,24 +3,24 @@ package duke.exceptions;
 /**
  * The EmptyDescriptionError program is an error thrown when user input is missing required description.
  *
- * @version 1.0
- * @since 28/1/2020
+ * @version 1.1
+ * @since 9/2/2020
  */
 public class EmptyDescriptionError extends Exceptions {
 
     public EmptyDescriptionError(String type) {
+
         super(type);
     }
 
     /**
-     * Constructs error message with respect the error.
+     * String representation of the exception.
      *
-     * @return error message of the error.
+     * @return error message.
      */
     @Override
-    public String errorMessage() {
+    public String toString() {
 
-        return "\nOPPS! The description of a " + super.getType() + " cannot be empty";
-
+        return "OPPS! The description of a " + super.getType() + " cannot be empty";
     }
 }

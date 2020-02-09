@@ -3,8 +3,8 @@ package duke.exceptions;
 /**
  * The Exception program is an error thrown when there is a user input error.
  *
- * @version 1.0
- * @since 28/1/2020
+ * @version 1.1
+ * @since 9/2/2020
  */
 public class Exceptions extends Exception {
 
@@ -20,16 +20,6 @@ public class Exceptions extends Exception {
 
     }
 
-    /**
-     * Constructs error message with respect the error.
-     *
-     * @return error message of the error.
-     */
-    public String errorMessage() {
-
-        return this.errorMessage();
-
-    }
 
     /**
      * Gets the type of task with error.
@@ -42,4 +32,13 @@ public class Exceptions extends Exception {
 
     }
 
+    /**
+     * String representation of the exception.
+     *
+     * @return error message.
+     */
+    @Override
+    public String toString() {
+        return this.toString();
+    }
 }

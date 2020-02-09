@@ -24,6 +24,18 @@ public class Deadline extends Task {
     }
 
     /**
+     * Gets the type of the task.
+     *
+     * @return type of task.
+     */
+    @Override
+    public Types getType() {
+
+        return Types.DEADLINE;
+
+    }
+
+    /**
      * Constructs a string representation of task.
      *
      * @return string representation of task.
@@ -38,17 +50,5 @@ public class Deadline extends Task {
                 + "[" + super.getStatus() + "]"
                 + " " + super.getTaskDescription()
                 + "(by:" + date + ")";
-    }
-
-    /**
-     * Gets the type of the task.
-     *
-     * @return type of task.
-     */
-    @Override
-    public Types getType() {
-
-        return Types.DEADLINE;
-
     }
 }

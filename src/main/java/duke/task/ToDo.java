@@ -23,6 +23,19 @@ public class ToDo extends Task {
     }
 
     /**
+     * Gets the type of the task.
+     *
+     * @return type of task.
+     */
+    @Override
+    public Types getType() {
+
+        return Types.TODO;
+
+    }
+
+
+    /**
      * Constructs a string representation of task.
      *
      * @return string representation of task.
@@ -33,17 +46,5 @@ public class ToDo extends Task {
         return "[" + Types.TODO + "]"
                 + "[" + super.getStatus() + "]"
                 + " " + super.getTaskDescription();
-    }
-
-    /**
-     * Gets the type of the task.
-     *
-     * @return type of task.
-     */
-    @Override
-    public Types getType() {
-
-        return Types.TODO;
-
     }
 }

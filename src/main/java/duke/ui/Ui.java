@@ -7,7 +7,6 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.exceptions.Exceptions;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -43,12 +42,12 @@ public class Ui {
      */
     public String frontDesk(String input) {
 
-        String[] taskDescriptionArr = null;
+        String[] taskDescriptionArr;
         Parser parser = new Parser();
 
         try {
             taskDescriptionArr = parser.parseUserInput(input);
-            Command c = null;
+            Command c;
 
             if (taskDescriptionArr[0].equals("bye")) {
 
@@ -83,15 +82,7 @@ public class Ui {
 
         } catch (Exception e) {
 
-            if (e instanceof Exceptions) {
-
-                return ((Exceptions) e).errorMessage();
-
-            } else {
-
-                return e.toString();
-
-            }
+            return e.toString();
 
         }
 

@@ -3,8 +3,8 @@ package duke.exceptions;
 /**
  * The MissingTaskNumber program is an error thrown when user input is missing required task number.
  *
- * @version 1.0
- * @since 28/1/2020
+ * @version 1.1
+ * @since 9/2/2020
  */
 public class MissingTaskNumberError extends Exceptions {
 
@@ -18,14 +18,13 @@ public class MissingTaskNumberError extends Exceptions {
     }
 
     /**
-     * Constructs error message with respect the error.
+     * String representation of the exception.
      *
-     * @return error message of the error.
+     * @return error message.
      */
     @Override
-    public String errorMessage() {
+    public String toString() {
 
-        return "\nOOPS! I'm sorry, the task number is missing.";
-
+        return "OOPS! I'm sorry, the task number is missing.";
     }
 }

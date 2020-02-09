@@ -145,11 +145,11 @@ public class Storage {
         assert list.size() > 0 : "list is empty";
 
         FileWriter writer = new FileWriter(new File(path));
-        String input = null;
+        String input;
 
         for (int i = 0; i < list.size(); i++) {
 
-            input = generateInput((Task)list.get(i));
+            input = generateInput(list.get(i));
             writer.write(input);
             writer.flush();
 
