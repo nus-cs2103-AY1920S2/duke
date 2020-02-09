@@ -59,7 +59,7 @@ public class TaskList {
             throw new DukeException("No task found in that index!");
         }
 
-        assert task.getStatus(): "Done is not set";
+        assert task.getStatus() : "Status is not updated to done yet.";
     }
 
     /**
@@ -78,7 +78,7 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No task found in that index!");
         }
-        assert records.contains(task): "Task did not removed";
+        assert records.contains(task) : "Task did not removed!";
         return task;
     }
 

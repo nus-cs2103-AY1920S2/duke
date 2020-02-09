@@ -2,6 +2,7 @@ package duke.tasklist;
 
 import duke.DukeException;
 import duke.task.Task;
+import duke.task.Todo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -49,12 +50,12 @@ public class TaskListTest {
     @Test
     public void deleteTaskWithTasks_shouldReturnTheTaskAtTheIndex() {
         TaskList taskList = new TaskList();
-        Task expected = new Task("Testing");
-        taskList.addTask(new Task("Wrong Task"));
+        Task expected = new Todo("Testing");
+        taskList.addTask(new Todo("Wrong Task"));
         taskList.addTask(expected);
-        taskList.addTask(new Task("Wrong Task"));
+        taskList.addTask(new Todo("Wrong Task"));
 
-        Assertions.assertSame(expected, taskList.getTask(2));
+        Assertions.assertSame(expected, taskList.getTask(1));
     }
 
     /**
@@ -63,8 +64,8 @@ public class TaskListTest {
     @Test
     public void getAmountOfTask_shouldReturnCorrectNumber() {
         TaskList taskList = new TaskList();
-        taskList.addTask(new Task("Wrong Task"));
-        taskList.addTask(new Task("Wrong Task"));
+        taskList.addTask(new Todo("One Task"));
+        taskList.addTask(new Todo("One Task"));
 
         Assertions.assertEquals(2, taskList.getAmountOfTask());
     }

@@ -44,7 +44,7 @@ public class DoneCommand extends Command {
             taskList.markDone(num);
             storage.saveTasks(taskList);
 
-            assert taskList.getTask(num).getStatus(): "Task is not mark done!";
+            assert taskList.getTask(num).getStatus() : "Task is not mark done!";
 
             return ui.replyDone(taskList.getTask(num));
         } catch (NumberFormatException e) {

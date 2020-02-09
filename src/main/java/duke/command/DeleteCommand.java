@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
             Task task = taskList.deleteTask(num);
             storage.saveTasks(taskList);
 
-            assert taskList.getTask(num).equals(task): "Task is not deleted from the taskList";
+            assert taskList.getTask(num).equals(task) : "Task is not deleted from the taskList";
 
             return ui.replyDelete(task);
         } catch (NumberFormatException e) {

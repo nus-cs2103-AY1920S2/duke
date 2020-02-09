@@ -45,7 +45,7 @@ public class TodoCommand extends Command {
         taskList.addTask(task);
         storage.saveTasks(taskList);
 
-        assert taskList.getTask(taskList.getAmountOfTask()).equals(task): "Task is not added into taskList";
+        assert taskList.getTask(taskList.getAmountOfTask()).equals(task) : "Task is not added into taskList";
 
         return ui.replyAdded(taskList.getAmountOfTask(), task);
     }

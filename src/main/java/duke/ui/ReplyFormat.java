@@ -69,7 +69,7 @@ public class ReplyFormat {
      */
     public void addEmptyLine() {
         addSentence("", 0);
-        assert message.endsWith("\n"): "Newline is not added into message";
+        assert message.endsWith("\n") : "Newline is not added into message.";
     }
 
     /**

@@ -14,9 +14,9 @@ public class Task implements Comparable<Task> {
     protected String type;
     protected boolean isDone;
     protected LocalDate period;
-    private final int EQUAL = 0;
-    private final int LOWER = 1;
-    private final int HIGHER = -1;
+    private static final int EQUAL = 0;
+    private static final int LOWER = 1;
+    private static final int HIGHER = -1;
 
     /**
      * Class constructor of Task which takes in description in String format.

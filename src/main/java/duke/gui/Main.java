@@ -35,7 +35,7 @@ public class Main extends Application {
     }
 
     /**
-     * Load the MainWindow fxml file and connect logic to MainWindow controller
+     * Load the MainWindow fxml file and connect logic to MainWindow controller.
      *
      * @return Ui style loaded.
      */
