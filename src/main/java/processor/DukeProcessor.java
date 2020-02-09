@@ -23,7 +23,9 @@ public class DukeProcessor {
      */
     private void init() {
         taskList = new TaskList(this);
+        assert taskList == null : "Task list initialisation error";
         isActive = true;
+        assert isActive == false : "isActive initialisation error";
         sayHello();
     }
 
