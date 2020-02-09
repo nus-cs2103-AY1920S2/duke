@@ -44,7 +44,6 @@ public class Duke {
      * @throws IOException if I/O error happens
      */
     public void run() throws IOException {
-//        ui.printIntro();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
