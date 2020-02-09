@@ -16,26 +16,13 @@ public class MyList {
         return listArray.size();
     }
 
-    public void printTaskAdded(Task task) {
-        System.out.println("added: " + task.toString());
-    }
-
     public Task getTask(int num) {
         return listArray.get(num-1);
     }
 
     public void deleteTask(int num) {
-        System.out.println("Noted! The task " + listArray.get(num-1).getItem() + " will be removed");
         listArray.remove(num-1);
         counter--;
-    }
-
-    public void printCounter() {
-        if(counter <= 1){
-            System.out.println("You have " + counter + " task on the agenda");
-        } else {
-            System.out.println("You have " + counter + " tasks on the agenda");
-        }
     }
 
     public void printList() {
