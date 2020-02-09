@@ -6,10 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class TaskListHistoryTest {
 
@@ -39,8 +41,13 @@ class TaskListHistoryTest {
     @Test
     void getPreviousState_noTaskListAddedToState_getInitialTaskList() {
         assertEquals(1, TaskListHistory.getStack().size());
-        assertEquals(TaskListHistory.getInitialTaskList().get(),
-                TaskListHistory.getPreviousState().get());
+        Optional<TaskList> previousTaskList = TaskListHistory.getPreviousState();
+        if (previousTaskList.isPresent()) {
+            assertEquals(TaskListHistory.getInitialTaskList(),
+                    previousTaskList.get());
+        } else {
+            fail("No task list returned from previous state");
+        }
     }
 
     @Test
@@ -53,8 +60,13 @@ class TaskListHistoryTest {
         TaskListHistory.update(updatedTasks);
         assertEquals(2, TaskListHistory.getStack().size());
         // Should remove update task and get initial task list
-        assertEquals(TaskListHistory.getInitialTaskList().get(),
-                TaskListHistory.getPreviousState().get());
-        assertEquals(1, TaskListHistory.getStack().size());
+        Optional<TaskList> previousTaskList = TaskListHistory.getPreviousState();
+        if (previousTaskList.isPresent()) {
+            assertEquals(TaskListHistory.getInitialTaskList(),
+                    previousTaskList.get());
+            assertEquals(1, TaskListHistory.getStack().size());
+        } else {
+            fail("No task list returned from previous state");
+        }
     }
 }
