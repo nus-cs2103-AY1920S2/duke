@@ -48,8 +48,8 @@ public class Duke extends Application {
     ArrayList<Task> Tasks = new ArrayList<>();
     final String FILEPATH = "java/data/list.txt";
     final File FILE = new File(FILEPATH);
-    final String SIZE = "/main/java/data/list.txt";
-    final File SIZEFILE = new File(SIZE);
+    //final String SIZE = "/main/java/data/list.txt";
+    //final File SIZEFILE = new File(SIZE);
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     Storage storage = new Storage(FILEPATH);
     TaskList tl = new TaskList(FILEPATH, Tasks);
@@ -184,6 +184,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) throws DukeException{
+        assert FILEPATH.equals("java/data/list.txt") : "wrong filepath";
         //return "Duke heard: " + input;
         Ui ui = new Ui(input);
         String command = ui.getCommand();
