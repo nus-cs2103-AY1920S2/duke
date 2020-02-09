@@ -10,7 +10,7 @@ public class DoneCommand extends Command {
         String num = getIndex();
         System.out.println("Nice! I've marked this task as done:\n");
         tasklist.getTask(Integer.parseInt(num) - 1).markAsDone();
-        System.out.println(num + ". " + "[" + taskList.getTask(Integer.parseInt(num) - 1).getStatusIcon() + "] " + tasklist.getTask(Integer.parseInt(num) - 1).getDescription());
+        System.out.println(num + ". " + "[" + tasklist.getTask(Integer.parseInt(num) - 1).getStatusIcon() + "] " + tasklist.getTask(Integer.parseInt(num) - 1).getDescription());
     }
 
     public String getIndex() {

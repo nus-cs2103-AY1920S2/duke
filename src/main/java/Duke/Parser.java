@@ -58,7 +58,7 @@ public class Parser {
         return new ExitCommand();
     }
 
-    private static LocalDateTime convertToDate(String fin) {
+    public static LocalDateTime convertToDate(String fin) {
         fin = fin.trim();
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(fin, dateFormat);
