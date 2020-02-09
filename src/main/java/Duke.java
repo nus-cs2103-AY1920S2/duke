@@ -26,6 +26,7 @@ public class Duke {
     /**
      * This function is to verify if command valid type (for later extension) so that main functions don't need to check
      * anymore.
+     * This function solely aims for command validity check, for better extension in the future.
      * @param command user command
      * @return
      */

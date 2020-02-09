@@ -1,5 +1,8 @@
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -11,8 +14,24 @@ public class TaskCollection {
     private ArrayList<PropertyChangeListener> listeners;
 
     public TaskCollection() {
-        this.tasks = new ArrayList<Task>();
+        this.loadTasks();
         this.listeners = new ArrayList<PropertyChangeListener>();
+    }
+
+    private void loadTasks() {
+        try {
+            File tmpDir = new File("../../tasks.tmp");
+            if (tmpDir.exists()) {
+                FileInputStream fis = new FileInputStream("../../../tasks.tmp");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                this.tasks = (ArrayList<Task>) ois.readObject();
+                ois.close();
+            } else {
+                this.tasks = new ArrayList<Task>();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public Integer size() {
