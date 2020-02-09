@@ -21,7 +21,7 @@ public class Parser {
         try {
             command = getCommand(input);
         } catch(DukeException d) {
-            System.out.println(d.getMessage());
+            return d.toString();
         }
 
         switch (command) {
@@ -121,8 +121,14 @@ public class Parser {
      * A class for user-specific exceptions
      */
     class DukeException extends Exception {
+        String errorMsg = "There is a Duke Exception";
         DukeException(String s) {
-            super(s);
+            errorMsg = s;
+        }
+
+        @Override
+        public String toString() {
+            return errorMsg;
         }
     }
 }

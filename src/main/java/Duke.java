@@ -31,7 +31,6 @@ public class Duke {
             ui = new Ui(tasks);
 
         } catch (FileNotFoundException e) {
-            System.out.println("NONEEE");
             tasks = new TaskList();
             ui = new Ui(tasks);
         }
