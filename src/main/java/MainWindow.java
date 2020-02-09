@@ -25,7 +25,9 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private String welcome = "Hello! I'm Duke, your personal task manager!\nWhat can I do for you?";
+    private String welcome = "Hello! I'm Duke, your personal task manager!\n"
+            + "What can I do for you?\n"
+            + "You can key in the command 'help' to view available commands.";
     private String bye = "Bye~ Hope to see you again soon!";
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));

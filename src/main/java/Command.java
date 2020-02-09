@@ -107,9 +107,21 @@ public class Command {
                 String keyWord = command[1].trim();
                 return ui.printFind(keyWord);
             }
+        case "help":
+            String instruction = "Available commands:\n"
+                    + "list: displays all tasks that is recorded\n\n"
+                    + "done [index]: marks the task as done\n\n"
+                    + "todo [task]: adds the task to the list\n\n"
+                    + "deadline /by [dd/mm/yy HHMM]: adds task with deadline to the list\n\n"
+                    + "event /at [dd/mm/yy HHMM-HHMM]: adds event with date and time to the list\n\n"
+                    + "delete [index]: deletes the task\n\n"
+                    + "find [keyword]: finds all task that is related to the keyword\n\n"
+                    + "bye: exits the application";
+            return instruction;
         default:
             try {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "Type 'help' to view available commands!" );
             } catch (DukeException e) {
                 return e.getMessage();
             }
