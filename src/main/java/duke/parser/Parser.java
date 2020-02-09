@@ -137,6 +137,8 @@ public class Parser {
 
                 outputArr[0] = input.substring(0, whiteSpaceIndex);
 
+                assert outputArr[0] == "event" : "task type is not event";
+
                 if (indexAt == -1) {
 
                     outputArr[1] = "EmptyDate";
@@ -189,6 +191,9 @@ public class Parser {
                 parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
 
             }
+
+            assert parsed[0] != null && parsed[1] != null : "Dates are empty";
+
             return parsed;
 
         } catch (Exception e) {
