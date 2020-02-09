@@ -1,14 +1,10 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
     id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-checkstyle {
-    toolVersion = '8.23'
-}
 
 group 'seedu.duke'
 version '0.1.0'
