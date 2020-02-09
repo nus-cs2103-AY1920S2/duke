@@ -5,6 +5,7 @@ import com.nus.duke.parser.Parser;
 import com.nus.duke.ui.Greetings;
 import java.util.Scanner;
 import javafx.util.Pair;
+import java.util.List;
 
 public class Duke {
     private static void poll(String[] args) {
@@ -15,18 +16,35 @@ public class Duke {
         while(contLoop){
             String input = scan.nextLine();
             Pair<String, String> parsedInput = Parser.tokenize(input);
+            String taskName = parsedInput.getValue();
 
             switch(parsedInput.getKey()) {
             case "list":
-                controller.listAllTasks();
+                List<String> tasks = controller.getAllTasks();
+                Greetings.prettyPrint(tasks);
                 break;
 
             case "add":
-                controller.createNewTask(parsedInput.getValue());
+                controller.createNewTask(taskName);
+                Greetings.prettyPrint("Added: " + taskName);
                 break;
 
             case "mark":
-                Greetings.prettyPrint(parsedInput.getValue());
+                if (controller.checkTask(taskName)) {
+                    controller.markTask(taskName);
+                    Greetings.prettyPrint(String.format("Marked task %s", taskName));
+                } else {
+                    Greetings.prettyPrint(String.format("Task does not exist", taskName));
+                }
+                break;
+
+            case "unmark":
+                if (controller.checkTask(taskName)) {
+                    controller.unmarkTask(taskName);
+                    Greetings.prettyPrint(String.format("Unmarked task %s", taskName));
+                } else {
+                    Greetings.prettyPrint(String.format("Task does not exist", taskName));
+                }
                 break;
 
             case "delete":
