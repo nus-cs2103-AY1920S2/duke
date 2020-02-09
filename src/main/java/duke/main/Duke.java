@@ -29,7 +29,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public Duke() {
         // Place-holder constructor, may need to extend later
@@ -40,15 +40,17 @@ public class Duke {
     }
 
     /**
-     * Let the bot greet, calls to Ui method
+     * Let the bot greet, calls to Ui method.
+     * @return Ui String that greets
      */
     public String greet() {
         return Ui.greet();
     }
 
     /**
-     * Takes in the user input, run the Parser to determine what it means and acts accordingly
+     * Takes in the user input, run the Parser to determine what it means and acts accordingly.
      * @param str
+     * @return The proper response by the bot that will be used by the dialog box
      * @throws InvalidCommandException
      * @throws OutOfBoundMarkingRequestException
      * @throws TaskErrorException
@@ -56,12 +58,11 @@ public class Duke {
     public String processUserInput(String str) throws InvalidCommandException, OutOfBoundMarkingRequestException, TaskErrorException {
         if (str.equals("")) {
             return Ui.blankInput();
-//            return;
+
         }
 
         if (parser.isFindRequest(str)) {
             return TaskList.findItem(str, storedItems);
-//            return;
         }
 
         int markPos = parser.isMarkingTaskRequest(str);
@@ -109,7 +110,6 @@ public class Duke {
             }
         }
 
-//        storage.writeData(storedItems);
         return ret;
     }
 
@@ -122,7 +122,6 @@ public class Duke {
         if (!sc.hasNext())
             throw new TaskErrorException("Missing ToDo description");
         Task todo = new ToDo(sc.nextLine().trim());
-//        storeUserInput(todo);
         sc.close();
         return storeUserInput(todo);
     }
@@ -140,7 +139,6 @@ public class Duke {
             throw new TaskErrorException("Missing Deadline description");
 
         Task deadline = new Deadline(parts[0], parts[1]);
-//        storeUserInput(deadline);
         sc.close();
         return storeUserInput(deadline);
     }
@@ -158,7 +156,6 @@ public class Duke {
             throw new TaskErrorException("Missing Event description");
 
         Task event = new Event(parts[0], parts[1]);
-//        storeUserInput(event);
         sc.close();
         return storeUserInput(event);
     }
@@ -170,20 +167,30 @@ public class Duke {
     }
 
     /**
-     * Calls Ui method to list tasks saved
+     * Calls Ui method to list tasks saved.
+     * @return
      */
     public String listStoredItems() {
         return Ui.listStoredItems(storedItems);
     }
 
     /**
-     * Bot says goodbye, also calls Ui method
+     * Interacts when the user says bye.
+     * @return Ui String that says good bye to the user
      */
     public String byeBye() {
         storage.writeData(storedItems);
         return Ui.byeBye();
     }
 
+    /**
+     * Gets the response from the bot.
+     * @param userInput
+     * @return The response String from the bot
+     * @throws OutOfBoundMarkingRequestException
+     * @throws TaskErrorException
+     * @throws InvalidCommandException
+     */
     public String getResponse(String userInput) throws OutOfBoundMarkingRequestException, TaskErrorException, InvalidCommandException {
         if (userInput.equals(Duke.BYE_COMMAND))
             return byeBye();
