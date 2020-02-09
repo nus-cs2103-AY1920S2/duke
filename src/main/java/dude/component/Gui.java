@@ -66,7 +66,7 @@ public class Gui implements IUserInterface {
     }
 
     /**
-     * Closes resources associated with the UI
+     * Closes resources associated with the UI.
      */
     @Override
     public void close() {

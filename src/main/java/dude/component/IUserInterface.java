@@ -69,7 +69,7 @@ public interface IUserInterface {
     void speak(String str);
 
     /**
-     * Closes resources associated with the UI
+     * Closes resources associated with the UI.
      */
     void close();
 }
