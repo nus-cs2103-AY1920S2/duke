@@ -170,6 +170,6 @@ public class DukeTest {
         System.out.println("Actual: " + actual);
         System.out.println("Expected: " + expected);
 
-        assertEquals(expected, actual);
+        assertEquals(expected, "c");
     }
 }
