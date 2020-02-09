@@ -15,6 +15,9 @@ import duke.tasks.*;
 import duke.commands.*;
 import duke.parser.Parser;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Duke {
 
     private Storage storage;
@@ -22,8 +25,6 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
-        System.out.println("duke" + System.getProperty("user.dir"));
-
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -40,10 +41,9 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                // ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
+                Command command = Parser.parse(fullCommand);
+                command.execute(tasks, ui, storage);
+                isExit = command.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
@@ -53,6 +53,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("src/main/java/duke/data/tasks.txt").run();
     }
 }
