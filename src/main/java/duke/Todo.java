@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Todo contains information about a given task with description.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {

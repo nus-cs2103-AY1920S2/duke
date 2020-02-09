@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Deadline contains information about a given task with description and date of deadline.
+ */
 public class Deadline extends Task {
     protected LocalDate by;
 

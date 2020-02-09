@@ -9,23 +9,14 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner input;
+    private TaskList tasks;
 
     /**
      * Constructs a Ui object. A Scanner reading in from System.in will be instantiated for user input.
      */
-    public Ui() {
+    public Ui(TaskList tasks) {
         this.input = new Scanner(System.in);
-    }
-
-    /**
-     * Returns a loading error due to Duke being unable to load in saved tasks from the file specified. Informs
-     * the user that a new file will be created.
-     * 
-     * @return Loading error string.
-     */
-    public String showLoadingError() {
-        return "Error: Unable to load saved tasks from file.\n"
-                + "New data file will be created.";
+        this.tasks = tasks;
     }
 
     /**
@@ -56,10 +47,9 @@ public class Ui {
     /**
      * Returns the information for each task in the tasks list in the order they were added.
      *
-     * @param tasks List of tasks.
      * @return List of tasks.
      */
-    public String showTasks(TaskList tasks) {
+    public String showTasks() {
         ArrayList<Task> list = tasks.getList();
         StringBuilder sb = new StringBuilder();
         
@@ -87,68 +77,55 @@ public class Ui {
 
     /**
      * Returns specified task from given tasks list as marked done.
-     * 
-     * @param taskList List of tasks.
+     *
      * @param task Task which has been marked as done.
      * @return String showing task as done.
      */
-    public String showSetAsDone(TaskList taskList, Task task) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Noted. I have marked this task as done:\n");
-        sb.append(String.format("\t%s%n%n", task));
-
-        return sb.toString();
+    public String showSetAsDone(Task task) {
+        return "Noted. I have marked this task as done:\n"
+                + String.format("\t%s%n%n", task);
     }
 
     /**
      * Returns specified task from given tasks list as added to that list.
-     * 
-     * @param taskList List of tasks.
+     *
      * @param task Task which has been added to list.
      * @return String showing task as added.
      */
-    public String showAddTask(TaskList taskList, Task task) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Alright! The following task has been added:\n");
-        sb.append(String.format("\t%s%n", task));
-        sb.append(String.format("You now have %d %s in the list.%n%n", 
-                taskList.getSize(), taskList.getSize() == 1 ? "task" : "tasks"));
-        
-        return sb.toString();
+    public String showAddTask(Task task) {
+        return "Alright! The following task has been added:\n"
+                + String.format("\t%s%n", task)
+                + String.format("You now have %d %s in the list.%n%n",
+                        tasks.getSize(), tasks.getSize() == 1 ? "task" : "tasks");
     }
 
     /**
      * Returns specified task from given tasks list as being deleted from that list.
-     * 
-     * @param taskList List of tasks.
+     *
      * @param task Task which has been deleted from list.
      * @return String showing task as deleted.
      */
-    public String showDeleteTask(TaskList taskList, Task task) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Noted. I have removed this task:\n");
-        sb.append(String.format("\t%s%n", task));
-        sb.append(String.format("You now have %d %s in the list.%n%n",
-                taskList.getSize(), taskList.getSize() == 1 ? "task" : "tasks"));
-
-        return sb.toString();
+    public String showDeleteTask(Task task) {
+        return "Noted. I have removed this task:\n"
+                + String.format("\t%s%n", task)
+                + String.format("You now have %d %s in the list.%n%n",
+                        tasks.getSize(), tasks.getSize() == 1 ? "task" : "tasks");
     }
 
     /**
      * Returns all tasks from specified tasks list as found task matching some search term.
-     * 
-     * @param tasks List of tasks containing tasks matching some search term.
+     *
      * @return String showing tasks matching some search term.
      */
-    public String showFound(ArrayList<Task> tasks) {
+    public String showFound(ArrayList<Task> foundTasks) {
         StringBuilder sb = new StringBuilder();
         
-        if (tasks.isEmpty()) {
+        if (foundTasks.isEmpty()) {
             sb.append("No matching tasks found.");
         } else {
             sb.append("These are the matching tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
-                sb.append(String.format("%d.%s%n", i + 1, tasks.get(i)));
+            for (int i = 0; i < foundTasks.size(); i++) {
+                sb.append(String.format("%d.%s%n", i + 1, foundTasks.get(i)));
             }
         }
 
