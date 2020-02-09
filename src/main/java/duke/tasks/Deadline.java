@@ -13,7 +13,7 @@ public class Deadline extends DateTask {
     private LocalTime finishByTime;
     /** Date of deadline. */
     private LocalDate finishByDate;
-    /** Format of LocalFate */
+    /** Format of LocalDate. */
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**

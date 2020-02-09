@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.tasks.TaskList;
 
-public class DoneCommand implements Command{
+public class DoneCommand implements Command {
     private TaskList taskList;
     private int taskIndex;
 

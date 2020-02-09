@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if(input.equals("bye")) {
+        if (input.equals("bye")) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog("Goodbye!", dukeImage)
@@ -69,6 +69,11 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Outputs text as Duke's response.
+     *
+     * @param text Text to be outputted.
+     */
     public void outputText(String text) {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(text, dukeImage)

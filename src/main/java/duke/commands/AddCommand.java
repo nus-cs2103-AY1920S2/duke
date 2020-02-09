@@ -12,6 +12,7 @@ public class AddCommand implements Command {
         this.taskList = taskList;
     }
 
+    @Override
     public String execute() {
         taskList.add(task);
         return "Got it. I've added this task:\n"

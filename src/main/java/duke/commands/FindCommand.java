@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.tasks.TaskList;
 
-public class FindCommand implements Command{
+public class FindCommand implements Command {
     private TaskList tasklist;
     private String keyword;
 

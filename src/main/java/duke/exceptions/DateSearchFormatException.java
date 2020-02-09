@@ -14,6 +14,6 @@ public class DateSearchFormatException extends Exception {
 
     @Override
     public String toString() {
-        return "Sorry, I don't recognize this date format. Try to follow this format (YYYY-MM-DD): 2020-12-31";
+        return "Sorry, I don't recognize this date format. Try to follow this format (DD/MM/YYYY): 28/02/2020";
     }
 }

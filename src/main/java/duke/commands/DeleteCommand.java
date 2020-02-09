@@ -3,7 +3,7 @@ package duke.commands;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-public class DeleteCommand implements Command{
+public class DeleteCommand implements Command {
     private TaskList taskList;
     private int taskNumber;
 

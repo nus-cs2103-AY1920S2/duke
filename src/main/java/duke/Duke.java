@@ -55,10 +55,6 @@ public class Duke {
      * @param input Input of user.
      */
     public String getResponse(String input) {
-//        if (input.equals("bye")) {
-//           return "Bye. Hope to see you again soon!";
-//        }
-
         try {
             String response = parser.parseAndExecuteToString(input);
             storage.save(taskList);

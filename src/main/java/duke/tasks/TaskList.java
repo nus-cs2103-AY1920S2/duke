@@ -140,6 +140,11 @@ public class TaskList {
         return s;
     }
 
+    /**
+     * Stringify the task list into an ordered numerical list.
+     *
+     * @return Stringified numerical list.
+     */
     public String orderedToString() {
         String s = "";
         for (int i = 0; i < list.size(); i++) {

@@ -28,12 +28,4 @@ public class EmptyTimeException extends Exception {
 
         return "The time/date of the " + this.taskType + " cannot be empty.";
     }
-
-    public String[] getFields() {
-        return this.fields;
-    }
-
-    public String stringifyFields() {
-        return this.taskType + " " + this.fields[0] + " /at ";
-    }
 }

@@ -4,7 +4,7 @@ import duke.tasks.TaskList;
 
 import java.time.LocalDate;
 
-public class FindDateCommand implements Command{
+public class FindDateCommand implements Command {
     private TaskList tasklist;
     private LocalDate date;
 

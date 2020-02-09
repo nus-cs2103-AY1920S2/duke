@@ -13,7 +13,7 @@ public class Event extends DateTask {
     private LocalTime startAtTime;
     /** Date of event. */
     private LocalDate startAtDate;
-    /** Format of LocalFate */
+    /** Format of LocalDate. */
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
@@ -46,7 +46,6 @@ public class Event extends DateTask {
 
     @Override
     public String toString() {
-//        String date = this.startAtDate.toString();
         String date = startAtDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         String dateTime = startAtTime != null
                 ? startAtTime + ", " + date

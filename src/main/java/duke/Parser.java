@@ -1,9 +1,23 @@
 package duke;
 
 // packages imports
-import duke.commands.*;
-import duke.exceptions.*;
-import duke.tasks.*;
+import duke.commands.AddCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
+import duke.commands.FindDateCommand;
+import duke.commands.ListCommand;
+import duke.exceptions.DateSearchFormatException;
+import duke.exceptions.EmptySearchException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.EmptyTimeException;
+import duke.exceptions.InvalidActionException;
+import duke.exceptions.InvalidTaskNumberException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 // java imports
 import java.time.DateTimeException;
@@ -85,7 +99,7 @@ public class Parser {
                 return new AddCommand(taskList, newTask).execute();
             case "date":
                 fields = input.split(" ");
-                if(fields.length < 2) {
+                if (fields.length < 2) {
                     throw new EmptySearchException();
                 }
 
@@ -121,7 +135,7 @@ public class Parser {
             return ex.toString();
         } catch (DateTimeException ex) {
             return "You have entered an invalid time/date format. "
-                    + "Please follow the following format: 23:59 2020-12-31 (padded with zero if neccesary e.g. 01). "
+                    + "Please follow the following format: 23:59 28/02/2020 (padded with zero if necessary). "
                     + "You may input '-' to omit either the time, date or both";
         }
     }
