@@ -144,6 +144,7 @@ public class TaskList {
             String taskDesc = taskName.split(" ", 2)[1];
             Task newTask = null;
             if (taskType.equals("todo")) {
+                assert taskDesc.trim() != null;
                 newTask = new ToDo(taskDesc);
             } else if (taskType.equals("deadline")) {
                 String[] in = taskDesc.split("/",2);
@@ -191,6 +192,7 @@ public class TaskList {
             if (Objects.isNull(newTask)) {
                 out = "Attempting to add invalid task. Operation aborted.";
             } else {
+                assert newTask != null;
                 taskList.add(newTask);
                 out = "Got it. I've added this task:\n" + newTask + "\n" + "Now you have "
                         + taskList.size() + " tasks in the list.";
@@ -211,8 +213,9 @@ public class TaskList {
     public String getDeleteString(String taskName) {
         String out;
         try {
-            String taskNum = taskName.split(" ", 2)[1];
-            Task currTask = taskList.get(Integer.parseInt(taskNum) - 1);
+            int taskNum = Integer.parseInt(taskName.split(" ", 2)[1]);
+            assert taskNum <= taskList.size();
+            Task currTask = taskList.get(taskNum - 1);
             taskList.remove(currTask);
             out = "Noted. I've removed this task:\n" +  currTask + "\nNow you have " + taskList.size() +
                     " tasks in the list.";
@@ -230,9 +233,11 @@ public class TaskList {
      * String of every item in taskList.
      */
     public String getListString() {
+        assert taskList != null;
         String out = "Here are the tasks in your list:\n";
         int i = 1;
         for (Task task : taskList) {
+            assert task != null;
             out += "     " + i + "." + task + "\n";
             i++;
         }
@@ -247,6 +252,7 @@ public class TaskList {
         String out;
         try {
             int num = Integer.parseInt(in.substring(5));
+            assert num <= this.taskList.size();
             out = "Nice! I've marked this task as done:\n";
             Task taskDone = taskList.get(num - 1);
             taskDone.markDone();
