@@ -6,6 +6,7 @@ public class Task {
     private String description;
     private String taskType;
     private boolean isDone;
+    private boolean prevStatus;
 
     /**
      * Class constructor.
@@ -17,6 +18,7 @@ public class Task {
         this.description = description;
         this.taskType = taskType;
         this.isDone = false;
+        this.prevStatus = false;
     }
 
     /**
@@ -67,7 +69,18 @@ public class Task {
      * Mark task as done.
      */
     public void setDone() {
+        prevStatus = isDone;
         isDone = true;
+    }
+
+    /**
+     * Reset the previous status of the task.
+     */
+    public void resetPrevStatus() {
+        boolean tempStatus = isDone;
+
+        isDone = prevStatus;
+        prevStatus = tempStatus;
     }
 
     /**
