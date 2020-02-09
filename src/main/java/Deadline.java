@@ -46,16 +46,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns whether a task is marked done in int form instead of symbol form, to be displayed in the file
-     * saved in hard disk.
-     *
-     * @return 1 if task is marked done, or 0 if the task is marked undone.
-     */
-    public int getDoneInt() {
-        return isDone() ? 1 : 0;
-    }
-
-    /**
      * Returns information about a task, stating that it is D(Deadline) task, whether it is marked done, the
      * description of the task and the deadline date and time, for the updating of the file saved in hard disk.
      *
