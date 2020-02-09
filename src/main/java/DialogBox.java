@@ -39,10 +39,22 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * DialogBox on the user side
+     * @return DialogBox
+     * @param Label
+     * @param ImageView
+     * */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * DialogBox on the Duke side
+     * @return DialogBox
+     * @param Label,
+     * @param ImageView
+     * */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
