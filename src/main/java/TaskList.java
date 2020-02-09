@@ -1,8 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Contains the task list.
@@ -70,12 +68,15 @@ public class TaskList {
      * @param keyword Keyword to be found in the description.
      * @return List of tasks that contains keyword.
      */
-    public ArrayList<Task> findTargets(String keyword) {
-        List<Task> targets = tasks.stream().filter(task -> task.getDescription().contains(keyword))
-                .collect(Collectors.toList());
+    public ArrayList<String> findTargets(String keyword) {
+        ArrayList<String> targets = new ArrayList<String>();
 
-        ArrayList<Task> matchedTasks = new ArrayList<Task>(targets);
+        for (int i = 0; i < this.getSize(); i++) {
+            if (this.getTask(i).getDescription().contains(keyword)) {
+                targets.add(this.getTask(i).obtainTaskInfo());
+            }
+        }
 
-        return matchedTasks;
+        return targets;
     }
 }
