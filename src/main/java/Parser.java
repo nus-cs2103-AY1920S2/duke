@@ -112,17 +112,4 @@ public class Parser {
 
         return timing;
     }
-
-    /**
-     * Check whether the input command to be made sense off is empty.
-     *
-     * @return True if input command is empty.
-     */
-    public boolean isEmpty() {
-        if (inputs[0].isEmpty()) {
-            return true;
-        }
-
-        return false;
-    }
 }
