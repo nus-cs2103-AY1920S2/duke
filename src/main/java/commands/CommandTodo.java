@@ -19,10 +19,6 @@ public class CommandTodo extends CommandTask {
      */
     public String execute(DukeProcessor processor, String args) throws DukeException {
         String[] argsArray = args.split(" ", 2);
-        if (argsArray.length < 2) {
-            throw new DukeException("Your 'todo' command is incorrect! Please follow the following format: todo "
-                    + "<item>");
-        }
 
         TodoTask task = new TodoTask(argsArray[1]);
         processor.getTaskList().add(task);

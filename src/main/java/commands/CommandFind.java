@@ -19,10 +19,6 @@ public class CommandFind implements Command {
      */
     public String execute(DukeProcessor processor, String args) throws DukeException {
         String[] argsArray = args.split(" ", 2);
-
-        if (argsArray.length < 2) {
-            throw new DukeException("You've entered an invalid format! Please use find <string>.");
-        }
         String searchString = argsArray[1];
 
         List<Task> tasksList = processor.getTaskList().getTasksContaining(searchString);

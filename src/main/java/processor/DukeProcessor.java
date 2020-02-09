@@ -4,6 +4,7 @@ import commands.Command;
 import commands.CommandType;
 import commands.Commander;
 import exceptions.DukeException;
+import main.Duke;
 import tasks.TaskList;
 
 /**
@@ -13,6 +14,7 @@ public class DukeProcessor {
 
     private boolean isActive;
     private TaskList taskList;
+    private Parser parser;
 
     public DukeProcessor() {
         init();
@@ -23,6 +25,7 @@ public class DukeProcessor {
      */
     private void init() {
         taskList = new TaskList(this);
+        parser = new Parser(this);
         isActive = true;
         sayHello();
     }
@@ -34,8 +37,8 @@ public class DukeProcessor {
      * @param input User input.
      */
     public String processInput(String input) {
-        Command command = Parser.parseInput(input);
         try {
+            Command command = parser.parseInput(input);
             return command.execute(this, input);
         } catch (DukeException e) {
             return e.toString();

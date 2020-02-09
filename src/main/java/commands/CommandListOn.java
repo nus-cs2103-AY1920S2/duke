@@ -29,19 +29,19 @@ public class CommandListOn implements Command {
             if (filteredTaskList.size() == 0) {
                 return "Looks like you don't have any tasks entered on this date! Try entering one with "
                         + "the commands 'todo', 'deadline' or 'event'!";
-            } else {
-                String filteredTaskListString = "";
-                for (int i = 0; i < filteredTaskList.size(); i++) {
-                    filteredTaskListString += String.format("%d. %s", i + 1, filteredTaskList.get(i)) + "\n";
-                }
-
-                String output = String.format("%s\n%s\n", String.format("Here are the %d tasks I've noted down for "
-                                + "you on %s:", filteredTaskList.size(), searchDate.format(
-                                        DateTimeFormatter.ofPattern("MMM d yyyy"))),
-                        filteredTaskListString);
-
-                return output;
             }
+
+            String filteredTaskListString = "";
+            for (int i = 0; i < filteredTaskList.size(); i++) {
+                filteredTaskListString += String.format("%d. %s", i + 1, filteredTaskList.get(i)) + "\n";
+            }
+
+            String output = String.format("%s\n%s\n", String.format("Here are the %d tasks I've noted down for "
+                            + "you on %s:", filteredTaskList.size(), searchDate.format(
+                    DateTimeFormatter.ofPattern("MMM d yyyy"))),
+                    filteredTaskListString);
+
+            return output;
         } catch (Exception e) {
             e.printStackTrace();
             throw new DukeException("You've entered an incorrect date! Please follow this format: liston dd/MM/yyyy");

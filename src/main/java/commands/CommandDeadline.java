@@ -17,16 +17,7 @@ public class CommandDeadline extends CommandTask {
      * @throws DukeException Throws an exception if the input format is incorrect.
      */
     public String execute(DukeProcessor processor, String args) throws DukeException {
-        if (!args.contains(" /by ")) {
-            throw new DukeException("Your deadline command is incorrect! Please follow the format: deadline <item> "
-                    + "/by <time>");
-        }
         String[] inputArgs = args.split(" ", 2)[1].split(" /by ");
-
-        if (inputArgs.length < 2) {
-            throw new DukeException("Your deadline command is incorrect! Please follow the format: deadline <item> "
-                    + "/by <time>");
-        }
 
         DeadlineTask task = new DeadlineTask(inputArgs[0], inputArgs[1]);
         processor.getTaskList().add(task);

@@ -21,16 +21,15 @@ public class CommandList implements Command {
         if (taskList.size() == 0) {
             return "Looks like you don't have any tasks entered! Try entering one with the "
                     + "commands 'todo', 'deadline' or 'event'!";
-        } else {
-            String taskListString = "";
-            for (int i = 0; i < taskList.size(); i++) {
-                taskListString += String.format("%d. %s", i + 1, taskList.get(i)) + "\n";
-            }
-
-            String output = String.format("%s\n%s\n", "Here are the " + taskList.size() + " tasks I've noted down "
-                    + "for you:",
-                    taskListString);
-            return output;
         }
+        String taskListString = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            taskListString += String.format("%d. %s", i + 1, taskList.get(i)) + "\n";
+        }
+
+        String output = String.format("%s\n%s\n", "Here are the " + taskList.size() + " tasks I've noted down "
+                        + "for you:",
+                taskListString);
+        return output;
     }
 }

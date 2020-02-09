@@ -17,15 +17,9 @@ public class CommandDone implements Command {
      * @param args      The arguments as entered by the user.
      * @throws DukeException Throws exception if Duke is unable to find a task at the index specified.
      */
-    public String execute(DukeProcessor processor, String args) throws DukeException {
+    public String execute(DukeProcessor processor, String args) {
         String[] argsArray = args.split(" ", 2);
-        if (argsArray.length < 2) {
-            throw new DukeException("Your 'done' command is incorrect! Use the following format: done <number>");
-        } else if (Integer.parseInt(argsArray[1]) > processor.getTaskList().size()) {
-            throw new DukeException("You've selected a non-existent task to complete! Please try again!");
-        } else if (Integer.parseInt(argsArray[1]) < 0) {
-            throw new DukeException("You've entered an index below the number of tasks in the list! Please try again!");
-        }
+
         int taskNumber = Integer.parseInt(argsArray[1]);
         int taskIndex = taskNumber - 1;
 
