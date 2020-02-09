@@ -8,11 +8,6 @@ public class Parser {
     protected ArrayList<Task> taskList;
     protected Ui ui;
 
-    public enum TypeOfError {
-        TODO_NO_DESC, DEADLINE_NO_DESC, DEADLINE_NO_DEADLINE, EVENT_NO_DESC, EVENT_NO_DATE_AND_TIME, OTHERS,
-        UNK_TASK_DONE, UNK_TASK_TO_DELETE
-    }
-
     public Parser(ArrayList<Task> taskList) {
         this.taskList = taskList;
         this.ui = new Ui();
@@ -37,7 +32,7 @@ public class Parser {
             String[] strArr = command.split(" ");
             if (strArr.length == 1) {
                 try {
-                    throw new DukeException(TypeOfError.UNK_TASK_DONE.ordinal());
+                    throw new DukeException("UNK_TASK_DONE");
                 } catch (DukeException e) {
                     return e.toString();
                 }
@@ -50,7 +45,7 @@ public class Parser {
 
             if (strArr.length == 1) {
                 try {
-                    throw new DukeException(TypeOfError.TODO_NO_DESC.ordinal());
+                    throw new DukeException("TODO_NO_DESC");
                 } catch (DukeException e) {
                     return e.toString();
                 }
@@ -63,7 +58,7 @@ public class Parser {
 
             if (strArr.length == 1) {
                 try {
-                    throw new DukeException(TypeOfError.DEADLINE_NO_DESC.ordinal());
+                    throw new DukeException("DEADLINE_NO_DESC");
                 } catch (DukeException e) {
                     return e.toString();
                 }
@@ -71,7 +66,7 @@ public class Parser {
             String[] cmdArr = strArr[1].split("/", 2);
             if (cmdArr.length == 1) {
                 try {
-                    throw new DukeException(TypeOfError.DEADLINE_NO_DEADLINE.ordinal());
+                    throw new DukeException("DEADLINE_NO_DEADLINE");
                 } catch (DukeException e) {
                     return e.toString();
                 }
@@ -87,7 +82,7 @@ public class Parser {
 
             if (strArr.length == 1) {
                 try {
-                    throw new DukeException(TypeOfError.EVENT_NO_DESC.ordinal());
+                    throw new DukeException("EVENT_NO_DESC");
                 } catch (DukeException e) {
                     return e.toString();
                 }
@@ -95,7 +90,7 @@ public class Parser {
             String[] cmdArr = strArr[1].split("/", 2);
             if (cmdArr.length == 1) {
                 try {
-                    throw new DukeException(TypeOfError.EVENT_NO_DATE_AND_TIME.ordinal());
+                    throw new DukeException("EVENT_NO_DATE_AND_TIME");
                 } catch (DukeException e) {
                     return e.toString();
                 }
@@ -111,7 +106,7 @@ public class Parser {
             String[] strArr = command.split(" ");
             if (strArr.length == 1) {
                 try {
-                    throw new DukeException(TypeOfError.UNK_TASK_TO_DELETE.ordinal());
+                    throw new DukeException("UNK_TASK_TO_DELETE");
                 } catch (DukeException e) {
                     return e.toString();
                 }
@@ -124,7 +119,7 @@ public class Parser {
             return ui.printTasksFound(taskList, strArr[1]);
         } else {
             try {
-                throw new DukeException(TypeOfError.OTHERS.ordinal());
+                throw new DukeException("OTHERS");
             } catch (DukeException e) {
                 return e.toString();
             }

@@ -1,5 +1,3 @@
-import static java.lang.Boolean.TRUE;
-
 /**
  * A Task object can be a Todo task, a Deadline task or a Event task.
  */
@@ -15,7 +13,7 @@ public class Task {
      * Marks a task as done.
      */
     protected void setDone() {
-        isDone = TRUE;
+        isDone = true;
     }
 
     /**

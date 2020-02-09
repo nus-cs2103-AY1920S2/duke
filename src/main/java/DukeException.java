@@ -1,30 +1,30 @@
 public class DukeException extends Exception {
-    private int index;
+    private String error;
 
-    public DukeException(int i) {
-        this.index = i;
+    public DukeException(String str) {
+        this.error = str;
     }
 
     @Override
     public String toString() {
-        switch (index) {
-        case 0: // todo task needs a description
+        switch (error) {
+        case "TODO_NO_DESC": // todo task needs a description
             return "Oh no! :( The description of todo cannot be empty.";
-        case 1: // deadline task needs a description
+        case "DEADLINE_NO_DESC": // deadline task needs a description
             return "Oh no! :( The description of deadline cannot be empty.";
-        case 2: // deadline task needs a deadline
+        case "DEADLINE_NO_DEADLINE": // deadline task needs a deadline
             return "Please include the deadline of this task!";
-        case 3: // event task needs a description
+        case "EVENT_NO_DESC": // event task needs a description
             return "Oh no! :( The description for event cannot be empty.";
-        case 4: // event task needs a date and time
+        case "EVENT_NO_DATE_AND_TIME": // event task needs a date and time
             return "Please include the date and time of this event!";
-        case 5: // for any unrecognised commands
+        case "OTHERS": // for any unrecognised commands
             return "Oh no! I am not sure what you are talking about:(";
-        case 6: // for not specifying which task is done
+        case "UNK_TASK_DONE": // for not specifying which task is done
             return "Please let me know which task you are done with!:)";
-        case 7: // for not specifying which task to delete
+        case "UNK_TASK_TO_DELETE": // for not specifying which task to delete
             return "Please let me know which task you want to delete!:)";
-        case 8: // file loading error
+        case "LOAD_ERROR": // file loading error
             return null;
         default:
             return "Error!";
