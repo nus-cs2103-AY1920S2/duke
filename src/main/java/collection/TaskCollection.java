@@ -1,12 +1,15 @@
+package collection;
+
+import task.Task;
+import storage.FileUtility;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.io.File;
 import java.util.ArrayList;
 
 /**
- * TaskCollection stores the implementation of data structure underlying Tasks.
+ * collection.TaskCollection stores the implementation of data structure underlying Tasks.
  * Also implements Observer Pattern on state change of tasks
  */
 public class TaskCollection {
@@ -20,12 +23,9 @@ public class TaskCollection {
 
     private void loadTasks() {
         try {
-            File tmpDir = new File("../../tasks.tmp");
+            File tmpDir = new File("../../../tasks.tmp");
             if (tmpDir.exists()) {
-                FileInputStream fis = new FileInputStream("../../../tasks.tmp");
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                this.tasks = (ArrayList<Task>) ois.readObject();
-                ois.close();
+                this.tasks = (ArrayList<Task>) FileUtility.load("../../../tasks.tmp");
             } else {
                 this.tasks = new ArrayList<Task>();
             }

@@ -1,3 +1,5 @@
+package task;
+
 import java.io.Serializable;
 
 public class Task implements Serializable {
@@ -10,7 +12,7 @@ public class Task implements Serializable {
     }
 
     public String getShortName() {
-        return "Task";
+        return "task.Task";
     }
 
     public String getStatusIcon() {

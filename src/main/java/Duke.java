@@ -1,3 +1,11 @@
+import collection.TaskCollection;
+import storage.PersistentStorageObserver;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+import validator.CommandParser;
+
 import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,40 +37,44 @@ public class Duke {
      * @param command user command
      */
     private static void commandProcessor(String command) {
-        Integer commandCode = commandParser.getCommandCode(command);
-        if (commandCode == commandCodeMapping.get("list")) {
-            for (int i = 0; i < taskCollection.size(); i++) {
-                System.out.printf(taskCollection.get(i).getFullDetail(i));
+        try {
+            Integer commandCode = commandParser.getCommandCode(command);
+            if (commandCode == commandCodeMapping.get("list")) {
+                for (int i = 0; i < taskCollection.size(); i++) {
+                    System.out.printf(taskCollection.get(i).getFullDetail(i));
+                }
+            } else if (commandCode == commandCodeMapping.get("mark done")) {
+                Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
+                if (taskIndex < taskCollection.size()) {
+                    taskCollection.get(taskIndex).markDone();
+                }
+            } else if (commandCode == commandCodeMapping.get("delete")) {
+                Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
+                System.out.println("HIEU");
+                if (taskIndex < taskCollection.size()) {
+                    taskCollection.remove(taskIndex.intValue());
+                }
+            } else if (commandCode == commandCodeMapping.get("todo")) {
+                String todoContent = command.split(" ", 2)[1];
+                Task todo = new Todo(todoContent);
+                taskCollection.add(todo);
+            } else if (commandCode == commandCodeMapping.get("deadline")) {
+                String deadlineContent = command.split(" ", 2)[1];
+                String deadlineDesc = deadlineContent.split("/by")[0];
+                String deadlineTime = deadlineContent.split("/by")[1];
+                Task deadline = new Deadline(deadlineDesc, deadlineTime);
+                taskCollection.add(deadline);
+            } else if (commandCode == commandCodeMapping.get("event")) {
+                String eventContent = command.split(" ", 2)[1];
+                String eventDesc = eventContent.split("/at")[0];
+                String eventTime = eventContent.split("/at")[1];
+                Task event = new Event(eventDesc, eventTime);
+                taskCollection.add(event);
+            } else if (commandCode == commandCodeMapping.get("invalid command")) {
+                System.out.printf("OOPS Wrong command\n");
             }
-        } else if (commandCode == commandCodeMapping.get("mark done")) {
-            Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
-            if (taskIndex < taskCollection.size()) {
-                taskCollection.get(taskIndex).markDone();
-            }
-        } else if (commandCode == commandCodeMapping.get("delete")) {
-            Integer taskIndex = Integer.parseInt(command.split(" ")[1]);
-            System.out.println("HIEU");
-            if (taskIndex < taskCollection.size()) {
-                taskCollection.remove(taskIndex.intValue());
-            }
-        } else if (commandCode == commandCodeMapping.get("todo")) {
-            String todoContent = command.split(" ", 2)[1];
-            Task todo = new Todo(todoContent);
-            taskCollection.add(todo);
-        } else if (commandCode == commandCodeMapping.get("deadline")) {
-            String deadlineContent = command.split(" ", 2)[1];
-            String deadlineDesc = deadlineContent.split("/by")[0];
-            String deadlineTime = deadlineContent.split("/by")[1];
-            Task deadline = new Deadline(deadlineDesc, deadlineTime);
-            taskCollection.add(deadline);
-        } else if (commandCode == commandCodeMapping.get("event")) {
-            String eventContent = command.split(" ", 2)[1];
-            String eventDesc = eventContent.split("/at")[0];
-            String eventTime = eventContent.split("/at")[1];
-            Task event = new Event(eventDesc, eventTime);
-            taskCollection.add(event);
-        } else if (commandCode == commandCodeMapping.get("invalid command")) {
-            System.out.printf("OOPS Wrong command\n");
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
