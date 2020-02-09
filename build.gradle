@@ -23,6 +23,9 @@ dependencies {
     // JUnit 5
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
 
+    // Mockito
+    testCompile "org.mockito:mockito-core:1.+"
+
     // JavaFX
     String javaFxVersion = '11'
 
@@ -46,6 +49,7 @@ test {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 application {
