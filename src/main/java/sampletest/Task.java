@@ -6,7 +6,7 @@ package sampletest;
  * @author Wei Cheng
  */
 
-public class Task {
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -33,7 +33,7 @@ public class Task {
     }
 
     /**
-     * obtain the icon corrsponding to the status of the Task.
+     * obtain the icon corresponding to the status of the Task.
      * @return an icon of tick when done or cross when it is not done.
      */
 
@@ -69,6 +69,25 @@ public class Task {
     public String getDescription() {
 
         return this.description;
+    }
+
+    public boolean isUrgent() {
+        return false;
+    }
+
+    public int getCompletionDate() {
+        return Integer.parseInt(null);
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (task.isUrgent() && this.isUrgent()) {
+            return task.getCompletionDate() -  this.getCompletionDate();
+        } else if (task.isUrgent() && !this.isUrgent()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
     /**

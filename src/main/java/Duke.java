@@ -9,6 +9,7 @@ import sampletest.Task;
 import sampletest.Events;
 import sampletest.Deadlines;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * CS2103 Individual Project.
@@ -100,6 +101,11 @@ public class Duke  {
                 numbOfTask = this.tasks.taskStorage.size();
                 return ("Got it. I've added this task:\n" + event.toString()
                         + "\nNow you have " + numbOfTask.toString() + " tasks in the list.");
+            case "sort":
+                Collections.sort(this.tasks.taskStorage);
+                numbOfTask = this.tasks.taskStorage.size();
+                return this.printText() + ("\nNow you have " + numbOfTask.toString() + " tasks in the list.");
+
             case "find":
                 String keyWord = parser.getDescription();
                 ArrayList<Task> matchingTasks = new ArrayList<>();
