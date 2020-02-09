@@ -15,6 +15,7 @@ public class Parser {
             } else {
                 throw new UndefinedCommandException();
             }
+            // TODO add exception for invalid find method
         } else {
             String firstArg = fullCommand.substring(0, spaceIndex);
             String otherArgs = fullCommand.substring(spaceIndex + 1);
@@ -35,6 +36,10 @@ public class Parser {
                 // assumes command is only "delete" and an int
                 // the input is 1-indexed. duke.DeleteCommand takes in 0-indexed
                 return new DeleteCommand(Integer.parseInt(otherArgs) - 1);
+            } else if (firstArg.equals("find")) {
+                // assumes command is only "find" and a single word search phrase
+                // currently will search the remainder of the command
+                return new FindCommand(otherArgs);
             } else {
                 throw new UndefinedCommandException();
             }
