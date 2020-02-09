@@ -6,6 +6,7 @@ import duke.command.Command;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 /**
  * Contains mainly static methods for all interactions
@@ -180,13 +181,11 @@ public class Ui {
      */
     public static void showAllCommands(Command... commands) {
         latestResponse = "";
-        int count = 0;
         showLine();
-        for (Command c : commands) {
-            count++;
-            latestResponse += count + ". " + c.toString() + "\n";
-            printWithIndent(count + ". " + c.toString());
-        }
+        Stream.of(commands).forEach(command -> {
+            latestResponse += "-- " + command.toString() + "\n";
+            printWithIndent("-- " + command + ". " + command.toString());
+        });
         showLine();
     }
 }
