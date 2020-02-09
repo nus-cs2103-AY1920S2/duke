@@ -17,7 +17,10 @@ public class Parse {
             if (statement.equals("list")) {
                 listDecode(tasks);
             }
-            //any command that's not list
+            else if (statement.equals("reminders")) {
+                tasks.reminderList();
+            }
+            //any command that's not list and reminder
             else if (taskArray.length == 1) {
                 emptyCommandDecode(taskArray[0]);
             } else {

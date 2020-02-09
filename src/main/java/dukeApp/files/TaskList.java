@@ -25,6 +25,17 @@ public class TaskList {
         print(aList);
     }
 
+    public void reminderList() {
+        ArrayList<Task> reminder = new ArrayList<>();
+        for (int i = 0; i < aList.size(); i++) {
+            if ((aList.get(i).getType()).equals("D")) {
+                reminder.add(aList.get(i));
+            }
+        }
+        System.out.println("Here are the upcoming deadlines in your list:");
+        print(reminder);
+    }
+
     /**
      * Actions to be done for delete & done tasks
      * @param rank task number in the list
