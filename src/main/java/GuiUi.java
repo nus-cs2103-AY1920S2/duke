@@ -128,4 +128,15 @@ public class GuiUi {
         }
         return response;
     }
+
+    public String getUndoIdentifier(String command) {
+        return "[Undo " + command + " command]: ";
+    }
+
+    public String getReverseDoneSuccess(TaskList tasks, int reverseTaskIndex) {
+        String response = "OH MAN! I've reversed the status of this task:\n";
+        response = response.concat("  " + tasks.getTask(reverseTaskIndex).obtainTaskInfo() + "\n");
+
+        return response;
+    }
 }
