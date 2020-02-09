@@ -114,4 +114,14 @@ public class Parser {
         return split_str[1];
     }
 
+    /**
+     * Only used when the command is "notes", meaning that the following commands are dealing with the TranScribe.
+     * @return the notes commands.
+     */
+    public String processNotesCommand() {
+        int start_index = raw_user_input.indexOf(" ") + 1;
+        int end_index = raw_user_input.length();
+        return raw_user_input.substring(start_index, end_index);
+    }
+
 }

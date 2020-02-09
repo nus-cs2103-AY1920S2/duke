@@ -8,9 +8,11 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private TranScribeHandler tranScribeHandler;
 
     public Duke() {
         ui = new Ui();
+        tranScribeHandler = new TranScribeHandler();
         storage = new Storage("data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
@@ -105,6 +107,15 @@ public class Duke {
                     lst = lst + completion_symbol + " " + task_type + " " + description + "(at: " + formattedDate + ")\n";
                     lst = lst + ui.printNumTasksInList(tasks);
                     return lst;
+                }
+                catch (DukeException exception) {
+                    return ui.printExceptionMessage(exception);
+                }
+            } else if (command.toLowerCase().equals("notes")) { // all commands to do with notes are prefaced with the word notes.
+                String notes_commands = parser.processNotesCommand();
+                try {
+                    String response = tranScribeHandler.handle(notes_commands);
+                    return response;
                 }
                 catch (DukeException exception) {
                     return ui.printExceptionMessage(exception);

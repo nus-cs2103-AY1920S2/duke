@@ -24,8 +24,8 @@ public class Ui {
     /**
      * Prints the greeting statement for Duke.
      */
-    public void printGreeting() {
-        System.out.println("Hello! I am a Pyramid 480 Medical class Operator. Nice to see you!");
+    public String printGreeting() {
+        return "Hello! I am a Pyramid 480 Medical class Operator. Nice to see you!";
     }
 
     /**
