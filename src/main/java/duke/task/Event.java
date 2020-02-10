@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -20,12 +22,11 @@ public class Event extends Task {
 
     @Override
     public String writeToFile() {
-        return "E , " + super.status + " ," + super.msg + " , " + super.time;
+        return super.writeToFile() + " , " + super.time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + "[" + super.status + "]" + super.msg + " (by: "
-                + super.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return super.toString() + " (at: " + super.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

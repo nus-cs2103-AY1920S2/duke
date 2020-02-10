@@ -1,4 +1,6 @@
 T , X , swim
 T , O , search coral
-E , X , meet birds , 2020-03-01
-D , X , find nemo , 2020-02-10
+D , O , find nemo , 2020-02-10
+E , X , fish and meet , 2020-02-03
+D , X , eat , 2020-02-11
+T , X , shark

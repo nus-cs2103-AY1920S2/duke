@@ -1,39 +1,51 @@
-import java.text.ParseException;
+package duke.interact;
+
+import duke.TaskList;
+import duke.command.Command;
+import duke.command.CommandAdd;
+import duke.command.CommandBye;
+import duke.command.CommandDel;
+import duke.command.CommandDone;
+import duke.command.CommandFind;
+import duke.command.CommandList;
+import duke.exception.DukeException;
+import duke.exception.DukeExceptionCommand;
+import duke.exception.DukeExceptionDate;
+import duke.exception.DukeExceptionDateFormat;
+import duke.exception.DukeExceptionDescription;
+import duke.exception.DukeExceptionIndex;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * Parses user input.
+ * Parses user input and checks whether the user has given wrongly formatted input.
  */
 public class Parser {
 
-    private Commands command;
-    private int indexOfTaskAffected = -1;
-    private Task newTask;
-    private String keyword;
-
     /**
-     * Decodes user input and generates a Parser object that is easier to understand.
-     * com saves the type of Command that the user input.
-     * indexOfTaskAffected saves the index for commands that require indexes.
-     * newTask saves a Task for commands that create a new task.
-     * @param line String to be decoded.
-     * @param size Current number of tasks.
-     * @throws DukeException If there was an invalid user input.
+     * Returns a Command representing the user input.
+     * @param line String input by user.
+     * @param tasks Current TaskList.
+     * @return Command representing user input.
+     * @throws DukeException Exception thrown if user input is wrongly formatted.
      */
-    public Parser(String line, int size) throws DukeException {
+    public Command parse(String line, TaskList tasks) throws DukeException {
+        int size = tasks.getSize();
         switch (line) {
         case "bye":
-            command = Commands.BYE;
-            break;
+            return new CommandBye();
 
         case "list":
-            command = Commands.LIST_TASKS;
-            break;
+            return new CommandList();
 
         default:
             String[] comArs = line.split("\\s", 2);
             String inputCommand = comArs[0];
+
             int index;
             String details;
             String[] msgAndDate;
@@ -48,10 +60,8 @@ public class Parser {
                     throw new DukeExceptionIndex("done");
                 }
 
-                command = Commands.DONE;
-                indexOfTaskAffected = index;
-                assert indexOfTaskAffected >= 0 : "Index should be greater than 0.";
-                break;
+                assert index >= 0 : "Index should be greater than 0.";
+                return new CommandDone(index);
 
             case "delete":
                 if (comArs.length == 1) {
@@ -62,22 +72,18 @@ public class Parser {
                     throw new DukeExceptionIndex("delete");
                 }
 
-                command = Commands.DEL_TASK;
-                indexOfTaskAffected = index;
-                assert indexOfTaskAffected >= 0 : "Index should be greater than 0.";
-                break;
+                assert index >= 0 : "Index should be greater than 0.";
+                return new CommandDel(index);
 
             case "todo":
-                details = line.substring(4, line.length());
+                details = line.substring(4);
                 if (details.isBlank()) {
                     throw new DukeExceptionDescription("todo");
                 }
-                command = Commands.NEW_TASK;
-                newTask = new ToDo(details);
-                break;
+                return new CommandAdd(new ToDo(details));
 
             case "event":
-                details = line.substring(5, line.length());
+                details = line.substring(5);
                 if (details.isBlank()) {
                     throw new DukeExceptionDescription("event");
                 }
@@ -88,15 +94,14 @@ public class Parser {
 
                 try {
                     LocalDate date = LocalDate.parse(msgAndDate[1]);
-                    command = Commands.NEW_TASK;
-                    newTask = new Event(msgAndDate[0], date);
+                    return new CommandAdd(new Event(msgAndDate[0], date));
+
                 } catch (DateTimeParseException e) {
                     throw new DukeExceptionDateFormat();
                 }
-                break;
 
             case "deadline":
-                details = line.substring(8, line.length());
+                details = line.substring(8);
                 if (details.isBlank()) {
                     throw new DukeExceptionDescription("deadline");
                 }
@@ -107,38 +112,17 @@ public class Parser {
 
                 try {
                     LocalDate date = LocalDate.parse(msgAndDate[1]);
-                    command = Commands.NEW_TASK;
-                    newTask = new Deadline(msgAndDate[0], date);
+                    return new CommandAdd(new Deadline(msgAndDate[0], date));
                 } catch (DateTimeParseException e) {
                     throw new DukeExceptionDateFormat();
                 }
-                break;
 
             case "find":
-                command = Commands.FIND;
-                keyword = line.substring(4, line.length());
-                break;
+                return new CommandFind(line.substring(4));
 
             default:
                 throw new DukeExceptionCommand();
             }
         }
-        assert command != null : "Command should be instantiated.";
-    }
-
-    public Task getTask() {
-        return newTask;
-    }
-
-    public String getKeyWord() {
-        return keyword;
-    }
-
-    public Commands getCommand() {
-        return command;
-    }
-
-    public int getIndexAffected() {
-        return indexOfTaskAffected;
     }
 }

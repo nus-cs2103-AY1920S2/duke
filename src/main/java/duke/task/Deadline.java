@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -7,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     /**
      * Creates a Deadline Task with date.
-     * @param msg Details of the Deadline Task.
+     * @param msg Details of the Deadline Task
      * @param date LocalDate that the Deadline needs to be done by.
      */
     public Deadline(String msg, LocalDate date) {
@@ -18,12 +20,11 @@ public class Deadline extends Task {
 
     @Override
     public String writeToFile() {
-        return "D , " + super.status + " ," + super.msg + " , " + super.time;
+        return super.writeToFile() + " , " + super.time;
     }
 
     @Override
     public String toString() {
-        return "[D]" + "[" + super.status + "]" + super.msg + " (by: "
-                + super.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return super.toString() + " (by: " + super.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
