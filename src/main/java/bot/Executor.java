@@ -5,6 +5,7 @@ import bot.command.instruction.ParsedInstruction;
 
 import bot.command.instruction.concrete.DeadlineInstruction;
 import bot.command.instruction.concrete.EventInstruction;
+import bot.command.instruction.concrete.ListInstruction;
 import bot.command.instruction.concrete.TerminateInstruction;
 
 import bot.command.instruction.execute.NotStorable;
@@ -100,6 +101,8 @@ public class Executor {
 
     private boolean executeReading(StorageReading<Task> parsed, ArrayList<String> arguments) {
         // assumes parsed is a ListInstruction
+        assert (parsed instanceof ListInstruction)
+                : "unknown StorageReading in Executor.executeReading";
         parsed.readStore(this.storage, this.ui);
         return true;
     }
@@ -107,6 +110,8 @@ public class Executor {
     private boolean executeSearching(StorageSearching<Task> parsed, ArrayList<String> arguments) {
         // assumes all StorageSearching Instructions have the
         // desired search terms as their second argument
+        assert (arguments.size() == 2)
+                : "executeSearching with more than 2 parameters";
         parsed.searchStore(this.storage, this.ui, arguments.get(0));
         return true;
     }
