@@ -103,15 +103,70 @@ public class TaskList {
     }
 
     public String find() {
-        ui.matchingTask();
+        String toPrint = ui.matchingTask() + "\n";
         String matching = description.substring(5);
         assert (matching != "") : "user needs to input";
-        String toPrint  = store.stream()
+        toPrint  += store.stream()
                 .filter( s -> s.getDescription().contains(matching))
                 .map(Task::toString)
                 .collect(Collectors.joining("\n"));
         return toPrint;
     }
+
+    public String date() {
+        //date 29/12/2020
+        // retrieve 29/12/2020
+        //should be the same as this.by
+        String date = description.substring(5);
+        String toPrint = ui.date(date) + "\n";
+        for(int i=0; i<store.size(); i++) {
+            Task t= store.get(i);
+            if (t instanceof Event) {
+                Event e = (Event) t;
+                if(e.getDate().equals(date)) {
+                    toPrint += e.toString() + "\n";
+                }
+            }
+            if (t instanceof Deadline) {
+                Deadline d = (Deadline) t;
+                if(d.getDate().equals(date)) {
+                    toPrint += d.toString() + "\n";
+                }
+            }
+        }
+        return toPrint;
+    }
+
+    public String view() {
+        List<Todo> td = new ArrayList<Todo>();
+        List<Deadline> dl = new ArrayList<Deadline>();
+        List<Event> evt = new ArrayList<Event>();
+
+        String taskToView = description.substring(5);
+        String toPrint = ui.view(taskToView) + "\n";
+
+        if (taskToView.equals("todo")) {
+            toPrint += store.stream()
+                            .filter( s -> { return s instanceof Todo;})
+                            .map(Task::toString)
+                            .collect(Collectors.joining("\n"));
+        }
+        if (taskToView.equals("deadline")) {
+            toPrint += store.stream()
+                    .filter( s -> {return s instanceof Deadline;})
+                    .map(Task::toString)
+                    .collect(Collectors.joining("\n"));
+        }
+        if (taskToView.equals("event")) {
+            toPrint += store.stream()
+                    .filter( s -> {return s instanceof Event;})
+                    .map(Task::toString)
+                    .collect(Collectors.joining("\n"));
+        }
+        return toPrint;
+
+    }
+
 
     public String printList() {
         ui.taskList();

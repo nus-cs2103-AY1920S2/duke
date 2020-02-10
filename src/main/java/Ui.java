@@ -11,6 +11,14 @@ public class Ui {
         return "Hello! I'm Duke\n What can i do for you?";
     }
 
+    public String view(String input) {
+        return "These are all your tasks for " + input + ":";
+    }
+
+    public String date(String input) {
+        return "These are all your tasks on " + input + ":";
+    }
+
     public String bye() {
         return "Bye. Hope to see you again soon!";
     }

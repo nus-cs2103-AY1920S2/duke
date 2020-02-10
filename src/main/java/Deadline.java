@@ -29,26 +29,31 @@ public class Deadline extends Task {
     }
 
     /**
-     *
-     * @param at takes in the deadline date of the task
-     * @return it as MMM d yyyy
+     * @param by takes in the deadline date of the task.
+     * @return it as MMM d yyyy.
      */
-    String getDate(String at) {
-        assert at != null : " no date and timing available";
+    String parseDate(String by) {
+        assert by != null : " no date and timing available";
         String s = "";
         try {
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HHmm");
             DateFormat newFormat = new SimpleDateFormat("MMM d yyyy h a");
-            s =  newFormat.format(df.parse(at));
+            s =  newFormat.format(df.parse(by));
         } catch (ParseException pe) {
             pe.printStackTrace();
         }
         return s;
     }
 
+    /**
+     * @return the date of the deadline.
+     */
+    String getDate() {
+        return this.by.split(" ")[0];
+    }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + getDate(this.by) + ")";
+        return "[D]" + super.toString() + " (by: " + parseDate(this.by) + ")";
     }
 }

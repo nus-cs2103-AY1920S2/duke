@@ -17,16 +17,25 @@ public class Parser {
 
             if(command.startsWith("bye", 0)) {
                 toPrint = ui.bye();
-            }
-            else if (command.startsWith("find", 0)) {
+
+            } else if (command.startsWith("view", 0)) {
+                TaskList schedule = new TaskList(command);
+                toPrint = schedule.view();
+
+            } else if (command.startsWith("date", 0)) {
+                TaskList schedule = new TaskList(command);
+                toPrint = schedule.date();
+
+            } else if (command.startsWith("find", 0)) {
                 TaskList task = new TaskList(command);
-                toPrint =task.find();
+                toPrint = task.find();
 
             } else if (command.startsWith("delete", 0)) {
                 TaskList task = new TaskList(command);
                 toPrint = task.delete();
 
-            } else if (!command.startsWith("todo", 0)
+            } else if (!command.startsWith("view", 0)
+                    && !command.startsWith("todo", 0)
                     && !command.startsWith("deadline", 0)
                     && !command.startsWith("event", 0)
                     && !command.startsWith("done", 0)

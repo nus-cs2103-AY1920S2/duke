@@ -29,7 +29,7 @@ public class Event extends Task {
      * @param at takes in the event's date.
      * @return it as MMM d yyyy.
      */
-    String date(String at) {
+    String parseDate(String at) {
         assert at != null : " no date and timing available";
         String s = "";
         try {
@@ -42,8 +42,15 @@ public class Event extends Task {
         return s;
     }
 
+    /**
+     * @return the date of the event.
+     */
+    String getDate() {
+        return this.at.split(" ")[0];
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date(at) + ")";
+        return "[E]" + super.toString() + " (at: " + parseDate(at) + ")";
     }
 }
