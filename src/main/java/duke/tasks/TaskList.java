@@ -150,6 +150,6 @@ public class TaskList {
         for (int i = 0; i < list.size(); i++) {
             s += (i + 1) + ")\t" + list.get(i).toString() + "\n";
         }
-        return s;
+        return s.strip();
     }
 }

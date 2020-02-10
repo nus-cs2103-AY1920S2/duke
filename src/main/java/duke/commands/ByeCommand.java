@@ -1,8 +1,12 @@
 package duke.commands;
 
-public class ByeCommand implements Command {
-    public ByeCommand() {
 
+
+public class ByeCommand implements Command {
+    /**
+     * Creates a ByeCommand that returns exit message.
+     */
+    public ByeCommand() {
     }
 
     @Override

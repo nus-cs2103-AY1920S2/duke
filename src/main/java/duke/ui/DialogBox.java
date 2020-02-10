@@ -9,10 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
@@ -21,10 +25,18 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private Circle clip;
 
+    /**
+     * Renders a dialog box with text and user image.
+     *
+     * @param text Text to be displayed as Label of the box.
+     * @param img Image to be displayed to recognize user.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -34,11 +46,10 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String[] lines = text.split("\r\n|\r|\n");
-
+        this.clip = new Circle(25, 25, 25);
         dialog.setText(text);
-        dialog.setMinHeight(lines.length * 17.0);
         displayPicture.setImage(img);
+        displayPicture.setClip(clip);
     }
 
     /**

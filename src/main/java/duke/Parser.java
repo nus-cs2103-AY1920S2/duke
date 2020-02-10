@@ -1,7 +1,17 @@
 package duke;
 
 // packages imports
-import duke.commands.*;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddTodoCommand;
+import duke.commands.ByeCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExceptionCommand;
+import duke.commands.FindCommand;
+import duke.commands.FindDateCommand;
+import duke.commands.ListCommand;
+import duke.commands.Command;
 import duke.exceptions.DateSearchFormatException;
 import duke.exceptions.EmptySearchException;
 import duke.exceptions.EmptyDescriptionException;
@@ -50,7 +60,7 @@ public class Parser {
     public Command parse(String input) {
         List<String> validatedInput = validateInput(input);
         String action =  validatedInput.remove(0);
-        switch(action) {
+        switch (action) {
         case "list":
             return new ListCommand(taskList);
         case "done":
@@ -74,12 +84,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Validates the input of the user before parsing it as a command.
+     *
+     * @param input User input.
+     * @return Necessary details of the user command.
+     */
     public List<String> validateInput(String input) {
         String action = input.split(" ")[0];
         List<String> data = new ArrayList<>();
         try {
             switch (action) {
             case "list":
+            case "bye":
                 break;
             case "done":
             case "delete":

@@ -5,10 +5,15 @@ import duke.tasks.Todo;
 
 import java.util.List;
 
-public class AddTodoCommand implements Command{
+public class AddTodoCommand implements Command {
     private TaskList taskList;
     private Todo todo;
 
+    /**
+     * Creates an AddTodoCommand that adds a new Todo to the tasklist.
+     * @param taskList List of all the tasks saved by the user.
+     * @param details Description of todo.
+     */
     public AddTodoCommand(TaskList taskList, List<String> details) {
         Todo todo = new Todo(details.get(0));
         this.taskList = taskList;
