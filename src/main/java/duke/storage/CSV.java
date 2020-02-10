@@ -31,7 +31,6 @@ public class CSV implements Comparable<CSV> {
                 System.out.print("" + csv.length() + ":");
                 System.out.println(csv.printString());
             }
-            // "g, \"\"\"r, t\"\",d ,a\", c"
         }
     }
 
