@@ -49,7 +49,7 @@ abstract class Task {
      * Returns if this Task is done.
      * @return the status of the Task.
      */
-    public boolean getStatus() {
+    public boolean getDoneStatus() {
         return isDone;
     }
 
@@ -57,7 +57,7 @@ abstract class Task {
      * Returns if this Task is done, in a unicode format.
      * @return the status of the Task
      */
-    public String getStatusUnicode() {
+    public String getDoneStatusUnicode() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
@@ -93,10 +93,10 @@ abstract class Task {
      */
     public String markDone() {
         if (this.isDone) {
-            return Ui.taskAlreadyDone;
+            return Ui.TASK_ALREADY_DONE;
         }
         this.isDone = true;
-        return Ui.markedTaskDone + this;
+        return Ui.MARKED_AS_DONE + this;
     }
 
     /**
@@ -106,13 +106,13 @@ abstract class Task {
     @Override
     public String toString() {
         if (this.taskType == 'T') {
-            return "[" + taskType + "] " + "[" + getStatusUnicode() + "] " + this.taskName;
+            return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName;
 
         } else if (this.taskType == 'D') {
-            return "[" + taskType + "] " + "[" + getStatusUnicode() + "] " + this.taskName + " (by: " + this.getTaskTime() + ")";
+            return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName + " (by: " + this.getTaskTime() + ")";
 
         } else if (this.taskType == 'E') {
-            return "[" + taskType + "] " + "[" + getStatusUnicode() + "] " + this.taskName + " (at: " + this.getTaskTime() + ")";
+            return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName + " (at: " + this.getTaskTime() + ")";
         } else {
             return "";
         }

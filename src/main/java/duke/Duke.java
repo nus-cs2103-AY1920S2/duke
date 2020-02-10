@@ -29,7 +29,13 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public Duke() {}
+    List<String> log;
+    TaskList tasklist;
+
+    public Duke() {
+        this.log = new ArrayList<String>();
+        this.tasklist = Storage.load();
+    }
 
     public static void main(String[] args) {
         run();
@@ -41,11 +47,11 @@ public class Duke extends Application {
 
         Ui.showLogo();
         TaskList tasklist = Storage.load();
-        System.out.println(Ui.welcomeMessage);
+        System.out.println(Ui.WELCOME_MESSAGE);
 
         boolean didNotExit = true;
         while (didNotExit) {
-            String thisResult = Ui.getNextCommand(scanner, tasklist);
+            String thisResult = Ui.processNextCommand(scanner, tasklist);
             log.add(thisResult);
 
             if (thisResult.equals("exit")) {
@@ -60,13 +66,14 @@ public class Duke extends Application {
             System.out.println("");
         }
 
-        System.out.println(Ui.exitMessage);
+        System.out.println(Ui.EXIT_MESSAGE);
         scanner.close();
     }
 
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
+
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -127,8 +134,6 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
 
-
-
     }
 
 
@@ -152,8 +157,11 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+
+        String commandInput = userInput.getText();
+        Label userText = new Label(commandInput);
+        Label dukeText = new Label(getResponse(commandInput));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -162,11 +170,11 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Processes the user input and returns a result.
+     * @return the result after processing the user input.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return Ui.processNextCommand(input, this.tasklist);
     }
 
 

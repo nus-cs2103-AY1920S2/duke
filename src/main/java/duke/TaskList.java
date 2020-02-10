@@ -24,7 +24,7 @@ public class TaskList {
      */
     public String add(Task task) {
         this.list.add(task);
-        return Ui.newTaskMessage + task + Ui.taskCountMessage(this.list.size());
+        return Ui.ADDED_NEW_TASK + task + Ui.taskCountMessage(this.list.size());
     }
 
     /**
@@ -77,7 +77,7 @@ public class TaskList {
      * @return a String message indicating if the deletion is successful.
      */
     public String deleteTask(int taskID) {
-        String output = Ui.deleteTaskMessage + this.list.get(taskID - 1);
+        String output = Ui.DELETED_TASK + this.list.get(taskID - 1);
         this.list.remove(taskID - 1);
         output = output + Ui.taskCountMessage(this.list.size());
         return output;

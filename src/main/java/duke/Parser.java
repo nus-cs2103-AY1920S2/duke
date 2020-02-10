@@ -73,10 +73,10 @@ public class Parser {
             case "exit":
                 return command[0];
             default:
-                return Ui.commandNotFound;
+                return Ui.COMMAND_NOT_FOUND;
             }
         } else {
-            return Ui.commandNotFound;
+            return Ui.COMMAND_NOT_FOUND;
         }
     }
 
@@ -90,7 +90,7 @@ public class Parser {
         if (command.length > 1) {
             return tasklist.newTodo(false, command[1]);
         } else {
-            return Ui.taskNeedsName;
+            return Ui.TASK_NEEDS_NAME;
         }
     }
 
@@ -105,13 +105,13 @@ public class Parser {
             try {
                 return tasklist.newEvent(false, command[1], command[2]);
             } catch (DateTimeParseException e) {
-                return Ui.wrongDateTimeFormat;
+                return Ui.WRONG_DATE_TIME_FORMAT;
             }
 
         } else if (command.length == 2) {
-            return Ui.taskNeedsDateTime;
+            return Ui.TASK_NEEDS_DATE_TIME;
         } else {
-            return Ui.taskNeedsName;
+            return Ui.TASK_NEEDS_NAME;
         }
     }
 
@@ -126,12 +126,12 @@ public class Parser {
             try {
                 return tasklist.newDeadline(false, command[1], command[2]);
             } catch (DateTimeParseException e) {
-                return Ui.wrongDateTimeFormat;
+                return Ui.WRONG_DATE_TIME_FORMAT;
             }
         } else if (command.length == 2) {
-            return Ui.taskNeedsDateTime;
+            return Ui.TASK_NEEDS_DATE_TIME;
         } else {
-            return Ui.taskNeedsName;
+            return Ui.TASK_NEEDS_NAME;
         }
     }
 
@@ -142,9 +142,9 @@ public class Parser {
      */
     public static String listCommand(TaskList tasklist) {
         if (tasklist.getSize() == 0) {
-            return Ui.noTaskInList;
+            return Ui.NO_TASK_IN_LIST;
         } else {
-            return Ui.displayTaskList + "\n" + tasklist;
+            return Ui.DISPLAY_TASK_LIST + "\n" + tasklist;
         }
     }
 
@@ -159,7 +159,7 @@ public class Parser {
             int taskID = Integer.parseInt(command[1]);
             return tasklist.markDone(taskID);
         } catch (IndexOutOfBoundsException e) {
-            return Ui.noTaskFound;
+            return Ui.NO_TASK_FOUND;
         }
     }
 
@@ -174,7 +174,7 @@ public class Parser {
             int taskID = Integer.parseInt(command[1]);
             return tasklist.deleteTask(taskID);
         } catch (IndexOutOfBoundsException e) {
-            return Ui.noTaskFound;
+            return Ui.NO_TASK_FOUND;
         }
     }
 
@@ -193,9 +193,9 @@ public class Parser {
             }
         }
         if (query.getList().isEmpty()) {
-            return Ui.noMatchingTaskInList;
+            return Ui.NO_MATCHING_TASK_IN_LIST;
         } else {
-            return Ui.displayMatchingTaskList + "\n" + query;
+            return Ui.DISPLAY_MATCHING_TASK_LIST + "\n" + query;
         }
     }
 
@@ -207,7 +207,7 @@ public class Parser {
     public static String saveCommand(TaskList tasklist) {
         try {
             Storage.save(tasklist);
-            return Ui.changesSaved;
+            return Ui.CHANGES_SAVED;
         } catch (Exception e) {
             return "Oops! Unable to write to file due to " + e + "!";
         }

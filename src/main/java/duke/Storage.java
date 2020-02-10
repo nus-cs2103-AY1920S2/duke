@@ -89,7 +89,7 @@ public class Storage {
 
         for (Task thisTask : tasklist.getList()) {
             String taskStr = thisTask.getTaskType() + " ~ "
-                    + (thisTask.getStatus() ? "1" : "0") + " ~ "
+                    + (thisTask.getDoneStatus() ? "1" : "0") + " ~ "
                     + thisTask.getTaskName() + " ~ "
                     + (thisTask.getTaskType() == 'T' ? "" : thisTask.getTaskTime()) + "\n";
             bw.write(taskStr);
