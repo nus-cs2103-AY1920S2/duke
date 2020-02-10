@@ -107,4 +107,10 @@ public class UI {
         }
         System.out.println(horizontalLine);
     }
+
+    public void printDuplicate(Task task) {
+        System.out.println(horizontalLine);
+        System.out.println("The task '" + task.getTaskName() + "' you are adding already exists!");
+        System.out.println(horizontalLine);
+    }
 }
