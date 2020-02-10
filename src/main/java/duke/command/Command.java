@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeStorageFileException;
 import duke.task.TaskList;
 
 import java.util.Optional;
@@ -20,5 +21,13 @@ public abstract class Command {
 
     public boolean isExit() {
         return isExit;
+    }
+
+    protected void updateSaveFile(Storage storage, Ui ui, TaskList tasks) {
+        try {
+            storage.updateSaveFile(tasks);
+        } catch (DukeStorageFileException e) {
+            ui.showExceptionMessage(e);
+        }
     }
 }
