@@ -7,7 +7,9 @@ import duke.task.TaskList;
  * Represents a ExitCommand.
  * Used to execute the exit command.
  */
-public class ExitCommand extends Command {
+public class ExitCommand implements Command {
+    private static final String EXIT_MESSAGE = "Wait! Don't leave me! Please bring me along!";
+
     /**
      * Executes the exit command.
      *
@@ -17,6 +19,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return "Wait! Don't leave me! Please bring me along!";
+        return EXIT_MESSAGE;
     }
 }

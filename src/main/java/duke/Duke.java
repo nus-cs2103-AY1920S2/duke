@@ -17,13 +17,10 @@ import java.nio.file.Paths;
  * Runs the application until the exit command is called.
  */
 public class Duke {
-    /** Storage object to deal with the save file. */
+    private static final String WELCOME_MESSAGE = "Hello! My name is Megumin, user of the finest magic"
+            + " crimson demons possess.\nWhat can I explo- I mean do for you?";
     private Storage storage;
-    /** TaskList object to store the task list. */
     private TaskList tasks;
-    /** Welcome message of the application. */
-    private String welcomeMessage = "Hello! My name is Megumin, user of the finest magic crimson demons possess.\n"
-            + "What can I explo- I mean do for you?";
 
     /**
      * Constructs Duke with the default save directory.
@@ -32,8 +29,6 @@ public class Duke {
         String workingDir = System.getProperty("user.dir");
         Path savePath = Paths.get(workingDir, "data", "duke.txt");
         storage = new Storage(savePath);
-
-        //load the tasks from save file
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (IOException e) {
@@ -49,10 +44,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            //parse command
             Command command = Parser.parseCommand(input);
-
-            //execute command
             return command.execute(tasks, storage);
         } catch (InvalidCommandException e) {
             return e.getMessage();
@@ -65,6 +57,6 @@ public class Duke {
      * @return The welcome message of the program.
      */
     public String getWelcomeMessage() {
-        return welcomeMessage;
+        return WELCOME_MESSAGE;
     }
 }

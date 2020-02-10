@@ -10,6 +10,9 @@ import java.util.List;
  * Contains operations for the task list.
  */
 public class TaskList {
+    private static final String DONE_NO_SUCH_TASK_MESSAGE = "HEY!!! I cannot set a non-existent task to be done.";
+    private static final String DELETE_NO_SUCH_TASK_MESSAGE = "HEY!!! I cannot destroy a non-existent task.";
+
     /** List of tasks. */
     private List<Task> tasks = new ArrayList<>();
 
@@ -39,12 +42,10 @@ public class TaskList {
      */
     public void setAsDone(int index) throws InvalidCommandException {
         if (index > tasks.size() || index <= 0) {
-            throw new InvalidCommandException("HEY!!! I cannot set a "
-                    + "non-existent task to be done.");
+            throw new InvalidCommandException(DONE_NO_SUCH_TASK_MESSAGE);
         }
         assert tasks.size() > 0 : "task list should not be empty";
 
-        //mark selected task to be done
         tasks.get(index - 1).markDone();
     }
 
@@ -56,14 +57,11 @@ public class TaskList {
      * @throws InvalidCommandException if the index given is out of bounds.
      */
     public Task deleteTask(int index) throws InvalidCommandException {
-        //check if index is valid
         if (index > tasks.size() || index <= 0) {
-            throw new InvalidCommandException("HEY!!! I cannot destroy a "
-                    + "non-existent task.");
+            throw new InvalidCommandException(DELETE_NO_SUCH_TASK_MESSAGE);
         }
         assert tasks.size() > 0 : "task list should not be empty";
 
-        //delete the task from the list and return it
         Task taskToDelete = tasks.remove(index - 1);
         return taskToDelete;
     }

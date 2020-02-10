@@ -12,7 +12,11 @@ import java.io.IOException;
  * Represents a EventCommand.
  * Used to execute the event command.
  */
-public class EventCommand extends Command {
+public class EventCommand implements Command {
+    private static final String NO_DATE_ERROR_MESSAGE = "HEY!!! The date of an event cannot be empty.";
+    private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
+            + " (Error when writing to save file).";
+
     /** String array for the command arguments. */
     private String[] args = new String[0];
 
@@ -35,26 +39,20 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            //check if the argument length required is correct
+            //check if arg length is complete for the command to execute
             if (args.length < 2) {
-                throw new InvalidCommandException("HEY!!! The date of an "
-                        + "event cannot be empty.");
+                throw new InvalidCommandException(NO_DATE_ERROR_MESSAGE);
             }
 
-            //add a new event task to the list
             Task newEventTask = new Event(args[0], args[1]);
             tasks.addTask(newEventTask);
-
-            //update save file
             storage.saveTasks(tasks.getList());
-
-            //print success message
             return String.format("Got it. I've added this task:\n  %s\n"
-                    + "Now you have %d tasks in the list.\n", newEventTask,tasks.getSize());
+                    + "Now you have %d tasks in the list.\n", newEventTask, tasks.getSize());
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
+            return SAVE_WRITE_ERROR_MESSAGE;
         }
     }
 }

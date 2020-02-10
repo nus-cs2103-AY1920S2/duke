@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.temporal.DateTimeParser;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -9,9 +11,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     /** Date that the event is happening. */
-    private LocalDate atDate = null;
+    private LocalDate atDate;
     /** Time of the day the event is happening. */
-    private LocalTime atTime = null;
+    private LocalTime atTime;
 
     /**
      * Constructs a new Event task with description and date.
@@ -22,25 +24,8 @@ public class Event extends Task {
      */
     public Event(String description, String atDateTime) {
         super(description, false);
-
-        //translate the date and time to the correct format
-        String[] rawDateTime = atDateTime.split(" ");
-        String[] date = rawDateTime[0].split("/");
-        if (date[0].length() < 2) {
-            date[0] = "0" + date[0];
-        }
-        if (date[1].length() < 2) {
-            date[1] = "0" + date[1];
-        }
-        String formattedDate = date[2] + "-" + date[1] + "-"
-                + date[0];
-        String formattedTime = "" + rawDateTime[1].charAt(0)
-                + rawDateTime[1].charAt(1) + ":" + rawDateTime[1].charAt(2)
-                + rawDateTime[1].charAt(3) + ":00";
-
-        //parse the reformatted date and time
-        this.atDate = LocalDate.parse(formattedDate);
-        this.atTime = LocalTime.parse(formattedTime);
+        this.atDate = LocalDate.parse(DateTimeParser.getParsableDate(atDateTime));
+        this.atTime = LocalTime.parse(DateTimeParser.getParsableTime(atDateTime));
     }
 
     /**
@@ -52,25 +37,8 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, String atDateTime) {
         super(description, isDone);
-
-        //translate the date and time to the correct format
-        String[] rawDateTime = atDateTime.split(" ");
-        String[] date = rawDateTime[0].split("/");
-        if (date[0].length() < 2) {
-            date[0] = "0" + date[0];
-        }
-        if (date[1].length() < 2) {
-            date[1] = "0" + date[1];
-        }
-        String formattedDate = date[2] + "-" + date[1] + "-"
-                + date[0];
-        String formattedTime = "" + rawDateTime[1].charAt(0)
-                + rawDateTime[1].charAt(1) + ":" + rawDateTime[1].charAt(2)
-                + rawDateTime[1].charAt(3) + ":00";
-
-        //parse the reformatted date and time
-        this.atDate = LocalDate.parse(formattedDate);
-        this.atTime = LocalTime.parse(formattedTime);
+        this.atDate = LocalDate.parse(DateTimeParser.getParsableDate(atDateTime));
+        this.atTime = LocalTime.parse(DateTimeParser.getParsableTime(atDateTime));
     }
 
     /**

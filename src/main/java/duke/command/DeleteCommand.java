@@ -11,7 +11,10 @@ import java.io.IOException;
  * Represents a DeleteCommand.
  * Used to execute the delete command.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand implements Command {
+    private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
+            + " (Error when writing to save file).";
+
     /** Index of the task to be deleted. */
     private int index = 0;
 
@@ -34,21 +37,16 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            //delete the desired task
-            Task taskToDelete = tasks.deleteTask(index);
-            assert taskToDelete != null : "There cannot be a null deleted task";
-
-            //update save file
+            Task taskDeleted = tasks.deleteTask(index);
+            assert taskDeleted != null : "There cannot be a null deleted task";
             storage.saveTasks(tasks.getList());
-
-            //print success message
             return String.format("Here I go! My ultimate destructive magic! EXPLOSION!\n"
                     + "I have successfully eradicated this task:\n  %s\n"
-                    + "Now you have %d tasks in the list.\n", taskToDelete, tasks.getSize());
+                    + "Now you have %d tasks in the list.\n", taskDeleted, tasks.getSize());
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
+            return SAVE_WRITE_ERROR_MESSAGE;
         }
     }
 }

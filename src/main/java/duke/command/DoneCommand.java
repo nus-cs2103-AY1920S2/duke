@@ -10,7 +10,10 @@ import java.io.IOException;
  * Represents a DoneCommand.
  * Used to execute the done command.
  */
-public class DoneCommand extends Command {
+public class DoneCommand implements Command {
+    private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
+            + " (Error when writing to save file).";
+
     /** Index of the task to be set as done. */
     private int index = 0;
 
@@ -33,19 +36,14 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            //set the desired task as done
             tasks.setAsDone(index);
-
-            //update save file
             storage.saveTasks(tasks.getList());
-
-            //print success message
             return String.format("Nice! I've marked this task as done:\n"
                     + "  %s\n" + "Hope we get loads of Eris for this!\n", tasks.getTask(index));
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
+            return SAVE_WRITE_ERROR_MESSAGE;
         }
 
     }
