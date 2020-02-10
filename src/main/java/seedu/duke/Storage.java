@@ -47,7 +47,7 @@ public class Storage {
             List<String> lines = tasks
                     .getTasks()
                     .stream()
-                    .map(Task::toStringForSaving)
+                    .map(task -> task.toStringForSaving())
                     .collect(Collectors.toList());
             Files.write(filePath, lines);
         } catch (IOException e) {
