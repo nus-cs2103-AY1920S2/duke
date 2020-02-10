@@ -87,4 +87,6 @@ public class Storage {
         }
         fw.close();
     }
+    
+    // todo: write/read task tags to/from file 
 }

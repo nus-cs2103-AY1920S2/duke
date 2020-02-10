@@ -27,7 +27,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new InvalidInstructionException("Task number given is not an integer");
             }
-        } else if (this.command == Command.TODO) {
+        } else if (this.command == Command.TODO || this.command == Command.TAG) {
             this.parameters = extractDescription(instruction);
         } else if (this.command == Command.DEADLINE || this.command == Command.EVENT) {
             this.parameters = extractDescription(instruction);
@@ -83,6 +83,8 @@ public class Parser {
             return Command.DELETE;
         case "find":
             return Command.FIND;
+        case "tag":
+            return Command.TAG;
         default:
             throw new InvalidInstructionException(
                     String.format("Command \"%s\" is not recognized", command));

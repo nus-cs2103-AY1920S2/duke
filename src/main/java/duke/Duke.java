@@ -134,6 +134,8 @@ public class Duke {
                 return deleteTask(Integer.parseInt(instruction.getParameters()));
             case FIND:
                 return ui.showFound(tasks.findTasks(instruction.getParameters()));
+            case TAG:
+                return addTag(instruction.getParameters());
             default:
                 return "";
             }
@@ -162,5 +164,22 @@ public class Duke {
         tasks.deleteTask(taskNum);
         storage.writeToFile(tasks);
         return ui.showDeleteTask(delTask);
+    }
+    
+    private String addTag(String parameters) throws InvalidInstructionException {
+        // todo: move logic to Parser
+        String[] paramsList = parameters.split(" ");
+        
+        if (paramsList.length < 2) {
+            throw new InvalidInstructionException("Not enough parameters given");
+        }
+        
+        try {
+            int taskNum = Integer.parseInt(paramsList[0]);
+            tasks.getTask(taskNum).addTag(paramsList[1]);
+            return ui.showTagTask(tasks.getTask(taskNum));
+        } catch (NumberFormatException e) {
+            throw new InvalidInstructionException("Task number given is not an integer");
+        }
     }
 }

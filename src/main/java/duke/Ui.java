@@ -131,4 +131,9 @@ public class Ui {
 
         return sb.toString();
     }
+    
+    public String showTagTask(Task task) {
+        return "Added tag to this task:\n"
+                + String.format("\t%s%n", task);
+    }
 }

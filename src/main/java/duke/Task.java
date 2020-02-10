@@ -1,11 +1,14 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Task contains information about a given task, including its description and done status.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<String> tags;
 
     /**
      * Constructs a Task object. Starts out as undone.
@@ -15,6 +18,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -59,5 +63,13 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
+    }
+    
+    protected String getTags() {
+        return " " + String.join(" ", this.tags);
+    }
+    
+    protected void addTag(String tag) {
+        this.tags.add("#" + tag);
     }
 }
