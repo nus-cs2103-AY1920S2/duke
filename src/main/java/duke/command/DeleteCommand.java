@@ -25,8 +25,7 @@ public class DeleteCommand extends Command {
         return false;
     }
     /**
-     * Deletes a task.
-     * If storage file is invalid, an error message is returned.
+     * Deletes a task. If storage file is invalid, an error message is returned.
      * @param tasks The task list to be updated.
      * @param ui The user interface to be to be shown.
      * @param storage The storage file to be updated.

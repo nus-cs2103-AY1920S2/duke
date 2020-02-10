@@ -25,8 +25,8 @@ public class AddCommand extends Command{
         return false;
     }
     /**
-     * Adds a task to the task list, updating the user interface and storage file.
-     * If storage file is invalid, an error message is returned.
+     * Adds a task to the task list, updating the user interface and storage file. If storage file is invalid, an error
+     * message is returned.
      * @param tasksList The task list to be updated.
      * @param ui The user interface to be shown.
      * @param storage The storage file to be updated.

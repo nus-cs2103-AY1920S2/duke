@@ -24,8 +24,7 @@ public class DoneCommand extends Command{
         return false;
     }
     /**
-     * Marks a task as done.
-     * If storage file is invalid, an error message is returned.
+     * Marks a task as done. If storage file is invalid, an error message is returned.
      * @param tasks The task list to be updated.
      * @param ui The user interface to be to be shown.
      * @param storage The storage file to be updated.
