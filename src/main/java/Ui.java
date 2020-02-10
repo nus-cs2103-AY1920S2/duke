@@ -61,7 +61,7 @@ public class Ui {
     }
 
     public String showFound(ArrayList<Task> tasksFound) {
-        String foundMsg = "Here are the tasks in your list:\n";
+        String foundMsg = "Here are the tasks found with keyword in your list:\n";
         for (int i = 0; i < tasksFound.size(); i++) {
             foundMsg += i + 1 + "." + tasksFound.get(i) + "\n";
         }
