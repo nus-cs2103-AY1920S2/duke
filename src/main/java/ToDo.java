@@ -19,14 +19,6 @@ public class ToDo extends Task{
         return "[T]";
     }
 
-    /**
-     * Prints the summary of the task.
-     */
-    @Override
-    public void taskSummary() {
-        System.out.println(getType() + getStatusIcon() + " " + description);
-    }
-
     public String toString() {
         return getType() + getStatusIcon() + " " + description;
     }

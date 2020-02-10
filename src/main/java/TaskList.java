@@ -1,3 +1,6 @@
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -18,11 +21,7 @@ public class TaskList {
     public Task createAndAddTask(String type, String whole) throws DukeException {
         Task task;
         if (parser.numOfParts(whole) == 1) {
-            if (whole.equals("todo") || whole.equals("event") || whole.equals("deadline")) {
-                throw new DukeException("\u2639 OOPS!!! The description of a " + type + " cannot be empty.");
-            } else {
-                throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
+            throw new InvalidCommandException("\u2639 OOPS!!! The description of a " + type + " cannot be empty.");
         }
 
         if (type.equals("todo")) {
@@ -38,9 +37,10 @@ public class TaskList {
             String desc =parser.getDesc(whole);
             LocalDate date = parser.getDate(whole);
             task = new Deadline(desc, date);
+
         } else {
             assert !type.equals("todo") : "type should not be todo";
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(task);
         return task;

@@ -1,3 +1,4 @@
+import duke.exception.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,19 +12,6 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke;
-
-    // EDIT!
-    {
-        try {
-            duke = new Duke();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (DukeException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void start(Stage stage) {
         try {
@@ -31,9 +19,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(new Duke());
             stage.show();
-        } catch (IOException e) {
+        } catch (IOException | DukeException e) {
             e.printStackTrace();
         }
     }

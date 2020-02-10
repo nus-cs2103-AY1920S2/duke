@@ -7,7 +7,8 @@ public class Ui {
     TaskList taskList = new TaskList();
 
     /**
-     * Prints a welcome message.
+     * Generates a welcome message.
+     * @return The welcome message.
      */
     public String welcomeMessage() {
         String logo = " ____        _        \n"
@@ -19,8 +20,9 @@ public class Ui {
     }
 
     /**
-     * Prints a 'delete' message after a task is deleted.
-     * @param task The task to be deleted.
+     * Generates a delete message.
+     * @param task The deleted task.
+     * @return The delete message.
      */
     public String deleteMessage(Task task) {
         return "Noted. I've removed this task:\n" + task + "\nNow you have " + (taskList.numOfTasks() - 1) + " "
@@ -28,24 +30,28 @@ public class Ui {
     }
 
     /**
-     * Prints an 'add' message after a new task is added.
-     * @param task The new task that is added.
+     * Generates the add message.
+     * @param task The newly added task.
+     * @return The add message.
      */
     public String addMessage(Task task) {
         return "Got it. I've added this task:\n" + task + "\nNow you have " + taskList.numOfTasks() + " "
                 + (taskList.numOfTasks() == 1? "task" : "tasks") + " in the list.";
     }
 
+
     /**
-     * Prints a 'done' message when a task is marked done.
+     * Generates a done message.
      * @param task The task that is done.
+     * @return The done message.
      */
     public String doneMessage(Task task) {
         return "Nice! I've marked this task as done: \n" + task;
     }
 
     /**
-     * Prints the list of tasks.
+     * Generates the string for the task list.
+     * @return The string of tasks.
      */
     public String printList() {
         String result;
@@ -66,6 +72,11 @@ public class Ui {
         System.out.println(msg);
     }
 
+    /**
+     * Generates the string for the task array.
+     * @param arr Array of tasks.
+     * @return The string of selected tasks.
+     */
     public String printSelected(ArrayList<Integer> arr) {
         String result;
         if (arr.isEmpty()) {

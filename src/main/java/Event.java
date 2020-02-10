@@ -25,14 +25,6 @@ public class Event extends Task{
         return "[E]";
     }
 
-    /**
-     * Prints the summary of the task.
-     */
-    @Override
-    public void taskSummary() {
-        System.out.println(getType() + getStatusIcon() + " " + description + "(at: "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
-    }
 
     public String toString() {
         return getType() + getStatusIcon() + " " + description + "(at: "

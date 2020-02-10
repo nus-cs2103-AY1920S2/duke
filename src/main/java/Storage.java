@@ -1,3 +1,5 @@
+import duke.exception.DukeException;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -7,14 +9,7 @@ import java.nio.file.Paths;
  */
 public class Storage {
     TaskList taskList = new TaskList();
-    private static File file;
-
-    /**
-     * Constructor for Storage class.
-     */
-    public Storage() {
-        file = new File("./data/duke.txt");
-    }
+    private File file = new File("./data/duke.txt");
 
     /**
      * Loads tasks stored in duke.txt in the hard disk. Creates and add the tasks into the ArrayList of tasks.
@@ -61,5 +56,71 @@ public class Storage {
             }
             bw.close();
         }
+    }
+
+    /**
+     * Saves new tasks by adding a line in duke.txt instead of re-writing everything.
+     * It will allow auto-save.
+     * @param task The newly added task.
+     * @throws IOException Throws IOException.
+     */
+    public void saveNewTask(Task task) throws IOException{
+        BufferedWriter bw = new BufferedWriter(new FileWriter("./data/duke.txt", true));
+        bw.write(task.saveString());
+        bw.newLine();
+        bw.close();
+    }
+
+    /**
+     * Deletes tasks from the disk by index.
+     * @param index The index of the task to be deleted in the task list.
+     */
+    public void deleteTask(int index) throws IOException {
+        String newFileData = "";
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+
+        int counter = 0;
+        String currentLine;
+
+        while((currentLine = reader.readLine()) != null) {
+            if (counter == index) {
+                counter++;
+            } else {
+                counter++;
+                newFileData = newFileData + currentLine + "\n";
+            }
+        }
+        reader.close();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write(newFileData);
+        writer.close();
+    }
+
+    /**
+     * Marks the task in the hard disk as done.
+     * @param index The index of the task to be marked done in the task list.
+     */
+    public void doneTask(int index) throws IOException {
+        String newFileData = "";
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+
+        int counter = 0;
+        String currentLine;
+
+        while((currentLine = reader.readLine()) != null) {
+            if (counter == index) {
+                counter++;
+                newFileData = newFileData + currentLine.substring(0, 2) + "1" + currentLine.substring(3) + "\n";
+            } else {
+                counter++;
+                newFileData = newFileData + currentLine + "\n";
+            }
+        }
+        reader.close();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write(newFileData);
+        writer.close();
     }
 }

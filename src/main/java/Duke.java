@@ -1,3 +1,6 @@
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidTaskIndexException;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -33,13 +36,11 @@ public class Duke {
         String response;
         if (!command.equals("bye")) {
             try {
-                response = handle2(command);
+                response = handle(command);
+            } catch (DukeException e) {
+                response = e.getMessage();
+                System.out.println(response);
             }
-            catch (DukeException ex) {
-                ui.showError(ex.getMessage());
-                response = ex.getMessage();
-            }
-
         } else {
             storage.saveData();
             response = "Bye. Hope to see you again soon!";
@@ -61,17 +62,15 @@ public class Duke {
     /**
      * The main method for Duke.
      * @param args For the main method.
-     * @throws DukeException Throws DukeException.
      * @throws IOException Throws IOException.
      */
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws IOException, DukeException {
         new Duke().run();
     }
 
 
     /**
-     * To run the duke program.
-     * @throws DukeException Throws DukeException.
+     * Runs the duke program.
      * @throws IOException Throws IOException.
      */
     public void run() throws IOException {
@@ -82,90 +81,64 @@ public class Duke {
         String command;
         while (!(command = sc.nextLine()).equals("bye")) {
             try {
-                handle(command);
+                System.out.println(handle(command));
             }
             catch (DukeException ex) {
                 ui.showError(ex.getMessage());
             }
 
         }
-        storage.saveData();
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    /**
-     * Handles the command provided by the user.
-     * @param command The user command.
-     * @throws DukeException Throws DukeException.
-     */
-    public void handle(String command) throws DukeException{
-        if (command.equals("list")) {
-            System.out.println(ui.printList());
-        } else {
-            String type = parser.getType(command);
-            if (type.equals("done") || type.equals("delete")) {
+    public String handle(String command) throws DukeException, IOException {
+        String type = parser.getType(command);
+        String response;
+        switch (type) {
+            case "list" :
+                response = ui.printList();
+                break;
+            case "done" :
+                int taskNum = parser.getTaskIndex(command);
+                if (taskNum > tasks.numOfTasks() || taskNum <= 0) {
+                    throw new InvalidTaskIndexException("\u2639 OOPS!! Not a valid number");
+                } else {
+                    tasks.getTask(taskNum - 1).markAsDone();
+                    response = ui.doneMessage(tasks.getTask(taskNum - 1));
+                    storage.doneTask(taskNum - 1);
+                }
+                break;
+            case "delete" :
                 int taskNo = parser.getTaskIndex(command);
                 if (taskNo > tasks.numOfTasks() || taskNo <= 0) {
-                    throw new DukeException("\u2639 OOPS!! Not a valid number");
+                    throw new InvalidTaskIndexException("\u2639 OOPS!! Not a valid number");
                 } else {
-                    if (type.equals("done")) {
-                        tasks.getTask(taskNo - 1).markAsDone();
-                        System.out.println(ui.doneMessage(tasks.getTask(taskNo - 1)));
-                    } else {
-                        assert type.equals("delete") : "type should be delete";
-                        System.out.println(ui.deleteMessage(tasks.getTask(taskNo - 1)));
-                        tasks.removeTask(taskNo - 1);
-                        Task.totalTasks--;
-                    }
+                    response = ui.deleteMessage(tasks.getTask(taskNo - 1));
+                    tasks.removeTask(taskNo - 1);
+                    Task.totalTasks--;
+                    storage.deleteTask(taskNo - 1);
                 }
-            } else if (type.equals("find")) {
+                break;
+            case "find" :
                 ArrayList<Integer> taskFound = new ArrayList<>();
                 for (int i = 0; i < tasks.numOfTasks(); i++) {
                     if (tasks.getTask(i).description.contains(command.split(" ")[1])) {
                         taskFound.add(i);
                     }
                 }
-                System.out.println(ui.printSelected(taskFound));
-            } else {
+                response = ui.printSelected(taskFound);
+                break;
+            case "todo" :
+            case "event" :
+            case "deadline" :
                 Task task = tasks.createAndAddTask(type, command);
-                System.out.println(ui.addMessage(task));
-            }
+                response = ui.addMessage(task);
+                storage.saveNewTask(task);
+                break;
+            default :
+                // invalid command
+                throw new InvalidCommandException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-    }
-
-    public String handle2(String command) throws DukeException{
-        String reply;
-        if (command.equals("list")) {
-            reply = ui.printList();
-        } else {
-            String type = parser.getType(command);
-            if (type.equals("done") || type.equals("delete")) {
-                int taskNo = parser.getTaskIndex(command);
-                if (taskNo > tasks.numOfTasks() || taskNo <= 0) {
-                    throw new DukeException("\u2639 OOPS!! Not a valid number");
-                } else {
-                    if (type.equals("done")) {
-                        tasks.getTask(taskNo - 1).markAsDone();
-                        reply = ui.doneMessage(tasks.getTask(taskNo - 1));
-                    } else {
-                        reply = ui.deleteMessage(tasks.getTask(taskNo - 1));
-                        tasks.removeTask(taskNo - 1);
-                        Task.totalTasks--;
-                    }
-                }
-            } else if (type.equals("find")) {
-                ArrayList<Integer> taskFound = new ArrayList<>();
-                for (int i = 0; i < tasks.numOfTasks(); i++) {
-                    if (tasks.getTask(i).description.contains(command.split(" ")[1])) {
-                        taskFound.add(i);
-                    }
-                }
-                reply = ui.printSelected(taskFound);
-            } else {
-                Task task = tasks.createAndAddTask(type, command);
-                reply = ui.addMessage(task);
-            }
-        }
-        return reply;
+        return response;
     }
 }
