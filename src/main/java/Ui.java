@@ -30,7 +30,8 @@ public class Ui {
     }
 
     public String printAddingMessage(TaskList tasks, Task task) {
-        return "Got it dude! I've added this task:" + "\n" + task
+        return "Got it dude! I've added this task:" + "\n"
+                + task + "\n"
                 + printTaskListSize(tasks);
     }
 
@@ -39,7 +40,8 @@ public class Ui {
     }
 
     public String printDeletingMessage(TaskList tasks, Task task) {
-        return "Got it dude! I've deleted this task:" + "\n" + task
+        return "Got it dude! I've deleted this task:" + "\n"
+                + task + "\n"
                 + printTaskListSize(tasks);
     }
 
