@@ -1,3 +1,14 @@
+package main;
+
+import exception.DuplicateMarkAelitaException;
+import exception.EmptyInputAelitaException;
+import exception.InvalidArgumentAelitaException;
+import exception.InvalidListItemAelitaException;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -84,7 +95,7 @@ public class TaskList {
     }
 
     /**
-     * Gets the size of the TaskList.
+     * Gets the size of the main.TaskList.
      *
      * @return the size.
      */
@@ -108,7 +119,7 @@ public class TaskList {
             if (task instanceof Deadline && ((Deadline) task).getDate().equals(date)) {
                 tmp.add(task);
 
-            } else if (task instanceof Event && ((Event) task).date.equals(date)) {
+            } else if (task instanceof Event && ((Event) task).getDate().equals(date)) {
                 tmp.add(task);
 
             }
@@ -143,6 +154,22 @@ public class TaskList {
             }
         }
         return tmp;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < taskList.size(); i++) {
+            builder.append("    ");
+            builder.append((i + 1));
+            builder.append(".");
+            builder.append(taskList.get(i));
+            builder.append("\n");
+        }
+
+        return builder.toString();
     }
 
 }

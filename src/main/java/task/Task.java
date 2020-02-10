@@ -1,3 +1,8 @@
+package task;
+
+import exception.DuplicateMarkAelitaException;
+import exception.InvalidArgumentAelitaException;
+
 /**
  * The representation of task in the project.
  */
@@ -17,7 +22,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructs a new instance of Task.
+     * Constructs a new instance of task.Task.
      *
      * @param description the description of the task.
      */
@@ -61,6 +66,11 @@ public class Task {
     public String getDescription() {
 
         return description;
+    }
+
+    public boolean isDone() {
+
+        return isDone;
     }
 
     /**

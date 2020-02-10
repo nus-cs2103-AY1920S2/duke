@@ -1,3 +1,7 @@
+package main;
+
+import exception.EmptyInputAelitaException;
+
 /**
  * Tokenizer to break a command into tokens given a regular expression.
  */

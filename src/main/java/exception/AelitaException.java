@@ -1,10 +1,12 @@
+package exception;
+
 /**
  * The base exception used by the project.
  */
 public class AelitaException extends Exception {
 
     /**
-     * Constructs a new AelitaException with null as message.
+     * Constructs a new exception.AelitaException with null as message.
      */
     public AelitaException() {
 
@@ -12,7 +14,7 @@ public class AelitaException extends Exception {
     }
 
     /**
-     * Constructs a new AelitaException with specified message.
+     * Constructs a new exception.AelitaException with specified message.
      *
      * @param msg the specified message details.
      */

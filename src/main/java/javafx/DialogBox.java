@@ -1,3 +1,7 @@
+package javafx;
+
+import main.Launcher;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -52,11 +56,11 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates a new dialog box for Duke's side with the specified text and image.
+     * Creates a new dialog box for main.Duke's side with the specified text and image.
      *
      * @param text the text of the dialog box.
-     * @param img  the image associated with Duke.
-     * @return a new Duke dialog box with the specified text and image.
+     * @param img  the image associated with main.Duke.
+     * @return a new main.Duke dialog box with the specified text and image.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
 

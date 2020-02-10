@@ -1,3 +1,11 @@
+package javafx;
+
+import main.Duke;
+import main.Response;
+import main.TaskList;
+
+import task.Task;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -48,7 +56,7 @@ public class Ui extends AnchorPane {
 
     /**
      * Obtains the input command from the text field and creates a user dialog box containing the command. Clears the
-     * text field after creating the dialog box. The command is passed to Duke and processed to get the appropriate
+     * text field after creating the dialog box. The command is passed to main.Duke and processed to get the appropriate
      * response, which is used to create another dialog box and appended to the dialog container.
      */
     @FXML
@@ -67,7 +75,7 @@ public class Ui extends AnchorPane {
      */
     public void printGreeting() {
 
-        String greeting = "Hi! I'm Duke.\nHow can I help you?";
+        String greeting = "Hi! I'm main.Duke.\nHow can I help you?";
 
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greeting, dukeImage));
     }
@@ -81,6 +89,7 @@ public class Ui extends AnchorPane {
     private void printResponse(Response response) {
 
         String message = "";
+
         switch (response.getMessage()) {
         case ADD_TASK:
             message = "I've got your back. Adding the new task:\n";
@@ -110,8 +119,13 @@ public class Ui extends AnchorPane {
             break;
 
         case GOODBYE:
-            message = "It's nice talking to you. See you soon! ;)";
-            break;
+            try {
+                Platform.exit();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return;
 
         case IO_ERROR:
             message = "Opps. Something went wrong when saving your tasks.";
@@ -130,14 +144,9 @@ public class Ui extends AnchorPane {
             break;
 
         case LIST:
-            message = "Here's your list:\n";
 
             TaskList list = (TaskList) response.getArgument();
-
-            for (int i = 0; i < list.getSize(); i++) {
-                message += "    " + (i + 1) + "." + list.get(i) + "\n";
-            }
-
+            message = "Here's your list:\n" + list.toString();
             break;
 
         case MISSING_DATE:
@@ -168,6 +177,9 @@ public class Ui extends AnchorPane {
             message = "When does the event end?";
             break;
 
+        case MISSING_FIND_INDEX:
+            message = "You need a keyword to search.";
+            break;
         case NO_TASK:
             message = "You have nothing to do today.";
             break;
@@ -190,13 +202,8 @@ public class Ui extends AnchorPane {
             break;
 
         case TASK_FOUND:
-            message = "These are the tasks you are looking for:\n";
-
             TaskList results = (TaskList) response.getArgument();
-
-            for (int i = 0; i < results.getSize(); i++) {
-                message += "    " + (i + 1) + "." + results.get(i) + "\n";
-            }
+            message = "These are the tasks you are looking for:\n" + results.toString();
             break;
 
         case TASK_NOT_FOUND:
@@ -207,17 +214,6 @@ public class Ui extends AnchorPane {
             //Do nothing
         }
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(message, dukeImage));
-
-        if (response.getMessage().equals(Message.GOODBYE)) {
-
-            try {
-                Platform.exit();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
     }
 
 }

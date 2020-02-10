@@ -1,8 +1,10 @@
+package task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A more detailed implementation of the Task class with specified deadline.
+ * A more detailed implementation of the task.Task class with specified deadline.
  */
 public class Deadline extends Task {
 
@@ -12,7 +14,7 @@ public class Deadline extends Task {
     protected LocalDate date;
 
     /**
-     * Constructs a new instance of Deadline.
+     * Constructs a new instance of task.Deadline.
      *
      * @param description the description of the task.
      * @param date        the deadline of the task.

@@ -1,3 +1,5 @@
+package main;
+
 /**
  * An enumeration of possible messages.
  */

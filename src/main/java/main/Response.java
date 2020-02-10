@@ -1,7 +1,7 @@
-import java.util.ArrayList;
+package main;
 
 /**
- * The type Response.
+ * The type main.Response.
  */
 public class Response {
 
@@ -9,7 +9,7 @@ public class Response {
     private Object argument;
 
     /**
-     * Instantiates a new Response.
+     * Instantiates a new main.Response.
      *
      * @param message  the message
      * @param argument the argument

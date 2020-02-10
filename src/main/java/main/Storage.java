@@ -1,3 +1,12 @@
+package main;
+
+import exception.DuplicateMarkAelitaException;
+import exception.IoAelitaException;
+
+import task.Deadline;
+import task.Event;
+import task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,7 +25,7 @@ public class Storage {
     private Path path;
 
     /**
-     * Constructs a new instance of Storage.
+     * Constructs a new instance of main.Storage.
      *
      * @param path the file path string.
      */
@@ -26,7 +35,7 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from the associated file and populate the supplied TaskList.
+     * Loads tasks from the associated file and populate the supplied main.TaskList.
      *
      * @param taskList the task list.
      */
@@ -72,9 +81,9 @@ public class Storage {
     }
 
     /**
-     * Save tasks on the supplied TaskList into the associated file.
+     * Save tasks on the supplied main.TaskList into the associated file.
      *
-     * @param taskList the supplied TaskList.
+     * @param taskList the supplied main.TaskList.
      * @throws IoAelitaException if FileWriter cannot be created.
      */
     public void saveTasks(TaskList taskList) throws IoAelitaException {
@@ -90,17 +99,18 @@ public class Storage {
             for (int i = 0; i < taskList.getSize(); i++) {
 
                 if (taskList.get(i) instanceof Todo) {
-                    writer.write("T/" + taskList.get(i).isDone + "/" + taskList.get(i).description + "\n");
+                    writer.write("T/" + taskList.get(i).isDone() + "/" + taskList.get(i).getDescription() +
+                            "\n");
 
                 } else if (taskList.get(i) instanceof Deadline) {
-                    writer.write("D/" + taskList.get(i).isDone + "/" + taskList.get(i).description + "/"
+                    writer.write("D/" + taskList.get(i).isDone() + "/" + taskList.get(i).getDescription() + "/"
 
                             + ((Deadline) taskList.get(i)).getDate() + "\n");
 
                 } else if (taskList.get(i) instanceof Event) {
-                    writer.write("E/" + taskList.get(i).isDone + "/" + taskList.get(i).description + "/"
-                            + ((Event) taskList.get(i)).date + "/" + ((Event) taskList.get(i)).startTime
-                            + "/" + ((Event) taskList.get(i)).endTime + "\n");
+                    writer.write("E/" + taskList.get(i).isDone() + "/" + taskList.get(i).getDescription() + "/"
+                            + ((Event) taskList.get(i)).getDate() + "/" + ((Event) taskList.get(i)).getStartTime()
+                            + "/" + ((Event) taskList.get(i)).getEndTime() + "\n");
 
                 }
             }

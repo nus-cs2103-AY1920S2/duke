@@ -1,3 +1,6 @@
+import exception.AelitaException;
+import exception.EmptyInputAelitaException;
+import main.Parser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +11,7 @@ public class ParserTest {
 
     @Test
     void parseTest1() {
+
         String testCase = "";
 
         try {
@@ -20,6 +24,7 @@ public class ParserTest {
 
     @Test
     void parseTest2() {
+
         String testCase = "todo individual project";
         try {
             String[] output = Parser.parse(testCase, " ");
@@ -34,6 +39,7 @@ public class ParserTest {
 
     @Test
     void parseTest3() {
+
         String testCase = "deadline individual project /by 2020-01-01";
         try {
             String[] output = Parser.parse(testCase, "/");
@@ -47,6 +53,7 @@ public class ParserTest {
 
     @Test
     void parseTest4() {
+
         String testCase = "2-4pm";
         try {
             String[] output = Parser.parse(testCase, "-");

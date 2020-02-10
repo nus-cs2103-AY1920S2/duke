@@ -1,10 +1,12 @@
+package task;
+
 /**
- * The simple implementation of Task class.
+ * The simple implementation of task.Task class.
  */
 public class Todo extends Task {
 
     /**
-     * Constructs a new instance of Todo.
+     * Constructs a new instance of task.Todo.
      *
      * @param description the description of the task.
      */
