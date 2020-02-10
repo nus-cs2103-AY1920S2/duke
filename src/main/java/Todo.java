@@ -8,8 +8,8 @@ public class Todo extends Task {
      *
      * @param description Describes the Todo object to be created
      */
-    public Todo (String description) {
-        super (description);
+    public Todo(String description) {
+        super(description);
     }
 
     /**
@@ -19,10 +19,10 @@ public class Todo extends Task {
      */
     @Override
     public String saveFile() {
-        if (this.status.equals ("Done")) {
-            return  "T|1||" + this.description;
+        if (this.status.equals("Done")) {
+            return "T|1||" + this.description;
         } else {
-            return  "T|0||" + this.description;
+            return "T|0||" + this.description;
         }
     }
 

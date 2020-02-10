@@ -1,5 +1,3 @@
-
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -35,16 +33,26 @@ import java.util.Scanner;
  */
 public class Duke extends Application {
 
-    /** Keeps of track of saved files */
-    private Storage storage;
-    /** A list to store tasks */
-    private TaskList tasks;
-    /** In charge of the interface the user sees */
-    private Ui ui;
-    /** Keeps of number of task left undone */
+    /**
+     * Keeps of number of task left undone
+     */
     public static int pendingTask = 0;
-    /** To take in user input */
+    /**
+     * To take in user input
+     */
     public static Scanner sc = new Scanner(System.in);
+    /**
+     * Keeps of track of saved files
+     */
+    private Storage storage;
+    /**
+     * A list to store tasks
+     */
+    private TaskList tasks;
+    /**
+     * In charge of the interface the user sees
+     */
+    private Ui ui;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -75,6 +83,10 @@ public class Duke extends Application {
 
     }
 
+    public static void main(String[] args) throws IOException {
+        new Duke("java/data/duke.txt").run();
+    }
+
     /**
      * Runs the Duke bot's processes
      *
@@ -84,12 +96,12 @@ public class Duke extends Application {
         ui.printOpeningScreen();
         Parser parser = new Parser(tasks);
         String input = "";
-        while ( ! (input = sc.nextLine()).equals ("bye")) {
+        while (!(input = sc.nextLine()).equals("bye")) {
             ui.printBreak();
-            parser.parse (input);
+            parser.parse(input);
             ui.printBreak();
         }
-        storage.saveFiles (tasks);
+        storage.saveFiles(tasks);
         ui.closeScreen();
     }
 
@@ -139,7 +151,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -160,6 +172,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -180,8 +193,8 @@ public class Duke extends Application {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                 DialogBox.getUserDialog(userText, user),
-                 DialogBox.getUserDialog(dukeText, duke)
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getUserDialog(dukeText, duke)
         );
         userInput.clear();
     }
@@ -191,10 +204,10 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return "Duke replies: " + input;
     }
 
-    public static void main(String[] args) throws IOException {
-        new Duke ("java/data/duke.txt").run();
+    public TaskList getTaskList() {
+        return tasks;
     }
 }

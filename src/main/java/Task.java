@@ -4,9 +4,13 @@
  */
 public class Task {
 
-    /** Describes the task*/
+    /**
+     * Describes the task
+     */
     protected String description;
-    /** Whether the task is done or not*/
+    /**
+     * Whether the task is done or not
+     */
     protected String status = "Not Done";
 
     /**
@@ -14,7 +18,7 @@ public class Task {
      *
      * @param description describes the task being created
      */
-    public Task (String description) {
+    public Task(String description) {
         this.description = description;
     }
 
@@ -41,10 +45,10 @@ public class Task {
      * @return a formatted string representing the task object
      */
     public String saveFile() {
-        if (this.status.equals ("Done")) {
-            return  "1|" + this.description;
+        if (this.status.equals("Done")) {
+            return "1|" + this.description;
         } else {
-            return  "0|" + this.description;
+            return "0|" + this.description;
         }
     }
 

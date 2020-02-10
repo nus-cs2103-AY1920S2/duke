@@ -7,23 +7,29 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    /** On what date the event is held on*/
+    /**
+     * On what date the event is held on
+     */
     protected LocalDate date;
-    /** What time the event starts*/
+    /**
+     * What time the event starts
+     */
     protected LocalTime start;
-    /** What time the event ends*/
+    /**
+     * What time the event ends
+     */
     protected LocalTime end;
 
     /**
      * Creates an Event Task object
      *
      * @param description What the event is
-     * @param date What day the event is on
-     * @param start When time the event starts
-     * @param end What time the event ends
+     * @param date        What day the event is on
+     * @param start       When time the event starts
+     * @param end         What time the event ends
      */
-    public Event (String description, LocalDate date, LocalTime start, LocalTime end) {
-        super (description);
+    public Event(String description, LocalDate date, LocalTime start, LocalTime end) {
+        super(description);
         this.date = date;
         this.start = start;
         this.end = end;
@@ -36,11 +42,11 @@ public class Event extends Task {
      */
     @Override
     public String saveFile() {
-        if (this.status.equals ("Done")) {
-            return  "E|1||" + this.description + "|||" + this.date + " "
+        if (this.status.equals("Done")) {
+            return "E|1||" + this.description + "|||" + this.date + " "
                     + this.start + "-" + this.end;
         } else {
-            return  "E|0||" + this.description + "|||" + this.date + " "
+            return "E|0||" + this.description + "|||" + this.date + " "
                     + this.start + "-" + this.end;
         }
     }
@@ -54,9 +60,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: "
-                + this.date.format (DateTimeFormatter.ofPattern ("MMM d yyyy, "))
-                + this.start.format (DateTimeFormatter.ofPattern ("hh:mm a")) + " - "
-                + this.end.format (DateTimeFormatter.ofPattern ("hh:mm a")) + ")";
+                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy, "))
+                + this.start.format(DateTimeFormatter.ofPattern("hh:mm a")) + " - "
+                + this.end.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }
 

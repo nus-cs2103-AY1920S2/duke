@@ -7,9 +7,13 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    /** An list to store the task*/
+    /**
+     * An list to store the task
+     */
     private ArrayList<Task> taskList;
-    /** Number of task in the list*/
+    /**
+     * Number of task in the list
+     */
     private int size = 0;
 
     /**
@@ -17,10 +21,10 @@ public class TaskList {
      *
      * @param taskList List of task
      */
-    public TaskList (ArrayList <Task> taskList) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
-            this.taskList.add (taskList.get(i));
+            this.taskList.add(taskList.get(i));
             this.size++;
         }
     }
@@ -28,15 +32,17 @@ public class TaskList {
     /**
      * Prints out all task in the list
      */
-    public void list () {
+    public String list() {
         //List out task
+        String output = "";
         int num = this.taskList.size();
         for (int i = 0; i < num; i++) {
-            System.out.println ( (i + 1) + ". " + this.taskList.get (i));
+            output += (i + 1) + ". " + this.taskList.get(i) + "\n";
         }
         if (num == 0) {
-            System.out.println ("You have no task!");
+            output += "\n You have no task!";
         }
+        return output;
     }
 
     /**
@@ -44,28 +50,30 @@ public class TaskList {
      *
      * @param taskNum The task that has been done
      */
-    public void done (int taskNum) {
+    public String done(int taskNum) {
+        String output = "";
         try {
             if (taskNum <= this.size) {
                 Task completedTask = this.taskList.get(taskNum - 1);
-                if (completedTask.getStatus().equals ("Done")) {
-                    System.out.println ("You have already completed this task!");
+                if (completedTask.getStatus().equals("Done")) {
+                    output+= "You have already completed this task!";
                 } else {
                     completedTask.markAsDone();
-                    System.out.println ("Nice! I've marked this task as done:\n"
-                            + "[" + completedTask.getStatus() + "] " + completedTask.getDescription());
                     Duke.pendingTask--;
+                    output+= "Nice! I've marked this task as done:\n"
+                            + "[" + completedTask.getStatus() + "] " + completedTask.getDescription();
                 }
                 if (Duke.pendingTask == 0) {
-                    System.out.println ("Yay! You have no more task remaining!");
+                    output+= "\nYay! You have no more task remaining!";
                 } else {
-                    System.out.println ("You have " + Duke.pendingTask + " tasks remaining!");
+                    output += "\nYou have " + Duke.pendingTask + " tasks remaining!";
                 }
+                return output;
             } else {
-                System.out.println ("Sorry, there is no such task!");
+                return "Sorry, there is no such task!";
             }
         } catch (Exception e) {
-            System.out.println ("Sorry, I dont understand your request!");
+            return "Sorry, I dont understand your request!";
         }
     }
 
@@ -74,51 +82,53 @@ public class TaskList {
      *
      * @param taskNum Task to be removed
      */
-    public void delete (int taskNum) {
+    public String delete(int taskNum) {
+        String output = "";
         try {
             if (taskNum <= this.size) {
-                Task deletedTask = this.taskList.get (taskNum - 1);
+                Task deletedTask = this.taskList.get(taskNum - 1);
                 String status = deletedTask.getStatus();
-                if (status.equals ("Not Done")) {
+                if (status.equals("Not Done")) {
                     //Pending task count drops only if deleted task not completed
                     Duke.pendingTask--;
                 }
-                System.out.println ("Noted. I've removed this task:\n" + deletedTask
-                        + "\nNow you have " + Duke.pendingTask + " tasks in the list.");
-                this.taskList.remove (taskNum - 1);
+                output += "Noted. I've removed this task:\n" + deletedTask
+                        + "\nNow you have " + Duke.pendingTask + " tasks in the list.";
+                this.taskList.remove(taskNum - 1);
                 this.size--;
+                return output;
             } else {
-                System.out.println ("Sorry, there is no such task!");
+                return "Sorry, there is no such task!";
             }
         } catch (Exception e) {
-            System.out.println ("Sorry, there is no such task!");
+            return "Sorry, there is no such task!";
         }
     }
 
     /**
      * Adds a new task into the list
      *
-     * @param type Whether it is a todo,event of deadline task
+     * @param type  Whether it is a todo,event of deadline task
      * @param input Describes the task to be added to the list
      */
-    public void addTask (String type, String input) {
-        if (type.equals ("T")) {
+    public String addTask(String type, String input) {
+        if (type.equals("T")) {
             try {
                 String task1 = input.substring(5);
                 if (task1.isEmpty()) {
-                    System.out.println ("OOOPS!! Cannot have empty todo request!!!");
+                    return "OOOPS!! Cannot have empty todo request!!!";
                 } else {
                     Todo todo = new Todo(task1);
                     this.taskList.add(todo);
                     Duke.pendingTask++;
                     this.size++;
-                    System.out.println ("Got it. I've added the following task:\n" +
-                            todo + "\nYou now have " + Duke.pendingTask + " task in the list");
+                    return "Got it. I've added the following task:\n" +
+                            todo + "\nYou now have " + Duke.pendingTask + " task in the list";
                 }
             } catch (Exception e) {
-                System.out.println ("Huh? I do not understand this todo request:/");
+                return "Huh? I do not understand this todo request:/";
             }
-        } else if (type.equals ("D")) {
+        } else if (type.equals("D")) {
             //deadline request format: deadline<space><task></<yyyy-mm-dd>"
             try {
                 int taskIndex = input.indexOf("/");
@@ -128,12 +138,12 @@ public class TaskList {
                 this.taskList.add(deadline);
                 Duke.pendingTask++;
                 this.size++;
-                System.out.println ("Got it. I've added the following task:\n" +
-                        deadline + "\nYou now have " + Duke.pendingTask + " task in the list");
+                return "Got it. I've added the following task:\n" +
+                        deadline + "\nYou now have " + Duke.pendingTask + " task in the list";
             } catch (Exception e) {
-                System.out.println ("Huh? This deadline request does not make sense");
+                return "Huh? This deadline request does not make sense";
             }
-        } else if (type.equals ("E")) {
+        } else if (type.equals("E")) {
             //event request format: event<space><task></><yyyy-mm-dd><T><hh:mm-hh:mm>
             try {
                 int taskIndex = input.indexOf("/");
@@ -146,11 +156,13 @@ public class TaskList {
                 this.taskList.add(event);
                 Duke.pendingTask++;
                 this.size++;
-                System.out.println ("Got it. I've added the following task:\n" +
-                        event + "\nYou now have " + Duke.pendingTask + " task in the list");
+                return "Got it. I've added the following task:\n" +
+                        event + "\nYou now have " + Duke.pendingTask + " task in the list";
             } catch (Exception e) {
-                System.out.println ("What? What event is this??");
+                return "What? What event is this??";
             }
+        } else {
+            return "I do not understand this request:/";
         }
     }
 
@@ -159,19 +171,21 @@ public class TaskList {
      *
      * @param keyWord keyword in task that you are looking for
      */
-    public void find (String keyWord) {
-        System.out.println ("Here are the matching tasks in your list:\n");
+    public String find(String keyWord) {
+        String output = "";
+        output += "Here are the matching tasks in your list:\n";
         int j = 0;
         for (int i = 0; i < this.size; i++) {
             String description = this.taskList.get(i).toString();
-            if (description.contains (keyWord)) {
-                System.out.println((i + 1) + "." + description);
+            if (description.contains(keyWord)) {
+                output+= (i + 1) + "." + description + "\n";
                 j++;
             }
         }
         if (j == 0) {
-            System.out.println ("No task with such keyword:(");
+            output += "No task with such keyword:(";
         }
+        return output;
     }
 
     /**

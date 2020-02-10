@@ -1,8 +1,8 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,7 +23,7 @@ public class Storage {
      *
      * @param filePath Location of saved files
      */
-    public Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -36,8 +36,8 @@ public class Storage {
     public ArrayList<Task> loadFiles() throws IOException {
         ArrayList<Task> lst = new ArrayList<>();
 
-        FileReader in = new FileReader (filePath);
-        BufferedReader br = new BufferedReader (in);
+        FileReader in = new FileReader(filePath);
+        BufferedReader br = new BufferedReader(in);
         try {
             String loadTask = br.readLine();
             while (loadTask != null) {
@@ -98,16 +98,16 @@ public class Storage {
      * @param taskList List of task to be saved
      * @throws IOException when reader reads NULL input
      */
-    public void saveFiles (TaskList taskList) throws IOException {
+    public void saveFiles(TaskList taskList) throws IOException {
         ArrayList<Task> lst = taskList.getList();
-        File file         = new File (filePath);
+        File file = new File(filePath);
         FileWriter fr;
         if (file.exists()) {
-            fr = new FileWriter (file, false);
-            BufferedWriter bw = new BufferedWriter (fr);
+            fr = new FileWriter(file, false);
+            BufferedWriter bw = new BufferedWriter(fr);
             for (int i = 0; i < lst.size(); i++) {
                 Task savedTask = lst.get(i);
-                bw.write (savedTask.saveFile() + "\n");
+                bw.write(savedTask.saveFile() + "\n");
                 bw.close();
                 fr.close();
             }
@@ -115,7 +115,7 @@ public class Storage {
             BufferedWriter bw = new BufferedWriter(new FileWriter("duke.txt"));
             for (int i = 0; i < lst.size(); i++) {
                 Task savedTask = lst.get(i);
-                bw.write (savedTask.saveFile() + "\n");
+                bw.write(savedTask.saveFile() + "\n");
                 bw.close();
             }
         }

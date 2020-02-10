@@ -22,7 +22,7 @@ public class Ui {
      */
     public void printBreak() {
         String line = "____________________________________";
-        System.out.println (line + "\n");
+        System.out.println(line + "\n");
     }
 
     /**
@@ -30,6 +30,6 @@ public class Ui {
      */
     public void closeScreen() {
         String wave = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        System.out.println (wave +"\nCya soon:)\n" + wave);
+        System.out.println(wave + "\nCya soon:)\n" + wave);
     }
 }
