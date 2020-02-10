@@ -9,7 +9,7 @@ import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;  
+import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

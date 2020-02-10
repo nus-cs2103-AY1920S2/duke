@@ -20,7 +20,8 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println("Hello I'm Duke." + "\n" + "What can I do for you?");
+        System.out.println("Hello I'm Duke." + "\n"
+                + "What can I do for you?");
     }
 
     public void showLine() {
