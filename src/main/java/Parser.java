@@ -27,6 +27,9 @@ public class Parser {
 
         switch (command) {
             case "todo": {
+                // extract the task and
+
+
                 String task = input.substring(input.indexOf(' ') + 1);
                 Todo todo = new Todo(task);
 
@@ -84,6 +87,7 @@ public class Parser {
         return "Invalid Command";
 
     }
+
 
 
     /**
