@@ -9,9 +9,9 @@ public class StatsCommand extends Command {
     public String execute() {
         StringBuilder output;
         output = new StringBuilder("Here are your statistics so far for this task list:\n");
-        output.append("Total number of input commands: " + stats.size() + "\n");
+        output.append("Total number of successful input commands: " + stats.size() + "\n\n");
         int i = 1;
-        output.append("All your input commands:\n");
+        output.append("All successful input commands so far:\n");
         for (Command c : stats) {
             output.append("    " + i + ". " + c.toString() + "\n");
             i++;

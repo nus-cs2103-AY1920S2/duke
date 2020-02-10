@@ -3,6 +3,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 public class AddCommand extends Command {
+    Task taskAdded;
 
     public AddCommand(TaskList taskList, String taskDesc) {
         super(taskList, taskDesc);
@@ -52,6 +53,8 @@ public class AddCommand extends Command {
                 out = "Attempting to add invalid task. Operation aborted.";
             } else {
                 list.add(newTask);
+                taskAdded = newTask;
+                stats.add(this);
                 out = "Got it. I've added this task:\n" + newTask + "\n" + "Now you have "
                         + list.size() + " tasks in the list.";
             }
@@ -61,9 +64,14 @@ public class AddCommand extends Command {
             out = "☹ OOPS!!! The description of a task cannot be empty.";
         } finally {
             storage.saveTask(list);
-            stats.add(this);
             statStorage.saveStats(stats);
         }
         return out;
+    }
+
+    public String toString() {
+        // String taskType = taskDesc.split(" ", 2)[0];
+        // String taskName = taskDesc.split(" ", 2)[1];
+        return taskDesc;
     }
 }

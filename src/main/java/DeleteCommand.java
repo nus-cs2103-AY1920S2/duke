@@ -1,4 +1,5 @@
 public class DeleteCommand extends Command {
+    Task taskDeleted;
 
     public DeleteCommand(TaskList taskList, String taskDesc) {
         super(taskList, taskDesc);
@@ -10,6 +11,8 @@ public class DeleteCommand extends Command {
             String taskNum = taskDesc.split(" ", 2)[1];
             Task currTask = list.get(Integer.parseInt(taskNum) - 1);
             list.remove(currTask);
+            taskDeleted = currTask;
+            stats.add(this);
             out = "Noted. I've removed this task:\n" +  currTask + "\nNow you have " + list.size()
                     + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
@@ -18,9 +21,12 @@ public class DeleteCommand extends Command {
             out = "OOPS!!! Delete must take a valid integer in the range of the task list.";
         } finally {
             storage.saveTask(list);
-            stats.add(this);
             statStorage.saveStats(stats);
         }
         return out;
+    }
+
+    public String toString() {
+        return taskDesc;
     }
 }
