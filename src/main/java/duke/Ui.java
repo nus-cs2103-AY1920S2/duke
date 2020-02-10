@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /** Contains interaction with user, meaning printing and reading through the scanner. */
@@ -84,13 +83,7 @@ public class Ui {
     switch (type) {
     case "list":
       result.append("Here are the tasks in your list:\n");
-      for (int i = 1; i <= tasks.getLength(); i++) {
-        StringBuilder str = new StringBuilder();
-        Task task = tasks.get(i - 1);
-        String output =
-                str.append(i).append(". ").append(task.toString()).append("\n").toString();
-        result.append(output);
-      }
+      appendList(result, tasks);
       break;
     case "task":
       result.append("Got it. I've added this task:\n");
@@ -111,20 +104,23 @@ public class Ui {
       result.append("Now you have " + tasks.getLength() + " tasks in the list.\n");
       break;
     case "find":
-      result.append("Here are the matching tasks in your list:");
-      for (int i = 1; i <= tasks.getLength(); i++) {
-        StringBuilder str = new StringBuilder();
-        Task task = tasks.get(i - 1);
-        String output =
-                str.append(i).append(". ").append(task.toString()).append("\n").toString();
-        System.out.println(output);
-      }
+      result.append("Here are the matching tasks in your list:\n");
+      appendList(result, tasks);
       break;
     default:
       result.append(input);
       break;
     }
     return result.toString();
+  }
+
+  public void appendList(StringBuilder result, TaskList tasks) {
+    for (int i = 1; i <= tasks.getLength(); i++) {
+      StringBuilder str = new StringBuilder();
+      Task task = tasks.get(i - 1);
+      String output = str.append(i).append(". ").append(task.toString()).append("\n").toString();
+      result.append(output);
+    }
   }
 
   public String readCommand() {

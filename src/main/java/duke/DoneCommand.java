@@ -1,6 +1,6 @@
 package duke;
 
-/** Command for setting a task as done. */
+/** Command for setting a task as done. Extends abstract class Command as well. */
 public class DoneCommand extends Command {
 
   DoneCommand(String input) {
