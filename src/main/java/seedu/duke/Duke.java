@@ -58,8 +58,6 @@ public class Duke {
 
             } catch (IOException e) {
 
-            } catch (DukeException e) {
-
             }
         }
     }

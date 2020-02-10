@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exception.DukeException;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
@@ -30,26 +31,27 @@ public class DoneCommand extends Command {
      * @param taskList The TaskList object.
      * @param ui The User Interface object.
      * @param storage The hard disk object.
-     * @throws EmptyDescriptionException If the description of a task is empty.
-     * @throws InvalidTaskInputException If an invalid task command is input.
      * @throws IOException If an input or output exception occurred.
-     * @throws TaskIndexOutOfBoundsException If the index of a task being marked as done or being deleted is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws EmptyDescriptionException,
-            InvalidTaskInputException, IOException, TaskIndexOutOfBoundsException {
-        if (inputs.length == 1) {
-            throw new EmptyDescriptionException();
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+        try {
+            if (inputs.length == 1) {
+                throw new EmptyDescriptionException();
+            }
+
+            if (!isNumeric(inputs[1])) {
+                throw new InvalidTaskInputException();
+            }
+            int index = Integer.parseInt(inputs[1]);
+            if (index < 1 || index > taskList.getTasks().size()) {
+                throw new TaskIndexOutOfBoundsException();
+            }
+            taskList.markTaskAsDone(index);
+        } catch (DukeException e) {
+            ui.print(e.toString());
         }
 
-        if (!isNumeric(inputs[1])) {
-            throw new InvalidTaskInputException();
-        }
-        int index = Integer.parseInt(inputs[1]);
-        if (index < 1 || index > taskList.getTasks().size()) {
-            throw new TaskIndexOutOfBoundsException();
-        }
-        taskList.markTaskAsDone(index);
     }
 
     @Override

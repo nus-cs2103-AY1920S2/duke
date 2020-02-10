@@ -3,5 +3,8 @@ D | N | tut | 2020-01-11
 D | Y | toh | 2020-02-02
 E | N | netball | 2020-02-16
 D | N | aa | 2021-01-01
-T | N | agaga
-T | N | sleep
+E | N | bb | 2021-01-01
+T | Y | bro
+T | N | wuhan
+T | Y | agaga
+T | Y | sleep

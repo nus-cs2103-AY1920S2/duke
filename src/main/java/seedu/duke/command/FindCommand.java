@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exception.DukeException;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
@@ -26,15 +27,19 @@ public class FindCommand extends Command {
      * @param taskList The TaskList object.
      * @param ui The User Interface object.
      * @param storage The hard disk object.
-     * @throws EmptyDescriptionException If the description of a task is empty.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws EmptyDescriptionException {
-        if (inputs.length == 1) {
-            throw new EmptyDescriptionException();
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        try {
+            if (inputs.length == 1) {
+                throw new EmptyDescriptionException();
+            }
+            String desc = inputs[1];
+            taskList.findTask(desc);
+        } catch (DukeException e) {
+            ui.print(e.toString());
         }
-        String desc = inputs[1];
-        taskList.findTask(desc);
+
     }
 
     @Override
