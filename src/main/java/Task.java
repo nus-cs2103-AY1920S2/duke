@@ -4,6 +4,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String tag;
 
     /**
      * Task Constructor.
@@ -12,6 +13,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = "";
     }
 
     /**
@@ -29,6 +31,11 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
 
     /**
      * Task's overriden toString method.

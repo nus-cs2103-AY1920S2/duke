@@ -177,7 +177,7 @@ public class Parser {
             saveTasks(store, filepath);
             break;
         case "find":
-            output += ("Here are the matching tasks in your list:");
+            output += ("Here are the matching tasks in your list:\n");
             String toFind = "";
             for (int i = 1; i < check.length; i++) {
                 toFind += check[i];
@@ -187,11 +187,30 @@ public class Parser {
             int counter = 1;
             for (int i = 0; i < store.size(); i++) {
                 Task tempTask = store.get(i);
-                if (tempTask.description.contains(toFind)) {
+                if (tempTask.description.contains(toFind) || tempTask.tag.contains(toFind)) {
                     output += ("" + counter + ". " + tempTask + "\n");
                     counter++;
                 }
             }
+            break;
+        case "tag":
+            assert check.length > 1: "Invalid Expression";
+            if (check.length < 3) {
+                throw new DukeException("OOPS! The description of a tag should be in the form as such: tag 2 #Fun");
+            }
+            int intOfInterestTag;
+            try {
+                intOfInterestTag = Integer.parseInt(check[1]) - 1;
+            } catch (NumberFormatException e) {
+                throw new DukeException("OOPS! Please use tag command in specific format. Eg. Tag 2 #Fun");
+            }
+            if (intOfInterestTag >= store.size() || intOfInterestTag < 0) {
+                throw new DukeException("OOPS! The Integer you used is invalid. Index of Array is out of bounds.");
+            }
+            output += ("Nice! I've added a tag for this task:\n");
+            store.get(Integer.parseInt(check[1]) - 1).setTag(check[2]);
+            output += (store.get(Integer.parseInt(check[1]) - 1));
+            saveTasks(store, filepath);
             break;
         default:
             throw new DukeException("OOPS! I'm sorry but I don't know what that means :-(");
@@ -216,17 +235,17 @@ public class Parser {
                 if (t instanceof Deadline) {
                     Deadline temp = (Deadline) t;
                     letter = "D";
-                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.description + " | " + temp.dL;
+                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.tag + " | " + temp.description + " | " + temp.dL;
                     saveAll += "\n";
                 } else if (t instanceof Event) {
                     Event temp = (Event) t;
                     letter = "E";
-                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.description + " | " + temp.time;
+                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.tag + " | " + temp.description + " | " + temp.time;
                     saveAll += "\n";
                 } else if (t instanceof ToDo) {
                     ToDo temp = (ToDo) t;
                     letter = "T";
-                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.description;
+                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.tag + " | " + temp.description;
                     saveAll += "\n";
                 } else {
                     continue;

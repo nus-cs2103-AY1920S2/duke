@@ -19,6 +19,10 @@ public class Event extends Task {
      * @return String representation of Event
      */
     public String toString() {
-        return ("[E] [" + this.getStatusIcon() + "] " + this.description + " (at: " + this.time + ")");
+        if (tag.equals("")) {
+            return ("[E] [" + this.getStatusIcon() + "] " + this.description + " (at: " + this.time + ")");
+        } else {
+            return ("[E] [" + this.getStatusIcon() + "] " + "[" + this.tag + "] " + this.description + " (at: " + this.time + ") ");
+        }
     }
 }

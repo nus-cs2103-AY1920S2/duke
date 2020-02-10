@@ -36,20 +36,23 @@ public class Storage {
                     newParts[i] = parts[i].trim();
                 }
                 if (newParts[0].equals("T")) {
-                    ToDo temp = new ToDo(newParts[2]);
+                    ToDo temp = new ToDo(newParts[3]);
+                    temp.setTag(newParts[2]);
                     if (newParts[1].equals("\u2713")) {
                         temp.isDone = true;
                     }
                     store.add(temp);
                 } else if (newParts[0].equals("D")) {
-                    LocalDateTime d1 = LocalDateTime.parse(newParts[3]);
-                    Deadline temp = new Deadline(newParts[2],d1);
+                    LocalDateTime d1 = LocalDateTime.parse(newParts[4]);
+                    Deadline temp = new Deadline(newParts[3],d1);
+                    temp.setTag(newParts[2]);
                     if (newParts[1].equals("\u2713")) {
                         temp.isDone = true;
                     }
                     store.add(temp);
                 } else if (newParts[0].equals("E")) {
-                    Event temp = new Event(newParts[2], newParts[3]);
+                    Event temp = new Event(newParts[3], newParts[4]);
+                    temp.setTag(newParts[2]);
                     if (newParts[1].equals("\u2713")) {
                         temp.isDone = true;
                     }

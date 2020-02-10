@@ -23,6 +23,10 @@ public class Deadline extends Task {
      */
     public String toString() {
         String dateTimeFormat = dL.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mma"));
-        return ("[D] [" + this.getStatusIcon() + "] " + this.description + " (by: " + dateTimeFormat + ")");
+        if (tag.equals("")) {
+            return ("[D] [" + this.getStatusIcon() + "] " + this.description + " (by: " + dateTimeFormat + ")");
+        } else {
+            return ("[D] [" + this.getStatusIcon() + "] " + "[" + this.tag + "] " + this.description + " (by: " + dateTimeFormat + ") ");
+        }
     }
 }

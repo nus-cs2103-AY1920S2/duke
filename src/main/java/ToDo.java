@@ -17,6 +17,10 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return ("[T] [" + this.getStatusIcon() + "] " + this.description);
+        if (tag.equals("")) {
+            return ("[T] [" + this.getStatusIcon() + "] " + this.description);
+        } else {
+            return ("[T] [" + this.getStatusIcon() + "] " + " [" + this.tag + "] " + this.description);
+        }
     }
 }
