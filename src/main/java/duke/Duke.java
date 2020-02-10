@@ -26,6 +26,10 @@ public class Duke extends Application {
     private TaskList tasks;
     private Ui ui;
 
+    public Duke() {
+
+    }
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -64,6 +68,6 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke("src/main/java/duke/data/tasks.txt").run();
+        new Duke("data/tasks.txt").run();
     }
 }
