@@ -48,9 +48,10 @@ public class Storage {
             }
         } else {
             try {
-                System.out.println("storage" + System.getProperty("user.dir"));
-                File f1 = new File(System.getProperty("user.dir"), "src/main/java/duke/data/text.txt");
-                f1.createNewFile();
+                //System.out.println("storage" + System.getProperty("user.dir"));
+                //File f1 = new File(System.getProperty("user.dir"), "src/main/java/duke/data/text.txt");
+                //f1.createNewFile();
+                f.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("create new file error");
