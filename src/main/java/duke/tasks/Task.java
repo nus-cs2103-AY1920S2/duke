@@ -1,4 +1,9 @@
-package tasks;
+/**
+ * Task is the parent class of all types of events, contains methods that all events share
+ */
+
+
+package duke.tasks;
 
 public class Task {
     protected String description;

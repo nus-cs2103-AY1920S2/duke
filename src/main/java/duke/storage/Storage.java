@@ -1,11 +1,16 @@
-package storage;
+/**
+ * Storage stores and updates the duke text file
+ * of any changes in the text list
+ */
 
-import tasks.Task;
-import tasks.Events;
-import tasks.Deadline;
-import tasks.ToDos;
-import tasklist.TaskList;
-import exceptions.DukeException;
+package duke.storage;
+
+import duke.tasks.Task;
+import duke.tasks.Events;
+import duke.tasks.Deadline;
+import duke.tasks.ToDos;
+import duke.tasklist.TaskList;
+import duke.exceptions.DukeException;
 
 import java.util.Scanner;
 import java.util.List;
@@ -31,6 +36,10 @@ public class Storage {
         file = new File(filepath);
     }
 
+    /**
+     * load() fetches existing information from the text file and
+     * updates the task list. load() is called when Duke starts.
+     */
     public List<Task> load() throws DukeException, FileNotFoundException {
         List<Task> list = new ArrayList<Task>();
 
@@ -61,6 +70,9 @@ public class Storage {
         return list;
     }
 
+    /**
+     * updateTask() updates the information int the text file when a task is completed
+     */
     public void updateTask(int doneTask, TaskList tasks) throws IOException {
         List<Task> list = tasks.getList();
         FileReader fr = new FileReader(filepath);
@@ -89,6 +101,9 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * deleteTask() updates the information int the text file when a task is deleted
+     */
     public void deleteTask(int deleteTask, TaskList tasks) throws IOException {
         List<Task> list = tasks.getList();
         FileReader fr = new FileReader(filepath);
@@ -116,6 +131,9 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * addTodo() adds the new todo task to the text file
+     */
     public void addTodo(TaskList tasks) throws IOException {
         List<Task> list = tasks.getList();
         Task t = list.get(list.size() - 1);
@@ -125,6 +143,9 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * addDeadline() adds the new deadline task to the text file
+     */
     public void addDeadline(TaskList tasks) throws IOException {
         List<Task> list = tasks.getList();
         Task t = list.get(list.size() - 1);
@@ -134,6 +155,9 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * addEvent() adds the new event task to the text file
+     */
     public void addEvent(TaskList tasks) throws IOException {
         List<Task> list = tasks.getList();
         Task t = list.get(list.size() - 1);

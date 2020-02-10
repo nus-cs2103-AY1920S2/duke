@@ -1,4 +1,9 @@
-package tasks;
+/**
+ * ToDos is a type of task that can be stored in the task list
+ */
+
+
+package duke.tasks;
 
 public class ToDos extends Task {
 

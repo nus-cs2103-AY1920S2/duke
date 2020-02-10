@@ -1,13 +1,18 @@
-//deals with making sense of the user command
+/**
+ * Parser makes sense of the user command and calls
+ * the respective command class
+ */
 
-import commands.Command;
-import commands.AddCommand;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.ExitCommand;
-import commands.ListCommand;
-import commands.NullCommand;
-import exceptions.DukeException;
+package duke.parser;
+
+import duke.commands.Command;
+import duke.commands.AddCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
+import duke.commands.NullCommand;
+import duke.exceptions.DukeException;
 
 public class Parser {
 

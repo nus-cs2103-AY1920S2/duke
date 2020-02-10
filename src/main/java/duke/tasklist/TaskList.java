@@ -1,10 +1,14 @@
-//contains the task list (contains operations to add/delete tasks in the list)
-package tasklist;
+/**
+ * contains the task list, including operations to add/delete tasks in that list
+ */
 
-import tasks.Events;
-import tasks.Deadline;
-import tasks.ToDos;
-import tasks.Task;
+//contains the task list (contains operations to add/delete tasks in the list)
+package duke.tasklist;
+
+import duke.tasks.Events;
+import duke.tasks.Deadline;
+import duke.tasks.ToDos;
+import duke.tasks.Task;
 
 import java.util.List;
 import java.util.ArrayList;

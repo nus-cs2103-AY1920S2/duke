@@ -1,9 +1,13 @@
-package commands;
+/**
+ * NullCommand takes care of all commands and errors
+ */
 
-import exceptions.DukeException;
-import storage.Storage;
-import ui.Ui;
-import tasklist.TaskList;
+package duke.commands;
+
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
 
 public class NullCommand extends Command {
 

@@ -1,4 +1,8 @@
-package tasks;
+/**
+ * Deadline is a type of task that can be stored in the task list
+ */
+
+package duke.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

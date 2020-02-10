@@ -1,12 +1,15 @@
-package ui;
+/**
+ * Ui deals with user inputs and outputs
+ */
 
-import tasks.Task;
-import tasklist.TaskList;
+package duke.ui;
+
+import duke.tasks.Task;
+import duke.tasklist.TaskList;
 
 
 import java.util.Scanner;
 import java.util.List;
-import java.util.ArrayList;
 
 public class Ui {
 

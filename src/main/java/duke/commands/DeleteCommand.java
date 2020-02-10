@@ -1,9 +1,13 @@
-package commands;
+/**
+ * DeleteCommand deletes an event from the task list
+ */
 
-import exceptions.DukeException;
-import storage.Storage;
-import ui.Ui;
-import tasklist.TaskList;
+package duke.commands;
+
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
 
 import java.io.IOException;
 

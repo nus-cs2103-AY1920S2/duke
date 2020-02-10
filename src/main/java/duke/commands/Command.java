@@ -1,10 +1,14 @@
-package commands;
+/**
+ * Abstract class command for all types of command
+ */
+
+package duke.commands;
 
 import java.io.IOException;
-import exceptions.DukeException;
-import storage.Storage;
-import ui.Ui;
-import tasklist.TaskList;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
 
 public abstract class Command {
 

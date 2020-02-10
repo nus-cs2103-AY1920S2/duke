@@ -1,9 +1,13 @@
-package commands;
+/**
+ * DoneCommand updates an event in the task from undone to done
+ */
 
-import exceptions.DukeException;
-import storage.Storage;
-import ui.Ui;
-import tasklist.TaskList;
+package duke.commands;
+
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
 
 import java.io.IOException;
 

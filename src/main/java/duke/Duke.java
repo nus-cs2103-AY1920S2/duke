@@ -1,22 +1,18 @@
-import exceptions.DukeException;
-import commands.Command;
-import storage.Storage;
-import tasklist.TaskList;
-import ui.Ui;
+/**
+ * Duke is the main class of the program
+ */
 
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
+package duke;
 
-import java.io.File;
+import duke.exceptions.DukeException;
+import duke.commands.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;  
+
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.BufferedReader;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Duke {
 
@@ -54,6 +50,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException, FileNotFoundException, IOException {
-        new Duke("../../../data/duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 }

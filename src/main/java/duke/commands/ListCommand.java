@@ -1,10 +1,14 @@
-package commands;
+/**
+ * ListCommand outputs the task list
+ */
 
-import tasks.Task;
-import exceptions.DukeException;
-import storage.Storage;
-import ui.Ui;
-import tasklist.TaskList;
+package duke.commands;
+
+import duke.tasks.Task;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
 
 import java.util.List;
 import java.util.ArrayList;
