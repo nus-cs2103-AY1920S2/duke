@@ -14,6 +14,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
+        assert !(timing.equals("")): "There is no timing provided for this event!";
         return "[E]" + super.toString() + " (at: " + timing + ")";
     }
 }
