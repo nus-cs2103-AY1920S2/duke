@@ -30,10 +30,10 @@ public class DeadlineCommand implements Command {
 
                 try {
                     try {
-                        DateTimeFormatter inputdTFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-                        LocalDateTime outputDT = LocalDateTime.parse(byDeadline[1], inputdTFormat);
-                        DateTimeFormatter outputdTFormat = DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma");
-                        byDeadline[1] = outputDT.format(outputdTFormat);
+                        DateTimeFormatter dtFormatInput = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                        LocalDateTime outputDT = LocalDateTime.parse(byDeadline[1], dtFormatInput);
+                        DateTimeFormatter dtFormatOutput = DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma");
+                        byDeadline[1] = outputDT.format(dtFormatOutput);
                     } catch (DateTimeParseException e) {
                         throw new UnknownDateTimeException();
                     }
