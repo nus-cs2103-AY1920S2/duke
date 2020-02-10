@@ -1,24 +1,18 @@
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import java.io.IOException;
 
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke;
+    private Duke duke = new Duke();
 
-    {
-        try {
-            duke = new Duke();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public Main() throws IOException {}
 
     @Override
     public void start(Stage stage) {

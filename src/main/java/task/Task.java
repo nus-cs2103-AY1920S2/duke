@@ -1,15 +1,16 @@
 package task;
 
 public class Task {
-    private String task;
+
+    private String taskAction;
     private boolean isDone;
 
-    public Task(String task) {
-        this.task = task;
+    public Task(String taskAction) {
+        this.taskAction = taskAction;
         this.isDone = false;
     }
 
-    public void finishTask() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -18,19 +19,19 @@ public class Task {
     }
 
     public String getTask() {
-        return this.task;
+        return this.taskAction;
     }
 
     @Override
     public String toString() {
         if (isDone) {
-            return String.format("[^] %s", this.task);
+            return String.format("[^] %s", this.taskAction);
         } else {
-            return String.format("[x] %s", this.task);
+            return String.format("[x] %s", this.taskAction);
         }
     }
 
-    public String toFormatString() {
+    public String toStringForFileStorage() {
         return "";
     }
 }

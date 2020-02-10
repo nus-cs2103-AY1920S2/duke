@@ -4,22 +4,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private LocalDateTime deadline;
 
-    public Deadline(String task, LocalDateTime deadline) {
-        super(task);
-        this.deadline = deadline;
+    private LocalDateTime deadlineTime;
+
+    public Deadline(String taskAction, LocalDateTime deadlineTime) {
+        super(taskAction);
+        this.deadlineTime = deadlineTime;
     }
 
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(),
-                this.deadline.format(DateTimeFormatter.ofPattern("" + "MMM d yyyy, h:mm a")));
+                this.deadlineTime.format(DateTimeFormatter.ofPattern("" + "MMM d yyyy, h:mm a")));
     }
 
     @Override
-    public String toFormatString() {
-        return super.getStatus() ? String.format("D | 1 | %s | %s", super.getTask(), this.deadline)
-                : String.format("D | 0 | %s | %s", super.getTask(), this.deadline);
+    public String toStringForFileStorage() {
+        return super.getStatus() ? String.format("D | 1 | %s | %s", super.getTask(), this.deadlineTime)
+                : String.format("D | 0 | %s | %s", super.getTask(), this.deadlineTime);
     }
 }

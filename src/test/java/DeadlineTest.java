@@ -14,6 +14,6 @@ public class DeadlineTest {
     @Test
     public void testDeadlinePrint() {
         Deadline deadline = new Deadline("do your work", LocalDateTime.parse("2020-02-02T20:00"));
-        Assertions.assertEquals("D | 0 | do your work | 2020-02-02T20:00", deadline.toFormatString());
+        Assertions.assertEquals("D | 0 | do your work | 2020-02-02T20:00", deadline.toStringForFileStorage());
     }
 }

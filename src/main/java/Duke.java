@@ -1,19 +1,21 @@
 import exception.DukeException;
+import exception.InvalidDateException;
 import parser.Parser;
 import storage.Storage;
-import task.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
 import ui.Ui;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-
+import java.time.DateTimeException;
 
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
 
     /**
      * Initializes Duke with its UI and file and load tasks into storage.
@@ -22,13 +24,14 @@ public class Duke {
      */
     public Duke() throws IOException {
         ui = new Ui();
+        assert this.ui != null : "Ui should be instantiated";
         String filePath = "data/duke.txt";
         storage = new Storage(filePath);
         assert this.storage != null : "storage should be instantiated";
         try {
-            tasks = new TaskList(storage.load());
-            assert tasks.getSize() != 0 : "list of tasks should not be empty";
-        } catch (FileNotFoundException e) {
+            tasks = new TaskList(storage.loadExistingFileTasks());
+            assert this.tasks != null : "tasks should be instantiated";
+        } catch (FileNotFoundException ex) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -42,51 +45,64 @@ public class Duke {
     public void run() throws IOException {
         ui.print();
 
+        outerloop:
         while (ui.hasNextInput()) {
             try {
-                String input = ui.getNextInput();
-                Parser p = new Parser(input);
-                String command = p.getCommand();
-                if (command.equals("bye")) {
-                    ui.exit();
+                String userNextInput = ui.getNextInput();
+                Parser parser = new Parser(userNextInput);
+                String userCommand = parser.getCommand();
+
+                switch (userCommand) {
+                case "bye":
+                    ui.printExit();
+                    break outerloop;
+
+                case "list":
+                    ui.listAllTasks(tasks);
                     break;
-                } else if (command.equals("list")) {
-                    if (tasks.getSize() == 0) {
-                        System.out.println("There is no task in your list. Please try again...");
-                        continue;
-                    }
-                    ui.printTasks(tasks);
-                } else if (command.equals("done")) {
-                    int taskIndex = p.getIndex();
-                    ui.acknowledgeDone(tasks, taskIndex);
-                    assert tasks.getTask(taskIndex).getStatus() == true : "Task should be marked as done.";
-                    storage.save(tasks);
-                } else if (command.equals("deadline")) {
-                    Deadline deadline = new Deadline(p.getTask(), p.getDate());
-                    tasks.add(deadline);
-                    assert tasks.getTask(tasks.getSize() - 1).toString()
-                            .equals(deadline.toString()) : "Added task should be a deadline task.";
-                    ui.acknowledgeDeadline(tasks, deadline);
-                    storage.save(tasks);
-                } else if (command.equals("todo")) {
-                    Todo todo = new Todo(p.getTask());
-                    tasks.add(todo);
+
+                case "done":
+                    ui.acknowledgeDone(tasks, parser.getTaskIndex());
+                    assert tasks.getTask(parser.getTaskIndex()).getStatus() == true
+                            : "Task should be marked as done.";
+                    storage.saveTasksIntoFile(tasks);
+                    break;
+
+                case "todo":
+                    Todo todo = new Todo(parser.getTaskAction());
+                    tasks.addTask(todo);
                     ui.acknowledgeTodo(tasks, todo);
-                    storage.save(tasks);
-                } else if (command.equals("event")) {
-                    Task event = new Event(p.getTask(), p.getDate());
-                    tasks.add(event);
+                    storage.saveTasksIntoFile(tasks);
+                    break;
+
+                case "deadline":
+                    Deadline deadline = new Deadline(parser.getTaskAction(), parser.getTaskDate());
+                    tasks.addTask(deadline);
+                    ui.acknowledgeDeadline(tasks, deadline);
+                    storage.saveTasksIntoFile(tasks);
+                    break;
+
+                case "event":
+                    Task event = new Event(parser.getTaskAction(), parser.getTaskDate());
+                    tasks.addTask(event);
                     ui.acknowledgeEvent(tasks, event);
-                    storage.save(tasks);
-                } else if (command.equals("delete")) {
-                    ui.acknowledgeDelete(tasks, p.getIndex());
-                    storage.save(tasks);
-                } else if (command.equals("find")) {
-                    ui.acknowledgeFound(tasks, p.getTask());
-                } else {
+                    storage.saveTasksIntoFile(tasks);
+                    break;
+
+                case "delete":
+                    ui.acknowledgeDelete(tasks, parser.getTaskIndex());
+                    storage.saveTasksIntoFile(tasks);
+                    break;
+
+                case "find":
+                    ui.acknowledgeFound(tasks, parser.getTaskAction());
+                    break;
+
+                default:
                     ui.printUnknownCommand();
+                    break;
                 }
-            } catch (DukeException ex) {
+            } catch (DukeException | DateTimeException ex) {
                 System.out.println(ex.getMessage());
                 continue;
             }
@@ -94,8 +110,8 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Duke responds in GUI.
+     *
      */
     public String getResponse(String input) {
         return "Duke heard: " + input;
