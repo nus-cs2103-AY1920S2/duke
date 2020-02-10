@@ -1,14 +1,19 @@
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     TaskList taskList;
+    Command command;
 
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;
+        this.command = new Command(taskList);
     }
 
     /**
      * Takes in user String input, parses, and executes command accordingly.
      * @param in User string input
      */
+    /*
     public void getInput(String in) {
         if (in.equals("list")) {
             taskList.printList();
@@ -27,6 +32,7 @@ public class Parser {
             }
         }
     }
+    */
 
     /**
      * Takes in user String input, parses, and executes command accordingly, and returns output string by Duke.
@@ -36,24 +42,24 @@ public class Parser {
     String getOutputString(String input) {
         String in = input.trim();
         String out;
-        if (in.equals("bye")) {
-            out = "Bye. Hope to see you again soon!";
-        } else if (in.equals("list")) {
-            out = taskList.getListString();
-        } else {
-            String taskType = in.split(" ", 2)[0];
-            if (taskType.equals("done")) {
-                out = taskList.getDoneString(in);
-            } else if (taskType.equals("delete")) {
-                out = taskList.getDeleteString(in);
-            } else if (Task.isValidTask(taskType)) {
-                out = taskList.getAddString(in);
-            } else if (in.isEmpty() || in == null) {
-                out = "☹ OOPS!!! Please type something here.";
+            if (in.equals("bye")) {
+                out = this.command.exit();
+            } else if (in.equals("list")) {
+                out = this.command.getListString();
             } else {
-                out = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+                String taskType = in.split(" ", 2)[0];
+                if (taskType.equals("done")) {
+                    out = this.command.done(in);
+                } else if (taskType.equals("delete")) {
+                    out = this.command.delete(in);
+                } else if (Task.isValidTask(taskType)) {
+                    out = this.command.add(in);
+                } else if (in.isEmpty() || in == null) {
+                    out = this.command.emptyInput();
+                } else {
+                    out = this.command.unknownCommand();
+                }
             }
-        }
         return out;
     }
 }
