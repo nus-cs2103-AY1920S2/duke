@@ -8,15 +8,15 @@ public class Ui {
     /**
      * Shows start message.
      */
-    public void showStartMessage() {
-        System.out.println("Hello Sir\nWhat can I do for you today?");
+    public String showStartMessage() {
+        return "Hello Sir\nWhat can I do for you today?";
     }
 
     /**
      * Shows goodbye message.
      */
-    public void showGoodbyeMessage() {
-        System.out.println("Have a nice day sir!");
+    public String showGoodbyeMessage() {
+        return "Have a nice day sir!";
     }
 
     /**
@@ -25,9 +25,8 @@ public class Ui {
      * @param task       the task
      * @param taskNumber the task number
      */
-    public void showTaskDoneMessage(Task task, int taskNumber) {
-        System.out.println("I shall mark task " + taskNumber + " as completed");
-        System.out.println(task.toString());
+    public String showTaskDoneMessage(Task task, int taskNumber) {
+        return "I shall mark task " + taskNumber + " as completed" + "\n" + task.toString();
     }
 
     /**
@@ -35,10 +34,12 @@ public class Ui {
      *
      * @param taskList the task list
      */
-    public void showTaskList(MyList taskList) {
-        System.out.println("Here are the list of task:");
-        taskList.printList();
-        System.out.println("You have " + taskList.getArraySize() + " task");
+    public String showTaskList(MyList taskList) {
+        String result = "";
+        result += "Here are the list of task:" + "\n";
+        result += taskList.printList();
+        result += "You have " + taskList.getArraySize() + " task";
+        return result;
     }
 
     /**
@@ -47,10 +48,12 @@ public class Ui {
      * @param task     the task
      * @param taskList the task list
      */
-    public void showTaskAddedMessage(Task task, MyList taskList) {
-        System.out.println("I have added the following task:");
-        System.out.println(task.toString());
-        System.out.println("You now have " + taskList.getArraySize() + " task");
+    public String showTaskAddedMessage(Task task, MyList taskList) {
+        String result = "";
+        result += "I have added the following task: \n";
+        result += task.toString() + "\n";
+        result += "You now have " + taskList.getArraySize() + " task";
+        return result;
     }
 
     /**
@@ -59,10 +62,10 @@ public class Ui {
      * @param taskList   the task list
      * @param taskNumber the task number
      */
-    public void showTaskDeletedMessage(MyList taskList, int taskNumber) {
+    public String showTaskDeletedMessage(MyList taskList, int taskNumber) {
         Task taskToDelete = taskList.getTask(taskNumber);
         String taskName = taskToDelete.getItem();
-        System.out.println("I shall delete task: " + taskName);
+        return "I shall delete task: " + taskName;
     }
 
     /**
@@ -113,15 +116,15 @@ public class Ui {
     /**
      * Show found results message.
      */
-    public void showFoundResultsMessage() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showFoundResultsMessage() {
+        return "Here are the matching tasks in your list:";
     }
 
     /**
      * Shows message if no task matches the find.
      */
-    public void showNoTaskFoundMessage() {
-        System.out.println("No task found that matches your description");
+    public String showNoTaskFoundMessage() {
+        return "No task found that matches your description";
     }
 
 }

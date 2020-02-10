@@ -10,7 +10,9 @@ public class FindCommand implements Command {
 
 
     @Override
-    public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+
+        String result = "";
 
         String[] split = task.split(" ", 2);
         String taskToFind = split[1];
@@ -26,14 +28,19 @@ public class FindCommand implements Command {
         }
 
         if(matchedTask.isEmpty()) {
-            ui.showNoTaskFoundMessage();
+            result += ui.showNoTaskFoundMessage();
         } else {
-            ui.showFoundResultsMessage();
+            result += ui.showFoundResultsMessage() + "\n";
             for(int i = 0; i < matchedTask.size(); i++) {
-                System.out.println((i+1) + ". " + matchedTask.get(i).toString());
+                if(i != matchedTask.size()-1) {
+                    result += (i+1) + ". " + matchedTask.get(i).toString() + "\n";
+                } else {
+                    result += (i+1) + ". " + matchedTask.get(i).toString();
+                }
             }
         }
 
+        return result;
     }
 
     @Override

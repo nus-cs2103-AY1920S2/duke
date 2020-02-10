@@ -57,10 +57,12 @@ public class MyList {
     /**
      * Prints list.
      */
-    public void printList() {
+    public String printList() {
+        String result = "";
         for(int i=0; i<counter; i++){
-            System.out.println(i+1 + ". " + listArray.get(i));
+            result += i+1 + ". " + listArray.get(i) + "\n";
         }
+        return result;
     }
 
 }

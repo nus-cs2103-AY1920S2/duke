@@ -8,6 +8,20 @@ import java.util.Scanner;
  */
 public class Duke {
 
+    private static Ui ui;
+    private static boolean isExit;
+    private static Parser parser;
+    private static MyList taskList;
+    private static Storage storage;
+
+    public Duke() {
+        taskList = new MyList();
+        storage = new Storage();
+        ui = new Ui();
+        parser = new Parser(ui);
+        isExit = false;
+    }
+
     /**
      * The entry point of application.
      *
@@ -16,12 +30,6 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        MyList taskList = new MyList();
-        Storage storage = new Storage();
-        storage.loadFile(taskList);
-        Ui ui = new Ui();
-        Parser parser = new Parser(ui);
-        boolean isExit = false;
 
         ui.showStartMessage();
 
@@ -47,7 +55,18 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+
+        String result = "";
+
+        try{
+            Command command = parser.parseCommand(input);
+            result += command.execute(input, taskList, ui, storage);
+        } catch(DukeException | IOException e) {
+            result += e.getMessage();
+        }
+
+        return result;
+
     }
 
 }

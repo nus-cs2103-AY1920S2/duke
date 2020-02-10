@@ -8,9 +8,9 @@ import java.io.IOException;
 public class ByeCommand implements Command {
 
     @Override
-    public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         storage.newSave(taskList);
-        ui.showGoodbyeMessage();
+        return ui.showGoodbyeMessage();
     }
 
     @Override
