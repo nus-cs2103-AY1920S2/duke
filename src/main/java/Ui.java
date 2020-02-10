@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+/*
+Helps Duke interact with the user
+ */
+public class Ui {
+    private Scanner sc;
+
+    public Ui() {
+        this.sc = new Scanner(System.in);
+    }
+
+    public void welcomeMessage() {
+        promptUser("Hello! I'm Duke");
+        promptUser("What can I do for you?");
+    }
+
+    public void byeMessage(){
+        promptUser("Bye. Hope to see you again soon!");
+    }
+
+    public void timeErrorMessage() {
+        promptUser("Event and Deadline tasks require a '/' character before specifying time");
+    }
+
+    public String getInput() {
+        return this.sc.nextLine();
+    }
+
+    public static void promptUser(String message) {
+        System.out.println(message);
+    }
+}

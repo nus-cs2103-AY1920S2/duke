@@ -6,10 +6,13 @@ public class ToDo extends Task {
      * Creates a To-Do object with given description.
      * @param description
      */
+    public ToDo(String description) {
+        super(description);
+    }
+
     public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
-
     /**
      * Gives a string representation of the To-do by building upon parent's representation method
      * @return a string representation

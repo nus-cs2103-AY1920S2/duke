@@ -9,7 +9,12 @@ public class Task {
      * Creates a new Task with the given description and sets isDone to false by default
      * @param description
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone){
         this.description = description;
         this.isDone = isDone;
     }

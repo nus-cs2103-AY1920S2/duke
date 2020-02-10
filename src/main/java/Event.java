@@ -12,16 +12,29 @@ public class Event extends Task {
      */
     protected String time;
     protected Optional<LocalDate> dueTime;
+    protected boolean timePresent;
     /**
      * Creates an Event object with given description and time
      * @param description
      * @param time
      */
+    public Event(String description, String time) {
+        super(description);
+        this.time = time;
+        timePresent = false;
+        if(this.time.matches("\\d{4}-\\d{2}-\\d{2}")) { //YYYY-MM-DD
+            this.dueTime = Optional.of(LocalDate.parse(this.time));
+            timePresent = true;
+        }
+    }
+
     public Event(String description, String time, boolean isDone) {
         super(description, isDone);
         this.time = time;
+        timePresent = false;
         if(this.time.matches("\\d{4}-\\d{2}-\\d{2}")) { //YYYY-MM-DD
             this.dueTime = Optional.of(LocalDate.parse(this.time));
+            timePresent = true;
         }
     }
 
@@ -31,7 +44,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        if (this.dueTime.isPresent()) {
+        if (timePresent) {
             return "[E]" + super.toString() + String.format("(at: %s)",
                     this.dueTime.get().format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         } else {

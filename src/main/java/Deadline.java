@@ -12,17 +12,30 @@ public class Deadline extends Task {
      */
     protected String by;
     protected Optional<LocalDate> dueDate;
+    protected boolean dueDatePresent;
 
     /**
      * Creates a deadline object with given description and time to complete (by)
      * @param description
      * @param by
      */
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = by;
+        dueDatePresent = false;
+        if (this.by.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            this.dueDate = Optional.of(LocalDate.parse(this.by));
+            dueDatePresent = true;
+        }
+    }
+
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = by;
+        dueDatePresent = false;
         if (this.by.matches("\\d{4}-\\d{2}-\\d{2}")) {
             this.dueDate = Optional.of(LocalDate.parse(this.by));
+            dueDatePresent = true;
         }
     }
 
@@ -32,7 +45,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if (this.dueDate.isPresent()) {
+        if (dueDatePresent) {
             return "[D]" + super.toString() +  "(by: " +
                     this.dueDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } else {

@@ -1,3 +1,4 @@
-D | 1 | return book  | Sunday
 E | 1 | project meeting  | Mon 2-4pm
-T | 0 | redbook
+T | 1 | redbook
+D | 0 | finish hw  | by Sunday
+E | 0 | project meeting  | at Mon 2-4pm
