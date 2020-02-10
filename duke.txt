@@ -13,6 +13,7 @@ T | N | read book
 T | Y | read book
 E | Y | project meeting | Apr 13 2020 6PM
 T | Y | join sports club
+<<<<<<< HEAD
 T | N | borrow book
 <<<<<<< HEAD
 D | N | return book  | Jun 5 2020 2PM
@@ -25,3 +26,9 @@ E | N | project meeting | Aug 17 2020 10AM
 D | N | do homework | Oct 29 2020 12PM
 T | N | test
 >>>>>>> 408109c... A-Assertions: Use Assertions
+=======
+T | Y | borrow book
+D | N | return book | Jun 5 2020 2PM
+E | N | project meeting | Aug 17 2020 10AM
+D | N | do homework | Oct 29 2020 12PM
+>>>>>>> 27a992b... C-Update: Easily edit items

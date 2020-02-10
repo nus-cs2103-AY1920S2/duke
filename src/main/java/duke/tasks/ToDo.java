@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * ToDos: tasks without any date/time attached to it e.g., visit new theme park.
  */
@@ -35,5 +37,10 @@ public class ToDo extends Task {
     public String fileString() {
         assert this.getDescription() != null : "No description for this todo";
         return "T | " + this.getStatusIcon() + " | " + this.getDescription();
+    }
+
+    @Override
+    public void update(String time, DateTimeFormatter format) {
+        //this method is unused because a todo doesnt have a timing
     }
 }

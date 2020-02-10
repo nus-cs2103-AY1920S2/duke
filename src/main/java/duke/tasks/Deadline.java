@@ -31,6 +31,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Updates the timing.
+     *
+     * @param by the new timing
+     * @param format the format to be used to parse this
+     */
+    public void update(String by, DateTimeFormatter format) {
+        this.by = LocalDateTime.parse(by, format);
+    }
+
+    /**
      * returns output string.
      *
      * @return String to be output to the user

@@ -31,6 +31,16 @@ public class Event extends Task {
     }
 
     /**
+     * Updates the timing.
+     *
+     * @param at the new timing
+     * @param format the format to be used to parse this
+     */
+    public void update(String at, DateTimeFormatter format) {
+        this.at = LocalDateTime.parse(at, format);
+    }
+
+    /**
      * returns output string.
      *
      * @return String to be output to the user

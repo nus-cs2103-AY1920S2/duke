@@ -83,6 +83,10 @@ public class Parser {
             } else if (command.startsWith("find")) {
                 return taskList.find(description[1]);
 
+            } else if (command.startsWith("update")) {
+                return taskList.update(Integer.valueOf(command.split(" ")[1]) - 1,
+                        arr[1].split(" ", 2)[1], PARSER);
+
             } else {
                 throw new DukeException("I'm sorry, but I don't know "
                         + "what that means :-(");

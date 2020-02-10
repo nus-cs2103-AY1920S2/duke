@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.tasks.Task;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -142,5 +143,17 @@ public class TaskList {
                 return "Here are the matching tasks in your list:\n" + output;
             }
         }
+    }
+
+    /**
+     * Updates the timing of a deadline or an event
+     *
+     * @param index the index of the task to update
+     * @return response to "update" command
+     */
+    public String update(int index, String time, DateTimeFormatter format) {
+        Task task = newList.get(index);
+        task.update(time, format);
+        return ("Noted. I've updated this task:\n" + task.toString() + "\n");
     }
 }

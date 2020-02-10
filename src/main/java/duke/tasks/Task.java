@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * The class that all the tasks inherit from.
  */
@@ -69,4 +71,12 @@ public abstract class Task {
         assert description != null : "No description for this task";
         return this.description;
     }
+
+    /**
+     * Updates the timing of a deadline or an event.
+     *
+     * @param time the new timing
+     * @param format the format to be used to parse this
+     */
+    public abstract void update(String time, DateTimeFormatter format);
 }
