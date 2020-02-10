@@ -53,6 +53,7 @@ public class Parser {
             }
             break;
         case "done":
+            assert check.length > 1: "Invalid Expression";
             if (check.length == 1) {
                 throw new DukeException("OOPS! The description of a done cannot be empty.");
             }
@@ -71,6 +72,7 @@ public class Parser {
             saveTasks(store, filepath);
             break;
         case "todo":
+            assert check.length > 1: "Invalid Expression";
             if (check.length == 1) {
                 throw new DukeException("OOPS! The description of a todo cannot be empty.");
             }
@@ -88,6 +90,7 @@ public class Parser {
             saveTasks(store, filepath);
             break;
         case "deadline":
+            assert check.length > 1: "Invalid Expression";
             if (check.length == 1) {
                 throw new DukeException("OOPS! The description of a deadline cannot be empty.");
             }
@@ -102,7 +105,7 @@ public class Parser {
                 taskingD += " ";
             }
             taskingD = taskingD.trim();
-
+          
             String dL = "";
             for (int i = by + 1; i < newCheck.length; i++) {
                 dL += newCheck[i];
@@ -113,7 +116,6 @@ public class Parser {
                 throw new DukeException("OOPS! Please enter deadline in the format yyyy-MM-dd HHmm. Thank you.");
             }
             LocalDateTime d1 = LocalDateTime.parse(dL, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-
             Deadline deadline = new Deadline(taskingD, d1);
             store.add(deadline);
             output += ("Got it. I've added this task:\n");
@@ -122,6 +124,7 @@ public class Parser {
             saveTasks(store, filepath);
             break;
         case "event":
+            assert check.length > 1: "Invalid Expression";
             if (check.length == 1) {
                 throw new DukeException("OOPS! The description of an event cannot be empty.");
             }
@@ -131,13 +134,13 @@ public class Parser {
                 throw new DukeException("OOPS! Please remember to insert an '/at' in the event description.");
             }
 
+
             String taskingE = "";
             for (int i = 0; i < at; i++) {
                 taskingE += newCheck2[i];
                 taskingE += " ";
             }
             taskingE = taskingE.trim();
-
             String time = "";
             for (int i = at + 1; i < newCheck2.length; i++) {
                 time += newCheck2[i];
@@ -152,6 +155,7 @@ public class Parser {
             saveTasks(store, filepath);
             break;
         case "delete":
+            assert check.length > 1: "Invalid Expression";
             if (check.length == 1) {
                 throw new DukeException("OOPS! The description of a delete cannot be empty.");
             }
