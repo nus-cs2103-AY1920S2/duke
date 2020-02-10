@@ -66,7 +66,7 @@ public class Task {
     }
     
     protected String getTags() {
-        return " " + String.join(" ", this.tags);
+        return (this.tags.isEmpty() ? "" : " " + String.join(" ", this.tags));
     }
     
     protected void addTag(String tag) {

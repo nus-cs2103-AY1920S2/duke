@@ -8,7 +8,7 @@ public class TodoTest {
     
     @Test
     void toString_valid_success() {
-        assertEquals("[T][✘] word1 word2", new Todo("word1 word2").toString());
+        assertEquals("[T][\u2718] word1 word2", new Todo("word1 word2").toString());
     }
     
     @Test
