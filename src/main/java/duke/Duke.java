@@ -14,11 +14,18 @@ import duke.ui.Ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Duke {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    public Duke() {}
 
     public Duke(String filePath) throws DukeException, FileNotFoundException {
         ui = new Ui();
@@ -51,5 +58,14 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException, FileNotFoundException, IOException {
         new Duke("data/duke.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
