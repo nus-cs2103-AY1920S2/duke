@@ -56,7 +56,7 @@ public class Parser {
     // TaskList methods
 
     /**
-     * Gives String representing the keywords of a command without the command type.
+     * Gives String representing the command type.
      *
      * @param command String representing all the words typed by the user.
      * @return String representing the keywords of a command without the command type.
@@ -85,7 +85,8 @@ public class Parser {
      * @return whether this is a correct done command.
      */
     public boolean determineIfValidDoneCommand(String[] commandWords, int taskListSize) {
-        return (Integer.parseInt(commandWords[1]) <= taskListSize);
+        int taskNumber = Integer.parseInt(commandWords[1]);
+        return (taskNumber <= taskListSize);
     }
 
 }
