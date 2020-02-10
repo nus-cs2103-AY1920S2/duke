@@ -1,4 +1,4 @@
-import duke.exception.DukeException;
+import exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

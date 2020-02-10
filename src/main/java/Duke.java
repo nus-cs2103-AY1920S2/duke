@@ -1,7 +1,7 @@
-import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
-import duke.exception.InvalidTaskIndexException;
-import duke.tasks.Task;
+import exception.DukeException;
+import exception.InvalidCommandException;
+import exception.InvalidTaskIndexException;
+import tasks.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

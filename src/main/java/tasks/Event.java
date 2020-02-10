@@ -1,4 +1,4 @@
-package duke.tasks;
+package tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +26,7 @@ public class Event extends Task{
 
 
     public String toString() {
-        return getType() + getStatusIcon() + " " + description + "(at: "
+        return getType() + getStatusIcon() + " " + description + " (at: "
                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 

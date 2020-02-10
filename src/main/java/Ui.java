@@ -1,4 +1,4 @@
-import duke.tasks.Task;
+import tasks.Task;
 
 import java.util.ArrayList;
 

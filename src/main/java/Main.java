@@ -1,4 +1,4 @@
-import duke.exception.DukeException;
+import exception.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

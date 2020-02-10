@@ -1,4 +1,4 @@
-package duke.exception;
+package exception;
 
 public class DuplicateTaskException extends DukeException{
     public DuplicateTaskException(String exception) {

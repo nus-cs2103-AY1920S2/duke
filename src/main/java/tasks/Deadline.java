@@ -1,4 +1,4 @@
-package duke.tasks;
+package tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +26,7 @@ public class Deadline extends Task{
 
     public String toString() {
         return getType() + getStatusIcon() + " " + description
-                + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**

@@ -1,4 +1,4 @@
-package duke.tasks;
+package tasks;
 
 /**
  * This class is a type of task.
