@@ -12,6 +12,9 @@ import java.io.IOException;
  * Used to execute the event command.
  */
 public class TodoCommand extends Command {
+    private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
+            + " (Error when writing to save file).";
+
     /** String argument for the command. */
     private String arg = "";
 
@@ -43,9 +46,9 @@ public class TodoCommand extends Command {
 
             //print success message
             return String.format("Got it. I've added this task:\n  %s\n"
-                    + "Now you have %d tasks in the list.\n", newTodoTask,tasks.getSize());
+                    + "Now you have %d tasks in the list.\n", newTodoTask, tasks.getSize());
         } catch (IOException e) {
-            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
+            return SAVE_WRITE_ERROR_MESSAGE;
         }
     }
 }

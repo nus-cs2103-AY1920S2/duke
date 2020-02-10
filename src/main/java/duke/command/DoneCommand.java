@@ -11,6 +11,9 @@ import java.io.IOException;
  * Used to execute the done command.
  */
 public class DoneCommand extends Command {
+    private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
+            + " (Error when writing to save file).";
+
     /** Index of the task to be set as done. */
     private int index = 0;
 
@@ -45,7 +48,7 @@ public class DoneCommand extends Command {
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
+            return SAVE_WRITE_ERROR_MESSAGE;
         }
 
     }

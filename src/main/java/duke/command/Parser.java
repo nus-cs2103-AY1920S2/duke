@@ -7,6 +7,19 @@ import duke.exception.InvalidCommandException;
  * Used to to parse user input into commands.
  */
 public class Parser {
+    private static final String INVALID_DONE_COMMAND_MESSAGE = "HEY!!! I need to know what task"
+            + " you want to mark as done!";
+    private static final String INVALID_DELETE_COMMAND_MESSAGE = "HEY!!! I need to know what task to"
+            + " target my explosion. Perhaps I will just target Beldia's castle...";
+    private static final String INVALID_TODO_COMMAND_MESSAGE = "HEY!!! The description of a todo cannot be empty."
+            + " Maybe I will name it ChunChunMaru for you! Just kidding, please don't hit me!";
+    private static final String INVALID_DEADLINE_COMMAND_MESSAGE = "HEY!!! The description of a deadline cannot"
+            + " be empty. Maybe I will name it Chomusuke for you! Just kidding, please don't hit me!";
+    private static final String INVALID_EVENT_COMMAND_MESSAGE = "HEY!!! The description of an event cannot be empty."
+            + " Maybe I will name it Hyoizaburoo for you! Just kidding, please don't hit me!";
+    private static final String INVALID_FIND_COMMAND_MESSAGE = "HEY!!! Please state what you want to find.";
+    private static final String NO_SUCH_COMMAND_MESSAGE = "HEY!!! I don't know what that means :-(";
+
     /**
      * Parses the user input into the respective command.
      *
@@ -27,48 +40,44 @@ public class Parser {
             return new ListCommand();
         case DONE:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("HEY!!! I need to know what task you want mark as done!");
+                throw new InvalidCommandException(INVALID_DONE_COMMAND_MESSAGE);
             } else {
                 return new DoneCommand(Integer.parseInt(commandLine[1]));
             }
         case DELETE:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("HEY!!! I need to know what task to target my explosion."
-                        + " Perhaps I will just target Beldia's castle...");
+                throw new InvalidCommandException(INVALID_DELETE_COMMAND_MESSAGE);
             } else {
                 return new DeleteCommand(Integer.parseInt(commandLine[1]));
             }
         case TODO:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("HEY!!! The description of a todo cannot be empty."
-                        + " Maybe I will name it ChunChunMaru for you! Just kidding, please don't hit me!");
+                throw new InvalidCommandException(INVALID_TODO_COMMAND_MESSAGE);
             } else {
                 return new TodoCommand(commandLine[1]);
             }
         case DEADLINE:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("HEY!!! The description of a deadline cannot be empty."
-                        + " Maybe I will name it Chomusuke for you! Just kidding, please don't hit me!");
+                throw new InvalidCommandException(INVALID_DEADLINE_COMMAND_MESSAGE);
             } else {
                 String[] deadlineDescriptionDate = commandLine[1].split(" /by ");
                 return new DeadlineCommand(deadlineDescriptionDate);
             }
         case EVENT:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("HEY!!! The description of an event cannot be empty."
-                        + " Maybe I will name it Hyoizaburoo for you! Just kidding, please don't hit me!");
+                throw new InvalidCommandException(INVALID_EVENT_COMMAND_MESSAGE);
             } else {
                 String[] eventDescriptionDate = commandLine[1].split(" /at ");
                 return new EventCommand(eventDescriptionDate);
             }
         case FIND:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException("HEY!!! Please state what you want to find.");
+                throw new InvalidCommandException(INVALID_FIND_COMMAND_MESSAGE);
             } else {
                 return new FindCommand(commandLine[1]);
             }
         default:
-            throw new InvalidCommandException("HEY!!! I don't know what that means :-(");
+            throw new InvalidCommandException(NO_SUCH_COMMAND_MESSAGE);
         }
     }
 }

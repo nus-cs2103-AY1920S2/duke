@@ -8,6 +8,9 @@ import duke.task.TaskList;
  * Used to execute the list command.
  */
 public class ListCommand extends Command {
+    private static final String EMPTY_TASK_LIST_MESSAGE = "I may or may not have exploded all your tasks"
+            + " in your list as it is empty.";
+
     /**
      * Executes the list command.
      *
@@ -20,7 +23,7 @@ public class ListCommand extends Command {
         if (tasks.getSize() > 0) {
             return "Here are the tasks in your list:\n" + tasks;
         } else {
-            return "I may or may not have exploded all your tasks in your list as it is empty.";
+            return EMPTY_TASK_LIST_MESSAGE;
         }
     }
 }

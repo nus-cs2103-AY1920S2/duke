@@ -8,6 +8,8 @@ import duke.task.TaskList;
  * Used to execute the FindCommand.
  */
 public class FindCommand extends Command {
+    private static final String NO_MATCHING_TASKS_MESSAGE = "There are no matching tasks in your list.";
+
     /** String argument for the command. */
     private String arg = "";
 
@@ -32,7 +34,7 @@ public class FindCommand extends Command {
         String relevantTasks = tasks.findTasksBySearchPhrase(arg);
 
         if (relevantTasks.equals("")) {
-            return "There are no matching tasks in your list.";
+            return NO_MATCHING_TASKS_MESSAGE;
         } else {
             return "Here are the matching tasks in your list:\n" + relevantTasks;
         }

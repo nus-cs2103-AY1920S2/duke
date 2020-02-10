@@ -12,6 +12,9 @@ import java.io.IOException;
  * Used to execute the delete command.
  */
 public class DeleteCommand extends Command {
+    private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
+            + " (Error when writing to save file).";
+
     /** Index of the task to be deleted. */
     private int index = 0;
 
@@ -47,7 +50,7 @@ public class DeleteCommand extends Command {
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
+            return SAVE_WRITE_ERROR_MESSAGE;
         }
     }
 }

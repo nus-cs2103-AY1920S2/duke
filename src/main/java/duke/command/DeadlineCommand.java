@@ -13,6 +13,10 @@ import java.io.IOException;
  * Used to execute the deadline command.
  */
 public class DeadlineCommand extends Command {
+    private static final String NO_DATE_ERROR_MESSAGE = "HEY!!! The date of a deadline cannot be empty.";
+    private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
+            + " (Error when writing to save file).";
+
     /** String array for the command arguments. */
     private String[] args = new String[0];
 
@@ -37,8 +41,7 @@ public class DeadlineCommand extends Command {
         try {
             //check if the argument length required is correct
             if (args.length < 2) {
-                throw new InvalidCommandException("HEY!!!"
-                        + " The date of a deadline cannot be empty.");
+                throw new InvalidCommandException(NO_DATE_ERROR_MESSAGE);
             }
 
             //add a new deadline task to the list
@@ -50,11 +53,11 @@ public class DeadlineCommand extends Command {
 
             //print success message
             return String.format("Got it. I've added this task:\n  %s\n"
-                    + "Now you have %d tasks in the list.\n", newDeadlineTask,tasks.getSize());
+                    + "Now you have %d tasks in the list.\n", newDeadlineTask, tasks.getSize());
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {
-            return "Sorry, I could not write to the magic saving item (Error when writing to save file).";
+            return SAVE_WRITE_ERROR_MESSAGE;
         }
     }
 }
