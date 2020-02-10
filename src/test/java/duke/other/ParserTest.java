@@ -10,6 +10,6 @@ class ParserTest {
     @Test
     void stringifyDetailsTest() {
         String[] replyArr = {"event", "CNY event /at 2020/1/30"};
-        assertEquals(" CNY event /at 2020/1/30", Parser.stringifyDetails(replyArr));
+        assertEquals(" CNY event /at 2020/1/30", Parser.stringifyArray(replyArr));
     }
 }

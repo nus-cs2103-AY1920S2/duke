@@ -20,7 +20,7 @@ public class TodoCommand extends Command {
      * @param taskList Overall TaskList of all the Tasks
      * @throws DukeException If details of Todo is invalid(i.e. insufficient arguments)
      */
-    public String execute(TaskList taskList, Ui ui){
+    public String execute(TaskList taskList, Ui ui) {
         String[] replyArr = details.split(" ");
         String replyWoSpace = "";
         for (int i = 1; i < replyArr.length; i++) {
@@ -34,6 +34,4 @@ public class TodoCommand extends Command {
             return Ui.todoInputError();
         }
     }
-
-
 }

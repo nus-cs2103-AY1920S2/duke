@@ -7,7 +7,8 @@ import duke.task.TaskList;
 import java.io.File;
 
 public class ByeCommand extends Command {
-    private Storage storage = new Storage("data" +File.separator + "duke.txt");
+    private Storage storage = new Storage("data" + File.separator + "duke.txt");
+
     public ByeCommand() {
     }
 
