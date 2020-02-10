@@ -1,5 +1,10 @@
 import duke.exception.DukeException;
+import duke.exception.DuplicateTaskException;
 import duke.exception.InvalidCommandException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,8 +29,12 @@ public class TaskList {
             throw new InvalidCommandException("\u2639 OOPS!!! The description of a " + type + " cannot be empty.");
         }
 
+        if (doesTaskExist(type, whole)) {
+            throw new DuplicateTaskException("\u2639 OOPS!!! That task already exists!");
+        }
+
         if (type.equals("todo")) {
-            String desc = whole.substring(5);
+            String desc = parser.getDesc(whole);
             task = new ToDo(desc);
 
         } else if (type.equals("event")) {
@@ -44,6 +53,45 @@ public class TaskList {
         }
         tasks.add(task);
         return task;
+    }
+
+    /**
+     * Checks if the task already exists.
+     * @param type The type of task.
+     * @param whole The whole command provided by the user.
+     * @return True if it exists already and false if it is new.
+     */
+    //ASSERT TYPE IS VALID
+    public boolean doesTaskExist(String type, String whole) {
+        switch (type) {
+            case "todo" :
+                for (Task task : tasks) {
+                    if (task instanceof ToDo && task.getDescription().equals(parser.getDesc(whole))) {
+                        return true;
+                    }
+                }
+                break;
+            case "event" :
+                for (Task task : tasks) {
+                    if (task instanceof Event && task.getDescription().equals(parser.getDesc(whole))
+                            && task.getDate().isEqual(parser.getDate(whole))) {
+                        return true;
+                    }
+                }
+                break;
+            case "deadline" :
+                for (Task task : tasks) {
+                    if (task instanceof Deadline && task.getDescription().equals(parser.getDesc(whole))
+                            && task.getDate().isEqual(parser.getDate(whole))) {
+                        return true;
+                    }
+                }
+                break;
+            default :
+                assert parser.numOfParts(whole) > 1 : "should be a command with > 1 parts";
+                break;
+        }
+        return false;
     }
 
     /**

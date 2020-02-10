@@ -1,6 +1,7 @@
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTaskIndexException;
+import duke.tasks.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -115,14 +116,13 @@ public class Duke {
                 } else {
                     response = ui.deleteMessage(tasks.getTask(taskNo - 1));
                     tasks.removeTask(taskNo - 1);
-                    Task.totalTasks--;
                     storage.deleteTask(taskNo - 1);
                 }
                 break;
             case "find" :
                 ArrayList<Integer> taskFound = new ArrayList<>();
                 for (int i = 0; i < tasks.numOfTasks(); i++) {
-                    if (tasks.getTask(i).description.contains(command.split(" ")[1])) {
+                    if (tasks.getTask(i).getDescription().contains(command.split(" ")[1])) {
                         taskFound.add(i);
                     }
                 }

@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -5,16 +7,13 @@ import java.time.format.DateTimeFormatter;
  * The Event class is a type of task.
  */
 public class Event extends Task{
-    LocalDate date;
-
     /**
      * The constructor for the Event class.
      * @param description The description of the event.
      * @param date The date for the event.
      */
     public Event(String description, LocalDate date) {
-        super(description);
-        this.date = date;
+        super(description, date);
     }
 
     /**

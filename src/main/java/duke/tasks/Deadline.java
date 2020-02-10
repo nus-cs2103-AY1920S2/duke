@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -5,16 +7,13 @@ import java.time.format.DateTimeFormatter;
  * The Deadline class is a type of task.
  */
 public class Deadline extends Task{
-    LocalDate date;
-
     /**
      * The constructor for the Deadline class.
      * @param description The description of the deadline.
      * @param date The date for the deadline.
      */
     public Deadline(String description, LocalDate date) {
-        super(description);
-        this.date = date;
+        super(description, date);
     }
 
     /**

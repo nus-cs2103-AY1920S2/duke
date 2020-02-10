@@ -1,4 +1,6 @@
 D|1|fsdfsd|2020-12-12
 T|1|read book
 D|1|return book|2030-01-05
-T|0|safdasd
+T|0|meh
+E|0|aelfnds|2020-12-12
+D|0|eat|2001-12-12

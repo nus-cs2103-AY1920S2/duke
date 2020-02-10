@@ -1,4 +1,5 @@
 import duke.exception.DukeException;
+import duke.tasks.Task;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -50,7 +51,7 @@ public class Storage {
         } else {
             FileOutputStream fos = new FileOutputStream(file);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-            for (int i = 0; i < Task.totalTasks; i++) {
+            for (int i = 0; i < taskList.numOfTasks(); i++) {
                 bw.write(taskList.getTask(i).saveString());
                 bw.newLine();
             }
