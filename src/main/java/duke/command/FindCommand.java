@@ -5,6 +5,7 @@ import duke.task.TaskList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class FindCommand implements Command {
     /**
@@ -17,15 +18,17 @@ public class FindCommand implements Command {
         StringBuilder sb = new StringBuilder();
         List<String> keywordList = new ArrayList<>();
 
-        for (String suffix : commandSuffix) {
-            if (!suffix.equals("")) {
+        //Converted previous nested if and for loop logic into an adapted Stream
+        Stream.of(commandSuffix)
+            .map(String::new)
+            .filter(i -> !i.equals(""))
+            .forEach(i -> {
                 for (Task task : taskList.getTasks()) {
-                    if (task.getTaskName().toLowerCase().contains(suffix.toLowerCase())) {
+                    if (task.getTaskName().toLowerCase().contains(i.toLowerCase())) {
                         keywordList.add(task.toString());
                     }
                 }
-            }
-        }
+            });
 
         if (keywordList.size() == 0) {
             sb.append("No matching tasks with that keyword found.");
