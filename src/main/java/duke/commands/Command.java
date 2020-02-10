@@ -27,11 +27,12 @@ public class Command {
      * @param storage For storing of tasks into file
      * @throws DukeException If input format is wrong
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showLine();
         if (!isExit()) {
-            ui.print("Your entry is not recognized. Please try again.");
+            return "Your entry is not recognized. Please try again.";
         }
+        return "Bye! See you again";
     }
 
     /**

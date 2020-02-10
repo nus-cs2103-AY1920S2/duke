@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      * @throws DukeException If input format is wrong. Not used here
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.printTaskList(ui);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.printTaskList(ui);
     }
 }

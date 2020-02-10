@@ -24,9 +24,8 @@ public class AddCommand extends Command {
      * @throws DukeException If input format is wrong
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = null;
-        //System.out.println("execute add command");
         if (command.contains("todo")) {
             // add Todo task
             t = createTodo(command);
@@ -41,10 +40,20 @@ public class AddCommand extends Command {
         if (t != null) {
             tasks.addTask(t);
             storage.saveTask(t);
+
+            StringBuilder output = new StringBuilder();
+            output.append("This task has been added successfully:\n"
+                    + t.toString() + "\n"
+                    + "Now you have " + tasks.size() + "tasks in the list");
+            /*
             ui.showLine();
             ui.print("This task has been added successfully:");
             ui.print(t.toString());
             ui.print("Now you have " + tasks.size() + " tasks in the list");
+            */
+            return output.toString();
+        } else {
+            return "There was a problem creating your task.";
         }
     }
 

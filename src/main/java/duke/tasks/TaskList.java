@@ -48,16 +48,23 @@ public class TaskList {
      * Prints to console the existing list of tasks
      * @param ui User interface to reply user
      */
-    public void printTaskList(Ui ui) {
+    public String printTaskList(Ui ui) {
+        StringBuilder output = new StringBuilder();
         ui.showLine();
         if (size() == 0) {
-            ui.print("Your list of tasks is currently empty.");
+            output.append("Your list of tasks is currently empty.\n");
+            //ui.print("Your list of tasks is currently empty.");
         } else {
-            ui.print("This is your list of tasks:");
+            //ui.print("This is your list of tasks:");
+            output.append("This is your list of tasks:\n");
+            int taskIdx = 1;
             for (Task t : taskList) {
-                ui.print(t.toString());
+                output.append(taskIdx + ". ");
+                output.append(t.toString());
+                taskIdx++;
             }
         }
+        return output.toString();
     }
 
     /**
@@ -67,15 +74,16 @@ public class TaskList {
      * @param taskNumber Index of task to mark as completed
      * @throws DukeException If given index does not exist
      */
-    public void completeTask(Ui ui, Storage storage, int taskNumber) throws DukeException {
+    public String completeTask(Ui ui, Storage storage, int taskNumber) throws DukeException {
         if (taskNumber > taskList.size() || taskNumber < 1) {
             throw new DukeException("This task number does not exist.");
         }
         Task t = taskList.get(taskNumber - 1);
-        ui.print("This task is marked as completed:");
-        ui.print(t.toString());
+        //ui.print("This task is marked as completed:");
+        //ui.print(t.toString());
         t.markAsDone();
         storage.updateTasks(taskList);
+        return t.toString();
     }
 
     /**
@@ -85,15 +93,17 @@ public class TaskList {
      * @param taskNumber Index of task to be deleted
      * @throws DukeException If given index does not exist
      */
-    public void deleteTask(Ui ui, Storage storage, int taskNumber) throws DukeException {
+    public String deleteTask(Ui ui, Storage storage, int taskNumber) throws DukeException {
         if (taskNumber > taskList.size() || taskNumber < 1) {
             throw new DukeException("This task number does not exist.");
         }
         Task t = taskList.get(taskNumber - 1);
         taskList.remove(taskNumber - 1);
-        ui.print("This task has been deleted:");
-        ui.print(t.toString());
+        //ui.print("This task has been deleted:");
+        //ui.print(t.toString());
         storage.updateTasks(taskList);
+
+        return t.toString();
     }
 
     /**

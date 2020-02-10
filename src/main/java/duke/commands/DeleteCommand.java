@@ -19,13 +19,14 @@ public class DeleteCommand extends Command {
      * @throws DukeException If input format is wrong
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showLine();
         if (command.equals("delete")) {
             throw new DukeException("Please enter a task number for deletion.");
         }
 
         int taskNumber = Integer.parseInt(command.split(" ")[1]);
-        tasks.deleteTask(ui, storage, taskNumber);
+        String deleted = tasks.deleteTask(ui, storage, taskNumber);
+        return "This task has been deleted: \n" + deleted;
     }
 }
