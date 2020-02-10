@@ -3,7 +3,7 @@ package seedu.duke.task;
 /**
  * Represents a Task object.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -50,4 +50,6 @@ public abstract class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
     }
+
+    public abstract int compareTo(Task task);
 }

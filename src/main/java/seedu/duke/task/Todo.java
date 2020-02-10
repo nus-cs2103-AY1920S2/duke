@@ -17,4 +17,10 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public int compareTo(Task task) {
+            return toString().compareTo(task.toString());
+//        }
+    }
 }

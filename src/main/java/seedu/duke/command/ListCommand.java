@@ -4,6 +4,8 @@ import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
 
+import java.util.Collections;
+
 /**
  * Represents a command to display the list of tasks.
  */
@@ -28,6 +30,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        Collections.sort(taskList.getTasks());
         taskList.printList();
     }
 

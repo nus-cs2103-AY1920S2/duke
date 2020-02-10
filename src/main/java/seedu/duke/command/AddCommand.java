@@ -1,13 +1,10 @@
 package seedu.duke.command;
 
+import seedu.duke.exception.*;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
 import seedu.duke.enums.TaskTypes;
-import seedu.duke.exception.EmptyDescriptionException;
-import seedu.duke.exception.InvalidCommandException;
-import seedu.duke.exception.InvalidDateException;
-import seedu.duke.exception.InvalidTaskInputException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -55,7 +52,6 @@ public class AddCommand extends Command {
             throw new EmptyDescriptionException();
         }
         String desc = inputs[1];
-        String[] descs = desc.split(" /by |\\|");
         Task task = null;
 
         switch (taskType) {
@@ -63,12 +59,13 @@ public class AddCommand extends Command {
             task = new Todo(desc);
             break;
         case DEADLINE:
-            if (descs.length == 1) { // invalid Deadline input format
+            String[] deadlineDescs = desc.split(" /by |\\|");
+            if (deadlineDescs.length == 1) { // invalid Deadline input format
                 throw new InvalidTaskInputException();
             }
 
-            String deadlineDesc = descs[0].trim();
-            String deadlineDate = descs[1].trim();
+            String deadlineDesc = deadlineDescs[0].trim();
+            String deadlineDate = deadlineDescs[1].trim();
             LocalDate formattedDeadlineDate = null;
             if (isValidDate(deadlineDate)) {
                 formattedDeadlineDate = LocalDate.parse(deadlineDate);
@@ -78,11 +75,12 @@ public class AddCommand extends Command {
             task = new Deadline(deadlineDesc, formattedDeadlineDate);
             break;
         case EVENT:
-            if (descs.length == 1) { // invalid Event input format
+            String[] eventDescs = desc.split(" /at |\\|");
+            if (eventDescs.length == 1) { // invalid Event input format
                 throw new InvalidTaskInputException();
             }
-            String eventDesc = descs[0].trim();
-            String eventDate = descs[1].trim();
+            String eventDesc = eventDescs[0].trim();
+            String eventDate = eventDescs[1].trim();
             LocalDate formattedEventDate = null;
             if (isValidDate(eventDate)) {
                 formattedEventDate = LocalDate.parse(eventDate);
@@ -92,12 +90,12 @@ public class AddCommand extends Command {
             task = new Event(eventDesc, formattedEventDate);
             break;
         default:
-            System.out.println("invalid");
             throw new InvalidCommandException();
         }
 
         taskList.addTask(task);
         storage.addToStorage(task);
+        storage.sortStorage();
         ui.printAddToList();
         ui.print(task.toString());
         ui.printNumTask(taskList.getTasks());

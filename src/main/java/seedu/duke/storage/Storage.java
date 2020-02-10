@@ -2,22 +2,14 @@ package seedu.duke.storage;
 
 import seedu.duke.exception.InvalidDateException;
 import seedu.duke.exception.InvalidTaskInputException;
-import seedu.duke.task.Deadline;
-import seedu.duke.task.Event;
-import seedu.duke.task.Task;
-import seedu.duke.task.Todo;
+import seedu.duke.task.*;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -65,7 +57,32 @@ public class Storage {
                 throw new InvalidTaskInputException();
             }
         }
+
+        Collections.sort(tasks);
+        deleteAllInStorage();
+        addAllToStorage(tasks);
         return tasks;
+    }
+
+    public void sortStorage() throws InvalidTaskInputException, InvalidDateException, IOException {
+        List<Task> tasksInStorage = new ArrayList<>();
+        tasksInStorage = load();
+        Collections.sort(tasksInStorage);
+        deleteAllInStorage();
+        addAllToStorage(tasksInStorage);
+    }
+
+    public void deleteAllInStorage() throws IOException {
+        String data = "";
+        FileOutputStream fileOutputStr = new FileOutputStream(path);
+        fileOutputStr.write(data.getBytes());
+        fileOutputStr.close();
+    }
+
+    public void addAllToStorage(List<Task> sortedTasks) throws IOException {
+        for (Task task : sortedTasks) {
+            addToStorage(task);
+        }
     }
 
     /**
@@ -73,9 +90,8 @@ public class Storage {
      *
      * @param desc The details of the todo task.
      * @param doneStatus An indicator which shows whether a todo task has been completed or not.
-     * @throws IOException If an input or output exception occurred.
      */
-    private void addTodo(String desc, String doneStatus) throws IOException {
+    private void addTodo(String desc, String doneStatus) {
         Task todo = new Todo(desc);
         if (doneStatus.equalsIgnoreCase("Y")) {
             todo.markAsDone();
@@ -179,15 +195,20 @@ public class Storage {
 
         if (task instanceof Deadline) {
             data += "D | " + task.getStatusIcon() + " | " + task.getDescription()
-                + " | " + ((Deadline) task).getDateBy();
+                + " | " + ((Deadline) task).getDate();
         } else if (task instanceof Event) {
             data += "E | " + task.getStatusIcon() + " | " + task.getDescription()
-                + " | " + ((Event) task).getDateAt();
+                + " | " + ((Event) task).getDate();
         } else if (task instanceof Todo) {
             data += "T | " + task.getStatusIcon() + " | " + task.getDescription();
         }
 
-        bw.write("\n" + data);
+        if (file.length() == 0) {
+            bw.write(data);
+        } else {
+            bw.write("\n" + data);
+        }
+
         bw.close();
         fw.close();
     }

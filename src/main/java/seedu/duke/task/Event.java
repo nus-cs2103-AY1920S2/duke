@@ -26,7 +26,28 @@ public class Event extends Task {
         return "[E]" + super.toString() + formattedEventDate;
     }
 
-    public LocalDate getDateAt() {
+    public LocalDate getDate() {
         return eventDate;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof Deadline) {
+            int cmp = getDate().compareTo(((Deadline) task).getDate());
+            if (cmp == 0) {
+                return toString().compareTo(task.toString());
+            } else {
+                return cmp;
+            }
+        } else if (task instanceof Event) {
+            int cmp = getDate().compareTo(((Event) task).getDate());
+            if (cmp == 0) {
+                return toString().compareTo(task.toString());
+            } else {
+                return cmp;
+            }
+        } else {
+            return toString().compareTo(task.toString());
+        }
     }
 }

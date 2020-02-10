@@ -5,6 +5,7 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,6 +34,7 @@ public class TaskList {
 
     public void addTask(Task task) {
         tasks.add(task);
+        Collections.sort(tasks);
     }
 
     public void printList() {
