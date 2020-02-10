@@ -1,8 +1,6 @@
 package duke;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,9 +28,19 @@ public class Storage {
         writer.println(t.getFormatForSave());
       }
       writer.close();
-    } catch (FileNotFoundException e) {
+      assert countLines() == tasks.getLength() : "Number of tasks does not tally";
+    } catch (IOException e) {
       throw new DukeException("file", "");
     }
+  }
+
+  public int countLines() throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(filePath));
+    int lines = 0;
+    while (reader.readLine() != null) lines++;
+    reader.close();
+    System.out.println(lines);
+    return lines;
   }
 
   public ArrayList<Task> loadData() throws DukeException {
@@ -64,18 +72,21 @@ public class Storage {
         Deadline d = new Deadline(input);
         if (doneStatus.equals("1")) {
           d.setDone();
+          assert d.isDone : "deadline did not set done";
         }
         return d;
       case "event":
         Event e = new Event(input);
         if (doneStatus.equals("1")) {
           e.setDone();
+          assert e.isDone : "event did not set done";
         }
         return e;
       case "todo":
         Todo td = new Todo(input);
         if (doneStatus.equals("1")) {
           td.setDone();
+          assert td.isDone : "todo did not set done";
         }
         return td;
       default:
