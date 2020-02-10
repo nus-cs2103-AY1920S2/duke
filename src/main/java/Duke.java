@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,7 +24,6 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -36,19 +36,18 @@ public class Duke extends Application {
         parser = new DukeParser(this.tasks);
     }
 
-    public void run() {
+/*    public void run() {
         DukeUI.showWelcomeMessage();
         this.tasks = parser.parseCommand();
         storage.saveTasks(tasks);
-    }
+    }*/
 
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
+/*    private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
         return textToAdd;
-    }
+    }*/
 
     @Override
     public void start(Stage stage) {
@@ -62,7 +61,7 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -75,11 +74,11 @@ public class Duke extends Application {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(535.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(535.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(535, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -89,7 +88,7 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(500.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -100,6 +99,11 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(DukeUI.showWelcomeMessage()), new ImageView(duke)),
+                DialogBox.getDukeDialog(new Label(parser.parseCommand("list")), new ImageView(duke))
+        );
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -125,6 +129,10 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+        if (userInput.getText().equalsIgnoreCase("bye")) {
+            storage.saveTasks(tasks);
+            Platform.exit();
+        }
         userInput.clear();
     }
 
@@ -133,6 +141,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return parser.parseCommand(input);
     }
 }

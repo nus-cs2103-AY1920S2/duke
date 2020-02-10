@@ -10,10 +10,8 @@ public class DukeParser {
         this.tasks = tasks;
     }
 
-    public TaskList parseCommand() {
+    public String parseCommand(String command) {
 
-        while(true) {
-            String command = scanner.nextLine();
             String[] command_broken = command.split(" ",2);
 
             String action = command_broken[0];
@@ -21,45 +19,49 @@ public class DukeParser {
             try {
 
                 if (action.equalsIgnoreCase("bye")) {
-                    DukeUI.showByeMsg();
-                    break;
+                    return DukeUI.showByeMsg();
 
                 } else if (action.equalsIgnoreCase("list")) {
-                    tasks.printTasks();
+                    return tasks.printTasks();
 
                 } else if (action.equalsIgnoreCase("done")) {
-                    DukeUI.showDoneMsg();
+
                     String context = command_broken[1];
                     int taskNo = Integer.parseInt(context);
                     tasks.markDone(taskNo);
+                    return DukeUI.showDoneMsg();
 
                 } else if (action.equalsIgnoreCase("delete")) {
-                    DukeUI.showDeleteMsg();
+
                     String context = command_broken[1];
                     int taskNo = Integer.parseInt(context);
                     tasks.removeTask(taskNo);
+                    return DukeUI.showDeleteMsg();
 
                 } else if (action.equalsIgnoreCase(("deadline"))) {
-                    DukeUI.showCreationMsg();
+
                     String context = command_broken[1];
                     String[] context_broken = context.split(" /by ", 2);
                     tasks.addInput(new Deadlines(context_broken[0], false ,context_broken[1]));
+                    return DukeUI.showCreationMsg();
 
                 } else if (action.equalsIgnoreCase(("todo"))) {
-                    DukeUI.showCreationMsg();
+
                     if (command_broken.length == 1) {
                         throw new DukeException("THE DESCRIPTION OF TODO CANNOT BE EMPTY");
                     }
                     tasks.addInput(new ToDos(command_broken[1], false));
+                    return DukeUI.showCreationMsg();
 
                 } else if (action.equalsIgnoreCase(("event"))) {
-                    DukeUI.showCreationMsg();
+
                     String context = command_broken[1];
                     String[] context_broken = context.split(" /at ", 2);
                     tasks.addInput(new Events(context_broken[0], false, context_broken[1]));
+                    return DukeUI.showCreationMsg();
 
                 } else if (action.equalsIgnoreCase("find")) {
-                    DukeUI.showFindMsg();
+
                     int count = 1;
                     for (Task t: tasks.getAllTasks()) {
                         if (t.containsSubstring(command_broken[1])) {
@@ -67,15 +69,15 @@ public class DukeParser {
                             count++;
                         }
                     }
+                    return DukeUI.showFindMsg();
 
                 } else {
-                    throw new DukeException("UNABLE TO COMPREHEND");
+                    return "UNABLE TO COMPREHEND";
                 }
 
             } catch (DukeException exception) {
                 System.out.println(exception.getMessage());
             }
-        }
-        return this.tasks;
+        return "";
     }
 }

@@ -14,13 +14,15 @@ public class TaskList {
         DukeUI.showCurrentListSize(allTasks.size());
     }
 
-    public void printTasks() {
+    public String printTasks() {
         int count = 1;
-        System.out.println("HERE IS YOUR LIST");
+        StringBuilder sb = new StringBuilder();
+        sb.append("HERE IS YOUR LIST\n");
         for (Task s : allTasks) {
-            System.out.println(count + ". " + s);
+            sb.append( count+ ". " + s + "\n");
             count++;
         }
+        return sb.toString();
     }
 
     public Task getTask(int n) {

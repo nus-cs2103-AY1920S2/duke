@@ -37,7 +37,7 @@ public class Task {
 
     //returns "O" if done, "X" if not
     public String getStatusIcon() {
-        return (isDone ? "O" : "X");
+        return (isDone ? "X" : "O");
     }
 
     public String getDescription() {
