@@ -24,78 +24,107 @@ public class Parser {
         String[] userInputSplit = userInput.trim().split("\\s+", 2);
         this.command = this.parseCommand(userInputSplit[0]);
         if (this.command == Command.ADD_DEADLINE) {
-            if (userInputSplit.length == 1) {
-                throw new DukeException("Sorry! Please provide the description and due date.");
-            } else if (!userInputSplit[1].contains("/by")) {
-                throw new DukeException("Sorry! Make sure to use the '/by' keyword.");
-            }
-            String[] instructionSplit = userInputSplit[1].split("/by", 2);
-            if (instructionSplit[0].equals("")) {
-                throw new DukeException("Sorry! Description of a Deadline must not be empty.");
-            } else if (instructionSplit[1].equals("")) {
-                throw new DukeException("Sorry! Please provide a due date.");
-            }
-            this.description = instructionSplit[0].trim();
-            try {
-                this.date = LocalDate.parse(instructionSplit[1].trim());
-            } catch (DateTimeParseException ex) {
-                throw new DukeException("Sorry! Make sure date is in YYYY-MM-DD format (eg. 2020-02-20)");
-            }
+            this.addDeadlineHandler(userInputSplit);
         } else if (this.command == Command.ADD_EVENT) {
-            if (userInputSplit.length == 1) {
-                throw new DukeException("Sorry! Please provide the description and due date.");
-            } else if (!userInputSplit[1].contains("/at")) {
-                throw new DukeException("Sorry! Make sure to use the '/at' keyword.");
-            }
-            String[] instructionSplit = userInputSplit[1].split("/at", 2);
-            if (instructionSplit[0].equals("")) {
-                throw new DukeException("Sorry! Description of an Event must not be empty.");
-            } else if (instructionSplit[1].equals("")) {
-                throw new DukeException("Sorry! Please provide a date range.");
-            }
-            this.description = instructionSplit[0].trim();
-            try {
-                this.date = LocalDate.parse(instructionSplit[1].trim());
-            } catch (DateTimeParseException ex) {
-                throw new DukeException("Sorry! Make sure date is in YYYY-MM-DD format (eg. 2020-02-20)");
-            }
+            this.addEventHandler(userInputSplit);
         } else if (this.command == Command.ADD_TODO) {
-            if (userInputSplit.length == 1) {
-                throw new DukeException("Sorry! Description of a Todo must not be empty.");
-            }
-            this.description = userInputSplit[1];
+            this.addTodoHandler(userInputSplit);
         } else if (this.command == Command.MARK_TASK_AS_DONE) {
-            if (userInputSplit.length == 1) {
-                throw new DukeException("Sorry! Please input a task number.");
-            }
-            try {
-                this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
-            } catch (NumberFormatException ex) {
-                throw new DukeException("Sorry! Please enter a valid number.");
-            }
+            this.markTaskAsDoneHandler(userInputSplit);
         } else if (this.command == Command.DELETE_TASK) {
-            if (userInputSplit.length == 1) {
-                throw new DukeException("Sorry! Please input a task number.");
-            }
-            try {
-                this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
-            } catch (NumberFormatException ex) {
-                throw new DukeException("Sorry! Please enter a valid number.");
-            }
+            this.deleteTaskHandler(userInputSplit);
         } else if (this.command == Command.NOT_FOUND) {
-            throw new DukeException("Sorry! I don't know what you mean!");
+            this.commandNotFoundHandler(userInputSplit);
         } else if (this.command == Command.FIND_TASKS) {
-            if (userInputSplit.length == 1) {
-                throw new DukeException("Sorry! Please provide something to find.");
-            }
-            this.description = userInputSplit[1];
+            this.findTasksHandler(userInputSplit);
         }
+    }
+
+    private void addDeadlineHandler(String[] userInputSplit) throws DukeException {
+        if (userInputSplit.length == 1) {
+            throw new DukeException("Sorry! Please provide the description and due date.");
+        } else if (!userInputSplit[1].contains("/by")) {
+            throw new DukeException("Sorry! Make sure to use the '/by' keyword.");
+        }
+        String[] instructionSplit = userInputSplit[1].split("/by", 2);
+        if (instructionSplit[0].equals("")) {
+            throw new DukeException("Sorry! Description of a Deadline must not be empty.");
+        } else if (instructionSplit[1].equals("")) {
+            throw new DukeException("Sorry! Please provide a due date.");
+        }
+        this.description = instructionSplit[0].trim();
+        try {
+            this.date = LocalDate.parse(instructionSplit[1].trim());
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("Sorry! Make sure date is in YYYY-MM-DD format (eg. 2020-02-20)");
+        }
+    }
+
+    private void addEventHandler(String[] userInputSplit) throws DukeException {
+        if (userInputSplit.length == 1) {
+            throw new DukeException("Sorry! Please provide the description and due date.");
+        } else if (!userInputSplit[1].contains("/at")) {
+            throw new DukeException("Sorry! Make sure to use the '/at' keyword.");
+        }
+        String[] instructionSplit = userInputSplit[1].split("/at", 2);
+        if (instructionSplit[0].equals("")) {
+            throw new DukeException("Sorry! Description of an Event must not be empty.");
+        } else if (instructionSplit[1].equals("")) {
+            throw new DukeException("Sorry! Please provide a date range.");
+        }
+        this.description = instructionSplit[0].trim();
+        try {
+            this.date = LocalDate.parse(instructionSplit[1].trim());
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("Sorry! Make sure date is in YYYY-MM-DD format (eg. 2020-02-20)");
+        }
+    }
+
+    private void addTodoHandler(String[] userInputSplit) throws DukeException {
+        if (userInputSplit.length == 1) {
+            throw new DukeException("Sorry! Description of a Todo must not be empty.");
+        }
+        this.description = userInputSplit[1];
+    }
+
+    private void markTaskAsDoneHandler(String[] userInputSplit) throws DukeException {
+        if (userInputSplit.length == 1) {
+            throw new DukeException("Sorry! Please input a task number.");
+        }
+        try {
+            this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
+        } catch (NumberFormatException ex) {
+            throw new DukeException("Sorry! Please enter a valid number.");
+        }
+    }
+
+    private void deleteTaskHandler(String[] userInputSplit) throws DukeException {
+        if (userInputSplit.length == 1) {
+            throw new DukeException("Sorry! Please input a task number.");
+        }
+        try {
+            this.taskIndex = Integer.parseInt(userInputSplit[1]) - 1;
+        } catch (NumberFormatException ex) {
+            throw new DukeException("Sorry! Please enter a valid number.");
+        }
+    }
+
+    private void commandNotFoundHandler(String[] userInputSplit) throws DukeException {
+        throw new DukeException("Sorry! I don't know what you mean!");
+    }
+
+    private void findTasksHandler(String[] userInputSplit) throws DukeException {
+        if (userInputSplit.length == 1) {
+            throw new DukeException("Sorry! Please provide something to find.");
+        }
+        this.description = userInputSplit[1];
     }
 
     /**
      * Parses and tokenizes a String from the local hard disk.
      * 
-     * <p>Unlike the {@code parseUserInput} method, this method does not throw any
+     * <p>
+     * Unlike the {@code parseUserInput} method, this method does not throw any
      * {@code DukeException} as the data stored on disk is guaranteed to be correct.
      * 
      * @param data the raw String data from the local hard disk
