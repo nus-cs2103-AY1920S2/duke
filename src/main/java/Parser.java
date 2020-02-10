@@ -30,6 +30,7 @@ public class Parser {
 
     String getOutputString(String in) {
         String out;
+        assert this.taskList != null;
         if (in.equals("bye")) {
             out = "Bye. Hope to see you again soon!";
         } else if (in.equals("list")) {

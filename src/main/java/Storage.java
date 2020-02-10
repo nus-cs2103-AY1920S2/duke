@@ -19,7 +19,7 @@ public class Storage {
      * @param filepath Pathname of where storage will be located
      */
     public Storage(String filepath) {
-        path = HOME + "/" + filepath;
+        this.path = HOME + "/" + filepath;
     }
 
     /**
@@ -28,7 +28,8 @@ public class Storage {
      */
     public void saveTask(List<Task> taskList) {
         try {
-            FileOutputStream fileOut = new FileOutputStream(path);
+            assert taskList != null;
+            FileOutputStream fileOut = new FileOutputStream(this.path);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(taskList);
             objectOut.close();
