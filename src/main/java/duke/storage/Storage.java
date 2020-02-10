@@ -36,10 +36,11 @@ public class Storage {
         while (s.hasNext()) {
             String nextLine = s.nextLine();
             String[] taskString = nextLine.split("/");
-            assert taskString.length > 1 :"Invalid format of Duke.txt";
+            assert taskString.length > 1 && taskString.length < 5 :"Invalid format of Duke.txt";
             String taskTitle = taskString[0];
             switch (taskTitle){
             case "T":
+                assert taskString.length == 3 :"Invalid format of Duke.txt";
                 Task todoTask = new Todo(taskString[2]);
                 if(taskString[1].equals("1")){
                     todoTask.markDone();
@@ -47,6 +48,7 @@ public class Storage {
                 tasks.add(todoTask);
                 break;
             case "D":
+                assert taskString.length == 4 :"Invalid format of Duke.txt";
                 Task deadlineTask = new Deadline(taskString[2], LocalDate.parse(taskString[3]));
                 if(taskString[1].equals("1")){
                     deadlineTask.markDone();
@@ -54,6 +56,7 @@ public class Storage {
                 tasks.add(deadlineTask);
                 break;
             case "E":
+                assert taskString.length == 4 :"Invalid format of Duke.txt";
                 Task eventTask = new Event(taskString[2], LocalDate.parse(taskString[3]));
                 if(taskString[1].equals("1")){
                     eventTask.markDone();
