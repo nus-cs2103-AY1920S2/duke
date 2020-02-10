@@ -22,7 +22,7 @@ public class Storage {
      * @param taskList List of Tasks for duke.Duke.
      */
     public static void saveChanges(TaskList taskList) {
-        // Note: The whole list will be iterated everytime an update is needed for the file.
+        // Note: The whole list will be iterated every time an update is needed for the file.
         try {
             FileWriter fw = new FileWriter("lastSavedTasks.txt");
             for (int i = 0; i < taskList.sizeOf(); i++) {
@@ -108,7 +108,7 @@ public class Storage {
 
             }
         } catch (FileNotFoundException fnfe) {
-            print("File is not found, but I gotcha back bro; will create one for you to save your tasks.");
+            // handles this exception by creating a new file for storing future Tasks automatically
         }
     }
 

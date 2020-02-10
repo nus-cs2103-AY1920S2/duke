@@ -4,7 +4,7 @@ import duke.tasks.Task;
 
 /**
  * User Interface class which is centred about a strong user experience and its associated methods.
- * Mainly provides public static methods to represent Strings for easy identification and usage.
+ * Mainly uses public static methods to format Strings for easy identification and usage.
  */
 public class Ui {
 
