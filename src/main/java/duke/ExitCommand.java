@@ -1,6 +1,6 @@
 package duke;
 
-/** Exits when bye is detected. isExit() is true this time. */
+/** Exits when bye is detected. isExit() is true this time. Extends the abstract class Command. */
 public class ExitCommand extends Command {
   ExitCommand(String input) {
     super(input);

@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Command abstract class that has method signatures and shared methods for all commands.
+ * Child classes implement the execute methods accordingly.
+ */
 public abstract class Command {
   String input;
 

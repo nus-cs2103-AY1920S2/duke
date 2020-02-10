@@ -1,6 +1,6 @@
 package duke;
 
-/** AddCommand extends command and adds to the taskList based on the input */
+/** AddCommand extends command and adds to the taskList based on the input. */
 public class AddCommand extends Command {
 
   AddCommand(String input) {
@@ -16,7 +16,7 @@ public class AddCommand extends Command {
    * @throws DukeException might throw DukeException from saveData.
    */
   protected void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-    String[] strArr = input.split(" ");
+  	String[] strArr = input.split(" ");
     String type = strArr[0];
     switch (type) {
     case "deadline":
