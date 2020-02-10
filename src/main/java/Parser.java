@@ -102,6 +102,7 @@ public class Parser {
      */
     public void parseDiskData(String data) {
         String[] dataSplit = data.split("\\|");
+        assert dataSplit.length >= 3;
         this.command = this.parseCommand(dataSplit[0]);
         this.description = dataSplit[2];
         this.isDone = dataSplit[1].equals("1") ? true : false;

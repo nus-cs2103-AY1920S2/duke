@@ -7,6 +7,7 @@ public abstract class Task {
     private boolean isDone;
 
     public Task(String description, boolean isDone) {
+        assert description != null;
         this.description = description;
         this.isDone = isDone;
     }
