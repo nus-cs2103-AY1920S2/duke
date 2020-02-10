@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.Duke;
+import duke.DukeException;
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -51,7 +53,7 @@ public abstract class Command {
      * @param ui      duke.Ui object providing command the ability to call duke.Ui methods.
      * @param storage duke.Storage object providing command the ability to call duke.Storage methods.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Should set boolean to true if command is an exit command otherwise
@@ -59,7 +61,8 @@ public abstract class Command {
      *
      * @return Boolean value representing command is an exit command.
      */
-    public abstract boolean isExit();
-
+    public boolean isExit() {
+        return false;
+    };
 }
 

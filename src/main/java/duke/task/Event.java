@@ -25,6 +25,10 @@ public class Event extends Task {
         this.time = at;
     }
 
+    public Event() {
+
+    }
+
     /**
      * Return a String object of when the event is happening.
      *
@@ -59,5 +63,11 @@ public class Event extends Task {
     public String toString() {
         String formattedDate = time.format(outputFormat);
         return String.format("[%s]%s (by: %s)", eventLogo, super.toString(), formattedDate);
+    }
+
+    public String getHelpFormat() {
+        return "Please type event task in this following format:\n" +
+                "event <task_name> /by yyyy-mm-dd\n" +
+                "event key word must be in lower case, spacing must be adhere and date format must include dashes!";
     }
 }

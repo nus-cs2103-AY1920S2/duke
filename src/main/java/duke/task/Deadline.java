@@ -26,6 +26,12 @@ public class Deadline extends Task {
     }
 
     /**
+     * An empty constructor for help to call method getHelpFormat.
+     */
+    public Deadline() {
+    }
+
+    /**
      * Return a String object of the task deadline.
      *
      * @return Date of task deadline in the format of MMM-dd-YYYY.
@@ -59,5 +65,11 @@ public class Deadline extends Task {
     public String toString() {
         String formattedDate = by.format((outputFormat));
         return String.format("[%s]%s (by: %s)", deadlineLogo, super.toString(), formattedDate);
+    }
+
+    public String getHelpFormat() {
+        return "Please type deadline task in this following format:\n" +
+                "deadline <task_name> /by yyyy-mm-dd\n" +
+                "deadline key word must be in lower case, spacing must be adhere and date format must include dashes!";
     }
 }

@@ -12,6 +12,10 @@ public class Done extends Command {
         this.taskNumber = taskNumber;
     }
 
+    public Done() {
+
+    }
+
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.getTask(taskNumber).markAsDone();
@@ -19,8 +23,10 @@ public class Done extends Command {
         return ui.showDoneMessage(tasks.getTask(taskNumber).getStatusIcon(), tasks.getTask(taskNumber));
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
+    public String getHelpFormat() {
+        return "Please type done command in following format:\n" +
+                "done <task_number>\n" +
+                "done key word must be in lower case, spacing must be adhere" +
+                "and type list command to find out task number!";
     }
 }

@@ -6,6 +6,7 @@ import duke.command.CommandList;
 import duke.command.Delete;
 import duke.command.Done;
 import duke.command.Exit;
+import duke.command.Help;
 import duke.command.List;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -14,6 +15,7 @@ import duke.task.ToDo;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 /**
  * Represent how the Chatbot is able to understand user's command.
@@ -106,8 +108,19 @@ public class Parser {
             return new List();
         case BYE:
             return new Exit();
+        case HELP:
+            return helpParser(fullCommand);
         default:
             throw new DukeException("Invalid command", DukeErrorType.INVALID_COMMAND);
+        }
+    }
+
+    public static Help helpParser(String command) {
+        String[] helpArr = command.split("help");
+        if (helpArr.length == 0) {
+            return new Help(Optional.empty());
+        } else {
+            return new Help(Optional.of(helpArr[1].trim()));
         }
     }
 }
