@@ -14,8 +14,7 @@ public class List extends Command {
         return ui.showListMessage(tasks);
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
+    public String getHelpFormat() {
+        return "Type command 'list' in lower case to see your tasks!";
     }
 }

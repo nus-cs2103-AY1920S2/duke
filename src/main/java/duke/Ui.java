@@ -1,8 +1,19 @@
 package duke;
 
+import duke.command.CommandList;
+import duke.command.Delete;
+import duke.command.Done;
+import duke.command.Exit;
+import duke.command.List;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.ToDo;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -195,5 +206,50 @@ public class Ui {
         return (INDENT + "  Goodbye and have a beautiful time!");
     }
 
+    public String showHelpMessage() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Below are the command(s) available:");
+        stringBuilder.append(NEWLINE);
+        stringBuilder.append(getListOfCommandsName());
+        return stringBuilder.toString();
+    }
+
+    public String showSpecificHelpMessage(String specificHelp) throws DukeException {
+        CommandList commandValue;
+        try {
+            commandValue = CommandList.valueOf(specificHelp.toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            throw new DukeException("Invalid command", DukeErrorType.INVALID_COMMAND);
+        }
+        switch (commandValue) {
+        case BYE:
+            return new Exit().getHelpFormat();
+        case DEADLINE:
+            return new Deadline().getHelpFormat();
+        case DONE:
+            return new Done().getHelpFormat();
+        case EVENT:
+            return new Event().getHelpFormat();
+        case LIST:
+            return new List().getHelpFormat();
+        case TODO:
+            return new ToDo().getHelpFormat();
+        case DELETE:
+            return new Delete().getHelpFormat();
+        default:
+            throw new DukeException("Invalid command", DukeErrorType.INVALID_COMMAND);
+        }
+    }
+
+    public String getListOfCommandsName() {
+        String newline = System.lineSeparator();
+        StringBuilder stringBuilder = new StringBuilder();
+        CommandList[] commandsList = CommandList.values();
+        for (CommandList commands : commandsList) {
+            stringBuilder.append(commands.toString().toLowerCase());
+            stringBuilder.append(newline);
+        }
+        return stringBuilder.toString();
+    }
 
 }

@@ -18,9 +18,4 @@ public class Add extends Command {
         return ui.showCustomiseMessage(super.getTask().toString(), tasks.getSize());
 
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

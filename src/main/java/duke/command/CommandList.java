@@ -27,6 +27,10 @@ public enum CommandList {
      */
     EVENT("E"),
     /**
+     * duke.command.Help command with no abbreviation.
+     */
+    HELP(""),
+    /**
      * duke.command.List command with no abbreviation.
      */
     LIST(""),

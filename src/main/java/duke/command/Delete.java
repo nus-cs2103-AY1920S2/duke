@@ -13,6 +13,10 @@ public class Delete extends Command {
         this.taskNumber = taskNumber;
     }
 
+    public Delete() {
+
+    }
+
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IndexOutOfBoundsException {
         Task deletedTask = tasks.deleteTask(taskNumber);
@@ -20,8 +24,10 @@ public class Delete extends Command {
         return ui.showDeleteMessage(deletedTask, tasks.getSize());
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
+    public String getHelpFormat() {
+        return "Please type delete command in following format:\n" +
+                "delete <task_number>\n" +
+                "delete key word must be in lower case, spacing must be adhere" +
+                "and type list command to find out task number!";
     }
 }

@@ -6,6 +6,7 @@ import duke.command.CommandList;
 import duke.command.Delete;
 import duke.command.Done;
 import duke.command.Exit;
+import duke.command.Help;
 import duke.command.List;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -14,6 +15,7 @@ import duke.task.ToDo;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 /**
  * Represent how the Chatbot is able to understand user's command.
@@ -35,7 +37,8 @@ public class Parser {
      * will be returned.
      * If user input consist of keyword done, a duke.command.Done object will be returned.
      * If user input consist of keyword list, a duke.command.List object will be returned.
-     * IF user input consist of keyword bye, a duke.command.Exit object will be returned.
+     * If user input consist of keyword bye, a duke.command.Exit object will be returned.
+     * If user input consist of keyword help, a duke.command.Help object will be returned.
      * else a duke.DukeException will be thrown with invalid command tagged to it.
      *
      * @param fullCommand String object of input given by user.
@@ -71,11 +74,22 @@ public class Parser {
             return listParser();
         case BYE:
             return byeParser();
+        case HELP:
+            return helpParser(fullCommand);
         default:
             throw new DukeException("Invalid command", DukeErrorType.INVALID_COMMAND);
         }
     }
 
+    public static Help helpParser(String command) {
+        String[] helpArr = command.split("help");
+        if (helpArr.length == 0) {
+            return new Help(Optional.empty());
+        } else {
+            return new Help(Optional.of(helpArr[1].trim()));
+        }
+    }
+  
     public static Command todoParser(String input) throws DukeException {
         String[] todoArr = input.split("todo");
         if (todoArr.length == 0 || todoArr[1].trim().length() == 0) {

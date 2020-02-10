@@ -14,6 +14,10 @@ public class Exit extends Command {
     public Exit() {
     }
 
+    public String getHelpFormat() {
+        return "Type command 'bye' in lower case to kill me :'(";
+    }
+
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.showGoodByeMessage();
