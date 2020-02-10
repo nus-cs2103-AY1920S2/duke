@@ -58,57 +58,85 @@ public class Parser {
         }
         switch (commandValue) {
         case TODO:
-            String[] todoArr = fullCommand.split("todo");
-            if (todoArr.length == 0 || todoArr[1].trim().length() == 0) {
-                throw new DukeException("Empty duke.task.ToDo description", DukeErrorType.EMPTY_DESCRIPTION, command);
-            } else {
-                String todoDescription = todoArr[1].trim();
-                return new Add(new ToDo(todoDescription));
-            }
+            return todoParser(fullCommand);
         case EVENT:
-            String[] eventDetails = fullCommand.split("/at");
-            if (eventDetails.length <= 1) {
-                throw new DukeException("Empty duke.task.Event time", DukeErrorType.EMPTY_TIME, command);
-            }
-            String eventTime = eventDetails[1].trim();
-            String[] descriptionArr = eventDetails[0].split("event");
-            String eventDescription = descriptionArr[1].trim();
-            if (descriptionArr.length == 0 || eventDescription.length() == 0) {
-                throw new DukeException("Empty duke.task.Event description", DukeErrorType.EMPTY_DESCRIPTION, command);
-            } else {
-                return new Add(
-                        new Event(eventDescription, LocalDate.parse(eventTime, USER_FORMAT)));
-            }
+            return eventParser(fullCommand);
         case DEADLINE:
-            String[] deadlineDetails = fullCommand.split("/by");
-            if (deadlineDetails.length <= 1) {
-                throw new DukeException("Empty duke.task.Deadline time", DukeErrorType.EMPTY_TIME, command);
-            }
-            String deadlineTime = deadlineDetails[1].trim();
-            String deadlineDescription = "";
-            String[] descriptionArrDeadLine = deadlineDetails[0].split("deadline");
-            deadlineDescription = descriptionArrDeadLine[1].trim();
-            if (descriptionArrDeadLine.length == 0 || deadlineDescription.length() == 0) {
-                throw new DukeException("Empty duke.task.Deadline description",
-                        DukeErrorType.EMPTY_DESCRIPTION,
-                        command);
-            } else {
-                return new Add(
-                        new Deadline(deadlineDescription, LocalDate.parse(deadlineTime, USER_FORMAT)));
-            }
+            return deadlineParser(fullCommand);
         case DELETE:
-            int deleteTaskNumber = Integer.parseInt(inputArr[1]) - 1;
-            return new Delete(deleteTaskNumber);
+            return deleteParser(Integer.parseInt(inputArr[1]));
         case DONE:
-            int taskNumber = Integer.parseInt(inputArr[1]) - 1;
-            return new Done(taskNumber);
+            return doneParser(Integer.parseInt(inputArr[1]));
         case LIST:
-            return new List();
+            return listParser();
         case BYE:
-            return new Exit();
+            return byeParser();
         default:
             throw new DukeException("Invalid command", DukeErrorType.INVALID_COMMAND);
         }
+    }
+
+    public static Command todoParser(String input) throws DukeException {
+        String[] todoArr = input.split("todo");
+        if (todoArr.length == 0 || todoArr[1].trim().length() == 0) {
+            throw new DukeException("Empty duke.task.ToDo description", DukeErrorType.EMPTY_DESCRIPTION, "todo");
+        } else {
+            String todoDescription = todoArr[1].trim();
+            return new Add(new ToDo(todoDescription));
+        }
+    }
+
+    public static Command eventParser(String input) throws DukeException, DateTimeException {
+        String[] eventDetails = input.split("/at");
+        if (eventDetails.length <= 1) {
+            throw new DukeException("Empty duke.task.Event time", DukeErrorType.EMPTY_TIME, "event");
+        }
+        String eventTime = eventDetails[1].trim();
+        String[] descriptionArr = eventDetails[0].split("event");
+        String eventDescription = descriptionArr[1].trim();
+        if (descriptionArr.length == 0 || eventDescription.length() == 0) {
+            throw new DukeException("Empty duke.task.Event description", DukeErrorType.EMPTY_DESCRIPTION, "event");
+        } else {
+            return new Add(
+                    new Event(eventDescription, LocalDate.parse(eventTime, USER_FORMAT)));
+        }
+    }
+
+    public static Command deadlineParser(String input) throws DukeException, DateTimeException {
+        String[] deadlineDetails = input.split("/by");
+        if (deadlineDetails.length <= 1) {
+            throw new DukeException("Empty duke.task.Deadline time", DukeErrorType.EMPTY_TIME, "deadline");
+        }
+        String deadlineTime = deadlineDetails[1].trim();
+        String deadlineDescription = "";
+        String[] descriptionArrDeadLine = deadlineDetails[0].split("deadline");
+        deadlineDescription = descriptionArrDeadLine[1].trim();
+        if (descriptionArrDeadLine.length == 0 || deadlineDescription.length() == 0) {
+            throw new DukeException("Empty duke.task.Deadline description",
+                    DukeErrorType.EMPTY_DESCRIPTION,
+                    "deadline");
+        } else {
+            return new Add(
+                new Deadline(deadlineDescription, LocalDate.parse(deadlineTime, USER_FORMAT)));
+        }
+    }
+
+    public static Command deleteParser(int position) throws IndexOutOfBoundsException {
+        int taskNumber = position - 1;
+        return new Delete(taskNumber);
+    }
+
+    public static Command doneParser(int position) throws IndexOutOfBoundsException {
+        int taskNumber = position - 1;
+        return new Done(taskNumber);
+    }
+
+    public static Command listParser() {
+        return new List();
+    }
+
+    public static Command byeParser() {
+        return new Exit();
     }
 }
 
