@@ -141,38 +141,32 @@ public class Parser {
      * @param tasks TaskList object to be edited based on the command.
      * @param command User Command.
      * @param ui Ui to handle the output depending on command type.
+     * @return Output message to the user.
      * @throws DukeUnknownInputException When the command type is not recognized.
      */
-    public static void executeCommand(TaskList tasks, String command, Ui ui)  throws DukeUnknownInputException {
+    public static String executeCommand(TaskList tasks, String command, Ui ui)  throws DukeUnknownInputException {
         String commandType = getCommandType(command);
         switch (commandType) {
         case "list":
-            ui.showList(tasks);
-            break;
+            return ui.showList(tasks);
         case "todo":
             String description = todoDescription(command);
-            ui.showAdded(tasks.addTodo(description), tasks.getLength());
-            break;
+            return ui.showAdded(tasks.addTodo(description), tasks.getLength());
         case "deadline":
             String[] descByWhen = deadlineParams(command);
-            ui.showAdded(tasks.addDeadline(descByWhen[0], descByWhen[1]), tasks.getLength());
-            break;
+            return ui.showAdded(tasks.addDeadline(descByWhen[0], descByWhen[1]), tasks.getLength());
         case "event":
             String[] descAtWhen = eventParams(command);
-            ui.showAdded(tasks.addEvent(descAtWhen[0], descAtWhen[1]), tasks.getLength());
-            break;
+            return ui.showAdded(tasks.addEvent(descAtWhen[0], descAtWhen[1]), tasks.getLength());
         case "done":
             int doneNum = markDoneNum(command);
-            ui.showMarkedDone(tasks.markDone(doneNum));
-            break;
+            return ui.showMarkedDone(tasks.markDone(doneNum));
         case "delete":
             int deleteNum = deleteNum(command);
-            ui.showDeleted(tasks.delete(deleteNum), tasks.getLength());
-            break;
+            return ui.showDeleted(tasks.delete(deleteNum), tasks.getLength());
         case "find":
             String findWord = findWord(command);
-            ui.showFound(tasks.find(findWord));
-            break;
+            return ui.showFound(tasks.find(findWord));
         default:
             throw new DukeUnknownInputException("Sorry but I do not recognise your command.");
         }

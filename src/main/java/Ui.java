@@ -11,67 +11,60 @@ import task.Task;
  */
 public class Ui {
     Scanner sc = new Scanner(System.in);
+    String divider = "____________________________________________________________";
 
     public String readCommand() {
         return sc.nextLine();
     }
 
-    public void showList(TaskList tasks) {
-        System.out.println("____________________________________________________________\n"
-                + "Here are the tasks in your list:");
+    public String showList(TaskList tasks) {
+        String listMsg = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.getLength(); i++) {
-            System.out.println(i + 1 + "." + tasks.getTask(i));
+            listMsg += i + 1 + "." + tasks.getTask(i) + "\n";
         }
-        System.out.println("____________________________________________________________");
+        return listMsg;
     }
 
-    public void showBye() {
-        System.out.print("____________________________________________________________\n"
-                + "Bye. Hope to see you again soon!\n"
-                + "____________________________________________________________");
+    public String showBye() {
+        String byeMessage = "Bye. Hope to see you again soon!\n";
+        return byeMessage;
     }
 
-    public void showHello() {
-        System.out.println("____________________________________________________________\n"
-                + "Hello! I'm Duke\nWhat can I do for you?\n"
-                + "____________________________________________________________");
+    public String showHello() {
+        String helloMessage = "Hello! I'm Duke\nWhat can I do for you?\n";
+        return helloMessage;
     }
 
-    public void showMarkedDone(Task task) {
-        System.out.println("____________________________________________________________\n"
-                + "Nice! I've marked this task as done:\n"
+    public String showMarkedDone(Task task) {
+        String doneMsg = "Nice! I've marked this task as done:\n"
+                + task + "\n";
+        return doneMsg;
+    }
+
+    public String showAdded(Task task, int numOfTasks) {
+        String addedMsg = "Got it. I've added this task:\n"
                 + task + "\n"
-                + "____________________________________________________________");
+                + "Now you have " + numOfTasks + " tasks in the list.\n";
+        return addedMsg;
     }
 
-    public void showAdded(Task task, int numOfTasks) {
-        System.out.println("____________________________________________________________\n"
-                + "Got it. I've added this task:\n"
+    public String showDeleted(Task task, int numOfTasks) {
+        String deletedMsg = "Noted. I've removed this task:\n"
                 + task + "\n"
-                + "Now you have " + numOfTasks + " tasks in the list.\n"
-                + "____________________________________________________________");
+                + "Now you have " + numOfTasks + " tasks in the list.\n";
+        return deletedMsg;
     }
 
-    public void showDeleted(Task task, int numOfTasks) {
-        System.out.println("____________________________________________________________\n"
-                + "Noted. I've removed this task:\n"
-                + task + "\n"
-                + "Now you have " + numOfTasks + " tasks in the list.\n"
-                + "____________________________________________________________");
+    public String showError(DukeException e) {
+        String errorMsg = e.getMessage() + "\n";
+        return errorMsg;
     }
 
-    public void showError(DukeException e) {
-        System.out.println("____________________________________________________________\n"
-                + e.getMessage() + "\n"
-                + "____________________________________________________________");
-    }
-
-    public void showFound(ArrayList<Task> tasksFound) {
-        System.out.println("____________________________________________________________\n"
-                + "Here are the tasks in your list:");
+    public String showFound(ArrayList<Task> tasksFound) {
+        String foundMsg = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasksFound.size(); i++) {
-            System.out.println(i + 1 + "." + tasksFound.get(i));
+            foundMsg += i + 1 + "." + tasksFound.get(i) + "\n";
         }
-        System.out.println("____________________________________________________________");
+        return foundMsg;
     }
 }
