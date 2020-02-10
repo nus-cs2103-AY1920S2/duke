@@ -16,6 +16,10 @@ public enum DukeErrorType {
      */
     INVALID_ABBREVIATION,
     /**
+     * File content format invalid
+     */
+    INVALID_FILE_CONTENT,
+    /**
      * duke.task.Task do not have an description.
      */
     EMPTY_DESCRIPTION,
