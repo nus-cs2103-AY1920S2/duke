@@ -24,10 +24,10 @@ public class Duke {
             else if (next_cmd.equals("list")) {
                 String list_of_items = "";
                 for(int i = 0; i < list.size(); i++) {
-                    list_of_items += list.get(i) + "\n";
+                    list_of_items += "     "+ (i+1) + ":" + list.get(i) + "\n";
                 }
                 System.out.println("    ____________________________________________________________\n" +
-                        "     " + list_of_items + "\n" +
+                        list_of_items +
                         "    ____________________________________________________________");
             }
             else if (next_cmd.equals("blah")) {
