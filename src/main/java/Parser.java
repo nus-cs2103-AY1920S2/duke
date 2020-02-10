@@ -28,7 +28,13 @@ public class Parser {
         }
     }
 
-    String getOutputString(String in) {
+    /**
+     * Takes in user String input, parses, and executes command accordingly, and returns output string by Duke.
+     * @param input User string input
+     * @return Output string by Duke
+     */
+    String getOutputString(String input) {
+        String in = input.trim();
         String out;
         if (in.equals("bye")) {
             out = "Bye. Hope to see you again soon!";
