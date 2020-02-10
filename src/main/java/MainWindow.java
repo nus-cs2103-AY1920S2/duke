@@ -37,7 +37,8 @@ public class MainWindow extends AnchorPane {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) { // temp change to public
-        return "\n" + " 연인 <3: " + input;
+       return "i love you " + input;
+        //return "\n" + " 연인 <3: " + input;
     }
 
     /**
