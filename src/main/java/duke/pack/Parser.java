@@ -28,26 +28,27 @@ public class Parser {
             return parseFind(comm);
 
         } else if (comm[0].equals("done")) {
-            // done
+            // done command to mark task as done
             return parseDone(comm);
 
         } else if (comm[0].equals("delete")) {
-            // delete
+            // delete command to remove task from list
             return parseDelete(comm);
 
         } else if (comm[0].equals("todo")) {
-            // to-do
+            // to-do command to add a to-do task
             return parseTodo(command, comm);
 
         } else if (comm[0].equals("event")) {
-            // event
+            // event command to add an event task
             return parseEvent(command, comm);
 
         } else if (comm[0].equals("deadline")) {
-            // deadline
+            // deadline command to add a deadline task
             return parseDeadline(command, comm);
 
         } else if (command.equals("bye")) {
+            // exit command to close programme
             return new ExitCommand();
 
         } else {
@@ -57,6 +58,12 @@ public class Parser {
 
     }
 
+    /**
+     * Interprets find command.
+     * @param comm String array of the command
+     * @return a FindCommand object
+     * @throws DukeException if no search keyword was provided
+     */
     public static Command parseFind(String[] comm) throws DukeException {
         if (comm.length == 1) {
             throw new DukeException("    Oh no! You have to specify what you want to find!");
@@ -66,6 +73,12 @@ public class Parser {
         return c;
     }
 
+    /**
+     * Interprets mark as done command.
+     * @param comm String array of command
+     * @return a DoneCommand object
+     * @throws DukeException if task number is not specified
+     */
     public static Command parseDone(String[] comm) throws DukeException {
         if (comm.length == 1) {
             throw new DukeException("    Oh no! You have to specify which task is done!");
@@ -75,6 +88,12 @@ public class Parser {
         return c;
     }
 
+    /**
+     * Interprets delete command.
+     * @param comm String array of command
+     * @return a DeleteCommand object
+     * @throws DukeException if task number is not specified
+     */
     public static Command parseDelete(String[] comm) throws DukeException {
         if (comm.length == 1) {
             throw new DukeException("    Oh no! You have to specify which task to delete!");
@@ -84,6 +103,13 @@ public class Parser {
         return c;
     }
 
+    /**
+     * Interprets to-do command.
+     * @param fullCommand String of full command given
+     * @param comm String array of command
+     * @return an AddCommand object
+     * @throws DukeException if task description is not provided
+     */
     public static Command parseTodo(String fullCommand, String[] comm) throws DukeException {
         // if no description is given
         if (comm.length == 1) {
@@ -98,6 +124,13 @@ public class Parser {
         return c;
     }
 
+    /**
+     * Interprets an event command.
+     * @param fullCommand String of full command given
+     * @param comm String array of command
+     * @return an AddCommand object
+     * @throws DukeException if task description is not provided, date and time details are not included
+     */
     public static Command parseEvent(String fullCommand, String[] comm) throws DukeException {
         // if no description is given
         if (comm.length == 1) {
@@ -131,6 +164,14 @@ public class Parser {
         }
     }
 
+
+    /**
+     * Interprets a deadline command.
+     * @param fullCommand String of full command given
+     * @param comm String array of command
+     * @return an AddCommand object
+     * @throws DukeException if task description is not provided, date and time details are not included
+     */
     public static Command parseDeadline(String fullCommand, String[] comm) throws DukeException {
         // if no description is given
         if (comm.length == 1) {
