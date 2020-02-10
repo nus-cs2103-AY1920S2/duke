@@ -22,12 +22,15 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
+            assert split[1] != null : "The index of task should be entered to mark task as done.";
             checkInputException(split, commandType);
             return new DoneCommand(Integer.parseInt(split[1]) - 1);
         case "delete":
+            assert split[1] != null : "The index of task should be entered to delete task.";
             checkInputException(split, commandType);
             return new DeleteCommand(Integer.parseInt(split[1]) - 1);
         case "find":
+            assert split[1] != null : "The keyword should be entered search task list.";
             checkInputException(split, commandType);
             return new FindCommand(split[1]);
         case "todo":

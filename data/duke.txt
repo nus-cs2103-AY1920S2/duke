@@ -1,5 +1,4 @@
 D | 1 | cs3230 assignment | Feb 6 2020
-T | 1 | javafx
 T | 0 | dance
-D | 1 | citi | Feb 28 2020
-T | 0 | halol
+T | 1 | cry
+T | 0 | haha
