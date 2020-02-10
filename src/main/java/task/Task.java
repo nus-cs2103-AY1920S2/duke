@@ -62,6 +62,7 @@ public class Task {
             }
             return deadline;
         default:
+            assert false : actionLetter;
             return new Task(taskDesc);
         }
     }

@@ -53,6 +53,7 @@ public class Parser {
 
 //            case HelpCommand.COMMAND_WORD: // Fallthrough
         default:
+            assert false : commandWord;
             return new ExitCommand();
         }
     }
