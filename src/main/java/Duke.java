@@ -14,6 +14,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private static final String path = "data/duke.txt";
 
     public Duke() {
     }
@@ -77,7 +78,7 @@ public class Duke {
 
 
     public static void main(String[] args) throws DukeException {
-        new Duke("data/duke.txt").run();
+        new Duke(path).run();
     }
 
 }

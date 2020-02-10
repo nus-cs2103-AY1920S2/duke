@@ -25,6 +25,7 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    private final String goodbye = "See you later! :)";
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -56,7 +57,7 @@ public class MainWindow extends AnchorPane {
 
         if (input.equals("bye")) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("See you later! :)", dukeImage)
+                    DialogBox.getDukeDialog(goodbye, dukeImage)
             );
 
             Platform.exit();
