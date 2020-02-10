@@ -12,16 +12,20 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
-
+    /**
+     * Initializes and starts the application.
+     *
+     * @param stage The window for the application to run on.
+     */
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("Duke Program");
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

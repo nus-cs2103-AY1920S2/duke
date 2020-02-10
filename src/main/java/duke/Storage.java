@@ -18,17 +18,14 @@ import java.util.List;
  */
 public class Storage {
     File file;
-    Ui ui;
 
     /**
-     * Initialize the file with the filepath specified by user and saves the ui class.
+     * Initialize the file with the filepath specified by user.
      *
      * @param filepath The location where the program data will be saved or loaded from.
-     * @param ui The ui class.
      */
-    public Storage(String filepath, Ui ui) {
+    public Storage(String filepath) {
         file = new File(new File(filepath).getAbsolutePath());
-        this.ui = ui;
     }
 
     /**
@@ -36,8 +33,9 @@ public class Storage {
      * A new file will be created if no existing data is found.
      *
      * @return An ArrayList containing existing data, if any.
+     * @throws DukeException Errors related to read/write operations will be thrown.
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             if (!file.createNewFile()) {
@@ -72,7 +70,7 @@ public class Storage {
                 br.close();
             }
         } catch (Exception e) {
-            ui.exceptionMessage(new DukeException("☹ OOPS!!! Error creating or loading file."));
+            throw new DukeException("☹ OOPS!!! Error creating or loading file.");
         }
         return tasks;
     }
@@ -81,14 +79,15 @@ public class Storage {
      * Writes data to the end of the file.
      *
      * @param data Data to be written.
+     * @throws DukeException Errors related to write operations will be thrown.
      */
-    public void writeToFile(String data) {
+    public void writeToFile(String data) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file, true);
             fw.write(data);
             fw.close();
         } catch (IOException e) {
-            ui.exceptionMessage(new DukeException("☹ OOPS!!! Error writing to file."));
+            throw new DukeException("☹ OOPS!!! Error writing to file.");
         }
     }
 
@@ -97,8 +96,9 @@ public class Storage {
      *
      * @param command Specify the operation to be done on the file.
      * @param taskNumber Which task to perform the operation on.
+     * @throws DukeException Errors related to read/write operations will be thrown.
      */
-    public void writeToFile(String command, int taskNumber) {
+    public void writeToFile(String command, int taskNumber) throws DukeException {
         List<String> lines = new ArrayList<>();
         int i = 0;
         try {
@@ -123,7 +123,7 @@ public class Storage {
             }
             bw.close();
         } catch (Exception e) {
-            ui.exceptionMessage(new DukeException("☹ OOPS!!! Error writing to file."));
+            throw new DukeException("☹ OOPS!!! Error writing to file.");
         }
     }
 }
