@@ -58,10 +58,20 @@ public class AddCommand extends Command {
     case "todo":
       Todo td = new Todo(input);
       tasks.add(td);
+      assert td.toString().equals("[T][\u2718] " + getDescription(input)) : "todo is wrong";
       storage.saveData(tasks);
       return ui.stringWithFormat(td.toString(), "task", tasks);
     default:
       return ("Wrong format added!");
     }
+  }
+
+  protected String getDescription(String input) {
+    StringBuilder str = new StringBuilder();
+    String[] strArr = input.split(" ");
+    for (int i = 1; i < strArr.length; i++) {
+      str.append(strArr[i]).append(" ");
+    }
+    return str.toString();
   }
 }

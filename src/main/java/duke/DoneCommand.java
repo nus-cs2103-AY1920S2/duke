@@ -30,6 +30,7 @@ public class DoneCommand extends Command {
     int index = Integer.parseInt(strArr[1]) - 1;
     Task taskToBeDone = tasks.get(index);
     taskToBeDone.setDone();
+    assert taskToBeDone.isDone : "Task was not set as done";
     storage.saveData(tasks);
     return ui.stringWithFormat(taskToBeDone.toString(), "done", tasks);
   }
