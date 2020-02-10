@@ -2,13 +2,7 @@ package duke.parser;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 
 import duke.dukeexception.DukeException;
 
@@ -72,6 +66,8 @@ public class Parser {
             return new FindCommand(keyword);
         case "bye":
             return new ByeCommand();
+        case "help":
+            return new HelpCommand();
         default:
             throw new DukeException("");
         }

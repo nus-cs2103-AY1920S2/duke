@@ -14,16 +14,16 @@ public class Ui {
     public void showWelcome(){
         String line = "    ____________________________________________________________" + "\n";
         String fiveSpaces = "      ";
-        System.out.println(line + fiveSpaces + "Hello! I'm Duke\n" + fiveSpaces + "Whatcha wanna do?\n" + line);
+        System.out.println(line + fiveSpaces + "Hello! I'm Duke.\n" + fiveSpaces +
+                "Type help to see the available commands.\n" + line);
     }
     /**
      * Welcome message formatted tos string.
      * @return The welcome message.
      */
     public String showWelcomeString(){
-//        String line = "    ____________________________________________________________" + "\n";
         String fiveSpaces = "      ";
-        return fiveSpaces + "Hello! I'm Duke\n" + fiveSpaces + "Whatcha wanna do?\n";
+        return fiveSpaces + "Hello! I'm Duke.\n" + fiveSpaces + "Type help to see the available commands.\n";
     }
     /**
      * Reads the command entered by the user.
