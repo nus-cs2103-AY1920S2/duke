@@ -15,7 +15,7 @@ public class Ui {
      */
     public static String welcome() {
         return Constant.FORMAT_LINE
-            + "Hello, duke.Duke here! :D \n"
+            + "Hello, Duke here! :D \n"
             + "I'm feeling good and ready to go!\n"
             + "What can I do for you?\n"
             + "Here, you can do the following:\n"
@@ -61,7 +61,7 @@ public class Ui {
      * Gives the String for all Tasks, their number order, and their completion status for the list command.
      */
     public static String listMessage(String tasks) {
-        return Constant.FORMAT_LINE + tasks + Constant.FORMAT_LINE;
+        return Constant.FORMAT_LINE + "\n" + tasks + Constant.FORMAT_LINE;
     }
 
     /**
