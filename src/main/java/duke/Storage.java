@@ -1,6 +1,10 @@
 package duke;
 
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Loan;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -84,19 +88,19 @@ public class Storage {
                     break;
 
                 case "D":
-                // This is a Deadline item
-                String deadlineCommand = getDeadlineCommand(details);
-                String deadlineLimit = getDeadlineLimit(details);
-                Task currentDeadline = new Deadline(deadlineCommand, deadlineLimit);
+                    // This is a Deadline item
+                    String deadlineCommand = getDeadlineCommand(details);
+                    String deadlineLimit = getDeadlineLimit(details);
+                    Task currentDeadline = new Deadline(deadlineCommand, deadlineLimit);
 
-                // Check if done
-                if (logic.isDone(doneStatus)) {
-                    currentDeadline.doTask();
-                }
+                    // Check if done
+                    if (logic.isDone(doneStatus)) {
+                        currentDeadline.doTask();
+                    }
 
-                // Finally, add the correct Task
-                allTasks.addSavedTaskToStored(currentDeadline);
-                break;
+                    // Finally, add the correct Task
+                    allTasks.addSavedTaskToStored(currentDeadline);
+                    break;
 
                 case "E":
                     // This is an Event item

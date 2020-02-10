@@ -1,8 +1,19 @@
 package duke;
 
-import duke.exceptions.*;
+import duke.exceptions.DeadlineException;
+import duke.exceptions.DeleteException;
+import duke.exceptions.DoneException;
+import duke.exceptions.EmptyTaskListException;
+import duke.exceptions.EventException;
+import duke.exceptions.InputUnclearException;
+import duke.exceptions.LoanException;
+import duke.exceptions.ToDoException;
 
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Loan;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
