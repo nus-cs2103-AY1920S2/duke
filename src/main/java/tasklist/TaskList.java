@@ -1,4 +1,11 @@
 //contains the task list (contains operations to add/delete tasks in the list)
+package tasklist;
+
+import tasks.Events;
+import tasks.Deadline;
+import tasks.ToDos;
+import tasks.Task;
+
 import java.util.List;
 import java.util.ArrayList;
 

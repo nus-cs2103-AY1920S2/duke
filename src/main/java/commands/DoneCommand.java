@@ -1,3 +1,10 @@
+package commands;
+
+import exceptions.DukeException;
+import storage.Storage;
+import ui.Ui;
+import tasklist.TaskList;
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {
@@ -6,11 +13,11 @@ public class DoneCommand extends Command {
         super(command);
     }
 
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         String arr[] = command.split(" ", 2);
         String firstWord = arr[0];
 

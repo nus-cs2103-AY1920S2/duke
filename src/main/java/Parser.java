@@ -1,5 +1,14 @@
 //deals with making sense of the user command
 
+import commands.Command;
+import commands.AddCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.ExitCommand;
+import commands.ListCommand;
+import commands.NullCommand;
+import exceptions.DukeException;
+
 public class Parser {
 
     public Parser() {}
