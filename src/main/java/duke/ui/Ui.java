@@ -1,7 +1,7 @@
 package duke.ui;
 
 /**
- * Allows Duke to display output to the user.
+ * Allows Duke to obtain input from and display output to the user.
  */
 public interface Ui {
     /**

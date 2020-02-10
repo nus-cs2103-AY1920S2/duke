@@ -81,10 +81,14 @@ public class CommandHandler {
     }
 
     private void executeCommand(String commandWord, String arg) {
+        // Check if command exists
+        if (!commands.containsKey(commandWord)) {
+            ui.showError("Command " + commandWord + " does not exist!");
+            return;
+        }
+
         try {
             commands.get(commandWord).execute(arg, tasks, ui, storage);
-        } catch (NullPointerException e) {
-            ui.showError("Command " + commandWord + " does not exist!");
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }

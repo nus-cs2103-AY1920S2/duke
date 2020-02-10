@@ -17,6 +17,7 @@ import duke.exceptions.DukeException;
  * Reschedules an existing Task.
  */
 class RescheduleTask extends TimedCommand {
+    final int NOT_FOUND = -1;
 
     public RescheduleTask(DateTimeParser dtParser) {
         super(dtParser);
@@ -27,7 +28,7 @@ class RescheduleTask extends TimedCommand {
         int taskNo;
         String dateTimeInfo;
         int spaceIndex = arg.indexOf(" ");
-        if (spaceIndex == -1) {
+        if (spaceIndex == NOT_FOUND) {
             // No spaces found, so must be invalid usage
             throw new DukeException("Usage for Deadline: reschedule [task number] [due date]\n"
                     + "Usage for Event: reschedule [task number] [start time] to [end time]");
