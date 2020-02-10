@@ -76,7 +76,7 @@ public class Duke {
             output = c.execute(tasks, ui, storage);
             // TODO: If exit command, close application?
             // if (c.isExit()) {
-                //     isActive = false;
+            //     isActive = false;
             // }
         } catch (Exception e) {
             output = e.getMessage();
