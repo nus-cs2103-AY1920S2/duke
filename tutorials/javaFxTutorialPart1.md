@@ -1,4 +1,4 @@
-# JavaFX Tutorial Part 1 – Introduction
+ge # JavaFX Tutorial Part 1 – Introduction
 
 ## JavaFX lifecycle of an application
 
