@@ -83,6 +83,7 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+        assert false; // this should be unreachable, all input cases should be handled by above
         return null;
     }
 }
