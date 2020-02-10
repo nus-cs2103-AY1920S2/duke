@@ -110,29 +110,58 @@ public class Storage {
      * @throws DukeException occurs when when wrong format of date and time found
      */
     private Task generateTaskBasedOnData(String[] line) throws DukeException {
-        Task task;
         switch (line[0]) {
         case "T":
-            task = new Todo(line[2]);
-            if (line[1].equals("1")) {
-                task.setStatusDone();
-            }
-            return task;
+            return generateTodo(line);
         case "E":
-            task = new Event(line[2], line[3]);
-            if (line[1].equals("1")) {
-                task.setStatusDone();
-            }
-            return task;
+            return generateEvent(line);
         case "D":
-            task = new Deadline(line[2], line[3]);
-            if (line[1].equals("1")) {
-                task.setStatusDone();
-            }
-            return task;
+            return generateDeadline(line);
         default:
             throw new DukeException("Data corrupted! I am unable to determine which task it belongs to.");
         }
+    }
+
+    /**
+     * Generate todo and set done if the index 1 of the data given is "1".
+     *
+     * @param data Description of Todo is at index 2 and done status at index 1.
+     * @return Todo task that is generated.
+     */
+    private Task generateTodo(String[] data) {
+        Task task = new Todo(data[2]);
+        if (data[1].equals("1")) {
+            task.setStatusDone();
+        }
+        return task;
+    }
+
+    /**
+     * Generate event and set done if the index 1 of the data given is "1".
+     *
+     * @param data Description of Event is at index 2, date of event is at index 3 amd done status at index 1.
+     * @return Event task that is generated.
+     */
+    private Task generateEvent(String[] data) throws DukeException {
+        Task task = new Event(data[2], data[3]);
+        if (data[1].equals("1")) {
+            task.setStatusDone();
+        }
+        return task;
+    }
+
+    /**
+     * Generate event and set done if the index 1 of the data  given is "1".
+     *
+     * @param data Description of Event is at index 2, date and time are at index 3 and done status at index 1.
+     * @return Deadline task that is generated.
+     */
+    private Task generateDeadline(String[] data) throws DukeException {
+        Task task = new Deadline(data[2], data[3]);
+        if (data[1].equals("1")) {
+            task.setStatusDone();
+        }
+        return task;
     }
 
     /**
