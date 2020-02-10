@@ -53,9 +53,4 @@ public class Duke {
 
         return output;
     }
-
-    public DukeUI getUi() {
-        return this.ui;
-    }
-
 }

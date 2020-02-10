@@ -1,5 +1,0 @@
-T|X|feed dog
-T|X|meet friend
-T|X|feed cat
-D|X|tutorial|2020-12-30
-T|X|feed dog

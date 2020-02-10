@@ -1,3 +1,4 @@
+import dukecommand.HelpCommand;
 import dukeui.DukeUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,6 +21,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private DukeUI dui;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Nezuko.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Shinobu.png"));
@@ -28,7 +30,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
-        DukeUI dui = new DukeUI();
+        dui = new DukeUI();
         String welcomeMessage = dui.getWelcomeMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)
@@ -54,5 +56,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    @FXML
+    private void sendHelpMessageButton() {
+        HelpCommand hc = new HelpCommand();
+        String helpOutput = hc.getHelpString();
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(helpOutput, dukeImage)
+        );
     }
 }
