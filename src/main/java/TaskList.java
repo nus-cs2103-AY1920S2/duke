@@ -39,6 +39,7 @@ public class TaskList {
             LocalDate date = parser.getDate(whole);
             task = new Deadline(desc, date);
         } else {
+            assert !type.equals("todo") : "type should not be todo";
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(task);

@@ -74,8 +74,7 @@ public class Duke {
      * @throws DukeException Throws DukeException.
      * @throws IOException Throws IOException.
      */
-    public void run() throws DukeException, IOException {
-        storage.loadData();
+    public void run() throws IOException {
         System.out.println(ui.welcomeMessage());
         System.out.println("What can I do for you");
 
@@ -113,6 +112,7 @@ public class Duke {
                         tasks.getTask(taskNo - 1).markAsDone();
                         System.out.println(ui.doneMessage(tasks.getTask(taskNo - 1)));
                     } else {
+                        assert type.equals("delete") : "type should be delete";
                         System.out.println(ui.deleteMessage(tasks.getTask(taskNo - 1)));
                         tasks.removeTask(taskNo - 1);
                         Task.totalTasks--;

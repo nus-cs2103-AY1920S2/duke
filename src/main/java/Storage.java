@@ -50,7 +50,6 @@ public class Storage {
      * @throws IOException Throws IOException.
      */
     public void saveData() throws IOException {
-        // save data into ./data/duke.txt
         if (taskList.isListEmpty()) {
             Files.write(Paths.get("./data/duke.txt"), ("").getBytes());
         } else {
