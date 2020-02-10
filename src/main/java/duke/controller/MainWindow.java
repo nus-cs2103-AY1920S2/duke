@@ -54,7 +54,9 @@ public class MainWindow extends VBox {
         }
         this.duke = d;
         String welcomeMessage = duke.getWelcomeMessage();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+        );
     }
 
     /**

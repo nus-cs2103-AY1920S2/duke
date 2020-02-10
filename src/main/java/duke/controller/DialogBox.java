@@ -16,9 +16,8 @@ import java.io.IOException;
 import java.util.Collections;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * The {@code DialogBox} control represents a dialog box consisting of an ImageView to
+ * represent the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML

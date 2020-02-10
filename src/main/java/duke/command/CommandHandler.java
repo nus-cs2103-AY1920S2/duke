@@ -36,7 +36,8 @@ public class CommandHandler {
      * @param storage  Storage instance.
      * @throws DuchessException If the list fails to be saved.
      */
-    static String handleTodoCommand(String command, TaskList taskList, Ui ui, Storage storage) throws DuchessException {
+    static String handleTodoCommand(String command, TaskList taskList,
+                                    Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         if (commands.size() < 2) {
             throw new DuchessException(ERROR_TODO_MISSING_CONTENT);
@@ -58,8 +59,8 @@ public class CommandHandler {
      * @throws DuchessException If the list fails to be saved or /at [details] is
      *                          missing.
      */
-    static String handleEventCommand(String command, TaskList taskList, Ui ui, Storage storage)
-            throws DuchessException {
+    static String handleEventCommand(String command, TaskList taskList,
+                                     Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         if (commands.size() < 2) {
             throw new DuchessException(ERROR_EVENT_MISSING_CONTENT);
@@ -85,8 +86,8 @@ public class CommandHandler {
      * @throws DuchessException If the list fails to be saved or /by is missing or
      *                          the deadline is of an unrecognizable format.
      */
-    static String handleDeadlineCommand(String command, TaskList taskList, Ui ui, Storage storage)
-            throws DuchessException {
+    static String handleDeadlineCommand(String command, TaskList taskList,
+                                        Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         if (commands.size() < 2) {
             throw new DuchessException(ERROR_DEADLINE_MISSING_CONTENT);
@@ -110,7 +111,8 @@ public class CommandHandler {
      * @param ui       Ui instance.
      * @param storage  Storage instance.
      */
-    static String handleListCommand(String command, TaskList taskList, Ui ui, Storage storage) throws DuchessException {
+    static String handleListCommand(String command, TaskList taskList,
+                                    Ui ui, Storage storage) throws DuchessException {
         return ui.printTaskList(taskList);
     }
 
@@ -125,7 +127,8 @@ public class CommandHandler {
      * @throws DuchessException If the list fails to be saved or the index is out of
      *                          bounds or the task is already completed.
      */
-    static String handleDoneCommand(String command, TaskList taskList, Ui ui, Storage storage) throws DuchessException {
+    static String handleDoneCommand(String command, TaskList taskList,
+                                    Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         int indexAsInt = Integer.parseInt(commands.get(1).trim());
         if (indexAsInt < 0 || indexAsInt > taskList.size()) {
@@ -164,8 +167,8 @@ public class CommandHandler {
      * @throws DuchessException If the list fails to be saved or the index is out of
      *                          bounds.
      */
-    static String handleDeleteCommand(String command, TaskList taskList, Ui ui, Storage storage)
-            throws DuchessException {
+    static String handleDeleteCommand(String command, TaskList taskList,
+                                      Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         int indexAsInt = Integer.parseInt(commands.get(1).trim());
         if (indexAsInt < 0 || indexAsInt > taskList.size()) {

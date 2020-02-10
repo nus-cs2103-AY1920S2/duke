@@ -61,7 +61,8 @@ public class Ui {
      * @return The default goodbye message {@code String}.
      */
     public String printGoodbye() {
-        return this.print("Bye, is it? Shoo shoo then.", "Don't need to worry, I'll remember what you told me today.");
+        return this.print("Bye, is it? Shoo shoo then.",
+                "Don't need to worry, I'll remember what you told me today.");
     }
 
     /**
@@ -217,9 +218,13 @@ public class Ui {
      * @return The welcome message {@code String}.
      */
     public String printConsoleWelcome() {
-        String logo = " _____             _\n" + "|  __ \\           | |\n" + "| |  | |_   _  ___| |__   ___  ___ ___\n"
-                + "| |  | | | | |/ __| '_ \\ / _ \\/ __/ __|\n" + "| |__| | |_| | (__| | | |  __/\\__ \\__ \\\n"
+        String logo = " _____             _\n"
+                + "|  __ \\           | |\n"
+                + "| |  | |_   _  ___| |__   ___  ___ ___\n"
+                + "| |  | | | | |/ __| '_ \\ / _ \\/ __/ __|\n"
+                + "| |__| | |_| | (__| | | |  __/\\__ \\__ \\\n"
                 + "|_____/ \\__,_|\\___|_| |_|\\___||___/___/";
-        return this.print("Hello from", logo, "My name is Duchess, as you can see above.", "How may I help you?");
+        return this.print("Hello from", logo, "My name is Duchess, as you can see above.",
+                "How may I help you?");
     }
 }
