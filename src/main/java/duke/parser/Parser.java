@@ -5,13 +5,7 @@
 
 package duke.parser;
 
-import duke.commands.Command;
-import duke.commands.AddCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.ListCommand;
-import duke.commands.NullCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 
 public class Parser {
@@ -28,10 +22,12 @@ public class Parser {
                 return new ExitCommand(command);
             } else if (command.equals("list")) {
                 return new ListCommand(command);
-            } else if (firstWord.equals("done")){
+            } else if (firstWord.equals("done")) {
                 return new DoneCommand(command);
             } else if (firstWord.equals("delete")) {
                 return new DeleteCommand(command);
+            } else if (firstWord.equals("find")) {
+                return new FindCommand(command);
             } else if (firstWord.equals("todo")) {
                 return new AddCommand(command);
             } else if (firstWord.equals("deadline")) {
