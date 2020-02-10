@@ -4,7 +4,7 @@ matrix:
     - jdk: openjdk11
 
 script: >-
-    ./gradlew clean format test
+    ./gradlew format test
 
 deploy:
   skip_cleanup: true
