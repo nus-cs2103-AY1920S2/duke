@@ -5,13 +5,18 @@
 
 package duke;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.HashSet;
 
 public class Parser {
     static HashSet<String> commandList = new HashSet<String>(
-            List.of("todo", "event", "deadline", "list", "done", "delete", "find", "save", "exit"));
+            List.of("todo", "event", "deadline",
+                    "list", "done", "delete",
+                    "find", "update", "upcoming",
+                    "view", "save", "exit"));
 
 
     /**
@@ -56,7 +61,7 @@ public class Parser {
                 return deadlineCommand(command, tasklist);
 
             case "list":
-                return listCommand(tasklist);
+                return listCommand(command, tasklist);
 
             case "done":
                 return doneCommand(command, tasklist);
@@ -66,6 +71,15 @@ public class Parser {
 
             case "find":
                 return findCommand(command, tasklist);
+
+            case "update":
+                return updateCommand(command, tasklist);
+
+            case "upcoming":
+                return upcomingCommand(command, tasklist);
+
+            case "view":
+                return viewCommand(command, tasklist);
 
             case "save":
                 return saveCommand(tasklist);
@@ -88,7 +102,11 @@ public class Parser {
      */
     public static String todoCommand(String[] command, TaskList tasklist) {
         if (command.length > 1) {
-            return tasklist.newTodo(false, command[1]);
+            try {
+                return tasklist.newTodo(false, command[1]);
+            } catch (IOException e) {
+                return "Oops! Unable to write to file due to " + e + "!";
+            }
         } else {
             return Ui.TASK_NEEDS_NAME;
         }
@@ -106,6 +124,8 @@ public class Parser {
                 return tasklist.newEvent(false, command[1], command[2]);
             } catch (DateTimeParseException e) {
                 return Ui.WRONG_DATE_TIME_FORMAT;
+            } catch (IOException e) {
+                return "Oops! Unable to write to file due to " + e + "!";
             }
 
         } else if (command.length == 2) {
@@ -127,6 +147,8 @@ public class Parser {
                 return tasklist.newDeadline(false, command[1], command[2]);
             } catch (DateTimeParseException e) {
                 return Ui.WRONG_DATE_TIME_FORMAT;
+            } catch (IOException e) {
+                return "Oops! Unable to write to file due to " + e + "!";
             }
         } else if (command.length == 2) {
             return Ui.TASK_NEEDS_DATE_TIME;
@@ -140,12 +162,31 @@ public class Parser {
      * @param tasklist the target TaskList.
      * @return a message displaying the number of tasks in the list.
      */
-    public static String listCommand(TaskList tasklist) {
-        if (tasklist.getSize() == 0) {
+    public static String listCommand(String[] command, TaskList tasklist) {
+        if (command.length > 1 && !command[1].equals("all")) {
+            TaskList query = new TaskList();
+            for (Task t : tasklist.getList()) {
+                if (command[1].equals("todo") && t instanceof Todo) {
+                    query.tempAdd(t);
+                } else if (command[1].equals("deadline") && t instanceof Deadline) {
+                    query.tempAdd(t);
+                } else if (command[1].equals("event") && t instanceof Event) {
+                    query.tempAdd(t);
+                }
+            }
+            if (query.isEmpty()) {
+                return Ui.NO_MATCHING_TASK_IN_LIST;
+            } else {
+                return Ui.DISPLAY_MATCHING_TASK_LIST + "\n" + query;
+            }
+        }
+
+        if (tasklist.isEmpty()) {
             return Ui.NO_TASK_IN_LIST;
         } else {
             return Ui.DISPLAY_TASK_LIST + "\n" + tasklist;
         }
+
     }
 
     /**
@@ -160,6 +201,8 @@ public class Parser {
             return tasklist.markDone(taskID);
         } catch (IndexOutOfBoundsException e) {
             return Ui.NO_TASK_FOUND;
+        } catch (IOException e) {
+            return "Oops! Unable to write to file due to " + e + "!";
         }
     }
 
@@ -175,6 +218,8 @@ public class Parser {
             return tasklist.deleteTask(taskID);
         } catch (IndexOutOfBoundsException e) {
             return Ui.NO_TASK_FOUND;
+        } catch (IOException e) {
+            return "Oops! Unable to write to file due to " + e + "!";
         }
     }
 
@@ -189,10 +234,10 @@ public class Parser {
         TaskList query = new TaskList();
         for (Task thisTask : tasklist.getList()) {
             if (command.length > 1 && thisTask.getTaskName().toLowerCase().contains(command[1].toLowerCase())) {
-                query.add(thisTask);
+                query.tempAdd(thisTask);
             }
         }
-        if (query.getList().isEmpty()) {
+        if (query.isEmpty()) {
             return Ui.NO_MATCHING_TASK_IN_LIST;
         } else {
             return Ui.DISPLAY_MATCHING_TASK_LIST + "\n" + query;
@@ -200,7 +245,106 @@ public class Parser {
     }
 
     /**
-     * Saves the master TaskList, at its current state when the command was called, into a save file.
+     * Updates the Task in the specified index of the TaskList
+     * @param command the String array representing the parsed input.
+     * @param tasklist the master TaskList object.
+     * @return a message displaying whether this command is successful.
+     */
+    public static String updateCommand(String[] command, TaskList tasklist) {
+        if (command.length > 1) {
+            try {
+                String[] s = command[1].split(" ", 2);
+                if (s.length < 2) {
+                    return Ui.NO_FIELD_TO_UPDATE;
+                }
+                int taskID = Integer.parseInt(s[0]);
+                return tasklist.updateTask(taskID, s[1]);
+            } catch (IndexOutOfBoundsException e) {
+                return Ui.NO_TASK_FOUND;
+            } catch (IOException e) {
+                return "Oops! Unable to write to file due to " + e + "!";
+            }
+        } else {
+            return Ui.NO_FIELD_TO_UPDATE;
+        }
+    }
+
+    /**
+     * Views a range of Tasks, sorted by time, over a specified number of days.
+     * @param command the String array representing the parsed input.
+     * @param tasklist the master TaskList object.
+     * @return a list of Event and Deadline objects occurring the specified number of days.
+     */
+    public static String upcomingCommand(String[] command, TaskList tasklist) {
+        if (command[1].equals("today")) {
+            command[1] = "1";
+        } else if (command[1].equals("tomorrow")) {
+            command[1] = "2";
+        }
+
+        try {
+            LocalDate TODAY = LocalDate.now();
+            TaskList upcomingEvents = new TaskList();
+            TaskList upcomingDeadlines = new TaskList();
+            int dayRangeUntil = Integer.parseInt(command[1]);
+            for (Task t : tasklist.getList()) {
+                if (!t.getTaskDate().isBefore(TODAY) && t.getTaskDate().compareTo(TODAY) <= dayRangeUntil) {
+                    if (t instanceof Event) {
+                        upcomingEvents.tempAdd(t);
+                    } else if (t instanceof Deadline && !t.getDoneStatus()) {
+                        upcomingDeadlines.tempAdd(t);
+                    }
+                }
+            }
+
+            return Ui.displayUpcomingRange(dayRangeUntil, upcomingDeadlines, upcomingEvents);
+
+        } catch (NumberFormatException e) {
+            return Ui.COMMAND_NOT_FOUND;
+        }
+    }
+
+    /**
+     * Views the schedule of a particular date.
+     * @param command the String array representing the parsed input.
+     * @param tasklist the master TaskList object.
+     * @return a list of Event and Deadline objects occurring on the specified day.
+     */
+    public static String viewCommand(String[] command, TaskList tasklist) {
+        try {
+            LocalDate targetDate;
+
+            if (command[1].equals("today")) {
+                targetDate = LocalDate.now();
+            } else if (command[1].equals("tomorrow")) {
+                targetDate = LocalDate.now().plusDays(1);
+            } else {
+                targetDate = LocalDate.parse(command[1], Task.DATE_FORMATTER);
+            }
+
+            TaskList upcomingEvents = new TaskList();
+            TaskList upcomingDeadlines = new TaskList();
+
+            for (Task t : tasklist.getList()) {
+                if (t.getTaskDate().equals(targetDate)) {
+                    if (t instanceof Event) {
+                        upcomingEvents.tempAdd(t);
+                    } else if (t instanceof Deadline && !t.getDoneStatus()) {
+                        upcomingDeadlines.tempAdd(t);
+                    }
+                }
+            }
+
+            return Ui.displayUpcomingDay(targetDate.format(Task.DATE_FORMATTER), upcomingDeadlines, upcomingEvents);
+
+        } catch (DateTimeParseException e) {
+            return Ui.WRONG_DATE_TIME_FORMAT;
+        }
+
+    }
+
+    /**
+     * Saves the master TaskList, at its current state when the command was called, into the data file.
      * @param tasklist the master TaskList object to save.
      * @return a message if the changes are successfully saved.
      */

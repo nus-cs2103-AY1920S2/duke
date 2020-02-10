@@ -9,9 +9,9 @@ public class Event extends Task {
      * Constructor for a new Event object.
      * @param isDone whether the Task is marked as done.
      * @param taskName the name of the Task.
-     * @param taskTime the end time of the Task.
+     * @param taskDateTime the end time of the Task.
      */
-    public Event(boolean isDone, String taskName, String taskTime) {
-        super('E', isDone, taskName, taskTime);
+    public Event(boolean isDone, String taskName, String taskDateTime) {
+        super('E', isDone, taskName, taskDateTime);
     }
 }

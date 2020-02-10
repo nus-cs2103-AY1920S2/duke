@@ -5,7 +5,8 @@
 
 package duke;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -13,36 +14,36 @@ abstract class Task {
     private char taskType;
     private boolean isDone;
     private String taskName;
-    private LocalDateTime taskTime;
+
+    private LocalDate taskDate;
+    private LocalTime taskTime;
+
+    static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy");
+    static DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
     /**
      * Constructor for a new generic Task object.
      * @param taskType defines the type of this Task.
      * @param isDone whether the Task is done.
      * @param taskName the name of the Task.
-     * @param taskTime the end time of the Task.
+     * @param taskDateTime the given date-time of the Task.
+     * @throws DateTimeParseException if the date or time provided is in the wrong format.
      */
-    public Task(char taskType, boolean isDone, String taskName, String taskTime) {
+    public Task(char taskType, boolean isDone, String taskName, String taskDateTime) throws DateTimeParseException {
         this.taskType = taskType;
         this.isDone = isDone;
         this.taskName = taskName;
-        this.taskTime = taskTime.isEmpty()
-                ? LocalDateTime.MIN
-                : this.parseDate(taskTime);
-    }
 
-    /**
-     * Parses the date and time in a string passed into the constructor.
-     * @param taskTime the end time of this Task.
-     * @return a LocalDateTime object containing a string representation of a time.
-     *         If no time is present, a default time "2359" is used.
-     * @throws DateTimeParseException if the string is not in d/M/yyyy HHmm format.
-     */
-    public LocalDateTime parseDate(String taskTime) throws DateTimeParseException {
-        if (taskType == 'D' && !taskTime.contains(" ")) {
-            taskTime = taskTime + " 2359";
+        this.taskDate = LocalDate.EPOCH;
+        this.taskTime = LocalTime.MAX;
+
+        if (!taskDateTime.isEmpty()) {
+            String[] dateTime = taskDateTime.split(" ");
+            this.taskDate = LocalDate.parse(dateTime[0], DATE_FORMATTER);
+            if (dateTime.length > 1) {
+                this.taskTime = LocalTime.parse(dateTime[1], TIME_FORMATTER);
+            }
         }
-        return LocalDateTime.parse(taskTime, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
     /**
@@ -78,13 +79,54 @@ abstract class Task {
     }
 
     /**
-     * Returns the end time of this Task, in a String format.
+     * Returns the date and time of this Task in a string format.
+     * @return the Date and Time of this Task.
+     */
+    public String getTaskDateTime() {
+        return this.getTaskDate().format(DATE_FORMATTER) + " " + this.getTaskTime().format(TIME_FORMATTER);
+    }
+
+    /**
+     * Returns the end date of this Task in a String format.
+     * @return the end date of the Task.
+     */
+    public LocalDate getTaskDate() {
+        return this.taskDate;
+    }
+
+    /**
+     * Returns the end time of this Task in a String format.
      * @return the end time of the Task.
      */
-    public String getTaskTime() {
-        return this.taskTime.getDayOfMonth() + "/" + this.taskTime.getMonthValue() + "/" + this.taskTime.getYear()
-                + " " + this.taskTime.getHour()
-                + (this.taskTime.getMinute() > 9 ? this.taskTime.getMinute() : "0" + this.taskTime.getMinute());
+    public LocalTime getTaskTime() {
+        return this.taskTime;
+    }
+
+
+    /**
+     * Sets the name of this Task to a new name.
+     * @param taskName the name to change this Task to.
+     */
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    /**
+     * Sets the end date of this Task to a new Date.
+     * @param taskDate the new Date.
+     * @throws DateTimeParseException if the Date is in the wrong format.
+     */
+    public void setTaskDate(String taskDate) throws DateTimeParseException {
+        this.taskDate = LocalDate.parse(taskDate, DATE_FORMATTER);
+    }
+
+    /**
+     * Sets the end time of this Task to a new Time.
+     * @param taskTime the new Time.
+     * @throws DateTimeParseException if the Time is in the wrong format
+     */
+    public void setTaskTime(String taskTime) throws DateTimeParseException {
+        this.taskTime = LocalTime.parse(taskTime, TIME_FORMATTER);
     }
 
     /**
@@ -99,20 +141,17 @@ abstract class Task {
         return Ui.MARKED_AS_DONE + this;
     }
 
-    /**
-     * An overridden toString() function to display a custom format when this Task is called as a String.
-     * @return a String representing this Task.
-     */
+
     @Override
     public String toString() {
         if (this.taskType == 'T') {
             return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName;
 
         } else if (this.taskType == 'D') {
-            return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName + " (by: " + this.getTaskTime() + ")";
+            return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName + " (by: " + this.getTaskDateTime() + ")";
 
         } else if (this.taskType == 'E') {
-            return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName + " (at: " + this.getTaskTime() + ")";
+            return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName + " (at: " + this.getTaskDateTime() + ")";
         } else {
             return "";
         }

@@ -18,10 +18,10 @@ public class Storage {
     static File thisLoc = new File(System.getProperty("user.dir") + "/data");
 
     /**
-     * This method handles loading of an existing saved data stored in the directory 'data', where the program is
+     * This method handles loading of an existing data file stored in the directory 'data', where the program is
      * located, and populate a new TaskList object.
      * If the directory is absent, a new directory is created.
-     * If the directory is created and the saved data is absent, a new saved file is created.
+     * If the directory is created and the data file is absent, a new data file is created.
      * @return a new TaskList object.
      */
     public static TaskList load() {
@@ -79,9 +79,9 @@ public class Storage {
     }
 
     /**
-     * This method saves a current TaskList object into the save file into the directory 'data', where the program
+     * This method saves a current TaskList object into the data file in the directory 'data', where the program
      * is located, assuming that the file has already been created before or during the launch of the program.
-     * @param tasklist the TaskList object to parse into the save file.
+     * @param tasklist the TaskList object to parse into the data file.
      */
     public static void save(TaskList tasklist) throws IOException {
         FileWriter fw = new FileWriter(savedData);
@@ -91,7 +91,7 @@ public class Storage {
             String taskStr = thisTask.getTaskType() + " ~ "
                     + (thisTask.getDoneStatus() ? "1" : "0") + " ~ "
                     + thisTask.getTaskName() + " ~ "
-                    + (thisTask.getTaskType() == 'T' ? "" : thisTask.getTaskTime()) + "\n";
+                    + (thisTask.getTaskType() == 'T' ? "" : thisTask.getTaskDateTime()) + "\n";
             bw.write(taskStr);
         }
         bw.close();

@@ -47,11 +47,12 @@ public class Duke extends Application {
 
         Ui.showLogo();
         TaskList tasklist = Storage.load();
+        System.out.println("");
         System.out.println(Ui.WELCOME_MESSAGE);
 
         boolean didNotExit = true;
         while (didNotExit) {
-            String thisResult = Ui.processNextCommand(scanner, tasklist);
+            String thisResult = Ui.readNextCommand(scanner, tasklist);
             log.add(thisResult);
 
             if (thisResult.equals("exit")) {
@@ -121,6 +122,14 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+
+        Label welcomeMessage = new Label(Ui.WELCOME_MESSAGE);
+        Label startupUpcomingWeekView = new Label(Parser.upcomingCommand(new String[] {"upcoming", "7"}, this.tasklist));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeMessage, new ImageView(duke)),
+                DialogBox.getDukeDialog(startupUpcomingWeekView, new ImageView(duke))
+        );
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -174,7 +183,7 @@ public class Duke extends Application {
      * @return the result after processing the user input.
      */
     private String getResponse(String input) {
-        return Ui.processNextCommand(input, this.tasklist);
+        return Ui.readNextCommand(input, this.tasklist);
     }
 
 
