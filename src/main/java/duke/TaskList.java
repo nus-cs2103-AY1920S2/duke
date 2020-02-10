@@ -1,17 +1,8 @@
 package duke;
 
-import duke.exceptions.DeadlineException;
-import duke.exceptions.DeleteException;
-import duke.exceptions.DoneException;
-import duke.exceptions.EmptyTaskListException;
-import duke.exceptions.EventException;
-import duke.exceptions.InputUnclearException;
-import duke.exceptions.ToDoException;
+import duke.exceptions.*;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
+import duke.tasks.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -74,6 +65,9 @@ public class TaskList {
             case "done":
                 return doneTask(command);
 
+            case "loan":
+                return addNewLoan(command);
+
             case "todo":
                 return addNewToDo(command);
 
@@ -92,7 +86,7 @@ public class TaskList {
 
             }
         } catch (DoneException | DeadlineException | DeleteException | EmptyTaskListException
-            | EventException | InputUnclearException | ToDoException e) {
+            | EventException | InputUnclearException | LoanException | ToDoException e) {
             return Ui.exceptionMessage(e.toString());
         }
 
@@ -195,19 +189,41 @@ public class TaskList {
     }
 
     /**
-     * Gives String representation of the result of a delete command and Deletes the given Task.
+     * Gives String representation of the result of a delete command and Deletes the given Task(s).
      * This is based on the command's keyword (a number representing index in ArrayList).
      *
-     * @param command the full, unedited command entered by the user.
+     * @param command the full, unedited command entered by the user, which can contain multiple integers.
      * @return String representation of the result of a delete command.
      * @throws DeleteException where deleting task not possible due to incorrect command/index entered by user.
      */
     private String deleteTask(String command) throws DeleteException {
         try {
-            int indexToRemove = Integer.parseInt(command.substring("delete ".length())) - 1; // due to zero-indexing
-            Task removedTask = allTasks.remove(indexToRemove);
-            Storage.saveChanges(this);
-            return Ui.taskRemovalMessage(indexToRemove, removedTask, this);
+            // Create an int array of task numbers to remove
+            String taskNumbersString = command.substring("delete ".length());
+            String[] taskNumbersStringArray = taskNumbersString.split(" ");
+            int[] taskNumbers = new int[taskNumbersStringArray.length];
+            // Removing one Task will eventually cause the length to decrease
+            // hence for each value we have to deduct the value by its positional index
+            // in the String array
+            for (int i = 0; i < taskNumbersStringArray.length; i++) {
+                taskNumbers[i] = Integer.parseInt(taskNumbersStringArray[i]) - i;
+            }
+
+            // Delete Tasks and get String result
+            String deleteTaskResponse = "";
+            for (int i = 0; i < taskNumbers.length; i++) {
+                // Delete Task
+                int taskNumber = taskNumbers[i]; // original String of task number entered
+                int indexToRemove = taskNumber - 1; // due to zero-indexing
+                Task removedTask = allTasks.remove(indexToRemove);
+
+                // Update String result and store changes
+                deleteTaskResponse += Ui.taskRemovalMessage(indexToRemove, removedTask, this) + "\n";
+                Storage.saveChanges(this);
+
+            }
+            return deleteTaskResponse;
+
         } catch (Exception e) {
             throw new DeleteException("");
         }
@@ -224,6 +240,29 @@ public class TaskList {
         allTasks.add(t);
         Storage.saveChanges(this);
         return Ui.customMessage(t.taskAddedMessage());
+    }
+
+    /**
+     * Gives the String to indicate adding a new Loan and adds the new Loan for user to track.
+     *
+     * @param command the full, unedited command entered by the user.
+     * @return String to indicate adding a new Loan.
+     * @throws LoanException Exception arising from creating Loan Task due to wrong inputs.
+     */
+    private  String addNewLoan(String command) throws LoanException {
+        try {
+            // need to identify value
+            String valueString = getRestriction("/value", command);
+            int value = Integer.parseInt(valueString);
+
+            // filter to obtain borrower
+            String borrower = getBorrower(command);
+            Loan currentLoan = new Loan(borrower, value);
+            assert (!currentLoan.getIsDone());
+            return addTaskToStored(currentLoan);
+        } catch (Exception e) {
+            throw new LoanException("");
+        }
     }
 
     /**
@@ -304,7 +343,7 @@ public class TaskList {
     }
 
     /**
-     * Gets Deadline limit or Event time based on keyword (which includes "/").
+     * Gets String for Deadline limit or Event time or Borrowed value based on keyword (which includes "/").
      * The result is simply the time/date in a String.
      *
      * @param keyword a String beginning with "/" and a keyword which separates the Task and Restriction of Time.
@@ -317,7 +356,7 @@ public class TaskList {
     }
 
     /**
-     * Gets Deadline or Event Task description to do.
+     * Gets Deadline or Event or Task description to do.
      *
      * @param taskType type of task.
      * @param keyword a String beginning with "/" and a keyword which separates the Task and Restriction of Time.
@@ -328,6 +367,16 @@ public class TaskList {
         int indexOfTimeKeyword = indexSearchInString(keyword, command) - 1; // due to whitespace
         int startIndex = taskType.length() + 1; // due to whitespace
         return command.substring(startIndex, indexOfTimeKeyword);
+    }
+
+    /**
+     * Gets borrower of Loan.
+     *
+     * @param command the full, unedited command entered by the user.
+     * @return String representation of borrower of the Loan.
+     */
+    private String getBorrower(String command) {
+        return getCommand("loan", "/value", command);
     }
 
     /**
@@ -349,9 +398,10 @@ public class TaskList {
      */
     private String doTask(int i) {
         Task t = allTasks.get(i - 1); // due to 0 indexing
+        String doTaskResponse = Ui.taskCompleteMessage(t); // gives response based on whether it has been done before
         t.doTask(); // task marked as complete
         Storage.saveChanges(this);
-        return Ui.taskCompleteMessage(t);
+        return doTaskResponse;
     }
 
     /**

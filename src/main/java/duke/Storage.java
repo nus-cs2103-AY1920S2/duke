@@ -1,9 +1,6 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
+import duke.tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,8 +52,8 @@ public class Storage {
 
                 // We want to get these useful Strings using our Parser
                 Parser logic = new Parser();
-                String doneStatus = logic.determineTaskDoneStatusFromFileLine(line);
                 String taskType = logic.determineTaskTypeFromFileLine(line);
+                String doneStatus = logic.determineTaskDoneStatusFromFileLine(line);
                 String details = logic.determineTaskDetailsFromFileLine(line);
 
                 switch (taskType) {
@@ -70,20 +67,36 @@ public class Storage {
                     allTasks.addSavedTaskToStored(currentToDo);
                     break;
 
-                case "D":
-                    // This is a Deadline item
-                    String deadlineCommand = getDeadlineCommand(details);
-                    String deadlineLimit = getDeadlineLimit(details);
-                    Task currentDeadline = new Deadline(deadlineCommand, deadlineLimit);
+                case "L":
 
-                    // Check if done
+                    // This is a Loan item
+                    String loanBorrower = getLoanBorrower(details);
+                    int loanValue = getLoanValue(details);
+                    Task currentLoan = new Loan(loanBorrower, loanValue);
+
+                    // Check if done/paid
                     if (logic.isDone(doneStatus)) {
-                        currentDeadline.doTask();
+                        currentLoan.doTask();
                     }
 
                     // Finally, add the correct Task
-                    allTasks.addSavedTaskToStored(currentDeadline);
+                    allTasks.addSavedTaskToStored(currentLoan);
                     break;
+
+                case "D":
+                // This is a Deadline item
+                String deadlineCommand = getDeadlineCommand(details);
+                String deadlineLimit = getDeadlineLimit(details);
+                Task currentDeadline = new Deadline(deadlineCommand, deadlineLimit);
+
+                // Check if done
+                if (logic.isDone(doneStatus)) {
+                    currentDeadline.doTask();
+                }
+
+                // Finally, add the correct Task
+                allTasks.addSavedTaskToStored(currentDeadline);
+                break;
 
                 case "E":
                     // This is an Event item
@@ -125,6 +138,7 @@ public class Storage {
         return eventCommand;
     }
 
+
     /**
      * Gets the Event's time based on the details upon removing task status and type.
      *
@@ -146,8 +160,8 @@ public class Storage {
      * @return the Deadline's command.
      */
     private String getDeadlineCommand(String details) {
-        int indexOfAtKeyword = details.indexOf("(by: ");
-        String deadlineCommand = details.substring(0, indexOfAtKeyword - 1);
+        int indexOfByKeyword = details.indexOf("(by: ");
+        String deadlineCommand = details.substring(0, indexOfByKeyword - 1);
         assert (deadlineCommand != null) : "Deadline tasks should have a command.";
         return deadlineCommand;
     }
@@ -164,6 +178,33 @@ public class Storage {
                 details.lastIndexOf(")"));
         assert (deadlineLimit != null) : "Deadline tasks should have a date limit.";
         return deadlineLimit;
+    }
+
+    /**
+     * Gets the Loan's borrower based on the details upon removing task status and type.
+     *
+     * @param details the line read in, after removing unnecessary information on task status and type.
+     * @return the Loan's borrower.
+     */
+    private String getLoanBorrower(String details) {
+        int indexOfValueKeyword = details.indexOf("(value: ");
+        String borrower = details.substring(0, indexOfValueKeyword - 1);
+        assert (borrower != null) : "Loan should have a borrower.";
+        return borrower;
+    }
+
+    /**
+     * Gets the Loan's time based on the details upon removing task status and type.
+     *
+     * @param details the line read in, after removing unnecessary information on task status and type.
+     * @return the Loan's value.
+     */
+    private int getLoanValue(String details) {
+        int indexOfValueKeyword = details.indexOf("(value: ");
+        String loanValueString = details.substring(indexOfValueKeyword + 8,
+                details.lastIndexOf(")"));
+        assert (loanValueString != null) : "Loan should have a value.";
+        return Integer.parseInt(loanValueString);
     }
 
     /**
