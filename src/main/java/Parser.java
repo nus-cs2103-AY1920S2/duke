@@ -44,7 +44,8 @@ public class Parser {
                 this::listCommand,
                 this::todoCommand,
                 this::findCommand,
-                this::sortCommand)
+                this::sortCommand,
+                this::helpCommand)
             .map(DukeOptionalCommand::get)
             .filter(Optional::isPresent)
             .map(Optional::get)
@@ -201,5 +202,21 @@ public class Parser {
             return Optional.empty();
         }
     }
+    
+    private Optional<Command> helpCommand() throws DukeException {
+        Pattern donePattern = Pattern.compile("^help( (.*))?");
+        Matcher doneMatcher = donePattern.matcher(command);
+        if (doneMatcher.find()) {
+            String commandString = doneMatcher.group(2);
+            if (commandString == null || commandString.isEmpty()) {
+                throw new DukeException("Command name cannot be empty");
+            } else {
+                return Optional.of(new HelpCommand(commandString));
+            }
+        } else {
+            return Optional.empty();
+        }
+    }
+    
 }
 

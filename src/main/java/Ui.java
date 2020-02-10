@@ -99,6 +99,12 @@ interface Ui {
     public void showSortMessage();
     
     /**
+     * Displays a help command for a given message name.
+     * @param command Command name
+     */
+    public void showHelpMessage(String commandName);
+    
+    /**
      * Closes and cleans up resources held by the UI.
      */
     public void close();

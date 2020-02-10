@@ -151,6 +151,53 @@ public class Cli implements Ui {
     }
     
     /**
+     * Displays a help command for a given message name.
+     * @param commandName Command name
+     */
+    public void showHelpMessage(String commandName) {
+        switch (commandName) {
+        case "bye":
+            PrintUtil.indentedPrintln("Usage: bye");
+            PrintUtil.indentedPrintln("Saves task list to file and exits.");
+            break;
+        case "deadline":
+            PrintUtil.indentedPrintln("Usage: deadline [task description] /by [yyyy-mm-dd]");
+            PrintUtil.indentedPrintln("Adds a new Deadline task into the task list.");
+            break;
+        case "delete":
+            PrintUtil.indentedPrintln("Usage: delete [i]");
+            PrintUtil.indentedPrintln("Removes the i-th task from the task list.");
+            break;
+        case "done":
+            PrintUtil.indentedPrintln("Usage: done [i]");
+            PrintUtil.indentedPrintln("Marks the i-th task in the task list as done.");
+            break;
+        case "event":
+            PrintUtil.indentedPrintln("Usage: event [task description] /at [yyyy-mm-dd]");
+            PrintUtil.indentedPrintln("Adds a new Event task into the task list.");
+            break;
+        case "find":
+            PrintUtil.indentedPrintln("Usage: find [task description]");
+            PrintUtil.indentedPrintln("Finds and displays tasks whose description matches the query string.");
+            break;
+        case "list":
+            PrintUtil.indentedPrintln("Usage: list");
+            PrintUtil.indentedPrintln("Displays the tasks in the task list.");
+            break;
+        case "sort":
+            PrintUtil.indentedPrintln("Usage: sort");
+            PrintUtil.indentedPrintln("Sorts all tasks in chronological order, then lists the tasks.");
+            break;
+        case "todo":
+            PrintUtil.indentedPrintln("Usage: todo [task description]");
+            PrintUtil.indentedPrintln("Adds a new Todo task into the task list.");
+            break;
+        default:
+            PrintUtil.indentedPrintf("Unknown command \"%s\"\n", commandName);
+        }
+    }
+    
+    /**
      * Closes and cleans up resources held by the UI.
      * This method does nothing for the command-line interface.
      */

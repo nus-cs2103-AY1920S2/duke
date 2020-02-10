@@ -6,7 +6,7 @@ public class FindCommand implements Command {
     }
     
     /**
-     * Finds and displays events whose description matches the query string.
+     * Finds and displays tasks whose description matches the query string.
      * @param tasks TaskList object to store tasks
      * @param ui UI object for interfacing with the user
      * @param storage Storage object to read and write TaskList state from files
