@@ -73,6 +73,9 @@ public class Parser {
         }
 
         String description = splitStr[0];
+        if (description.equals("deadline ")) {
+            throw (new DukeException("The deadline requires a description."));
+        }
         String timing = splitStr[1];
         String[] splitCommand = description.split(" ");
 
@@ -102,6 +105,9 @@ public class Parser {
         }
 
         String description = splitStr[0];
+        if (description.equals("event ")) {
+            throw (new DukeException("The event requires a description."));
+        }
         String timing = splitStr[1];
         String[] splitCommand = description.split(" ");
 

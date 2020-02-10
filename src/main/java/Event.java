@@ -1,4 +1,5 @@
 import java.text.ParseException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -21,11 +22,15 @@ public class Event extends Task {
      * @param date The date which the event is at.
      * @throws ParseException If the date cannot be parsed, i.e is in the wrong format.
      */
-    public Event(String description, String date) {
+    public Event(String description, String date) throws DukeException {
         super(description);
         assert description != null : "description cannot be null";
         assert date != null : "date cannot be null";
-        this.date = LocalDate.parse(date);
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeException e) {
+            throw new DukeException("Please format the date as YYYY-MM-DD.");
+        }
     }
 
     /**

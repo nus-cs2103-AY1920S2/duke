@@ -1,6 +1,8 @@
 import java.text.ParseException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,11 +23,15 @@ public class Deadline extends Task {
      * @param date The date which the deadline is due.
      * @throws ParseException If the date cannot be parsed, i.e is in the wrong format.
      */
-    public Deadline(String description, String date) {
+    public Deadline(String description, String date) throws DukeException {
         super(description);
         assert description != null : "description cannot be null";
         assert date != null : "date cannot be null";
-        this.date = LocalDate.parse(date);
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeException e) {
+            throw new DukeException("Please format the date as YYYY-MM-DD.");
+        }
     }
 
     /**

@@ -1,6 +1,10 @@
 event/0/qq/2019-07-11
 todo/0/tomorrow
-todo/0/tomorrow
 todo/0/view file
 event/1/dialog/2019-03-08
-deadline /0 /code / 2019-11-11
+deadline /0 /code/ 2019-11-11
+todo/0/eat
+deadline /0 /eat/ 2019-01-01
+todo/0/CS2103 Assignment
+deadline /0 /deadline/ 2020-02-02
+deadline /0 /deadline / 2020-02-02

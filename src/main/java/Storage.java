@@ -70,7 +70,7 @@ public class Storage {
                 default:
                 }
             }
-        } catch (FileNotFoundException e1) {
+        } catch (FileNotFoundException | DukeException e1) {
             System.out.println(e1.getMessage());
         }
         return dukeList;
