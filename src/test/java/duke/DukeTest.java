@@ -64,7 +64,6 @@ class DukeTest {
 
     @BeforeEach
     void init() {
-        // Delete any save file
         deleteSaveFile();
         duke = new Duke(saveFile);
         output = new ByteArrayOutputStream();

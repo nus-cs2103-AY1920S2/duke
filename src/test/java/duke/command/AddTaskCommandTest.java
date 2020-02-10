@@ -45,6 +45,14 @@ class AddTaskCommandTest {
                 Arguments.of(task, tasks));
     }
 
+    private static Stream<Arguments> generateTaskListWithOneTask() {
+        Task task = new Todo("Read book");
+        TaskList tasks = new TaskList();
+        tasks.addTask(task);
+        return Stream.of(
+                Arguments.of(task, tasks));
+    }
+
     private void deleteSaveFile() {
         try {
             Files.deleteIfExists(Paths.get(saveFilePath));
@@ -73,7 +81,7 @@ class AddTaskCommandTest {
 
     @ParameterizedTest
     @MethodSource("generateEmptyState")
-    void execute(Task task, TaskList tasks) {
+    void execute_emptyTaskList_addTask(Task task, TaskList tasks) {
         int tasksCount = tasks.size();
         // Execute function for testing
         Command command = new AddTaskCommand(task);
@@ -89,5 +97,16 @@ class AddTaskCommandTest {
         } catch (IOException e) {
             fail("Could not read save file");
         }
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateTaskListWithOneTask")
+    void execute_oneTaskInTaskList_addTask(Task task, TaskList tasks) {
+        int tasksCount = tasks.size();
+        assertEquals(1, tasksCount);
+        Command command = new AddTaskCommand(task);
+        command.execute(tasks, ui, storage);
+        assertEquals(2, tasks.size());
+        assertEquals(task.getDescription(), tasks.get(tasksCount).getDescription());
     }
 }
