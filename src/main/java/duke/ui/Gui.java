@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import java.util.concurrent.Semaphore;
 
 import duke.Duke;
+import duke.exceptions.DukeException;
 
 /**
  * Controller for the Main Window of the GUI for Duke.
@@ -46,7 +47,8 @@ public class Gui extends AnchorPane implements Ui {
     }
 
     /**
-     * Configures Duke to accept self as Ui and self's semaphore for synchronisation.
+     * Configures Duke to accept self as Ui and self's semaphore for
+     * synchronisation.
      */
     public void setDuke(Duke duke) {
         duke.useUi(this);
@@ -55,18 +57,36 @@ public class Gui extends AnchorPane implements Ui {
 
     @FXML
     public void showReply(String reply) {
-        Platform.runLater(() -> dialogContainer.getChildren().add(DialogBox.getDukeDialog(reply, dukeImage)));
+        Platform.runLater(() -> addDialog(reply, true));
     }
 
     @FXML
     public void showError(String error) {
-        Platform.runLater(() -> dialogContainer.getChildren().add(DialogBox.getDukeDialog(error, dukeImage)));
+        Platform.runLater(() -> addDialog(error, true));
     }
 
     @FXML
     public void showGreeting() {
         String greeting = "Hello! I'm Duke\nGive me a moment while I locate your save file...";
-        Platform.runLater(() -> dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage)));
+        Platform.runLater(() -> addDialog(greeting, true));
+    }
+
+    /**
+     * Adds a new DialogBox containing the given text to the dialogContainer.
+     * 
+     * @param text Text to be displayed.
+     * @param isDuke Determines whether to add Duke DialogBox or User DialogBox.
+     */
+    private void addDialog(String text, Boolean isDuke) {
+        try {
+            if (isDuke) {
+                dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage));
+            } else {
+                dialogContainer.getChildren().add(DialogBox.getUserDialog(text, userImage));
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -74,11 +94,11 @@ public class Gui extends AnchorPane implements Ui {
         try {
             inputLock.acquire();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            showError("Interrupted!");
         }
         String input = userInput.getText();
         Platform.runLater(() -> userInput.clear());
-        Platform.runLater(() -> dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage)));
+        Platform.runLater(() -> addDialog(input, false));
         inputLock.release();
         return input;
     }
@@ -88,7 +108,7 @@ public class Gui extends AnchorPane implements Ui {
             Thread.sleep(1000);
             Platform.exit();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+            showError("Interrupted!");
 		}
     }
 

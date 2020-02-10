@@ -21,30 +21,33 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Gui.fxml"));
+        AnchorPane ap;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Gui.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-
-            Gui gui = fxmlLoader.<Gui>getController();
-            gui.setDuke(duke);
-
-            stage.setScene(scene);
-            stage.resizableProperty().setValue(false);
-            // Handle case where user manually exits
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                public void handle(WindowEvent event) {
-                    event.consume();
-                    gui.bye();
-                }
-            });
-            stage.show();
-
-            new Thread(() -> {
-                duke.run();
-            }).start();
+            ap = fxmlLoader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error in loading fxml!");
+            return;
         }
+        Scene scene = new Scene(ap);
+
+        Gui gui = fxmlLoader.<Gui>getController();
+        gui.setDuke(duke);
+
+        stage.setScene(scene);
+        stage.resizableProperty().setValue(false);
+        // Handle case where user manually exits
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent event) {
+                event.consume();
+                gui.bye();
+            }
+        });
+        stage.show();
+
+        new Thread(() -> {
+            duke.run();
+        }).start();
+
     }
 }

@@ -47,7 +47,7 @@ public class Duke {
                 try {
                     inputLock.acquire();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    ui.showError("Interrupted!");
                 }
             }
             handler.handleCommand(ui.getInput());
