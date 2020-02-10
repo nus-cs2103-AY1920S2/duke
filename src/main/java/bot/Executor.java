@@ -77,6 +77,7 @@ public class Executor {
         } else if (inst instanceof StorageWriting) {
             return this.executeWriting((StorageWriting<Task>) inst, arguments);
         } else {
+            // unknown instruction type, end program
             return false;
         }
     }
