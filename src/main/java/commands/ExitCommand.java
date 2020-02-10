@@ -20,7 +20,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
-//        System.out.println(MESSAGE_EXIT_ACKNOWEDGEMENT);
         return new CommandResult(MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 

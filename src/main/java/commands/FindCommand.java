@@ -24,14 +24,11 @@ public class FindCommand extends Command {
                     matchedTasks.add(t);
                 }
             }
-//			System.out.println("Search Results as follows: ");
             for (Task t : matchedTasks) {
-//				System.out.println(t);
                 output += "\n" + t.toString();
             }
             return new CommandResult(output + "\n");
         } catch (IndexOutOfBoundsException ie) {
-//			System.out.println("Index does not exist");
             return new CommandResult("Index does not exist");
         }
     }

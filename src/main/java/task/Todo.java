@@ -12,7 +12,7 @@ public class Todo extends Task {
      *
      * @return A String object that can be easily written and retrieved from the data file.
      */
-    public String format() {
+    public String toTxtFormat() {
         return "T" + " | " + (this.isDone ? "1" : "0") + " | " + description;
     }
 

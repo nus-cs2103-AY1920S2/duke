@@ -21,7 +21,6 @@ public class Storage {
 
     public Storage(String filePath) {
         path = Paths.get(filePath);
-        // will need to deal with errorneous paths
     }
 
     /**
@@ -39,13 +38,11 @@ public class Storage {
      * @param tasks The tasks to be saved.s
      */
     public void save(TaskList tasks) {
-//            List<String> encodedAddressBook = AddressBookEncoder.encodeAddressBook(addressBook);
         String s = "";
         for (Task t : tasks.getList()) {
-            s = s + t.format() + "\n";
+            s = s + t.toTxtFormat() + "\n";
         }
         write(s, path);
-//      Files.write(path, encodedAddressBook);
     }
 
     /**
@@ -83,6 +80,7 @@ public class Storage {
             try {
                 Files.createDirectory(path);
             } catch (FileAlreadyExistsException e) {
+                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -48,8 +48,6 @@ public class DeadlineCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         tasks.add(dl);
-//		System.out.println("Successfully added: " + dl);
-//		System.out.println("You now have " + (tasks.getList().size()) + " number of tasks in the list");
         storage.save(tasks);
         return new CommandResult("Successfully added: " + dl + "\nYou now have " + (tasks.getList().size()) +
                 " number of tasks in the list");

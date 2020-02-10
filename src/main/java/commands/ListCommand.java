@@ -20,13 +20,11 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         String printList = "Here are the current tasks in your list:\n";
-//		System.out.println("Here are the current tasks in your list:");
         int listStart = 1;
         for (Task task : tasks.getList()) {
             printList = printList + listStart + ". " + task + "\n";
             listStart++;
         }
-//		System.out.println(printList.trim());
         return new CommandResult(printList);
     }
 }

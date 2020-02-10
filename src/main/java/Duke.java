@@ -11,6 +11,8 @@ import storage.Storage;
 import taskList.TaskList;
 import ui.Ui;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * The class representation of the AI bot that helps keep track of the user's todo list.
  */
@@ -18,15 +20,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
 
     public Duke() {
     }
@@ -42,25 +35,17 @@ public class Duke {
         }
     }
 
-    public String getWelcomeMessage() {
-//		return ui.createWelcomeMessage(tasks);
-        return "jarvis here!";
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
-//        boolean isExit = false;
-//        while(!isExit) {
-//
-//        }
         Command c = Parser.parse(input);
         boolean isExit = c.isExit();
         CommandResult output = c.execute(tasks, storage);
         if(isExit){
             System.out.println("Bye");
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.exit(0);
         }
 
@@ -71,7 +56,6 @@ public class Duke {
      * The main program execution that will take in the user's input and act on it.
      */
     public void run() {
-        //  ui.showWelcomeMessage(tasks);
         System.out.println(ui.createWelcomeMessage(tasks));
         boolean isExit = false;
         while (!isExit) {

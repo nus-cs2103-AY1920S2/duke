@@ -34,11 +34,6 @@ public class Command {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
     }
 
-
-
-
-    ;
-
     /**
      * Checks if this is an exit command.
      *

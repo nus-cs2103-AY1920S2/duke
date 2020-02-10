@@ -27,13 +27,12 @@ public class Event extends Task {
      *
      * @return A String object that can be easily written and retrieved from the data file.
      */
-    public String format() {
+    public String toTxtFormat() {
         return "E" + " | " + (this.isDone ? "1" : "0") + " | " + description + " | " + date;
     }
 
     public Event(String description, LocalDate date) {
         super(description);
-//        this.dateTime = dateTime;
         this.date = date;
     }
 

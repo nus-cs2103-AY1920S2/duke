@@ -31,13 +31,11 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         try {
-//			System.out.println("Successfully Removed: " + tasks.getList().get(this.index - 1));
             Task deleted = tasks.getList().get(this.index - 1);
             tasks.remove(this.index - 1);
             storage.save(tasks);
             return new CommandResult("Successfully Removed: " + deleted);
         } catch (IndexOutOfBoundsException ie) {
-//            System.out.println("Index does not exist");
             return new CommandResult("Index does not exist");
         }
     }
