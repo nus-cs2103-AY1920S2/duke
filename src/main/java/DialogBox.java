@@ -55,7 +55,6 @@ public class DialogBox extends HBox {
         DialogBox userDiaBox = new DialogBox(text, img);
         userDiaBox.setSpacing(10);
         return userDiaBox;
-        //return new DialogBox(text, img);
     }
 
     /**
