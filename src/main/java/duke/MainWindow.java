@@ -43,7 +43,6 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
-
     /**
      * Sets variable stage as current stage.
      * @param s current stage

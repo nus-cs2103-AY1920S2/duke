@@ -64,7 +64,7 @@ public class TaskList {
      * @return String of all tasks on the date
      * @throws DukeException If the input date is invalid (i.e. incorrect format)
      */
-    public String showTaskOnDate(String[] replyArr) throws DukeException {
+    public String showTaskOnDate(String[] replyArr) {
         if (DATE_VALIDATOR.isValidDate(replyArr[1])) {
             LocalDate date = LocalDate.parse(replyArr[1], DATE_FORMATTER);
             String taskOnDate = "";
@@ -92,7 +92,7 @@ public class TaskList {
      * @throws DukeException If task number specified does not exist in the TaskList (e.g. done 5 when there is only 4
      *                       tasks)
      */
-    public String markTaskAsDone(String[] replyArr) throws DukeException {
+    public String markTaskAsDone(String[] replyArr) {
         int taskNum = Integer.parseInt(replyArr[1]) - 1;
         if (taskNum > taskList.size() - 1) {
             return Ui.doneInputError();
@@ -113,7 +113,7 @@ public class TaskList {
      * @throws DukeException If task number specified does not exist in the TaskList (e.g. delete 5 when there is only 4
      *                       tasks)
      */
-    public String deleteTask(String[] replyArr) throws DukeException {
+    public String deleteTask(String[] replyArr) {
         try {
             int taskNum = Integer.parseInt(replyArr[1]) - 1;
             Task currTask = taskList.get(taskNum);

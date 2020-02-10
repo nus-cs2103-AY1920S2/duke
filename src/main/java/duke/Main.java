@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -13,7 +14,9 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/duke.txt");
+    private String filePath = "data" + File.separator + "duke.txt";
+
+    private Duke duke = new Duke(filePath);
 
     @Override
     public void start(Stage stage) {

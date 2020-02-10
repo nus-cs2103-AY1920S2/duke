@@ -5,13 +5,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
 /**
  * Represents a date validator to check is a date is formatted in a specified format. A DateValidator object
  * corresponds to a Date Formatter of a specific date format.
  */
 public class DateValidator {
     private DateTimeFormatter dateFormatter;
-
 
     public DateValidator(DateTimeFormatter dateFormatter) {
         this.dateFormatter = dateFormatter;

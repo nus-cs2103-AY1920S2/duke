@@ -1,13 +1,10 @@
 package duke;
 
 import duke.command.Command;
+import duke.other.Parser;
 import duke.other.Storage;
 import duke.other.Ui;
-import duke.other.DukeException;
-import duke.other.Parser;
 import duke.task.TaskList;
-
-import java.io.FileNotFoundException;
 
 
 /**
@@ -21,6 +18,7 @@ public class Duke {
 
     /**
      * Constructs a Duke object.
+     *
      * @param filePath File path to the file that stores the Tasks data
      */
     public Duke(String filePath) {
@@ -28,7 +26,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException | FileNotFoundException e) {
+        } catch (Exception e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -45,9 +43,9 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, ui);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (Exception e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
@@ -60,21 +58,15 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
-
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        Command parser = (new Parser()).parse(input);
+        Parser p = new Parser();
+        Command command = p.parse(input);
         String response = "";
-        if (parser.isExit()) {
-            response = "    Bye! See ya later, alligator!";
-            storage.saveFile(tasks);
-        } else {
-            response = parser.execute(tasks, ui, storage);
-        }
+        response = command.execute(tasks, ui);
         return response;
     }
 
