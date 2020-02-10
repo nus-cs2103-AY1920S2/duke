@@ -17,7 +17,7 @@ public class DukeExceptionLoad extends DukeException {
             break;
 
         case "format":
-            super.errorMsg = "da@#slkf? My memory was formatted in the wrong manner.";
+            super.errorMsg = "My memory was formatted in the wrong manner.";
             break;
 
         default:

@@ -50,6 +50,7 @@ public class Parser {
 
                 command = Commands.DONE;
                 indexOfTaskAffected = index;
+                assert indexOfTaskAffected >= 0 : "Index should be greater than 0.";
                 break;
 
             case "delete":
@@ -63,6 +64,7 @@ public class Parser {
 
                 command = Commands.DEL_TASK;
                 indexOfTaskAffected = index;
+                assert indexOfTaskAffected >= 0 : "Index should be greater than 0.";
                 break;
 
             case "todo":
@@ -121,6 +123,7 @@ public class Parser {
                 throw new DukeExceptionCommand();
             }
         }
+        assert command != null : "Command should be instantiated.";
     }
 
     public Task getTask() {

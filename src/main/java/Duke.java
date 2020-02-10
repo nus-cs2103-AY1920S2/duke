@@ -15,19 +15,23 @@ public class Duke {
         String fileName = "duke.txt";
         Path path  = Paths.get(homeDir, "duke", "data", fileName);
 
+
+
         try {
             storage = new Storage(path);
             tasks = storage.load();
             ui = new Ui(tasks, storage);
         } catch (DukeException error) {
             System.out.println(error);
-            tasks = new TaskList();
         }
+        assert tasks != null : "TaskList should be instantiated.";
     }
 
 
     String getResponse(String input) {
-        return ui.getOutput(input);
+        String output = ui.getOutput(input);
+        assert !output.isEmpty() : "The output should not be empty.";
+        return output;
     }
 
 }

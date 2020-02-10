@@ -13,7 +13,6 @@ public class Task {
      */
     public Task(String msg) {
         this.msg = msg;
-        this.type = "";
         status = "X";
     }
 
@@ -30,11 +29,13 @@ public class Task {
     }
 
     public String writeToFile() {
+        assert (type.equals("T") | type.equals("D") | type.equals("E")) : "Type should either be T, D or E.";
         return type + " , " + status + " ," + msg;
     }
 
     @Override
     public String toString() {
+        assert (type.equals("T") | type.equals("D") | type.equals("E")) : "Type should either be T, D or E.";
         return "[" + type + "][" + status + "]" + msg;
     }
 }

@@ -20,7 +20,8 @@ public class Ui {
 
     /**
      * Gives the correct output for the given input.
-     * @param input String input by the user.
+     * @param input
+     * String input by the user.
      * @return String response from the program.
      */
     public String getOutput(String input) {
@@ -55,7 +56,7 @@ public class Ui {
             case DONE:
                 tasks.markDone(index);
                 output = UiDesign.DONE_TOP_PART.getString()
-                        + "       " + tasks.getTask(index) + "\n"
+                        + tasks.getTask(index) + "\n"
                         + UiDesign.BORDER.getString();
                 break;
 
