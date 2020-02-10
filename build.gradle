@@ -25,11 +25,12 @@ dependencies {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 run {
     standardInput = System.in
+    enableAssertions = true
 }
 
 shadowJar {

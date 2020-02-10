@@ -37,6 +37,8 @@ public class DeleteCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             return ui.showException(new DukeException(
                     "☹ OOPS!!! The description of a delete cannot be empty."));
+        } catch (DukeException de) {
+            return ui.showException(de);
         }
     }
 }

@@ -41,6 +41,8 @@ public class AddEventCommand extends AddCommand {
         } catch (IndexOutOfBoundsException e) {
             return ui.showException(new DukeException(
                     "☹ OOPS!!! The description of an event cannot be empty."));
+        } catch (DukeException de) {
+            return ui.showException(de);
         }
     }
 }

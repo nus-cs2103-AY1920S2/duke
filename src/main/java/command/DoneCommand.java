@@ -37,6 +37,8 @@ public class DoneCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             return ui.showException(new DukeException(
                     "☹ OOPS!!! The description of a done cannot be empty."));
+        } catch (DukeException de) {
+            return ui.showException(de);
         }
     }
 }

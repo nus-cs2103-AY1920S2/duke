@@ -83,10 +83,9 @@ public class Storage {
     /**
      * Updates information to the file specified for this Storage
      * by adding on a new task object.
-     *
      * @param updatedTask Task to be updated
      **/
-    public static void updateDrive(Task updatedTask) {
+    public static void updateDrive(Task updatedTask) throws DukeException{
         String home = System.getProperty("user.home");
         Path path = java.nio.file.Paths.get(home, "duke", "data");
         boolean directoryExists = java.nio.file.Files.exists(path);
@@ -99,10 +98,10 @@ public class Storage {
                 writer.newLine();
                 writer.close();
             } catch (IOException e) {
-                System.out.println("File duke.txt to be updated cannot be found");
+                throw new DukeException("File duke.txt to be updated cannot be found");
             }
         } else {
-            System.out.println("File duke.txt to be updated cannot be found");
+            throw new DukeException("File duke.txt to be updated cannot be found");
         }
     }
 
@@ -111,7 +110,7 @@ public class Storage {
      * by removing on a new task object.
      * @param size The order of the task that are to be removed
      **/
-    public static void deleteDrive(int size) {
+    public static void deleteDrive(int size) throws DukeException {
         ArrayList<String> tasks = new ArrayList<>();
         try {
             File file = new File("./data/duke.txt");
@@ -136,9 +135,9 @@ public class Storage {
             }
             writer.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File duke.txt to be updated cannot be found");
+            throw new DukeException("File duke.txt to be updated cannot be found");
         } catch (IOException ie) {
-            System.out.println("File duke.txt to be updated cannot be found");
+            throw new DukeException("File duke.txt to be updated cannot be found");
         }
     }
 }

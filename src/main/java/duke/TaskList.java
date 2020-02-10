@@ -42,6 +42,7 @@ public class TaskList {
      * @param i The indec of the task to be taken
      **/
     public Task get(int i) {
+        assert i <= this.taskList.size() - 1;
         return this.taskList.get(i);
     }
 

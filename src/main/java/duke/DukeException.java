@@ -17,6 +17,7 @@ public class DukeException extends Exception {
      * @return The string of the message of the exception.
      */
     public String toString() {
+        assert !getMessage().equals("");
         return getMessage();
     }
 }
