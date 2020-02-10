@@ -17,6 +17,7 @@ public class ListCommand implements Command {
         } else {
             sb.append("Here are the task(s) in your list:\n");
 
+            //Lambda for printing of all tasks in the list
             for (Task task : taskList.getTasks()) {
                 sb.append(task).append("\n");
             }

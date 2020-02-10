@@ -53,6 +53,7 @@ public class CalendarCommand implements Command {
         } else {
             sb.append("Here are the task(s) in your list on that date:\n");
 
+            //Lambda for printing of found calendar tasks into a list
             for (String task : calendarList) {
                 sb.append(task).append("\n");
             }

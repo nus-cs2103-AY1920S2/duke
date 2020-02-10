@@ -32,6 +32,7 @@ public class FindCommand implements Command {
         } else {
             sb.append("Here are the matching task(s) in your list:\n");
 
+            //Lambda for printing of found keyword tasks into a list
             for (String task : keywordList) {
                 sb.append(task).append("\n");
             }
