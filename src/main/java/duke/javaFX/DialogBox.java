@@ -34,11 +34,9 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
-
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */

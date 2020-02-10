@@ -20,6 +20,7 @@ public class AddCommand extends Command{
      * Returns the result of whether this is an exit program command.
      * @return The result of whether this command can exit the program.
      */
+    @Override
     public boolean isExit() {
         return false;
     }
@@ -31,6 +32,7 @@ public class AddCommand extends Command{
      * @param storage The storage file to be updated.
      * @throws IOException If the storage file is not found.
      */
+    @Override
     public void execute(TaskList tasksList, Ui ui, Storage storage) throws IOException {
         tasksList.add(task);
         ui.taskAdded(task, tasksList);

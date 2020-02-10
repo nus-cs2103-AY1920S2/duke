@@ -44,10 +44,10 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the respond by Duke.
+     * @param input The command entered by the user.
+     * @return The result of the command to be displayed.
      */
     public String getResponse(String input) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
