@@ -31,6 +31,12 @@ public enum DukeCommand {
 
             Task taskToBeCompleted = list.getListOfTask().get(pos);
             taskToBeCompleted.taskIsDone(); // Mark this task as done
+
+            // Asserting the task, check if it is done
+            assert taskToBeCompleted.getStatusIcon() == "[Y]" : "Task is not made done";
+
+            // Show message to user
+            // Indicate that task is done
             ui.doneMessage(taskToBeCompleted);
         }
     },

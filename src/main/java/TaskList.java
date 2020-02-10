@@ -41,9 +41,11 @@ public class TaskList {
     public void delete(int index, Storage storage) {
         // Split the string to get the
         // index of the task to be deleted
+        int sizeBeforeDeletion = getsize();
         ui.deletedTaskMessage(getsize() - 1, tasks.get(index));
         tasks.remove(index); // Deletes from task list
 
+        assert sizeBeforeDeletion - 1 == getsize() : "Task not deleted!";
         storage.store(this, ui);
     }
 

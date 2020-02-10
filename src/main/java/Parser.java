@@ -25,6 +25,8 @@ public class Parser {
         commandpairing.put("deadline", "/by");
         commandpairing.put("delete", "2");
         commandpairing.put("find", "2");
+
+        assert !commandpairing.isEmpty() : "Error adding key-value objects in HashMap";
     }
 
     /**
@@ -52,6 +54,7 @@ public class Parser {
         } catch (DateTimeParseException exception) {
             ui.showErrorMessage("Input date in the form of yyy-mm-dd and " +
                     "remember to add time in 24-hour format \n" + exception.getMessage());
+            return false;
         }
 
         return true;
