@@ -38,6 +38,7 @@ public class DeleteCommand implements Command {
     public String execute(TaskList tasks, Storage storage) {
         try {
             Task taskDeleted = tasks.deleteTask(index);
+            assert taskDeleted != null : "There cannot be a null deleted task";
             storage.saveTasks(tasks.getList());
             return String.format("Here I go! My ultimate destructive magic! EXPLOSION!\n"
                     + "I have successfully eradicated this task:\n  %s\n"

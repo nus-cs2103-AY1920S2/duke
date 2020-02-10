@@ -44,6 +44,7 @@ public class TaskList {
         if (index > tasks.size() || index <= 0) {
             throw new InvalidCommandException(DONE_NO_SUCH_TASK_MESSAGE);
         }
+        assert tasks.size() > 0 : "task list should not be empty";
 
         tasks.get(index - 1).markDone();
     }
@@ -59,6 +60,7 @@ public class TaskList {
         if (index > tasks.size() || index <= 0) {
             throw new InvalidCommandException(DELETE_NO_SUCH_TASK_MESSAGE);
         }
+        assert tasks.size() > 0 : "task list should not be empty";
 
         Task taskToDelete = tasks.remove(index - 1);
         return taskToDelete;
