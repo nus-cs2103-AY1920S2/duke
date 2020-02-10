@@ -98,6 +98,7 @@ public class Storage {
     public static void saveTasks(ArrayList<Task> tasks) throws SaveException {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
+            assert fw != null : "Assert error: Error saving into file!";
             for (Task t : tasks) {
                 fw.write(formatSavedFile(t) + "\n");
             }
