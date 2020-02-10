@@ -13,7 +13,9 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    // This is the only Duke instance created, to handle everything.
+    /**
+     * This is the only Duke instance created, to handle everything.
+     */
     private Duke duke = new Duke();
 
     /**
