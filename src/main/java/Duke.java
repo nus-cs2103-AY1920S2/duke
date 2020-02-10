@@ -30,16 +30,6 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-//    public Duke(String filePath) {
-//        ui = new Ui();
-//        storage = new Storage(filePath);
-//        try {
-//            tasks = new TaskList(storage.load());
-//        } catch (DukeException e) {
-//            ui.showLoadingError();
-//            tasks = new TaskList();
-//        }
-//    }
     /**
      * Duke Constructor
      */
@@ -149,16 +139,6 @@ public class Duke extends Application{
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-//    private void handleUserInput() {
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(user)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
-//    }
-
     private void handleUserInput() {
 //        Label userText = new Label(userInput.getText());
         String userText = userInput.getText();
@@ -175,7 +155,6 @@ public class Duke extends Application{
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-
         return "Duke heard: " + input;
     }
 
