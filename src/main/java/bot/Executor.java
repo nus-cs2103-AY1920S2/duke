@@ -7,6 +7,7 @@ import bot.command.instruction.concrete.DeadlineInstruction;
 import bot.command.instruction.concrete.EventInstruction;
 import bot.command.instruction.concrete.TerminateInstruction;
 
+import bot.command.instruction.concrete.TodoInstruction;
 import bot.command.instruction.execute.NotStorable;
 import bot.command.instruction.execute.StorageModifying;
 import bot.command.instruction.execute.StorageReading;
@@ -78,6 +79,7 @@ public class Executor {
             return this.executeWriting((StorageWriting<Task>) inst, arguments);
         } else {
             // unknown instruction type, end program
+            System.err.println("unknown Instruction type in Executor.execute()");
             return false;
         }
     }
@@ -118,9 +120,15 @@ public class Executor {
             toWrite = new Deadline(arguments.get(0), arguments.get(1));
         } else if (parsed instanceof EventInstruction) {
             toWrite = new Event(arguments.get(0), arguments.get(1));
-        } else {
+        } else if (parsed instanceof TodoInstruction) {
             // parsed instanceof TodoInstruction
             toWrite = new Todo(arguments.get(0));
+        } else {
+            // unknown StorageWriting instruction
+            System.err.println(
+                    "unknown StorageWriting in Executor.executeWriting()"
+            );
+            return false;
         }
         parsed.writeToStore(this.storage, this.ui, toWrite);
         this.storage.saveToDisk(this.storageLocation);
