@@ -1,63 +1,66 @@
 package seedu.java.util;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-
 import javafx.scene.layout.HBox;
 
-import javafx.scene.paint.Color;
-
+/**
+ * An example of a custom control using FXML.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
+ */
 public class DialogBox extends HBox {
-
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
-    /**
-     * Builds a dialogBox.
-     * @param l for Label
-     * @param iv ImageView
-     */
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.CENTER_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
-        this.setPadding(new Insets(20.0));
-        this.setSpacing(30.0);
-        this.setBackground(new Background(new BackgroundFill(Color.rgb(208, 255, 209), CornerRadii.EMPTY, Insets.EMPTY)));
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        this.setAlignment(Pos.CENTER_LEFT);
-        this.setBackground(new Background(new BackgroundFill(Color.rgb(250, 255, 201), CornerRadii.EMPTY, Insets.EMPTY)));
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    /**
+     * Creates a new Duke Dialog.
+     * @param text text to be spawned as label
+     * @param img to be spawned as ImageView
+     * @return a DialogBox with text & image
+     */
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
