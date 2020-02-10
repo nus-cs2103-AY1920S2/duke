@@ -40,6 +40,7 @@ public class Storage {
         File noteFile = new File(path.toString());
         if (Files.notExists(path)) {
             noteFile = new File("data/duke.txt");
+            noteFile.mkdir(); // Create directory
         }
         return fileToArray(noteFile.toString());
     }

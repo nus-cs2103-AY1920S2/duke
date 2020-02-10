@@ -55,6 +55,7 @@ public class AddCommand extends Command {
         case "event":
             return handleEvent(details, taskList);
         default:
+            assert false : instruction;
             break;
         }
         return null;
@@ -69,13 +70,13 @@ public class AddCommand extends Command {
      *
      * @param reply    Details of Deadline command
      * @param taskList Overall TaskList of all the Tasks
+     * @return String of bot's response
      * @throws DukeException If details of Deadline is invalid(i.e. insufficient arguments, argument in incorrect
      *                       format)
      */
     public static String handleDeadline(String reply, TaskList taskList) throws DukeException {
         String[] taskReplyArr = reply.split("/by ");
         if (taskReplyArr.length < 2) {
-//            Ui.throwDeadlineInputError();
             return Ui.deadlineInputError();
         }
         String[] taskInstrArr = taskReplyArr[0].split(" ");
@@ -95,7 +96,8 @@ public class AddCommand extends Command {
                     taskList.addTask(deadLine);
                     return Ui.showTaskAdded(deadLine, taskList);
                 } else {
-//                    Ui.throwDeadlineInputError();
+                    assert (DATE_VALIDATOR.isValidDate(timeDateArr[0]) && TIME_VALIDATOR.isValidTime(timeDateArr[1]))
+                            == false : timeDateArr[0] + timeDateArr[1];
                     return Ui.deadlineInputError();
                 }
             } else if (timeDateArr.length == 1) {
@@ -105,19 +107,20 @@ public class AddCommand extends Command {
                     taskList.addTask(deadLine);
                     return Ui.showTaskAdded(deadLine, taskList);
                 } else if (TIME_VALIDATOR.isValidTime(timeDateArr[0])) {
+                    assert DATE_VALIDATOR.isValidDate(timeDateArr[0]) == false : timeDateArr[0];
                     LocalTime formattedTime = LocalTime.parse(timeDateArr[0], TIME_FORMATTER);
                     Deadline deadLine = new Deadline(task, LocalDate.now(), formattedTime, false);
                     taskList.addTask(deadLine);
                     return Ui.showTaskAdded(deadLine, taskList);
                 } else {
-//                    Ui.throwDeadlineInputError();
+                    assert timeDateArr.length < 1 || timeDateArr.length > 2 : timeDateArr.length;
                     return Ui.deadlineInputError();
                 }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-//            Ui.throwDeadlineInputError();
             return Ui.deadlineInputError();
         }
+        assert false;
         return null;
     }
 
@@ -130,6 +133,7 @@ public class AddCommand extends Command {
      *
      * @param reply    Details of Event command
      * @param taskList Overall TaskList of all the Tasks
+     * @return String of bot's response
      * @throws DukeException If details of Event is invalid(i.e. insufficient arguments, argument in incorrect
      *                       format)
      */
@@ -137,7 +141,6 @@ public class AddCommand extends Command {
         System.out.println(reply);
         String[] taskReplyArr = reply.split("/at ");
         if (taskReplyArr.length < 2) {
-//            Ui.throwEventInputError();
             return Ui.eventInputError();
         }
         String[] taskInstrArr = taskReplyArr[0].split(" ");
@@ -158,7 +161,8 @@ public class AddCommand extends Command {
                     taskList.addTask(event);
                     return Ui.showTaskAdded(event, taskList);
                 } else {
-//                    Ui.throwEventInputError();
+                    assert (DATE_VALIDATOR.isValidDate(timeDateArr[0]) && TIME_VALIDATOR.isValidTime(timeDateArr[1]))
+                            == false : timeDateArr[0] + timeDateArr[1];
                     return Ui.eventInputError();
                 }
             } else if (timeDateArr.length == 1) {
@@ -168,19 +172,20 @@ public class AddCommand extends Command {
                     taskList.addTask(event);
                     return Ui.showTaskAdded(event, taskList);
                 } else if (TIME_VALIDATOR.isValidTime(timeDateArr[0])) {
+                    assert DATE_VALIDATOR.isValidDate(timeDateArr[0]) == false : timeDateArr[0];
                     LocalTime formattedTime = LocalTime.parse(timeDateArr[0], TIME_FORMATTER);
                     Event event = new Event(task, LocalDate.now(), formattedTime, false);
                     taskList.addTask(event);
                     return Ui.showTaskAdded(event, taskList);
                 } else {
-//                    Ui.throwEventInputError();
+                    assert timeDateArr.length < 1 || timeDateArr.length > 2 : timeDateArr.length;
                     return Ui.eventInputError();
                 }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-//            Ui.throwEventInputError();
             return Ui.eventInputError();
         }
+        assert false;
         return null;
     }
 
@@ -189,21 +194,20 @@ public class AddCommand extends Command {
      *
      * @param reply    Details of Todo command
      * @param taskList Overall TaskList of all the Tasks
+     * @return String of bot's response
      * @throws DukeException If details of Deadline is invalid(i.e. insufficient arguments)
      */
     public static String handleTodo(String reply, TaskList taskList) throws DukeException {
         String[] replyArr = reply.split(" ");
         String replyWoSpace = "";
-        for(int i = 1; i < replyArr.length; i++) {
+        for (int i = 1; i < replyArr.length; i++) {
             replyWoSpace += replyArr[i] + " ";
-//            System.out.println(replyWoSpace);
         }
         if (!replyWoSpace.equals("")) {
             Todo toDo = new Todo(replyWoSpace, false);
             taskList.addTask(toDo);
             return Ui.showTaskAdded(toDo, taskList);
         } else {
-//            Ui.throwTodoInputError();
             return Ui.todoInputError();
         }
     }
