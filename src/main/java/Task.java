@@ -1,12 +1,12 @@
 /**
- * Class representation of Task
+ * Class representation of Task.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Task Constructor
+     * Task Constructor.
      * @param description
      */
     public Task(String description) {
@@ -15,7 +15,7 @@ public class Task {
     }
 
     /**
-     * Task's getStatusIcon method
+     * Task's getStatusIcon method.
      * @return tick or cross dependent on isDone boolean attribute
      */
     public String getStatusIcon() {
@@ -24,14 +24,14 @@ public class Task {
     }
 
     /**
-     * Task's markAsDone method
+     * Task's markAsDone method.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Task's overriden toString method
+     * Task's overriden toString method.
      * @return String representation of Tasks
      */
     @Override

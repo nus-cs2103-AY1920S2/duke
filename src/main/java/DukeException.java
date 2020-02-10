@@ -1,9 +1,9 @@
 /**
- * Class representation of DukeException
+ * Class representation of DukeException.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
-     * DukeException constructor
+     * DukeException constructor.
      * @param message
      */
     public DukeException(String message) {
