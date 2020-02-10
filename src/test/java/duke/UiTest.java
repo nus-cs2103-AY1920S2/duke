@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.task.DeadlineStub;
 import duke.task.EventStub;
 import duke.task.Task;
@@ -124,15 +125,6 @@ class UiTest {
         expected.append(indentation).append("we have to remember that.").append(newline);
         expected.append(horizontalDivider);
         assertEquals(expected.toString(), output.toString(), "Should display greeting message");
-    }
-
-    @Test
-    void showLoadingError() {
-        String expected = horizontalDivider
-                + indentation + "Unable to load storage data..." + newline
-                + horizontalDivider;
-        ui.showLoadingError();
-        assertEquals(expected, output.toString());
     }
 
     @Test

@@ -1,6 +1,14 @@
 package duke;
 
+import duke.command.AddTaskCommand;
 import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.UndoCommand;
+import duke.exception.DukeException;
+import duke.exception.DukeStorageDirectoryException;
+import duke.exception.DukeStorageFileException;
+import duke.exception.DukeStorageLoadException;
 import duke.task.TaskList;
 
 import java.io.BufferedReader;
@@ -41,12 +49,11 @@ public class Duke {
     }
 
     private void loadTasksFromSaveFile(String saveFile) {
-        storage = new Storage(saveFile);
         try {
+            storage = new Storage(saveFile);
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            // Did not load tasks from save file
-            ui.showLoadingError();
+        } catch (DukeStorageLoadException | DukeStorageDirectoryException | DukeStorageFileException e) {
+            ui.showExceptionMessage(e);
             tasks = new TaskList();
         }
     }
@@ -61,19 +68,32 @@ public class Duke {
         ui.greet();
         boolean requestExit = false;
         while (!requestExit) {
-            // Run process command, check if user has terminated program
             try {
-                Optional<Command> c = Parser.parse(ui.readCommand(reader));
-                assert c.isPresent() : "Parser did not return a command";
-                c.get().execute(tasks, ui, storage);
-                requestExit = c.get().isExit();
+                Optional<Command> c = parseAndExecuteCommand(ui.readCommand(reader));
+                if (c.isPresent()) {
+                    requestExit = c.get().isExit();
+                }
             } catch (IOException ioException) {
                 ui.unableToReadUserInput();
             } catch (DukeException dukeException) {
-                // Print error message
                 ui.showExceptionMessage(dukeException);
             }
         }
+    }
+
+    private Optional<Command> parseAndExecuteCommand(String input) throws DukeException {
+        Optional<Command> c = Parser.parse(input);
+        assert c.isPresent() : "Parser did not return a command";
+        Optional<TaskList> taskList = c.get().execute(tasks, ui, storage);
+        if (isValidUndoCommandTypes(c.get()) && taskList.isPresent()) {
+            tasks = taskList.get();
+        }
+        return c;
+    }
+
+    private boolean isValidUndoCommandTypes(Command command) {
+        return command instanceof UndoCommand || command instanceof DeleteCommand
+                || command instanceof AddTaskCommand || command instanceof DoneCommand;
     }
 
     /**
@@ -88,17 +108,23 @@ public class Duke {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
         try {
-            Optional<Command> command = Parser.parse(input);
-            assert command.isPresent() : "Parser did not return a command";
-            command.get().execute(tasks, ui, storage);
+            parseAndExecuteCommand(input);
         } catch (DukeException dukeException) {
             // Display error message
             System.out.print(dukeException.getMessage());
         }
         response = output.toString();
+        response = formatResponse(response);
+        // Reset stdout for duke
+        System.setOut(System.out);
+        return response;
+    }
+
+    private String formatResponse(String input) {
         // Remove all horizontal divider present
         String indentation = Ui.INDENTATION;
         String horizontalBar = Ui.HORIZONTAL_BAR;
+        String response = input;
         while (response.contains(indentation)) {
             response = response.replace(indentation, "");
         }
@@ -106,8 +132,6 @@ public class Duke {
             response = response.replace(horizontalBar, "");
         }
         response = response.trim();
-        // Reset stdout for duke
-        System.setOut(System.out);
         return response;
     }
 }

@@ -21,8 +21,8 @@ public class Event implements Task {
      * Returns an Event instance.
      *
      * @param description details about Event
-     * @param eventTime time of Event
-     * @param isDone completion status of Event
+     * @param eventTime   time of Event
+     * @param isDone      completion status of Event
      * @throws DateTimeException given event time is not in a valid date format
      */
     public Event(String description, String eventTime, boolean isDone) throws DateTimeException {

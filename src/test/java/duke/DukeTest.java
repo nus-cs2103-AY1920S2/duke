@@ -1,5 +1,6 @@
 package duke;
 
+import duke.task.TaskListHistory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -56,14 +57,19 @@ class DukeTest {
         return logo;
     }
 
+    private String exitMessage() {
+        return horizontalDivider + indentation + "Goodbye friend." + newline
+                + horizontalDivider;
+    }
+
     @BeforeEach
     void init() {
-        // Delete any save file
         deleteSaveFile();
         duke = new Duke(saveFile);
         output = new ByteArrayOutputStream();
         // Change output stream
         System.setOut(new PrintStream(output));
+        TaskListHistory.reset();
     }
 
     @AfterEach
@@ -72,8 +78,23 @@ class DukeTest {
     }
 
     @Test
+    @DisplayName("duke.Duke: Test for undo command")
+    void undo_emptyTaskList_noAction() {
+        String input = "undo" + newline + "bye" + newline;
+        duke.run(new BufferedReader(
+                new InputStreamReader(new ByteArrayInputStream(input.getBytes()))));
+        String expected = greeting();
+        expected += horizontalDivider + indentation
+                + "Nothing to undo..." + newline
+                + horizontalDivider;
+        expected += exitMessage();
+        assertEquals(expected, output.toString(),
+                "Should display correct response for nothing to undo");
+    }
+
+    @Test
     @DisplayName("duke.Duke: Test for invalid command")
-    void dukeException_invalidCommand_displayInvalidCommandMessage() {
+    void run_invalidCommand_displayInvalidCommandMessage() {
         String input = "blah" + newline + "bye" + newline;
         duke.run(new BufferedReader(
                 new InputStreamReader(new ByteArrayInputStream(input.getBytes()))));
@@ -83,8 +104,7 @@ class DukeTest {
                 + " OOPS!!! I'm sorry, but I don't know what that means :-(" + newline
                 + horizontalDivider;
         // Add exit message
-        expected += horizontalDivider + indentation + "Goodbye friend." + newline
-                + horizontalDivider;
+        expected += exitMessage();
         assertEquals(expected, output.toString(), "Should display invalid command message");
     }
 }

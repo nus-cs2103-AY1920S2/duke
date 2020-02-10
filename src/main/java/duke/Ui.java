@@ -57,15 +57,6 @@ public class Ui {
     }
 
     /**
-     * Prints out error when storage data cannot be loaded into program.
-     */
-    public void showLoadingError() {
-        printTextWithIndentation(HORIZONTAL_BAR);
-        printTextWithIndentation("Unable to load storage data...");
-        printTextWithIndentation(HORIZONTAL_BAR);
-    }
-
-    /**
      * Prints out error message for invalid user input.
      */
     public void unableToReadUserInput() {
@@ -108,6 +99,17 @@ public class Ui {
     public void showExceptionMessage(Exception exception) {
         printTextWithIndentation(HORIZONTAL_BAR);
         printTextWithIndentation(exception.getMessage());
+        printTextWithIndentation(HORIZONTAL_BAR);
+    }
+
+    /**
+     * Prints out message given to stdout.
+     *
+     * @param message message to be printed out
+     */
+    public void printMessage(String message) {
+        printTextWithIndentation(HORIZONTAL_BAR);
+        printTextWithIndentation(message);
         printTextWithIndentation(HORIZONTAL_BAR);
     }
 
