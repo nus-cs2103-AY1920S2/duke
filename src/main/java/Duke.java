@@ -47,7 +47,6 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-
             Parser parser = new Parser();
             String output = parser.parse(input, ui, tasks);
             storage.updateData(tasks);

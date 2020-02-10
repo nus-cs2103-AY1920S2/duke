@@ -12,6 +12,7 @@ public class Parser {
      */
     public String parse(String input, Ui ui, TaskList tasks) {
 
+
         if (input.equals("list")) {
             return ui.printList();  // may need to update
         }
@@ -75,8 +76,11 @@ public class Parser {
                 }
                 return output.toString();
             }
+
         }
 
+        // if it reaches here without returning means exception did not catch and its an invalid command
+        assert false;
         return "Invalid Command";
 
     }
@@ -121,7 +125,7 @@ public class Parser {
      * A class for user-specific exceptions
      */
     class DukeException extends Exception {
-        String errorMsg = "There is a Duke Exception";
+        String errorMsg = "Error is not specified";
         DukeException(String s) {
             errorMsg = s;
         }
