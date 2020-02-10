@@ -40,6 +40,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Tokenizes the {@code ADD_DEADLINE} command.
+     * 
+     * @param userInputSplit the array representing the user input string separated
+     *                       by white spaces
+     * @throws DukeException if any of the task description, due date, or '/by'
+     *                       keyword are missing
+     */
     private void addDeadlineHandler(String[] userInputSplit) throws DukeException {
         if (userInputSplit.length == 1) {
             throw new DukeException("Sorry! Please provide the description and due date.");
@@ -60,6 +68,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Tokenizes the {@code ADD_EVENT} command.
+     * 
+     * @param userInputSplit the array representing the user input string separated
+     *                       by white spaces
+     * @throws DukeException if any of the task description, due date, or '/at'
+     *                       keyword are missing
+     */
     private void addEventHandler(String[] userInputSplit) throws DukeException {
         if (userInputSplit.length == 1) {
             throw new DukeException("Sorry! Please provide the description and due date.");
@@ -80,6 +96,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Tokenizes the {@code ADD_TODO} command.
+     * 
+     * @param userInputSplit the array representing the user input string separated
+     *                       by white spaces
+     * @throws DukeException if the task description is missing
+     */
     private void addTodoHandler(String[] userInputSplit) throws DukeException {
         if (userInputSplit.length == 1) {
             throw new DukeException("Sorry! Description of a Todo must not be empty.");
@@ -87,6 +110,13 @@ public class Parser {
         this.description = userInputSplit[1];
     }
 
+    /**
+     * Tokenizes the {@code MARK_TASK_AS_DONE} command.
+     * 
+     * @param userInputSplit the array representing the user input string separated
+     *                       by white spaces
+     * @throws DukeException if the input task number is missing, or not a number
+     */
     private void markTaskAsDoneHandler(String[] userInputSplit) throws DukeException {
         if (userInputSplit.length == 1) {
             throw new DukeException("Sorry! Please input a task number.");
@@ -98,6 +128,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Tokenizes the {@code DELETE_TASK} command.
+     * 
+     * @param userInputSplit the array representing the user input string separated
+     *                       by white spaces
+     * @throws DukeException if the input task number is missing, or not a number
+     */
     private void deleteTaskHandler(String[] userInputSplit) throws DukeException {
         if (userInputSplit.length == 1) {
             throw new DukeException("Sorry! Please input a task number.");
@@ -113,6 +150,13 @@ public class Parser {
         throw new DukeException("Sorry! I don't know what you mean!");
     }
 
+    /**
+     * Tokenizes the {@code FIND_TASKS} command.
+     * 
+     * @param userInputSplit the array representing the user input string separated
+     *                       by white spaces
+     * @throws DukeException if the input string to find is missing
+     */
     private void findTasksHandler(String[] userInputSplit) throws DukeException {
         if (userInputSplit.length == 1) {
             throw new DukeException("Sorry! Please provide something to find.");
@@ -142,6 +186,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses and returns the correct {@code Command} enum value from the input
+     * string {@code command}
+     * 
+     * @param command string to match
+     * @return the correct {@code Command} enum value
+     */
     private Command parseCommand(String command) {
         if (command.equals("bye")) {
             return Command.EXIT_DUKE;
