@@ -23,46 +23,16 @@ public class Duke {
      * Runs the main loop of Duke.
      */
     public void run() {
+        // Setup in-memory and disk storage
         String filePath = "data/tasks.txt";
-        assert filePath != null && filePath.length() > 0 : "filepath should not be empty";
         Storage storage = new TextStorage(filePath);
-        TaskList tasks = new TaskList();
+        TaskList tasks = loadTasks(storage);
 
         ui.showGreeting();
 
-        // Load existing save file
-        try {
-            tasks.add(storage.load());
-            ui.showReply("Save file loaded!");
-        } catch (FileNotFoundException e) {
-            ui.showError("Save file not found!");
-        } catch (DukeException e) {
-            ui.showError(e.getMessage());
-        }
+        activate(new CommandHandler(tasks, ui, storage));
 
-        // Main loop of Duke to handle user commands
-        CommandHandler handler = new CommandHandler(tasks, ui, storage);
-        while (handler.isActive()) {
-            if (inputLock != null) {
-                try {
-                    inputLock.acquire();
-                } catch (InterruptedException e) {
-                    ui.showError("Interrupted!");
-                }
-            }
-            handler.handleCommand(ui.getInput());
-        }
-
-        // Save to disk
-        try {
-            storage.save(tasks.getAllTasks());
-            ui.showReply("Save Success! See you next time!");
-        } catch (IOException e) {
-            ui.showError("Save Failure :-(. Try again next time!");
-        } catch (DukeException e) {
-            ui.showError(e.getMessage());
-        }
-
+        saveTasks(tasks, storage);
         ui.shutDown();
     }
 
@@ -78,5 +48,42 @@ public class Duke {
      */
     public void useUi(Ui ui) {
         this.ui = ui;
+    }
+
+    private TaskList loadTasks(Storage storage) {
+        TaskList tasks = new TaskList();
+        try {
+            tasks.add(storage.load());
+            ui.showReply("Save file loaded!");
+        } catch (FileNotFoundException e) {
+            ui.showError("Save file not found!");
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
+        return tasks;
+    }
+
+    private void saveTasks(TaskList tasks, Storage storage) {
+        try {
+            storage.save(tasks.getAllTasks());
+            ui.showReply("Save Success! See you next time!");
+        } catch (IOException e) {
+            ui.showError("Save Failure :-(. Try again next time!");
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
+    }
+
+    private void activate(CommandHandler handler) {
+        while (handler.isActive()) {
+            if (inputLock != null) {
+                try {
+                    inputLock.acquire();
+                } catch (InterruptedException e) {
+                    ui.showError("Interrupted!");
+                }
+            }
+            handler.handleCommand(ui.getInput());
+        }
     }
 }
