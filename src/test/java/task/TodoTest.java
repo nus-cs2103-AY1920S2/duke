@@ -8,8 +8,9 @@ public class TodoTest {
     @Test
     public void testTodo() {
         Task todo = new Todo("Task");
-        String expectedText = "[T][✗] Task";
+        String expectedText = "[T][\u2718] Task";
         String actualText = todo.toString();
         assertEquals(expectedText, actualText);
     }
 }
+

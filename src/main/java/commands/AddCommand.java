@@ -16,10 +16,10 @@ public class AddCommand extends Command {
     /**
      * Constructor for AddCommand.
      *
-     * @param t t is the Task to be added into TaskList.
+     * @param task task is the Task to be added into TaskList.
      */
-    public AddCommand(Task t) {
-        this.task = t;
+    public AddCommand(Task task) {
+        this.task = task;
     }
 
     /**

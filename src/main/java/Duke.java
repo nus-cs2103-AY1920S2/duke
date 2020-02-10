@@ -1,6 +1,6 @@
 import commands.Command;
 import dukeexception.DukeException;
-import dukeexception.SaveException;
+import dukeexception.LoadException;
 import parser.Parser;
 import storage.Storage;
 import tasklist.TaskList;
@@ -30,7 +30,7 @@ public class Duke {
             storage = new Storage("data/tasks.txt");
             tasks = new TaskList(storage.load());
             ui = new Ui();
-        } catch (DukeException e) {
+        } catch (LoadException e) {
             e.getMessage();
         }
     }

@@ -45,6 +45,9 @@ public class Storage {
     public ArrayList<Task> load() throws LoadException {
         try {
             File file = new File(FILE_PATH);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -95,7 +98,6 @@ public class Storage {
     public static void saveTasks(ArrayList<Task> tasks) throws SaveException {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
-            assert fw != null : "Assert error: Error saving into file, file not found!";
             for (Task t : tasks) {
                 fw.write(formatSavedFile(t) + "\n");
             }

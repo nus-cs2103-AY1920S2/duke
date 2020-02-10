@@ -9,6 +9,7 @@ public class InvalidDateTimeException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return "ERROR: Date/time format is wrong!";
+        return "ERROR: Date/time format is wrong!" +
+                "\n TRY: YYYY-MM-DD TTTT";
     }
 }
