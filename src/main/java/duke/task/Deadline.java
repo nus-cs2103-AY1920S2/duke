@@ -5,26 +5,26 @@ import duke.utils.Parser;
 import java.util.Date;
 
 /**
- * Event object extending from ExecutableTask
+ * Deadline object extending from ExecutableTask.
  */
-public class Events extends ExecutableTask {
+public class Deadlines extends ExecutableTask {
 
     private boolean done = false;
     private String name;
     private Date time;
 
     /**
-     * Event object constructor
+     * Deadline object constructor.
      * @param name task name
      * @param time task time
      */
-    public Events(String name, Date time) {
+    public Deadlines(String name, Date time) {
         this.name = name;
         this.time = time;
     }
 
     /**
-     * check if event is done
+     * check if deadline is done.
      * @return done or not
      */
     @Override
@@ -33,7 +33,7 @@ public class Events extends ExecutableTask {
     }
 
     /**
-     * get name of event
+     * get name of deadline.
      * @return task name
      */
     @Override
@@ -42,16 +42,16 @@ public class Events extends ExecutableTask {
     }
 
     /**
-     * get type of task
-     * @return the string E to represent event
+     * get type of task.
+     * @return the string D to represent deadline
      */
     @Override
     public String getTaskType() {
-        return "E";
+        return "D";
     }
 
     /**
-     * get task time
+     * get task time.
      * @return task time
      */
     public Date getTaskTime() {
@@ -59,7 +59,7 @@ public class Events extends ExecutableTask {
     }
 
     /**
-     * mark event as done
+     * mark deadline as done.
      */
     @Override
     public void markAsDone() {
@@ -68,7 +68,7 @@ public class Events extends ExecutableTask {
 
     @Override
     public String toString() {
-        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName() + " (at: " +
+        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName() + " (by: " +
                 Parser.dateToString(getTaskTime()) + ")";
     }
 }

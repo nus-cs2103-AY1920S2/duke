@@ -3,7 +3,7 @@ package duke.task;
 import java.util.Date;
 
 /**
- * Todos object extending from ExecutableTask
+ * Todos object extending from ExecutableTask.
  */
 public class Todos extends ExecutableTask {
 
@@ -11,7 +11,7 @@ public class Todos extends ExecutableTask {
     private String name;
 
     /**
-     * Constructor for Todos object
+     * Constructor for Todos object.
      * @param name name of task
      */
     public Todos(String name) {
@@ -19,7 +19,7 @@ public class Todos extends ExecutableTask {
     }
 
     /**
-     * check if todos is done
+     * check if todos is done.
      * @return done or not
      */
     @Override
@@ -28,7 +28,7 @@ public class Todos extends ExecutableTask {
     }
 
     /**
-     * get name of todos
+     * get name of todos.
      * @return task name
      */
     @Override
@@ -37,7 +37,7 @@ public class Todos extends ExecutableTask {
     }
 
     /**
-     * get type of task
+     * get type of task.
      * @return the string T to represent todos
      */
     @Override
@@ -46,7 +46,7 @@ public class Todos extends ExecutableTask {
     }
 
     /**
-     * get task time
+     * get task time.
      * @return null as todos do not have time
      */
     @Override
@@ -56,7 +56,7 @@ public class Todos extends ExecutableTask {
     }
 
     /**
-     * mark todos as done
+     * mark todos as done.
      */
     @Override
     public void markAsDone() {
