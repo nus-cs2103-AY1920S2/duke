@@ -36,6 +36,7 @@ public class DeleteCommand extends Command {
         try {
             //delete the desired task
             Task taskToDelete = tasks.deleteTask(index);
+            assert taskToDelete != null : "There cannot be a null deleted task";
 
             //update save file
             storage.saveTasks(tasks.getList());

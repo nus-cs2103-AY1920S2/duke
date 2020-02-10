@@ -42,6 +42,7 @@ public class TaskList {
             throw new InvalidCommandException("HEY!!! I cannot set a "
                     + "non-existent task to be done.");
         }
+        assert tasks.size() > 0 : "task list should not be empty";
 
         //mark selected task to be done
         tasks.get(index - 1).markDone();
@@ -60,6 +61,7 @@ public class TaskList {
             throw new InvalidCommandException("HEY!!! I cannot destroy a "
                     + "non-existent task.");
         }
+        assert tasks.size() > 0 : "task list should not be empty";
 
         //delete the task from the list and return it
         Task taskToDelete = tasks.remove(index - 1);
