@@ -8,8 +8,8 @@ public class ToDo extends AbstractTask {
     }
 
     @Override
-    public String toString() {
-        return "[T]" + taskStateString() + " " + this.taskName;
+    protected String taskType() {
+        return "[T]";
     }
 
 }

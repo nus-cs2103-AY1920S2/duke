@@ -30,6 +30,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets current controller to instantiated Duke class.
+     * @param d Duke instance to be set
+     */
     public void setDuke(Duke d) {
         duke = d;
         String response = duke.getUi().startupString();
@@ -50,7 +54,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        if(input.equals("bye")) { //exit Duke when user inputs bye
+        if (input.equals("bye")) { //exit Duke when user inputs bye
             Platform.exit();
             System.exit(0);
         }

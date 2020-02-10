@@ -10,9 +10,7 @@ public class Ui {
      * Constructor for Ui class.
      */
     public Ui() {
-//        this.sc = new Scanner(System.in);
         this.parser = new Parser();
-//        System.out.println("Hello from " + logo);
     }
 
     public void setTaskList(TaskList taskList) {
@@ -20,17 +18,19 @@ public class Ui {
         parser.setTaskList(taskList);
     }
 
-//    /**
-//     * Scans for user input indefinitely and terminates when user inputs "bye".
-//     */
-//    public void awaitUserInput() {
-//        String in = sc.nextLine();
-//        while (!in.equals("bye")) {
-//            parser.getInput(in);
-//            in = sc.nextLine();
-//        }
-//        System.out.println("     Bye. Hope to see you again soon!");
-//    }
+    /**
+     * Scans for user input indefinitely and terminates when user inputs "bye".
+     */
+    /*
+    public void awaitUserInput() {
+        String in = sc.nextLine();
+        while (!in.equals("bye")) {
+            parser.getInput(in);
+            in = sc.nextLine();
+        }
+        System.out.println("     Bye. Hope to see you again soon!");
+    }
+    */
 
     /**
      * String to be printed by Duke on Duke's startup.
@@ -46,7 +46,7 @@ public class Ui {
         return "Bye!";
     }
 
-     /** Parses user input for Duke GUI.
+    /** Parses user input for Duke GUI.
      * @param input user input in GUI
      */
     String parseInput(String input) {

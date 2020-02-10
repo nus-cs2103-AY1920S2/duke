@@ -214,8 +214,8 @@ public class TaskList {
             String taskNum = taskName.split(" ", 2)[1];
             Task currTask = taskList.get(Integer.parseInt(taskNum) - 1);
             taskList.remove(currTask);
-            out = "Noted. I've removed this task:\n" +  currTask + "\nNow you have " + taskList.size() +
-                    " tasks in the list.";
+            out = "Noted. I've removed this task:\n" +  currTask + "\nNow you have " + taskList.size()
+                    + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
             out = "☹ OOPS!!! Please input a valid number in the range of the task list to delete.";
         } catch (NumberFormatException e) { // when non-int arg provided
