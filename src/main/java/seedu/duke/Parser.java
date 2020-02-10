@@ -21,53 +21,30 @@ class Parser {
         String[] splitInput = fullCommand.split(Pattern.quote(" "));
         // empty line would output string array of size 1, where the element is empty string
         String commandString = splitInput[0];
-        int selectedTaskIndex;
-        Command toReturn = null;
 
         try {
             switch (Command.Type.valueOf(commandString)) {
             case bye:
-                toReturn = new ExitCommand();
-                break;
+                return new ExitCommand();
             case list:
-                toReturn = new ListCommand();
-                break;
+                return new ListCommand();
             case done:
-                isSplitInputLengthLargerThanOne(splitInput);
-                selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
-                toReturn = new DoneCommand(selectedTaskIndex);
-                break;
+                return createDoneCommand(splitInput);
             case delete:
-                isSplitInputLengthLargerThanOne(splitInput);
-                selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
-                toReturn = new DeleteCommand(selectedTaskIndex);
-                break;
+                return createDeleteCommand(splitInput);
             case todo:
-                isSplitInputLengthLargerThanOne(splitInput);
-                String taskDescription = fullCommand.substring(Command.Type.todo.getCommand().length()).strip();
-                toReturn = new AddCommand(Command.Type.todo, taskDescription);
-                break;
+                return createTodoAddCommand(fullCommand, splitInput);
             case find:
-                isSplitInputLengthLargerThanOne(splitInput);
-                String[] keywords = fullCommand
-                        .substring(Command.Type.find.getCommand().length())
-                        .strip()
-                        .split(Pattern.quote(" "));
-                toReturn = new FindCommand(keywords);
-                break;
-            case deadline:
+                return createFindCommand(fullCommand, splitInput);
+            case deadline: // Fallthrough
             case event:
-                isSplitInputLengthLargerThanOne(splitInput);
-                toReturn = createDeadLineOrEventCommand(fullCommand, commandString);
-                break;
+                return createDeadLineOrEventAddCommand(fullCommand, splitInput, commandString);
             default:
-                break;
+                return null;
             }
         } catch (IllegalArgumentException e) {
             throw new DukeWrongCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
-        return toReturn;
     }
 
     private static void isSplitInputLengthLargerThanOne(String[] splitInput) throws DukeEmptyDescriptionException {
@@ -76,8 +53,41 @@ class Parser {
         }
     }
 
-    private static Command createDeadLineOrEventCommand(String fullCommand, String commandString)
-            throws DukeNoKeywordException {
+    private static Command createDoneCommand(String[] splitInput) throws DukeEmptyDescriptionException {
+        int selectedTaskIndex;
+        isSplitInputLengthLargerThanOne(splitInput);
+        selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
+        return new DoneCommand(selectedTaskIndex);
+    }
+
+    private static Command createDeleteCommand(String[] splitInput) throws DukeEmptyDescriptionException {
+        int selectedTaskIndex;
+        isSplitInputLengthLargerThanOne(splitInput);
+        selectedTaskIndex = Integer.parseInt(splitInput[1]) - 1;
+        return new DeleteCommand(selectedTaskIndex);
+    }
+
+    private static Command createTodoAddCommand(String fullCommand, String[] splitInput)
+            throws DukeEmptyDescriptionException {
+        isSplitInputLengthLargerThanOne(splitInput);
+        String taskDescription = fullCommand.substring(Command.Type.todo.getCommand().length()).strip();
+        return new AddCommand(Command.Type.todo, taskDescription);
+    }
+
+    private static Command createFindCommand(String fullCommand, String[] splitInput)
+            throws DukeEmptyDescriptionException {
+        isSplitInputLengthLargerThanOne(splitInput);
+        String[] keywords = fullCommand
+                .substring(Command.Type.find.getCommand().length())
+                .strip()
+                .split(Pattern.quote(" "));
+        return new FindCommand(keywords);
+    }
+
+    private static Command createDeadLineOrEventAddCommand(
+            String fullCommand, String[] splitInput, String commandString)
+            throws DukeEmptyDescriptionException, DukeNoKeywordException {
+        isSplitInputLengthLargerThanOne(splitInput);
         Command.Type type = Command.Type.valueOf(commandString);
         Command.Type keyword = type == Command.Type.deadline
                 ? Command.Type.deadline_by
