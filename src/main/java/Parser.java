@@ -42,24 +42,26 @@ public class Parser {
     String getOutputString(String input) {
         String in = input.trim();
         String out;
-            if (in.equals("bye")) {
-                out = this.command.exit();
-            } else if (in.equals("list")) {
-                out = this.command.getListString();
+      
+        assert this.taskList != null;
+        if (in.equals("bye")) {
+            out = this.command.exit();
+        } else if (in.equals("list")) {
+            out = this.command.getListString();
+        } else {
+            String taskType = in.split(" ", 2)[0];
+            if (taskType.equals("done")) {
+                out = this.command.done(in);
+            } else if (taskType.equals("delete")) {
+                out = this.command.delete(in);
+            } else if (Task.isValidTask(taskType)) {
+                out = this.command.add(in);
+            } else if (in.isEmpty() || in == null) {
+                out = this.command.emptyInput();
             } else {
-                String taskType = in.split(" ", 2)[0];
-                if (taskType.equals("done")) {
-                    out = this.command.done(in);
-                } else if (taskType.equals("delete")) {
-                    out = this.command.delete(in);
-                } else if (Task.isValidTask(taskType)) {
-                    out = this.command.add(in);
-                } else if (in.isEmpty() || in == null) {
-                    out = this.command.emptyInput();
-                } else {
-                    out = this.command.unknownCommand();
-                }
+                out = this.command.unknownCommand();
             }
+        }
         return out;
     }
 }
