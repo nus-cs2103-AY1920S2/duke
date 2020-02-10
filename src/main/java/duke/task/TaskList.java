@@ -45,7 +45,6 @@ public class TaskList {
             throw new InvalidCommandException(DONE_NO_SUCH_TASK_MESSAGE);
         }
 
-        //mark selected task to be done
         tasks.get(index - 1).markDone();
     }
 
@@ -57,12 +56,10 @@ public class TaskList {
      * @throws InvalidCommandException if the index given is out of bounds.
      */
     public Task deleteTask(int index) throws InvalidCommandException {
-        //check if index is valid
         if (index > tasks.size() || index <= 0) {
             throw new InvalidCommandException(DELETE_NO_SUCH_TASK_MESSAGE);
         }
 
-        //delete the task from the list and return it
         Task taskToDelete = tasks.remove(index - 1);
         return taskToDelete;
     }

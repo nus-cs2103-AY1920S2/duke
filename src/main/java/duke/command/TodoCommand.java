@@ -37,14 +37,9 @@ public class TodoCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            //add a new todo task to the list
             Task newTodoTask = new Todo(arg);
             tasks.addTask(newTodoTask);
-
-            //update save file
             storage.saveTasks(tasks.getList());
-
-            //print success message
             return String.format("Got it. I've added this task:\n  %s\n"
                     + "Now you have %d tasks in the list.\n", newTodoTask, tasks.getSize());
         } catch (IOException e) {

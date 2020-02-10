@@ -32,7 +32,6 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         String relevantTasks = tasks.findTasksBySearchPhrase(arg);
-
         if (relevantTasks.equals("")) {
             return NO_MATCHING_TASKS_MESSAGE;
         } else {

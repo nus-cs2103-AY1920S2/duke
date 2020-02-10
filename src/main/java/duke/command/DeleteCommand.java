@@ -37,16 +37,11 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            //delete the desired task
-            Task taskToDelete = tasks.deleteTask(index);
-
-            //update save file
+            Task taskDeleted = tasks.deleteTask(index);
             storage.saveTasks(tasks.getList());
-
-            //print success message
             return String.format("Here I go! My ultimate destructive magic! EXPLOSION!\n"
                     + "I have successfully eradicated this task:\n  %s\n"
-                    + "Now you have %d tasks in the list.\n", taskToDelete, tasks.getSize());
+                    + "Now you have %d tasks in the list.\n", taskDeleted, tasks.getSize());
         } catch (InvalidCommandException e) {
             return e.getMessage();
         } catch (IOException e) {

@@ -36,13 +36,8 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            //set the desired task as done
             tasks.setAsDone(index);
-
-            //update save file
             storage.saveTasks(tasks.getList());
-
-            //print success message
             return String.format("Nice! I've marked this task as done:\n"
                     + "  %s\n" + "Hope we get loads of Eris for this!\n", tasks.getTask(index));
         } catch (InvalidCommandException e) {

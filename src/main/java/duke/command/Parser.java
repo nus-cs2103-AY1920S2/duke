@@ -28,7 +28,7 @@ public class Parser {
      * @throws InvalidCommandException If command input is invalid.
      */
     public static Command parseCommand(String input) throws InvalidCommandException {
-        //split the command line
+        //split the command line to get the command and arguments
         String[] commandLine = input.split(" ", 2);
 
         //determine which type of command and return the respective command
