@@ -20,8 +20,7 @@ public class Ui {
 
     /**
      * Gives the correct output for the given input.
-     * @param input
-     * String input by the user.
+     * @param input String input by the user.
      * @return String response from the program.
      */
     public String getOutput(String input) {
