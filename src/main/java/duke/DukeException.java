@@ -59,18 +59,26 @@ public class DukeException extends Exception {
             stringBuilder.append("      :( Small peepee move, please give valid command!");
             break;
         case EMPTY_DESCRIPTION:
-            stringBuilder.append("      :( WHOOPS I did it again~\n" + "      " + commandName
-                    + " description is empty!\n      Describe it for my smol brain please :)");
+            stringBuilder.append("      :( WHOOPS I did it again~\n      ");
+            stringBuilder.append(commandName);
+            stringBuilder.append(" description is empty!\n");
+            stringBuilder.append("      Describe it for my smol brain please :)");
             break;
         case EMPTY_TIME:
-            stringBuilder.append("      Date and time?\n" + "      " + commandName
-                    + " time is empty!\n      Set it for your smol brain please :)");
+            stringBuilder.append("      Date and time?\n      " );
+            stringBuilder.append(commandName);
+            stringBuilder.append(" time is empty!\n      Set it for your smol brain please :)");
             break;
         case INVALID_ABBREVIATION:
-            stringBuilder.append("      Invalid abbreviation in data document, please check!\n" +
-                    "      Only T/D/E abbreviation is allowed.");
+            stringBuilder.append("      Invalid abbreviation in data document, please check!\n");
+            stringBuilder.append("      Only T/D/E abbreviation is allowed.");
+            break;
         case EMPTY_COMMAND:
             stringBuilder.append("      Please give me something to exe :D");
+            break;
+        case INVALID_FILE_CONTENT:
+            stringBuilder.append("Please make sure file content is separated with |");
+            break;
         }
         return stringBuilder.toString();
     }

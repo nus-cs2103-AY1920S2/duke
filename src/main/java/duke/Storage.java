@@ -91,28 +91,19 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String nextLine = scanner.nextLine();
                 String[] taskArr = nextLine.split(" \\| ");
+                if (taskArr.length <= 1) {
+                    throw new DukeException("Invalid file content format", DukeErrorType.INVALID_FILE_CONTENT);
+                }
                 CommandList taskAbbreviation = CommandList.get(taskArr[0]);
                 switch (taskAbbreviation) {
                 case TODO:
-                    ToDo storeTask = new ToDo(taskArr[2]);
-                    if (taskArr[1].equals(DONE)) {
-                        storeTask.markAsDone();
-                    }
-                    tasks.add(storeTask);
+                    tasks.add(todoLoader(taskArr));
                     break;
                 case EVENT:
-                    Event storeEvent = new Event(taskArr[2], LocalDate.parse(taskArr[3], inputFormat));
-                    if (taskArr[1].equals(DONE)) {
-                        storeEvent.markAsDone();
-                    }
-                    tasks.add(storeEvent);
+                    tasks.add(eventLoader(taskArr, inputFormat));
                     break;
                 case DEADLINE:
-                    Deadline storeDeadline = new Deadline(taskArr[2], LocalDate.parse(taskArr[3], inputFormat));
-                    if (taskArr[1].equals(DONE)) {
-                        storeDeadline.markAsDone();
-                    }
-                    tasks.add(storeDeadline);
+                    tasks.add(deadlineLoader(taskArr, inputFormat));
                     break;
                 default:
                     throw new DukeException("Invalid abbreviation!", DukeErrorType.INVALID_ABBREVIATION);
@@ -162,5 +153,33 @@ public class Storage {
         } else {
             System.out.println("Please check write permission on " + absoluteStorageFilePath);
         }
+    }
+
+    public ToDo todoLoader(String[] taskArr) {
+        ToDo storeTask = new ToDo(taskArr[2]);
+        if (isDone(taskArr)) {
+            storeTask.markAsDone();
+        }
+        return storeTask;
+    }
+
+    public Event eventLoader(String[] taskArr, DateTimeFormatter inputFormat) {
+        Event storeEvent = new Event(taskArr[2], LocalDate.parse(taskArr[3], inputFormat));
+        if (isDone(taskArr)) {
+            storeEvent.markAsDone();
+        }
+        return storeEvent;
+    }
+
+    public Deadline deadlineLoader(String[] taskArr, DateTimeFormatter inputFormat) {
+        Deadline storeDeadline = new Deadline(taskArr[2], LocalDate.parse(taskArr[3], inputFormat));
+        if (isDone(taskArr)) {
+            storeDeadline.markAsDone();
+        }
+        return storeDeadline;
+    }
+
+    public boolean isDone(String[] taskArr) {
+        return taskArr[1].equals(DONE);
     }
 }

@@ -44,7 +44,7 @@ public class Duke {
     }
 
     /**
-     * Execute the start-up, message shown, and main functions of the chatbot
+     * Executes the start-up, message shown, and main functions of the chatbot
      */
     public void run() {
         System.out.println(ui.addBorder(ui.showWelcome()));
@@ -73,7 +73,6 @@ public class Duke {
      *
      * @param args Unused.
      */
-
     public static void main(String[] args) {
         new Duke("data" + System.getProperty("file.separator") + "duke.txt").run();
     }
