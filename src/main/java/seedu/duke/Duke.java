@@ -77,7 +77,7 @@ public class Duke {
      * @param input The user input.
      * @return Duke's response.
      */
-    protected String getResponse(String input) {
+    protected String getResponse(String input) throws IOException {
 //            if (!parser.hasNextCommand()) {
 //                break;
 //            }
@@ -89,7 +89,8 @@ public class Duke {
 
         Parser parser = new Parser();
         String[] inputs = input.split(" ", 2);
-        parser.handleCommands(inputs, taskList);
+        Command cmd = parser.handleCommands(inputs, taskList);
+        cmd.execute(taskList, ui, storage);
 
         System.out.flush();
         System.setOut(old);
