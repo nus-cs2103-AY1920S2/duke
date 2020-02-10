@@ -54,6 +54,9 @@ public class Ui {
      * @return a String of all tasks specified in the param.
      */
     public String showList(TaskList taskList) {
+        if (taskList.getList().isEmpty()) {
+            return "There are no tasks in the list yet.";
+        }
         return taskList.toString() + "\n";
     }
 

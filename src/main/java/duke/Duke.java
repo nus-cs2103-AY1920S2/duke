@@ -4,7 +4,6 @@ import duke.task.TaskList;
 import duke.exception.DukeException;
 import duke.command.Command;
 
-
 /**
  * Represents the main logic flow of the Duke Application.
  * A <code>Storage</code> object stores all list data into disk.
@@ -42,6 +41,7 @@ public class Duke {
         try {
             Command c = Parser.parse(instruction);
             result = c.execute(tasks, ui);
+            assert !result.equals("") : "No result was returned.";
         } catch (DukeException e) {
             result = ui.showError(e);
         }
