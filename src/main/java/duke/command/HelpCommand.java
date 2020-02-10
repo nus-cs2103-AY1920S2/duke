@@ -16,7 +16,7 @@ public class HelpCommand extends Command{
         return false;
     }
     /**
-     * Displays the task list. If storage file is invalid, an error message is returned.
+     * Displays all the commands in Duke. If storage file is invalid, an error message is returned.
      * @param tasks The task list to be updated.
      * @param ui The user interface to be to be shown.
      * @param storage The storage file to be updated.
