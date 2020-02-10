@@ -35,7 +35,6 @@ public class Storage {
         File f = new File(filePath);
 
         if (f.exists()) {
-
             try {
                 Scanner sc = new Scanner(f);
                 while (sc.hasNext()) {
@@ -44,13 +43,10 @@ public class Storage {
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                System.out.println("File not found exception");
+                throw new DukeException("File was not created successfully!");
             }
         } else {
             try {
-                //System.out.println("storage" + System.getProperty("user.dir"));
-                //File f1 = new File(System.getProperty("user.dir"), "src/main/java/duke/data/text.txt");
-                //f1.createNewFile();
                 f.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
