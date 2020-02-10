@@ -1,5 +1,7 @@
+package duke.exception;
+
 /**
- * Generates an error message for improper user input.
+ * Generates an error message for incorrect user input.
  */
 
 public class DukeException extends IllegalArgumentException {
@@ -8,9 +10,8 @@ public class DukeException extends IllegalArgumentException {
     @Override
     public String toString() {
         assert !errorMsg.isEmpty() : "Error message should not be empty.";
-        String text = "                    -~~o~~-\n"
+        return "                    -~~o~~-\n"
                 + errorMsg + "\n"
                 + "                    -~~o~~-\n";
-        return text;
     }
 }

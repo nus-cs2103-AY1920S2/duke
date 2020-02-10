@@ -1,3 +1,4 @@
+package duke.exception;
 
 /**
  * Generates an error message for the situation where a date was not given in the yyyy-mm-dd format.

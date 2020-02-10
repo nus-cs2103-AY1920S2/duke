@@ -1,3 +1,4 @@
+package duke.exception;
 
 /**
  * Generates an error message for the situation where the given index for Remove or Done command is not suitable.

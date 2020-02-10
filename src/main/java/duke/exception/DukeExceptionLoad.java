@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Generates an error message for the situation where the txt file cannot be read from.
  */

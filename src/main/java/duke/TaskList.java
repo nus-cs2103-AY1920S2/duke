@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -9,7 +13,7 @@ public class TaskList {
     private int size;
 
     public TaskList() {
-        tasks = new ArrayList<Task>();
+        tasks = new ArrayList<>();
         size = 0;
     }
 
@@ -17,13 +21,13 @@ public class TaskList {
      * Formats the current tasks into a String to be saved into a txt file.
      * @return A String of all the current tasks
      */
-    public String tasksToString() {
-        String output = "";
+    public String saveFormat() {
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < size; i++) {
             Task t = tasks.get(i);
-            output += t.writeToFile() + "\n";
+            output.append(t.writeToFile()).append("\n");
         }
-        return output;
+        return output.toString();
     }
 
     public void addTask(Task t) {
@@ -31,6 +35,10 @@ public class TaskList {
         size++;
     }
 
+    /**
+     * Removes the Task at index from the List.
+     * @param index int index of the Task to be removed.
+     */
     public void remTask(int index) {
         assert index > 0 : "Invalid index is used.";
         tasks.remove(index);
@@ -43,10 +51,6 @@ public class TaskList {
 
     public Task getTask(int index) {
         return tasks.get(index);
-    }
-
-    public ArrayList<Task> getTaskList() {
-        return tasks;
     }
 
     public int getSize() {

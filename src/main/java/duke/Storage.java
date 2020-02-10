@@ -1,3 +1,13 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.DukeExceptionLoad;
+import duke.exception.DukeExceptionSave;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +28,7 @@ public class Storage {
 
     /**
      * Loads the tasks from Path into TaskList.
-     * @return Updated TaskList.
+     * @return Updated TaskList
      * @throws DukeException Error resulting from loading Tasks.
      */
     public TaskList load() throws DukeException {
@@ -26,8 +36,7 @@ public class Storage {
         try {
             List<String> lines = Files.readAllLines(path);
 
-            for (int i = 0; i < lines.size(); i++) {
-                String curLine = lines.get(i);
+            for (String curLine : lines) {
                 String[] components = curLine.split(" , ");
 
                 if (components.length < 3) {
@@ -61,8 +70,6 @@ public class Storage {
             }
         } catch (IOException error) {
             throw new DukeExceptionLoad("filetype");
-        } catch (DukeException error) {
-            throw error;
         }
         return tasks;
     }
@@ -74,7 +81,7 @@ public class Storage {
      */
     public void save(TaskList tasks) throws DukeException {
         try {
-            String savedString = tasks.tasksToString();
+            String savedString = tasks.saveFormat();
             BufferedWriter writer = Files.newBufferedWriter(path);
             writer.write(savedString);
             writer.flush();

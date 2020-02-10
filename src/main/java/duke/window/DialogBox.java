@@ -1,3 +1,5 @@
+package duke.window;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -51,6 +53,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box for the User.
+     * @param text String to be displayed
+     * @param img Image representing User.
+     * @return DialogBox to be displayed.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDiaBox = new DialogBox(text, img);
         userDiaBox.setSpacing(10);
