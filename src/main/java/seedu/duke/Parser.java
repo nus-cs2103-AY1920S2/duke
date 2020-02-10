@@ -61,6 +61,7 @@ class Parser {
                 toReturn = createDeadLineOrEventCommand(fullCommand, commandString);
                 break;
             default:
+                assert false : "Class Parser: parse method, reached default case.";
                 break;
             }
         } catch (IllegalArgumentException e) {

@@ -56,6 +56,7 @@ public class AddCommand extends Command {
             newTask = new Event(taskDescription, date);
             break;
         default:
+            assert false : "Class AddCommand: execute method, reached default case.";
             break;
         }
 
