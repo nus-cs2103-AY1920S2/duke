@@ -4,7 +4,7 @@ package duke;
  * Represent a task to be done by the user.
  * Described by a string and boolean to indicate whether its done.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -46,6 +46,10 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public int compareTo(Task other) {
+        return this.description.compareTo(other.description);
     }
     
     /**

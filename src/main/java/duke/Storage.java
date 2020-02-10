@@ -76,14 +76,15 @@ public class Storage {
     }
 
     /**
-     * Writes data to the end of the file.
+     * Writes data to the file.
      *
      * @param data Data to be written.
+     * @param append Indicates whether data should be appended to the end of file or overwrites it.
      * @throws DukeException Errors related to write operations will be thrown.
      */
-    public void writeToFile(String data) throws DukeException {
+    public void writeToFile(String data, boolean append) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(file, true);
+            FileWriter fw = new FileWriter(file, append);
             fw.write(data);
             fw.close();
         } catch (IOException e) {
@@ -106,9 +107,9 @@ public class Storage {
             String line;
             while ((line = br.readLine()) != null) {
                 if (i == taskNumber) {
-                    if (command.equals("done")) {
+                    if (command.equals("DONE")) {
                         line = line.substring(0, 4) + "1" + line.substring(5);
-                    } else {
+                    } else if (command.equals("DELETE")) {
                         i++;
                         continue;
                     }
@@ -125,5 +126,31 @@ public class Storage {
         } catch (Exception e) {
             throw new DukeException("☹ OOPS!!! Error writing to file.");
         }
+    }
+
+    /**
+     * Overloaded method which writes the given task list to file, overriding any old data.
+     *
+     * @param tasks Task list to be written.
+     * @throws DukeException Errors related to write operations will be thrown.
+     */
+    public void writeToFile(ArrayList<Task> tasks) throws DukeException {
+        String data = "";
+        for (Task t : tasks) {
+            String className = t.getClass().getSimpleName();
+            int isTaskDone = t.isTaskDone() ? 1 : 0;
+            if (className.equalsIgnoreCase("TODO")) {
+                data += "T | " + isTaskDone + " | " + t.getDescription() + "\n";
+            } else if (className.equalsIgnoreCase("DEADLINE")) {
+                Deadline d = (Deadline) t;
+                data += "D | " + isTaskDone + " | " + d.getDescription() + " | "
+                        + d.getDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
+            } else if (className.equalsIgnoreCase("EVENT")) {
+                Event e = (Event) t;
+                data += "E | " + isTaskDone + " | " + e.getDescription() + " | "
+                        + e.getDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
+            }
+        }
+        writeToFile(data, false);
     }
 }

@@ -20,6 +20,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public LocalDate getDate() {
+        return at;
+    }
+
     /**
      * Overwritten toString to fit format requirements.
      *

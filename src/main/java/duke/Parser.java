@@ -6,6 +6,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.command.TodoCommand;
 
 /**
@@ -56,6 +57,9 @@ public class Parser {
             break;
         case "FIND":
             msg = new FindCommand(userInput).execute(storage, tasks);
+            break;
+        case "SORT":
+            msg = new SortCommand().execute(storage, tasks);
             break;
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

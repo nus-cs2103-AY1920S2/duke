@@ -40,7 +40,7 @@ public class TodoCommand extends Command {
         int size = tasks.size();
         tasks.add(todo);
         assert (size + 1) == tasks.size() : "Todo command error";
-        storage.writeToFile("T | 0 | " + description + "\n");
+        storage.writeToFile("T | 0 | " + description + "\n", true);
         return "Got it. I've added this task:\n    " + todo
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
