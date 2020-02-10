@@ -155,7 +155,7 @@ public class Ui {
         for (Task task: tasks.getCurrentTasks()) {
             String taskAction = task.toString().split(" ", 2)[1].split("\\(")[0];
             if (taskAction.contains(taskSearchKey)) {
-                System.out.printf("%d.%s\n", index, task.toString());
+                System.out.printf("%d. %s\n", index, task.toString());
                 index++;
             }
         }
