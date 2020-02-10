@@ -31,7 +31,7 @@ public class Gui {
         String toReturn = "Here are the tasks in your list:\n";
         int i = 1;
         for (Task task : listOfTasks.getTaskList()) {
-            toReturn += String.format("%d.%s\n", i, task.toString());
+            toReturn += String.format("  %d.%s\n", i, task.toString());
             i++;
         }
         return toReturn;
@@ -48,7 +48,7 @@ public class Gui {
         if (deleteIndex >= listOfTasks.getNumOfTasks() || deleteIndex < 0) {
             throw new DukeException("Index out of bounds!");
         }
-        String toReturn = "Noted. I've removed this task:\n ";
+        String toReturn = "Noted. I've removed this task:\n  ";
         toReturn += listOfTasks.getTask(deleteIndex);
         toReturn += String.format("\nNow you have %s tasks in the list\n", listOfTasks.getNumOfTasks() - 1);
         return toReturn;
@@ -66,7 +66,7 @@ public class Gui {
         if (index >= listOfTasks.getNumOfTasks() || index < 0) {
             throw new DukeException("Index out of bounds!");
         }
-        String toReturn = "Nice, I've marked this task as done:\n ";
+        String toReturn = "Nice, I've marked this task as done:\n  ";
         toReturn += (listOfTasks.getTask(index));
 
         return toReturn;
@@ -99,7 +99,7 @@ public class Gui {
         String toReturn = "Here are the matching tasks in your list:\n";
         int i = 1;
         for (Task task : listOfTasks.getTaskList()) {
-            toReturn += String.format("%d.%s\n", i, task);
+            toReturn += String.format("  %d.%s\n", i, task);
             i++;
         }
         return toReturn;
