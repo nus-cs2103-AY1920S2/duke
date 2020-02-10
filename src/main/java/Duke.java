@@ -13,9 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * Class representation of Duke
+ * Class representation of Duke.
  */
-public class Duke extends Application{
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -31,7 +31,7 @@ public class Duke extends Application{
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Duke Constructor
+     * Duke Constructor.
      */
     public Duke() {
         String filePath = "/Users/gerrenseow/Documents/Gerren/MODULES/Y2S2/CS2103T/Individual_Project/duke/src/main/java/data/data.txt";
@@ -88,13 +88,13 @@ public class Duke extends Application{
 
         sendButton.setPrefWidth(55.0);
 
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setTopAnchor(scrollPane,1.0);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(sendButton,1.0);
+        AnchorPane.setRightAnchor(sendButton,1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput,1.0);
+        AnchorPane.setBottomAnchor(userInput,1.0);
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -140,9 +140,7 @@ public class Duke extends Application{
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-//        Label userText = new Label(userInput.getText());
         String userText = userInput.getText();
-//        Label dukeText = new Label(getResponse(userInput.getText()));
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, (user)),
@@ -169,7 +167,7 @@ public class Duke extends Application{
     }
 
     /**
-     *  Duke's run method
+     *  Duke's run method.
      *  Calls its Ui attribute, and activates the onStart function
      */
     public void run() {

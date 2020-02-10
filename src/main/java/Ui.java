@@ -1,10 +1,10 @@
 /**
- * Class representation of Ui
+ * Class representation of Ui.
  */
 public class Ui {
     /**
-     * Ui's on start method, which prints the Introduction header and
-     * creates a Parser object, running its startParsing function
+     * Ui's on start method, which prints the Introduction header and,
+     * creates a Parser object, running its startParsing function.
      * @param tasks
      * @param filepath
      */
@@ -23,7 +23,7 @@ public class Ui {
     }
 
     /**
-     * Ui's showLoadingError method, which will be colled when filepath of txt.file is invalid
+     * Ui's showLoadingError method, which will be colled when filepath of txt.file is invalid.
      */
     public void showLoadingError() {
         System.out.println("ERROR. Previous data cannot be found. A new, empty task list is created.");

@@ -1,21 +1,21 @@
 /**
- * Class representation of Event
+ * Class representation of Event.
  */
 public class Event extends Task {
     protected String time;
 
     /**
-     * Event Constructor
+     * Event Constructor.
      * @param description
      * @param time
      */
-    public Event(String description, String time){
+    public Event(String description, String time) {
         super(description);
         this.time = time;
     }
 
     /**
-     * Event's overriden toString method
+     * Event's overriden toString method.
      * @return String representation of Event
      */
     public String toString() {

@@ -2,13 +2,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class representation of Deadline
+ * Class representation of Deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDateTime dL;
 
     /**
-     * Deadline Constructor
+     * Deadline Constructor.
      * @param description
      * @param dL
      */
@@ -18,7 +18,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * Deadline's overriden toString method
+     * Deadline's overriden toString method.
      * @return String representation of Deadline
      */
     public String toString() {

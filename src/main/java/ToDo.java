@@ -1,10 +1,10 @@
 /**
- * Class representation of ToDo
+ * Class representation of ToDo.
  */
 public class ToDo extends Task {
 
     /**
-     * ToDo Constructor
+     * ToDo Constructor.
      * @param description
      */
     public ToDo(String description) {
@@ -12,7 +12,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * ToDo's overriden toString method
+     * ToDo's overriden toString method.
      * @return String representation of ToDO
      */
     @Override
