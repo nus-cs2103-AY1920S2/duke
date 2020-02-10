@@ -1,3 +1,11 @@
 [T][✓] list
 [D][✘] testing (by: 2020-08-09)
 [E][✘] welcome tea (at: 2020-03-20)
+[T][✘] hello
+[D][✘] event (by: 2020-03-04)
+[T][✘] testing
+[T][✘] hahaha
+[T][✘] bye
+[T][✘] hehehe
+[T][✘] what
+[T][✘] what

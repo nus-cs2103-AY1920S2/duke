@@ -144,12 +144,12 @@ public class Ui {
         StringBuilder botReplySb = new StringBuilder();
         showLine();
         for (int i = 0; i < taskList.getTaskListSize(); i++) {
-            botReplySb.append(i + 1 + ". " + taskList.getTask(i).toString() + "\n");
-//            System.out.println(i + 1 + ". " + taskList.getTask(i).toString());
+            botReplySb.append(i + 1 + ". " + taskList.getTask(i).toString()+"\n");
+            System.out.println(i + 1 + ". " + taskList.getTask(i).toString());
             sb.append(taskList.getTask(i).saveToList() + "\n");
         }
         showLine();
-        return botReplySb.toString();
+        return botReplySb.toString().strip();
     }
 
 
