@@ -210,4 +210,8 @@ public class Duke extends Application {
     public TaskList getTaskList() {
         return tasks;
     }
+
+    public void save() throws IOException {
+        storage.saveFiles(tasks);
+    }
 }
