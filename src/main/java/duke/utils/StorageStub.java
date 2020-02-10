@@ -3,7 +3,7 @@ package duke.utils;
 import java.io.IOException;
 
 /**
- * Stub for file storage
+ * Stub for file storage.
  */
 public class StorageStub implements Storage {
 

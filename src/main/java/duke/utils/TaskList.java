@@ -1,9 +1,9 @@
 package duke.utils;
 
-import duke.task.Deadlines;
-import duke.task.Events;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todos;
+import duke.task.Todo;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -12,14 +12,14 @@ import java.util.List;
 
 /**
  * Task List class to represent a list of task and handle
- * task list operations
+ * task list operations.
  */
 public class TaskList {
 
     private List<Task> tasks = new ArrayList<>();
 
     /**
-     * Task List constructor
+     * Task List constructor.
      * @param tasks list of tasks
      */
     public TaskList(List<Task> tasks) {
@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Task list constructor with empty list
+     * Task list constructor with empty list.
      */
     public TaskList() { }
 
@@ -36,7 +36,7 @@ public class TaskList {
     }
 
     /**
-     * Get size of task list
+     * Gets size of task list.
      * @return size of task list
      */
     public int size() {
@@ -44,7 +44,7 @@ public class TaskList {
     }
 
     /**
-     * Mark task at certain index as done
+     * Marks task at certain index as done.
      * @param taskId to be marked as done
      */
     public void markTaskAsDone(int taskId) {
@@ -60,7 +60,7 @@ public class TaskList {
     }
 
     /**
-     * Find tasks from task list with a given keyword
+     * Finds tasks from task list with a given keyword
      * @param word
      * @return list of tasks with given keyword
      */
@@ -76,7 +76,7 @@ public class TaskList {
     }
 
     /**
-     * Add item to task list
+     * Adds item to task list
      * @param item name
      * @param type of item
      * @return whether addition is successful or not
@@ -90,7 +90,7 @@ public class TaskList {
 
         switch (type) {
             case "todo":
-                newTask = new Todos(item);
+                newTask = new Todo(item);
                 break;
             case "deadline":
                 tokens = item.split("/", 2);
@@ -104,7 +104,7 @@ public class TaskList {
                 if (!Parser.checkDateFormat(time)) {
                     return false;
                 }
-                newTask = new Deadlines(tokens[0].trim(), Parser.stringToDate(time));
+                newTask = new Deadline(tokens[0].trim(), Parser.stringToDate(time));
                 break;
             case "event":
                 tokens = item.split("/", 2);
@@ -118,7 +118,7 @@ public class TaskList {
                 if (!Parser.checkDateFormat(time)) {
                     return false;
                 }
-                newTask = new Events(tokens[0].trim(), Parser.stringToDate(time));
+                newTask = new Event(tokens[0].trim(), Parser.stringToDate(time));
                 break;
             default:
                 newTask = null;

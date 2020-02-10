@@ -6,15 +6,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * File storage object to handle storage in a local file
- * Implements storage interface
+ * File storage object to handle storage in a local file.
+ * Implements storage interface.
  */
 public class FileStorage implements Storage {
 
     private String fileName;
 
     /**
-     * File storage constructor
+     * File storage constructor.
      * @param fileName
      */
     public FileStorage(String fileName) {
@@ -22,7 +22,7 @@ public class FileStorage implements Storage {
     }
 
     /**
-     * Create storage if it doesn't exist
+     * Create storage if it doesn't exist.
      * @throws IOException
      */
     public void createStorage() throws IOException {
@@ -35,8 +35,8 @@ public class FileStorage implements Storage {
     }
 
     /**
-     * Check if file that is to be created already exists
-     * @return
+     * Check if file that is to be created already exists.
+     * @return boolean on whether or not file exists
      */
     public boolean checkFileExistence() {
         //relative path
@@ -49,8 +49,8 @@ public class FileStorage implements Storage {
     }
 
     /**
-     * Load data from storage file
-     * @return data in the form of a string
+     * Load data from storage file.
+     * @return data in the form of a string.
      * @throws IOException
      */
     public String loadStorage() throws IOException {
@@ -65,8 +65,8 @@ public class FileStorage implements Storage {
     }
 
     /**
-     * Store data to storage file
-     * @param data in the form of a string
+     * Store data to storage file.
+     * @param data in the form of a string.
      * @throws IOException
      */
     public void storeData(String data) throws IOException {

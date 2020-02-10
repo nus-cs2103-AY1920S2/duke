@@ -1,25 +1,25 @@
 package duke.command;
 
-import duke.main.Ui;
+import duke.main.UiHandler;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 
 /**
- * Exit command implementing command interface
+ * Exit command implementing command interface.
  */
 public class ExitCommand implements Command {
 
     /**
-     * Exit duke and set appropriate ui response
-     * @param task
-     * @param ui
-     * @param storage
-     * @param taskList
+     * Exits duke and set appropriate ui response.
+     * @param task task for this execution
+     * @param uiHandler ui handler to capture response
+     * @param storage storage to be updated
+     * @param taskList list of tasks
      */
     @Override
-    public void execute(String task, Ui ui, Storage storage, TaskList taskList) {
-        ui.setResponse("bye ciao adios");
-        ui.exitDuke();
+    public void execute(String task, UiHandler uiHandler, Storage storage, TaskList taskList) {
+        uiHandler.setResponse("bye ciao adios");
+        uiHandler.exitDuke();
     }
 
 }

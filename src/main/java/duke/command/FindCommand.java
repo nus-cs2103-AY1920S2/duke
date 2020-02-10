@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.main.Ui;
+import duke.main.UiHandler;
 import duke.task.Task;
 import duke.utils.Storage;
 import duke.utils.TaskList;
@@ -8,29 +8,29 @@ import duke.utils.TaskList;
 import java.util.List;
 
 /**
- * Find Command which implements Command interface
+ * Find Command which implements Command interface.
  */
 public class FindCommand implements Command {
 
     /**
-     * Attempt to find task list based on key word and set ui response
-     * to display tasks found
-     * @param task
-     * @param ui
-     * @param storage
-     * @param taskList
+     * Attempts to find task list based on key word and set ui response
+     * to display tasks found.
+     * @param task task for this execution
+     * @param uiHandler ui handler to capture response
+     * @param storage storage to be updated
+     * @param taskList list of tasks
      */
     @Override
-    public void execute(String task, Ui ui, Storage storage, TaskList taskList) {
+    public void execute(String task, UiHandler uiHandler, Storage storage, TaskList taskList) {
         String[] token = task.split(" ");
 
         if (token.length < 2) {
-            ui.setResponse("Please specify a keyword to search for");
+            uiHandler.setResponse("Please specify a keyword to search for");
             return;
         }
 
         if (token.length > 2) {
-            ui.setResponse("Only 1 keyword is allowed");
+            uiHandler.setResponse("Only 1 keyword is allowed");
             return;
         }
 
@@ -47,7 +47,7 @@ public class FindCommand implements Command {
             }
         }
 
-        ui.setResponse(response);
+        uiHandler.setResponse(response);
     }
 
 }

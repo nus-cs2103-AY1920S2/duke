@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Deadline object extending from ExecutableTask.
  */
-public class Deadlines extends ExecutableTask {
+public class Deadline extends ExecutableTask {
 
     private boolean done = false;
     private String name;
@@ -18,13 +18,13 @@ public class Deadlines extends ExecutableTask {
      * @param name task name
      * @param time task time
      */
-    public Deadlines(String name, Date time) {
+    public Deadline(String name, Date time) {
         this.name = name;
         this.time = time;
     }
 
     /**
-     * check if deadline is done.
+     * checks if deadline is done.
      * @return done or not
      */
     @Override
@@ -33,7 +33,7 @@ public class Deadlines extends ExecutableTask {
     }
 
     /**
-     * get name of deadline.
+     * gets name of deadline.
      * @return task name
      */
     @Override
@@ -42,7 +42,7 @@ public class Deadlines extends ExecutableTask {
     }
 
     /**
-     * get type of task.
+     * gets type of task.
      * @return the string D to represent deadline
      */
     @Override
@@ -51,7 +51,7 @@ public class Deadlines extends ExecutableTask {
     }
 
     /**
-     * get task time.
+     * gets task time.
      * @return task time
      */
     public Date getTaskTime() {
@@ -59,7 +59,7 @@ public class Deadlines extends ExecutableTask {
     }
 
     /**
-     * mark deadline as done.
+     * marks deadline as done.
      */
     @Override
     public void markAsDone() {

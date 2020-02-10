@@ -1,6 +1,5 @@
-package duke;
+package duke.main;
 
-import duke.main.Duke;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;

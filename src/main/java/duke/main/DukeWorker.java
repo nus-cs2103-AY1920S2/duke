@@ -46,8 +46,8 @@ public class DukeWorker {
         }
     }
 
-    public void handleRequest(String request, Ui ui) {
+    public void handleRequest(String request, UiHandler uiHandler) {
         Command command = CommandParser.commandParser(request);
-        command.execute(request, ui, storage, taskList);
+        command.execute(request, uiHandler, storage, taskList);
     }
 }

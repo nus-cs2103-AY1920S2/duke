@@ -1,7 +1,6 @@
-package duke;
+package duke.main;
 
-import duke.main.DukeWorker;
-import duke.main.Ui;
+import duke.ui.DialogBox;
 import duke.utils.Constants;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -18,7 +17,7 @@ import javafx.scene.image.ImageView;
 
 public class Duke extends Application {
 
-    private Ui ui;
+    private UiHandler uiHandler;
     private DukeWorker worker;
 
     private ScrollPane scrollPane;
@@ -31,18 +30,18 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/image/duke.png"));
 
     public Duke() {
-        ui = new Ui();
+        uiHandler = new UiHandler();
         worker = new DukeWorker(Constants.DUKE_FILE_PATH);
         worker.initializeWorker();
     }
 
     public void run() {
-        ui.welcomeMessage();
+        uiHandler.welcomeMessage();
         String request = "";
-        while (!ui.isExit()) {
-            request = ui.requestInput().trim().toLowerCase();
-            worker.handleRequest(request, ui);
-            ui.displayResponse();
+        while (!uiHandler.isExit()) {
+            request = uiHandler.requestInput().trim().toLowerCase();
+            worker.handleRequest(request, uiHandler);
+            uiHandler.displayResponse();
         }
     }
 
@@ -138,7 +137,7 @@ public class Duke extends Application {
      */
     public String getResponse(String input) {
         String request = input;
-        worker.handleRequest(request, ui);
-        return ui.getResponse();
+        worker.handleRequest(request.toLowerCase().trim(), uiHandler);
+        return uiHandler.getResponse();
     }
 }

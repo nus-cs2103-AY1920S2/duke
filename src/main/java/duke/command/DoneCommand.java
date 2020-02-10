@@ -1,38 +1,38 @@
 package duke.command;
 
-import duke.main.Ui;
+import duke.main.UiHandler;
 import duke.utils.*;
 
 import java.io.IOException;
 
 /**
- * Done command implementing command interface
+ * Done command implementing command interface.
  */
 public class DoneCommand implements Command {
 
     /**
-     * Attempt to mark specified tasks as done and set ui response to
-     * the appropriate one
-     * @param task
-     * @param ui
-     * @param storage
-     * @param taskList
+     * Attempts to mark specified tasks as done and set ui response to
+     * the appropriate one.
+     * @param task task for this execution
+     * @param uiHandler ui handler to capture response
+     * @param storage storage to be updated
+     * @param taskList list of tasks
      */
     @Override
-    public void execute(String task, Ui ui, Storage storage, TaskList taskList) {
+    public void execute(String task, UiHandler uiHandler, Storage storage, TaskList taskList) {
         String[] token = task.split(" ", 2);
         if (token.length < 2) {
-            ui.setResponse("Please specify which task to mark as done");
+            uiHandler.setResponse("Please specify which task to mark as done");
             return;
         }
         String[] indices = token[1].split(" ");
         if (indices.length < 1 || Utils.isNumeric(indices[0]) != true) {
-            ui.setResponse("Please specify which task to mark as done");
+            uiHandler.setResponse("Please specify which task to mark as done");
             return;
         }
         int taskId = Integer.parseInt(indices[0]) - 1;
         if (taskId >= taskList.size() || taskId < 0) {
-            ui.setResponse("No such task number");
+            uiHandler.setResponse("No such task number");
             return;
         }
         taskList.markTaskAsDone(taskId);
@@ -55,7 +55,7 @@ public class DoneCommand implements Command {
         } catch (IOException e) {
             System.out.println("Error in storing data");
         }
-        ui.setResponse(response);
+        uiHandler.setResponse(response);
         return;
     }
 

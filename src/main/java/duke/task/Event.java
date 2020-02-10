@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Event object extending from ExecutableTask.
  */
-public class Events extends ExecutableTask {
+public class Event extends ExecutableTask {
 
     private boolean done = false;
     private String name;
@@ -18,13 +18,13 @@ public class Events extends ExecutableTask {
      * @param name task name
      * @param time task time
      */
-    public Events(String name, Date time) {
+    public Event(String name, Date time) {
         this.name = name;
         this.time = time;
     }
 
     /**
-     * check if event is done.
+     * checks if event is done.
      * @return done or not
      */
     @Override
@@ -33,7 +33,7 @@ public class Events extends ExecutableTask {
     }
 
     /**
-     * get name of event.
+     * gets name of event.
      * @return task name
      */
     @Override
@@ -42,7 +42,7 @@ public class Events extends ExecutableTask {
     }
 
     /**
-     * get type of task.
+     * gets type of task.
      * @return the string E to represent event
      */
     @Override
@@ -51,7 +51,7 @@ public class Events extends ExecutableTask {
     }
 
     /**
-     * get task time.
+     * gets task time.
      * @return task time
      */
     public Date getTaskTime() {
@@ -59,7 +59,7 @@ public class Events extends ExecutableTask {
     }
 
     /**
-     * mark event as done.
+     * marks event as done.
      */
     @Override
     public void markAsDone() {

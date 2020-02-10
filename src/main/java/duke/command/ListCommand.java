@@ -1,24 +1,24 @@
 package duke.command;
 
-import duke.main.Ui;
+import duke.main.UiHandler;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 
 /**
- * List command implementing command interface
+ * List command implementing command interface.
  */
 public class ListCommand implements Command {
 
     /**
-     * set ui response to list of task to be displayed
-     * @param task
-     * @param ui
-     * @param storage
-     * @param taskList
+     * Sets ui response to list of task to be displayed.
+     * @param task task for this execution
+     * @param uiHandler ui handler to capture response
+     * @param storage storage to be updated
+     * @param taskList list of tasks
      */
     @Override
-    public void execute(String task, Ui ui, Storage storage, TaskList taskList) {
-        ui.setResponse(taskList.toString());
+    public void execute(String task, UiHandler uiHandler, Storage storage, TaskList taskList) {
+        uiHandler.setResponse(taskList.toString());
     }
 
 }

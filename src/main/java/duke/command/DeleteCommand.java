@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.main.Ui;
+import duke.main.UiHandler;
 import duke.utils.*;
 
 import java.io.IOException;
@@ -9,30 +9,30 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Delete command implementing command interface
+ * Delete command implementing command interface.
  */
 public class DeleteCommand implements Command {
 
     /**
-     * attempt to delete task from task list and set ui response to the
-     * appropriate one
-     * @param task
-     * @param ui
-     * @param storage
-     * @param taskList
+     * Attempts to delete task from task list and set ui response to the
+     * appropriate one.
+     * @param task task for this execution
+     * @param uiHandler ui handler to capture response
+     * @param storage storage to be updated
+     * @param taskList list of tasks
      */
     @Override
-    public void execute(String task, Ui ui, Storage storage, TaskList taskList) {
+    public void execute(String task, UiHandler uiHandler, Storage storage, TaskList taskList) {
 
         String[] token = task.split(" ", 2);
         if (token.length < 2) {
-            ui.setResponse("Please specify which task to delete");
+            uiHandler.setResponse("Please specify which task to delete");
             return;
         }
 
         String[] indices = token[1].split(" ");
         if (!Utils.isNumeric(indices[0])) {
-            ui.setResponse("Please specify which task to delete");
+            uiHandler.setResponse("Please specify which task to delete");
             return;
         }
 
@@ -44,17 +44,20 @@ public class DeleteCommand implements Command {
                 toBeDeleted.add(Integer.parseInt(indices[i]) - 1);
             }
         }
+
         Collections.sort(toBeDeleted);
+
         if (toBeDeleted.size() < 1) {
-            ui.setResponse("Please specify which task to delete");
+            uiHandler.setResponse("Please specify which task to delete");
             return;
         }
         if (toBeDeleted.get(0) >= taskList.size() || toBeDeleted.get(toBeDeleted.size() - 1) < 0) {
-            ui.setResponse("No such task number");
+            uiHandler.setResponse("No such task number");
             return;
         }
 
         String response = "";
+
         for (int i = toBeDeleted.size() - 1; toBeDeleted.size() > 0 && i >= 0; i--) {
             int taskId = toBeDeleted.get(i);
             if (taskId >= taskList.size() || taskId < 0) {
@@ -75,7 +78,7 @@ public class DeleteCommand implements Command {
         }
 
         response = "Nice! Deleted tasks(unknown task number ignored):\n " + response;
-        ui.setResponse(response);
+        uiHandler.setResponse(response);
     }
 
 }

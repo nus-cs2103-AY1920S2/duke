@@ -1,9 +1,9 @@
 package duke.utils;
 
-import duke.task.Deadlines;
-import duke.task.Events;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todos;
+import duke.task.Todo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Parser to parse various stuff
+ * Parser to parse various stuff.
  */
 public class Parser {
 
     /**
-     * Parse string into date object
+     * Parse string into date object.
      * @param text
      * @return date object from string
      * @throws ParseException
@@ -30,7 +30,7 @@ public class Parser {
     }
 
     /**
-     * Check date format to see if it is in the form of yyyy-MM-dd
+     * Check date format to see if it is in the form of yyyy-MM-dd.
      * @param text
      * @return boolean
      */
@@ -49,7 +49,7 @@ public class Parser {
     }
 
     /**
-     * Convert date object to string in the format MMM dd yyyy
+     * Convert date object to string in the format MMM dd yyyy.
      * @param date
      * @return string
      */
@@ -60,7 +60,7 @@ public class Parser {
     }
 
     /**
-     * convert list of task to string to be stored
+     * convert list of task to string to be stored.
      * @param tasks
      * @return string to be stored
      */
@@ -82,7 +82,7 @@ public class Parser {
     }
 
     /**
-     * Convert string data loaded to list of tasks
+     * Convert string data loaded to list of tasks.
      * @param data
      * @return list of tasks
      * @throws ParseException
@@ -95,14 +95,14 @@ public class Parser {
             String[] tokens = line.split("&");
             Task task = null;
             if (tokens[0].equals("T")) {
-                task = new Todos(tokens[2]);
+                task = new Todo(tokens[2]);
                 if (tokens[1].equals("1")) {
                     task.markAsDone();
                 }
             } else if (tokens[0].equals("E")) {
-                task = new Events(tokens[2], stringToDate(tokens[3]));
+                task = new Event(tokens[2], stringToDate(tokens[3]));
             } else if (tokens[0].equals("D")) {
-                task = new Deadlines(tokens[2], stringToDate(tokens[3]));
+                task = new Deadline(tokens[2], stringToDate(tokens[3]));
             }
             if (task != null && tokens[1].equals("1")) {
                 task.markAsDone();

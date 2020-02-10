@@ -4,13 +4,13 @@ import duke.utils.Constants;
 
 import java.util.Scanner;
 
-public class Ui {
+public class UiHandler {
 
     private String response;
     private boolean isExit;
     Scanner sc = new Scanner(System.in);
 
-    public Ui() {
+    public UiHandler() {
         isExit = false;
     }
 
