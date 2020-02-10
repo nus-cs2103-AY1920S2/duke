@@ -46,7 +46,7 @@ public class Duke extends Application {
 //        try {
 //            boolean result = file.exists();
 //            if(!result){
-//                boolean ans = file.createNewFile();
+//                boolean isNewFile = file.createNewFile();
 //            } else {
 //                    Scanner newSN = new Scanner(file);
 //                    while(newSN.hasNextLine()){
@@ -124,7 +124,7 @@ public class Duke extends Application {
     }
 
 //    /**
-//     * This is the main method that uses DUke method.
+//     * This is the main method that uses Duke method.
 //     * @param args Unused.
 //     */
 //    public static void main(String[] args) {
@@ -205,7 +205,6 @@ public class Duke extends Application {
         });
 
     }
-
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
