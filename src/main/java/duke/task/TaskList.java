@@ -24,7 +24,7 @@ public class TaskList {
         for (Task task : tasks) {
             taskString += task.toStringTasks();
         }
-        assert taskString != null : "Error saving tasks into Duke.txt";
+        assert taskString != null : "taskString cannot be null.";
         return taskString;
     }
     /**
