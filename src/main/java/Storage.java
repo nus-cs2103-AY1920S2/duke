@@ -18,6 +18,7 @@ public class Storage {
      * @param filePath path to file that stores the task list.
      */
     public Storage(String filePath) {
+        assert (new File(filePath)).exists() : "Storage file does not exist!";
         this.filePath = filePath;
     }
 
