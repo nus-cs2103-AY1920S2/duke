@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
      * @param storage The storage file to be updated.
      * @throws IOException If the storage file is not found.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
         Task task = tasks.getTask(taskNum - 1);
         tasks.delete(taskNum - 1);
         ui.taskDeleted(task, tasks);

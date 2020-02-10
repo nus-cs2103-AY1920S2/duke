@@ -41,6 +41,13 @@ public class TaskList {
         tasks.remove(taskNum);
     }
     /**
+     * Returns the result of whether the task list is empty or not
+     * @return The boolean result.
+     */
+    public boolean isEmpty(){
+        return tasks.isEmpty();
+    }
+    /**
      * Returns the task list that contains the provided keyword.
      * @param keyword The keyword.
      * @return The list of tasks that has the keyword.

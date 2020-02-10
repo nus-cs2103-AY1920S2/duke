@@ -23,7 +23,12 @@ public class FindCommand extends Command{
      * @throws IOException If the storage file is not found.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException{
-        ui.printList(tasks.findTasks(keyword));
+        if(tasks.findTasks(keyword).isEmpty()){
+            System.out.println("Sorry, no such keyword in the task list.");
+        }
+        else {
+            ui.printList(tasks.findTasks(keyword));
+        }
     }
     /**
      * Returns the result of whether this is an exit program command.

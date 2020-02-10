@@ -65,6 +65,8 @@ public class Duke {
             ui.showSavingError();
         } catch (DateTimeException dt){
             System.out.println("      Please enter date in this format: YYYY-MM-DD");
+        } catch (IndexOutOfBoundsException iobe){
+            System.out.println("      Sorry, index is out of bounce.");
         }
         finally {
             return baos.toString();

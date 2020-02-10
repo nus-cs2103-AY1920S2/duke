@@ -1,3 +1,2 @@
-D/1/return book /2020-01-28
-D/0/do homework /2020-12-12
-T/0/stuff 
+T/0/me 
+T/0/him 

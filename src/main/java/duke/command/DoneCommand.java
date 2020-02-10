@@ -23,7 +23,7 @@ public class DoneCommand extends Command{
      * @param storage The storage file to be updated.
      * @throws IOException If the storage file is not found.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
         tasks.getTask(taskNum - 1).markDone();
         ui.taskDone(tasks.getTask(taskNum - 1));
         storage.save(tasks);
