@@ -104,14 +104,14 @@ public class Parser {
             throw new DukeException("    Oh no! An event cannot be empty!");
         }
 
-        String[] arr = fullCommand.split("/at");
+        String[] splitByAt = fullCommand.split("/at");
         // if no "at" is given
-        if (arr.length == 1) {
+        if (splitByAt.length == 1) {
             throw new DukeException("    Oh no! Please include an at!");
         }
-
-        String[] arr2 = arr[0].split("event");
-        String[] dateTime = arr[1].trim().split(" ");
+        
+        String[] splitByEvent = splitByAt[0].split("event");
+        String[] dateTime = splitByAt[1].trim().split(" ");
         if (dateTime.length == 1) {
             throw new DukeException("    Oh no! Please include a time!");
         }
@@ -121,7 +121,7 @@ public class Parser {
 
         try {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
-            Task t = new Event(arr2[1].trim(), time, date, comm[1]);
+            Task t = new Event(splitByEvent[1].trim(), time, date, comm[1]);
             Command c = new AddCommand(t);
             return c;
 
@@ -137,14 +137,14 @@ public class Parser {
             throw new DukeException("    Oh no! A deadline cannot be empty!");
         }
 
-        String[] arr = fullCommand.split("/by");
+        String[] splitByBy = fullCommand.split("/by");
         // if no "by" is given
-        if (arr.length == 1) {
+        if (splitByBy.length == 1) {
             throw new DukeException("    Oh no! You need to include by when!");
         }
 
-        String[] arr2 = arr[0].split("deadline");
-        String[] dateTime = arr[1].trim().split(" ");
+        String[] splitByDeadline = splitByBy[0].split("deadline");
+        String[] dateTime = splitByBy[1].trim().split(" ");
 
         if (dateTime.length == 1) {
             throw new DukeException("    Oh no! Please include a time!");
@@ -156,7 +156,7 @@ public class Parser {
         try {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             // add to list
-            Task t = new Deadline(arr2[1].trim(), time, date, comm[1]);
+            Task t = new Deadline(splitByDeadline[1].trim(), time, date, comm[1]);
             Command c = new AddCommand(t);
             return c;
 
