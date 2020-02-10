@@ -57,10 +57,9 @@ public class Storage {
      *
      * @throws IOException Throws an error if there is some sort of I/O error.
      */
-    public static void writeList() throws IOException {
+    public void writeList(TaskList tasks) throws IOException {
         fw = new FileWriter(file);
-        for (Task t : TaskList.getTaskList()) {
-            //            System.out.println(t);
+        for (Task t : tasks.getTaskList()) {
             fw.write(t.save() + "\n");
         }
         fw.flush();

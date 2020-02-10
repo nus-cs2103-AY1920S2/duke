@@ -1,20 +1,27 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * UI class supports everything that is displayed to the user.
  */
 public class UI {
 
+    Scanner scanner;
     /**
      * Empty constructor.
      */
     public UI() {
+        this.scanner = new Scanner(System.in);
     }
 
     /**
      * String of asterisks for design purposes.
      */
-    static String horizontalLine = "**********************************************";
+    private static String horizontalLine = "**********************************************";
+
+    public String readCommand() {
+        return this.scanner.nextLine();
+    }
 
     /**
      * Prints the introduction logo when program is first started.
@@ -35,17 +42,25 @@ public class UI {
     /**
      * Prints the goodbye message when user inputs "bye".
      */
-    public static void printBye() {
+    public void printBye() {
         System.out.println(horizontalLine);
         System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(horizontalLine);
+    }
+
+
+    public void printAdd(Task task, TaskList tasks) {
+        System.out.println(horizontalLine);
+        System.out.println("I have added " + task);
+        System.out.println("You now have " + tasks.getTaskList().size() + " tasks!");
         System.out.println(horizontalLine);
     }
 
     /**
      * Prints out the tasks in the list.
      */
-    public static void printList() {
-        ArrayList<Task> list = TaskList.getTaskList();
+    public void printList(TaskList tasks) {
+        ArrayList<Task> list = tasks.getTaskList();
         System.out.println(horizontalLine);
         if (list.isEmpty()) {
             System.out.println("You have 0 outstanding tasks!");
@@ -59,21 +74,27 @@ public class UI {
         System.out.println(horizontalLine);
     }
 
-    /**
-     * Prints out the inputted string wrapped within the line of asterisks.
-     *
-     * @param string String to be wrapped within.
-     */
-    public static void wrapper(String string) {
-        String output = horizontalLine + "\n" + string + "\n" + horizontalLine;
-        System.out.println(output);
+    public void printDone(Task task, int taskNumber, TaskList tasks) {
+        System.out.println(horizontalLine);
+        //I have marked 1. <name> as done!
+        System.out.println("I have marked " + taskNumber + ". " + task + " as done!");
+        System.out.println("You now have " + tasks.getTaskList().size() + " tasks left!");
+        System.out.println(horizontalLine);
+    }
+
+    public void printDelete(Task task, int taskNumber, TaskList tasks) {
+        System.out.println(horizontalLine);
+        //I have deleted <task>
+        System.out.println("I have deleted " + taskNumber + ". " + task);
+        System.out.println("You now have " + tasks.getTaskList().size() + " tasks remaining!");
+        System.out.println(horizontalLine);
     }
 
     /**
      * Prints out the tasks found.
      * @param list Takes in a list to print out.
      */
-    public static void printFoundTasks(ArrayList<Task> list) {
+    public void printFoundTasks(ArrayList<Task> list) {
         System.out.println(horizontalLine);
         if (list.isEmpty()) {
             System.out.println("There were no tasks found");

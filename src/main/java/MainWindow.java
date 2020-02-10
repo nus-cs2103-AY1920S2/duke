@@ -6,10 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.concurrent.TimeUnit;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -31,6 +27,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("Hello! I'm Ronaldooooooo. How may I be of service today?", dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -44,13 +43,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        String response = duke.getResponse(input);
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        System.setOut(ps);
-        Parser.scan(input);
-
-        String response = duke.getResponse(baos.toString());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

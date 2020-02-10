@@ -19,174 +19,90 @@ public class Parser {
      * This method reads the input of the users and subsequently does the appropriate actions via the
      * methods in the TaskList class.
      */
-    public void scan() {
-        while (true) {
-            String input = sc.nextLine();
-            ArrayList<Task> list = TaskList.getTaskList();
-            try {
-                if (input.equals("bye")) {
-                    UI.printBye();
-                    break;
-                } else if (input.contains("find")) {
-                    if (input.split(" ").length == 1) {
-                        throw new DukeException("Sorry! Please input a task to find");
-                    } else {
-                        String keyword = input.substring(5);
-                        TaskList.findTasks(keyword);
-                    }
-                } else if (input.equals("list")) {
-                    UI.printList();
-                } else if (input.contains("done")) {
-                    String[] inputArr = input.split(" ");
-                    int num = Integer.parseInt(inputArr[1]);
-                    if (num > list.size()) {
-                        throw new DukeException("Sorry! That is an invalid task number.");
-                    } else {
-                        TaskList.doneAction(num);
-                    }
-                } else if (input.contains("todo")) {
-                    if (input.split(" ").length == 1) {
-                        throw new DukeException("Sorry! Description of todo cannot be empty.");
-                    } else {
-                        String name = input.substring(5);
-                        Task todo = new ToDos(name);
-                        TaskList.addToList(todo);
-                    }
-                } else if (input.contains("deadline")) {
-                    if (input.split(" ").length == 1) {
-                        throw new DukeException("Sorry! Description of deadline cannot be empty.");
-                    } else {
-                        int index = input.indexOf(" ");
-                        String action = input.substring(index + 1);
-                        String[] actionArr = action.split(" /by ");
-                        if (index == -1) {
-                            throw new DukeException("Sorry! Please enter a deadline.");
-                        } else {
-                            String by = actionArr[1];
-                            String name = actionArr[0];
-                            Task deadline = new Deadline(name, by);
-                            TaskList.addToList(deadline);
-                        }
-                    }
-                } else if (input.contains("event")) {
-                    if (input.split(" ").length == 1) {
-                        throw new DukeException("Sorry! Description of event cannot be empty.");
-                    } else {
-                        int index = input.indexOf(" ");
-                        String action = input.substring(index + 1);
-                        String[] actionArr = action.split(" /by ");
-                        if (index == -1) {
-                            throw new DukeException("Sorry! Please enter a date and time.");
-                        } else {
-                            String by = actionArr[1];
-                            String name = actionArr[0];
-                            Task event = new Event(name, by);
-                            TaskList.addToList(event);
-                        }
-                    }
-                } else if (input.contains("delete")) {
-                    if (input.split(" ").length == 1) {
-                        throw new DukeException("Sorry! Please specify a task number.");
-                    } else {
-                        String[] inputArr = input.split(" ");
-                        int num = Integer.parseInt(inputArr[1]);
-                        if (num > list.size()) {
-                            throw new DukeException("Sorry! That is an invalid task number.");
-                        } else {
-                            TaskList.removeAction(num - 1);
-                        }
-                    }
+    public static Command parse(String fullCommand) throws DukeException {
+        Command command = null;
+        String[] commandSplit = fullCommand.split(" ", 2);
+        String rest;
+        String action = commandSplit[0];
+        switch (action.toLowerCase()) {
+            case "bye":
+                command = new ExitCommand();
+                break;
+            case "list":
+                command = new ListCommand();
+                break;
+            case "todo":
+                rest = commandSplit[1];
+                if (rest.isBlank()) {
+                    throw new DukeException("Sorry! Description cannot be empty");
                 } else {
-                    throw new DukeException("Sorry! I dont know what that means.");
+                    command = new AddCommand(new ToDos(rest.trim()));
                 }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+                break;
+            case "event":
+                rest = commandSplit[1];
+                if (rest.isBlank()) {
+                    throw new DukeException("Sorry! Description cannot be empty");
+                } else {
+                    String[] restArr = rest.split("/by");
+                    if (restArr.length == 1) {
+                        throw new DukeException("Sorry! Please enter a date.");
+                    } else {
+                        command = new AddCommand(new Event(restArr[0].trim(), restArr[1].trim()));
+                    }
+                }
+                break;
+            case "deadline":
+                rest = commandSplit[1];
+                if (rest.isBlank()) {
+                    throw new DukeException("Sorry! Description cannot be empty");
+                } else {
+                    String[] restArr = rest.split("/by");
+                    if (restArr.length == 1) {
+                        throw new DukeException("Sorry! Please enter a date.");
+                    } else {
+                        command = new AddCommand(new Deadline(restArr[0].trim(), restArr[1].trim()));
+                    }
+                }
+                break;
+            case "done":
+                if (commandSplit.length < 2) {
+                    throw new DukeException("Sorry! Please enter a task number");
+                }
+                rest = commandSplit[1];
+                if (rest.isBlank()) {
+                    throw new DukeException("Sorry! Please enter a task number");
+                } else {
+                    int taskNum = Integer.parseInt(rest.trim());
+                    command = new DoneCommand(taskNum);
+                }
+                break;
+            case "delete":
+                if (commandSplit.length < 2) {
+                    throw new DukeException("Sorry! Please enter a task number");
+                }
+                rest = commandSplit[1];
+                if (rest.isBlank()) {
+                    throw new DukeException("Sorry! Please enter a task number");
+                } else {
+                    int taskNum = Integer.parseInt(rest.trim());
+                    command = new DeleteCommand(taskNum);
+                }
+                break;
+            case "find":
+                if (commandSplit.length < 2) {
+                    throw new DukeException("Sorry! Please enter a keyword");
+                }
+                rest = commandSplit[1];
+                if (rest.isBlank()) {
+                    throw new DukeException("Sorry! Please enter a keyword");
+                } else {
+                    command = new FindCommand(rest);
+                }
+                break;
+            default:
+                throw new DukeException("Sorry! Please enter a valid command");
         }
-    }
-
-    public static void scan(String input) {
-        ArrayList<Task> list = TaskList.getTaskList();
-        try {
-            if (input.equals("bye")) {
-                UI.printBye();
-                Storage.writeList();
-                TimeUnit.SECONDS.sleep(5);
-                System.exit(0);
-            } else if (input.contains("find")) {
-                if (input.split(" ").length == 1) {
-                    throw new DukeException("Sorry! Please input a task to find");
-                } else {
-                    String keyword = input.substring(5);
-                    TaskList.findTasks(keyword);
-                }
-            } else if (input.equals("list")) {
-                UI.printList();
-            } else if (input.contains("done")) {
-                String[] inputArr = input.split(" ");
-                int num = Integer.parseInt(inputArr[1]);
-                if (num > list.size()) {
-                    throw new DukeException("Sorry! That is an invalid task number.");
-                } else {
-                    TaskList.doneAction(num);
-                }
-            } else if (input.contains("todo")) {
-                if (input.split(" ").length == 1) {
-                    throw new DukeException("Sorry! Description of todo cannot be empty.");
-                } else {
-                    String name = input.substring(5);
-                    Task todo = new ToDos(name);
-                    TaskList.addToList(todo);
-                }
-            } else if (input.contains("deadline")) {
-                if (input.split(" ").length == 1) {
-                    throw new DukeException("Sorry! Description of deadline cannot be empty.");
-                } else {
-                    int index = input.indexOf(" ");
-                    String action = input.substring(index + 1);
-                    String[] actionArr = action.split(" /by ");
-                    if (index == -1) {
-                        throw new DukeException("Sorry! Please enter a deadline.");
-                    } else {
-                        String by = actionArr[1];
-                        String name = actionArr[0];
-                        Task deadline = new Deadline(name, by);
-                        TaskList.addToList(deadline);
-                    }
-                }
-            } else if (input.contains("event")) {
-                if (input.split(" ").length == 1) {
-                    throw new DukeException("Sorry! Description of event cannot be empty.");
-                } else {
-                    int index = input.indexOf(" ");
-                    String action = input.substring(index + 1);
-                    String[] actionArr = action.split(" /by ");
-                    if (index == -1) {
-                        throw new DukeException("Sorry! Please enter a date and time.");
-                    } else {
-                        String by = actionArr[1];
-                        String name = actionArr[0];
-                        Task event = new Event(name, by);
-                        TaskList.addToList(event);
-                    }
-                }
-            } else if (input.contains("delete")) {
-                if (input.split(" ").length == 1) {
-                    throw new DukeException("Sorry! Please specify a task number.");
-                } else {
-                    String[] inputArr = input.split(" ");
-                    int num = Integer.parseInt(inputArr[1]);
-                    if (num > list.size()) {
-                        throw new DukeException("Sorry! That is an invalid task number.");
-                    } else {
-                        TaskList.removeAction(num - 1);
-                    }
-                }
-            } else {
-                throw new DukeException("Sorry! I dont know what that means.");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        return command;
     }
 }

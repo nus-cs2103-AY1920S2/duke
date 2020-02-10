@@ -11,10 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -39,7 +36,7 @@ public class Duke extends Application {
 
     private UI ui;
     private Storage storage;
-    private TaskList taskList;
+    private TaskList tasks;
     private Parser parser = new Parser();
 
     /**
@@ -51,7 +48,7 @@ public class Duke extends Application {
         try {
             ui = new UI();
             storage = new Storage(filePath);
-            taskList = storage.getTaskList();
+            tasks = storage.getTaskList();
         } catch (IOException e) {
             System.err.println(e);
         }
@@ -67,13 +64,17 @@ public class Duke extends Application {
      * output into text file when command "bye" is entered.
      */
     public void run() {
-        UI.printIntro();
-        try {
-            parser.scan();
-            // Write the list into output
-//            storage.writeList();
-        } catch (Exception e) {
-            System.out.println(e);
+        ui.printIntro();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 
@@ -124,7 +125,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
@@ -153,6 +154,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -182,6 +184,27 @@ public class Duke extends Application {
      * Gets the response of Duke.
      */
     public String getResponse(String input) {
-        return input;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+        boolean isExit = false;
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        if (isExit) {
+            ui.printBye();
+            System.exit(0);
+        }
+
+        System.out.flush();
+        System.setOut(old);
+        return baos.toString();
     }
+
 }
