@@ -53,6 +53,8 @@ public class Parser {
                 }
                 break;
             case "done":
+                assert check.length > 1: "Invalid Expression";
+
                 if(check.length == 1) {
                     throw new DukeException("OOPS! The description of a done cannot be empty.");
                 }
@@ -71,6 +73,8 @@ public class Parser {
                 saveTasks(store, filepath);
                 break;
             case "todo":
+                assert check.length > 1: "Invalid Expression";
+
                 if(check.length == 1) {
                     throw new DukeException("OOPS! The description of a todo cannot be empty.");
                 }
@@ -88,6 +92,8 @@ public class Parser {
                 saveTasks(store, filepath);
                 break;
             case "deadline":
+                assert check.length > 1: "Invalid Expression";
+
                 if(check.length == 1) {
                     throw new DukeException("OOPS! The description of a deadline cannot be empty.");
                 }
@@ -122,6 +128,8 @@ public class Parser {
                 saveTasks(store, filepath);
                 break;
             case "event":
+                assert check.length > 1: "Invalid Expression";
+
                 if(check.length == 1) {
                     throw new DukeException("OOPS! The description of an event cannot be empty.");
                 }
@@ -152,6 +160,8 @@ public class Parser {
                 saveTasks(store, filepath);
                 break;
             case "delete":
+                assert check.length > 1: "Invalid Expression";
+
                 if(check.length == 1) {
                     throw new DukeException("OOPS! The description of a delete cannot be empty.");
                 }
