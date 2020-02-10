@@ -101,6 +101,7 @@ public class Storage {
                     break;
 
                 default:
+                    assert false : "Tasks should either be ToDo (T), Deadline (D), or Event (E).";
                     break;
 
                 }
@@ -120,6 +121,7 @@ public class Storage {
     private String getEventCommand(String details) {
         int indexOfAtKeyword = details.indexOf("(at: ");
         String eventCommand = details.substring(0, indexOfAtKeyword - 1);
+        assert (eventCommand != null) : "Event should have a command.";
         return eventCommand;
     }
 
@@ -133,6 +135,7 @@ public class Storage {
         int indexOfByKeyword = details.indexOf("(at: ");
         String eventTime = details.substring(indexOfByKeyword + 5,
                 details.lastIndexOf(")"));
+        assert (eventTime != null) : "Event should have a time.";
         return eventTime;
     }
 
@@ -145,6 +148,7 @@ public class Storage {
     private String getDeadlineCommand(String details) {
         int indexOfAtKeyword = details.indexOf("(by: ");
         String deadlineCommand = details.substring(0, indexOfAtKeyword - 1);
+        assert (deadlineCommand != null) : "Deadline tasks should have a command.";
         return deadlineCommand;
     }
 
@@ -158,6 +162,7 @@ public class Storage {
         int indexOfByKeyword = details.indexOf("(by: ");
         String deadlineLimit = details.substring(indexOfByKeyword + 5,
                 details.lastIndexOf(")"));
+        assert (deadlineLimit != null) : "Deadline tasks should have a date limit.";
         return deadlineLimit;
     }
 

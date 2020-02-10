@@ -16,6 +16,7 @@ public class Parser {
     public String determineTaskDoneStatusFromFileLine(String line) {
         int indexOfFirstSquareBracket = line.indexOf("[");
         String doneStatus = String.valueOf(line.charAt(indexOfFirstSquareBracket + 1));
+        assert (doneStatus.equals("V") || doneStatus.equals("X")) : "Done status can only be X or V";
         return doneStatus;
     }
 

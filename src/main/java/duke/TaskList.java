@@ -49,6 +49,7 @@ public class TaskList {
     public String serveUser(String command) {
 
         String commandType = logic.findKeywordFromString(command);
+        assert (commandType != null) : "Null commandType detected in serveUser in the TaskList class!";
 
         try {
 
@@ -183,6 +184,7 @@ public class TaskList {
      */
     private String obtainTaskFromStoredMessage(int i) {
         String tickOrCross = this.getTask(i).obtainStatusIcon();
+        assert (tickOrCross.equals("X") || tickOrCross.equals("V"));
         return String.valueOf(i + 1) + ". [" + tickOrCross + "] " + this.getTask(i);
     }
 
