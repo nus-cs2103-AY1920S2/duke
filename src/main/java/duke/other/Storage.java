@@ -35,11 +35,13 @@ public class Storage {
      * @return An ArrayList of Tasks
      * @throws FileNotFoundException If the file is not found in the file path
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws IOException {
         Path path = Paths.get(filePath);
         File noteFile = new File(path.toString());
         if (Files.notExists(path)) {
-            noteFile = new File("data/duke.txt");
+            noteFile = new File("data" + File.separator + "duke.txt");
+            noteFile.getParentFile().mkdirs();
+            noteFile.createNewFile();
         }
         return fileToArray(noteFile.toString());
     }
@@ -129,7 +131,9 @@ public class Storage {
      * @throws IOException If the file path is invalid
      */
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+        Path path = Paths.get(filePath);
+        File noteFile = new File(path.toString());
+        FileWriter fw = new FileWriter(noteFile);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(textToAdd);
         bw.close();

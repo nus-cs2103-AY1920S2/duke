@@ -1,8 +1,7 @@
 package duke.command;
 
+import duke.other.DukeException;
 import duke.task.TaskList;
-
-import duke.other.Storage;
 import duke.other.Ui;
 
 
@@ -26,9 +25,8 @@ public class DeleteCommand extends Command {
      *
      * @param taskList Overall TaskList of all the Tasks
      * @param ui       Overall Ui handling the ui of Duke
-     * @param storage  Storage handling the storage of the Tasks in TaskList
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui) {
         return taskList.deleteTask(replyArr);
     }
 }

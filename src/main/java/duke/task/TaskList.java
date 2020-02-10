@@ -62,7 +62,7 @@ public class TaskList {
      * @param replyArr Array of the command + details of the command after splitting it by " "
      * @throws DukeException If the input date is invalid (i.e. incorrect format)
      */
-    public String showTaskOnDate(String[] replyArr) throws DukeException {
+    public String showTaskOnDate(String[] replyArr) {
         if (DATE_VALIDATOR.isValidDate(replyArr[1])) {
             LocalDate date = LocalDate.parse(replyArr[1], DATE_FORMATTER);
             String taskOnDate = "";
@@ -77,7 +77,6 @@ public class TaskList {
             System.out.println(tasksToday);
             return tasksToday;
         } else {
-//            Ui.throwDateInputError();
             return Ui.dateInputError();
         }
     }
@@ -89,10 +88,9 @@ public class TaskList {
      * @throws DukeException If task number specified does not exist in the TaskList (e.g. done 5 when there is only 4
      *                       tasks)
      */
-    public String markTaskAsDone(String[] replyArr) throws DukeException {
+    public String markTaskAsDone(String[] replyArr) {
         int taskNum = Integer.parseInt(replyArr[1]) - 1;
         if (taskNum > taskList.size() - 1) {
-//            Ui.throwDoneInputError();
             return Ui.doneInputError();
         } else {
             Task currTask = taskList.get(taskNum);
@@ -110,7 +108,7 @@ public class TaskList {
      * @throws DukeException If task number specified does not exist in the TaskList (e.g. delete 5 when there is only 4
      *                       tasks)
      */
-    public String deleteTask(String[] replyArr) throws DukeException {
+    public String deleteTask(String[] replyArr) {
         try {
             int taskNum = Integer.parseInt(replyArr[1]) - 1;
             Task currTask = taskList.get(taskNum);
@@ -120,7 +118,6 @@ public class TaskList {
             taskList.remove(taskNum);
             return deleteMsg;
         } catch (IndexOutOfBoundsException ex) {
-//            Ui.throwDeleteInputError();
             return Ui.deleteInputError();
         }
     }
@@ -132,8 +129,8 @@ public class TaskList {
     public String findTaskByKeyword(String[] replyArr) {
         String keyword = replyArr[1];
         String taskWithKeyword = "";
-        for(Task task: taskList) {
-            if(task.getDescription().contains(keyword)) {
+        for (Task task: taskList) {
+            if (task.getDescription().contains(keyword)) {
                 taskWithKeyword += "    " + task.toString() + "\n";
             }
         }

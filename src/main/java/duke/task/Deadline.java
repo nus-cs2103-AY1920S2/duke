@@ -1,8 +1,8 @@
 package duke.task;
 
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Deadline task that extends the TaskDate class. A Deadline object is represented by a String description,

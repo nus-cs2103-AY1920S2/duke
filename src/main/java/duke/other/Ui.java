@@ -1,7 +1,7 @@
 package duke.other;
 
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 
 import java.util.Scanner;
 
@@ -18,7 +18,7 @@ public class Ui {
      * Prints the welcome message when the user runs Duke.
      */
     public void showWelcome() {
-        String greeting = "Hey there! I'm DingDing!\n"
+        String greeting = "    Hey there! I'm DingDing!\n"
                 + "    What's up today? ;D";
         printWithBorder(greeting);
     }
@@ -70,10 +70,7 @@ public class Ui {
      * @throws DukeException If there is an invalid input for the deadline command
      */
     public static void throwDeadlineInputError() throws DukeException {
-        String msg = "    Invalid date and/or time format! \n"
-                + "    Specify deadline with: /at <YYYY/MM/DD> <HH:MM>\n"
-                + "    i.e. deadline Project Meeting /by 2020/01/28 18:00";
-        throw new DukeException(msg);
+        throw new DukeException(deadlineInputError());
     }
 
     /**
@@ -82,10 +79,7 @@ public class Ui {
      * @throws DukeException If there is an invalid input for the event command
      */
     public static void throwEventInputError() throws DukeException {
-        String msg = "    Invalid date and/or time format! \n"
-                + "    Specify event with: /at <YYYY/MM/DD> <HH:MM>\n"
-                + "    i.e. event Project Meeting /at 2020/01/28 18:00";
-        throw new DukeException(msg);
+        throw new DukeException(eventInputError());
     }
 
     /**
@@ -93,8 +87,8 @@ public class Ui {
      *
      * @throws DukeException If there is an invalid input for the todo command
      */
-    public static void throwTodoInputError() {
-        throw new DukeException("    Specify your todo \n" + "    i.e. todo Complete tutorials ");
+    public static void throwTodoInputError() throws DukeException {
+        throw new DukeException(todoInputError());
     }
 
     /**
@@ -103,8 +97,7 @@ public class Ui {
      * @throws DukeException If there is an invalid input for the date command
      */
     public static void throwDateInputError() throws DukeException {
-        throw new DukeException("    Please enter a valid date in <YYYY/M/D> format\n"
-                + "    i.e. 2020/10/28");
+        throw new DukeException(dateInputError());
     }
 
     /**
@@ -113,7 +106,7 @@ public class Ui {
      * @throws DukeException If there is an invalid input for the done command
      */
     public static void throwDoneInputError() throws DukeException {
-        throw new DukeException("    Task doesn't exist!");
+        throw new DukeException(doneInputError());
     }
 
     /**
@@ -122,7 +115,7 @@ public class Ui {
      * @throws DukeException If there is an invalid input for the delete command
      */
     public static void throwDeleteInputError() throws DukeException {
-        throw new DukeException("    Task doesn't exist! Add a new task!");
+        throw new DukeException(deleteInputError());
     }
 
     /**
@@ -143,7 +136,6 @@ public class Ui {
         showLine();
     }
 
-    //For GUI
     /**
      * Returns an error message when there is an invalid input for the deadline command.
      */
@@ -152,11 +144,11 @@ public class Ui {
                 + "    Specify deadline with: /at <YYYY/MM/DD> <HH:MM>\n"
                 + "    i.e. deadline Project Meeting /by 2020/01/28 18:00";
         System.out.println(msg);
-        return(msg);
+        return msg;
     }
 
     /**
-     * Returns an error messagen when there is an invalid input for the event command.
+     * Returns an error message when there is an invalid input for the event command.
      *
      */
     public static String eventInputError() {
@@ -164,7 +156,7 @@ public class Ui {
                 + "    Specify event with: /at <YYYY/MM/DD> <HH:MM>\n"
                 + "    i.e. event Project Meeting /at 2020/01/28 18:00";
         System.out.println(msg);
-        return(msg);
+        return msg;
     }
 
     /**
@@ -182,7 +174,7 @@ public class Ui {
      *
      */
     public static String dateInputError() {
-        String msg ="    Please enter a valid date in <YYYY/M/D> format\n"
+        String msg = "    Please enter a valid date in <YYYY/M/D> format\n"
                 + "    i.e. 2020/10/28";
         System.out.println(msg);
         return msg;
@@ -207,11 +199,5 @@ public class Ui {
         System.out.println(msg);
         return msg;
     }
-
-
-
-
-
-
 }
 
