@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'seedu.duke'
-version '0.1.0'
+version '2.0.0'
 
 repositories {
     mavenCentral()
@@ -19,7 +19,7 @@ dependencies {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke" //seedu.duke.Duke"
+    mainClassName = "Launcher" //seedu.duke.Duke"
 }
 
 run {
@@ -32,7 +32,7 @@ checkstyle {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.1"
+    archiveVersion = "2.0"
     archiveClassifier = null
     archiveAppendix = null
 }

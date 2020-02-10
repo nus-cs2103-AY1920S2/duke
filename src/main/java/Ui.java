@@ -55,7 +55,7 @@ public class Ui {
             case DONE:
                 tasks.markDone(index);
                 output = UiDesign.DONE_TOP_PART.getString()
-                        + "       " + tasks.getTask(index) + "\n"
+                        + tasks.getTask(index) + "\n"
                         + UiDesign.BORDER.getString();
                 break;
 

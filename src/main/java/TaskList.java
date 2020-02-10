@@ -32,6 +32,7 @@ public class TaskList {
     }
 
     public void remTask(int index) {
+        assert index > 0 : "Invalid index is used.";
         tasks.remove(index);
         size--;
     }

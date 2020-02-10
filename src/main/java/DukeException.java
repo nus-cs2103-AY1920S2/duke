@@ -7,6 +7,7 @@ public class DukeException extends IllegalArgumentException {
 
     @Override
     public String toString() {
+        assert !errorMsg.isEmpty() : "Error message should not be empty.";
         String text = "                    -~~o~~-\n"
                 + errorMsg + "\n"
                 + "                    -~~o~~-\n";
