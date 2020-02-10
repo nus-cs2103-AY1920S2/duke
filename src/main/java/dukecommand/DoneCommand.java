@@ -31,6 +31,7 @@ public class DoneCommand extends DukeCommand {
     @Override
     public String execute (DukeList dl, DukeStorage ds, DukeUI dui) throws DukeException {
         Task curr = dl.markTaskAsDone(doneIndex);
+        ds.save(dl);
         dui.holdCurrentMessage("    Nice! I've marked this task as done:");
         dui.holdCurrentMessage("    " + curr);
 

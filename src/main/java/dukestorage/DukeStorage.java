@@ -20,7 +20,8 @@ import java.util.List;
  */
 
 public class DukeStorage {
-    private static final String defaultPath = "data/duke.txt";
+    // try to change to relative path
+    private static final String defaultPath = "C:\\MinGW\\msys\\1.0\\JavaTestFile\\2103Codes\\duke\\src\\main\\java\\data\\duke.txt";
 
     public final Path path;
 
@@ -42,6 +43,7 @@ public class DukeStorage {
         ArrayList<Task> inputDL = dl.getListOfTasks();
         List<String> outputList = saveEncoder(inputDL);
         try {
+            System.out.println("Trying to save");
             Path test = Files.write(path, outputList);
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
@@ -65,8 +67,10 @@ public class DukeStorage {
      */
     public DukeList load() throws IOException {
         if (!Files.exists(path)) {
+            System.out.println("Path is empty!");
             return new DukeList();
         } else {
+            System.out.println("Path is not empty!");
             DukeList output = new DukeList();
             try {
                 List<String> input = Files.readAllLines(path);
