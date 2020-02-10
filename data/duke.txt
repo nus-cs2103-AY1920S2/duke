@@ -6,3 +6,4 @@ E , 1 , ihg closing , 2020-02-10
 E , 0 , testing , 2020-01-01
 D , 0 , testing2 , 2020-01-02
 T , 1 , buy tissue
+T , 0 , hello
