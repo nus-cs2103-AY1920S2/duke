@@ -40,7 +40,7 @@ class Parser {
             case event:
                 return createDeadLineOrEventAddCommand(fullCommand, splitInput, commandString);
             default:
-                return null;
+                assert false : "Class Parser: parse method, reached default case.";
             }
         } catch (IllegalArgumentException e) {
             throw new DukeWrongCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");

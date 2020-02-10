@@ -57,7 +57,7 @@ public class TaskList {
             toReturn = new Event(taskDescription, date);
             break;
         default:
-            System.out.println("Failed to decode. Unknown task type.");
+            assert false : "Failed to decode. Unknown task type.";
             break;
         }
 
