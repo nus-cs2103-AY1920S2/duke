@@ -78,12 +78,18 @@ public class Duke {
         new Duke("data" + System.getProperty("file.separator") + "duke.txt").run();
     }
 
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the response user suppose to see upon keying in any input into the dialog
+     * box. String returned will never be empty.
+     * At this point all 3 objects ui, tasks and storage should not be null.
+     *
+     * @param input User's input into the dialog box
+     * @return String object of the response according to user's input.
      */
     public String getResponse(String input) {
+        assert ui != null;
+        assert tasks != null;
+        assert storage != null;
         String response = "";
         try {
             Command currentCommand = Parser.parse(input);
@@ -96,10 +102,19 @@ public class Duke {
             response = ui.showIndexOutOfBoundException(tasks.getSize());
         }
 
+        assert !response.isEmpty();
         return response;
     }
 
+    /**
+     * Provide a method for other class to obtain Ui object of Duke class.
+     * Ui object should never be null as it handles every display user suppose
+     * to see on their screen.
+     *
+     * @return Ui object as a reference to handle Ui interactions with user.
+     */
     public Ui getUi() {
+        assert ui != null;
         return this.ui;
     }
 }

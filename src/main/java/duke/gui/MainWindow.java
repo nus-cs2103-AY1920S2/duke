@@ -26,7 +26,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private boolean isStartUp = true;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -41,8 +40,15 @@ public class MainWindow extends AnchorPane {
         loadStartUp(d.getUi());
     }
 
+    /**
+     * Displays the start-up message user suppose to see upon starting of
+     * EXE. Welcome message should never be empty.
+     *
+     * @param ui Ui object which handles all message that is to be displayed to user.
+     */
     public void loadStartUp(Ui ui) {
         String welcome = ui.showGuiWelcome();
+        assert !welcome.isEmpty();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcome, dukeImage)
         );
@@ -54,8 +60,12 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        assert duke != null;
+        assert !userImage.isBackgroundLoading();
+        assert !dukeImage.isBackgroundLoading();
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        assert !response.isEmpty();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
