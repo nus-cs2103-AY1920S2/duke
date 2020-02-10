@@ -54,6 +54,10 @@ public class Storage {
     public void save(TaskList taskList) throws CannotSaveFileException {
         try {
             File file = new File(filepath);
+
+            //Assert that the File object has been programmatically initialised
+            assert (file != null);
+
             if (file.exists()) {
                 file.delete();
             }

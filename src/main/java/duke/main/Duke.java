@@ -90,6 +90,9 @@ public class Duke extends Application {
      * getResponse performs the tasks as necessary, and returns response to userInput.
      */
     public String getResponse(String input) {
+        //Assert that the input received is not programmatically empty
+        assert (!input.isEmpty());
+
         String output = Parser.parseCommand(input, taskList);
 
         if (output.equals("BYE")) {
