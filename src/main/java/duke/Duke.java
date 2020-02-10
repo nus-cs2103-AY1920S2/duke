@@ -4,41 +4,31 @@ package duke;
  * Main class for running the Duke program.
  */
 public class Duke {
-    private Ui ui;
     private Parser parser;
-
-    public Duke() {
-        ui = new Ui();
-        Storage storage = new Storage("data/tasks.txt", ui);
-        TaskList tasks = new TaskList(storage.load());
-        parser = new Parser(tasks, storage, ui);
-    }
+    private String welcomeMessage = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n"
+                + "Hello! What can I do for you?";
 
     /**
      * Initializes the Duke program.
      *
-     * @param filePath Location of the output file.
+     * @throws DukeException Any read/write operations errors resulting from storage.load() will be thrown.
      */
-//    public Duke(String filePath) {
-//        ui = new Ui();
-//        Storage storage = new Storage(filePath, ui);
-//        TaskList tasks = new TaskList(storage.load());
-//        parser = new Parser(tasks, storage, ui);
-//    }
+    public Duke() throws DukeException {
+        Storage storage = new Storage("data/tasks.txt");
+        TaskList tasks = new TaskList(storage.load());
+        parser = new Parser(tasks, storage);
+    }
 
     /**
-     * Runs the Duke program and starts to receive inputs from user.
+     * Processes user input and return a response.
+     *
+     * @param input User input.
+     * @return Response to the user.
      */
-//    public void run() {
-//        ui.welcomeMessage();
-//        String input = ui.receiveInput();
-//        while (parser.parse(input)) {
-//            input = ui.receiveInput();
-//        }
-//        ui.fareWellMessage();
-//        ui.close();
-//    }
-
     public String getResponse(String input) {
         String response;
         try {
@@ -50,10 +40,6 @@ public class Duke {
     }
 
     public String getWelcomeMessage() {
-        return ui.welcomeMessage();
+        return welcomeMessage;
     }
-
-//    public static void main(String[] args) {
-//        new Duke("data/tasks.txt").run();
-//    }
 }

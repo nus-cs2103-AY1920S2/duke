@@ -1,5 +1,7 @@
-package duke;
+package duke.ui;
 
+import duke.Duke;
+import duke.DukeException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,15 +29,21 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the main window and displays the welcome message.
+     * If an error occurs while initializing duke, an exception message will be displayed instead.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setDuke(Duke d) {
-        duke = d;
+        try {
+            duke = new Duke();
+        } catch (DukeException e) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(e.getMessage(), dukeImage));
+        }
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(d.getWelcomeMessage(), dukeImage));
+                DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage));
     }
 
     /**

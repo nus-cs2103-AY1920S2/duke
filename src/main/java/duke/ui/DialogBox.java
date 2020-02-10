@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a user dialog box.
+     *
+     * @param text Message to be used with the dialog box.
+     * @param img Image to be used with the dialog box.
+     * @return The dialog box object.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a duke dialog box.
+     *
+     * @param text Message to be used with the dialog box.
+     * @param img Image to be used with the dialog box.
+     * @return The dialog box object.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

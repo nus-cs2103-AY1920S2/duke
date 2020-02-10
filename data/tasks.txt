@@ -1,5 +1,6 @@
 E | 1 | project meeting | Mar 3 2020
 D | 1 | return book | Mar 20 2020
 T | 1 | borrow book
-D | 0 | return book | May 12 2020
-E | 0 | movie | May 2 2020
+T | 0 | buy bread
+D | 0 | read book | Mar 5 2020
+T | 0 | more tasks

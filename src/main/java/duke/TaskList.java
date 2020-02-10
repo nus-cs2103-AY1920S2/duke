@@ -18,17 +18,6 @@ public class TaskList {
     }
 
     /**
-     * List out all the tasks currently in the task list.
-     */
-    public String list() {
-        String msg = "Here are the tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            msg += i + 1 + "." + tasks.get(i) + "\n";
-        }
-        return msg;
-    }
-
-    /**
      * Returns a task specified by the user.
      *
      * @param taskNumber The task number.
@@ -69,22 +58,13 @@ public class TaskList {
      * @param keyword The keyword for the tasks to be matched against.
      * @return Returns the list of tasks with found matches.
      */
-    public String find(String keyword) {
+    public ArrayList<Task> find(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
         for (Task t : tasks) {
             if (t.getDescription().contains(keyword)) {
                 result.add(t);
             }
         }
-        String msg;
-        if (result.size() == 0) {
-            msg = "No match found.";
-        } else {
-            msg = "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < result.size(); i++) {
-                msg += i + 1 + "." + result.get(i) + "\n";
-            }
-        }
-        return msg;
+        return result;
     }
 }
