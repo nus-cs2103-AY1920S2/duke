@@ -43,7 +43,8 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt"); //default filepath
-        tasks = new TaskList(storage);
+        Storage statStorage = new Storage("data/stats.txt"); //default filepath for stats info
+        tasks = new TaskList(storage, statStorage);
         ui.setTaskList(tasks);
     }
 

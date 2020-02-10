@@ -2,11 +2,11 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     TaskList taskList;
-    Command command;
+//    Command command;
 
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;
-        this.command = new Command(taskList);
+//        this.command = new Command(taskList);
     }
 
     /**
@@ -40,28 +40,44 @@ public class Parser {
      * @return Output string by Duke
      */
     String getOutputString(String input) {
-        String in = input.trim();
+        String in = input.trim().toLowerCase();
         String out;
       
         assert this.taskList != null;
         if (in.equals("bye")) {
-            out = this.command.exit();
+//            out = this.command.exit();
+            Command exitCommand = new ExitCommand();
+            out = exitCommand.execute();
         } else if (in.equals("list")) {
-            out = this.command.getListString();
+//            out = this.command.getListString();
+            Command listCommand = new ListCommand(taskList);
+            out = listCommand.execute();
+        } else if (in.equals("statistics") || in.equals("stats")) {
+            Command statsCommand = new StatsCommand(taskList);
+            out = statsCommand.execute();
         } else {
             String taskType = in.split(" ", 2)[0];
             if (taskType.equals("done")) {
-                out = this.command.done(in);
+//                out = this.command.done(in);
+                Command doneCommand = new DoneCommand(taskList, in);
+                out = doneCommand.execute();
             } else if (taskType.equals("delete")) {
-                out = this.command.delete(in);
+//                out = this.command.delete(in);
+                Command deleteCommand = new DeleteCommand(taskList, in);
+                out = deleteCommand.execute();
             } else if (Task.isValidTask(taskType)) {
-                out = this.command.add(in);
+//                out = this.command.add(in);
+                Command addCommand = new AddCommand(taskList, in);
+                out = addCommand.execute();
             } else if (in.isEmpty() || in == null) {
-                out = this.command.emptyInput();
+                Command emptyCommand = new EmptyCommand();
+                out = emptyCommand.execute();
             } else {
-                out = this.command.unknownCommand();
+                Command unknownCommand = new UnknownCommand();
+                out = unknownCommand.execute();
             }
         }
+        assert out != null;
         return out;
     }
 }

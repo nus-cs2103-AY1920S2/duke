@@ -1,4 +1,11 @@
-package PACKAGE_NAME;
+public class EmptyCommand extends Command {
 
-public class EmptyCommand {
+    public EmptyCommand() {
+        super();
+    }
+
+    public String execute() {
+        String out = "☹ OOPS!!! Please type something here.";
+        return out;
+    }
 }
