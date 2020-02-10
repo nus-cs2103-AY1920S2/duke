@@ -14,8 +14,7 @@ import duke.task.Todo;
  */
 public class Parser {
     /**
-     * Returns the command to be executed.
-     * If invalid command entered, a invalid command instruction is returned.
+     * Returns the command to be executed. If invalid command entered, a invalid command instruction is returned.
      * @param fullCommand The command entered by the user.
      * @return The command to be executed.
      * @throws DukeException If the user enters an invalid command.
