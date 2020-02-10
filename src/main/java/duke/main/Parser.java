@@ -7,6 +7,7 @@ import duke.command.DeadlineCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
 import duke.exception.MissingDetailsException;
@@ -70,6 +71,9 @@ public class Parser {
 
             case TODO:
                 return TodoCommand.run(taskList, commandSuffix);
+
+            case SORT:
+                return SortCommand.run(taskList, commandSuffix);
 
             default:
                 return new UnknownCommandException().toString();

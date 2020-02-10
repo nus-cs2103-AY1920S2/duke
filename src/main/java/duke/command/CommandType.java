@@ -9,5 +9,6 @@ public enum CommandType {
     EVENT,
     FIND,
     LIST,
+    SORT,
     TODO
 }
