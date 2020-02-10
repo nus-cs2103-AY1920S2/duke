@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeIoException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -26,7 +27,11 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        storage.writeToFile(taskList.getTasks());
+        try {
+            storage.writeToFile(taskList.getTasks());
+        } catch (DukeIoException e) {
+            // There should not be any I/O exception caught.
+        }
         return "     Bye. Hope to see you again soon!";
     }
 }

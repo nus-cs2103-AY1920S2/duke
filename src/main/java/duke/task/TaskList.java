@@ -82,6 +82,9 @@ public class TaskList {
                 tasks.parallelStream()
                         .filter(task -> task.getDescription().contains(keyword))
                         .collect(Collectors.toList());
+        if (foundTasks.isEmpty()) {
+            return "     There are no tasks with this keyword: " + keyword;
+        }
         String output = "     Here are the matching tasks in your list:";
         output += iterateTasks(foundTasks);
         return output;
@@ -93,6 +96,9 @@ public class TaskList {
      * @return the list of tasks.
      */
     public String listTasks() {
+        if (tasks.isEmpty()) {
+            return "     You have no tasks in your list :)";
+        }
         String output = "     Here are the tasks in your list:";
         output += iterateTasks(tasks);
         return output;

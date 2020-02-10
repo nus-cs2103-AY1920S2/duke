@@ -48,8 +48,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         ui = new Ui();
-        storage = new Storage("data/duke.txt");
         try {
+            storage = new Storage("data/duke.txt");
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             taskList = new TaskList();

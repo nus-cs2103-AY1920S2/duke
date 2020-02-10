@@ -24,8 +24,8 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
         try {
+            storage = new Storage(filePath);
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
@@ -47,7 +47,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showTopLine();
+                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 String acknowledgement = c.execute(taskList, ui, storage);
                 ui.showAcknowledgement(acknowledgement);
@@ -55,7 +55,7 @@ public class Duke {
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
-                ui.showBottomLine();
+                ui.showLine();
             }
         }
     }

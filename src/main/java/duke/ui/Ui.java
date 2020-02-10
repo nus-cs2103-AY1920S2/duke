@@ -17,17 +17,10 @@ public class Ui {
     }
 
     /**
-     * Prints a top horizontal line before every executed command.
+     * Prints a horizontal line before and after every executed command.
      */
-    public void showTopLine() {
-        System.out.println("\n    ________________________________________________________");
-    }
-
-    /**
-     * Prints a bottom horizontal line after every executed command.
-     */
-    public void showBottomLine() {
-        System.out.println("    ________________________________________________________\n");
+    public void showLine() {
+        System.out.println("\n    ________________________________________________________\n");
     }
 
     /**
@@ -40,9 +33,9 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        showTopLine();
+        showLine();
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
-        showBottomLine();
+        showLine();
     }
 
     /**
@@ -88,8 +81,8 @@ public class Ui {
         if (reminder.isBlank()) {
             return;
         }
-        showTopLine();
+        showLine();
         System.out.println(reminder);
-        showBottomLine();
+        showLine();
     }
 }
