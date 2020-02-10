@@ -1,14 +1,19 @@
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     TaskList taskList;
+    Command command;
 
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;
+        this.command = new Command(taskList);
     }
 
     /**
      * Takes in user String input, parses, and executes command accordingly.
      * @param in User string input
      */
+    /*
     public void getInput(String in) {
         if (in.equals("list")) {
             taskList.printList();
@@ -27,26 +32,34 @@ public class Parser {
             }
         }
     }
+    */
 
-    String getOutputString(String in) {
+    /**
+     * Takes in user String input, parses, and executes command accordingly, and returns output string by Duke.
+     * @param input User string input
+     * @return Output string by Duke
+     */
+    String getOutputString(String input) {
+        String in = input.trim();
         String out;
+      
         assert this.taskList != null;
         if (in.equals("bye")) {
-            out = "Bye. Hope to see you again soon!";
+            out = this.command.exit();
         } else if (in.equals("list")) {
-            out = taskList.getListString();
+            out = this.command.getListString();
         } else {
             String taskType = in.split(" ", 2)[0];
             if (taskType.equals("done")) {
-                out = taskList.getDoneString(in);
+                out = this.command.done(in);
             } else if (taskType.equals("delete")) {
-                out = taskList.getDeleteString(in);
+                out = this.command.delete(in);
             } else if (Task.isValidTask(taskType)) {
-                out = taskList.getAddString(in);
+                out = this.command.add(in);
             } else if (in.isEmpty() || in == null) {
-                out = "☹ OOPS!!! Please type something here.";
+                out = this.command.emptyInput();
             } else {
-                out = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+                out = this.command.unknownCommand();
             }
         }
         return out;
