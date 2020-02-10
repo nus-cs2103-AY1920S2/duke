@@ -9,79 +9,53 @@ public class Ui {
     /**
      * Prints a welcome message.
      */
-    public void welcomeMessage() {
+    public String welcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        return "Hello from\n" + logo;
     }
 
     /**
      * Prints a 'delete' message after a task is deleted.
      * @param task The task to be deleted.
      */
-    public void deleteMessage(Task task) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("        Noted. I've removed this task:");
-        System.out.print("        ");
-        task.taskSummary();
-        System.out.println("        Now you have " + (taskList.numOfTasks() - 1) + " "
-                + (taskList.numOfTasks() == 1? "task" : "tasks") + " in the list.");
-        System.out.println("    ____________________________________________________________");
+    public String deleteMessage(Task task) {
+        return "Noted. I've removed this task:\n" + task + "\nNow you have " + (taskList.numOfTasks() - 1) + " "
+                + (taskList.numOfTasks() == 1? "task" : "tasks") + " in the list.";
     }
 
     /**
      * Prints an 'add' message after a new task is added.
      * @param task The new task that is added.
      */
-    public void addMessage(Task task) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("        Got it. I've added this task:");
-        System.out.print("            ");
-        task.taskSummary();
-        System.out.println("        Now you have " + taskList.numOfTasks() + " "
-                + (taskList.numOfTasks() == 1? "task" : "tasks") + " in the list.");
-        System.out.println("    ____________________________________________________________");
-
+    public String addMessage(Task task) {
+        return "Got it. I've added this task:\n" + task + "\nNow you have " + taskList.numOfTasks() + " "
+                + (taskList.numOfTasks() == 1? "task" : "tasks") + " in the list.";
     }
 
     /**
      * Prints a 'done' message when a task is marked done.
      * @param task The task that is done.
      */
-    public void doneMessage(Task task) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("        Nice! I've marked this task as done: ");
-        System.out.print("        ");
-        task.taskSummary();
-        System.out.println("    ____________________________________________________________");
-    }
-
-    /**
-     * Prints a message with nice frames.
-     * @param string The message.
-     */
-    public void reply(String string) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("        " + string);
-        System.out.println("    ____________________________________________________________");
+    public String doneMessage(Task task) {
+        return "Nice! I've marked this task as done: \n" + task;
     }
 
     /**
      * Prints the list of tasks.
      */
-    public void printList() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("        Here are the tasks in your list:");
+    public String printList() {
+        String result;
+        result = "Here are the tasks in your list:\n";
         int count = 1;
         for (int i = 0; i < taskList.numOfTasks(); i++) {
-            System.out.print("        " + count + ".");
-            (taskList.getTask(i)).taskSummary();
+            result = result + count + ". " + taskList.getTask(i) + "\n";
             count++;
         }
-        System.out.println("    ____________________________________________________________");
+        return result;
     }
 
     /**
@@ -92,19 +66,18 @@ public class Ui {
         System.out.println(msg);
     }
 
-    public void printSelected(ArrayList<Integer> arr) {
+    public String printSelected(ArrayList<Integer> arr) {
+        String result;
         if (arr.isEmpty()) {
-            System.out.println("No tasks found");
+            result = "No tasks found";
         } else {
-            System.out.println("    ____________________________________________________________");
-            System.out.println("        Here are the matching tasks in your list:");
+            result = "Here are the matching tasks in your list:\n";
             int count = 1;
             for (int i = 0; i < arr.size(); i++) {
-                System.out.print("        " + count + ".");
-                (taskList.getTask(arr.get(i))).taskSummary();
+                result = result + count + ". " + taskList.getTask(arr.get(i)) + "\n";
                 count++;
             }
-            System.out.println("    ____________________________________________________________");
         }
+        return result;
     }
 }

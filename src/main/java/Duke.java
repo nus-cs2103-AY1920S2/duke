@@ -29,22 +29,33 @@ public class Duke {
 
 
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String command) throws IOException{
+        String response;
+        if (!command.equals("bye")) {
+            try {
+                response = handle2(command);
+            }
+            catch (DukeException ex) {
+                ui.showError(ex.getMessage());
+                response = ex.getMessage();
+            }
+
+        } else {
+            storage.saveData();
+            response = "Bye. Hope to see you again soon!";
+        }
+        return response;
     }
 
     /**
      * The constructor for the Duke class.
      */
-    public Duke() {
+    public Duke() throws IOException, DukeException {
         ui = new Ui();
         tasks = new TaskList();
         storage = new Storage();
         parser = new Parser();
+        storage.loadData();
     }
 
     /**
@@ -65,8 +76,8 @@ public class Duke {
      */
     public void run() throws DukeException, IOException {
         storage.loadData();
-        ui.welcomeMessage();
-        ui.reply("    What can I do for you");
+        System.out.println(ui.welcomeMessage());
+        System.out.println("What can I do for you");
 
         Scanner sc = new Scanner(System.in);
         String command;
@@ -79,9 +90,8 @@ public class Duke {
             }
 
         }
-
         storage.saveData();
-        ui.reply("    Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -91,19 +101,19 @@ public class Duke {
      */
     public void handle(String command) throws DukeException{
         if (command.equals("list")) {
-            ui.printList();
+            System.out.println(ui.printList());
         } else {
             String type = parser.getType(command);
             if (type.equals("done") || type.equals("delete")) {
                 int taskNo = parser.getTaskIndex(command);
                 if (taskNo > tasks.numOfTasks() || taskNo <= 0) {
-                    throw new DukeException("☹ OOPS!! Not a valid number");
+                    throw new DukeException("\u2639 OOPS!! Not a valid number");
                 } else {
                     if (type.equals("done")) {
                         tasks.getTask(taskNo - 1).markAsDone();
-                        ui.doneMessage(tasks.getTask(taskNo - 1));
+                        System.out.println(ui.doneMessage(tasks.getTask(taskNo - 1)));
                     } else {
-                        ui.deleteMessage(tasks.getTask(taskNo - 1));
+                        System.out.println(ui.deleteMessage(tasks.getTask(taskNo - 1)));
                         tasks.removeTask(taskNo - 1);
                         Task.totalTasks--;
                     }
@@ -115,12 +125,47 @@ public class Duke {
                         taskFound.add(i);
                     }
                 }
-                ui.printSelected(taskFound);
+                System.out.println(ui.printSelected(taskFound));
             } else {
-                // create new task -> add to tasks -> reply
                 Task task = tasks.createAndAddTask(type, command);
-                ui.addMessage(task);
+                System.out.println(ui.addMessage(task));
             }
         }
+    }
+
+    public String handle2(String command) throws DukeException{
+        String reply;
+        if (command.equals("list")) {
+            reply = ui.printList();
+        } else {
+            String type = parser.getType(command);
+            if (type.equals("done") || type.equals("delete")) {
+                int taskNo = parser.getTaskIndex(command);
+                if (taskNo > tasks.numOfTasks() || taskNo <= 0) {
+                    throw new DukeException("\u2639 OOPS!! Not a valid number");
+                } else {
+                    if (type.equals("done")) {
+                        tasks.getTask(taskNo - 1).markAsDone();
+                        reply = ui.doneMessage(tasks.getTask(taskNo - 1));
+                    } else {
+                        reply = ui.deleteMessage(tasks.getTask(taskNo - 1));
+                        tasks.removeTask(taskNo - 1);
+                        Task.totalTasks--;
+                    }
+                }
+            } else if (type.equals("find")) {
+                ArrayList<Integer> taskFound = new ArrayList<>();
+                for (int i = 0; i < tasks.numOfTasks(); i++) {
+                    if (tasks.getTask(i).description.contains(command.split(" ")[1])) {
+                        taskFound.add(i);
+                    }
+                }
+                reply = ui.printSelected(taskFound);
+            } else {
+                Task task = tasks.createAndAddTask(type, command);
+                reply = ui.addMessage(task);
+            }
+        }
+        return reply;
     }
 }

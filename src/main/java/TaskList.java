@@ -19,9 +19,9 @@ public class TaskList {
         Task task;
         if (parser.numOfParts(whole) == 1) {
             if (whole.equals("todo") || whole.equals("event") || whole.equals("deadline")) {
-                throw new DukeException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The description of a " + type + " cannot be empty.");
             } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
 

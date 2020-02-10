@@ -11,7 +11,18 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke;
+
+    // EDIT!
+    {
+        try {
+            duke = new Duke();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void start(Stage stage) {

@@ -1,6 +1,4 @@
-T|0|sfsadf
 D|0|fsdfsd|2020-12-12
-T|0|sdfsf
-D|0|asda|2020-12-12
 T|0|read book
-D|0|return book|2030-01-05
+D|1|return book|2030-01-05
+T|0|safdasd

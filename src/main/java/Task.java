@@ -5,6 +5,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        totalTasks++;
     }
 
     public abstract String getType();
@@ -16,6 +17,6 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone? "[✓]" : "[✗]");
+        return (isDone? "[\u2713]" : "[\u2718]");
     }
 }

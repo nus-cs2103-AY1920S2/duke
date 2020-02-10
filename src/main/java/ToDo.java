@@ -9,7 +9,6 @@ public class ToDo extends Task{
      */
     public ToDo(String description) {
         super(description);
-        totalTasks++;
     }
 
     /**
@@ -26,6 +25,10 @@ public class ToDo extends Task{
     @Override
     public void taskSummary() {
         System.out.println(getType() + getStatusIcon() + " " + description);
+    }
+
+    public String toString() {
+        return getType() + getStatusIcon() + " " + description;
     }
 
     /**
