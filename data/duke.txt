@@ -1,2 +1,5 @@
 D/1/return book /2020-01-28
 T/1/me 
+T/0/list 
+T/0/run around the place 
+D/0/do homework /2020-12-12

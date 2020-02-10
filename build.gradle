@@ -53,9 +53,10 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.javaFX.Launcher"
 }
 
 run {
     standardInput = System.in
+    enableAssertions = true
 }

@@ -36,6 +36,7 @@ public class Storage {
         while (s.hasNext()) {
             String nextLine = s.nextLine();
             String[] taskString = nextLine.split("/");
+            assert taskString.length > 1 :"Invalid format of Duke.txt";
             String taskTitle = taskString[0];
             switch (taskTitle){
             case "T":
