@@ -12,20 +12,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private boolean isLoadedFromStorage = false;
-
-    /**
-     * Duke constructor.
-     */
-    public Duke() {
-        ui = new Ui();
-        storage = new Storage("data/duke.txt");
-        try {
-            tasks = new TaskList(storage.load());
-            this.isLoadedFromStorage = true;
-        } catch (DukeException e) {
-            tasks = new TaskList();
-        }
-    }
+    private static final String FILE_PATH = "data/duke.txt";
 
     /**
      * Duke constructor.
@@ -75,7 +62,7 @@ public class Duke {
      * @param args Command-line arguments. Unused.
      */
     public static void main(final String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke(FILE_PATH).run();
     }
 
     /**

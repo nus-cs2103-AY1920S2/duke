@@ -3,10 +3,11 @@ package duke.ui;
 import java.util.Scanner;
 
 public class Ui {
-    private final String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+    private static final String UI_LOGO = " ____        _        \n"
+        + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
         + "| |_| | |_| |   <  __/\n" + "|____/ \\__._|_|\\_\\___|\n";
-    private final String logoDivider = "++++++++++++++++++++++\n";
-    private final Scanner scanner;
+    private static final String UI_DIVIDER = "++++++++++++++++++++++\n";
+    private Scanner scanner;
 
     public Ui() {
         scanner = new Scanner(System.in);
@@ -16,7 +17,7 @@ public class Ui {
      * Print out the welcome message.
      */
     public void showWelcome() {
-        System.out.println(logoDivider + logo + "\n" + logoDivider);
+        System.out.println(UI_DIVIDER + UI_LOGO + "\n" + UI_DIVIDER);
         this.dukePrompt(new String[]{"Hey boss! Duke here, at your service.", "What do you need me to do?"});
         System.out.println();
     }
