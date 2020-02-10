@@ -11,7 +11,7 @@ import java.io.IOException;
  * Represents a DeleteCommand.
  * Used to execute the delete command.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand implements Command {
     private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
             + " (Error when writing to save file).";
 

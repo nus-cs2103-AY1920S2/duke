@@ -10,7 +10,7 @@ import java.io.IOException;
  * Represents a DoneCommand.
  * Used to execute the done command.
  */
-public class DoneCommand extends Command {
+public class DoneCommand implements Command {
     private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
             + " (Error when writing to save file).";
 

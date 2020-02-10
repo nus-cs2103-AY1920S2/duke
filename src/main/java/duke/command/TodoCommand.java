@@ -11,7 +11,7 @@ import java.io.IOException;
  * Represents a EventCommand.
  * Used to execute the event command.
  */
-public class TodoCommand extends Command {
+public class TodoCommand implements Command {
     private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
             + " (Error when writing to save file).";
 

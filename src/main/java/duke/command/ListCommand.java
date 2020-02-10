@@ -7,7 +7,7 @@ import duke.task.TaskList;
  * Represents a ListCommand.
  * Used to execute the list command.
  */
-public class ListCommand extends Command {
+public class ListCommand implements Command {
     private static final String EMPTY_TASK_LIST_MESSAGE = "I may or may not have exploded all your tasks"
             + " in your list as it is empty.";
 

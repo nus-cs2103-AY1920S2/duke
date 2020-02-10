@@ -12,7 +12,7 @@ import java.io.IOException;
  * Represents a DeadlineCommand.
  * Used to execute the deadline command.
  */
-public class DeadlineCommand extends Command {
+public class DeadlineCommand implements Command {
     private static final String NO_DATE_ERROR_MESSAGE = "HEY!!! The date of a deadline cannot be empty.";
     private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
             + " (Error when writing to save file).";

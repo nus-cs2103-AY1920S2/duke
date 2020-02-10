@@ -12,7 +12,7 @@ import java.io.IOException;
  * Represents a EventCommand.
  * Used to execute the event command.
  */
-public class EventCommand extends Command {
+public class EventCommand implements Command {
     private static final String NO_DATE_ERROR_MESSAGE = "HEY!!! The date of an event cannot be empty.";
     private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
             + " (Error when writing to save file).";

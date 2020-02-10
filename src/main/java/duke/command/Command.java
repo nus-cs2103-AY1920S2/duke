@@ -5,16 +5,16 @@ import duke.task.TaskList;
 
 /**
  * Represents a Command.
- * This is an abstract class meant as a template for the commands.
+ * This is an interface meant as a template for the commands.
  */
-public abstract class Command {
+public interface Command {
     /**
-     * Abstract method to execute the command.
-     * Must be overridden.
+     * Method to execute the command.
+     * Must be overridden by implementing classes.
      *
      * @param tasks TaskList object that contains the tasks of the application.
      * @param storage storage object for the retrieval/saving of tasks.
      * @return The program's output.
      */
-    public abstract String execute(TaskList tasks, Storage storage);
+    String execute(TaskList tasks, Storage storage);
 }
