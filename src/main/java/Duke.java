@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-
 import javafx.application.Platform;
 
 public class Duke {
@@ -44,6 +43,7 @@ public class Duke {
         } catch (IOException e) {
             toReturn += "\nAn error occurred while saving, please try again!";
         }
+        assert !(toReturn.equals("")): "Duke's response is empty!";
         return toReturn;
     }
 }
