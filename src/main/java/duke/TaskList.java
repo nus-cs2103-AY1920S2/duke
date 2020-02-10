@@ -19,7 +19,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- * TaskList class which mainly stores all the Tasks in an ArrayList of Tasks and handles related methods.
+ * TaskList class stores and manages Tasks.
+ * TaskList mainly stores all the Tasks in an ArrayList of Tasks.
+ * Methods regarding Task handling are managed by the TaskList.
  */
 public class TaskList {
 
@@ -84,6 +86,7 @@ public class TaskList {
                 return findTask(command);
 
             default:
+                // should not arrive here
                 throw new InputUnclearException("");
 
             }
@@ -103,22 +106,25 @@ public class TaskList {
      * @throws InputUnclearException an Exception given when the input is unfitting.
      */
     private String doneTask(String command) throws DoneException, InputUnclearException {
-        // user inputs will be "done _____"
-        // Take only the very next token which must be an integer
+
         String[] commandWords = command.split("\\s"); // 0: "find", 1: keyword
-        if (logic.satisfiesMinimumDoneCommandLength(commandWords)) {
-            // this is a valid command
-            if (logic.determineIfValidDoneCommand(commandWords, this.sizeOf())) {
-                // this valid command has a valid number, so, mark as done
-                return doTask(Integer.parseInt(commandWords[1]));
-            } else {
-                // invalid input: attempting to do a non-existent task
-                throw new InputUnclearException("");
-            }
-        } else {
-            // invalid input
+
+        // check for input invalidity
+        if (!logic.satisfiesMinimumDoneCommandLength(commandWords)) {
+            // invalid command
             throw new DoneException("");
         }
+        if (!logic.determineIfValidDoneCommand(commandWords, this.sizeOf())) {
+            // invalid input: attempting to do a non-existent task
+            throw new InputUnclearException("");
+        }
+
+        // this is a valid command
+        // user inputs will be "done _____"
+        // Take only the very next token which must be an integer
+        int taskNumber = Integer.parseInt(commandWords[1]);
+        return doTask(taskNumber);
+
     }
 
     /**

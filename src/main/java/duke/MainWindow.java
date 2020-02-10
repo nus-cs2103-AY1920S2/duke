@@ -31,21 +31,22 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Initialises the Main Window for the Application, prompting user to use Duke.
+     * Sets size constraints, then presents visual cues to prompt the user to use the program.
      */
     @FXML
     public void initialize() {
 
-        // set size constraints
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
-        // set visual cues for users to begin using program
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.welcome(), dukeImage)
         );
 
     }
 
-    // We can use this Duke to perform as a chatbot.
+    /**
+     * We can use this Duke to perform as a chatbot.
+     */
     private Duke duke;
 
     /**
@@ -64,17 +65,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
 
-        // User and Duke query and response come as a pair.
+        // User and Duke query and response come as a pair
         String userText = getUserResponse(userInput.getText());
         String dukeText = getDukeResponse(userInput.getText());
 
-        // Adding both into a container (VBox) which presents visually their messages.
+        // Both the user and Duke's messages are required to be put into a container (VBox)
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
                 DialogBox.getDukeDialog(dukeText, dukeImage)
         );
 
-        // Clear the user input.
+        // Clear the user input
         userInput.clear();
     }
 
