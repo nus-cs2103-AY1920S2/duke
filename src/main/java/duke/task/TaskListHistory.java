@@ -1,7 +1,7 @@
 package duke.task;
 
-import duke.DukeException;
 import duke.Storage;
+import duke.exception.DukeException;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -12,13 +12,14 @@ import java.util.Stack;
  */
 public class TaskListHistory {
     private static String saveFile = "duke.txt";
-    private static Storage storage = new Storage(saveFile);
+    private static Storage storage;
     private static TaskList initialTaskList;
     private static Stack<TaskList> stack = new Stack<>();
 
     static {
         // Load task list from save file
         try {
+            storage = new Storage(saveFile);
             initialTaskList = new TaskList(storage.load());
         } catch (DukeException e) {
             // Did not load tasks from save file

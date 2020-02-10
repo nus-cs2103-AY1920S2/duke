@@ -17,8 +17,9 @@ public class EmptyInputCommand extends Command {
 
     /**
      * Displays command not found message to user.
-     *  @param tasks list of tasks
-     * @param ui prints output to user
+     *
+     * @param tasks   list of tasks
+     * @param ui      prints output to user
      * @param storage manages save file
      * @return TaskList required for indicating updating of tasks
      */

@@ -9,6 +9,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.UndoCommand;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -206,7 +207,7 @@ public class Parser {
     }
 
     /**
-     * Throws duke.DukeException if event command has invalid parameters.
+     * Throws duke.exception.DukeException if event command has invalid parameters.
      *
      * @throws DukeException for invalid event command
      */
@@ -231,7 +232,7 @@ public class Parser {
     }
 
     /**
-     * Throws duke.DukeException if deadline command has any invalid parameters.
+     * Throws duke.exception.DukeException if deadline command has any invalid parameters.
      *
      * @throws DukeException for invalid deadline command
      */

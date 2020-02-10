@@ -21,8 +21,8 @@ public class Deadline implements Task {
      * Returns a new Deadline instance.
      *
      * @param description details about Deadline
-     * @param deadline due date of Deadline
-     * @param isDone completion status of Deadline
+     * @param deadline    due date of Deadline
+     * @param isDone      completion status of Deadline
      * @throws DateTimeException given deadline is not in a valid date format
      */
     public Deadline(String description, String deadline, boolean isDone) throws DateTimeException {

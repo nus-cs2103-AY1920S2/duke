@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.command.UndoCommand;
+import duke.exception.DukeException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

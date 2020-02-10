@@ -1,6 +1,9 @@
 package duke;
 
 
+import duke.exception.DukeStorageDirectoryException;
+import duke.exception.DukeStorageFileException;
+import duke.exception.DukeStorageLoadException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -35,7 +38,7 @@ public class Storage {
      *
      * @param fileName file used to save user data
      */
-    public Storage(String fileName) {
+    public Storage(String fileName) throws DukeStorageDirectoryException, DukeStorageFileException {
         saveFilePath = dataDirectoryPath + fileSeparator + fileName;
         // Setup data directory
         setupDataDirectory();
@@ -45,26 +48,26 @@ public class Storage {
     /**
      * Creates the required directories for saving user data.
      */
-    protected void setupDataDirectory() {
+    protected void setupDataDirectory() throws DukeStorageDirectoryException {
         try {
             // Create directories along path if they don't exist
             Files.createDirectories(Paths.get(dataDirectoryPath));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeStorageDirectoryException();
         }
     }
 
     /**
      * Creates a new save file in the path created and stored by the Storage constructor.
      */
-    protected void createSaveFile() {
+    protected void createSaveFile() throws DukeStorageFileException {
         try {
             // Create a new file, exception will be thrown if file already exists
             Files.createFile(Paths.get(saveFilePath));
         } catch (FileAlreadyExistsException e) {
             // File exists
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeStorageFileException();
         }
     }
 
@@ -119,7 +122,7 @@ public class Storage {
      *
      * @param tasks list of Tasks to be saved
      */
-    public void updateSaveFile(TaskList tasks) {
+    public void updateSaveFile(TaskList tasks) throws DukeStorageFileException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(saveFilePath))) {
             // Write all tasks to file
             for (Task task : tasks) {
@@ -127,7 +130,7 @@ public class Storage {
                 writer.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeStorageFileException();
         }
     }
 }

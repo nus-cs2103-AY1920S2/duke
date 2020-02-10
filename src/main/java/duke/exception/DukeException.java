@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 public class DukeException extends Exception {
     public static String exceptionIcon = "\u2639"; // Sad face symbol

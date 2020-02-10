@@ -2,6 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeStorageDirectoryException;
+import duke.exception.DukeStorageFileException;
 import duke.task.EventStub;
 import duke.task.TaskList;
 import org.junit.jupiter.api.AfterEach;
@@ -53,7 +55,11 @@ class DeleteCommandTest {
     void setUp() {
         tasks = new TaskList();
         ui = new Ui();
-        storage = new Storage(saveFile);
+        try {
+            storage = new Storage(saveFile);
+        } catch (DukeStorageFileException | DukeStorageDirectoryException e) {
+            e.printStackTrace();
+        }
         // Redirect stdout to own PrintStream
         output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));

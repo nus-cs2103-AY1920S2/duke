@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.task.TaskListHistory;
 import org.junit.jupiter.api.AfterEach;

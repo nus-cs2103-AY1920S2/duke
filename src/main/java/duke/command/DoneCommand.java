@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskListHistory;
@@ -22,8 +22,9 @@ public class DoneCommand extends Command {
 
     /**
      * Marks a given task number in task list as done, prints out task summary.
-     *  @param tasks list of tasks
-     * @param ui used to display information to user
+     *
+     * @param tasks   list of tasks
+     * @param ui      used to display information to user
      * @param storage used to update save file
      * @return TaskList required for indicating updating of tasks
      */
@@ -33,7 +34,7 @@ public class DoneCommand extends Command {
             Task task = tasks.get(taskNumber - 1);
             ui.markTaskAsDone(task);
             TaskListHistory.update(tasks.copy());
-            storage.updateSaveFile(tasks);
+            updateSaveFile(storage, ui, tasks);
         } catch (IndexOutOfBoundsException e) {
             ui.showExceptionMessage(new DukeException("Invalid Task Number given!"));
         }

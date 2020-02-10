@@ -2,6 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeStorageDirectoryException;
+import duke.exception.DukeStorageFileException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -55,7 +57,11 @@ class AddTaskCommandTest {
     void setUp() {
         ui = new Ui();
         output = new ByteArrayOutputStream();
-        storage = new Storage(saveFile);
+        try {
+            storage = new Storage(saveFile);
+        } catch (DukeStorageFileException | DukeStorageDirectoryException e) {
+            e.printStackTrace();
+        }
         System.setOut(new PrintStream(output));
     }
 

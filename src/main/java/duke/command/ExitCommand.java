@@ -16,16 +16,16 @@ public class ExitCommand extends Command {
 
     /**
      * Updates task list in save file.
-     *  @param tasks list of tasks
-     * @param ui prints information to user
+     *
+     * @param tasks   list of tasks
+     * @param ui      prints information to user
      * @param storage manages user save file
      * @return TaskList required for indicating updating of tasks
      */
     @Override
     public Optional<TaskList> execute(TaskList tasks, Ui ui, Storage storage) {
-        // User request for exit
         ui.goodbye();
-        storage.updateSaveFile(tasks);
+        updateSaveFile(storage, ui, tasks);
         return Optional.empty();
     }
 }

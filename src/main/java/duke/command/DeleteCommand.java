@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskListHistory;
@@ -23,8 +23,9 @@ public class DeleteCommand extends Command {
     /**
      * Removes task from task list based on given task number, prints out deleted task information and
      * updates save file.
-     *  @param tasks list of tasks
-     * @param ui used to display information to user
+     *
+     * @param tasks   list of tasks
+     * @param ui      used to display information to user
      * @param storage used to access save file
      * @return TaskList required for indicating updating of tasks
      */
@@ -35,9 +36,8 @@ public class DeleteCommand extends Command {
             TaskListHistory.update(tasks.copy());
             Task removedTask = tasks.remove(taskNumber - 1);
             ui.printTaskDeletion(removedTask, tasks.size());
-            storage.updateSaveFile(tasks);
+            updateSaveFile(storage, ui, tasks);
         } catch (IndexOutOfBoundsException e) {
-            // Invalid task number given
             ui.showExceptionMessage(new DukeException("Invalid task number given for deletion..."));
         }
         return Optional.of(tasks);

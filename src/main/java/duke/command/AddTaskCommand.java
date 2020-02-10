@@ -21,8 +21,9 @@ public class AddTaskCommand extends Command {
 
     /**
      * Adds task given to list, print task information and update save file.
-     *  @param tasks list of tasks
-     * @param ui used to display information to user
+     *
+     * @param tasks   list of tasks
+     * @param ui      used to display information to user
      * @param storage to update save file when the task list is changed
      * @return TaskList required for indicating updating of tasks
      */
@@ -31,7 +32,7 @@ public class AddTaskCommand extends Command {
         tasks.addTask(task);
         TaskListHistory.update(tasks.copy());
         ui.printTaskAddition(task, tasks.size());
-        storage.updateSaveFile(tasks);
+        updateSaveFile(storage, ui, tasks);
         return Optional.of(tasks);
     }
 }

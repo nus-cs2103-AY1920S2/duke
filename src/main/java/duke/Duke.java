@@ -5,6 +5,10 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.UndoCommand;
+import duke.exception.DukeException;
+import duke.exception.DukeStorageDirectoryException;
+import duke.exception.DukeStorageFileException;
+import duke.exception.DukeStorageLoadException;
 import duke.task.TaskList;
 
 import java.io.BufferedReader;
@@ -45,11 +49,10 @@ public class Duke {
     }
 
     private void loadTasksFromSaveFile(String saveFile) {
-        storage = new Storage(saveFile);
         try {
+            storage = new Storage(saveFile);
             tasks = new TaskList(storage.load());
-        } catch (DukeStorageLoadException e) {
-            // Did not load tasks from save file
+        } catch (DukeStorageLoadException | DukeStorageDirectoryException | DukeStorageFileException e) {
             ui.showExceptionMessage(e);
             tasks = new TaskList();
         }
@@ -65,7 +68,6 @@ public class Duke {
         ui.greet();
         boolean requestExit = false;
         while (!requestExit) {
-            // Run process command, check if user has terminated program
             try {
                 Optional<Command> c = parseAndExecuteCommand(ui.readCommand(reader));
                 if (c.isPresent()) {
@@ -74,7 +76,6 @@ public class Duke {
             } catch (IOException ioException) {
                 ui.unableToReadUserInput();
             } catch (DukeException dukeException) {
-                // Print error message
                 ui.showExceptionMessage(dukeException);
             }
         }

@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.task.TaskListHistory;
 
@@ -16,6 +16,14 @@ public class UndoCommand extends Command {
         super(false);
     }
 
+    /**
+     * Reverts task list to previous state.
+     *
+     * @param tasks   list of tasks
+     * @param ui      handles user interface
+     * @param storage manages save file
+     * @return TaskList required for indicating updating of tasks
+     */
     @Override
     public Optional<TaskList> execute(TaskList tasks, Ui ui, Storage storage) {
         if (TaskListHistory.getStack().size() == 1) {
@@ -23,11 +31,10 @@ public class UndoCommand extends Command {
             ui.showExceptionMessage(new DukeException("Nothing to undo..."));
             return Optional.empty();
         }
-        // Get previous state
         Optional<TaskList> previousTaskList = TaskListHistory.getPreviousState();
         if (previousTaskList.isPresent()) {
             tasks.setTasks(previousTaskList.get().getTasks());
-            storage.updateSaveFile(tasks);
+            updateSaveFile(storage, ui, tasks);
             ui.printMessage("Undo Success!");
         }
         return Optional.of(tasks);
