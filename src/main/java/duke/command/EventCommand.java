@@ -58,7 +58,7 @@ public class EventCommand extends Command {
         tasks.add(event);
         assert (size + 1) == tasks.size() : "Event command error";
         storage.writeToFile("E | 0 | " + description + " | "
-                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n");
+                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n", true);
         return "Got it. I've added this task:\n    "
                 + event + "\nNow you have " + tasks.size() + " tasks in the list.";
     }

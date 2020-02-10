@@ -58,7 +58,7 @@ public class DeadlineCommand extends Command {
         tasks.add(deadline);
         assert (size + 1) == tasks.size() : "Deadline command error";
         storage.writeToFile("D | 0 | " + description + " | "
-                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n");
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n", true);
         return "Got it. I've added this task:\n    "
                 + deadline + "\nNow you have " + tasks.size() + " tasks in the list.";
     }

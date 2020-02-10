@@ -20,6 +20,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public LocalDate getDate() {
+        return by;
+    }
+
     /**
      * Overwritten toString to fit format requirements.
      *

@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Manages the tasks of the user.
@@ -66,5 +67,15 @@ public class TaskList {
             }
         }
         return result;
+    }
+
+    /**
+     * Sorts the task list in alphabetically order.
+     *
+     * @return Sorted task list.
+     */
+    public ArrayList<Task> sort() {
+        Collections.sort(tasks);
+        return tasks;
     }
 }
