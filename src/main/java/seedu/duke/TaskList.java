@@ -33,7 +33,10 @@ public class TaskList {
      * @param lines List of strings read from text file.
      */
     public TaskList(List<String> lines) {
-        tasks = lines.stream().map(TaskList::decode).collect(Collectors.toList());
+        tasks = lines
+                .stream()
+                .map(str -> TaskList.decode(str))
+                .collect(Collectors.toList());
     }
 
     private static Task decode(String str) {
