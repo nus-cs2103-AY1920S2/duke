@@ -60,7 +60,7 @@ public class TaskList {
             int taskIdx = 1;
             for (Task t : taskList) {
                 output.append(taskIdx + ". ");
-                output.append(t.toString());
+                output.append(t.toString() + "\n");
                 taskIdx++;
             }
         }

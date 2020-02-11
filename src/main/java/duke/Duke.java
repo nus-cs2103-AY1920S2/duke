@@ -117,10 +117,9 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        // more code to be added here later
     }
 
+    /*
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -138,19 +137,7 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
      */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
 
     /**
      * Iteration 2:
@@ -174,18 +161,15 @@ public class Duke extends Application {
     public String getResponse(String input) {
         boolean isExit = false;
         String output = "";
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = Parser.parse(fullCommand);
-                output = command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+
+        Command command = Parser.parse(input);
+        try {
+            output = command.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            e.printStackTrace();
+            System.out.println("execute failed");
         }
-        return "Duke heard: " + output;
+
+        return "Duke reply: " + output;
     }
 }

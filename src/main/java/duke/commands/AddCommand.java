@@ -44,7 +44,7 @@ public class AddCommand extends Command {
             StringBuilder output = new StringBuilder();
             output.append("This task has been added successfully:\n"
                     + t.toString() + "\n"
-                    + "Now you have " + tasks.size() + "tasks in the list");
+                    + "Now you have " + tasks.size() + " tasks in the list\n");
             /*
             ui.showLine();
             ui.print("This task has been added successfully:");

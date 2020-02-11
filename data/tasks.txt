@@ -1,1 +1,2 @@
-T | 0 | borrow book
+T | 1 | borrow book
+D | 0 | return book | Jun 6 2020
