@@ -5,12 +5,18 @@ import duke.other.Ui;
 import duke.task.TaskList;
 import duke.task.Todo;
 
+import java.time.LocalDate;
+
 public class TodoCommand extends Command {
     private String instruction;
     private String details;
+    private java.time.LocalDate date;
 
-    public TodoCommand(String instruction, String details) {
-        this.instruction = instruction;
+    /**
+     * Creates a TodoCommand.
+     * @param details details oft eh instruction
+     */
+    public TodoCommand(String details) {
         this.details = details;
     }
 
@@ -23,11 +29,11 @@ public class TodoCommand extends Command {
     public String execute(TaskList taskList, Ui ui) {
         String[] replyArr = details.split(" ");
         String replyWoSpace = "";
-        for (int i = 1; i < replyArr.length; i++) {
+        for (int i = 0; i < replyArr.length; i++) {
             replyWoSpace += replyArr[i] + " ";
         }
         if (!replyWoSpace.equals("")) {
-            Todo toDo = new Todo(replyWoSpace, false);
+            Todo toDo = new Todo(replyWoSpace, false, LocalDate.MAX);
             taskList.addTask(toDo);
             return Ui.showTaskAdded(toDo, taskList);
         } else {

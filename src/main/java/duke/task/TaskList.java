@@ -7,6 +7,7 @@ import duke.other.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represented a TaskList of all the Tasks. A TaskList object corresponds with a list of all the tasks loaded from the
@@ -33,6 +34,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         taskList.add(task);
+        sort();
     }
 
     /**
@@ -44,6 +46,10 @@ public class TaskList {
         return taskList.size();
     }
 
+    public void sort() {
+        Collections.sort(taskList);
+    }
+
     /**
      * Prints out all the Tasks in the current TaskList.
      * @return String of all the tasks
@@ -51,7 +57,7 @@ public class TaskList {
     public String listTasks() {
         String completeList = "    Task(s) in your list:";
         for (Task task : taskList) {
-            completeList += "\n    " + ((taskList.indexOf(task) + 1) + "." + task.toString());
+            completeList += "\n    " + ((taskList.indexOf(task) + 1)) + "." + task.toString();
         }
         System.out.println(completeList);
         return completeList;
@@ -133,14 +139,17 @@ public class TaskList {
      * @return String of all tasks with keyword(s)
      */
     public String findTaskByKeyword(String[] replyArr) {
-        String keyword = replyArr[1];
         String taskWithKeyword = "";
-        for (Task task: taskList) {
-            if (task.getDescription().contains(keyword)) {
-                taskWithKeyword += "    " + task.toString() + "\n";
+        String keywords = "";
+        for (int i = 1; i < replyArr.length; i++) {
+            keywords += replyArr[i] + " ";
+            for (Task task: taskList) {
+                if (task.getDescription().contains(replyArr[i])) {
+                    taskWithKeyword += "    " + task.toString() + "\n";
+                }
             }
         }
-        String msg = "    Task(s) with keyword " + replyArr[1] + ":\n" + taskWithKeyword;
+        String msg = "    Task(s) with keyword " + keywords + ":\n" + taskWithKeyword;
         System.out.println(msg);
         return msg;
     }

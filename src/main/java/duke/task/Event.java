@@ -11,8 +11,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends TaskDate {
 
-    protected LocalDate date;
-    protected LocalTime time;
     public boolean isTime;
 
     /**
@@ -23,7 +21,7 @@ public class Event extends TaskDate {
      * @param isDone      boolean of whether this event task is done
      */
     public Event(String description, LocalDate date, boolean isDone) {
-        super(description, isDone);
+        super(description, isDone, date);
         this.date = date;
         isTime = false;
     }
@@ -37,7 +35,7 @@ public class Event extends TaskDate {
      * @param isDone      boolean of whether this event task is done
      */
     public Event(String description, LocalDate date, LocalTime time, boolean isDone) {
-        super(description, isDone);
+        super(description, isDone, date, time);
         this.date = date;
         this.time = time;
         isTime = true;

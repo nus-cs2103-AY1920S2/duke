@@ -5,23 +5,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="584.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0">
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="42.0" prefWidth="582.0" AnchorPane.bottomAnchor="1.0">
          <font>
             <Font name="Segoe UI" size="12.0" />
          </font></TextField>
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="582.0" vvalue="1.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="542.0" prefWidth="582.0" />
+            </content>
+        </ScrollPane>
+        <Button fx:id="sendButton" layoutX="499.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="42.0" prefWidth="84.0" text="Send">
          <font>
             <Font name="Segoe UI" size="12.0" />
          </font>
          <opaqueInsets>
             <Insets />
-         </opaqueInsets></Button>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
-            <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="400.0" />
-            </content>
-        </ScrollPane>
+         </opaqueInsets>
+      </Button>
     </children>
 </AnchorPane>

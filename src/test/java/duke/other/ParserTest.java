@@ -8,8 +8,8 @@ class ParserTest {
 
 
     @Test
-    void stringifyDetailsTest() {
+    void stringifyArrayTest() {
         String[] replyArr = {"event", "CNY event /at 2020/1/30"};
-        assertEquals(" CNY event /at 2020/1/30", Parser.stringifyArray(replyArr));
+        assertEquals("CNY event /at 2020/1/30 ", Parser.stringifyArray(replyArr));
     }
 }

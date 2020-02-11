@@ -141,7 +141,7 @@ public class Ui {
      */
     public static String deadlineInputError() {
         String msg = "    Invalid date and/or time format! \n"
-                + "    Specify deadline with: /at <YYYY/MM/DD> <HH:MM>\n"
+                + "    Specify deadline with: /by <YYYY/MM/DD> <HH:MM>\n"
                 + "    i.e. deadline Project Meeting /by 2020/01/28 18:00";
         System.out.println(msg);
         return msg;

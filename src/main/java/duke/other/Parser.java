@@ -8,6 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.command.UnknownCommand;
@@ -36,6 +37,7 @@ public class Parser {
             ByeCommand c = new ByeCommand();
             return c;
         case "date":
+
             return new DateCommand(instruction, replyArr);
         case "deadline":
             return new DeadlineCommand(instruction, stringifyArray(replyArr));
@@ -47,10 +49,12 @@ public class Parser {
             return new EventCommand(instruction, stringifyArray(replyArr));
         case "find":
             return new FindCommand(instruction, replyArr);
+        case "help":
+            return new HelpCommand();
         case "list":
             return new ListCommand(instruction, replyArr);
         case "todo":
-            return new TodoCommand(instruction, stringifyArray(replyArr));
+            return new TodoCommand(stringifyArray(replyArr));
         default:
             return new UnknownCommand(instruction);
         }
@@ -65,7 +69,7 @@ public class Parser {
     public static String stringifyArray(String[] replyArr) {
         String details = "";
         for (int i = 1; i < replyArr.length; i++) {
-            details += " " + replyArr[i];
+            details += replyArr[i] + " ";
         }
         return details;
     }

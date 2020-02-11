@@ -22,7 +22,7 @@ public class Deadline extends TaskDate {
      * @param isDone      boolean of whether this deadline task is done
      */
     public Deadline(String description, LocalDate date, boolean isDone) {
-        super(description, isDone);
+        super(description, isDone, date);
         this.date = date;
         isTime = false;
     }
@@ -36,7 +36,7 @@ public class Deadline extends TaskDate {
      * @param isDone      boolean of whether this deadline task is done
      */
     public Deadline(String description, LocalDate date, LocalTime time, boolean isDone) {
-        super(description, isDone);
+        super(description, isDone, date, time);
         this.date = date;
         this.time = time;
         isTime = true;
@@ -63,7 +63,7 @@ public class Deadline extends TaskDate {
 
     @Override
     public String toString() {
-        String formattedDate = (this.date).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        String formattedDate = getDate().format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         if (isTime) {
             String formattedTime = (this.time).format(DateTimeFormatter.ofPattern("h:mma"));
             return "[D]" + super.toString() + " (by:" + formattedDate + " " + formattedTime + ")";

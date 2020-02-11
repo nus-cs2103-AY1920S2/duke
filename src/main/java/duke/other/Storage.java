@@ -66,7 +66,7 @@ public class Storage {
             String taskDesc = noteArr[2];
 
             if (noteType.equals("T")) {
-                taskList.add(new Todo(taskDesc, taskIsDone));
+                taskList.add(new Todo(taskDesc, taskIsDone, LocalDate.MAX));
             } else if (noteType.equals("E")) {
                 if (noteArr.length == 5) {
                     taskList.add(new Event(taskDesc, LocalDate.parse(noteArr[3]), LocalTime.parse(noteArr[4]),
@@ -75,6 +75,7 @@ public class Storage {
                     taskList.add(new Event(taskDesc, LocalDate.parse(noteArr[3]), taskIsDone));
                 }
             } else {
+                assert noteType.equals("D") : noteType;
                 if (noteArr.length == 5) {
                     taskList.add(new Deadline(taskDesc, LocalDate.parse(noteArr[3]), LocalTime.parse(noteArr[4]),
                             taskIsDone));
