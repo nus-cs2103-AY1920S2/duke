@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Event task takes in at at time clause
+ * Event task takes in at at time clause.
  */
 public class EventTask extends Task {
 

@@ -1,7 +1,7 @@
 package jiachen.duke;
 
 /**
- * General Duke exception for more specific exceptions to implement
+ * General Duke exception for more specific exceptions to implement.
  */
 public abstract class DukeException extends Exception {
     /**
