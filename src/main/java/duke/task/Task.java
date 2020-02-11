@@ -1,5 +1,9 @@
 package duke.task;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * This is a simulation of tasks.
  */
@@ -8,15 +12,22 @@ public abstract class Task {
     protected String description;
     /** Status of this task, whether it has been marked as done. */
     protected boolean isDone;
+    protected List<String> tags;
 
     /**
      * Class constructor with status to be false by default.
      *
      * @param description Description of the task.
+     * @param tags Existing tags of the task.
      */
-    public Task(String description) {
+    public Task(String description, String... tags) {
         this.description = description;
         this.isDone = false;
+        this.tags = new ArrayList<>();
+        if (tags.length != 0) {
+            String[] currTags = tags[0].split(",");
+            this.tags.addAll(Arrays.asList(currTags));
+        }
     }
 
     /**
@@ -29,13 +40,48 @@ public abstract class Task {
     }
 
     /**
+     * Returns if current task has tags.
+     *
+     * @return true if current task has tags. Otherwise return false.
+     */
+    public boolean hasTags() {
+        return this.tags.size() > 0;
+    }
+
+    /**
+     * Add tag to current task.
+     *
+     * @param tag New tag.
+     */
+    public void addTags(String tag) {
+        this.tags.add(tag);
+    }
+
+    /**
+     * Returns tags of the task.
+     *
+     * @return number of tags, separated by |.
+     */
+    private String getTagsIcon() {
+        String str = "";
+        if (hasTags()) {
+            for (int i = 0; i < this.tags.size(); i++) {
+                str = str.concat(this.tags.get(i)
+                        + (i == (this.tags.size() - 1) ? "" : ","));
+            }
+        }
+        return str;
+    }
+
+    /**
      * Overrides String representation of tasks.
      *
      * @return  String representation of status and description.
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription();
+        return "[" + getStatusIcon() + "] " + getDescription()
+                + " #<" + getTagsIcon() + ">";
     }
 
     /**
@@ -60,6 +106,7 @@ public abstract class Task {
      * @return String representation of the task data
      */
     public String getData() {
-        return "|" + (this.isDone ? 1 : 0) + "|" + this.description;
+        return "|" + (this.isDone ? 1 : 0) + "|" + this.description
+                + "|" + getTagsIcon();
     }
 }
