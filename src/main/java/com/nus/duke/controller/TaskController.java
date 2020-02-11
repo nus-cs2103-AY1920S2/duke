@@ -85,6 +85,7 @@ public class TaskController {
     }
 
     public boolean removeTask(String name) {
-        return false;
+        Tasks t = this.getTask(name);
+        return this.dataObj.delete(t);
     }
 }
