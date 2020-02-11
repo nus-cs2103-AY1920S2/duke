@@ -35,13 +35,18 @@ public class Storage {
             if (type.equals("T")) {
                 task = new Todo(isDone, description);
             } else {
+                // Deadline/Event has tokens = {type, isDone, description, time}
+                assert tokens.length == 4 : "missing arguments";
                 String time = tokens[3];
                 if (type.equals("D")) {
                     task = new Deadline(isDone, description, time);
                 } else {
+                    // type Event
+                    assert type.equals("E");
                     task = new Event(isDone, description, time);
                 }
             }
+            assert task != null : "null task";
             taskList.add(task);
             line = reader.readLine();
         }

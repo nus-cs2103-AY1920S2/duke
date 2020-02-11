@@ -59,7 +59,10 @@ public class TaskList {
                 descriptions = commands[1].split(" /by ");
                 task = new Deadline(false, descriptions[0], descriptions[1]);
                 break;
+            default:
+                assert 1 == 0 : "default reached";
         }
+        assert task != null : "null task";
         this.taskList.add(task);
         return task;
     }
@@ -74,13 +77,18 @@ public class TaskList {
     }
 
     public String findTask(Ui ui, String keyword) {
+        boolean isFound = false;
         String output = ui.printFoundTaskMessage();
         for (int i = 1; i <= this.taskList.size(); i++) {
             Task task = this.taskList.get(i - 1);
             if (task.getDescription().contains(keyword)) {
+                isFound = true;
                 output += "\n";
                 output += ui.printTask(i, task);
             }
+        }
+        if (!isFound) {
+            output = ui.printNotFoundTaskMessage();
         }
         return output;
     }

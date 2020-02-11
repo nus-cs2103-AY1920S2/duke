@@ -62,6 +62,10 @@ public class Ui {
         return "Okay dude here are what I found:";
     }
 
+    public String printNotFoundTaskMessage() {
+        return "Sorry dude but I can't find anything :(";
+    }
+
     public String printTask(int i, Task task) {
         return i + ". " + task;
     }
