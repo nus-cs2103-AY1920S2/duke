@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    public ArrayList<Task> tasks = new ArrayList<Task>();
+    public ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList.
      *
      * @param tasks ArrayList for TaskList.
      */
-    public TaskList(ArrayList tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -55,8 +55,9 @@ public class TaskList {
      *
      * @param description Task description to find task in TaskList.
      */
-    public void findTask(String description) {
-        ArrayList<Task> foundTasks = new ArrayList<Task>();
+    public String findTask(String description) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         for (Task task : tasks) {
             if (task.description.contains(description)) {
                 foundTasks.add(task);
@@ -67,12 +68,15 @@ public class TaskList {
             System.out.println("Found your matching tasks in your list:");
             for (int i = 0; i < foundTasks.size(); i++) {
                 System.out.println(i + 1 + ". " + foundTasks.get(i).toString());
+                sb.append(i + 1 + ". " + foundTasks.get(i).toString() + "\n");
             }
             Ui.showLine();
+            return (sb.toString().strip());
         } else {
             Ui.showLine();
             System.out.println("There are no matching tasks in your list");
             Ui.showLine();
+            return ("There are no matching tasks in your list");
         }
 
     }

@@ -82,16 +82,7 @@ public class Ui {
         String taskToBeDeleted = taskList.getTask(taskNumber).toString();
         taskList.deleteTask(taskNumber);
         String tasksInList = taskInList(taskList.getTaskListSize());
-        return ("Consider it deleted. \n" + taskToBeDeleted + "\n"+ tasksInList);
-    }
-
-    /**
-     * Message when task number is not specified.
-     *
-     * @return Message of missing task number.
-     */
-    public static String missingTaskNumber() {
-        return "Missing task number.";
+        return ("Consider it deleted. \n" + taskToBeDeleted + "\n" + tasksInList);
     }
 
     /**
@@ -101,8 +92,13 @@ public class Ui {
      * @return Message of incomplete command.
      */
     public static String incompleteCommand(String str) {
-        return str + "not complete";
+        if (str.isEmpty()) {
+            return "Missing task number.";
+        } else {
+            return str + "not complete";
+        }
     }
+
 
     /**
      * Message when command is invalid.
@@ -130,7 +126,7 @@ public class Ui {
     public static String taskInList(int listSize) {
         System.out.println("You have " + listSize + " task(s) in your list.");
         showLine();
-        return "You have "  + listSize + " task(s) in your list.";
+        return "You have " + listSize + " task(s) in your list.";
     }
 
     /**
@@ -143,13 +139,11 @@ public class Ui {
         StringBuilder botReplySb = new StringBuilder();
         showLine();
         for (int i = 0; i < taskList.getTaskListSize(); i++) {
-            botReplySb.append(i + 1 + ". " + taskList.getTask(i).toString()+"\n");
+            botReplySb.append(i + 1 + ". " + taskList.getTask(i).toString() + "\n");
             System.out.println(i + 1 + ". " + taskList.getTask(i).toString());
             sb.append(taskList.getTask(i).saveToList() + "\n");
         }
         showLine();
         return botReplySb.toString().strip();
     }
-
-
 }

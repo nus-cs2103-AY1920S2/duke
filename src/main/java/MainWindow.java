@@ -45,12 +45,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
 
+        String errMsg = "";
         String input = userInput.getText();
         String[] arrString = input.split(" ", 2);
         try {
             if (arrString[0].equalsIgnoreCase("bye")) {
                 StringBuilder sb = new StringBuilder();
-                Ui.listCommand(tasks,sb);
+                Ui.listCommand(tasks, sb);
                 SaveToFile.usingFileWriter(sb.toString());
                 handleExit();
             } else if (arrString[0].equalsIgnoreCase("list")) {
@@ -63,74 +64,46 @@ public class MainWindow extends AnchorPane {
                     SaveToFile.usingFileWriter(sb.toString());
                 }
             } else if (arrString[0].equalsIgnoreCase("done")) {
-                try {
-                    int taskNumber = Integer.parseInt(arrString[1].strip()) - 1;
-                    if (taskNumber >= 0 && taskNumber < tasks.getTaskListSize()) {
-                        handleDialogOutput(input, Ui.doneTask(tasks, taskNumber));
-                    } else {
-                        handleDialogOutput(input, Ui.invalidTask());
-                    }
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, Ui.missingTaskNumber());
-                    throw new DukeException(Ui.missingTaskNumber());
+                int taskNumber = Integer.parseInt(arrString[1].strip()) - 1;
+                if (taskNumber >= 0 && taskNumber < tasks.getTaskListSize()) {
+                    handleDialogOutput(input, Ui.doneTask(tasks, taskNumber));
+                } else {
+                    handleDialogOutput(input, Ui.invalidTask());
                 }
-
             } else if (arrString[0].equalsIgnoreCase("delete")) {
-                try {
-                    int taskNumber = Integer.parseInt(arrString[1].strip()) - 1;
-                    if (taskNumber >= 0 && taskNumber < tasks.getTaskListSize()) {
-                        handleDialogOutput(input, Ui.deletedTask(tasks, taskNumber));
-                    } else {
-                        handleDialogOutput(input, Ui.invalidTask());
-                    }
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, Ui.missingTaskNumber());
-                    throw new DukeException(Ui.missingTaskNumber());
+                int taskNumber = Integer.parseInt(arrString[1].strip()) - 1;
+                if (taskNumber >= 0 && taskNumber < tasks.getTaskListSize()) {
+                    handleDialogOutput(input, Ui.deletedTask(tasks, taskNumber));
+                } else {
+                    handleDialogOutput(input, Ui.invalidTask());
                 }
-
             } else if (arrString[0].equalsIgnoreCase("todo")) {
-                try {
-                    Todo todo = new Todo(arrString[1]);
-                    tasks.addTask(todo);
-                    handleDialogOutput(input, Ui.addedCommand(tasks.getTaskListSize()));
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, Ui.incompleteCommand("Todo"));
-                    throw new DukeException(Ui.incompleteCommand("Todo"));
-                }
+                errMsg = "todo";
+                Todo todo = new Todo(arrString[1]);
+                tasks.addTask(todo);
+                handleDialogOutput(input, Ui.addedCommand(tasks.getTaskListSize()));
             } else if (arrString[0].equalsIgnoreCase("event")) {
-                try {
-                    String[] eventString = arrString[1].split("/");
-                    Event event = new Event(eventString[0].strip(), eventString[1].substring(2).strip());
-                    tasks.addTask(event);
-                    handleDialogOutput(input, Ui.addedCommand(tasks.getTaskListSize()));
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, Ui.incompleteCommand("Event"));
-                    throw new DukeException(Ui.incompleteCommand("Event"));
-                }
+                errMsg = "event";
+                String[] eventString = arrString[1].split("/");
+                Event event = new Event(eventString[0].strip(), eventString[1].substring(2).strip());
+                tasks.addTask(event);
+                handleDialogOutput(input, Ui.addedCommand(tasks.getTaskListSize()));
             } else if (arrString[0].equalsIgnoreCase("deadline")) {
-                try {
-                    String[] deadlineString = arrString[1].split("/");
-                    Deadline deadline = new Deadline(deadlineString[0].strip(),
-                            deadlineString[1].substring(2).strip());
-                    tasks.addTask(deadline);
-                    handleDialogOutput(input, Ui.addedCommand(tasks.getTaskListSize()));
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, Ui.incompleteCommand("Deadline"));
-                    throw new DukeException(Ui.incompleteCommand("Deadline"));
-                }
-            } else if (arrString[0].equalsIgnoreCase("Find")) {
-                try {
-                    tasks.findTask(arrString[1]);
-                } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, Ui.incompleteCommand("Find"));
-                    throw new DukeException(Ui.incompleteCommand("Find"));
-                }
+                errMsg = "deadline";
+                String[] deadlineString = arrString[1].split("/");
+                Deadline deadline = new Deadline(deadlineString[0].strip(),
+                        deadlineString[1].substring(2).strip());
+                tasks.addTask(deadline);
+                handleDialogOutput(input, Ui.addedCommand(tasks.getTaskListSize()));
+            } else if (arrString[0].equalsIgnoreCase("find")) {
+                errMsg = "find";
+                handleDialogOutput(input, tasks.findTask(arrString[1]));
             } else {
                 handleDialogOutput(input, Ui.invalidCommand());
                 throw new DukeException(Ui.invalidCommand());
             }
-
-
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            handleDialogOutput(input, Ui.incompleteCommand(errMsg));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

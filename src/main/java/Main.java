@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * A GUI for Duke using FXML.
@@ -22,6 +23,16 @@ public class Main extends Application {
             stage.setScene(scene); 
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            
+            stage.setOnCloseRequest((WindowEvent event1) -> {
+                StringBuilder sb = new StringBuilder();
+                Ui.listCommand(duke.tasks, sb);
+                try {
+                    SaveToFile.usingFileWriter(sb.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
