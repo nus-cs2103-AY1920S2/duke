@@ -2,10 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.command.Parser;
+import duke.command.ReminderCommand;
 import duke.exception.InvalidCommandException;
 import duke.task.Storage;
 import duke.task.TaskList;
-import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -59,5 +59,16 @@ public class Duke {
      */
     public String getWelcomeMessage() {
         return WELCOME_MESSAGE;
+    }
+
+    /**
+     * Gets the reminder for task expiring in the next 7 days.
+     *
+     * @return reminder containing tasks expiring in the next 7 days.
+     */
+    public String getReminder() {
+        //use the reminder command execution to reuse code
+        ReminderCommand reminderCommand = new ReminderCommand("all");
+        return reminderCommand.execute(tasks, storage);
     }
 }
