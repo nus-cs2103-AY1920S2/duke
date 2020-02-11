@@ -18,13 +18,16 @@ public class Parser {
                 Ui.printList(taskList);
             } else if (input.contains("done")) {
                 String[] inputArr = input.split(" ", 2);
+                assert(inputArr.length == 2);
                 int taskNum = Integer.parseInt(inputArr[1]);
                 taskList.taskDone(taskNum);
                 storage.updateFile(taskList);
             } else if (input.contains("find")) {
                 String[] inputArr = input.split(" ", 2);
+                assert(inputArr.length == 2);
                 taskList.findTasks(inputArr[1]);
             } else if (input.contains("todo")) {
+                assert(input.substring(5).length() > 0);
                 if (input.split(" ").length == 1) {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 } else {

@@ -18,6 +18,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    private static final String WELCOME_MESSAGE = "    ____________________________________________________________\n"
+            + "      ____        _        \n"
+            + "     |  _ \\ _   _| | _____ \n"
+            + "     | | | | | | | |/ / _ \\\n"
+            + "     | |_| | |_| |   <  __/\n"
+            + "     |____/ \\__,_|_|\\_\\___|\n"
+            + "     Hello! I'm Duke\n"
+            + "     What can I do for you?\n"
+            + "    ____________________________________________________________";
+
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -26,7 +36,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        Ui.printHello();
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage)
+//        );
     }
 
     public void setDuke(Duke d) {

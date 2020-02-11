@@ -35,6 +35,7 @@ public class Storage {
      * @param taskList TaskList to add the Task to
      */
     public void parseLine(String taskString, TaskList taskList) {
+        assert(taskString.length() > 0);
         String[] taskDetails = taskString.split(",");
         for (int i = 0; i < taskDetails.length; i++) {
             taskDetails[i] = taskDetails[i].trim();

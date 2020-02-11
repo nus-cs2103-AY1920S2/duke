@@ -29,9 +29,9 @@ public class Ui {
      * Print goodbye message.
      */
     public static void printBye() {
-        String byeText = "    ____________________________________________________________\n"
-                + "     Bye. Hope to see you again soon!\n"
-                + "    ____________________________________________________________";
+        String byeText = "____________________________________________________________\n"
+                + "Bye. Hope to see you again soon!\n"
+                + "____________________________________________________________";
         System.out.println(byeText);
     }
 
@@ -40,12 +40,12 @@ public class Ui {
      * @param taskList TaskList to print tasks from
      */
     public static void printList(TaskList taskList) {
-        System.out.println("    ____________________________________________________________\n"
-                + "     Here are the tasks in your list:");
+        System.out.println("____________________________________________________________\n"
+                + "Here are the tasks in your list:");
         for (Task s : taskList.arrList) {
-            System.out.println("     " + (taskList.arrList.indexOf(s) + 1) + ". " + s);
+            System.out.println((taskList.arrList.indexOf(s) + 1) + ". " + s);
         }
-        System.out.println("    ____________________________________________________________");
+        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -53,12 +53,12 @@ public class Ui {
      * @param filteredList ArrayList to print tasks from
      */
     public static void printFilteredList(ArrayList<Task> filteredList) {
-        System.out.println("    ____________________________________________________________\n"
-                + "     Here are the matching tasks in your list:");
+        System.out.println("____________________________________________________________\n"
+                + "Here are the matching tasks in your list:");
         for (Task s : filteredList) {
-            System.out.println("     " + (filteredList.indexOf(s) + 1) + ". " + s);
+            System.out.println((filteredList.indexOf(s) + 1) + ". " + s);
         }
-        System.out.println("    ____________________________________________________________");
+        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -75,10 +75,10 @@ public class Ui {
      * @param arrList ArrayList from which Task is deleted from
      */
     public static void printDelete(Task task, ArrayList<Task> arrList) {
-        System.out.println("   ____________________________________________________________\n"
-                + "     Noted. I've removed this task: \n"
-                + "       " + task + "\n"
-                + "     Now you have " + arrList.size() + " tasks in the list.");
+        System.out.println("____________________________________________________________\n"
+                + "Noted. I've removed this task: \n"
+                + task + "\n"
+                + "Now you have " + arrList.size() + " tasks in the list.");
     }
 
     /**
@@ -87,10 +87,10 @@ public class Ui {
      * @param arrList ArrayList from which Task is marked
      */
     public static void printDone(Task task, ArrayList<Task> arrList) {
-        System.out.println("    ____________________________________________________________\n"
-                + "     Nice! I've marked this task as done: \n"
-                + "       " + task + "\n"
-                + "    ____________________________________________________________");
+        System.out.println("____________________________________________________________\n"
+                + "Nice! I've marked this task as done: \n"
+                + task + "\n"
+                + "____________________________________________________________");
     }
 
     /**
@@ -99,10 +99,10 @@ public class Ui {
      * @param arrList ArrayList to which task is added
      */
     public static void printAdd(Task task, ArrayList<Task> arrList) {
-        System.out.println("    ____________________________________________________________\n"
-                + "     Got it. I've added this task: \n"
-                + "       " + task + "\n"
-                + "     Now you have " + arrList.size() + " tasks in the list.");
+        System.out.println("____________________________________________________________\n"
+                + "Got it. I've added this task: \n"
+                + task + "\n"
+                + "Now you have " + arrList.size() + " tasks in the list.");
     }
 
 }
