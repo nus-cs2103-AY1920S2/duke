@@ -1,3 +1,4 @@
+package duke;
 /**
  * Represents a Task to be managed/stored by the command line application Duke
  */

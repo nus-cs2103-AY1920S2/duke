@@ -1,3 +1,4 @@
+package duke;
 import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,6 +7,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.File;
+
 
 public class Duke {
 

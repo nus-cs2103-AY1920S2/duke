@@ -1,3 +1,4 @@
+package duke;
 /**
  * Represents a To-do which inherits from Task and is stored/managed by Duke
  */

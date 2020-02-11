@@ -1,3 +1,4 @@
+package duke;
 /*
 Represents a Parser object that parses user info for Duke
  */
