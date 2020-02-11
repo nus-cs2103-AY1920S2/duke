@@ -2,6 +2,7 @@ package parser;
 
 import command.AddCommand;
 import command.Command;
+import command.DeleteAllCommand;
 import command.DeleteCommand;
 import command.DoneCommand;
 import command.ExitCommand;
@@ -18,6 +19,23 @@ import task.Todo;
  * Represents a Parser class which parses the command and makes sense of the input string into commands.
  */
 public class Parser {
+
+    /**
+     * Method to return if the string is actually an integer
+     * @param string input string
+     * @return boolean to determine if string is numeric
+     */
+    public static boolean isNumeric(String string) {
+        if (string == null) {
+            return false;
+        }
+        try {
+            int value = Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
     public static Command parseCommand(String userInput) throws DukeException {
         String[] split = userInput.split(" ", 2);
         String first = split[0];
@@ -30,8 +48,12 @@ public class Parser {
             return new DoneCommand(doneId);
 
         case "delete":
-            int deleteId = Integer.parseInt(split[1]);
-            return new DeleteCommand(deleteId);
+            if (isNumeric(split[1])) {
+                int deleteId = Integer.parseInt(split[1]);
+                return new DeleteCommand(deleteId);
+            } else if (split[1].equals("all")) {
+                return new DeleteAllCommand();
+            }
 
         case "list":
             return new ListCommand();

@@ -29,6 +29,10 @@ public class TaskList {
         tasks.remove(id);
     }
 
+    public void deleteAll() {
+        tasks.clear();
+    }
+
     public TaskList find(String keyword) {
         ArrayList<Task> newList = new ArrayList<>();
         for (Task t : tasks) {
