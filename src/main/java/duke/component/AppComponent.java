@@ -1,4 +1,4 @@
-package duke.ui.component;
+package duke.component;
 
 import java.io.IOException;
 import duke.DukeException;
@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 /**
  * Duke's root application component.
  */
-public class App extends VBox {
+public class AppComponent extends VBox {
     @FXML
     private ScrollPane messageListContainer;
 
@@ -30,10 +30,10 @@ public class App extends VBox {
     /**
      * Create Duke's root application component.
      */
-    public App(TaskModel taskModel) {
+    public AppComponent(TaskModel taskModel) {
         this.taskModel = taskModel;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/App.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/AppComponent.fxml"));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
         try {
@@ -51,18 +51,18 @@ public class App extends VBox {
         messageInput.clear();
 
         // Display user query in messageList
-        messageList.getChildren().add(new UserMessage(query));
+        messageList.getChildren().add(new UserMessageComponent(query));
 
         // Process input and display result in messageList
         try {
             Command command = Parser.parse(query);
             Command.ExecuteResult result = command.execute(taskModel.getTasks());
-            messageList.getChildren().add(new DukeMessage(result.getMessage()));
+            messageList.getChildren().add(new DukeMessageComponent(result.getMessage()));
             taskModel.updateTasks(result.getTasks());
         } catch (DukeException exception) {
-            messageList.getChildren().add(new DukeMessage(exception.getMessage() + "!"));
+            messageList.getChildren().add(new DukeMessageComponent(exception.getMessage() + "!"));
         } catch (IOException exception) {
-            messageList.getChildren().add(new DukeMessage("Failed to persist data!"));
+            messageList.getChildren().add(new DukeMessageComponent("Failed to persist data!"));
         }
     }
 
@@ -72,6 +72,8 @@ public class App extends VBox {
         messageListContainer.vvalueProperty().bind(messageList.heightProperty());
 
         // Display startup message
-        messageList.getChildren().add(new DukeMessage("Hello, I'm Duke. What can I help you with?"));
+        messageList.getChildren().add(
+                new DukeMessageComponent("Hello, I'm Duke. What can I help you with?")
+        );
     }
 }

@@ -1,4 +1,4 @@
-package duke.ui.component;
+package duke.component;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -13,7 +13,7 @@ import javafx.scene.shape.Circle;
 /**
  * Represents a message component.
  */
-public class Message extends HBox {
+public class MessageComponent extends HBox {
     public static enum Alignment {
         LEFT, RIGHT
     }
@@ -35,12 +35,12 @@ public class Message extends HBox {
      * @param profilePhotoUrl URL to the profile photo of the user who sent the message
      * @param alignment Message alignment
      */
-    public Message(String messageString, String profilePhotoUrl, Alignment alignment) {
+    public MessageComponent(String messageString, String profilePhotoUrl, Alignment alignment) {
         this.messageString = messageString;
         this.profilePhotoUrl = profilePhotoUrl;
         this.alignment = alignment;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Message.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MessageComponent.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {

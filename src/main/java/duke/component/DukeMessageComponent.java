@@ -1,15 +1,15 @@
-package duke.ui.component;
+package duke.component;
 
 /**
  * Represents a message sent by Duke.
  */
-public class DukeMessage extends Message {
+public class DukeMessageComponent extends MessageComponent {
     /**
      * Constructs a message sent by Duke.
      * 
      * @param messageString Message string
      */
-    public DukeMessage(String messageString) {
+    public DukeMessageComponent(String messageString) {
         super(messageString, "/image/DaDuke.png", Alignment.LEFT);
     }
 }
