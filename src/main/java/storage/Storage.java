@@ -1,6 +1,11 @@
 package storage;
 
-import task.*;
+import task.Deadline;
+import task.Event;
+import task.TaskList;
+import task.Todo;
+import task.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,38 +31,38 @@ public class Storage {
             String[] split = nextLine.split("/");
             String indicator = split[0];
             switch (indicator) {
-                case "D":
-                    Deadline deadline = new Deadline(split[2], split[3]);
-                    if (split[1].equals("Y")) {
-                        deadline.setCheck();
-                    }
-                    tasks.add(deadline);
-                    break;
+            case "D":
+                Deadline deadline = new Deadline(split[2], split[3]);
+                if (split[1].equals("Y")) {
+                    deadline.setCheck();
+                }
+                tasks.add(deadline);
+                break;
 
-                case "E":
-                    Event event = new Event(split[2], split[3]);
-                    if (split[1].equals("Y")) {
-                        event.setCheck();
-                    }
-                    tasks.add(event);
-                    break;
+            case "E":
+                Event event = new Event(split[2], split[3]);
+                if (split[1].equals("Y")) {
+                    event.setCheck();
+                }
+                tasks.add(event);
+                break;
 
-                case "T":
-                    Todo todo = new Todo(split[2]);
-                    if (split[1].equals("Y")) {
-                        todo.setCheck();
-                    }
-                    tasks.add(todo);
-                    break;
+            case "T":
+                Todo todo = new Todo(split[2]);
+                if (split[1].equals("Y")) {
+                    todo.setCheck();
+                }
+                tasks.add(todo);
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
         return tasks;
     }
 
-    public void save(TaskList taskList) throws IOException{
+    public void save(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task t : taskList.tasks) {
             fw.write(t.toStringTxt() + System.lineSeparator());

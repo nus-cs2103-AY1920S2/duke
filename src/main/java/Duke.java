@@ -1,10 +1,10 @@
-import command.*;
-import dukeexception.*;
-import javafx.application.Platform;
-import parser.*;
-import storage.*;
-import task.*;
-import ui.*;
+import command.Command;
+
+import dukeexception.DukeException;
+import parser.Parser;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

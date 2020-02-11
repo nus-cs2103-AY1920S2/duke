@@ -1,14 +1,17 @@
 package ui;
 
-import task.*;
+import task.TaskList;
+import task.Task;
 import java.util.Scanner;
 
 public class Ui {
 
-    public Ui(){};
+    public Ui() {
 
-    public void showLine(){
-        System.out.println("______________________________________________________________" );
+    }
+
+    public void showLine() {
+        System.out.println("______________________________________________________________");
     }
 
     public String displayIntro() {
@@ -40,13 +43,15 @@ public class Ui {
     public void displayAddedTask(Task task, TaskList taskList) {
         int size = taskList.getSize();
         assert size > 0 : "Size cannot be less than 0!";
-        System.out.println("Got it. I've added this task:\n" + task.toString() + "\n" + "Now you have " + size + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list.");
     }
 
     public void displayDeletedTask(Task task, TaskList taskList) {
         int size = taskList.getSize();
         assert size > 0 : "Size cannot be less than 0!";
-        System.out.println("Noted. I've removed this task:\n" + task.toString() + "\n" + "Now you have " + size + " tasks in the list.");
+        System.out.println("Noted. I've removed this task:\n" + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list.");
     }
 
     public void displayTasks(TaskList taskList) {
