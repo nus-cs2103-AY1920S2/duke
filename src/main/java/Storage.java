@@ -3,6 +3,7 @@ import task.Deadline;
 import task.Event;
 import task.Todo;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,6 +23,7 @@ public class Storage {
      * @param filePath a String indicates where the tasks are going to be saved.
      */
     public Storage(String filePath) {
+        assert (new File(filePath)).exists() : "Given file path cannot be found";
         this.filePath = filePath;
     }
 
@@ -53,9 +55,9 @@ public class Storage {
     private String getSpecificDescription(Task t) {
         String description = t.getDescription();
         if (t instanceof Deadline) {
-            description += "~" + ((Deadline) t).getBy();
+            description += "~" + ((Deadline) t).getDueDate();
         } else if (t instanceof Event) {
-            description += "~" + ((Event) t).getAt();
+            description += "~" + ((Event) t).getScheduledDate();
         }
         return description;
     }

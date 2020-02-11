@@ -49,6 +49,7 @@ public class Parser {
      * @throws InvalidKeyException if the input does not give a valid message.
      */
     public Message getMessage(String str) throws InvalidKeyException {
+        assert Parser.availableMessage.get(str) != null : "The request message entered is not valid.";
         return Optional.ofNullable(Parser.availableMessage.get(str))
                 .orElseThrow(() -> new InvalidKeyException("OOPS!!! I'm sorry, but I don't know what that means :-("));
     }

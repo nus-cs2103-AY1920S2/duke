@@ -7,24 +7,24 @@ import java.time.format.DateTimeFormatter;
  * Deadline class extends from Task class and has an extra property.
  */
 public class Deadline extends Task {
-    private LocalDate by;
+    private LocalDate dueDate;
 
     /**
      * construct a Deadline instance by specify its due date.
      * @param description the description of the Deadline.
-     * @param by the due date of the Deadline.
+     * @param dueDate the due date of the Deadline.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dueDate) {
         super(description);
-        this.by = LocalDate.parse(by);
+        this.dueDate = LocalDate.parse(dueDate);
     }
 
-    public LocalDate getBy() {
-        return this.by;
+    public LocalDate getDueDate() {
+        return this.dueDate;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

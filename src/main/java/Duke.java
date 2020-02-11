@@ -59,6 +59,9 @@ public class Duke {
     public String processRequest(String str)
             throws InvalidKeyException, IllegalArgumentException, EmptyDescriptionException, IOException {
 
+        assert !str.isBlank() : "Your request is missing!!!";
+        //assert false : "testing";
+
         if (str.equals("")) {
             throw new InvalidKeyException("Try to say something to me.");
         }
