@@ -1,9 +1,9 @@
-package com.duke.bot.command;
+package duke.command;
 
 import java.util.List;
-import com.duke.bot.DukeException;
-import com.duke.bot.TaskList;
-import com.duke.bot.task.Task;
+import duke.DukeException;
+import duke.TaskList;
+import duke.task.Task;
 
 public class DoneCommand extends Command {
     private final int doneIndex;

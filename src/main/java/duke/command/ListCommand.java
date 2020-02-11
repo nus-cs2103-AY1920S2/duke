@@ -1,9 +1,9 @@
-package com.duke.bot.command;
+package duke.command;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import com.duke.bot.TaskList;
+import duke.TaskList;
 
 public class ListCommand extends Command {
     @Override

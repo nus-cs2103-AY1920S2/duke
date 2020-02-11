@@ -1,11 +1,11 @@
-package com.duke.bot;
+package duke;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
-import com.duke.bot.command.Command;
-import com.duke.bot.util.Parser;
+import duke.command.Command;
+import duke.util.Parser;
 
 /**
  * A personal note-taking assistant.

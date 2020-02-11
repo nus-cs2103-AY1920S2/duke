@@ -1,11 +1,11 @@
-package com.duke.bot.command;
+package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
-import com.duke.bot.TaskList;
-import com.duke.bot.command.Command.ExecuteResult;
-import com.duke.bot.task.Todo;
 import org.junit.jupiter.api.Test;
+import duke.TaskList;
+import duke.command.Command.ExecuteResult;
+import duke.task.Todo;
 
 public class AddCommandTest {
     @Test

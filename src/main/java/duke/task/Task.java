@@ -1,4 +1,4 @@
-package com.duke.bot.task;
+package duke.task;
 
 import java.util.Objects;
 

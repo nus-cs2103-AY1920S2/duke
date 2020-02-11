@@ -1,4 +1,4 @@
-package com.duke.bot;
+package duke;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -7,10 +7,10 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
-import com.duke.bot.task.Deadline;
-import com.duke.bot.task.Event;
-import com.duke.bot.task.Task;
-import com.duke.bot.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class PersistentStorage {
     private final Path storagePath;

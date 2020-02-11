@@ -6,7 +6,7 @@ plugins {
     id "org.openjfx.javafxplugin" version "0.0.8"
 }
 
-group "com.duke.bot"
+group "duke"
 version "0.1.0"
 
 repositories {
@@ -14,7 +14,7 @@ repositories {
 }
 
 application {
-    mainClassName = "com.duke.bot.Launcher"
+    mainClassName = "duke.Duke"
 }
 
 dependencies {

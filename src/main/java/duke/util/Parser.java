@@ -1,24 +1,24 @@
-package com.duke.bot.util; 
+package duke.util; 
 
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.duke.bot.DukeException;
-import com.duke.bot.command.AddCommand;
-import com.duke.bot.command.Command;
-import com.duke.bot.command.DeleteCommand;
-import com.duke.bot.command.DoneCommand;
-import com.duke.bot.command.ExitCommand;
-import com.duke.bot.command.FindCommand;
-import com.duke.bot.command.ListCommand;
-import com.duke.bot.task.Deadline;
-import com.duke.bot.task.Event;
-import com.duke.bot.task.Todo;
+import duke.DukeException;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 public class Parser {
     /**
      * Parses a string input and return the command
-     * (one of the subclasses of {@link com.duke.bot.command.Command}) the input represents.
+     * (one of the subclasses of {@link duke.command.Command}) the input represents.
      * 
      * @param input String input to be parsed
      * @return A command the string input represents

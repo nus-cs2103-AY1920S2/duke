@@ -1,8 +1,8 @@
-package com.duke.bot.command;
+package duke.command;
 
 import java.util.List;
-import com.duke.bot.TaskList;
-import com.duke.bot.task.Task;
+import duke.TaskList;
+import duke.task.Task;
 
 public class AddCommand extends Command {
     private final Task addTask;

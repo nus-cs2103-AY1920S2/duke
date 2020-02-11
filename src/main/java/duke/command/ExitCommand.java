@@ -1,7 +1,7 @@
-package com.duke.bot.command;
+package duke.command;
 
 import java.util.List;
-import com.duke.bot.TaskList;
+import duke.TaskList;
 
 public class ExitCommand extends Command {
     @Override

@@ -1,8 +1,8 @@
-package com.duke.bot;
+package duke;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.duke.bot.task.Task;
+import duke.task.Task;
 
 public class TaskList {
     private final List<Task> tasks;

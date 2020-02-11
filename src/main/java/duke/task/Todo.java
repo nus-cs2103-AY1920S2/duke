@@ -1,4 +1,4 @@
-package com.duke.bot.task;
+package duke.task;
 
 public class Todo extends Task {
     public Todo(String title, boolean isDone) {

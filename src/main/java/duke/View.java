@@ -1,4 +1,4 @@
-package com.duke.bot;
+package duke;
 
 import java.util.List;
 
