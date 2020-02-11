@@ -5,7 +5,9 @@ import java.io.IOException;
 import duke.command.Command;
 import duke.exception.DukeException;
 
-/** Class Duke, the driver class of the program. */
+/**
+ * Class Duke, the driver class of the program.
+ * */
 public class Duke {
     private Ui ui;
     private Parser parser;
@@ -16,7 +18,9 @@ public class Duke {
         new Duke().run();
     }
 
-    /** Duke object creation, initiate Ui, Parser, TaskList, and Storage. */
+    /**
+     * Duke object creation, initiate Ui, Parser, TaskList, and Storage.
+     */
     public Duke() {
         ui = new Ui();
         parser = new Parser();

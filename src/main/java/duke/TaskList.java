@@ -4,7 +4,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-/** Class representing task list. */
+/**
+ * Class representing task list.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 

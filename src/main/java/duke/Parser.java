@@ -20,11 +20,14 @@ import duke.exception.MissingTimeException;
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingParameterException;
 
-/** Class representing the parser with methods to parse strings. */
+/**
+ * Class representing the parser with methods to parse strings.
+ */
 public class Parser {
 
     /**
      * Parses the user input to a Command object.
+     *
      * @param longCommand user String input.
      * @return Command object that represents the user input.
      */
@@ -106,6 +109,7 @@ public class Parser {
 
     /**
      * Parses description into Event Command.
+     *
      * @param longDescription String description to describe the event.
      * @return EventCommand as described by the description.
      */

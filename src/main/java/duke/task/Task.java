@@ -1,6 +1,8 @@
 package duke.task;
 
-/** Class representation of Task. */
+/**
+ * Class representation of Task.
+ */
 public class Task {
 
     protected String task;

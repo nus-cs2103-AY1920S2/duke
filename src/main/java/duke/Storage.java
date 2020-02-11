@@ -14,7 +14,9 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
-/** Class representing a Store, to save and load from file. */
+/**
+ * Class representing a Store, to save and load from file.
+ */
 public class Storage {
     String path;
 

@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.task.Task;
-
-/** Class representing todo task. */
+/**
+ * Class representing a Todo task.
+ */
 public class Todo extends Task {
     /**
      * Creates a Todo object.

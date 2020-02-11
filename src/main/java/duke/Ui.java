@@ -5,10 +5,15 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class to read and write all responses for Duke.
+ */
 public class Ui {
     Scanner io;
 
-    /** Initialises the Ui object with a Scanner object. */
+    /**
+     * Initialises the Ui object with a Scanner object.
+     */
     Ui() {
         this.io = new Scanner(System.in);
     }
@@ -29,19 +34,25 @@ public class Ui {
         System.out.println("----------------------------\n");
     }
 
-    /** Prints the Initial Prompt. */
+    /**
+     * Prints the Initial Prompt.
+     */
     public void initPrompt() {
         System.out.println("\n----------------------------");
         System.out.println("What tasks do you have dude?");
         System.out.println("----------------------------");
     }
 
-    /** Prints a small line. */
+    /**
+     * Prints a small line.
+     */
     public void printSmallLine() {
         System.out.println("    -----");
     }
 
-    /** Prints bye message. */
+    /**
+     * Prints bye message.
+     */
     public void bye() {
         printSmallLine();
         System.out.println("    Bye bye friend!");
