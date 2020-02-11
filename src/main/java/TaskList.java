@@ -84,4 +84,14 @@ public class TaskList {
     public int getsize() {
         return tasks.size();
     }
+
+    public boolean hasDuplicates(Task taskCheck) {
+        for (Task task : this.tasks) {
+            if (task.equals(taskCheck)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

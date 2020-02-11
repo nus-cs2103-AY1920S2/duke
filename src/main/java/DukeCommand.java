@@ -52,14 +52,13 @@ public enum DukeCommand {
         @Override
         public void execute(String s1, TaskList list, Ui ui, Storage storage) {
             // Manipulating the String by separating the actual command
-            // and the word '/by' to get the description and date/time
+            // with the word '/by' to get the description and date/time
             int limit = s1.lastIndexOf("/by") - 1;
             String[] arr = s1.split("\\s+", 2);
             int dateindex = arr[1].lastIndexOf("/by");
             String substr = arr[1].substring(dateindex);
             String[] strarr = substr.split("\\s+", 2);
 
-            DateTimeFormatter formatdate = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
             DukeTimeFormatter timeformat = new DukeTimeFormatter();
             DateTimeValidator validator = new DateTimeValidator();
@@ -82,8 +81,15 @@ public enum DukeCommand {
                 inputdate[1] = timeformat.toAMPMFormat(timeTest, dateInt);
 
                 String newstr = String.join(" ", inputdate);
-                list.add(new Deadline(s1.substring(9, limit), newstr));
 
+                Deadline FormattedDeadline = new Deadline(s1.substring(9, limit), newstr);
+
+                if (list.hasDuplicates(FormattedDeadline)) {
+                    throw new DukeException("OOPS!!! There is a same task already added into the list " +
+                            "or there is a clash of timing with one of the tasks in your list!");
+                }
+
+                list.add(FormattedDeadline);
             } catch (DateTimeParseException exception){
                 ui.showErrorMessage(exception.getMessage() + "\n" +
                         "Input date in the form of yyy-mm-dd and " +
@@ -97,7 +103,7 @@ public enum DukeCommand {
     EVENT {
         public void execute(String s1, TaskList list, Ui ui, Storage storage){
             // Manipulating the String by separating the actual command
-            // and the word '/at' to get the description and date/time
+            // with the word '/at' to get the description and date/time
             int limit = s1.lastIndexOf("/at") - 1;
             String[] arr = s1.split("\\s+", 2);
             int dateindex = arr[1].lastIndexOf("/at");
@@ -106,7 +112,6 @@ public enum DukeCommand {
             // Separating the description and the date & time
             String[] strarr = substr.split("\\s+", 2);
 
-            DateTimeFormatter formatdate = DateTimeFormatter.ofPattern("uuuu-MM-dd");
             DukeTimeFormatter timeformat = new DukeTimeFormatter();
             DateTimeValidator validator = new DateTimeValidator();
             try {
@@ -128,8 +133,15 @@ public enum DukeCommand {
                 inputdate[1] = timeformat.toAMPMFormat(timeTest, dateInt);
 
                 String newstr = String.join(" ", inputdate);
-                list.add(new Event(s1.substring(6, limit), newstr));
 
+                Event FormattedEvent = new Event(s1.substring(6, limit), newstr);
+
+                if (list.hasDuplicates(FormattedEvent)) {
+                    throw new DukeException("OOPS!!! There is a same task already added into the list " +
+                            "or there is a clash of timing with one of the tasks in your list!");
+                }
+
+                list.add(FormattedEvent);
             } catch (DateTimeParseException exception){
                 ui.showErrorMessage(exception.getMessage() + "\n" +
                         "Input date in the form of yyy-mm-dd and " +

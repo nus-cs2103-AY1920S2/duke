@@ -54,4 +54,24 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this instanceof Todo && obj instanceof Todo) {
+            // No Todo tasks
+            // can be the same in the list
+            Todo todocmp = (Todo) obj;
+            return (this.getDesc()).equals(todocmp.getDesc());
+        } else if (this instanceof Event && obj instanceof Event) {
+            // Can't attend two events at the same time
+            Event eventcmp = (Event) obj;
+            return (this.getDate()).equals(eventcmp.getDate());
+        } else if (this instanceof Deadline && obj instanceof Deadline) {
+            Deadline deadlinecmp = (Deadline) obj;
+            return (this.getDesc()).equals(deadlinecmp.getDesc()) ||
+                    (this.getDate()).equals(deadlinecmp.getDate());
+        }
+
+        return false;
+    }
 }

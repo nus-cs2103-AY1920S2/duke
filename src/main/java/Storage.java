@@ -34,7 +34,7 @@ public class Storage {
         String currentline = reader.readLine();
 
         while (currentline != null) {
-            String[] arr = currentline.split(" ", 4);
+            String[] arr = currentline.split(" ", 3);
 
             String expression = arr[0];
 
@@ -43,13 +43,26 @@ public class Storage {
             // the list.
             switch (expression) {
             case "[E]":
-                Event eventTask = new Event(arr[2], arr[3]);
-                if (arr[1].equals("Y"))
+                // Collect description and date/time separately
+                int limit = arr[2].lastIndexOf("%");
+                String desc = arr[2].substring(0, limit);
+                String dateTime = arr[2].substring(limit + 1);
+
+                // Put in Event Task
+                Event eventTask = new Event(desc, dateTime);
+                if (arr[1].equals("Y")) {
                     eventTask.taskIsDone();
+                }
                 Tasklist.add(eventTask);
                 break;
             case "[D]":
-                Deadline deadlineTask = new Deadline(arr[2], arr[3]);
+                // Collect description and date/time separately
+                int index = arr[2].lastIndexOf("%");
+                String deadlineDesc = arr[2].substring(0, index);
+                String deadlineDateTime = arr[2].substring(index + 1);
+
+                // Put in Deadline Task
+                Deadline deadlineTask = new Deadline(deadlineDesc, deadlineDateTime);
                 if (arr[1].equals("Y"))
                     deadlineTask.taskIsDone();
                 Tasklist.add(deadlineTask);
@@ -88,8 +101,10 @@ public class Storage {
                     line = "[T] " + task.getStatusIcon() + " " + task.getDesc();
                 } else {
                     // Deadline/Event objects
+                    // Add a "%" as a boundary between the description
+                    // and the date/time. Will be used to get the two separately.
                     line = task.getType() + " " + task.getStatusIcon() + " " +
-                            task.getDesc() + " " + task.getDate();
+                            task.getDesc() + "%" + task.getDate();
                 }
 
                 writer.write(line);

@@ -31,8 +31,14 @@ public enum DukeEnumExceptions {
             int numOfArgs = Integer.parseInt(s2);
             String[] allargs = s1.split("\\s+");
 
-            if (numOfArgs > allargs.length)
+            if (numOfArgs > allargs.length) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            }
+
+            if (list.hasDuplicates(new Todo(allargs[1]))) {
+                throw new DukeException("OOPS!!! There is a same task already added into the list " +
+                        "or there is a clash of timing with one of the tasks in your list!");
+            }
         }
     },
     DEADLINE {
@@ -53,6 +59,7 @@ public enum DukeEnumExceptions {
                     throw new DukeException("No description! Please add description to your deadline");
                 }
             }
+
         }
     },
     EVENT {
