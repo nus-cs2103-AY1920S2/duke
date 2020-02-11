@@ -31,7 +31,7 @@ public class Duke {
 
             case "mark":
                 if (controller.checkTask(taskName)) {
-                    controller.markTask(taskName);
+                    controller.setMark(taskName, true);
                     Greetings.prettyPrint(String.format("Marked task %s", taskName));
                 } else {
                     Greetings.prettyPrint(String.format("Task does not exist", taskName));
@@ -40,8 +40,35 @@ public class Duke {
 
             case "unmark":
                 if (controller.checkTask(taskName)) {
-                    controller.unmarkTask(taskName);
+                    controller.setMark(taskName, false);
                     Greetings.prettyPrint(String.format("Unmarked task %s", taskName));
+                } else {
+                    Greetings.prettyPrint(String.format("Task does not exist", taskName));
+                }
+                break;
+
+            case "todo":
+                if (controller.checkTask(taskName)) {
+                    controller.asTodo(taskName);
+                    Greetings.prettyPrint(String.format("Marked task as todo %s", taskName));
+                } else {
+                    Greetings.prettyPrint(String.format("Task does not exist", taskName));
+                }
+                break;
+
+            case "deadline":
+                if (controller.checkTask(taskName)) {
+                    controller.asDeadline(taskName);
+                    Greetings.prettyPrint(String.format("Marked task as deadline %s", taskName));
+                } else {
+                    Greetings.prettyPrint(String.format("Task does not exist", taskName));
+                }
+                break;
+
+            case "event":
+                if (controller.checkTask(taskName)) {
+                    controller.asEvent(taskName);
+                    Greetings.prettyPrint(String.format("Marked task as event %s", taskName));
                 } else {
                     Greetings.prettyPrint(String.format("Task does not exist", taskName));
                 }

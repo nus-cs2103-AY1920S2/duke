@@ -10,14 +10,20 @@ public class InMemDAO implements DAOInterface {
     private List<Tasks> tasksList = new ArrayList<>();
 
     @Override
-    public Boolean add(Tasks task) {
+    public boolean add(Tasks task) {
         this.tasksList.add(task);
         return true;
     }
 
     @Override
-    public Boolean set(Tasks task, TASK_STATUS status) {
+    public boolean set(Tasks task, TASK_STATUS status) {
         task.changeStatus(status);
+        return true;
+    }
+
+    @Override
+    public boolean set(Tasks task, Tasks.TASK_CATEGORY category) {
+        task.changeCategory(category);
         return true;
     }
 
@@ -32,7 +38,7 @@ public class InMemDAO implements DAOInterface {
     }
 
     @Override
-    public Boolean delete(Tasks task) {
+    public boolean delete(Tasks task) {
         this.tasksList.remove(task);
         return true;
     }

@@ -20,6 +20,32 @@ public class TaskController {
         return true;
     }
 
+    private boolean setTask(Tasks task, Tasks.TASK_CATEGORY cat) {
+        this.dataObj.set(task, cat);
+        return true;
+    }
+
+    public boolean setMark(String name, boolean isMark) {
+        Tasks t = this.getTask(name);
+        Tasks.TASK_STATUS status = isMark ? Tasks.TASK_STATUS.COMPLETE : Tasks.TASK_STATUS.INCOMPLETE;
+        return this.setTask(t, status);
+    }
+
+    public boolean asTodo(String name) {
+        Tasks t = this.getTask(name);
+        return this.setTask(t, Tasks.TASK_CATEGORY.TODO);
+    }
+
+    public boolean asDeadline(String name) {
+        Tasks t = this.getTask(name);
+        return this.setTask(t, Tasks.TASK_CATEGORY.DEADLINE);
+    }
+
+    public boolean asEvent(String name) {
+        Tasks t = this.getTask(name);
+        return this.setTask(t, Tasks.TASK_CATEGORY.EVENT);
+    }
+
     public boolean createNewTask(String name) {
         Tasks task = new Tasks(name);
         Boolean result = this.dataObj.add(task);
@@ -40,16 +66,6 @@ public class TaskController {
                                         .map(eachTask -> stringify(eachTask))
                                         .collect(Collectors.toList());
         return taskString;
-    }
-
-    public boolean markTask(String name) {
-        Tasks t = this.getTask(name);
-        return this.setTask(t, Tasks.TASK_STATUS.COMPLETE);
-    }
-
-    public boolean unmarkTask(String name) {
-        Tasks t = this.getTask(name);
-        return this.setTask(t, Tasks.TASK_STATUS.INCOMPLETE);
     }
 
     public boolean removeTask(String name) {

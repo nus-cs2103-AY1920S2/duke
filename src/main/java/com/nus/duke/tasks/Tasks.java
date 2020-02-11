@@ -3,9 +3,7 @@ package com.nus.duke.tasks;
 public class Tasks {
     public enum TASK_STATUS {
         INCOMPLETE {
-            public String toString() {
-                return "\u2717";
-            }
+            public String toString() { return "\u2717"; }
         },
         COMPLETE {
             public String toString() {
@@ -58,5 +56,9 @@ public class Tasks {
 
     public void changeStatus(TASK_STATUS status) {
         this.status = status;
+    }
+
+    public void changeCategory(TASK_CATEGORY category) {
+        this.category = category;
     }
 }
