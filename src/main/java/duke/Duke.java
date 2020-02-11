@@ -20,6 +20,9 @@ public class Duke {
     private Ui ui;
     private boolean canLoad = true;
 
+    /**
+     * Creates a Duke object and initialises Ui, Storage and TaskList.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
