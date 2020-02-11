@@ -41,8 +41,21 @@ public class Ui {
         String str = "Here are the tasks in your list:\n";
         for (int i = 1; i <= tasks.getTaskNumber(); i++) {
             Task currTask = tasks.getTask(i - 1);
-            str = str.concat("  " + i + "." + currTask + "\n");
+            str = showNewTask(str, i, currTask);
         }
+        return str;
+    }
+
+    /**
+     * Add string representation of a task.
+     *
+     * @param str Original sentence.
+     * @param i Index of the task.
+     * @param currTask Current task.
+     * @return A string contains representation of current task.
+     */
+    private String showNewTask(String str, int i, Task currTask) {
+        str = str.concat("  " + i + "." + currTask + "\n");
         return str;
     }
 
@@ -55,7 +68,17 @@ public class Ui {
      */
     public String showAdd(Task t, TaskList tasks) {
         tasks.addTask(t);
-        return "Got it. I've added this task:\n  " + t + "\nNow you have "
+        return "Got it. I've added this task:\n  " + t + "\n" + showTaskNumber(tasks);
+    }
+
+    /**
+     * Shows number of tasks in current task list.
+     *
+     * @param tasks Task list.
+     * @return A string indicates number of tasks.
+     */
+    private String showTaskNumber(TaskList tasks) {
+        return "Now you have "
                 + tasks.getTaskNumber() + " tasks in the list.\n";
     }
 
@@ -80,7 +103,7 @@ public class Ui {
     public String showDelete(Task currTask, TaskList tasks) {
         String str = "Noted. I've removed this task:\n  " + currTask + "\n";
         tasks.removeTask(currTask);
-        str = str.concat("Now you have " + tasks.getTaskNumber() + " tasks in the list.\n");
+        str = str.concat(showTaskNumber(tasks));
         return str;
     }
 
@@ -122,7 +145,7 @@ public class Ui {
     }
 
     /**
-     * Shows all Tasks that matches the key word.
+
      *
      * @param keyWord String of key word.
      * @param tasks Task list.
@@ -130,15 +153,15 @@ public class Ui {
      */
     public String showFind(String keyWord, TaskList tasks) {
         String str = "Here are the matching tasks in your list:\n";
-        boolean isfailed = true;
+        boolean failed = true;
         for (int i = 1; i <= tasks.getTaskNumber(); i++) {
             Task currTask = tasks.getTask(i - 1);
             if (currTask.getDescription().contains(keyWord)) {
-                str = str.concat("  " + i + "." + currTask + "\n");
-                isfailed = false;
+                str = showNewTask(str, i, currTask);
+                failed = false;
             }
         }
-        if (isfailed) {
+        if (failed) {
             str = str.concat("  None.\n");
         }
         return str;
