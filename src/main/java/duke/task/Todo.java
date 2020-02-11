@@ -9,9 +9,10 @@ public class Todo extends Task {
      * Class constructor inherits Task constructor.
      *
      * @param description Description of this Todotask.
+     * @param tags Tags of the task.
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, String... tags) {
+        super(description, tags);
     }
 
     /**

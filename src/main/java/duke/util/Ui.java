@@ -129,6 +129,7 @@ public class Ui {
                 + "- deadline [task description] /by [yyyy-mm-dd]: add a task with deadline.\n"
                 + "- event [task description] /at [yyyy-mm-dd]: add an event with time.\n"
                 + "- done [task number]: mark this task as done.\n"
+                + "- tag [task number] [tag]: add one tag to this task.\n"
                 + "- delete [task number]: delete this task from your list.\n"
                 + "- find [keywords]: find all tasks containing the keywords.\n"
                 + "- exit: say goodbye!\n";
@@ -145,7 +146,7 @@ public class Ui {
     }
 
     /**
-
+     * Shows all Tasks that matches the key word.
      *
      * @param keyWord String of key word.
      * @param tasks Task list.
@@ -165,5 +166,17 @@ public class Ui {
             str = str.concat("  None.\n");
         }
         return str;
+    }
+
+    /**
+     * Add one tag to a task and show this step.
+     *
+     * @param currTask The task.
+     * @param tag The new tag.
+     * @return A string representation of the task with new tags.
+     */
+    public String showTag(Task currTask, String tag) {
+        currTask.addTags(tag);
+        return "Nice! I've added tag to this task:\n" + "  " + currTask + "\n";
     }
 }

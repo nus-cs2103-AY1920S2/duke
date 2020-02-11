@@ -66,20 +66,22 @@ public class Storage {
         assert words.length >= 3: "Incomplete task record when saving data";
         Task currTask;
         switch (words[0]) {
-        case "T":
-            assert words.length >= 3: "Invalid Todo task record when saving data";
-            currTask = new Todo(words[2]);
-            break;
-        case "D":
-            assert words.length >= 4: "Invalid Deadline task record when saving data";
-            currTask = new Deadline(words[2], LocalDate.parse(words[3]));
-            break;
-        case "E":
-            assert words.length >= 4: "Invalid Event task record when saving data";
-            currTask = new Event(words[2], LocalDate.parse(words[3]));
-            break;
-        default:
-            return null;
+            case "T":
+                assert words.length >= 3: "Invalid Todo task record when saving data";
+                currTask = words.length >= 4 ? new Todo(words[2], words[3]) : new Todo(words[2]);
+                break;
+            case "D":
+                assert words.length >= 4: "Invalid Deadline task record when saving data";
+                currTask = words.length >= 5 ? new Deadline(words[2], LocalDate.parse(words[4]), words[3]) :
+                        new Deadline(words[2], LocalDate.parse(words[4]));
+                break;
+            case "E":
+                assert words.length >= 4: "Invalid Event task record when saving data";
+                currTask = words.length >= 5 ? new Event(words[2], LocalDate.parse(words[4]), words[3]) :
+                        new Event(words[2], LocalDate.parse(words[4]));
+                break;
+            default:
+                return null;
         }
         if (Integer.parseInt(words[1]) == 1) {
             currTask.markAsDone();
