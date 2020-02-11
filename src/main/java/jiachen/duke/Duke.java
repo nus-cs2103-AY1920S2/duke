@@ -89,6 +89,9 @@ public class Duke extends Application {
         case "find":
             command = Command.FIND_COMMAND;
             break;
+        case "help":
+            command = Command.HELP_COMMAND;
+            break;
         default:
             throw new InvalidDukeCommandException();
         }
@@ -130,7 +133,9 @@ public class Duke extends Application {
             case EVENT_COMMAND:
                 response = handleEvent(parameters);
                 break;
-
+            case HELP_COMMAND:
+                response = handleHelp();
+                break;
             default:
                 throw new InvalidDukeCommandException();
             }
@@ -139,6 +144,10 @@ public class Duke extends Application {
         }
 
         return response;
+    }
+
+    private String handleHelp() {
+        return ui.formatHelp();
     }
 
     private String handleEvent(String parameters) throws InvalidDukeFormatException {

@@ -119,4 +119,20 @@ public class Ui {
         return builder.toString();
     }
 
+    /**
+     * Format help message.
+     *
+     * @return help info as a string
+     */
+    public String formatHelp() {
+        return "Hello there! here is a list of commands you can try! "
+            + "\n\ttodo - to create a new todo task"
+            + "\n\tevent - to create a new event task"
+            + "\n\tdeadline - to create a new deadline task"
+            + "\n\tlist - to list all tasks"
+            + "\n\tdone - to mark a task as done"
+            + "\n\tdelete - to delete am existing task"
+            + "\n\thelp - to get help information"
+            + "\n\texit - to leave duke";
+    }
 }

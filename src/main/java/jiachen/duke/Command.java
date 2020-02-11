@@ -35,5 +35,9 @@ enum Command {
     /**
      * Find command command.
      */
-    FIND_COMMAND
+    FIND_COMMAND,
+    /**
+     * Help command command.
+     */
+    HELP_COMMAND
 }
