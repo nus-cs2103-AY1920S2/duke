@@ -18,7 +18,7 @@ public class Event extends Task {
      * @param eventTime Time of upcoming task
      */
     public Event(String taskTitle, LocalDate eventDate, LocalTime eventTime) {
-        super(taskTitle);
+        super(taskTitle, eventDate, eventTime);
         this.eventDate = eventDate;
         this.eventTime = eventTime;
     }

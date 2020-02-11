@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Task {
+public class Task implements Comparable<Task> {
 
     public static String datePattern = "MMM d yyyy";
     public static String timePattern = "HH:mm";
@@ -14,14 +14,18 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    protected LocalDate taskDate;
+    protected LocalTime taskTime;
 
     /**
      * Creates a Task object
      * @param description Information about the task
      */
-    public Task(String description) {
+    public Task(String description, LocalDate taskDate, LocalTime taskTime) {
         this.description = description;
         this.isDone = false;
+        this.taskDate = taskDate;
+        this.taskTime = taskTime;
     }
 
     /**
@@ -86,6 +90,20 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
+    }
+
+    @Override
+    public int compareTo(Task other) {
+
+        if (this.taskDate.toString().equals(other.taskDate.toString())) {
+            // Dates are the same
+            if (this.taskTime == null || other.taskTime == null) {
+                return -1;
+            }
+            return this.taskTime.compareTo(other.taskTime);
+        } else {
+            return this.taskDate.compareTo(other.taskDate);
+        }
     }
 
     //...
