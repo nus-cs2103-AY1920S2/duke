@@ -188,18 +188,11 @@ public class Duke extends Application {
         PrintStream ps = new PrintStream(baos);
         PrintStream old = System.out;
         System.setOut(ps);
-        boolean isExit = false;
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
-            isExit = c.isExit();
         } catch (Exception e) {
             System.out.println(e);
-        }
-
-        if (isExit) {
-            ui.printBye();
-            System.exit(0);
         }
 
         System.out.flush();
