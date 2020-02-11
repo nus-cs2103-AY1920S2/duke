@@ -15,6 +15,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner sc;
+    private String separator = "____________________________________________________________";
 
     /**
      * Constructs a Ui instance and instantiates a Scanner instance.
@@ -24,36 +25,29 @@ public class Ui {
     }
 
     /**
-     * Prints a horizontal bar to separate commands.
-     */
-    private void printSeparator() {
-        System.out.println("____________________________________________________________");
-    }
-
-    /**
      * Driver method that introduces Duke.
      */
     public void run() {
-        printSeparator();
+        System.out.println(separator);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        printSeparator();
+        System.out.println(separator);
     }
 
-    /**
-     * Gets input from user.
-     * @return The next line of user input from the Scanner instance.
-     */
-    public String getInput() {
-        return this.sc.nextLine();
-    }
+//    /**
+//     * Gets input from user.
+//     * @return The next line of user input from the Scanner instance.
+//     */
+//    public String getInput() {
+//        return this.sc.nextLine();
+//    }
 
     /**
      * Handles user input of bye that signals exiting from program.
      */
-    protected void bye() {
-        printSeparator();
-        System.out.println("Bye! Come back again soon!");
-        printSeparator();
+    public String bye() {
+        StringBuilder sb = new StringBuilder(separator);
+        sb.append("\n").append("Bye! Come back again soon!\n").append(separator);
         sc.close();
+        return sb.toString();
     }
 }

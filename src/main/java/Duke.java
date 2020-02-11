@@ -1,9 +1,11 @@
+import duke.util.CommandHandler;
+
+import java.io.IOException;
+
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,8 +17,6 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
 
 /**
  * Duke
@@ -40,44 +40,39 @@ public class Duke extends Application {
     private static Parser parser;
     private static Storage storage;
     private static TaskList tasks;
+    private static CommandHandler cmd;
     private static Ui ui;
 
     public Duke() {
-
-    }
-
-    /**
-     * Constructs a Duke instance.
-     * @param filePath The file path for the file to be opened and its data to be read or for new data to be written.
-     */
-    public Duke(String filePath) {
+        String filePath = "data/duke.txt";
         storage = new Storage(filePath);
         ui = new Ui();
+        tasks = new TaskList(storage, ui);
+        ui.run();
         try {
-            tasks = new TaskList(storage);
-            parser = new Parser(tasks, ui);
+            cmd = new CommandHandler(tasks);
+            parser = new Parser(cmd, ui);
             storage.loadTasks();
-            run();
         } catch (IOException e) {
             System.err.println(e);
         }
     }
-
-    /**
-     * The method that calls the driver method run in Ui.
-     */
-    private static void run()  {
-        ui.run();
-        parser.parseInput(ui.getInput());
-    }
-
-    /**
-     * The method that creates and instance of Duke.
-     * @param args The arguments from the command line.
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt");
-    }
+//
+//    /**
+//     * Constructs a Duke instance.
+//     */
+//    public Duke(String filePath) {
+//        storage = new Storage(filePath);
+//        ui = new Ui();
+//        try {
+//            tasks = new TaskList(storage, ui);
+//            parser = new Parser(cmd);
+//            storage.loadTasks();
+//            ui.run();
+//        } catch (IOException e) {
+//            System.err.println(e);
+//        }
+//    }
 
     @Override
     public void start(Stage stage) {
@@ -107,6 +102,7 @@ public class Duke extends Application {
 
         mainLayout.setPrefSize(400.0, 600.0);
 
+        scrollPane.setPrefSize(385, 535);
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -156,7 +152,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
+     * @param text String containing text to add.
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
@@ -180,10 +176,11 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets Duke's response given input from user.
+     * @param input User's input.
+     * @return Duke's response as a string.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return parser.parseLine(input);
     }
 }

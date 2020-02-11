@@ -2,8 +2,6 @@ package duke.util;
 
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidIndexException;
-import duke.exception.NoKeywordProvidedException;
-import duke.exception.NoTaskNumberException;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -23,95 +21,89 @@ import java.util.List;
  * @author Jel
  */
 public class TaskList {
+    protected Ui ui;
     protected Storage storage;
     protected List<Task> tasks;
+    protected String separator = "____________________________________________________________";
 
     /**
      * Constructs a TaskList instance.
      * @param storage The storage instance that will the program will extract data from and store all data to.
      */
-    public TaskList(Storage storage) {
+    public TaskList(Storage storage, Ui ui) {
         this.storage = storage;
         this.tasks = storage.tasks;
-    }
-
-    /**
-     * Prints a horizontal bar to separate commands.
-     */
-    protected void printSeparator() {
-        System.out.println("____________________________________________________________");
+        this.ui = ui;
     }
 
     /**
      * Lists all tasks in the current list of tasks.
      */
-    protected void listTasks() {
+    protected String listTasks() {
+        System.out.println("listing tasks");
         StringBuilder sb = new StringBuilder();
         sb.append("Below is your task list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append("\t").append(i + 1).append(".").append(tasks.get(i)).append("\n");
         }
-        System.out.print(sb);
-        printSeparator();
+        System.out.println(sb);
+        sb.append(separator);
+        return sb.toString();
     }
 
     /**
      * Deletes the specified task from the list and data file. 
-     * @param line The input from user containing the task number to be deleted.
-     * @throws NoTaskNumberException No task number is provided.
+     * @param taskNum The task number for the task to be deleted.
      * @throws InvalidIndexException Task number or index provided is out of bound of current list of tasks.
      * @throws IOException Error opening file where data is to be deleted.
      */
-    protected void deleteTask(String line)
-            throws NoTaskNumberException, InvalidIndexException, IOException {
+    protected String deleteTask(int taskNum) throws InvalidIndexException, IOException {
         int size = tasks.size();
-        String[] splitInput = line.split(" ");
         StringBuilder sb = new StringBuilder();
-        if (splitInput.length > 1) {
-            int n = Integer.parseInt(splitInput[1]);
-            if (n < 1 || n > size) {
-                throw new InvalidIndexException(n, size);
-            } else {
-                sb.append("Noted. I've removed this task:\n\t" + tasks.get(n - 1));
-                tasks.remove(n - 1);
-                sb.append("\nYou now have " + tasks.size() + (tasks.size() > 1 ? " tasks" : " task") + " in the list.");
-            }
-        } else {
-            throw new NoTaskNumberException();
+        if (taskNum < 1 || taskNum > size) {
+            throw new InvalidIndexException(taskNum, size);
         }
-        System.out.println(sb);
-        printSeparator();
+        sb.append("Noted. I've removed this task:\n\t" + tasks.get(taskNum - 1));
+        tasks.remove(taskNum - 1);
+        sb.append("\nYou now have " + tasks.size() + (tasks.size() > 1 ? " tasks" : " task") + " in the list.\n");
+        sb.append(separator);
         storage.clearAllData();
         storage.updateData();
+        return sb.toString();
     }
 
     /**
      * Marks the specified task as done in the list and data file.
-     * @param line The input from user containing the task number to be marked as done.
-     * @throws NoTaskNumberException No task number is provided.
+     * @param taskNum The task number for the task to be marked as done.
      * @throws InvalidIndexException Task number or index provided is out of bound of current list of tasks.
      * @throws IOException Error opening file where data is to be marked as done.
      */
-    protected void markTaskAsDone(String line)
-            throws NoTaskNumberException, InvalidIndexException, IOException {
+    protected String markTaskAsDone(int taskNum) throws InvalidIndexException, IOException {
         int size = tasks.size();
-        String[] splitInput = line.split(" ", 2);
         StringBuilder sb = new StringBuilder();
-        if (splitInput.length > 1) {
-            int taskNum = Integer.parseInt(splitInput[1]);
-            if (taskNum < 1 || taskNum > size) {
-                throw new InvalidIndexException(taskNum, size);
-            }
-            Task t = tasks.get(taskNum - 1);
-            t.markAsDone();
-            sb.append("Nice! I've marked this task as done:\n\t").append(t);
-            System.out.println(sb);
-            printSeparator();
-        } else {
-            throw new NoTaskNumberException();
+        if (taskNum < 1 || taskNum > size) {
+            throw new InvalidIndexException(taskNum, size);
         }
+        Task t = tasks.get(taskNum - 1);
+        t.markAsDone();
+        sb.append("Nice! I've marked this task as done:\n\t").append(t);
         storage.clearAllData();
         storage.updateData();
+        sb.append("\n").append(separator);
+        return sb.toString();
+    }
+
+    /**
+     * Adds a new todo to the task list and the data file.
+     * @param desc The description of details of the todo.
+     * @return The string signifying successful addition of task.
+     * @throws IOException Error opening file where data is to be added.
+     */
+    protected String addTodo(String desc) throws IOException {
+        Task toSave = new Todo(desc);
+        tasks.add(toSave);
+        storage.saveTask(toSave, true);
+        return confirmAddition();
     }
 
     /**
@@ -131,25 +123,14 @@ public class TaskList {
     }
 
     /**
-     * Adds a new todo to the task list and the data file.
-     * @param desc The description of details of the todo.
-     * @throws IOException Error opening file where data is to be added.
-     */
-    protected void addTodo(String desc) throws IOException {
-        Task toSave = new Todo(desc);
-        tasks.add(toSave);
-        storage.saveTask(toSave, true);
-        additionConfirmation();
-    }
-
-    /**
-     * Adds a new deadline or event to the task list and data file. 
+     * Adds a new deadline or event to the task list and data file.
      * @param id The unique id identifying the type of task to be added.
      * @param descAndDate The description or details of the deadline or event.
+     * @return The string signifying successful addition of task.
      * @throws IOException Error opening file where data is to be added.
      * @throws InvalidDateException Date provided is of the wrong format or invalid.
      */
-    protected void addDeadlineOrEvt(String id, String descAndDate) throws IOException, InvalidDateException {
+    protected String addDeadlineOrEvt(String id, String descAndDate) throws IOException, InvalidDateException {
         String[] temp = descAndDate.split(" \\| ");
         if (dateIsValid(temp[1])) {
             if (id.equals(" /by ")) {
@@ -161,7 +142,7 @@ public class TaskList {
                 storage.saveTask(toSave, true);
                 tasks.add(toSave);
             }
-            additionConfirmation();
+            return confirmAddition();
         } else {
             throw new InvalidDateException();
         }
@@ -170,31 +151,25 @@ public class TaskList {
     /**
      * Prints out confirmation of addition of new task to list and data file.
      */
-    protected void additionConfirmation() {
+    protected String confirmAddition() {
+        StringBuilder sb = new StringBuilder("Got it. I've added this task:\n\t");
         int size = this.tasks.size();
-        System.out.println("Got it. I've added this task:");
-        System.out.print("\t" + this.tasks.get(size - 1));
-        System.out.printf("\nYou now have %d %s in the list.\n", size, tasks.size() > 1 ? "tasks" : "task");
-        printSeparator();
+        sb.append(this.tasks.get(size - 1)).append(String.format("\nYou now have %d %s in the list.\n", size, tasks.size() > 1 ? "tasks" : "task"));
+        return sb.toString();
     }
 
     /**
      * Finds tasks whose details match the keyword provided.
-     * @param line The user's line of input.
-     * @throws NoKeywordProvidedException No keyword was provided with the find command.
+     * @param keyword The keyword user is searching for.
      */
-    protected void findTask(String line) throws NoKeywordProvidedException {
-        String[] temp = line.split(" ", 2);
-        if (temp.length < 2) {
-            throw new NoKeywordProvidedException();
-        }
+    protected String findTask(String keyword) {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n\t");
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDescription().contains(temp[1])) {
+            if (tasks.get(i).getDescription().contains(keyword)) {
                 sb.append(tasks.get(i)).append("\n\t");
             }
         }
-        System.out.println(sb.toString().trim());
-        printSeparator();
+        String res = sb.toString().trim();
+        return res + "\n" + separator;
     }
 }

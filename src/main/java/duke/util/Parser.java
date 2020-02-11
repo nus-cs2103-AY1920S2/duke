@@ -4,8 +4,9 @@ import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.NoDateProvidedException;
 import duke.exception.NoDescriptionException;
+import duke.exception.NoKeywordProvidedException;
+import duke.exception.NoTaskNumberException;
 
-import java.io.IOException;
 
 /**
  * Parser
@@ -19,16 +20,14 @@ import java.io.IOException;
  * @author Jel
  */
 public class Parser {
-    private TaskList tasks;
+    private CommandHandler commandHandler;
     private Ui ui;
 
     /**
      * Constructs a Parser instance.
-     * @param tasks List where tasks are to be stored.
-     * @param ui User interface of the program.
      */
-    public Parser(TaskList tasks, Ui ui) {
-        this.tasks = tasks;
+    public Parser(CommandHandler commandHandler, Ui ui) {
+        this.commandHandler = commandHandler;
         this.ui = ui;
     }
 
@@ -36,50 +35,36 @@ public class Parser {
      * Parses user input.
      * @param line The line of input to be parsed.
      */
-    public void parseInput(String line) {
+    public String parseLine(String line) {
         String trimmed = line.trim();
         String cmd = getCommand(trimmed);
-        String descAndDate;
+        String keyword = "";
+        int taskNum = -1;
+        String descAndDate = "";
 
         try {
             switch (cmd) {
             case "bye":
-                ui.bye();
-                return;
-            case "todo":
-                descAndDate = getDescAndDate(cmd, trimmed);
-                tasks.addTodo(descAndDate);
-                break;
-            case "deadline":
-                descAndDate = getDescAndDate(cmd, trimmed);
-                tasks.addDeadlineOrEvt(" /by ", descAndDate);
-                break;
-            case "event":
-                descAndDate = getDescAndDate(cmd, trimmed);
-                tasks.addDeadlineOrEvt(" /at ", descAndDate);
-                break;
+                return ui.bye();
             case "list":
-                tasks.listTasks();
                 break;
-            case "done":
-                tasks.markTaskAsDone(trimmed);
-                break;
-            case "delete":
-                tasks.deleteTask(trimmed);
+            case "done": case "delete":
+                taskNum = getTaskNum(trimmed);
                 break;
             case "find":
-                tasks.findTask(trimmed);
+                keyword = getKeyword(trimmed);
+                break;
+            case "todo": case "deadline": case "event":
+                descAndDate = getDescAndDate(cmd, trimmed);
                 break;
             default:
                 throw new InvalidCommandException();
             }
-        } catch (IOException | DukeException e) {
-            System.out.println("____________________________________________________________");
-            System.err.println(e);
-            System.out.println("____________________________________________________________");
+        } catch (DukeException e) {
+            return e.toString();
         }
-        parseInput(ui.getInput());
 
+        return commandHandler.handleCommand(new String[] {cmd, descAndDate}, taskNum, keyword);
     }
 
     /**
@@ -96,7 +81,7 @@ public class Parser {
      * @param cmd The user's command.
      * @param line The user's line of input.
      * @return A joined string of the description and date of the task.
-     * @throws NoDescriptionException No description for the task was provided.
+     * @throws NoDescriptionException No date for the deadline or event was provided.
      * @throws NoDateProvidedException No description for the deadline or event was provided.
      */
     private String getDescAndDate(String cmd, String line) throws NoDescriptionException, NoDateProvidedException {
@@ -119,5 +104,35 @@ public class Parser {
             }
             return String.join(" | ", descAndDate);
         }
+    }
+
+    /**
+     * Gets task number of task to be handled.
+     * @param line The line of input from user.
+     * @return The tasks' number.
+     * @throws NoTaskNumberException No task number was provided for the action to be done.
+     */
+    private int getTaskNum(String line) throws NoTaskNumberException {
+        String[] splitInput = line.split(" ");
+        StringBuilder sb = new StringBuilder();
+        if (splitInput.length > 1) {
+            return Integer.parseInt(splitInput[1]);
+        } else {
+            throw new NoTaskNumberException();
+        }
+    }
+
+    /**
+     * Gets the keyword that the user is searching for from the line of input.
+     * @param line The line of user input.
+     * @return The user's search keyword
+     * @throws NoKeywordProvidedException No keyword was provided for the find action.
+     */
+    private String getKeyword(String line) throws NoKeywordProvidedException {
+        String[] temp = line.split(" ", 2);
+        if (temp.length < 2) {
+            throw new NoKeywordProvidedException();
+        }
+        return temp[1];
     }
 }
