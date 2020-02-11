@@ -2,7 +2,6 @@ package parser;
 
 public class ExitCommand extends Command {
 
-    static String line = "____________________________________________________________\n";
     static String exitGreeting = "Bye. Hope to see you again soon!\n";
 
     public static boolean isExit(Command command) {
