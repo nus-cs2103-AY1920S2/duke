@@ -16,6 +16,7 @@ public class DeleteCommand extends Command {
         this.id = id;
     }
 
+
     /**
      * Executes the command, adding the task to the task list and also updates UI and storage file.
      * If storage file invalid, exception thrown and error message is returned.

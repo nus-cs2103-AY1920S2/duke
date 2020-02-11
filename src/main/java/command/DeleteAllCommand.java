@@ -7,13 +7,12 @@ import ui.Ui;
 import java.io.IOException;
 
 public class DeleteAllCommand extends Command{
-    public DeleteAllCommand() {
+    public DeleteAllCommand() {}
 
-    }
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.deleteAll();
-        ui.displayTasks(taskList);
+        ui.displayDeleteAllTask();
         storage.save(taskList);
     }
 

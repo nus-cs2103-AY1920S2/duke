@@ -2,6 +2,9 @@ package ui;
 
 import task.TaskList;
 import task.Task;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Ui {
@@ -51,6 +54,20 @@ public class Ui {
         int size = taskList.getSize();
         assert size > 0 : "Size cannot be less than 0!";
         System.out.println("Noted. I've removed this task:\n" + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list.");
+    }
+
+    public void displayDeleteAllTask() {
+        System.out.println("Noted. I've deleted all tasks. Don't come crying later!");
+    }
+
+    public void displayDeleteSomeTask(TaskList taskList, ArrayList<Integer> idOfTaskListToBeDeleted) {
+        int size = taskList.getSize();
+        String string = "";
+        for (int i : idOfTaskListToBeDeleted) {
+            string += (i + ", ");
+        }
+        System.out.println("Noted. I've removed these tasks:\n" + string + "\n"
                 + "Now you have " + size + " tasks in the list.");
     }
 

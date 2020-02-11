@@ -4,6 +4,7 @@ import command.AddCommand;
 import command.Command;
 import command.DeleteAllCommand;
 import command.DeleteCommand;
+import command.DeleteSomeCommand;
 import command.DoneCommand;
 import command.ExitCommand;
 import command.FindCommand;
@@ -13,7 +14,11 @@ import dukeexception.DukeException;
 
 import task.Deadline;
 import task.Event;
+import task.Task;
 import task.Todo;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents a Parser class which parses the command and makes sense of the input string into commands.
@@ -47,12 +52,25 @@ public class Parser {
             int doneId = Integer.parseInt(split[1]);
             return new DoneCommand(doneId);
 
+        // 3 cases, delete 2, delete all, delete 1 3 5 7
         case "delete":
             if (isNumeric(split[1])) {
                 int deleteId = Integer.parseInt(split[1]);
                 return new DeleteCommand(deleteId);
             } else if (split[1].equals("all")) {
                 return new DeleteAllCommand();
+            } else {
+                ArrayList<Integer> idOfTaskListToBeDeleted = new ArrayList<>();
+                String stringOfNums = split[1];
+                String[] stringArrayOfNums = stringOfNums.split(" ");
+                System.out.println(stringArrayOfNums.length);
+                for (String s : stringArrayOfNums) {
+                    int num = Integer.parseInt(s);
+                    idOfTaskListToBeDeleted.add(num);
+                }
+                // reverse order of deletion
+                Collections.sort(idOfTaskListToBeDeleted, Collections.reverseOrder());
+                return new DeleteSomeCommand(idOfTaskListToBeDeleted);
             }
 
         case "list":

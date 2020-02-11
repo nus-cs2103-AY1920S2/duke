@@ -33,6 +33,12 @@ public class TaskList {
         tasks.clear();
     }
 
+    public void deleteSome(ArrayList<Integer> idOfTaskListToBeDeleted) {
+        for (int i : idOfTaskListToBeDeleted) {
+            tasks.remove(i - 1);
+        }
+    }
+
     public TaskList find(String keyword) {
         ArrayList<Task> newList = new ArrayList<>();
         for (Task t : tasks) {
