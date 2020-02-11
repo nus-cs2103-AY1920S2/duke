@@ -1,8 +1,12 @@
 package Grapie.Tasks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Task {
     public String description;
     public boolean isDone;
+    public List<String> tagList;
 
     /**
      * Constructor for Grapie.Tasks.Task class.
@@ -12,6 +16,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        tagList = new ArrayList<>();
     }
 
     /**
@@ -27,6 +32,10 @@ public class Task {
         } else {
             return "O"; //done
         }
+    }
+
+    public void addTag(String tag) {
+        tagList.add(tag);
     }
 
     @Override

@@ -115,7 +115,29 @@ public class TaskList {
         } else {
             throw new GrapieExceptions(ErrorMsg.wakarimasenError);
         }
+    }
 
+    public String tagTask(String command) throws IOException {
+        //tag 1 #fun
+        command = command.trim();
+
+        if (!command.trim().equals("")) {
+            String[] splittedStr = command.substring(4, command.length()).split("\\s+");
+            int numDone = Integer.parseInt(splittedStr[0].trim());
+
+            String theTag;
+            if (splittedStr[1].trim().substring(0, 1).equals("#")) {
+                theTag = splittedStr[1];
+            } else {
+                theTag = "#" + splittedStr[1];
+            }
+            storingList.get(numDone - 1).addTag(theTag);
+
+            storage.addTagToDisk(numDone, theTag);
+            String printStr = "Added " + theTag + " to task " + numDone;
+            return printStr;
+        }
+        return "error";
     }
 
     /**
@@ -131,7 +153,7 @@ public class TaskList {
         String strNumberDone = doneTaskStr.substring(5, doneTaskStr.length());
         strNumberDone.replaceAll("\\s+", ""); //remove all white spaces
 
-        int numDone = Integer.parseInt(strNumberDone); //convert to number
+        int numDone = Integer.parseInt(strNumberDone.trim()); //convert to number
 
         if (storingList.size() >= numDone && numDone != 0) {
             if (storingList.get(numDone - 1).isDone) {
@@ -191,20 +213,51 @@ public class TaskList {
      */
     public String findFromList(String command) throws GrapieExceptions {
         //remember to add check for already completed task
-        String keyword = command.substring(5, command.length());
+        String keyword = command.substring(5, command.length()).trim();
 
-        int counter = 1;
-        String finalStr = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < storingList.size(); i++) {
-            Task task = storingList.get(i);
+        String finalStr = "Here are the matching tags in your list:\n";
+        if (keyword.substring(0,1).equals("#")) {
+            //tag
+            int counter = 1;
+            for (int i = 0; i < storingList.size(); i++) {
+                Task task = storingList.get(i);
 
-            if (task.description.contains(keyword)) {
-                finalStr += counter + "." + task + "\n";
-                counter++;
+                for (int j = 0; j < task.tagList.size(); j++) {
+                    String currTag = task.tagList.get(j);
+                    if (currTag.equals(keyword)) {
+                        finalStr += counter + "." + task + "\n";
+                        int numOfTags = storingList.get(i).tagList.size();
+                        if (numOfTags != 0) {
+                            finalStr += "    Tags:";
+                            for (int k = 0; k < numOfTags; k++) {
+                                finalStr += " " + storingList.get(i).tagList.get(k);
+                            }
+                            finalStr += "\n";
+                        }
+                        counter++;
+                    }
+                }
+            }
+        } else {
+            int counter = 1;
+            for (int i = 0; i < storingList.size(); i++) {
+                Task task = storingList.get(i);
+
+                if (task.description.contains(keyword)) {
+                    finalStr += counter + "." + task + "\n";
+                    int numOfTags = storingList.get(i).tagList.size();
+                    if (numOfTags != 0) {
+                        finalStr += "    Tags:";
+                        for (int j = 0; j < numOfTags; j++) {
+                            finalStr += " " + storingList.get(i).tagList.get(j);
+                        }
+                        finalStr += "\n";
+                    }
+                    counter++;
+                }
             }
         }
         return finalStr;
-
     }
 
     /**
@@ -216,6 +269,16 @@ public class TaskList {
 
         for (int i = 1; i <= sizeOfList; i++) {
             stringList = stringList + "" + i + ". " + storingList.get(i - 1) + "\n"; //add tasks
+
+            int numOfTags = storingList.get(i - 1).tagList.size();
+            if (numOfTags != 0) {
+                stringList += "    Tags:";
+                for (int j = 0; j < numOfTags; j++) {
+                    stringList += " " + storingList.get(i - 1).tagList.get(j);
+                }
+
+                stringList += "\n";
+            }
         }
 
         return stringList;

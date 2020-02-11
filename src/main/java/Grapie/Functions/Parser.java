@@ -41,7 +41,27 @@ public class Parser {
             return CommandTypes.Commands.LIST;
         } else {
             //ADD, DONE, DELETE,
-            if (command.length() >= 4 && command.substring(0, 4).equals("done")) {
+            if (command.length() >= 3 && command.substring(0, 3).equals("tag")) {
+                if (command.length() <= 4) {
+                    throw new GrapieExceptions(ErrorMsg.invalidNumberError);
+                } else {
+                    command.trim();
+
+                    String[] splittedStr = command.substring(4, command.length()).split("\\s+");
+
+                    if (splittedStr.length != 2) {
+                        throw new GrapieExceptions(ErrorMsg.wrongTagFormatError);
+                    } else {
+                        boolean isANumber = isNumber(splittedStr[0]);
+                        if (isANumber) {
+                            return CommandTypes.Commands.TAG;
+                        } else {
+                            throw new GrapieExceptions(ErrorMsg.invalidNumberError);
+                        }
+                    }
+                }
+
+            } else if (command.length() >= 4 && command.substring(0, 4).equals("done")) {
                 if (command.length() <= 5) {
                     //no number behind
                     throw new GrapieExceptions(ErrorMsg.invalidNumberError);

@@ -10,6 +10,8 @@ import Grapie.Commands.TaskList;
 import Grapie.Functions.Ui;
 
 import Grapie.Tasks.Task;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -18,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import javafx.scene.image.Image;
+import javafx.util.Duration;
 
 public class Duke {
     private Storage storage;
@@ -44,7 +47,7 @@ public class Duke {
      * @throws GrapieExceptions Throws Grapie.Exceptions.GrapieExceptions.
      */
     public Duke() throws IOException, GrapieExceptions {
-        String filePath = "data/dukeStorage.txt";
+        String filePath = "./data/dukeStorage.txt";
         storingList = new ArrayList<Task>();
         storage = new Storage(filePath, storingList);
         storage.load();
@@ -83,6 +86,10 @@ public class Duke {
 
                 case FIND:
                     result = tasks.findFromList(command);
+                    return result;
+
+                case TAG:
+                    result = tasks.tagTask(command);
                     return result;
 
                 default:
@@ -128,6 +135,11 @@ public class Duke {
             }
         } else {
             result = ui.sayonara();
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> {
+                Platform.exit();
+            });
+            pause.play();
         }
 
         return result;

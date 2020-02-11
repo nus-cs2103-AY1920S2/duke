@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() throws IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greetings(), dukeImage));
     }
-
 
     /**
      * Returns greetings to user.
@@ -48,7 +48,8 @@ public class MainWindow extends AnchorPane {
                 + "                  |_|           \n"
 
 
-                + "What do ya need from me?\n";
+                + "What do ya need from me?\n"
+                + "---------------------------\n";
 
         return intro;
     }

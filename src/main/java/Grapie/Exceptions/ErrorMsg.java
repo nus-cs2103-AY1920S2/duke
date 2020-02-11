@@ -16,6 +16,7 @@ public class ErrorMsg {
             + "your_deadline /by YYYY-MM-DD TTTT";
     public static String emptyKeywordError = "OOPS!!! Please input a valid word behind find!!!";
     public static String noSpaceError = "OOPS!!! Please leave a space between command and details!!";
+    public static String wrongTagFormatError = "OOPS! Tag in wrong format. Please use: tag task_number #your_tag";
 
     public static String taskNumIsAlreadyDone(int num) {
         String errorMsg = "OOPS!!! Task number " + num + " is already done!!!";

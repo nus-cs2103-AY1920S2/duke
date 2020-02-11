@@ -38,9 +38,9 @@ public class Storage {
      *
      * @return Returns an ArrayList of Grapie.Tasks.Task, loaded from the Hard Disk.
      * @throws FileNotFoundException Throws exception.
-     * @throws GrapieExceptions Throws exception.
+     * @throws GrapieExceptions      Throws exception.
      */
-    public List<Task> load() throws FileNotFoundException, GrapieExceptions {
+    public List<Task> load() throws GrapieExceptions, FileNotFoundException {
 
         File myObj = new File(filePath);
         Scanner myReader = new Scanner(myObj);
@@ -48,6 +48,9 @@ public class Storage {
             String data = myReader.nextLine();
 
             /*
+            //tags
+            T | 1 | activity | tag | date
+
             T | 1 | read book
             D | 0 | return book | June 6th
             E | 0 | project meeting | Aug 6th 2-4pm
@@ -61,30 +64,51 @@ public class Storage {
                 dataSplited[i] = dataSplited[i].trim();
             }
 
-            if (dataSplited.length == 3) {
+            if (dataSplited.length == 4) {
                 //is a todo
                 Task task = new Todo(dataSplited[2]);
                 if (dataSplited[1].equals("O")) {
                     task.isDone = true;
                 }
-                storingList.add(task);
 
-            } else if (dataSplited.length == 4) {
+                if (!dataSplited[3].trim().equals("")) {
+                    String[] tagSplit = dataSplited[3].trim().split("\\s+");
+                    for (int i = 0; i < tagSplit.length; i++) {
+                        task.tagList.add(tagSplit[i]);
+                    }
+                }
+
+                storingList.add(task);
+            } else if (dataSplited.length == 5) {
                 //is a event or deadline
                 if (dataSplited[0].equals("E")) {
                     //event
-                    Event task = new Event(dataSplited[2], dataSplited[3]);
+                    Event task = new Event(dataSplited[2], dataSplited[4]);
                     if (dataSplited[1].equals("O")) {
                         task.isDone = true;
+                    }
+
+                    if (!dataSplited[3].trim().equals("")) {
+                        String[] tagSplit = dataSplited[3].trim().split("\\s+");
+                        for (int i = 0; i < tagSplit.length; i++) {
+                            task.tagList.add(tagSplit[i]);
+                        }
                     }
                     storingList.add(task);
 
                 } else {
                     //deadline
-                    Deadline task = new Deadline(dataSplited[2], dataSplited[3]);
+                    Deadline task = new Deadline(dataSplited[2], dataSplited[4]);
                     if (dataSplited[1].equals("O")) {
                         task.isDone = true;
                     }
+                    if (!dataSplited[3].trim().equals("")) {
+                        String[] tagSplit = dataSplited[3].trim().split("\\s+");
+                        for (int i = 0; i < tagSplit.length; i++) {
+                            task.tagList.add(tagSplit[i]);
+                        }
+                    }
+
                     storingList.add(task);
                 }
             }
@@ -108,13 +132,23 @@ public class Storage {
             doneOrNotDone += "X";
         }
 
+        String tags = "";
+        int numTags = task.tagList.size();
+        if (numTags != 0) {
+            for (int i = 0; i < numTags; i++) {
+                tags += " " + task.tagList.get(i);
+            }
+        }
+
+
         String newDescription = "";
         if (type.equals("T")) {
             //todo
-            newDescription += type + " | " + doneOrNotDone + " | " + task.description;
+            newDescription += type + " | " + doneOrNotDone + " | " + task.description + " | " + tags;
         } else {
             //event & deadline
-            newDescription += type + " | " + doneOrNotDone + " | " + task.description + " | " + time;
+            newDescription += type + " | " + doneOrNotDone + " | " + task.description + " | " + tags + " | "
+                    + time;
         }
 
         File file = new File(filePath);
@@ -148,6 +182,40 @@ public class Storage {
 
             if (counter == lineNumber) {
                 data = data.substring(0, 4) + "O" + data.substring(5, data.length());
+            }
+
+            if (counter == 1) {
+                newData += data;
+            } else {
+                newData += "\n" + data;
+            }
+
+            counter++;
+        }
+
+        FileOutputStream fileOut = new FileOutputStream(filePath);
+        fileOut.write(newData.getBytes());
+        fileOut.close();
+    }
+
+    public void addTagToDisk(int lineNumber, String tag) throws IOException {
+        File myObj = new File(filePath);
+        Scanner myReader = new Scanner(myObj);
+
+        String newData = "";
+        int counter = 1;
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            //System.out.println(data);
+
+            if (counter == lineNumber) {
+                String[] dataSplited = data.split("\\|");
+
+                if (dataSplited.length == 4) {
+                    data = dataSplited[0] + "|" + dataSplited[1] + "|" + dataSplited[2] + "|" + dataSplited[3] + " " + tag;
+                } else {
+                    data = dataSplited[0] + "|" + dataSplited[1] + "|" + dataSplited[2] + "|" + dataSplited[3] + " " + tag + "|" + dataSplited[4];
+                }
             }
 
             if (counter == 1) {
