@@ -32,6 +32,11 @@ public class Deadline extends Task{
     }
 
     @Override
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    @Override
     public String saveToText() {
         String output;
         if(this.isDone) {

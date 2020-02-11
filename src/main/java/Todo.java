@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public class Todo extends Task{
@@ -12,6 +13,11 @@ public class Todo extends Task{
             desc += input[i];
         }
         return desc;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return null;
     }
 
     @Override
