@@ -28,8 +28,8 @@ public class AddEventCommand implements Command {
         Task task;
         try {
             String taskTitle = description.substring(0, slashIdx).trim();
-            String dateTime = description.substring(slashIdx + 4).trim();
-            task = new Event(taskTitle, Event.parseDateTime(dateTime));
+            String[] dateTime = description.substring(slashIdx + 4).trim().split(" ");
+            task = new Event(taskTitle, Task.parseDate(dateTime[0]), Task.parseTime(dateTime[1]));
         } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
             throw new WrongEventFormatException();
         }

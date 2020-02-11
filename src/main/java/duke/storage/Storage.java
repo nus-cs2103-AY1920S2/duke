@@ -7,11 +7,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 import duke.exceptions.DukeException;
@@ -69,12 +67,14 @@ public class Storage {
                 task = new Todo(taskDetails[2]);
                 break;
             case 'D':
-                LocalDate date = LocalDate.parse(taskDetails[3], Deadline.dateFormatter);
-                task = new Deadline(taskDetails[2], date);
+                LocalDate deadlineDate = LocalDate.parse(taskDetails[3], Deadline.dateFormatter);
+                task = new Deadline(taskDetails[2], deadlineDate);
                 break;
             case 'E':
-                LocalDateTime localDateTime = LocalDateTime.parse(taskDetails[3], Event.dateTimeFormatter);
-                task = new Event(taskDetails[2], localDateTime);
+                String[] dateTimeString = taskDetails[3].split("-");
+                LocalDate eventDate = LocalDate.parse(dateTimeString[0], Deadline.dateFormatter);
+                LocalTime eventTime = LocalTime.parse(dateTimeString[1], Event.timeFormatter);
+                task = new Event(taskDetails[2], eventDate, eventTime);
                 break;
         }
 
@@ -134,7 +134,8 @@ public class Storage {
             sb.append("D | " + isDone + " | " + deadlineTask.getDescription() + " | " + deadlineTask.getDeadline());
         } else if (task instanceof Event) {
             Event eventTask = (Event) task;
-            sb.append("E | " + isDone + " | " + eventTask.getDescription() + " | " + eventTask.getDateTime());
+            sb.append("E | " + isDone + " | " + eventTask.getDescription() + " | " + eventTask.getDate()
+            + "-" + eventTask.getTime());
         }
         sb.append("\n");
         return sb.toString();

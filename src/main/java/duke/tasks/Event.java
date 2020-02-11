@@ -1,39 +1,26 @@
 /**
- * Event task that specifies a upcoming task that on a certain date and time
+ * Event task that specifies an upcoming task on a certain date and time
  */
 package duke.tasks;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Event extends Task {
 
-    public static String dateTimePattern = "MMM d yyyy HH:mm";
-    public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(Event.dateTimePattern);
-    protected LocalDateTime dateTime;
-
-    /**
-     * Checks If user input date and time is of the correct format
-     * @param inputDateTime Date and time input from user
-     * @return LocalDateTime object of format "yyyy-MM-dd HHmm" if input is of correct format
-     * @throws DateTimeParseException If input format is wrong
-     */
-    public static LocalDateTime parseDateTime(String inputDateTime) throws DateTimeParseException {
-        String inputDateTimePattern = "yyyy-MM-dd HHmm";
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(inputDateTimePattern);
-        LocalDateTime localDateTime = LocalDateTime.parse(inputDateTime, dateTimeFormatter);
-        return localDateTime;
-    }
+    protected LocalDate eventDate;
+    protected LocalTime eventTime;
 
     /**
      * Creates an Event task
      * @param taskTitle Title of upcoming task
-     * @param dateTime Date and time of upcoming task
+     * @param eventDate Date of upcoming task
+     * @param eventTime Time of upcoming task
      */
-    public Event(String taskTitle, LocalDateTime dateTime) {
+    public Event(String taskTitle, LocalDate eventDate, LocalTime eventTime) {
         super(taskTitle);
-        this.dateTime = dateTime;
+        this.eventDate = eventDate;
+        this.eventTime = eventTime;
     }
 
     /**
@@ -42,14 +29,24 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateTimeFormatter.format(dateTime) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + Task.dateFormatter.format(eventDate) + "-"
+                + Task.timeFormatter.format(eventTime) + ")";
     }
 
     /**
-     * Returns a string representation of the date and time of this task
-     * @return A string representation of the date and time of this task
+     * Returns a string representation of the date of this task
+     * @return A string representation of the date of this task
      */
-    public String getDateTime() {
-        return dateTimeFormatter.format(dateTime);
+    public String getDate() {
+        return Task.dateFormatter.format(eventDate);
+    }
+
+    /**
+     * Returns a string representation of the time of this task
+     * @return A string representation of the time of this task
+     */
+    public String getTime() {
+        return Task.timeFormatter.format(eventTime);
     }
 }

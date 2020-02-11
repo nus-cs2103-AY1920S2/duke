@@ -1,5 +1,4 @@
-T | 0 | read book
-D | 0 | return book | Jun 6 2020
-E | 1 | project meeting | Jul 6 2020 15:00
+E | 1 | project meeting | Jul 6 2020-15:00
 D | 0 | Assignment 1 | Aug 30 2020
-D | 0 | Assignment 2 | Sep 20 2020
+D | 0 | return book | Aug 6 2020
+E | 0 | Match | Dec 15 2020-20:00

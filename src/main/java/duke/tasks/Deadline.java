@@ -3,37 +3,20 @@
  */
 package duke.tasks;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 public class Deadline extends Task {
 
-    public static String datePattern = "MMM d yyyy";
-    //public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Deadline.datePattern);
-    //protected Date date;
-    public static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(Deadline.datePattern);
-    protected LocalDate date;
-
-    public static LocalDate parseDate(String inputDate) throws DateTimeParseException {
-        String pattern = "yyyy-MM-dd";
-        DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern(pattern);
-        LocalDate date = LocalDate.parse(inputDate, inputDateFormat);
-        return date;
-    }
+    protected LocalDate deadlineDate;
 
     /**
      * Creates a Deadline task
      * @param taskTitle Title of task to be completed
-     * @param date Deadline of task
+     * @param deadlineDate Deadline of task
      */
-    public Deadline(String taskTitle, LocalDate date) {
+    public Deadline(String taskTitle, LocalDate deadlineDate) {
         super(taskTitle);
-        this.date = date;
+        this.deadlineDate = deadlineDate;
     }
 
     /**
@@ -42,14 +25,15 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateFormatter.format(date) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + dateFormatter.format(deadlineDate) + ")";
     }
 
     /**
-     * Returns a string representation of this task's deadline
-     * @return A string representation of this task's deadline
+     * Returns a string representation of the date of this task
+     * @return A string representation of the date of this task
      */
     public String getDeadline() {
-        return dateFormatter.format(date);
+        return Task.dateFormatter.format(deadlineDate);
     }
 }
