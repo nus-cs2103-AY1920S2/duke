@@ -130,6 +130,7 @@ public class Duke extends Application {
 
     private String getResponse(String input) {
         String output = "";
+        assert output == "" : "output should be empty initially";
         Scanner sc = new Scanner(input);
         String commandWord = sc.next();
         String restOfStr = sc.hasNext() ? sc.nextLine() : "";
@@ -153,6 +154,7 @@ public class Duke extends Application {
      */
     public void echo() throws DukeException {
         String userCommand = ui.getNext();
+        assert !userCommand.equals("") : "user command cannot be empty";
         String output = Parser.parse(userCommand, ui, storage, tasks);
         ui.print(output);
         if (!userCommand.equals("bye")) {
