@@ -46,8 +46,13 @@ public class TaskList {
      * Removes a specified task from the list.
      *
      * @param taskNum Task to be removed from the list.
+     * @throws DukeException If specified task number is out of range of task list.
      */
-    public void deleteFromTasks(int taskNum) {
+    public void deleteFromTasks(int taskNum) throws DukeException {
+        if (taskNum < 0 || taskNum > tasks.size()) {
+            throw new DukeException("Invalid task number.");
+        }
+        assert (taskNum > 0 && taskNum <= tasks.size()) : "Invalid task number.";
         tasks.remove(taskNum - 1);
     }
 
@@ -55,8 +60,13 @@ public class TaskList {
      * Sets a specified task from the list as done.
      *
      * @param taskNum Task number to be set as done.
+     * @throws DukeException If specified task number is out of range of task list.
      */
-    public void setAsDone(int taskNum) {
+    public void setAsDone(int taskNum) throws DukeException {
+        if (taskNum < 0 || taskNum > tasks.size()) {
+            throw new DukeException("Invalid task number.");
+        }
+        assert (taskNum > 0 && taskNum <= tasks.size()) : "Invalid task number.";
         tasks.get(taskNum - 1).markAsDone();
     }
 
@@ -65,8 +75,13 @@ public class TaskList {
      *
      * @param taskNum Task number to be returned.
      * @return Task to be returned.
+     * @throws DukeException If specified task number is out of range of task list.
      */
-    public Task getTask(int taskNum) {
+    public Task getTask(int taskNum) throws DukeException {
+        if (taskNum < 0 || taskNum > tasks.size()) {
+            throw new DukeException("Invalid task number.");
+        }
+        assert (taskNum > 0 && taskNum <= tasks.size()) : "Invalid task number.";
         return tasks.get(taskNum - 1);
     }
 
