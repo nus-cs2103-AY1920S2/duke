@@ -67,43 +67,40 @@ public class Duke extends Application {
 
         Command command;
         switch (commandStr) {
-            case "bye":
-                command = EXIT_COMMAND;
-                break;
-            case "list":
-                command = LIST_COMMAND;
-                break;
-            case "done":
-                command = Command.DONE_COMMAND;
-                break;
-            case "delete":
-                command = Command.DELETE_COMMAND;
-                break;
-            case "todo":
-                command = Command.TODO_COMMAND;
-                break;
-            case "deadline":
-                command = Command.DEADLINE_COMMAND;
-                break;
-            case "event":
-                command = Command.EVENT_COMMAND;
-                break;
-            case "find":
-                command = FIND_COMMAND;
-                break;
-            default:
-                throw new InvalidDukeCommandException();
+        case "bye":
+            command = EXIT_COMMAND;
+            break;
+        case "list":
+            command = LIST_COMMAND;
+            break;
+        case "done":
+            command = DONE_COMMAND;
+            break;
+        case "delete":
+            command = DELETE_COMMAND;
+            break;
+        case "todo":
+            command = TODO_COMMAND;
+            break;
+        case "deadline":
+            command = DEADLINE_COMMAND;
+            break;
+        case "event":
+            command = EVENT_COMMAND;
+            break;
+        case "find":
+            command = FIND_COMMAND;
+            break;
+        default:
+            throw new InvalidDukeCommandException();
         }
-        assert command != null : "Unknown command!";
         return command;
     }
 
     /**
-     * the Main entry point into the Duke program
+     * The Main entry point into the Duke program.
      */
     public String run(String input) {
-
-        String desc = "", timestamp = "";
         String[] separateLine = input.split(" ", 2);
         String commandStr = separateLine[0];
         String parameters = separateLine.length > 1 ? separateLine[1] : "";
@@ -111,29 +108,29 @@ public class Duke extends Application {
 
         try {
             switch (parseCommand(commandStr)) {
-                case EXIT_COMMAND:
-                    handleExit();
-                case LIST_COMMAND:
-                    response = handleList();
-                    break;
-                case FIND_COMMAND:
-                    response = handleFind(parameters);
-                    break;
-                case DONE_COMMAND:
-                    response = handleDone(input);
-                    break;
-                case DELETE_COMMAND:
-                    response = handleDelete(input);
-                    break;
-                case TODO_COMMAND:
-                    response = handleTodo(parameters);
-                    break;
-                case DEADLINE_COMMAND:
-                    response = handleDeadline(parameters);
-                    break;
-                case EVENT_COMMAND:
-                    response = handleEvent(parameters);
-                    break;
+            case EXIT_COMMAND:
+                handleExit();
+            case LIST_COMMAND:
+                response = handleList();
+                break;
+            case FIND_COMMAND:
+                response = handleFind(parameters);
+                break;
+            case DONE_COMMAND:
+                response = handleDone(input);
+                break;
+            case DELETE_COMMAND:
+                response = handleDelete(input);
+                break;
+            case TODO_COMMAND:
+                response = handleTodo(parameters);
+                break;
+            case DEADLINE_COMMAND:
+                response = handleDeadline(parameters);
+                break;
+            case EVENT_COMMAND:
+                response = handleEvent(parameters);
+                break;
             }
         } catch (DukeException e) {
             response = ui.formatError(e.toString());
@@ -145,7 +142,8 @@ public class Duke extends Application {
     private String handleEvent(String parameters) throws InvalidDukeFormatException {
         String[] taskInfo = parameters.split("/at");
 
-        String desc = "", timestamp = "";
+        String desc = "";
+        String timestamp = "";
         if (taskInfo.length > 0) {
             desc = taskInfo[0].trim();
         }
@@ -185,7 +183,6 @@ public class Duke extends Application {
     }
 
     private String handleDelete(String input) throws InvalidDukeFormatException {
-
         String[] splitted = input.split(" ");
         if (splitted.length < 2) {
             throw new InvalidDukeFormatException("The index of a delete cannot be empty.");
@@ -196,7 +193,6 @@ public class Duke extends Application {
         }
         storage.save(tasks);
         return ui.formatRemoveTask(tasks.remove(taskId - 1));
-
     }
 
     private String handleDone(String input) throws InvalidDukeFormatException {
@@ -234,7 +230,6 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 

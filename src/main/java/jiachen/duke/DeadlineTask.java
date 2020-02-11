@@ -3,10 +3,20 @@ package jiachen.duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The type Deadline task.
+ */
 public class DeadlineTask extends Task {
 
     private String toBeDoneBy;
 
+    /**
+     * Instantiates a new Deadline task.
+     *
+     * @param description the description
+     * @param deadline    the deadline
+     * @throws InvalidDukeFormatException the invalid duke format exception
+     */
     public DeadlineTask(String description, String deadline) throws InvalidDukeFormatException {
         super(description);
         this.toBeDoneBy = deadline;
@@ -23,6 +33,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String format() {
-        return "D | " + super.format() + " | " + LocalDateTime.parse(this.toBeDoneBy, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        LocalDateTime dateString = LocalDateTime.parse(this.toBeDoneBy, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        return "D | " + super.format() + " | " + dateString;
     }
 }
