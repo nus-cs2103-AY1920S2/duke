@@ -11,12 +11,8 @@ public class TodoCommand extends Command {
 
     private String taskDescription;
 
-    public TodoCommand(String taskDesc) throws IllegalTextException {
-        try {
-            this.taskDescription = taskDesc.split(" ", 2)[1];
-        } catch (PatternSyntaxException e) {
-            throw new IllegalTextException("Todo command must have a valid description.");
-        }
+    public TodoCommand(String taskDesc) {
+        this.taskDescription = taskDesc;
     }
 
     @Override

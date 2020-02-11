@@ -3,6 +3,8 @@ package duke.parser;
 import duke.command.*;
 import exception.IllegalTextException;
 
+import java.util.regex.PatternSyntaxException;
+
 public class Parser {
 
     public static Command parse(String stringToParse) throws IllegalTextException {
@@ -19,13 +21,21 @@ public class Parser {
         case "delete":
             return new deleteCommand(parseItemNumber(stringToParse));
         case "todo":
-            return new TodoCommand(stringToParse);
+            return new TodoCommand(parseTodoArgs(stringToParse));
         case "event":
-            //return new EventCommand(stringToParse);
+            return new EventCommand(stringToParse);
         case "deadline":
             //return new DeadlineCommand(stringToParse);
         }
         return null;
+    }
+
+    private static String parseTodoArgs(String stringToParse) throws IllegalTextException {
+        try {
+            return stringToParse.split(" ", 2)[1];
+        } catch (PatternSyntaxException e) {
+            throw new IllegalTextException("Todo command must have a valid description.");
+        }
     }
 
     private static String removeExtraWhitespaces(String stringToParse) {
