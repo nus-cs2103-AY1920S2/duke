@@ -4,7 +4,7 @@ import duke.Ui.Ui;
 import duke.storage.TaskStorage;
 import duke.task.Task;
 
-public class listCommand extends Command {
+public class ListCommand extends Command {
 
     @Override
     public String execute(Ui ui, TaskStorage storage) {

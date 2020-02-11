@@ -15,7 +15,7 @@ public class Parser {
         case "bye":
             return new ByeCommand();
         case "list":
-            return new listCommand();
+            return new ListCommand();
         case "done":
             return new doneCommand(parseItemNumber(stringToParse));
         case "delete":
@@ -23,19 +23,49 @@ public class Parser {
         case "todo":
             return new TodoCommand(parseTodoArgs(stringToParse));
         case "event":
-            return new EventCommand(stringToParse);
+            return new EventCommand(parseEventArgs(stringToParse));
         case "deadline":
-            //return new DeadlineCommand(stringToParse);
+            return new DeadlineCommand(parseDeadlineArgs(stringToParse));
         }
         return null;
     }
 
-    private static String parseTodoArgs(String stringToParse) throws IllegalTextException {
+    private static String[] parseDeadlineArgs(String stringToParse) throws IllegalTextException {
+        // Consider an example: "deadline return book /by Sunday"
+        // deadlineArgs = "return book /by Sunday"
+        String deadlineArgs = removeActionKeyword(stringToParse, "deadline");
+        // deadlineArgsArray = ["return book", "Sunday"]
+        String[] deadlineArgsArray = deadlineArgs.split("/by");
+        for (String s : deadlineArgsArray) {
+            s = s.trim();
+        }
+
+        return deadlineArgsArray;
+    }
+
+    private static String[] parseEventArgs(String stringToParse) throws IllegalTextException {
+        // Consider an example: "event project meeting /at mon 2-4pm"
+        // eventArgs = "project meeting /at mon 2-4pm"
+        String eventArgs = removeActionKeyword(stringToParse, "event");
+        // eventArgsArray = ["Project meeting", "mon 2-4pm"]
+        String[] eventArgsArray = eventArgs.split("/at");
+        for (String s : eventArgsArray) {
+            s = s.trim();
+        }
+
+        return eventArgsArray;
+    }
+
+    private static String removeActionKeyword(String stringToParse, String commandType) throws IllegalTextException {
         try {
             return stringToParse.split(" ", 2)[1];
         } catch (PatternSyntaxException e) {
-            throw new IllegalTextException("Todo command must have a valid description.");
+            throw new IllegalTextException(commandType + " command must have a valid description.");
         }
+    }
+
+    private static String parseTodoArgs(String stringToParse) throws IllegalTextException {
+        return removeActionKeyword(stringToParse, "todo");
     }
 
     private static String removeExtraWhitespaces(String stringToParse) {

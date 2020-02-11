@@ -3,9 +3,6 @@ package duke.command;
 import duke.Ui.Ui;
 import duke.storage.TaskStorage;
 import duke.task.Todo;
-import exception.IllegalTextException;
-
-import java.util.regex.PatternSyntaxException;
 
 public class TodoCommand extends Command {
 
