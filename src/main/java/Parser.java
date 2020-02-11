@@ -1,9 +1,15 @@
-package duke;
+package com.duke;
 
-import duke.dukeException.DukeParseException;
-import duke.task.*;
-import duke.commands.*;
+import com.duke.dukeException.DukeParseException;
+import com.duke.task.Task;
+import com.duke.task.Event;
+import com.duke.task.ToDo;
+import com.duke.task.Deadline;
+import com.duke.commands.*;
 
+/**
+ * This class parse raw command string into commands. 
+ */
 public class Parser {
 	public Command parse(String commandText) throws DukeParseException {
 		String[] tokens = commandText.split(" ");

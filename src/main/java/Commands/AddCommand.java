@@ -1,12 +1,15 @@
-package duke.commands;
+package com.duke.commands;
 
-import duke.task.Task;
-import duke.Storage;
-import duke.TaskList;
-import duke.Interpreter;
-import duke.dukeException.DukeParseException;
-import duke.DukeResponse;
+import com.duke.task.Task;
+import com.duke.Storage;
+import com.duke.TaskList;
+import com.duke.Interpreter;
+import com.duke.dukeException.DukeParseException;
+import com.duke.DukeResponse;
 
+/**
+ * this command adds tasks into task list.
+ */
 public class AddCommand extends Command {
 	private Task task;
 	public AddCommand(String commandText, Task task) {

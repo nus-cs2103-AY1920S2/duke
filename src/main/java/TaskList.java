@@ -1,4 +1,5 @@
 package com.duke;
+
 import java.util.ArrayList;
 import java.util.List;
 import com.duke.task.Task;
@@ -11,7 +12,9 @@ import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 import java.net.URL;
 
-
+/**
+ * Store list of current tasks.
+ */
 public class TaskList {
 	private List<Task> containers;
 

@@ -1,11 +1,12 @@
-package duke.task;
+package com.duke.task;
+
 import java.util.List;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import duke.dukeException.DukeParseException;
+import com.duke.dukeException.DukeParseException;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 /**
  * Consist of event description and period of time in which the event happens.

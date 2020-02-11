@@ -1,5 +1,8 @@
-package duke;
+package com.duke;
 
+/**
+ * Response of duke from user requests
+ */
 public class DukeResponse {
 	private String message; 
 

@@ -1,11 +1,14 @@
-package duke.commands;
+package com.duke.commands;
 
-import duke.dukeException.DukeParseException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Interpreter;
-import duke.DukeResponse;
+import com.duke.dukeException.DukeParseException;
+import com.duke.Storage;
+import com.duke.TaskList;
+import com.duke.Interpreter;
+import com.duke.DukeResponse;
 
+/**
+ * This command will delete commands in the task list.
+ */
 public class DeleteCommand extends Command {
 	public DeleteCommand(String commandText) {
 		super(commandText);

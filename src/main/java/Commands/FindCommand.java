@@ -1,13 +1,13 @@
-package duke.commands;
+package com.duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.dukeException.DukeParseException;
+import com.duke.Storage;
+import com.duke.TaskList;
+import com.duke.dukeException.DukeParseException;
+import com.duke.Interpreter;
+import com.duke.task.Task;
+import com.duke.DukeResponse;
 import java.util.ArrayList;
 import java.util.List;
-import duke.Interpreter;
-import duke.task.Task;
-import duke.DukeResponse;
 
 public class FindCommand extends Command {
 	private String keyWord;

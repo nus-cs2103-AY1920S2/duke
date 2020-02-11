@@ -1,8 +1,11 @@
-package duke.task;
+package com.duke.task;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
-import duke.dukeException.DukeParseException;
+import com.duke.dukeException.DukeParseException;
 
+/**
+ * This is TODO task.
+ */
 public class ToDo extends Task {
 	private String signature = "todo";
 	private String separator = "";

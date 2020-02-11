@@ -1,4 +1,4 @@
-package duke;
+package com.duke;
 
 public enum CommandType {
 	BYE, 

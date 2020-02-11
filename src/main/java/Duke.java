@@ -1,17 +1,22 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import duke.task.*;
 import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.File;
-import duke.dukeException.DukeParseException;
-import duke.Interpreter;
-import duke.Storage;
-import duke.TaskList;	
-import duke.Parser;
-import duke.commands.Command;
+import com.duke.task.Task;
+import com.duke.task.Event;
+import com.duke.task.Deadline;
+import com.duke.task.ToDo;
+import com.duke.dukeException.DukeParseException;
+import com.duke.Interpreter;
+import com.duke.Storage;
+import com.duke.TaskList;	
+import com.duke.Parser;
+import com.duke.DialogBox;
+import com.duke.commands.Command;
+import com.duke.DukeResponse;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -24,16 +29,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
-import duke.DialogBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;	
 import javafx.application.Platform;
-import duke.DukeResponse;
 
+/**
+ * Main class Duke. 
+ */
 public class Duke extends Application {
-	static final String separation = "_________________________________________________";
-	static final String greetingMessage = "Salue! Je suis Duke. \nWhat can I do for you?";
-	static final String pathToData = "data/storage.txt";
+	static final String SEPARATION = "_________________________________________________";
+	static final String GREETINGMESSAGE = "Salue! Je suis Duke. \nWhat can I do for you?";
+	static final String PATHTODATA = "data/storage.txt";
 	private Storage storage;
 	private TaskList taskList;
 	private Parser parser;
@@ -45,8 +51,12 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Duke constructor, consisting of storage, UI, ..
+     * @return a new Duke
+     */
 	public Duke() {
-		storage = new Storage(pathToData);
+		storage = new Storage(PATHTODATA);
 		taskList = new TaskList(storage.getData());
 		parser = new Parser();
 	}
@@ -75,10 +85,10 @@ public class Duke extends Application {
 
 	private void printGreeting() {
 		Interpreter.printGreeting();
-		Interpreter.printMessage(greetingMessage);
+		Interpreter.printMessage(GREETINGMESSAGE);
 		Interpreter.printUsage();
 		String text = Interpreter.printGreeting().getMessage() + "\n" 
-						+ Interpreter.printMessage(greetingMessage).getMessage() +  "\n" 
+						+ Interpreter.printMessage(GREETINGMESSAGE).getMessage() +  "\n" 
 						+ Interpreter.printUsage().getMessage() +  "\n"; 
 		Label dukeText = new Label(text);
 		dialogContainer.getChildren().addAll(
@@ -102,7 +112,7 @@ public class Duke extends Application {
 
 	public void run() {
 		Interpreter.printGreeting();
-		Interpreter.printMessage(greetingMessage);
+		Interpreter.printMessage(GREETINGMESSAGE);
 		Interpreter.printUsage();
 
 		Scanner cin = new Scanner(System.in);

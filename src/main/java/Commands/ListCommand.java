@@ -1,10 +1,13 @@
-package duke.commands;
+package com.duke.commands;
 
-import duke.Interpreter;
-import duke.Storage;
-import duke.TaskList;
-import duke.DukeResponse;
+import com.duke.Interpreter;
+import com.duke.Storage;
+import com.duke.TaskList;
+import com.duke.DukeResponse;
 
+/**
+ * This command list all items in the task list. 
+ */
 public class ListCommand extends Command {
 	public ListCommand(String commandText) {
 		super(commandText);
