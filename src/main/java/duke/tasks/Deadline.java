@@ -14,7 +14,7 @@ public class Deadline extends DateTask {
     /** Date of deadline. */
     private LocalDate finishByDate;
     /** Format of LocalDate. */
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
 
     /**
      * Creates a deadline task with the given description and time.

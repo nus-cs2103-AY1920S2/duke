@@ -1,17 +1,7 @@
 package duke;
 
 // packages imports
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddTodoCommand;
-import duke.commands.ByeCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExceptionCommand;
-import duke.commands.FindCommand;
-import duke.commands.FindDateCommand;
-import duke.commands.ListCommand;
-import duke.commands.Command;
+import duke.commands.*;
 import duke.exceptions.DateSearchFormatException;
 import duke.exceptions.EmptySearchException;
 import duke.exceptions.EmptyDescriptionException;
@@ -61,42 +51,45 @@ public class Parser {
         List<String> validatedInput = validateInput(input);
         String action =  validatedInput.remove(0);
         switch (action) {
-        case "list":
-            return new ListCommand(taskList);
-        case "done":
-            return new DoneCommand(taskList, validatedInput);
-        case "delete":
-            return new DeleteCommand(taskList, validatedInput);
-        case "todo":
-            return new AddTodoCommand(taskList, validatedInput);
-        case "event":
-            return new AddEventCommand(taskList, validatedInput);
-        case "deadline":
-            return new AddDeadlineCommand(taskList, validatedInput);
-        case "find":
-            return new FindCommand(taskList, validatedInput);
-        case "date":
-            return new FindDateCommand(taskList, validatedInput);
         case "bye":
             return new ByeCommand();
+        case "date":
+            return new FindDateCommand(taskList, validatedInput);
+        case "deadline":
+            return new AddDeadlineCommand(taskList, validatedInput);
+        case "delete":
+            return new DeleteCommand(taskList, validatedInput);
+        case "done":
+            return new DoneCommand(taskList, validatedInput);
+        case "event":
+            return new AddEventCommand(taskList, validatedInput);
+        case "help":
+            return new HelpCommand();
+        case "find":
+            return new FindCommand(taskList, validatedInput);
+        case "list":
+            return new ListCommand(taskList);
+        case "todo":
+            return new AddTodoCommand(taskList, validatedInput);
         default:
             return new ExceptionCommand(validatedInput);
         }
     }
 
     /**
-     * Validates the input of the user before parsing it as a command.
+     * Validates the input of the user before returning it as a list of details.
      *
      * @param input User input.
-     * @return Necessary details of the user command.
+     * @return List of necessary details of the user command.
      */
-    public List<String> validateInput(String input) {
+    private List<String> validateInput(String input) {
         String action = input.split(" ")[0];
         List<String> data = new ArrayList<>();
         try {
             switch (action) {
             case "list":
             case "bye":
+            case "help":
                 break;
             case "done":
             case "delete":
@@ -208,6 +201,6 @@ public class Parser {
     }
 
     private LocalDate formatDate(String date) throws DateTimeParseException {
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy"));
     }
 }

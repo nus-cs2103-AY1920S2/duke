@@ -15,6 +15,7 @@ public class DateSearchFormatException extends Exception {
     @Override
     public String toString() {
         return "You have entered an invalid time/date format.\n"
-                    + "Please follow the following format: 23:59 28/02/2020\n (padded with zero if necessary).";
+                    + "Please follow the following format: 23:59 28/02/2020\n"
+                    + "(padded with zero if necessary).";
     }
 }

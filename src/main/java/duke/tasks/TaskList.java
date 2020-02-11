@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.ui.Ui;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -11,12 +9,9 @@ import java.util.ArrayList;
 public class TaskList {
     /** List to store tasks. */
     private ArrayList<Task> list;
-    /** Class of formatted user interactions. */
-    private Ui ui;
 
     public TaskList() {
         this.list = new ArrayList<>();
-        this.ui = new Ui();
     }
 
     /**
@@ -96,13 +91,6 @@ public class TaskList {
         }
 
         return dateTasks;
-    }
-
-    /**
-     * Prints all tasks in the list.
-     */
-    public void print() {
-        ui.printList(this.list);
     }
 
     /**

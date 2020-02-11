@@ -2,6 +2,7 @@ package duke;
 
 // packages imports
 import duke.commands.Command;
+import duke.controllers.MainWindow;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -36,8 +37,8 @@ public class Duke {
      * Creates a bot with personalize user interface, storage, and task list.
      * Will create a new save file is there is no existing one.
      */
-    public Duke() {
-        ui = new Ui();
+    public Duke(MainWindow mainWindowController) {
+        ui = new Ui(mainWindowController);
         storage = new Storage();
         taskList = new TaskList();
         parser = new Parser(taskList);
@@ -45,7 +46,7 @@ public class Duke {
         try {
             storage.readSaveFile(taskList);
         } catch (FileNotFoundException ex) {
-            ui.printFormattedOutput("No saved task list found. Creating a new one...");
+            Ui.printOutput("No saved task list found. Creating a new one...");
         }
     }
 

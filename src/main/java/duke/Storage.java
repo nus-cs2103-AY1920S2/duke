@@ -64,7 +64,6 @@ public class Storage {
     public void readSaveFile(TaskList list) throws FileNotFoundException {
         FileReader file = new FileReader(saveFile);
         BufferedReader reader = new BufferedReader(file);
-        Ui ui = new Ui();
 
         try {
             String text = reader.readLine();
@@ -93,7 +92,7 @@ public class Storage {
 
             reader.close();
         } catch (IOException ex) {
-            ui.printFormattedOutput("Corrupted Task");
+            Ui.printOutput("Corrupted Task");
         }
     }
 }

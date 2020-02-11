@@ -1,5 +1,6 @@
 DialogBox {
     -fx-spacing: 10.0;
+    -fx-padding: 10.0;
 }
 
 #dialogContainer {
@@ -20,11 +21,41 @@ DialogBox {
     -fx-border-color: #c2cff2;
 }
 
-#textBox {
-    -fx-border-color: #c2cff2;
-    -fx-border-width: 1;
-}
-
 #sendButton {
     -fx-text-fill: #3659ba;
 }
+
+#userInput {
+    -fx-border-radius: 22;
+    -fx-border-color: #2d3c66;
+    -fx-border-width: 4;
+    -fx-background-color: #137F97;
+    -fx-background-radius: 22;
+    -fx-text-fill: #c2cff2;
+}
+
+#scrollPane {
+    -fx-background-color: #2d3c66;
+}
+
+.track-background {
+    -fx-background-color: #2d3c66;
+}
+
+.track {
+    /*-fx-background-color: #c2cff2;*/
+    -fx-border-radius: 10.0;
+}
+
+.thumb {
+    -fx-background-color: #c2cff2;
+    -fx-background-radius: 10.0;
+}
+
+/*.increment-button {*/
+/*    -fx-fill: #137F97;*/
+/*}*/
+
+/*.decrement-button {*/
+/*    -fx-fill: #137F97;*/
+/*}*/

@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.controllers;
 
 import duke.Duke;
 import javafx.animation.PauseTransition;
@@ -58,15 +58,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         if (input.equals("bye")) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished( event -> stage.close() );
             delay.play();
-//            dialogContainer.getChildren().addAll(
-//                    DialogBox.getUserDialog(input, userImage),
-//                    DialogBox.getDukeDialog("Goodbye!", dukeImage)
-//            );
-//
-//            stage.close();
         }
 
         String response = duke.getResponse(input);

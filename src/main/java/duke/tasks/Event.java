@@ -14,7 +14,7 @@ public class Event extends DateTask {
     /** Date of event. */
     private LocalDate startAtDate;
     /** Format of LocalDate. */
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
 
     /**
      * Creates an event task with the given description and time.
