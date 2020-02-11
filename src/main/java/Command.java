@@ -13,6 +13,7 @@ public abstract class Command {
     public Command(String response) {
 
         this.response = response;
+        assert response != null : "Response cannot be null";
 
     }
 

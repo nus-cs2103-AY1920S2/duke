@@ -16,6 +16,7 @@ public class FindCommand extends Command {
 
         super(response);
         this.keyword = keyword;
+        assert keyword != null : "No Keyword";
 
     }
 
