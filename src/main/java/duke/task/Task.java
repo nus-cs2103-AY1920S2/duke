@@ -4,8 +4,22 @@ import java.io.Serializable;
 
 public abstract class Task implements Serializable {
 
+    public enum Priority {
+        PRIORITY_HIGH,
+        PRIORITY_MEDIUM,
+        PRIORITY_LOW,
+        PRIORITY_DEFAULT
+    }
+
+    public enum TaskType {
+        TASK_TYPE_TODO,
+        TASK_TYPE_EVENT,
+        TASK_TYPE_DEADLINE
+    }
+
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
     /**
      * Constructor of the Task.
@@ -15,6 +29,7 @@ public abstract class Task implements Serializable {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = Priority.PRIORITY_DEFAULT;
     }
 
     /**
@@ -24,6 +39,10 @@ public abstract class Task implements Serializable {
      */
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public void setPriority(Priority newPriority) {
+        this.priority = newPriority;
     }
 
     /**
@@ -46,11 +65,5 @@ public abstract class Task implements Serializable {
     @Override
     public String toString() {
         return getTypeIcon() + getStatusIcon() + " " + description;
-    }
-
-    public enum TaskType {
-        TASK_TYPE_TODO,
-        TASK_TYPE_EVENT,
-        TASK_TYPE_DEADLINE
     }
 }

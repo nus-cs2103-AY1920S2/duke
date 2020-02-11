@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SetPriorityCommand;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -54,6 +55,12 @@ public class Parser {
             return new AddCommand(Task.TaskType.TASK_TYPE_EVENT, args);
         case "delete":
             return new DeleteCommand(operationIndex);
+        case "priority":
+            // TODO: This is disgusting, find a better way to parse arguments
+            String[] extraArgs = args.split(" "); // Possible exception thrown
+            int targetIndex = Integer.parseInt(extraArgs[0]); // Possible exception thrown
+            Task.Priority targetPriority = Task.Priority.valueOf(extraArgs[1]); // Possible exception thrown
+            return new SetPriorityCommand(targetIndex, targetPriority);
         case "done":
             return new DoneCommand(operationIndex);
         default:
