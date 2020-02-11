@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 /**
  * This class contains a list of todo items.
  */
@@ -10,6 +11,10 @@ public class TaskList {
 
     public TaskList() {
         this.count = 0;
+    }
+    public TaskList(ArrayList<Item> items, int count) {
+        this.items = items;
+        this.count =count;
     }
 
     /**
@@ -40,6 +45,22 @@ public class TaskList {
             }
         }
         return temp;
+    }
+
+    public TaskList sortAsc() {
+        ArrayList<Item> sorted = new ArrayList<Item>();
+        sorted.addAll(items);
+        DateCompareAsc compare = new DateCompareAsc();
+        Collections.sort(sorted, compare);
+        return new TaskList(sorted, count);
+    }
+
+    public TaskList sortDes() {
+        ArrayList<Item> sorted = new ArrayList<Item>();
+        sorted.addAll(items);
+        DateCompareDes compare = new DateCompareDes();
+        Collections.sort(sorted, compare);
+        return new TaskList(sorted, count);
     }
 
     @Override

@@ -44,4 +44,8 @@ public class Deadline extends Item {
         String temp = "   [D]" + super.toString() + " (by: " + date + ")\n";
         return temp;
     }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
 }

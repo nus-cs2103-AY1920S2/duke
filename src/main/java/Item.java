@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * This class is parent class of other three classes, mark to be done and delete functions are enabled.
  */
@@ -45,4 +47,9 @@ public abstract class Item {
     public abstract String replace();
 
     public abstract String now();
+
+    public abstract LocalDate getDate();
+
+
+
 }

@@ -42,4 +42,8 @@ public class Event extends Item {
         String temp = "   [E]" + super.toString() + " (at: " + date + ")\n";
         return temp;
     }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
 }

@@ -35,6 +35,10 @@ public class Parser {
                 return list.toString();
             } else if (temp.equals("bye")) {
                 return ui.bye();
+            } else if (temp.equals("sortAsc")) {
+                return list.sortAsc().toString();
+            } else if (temp.equals("sortDes")) {
+                return list.sortDes().toString();
             } else if (tmp[0].equals("done") || tmp[0].equals("delete")) {
                 if (tmp.length < 2) {
                     return ("OOPS!!! The index of a task cannot be empty.");

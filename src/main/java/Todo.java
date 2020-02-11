@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * This class deals with a todo item.
  */
@@ -29,5 +31,9 @@ public class Todo extends Item {
      */
     public String now() {
         return this.toString();
+    }
+
+    public LocalDate getDate() {
+        return LocalDate.now();
     }
 }

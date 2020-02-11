@@ -23,7 +23,9 @@ public class Ui {
                 + "2. deadline xxxx /by YYYY-MM-DD\n"
                 + space + "3. event xxxx /at YYYY-MM-DD\n" + "or enter 'list' to display all items\n"
                 + "or 'delete/done index' for deletion/marked as done\n"
-                + "or find xxxx for search";
+                + "or find xxxx for search\n"
+                + "or sort existing list by enter 'sortAsc' or 'sortDes'\n"
+                + "date of todo items assumed to be today";
         return instruction;
     }
 
