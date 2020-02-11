@@ -22,13 +22,17 @@ public class Duke {
 
     /**
      * Duke object creation, initiate Ui, Parser, TaskList, and Storage.
+     *
+     * @throws IOException If Exception is raised during loading and saving.
      */
-    public Duke() {
+    public Duke() throws IOException{
         ui = new Ui();
         parser = new Parser();
         taskList = new TaskList();
         storage = new Storage(".//saved-tasks.txt");
         gui = new Gui();
+
+        storage.loadBaby(taskList, parser);
     }
 
     /**
@@ -36,13 +40,10 @@ public class Duke {
      *
      * <p>Initiates greeting. Enter a while loop waiting for commands and call respective handlers.
      * Exits when a "bye" command is given.
-     *
-     * @throws IOException If Exception is raised during loading and saving.
      */
-    public void run() throws IOException {
+    public void run() {
         assert ( storage != null && ui != null && parser != null && taskList != null ): "Duke instantiation error";
 
-        storage.loadBaby(taskList, parser);
         ui.greeting();
         ui.showList(taskList.getTaskList(), "Tasks loaded from disk:");
         ui.initPrompt();
@@ -65,10 +66,16 @@ public class Duke {
         ui.bye();
     }
 
-    private String runSingleCommand(String commandString) {
+    /**
+     * Returns the String response of Duke according to a user command.
+     *
+     * @param input input string of user
+     * @return String response of Duke
+     */
+    public String getResponse(String input) {
         String output;
         try {
-            Command command = parser.parse(commandString);
+            Command command = parser.parse(input);
             output = command.execute(taskList, gui);
             storage.saveBaby(taskList.getTaskList());
         } catch (DukeException e) {
@@ -77,10 +84,6 @@ public class Duke {
             output = gui.showUnknownException(e);
         }
         return output;
-    }
-
-    public String getResponse(String input) {
-        return runSingleCommand(input);
     }
 
 }
