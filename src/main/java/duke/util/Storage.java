@@ -63,15 +63,19 @@ public class Storage {
 
     private static Task decodeTaskFromString(String line) {
         String[] words = line.split("\\|");
+        assert words.length >= 3: "Incomplete task record when saving data";
         Task currTask;
         switch (words[0]) {
         case "T":
+            assert words.length >= 3: "Invalid Todo task record when saving data";
             currTask = new Todo(words[2]);
             break;
         case "D":
+            assert words.length >= 4: "Invalid Deadline task record when saving data";
             currTask = new Deadline(words[2], LocalDate.parse(words[3]));
             break;
         case "E":
+            assert words.length >= 4: "Invalid Event task record when saving data";
             currTask = new Event(words[2], LocalDate.parse(words[3]));
             break;
         default:

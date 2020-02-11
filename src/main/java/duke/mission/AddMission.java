@@ -42,6 +42,7 @@ public class AddMission extends Mission {
                 str = ui.showException("Input time should be \" /at yyyy-mm-dd\"");
             }
         }
+        assert str != null : "Incomplete Add Mission";
         return str;
     }
 }
