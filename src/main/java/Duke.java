@@ -56,9 +56,24 @@ public class Duke {
             }
 
             else {
-                taskList.add(new Task(next_cmd));
+                Task t = null;
+                String taskType = next_cmd.split(" ")[0];
+                next_cmd = next_cmd.substring(next_cmd.indexOf(" "));
+                switch (taskType) {
+                    case "todo":
+                        t = new ToDo(next_cmd);
+                        break;
+                    case "event":
+                        t = new Event(next_cmd.split("/at")[0], next_cmd.split("/at")[1]);
+                        break;
+                    case "deadline":
+                        t = new Deadline(next_cmd.split("/by")[0], next_cmd.split("/by")[1]);
+                        break;
+                }
+                taskList.add(t);
                 System.out.println("    ____________________________________________________________\n" +
-                        "      added: "  + next_cmd + "\n" +
+                        "      Got it. I've added this task: \n" + "       " +
+                        t + "\n" + "     Now you have " + taskList.size() + " tasks in the list.\n" +
                         "    ____________________________________________________________");
             }
         }
