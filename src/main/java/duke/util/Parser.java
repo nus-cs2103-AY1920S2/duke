@@ -24,6 +24,7 @@ public class Parser {
         COMMAND_IDENTIFIERS.put("deadline", CommandIdentifier.DEADLINE);
         COMMAND_IDENTIFIERS.put("event", CommandIdentifier.EVENT);
         COMMAND_IDENTIFIERS.put("delete", CommandIdentifier.DELETE);
+        COMMAND_IDENTIFIERS.put("find", CommandIdentifier.FIND);
     }
 
     /**
@@ -59,6 +60,9 @@ public class Parser {
             case EVENT:
                 String[] eventDescriptionAndTime = getTaskDescriptionAndTime(st);
                 return new AddCommand(new Event(eventDescriptionAndTime[0], eventDescriptionAndTime[1]));
+            case FIND:
+                String keyword = getTaskDescription(st);
+                return new FindCommand(keyword);
             default:
                 return new ExitCommand();
             }

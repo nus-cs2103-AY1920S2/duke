@@ -72,11 +72,7 @@ public class TaskList {
             sb.append("There is currently no pending task. " +
                     "Please add some tasks by using the \"todo\", \"event\" or \"deadline\" command\n");
         } else {
-            int index = 0;
-            sb.append("Here are all the tasks in your list:\n");
-            for (Task task : tasks) {
-                sb.append(String.format("%d. ", ++index)).append(task.toString()).append("\n");
-            }
+            sb.append("Here are all the tasks in your list:\n").append(tasksToString(tasks));
         }
         return sb.toString();
     }
@@ -93,5 +89,31 @@ public class TaskList {
         String doneMessage = "Nice! Congratulations for completing this task:\n" + task + "\n";
         storage.updateTaskData(this);
         return doneMessage;
+    }
+
+    public String findTask(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        String findMessage = "";
+        if (matchingTasks.size() == 0) {
+            findMessage = "Sorry, I can't find any task that matches the keyword :(\nMaybe you want to try a different" +
+                    " keyword? :D\n";
+        } else {
+            findMessage = "Here are the matching tasks in your list:\n" + tasksToString(matchingTasks);
+        }
+        return findMessage;
+    }
+
+    private String tasksToString(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        int index = 0;
+        for (Task task : tasks) {
+            sb.append(String.format("%d. ", ++index)).append(task.toString()).append("\n");
+        }
+        return sb.toString();
     }
 }

@@ -16,6 +16,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String getStatusIcon() {
 //        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
         return (isDone ? "✓" : "✘");
@@ -40,4 +44,6 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "]" + description;
     }
+
+
 }
