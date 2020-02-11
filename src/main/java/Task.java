@@ -29,7 +29,6 @@ class Task {
         return (isDone ? "[Y]" : "[N]");
         // The symbols for the check marks and crosses do not seem to work and have been replaced by "Y" and "N" to
         // represent 'Yes' and 'No' respectively.
-
     }
 
     /**

@@ -11,16 +11,10 @@ abstract class Command {
     protected Storage storage;
 
     /**
-     * This method is used to terminate the run() method in the Duke class.
-     *
-     * @return This returns true if the command is an ExitCommand and false otherwise.
+     * This method is used to terminate the run() method in the Duke class if the command
+     * is an exit command.
      */
-    boolean isExit() {
-        if (this instanceof ExitCommand) {
-            return true;
-        }
-        return false;
-    }
+    abstract boolean isExit();
 
     /**
      * This abstract method is inherited by all child classes of the Command class

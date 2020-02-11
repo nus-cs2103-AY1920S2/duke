@@ -37,4 +37,14 @@ class DeleteCommand extends Command {
                 + tasks.getTaskList().size()
                 + " task(s) in the list.");
     }
+
+    /**
+     * Returns true if the command is an ExitCommand and false otherwise.
+     * @return false
+     */
+    @Override
+    boolean isExit() {
+        return false;
+    }
+
 }

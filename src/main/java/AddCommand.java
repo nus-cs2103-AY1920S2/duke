@@ -26,18 +26,29 @@ class AddCommand extends Command {
     void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
             if (this.command.startsWith("deadline")) {
-                String commandWithoutDeadline = this.command.substring(9);
-                String[] commands = commandWithoutDeadline.split("/by");
-                LocalDate localDate = LocalDate.parse(commands[1].trim());
-                Deadline deadline = new Deadline(commands[0], localDate);
-                tasks.getTaskList().add(deadline);
-                storage.save(tasks);
+                String commandWithoutDeadline = this.command.substring(8);
+                String[] commands = commandWithoutDeadline.trim().split("/by");
+                try {
+                    if (commandWithoutDeadline.length() > 0) {
+                        LocalDate localDate = LocalDate.parse(commands[1].trim());
+                        Deadline deadline = new Deadline(commands[0], localDate);
+                        tasks.getTaskList().add(deadline);
+                        storage.save(tasks);
 
-                System.out.println("\n" + "Alright, I've added this task:" + "\n");
-                System.out.println(deadline + "\n");
-                System.out.println("You currently have "
-                        + tasks.getTaskList().size()
-                        + " task(s) in the list.");
+                        System.out.println("\n" + "Alright, I've added this task:" + "\n");
+                        System.out.println(deadline + "\n");
+                        System.out.println("You currently have "
+                                + tasks.getTaskList().size()
+                                + " task(s) in the list.");
+                    } else {
+                        throw new DukeException("");
+                    }
+                } catch (DukeException e ) {
+                    ui.showLine();
+                    System.out.println("There is no valid input after deadline. Please try again.");
+                    ui.showLine();
+                }
+
             } else if (this.command.startsWith("todo")) {
                 String[] commands = this.command.split("todo ");
                 try {
@@ -60,22 +71,42 @@ class AddCommand extends Command {
                     ui.showLine();
                 }
             } else if (this.command.startsWith("event")) {
-                String commandWithoutEvent = command.substring(6);
-                String[] commands = commandWithoutEvent.split("/at");
+                String commandWithoutEvent = command.substring(5);
+                String[] commands = commandWithoutEvent.trim().split("/at");
+                try {
+                    if (commandWithoutEvent.length() > 0) {
+                        LocalDate localDate = LocalDate.parse(commands[1].trim());
+                        Event event = new Event(commands[0], localDate);
+                        tasks.getTaskList().add(event);
+                        storage.save(tasks);
 
-                LocalDate localDate = LocalDate.parse(commands[1].trim());
-                Event event = new Event(commands[0], localDate);
-                tasks.getTaskList().add(event);
-                storage.save(tasks);
-
-                System.out.println("\n" + "Alright, I've added this task:" + "\n");
-                System.out.println(event + "\n");
-                System.out.println("You currently have "
-                        + tasks.getTaskList().size()
-                        + " task(s) in the list.");
+                        System.out.println("\n" + "Alright, I've added this task:" + "\n");
+                        System.out.println(event + "\n");
+                        System.out.println("You currently have "
+                                + tasks.getTaskList().size()
+                                + " task(s) in the list.");
+                    } else {
+                        throw new DukeException("");
+                    }
+                } catch (DukeException e) {
+                    ui.showLine();
+                    System.out.println("There is no valid input after event. Please try again.");
+                    ui.showLine();
+                }
             }
         } catch (DateTimeParseException e) {
             System.out.println("Your date input should be in 'YYYY-MM-DD' format. Please try again.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please check your input to see if it is valid.");
         }
-        }
+    }
+
+    /**
+     * Returns true if the command is an ExitCommand and false otherwise.
+     * @return false
+     */
+    @Override
+    boolean isExit() {
+        return false;
+    }
 }

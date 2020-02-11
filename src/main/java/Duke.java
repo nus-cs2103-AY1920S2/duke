@@ -56,18 +56,21 @@ public class Duke {
      * This method is called to update the Tasks and print outputs based on different user inputs.
      */
     public void run() {
+        assert tasks != null : "The list of tasks should not be null";
+        assert ui != null : "The Ui object should not be null";
+        assert storage != null : "The storage object should not be null";
+
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
-            System.out.println(isExit);
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (IOException e) {
-                ui.showError(e.getMessage());
+            } catch (IOException | DukeException e) {
+                System.out.println(e.getMessage());
             } finally {
                 ui.showLine();
                 if (isExit) {
@@ -95,11 +98,15 @@ public class Duke {
         ByteArrayOutputStream formattedOutput = new ByteArrayOutputStream();
         System.setOut(new PrintStream(formattedOutput));
         String reply = "";
+        assert tasks != null : "The list of tasks should not be null";
+        assert ui != null : "The Ui object should not be null";
+        assert storage != null : "The storage object should not be null";
+
         try {
             Command command = Parser.parse(input);
             command.execute(tasks, ui, storage);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        } catch (IOException | DukeException e) {
+            System.out.println(e.getMessage());
         }
         reply = formattedOutput.toString();
         while (reply.contains(Duke.LINE)) {
@@ -109,5 +116,4 @@ public class Duke {
         System.setOut(System.out);
         return reply;
     }
-
 }
