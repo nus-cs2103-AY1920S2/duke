@@ -31,7 +31,6 @@ public class Duke {
             // Since we can successfully load it, we save all in duke.main.TaskList
             storage.writeTasks(tasks);
         } catch (FileNotFoundException e) {
-            // Load an empty one
             tasks = new TaskList();
             Ui.printLine();
             Ui.indent("It seems that there is no save file in: " + filePath);

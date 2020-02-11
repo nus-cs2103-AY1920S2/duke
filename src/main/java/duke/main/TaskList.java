@@ -18,20 +18,25 @@ public class TaskList {
      */
     public TaskList(List<List<String>> savedTasks) {
         tasks = new ArrayList<>();
+        final int TYPE = 0;
+        final int STATUS = 1;
+        final int DESC = 2;
+        final int ARGS = 3;
+
         for (List<String> savedTask : savedTasks) {
-            String type = savedTask.get(0);
+            String type = savedTask.get(TYPE);
             Task taskObject;
             if (type.equals("D")) {
-                taskObject = new Deadline(savedTask.get(2), savedTask.get(3));
+                taskObject = new Deadline(savedTask.get(DESC), savedTask.get(ARGS));
             } else if (type.equals("E")) {
-                taskObject = new Event(savedTask.get(2), savedTask.get(3));
+                taskObject = new Event(savedTask.get(DESC), savedTask.get(ARGS));
             } else {
                 // type equals ("T")
-                taskObject = new Todo(savedTask.get(2));
+                taskObject = new Todo(savedTask.get(DESC));
             }
             tasks.add(taskObject);
 
-            if (savedTask.get(1).equals("1")) {
+            if (savedTask.get(STATUS).equals("1")) {
                 // That means task was initially done
                 taskObject.markAsDone();
             }
