@@ -17,6 +17,8 @@ final class EventCommand extends Command {
             throw new InvalidUsageException("Usage: event <description> /at <when>");
         }
 
+        assert splitArgs.length == 2 : "There should only be 2 arguments in the split arguments";
+
         this.description = splitArgs[0].trim();
         this.when = Date.fromFormat(splitArgs[1].trim(), Date.DEFAULT_INPUT_FORMAT);
     }

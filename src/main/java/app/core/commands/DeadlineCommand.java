@@ -17,6 +17,8 @@ final class DeadlineCommand extends Command {
             throw new InvalidUsageException("Usage: deadline <description> /by <deadline>");
         }
 
+        assert splitArgs.length == 2 : "There should only be 2 arguments in the split arguments";
+        
         this.description = splitArgs[0].trim();
         this.deadline = Date.fromFormat(splitArgs[1].trim(), Date.DEFAULT_INPUT_FORMAT);
     }

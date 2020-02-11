@@ -22,6 +22,7 @@ public final class ConsoleInterface {
      */
     public ConsoleInterface() {
         this.scanner = new Scanner(System.in);
+        assert this.scanner != null : "The scanner attribute should not be null";
     }
 
     /**

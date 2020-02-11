@@ -21,6 +21,9 @@ public final class CommandManager {
         StringPair tokens = Parser.parse(userInput);
         String command = tokens.getFirstValue();
         String args = tokens.getSecondValue();
+        
+        assert command != null : "Token's command should not be null";
+        assert args != null : "Token's args should not be null";
 
         switch (command) {
         case "bye":
@@ -39,6 +42,8 @@ public final class CommandManager {
             return new DoneCommand(args);
         case "delete":
             return new DeleteCommand(args);
+        case "":
+            throw new InvalidCommandException("The command should not be empty");
         default:
             throw new InvalidCommandException(String.format("The command '%s' is not supported", command));
         }
