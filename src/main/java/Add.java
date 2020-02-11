@@ -8,6 +8,8 @@ public class Add extends Command {
     }
 
     String execute(TaskList tasks, Storage storage) {
+        DetectDuplicates detect = new DetectDuplicates(ob.getTaskName(), ob.getType());
+        detect.removeDuplicates(tasks, storage);
         tasks.getList().add(ob);
         String k = ob.toString();
         if (saved == 0) {
