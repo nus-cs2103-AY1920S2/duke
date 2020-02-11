@@ -40,6 +40,7 @@ public class Storage {
 
     Task eval(String line)throws IOException {
         int i = line.indexOf("|");
+        assert i != -1 : "Error in text file";
         String type = line.substring(0, i);
         switch (type) {
         case "T":

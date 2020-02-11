@@ -35,7 +35,7 @@ test {
     useJUnitPlatform()
 }
 
-
 run {
     standardInput = System.in
+    enableAssertions = true
 }

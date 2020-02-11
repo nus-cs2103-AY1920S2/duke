@@ -12,6 +12,7 @@ public class Duke {
     public Duke() {
         String filePath = new File("").getAbsolutePath();
         int ind = filePath.lastIndexOf("/");
+        assert ind == -1 : "File path is incorrect";
         String path = filePath.substring(0, ind + 1);
         filePath = path.concat("duke.txt");
         storage = new Storage(filePath);
@@ -30,7 +31,7 @@ public class Duke {
      */
     public String getResponse(String fullCommand) throws IOException {
         try {
-            Command c = Parser.parse(0,fullCommand,0);
+            Command c = Parser.parse(0,fullCommand,0, tasks);
             return c.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();

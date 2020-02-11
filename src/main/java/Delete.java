@@ -1,9 +1,9 @@
 public class Delete extends Command {
-    String str;
+    int num;
 
-    Delete(String str) {
+    Delete(int num) {
         super();
-        this.str = str;
+        this.num = num;
     }
 
     /**
@@ -13,7 +13,8 @@ public class Delete extends Command {
      * @param storage Object of type Storage.
      */
     public String execute(TaskList tasks, Storage storage) {
-        int num = Integer.valueOf(str);
+        assert num <= tasks.getList().size() && num >= 0 : "This task number does not exist in the list. "
+                + "Please try again!";
         String s = tasks.getList().get(num - 1).toString();
         tasks.getList().remove(num - 1);
         return "Noted. I've removed this task:\n" + s
