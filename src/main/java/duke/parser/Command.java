@@ -70,6 +70,7 @@ class AddTaskCommand extends Command {
             storage.save(tasks.getTaskList());
             return true;
         } else {
+            ui.respond(UiText.dunno);
             return false;
         }
     }
@@ -82,11 +83,16 @@ class ListCommand extends Command {
 
     @Override
     public boolean execute(TaskList tasks, UiText ui, Storage storage) {
-        List<Task> lst = tasks.getTaskList();
-        ui.start("Here are the tasks in your list:");
-        ui.respondLine(lst.stream().map(x -> "" + (lst.indexOf(x) + 1) + "." + x).collect(Collectors.toList()));
-        ui.over();
-        return true;
+        try {
+            List<Task> lst = tasks.getTaskList();
+            ui.start("Here are the tasks in your list:");
+            ui.respondLine(lst.stream().map(x -> "" + (lst.indexOf(x) + 1) + "." + x).collect(Collectors.toList()));
+            ui.over();
+            return true;
+        } catch (Exception e) {
+            ui.respond(UiText.dunno);
+            return false;
+        }
     }
 }
 
@@ -97,11 +103,16 @@ class FindCommand extends Command {
 
     @Override
     public boolean execute(TaskList tasks, UiText ui, Storage storage) {
-        List<Task> lst = tasks.find(this.terms.next());
-        ui.start("Here are the matching tasks in your list:");
-        ui.respondLine(lst.stream().map(x -> "" + (lst.indexOf(x) + 1) + "." + x).collect(Collectors.toList()));
-        ui.over();
-        return true;
+        try {
+            List<Task> lst = tasks.find(this.terms.next());
+            ui.start("Here are the matching tasks in your list:");
+            ui.respondLine(lst.stream().map(x -> "" + (lst.indexOf(x) + 1) + "." + x).collect(Collectors.toList()));
+            ui.over();
+            return true;
+        } catch (Exception e) {
+            ui.respond(UiText.dunno);
+            return false;
+        }
     }
 }
 
@@ -112,11 +123,16 @@ class DeleteCommand extends Command {
 
     @Override
     public boolean execute(TaskList tasks, UiText ui, Storage storage) {
-        int num = Integer.parseInt(this.terms.next()) - 1;
-        ui.respond("Got it. I've removed this task:", "  " + tasks.remove(num).toString(),
-                "Now you have " + tasks.count() + " tasks in the list.");
-        storage.save(tasks.getTaskList());
-        return true;
+        try {
+            int num = Integer.parseInt(this.terms.next()) - 1;
+            ui.respond("Got it. I've removed this task:", "  " + tasks.remove(num).toString(),
+                    "Now you have " + tasks.count() + " tasks in the list.");
+            storage.save(tasks.getTaskList());
+            return true;
+        } catch (Exception e) {
+            ui.respond(UiText.dunno);
+            return false;
+        }
     }
 }
 
@@ -127,11 +143,16 @@ class MarkAsDoneCommand extends Command {
 
     @Override
     public boolean execute(TaskList tasks, UiText ui, Storage storage) {
-        int num = Integer.parseInt(this.terms.next()) - 1;
-        tasks.get(num).setToDone();
-        ui.respond(UiText.taskDoneNote, tasks.get(num).toString());
-        storage.save(tasks.getTaskList());
-        return true;
+        try {
+            int num = Integer.parseInt(this.terms.next()) - 1;
+            tasks.get(num).setToDone();
+            ui.respond(UiText.taskDoneNote, tasks.get(num).toString());
+            storage.save(tasks.getTaskList());
+            return true;
+        } catch (Exception e) {
+            ui.respond(UiText.dunno);
+            return false;
+        }
     }
 }
 
@@ -142,8 +163,13 @@ class ExitCommand extends Command {
 
     @Override
     public boolean execute(TaskList tasks, UiText ui, Storage storage) {
-        ui.respond(UiText.bye);
-        System.exit(0);
-        return true;
+        try {
+            ui.respond(UiText.bye);
+            System.exit(0);
+            return true;
+        } catch (Exception e) {
+            ui.respond(UiText.dunno);
+            return false;
+        }
     }
 }

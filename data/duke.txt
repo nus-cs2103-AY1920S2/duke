@@ -1,5 +1,2 @@
 T,false,shit
 T,false,haha
-D,by:, Sun,false,nanv
-T,false,ahhah
-T,false,shinva
