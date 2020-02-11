@@ -1,12 +1,12 @@
 package e0148811.duke;
 
 public class Ui {
-    final String logo = " ____        _        \n"
+    static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    final String FORMAT_CORRECTION = "Invalid format for the instruction you gave.\n"
+    static final String FORMAT_CORRECTION = "Invalid format for the instruction you gave.\n"
             + "The correct format should be ";
 
     public void showLoadingError() {
@@ -15,7 +15,7 @@ public class Ui {
     }
 
     public void showLogo() {
-        System.out.println(logo);
+        System.out.println(LOGO);
     }
 
     public void greet() {

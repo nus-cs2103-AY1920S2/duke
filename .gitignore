@@ -32,3 +32,6 @@ gradlew
 gradlew.bat
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
+backup/test/build.gradle
+backup/test/java/e0148811/duke/DeadlineTest.java
+backup/test/java/e0148811/duke/TaskListTest.java

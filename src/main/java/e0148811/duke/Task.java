@@ -1,8 +1,8 @@
 package e0148811.duke;
 
 public class Task {
-    static String TICK = "✔";
-    static String CROSS = "✘";
+    static String DONE = "Done";
+    static String NOT_DONE = "Not Done";
     private boolean isDone;
     private String task;
 
@@ -22,9 +22,9 @@ public class Task {
     @Override
     public String toString() {
         if (isDone) {
-            return "[" + Task.TICK + "] " + task;
+            return "[" + Task.DONE + "] " + task;
         } else {
-            return "[" + Task.CROSS + "] " + task;
+            return "[" + Task.NOT_DONE + "] " + task;
         }
     }
 
