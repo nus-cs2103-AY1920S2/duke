@@ -30,14 +30,6 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns boolean true if command exits the program, false if otherwise.
-     * @return boolean.
-     */
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Checks command for valid index number.
      * @param tasks list of tasks.
      * @throws DukeException if user input does not follow input format.
@@ -45,7 +37,7 @@ public class DeleteCommand extends Command {
     public void checkDeleteException(TaskList tasks) throws DukeException {
         // list has 5 items, tasks.size() = 5, this.index max = 4
         if (tasks.size() <= this.index) {
-            throw new DukeException("☹ OOPS!!! Task " + this.index + " does not exist.\n");
+            throw new DukeException("☹ OOPS!!! Task " + (this.index + 1) + " does not exist.\n");
         }
     }
 

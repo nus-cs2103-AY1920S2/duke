@@ -30,14 +30,6 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Returns a boolean that determines if command exits the program.
-     * @return boolean.
-     */
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Checks command for valid index number.
      * @param tasks list of tasks.
      * @throws DukeException if user input does not follow input format.
@@ -45,7 +37,7 @@ public class DoneCommand extends Command {
     public void checkDoneException(TaskList tasks) throws DukeException {
         // list has 5 items, tasks.size() = 5, this.index max = 4
         if (tasks.size() <= this.index) {
-            throw new DukeException("☹ OOPS!!! Task " + this.index + " does not exist.\n");
+            throw new DukeException("☹ OOPS!!! Task " + (this.index + 1) + " does not exist.\n");
         }
     }
 

@@ -27,12 +27,4 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         return tasks.find(description);
     }
-
-    /**
-     * Returns a boolean that determines if command exits the program.
-     * @return boolean.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }
