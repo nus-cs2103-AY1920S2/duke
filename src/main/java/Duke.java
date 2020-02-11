@@ -45,6 +45,10 @@ public class Duke {
                 String keyword = this.scanner.nextLine();
                 output = this.ui.showSearchResults(this.tracker, keyword);
             } else {
+                boolean isRemainingCommands = command.getCommand().equals("todo")
+                        || command.getCommand().equals("event") || command.getCommand().equals("deadline");
+                assert isRemainingCommands;
+
                 // InvocationTargetException
                 Parser content;
 

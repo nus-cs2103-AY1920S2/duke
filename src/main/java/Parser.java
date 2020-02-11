@@ -41,6 +41,8 @@ public class Parser {
                 String [] deadlineArray = content.split(" /by ");
                 this.task = new Deadline(deadlineArray[0].substring(1), deadlineArray[1]);
                 break;
+            default:
+                assert false : command.getCommand();
             }
         }
     }

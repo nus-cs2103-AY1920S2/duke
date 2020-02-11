@@ -32,6 +32,7 @@ public class Ui {
     }
 
     public String showDone(Tracker tracker, int index, Storage storage) {
+        assert index <= tracker.getTotalTasks(): "Index given exceeds total tasks";
         String output = "Nice! I've marked this task as done\n";
         tracker.markDone(index);
         output += "  " + tracker.showList().get(index);
@@ -41,6 +42,7 @@ public class Ui {
     }
 
     public String showDelete(Tracker tracker, int index, Storage storage) {
+        assert index <= tracker.getTotalTasks(): "Index given exceeds total tasks";
         String output = "Noted. I've removed this task:\n";
         output += "  " + tracker.showList().get(index);
         tracker.delete(index);
