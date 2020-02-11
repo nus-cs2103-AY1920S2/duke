@@ -10,6 +10,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public void snooze(String by) throws DukeException {
+        throw new DukeException("A todo does not have a deadline, and therefore cannot be snoozed!");
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

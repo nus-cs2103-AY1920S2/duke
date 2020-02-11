@@ -21,6 +21,15 @@ public class Task {
     }
 
     /**
+     * Snoozes the task
+     * @param by String of new timing
+     * @throws DukeException if task cannot be snoozed.
+     */
+    public void snooze(String by) throws DukeException {
+
+    }
+
+    /**
      * Returns status icon of task.
      *
      * @return Y if task is done, and N if not.
