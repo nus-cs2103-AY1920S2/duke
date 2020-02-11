@@ -7,6 +7,9 @@
 /.gradle/
 /build/
 src/main/resources/docs/
+src/main/resources/
+/data/
+/text-ui-test/
 
 # MacOS custom attributes files created by Finder
 .DS_Store

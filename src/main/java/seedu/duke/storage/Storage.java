@@ -16,16 +16,16 @@ import java.util.List;
  * Creates a hard disk that allows user to add, delete, or modify the content of the file.
  */
 public class Storage {
-    String path;
+    String filePath;
     List<Task> tasks;
 
     /**
      * Creates a hard disk to store and load the user's task list.
      *
-     * @param path Relative path to the file that is being opened.
+     * @param filePath Relative path to the file that is being opened.
      */
-    public Storage(String path) {
-        this.path = path;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Storage {
     public List<Task> load() throws IOException, InvalidTaskInputException, InvalidDateException {
         tasks = new ArrayList<>();
         String inputLine;
-        File file = new File(path);
+        File file = new File(filePath);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         while ((inputLine = br.readLine()) != null) {
@@ -74,7 +74,7 @@ public class Storage {
 
     public void deleteAllInStorage() throws IOException {
         String data = "";
-        FileOutputStream fileOutputStr = new FileOutputStream(path);
+        FileOutputStream fileOutputStr = new FileOutputStream(filePath);
         fileOutputStr.write(data.getBytes());
         fileOutputStr.close();
     }
@@ -188,7 +188,7 @@ public class Storage {
      * @throws IOException If an input or output exception occurred.
      */
     public void addToStorage(Task task) throws IOException {
-        File file = new File(path);
+        File file = new File(filePath);
         FileWriter fw = new FileWriter(file, true);
         BufferedWriter bw = new BufferedWriter(fw);
         String data = "";
@@ -220,7 +220,7 @@ public class Storage {
      * @throws IOException If an input or output exception occurred.
      */
     public void changeToStorage(int index) throws IOException {
-        File file = new File(path);
+        File file = new File(filePath);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
 
@@ -241,7 +241,7 @@ public class Storage {
             counter++;
         }
 
-        FileOutputStream fileOutputStr = new FileOutputStream(path);
+        FileOutputStream fileOutputStr = new FileOutputStream(filePath);
         fileOutputStr.write(data.getBytes());
         fileOutputStr.close();
     }
@@ -253,7 +253,7 @@ public class Storage {
      * @throws IOException If an input or output exception occurred.
      */
     public void deleteInStorage(int index) throws IOException {
-        File file = new File(path);
+        File file = new File(filePath);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
 
@@ -274,7 +274,7 @@ public class Storage {
             counter++;
         }
 
-        FileOutputStream fileOutputStr = new FileOutputStream(path);
+        FileOutputStream fileOutputStr = new FileOutputStream(filePath);
         fileOutputStr.write(data.getBytes());
         fileOutputStr.close();
     }
