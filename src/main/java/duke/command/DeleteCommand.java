@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.gui.Gui;
 import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
@@ -13,14 +14,25 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
-    @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public Task delete(TaskList taskList) {
         try {
             Task task = taskList.getTaskList().get(index);
             taskList.getTaskList().remove(task);
-            ui.showDelete(task, taskList.getTaskList());
+            return task;
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(Integer.toString(index + 1));
         }
+    }
+
+    @Override
+    public void execute(TaskList taskList, Ui ui) {
+        Task task = delete(taskList);
+        ui.showDelete(task, taskList.getTaskList());
+    }
+
+    @Override
+    public String execute(TaskList taskList, Gui gui) {
+        Task task = delete(taskList);
+        return gui.showDelete(task, taskList.getTaskList());
     }
 }

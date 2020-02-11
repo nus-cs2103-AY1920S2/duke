@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.gui.Gui;
 import duke.task.Event;
 import duke.TaskList;
 import duke.Ui;
@@ -20,5 +21,12 @@ public class AddEventCommand extends Command {
         Event task = new Event(description, time);
         taskList.addTask(task);
         ui.showAdd(task, taskList.getTaskList());
+    }
+
+    @Override
+    public String execute(TaskList taskList, Gui gui) {
+        Event task = new Event(description, time);
+        taskList.addTask(task);
+        return gui.showAdd(task, taskList.getTaskList());
     }
 }

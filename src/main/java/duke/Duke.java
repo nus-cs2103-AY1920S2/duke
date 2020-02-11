@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.gui.Gui;
 
 /**
  * Class Duke, the driver class of the program.
@@ -13,6 +14,7 @@ public class Duke {
     private Parser parser;
     private TaskList taskList;
     private Storage storage;
+    private Gui gui;
 
     public static void main(String[] args) throws IOException {
         new Duke().run();
@@ -26,6 +28,7 @@ public class Duke {
         parser = new Parser();
         taskList = new TaskList();
         storage = new Storage(".//saved-tasks.txt");
+        gui = new Gui();
     }
 
     /**
@@ -62,8 +65,22 @@ public class Duke {
         ui.bye();
     }
 
+    private String runSingleCommand(String commandString) {
+        String output;
+        try {
+            Command command = parser.parse(commandString);
+            output = command.execute(taskList, gui);
+            storage.saveBaby(taskList.getTaskList());
+        } catch (DukeException e) {
+            output = gui.showException(e);
+        } catch (Exception e) {
+            output = gui.showUnknownException(e);
+        }
+        return output;
+    }
+
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return runSingleCommand(input);
     }
 
 }

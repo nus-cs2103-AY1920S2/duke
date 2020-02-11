@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.gui.Gui;
 import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
@@ -14,14 +15,25 @@ public class SearchCommand extends Command {
         this.searchKey = searchKey;
     }
 
-    @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public ArrayList<Task> search(TaskList taskList) {
         ArrayList<Task> tasksWithKey = new ArrayList<>();
         for (Task t : taskList.getTaskList()) {
             if (t.toString().contains(searchKey)) {
                 tasksWithKey.add(t);
             }
         }
+        return tasksWithKey;
+    }
+
+    @Override
+    public void execute(TaskList taskList, Ui ui) {
+        ArrayList<Task> tasksWithKey = search(taskList);
         ui.showList(tasksWithKey, "Here are the tasks that contains '" + searchKey + "' in your list:");
+    }
+
+    @Override
+    public String execute(TaskList taskList, Gui gui) {
+        ArrayList<Task> tasksWithKey = search(taskList);
+        return gui.showList(tasksWithKey, "Here are the tasks that contains '" + searchKey + "' in your list:");
     }
 }
