@@ -33,8 +33,9 @@ public enum DukeCommand {
             taskToBeCompleted.taskIsDone(); // Mark this task as done
 
             // Asserting the task, check if it is done
-            assert taskToBeCompleted.getStatusIcon() == "[Y]" : "Task is not made done";
+            assert taskToBeCompleted.getStatusIcon() == "Y" : "Task is not made done";
 
+            storage.store(list, ui);
             // Show message to user
             // Indicate that task is done
             ui.doneMessage(taskToBeCompleted);
@@ -60,48 +61,25 @@ public enum DukeCommand {
 
             DateTimeFormatter formatdate = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
+            DukeTimeFormatter timeformat = new DukeTimeFormatter();
+            DateTimeValidator validator = new DateTimeValidator();
             try {
-                if (strarr[1].equals("")) {
-                    throw new DukeException("Please enter Date and Time!");
-                }
-                // Translating input date to the form of "MM d yyyy"
                 String[] inputdate = (strarr[1]).split("\\s+", 2);
 
-                LocalDate date = LocalDate.parse(inputdate[0],
-                        formatdate.withResolverStyle(ResolverStyle.STRICT));
+                inputdate[0] = validator.DateValidator(strarr[1]);
 
-                // Format it to english. For example, 3 Oct 2019
-                inputdate[0] = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-
-
-                // Time validation
-                if ((inputdate[1].toCharArray()).length != 4)
+                // Time Validation
+                if (validator.isTwentyFourHourFormat(inputdate[1]))
                     throw new DukeException("Please enter time in the form of 24 hour format!");
                 int dateInt = Integer.parseInt(inputdate[1]);
                 int timeTest = dateInt % 100;
+
                 // Check if the minute is valid
-                if ((timeTest > 60 || timeTest < 0) || (dateInt > 2359 || dateInt < 0))
+                if (validator.isValidTime(timeTest, dateInt))
                     throw new DukeException("Invalid time!");
 
-                String time = "";
-
-                // Translating the time from 24-hour format to
-                // AM/PM format
-                if (dateInt < 1300){
-                    time = timeTest < 10 ? time + "0" : time;
-
-                    String hour = dateInt < 100 ? "12" : Integer.toString(dateInt / 100);
-                    String minute = Integer.toString(timeTest);
-
-                    time = dateInt < 1200 ? hour + ":" + time + minute + "am" :
-                            hour + ":" + time + minute + "pm";
-                } else {
-                    time = (dateInt % 100) < 10 ? time + "0" : time;
-                    String hour = Integer.toString((dateInt / 100) - 12);
-                    String minute = Integer.toString(timeTest);
-                    time = hour + ":" + time + minute + "pm";
-                }
-                inputdate[1] = time;
+                // Convert time to AM/PM format
+                inputdate[1] = timeformat.toAMPMFormat(timeTest, dateInt);
 
                 String newstr = String.join(" ", inputdate);
                 list.add(new Deadline(s1.substring(9, limit), newstr));
@@ -124,52 +102,30 @@ public enum DukeCommand {
             String[] arr = s1.split("\\s+", 2);
             int dateindex = arr[1].lastIndexOf("/at");
             String substr = arr[1].substring(dateindex);
+
+            // Separating the description and the date & time
             String[] strarr = substr.split("\\s+", 2);
 
             DateTimeFormatter formatdate = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-
+            DukeTimeFormatter timeformat = new DukeTimeFormatter();
+            DateTimeValidator validator = new DateTimeValidator();
             try {
-                if (strarr[1].equals("")) {
-                    throw new DukeException("Please enter date and time!");
-                }
-
-                // Translating input date to the form of "MM d yyyy"
                 String[] inputdate = (strarr[1]).split("\\s+", 2);
 
-                LocalDate date = LocalDate.parse(inputdate[0],
-                        formatdate.withResolverStyle(ResolverStyle.STRICT));
-
-                // Format it to english. For example, 3 Oct 2019
-                inputdate[0] = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-
+                inputdate[0] = validator.DateValidator(strarr[1]);
 
                 // Time Validation
-                if ((inputdate[1].toCharArray()).length != 4)
+                if (validator.isTwentyFourHourFormat(inputdate[1]))
                     throw new DukeException("Please enter time in the form of 24 hour format!");
                 int dateInt = Integer.parseInt(inputdate[1]);
                 int timeTest = dateInt % 100;
+
                 // Check if the minute is valid
-                if ((timeTest > 60 || timeTest < 0) || (dateInt > 2359 || dateInt < 0))
+                if (validator.isValidTime(timeTest, dateInt))
                     throw new DukeException("Invalid time!");
 
-                String time = "";
-
-                // Translating the time from 24-hour format to
-                // AM/PM format
-                if (dateInt < 1300){
-                    time = timeTest < 10 ? time + "0" : time;
-
-                    String hour = dateInt < 100 ? "12" : Integer.toString(dateInt / 100);
-                    String minute = Integer.toString(timeTest);
-                    time = dateInt < 1200 ? hour + ":" + time + minute + "am" :
-                            hour + ":" + time + minute + "pm";
-                } else {
-                    time = (dateInt % 100) < 10 ? time + "0" : time;
-                    String hour = Integer.toString((dateInt / 100) - 12);
-                    String minute = Integer.toString(timeTest);
-                    time = hour + ":" + time + minute + "pm";
-                }
-                inputdate[1] = time;
+                // Convert time to AM/PM format
+                inputdate[1] = timeformat.toAMPMFormat(timeTest, dateInt);
 
                 String newstr = String.join(" ", inputdate);
                 list.add(new Event(s1.substring(6, limit), newstr));

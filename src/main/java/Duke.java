@@ -90,6 +90,7 @@ public class Duke {
             line = sc.nextLine();
         }
 
+        storage.store(tasks, ui);
         // Say 'bye' to the user
         ui.exit();
     }

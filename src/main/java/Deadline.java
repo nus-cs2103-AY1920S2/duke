@@ -1,7 +1,8 @@
 /**
  * Deadline Class.
  * Deadline Class is a subclass of Task Class. It stores the description of this instance
- * as well as the date and time.
+ * as well as the date and time. The only difference from the Event task is that it
+ * make known to the user of what needs to be done before the date.
  *
  * @author Amos Cheong
  */
@@ -14,28 +15,14 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    /**
-     * Get the description of this Deadline object.
-     * @return String description of this Deadline object.
-     */
     public String getDesc() {
         return super.description;
     }
 
-    /**
-     * Get the date and time of this Deadline object.
-     * @return String date and time.
-     */
     public String getDate() {
         return by;
     }
 
-    /**
-     * Get the type of this object.
-     * Used when outputting to user.
-     *
-     * @return String The object type.
-     */
     public String getType() {
         return "[D]";
     }

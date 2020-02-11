@@ -34,7 +34,7 @@ public class Storage {
         String currentline = reader.readLine();
 
         while (currentline != null) {
-            String[] arr = currentline.split(" ", 3);
+            String[] arr = currentline.split(" ", 4);
 
             String expression = arr[0];
 
@@ -43,13 +43,22 @@ public class Storage {
             // the list.
             switch (expression) {
             case "[E]":
-                Tasklist.add(new Event(arr[1], arr[2]));
+                Event eventTask = new Event(arr[2], arr[3]);
+                if (arr[1].equals("Y"))
+                    eventTask.taskIsDone();
+                Tasklist.add(eventTask);
                 break;
             case "[D]":
-                Tasklist.add(new Deadline(arr[1], arr[2]));
+                Deadline deadlineTask = new Deadline(arr[2], arr[3]);
+                if (arr[1].equals("Y"))
+                    deadlineTask.taskIsDone();
+                Tasklist.add(deadlineTask);
                 break;
             case "[T]":
-                Tasklist.add(new Todo(arr[1]));
+                Todo TodoTask = new Todo(arr[2]);
+                if (arr[1].equals("Y"))
+                    TodoTask.taskIsDone();
+                Tasklist.add(TodoTask);
                 break;
             }
 
@@ -76,11 +85,13 @@ public class Storage {
             for (Task task : alltasks.getListOfTask()) {
                 if (task.getType().equals("[T]")) {
                     // Todo objects
-                    line = "[T] " + task.getDesc();
+                    line = "[T] " + task.getStatusIcon() + " " + task.getDesc();
                 } else {
                     // Deadline/Event objects
-                    line = task.getType() + " " + task.getDesc() + " " + task.getDate();
+                    line = task.getType() + " " + task.getStatusIcon() + " " +
+                            task.getDesc() + " " + task.getDate();
                 }
+
                 writer.write(line);
                 writer.newLine();
                 line = "";
