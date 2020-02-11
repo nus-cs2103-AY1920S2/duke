@@ -11,6 +11,7 @@ public class Event extends Task {
      */
     public Event(String[] description) {
         super(description[0]);
+        assert description.length > 1 : "description is not of the right format";
         at = (description[1].split(" ", 2))[1];
         modifyDateFormat();
     }
@@ -28,6 +29,7 @@ public class Event extends Task {
     public Event(String description, String atDate, boolean isDone) {
         super(description, isDone);
         at = atDate;
+        modifyDateFormat();
     }
 
     @Override
@@ -38,6 +40,6 @@ public class Event extends Task {
     @Override
     public String addToFile() {
         //format to be added to file
-        return "E | " + super.addToFile() + " | " + parsedAt;
+        return "E | " + super.addToFile() + " | " + at;
     }
 }
