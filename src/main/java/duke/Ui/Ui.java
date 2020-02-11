@@ -1,20 +1,17 @@
 package duke.Ui;
 
-import duke.command.IllegalCommandException;
-
 public class Ui {
 
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+    public static String showWelcomeMessage() {
+        String welcomeMessage = "Hello! I'm Duke\n" + "What can I do for you?";
+        return welcomeMessage;
     }
 
-    public String showError() {
-        return new IllegalCommandException().getMessage();
+    public String showByeMessage() {
+        return "Bye. Hope to see you again soon!";
+    }
+
+    public String showErrorMessage(Exception e) {
+        return e.getMessage();
     }
 }

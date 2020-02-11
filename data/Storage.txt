@@ -1,2 +1,4 @@
-[E][✓] event project meeting (at: Mon 2-4pm)
-[T][✘] kill billworthson
+[T][?] borrow book
+[E][?] project meeting  (at:  mon 2-4pm)
+[T][?] borrow book
+[D][?] return book  (by:  Sunday)

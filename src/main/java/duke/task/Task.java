@@ -30,8 +30,6 @@ public class Task {
         return t.description.equals(this.description) && (Boolean.compare(t.isDone, this.isDone)==0);
     }
 
-    public static Task createTask(String[] commandArgs) throws IllegalArgumentException {return null;};
-
     public char getStatusIcon() {
         return (isDone ? Task.TICK : Task.CROSS); //return tick or X symbols
     }

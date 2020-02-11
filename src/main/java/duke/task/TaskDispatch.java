@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.command.IllegalCommandException;
+import exception.IllegalCommandException;
 
 public interface TaskDispatch {
 

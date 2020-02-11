@@ -1,6 +1,6 @@
 package duke.storage;
 
-import duke.command.IllegalCommandException;
+import exception.IllegalCommandException;
 import duke.task.Task;
 import duke.task.TaskDispatch;
 
@@ -42,7 +42,7 @@ public class TaskStorage {
         return this.taskList;
     }
 
-    public void addToTaskList(Task newTask, String nextInput) {
+    public void addToTaskList(Task newTask) {
         this.taskList.add(newTask);
         try {
             FileWriter fw = new FileWriter(filePath, true);
