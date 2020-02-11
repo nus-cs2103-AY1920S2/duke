@@ -29,14 +29,14 @@ public class Event extends Task {
      * @param datetime The datetime of the Event.
      * @param isDone The done status of the Event.
      */
-    public Event(String description, String connector, String datetime, boolean isDone) {
-        super(description, isDone);
+    public Event(String description, String connector, String datetime, boolean isDone, int priority) {
+        super(description, isDone, priority);
         this.connector = connector;
         this.datetime = LocalDate.parse(datetime);
     }
 
     public Event(String description, String connector, String datetime) {
-        this(description, connector, datetime, false);
+        this(description, connector, datetime, false, 10);
     }
 
     /**

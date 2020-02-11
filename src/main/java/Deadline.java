@@ -29,14 +29,14 @@ public class Deadline extends Task {
      * @param datetime The datetime of the Deadline.
      * @param isDone The done status of the Deadline.
      */
-    public Deadline(String description, String connector, String datetime, boolean isDone) {
-        super(description, isDone);
+    public Deadline(String description, String connector, String datetime, boolean isDone, int priority) {
+        super(description, isDone, priority);
         this.connector = connector;
         this.datetime = LocalDate.parse(datetime);
     }
 
     public Deadline(String description, String connector, String datetime) {
-        this(description, connector, datetime, false);
+        this(description, connector, datetime, false, 10);
     }
 
     /**

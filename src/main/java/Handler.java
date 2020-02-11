@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 
 
 /*
@@ -126,6 +127,7 @@ public class Handler {
             //dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
         } finally {
             try {
+                //Collections.sort(Collections.unmodifiableList(listing));
                 FileWriter fileWriter = new FileWriter(fileLoc);
                 for (Task i : listing) {
                     fileWriter.write(i.getFileString() + "\n");
