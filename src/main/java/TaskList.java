@@ -7,7 +7,12 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    public void addTask(Task task) {
+    public void addTask(Task task) throws DukeException {
+        for (Task t : taskList) {
+            if (task.getClass() == t.getClass() && task.isSimilarTask(t)) {
+                throw new DukeException("Sorry! This task already exists!");
+            }
+        }
         taskList.add(task);
     }
 

@@ -25,4 +25,10 @@ public class Deadline extends Task {
     public String getFullDescription() {
         return "[D]" + super.getDescriptionWithIsDone() + " (by: " + this.formattedDate + ")";
     }
+
+    @Override
+    public boolean isSimilarTask(Task task) {
+        Deadline deadline = (Deadline) task;
+        return super.getDescription().equals(deadline.getDescription()) && this.date.equals(deadline.getDate());
+    }
 }
