@@ -12,7 +12,7 @@ public class Deadline extends Task {
     LocalDateTime getTime() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         String formatDateTime = by.format(format);
-        return by;
+        return by; //return the localDateTime
     }
 
     @Override
