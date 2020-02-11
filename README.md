@@ -1,5 +1,5 @@
 # Setting up
-
+[![Build Status](https://travis-ci.org/jiachen247/duke.svg?branch=master)](https://travis-ci.org/jiachen247/duke)
 **Prerequisites**
 
 * JDK 11
