@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class EmptyDescriptionException extends DukeException {
     private static final String space = "    ";
 

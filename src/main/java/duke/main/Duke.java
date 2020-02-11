@@ -1,30 +1,25 @@
-import javafx.application.Application;
+package duke.main;
+
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.TooManyTasksException;
+import duke.exception.UnknownCommandException;
+import duke.processor.Processor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    // Empty constructor required for Launcher
+    // Empty constructor required for duke.main.Launcher
     public Duke() {
     }
 
@@ -33,10 +28,9 @@ public class Duke {
         try {
             tasks = new TaskList(storage.loadTasksFromSaveFile());
 
-            // Since we can successfully load it, we save all in TaskList
+            // Since we can successfully load it, we save all in duke.main.TaskList
             storage.writeTasks(tasks);
         } catch (FileNotFoundException e) {
-            // Load an empty one
             tasks = new TaskList();
             Ui.printLine();
             Ui.indent("It seems that there is no save file in: " + filePath);
@@ -46,63 +40,19 @@ public class Duke {
 
     public void run() {
         Ui.greet();
-        while (Parser.stillHasInputs()) {
-            try {
-                String input = Parser.readLine();
-                if (Parser.commandEquals("bye", input)) {
-                    Ui.sayGoodbye();
-                    break;
-                } else if (Parser.commandEquals("list", input)) {
-                    Ui.displayList(tasks);
-                } else if (Parser.commandEquals("done", input)) {
-                    int taskNo = Parser.getTaskNo(input);
-                    tasks.markTaskAsDone(taskNo);
-                } else if (Parser.commandEquals("delete", input)) {
-                    int taskNo = Parser.getTaskNo(input);
-                    tasks.deleteTask(taskNo);
-                } else if (Parser.commandEquals("deadline", input)) {
-                    if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
-                    if (tasks.isFull()) throw new TooManyTasksException();
-
-                    tasks.addDeadline(Parser.getArgs(input));
-                } else if (Parser.commandEquals("event", input)) {
-                    if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
-                    if (tasks.isFull()) throw new TooManyTasksException();
-
-                    tasks.addEvent(Parser.getArgs(input));
-                } else if (Parser.commandEquals("todo", input)) {
-                    if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
-                    if (tasks.isFull()) throw new TooManyTasksException();
-
-                    tasks.addTodo(Parser.getArgs(input));
-                } else if (Parser.commandEquals("find", input)) {
-                    if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
-
-                    tasks.find(Parser.getArgs(input));
-                } else {
-                    throw new UnknownCommandException();
-                }
-
-                // Rewrites the entire file for every update you make here
-                // Probably O(n^2) time where n is the number of tasks but this is the simplest change we can make
-                storage.writeTasks(tasks);
-            } catch (DukeException e) {
-                Ui.printLine();
-                Ui.indent(e.toString());
-                Ui.printLine();
-            } catch (DateTimeParseException e) {
-                Ui.printLine();
-                Ui.indent("It seems that you have entered a format we don't understand. ");
-                Ui.indent("Please use the YYYY-MM-DD format.");
-                Ui.printLine();
-            }
+        try {
+            Processor.process(tasks, storage);
+        } catch (DukeException e) {
+            String message = Ui.indentWithNewline(e.toString(), 1);
+            Ui.printSection(message);
+        } catch (DateTimeParseException e) {
+            String message = "";
+            message += Ui.indentWithNewline("It seems that you have entered a format we don't understand",
+                    1);
+            message += Ui.indentWithNewline("Please use the YYYY-MM-DD format.", 1);
+            Ui.printSection(message);
         }
     }
-
-    public static void handleCommand(String input) {
-
-    }
-
 
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
@@ -113,7 +63,7 @@ public class Duke {
         String toReturn;
         try {
             if (Parser.commandEquals("bye", input)) {
-                Ui.sayGoodbye();
+                // Ui.sayGoodbye();
                 toReturn = "Bye!";
             } else if (Parser.commandEquals("list", input)) {
                 Ui.displayList(tasks);
