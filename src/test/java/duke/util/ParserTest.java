@@ -18,6 +18,7 @@ public class ParserTest {
         try {
             Parser parser = new Parser();
             assertEquals(CommandIdentifier.BYE, parser.getCommandIdentifier("hey"));
+            fail();
         } catch (CommandNotFoundException e) {
             assertEquals("OOPS!!! I don't understand this command. ☹\n", e.getMessage());
         }
