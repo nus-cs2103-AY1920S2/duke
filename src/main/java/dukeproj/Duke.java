@@ -134,10 +134,6 @@ public class Duke {
      * @param args Inputs by user on the CLI.
      */
     public static void main(String[] args) {
-        if (args.length > 0 && args[0].toUpperCase().equals("TEXT")) {
-            new Duke("." + File.separator + "data" + File.separator + "Task.txt", false).run();
-        } else {
-            Application.launch(GuiApp.class, args);
-        }
+        Application.launch(GuiApp.class, args);
     }
 }
