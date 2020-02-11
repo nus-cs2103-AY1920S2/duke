@@ -3,5 +3,4 @@ T|1|more work
 T|0|it's never ending!
 E|0|event|location
 T|0|read books
-T|0|read 10 books
 T|0|return book

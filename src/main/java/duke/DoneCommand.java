@@ -10,7 +10,7 @@ public class DoneCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         //doneIndex is 0-indexed
-        tasks.done(doneIndex);
+        ui.printString(tasks.done(doneIndex));
     }
 
     @Override
