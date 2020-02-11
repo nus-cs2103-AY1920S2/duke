@@ -1,40 +1,38 @@
 package duke;
 
-import java.lang.StringBuilder;
-import java.time.LocalDate;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
-/** Event that inherits from task, parses out the timing and description from input. */
-public class Event extends Task {
-  LocalDate timing;
+public class Reminder extends Task {
+
+  LocalDateTime timing;
   String description;
   ScheduledExecutorService executorService;
 
-  Event(String input) throws DukeException {
+  Reminder(String input) throws DukeException {
     super(input);
     this.timing = getTiming(input);
     this.description = getDescription(input);
     this.executorService = Executors.newScheduledThreadPool(1);
-    timedPrint();
+    setReminder();
   }
 
-  public void timedPrint() {
-  	Runnable printShit = () -> System.out.println("testy test");
-  	executorService.schedule(printShit, 10, TimeUnit.SECONDS);
+  public void timedPrint(long delay) {
+	  MainWindow.triggerReminder();
   }
 
   /**
-   * Gets timing from the input parsed in the LocalDate format.
+   * Gets timing from the input parsed in the LocalDateTime format eg: 2011-12-03T10:15:30.
    *
    * @param input from the string input user keys in.
    * @return timing as LocalData object.
    * @throws DukeException if date is the wrong format.
    */
-  private LocalDate getTiming(String input) throws DukeException {
+  private LocalDateTime getTiming(String input) throws DukeException {
     try {
       String[] strArr = input.split(" ");
       int index = 0;
@@ -50,10 +48,16 @@ public class Event extends Task {
         str.append(" ").append(strArr[i]);
       }
       String date = str.toString().trim();
-      return LocalDate.parse(date);
+      return LocalDateTime.parse(date);
     } catch (DateTimeParseException d) {
-      throw new DukeException("date", "");
+      throw new DukeException("dateTime", "");
     }
+  }
+
+  private void setReminder() {
+  	LocalDateTime currentTime = LocalDateTime.now();
+  	Duration duration = Duration.between(currentTime, timing);
+  	timedPrint(duration.getSeconds());
   }
 
   /**
@@ -76,12 +80,12 @@ public class Event extends Task {
 
   @Override
   public String toString() {
-    StringBuilder str = new StringBuilder("[E]");
+    StringBuilder str = new StringBuilder("[R]");
     str.append(this.getStatusIcon())
         .append(" ")
         .append(description)
         .append("(at: ")
-        .append(timing.format(DateTimeFormatter.ofPattern("MMM d yyyy")))
+        .append(timing.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")))
         .append(")");
     return str.toString();
   }

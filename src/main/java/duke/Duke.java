@@ -43,10 +43,6 @@ public class Duke {
     super();
   }
 
-  /**
-   * You should have your own function to generate a response to user input. ideas: instead of just
-   * printing the response
-   */
   public String getResponse(String input) {
     try {
       Command c = Parser.parse(input);
@@ -55,6 +51,11 @@ public class Duke {
       return e.getMessage();
     }
   }
+
+//
+//  public static void triggerReminder(String response) {
+//  	MainWindow.showReminder(response);
+//  }
 
   public void run() {
     ui.showWelcome();

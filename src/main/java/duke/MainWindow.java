@@ -1,12 +1,17 @@
 package duke;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
 /** Controller for duke.MainWindow. Provides the layout for the other controls. */
 public class MainWindow extends AnchorPane {
   @FXML private ScrollPane scrollPane;
@@ -18,6 +23,28 @@ public class MainWindow extends AnchorPane {
 
   private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Me.jpg"));
   private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.jpeg"));
+
+  @FXML
+  public static void triggerReminder() {
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.millis(2500), ae -> MainWindow.showReminder("alerttt ols workkk")));
+    timeline.play();
+  }
+
+  @FXML
+  /**
+   * Is triggered at the delayed time in Duke itself.
+   * https://thecodinginterface.com/blog/javafx-alerts-and-dialogs/#informational-alert
+   */
+  public static void showReminder(String response) {
+    var alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("reminder");
+    alert.setHeaderText("Reminder");
+    alert.setContentText(response);
+    alert.show();
+  }
 
   @FXML
   public void initialize() {

@@ -20,41 +20,6 @@ public class Storage {
     }
   }
 
-  public void saveData(TaskList tasks) throws DukeException {
-    try {
-      PrintWriter writer = new PrintWriter(filePath);
-      for (int i = 0; i < tasks.getLength(); i++) {
-        Task t = tasks.get(i);
-        writer.println(t.getFormatForSave());
-      }
-      writer.close();
-      assert countLines() == tasks.getLength() : "Number of tasks does not tally";
-    } catch (IOException e) {
-      throw new DukeException("file", "");
-    }
-  }
-
-  public int countLines() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(filePath));
-    int lines = 0;
-    while (reader.readLine() != null) lines++;
-    reader.close();
-    System.out.println(lines);
-    return lines;
-  }
-
-  public ArrayList<Task> loadData() throws DukeException {
-    ArrayList<Task> loadedList = new ArrayList<>();
-    while (fileScanner.hasNextLine()) {
-      String inputLine = fileScanner.nextLine();
-      loadedList.add(interpretLine(inputLine));
-    }
-    if (loadedList.size() < 1) {
-      throw new DukeException("emptyLoad", "");
-    }
-    return loadedList;
-  }
-
   /**
    * Interprets each line in Duke.txt and returns the appropiate task.
    *
@@ -89,8 +54,49 @@ public class Storage {
           assert td.isDone : "todo did not set done";
         }
         return td;
+      case "reminder":
+        Reminder r = new Reminder(input);
+        if (doneStatus.equals("1")) {
+          r.setDone();
+          assert r.isDone : "reminder did not set done";
+        }
+        return r;
       default:
         throw new DukeException("read", "");
     }
+  }
+
+  public void saveData(TaskList tasks) throws DukeException {
+    try {
+      PrintWriter writer = new PrintWriter(filePath);
+      for (int i = 0; i < tasks.getLength(); i++) {
+        Task t = tasks.get(i);
+        writer.println(t.getFormatForSave());
+      }
+      writer.close();
+      assert countLines() == tasks.getLength() : "Number of tasks does not tally";
+    } catch (IOException e) {
+      throw new DukeException("file", "");
+    }
+  }
+
+  public int countLines() throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(filePath));
+    int lines = 0;
+    while (reader.readLine() != null) lines++;
+    reader.close();
+    return lines;
+  }
+
+  public ArrayList<Task> loadData() throws DukeException {
+    ArrayList<Task> loadedList = new ArrayList<>();
+    while (fileScanner.hasNextLine()) {
+      String inputLine = fileScanner.nextLine();
+      loadedList.add(interpretLine(inputLine));
+    }
+    if (loadedList.size() < 1) {
+      throw new DukeException("emptyLoad", "");
+    }
+    return loadedList;
   }
 }

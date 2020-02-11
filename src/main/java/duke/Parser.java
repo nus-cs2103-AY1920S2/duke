@@ -22,6 +22,7 @@ public class Parser {
     case "deadline":
     case "todo":
     case "event":
+	case "reminder":
       if (length > 1) {
         return new AddCommand(fullCommand);
       } else {
