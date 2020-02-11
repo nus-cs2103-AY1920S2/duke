@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.DukeException;
+
 public class Event extends Task {
 
     protected String at;
@@ -15,8 +17,14 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Updates this task object attributes without creating a new object
+     *
+     * @param updateStrArr String[] containing data for the update
+     * @return the reference of this object
+     */
     @Override
-    public Task update(String[] updateStrArr) {
+    public Task update(String[] updateStrArr) throws DukeException {
         super.update(updateStrArr);
         for (String updateStr : updateStrArr) {
             String[] attrToChange = updateStr.split("=");

@@ -46,6 +46,12 @@ public class Task {
         return (isDone ? "1" : "0") + ":;:" + this.description;
     }
 
+    /**
+     * Updates this task object attributes without creating a new object
+     *
+     * @param updateStrArr String[] containing data for the update
+     * @return the reference of this object
+     */
     public Task update(String[] updateStrArr) throws DukeException {
         for (String updateStr : updateStrArr) {
             String[] attrToChange = updateStr.split("=");

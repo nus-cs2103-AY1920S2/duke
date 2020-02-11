@@ -44,7 +44,12 @@ public class Deadline extends Task {
         }
     }
 
-    
+    /**
+     * Updates this task object attributes without creating a new object
+     *
+     * @param updateStrArr String[] containing data for the update
+     * @return the reference of this object
+     */
     @Override
     public Task update(String[] updateStrArr) throws DukeException {
         super.update(updateStrArr);
