@@ -14,7 +14,7 @@ public class Parser {
                 |command.equals("find")) {
             this.cmd = command.toLowerCase();
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I dont know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I dont know what that means :-(");
         }
     }
 
@@ -26,7 +26,7 @@ public class Parser {
      */
     public Parser(String content, Parser command) throws DukeException {
         if (content.equals(new String())) {
-            throw new DukeException("☹ OOPS!!! The description of a "
+            throw new DukeException("OOPS!!! The description of a "
                     + command.getCommand() + " cannot be empty.");
         } else {
             switch (command.getCommand()) {
