@@ -1,10 +1,3 @@
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -37,6 +30,13 @@ public class Duke {
         this("data/tasks.txt");
     }
 
+    /**
+     * Processes input given by user and runs the command
+     * the user inputs.
+     *
+     * @param input User's input.
+     * @return Result of running the command.
+     */
     public String getResponse(String input) {
         String output = "";
         try {
@@ -44,13 +44,13 @@ public class Duke {
                 output = tasks.list();
             } else if (input.startsWith("done")) {
                 int n = Integer.parseInt(parser.parse(input)[1]);
-                output = tasks.done(n);
+                output = tasks.markAsDoneAndPrint(n);
             } else if (input.startsWith("delete")) {
                 int n = Integer.parseInt(parser.parse(input)[1]);
-                output = tasks.delete(n);
+                output = tasks.deleteAndPrint(n);
             } else if (input.startsWith("find")) {
                 String str = parser.parse(input)[1];
-                output = tasks.find(str);
+                output = tasks.findAndPrint(str);
             } else if(input.equalsIgnoreCase("bye")) {
                 output = "Bye! Hope to see you again soon!\n";
                 try {

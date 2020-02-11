@@ -1,3 +1,6 @@
+/**
+ * This class is the exception in the case where there is no task description.
+ */
 public class EmptyTaskException extends Exception {
 
     String taskType;

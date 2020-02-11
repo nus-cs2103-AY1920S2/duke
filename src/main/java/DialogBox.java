@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -33,8 +34,15 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        initialiseBox(text);
+
         dialog.setText(text);
         displayPicture.setImage(img);
+    }
+
+    public void initialiseBox(String text) {
+        dialog.setMinSize(10, Label.USE_PREF_SIZE + 50);
+        dialog.setTextOverrun(OverrunStyle.CLIP);
     }
 
     /**
