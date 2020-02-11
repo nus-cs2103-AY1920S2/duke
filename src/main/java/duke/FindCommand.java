@@ -17,6 +17,12 @@ public class FindCommand extends Command {
         this.description = description;
     }
 
+    /**
+     * Execute the command.
+     * @param ui Pass in Ui class
+     * @param storage Pass in Storage class
+     * @param taskList Pass in TaskList class
+     */
     public void execute(Ui ui, Storage storage, TaskList taskList) {
         for(int i = 0; i < taskList.getTaskListSize(); i ++) {
             if (taskList.getTask(i).description.contains(getDescription())) {
