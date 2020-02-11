@@ -5,10 +5,50 @@ import java.io.Serializable;
 public abstract class Task implements Serializable {
 
     public enum Priority {
-        PRIORITY_HIGH,
-        PRIORITY_MEDIUM,
-        PRIORITY_LOW,
-        PRIORITY_DEFAULT
+        PRIORITY_HIGH("High"),
+        PRIORITY_MEDIUM("Medium"),
+        PRIORITY_LOW("Low"),
+        PRIORITY_DEFAULT("");
+
+        private String name;
+
+        private Priority(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+
+        public String getIcon() {
+            String icon = "[";
+            switch (name) {
+            case "High":
+                icon += "*";
+                // Fallthrough
+            case "Medium":
+                icon += "*";
+                // Fallthrough
+            case "Low":
+                icon += "*";
+                break;
+            default:
+                return "";
+            }
+
+            return icon + "]";
+        }
+
+        public static Priority getEnumByString(String value) {
+            for (Priority p : Priority.values()) {
+                if (p.name.toLowerCase().equals(value.toLowerCase())) {
+                    return p;
+                }
+            }
+
+            return null;
+        }
     }
 
     public enum TaskType {
@@ -64,6 +104,6 @@ public abstract class Task implements Serializable {
 
     @Override
     public String toString() {
-        return getTypeIcon() + getStatusIcon() + " " + description;
+        return priority.getIcon() + getTypeIcon() + getStatusIcon() + " " + description;
     }
 }

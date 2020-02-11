@@ -19,7 +19,7 @@ public class ListCommand extends Command {
         String[] names = taskList.getNames();
         String output = "";
         for (int i = 0; i < names.length; ++i) {
-            output += (i + 1) + ". " + names[i] + "\n";
+            output += i + ". " + names[i] + "\n";
         }
         System.out.println(output);
     }
