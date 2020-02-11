@@ -5,18 +5,25 @@ package duke.tasks;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class Deadline extends Task {
 
     public static String datePattern = "MMM d yyyy";
-    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Deadline.datePattern);
-    protected Date date;
+    //public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Deadline.datePattern);
+    //protected Date date;
+    public static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(Deadline.datePattern);
+    protected LocalDate date;
 
-    public static Date parseDate(String inputDate) throws ParseException {
+    public static LocalDate parseDate(String inputDate) throws DateTimeParseException {
         String pattern = "yyyy-MM-dd";
-        SimpleDateFormat inputDateFormat = new SimpleDateFormat(pattern);
-        return inputDateFormat.parse(inputDate);
+        DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern(pattern);
+        LocalDate date = LocalDate.parse(inputDate, inputDateFormat);
+        return date;
     }
 
     /**
@@ -24,7 +31,7 @@ public class Deadline extends Task {
      * @param taskTitle Title of task to be completed
      * @param date Deadline of task
      */
-    public Deadline(String taskTitle, Date date) {
+    public Deadline(String taskTitle, LocalDate date) {
         super(taskTitle);
         this.date = date;
     }
@@ -35,7 +42,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + simpleDateFormat.format(date) + ")";
+        return "[D]" + super.toString() + " (by: " + dateFormatter.format(date) + ")";
     }
 
     /**
@@ -43,6 +50,6 @@ public class Deadline extends Task {
      * @return A string representation of this task's deadline
      */
     public String getDeadline() {
-        return simpleDateFormat.format(date);
+        return dateFormatter.format(date);
     }
 }

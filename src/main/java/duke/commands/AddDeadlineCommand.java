@@ -8,6 +8,7 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 
 public class AddDeadlineCommand implements Command {
 
@@ -30,7 +31,7 @@ public class AddDeadlineCommand implements Command {
             String taskTitle = description.substring(0, slashIdx).trim();
             String deadline = description.substring(slashIdx + 4).trim();
             task = new Deadline(taskTitle, Deadline.parseDate(deadline));
-        } catch (StringIndexOutOfBoundsException | ParseException e) {
+        } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
             throw new WrongDeadlineFormatException();
         }
 

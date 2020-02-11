@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,13 +69,8 @@ public class Storage {
                 task = new Todo(taskDetails[2]);
                 break;
             case 'D':
-                try {
-                    Date date = Deadline.simpleDateFormat.parse(taskDetails[3]);
-                    task = new Deadline(taskDetails[2], date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    System.out.println("Error reading deadline date from file");
-                }
+                LocalDate date = LocalDate.parse(taskDetails[3], Deadline.dateFormatter);
+                task = new Deadline(taskDetails[2], date);
                 break;
             case 'E':
                 LocalDateTime localDateTime = LocalDateTime.parse(taskDetails[3], Event.dateTimeFormatter);
