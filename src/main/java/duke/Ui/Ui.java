@@ -11,7 +11,7 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
-    public String showErrorMessage(Throwable e) {
+    public String showErrorMessage(Exception e) {
         return e.getMessage();
     }
 }

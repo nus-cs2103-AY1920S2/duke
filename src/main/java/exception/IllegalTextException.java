@@ -1,9 +1,8 @@
 package exception;
 
-public class IllegalTextException extends Throwable {
+public class IllegalTextException extends Exception {
 
-    @Override
-    public String getMessage() {
-        return "Your input text is invalid, please try again!";
+    public IllegalTextException(String errorMessage) {
+        super(errorMessage);
     }
 }

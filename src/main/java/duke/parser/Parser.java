@@ -19,24 +19,24 @@ public class Parser {
         case "delete":
             return new deleteCommand(parseItemNumber(stringToParse));
         case "todo":
-            // do something
+            return new TodoCommand(stringToParse);
         case "event":
-            // do something
+            //return new EventCommand(stringToParse);
         case "deadline":
-            // do something
+            //return new DeadlineCommand(stringToParse);
         }
         return null;
     }
 
     private static String removeExtraWhitespaces(String stringToParse) {
-        return stringToParse.replaceAll("\\s+", " ");
+        return stringToParse.replaceAll("\\s+", " ").trim();
     }
 
     private static int parseItemNumber(String stringToParse) throws IllegalTextException {
         try {
-            return Integer.parseInt(stringToParse.split("")[1]);
+            return Integer.parseInt(stringToParse.split(" ")[1]);
         } catch (NumberFormatException e) {
-            throw new IllegalTextException();
+            throw new IllegalTextException("Incorrect task number entered.");
         }
     }
 
@@ -45,7 +45,7 @@ public class Parser {
             String command = stringToParse.split(" ")[0];
             return command;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new IllegalTextException();
+            throw new IllegalTextException("Illegal command format entered.");
         }
     }
 }

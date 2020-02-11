@@ -32,7 +32,7 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             return command.execute(this.ui, this.taskStorage);
-        } catch (IllegalTextException | Exception e) {
+        } catch (Exception e) {
             return this.ui.showErrorMessage(e);
         }
 
