@@ -16,6 +16,14 @@ shadowJar {
     archiveAppendix = null
 }
 
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
 group 'seedu.duke'
 version '0.1.0'
 
