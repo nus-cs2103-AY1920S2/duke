@@ -1,3 +1,6 @@
+# JAVA .class files
+/*.class
+
 # IDEA files
 /.idea/
 /out/
@@ -11,3 +14,4 @@ src/main/resources/docs/
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
+bin/
