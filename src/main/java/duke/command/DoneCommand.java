@@ -1,7 +1,8 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
 import duke.DukeException;
-import duke.TaskList;
 import duke.task.Task;
 
 public class DoneCommand extends Command {
@@ -12,17 +13,19 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public ExecuteResult execute(TaskList tasks) throws DukeException {
-        if (doneIndex >= 0 && doneIndex < tasks.size()) {
-            Task doneTask = tasks.get(doneIndex).setDone(true);
-            return new ExecuteResult(
-                    tasks.set(doneIndex, doneTask),
-                    "Nice! I've marked this task as done:\n"
-                    + "  " + doneTask,
-                    true
-            );
-        } else {
+    public ExecuteResult execute(List<Task> tasks) throws DukeException {
+        if (doneIndex < 0 || doneIndex >= tasks.size()) {
             throw new DukeException("Oops, done index is out of bounds");
+            
         }
+        Task doneTask = tasks.get(doneIndex).setDone(true);
+        List<Task> newTasks = new ArrayList<>(tasks);
+        newTasks.set(doneIndex, doneTask);
+        return new ExecuteResult(
+                newTasks,
+                "Nice! I've marked this task as done:\n"
+                + "  " + doneTask,
+                true
+        );
     }
 }

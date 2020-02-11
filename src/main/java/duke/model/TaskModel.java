@@ -1,4 +1,4 @@
-package duke;
+package duke.model;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -6,29 +6,62 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-public class PersistentStorage {
+/**
+ * Represents a task model that is backed with a flat-file database.
+ */
+public class TaskModel {
     private final Path storagePath;
+    private List<Task> tasks; 
 
-    public PersistentStorage(Path storagePath) {
+    /**
+     * Creates a task model.
+     * 
+     * @param storagePath Path to the flat-file database
+     */
+    public TaskModel(Path storagePath) {
         this.storagePath = storagePath;
+        try {
+            tasks = load();
+        } catch (IOException exception) {
+            tasks = new ArrayList<>();
+        }
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    /**
+     * Update tasks with the new list of tasks.
+     * 
+     * @param tasks The new list of tasks
+     * @throws IOException Throws when there is some problem with the writing process
+     */
+    public void updateTasks(List<Task> tasks) throws IOException {
+        if (this.tasks == tasks) {
+            return;
+        }
+        this.tasks = tasks;
+        save();
     }
 
     /**
      * Saves the tasks provided to the disk as a flat file.
      * 
-     * @param tasks Tasks to be saved to the disk
-     * @throws IOException Throws when there is any problem with the writing process
+     * @throws IOException Throws when there is some problem with the writing process
      */
-    public void save(TaskList tasks) throws IOException {
+    public void save() throws IOException {
         Files.write(
             storagePath,
-            tasks.getUnderlyingList().stream()
+            tasks.stream()
                     .map(this::serializeTask)
                     .collect(Collectors.toUnmodifiableList()),
             StandardCharsets.UTF_8
@@ -64,12 +97,12 @@ public class PersistentStorage {
      * Loads tasks from the disk (from a flat-file database).
      * 
      * @return Tasks loaded from the disk
-     * @throws IOException Throws when there is any problem with the reading process
+     * @throws IOException Throws when there is some problem with the reading process
      */
-    public TaskList load() throws IOException {
-        return new TaskList(Files.readAllLines(storagePath).stream()
+    public List<Task> load() throws IOException {
+        return Files.readAllLines(storagePath).stream()
                 .map(this::deserializeTask)
-                .collect(Collectors.toUnmodifiableList()));
+                .collect(Collectors.toUnmodifiableList());
     } 
 
     private Task deserializeTask(String serialized) {

@@ -1,12 +1,13 @@
 package duke.command;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import duke.TaskList;
+import duke.task.Task;
 
 public class ListCommand extends Command {
     @Override
-    public ExecuteResult execute(TaskList tasks) {
+    public ExecuteResult execute(List<Task> tasks) {
         return new ExecuteResult(
                 tasks,
                 "Here are the tasks in your list:\n"

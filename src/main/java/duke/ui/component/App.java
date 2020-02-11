@@ -2,9 +2,8 @@ package duke.ui.component;
 
 import java.io.IOException;
 import duke.DukeException;
-import duke.PersistentStorage;
-import duke.TaskList;
 import duke.command.Command;
+import duke.model.TaskModel;
 import duke.util.Parser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,19 +25,13 @@ public class App extends VBox {
     @FXML
     private TextField messageInput;
 
-    private TaskList tasks;
-    private final PersistentStorage persistentStorage;
+    private final TaskModel taskModel;
 
     /**
      * Create Duke's root application component.
      */
-    public App(PersistentStorage persistentStorage) {
-        this.persistentStorage = persistentStorage;
-        try {
-            tasks = persistentStorage.load();
-        } catch (IOException exception) {
-            tasks = new TaskList();
-        }
+    public App(TaskModel taskModel) {
+        this.taskModel = taskModel;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/App.fxml"));
         fxmlLoader.setController(this);
@@ -63,10 +56,9 @@ public class App extends VBox {
         // Process input and display result in messageList
         try {
             Command command = Parser.parse(query);
-            Command.ExecuteResult result = command.execute(tasks);
-            tasks = result.getTasks();
+            Command.ExecuteResult result = command.execute(taskModel.getTasks());
             messageList.getChildren().add(new DukeMessage(result.getMessage()));
-            persistentStorage.save(tasks);
+            taskModel.updateTasks(result.getTasks());
         } catch (DukeException exception) {
             messageList.getChildren().add(new DukeMessage(exception.getMessage() + "!"));
         } catch (IOException exception) {

@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.TaskList;
+import java.util.ArrayList;
+import java.util.List;
 import duke.task.Task;
 
 public class AddCommand extends Command {
@@ -11,9 +12,11 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public ExecuteResult execute(TaskList tasks) {
+    public ExecuteResult execute(List<Task> tasks) {
+        List<Task> newTasks = new ArrayList<>(tasks);
+        newTasks.add(addTask);
         return new ExecuteResult(
-                tasks.add(addTask),
+                newTasks,
                 "Got it. I've added this task:\n"
                 + "  " + addTask + "\n"
                 + String.format("Now you have %d tasks in the list.", tasks.size() + 1),

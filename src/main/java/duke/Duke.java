@@ -1,6 +1,7 @@
 package duke;
 
 import java.nio.file.Paths;
+import duke.model.TaskModel;
 import duke.ui.component.App;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,10 +15,8 @@ public class Duke extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Duke");
 
-        PersistentStorage persistentStorage = new PersistentStorage(
-                Paths.get(System.getProperty("user.dir"), "data.txt")
-        );
-        App app = new App(persistentStorage);
+        TaskModel taskModel = new TaskModel(Paths.get(System.getProperty("user.dir"), "data.txt"));
+        App app = new App(taskModel);
 
         Scene scene = new Scene(app);
         primaryStage.setScene(scene);

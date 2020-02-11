@@ -1,7 +1,8 @@
 package duke.command;
 
+import java.util.List;
 import java.util.stream.Collectors;
-import duke.TaskList;
+import duke.task.Task;
 
 public class FindCommand extends Command {
     private final String keyword;
@@ -11,11 +12,11 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public ExecuteResult execute(TaskList tasks) {
+    public ExecuteResult execute(List<Task> tasks) {
         return new ExecuteResult(
                 tasks,
                 "Here are the matching tasks in your list:\n"
-                + tasks.getUnderlyingList().stream()
+                + tasks.stream()
                         .map(Object::toString)
                         .filter(taskString -> taskString.matches(".*" + keyword + ".*"))
                         .collect(Collectors.joining("\n")),
