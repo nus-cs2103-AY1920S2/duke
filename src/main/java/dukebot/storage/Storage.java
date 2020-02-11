@@ -27,8 +27,6 @@ public class Storage {
     private static final String TASK_LIST_FILEPATH = "/task-list.data";
     private static final String CONTACT_LIST_FILEPATH = "/contact-list.data";
     private static final String ALIAS_FILEPATH = "/alias.data";
-    // private static final String SMALL_TALK_FILEPATH = "/small-talk.data";
-    // private static final String CONFIG_FILEPATH = "/config.data";
 
     /**
      * Generates the Storage with default directory.

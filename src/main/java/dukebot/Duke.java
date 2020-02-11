@@ -24,11 +24,11 @@ public class Duke {
     /**
      * Initialises Duke.
      *
-     * @param withGui Whether GUI mode is used.
+     * @param hasGui Whether GUI mode is used.
      */
-    public Duke(boolean withGui) {
+    public Duke(boolean hasGui) {
         storage = new Storage();
-        ui = new Ui(withGui);
+        ui = new Ui(hasGui);
 
         // Load Aliases
         Parser parserTemp;
@@ -49,19 +49,19 @@ public class Duke {
             contactList = new ContactList(new ArrayList<>());
         }
 
-        TaskList tasks = loadTaskList(ui, storage, withGui);
+        TaskList tasks = loadTaskList(ui, storage, hasGui);
         appStorage = new AppStorage(tasks, contactList);
     }
 
     /**
      * Loads the task list from storage.
      */
-    private TaskList loadTaskList(Ui ui, Storage storage, Boolean withGui) {
+    private TaskList loadTaskList(Ui ui, Storage storage, Boolean hasGui) {
         TaskList tasks;
         try {
             ArrayList<Task> taskArrayList = storage.loadTaskArrayList();
             tasks = new TaskList(taskArrayList);
-            if (withGui) {
+            if (hasGui) {
                 ui.showWelcomeGui();
                 ui.getDukeVoice().playVoice();
             } else {
