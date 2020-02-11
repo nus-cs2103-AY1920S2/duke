@@ -11,19 +11,11 @@ public class UI {
     public static String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
     /**
-     * Prints a single line.
-     */
-    static void println() {
-        System.out.println(LINE);
-    }
-
-    /**
      * Prints string s wrapped in lines.
      *
      * @param s s
      */
     static String say(String s) {
-//        String returnString = LINE + "\n" + s + "\n" + LINE;
         return s;
     }
 
@@ -33,12 +25,12 @@ public class UI {
      * @param arr arr
      */
     static String listHelper(TaskList arr) {
-        String returnString = "";
+        StringBuilder returnString = new StringBuilder();
         for (var i = 0; i < arr.size(); i++) {
             Task t = arr.get(i);
-            returnString += "\n" + (i + 1) + ": " + t.toString();
+            returnString.append("\n").append(i + 1).append(": ").append(t.toString());
         }
-        return returnString;
+        return returnString.toString();
     }
 
     static String list(TaskList arr) {
