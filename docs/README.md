@@ -1,6 +1,6 @@
-# DUKE
+# User Guide
 
-![DUKE](/docs/Ui.png)
+![DUKE](Ui.png)
 
 > One of my favorites!
 >
@@ -12,15 +12,15 @@
 3. **[Usage](#usage)**
 4. **[Commands](#commands)**
    - **[Summary of commands](#summary-of-commands)**
-   1. **[`help`](#help)**
-   2. **[`list`](#list)**
-   3. **[`todo`](#todo)**
-   4. **[`deadline`](#deadline)**
-   5. **[`event`](#event)**
-   6. **[`delete`](#delete)**
-   7. **[`done`](#done)**
-   8. **[`find`](#find)**
-   9.  **[`bye`](#bye)**
+   - **[`help`](#help)**
+   - **[`list`](#list)**
+   - **[`todo`](#todo)**
+   - **[`deadline`](#deadline)**
+   - **[`event`](#event)**
+   - **[`delete`](#delete)**
+   - **[`done`](#done)**
+   - **[`find`](#find)**
+   -  **[`bye`](#bye)**
 
 ## Introduction
 
@@ -196,6 +196,7 @@ Removes a given task from DUKE, so that DUKE will no longer keep track of this t
   * Removes the second task (as per the example in [`list`](#list)), and shows:
 
         Removed 'Submit work'
+
     An immediate subsequent `list` command will show:
 
         Tasks so far:
@@ -223,6 +224,7 @@ Marks a given task tracked by DUKE as done. Tasks are identified by their  index
   * Marks the second task (as per the example in [`list`](#list)) as done, and shows:
 
         Marked 'Submit work' as done
+
     An immediate subsequent `list` command will show:
 
         Tasks so far:
