@@ -46,6 +46,11 @@ public class Duke {
         PrintStream uiOutput = new PrintStream(respond);
         PrintStream systemOutput = System.out;
         System.setOut(uiOutput);
+
+        assert tasks != null : "The tasks should be initialise at this stage";
+        assert ui != null : "The Ui object should be initialise at this stage";
+        assert storage != null : "The storage object should be initialise at this stage";
+
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
