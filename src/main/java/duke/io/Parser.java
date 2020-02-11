@@ -41,18 +41,6 @@ public class Parser {
         case "quit":
             // Fallthrough
         case "exit":
-            // Fallthrough
-        case "drop_module":
-            // Fallthrough
-        case "dropout":
-            // Fallthrough
-        case "die":
-            // Fallthrough
-        case "kys":
-            // Fallthrough
-        case "fuck":
-            // Fallthrough
-        case "withdraw_from_uni":
             return new ExitCommand();
         case "list":
             return new ListCommand();
