@@ -1,5 +1,12 @@
 package duke;
 
+import duke.command.Command;
+import duke.command.Parser;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
 
     private Storage storage;
@@ -33,7 +40,20 @@ public class Duke {
      */
     public void run() {
         Ui.printWelcomeMessage();
+        boolean isByeCommand = false;
+        while (!isByeCommand) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isByeCommand = c.isByeCommand();
+            } catch (DukeException ex) {
+                ui.printMessage(ex.getMessage());
+            }
+        }
 
-        Parser.parse(storage, tasks, ui);
+        Ui.printMessage("Bye! Hope you visit again soon!");
+
+        //Parser.parse(storage, tasks, ui);
     }
 }

@@ -1,4 +1,9 @@
-package duke;
+package duke.storage;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -61,7 +66,7 @@ public class Storage {
         try {
             Files.write(file, result.toString().getBytes());
         } catch (FileNotFoundException ex) {
-            System.err.println("duke.Task file not found.");
+            System.err.println("duke.task.Task file not found.");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.task.Event;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
