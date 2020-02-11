@@ -1,8 +1,8 @@
-package main.java.duke.gui;
+package duke.gui;
 
 import javafx.beans.property.*;
-import main.java.duke.entity.TaskList;
-import main.java.duke.entity.task.Task;
+import duke.entity.TaskList;
+import duke.entity.task.Task;
 
 public class TaskModel {
 

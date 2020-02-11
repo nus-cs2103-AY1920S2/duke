@@ -1,21 +1,21 @@
-package main.java.duke;
+package duke;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import main.java.duke.entity.TaskList;
-import main.java.duke.entity.command.Command;
-import main.java.duke.entity.task.Task;
-import main.java.duke.gui.TaskModel;
-import main.java.duke.gui.view.TaskListOverviewController;
-import main.java.duke.gui.view.UiController;
-import main.java.duke.handler.Ui;
+import duke.entity.TaskList;
+import duke.entity.command.Command;
+import duke.entity.task.Task;
+import duke.gui.TaskModel;
+import duke.gui.view.TaskListOverviewController;
+import duke.gui.view.UiController;
+import duke.handler.Ui;
 
-import main.java.duke.exception.DirectoryNotFoundException;
-import main.java.duke.handler.Storage;
-import main.java.duke.parser.CommandParser;
+import duke.exception.DirectoryNotFoundException;
+import duke.handler.Storage;
+import duke.parser.CommandParser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -61,7 +61,8 @@ public class Duke extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Duke.class.getResource("gui/view/RootLayout.fxml"));
+            loader.setLocation(getClass().getResource("gui/view/RootLayout.fxml"));
+            assert loader != null : "loader cannot be null";
             rootLayout = loader.load();
 
             // Show the scene containing the root layout.
@@ -78,12 +79,11 @@ public class Duke extends Application {
      */
     public void showTaskListOverview() {
         try {
-            // Load person overview.
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Duke.class.getResource("gui/view/TaskListOverview.fxml"));
             AnchorPane personOverview = loader.load();
 
-            // Set person overview into the center of root layout.
             rootLayout.setCenter(personOverview);
             TaskListOverviewController controller = loader.getController();
             controller.setMainApp(this);

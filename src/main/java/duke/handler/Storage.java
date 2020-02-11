@@ -1,10 +1,10 @@
-package main.java.duke.handler;
+package duke.handler;
 
-import main.java.duke.entity.task.Deadline;
-import main.java.duke.entity.task.Event;
-import main.java.duke.entity.task.Task;
-import main.java.duke.entity.task.Todo;
-import main.java.duke.exception.DirectoryNotFoundException;
+import duke.entity.task.Deadline;
+import duke.entity.task.Event;
+import duke.entity.task.Task;
+import duke.entity.task.Todo;
+import duke.exception.DirectoryNotFoundException;
 
 import java.io.File;
 import java.io.FileNotFoundException;

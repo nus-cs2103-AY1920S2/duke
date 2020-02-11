@@ -1,12 +1,12 @@
-package main.java.duke.entity.command;
+package duke.entity.command;
 
 import javafx.collections.ObservableList;
-import main.java.duke.entity.task.Task;
-import main.java.duke.entity.TaskList;
-import main.java.duke.gui.TaskModel;
-import main.java.duke.gui.view.UiController;
-import main.java.duke.handler.Storage;
-import main.java.duke.handler.Ui;
+import duke.entity.task.Task;
+import duke.entity.TaskList;
+import duke.gui.TaskModel;
+import duke.gui.view.UiController;
+import duke.handler.Storage;
+import duke.handler.Ui;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,6 +23,7 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         List<Task> tasks = taskList.getTasks();
+        assert index < tasks.size() : "index should not be larger than size of list";
         if (!tasks.get(index).isDone()) {
             try {
                 tasks.get(index).markAsDone(true);

@@ -1,4 +1,4 @@
-package main.java.duke.parser;
+package duke.parser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package main.java.duke.entity.task;
+package duke.entity.task;
 
 import java.util.Date;
 

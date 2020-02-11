@@ -1,12 +1,12 @@
-package main.java.duke.entity.command;
+package duke.entity.command;
 
 import javafx.collections.ObservableList;
-import main.java.duke.entity.TaskList;
-import main.java.duke.entity.task.Task;
-import main.java.duke.gui.TaskModel;
-import main.java.duke.gui.view.UiController;
-import main.java.duke.handler.Storage;
-import main.java.duke.handler.Ui;
+import duke.entity.TaskList;
+import duke.entity.task.Task;
+import duke.gui.TaskModel;
+import duke.gui.view.UiController;
+import duke.handler.Storage;
+import duke.handler.Ui;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
-package main.java.duke.parser;
+package duke.parser;
 
-import main.java.duke.entity.command.*;
-import main.java.duke.entity.task.Deadline;
-import main.java.duke.entity.task.Event;
-import main.java.duke.entity.task.Todo;
-import main.java.duke.handler.Ui;
+import duke.entity.command.*;
+import duke.entity.task.Deadline;
+import duke.entity.task.Event;
+import duke.entity.task.Todo;
+import duke.handler.Ui;
 
 import java.text.ParseException;
 import java.util.Date;

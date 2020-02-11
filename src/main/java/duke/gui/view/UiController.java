@@ -1,7 +1,7 @@
-package main.java.duke.gui.view;
+package duke.gui.view;
 
-import main.java.duke.entity.TaskList;
-import main.java.duke.entity.task.Task;
+import duke.entity.TaskList;
+import duke.entity.task.Task;
 
 import java.util.Date;
 import java.util.List;

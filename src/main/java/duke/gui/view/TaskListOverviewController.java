@@ -1,16 +1,16 @@
-package main.java.duke.gui.view;
+package duke.gui.view;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import main.java.duke.Duke;
-import main.java.duke.entity.command.Command;
-import main.java.duke.gui.TaskModel;
-import main.java.duke.handler.Storage;
-import main.java.duke.handler.Ui;
-import main.java.duke.parser.CommandParser;
+import duke.Duke;
+import duke.entity.command.Command;
+import duke.gui.TaskModel;
+import duke.handler.Storage;
+import duke.handler.Ui;
+import duke.parser.CommandParser;
 
 public class TaskListOverviewController {
 
@@ -65,7 +65,6 @@ public class TaskListOverviewController {
     public void setMainApp(Duke duke) {
         this.duke = duke;
         taskData = duke.getTaskData();
-        // Add observable list data to the table
         taskTable.setItems(taskData);
     }
 
