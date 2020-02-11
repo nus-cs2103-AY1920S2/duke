@@ -7,8 +7,25 @@ public class Add extends Command {
         this.saved = saved;
     }
 
+    /**
+     * This function executes the add command for tasks of all types.
+     * It initially calls a function from DetectDuplicates class to detect and remove an duplicates in the list.
+     *
+     * @param tasks TaskList object.
+     * @param storage Storage object.
+     * @return Returns affirmation that add has been done.
+     */
     String execute(TaskList tasks, Storage storage) {
-        DetectDuplicates detect = new DetectDuplicates(ob.getTaskName(), ob.getType());
+        DetectDuplicates detect;
+        if (ob.getType().equals("todo")) {
+            detect = new DetectDuplicates(ob.getTaskName(), ob.getType());
+        } else {
+            if (ob.getType().equals("deadline")) {
+                detect = new DetectDuplicates(ob.getTaskName(), ob.getType(), ((Deadline)ob).getTime());
+            } else {
+                detect = new DetectDuplicates(ob.getTaskName(), ob.getType(), ((Event)ob).getTime());
+            }
+        }
         detect.removeDuplicates(tasks, storage);
         tasks.getList().add(ob);
         String k = ob.toString();
@@ -20,9 +37,4 @@ public class Add extends Command {
             return "";
         }
     }
-
-    boolean isExit() {
-        return false;
-    }
-
 }

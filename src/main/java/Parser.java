@@ -5,13 +5,13 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
 
     /**
-     * Formats the sentence.
+     * Formats the deadline and event type commands.
      *
      * @param sentence Input line.
      * @param locOfSpace Location of space.
      * @param type Type of entry.
      * @param done Done status.
-     * @return Task.
+     * @return Task object of type deadline/event.
      */
     public static Task formatter(String sentence, int locOfSpace, String type, int done) throws DukeException {
         int locOfSlash = sentence.indexOf("/");

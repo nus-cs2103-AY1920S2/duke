@@ -6,10 +6,11 @@ public class Done extends Command {
     }
 
     /**
-     * Executes the done command.
+     * Executes the done command by marking the respective task as done.
      *
      * @param tasks Task object.
      * @param storage Storage object.
+     * @return Returns the affirmation that task has been marked as completed.
      */
     public String execute(TaskList tasks, Storage storage) {
         int number = Integer.valueOf(num);
@@ -18,9 +19,5 @@ public class Done extends Command {
         ob.setDone();
         return "Nice! I've marked this task as done:\n"
                 + k;
-    }
-
-    boolean isExit() {
-        return false;
     }
 }

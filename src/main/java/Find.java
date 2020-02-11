@@ -9,10 +9,11 @@ public class Find extends Command {
     }
 
     /**
-     * It executes the find command.
+     * It executes the find command by searching for every task that contains that keyword.
      *
      * @param tasks Object of type TaskList.
      * @param storage Object of type Storage.
+     * @return Returns the list of tasks that contain user input keyword
      */
     public String execute(TaskList tasks, Storage storage) {
         StringBuilder s = new StringBuilder("Here are the matching tasks in your list:\n");
@@ -31,9 +32,5 @@ public class Find extends Command {
             s = s.append("NoTasks available\n");
         }
         return s.toString();
-    }
-
-    boolean isExit() {
-        return false;
     }
 }

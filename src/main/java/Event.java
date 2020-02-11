@@ -9,7 +9,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    LocalDateTime getAt() {
+    LocalDateTime getTime() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         String formatDateTime = at.format(format);
         return at;

@@ -90,7 +90,7 @@ public class Storage {
                 switch (ob.getType()) {
                 case "deadline":
                     s = s + "D|" + ob.getDone() + "|"
-                            + ob.getTaskName() + "|" + ((Deadline)ob).getBy().format(format) + "\n";
+                            + ob.getTaskName() + "|" + ((Deadline)ob).getTime().format(format) + "\n";
                     break;
                 case "todo":
                     s = s + "T|" + ob.getDone()
@@ -98,7 +98,7 @@ public class Storage {
                     break;
                 case "event":
                     s = s + "E|" + ob.getDone()
-                            + "|" + ob.getTaskName() + "|" + ((Event)ob).getAt().format(format) + "\n";
+                            + "|" + ob.getTaskName() + "|" + ((Event)ob).getTime().format(format) + "\n";
                     break;
                 default:
                 }

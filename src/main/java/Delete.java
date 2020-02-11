@@ -7,10 +7,11 @@ public class Delete extends Command {
     }
 
     /**
-     * It executes the delete command.
+     * It executes the delete command by removing the specified task from the list.
      *
      * @param tasks Object of type TaskList.
      * @param storage Object of type Storage.
+     * @return Returns affirmation that delete has been done.
      */
     public String execute(TaskList tasks, Storage storage) {
         assert num <= tasks.getList().size() && num >= 0 : "This task number does not exist in the list. "
@@ -19,9 +20,5 @@ public class Delete extends Command {
         tasks.getList().remove(num - 1);
         return "Noted. I've removed this task:\n" + s
                 + "\nNow you have " + (tasks.getList().size()) + " tasks in the list.";
-    }
-
-    boolean isExit() {
-        return false;
     }
 }
