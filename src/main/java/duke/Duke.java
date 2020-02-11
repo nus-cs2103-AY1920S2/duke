@@ -3,11 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
-import duke.exception.InvalidIndexException;
-import duke.exception.MissingParameterException;
-import duke.exception.MissingTimeException;
-import duke.exception.TimeFormatException;
-import duke.exception.UnknownCommandException;
+import duke.exception.DukeException;
 
 /** Class Duke, the driver class of the program. */
 public class Duke {
@@ -53,11 +49,7 @@ public class Duke {
                 command.execute(taskList, ui);
                 isExit = command.isExit();
                 storage.saveBaby(taskList.getTaskList());
-            } catch (MissingParameterException
-                    | MissingTimeException
-                    | UnknownCommandException
-                    | TimeFormatException
-                    | InvalidIndexException e) {
+            } catch (DukeException e) {
                 ui.showException(e);
             } catch (Exception e) {
                 ui.showUnknownException(e);
