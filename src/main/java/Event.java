@@ -28,11 +28,16 @@ public class Event extends Task {
      * @param connector The word connecting between description and datetime.
      * @param datetime The datetime of the Event.
      * @param isDone The done status of the Event.
+     * @param priority The priority of the Event.
      */
     public Event(String description, String connector, String datetime, boolean isDone, int priority) {
         super(description, isDone, priority);
         this.connector = connector;
         this.datetime = LocalDate.parse(datetime);
+    }
+
+    public Event(String description, String connector, String datetime, int priority) {
+        this(description, connector, datetime, false, priority);
     }
 
     public Event(String description, String connector, String datetime) {
@@ -44,7 +49,7 @@ public class Event extends Task {
      * @return Database formatted string.
      */
     public String getFileString() {
-        return "E|" + isDone + "|" + description + "|" + connector + "|" + datetime;
+        return "E|" + isDone + "|" + description + "|" + connector + "|" + datetime + "|" + priority;
     }
 
     /**

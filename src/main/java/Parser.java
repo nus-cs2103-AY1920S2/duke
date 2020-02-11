@@ -81,14 +81,14 @@ public class Parser {
         String[] params = s.split("\\|");
 
         if (params[0].equals("D")) {
-            assert(params.length == 5);
-            return new Deadline(params[2], params[3], params[4], !params[1].equals("false"));
+            assert(params.length == 6);
+            return new Deadline(params[2], params[3], params[4], !params[1].equals("false"), Integer.parseInt(params[5]));
         } else if (params[0].equals("E")) {
-            assert(params.length == 5);
-            return new Event(params[2], params[3], params[4], !params[1].equals("false"));
+            assert(params.length == 6);
+            return new Event(params[2], params[3], params[4], !params[1].equals("false"), Integer.parseInt(params[5]));
         } else {
-            assert(params.length == 3);
-            return new Task(params[2], !params[1].equals("false"));
+            assert(params.length == 4);
+            return new Task(params[2], !params[1].equals("false"), Integer.parseInt(params[3]));
         }
     }
 }

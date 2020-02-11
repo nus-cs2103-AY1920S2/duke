@@ -83,9 +83,16 @@ public class Handler {
                 Task tmp = new Task(userText);
                 if (isTodo) {
                     try {
-                        userText = userText.substring(5).trim();
-                        tmp = new Task(userText);
-                        if (userText.equals("")) {
+                        String userTask = userText.substring(5).trim();
+                        String[] userParams = userTask.split(" ");
+                        if (userParams.length == 1) {
+                            tmp = new Task(userParams[0]);
+                        } else if (userParams.length == 2){
+                            int priority = Integer.parseInt(userTask.split(" ")[1]);
+                            tmp = new Task(userParams[0], priority);
+                        }
+
+                        if (userTask.equals("")) {
                             throw new Exception();
                         }
                     } catch (Exception e) {
@@ -95,12 +102,21 @@ public class Handler {
                     try {
                         String[] parts = userText.split("/");
                         String description = parts[0].split(" ", 2)[1];
-                        String connector = parts[1].split(" ", 2)[0];
-                        String datetime = parts[1].split(" ", 2)[1];
+                        String connector = parts[1].split(" ")[0];
+                        String datetime = parts[1].split(" ")[1];
+                        String[] innerPart = parts[1].split(" ");
                         if (isDeadline) {
-                            tmp = new Deadline(description, connector, datetime);
+                            if (innerPart.length == 2) {
+                                tmp = new Deadline(description, connector, datetime);
+                            } else if (innerPart.length == 3) {
+                                tmp = new Deadline(description, connector, datetime, Integer.parseInt(innerPart[2]));
+                            }
                         } else if (isEvent) {
-                            tmp = new Event(description, connector, datetime);
+                            if (innerPart.length == 2) {
+                                tmp = new Event(description, connector, datetime);
+                            } else if (innerPart.length == 3) {
+                                tmp = new Event(description, connector, datetime, Integer.parseInt(innerPart[2]));
+                            }
                         }
                     } catch (Exception e) {
                         throw new DukeException("☹ OOPS!!! The description of a " + tmp.getClass().getSimpleName() + " is not well formatted.");
@@ -127,7 +143,7 @@ public class Handler {
             //dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
         } finally {
             try {
-                //Collections.sort(Collections.unmodifiableList(listing));
+                listing.sort(new TaskComparator());
                 FileWriter fileWriter = new FileWriter(fileLoc);
                 for (Task i : listing) {
                     fileWriter.write(i.getFileString() + "\n");

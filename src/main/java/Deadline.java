@@ -28,11 +28,16 @@ public class Deadline extends Task {
      * @param connector The word connecting between description and datetime.
      * @param datetime The datetime of the Deadline.
      * @param isDone The done status of the Deadline.
+     * @param priority The priority of the Deadline.
      */
     public Deadline(String description, String connector, String datetime, boolean isDone, int priority) {
         super(description, isDone, priority);
         this.connector = connector;
         this.datetime = LocalDate.parse(datetime);
+    }
+
+    public Deadline(String description, String connector, String datetime, int priority) {
+       this(description, connector, datetime, false, priority);
     }
 
     public Deadline(String description, String connector, String datetime) {
@@ -44,7 +49,7 @@ public class Deadline extends Task {
      * @return Database formatted string.
      */
     public String getFileString() {
-        return "D|" + isDone + "|" + description + "|" + connector + "|" + datetime;
+        return "D|" + isDone + "|" + description + "|" + connector + "|" + datetime + "|" + priority;
     }
 
     /**

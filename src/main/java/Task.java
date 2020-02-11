@@ -25,6 +25,7 @@ public class Task {
      * @param description The description of the Task.
      * @param isDone The status whether of the Task is done.
      * @param priority The priority the Task in.
+     * @param priority The priority of the Task.
      */
     public Task(String description, boolean isDone, int priority) {
         this.description = description;
@@ -34,6 +35,10 @@ public class Task {
 
     public Task(String description) {
         this(description, false, 10);
+    }
+
+    public Task(String description, int priority) {
+        this(description, false, priority);
     }
 
     /**
@@ -59,7 +64,7 @@ public class Task {
      * @return Database formatted string.
      */
     public String getFileString() {
-        return "T|" + isDone + "|" + description;
+        return "T|" + isDone + "|" + description + "|" + priority;
     }
 
     /**
@@ -69,5 +74,13 @@ public class Task {
     public String done() {
         isDone = true;
         return this.toString();
+    }
+
+    /**
+     * Returns the priority of the task.
+     * @return Task Priority.
+     */
+    public int getPriority() {
+        return priority;
     }
 }
