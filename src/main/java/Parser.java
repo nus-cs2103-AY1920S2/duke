@@ -1,4 +1,10 @@
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.security.InvalidKeyException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.StringTokenizer;
@@ -62,5 +68,42 @@ public class Parser {
      */
     public boolean inRange(int num, int index) {
         return num > 0 && num <= index;
+    }
+
+    public LocalDate getLocalDate(String str) {
+        return LocalDate.parse(str);
+    }
+
+    /**
+     * decode the String gotten from the data file into a Task.
+     * @param data a String gotten from the data file
+     * @return the Task after decoding the String.
+     */
+    public Task parseFromDataFile(String data) {
+        StringTokenizer st = new StringTokenizer(data);
+        String className = st.nextToken("~");
+        String status = st.nextToken("~");
+        String description = st.nextToken("~");
+        if (st.hasMoreTokens()) {
+            String extra = st.nextToken("~");
+            if (className.equals("Task.Deadline")) {
+                Deadline ddl =  new Deadline(description, getLocalDate(extra));
+                if (status.equals("1")) {
+                    ddl.markAsDone();
+                }
+                return ddl;
+            } else {
+                Event ev =  new Event(description, getLocalDate(extra));
+                if (status.equals("1")) {
+                    ev.markAsDone();
+                }
+                return ev;
+            }
+        }
+        Todo td = new Todo(description);
+        if (status.equals("1")) {
+            td.markAsDone();
+        }
+        return td;
     }
 }

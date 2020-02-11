@@ -4,6 +4,7 @@ import task.Todo;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
+import java.time.LocalDate;
 import java.util.StringTokenizer;
 
 /**
@@ -98,7 +99,7 @@ public class Duke {
         case DEADLINE:
             parser.checkDescription(str, "deadline".length());
             String[] strings = parser.stringSplitting(st);
-            Deadline ddl = new Deadline(strings[0], strings[1]);
+            Deadline ddl = new Deadline(strings[0], parser.getLocalDate(strings[1]));
             output += taskList.addTask(ddl);
             this.storage.rewriteFile(taskList);
             break;
@@ -106,7 +107,7 @@ public class Duke {
         case EVENT:
             parser.checkDescription(str, "event".length());
             String[] strings2 = parser.stringSplitting(st);
-            Event ev = new Event(strings2[0], strings2[1]);
+            Event ev = new Event(strings2[0], parser.getLocalDate(strings2[1]));
             output += taskList.addTask(ev);
             this.storage.rewriteFile(taskList);
             break;

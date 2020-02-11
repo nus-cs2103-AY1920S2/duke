@@ -14,9 +14,9 @@ public class Event extends Task {
      * @param description the description of the Event.
      * @param scheduledDate the timing of the Event.
      */
-    public Event(String description, String scheduledDate) {
+    public Event(String description, LocalDate scheduledDate) {
         super(description);
-        this.scheduledDate = LocalDate.parse(scheduledDate);
+        this.scheduledDate = scheduledDate;
     }
 
     public LocalDate getScheduledDate() {

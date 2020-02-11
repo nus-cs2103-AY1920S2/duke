@@ -63,48 +63,16 @@ public class Storage {
     }
 
     /**
-     * decode the String gotten from the data file into a Task.
-     * @param data a String gotten from the data file
-     * @return the Task after decoding the String.
-     */
-    private Task decode(String data) {
-        StringTokenizer st = new StringTokenizer(data);
-        String className = st.nextToken("~");
-        String status = st.nextToken("~");
-        String description = st.nextToken("~");
-        if (st.hasMoreTokens()) {
-            String extra = st.nextToken("~");
-            if (className.equals("Task.Deadline")) {
-                Deadline ddl =  new Deadline(description, extra);
-                if (status.equals("1")) {
-                    ddl.markAsDone();
-                }
-                return ddl;
-            } else {
-                Event ev =  new Event(description, extra);
-                if (status.equals("1")) {
-                    ev.markAsDone();
-                }
-                return ev;
-            }
-        }
-        Todo td = new Todo(description);
-        if (status.equals("1")) {
-            td.markAsDone();
-        }
-        return td;
-    }
-
-    /**
      * loads the list of tasks stored in hard disk.
      * @return a list of Tasks gotten from the hard disk.
      * @throws IOException if the file path cannot be found.
      */
     public ArrayList<Task> start() throws IOException {
+        Parser parser = new Parser();
         ArrayList<Task> tasks = new ArrayList<>();
         List<String> data = Files.readAllLines(Paths.get(this.filePath));
         for (String s: data) {
-            tasks.add(decode(s));
+            tasks.add(parser.parseFromDataFile(s));
         }
         return tasks;
     }

@@ -1,7 +1,6 @@
 Todo~1~play chess
-Event~0~go to bed~2020-02-01
-Event~1~group meeting~2020-03-15
-Todo~0~watch webclass at home
-Event~1~blah blah~2019-10-20
-Event~1~finish homework~2020-02-10
-Event~1~submit homework~2020-02-19
+Todo~0~go to bed
+Todo~1~group meeting
+Todo~0~watching TV
+Todo~0~group meeting
+Event~0~dalnhjdflak~2020-01-29
