@@ -1,5 +1,6 @@
 package dukeproj.data;
 
+import dukeproj.enums.TType;
 import dukeproj.tasks.Task;
 
 import java.time.LocalDate;
@@ -56,9 +57,11 @@ public class Schedule {
         if (mapOfDates.containsKey(date)) {
             ArrayList<Task> tasks = mapOfDates.get(date);
             tasks.remove(task);
+        } else if (task.getType().equals(TType.TODO)) {
+            // do nothing as type is todo
         } else {
             System.out.println("Task: " + task
-                    + " is not found in the calender");
+                    + " is not found in the schedule");
         }
     }
 

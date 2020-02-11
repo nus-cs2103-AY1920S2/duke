@@ -38,55 +38,42 @@ public class AddCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage, Schedule schedule)
             throws BadDescriptionException, DukeDescriptionException, BadDateException {
-        String output = "";
+        if (description.isEmpty()) {
+            throw new DukeDescriptionException("Empty Description");
+        }
+        Task task = addTask();
+        String output = ui.say(SayType.ADD) + "\n" + task;
+        if (!type.equals(CommandType.TODO)) {
+            //Add task into schedule if it is event or deadline
+            schedule.addDate(task);
+        }
+        taskList.addTask(task);
+        storage.writeListIntoFile(taskList.getList());
+        return output;
+    }
+
+    private Task addTask() throws BadDescriptionException, BadDateException {
         switch (type) {
         case TODO:
-            if (description.isEmpty()) {
-                throw new DukeDescriptionException("Empty Description");
-            }
-
-            Task taskToDo = new Todo(description);
-            taskList.addTask(taskToDo);
-            storage.writeListIntoFile(taskList.getList());
-
-            output = ui.say(SayType.ADD) + "\n" + taskToDo;
-            break;
+            return new Todo(description);
         case EVENT:
-            if (description.isEmpty()) {
-                throw new DukeDescriptionException("Empty Description");
-            }
             int eventDate = description.indexOf("/");
             if (eventDate == -1) {
                 throw new BadDescriptionException("Missing '/' in Description");
             }
-            Task taskEvent = new Event(description.substring(0, eventDate),
+            return new Event(description.substring(0, eventDate),
                     description.substring(eventDate + 4));
-            taskList.addTask(taskEvent);
-            schedule.addDate(taskEvent);
-            storage.writeListIntoFile(taskList.getList());
-
-            output = ui.say(SayType.ADD) + "\n" + taskEvent;
-            break;
         case DEADLINE:
-            if (description.isEmpty()) {
-                throw new DukeDescriptionException("Empty Description");
-            }
             int deadlineDate = description.indexOf("/");
             if (deadlineDate == -1) {
                 throw new BadDescriptionException("Missing '/' in Description");
             }
-            Task taskDLine = new Deadline(description.substring(0, deadlineDate),
+            return new Deadline(description.substring(0, deadlineDate),
                     description.substring(deadlineDate + 4));
-            taskList.addTask(taskDLine);
-            schedule.addDate(taskDLine);
-            storage.writeListIntoFile(taskList.getList());
-
-            output = ui.say(SayType.ADD) + "\n" + taskDLine;
-            break;
         default:
-            break;
+            System.err.println("Bad command type parsed into AddCommand, task defaults to Todo");
+            return new Todo(description); //default is todo task.
         }
-        return output;
     }
 
     /**

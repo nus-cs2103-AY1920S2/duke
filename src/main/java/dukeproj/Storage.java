@@ -35,28 +35,7 @@ public class Storage {
             while (sc.hasNext()) {
                 String str = sc.nextLine();
                 String[] parts = str.split("\\|");
-                switch (parts[0]) {
-                case "T": {
-                    Task task = new Todo(Boolean.parseBoolean(parts[1]), parts[2]);
-                    tasks.add(task);
-                    schedule.addDate(task);
-                    break;
-                }
-                case "E": {
-                    Task task = new Event(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
-                    tasks.add(task);
-                    schedule.addDate(task);
-                    break;
-                }
-                case "D": {
-                    Task task = new Deadline(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
-                    tasks.add(task);
-                    schedule.addDate(task);
-                    break;
-                }
-                default:
-                    break;
-                }
+                addTask(parts, tasks, schedule);
             }
             return tasks;
         } catch (FileNotFoundException e) {
@@ -68,6 +47,41 @@ public class Storage {
         }
     }
 
+    private void addTask(String[] inputs, ArrayList<Task> tasks, Schedule schedule)
+            throws BadDateException {
+        switch (inputs[0]) {
+        case "T":
+            Task todo = newTodo(Boolean.parseBoolean(inputs[1]), inputs[2]);
+            tasks.add(todo);
+            break;
+        case "E":
+            Task event = newEvent(Boolean.parseBoolean(inputs[1]), inputs[2], inputs[3]);
+            tasks.add(event);
+            schedule.addDate(event);
+            break;
+        case "D":
+            Task deadline = newDeadline(Boolean.parseBoolean(inputs[1]), inputs[2], inputs[3]);
+            tasks.add(deadline);
+            schedule.addDate(deadline);
+            break;
+        default:
+            System.err.println("Error in file reading");
+            break;
+        }
+    }
+
+    private Task newTodo(boolean isDone, String description) {
+        return new Todo(isDone, description);
+    }
+
+    private Task newEvent(boolean isDone, String description, String date) throws BadDateException {
+        return new Event(isDone, description, date);
+    }
+
+    private Task newDeadline(boolean isDone, String description, String date) throws BadDateException {
+        return new Deadline(isDone, description, date);
+    }
+
     /**
      * Writes the tasks in an ArrayList into the storage file.
      *
@@ -77,28 +91,33 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : tasks) {
-                switch (task.getType()) {
-                case TODO:
-                    fw.write("T|" + task.getDone() + "|" + task.getTask()
-                            + System.lineSeparator());
-                    break;
-                case EVENT:
-                    fw.write("E|" + task.getDone() + "|" + task.getTask() + "|"
-                            + task.getDate().format(Parser.DATE_WRITE_FORMATTER)
-                            + System.lineSeparator());
-                    break;
-                case DEADLINE:
-                    fw.write("D|" + task.getDone() + "|" + task.getTask() + "|"
-                            + task.getDate().format(Parser.DATE_WRITE_FORMATTER)
-                            + System.lineSeparator());
-                    break;
-                default:
-                    break;
-                }
+                writeTaskToFile(task, fw);
             }
             fw.close();
         } catch (IOException e) {
             System.err.println("Unable to write");
+        }
+    }
+
+    private void writeTaskToFile(Task task, FileWriter fw) throws IOException {
+        switch (task.getType()) {
+        case TODO:
+            fw.write("T|" + task.getDone() + "|" + task.getTask()
+                    + System.lineSeparator());
+            break;
+        case EVENT:
+            fw.write("E|" + task.getDone() + "|" + task.getTask() + "|"
+                    + task.getDate().format(Parser.DATE_WRITE_FORMATTER)
+                    + System.lineSeparator());
+            break;
+        case DEADLINE:
+            fw.write("D|" + task.getDone() + "|" + task.getTask() + "|"
+                    + task.getDate().format(Parser.DATE_WRITE_FORMATTER)
+                    + System.lineSeparator());
+            break;
+        default:
+            System.err.println("Error in TaskList");
+            break;
         }
     }
 

@@ -97,7 +97,7 @@ public class GuiApp extends Application {
             scrollPane.setVvalue(1.0);
         }));
 
-        dukeSay(duke.getUi().say(SayType.INTRO));
+        displayDukeResponse(duke.getUi().say(SayType.INTRO));
     }
 
     /**
@@ -105,7 +105,7 @@ public class GuiApp extends Application {
      *
      * @param str String to be echoed into the GUI by Duke.
      */
-    public void dukeSay(String str) {
+    public void displayDukeResponse(String str) {
         Label text = new Label(str);
 
         text.setWrapText(true);
@@ -119,30 +119,33 @@ public class GuiApp extends Application {
      * The method will also check whether the command given by user is an exit command and responses appropriately.
      */
     private void handleUserInput() {
-        String dukeResponse = "";
-        Command command = new ListCommand(); //default command
-        try {
-            command = duke.getCommandResponse(userInput.getText());
-            dukeResponse = duke.getResponse(command);
-        } catch (InvalidCommandException e) {
-            dukeResponse = duke.getUi().say(SayType.INVALID_COMMAND);
-        }
-
+        StringBuilder dukeResponse = new StringBuilder();
+        Command command = getDukeCommand(dukeResponse);
+        //set up labels for user and duke
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(dukeResponse);
-
+        Label dukeText = new Label(dukeResponse.toString());
         userText.setWrapText(true);
         dukeText.setWrapText(true);
-
+        //add labels into dialog container
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userIm)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeIm))
         );
-
         if (command.isExit()) {
             closeApp();
         }
         userInput.clear();
+    }
+
+    private Command getDukeCommand(StringBuilder response) {
+        try {
+            Command command = duke.getCommandResponse(userInput.getText());
+            response.append(duke.getResponse(command));
+            return command;
+        } catch (InvalidCommandException e) {
+            response.append(duke.getUi().say(SayType.INVALID_COMMAND));
+            return new ListCommand();
+        }
     }
 
     /**
@@ -152,7 +155,7 @@ public class GuiApp extends Application {
         try {
             Platform.exit();
         } catch (Exception e) {
-            dukeSay("Oh dear! I cant seem to close, please alt+F4");
+            displayDukeResponse("Oh dear! I cant seem to close, please alt+F4");
         }
     }
 
@@ -160,7 +163,7 @@ public class GuiApp extends Application {
      * Constructs a GUI app with a predetermined Duke variable.
      */
     public GuiApp() {
-        duke = new Duke("." + File.separator + "data" + File.separator + "Task.txt", true);
+        duke = new Duke("." + File.separator + "data" + File.separator + "Task.txt");
     }
 
 }
