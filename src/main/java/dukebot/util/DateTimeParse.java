@@ -57,9 +57,10 @@ public class DateTimeParse {
                     .parseDefaulting(ChronoField.YEAR, defaultLocalDateTime.getYear())
                     .toFormatter();
         case 6:
-            // fallthrough
+            return DateTimeFormatter.ofPattern("yyyy/M/d HHmm");
         default:
             // default should never be triggered but just in case.
+            assert false;
             return DateTimeFormatter.ofPattern("yyyy/M/d HHmm");
         }
     }
