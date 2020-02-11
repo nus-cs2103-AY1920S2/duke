@@ -15,9 +15,9 @@
     prefHeight="500"
     fitToWidth="true"
   >
-    <VBox fx:id="messageList" spacing="8">
+    <VBox fx:id="messageList" spacing="12">
       <padding>
-        <Insets top="4" left="4" bottom="4" right="4" />
+        <Insets top="12" left="12" bottom="24" right="12" />
       </padding>
     </VBox>
   </ScrollPane>
