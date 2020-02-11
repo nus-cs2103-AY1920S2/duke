@@ -36,12 +36,18 @@ public class Parser {
         checkCommandWord(commandWord);
         if (!commandWord.equals("list") && !commandWord.equals("bye")) {
             checkDetails(commands);
+        } else {
+            // commandWord is either "list" or "bye" -- commands with no arguments required
+            assert commandWord.equals("list") || commandWord.equals("bye") : "invalid command";
         }
     }
 
     public static void checkCommandWord(String commandWord) throws InvalidCommandException {
         if (!validCommands.contains(commandWord)) {
             throw new InvalidCommandException("Sorry dude but that won't command me!");
+        } else {
+            // commandWord is valid and found in the list of validCommands
+            assert validCommands.contains(commandWord) : "invalid command";
         }
     }
 

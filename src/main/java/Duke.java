@@ -18,8 +18,6 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
@@ -27,11 +25,9 @@ public class Duke extends Application {
     private TaskList tasks;
     private Ui ui;
 
-    private String filePath = "data/tasks.txt";
-
     public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
@@ -52,12 +48,12 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout); // Setting the scene to be our layout
+        Scene scene = new Scene(mainLayout); // Setting the scene to be our layout
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
 
@@ -134,8 +130,7 @@ public class Duke extends Application {
     public String getResponse(String input) {
         String output = "";
         try {
-            String fullCommand = input;
-            Command c = Parser.parse(fullCommand);
+            Command c = Parser.parse(input);
             if (!c.isExit()) {
                 output = c.execute(tasks, ui, storage);
             }
