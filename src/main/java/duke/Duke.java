@@ -148,6 +148,10 @@ public class Duke extends Application {
             System.out.println("execute failed");
         }
 
-        return "Duke reply: " + output.toString();
+        if (output.toString().equals("See you again!")) {
+            System.exit(0);
+        }
+
+        return output.toString();
     }
 }
