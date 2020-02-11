@@ -1,5 +1,4 @@
 import CustomException.DukeException;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,8 +21,8 @@ public class TaskList {
     /**
      * Parse all information read from the database into memory
      *
-     * @param contents
-     * @throws DukeException
+     * @param contents the array of Strings representing per line in the database
+     * @throws DukeException if there's anything wrong with loading from the contents into memory
      */
     private void load(ArrayList<String> contents) throws DukeException {
         try {
@@ -74,16 +73,6 @@ public class TaskList {
         return -1;
     }
 
-    public void display() {
-        System.out.println("Here are the tasks in your list:");
-
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1)
-                    + ". "
-                    + list.get(i).toString());
-        }
-    }
-
     public String displayGUI() {
         StringBuilder ret = new StringBuilder("Here are the tasks in your list:\n");
 
@@ -94,12 +83,30 @@ public class TaskList {
         return ret.toString();
     }
 
-    public void display(ArrayList<Integer> indices) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String displayGUI(char key) {
+        if (key == 'n') {
+            list.sort(new NameComp());
+        } else if (key == 'd') {
+            list.sort(new DateComp());
+        }
+
+        StringBuilder ret = new StringBuilder("Here are the tasks in your list:\n");
+
+        for (int i = 0; i < list.size(); i++) {
+            ret.append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
+        }
+
+        return ret.toString();
+    }
+
+    public String displayGUI(ArrayList<Integer> indices) {
+        StringBuilder ret = new StringBuilder("Here are the matching tasks in your list:\n");
 
         for (int i = 0; i < indices.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(indices.get(i)).toString());
+            ret.append(i + 1).append(". ").append(list.get(indices.get(i)).toString()).append("\n");
         }
+
+        return ret.toString();
     }
 
     public void add(String description, boolean isDone) {
@@ -132,7 +139,7 @@ public class TaskList {
         return list.remove(index);
     }
 
-    public void find(String key) {
+    public String find(String key) {
         ArrayList<Integer> indices = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
@@ -142,6 +149,6 @@ public class TaskList {
             }
         }
 
-        display(indices);
+        return displayGUI(indices);
     }
 }
