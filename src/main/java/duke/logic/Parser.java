@@ -31,6 +31,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if an input command is valid.
+     * @param input Input command.
+     * @return true if input command is valid, false otherwise.
+     */
     private static boolean isValidCommand(String input) {
         // Maintain an array of possible commands by the user
         ArrayList<String> commands = new ArrayList<>();
@@ -53,11 +58,6 @@ public class Parser {
      * @throws DukeException If any error occurs during parsing of the user input.
      */
     public static Command parse(String input) throws DukeException {
-        // Check for unknown commands
-        if (!isValidCommand(input)) {
-            return new UnknownCommand();
-        }
-
         // Check for single word user inputs
         if (input.equals("bye")) {
             return new ExitCommand();
@@ -68,6 +68,11 @@ public class Parser {
         Command c;
         String[] inputElements = input.split(" ", 2);
         String command = inputElements[0];
+
+        // Check for unknown commands
+        if (!isValidCommand(command)) {
+            return new UnknownCommand();
+        }
 
         try {
             Parser.checkArr(command, false, inputElements);

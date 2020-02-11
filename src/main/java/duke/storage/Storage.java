@@ -32,26 +32,21 @@ public class Storage {
         switch (taskElements[0]) {
         case "T":
             t = new ToDo(taskElements[2]);
-            if (taskElements[1].equals("1")) {
-                t.setDone();
-            }
             break;
         case "D":
             t = new Deadline(taskElements[2],
                     LocalDate.parse(taskElements[3], DateTimeFormatter.ofPattern("MMM d yyyy")));
-            if (taskElements[1].equals("1")) {
-                t.setDone();
-            }
             break;
         case "E":
             t = new Event(taskElements[2],
                     LocalDate.parse(taskElements[3], DateTimeFormatter.ofPattern("MMM d yyyy")));
-            if (taskElements[1].equals("1")) {
-                t.setDone();
-            }
             break;
         default:
             throw new LoadingException();
+        }
+        assert t != null;
+        if (taskElements[1].equals("1")) {
+            t.setDone();
         }
         return t;
     }
