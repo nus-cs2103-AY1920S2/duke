@@ -14,6 +14,14 @@ public class ToDo extends Task {
     }
 
     /**
+     * Returns boolean of whether a todo is dated.
+     * @return false.
+     */
+    public boolean hasDate() {
+        return false;
+    }
+
+    /**
      * Constructor for a todo task, in which the done status can be specified.
      * @param name The name of event task
      * @param isDone The done status of event task

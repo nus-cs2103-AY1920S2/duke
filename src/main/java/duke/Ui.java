@@ -3,6 +3,8 @@ package duke;
 import task.Task;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This class takes care of the user interface
@@ -31,7 +33,32 @@ public class Ui {
      **/
     public static String showList(TaskList tasks) {
         StringBuilder sb = new StringBuilder();
+        if (tasks.size() == 0) {
+            return "There are no tasks in your list";
+        }
         sb.append("Here are the tasks in your list:\n");
+        sb.append(Ui.listOfTask(tasks));
+        return sb.toString();
+    }
+
+    /**
+     * Shows the task schedule at a certain date of the user.
+     * @return Message to show task schedule
+     * at a certain date to the user.
+     **/
+    public static String showSchedule(TaskList tasks, LocalDate date) {
+        String dateFormat = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        StringBuilder sb = new StringBuilder();
+        if (tasks.size() == 0) {
+            return "There are currently no tasks for " + dateFormat + ".";
+        }
+        sb.append("Here are the schedule for " + dateFormat + ":\n");
+        sb.append(Ui.listOfTask(tasks));
+        return sb.toString();
+    }
+
+    private static String listOfTask (TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Task s : tasks.getTasks()) {
             sb.append(i + "." + s.toString() + "\n");
@@ -47,7 +74,7 @@ public class Ui {
     public static String showTask(Task newTask, int size) {
         StringBuilder sb = new StringBuilder();
         sb.append("Got it. I've added this task:\n");
-        sb.append("\t" + newTask + "\n");
+        sb.append(newTask + "\n");
         sb.append("Now you have " + size + " tasks in the list.\n");
         return sb.toString();
     }
@@ -60,7 +87,7 @@ public class Ui {
     public static String showDone(Task updatedTask) {
         StringBuilder sb = new StringBuilder();
         sb.append("Nice! I've marked this task as done:");
-        sb.append("\t" + updatedTask + "\n");
+        sb.append(updatedTask + "\n");
         return sb.toString();
     }
 
@@ -84,7 +111,7 @@ public class Ui {
     public static String showRemove(Task removedTask, int size) {
         StringBuilder sb = new StringBuilder();
         sb.append("Noted. I've removed this task:\n");
-        sb.append("\t" + removedTask + "\n");
+        sb.append(removedTask + "\n");
         sb.append("Now you have " + size + " tasks in the list.\n");
         return sb.toString();
     }

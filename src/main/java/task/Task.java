@@ -62,4 +62,11 @@ public abstract class Task {
      * @return A string of the task to be written to a file.
      */
     public abstract String writeDrive();
+
+    /**
+     * Returns boolean of whether the task is dated.
+     * @return Boolean of whether the task is dated.
+     */
+    abstract public boolean hasDate();
+
 }

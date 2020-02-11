@@ -3,6 +3,7 @@ package duke;
 import task.Task;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 /**
@@ -20,11 +21,19 @@ public class TaskList {
     }
 
     /**
-     * Constructs a of a non-empty array list using a private constructor.
+     * Constructs a of a non-empty array list using a constructor.
      * @param taskList The ArrayList of this self-implemented TaskList.
      **/
     TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
+    }
+
+    /**
+     * Constructs a of a non-empty array list using a static constructor.
+     * @param taskList The ArrayList of this self-implemented TaskList.
+     **/
+    public static TaskList of(ArrayList<Task> taskList) {
+        return new TaskList(taskList);
     }
 
     /**
@@ -81,7 +90,7 @@ public class TaskList {
      * Filters the list of task to the one that contains a certain string.
      * @return A TaskList that has been filtered
      **/
-    public TaskList filter(String s) {
+    public TaskList filterKeyword (String s) {
         ArrayList<Task> al = new ArrayList<>(
                 this.taskList.stream()
                         .filter(x -> x.getName().contains(s)).collect(Collectors.toList()));

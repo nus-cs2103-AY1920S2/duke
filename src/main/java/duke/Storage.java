@@ -105,10 +105,10 @@ public class Storage {
                 String name = curr.substring(4, curr.indexOf('|', 4));
                 String date = curr.substring(curr.indexOf('|', 4) + 1);
                 if (type.equals("D")) {
-                    add = new Deadline(name, Parser.extractDate(date),
+                    add = new Deadline(name, Parser.formatDateAndTime(date),
                             !isDone.equals("0"));
                 } else {
-                    add = new Event(name, Parser.extractDate(date),
+                    add = new Event(name, Parser.formatDateAndTime(date),
                             !isDone.equals("0"));
                 }
             }

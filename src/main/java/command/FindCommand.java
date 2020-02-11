@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      * @return String as the response of the execution.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList filtered = tasks.filter(this.keyword);
+        TaskList filtered = tasks.filterKeyword(this.keyword);
         return Ui.showFindings(filtered);
     }
 }

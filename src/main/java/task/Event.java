@@ -31,6 +31,22 @@ public class Event extends Task {
     }
 
     /**
+     * Returns boolean of whether an event is dated.
+     * @return true.
+     */
+    public boolean hasDate() {
+        return true;
+    }
+
+    /**
+     * Returns the date of this event task.
+     * @return true.
+     */
+    public LocalDateTime getDate() {
+        return this.date;
+    }
+
+    /**
      * Displays string for an event task.
      * @return The string of event task to be displayed to user.
      */

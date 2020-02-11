@@ -31,6 +31,22 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns boolean of whether a deadline is dated.
+     * @return true.
+     */
+    public boolean hasDate() {
+        return true;
+    }
+
+    /**
+     * Returns the date of this deadline task.
+     * @return true.
+     */
+    public LocalDateTime getDate() {
+        return this.date;
+    }
+
+    /**
      * Displays for a deadline task for the user.
      * @return The string of deadline task to be displayed to user.
      */

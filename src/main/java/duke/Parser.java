@@ -10,6 +10,7 @@ import command.ErrorCommand;
 import command.ExitCommand;
 import command.FindCommand;
 import command.ListCommand;
+import command.ScheduleCommand;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,6 +39,8 @@ public class Parser {
                 return new ListCommand();
             case "bye":
                 return new ExitCommand();
+            case "schedule":
+                return new ScheduleCommand(Parser.extractDate(Parser.getDateAndTimeOnly(trimCommand)));
             case "find":
                 return new FindCommand(Parser.getSecond(trimCommand));
             case "done":
@@ -63,14 +66,16 @@ public class Parser {
                 }
             case "deadline":
                 try {
-                    return new AddDeadlineCommand(Parser.getTaskName(trimCommand), Parser.getDate(trimCommand));
+                    return new AddDeadlineCommand(Parser.getTaskName(trimCommand),
+                            Parser.formatDateAndTime(Parser.getDateAndTimeOnly(trimCommand)));
                 } catch (IndexOutOfBoundsException e) {
                     return new ErrorCommand(new DukeException(
                             "☹ OOPS!!! The description of a deadline cannot be empty."));
                 }
             case "event":
                 try {
-                    return new AddEventCommand(Parser.getTaskName(trimCommand), Parser.getDate(trimCommand));
+                    return new AddEventCommand(Parser.getTaskName(trimCommand),
+                            Parser.formatDateAndTime(Parser.getDateAndTimeOnly(trimCommand)));
                 } catch (IndexOutOfBoundsException e) {
                     return new ErrorCommand(new DukeException(
                             "☹ OOPS!!! The description of an event cannot be empty."));
@@ -96,6 +101,7 @@ public class Parser {
      * @return String of the third argument of the command
      **/
     public static String getTaskName(String message) {
+        String taskType = message.trim().split(" ")[0];
         if (hasSeparator(message)) {
             assert taskType.equals("deadline") || taskType.equals("event");
             return getBeforeSeparator(message);
@@ -120,8 +126,19 @@ public class Parser {
      * @param message The command text.
      * @return Boolean value whether text has a / separator.
      **/
-    private static boolean hasSeparator(String message) {
+    public static boolean hasSeparator(String message) {
         return message.contains("/");
+    }
+
+    /**
+     * Retrieves the string of date and time part of a Deadline and Event only.
+     * @param message The message to be sliced.
+     * @return Boolean value whether text has a / separator.
+     **/
+    public static String getDateAndTimeOnly (String message) {
+        String beforeDate = message.substring(message.indexOf("/") + 1, message.indexOf("/") + 4);
+        assert beforeDate.equals("/by ") || beforeDate.equals("/at");
+        return message.substring(message.indexOf("/") + 4);
     }
 
     /**
@@ -129,10 +146,9 @@ public class Parser {
      * @param message The message text.
      * @return Date format of the of the command of the task
      **/
-    public static LocalDateTime getDate(String message) {
-        String beforeDate = message.substring(message.indexOf("/") + 1, message.indexOf("/") + 4);
-        assert beforeDate.equals("/by ");
-        return extractDate(message.substring(message.indexOf("/") + 4));
+    public static LocalDateTime formatDateAndTime(String message) {
+        String time = getTime(message);
+        return extractDate(message).atTime(LocalTime.parse(time));
     }
 
     /**
@@ -140,13 +156,11 @@ public class Parser {
      * @param message The message text.
      * @return Date format of the of the string format of the date
      **/
-    public static LocalDateTime extractDate(String message) {
-        String time = getTime(message);
+    public static LocalDate extractDate(String message) {
         String[] original = getDayMonthYearArray(message);
         String[] reversed = getYearMonthDayArray(original);
         String date = String.join("-", reversed);
-        return LocalDate.parse(date)
-                .atTime(LocalTime.parse(time));
+        return LocalDate.parse(date);
     }
 
     /**
@@ -166,8 +180,12 @@ public class Parser {
      * @return String array of day, month, year of the message date.
      **/
     private static String[] getDayMonthYearArray(String message) {
-        return message.substring(0, message.indexOf(" "))
-                .split("/");
+        System.out.println(message);
+        if (message.contains(" ")) {
+            return message.substring(0, message.indexOf(" "))
+                    .split("/");
+        }
+        return message.split("/");
     }
 
     /**
