@@ -6,7 +6,7 @@ public class Deadline extends Task {
     private LocalDate deadline;
 
     public Deadline(String description, LocalDate deadline) {
-        super(description);
+        super(false, description);
         this.deadline = deadline;
     }
 

@@ -6,11 +6,6 @@ public class Task {
     private boolean isDone;
     private String task;
 
-    public Task(String description) {
-        isDone = false;
-        task = description;
-    }
-
     public Task(boolean isDone, String description) {
         this.isDone = isDone;
         task = description;

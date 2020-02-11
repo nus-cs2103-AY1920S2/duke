@@ -2,7 +2,7 @@ package e0148811.duke;
 
 public class Todo extends Task {
     public Todo(String description) {
-        super(description);
+        super(false, description);
     }
 
     public Todo(boolean isDone, String description) {

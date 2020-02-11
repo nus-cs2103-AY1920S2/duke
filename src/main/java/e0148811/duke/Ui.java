@@ -19,7 +19,7 @@ public class Ui {
     }
 
     public void greet() {
-        System.out.println("Hello, this is Duke. "
+        System.out.println("Hello, this is NUS-Duke. "
                 + "Please give me an instruction followed by relevant description.");
     }
 

@@ -12,10 +12,8 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class Duke {
     private Storage storage;
@@ -49,16 +47,16 @@ public class Duke {
                     printList(lengthOfArray);
                     break;
                 case "todo":
-                    Task t = createATodoTask(instructionByWord, lengthOfArray);
-                    addAndStoreTask(t);
+                    Task task = createATodoTask(instructionByWord, lengthOfArray);
+                    addAndStoreTask(task);
                     break;
                 case "deadline":
-                    t = createADeadlineTask(instructionByWord, lengthOfArray);
-                    addAndStoreTask(t);
+                    task = createADeadlineTask(instructionByWord, lengthOfArray);
+                    addAndStoreTask(task);
                     break;
                 case "event":
-                    t = createAnEventTask(instructionByWord, lengthOfArray);
-                    addAndStoreTask(t);
+                    task = createAnEventTask(instructionByWord, lengthOfArray);
+                    addAndStoreTask(task);
                     break;
                 case "done":
                     doneOrDeleteATask("done", instructionByWord, lengthOfArray);
