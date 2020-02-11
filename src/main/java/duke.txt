@@ -3,4 +3,4 @@ T/N/swim
 E/N/meeting /2020-02-02
 T/N/borrow book
 T/N/eat
-E/N/class meeting /2020-03-03
+T/N/sit

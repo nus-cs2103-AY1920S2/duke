@@ -39,24 +39,27 @@ public class Ui {
 
     public void displayAddedTask(Task task, TaskList taskList) {
         int size = taskList.getSize();
+        assert size > 0 : "Size cannot be less than 0!";
         System.out.println("Got it. I've added this task:\n" + task.toString() + "\n" + "Now you have " + size + " tasks in the list.");
     }
 
     public void displayDeletedTask(Task task, TaskList taskList) {
         int size = taskList.getSize();
+        assert size > 0 : "Size cannot be less than 0!";
         System.out.println("Noted. I've removed this task:\n" + task.toString() + "\n" + "Now you have " + size + " tasks in the list.");
     }
 
     public void displayTasks(TaskList taskList) {
-        System.out.println("Here are your remaining tasks:");
+        System.out.print("Here are your remaining tasks:");
         for (Task t: taskList.tasks) {
             int index = taskList.tasks.indexOf(t) + 1;
+            assert index < 0 : "Index cannot be less than 0!";
             System.out.println("" + index + "." + t.toString());
         }
     }
 
     public void displayBye() {
-        System.out.println("Bye nerd. Hope to see you again soon!");
+        System.out.print("Bye nerd. Hope to see you again soon!\n");
     }
 
 
