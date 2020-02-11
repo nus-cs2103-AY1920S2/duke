@@ -8,6 +8,8 @@ import duke.task.Task;
 public class ListCommand extends Command {
     @Override
     public ExecuteResult execute(List<Task> tasks) {
+        assert tasks != null;
+
         return new ExecuteResult(
                 tasks,
                 "Here are the tasks in your list:\n"

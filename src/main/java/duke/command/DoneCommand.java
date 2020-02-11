@@ -14,10 +14,12 @@ public class DoneCommand extends Command {
 
     @Override
     public ExecuteResult execute(List<Task> tasks) throws DukeException {
+        assert tasks != null;
+
         if (doneIndex < 0 || doneIndex >= tasks.size()) {
             throw new DukeException("Oops, done index is out of bounds");
-            
         }
+
         Task doneTask = tasks.get(doneIndex).setDone(true);
         List<Task> newTasks = new ArrayList<>(tasks);
         newTasks.set(doneIndex, doneTask);

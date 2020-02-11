@@ -19,6 +19,9 @@ public abstract class Command {
          * @param hasNextCommand Whether or not the current command is terminal
          */
         public ExecuteResult(List<Task> tasks, String message, boolean hasNextCommand) {
+            assert tasks != null;
+            assert message != null;
+
             this.tasks = tasks;
             this.message = message;
             this.hasNextCommand = hasNextCommand;
