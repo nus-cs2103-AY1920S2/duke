@@ -34,6 +34,9 @@ public class Parser {
             } else if (cmd.contains("delete")) {
                 String wh = cmd.split(" ")[1];
                 return new DeleteCommand(wh);
+            } else if (cmd.contains("find")) {
+                String description = cmd.split(" ")[1];
+                return new FindCommand(description);
             } else {
                 TaskEnum taskEnum;
                 String comm = cmd.split(" ")[0];

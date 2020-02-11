@@ -59,4 +59,18 @@ public class Ui {
         System.out.println(t.toString());
         System.out.println("Now you have " + i + " tasks in the list");
     }
+
+    /**
+     * Print found message.
+     */
+    public void printFound() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    /**
+     * Print Not Found message.
+     */
+    public void printNotFound() {
+        System.out.println("There was no matching task");
+    }
 }
