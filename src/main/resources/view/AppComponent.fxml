@@ -25,7 +25,7 @@
     <TextField
       fx:id="messageInput"
       HBox.hgrow="ALWAYS"
-      prefWidth="250"
+      prefWidth="500"
       promptText="Ask Duke anything!"
       onAction="#askQuery"
     />
