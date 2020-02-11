@@ -10,6 +10,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -41,6 +42,8 @@ public class Parser {
             return parseDeadlineInput(input);
         } else if (input.equalsIgnoreCase("bye")) {
             return new ExitCommand();
+        } else if (input.equalsIgnoreCase("help")) {
+            return new HelpCommand();
         } else {
             throw new DukeException(String.format("Oops, '%s' is an invalid input", input));
         }
