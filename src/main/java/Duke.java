@@ -40,7 +40,7 @@ public class Duke extends Application{
                 String[] inputs = input.split(" ", 2);
                 String command = inputs[0];
                 char[] inputArr = input.toCharArray();
-                if (command.equals("todo")) { //create todo
+                if (command.equals("todo") || command.equals("t")) { //create todo
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
                     }
@@ -48,7 +48,7 @@ public class Duke extends Application{
                     String info = Todo.generateTodoDesc(inputArr);
                     Todo task = new Todo(info);
                     Task.addTask(task);
-                } else if (command.equals("event")) { //create event
+                } else if (command.equals("event") || command.equals("e")) { //create event
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
                     }
@@ -58,7 +58,7 @@ public class Duke extends Application{
                     desc = Event.getEventDesc(inputArr);
                     Event task = new Event(desc, date);
                     Task.addTask(task);
-                } else if (command.equals("deadline")) { //create deadline
+                } else if (command.equals("deadline") || command.equals("d")) { //create deadline
                     if (inputs.length == 1) {
                         throw new EmptyDescriptionException();
                     }
@@ -68,19 +68,19 @@ public class Duke extends Application{
                     desc = Deadline.getDesc(inputArr);
                     Deadline task = new Deadline(desc, by);
                     Task.addTask(task);
-                } else if (command.equals("list")) { //list command
+                } else if (command.equals("list") || command.equals ("l")) { //list command
                     Task.showTasks();
-                } else if (command.equals("done")) { //done command
+                } else if (command.equals("done") || command.equals("do")) { //done command
                     Task.taskDone(input);
-                } else if (command.equals("bye")) { //bye command
+                } else if (command.equals("bye") || command.equals("b")) { //bye command
                     Task.saveToFile();
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
-                } else if (command.equals("delete")) { //delete command
+                } else if (command.equals("delete") || command.equals("del")) { //delete command
                     Task.deleteTask(inputs[1]);
-                } else if (command.equals("find")) { //find command
+                } else if (command.equals("find") || command.equals("f")) { //find command
                     Task.find(inputs[1]);
-                } else if (command.equals("view")) { //view schedules
+                } else if (command.equals("view") || command.equals("v")) { //view schedules
                     Task.viewSchedule(inputs[1]);
                 } else {
                     throw new InvalidCommandException();
