@@ -1,11 +1,11 @@
-package Duke;
+package duke;
 
 /**
- * Class for handling empty list
+ * Class for handling empty list.
  */
 public class EmptyListException extends DukeException {
     /**
-     * toString method
+     * toString method.
      * @return the toString method
      */
     @Override

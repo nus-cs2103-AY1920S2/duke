@@ -1,8 +1,9 @@
-package Duke;
+package duke;
+
 import java.time.LocalDateTime;
 
 /**
- * DeadLine Command class that inherits from Command
+ * DeadLine Command class that inherits from Command.
  */
 public class DeadLineCommand extends Command {
     protected String spli;
@@ -10,7 +11,7 @@ public class DeadLineCommand extends Command {
     protected LocalDateTime fin;
 
     /**
-     * Deadline command constructor
+     * Deadline command constructor.
      * @param spli Takes in /by statement
      * @param description takes in the description
      * @param fin Takes in the finishing date
@@ -22,7 +23,7 @@ public class DeadLineCommand extends Command {
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      * @param ui Pass in Ui class
      * @param storage Pass in Storage class
      * @param taskList Pass in TaskList class
@@ -35,7 +36,7 @@ public class DeadLineCommand extends Command {
     }
 
     /**
-     * Method to return the index
+     * Method to return the index.
      * @return returns the index in the class
      */
     public String getIndex() {

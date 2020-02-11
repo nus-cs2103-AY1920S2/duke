@@ -1,11 +1,11 @@
-package Duke;
+package duke;
 
 /**
- * Class for unknown commands
+ * Class for unknown commands.
  */
 public class UnknownCommandException extends DukeException {
     /**
-     * toString method
+     * toString method.
      * @return the toString method
      */
     @Override

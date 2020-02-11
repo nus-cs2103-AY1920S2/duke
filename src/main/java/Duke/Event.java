@@ -1,13 +1,13 @@
-package Duke;
+package duke;
 
 /**
- * Event class that inherits from Task class
+ * Event class that inherits from Task class.
  */
 public class Event extends Task {
     protected String timefin;
 
     /**
-     * Constructor for Event
+     * Constructor for Event.
      * @param description Takes in a description
      * @param timefin Takes in a String of finishing time
      */
@@ -17,7 +17,7 @@ public class Event extends Task {
     }
 
     /**
-     * To string method for Event
+     * To string method for Event.
      * @return string for toString method
      */
     @Override

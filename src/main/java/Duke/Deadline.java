@@ -1,15 +1,16 @@
-package Duke;
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Dateline class that inherits from Task class
+ * Dateline class that inherits from Task class.
  */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
-     * Constructor for Deadline
+     * Constructor for Deadline.
      * @param description Takes in a description
      * @param by Takes in local date time
      */
@@ -19,11 +20,12 @@ public class Deadline extends Task {
     }
 
     /**
-     * To string method for Deadline
+     * To string method for Deadline.
      * @return string for toString method
      */
     @Override
     public String toString() {
-        return "[D]"+ "[" + super.getStatusIcon() + "] "  + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")) + ")";
+        return "[D]" + "[" + super.getStatusIcon() + "] "  + super.toString() + " (by: " + by.format(
+                DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")) + ")";
     }
 }

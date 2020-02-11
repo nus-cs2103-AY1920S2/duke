@@ -1,7 +1,11 @@
-import Duke.*;
+import duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Command;
+import duke.Parser;
 
 /**
- * Main class for Duke
+ * Main class for duke.
  */
 public class Duke {
 
@@ -10,10 +14,10 @@ public class Duke {
     protected TaskList tasks;
 
     /**
-     * Initialize Duke
+     * Initialize duke.
      * @param filepath filepath of storage file
      */
-    public Duke(String filepath){
+    public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
         tasks = new TaskList(storage.load());
@@ -21,7 +25,7 @@ public class Duke {
     }
 
     /**
-     * Run Duke
+     * Run duke.
      */
     public void run() {
         ui.printLogo();
@@ -36,7 +40,7 @@ public class Duke {
     }
 
     /**
-     * Main Method of Duke
+     * Main Method of duke.
      * @param args takes in command prompt arguments
      */
     public static void main(String[] args) {

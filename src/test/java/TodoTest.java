@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
-import Duke.Task;
-import Duke.Todo;
+import duke.Task;
+import duke.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

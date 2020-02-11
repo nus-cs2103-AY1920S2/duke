@@ -1,11 +1,11 @@
-package Duke;
+package duke;
 
 /**
- * Abstract class for handling Duke Exception
+ * Abstract class for handling duke Exception.
  */
 public abstract class DukeException extends Exception {
     /**
-     * Abstract toString method
+     * Abstract toString method.
      * @return the toString method
      */
     @Override

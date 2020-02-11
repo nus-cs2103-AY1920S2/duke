@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
 /**
- * Event Command class that inherits from Command
+ * Event Command class that inherits from Command.
  */
 public class EventCommand extends Command {
     protected String spli;
@@ -9,7 +9,7 @@ public class EventCommand extends Command {
     protected String date;
 
     /**
-     * Deadline command constructor
+     * Deadline command constructor.
      * @param spli Takes in /at statement
      * @param description takes in the description
      * @param date Takes in the finishing date in string
@@ -21,7 +21,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      * @param ui Pass in Ui class
      * @param storage Pass in Storage class
      * @param taskList Pass in TaskList class
@@ -34,7 +34,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Method to return the index
+     * Method to return the index.
      * @return returns the index in the class
      */
     public String getIndex() {

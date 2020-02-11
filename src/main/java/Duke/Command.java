@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
 /**
- * Abstract class for Command
+ * Abstract class for Command.
  */
 public abstract class Command {
     protected Ui ui;
@@ -9,7 +9,7 @@ public abstract class Command {
     protected TaskList taskList;
 
     /**
-     * Abstract method for executing commands
+     * Abstract method for executing commands.
      * @param ui Pass in Ui class
      * @param storage Pass in Storage class
      * @param taskList Pass in TaskList class

@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
 /**
- * Todo class that inherits from Task class
+ * Todo class that inherits from Task class.
  */
 public class Todo extends Task {
     public Todo(String description) {
@@ -9,7 +9,7 @@ public class Todo extends Task {
     }
 
     /**
-     * To string method for Todo
+     * To string method for Todo.
      * @return string for toString method
      */
     @Override

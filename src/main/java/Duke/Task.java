@@ -1,14 +1,14 @@
-package Duke;
+package duke;
 
 /**
- * Task class
+ * Task class.
  */
 public class Task implements java.io.Serializable {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Task constructor
+     * Task constructor.
      * @param description description of the task
      */
     public Task(String description) {
@@ -17,7 +17,7 @@ public class Task implements java.io.Serializable {
     }
 
     /**
-     * Method for returning the status icon
+     * Method for returning the status icon.
      * @return returns a status icon in string
      */
     public String getStatusIcon() {
@@ -25,14 +25,14 @@ public class Task implements java.io.Serializable {
     }
 
     /**
-     * Change isDone to true
+     * Change isDone to true.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Getter method for description
+     * Getter method for description.
      * @return returns a description
      */
     public String getDescription() {
@@ -40,7 +40,7 @@ public class Task implements java.io.Serializable {
     }
 
     /**
-     * toString method for task
+     * toString method for task.
      * @return the toString statement
      */
     @Override

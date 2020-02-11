@@ -1,20 +1,21 @@
-package Duke;
+package duke;
+
 import java.util.Scanner;
 
 /**
- * UI class
+ * UI class.
  */
 public class Ui {
 
     /**
-     * Display a welcome text
+     * Display a welcome text.
      */
-    public static void showWelcome(){
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public static void showWelcome() {
+        System.out.println("Hello! I'm duke\nWhat can I do for you?");
     }
 
     /**
-     * Display the Duke Logo
+     * Display the duke Logo.
      */
     public static void printLogo() {
         String logo = " ____        _        \n"
@@ -26,14 +27,14 @@ public class Ui {
     }
 
     /**
-     * Prints out a line
+     * Prints out a line.
      */
     public void printLine() {
         System.out.println("--------------------------------");
     }
 
     /**
-     * Read in the command
+     * Read in the command.
      * @return the string of the command
      */
     public String readCommand() {
@@ -42,14 +43,14 @@ public class Ui {
     }
 
     /**
-     * Prints out exit message
+     * Prints out exit message.
      */
     public void printExit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Prints out the task message
+     * Prints out the task message.
      * @param t takes in a task
      * @param i takes in task list size
      */
@@ -58,6 +59,4 @@ public class Ui {
         System.out.println(t.toString());
         System.out.println("Now you have " + i + " tasks in the list");
     }
-
-
 }

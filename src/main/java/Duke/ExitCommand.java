@@ -1,12 +1,12 @@
-package Duke;
+package duke;
 
 /**
- * Exit Command class that inherits from Command
+ * Exit Command class that inherits from Command.
  */
 public class ExitCommand extends Command {
 
     /**
-     * Execute the command
+     * Execute the command.
      * @param ui Pass in Ui class
      * @param storage Pass in Storage class
      * @param taskList Pass in TaskList class

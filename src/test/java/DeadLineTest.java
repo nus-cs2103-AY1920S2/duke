@@ -1,8 +1,8 @@
-package Duke;
+package duke;
 
-import Duke.Task;
-import Duke.Parser;
-import Duke.Deadline;
+import duke.Task;
+import duke.Parser;
+import duke.Deadline;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

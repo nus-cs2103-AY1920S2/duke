@@ -1,13 +1,13 @@
-package Duke;
+package duke;
 
 /**
- * ToDoCommand class that inherits from Command
+ * ToDoCommand class that inherits from Command.
  */
 public class ToDoCommand extends Command {
     protected String description;
 
     /**
-     * Delete Command constructor
+     * Delete Command constructor.
      * @param description description of todo
      */
     public ToDoCommand(String description) {
@@ -15,7 +15,7 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      * @param ui Pass in Ui class
      * @param storage Pass in Storage class
      * @param taskList Pass in taskList class
@@ -28,7 +28,7 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Method to return the index
+     * Method to return the index.
      * @return returns the index in the class
      */
     public String getIndex() {
