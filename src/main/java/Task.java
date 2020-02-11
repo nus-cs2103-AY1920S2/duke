@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 
 public class Task {
     protected String description;
@@ -9,6 +10,8 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    public boolean getStatus() { return this.isDone; }
 
     public String getStatusIcon() {
         return (isDone ? "Y" : "N"); //return tick or X symbols
