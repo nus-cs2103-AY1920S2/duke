@@ -1,22 +1,13 @@
 package dukeproj;
 
 import dukeproj.command.*;
-import dukeproj.data.Schedule;
-import dukeproj.data.TaskList;
 import dukeproj.enums.CommandType;
 import dukeproj.exception.BadDateException;
-import dukeproj.exception.BadDescriptionException;
-import dukeproj.exception.DukeDescriptionException;
 import dukeproj.exception.InvalidCommandException;
-import dukeproj.tasks.Deadline;
-import dukeproj.tasks.Event;
-import dukeproj.tasks.Task;
-import dukeproj.tasks.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * Represents a parser with static methods to interpret Strings into actionable data for DukeProject.
@@ -28,15 +19,6 @@ public class Parser {
     /** Date formatter when writing (to write into dukeproj.Duke) the date.*/
     public static DateTimeFormatter DATE_WRITE_FORMATTER =
             DateTimeFormatter.ofPattern("dd MM uu");
-
-    /** Primary data structure to store the tasks. */
-    private TaskList taskList;
-    /** Storage to read/write task list from/into files. */
-    private Storage storage;
-    /** Data structure to store tasks aligned by dates.*/
-    private Schedule schedule;
-    /** Primary I/O object used. */
-    private Scanner sc;
 
     /**
      * Returns the date in LocalDate form parsed from the String entered.
@@ -105,12 +87,11 @@ public class Parser {
             break;
         case HELP:
             command = new HelpCommand();
+            break;
         case BYE:
             //fallthrough
         default:
-            if (command.isExit() && !commandType.equals(CommandType.BYE)) {
-                System.err.println("erroneous command");
-            }
+            assert !commandType.equals(CommandType.BYE) : "Erroneous Command";
             break;
         }
         return command;
