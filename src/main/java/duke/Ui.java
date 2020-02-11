@@ -7,6 +7,8 @@ public class Ui {
 
     /**
      * Shows start message.
+     *
+     * @return the string
      */
     public String showStartMessage() {
         return "Hello Sir\nWhat can I do for you today?";
@@ -14,6 +16,8 @@ public class Ui {
 
     /**
      * Shows goodbye message.
+     *
+     * @return the string
      */
     public String showGoodbyeMessage() {
         return "Have a nice day sir!";
@@ -24,6 +28,7 @@ public class Ui {
      *
      * @param task       the task
      * @param taskNumber the task number
+     * @return the string
      */
     public String showTaskDoneMessage(Task task, int taskNumber) {
         return "I shall mark task " + taskNumber + " as completed" + "\n" + task.toString();
@@ -33,6 +38,7 @@ public class Ui {
      * Shows task list.
      *
      * @param taskList the task list
+     * @return the string
      */
     public String showTaskList(MyList taskList) {
         String result = "";
@@ -47,6 +53,7 @@ public class Ui {
      *
      * @param task     the task
      * @param taskList the task list
+     * @return the string
      */
     public String showTaskAddedMessage(Task task, MyList taskList) {
         String result = "";
@@ -61,6 +68,7 @@ public class Ui {
      *
      * @param taskList   the task list
      * @param taskNumber the task number
+     * @return the string
      */
     public String showTaskDeletedMessage(MyList taskList, int taskNumber) {
         Task taskToDelete = taskList.getTask(taskNumber);
@@ -115,6 +123,8 @@ public class Ui {
 
     /**
      * Show found results message.
+     *
+     * @return the string
      */
     public String showFoundResultsMessage() {
         return "Here are the matching tasks in your list:";
@@ -122,6 +132,8 @@ public class Ui {
 
     /**
      * Shows message if no task matches the find.
+     *
+     * @return the string
      */
     public String showNoTaskFoundMessage() {
         return "No task found that matches your description";

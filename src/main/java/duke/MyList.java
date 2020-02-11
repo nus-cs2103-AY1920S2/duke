@@ -56,6 +56,8 @@ public class MyList {
 
     /**
      * Prints list.
+     *
+     * @return the string
      */
     public String printList() {
         String result = "";

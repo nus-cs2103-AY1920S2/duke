@@ -14,6 +14,9 @@ public class Duke {
     private static MyList taskList;
     private static Storage storage;
 
+    /**
+     * Instantiates a new Duke.
+     */
     public Duke() {
         taskList = new MyList();
         storage = new Storage();
@@ -53,6 +56,9 @@ public class Duke {
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     *
+     * @param input the input
+     * @return the response
      */
     String getResponse(String input) {
 

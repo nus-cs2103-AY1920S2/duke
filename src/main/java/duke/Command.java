@@ -14,6 +14,7 @@ public interface Command {
      * @param taskList the task list
      * @param ui       the ui
      * @param storage  the storage
+     * @return the string
      * @throws IOException   the io exception
      * @throws DukeException the duke exception
      */
