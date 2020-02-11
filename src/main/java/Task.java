@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Parent class of Deadline, Event and ToDo.
  */
@@ -22,6 +24,10 @@ public class Task {
     public boolean getDone() {
         return this.done;
     }
+
+    public String getClassName() { return "Task"; }
+
+    public LocalDate getDateObj() { return null; }
 
     /**
      * Toggle status of the done attribute of task.
@@ -50,4 +56,26 @@ public class Task {
         }
         return "[" + symbol + "] " + this.name;
     }
+
+//    @Override
+//    public int compareTo(Task other) {
+//        String thisClass = this.getClassName();
+//        String otherClass = other.getClassName();
+//        System.out.println("Compare ");
+//        if (thisClass.equals(otherClass)) {
+//            if (thisClass.equals("Deadline")) {
+//                return this.getDateObj().compareTo(other.getDateObj());
+//            }
+//        } else {
+//            if (thisClass.equals("Todo")) {
+//                return -1;
+//            } else if (thisClass.equals("Event") && otherClass.equals("Deadline")) {
+//                return -1;
+//            } else {
+//                return 1;
+//            }
+//        }
+//
+//        return 1;
+//    }
 }

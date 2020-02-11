@@ -24,6 +24,8 @@ public class Event extends Task {
         return this.done;
     }
 
+    public String getClassName() { return "event"; }
+
     /**
      * Converts Event into a String to be saved to file.
      * @return String to be saved to file
@@ -38,4 +40,5 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + "(at: " + dateString + ")";
     }
+
 }

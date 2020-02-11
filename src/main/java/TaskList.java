@@ -1,5 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TaskList {
     public ArrayList<Task> arrList;
@@ -37,6 +39,26 @@ public class TaskList {
      */
     public void addList(Task task) {
         arrList.add(task);
+        Collections.sort(arrList, new Comparator<Task>() {
+            public int compare(Task t1, Task t2) {
+                String thisClass = t1.getClassName();
+                String otherClass = t2.getClassName();
+                if (thisClass.equals(otherClass)) {
+                    if (thisClass.equals("deadline")) {
+                        return t1.getDateObj().compareTo(t2.getDateObj());
+                    }
+                } else {
+                    if (thisClass.equals("todo")) {
+                        return -1;
+                    } else if (thisClass.equals("event") && otherClass.equals("deadline")) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                }
+                return 0;
+            }
+        });
         Ui.printAdd(task, arrList);
     }
 
