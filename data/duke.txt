@@ -4,3 +4,4 @@ T | [N] | run 5km
 T | [N] | read book
 T | [N] | read book
 T | [N] | read book
+T | [N] | read book

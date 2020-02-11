@@ -5,7 +5,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A GUI for Duke using FXML.
@@ -28,11 +27,4 @@ public class Main extends Application {
         }
     }
 
-    public void stop() {
-        try {
-            TimeUnit.MILLISECONDS.sleep(10000);
-        } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
-        }
-    }
 }
