@@ -53,7 +53,5 @@ public class Duke {
         }
 
         Ui.printMessage("Bye! Hope you visit again soon!");
-
-        //Parser.parse(storage, tasks, ui);
     }
 }
