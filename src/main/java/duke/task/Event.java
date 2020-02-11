@@ -37,7 +37,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s (by: %s)",super.getTaskType(), super.toString()
-                , dateTime.format(OUT_FORMATTER));
+        return String.format("[%s] %s (by: %s)",super.getTaskType(), super.toString(),
+                dateTime.format(OUT_FORMATTER));
     }
 }

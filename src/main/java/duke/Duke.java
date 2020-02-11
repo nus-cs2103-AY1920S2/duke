@@ -17,6 +17,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private PrintStream systemOutput;
 
     /**
      * Setup the list of task based on the local file.
@@ -44,7 +45,7 @@ public class Duke {
     public String getResponse(String input) {
         ByteArrayOutputStream respond = new ByteArrayOutputStream();
         PrintStream uiOutput = new PrintStream(respond);
-        PrintStream systemOutput = System.out;
+        systemOutput = System.out;
         System.setOut(uiOutput);
 
         assert tasks != null : "The tasks should be initialise at this stage";

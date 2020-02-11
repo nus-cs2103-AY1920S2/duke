@@ -50,7 +50,7 @@ public class Ui {
     /**
      * Shows the information of deleted task to user.
      *
-     * @param task deleted task
+     * @param tasks deleted tasks
      * @param totalTasks current total task in integer
      */
     public void showDeleteTask(TaskList tasks, int totalTasks) {
