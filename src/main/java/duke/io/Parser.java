@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SetPriorityCommand;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -54,6 +55,9 @@ public class Parser {
             return new AddCommand(Task.TaskType.TASK_TYPE_EVENT, args);
         case "delete":
             return new DeleteCommand(operationIndex);
+        case "priority":
+            // TODO: Parse priority input
+            return new SetPriorityCommand(operationIndex, Task.Priority.PRIORITY_DEFAULT);
         case "done":
             return new DoneCommand(operationIndex);
         default:
