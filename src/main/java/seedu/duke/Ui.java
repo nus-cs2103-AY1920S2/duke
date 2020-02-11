@@ -3,6 +3,8 @@ package seedu.duke;
 import seedu.duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,17 +29,11 @@ public class Ui {
     }
 
     void print(String s) {
-        List<String> temp = new ArrayList<>();
-        temp.add(s);
-        print(temp);
+        print(Collections.singletonList(s));
     }
 
-    void print(String ... strings) {
-        List<String> temp = new ArrayList<>();
-        for (String s : strings) {
-            temp.add(s);
-        }
-        print(temp);
+    void print(String... strings) {
+        print(Arrays.asList(strings));
     }
 
     void print(List<String> stringList) {
