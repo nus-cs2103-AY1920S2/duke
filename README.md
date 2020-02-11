@@ -1,3 +1,5 @@
+# IP (Project) for course CS2103/T (Software Engineering)
+
 # Setting up
 
 **Prerequisites**
