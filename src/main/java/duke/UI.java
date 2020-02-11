@@ -87,4 +87,8 @@ public class UI {
         String returnString = "Here are your search results:\n" + UI.listHelper(tl);
         return say(returnString);
     }
+
+    static String help() {
+        return say("The following commands are available:\nlist\ndone\ntodo\ndelete\ndeadline\nevent\nhelp");
+    }
 }

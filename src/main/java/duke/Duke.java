@@ -93,6 +93,9 @@ public class Duke  {
                 case ("find"):
                     System.out.println(UI.results(tasks.search(c[1])));
                     break;
+                case("help"):
+                    System.out.println(UI.help());
+                    break;
                 default:
                     try {
                         throw new DukeException();
@@ -144,6 +147,8 @@ public class Duke  {
                 }
             case ("find"):
                 return(UI.results(tasks.search(c[1])));
+            case("help"):
+                return(UI.help());
             default:
                 try {
                     throw new DukeException();
