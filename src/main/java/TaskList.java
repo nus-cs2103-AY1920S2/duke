@@ -19,7 +19,6 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
-        Ui.addedCommand();
         System.out.println(task.toString());
     }
 

@@ -20,28 +20,20 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    @FXML
-    private Duke duke;
-    @FXML
-    private SaveToFile saveToFile = new SaveToFile();
-    @FXML
-    private Ui ui = new Ui();
-    @FXML
-    private TaskList tasks = new TaskList(saveToFile.loadList("./out.txt"));
-
+    private TaskList tasks;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/rick.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mrmeeseeks.jpg"));
 
     @FXML
     public void initialize() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(ui.showWelcome(), dukeImage)
+                DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage)
         );
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
     public void setDuke(Duke d) {
-        duke = d;
+        tasks = d.tasks;
     }
 
 
@@ -57,60 +49,63 @@ public class MainWindow extends AnchorPane {
         String[] arrString = input.split(" ", 2);
         try {
             if (arrString[0].equalsIgnoreCase("bye")) {
+                StringBuilder sb = new StringBuilder();
+                Ui.listCommand(tasks,sb);
+                SaveToFile.usingFileWriter(sb.toString());
                 handleExit();
             } else if (arrString[0].equalsIgnoreCase("list")) {
                 if (tasks.getTaskListSize() == 0) {
-                    handleDialogOutput(input, ui.emptyList());
-                    saveToFile.usingFileWriter("");
+                    handleDialogOutput(input, Ui.emptyList());
+                    SaveToFile.usingFileWriter("");
                 } else {
                     StringBuilder sb = new StringBuilder();
-                    handleDialogOutput(input, ui.listCommand(tasks, sb));
-                    saveToFile.usingFileWriter(sb.toString());
+                    handleDialogOutput(input, Ui.listCommand(tasks, sb));
+                    SaveToFile.usingFileWriter(sb.toString());
                 }
             } else if (arrString[0].equalsIgnoreCase("done")) {
                 try {
                     int taskNumber = Integer.parseInt(arrString[1].strip()) - 1;
                     if (taskNumber >= 0 && taskNumber < tasks.getTaskListSize()) {
-                        handleDialogOutput(input, ui.doneTask(tasks, taskNumber));
+                        handleDialogOutput(input, Ui.doneTask(tasks, taskNumber));
                     } else {
-                        handleDialogOutput(input, ui.invalidTask());
+                        handleDialogOutput(input, Ui.invalidTask());
                     }
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, ui.missingTaskNumber());
-                    throw new DukeException(ui.missingTaskNumber());
+                    handleDialogOutput(input, Ui.missingTaskNumber());
+                    throw new DukeException(Ui.missingTaskNumber());
                 }
 
             } else if (arrString[0].equalsIgnoreCase("delete")) {
                 try {
                     int taskNumber = Integer.parseInt(arrString[1].strip()) - 1;
                     if (taskNumber >= 0 && taskNumber < tasks.getTaskListSize()) {
-                        handleDialogOutput(input, ui.deletedTask(tasks, taskNumber));
+                        handleDialogOutput(input, Ui.deletedTask(tasks, taskNumber));
                     } else {
-                        handleDialogOutput(input, ui.invalidTask());
+                        handleDialogOutput(input, Ui.invalidTask());
                     }
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, ui.missingTaskNumber());
-                    throw new DukeException(ui.missingTaskNumber());
+                    handleDialogOutput(input, Ui.missingTaskNumber());
+                    throw new DukeException(Ui.missingTaskNumber());
                 }
 
             } else if (arrString[0].equalsIgnoreCase("todo")) {
                 try {
                     Todo todo = new Todo(arrString[1]);
                     tasks.addTask(todo);
-                    handleDialogOutput(input, ui.taskInList(tasks.getTaskListSize()));
+                    handleDialogOutput(input, Ui.addedCommand(tasks.getTaskListSize()));
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, ui.incompleteCommand("Todo"));
-                    throw new DukeException(ui.incompleteCommand("Todo"));
+                    handleDialogOutput(input, Ui.incompleteCommand("Todo"));
+                    throw new DukeException(Ui.incompleteCommand("Todo"));
                 }
             } else if (arrString[0].equalsIgnoreCase("event")) {
                 try {
                     String[] eventString = arrString[1].split("/");
                     Event event = new Event(eventString[0].strip(), eventString[1].substring(2).strip());
                     tasks.addTask(event);
-                    handleDialogOutput(input, ui.taskInList(tasks.getTaskListSize()));
+                    handleDialogOutput(input, Ui.addedCommand(tasks.getTaskListSize()));
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, ui.incompleteCommand("Event"));
-                    throw new DukeException(ui.incompleteCommand("Event"));
+                    handleDialogOutput(input, Ui.incompleteCommand("Event"));
+                    throw new DukeException(Ui.incompleteCommand("Event"));
                 }
             } else if (arrString[0].equalsIgnoreCase("deadline")) {
                 try {
@@ -118,36 +113,35 @@ public class MainWindow extends AnchorPane {
                     Deadline deadline = new Deadline(deadlineString[0].strip(),
                             deadlineString[1].substring(2).strip());
                     tasks.addTask(deadline);
-                    handleDialogOutput(input, ui.taskInList(tasks.getTaskListSize()));
+                    handleDialogOutput(input, Ui.addedCommand(tasks.getTaskListSize()));
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, ui.incompleteCommand("Deadline"));
-                    throw new DukeException(ui.incompleteCommand("Deadline"));
+                    handleDialogOutput(input, Ui.incompleteCommand("Deadline"));
+                    throw new DukeException(Ui.incompleteCommand("Deadline"));
                 }
             } else if (arrString[0].equalsIgnoreCase("Find")) {
                 try {
                     tasks.findTask(arrString[1]);
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    handleDialogOutput(input, ui.incompleteCommand("Find"));
-                    throw new DukeException(ui.incompleteCommand("Find"));
+                    handleDialogOutput(input, Ui.incompleteCommand("Find"));
+                    throw new DukeException(Ui.incompleteCommand("Find"));
                 }
             } else {
-                handleDialogOutput(input, ui.invalidCommand());
-                throw new DukeException(ui.invalidCommand());
+                handleDialogOutput(input, Ui.invalidCommand());
+                throw new DukeException(Ui.invalidCommand());
             }
 
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        
-    }
 
+    }
 
     @FXML
     private void handleExit() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog("Bye", userImage),
-                DialogBox.getDukeDialog(ui.goodbyeMessage(), dukeImage)
+                DialogBox.getDukeDialog(Ui.goodbyeMessage(), dukeImage)
         );
         Platform.exit();
         System.exit(0);
@@ -160,10 +154,5 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(uiCommand, dukeImage)
         );
         userInput.clear();
-    }
-
-    @FXML
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 }

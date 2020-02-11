@@ -116,11 +116,10 @@ public class Ui {
     /**
      * Message when task is added.
      */
-    public static String addedCommand() {
+    public static String addedCommand(int listSize) {
         showLine();
         System.out.println("Duke: added your command. \n");
-        return "Ooooh yeah! Can do!";
-
+        return "Ooooh yeah! Can do! " + taskInList(listSize);
     }
 
     /**
@@ -131,7 +130,7 @@ public class Ui {
     public static String taskInList(int listSize) {
         System.out.println("You have " + listSize + " task(s) in your list.");
         showLine();
-        return "You have"  + listSize + " task(s) in your list.";
+        return "You have "  + listSize + " task(s) in your list.";
     }
 
     /**
