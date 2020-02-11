@@ -1,4 +1,2 @@
-T | 1 | sleep
 D | 1 | hwk | 2019-10-10
-T | 0 | eat
-T | 0 | drink
+T | 1 | drink

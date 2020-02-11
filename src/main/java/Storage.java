@@ -16,19 +16,23 @@ public class Storage {
      * @param s String object to be written to file.
      * @throws IOException Handles errors if file is not found.
      */
-    public void writeToFile(String s) throws IOException {
-        // assert assumption that string exists:
-        assert s != null : "Empty string"; 
+    public void writeToFile(String s) {
+        try {
+            // assert assumption that string exists:
+            assert s != null : "Empty string"; 
 
-        File file = new File("./myfile.txt");
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+            File file = new File("./myfile.txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 
-        if (!file.exists()) {
-            file.createNewFile();
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            writer.write(s); 
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        writer.write(s); 
-        writer.newLine();
-        writer.close();
     }
 
     /**
@@ -37,21 +41,25 @@ public class Storage {
      * @return String object after reading the text file of saved tasks from disk.
      * @throws IOException Handles errors if file is not found.
      */
-    public String readFromFile() throws IOException {
-        File file = new File("./myfile.txt");
-        StringBuilder content = new StringBuilder();
-        String line;
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        while ((line = reader.readLine()) != null) {
-            content.append(line);
-            content.append(System.lineSeparator());
-        }
+    public String readFromFile() {
+        try {
+            File file = new File("./myfile.txt");
+            StringBuilder content = new StringBuilder();
+            String line;
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            while ((line = reader.readLine()) != null) {
+                content.append(line);
+                content.append(System.lineSeparator());
+            }
 
-        reader.close();
-        return content.toString();
+            reader.close();
+            return content.toString();
+        } catch (IOException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -61,24 +69,27 @@ public class Storage {
      * @param index Index of task to be removed.
      * @throws IOException Handles errors if file is not found.
      */
-    public void removeLine(String tasks, int index) throws IOException {
-        // assert assumption that at least one task exists:
-        assert tasks != null : "No tasks"; 
-        
-        File file = new File("./myfile.txt");
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
-        String[] lines = tasks.split("\\r?\\n");
+    public void removeLine(String tasks, int index) {
+        try {
+            // assert assumption that at least one task exists:
+            assert tasks != null : "No tasks"; 
+            
+            File file = new File("./myfile.txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
+            String[] lines = tasks.split("\\r?\\n");
 
-        for (int i = 0; i < lines.length; i++) {
-            if (i == index) {
-                // do nth
-            } else {
-                writer.write(lines[i]);
-                writer.newLine();
+            for (int i = 0; i < lines.length; i++) {
+                if (i == index) {
+                    // do nth
+                } else {
+                    writer.write(lines[i]);
+                    writer.newLine();
+                }
             }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        writer.close();
-
     }
 
     /**
@@ -88,24 +99,27 @@ public class Storage {
      * @param index Index of task to be marked as done.
      * @throws IOException Handles errors if file is not found.
      */
-    public void changeToDone(String tasks, int index) throws IOException {
-        // assert assumption that at least one task exists:
-        assert tasks != null : "No tasks"; 
-                
-        File file = new File("./myfile.txt");
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
-        String[] lines = tasks.split("\\r?\\n");
+    public void changeToDone(String tasks, int index) {
+        try {
+            // assert assumption that at least one task exists:
+            assert tasks != null : "No tasks"; 
+                    
+            File file = new File("./myfile.txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
+            String[] lines = tasks.split("\\r?\\n");
 
-        for (int i = 0; i < lines.length; i++) {
-            if (i == index) {
-                writer.write(lines[i].replaceFirst("0", "1"));
-            } else {
-                writer.write(lines[i]);
+            for (int i = 0; i < lines.length; i++) {
+                if (i == index) {
+                    writer.write(lines[i].replaceFirst("0", "1"));
+                } else {
+                    writer.write(lines[i]);
+                }
+                writer.newLine();
             }
-            writer.newLine();
-        }
-        writer.close();
-
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }  
     }
 
     /**
