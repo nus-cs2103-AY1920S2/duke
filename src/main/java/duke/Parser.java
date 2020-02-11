@@ -38,37 +38,38 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
-            if (keywords.length == 1) {
-                throw new MissingParameterException("Done");
-            }
+            checkKeywordsLength(keywords);
             return new DoneCommand(parseStringToInt(keywords[1]));
         case "search":
-            if (keywords.length == 1) {
-                throw new MissingParameterException("Search");
-            }
+            checkKeywordsLength(keywords);
             return new SearchCommand(keywords[1]);
         case "delete":
-            if (keywords.length == 1) {
-                throw new MissingParameterException("Delete");
-            }
+            checkKeywordsLength(keywords);
             return new DeleteCommand(parseStringToInt(keywords[1]));
         case "todo":
-            if (keywords.length == 1) {
-                throw new MissingParameterException("Todo");
-            }
+            checkKeywordsLength(keywords);
             return new AddTodoCommand(keywords[1]);
         case "event":
-            if (keywords.length == 1) {
-                throw new MissingParameterException("Event");
-            }
+            checkKeywordsLength(keywords);
             return parseEvent(keywords[1]);
         case "deadline":
-            if (keywords.length == 1) {
-                throw new MissingParameterException("Deadline");
-            }
+            checkKeywordsLength(keywords);
             return parseDeadline(keywords[1]);
         default:
             throw new UnknownCommandException(keywords[0]);
+        }
+    }
+
+    /**
+     * Checks if the keywords array is of the length 2. Throws MissingParameterException
+     * if keywords array is anything but 2.
+     *
+     * @param keywords Array of keywords
+     */
+    private void checkKeywordsLength(String[] keywords) {
+        if (keywords.length != 2) {
+            throw new MissingParameterException(
+                    keywords[0].substring(0, 1).toUpperCase() + keywords[0].substring(1));
         }
     }
 
