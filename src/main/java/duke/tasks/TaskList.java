@@ -39,7 +39,8 @@ public class TaskList {
     }
 
     public boolean addTask(Task task) {
-        // TODO: To handle this add() == false?
+        assert task != null : "No task to be added";
+        assert task.getTaskName() != null : "Task has a missing description";
         return taskList.add(task);
     }
 
