@@ -53,12 +53,18 @@ public class Tasks {
         return this.status;
     }
     public TASK_CATEGORY getType() {return this.category;}
-
     public void changeStatus(TASK_STATUS status) {
         this.status = status;
     }
-
     public void changeCategory(TASK_CATEGORY category) {
         this.category = category;
+    }
+
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (!(obj instanceof Tasks)) return false;
+        Tasks o = (Tasks) obj;
+        return o.getName() == this.getName();
     }
 }
