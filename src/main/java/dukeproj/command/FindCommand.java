@@ -2,7 +2,7 @@ package dukeproj.command;
 
 import dukeproj.Storage;
 import dukeproj.Ui;
-import dukeproj.data.Calender;
+import dukeproj.data.Schedule;
 import dukeproj.data.TaskList;
 import dukeproj.enums.SayType;
 import dukeproj.exception.DukeDescriptionException;
@@ -20,12 +20,12 @@ public class FindCommand extends Command {
      * @param ui The user interface of Duke, used to return Duke's response.
      * @param taskList The list of tasks to find the tasks from.
      * @param storage Unused.
-     * @param calender Unused.
+     * @param schedule Unused.
      * @return Duke's response in the form of a String.
      * @throws DukeDescriptionException If the description is empty.
      */
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage, Calender calender)
+    public String execute(Ui ui, TaskList taskList, Storage storage, Schedule schedule)
             throws DukeDescriptionException {
         if (keyword.isEmpty()) {
             throw new DukeDescriptionException("Empty Description");

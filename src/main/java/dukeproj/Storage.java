@@ -1,6 +1,6 @@
 package dukeproj;
 
-import dukeproj.data.Calender;
+import dukeproj.data.Schedule;
 import dukeproj.exception.BadDateException;
 import dukeproj.tasks.Deadline;
 import dukeproj.tasks.Event;
@@ -25,10 +25,10 @@ public class Storage {
      * Prints the file in storage into an ArrayList.
      * Takes in a calender to update the calender with the tasks in the file.
      *
-     * @param calender calender to be updated by tasks in storage file.
+     * @param schedule calender to be updated by tasks in storage file.
      * @return ArrayList made from tasks in storage file.
      */
-    public ArrayList<Task> printFileIntoList(Calender calender) {
+    public ArrayList<Task> printFileIntoList(Schedule schedule) {
         try {
             Scanner sc = new Scanner(file);
             ArrayList<Task> tasks = new ArrayList<>();
@@ -39,21 +39,23 @@ public class Storage {
                 case "T": {
                     Task task = new Todo(Boolean.parseBoolean(parts[1]), parts[2]);
                     tasks.add(task);
-                    calender.addDate(task);
+                    schedule.addDate(task);
                     break;
                 }
                 case "E": {
                     Task task = new Event(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
                     tasks.add(task);
-                    calender.addDate(task);
+                    schedule.addDate(task);
                     break;
                 }
                 case "D": {
                     Task task = new Deadline(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
                     tasks.add(task);
-                    calender.addDate(task);
+                    schedule.addDate(task);
                     break;
                 }
+                default:
+                    break;
                 }
             }
             return tasks;
@@ -81,13 +83,13 @@ public class Storage {
                             + System.lineSeparator());
                     break;
                 case EVENT:
-                    fw.write("E|" + task.getDone() + "|" + task.getTask() + "|" +
-                            task.getDate().format(Parser.DATE_WRITE_FORMATTER)
+                    fw.write("E|" + task.getDone() + "|" + task.getTask() + "|"
+                            + task.getDate().format(Parser.DATE_WRITE_FORMATTER)
                             + System.lineSeparator());
                     break;
                 case DEADLINE:
-                    fw.write("D|" + task.getDone() + "|" + task.getTask() + "|" +
-                            task.getDate().format(Parser.DATE_WRITE_FORMATTER)
+                    fw.write("D|" + task.getDone() + "|" + task.getTask() + "|"
+                            + task.getDate().format(Parser.DATE_WRITE_FORMATTER)
                             + System.lineSeparator());
                     break;
                 default:
@@ -106,7 +108,7 @@ public class Storage {
      *
      * @param filepath filepath to be assigned to the storage.
      */
-    public Storage (String filepath) {
+    public Storage(String filepath) {
         file = new File(filepath);
         try {
             file.getParentFile().mkdir(); //makes data directory if does not exists

@@ -1,7 +1,7 @@
 package dukeproj;
 
 import dukeproj.command.Command;
-import dukeproj.data.Calender;
+import dukeproj.data.Schedule;
 import dukeproj.data.TaskList;
 import dukeproj.enums.CommandType;
 import dukeproj.enums.SayType;
@@ -30,7 +30,7 @@ public class Duke {
     /** List of tasks in Duke. */
     private TaskList taskList;
     /** Calender of tasks stored according to their dates. */
-    private Calender calender;
+    private Schedule schedule;
 
     /**
      * Generates a command as a response to a user input String from the GUI.
@@ -56,7 +56,7 @@ public class Duke {
      */
     public String getResponse(Command command) {
         try {
-            return command.execute(ui, taskList, storage, calender);
+            return command.execute(ui, taskList, storage, schedule);
         } catch (DukeDescriptionException e) {
             return ui.say(SayType.EMPTY_DESCRIPTION);
         } catch (BadDateException e) {
@@ -115,14 +115,14 @@ public class Duke {
      */
     public Duke(String filepath, boolean isGui) {
         ui = new Ui();
-        calender = new Calender();
+        schedule = new Schedule();
         storage = new Storage(filepath);
-        taskList = new TaskList(storage.printFileIntoList(calender));
+        taskList = new TaskList(storage.printFileIntoList(schedule));
         if (isGui) {
             parser = new Parser();
         } else {
             sc = new Scanner(System.in);
-            parser = new Parser(taskList, calender, storage, sc);
+            parser = new Parser(taskList, schedule, storage, sc);
         }
     }
 

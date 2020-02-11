@@ -12,6 +12,8 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
+     * Gets the size of the Task List.
+     *
      * @return size of task list.
      */
     public int getSize() {
@@ -19,6 +21,8 @@ public class TaskList {
     }
 
     /**
+     * Adds the task provided into TaskList.
+     *
      * @param task task to add into list.
      */
     public void addTask(Task task) {
@@ -26,6 +30,8 @@ public class TaskList {
     }
 
     /**
+     * Gets a certain task in the TaskList based upon the index provided.
+     *
      * @param idx index of task to get.
      * @return task from list.
      */
@@ -34,6 +40,8 @@ public class TaskList {
     }
 
     /**
+     * Removes the task at the specified index in TaskList.
+     *
      * @param idx index of task to remove.
      */
     public void removeTask(int idx) {
@@ -41,6 +49,8 @@ public class TaskList {
     }
 
     /**
+     * Gets the ArrayList variable in TaskList.
+     *
      * @return ArrayList of tasks.
      */
     public ArrayList<Task> getList() {
@@ -60,8 +70,6 @@ public class TaskList {
     /**
      * Prints the list of task systematically.
      * Includes index of task based on (array index + 1).
-     *
-     * @return String that has a list of tasks.
      */
     public void printTask() {
         for (int i = 1; i <= tasks.size(); i++) {
@@ -70,12 +78,12 @@ public class TaskList {
     }
 
     /**
-     * Finds tasks in the TaskList using a varargs of keywords
+     * Finds tasks in the TaskList using a varargs of keywords.
      *
      * @param keywords The varargs of keywords used to find tasks.
      * @return The ArrayList of tasks found using the keywords.
      */
-    public ArrayList<Task> find(String ... keywords) {
+    public ArrayList<Task> find(String ...keywords) {
         ArrayList<Task> outputList = new ArrayList<>();
         for (Task task: tasks) {
             for (String str: keywords) {
@@ -104,6 +112,8 @@ public class TaskList {
     }
 
     /**
+     * Gets the String representation of task list.
+     *
      * @return TaskList in the form of a String.
      */
     @Override

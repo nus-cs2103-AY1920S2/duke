@@ -2,7 +2,7 @@ package dukeproj.command;
 
 import dukeproj.Storage;
 import dukeproj.Ui;
-import dukeproj.data.Calender;
+import dukeproj.data.Schedule;
 import dukeproj.data.TaskList;
 import dukeproj.enums.CommandType;
 import dukeproj.enums.SayType;
@@ -29,14 +29,14 @@ public class AddCommand extends Command {
      * @param ui The user interface of Duke, used to return Duke's response.
      * @param taskList The list of tasks to add to.
      * @param storage The object to assist in writing the task list into the storage file.
-     * @param calender Duke's calender to be modified if added task is date sensitive.
+     * @param schedule Duke's calender to be modified if added task is date sensitive.
      * @return Duke's response in the form of a String.
      * @throws BadDescriptionException If the description is missing a '/', for Event and Deadline cases only.
      * @throws DukeDescriptionException If the description is empty.
      * @throws BadDateException If the date provided does not follow the required date format.
      */
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage, Calender calender)
+    public String execute(Ui ui, TaskList taskList, Storage storage, Schedule schedule)
             throws BadDescriptionException, DukeDescriptionException, BadDateException {
         String output = "";
         switch (type) {
@@ -62,7 +62,7 @@ public class AddCommand extends Command {
             Task taskEvent = new Event(description.substring(0, eventDate),
                     description.substring(eventDate + 4));
             taskList.addTask(taskEvent);
-            calender.addDate(taskEvent);
+            schedule.addDate(taskEvent);
             storage.writeListIntoFile(taskList.getList());
 
             output = ui.say(SayType.ADD) + "\n" + taskEvent;
@@ -71,14 +71,14 @@ public class AddCommand extends Command {
             if (description.isEmpty()) {
                 throw new DukeDescriptionException("Empty Description");
             }
-            int dLineDate = description.indexOf("/");
-            if (dLineDate == -1) {
+            int deadlineDate = description.indexOf("/");
+            if (deadlineDate == -1) {
                 throw new BadDescriptionException("Missing '/' in Description");
             }
-            Task taskDLine = new Deadline(description.substring(0, dLineDate),
-                    description.substring(dLineDate + 4));
+            Task taskDLine = new Deadline(description.substring(0, deadlineDate),
+                    description.substring(deadlineDate + 4));
             taskList.addTask(taskDLine);
-            calender.addDate(taskDLine);
+            schedule.addDate(taskDLine);
             storage.writeListIntoFile(taskList.getList());
 
             output = ui.say(SayType.ADD) + "\n" + taskDLine;

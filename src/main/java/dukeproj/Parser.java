@@ -1,7 +1,14 @@
 package dukeproj;
 
-import dukeproj.command.*;
-import dukeproj.data.Calender;
+import dukeproj.command.DeleteCommand;
+import dukeproj.command.AddCommand;
+import dukeproj.command.ScheduleCommand;
+import dukeproj.command.ListCommand;
+import dukeproj.command.DoneCommand;
+import dukeproj.command.FindCommand;
+import dukeproj.command.ExitCommand;
+import dukeproj.command.Command;
+import dukeproj.data.Schedule;
 import dukeproj.data.TaskList;
 import dukeproj.enums.CommandType;
 import dukeproj.exception.BadDateException;
@@ -34,7 +41,7 @@ public class Parser {
     /** Storage to read/write task list from/into files. */
     private Storage storage;
     /** Data structure to store tasks aligned by dates.*/
-    private Calender calender;
+    private Schedule schedule;
     /** Primary I/O object used. */
     private Scanner sc;
 
@@ -97,8 +104,8 @@ public class Parser {
         case DELETE:
             command = new DeleteCommand(description);
             break;
-        case SEARCH:
-            command = new SearchCommand(description);
+        case SCHEDULE:
+            command = new ScheduleCommand(description);
             break;
         case FIND:
             command = new FindCommand(description);
@@ -139,8 +146,8 @@ public class Parser {
                             + done);
                 }
                 taskList.getTask(done - 1).setDone(true);
-                System.out.println("Nice! I've marked this task as done: \n" +
-                        "  " + taskList.getTask(done - 1));
+                System.out.println("Nice! I've marked this task as done: \n"
+                        + "  " + taskList.getTask(done - 1));
                 storage.writeListIntoFile(taskList.getList());
             } catch (NumberFormatException e) {
                 throw new BadDescriptionException("Non-Integer");
@@ -153,9 +160,9 @@ public class Parser {
             }
             Task taskToDo = new Todo(todo.substring(1));
             taskList.addTask(taskToDo);
-            System.out.println("I've added this task: \n" +
-                    "  " + taskToDo + "\nNow you have " +
-                    taskList.getSize() + " tasks in the list." );
+            System.out.println("I've added this task: \n"
+                    + "  " + taskToDo + "\nNow you have "
+                    + taskList.getSize() + " tasks in the list.");
             storage.writeListIntoFile(taskList.getList());
             break;
         case EVENT:
@@ -170,10 +177,10 @@ public class Parser {
             Task taskEvent = new Event(event.substring(1, eventDate),
                     event.substring(eventDate + 4));
             taskList.addTask(taskEvent);
-            calender.addDate(taskEvent);
-            System.out.println("I've added this task: \n" +
-                    "  " + taskEvent + "\nNow you have " +
-                    taskList.getSize() + " tasks in the list." );
+            schedule.addDate(taskEvent);
+            System.out.println("I've added this task: \n"
+                    + "  " + taskEvent + "\nNow you have "
+                    + taskList.getSize() + " tasks in the list.");
             storage.writeListIntoFile(taskList.getList());
             break;
         case DEADLINE:
@@ -188,10 +195,10 @@ public class Parser {
             Task taskDLine = new Deadline(deadline.substring(1, dLineDate),
                     deadline.substring(dLineDate + 4));
             taskList.addTask(taskDLine);
-            calender.addDate(taskDLine);
-            System.out.println("I've added this task: \n" +
-                    "  " + taskDLine + "\nNow you have " +
-                    taskList.getSize() + " tasks in the list." );
+            schedule.addDate(taskDLine);
+            System.out.println("I've added this task: \n"
+                    + "  " + taskDLine + "\nNow you have "
+                    + taskList.getSize() + " tasks in the list.");
             storage.writeListIntoFile(taskList.getList());
             break;
         case DELETE:
@@ -206,24 +213,24 @@ public class Parser {
                 }
                 Task deletedTask = taskList.getTask(delete - 1);
                 taskList.removeTask(delete - 1);
-                calender.removeTask(deletedTask, deletedTask.getDate());
+                schedule.removeTask(deletedTask, deletedTask.getDate());
                 System.out.println("Okay! I have deleted this task:\n" +
-                        "  " + deletedTask + "\nNow you have " +
-                        taskList.getSize() + " tasks in the list.");
+                        "  " + deletedTask + "\nNow you have "
+                        + taskList.getSize() + " tasks in the list.");
                 storage.writeListIntoFile(taskList.getList());
             } catch (NumberFormatException e) {
                 throw new BadDescriptionException("Non-Integer");
             }
             break;
-        case SEARCH:
+        case SCHEDULE:
             String search = sc.nextLine();
             if (search.isEmpty()) {
                 throw new DukeDescriptionException("Empty Description");
             }
             LocalDate date = Parser.dateParser(search.substring(1));
-            System.out.println("Here are the events on " +
-                    date.format(Parser.DATE_READ_FORMATTER) + ":");
-            System.out.println(calender.searchDate(date));
+            System.out.println("Here are the events on "
+                    + date.format(Parser.DATE_READ_FORMATTER) + ":");
+            System.out.println(schedule.searchDate(date));
             break;
         case FIND:
             String find = sc.nextLine();
@@ -249,13 +256,13 @@ public class Parser {
      * Constructs a Parser object with data objects associated with it to efficiently read Duke commands.
      *
      * @param taskList List of tasks in Duke.
-     * @param calender Calender of tasks in Duke.
+     * @param schedule Calender of tasks in Duke.
      * @param storage Storage object linked to the storage file of Duke.
      * @param sc Scanner to read user input.
      */
-    public Parser(TaskList taskList, Calender calender, Storage storage, Scanner sc) {
+    public Parser(TaskList taskList, Schedule schedule, Storage storage, Scanner sc) {
         this.taskList = taskList;
-        this.calender = calender;
+        this.schedule = schedule;
         this.storage = storage;
         this.sc = sc;
     }

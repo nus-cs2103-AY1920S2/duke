@@ -10,7 +10,7 @@ import java.util.HashMap;
  * Represents a pseudo-calender using a HashMap to map dates to
  * an ArrayList of tasks occurring on the specific date.
  */
-public class Calender {
+public class Schedule {
     /** HashMap representing the calender. */
     private HashMap<LocalDate, ArrayList<Task>> mapOfDates;
 
@@ -61,7 +61,7 @@ public class Calender {
     /**
      * Constructs an empty calender.
      */
-    public Calender() {
+    public Schedule() {
         mapOfDates = new HashMap<>();
     }
 }

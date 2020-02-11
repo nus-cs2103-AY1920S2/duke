@@ -2,7 +2,7 @@ package dukeproj.command;
 
 import dukeproj.Storage;
 import dukeproj.Ui;
-import dukeproj.data.Calender;
+import dukeproj.data.Schedule;
 import dukeproj.data.TaskList;
 import dukeproj.enums.SayType;
 import dukeproj.exception.BadDescriptionException;
@@ -22,13 +22,13 @@ public class DeleteCommand extends Command {
      * @param ui The user interface of Duke, used to return Duke's response.
      * @param taskList The list of tasks to delete from.
      * @param storage The object to assist in writing the task list into the storage file.
-     * @param calender Duke's calender to be modified if deleted task is date sensitive.
+     * @param schedule Duke's calender to be modified if deleted task is date sensitive.
      * @return Duke's response in the form of a String.
      * @throws BadDescriptionException If the description is not in the form of an integer.
      * @throws DukeDescriptionException If the description is empty.
      */
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage, Calender calender)
+    public String execute(Ui ui, TaskList taskList, Storage storage, Schedule schedule)
             throws BadDescriptionException, DukeDescriptionException {
         try {
             if (index.isEmpty()) {
@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
 
             Task deletedTask = taskList.getTask(delete - 1);
             taskList.removeTask(delete - 1);
-            calender.removeTask(deletedTask, deletedTask.getDate());
+            schedule.removeTask(deletedTask, deletedTask.getDate());
             storage.writeListIntoFile(taskList.getList());
 
             return ui.say(SayType.DELETE) + "\n" + deletedTask;
