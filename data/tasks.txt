@@ -1,0 +1,2 @@
+E | true | Math Vision | 2020-02-08 0930
+T | false | borrow book
