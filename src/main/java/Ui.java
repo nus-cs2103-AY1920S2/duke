@@ -12,6 +12,22 @@ import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
+/*
+ * Ui
+ *
+ * CS2103 AY19/20 Semester 2
+ * Individual Project
+ * Duke Project
+ *
+ * 11 February 2020
+ *
+ */
+
+/**
+ * The Ui class handles the creation of the User Interface
+ * for the duke chat platform.
+ * @author Daniel Alfred Widjaja
+ */
 public class Ui {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -26,7 +42,13 @@ public class Ui {
     private Image user;
     private Image duke;
 
-    //The container for the content of the chat to scroll.
+
+    /**
+     * Initiation for Ui class.
+     * @param stage The stage to load the UI in.
+     * @param parser The parser to load the database.
+     * @param handler The class to handle the duke response.
+     */
     public Ui(Stage stage, Parser parser, Handler handler) {
         this.stage = stage;
         this.parser = parser;
@@ -34,6 +56,9 @@ public class Ui {
         this.listing = parser.getDatabase();
     }
 
+    /**
+     * Create the User Interface layout.
+     */
     public void start() {
 
         listing = parser.getDatabase();
@@ -102,6 +127,12 @@ public class Ui {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Handles user input and write the response in the layout
+     * @return the response status,
+     * 0 if UI doesn't need to exit,
+     * 1 if UI need to exit.
+     */
     private int handleUserInput() {
         Label userText = new Label(userInput.getText());
         dialogContainer.getChildren().add( new DialogBox(userText, new ImageView(user)));
@@ -110,12 +141,11 @@ public class Ui {
 
         DukeResponse resp = handler.getResponse(userTxt, listing);
 
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(resp.getResponse()), new ImageView(duke)));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(resp.getResponse()), new ImageView(duke)));
         return resp.getStatus();
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      *
      * @param text String containing text to add

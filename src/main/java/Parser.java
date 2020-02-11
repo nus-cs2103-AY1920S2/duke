@@ -5,14 +5,39 @@ import java.nio.file.Paths;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.nio.file.FileAlreadyExistsException;
 
+
+/*
+ * Parser
+ *
+ * CS2103 AY19/20 Semester 2
+ * Individual Project
+ * Duke Project
+ *
+ * 11 February 2020
+ *
+ */
+
+/**
+ * The Parser class is the parser to load the database file.
+ * @author Daniel Alfred Widjaja
+ */
 public class Parser {
     private String fileLoc;
+
+    /**
+     * Construct the parser instance.
+     * @param fileLoc The location of the database file.
+     */
     public Parser(String fileLoc) {
         this.fileLoc = fileLoc;
     }
 
+    /**
+     * Load and parse the database from file into an ArrayList.
+     * @param fileLoc The location of the database file.
+     * @return An ArrayList loaded from the file.
+     */
     public ArrayList<Task> getDatabase(String fileLoc) {
         ArrayList<Task> listing = new ArrayList<>();
         Path path = Paths.get(fileLoc);
@@ -37,6 +62,10 @@ public class Parser {
         return listing;
     }
 
+    /**
+     * Load and parse the database from object's fileLoc into an ArrayList.
+     * @return An ArrayList loaded from the object's fileLoc.
+     */
     public ArrayList<Task> getDatabase() {
         return this.getDatabase(fileLoc);
     }
