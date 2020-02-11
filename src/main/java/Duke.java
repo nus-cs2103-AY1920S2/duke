@@ -82,6 +82,8 @@ public class Duke extends Application{
                     Task.find(inputs[1]);
                 } else if (command.equals("view") || command.equals("v")) { //view schedules
                     Task.viewSchedule(inputs[1]);
+                } else if(command.equals("contact") || command.equals("c")) {
+                    Contact.addToContacts(inputs[1]);
                 } else {
                     throw new InvalidCommandException();
                 }
