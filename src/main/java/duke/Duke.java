@@ -18,7 +18,8 @@ import java.nio.file.Paths;
  */
 public class Duke {
     private static final String WELCOME_MESSAGE = "Hello! My name is Megumin, user of the finest magic"
-            + " crimson demons possess.\nWhat can I explo- I mean do for you?";
+            + " crimson demons possess.\nWhat can I explo- I mean do for you?\nUse command 'help'"
+            + " to see what I can do!";
     private Storage storage;
     private TaskList tasks;
 

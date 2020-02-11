@@ -76,6 +76,8 @@ public class Parser {
             } else {
                 return new FindCommand(commandLine[1]);
             }
+        case HELP:
+            return new HelpCommand();
         default:
             throw new InvalidCommandException(NO_SUCH_COMMAND_MESSAGE);
         }
