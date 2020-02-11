@@ -1,3 +1,5 @@
+package duke.main;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -26,7 +28,7 @@ public class Parser {
      */
     public static String getCommand(String input) {
         String[] inputs = input.split(" ", 2);
-        assert inputs.length == 1 : "Inputs should at least have a command";
+        // assert inputs.length == 1 : "Inputs should at least have a command";
         return inputs[0];
     }
 

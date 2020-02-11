@@ -1,15 +1,16 @@
-import javafx.application.Application;
+package duke.main;
+
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.TooManyTasksException;
+import duke.exception.UnknownCommandException;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 
@@ -24,7 +25,7 @@ public class Duke {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    // Empty constructor required for Launcher
+    // Empty constructor required for duke.main.Launcher
     public Duke() {
     }
 
@@ -33,7 +34,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.loadTasksFromSaveFile());
 
-            // Since we can successfully load it, we save all in TaskList
+            // Since we can successfully load it, we save all in duke.main.TaskList
             storage.writeTasks(tasks);
         } catch (FileNotFoundException e) {
             // Load an empty one

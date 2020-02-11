@@ -1,3 +1,5 @@
+package duke.main;
+
 public class Ui {
     private static final String line = "    ____________________________________________________________";
     private static final String space = "    ";

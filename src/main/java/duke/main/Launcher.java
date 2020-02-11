@@ -1,3 +1,5 @@
+package duke.main;
+
 import javafx.application.Application;
 
 /**
@@ -5,7 +7,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        // Duke duke = new Duke("data/duke.txt");
+        // duke.main.Duke duke = new duke.main.Duke("data/duke.txt");
         Application.launch(Main.class, args);
     }
 }

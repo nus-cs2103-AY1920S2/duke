@@ -1,3 +1,11 @@
+package duke.main;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.exception.InvalidIndexException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,7 +13,7 @@ public class TaskList {
     private List<Task> tasks;
 
     /**
-     * Initialises the TaskList according to a list of tasks that have been saved
+     * Initialises the duke.main.TaskList according to a list of tasks that have been saved
      * @param savedTasks Tasks that have been saved represented as a List<List<String>>
      */
     public TaskList(List<List<String>> savedTasks) {
@@ -59,7 +67,7 @@ public class TaskList {
     }
 
     /**
-     * Adds an Event object to the task list
+     * Adds an duke.task.Event object to the task list
      * @param args A String in the format of: "<desc> /at <date>"
      */
     public void addEvent(String args) {
@@ -75,7 +83,7 @@ public class TaskList {
     }
 
     /**
-     * Add a Todo object to the task list
+     * Add a duke.task.Todo object to the task list
      * @param args A String in the format of: "<desc>"
      */
     public void addTodo(String args) {
@@ -93,16 +101,16 @@ public class TaskList {
     }
 
     /**
-     * The number of tasks in the TaskList
-     * @return The number of tasks in the TaskList
+     * The number of tasks in the duke.main.TaskList
+     * @return The number of tasks in the duke.main.TaskList
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * The Task at a the index specified by the param
-     * @param idx 0-based indexing to get the Task object
+     * The duke.task.Task at a the index specified by the param
+     * @param idx 0-based indexing to get the duke.task.Task object
      * @return
      */
     public Task get(int idx) {
@@ -110,8 +118,8 @@ public class TaskList {
     }
 
     /**
-     * Mark a Task (specified by the index) as done
-     * @param taskNo A 1-based indexing of the position of the Task in the list
+     * Mark a duke.task.Task (specified by the index) as done
+     * @param taskNo A 1-based indexing of the position of the duke.task.Task in the list
      * @throws InvalidIndexException
      */
     public void markTaskAsDone(int taskNo) throws InvalidIndexException {
@@ -128,8 +136,8 @@ public class TaskList {
     }
 
     /**
-     * Delete a Task (specified by the index)
-     * @param taskNo A 1-based indexing of the position of the Task in the list
+     * Delete a duke.task.Task (specified by the index)
+     * @param taskNo A 1-based indexing of the position of the duke.task.Task in the list
      * @throws InvalidIndexException
      */
     public void deleteTask(int taskNo) throws InvalidIndexException {
@@ -147,8 +155,8 @@ public class TaskList {
     }
 
     /**
-     * Checks if the TaskList is full (full is defined by 100 tasks)
-     * @return true if TaskList is full
+     * Checks if the duke.main.TaskList is full (full is defined by 100 tasks)
+     * @return true if duke.main.TaskList is full
      */
     public boolean isFull() {
         return tasks.size() == 100;

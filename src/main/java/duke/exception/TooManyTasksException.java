@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class TooManyTasksException extends DukeException {
     private static final String space = "    ";
 
