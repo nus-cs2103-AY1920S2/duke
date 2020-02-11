@@ -1,6 +1,5 @@
 T , X , swim
 T , O , search coral
-D , O , find nemo , 2020-02-10
-E , X , fish and meet , 2020-02-03
-D , X , eat , 2020-02-11
-T , X , shark
+D , O , find nemo and dory , 2020-02-10
+E , O , fish and meet , 2020-02-03
+D , X , eat dory's fin , 2020-02-13

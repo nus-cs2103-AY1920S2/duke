@@ -2,7 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 
-public class Task {
+public abstract class Task {
     protected String msg;
     protected String status;
     protected String type;
@@ -18,6 +18,11 @@ public class Task {
         status = "X";
     }
 
+    public void changeDetail(String msg) {
+        this.msg = msg;
+    }
+
+
     public void markDone() {
         status = "O";
     }
@@ -29,6 +34,7 @@ public class Task {
     public void setStatus(String status) {
         this.status = status;
     }
+
 
     public String writeToFile() {
         assert (type.equals("T") | type.equals("D") | type.equals("E")) : "Type should either be T, D or E.";

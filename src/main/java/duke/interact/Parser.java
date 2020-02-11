@@ -8,6 +8,8 @@ import duke.command.CommandDel;
 import duke.command.CommandDone;
 import duke.command.CommandFind;
 import duke.command.CommandList;
+import duke.command.CommandUpDate;
+import duke.command.CommandUpDetail;
 import duke.exception.DukeException;
 import duke.exception.DukeExceptionCommand;
 import duke.exception.DukeExceptionDate;
@@ -16,6 +18,7 @@ import duke.exception.DukeExceptionDescription;
 import duke.exception.DukeExceptionIndex;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 
 import java.time.LocalDate;
@@ -49,6 +52,7 @@ public class Parser {
             int index;
             String details;
             String[] msgAndDate;
+            String[] indexAndNew;
 
             switch (inputCommand) {
             case "done":
@@ -119,6 +123,16 @@ public class Parser {
 
             case "find":
                 return new CommandFind(line.substring(4));
+
+            case "updatem":
+                // implement check for presence of index & detail
+                indexAndNew = comArs[1].split("\\s", 2);
+                return new CommandUpDetail(Integer.parseInt(indexAndNew[0]) - 1, " " + indexAndNew[1]);
+
+            case "updated":
+                // implement check for presence of index & date
+                indexAndNew = comArs[1].split("\\s", 2);
+                return new CommandUpDate(Integer.parseInt(indexAndNew[0]) - 1, LocalDate.parse(indexAndNew[1]));
 
             default:
                 throw new DukeExceptionCommand();

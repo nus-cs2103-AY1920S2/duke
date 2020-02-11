@@ -13,7 +13,8 @@ public enum UiDesign {
     REMOVE_TOP_PART("I've removed it: \n"),
     LIST_TOP_PART("Just keep swimming, swimming, swimming... \n"),
     ADD_TOP_PART("I will try to remember it: \n"),
-    FIND_TOP_PART("Here's what I've found amongst all the marine litter: \n");
+    FIND_TOP_PART("Here's what I've found amongst all the marine litter: \n"),
+    UPDATE_TOP_PART("I have updated it: \n");
 
     private final String text;
 
