@@ -32,6 +32,9 @@ public class Storage {
      */
     public TaskList loadTasksFile() throws FileNotFoundException {
 
+        // Assert that the tasksFile is still at the specified path and has not been shifted by some naughty user
+        assert tasksFile.isFile();
+
         Scanner sc = new Scanner(tasksFile);
         TaskList taskData = new TaskList();
 
@@ -83,6 +86,8 @@ public class Storage {
      * @throws IOException if FileWriter object do not work as expected
      */
     public void writeTasksFile(TaskList tasks) throws IOException {
+        // Assert that the tasksFile is still at the specified path and has not been shifted by some naughty user
+        assert tasksFile.isFile();
         FileWriter fw = new FileWriter(tasksFile);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTask(i);
