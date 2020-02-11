@@ -35,42 +35,52 @@ public class DukeParser {
 
                     String context = command_broken[1];
                     int taskNo = Integer.parseInt(context);
-                    tasks.removeTask(taskNo);
-                    return DukeUI.showDeleteMsg();
+                    return tasks.removeTask(taskNo);
 
                 } else if (action.equalsIgnoreCase(("deadline"))) {
 
                     String context = command_broken[1];
                     String[] context_broken = context.split(" /by ", 2);
-                    tasks.addInput(new Deadlines(context_broken[0], false ,context_broken[1]));
-                    return DukeUI.showCreationMsg();
+                    Task tempTask = tasks.addTask(new Deadlines(context_broken[0], false ,context_broken[1]));
+                    return DukeUI.showCreationMsg(tempTask);
 
                 } else if (action.equalsIgnoreCase(("todo"))) {
 
                     if (command_broken.length == 1) {
                         throw new DukeException("THE DESCRIPTION OF TODO CANNOT BE EMPTY");
                     }
-                    tasks.addInput(new ToDos(command_broken[1], false));
-                    return DukeUI.showCreationMsg();
+                    Task tempTask = tasks.addTask(new ToDos(command_broken[1], false));
+                    return DukeUI.showCreationMsg(tempTask);
 
                 } else if (action.equalsIgnoreCase(("event"))) {
 
                     String context = command_broken[1];
                     String[] context_broken = context.split(" /at ", 2);
-                    tasks.addInput(new Events(context_broken[0], false, context_broken[1]));
-                    return DukeUI.showCreationMsg();
+                    Task tempTask = tasks.addTask(new Events(context_broken[0], false, context_broken[1]));
+                    return DukeUI.showCreationMsg(tempTask);
 
                 } else if (action.equalsIgnoreCase("find")) {
 
                     int count = 1;
-                    for (Task t: tasks.getAllTasks()) {
+                    for (Task t : tasks.getAllTasks()) {
                         if (t.containsSubstring(command_broken[1])) {
                             System.out.println(count + "." + t);
                             count++;
                         }
                     }
                     return DukeUI.showFindMsg();
+                } else if (action.equalsIgnoreCase("archive")) {
 
+                    String context = command_broken[1];
+                    int taskNo = Integer.parseInt(context);
+                    return tasks.archiveTask(taskNo);
+
+                } else if (action.equalsIgnoreCase("archiveall")) {
+
+                    return tasks.archiveAll();
+
+                } else if (action.equalsIgnoreCase("showarchive")){
+                    return tasks.showArchived();
                 } else {
                     return "UNABLE TO COMPREHEND";
                 }

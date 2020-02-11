@@ -6,9 +6,9 @@ public class DeadlineTest {
 
     @Test
     public void testStringConvert() {
-        assertEquals("[D][X] read book (By: JAN 1 2020)",
-                new Deadlines("read book",false, "2020-01-01").toString());
         assertEquals("[D][O] read book (By: JAN 1 2020)",
+                new Deadlines("read book",false, "2020-01-01").toString());
+        assertEquals("[D][X] read book (By: JAN 1 2020)",
                 new Deadlines("read book", true, "2020-01-01").toString());
     }
 

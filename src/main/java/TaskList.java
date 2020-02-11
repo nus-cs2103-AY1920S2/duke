@@ -4,25 +4,20 @@ import java.util.List;
 //Wrapper class for the list of tasks
 public class TaskList {
     private List<Task> allTasks;
+    private List<Task> archivedTasks;
 
     public TaskList() {
         allTasks = new ArrayList<>();
+        archivedTasks = new ArrayList<>();
     }
 
-    public void addInput(Task s) {
+    public Task addTask(Task s) {
         this.allTasks.add(s);
-        DukeUI.showCurrentListSize(allTasks.size());
+        return s;
     }
 
     public String printTasks() {
-        int count = 1;
-        StringBuilder sb = new StringBuilder();
-        sb.append("HERE IS YOUR LIST\n");
-        for (Task s : allTasks) {
-            sb.append( count+ ". " + s + "\n");
-            count++;
-        }
-        return sb.toString();
+        return getString(allTasks);
     }
 
     public Task getTask(int n) {
@@ -41,9 +36,40 @@ public class TaskList {
         allTasks.get(taskNo - 1).markAsDone();
     }
 
-    public void removeTask(int taskNo) {
+    public String removeTask(int taskNo) {
         Task tempTask = allTasks.remove(taskNo - 1);
-        System.out.println(" " + tempTask);
-        DukeUI.showCurrentListSize(allTasks.size());
+        return DukeUI.showDeleteMsg() + "\n" +
+                " " + tempTask + "\n" +
+                DukeUI.showCurrentListSize(allTasks.size());
+    }
+
+    public String archiveTask(int taskNo) {
+        Task tempTask = allTasks.remove(taskNo - 1);
+        archivedTasks.add(tempTask);
+        return DukeUI.showArchivedMsg(tempTask);
+
+    }
+
+    public String archiveAll() {
+        String archiveMessage = "";
+        for (int i = 1; i <= allTasks.size(); i++) {
+            archiveMessage += this.archiveTask(i);
+        }
+        return archiveMessage;
+    }
+
+    public String showArchived() {
+        return getString(archivedTasks);
+    }
+
+    private String getString(List<Task> tasks) {
+        int count = 1;
+        StringBuilder sb = new StringBuilder();
+        sb.append("HERE IS YOUR LIST\n");
+        for (Task s : tasks) {
+            sb.append(count).append(". ").append(s).append("\n");
+            count++;
+        }
+        return sb.toString();
     }
 }

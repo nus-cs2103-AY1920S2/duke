@@ -28,8 +28,9 @@ public class DukeUI {
     public static String showDoneMsg() {
         return "TASK COMPLETED";
     }
-    public static String showCreationMsg() {
-        return "UNDERSTOOD";
+
+    public static String showCreationMsg(Task task) {
+        return "UNDERSTOOD \n" + task.toString() + "\nADDED";
     }
 
     public static String showDeleteMsg() {
@@ -41,5 +42,11 @@ public class DukeUI {
     }
 
     public static String showCurrentListSize(int size) {
-        return "NOW YOU HAVE " + size + " TASKS";}
+        return "NOW YOU HAVE " + size + " TASKS";
+    }
+
+    public static String showArchivedMsg(Task task) {
+        return task.toString() + "\n        IS NOW ARCHIVED";
+    }
+
 }

@@ -1,5 +1,4 @@
-import org.gradle.api.plugins.internal.DefaultJavaApplication
-import org.gradle.internal.jvm.Jvm
+
 
 plugins {
     id 'java'
@@ -53,8 +52,11 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+
+    compile files("${System.properties['JAVA_HOME']}/../lib/tools.jar")
 }
 
 run {
     standardInput = System.in
 }
+

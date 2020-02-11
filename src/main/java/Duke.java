@@ -88,7 +88,7 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(500.0);
+        userInput.setPrefWidth(480.0);
 
         sendButton.setPrefWidth(55.0);
 
