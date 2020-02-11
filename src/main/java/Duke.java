@@ -159,7 +159,11 @@ public class Duke extends Application {
         // Tell Java to use your special stream
         System.setOut(ps);
 
-        Parser.read(input, taskList, storage);
+        if(input.toLowerCase().contains("bye")) {
+            System.exit(0);
+        } else {
+            Parser.read(input, taskList, storage);
+        }
 
 
         System.out.flush();
