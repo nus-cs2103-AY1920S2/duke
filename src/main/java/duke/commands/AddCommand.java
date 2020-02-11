@@ -25,32 +25,26 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task t = null;
+        Task task = null;
         if (command.contains("todo")) {
             // add Todo task
-            t = createTodo(command);
+            task = createTodo(command);
         } else if (command.contains("deadline")) {
             // add Deadline task
-            t = createDeadline(command);
+            task = createDeadline(command);
         } else if (command.contains("event")) {
             // add Event task
-            t = createEvent(command);
+            task = createEvent(command);
         }
 
-        if (t != null) {
-            tasks.addTask(t);
-            storage.saveTask(t);
+        if (task != null) {
+            tasks.addTask(task);
+            storage.saveTask(task);
 
             StringBuilder output = new StringBuilder();
             output.append("This task has been added successfully:\n"
-                    + t.toString() + "\n"
+                    + task.toString() + "\n"
                     + "Now you have " + tasks.size() + " tasks in the list\n");
-            /*
-            ui.showLine();
-            ui.print("This task has been added successfully:");
-            ui.print(t.toString());
-            ui.print("Now you have " + tasks.size() + " tasks in the list");
-            */
             return output.toString();
         } else {
             return "There was a problem creating your task.";

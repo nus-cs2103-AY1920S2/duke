@@ -28,7 +28,6 @@ public class Command {
      * @throws DukeException If input format is wrong
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showLine();
         if (!isExit()) {
             return "Your entry is not recognized. Please try again.";
         }

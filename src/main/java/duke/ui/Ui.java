@@ -13,7 +13,6 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        showLine();
         System.out.println(INDENT + "Loading error");
     }
 
@@ -27,15 +26,9 @@ public class Ui {
         System.out.println(INDENT + HOR_LINE);
         System.out.println(INDENT + "Hello! I'm Duke!");
         System.out.println(INDENT + "What can I do for you?");
-        showLine();
-    }
-
-    public void showLine() {
-        System.out.println(INDENT + HOR_LINE);
     }
 
     public void showError(String message) {
-        showLine();
         System.out.println(INDENT + message);
     }
 

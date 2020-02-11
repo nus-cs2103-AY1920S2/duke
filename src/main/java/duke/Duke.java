@@ -14,7 +14,6 @@ import duke.ui.Ui;
 import duke.tasks.TaskList;
 import duke.commands.Command;
 import duke.parser.Parser;
-import duke.DialogBox;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -119,26 +118,6 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    /*
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-     */
-
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -159,17 +138,16 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        boolean isExit = false;
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         Command command = Parser.parse(input);
         try {
-            output = command.execute(tasks, ui, storage);
+            output.append(command.execute(tasks, ui, storage));
         } catch (DukeException e) {
             e.printStackTrace();
             System.out.println("execute failed");
         }
 
-        return "Duke reply: " + output;
+        return "Duke reply: " + output.toString();
     }
 }

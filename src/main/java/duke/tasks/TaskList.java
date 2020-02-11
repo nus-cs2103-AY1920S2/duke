@@ -50,12 +50,9 @@ public class TaskList {
      */
     public String printTaskList(Ui ui) {
         StringBuilder output = new StringBuilder();
-        ui.showLine();
         if (size() == 0) {
             output.append("Your list of tasks is currently empty.\n");
-            //ui.print("Your list of tasks is currently empty.");
         } else {
-            //ui.print("This is your list of tasks:");
             output.append("This is your list of tasks:\n");
             int taskIdx = 1;
             for (Task t : taskList) {
@@ -78,12 +75,10 @@ public class TaskList {
         if (taskNumber > taskList.size() || taskNumber < 1) {
             throw new DukeException("This task number does not exist.");
         }
-        Task t = taskList.get(taskNumber - 1);
-        //ui.print("This task is marked as completed:");
-        //ui.print(t.toString());
-        t.markAsDone();
+        Task task = taskList.get(taskNumber - 1);
+        task.markAsDone();
         storage.updateTasks(taskList);
-        return t.toString();
+        return task.toString();
     }
 
     /**
@@ -97,13 +92,11 @@ public class TaskList {
         if (taskNumber > taskList.size() || taskNumber < 1) {
             throw new DukeException("This task number does not exist.");
         }
-        Task t = taskList.get(taskNumber - 1);
+        Task task = taskList.get(taskNumber - 1);
         taskList.remove(taskNumber - 1);
-        //ui.print("This task has been deleted:");
-        //ui.print(t.toString());
         storage.updateTasks(taskList);
 
-        return t.toString();
+        return task.toString();
     }
 
     /**
