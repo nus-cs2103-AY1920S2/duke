@@ -1,4 +1,4 @@
-package duke;
+package duke.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
