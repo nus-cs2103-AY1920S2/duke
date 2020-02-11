@@ -72,7 +72,7 @@ public class TaskList {
     public String list() {
         String output;
         int size = tasks.size();
-        if(size == 0) {
+        if (size == 0) {
             output = "There is nothing in your list.\n";
         } else {
             output = "Here are the tasks in your list:\n";
@@ -110,8 +110,8 @@ public class TaskList {
         Collections.sort(tasks, new Comparator<Task>() {
             @Override
             public int compare(Task o1, Task o2) {
-                if(o1 instanceof Deadline) {
-                    if(o2 instanceof ToDo) {
+                if (o1 instanceof Deadline) {
+                    if (o2 instanceof ToDo) {
                         return -1;
                     } else if (o2 instanceof Event) {
                         return ((Deadline) o1).due.compareTo(((Event) o2).at);
@@ -119,7 +119,7 @@ public class TaskList {
                         return ((Deadline) o1).due.compareTo(((Deadline) o2).due);
                     }
                 } else if (o1 instanceof ToDo) {
-                    if(o2 instanceof ToDo) {
+                    if (o2 instanceof ToDo) {
                         return o1.description.compareTo(o2.description);
                     } else if (o2 instanceof Event) {
                         return 1;
@@ -127,7 +127,7 @@ public class TaskList {
                         return 1;
                     }
                 } else {
-                    if(o2 instanceof ToDo) {
+                    if (o2 instanceof ToDo) {
                         return -1;
                     } else if (o2 instanceof Event) {
                         return ((Event) o1).at.compareTo(((Event) o2).at);
@@ -159,7 +159,7 @@ public class TaskList {
                 output = output + ++cnt + ". " + temp + "\n";
             }
         }
-        if(cnt == 0) {
+        if (cnt == 0) {
             output = "There are no matching items in your list.\n";
         }
         return output;

@@ -55,7 +55,7 @@ public class Duke {
             } else if (input.startsWith("find")) {
                 String str = parser.parse(input)[1];
                 output = tasks.findAndPrint(str);
-            } else if(input.equalsIgnoreCase("bye")) {
+            } else if (input.equalsIgnoreCase("bye")) {
                 output = "Bye! Hope to see you again soon!\n";
                 try {
                     storage.addTasksToFile(tasks.tasks);
