@@ -57,9 +57,14 @@ public class TaskList {
     public String list() {
         String output;
         int size = tasks.size();
-        output = "Here are the tasks in your list:\n";
-        for (int i = 0; i < size; ++i) {
-            output = output + (i + 1) + ". " + tasks.get(i) + "\n";
+        if(size == 0) {
+            output = "There is nothing in your list.\n";
+        } else {
+            output = "Here are the tasks in your list:\n";
+            assert size > 0 : "no tasks in list";
+            for (int i = 0; i < size; ++i) {
+                output = output + (i + 1) + ". " + tasks.get(i) + "\n";
+            }
         }
         return output;
     }
@@ -81,6 +86,9 @@ public class TaskList {
                 output = output + ++cnt + ". " + temp + "\n";
             }
         }
+        if(cnt == 0) {
+            output = "There are no matching items in your list.\n";
+        }
         return output;
     }
 
@@ -91,9 +99,10 @@ public class TaskList {
      */
     public String done(int n) {
         String output;
-        if (n > tasks.size()) {
-            output = "There is no such task\n";
+        if (n > tasks.size() || n <= 0) {
+            output = "There is no such task!\n";
         } else {
+            assert n > 0 : "Number out of bounds";
             output = "Nice! I've marked this task as done:\n";
             tasks.get(n - 1).markAsDone();
             output = tasks.get(n - 1) + "\n";

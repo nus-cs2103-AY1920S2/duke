@@ -33,10 +33,12 @@ public class Storage {
                 tasks.add(t);
                 break;
             case "D":
+                assert taskComponents.length == 4 : "File has wrong format for deadline";
                 t = new Deadline(taskComponents[2], taskComponents[3], stringToBoolean(taskComponents[1]));
                 tasks.add(t);
                 break;
             case "E":
+                assert taskComponents.length == 4 : "File has wrong format for Event";
                 t = new Event(taskComponents[2], taskComponents[3], stringToBoolean(taskComponents[1]));
                 tasks.add(t);
                 break;
@@ -78,6 +80,7 @@ public class Storage {
      * @return Whether task is completed.
      */
     public static boolean stringToBoolean(String str) {
+        assert str.equals("0") || str.equals("1") : "non-boolean value";
         if (str.equals("0")) {
             return false;
         } else {

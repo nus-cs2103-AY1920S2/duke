@@ -14,6 +14,7 @@ public class Deadline extends Task {
      */
     public Deadline(String[] description) {
         super(description[0]);
+        assert description.length > 1 : "description is wrong";
         due = (description[1].split(" ", 2))[1];
         modifyDateFormat();
     }
@@ -38,6 +39,7 @@ public class Deadline extends Task {
     public Deadline(String description, String dueDate, boolean isDone) {
         super(description, isDone);
         due = dueDate;
+        modifyDateFormat();
     }
 
     public String getDescription() {
@@ -50,6 +52,6 @@ public class Deadline extends Task {
     }
 
     public String addToFile() {
-        return "D | " + super.addToFile() + " | " + this.parsedDue;
+        return "D | " + super.addToFile() + " | " + due;
     }
 }
