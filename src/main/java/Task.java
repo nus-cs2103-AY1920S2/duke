@@ -1,4 +1,4 @@
-package duke.task;
+package comduke.task;
 import java.util.List;
 import java.util.ArrayList;	
 import org.json.simple.JSONObject;

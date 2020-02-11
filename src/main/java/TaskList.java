@@ -1,7 +1,10 @@
-package duke;
+package com.duke;
 import java.util.ArrayList;
 import java.util.List;
-import duke.task.*;
+import com.duke.task.Task;
+import com.duke.task.Event;
+import com.duke.task.ToDo;
+import com.duke.task.Deadline;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
