@@ -16,44 +16,6 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 /**
- * The enum Command.
- */
-enum Command {
-  /**
-   * Exit command command.
-   */
-  EXIT_COMMAND,
-  /**
-   * List command command.
-   */
-  LIST_COMMAND,
-  /**
-   * Done command command.
-   */
-  DONE_COMMAND,
-  /**
-   * Delete command command.
-   */
-  DELETE_COMMAND,
-  /**
-   * Todo command command.
-   */
-  TODO_COMMAND,
-  /**
-   * Deadline command command.
-   */
-  DEADLINE_COMMAND,
-  /**
-   * Event command command.
-   */
-  EVENT_COMMAND,
-  /**
-   * Find command command.
-   */
-  FIND_COMMAND
-}
-
-/**
  * The type Duke.
  */
 public class Duke extends Application {
