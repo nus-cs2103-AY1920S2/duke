@@ -6,10 +6,15 @@
 <?import javafx.scene.layout.Border?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
   <ScrollPane VBox.vgrow="ALWAYS" prefHeight="500" fitToWidth="true">
-    <VBox fx:id="messageList" />
+    <VBox fx:id="messageList" spacing="8">
+      <padding>
+        <Insets top="4" left="4" bottom="4" right="4" />
+      </padding>
+    </VBox>
   </ScrollPane>
   <HBox>
     <TextField
