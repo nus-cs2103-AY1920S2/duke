@@ -67,7 +67,7 @@ public class Duke {
                 break;
 
             case "delete":
-                if (!controller.checkTask(taskName)) {
+                if (controller.checkTask(taskName)) {
                     controller.removeTask(taskName);
                 }
                 Greetings.prettyPrint(String.format("Deleted task: %s", taskName));
