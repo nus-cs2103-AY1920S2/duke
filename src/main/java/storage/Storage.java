@@ -24,7 +24,7 @@ public class Storage {
 
     public String pathName;
     public ArrayList<Task> taskList;
-    public static final String FILE_PATH = "/Users/jadetay/duke/data/tasks.txt";
+    public static final String FILE_PATH = "data/tasks.txt";
 
     /**
      * Constructor for creating new Storage object and creates new ArrayList to store Tasks.
@@ -132,6 +132,24 @@ public class Storage {
             toAdd += "E | " + isDone + " | " + e.getDescription() + " | " + e.getEvent();
         }
         return toAdd;
+    }
+
+    public void newFile(String noteType) throws IOException {
+        File file = new File("data/notes/" + noteType + ".txt");
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+    }
+
+    public void saveNote(String noteType, String notes) throws IOException {
+        File file = new File("data/notes/" + noteType + ".txt");
+        FileWriter fw = new FileWriter(file, true);
+        fw.write("• " + notes + "\n");
+        fw.close();
+    }
+
+    private String formatNotes(String notes) {
+        return "• " + notes;
     }
 
 }

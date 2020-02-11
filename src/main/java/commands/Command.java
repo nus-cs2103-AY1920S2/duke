@@ -5,6 +5,8 @@ import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
 
+import java.io.IOException;
+
 /**
  * Creates a new Command object according to user input.
  */
@@ -18,7 +20,7 @@ public abstract class Command {
      * @param storage This allows for TaskList to be updated and stored in hard drive.
      * @throws DukeException depending on command, different child class exception is thrown.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
 
     /**
      * Check for Exit Command and exit programme if returns false.

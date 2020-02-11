@@ -1,14 +1,6 @@
 package parser;
 
-import commands.AddCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.SearchCommand;
-import commands.FindCommand;
-import commands.ListCommand;
-import commands.ExitCommand;
-import commands.UnknownCommand;
+import commands.*;
 import dukeexception.DukeException;
 import dukeexception.InvalidDateTimeException;
 import dukeexception.WrongInputException;
@@ -16,6 +8,8 @@ import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
+import task.Note;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -91,6 +85,11 @@ public class Parser {
                 com = new ListCommand();
             } else if (command.equals("bye")) {
                 com = new ExitCommand();
+            } else if (command.equals("note")) {
+                Note n = new Note(temp[1], fullCommand.substring(temp[0].length() + temp[1].length() + 2));
+                com = new NewNoteCommand(n);
+            } else if (command.equals("view")) {
+                com = new ViewNoteCommand(temp[1]);
             } else {
                 com = new UnknownCommand();
             }
