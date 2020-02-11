@@ -35,29 +35,7 @@ public class Storage {
             while (sc.hasNext()) {
                 String str = sc.nextLine();
                 String[] parts = str.split("\\|");
-                switch (parts[0]) {
-                case "T": {
-                    Task task = new Todo(Boolean.parseBoolean(parts[1]), parts[2]);
-                    tasks.add(task);
-                    schedule.addDate(task);
-                    break;
-                }
-                case "E": {
-                    Task task = new Event(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
-                    tasks.add(task);
-                    schedule.addDate(task);
-                    break;
-                }
-                case "D": {
-                    Task task = new Deadline(Boolean.parseBoolean(parts[1]), parts[2], parts[3]);
-                    tasks.add(task);
-                    schedule.addDate(task);
-                    break;
-                }
-                default:
-                    System.err.println("Error in task type in file");
-                    break;
-                }
+                addTask(parts, tasks, schedule);
             }
             return tasks;
         } catch (FileNotFoundException e) {
@@ -67,6 +45,41 @@ public class Storage {
             System.err.println("Bad dates in File\n Please correct it and reload");
             return null;
         }
+    }
+
+    private void addTask(String[] inputs, ArrayList<Task> tasks, Schedule schedule)
+            throws BadDateException {
+        switch (inputs[0]) {
+        case "T":
+            Task todo = newTodo(Boolean.parseBoolean(inputs[1]), inputs[2]);
+            tasks.add(todo);
+            break;
+        case "E":
+            Task event = newEvent(Boolean.parseBoolean(inputs[1]), inputs[2], inputs[3]);
+            tasks.add(event);
+            schedule.addDate(event);
+            break;
+        case "D":
+            Task deadline = newDeadline(Boolean.parseBoolean(inputs[1]), inputs[2], inputs[3]);
+            tasks.add(deadline);
+            schedule.addDate(deadline);
+            break;
+        default:
+            System.err.println("Error in file reading");
+            break;
+        }
+    }
+
+    private Task newTodo(boolean isDone, String description) {
+        return new Todo(isDone, description);
+    }
+
+    private Task newEvent(boolean isDone, String description, String date) throws BadDateException {
+        return new Event(isDone, description, date);
+    }
+
+    private Task newDeadline(boolean isDone, String description, String date) throws BadDateException {
+        return new Deadline(isDone, description, date);
     }
 
     /**
