@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The DeleteCommand inherits from Command and is used to delete tasks in the saved TaskList.
@@ -26,15 +28,60 @@ class DeleteCommand extends Command {
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         String[] commands = command.split(" ");
-        Task toBeRemoved = tasks.getTaskList().get(Integer.parseInt(commands[1])-1);
-        tasks.taskList.remove(Integer.parseInt(commands[1])-1);
-        storage.save(tasks);
+        if (!(commands[1].trim().equals("all"))) {
+            Task toBeRemoved = tasks.getTaskList().get(Integer.parseInt(commands[1])-1);
+            tasks.taskList.remove(Integer.parseInt(commands[1])-1);
+            storage.save(tasks);
 
-        ui.showLine();
-        System.out.println("\n" + "Alright, I've removed this task:" + "\n");
-        System.out.println(toBeRemoved + "\n");
+            ui.showLine();
+            System.out.println("\n" + "Alright, I've removed this task:" + "\n");
+            System.out.println(toBeRemoved + "\n");
+        } else {
+            // It is a mass deletion task
+            List<Task> remainingTasks = new ArrayList<>();
+
+            try {
+                if (commands[2].equals("todo")) {
+                    for (Task task : tasks.taskList) {
+                        if (!(task instanceof ToDo)) {
+                            remainingTasks.add(task);
+                        }
+                    }
+                } else if (commands[2].equals("event")) {
+                    for (Task task : tasks.taskList) {
+                        if (!(task instanceof Event)) {
+                            remainingTasks.add(task);
+                        }
+                    }
+                } else if (commands[2].equals("deadline")) {
+                    for (Task task : tasks.taskList) {
+                        if (!(task instanceof Deadline)) {
+                            remainingTasks.add(task);
+                        }
+                    }
+                } else if (commands[2].equals("done")) {
+                    for (Task task : tasks.taskList) {
+                        if (!(task.getStatusIcon().equals("[Y]"))) {
+                            remainingTasks.add(task);
+                        }
+                    }
+                }
+                else {
+                    throw new DukeException("There was no invalid input after 'all'. Please try again.");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+
+
+
+            tasks.taskList = remainingTasks;
+            storage.save(tasks);
+            ui.showLine();
+            System.out.println("\n" + "Alright, I've removed all " + commands[2] + " tasks." + "\n");
+        }
         System.out.println("You currently have "
-                + tasks.getTaskList().size()
+                + tasks.taskList.size()
                 + " task(s) in the list.");
     }
 

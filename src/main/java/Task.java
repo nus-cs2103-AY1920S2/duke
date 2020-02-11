@@ -7,6 +7,7 @@ class Task {
     protected static int taskNumber = 1; // for Level 2
     protected int currentTaskNumber;
     protected boolean isDone; // for Level 3
+    protected String taskType;
 
     /**
      * Constructor for a Task takes in a String task name that is specified by the user.
@@ -18,6 +19,7 @@ class Task {
         this.taskName = taskName;
         currentTaskNumber = taskNumber;
         this.taskNumber++;
+        this.taskType = taskType;
     }
 
     /**
@@ -45,6 +47,10 @@ class Task {
      */
     public String getTaskName() {
         return taskName.trim();
+    }
+
+    public String getTaskType() {
+        return taskType;
     }
 
     /**
