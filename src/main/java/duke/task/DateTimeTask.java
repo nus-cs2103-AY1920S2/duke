@@ -21,4 +21,12 @@ public abstract class DateTimeTask extends Task {
     public String getDateTime() {
         return this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
+    /**
+     * Sets the date attached to the task.
+     * @param dateTime Date in task.
+     */
+    public void setDateTime(LocalDate dateTime) {
+        this.dateTime = dateTime;
+    }
 }

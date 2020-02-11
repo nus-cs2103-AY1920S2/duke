@@ -1,6 +1,7 @@
 package duke.logic;
 
 import duke.command.AddCommand;
+import duke.command.ChangeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -54,8 +55,25 @@ public class Parser {
         commands.add("delete");
         commands.add("done");
         commands.add("find");
+        commands.add("edit");
 
         return commands.contains(input);
+    }
+
+    private static String getValidRegex(String str) {
+        String regex = null;
+        ArrayList<String> validRegexes = new ArrayList<>();
+        validRegexes.add("/by");
+        validRegexes.add("/at");
+
+        for (String rgx: validRegexes) {
+            if (str.contains(rgx)) {
+                regex = rgx;
+                break;
+            }
+        }
+
+        return regex;
     }
 
     /**
@@ -103,6 +121,23 @@ public class Parser {
                 c = new DoneCommand(i - 1);
             } else if (command.equals("find")) {
                 c = new FindCommand(inputElements[1]);
+            } else if (command.equals("edit")) {
+                String[] idxDescElements = inputElements[1].split(" ", 2);
+                int i = Integer.parseInt(idxDescElements[0]);
+                String regex = getValidRegex(idxDescElements[1]);
+                // Editing Deadline or Event (expected, but not necessarily)
+                if (regex != null) {
+                    String[] descElements = idxDescElements[1].split(regex, 2);
+                    LocalDate date = LocalDate.parse(descElements[1].trim());
+                    // Only edit the time
+                    if (descElements[0].trim().isEmpty()) {
+                        c = new ChangeCommand(i - 1, date);
+                    } else { // Edit description and time
+                        c = new ChangeCommand(i - 1, descElements[0].trim(), date);
+                    }
+                } else { // Can be editing any task, but only the description
+                    c = new ChangeCommand(i - 1, idxDescElements[1]);
+                }
             } else {
                 c = new UnknownCommand();
             }

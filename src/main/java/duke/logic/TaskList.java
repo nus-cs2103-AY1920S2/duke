@@ -1,7 +1,11 @@
 package duke.logic;
 
+import duke.task.DateTimeTask;
 import duke.task.Task;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Manages all the tasks in Duke.
@@ -15,6 +19,15 @@ public class TaskList {
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    /**
+     * Return a specified task managed by Duke.
+     * @param i Task index.
+     * @return Requested task.
+     */
+    public Task getTask(int i) {
+        return this.tasks.get(i).getCopy();
     }
 
     /**
@@ -84,5 +97,45 @@ public class TaskList {
             }
         }
         return tasks;
+    }
+
+    /**
+     * Edit the description of a task.
+     * @param i Task index.
+     * @param desc New description.
+     * @return Task which was replaced.
+     */
+    public Task editTask(int i, String desc) {
+        Task t = this.tasks.get(i).getCopy();
+        this.tasks.get(i).setDescription(desc);
+        return t;
+    }
+
+    /**
+     * Edit the date of a task.
+     * @param i Task index.
+     * @param date New date.
+     * @return Task which was replaced.
+     */
+    public Task editTask(int i, LocalDate date) {
+        assert this.tasks.get(i) instanceof DateTimeTask;
+        Task t = this.tasks.get(i).getCopy();
+        ((DateTimeTask)this.tasks.get(i)).setDateTime(date);
+        return t;
+    }
+
+    /**
+     * Edit the description and date of a task.
+     * @param i Task index.
+     * @param desc New description.
+     * @param date New date.
+     * @return Task which was replaced.
+     */
+    public Task editTask(int i, String desc, LocalDate date) {
+        assert this.tasks.get(i) instanceof DateTimeTask;
+        Task t = this.tasks.get(i).getCopy();
+        this.tasks.get(i).setDescription(desc);
+        ((DateTimeTask)this.tasks.get(i)).setDateTime(date);
+        return t;
     }
 }
