@@ -14,6 +14,20 @@ public class Event extends Task {
         this.at = at;
     }
 
+    @Override
+    public Task update(String[] updateStrArr) {
+        super.update(updateStrArr);
+        for (String updateStr : updateStrArr) {
+            String[] attrToChange = updateStr.split("=");
+            String attr = attrToChange[0].strip();
+            String newValue = attrToChange[1].strip();
+            if (attr.equalsIgnoreCase("at")) {
+                this.at = newValue;
+            }
+        }
+        return this;
+    }
+
 
     /**
      * Formats this object as a String to be written into the data file

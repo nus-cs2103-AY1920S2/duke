@@ -2,6 +2,8 @@ package duke;
 
 import duke.tasks.*;
 
+import java.util.Scanner;
+
 public class Parser {
 
     /**
@@ -102,6 +104,18 @@ public class Parser {
             if (numMatches==0) {
                 ui.cathulhuSays("\t  You have no matching task, mortal.");
             }
+
+        } else if (cmdString[0].equalsIgnoreCase("update")) { //update
+            if (cmdString.length == 1) {
+                throw new DukeException("\tWhat do you want to update, mortal?");
+            }
+            int taskPos = new Scanner(cmdString[1]).useDelimiter("\\D+").nextInt();
+            String[] updateStringArr = cmdString[1].substring(cmdString[1].indexOf(String.valueOf(taskPos)))
+                    .split(",");
+            String originalTask = tasks.getTask(taskPos).toString();
+            String updatedTask = tasks.getTask(taskPos).update(updateStringArr).toString();
+            ui.cathulhuSays("\t  The following task has been changed: \n\t  From: "
+                    + originalTask + "\n\t  to: " + updatedTask);
 
         } else {
             throw new DukeException("\tMortal, that's an invalid Task!");

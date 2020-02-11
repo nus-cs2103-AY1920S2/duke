@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.DukeException;
+
 public class Task {
 
     protected String description;
@@ -40,6 +42,24 @@ public class Task {
      */
     public String toDataString() {
         return (isDone ? "1" : "0") + ":;:" + this.description;
+    }
+
+    public Task update(String[] updateStrArr) throws DukeException {
+        for (String updateStr : updateStrArr) {
+            String[] attrToChange = updateStr.split("=");
+            String attr = attrToChange[0].strip();
+            String newValue = attrToChange[1].strip();
+            if (attr.equalsIgnoreCase("description")) {
+                this.description = newValue;
+            } else if (attr.equalsIgnoreCase("done")) {
+                if (newValue.equalsIgnoreCase("true")) {
+                    this.isDone = true;
+                } else if (newValue.equalsIgnoreCase("false")) {
+                    this.isDone = false;
+                }
+            }
+        }
+        return this;
     }
 
     /**
