@@ -9,6 +9,8 @@ public class Event extends Task {
      */
     public Event (String description, String time){
         super(description);
+        assert description != null : "Description cannot bve empty";
+        assert time != null : "Time cannot be empty";
         this.time = time;
     }
 

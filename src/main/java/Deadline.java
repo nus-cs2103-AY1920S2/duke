@@ -9,6 +9,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String time) {
         super(description);
+        assert description != null : "description cannot be null";
+        assert time != null : "date cannot be null";
         this.time = time;
     }
 

@@ -5,7 +5,6 @@ import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.io.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -55,7 +54,7 @@ public class Store {
                 Storage.get(i).getStatusIcon();
             }
             String data = String.format("%d.",i+1) + Storage.get(i).toString();
-            output = output + data + "\n";
+            output = String.format("%s%s\n", output, data);
         }
         return output;
     }
@@ -63,19 +62,21 @@ public class Store {
     /**
      * This method updates the Task at the index to complete.
      * @param index Indicates which item on the ArrayList Storage.
-     * @retrun String of done task.
+     * @return String of done task.
      */
     public String done(int index){
-        if(index > Storage.size() || index <= 0){
-            return DE.ExceedList();
-        } else {
+        assert index < Storage.size() : "Index cannot be greater than list";
+        assert index > 0 : "Index cannot be 0 or negative";
+//        if(index > Storage.size() || index <= 0){
+//            return DE.ExceedList();
+//        } else {
             Task UpdateCurrAction = Storage.get(index - 1);
             UpdateCurrAction.isDone = true;
             UpdateCurrAction.getStatusIcon();
             String CurrAction = UpdateCurrAction.toString();
             WritetoFile();
             return ui.DoneMessage(CurrAction);
-        }
+//        }
     }
 
     /**
@@ -84,6 +85,7 @@ public class Store {
      * @return String This returns the number of task currently.
      */
     public String todo(String S){
+        assert S != null : "input string cannot be null";
         this.cmd = S;
         Task T = new Todo(cmd);
         Storage.add(T);
@@ -98,6 +100,7 @@ public class Store {
      * @return the String of the new deadline task.
      */
     public String deadline(String[] ActionTime){
+        assert ActionTime.length > 0 : "Deadline details cannot be empty";
         String Timing;
         String details;
         this.cmd = ActionTime[0];
@@ -138,9 +141,10 @@ public class Store {
         String details;
         String Date;
         this.cmd = ActionTime[0];
-        if(ActionTime[1].length() <=1){
-            return DE.EventMissingDate();
-        } else {
+        assert ActionTime.length > 1 : "Event missing date";
+//        if(ActionTime[1].length() <=1){
+//            return DE.EventMissingDate();
+//        } else {
             details = ActionTime[1].substring(3).strip();
             String[] DateTime = details.split(" ");
             try {
@@ -163,7 +167,7 @@ public class Store {
             } catch (DateTimeException | ParseException d) {
                 return DE.InvalidDateFormat();
             }
-        }
+//        }
     }
 
     /**
@@ -172,16 +176,18 @@ public class Store {
      * @return the String of the task deleted.
      */
     public String delete(int index){
-        if(index > Storage.size() || index <= 0){
-            return DE.ExceedList();
-        } else {
+        assert index < Storage.size() : "index value greater than list";
+        assert index > 0 : "index cannot be 0 or negative.";
+//        if(index > Storage.size() || index <= 0){
+//            return DE.ExceedList();
+//        } else {
             Task UpdateCurrAction = Storage.get(index - 1);
             String CurrAction = UpdateCurrAction.toString();
             int amt = Storage.size() - 1;
             Storage.remove(index - 1);
             WritetoFile();
             return ui.DeleteMessage(CurrAction, amt);
-        }
+//        }
     }
 
     /**
@@ -265,7 +271,7 @@ public class Store {
         } else {
             output = output + "Here are the matching tasks in your list:\n";
             for (String item : Match){
-                output = output + item + "\n";
+                output = String.format("%s%s\n", output, item);
             }
         }
         return output;

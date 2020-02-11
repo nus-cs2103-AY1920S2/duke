@@ -58,6 +58,10 @@ public class Duke extends Application {
         }
     } //end Duke
 
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
+
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
