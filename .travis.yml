@@ -4,7 +4,7 @@ jdk: openjdk11
 os: linux
 dist: xenial
 script: >-
-  ./gradlew run
+  ./gradlew run --args="cli"
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
