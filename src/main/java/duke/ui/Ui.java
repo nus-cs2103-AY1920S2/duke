@@ -11,7 +11,7 @@ public class Ui {
     private static final String LS = System.lineSeparator();
     private static final String NUM_OF_TASKS = "Now you have %d tasks in the list.";
     private static final String ADD_TASK = "Got it. I've added this task: ";
-    private static final String DELETE_TASK = "Noted. I've removed this task: ";
+    private static final String DELETE_TASK = "Noted. I've removed these tasks: ";
     private static final String DONE_TASK = "Nice! I've marked this task as done: ";
     private static final String EXIT_TASK = "Bye!!! See you again :)";
     private static final String INVALID_TASK = "Invalid command format!";
@@ -53,8 +53,8 @@ public class Ui {
      * @param task deleted task
      * @param totalTasks current total task in integer
      */
-    public void showDeleteTask(Task task, int totalTasks) {
-        showToUser(DELETE_TASK, task.toString(), String.format(NUM_OF_TASKS, totalTasks));
+    public void showDeleteTask(TaskList tasks, int totalTasks) {
+        showToUser(DELETE_TASK, getAllTaskForView(tasks), String.format(NUM_OF_TASKS, totalTasks));
     }
 
     /**

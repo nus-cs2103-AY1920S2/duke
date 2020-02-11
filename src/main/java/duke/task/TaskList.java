@@ -3,6 +3,7 @@ package duke.task;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a list of tasks.
@@ -69,18 +70,24 @@ public class TaskList {
     }
 
     /**
-     * Delete the task from the list based on the given index.
+     * Delete the list of tasks based on given indexes.
      *
-     * @param index given index of the task
-     * @return deleted task
+     * @param indexes list indexes of the task
+     * @return deleted TaskList
      * @throws DukeException exception for error while the given index not exist
      */
-    public Task deleteTaskByIndex(int index) throws DukeException {
+    public TaskList deleteTaskByIndexes(List<Integer> indexes) throws DukeException {
+        TaskList deletedTasks = new TaskList();
+        int deleteCounter = 1;
         try {
-            return tasks.remove(index - 1);
+            for (int index : indexes) {
+                deletedTasks.addTask(tasks.remove(index - deleteCounter));
+                deleteCounter++;
+            }
         } catch (IndexOutOfBoundsException ex) {
-            throw new DukeException("OOPS!!! We don't have this number in list!!!");
+            throw new DukeException("OOPS!!! We don't have some number in list!!!");
         }
+        return deletedTasks;
     }
 
     /**
@@ -89,7 +96,7 @@ public class TaskList {
      * @param keyword keyword to search
      * @return a TaskList of result tasks
      */
-    public TaskList getTaskWithKeyword(String keyword) {
+    public TaskList getTaskListWithKeyword(String keyword) {
         TaskList result = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {

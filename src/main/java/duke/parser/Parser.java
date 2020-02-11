@@ -9,12 +9,13 @@ import duke.command.TodoCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ListCommand;
-import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Parses user input.
@@ -155,11 +156,12 @@ public class Parser {
      */
     private static Command prepareDelete(String[] command) throws InvalidCommandException {
         try {
-            int index = Integer.parseInt(command[1]);
-            if (command.length > 2) {
-                throw new InvalidCommandException(EXTRA_ERROR);
+            String[] commandSplit = command[1].split(" ");
+            List<Integer> indexes = new ArrayList<>();
+            for (String index : commandSplit) {
+                indexes.add(Integer.parseInt(index));
             }
-            return new DeleteCommand(index);
+            return new DeleteCommand(indexes);
         } catch (IndexOutOfBoundsException ex) {
             throw new InvalidCommandException(INCOMPLETE_ERROR);
         } catch (NumberFormatException ex) {
