@@ -42,6 +42,10 @@ public class Duke {
         try {
             if (input.equalsIgnoreCase("list")) {
                 output = tasks.list();
+            } else if (input.equalsIgnoreCase("sort alphabetically")) {
+                output = tasks.sortAlphabetically();
+            } else if (input.equalsIgnoreCase("sort chronologically")) {
+                output = tasks.sortChronologically();
             } else if (input.startsWith("done")) {
                 int n = Integer.parseInt(parser.parse(input)[1]);
                 output = tasks.markAsDoneAndPrint(n);

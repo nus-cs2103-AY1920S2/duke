@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Deals with the functionality of the task list.
@@ -82,6 +84,64 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Sorts the task list alphabetically.
+     *
+     * @return message to indicate successful sorting.
+     */
+    public String sortAlphabetically() {
+        Collections.sort(tasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.description.compareTo(o2.description);
+            }
+        });
+        String output = "I have sorted the tasks alphabetically.\n";
+        output = output + "You can use the list command to view it.";
+        return output;
+    }
+
+    /**
+     * Sorts the task list chronologically.
+     *
+     * @return message to indicate successful sorting.
+     */
+    public String sortChronologically() {
+        Collections.sort(tasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                if(o1 instanceof Deadline) {
+                    if(o2 instanceof ToDo) {
+                        return -1;
+                    } else if (o2 instanceof Event) {
+                        return ((Deadline) o1).due.compareTo(((Event) o2).at);
+                    } else {
+                        return ((Deadline) o1).due.compareTo(((Deadline) o2).due);
+                    }
+                } else if (o1 instanceof ToDo) {
+                    if(o2 instanceof ToDo) {
+                        return o1.description.compareTo(o2.description);
+                    } else if (o2 instanceof Event) {
+                        return 1;
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    if(o2 instanceof ToDo) {
+                        return -1;
+                    } else if (o2 instanceof Event) {
+                        return ((Event) o1).at.compareTo(((Event) o2).at);
+                    } else {
+                        return ((Event) o1).at.compareTo(((Deadline) o2).due);
+                    }
+                }
+            }
+        });
+        String output = "I have sorted the tasks chronologically.\n";
+        output = output + "You can use the list command to view it.";
+        return output;
+    }
+
 
     /**
      * Finds tasks containing given string.
@@ -125,6 +185,7 @@ public class TaskList {
 
     /**
      * Task to be deleted.
+     *
      * @param n Task to be deleted.
      */
     public String deleteAndPrint(int n) {

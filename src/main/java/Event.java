@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
  * Simulates an Event task.
  */
 public class Event extends Task {
-    protected String at;
-    protected String parsedAt;
+    String at;
+    String parsedAt;
 
     /**
      * Creates event.

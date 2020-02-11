@@ -7,8 +7,8 @@ import java.util.Locale;
  * Simulates the working of a deadline task.
  */
 public class Deadline extends Task {
-    protected String due;
-    protected String parsedDue;
+    String due;
+    String parsedDue;
 
     /**
      * Creates deadline type.
