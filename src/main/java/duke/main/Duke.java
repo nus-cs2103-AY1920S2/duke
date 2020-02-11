@@ -51,14 +51,14 @@ public class Duke {
         try {
             Processor.process(tasks, storage);
         } catch (DukeException e) {
-            Ui.printLine();
-            Ui.indent(e.toString());
-            Ui.printLine();
+            String message = Ui.indentWithNewline(e.toString(), 1);
+            Ui.printSection(message);
         } catch (DateTimeParseException e) {
-            Ui.printLine();
-            Ui.indent("It seems that you have entered a format we don't understand. ");
-            Ui.indent("Please use the YYYY-MM-DD format.");
-            Ui.printLine();
+            String message = "";
+            message += Ui.indentWithNewline("It seems that you have entered a format we don't understand",
+                    1);
+            message += Ui.indentWithNewline("Please use the YYYY-MM-DD format.", 1);
+            Ui.printSection(message);
         }
     }
 
@@ -71,7 +71,7 @@ public class Duke {
         String toReturn;
         try {
             if (Parser.commandEquals("bye", input)) {
-                Ui.sayGoodbye();
+                // Ui.sayGoodbye();
                 toReturn = "Bye!";
             } else if (Parser.commandEquals("list", input)) {
                 Ui.displayList(tasks);

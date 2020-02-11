@@ -54,46 +54,47 @@ public class TaskList {
      * Adds a deadline object to the task list
      * @param args A String in the format of: "<desc> /by <date>"
      */
-    public void addDeadline(String args) {
+    public String addDeadline(String args) {
         String[] descAndBy = args.split(" /by ");
         Deadline deadline = new Deadline(descAndBy[0], descAndBy[1]);
         tasks.add(deadline);
 
-        Ui.printLine();
-        Ui.indent("Acknowledged. I have added: ");
-        Ui.doubleIndent( deadline.toString());
-        Ui.printTaskCount(this);
-        Ui.printLine();
+        String toReturn = "";
+        toReturn += Ui.indentWithNewline("Acknowledge. I have added: ", 1);
+        toReturn += Ui.indentWithNewline(deadline.toString(), 2);
+        toReturn += Ui.getTaskCount(this);
+        return toReturn;
     }
 
     /**
      * Adds an duke.task.Event object to the task list
      * @param args A String in the format of: "<desc> /at <date>"
      */
-    public void addEvent(String args) {
+    public String addEvent(String args) {
         String[] descAndAt = args.split(" /at ");
         Event event = new Event(descAndAt[0], descAndAt[1]);
         tasks.add(event);
 
-        Ui.printLine();
-        Ui.indent("Acknowledged. I have added: ");
-        Ui.doubleIndent(event.toString());
-        Ui.printTaskCount(this);
-        Ui.printLine();
+        String toReturn = "";
+        toReturn += Ui.indentWithNewline("Acknowledge. I have added: ", 1);
+        toReturn += Ui.indentWithNewline(event.toString(), 2);
+        toReturn += Ui.getTaskCount(this);
+        return toReturn;
     }
 
     /**
      * Add a duke.task.Todo object to the task list
      * @param args A String in the format of: "<desc>"
      */
-    public void addTodo(String args) {
+    public String addTodo(String args) {
         Todo todo = new Todo(args);
         tasks.add(todo);
-        Ui.printLine();
-        Ui.indent("Acknowledged. I have added: ");
-        Ui.doubleIndent(todo.toString());
-        Ui.printTaskCount(this);
-        Ui.printLine();
+
+        String toReturn = "";
+        toReturn += Ui.indentWithNewline("Acknowledge. I have added: ", 1);
+        toReturn += Ui.indentWithNewline(todo.toString(), 2);
+        toReturn += Ui.getTaskCount(this);
+        return toReturn;
     }
 
     private void add(Task task) {
@@ -122,17 +123,17 @@ public class TaskList {
      * @param taskNo A 1-based indexing of the position of the duke.task.Task in the list
      * @throws InvalidIndexException
      */
-    public void markTaskAsDone(int taskNo) throws InvalidIndexException {
+    public String markTaskAsDone(int taskNo) throws InvalidIndexException {
         if (taskNo < 1 || taskNo > tasks.size()) {
             throw new InvalidIndexException();
         }
         Task task = tasks.get(taskNo - 1); // The user starts counting from 1
         task.markAsDone();
 
-        Ui.printLine();
-        Ui.indent("Excellent! You have completed this task: ");
-        Ui.doubleIndent(task.toString());
-        Ui.printLine();
+        String toReturn = "";
+        toReturn += Ui.indentWithNewline("Excellent! You have completed this task: ", 1);
+        toReturn += Ui.indent(task.toString(), 2);
+        return toReturn;
     }
 
     /**
@@ -140,18 +141,18 @@ public class TaskList {
      * @param taskNo A 1-based indexing of the position of the duke.task.Task in the list
      * @throws InvalidIndexException
      */
-    public void deleteTask(int taskNo) throws InvalidIndexException {
+    public String deleteTask(int taskNo) throws InvalidIndexException {
         if (taskNo < 1 || taskNo > tasks.size()) {
             throw new InvalidIndexException();
         }
         Task task = tasks.get(taskNo - 1); // The user starts counting from 1
         tasks.remove(taskNo - 1);
 
-        Ui.printLine();
-        Ui.indent("Understood. I have now removed this task: ");
-        Ui.doubleIndent(task.toString());
-        Ui.printTaskCount(this);
-        Ui.printLine();
+        String toReturn = "";
+        toReturn += Ui.indentWithNewline("Understood. I have now removed this task: ", 1);
+        toReturn += Ui.indentWithNewline(task.toString(), 2);
+        toReturn += Ui.getTaskCount(this);
+        return toReturn;
     }
 
     /**
@@ -162,18 +163,16 @@ public class TaskList {
         return tasks.size() == 100;
     }
 
-    public void find(String args) {
+    public String find(String args) {
         TaskList matches = new TaskList();
         for (Task task: tasks) {
             if (task.toString().contains(args)) matches.add(task);
         }
 
         if (matches.size() == 0)  {
-           Ui.printLine();
-           Ui.indent("No match found.");
-           Ui.printLine();
+            return Ui.indentWithNewline("No match found. ", 1);
         } else {
-            Ui.displayList(matches, "We have found the following matches:");
+            return Ui.displayListInUi(matches, "We have found the following matches: ");
         }
     }
 
@@ -192,6 +191,7 @@ public class TaskList {
             return matches.toString();
         }
     }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.size(); i++) {
