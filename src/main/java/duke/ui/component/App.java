@@ -1,4 +1,4 @@
-package duke.ui.components;
+package duke.ui.component;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
  */
 public class App extends VBox {
     @FXML
-    private VBox messageList = null;
+    private VBox messageList;
 
     /**
      * Create Duke's root application component.
@@ -25,6 +25,8 @@ public class App extends VBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+        getStylesheets().add("/style/App.css");
     }
 
     @FXML
