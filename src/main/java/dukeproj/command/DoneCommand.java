@@ -21,7 +21,7 @@ public class DoneCommand extends Command {
      * @param ui The user interface of Duke, used to return Duke's response.
      * @param taskList The list of tasks to be marked from.
      * @param storage The object to assist in writing the task list into the storage file.
-     * @param schedule Duke's calender to be modified if done task is date sensitive.
+     * @param schedule Duke's schedule to be modified if done task is date sensitive.
      * @return Duke's response in the form of a String.
      * @throws BadDescriptionException If index is not in the form of an integer.
      * @throws DukeDescriptionException If index is empty.

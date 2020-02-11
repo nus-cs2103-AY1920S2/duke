@@ -5,7 +5,7 @@ package dukeproj.exception;
  * whereby the command given is not found in the enum class: Command.
  */
 public class InvalidCommandException extends DukeException {
-    public InvalidCommandException (String errorMsg) {
+    public InvalidCommandException(String errorMsg) {
         super(errorMsg);
     }
 }

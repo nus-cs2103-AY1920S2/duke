@@ -9,13 +9,17 @@ import java.time.LocalDate;
  */
 public class Todo extends Task {
     /**
-     * @return type of task in TType format.
+     * Returns type of task.
+     *
+     * @return TType.TODO.
      */
     public TType getType() {
         return TType.TODO;
     }
 
     /**
+     * Returns null as todo does not have a date.
+     *
      * @return null as todo tasks has no dates.
      */
     public LocalDate getDate() {
@@ -24,6 +28,7 @@ public class Todo extends Task {
 
     /**
      * Constructs todo task with default false isDone.
+     *
      * @param task Description of task.
      */
     public Todo(String task) {
@@ -32,6 +37,7 @@ public class Todo extends Task {
 
     /**
      * Constructs a todo task with user defined isDone.
+     *
      * @param isDone Whether the task is done.
      * @param task Description of task.
      */
@@ -40,7 +46,9 @@ public class Todo extends Task {
     }
 
     /**
-     * @return String form of task, will show ✓ if done and ✗ if not.
+     * Returns the string form of todo.
+     *
+     * @return String form of todo, will show ✓ if done and ✗ if not.
      */
     @Override
     public String toString() {

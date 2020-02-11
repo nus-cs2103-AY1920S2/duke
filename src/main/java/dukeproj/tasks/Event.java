@@ -14,6 +14,8 @@ public class Event extends Task {
     private LocalDate date;
 
     /**
+     * Returns the date of the event.
+     *
      * @return date in LocalDate format.
      */
     public LocalDate getDate() {
@@ -21,7 +23,9 @@ public class Event extends Task {
     }
 
     /**
-     * @return type of task in TType format.
+     * Returns the type of task.
+     *
+     * @return TType.event.
      */
     public TType getType() {
         return TType.EVENT;
@@ -29,6 +33,7 @@ public class Event extends Task {
 
     /**
      * Constructs an event with default false isDone.
+     *
      * @param task Description of event.
      * @param date Date of event, in String form.
      * @throws BadDateException If date format is wrong.
@@ -40,6 +45,7 @@ public class Event extends Task {
 
     /**
      * Constructs an event with user defined isDone.
+     *
      * @param isDone Whether the event is done.
      * @param task Description of event.
      * @param date Date of event, in String form.
@@ -51,16 +57,18 @@ public class Event extends Task {
     }
 
     /**
-     * @return String form of task, will show ✓ if done and ✗ if not.
+     * Returns the string form of event.
+     *
+     * @return String form of event, will show ✓ if done and ✗ if not.
      */
     @Override
     public String toString() {
         if (isDone) {
-            return  "[E][✓] " + task + " (at: " +
-                    date.format(Parser.DATE_READ_FORMATTER) + ")";
+            return  "[E][✓] " + task + " (at: "
+                    + date.format(Parser.DATE_READ_FORMATTER) + ")";
         } else {
-            return "[E][✗] " + task + " (at: " +
-                    date.format(Parser.DATE_READ_FORMATTER) + ")";
+            return "[E][✗] " + task + " (at: "
+                    + date.format(Parser.DATE_READ_FORMATTER) + ")";
         }
     }
 }

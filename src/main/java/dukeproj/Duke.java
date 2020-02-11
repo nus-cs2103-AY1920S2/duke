@@ -77,8 +77,7 @@ public class Duke {
             String next = sc.next();
             if (next.equals("bye")) {
                 break;
-            }
-            else {
+            } else {
                 try {
                     ui.printLineBreak();
                     CommandType commandType = Parser.commandParser(next);
@@ -102,6 +101,8 @@ public class Duke {
     }
 
     /**
+     * Returns the User Interface of Duke.
+     *
      * @return User Interface.
      */
     public Ui getUi() {

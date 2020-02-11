@@ -5,7 +5,7 @@ package dukeproj.exception;
  * Serves as parent class to all exceptions in dukeproj.Duke.
  */
 public class DukeException extends Exception {
-    public DukeException (String errorMsg) {
+    public DukeException(String errorMsg) {
         super(errorMsg);
     }
 }

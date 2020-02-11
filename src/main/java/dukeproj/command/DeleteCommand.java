@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
      * @param ui The user interface of Duke, used to return Duke's response.
      * @param taskList The list of tasks to delete from.
      * @param storage The object to assist in writing the task list into the storage file.
-     * @param schedule Duke's calender to be modified if deleted task is date sensitive.
+     * @param schedule Duke's schedule to be modified if deleted task is date sensitive.
      * @return Duke's response in the form of a String.
      * @throws BadDescriptionException If the description is not in the form of an integer.
      * @throws DukeDescriptionException If the description is empty.

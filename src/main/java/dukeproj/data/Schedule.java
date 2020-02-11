@@ -7,15 +7,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Represents a pseudo-calender using a HashMap to map dates to
+ * Represents a scheduler using a HashMap to map dates to
  * an ArrayList of tasks occurring on the specific date.
  */
 public class Schedule {
-    /** HashMap representing the calender. */
+    /** HashMap representing the schedule. */
     private HashMap<LocalDate, ArrayList<Task>> mapOfDates;
 
     /**
-     * @param task task to be added into the calender.
+     * Adds a task into the schedule.
+     *
+     * @param task task to be added into the schedule.
      */
     public void addDate(Task task) {
         if (mapOfDates.containsKey(task.getDate())) {
@@ -28,7 +30,7 @@ public class Schedule {
     }
 
     /**
-     * Searches for a specific date in the calender and returns all tasks due on that date.
+     * Searches for a specific date in the schedule and returns all tasks due on that date.
      *
      * @param date date to be searched for.
      * @return a string of the tasks found in the specific date.
@@ -45,6 +47,8 @@ public class Schedule {
     }
 
     /**
+     * Removes a task from the schedule.
+     *
      * @param task task to be removed.
      * @param date date of task.
      */
@@ -59,7 +63,7 @@ public class Schedule {
     }
 
     /**
-     * Constructs an empty calender.
+     * Constructs an empty schedule.
      */
     public Schedule() {
         mapOfDates = new HashMap<>();

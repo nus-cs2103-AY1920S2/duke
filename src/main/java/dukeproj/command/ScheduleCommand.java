@@ -24,7 +24,7 @@ public class ScheduleCommand extends Command {
      * @param ui The user interface of Duke, used to return Duke's response.
      * @param taskList Unused.
      * @param storage Unused.
-     * @param schedule The calender to search tasks from.
+     * @param schedule The schedule to search tasks from.
      * @return Duke's response in the form of a String.
      * @throws DukeDescriptionException If the date is empty.
      * @throws BadDateException If the date is in a wrong format.

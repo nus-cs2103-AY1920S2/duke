@@ -14,6 +14,8 @@ public class Deadline extends Task {
     private LocalDate date;
 
     /**
+     * Returns the date of the deadline.
+     *
      * @return date in LocalDate format.
      */
     public LocalDate getDate() {
@@ -21,7 +23,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * @return type of task in TType format.
+     * Returns the type of task.
+     *
+     * @return TType.DEADLINE.
      */
     public TType getType() {
         return TType.DEADLINE;
@@ -29,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline task with default false isDone.
+     *
      * @param task Description of task.
      * @param date Date to be done by, in String form.
      * @throws BadDateException If date format is wrong.
@@ -40,6 +45,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline task with user defined isDone.
+     *
      * @param isDone Whether the task is done.
      * @param task Description of task.
      * @param date Date to be done by, in String form.
@@ -51,16 +57,18 @@ public class Deadline extends Task {
     }
 
     /**
-     * @return String form of task, will show ✓ if done and ✗ if not.
+     * Returns the string form of deadline.
+     *
+     * @return String form of deadline, will show ✓ if done and ✗ if not.
      */
     @Override
     public String toString() {
         if (isDone) {
-            return  "[D][✓] " + task + " (by: " +
-                    date.format(Parser.DATE_READ_FORMATTER) + ")";
+            return  "[D][✓] " + task + " (by: "
+                    + date.format(Parser.DATE_READ_FORMATTER) + ")";
         } else {
-            return "[D][✗] " + task + " (by: " +
-                    date.format(Parser.DATE_READ_FORMATTER) + ")";
+            return "[D][✗] " + task + " (by: "
+                    + date.format(Parser.DATE_READ_FORMATTER) + ")";
         }
     }
 }

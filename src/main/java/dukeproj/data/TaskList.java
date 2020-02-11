@@ -83,7 +83,7 @@ public class TaskList {
      * @param keywords The varargs of keywords used to find tasks.
      * @return The ArrayList of tasks found using the keywords.
      */
-    public ArrayList<Task> find(String ...keywords) {
+    public ArrayList<Task> find(String...keywords) {
         ArrayList<Task> outputList = new ArrayList<>();
         for (Task task: tasks) {
             for (String str: keywords) {

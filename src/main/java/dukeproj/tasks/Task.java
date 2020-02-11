@@ -17,6 +17,8 @@ public abstract class Task {
     public abstract LocalDate getDate();
 
     /**
+     * Returns the task.
+     *
      * @return task description in String format.
      */
     public String getTask() {
@@ -24,6 +26,8 @@ public abstract class Task {
     }
 
     /**
+     * Shows whether a task is done or not.
+     *
      * @return boolean representing whether the task is done.
      */
     public boolean getDone() {
@@ -31,6 +35,8 @@ public abstract class Task {
     }
 
     /**
+     * Marks a task as done or not done.
+     *
      * @param bool boolean to set isDone to.
      */
     public void setDone(boolean bool) {
@@ -39,15 +45,17 @@ public abstract class Task {
 
     /**
      * Constructs a Task object with a description and default isDone = false.
+     *
      * @param task description of task.
      */
-    public Task (String task) {
+    public Task(String task) {
         this.task = task;
         isDone = false;
     }
 
     /**
      * Overloaded constructor that additionally modifies boolean isDone.
+     *
      * @param isDone boolean to set isDone to.
      * @param task description of task.
      */

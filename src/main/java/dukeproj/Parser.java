@@ -73,7 +73,7 @@ public class Parser {
     public static CommandType commandParser(String str) throws InvalidCommandException {
         try {
             return CommandType.valueOf(str.toUpperCase());
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new InvalidCommandException(str + " is an invalid command");
         }
     }
@@ -188,12 +188,12 @@ public class Parser {
             if (deadline.isEmpty()) {
                 throw new DukeDescriptionException("Empty Description");
             }
-            int dLineDate = deadline.indexOf("/");
-            if (dLineDate == -1) {
+            int deadlineDate = deadline.indexOf("/");
+            if (deadlineDate == -1) {
                 throw new BadDescriptionException("Missing '/' in Description");
             }
-            Task taskDLine = new Deadline(deadline.substring(1, dLineDate),
-                    deadline.substring(dLineDate + 4));
+            Task taskDLine = new Deadline(deadline.substring(1, deadlineDate),
+                    deadline.substring(deadlineDate + 4));
             taskList.addTask(taskDLine);
             schedule.addDate(taskDLine);
             System.out.println("I've added this task: \n"
@@ -214,8 +214,8 @@ public class Parser {
                 Task deletedTask = taskList.getTask(delete - 1);
                 taskList.removeTask(delete - 1);
                 schedule.removeTask(deletedTask, deletedTask.getDate());
-                System.out.println("Okay! I have deleted this task:\n" +
-                        "  " + deletedTask + "\nNow you have "
+                System.out.println("Okay! I have deleted this task:\n"
+                        + "  " + deletedTask + "\nNow you have "
                         + taskList.getSize() + " tasks in the list.");
                 storage.writeListIntoFile(taskList.getList());
             } catch (NumberFormatException e) {
@@ -256,7 +256,7 @@ public class Parser {
      * Constructs a Parser object with data objects associated with it to efficiently read Duke commands.
      *
      * @param taskList List of tasks in Duke.
-     * @param schedule Calender of tasks in Duke.
+     * @param schedule Schedule of tasks in Duke.
      * @param storage Storage object linked to the storage file of Duke.
      * @param sc Scanner to read user input.
      */

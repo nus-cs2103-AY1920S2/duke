@@ -27,6 +27,8 @@ public class ExitCommand extends Command {
     }
 
     /**
+     * Returns whether the command is an exit command.
+     *
      * @return True as the command is an exit command.
      */
     @Override
