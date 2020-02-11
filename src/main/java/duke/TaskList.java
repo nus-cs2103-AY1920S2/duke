@@ -64,7 +64,7 @@ public class TaskList {
     public void findAndPrint(String searchPhrase) {
         // filter tasks on description
         List<Task> foundTasks = this.tasks.stream()
-                .filter(task -> task.getDescription().contains(searchPhrase))
+                .filter(task -> task.getDescription().toLowerCase().contains(searchPhrase.toLowerCase()))
                 .collect(Collectors.toList());
 
         // print the tasks
