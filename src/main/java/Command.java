@@ -12,5 +12,5 @@ public abstract class Command {
 
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
         return "";
-    };
+    }
 }

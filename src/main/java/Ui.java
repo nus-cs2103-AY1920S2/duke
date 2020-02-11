@@ -4,17 +4,15 @@ import java.util.ArrayList;
 public class Ui {
 
     public Ui() {
-    }
-    public String greet() {
-        return "Hi dude! I'm your Dude\n" + "What do you want?\n";
+
     }
 
-    public String showLoadingError(String message) {
-        return "Loading error: " + message;
+    public void showLoadingError(String message) {
+        System.out.println("Loading error: " + message);
     }
 
-    public String showCommandError(String message) {
-        return "Command error: " + message;
+    public void showCommandError(String message) {
+        System.out.println("Command error: " + message);
     }
 
     public String showAddingError(String message) {

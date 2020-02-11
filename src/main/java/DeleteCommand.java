@@ -10,7 +10,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException{
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
         Task task = tasks.getTask(this.deleteIndex);
         tasks.deleteTask(this.deleteIndex);
         String output = ui.printDeletingMessage(tasks, task);

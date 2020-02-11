@@ -11,7 +11,7 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public Task getTask(int index) throws InvalidIndexException{
+    public Task getTask(int index) throws InvalidIndexException {
         try {
             return this.taskList.get(index);
         } catch (IndexOutOfBoundsException e) {
@@ -47,20 +47,20 @@ public class TaskList {
         String description;
         String[] descriptions;
         switch (commandWord) {
-            case "todo":
-                description = commands[1];
-                task = new Todo(false, description);
-                break;
-            case "event":
-                descriptions = commands[1].split(" /at ");
-                task = new Event(false, descriptions[0], descriptions[1]);
-                break;
-            case "deadline":
-                descriptions = commands[1].split(" /by ");
-                task = new Deadline(false, descriptions[0], descriptions[1]);
-                break;
-            default:
-                assert 1 == 0: "default reached";
+        case "todo":
+            description = commands[1];
+            task = new Todo(false, description);
+            break;
+        case "event":
+            descriptions = commands[1].split(" /at ");
+            task = new Event(false, descriptions[0], descriptions[1]);
+            break;
+        case "deadline":
+            descriptions = commands[1].split(" /by ");
+            task = new Deadline(false, descriptions[0], descriptions[1]);
+            break;
+        default:
+            assert 1 == 0 : "default reached";
         }
         this.taskList.add(task);
         return task;
@@ -72,7 +72,7 @@ public class TaskList {
     }
 
     public void deleteTask(int deleteIndex) {
-        this.taskList.remove(deleteIndex );
+        this.taskList.remove(deleteIndex);
     }
 
     public String findTask(Ui ui, String keyword) {
