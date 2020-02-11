@@ -33,4 +33,6 @@ public abstract class Task {
     }
 
     public abstract String getFullDescription();
+
+    public abstract boolean isSimilarTask(Task task);
 }

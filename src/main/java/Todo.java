@@ -10,4 +10,10 @@ public class Todo extends Task {
     public String getFullDescription() {
         return "[T]" + super.getDescriptionWithIsDone();
     }
+
+    @Override
+    public boolean isSimilarTask(Task task) {
+        return super.getDescription().equals(task.getDescription());
+    }
+
 }

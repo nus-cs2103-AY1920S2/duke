@@ -8,7 +8,11 @@ public class Duke {
     private final Storage storage = new Storage();
 
     public Duke() {
-        this.initialise();
+        try {
+            this.initialise();
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
     }
 
     public String greet() {
@@ -19,7 +23,7 @@ public class Duke {
      * Initialises Duke by reading the stored data from disk and storing the tasks
      * in {@code TaskList}.
      */
-    private void initialise() {
+    private void initialise() throws DukeException {
         ArrayList<String> lines = this.storage.readFromDisk();
         for (String line : lines) {
             Parser parser = new Parser();

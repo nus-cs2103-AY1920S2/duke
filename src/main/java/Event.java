@@ -26,4 +26,10 @@ public class Event extends Task {
     public String getFullDescription() {
         return "[E]" + super.getDescriptionWithIsDone() + " (at: " + this.formattedDate + ")";
     }
+
+    @Override
+    public boolean isSimilarTask(Task task) {
+        Event event = (Event) task;
+        return super.getDescription().equals(event.getDescription()) && this.date.equals(event.getDate());
+    }
 }
