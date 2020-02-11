@@ -28,6 +28,10 @@ public class Task {
         }
     }
 
+    public void update(String newDescription) {
+        this.description = newDescription;
+    }
+
     /**
      * Returns true of description of task contains keyword, and false if otherwise.
      * @param keyword keyword specified by user.

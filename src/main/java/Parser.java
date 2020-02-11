@@ -33,6 +33,8 @@ public class Parser {
             assert split[1] != null : "The keyword should be entered search task list.";
             checkInputException(split, commandType);
             return new FindCommand(split[1]);
+        case "update":
+            return new UpdateCommand(split[1]);
         case "todo":
         case "deadline":
         case "event":

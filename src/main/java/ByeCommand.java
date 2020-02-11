@@ -19,12 +19,4 @@ public class ByeCommand extends Command {
         return "Bye. Hope to see you again soon!";
     }
 
-    /**
-     * Returns a boolean that determines if command exits the program.
-     * @return boolean.
-     */
-    public boolean isExit() {
-        return true;
-    }
-
 }

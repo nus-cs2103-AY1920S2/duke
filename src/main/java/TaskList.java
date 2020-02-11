@@ -146,6 +146,28 @@ public class TaskList {
     }
 
     /**
+     * Updates task with new description.
+     * @param index index position of task to be updated.
+     * @param newDescription new description of tasks.
+     * @param storage makeshift database for tasks.
+     * @return string indicating completion of the update command.
+     * @throws DukeException named file exists but is a directory rather than a regular file,
+     *      does not exist but cannot be created, or cannot be open for any other reason.
+     * @throws IOException if user input does not follow input format.
+     */
+    public String update(int index, String newDescription, Storage storage) throws DukeException, IOException {
+        if (size() <= index) {
+            throw new DukeException("☹ OOPS!!! There is no task " + (index + 1) + ".");
+        }
+        String updateResult = "";
+        list.get(index).update(newDescription);
+        updateResult += "Noted. I've updated this task:\n";
+        updateResult += list.get(index) + "\n";
+        storage.writeToFile(saveList());
+        return updateResult;
+    }
+
+    /**
      * Searches and returns a list of tasks containing a keyword.
      * @param keyword keyword specified by user.
      * @return string indicating completion of the find command.
