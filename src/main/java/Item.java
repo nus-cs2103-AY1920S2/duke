@@ -6,11 +6,11 @@ import java.time.LocalDate;
 public abstract class Item {
     Ui ui = new Ui();
     private String name;
-    private boolean done;
+    private boolean isDone;
 
     Item(String name, boolean done) {
         this.name = name;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -18,7 +18,7 @@ public abstract class Item {
      */
     public String toString() {
         String temp = "[";
-        if (this.done) {
+        if (this.isDone) {
             temp += "\u2713";
         } else {
             temp += "\u2718";
@@ -31,13 +31,13 @@ public abstract class Item {
      * Returns the item after being marked as done.
      */
     public Item markDone() {
-        this.done = true;
+        this.isDone = true;
         ui.markDone(this);
         return this;
     }
 
     public boolean getDone() {
-        return this.done;
+        return this.isDone;
     }
 
     public String getName() {
@@ -49,7 +49,5 @@ public abstract class Item {
     public abstract String now();
 
     public abstract LocalDate getDate();
-
-
 
 }

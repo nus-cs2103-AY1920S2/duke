@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Item {
     LocalDate date;
-    boolean done;
+    boolean isDone;
 
     Deadline(String name, LocalDate date) {
         super(name, false);
@@ -15,7 +15,7 @@ public class Deadline extends Item {
 
     Deadline(String name, LocalDate date, boolean done) {
         super(name, done);
-        this.done = done;
+        this.isDone = done;
         this.date = date;
     }
 
@@ -33,7 +33,7 @@ public class Deadline extends Item {
      * used for string substitution in the txt file when it is marked done.
      */
     public String replace() {
-        String temp =  "   [D]["+ "\u2718" +"] " + super.getName() + " (by: " + date + ")\n";
+        String temp =  "   [D][" + "\u2718" + "] " + super.getName() + " (by: " + date + ")\n";
         return temp;
     }
 

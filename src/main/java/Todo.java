@@ -8,8 +8,8 @@ public class Todo extends Item {
         super(name, false);
     }
 
-    Todo(String name, boolean done) {
-        super(name, done);
+    Todo(String name, boolean isDone) {
+        super(name, isDone);
     }
 
     public String toString() {
@@ -22,7 +22,7 @@ public class Todo extends Item {
      * used for string substitution in the txt file when it is marked done.
      */
     public String replace() {
-        String temp = "   [T]["+ "\u2718" +"] " + super.getName() + "\n";
+        String temp = "   [T][" + "\u2718" + "] " + super.getName() + "\n";
         return temp;
     }
 

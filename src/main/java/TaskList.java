@@ -12,9 +12,10 @@ public class TaskList {
     public TaskList() {
         this.count = 0;
     }
+
     public TaskList(ArrayList<Item> items, int count) {
         this.items = items;
-        this.count =count;
+        this.count = count;
     }
 
     /**
@@ -47,6 +48,9 @@ public class TaskList {
         return temp;
     }
 
+    /**
+     * Returns TaskList sorted by ascending dates.
+     */
     public TaskList sortAsc() {
         ArrayList<Item> sorted = new ArrayList<Item>();
         sorted.addAll(items);
@@ -55,6 +59,9 @@ public class TaskList {
         return new TaskList(sorted, count);
     }
 
+    /**
+     * Returns TaskList sorted by descending dates.
+     */
     public TaskList sortDes() {
         ArrayList<Item> sorted = new ArrayList<Item>();
         sorted.addAll(items);

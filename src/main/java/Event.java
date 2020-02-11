@@ -12,8 +12,8 @@ public class Event extends Item {
         this.date = date;
     }
 
-    Event(String name, LocalDate date, boolean done) {
-        super(name, done);
+    Event(String name, LocalDate date, boolean isDone) {
+        super(name, isDone);
         this.date = date;
     }
 
@@ -31,7 +31,7 @@ public class Event extends Item {
      * in the txt file when it is marked done.
      */
     public String replace() {
-        String temp = "   [E]["+ "\u2718" +"] "+ super.getName() + " (at: " + date + ")\n";
+        String temp = "   [E][" + "\u2718" + "] " + super.getName() + " (at: " + date + ")\n";
         return temp;
     }
 
