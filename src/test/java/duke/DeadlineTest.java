@@ -22,7 +22,5 @@ class DeadlineTest {
                 new Deadline("return book", LocalDate.parse("2020-01-10")).toString());
         assertEquals("[D] [V] return book (by: Oct 1 2020)",
                 new Deadline("return book", LocalDate.parse("2020-10-01"), true).toString());
-        assertEquals("[D] [X] return book (by: Oct 1 2020)",
-                new Deadline("return book", LocalDate.parse("2020-10-01"), false).toString());
     }
 }

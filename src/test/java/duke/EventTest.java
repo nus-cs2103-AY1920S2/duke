@@ -24,7 +24,5 @@ class EventTest {
                 new Event("project meeting", LocalDate.parse("2020-01-10")).toString());
         assertEquals("[E] [V] project meeting (at: Jan 10 2020)",
                 new Event("project meeting", LocalDate.parse("2020-01-10"), true).toString());
-        assertEquals("[E] [X] project meeting (at: Jan 10 2020)",
-                new Event("project meeting", LocalDate.parse("2020-01-10"), false).toString());
     }
 }
