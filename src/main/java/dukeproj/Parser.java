@@ -79,10 +79,10 @@ public class Parser {
      * @return The Command class object to be returned.
      */
     public Command getCommand(CommandType commandType, String description) {
-        Command command = new ListCommand(); //default command
+        Command command = new ExitCommand(); //default command
         switch (commandType) {
-        case BYE:
-            command = new ExitCommand();
+        case LIST:
+            command = new ListCommand();
             break;
         case DONE:
             command = new DoneCommand(description);
@@ -105,160 +105,20 @@ public class Parser {
             break;
         case HELP:
             command = new HelpCommand();
-        case LIST:
+        case BYE:
             //fallthrough
         default:
+            if (command.isExit() && !commandType.equals(CommandType.BYE)) {
+                System.err.println("erroneous command");
+            }
             break;
         }
         return command;
     }
 
     /**
-     * Execute commands to manipulate task list and calender. The method will create/delete task objects as required
-     * and store/remove them from all data structures as needed.
-     *
-     * @param commandType Command to be executed.
-     * @throws DukeDescriptionException If command requires a description and it not given.
-     * @throws BadDescriptionException If description provided does not match the format required by command.
-     * @throws BadDateException If date provided does not match format required by command.
-     */
-    public void readCommand(CommandType commandType) throws DukeDescriptionException,
-            BadDescriptionException, BadDateException {
-        switch (commandType) {
-        case LIST:
-            System.out.println("Here are all your tasks:");
-            taskList.printTask();
-            break;
-        case DONE:
-            try {
-                String strDone = sc.nextLine();
-                if (strDone.isEmpty()) {
-                    throw new DukeDescriptionException("Empty Description");
-                }
-                int done = Integer.parseInt(strDone.substring(1)); //there must be a space between command and input
-                if (done <= 0 || done > taskList.getSize()) {
-                    throw new BadDescriptionException("Description for done cannot be "
-                            + done);
-                }
-                taskList.getTask(done - 1).setDone(true);
-                System.out.println("Nice! I've marked this task as done: \n"
-                        + "  " + taskList.getTask(done - 1));
-                storage.writeListIntoFile(taskList.getList());
-            } catch (NumberFormatException e) {
-                throw new BadDescriptionException("Non-Integer");
-            }
-            break;
-        case TODO:
-            String todo = sc.nextLine();
-            if (todo.isEmpty()) {
-                throw new DukeDescriptionException("Empty Description");
-            }
-            Task taskToDo = new Todo(todo.substring(1));
-            taskList.addTask(taskToDo);
-            System.out.println("I've added this task: \n"
-                    + "  " + taskToDo + "\nNow you have "
-                    + taskList.getSize() + " tasks in the list.");
-            storage.writeListIntoFile(taskList.getList());
-            break;
-        case EVENT:
-            String event = sc.nextLine();
-            if (event.isEmpty()) {
-                throw new DukeDescriptionException("Empty Description");
-            }
-            int eventDate = event.indexOf("/");
-            if (eventDate == -1) {
-                throw new BadDescriptionException("Missing '/' in Description");
-            }
-            Task taskEvent = new Event(event.substring(1, eventDate),
-                    event.substring(eventDate + 4));
-            taskList.addTask(taskEvent);
-            schedule.addDate(taskEvent);
-            System.out.println("I've added this task: \n"
-                    + "  " + taskEvent + "\nNow you have "
-                    + taskList.getSize() + " tasks in the list.");
-            storage.writeListIntoFile(taskList.getList());
-            break;
-        case DEADLINE:
-            String deadline = sc.nextLine();
-            if (deadline.isEmpty()) {
-                throw new DukeDescriptionException("Empty Description");
-            }
-            int deadlineDate = deadline.indexOf("/");
-            if (deadlineDate == -1) {
-                throw new BadDescriptionException("Missing '/' in Description");
-            }
-            Task taskDLine = new Deadline(deadline.substring(1, deadlineDate),
-                    deadline.substring(deadlineDate + 4));
-            taskList.addTask(taskDLine);
-            schedule.addDate(taskDLine);
-            System.out.println("I've added this task: \n"
-                    + "  " + taskDLine + "\nNow you have "
-                    + taskList.getSize() + " tasks in the list.");
-            storage.writeListIntoFile(taskList.getList());
-            break;
-        case DELETE:
-            try {
-                String strDelete = sc.nextLine();
-                if (strDelete.isEmpty()) {
-                    throw new DukeDescriptionException("Empty Description");
-                }
-                int delete = Integer.parseInt(strDelete.substring(1)); //there must be a space between command and input
-                if (delete <= 0 || delete > taskList.getSize()) {
-                    throw new BadDescriptionException("Description for delete cannot be " + delete);
-                }
-                Task deletedTask = taskList.getTask(delete - 1);
-                taskList.removeTask(delete - 1);
-                schedule.removeTask(deletedTask, deletedTask.getDate());
-                System.out.println("Okay! I have deleted this task:\n"
-                        + "  " + deletedTask + "\nNow you have "
-                        + taskList.getSize() + " tasks in the list.");
-                storage.writeListIntoFile(taskList.getList());
-            } catch (NumberFormatException e) {
-                throw new BadDescriptionException("Non-Integer");
-            }
-            break;
-        case SCHEDULE:
-            String search = sc.nextLine();
-            if (search.isEmpty()) {
-                throw new DukeDescriptionException("Empty Description");
-            }
-            LocalDate date = Parser.dateParser(search.substring(1));
-            System.out.println("Here are the events on "
-                    + date.format(Parser.DATE_READ_FORMATTER) + ":");
-            System.out.println(schedule.searchDate(date));
-            break;
-        case FIND:
-            String find = sc.nextLine();
-            if (find.isEmpty()) {
-                throw new DukeDescriptionException("Empty Description");
-            }
-            TaskList outputList = new TaskList(taskList.find(find.substring(1).split(" ")));
-            System.out.println("Here are the matching tasks in your list:");
-            outputList.printTask();
-            break;
-        default:
-            break;
-        }
-    }
-
-    /**
      * Constructs an empty Parser to be used in Duke GUI version.
      */
     public Parser() {
-    }
-
-    /**
-     * Constructs a Parser object with data objects associated with it to efficiently read Duke commands.
-     *
-     * @param taskList List of tasks in Duke.
-     * @param schedule Schedule of tasks in Duke.
-     * @param storage Storage object linked to the storage file of Duke.
-     * @param sc Scanner to read user input.
-     */
-    public Parser(TaskList taskList, Schedule schedule, Storage storage, Scanner sc) {
-        this.taskList = taskList;
-        this.schedule = schedule;
-        this.storage = storage;
-        this.sc = sc;
     }
 }
