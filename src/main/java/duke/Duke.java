@@ -19,9 +19,7 @@ public class Duke {
      * Instantiates a Duke instance with a path to a save file.
      * @param filePath The save file location relative to the project root
      */
-    public Duke(String filePath) {
-        this.storage = new Storage(filePath);
-        this.tasks = new TaskList(storage.loadTasks());
+    public Duke() {
         this.ui = new Ui();
     }
 
@@ -30,16 +28,7 @@ public class Duke {
      * @param args Arguments to be passed into Duke
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Please enter location of save file (default: data/duke.txt):");
-        String saveLocation = sc.nextLine();
-
-        if (saveLocation.equals("")) {
-            saveLocation = "data/duke.txt";
-        }
-
-        new Duke(saveLocation).run();
+        new Duke().run();
     }
 
     /**
@@ -47,6 +36,16 @@ public class Duke {
      */
     public void run() {
         Ui.printWelcomeMessage();
+
+        String saveLocation = ui.readCommand();
+        if (saveLocation.equals("")) {
+            saveLocation = "data/duke.txt";
+        }
+        this.storage = new Storage(saveLocation);
+        this.tasks = new TaskList(storage.loadTasks());
+
+        Ui.printMessage("How may I help you?");
+
         boolean isByeCommand = false;
         while (!isByeCommand) {
             try {

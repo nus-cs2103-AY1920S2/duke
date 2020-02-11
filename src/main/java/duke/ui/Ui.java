@@ -25,7 +25,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "\n");
-        Ui.printMessage("Greetings! I'm Duke!\n\tHow may I help you?");
+        Ui.printMessage("Greetings! I'm Duke!\n\tPlease enter location of save file (default: data/duke.txt): ");
     }
 
     public static void displayAddTaskSuccessMsg(Task task, int numOfTasks) {
