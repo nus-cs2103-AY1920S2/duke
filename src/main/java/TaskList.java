@@ -33,6 +33,17 @@ public class TaskList {
         return new TaskList(events);
     }
 
+    public TaskList sortTodoTask() {
+        ArrayList<Task> todos = new ArrayList<>();
+        for (Task task : this.list) {
+            if (task instanceof ToDoTask) {
+                todos.add(task);
+            }
+        }
+        Collections.sort(todos, (task1, task2) -> task1.compareTo(task2));
+        return new TaskList(todos);
+    }
+
     @Override
     public String toString() {
         String output = "";

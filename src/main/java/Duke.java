@@ -93,9 +93,9 @@ public class Duke {
                 TaskList sortedList = taskList.sortEventTask();
                 return ("Here are your events sorted chronologically: \n" + sortedList.toString());
 
-            } else { // sort todos by desc
-                // do later
-                return ("");
+            } else { // sort todos by description
+                TaskList sortedList = taskList.sortTodoTask();
+                return ("Here are your todos sorted by description: \n" + sortedList.toString());
             }
 
         } else {

@@ -13,6 +13,6 @@ public class ToDoTask extends Task {
 
     @Override 
     public int compareTo(Task other) {
-        return 0;
+        return this.desc.compareTo(other.desc);
     }
 }

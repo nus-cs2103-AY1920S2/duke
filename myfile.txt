@@ -1,4 +1,4 @@
 T | 1 | drink
-E | 0 | mo | 2019-10-10
-E | 0 | mi | 2019-10-09
-E | 0 | dd | 2020-10-10
+T | 0 | eat
+T | 0 | sleep
+T | 0 | eat drink sleep
