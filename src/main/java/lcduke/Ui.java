@@ -12,12 +12,7 @@ public class Ui {
 
     /** This is the constructor to create the Ui Object.
      */
-    public Ui() {
-        String response = "    ____________________________________________________________\n"
-         + "     Hello! I'm Duke\n"
-        + "     What can I do for you?\n"
-        + "    ____________________________________________________________\n";
-    }
+    public Ui() { }
 
     public String init() {
         String response = "    ____________________________________________________________"
@@ -34,6 +29,7 @@ public class Ui {
         if(newInput.getIsProblem()) {
             Parser.isProblem = false;
             response = "there is Problem with user's Input";
+
         } else {
             if (this.userInput.equals("list")) {
                 response = this.list();
@@ -72,7 +68,7 @@ public class Ui {
                 }
             } else {
                 response = tasks.event(this.userInput);
-                //TaskList.totalTasks[TaskList.totalTasksCount -1].printInit();
+
                 try {
                     storage.save();
                 } catch (IOException e) {

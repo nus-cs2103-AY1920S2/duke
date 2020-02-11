@@ -118,7 +118,13 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        Label startMessage = new Label(ui.init());
+        String response = ui.init();
+        assert response == "    ____________________________________________________________"
+                + "     Hello! I'm Duke"
+                + "     What can I do for you?"
+                + "    ____________________________________________________________\n"
+         : "ui should have correct starting message";
+        Label startMessage = new Label(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(startMessage, new ImageView(duke))
                 );
@@ -175,6 +181,10 @@ public class Duke extends Application {
             response = ui.inputProcess(input, storage, tasks);
         } else {
             response = ui.bye();
+            assert response == "    ____________________________________________________________\n"
+                    + "     Bye. Hope to see you again soon!\n"
+                    + "    ____________________________________________________________\n"
+                    : "ui should have correct bye message";
         }
         return "Duke heard: " + response;
     }
