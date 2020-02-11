@@ -40,13 +40,11 @@ public class TaskList {
      * Lists all tasks in the current list of tasks.
      */
     protected String listTasks() {
-        System.out.println("listing tasks");
         StringBuilder sb = new StringBuilder();
         sb.append("Below is your task list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append("\t").append(i + 1).append(".").append(tasks.get(i)).append("\n");
         }
-        System.out.println(sb);
         sb.append(separator);
         return sb.toString();
     }

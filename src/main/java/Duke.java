@@ -6,17 +6,6 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 
 /**
  * Duke
@@ -25,154 +14,47 @@ import javafx.scene.image.Image;
  * Individual project
  * Duke project
  *
- * 29 Jan 2020
+ * 11 Feb 2020
  *
  * @author Jel
  */
-public class Duke extends Application {
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
+public class Duke {
     private static Parser parser;
     private static Storage storage;
     private static TaskList tasks;
     private static CommandHandler cmd;
     private static Ui ui;
 
+    /**
+     * Constructs a Duke instance.
+     */
     public Duke() {
         String filePath = "data/duke.txt";
         storage = new Storage(filePath);
         ui = new Ui();
         tasks = new TaskList(storage, ui);
-        ui.run();
+        cmd = new CommandHandler(tasks);
+        parser = new Parser(cmd, ui);
+
         try {
-            cmd = new CommandHandler(tasks);
-            parser = new Parser(cmd, ui);
             storage.loadTasks();
         } catch (IOException e) {
             System.err.println(e);
         }
     }
-//
-//    /**
-//     * Constructs a Duke instance.
-//     */
-//    public Duke(String filePath) {
-//        storage = new Storage(filePath);
-//        ui = new Ui();
-//        try {
-//            tasks = new TaskList(storage, ui);
-//            parser = new Parser(cmd);
-//            storage.loadTasks();
-//            ui.run();
-//        } catch (IOException e) {
-//            System.err.println(e);
-//        }
-//    }
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
+    public static void main(String[] args) {
+        new Duke();
+        ui.run();
+        String input = ui.getInput();
+        while (!input.equals("bye")) {
+            System.out.println(parser.parseLine(input));
+            input = ui.getInput();
+        }
 
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        ///Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add.
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userInput.getText(), user),
-                DialogBox.getDukeDialog(getResponse(userInput.getText()), duke)
-        );
-        userInput.clear();
+        if (input.equals("bye")) {
+            ui.bye();
+        }
     }
 
     /**

@@ -7,7 +7,6 @@ import duke.exception.NoDescriptionException;
 import duke.exception.NoKeywordProvidedException;
 import duke.exception.NoTaskNumberException;
 
-
 /**
  * Parser
  *
@@ -15,7 +14,7 @@ import duke.exception.NoTaskNumberException;
  * Individual project
  * Duke project
  *
- * 30 Jan 2020
+ * 11 Feb 2020
  *
  * @author Jel
  */
@@ -23,9 +22,6 @@ public class Parser {
     private CommandHandler commandHandler;
     private Ui ui;
 
-    /**
-     * Constructs a Parser instance.
-     */
     public Parser(CommandHandler commandHandler, Ui ui) {
         this.commandHandler = commandHandler;
         this.ui = ui;
@@ -61,29 +57,18 @@ public class Parser {
                 throw new InvalidCommandException();
             }
         } catch (DukeException e) {
-            return e.toString();
+            StringBuilder sb = new StringBuilder("____________________________________________________________\n");
+            sb.append(e).append("\n").append("____________________________________________________________");
+            return sb.toString();
         }
 
         return commandHandler.handleCommand(new String[] {cmd, descAndDate}, taskNum, keyword);
     }
 
-    /**
-     * Extracts user's command from line of input.
-     * @param line The user's line of input.
-     * @return The user's command.
-     */
     private String getCommand(String line) {
         return line.split(" ", 2)[0].trim();
     }
 
-    /**
-     * Extracts the description and date of the task.
-     * @param cmd The user's command.
-     * @param line The user's line of input.
-     * @return A joined string of the description and date of the task.
-     * @throws NoDescriptionException No date for the deadline or event was provided.
-     * @throws NoDateProvidedException No description for the deadline or event was provided.
-     */
     private String getDescAndDate(String cmd, String line) throws NoDescriptionException, NoDateProvidedException {
         String[] arr = line.split(" ", 2);
         if (arr.length < 2) {
@@ -106,12 +91,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Gets task number of task to be handled.
-     * @param line The line of input from user.
-     * @return The tasks' number.
-     * @throws NoTaskNumberException No task number was provided for the action to be done.
-     */
     private int getTaskNum(String line) throws NoTaskNumberException {
         String[] splitInput = line.split(" ");
         StringBuilder sb = new StringBuilder();
@@ -122,12 +101,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Gets the keyword that the user is searching for from the line of input.
-     * @param line The line of user input.
-     * @return The user's search keyword
-     * @throws NoKeywordProvidedException No keyword was provided for the find action.
-     */
     private String getKeyword(String line) throws NoKeywordProvidedException {
         String[] temp = line.split(" ", 2);
         if (temp.length < 2) {

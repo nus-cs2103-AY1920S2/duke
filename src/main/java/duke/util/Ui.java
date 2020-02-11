@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Individual project
  * Duke project
  *
- * 30 Jan 2020
+ * 11 Feb 2020
  *
  * @author Jel
  */
@@ -17,9 +17,6 @@ public class Ui {
     private Scanner sc;
     private String separator = "____________________________________________________________";
 
-    /**
-     * Constructs a Ui instance and instantiates a Scanner instance.
-     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
@@ -33,13 +30,13 @@ public class Ui {
         System.out.println(separator);
     }
 
-//    /**
-//     * Gets input from user.
-//     * @return The next line of user input from the Scanner instance.
-//     */
-//    public String getInput() {
-//        return this.sc.nextLine();
-//    }
+    /**
+     * Gets input from user.
+     * @return The next line of user input from the Scanner instance.
+     */
+    public String getInput() {
+        return this.sc.nextLine();
+    }
 
     /**
      * Handles user input of bye that signals exiting from program.

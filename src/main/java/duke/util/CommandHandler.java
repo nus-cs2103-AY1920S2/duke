@@ -5,6 +5,17 @@ import duke.exception.InvalidCommandException;
 
 import java.io.IOException;
 
+/**
+ * CommandHandler
+ *
+ * <p>CS2103T AY19/20 Semester 2
+ * Individual project
+ * Duke project
+ *
+ * 11 Feb 2020
+ *
+ * @author Jel
+ */
 public class CommandHandler {
     private TaskList tasks;
     
