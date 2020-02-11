@@ -14,7 +14,8 @@ public class Ui {
     }
 
     /**
-     * Retrieves the next line of user command via Scanner's nextLine() method
+     * Retrieves the next line of user command via Scanner's nextLine() method.
+     *
      * @return String containing the user command
      */
     public String getUserCmd() {
@@ -22,7 +23,8 @@ public class Ui {
     }
 
     /**
-     * Speaks on behalf of Cathulhu
+     * Speaks on behalf of Cathulhu.
+     *
      * @param msg message to be printed out on the cli
      */
     public void cathulhuSays(String msg) {
@@ -91,7 +93,8 @@ public class Ui {
 
 
     /**
-     * Prints out the error message received
+     * Prints out the error message received.
+     *
      * @param e Typically CathulhuException error with message to be printed out
      */
     public void printError(Exception e) {

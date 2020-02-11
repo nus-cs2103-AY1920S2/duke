@@ -13,7 +13,8 @@ public class Deadline extends Task {
     protected String byString;
 
     /**
-     * Constructor for the Deadline object, a subclass of Task
+     * Constructor for the Deadline object, a subclass of Task.
+     *
      * @param description String containing the description of the task
      * @param by String setting the deadline for this task
      */
@@ -35,7 +36,8 @@ public class Deadline extends Task {
 
 
     /**
-     * Formats this object as a String to be written into the data file
+     * Formats this object as a String to be written into the data file.
+     *
      * @return String in the format D:;:isDone:;:description:;:by
      */
     @Override
@@ -45,7 +47,8 @@ public class Deadline extends Task {
 
 
     /**
-     * Formats this object as a String to be printed out
+     * Formats this object as a String to be printed out.
+     *
      * @return String
      */
     @Override
