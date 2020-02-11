@@ -184,6 +184,11 @@ public class TaskList {
         }
     }
 
+    public String sort() {
+        tasks.sort((taskA, taskB) -> taskA.getDesc().compareTo(taskB.getDesc()));
+        return Ui.displayListInUi(this, "All right, I have sorted it in ascending order: ");
+    }
+
     // Temporary method for GUI.
     // TODO: Refactor this to something nicer
     public String findToString(String args) {

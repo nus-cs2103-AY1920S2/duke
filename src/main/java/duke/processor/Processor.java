@@ -62,6 +62,8 @@ public class Processor {
                 }
 
                 toReturn = tasks.find(Parser.getArgs(input));
+            } else if (Parser.commandEquals("sort", input)) {
+                toReturn = tasks.sort();
             } else {
                 throw new UnknownCommandException();
             }
