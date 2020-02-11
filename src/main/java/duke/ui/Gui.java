@@ -1,21 +1,9 @@
 package duke.ui;
 
-import duke.Duke;
-import duke.parser.Command;
-import duke.parser.Parser;
-import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-import java.io.File;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -55,6 +43,11 @@ public class Gui implements UiText {
         over();
     }
 
+    /**
+     * Start a dialog box with the initial texts
+     *
+     * @param initials = intial texts
+     */
     public void start(String... initials) {
         assert !this.isOpen : "illegal usage of responder";
         this.tempText = new StringBuilder();
@@ -70,6 +63,12 @@ public class Gui implements UiText {
         this.isOpen = true;
     }
 
+    /**
+     * Respond to user with a list of strings using the same dialog box, must be used after start()
+     * Each String in the list is a line inside the particular dialog box
+     *
+     * @param respondStr = list of strings to respond to user
+     */
     public void respondLine(List<String> respondStr) {
         assert this.isOpen : "illegal usage of responder";
         Scanner sc2;
@@ -82,6 +81,11 @@ public class Gui implements UiText {
         }
     }
 
+    /**
+     * Close the dialog box with some remarks
+     *
+     * @param remarks = remarks to the user before closing the dialog box
+     */
     public void over(String... remarks) {
         Scanner sc2;
         for (String str : remarks) {
@@ -97,14 +101,23 @@ public class Gui implements UiText {
         this.isOpen = false;
     }
 
+    /**
+     * Clears user input box
+     */
     public void clearUserInput() {
         this.userInput.clear();
     }
 
+    /**
+     * Get input by user
+     */
     public String nextLine() {
         return this.userInput.getText();
     }
 
+    /**
+     * user inputted string?
+     */
     public boolean hasNextLine() {
         return !this.userInput.getText().isEmpty();
     }
