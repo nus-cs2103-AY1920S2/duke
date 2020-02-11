@@ -24,11 +24,6 @@ public class Duke {
                 Greetings.prettyPrint(tasks);
                 break;
 
-            case "add":
-                controller.createNewTask(taskName);
-                Greetings.prettyPrint("Added: " + taskName);
-                break;
-
             case "mark":
                 if (controller.checkTask(taskName)) {
                     controller.setMark(taskName, true);
@@ -48,30 +43,27 @@ public class Duke {
                 break;
 
             case "todo":
-                if (controller.checkTask(taskName)) {
-                    controller.asTodo(taskName);
-                    Greetings.prettyPrint(String.format("Marked task as todo %s", taskName));
-                } else {
-                    Greetings.prettyPrint(String.format("Task does not exist", taskName));
+                if (!controller.checkTask(taskName)) {
+                    controller.createNewTask(taskName);
                 }
+                controller.asTodo(taskName);
+                Greetings.prettyPrint(String.format("Marked task as todo: %s", taskName));
                 break;
 
             case "deadline":
-                if (controller.checkTask(taskName)) {
-                    controller.asDeadline(taskName);
-                    Greetings.prettyPrint(String.format("Marked task as deadline %s", taskName));
-                } else {
-                    Greetings.prettyPrint(String.format("Task does not exist", taskName));
+                if (!controller.checkTask(taskName)) {
+                    controller.createNewTask(taskName);
                 }
+                controller.asDeadline(taskName);
+                Greetings.prettyPrint(String.format("Marked task as deadline: %s", taskName));
                 break;
 
             case "event":
-                if (controller.checkTask(taskName)) {
-                    controller.asEvent(taskName);
-                    Greetings.prettyPrint(String.format("Marked task as event %s", taskName));
-                } else {
-                    Greetings.prettyPrint(String.format("Task does not exist", taskName));
+                if (!controller.checkTask(taskName)) {
+                    controller.createNewTask(taskName);
                 }
+                controller.asEvent(taskName);
+                Greetings.prettyPrint(String.format("Marked task as event: %s", taskName));
                 break;
 
             case "delete":
