@@ -56,7 +56,7 @@ public class Parser {
         }
     }
 
-    private CommandIdentifier getCommandIdentifier(String identifier) throws CommandNotFoundException {
+    public CommandIdentifier getCommandIdentifier(String identifier) throws CommandNotFoundException {
         if (COMMAND_IDENTIFIERS.get(identifier) == null) {
             throw new CommandNotFoundException("OOPS!!! I don't understand this command. ☹\n");
         }
