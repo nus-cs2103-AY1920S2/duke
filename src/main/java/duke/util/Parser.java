@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+/**
+ * Handles the logic of parsing the user input.
+ */
 public class Parser {
     private static HashMap<String, CommandIdentifier> COMMAND_IDENTIFIERS = new HashMap<>();
     static {
@@ -23,6 +26,14 @@ public class Parser {
         COMMAND_IDENTIFIERS.put("delete", CommandIdentifier.DELETE);
     }
 
+    /**
+     * Parses the user input and returns the corresponding command.
+     * @param fullCommand User input which is in String format.
+     * @param tasklist The current list of tasks.
+     * @return The command corresponds to the user input.
+     * @throws CommandNotFoundException If the command is not found.
+     * @throws InvalidDukeArgumentException If the argument is invalid, either not a number or out of range.
+     */
     public Command parse(String fullCommand, TaskList tasklist) throws CommandNotFoundException, InvalidDukeArgumentException {
         StringTokenizer st = new StringTokenizer(fullCommand);
         String identifier = st.nextToken();

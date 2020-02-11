@@ -12,9 +12,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles loading tasks from the stored data file and saving tasks in the data file.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Initializes a <code>Storage</code> class with the given file path.
+     * @param filePath The path of the data file in which the existing tasks are stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -46,6 +53,11 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Loads the tasks from the data file.
+     * @return A tasklist that contains all the existing tasks.
+     * @throws FileNotFoundException If the data file is not found.
+     */
     public TaskList loadTasks() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -71,6 +83,10 @@ public class Storage {
         return sb.toString();
     }
 
+    /**
+     * Writes the given tasklist into the data file.
+     * @param tasklist The tasklist that needs to be written.
+     */
     public void updateTaskData(TaskList tasklist) {
         try {
             writeToFile(tasksToString(tasklist));

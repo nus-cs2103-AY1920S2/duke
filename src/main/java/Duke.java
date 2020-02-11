@@ -7,12 +7,20 @@ import duke.util.Ui;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Represents a Duke chat bot, which supports basic todo list features such as adding and deleting tasks,
+ * marking a task as done or list out all the tasks.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasklist;
     private Ui ui;
 
+    /**
+     * Constructs a Duke chat bot instance.
+     * @param filePath the file path of the data file in which the existing tasks are stored.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the chat bot, exits when encountering the "bye" command.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -4,13 +4,23 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks. Supports operations such as add task, delete task, list tasks and so on.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Initializes an empty list of tasks.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Initialize a tasklist from the given list of tasks.
+     * @param tasks The list of existing tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -23,6 +33,12 @@ public class TaskList {
         return tasks.get(index - 1);
     }
 
+    /**
+     * Adds a task to the tasklist and updates the data file.
+     * @param task The task to be added.
+     * @param storage The storage used to write to the data file.
+     * @return The message that is later displayed in the user interface.
+     */
     public String addTask(Task task, Storage storage) {
         tasks.add(task);
         String addMessage = "Got it. I've added this task:\n" + task
@@ -31,6 +47,12 @@ public class TaskList {
         return addMessage;
     }
 
+    /**
+     * Deletes a task and updates the data file.
+     * @param index The index of the task to be deleted.
+     * @param storage The storage used to write to the data file.
+     * @return The message that is later displayed in the user interface.
+     */
     public String deleteTask(int index, Storage storage) {
         Task task = getTask(index);
         tasks.remove(task);
@@ -40,6 +62,10 @@ public class TaskList {
         return deleteMessage;
     }
 
+    /**
+     * Lists out all the exiting tasks.
+     * @return The message that is later displayed in the user interface.
+     */
     public String listTask() {
         StringBuilder sb = new StringBuilder();
         if (tasks.size() == 0) {
@@ -55,6 +81,12 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Marks a task in the tasklist as done and updates the data file.
+     * @param index The index of the task to be marked as done.
+     * @param storage The storage used to write to the data file.
+     * @return The message that is later displayed in the user interface.
+     */
     public String doneTask(int index, Storage storage) {
         Task task = getTask(index);
         task.markAsDone();

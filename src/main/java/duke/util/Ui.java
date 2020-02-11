@@ -2,6 +2,9 @@ package duke.util;
 
 import java.util.Scanner;
 
+/**
+ * Represents the user interface of the duke chat bot.
+ */
 public class Ui {
     private static final String SEPERARION_LINE = "_".repeat(50) + "\n";
     private Scanner scanner;
@@ -10,10 +13,19 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Formats the given message by adding two separation lines at the top and the bottom.
+     * @param message The message to be formatted.
+     * @return The formatted message.
+     */
     private String formatMessage(String message) {
         return SEPERARION_LINE + message + SEPERARION_LINE;
     }
 
+    /**
+     * Displays the message to the user in a certain format.
+     * @param message The message to be displayed.
+     */
     public void showMessage(String message) {
         System.out.println(formatMessage(message));
     }
@@ -42,6 +54,10 @@ public class Ui {
         showMessage(message);
     }
 
+    /**
+     * Reads the user input.
+     * @return A string representation of the user input.
+     */
     public String readCommand() {
         return this.scanner.nextLine();
     }
