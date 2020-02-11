@@ -1,8 +1,8 @@
 # User Guide
 
-## Features 
+## Features
 
-### Feature 1 
+### Feature 1
 Description of feature.
 
 ## Usage
@@ -11,7 +11,7 @@ Description of feature.
 
 Describe action and its outcome.
 
-Example of usage: 
+Example of usage:
 
 `keyword (optional arguments)`
 

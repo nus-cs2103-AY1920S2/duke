@@ -9,7 +9,7 @@ fi
 # delete output from previous run
 if [ -e "./ACTUAL.TXT" ]
 then
-    rm ACTUAL.TXT
+    rm ACTUAL.txt
 fi
 
 # delete output from previous run
@@ -29,7 +29,7 @@ fi
 java -classpath ../bin/jiachen/duke Duke < input.txt > ACTUAL.TXT
 
 # compare the output to the expected output
-diff ACTUAL.TXT EXPECTED.TXT
+diff ACTUAL.txt EXPECTED.txt
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"
