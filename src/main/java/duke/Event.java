@@ -1,7 +1,6 @@
 package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -29,6 +28,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Creates an Event object with given description, time and done status. Used when loading data from data.txt file
+     * @param description
+     * @param time
+     * @param isDone
+     */
     public Event(String description, String time, boolean isDone) {
         super(description, isDone);
         this.time = time;
@@ -54,6 +59,10 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Gives a string representation of the Event object used for storing it in the data.txt file
+     * @return
+     */
     public String toFile() {
         return "E | " + super.toFile() + " | " + time;
     }

@@ -1,8 +1,7 @@
 package duke;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-/*
+/**
 Represents the task list that stores the tasks of Duke
  */
 public class TaskList {

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
+/**
 Represents the file object to store the address book data
  */
 public class Storage {

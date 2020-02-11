@@ -1,14 +1,11 @@
 package duke;
-import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.File;
 
-
+/**
+Represents the Duke object with which the user interacts.
+ */
 public class Duke {
 
     private Storage storage;
@@ -17,10 +14,11 @@ public class Duke {
     private Parser parser;
 
     private ArrayList<Task> list;
-    public Duke() {
-        this.list = new ArrayList<>();
-    }
 
+    /**
+     * Creates a Duke Instance with given filePath
+     * @param filePath
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -32,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the duke object so that it can be used
+     */
     public void run() {
         ui.welcomeMessage();
         while(true) {
@@ -66,6 +67,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the duke application
+     * @param args
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("data/data.txt");
         duke.run();

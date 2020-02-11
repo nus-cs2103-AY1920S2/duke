@@ -1,4 +1,4 @@
-import duke.Task;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.ToDo;
 import duke.Deadline;
 
+/**
+ * Represents a class that is used to write JUnit tests for the duke application
+ */
 public class DukeTest {
     @Test
     public void testToDo() {
