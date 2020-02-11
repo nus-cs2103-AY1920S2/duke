@@ -55,10 +55,10 @@ public class Ui {
     }
 
     public void displayTasks(TaskList taskList) {
-        System.out.print("Here are your remaining tasks:");
+        System.out.print("Here are your remaining tasks:\n");
         for (Task t: taskList.tasks) {
             int index = taskList.tasks.indexOf(t) + 1;
-            assert index < 0 : "Index cannot be less than 0!";
+            //assert index < 0 : "Index cannot be less than 0!";
             System.out.println("" + index + "." + t.toString());
         }
     }
