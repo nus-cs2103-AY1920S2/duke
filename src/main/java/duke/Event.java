@@ -39,4 +39,8 @@ public class Event extends Task {
         }
         return ("[E][x] " + name+ " | at: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ "\n");
     }
+
+    public LocalDate getTime() {
+        return time;
+    }
 }

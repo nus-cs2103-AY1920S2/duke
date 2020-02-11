@@ -29,6 +29,10 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public LocalDate getTime() {
+        return time;
+    }
+
 
     /***
      * Specify print format

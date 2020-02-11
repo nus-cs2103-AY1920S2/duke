@@ -1,10 +1,21 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+
+
 public class TaskList {
+
+
     /***
      * print the list of current tasks
      */
+
+
     public static String printList() {
+
         String output= "";
         if (Duke.commandList.size() > 0) {
             output += "Here are the tasks in your list:\n";
@@ -12,11 +23,41 @@ public class TaskList {
                 int a = i + 1;
                 output+= a + ". " + Duke.commandList.get(i);
             }
+
+
+            if (reminder().size() > 0) {
+                output += "You have "+reminder().size() + " task(s) that due today: \n";
+                for (Task task : reminder()) {
+                    output += task;
+                }
+            }
         } else {
             output = "☹ OOPS!!! I'm sorry, I can't find any task in your list\n";
         }
 
         return output;
+    }
+
+    public static ArrayList<Task> reminder() {
+        ArrayList<Task> taskDueToday = new ArrayList<>();
+        if (Duke.commandList.size() > 0) {
+            for (Task task : Duke.commandList) {
+                if (task instanceof Deadline || task instanceof Event) {
+                    if (isToday(task.getTime())) {
+                        taskDueToday.add(task);
+                    }
+                }
+            }
+        }
+
+        return taskDueToday;
+
+    }
+
+
+    public static boolean isToday(LocalDate date) {
+        LocalDate today = LocalDate.now();
+        return today.isEqual(date);
     }
 
     /***

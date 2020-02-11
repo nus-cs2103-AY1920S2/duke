@@ -208,7 +208,7 @@ public class Parser {
         output += ui.printLine();
         assert output != "" : "Sorry, no message to return";
         return output;
-        
+
     }
 
 
