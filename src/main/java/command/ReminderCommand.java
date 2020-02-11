@@ -31,6 +31,7 @@ public class ReminderCommand extends Command {
      * @throws DukeException
      */
     public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+        assert this.filter == -1 || this.filter == 1 || this.filter == 2 || this.filter == 3 : "Wrong parameter.";
         if (this.filter == 1) {
             return textUi.remindTasks(tasks, 'T');
         } else if(this.filter == 2) {
