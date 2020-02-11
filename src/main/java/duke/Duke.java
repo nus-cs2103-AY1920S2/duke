@@ -18,6 +18,10 @@ public class Duke {
         try {
             this.ui = new Ui();
             this.taskStorage = new TaskStorage("./data/Storage.txt");
+
+            assert this.ui != null : "ui instance in duke is null";
+            assert this.taskStorage != null : "taskStorage instance in duke is null";
+
         } catch (FileNotFoundException e) {
             System.out.println("./data/Storage.txt");
             System.out.println("File not found");
