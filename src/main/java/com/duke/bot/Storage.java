@@ -9,6 +9,7 @@ import java.io.IOException;
  */
 public class Storage {
     private static final String DESTINATION_PATH = "/tasks.txt";
+    private static final String ARCHIVE_PATH = "/archive.txt";
 
     private Storage() {
     }
@@ -36,12 +37,25 @@ public class Storage {
         }
     }
 
+    public void archive() throws DukeException{
+            File archiveFile = new File(ARCHIVE_PATH);
+            File oldFile= new File(DESTINATION_PATH);
+            boolean success = oldFile.renameTo(archiveFile);
+            if (success) {
+                throw new DukeException("Archive file already exists!");
+            }
+    }
+
 
     /**
      * Returns the path in which the output is saved.
      */
     public String getDestinationPath() {
         return DESTINATION_PATH;
+    }
+
+    public String getArchivePath() {
+        return ARCHIVE_PATH;
     }
 
 }

@@ -1,6 +1,9 @@
 package com.duke.bot;
 
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Parser {
 
@@ -94,6 +97,10 @@ public class Parser {
             tasks.deleteTask(delIdx);
             storage.saveToFile(tasks.printList());
             return String.format("Deleted: %s\n\n", delTask.toString());
+
+        case "archive":
+            storage.archive();
+            return "Task list archived.";
 
         default:
             throw new DukeException(
