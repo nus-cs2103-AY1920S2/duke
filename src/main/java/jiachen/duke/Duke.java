@@ -15,8 +15,6 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-import static jiachen.duke.Command.*;
-
 /**
  * The type Duke.
  */
@@ -68,28 +66,28 @@ public class Duke extends Application {
         Command command;
         switch (commandStr) {
         case "bye":
-            command = EXIT_COMMAND;
+            command = Command.EXIT_COMMAND;
             break;
         case "list":
-            command = LIST_COMMAND;
+            command = Command.LIST_COMMAND;
             break;
         case "done":
-            command = DONE_COMMAND;
+            command = Command.DONE_COMMAND;
             break;
         case "delete":
-            command = DELETE_COMMAND;
+            command = Command.DELETE_COMMAND;
             break;
         case "todo":
-            command = TODO_COMMAND;
+            command = Command.TODO_COMMAND;
             break;
         case "deadline":
-            command = DEADLINE_COMMAND;
+            command = Command.DEADLINE_COMMAND;
             break;
         case "event":
-            command = EVENT_COMMAND;
+            command = Command.EVENT_COMMAND;
             break;
         case "find":
-            command = FIND_COMMAND;
+            command = Command.FIND_COMMAND;
             break;
         default:
             throw new InvalidDukeCommandException();
@@ -110,6 +108,7 @@ public class Duke extends Application {
             switch (parseCommand(commandStr)) {
             case EXIT_COMMAND:
                 handleExit();
+                break;
             case LIST_COMMAND:
                 response = handleList();
                 break;
@@ -131,6 +130,9 @@ public class Duke extends Application {
             case EVENT_COMMAND:
                 response = handleEvent(parameters);
                 break;
+
+            default:
+                throw new InvalidDukeCommandException();
             }
         } catch (DukeException e) {
             response = ui.formatError(e.toString());

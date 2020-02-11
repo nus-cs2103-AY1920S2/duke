@@ -3,7 +3,7 @@ package jiachen.duke;
 import java.util.ArrayList;
 
 /**
- * The type Task list. Wrapper and abstraction for the ArrayList of Task objects
+ * The type Task list. Wrapper and abstraction for the ArrayList of Task objects.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -25,7 +25,7 @@ public class TaskList {
     }
 
     /**
-     * Wrapper around the add function
+     * Wrapper around the add function.
      *
      * @param task the task
      */
@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * Returns undelying ArrayList
+     * Returns undelying ArrayList.
      *
      * @return the list
      */
@@ -43,7 +43,7 @@ public class TaskList {
     }
 
     /**
-     * get task at index
+     * get task at index.
      *
      * @param index the index
      * @return the task
@@ -53,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * get size of tasklist
+     * get size of tasklist.
      *
      * @return the int
      */
@@ -62,7 +62,7 @@ public class TaskList {
     }
 
     /**
-     * Remove task from tasklist
+     * Remove task from tasklist.
      *
      * @param index the index
      * @return the task

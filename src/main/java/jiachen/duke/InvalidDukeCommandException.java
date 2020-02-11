@@ -1,7 +1,7 @@
 package jiachen.duke;
 
 /**
- * Throws when user tries to use an invalid command
+ * Throws when user tries to use an invalid command.
  */
 public class InvalidDukeCommandException extends DukeException {
     /**

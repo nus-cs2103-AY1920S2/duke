@@ -1,13 +1,17 @@
 package jiachen.duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
- * Storage handle persistance to and from the local file system
+ * Storage handle persistance to and from the local file system.
  */
 public class Storage {
     private String pathname;
@@ -22,7 +26,7 @@ public class Storage {
     }
 
     /**
-     * Loads and returns task list if valid
+     * Loads and returns task list if valid.
      *
      * @return the task list
      * @throws DukeException the duke exception
@@ -54,17 +58,17 @@ public class Storage {
 
                 try {
                     switch (tokens[0]) {
-                        case "T":
-                            t = new TodoTask(tokens[2]);
-                            break;
-                        case "D":
-                            t = new DeadlineTask(tokens[2], tokens[3]);
-                            break;
-                        case "E":
-                            t = new EventTask(tokens[2], tokens[3]);
-                            break;
-                        default:
-                            throw new InvalidDukeFormatException("Unknown Command.");
+                    case "T":
+                        t = new TodoTask(tokens[2]);
+                        break;
+                    case "D":
+                        t = new DeadlineTask(tokens[2], tokens[3]);
+                        break;
+                    case "E":
+                        t = new EventTask(tokens[2], tokens[3]);
+                        break;
+                    default:
+                        throw new InvalidDukeFormatException("Unknown Command.");
                     }
                     if (tokens[1].equals("1")) {
                         t.markAsDone();
@@ -85,7 +89,7 @@ public class Storage {
     }
 
     /**
-     * Save changes from the tasklist to the file
+     * Save changes from the tasklist to the file.
      *
      * @param tasks the tasks
      */

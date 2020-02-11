@@ -1,7 +1,7 @@
 package jiachen.duke;
 
 /**
- * Throws wehn bad format is encountered with input
+ * Throws wehn bad format is encountered with input.
  */
 public class InvalidDukeFormatException extends DukeException {
     /**

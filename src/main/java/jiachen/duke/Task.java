@@ -1,8 +1,7 @@
 package jiachen.duke;
 
 /**
- * generic abstract task object that specific kinds of task can implement eg Todo, Deadline and
- * Event
+ * generic abstract task object that specific kinds of task can implement.
  */
 public abstract class Task {
     /**
@@ -10,7 +9,7 @@ public abstract class Task {
      */
     protected String description;
     /**
-     * Is task completed?
+     * Is task completed?.
      */
     protected boolean isDone;
 
