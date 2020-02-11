@@ -1,3 +1,5 @@
+package duke.util;
+
 public enum CommandIdentifier {
     BYE,
     LIST,
