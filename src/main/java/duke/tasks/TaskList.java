@@ -13,21 +13,21 @@ import duke.exceptions.DukeException;
 
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
     /**
      * Creates a TaskList object from an existing list of tasks
      * @param taskList
      */
     public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+        this.tasks = taskList;
     }
 
     /**
      * Creates a TaskList object with a new list
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -35,7 +35,7 @@ public class TaskList {
      * @param t Task to be added to ArrayList
      */
     public void addTask(Task t) {
-        taskList.add(t);
+        tasks.add(t);
     }
 
     /**
@@ -43,7 +43,15 @@ public class TaskList {
      * @return Number of existing tasks
      */
     public int size() {
-        return taskList.size();
+        return tasks.size();
+    }
+
+    /**
+     * Returns existing ArrayList of tasks
+     * @return ArrayList of tasks
+     */
+    public ArrayList<Task> getList() {
+        return tasks;
     }
 
     /**
@@ -56,7 +64,7 @@ public class TaskList {
         } else {
             output.append("This is your list of tasks:\n");
             int taskIdx = 1;
-            for (Task task : taskList) {
+            for (Task task : tasks) {
                 output.append(taskIdx + ". ");
                 output.append(task.toString() + "\n");
                 taskIdx++;
@@ -72,12 +80,11 @@ public class TaskList {
      * @throws DukeException If given index does not exist
      */
     public String completeTask(Storage storage, int taskNumber) throws DukeException {
-        if (taskNumber > taskList.size() || taskNumber < 1) {
+        if (taskNumber > tasks.size() || taskNumber < 1) {
             throw new UnknownTaskException();
         }
-        Task task = taskList.get(taskNumber - 1);
+        Task task = tasks.get(taskNumber - 1);
         task.markAsDone();
-        storage.updateTasks(taskList);
         return task.toString();
     }
 
@@ -88,12 +95,11 @@ public class TaskList {
      * @throws DukeException If given index does not exist
      */
     public String deleteTask(Storage storage, int taskNumber) throws DukeException {
-        if (taskNumber > taskList.size() || taskNumber < 1) {
+        if (taskNumber > tasks.size() || taskNumber < 1) {
             throw new UnknownTaskException();
         }
-        Task task = taskList.get(taskNumber - 1);
-        taskList.remove(taskNumber - 1);
-        storage.updateTasks(taskList);
+        Task task = tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
 
         return task.toString();
     }
@@ -104,7 +110,7 @@ public class TaskList {
      */
     public TaskList findKeyWord(String keyword) throws DukeException {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             String description = task.getDescription();
             if (description.contains(keyword)) {
                 matchingTasks.add(task);
