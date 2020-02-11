@@ -1,6 +1,6 @@
 package dukebot.ui;
 
-import dukebot.contactlist.ContactDetails;
+import dukebot.contactlist.ContactDetail;
 import dukebot.gui.DukeExpression;
 import dukebot.gui.DukeVoice;
 import dukebot.tasklist.Task;
@@ -17,7 +17,7 @@ public class Ui {
             + " _|__/  |__|_, _| \\_, _|__,\n"
             + "(             (      (    \n";
     private final Scanner sc;
-    private final boolean withGui;
+    private final boolean hasGui;
     private boolean sayFirst = true;
     private StringBuilder guiOutput = new StringBuilder();
     private DukeExpression dukeExpression = DukeExpression.HAPPY;
@@ -27,8 +27,8 @@ public class Ui {
     /**
      * Generates the Ui with GUI.
      */
-    public Ui(boolean withGui) {
-        this.withGui = withGui;
+    public Ui(boolean hasGui) {
+        this.hasGui = hasGui;
         sc = new Scanner(System.in);
     }
 
@@ -36,7 +36,7 @@ public class Ui {
      * Generates the Ui.
      */
     public Ui() {
-        withGui = false;
+        hasGui = false;
         sc = new Scanner(System.in);
     }
 
@@ -304,9 +304,9 @@ public class Ui {
      *
      * @param contactList The array of contacts to print.
      */
-    public void sayContacts(ArrayList<ContactDetails> contactList) {
+    public void sayContacts(ArrayList<ContactDetail> contactList) {
         int i = 1;
-        for (ContactDetails contact : contactList) {
+        for (ContactDetail contact : contactList) {
             dukeSays(i + ". "
                     + contact.getName()
                     + " [" + contact.getPhoneNumber() + "] "
@@ -374,7 +374,7 @@ public class Ui {
      * @param lineName Line to say.
      * @param contact Contact to use.
      */
-    public void sayLineWithContact(LineNameWithContact lineName, ContactDetails contact) {
+    public void sayLineWithContact(LineNameWithContact lineName, ContactDetail contact) {
         switch (lineName) {
         case DELETE_CONTACT_SUCCESS:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,
@@ -419,7 +419,7 @@ public class Ui {
      * @param line Line to print.
      */
     private void dukeSays(String line) {
-        if (withGui) {
+        if (hasGui) {
             guiOutput.append(line);
             guiOutput.append("\n");
         } else {
@@ -437,7 +437,7 @@ public class Ui {
      * Resets text output.
      */
     public void resetGuiOutput() {
-        if (withGui) {
+        if (hasGui) {
             guiOutput = new StringBuilder();
         }
     }
@@ -446,7 +446,7 @@ public class Ui {
      * Gets text output for GUI.
      */
     public String getGuiOutput() {
-        if (withGui) {
+        if (hasGui) {
             return guiOutput.toString();
         } else {
             return "";

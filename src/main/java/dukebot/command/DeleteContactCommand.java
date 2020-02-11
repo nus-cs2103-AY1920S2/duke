@@ -1,14 +1,12 @@
 package dukebot.command;
 
-import dukebot.contactlist.ContactDetails;
+import dukebot.contactlist.ContactDetail;
 import dukebot.contactlist.ContactList;
 import dukebot.exception.DukeException;
 import dukebot.storage.AppStorage;
 import dukebot.storage.Storage;
-import dukebot.tasklist.Task;
 import dukebot.ui.LineName;
 import dukebot.ui.LineNameWithContact;
-import dukebot.ui.LineNameWithTask;
 import dukebot.ui.Ui;
 import dukebot.util.MiscUtils;
 
@@ -40,14 +38,14 @@ public class DeleteContactCommand extends Command {
         }
 
         int taskInd = Integer.parseInt(inpArr[1]) - 1;
-        ContactDetails contactDetails = contactList.deleteTask(taskInd);
+        ContactDetail contactDetail = contactList.deleteTask(taskInd);
 
-        if (contactDetails == null) {
+        if (contactDetail == null) {
             ui.sayLine(LineName.DELETE_OUT_OF_INDEX);
             return;
         }
 
-        ui.sayLineWithContact(LineNameWithContact.DELETE_CONTACT_SUCCESS, contactDetails);
+        ui.sayLineWithContact(LineNameWithContact.DELETE_CONTACT_SUCCESS, contactDetail);
 
         try {
             storage.saveContactList(contactList);

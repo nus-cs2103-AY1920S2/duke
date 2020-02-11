@@ -1,7 +1,7 @@
 package dukebot.storage;
 
 import dukebot.command.CommandList;
-import dukebot.contactlist.ContactDetails;
+import dukebot.contactlist.ContactDetail;
 import dukebot.contactlist.ContactList;
 import dukebot.exception.DukeException;
 import dukebot.tasklist.Task;
@@ -27,8 +27,6 @@ public class Storage {
     private static final String TASK_LIST_FILEPATH = "/task-list.data";
     private static final String CONTACT_LIST_FILEPATH = "/contact-list.data";
     private static final String ALIAS_FILEPATH = "/alias.data";
-    // private static final String SMALL_TALK_FILEPATH = "/small-talk.data";
-    // private static final String CONFIG_FILEPATH = "/config.data";
 
     /**
      * Generates the Storage with default directory.
@@ -132,7 +130,7 @@ public class Storage {
      * @throws DukeException If save fails for the first time.
      */
     public void saveContactList(ContactList contactList) throws DukeException {
-        ArrayList<ContactDetails> contactDetails = contactList.getContactList();
+        ArrayList<ContactDetail> contactDetails = contactList.getContactList();
         if (!mkDataDir() && !saveAlreadyFailed) {
             saveAlreadyFailed = true;
             throw new DukeException(LineName.SAVE_FAIL);
@@ -141,7 +139,7 @@ public class Storage {
             File file = new File(storageDirectory + CONTACT_LIST_FILEPATH);
             FileOutputStream writeData = new FileOutputStream(file);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-            ContactDetails[] contactArr = contactDetails.toArray(new ContactDetails[0]);
+            ContactDetail[] contactArr = contactDetails.toArray(new ContactDetail[0]);
             writeStream.writeObject(contactArr);
             writeStream.flush();
             writeStream.close();
@@ -160,7 +158,7 @@ public class Storage {
      * @return The saved ContactArrayList.
      * @throws DukeException If no data is found.
      */
-    public ArrayList<ContactDetails> loadContactArrayList() throws DukeException {
+    public ArrayList<ContactDetail> loadContactArrayList() throws DukeException {
         File file = new File(storageDirectory + CONTACT_LIST_FILEPATH);
         if (!file.isFile()) {
             throw new DukeException(LineName.LOAD_FAIL);
@@ -170,8 +168,8 @@ public class Storage {
             FileInputStream readData = new FileInputStream(file);
             ObjectInputStream readStream = new ObjectInputStream(readData);
             Object obj = readStream.readObject();
-            if (obj instanceof ContactDetails[]) {
-                return new ArrayList<>(Arrays.asList((ContactDetails[]) obj));
+            if (obj instanceof ContactDetail[]) {
+                return new ArrayList<>(Arrays.asList((ContactDetail[]) obj));
             }
         } catch (IOException | ClassNotFoundException e) {
             // e.printStackTrace();

@@ -1,6 +1,6 @@
 package dukebot.command;
 
-import dukebot.contactlist.ContactDetails;
+import dukebot.contactlist.ContactDetail;
 import dukebot.contactlist.ContactList;
 import dukebot.exception.DukeException;
 import dukebot.storage.AppStorage;
@@ -37,9 +37,9 @@ public class AddContactCommand extends Command {
         }
         String name = inpArr[1];
         int phoneNumber = Integer.parseInt(inpArr[2]);
-        ContactDetails contactDetails = new ContactDetails(name, phoneNumber);
-        contactList.add(contactDetails);
-        ui.sayLineWithContact(LineNameWithContact.ADD_CONTACT_SUCCESS, contactDetails);
+        ContactDetail contactDetail = new ContactDetail(name, phoneNumber);
+        contactList.add(contactDetail);
+        ui.sayLineWithContact(LineNameWithContact.ADD_CONTACT_SUCCESS, contactDetail);
 
         try {
             storage.saveContactList(contactList);

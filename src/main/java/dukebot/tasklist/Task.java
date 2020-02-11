@@ -11,7 +11,6 @@ import java.util.Objects;
 public abstract class Task implements Serializable {
     private static final DateTimeFormatter DEFAULT_FORMAT_NO_TIME = DateTimeFormatter.ofPattern("MMM d yyyy");
     private static final DateTimeFormatter DEFAULT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
-    // private LocalDateTime localDateTimeProvider = LocalDateTime.now();
     protected final String description;
 
     private boolean isDone;
@@ -27,13 +26,6 @@ public abstract class Task implements Serializable {
         this.description = description;
         this.isDone = false;
     }
-
-    // /**
-    //  * For testing purposes.
-    //  */
-    // public void setLocalDateTimeProvider(LocalDateTime localDateTimeProvider) {
-    //     this.localDateTimeProvider = localDateTimeProvider;
-    // }
 
     /**
      * Sets dateTime of task.
@@ -93,7 +85,7 @@ public abstract class Task implements Serializable {
      * @return DateTime string to be displayed.
      */
     public String dateTimeToString() {
-        // Think of a way to use custom datetime.
+        // TODO: think of a way to use custom Datetime.now() for better testing.
         if (dateTime == null) {
             return "";
         } else if (dateTime.toLocalDate().equals(LocalDateTime.now().toLocalDate())) {
@@ -123,6 +115,4 @@ public abstract class Task implements Serializable {
         }
         return false;
     }
-
-    //...
 }

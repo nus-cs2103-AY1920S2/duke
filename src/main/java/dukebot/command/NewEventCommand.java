@@ -35,32 +35,29 @@ public class NewEventCommand extends Command {
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
         assertExecuteNotNull(appStorage, ui, storage);
         TaskList taskList = appStorage.getTaskList();
-        String description;
-        String time;
-        Task event = null;
         int atInd = Arrays.asList(inpArr).indexOf("/at");
         if (atInd == inpArr.length - 1) {
             ui.sayLine(LineName.EVENT_EMPTY);
             return;
-        } else if (atInd > 1) {
-            description = String.join(" ", Arrays.copyOfRange(inpArr, 1, atInd));
-            time = String.join(" ", Arrays.copyOfRange(inpArr, atInd + 1, inpArr.length));
-            try {
-                LocalDateTime parsedDate = DateTimeParse.parseDate(time);
-                event = new Event(description, parsedDate);
-            } catch (DateTimeParseException e) {
-                ui.sayLine(LineName.DATE_TIME_PARSE_FAIL);
-                return;
-            }
-        } else {
+        } else if (atInd <= 1) {
             ui.sayLine(LineName.EVENT_AT_MISSING);
             return;
         }
+        String description = String.join(" ", Arrays.copyOfRange(inpArr, 1, atInd));
+        String time = String.join(" ", Arrays.copyOfRange(inpArr, atInd + 1, inpArr.length));
+        LocalDateTime parsedDate = null;
+        try {
+            parsedDate = DateTimeParse.parseDate(time);
+        } catch (DateTimeParseException e) {
+            ui.sayLine(LineName.DATE_TIME_PARSE_FAIL);
+            return;
+        }
+        Task event = new Event(description, parsedDate);
+        taskList.addTask(event);
+        ui.sayLineWithTask(LineNameWithTask.NEW_TASK_SUCCESS, event);
 
         try {
-            taskList.addTask(event);
             storage.saveTaskList(taskList);
-            ui.sayLineWithTask(LineNameWithTask.NEW_TASK_SUCCESS, event);
         } catch (DukeException e) {
             ui.sayLine(e.getErrorLineName());
         }

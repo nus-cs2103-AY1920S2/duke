@@ -38,9 +38,9 @@ public class FindCommand extends Command {
         ArrayList<Task> tasksFound = taskList.findAll(toFind);
         if (tasksFound.size() == 0) {
             ui.sayLine(LineName.FIND_FAIL);
-        } else {
-            ui.sayLine(LineName.FIND_SUCCESS);
-            ui.sayTasks(tasksFound);
+            return;
         }
+        ui.sayLine(LineName.FIND_SUCCESS);
+        ui.sayTasks(tasksFound);
     }
 }

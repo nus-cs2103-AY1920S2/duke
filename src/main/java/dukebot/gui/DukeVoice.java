@@ -56,10 +56,6 @@ public enum DukeVoice {
         return NO_VOICE;
     }
 
-    // public MediaPlayer getDukeVoicePlayer() {
-    //     return dukeVoicePlayer;
-    // }
-
     /**
      * Plays corresponding voice.
      */

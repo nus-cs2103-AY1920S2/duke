@@ -35,32 +35,30 @@ public class NewDeadlineCommand extends Command {
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
         assertExecuteNotNull(appStorage, ui, storage);
         TaskList taskList = appStorage.getTaskList();
-        String description;
-        String time;
-        Task deadline;
         int byInd = Arrays.asList(inpArr).indexOf("/by");
         if (byInd == inpArr.length - 1) {
             ui.sayLine(LineName.DEADLINE_EMPTY);
             return;
-        } else if (byInd > 1) {
-            description = String.join(" ", Arrays.copyOfRange(inpArr, 1, byInd));
-            time = String.join(" ", Arrays.copyOfRange(inpArr, byInd + 1, inpArr.length));
-            try {
-                LocalDateTime parsedDate = DateTimeParse.parseDate(time);
-                deadline = new Deadline(description, parsedDate);
-            } catch (DateTimeParseException e) {
-                ui.sayLine(LineName.DATE_TIME_PARSE_FAIL);
-                return;
-            }
-        } else {
+        } else if (byInd <= 1) {
             ui.sayLine(LineName.DEADLINE_EMPTY);
             return;
         }
+        String description = String.join(" ", Arrays.copyOfRange(inpArr, 1, byInd));
+        String time = String.join(" ", Arrays.copyOfRange(inpArr, byInd + 1, inpArr.length));
+        LocalDateTime.now();
+        LocalDateTime parsedDate = null;
+        try {
+            parsedDate = DateTimeParse.parseDate(time);
+        } catch (DateTimeParseException e) {
+            ui.sayLine(LineName.DATE_TIME_PARSE_FAIL);
+            return;
+        }
+        Task deadline = new Deadline(description, parsedDate);
+        taskList.addTask(deadline);
+        ui.sayLineWithTask(LineNameWithTask.NEW_TASK_SUCCESS, deadline);
 
         try {
-            taskList.addTask(deadline);
             storage.saveTaskList(taskList);
-            ui.sayLineWithTask(LineNameWithTask.NEW_TASK_SUCCESS, deadline);
         } catch (DukeException e) {
             ui.sayLine(e.getErrorLineName());
         }
