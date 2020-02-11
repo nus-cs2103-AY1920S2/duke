@@ -5,6 +5,8 @@ import exception.EmptyTaskListException;
 import exception.InvalidIndexException;
 import task.Task;
 import task.TaskList;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -58,8 +60,10 @@ public class Ui {
             throw new EmptyTaskListException("There is no task in your list. Please try again...");
         }
         System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= tasks.getTaskListSize(); i++) {
-            System.out.println(i + ".  " + tasks.getTask(i - 1));
+        AtomicInteger atomicIndex = new AtomicInteger(1);
+
+        for (Task task: tasks.getCurrentTasks()) {
+            System.out.printf("%d.  %s\n", atomicIndex.getAndIncrement(), task);
         }
     }
 
@@ -150,14 +154,14 @@ public class Ui {
      */
     public void acknowledgeFound(TaskList tasks, String taskSearchKey) {
         System.out.println("Here are the matching tasks in your list:");
-        int index = 1;
-
-        for (Task task: tasks.getCurrentTasks()) {
-            String taskAction = task.toString().split(" ", 2)[1].split("\\(")[0];
-            if (taskAction.contains(taskSearchKey)) {
-                System.out.printf("%d. %s\n", index, task.toString());
-                index++;
-            }
-        }
+        AtomicInteger atomicIndex = new AtomicInteger(1);
+        ArrayList<Task> taskList = tasks.getCurrentTasks();
+        taskList.stream()
+                .filter(task -> task.toString().split(" ", 2)[1].split("\\(")[0]
+                        .contains(taskSearchKey))
+                .forEach(task -> {
+                    System.out.printf("%d.  ", atomicIndex.getAndIncrement());
+                    System.out.println(task);
+                });
     }
 }
