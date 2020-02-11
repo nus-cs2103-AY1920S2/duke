@@ -27,10 +27,10 @@ public class Ui {
     private Image duke;
 
     //The container for the content of the chat to scroll.
-    public Ui(Stage stage, String fileLoc) {
+    public Ui(Stage stage, Parser parser, Handler handler) {
         this.stage = stage;
-        this.parser = new Parser(fileLoc);
-        this.handler = new Handler(fileLoc);
+        this.parser = parser;
+        this.handler = handler;
         this.listing = parser.getDatabase();
     }
 
