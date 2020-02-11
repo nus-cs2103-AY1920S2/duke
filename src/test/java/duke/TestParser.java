@@ -1,4 +1,5 @@
-import duke.Parser;
+package duke;
+
 import duke.exception.DukeException;
 
 import org.junit.jupiter.api.Test;
