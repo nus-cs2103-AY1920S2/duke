@@ -50,7 +50,7 @@ public class Duke {
             if (split.length == 1) {
                 return ("OOPS!!!" + " The description of a todo cannot be empty. \n");
             }
-            String desc = input.substring(5);
+            String desc = input.replace("todo ", "");
             Task t = new ToDoTask(desc);
             taskList.list.add(t);
             numOfTask = taskList.list.size();
@@ -59,7 +59,7 @@ public class Duke {
 
         } else if (command.equals("deadline")) {
             String[] arr = input.split(" /by ");
-            String desc = arr[0].substring(9);
+            String desc = arr[0].replace("deadline ", "");
             String time = arr[1];
             Task t = new DeadlineTask(desc, LocalDate.parse(time));
             taskList.list.add(t);
@@ -69,7 +69,7 @@ public class Duke {
 
         } else if (command.equals("event")) {
             String[] arr = input.split(" /at ");
-            String desc = arr[0].substring(6);
+            String desc = arr[0].replace("event ", "");
             String time = arr[1];
             Task t = new EventTask(desc, LocalDate.parse(time));
             taskList.list.add(t);
@@ -88,4 +88,6 @@ public class Duke {
             return "OOPS!!! I'm sorry, but I don't know what that means :-( \n";
         }
     }
+
+    
 }
