@@ -5,7 +5,15 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a Command object specifically for listing the tasks currently in the TaskList.
+ *
+ * @author Firzan Armani
+ */
 public class ListCommand extends Command {
+    /**
+     * ListCommand constructor.
+     */
     public ListCommand() {
         super();
     }

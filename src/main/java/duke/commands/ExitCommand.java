@@ -5,7 +5,16 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a Command object specifically for exiting the Duke program.
+ *
+ * @author Firzan Armani
+ */
 public class ExitCommand extends Command {
+    /**
+     * ExitCommand constructor.
+     *
+     */
     public ExitCommand() {
         super();
     }

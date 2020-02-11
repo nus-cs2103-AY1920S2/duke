@@ -7,6 +7,11 @@ import java.time.format.DateTimeParseException;
 import duke.enums.ErrorCodes;
 import duke.exceptions.DukeException;
 
+/**
+ * Represents a Deadline task.
+ *
+ * @author Firzan Armani
+ */
 public class Deadline extends Task {
     private String deadlineDate;
     private LocalDate parsedDate;

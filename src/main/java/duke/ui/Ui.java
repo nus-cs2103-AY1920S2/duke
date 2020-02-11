@@ -2,6 +2,11 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Class with methods for UI output.
+ *
+ * @author Firzan Armani
+ */
 public class Ui {
     private static final String UI_LOGO = " ____        _        \n"
         + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
@@ -9,6 +14,9 @@ public class Ui {
     private static final String UI_DIVIDER = "++++++++++++++++++++++\n";
     private Scanner scanner;
 
+    /**
+     * UI constructor.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
     }

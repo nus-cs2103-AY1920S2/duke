@@ -5,12 +5,23 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Abstract Command class.
+ */
 public abstract class Command {
     protected String taskString;
 
+    /**
+     * Command abstract constructor.
+     */
     public Command() {
     }
 
+    /**
+     * Command constructor.
+     *
+     * @param taskString Descriptionn of the task
+     */
     public Command(String taskString) {
         this.taskString = taskString;
     }

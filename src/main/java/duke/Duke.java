@@ -7,6 +7,11 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class for the Duke program.
+ *
+ * @author Firzan Armani
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;

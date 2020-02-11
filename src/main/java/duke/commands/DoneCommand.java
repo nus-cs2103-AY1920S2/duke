@@ -7,9 +7,19 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a Command object specifically for marking a task as Completed.
+ *
+ * @author Firzan Armani
+ */
 public class DoneCommand extends Command {
     private int index = -1;
 
+    /**
+     * DoneCommand constructor.
+     *
+     * @param index The index of the task in the TaskList to be marked as completed
+     */
     public DoneCommand(int index) {
         super();
         this.index = index;

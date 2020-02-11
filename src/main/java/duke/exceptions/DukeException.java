@@ -2,6 +2,11 @@ package duke.exceptions;
 
 import duke.enums.ErrorCodes;
 
+/**
+ * Class for exceptions specific to the Duke program.
+ *
+ * @author Firzan Armani
+ */
 public class DukeException extends Exception {
     private ErrorCodes errorCode;
     private String errorInfo;
