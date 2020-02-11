@@ -81,6 +81,29 @@ public class Ui {
     }
 
     /**
+     * Given a TaskList, print the list of tasks with sorted message.
+     *
+     * @param tasks TaskList object to be printed.
+     */
+    public void printSortedTaskList(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            print("List is empty");
+            return;
+        }
+
+        List<String> outputStreamBuffer = new ArrayList<>();
+
+        outputStreamBuffer.add("Here are your tasks in chronological order:");
+        for (int i = 0; i < tasks.size(); i++) {
+            String str = tasks.get(i).toString();
+            String newStr = String.format("%d.%s", i + 1, str);
+            outputStreamBuffer.add(newStr);
+        }
+
+        print(outputStreamBuffer);
+    }
+
+    /**
      * Given a TaskList, print the list of tasks with matched message.
      *
      * @param tasks TaskList object to be printed.

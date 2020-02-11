@@ -13,6 +13,10 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     @Override
     public String toStringForSaving() {
         return TYPE_SYMBOL + Task.SEPERATOR
@@ -27,5 +31,16 @@ public class Deadline extends Task {
                 TYPE_SYMBOL,
                 super.toString(),
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof Todo) {
+            return -1;
+        } else if (task instanceof Deadline) {
+            return this.getDate().compareTo(((Deadline) task).getDate());
+        } else { // event
+            return this.getDate().compareTo(((Event) task).getDate());
+        }
     }
 }

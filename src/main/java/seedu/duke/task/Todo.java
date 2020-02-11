@@ -19,4 +19,13 @@ public class Todo extends Task {
     public String toString() {
         return String.format("[%s]%s", TYPE_SYMBOL, super.toString());
     }
+
+    @Override
+    public int compareTo(Task task) {
+        if (task instanceof Todo) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 }

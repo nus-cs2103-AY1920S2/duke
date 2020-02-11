@@ -7,6 +7,7 @@ import seedu.duke.task.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -64,7 +65,7 @@ public class TaskList {
             break;
         }
 
-        if (isDone && toReturn != null) {
+        if (isDone) {
             toReturn.markAsDone();
         }
 
@@ -131,5 +132,12 @@ public class TaskList {
         }
 
         return viewToReturn;
+    }
+
+    /**
+     * Sort tasks in the task list by chronological order.
+     */
+    public void sort() {
+        Collections.sort(tasks);
     }
 }

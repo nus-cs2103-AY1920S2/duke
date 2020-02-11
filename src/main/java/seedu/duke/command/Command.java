@@ -21,7 +21,9 @@ public abstract class Command {
         deadline_by("/by"),
 
         event("event"),
-        event_at("/at");
+        event_at("/at"),
+
+        sort("sort");
 
         private final String command;
 

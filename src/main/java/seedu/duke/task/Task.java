@@ -1,6 +1,6 @@
 package seedu.duke.task;
 
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
 
     public static final String SEPERATOR = " | ";
     public static final String TRUE_SYMBOL = "O";

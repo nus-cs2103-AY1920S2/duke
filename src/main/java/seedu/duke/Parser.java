@@ -7,6 +7,7 @@ import seedu.duke.command.DoneCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.FindCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.SortCommand;
 import seedu.duke.exception.DukeEmptyDescriptionException;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.DukeNoKeywordException;
@@ -28,6 +29,8 @@ class Parser {
                 return new ExitCommand();
             case list:
                 return new ListCommand();
+            case sort:
+                return new SortCommand();
             case done:
                 return createDoneCommand(splitInput);
             case delete:
