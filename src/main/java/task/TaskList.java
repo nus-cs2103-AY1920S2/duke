@@ -72,6 +72,7 @@ public class TaskList {
         return sb.toString();
     }
 
+    /** Improve codeQuality by providing the method toUndoneListString(). */
     /**
      * Represents the list of undone tasks in one string.
      *
