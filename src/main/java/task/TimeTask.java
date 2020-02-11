@@ -14,11 +14,10 @@ public class TimeTask extends Task {
         this.time = Parser.getTime(dateTime);
         this.date = Parser.getDate(dateTime);
     }
-
     public TimeTask(String type, String[] fromMemory) {
-        super(type, fromMemory[1], fromMemory[2]);
-        this.date = LocalDate.parse(fromMemory[3]);
-        this.time = LocalTime.parse(fromMemory[4]);
+        super(type, fromMemory[Constant.isDoneIndex], fromMemory[Constant.descriptionIndex]);
+        this.date = LocalDate.parse(fromMemory[Constant.dateIndex]);
+        this.time = LocalTime.parse(fromMemory[Constant.timeIndex]);
     }
 
     /** @return String returns string used to store task in txt file */

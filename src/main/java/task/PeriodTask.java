@@ -36,8 +36,8 @@ public class PeriodTask extends TimeTask {
 
     public PeriodTask(String[] fromMemory) {
         super(Constant.PERIODTASK.getType(), fromMemory);
-        this.endDate = LocalDate.parse(fromMemory[5]);
-        this.endTime = LocalTime.parse(fromMemory[6]);
+        this.endDate = LocalDate.parse(fromMemory[Constant.endDateIndex]);
+        this.endTime = LocalTime.parse(fromMemory[Constant.endTimeIndex]);
     }
 
     @Override
