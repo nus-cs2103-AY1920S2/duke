@@ -7,15 +7,13 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.util.Scanner;
+
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    public Duke() {
-        this("data/duke.txt");
-    }
 
     /**
      * Instantiates a Duke instance with a path to a save file.
@@ -32,7 +30,16 @@ public class Duke {
      * @param args Arguments to be passed into Duke
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Please enter location of save file (default: data/duke.txt):");
+        String saveLocation = sc.nextLine();
+
+        if (saveLocation.equals("")) {
+            saveLocation = "data/duke.txt";
+        }
+
+        new Duke(saveLocation).run();
     }
 
     /**
