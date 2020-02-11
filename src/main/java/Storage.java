@@ -17,13 +17,16 @@ public class Storage {
      * @throws IOException Handles errors if file is not found.
      */
     public void writeToFile(String s) throws IOException {
+        // assert assumption that string exists:
+        assert s != null : "Empty string"; 
+
         File file = new File("./myfile.txt");
         BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 
         if (!file.exists()) {
             file.createNewFile();
         }
-        writer.write(s);
+        writer.write(s); 
         writer.newLine();
         writer.close();
     }
@@ -59,6 +62,9 @@ public class Storage {
      * @throws IOException Handles errors if file is not found.
      */
     public void removeLine(String tasks, int index) throws IOException {
+        // assert assumption that at least one task exists:
+        assert tasks != null : "No tasks"; 
+        
         File file = new File("./myfile.txt");
         BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
         String[] lines = tasks.split("\\r?\\n");
@@ -83,6 +89,9 @@ public class Storage {
      * @throws IOException Handles errors if file is not found.
      */
     public void changeToDone(String tasks, int index) throws IOException {
+        // assert assumption that at least one task exists:
+        assert tasks != null : "No tasks"; 
+                
         File file = new File("./myfile.txt");
         BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
         String[] lines = tasks.split("\\r?\\n");
