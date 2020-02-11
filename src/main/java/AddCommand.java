@@ -56,7 +56,7 @@ class AddCommand extends Command {
                     }
                 } catch (DukeException e) {
                     ui.showLine();
-                    System.err.println("There is no valid input after to do. Please try again.");
+                    System.out.println("There is no valid input after to do. Please try again.");
                     ui.showLine();
                 }
             } else if (this.command.startsWith("event")) {
@@ -75,7 +75,7 @@ class AddCommand extends Command {
                         + " task(s) in the list.");
             }
         } catch (DateTimeParseException e) {
-            System.err.println("Your date input should be in 'YYYY-MM-DD' format. Please try again.");
+            System.out.println("Your date input should be in 'YYYY-MM-DD' format. Please try again.");
         }
         }
 }
