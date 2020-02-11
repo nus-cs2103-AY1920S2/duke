@@ -125,8 +125,13 @@ public class Duke extends Application {
                 + "    ____________________________________________________________\n"
          : "ui should have correct starting message";
         Label startMessage = new Label(response);
+
+        String remainderMessage = ui.reminders();
+        Label startRemainder = new Label(remainderMessage);
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(startMessage, new ImageView(duke))
+                DialogBox.getUserDialog(startMessage, new ImageView(duke)),
+                DialogBox.getUserDialog(startRemainder, new ImageView(duke))
                 );
 
         //Step 3. Add functionality to handle user input.

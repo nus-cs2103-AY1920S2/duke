@@ -12,10 +12,13 @@ public class Ui {
 
     /** This is the constructor to create the Ui Object.
      */
-    public Ui() { }
+    public Ui() {
+        //this is the constructor of ui
+    }
 
     public String init() {
-        String response = "    ____________________________________________________________"
+        String response;
+        response = "    ____________________________________________________________"
                 + "     Hello! I'm Duke"
                 + "     What can I do for you?"
                 + "    ____________________________________________________________\n";
@@ -23,9 +26,9 @@ public class Ui {
     }
 
     public String inputProcess(String userInput, Storage storage, TaskList tasks) {
-        String response;
         this.userInput = userInput;
         newInput = new Parser(this.userInput);
+        String response;
         if(newInput.getIsProblem()) {
             Parser.isProblem = false;
             response = "there is Problem with user's Input";
@@ -66,9 +69,10 @@ public class Ui {
                 } catch (IOException e) {
                     System.out.println("Cannot write file");
                 }
+            } else if (this.userInput.contains("reminders")) {
+                response = this.reminders();
             } else {
                 response = tasks.event(this.userInput);
-
                 try {
                     storage.save();
                 } catch (IOException e) {
@@ -95,7 +99,8 @@ public class Ui {
     /** This outputs the response to bye request.
      */
     public String bye(){
-        String response = "    ____________________________________________________________\n"
+        String response;
+        response = "    ____________________________________________________________\n"
         + "     Bye. Hope to see you again soon!\n"
         + "    ____________________________________________________________\n";
         return response;
@@ -119,7 +124,6 @@ public class Ui {
         return response;
     }
 
-
     /** This is to mark a task is done.
      *
      */
@@ -131,6 +135,23 @@ public class Ui {
         TaskList.totalTasks[taskNo - 1].markAsDone(); // to mark as done; -1 as since count in totalTasks starts from 0
         response = response + "       " + TaskList.totalTasks[taskNo - 1].getStatusIcon() + " "
                 + TaskList.totalTasks[taskNo - 1].getDescription() + "\n";
+        response = response + "    ____________________________________________________________\n";
+        return response;
+    }
+
+    public String reminders(){
+        String response;
+        response = "    ____________________________________________________________\n"
+                +"     Here are the reminders of your tasks:\n";
+        int i = 0;
+        int j = 1;
+        while (i < TaskList.totalTasksCount) {
+            if (!TaskList.totalTasks[i].isDone) {
+                response = response + "     " + j + "." + TaskList.totalTasks[i].toString() + "\n";
+                j++;
+            }
+            i++;
+        }
         response = response + "    ____________________________________________________________\n";
         return response;
     }
