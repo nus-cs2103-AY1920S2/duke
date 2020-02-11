@@ -28,15 +28,14 @@ public class DoneCommandTest {
         final TaskList TASK_LIST = new TaskList(List.of(TODO));
 
         final TaskList EXPECTED_TASK_LIST = new TaskList(List.of(TODO.setDone(true)));
-        final List<String> EXPECTED_MESSAGES = List.of(
-                "Nice! I've marked this task as done:",
-                "  [T][\u2713] " + TODO_TITLE // \u2713 = tick
-        );
+        final String EXPECTED_MESSAGE =
+                "Nice! I've marked this task as done:\n"
+                + "  [T][\u2713] " + TODO_TITLE; // \u2713 = tick
 
         DoneCommand doneCommand = new DoneCommand(DONE_INDEX);
         ExecuteResult result = doneCommand.execute(TASK_LIST);
 
         assertEquals(EXPECTED_TASK_LIST.getUnderlyingList(), result.getTasks().getUnderlyingList());
-        assertEquals(EXPECTED_MESSAGES, result.getMessages());
+        assertEquals(EXPECTED_MESSAGE, result.getMessage());
     }
 }

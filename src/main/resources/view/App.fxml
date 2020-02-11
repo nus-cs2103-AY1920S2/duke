@@ -9,7 +9,12 @@
 <?import javafx.geometry.Insets?>
 
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
-  <ScrollPane VBox.vgrow="ALWAYS" prefHeight="500" fitToWidth="true">
+  <ScrollPane
+    fx:id="messageListContainer"
+    VBox.vgrow="ALWAYS"
+    prefHeight="500"
+    fitToWidth="true"
+  >
     <VBox fx:id="messageList" spacing="8">
       <padding>
         <Insets top="4" left="4" bottom="4" right="4" />
@@ -18,9 +23,11 @@
   </ScrollPane>
   <HBox>
     <TextField
+      fx:id="messageInput"
       HBox.hgrow="ALWAYS"
       prefWidth="250"
       promptText="Ask Duke anything!"
+      onAction="#askQuery"
     />
     <Button text="Ask" onAction="#askQuery" />
   </HBox>

@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.util.List;
 import duke.TaskList;
 import duke.task.Task;
 
@@ -15,11 +14,9 @@ public class AddCommand extends Command {
     public ExecuteResult execute(TaskList tasks) {
         return new ExecuteResult(
                 tasks.add(addTask),
-                List.of(
-                        "Got it. I've added this task:",
-                        "  " + addTask,
-                        String.format("Now you have %d tasks in the list.", tasks.size() + 1)
-                ),
+                "Got it. I've added this task:\n"
+                + "  " + addTask + "\n"
+                + String.format("Now you have %d tasks in the list.", tasks.size() + 1),
                 true
         );
     }

@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.util.List;
 import duke.DukeException;
 import duke.TaskList;
 
@@ -16,11 +15,9 @@ public class DeleteCommand extends Command {
         if (deleteIndex >= 0 && deleteIndex < tasks.size()) {
             return new ExecuteResult(
                     tasks.remove(deleteIndex),
-                    List.of(
-                            "Noted. I've removed this task:",
-                            "  " + tasks.get(deleteIndex),
-                            String.format("Now you have %d tasks in the list", tasks.size() - 1)
-                    ),
+                    "Noted. I've removed this task:\n"
+                    + "  " + tasks.get(deleteIndex) + "\n"
+                    + String.format("Now you have %d tasks in the list", tasks.size() - 1),
                     true
             );
         } else {

@@ -15,16 +15,15 @@ public class AddCommandTest {
         final TaskList EMPTY_TASK_LIST = new TaskList();
 
         final TaskList EXPECTED_TASK_LIST = new TaskList(List.of(TODO));
-        final List<String> EXPECTED_MESSAGES = List.of(
-                "Got it. I've added this task:",
-                "  [T][\u2717] " + TODO_TITLE, // \u2717 = cross
-                "Now you have 1 tasks in the list."
-        );
+        final String EXPECTED_MESSAGE =
+                "Got it. I've added this task:\n"
+                + "  [T][\u2717] " + TODO_TITLE + "\n" // \u2717 = cross
+                + "Now you have 1 tasks in the list.";
 
         AddCommand addCommand = new AddCommand(TODO);
         ExecuteResult result = addCommand.execute(EMPTY_TASK_LIST);
 
         assertEquals(EXPECTED_TASK_LIST.getUnderlyingList(), result.getTasks().getUnderlyingList());
-        assertEquals(EXPECTED_MESSAGES, result.getMessages());
+        assertEquals(EXPECTED_MESSAGE, result.getMessage());
     }
 }

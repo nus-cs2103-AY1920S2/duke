@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.util.List;
 import duke.DukeException;
 import duke.TaskList;
 import duke.task.Task;
@@ -18,10 +17,8 @@ public class DoneCommand extends Command {
             Task doneTask = tasks.get(doneIndex).setDone(true);
             return new ExecuteResult(
                     tasks.set(doneIndex, doneTask),
-                    List.of(
-                            "Nice! I've marked this task as done:",
-                            "  " + doneTask
-                    ),
+                    "Nice! I've marked this task as done:\n"
+                    + "  " + doneTask,
                     true
             );
         } else {
