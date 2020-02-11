@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'duke'
@@ -22,6 +23,13 @@ run {
 
 checkstyle {
     toolVersion = '8.23'
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.3"
+    archiveClassifier = null
+    archiveAppendix = null
 }
 
 test {
