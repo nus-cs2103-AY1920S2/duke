@@ -76,6 +76,7 @@ public class Duke {
         case DONE:
             this.parser.checkDescriptionWhetherExit(str, "done".length());
             int requestNumber = parser.extractRequestNumber(st.nextToken());
+            assert requestNumber <= taskList.size() : "The number entered is invalid.";
             this.taskList.markDone(requestNumber);
             output += this.ui.doneMessage(requestNumber, taskList.getTasks());
             this.storage.rewriteFile(taskList);
@@ -84,6 +85,7 @@ public class Duke {
         case DELETE:
             this.parser.checkDescriptionWhetherExit(str, "delete".length());
             int requestNumber2 = parser.extractRequestNumber(st.nextToken());
+            assert requestNumber2 <= taskList.size() : "The number entered is invalid.";
             Task taskDeleted = this.taskList.delete(requestNumber2);
             output += this.ui.deleteMessage(requestNumber2, taskDeleted, this.taskList.size());
             this.storage.rewriteFile(taskList);
