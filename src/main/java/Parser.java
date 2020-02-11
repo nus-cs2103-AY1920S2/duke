@@ -25,6 +25,8 @@ public class Parser {
             splitter = " /by ";
         } else if (command.equals("event")) {
             splitter = " /at ";
+        } else if (command.equals("snooze")) {
+            splitter = (" /to ");
         }
 
         String[] descriptionSplit;
@@ -125,6 +127,9 @@ public class Parser {
                     break;
                 case "find":
                     toReturn = (ui.printOutFound(tasks.getMatches(getDescription())));
+                    break;
+                case "snooze":
+                    tasks.getTask(getIndex() -1).snooze(timing);
                     break;
                 case "event":
                     tasks.newEvent(getDescription(), getTiming());
