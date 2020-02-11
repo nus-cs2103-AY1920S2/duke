@@ -19,7 +19,7 @@ import java.util.Arrays;
  * Command to create a deadline.
  */
 public class NewDeadlineCommand extends Command {
-    private String[] inpArr;
+    private final String[] inpArr;
 
     /**
      * Generates the command.
@@ -27,11 +27,13 @@ public class NewDeadlineCommand extends Command {
      * @param inpArr  The input entered by user split by space
      */
     public NewDeadlineCommand(String[] inpArr) {
+        assert inpArr != null;
         this.inpArr = inpArr;
     }
 
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        assertExecuteNotNull(appStorage, ui, storage);
         TaskList taskList = appStorage.getTaskList();
         String description;
         String time;

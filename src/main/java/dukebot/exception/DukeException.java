@@ -6,7 +6,7 @@ import dukebot.ui.LineName;
  * Generic exception.
  */
 public class DukeException extends Throwable {
-    private LineName errorLineName;
+    private final LineName errorLineName;
 
     /**
      * Error with LineName.

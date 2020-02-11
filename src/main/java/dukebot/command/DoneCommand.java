@@ -14,7 +14,7 @@ import dukebot.util.MiscUtils;
  * Command to set task as done.
  */
 public class DoneCommand extends Command {
-    private String[] inpArr;
+    private final String[] inpArr;
 
     /**
      * Generates the command.
@@ -22,11 +22,13 @@ public class DoneCommand extends Command {
      * @param inpArr  The input entered by user split by space
      */
     public DoneCommand(String[] inpArr) {
+        assert inpArr != null;
         this.inpArr = inpArr;
     }
 
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        assertExecuteNotNull(appStorage, ui, storage);
         TaskList taskList = appStorage.getTaskList();
         if (inpArr.length == 1) {
             ui.sayLine(LineName.DONE_EMPTY);

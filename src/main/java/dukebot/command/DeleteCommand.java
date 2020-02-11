@@ -14,7 +14,7 @@ import dukebot.util.MiscUtils;
  * Command to delete a task.
  */
 public class DeleteCommand extends Command {
-    private String[] inpArr;
+    private final String[] inpArr;
 
     /**
      * Generates the command.
@@ -22,11 +22,13 @@ public class DeleteCommand extends Command {
      * @param inpArr  The input entered by user split by space
      */
     public DeleteCommand(String[] inpArr) {
+        assert inpArr != null;
         this.inpArr = inpArr;
     }
 
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        assertExecuteNotNull(appStorage, ui, storage);
         TaskList taskList = appStorage.getTaskList();
         if (inpArr.length == 1) {
             ui.sayLine(LineName.DELETE_EMPTY);

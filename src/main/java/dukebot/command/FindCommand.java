@@ -14,7 +14,7 @@ import java.util.Arrays;
  * Command to find a substring in a task's description.
  */
 public class FindCommand extends Command {
-    private String[] inpArr;
+    private final String[] inpArr;
 
     /**
      * Generates the command.
@@ -22,11 +22,13 @@ public class FindCommand extends Command {
      * @param inpArr  The input entered by user split by space
      */
     public FindCommand(String[] inpArr) {
+        assert inpArr != null;
         this.inpArr = inpArr;
     }
 
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        assertExecuteNotNull(appStorage, ui, storage);
         TaskList taskList = appStorage.getTaskList();
         String toFind = String.join(" ", Arrays.copyOfRange(inpArr, 1, inpArr.length));
         if (toFind.length() == 0) {

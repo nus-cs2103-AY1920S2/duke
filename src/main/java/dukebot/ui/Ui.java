@@ -276,8 +276,8 @@ public class Ui {
             // Fallthrough
         default:
             // Purely for testing, should never be called in deployment
-            assert false;
             dukeSays("There is an unexpected error :(");
+            assert false;
             break;
         }
     }
@@ -362,8 +362,8 @@ public class Ui {
             // Fallthrough
         default:
             // Purely for testing, should never be called in deployment
-            assert false;
             dukeSays("There is an unexpected error :(");
+            assert false;
             break;
         }
     }

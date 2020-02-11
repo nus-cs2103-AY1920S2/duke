@@ -32,6 +32,7 @@ public class RescheduleCommand extends Command {
 
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        assertExecuteNotNull(appStorage, ui, storage);
         TaskList taskList = appStorage.getTaskList();
         if (inpArr.length <= 2) {
             ui.sayLine(LineName.RESCHEDULE_EMPTY);

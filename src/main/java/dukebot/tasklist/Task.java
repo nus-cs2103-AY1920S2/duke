@@ -19,6 +19,9 @@ public abstract class Task implements Serializable {
     protected LocalDateTime dateTime;
 
     protected Task(String description, TaskType taskType, LocalDateTime dateTime) {
+        assert description != null;
+        assert !description.equals("");
+        assert taskType != null;
         this.taskType = taskType;
         this.dateTime = dateTime;
         this.description = description;

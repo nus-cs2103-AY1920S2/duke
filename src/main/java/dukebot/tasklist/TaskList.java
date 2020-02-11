@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Represents the task list.
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     /**
      * Generates a new TaskList.
@@ -14,6 +14,7 @@ public class TaskList {
      * @param taskList The task list to use.
      */
     public TaskList(ArrayList<Task> taskList) {
+        assert taskList != null;
         this.taskList = taskList;
     }
 
@@ -53,6 +54,7 @@ public class TaskList {
      * @param task Task to add.
      */
     public void addTask(Task task) {
+        assert task != null;
         this.taskList.add(task);
     }
 

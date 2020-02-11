@@ -13,8 +13,8 @@ import java.util.HashMap;
  * Changes phrase mapping of command.
  */
 public class AliasCommand extends Command {
-    private String[] inpArr;
-    private HashMap<String, CommandList> aliasMap;
+    private final String[] inpArr;
+    private final HashMap<String, CommandList> aliasMap;
 
     /**
      * Generates the command.
@@ -22,12 +22,15 @@ public class AliasCommand extends Command {
      * @param inpArr  The input entered by user split by space
      */
     public AliasCommand(String[] inpArr, HashMap<String, CommandList> aliasMap) {
+        assert inpArr != null;
+        assert aliasMap != null;
         this.aliasMap = aliasMap;
         this.inpArr = inpArr;
     }
 
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        assertExecuteNotNull(appStorage, ui, storage);
         if (inpArr.length >= 3) {
             String currentAlias = inpArr[1];
             String newAlias = inpArr[2];

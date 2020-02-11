@@ -13,7 +13,7 @@ public class Parser {
         CONFIRM_RESET_STORAGE;
     }
 
-    private HashMap<String, CommandList> aliasMap;
+    private final HashMap<String, CommandList> aliasMap;
     private ParserState parserState = ParserState.NORMAL;
 
     /**
@@ -32,6 +32,7 @@ public class Parser {
      * @param loadedAliasMap  Key is the default command, value is alias.
      */
     public Parser(HashMap<String, String> loadedAliasMap) {
+        assert loadedAliasMap != null;
         aliasMap = new HashMap<>();
         for (CommandList command: CommandList.values()) {
             String defaultValue = command.getDefaultCommand();
@@ -119,6 +120,8 @@ public class Parser {
             case TODO:
                 return new NewTodoCommand(inpArr);
             default:
+                // Should never happen as everything in aliasMap should be handled
+                assert false;
                 break;
             }
         } else {

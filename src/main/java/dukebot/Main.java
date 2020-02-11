@@ -22,6 +22,7 @@ public class Main extends Application {
         try {
             stage.setTitle("Waifu Simulator (Duke)");
             stage.getIcons().add(new Image("/images/duke_happy.png"));
+            stage.setResizable(false);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

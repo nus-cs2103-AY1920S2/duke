@@ -17,6 +17,7 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        assertExecuteNotNull(appStorage, ui, storage);
         TaskList taskList = appStorage.getTaskList();
         if (taskList.size() == 0) {
             ui.sayLine(LineName.LIST_EMPTY);

@@ -12,6 +12,7 @@ import dukebot.ui.Ui;
 public class ResetStorageCommand extends Command {
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        assertExecuteNotNull(appStorage, ui, storage);
         storage.clearStorage();
         ui.sayLine(LineName.RESET_STORAGE_SUCCESS);
     }

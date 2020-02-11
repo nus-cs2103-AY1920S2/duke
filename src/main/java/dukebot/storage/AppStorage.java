@@ -8,6 +8,8 @@ public class AppStorage {
     private ContactList contactList;
 
     public AppStorage(TaskList taskList, ContactList contactList) {
+        assert taskList != null;
+        assert contactList != null;
         this.taskList = taskList;
         this.contactList = contactList;
     }

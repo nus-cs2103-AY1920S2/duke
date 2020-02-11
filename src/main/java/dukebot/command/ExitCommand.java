@@ -12,6 +12,7 @@ import dukebot.ui.Ui;
 public class ExitCommand extends Command {
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        assertExecuteNotNull(appStorage, ui, storage);
         ui.sayLine(LineName.EXIT);
     }
 

@@ -16,7 +16,7 @@ import java.util.Arrays;
  * Command to create a new todo.
  */
 public class NewTodoCommand extends Command {
-    private String[] inpArr;
+    private final String[] inpArr;
 
     /**
      * Generates the command.
@@ -24,11 +24,13 @@ public class NewTodoCommand extends Command {
      * @param inpArr  The input entered by user split by space
      */
     public NewTodoCommand(String[] inpArr) {
+        assert inpArr != null;
         this.inpArr = inpArr;
     }
 
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
+        assertExecuteNotNull(appStorage, ui, storage);
         TaskList taskList = appStorage.getTaskList();
         String description;
         Task task;

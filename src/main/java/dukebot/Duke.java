@@ -2,7 +2,6 @@ package dukebot;
 
 import dukebot.command.Command;
 import dukebot.command.Parser;
-import dukebot.contactlist.ContactDetails;
 import dukebot.contactlist.ContactList;
 import dukebot.exception.DukeException;
 import dukebot.storage.AppStorage;
@@ -12,7 +11,6 @@ import dukebot.tasklist.TaskList;
 import dukebot.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Main logic.
