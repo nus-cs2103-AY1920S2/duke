@@ -38,6 +38,7 @@ public class TaskList {
     }
 
     public void markTaskAsDone(int index) throws OutOfRangeException {
+        assert tasks.size() > 0 : "TaskList should not be empty.";
         if (isValidTask(index)) {
             tasks.get(index).markAsDone();
         } else {

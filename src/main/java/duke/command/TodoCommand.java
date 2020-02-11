@@ -25,6 +25,7 @@ public class TodoCommand extends Command {
             throw new InsufficientArgumentsException("☹ OOPS!!! TODO description cannot be empty!");
         } else {
             Task newTask = new Todo(description);
+            assert newTask != null : "newTask should not be null.";
             tasks.addTask(newTask);
             Ui.displayAddTaskSuccessMsg(newTask, tasks.getNumberOfTasks());
             storage.storeTasks(tasks.getTasks());

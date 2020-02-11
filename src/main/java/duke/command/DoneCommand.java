@@ -27,6 +27,7 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.getTask(this.index);
+        assert task != null : "Task should not be null.";
         tasks.markTaskAsDone(this.index);
 
         Ui.printMessage("Nice! I've marked this task as done:\n\t" + task);

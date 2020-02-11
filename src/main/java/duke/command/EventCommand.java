@@ -31,6 +31,7 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task newTask = new Event(eventArgs[0], LocalDate.parse(eventArgs[1]));
+            assert newTask != null : "newTask should not be null.";
             tasks.addTask(newTask);
             Ui.displayAddTaskSuccessMsg(newTask, tasks.getNumberOfTasks());
             storage.storeTasks(tasks.getTasks());
