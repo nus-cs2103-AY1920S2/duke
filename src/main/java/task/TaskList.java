@@ -39,7 +39,7 @@ public class TaskList {
      */
     public void add(Task addedTask) {
         this.list.add(addedTask);
-    }
+     }
 
     /**
      * Removes a task from the task list.

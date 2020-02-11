@@ -65,4 +65,8 @@ public class ReminderCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    public boolean isUndoable() {
+        return false;
+    }
 }

@@ -48,4 +48,8 @@ public class DisplayCommand extends Command {
         return false;
     }
 
+    public boolean isUndoable() {
+        return false;
+    }
+
 }

@@ -50,4 +50,8 @@ public class ExitCommand extends Command {
         return true;
     }
 
+    public boolean isUndoable() {
+        return false;
+    }
+
 }

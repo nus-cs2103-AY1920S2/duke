@@ -42,4 +42,8 @@ public class AddCommand extends Command {
         return false;
     }
 
+    public boolean isUndoable() {
+        return true;
+    }
+
 }

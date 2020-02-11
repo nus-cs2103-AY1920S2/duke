@@ -49,4 +49,8 @@ public class ErrorCommand extends Command {
         return false;
     }
 
+    public boolean isUndoable() {
+        return false;
+    }
+
 }

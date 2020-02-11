@@ -52,4 +52,8 @@ public class FindCommand extends Command {
         return false;
     }
 
+    public boolean isUndoable() {
+        return false;
+    }
+
 }

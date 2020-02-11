@@ -47,7 +47,9 @@ public class Duke {
                 commandResult = c.undo(tasks, textUi, dukeStorage);
             } else {
                 c = Parser.parse(text.trim());
-                commandStack.push(c);
+                if (c.isUndoable()) {
+                    commandStack.push(c);
+                }
                 commandResult = c.execute(tasks, textUi, dukeStorage);
             }
             if(commandResult.equals("     It is time to say goodbye :(")){

@@ -69,4 +69,8 @@ public class DeleteCommand extends Command {
         return false;
     }
 
+    public boolean isUndoable() {
+        return true;
+    }
+
 }

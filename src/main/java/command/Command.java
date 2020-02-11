@@ -30,4 +30,6 @@ public abstract class Command {
     public abstract String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException;
 
     public abstract boolean isExit();
+
+    public abstract boolean isUndoable();
 }
