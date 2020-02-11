@@ -98,6 +98,8 @@ public class MainWindow extends AnchorPane {
             } else if (arrString[0].equalsIgnoreCase("find")) {
                 errMsg = "find";
                 handleDialogOutput(input, tasks.findTask(arrString[1]));
+            } else if (arrString[0].equalsIgnoreCase("help")) {
+                handleDialogOutput(input, Ui.helpCommand());
             } else {
                 handleDialogOutput(input, Ui.invalidCommand());
                 throw new DukeException(Ui.invalidCommand());

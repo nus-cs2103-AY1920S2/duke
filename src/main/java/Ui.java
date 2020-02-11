@@ -146,4 +146,17 @@ public class Ui {
         showLine();
         return botReplySb.toString().strip();
     }
+
+    public static String helpCommand() {
+        return "Oooooh seems like you need help.\n"
+                + "Here are some commands you can use: \n\n"
+                + "list \n--> to display your current list. \n\n"
+                + "todo <task name> \n--> adds a new todo to your list. \n\n"
+                + "event <event name> /at <date format yyyy-mm--dd> \n--> adds a new event to your list.\n\n"
+                + "deadline <deadline description> /by <date format yyyy--mm-dd> \n--> adds a new deadline to your list.\n\n"
+                + "done <task number> \n--> marks a todo || event || deadline as done.\n\n"
+                + "delete <task number> \n--> deletes a todo || event || deadline from the list. \n\n"
+                + "find <keyword> \n--> searches the list for tasks that contains the keyword specified. \n\n"
+                + "help \n--> to summon this guide again.";
+    }
 }
