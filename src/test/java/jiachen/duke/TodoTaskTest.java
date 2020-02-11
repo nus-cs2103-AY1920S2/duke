@@ -10,18 +10,18 @@ class TodoTaskTest {
     @Test
     void testInvalidConstructor() {
         Assertions.assertThrows(
-                InvalidDukeFormatException.class,
-                () -> {
-                    new TodoTask("");
-                });
+            InvalidDukeFormatException.class,
+            () -> {
+                new TodoTask("");
+            });
     }
 
     @Test
     void testConstructor() {
         Assertions.assertDoesNotThrow(
-                () -> {
-                    new TodoTask("this is a discription");
-                });
+            () -> {
+                new TodoTask("this is a discription");
+            });
     }
 
     @Test

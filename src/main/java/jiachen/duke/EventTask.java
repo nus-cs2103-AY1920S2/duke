@@ -20,7 +20,7 @@ public class EventTask extends Task {
      * @throws DateTimeParseException     the date time parse exception
      */
     public EventTask(String description, String at)
-            throws InvalidDukeFormatException, DateTimeParseException {
+        throws InvalidDukeFormatException, DateTimeParseException {
         super(description);
 
         if (at.isEmpty()) {
@@ -39,8 +39,8 @@ public class EventTask extends Task {
     @Override
     public String format() {
         return "E | "
-                + super.format()
-                + " | "
-                + DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm").format(this.at);
+            + super.format()
+            + " | "
+            + DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm").format(this.at);
     }
 }

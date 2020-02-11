@@ -12,10 +12,10 @@ public class Ui {
      */
     public String format(String message) {
         return formatSeparator()
-                + "\t"
-                + message
-                + "\n"
-                + formatSeparator();
+            + "\t"
+            + message
+            + "\n"
+            + formatSeparator();
     }
 
 
@@ -37,9 +37,9 @@ public class Ui {
      */
     public String formatRemoveTask(Task task) {
         return formatSeparator()
-                + "\t Noted. I've removed this task:\t\t"
-                + task + "\n"
-                + formatSeparator();
+            + "\t Noted. I've removed this task:\t\t"
+            + task + "\n"
+            + formatSeparator();
     }
 
     /**
@@ -50,9 +50,9 @@ public class Ui {
      */
     public String formatDoneTask(Task task) {
         return formatSeparator()
-                + "\t Nice! I've marked this task as done: \n\t\t"
-                + task
-                + formatSeparator();
+            + "\t Nice! I've marked this task as done: \n\t\t"
+            + task
+            + formatSeparator();
     }
 
     /**
@@ -80,13 +80,13 @@ public class Ui {
      */
     public String formatNewTask(Task task, int numOfTasks) {
         return formatSeparator()
-                + "\t Got it. I've added this task: \n"
-                + "\t\t"
-                + task
-                + "\n"
-                + "\t Now you have "
-                + numOfTasks
-                + " tasks in the list.\n" + formatSeparator();
+            + "\t Got it. I've added this task: \n"
+            + "\t\t"
+            + task
+            + "\n"
+            + "\t Now you have "
+            + numOfTasks
+            + " tasks in the list.\n" + formatSeparator();
     }
 
     /**

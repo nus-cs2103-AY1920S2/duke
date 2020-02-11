@@ -12,27 +12,27 @@ class EventTaskTest {
     @Test
     void testInvalidConstructor() {
         Assertions.assertThrows(
-                InvalidDukeFormatException.class,
-                () -> {
-                    new EventTask("", "");
-                });
+            InvalidDukeFormatException.class,
+            () -> {
+                new EventTask("", "");
+            });
     }
 
     @Test
     void testInvalidDateConstructor() {
         Assertions.assertThrows(
-                DateTimeParseException.class,
-                () -> {
-                    new EventTask("desc", "invalid date");
-                });
+            DateTimeParseException.class,
+            () -> {
+                new EventTask("desc", "invalid date");
+            });
     }
 
     @Test
     void testConstructor() {
         Assertions.assertDoesNotThrow(
-                () -> {
-                    new EventTask("this is a discription", "01/12/2020 0700");
-                });
+            () -> {
+                new EventTask("this is a discription", "01/12/2020 0700");
+            });
     }
 
     @Test

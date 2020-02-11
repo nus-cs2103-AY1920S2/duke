@@ -10,18 +10,18 @@ class DeadlineTaskTest {
     @Test
     void testInvalidConstructor() {
         Assertions.assertThrows(
-                InvalidDukeFormatException.class,
-                () -> {
-                    new DeadlineTask("", "");
-                });
+            InvalidDukeFormatException.class,
+            () -> {
+                new DeadlineTask("", "");
+            });
     }
 
     @Test
     void testConstructor() {
         Assertions.assertDoesNotThrow(
-                () -> {
-                    new DeadlineTask("this is a discription", "01/12/2020 0700");
-                });
+            () -> {
+                new DeadlineTask("this is a discription", "01/12/2020 0700");
+            });
     }
 
     @Test

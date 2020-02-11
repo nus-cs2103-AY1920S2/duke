@@ -239,8 +239,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText.toString(), user),
-                DialogBox.getDukeDialog(dukeText.toString(), duke)
+            DialogBox.getUserDialog(userText.toString(), user),
+            DialogBox.getDukeDialog(dukeText.toString(), duke)
         );
         userInput.clear();
     }
