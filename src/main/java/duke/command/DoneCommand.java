@@ -21,6 +21,8 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task t = tasks.markTaskAsDone(this.idx);
+            // No error means idx is in range and task has been assigned
+            assert (this.idx >= 0 && this.idx < tasks.getNumTasks()) && (t != null);
             storage.save(tasks.getTasks());
             String response = "Nice! I've marked this task as done:\n" + t;
             return response;
