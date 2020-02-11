@@ -57,14 +57,6 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Returns a boolean that determines if command exits the program.
-     * @return boolean.
-     */
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Checks task (deadline or event) for the presence of date.
      * @param deadlineOrEvent indicates whether method checks the event or deadline for
      *                        presence of date in task.

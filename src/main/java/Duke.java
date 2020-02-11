@@ -74,33 +74,6 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * Runs Duke program.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt").run();
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
