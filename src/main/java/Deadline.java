@@ -9,6 +9,7 @@ class Deadline extends Task {
     protected LocalDate dateBy;
     DateTimeFormatter formattedOutput = DateTimeFormatter.ofPattern("MMM d yyyy");
     DateTimeFormatter input = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    protected String taskType;
 
     /**
      * The constructor for Deadline tasks.
@@ -19,6 +20,7 @@ class Deadline extends Task {
     Deadline(String taskName, LocalDate dateBy) {
         super(taskName);
         this.dateBy = dateBy;
+        this.taskType = "deadline";
     }
 
     /**

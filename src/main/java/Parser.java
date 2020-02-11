@@ -30,8 +30,7 @@ class Parser {
         } else if (command.startsWith("find")) {
             return new FindCommand(command);
         } else {
-            throw new DukeException("");
+            throw new DukeException("That was an invalid input. Please try again.");
         }
-
     }
 }

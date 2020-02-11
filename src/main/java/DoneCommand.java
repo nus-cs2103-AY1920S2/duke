@@ -37,4 +37,13 @@ class DoneCommand extends Command {
         doneTask.markAsDone();
         System.out.println(doneTask + "\n");
     }
+
+    /**
+     * Returns true if the command is an ExitCommand and false otherwise.
+     * @return false
+     */
+    @Override
+    boolean isExit() {
+        return false;
+    }
 }

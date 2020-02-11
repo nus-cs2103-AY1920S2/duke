@@ -14,4 +14,13 @@ class ExitCommand extends Command {
     void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showByeMessage();
     }
+
+    /**
+     * Returns true if the command is an ExitCommand and false otherwise.
+     * @return false
+     */
+    @Override
+    boolean isExit() {
+        return true;
+    }
 }
