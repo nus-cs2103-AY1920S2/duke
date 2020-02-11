@@ -33,9 +33,9 @@ public class Ui {
 
     public String showDone(Tracker tracker, int index, Storage storage) {
         assert index <= tracker.getTotalTasks(): "Index given exceeds total tasks";
-        String output = "Nice! I've marked this task as done\n";
         tracker.markDone(index);
-        output += "  " + tracker.showList().get(index);
+        String output = "Nice! I've marked this task as done\n"
+                + "  " + tracker.showList().get(index);
         storage.saveData(tracker.showList());
 
         return output;
@@ -43,8 +43,8 @@ public class Ui {
 
     public String showDelete(Tracker tracker, int index, Storage storage) {
         assert index <= tracker.getTotalTasks(): "Index given exceeds total tasks";
-        String output = "Noted. I've removed this task:\n";
-        output += "  " + tracker.showList().get(index);
+        String output = "Noted. I've removed this task:\n"
+                + "  " + tracker.showList().get(index);
         tracker.delete(index);
         storage.saveData(tracker.showList());
 
@@ -53,9 +53,9 @@ public class Ui {
 
     public String showAddedTask(Tracker tracker, Parser content, Storage storage) {
         tracker.add(content.getTask());
-        String output = "Got it. I've added this task:\n";
-        output += "  " + content.getTask() + "\n";
-        output += "Now you have " + tracker.getTotalTasks() + " task(s) in the list.";
+        String output = "Got it. I've added this task:\n"
+                + "  " + content.getTask() + "\n" + "Now you have "
+                + tracker.getTotalTasks() + " task(s) in the list.";
         storage.saveData(tracker.showList());
 
         return output;
