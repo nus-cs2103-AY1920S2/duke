@@ -7,6 +7,8 @@ import duke.Ui;
 
 import task.Task;
 
+import java.io.IOException;
+
 /**
  * A command object for changing task's status to done.
  */
@@ -32,11 +34,15 @@ public class DoneCommand extends Command {
         try {
             Task updatedTask = tasks.get(this.taskNumber - 1).setDone();
             tasks.set(this.taskNumber - 1, updatedTask);
-            storage.updateDrive(updatedTask);
-            return ui.showDone(updatedTask);
+            storage.deleteFromFile(this.taskNumber);
+            storage.updateFile(updatedTask);
+            return Ui.showDone(updatedTask);
         } catch (IndexOutOfBoundsException e) {
-            return ui.showException(new DukeException(
+            return Ui.showException(new DukeException(
                     "☹ OOPS!!! The description of a done cannot be empty."));
+        } catch (IOException e) {
+            return Ui.showException(new DukeException(
+                    "☹ OOPS!!! The file of duke.txt can't be updated, list not updated."));
         }
     }
 }

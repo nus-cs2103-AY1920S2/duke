@@ -7,6 +7,9 @@ import duke.Ui;
 
 import task.Task;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  * A command object for deleting tasks from the list.
  */
@@ -32,11 +35,17 @@ public class DeleteCommand extends Command {
         try {
             Task removedTask = tasks.get(taskNumber - 1);
             tasks.remove(removedTask);
-            storage.deleteDrive(taskNumber);
-            return ui.showRemove(removedTask, tasks.size());
+            storage.deleteFromFile(taskNumber);
+            return Ui.showRemove(removedTask, tasks.size());
         } catch (IndexOutOfBoundsException e) {
-            return ui.showException(new DukeException(
+            return Ui.showException(new DukeException(
                     "☹ OOPS!!! The description of a delete cannot be empty."));
+        } catch (FileNotFoundException e) {
+            return Ui.showException(new DukeException(
+                    "☹ OOPS!!! The file of duke.txt can't be found, list not updated."));
+        } catch (IOException e) {
+            return Ui.showException(new DukeException(
+                    "☹ OOPS!!! The file of duke.txt can't be updated, list not updated."));
         }
     }
 }

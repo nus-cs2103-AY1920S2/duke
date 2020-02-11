@@ -28,6 +28,6 @@ public class FindCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filtered = tasks.filter(this.keyword);
-        return ui.showFindings(filtered);
+        return Ui.showFindings(filtered);
     }
 }

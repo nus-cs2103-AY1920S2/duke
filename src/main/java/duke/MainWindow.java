@@ -57,6 +57,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        checkExit(response);
+    }
+
+    /**
+     * Checks whether the chat bot has delivered its farewell message.
+     * @param response The response form chat bot.
+     */
+    private void checkExit(String response) {
         if (response.equals(Ui.showBye())) {
             Stage stage = (Stage) scrollPane.getScene().getWindow();
             stage.close();
