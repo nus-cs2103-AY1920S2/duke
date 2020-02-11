@@ -24,16 +24,16 @@ public class AddCommand extends Command {
     @Override
     public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Add task to the list
-        TaskList newList = tasks.addTask(task);
+        TaskList newTasks = tasks.addTask(task);
 
         ui.showAdd(task);
         ui.showLineBreak(2);
-        ui.showTaskCount(newList);
+        ui.showTaskCount(newTasks);
 
         // Save immediately
-        storage.save(newList);
+        storage.save(newTasks);
 
-        return newList;
+        return newTasks;
     }
 
     @Override

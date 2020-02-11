@@ -46,8 +46,7 @@ public class Ui {
      * @return a welcome message in the chat-bot.
      */
     public String getWelcome() {
-        String header = indent("Hello from\n" + LOGO, 4);
-        return header;
+        return "Hello from\n" + LOGO;
     }
 
     /**

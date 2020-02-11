@@ -23,25 +23,23 @@ public class DeleteCommand extends Command {
 
     @Override
     public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        // Check if task number is valid
-        if (0 < taskId && taskId <= tasks.getNumTasks()) {
-            // Extract the deleted task
-            Task deletedTask = tasks.get(taskId);
-            TaskList newList = tasks.deleteTask(taskId);
-
-            ui.showDelete(deletedTask);
-            ui.showLineBreak(2);
-            ui.showTaskCount(newList);
-
-            // Save immediately
-            storage.save(newList);
-
-            return newList;
-
-        } else {
-            // Invalid task number
+        // Invalid task number
+        if (taskId <= 0 || taskId > tasks.getNumTasks()) {
             throw new DukeException("Your task number does not exist.");
         }
+
+        // Extract the deleted task
+        Task deletedTask = tasks.get(taskId);
+        TaskList newTasks = tasks.deleteTask(taskId);
+
+        ui.showDelete(deletedTask);
+        ui.showLineBreak(2);
+        ui.showTaskCount(newTasks);
+
+        // Save immediately
+        storage.save(newTasks);
+
+        return newTasks;
     }
 
     @Override

@@ -28,6 +28,8 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        isExit = false;
+
         try {
             tasks = new TaskList(storage.load()); // Load from file if possible
             isLoaded = true;
@@ -35,7 +37,6 @@ public class Duke {
             tasks = new TaskList(); // Start a brand new task list if file cannot be found/opened.
             isLoaded = false;
         }
-        isExit = false;
     }
 
     /**

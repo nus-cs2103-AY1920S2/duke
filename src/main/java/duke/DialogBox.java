@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
 import javafx.scene.Node;
@@ -46,6 +47,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setPadding(new Insets(0, 20, 0,0));
         displayPicture.setImage(img);
     }
 
@@ -53,10 +55,11 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        ObservableList<Node> node = FXCollections.observableArrayList(this.getChildren());
+        FXCollections.reverse(node);
+        this.getChildren().setAll(node);
+        this.setAlignment(Pos.TOP_LEFT);
+        dialog.setPadding(new Insets(0, 0, 0,20));
     }
 
     /**
@@ -78,7 +81,7 @@ public class DialogBox extends HBox {
      * @return a dialog box for Duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }
