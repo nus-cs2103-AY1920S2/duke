@@ -51,10 +51,12 @@ public class Parser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
-//            case HelpCommand.COMMAND_WORD: // Fallthrough
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
         default:
-            assert false : commandWord;
-            return new ExitCommand();
+            //assert false : commandWord;
+            return new HelpCommand();
         }
     }
 
@@ -78,7 +80,7 @@ public class Parser {
             desc = items[0];
             date = LocalDate.parse(items[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Incorrect arguments please try again.");
+            System.out.println("Incorrect arguments please try again. Use \"help\" to see commands");
         }
 
         return new EventCommand(desc, date);
@@ -100,7 +102,7 @@ public class Parser {
             desc = items[0];
             date = LocalDate.parse(items[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Incorrect arguments please try again.");
+            System.out.println("Incorrect arguments please try again. Use \"help\" to see commands");
         }
 
         return new DeadlineCommand(desc, date);
