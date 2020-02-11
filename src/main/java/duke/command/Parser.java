@@ -30,6 +30,7 @@ public class Parser {
      */
     public String executeCommand(String inputCommand) {
 
+
         String[] commandSplit = inputCommand.split(" ");
         String basicCommand = commandSplit[0];
         if (basicCommand.equals("list")) {
@@ -41,8 +42,6 @@ public class Parser {
 
             // Checks the task as 'Done'
             return this.listOfTasks.done(commandSplit[1]);
-
-
 
         } else if (basicCommand.equals("todo") || basicCommand.equals("deadline") || basicCommand.equals("event")) {
 
@@ -56,7 +55,6 @@ public class Parser {
                 // Adds the task into the list of tasks
                 return this.listOfTasks.add(type, inputCommand);
 
-
             } catch (DukeException dukeException) {
                 System.out.println(dukeException);
             } catch (Exception e) {
@@ -65,6 +63,7 @@ public class Parser {
         } else if (basicCommand.equals("delete")) {
 
             // Deletes the task
+
             return this.listOfTasks.delete(commandSplit[1]);
 
         } else if (basicCommand.equals("find")) {

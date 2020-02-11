@@ -19,7 +19,6 @@ public class DukeUserInterface {
     private static final String OPENING_GREETING = "     Hello! I'm Duke\n" + "     What can I do for you?";
     private static final String FAREWELL_CLOSING = "Poyo! (Bye. Hope to see you again soon! UwU)";
 
-
     private InputStreamReader stringReader;
     private BufferedReader commandReader;
 
@@ -63,6 +62,7 @@ public class DukeUserInterface {
             String input = commandReader.readLine();
 
             while (!input.equals("bye")) {
+
                 String response = commandParser.executeCommand(input);
                 input = commandReader.readLine();
             }

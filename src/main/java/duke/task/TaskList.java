@@ -22,7 +22,6 @@ public class TaskList {
     private final static String TASK_ADD_MESSAGE = "Got it. I've added this task:";
     private final static String DELETE_MESSAGE = "Noted. I've removed this task:";
 
-
     /**
      * TaskList holds the list of tasks that are in the Duke program.
      * TaskList is also the class that executes the given commands.
@@ -83,7 +82,6 @@ public class TaskList {
      * @param inputCommand Full input command.
      */
     public String add(String type, String inputCommand) {
-
 
         try {
             
@@ -148,6 +146,5 @@ public class TaskList {
         output += "\n" + this.storageData.get(task_Done - 1);
 
         return output;
-
     }
 }
