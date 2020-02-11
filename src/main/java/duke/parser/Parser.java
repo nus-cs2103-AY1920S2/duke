@@ -13,6 +13,25 @@ public class Parser {
      * @return new Command object
      */
     public static Command parse(String cmdLine) {
-        return new Command(new Scanner(cmdLine));
+        Scanner sc = new Scanner(cmdLine);
+        String first = sc.next();
+        switch(first) {
+            case "todo":
+            case "deadline":
+            case "event":
+                return new AddTaskCommand(first, sc);
+            case "list":
+                return new ListCommand(sc);
+            case "delete":
+                return new DeleteCommand(sc);
+            case "find":
+                return new FindCommand(sc);
+            case "done":
+                return new MarkAsDoneCommand(sc);
+            case "exit":
+                return new ExitCommand(sc);
+            default:
+                return new Command(sc);
+        }
     }
 }

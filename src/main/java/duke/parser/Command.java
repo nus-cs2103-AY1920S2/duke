@@ -9,9 +9,7 @@ import duke.storage.Storage;
 import duke.ui.UiText;
 
 import java.util.Scanner;
-
 import java.util.List;
-
 import java.util.stream.Collectors;
 
 public class Command {
@@ -22,29 +20,42 @@ public class Command {
     }
 
     /**
-     * Add new user task into task list
+     * execute the command with the given elements
      *
-     * @param first   = task type specified by user
-     * @param terms   = subsequent terms specified by to define the task
-     * @param tasks   = task list
-     * @param ui      = ui for responding to user after adding the new task
-     * @param storage = save to local file after every changes to task list
-     * @return task successfully added?
+     * @param tasks   = tasklist
+     * @param ui      = ui to respond to user
+     * @param storage = to store data to local file
+     * @return task successfully executed?
      */
-    static boolean addTask(String first, Scanner terms, TaskList tasks, UiText ui, Storage storage) {
+    public boolean execute(TaskList tasks, UiText ui, Storage storage) {
+        ui.respond(UiText.dunno);
+        return false;
+    }
+}
+
+class AddTaskCommand extends Command {
+    private String first;
+
+    public AddTaskCommand(String first, Scanner sc) {
+        super(sc);
+        this.first = first;
+    }
+
+    @Override
+    public boolean execute(TaskList tasks, UiText ui, Storage storage) {
         Task t = null;
         try {
-            switch (first) {
+            switch (this.first) {
                 case "todo":
-                    t = new ToDoTask(terms.nextLine().trim());
+                    t = new ToDoTask(this.terms.nextLine().trim());
                     break;
                 case "deadline":
-                    t = new DeadlineTask(terms.useDelimiter("/").next().trim(), terms.useDelimiter(" ").next().substring(1),
-                            terms.nextLine());
+                    t = new DeadlineTask(this.terms.useDelimiter("/").next().trim(), this.terms.useDelimiter(" ").next().substring(1),
+                            this.terms.nextLine());
                     break;
                 case "event":
-                    t = new EventTask(terms.useDelimiter("/").next().trim(), terms.useDelimiter(" ").next().substring(1),
-                            terms.nextLine());
+                    t = new EventTask(this.terms.useDelimiter("/").next().trim(), this.terms.useDelimiter(" ").next().substring(1),
+                            this.terms.nextLine());
                     break;
                 default:
             }
@@ -62,75 +73,77 @@ public class Command {
             return false;
         }
     }
+}
 
-    private static void listTask(TaskList tasks, UiText ui) {
+class ListCommand extends Command {
+    public ListCommand(Scanner sc) {
+        super(sc);
+    }
+
+    @Override
+    public boolean execute(TaskList tasks, UiText ui, Storage storage) {
         List<Task> lst = tasks.getTaskList();
         ui.start("Here are the tasks in your list:");
         ui.respondLine(lst.stream().map(x -> "" + (lst.indexOf(x) + 1) + "." + x).collect(Collectors.toList()));
         ui.over();
+        return true;
+    }
+}
+
+class FindCommand extends Command {
+    public FindCommand(Scanner sc) {
+        super(sc);
     }
 
-    private static void findTask(Scanner terms, TaskList tasks, UiText ui) {
-        List<Task> lst = tasks.find(terms.next());
+    @Override
+    public boolean execute(TaskList tasks, UiText ui, Storage storage) {
+        List<Task> lst = tasks.find(this.terms.next());
         ui.start("Here are the matching tasks in your list:");
         ui.respondLine(lst.stream().map(x -> "" + (lst.indexOf(x) + 1) + "." + x).collect(Collectors.toList()));
         ui.over();
+        return true;
+    }
+}
+
+class DeleteCommand extends Command {
+    public DeleteCommand(Scanner sc) {
+        super(sc);
     }
 
-    private static void markAsDone(Scanner terms, TaskList tasks, UiText ui) {
-        int num = Integer.parseInt(terms.next()) - 1;
-        tasks.get(num).setToDone();
-        ui.respond(UiText.taskDoneNote, tasks.get(num).toString());
-    }
-
-    private static void remove(Scanner terms, TaskList tasks, UiText ui) {
-        int num = Integer.parseInt(terms.next()) - 1;
+    @Override
+    public boolean execute(TaskList tasks, UiText ui, Storage storage) {
+        int num = Integer.parseInt(this.terms.next()) - 1;
         ui.respond("Got it. I've removed this task:", "  " + tasks.remove(num).toString(),
                 "Now you have " + tasks.count() + " tasks in the list.");
+        storage.save(tasks.getTaskList());
+        return true;
+    }
+}
+
+class MarkAsDoneCommand extends Command {
+    public MarkAsDoneCommand(Scanner sc) {
+        super(sc);
     }
 
-    /**
-     * execute the command with the given elements
-     *
-     * @param tasks   = tasklist
-     * @param ui      = ui to respond to user
-     * @param storage = to store data to local file
-     * @return task successfully executed?
-     */
+    @Override
     public boolean execute(TaskList tasks, UiText ui, Storage storage) {
-        String first = this.terms.next();
-
-        try {
-            if (!addTask(first, this.terms, tasks, ui, storage)) {
-                switch (first) {
-                    case "exit":
-                        ui.respond(UiText.bye);
-                        System.exit(0);
-                        break;
-                    case "list":
-                        listTask(tasks, ui);
-                        break;
-                    case "find":
-                        findTask(this.terms, tasks, ui);
-                        break;
-                    case "done":
-                        markAsDone(this.terms, tasks, ui);
-                        storage.save(tasks.getTaskList());
-                        break;
-                    case "delete":
-                        remove(this.terms, tasks, ui);
-                        storage.save(tasks.getTaskList());
-                        break;
-                    default:
-                        ui.respond(UiText.dunno);
-                        return false;
-                }
-            }
-        } catch (Exception e) {
-            ui.respond(UiText.dunno);
-            return false;
-        }
+        int num = Integer.parseInt(this.terms.next()) - 1;
+        tasks.get(num).setToDone();
+        ui.respond(UiText.taskDoneNote, tasks.get(num).toString());
+        storage.save(tasks.getTaskList());
         return true;
+    }
+}
 
+class ExitCommand extends Command {
+    public ExitCommand(Scanner sc) {
+        super(sc);
+    }
+
+    @Override
+    public boolean execute(TaskList tasks, UiText ui, Storage storage) {
+        ui.respond(UiText.bye);
+        System.exit(0);
+        return true;
     }
 }
