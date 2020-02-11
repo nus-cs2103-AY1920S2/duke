@@ -18,14 +18,7 @@ import java.time.format.DateTimeParseException;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     // Empty constructor required for duke.main.Launcher
     public Duke() {
     }
