@@ -74,15 +74,6 @@ public class Ui {
     }
 
     /**
-     * Shows invalid command message to user.
-     *
-     * @param message message of invalid command
-     */
-    public void showInvalid(String message) {
-        showToUser(INVALID_TASK, message);
-    }
-
-    /**
      * Shows all current tasks to user.
      *
      * @param tasks list of all tasks

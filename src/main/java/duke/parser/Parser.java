@@ -3,13 +3,14 @@ package duke.parser;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
-import duke.command.InvalidCommand;
 import duke.command.EventCommand;
 import duke.command.DeadlineCommand;
 import duke.command.TodoCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ListCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,7 +33,7 @@ public class Parser {
      * @param fullCommand full user input string
      * @return the command based on the user input
      */
-    public static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand) throws InvalidCommandException {
         String[] command = fullCommand.split(" ", 2);
         switch (command[0]) {
 
@@ -61,7 +62,7 @@ public class Parser {
             return prepareExit(command);
 
         default:
-            return new InvalidCommand(UNKNOWN_ERROR);
+            throw new InvalidCommandException(UNKNOWN_ERROR);
         }
     }
 
@@ -71,12 +72,12 @@ public class Parser {
      * @param command full user command array
      * @return the find command
      */
-    private static Command prepareFind(String[] command) {
+    private static Command prepareFind(String[] command) throws InvalidCommandException {
         try {
             String keyword = command[1];
             return new FindCommand(keyword);
         } catch (IndexOutOfBoundsException ex) {
-            return new InvalidCommand(INCOMPLETE_ERROR);
+            throw new InvalidCommandException(INCOMPLETE_ERROR);
         }
     }
 
@@ -86,9 +87,9 @@ public class Parser {
      * @param command full user command array
      * @return the exit command
      */
-    private static Command prepareExit(String[] command) {
+    private static Command prepareExit(String[] command) throws InvalidCommandException {
         if (command.length > 1) {
-            return new InvalidCommand(EXTRA_ERROR);
+            throw new InvalidCommandException(EXTRA_ERROR);
         }
         return new ExitCommand();
     }
@@ -99,16 +100,16 @@ public class Parser {
      * @param command full user command array
      * @return the event command
      */
-    private static Command prepareEvent(String[] command) {
+    private static Command prepareEvent(String[] command) throws InvalidCommandException {
         try {
             String[] commandSplit = command[1].split(" /at ", 2);
             String desc = commandSplit[0];
             LocalDateTime dateTime = LocalDateTime.parse(commandSplit[1], IN_FORMATTER);
             return new EventCommand(desc, dateTime);
         } catch (IndexOutOfBoundsException ex) {
-            return new InvalidCommand(INCOMPLETE_ERROR);
+            throw new InvalidCommandException(INCOMPLETE_ERROR);
         } catch (DateTimeParseException ex) {
-            return new InvalidCommand(DATETIME_ERROR);
+            throw new InvalidCommandException(DATETIME_ERROR);
         }
     }
 
@@ -118,16 +119,16 @@ public class Parser {
      * @param command full user command array
      * @return the deadline command command
      */
-    private static Command prepareDeadline(String[] command) {
+    private static Command prepareDeadline(String[] command) throws InvalidCommandException {
         try {
             String[] commandSplit = command[1].split(" /by ", 2);
             String desc = commandSplit[0];
             LocalDateTime dateTime = LocalDateTime.parse(commandSplit[1], IN_FORMATTER);
             return new DeadlineCommand(desc, dateTime);
         } catch (IndexOutOfBoundsException ex) {
-            return new InvalidCommand(INCOMPLETE_ERROR);
+            throw new InvalidCommandException(INCOMPLETE_ERROR);
         } catch (DateTimeParseException ex) {
-            return new InvalidCommand(DATETIME_ERROR);
+            throw new InvalidCommandException(DATETIME_ERROR);
         }
     }
 
@@ -137,12 +138,12 @@ public class Parser {
      * @param command full user command array
      * @return the todo command command
      */
-    private static Command prepareTodo(String[] command) {
+    private static Command prepareTodo(String[] command) throws InvalidCommandException {
         try {
             String desc = command[1];
             return new TodoCommand(desc);
         } catch (IndexOutOfBoundsException ex) {
-            return new InvalidCommand(INCOMPLETE_ERROR);
+            throw new InvalidCommandException(INCOMPLETE_ERROR);
         }
     }
 
@@ -152,17 +153,17 @@ public class Parser {
      * @param command full user command array
      * @return the delete command command
      */
-    private static Command prepareDelete(String[] command) {
+    private static Command prepareDelete(String[] command) throws InvalidCommandException {
         try {
             int index = Integer.parseInt(command[1]);
             if (command.length > 2) {
-                return new InvalidCommand(EXTRA_ERROR);
+                throw new InvalidCommandException(EXTRA_ERROR);
             }
             return new DeleteCommand(index);
         } catch (IndexOutOfBoundsException ex) {
-            return new InvalidCommand(INCOMPLETE_ERROR);
+            throw new InvalidCommandException(INCOMPLETE_ERROR);
         } catch (NumberFormatException ex) {
-            return new InvalidCommand(NUMBER_ERROR);
+            throw new InvalidCommandException(NUMBER_ERROR);
         }
     }
 
@@ -172,17 +173,17 @@ public class Parser {
      * @param command full user command array
      * @return the done command command
      */
-    private static Command prepareDone(String[] command) {
+    private static Command prepareDone(String[] command) throws InvalidCommandException {
         try {
             int index = Integer.parseInt(command[1]);
             if (command.length > 2) {
-                return new InvalidCommand(EXTRA_ERROR);
+                throw new InvalidCommandException(EXTRA_ERROR);
             }
             return new DoneCommand(index);
         } catch (IndexOutOfBoundsException ex) {
-            return new InvalidCommand(INCOMPLETE_ERROR);
+            throw new InvalidCommandException(INCOMPLETE_ERROR);
         } catch (NumberFormatException ex) {
-            return new InvalidCommand(NUMBER_ERROR);
+            throw new InvalidCommandException(NUMBER_ERROR);
         }
     }
 
@@ -192,9 +193,9 @@ public class Parser {
      * @param command full user command array
      * @return the list command command
      */
-    private static Command prepareList(String[] command) {
+    private static Command prepareList(String[] command) throws InvalidCommandException {
         if (command.length > 1) {
-            return new InvalidCommand(EXTRA_ERROR);
+            throw new InvalidCommandException(EXTRA_ERROR);
         }
         return new ListCommand();
     }
