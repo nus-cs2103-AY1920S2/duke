@@ -20,7 +20,7 @@ public class Todo extends Item {
      * used for string substitution in the txt file when it is marked done.
      */
     public String replace() {
-        String temp = "   [T][✗] " + super.getName() + "\n";
+        String temp = "   [T]["+ "\u2718" +"] " + super.getName() + "\n";
         return temp;
     }
 

@@ -17,9 +17,9 @@ public abstract class Item {
     public String toString() {
         String temp = "[";
         if (this.done) {
-            temp += "✓";
+            temp += "\u2713";
         } else {
-            temp += "✗";
+            temp += "\u2718";
         }
         temp += "] " + this.name;
         return temp;

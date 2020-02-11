@@ -36,9 +36,9 @@ public class Parser {
                 return ui.bye();
             } else if (tmp[0].equals("done") || tmp[0].equals("delete")) {
                 if (tmp.length < 2) {
-                    return ("☹ OOPS!!! The index of a task cannot be empty.");
+                    return ("OOPS!!! The index of a task cannot be empty.");
                 } else if (Integer.parseInt(tmp[1]) > list.items.size()) {
-                    return ("☹ OOPS!!! The index of a task is out of range.");
+                    return ("OOPS!!! The index of a task is out of range.");
                 }
                 int index = Integer.parseInt(tmp[1]);
                 if (tmp[0].equals("done")) {
@@ -85,7 +85,7 @@ public class Parser {
             }  else if (tmp[0].equals("find")) {
                 return ui.searchTask() + list.search(task);
             } else {
-                return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (IllegalInstructionException e) {
             System.err.println(e.getMessage());

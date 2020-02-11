@@ -54,11 +54,11 @@ public class Ui {
     }
 
     public void printIOerr() {
-        System.err.println(space + "☹ The format of io is wrong.");
+        System.err.println(space + "The format of io is wrong.");
     }
 
     public void printDateErr() {
-        System.err.println(space + "☹ OOPS!!! The format of date is wrong (yyyy-MM-dd).");
+        System.err.println(space + "OOPS!!! The format of date is wrong (yyyy-MM-dd).");
     }
 
     public void printLoad() {
@@ -66,7 +66,7 @@ public class Ui {
     }
     
     public void printIndexErr() {
-        System.err.println(space + "☹ OOPS!!! The format of index is wrong.");
+        System.err.println(space + "OOPS!!! The format of index is wrong.");
     }
 
 }

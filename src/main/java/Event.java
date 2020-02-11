@@ -31,7 +31,7 @@ public class Event extends Item {
      * in the txt file when it is marked done.
      */
     public String replace() {
-        String temp = "   [E][✗] " + super.getName() + " (at: " + date + ")\n";
+        String temp = "   [E]["+ "\u2718" +"] "+ super.getName() + " (at: " + date + ")\n";
         return temp;
     }
 

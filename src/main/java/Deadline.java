@@ -33,7 +33,7 @@ public class Deadline extends Item {
      * used for string substitution in the txt file when it is marked done.
      */
     public String replace() {
-        String temp = "   [D][✗] " + super.getName() + " (by: " + date + ")\n";
+        String temp =  "   [D]["+ "\u2718" +"] " + super.getName() + " (by: " + date + ")\n";
         return temp;
     }
 
