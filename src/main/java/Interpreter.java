@@ -10,7 +10,7 @@ import com.duke.DukeResponse;
 
 /**
  * 
- * Get responses
+ * Get responses 
  */
 public class Interpreter {
 	static private final String separation = "_________________________________________________";
