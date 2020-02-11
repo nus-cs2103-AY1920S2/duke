@@ -205,6 +205,7 @@ Removes a given task from DUKE, so that DUKE will no longer keep track of this t
           2. [T][X] Take a nap
           3. [E][ ] Lab (at: Thu, 13 Feb 2020, 14:00)
         }
+
     Notice that the `Submit work` task has been removed.
 
 ---
@@ -234,6 +235,7 @@ Marks a given task tracked by DUKE as done. Tasks are identified by their  index
           3. [T][X] Take a nap
           4. [E][ ] Lab (at: Thu, 13 Feb 2020, 14:00)
         }
+
     Notice that the completion status for the second task has now changed from `[ ]` to `[X]`.
 
 ---
@@ -276,4 +278,5 @@ Quits the program gracefully.
   * Shows:
 
         Goodbye!
+
     and exits the application gracefully.
