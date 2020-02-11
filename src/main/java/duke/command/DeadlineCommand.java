@@ -31,6 +31,7 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task newTask = new Deadline(deadlineArgs[0], LocalDate.parse(deadlineArgs[1]));
+            assert newTask != null : "newTask should not be null.";
             tasks.addTask(newTask);
             ui.displayAddTaskSuccessMsg(newTask, tasks.getNumberOfTasks());
             storage.storeTasks(tasks.getTasks());
