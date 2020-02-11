@@ -42,6 +42,24 @@ public class Deadline extends Task {
     }
 
     /**
+     * Gets the due date of the deadline task.
+     *
+     * @return the due date of the deadline task.
+     */
+    public LocalDate getByDate() {
+        return byDate;
+    }
+
+    /**
+     * Gets the time the deadline task is due.
+     *
+     * @return the time the deadline task is due.
+     */
+    public LocalTime getByTime() {
+        return byTime;
+    }
+
+    /**
      * Gets the string representation of the deadline task used for saving.
      *
      * @return the string representation of the deadline task to be used for saving.

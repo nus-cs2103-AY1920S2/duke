@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.exception.InvalidCommandException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +88,70 @@ public class TaskList {
         String relevantTasksRepresentation = "";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(searchPhrase)) {
+                relevantTasksRepresentation += String.format("%d. %s\n", (i + 1), tasks.get(i));
+            }
+        }
+        return relevantTasksRepresentation;
+    }
+
+    /**
+     * Finds the list of all tasks that is expiring up to specified number of days from today.
+     * The list is ordered by deadlines first followed by events.
+     *
+     * @param daysFromToday how many days from today to look at.
+     * @return the string representation of the expiring tasks.
+     */
+    public String findAllExpiringTasks(int daysFromToday) {
+        String relevantTasksRepresentation = findExpiringDeadlines(daysFromToday) + findExpiringEvents(daysFromToday);
+        return relevantTasksRepresentation;
+    }
+
+    /**
+     * Finds the list of deadline that is due in the next specified number of days from today.
+     *
+     * @param daysFromToday how many days from today to look at.
+     * @return the string representation of the filtered deadlines.
+     */
+    public String findExpiringDeadlines(int daysFromToday) {
+        LocalDate currentDate = LocalDate.now();
+        String relevantTasksRepresentation = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            if (currentTask instanceof Deadline) {
+                LocalDate deadlineDate = ((Deadline) currentTask).getByDate();
+                if (deadlineDate.isAfter(currentDate.plusDays(daysFromToday))
+                        || deadlineDate.isBefore(currentDate)) {
+                    continue;
+                } else if (deadlineDate.isEqual(currentDate)
+                        && ((Deadline) currentTask).getByTime().isBefore(LocalTime.now())) {
+                    continue;
+                }
+                relevantTasksRepresentation += String.format("%d. %s\n", (i + 1), tasks.get(i));
+            }
+        }
+        return relevantTasksRepresentation;
+    }
+
+    /**
+     * Finds the list of events that is happening in the next specified number of days from today.
+     *
+     * @param daysFromToday how many days from today to look at.
+     * @return the string representation of the filtered events.
+     */
+    public String findExpiringEvents(int daysFromToday) {
+        LocalDate currentDate = LocalDate.now();
+        String relevantTasksRepresentation = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            if (tasks.get(i) instanceof Event) {
+                LocalDate eventDate = ((Event) currentTask).getAtDate();
+                if (eventDate.isAfter(currentDate.plusDays(daysFromToday))
+                        || eventDate.isBefore(currentDate)) {
+                    continue;
+                } else if (eventDate.isEqual(currentDate)
+                        && ((Event) currentTask).getAtTime().isBefore(LocalTime.now())) {
+                    continue;
+                }
                 relevantTasksRepresentation += String.format("%d. %s\n", (i + 1), tasks.get(i));
             }
         }

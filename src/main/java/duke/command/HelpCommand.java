@@ -20,6 +20,8 @@ public class HelpCommand implements Command {
             + " Adds a event task with the given description that happens at the entered date and time.\n";
     private static final String FIND_INFO = "'find <search phrase>' - Displays the list of tasks containing the"
             + " given search phrase in the description.\n";
+    private static final String REMINDER_INFO = "'reminder <type>' - Displays the list of tasks expiring in the"
+            + " next 7 days. You must specify <type> to be 'all', 'deadline' or 'events'.\n";
 
     /**
      * Executes the help command.
@@ -31,6 +33,6 @@ public class HelpCommand implements Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         return HELP_MESSAGE + BYE_INFO + LIST_INFO + DONE_INFO + DELETE_INFO + TODO_INFO + DEADLINE_INFO + EVENT_INFO
-                + FIND_INFO;
+                + FIND_INFO + REMINDER_INFO;
     }
 }

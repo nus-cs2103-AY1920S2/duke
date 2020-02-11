@@ -42,6 +42,24 @@ public class Event extends Task {
     }
 
     /**
+     * Gets the date that the event task is happening.
+     *
+     * @return the date that the event task is happening.
+     */
+    public LocalDate getAtDate() {
+        return atDate;
+    }
+
+    /**
+     * Gets the time that the event task is happening.
+     *
+     * @return the time that the event task is happening.
+     */
+    public LocalTime getAtTime() {
+        return atTime;
+    }
+
+    /**
      * Gets the string representation of the event task used for saving.
      *
      * @return the string representation of the event task to be used for saving.

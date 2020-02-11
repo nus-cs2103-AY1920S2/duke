@@ -18,6 +18,8 @@ public class Parser {
     private static final String INVALID_EVENT_COMMAND_MESSAGE = "HEY!!! The description of an event cannot be empty."
             + " Maybe I will name it Hyoizaburoo for you! Just kidding, please don't hit me!";
     private static final String INVALID_FIND_COMMAND_MESSAGE = "HEY!!! Please state what you want to find.";
+    private static final String INVALID_REMINDER_COMMAND_MESSAGE = "HEY!!! Please state"
+            + " what you want to be reminded of.";
     private static final String NO_SUCH_COMMAND_MESSAGE = "HEY!!! I don't know what that means :-(";
 
     /**
@@ -78,6 +80,12 @@ public class Parser {
             }
         case HELP:
             return new HelpCommand();
+        case REMINDER:
+            if (commandLine.length < 2) {
+                throw new InvalidCommandException(INVALID_FIND_COMMAND_MESSAGE);
+            } else {
+                return new ReminderCommand(commandLine[1]);
+            }
         default:
             throw new InvalidCommandException(NO_SUCH_COMMAND_MESSAGE);
         }

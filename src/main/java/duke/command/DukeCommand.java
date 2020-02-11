@@ -6,7 +6,7 @@ import duke.exception.InvalidCommandException;
  * Enum for all the commands duke has.
  */
 public enum DukeCommand {
-    BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND, HELP;
+    BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND, HELP, REMINDER;
 
     /**
      * Translate a string to the respective Enum value.
@@ -34,6 +34,8 @@ public enum DukeCommand {
             return DukeCommand.FIND;
         } else if (command.equals("help")) {
             return DukeCommand.HELP;
+        } else if (command.equals("reminder")) {
+            return DukeCommand.REMINDER;
         } else {
             throw new InvalidCommandException("HEY!!! I don't know what that means :-(");
         }
