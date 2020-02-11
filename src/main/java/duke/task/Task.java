@@ -38,13 +38,22 @@ public abstract class Task implements Serializable {
     }
 
     /**
+     * Returns whether the task has been completed or not.
+     *
+     * @return true if the task has been completed, otherwise false.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
      * Returns a tick or X symbol depending if the task has been completed.
      *
      * @return a tick (if task is completed) or an X (if not complete).
      */
     private String getStatusIcon() {
+        // Symbol codes: tick (\u2713), cross (\u2718)
         return (isDone ? "✓" : "✘");
-        //return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
@@ -81,6 +90,8 @@ public abstract class Task implements Serializable {
         for (int i = 0; i < args.length; i++) {
             serial.append(delimiter).append(args[i]);
         }
+
+        // TODO: potential for assertion here
 
         return serial.toString();
     }

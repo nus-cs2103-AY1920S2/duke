@@ -135,6 +135,8 @@ public class Ui {
      * @param taskIds the list of ids in the task list matching the search criteria.
      */
     public void showFind(TaskList tasks, List<Integer> taskIds) {
+        // TODO: exception if taskIds contains duplicate elements
+
         String title = "Here are the matching tasks in your list:\n\n";
         StringBuilder foundTasks = new StringBuilder();
 
@@ -170,6 +172,9 @@ public class Ui {
      * @return the indented text.
      */
     private String indent(String text, int indentWidth) {
+        assert indentWidth > 0 : "Should be adding at least one whitespace"
+                + " of indentation, not " + indentWidth;
+
         String indent = " ".repeat(indentWidth);
         return text.replaceAll("(?m)^", indent);
     }

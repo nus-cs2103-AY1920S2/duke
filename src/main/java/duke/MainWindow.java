@@ -78,6 +78,9 @@ public class MainWindow extends AnchorPane {
      * @param dialogBoxes a list of dialog boxes.
      */
     private void addDialogBox(DialogBox... dialogBoxes) {
+        assert dialogBoxes.length > 0 : "Should be adding at least one dialog box,"
+                + " not " + dialogBoxes.length;
+
         dialogContainer.getChildren().addAll(dialogBoxes);
     }
 }
