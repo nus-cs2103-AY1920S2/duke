@@ -27,7 +27,8 @@ public class SetPriorityCommand extends Command {
     @Override
     public void execute(TaskList taskList) throws DukeException {
         DukeException.throwIf(!taskList.isIndexValid(targetTaskIndex), "The input index is out of bounds!");
+        DukeException.throwIf(targetPriority == null, "The target priority is invalid!");
         taskList.get(targetTaskIndex).setPriority(targetPriority);
-        System.out.println("Priority Set!"); // TODO: Reflect the actual priority set
+        System.out.println(String.format("Priority for task %d has been set to %s.", targetTaskIndex, targetPriority));
     }
 }
