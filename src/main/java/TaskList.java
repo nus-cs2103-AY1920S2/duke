@@ -32,22 +32,4 @@ class TaskList {
         return this.taskList;
     }
 
-    /**
-     * This method is used to delete a specific task from the TaskList.
-     *
-     * @param taskNum The task number of the task to be deleted.
-     */
-    void delete(int taskNum) {
-        taskList.remove(taskNum);
-    }
-
-    /**
-     * This method is used to delete a specific task from the TaskList but is not a void method.
-     *
-     * @param i The task number of the task to be deleted.
-     * @return The Task that was deleted.
-     */
-    public Task deleteTask(int i) {
-        return taskList.remove(i);
-    }
 }

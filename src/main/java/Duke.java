@@ -1,6 +1,5 @@
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -57,18 +56,21 @@ public class Duke {
      * This method is called to update the Tasks and print outputs based on different user inputs.
      */
     public void run() {
+        assert tasks != null : "The list of tasks should not be null";
+        assert ui != null : "The Ui object should not be null";
+        assert storage != null : "The storage object should not be null";
+
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
-            System.out.println(isExit);
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (IOException e) {
-                ui.showError(e.getMessage());
+            } catch (IOException | DukeException e) {
+                System.out.println(e.getMessage());
             } finally {
                 ui.showLine();
                 if (isExit) {
@@ -89,21 +91,6 @@ public class Duke {
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    /*private void handleUserInput() {
-        String userText = userInput.getText();
-        String dukeText = userInput.getText();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new Image(user)),
-                DialogBox.getDukeDialog(dukeText, new Image(duke))
-        );
-        userInput.clear();
-    }*/
-
-    /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
@@ -111,11 +98,15 @@ public class Duke {
         ByteArrayOutputStream formattedOutput = new ByteArrayOutputStream();
         System.setOut(new PrintStream(formattedOutput));
         String reply = "";
+        assert tasks != null : "The list of tasks should not be null";
+        assert ui != null : "The Ui object should not be null";
+        assert storage != null : "The storage object should not be null";
+
         try {
             Command command = Parser.parse(input);
             command.execute(tasks, ui, storage);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        } catch (IOException | DukeException e) {
+            System.out.println(e.getMessage());
         }
         reply = formattedOutput.toString();
         while (reply.contains(Duke.LINE)) {
@@ -124,18 +115,5 @@ public class Duke {
         reply = reply.trim();
         System.setOut(System.out);
         return reply;
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 }

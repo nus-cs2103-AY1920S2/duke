@@ -83,6 +83,7 @@ class Storage {
     public void save(TaskList taskList) throws IOException {
         File file = new File("data/duke.txt");
         PrintWriter out = new PrintWriter(file);
+
         for (Task task : taskList.getTaskList()) {
             if (task instanceof ToDo) {
                 out.write("T | " + task.getStatusIcon() + " | "

@@ -3,7 +3,6 @@
  * input will generate.
  */
 class Task {
-    private static String horizontalLine = "__________________________________________";
     protected String taskName;
     protected static int taskNumber = 1; // for Level 2
     protected int currentTaskNumber;
@@ -30,7 +29,6 @@ class Task {
         return (isDone ? "[Y]" : "[N]");
         // The symbols for the check marks and crosses do not seem to work and have been replaced by "Y" and "N" to
         // represent 'Yes' and 'No' respectively.
-
     }
 
     /**
@@ -47,15 +45,6 @@ class Task {
      */
     public String getTaskName() {
         return taskName.trim();
-    }
-
-    /**
-     * This task returns the task number of the specified task.
-     *
-     * @return A number of type int.
-     */
-    public int getTaskNumber() {
-        return currentTaskNumber;
     }
 
     /**
