@@ -121,7 +121,7 @@ public class GuiApp extends Application {
     private void handleUserInput() {
         StringBuilder dukeResponse = new StringBuilder();
         Command command = getDukeCommand(dukeResponse);
-        assert dukeResponse.length() > 0 : "Response cannot be empty";
+        assert dukeResponse.length() > 0 : "Duke response cannot be empty";
         //set up labels for user and duke
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(dukeResponse.toString());

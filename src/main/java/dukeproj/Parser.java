@@ -13,10 +13,10 @@ import java.time.format.DateTimeParseException;
  * Represents a parser with static methods to interpret Strings into actionable data for DukeProject.
  */
 public class Parser {
-    /** Date formatter when reading (to print from dukeproj.Duke) the date. */
+    /** Date formatter when reading (to print from Duke) the date. */
     public static DateTimeFormatter DATE_READ_FORMATTER =
             DateTimeFormatter.ofPattern("dd MMM uuuu");
-    /** Date formatter when writing (to write into dukeproj.Duke) the date.*/
+    /** Date formatter when writing (to write into Duke) the date.*/
     public static DateTimeFormatter DATE_WRITE_FORMATTER =
             DateTimeFormatter.ofPattern("dd MM uu");
 
