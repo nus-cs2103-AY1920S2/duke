@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 public class FindCommand implements Command {
     String searchString;
     

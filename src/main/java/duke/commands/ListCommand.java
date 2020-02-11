@@ -1,14 +1,14 @@
+package duke.commands;
+
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 /**
  * Encapsulates a "list" command from the user.
  * The "list" command takes in no arguments, and will be rejected by `Parser` if arguments are supplied.
  */
 public class ListCommand implements Command {
-    /**
-     * Constructs a new ListCommand instance.
-     */
-    public ListCommand() {
-    }
-    
     /**
      * Prints the tasks in the task list to the UI.
      */

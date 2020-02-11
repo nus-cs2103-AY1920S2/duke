@@ -1,12 +1,14 @@
+package duke.tasks;
+
 /**
  * Encapsulates a todo task which has a description.
  */
-public class Todo extends Task {
+public class ToDo extends Task {
     /**
-     * Constructs a new Todo instance.
+     * Constructs a new ToDo instance.
      * @param description Task description
      */
-    public Todo(String description) {
+    public ToDo(String description) {
         super(description);
     }
     

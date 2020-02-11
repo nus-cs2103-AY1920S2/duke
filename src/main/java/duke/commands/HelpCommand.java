@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 /**
  * Encapsulates a "help" command from the user.
  */

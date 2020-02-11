@@ -1,3 +1,9 @@
+package duke.ui;
+
+import duke.Duke;
+import duke.tasks.Task;
+import duke.exceptions.DukeException;
+
 import java.util.Scanner;
 
 /**
@@ -6,7 +12,7 @@ import java.util.Scanner;
  * Implementations of the `Ui` interface are not required to buffer the printed message,
  * but the whole message must be printed after Ui#endMessage() is called.
  */
-interface Ui {
+public interface Ui {
     //TODO: create and store a Message object instead of using a static buffer
     
     /**
@@ -100,7 +106,7 @@ interface Ui {
     
     /**
      * Displays a help command for a given message name.
-     * @param command Command name
+     * @param commandName Command name
      */
     public void showHelpMessage(String commandName);
     

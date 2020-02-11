@@ -1,3 +1,10 @@
+package duke.ui;
+
+import duke.Duke;
+import duke.tasks.Task;
+import duke.exceptions.DukeException;
+import duke.util.PrintUtil;
+
 import java.util.Scanner;
 
 /**
@@ -190,7 +197,7 @@ public class Cli implements Ui {
             break;
         case "todo":
             PrintUtil.indentedPrintln("Usage: todo [task description]");
-            PrintUtil.indentedPrintln("Adds a new Todo task into the task list.");
+            PrintUtil.indentedPrintln("Adds a new ToDo task into the task list.");
             break;
         default:
             PrintUtil.indentedPrintf("Unknown command \"%s\"\n", commandName);
