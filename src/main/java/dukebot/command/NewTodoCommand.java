@@ -30,19 +30,17 @@ public class NewTodoCommand extends Command {
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
         TaskList taskList = appStorage.getTaskList();
-        String description;
-        Task task;
-        description = String.join(" ", Arrays.copyOfRange(inpArr, 1, inpArr.length));
+        String description = String.join(" ", Arrays.copyOfRange(inpArr, 1, inpArr.length));
         if (description.length() == 0) {
             ui.sayLine(LineName.TODO_EMPTY);
             return;
         }
-        task = new Todo(description);
+        Task task = new Todo(description);
+        taskList.addTask(task);
+        ui.sayLineWithTask(LineNameWithTask.NEW_TASK_SUCCESS, task);
 
         try {
-            taskList.addTask(task);
             storage.saveTaskList(taskList);
-            ui.sayLineWithTask(LineNameWithTask.NEW_TASK_SUCCESS, task);
         } catch (DukeException e) {
             ui.sayLine(e.getErrorLineName());
         }
