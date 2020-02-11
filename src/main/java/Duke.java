@@ -1,10 +1,11 @@
 import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
         boolean end = false;
 
         String opening_message = "    ____________________________________________________________\n" +
@@ -15,36 +16,47 @@ public class Duke {
 
         while(!end) {
             String next_cmd = sc.nextLine();
+
+            //Command: Bye (Termination of Program)
             if (next_cmd.equals("bye")) {
                 end = true;
                 System.out.println("    ____________________________________________________________\n" +
                         "     Bye. Hope to see you again soon!\n" +
                         "    ____________________________________________________________");
             }
+
+            //Command: List (List out all the Tasks and Completion Status)
             else if (next_cmd.equals("list")) {
-                if (list.size() == 0) {
+                //No Tasks in List
+                if (taskList.size() == 0) {
                     System.out.println("    ____________________________________________________________\n" +
                             "     There are no tasks available\n" +
                             "    ____________________________________________________________");
                 }
+
                 else {
-                    String list_of_items = "";
-                    for(int i = 0; i < list.size(); i++) {
-                        list_of_items += "     "+ (i+1) + ":" + list.get(i) + "\n";
+                    String list_of_tasks = "";
+                    for(int i = 0; i < taskList.size(); i++) {
+                        list_of_tasks += "     "+ (i+1) + ":" + taskList.get(i) + "\n";
                     }
                     System.out.println("    ____________________________________________________________\n" +
-                            list_of_items +
+                            list_of_tasks +
                             "    ____________________________________________________________");
                 }
             }
-            else if (next_cmd.equals("blah")) {
-                System.out.println("    ____________________________________________________________\n" +
-                        "     blah\n" +
-                        "    ____________________________________________________________");
 
+            //Command: Done (Mark the particular task as done)
+            else if ((next_cmd.split(" ")[0]).equals("done")) {
+                int task_num = Integer.parseInt(next_cmd.split(" ")[1]) - 1;
+                taskList.get(task_num).markAsDone();
+                System.out.println("    ____________________________________________________________\n" +
+                        "     Nice! I've marked this task as done:");
+                System.out.println("       " + taskList.get(task_num));
+                System.out.println("    ____________________________________________________________");
             }
+
             else {
-                list.add(next_cmd);
+                taskList.add(new Task(next_cmd));
                 System.out.println("    ____________________________________________________________\n" +
                         "      added: "  + next_cmd + "\n" +
                         "    ____________________________________________________________");
