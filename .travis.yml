@@ -3,8 +3,11 @@ jdk: openjdk11
 
 os: linux
 dist: xenial
-script: >-
-  ./gradlew run --args="cli"
+script: >
+  - ./gradlew run --args="cli"
+  - hello
+  - thanks
+  - bye
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
