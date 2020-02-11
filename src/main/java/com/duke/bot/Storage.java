@@ -8,7 +8,7 @@ import java.io.IOException;
  * Represents the permanent storage of the list of tasks managed by Duke Bot into the hard drive.
  */
 public class Storage {
-    private static final String DESTINATION_PATH = "C:\\tasks.txt";
+    private static final String DESTINATION_PATH = "/tasks.txt";
 
     private Storage() {
     }
