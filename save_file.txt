@@ -1,1 +1,14 @@
-T | 0 | homework
+T | 1 | homework | 
+E | 0 | meeting | 14:00 | 2/2/2020 | 
+D | 0 | homework | 12:00 | 3/2/2020 | impt | high
+D | 0 | homework1 | 12:00 | 13/2/2020 | important
+E | 0 | meetup | 12:00 | 3/3/2020 | impt | meetup
+T | 1 | read book | low
+T | 1 | run | high | oneday
+E | 0 | meeting | 13:30 | 4/4/2020 | 
+D | 0 | tutorial | 23:59 | 10/2/2020 | 
+T | 0 | walk | medium
+T | 0 | help | 
+T | 0 | help1 | help
+T | 0 | help2 | 
+E | 0 | meeting | 14:00 | 2/2/2020 | 

@@ -1,11 +1,16 @@
 package duke.tasks;
 
-/**
- * Represents a simple task with description only.
- */
 public class Todo extends Task {
-    public Todo(String description) {
+    /** Creates a Todo with the given description.
+     *
+     * @param description Description of task.
+     * @param tags Taggings of task.
+     */
+    public Todo(String description, String...tags) {
         super(description);
+        for (String tag : tags) {
+            super.addTag(tag);
+        }
     }
 
     @Override
@@ -21,6 +26,6 @@ public class Todo extends Task {
     @Override
     public String toSaveFormat() {
         char d = super.getIsDone() ? '1' : '0';
-        return "T | " + d + " | " + super.getDescription();
+        return "T | " + d + " | " + super.getDescription() + " | " + super.stringifyTagsToSaveFormat();
     }
 }

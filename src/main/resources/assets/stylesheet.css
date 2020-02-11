@@ -22,7 +22,12 @@ DialogBox {
 }
 
 #sendButton {
-    -fx-text-fill: #3659ba;
+    -fx-text-fill: #c2cff2;
+    -fx-background-color: #137F97;
+    -fx-border-width: 4;
+    -fx-border-color: #2d3c66;
+    -fx-border-radius: 10;
+    -fx-background-radius: 15;
 }
 
 #userInput {
@@ -51,11 +56,3 @@ DialogBox {
     -fx-background-color: #c2cff2;
     -fx-background-radius: 10.0;
 }
-
-/*.increment-button {*/
-/*    -fx-fill: #137F97;*/
-/*}*/
-
-/*.decrement-button {*/
-/*    -fx-fill: #137F97;*/
-/*}*/

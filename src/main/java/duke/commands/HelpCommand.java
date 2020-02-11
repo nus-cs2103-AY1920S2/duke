@@ -21,6 +21,7 @@ public class HelpCommand implements Command {
                 + "done\t<index>\t\t\t\t\t\t\tMark task at index as done\n"
                 + "find\t\t<keyword>\t\t\t\t\t\tTasks containing keyword\n"
                 + "date\t\t<date>\t\t\t\t\t\t\tTasks on/by given date\n"
+                + "#tag\t\t\t\t\t\t\t\t\t\tTasks tagged with given tag\n"
                 + "help\t\t\t\t\t\t\t\t\t\tHelp center\n"
                 + "bye\t\t\t\t\t\t\t\t\t\tExit Duke\n"
                 + "\n* actions with <date> are to be formatted like this: dd/mm/yyyy\n"

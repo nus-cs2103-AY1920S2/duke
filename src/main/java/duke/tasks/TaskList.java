@@ -140,4 +140,19 @@ public class TaskList {
         }
         return s.strip();
     }
+
+    /**
+     * Finds and returns a TaskList of all tasks tagged with given tag.
+     * @param tag Tag to be filtered.
+     * @return List of all tagged tasks/
+     */
+    public TaskList findTag(String tag) {
+        TaskList tasksWithTag = new TaskList();
+        for (Task t : this.list) {
+            if (t.containTag(tag)) {
+                tasksWithTag.add(t);
+            }
+        }
+        return tasksWithTag;
+    }
 }

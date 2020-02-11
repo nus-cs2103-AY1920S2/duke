@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Provides an interface between Duke chat bot and the save file.
@@ -74,11 +75,11 @@ public class Storage {
 
                 // Create corresponding specific task
                 if (fields[0].equals("T")) {
-                    newTask = new Todo(fields[2]);
+                    newTask = new Todo(fields[2], tagFields(fields, 3));
                 } else if (fields[0].equals("E")) {
-                    newTask = new Event(fields[2], fields[3], fields[4]);
+                    newTask = new Event(fields[2], fields[3], fields[4], tagFields(fields, 5));
                 } else {
-                    newTask = new Deadline(fields[2], fields[3], fields[4]);
+                    newTask = new Deadline(fields[2], fields[3], fields[4],  tagFields(fields, 5));
                 }
 
                 // Set isDone status
@@ -94,5 +95,9 @@ public class Storage {
         } catch (IOException ex) {
             Ui.printOutput("Corrupted Task");
         }
+    }
+
+    private String[] tagFields(String[] fields, int fromIndex) {
+        return Arrays.copyOfRange(fields, fromIndex, fields.length);
     }
 }

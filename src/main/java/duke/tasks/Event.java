@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -26,12 +25,14 @@ public class Event extends DateTask {
      * @param description Description of task.
      * @param startAtTime Time of event.
      * @param startAtDate Date of event.
-     * @throws DateTimeException When there are insufficient parameters for startAt.
      */
-    public Event(String description, String startAtTime, String startAtDate) throws DateTimeException {
+    public Event(String description, String startAtTime, String startAtDate, String...tags) {
         super(description);
         this.startAtTime = LocalTime.parse(startAtTime);
         this.startAtDate = LocalDate.parse(startAtDate, dateFormatter);
+        for (String tag : tags) {
+            super.addTag(tag);
+        }
     }
 
     @Override
@@ -66,6 +67,6 @@ public class Event extends DateTask {
         String time = startAtTime == null ? "-" : startAtTime.toString();
 
         return "E | " + d + " | " + super.getDescription() + " | " + time
-                + " | " + startAtDate.format(dateFormatter);
+                + " | " + startAtDate.format(dateFormatter) + " | " + super.stringifyTagsToSaveFormat();
     }
 }

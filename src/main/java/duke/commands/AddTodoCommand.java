@@ -15,7 +15,8 @@ public class AddTodoCommand implements Command {
      * @param details Description of todo.
      */
     public AddTodoCommand(TaskList taskList, List<String> details) {
-        Todo todo = new Todo(details.get(0));
+        String description = details.remove(0);
+        Todo todo = new Todo(description, details.toArray(new String[details.size()]));
         this.taskList = taskList;
         this.todo = todo;
     }
