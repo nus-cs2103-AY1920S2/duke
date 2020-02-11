@@ -25,7 +25,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList taskList) throws DukeException {
         DukeException.throwIf(!taskList.isIndexValid(indexToMarkAsDone), "The input index is out of bounds!");
         taskList.markAsDone(indexToMarkAsDone);
-
+        assert(taskList.get(indexToMarkAsDone).isDone());
         // Temp for visualization. TODO: remove this.
         new ListCommand().execute(taskList);
     }

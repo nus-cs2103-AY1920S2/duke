@@ -26,6 +26,15 @@ public abstract class Task implements Serializable {
         this.isDone = isDone;
     }
 
+    /**
+     * Gets the isDone flag of the task.
+     *
+     * @return true if the task is done; false otherwise.
+     */
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     protected String getStatusIcon() {
         return "[" + (isDone ? "\u2713" : "\u2718") + "]"; //return [tick] or [X] symbols
     }
