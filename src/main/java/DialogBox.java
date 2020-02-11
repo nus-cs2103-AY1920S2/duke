@@ -33,21 +33,13 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        initializeBox(text);
-        dialog.setText(text);
-        displayPicture.setImage(img);
-    }
-
-    private void initializeBox(String text) {
-        formatDialog(text);
-        dialog.setMinSize(200, Label.USE_PREF_SIZE + 50);
-    }
-
-    private void formatDialog(String text) {
         dialog.setText(text);
         dialog.setFont(Font.font("Verdana", 14));
         dialog.setTextFill(Color.WHITE);
         dialog.setTextOverrun(OverrunStyle.CLIP);
+        dialog.setMinSize(200, Label.USE_PREF_SIZE + 50);
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /**
