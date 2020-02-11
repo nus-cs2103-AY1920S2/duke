@@ -91,29 +91,33 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : tasks) {
-                switch (task.getType()) {
-                case TODO:
-                    fw.write("T|" + task.getDone() + "|" + task.getTask()
-                            + System.lineSeparator());
-                    break;
-                case EVENT:
-                    fw.write("E|" + task.getDone() + "|" + task.getTask() + "|"
-                            + task.getDate().format(Parser.DATE_WRITE_FORMATTER)
-                            + System.lineSeparator());
-                    break;
-                case DEADLINE:
-                    fw.write("D|" + task.getDone() + "|" + task.getTask() + "|"
-                            + task.getDate().format(Parser.DATE_WRITE_FORMATTER)
-                            + System.lineSeparator());
-                    break;
-                default:
-                    System.err.println("Error in TaskList");
-                    break;
-                }
+                writeTaskToFile(task, fw);
             }
             fw.close();
         } catch (IOException e) {
             System.err.println("Unable to write");
+        }
+    }
+
+    private void writeTaskToFile(Task task, FileWriter fw) throws IOException {
+        switch (task.getType()) {
+        case TODO:
+            fw.write("T|" + task.getDone() + "|" + task.getTask()
+                    + System.lineSeparator());
+            break;
+        case EVENT:
+            fw.write("E|" + task.getDone() + "|" + task.getTask() + "|"
+                    + task.getDate().format(Parser.DATE_WRITE_FORMATTER)
+                    + System.lineSeparator());
+            break;
+        case DEADLINE:
+            fw.write("D|" + task.getDone() + "|" + task.getTask() + "|"
+                    + task.getDate().format(Parser.DATE_WRITE_FORMATTER)
+                    + System.lineSeparator());
+            break;
+        default:
+            System.err.println("Error in TaskList");
+            break;
         }
     }
 
