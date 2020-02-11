@@ -28,12 +28,4 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: "
                 + dateFormatter.format(deadlineDate) + ")";
     }
-
-    /**
-     * Returns a string representation of the date of this task
-     * @return A string representation of the date of this task
-     */
-    public String getDeadline() {
-        return Task.dateFormatter.format(deadlineDate);
-    }
 }

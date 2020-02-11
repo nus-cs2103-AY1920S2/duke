@@ -9,7 +9,7 @@ public class ListCommand implements Command {
 
 
     /**
-     * Prints out the current list of tasks to terminal
+     * Prints out the current list of tasks
      * @param tasks List of current tasks
      * @throws DukeException If input format is wrong. Not used here
      */

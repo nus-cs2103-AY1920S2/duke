@@ -3,15 +3,7 @@
  */
 package duke.parser;
 
-import duke.commands.AddTodoCommand;
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.CommandType;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.exceptions.MissingDetailsException;
 import duke.exceptions.UnrecognizedCommandException;
@@ -63,6 +55,8 @@ public class Parser {
             return FindCommand.execute(commandDetails, taskList);
         case LIST:
             return ListCommand.execute(taskList);
+        case SCHEDULE:
+            return ScheduleCommand.execute(commandDetails, taskList);
         case TODO:
             return AddTodoCommand.execute(commandDetails, taskList, storage);
         default:

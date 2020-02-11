@@ -33,20 +33,4 @@ public class Event extends Task {
                 + Task.dateFormatter.format(eventDate) + "-"
                 + Task.timeFormatter.format(eventTime) + ")";
     }
-
-    /**
-     * Returns a string representation of the date of this task
-     * @return A string representation of the date of this task
-     */
-    public String getDate() {
-        return Task.dateFormatter.format(eventDate);
-    }
-
-    /**
-     * Returns a string representation of the time of this task
-     * @return A string representation of the time of this task
-     */
-    public String getTime() {
-        return Task.timeFormatter.format(eventTime);
-    }
 }

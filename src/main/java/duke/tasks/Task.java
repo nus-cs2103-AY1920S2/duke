@@ -106,5 +106,35 @@ public class Task implements Comparable<Task> {
         }
     }
 
-    //...
+    /**
+     * Returns a string representation of the date of this task
+     * @return A string representation of the date of this task
+     */
+    public String getDateString() {
+        return dateFormatter.format(taskDate);
+    }
+
+    /**
+     * Returns a string representation of the time of this task
+     * @return A string representation of the time of this task
+     */
+    public String getTimeString() {
+        return timeFormatter.format(taskTime);
+    }
+
+    /**
+     * Returns the date attribute of this task
+     * @return The date attribute of this task
+     */
+    public LocalDate getDate() {
+        return taskDate;
+    }
+
+    /**
+     * Returns the time attribute of this task
+     * @return The time attribute of this task
+     */
+    public LocalTime getTime() {
+        return taskTime;
+    }
 }

@@ -131,11 +131,11 @@ public class Storage {
             sb.append("T | " + isDone + " | " + task.getDescription());
         } else if (task instanceof Deadline) {
             Deadline deadlineTask = (Deadline) task;
-            sb.append("D | " + isDone + " | " + deadlineTask.getDescription() + " | " + deadlineTask.getDeadline());
+            sb.append("D | " + isDone + " | " + deadlineTask.getDescription() + " | " + deadlineTask.getDateString());
         } else if (task instanceof Event) {
             Event eventTask = (Event) task;
-            sb.append("E | " + isDone + " | " + eventTask.getDescription() + " | " + eventTask.getDate()
-            + "-" + eventTask.getTime());
+            sb.append("E | " + isDone + " | " + eventTask.getDescription() + " | " + eventTask.getDateString()
+            + "-" + eventTask.getTimeString());
         }
         sb.append("\n");
         return sb.toString();

@@ -4,7 +4,9 @@
  */
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import duke.exceptions.MissingKeywordException;
 import duke.exceptions.UnknownTaskException;
@@ -14,13 +16,20 @@ import duke.exceptions.DukeException;
 public class TaskList {
 
     private ArrayList<Task> tasks;
-
+    private TreeSet<Task> schedule;
     /**
      * Creates a TaskList object from an existing list of tasks
-     * @param taskList
+     * @param tasks
      */
-    public TaskList(ArrayList<Task> taskList) {
-        this.tasks = taskList;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+        this.schedule = new TreeSet<>();
+
+        for (Task task : tasks) {
+            if (task instanceof Deadline || task instanceof Event) {
+                schedule.add(task);
+            }
+        }
     }
 
     /**
@@ -28,14 +37,18 @@ public class TaskList {
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
+        this.schedule = new TreeSet<>();
     }
 
     /**
      * Adds a task to the ArrayList
-     * @param t Task to be added to ArrayList
+     * @param task Task to be added to ArrayList
      */
-    public void addTask(Task t) {
-        tasks.add(t);
+    public void addTask(Task task) {
+        tasks.add(task);
+        if (task instanceof Deadline || task instanceof Event) {
+            schedule.add(task);
+        }
     }
 
     /**
@@ -74,6 +87,27 @@ public class TaskList {
     }
 
     /**
+     * Prints to console the schedule specified
+     */
+    public String printSchedule(LocalDate date) {
+        StringBuilder output = new StringBuilder();
+        if (size() == 0) {
+            output.append("Your list of tasks is currently empty.\n");
+        } else {
+            output.append("This is your schedule on " + date + ":\n");
+            int taskIdx = 1;
+            for (Task task : schedule) {
+                if (task.getDate().toString().equals(date.toString())) {
+                    output.append(taskIdx + ". ");
+                    output.append(task.toString() + "\n");
+                    taskIdx++;
+                }
+            }
+        }
+        return output.toString();
+    }
+
+    /**
      * Marks a task in the ArrayList as complete
      * @param storage To store updated task status in file
      * @param taskNumber Index of task to mark as completed
@@ -100,6 +134,7 @@ public class TaskList {
         }
         Task task = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
+        schedule.remove(task);
 
         return task.toString();
     }

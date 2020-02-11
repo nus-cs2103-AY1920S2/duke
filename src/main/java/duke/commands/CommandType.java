@@ -8,5 +8,6 @@ public enum CommandType {
     EVENT,
     FIND,
     LIST,
+    SCHEDULE,
     TODO
 }
