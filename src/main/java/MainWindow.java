@@ -55,7 +55,16 @@ public class MainWindow extends AnchorPane {
     }
 
     private void greet() {
-        StringBuilder logo = new StringBuilder("Hello! I am DUKE.");
+        StringBuilder logo = new StringBuilder("Hello! I am DUKE.\n\n"
+                + "These are the functions I provide:\n"
+                + "1. Add a task- task may be of type todo, deadline or event\n"
+                + "2. Delete a task\n"
+                + "3. Find a task\n"
+                + "4. Mark a task as completed/done\n"
+                + "5. List all tasks\n"
+                + "6. Exit the application\n\n"
+                + "Please enter the respective number of a function for more information on usage!\n\n"
+                + "NOTE: The application automatically deletes duplicated tasks");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(logo.toString(), dukeImage)
         );

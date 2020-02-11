@@ -26,7 +26,7 @@ public class Parser {
                 throw ex;
             }
         }
-        if((locOfSpace + 1) >= (locOfSlash)) {
+        if ((locOfSpace + 1) >= (locOfSlash)) {
             DukeException ex = new DukeException(":( OOPS!!! "
                     + "Missing description!");
             throw ex;
@@ -57,6 +57,18 @@ public class Parser {
     static Command parse(int saved, String sentence, int done, TaskList tasks) throws IOException, DukeException {
         int locOfSpace = sentence.indexOf(" ");
         String firstWord = (locOfSpace == -1) ? sentence : sentence.substring(0, locOfSpace);
+        if (firstWord.equals(sentence) && firstWord.length() == 1) {
+            char ch = firstWord.charAt(0);
+            boolean isDigit = Character.isDigit(ch);
+            if (isDigit) {
+                Help h = new Help(Integer.valueOf(firstWord));
+                return h;
+            } else {
+                DukeException ex = new DukeException(":( OOPS!!! "
+                        + "I do not know what you mean");
+                throw ex;
+            }
+        }
         switch (firstWord) {
         case "delete":
             int num = Integer.valueOf(sentence.substring(locOfSpace + 1));
