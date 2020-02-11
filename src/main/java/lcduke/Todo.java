@@ -15,12 +15,14 @@ public class Todo extends Task {
 
     /** This prints the response after adding a Todo object to task list.
      */
-    public void printInit(){
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + this.toString());
-        System.out.println("     Now you have " + taskNo + " tasks in the list.");
-        System.out.println("    ____________________________________________________________\n");
+    public String printInit(){
+        String response;
+        response = "    ____________________________________________________________"
+                + "     Got it. I've added this task: "
+                + "       " + this.toString()
+                + "     Now you have " + taskNo + " tasks in the list."
+                + "    ____________________________________________________________\n";
+        return response;
     }
 
     /** This generates the description in the list.

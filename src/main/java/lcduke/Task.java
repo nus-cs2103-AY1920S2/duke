@@ -49,7 +49,7 @@ public abstract class Task {
         return description;
     }
 
-    public abstract void printInit();
+    public abstract String printInit();
 
     /** This generates the description in the list.
      * @return the description in the list

@@ -142,41 +142,46 @@ public class TaskList {
         Task.taskNo = Task.taskNo - 1;
     }
 
-    public void toDo(String userInput){
+    public String toDo(String userInput){
         String content = userInput.substring(5);
         Task t = new Todo(content);
         totalTasks[totalTasksCount] = t;
         totalTasksCount++;
+        return t.printInit();
     }
 
-    public void deadline(String userInput){
+    public String deadline(String userInput){
         userInput = userInput.substring(9);
         String contentTasks = userInput.substring(0, userInput.indexOf("/by") - 1);
         String taskDeadline = userInput.substring(userInput.indexOf("/by") + 4);
         Task t = new Deadline(contentTasks, taskDeadline);
         totalTasks[totalTasksCount] = t;
         totalTasksCount++;
+        return t.printInit();
     }
 
-    public void event(String userInput){
+    public String event(String userInput){
         userInput = userInput.substring(6);
         String contentTasks = userInput.substring(0, userInput.indexOf("/at") - 1);
         String taskTime = userInput.substring(userInput.indexOf("/at") + 4);
         Task t = new Event(contentTasks, taskTime);
         totalTasks[totalTasksCount] = t;
         totalTasksCount++;
+        return t.printInit();
     }
-    public void find(String userInput){
+    public String find(String userInput){
+        String response;
         String keyword = userInput.substring(5);
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the matching tasks in your list:");
+        response = "    ____________________________________________________________"
+                + "     Here are the matching tasks in your list:";
         int i = 1;
         for(int j = 0; j < totalTasksCount; j++) {
             if(totalTasks[j].getDescription().contains(keyword)){
-                System.out.println("     " + i + "." + totalTasks[j].toString());
+                response = response + "     " + i + "." + totalTasks[j].toString();
                 i++;
             }
         }
-        System.out.println("    ____________________________________________________________");
+        response = response + "    ____________________________________________________________";
+        return response;
     }
 }
