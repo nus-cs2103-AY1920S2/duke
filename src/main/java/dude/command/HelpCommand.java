@@ -98,21 +98,21 @@ public class HelpCommand extends Command {
         ui.respond("I'm great at understanding my dates",
                 "Of course I'm great at understanding your dates, too!",
                 "You can tell me your dates in any of these ways:");
-        ui.respond("1. yyyy-mm-dd",
-                "Example: 2020-02-02",
+        ui.respond("1. yyyy-mm-dd", "",
+                "Example: 2020-02-02", "",
                 "Nice and easy, I can't go wrong with this");
-        ui.respond("2. d MMM yyyy",
-                "Example: 2 Feb 2020",
+        ui.respond("2. d MMM yyyy", "",
+                "Example: 2 Feb 2020", "",
                 "Even easier to remember and type!");
-        ui.respond("3. dayOfWeek [+number]",
-                "Examples:", "Monday +4", "Tue", "Sun +3",
+        ui.respond("3. dayOfWeek [+number]", "",
+                "Examples:", "Monday +4", "Tue", "Sun +3", "",
                 "If just a day of the week is given, say Tue or Wed, the date is "
                 + "taken to be the next closest day from today. Eg. 'Tue' refers to "
                 + "next Tuesday.",
                 "If a number n is specified, the date is the given day n weeks from now. "
                 + "Eg. 'Monday +4' refers to the Monday 4 weeks from now");
-        ui.respond("4. number [day(s) | week(s) | month(s) | year(s)]",
-                "Examples:", "10 days", "4 weeks", "1 year",
+        ui.respond("4. number [day(s) | week(s) | month(s) | year(s)]", "",
+                "Examples:", "10 days", "4 weeks", "1 year", "",
                 "The given duration after today. Eg. If today is 2020-02-09, '10 days' "
                 + "would be 2020-02-19");
     }
