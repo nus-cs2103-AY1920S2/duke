@@ -14,9 +14,12 @@ public class DeleteCommand extends Command {
 
     @Override
     public ExecuteResult execute(List<Task> tasks) throws DukeException {
+        assert tasks != null;
+
         if (deleteIndex < 0 || deleteIndex >= tasks.size()) {
             throw new DukeException("Oops, delete index is out of bounds");
         } 
+
         List<Task> newTasks = new ArrayList<>(tasks);
         newTasks.remove(deleteIndex);
         return new ExecuteResult(

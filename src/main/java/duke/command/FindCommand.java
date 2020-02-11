@@ -13,6 +13,8 @@ public class FindCommand extends Command {
 
     @Override
     public ExecuteResult execute(List<Task> tasks) {
+        assert tasks != null;
+
         return new ExecuteResult(
                 tasks,
                 "Here are the matching tasks in your list:\n"
