@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTest {
-    private final static DateTimeFormatter IN_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final DateTimeFormatter IN_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     @Test
     void getDateTime() {
@@ -18,7 +18,7 @@ class DeadlineTest {
 
     @Test
     void testToString() {
-        assertEquals("[D][n] testing (by: 20 Feb 2020 07:00 PM)",
+        assertEquals("[D] [n] testing (by: 20 Feb 2020 07:00 PM)",
                 new Deadline("testing", LocalDateTime.parse("20/02/2020 1900", IN_FORMATTER)).toString());
     }
 
