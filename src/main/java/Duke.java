@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
         Ui ui = new Ui();
 
@@ -50,5 +51,9 @@ public class Duke {
                 ui.showError(exception);
             }
         }
+    }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
