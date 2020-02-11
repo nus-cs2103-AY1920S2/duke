@@ -32,11 +32,11 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
-        File f = new File(filePath);
+        File file = new File(filePath);
 
-        if (f.exists()) {
+        if (file.exists()) {
             try {
-                Scanner sc = new Scanner(f);
+                Scanner sc = new Scanner(file);
                 while (sc.hasNext()) {
                     String currentTask = sc.nextLine();
                     taskList.add(parseTask(currentTask));
@@ -47,7 +47,7 @@ public class Storage {
             }
         } else {
             try {
-                f.createNewFile();
+                file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("create new file error");
@@ -58,21 +58,21 @@ public class Storage {
         return taskList;
     }
 
-    private Task parseTask(String task) {
-        String[] taskDetails = task.split(" \\| ");
+    private Task parseTask(String taskDetail) {
+        String[] taskDetails = taskDetail.split(" \\| ");
 
         Character taskType = taskDetails[0].charAt(0);
         boolean taskIsDone = taskDetails[1].equals("1");
-        Task t = null;
+        Task task = null;
 
         switch (taskType) {
             case 'T':
-                t = new Todo(taskDetails[2]);
+                task = new Todo(taskDetails[2]);
                 break;
             case 'D':
                 try {
                     Date date = Deadline.simpleDateFormat.parse(taskDetails[3]);
-                    t = new Deadline(taskDetails[2], date);
+                    task = new Deadline(taskDetails[2], date);
                 } catch (ParseException e) {
                     e.printStackTrace();
                     System.out.println("Error reading deadline date from file");
@@ -80,24 +80,24 @@ public class Storage {
                 break;
             case 'E':
                 LocalDateTime localDateTime = LocalDateTime.parse(taskDetails[3], Event.dateTimeFormatter);
-                t = new Event(taskDetails[2], localDateTime);
+                task = new Event(taskDetails[2], localDateTime);
                 break;
         }
 
-        if (t != null && taskIsDone) {
-            t.markAsDone();
+        if (task != null && taskIsDone) {
+            task.markAsDone();
         }
-        return t;
+        return task;
     }
 
     /**
      * Appends the current task to existing list of tasks
-     * @param t Task to be added to list
+     * @param task Task to be added to list
      */
-    public void saveTask(Task t) {
+    public void saveTask(Task task) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            String toAdd = formatTaskForSaving(t);
+            String toAdd = formatTaskForSaving(task);
             fw.write(toAdd);
             fw.close();
         } catch (IOException e) {
@@ -124,22 +124,22 @@ public class Storage {
         }
     }
 
-    private String formatTaskForSaving(Task t) {
+    private String formatTaskForSaving(Task task) {
         StringBuilder sb = new StringBuilder();
 
         int isDone = 0;
-        if (t.isDone()) {
+        if (task.isDone()) {
             isDone = 1;
         }
 
-        if (t instanceof Todo) {
-            sb.append("T | " + isDone + " | " + t.getDescription());
-        } else if (t instanceof Deadline) {
-            Deadline d = (Deadline) t;
-            sb.append("D | " + isDone + " | " + d.getDescription() + " | " + d.getDeadline());
-        } else if (t instanceof Event) {
-            Event e = (Event) t;
-            sb.append("E | " + isDone + " | " + e.getDescription() + " | " + e.getDateTime());
+        if (task instanceof Todo) {
+            sb.append("T | " + isDone + " | " + task.getDescription());
+        } else if (task instanceof Deadline) {
+            Deadline deadlineTask = (Deadline) task;
+            sb.append("D | " + isDone + " | " + deadlineTask.getDescription() + " | " + deadlineTask.getDeadline());
+        } else if (task instanceof Event) {
+            Event eventTask = (Event) task;
+            sb.append("E | " + isDone + " | " + eventTask.getDescription() + " | " + eventTask.getDateTime());
         }
         sb.append("\n");
         return sb.toString();
