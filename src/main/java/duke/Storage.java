@@ -111,59 +111,121 @@ public class Storage {
 
         // Check if the tokens can form one of the task types
         if (isTask(args)) {
-            Task task;
-
-            // First argument is the character ID of the task type.
-            // Exceptions will be thrown if the task could not be read properly
-            switch (args[0]) {
-            case "T":
-                // To-do
-                task = readTodo(args);
-                break;
-            case "D":
-                // Deadline
-                task = readDeadline(args);
-                break;
-            case "E":
-                // Event
-                task = readEvent(args);
-                break;
-            default:
-                throw new DukeException("Unknown task type: " + args[0]);
-            }
-
-            // Second argument indicates whether the task has been completed
-            if (args[1].equals(TASK_COMPLETE)) {
-                task = task.markDone();
-            }
+            Task task = readTaskType(args);
+            task = readTaskIsDone(args[1], task);
 
             return task;
 
         } else {
+            // Task could not be read properly
             throw new DukeException("Arguments cannot be used to construct a valid task.");
         }
     }
 
+    /**
+     * Checks if a group of tokens form the minimum requirements to construct a task.
+     * The first token must be the character id of the underlying task type.
+     * The second token must either be a "0" or "1" to represent whether the task has been
+     * completed or not.
+     *
+     * @param args tokens read from a file input.
+     * @return true if the tokens can construct a generic task, otherwise false.
+     */
     private boolean isTask(String[] args) {
-        // Arguments form a task if there are at least 3 arguments
-        // and the second argument is either a "0" or "1"
-        return args.length >= 3
-                && (args[1].equals(TASK_COMPLETE)
-                    || args[1].equals(TASK_INCOMPLETE));
+        // There should be at least 3 arguments
+        boolean hasThreeArguments = args.length >= 3;
+
+        if (hasThreeArguments) {
+            // Second argument is either "0" or "1"
+            return args[1].equals(TASK_INCOMPLETE) || args[1].equals(TASK_COMPLETE);
+
+        } else {
+            return false;
+        }
     }
 
+    /**
+     * Reads and constructs a task from a tokenized file input.
+     *
+     * @param args tokens read from a file input.
+     * @return a task read from file input.
+     * @throws DukeException if the file input has an invalid task id.
+     */
+    private Task readTaskType(String[] args) throws DukeException {
+        // First argument is the character ID of the task type.
+        switch (args[0]) {
+        case "T":
+            return readTodo(args); // To-do
+        case "D":
+            return readDeadline(args); // Deadline
+        case "E":
+            return readEvent(args); // Event
+        default:
+            throw new DukeException("Unknown task type: " + args[0]);
+        }
+    }
+
+    // TODO: remove dependency on Parser
+
+    /**
+     * Returns a to-do constructed from a tokenized file input.
+     *
+     * @param args tokens read from a file input.
+     * @return a to-do read from file input.
+     * @throws DukeException if the file input contains invalid arguments.
+     */
     private Todo readTodo(String[] args) throws DukeException {
         Parser.checkArgumentCount(args, 3);
         return new Todo(args[2]);
     }
 
+    /**
+     * Returns a deadline constructed from a tokenized file input.
+     *
+     * @param args tokens read from a file input.
+     * @return a deadline read from file input.
+     * @throws DukeException if the file input contains invalid arguments.
+     */
     private Deadline readDeadline(String[] args) throws DukeException {
         Parser.checkArgumentCount(args, 4);
         return new Deadline(args[2], Parser.parseDate(args[3]));
     }
 
+    /**
+     * Returns an event constructed from a tokenized file input.
+     *
+     * @param args tokens read from a file input.
+     * @return an event read from file input.
+     * @throws DukeException if the file input contains invalid arguments.
+     */
     private Event readEvent(String[] args) throws DukeException {
         Parser.checkArgumentCount(args, 5);
         return new Event(args[2], args[3], args[4]);
+    }
+
+    /**
+     * Marks a task as completed or not based on a token read from a file input.
+     *
+     * @param isCompleted a token read from file input representing whether
+     *                    the task has been completed or not.
+     * @param task the task read from a file input.
+     * @return a task that has been marked as completed based on a token read from
+     *         a file input.
+     */
+    private Task readTaskIsDone(String isCompleted, Task task) {
+        // TODO: Abstract out this check
+        assert isCompleted.equals(TASK_INCOMPLETE)
+                || isCompleted.equals(TASK_COMPLETE) : "Invalid token - " + isCompleted;
+
+        assert !task.isDone() : "Task should not be marked as completed when constructed";
+
+        if (isCompleted.equals(TASK_COMPLETE)) {
+            return task.markDone();
+
+        } else {
+            assert isCompleted.equals(TASK_INCOMPLETE) : "Invalid token - " + isCompleted;
+
+            return task;
+        }
     }
 }
