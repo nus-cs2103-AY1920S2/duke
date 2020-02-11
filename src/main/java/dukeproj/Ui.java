@@ -20,7 +20,7 @@ public class Ui {
     public String say(SayType type) {
         switch (type) {
         case INTRO:
-            return "Hello! I am\n" + logo + "\nWhat can I do for you today?";
+            return getGuiIntroduction();
         case EXIT:
             return getExit();
         case LIST:
@@ -43,6 +43,8 @@ public class Ui {
             return "Sorry I don't recognise this date format!\nPlease make sure the format is: dd mm yy";
         case BAD_DESCRIPTION:
             return "OOPS! ";
+        case HELP:
+            return getHelp();
         default:
             return "";
         }
@@ -52,7 +54,8 @@ public class Ui {
      * Prints out the introductory message for DukeProject.
      */
     public String getIntroduction() {
-        return lineBreak + "\nHello I am \n" + logo + "\nWhat can I do for you?\n" + lineBreak;
+        return lineBreak + "\nHello I am \n" + logo
+                + "\nWhat can I do for you?\n" + lineBreak;
     }
 
     /**
@@ -60,6 +63,24 @@ public class Ui {
      */
     public String getExit() {
         return lineBreak + "\nBye! Hope to see you again soon!\n" + lineBreak;
+    }
+
+    private String getHelp() {
+        return "Here are the list of commands:\nList: returns a list of all your tasks\n"
+                + "Todo: makes a new todo task\n  Format: todo (task)\n"
+                + "Deadline: makes a new deadline task\n  Format: deadline (task) /by (dd mm yy)\n"
+                + "Event: makes a new event task\n  Format: event (task) /at (dd mm yy)\n"
+                + "Done: marks a task as done\n  Format: done (task index)\n"
+                + "Delete: deletes a task\n  Format: delete (task index)\n"
+                + "Schedule: view schedule for a specific date\n  Format: schedule (dd mm yy)\n"
+                + "Find: find tasks using keywords\n  Format: find (keywords)\n"
+                + "Bye: exits duke";
+    }
+
+    private String getGuiIntroduction() {
+        return "Hello! I am\n" + logo
+                + "\nPlease type help for a list of commands!"
+                + "\nWhat can I do for you today?";
     }
 
     /**

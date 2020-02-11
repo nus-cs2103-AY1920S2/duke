@@ -1,13 +1,6 @@
 package dukeproj;
 
-import dukeproj.command.DeleteCommand;
-import dukeproj.command.AddCommand;
-import dukeproj.command.ScheduleCommand;
-import dukeproj.command.ListCommand;
-import dukeproj.command.DoneCommand;
-import dukeproj.command.FindCommand;
-import dukeproj.command.ExitCommand;
-import dukeproj.command.Command;
+import dukeproj.command.*;
 import dukeproj.data.Schedule;
 import dukeproj.data.TaskList;
 import dukeproj.enums.CommandType;
@@ -110,6 +103,8 @@ public class Parser {
         case FIND:
             command = new FindCommand(description);
             break;
+        case HELP:
+            command = new HelpCommand();
         case LIST:
             //fallthrough
         default:
