@@ -21,6 +21,9 @@ public class TaskList {
      * @return Task object at the specified index in the TaskList
      */
     public Task getTask(int index) {
+        // Asserts that there is a Task object at the specified index
+        assert tasks.size() > index;
+
         return tasks.get(index);
     }
 
@@ -38,6 +41,9 @@ public class TaskList {
      * @return Task object that has been removed
      */
     public Task removeTask(int index) {
+        // Asserts that there is a Task object at the specified index
+        assert tasks.size() > index;
+
         return tasks.remove(index);
     }
 
