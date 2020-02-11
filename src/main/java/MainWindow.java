@@ -6,6 +6,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -28,10 +33,10 @@ public class MainWindow extends AnchorPane {
      * Initialize the GUI.
      */
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello I'm Peachy! Here to help you!", dukeImage));
+                DialogBox.getDukeDialog(this.welcomeMsg(), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -51,6 +56,17 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    public static String welcomeMsg() throws IOException {
+        File f = new File("/Users/jadetay/duke/src/main/resources/text/welcomeMsg.txt");
+        FileReader fr = new FileReader(f);
+        BufferedReader br = new BufferedReader(fr);
+        String line, msg = "";
+        while((line = br.readLine()) != null){
+            msg += line + "\n";
+        }
+        return msg;
     }
 
 }

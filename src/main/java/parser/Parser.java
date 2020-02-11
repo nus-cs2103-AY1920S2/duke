@@ -87,9 +87,9 @@ public class Parser {
                 com = new ExitCommand();
             } else if (command.equals("note")) {
                 Note n = new Note(temp[1], fullCommand.substring(temp[0].length() + temp[1].length() + 2));
-                com = new NewNoteCommand(n);
+                com = new NewNoteCommand(n); // note ___ desp
             } else if (command.equals("view")) {
-                com = new ViewNoteCommand(temp[1]);
+                com = new ViewNoteCommand(temp[1]); //view ___ notes
             } else {
                 com = new UnknownCommand();
             }
