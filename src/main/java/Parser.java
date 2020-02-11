@@ -48,15 +48,17 @@ public class Parser {
      * @param s string for object parameters.
      * @return Task of string.
      */
-
     private Task parseList(String s) {
         String[] params = s.split("\\|");
 
         if (params[0].equals("D")) {
+            assert(params.length == 5);
             return new Deadline(params[2], params[3], params[4], !params[1].equals("false"));
         } else if (params[0].equals("E")) {
+            assert(params.length == 5);
             return new Event(params[2], params[3], params[4], !params[1].equals("false"));
         } else {
+            assert(params.length == 3);
             return new Task(params[2], !params[1].equals("false"));
         }
     }
