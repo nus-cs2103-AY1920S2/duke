@@ -1,12 +1,28 @@
 package duke.tasks;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import duke.tags.Tag;
+
 public class Task {
     private String taskName;
     private boolean taskDone;
+    private ArrayList<Tag> tags;
 
     public Task(String taskName) {
         this.taskName = taskName;
         this.taskDone = false;
+    }
+
+    public Task(String taskName, Tag... tags) {
+        this.taskName = taskName;
+        this.taskDone = false;
+        this.tags = new ArrayList<Tag>();
+        for (Tag tag : tags) {
+            this.tags.add(tag);
+        }
     }
 
     public String getTaskName() {
@@ -37,5 +53,16 @@ public class Task {
     public String toFileString() {
         return " | " + getTaskDone()
             + " | " + getTaskName();
+    }
+
+    public static void getTags(String input) {
+        Pattern pat = Pattern.compile("\\#(\\w+)");
+        Matcher mat = pat.matcher(input);
+        ArrayList<Tag> tags = new ArrayList<Tag>();
+        while (mat.find()) {
+            tags.add(new Tag(mat.group()));
+            // System.out.println(mat.group().toString());
+        }
+        System.out.println(tags.size());
     }
 }
