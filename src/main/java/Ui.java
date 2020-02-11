@@ -14,23 +14,25 @@ public class Ui {
     /**
      * This method prints the welcome message when user first run the program.
      */
-    public void showWelcome(){
+    public void logo(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-        System.out.print(line());
+    }
+
+    public static String welcomeMessage() {
+        return "Hi, welcome to Duke! \nHow can I help you?";
     }
 
     /**
      * This method return the Bye Message.
      * @return String This is the bye message.
      */
-    public String byeMessgae(){
-        return line() + "Bye. Hope to see you again soon!\n" + line();
+    public String byeMessage(){
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -41,7 +43,7 @@ public class Ui {
      */
     public String DeleteMessage(String Action, int amt){
         String Output = String.format("\nNow you have %d tasks in the list\n", amt);
-        return line()+ "Noted. I've removed this task: \n" + Action + Output + line();
+        return "Noted. I've removed this task: \n" + Action + Output;
     }
 
     /**
@@ -49,7 +51,7 @@ public class Ui {
      * @param Action This is the action that has been completed.
      * @return This is the message for the Done action.
      */
-    public String DoneMessgae(String Action){
-        return line() + "Nice! I've marked this task as done:\n" + Action + "\n" + line();
+    public String DoneMessage(String Action){
+        return "Nice! I've marked this task as done:\n" + Action;
     }
 }

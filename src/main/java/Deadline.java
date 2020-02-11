@@ -21,10 +21,8 @@ public class Deadline extends Task {
     /**
      * This method indicates that a new Deadline Task has been added to the ArrayList in Store.
      */
-    public void Output() {
-        System.out.print(super.line);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(" [D]" + super.toString() + "| by: " + time );
+    public String Output() {
+        return "Got it. I've added this task: \n" + " [D]" + super.toString() + "| by: " + time;
     }
 
     /**

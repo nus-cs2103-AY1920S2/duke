@@ -1,9 +1,13 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Store {
 
@@ -15,6 +19,10 @@ public class Store {
     private LocalTime LT;
     File file;
     private Ui ui = new Ui();
+    private DateFormat inputDate = new SimpleDateFormat("dd/MM/yyyy");  //input date format of dd/mm/yyyy
+    private DateFormat inputTime = new SimpleDateFormat("HHmm");        //input time in hhmm
+    private DateFormat outputDate = new SimpleDateFormat("MMM dd yyyy");//output in MMM dd yyyy
+    private DateFormat outputTime = new SimpleDateFormat("hh:mm a");    //output in hh:mm PM/AM
 
     /**
      * This method updates the existing variables.
@@ -29,39 +37,45 @@ public class Store {
 
     /**
      * This method prints out message for "bye" action.
+     * @return the String of the byeMessage
      */
-    public void bye() {
+    public String bye() {
         WritetoFile();
-        System.out.print(ui.byeMessgae());
-        System.exit(1); //exits program
+        return ui.byeMessage();
     }
 
     /**
      * This method prints the elements in the ArrayList<Task>.
+     * @return the String of list
      */
-    public void list() {
-        System.out.print(ui.line());
+    public String list() {
+        String output = "";
         for(int i = 0; i < Storage.size(); i++) {
+            if (Storage.get(i).toString().contains("[1]")){
+                Storage.get(i).getStatusIcon();
+            }
             String data = String.format("%d.",i+1) + Storage.get(i).toString();
-            System.out.println(data);
+            output = output + data + "\n";
         }
-        System.out.print(ui.line());
+        return output;
     }
 
     /**
      * This method updates the Task at the index to complete.
      * @param index Indicates which item on the ArrayList Storage.
+     * @retrun String of done task.
      */
-    public void done(int index){
+    public String done(int index){
         if(index > Storage.size() || index <= 0){
-            DE.ExceedList();
+            return DE.ExceedList();
         } else {
             Task UpdateCurrAction = Storage.get(index - 1);
             UpdateCurrAction.isDone = true;
+            UpdateCurrAction.getStatusIcon();
             String CurrAction = UpdateCurrAction.toString();
-            System.out.print(ui.DoneMessgae(CurrAction));
+            WritetoFile();
+            return ui.DoneMessage(CurrAction);
         }
-        WritetoFile();
     }
 
     /**
@@ -72,49 +86,44 @@ public class Store {
     public String todo(String S){
         this.cmd = S;
         Task T = new Todo(cmd);
-        T.Output();
         Storage.add(T);
-        String s = String.format("Now you have %d tasks in the list.\n", Storage.size());
+        String output = T.Output() + String.format("\nNow you have %d tasks in the list.\n", Storage.size());
         WritetoFile();
-        return s + ui.line();
+        return output;
     }
 
     /**
      * This method add a new Deadline Task to the ArrayList<Task>
      * @param ActionTime Contains the Action and the Date and/or Time.
+     * @return the String of the new deadline task.
      */
-    public void deadline(String[] ActionTime){
+    public String deadline(String[] ActionTime){
         String Timing;
         String details;
         this.cmd = ActionTime[0];
         if(ActionTime[1].length() <=1){
-            DE.DeadlineMissingDate();
+            return DE.DeadlineMissingDate();
         } else {
             details = ActionTime[1].substring(3).strip();
             String[] DateTime = details.split(" ");
             try {
-                this.LD = LocalDate.parse(DateTime[0]);
-                String Date = LD.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                Date date = inputDate.parse(DateTime[0]);
+                Timing = outputDate.format(date);
                 if (DateTime.length == 2) {
                     try {
-                        this.LT = LocalTime.parse(DateTime[1]); //accept time of 10:15 format
-                        String Time = LT.format(DateTimeFormatter.ofPattern("hh:mm a"));
-                        Timing = Date + " " + Time;
+                        Date time = inputTime.parse(DateTime[1]);
+                        Timing = Timing + " " + outputTime.format(time);
                     } catch (DateTimeException d){
-                        DE.InvalidTimeFormat();
-                        return;
+                        return DE.InvalidTimeFormat();
                     }
-                } else {
-                    Timing = Date;
                 }
                 Task T = new Deadline(cmd, Timing);
                 Storage.add(T);
-                T.Output();
-                System.out.println(String.format("Now you have %d tasks in the list.", counter));
-                System.out.print(ui.line());
+                String output = T.Output() + String.format("\nNow you have %d tasks in the list.\n", Storage.size());
                 WritetoFile();
-            } catch (DateTimeException d){
-                DE.InvalidDateFormat();
+                return output;
+            } catch (DateTimeException | ParseException d){
+                return DE.InvalidDateFormat();
             }
         }
     }
@@ -122,40 +131,37 @@ public class Store {
     /**
      * This method add a new Event Task to the ArrayList<Task>
      * @param ActionTime Contains the Action and Date and/or Time.
+     * @return String of the event created.
      */
-    public void event(String[] ActionTime){
+    public String event(String[] ActionTime){
         String Timing;
         String details;
         String Date;
         this.cmd = ActionTime[0];
         if(ActionTime[1].length() <=1){
-            DE.EventMissingDate();
+            return DE.EventMissingDate();
         } else {
             details = ActionTime[1].substring(3).strip();
             String[] DateTime = details.split(" ");
             try {
-                this.LD = LocalDate.parse(DateTime[0]);
-                Date = LD.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                Date date = inputDate.parse(DateTime[0]);
+                Timing = outputDate.format(date);
                 if (DateTime.length == 2) {
                     try {
-                        this.LT = LocalTime.parse(DateTime[1]); //accept time of 10:15 format
-                        String Time = LT.format(DateTimeFormatter.ofPattern("hh:mm a"));
-                        Timing = Date + " " + Time;
+                        Date time = inputTime.parse(DateTime[1]);
+                        Timing = date + " " + outputTime.format(time);
+
                     } catch (DateTimeException d) {
-                        DE.InvalidTimeFormat();
-                        return;
+                        return DE.InvalidTimeFormat();
                     }
-                } else {
-                    Timing = Date;
                 }
                 Task T = new Event(cmd, Timing);
                 Storage.add(T);
-                T.Output();
-                System.out.println(String.format("Now you have %d tasks in the list.", counter));
-                System.out.print(ui.line());
+                String output = T.Output() + String.format("\nNow you have %d tasks in the list.", Storage.size());
                 WritetoFile();
-            } catch (DateTimeException d) {
-                DE.InvalidDateFormat();
+                return output;
+            } catch (DateTimeException | ParseException d) {
+                return DE.InvalidDateFormat();
             }
         }
     }
@@ -163,18 +169,19 @@ public class Store {
     /**
      * This method remove the Task at the index from the ArrayList.
      * @param index Indicates which item on the ArrayList<Task> Storage.
+     * @return the String of the task deleted.
      */
-    public void delete(int index){
+    public String delete(int index){
         if(index > Storage.size() || index <= 0){
-            DE.ExceedList();
+            return DE.ExceedList();
         } else {
             Task UpdateCurrAction = Storage.get(index - 1);
             String CurrAction = UpdateCurrAction.toString();
             int amt = Storage.size() - 1;
             Storage.remove(index - 1);
-            System.out.print(ui.DeleteMessage(CurrAction, amt));
+            WritetoFile();
+            return ui.DeleteMessage(CurrAction, amt);
         }
-        WritetoFile();
     }
 
     /**
@@ -184,6 +191,9 @@ public class Store {
         try {
             FileWriter fileWriter = new FileWriter(file);
             for (int i = 0; i < Storage.size(); i++) {
+                if (Storage.get(i).isDone) {
+                    Storage.get(i).setStatusIcon();
+                }
                 String data = String.format("%d.", i + 1) + Storage.get(i).toString();
                 fileWriter.write(data);
                 fileWriter.write("\n");
@@ -199,27 +209,27 @@ public class Store {
      * @param S This is the Task from the file to be loaded from.
      */
     public void load(String S){
-        boolean R = CheckIfDone(S);
+        boolean alreadyDone = CheckIfDone(S);
         if(S.contains("[T]")){
-            String result = S.substring(9);
-            Task T = new Todo(result);
-            T.isDone = R;
+            String[] result = S.split(" ", 2);
+            Task T = new Todo(result[1]);
+            T.isDone = alreadyDone;
             Storage.add(T);
             WritetoFile();
         } else if (S.contains("[D]")){
-            String NewInput = S.substring(9);
-            String[] AT = NewInput.split("\\|");
+            String[] result = S.split(" ", 2);
+            String[] AT = result[1].split("\\|");
             String time = AT[1].strip().substring(3).strip();
             Task T = new Deadline(AT[0], time);
-            T.isDone = R;
+            T.isDone = alreadyDone;
             Storage.add(T);
             WritetoFile();
         } else if (S.contains("[E]")){
-            String result = S.substring(9);
-            String[] AT = result.split("\\|");
+            String[] result = S.split(" ", 2);
+            String[] AT = result[1].split("\\|");
             String time = AT[1].strip().substring(3).strip();
             Task T = new Event(AT[0], time);
-            T.isDone = R;
+            T.isDone = alreadyDone;
             Storage.add(T);
             WritetoFile();
         }
@@ -231,16 +241,17 @@ public class Store {
      * @return boolean This return true if the task has been completed.
      */
     public boolean CheckIfDone(String S){
-        return S.contains("✓");
+        return S.contains("[1]");
     }
 
     /**
      * This method finds Task that contains the Action.
      * @param Action This is the Action to be located in the ArrayList<Task> Storage.
+     * @return the String of all the items in the list that match.
      */
-    public void find(String Action){
+    public String find(String Action){
         ArrayList<String> Match = new ArrayList<>();
-        System.out.print(ui.line());
+        String output = "";
         int counter = 1;
         for (Task task : Storage) {
             String data = task.toString();
@@ -250,14 +261,14 @@ public class Store {
             }
         }
         if(Match.isEmpty()){
-            System.out.println("☹ What you are looking for does not exist.");
+            output = output + DE.NoMatchesFound();
         } else {
-            System.out.println("Here are the matching tasks in your list:");
-            for (String s : Match){
-                System.out.println(s);
+            output = output + "Here are the matching tasks in your list:\n";
+            for (String item : Match){
+                output = output + item + "\n";
             }
         }
-        System.out.print(ui.line());
+        return output;
     }
 }
 

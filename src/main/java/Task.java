@@ -3,8 +3,11 @@ public class Task {
     protected boolean isDone; //status of the action
     private Ui ui = new Ui();
     protected String line = ui.line();
+    protected String StatusIcon;
 
-    public void Output(){}
+    public String Output(){
+        return "";
+    }
 
     /**
      * This methods updates the Task action and indicate that it is incomplete.
@@ -13,18 +16,28 @@ public class Task {
     public Task(String description){
         this.description = description;
         this.isDone = false;
+        this.StatusIcon = "\u2718";
     }
 
     /**
      * This methods retrun the status icon.
      * @return String This return the status icon.
      */
-    public String getStatusIcon() { return (isDone ? "✓" : "✖"); }
-//    public int getStatusIcon() { return (isDone ? 1 : 0); }
+    public void getStatusIcon() {
+        if (isDone) {
+            this.StatusIcon = "\u2713";
+        } else {
+            this.StatusIcon = "\u2718";
+        }
+    }
+
+    public void setStatusIcon() {
+        this.StatusIcon =  "1";
+    }
 
     @Override
     public String toString(){
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + StatusIcon + "] " + description;
     }
 
 }

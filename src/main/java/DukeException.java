@@ -1,70 +1,82 @@
+import javafx.scene.image.Image;
+
 public class DukeException{
-    private Ui ui = new Ui();
 
     public DukeException(){
     }
 
     /**
-     * This method prints the Error Message for Incorrect Input.
+     * This method return the Error Message for Incorrect Input.
      */
-    public void IncorrectInputTodo(){
-        System.out.print(ui.line() + "☹ OOPS!!! The description of a todo cannot be empty.\nPlease insert Action\n" + ui.line());
+    public String IncorrectInputTodo(){
+        return "OOPS!!! The description of a todo cannot be empty.\nPlease insert Action\n";
     }
 
     /**
-     * This method prints the Error Message for Incorrect Input for a Deadline Task.
+     * This method return the Error Message for Incorrect Input for a Deadline Task.
      */
-    public void IncorrectInputDeadline(){
-        System.out.print(ui.line() + "☹ OOPS!!! The description of a Deadline cannot be empty.\nPlease insert Action\n" + ui.line());
+    public String IncorrectInputDeadline(){
+        return "OOPS!!! The description of a Deadline cannot be empty.\nPlease insert Action\n" ;
     }
 
     /**
-     * This method prints the Error Message for Incorrect Input for a Event Task.
+     * This method return the Error Message for Incorrect Input for a Event Task.
      */
-    public void IncorrectInputEvent(){
-        System.out.print(ui.line() + "☹ OOPS!!! The description of a Event cannot be empty.\nPlease insert Action\n" + ui.line());
+    public String IncorrectInputEvent(){
+        return "OOPS!!! The description of a Event cannot be empty.\nPlease insert Action\n";
     }
 
     /**
-     * This method prints the Error Message for Missing Date in Deadline Task.
+     * This method return the Error Message for Missing Date in Deadline Task.
      */
-    public void DeadlineMissingDate() {
-        System.out.print(ui.line() + "☹ OOPS!!! Deadline is missing a Date!\nPlease input Date\n" + ui.line());
+    public String DeadlineMissingDate() {
+        return "OOPS!!! Deadline is missing a Date!\nPlease input Date\n";
     }
 
     /**
-     * This method prints the Error Message for Missing Date in Event Task.
+     * This method return the Error Message for Missing Date in Event Task.
      */
-    public void EventMissingDate(){
-        System.out.print(ui.line() + "☹ OOPS!!! Event is missing a Date!\nPlease input Date\n" + ui.line());
+    public String EventMissingDate(){
+        return "OOPS!!! Event is missing a Date!\nPlease input Date\n";
     }
 
     /**
-     * This method prints the Error Message for Invalid Input.
+     * This method return the Error Message for Invalid Input.
      */
-    public void InvalidInput(){
-        System.out.print(ui.line() + "☹ OOPS!!! I'm sorry, but I don't know what that means.\n" + ui.line());
+    public String InvalidInput(){
+        return "OOPS!!! I'm sorry, but I don't know what that means.\n";
     }
 
     /**
-     * This method prints the Error Message for Invalid Number.
+     * This method return the Error Message for Invalid Number.
      */
-    public void ExceedList(){
-        System.out.print(ui.line() + "☹ Invalid Number. Please Enter a valid number.\n" + ui.line());
+    public String ExceedList(){
+        return "Invalid Number. Please Enter a valid number.\n";
     }
 
     /**
-     * This method prints the Error Message for Invalid Date Format.
+     * This method return the Error Message for Invalid Date Format.
      */
-    public void InvalidDateFormat(){
-        System.out.print(ui.line() + "☹ Invalid Date Format! Enter in /by yyyy-mm-dd\n" + ui.line());
+    public String InvalidDateFormat(){
+        return "Invalid Date Format! Enter in /by yyyy-mm-dd\n";
     }
 
     /**
-     * This method prints the Error Message for Invalid Time Format.
+     * This method return the Error Message for Invalid Time Format.
      */
-    public void InvalidTimeFormat(){
-        System.out.print(ui.line() + "☹ Invalid Date Format! Enter in hh:mm\n" + ui.line());
+    public String InvalidTimeFormat(){
+        return "Invalid Date Format! Enter in hh:mm\n";
+    }
+
+    /**
+     * This method return Error Message for no matched found.
+     */
+    public String NoMatchesFound(){
+        return "What you are looking for does not exist.\n";
+    }
+
+    public String MissingDoneIndex() {
+        return "OOPS you're missing an Index.";
     }
 
 
