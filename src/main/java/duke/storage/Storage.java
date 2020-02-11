@@ -15,10 +15,7 @@ import java.util.Scanner;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.FileCreationFailure;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 public class Storage {
 
@@ -103,7 +100,7 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error in saveTask");
+            System.out.println("Error in saving tasks to storage");
         }
     }
 
@@ -111,17 +108,18 @@ public class Storage {
      * Updates existing task list when there is a completion or deletion
      * @param taskList Existing task list
      */
-    public void updateTasks(ArrayList<Task> taskList) {
+    public void saveAllTasks(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(filePath, false);
-            for (Task task : taskList) {
+            ArrayList<Task> saveList = taskList.getList();
+            for (Task task : saveList) {
                 String toAdd = formatTaskForSaving(task);
                 fw.write(toAdd);
             }
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error in updateTasks");
+            System.out.println("Error in saving tasks to storage");
         }
     }
 

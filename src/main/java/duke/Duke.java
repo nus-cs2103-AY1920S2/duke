@@ -146,6 +146,7 @@ public class Duke extends Application {
         }
 
         if (output.toString().equals("See you again!")) {
+            storage.saveAllTasks(tasks);
             System.exit(0);
         }
 
