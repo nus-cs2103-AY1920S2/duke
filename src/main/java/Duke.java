@@ -67,6 +67,23 @@ public class Duke {
                 System.out.println("       " + taskList.get(task_num));
                 System.out.println("    ____________________________________________________________");
             }
+            else if ((next_cmd.split(" ")[0]).equals("delete")) {
+                int task_num = Integer.parseInt(next_cmd.split(" ")[1]) - 1;
+                if (task_num > taskList.size() || task_num < 0) {
+                    throw new DukeException("Invalid Task Number");
+                } else {
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     Noted. I've removed this task:");
+                    System.out.println("       " + taskList.get(task_num));
+                    taskList.remove(task_num);
+                    if (taskList.size() > 1) {
+                        System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
+                    } else {
+                        System.out.println("     Now you have " + taskList.size() + " task in the list.");
+                    }
+                    System.out.println("    ____________________________________________________________");
+                }
+            }
 
             //Add Task to taskList
             else {
