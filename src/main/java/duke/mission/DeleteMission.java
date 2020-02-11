@@ -20,6 +20,7 @@ public class DeleteMission extends Mission {
             str = ui.showException("OOP!!! The number of tasks you have is only "
                     + tasks.getTaskNumber());
         }
+        assert str != null : "Incomplete Delete Mission";
         return str;
     }
 }

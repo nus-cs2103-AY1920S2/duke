@@ -21,6 +21,7 @@ public class MarkDoneMission extends Mission {
             str = ui.showException("OOP!!! The number of tasks you have is only "
                     + tasks.getTaskNumber());
         }
+        assert str != null : "Incomplete MarkDone Mission";
         return str;
     }
 }
