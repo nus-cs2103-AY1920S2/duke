@@ -3,20 +3,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Border?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root
-  type="javafx.scene.layout.VBox"
-  xmlns:fx="http://javafx.com/fxml"
->
-  <ScrollPane>
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
+  <ScrollPane VBox.vgrow="ALWAYS" prefHeight="500" fitToWidth="true">
     <VBox fx:id="messageList" />
   </ScrollPane>
   <HBox>
     <TextField
       HBox.hgrow="ALWAYS"
-      minWidth="250"
+      prefWidth="250"
       promptText="Ask Duke anything!"
     />
     <Button text="Ask" onAction="#askQuery" />
