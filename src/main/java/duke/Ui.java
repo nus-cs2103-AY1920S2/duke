@@ -135,4 +135,15 @@ public class Ui {
         System.out.print("> ");
     }
 
+    /**
+     * Prints out all the tasks from the task list that got archived.
+     * @param tasks List of tasks.
+     */
+    public void showArchiveMessage(TaskList tasks) {
+        System.out.println(DELIMITER);
+        System.out.println("Here are the tasks that you have archived: ");
+        System.out.println(tasks);
+        System.out.println(DELIMITER);
+        System.out.print("> ");
+    }
 }

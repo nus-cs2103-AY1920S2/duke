@@ -215,6 +215,12 @@ public class Duke extends Application {
                     String searchTerm = instruction.getParameter();
                     ui.showFoundTasks(tasks.findTasks(searchTerm));
                     break;
+                case ARCHIVE:
+                    Path archiveFilePath = Paths.get("data", "dukeArchive.txt");
+                    storage.archive(tasks, archiveFilePath);
+                    ui.showArchiveMessage(tasks);
+                    tasks.clean();
+                    break;
                 default:
                     ;
                 }

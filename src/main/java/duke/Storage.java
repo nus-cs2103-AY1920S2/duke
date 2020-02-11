@@ -39,7 +39,7 @@ public class Storage {
                 fw.write(String.format("%s%n", tasks.getTask(i + 1).toFileFormat()));
             }
             fw.close();
-        } catch (IOException e) {
+        } catch (IOException | DukeException e) {
             e.printStackTrace();
         }
     }
@@ -67,5 +67,24 @@ public class Storage {
             throw new DukeException(e.getMessage());
         }
         return tempList;
+    }
+
+    /**
+     * Writes task to archive. If Storage was previously unable to read in saved data due to invalid data or
+     * corrupted file, it wil overwrite the file.
+     * @param tasks List of tasks to be archived.
+     * @param archiveFilePath Path of archival file.
+     */
+    public void archive(TaskList tasks, Path archiveFilePath) {
+        File archiveFile = new File(archiveFilePath.toString());
+        try {
+            FileWriter fw = new FileWriter(archiveFile, true);
+            for (int i = 0; i < tasks.getSize(); i++) {
+                fw.append(String.format("%s%n", tasks.getTask(i + 1).toFileFormat()));
+            }
+            fw.close();
+        } catch (IOException | DukeException e) {
+            e.printStackTrace();
+        }
     }
 }

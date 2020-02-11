@@ -97,6 +97,13 @@ public class TaskList {
     }
 
     /**
+     * Resets the task list so it is empty. For archiving purposes.
+     */
+    public void clean() {
+        this.tasks = new ArrayList<>();
+    }
+
+    /**
      * Returns the string representation of a TaskList.
      * @return String representation of TaskList.
      */
