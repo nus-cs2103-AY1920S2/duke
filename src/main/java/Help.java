@@ -34,8 +34,4 @@ public class Help extends Command {
             return "This is not a valid function! Please try again.";
         }
     }
-
-    boolean isExit() {
-        return false;
-    }
 }

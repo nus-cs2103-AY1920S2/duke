@@ -9,7 +9,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    LocalDateTime getBy() {
+    LocalDateTime getTime() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         String formatDateTime = by.format(format);
         return by;

@@ -6,5 +6,7 @@ public abstract class Command {
 
     abstract String execute(TaskList task, Storage storage) throws IOException;
 
-    abstract boolean isExit();
+    boolean isExit() {
+        return false;
+    }
 }

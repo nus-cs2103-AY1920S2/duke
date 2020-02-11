@@ -25,8 +25,9 @@ public class Duke {
     }
 
     /**
-     * Runs the code well.
+     * Parses user input and executes the same.
      *
+     * @return String to be displayed.
      * @throws IOException Throws IOException.
      */
     public String getResponse(String fullCommand) throws IOException {
