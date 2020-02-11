@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -108,13 +109,9 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
@@ -130,6 +127,77 @@ public class Duke extends Application {
         textToAdd.setWrapText(true);
 
         return textToAdd;
+    }
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String cmd) {
+        if (cmd.equals("bye")) {
+            return lib.bye();
+        } else if (cmd.equals("list")) {
+            return lib.list();
+        } else if (cmd.contains("done")) {
+            String[] splited = cmd.split(" ");
+            if (splited.length < 2){
+                return DE.MissingDoneIndex();
+            } else {
+                int index = Integer.parseInt(splited[1]);
+                return lib.done(index);
+            }
+        } else if (cmd.contains("delete")) {
+            String[] splited = cmd.split(" ");
+            int index = Integer.parseInt(splited[1]);
+            return lib.delete(index);
+        } else if (cmd.contains("todo")) {
+            CheckInput = cmd.split(" ");
+            if (CheckInput.length < 2) {
+                return DE.IncorrectInputTodo();
+            } else {
+                String NewInput = cmd.substring(5);
+                return lib.todo(NewInput);
+            }
+        } else if (cmd.contains("deadline")) {
+            CheckInput = cmd.split(" ");
+            if (CheckInput.length < 2) {
+                return DE.IncorrectInputDeadline();
+            } else if (!cmd.contains("/")) {
+                return DE.DeadlineMissingDate();
+            } else {
+                String NewInput = cmd.substring(9);
+                String[] ActionTime = NewInput.split("/", 2);
+                return lib.deadline(ActionTime);
+            }
+        } else if (cmd.contains("event")) {
+            CheckInput = cmd.split(" ");
+            if (CheckInput.length < 2) {
+                return DE.IncorrectInputEvent();
+            } else if (!cmd.contains("/")) {
+                return DE.EventMissingDate();
+            } else {
+                String NewInput = cmd.substring(6);
+                String[] ActionTime = NewInput.split("/", 2);
+                return lib.event(ActionTime);
+            }
+        } else if (cmd.contains("find")) {
+            CheckInput = cmd.split(" ");
+            if (CheckInput.length < 2) {
+                return DE.InvalidInput();
+            } else {
+                String NewInput = cmd.substring(4).strip();
+                return lib.find(NewInput);
+            }
+        } else {
+            return DE.InvalidInput();
+        }
     }
 }
 
