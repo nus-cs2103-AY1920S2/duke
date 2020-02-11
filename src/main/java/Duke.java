@@ -1,6 +1,7 @@
 import duke.*;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.IOException;
@@ -40,7 +41,7 @@ public class Duke {
         this.ui = new Ui();
         this.parser = new Parser();
         try {
-            this.taskList = new TaskList(storage.start());
+            this.taskList = new TaskList(storage.load());
         } catch (IOException e) {
             System.err.println(e);
         }
@@ -73,47 +74,54 @@ public class Duke {
 
         switch (parser.getMessage(first)) {
         case DONE:
-            parser.checkDescription(str, "done".length());
-            output += taskList.markDone(str);
+            this.parser.checkDescriptionWhetherExit(str, "done".length());
+            int requestNumber = parser.extractRequestNumber(st.nextToken());
+            this.taskList.markDone(requestNumber);
+            output += this.ui.doneMessage(requestNumber, taskList.getTasks());
             this.storage.rewriteFile(taskList);
             break;
 
         case DELETE:
-            parser.checkDescription(str, "delete".length());
-            output += taskList.delete(str);
+            this.parser.checkDescriptionWhetherExit(str, "delete".length());
+            int requestNumber2 = parser.extractRequestNumber(st.nextToken());
+            Task taskDeleted = this.taskList.delete(requestNumber2);
+            output += this.ui.deleteMessage(requestNumber2, taskDeleted, this.taskList.size());
             this.storage.rewriteFile(taskList);
             break;
 
         case FIND:
-            parser.checkDescription(str, "find".length());
-            output += taskList.find(str);
+            parser.checkDescriptionWhetherExit(str, "find".length());
+            output += ui.printMatchingTasks(taskList.find(st.nextToken()));
             break;
 
         case TODO:
-            parser.checkDescription(str, "todo".length());
+            parser.checkDescriptionWhetherExit(str, "todo".length());
             Todo td = new Todo(st.nextToken("").substring(1));
-            output += taskList.addTask(td);
+            taskList.addTask(td);
+            output += this.ui.addMessage(td, this.taskList.size());
             this.storage.rewriteFile(taskList);
             break;
 
         case DEADLINE:
-            parser.checkDescription(str, "deadline".length());
+            parser.checkDescriptionWhetherExit(str, "deadline".length());
             String[] strings = parser.stringSplitting(st);
             Deadline ddl = new Deadline(strings[0], parser.getLocalDate(strings[1]));
-            output += taskList.addTask(ddl);
+            taskList.addTask(ddl);
+            output += this.ui.addMessage(ddl, this.taskList.size());
             this.storage.rewriteFile(taskList);
             break;
 
         case EVENT:
-            parser.checkDescription(str, "event".length());
+            parser.checkDescriptionWhetherExit(str, "event".length());
             String[] strings2 = parser.stringSplitting(st);
             Event ev = new Event(strings2[0], parser.getLocalDate(strings2[1]));
-            output += taskList.addTask(ev);
+            taskList.addTask(ev);
+            output += this.ui.addMessage(ev, this.taskList.size());
             this.storage.rewriteFile(taskList);
             break;
 
         case LIST:
-            output += this.ui.getList(taskList);
+            output += this.ui.printCurrentList(taskList);
             break;
 
         case HEY:

@@ -1,8 +1,7 @@
 Todo~1~play chess
-Todo~0~go to bed
 Todo~0~watching TV
 Todo~0~group meeting
 Event~1~presentation~2020-02-23
 Event~0~e-learning~2020-10-29
-Deadline~0~lunch~2020-02-20
-Event~0~kwk~2020-12-12
+Deadline~1~play guitar~2020-04-05
+Event~1~party~2020-09-09

@@ -44,7 +44,7 @@ public class Parser {
      * @param length the length of the command being checked.
      * @throws EmptyDescriptionException if the description is empty.
      */
-    public void checkDescription(String str, int length) throws EmptyDescriptionException {
+    public void checkDescriptionWhetherExit(String str, int length) throws EmptyDescriptionException {
         if (str.length() <= length + 1) {
             throw new EmptyDescriptionException("OOPS!!! The description of a duke.task cannot be empty.");
         }
@@ -62,16 +62,6 @@ public class Parser {
         //Lambda usage here
         return Optional.ofNullable(Parser.availableMessage.get(str))
                 .orElseThrow(() -> new InvalidKeyException("OOPS!!! I'm sorry, but I don't know what that means :-("));
-    }
-
-    /**
-     * checks whether the number input is valid.
-     * @param num the number given by the user.
-     * @param index the size of the duke.TaskList.
-     * @return true if num is within the correct range.
-     */
-    public boolean inRange(int num, int index) {
-        return num > 0 && num <= index;
     }
 
     public LocalDate getLocalDate(String str) {
@@ -109,5 +99,9 @@ public class Parser {
             td.markAsDone();
         }
         return td;
+    }
+
+    public int extractRequestNumber(String str) {
+        return Integer.parseInt(str);
     }
 }

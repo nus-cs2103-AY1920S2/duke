@@ -29,7 +29,7 @@ public class Ui {
         //welcome message and showing the list to the user
         String s = typeSetting("    Hello, I'm Bob. 👶 👶 👶\n    " +
                 "What can I do for you? 😃\n");
-        return s + getList(taskList);
+        return s + printCurrentList(taskList);
     }
 
     /**
@@ -77,7 +77,7 @@ public class Ui {
      * gets a list which listing all the tasks recorded.
      * @param taskList the duke.TaskList which contains all the Tasks recorded.
      */
-    public String getList(TaskList taskList) {
+    public String printCurrentList(TaskList taskList) {
         List<Task> list = taskList.getTasks();
         int index = list.size();
         StringBuilder li = new StringBuilder("    📜 Here are the tasks in your list:\n");
@@ -91,7 +91,7 @@ public class Ui {
      * an slightly altered version of gettingList. (exclusively used in findTask method in duke.TaskList class)
      * @param taskList the duke.TaskList we are dealing with.
      */
-    public String getMatchingTasks(TaskList taskList) {
+    public String printMatchingTasks(TaskList taskList) {
         List<Task> list = taskList.getTasks();
         int index = list.size();
         StringBuilder li = new StringBuilder("    📜 Here are the matching tasks in your list:\n");

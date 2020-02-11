@@ -67,7 +67,7 @@ public class Storage {
      * @return a list of Tasks gotten from the hard disk.
      * @throws IOException if the file path cannot be found.
      */
-    public ArrayList<Task> start() throws IOException {
+    public ArrayList<Task> load() throws IOException {
         Parser parser = new Parser();
         ArrayList<Task> tasks = new ArrayList<>();
         List<String> data = Files.readAllLines(Paths.get(this.filePath));
