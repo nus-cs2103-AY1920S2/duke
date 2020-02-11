@@ -12,7 +12,6 @@ import duke.storage.Storage;
 import duke.exceptions.DukeException;
 import duke.ui.Ui;
 import duke.tasks.TaskList;
-import duke.commands.Command;
 import duke.parser.Parser;
 
 import javafx.application.Application;
@@ -140,13 +139,7 @@ public class Duke extends Application {
     public String getResponse(String input) {
         StringBuilder output = new StringBuilder();
 
-        Command command = Parser.parse(input);
-        try {
-            output.append(command.execute(tasks, ui, storage));
-        } catch (DukeException e) {
-            e.printStackTrace();
-            System.out.println("execute failed");
-        }
+        output.append(Parser.parse(input, tasks, storage));
 
         if (output.toString().equals("See you again!")) {
             System.exit(0);

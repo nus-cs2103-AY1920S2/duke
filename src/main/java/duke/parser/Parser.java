@@ -3,35 +3,65 @@
  */
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.AddTodoCommand;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.CommandType;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
 
 public class Parser {
 
     /**
      * Returns the command corresponding to user input
-     * @param fullCommand Input received from user
+     * @param input Input received from user
      * @return Command requested by user
      */
-    public static Command parse(String fullCommand) {
+    public static String parse(String input, TaskList taskList, Storage storage) {
 
-        String cmdType = fullCommand.split(" ")[0];
+        String[] inputArr = input.split(" ",2);
+        String cmd = inputArr[0].toUpperCase();
 
-        if (cmdType.equalsIgnoreCase("todo")
-                || cmdType.equalsIgnoreCase("deadline")
-                || cmdType.equalsIgnoreCase("event")) {
-            return new AddCommand(fullCommand.toLowerCase().trim());
-        } else if (cmdType.equalsIgnoreCase("list")) {
-            return new ListCommand(fullCommand.toLowerCase().trim());
-        } else if (cmdType.equalsIgnoreCase("done")) {
-            return new DoneCommand(fullCommand.toLowerCase().trim());
-        } else if (cmdType.equalsIgnoreCase("delete")) {
-            return new DeleteCommand(fullCommand.toLowerCase().trim());
-        } else if (cmdType.equalsIgnoreCase("find")) {
-            return new FindCommand(fullCommand.toLowerCase().trim());
-        } else if (cmdType.equalsIgnoreCase("bye")) {
-            return new ExitCommand("bye");
-        } else {
-            return new Command("Unrecognized");
+        CommandType commandType;
+        try {
+            commandType = CommandType.valueOf(cmd);
+        } catch (IllegalArgumentException e) {
+            return "command not recognized";
+        }
+        String commandDetails = "";
+
+        if (commandType != CommandType.BYE || commandType != CommandType.LIST) {
+            try {
+                commandDetails = inputArr[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("details required");
+            }
+        }
+
+        switch (commandType) {
+        case TODO:
+            return AddTodoCommand.execute(commandDetails, taskList, storage);
+        case BYE:
+            return ExitCommand.execute(commandDetails, taskList, storage);
+        case DEADLINE:
+            return AddDeadlineCommand.execute(commandDetails, taskList, storage);
+        case DELETE:
+            return DeleteCommand.execute(commandDetails, taskList, storage);
+        case DONE:
+            return DoneCommand.execute(commandDetails, taskList, storage);
+        case EVENT:
+            return AddEventCommand.execute(commandDetails, taskList, storage);
+        case FIND:
+            return FindCommand.execute(commandDetails, taskList, storage);
+        case LIST:
+            return ListCommand.execute(commandDetails, taskList, storage);
+        default:
+            return "failed to understand command";
         }
     }
 }

@@ -8,15 +8,11 @@ public class Ui {
     private static final String HOR_LINE = "___________________________" +
             "_________________________________";
 
-    public Ui() {
-
-    }
-
-    public void showLoadingError() {
+    public static void showLoadingError() {
         System.out.println(INDENT + "Loading error");
     }
 
-    public void showWelcome() {
+    public static void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -28,7 +24,7 @@ public class Ui {
         System.out.println(INDENT + "What can I do for you?");
     }
 
-    public void showError(String message) {
+    public static void showError(String message) {
         System.out.println(INDENT + message);
     }
 
@@ -37,7 +33,7 @@ public class Ui {
         return sc.nextLine().trim();
     }
 
-    public void print(String s) {
+    public static void print(String s) {
         System.out.println(INDENT + s);
     }
 }

@@ -5,7 +5,6 @@
 package duke.tasks;
 
 import java.util.ArrayList;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.exceptions.DukeException;
 
@@ -46,18 +45,17 @@ public class TaskList {
 
     /**
      * Prints to console the existing list of tasks
-     * @param ui User interface to reply user
      */
-    public String printTaskList(Ui ui) {
+    public String printTaskList() {
         StringBuilder output = new StringBuilder();
         if (size() == 0) {
             output.append("Your list of tasks is currently empty.\n");
         } else {
             output.append("This is your list of tasks:\n");
             int taskIdx = 1;
-            for (Task t : taskList) {
+            for (Task task : taskList) {
                 output.append(taskIdx + ". ");
-                output.append(t.toString() + "\n");
+                output.append(task.toString() + "\n");
                 taskIdx++;
             }
         }
@@ -66,12 +64,11 @@ public class TaskList {
 
     /**
      * Marks a task in the ArrayList as complete
-     * @param ui User interface to reply user
      * @param storage To store updated task status in file
      * @param taskNumber Index of task to mark as completed
      * @throws DukeException If given index does not exist
      */
-    public String completeTask(Ui ui, Storage storage, int taskNumber) throws DukeException {
+    public String completeTask(Storage storage, int taskNumber) throws DukeException {
         if (taskNumber > taskList.size() || taskNumber < 1) {
             throw new DukeException("This task number does not exist.");
         }
@@ -83,12 +80,11 @@ public class TaskList {
 
     /**
      * Deletes a task in the ArrayList
-     * @param ui User interface to reply user
      * @param storage To store updated task status in file
      * @param taskNumber Index of task to be deleted
      * @throws DukeException If given index does not exist
      */
-    public String deleteTask(Ui ui, Storage storage, int taskNumber) throws DukeException {
+    public String deleteTask(Storage storage, int taskNumber) throws DukeException {
         if (taskNumber > taskList.size() || taskNumber < 1) {
             throw new DukeException("This task number does not exist.");
         }
@@ -101,10 +97,9 @@ public class TaskList {
 
     /**
      * Returns a taskList object with descriptions containing the keyword
-     * @param ui User interface to reply user
      * @param keyword To be searched against existing task list
      */
-    public TaskList findKeyWord(Ui ui, String keyword) {
+    public TaskList findKeyWord(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : taskList) {
             String description = task.getDescription();

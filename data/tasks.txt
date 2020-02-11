@@ -1,4 +1,1 @@
-T | 1 | borrow book
-D | 0 | return book | Jun 6 2020
-E | 0 | project meeting | Jun 6 2020 14:00
 T | 0 | read book
