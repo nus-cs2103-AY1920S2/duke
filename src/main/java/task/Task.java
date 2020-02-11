@@ -36,6 +36,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void markAsUndone() {
+        this.isDone = false;
+    }
+
     /**
      * Returns a summary of the task.
      *

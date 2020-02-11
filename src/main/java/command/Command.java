@@ -19,5 +19,15 @@ public abstract class Command {
      */
     public abstract String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException;
 
+    /**
+     * Undoes the command.
+     *
+     * @param tasks A TaskList containing all tasks
+     * @param textUi a TextUi object that handles user-system interaction
+     * @param storage A Storage object which specifies the location of the data
+     * @return a string representing the result of the undo command
+     */
+    public abstract String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException;
+
     public abstract boolean isExit();
 }

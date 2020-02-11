@@ -1,5 +1,6 @@
 package command;
 
+import common.Message;
 import common.Storage;
 import task.TaskList;
 import exception.DukeException;
@@ -41,6 +42,19 @@ public class ReminderCommand extends Command {
         } else {
             return textUi.remindTasks(tasks, 'A');
         }
+    }
+
+    /**
+     * Informs the user that reminders command cannot be undone.
+     *
+     * @param tasks A TaskList containing all tasks
+     * @param textUi a TextUi object that handles user-system interaction
+     * @param storage A Storage object which specifies the location of the data
+     * @return
+     * @throws DukeException
+     */
+    public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+        return textUi.showError_Str(Message.MESSAGE_CANNOTUNDO);
     }
 
     /**

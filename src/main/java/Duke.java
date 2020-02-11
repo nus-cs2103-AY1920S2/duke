@@ -1,9 +1,12 @@
 import command.Command;
+import command.ErrorCommand;
 import common.Storage;
 import exception.DukeException;
 import parser.Parser;
 import task.TaskList;
 import ui.TextUi;
+
+import java.util.Stack;
 
 /**
  * Control class of Duke, including the logic of Duke.
@@ -14,6 +17,7 @@ public class Duke {
     private Storage dukeStorage;
     private TaskList tasks;
     private boolean isFinished;
+    private Stack<Command> commandStack;
 
     /**
      * Initializes ui and storage.
@@ -22,6 +26,7 @@ public class Duke {
         textUi = new TextUi();
         dukeStorage = new Storage("tasks.txt");
         tasks = new TaskList(dukeStorage.readFromFile());
+        commandStack = new Stack<>();
     }
 
     /**
@@ -31,8 +36,20 @@ public class Duke {
      */
     public String getResponse(String text) {
         try {
-            Command c = Parser.parse(text.trim());
-            String commandResult = c.execute(tasks, textUi, dukeStorage);
+            Command c;
+            String commandResult;
+            if(text.trim().equalsIgnoreCase("undo")) {
+                if (commandStack.isEmpty()) {
+                    c = new ErrorCommand();
+                } else {
+                    c = commandStack.pop();
+                }
+                commandResult = c.undo(tasks, textUi, dukeStorage);
+            } else {
+                c = Parser.parse(text.trim());
+                commandStack.push(c);
+                commandResult = c.execute(tasks, textUi, dukeStorage);
+            }
             if(commandResult.equals("     It is time to say goodbye :(")){
                 this.isFinished = true;
             }

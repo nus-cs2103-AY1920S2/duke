@@ -14,6 +14,7 @@ public class Message {
     public static final String MESSAGE_IAM = "Hello! I'm Duke\n" + "What can I do for you?";
     public static final String MESSAGE_LINE = "    ____________________________________________________________";
     public static final String MESSAGE_MARKASDONE = "     Nice! I've marked this task as done:";
+    public static final String MESSAGE_MARKASUNDONE = "     Nice! I've marked this task as undone:";
     public static final String MESSAGE_SHOWLIST = "     Here are the tasks in your list:";
     public static final String MESSAGE_GOTIT = "     Got it. I've added this task:";
     public static final String MESSAGE_DELETEIT = "     Noted. I've removed this task: ";
@@ -23,4 +24,9 @@ public class Message {
     public static final String MESSAGE_NULL = "     Sorry, but I cannot find matching items.";
     public static final String MESSAGE_SHOWRELATED = "     Here are all related undone tasks:";
     public static final String MESSAGE_NOTHING = "you have nothing left in the list.";
+    public static final String MESSAGE_REMOVE = "     Got it. I've removed this task: ";
+    public static final String MESSAGE_PREVIOUSINVALID = "     Sorry, the previous command was invalid\n"
+            +"     It cannot be undone.";
+    public static final String MESSAGE_CANNOTUNDO = "     Sorry, the previous command was\n"
+            + "     not suitable to be undone";
 }

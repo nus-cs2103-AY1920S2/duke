@@ -32,6 +32,12 @@ public class AddCommand extends Command {
         return textUi.showAddingTask_Str(thisTask, tasks);
     }
 
+    public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+        tasks.remove(this.thisTask);
+        storage.writeToFile(tasks.getList());
+        return textUi.showRemovingTask(this.thisTask, tasks);
+    }
+
     public boolean isExit() {
         return false;
     }

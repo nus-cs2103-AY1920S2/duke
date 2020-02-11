@@ -2,6 +2,7 @@ package command;
 
 import common.Message;
 import common.Storage;
+import task.Task;
 import ui.TextUi;
 import exception.DukeException;
 import task.TaskList;
@@ -12,10 +13,13 @@ import task.TaskList;
 public class DeleteCommand extends Command {
 
     protected int index;
+    protected Task deletedTask;
+    protected boolean isValid;
 
     public DeleteCommand(int index) {
         super();
         this.index = index - 1;
+        this.isValid = false;
     }
 
     /**
@@ -30,10 +34,30 @@ public class DeleteCommand extends Command {
         if (this.index >= tasks.getList().size() || this.index < 0) {
             return textUi.showError_Str(Message.MESSAGE_INVALIDCOMMAND);
         }
+        this.isValid = true;
+        this.deletedTask = tasks.getList().get(this.index);
         String res = textUi.showDeletingTask_Str(this.index, tasks);
         tasks.delete(this.index);
         storage.writeToFile(tasks.getList());
         return res;
+    }
+
+    /**
+     * Undoes the deleting command.
+     *
+     * @param tasks A TaskList containing all tasks
+     * @param textUi a TextUi object that handles user-system interaction
+     * @param storage A Storage object which specifies the location of the data
+     * @return a string representing the adding back command.
+     * @throws DukeException
+     */
+    public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+        if(!this.isValid) {
+            return textUi.showError_Str(Message.MESSAGE_PREVIOUSINVALID);
+        }
+        tasks.add(this.deletedTask);
+        storage.writeToFile(tasks.getList());
+        return textUi.showAddingTask_Str(this.deletedTask, tasks);
     }
 
     /**

@@ -78,6 +78,23 @@ public class TextUi {
     }
 
     /**
+     * Returns messages after removing a task from the task list.
+     *
+     * @param givenTask
+     * @param tasks
+     * @return
+     */
+    public String showRemovingTask(Task givenTask, TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Message.MESSAGE_LINE + "\n");
+        sb.append(Message.MESSAGE_REMOVE + "\n");
+        sb.append("     " + givenTask.toString() + "\n");
+        sb.append("     Now you have " + tasks.getList().size() + " tasks in the list." + "\n");
+        sb.append(Message.MESSAGE_LINE);
+        return sb.toString();
+    }
+
+    /**
      * Returns the deleted task message to the user.
      *
      * @param index the index of the deleted task in the task list
@@ -104,6 +121,22 @@ public class TextUi {
         sb.append(Message.MESSAGE_LINE + "\n");
         sb.append(Message.MESSAGE_MARKASDONE + "\n");
         sb.append("     " + tasks.getList().get(index).toString() + "\n");
+        sb.append(Message.MESSAGE_LINE);
+        return sb.toString();
+    }
+
+    /**
+     * Returns the undone task message to the user.
+     *
+     * @param givenTask the task is marked as undone
+     * @param tasks the task list
+     * @return a string representing the undone command result
+     */
+    public String showUndoneTask(Task givenTask, TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Message.MESSAGE_LINE + "\n");
+        sb.append(Message.MESSAGE_MARKASUNDONE + "\n");
+        sb.append("     " + givenTask.toString() + "\n");
         sb.append(Message.MESSAGE_LINE);
         return sb.toString();
     }
@@ -228,4 +261,5 @@ public class TextUi {
         sb.append(Message.MESSAGE_LINE);
         return sb.toString();
     }
+
 }

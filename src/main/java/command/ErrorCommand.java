@@ -28,6 +28,19 @@ public class ErrorCommand extends Command {
     }
 
     /**
+     * Informs the user that error command cannot be undone.
+     *
+     * @param tasks A TaskList containing all tasks
+     * @param textUi a TextUi object that handles user-system interaction
+     * @param storage A Storage object which specifies the location of the data
+     * @return
+     * @throws DukeException
+     */
+    public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
+        return textUi.showError_Str(Message.MESSAGE_CANNOTUNDO);
+    }
+
+    /**
      * Returns whether the current command is an exit command.
      *
      * @return a boolean value representing the property of the current command

@@ -42,6 +42,19 @@ public class TaskList {
     }
 
     /**
+     * Removes a task from the task list.
+     *
+     * @param removedTask the removed Task
+     */
+    public void remove(Task removedTask) {
+        for (int i = 0; i < this.list.size(); i++) {
+            if(removedTask == this.list.get(i)) {
+                this.list.remove(i);
+            }
+        }
+    }
+
+    /**
      * Deletes a task from the task list.
      *
      * @param index the index of the task being deleted
@@ -57,6 +70,19 @@ public class TaskList {
      */
     public void done(int index) {
         this.list.get(index).markAsDone();
+    }
+
+    /**
+     * Marks one task as undone.
+     *
+     * @param givenTask the task that is to be marked as undone
+     */
+    public void unDone(Task givenTask) {
+        for (int i = 0; i < this.list.size(); i++) {
+            if(givenTask == this.list.get(i)) {
+                this.list.get(i).markAsUndone();
+            }
+        }
     }
 
     /**
