@@ -3,49 +3,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import CustomException.DukeException;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-
-
-// These are not Strings; they are constant variables
-/* enum Op {
-    TODO,
-    DEADLINE,
-    EVENT,
-    LIST,
-    DONE,
-    DELETE,
-    BYE
-} */
 
 /**
  * Represents a chatbot to store list of things to do. A <code>Duke</code> object corresponds to
  * a chatbot that stores a list of things to do.
  */
-public class Duke extends Application {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Creates a Duke object
@@ -68,7 +34,6 @@ public class Duke extends Application {
      */
     public Duke() {}
 
-
     public static void main(String[] args) throws IOException {
         Duke duke = new Duke("./src/main/java/database.txt");
         duke.run();
@@ -89,122 +54,22 @@ public class Duke extends Application {
         ui.prompt(storage, tasks);
     }
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
+    public String intro() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
 
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-
-        /*Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.*/
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
+        return logo;
     }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) throws IOException {
+        return ui.promptGUI(storage, tasks, input);
     }
 }
 
@@ -353,138 +218,6 @@ class Storage {
 }
 
 /**
- * Represents the task list in memory. A <code>TaskList</code> object corresponds to a task list
- */
-class TaskList {
-    private ArrayList<Task> list;
-
-    public TaskList() {
-        list = new ArrayList<>();
-    }
-
-    public TaskList(ArrayList<String> contents) throws DukeException {
-        list = new ArrayList<>();
-        load(contents);
-    }
-
-    /**
-     * Parse all information read from the database into memory
-     *
-     * @param contents
-     * @throws DukeException
-     */
-    private void load(ArrayList<String> contents) throws DukeException {
-        try {
-            for (String str : contents) {
-                char type = str.charAt(0);
-                boolean done = Boolean.parseBoolean(str.substring(4, 5));
-                String description;
-                String byAt;
-
-                // To Do
-                if (type == 'T') {
-                    description = str.substring(8);
-                    list.add(new ToDo(description, done));
-                } else {
-                    int lastIndex = findThirdStrike(str) - 1;
-                    description = str.substring(8, lastIndex);
-                    byAt = str.substring(lastIndex + 3);
-
-                    if (type == 'D') {
-                        list.add(new Deadline(description, done, LocalDate.parse(byAt)));
-                    } else if (type == 'E') {
-                        list.add(new Event(description, done, LocalDate.parse(byAt)));
-                    }
-                }
-            }
-        } catch (Exception e) {
-            throw new DukeException();
-        }
-    }
-
-    public void save(Storage storage) throws IOException {
-        storage.save(list);
-    }
-
-    private int findThirdStrike(String str) {
-        int count = 3;
-
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == '|') {
-                count--;
-            }
-
-            if (count == 0) {
-                return i;
-            }
-        }
-
-        return -1;
-    }
-
-    public void display() {
-        System.out.println("Here are the tasks in your list:");
-
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1)
-                    + ". "
-                    + list.get(i).toString());
-        }
-    }
-
-    public void display(ArrayList<Integer> indices) {
-        System.out.println("Here are the matching tasks in your list:");
-
-        for (int i = 0; i < indices.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(indices.get(i)).toString());
-        }
-    }
-
-    public void add(String description, boolean isDone) {
-        list.add(new ToDo(description, isDone));
-    }
-
-    public void add(char type, String description, boolean isDone, LocalDate date) {
-        if (type == 'D') {
-            list.add(new Deadline(description, isDone, date));
-        } else if (type == 'E') {
-            list.add(new Event(description, isDone, date));
-        } else {
-            System.out.println("Error: type must be 'D' or 'E'");
-        }
-    }
-
-    public int size() {
-        return list.size();
-    }
-
-    public Task get(int i) {
-        return list.get(i);
-    }
-
-    public void markAsDone(int index) {
-        list.get(index).markAsDone();
-    }
-
-    public Task delete(int index) {
-        return list.remove(index);
-    }
-
-    public void find(String key) {
-        ArrayList<Integer> indices = new ArrayList<>();
-
-        for (int i = 0; i < list.size(); i++) {
-            String desc = list.get(i).getDescription();
-            if (desc.contains(key)) {
-                indices.add(i);
-            }
-        }
-
-        display(indices);
-    }
-}
-
-/**
  * Represents the main UI for communicating with user. A <code>Ui</code> object corresponds to a UI
  */
 class Ui {
@@ -511,6 +244,17 @@ class Ui {
         System.out.println("Now you have "
                 + tasks.size()
                 + "tasks in the list.");
+    }
+
+    private String printAddedGUI(TaskList tasks) {
+        String ret = "Got it. I've added this task:\n";
+        ret += "\t" + tasks.get(tasks.size() - 1).toString() + "\n";
+        ret += "Now you have "
+                + tasks.size()
+                + "tasks in the list."
+                + "\n";
+
+        return ret;
     }
 
     /**
@@ -622,7 +366,116 @@ class Ui {
             }
 
             if (isBye) {
-                break;
+                return;
+            }
+        }
+    }
+
+    public String promptGUI(Storage storage, TaskList tasks, String userInput) throws IOException {
+        while (true) {
+            boolean isBye = false;
+            String input = userInput;
+            String firstWord;
+
+            // Guarantees 1st word is legitimate
+            try {
+                firstWord = Parser.getFirstWord(input);
+            } catch (DukeException e) {
+                return "Oops!! I'm sorry, but I don't know what that means :(";
+            }
+
+            switch (firstWord) {
+            case "bye":
+                return "Bye. Hope to see you again soon!";
+            case "list":
+                return tasks.displayGUI();
+            case "todo":
+                if (input.length() > 5) {
+                    int original = tasks.size();
+                    tasks.add(input.substring(5), false);
+                    assert tasks.size() == original + 1: "Task list not updated";
+
+                    tasks.save(storage);
+                    return printAddedGUI(tasks);
+                } else {
+                    return "No todo task specified!\n";
+                }
+            case "deadline":    // deadline description /yyyy-mm-dd
+                if (input.length() > 9) {
+                    try {
+                        String description = Parser.getDescription(input, 9);
+                        LocalDate date = Parser.getDate(input);
+
+                        int original = tasks.size();
+                        tasks.add('D', description, false, date);
+                        assert tasks.size() == original + 1: "Task list not updated";
+
+                        tasks.save(storage);
+                        return printAddedGUI(tasks);
+                    } catch (Exception e) {
+                        return "Error: incorrect format to add deadline task\n";
+                    }
+                } else {
+                    return "No deadline task specified!\n";
+                }
+            case "event":   // event description /yyyy-mm-dd
+                if (input.length() > 6) {
+                    try {
+                        String description = Parser.getDescription(input, 6);
+                        LocalDate date = Parser.getDate(input);
+
+                        int original = tasks.size();
+                        tasks.add('E', description, false, date);
+                        assert tasks.size() == original + 1: "Task list not updated";
+
+
+                        tasks.save(storage);
+                        return printAddedGUI(tasks);
+                    } catch (Exception e) {
+                        return "Error: incorrect format to add deadline task\n";
+                    }
+                } else {
+                    return "Error: no deadline task specified\n";
+                }
+            case "done":
+                try {
+                    int index = Parser.getIndex(input, "done");
+                    tasks.markAsDone(index);
+
+                    return "Nice! I've marked this task as done: \n"
+                            + "\t"
+                            + tasks.get(index).toString()
+                            + "\n";
+                } catch (Exception e) {
+                    return "Error: invalid (out of bounds) or non-integer entered\n";
+                }
+            case "delete":
+                try {
+                    int original = tasks.size();
+
+                    int index = Parser.getIndex(input, "delete");
+                    Task rm = tasks.delete(index);
+                    tasks.save(storage);
+
+                    assert tasks.size() == original - 1: "Task list not updated";
+
+                    return "Noted. I've removed this task: \n"
+                            + "\t" + rm.toString()
+                            + "Now you have "
+                            + tasks.size()
+                            + " tasks in the list.\n";
+                } catch (Exception e) {
+                    System.out.println("Error: invalid (out of bounds) or non-integer entered");
+                }
+            case "find":
+                if (input.length() > 5) {
+                    String key = input.substring(5);
+                    tasks.find(key);
+                } else {
+                    return "No search string specified!\n";
+                }
+            default:
+                return "Oops!! I'm sorry, but I don't know what that means :(\n";
             }
         }
     }
