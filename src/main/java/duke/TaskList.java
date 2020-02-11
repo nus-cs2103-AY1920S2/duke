@@ -4,21 +4,31 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class TaskList {
     /** Stores a list of tasks. */
     private final List<Task> tasks;
+    private final HashSet<Task> taskCounters;
 
     /** Constructs a new TaskList that can store an arbitrary size. */
     public TaskList() {
-        this(new ArrayList<>());
+        this(new ArrayList<>(), new HashSet<>());
     }
 
     /** Constructs a new TaskList using an existing list of tasks. */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
 
+        this.taskCounters = new HashSet<>();
+        this.taskCounters.addAll(tasks);
+
+    }
+
+    private TaskList(List<Task> tasks, HashSet<Task> taskCounters) {
+        this.tasks = tasks;
+        this.taskCounters = taskCounters;
     }
 
     /**
@@ -56,10 +66,16 @@ public class TaskList {
      * @return a copy of this TaskList with the newly added task.
      */
     public TaskList addTask(Task task) throws DukeException {
+        if (taskCounters.contains(task)) {
+            throw new DukeException("Duplicate entered. Please try again!");
+        }
         List<Task> newTasks = new ArrayList<>(tasks);
         newTasks.add(task);
 
-        return new TaskList(newTasks);
+        HashSet<Task> newTaskCounters = new HashSet<>(taskCounters);
+        newTaskCounters.add(task);
+
+        return new TaskList(newTasks, newTaskCounters);
     }
 
     /**
@@ -75,7 +91,12 @@ public class TaskList {
         List<Task> newTasks = new ArrayList<>(tasks);
         newTasks.set(taskId - 1, newTask);
 
-        return new TaskList(newTasks);
+        // For safety, update hashSet with the completed task
+        HashSet<Task> newTaskCounters = new HashSet<>(taskCounters);
+        newTaskCounters.remove(oldTask);
+        newTaskCounters.add(newTask);
+
+        return new TaskList(newTasks, newTaskCounters);
     }
 
     /**
@@ -91,7 +112,10 @@ public class TaskList {
         List<Task> newTasks = new ArrayList<>(tasks);
         newTasks.remove(taskId - 1);
 
-        return new TaskList(newTasks);
+        HashSet<Task> newTaskCounters = new HashSet<>(taskCounters);
+        newTaskCounters.remove(task);
+
+        return new TaskList(newTasks, newTaskCounters);
     }
 
     /**

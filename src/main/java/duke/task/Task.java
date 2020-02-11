@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.Serializable;
 
+import java.util.Objects;
+
 public abstract class Task implements Serializable {
     /** Details about the task. */
     protected final String description;
@@ -99,5 +101,22 @@ public abstract class Task implements Serializable {
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Task) {
+            Task task = (Task)obj;
+            return this.description.equals(task.description);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
     }
 }

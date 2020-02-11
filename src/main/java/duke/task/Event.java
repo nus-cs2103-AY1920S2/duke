@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Objects;
+
 public class Event extends Task {
     /** The date of this event. */
     protected final String at;
@@ -36,5 +38,21 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s %s)", super.toString(), at, timeSlot);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (super.equals(obj) && obj instanceof Event) {
+            Event event = (Event)obj;
+            return this.at.equals(event.at)
+                    && this.timeSlot.equals(event.timeSlot);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), at, timeSlot);
     }
 }

@@ -28,4 +28,14 @@ public class Todo extends Task {
     public String toString() {
         return String.format("[T]%s", super.toString());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj) && obj instanceof Todo;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

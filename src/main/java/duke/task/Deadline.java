@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Deadline extends Task {
     /** The cut-off date for this deadline. */
@@ -38,5 +39,20 @@ public class Deadline extends Task {
         // Date format is MMM d yyyy
         String formatDate = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return String.format("[D]%s (by: %s)", super.toString(), formatDate);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (super.equals(obj) && obj instanceof Deadline) {
+            Deadline deadline = (Deadline)obj;
+            return this.by.equals(deadline.by);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), by);
     }
 }
