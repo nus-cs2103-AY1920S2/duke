@@ -18,25 +18,35 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean canLoad = true;
 
-    public Duke() {}
-
-    public String init() {
+    public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
-        String response = ui.getWelcome();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            response = ui.getLoadingError();
+            canLoad = false;
             tasks = new TaskList();
         }
-        return response;
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the message that Duke will show the user once it is initialised.
+     * @return Duke's first message.
+     */
+    public String getFirstMsg() {
+        if (canLoad) {
+            return ui.getWelcome();
+        } else {
+            return ui.getLoadingError();
+        }
+    }
+
+    /**
+     * Returns Duke's response to user input.
+     * @param input User input.
+     * @return Duke's response.
      */
     public String getResponse(String input) {
         boolean isExit;

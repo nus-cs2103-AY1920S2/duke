@@ -9,6 +9,7 @@ public class Ui {
 
     /**
      * Prints a welcome message when Duke is initialised.
+     * @return Welcome message.
      */
     public String getWelcome() {
         String greeting = "Hello! I'm Woody and I'm always here to keep you company.\n"
@@ -19,6 +20,7 @@ public class Ui {
     /**
      * Prints an error message.
      * @param errorMsg Error message.
+     * @return Error message to display to user.
      */
     public String getError(String errorMsg) {
         return "OOPS!!! " + errorMsg;
@@ -26,6 +28,7 @@ public class Ui {
 
     /**
      * Prints an error message for errors encountered during loading.
+     * @return Loading error message.
      */
     public String getLoadingError() {
         return "OOPS!!! Error when loading tasks from file to Woody.";

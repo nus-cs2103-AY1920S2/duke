@@ -11,6 +11,7 @@ import duke.task.ToDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * Parses user inputs.
@@ -31,12 +32,33 @@ public class Parser {
     }
 
     /**
+     * Checks if an input command is valid.
+     * @param input Input command.
+     * @return true if input command is valid, false otherwise.
+     */
+    private static boolean isValidCommand(String input) {
+        // Maintain an array of possible commands by the user
+        ArrayList<String> commands = new ArrayList<>();
+        commands.add("bye");
+        commands.add("list");
+        commands.add("todo");
+        commands.add("deadline");
+        commands.add("event");
+        commands.add("delete");
+        commands.add("done");
+        commands.add("find");
+
+        return commands.contains(input);
+    }
+
+    /**
      * Parses the given user input and maps it to a command.
      * @param input User input.
      * @return Command.
      * @throws DukeException If any error occurs during parsing of the user input.
      */
     public static Command parse(String input) throws DukeException {
+        // Check for single word user inputs
         if (input.equals("bye")) {
             return new ExitCommand();
         } else if (input.equals("list")) {
@@ -46,6 +68,11 @@ public class Parser {
         Command c;
         String[] inputElements = input.split(" ", 2);
         String command = inputElements[0];
+
+        // Check for unknown commands
+        if (!isValidCommand(command)) {
+            return new UnknownCommand();
+        }
 
         try {
             Parser.checkArr(command, false, inputElements);
