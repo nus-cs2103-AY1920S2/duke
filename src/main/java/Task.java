@@ -147,4 +147,14 @@ public class Task implements Serializable {
         String output = "";
         return output;
     }
+
+    public static void find(String desc) {
+        int counter = 1;
+        for(Task t : taskArrList) {
+            if(t.description.contains(desc)) {
+                System.out.println(counter + "." + t.toString());
+            }
+            counter++;
+        }
+    }
 }
