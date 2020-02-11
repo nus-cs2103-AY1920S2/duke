@@ -1,7 +1,7 @@
 /**
  * Represents a task that users can input.
  */
-public class Task {
+public abstract class Task {
     String desc;
     boolean isDone;
 
@@ -13,6 +13,8 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
+    public abstract int compareTo(Task task);
 
     @Override
     public String toString() {

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This represents a list of Tasks.
@@ -8,6 +9,23 @@ public class TaskList {
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
+    }
+
+    public TaskList sortDeadlineTask() {
+        ArrayList<Task> deadlines = new ArrayList<>();
+        for (Task task : this.list) {
+            if (task instanceof DeadlineTask) {
+                deadlines.add(task);
+            }
+        }
+        Collections.sort(deadlines, (task1, task2) -> task1.compareTo(task2));
+
+        return new TaskList(deadlines);
+    }
+
+    public TaskList sortEventTask() {
+        TaskList sorted = new TaskList(new ArrayList<Task>());
+        return sorted;
     }
 
     @Override

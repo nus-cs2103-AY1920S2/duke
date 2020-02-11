@@ -16,4 +16,9 @@ public class DeadlineTask extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by:" + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
+    @Override 
+    public int compareTo(Task other) {
+        return this.by.compareTo(((DeadlineTask) other).by);
+    }
 }

@@ -84,6 +84,20 @@ public class Duke {
             TaskList foundList = Parser.storageToTaskList(found);
             return ("Here are the matching tasks in your list: \n" + foundList.toString());
 
+        } else if (command.equals("sort")) { 
+            if (split[1].equals("deadlines")) { // sort deadlines chronologically
+                TaskList sortedList = taskList.sortDeadlineTask();
+                return ("Here are your deadlines sorted chronologically: \n" + sortedList.toString());
+
+            } else if (split[1].equals("events")) { // sort events chronologically
+                TaskList sortedList = taskList.sortEventTask();
+                return ("Here are your events sorted chronologically: \n" + sortedList.toString());
+
+            } else { // sort todos by desc
+                // do later
+                return ("");
+            }
+
         } else {
             return "OOPS!!! I'm sorry, but I don't know what that means :-( \n";
         }

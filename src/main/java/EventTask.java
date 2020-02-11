@@ -16,4 +16,9 @@ public class EventTask extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at:" + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
+    @Override 
+    public int compareTo(Task other) {
+        return this.at.compareTo(((EventTask) other).at);
+    }
 }
