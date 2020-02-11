@@ -1,6 +1,15 @@
 package duke;
 
-import command.*;
+import command.Command;
+import command.AddDeadlineCommand;
+import command.AddEventCommand;
+import command.AddToDoCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ErrorCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.ListCommand;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -88,8 +97,10 @@ public class Parser {
      **/
     public static String getTaskName(String message) {
         if (hasSeparator(message)) {
+            assert taskType.equals("deadline") || taskType.equals("event");
             return getBeforeSeparator(message);
         } else {
+            assert taskType.equals("todo") : taskType;
             return message.trim().substring(5);
         }
     }
@@ -119,6 +130,8 @@ public class Parser {
      * @return Date format of the of the command of the task
      **/
     public static LocalDateTime getDate(String message) {
+        String beforeDate = message.substring(message.indexOf("/") + 1, message.indexOf("/") + 4);
+        assert beforeDate.equals("/by ");
         return extractDate(message.substring(message.indexOf("/") + 4));
     }
 
