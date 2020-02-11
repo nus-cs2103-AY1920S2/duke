@@ -82,6 +82,30 @@ public class TaskList {
     }
 
 
+    /**
+     * Finds all matching cases of a string and prints those cases to console
+     * @param input
+     */
+    public void find(String input) {
+        int n = taskArrayList.size();
+        String concat = "";
+        int matches = 1;
+        for(int i = 0; i < n; i++) {
+            if (taskArrayList.get(i).description.contains(input)) {
+                String representation = String.format("%d. %s", matches, this.taskArrayList.get(i));
+                concat += representation + "\n";
+                matches++;
+            }
+        }
+        if (matches > 1) {
+            Ui.promptUser("Here are the matching tasks in your list:");
+            Ui.promptUser(concat);
+        } else {
+            Ui.promptUser("No tasks with given search keyword found. Please try again");
+        }
+    }
+
+
     /*
     Deletes the task at specified index if it exists. Otherwise displays error message to user
      */

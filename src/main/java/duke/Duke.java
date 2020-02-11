@@ -52,6 +52,9 @@ public class Duke {
                 tasks.deleteTaskByIndex(index);
             } else if (input.equalsIgnoreCase("list")) {
                 tasks.printList();
+            } else if (input.startsWith("find")){
+                String[] parsedInput = parser.parse(input, 2);
+                tasks.find(parsedInput[1]);
             } else {
                 String[] parsedInput = parser.parse(input, 2);
                 if(input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
