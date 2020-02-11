@@ -7,6 +7,7 @@ import duke.Ui;
 
 import task.Deadline;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
@@ -36,13 +37,14 @@ public class AddDeadlineCommand extends AddCommand {
         try {
             Deadline newTask = new Deadline(this.taskName, this.date);
             tasks.add(newTask);
-            storage.updateDrive(newTask);
-            return ui.showTask(newTask, tasks.size());
+            storage.updateFile(newTask);
+            return Ui.showTask(newTask, tasks.size());
         } catch (IndexOutOfBoundsException e) {
-            return ui.showException(new DukeException(
+            return Ui.showException(new DukeException(
                     "☹ OOPS!!! The description of a deadline cannot be empty."));
-        } catch (DukeException de) {
-            return ui.showException(de);
+        } catch (IOException e) {
+            return Ui.showException(new DukeException(
+                    "☹ OOPS!!! The file of duke.txt can't be updated, list not updated."));
         }
     }
 }

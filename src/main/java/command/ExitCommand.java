@@ -16,6 +16,6 @@ public class ExitCommand extends Command {
      * @return String as the response of the execution.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.showBye();
+        return Ui.showBye();
     }
 }

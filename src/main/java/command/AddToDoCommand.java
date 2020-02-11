@@ -7,6 +7,8 @@ import duke.Ui;
 import task.Task;
 import task.ToDo;
 
+import java.io.IOException;
+
 /**
  * A command object for adding todo tasks to the list.
  */
@@ -30,10 +32,11 @@ public class AddToDoCommand extends AddCommand {
         try {
             Task newTask = new ToDo(this.taskName);
             tasks.add(newTask);
-            storage.updateDrive(newTask);
-            return ui.showTask(newTask, tasks.size());
-        } catch (DukeException de) {
-            return ui.showException(de);
+            storage.updateFile(newTask);
+            return Ui.showTask(newTask, tasks.size());
+        } catch (IOException e) {
+            return Ui.showException(new DukeException(
+                    "☹ OOPS!!! The file of duke.txt can't be updated, list not updated."));
         }
     }
 }

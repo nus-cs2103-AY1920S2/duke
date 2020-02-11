@@ -30,6 +30,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs dialog box according to set up in DialogBox.fxml.
+     * @param text The text of the dialog box.
+     * @param img The image of the dialog box.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -39,6 +44,13 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setDialogBox(text, img);
+    }
+
+    /**
+     * Sets the dialog box with the image and text.
+     */
+    public void setDialogBox(String text, Image img) {
         dialog.setPadding(new Insets(10));
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         dialog.setText(text);
@@ -77,8 +89,8 @@ public class DialogBox extends HBox {
      * @return DialogBox object of the user's dialog with the text and image.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        var dialogBox = new DialogBox(text, img);
+        dialogBox.flip();
+        return dialogBox;
     }
 }

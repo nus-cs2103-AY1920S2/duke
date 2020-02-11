@@ -33,113 +33,156 @@ public class Parser {
         } else {
             firstCommand = command.trim();
         }
-        if (firstCommand.equals("list")) {
-            return new ListCommand();
-        } else if (firstCommand.equals("bye")) {
-            return new ExitCommand();
-        } else if (firstCommand.equals("find")) {
-            try {
+        switch (firstCommand) {
+            case "list":
+                return new ListCommand();
+            case "bye":
+                return new ExitCommand();
+            case "find":
                 return new FindCommand(Parser.getSecond(trimCommand));
-            } catch (IndexOutOfBoundsException e) {
-                return new ErrorCommand(new DukeException(
-                        "☹ OOPS!!! The keyword of a find cannot be empty."));
-            }
-        } else if (firstCommand.equals("done")) {
-            try {
-                return new DoneCommand(Integer.valueOf(Parser.getSecond(trimCommand)));
-            } catch (IndexOutOfBoundsException e) {
-                return new ErrorCommand(new DukeException(
-                        "☹ OOPS!!! The description of a done cannot be empty."));
-            }
-        } else if (firstCommand.equals("delete")) {
-            try {
-                return new DeleteCommand(Integer.valueOf(Parser.getSecond(trimCommand)));
-            } catch (IndexOutOfBoundsException e) {
-                return new ErrorCommand(new DukeException(
-                        "☹ OOPS!!! The description of a delete cannot be empty."));
-            }
-        } else {
-            if (firstCommand.equals("todo")) {
+            case "done":
+                try {
+                    return new DoneCommand(Integer.valueOf(Parser.getSecond(trimCommand)));
+                } catch (IndexOutOfBoundsException e) {
+                    return new ErrorCommand(new DukeException(
+                            "☹ OOPS!!! The description of a done cannot be empty."));
+                }
+            case "delete":
+                try {
+                    return new DeleteCommand(Integer.valueOf(Parser.getSecond(trimCommand)));
+                } catch (IndexOutOfBoundsException e) {
+                    return new ErrorCommand(new DukeException(
+                            "☹ OOPS!!! The description of a delete cannot be empty."));
+                }
+            case "todo":
                 try {
                     return new AddToDoCommand(Parser.getTaskName(trimCommand));
                 } catch (IndexOutOfBoundsException e) {
                     return new ErrorCommand(new DukeException(
                             "☹ OOPS!!! The description of a todo cannot be empty."));
                 }
-            } else if (firstCommand.equals("deadline")) {
+            case "deadline":
                 try {
                     return new AddDeadlineCommand(Parser.getTaskName(trimCommand), Parser.getDate(trimCommand));
                 } catch (IndexOutOfBoundsException e) {
                     return new ErrorCommand(new DukeException(
                             "☹ OOPS!!! The description of a deadline cannot be empty."));
                 }
-            } else if (firstCommand.equals("event")) {
+            case "event":
                 try {
                     return new AddEventCommand(Parser.getTaskName(trimCommand), Parser.getDate(trimCommand));
                 } catch (IndexOutOfBoundsException e) {
                     return new ErrorCommand(new DukeException(
                             "☹ OOPS!!! The description of an event cannot be empty."));
                 }
-            } else {
+            default:
                 return new ErrorCommand(new DukeException(
                         "☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
-            }
         }
     }
 
     /**
      * Retrieves the second argument of the command.
+     * @param message The command text.
      * @return String of the second argument of the command
      **/
-    public static String getSecond(String text) {
-        return text.trim().split(" ")[1];
+    public static String getSecond(String message) {
+        return message.trim().split(" ")[1];
     }
 
     /**
      * Retrieves the third argument of the command.
+     * @param message The command text.
      * @return String of the third argument of the command
      **/
-    public static String getTaskName(String text) {
-        String taskType = text.trim().split(" ")[0];
-        if (text.contains("/")) {
+    public static String getTaskName(String message) {
+        if (hasSeparator(message)) {
             assert taskType.equals("deadline") || taskType.equals("event");
-            return text.substring(text.indexOf(" ") + 1,
-                    text.indexOf("/") - 1);
+            return getBeforeSeparator(message);
         } else {
             assert taskType.equals("todo") : taskType;
-            return text.trim().substring(5);
+            return message.trim().substring(5);
         }
     }
 
     /**
+     * Cuts the string starting from the first space until the / separator.
+     * @param message The command text.
+     * @return Sliced string of the text
+     **/
+    private static String getBeforeSeparator(String message) {
+        return message.substring(message.indexOf(" ") + 1,
+                message.indexOf("/") - 1);
+    }
+
+    /**
+     * Checks whether the command has a / separator.
+     * @param message The command text.
+     * @return Boolean value whether text has a / separator.
+     **/
+    private static boolean hasSeparator(String message) {
+        return message.contains("/");
+    }
+
+    /**
      * Retrieves the date format of the command.
+     * @param message The message text.
      * @return Date format of the of the command of the task
      **/
-    public static LocalDateTime getDate(String text) {
-        String beforeDate = text.substring(text.indexOf("/") + 1, text.indexOf("/") + 4);
+    public static LocalDateTime getDate(String message) {
+        String beforeDate = message.substring(message.indexOf("/") + 1, message.indexOf("/") + 4);
         assert beforeDate.equals("/by ");
-        return extractDate(text.substring(text.indexOf("/") + 4));
+        return extractDate(message.substring(message.indexOf("/") + 4));
     }
 
     /**
      * Converts a date in the form of a string to a Date form.
+     * @param message The message text.
      * @return Date format of the of the string format of the date
      **/
-    static LocalDateTime extractDate(String next) {
-        StringBuilder forTime = new StringBuilder(next.substring(next.indexOf(" ") + 1));
-        forTime.insert(2, ':');
-        String[] reverse = next.substring(0, next.indexOf(" "))
-                .split("/");
-        String[] reversed = reverse;
-        String temp = String.format("%2s",reverse[0]).replace(" ", "0");
-        reversed[0] = String.format("%4s",reverse[2]).replace(" ", "0");
-        reversed[2] = temp;
-        reversed[1] = String.format("%2s", reverse[1]).replace(" ", "0");
+    public static LocalDateTime extractDate(String message) {
+        String time = getTime(message);
+        String[] original = getDayMonthYearArray(message);
+        String[] reversed = getYearMonthDayArray(original);
         String date = String.join("-", reversed);
-        LocalDateTime taskDate = LocalDate.parse(date)
-                .atTime(LocalTime.parse(forTime.toString()))
-                ;
-        return taskDate;
+        return LocalDate.parse(date)
+                .atTime(LocalTime.parse(time));
     }
 
+    /**
+     * Obtains the time stamp from the message time.
+     * @param message The message string time.
+     * @return The string representing the time stamp.
+     */
+    private static String getTime(String message) {
+        StringBuilder time = new StringBuilder(message.substring(message.indexOf(" ") + 1));
+        time.insert(2, ':');
+        return time.toString();
+    }
+
+    /**
+     * Splits a string of date into a day, month, year array.
+     * @param message The message text.
+     * @return String array of day, month, year of the message date.
+     **/
+    private static String[] getDayMonthYearArray(String message) {
+        return message.substring(0, message.indexOf(" "))
+                .split("/");
+    }
+
+    /**
+     * Reverses a day, month, year array to a year, month, day array.
+     * @param original The day, month, year array to be reversed.
+     * @return String array of year, month, day of the message date.
+     **/
+    private static String[] getYearMonthDayArray(String[] original) {
+        String[] reversed = new String[3];
+        String year = String.format("%4s",original[2]).replace(" ", "0");
+        String day = String.format("%2s",original[0]).replace(" ", "0");
+        String month = String.format("%2s", original[1]).replace(" ", "0");
+        reversed[0] = year;
+        reversed[1] = month;
+        reversed[2] = day;
+        return reversed;
+    }
 }

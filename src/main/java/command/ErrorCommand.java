@@ -27,6 +27,6 @@ public class ErrorCommand extends Command {
      * @return String as the response of the execution.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.showException(de);
+        return Ui.showException(de);
     }
 }
