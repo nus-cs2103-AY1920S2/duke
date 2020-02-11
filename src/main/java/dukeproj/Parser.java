@@ -79,10 +79,10 @@ public class Parser {
      * @return The Command class object to be returned.
      */
     public Command getCommand(CommandType commandType, String description) {
-        Command command = new ListCommand(); //default command
+        Command command = new ExitCommand(); //default command
         switch (commandType) {
-        case BYE:
-            command = new ExitCommand();
+        case LIST:
+            command = new ListCommand();
             break;
         case DONE:
             command = new DoneCommand(description);
@@ -105,9 +105,12 @@ public class Parser {
             break;
         case HELP:
             command = new HelpCommand();
-        case LIST:
+        case BYE:
             //fallthrough
         default:
+            if (command.isExit() && !commandType.equals(CommandType.BYE)) {
+                System.err.println("erroneous command");
+            }
             break;
         }
         return command;

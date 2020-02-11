@@ -46,7 +46,7 @@ public class Ui {
         case HELP:
             return getHelp();
         default:
-            return "";
+            return "**** Duke does not know what to say!";
         }
     }
 

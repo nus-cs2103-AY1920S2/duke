@@ -55,6 +55,7 @@ public class Storage {
                     break;
                 }
                 default:
+                    System.err.println("Error in task type in file");
                     break;
                 }
             }
@@ -93,6 +94,7 @@ public class Storage {
                             + System.lineSeparator());
                     break;
                 default:
+                    System.err.println("Error in TaskList");
                     break;
                 }
             }
