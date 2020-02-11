@@ -1,10 +1,16 @@
 public class Task {
+    protected String type;
     protected String description;
     protected boolean isDone;
 
-    public Task(boolean isDone, String description) {
+    public Task(String type, boolean isDone, String description) {
+        this.type = type;
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public String getDescription() {

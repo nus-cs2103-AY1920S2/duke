@@ -29,17 +29,17 @@ public class Storage {
             String description = tokens[2];
             Task task;
             if (type.equals("T")) {
-                task = new Todo(isDone, description);
+                task = new Todo("todo", isDone, description);
             } else {
                 // tokens = {type, isDone, description, time}
                 assert tokens.length == 4 : "missing argument(s)";
                 String time = tokens[3];
                 if (type.equals("D")) {
-                    task = new Deadline(isDone, description, time);
+                    task = new Deadline("deadline", isDone, description, time);
                 } else {
                     // Event type is provided
                     assert type.equals("E") : "invalid type";
-                    task = new Event(isDone, description, time);
+                    task = new Event("event", isDone, description, time);
                 }
             }
             assert task != null : "null task";

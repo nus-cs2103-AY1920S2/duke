@@ -100,19 +100,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private  Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -135,7 +122,7 @@ public class Duke extends Application {
                 output = c.execute(tasks, ui, storage);
             }
         } catch (DukeException e) {
-            ui.showCommandError(e.getMessage());
+            output = ui.showCommandError(e.getMessage());
         }
         return output;
     }

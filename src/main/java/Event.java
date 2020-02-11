@@ -9,9 +9,8 @@ public class Event extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
-    public Event(boolean isDone, String description, String atString) {
-        super(isDone, description);
-        this.type = "E";
+    public Event(String type, boolean isDone, String description, String atString) {
+        super(type, isDone, description);
         this.atString = atString;
 
         //Date input format: yyyy-mm-dd HHmm
@@ -24,10 +23,14 @@ public class Event extends Task {
         }
     }
 
+    public String getTypeSymbol() {
+        return "E";
+    }
+
     @Override
     public String[] toDataTokens() {
         String isDoneString = String.valueOf(super.isDone);
-        return new String[] {this.type, isDoneString, super.description, this.atString};
+        return new String[] {getTypeSymbol(), isDoneString, super.description, this.atString};
     }
 
     @Override
@@ -37,6 +40,6 @@ public class Event extends Task {
         if (this.time != null) {
             dateTime += " " + this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
         }
-        return "[E]" + super.toString() + " (at: " + dateTime + ")";
+        return "[" + getTypeSymbol() + "]" + super.toString() + " (at: " + dateTime + ")";
     }
 }

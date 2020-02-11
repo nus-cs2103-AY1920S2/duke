@@ -7,12 +7,12 @@ public class Ui {
 
     }
 
-    public void showLoadingError(String message) {
-        System.out.println("Loading error: " + message);
+    public String showLoadingError(String message) {
+        return "Loading error: " + message;
     }
 
-    public void showCommandError(String message) {
-        System.out.println("Command error: " + message);
+    public String showCommandError(String message) {
+        return "Command error: " + message;
     }
 
     public String showAddingError(String message) {
@@ -62,6 +62,10 @@ public class Ui {
 
     public String printNotFoundTaskMessage() {
         return "Sorry dude I found nothing :(";
+    }
+
+    public String printDuplicateMessage() {
+        return "Hey you already have this task dude!";
     }
 
     public String printTask(int i, Task task) {
