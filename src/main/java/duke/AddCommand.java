@@ -22,11 +22,9 @@ public class AddCommand implements Command {
             taskList.setListArray(deadline);
             result += ui.showTaskAddedMessage(deadline, taskList);
             storage.saveToFile(deadline.toString());
-        }
-
-        else if(task.contains("event")){
+        } else if (task.contains("event")) {
             String[] retrieveDateArray = task.split(" /at ");
-            if(retrieveDateArray.length < 2){
+            if (retrieveDateArray.length < 2) {
                 throw new DukeException(ui.showEventDescriptionError());
             }
             String[] retrieveTaskArray = retrieveDateArray[0].split(" ", 2);
@@ -34,11 +32,9 @@ public class AddCommand implements Command {
             taskList.setListArray(event);
             result += ui.showTaskAddedMessage(event, taskList);
             storage.saveToFile(event.toString());
-        }
-
-        else {
+        } else {
             String[] retrieveTaskArray = task.split(" ", 2);
-            if(retrieveTaskArray.length < 2){
+            if (retrieveTaskArray.length < 2) {
                 throw new DukeException(ui.showTodoDescriptionError());
             }
             Todo todo = new Todo(retrieveTaskArray[1]);
@@ -46,7 +42,6 @@ public class AddCommand implements Command {
             result += ui.showTaskAddedMessage(todo, taskList);
             storage.saveToFile(todo.toString());
         }
-
         return result;
     }
 

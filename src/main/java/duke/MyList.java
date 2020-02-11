@@ -10,7 +10,8 @@ public class MyList {
     /**
      * Instantiates a new list for tasks.
      */
-    public MyList(){}
+    public MyList() {
+    }
 
     private ArrayList<Task> listArray = new ArrayList<>();
     private int counter = 0;
@@ -20,7 +21,7 @@ public class MyList {
      *
      * @param task the task
      */
-    public void setListArray(Task task){
+    public void setListArray(Task task) {
         this.listArray.add(task);
         counter++;
     }
@@ -41,7 +42,7 @@ public class MyList {
      * @return the task
      */
     public Task getTask(int num) {
-        return listArray.get(num-1);
+        return listArray.get(num - 1);
     }
 
     /**
@@ -50,7 +51,7 @@ public class MyList {
      * @param num the num
      */
     public void deleteTask(int num) {
-        listArray.remove(num-1);
+        listArray.remove(num - 1);
         counter--;
     }
 
@@ -61,8 +62,8 @@ public class MyList {
      */
     public String printList() {
         String result = "";
-        for(int i=0; i<counter; i++){
-            result += i+1 + ". " + listArray.get(i) + "\n";
+        for (int i = 0; i < counter; i++) {
+            result += i + 1 + ". " + listArray.get(i) + "\n";
         }
         return result;
     }

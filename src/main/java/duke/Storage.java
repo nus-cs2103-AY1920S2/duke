@@ -36,7 +36,7 @@ public class Storage {
         try {
             File file = new File(filePath);
             Scanner sc = new Scanner(file);
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 String listItem = sc.nextLine();
                 String[] splitStringArr = splitString(listItem);
                 String task = splitStringArr[0];
@@ -64,6 +64,7 @@ public class Storage {
                           event.setCompleted(status);
                           myList.setListArray(event);
                           break;
+                default:  break;
                 }
             }
         } catch (FileNotFoundException | ParseException e) {
@@ -93,7 +94,7 @@ public class Storage {
     public void newSave(MyList list) throws IOException {
         File file = new File(filePath);
         FileWriter fileWriter = new FileWriter(file, false);
-        for(int i = 1; i <= list.getArraySize(); i++) {
+        for (int i = 1; i <= list.getArraySize(); i++) {
             fileWriter.write(list.getTask(i).toString());
         }
         fileWriter.close();

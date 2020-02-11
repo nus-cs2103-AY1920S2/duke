@@ -26,29 +26,21 @@ public class Parser {
     public Command parseCommand(String command) throws DukeException {
         if (command.contains("deadline")) {
             return new AddCommand();
-        }
-        else if(command.contains("event")) {
+        } else if (command.contains("event")) {
             return new AddCommand();
-        }
-        else if(command.contains("todo")) {
+        } else if (command.contains("todo")) {
             return new AddCommand();
-        }
-        else if(command.contains("bye")) {
+        } else if (command.contains("bye")) {
             return new ByeCommand();
-        }
-        else if(command.contains("done")) {
+        } else if (command.contains("done")) {
             return new DoneCommand();
-        }
-        else if(command.contains("delete")) {
+        } else if (command.contains("delete")) {
             return new DeleteCommand();
-        }
-        else if(command.contains("list")) {
+        } else if (command.contains("list")) {
             return new ListCommand();
-        }
-        else if(command.contains("find")){
+        } else if (command.contains("find")) {
             return new FindCommand();
-        }
-        else {
+        } else {
             throw new DukeException(ui.showWrongCommandError());
         }
 

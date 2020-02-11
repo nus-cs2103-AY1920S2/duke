@@ -18,24 +18,24 @@ public class FindCommand implements Command {
         String taskToFind = split[1];
         ArrayList<Task> matchedTask = new ArrayList<>();
 
-        for(int i = 0; i < taskList.getArraySize(); i++) {
-            Task currTask = taskList.getTask(i+1);
+        for (int i = 0; i < taskList.getArraySize(); i++) {
+            Task currTask = taskList.getTask(i + 1);
             String taskName = currTask.getItem();
 
-            if(taskName.contains(taskToFind)) {
+            if (taskName.contains(taskToFind)) {
                 matchedTask.add(currTask);
             }
         }
 
-        if(matchedTask.isEmpty()) {
+        if (matchedTask.isEmpty()) {
             result += ui.showNoTaskFoundMessage();
         } else {
             result += ui.showFoundResultsMessage() + "\n";
-            for(int i = 0; i < matchedTask.size(); i++) {
-                if(i != matchedTask.size()-1) {
-                    result += (i+1) + ". " + matchedTask.get(i).toString() + "\n";
+            for (int i = 0; i < matchedTask.size(); i++) {
+                if (i != matchedTask.size() - 1) {
+                    result += (i + 1) + ". " + matchedTask.get(i).toString() + "\n";
                 } else {
-                    result += (i+1) + ". " + matchedTask.get(i).toString();
+                    result += (i + 1) + ". " + matchedTask.get(i).toString();
                 }
             }
         }

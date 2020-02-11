@@ -3,7 +3,7 @@ package duke;
 /**
  * The type Task.
  */
-public class Task{
+public class Task {
 
     private String item;
     private boolean isCompleted;
@@ -51,7 +51,7 @@ public class Task{
      * @param string the string
      */
     public void setCompleted(String string) {
-        if(string.equals("\u2713")) {
+        if (string.equals("\u2713")) {
             this.isCompleted = true;
         }
     }

@@ -36,14 +36,14 @@ public class Duke {
 
         ui.showStartMessage();
 
-        while(!isExit) {
+        while (!isExit) {
 
-            try{
+            try {
                 String word = sc.nextLine();
                 Command command = parser.parseCommand(word);
                 command.execute(word, taskList, ui, storage);
                 isExit = command.isExit();
-            } catch(DukeException | IOException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e.getMessage());
             }
 
@@ -64,15 +64,20 @@ public class Duke {
 
         String result = "";
 
-        try{
+        try {
             Command command = parser.parseCommand(input);
             result += command.execute(input, taskList, ui, storage);
-        } catch(DukeException | IOException e) {
+            isExit = command.isExit();
+        } catch (DukeException | IOException e) {
             result += e.getMessage();
         }
 
         return result;
 
+    }
+
+    public boolean getIsExit() {
+        return isExit;
     }
 
 }

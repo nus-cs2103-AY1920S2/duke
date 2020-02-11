@@ -8,11 +8,7 @@ public class Event extends Task {
     /**
      * The Date and time.
      */
-    DateAndTime dateAndTime;
-    /**
-     * The Date.
-     */
-    protected String date;
+    private DateAndTime dateAndTime;
 
     /**
      * Instantiates a new Event.
@@ -22,7 +18,9 @@ public class Event extends Task {
      */
     public Event(String description, String date) {
         super(description);
-        this.date = date;
+        /**
+         * The Date.
+         */
         dateAndTime = new DateAndTime(date);
     }
 

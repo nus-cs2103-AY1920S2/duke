@@ -8,11 +8,7 @@ public class Deadline extends Task {
     /**
      * The Date and time.
      */
-    DateAndTime dateAndTime;
-    /**
-     * The Date.
-     */
-    protected String date;
+    private DateAndTime dateAndTime;
 
     /**
      * Instantiates a new Deadline.
@@ -22,7 +18,9 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String date) {
         super(description);
-        this.date = date;
+        /**
+         * The Date.
+         */
         dateAndTime = new DateAndTime(date);
     }
 
@@ -30,4 +28,5 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dateAndTime.formatDateToString() + ")";
     }
+
 }

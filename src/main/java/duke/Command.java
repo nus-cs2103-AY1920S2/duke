@@ -18,13 +18,13 @@ public interface Command {
      * @throws IOException   the io exception
      * @throws DukeException the duke exception
      */
-    public String execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException;
+    String execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException;
 
     /**
      * Function to check if duke will exit.
      *
      * @return the boolean
      */
-    public boolean isExit();
+    boolean isExit();
 
 }

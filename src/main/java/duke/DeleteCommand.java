@@ -14,7 +14,7 @@ public class DeleteCommand implements Command {
 
         String[] split = task.split(" ");
         int num = Integer.parseInt(split[1]);
-        if(num > taskList.getArraySize() || num <= 0) {
+        if (num > taskList.getArraySize() || num <= 0) {
             throw new DukeException(ui.showTaskDoesNotExistMessage());
         }
 

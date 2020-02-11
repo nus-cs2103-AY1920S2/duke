@@ -11,6 +11,11 @@ repositories {
     mavenCentral()
 }
 
+checkstyle {
+    toolVersion = '8.23'
+}
+
+
 dependencies {
     String javaFxVersion = '11.0.1'
 
