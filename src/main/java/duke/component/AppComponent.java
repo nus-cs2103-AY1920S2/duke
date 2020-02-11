@@ -5,6 +5,7 @@ import duke.DukeException;
 import duke.command.Command;
 import duke.model.TaskModel;
 import duke.util.Parser;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,6 +60,11 @@ public class AppComponent extends VBox {
             Command.ExecuteResult result = command.execute(taskModel.getTasks());
             messageList.getChildren().add(new DukeMessageComponent(result.getMessage()));
             taskModel.updateTasks(result.getTasks());
+
+            // Check whether or not app window should be closed.
+            if (!result.hasNextCommand()) {
+                Platform.exit();
+            }
         } catch (DukeException exception) {
             messageList.getChildren().add(new DukeMessageComponent(exception.getMessage() + "!"));
         } catch (IOException exception) {
