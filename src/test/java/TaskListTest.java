@@ -11,7 +11,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTest() {
+    public void deleteTest() throws DukeException {
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDo("test"));
         tasks.deleteTask(0);

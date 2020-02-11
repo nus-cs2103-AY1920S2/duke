@@ -46,8 +46,10 @@ public class TaskList {
      * Method that removes a task at that index from the task list.
      * @param index Index which task to be removed from.
      */
-    public void deleteTask(int index) {
-        assert index < taskList.size() : "Index must be within range of tasklist.";
+    public void deleteTask(int index) throws DukeException {
+        if (index > taskList.size()) {
+            throw (new DukeException("There is no task number " + (index + 1) + "."));
+        }
         taskList.remove(index);
     }
 
@@ -66,8 +68,10 @@ public class TaskList {
      * @param index Index of task to be returned.
      * @return Task to be returned.
      */
-    public Task getTask(int index) {
-        assert index < taskList.size() : "Index must be within range of tasklist.";
+    public Task getTask(int index) throws DukeException {
+        if (index > taskList.size()) {
+            throw (new DukeException("There is no task number " + (index + 1) + "."));
+        }
         return taskList.get(index);
     }
 
