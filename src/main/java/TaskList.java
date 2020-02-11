@@ -19,13 +19,18 @@ public class TaskList {
             }
         }
         Collections.sort(deadlines, (task1, task2) -> task1.compareTo(task2));
-
         return new TaskList(deadlines);
     }
 
     public TaskList sortEventTask() {
-        TaskList sorted = new TaskList(new ArrayList<Task>());
-        return sorted;
+        ArrayList<Task> events = new ArrayList<>();
+        for (Task task : this.list) {
+            if (task instanceof EventTask) {
+                events.add(task);
+            }
+        }
+        Collections.sort(events, (task1, task2) -> task1.compareTo(task2));
+        return new TaskList(events);
     }
 
     @Override
