@@ -3,9 +3,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
+/**
+ * Simulates the working of a deadline task.
+ */
 public class Deadline extends Task {
-    String due;
-    String parsedDue;
+    protected String due;
+    protected String parsedDue;
 
     /**
      * Creates deadline type.
@@ -14,7 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String[] description) {
         super(description[0]);
-        assert description.length > 1 : "description is wrong";
+        assert description.length > 1 : "Description doesn't contain the date properly.";
         due = (description[1].split(" ", 2))[1];
         modifyDateFormat();
     }

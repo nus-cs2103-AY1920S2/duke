@@ -1,9 +1,12 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Simulates an Event task.
+ */
 public class Event extends Task {
-    String at;
-    String parsedAt;
+    protected String at;
+    protected String parsedAt;
 
     /**
      * Creates event.
@@ -26,6 +29,13 @@ public class Event extends Task {
         this.parsedAt = parsedDate.format(outputFormatter);
     }
 
+    /**
+     * Creates an Event with given details.
+     *
+     * @param description description of the event.
+     * @param atDate date of event.
+     * @param isDone indicates whether event has been done.
+     */
     public Event(String description, String atDate, boolean isDone) {
         super(description, isDone);
         at = atDate;

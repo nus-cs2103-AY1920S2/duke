@@ -1,3 +1,6 @@
+/**
+ * Deals with the basic functionality of a Task.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

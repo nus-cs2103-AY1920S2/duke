@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Deals with the functionality of the task list.
+ */
 public class TaskList {
     ArrayList<Task> tasks;
     Ui ui = new Ui();
@@ -22,6 +25,7 @@ public class TaskList {
 
     /**
      * Adds task to tasklist.
+     *
      * @param taskType Type of task to be added.
      * @param taskDescription Description of task to be added.
      */
@@ -45,8 +49,17 @@ public class TaskList {
             temp = new ToDo(taskDescription);
             tasks.add(temp);
         }
-        String output = "Got it. I've added this task:\n";
-        output = output + temp + "\n";
+        return addMessage(temp);
+    }
+
+    /**
+     * Creates output message when you add to tasklist.
+     *
+     * @param addedTask Task that was added to the tasklist.
+     * @return message once task has been added.
+     */
+    public String addMessage(Task addedTask) {
+        String output = "Got it. I've added this task:\n" + addedTask + "\n";
         output = "Now you have " + tasks.size() + " tasks in your list.\n";
         return output;
     }
@@ -75,7 +88,7 @@ public class TaskList {
      *
      * @param str Substring to be found.
      */
-    public String find(String str) {
+    public String findAndPrint(String str) {
         String output;
         int size = tasks.size();
         int cnt = 0;
@@ -97,7 +110,7 @@ public class TaskList {
      *
      * @param n Task to be marked as done.
      */
-    public String done(int n) {
+    public String markAsDoneAndPrint(int n) {
         String output;
         if (n > tasks.size() || n <= 0) {
             output = "There is no such task!\n";
@@ -114,7 +127,7 @@ public class TaskList {
      * Task to be deleted.
      * @param n Task to be deleted.
      */
-    public String delete(int n) {
+    public String deleteAndPrint(int n) {
         String output;
         if (n > tasks.size() || n < 1) {
             output = "There is no such task\n";

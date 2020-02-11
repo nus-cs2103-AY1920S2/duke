@@ -15,6 +15,7 @@ public class Storage {
 
     /**
      * Retrieves tasks from Hard Disk.
+     *
      * @param path Path to file in Hard Disk.
      * @return Arraylist containing all the tasks.
      * @throws FileNotFoundException if file pointed to by path is not found.
@@ -76,6 +77,7 @@ public class Storage {
 
     /**
      * Converts string to boolean.
+     *
      * @param str String to be converted.
      * @return Whether task is completed.
      */
