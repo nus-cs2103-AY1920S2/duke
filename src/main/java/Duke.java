@@ -4,82 +4,21 @@ import java.io.IOException;
 import java.util.*;
 import java.io.File;
 import java.io.PrintWriter;
-<<<<<<< HEAD
-=======
 import java.time.LocalDate;
->>>>>>> branch-Level-8
 
 public class Duke {
     public static void main(String[] args) throws DukeException, IOException {
-        /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-         */
-        File myfile = new File("Duke.txt");
-        boolean check = myfile.exists();
-        myfile.createNewFile();
-        Scanner fsc = new Scanner(myfile);
         Scanner sc = new Scanner(System.in);
 
         String Hello = "Hello! I'm Duke\nWhat can i do for you?";
         System.out.println(Hello);
+
+        Storage storage = new Storage();
+
         int flag = 0;
         ArrayList<task> mylist = new ArrayList<>();
+        mylist = storage.readTxtFile();
 
-        if (check == false) {
-
-        } else {
-            while (fsc.hasNextLine()) {
-                String currline = fsc.nextLine();
-                String[] temparr = currline.split(" /n ");
-
-                if (temparr[0].equals("T")) {
-                    ToDo td = new ToDo(temparr[2]);
-
-                    if (temparr[1].equals("1")) {
-                        td.markDone();
-                    } else {
-
-                    }
-
-                    mylist.add(td);
-                } else  if (temparr[0].equals("D")) {
-                    DeadLine d = new DeadLine(temparr[2], temparr[3]);
-
-                    if (temparr[1].equals("1")) {
-                        d.markDone();
-                    } else {
-
-                    }
-
-                    mylist.add(d);
-                } else if (temparr[0].equals("E")) {
-                    Event e = new Event(temparr[2], temparr[3]);
-
-                    if (temparr[1].equals("1")) {
-                        e.markDone();
-                    } else {
-
-                    }
-
-                    mylist.add(e);
-                } else {
-
-                }
-            }
-            System.out.println("You currently have " + mylist.size() + " items from the previous session\n");
-
-        }
-<<<<<<< HEAD
-
-
-
-=======
-        
->>>>>>> branch-Level-8
         while(flag == 0) {
             String input = sc.nextLine();
             String[] inarr = input.split(" ");
@@ -100,7 +39,7 @@ public class Duke {
 
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(mylist.get(tocheck - 1));
-                        updateTxtFile(mylist, myfile);
+                        storage.updateTxtFile(mylist);
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! That task doesn't exist or you failed to include a number.", e);
                     }
@@ -111,7 +50,7 @@ public class Duke {
                         System.out.println(temp);
                         System.out.println("Now you have " + (mylist.size() + 1) + " tasks in the list.");
                         mylist.add(temp);
-                        updateTxtFile(mylist, myfile);
+                        storage.updateTxtFile(mylist);
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! You're missing some descriptions for your todo.", e);
                     }
@@ -124,7 +63,7 @@ public class Duke {
                         System.out.println(temp);
                         System.out.println("Now you have " + (mylist.size() + 1) + " tasks in the list.");
                         mylist.add(temp);
-                        updateTxtFile(mylist, myfile);
+                        storage.updateTxtFile(mylist);
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! You're missing some descriptions for your deadline.", e);
                     }
@@ -137,7 +76,7 @@ public class Duke {
                         System.out.println(temp);
                         System.out.println("Now you have " + (mylist.size() + 1) + " tasks in the list.");
                         mylist.add(temp);
-                        updateTxtFile(mylist, myfile);
+                        storage.updateTxtFile(mylist);
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! You're missing some descriptions for your event.", e);
                     }
@@ -146,9 +85,28 @@ public class Duke {
                     try {
                         int toremove = Integer.parseInt(inarr[1]);
                         removetask(mylist, toremove);
-                        updateTxtFile(mylist, myfile);
+                        storage.updateTxtFile(mylist);
                     } catch(IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! That task doesn't exist or you failed to include a number.", e);
+                    }
+                } else if (inarr[0].equals("find")) {
+                    ArrayList<Integer> searchResults = new ArrayList<Integer>();
+                    String keyword = input.replaceFirst("find ", "");
+
+                    for (int i = 0; i < mylist.size(); i++) {
+                        if (mylist.get(i).getName().contains(keyword)) {
+                            searchResults.add(i);
+                        } else {}
+                    }
+
+                    if (searchResults.size() == 0) {
+                        System.out.println("Sorry, I can't seem to find anything related to " + keyword);
+                    } else {
+                        System.out.println("Here are the matching tasks in your list");
+
+                        for (int i = 0; i < searchResults.size(); i++) {
+                            System.out.println((i + 1) + "." + mylist.get(searchResults.get(i)));
+                        }
                     }
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -176,61 +134,5 @@ public class Duke {
         System.out.println("Now you have " + ls.size() + " tasks on the list.");
     }
 
-    private static void updateTxtFile (ArrayList<task> ls, File fl) throws IOException {
-        PrintWriter pw = new PrintWriter(fl);
-        pw.write("");
-        pw.close();
 
-        PrintWriter toWrite = new PrintWriter(fl);
-        String finalToWrite = "";
-
-        for (int i = 0; i < ls.size(); i++) {
-            String temp = ls.get(i).toString();
-            String[] temparr = temp.split("] ");
-            String[] temparr1 = temparr[0].split("]");
-            String toAppend = "";
-            if (temparr1[0].equals("[T")) {
-                toAppend = toAppend + "T /n ";
-
-                if (temparr1[1].equals("[✓")) {
-                    toAppend = toAppend + "1 /n ";
-                } else {
-                    toAppend = toAppend + "0 /n ";
-                }
-
-                toAppend = toAppend + temparr[1];
-            } else if (temparr1[0].equals("[D")) {
-                toAppend = toAppend + "D /n ";
-
-                if (temparr1[1].equals("[✓")) {
-                    toAppend = toAppend + "1 /n ";
-                } else {
-                    toAppend = toAppend + "0 /n ";
-                }
-
-                String[] temparr2 = temparr[1].split(" \\(by: ");
-
-                toAppend = toAppend + temparr2[0] + " /n " + temparr2[1].substring(0, temparr2[1].length() - 1);
-            } else if (temparr1[0].equals("[E")) {
-                toAppend = toAppend + "E /n ";
-
-                if (temparr1[1].equals("[✓")) {
-                    toAppend = toAppend + "1 /n ";
-                } else {
-                    toAppend = toAppend + "0 /n ";
-                }
-
-                String[] temparr2 = temparr[1].split(" \\(at: ");
-
-                toAppend = toAppend + temparr2[0] + " /n " + temparr2[1].substring(0, temparr2[1].length() - 1);
-            } else {
-
-            }
-            toAppend = toAppend + "\n";
-            finalToWrite = finalToWrite + toAppend;
-        }
-
-        toWrite.write(finalToWrite);
-        toWrite.close();
-    }
 }
