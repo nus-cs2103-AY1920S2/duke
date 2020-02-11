@@ -1,10 +1,10 @@
-import task.Deadline;
-import task.Event;
-import task.Todo;
+import duke.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
-import java.time.LocalDate;
 import java.util.StringTokenizer;
 
 /**

@@ -1,7 +1,8 @@
-import task.Task;
-import task.Deadline;
-import task.Event;
-import task.Todo;
+package duke;
+
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  *  contains methods which deal with loading tasks from the file and saving tasks in the file.
@@ -19,7 +19,7 @@ public class Storage {
     private final String filePath;
 
     /**
-     * constructs a Storage to save and load Tasks.
+     * constructs a duke.Storage to save and load Tasks.
      * @param filePath a String indicates where the tasks are going to be saved.
      */
     public Storage(String filePath) {
@@ -29,7 +29,7 @@ public class Storage {
 
     /**
      * updates the data file when any changes are made to the list of tasks.
-     * @param taskList the TaskList being updated.
+     * @param taskList the duke.TaskList being updated.
      * @throws IOException if the file path cannot be found.
      */
     public void rewriteFile(TaskList taskList) throws IOException {

@@ -1,9 +1,11 @@
-import task.Task;
+package duke;
+
+import duke.task.Task;
 
 import java.util.List;
 
 /**
- * Ui class has specific methods that deal with interactions with the user.
+ * duke.Ui class has specific methods that deal with interactions with the user.
  */
 public class Ui {
     /**
@@ -44,7 +46,7 @@ public class Ui {
      * @param list the list of Tasks which we are dealing with.
      */
     public String doneMessage(int num, List<Task> list) {
-        return typeSetting("    👍 Nice! I've marked this task as done: " + num
+        return typeSetting("    👍 Nice! I've marked this duke.task as done: " + num
                 + "\n" + "      " + list.get(num - 1));
     }
 
@@ -55,25 +57,25 @@ public class Ui {
      * @param index the number of tasks in the list after deleting.
      */
     public String deleteMessage(int num, Task t, int index) {
-        return typeSetting("    👌 Noted. I've removed this task: " + num
+        return typeSetting("    👌 Noted. I've removed this duke.task: " + num
                 + "\n" + "      " + t + "\n" +
                 "    Now you have " + index + " tasks in the list.");
     }
 
     /**
-     * shows a specific message when a Task is newly added into the TaskList.
+     * shows a specific message when a Task is newly added into the duke.TaskList.
      * @param t the Task being added.
      * @param index the number of Tasks in the list after adding.
      */
     public String addMessage(Task t, int index) {
-        return typeSetting("    🟢 Got it. I've added this task: \n      " +
+        return typeSetting("    🟢 Got it. I've added this duke.task: \n      " +
                 t + "\n" +
                 "    Now you have " + index + " tasks in the list.");
     }
 
     /**
      * gets a list which listing all the tasks recorded.
-     * @param taskList the TaskList which contains all the Tasks recorded.
+     * @param taskList the duke.TaskList which contains all the Tasks recorded.
      */
     public String getList(TaskList taskList) {
         List<Task> list = taskList.getTasks();
@@ -86,8 +88,8 @@ public class Ui {
     }
 
     /**
-     * an slightly altered version of gettingList. (exclusively used in findTask method in TaskList class)
-     * @param taskList the TaskList we are dealing with.
+     * an slightly altered version of gettingList. (exclusively used in findTask method in duke.TaskList class)
+     * @param taskList the duke.TaskList we are dealing with.
      */
     public String getMatchingTasks(TaskList taskList) {
         List<Task> list = taskList.getTasks();

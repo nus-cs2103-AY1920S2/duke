@@ -1,3 +1,5 @@
+package duke;
+
 public enum Message {
     DONE,
     DELETE,

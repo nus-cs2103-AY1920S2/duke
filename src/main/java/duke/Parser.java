@@ -1,7 +1,9 @@
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.security.InvalidKeyException;
 import java.time.LocalDate;
@@ -44,14 +46,14 @@ public class Parser {
      */
     public void checkDescription(String str, int length) throws EmptyDescriptionException {
         if (str.length() <= length + 1) {
-            throw new EmptyDescriptionException("OOPS!!! The description of a task cannot be empty.");
+            throw new EmptyDescriptionException("OOPS!!! The description of a duke.task cannot be empty.");
         }
     }
 
     /**
-     * gets the corresponding Message indicated from the user input String.
+     * gets the corresponding duke.Message indicated from the user input String.
      * @param str the first token gotten from the user input.
-     * @return a Message from the user input.
+     * @return a duke.Message from the user input.
      * @throws InvalidKeyException if the input does not give a valid message.
      */
     public Message getMessage(String str) throws InvalidKeyException {
@@ -63,7 +65,7 @@ public class Parser {
     /**
      * checks whether the number input is valid.
      * @param num the number given by the user.
-     * @param index the size of the TaskList.
+     * @param index the size of the duke.TaskList.
      * @return true if num is within the correct range.
      */
     public boolean inRange(int num, int index) {
@@ -86,7 +88,7 @@ public class Parser {
         String description = st.nextToken("~");
         if (st.hasMoreTokens()) {
             String extra = st.nextToken("~");
-            if (className.equals("Task.Deadline")) {
+            if (className.equals("Deadline")) {
                 Deadline ddl =  new Deadline(description, getLocalDate(extra));
                 if (status.equals("1")) {
                     ddl.markAsDone();

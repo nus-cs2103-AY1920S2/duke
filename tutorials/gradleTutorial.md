@@ -17,7 +17,7 @@ As a developer, you write a _build file_ that describes the project. A build fil
 
 * **Plugins** extend the functionality of Gradle. For example, the `java` plugin adds support for `Java` projects.
 
-* **Tasks** are reusable blocks of logic.  For example, the task `clean` simply deletes the project build directory. Tasks can be composed of other tasks or be dependent on another task. 
+* **Tasks** are reusable blocks of logic.  For example, the duke.task `clean` simply deletes the project build directory. Tasks can be composed of other tasks or be dependent on another duke.task. 
 
 * **Properties** change the behavior of tasks. For instance, `mainClassName` of the `application` plugin is a compulsory property which tells Gradle which class is the entrypoint to your application.
   As Gradle favors [_convention over configuration_](https://en.wikipedia.org/wiki/Convention_over_configuration), there is not much to you need to configure if you follow the recommended directory structure.
@@ -38,7 +38,7 @@ As a developer, you write a _build file_ that describes the project. A build fil
    ```
 1. To check if Gradle has been added to the project correctly, open a terminal window, navigate to the root directory of your project and run the command `gradlew run`. This should result in Gradle running the main method of your project.
 
-:bulb: Simply run the command `gradlew {taskName}` in the terminal and Gradle will run the task! Here are some example commands:
+:bulb: Simply run the command `gradlew {taskName}` in the terminal and Gradle will run the duke.task! Here are some example commands:
 * `gradlew tasks` (or `gradlew tasks --all`): shows a list of tasks available
 * `gradlew run`: runs the main class of your project
 

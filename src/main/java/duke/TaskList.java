@@ -1,15 +1,17 @@
-import task.Task;
+package duke;
+
+import duke.task.Task;
 
 import java.util.ArrayList;
 
 /**
- *  A TaskList contains the task list e.g., it has operations to add/delete tasks in the list.
+ *  A duke.TaskList contains the duke.task list e.g., it has operations to add/delete tasks in the list.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * construct a TaskList by the list of Tasks given.
+     * construct a duke.TaskList by the list of Tasks given.
      * @param tasks a list of Tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -33,7 +35,7 @@ public class TaskList {
     }
 
     /**
-     * adds a Task to the TaskList.
+     * adds a Task to the duke.TaskList.
      * @param t the Task being added.
      */
     public String addTask(Task t) {
@@ -43,7 +45,7 @@ public class TaskList {
     }
 
     /**
-     * deletes a Task in the TaskList by parsing the String given as an Integer.
+     * deletes a Task in the duke.TaskList by parsing the String given as an Integer.
      * @param str the String being parsed into an integer
      * @throws IllegalArgumentException if the string is parsed into a number which is out of the range.
      */
@@ -59,7 +61,7 @@ public class TaskList {
     }
 
     /**
-     * finds the tasks which contain the keyword given by the user and construct a TaskList by the resulting tasks.
+     * finds the tasks which contain the keyword given by the user and construct a duke.TaskList by the resulting tasks.
      * @param str a String represents the input of the user.
      */
     public String find(String str) {

@@ -1,6 +1,8 @@
 Todo~1~play chess
 Todo~0~go to bed
-Todo~1~group meeting
 Todo~0~watching TV
 Todo~0~group meeting
-Event~0~dalnhjdflak~2020-01-29
+Event~1~presentation~2020-02-23
+Event~0~e-learning~2020-10-29
+Deadline~0~lunch~2020-02-20
+Event~0~kwk~2020-12-12
