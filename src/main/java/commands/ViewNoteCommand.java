@@ -1,7 +1,6 @@
 package commands;
 
 import storage.Storage;
-import task.Note;
 import tasklist.TaskList;
 import ui.Ui;
 
@@ -20,7 +19,7 @@ public class ViewNoteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        if (!noteType.equals("all")) {
+        if (!noteType.equals("all")) { //view school note
             String msg = "Your " + noteType + " notes: \n";
             File file = new File("data/notes/" + noteType + ".txt");
             FileReader fr = new FileReader(file);
@@ -30,7 +29,7 @@ public class ViewNoteCommand extends Command {
                 msg += line + "\n";
             }
             return msg;
-        } else {
+        } else { //view all notes
             String msg = "These are the notes you have: \n";
             File folder = new File("data/notes/");
             File[] listOfFiles = folder.listFiles();
