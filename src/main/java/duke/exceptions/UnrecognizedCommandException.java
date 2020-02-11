@@ -1,4 +1,8 @@
 package duke.exceptions;
 
-public class UnrecognizedCommandException {
+public class UnrecognizedCommandException extends DukeException {
+    @Override
+    public String toString() {
+        return "Your command is not recognized";
+    }
 }

@@ -12,7 +12,7 @@ public class FindCommand implements Command {
      * @param tasks List of current tasks
      * @throws DukeException If keyword is not in list of tasks
      */
-    public static String execute(String keyword, TaskList tasks) {
+    public static String execute(String keyword, TaskList tasks) throws DukeException {
         TaskList matchingTasks = tasks.findKeyWord(keyword);
         return matchingTasks.printTaskList();
     }

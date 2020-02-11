@@ -13,15 +13,10 @@ public class DoneCommand implements Command {
      * @param storage For storing of tasks into file
      * @throws DukeException If input format is wrong
      */
-    public static String execute(String taskNum, TaskList tasks, Storage storage) {
+    public static String execute(String taskNum, TaskList tasks, Storage storage) throws DukeException {
 
         int taskNumber = Integer.parseInt(taskNum);
-        String completed = null;
-        try {
-            completed = tasks.completeTask(storage, taskNumber);
-        } catch (DukeException e) {
-            System.out.println("Task number doesn't exist for completion");
-        }
+        String completed = tasks.completeTask(storage, taskNumber);
         return "This task has been marked as completed: \n" + completed;
     }
 }

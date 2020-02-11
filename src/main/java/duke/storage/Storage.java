@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.FileCreationFailure;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -45,17 +46,14 @@ public class Storage {
                     taskList.add(parseTask(currentTask));
                 }
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                throw new DukeException("File was not created successfully!");
+                throw new FileCreationFailure();
             }
         } else {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("create new file error");
+                throw new FileCreationFailure();
             }
-            throw new DukeException("Task list not found! Creating new task list");
         }
 
         return taskList;

@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.WrongEventFormatException;
 import duke.storage.Storage;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -17,32 +18,33 @@ public class AddEventCommand implements Command {
      * @param storage For storing of tasks into file
      * @throws DukeException If input format is wrong
      */
-    public static String execute(String description, TaskList tasks, Storage storage) {
+    public static String execute(String description, TaskList tasks, Storage storage) throws DukeException {
 
         int slashIdx = description.indexOf("/");
         if (slashIdx == -1) {
-            // throw exception
-            System.out.println("Wrong event format. Please try again.");
+            throw new WrongEventFormatException();
         }
-        String taskTitle = description.substring(0, slashIdx).trim();
-        String dateTime = description.substring(slashIdx + 4).trim();
 
-        Task task = null;
+        Task task;
         try {
+            String taskTitle = description.substring(0, slashIdx).trim();
+            String dateTime = description.substring(slashIdx + 4).trim();
             task = new Event(taskTitle, Event.parseDateTime(dateTime));
-        } catch (DateTimeParseException e) {
-            // throw duke
-            System.out.println("Please enter deadline in the following format: YYYY-MM-DD HHMM");
+        } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
+            throw new WrongEventFormatException();
         }
-
-        tasks.addTask(task);
-        storage.saveTask(task);
 
         StringBuilder output = new StringBuilder();
-        output.append("This task has been added successfully:\n"
-                + task.toString() + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list\n");
+        if (task != null) {
+            tasks.addTask(task);
+            storage.saveTask(task);
 
+            output.append("This task has been added successfully:\n"
+                    + task.toString() + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list\n");
+        } else {
+            output.append("Event was not added. Please try again");
+        }
         return output.toString();
     }
 }

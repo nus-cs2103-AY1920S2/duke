@@ -139,7 +139,11 @@ public class Duke extends Application {
     public String getResponse(String input) {
         StringBuilder output = new StringBuilder();
 
-        output.append(Parser.parse(input, tasks, storage));
+        try {
+            output.append(Parser.parse(input, tasks, storage));
+        } catch (DukeException e) {
+            return e.toString();
+        }
 
         if (output.toString().equals("See you again!")) {
             System.exit(0);

@@ -5,6 +5,9 @@
 package duke.tasks;
 
 import java.util.ArrayList;
+
+import duke.exceptions.MissingKeywordException;
+import duke.exceptions.UnknownTaskException;
 import duke.storage.Storage;
 import duke.exceptions.DukeException;
 
@@ -70,7 +73,7 @@ public class TaskList {
      */
     public String completeTask(Storage storage, int taskNumber) throws DukeException {
         if (taskNumber > taskList.size() || taskNumber < 1) {
-            throw new DukeException("This task number does not exist.");
+            throw new UnknownTaskException();
         }
         Task task = taskList.get(taskNumber - 1);
         task.markAsDone();
@@ -86,7 +89,7 @@ public class TaskList {
      */
     public String deleteTask(Storage storage, int taskNumber) throws DukeException {
         if (taskNumber > taskList.size() || taskNumber < 1) {
-            throw new DukeException("This task number does not exist.");
+            throw new UnknownTaskException();
         }
         Task task = taskList.get(taskNumber - 1);
         taskList.remove(taskNumber - 1);
@@ -99,13 +102,17 @@ public class TaskList {
      * Returns a taskList object with descriptions containing the keyword
      * @param keyword To be searched against existing task list
      */
-    public TaskList findKeyWord(String keyword) {
+    public TaskList findKeyWord(String keyword) throws DukeException {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : taskList) {
             String description = task.getDescription();
             if (description.contains(keyword)) {
                 matchingTasks.add(task);
             }
+        }
+
+        if (matchingTasks.size() == 0) {
+            throw new MissingKeywordException();
         }
         return new TaskList(matchingTasks);
     }

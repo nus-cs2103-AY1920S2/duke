@@ -13,15 +13,10 @@ public class DeleteCommand implements Command {
      * @param storage For storing of tasks into file
      * @throws DukeException If input format is wrong
      */
-    public static String execute(String taskNum, TaskList tasks, Storage storage) {
+    public static String execute(String taskNum, TaskList tasks, Storage storage) throws DukeException {
 
         int taskNumber = Integer.parseInt(taskNum);
-        String deleted = null;
-        try {
-            deleted = tasks.deleteTask(storage, taskNumber);
-        } catch (DukeException e) {
-            System.out.println("Task number doesn't exist for deletion");
-        }
+        String deleted = tasks.deleteTask(storage, taskNumber);
         return "This task has been deleted: \n" + deleted;
     }
 }
