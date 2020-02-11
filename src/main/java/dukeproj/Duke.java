@@ -12,17 +12,12 @@ import dukeproj.exception.InvalidCommandException;
 
 import javafx.application.Application;
 
-import java.io.File;
-import java.util.Scanner;
-
 /**
  * Represents the main working class of DukeProject.
  */
 public class Duke {
     /** Object that handles user interface and communicating with user. */
     private Ui ui;
-    /** Primary I/O object used. */
-    private Scanner sc;
     /** Parser to read commands. */
     private Parser parser;
     /** Storage to read and store Duke into a file. */
