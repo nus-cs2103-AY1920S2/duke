@@ -4,6 +4,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /*
  * MainWindow
@@ -71,6 +72,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        checkExit(input);
     }
 
     /**
@@ -90,5 +92,17 @@ public class MainWindow extends AnchorPane {
 
     private String getWelcomeMessage() {
         return "Hi! I'm Duke (actually, my real name is Alice lol). Please enter your command!";
+    }
+
+    /**
+     * Checks the input whether it is a bye command. Close the
+     * app if it is.
+     * @param input The string input by the command.
+     */
+    private void checkExit(String input) {
+        if (input.equals("bye")) {
+            Stage stage = (Stage) scrollPane.getScene().getWindow();
+            stage.close();
+        }
     }
 }
