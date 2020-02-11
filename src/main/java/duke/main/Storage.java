@@ -26,8 +26,8 @@ public class Storage {
     }
 
     /**
-     * Write to the file whose address is specified by storagePath.
-     * @param textToAdd The text that is added to the file
+     * Writes to the file whose address is specified by storagePath.
+     * @param textToAdd The text that is added to the file.
      */
     public void writeToFile(String textToAdd) {
         try {
@@ -40,8 +40,8 @@ public class Storage {
     }
 
     /**
-     * Take the tasks in taskList and write all of them into the file who address is specified by storagePath
-     * @param taskList The List of Tasks to be written
+     * Takes the tasks in taskList and write all of them into the file whose address is specified by storagePath.
+     * @param taskList The List of Tasks to be written.
      */
     public void writeTasks(TaskList taskList) {
         List<Task> tasks = taskList.getTasks();
@@ -53,10 +53,10 @@ public class Storage {
     }
 
     /**
-     * Read the file that is pointed by storagePath and write store them as a List<List<String>>.
-     * The List<String> can be a list of a single command or a command with the arguments
-     * @return The List<List<String>> version of the file being read
-     * @throws FileNotFoundException
+     * Reads the file that is pointed by storagePath and write store them as a List<List<String>>.
+     * The List<String> can be a list of a single command or a command with the arguments.
+     * @return The List<List<String>> version of the file being read.
+     * @throws FileNotFoundException If file is not found.
      */
     public List<List<String>> loadTasksFromSaveFile() throws FileNotFoundException {
         List<List<String>> tasks = new ArrayList<>();
@@ -73,6 +73,4 @@ public class Storage {
         }
         return tasks;
     }
-
-
 }

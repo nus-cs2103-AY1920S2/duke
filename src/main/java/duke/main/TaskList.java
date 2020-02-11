@@ -13,8 +13,8 @@ public class TaskList {
     private List<Task> tasks;
 
     /**
-     * Initialises the duke.main.TaskList according to a list of tasks that have been saved
-     * @param savedTasks Tasks that have been saved represented as a List<List<String>>
+     * Initialises the TaskList according to a list of tasks that have been saved.
+     * @param savedTasks Tasks that have been saved represented as a List<List<String>>.
      */
     public TaskList(List<List<String>> savedTasks) {
         tasks = new ArrayList<>();
@@ -43,16 +43,17 @@ public class TaskList {
     }
 
     /**
-     * Gets the concrete representation of the tasks
-     * @return A List of Tasks
+     * Gets the concrete representation of the tasks.
+     * @return A List of Tasks.
      */
     public List<Task> getTasks() {
         return tasks;
     }
 
     /**
-     * Adds a deadline object to the task list
-     * @param args A String in the format of: "<desc> /by <date>"
+     * Adds a deadline object to the task list.
+     * @param args A String in the format of: "<desc> /by <date>".
+     * @return A String of the response to the CLI UI.
      */
     public String addDeadline(String args) {
         String[] descAndBy = args.split(" /by ");
@@ -67,8 +68,9 @@ public class TaskList {
     }
 
     /**
-     * Adds an duke.task.Event object to the task list
-     * @param args A String in the format of: "<desc> /at <date>"
+     * Adds an Event object to the task list.
+     * @param args A String in the format of: "<desc> /at <date>".
+     * @return A String of the response to the CLI UI.
      */
     public String addEvent(String args) {
         String[] descAndAt = args.split(" /at ");
@@ -83,8 +85,9 @@ public class TaskList {
     }
 
     /**
-     * Add a duke.task.Todo object to the task list
-     * @param args A String in the format of: "<desc>"
+     * Add a Todo object to the task list.
+     * @param args A String in the format of: "<desc>".
+     * @return A String of the response to the CLI UI.
      */
     public String addTodo(String args) {
         Todo todo = new Todo(args);
@@ -102,26 +105,26 @@ public class TaskList {
     }
 
     /**
-     * The number of tasks in the duke.main.TaskList
-     * @return The number of tasks in the duke.main.TaskList
+     * Returns the number of tasks in the TaskList.
+     * @return The number of tasks in the TaskList.
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * The duke.task.Task at a the index specified by the param
-     * @param idx 0-based indexing to get the duke.task.Task object
-     * @return
+     * Gets the Task at a the index specified by the param.
+     * @param idx 0-based indexing to get the Task object.
+     * @return The Task at the index specified by the param.
      */
     public Task get(int idx) {
         return tasks.get(idx);
     }
 
     /**
-     * Mark a duke.task.Task (specified by the index) as done
-     * @param taskNo A 1-based indexing of the position of the duke.task.Task in the list
-     * @throws InvalidIndexException
+     * Marks a Task (specified by the index) as done.
+     * @param taskNo A 1-based indexing of the position of the Task in the list.
+     * @throws InvalidIndexException If the index specified is less than 1 or greater than number of tasks.
      */
     public String markTaskAsDone(int taskNo) throws InvalidIndexException {
         if (taskNo < 1 || taskNo > tasks.size()) {
@@ -137,9 +140,9 @@ public class TaskList {
     }
 
     /**
-     * Delete a duke.task.Task (specified by the index)
-     * @param taskNo A 1-based indexing of the position of the duke.task.Task in the list
-     * @throws InvalidIndexException
+     * Deletes a Task (specified by the index).
+     * @param taskNo A 1-based indexing of the position of the Task in the list.
+     * @throws InvalidIndexException If the index specified is less than 1 or greater than number of tasks.
      */
     public String deleteTask(int taskNo) throws InvalidIndexException {
         if (taskNo < 1 || taskNo > tasks.size()) {
@@ -156,8 +159,8 @@ public class TaskList {
     }
 
     /**
-     * Checks if the duke.main.TaskList is full (full is defined by 100 tasks)
-     * @return true if duke.main.TaskList is full
+     * Checks if the TaskList is full (full is defined by 100 tasks).
+     * @return true If TaskList is full.
      */
     public boolean isFull() {
         return tasks.size() == 100;
@@ -200,5 +203,4 @@ public class TaskList {
         }
         return sb.toString();
     }
-
 }
