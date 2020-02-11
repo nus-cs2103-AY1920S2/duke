@@ -18,8 +18,11 @@ public class TaskList {
         this.taskArrayList = new ArrayList<Task>();
     }
 
+    /*
+    Gets a task at index specified
+     */
     public Task getTaskByIndex(int index) {
-        return this.taskArrayList.get(index);
+        return this.taskArrayList.get(index-1); //-1 because indexing for user starts from 1, but 0 for arraylist.
     }
 
     public void addTask(String type, String description){
@@ -78,6 +81,7 @@ public class TaskList {
             Ui.promptUser(stringNew);
         }
     }
+
 
     /*
     Deletes the task at specified index if it exists. Otherwise displays error message to user
