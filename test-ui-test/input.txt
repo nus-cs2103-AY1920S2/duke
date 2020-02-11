@@ -1,0 +1,9 @@
+list
+todo 1100 hw
+deadline 2131 hw /by tmr
+event meet hl /at tuesday in nus
+list
+done 2
+done 1
+list
+bye
