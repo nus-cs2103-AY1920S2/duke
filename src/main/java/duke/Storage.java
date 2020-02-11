@@ -27,10 +27,14 @@ public class Storage {
 
     /**
      * Loads data from the tasks data file.
+     *
      * @return TaskList. A TaskList object containing all parseable Task objects in the data file
      * @throws FileNotFoundException if Scanner object is not able to find the tasks data file
      */
     public TaskList loadTasksFile() throws FileNotFoundException {
+
+        // Assert that the tasksFile is still at the specified path and has not been shifted by some naughty user
+        assert tasksFile.isFile();
 
         Scanner sc = new Scanner(tasksFile);
         TaskList taskData = new TaskList();
@@ -78,11 +82,14 @@ public class Storage {
     }
 
     /**
-     * Writes all Tasks in the TaskList object to the file at the specified file location
+     * Writes all Tasks in the TaskList object to the file at the specified file location.
+     *
      * @param tasks TaskList. TaskList object storing all current Tasks.
      * @throws IOException if FileWriter object do not work as expected
      */
     public void writeTasksFile(TaskList tasks) throws IOException {
+        // Assert that the tasksFile is still at the specified path and has not been shifted by some naughty user
+        assert tasksFile.isFile();
         FileWriter fw = new FileWriter(tasksFile);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTask(i);
