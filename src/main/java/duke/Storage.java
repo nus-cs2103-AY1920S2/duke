@@ -27,6 +27,7 @@ public class Storage {
 
     /**
      * Loads data from the tasks data file.
+     *
      * @return TaskList. A TaskList object containing all parseable Task objects in the data file
      * @throws FileNotFoundException if Scanner object is not able to find the tasks data file
      */
@@ -78,7 +79,8 @@ public class Storage {
     }
 
     /**
-     * Writes all Tasks in the TaskList object to the file at the specified file location
+     * Writes all Tasks in the TaskList object to the file at the specified file location.
+     *
      * @param tasks TaskList. TaskList object storing all current Tasks.
      * @throws IOException if FileWriter object do not work as expected
      */

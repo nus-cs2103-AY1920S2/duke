@@ -5,7 +5,8 @@ import duke.tasks.*;
 public class Parser {
 
     /**
-     * Parses the command the user enters and execute it
+     * Parses the command the user enters and execute it.
+     *
      * @param tasks TaskList that stores all the current tasks
      * @param ui UI for interaction with the user
      * @return boolean. true indicates that the user has terminated the program (by typing "bye")
