@@ -237,6 +237,7 @@ public class Duke extends Application {
    * Replace this stub with your completed method.
    */
   protected String getResponse(String input) {
+    assert !input.isEmpty() : "Input cannot be empty!";
     return this.run(input);
   }
 
