@@ -9,26 +9,26 @@ public class Parser {
     public Parser() {
     }
 
-    public static Command parse(String fullCommand) throws DukeException{
+    public static Command parse(String fullCommand) throws DukeException {
         String[] commands = fullCommand.split(" ", 2);
         String commandWord = commands[0];
         checkCommand(commandWord, commands);
-        switch(commandWord) {
-            case "bye":
-                return new ExitCommand(commandWord);
-            case "list":
-                return new ListCommand(commandWord);
-            case "done":
-                int doneIndex = Integer.parseInt(commands[1]);
-                return new DoneCommand(commandWord, doneIndex);
-            case "delete":
-                int deleteIndex = Integer.parseInt(commands[1]);
-                return new DeleteCommand(commandWord, deleteIndex);
-            case "find":
-                String keyword = commands[1];
-                return new FindCommand(commandWord, keyword);
-            default:
-                return new AddCommand(commandWord, commands);
+        switch (commandWord) {
+        case "bye":
+            return new ExitCommand(commandWord);
+        case "list":
+            return new ListCommand(commandWord);
+        case "done":
+            int doneIndex = Integer.parseInt(commands[1]);
+            return new DoneCommand(commandWord, doneIndex);
+        case "delete":
+            int deleteIndex = Integer.parseInt(commands[1]);
+            return new DeleteCommand(commandWord, deleteIndex);
+        case "find":
+            String keyword = commands[1];
+            return new FindCommand(commandWord, keyword);
+        default:
+            return new AddCommand(commandWord, commands);
         }
     }
 
@@ -51,7 +51,7 @@ public class Parser {
         }
     }
 
-    public static void checkDetails(String[] commands) throws EmptyDescriptionException{
+    public static void checkDetails(String[] commands) throws EmptyDescriptionException {
         if (commands.length < 2) {
             throw new EmptyDescriptionException("Sorry dude but where are the arguments???");
         }

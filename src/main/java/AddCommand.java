@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     private String[] commands;
 
@@ -10,7 +10,7 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DuplicateTaskException {
         Task task = tasks.addTask(commandWord, commands);
         String output = ui.printAddingMessage(tasks, task);
         try {

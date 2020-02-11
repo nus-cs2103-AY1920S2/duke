@@ -4,9 +4,7 @@ import java.util.ArrayList;
 public class Ui {
 
     public Ui() {
-    }
-    public String greet() {
-        return "Hi dude! I'm your Dude\n" + "What do you want?\n";
+
     }
 
     public String showLoadingError(String message) {
@@ -64,6 +62,10 @@ public class Ui {
 
     public String printNotFoundTaskMessage() {
         return "Sorry dude I found nothing :(";
+    }
+
+    public String printDuplicateMessage() {
+        return "Hey you already have this task dude!";
     }
 
     public String printTask(int i, Task task) {

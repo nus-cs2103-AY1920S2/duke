@@ -9,9 +9,8 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
-    public Deadline(boolean isDone, String description, String byString) {
-        super(isDone, description);
-        this.type = "D";
+    public Deadline(String type, boolean isDone, String description, String byString) {
+        super(type, isDone, description);
         this.byString = byString;
 
         //Date input format: yyyy-mm-dd HHmm
@@ -24,10 +23,14 @@ public class Deadline extends Task {
         }
     }
 
+    public String getTypeSymbol() {
+        return "D";
+    }
+
     @Override
     public String[] toDataTokens() {
         String isDoneString = String.valueOf(super.isDone);
-        return new String[] {this.type, isDoneString, super.description, this.byString};
+        return new String[] {getTypeSymbol(), isDoneString, super.description, this.byString};
     }
 
     @Override
@@ -37,6 +40,6 @@ public class Deadline extends Task {
         if (this.time != null) {
             dateTime += " " + this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
         }
-        return "[D]" + super.toString() + " (by: " + dateTime + ")";
+        return "[" + getTypeSymbol() + "]" + super.toString() + " (by: " + dateTime + ")";
     }
 }

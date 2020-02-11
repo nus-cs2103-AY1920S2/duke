@@ -1,15 +1,16 @@
-import java.io.*;
-
-import java.util.ArrayList;
-
-import java.lang.reflect.Array;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
 
     private String filePath;
-    private String SPLIT =  " \\| ";
-    private String JOIN = " | ";
+    private static final String SPLIT =  " \\| ";
+    private static final String JOIN = " | ";
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -28,20 +29,20 @@ public class Storage {
             String description = tokens[2];
             Task task;
             if (type.equals("T")) {
-                task = new Todo(isDone, description);
+                task = new Todo("todo", isDone, description);
             } else {
                 // tokens = {type, isDone, description, time}
                 assert tokens.length == 4 : "missing argument(s)";
                 String time = tokens[3];
                 if (type.equals("D")) {
-                    task = new Deadline(isDone, description, time);
+                    task = new Deadline("deadline", isDone, description, time);
                 } else {
                     // Event type is provided
                     assert type.equals("E") : "invalid type";
-                    task = new Event(isDone, description, time);
+                    task = new Event("event", isDone, description, time);
                 }
             }
-            assert task != null: "null task";
+            assert task != null : "null task";
             taskList.add(task);
             line = reader.readLine();
         }
@@ -50,7 +51,7 @@ public class Storage {
         return taskList;
     }
 
-    public void update(TaskList tasks) throws IOException{
+    public void update(TaskList tasks) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false));
         ArrayList<Task> taskList = tasks.getTaskList();
         for (Task task: taskList) {
