@@ -38,7 +38,16 @@ public class TaskList {
      * @param addedTask the newly added Task
      */
     public void add(Task addedTask) {
-        this.list.add(addedTask);
+        boolean isDuplicated = false;
+        for (int i = 0; i < this.list.size(); i++) {
+            if (addedTask.toString().equalsIgnoreCase(this.list.get(i).toString())) {
+                isDuplicated = true;
+                break;
+            }
+        }
+        if (!isDuplicated) {
+            this.list.add(addedTask);
+        }
      }
 
     /**
