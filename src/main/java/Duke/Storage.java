@@ -2,14 +2,25 @@ package Duke;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Storage class for Duke
+ */
 public class Storage {
 
     protected String filePath;
 
+    /**
+     * Constructor for Storage
+     * @param filePath filepath of storage file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the task into Duke
+     * @return the arrayList of task
+     */
     public ArrayList<Task> load() {
         try {
             FileInputStream file = new FileInputStream(filePath);
@@ -24,12 +35,16 @@ public class Storage {
         return new ArrayList<Task>();
     }
 
-    public void store(ArrayList<Task> tsklst) {
+    /**
+     * Stores the task list into the system
+     * @param taskList takes in the tasklist
+     */
+    public void store(ArrayList<Task> taskList) {
         try {
             //saving file as object
             FileOutputStream file = new FileOutputStream(filePath);
             ObjectOutputStream out = new ObjectOutputStream(file);
-            out.writeObject(tsklst);
+            out.writeObject(taskList);
             out.close();
         } catch (IOException e) {
             System.out.println(e);

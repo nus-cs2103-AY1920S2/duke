@@ -1,21 +1,43 @@
 package Duke;
 
+/**
+ * Event Command class that inherits from Command
+ */
 public class EventCommand extends Command {
     protected String spli;
-    protected String des;
+    protected String description;
     protected String date;
-    public EventCommand(String spli, String des, String date) {
+
+    /**
+     * Deadline command constructor
+     * @param spli Takes in /at statement
+     * @param description takes in the description
+     * @param date Takes in the finishing date in string
+     */
+    public EventCommand(String spli, String description, String date) {
         this.spli = spli;
-        this.des = des;
+        this.description = description;
         this.date = date;
     }
-    public void execute(Ui ui, Storage storage, TaskList tasklist) {
+
+    /**
+     * Execute the command
+     * @param ui Pass in Ui class
+     * @param storage Pass in Storage class
+     * @param taskList Pass in TaskList class
+     */
+    public void execute(Ui ui, Storage storage, TaskList taskList) {
         Task t = new Event(getIndex(), date);
-        tasklist.addTask(t);
-        storage.store(tasklist.getEntireList());
-        ui.printTodoComplete(t, tasklist.getTaskListSize());
+        taskList.addTask(t);
+        storage.store(taskList.getEntireList());
+        ui.printTodoComplete(t, taskList.getTaskListSize());
     }
+
+    /**
+     * Method to return the index
+     * @return returns the index in the class
+     */
     public String getIndex() {
-        return des;
+        return description;
     }
 }

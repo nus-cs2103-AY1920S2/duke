@@ -3,16 +3,24 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Parser class for Duke
+ */
 public class Parser {
     static Scanner scanner = new Scanner(System.in);
+
+    /**
+     * Enums for task
+     */
     enum TaskEnum {
       TODO, DEADLINE, EVENT
     }
 
-    public Parser() {
-
-    }
-
+    /**
+     * Parse method for reading commands
+     * @param cmd takes in a command
+     * @return the command class
+     */
     public static Command parse(String cmd) {
         try {
             if(cmd.equals("bye")) {
@@ -58,6 +66,11 @@ public class Parser {
         return new ExitCommand();
     }
 
+    /**
+     * Converts String to local date time
+     * @param fin takes in the String of date
+     * @return returns the local date time
+     */
     public static LocalDateTime convertToDate(String fin) {
         fin = fin.trim();
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
