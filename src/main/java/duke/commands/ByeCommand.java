@@ -13,6 +13,8 @@ public class ByeCommand implements Command {
      * Prints the goodbye message in the UI.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null && ui != null && storage != null; //Precondition: non-null arguments
+        
         ui.showBye();
     }
     
