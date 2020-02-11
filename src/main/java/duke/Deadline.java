@@ -1,5 +1,4 @@
 package duke;
-import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -30,6 +29,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Creates a deadline object with given description, time to complete (by) and done status.
+     * Used when loading data from the data.txt file
+     * @param description
+     * @param by
+     * @param isDone
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = by;
@@ -54,6 +60,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Gives a string representation of the task to be stored in data.txt
+     * @return
+     */
     public String toFile() {
         return "D | " + super.toFile() + " | " + by;
     }
