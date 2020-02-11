@@ -1,3 +1,20 @@
+package duke.parser;
+
+import duke.commands.Command;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
+import duke.commands.ListCommand;
+import duke.commands.SortCommand;
+import duke.commands.ToDoCommand;
+
+import duke.exceptions.DukeException;
+
 import java.util.Optional;
 import java.util.stream.Stream;
 import java.util.function.Supplier;
@@ -135,7 +152,7 @@ public class Parser {
             if (taskString == null || taskString.isEmpty()) {
                 throw new DukeException("Task description cannot be empty");
             } else {
-                return Optional.of(new TodoCommand(taskString));
+                return Optional.of(new ToDoCommand(taskString));
             }
         } else {
             return Optional.empty();

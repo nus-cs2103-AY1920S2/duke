@@ -1,3 +1,9 @@
+package duke.storage;
+
+import duke.tasks.TaskList;
+import duke.tasks.Task;
+import duke.exceptions.DukeException;
+
 import java.util.ArrayList;
 
 import java.io.IOException;
@@ -16,16 +22,14 @@ import java.nio.file.Files;
 public class Storage {
     public static final String STORAGE_SAVE_PATH = "data/duke.txt";
     
-    public Storage() {
-    }
-    
-    @SuppressWarnings("unchecked")
     private ArrayList<Task> loadTaskState()
         throws IOException, ClassNotFoundException, ClassCastException {
         FileInputStream f = new FileInputStream(STORAGE_SAVE_PATH);
         ObjectInputStream o = new ObjectInputStream(f);
         
+        @SuppressWarnings("unchecked") //necessary due to unchecked cast to ArrayList<Task>
         ArrayList<Task> tasks = (ArrayList<Task>)o.readObject();
+        
         o.close();
         
         return tasks;

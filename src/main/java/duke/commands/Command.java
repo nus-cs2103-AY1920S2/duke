@@ -1,9 +1,15 @@
+package duke.commands;
+
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 /**
  * Encapsulates a syntatically valid command input from the user.
  * The `Command` must be implemented by any command supported by Duke.
  * However, the actual command parsing is done in `Parser`, as required in A-MoreOOP increment specification.
  */
-interface Command {
+public interface Command {
     /**
      * Executes the command, mutating `tasks` and writing to the UI as needed.
      * @param tasks TaskList object to store tasks

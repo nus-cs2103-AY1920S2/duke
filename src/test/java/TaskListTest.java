@@ -1,3 +1,7 @@
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+import duke.tasks.TaskList;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -5,17 +9,17 @@ public class TaskListTest {
     @Test
     public void addTasks() {
         TaskList taskList = new TaskList();
-        taskList.addTask(new Todo("1"));
-        taskList.addTask(new Todo("2"));
-        taskList.addTask(new Todo("3"));
+        taskList.addTask(new ToDo("1"));
+        taskList.addTask(new ToDo("2"));
+        taskList.addTask(new ToDo("3"));
         assertEquals(3, taskList.size());
     }
     
     @Test
     public void removeTasks() {
         TaskList taskList = new TaskList();
-        taskList.addTask(new Todo("1"));
-        taskList.addTask(new Todo("2"));
+        taskList.addTask(new ToDo("1"));
+        taskList.addTask(new ToDo("2"));
         assertEquals(2, taskList.size());
         
         taskList.removeTask(1);
@@ -27,8 +31,8 @@ public class TaskListTest {
     @Test
     public void markTaskAsDone() {
         TaskList taskList = new TaskList();
-        taskList.addTask(new Todo("1"));
-        taskList.addTask(new Todo("2"));
+        taskList.addTask(new ToDo("1"));
+        taskList.addTask(new ToDo("2"));
         assertEquals(false, taskList.getTask(0).isDone());
         assertEquals(false, taskList.getTask(1).isDone());
         

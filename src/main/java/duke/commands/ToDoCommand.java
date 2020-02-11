@@ -1,25 +1,33 @@
+package duke.commands;
+
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 /**
  * Encapsulates a "todo" command from the user.
  */
-public class TodoCommand implements Command {
+public class ToDoCommand implements Command {
     String description;
     
     /**
-     * Constructs a new TodoCommand instance.
+     * Constructs a new ToDoCommand instance.
      * @param description Task description
      */
-    public TodoCommand(String description) {
+    public ToDoCommand(String description) {
         this.description = description;
     }
     
     /**
-     * Adds a new Todo task specified by this TodoCommand into the task list.
+     * Adds a new ToDo task specified by this ToDoCommand into the task list.
      * @param tasks TaskList object to store tasks
      * @param ui UI object for interfacing with the user
      * @param storage Storage object to read and write TaskList state from files
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task newTask = new Todo(description);
+        Task newTask = new ToDo(description);
         tasks.addTask(newTask);
         
         ui.showAddTaskMessage(newTask, tasks.size());

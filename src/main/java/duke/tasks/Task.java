@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.io.Serializable;
 //Adapted from https://nus-cs2103-ay1920s2.github.io/website/schedule/week2/project.html
 
@@ -9,9 +11,6 @@ import java.io.Serializable;
 public abstract class Task implements Serializable {
     protected String description;
     protected boolean isDone;
-    
-    private Task() {
-    }
     
     /**
      * Constructs a new Task instance.

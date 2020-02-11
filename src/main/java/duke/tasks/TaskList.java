@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -78,7 +80,7 @@ public class TaskList {
 
     /**
      * Sorts the tasks in the list in ascending task date.
-     * Tasks without a date (e.g. `Todo`) will be placed after all tasks with a date.
+     * Tasks without a date (e.g. `ToDo`) will be placed after all tasks with a date.
      */
     public void sort() {
         Collections.sort(tasks, (taskA, taskB) -> {

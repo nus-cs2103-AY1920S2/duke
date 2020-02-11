@@ -1,14 +1,14 @@
+package duke.commands;
+
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 /**
  * Encapsulates a "bye" command from the user.
  * The "bye" command takes in no arguments, and any provided arguments will be ignored.
  */
 public class ByeCommand implements Command {
-    /**
-     * Constructs a new ByeCommand instance.
-     */
-    public ByeCommand() {
-    }
-    
     /**
      * Prints the goodbye message in the UI.
      */

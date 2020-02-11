@@ -1,6 +1,15 @@
 //Code for GUI is heavily adapted from the Duke JavaFX tutorials, available at
 //https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart1.md
 
+package duke.ui;
+
+import duke.Duke;
+import duke.tasks.Task;
+import duke.exceptions.DukeException;
+import duke.util.PrintUtil;
+
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -26,6 +35,7 @@ public class Gui implements Ui {
     private Duke duke;
     private boolean isClosed = false;
     private Font font = new Font("Liberation Mono", 15.0);
+    private ArrayList<Message> messageBuffer;
     
     /**
      * Constructs a new `Gui` instance.
@@ -34,6 +44,7 @@ public class Gui implements Ui {
      */
     public Gui(Duke duke) {
         this.duke = duke;
+        messageBuffer = new ArrayList<>();
         
         PrintUtil.setIndentLevel(0);
     }
@@ -124,6 +135,9 @@ public class Gui implements Ui {
         
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        
+        //Finally, add pending messages to the `dialogContainer`.
+        processMessageBuffer();
     }
     
     /**
@@ -136,16 +150,33 @@ public class Gui implements Ui {
      * Denotes the end of a new message to be printed.
      */
     public void endMessage() {
-        //getDialogLabel(PrintUtil.flushBuffer());
-        dialogContainer.getChildren().add(getDialogLabel(PrintUtil.flushBuffer()));
+        String buffer = PrintUtil.flushBuffer();
+        messageBuffer.add(new Message(String.format("%s", buffer)));
+        
+        if (this.stage != null) {
+            processMessageBuffer();
+        }
     }
-    
+
+    private void displayMessage(Message message) {
+        Label label = getDialogLabel(message.text);
+        dialogContainer.getChildren().add(label);
+    }
+
+    private void processMessageBuffer() {
+        for (Message m : messageBuffer) {
+            displayMessage(m);
+        }
+        messageBuffer.clear();
+    }
+
     /**
      * Reads a single-line command string from the user.
      * @return command string
      */
     public String readCommandString() {
         String command = userInput.getText();
+        displayMessage(new Message(String.format("> %s", command)));
         userInput.clear();
         return command;
     }
@@ -297,7 +328,7 @@ public class Gui implements Ui {
             break;
         case "todo":
             PrintUtil.indentedPrintln("Usage: todo [task description]");
-            PrintUtil.indentedPrintln("Adds a new Todo task into the task list.");
+            PrintUtil.indentedPrintln("Adds a new ToDo task into the task list.");
             break;
         default:
             PrintUtil.indentedPrintf("Unknown command \"%s\"\n", commandName);

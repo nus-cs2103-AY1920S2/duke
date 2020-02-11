@@ -1,3 +1,12 @@
+package duke;
+
+import duke.tasks.TaskList;
+import duke.ui.Gui;
+import duke.storage.Storage;
+import duke.exceptions.DukeException;
+import duke.commands.Command;
+import duke.parser.Parser;
+
 import java.util.Optional;
 import java.io.FileNotFoundException;
 
@@ -38,7 +47,11 @@ public class Duke extends Application {
         }
     }
     
-    protected void processCommand(String command) {
+    /**
+     * Parses and processes a command string.
+     * @param command Command string
+     */
+    public void processCommand(String command) {
         ui.startMessage();
         try {
             Optional<Command> c = new Parser(command).parse();

@@ -1,3 +1,11 @@
+package duke.commands;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.exceptions.DukeException;
+
 /**
  * Encapsulates a "done" command from the user.
  */
