@@ -25,7 +25,7 @@ public class TaskList {
      * @return true if num is within the correct range.
      */
     public boolean inRange(int num, int index) {
-        return num > 0 && num <= index;
+        return num <= 0 || num > index;
     }
 
     /**
@@ -34,7 +34,7 @@ public class TaskList {
      * @throws IllegalArgumentException if the string is parsed into a number which is out of the range.
      */
     public void markDone(int requestNumber) throws IllegalArgumentException {
-        if (!inRange(requestNumber, this.tasks.size())) {
+        if (inRange(requestNumber, this.tasks.size())) {
             throw new IllegalArgumentException("OOPS!!! The number you checked for may not be valid.");
         }
         this.tasks.get(requestNumber - 1).markAsDone();
@@ -54,7 +54,7 @@ public class TaskList {
      * @throws IllegalArgumentException if the string is parsed into a number which is out of the range.
      */
     public Task delete(int requestNumber) throws IllegalArgumentException {
-        if (!inRange(requestNumber, this.tasks.size())) {
+        if (inRange(requestNumber, this.tasks.size())) {
             throw new IllegalArgumentException("OOPS!!! The number you checked for may not be valid.");
         }
         return tasks.remove(requestNumber - 1);
