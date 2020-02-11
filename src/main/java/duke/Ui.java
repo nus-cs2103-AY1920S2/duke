@@ -48,6 +48,8 @@ public class Ui {
         stringBuilder.append(logo);
         stringBuilder.append(INDENT + "  Hello! I'm EXE, I'll execute anything on your command! :)" + NEWLINE);
         stringBuilder.append(INDENT + "  What do you want to exe?");
+        stringBuilder.append(INDENT + "  Type help to see what I can do for you!" + NEWLINE);
+        stringBuilder.append(INDENT + "  Type help follow by command keyword to see input format! :D");
         return stringBuilder.toString();
     }
 
@@ -55,7 +57,8 @@ public class Ui {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Hello! I'm EXE, I'll execute anything on your command! :)"
                 + NEWLINE);
-        stringBuilder.append("What do you want to exe?");
+        stringBuilder.append("Type help to see what I can do for you!" + NEWLINE);
+        stringBuilder.append("Type help follow by command keyword to see input format! :D");
         return stringBuilder.toString();
     }
 
