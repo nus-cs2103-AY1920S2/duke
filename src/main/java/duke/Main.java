@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
-import duke.javaFX.MainWindow;
+import duke.javafx.MainWindow;
 
 /**
  * A GUI for Duke using FXML.
@@ -40,8 +40,9 @@ public class Main extends Application {
     }
     /**
      * Terminates the scene builder.
-     * @throws Exception
+     * @throws Exception If program is unable to terminate.
      */
+
     @Override
     public void stop() throws Exception {
         TimeUnit.MILLISECONDS.sleep(50);

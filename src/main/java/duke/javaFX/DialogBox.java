@@ -1,4 +1,4 @@
-package duke.javaFX;
+package duke.javafx;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -40,6 +40,7 @@ public class DialogBox extends HBox {
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
+
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
@@ -50,6 +51,13 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
+
+    /**
+     * Returns the dialog to be displayed.
+     * @param text The text to be displayed.
+     * @param img The image to be displayed.
+     * @return The dialog box to be displayed.
+     */
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

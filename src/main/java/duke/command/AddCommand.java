@@ -1,4 +1,5 @@
 package duke.command;
+
 import java.io.IOException;
 
 import duke.storage.Storage;
@@ -11,15 +12,18 @@ import duke.ui.Ui;
  * Represents the command of adding a task into the task list. A <code>AddCommand</code> object corresponds to a task
  * to be added to the task list e.g., <code>Task</code>
  */
-public class AddCommand extends Command{
+
+public class AddCommand extends Command {
     Task task;
-    public AddCommand(Task task){
+
+    public AddCommand(Task task) {
         this.task = task;
     }
     /**
      * Returns the result of whether this is an exit program command.
      * @return The result of whether this command can exit the program.
      */
+
     @Override
     public boolean isExit() {
         return false;
@@ -32,6 +36,7 @@ public class AddCommand extends Command{
      * @param storage The storage file to be updated.
      * @throws IOException If the storage file is not found.
      */
+
     @Override
     public void execute(TaskList tasksList, Ui ui, Storage storage) throws IOException {
         tasksList.add(task);

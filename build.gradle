@@ -53,7 +53,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.javaFX.Launcher"
+    mainClassName = "duke.javafx.Launcher"
 }
 
 run {

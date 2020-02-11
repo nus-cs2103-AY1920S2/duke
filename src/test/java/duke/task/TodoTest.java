@@ -1,11 +1,11 @@
 package duke.task;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class TodoTest {
-
     @Test
-    void toStringTest(){
+    void toStringTest() {
         Task todo = new Todo("Task");
         String expectedFirst = "[T][Not Done] " + "Task";
         String actualFirst = todo.toString();
@@ -13,7 +13,7 @@ public class TodoTest {
     }
 
     @Test
-    void toStringTasksTest(){
+    void toStringTasksTest() {
         Task todo = new Todo("Task");
         String expectedSec = "T/0/Task\n";
         String actualSec = todo.toStringTasks();

@@ -1,4 +1,4 @@
-package duke.javaFX;
+package duke.javafx;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -14,6 +14,7 @@ import duke.ui.Ui;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
+
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -29,6 +30,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Starts the GUI.
+     */
     @FXML
     public void initialize() {
         Ui ui = new Ui();
@@ -45,6 +49,7 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -54,8 +59,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if(response.equals("     See ya later alligator!\n")){
-            new Thread( () -> {
+        if (response.equals("     See ya later alligator!\n")) {
+            new Thread(() -> {
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException ie) {

@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
@@ -27,6 +28,11 @@ public class Duke {
     public Duke() throws IOException {
         this("data/duke.txt");
     }
+    /**
+     * Creates a Duke object.
+     * @param filePath The file path to Duke.txt.
+     * @throws IOException If Duke.txt is not found.
+     */
 
     public Duke(String filePath) throws IOException {
         ui = new Ui();
@@ -49,6 +55,7 @@ public class Duke {
      * @param input The command entered by the user.
      * @return The result of the command to be displayed.
      */
+
     public String getResponse(String input) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -63,15 +70,17 @@ public class Duke {
             ui.showError(e.getMessage());
         } catch (IOException io) {
             ui.showSavingError();
-        } catch (DateTimeException dt){
+        } catch (DateTimeException dt) {
             System.out.println("      Please enter date in this format: YYYY-MM-DD");
-        } catch (IndexOutOfBoundsException iobe){
+        } catch (IndexOutOfBoundsException iobe) {
             System.out.println("      Sorry, index is out of bounce.");
-        }
-        finally {
+        } finally {
             return baos.toString();
         }
     }
+    /**
+     * Runs the duke program.
+     */
 
     public void run() {
         ui.showWelcome();
@@ -87,14 +96,14 @@ public class Duke {
                 ui.showError(e.getMessage());
             } catch (IOException io) {
                 ui.showSavingError();
-            } catch (DateTimeException dt){
+            } catch (DateTimeException dt) {
                 System.out.println("      Please enter date in this format: YYYY-MM-DD");
-            }
-            finally {
+            } finally {
                 ui.showLine();
             }
         }
     }
+
     public static void main(String[] args) throws IOException {
         new Duke().run();
     }

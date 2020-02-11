@@ -1,8 +1,16 @@
 package duke.parser;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
 
 import duke.dukeexception.DukeException;
 
@@ -12,6 +20,7 @@ import duke.task.Todo;
 /**
  * Makes sense of the command entered by the user.
  */
+
 public class Parser {
     /**
      * Returns the command to be executed. If invalid command entered, a invalid command instruction is returned.
@@ -19,24 +28,24 @@ public class Parser {
      * @return The command to be executed.
      * @throws DukeException If the user enters an invalid command.
      */
+
     public static Command parse(String fullCommand) throws DukeException, DateTimeException {
         String[] commandSplit = fullCommand.split(" ");
         String firstWord = commandSplit[0];
-        switch(firstWord){
+        switch (firstWord) {
         case "todo":
-            if (commandSplit.length < 2){
+            if (commandSplit.length < 2) {
                 throw new DukeException("todo");
-            }
-            else{
+            } else {
                 String description = "";
-                for(int i = 1; i < commandSplit.length; i++){
+                for (int i = 1; i < commandSplit.length; i++) {
                     description += commandSplit[i] + " ";
                 }
                 return new AddCommand(new Todo(description));
             }
         case "deadline":
             String deadlineTask = "";
-            for(int i = 1; i < commandSplit.length; i++){
+            for (int i = 1; i < commandSplit.length; i++) {
                 deadlineTask += commandSplit[i] + " ";
             }
             String deadlineDecription = deadlineTask.split("/by ")[0];
@@ -45,7 +54,7 @@ public class Parser {
                     LocalDate.parse(deadlineDate.substring(0, deadlineDate.length() - 1))));
         case "event":
             String eventTask = "";
-            for(int i = 1; i < commandSplit.length; i++){
+            for (int i = 1; i < commandSplit.length; i++) {
                 eventTask += commandSplit[i] + " ";
             }
             String eventDescription = eventTask.split("/at ")[0];

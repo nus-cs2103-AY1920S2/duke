@@ -1,4 +1,5 @@
 package duke.command;
+
 import java.io.IOException;
 
 import duke.storage.Storage;
@@ -10,15 +11,18 @@ import duke.ui.Ui;
  * Represents the command of marking a task at the index as done. A <code>DoneCommand</code> object corresponds to the
  * command of marking the task at the index as done e.g., <code>2</code>
  */
-public class DoneCommand extends Command{
+
+public class DoneCommand extends Command {
     int taskNum;
-    public DoneCommand(int taskNum){
+
+    public DoneCommand(int taskNum) {
         this.taskNum = taskNum;
     }
     /**
      * Returns the result of whether this is an exit program command.
      * @return The result of whether this command can exit the program.
      */
+
     @Override
     public boolean isExit() {
         return false;
@@ -30,6 +34,7 @@ public class DoneCommand extends Command{
      * @param storage The storage file to be updated.
      * @throws IOException If the storage file is not found.
      */
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
         tasks.getTask(taskNum - 1).markDone();
