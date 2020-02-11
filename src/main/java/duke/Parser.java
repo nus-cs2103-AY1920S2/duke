@@ -10,6 +10,7 @@ import duke.command.ListCommand;
 
 import duke.exception.DukeException;
 
+import duke.exception.MissingParsedArgumentsException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -62,88 +63,119 @@ public class Parser {
 
         default:
             if (command.strip().isEmpty()) {
+                // Blank input
                 throw new DukeException("I'm sorry. You didn't ask me anything.");
             } else {
+                // Unknown command
                 throw new DukeException("I'm sorry, but I don't know what that means :(");
             }
         }
     }
 
-    private static ExitCommand parseExit(String[] input) throws DukeException {
-        checkArgumentCount(input, 1); // Exception if not one word
+    private static ExitCommand parseExit(String[] input)
+            throws MissingParsedArgumentsException {
+        if (!hasNumArguments(input, 1)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         return new ExitCommand();
     }
 
     private static AddCommand parseDeadline(String[] input) throws DukeException {
-        checkArgumentCount(input, 2);
+        if (!hasNumArguments(input, 2)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         String[] args = input[1].split("\\s+/by\\s+");
 
-        checkArgumentCount(args, 2);
+        if (!hasNumArguments(args, 2)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         Task task = new Deadline(args[0], parseDate(args[1]));
         return new AddCommand(task);
     }
 
     private static AddCommand parseTodo(String[] input) throws DukeException {
-        checkArgumentCount(input, 2);
+        if (!hasNumArguments(input, 2)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         Task task = new Todo(input[1]);
         return new AddCommand(task);
     }
 
-    private static AddCommand parseEvent(String[] input) throws DukeException {
-        checkArgumentCount(input, 2);
+    private static AddCommand parseEvent(String[] input)
+            throws MissingParsedArgumentsException {
+        if (!hasNumArguments(input, 2)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         String[] args = input[1].split("\\s+/at\\s+");
 
-        checkArgumentCount(args, 2);
+        if (!hasNumArguments(args, 2)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         int timeSlotIndex = args[1].lastIndexOf(" ");
 
-        if (timeSlotIndex > 0) {
-            Task task = new Event(args[0],
-                    args[1].substring(0, timeSlotIndex).strip(),
-                    args[1].substring(timeSlotIndex + 1));
-            return new AddCommand(task);
-        } else {
-            // Exception if command is incorrectly typed
-            throw new DukeException("Could not parse input"
-                    + " because the number of arguments is invalid.");
+        if (timeSlotIndex <= 0) {
+            // Command is incorrectly typed
+            throw new MissingParsedArgumentsException();
         }
+
+        Task task = new Event(args[0],
+                args[1].substring(0, timeSlotIndex).strip(),
+                args[1].substring(timeSlotIndex + 1));
+
+        return new AddCommand(task);
     }
 
     private static DoneCommand parseDone(String[] input) throws DukeException {
-        checkArgumentCount(input, 2);
+        if (!hasNumArguments(input, 2)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         int taskId = parseInt(input[1]);
         return new DoneCommand(taskId);
     }
 
     private static DeleteCommand parseDelete(String[] input) throws DukeException {
-        checkArgumentCount(input, 2);
+        if (!hasNumArguments(input, 2)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         int taskId = parseInt(input[1]);
         return new DeleteCommand(taskId);
     }
 
     private static ListCommand parseList(String[] input) throws DukeException {
-        checkArgumentCount(input, 1);
+        if (!hasNumArguments(input, 1)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         return new ListCommand();
     }
 
     private static FindCommand parseFind(String[] input) throws DukeException {
-        checkArgumentCount(input, 2);
+        if (!hasNumArguments(input, 2)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         return new FindCommand(input[1]);
     }
 
     /**
-     * Will verify the number of arguments in a line of user input.
+     * Returns true if the input contains the correct number of arguments,
+     * otherwise false.
      *
      * @param input a tokenized array of input arguments.
      * @param length the desired number of input arguments.
-     * @throws DukeException if command arguments do not match.
+     * @return true if the input contains the correct number of arguments,
+     *         otherwise false.
      */
-    public static void checkArgumentCount(String[] input, int length)
-            throws DukeException {
-        if (input.length != length) {
-            // Exception if full command is incorrectly typed
-            throw new DukeException("Could not parse input"
-                    + " because the number of arguments is invalid.");
-        }
+    private static boolean hasNumArguments(String[] input, int length) {
+        return input.length == length;
     }
 
     /**
@@ -169,10 +201,10 @@ public class Parser {
      * @return the date representation of the string.
      * @throws DukeException if input cannot be parsed as a date object.
      */
-    public static LocalDate parseDate(String input)
-            throws DukeException {
+    public static LocalDate parseDate(String input) throws DukeException {
         try {
             return LocalDate.parse(input, DateTimeFormatter.ISO_LOCAL_DATE);
+
         } catch (DateTimeParseException e) {
             throw new DukeException("Please ensure your input matches the date format:\n"
                     + " yyyy-mm-dd.");

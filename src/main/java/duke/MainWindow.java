@@ -35,20 +35,16 @@ public class MainWindow extends AnchorPane {
     /**
      * Sets the chat-bot for this main window.
      *
-     * @param d the chat-bot instance.
+     * @param duke the chat-bot instance.
      */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
 
-        if (!d.isLoaded()) {
-            addDialogBox(
-                    DialogBox.getDukeDialog(duke.getLoadingError(), dukeImage)
-            );
+        if (!this.duke.isLoaded()) {
+            addDialogBox(DialogBox.getDukeDialog(duke.getLoadingError(), dukeImage));
         }
 
-        addDialogBox(
-                DialogBox.getDukeDialog(duke.getWelcome(), dukeImage)
-        );
+        addDialogBox(DialogBox.getDukeDialog(duke.getWelcome(), dukeImage));
     }
 
     /**
@@ -58,15 +54,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        addDialogBox(
-                DialogBox.getUserDialog(input, userImage)
-        );
+        addDialogBox(DialogBox.getUserDialog(input, userImage));
 
         if (!duke.isExit()) {
             String response = duke.getResponse(input);
-            addDialogBox(
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
+            addDialogBox(DialogBox.getDukeDialog(response, dukeImage));
         }
 
         userInput.clear();

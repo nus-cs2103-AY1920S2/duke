@@ -2,6 +2,7 @@ package duke;
 
 import duke.exception.DukeException;
 
+import duke.exception.MissingParsedArgumentsException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -14,16 +15,15 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
     /** Separates a line of text for file IO processing. */
     private static final String DELIMITER = " \\s*\\|\\s*";
-    /** ID for a completed task. */
-    private static final String TASK_COMPLETE = "1";
-    /** ID for a task that has not been completed. */
-    private static final String TASK_INCOMPLETE = "0";
 
     /** Relative directory of the save file for this storage object. */
     private String filePath;
@@ -109,39 +109,24 @@ public class Storage {
         // Tokenize the string
         String[] args = line.split(DELIMITER);
 
-        // Check if the tokens can form one of the task types
-        if (isTask(args)) {
-            Task task = readTaskType(args);
-            task = readTaskIsDone(args[1], task);
+        int minimumArguments = 3;
+        boolean hasMinimumArguments = args.length >= minimumArguments;
 
-            return task;
+        if (!hasMinimumArguments) {
+            throw new MissingParsedArgumentsException();
+        }
 
-        } else {
+        boolean hasIsDoneArgument = isBoolean(args[1]);
+
+        if (!hasIsDoneArgument) {
             // Task could not be read properly
             throw new DukeException("Arguments cannot be used to construct a valid task.");
         }
-    }
 
-    /**
-     * Checks if a group of tokens form the minimum requirements to construct a task.
-     * The first token must be the character id of the underlying task type.
-     * The second token must either be a "0" or "1" to represent whether the task has been
-     * completed or not.
-     *
-     * @param args tokens read from a file input.
-     * @return true if the tokens can construct a generic task, otherwise false.
-     */
-    private boolean isTask(String[] args) {
-        // There should be at least 3 arguments
-        boolean hasThreeArguments = args.length >= 3;
+        Task task = readTaskType(args);
+        task = markTaskIfDone(args[1], task);
 
-        if (hasThreeArguments) {
-            // Second argument is either "0" or "1"
-            return args[1].equals(TASK_INCOMPLETE) || args[1].equals(TASK_COMPLETE);
-
-        } else {
-            return false;
-        }
+        return task;
     }
 
     /**
@@ -174,8 +159,11 @@ public class Storage {
      * @return a to-do read from file input.
      * @throws DukeException if the file input contains invalid arguments.
      */
-    private Todo readTodo(String[] args) throws DukeException {
-        Parser.checkArgumentCount(args, 3);
+    private Todo readTodo(String[] args) throws MissingParsedArgumentsException {
+        if (!hasNumArguments(args, 3)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         return new Todo(args[2]);
     }
 
@@ -186,9 +174,13 @@ public class Storage {
      * @return a deadline read from file input.
      * @throws DukeException if the file input contains invalid arguments.
      */
-    private Deadline readDeadline(String[] args) throws DukeException {
-        Parser.checkArgumentCount(args, 4);
-        return new Deadline(args[2], Parser.parseDate(args[3]));
+    private Deadline readDeadline(String[] args) throws MissingParsedArgumentsException,
+            DukeException {
+        if (!hasNumArguments(args, 4)) {
+            throw new MissingParsedArgumentsException();
+        }
+
+        return new Deadline(args[2], parseDate(args[3]));
     }
 
     /**
@@ -199,8 +191,80 @@ public class Storage {
      * @throws DukeException if the file input contains invalid arguments.
      */
     private Event readEvent(String[] args) throws DukeException {
-        Parser.checkArgumentCount(args, 5);
+        if (!hasNumArguments(args, 5)) {
+            throw new MissingParsedArgumentsException();
+        }
+
         return new Event(args[2], args[3], args[4]);
+    }
+
+    /**
+     * Returns true if the input contains the correct number of arguments,
+     * otherwise false.
+     *
+     * @param input a tokenized array of input arguments.
+     * @param length the desired number of input arguments.
+     * @return true if the input contains the correct number of arguments,
+     *         otherwise false.
+     */
+    private boolean hasNumArguments(String[] input, int length) {
+        return input.length == length;
+    }
+
+    /**
+     * Return true if a token can be parsed as a boolean, otherwise false.
+     * The token must either be a "0" or "1".
+     *
+     * @param token a token read from a file input.
+     * @return true if the token can be parsed as a boolean, otherwise false.
+     */
+    private boolean isBoolean(String token) {
+        String trueInput = "1";
+        String falseInput = "0";
+
+        return token.equals(trueInput) || token.equals(falseInput);
+    }
+
+    /**
+     * Parses a boolean from a string.
+     *
+     * @param input a string to convert into a boolean.
+     * @return the boolean representation of the string.
+     * @throws DukeException if input cannot be parsed as a boolean.
+     */
+    private boolean parseBoolean(String input) throws AssertionError {
+        String trueInput = "1";
+        String falseInput = "0";
+
+        assert input.equals(trueInput) || input.equals(falseInput) : "Invalid input - " + input;
+
+        if (input.equals(trueInput)) {
+            return true;
+        } else if (input.equals(falseInput)) {
+            return false;
+        } else {
+            throw new AssertionError();
+            // throw new DukeException("Could not parse input as a boolean.\n"
+            //        + "Inputs that are true: 0\n"
+            //        + "Inputs that are false: 1");
+        }
+    }
+
+    /**
+     * Parses a date from a string.
+     *
+     * @param input a string to convert into a date, in yyyy-mm-dd format.
+     * @return the date representation of the string.
+     * @throws DukeException if input cannot be parsed as a date object.
+     */
+    private LocalDate parseDate(String input) throws DukeException {
+        try {
+            return LocalDate.parse(input, DateTimeFormatter.ISO_LOCAL_DATE);
+
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please ensure your input matches the date format:\n"
+                    + " yyyy-mm-dd.");
+        }
     }
 
     /**
@@ -212,19 +276,16 @@ public class Storage {
      * @return a task that has been marked as completed based on a token read from
      *         a file input.
      */
-    private Task readTaskIsDone(String isCompleted, Task task) {
+    private Task markTaskIfDone(String isCompleted, Task task) {
         // TODO: Abstract out this check
-        assert isCompleted.equals(TASK_INCOMPLETE)
-                || isCompleted.equals(TASK_COMPLETE) : "Invalid token - " + isCompleted;
-
+        assert isBoolean(isCompleted) : "Invalid token - " + isCompleted;
         assert !task.isDone() : "Task should not be marked as completed when constructed";
 
-        if (isCompleted.equals(TASK_COMPLETE)) {
+        boolean isDone = parseBoolean(isCompleted);
+
+        if (isDone) {
             return task.markDone();
-
         } else {
-            assert isCompleted.equals(TASK_INCOMPLETE) : "Invalid token - " + isCompleted;
-
             return task;
         }
     }

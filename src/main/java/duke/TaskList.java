@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -7,15 +8,17 @@ import java.util.List;
 
 public class TaskList {
     /** Stores a list of tasks. */
-    private final List<Task> taskList;
+    private final List<Task> tasks;
 
     /** Constructs a new TaskList that can store an arbitrary size. */
     public TaskList() {
         this(new ArrayList<>());
     }
 
-    public TaskList(List<Task> taskList) {
-        this.taskList = taskList;
+    /** Constructs a new TaskList using an existing list of tasks. */
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
+
     }
 
     /**
@@ -25,7 +28,7 @@ public class TaskList {
      * @return the task at the specified position in the list.
      */
     public Task get(int taskId) {
-        return taskList.get(taskId - 1);
+        return tasks.get(taskId - 1);
     }
 
     /**
@@ -34,7 +37,7 @@ public class TaskList {
      * @return the number of tasks in the list.
      */
     public int getNumTasks() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -43,7 +46,7 @@ public class TaskList {
      * @return the list of tasks.
      */
     public List<Task> getList() {
-        return new ArrayList<>(taskList);
+        return new ArrayList<>(tasks);
     }
 
     /**
@@ -52,11 +55,11 @@ public class TaskList {
      * @param task the task to add into the list.
      * @return a copy of this TaskList with the newly added task.
      */
-    public TaskList addTask(Task task) {
-        List<Task> newList = new ArrayList<>(taskList);
-        newList.add(task);
+    public TaskList addTask(Task task) throws DukeException {
+        List<Task> newTasks = new ArrayList<>(tasks);
+        newTasks.add(task);
 
-        return new TaskList(newList);
+        return new TaskList(newTasks);
     }
 
     /**
@@ -66,12 +69,13 @@ public class TaskList {
      * @return a copy of this TaskList with the specified task marked as done.
      */
     public TaskList doneTask(int taskId) {
-        List<Task> newList = new ArrayList<>(taskList);
+        Task oldTask = this.get(taskId);
+        Task newTask = oldTask.markDone();
 
-        Task newTask = taskList.get(taskId - 1).markDone();
-        newList.set(taskId - 1, newTask);
+        List<Task> newTasks = new ArrayList<>(tasks);
+        newTasks.set(taskId - 1, newTask);
 
-        return new TaskList(newList);
+        return new TaskList(newTasks);
     }
 
     /**
@@ -82,10 +86,12 @@ public class TaskList {
      *      and remaining elements left-shifted.
      */
     public TaskList deleteTask(int taskId) {
-        List<Task> newList = new ArrayList<>(taskList);
-        newList.remove(taskId - 1);
+        Task task = this.get(taskId);
 
-        return new TaskList(newList);
+        List<Task> newTasks = new ArrayList<>(tasks);
+        newTasks.remove(taskId - 1);
+
+        return new TaskList(newTasks);
     }
 
     /**
@@ -95,14 +101,14 @@ public class TaskList {
      * @return a task in the list as a formatted text.
      */
     public String getFormattedTask(int taskId) {
-        return String.format("%2d.%s", taskId, taskList.get(taskId - 1));
+        return String.format("%2d.%s", taskId, tasks.get(taskId - 1));
     }
 
     @Override
     public String toString() {
         StringBuilder tasks = new StringBuilder();
 
-        for (int i = 1; i <= taskList.size(); i++) {
+        for (int i = 1; i <= this.tasks.size(); i++) {
             tasks.append(getFormattedTask(i)).append("\n");
         }
 
