@@ -30,8 +30,9 @@ public class MainWindow extends AnchorPane {
         botName.setText("Duke is here");
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    /** @param duke Instance of duke that will control interactions with user */
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**

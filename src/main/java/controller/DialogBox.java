@@ -43,10 +43,20 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * @param text to display
+     * @param img to display as user
+     * @return DialogBox DialogBox floated to the right
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * @param text to display
+     * @param img to display
+     * @return DialogBox DialogBox floated to the left
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

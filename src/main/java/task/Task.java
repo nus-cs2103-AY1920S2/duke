@@ -1,6 +1,7 @@
 package task;
 
 import exception.DukeException;
+import exception.UIException;
 import parser.Parser;
 
 public class Task {
@@ -39,7 +40,7 @@ public class Task {
             case "period":
                 return new PeriodTask(typeLess);
             default:
-                throw new DukeException("Task not recognized");
+                throw new UIException("Task not recognized");
         }
     }
 
@@ -63,7 +64,7 @@ public class Task {
             case "[P]":
                 return new PeriodTask(splitEntry);
             default:
-                throw new DukeException("Task not recognized");
+                throw new UIException("Task not recognized");
         }
     }
 

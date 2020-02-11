@@ -1,6 +1,7 @@
 package duke;
 
 import exception.DukeException;
+import exception.TaskListException;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 import javafx.application.Application;
@@ -11,13 +12,12 @@ import parser.Parser;
 import storage.Storage;
 import task.Task;
 
-// TODO remove all old parts of Duke and keep only parts that are required for JavaFx
-
 public class Duke extends Application {
     private UserInterface UI;
     private TaskList taskList;
     private Boolean isClosed = false;
 
+    // storage path is set to root_folder/storage/file.txt
     private static Storage storage = new Storage(Paths.get("storage", "file.txt"));
 
     @Override
@@ -68,7 +68,7 @@ public class Duke extends Application {
         switch (input) {
             case "list":
                 return this.taskList
-                        .getAllTaskString()
+                        .getAllTasksAsString()
                         .stream()
                         .collect(Collectors.joining(String.format("%n")));
             case "bye":
@@ -76,18 +76,19 @@ public class Duke extends Application {
                 return "Bye see you again soon!";
             default:
                 // as long as done/delete inside
-                if (Parser.isDoneDelete(input)) {
+                if (Parser.isDoneOrDelete(input)) {
                     if (this.taskList.isEmpty()) {
-                        throw new DukeException("Task list is empty!");
+                        throw new TaskListException();
+                        // throw new DukeException("Task list is empty!");
                     }
-                    // TODO shift to parser for getting taskIndex
-                    String[] splitInput = input.split("\\s+");
-                    int taskIndex = Integer.parseInt(splitInput[splitInput.length - 1]) - 1;
+                    int taskIndex = Parser.getTaskIndex(input) - 1;
                     if (taskIndex >= this.taskList.size()) {
-                        throw new DukeException(
-                                String.format(
-                                        "Please choose an index that is between 1 and %d (inclusive)",
-                                        this.taskList.size()));
+                        throw new TaskListException(this.taskList.size());
+                        // throw new DukeException(
+                        //         String.format(
+                        //                 "Please choose an index that is between 1 and %d
+                        // (inclusive)",
+                        //                 this.taskList.size()));
                     }
                     if (input.contains("done")) {
                         this.taskList.markDone(taskIndex);
@@ -102,16 +103,21 @@ public class Duke extends Application {
                     }
                 } else if (Parser.isFind(input)) {
                     if (this.taskList.isEmpty()) {
-                        throw new DukeException("Task list is empty!");
+                        throw new TaskListException();
+                        // throw new DukeException("Task list is empty!");
                     }
-                    // TODO shift to parser for getting serachTerm
-                    String searchTerm = input.substring(5).trim();
-                    return taskList.search(searchTerm)
-                            .stream()
-                            .collect(Collectors.joining(String.format("%n")));
+                    String searchTerm = Parser.getSearchTerm(input);
+                    String searchResults =
+                            taskList.search(searchTerm)
+                                    .stream()
+                                    .collect(Collectors.joining(String.format("%n")));
+                    if (searchResults.isEmpty()) {
+                        return "No matching tasks!";
+                    }
+                    return searchResults;
                 } else {
-                    // TODO create task here then addTask to this.taskList as a Task Object
-                    Task newTask = this.taskList.addTask(input);
+                    Task newTask = Task.newTask(input);
+                    this.taskList.addTask(newTask);
                     return String.format(
                             "Got it. I've added this task:%n%s%nNow you have %d %s in the list,",
                             newTask.toString(),
@@ -121,6 +127,10 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * @param input user input
+     * @return String duke's response to user input
+     */
     public String getResponse(String input) {
         try {
             String output = dispatch(input);
@@ -131,6 +141,7 @@ public class Duke extends Application {
         }
     }
 
+    /** @return Boolean whether the user has closed the GUI */
     public Boolean getIsClosed() {
         return this.isClosed;
     }

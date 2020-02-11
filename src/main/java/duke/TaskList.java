@@ -1,6 +1,5 @@
 package duke;
 
-import exception.DukeException;
 import java.util.ArrayList;
 import task.Task;
 
@@ -22,7 +21,7 @@ public class TaskList {
     }
 
     /** @return ArrayList<String> returns an array of tasks in string format */
-    public ArrayList<String> getAllTaskString() {
+    public ArrayList<String> getAllTasksAsString() {
         ArrayList<String> taskString = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {
             taskString.add(String.format("%d.%s", i + 1, this.tasks.get(i)));
@@ -61,15 +60,9 @@ public class TaskList {
         return this.tasks.remove(index);
     }
 
-    /**
-     * @param input raw string of new task
-     * @return Task returns created task
-     * @throws DukeException exceptions when creating task
-     */
-    public Task addTask(String input) throws DukeException {
-        Task newTask = Task.newTask(input);
+    /** @param newTask new task object */
+    public void addTask(Task newTask) {
         this.tasks.add(newTask);
-        return newTask;
     }
 
     /** @param index index of task to set done */

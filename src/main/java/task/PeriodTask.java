@@ -40,7 +40,6 @@ public class PeriodTask extends TimeTask {
         this.endTime = LocalTime.parse(fromMemory[6]);
     }
 
-    /** @return String */
     @Override
     public String toString() {
         return String.format(

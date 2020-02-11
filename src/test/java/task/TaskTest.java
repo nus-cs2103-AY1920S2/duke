@@ -37,7 +37,7 @@ public class TaskTest {
                                     "period TOTO 4D BIG HUAT /start 14/02/2020 0000 /end 12/02/2020 2359");
                         });
         assertEquals(
-                "WARNING!! End dates and time must be after start dates and time",
+                "Oppsie doodle: End dates and time must be after start dates and time",
                 periodException.getMessage());
 
         Exception noTypesException =
@@ -47,7 +47,7 @@ public class TaskTest {
                             Task.newTask(
                                     "TOTO 4D BIG HUAT /start 14/02/2020 0000 /end 12/02/2020 2359");
                         });
-        assertEquals("WARNING!! No accepted types present", noTypesException.getMessage());
+        assertEquals("Oppsie doodle: Dear user, No accepted types present", noTypesException.getMessage());
     }
 
     @Test
