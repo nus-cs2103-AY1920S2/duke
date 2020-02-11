@@ -23,10 +23,10 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = new Todo(description);
         tasks.addTask(task);
         storage.saveSingle(task);
-        return ui.showAddTask(task, tasks.getSize());
+        ui.showAddTask(task, tasks.getSize());
     }
 }

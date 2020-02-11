@@ -82,4 +82,20 @@ public class TaskList {
             throw new DukeException("OOPS!!! We don't have this number in list!!!");
         }
     }
+
+    /**
+     * Find the task which contains the keyword.
+     *
+     * @param keyword keyword to search
+     * @return a TaskList of result tasks
+     */
+    public TaskList getTaskWithKeyword(String keyword) {
+        TaskList result = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                result.addTask(task);
+            }
+        }
+        return result;
+    }
 }

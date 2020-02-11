@@ -66,17 +66,18 @@ public class Task {
         this.isDone = true;
     }
 
-    @Override
-    public String toString() {
-        return getStatusIcon() + " " + getDescription();
-    }
-
     /**
      * Convert task to string to store in the data file.
      *
      * @return string represent the task
      */
     public String saveString() {
-        return taskType + " | " + (isDone ? "1" : "0") + " | " + description + " | ";
+        String status = getStatus() ? "1" : "0";
+        return String.format("%s | %s | %s", getTaskType(), status, getDescription());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s",getStatusIcon(), getDescription());
     }
 }

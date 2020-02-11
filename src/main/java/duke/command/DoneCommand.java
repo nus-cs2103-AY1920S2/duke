@@ -22,10 +22,10 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task tempTask = tasks.getByIndex(index);
         tempTask.markDone();
         storage.saveAll(tasks);
-        return ui.showDone(tempTask);
+        ui.showDone(tempTask);
     }
 }

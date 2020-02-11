@@ -9,15 +9,8 @@ import duke.ui.Ui;
  */
 public class ExitCommand extends Command {
 
-    /**
-     * Create instance of ExitCommand.
-     */
-    public ExitCommand() {
-
-    }
-
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.showExit();
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.showExit();
     }
 }

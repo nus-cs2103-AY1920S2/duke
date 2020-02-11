@@ -8,7 +8,7 @@ import duke.ui.Ui;
 /**
  * Represents an executable command.
  */
-public class Command {
+public abstract class Command {
 
     /**
      * Create instance of Command.
@@ -24,10 +24,7 @@ public class Command {
      * @param ui Ui which handle ui operation
      * @param storage Storage to perform read and write operation to the file
      *
-     * @throws DukeException the exception for the unimplemented method
-     * @return feedback to user
+     * @throws DukeException Exception related when execute the command
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException("This method is to be implemented by child classes");
-    }
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

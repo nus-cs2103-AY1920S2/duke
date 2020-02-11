@@ -17,93 +17,87 @@ public class Ui {
     private static final String INVALID_TASK = "Invalid command format!";
     private static final String FIND_TASK = "Here are the matching tasks in your list:";
 
-    public Ui() {
-
-    }
-
     /**
-     * Returns message to the user.
+     * Shows message to the user.
      *
      * @param message message given
      */
-    private String showToUser(String... message) {
-        StringBuilder formatted = new StringBuilder();
+    private void showToUser(String... message) {
         for (String m : message) {
-            formatted.append(m).append(LS);
+            System.out.println(m.replace("\n", LS));
         }
-        return formatted.toString();
     }
 
     /**
-     * Returns error message based on the exception to user.
+     * Shows error message based on the exception to user.
      *
      * @param ex exception which contain error message
      */
-    public String showError(DukeException ex) {
-        return showToUser(ex.getMessage());
+    public void showError(DukeException ex) {
+        showToUser(ex.getMessage());
     }
 
     /**
-     * Returns the information of added task to user.
+     * Shows the information of added task to user.
      *
      * @param task new task
      * @param totalTasks current total task in integer
      */
-    public String showAddTask(Task task, int totalTasks) {
-        return showToUser(ADD_TASK, task.toString(), String.format(NUM_OF_TASKS, totalTasks));
+    public void showAddTask(Task task, int totalTasks) {
+        showToUser(ADD_TASK, task.toString(), String.format(NUM_OF_TASKS, totalTasks));
     }
 
     /**
-     * Returns the information of deleted task to user.
+     * Shows the information of deleted task to user.
      *
      * @param task deleted task
      * @param totalTasks current total task in integer
      */
-    public String showDeleteTask(Task task, int totalTasks) {
-        return showToUser(DELETE_TASK, task.toString(), String.format(NUM_OF_TASKS, totalTasks));
+    public void showDeleteTask(Task task, int totalTasks) {
+        showToUser(DELETE_TASK, task.toString(), String.format(NUM_OF_TASKS, totalTasks));
     }
 
     /**
-     * Returns the information of done task to user.
+     * Shows the information of done task to user.
      *
      * @param task done task
      */
-    public String showDone(Task task) {
-        return showToUser(DONE_TASK, task.toString());
+    public void showDone(Task task) {
+        showToUser(DONE_TASK, task.toString());
     }
 
     /**
-     * Returns exit message to user.
+     * Shows exit message to user.
      */
-    public String showExit() {
-        return showToUser(EXIT_TASK);
+    public void showExit() {
+        showToUser(EXIT_TASK);
     }
 
     /**
-     * Returns invalid command message to user.
+     * Shows invalid command message to user.
      *
      * @param message message of invalid command
      */
-    public String showInvalid(String message) {
-        return showToUser(INVALID_TASK, message);
+    public void showInvalid(String message) {
+        showToUser(INVALID_TASK, message);
     }
 
     /**
-     * Returns all current tasks to user.
+     * Shows all current tasks to user.
      *
      * @param tasks list of all tasks
      */
-    public String showAllTask(TaskList tasks) {
-        return showToUser(getAllTaskForView(tasks));
+    public void showAllTask(TaskList tasks) {
+        showToUser(getAllTaskForView(tasks));
     }
 
     /**
-     * Returns all find tasks to user.
+     * Shows all find tasks to user.
      *
      * @param tasks list of find tasks
      */
-    public String showFindTask(TaskList tasks) {
-        return showToUser(FIND_TASK, getAllTaskForView(tasks));
+    public void showFindTask(TaskList tasks) {
+        showToUser(FIND_TASK, getAllTaskForView(tasks));
     }
 
     /**

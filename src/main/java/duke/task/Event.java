@@ -31,11 +31,13 @@ public class Event extends Task {
 
     @Override
     public String saveString() {
-        return getTaskType() + " | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + getDateTime();
+        String status = getStatus() ? "1" : "0";
+        return String.format("%s | %s | %s | %s", getTaskType(), status, getDescription(), getDateTime());
     }
 
     @Override
     public String toString() {
-        return "[" + super.getTaskType() + "]" + super.toString() + " (at: " + dateTime.format(OUT_FORMATTER) + ")";
+        return String.format("[%s] %s (by: %s)",super.getTaskType(), super.toString()
+                , dateTime.format(OUT_FORMATTER));
     }
 }

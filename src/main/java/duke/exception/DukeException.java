@@ -7,13 +7,6 @@ public class DukeException extends Exception {
 
     /**
      * Create instance of DukeException.
-     */
-    public DukeException() {
-
-    }
-
-    /**
-     * Create instance of DukeException.
      *
      * @param message Error message of exception
      */

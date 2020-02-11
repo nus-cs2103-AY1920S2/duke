@@ -1,13 +1,14 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.ExitCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import javafx.application.Platform;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 /**
  * Initializes the setting and prepare respond to user input.
@@ -29,11 +30,9 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             tasks = new TaskList();
+        } catch (Exception e) {
+            ui.showError(new DukeException("Unknown Error, Please try to restart the application!"));
         }
-    }
-
-    public Duke() {
-
     }
 
     /**
@@ -43,14 +42,19 @@ public class Duke {
      * @return return the response from the system
      */
     public String getResponse(String input) {
+        ByteArrayOutputStream respond = new ByteArrayOutputStream();
+        PrintStream uiOutput = new PrintStream(respond);
+        PrintStream systemOutput = System.out;
+        System.setOut(uiOutput);
         try {
             Command c = Parser.parse(input);
-            if (c instanceof ExitCommand) {
-                Platform.exit(); // statement to exit the JavaFX application
-            }
-            return c.execute(tasks, ui, storage);
+            c.execute(tasks, ui, storage);
         } catch (DukeException ex) {
-            return ui.showError(ex);
+            ui.showError(ex);
         }
+
+        System.out.flush();
+        System.setOut(systemOutput);
+        return respond.toString();
     }
 }

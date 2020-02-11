@@ -55,7 +55,6 @@ public class Storage {
      * @throws DukeException exception for error while writing data to the file
      */
     public void saveSingle(Task task) throws DukeException {
-        saveCheck();
         try {
             FileWriter fw = new FileWriter(Paths.get(filePath).toString(), true);
             fw.write(task.saveString() + System.lineSeparator());
@@ -73,7 +72,6 @@ public class Storage {
      * @throws DukeException exception for error while writing data to the file
      */
     public void saveAll(TaskList tasks) throws DukeException {
-        saveCheck();
         try {
             FileWriter fw = new FileWriter(Paths.get(filePath).toString());
             for (Task task : tasks.getList()) {
@@ -82,33 +80,6 @@ public class Storage {
             fw.close();
         } catch (IOException ex) {
             throw new DukeException("Save all error.");
-        }
-    }
-
-    /**
-     * Check if the file and directory exist before saving. Create the file and directory if do not exist.
-     *
-     * @throws DukeException exception for error while creating the file or directory
-     */
-    private void saveCheck() throws DukeException {
-        File file = new File(Paths.get(filePath).toUri());
-        boolean success;
-        if (!file.exists()) {
-            File dir = new File(file.getParentFile().getAbsolutePath());
-            if (!dir.exists()) {
-                success = dir.mkdir();
-                if (!success) {
-                    throw new DukeException("Create file directory error");
-                }
-            }
-            try {
-                success = file.createNewFile();
-                if (success) {
-                    throw new DukeException("Create file error");
-                }
-            } catch (IOException ex) {
-                throw new DukeException("Create file error");
-            }
         }
     }
 
