@@ -9,7 +9,7 @@ public class ToDo extends Task {
      */
     public ToDo(String name) {
         super(name);
-        done = false;
+        isDone = false;
     }
 
     /***
@@ -19,7 +19,7 @@ public class ToDo extends Task {
      */
     public ToDo(String name, boolean done) {
         super(name);
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /***
@@ -27,7 +27,7 @@ public class ToDo extends Task {
      * @return print format
      */
     public String toString() {
-        if (done) {
+        if (isDone) {
             return ("[T][v] " + name+"\n");
         }
 

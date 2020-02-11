@@ -13,7 +13,7 @@ public class Deadline extends Task {
      */
     public Deadline(String name, LocalDate time) {
         super(name);
-        done = false;
+        isDone = false;
         this.time = time;
     }
 
@@ -21,11 +21,11 @@ public class Deadline extends Task {
      * Constructor of newly read deadline
      * @param name
      * @param time
-     * @param done
+     * @param isDone
      */
-    public Deadline(String name, LocalDate time, boolean done) {
+    public Deadline(String name, LocalDate time, boolean isDone) {
         super(name);
-        this.done = done;
+        this.isDone = isDone;
         this.time = time;
     }
 
@@ -35,7 +35,7 @@ public class Deadline extends Task {
      * @return print format
      */
     public String toString() {
-        if (done) {
+        if (isDone) {
             return ("[D][v] " + name + " | by: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n");
         }
 

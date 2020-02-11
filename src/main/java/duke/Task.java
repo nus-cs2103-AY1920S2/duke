@@ -2,7 +2,7 @@ package duke;
 
 public class Task {
     protected String name;
-    protected boolean done;
+    protected boolean isDone;
 
     /***
      * Task constructor
@@ -17,7 +17,7 @@ public class Task {
      * Set a task as done
      */
     protected void setDone() {
-        done = true;
+        isDone = true;
     }
 
 

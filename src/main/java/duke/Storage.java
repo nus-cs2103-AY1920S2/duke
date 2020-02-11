@@ -32,13 +32,13 @@ public class Storage {
         while (s.hasNext()) {
             String sentence = s.nextLine();
             String type = sentence.substring(4, 5);
-            boolean done = true;
+            boolean isDone = true;
             if (sentence.substring(7, 8).equals("x")) {
-                done = false;
+                isDone = false;
             }
             if (type.equals("T")) {
                 String substr = sentence.substring(10);
-                ToDo task = new ToDo(substr, done);
+                ToDo task = new ToDo(substr, isDone);
                 Duke.commandList.add(task);
 
             } else if (type.equals("D")) {
@@ -46,7 +46,7 @@ public class Storage {
                 String[] deadlineSplit = substr.split(" \\| by: ");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
                 LocalDate date = LocalDate.parse(deadlineSplit[1], formatter);
-                Deadline task = new Deadline(deadlineSplit[0], date, done);
+                Deadline task = new Deadline(deadlineSplit[0], date, isDone);
                 Duke.commandList.add(task);
 
             } else {
@@ -54,7 +54,7 @@ public class Storage {
                 String[] eventSplit = substr.split(" \\| at: ");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
                 LocalDate date = LocalDate.parse(eventSplit[1], formatter);
-                Event task = new Event(eventSplit[0], date, done);
+                Event task = new Event(eventSplit[0], date, isDone);
                 Duke.commandList.add(task);
 
             }

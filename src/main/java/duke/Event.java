@@ -13,7 +13,7 @@ public class Event extends Task {
      */
     public Event(String name, LocalDate time) {
         super(name);
-        done = false;
+        isDone = false;
         this.time = time;
     }
 
@@ -21,11 +21,11 @@ public class Event extends Task {
      * Constructor of newly read event
      * @param name
      * @param time
-     * @param done
+     * @param isDone
      */
-    public Event(String name, LocalDate time, boolean done) {
+    public Event(String name, LocalDate time, boolean isDone) {
         super(name);
-        this.done = done;
+        this.isDone = isDone;
         this.time = time;
     }
 
@@ -34,7 +34,7 @@ public class Event extends Task {
      * @return print format
      */
     public String toString() {
-        if (done) {
+        if (isDone) {
             return ("[E][v] " + name + " | at: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ "\n");
         }
         return ("[E][x] " + name+ " | at: "+time.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ "\n");
