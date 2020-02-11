@@ -30,5 +30,9 @@ T | N | test
 T | Y | borrow book
 D | N | return book | Jun 5 2020 2PM
 E | N | project meeting | Aug 17 2020 10AM
+<<<<<<< HEAD
 D | N | do homework | Oct 29 2020 12PM
 >>>>>>> 27a992b... C-Update: Easily edit items
+=======
+D | Y | do homework | Oct 29 2020 12PM
+>>>>>>> 8ba8999... fixed duke.main()

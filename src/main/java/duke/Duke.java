@@ -55,9 +55,9 @@ public class Duke extends Application {
      * @throws IOException if the file cannot be updated
      */
     public static void main(String[] args) throws DukeException, IOException {
-        ui.start();
+        ui.dukePrint(ui.start());
         taskList = new TaskList();
-        storage = new Storage("duke.txt", taskList);
+
         storage = new Storage("duke.txt", taskList);
         try {
             storage.retrieveInfo();
@@ -65,11 +65,16 @@ public class Duke extends Application {
             ui.dukePrint("Something went wrong: " + e.getMessage());
             return;
         }
+
         parser = new Parser(taskList);
+
         String command = scanner.nextLine();
-        while (scanner.hasNextLine()) {
+        while (!command.equals("bye")) {
             ui.dukePrint(parser.parse(command));
+            command = scanner.nextLine();
         }
+
+        ui.dukePrint("Bye. Hope to see you again soon!\n");
         storage.updateInfo();
     }
 
