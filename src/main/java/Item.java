@@ -34,6 +34,10 @@ public abstract class Item {
         return this;
     }
 
+    public boolean getDone() {
+        return this.done;
+    }
+
     public String getName() {
         return this.name;
     }

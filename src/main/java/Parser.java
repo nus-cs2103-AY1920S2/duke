@@ -14,6 +14,7 @@ public class Parser {
      */
     public String append(String[] tmp) {
         String task = "";
+        assert tmp.length >= 1;
         for (int i = 1; i < tmp.length; i++) {
             task += tmp[i];
             if (i != tmp.length - 1) {
@@ -40,10 +41,12 @@ public class Parser {
                 } else if (Integer.parseInt(tmp[1]) > list.items.size()) {
                     return ("OOPS!!! The index of a task is out of range.");
                 }
+                assert tmp.length >= 2;
                 int index = Integer.parseInt(tmp[1]);
                 if (tmp[0].equals("done")) {
                     list.items.get(index - 1).markDone();
                     storage.updateTxt(list.items.get(index - 1).replace(), list.items.get(index - 1).now(), ui);
+                    assert list.items.get(index - 1).getDone() == true;
                     return ui.markDone(list.items.get(index - 1));
                 } else {
                     storage.updateTxt(list.items.get(index - 1).now(), "", ui);
