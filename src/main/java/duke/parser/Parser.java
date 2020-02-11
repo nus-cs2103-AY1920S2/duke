@@ -47,7 +47,7 @@ public class Parser {
         case TODO:
             return AddTodoCommand.execute(commandDetails, taskList, storage);
         case BYE:
-            return ExitCommand.execute(commandDetails, taskList, storage);
+            return ExitCommand.execute();
         case DEADLINE:
             return AddDeadlineCommand.execute(commandDetails, taskList, storage);
         case DELETE:
@@ -57,9 +57,9 @@ public class Parser {
         case EVENT:
             return AddEventCommand.execute(commandDetails, taskList, storage);
         case FIND:
-            return FindCommand.execute(commandDetails, taskList, storage);
+            return FindCommand.execute(commandDetails, taskList);
         case LIST:
-            return ListCommand.execute(commandDetails, taskList, storage);
+            return ListCommand.execute(taskList);
         default:
             return "failed to understand command";
         }

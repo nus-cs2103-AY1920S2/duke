@@ -4,7 +4,7 @@ import duke.tasks.TaskList;
 import duke.storage.Storage;
 import duke.exceptions.DukeException;
 
-public class DoneCommand extends Command {
+public class DoneCommand implements Command {
 
     /**
      * Marks a particular task as done

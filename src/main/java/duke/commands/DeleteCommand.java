@@ -4,7 +4,7 @@ import duke.storage.Storage;
 import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
 
-public class DeleteCommand extends Command {
+public class DeleteCommand implements Command {
 
     /**
      * Deletes a task from list of current tasks

@@ -6,7 +6,7 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
-public class AddTodoCommand extends Command {
+public class AddTodoCommand implements Command {
 
     /**
      * Adds a Todo task to TaskList

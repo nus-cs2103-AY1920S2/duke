@@ -8,7 +8,7 @@ import duke.tasks.TaskList;
 
 import java.time.format.DateTimeParseException;
 
-public class AddEventCommand extends Command {
+public class AddEventCommand implements Command {
 
     /**
      * Adds an Event task to TaskList

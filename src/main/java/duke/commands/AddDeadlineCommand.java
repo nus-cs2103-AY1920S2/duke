@@ -8,7 +8,7 @@ import duke.tasks.TaskList;
 
 import java.text.ParseException;
 
-public class AddDeadlineCommand extends Command {
+public class AddDeadlineCommand implements Command {
 
     /**
      * Adds a Deadline task to TaskList
