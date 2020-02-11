@@ -78,8 +78,8 @@ public class Duke extends Application{
                     break;
                 } else if (command.equals("delete")) { //delete command
                     Task.deleteTask(inputs[1]);
-//                } else if (command.equals("find")) {
-//                    Task.find(inputs[1]);
+                } else if (command.equals("find")) {
+                    Task.find(inputs[1]);
                 } else {
                     throw new InvalidCommandException();
                 }
