@@ -41,7 +41,7 @@ public class Duke {
     static String terminateCommand = "bye";
     static TaskCollection taskCollection = new TaskCollection();
     static PersistentStorageObserver persistentStorageObserver = new PersistentStorageObserver(taskCollection);
-    static ReminderObserver reminderObserver = new ReminderObserver(taskCollection);
+//    static ReminderObserver reminderObserver = new ReminderObserver(taskCollection);
     // Use a hashmap to store command key to prevent developer error in typing command keys across different functions
     static HashMap<String, Integer> commandCodeMapping = new HashMap<String, Integer>() {
         {

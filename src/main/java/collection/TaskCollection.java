@@ -21,6 +21,10 @@ public class TaskCollection {
         this.listeners = new ArrayList<PropertyChangeListener>();
     }
 
+    public void resetTasks() {
+        this.tasks = new ArrayList<Task>();
+    }
+
     private void loadTasks() {
         try {
             File tmpDir = new File("../../../tasks.tmp");

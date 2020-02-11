@@ -12,6 +12,7 @@ public class TaskCollectionTest {
     @Test
     public void testGetMethod() {
         TaskCollection tc = new TaskCollection();
+        tc.resetTasks()
         tc.add(new Task("a"));
         assertEquals("a", tc.get(0).getDescription(), "get correct task in collection");
     }
@@ -19,6 +20,7 @@ public class TaskCollectionTest {
     @Test
     public void testRemoveMethod() {
         TaskCollection tc = new TaskCollection();
+        tc.resetTasks();
         tc.add(new Task("a"));
         tc.remove(0);
         assertEquals(0, tc.size(), "remove successfully");
