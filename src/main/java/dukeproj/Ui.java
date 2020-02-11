@@ -8,8 +8,6 @@ import dukeproj.enums.SayType;
 public class Ui {
     /** Logo of Duke. */
     private String logo;
-    /** Pre-specified line break for use in CLI version of Duke. */
-    private String lineBreak;
 
     /**
      * Returns Duke's response to a certain SayType.
@@ -51,18 +49,10 @@ public class Ui {
     }
 
     /**
-     * Prints out the introductory message for DukeProject.
-     */
-    public String getIntroduction() {
-        return lineBreak + "\nHello I am \n" + logo
-                + "\nWhat can I do for you?\n" + lineBreak;
-    }
-
-    /**
      * Prints out the exit message for DukeProject.
      */
     public String getExit() {
-        return lineBreak + "\nBye! Hope to see you again soon!\n" + lineBreak;
+        return "Bye! Hope to see you again soon!";
     }
 
     private String getHelp() {
@@ -84,13 +74,6 @@ public class Ui {
     }
 
     /**
-     * Prints out a lineBreak.
-     */
-    public void printLineBreak() {
-        System.out.println(lineBreak);
-    }
-
-    /**
      * Creates the User Interface with pre-defined logo and linebreak.
      */
     public Ui() {
@@ -99,8 +82,5 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        lineBreak = "_____________________________"
-                + "_________________________";
-
     }
 }

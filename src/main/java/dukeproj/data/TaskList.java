@@ -68,16 +68,6 @@ public class TaskList {
     }
 
     /**
-     * Prints the list of task systematically.
-     * Includes index of task based on (array index + 1).
-     */
-    public void printTask() {
-        for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(i + "." + tasks.get(i - 1));
-        }
-    }
-
-    /**
      * Finds tasks in the TaskList using a varargs of keywords.
      *
      * @param keywords The varargs of keywords used to find tasks.

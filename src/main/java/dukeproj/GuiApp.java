@@ -97,7 +97,7 @@ public class GuiApp extends Application {
             scrollPane.setVvalue(1.0);
         }));
 
-        dukeSay(duke.getUi().say(SayType.INTRO));
+        getDukeResponse(duke.getUi().say(SayType.INTRO));
     }
 
     /**
@@ -105,7 +105,7 @@ public class GuiApp extends Application {
      *
      * @param str String to be echoed into the GUI by Duke.
      */
-    public void dukeSay(String str) {
+    public void getDukeResponse(String str) {
         Label text = new Label(str);
 
         text.setWrapText(true);
@@ -152,7 +152,7 @@ public class GuiApp extends Application {
         try {
             Platform.exit();
         } catch (Exception e) {
-            dukeSay("Oh dear! I cant seem to close, please alt+F4");
+            getDukeResponse("Oh dear! I cant seem to close, please alt+F4");
         }
     }
 
@@ -160,7 +160,7 @@ public class GuiApp extends Application {
      * Constructs a GUI app with a predetermined Duke variable.
      */
     public GuiApp() {
-        duke = new Duke("." + File.separator + "data" + File.separator + "Task.txt", true);
+        duke = new Duke("." + File.separator + "data" + File.separator + "Task.txt");
     }
 
 }

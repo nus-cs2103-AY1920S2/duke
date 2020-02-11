@@ -67,40 +67,6 @@ public class Duke {
     }
 
     /**
-     * Generates DukeProject. This method will run the main interface of the DukeProject.
-     * It will read commands given by the system using a scanner and store results in a task list before writing it
-     * into storage.
-     */
-    public void run() {
-        System.out.println(ui.getIntroduction());
-        while (sc.hasNext()) {
-            String next = sc.next();
-            if (next.equals("bye")) {
-                break;
-            } else {
-                try {
-                    ui.printLineBreak();
-                    CommandType commandType = Parser.commandParser(next);
-                    parser.readCommand(commandType);
-                } catch (InvalidCommandException e) {
-                    System.out.println("Sorry I do not know what that means!");
-                    sc.nextLine();
-                } catch (DukeDescriptionException e) {
-                    System.out.println("OOPS! You forgot to include a description!");
-                } catch (BadDescriptionException e) {
-                    System.out.println("OOPS! " + e.getMessage());
-                } catch (BadDateException e) {
-                    System.out.println("Sorry I don't recognise this date format!\n"
-                            + "Please make sure the format is: dd mm yy");
-                } finally {
-                    ui.printLineBreak();
-                }
-            }
-        }
-        System.out.println(ui.getExit());
-    }
-
-    /**
      * Returns the User Interface of Duke.
      *
      * @return User Interface.
@@ -114,17 +80,12 @@ public class Duke {
      *
      * @param filepath Filepath of the Duke storage.
      */
-    public Duke(String filepath, boolean isGui) {
+    public Duke(String filepath) {
         ui = new Ui();
         schedule = new Schedule();
         storage = new Storage(filepath);
         taskList = new TaskList(storage.printFileIntoList(schedule));
-        if (isGui) {
-            parser = new Parser();
-        } else {
-            sc = new Scanner(System.in);
-            parser = new Parser(taskList, schedule, storage, sc);
-        }
+        parser = new Parser();
     }
 
     /**
