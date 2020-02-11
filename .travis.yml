@@ -1,0 +1,17 @@
+language: java
+matrix:
+  include:
+    - jdk: openjdk11
+
+script: >-
+  ./config/travis/run-checks.sh &&
+  ./gradlew clean checkstyleMain checkstyleTest test
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
