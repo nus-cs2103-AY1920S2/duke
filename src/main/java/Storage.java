@@ -1,9 +1,4 @@
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 import java.util.ArrayList;
 
@@ -68,6 +63,12 @@ public class Storage {
     }
 
     public void initialiseData() {
-
+        File file = new File("data/tasks.txt");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            // initialiseData() only called when file not already exists
+            assert 1 == 0 : "data already exists";
+        }
     }
 }
