@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         List<Task> taskList = new ArrayList<>();
         boolean end = false;
@@ -29,9 +29,7 @@ public class Duke {
             else if (next_cmd.equals("list")) {
                 //No Tasks in List
                 if (taskList.size() == 0) {
-                    System.out.println("    ____________________________________________________________\n" +
-                            "     There are no tasks available\n" +
-                            "    ____________________________________________________________");
+                    throw new DukeException("There are no tasks availaible");
                 }
 
                 else {
@@ -45,9 +43,24 @@ public class Duke {
                 }
             }
 
+            //Invalid Command: Command does not have description
+            else if (next_cmd.split(" ").length == 1) {
+                if (next_cmd.equals("todo") || next_cmd.equals("deadline") || next_cmd.equals("event")) {
+                    throw new DukeException("☹ OOPS!!! The description of a " + next_cmd + " cannot be empty.");
+                }
+                else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            }
+
             //Command: Done (Mark the particular task as done)
             else if ((next_cmd.split(" ")[0]).equals("done")) {
+
+
                 int task_num = Integer.parseInt(next_cmd.split(" ")[1]) - 1;
+                if(task_num > taskList.size() || task_num < 0) {
+                    throw new DukeException("Invalid Task Number");
+                }
                 taskList.get(task_num).markAsDone();
                 System.out.println("    ____________________________________________________________\n" +
                         "     Nice! I've marked this task as done:");
@@ -55,6 +68,7 @@ public class Duke {
                 System.out.println("    ____________________________________________________________");
             }
 
+            //Add Task to taskList
             else {
                 Task t = null;
                 String taskType = next_cmd.split(" ")[0];
@@ -69,6 +83,7 @@ public class Duke {
                     case "deadline":
                         t = new Deadline(next_cmd.split("/by")[0], next_cmd.split("/by")[1]);
                         break;
+                    default: throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 taskList.add(t);
                 System.out.println("    ____________________________________________________________\n" +
