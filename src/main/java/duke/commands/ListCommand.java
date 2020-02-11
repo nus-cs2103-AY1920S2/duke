@@ -7,19 +7,15 @@ import duke.exceptions.DukeException;
 
 public class ListCommand extends Command {
 
-    public ListCommand(String command) {
-        super(command);
-    }
 
     /**
      * Prints out the current list of tasks to terminal
+     * @param description Description of task
      * @param tasks List of current tasks
-     * @param ui User interface used to reply user
      * @param storage For storing of tasks into file
      * @throws DukeException If input format is wrong. Not used here
      */
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return tasks.printTaskList(ui);
+    public static String execute(String description, TaskList tasks, Storage storage) {
+        return tasks.printTaskList();
     }
 }
