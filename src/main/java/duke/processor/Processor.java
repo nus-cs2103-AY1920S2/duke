@@ -13,10 +13,12 @@ public class Processor {
     public static void process(TaskList tasks, Storage storage) throws DukeException {
         while (Parser.stillHasInputs()) {
             String input = Parser.readLine();
-            String toReturn = "";
+            String toReturn;
             if (Parser.commandEquals("bye", input)) {
-
                 toReturn = Ui.getGoodbyeMessage();
+
+                // The other print sections are after the series of if-elses, so by inserting a break in this block
+                // I have to print section here
                 Ui.printSection(toReturn);
                 break;
             } else if (Parser.commandEquals("list", input)) {
@@ -28,22 +30,36 @@ public class Processor {
                 int taskNo = Parser.getTaskNo(input);
                 toReturn = tasks.deleteTask(taskNo);
             } else if (Parser.commandEquals("deadline", input)) {
-                if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
-                if (tasks.isFull()) throw new TooManyTasksException();
+                if (Parser.hasNoArgs(input)) {
+                    throw new EmptyDescriptionException();
+                }
+                if (tasks.isFull()) {
+                    throw new TooManyTasksException();
+                }
 
                 toReturn = tasks.addDeadline(Parser.getArgs(input));
             } else if (Parser.commandEquals("event", input)) {
-                if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
-                if (tasks.isFull()) throw new TooManyTasksException();
+                if (Parser.hasNoArgs(input)) {
+                    throw new EmptyDescriptionException();
+                }
+                if (tasks.isFull()) {
+                    throw new TooManyTasksException();
+                }
 
                 toReturn = tasks.addEvent(Parser.getArgs(input));
             } else if (Parser.commandEquals("todo", input)) {
-                if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
-                if (tasks.isFull()) throw new TooManyTasksException();
+                if (Parser.hasNoArgs(input)) {
+                    throw new EmptyDescriptionException();
+                }
+                if (tasks.isFull()) {
+                    throw new TooManyTasksException();
+                }
 
                 toReturn = tasks.addTodo(Parser.getArgs(input));
             } else if (Parser.commandEquals("find", input)) {
-                if (Parser.hasNoArgs(input)) throw new EmptyDescriptionException();
+                if (Parser.hasNoArgs(input)) {
+                    throw new EmptyDescriptionException();
+                }
 
                 toReturn = tasks.find(Parser.getArgs(input));
             } else {
