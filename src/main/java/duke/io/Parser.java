@@ -56,8 +56,11 @@ public class Parser {
         case "delete":
             return new DeleteCommand(operationIndex);
         case "priority":
-            // TODO: Parse priority input
-            return new SetPriorityCommand(operationIndex, Task.Priority.PRIORITY_DEFAULT);
+            // TODO: This is disgusting, find a better way to parse arguments
+            String[] extraArgs = args.split(" "); // Possible exception thrown
+            int targetIndex = Integer.parseInt(extraArgs[0]); // Possible exception thrown
+            Task.Priority targetPriority = Task.Priority.valueOf(extraArgs[1]); // Possible exception thrown
+            return new SetPriorityCommand(targetIndex, targetPriority);
         case "done":
             return new DoneCommand(operationIndex);
         default:
