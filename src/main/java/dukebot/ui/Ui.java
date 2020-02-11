@@ -1,6 +1,6 @@
 package dukebot.ui;
 
-import dukebot.contactlist.ContactDetails;
+import dukebot.contactlist.ContactDetail;
 import dukebot.gui.DukeExpression;
 import dukebot.gui.DukeVoice;
 import dukebot.tasklist.Task;
@@ -304,9 +304,9 @@ public class Ui {
      *
      * @param contactList The array of contacts to print.
      */
-    public void sayContacts(ArrayList<ContactDetails> contactList) {
+    public void sayContacts(ArrayList<ContactDetail> contactList) {
         int i = 1;
-        for (ContactDetails contact : contactList) {
+        for (ContactDetail contact : contactList) {
             dukeSays(i + ". "
                     + contact.getName()
                     + " [" + contact.getPhoneNumber() + "] "
@@ -374,7 +374,7 @@ public class Ui {
      * @param lineName Line to say.
      * @param contact Contact to use.
      */
-    public void sayLineWithContact(LineNameWithContact lineName, ContactDetails contact) {
+    public void sayLineWithContact(LineNameWithContact lineName, ContactDetail contact) {
         switch (lineName) {
         case DELETE_CONTACT_SUCCESS:
             dukeVoice = DukeVoice.randomVoice(hasVoice, DukeVoice.THING_YOURE_INTO,

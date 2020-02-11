@@ -1,13 +1,11 @@
 package dukebot.contactlist;
 
-import dukebot.tasklist.Task;
-
 import java.util.ArrayList;
 
 public class ContactList {
-    private ArrayList<ContactDetails> contactList;
+    private ArrayList<ContactDetail> contactList;
 
-    public ContactList(ArrayList<ContactDetails> contactList) {
+    public ContactList(ArrayList<ContactDetail> contactList) {
         this.contactList = contactList;
     }
 
@@ -16,17 +14,17 @@ public class ContactList {
      *
      * @return The stored contact list.
      */
-    public ArrayList<ContactDetails> getContactList() {
+    public ArrayList<ContactDetail> getContactList() {
         return this.contactList;
     }
 
     /**
      * Adds ContactDetails to end of ContactList.
      *
-     * @param contactDetails ContactDetails to add.
+     * @param contactDetail ContactDetails to add.
      */
-    public void add(ContactDetails contactDetails) {
-        contactList.add(contactDetails);
+    public void add(ContactDetail contactDetail) {
+        contactList.add(contactDetail);
     }
 
     /**
@@ -43,11 +41,11 @@ public class ContactList {
      *
      * @param contactInd Index of task.
      */
-    public ContactDetails deleteTask(int contactInd) {
+    public ContactDetail deleteTask(int contactInd) {
         if (contactInd >= size() || contactInd < 0) {
             return null;
         } else {
-            ContactDetails contactDetail = this.contactList.get(contactInd);
+            ContactDetail contactDetail = this.contactList.get(contactInd);
             this.contactList.remove(contactInd);
             return contactDetail;
         }
