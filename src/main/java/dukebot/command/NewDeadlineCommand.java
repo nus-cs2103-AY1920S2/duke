@@ -24,7 +24,7 @@ public class NewDeadlineCommand extends Command {
     /**
      * Generates the command.
      *
-     * @param inpArr  The input entered by user split by space
+     * @param inpArr The input entered by user split by space
      */
     public NewDeadlineCommand(String[] inpArr) {
         assert inpArr != null;
@@ -34,7 +34,6 @@ public class NewDeadlineCommand extends Command {
     @Override
     public void execute(AppStorage appStorage, Ui ui, Storage storage) {
         assertExecuteNotNull(appStorage, ui, storage);
-        TaskList taskList = appStorage.getTaskList();
         int byInd = Arrays.asList(inpArr).indexOf("/by");
         if (byInd == inpArr.length - 1) {
             ui.sayLine(LineName.DEADLINE_EMPTY);
@@ -54,6 +53,7 @@ public class NewDeadlineCommand extends Command {
             return;
         }
         Task deadline = new Deadline(description, parsedDate);
+        TaskList taskList = appStorage.getTaskList();
         taskList.addTask(deadline);
         ui.sayLineWithTask(LineNameWithTask.NEW_TASK_SUCCESS, deadline);
 

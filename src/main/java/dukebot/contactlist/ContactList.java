@@ -5,6 +5,11 @@ import java.util.ArrayList;
 public class ContactList {
     private ArrayList<ContactDetail> contactList;
 
+    /**
+     * Creates a contact list.
+     *
+     * @param contactList The contact list to use.
+     */
     public ContactList(ArrayList<ContactDetail> contactList) {
         this.contactList = contactList;
     }

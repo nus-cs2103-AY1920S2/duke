@@ -16,7 +16,7 @@ public class DeleteContactCommand extends Command {
     /**
      * Generates the command.
      *
-     * @param inpArr  The input entered by user split by space
+     * @param inpArr The input entered by user split by space
      */
     public DeleteContactCommand(String[] inpArr) {
         assert inpArr != null;
@@ -32,7 +32,7 @@ public class DeleteContactCommand extends Command {
             return;
         }
 
-        if (!MiscUtils.isInteger(inpArr[1])){
+        if (!MiscUtils.isInteger(inpArr[1])) {
             ui.sayLine(LineName.NOT_A_NUMBER);
             return;
         }
