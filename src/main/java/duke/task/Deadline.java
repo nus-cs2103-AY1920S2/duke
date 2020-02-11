@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +11,8 @@ public class Deadline extends Task {
 
     /**
      * Constructs a new deadline task with a description and due date.
-     * @param desc The description of the deadline.
+     *
+     * @param desc    The description of the deadline.
      * @param dueDate The due date of the deadline.
      */
     public Deadline(String desc, LocalDate dueDate) {
@@ -21,9 +22,10 @@ public class Deadline extends Task {
 
     /**
      * Constructs a new deadline task with a description, due date and status.
-     * @param desc The description of the deadline.
+     *
+     * @param desc    The description of the deadline.
      * @param dueDate The due date of the deadline.
-     * @param isDone The status of the deadline.
+     * @param isDone  The status of the deadline.
      */
     public Deadline(String desc, LocalDate dueDate, boolean isDone) {
         super(desc);
@@ -33,6 +35,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a save file entry to be inserted into a save file.
+     *
      * @return The save file entry generated from a Deadline
      */
     @Override
@@ -43,6 +46,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of a Deadline.
+     *
      * @return The string representation of a Deadline
      */
     @Override

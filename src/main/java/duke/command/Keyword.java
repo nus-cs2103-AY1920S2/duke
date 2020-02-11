@@ -1,32 +1,35 @@
-package duke;
+package duke.command;
 
-public enum Command {
+import duke.exception.InvalidCommandException;
+
+public enum Keyword {
     BYE, FIND, LIST, DONE, DELETE, DEADLINE, EVENT, TODO;
 
     /**
-     * The Command enum represents the various commands Duke can respond to.
+     * The Keyword enum represents the various commands Duke can respond to.
+     *
      * @param cmd The input string
-     * @return A Command enum
+     * @return A Keyword enum
      * @throws InvalidCommandException
      */
-    public static Command getCommand(String cmd) throws InvalidCommandException {
+    public static Keyword getKeyword(String cmd) throws InvalidCommandException {
         cmd = cmd.toLowerCase();
         if (cmd.equals("bye")) {
-            return Command.BYE;
+            return Keyword.BYE;
         } else if (cmd.equals("find")) {
-            return Command.FIND;
+            return Keyword.FIND;
         } else if (cmd.equals("list")) {
-            return Command.LIST;
+            return Keyword.LIST;
         } else if (cmd.equals("done")) {
-            return Command.DONE;
+            return Keyword.DONE;
         } else if (cmd.equals("delete")) {
-            return Command.DELETE;
+            return Keyword.DELETE;
         } else if (cmd.equals("deadline")) {
-            return Command.DEADLINE;
+            return Keyword.DEADLINE;
         } else if (cmd.equals("event")) {
-            return Command.EVENT;
+            return Keyword.EVENT;
         } else if (cmd.equals("todo")) {
-            return Command.TODO;
+            return Keyword.TODO;
         } else {
             throw new InvalidCommandException();
         }

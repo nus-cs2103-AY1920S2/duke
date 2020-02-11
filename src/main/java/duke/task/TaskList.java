@@ -1,4 +1,7 @@
-package duke;
+package duke.task;
+
+import duke.ui.Ui;
+import duke.exception.OutOfRangeException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +17,32 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public int getNumberOfTasks() {
+        return this.tasks.size();
+    }
+
     public List<Task> getTasks() {
         return this.tasks;
     }
 
+    public Task getTask(int index) throws OutOfRangeException {
+        if (isValidTask(index)) {
+            return tasks.get(index);
+        } else {
+            throw new OutOfRangeException();
+        }
+    }
+
     public void addTask(Task task) {
         this.tasks.add(task);
+    }
+
+    public void markTaskAsDone(int index) throws OutOfRangeException {
+        if (isValidTask(index)) {
+            tasks.get(index).markAsDone();
+        } else {
+            throw new OutOfRangeException();
+        }
     }
 
     public void deleteTask(int index) throws OutOfRangeException {
@@ -50,5 +73,13 @@ public class TaskList {
             return "No results matching your search was found!";
         }
         return result.toString();
+    }
+
+    public boolean isValidTask(int index) throws OutOfRangeException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new OutOfRangeException();
+        } else {
+            return true;
+        }
     }
 }

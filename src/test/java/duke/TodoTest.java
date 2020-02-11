@@ -1,5 +1,6 @@
 package duke;
 
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,6 +18,5 @@ class TodoTest {
     void toString_validTodo_returnsString() {
         assertEquals("[T] [X] read book", new Todo("read book").toString());
         assertEquals("[T] [V] read book", new Todo("read book", true).toString());
-        assertEquals("[T] [X] read book", new Todo("read book", false).toString());
     }
 }
