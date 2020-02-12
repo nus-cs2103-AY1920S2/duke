@@ -13,6 +13,10 @@ public class Command {
 
     }
 
+    public Command(TaskList taskList) {
+        this.taskList = taskList;
+    }
+
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;
     }

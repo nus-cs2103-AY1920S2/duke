@@ -2,6 +2,7 @@ package model;
 
 import exceptions.NoDescriptionException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.format.DateTimeFormatter;
@@ -12,11 +13,13 @@ import java.util.Collections;
  */
 public abstract class Task {
     protected String description;
-    private String taskTypeString;
     protected boolean isDone;
+    private String taskTypeString;
+
+    static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private static final String DEFAULT_TASK_TYPE_STRING = "task";
-    static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final boolean DEFAULT_TASK_IS_DONE = false;
 
     public Task() {
 
@@ -28,14 +31,7 @@ public abstract class Task {
      * @throws NoDescriptionException If the description is empty.
      */
     public Task(String description) throws NoDescriptionException {
-        this.taskTypeString = DEFAULT_TASK_TYPE_STRING;
-        if ("".equals(description)) {
-            throw new NoDescriptionException("OOPS!!! The description of a "
-                    + taskTypeString
-                    + " cannot be empty.\n");
-        }
-        this.description = description;
-        this.isDone = false;
+        this(description, DEFAULT_TASK_TYPE_STRING, DEFAULT_TASK_IS_DONE);
     }
 
     /**
@@ -45,6 +41,17 @@ public abstract class Task {
      * @throws NoDescriptionException If the description is empty.
      */
     public Task(String description, String taskTypeString) throws NoDescriptionException {
+        this(description, taskTypeString, DEFAULT_TASK_IS_DONE);
+    }
+
+    /**
+     * Constructs a {@code Task} with the input description, task type string, and task status.
+     * @param description A not empty description.
+     * @param taskTypeString A not empty task type string.
+     * @param taskIsDone A boolean object indicating whether the task is done.
+     * @throws NoDescriptionException If the description is empty.
+     */
+    public Task(String description, String taskTypeString, boolean taskIsDone) throws NoDescriptionException {
         this.taskTypeString = taskTypeString;
         if ("".equals(description)) {
             throw new NoDescriptionException("OOPS!!! The description of a "
@@ -52,7 +59,7 @@ public abstract class Task {
                     + " cannot be empty.\n");
         }
         this.description = description;
-        this.isDone = false;
+        this.isDone = taskIsDone;
     }
 
     /**

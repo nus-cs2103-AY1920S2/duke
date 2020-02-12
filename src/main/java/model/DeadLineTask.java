@@ -9,8 +9,9 @@ import java.util.Arrays;
  * Presents the deadline task in the task list.
  */
 public class DeadLineTask extends Task {
+    public static final String TASK_TYPE_CHA = "D";
+
     private static final String TASK_TYPE_STRING = "deadline task";
-    private static final String TASK_TYPE_CHA = "D";
 
     private LocalDateTime by;
 
@@ -26,6 +27,18 @@ public class DeadLineTask extends Task {
      */
     public DeadLineTask(String description, LocalDateTime by) throws NoDescriptionException {
         super(description, TASK_TYPE_STRING);
+        this.by = by;
+    }
+
+    /**
+     * Constructs an {@code DeadLineTask}.
+     * @param description a not empty description.
+     * @param by a valid date time object.
+     * @param isDone A boolean indicating whether the task is done.
+     * @throws NoDescriptionException if the description is empty.
+     */
+    public DeadLineTask(String description, LocalDateTime by, boolean isDone) throws NoDescriptionException {
+        super(description, TASK_TYPE_STRING, isDone);
         this.by = by;
     }
 

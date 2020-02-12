@@ -17,8 +17,7 @@ import java.util.List;
  * such that the program can load data from local disk or save data to files.
  */
 public class Storage {
-    private static final String DEFAULT_STORAGE_PATH = "tasks.txt";
-
+    private final static String DEFAULT_STORAGE_PATH = "tasks.txt";
     private Path path;
 
     /**
@@ -32,7 +31,7 @@ public class Storage {
     /**
      * Set the path of the data file to the customized path.
      * Throws exception if the path is not valid. E.g. Doesn't end with ".txt"
-     * @param filePath
+     * @param filePath customized file path.
      * @throws InvalidStorageFilePathException
      */
     public Storage(String filePath) throws InvalidStorageFilePathException {
@@ -64,13 +63,13 @@ public class Storage {
     }
 
     /**
-     * Read the data from local file. Returns empty task list if the path doesn't exist or
+     * Reads the data from local file. Returns empty task list if the path doesn't exist or
      * the path doesn't point to a regular file.
      * @return tasklist
-     * @throws StorageOperationException
-     * @throws IOException
-     * @throws NoDescriptionException
-     * @throws IllegalDateTimeFormatException
+     * @throws StorageOperationException If there is encoded task list is in invalid format.
+     * @throws IOException If there is error while reading or writing the file.
+     * @throws NoDescriptionException If the loaded description for any task is empty.
+     * @throws IllegalDateTimeFormatException If any loaded date time string is empty.
      */
     public TaskList load() throws
             StorageOperationException, IOException, NoDescriptionException, IllegalDateTimeFormatException {
