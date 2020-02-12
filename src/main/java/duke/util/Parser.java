@@ -39,6 +39,7 @@ public class Parser {
         try {
             switch (cmd) {
             case "bye":
+                // this case is needed for GUI
                 return ui.bye();
             case "list":
                 break;
@@ -67,8 +68,10 @@ public class Parser {
         return line.split(" ", 2)[0].trim();
     }
 
-    private String getDescAndDate(String cmd, String line) throws NoDescriptionProvidedException,
-            NoDateProvidedException {
+
+    private String getDescAndDate(String cmd, String line) throws NoDescriptionException, 
+              NoDateProvidedException {
+        // TODO: throw NoDescriptionException when only date and task type is provided.
         String[] arr = line.split(" ", 2);
         if (arr.length < 2) {
             throw new NoDescriptionProvidedException();

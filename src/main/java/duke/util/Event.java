@@ -37,7 +37,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(),
-                this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        assert at != null : "At date does not exist.";
+        return String.format("[E]%s (at: %s)", super.toString(), 
+                             this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

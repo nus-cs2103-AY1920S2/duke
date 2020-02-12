@@ -39,7 +39,7 @@ public class TaskList {
      */
     protected String listTasks() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Below is your list of tasks:\n");
+        sb.append(String.format("There are currently %d tasks. Below is your task list:\n", tasks.size()));
         for (int i = 0; i < tasks.size(); i++) {
             sb.append("\t").append(i + 1).append(".").append(tasks.get(i)).append("\n");
         }
@@ -126,6 +126,7 @@ public class TaskList {
      * @throws InvalidDateException Date provided is of the wrong format or invalid.
      */
     protected String addDeadlineOrEvt(String id, String descAndDate) throws IOException, InvalidDateException {
+        assert id.equals(" /by ") || id.equals(" /at ") : "Invalid id supplied.";
         String[] temp = descAndDate.split(" \\| ");
         if (dateIsValid(temp[1])) {
             if (id.equals(" /by ")) {
