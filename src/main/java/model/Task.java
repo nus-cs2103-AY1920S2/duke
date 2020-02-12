@@ -5,12 +5,14 @@ import exceptions.NoDescriptionException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 
 /**
  * An abstract class implements some common methods for task objects.
  */
 public abstract class Task {
     protected String description;
+    private String taskTypeString;
     protected boolean isDone;
 
     private static final String DEFAULT_TASK_TYPE_STRING = "task";
@@ -25,9 +27,10 @@ public abstract class Task {
      * @throws NoDescriptionException If the description is empty.
      */
     public Task(String description) throws NoDescriptionException {
+        this.taskTypeString = DEFAULT_TASK_TYPE_STRING;
         if ("".equals(description)) {
             throw new NoDescriptionException("OOPS!!! The description of a " +
-                    DEFAULT_TASK_TYPE_STRING + " cannot be empty.\n");
+                    taskTypeString + " cannot be empty.\n");
         }
         this.description = description;
         this.isDone = false;
@@ -40,9 +43,10 @@ public abstract class Task {
      * @throws NoDescriptionException If the description is empty.
      */
     public Task(String description, String taskTypeString) throws NoDescriptionException {
+        this.taskTypeString = taskTypeString;
         if ("".equals(description)) {
             throw new NoDescriptionException("OOPS!!! The description of a " +
-                    taskTypeString + " cannot be empty.\n");
+                    this.taskTypeString + " cannot be empty.\n");
         }
         this.description = description;
         this.isDone = false;
@@ -56,7 +60,7 @@ public abstract class Task {
     public void setDescription(String description) throws NoDescriptionException {
         if ("".equals(description)) {
             throw new NoDescriptionException("OOPS!!! The description of a " +
-                    DEFAULT_TASK_TYPE_STRING + " cannot be empty.\n");
+                    taskTypeString + " cannot be empty.\n");
         }
         this.description = description;
     }
@@ -87,7 +91,7 @@ public abstract class Task {
      * @return an arraylist including the description.
      */
     public ArrayList<String> getDetails() {
-        return new ArrayList<String>(Arrays.asList(this.description));
+        return new ArrayList<String>(Collections.singletonList(this.description));
     }
 
     /**

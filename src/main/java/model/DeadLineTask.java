@@ -9,10 +9,10 @@ import java.util.Arrays;
  * Presents the deadline task in the task list.
  */
 public class DeadLineTask extends Task {
-    static final String TASK_TYPE_STRING = "deadline task";
-    static final String TASK_TYPE_CHA = "D";
+    private static final String TASK_TYPE_STRING = "deadline task";
+    private static final String TASK_TYPE_CHA = "D";
 
-    protected LocalDateTime by;
+    private LocalDateTime by;
 
     public DeadLineTask() {}
 

@@ -8,10 +8,10 @@ import java.util.*;
 public class TaskList implements Iterable<Task> {
     protected final List<Task> internalList = new ArrayList<Task>();
 
-    static String addTaskStart = "Got it. I've added this task:\n";
-    static String deleteTaskStart = "Noted. I have removed this task:\n";
-    static String viewListGreeting = "Here are the tasks in your list:\n";
-    static String taskCompleteCongrats = "Nice! I've marked this task as done:\n";
+    private static final String addTaskStart = "Got it. I've added this task:\n";
+    private static final String deleteTaskStart = "Noted. I have removed this task:\n";
+    private static final String viewListGreeting = "Here are the tasks in your list:\n";
+    private static final String taskCompleteCongrats = "Nice! I've marked this task as done:\n";
 
     public TaskList() {}
 
