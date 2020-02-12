@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Processes user input
  */
@@ -7,6 +9,7 @@ public class Parser {
      * A list of Task objects to keep track of task changes
      */
     private TaskList taskList;
+    private Duke duke = new Duke ("java/data/duke.txt");
 
     /**
      * Creates a Parser object that is able to process user input
@@ -22,7 +25,7 @@ public class Parser {
      *
      * @param input A command prompt by the user to Duke
      */
-    public String parse(String input) {
+    public String parse(String input) throws IOException {
         if (input.equals("list")) {
             return taskList.list();
         } else if (input.contains("done")) {
@@ -48,6 +51,7 @@ public class Parser {
                 return "Where is your keyword:(";
             }
         } else if (input.equals ("bye")) {
+            duke.save();
             return "Cya soon:)";
         } else {
             //Create task using key words: "todo", "deadline", "event"

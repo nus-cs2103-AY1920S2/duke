@@ -196,4 +196,12 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return this.taskList;
     }
+
+    public String toString() {
+        String output = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            output += taskList.get(i) + " ";
+        }
+        return output;
+    }
 }

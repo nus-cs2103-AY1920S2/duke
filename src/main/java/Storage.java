@@ -87,7 +87,7 @@ public class Storage {
             }
             br.close();
         } catch (NullPointerException e) {
-
+            System.out.println ("No files man");
         }
         return lst;
     }

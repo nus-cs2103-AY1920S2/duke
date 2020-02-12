@@ -84,7 +84,7 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        new Duke("java/data/duke.txt").run();
+        new Duke("src/main/java/data/duke.txt").run();
     }
 
     /**
@@ -213,5 +213,9 @@ public class Duke extends Application {
 
     public void save() throws IOException {
         storage.saveFiles(tasks);
+    }
+
+    public void load() throws IOException {
+        tasks = new TaskList(storage.loadFiles());
     }
 }

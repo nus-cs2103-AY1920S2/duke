@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -20,18 +22,19 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duke duke = new Duke ("src/main/java/data/duke.txt");
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        duke.load();
     }
 
     public void setDuke(Duke d) {
-        duke = new Duke ("java/data/duke.txt");
+        duke = new Duke ("src/main/java/data/duke.txt");
     }
 
     /**
@@ -42,25 +45,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws Exception {
         Parser parser = new Parser (duke.getTaskList());
         String input = userInput.getText();
-//        String response = duke.getResponse(input);
         String response = parser.parse (input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (input.equals ("bye")) {
-            Platform.exit();
-        }
     }
 }
-//            ui.printOpeningScreen();
-//    Parser parser = new Parser(tasks);
-//    String input = "";
-//        while (!(input = sc.nextLine()).equals("bye")) {
-//        ui.printBreak();
-//        parser.parse(input);
-//        ui.printBreak();
-//    }
-//        storage.saveFiles(tasks);
-//        ui.closeScreen();
+
