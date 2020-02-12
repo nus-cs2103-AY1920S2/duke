@@ -20,12 +20,12 @@ public class TaskListEncoder {
      * @return A list of strings with each string representing one task.
      */
     public static List<String> encodeTask(TaskList taskList) {
-        final List<String> encodedPersons = new ArrayList();
-        taskList.forEach((task) -> encodedPersons.add(
+        final List<String> encodedTasks = new ArrayList();
+        taskList.forEach((task) -> encodedTasks.add(
                 encodeTaskToString(task)
         ));
 
-        return encodedPersons;
+        return encodedTasks;
     }
 
     private static String encodeTaskToString(Task task) {
