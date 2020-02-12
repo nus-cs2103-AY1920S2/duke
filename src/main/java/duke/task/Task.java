@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * Task class to store task information
+ * duke.task.Task class to store task information
  */
 public class Task {
     private String description;

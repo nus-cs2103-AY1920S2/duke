@@ -1,3 +1,5 @@
+package duke.main;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -12,7 +14,7 @@ public class Duke {
 
 
     /**
-     * Constructor for Duke to start the initialise the necessary variables
+     * Constructor for duke.main.Duke to start the initialise the necessary variables
      */
     public Duke() {
         storage = new Storage();
@@ -63,7 +65,7 @@ public class Duke {
 
 
     /**
-     * Main method for the class
+     * duke.main.Main method for the class
      * @param args no commmand line arguments are used explicitly
      * @throws IOException is thrown when there is I/O error
      */

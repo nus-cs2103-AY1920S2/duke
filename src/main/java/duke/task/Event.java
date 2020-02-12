@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * Event class which is a Task but more specific
+ * duke.task.Event class which is a duke.task.Task but more specific
  */
 public class Event extends Task {
     private String at;

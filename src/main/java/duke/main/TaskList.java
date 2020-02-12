@@ -1,4 +1,7 @@
-import java.lang.reflect.Array;
+package duke.main;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -32,8 +35,8 @@ public class TaskList {
     }
 
     /**
-     * Check the size of this instance of TaskList
-     * @return the size of the TaskList
+     * Check the size of this instance of duke.main.TaskList
+     * @return the size of the duke.main.TaskList
      */
     public int size() {
         return tasks.size();
@@ -49,7 +52,7 @@ public class TaskList {
     }
 
     /**
-     * Adds the task to the current instance of TaskList
+     * Adds the task to the current instance of duke.main.TaskList
      * @param task is the task to be added
      */
     public void add(Task task) {
@@ -57,7 +60,7 @@ public class TaskList {
     }
 
     /**
-     * Removes the task to the current instance of TaskList
+     * Removes the task to the current instance of duke.main.TaskList
      * @param toDelete is the index of task to be removed
      */
     public void remove(int toDelete) {

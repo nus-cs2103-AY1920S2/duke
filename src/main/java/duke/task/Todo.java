@@ -1,7 +1,9 @@
+package duke.task;
 
+import duke.task.Task;
 
 /**
- * Todo class which is a Task but more specific
+ * duke.task.Todo class which is a duke.task.Task but more specific
  */
 public class Todo extends Task {
     public Todo(String description) {
