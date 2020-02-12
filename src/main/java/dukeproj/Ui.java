@@ -34,17 +34,17 @@ public class Ui {
         case SEARCH:
             return "Here are your tasks on the date of ";
         case INVALID_COMMAND:
-            return "Sorry! I do not know what this command means!";
+            return "Oi, there's no such command!";
         case EMPTY_DESCRIPTION:
-            return "OOPS! You forgot to include a description!";
+            return "You blockhead! You forgot to include a description!";
         case BAD_DATE:
-            return "Sorry I don't recognise this date format!\nPlease make sure the format is: dd mm yy";
+            return "HEY! Bad date format!\nMake sure the format is: dd mm yy";
         case BAD_DESCRIPTION:
             return "OOPS! ";
         case HELP:
             return getHelp();
         default:
-            return "**** Duke does not know what to say!";
+            return "**** What is this!?";
         }
     }
 
@@ -52,11 +52,11 @@ public class Ui {
      * Prints out the exit message for DukeProject.
      */
     public String getExit() {
-        return "Bye! Hope to see you again soon!";
+        return "Bye! Come again soon!";
     }
 
     private String getHelp() {
-        return "Here are the list of commands:\nList: returns a list of all your tasks\n"
+        return "Here are the commands:\nList: returns a list of all your tasks\n"
                 + "Todo: makes a new todo task\n  Format: todo (task)\n"
                 + "Deadline: makes a new deadline task\n  Format: deadline (task) /by (dd mm yy)\n"
                 + "Event: makes a new event task\n  Format: event (task) /at (dd mm yy)\n"
@@ -68,9 +68,9 @@ public class Ui {
     }
 
     private String getGuiIntroduction() {
-        return "Hello! I am\n" + logo
-                + "\nPlease type help for a list of commands!"
-                + "\nWhat can I do for you today?";
+        return "Hello! This is\n" + logo
+                + "\nYou can type help for a list of commands!"
+                + "\nSo, whatdya want?";
     }
 
     /**
