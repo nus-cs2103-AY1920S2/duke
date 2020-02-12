@@ -1,0 +1,9 @@
+Hi
+todo Read 10 Books
+event Exam /at Monday 4pm
+list
+done 1
+deadline Return Books /by Sunday
+list
+delete 1
+bye

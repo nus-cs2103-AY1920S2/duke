@@ -1,0 +1,22 @@
+Hello Master
+What can I do for you today?
+I'm sorry, but I do not understand what you mean
+Read 10 Books has been added to list
+added: [T][?] Read 10 Books
+You have 1 task on the agenda
+Exam has been added to list
+added: [E][?] Exam (at: Monday 4pm)
+You have 2 tasks on the agenda
+1. [T][?] Read 10 Books
+2. [E][?] Exam (at: Monday 4pm)
+I shall mark task 1 as completed
+[T][?] Read 10 Books
+Return Books has been added to list
+added: [D][?] Return Books (by: Sunday)
+You have 3 tasks on the agenda
+1. [T][?] Read 10 Books
+2. [E][?] Exam (at: Monday 4pm)
+3. [D][?] Return Books (by: Sunday)
+Noted! The task Read 10 Books will be removed
+You have 2 tasks on the agenda
+Have a nice day sir!
