@@ -62,6 +62,7 @@ public class Baron {
         this.graphUi.showInitial();
         // load stored items
         taskStore.importFromCollection(tasksDiskLoc.loadFromDisk());
+        aliasStore.importFromCollection(aliasDiskLoc.loadFromDisk());
     }
 
     /**

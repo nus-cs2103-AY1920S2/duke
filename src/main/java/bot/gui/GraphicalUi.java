@@ -226,9 +226,9 @@ public class GraphicalUi extends Ui {
 
     @Override
     public void showAliasMessage(String originalName, String aliasedName) {
-        System.out.println(GraphicalUi.ALIAS_MESSAGE_ONE + aliasedName
+        this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.ALIAS_MESSAGE_ONE + aliasedName
                 + GraphicalUi.ALIAS_MESSAGE_TWO + originalName
-                + GraphicalUi.ALIAS_MESSAGE_THREE);
+                + GraphicalUi.ALIAS_MESSAGE_THREE));
     }
 
     /**
