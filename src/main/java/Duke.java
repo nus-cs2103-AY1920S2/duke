@@ -20,7 +20,7 @@ import javafx.stage.StageStyle;
 /**
  * Represents main body for Duke to run.
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
@@ -173,8 +173,16 @@ public class Duke extends Application {
         ui.showBye();
     }
 
-    @Override
-    public void start(Stage stage) {
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTaskList() {
+        return tasks;
+    }
+
+    public Ui getUi() {
+        return ui;
     }
 
     public static void main(String[] args) {

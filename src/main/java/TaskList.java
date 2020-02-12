@@ -49,10 +49,14 @@ public class TaskList {
         }
 
         if (description.isEmpty()) {
-            throw new GooseEmptyDescriptionException("Honk! Description of an event cannot be empty.");
+            throw new GooseEmptyDescriptionException("Honk! Description of an event cannot be empty. " +
+                    "Please tell Goose in this format:\n" +
+                    "'event [description] /at [DD/MM/YYYY] [Time]'");
         } else {
             if (eventArr.length == 1) {
-                throw new GooseIllegalFormatException("Honk! No event date specified.");
+                throw new GooseIllegalFormatException("Honk! No event date specified. " +
+                    "Please tell Goose in this format:\n" +
+                    "'event [description] /at [DD/MM/YYYY] [Time]'");
             }
 
             eventArr = eventArr[1].split(" ");
@@ -84,10 +88,14 @@ public class TaskList {
         }
 
         if (description.isEmpty()) {
-            throw new GooseEmptyDescriptionException("Honk! Description of a deadline cannot be empty.");
+            throw new GooseEmptyDescriptionException("Honk! Description of a deadline cannot be empty. " +
+                    "Please tell Goose in this format:\n" +
+                    "'deadline [description] /by [DD/MM/YYYY] [Time]'");
         } else {
             if (deadlineArr.length == 1) {
-                throw new GooseIllegalFormatException("Honk! No deadline specified.");
+                throw new GooseIllegalFormatException("Honk! No deadline specified. " +
+                        "Please tell Goose in this format:\n" +
+                        "'deadline [description] /by [DD/MM/YYYY] [Time]'");
             }
 
             deadlineArr = deadlineArr[1].split(" ");
@@ -116,7 +124,9 @@ public class TaskList {
         }
 
         if (description.isEmpty()) {
-            throw new GooseEmptyDescriptionException("Honk! Description of a todo cannot be empty.");
+            throw new GooseEmptyDescriptionException("Honk! Description of a todo cannot be empty. " +
+                    "Please tell Goose in this format:\n" +
+                    "'todo [description]'");
         } else {
             taskList.add(new Todo(description));
             return (Todo) taskList.get(taskList.size() - 1);

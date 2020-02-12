@@ -122,7 +122,7 @@ public class Ui {
      * @param taskList Current task list as an ArrayList
      * @return String containing formatted message regarding task count of task list.
      */
-    private String showCount(ArrayList<Task> taskList) {
+    public String showCount(ArrayList<Task> taskList) {
         String count = taskList.size() == 1
                 ? "\n\n Now you have " + taskList.size() + " task in the list."
                 : "\n\n Now you have " + taskList.size() + " tasks in the list.";
