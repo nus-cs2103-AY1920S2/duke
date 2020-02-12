@@ -78,23 +78,19 @@ public class Storage {
      * @throws DukeStorageLoadException the given save file could not be loaded
      */
     public List<Task> load() throws DukeStorageLoadException {
+        /*
+        Format of save file
+        [task type],[complete status],[task information]
+        */
         ArrayList<Task> tasks = new ArrayList<>();
         try (BufferedReader saveFile = new BufferedReader(new FileReader(saveFilePath))) {
-            // Load data into tasks
             String line = saveFile.readLine();
-            /* Format of save file
-            [task type],[complete status],[task information]...
-            Example:
-            todo,1,read book
-            deadline,0,return book,June 6th
-            event,0,project meeting,Aug 6th 2-4pm
-            */
             while (line != null) {
-                // Store task
                 String[] taskWords = line.split(",");
                 boolean isDone = taskWords[1].equals("1");
                 String description = taskWords[2];
-                switch (taskWords[0].toLowerCase()) {
+                String taskType = taskWords[0].toLowerCase();
+                switch (taskType) {
                 case "todo":
                     tasks.add(new Todo(taskWords[2], isDone));
                     break;
