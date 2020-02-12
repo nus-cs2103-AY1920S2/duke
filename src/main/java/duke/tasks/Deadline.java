@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import duke.utilities.TimeParser;
 
 public class Deadline extends Task implements TimeParser {
-    protected LocalDate deadline;
+    protected LocalDate date;
 
     /**
      * Another constructor for creating Deadline.
@@ -14,22 +14,32 @@ public class Deadline extends Task implements TimeParser {
      * Sets isDone to true or false according to status number (0 or 1)
      *
      * @param status      0 - isDone is false, 1 - isDone is true
-     * @param description description of deadline
-     * @param deadline    String representation of the deadline
+     * @param description description of date
+     * @param date    String representation of the date
      * @throws DateTimeParseException
      */
-    public Deadline(String status, String description, String deadline) throws DateTimeParseException { // constructor when parsing tasks from hard disk
+    public Deadline(String status, String description, String date) throws DateTimeParseException { // constructor when parsing tasks from hard disk
         super(TaskType.DEADLINE, status, description);
-        this.deadline = TimeParser.parseDate(deadline);
-        assert this.deadline != null : "date is null after parsing in constructor";
+        this.date = TimeParser.parseDate(date);
+        assert this.date != null : "date is null after parsing in constructor";
     }
 
-
     public LocalDate getTaskTime() {
-        return this.deadline;
+        return this.date;
+    }
+
+    /**
+     * Method to change the date assigned to this event. Called in Parser class when user is updating the date.
+     * @param update the date, represented in String, to be changed
+     * @return boolean true by default
+     */
+    @Override
+    public boolean changeDate(String update) {
+        date = TimeParser.parseDate(update);
+        return true;
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + TimeParser.printDate(this.deadline) + ")";
+        return "[D]" + super.toString() + " (by: " + TimeParser.printDate(this.date) + ")";
     }
 }

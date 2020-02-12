@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import duke.utilities.TimeParser;
 
 public class Event extends Task implements TimeParser {
-    protected LocalDate eventTime;
+    protected LocalDate date;
 
 
     /**
@@ -16,20 +16,31 @@ public class Event extends Task implements TimeParser {
      *
      * @param status      0 - isDone is false, 1 - isDone is true
      * @param description description of event
-     * @param eventTime   String representation of the event time
+     * @param date   String representation of the event time
      * @throws DateTimeParseException
      */
-    public Event(String status, String description, String eventTime) throws DateTimeParseException { // constructor for parsing tasks from hard disk
+    public Event(String status, String description, String date) throws DateTimeParseException { // constructor for parsing tasks from hard disk
         super(TaskType.EVENT, status, description);
-        this.eventTime = TimeParser.parseDate(eventTime);
-        assert this.eventTime != null : "event time is null after parsing in constructor";
+        this.date = TimeParser.parseDate(date);
+        assert this.date != null : "event time is null after parsing in constructor";
     }
 
     public LocalDate getTaskTime() {
-        return this.eventTime;
+        return this.date;
+    }
+
+    /**
+     * Method to change the date assigned to this event. Called in Parser class when user is updating the date.
+     * @param update the date, represented in String, to be changed
+     * @return boolean true by default
+     */
+    @Override
+    public boolean changeDate(String update) {
+        date = TimeParser.parseDate(update);
+        return true;
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + TimeParser.printDate(this.eventTime) + ")";
+        return "[E]" + super.toString() + " (at: " + TimeParser.printDate(this.date) + ")";
     }
 }

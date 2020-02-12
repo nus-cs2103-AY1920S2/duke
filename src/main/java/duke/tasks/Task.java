@@ -1,6 +1,6 @@
 package duke.tasks;
 
-public class Task {
+public abstract class Task {
     protected TaskType TYPE;
     protected String description;
     protected boolean isDone;
@@ -37,6 +37,13 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
+    public boolean changeDescription(String update) {
+        this.description = update;
+        return true;
+    }
+
+    public abstract boolean changeDate(String update);
 
     public String toString() {
         return getStatusIcon() + " " + this.description;

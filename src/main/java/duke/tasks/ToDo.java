@@ -9,4 +9,9 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    public boolean changeDate(String update) {
+        assert false; // this method should never be called for a todo class
+        return false;
+    }
 }
