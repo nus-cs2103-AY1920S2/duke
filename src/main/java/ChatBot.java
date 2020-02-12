@@ -14,6 +14,7 @@ public class ChatBot {
     private String fileLocation = "./Data/Tasks.txt"; //hard-coded relative file location of stored tasks
     private Storage storage = new Storage();
     private Parser parser = new Parser();
+    private HistoryManager historyManager = new HistoryManager();
 
 
     public ChatBot() {
@@ -37,7 +38,7 @@ public class ChatBot {
             inputCommand = sc.nextLine();
             Command command = parser.respondToUser(inputCommand);
             try {
-                command.execute(this.ui, this.taskLists, this.storage);
+                command.execute(this.ui, this.taskLists, this.storage, this.historyManager);
                 if (command.getExitStatus()) {
                     return; //exit from chat-bot
                 }
@@ -66,5 +67,9 @@ public class ChatBot {
 
     public TaskList getTaskLists() {
         return this.taskLists;
+    }
+
+    public HistoryManager getHistoryManager() {
+        return this.historyManager;
     }
 }

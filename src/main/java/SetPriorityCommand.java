@@ -5,7 +5,7 @@ public class SetPriorityCommand extends Command {
     }
 
     @Override
-    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {
         String[] parsedInput = this.getInputCommand().trim().split(" ");
         if (parsedInput.length < 3) {
             throw new DukeException("Set priority command incomplete");
@@ -13,16 +13,16 @@ public class SetPriorityCommand extends Command {
         try {
             Task task = list.getTask(Integer.parseInt(parsedInput[1]));
             int priority = extractPriority(parsedInput[2]);
-            boolean isSuccessful = task.setPriority(priority);
-            if (isSuccessful) {
+            if (task.getPriority() == priority) {
+                ui.prettyPrinting("Priority is already set as stated!");
+                return "Priority is already set as stated";
+            } else {
+                historyManager.addState(list);
+                task.setPriority(priority);
                 ui.prettyPrinting("Priority set!");
                 storage.writeToFile(list.getTaskList());
                 return "Priority set!";
-            } else {
-                ui.prettyPrinting("Priority is already set as stated!");
-                return "Priority is already set as stated";
             }
-
         } catch (NumberFormatException e) {
             throw new DukeException("Task number must be a number");
         } catch (IndexOutOfBoundsException e) {

@@ -33,10 +33,15 @@ public class TaskList {
      * @return the Task being deleted.
      * @throws IndexOutOfBoundsException if the taskNumber is not within the bounds.
      */
-    public Task deleteTask(int taskNumber) throws IndexOutOfBoundsException {
-        Task deletedTask = this.tasks.remove(taskNumber - 1); // need to minus 1 as 0-index based arraylist
-        this.size--;
-        return deletedTask;
+    public Task deleteTask(int taskNumber, HistoryManager historyManager) throws IndexOutOfBoundsException {
+        if (taskNumber >= 0 || taskNumber < this.tasks.size()) {
+            historyManager.addState(this);
+            Task deletedTask = this.tasks.remove(taskNumber - 1); // need to minus 1 as 0-index based arraylist
+            this.size--;
+            return deletedTask;
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     /**

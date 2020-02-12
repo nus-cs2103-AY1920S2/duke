@@ -5,7 +5,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {
         String helpCommands = "";
         helpCommands += ui.getDecoration().trim() + "\n";
         helpCommands += "Command List \n";

@@ -8,10 +8,9 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {
         try {
             String[] inputParsed = this.getInputCommand().trim().split(" ");
-
             // to check if the command violates any rules
             if (!this.getInputCommand().contains("/by")) {
                 throw new DukeException("Deadline command must contain [/by] as stated!");
@@ -27,8 +26,8 @@ public class AddDeadlineCommand extends Command {
             parser.grabDateTime(indexFound, inputParsed, dateTime);
             Deadline.validDate(dateTime.toString());
             Deadline deadline = new Deadline(taskName.toString(), dateTime.toString());
+            historyManager.addState(list);
             list.addTask(deadline);
-
             //write to storage and print out output (for debugging)
             storage.writeToFile(list.getTaskList());
             return ui.prettyPrinting(taskName.toString() + " added!");

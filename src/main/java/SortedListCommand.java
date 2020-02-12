@@ -8,7 +8,7 @@ public class SortedListCommand extends Command {
     }
 
     @Override
-    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {
         HashMap<Integer, ArrayList<Task>> map = new HashMap<>();
         ArrayList<Task> tasks = list.getTaskList();
         this.initializeHashMap(map);

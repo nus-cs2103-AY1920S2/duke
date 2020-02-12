@@ -20,13 +20,13 @@ public class DeleteCommand extends Command {
      * @throws DukeException exception.
      */
     @Override
-    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {
         try {
             String[] inputParsed = this.getInputCommand().trim().split(" ");
             if (inputParsed.length <= 1) {
                 throw new DukeException("Delete command cannot be empty!");
             }
-            Task taskDeleted = list.deleteTask(Integer.parseInt(inputParsed[1]));
+            Task taskDeleted = list.deleteTask(Integer.parseInt(inputParsed[1]), historyManager);
             storage.writeToFile(list.getTaskList());
             return ui.prettyPrinting(taskDeleted.toString() + " has been removed from the tasklist!");
         } catch (IndexOutOfBoundsException e) {

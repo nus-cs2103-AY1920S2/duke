@@ -66,11 +66,12 @@ public class Duke {
         bot.updateTaskList();
         TaskList list = bot.getTaskLists();
         Storage storage = bot.getStorage();
+        HistoryManager historyManager = bot.getHistoryManager();
         UI ui = bot.getUI();
         try {
             Command command = parser.respondToUser(input);
             assert command != null; // assert that command not null
-            String reply = command.execute(ui, list, storage).trim();
+            String reply = command.execute(ui, list, storage, historyManager).trim();
             return reply;
         } catch (DukeException e) {
             return e.toString();

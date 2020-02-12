@@ -20,7 +20,7 @@ public class ListCommand extends Command {
      * @throws DukeException exception.
      */
     @Override
-    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {
         int counter = 1;
         String listings = "";
         for (Task task : list.getTaskList()) {

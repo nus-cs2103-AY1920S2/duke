@@ -41,4 +41,8 @@ public class Event extends Task {
         message += " Priority: " + this.getPriorityString();
         return message;
     }
+
+    public String getDateTime() {
+        return this.dateTime;
+    }
 }

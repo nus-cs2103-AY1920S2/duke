@@ -67,4 +67,8 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm");
         LocalDateTime d = LocalDateTime.parse(date, formatter);
     }
+
+    public String getDateTime() {
+        return this.dateTime;
+    }
 }

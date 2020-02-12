@@ -38,6 +38,8 @@ public class Parser {
             return new SortedListCommand(command, false);
         case "help":
             return new HelpCommand(command, false);
+        case "undo":
+            return new UndoCommand(command, false);
         default:
             return new InvalidCommand(command, false);
         }

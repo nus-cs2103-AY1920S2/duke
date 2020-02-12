@@ -5,7 +5,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {
         try {
             String[] inputParsed = this.getInputCommand().trim().split(" ");
             if (inputParsed.length <= 1) {
@@ -15,6 +15,7 @@ public class DoneCommand extends Command {
             if (task.getDone()) {
                 return ui.prettyPrinting("Task already set done!");
             } else {
+                historyManager.addState(list);
                 task.setDone();
                 storage.writeToFile(list.getTaskList());
                 return ui.prettyPrinting("Task set to done!");

@@ -23,7 +23,7 @@ public class AddEventCommand extends Command {
      * @throws DukeException exception.
      */
     @Override
-    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {
         String[] inputParsed = this.getInputCommand().trim().split(" ");
         if (!this.getInputCommand().contains("/at")) {
             throw new DukeException("Event command must contain [/at] as stated!");
@@ -37,6 +37,7 @@ public class AddEventCommand extends Command {
         parser.grabDateTime(indexFound, inputParsed, dateTime);
         // create new event class
         Event event = new Event(taskName.toString(), dateTime.toString());
+        historyManager.addState(list);
         list.addTask(event);
         storage.writeToFile(list.getTaskList()); //save to file
         return ui.prettyPrinting(taskName.toString() + " added!");

@@ -20,7 +20,7 @@ public class InvalidCommand extends Command {
      * @throws DukeException exception.
      */
     @Override
-    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {
+    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {
         return ui.prettyPrinting("Invalid command! Please try again!");
     }
 }
