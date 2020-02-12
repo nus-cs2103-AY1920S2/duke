@@ -17,10 +17,22 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class contains method to decode a list of string representing tasks
+ * to real task objects.
+ */
 public class TaskListDecoder {
     static final String PERSON_DATA_ARGS = "\\s\\|\\s(T|E|D)\\s\\|\\s(1|0)\\s\\|\\s(\\S+)\\s?\\|?\\s?" + DATE_TIME_KEY;
     static final Pattern PERSON_DATA_ARGS_FORMAT = Pattern.compile(PERSON_DATA_ARGS);
 
+    /**
+     * Decode task from a list of string to TaskList object.
+     * @param encodedTaskList A list of string representing tasks
+     * @return TaskList object
+     * @throws StorageOperationException If encoded task in invalid format.
+     * @throws NoDescriptionException If there is no description for any task.
+     * @throws IllegalDateTimeFormatException If date time string is in incorrect format.
+     */
     public static TaskList decodeTaskList(List<String> encodedTaskList) throws
             StorageOperationException, NoDescriptionException, IllegalDateTimeFormatException {
         final ArrayList<Task> tasks = new ArrayList<>();
@@ -30,6 +42,14 @@ public class TaskListDecoder {
         return new TaskList(tasks);
     }
 
+    /**
+     * Decode a string to task object.
+     * @param encodedTask
+     * @return Task object.
+     * @throws StorageOperationException If encoded task string is in invalid format.
+     * @throws NoDescriptionException If there is no description for any task.
+     * @throws IllegalDateTimeFormatException If the date time string is in invalid format.
+     */
     public static Task decodeTask(String encodedTask) throws
             StorageOperationException, NoDescriptionException, IllegalDateTimeFormatException {
         final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(encodedTask);
