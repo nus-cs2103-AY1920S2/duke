@@ -10,12 +10,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * TaskList
+ * Represents the task list used by Duke to track tasks.
  *
  * <p>CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * Individual Duke project
  * 30 Jan 2020
  *
  * @author Jel
@@ -41,7 +39,7 @@ public class TaskList {
      */
     protected String listTasks() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Below is your task list:\n");
+        sb.append("Below is your list of tasks:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append("\t").append(i + 1).append(".").append(tasks.get(i)).append("\n");
         }
@@ -61,10 +59,10 @@ public class TaskList {
         if (taskNum < 1 || taskNum > size) {
             throw new InvalidIndexException(taskNum, size);
         }
-        sb.append("Noted. I've removed this task:\n\t" + tasks.get(taskNum - 1));
+        sb.append("Alright, I've removed this task.\n\t" + tasks.get(taskNum - 1));
         tasks.remove(taskNum - 1);
-        sb.append("\nYou now have " + tasks.size() + (tasks.size() > 1 ? " tasks" : " task") + " in the list.\n");
-        sb.append(separator);
+        sb.append(String.format("\nYou now have %d %s in the list.\n", size, (size > 1 ? "tasks" : "task")))
+                .append(separator);
         storage.clearAllData();
         storage.updateData();
         return sb.toString();
@@ -84,10 +82,9 @@ public class TaskList {
         }
         Task t = tasks.get(taskNum - 1);
         t.markAsDone();
-        sb.append("Nice! I've marked this task as done:\n\t").append(t);
+        sb.append("Great job! I've marked this task as done:\n\t").append(t).append("\n").append(separator);
         storage.clearAllData();
         storage.updateData();
-        sb.append("\n").append(separator);
         return sb.toString();
     }
 
@@ -152,22 +149,27 @@ public class TaskList {
     protected String confirmAddition() {
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n\t");
         int size = this.tasks.size();
-        sb.append(this.tasks.get(size - 1)).append(String.format("\nYou now have %d %s in the list.\n", size, tasks.size() > 1 ? "tasks" : "task"));
+        sb.append(this.tasks.get(size - 1)).append(String.format("\nYou now have %d %s in the list.\n", size,
+                size > 1 ? "tasks" : "task"));
         return sb.toString();
     }
 
     /**
-     * Finds tasks whose details match the keyword provided.
+     * Finds tasks with that details match the keyword provided.
      * @param keyword The keyword user is searching for.
      */
     protected String findTask(String keyword) {
+        int count = 0;
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n\t");
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(keyword)) {
+                count++;
                 sb.append(tasks.get(i)).append("\n\t");
             }
         }
-        String res = sb.toString().trim();
-        return res + "\n" + separator;
+        if (count > 0) {
+            return sb.toString().trim() + "\n" + separator;
+        }
+        return String.format("There are no matching tasks for the keyword '%s'.", keyword);
     }
 }

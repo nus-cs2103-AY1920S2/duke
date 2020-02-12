@@ -4,12 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline
+ * Represents a Deadline task.
  *
  * <p>CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * Individual Duke project
  * 29 Jan 2020
  *
  * @author Jel
@@ -27,10 +25,6 @@ public class Deadline extends Task {
         this.due = due;
     }
 
-    /**
-     * Gets due date of the Deadline.
-     * @return Due date of the Deadline.
-     */
     public LocalDate getDueDate() {
         return this.due;
     }
@@ -43,6 +37,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.due.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.format("[D]%s (by: %s)", super.toString(),
+                this.due.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

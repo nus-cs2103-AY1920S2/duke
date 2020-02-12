@@ -4,12 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event
+ * Represents a Event task.
  *
  * <p>CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * Individual Duke project
  * 29 Jan 2020
  *
  * @author Jel
@@ -27,10 +25,6 @@ public class Event extends Task {
         this.at = at;
     }
 
-    /**
-     * Gets the scheduled time of the Event.
-     * @return The scheduled time of the Event.
-     */
     public LocalDate getScheduledTime() {
         return this.at;
     }
@@ -43,6 +37,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.format("[E]%s (at: %s)", super.toString(),
+                this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

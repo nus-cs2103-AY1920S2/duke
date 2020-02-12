@@ -1,12 +1,10 @@
 package duke.exception;
 
 /**
- * NoKeywordProvided Exception
+ * Represents a No Keyword Provided exception.
  *
  * <p>CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * Individual Duke project
  * 29 Jan 2020
  *
  * @author Jel

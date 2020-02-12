@@ -8,12 +8,10 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Duke
+ * Represents the chat bot Duke.
  *
- * CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * <p>CS2103T AY19/20 Semester 2
+ * Individual Duke project
  * 11 Feb 2020
  *
  * @author Jel
@@ -43,9 +41,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Driver method for CLI version of Duke.
+     * @param args Command line arguments supplied.
+     */
     public static void main(String[] args) {
-        new Duke();
-        ui.run();
+        new Duke().run();
         String input = ui.getInput();
         while (!input.equals("bye")) {
             System.out.println(parser.parseLine(input));
@@ -55,6 +56,15 @@ public class Duke {
         if (input.equals("bye")) {
             ui.bye();
         }
+    }
+
+    /**
+     * Introduces Duke.
+     */
+    public void run() {
+        System.out.println("____________________________________________________________");
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("____________________________________________________________");
     }
 
     /**

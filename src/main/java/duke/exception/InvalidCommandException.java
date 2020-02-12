@@ -1,12 +1,10 @@
 package duke.exception;
 
 /**
- * InvalidCommandException
+ * Represents an Invalid Command exception.
  *
  * <p>CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * Individual Duke project
  * 29 Jan 2020
  *
  * @author Jel

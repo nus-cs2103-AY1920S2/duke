@@ -6,12 +6,10 @@ import duke.exception.InvalidCommandException;
 import java.io.IOException;
 
 /**
- * CommandHandler
+ * The class that handles all commands entered.
  *
  * <p>CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * Individual Duke project
  * 11 Feb 2020
  *
  * @author Jel
