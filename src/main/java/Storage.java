@@ -56,88 +56,89 @@ public class Storage {
             String[] readTaskArray = readTask.split(" ");
 
 
+            switch (readTaskArray[0]) {
+                case "T": {
 
-            if (readTaskArray[0].equals("T")) {
-
-                String taskDescription = "";
-                for (int i = 4; i < readTaskArray.length; i ++) { // Extract the description of the task
-                    taskDescription += " " + readTaskArray[i];
-                }
-
-
-                ToDo newTask = new ToDo(taskDescription);
-
-                if (readTaskArray[2].equals("1")) { // Sets status as done if it is done
-                    newTask.setStatusDone();
-                }
-
-                list.add(newTask);
-
-
-
-
-            } else if (readTaskArray[0].equals("D")) {
-
-                String taskDescription = "";
-                int indexOfSlash = 0;
-                String timing = "";
-
-                for (int i = 4; i < readTaskArray.length; i++) {
-
-                    if (readTaskArray[i].equals("|")) {
-                        indexOfSlash += i;
-                        break;
+                    String taskDescription = "";
+                    for (int i = 4; i < readTaskArray.length; i++) { // Extract the description of the task
+                        taskDescription += " " + readTaskArray[i];
                     }
-                    taskDescription += " " + readTaskArray[i];
-                }
-
-                for (int i = indexOfSlash + 1; i < readTaskArray.length; i ++) {
-                    timing += " " + readTaskArray[i];
-                }
-
-                LocalDate timingLocalDate = LocalDate.parse(timing.trim());
-
-                Deadline newTask = new Deadline(taskDescription, timingLocalDate);
-
-                if (readTaskArray[2].equals("1")) { // Sets status as done if it is done
-                    newTask.setStatusDone();
-                }
-
-                list.add(newTask);
 
 
+                    ToDo newTask = new ToDo(taskDescription);
 
-
-
-            } else if (readTaskArray[0].equals("E")) {
-
-                String taskDescription = "";
-                int indexOfSlash = 0;
-                String timing = "";
-
-                for (int i = 4; i < readTaskArray.length; i++) {
-
-                    if (readTaskArray[i].equals("|")) {
-                        indexOfSlash += i;
-                        break;
+                    if (readTaskArray[2].equals("1")) { // Sets status as done if it is done
+                        newTask.setStatusDone();
                     }
-                    taskDescription += " " + readTaskArray[i];
+
+                    list.add(newTask);
+
+
+                    break;
                 }
+                case "D": {
 
-                for (int i = indexOfSlash + 1; i < readTaskArray.length; i ++) {
-                    timing += " " + readTaskArray[i];
+                    String taskDescription = "";
+                    int indexOfSlash = 0;
+                    String timing = "";
+
+                    for (int i = 4; i < readTaskArray.length; i++) {
+
+                        if (readTaskArray[i].equals("|")) {
+                            indexOfSlash += i;
+                            break;
+                        }
+                        taskDescription += " " + readTaskArray[i];
+                    }
+
+                    for (int i = indexOfSlash + 1; i < readTaskArray.length; i++) {
+                        timing += " " + readTaskArray[i];
+                    }
+
+                    LocalDate timingLocalDate = LocalDate.parse(timing.trim());
+
+                    Deadline newTask = new Deadline(taskDescription, timingLocalDate);
+
+                    if (readTaskArray[2].equals("1")) { // Sets status as done if it is done
+                        newTask.setStatusDone();
+                    }
+
+                    list.add(newTask);
+
+
+                    break;
                 }
+                case "E": {
 
-                LocalDate timingLocalDate = LocalDate.parse(timing.trim());
+                    String taskDescription = "";
+                    int indexOfSlash = 0;
+                    String timing = "";
 
-                Event newTask = new Event(taskDescription, timingLocalDate);
+                    for (int i = 4; i < readTaskArray.length; i++) {
 
-                if (readTaskArray[2].equals("1")) { // Sets status as done if it is done
-                    newTask.setStatusDone();
+                        if (readTaskArray[i].equals("|")) {
+                            indexOfSlash += i;
+                            break;
+                        }
+                        taskDescription += " " + readTaskArray[i];
+                    }
+
+                    for (int i = indexOfSlash + 1; i < readTaskArray.length; i++) {
+                        timing += " " + readTaskArray[i];
+                    }
+
+                    LocalDate timingLocalDate = LocalDate.parse(timing.trim());
+
+                    Event newTask = new Event(taskDescription, timingLocalDate);
+
+                    if (readTaskArray[2].equals("1")) { // Sets status as done if it is done
+                        newTask.setStatusDone();
+                    }
+
+                    list.add(newTask);
+
+                    break;
                 }
-
-                list.add(newTask);
-
             }
         }
     }
@@ -155,23 +156,30 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath);
 
         for (Task t : list) {
-            if (t.getType() == "todo") {
+            switch (t.getType()) {
+                case "todo": {
 
-                String taskMessage = "T | " + t.getStatus() + " |" + t.getDescription() + "\n";
-                writeToFile(taskMessage);
+                    String taskMessage = "T | " + t.getStatus() + " |" + t.getDescription() + "\n";
+                    writeToFile(taskMessage);
 
-            } else if (t.getType() == "deadline") {
+                    break;
+                }
+                case "deadline": {
 
-                String taskMessage = "D | " + t.getStatus() + " |" + t.getDescription()
-                        + " | " + t.getBy() + "\n";
-                writeToFile(taskMessage);
+                    String taskMessage = "D | " + t.getStatus() + " |" + t.getDescription()
+                            + " | " + t.getBy() + "\n";
+                    writeToFile(taskMessage);
 
-            } else if (t.getType() == "event") {
+                    break;
+                }
+                case "event": {
 
-                String taskMessage = "E | " + t.getStatus() + " |" + t.getDescription()
-                        + " | " + t.getBy() + "\n";
-                writeToFile(taskMessage);
+                    String taskMessage = "E | " + t.getStatus() + " |" + t.getDescription()
+                            + " | " + t.getBy() + "\n";
+                    writeToFile(taskMessage);
 
+                    break;
+                }
             }
         }
 
