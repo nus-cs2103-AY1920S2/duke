@@ -2,10 +2,6 @@ package parser;
 
 import exceptions.IllegalDateTimeFormatException;
 import exceptions.NoCommandException;
-import exceptions.NoDescriptionException;
-import model.DeadLineTask;
-import model.EventTask;
-import model.ToDoTask;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
