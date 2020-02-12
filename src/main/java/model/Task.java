@@ -47,6 +47,10 @@ public abstract class Task {
         this.setDescription(params[0]);
     }
 
+    public boolean hasKeyWord(String keyWord) {
+        return description.toLowerCase().contains(keyWord.toLowerCase());
+    }
+
     public abstract String getTaskType();
 
     public String getStatusIcon() {
