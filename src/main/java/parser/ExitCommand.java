@@ -11,7 +11,6 @@ public class ExitCommand extends Command {
     @Override
     public String execute() {
         return EXIT_GREETING;
-//        System.exit(0);
     }
 
 

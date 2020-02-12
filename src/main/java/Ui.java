@@ -25,7 +25,7 @@ public class Ui {
     }
 
     public void printCommandResult(String result) {
-        System.out.println(LINE + result+ LINE);
+        System.out.println(LINE + result + LINE);
     }
 
     public void printErrorMessage(String errorMessage) {
@@ -39,7 +39,7 @@ public class Ui {
     }
 
     public void greet() {
-        this.printCommandResult("Hello "+ this.userName + "! " + GREETING);
+        this.printCommandResult("Hello " + this.userName + "! " + GREETING);
     }
 
     public String getUserInput() {

@@ -11,7 +11,9 @@ public class DeadLineTask extends Task {
 
     private LocalDateTime by;
 
-    public DeadLineTask() {}
+    public DeadLineTask() {
+
+    }
 
     public DeadLineTask(String description, LocalDateTime by) throws NoDescriptionException {
         super(description, TASK_TYPE_STRING);

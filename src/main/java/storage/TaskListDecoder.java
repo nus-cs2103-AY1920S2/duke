@@ -4,13 +4,16 @@ import static parser.Parser.parseDateTime;
 import static storage.TaskListEncoder.FINISHED_STATUS;
 import static parser.Parser.DATE_TIME_KEY;
 
-import jdk.jfr.Event;
 import exceptions.IllegalDateTimeFormatException;
 import exceptions.NoDescriptionException;
 import exceptions.StorageOperationException;
-import model.*;
 
-import java.lang.reflect.Array;
+import model.DeadLineTask;
+import model.EventTask;
+import model.Task;
+import model.TaskList;
+import model.ToDoTask;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +21,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskListDecoder {
-    private static final String PERSON_DATA_ARGS = "\\s\\|\\s(T|E|D)\\s\\|\\s(1|0)\\s\\|\\s(\\S+)\\s?\\|?\\s?" + DATE_TIME_KEY;
+    private static final String PERSON_DATA_ARGS = "\\s\\|\\s(T|E|D)\\s\\|\\s(1|0)\\s\\|\\s(\\S+)\\s?\\|?\\s?"
+            + DATE_TIME_KEY;
     private static final Pattern PERSON_DATA_ARGS_FORMAT = Pattern.compile(PERSON_DATA_ARGS);
 
     static TaskList decodeTaskList(List<String> encodedTaskList) throws

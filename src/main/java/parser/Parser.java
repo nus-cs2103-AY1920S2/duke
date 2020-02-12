@@ -29,11 +29,12 @@ public class Parser {
     private static final Pattern DEADLINE_PATTERN = Pattern.compile(DEADLINE_KEY);
     private static final Pattern EVENT_PATTERN = Pattern.compile(EVENT_KEY);
 
-    public static LocalDateTime parseDateTime(String dateString, String timeString) throws IllegalDateTimeFormatException {
+    public static LocalDateTime parseDateTime(String dateString, String timeString) throws
+            IllegalDateTimeFormatException {
         //TODO: add a notification
         try {
             LocalDate date = LocalDate.parse(dateString);
-            LocalTime time = LocalTime.parse(timeString == null ? DEFAULT_TIME: timeString);
+            LocalTime time = LocalTime.parse(timeString == null ? DEFAULT_TIME : timeString);
             return date.atTime(time);
         } catch (DateTimeParseException dte) {
 
@@ -63,9 +64,13 @@ public class Parser {
         return parseDateTime(dateString, timeString);
     }
 
-    private static boolean isExitKey(String input) { return EXIT_KEY.equals(input); }
+    private static boolean isExitKey(String input) {
+        return EXIT_KEY.equals(input);
+    }
 
-    private static boolean isViewListKey(String input) {return VIEW_LIST_KEY.equals(input); }
+    private static boolean isViewListKey(String input) {
+        return VIEW_LIST_KEY.equals(input);
+    }
 
     private static boolean isDeleteKey(String input) {
         Matcher deleteMatcher = DELETE_PATTERN.matcher(input);
@@ -93,36 +98,29 @@ public class Parser {
     }
 
     public Command parseCommand(String userInput) throws
-            NoCommandException, IllegalDateTimeFormatException{
+            NoCommandException, IllegalDateTimeFormatException {
         if (Parser.isExitKey(userInput)) {
             return new ExitCommand();
-        }
-        else if (Parser.isViewListKey(userInput)) {
+        } else if (Parser.isViewListKey(userInput)) {
             return new ViewListCommand();
-        }
-        else if (Parser.isDeleteKey(userInput)) {
+        } else if (Parser.isDeleteKey(userInput)) {
             int deletedTaskIndex = this.findIndex(DELETE_PATTERN, userInput);
             return new DeleteCommand(deletedTaskIndex);
-        }
-        else if (Parser.isFinishKey(userInput)) {
+        } else if (Parser.isFinishKey(userInput)) {
             int finishedTaskIndex = this.findIndex(FINISH_PATTERN, userInput);
             return new FinishCommand(finishedTaskIndex);
-        }
-        else if (Parser.isTodoKey(userInput)){
+        } else if (Parser.isTodoKey(userInput)) {
             String description = this.findDescription(TODO_PATTERN, userInput);
             return new AddToDoCommand(description);
-        }
-        else if (Parser.isDeadLineKey(userInput)){
+        } else if (Parser.isDeadLineKey(userInput)) {
             String description = this.findDescription(DEADLINE_PATTERN, userInput);
             LocalDateTime by = this.findDateTime(DEADLINE_PATTERN, userInput);
             return new AddDeadlineCommand(description, by);
-        }
-        else if (Parser.isEventKey(userInput)){
+        } else if (Parser.isEventKey(userInput)) {
             String description = this.findDescription(EVENT_PATTERN, userInput);
             LocalDateTime at = this.findDateTime(EVENT_PATTERN, userInput);
             return new AddEventCommand(description, at);
-        }
-        else {
+        } else {
             throw new NoCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
     }

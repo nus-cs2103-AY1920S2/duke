@@ -22,11 +22,11 @@ public class Duke {
     protected Parser parser;
     protected Ui ui;
 
-    public Duke () {
+    public Duke() {
         this.userName = "";
     }
 
-    public Duke (String userName) {
+    public Duke(String userName) {
         this.userName = userName;
     }
     
@@ -41,7 +41,7 @@ public class Duke {
         } catch (InvalidStorageFilePathException | IOException e) {
             ui.printErrorMessage(e.getMessage());
             throw new RuntimeException(e);
-        } catch(StorageOperationException | NoDescriptionException | IllegalDateTimeFormatException err) {
+        } catch (StorageOperationException | NoDescriptionException | IllegalDateTimeFormatException err) {
             ui.printErrorMessage(err.getMessage());
         }
     }

@@ -13,12 +13,15 @@ public abstract class Task {
     private static final String TASK_TYPE_STRING = "task";
     static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public Task() {}
+    public Task() {
+
+    }
     
     public Task(String description) throws NoDescriptionException {
         if ("".equals(description)) {
-            throw new NoDescriptionException("OOPS!!! The description of a " +
-                    TASK_TYPE_STRING + " cannot be empty.\n");
+            throw new NoDescriptionException("OOPS!!! The description of a "
+                    + TASK_TYPE_STRING
+                    + " cannot be empty.\n");
         }
         this.description = description;
         this.isDone = false;
@@ -26,8 +29,9 @@ public abstract class Task {
 
     public Task(String description, String taskTypeString) throws NoDescriptionException {
         if ("".equals(description)) {
-            throw new NoDescriptionException("OOPS!!! The description of a " +
-                    taskTypeString + " cannot be empty.\n");
+            throw new NoDescriptionException("OOPS!!! The description of a "
+                    + taskTypeString
+                    + " cannot be empty.\n");
         }
         this.description = description;
         this.isDone = false;
@@ -35,8 +39,9 @@ public abstract class Task {
 
     public void setDescription(String description) throws NoDescriptionException {
         if ("".equals(description)) {
-            throw new NoDescriptionException("OOPS!!! The description of a " +
-                    TASK_TYPE_STRING + " cannot be empty.\n");
+            throw new NoDescriptionException("OOPS!!! The description of a "
+                    + TASK_TYPE_STRING
+                    + " cannot be empty.\n");
         }
         this.description = description;
     }

@@ -1,6 +1,10 @@
 package model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Iterator;
 
 public class TaskList implements Iterable<Task> {
     protected final List<Task> internalList = new ArrayList<Task>();
@@ -10,7 +14,9 @@ public class TaskList implements Iterable<Task> {
     private static final String ECHO_VIEW_TASK_LIST = "Here are the tasks in your list:\n";
     private static final String ECHO_COMPLETE_TASK = "Nice! I've marked this task as done:\n";
 
-    public TaskList() {}
+    public TaskList() {
+
+    }
 
     public TaskList(Task... tasks) {
         final List<Task> initials = Arrays.asList(tasks);
@@ -26,21 +32,32 @@ public class TaskList implements Iterable<Task> {
         StringBuilder addTaskEnd = new StringBuilder("Now you have  tasks in the list.\n");
 
         String addTaskEndStr = addTaskEnd.insert(13, this.internalList.size()).toString();
-        return ECHO_ADD_TASK + task.toString() + "\n" + addTaskEndStr;
+        return ECHO_ADD_TASK
+                + task.toString()
+                + "\n"
+                + addTaskEndStr;
     }
 
     public String remove(int position) {
         Task deletedTask = internalList.get(position);
         internalList.remove(position);
-        return ECHO_DELETE_TASK + " " + deletedTask.toString() + "\n" +
-                "Now you have " + Integer.toString(this.internalList.size()) + " tasks in the list.\n";
+        return ECHO_DELETE_TASK
+                + " "
+                + deletedTask.toString()
+                + "\n"
+                + "Now you have "
+                + Integer.toString(this.internalList.size())
+                + " tasks in the list.\n";
     }
 
     public String markTaskAsDone(Integer position) {
         Task finishedTask = this.internalList.get(position);
         finishedTask.markAsDone();
 
-        return ECHO_COMPLETE_TASK + " " + finishedTask.toString() + "\n";
+        return ECHO_COMPLETE_TASK
+                + " "
+                + finishedTask.toString()
+                + "\n";
     }
 
     public String toString() {
@@ -49,8 +66,11 @@ public class TaskList implements Iterable<Task> {
             if (this.internalList.get(i) == null) {
                 continue;
             }
-            listOverView = listOverView + Integer.toString(i + 1) + "."
-                    + this.internalList.get(i).toString() + "\n";
+            listOverView = listOverView
+                    + Integer.toString(i + 1)
+                    + "."
+                    + this.internalList.get(i).toString()
+                    + "\n";
         }
         return listOverView;
     }

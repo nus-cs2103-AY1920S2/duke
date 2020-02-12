@@ -6,7 +6,9 @@ import model.TaskList;
 public class Command {
     protected TaskList taskList;
 
-    public Command() {}
+    public Command() {
+
+    }
 
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;

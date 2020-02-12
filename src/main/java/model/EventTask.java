@@ -7,13 +7,15 @@ import java.util.Arrays;
 import java.time.LocalDateTime;
 
 
-public class EventTask extends Task{
+public class EventTask extends Task {
     private static final String TASK_TYPE_STRING = "event task";
     private static final String TASK_TYPE_CHA = "E";
 
     private LocalDateTime at;
 
-    public EventTask() {}
+    public EventTask() {
+
+    }
 
     public EventTask(String description, LocalDateTime at) throws NoDescriptionException {
         super(description, TASK_TYPE_STRING);

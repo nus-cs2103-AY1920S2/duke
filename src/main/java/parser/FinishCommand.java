@@ -1,6 +1,6 @@
 package parser;
 
-public class FinishCommand extends Command{
+public class FinishCommand extends Command {
     private Integer position;
 
     FinishCommand(Integer position) {
@@ -10,5 +10,4 @@ public class FinishCommand extends Command{
     public String execute() {
         return this.taskList.markTaskAsDone(position);
     }
-
 }

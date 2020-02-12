@@ -2,11 +2,13 @@ package parser;
 
 public class ViewListCommand extends Command {
 
-    public ViewListCommand() {}
+    public ViewListCommand() {
+
+    }
 
     @Override
     public String execute() {
         return this.taskList.toString();
     }
- }
+}
 

@@ -32,7 +32,7 @@ public class Storage {
         return filePath.toString().endsWith(".txt");
     }
 
-    public void save(TaskList taskList) throws IOException{
+    public void save(TaskList taskList) throws IOException {
         List<String> encodedTaskList = TaskListEncoder.encodeTask(taskList);
         Files.write(path, encodedTaskList);
     }
