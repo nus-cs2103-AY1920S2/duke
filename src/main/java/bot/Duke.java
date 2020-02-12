@@ -2,6 +2,7 @@ package bot;
 
 import bot.command.instruction.ParsedInstruction;
 
+import bot.command.instruction.concrete.TerminateInstruction;
 import bot.gui.Launcher;
 
 import bot.loadsave.DummyLoader;
@@ -99,6 +100,9 @@ public class Duke {
             }
 
             if (!executor.execute(next)) {
+                // should be exit instruction
+                assert (next.getInstruction() instanceof TerminateInstruction)
+                        : "unknown instruction in Executor.execute";
                 break;
             }
             botUi.showAwaiting();

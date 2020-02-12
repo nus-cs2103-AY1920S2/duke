@@ -9,6 +9,7 @@ import bot.command.exception.InadequateArgumentsException;
 import bot.command.exception.TooManyArgumentsException;
 import bot.command.exception.UnknownInstructionException;
 import bot.command.instruction.ParsedInstruction;
+import bot.command.instruction.concrete.TerminateInstruction;
 import bot.loadsave.LoadAndSave;
 
 import bot.task.Task;
@@ -80,6 +81,10 @@ public class Baron {
 
         // execute the instruction
         if (!executor.execute(instr)) {
+            // should be exit instruction
+            assert (instr.getInstruction() instanceof TerminateInstruction)
+                    : "execution failure: unknown instruction";
+
             // exit after 0.5 seconds
             Executors.newScheduledThreadPool(1)
                     .schedule(() -> System.exit(0),750, TimeUnit.MILLISECONDS);
