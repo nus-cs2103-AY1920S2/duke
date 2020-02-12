@@ -28,6 +28,14 @@ public class AddCommand extends Command {
         ui.showCount(tasks);
     }
 
+    /**
+     * Executes add command and gets response for the GUI
+     * @param tasks TaskList containing all the added tasks
+     * @param ui UI that handles interactions with user
+     * @param storage Storage that handles updating of tasks in hard disk
+     * @return String response for GUI
+     * @throws DukeException if task cannot be saved to hard disk
+     */
     public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);
         storage.save(tasks);

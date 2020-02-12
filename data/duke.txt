@@ -1,6 +1,6 @@
 T | 1 | read book
 T | 1 | bloobloop
 T | 0 | borrow book
-T | 0 | watch lecture
+T | 1 | watch lecture
 E | 0 | meeting | 1pm | 2020-02-12
 T | 0 | code code code
