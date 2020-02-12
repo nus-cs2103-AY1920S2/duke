@@ -12,6 +12,8 @@ public class Ui {
 
     /**
      * Welcome message.
+     *
+     * @return Message of welcome.
      */
     public static String showWelcome() {
         System.out.println("Hello from\n" + logo + "\n I am at your service\n" + botReplyLine);
@@ -20,6 +22,8 @@ public class Ui {
 
     /**
      * Goodbye message.
+     *
+     * @return Message of goodbye.
      */
     public static String goodbyeMessage() {
         System.out.println(botReplyLine + "\n Duke: I'll say goodnight now \n" + botReplyLine);
@@ -122,6 +126,7 @@ public class Ui {
      * Message to show number of tasks in TaskList.
      *
      * @param listSize number of tasks in TaskList
+     * @return Message of number of tasks in list.
      */
     public static String taskInList(int listSize) {
         System.out.println("You have " + listSize + " task(s) in your list.");
@@ -134,6 +139,7 @@ public class Ui {
      *
      * @param taskList TaskList provided.
      * @param sb       StringBuilder object.
+     * @return Message of list command.
      */
     public static String listCommand(TaskList taskList, StringBuilder sb) {
         StringBuilder botReplySb = new StringBuilder();
@@ -147,13 +153,19 @@ public class Ui {
         return botReplySb.toString().strip();
     }
 
+    /**
+     * Help command method.
+     *
+     * @return Message of help command.
+     */
     public static String helpCommand() {
         return "Oooooh seems like you need help.\n"
                 + "Here are some commands you can use: \n\n"
                 + "list \n--> to display your current list. \n\n"
                 + "todo <task name> \n--> adds a new todo to your list. \n\n"
                 + "event <event name> /at <date format yyyy-mm--dd> \n--> adds a new event to your list.\n\n"
-                + "deadline <deadline description> /by <date format yyyy--mm-dd> \n--> adds a new deadline to your list.\n\n"
+                + "deadline <deadline description> /by <date format yyyy--mm-dd> \n" 
+                + "--> adds a new deadline to your list.\n\n"
                 + "done <task number> \n--> marks a todo || event || deadline as done.\n\n"
                 + "delete <task number> \n--> deletes a todo || event || deadline from the list. \n\n"
                 + "find <keyword> \n--> searches the list for tasks that contains the keyword specified. \n\n"
