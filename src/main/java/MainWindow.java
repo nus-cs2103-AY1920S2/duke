@@ -5,10 +5,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -28,6 +30,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets a supplied Duke instance for the MainWindow and introduces Duke on start up.
+     * @param d Duke instance to be set.
+     */
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().add(

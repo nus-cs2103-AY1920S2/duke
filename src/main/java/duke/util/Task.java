@@ -1,12 +1,10 @@
 package duke.util;
 
 /**
- * Task
+ * Represents a Task.
  *
  * <p>CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * Individual Duke project
  * 29 Jan 2020
  *
  * @author Jel
@@ -24,10 +22,6 @@ public class Task {
         this.isDone = false;
     }
 
-    /**
-     * Gets the description of the Task.
-     * @return The description of the Task.
-     */
     public String getDescription() {
         return this.description;
     }
@@ -40,9 +34,6 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    /**
-     * Marks the task as done.
-     */
     public void markAsDone() {
         this.isDone = true;
     }

@@ -13,12 +13,10 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 
 /**
- * Storage
+ * Represents the storage used.
  *
  * <p>CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * Individual Duke project
  * 30 Jan 2020
  *
  * @author Jel
@@ -75,6 +73,7 @@ public class Storage {
         FileInputStream ips = new FileInputStream(new File(this.filePath));
         BufferedReader br = new BufferedReader(new InputStreamReader(ips));
         String line;
+
         while ((line = br.readLine()) != null) {
             String[] arr = line.split(" \\| ");
             String details = arr[2];
@@ -112,10 +111,6 @@ public class Storage {
         ops.close();
     }
 
-    /**
-     * Updates data in data file.
-     * @throws IOException Error opening file.
-     */
     protected void updateData() throws IOException {
         for (int i = 0; i < this.tasks.size(); i++) {
             saveTask(this.tasks.get(i), i != 0);

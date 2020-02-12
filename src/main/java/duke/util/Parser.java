@@ -3,17 +3,15 @@ package duke.util;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.NoDateProvidedException;
-import duke.exception.NoDescriptionException;
+import duke.exception.NoDescriptionProvidedException;
 import duke.exception.NoKeywordProvidedException;
 import duke.exception.NoTaskNumberException;
 
 /**
- * Parser
+ * Parses all user input for Duke to handle as commands.
  *
  * <p>CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * Individual Duke project
  * 11 Feb 2020
  *
  * @author Jel
@@ -70,11 +68,13 @@ public class Parser {
         return line.split(" ", 2)[0].trim();
     }
 
-    private String getDescAndDate(String cmd, String line) throws NoDescriptionException, NoDateProvidedException {
+
+    private String getDescAndDate(String cmd, String line) throws NoDescriptionException, 
+              NoDateProvidedException {
         // TODO: throw NoDescriptionException when only date and task type is provided.
         String[] arr = line.split(" ", 2);
         if (arr.length < 2) {
-            throw new NoDescriptionException();
+            throw new NoDescriptionProvidedException();
         }
         if (cmd.equals("todo")) {
             return arr[1].trim();

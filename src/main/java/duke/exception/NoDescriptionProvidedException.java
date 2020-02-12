@@ -1,17 +1,15 @@
 package duke.exception;
 
 /**
- * NoDescriptionException
+ * Represents a No Description Provided exception.
  *
  * <p>CS2103T AY19/20 Semester 2
- * Individual project
- * Duke project
- *
+ * Individual Duke project
  * 29 Jan 2020
  *
  * @author Jel
  */
-public class NoDescriptionException extends DukeException {
+public class NoDescriptionProvidedException extends DukeException {
     /**
      * Overrides the Object's toString method
      * and contains details of the error.
