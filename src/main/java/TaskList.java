@@ -28,7 +28,7 @@ public class TaskList {
     /**
      * Deletes the task specified by the index.
      *
-     * @param index the index of the task to be deleted.
+     * @param index the index of the task to be deleted
      * @return the deleted task
      */
     public Task deleteTask(int index) {
@@ -40,9 +40,9 @@ public class TaskList {
     }
 
     /**
-     * Completes the task specified by the index.
+     * Completes the task specified by the index
      *
-     * @param index the index of the task to be completed.
+     * @param index the index of the task to be completed
      * @return the completed task
      */
     public Task completeTask(int index) {
@@ -58,8 +58,11 @@ public class TaskList {
     /**
      * Completes the task specified by the index.
      *
-     * @param index the index of the task to be completed.
+     * @param index the index of the task to be completed
+     * @param time the new time
      * @return the completed task
+     *
+     * @throws InvalidClassException when the task is not snoozeable
      */
     public Task snoozeTask(int index, String time) throws InvalidClassException {
         // check whether the index is within bounds
