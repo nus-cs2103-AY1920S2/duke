@@ -267,6 +267,7 @@ public class Duke extends Application {
                                 foundTasks.add(arr.get(i));
                             }
                         }
+                        assert i >= taskNames.size() : "error";
                     }
                     for (int i = 0; i < foundTasks.size(); i++) {
                         int j = i + 1;
