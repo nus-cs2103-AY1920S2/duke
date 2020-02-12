@@ -1,2 +1,2 @@
-E | 1 | meeting | 2019-12-10
-D | 0 | project | 2020-01-11
+E | 0 | meeting | 2019-12-10
+D | 1 | project | 2020-01-11

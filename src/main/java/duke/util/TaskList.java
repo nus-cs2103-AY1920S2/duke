@@ -48,47 +48,6 @@ public class TaskList {
     }
 
     /**
-     * Deletes the specified task from the list and data file. 
-     * @param taskNum The task number for the task to be deleted.
-     * @throws InvalidIndexException Task number or index provided is out of bound of current list of tasks.
-     * @throws IOException Error opening file where data is to be deleted.
-     */
-    protected String deleteTask(int taskNum) throws InvalidIndexException, IOException {
-        int size = tasks.size();
-        StringBuilder sb = new StringBuilder();
-        if (taskNum < 1 || taskNum > size) {
-            throw new InvalidIndexException(taskNum, size);
-        }
-        sb.append("Alright, I've removed this task.\n\t" + tasks.get(taskNum - 1));
-        tasks.remove(taskNum - 1);
-        sb.append(String.format("\nYou now have %d %s in the list.\n", size, (size > 1 ? "tasks" : "task")))
-                .append(separator);
-        storage.clearAllData();
-        storage.updateData();
-        return sb.toString();
-    }
-
-    /**
-     * Marks the specified task as done in the list and data file.
-     * @param taskNum The task number for the task to be marked as done.
-     * @throws InvalidIndexException Task number or index provided is out of bound of current list of tasks.
-     * @throws IOException Error opening file where data is to be marked as done.
-     */
-    protected String markTaskAsDone(int taskNum) throws InvalidIndexException, IOException {
-        int size = tasks.size();
-        StringBuilder sb = new StringBuilder();
-        if (taskNum < 1 || taskNum > size) {
-            throw new InvalidIndexException(taskNum, size);
-        }
-        Task t = tasks.get(taskNum - 1);
-        t.markAsDone();
-        sb.append("Great job! I've marked this task as done:\n\t").append(t).append("\n").append(separator);
-        storage.clearAllData();
-        storage.updateData();
-        return sb.toString();
-    }
-
-    /**
      * Adds a new todo to the task list and the data file.
      * @param desc The description of details of the todo.
      * @return The string signifying successful addition of task.
@@ -153,6 +112,76 @@ public class TaskList {
         sb.append(this.tasks.get(size - 1)).append(String.format("\nYou now have %d %s in the list.\n", size,
                 size > 1 ? "tasks" : "task"));
         return sb.toString();
+    }
+
+    /**
+     * Deletes the specified task from the list and data file.
+     * @param taskNum The task number for the task to be deleted.
+     * @throws InvalidIndexException Task number or index provided is out of bound of current list of tasks.
+     * @throws IOException Error opening file where data is to be deleted.
+     */
+    protected String deleteTask(int taskNum) throws InvalidIndexException, IOException {
+        int size = tasks.size();
+        StringBuilder sb = new StringBuilder();
+        if (isValidIndex(taskNum, size)) {
+            sb.append("Alright, I've removed this task.\n\t" + tasks.get(taskNum - 1));
+            tasks.remove(taskNum - 1);
+            sb.append(String.format("\nYou now have %d %s in the list.\n", size, (size > 1 ? "tasks" : "task")))
+                    .append(separator);
+            storage.clearAllData();
+            storage.updateData();
+            return sb.toString();
+        } else {
+            throw new InvalidIndexException(taskNum, size);
+        }
+    }
+
+    /**
+     * Marks the specified task as done in the list and data file.
+     * @param taskNum The task number for the task to be marked as done.
+     * @throws InvalidIndexException Task number or index provided is out of bound of current list of tasks.
+     * @throws IOException Error opening file where data is to be marked as done.
+     */
+    protected String markTaskAsDone(int taskNum) throws InvalidIndexException, IOException {
+        int size = tasks.size();
+        StringBuilder sb = new StringBuilder();
+        if (isValidIndex(taskNum, size)) {
+            Task t = tasks.get(taskNum - 1);
+            if (t.isDone) {
+                sb.append("Task was already marked as done.\n").append(separator);
+            } else {
+                t.markAsDone();
+                sb.append("Great job! I've marked this task as done:\n\t").append(t).append("\n").append(separator);
+                storage.clearAllData();
+                storage.updateData();
+            }
+            return sb.toString();
+        } else {
+            throw new InvalidIndexException(taskNum, size);
+        }
+    }
+
+    protected String markTaskNotDone(int taskNum) throws InvalidIndexException, IOException {
+        int size = tasks.size();
+        StringBuilder sb = new StringBuilder();
+        if (isValidIndex(taskNum, size)) {
+            Task t = tasks.get(taskNum - 1);
+            if (t.isDone) {
+                t.markAsNotDone();
+                sb.append("Ok, I've marked this task as not done:\n\t").append(t).append("\n").append(separator);
+                storage.clearAllData();
+                storage.updateData();
+            } else {
+                sb.append("Task has not yet been completed.\n\t").append(separator);
+            }
+            return sb.toString();
+        } else {
+            throw new InvalidIndexException(taskNum, size);
+        }
+    }
+
+    private boolean isValidIndex(int taskNum, int size) {
+        return (taskNum > 0 || taskNum < size);
     }
 
     /**

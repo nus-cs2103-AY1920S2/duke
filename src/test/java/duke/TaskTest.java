@@ -15,9 +15,8 @@ public class TaskTest {
     @Test
     void getStatusIcon() {
         Task task = new MockTask("a description");
-        assertEquals(task.getStatusIcon(), ("\u2718"));
-        task.markAsDone();
-        assertEquals(task.getStatusIcon(), "\u2713");
+        assertEquals(task.getStatusIcon(), ("\u2718")); // represents cross
+        assertEquals(task.getStatusIcon(), "\u2713"); // represents tick
     }
 
     @Test
@@ -31,6 +30,6 @@ public class TaskTest {
     @Test
     void testToString() {
         Task task = new MockTask("a description");
-        assertEquals(task.toString(), "[\u2718] this is a description");
+        assertEquals(task.toString(), "[\u2718] this is a description"); // unicode represents cross
     }
 }

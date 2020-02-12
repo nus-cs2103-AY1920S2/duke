@@ -11,7 +11,7 @@ public class EventTest {
     @Test
     void getScheduledTime() {
         Event evt = new Event("hello world", LocalDate.parse("01-20-2020"));
-        assertEquals(evt.getScheduledTime() , LocalDate.parse("01-20-2020"));
+        assertEquals(evt.getScheduledTime(), LocalDate.parse("01-20-2020"));
     }
 
     @Test

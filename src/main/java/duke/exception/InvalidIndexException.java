@@ -26,7 +26,7 @@ public class InvalidIndexException extends DukeException {
     /**
      * Overrides the Object's toString method
      * and contains details of the error.
-     * @return The String that containing reason for the error and how to resolve it.
+     * @return The String containing reason for the error and how to resolve it.
      */
     @Override
     public String toString() {

@@ -41,9 +41,9 @@ public class Parser {
             case "bye":
                 // this case is needed for GUI
                 return ui.bye();
-            case "list":
+            case "list": case "help":
                 break;
-            case "done": case "delete":
+            case "done": case "delete": case "unmark":
                 taskNum = getTaskNum(trimmed);
                 break;
             case "find":

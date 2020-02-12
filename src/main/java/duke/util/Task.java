@@ -38,6 +38,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void markAsNotDone() {
+        this.isDone = false;
+    }
+
     /**
      * Overrides the Object's toString method
      * and contains the status icon and description of the task.
