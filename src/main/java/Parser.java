@@ -32,6 +32,7 @@ public class Parser {
             throw new DukeMissingDescriptionException("Task number missing.");
         }
         String num = command.substring(5);
+        assert num != null;
         try {
             return Integer.valueOf(num);
         } catch (NumberFormatException e) {
@@ -114,6 +115,7 @@ public class Parser {
             throw new DukeMissingDescriptionException("Task number missing.");
         }
         String num = command.substring(7);
+        assert num != null;
         try {
             return Integer.valueOf(num);
         } catch (NumberFormatException e) {
