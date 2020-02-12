@@ -41,7 +41,7 @@ public class ParsedInstruction {
      * hold the information for
      *
      * @return Returns the main Instruction for this
-     * ParsedInstruction
+     *     ParsedInstruction
      */
     public Instruction getInstruction() {
         return this.mainInstruction;
@@ -53,8 +53,8 @@ public class ParsedInstruction {
      * execute, in the correct order
      *
      * @return Returns an ArrayList of Strings containing
-     * arguments required by the main Instruction of
-     * this ParsedInstruction
+     *     arguments required by the main Instruction of
+     *     this ParsedInstruction
      */
     public ArrayList<String> getArguments() {
         return this.requiredArguments;

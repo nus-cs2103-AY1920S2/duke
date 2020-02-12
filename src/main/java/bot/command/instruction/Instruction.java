@@ -34,7 +34,7 @@ public abstract class Instruction {
      * this Instruction
      *
      * @return Collection of Commands that cause this
-     * Instruction to execute
+     *     Instruction to execute
      */
     public Collection<Command> getCommandList() {
         return this.commandList;
@@ -61,7 +61,7 @@ public abstract class Instruction {
      * @param com The command that was identified by
      *            CommandParser
      * @return Returns a ParsedInstruction representing
-     * the Instruction and arguments of rawCommand
+     *     the Instruction and arguments of rawCommand
      */
     public abstract ParsedInstruction parse(String rawCommand, Command com)
             throws InadequateArgumentsException, TooManyArgumentsException;

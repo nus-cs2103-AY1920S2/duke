@@ -23,15 +23,16 @@ public abstract class AddTaskInstruction extends Instruction {
      * <p>Example: "/by" for "deadline"
      *
      * @return Returns a String containing only the
-     * sub-command word
+     *     sub-command word
      */
     public abstract String getSubCommand();
 
     @Override
     public ParsedInstruction parse(String rawCommand, Command command)
-            throws InadequateArgumentsException
-    {
-        assert(rawCommand.startsWith(command.getWord()));
+            throws InadequateArgumentsException {
+
+        assert (rawCommand.startsWith(command.getWord()))
+                : "command parse failure in AddTaskInstruction";
         String rest = rawCommand.substring(command.getWord().length()).stripLeading();
         return new ParsedInstruction(this,
                 formatDesc(rest, command),
@@ -50,8 +51,8 @@ public abstract class AddTaskInstruction extends Instruction {
      * @return Returns the formatted String description
      */
     private String formatDesc(String withoutFirst, Command command)
-            throws InadequateArgumentsException
-    {
+            throws InadequateArgumentsException {
+
         int indexFirst = withoutFirst.indexOf(this.getSubCommand());
         if (indexFirst == -1) {
             // could not find sub-command in raw command
