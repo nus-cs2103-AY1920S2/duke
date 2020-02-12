@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class Parser {
 
+    private String latestCommand;
+
 
     public Parser() {
 
@@ -272,6 +274,43 @@ public class Parser {
 
 
                 }
+
+                case "undo": {
+
+                    String[] latestCommandArray = latestCommand.split(" ");
+                    ArrayList<Task> originalTaskList = TaskList.taskList;
+
+                    switch (latestCommandArray[0]) {
+
+                        case "done" : {
+
+                            int indexOfDoneTask = Integer.parseInt(latestCommandArray[1]);
+                            originalTaskList.get(indexOfDoneTask - 1);
+
+                        }
+
+                        case "todo" : {
+
+                            originalTaskList.remove(originalTaskList.size() - 1);
+
+                        }
+
+                        case "event" : {
+
+                            originalTaskList.remove(originalTaskList.size() - 1);
+
+                        }
+
+                        case "deadline" : {
+
+                            originalTaskList.remove(originalTaskList.size() - 1);
+
+                        }
+
+                    }
+
+                }
+
                 default:
 
                     throw new DukeException("☹ OWO!!! I'm sorry, but I don't know what that means :-(");
@@ -283,6 +322,12 @@ public class Parser {
         }
 
         return "";
+    }
+
+    public void setLatestCommand(String command) {
+
+        latestCommand.equals(command);
+
     }
 
 

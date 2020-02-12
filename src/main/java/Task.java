@@ -52,6 +52,17 @@ public class Task {
     }
 
     /**
+     * Method returns sets the task status to undone,
+     * which in this case is reflected as a 0 or 1.
+     *
+     */
+
+    public void setStatusUndone() {
+
+        status = 0;
+    }
+
+    /**
      * Method returns sets the task type, where in this
      * Task class there is no type and this function is overridden
      * in the event, deadline and todo class.
