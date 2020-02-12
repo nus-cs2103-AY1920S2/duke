@@ -89,6 +89,7 @@ public class Parser {
 
 
         else {
+            
             Task itemToAdd = null;
 
             if (firstToken.equals("deadline")) {
