@@ -5,17 +5,21 @@ import bot.command.instruction.ParsedInstruction;
 import bot.command.instruction.concrete.TerminateInstruction;
 import bot.gui.Launcher;
 
+import bot.loadsave.AliasLoader;
 import bot.loadsave.DummyLoader;
 import bot.loadsave.LoadAndSave;
 import bot.loadsave.TasksToDisk;
 
+import bot.store.AliasStorage;
 import bot.store.TaskStorage;
+
 import bot.task.Task;
 
 import bot.command.CommandParser;
 import bot.command.exception.InadequateArgumentsException;
 import bot.command.exception.TooManyArgumentsException;
 import bot.command.exception.UnknownInstructionException;
+import bot.util.Pair;
 
 import java.io.FileNotFoundException;
 
@@ -26,7 +30,8 @@ import java.util.Scanner;
  */
 public class Duke {
     public static final String FILE_DIRECTORY = "../user/data";
-    public static final String FILE_NAME = "tasks.botstore";
+    public static final String FILE_NAME_TASKS = "tasks.botstore";
+    public static final String FILE_NAME_ALIASES = "aliases.botstore";
 
     /**
      * Main program of 4LC3N-BOT, if started with the
@@ -67,20 +72,30 @@ public class Duke {
         CommandParser parser = new CommandParser();
 
         // initialise TaskStorage
-        TaskStorage store = new TaskStorage();
-
-        LoadAndSave<Task> botStore;
+        TaskStorage taskStore = new TaskStorage();
+        LoadAndSave<Task> taskStoreLoc;
         try {
-            botStore = new TasksToDisk(Duke.FILE_DIRECTORY, Duke.FILE_NAME);
+            taskStoreLoc = new TasksToDisk(Duke.FILE_DIRECTORY, Duke.FILE_NAME_TASKS);
         } catch (FileNotFoundException e) {
             botUi.showError(e);
-            botStore = new DummyLoader<Task>();
+            taskStoreLoc = new DummyLoader<Task>();
         }
+        taskStore.importFromCollection(taskStoreLoc.loadFromDisk());
 
-        store.importTasks(botStore.loadFromDisk());
+        // initialise AliasStorage
+        AliasStorage aliasStore = new AliasStorage();
+        LoadAndSave<Pair<String, String>> aliasStoreLoc;
+        try {
+            aliasStoreLoc = new AliasLoader(Duke.FILE_DIRECTORY, Duke.FILE_NAME_ALIASES);
+        } catch (FileNotFoundException e) {
+            botUi.showError(e);
+            aliasStoreLoc = new DummyLoader<Pair<String, String>>();
+        }
+        aliasStore.importFromCollection(aliasStoreLoc.loadFromDisk());
 
         // initialise instruction Executor
-        Executor executor = new Executor(store, botUi, botStore);
+        Executor executor =
+                new Executor(botUi, taskStore, taskStoreLoc, aliasStore, aliasStoreLoc);
         Scanner input = new Scanner(System.in);
 
         botUi.showInitial();

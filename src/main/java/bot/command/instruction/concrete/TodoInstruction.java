@@ -1,5 +1,6 @@
 package bot.command.instruction.concrete;
 
+import bot.command.exception.InstructionAlreadyExistsException;
 import bot.store.Storage;
 import bot.Ui;
 
@@ -18,7 +19,12 @@ public class TodoInstruction extends TextInstruction
 
     @Override
     public void writeToStore(Storage<Task> store, Ui ui, Task t) {
-        store.store(t);
+        try {
+            store.store(t);
+        } catch (InstructionAlreadyExistsException e) {
+            // should never reach here!
+            ui.showError(e);
+        }
         ui.showTaskStoreMessage(store.getSize());
     }
 }

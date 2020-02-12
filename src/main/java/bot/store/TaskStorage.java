@@ -20,7 +20,7 @@ public class TaskStorage implements Storage<Task> {
      *
      * @param tasks The Collection to add from
      */
-    public void importTasks(Collection<Task> tasks) {
+    public void importFromCollection(Collection<Task> tasks) {
         storedTasks.addAll(tasks);
     }
 

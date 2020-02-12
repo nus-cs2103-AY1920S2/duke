@@ -3,12 +3,13 @@ package bot;
 import bot.command.instruction.Instruction;
 import bot.command.instruction.ParsedInstruction;
 
+import bot.command.instruction.concrete.AliasInstruction;
 import bot.command.instruction.concrete.DeadlineInstruction;
 import bot.command.instruction.concrete.EventInstruction;
 import bot.command.instruction.concrete.ListInstruction;
 import bot.command.instruction.concrete.TerminateInstruction;
-
 import bot.command.instruction.concrete.TodoInstruction;
+
 import bot.command.instruction.execute.NotStorable;
 import bot.command.instruction.execute.StorageModifying;
 import bot.command.instruction.execute.StorageReading;
@@ -23,6 +24,7 @@ import bot.task.Deadline;
 import bot.task.Event;
 import bot.task.Task;
 import bot.task.Todo;
+import bot.util.Pair;
 
 import java.util.ArrayList;
 
@@ -35,24 +37,35 @@ import java.util.ArrayList;
  * instructions that deal with Tasks
  */
 public class Executor {
-    private final Storage<Task> storage;
     private final Ui ui;
-    private final LoadAndSave<Task> storageLocation;
+    private final Storage<Task> taskStorage;
+    private final LoadAndSave<Task> taskStoreLocation;
+    private final Storage<Pair<String, String>> aliasStorage;
+    private final LoadAndSave<Pair<String, String>> aliasStoreLocation;
 
     /**
      * Constructs a new Executor, handling execution
      * of instructions for the bot
-     *
-     * @param store The Task storage of the bot
      * @param ui The UI of the bot
-     * @param storeLoc The LoadAndSave representing file
+     * @param taskStore The Task storage of the bot
+     * @param tasksLoc The LoadAndSave representing file
      *                 directory and file name of the
-     *                 storage file on disk
+     *                 Task storage
+     * @param aliasStore The storage containing aliases
+     *                   for commands
+     * @param aliasesLoc The LoadAndSave representing file
+     *                   directory and file name of the
+     *                   aliases storage
      */
-    public Executor(Storage<Task> store, Ui ui, LoadAndSave<Task> storeLoc) {
-        this.storage = store;
+    public Executor(Ui ui, Storage<Task> taskStore, LoadAndSave<Task> tasksLoc,
+                    Storage<Pair<String, String>> aliasStore,
+                    LoadAndSave<Pair<String, String>> aliasesLoc) {
+
         this.ui = ui;
-        this.storageLocation = storeLoc;
+        this.taskStorage = taskStore;
+        this.taskStoreLocation = tasksLoc;
+        this.aliasStorage = aliasStore;
+        this.aliasStoreLocation = aliasesLoc;
     }
 
     /**
@@ -78,7 +91,10 @@ public class Executor {
             return this.executeReading((StorageReading<Task>) inst, arguments);
         } else if (inst instanceof StorageSearching) {
             return this.executeSearching((StorageSearching<Task>) inst, arguments);
+        } else if (inst instanceof AliasInstruction) {
+            return this.executeAlias((AliasInstruction) inst, arguments);
         } else if (inst instanceof StorageWriting) {
+            // this is guaranteed to be a task writing instruction
             return this.executeWriting((StorageWriting<Task>) inst, arguments);
         } else {
             // unknown instruction type, end program
@@ -96,7 +112,7 @@ public class Executor {
         // assumes all StorageModifying Instructions have the
         // required index as their second argument
         try {
-            parsed.modifyStore(this.storage, this.ui,
+            parsed.modifyStore(this.taskStorage, this.ui,
                     Integer.parseInt(arguments.get(0)));
         } catch (NumberFormatException e) {
             this.ui.showError(e);
@@ -108,7 +124,7 @@ public class Executor {
         // assumes parsed is a ListInstruction
         assert (parsed instanceof ListInstruction)
                 : "unknown StorageReading in Executor.executeReading";
-        parsed.readStore(this.storage, this.ui);
+        parsed.readStore(this.taskStorage, this.ui);
         return true;
     }
 
@@ -117,7 +133,7 @@ public class Executor {
         // desired search terms as their second argument
         assert (arguments.size() == 2)
                 : "executeSearching with more than 2 parameters";
-        parsed.searchStore(this.storage, this.ui, arguments.get(0));
+        parsed.searchStore(this.taskStorage, this.ui, arguments.get(0));
         return true;
     }
 
@@ -137,8 +153,18 @@ public class Executor {
             );
             return false;
         }
-        parsed.writeToStore(this.storage, this.ui, toWrite);
-        this.storage.saveToDisk(this.storageLocation);
+        parsed.writeToStore(this.taskStorage, this.ui, toWrite);
+        this.taskStorage.saveToDisk(this.taskStoreLocation);
+        return true;
+    }
+
+    private boolean executeAlias(AliasInstruction parsed, ArrayList<String> arguments) {
+        // first argument is the original name
+        // second argument is the aliased name
+        Pair<String, String> toWrite =
+                new Pair<String, String>(arguments.get(0), arguments.get(1));
+        parsed.writeToStore(this.aliasStorage, this.ui, toWrite);
+        this.aliasStorage.saveToDisk(this.aliasStoreLocation);
         return true;
     }
 }

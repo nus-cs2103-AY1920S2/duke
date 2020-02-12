@@ -3,6 +3,8 @@ package bot.store;
 import bot.command.exception.InstructionAlreadyExistsException;
 import bot.loadsave.LoadAndSave;
 
+import java.util.Collection;
+
 /**
  * Implementation of a generic item storage to be
  * used in 4LC3N-BOT
@@ -61,4 +63,11 @@ public interface Storage<T> {
      *     number of stored items
      */
     int getSize();
+
+    /**
+     * Adds items from a Collection into this Storage
+     *
+     * @param items The Collection to add from
+     */
+    void importFromCollection(Collection<T> items);
 }

@@ -2,6 +2,7 @@ package bot.gui;
 
 import bot.Executor;
 
+import bot.store.AliasStorage;
 import bot.store.TaskStorage;
 
 import bot.command.CommandParser;
@@ -15,6 +16,8 @@ import bot.command.instruction.concrete.TerminateInstruction;
 import bot.loadsave.LoadAndSave;
 
 import bot.task.Task;
+
+import bot.util.Pair;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -32,27 +35,33 @@ public class Baron {
 
     /**
      * Constructor for a new Baron.
-     *
-     * @param comParse The CommandParser to parse
+     *  @param comParse The CommandParser to parse
      *                 text entered by the user
-     * @param store The Storage to save Tasks to
-     * @param disk The LoadAndSave representing location
-     *             of the file on disk to save data to
      * @param gui The GUI of the Bot, to display messages
+     * @param taskStore The TaskStorage to save Tasks to
+     * @param tasksDiskLoc The LoadAndSave representing location
+*                          of the file on disk to
+     *                     save Tasks data to
+     * @param aliasStore The AliasStorage to save aliases to
+     * @param aliasDiskLoc The LoadAndSave representing location
+     *                     of the file on disk to save
+     *                     alias data to
      */
     public Baron(
             CommandParser comParse,
-            TaskStorage store,
-            LoadAndSave<Task> disk,
-            GraphicalUi gui
-    ) {
+            GraphicalUi gui, TaskStorage taskStore,
+            LoadAndSave<Task> tasksDiskLoc,
+            AliasStorage aliasStore,
+            LoadAndSave<Pair<String, String>> aliasDiskLoc) {
+
         this.parser = comParse;
         this.graphUi = gui;
-        this.executor = new Executor(store, this.graphUi, disk);
+        this.executor =
+                new Executor(this.graphUi, taskStore, tasksDiskLoc, aliasStore, aliasDiskLoc);
         // show welcome message
         this.graphUi.showInitial();
         // load stored items
-        store.importTasks(disk.loadFromDisk());
+        taskStore.importFromCollection(tasksDiskLoc.loadFromDisk());
     }
 
     /**

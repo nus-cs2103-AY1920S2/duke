@@ -3,6 +3,8 @@ package bot.gui;
 import java.io.IOException;
 
 import bot.Duke;
+import bot.loadsave.AliasLoader;
+import bot.store.AliasStorage;
 import bot.store.TaskStorage;
 
 import bot.command.CommandParser;
@@ -33,17 +35,21 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setBaron(
                     new Baron(
                             new CommandParser(),
-                            new TaskStorage(),
-                            new TasksToDisk(
-                                    Duke.FILE_DIRECTORY,
-                                    Duke.FILE_NAME
-                            ),
                             new GraphicalUi(fxmlLoader
                                     .<MainWindow>getController()
                                     .getChatContainer()
                                     .getChildren()
-                            )
-                    )
+                            ),
+                            new TaskStorage(),
+                            new TasksToDisk(
+                                    Duke.FILE_DIRECTORY,
+                                    Duke.FILE_NAME_TASKS
+                            ),
+                            new AliasStorage(),
+                            new AliasLoader(
+                                    Duke.FILE_DIRECTORY,
+                                    Duke.FILE_NAME_ALIASES
+                            ))
             );
             stage.show();
         } catch (IOException e) {

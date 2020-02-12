@@ -8,6 +8,7 @@ import bot.loadsave.LoadAndSave;
 import bot.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -45,6 +46,22 @@ public class AliasStorage implements Storage<Pair<String, String>> {
     @Override
     public int getSize() {
         return this.storedAliases.size();
+    }
+
+    @Override
+    public void importFromCollection(Collection<Pair<String, String>> aliases) {
+        for (Pair<String, String> alias : aliases) {
+            String aliasedName = alias.getSecond();
+            if (CommandParser.INSTR_MAP.containsKey(aliasedName)
+                    || this.aliasMap.containsKey(aliasedName)) {
+
+                // the alias is already in use
+                // do nothing
+            } else {
+                this.storedAliases.add(alias);
+                this.aliasMap.put(aliasedName, alias.getFirst());
+            }
+        }
     }
 
     @Override

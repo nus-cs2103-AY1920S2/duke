@@ -48,7 +48,7 @@ public class AliasLoader extends LoadAndSave<Pair<String, String>> {
                 break;
             }
 
-            storedAliases.add(new Pair(originalName, aliasedName));
+            storedAliases.add(new Pair<String, String>(originalName, aliasedName));
         }
         return storedAliases;
     }
