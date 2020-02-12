@@ -46,6 +46,9 @@ public class Parser {
                 String keyword = input.substring(input.indexOf(' ') + 1);
                 return FindCommand.run(tasks, keyword);
             }
+            case "sort": {
+                return SortCommand.run(tasks);
+            }
         }
 
         // if it reaches here without returning means exception did not catch and its an invalid command
@@ -78,14 +81,15 @@ public class Parser {
                     !input.equals("delete") &&
                     !input.equals("done") &&
                     !input.equals("find") &&
-                    !input.equals("list")) {
+                    !input.equals("list") &&
+                    !input.equals("sort")) {
                 throw new DukeException("OOPS! I'm sorry but I dont know what that means :(");
             } else {
                 // command is either not valid, or is list
-                if (!input.equals("list")) {
+                if (!input.equals("list") && !input.equals("sort")) {
                     throw new DukeException("OOPS! The description of a " + input + " cannot be empty");
                 } else {
-                    return "list";
+                    return input;
                 }
 
             }

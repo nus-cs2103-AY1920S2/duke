@@ -1,8 +1,10 @@
 package duke.main;
 
 import duke.task.Task;
+import duke.task.Todo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class TaskList {
 
@@ -75,5 +77,10 @@ public class TaskList {
             }
         }
         return matchingTasks;
+    }
+
+
+    public void sortByAlphabeticalOrder() {
+        tasks.sort(Comparator.comparing(Task::toString));
     }
 }
