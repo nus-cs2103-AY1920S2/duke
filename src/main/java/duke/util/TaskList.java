@@ -65,7 +65,7 @@ public class TaskList {
      * @param source The date to be checked.
      * @return The boolean representing whether the date provided is valid.
      */
-    private static boolean dateIsValid(String source) {
+    private static boolean isValidDate(String source) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
         try {
@@ -87,7 +87,7 @@ public class TaskList {
     protected String addDeadlineOrEvt(String id, String descAndDate) throws IOException, InvalidDateException {
         assert id.equals(" /by ") || id.equals(" /at ") : "Invalid id supplied.";
         String[] temp = descAndDate.split(" \\| ");
-        if (dateIsValid(temp[1])) {
+        if (isValidDate(temp[1])) {
             if (id.equals(" /by ")) {
                 Task toSave = new Deadline(temp[0].trim().toString(), LocalDate.parse(temp[1]));
                 storage.saveTask(toSave, true);

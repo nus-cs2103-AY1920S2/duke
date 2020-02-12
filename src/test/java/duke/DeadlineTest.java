@@ -8,14 +8,14 @@ import java.time.LocalDate;
 
 public class DeadlineTest {
     @Test
-    void getDueDate() {
-        Deadline deadline = new Deadline("hello world", LocalDate.parse("01-20-2020"));
-        assertEquals(deadline.getDueDate(), LocalDate.parse("01-20-2020"));
+    void testGetDueDate() {
+        Deadline deadline = new Deadline("hello world", LocalDate.parse("2020-01-20"));
+        assertEquals(deadline.getDueDate(), LocalDate.parse("2020-01-20"));
     }
 
     @Test
     void testToString() {
-        Deadline deadline = new Deadline("hello world", LocalDate.parse("01-20-2020"));
+        Deadline deadline = new Deadline("hello world", LocalDate.parse("2020-01-20"));
         assertEquals(deadline.toString(), "[D][✘] hello world (by: Jan 20 2020)");
     }
 }
