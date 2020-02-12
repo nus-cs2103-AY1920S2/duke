@@ -13,7 +13,7 @@ public class Duke {
      */
     
     public Duke(String filePath) {
-        assert filePath.isEmpty() : "File does not exist!";
+        assert filePath.isEmpty() : "File does not exist!"; 
         this.ui = new Ui();
         this.saveToFile = new SaveToFile();
         this.tasks = new TaskList(saveToFile.loadList(filePath));
