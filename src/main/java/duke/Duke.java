@@ -41,6 +41,7 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             response = command.executeWithoutReply(taskList, storage, ui);
+            assert response != null : "Response is null";
             return response;
         } catch (DukeException e) {
             return e.getMessage();

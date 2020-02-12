@@ -78,7 +78,7 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No task found in that index!");
         }
-        assert records.contains(task) : "Task did not removed!";
+
         return task;
     }
 
