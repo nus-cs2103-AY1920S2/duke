@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * The ToDo Class extends the Task Class to store objects with a description but no time and date attached.
  * @author qiujingying

@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package duke;
 
 /**
  * The Main Class initialises all important objects for the program to run.
