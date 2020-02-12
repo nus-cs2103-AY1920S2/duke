@@ -3,6 +3,8 @@ package duke.tasks;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected final static int TASK_NAME_INDEX = 2;
+    protected final static int IS_DONE_BOOLEAN_INDEX = 1;
 
     public Task(String s) {
         this.description = s;
@@ -27,7 +29,7 @@ public class Task {
      * @return Created Task class.
      */
     public static Task create(String[] strArr) {
-        Task t = new Task(strArr[2]);
+        Task t = new Task(strArr[TASK_NAME_INDEX]);
         if (strArr[1].equals("1")) {
             t.setDone();
         }
