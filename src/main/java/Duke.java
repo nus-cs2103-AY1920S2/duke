@@ -1,5 +1,4 @@
 import e0148811.duke.Deadline;
-import e0148811.duke.DialogBox;
 import e0148811.duke.DukeException;
 import e0148811.duke.Event;
 import e0148811.duke.Parser;
@@ -353,8 +352,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    String getResponse(String input) {
         return "Duke heard: " + input;
     }
-
 }
