@@ -24,12 +24,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    /**
-     * No params constructor for Launcher class to initialize Duke.
-     */
-    public Duke() {
-
-    }
+    private boolean isExit = false;
 
     /**
      * Constructor for Duke.
@@ -54,6 +49,7 @@ public class Duke {
         try {
             Command c = Parser.parse(command);
             response = c.execute(tasks, ui, storage);
+            isExit = c.isExit();
         } catch (DukeException e) {
             e.printStackTrace();
             return e.getErrorMessage();
@@ -70,5 +66,9 @@ public class Duke {
         }
 
         return response;
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 }
