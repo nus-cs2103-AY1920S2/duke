@@ -2,6 +2,7 @@ package duke.task;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,9 +31,9 @@ public class DeadlineTest {
      */
     @Test
     public void testToString() {
-        assertEquals("[D][\u2718] Deadline!! (by: Dec 30 1900 6:00 pm [OVERDUE])", // cross mark
-                new Deadline("Deadline!!", LocalDateTime.of(1900, 12, 30, 18, 0)).toString());
-        // assertEquals("[D][\u2713] brunch (by: Today 5:00 pm)", // tick mark
-        // new Deadline("brunch", LocalDate.now().atTime(17, 0), true).toString());
+        // assertEquals("[D][\u2718] Deadline!! (by: Dec 30 1900 6:00 pm [OVERDUE])", // cross mark
+        // new Deadline("Deadline!!", LocalDateTime.of(1900, 12, 30, 18, 0)).toString());
+        assertEquals("[D][\u2713] brunch (by: Today 5:00 pm)", // tick mark
+                new Deadline("brunch", LocalDate.now().atTime(17, 0), true).toString());
     }
 }
