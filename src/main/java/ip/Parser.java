@@ -3,6 +3,7 @@ package ip;
 import ip.command.*;
 import ip.task.Deadline;
 import ip.task.Event;
+import ip.task.FixedDuration;
 import ip.task.Todo;
 
 import java.time.LocalDate;
@@ -95,6 +96,21 @@ public class Parser {
                         ev = new Event(name, (datetime));
                         return new AddCommand(ev);
                     }
+                case "fixed":
+                    rest = input.substring(command.length()).trim();
+                    int durationIndex = rest.indexOf("/duration");
+                    if (durationIndex == -1) {
+                        throw new Duke.DukeException("Please include the duration after the \"/duration\" keyword");
+                    }
+                    name = rest.substring(0, durationIndex).trim();
+                    if (name.length() == 0) {
+                        throw new Duke.DukeException("The description of a fixed duration task cannot be empty.");
+                    }
+                    datetime = rest.substring(durationIndex + 9).trim();
+                    if (datetime.length() == 0) {
+                        throw new Duke.DukeException("The duration cannot be empty.");
+                    }
+                    return new AddCommand(new FixedDuration(name, datetime));
                 default:
                     throw new Duke.DukeException("I'm sorry, but I don't know what that means :-(");
             }
