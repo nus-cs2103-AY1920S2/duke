@@ -2,7 +2,6 @@ package main;
 
 import exception.DuplicateMarkAelitaException;
 import exception.IoAelitaException;
-
 import task.Deadline;
 import task.Event;
 import task.Todo;

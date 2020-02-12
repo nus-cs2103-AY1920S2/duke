@@ -38,6 +38,8 @@ public class EventCommand extends Command {
         String[] dateTime = extractDateTime(at);
         LocalDate eventDate = LocalDate.parse(dateTime[0]);
 
+        assert dateTime.length == 3 : "There should be a date, start time and end time";
+
         Task event = new Event(description, eventDate, dateTime[1], dateTime[2]);
         taskList.add(event);
         return new Response(Message.ADD_TASK, "event");

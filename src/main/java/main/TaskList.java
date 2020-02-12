@@ -4,7 +4,6 @@ import exception.DuplicateMarkAelitaException;
 import exception.EmptyInputAelitaException;
 import exception.InvalidArgumentAelitaException;
 import exception.InvalidListItemAelitaException;
-
 import task.Deadline;
 import task.Event;
 import task.Task;

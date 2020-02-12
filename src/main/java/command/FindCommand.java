@@ -30,6 +30,8 @@ public class FindCommand extends Command {
 
         checkSufficientTokens(commandTokens, "find");
 
+        assert commandTokens.length > 1 : "There should be a keyword";
+
         String keyword = commandTokens[1].toLowerCase();
 
         //Gets the list of task containing the keyword

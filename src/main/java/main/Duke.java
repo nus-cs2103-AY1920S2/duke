@@ -1,7 +1,6 @@
 package main;
 
 import command.ByeCommand;
-import command.Command;
 import command.DeadlineCommand;
 import command.DeleteCommand;
 import command.DoneCommand;
@@ -17,13 +16,7 @@ import exception.InvalidCommandAelitaException;
 import exception.InvalidListItemAelitaException;
 import exception.IoAelitaException;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**

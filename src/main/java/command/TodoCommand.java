@@ -31,6 +31,8 @@ public class TodoCommand extends Command {
 
         checkSufficientTokens(descriptionTokens, "todo");
 
+        assert descriptionTokens.length > 0 : "There should be a description";
+
         Task task = new Task(reconstructDescription(descriptionTokens));
         taskList.add(task);
 

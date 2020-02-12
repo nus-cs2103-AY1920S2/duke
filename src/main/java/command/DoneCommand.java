@@ -33,6 +33,8 @@ public class DoneCommand extends Command {
 
         checkSufficientTokens(commandTokens, "done");
 
+        assert commandTokens.length > 1 : "There should be an index";
+
         int index = Integer.parseInt(commandTokens[1]) - 1;
         taskList.complete(index);
         return new Response(Message.DONE, index);

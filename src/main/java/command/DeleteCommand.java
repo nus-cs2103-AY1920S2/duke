@@ -33,6 +33,8 @@ public class DeleteCommand extends Command {
 
         checkSufficientTokens(commandTokens, "delete");
 
+        assert commandTokens.length > 1 : "There should be an index";
+
         int index = Integer.parseInt(commandTokens[1]) - 1;
         return new Response(Message.DELETE, taskList.remove(index));
     }
