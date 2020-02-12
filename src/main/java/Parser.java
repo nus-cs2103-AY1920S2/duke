@@ -12,12 +12,10 @@ public class Parser {
 
     public String parse(String input) throws Exception {
         String reply;
-        //while (sc.hasNext()) {
-            //String str = sc.nextLine();
         String str = input;
 
         if (str.isEmpty()) {
-            return "Please enter a command :D";
+            return ui.emptyCmd();
         }
         reply = parseCommands(str);
         if (bye) {
