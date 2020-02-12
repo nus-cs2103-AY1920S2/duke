@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * Main class that drives the code to run the Duke bot.
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
@@ -58,10 +58,9 @@ public class Duke extends Application {
     }
 
     /**
-     * Main method that drives the Duke bot.
+     * Main method that drives the Duke bot, using Command Line.
      */
     public void run() {
-        ui.printWelcome();
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(sc);
 
@@ -137,7 +136,7 @@ public class Duke extends Application {
                     command = parser.readCommand();
                     break;
                 default:
-                    ui.printBye();
+                    System.out.println(new DukeException("Invalid command"));
                 }
             }
         } catch (DukeException e) {
@@ -153,6 +152,7 @@ public class Duke extends Application {
     }
 
     /**
+<<<<<<< HEAD
      * Method to launch JavaFX.
      *
      * @param stage Primary stage that JavaFX provides.
@@ -238,11 +238,12 @@ public class Duke extends Application {
     }
 
     /**
+=======
+>>>>>>> c372a5e003486242f5eab3adb603b1e2d5b0a4a6
      * Gets the response of Duke based on the command given from the user.
      * @param command String input from the user.
      */
     protected String getResponse(String command) {
-
         try {
             String commandType = parser.getCommandType(command);
             switch (commandType) {
