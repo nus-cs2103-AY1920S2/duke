@@ -76,8 +76,7 @@ public class Duke extends Application {
             alert.setContentText("type 'help' to see what SQUIRTLE can do!");
 
             alert.showAndWait();
-        }
-        catch(DukeException e) {
+        } catch (DukeException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning!");
             alert.setHeaderText("Error in loading file!");

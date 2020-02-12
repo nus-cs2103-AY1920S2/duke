@@ -16,6 +16,11 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+
+    public Task getTask(int taskNumber) {
+        return taskList.get(taskNumber);
+    }
+
     /**
      * Deletes task from taskList.
      *
@@ -47,6 +52,14 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) { // throw exception if the task does not exist at index provided
             throw new DukeException(DukeError.NUMBER);
         }
+    }
+
+    /**
+     * Updates task description or date
+     */
+    public Task updateTask(int index, Task task) {
+        taskList.set(index, task);
+        return task;
     }
 
     /**

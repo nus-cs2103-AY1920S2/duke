@@ -15,6 +15,9 @@ public class Parser {
 
     }
 
+    static boolean isUpdating = false;
+    static UpdateCommand updateCommand;
+
     /**
      * Parses task into a string to load into tasks.txt.
      *
@@ -45,10 +48,11 @@ public class Parser {
     /**
      * Parses line from tasks.txt into a Task object.
      * Line is in the form of (TYPE)|(0 or 1)|(description)|(task time, if any).
+     *
      * @param line String representation of task
      * @return a Task object
      */
-    public static Task parseFile(String line) throws DukeException{ // parses line from tasks.txt into a task
+    public static Task parseFile(String line) throws DukeException { // parses line from tasks.txt into a task
         String[] split = line.split(Pattern.quote("|"));
         Task task;
         switch (split[0]) {
@@ -72,7 +76,7 @@ public class Parser {
     /**
      * Parses user input into a Command object.
      *
-     * @param input user input eg. "deadline blah /by 9/2/2020"
+     * @param input user input eg. "date blah /by 9/2/2020"
      * @return a Command representing the action to be taken as directed by user
      * @throws DukeException if insufficient commands given, wrong command given or wrong date format given
      */
@@ -83,6 +87,8 @@ public class Parser {
                 return new ExitCommand();
             } else if (input.equals("list")) { // parse list command
                 return new ListCommand();
+            } else if (input.equals("help")) {
+                return new HelpCommand();
             } else if (input.startsWith("done")) { // parse done command
                 int taskNumber = Integer.parseInt(input.split(" ", 2)[1]) - 1;
                 return new DoneCommand(taskNumber);
@@ -96,14 +102,31 @@ public class Parser {
                 } else {
                     return new FindCommand(split[1]);
                 }
+            } else if (input.startsWith("update")) {
+                assert isUpdating == false : "isUpdating boolean should be false!";
+                int taskNumber = Integer.parseInt(input.split(" ", 2)[1]) - 1;
+                isUpdating = true;
+                updateCommand = new UpdateCommand(taskNumber);
+                return updateCommand;
+            } else if (isUpdating) {
+                assert updateCommand != null; // the updateCommand cannot be null if parser is set to update
+                String[] split = input.split(" ", 2);
+                if (!split[0].equals("description") && !split[0].equals("date")) {
+                    throw new DukeException(DukeError.UPDATE);
+                } else {
+                    isUpdating = false;
+                    Command nextStage = updateCommand.nextUpdateStage(split[0], split[1]);
+                    updateCommand = null;
+                    return nextStage;
+                }
             } else { // parse task command
                 String[] split = input.split(" ", 2);
                 TaskType taskType = TaskType.valueOf(split[0].toUpperCase());
                 String taskDetails = split[1];
-                Task task = new Task();
+                Task task = null;
                 switch (taskType) {
                     case TODO:
-                        task = new ToDo("0",taskDetails);
+                        task = new ToDo("0", taskDetails);
                         break;
                     case EVENT:
                         String[] eventDetails = taskDetails.split("/at");

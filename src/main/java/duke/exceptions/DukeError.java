@@ -10,5 +10,6 @@ public enum DukeError {
     DATEFORMAT, // error in date given by the user - unable to parse
     KEYWORDS, // error when user providing keywords - too many keywords
     FILEPARSE, // error when parser is trying to read task from file
-    TASKPARSE; // error when parser is trying to read task into a string
+    TASKPARSE, // error when parser is trying to read task into a string
+    UPDATE; // error when user is trying to update - eg. gives updating date
 }

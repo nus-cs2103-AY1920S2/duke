@@ -25,7 +25,7 @@ public class Storage {
      *
      * @return ArrayList of all tasks previously stored in the hard disk.
      */
-    public ArrayList<Task> load() throws DukeException{ // load all tasks from hard disk into an ArrayList of tasks
+    public ArrayList<Task> load() throws DukeException { // load all tasks from hard disk into an ArrayList of tasks
         ArrayList<Task> lst = new ArrayList<>();
         try {
             File file = this.getFile();

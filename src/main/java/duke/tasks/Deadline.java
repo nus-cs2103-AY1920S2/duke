@@ -15,7 +15,7 @@ public class Deadline extends Task implements TimeParser {
      *
      * @param status      0 - isDone is false, 1 - isDone is true
      * @param description description of date
-     * @param date    String representation of the date
+     * @param date        String representation of the date
      * @throws DateTimeParseException
      */
     public Deadline(String status, String description, String date) throws DateTimeParseException { // constructor when parsing tasks from hard disk
@@ -30,6 +30,7 @@ public class Deadline extends Task implements TimeParser {
 
     /**
      * Method to change the date assigned to this event. Called in Parser class when user is updating the date.
+     *
      * @param update the date, represented in String, to be changed
      * @return boolean true by default
      */

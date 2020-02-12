@@ -16,7 +16,7 @@ public class Event extends Task implements TimeParser {
      *
      * @param status      0 - isDone is false, 1 - isDone is true
      * @param description description of event
-     * @param date   String representation of the event time
+     * @param date        String representation of the event time
      * @throws DateTimeParseException
      */
     public Event(String status, String description, String date) throws DateTimeParseException { // constructor for parsing tasks from hard disk
@@ -31,6 +31,7 @@ public class Event extends Task implements TimeParser {
 
     /**
      * Method to change the date assigned to this event. Called in Parser class when user is updating the date.
+     *
      * @param update the date, represented in String, to be changed
      * @return boolean true by default
      */
