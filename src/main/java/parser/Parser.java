@@ -3,6 +3,7 @@ package parser;
 import exception.InvalidFormatException;
 import exception.InvalidInstructionException;
 import tasks.TaskList;
+import ui.Ui;
 
 /**
  * Deals with making sense of the user command.
@@ -14,7 +15,7 @@ public class Parser {
      * @param tasks TaskList containing existing tasks.
      * @return String representing response.
      */
-    public String handleTaskCommand(String text, TaskList tasks) {
+    public String handleTaskCommand(String text, TaskList tasks, Ui ui) {
         String[] textArray = text.split(" ");
         String instruction = textArray[0];
         String response = "";
@@ -31,8 +32,11 @@ public class Parser {
                     || instruction.equals("deadline")
                     || instruction.equals("event"))) {
                 return tasks.addNewTask(textArray);
+            } else if (instruction.equals("help")) {
+                return ui.getHelpMessage();
             } else {
-                throw new InvalidInstructionException("You have entered invalid input.");
+                throw new InvalidInstructionException("You have entered invalid input."
+                        + "\nEnter help to all all possible commands.");
             }
         } catch (InvalidInstructionException e) {
             return e.getMessage();

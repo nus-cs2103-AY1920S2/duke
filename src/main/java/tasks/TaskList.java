@@ -80,7 +80,7 @@ public class TaskList {
         if (this.tasks.isEmpty()) {
             return (
                     isLoadedList
-                    ? "Nothing at the moment, you're all good."
+                    ? "Nothing at the moment. The sith control everything, you just don't know it."
                     : "No existing tasks has description that fits the keyword.");
         } else {
             StringBuilder sb = new StringBuilder();

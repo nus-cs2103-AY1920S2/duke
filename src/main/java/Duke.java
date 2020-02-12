@@ -33,7 +33,11 @@ public class Duke {
      * @return String to display.
      */
     public String getResponse(String input) {
-        return parser.handleTaskCommand(input, tasks);
+        if (input.equals("bye")) {
+            save();
+            return getExit() + "\nFile saved. \nType anything to close.";
+        }
+        return parser.handleTaskCommand(input, tasks, this.ui);
     }
 
     /**
@@ -53,11 +57,9 @@ public class Duke {
     }
 
     /**
-     * Saves our current tasks and inform user about it.
-     * @return String saying instructions have been saved.
+     * Saves our current tasks.
      */
-    public String save() {
+    public void save() {
         storage.save(tasks);
-        return "I have saved your instructions.\n";
     }
 }
