@@ -54,10 +54,12 @@ public class Ui {
     }
 
     public String showDeletedTask(TaskList tasks, int option) {
+        assert tasks.arr.size() > 0 : "Size of the task list cannot be 0";
         return "Noted. I've removed this task: \n  " + tasks.arr.get(option - 1) + "\nNow you have " + (tasks.arr.size() - 1) + " tasks in the list.";
     }
 
     public String showAddedTask(Task task, TaskList tasks) {
+        assert tasks.arr.size() > 0 : "Size of the task list cannot be 0";
         return "Got it. I've added this task: \n " + task + "\nNow you have " + tasks.arr.size() + " tasks in the list.";
     }
 

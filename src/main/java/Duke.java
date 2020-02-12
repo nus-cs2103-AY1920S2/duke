@@ -85,6 +85,7 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             output = ui.showIndexError();
         }
+        assert output != null: "Response message by Duke should not be null";
         return output;
     }
 
