@@ -19,7 +19,6 @@ public class Event extends Task {
     public Event(String description, LocalDate dateAt) {
         super(description);
         this.dateAt = dateAt;
-        System.out.println("\t\t" + this);
     }
 
     /**

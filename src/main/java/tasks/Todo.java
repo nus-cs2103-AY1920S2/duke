@@ -12,7 +12,6 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
-        System.out.println("\t\t" + this);
     }
 
     /**

@@ -6,6 +6,7 @@ public class UI {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String ADD = "\tGot it. I've added this task:\n";
     public static final String BYE = "\tBye. Hope to see you again soon!";
     public static final String CLEAR = "\tList cleared.";
     public static final String DONE = "\tNice! I've marked this task as done:\n\t\t";

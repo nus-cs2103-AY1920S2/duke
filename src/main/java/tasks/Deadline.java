@@ -19,7 +19,6 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate dateBy) {
         super(description);
         this.dateBy = dateBy;
-        System.out.println("\t\t" + this);
     }
 
     /**

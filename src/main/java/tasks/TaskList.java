@@ -103,11 +103,11 @@ public class TaskList {
      */
     public String printTotalTasks() {
         if (getTotalTasks() == 0) {
-            return "\tNow you have no tasks in the list.";
+            return "\n\tNow you have no tasks in the list.";
         } else if (getTotalTasks() == 1) {
-            return String.format("\tNow you have %d task in the list.", getTotalTasks());
+            return String.format("\n\tNow you have %d task in the list.", getTotalTasks());
         } else {
-            return String.format("\tNow you have %d tasks in the list.", getTotalTasks());
+            return String.format("\n\tNow you have %d tasks in the list.", getTotalTasks());
         }
     }
 

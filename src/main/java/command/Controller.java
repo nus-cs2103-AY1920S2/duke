@@ -60,8 +60,9 @@ public class Controller {
                     if (parsedInput.length < 2) {
                         throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
                     }
-                    taskList.addTask(new Todo(parsedInput[1]));
-                    return taskList.printTotalTasks();
+                    Todo newTodo = new Todo(parsedInput[1]);
+                    taskList.addTask(newTodo);
+                    return UI.ADD + "\t\t" + newTodo.toString() + taskList.printTotalTasks();
                 case "deadline":
                     if (parsedInput.length < 2) {
                         throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -71,8 +72,9 @@ public class Controller {
                     if (by.length < 2) {
                         throw new DukeException("\t☹ OOPS!!! The date of a deadline cannot be empty.");
                     }
-                    taskList.addTask(new Deadline(by[0], LocalDate.parse(by[1])));
-                    return taskList.printTotalTasks();
+                    Deadline newDeadline = new Deadline(by[0], LocalDate.parse(by[1]));
+                    taskList.addTask(newDeadline);
+                    return UI.ADD + "\t\t" + newDeadline.toString() + taskList.printTotalTasks();
                 case "event":
                     if (parsedInput.length < 2) {
                         throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
@@ -81,8 +83,9 @@ public class Controller {
                     if (at.length < 2) {
                         throw new DukeException("\t☹ OOPS!!! The date of a event cannot be empty.");
                     }
-                    taskList.addTask(new Event(at[0], LocalDate.parse(at[1])));
-                    return taskList.printTotalTasks();
+                    Event newEvent = new Event(at[0], LocalDate.parse(at[1]));
+                    taskList.addTask(newEvent);
+                    return UI.ADD + "\t\t" + newEvent.toString() + taskList.printTotalTasks();
                 default:
                     throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
