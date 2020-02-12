@@ -6,6 +6,10 @@ package duke.pack;
 public class DeleteCommand extends Command {
     protected int taskNum;
 
+    /**
+     * Creates a delete command.
+     * @param taskNum number of task to be deleted
+     */
     public DeleteCommand(int taskNum) {
         assert taskNum > 0: "task number must be 1 or more!";
         this.taskNum = taskNum;
@@ -29,6 +33,15 @@ public class DeleteCommand extends Command {
         ui.showCount(tasks);
     }
 
+
+    /**
+     * Executes delete command and gets response for the GUI
+     * @param tasks TaskList containing all the added tasks
+     * @param ui UI that handles interactions with user
+     * @param storage Storage that handles updating of tasks in hard disk
+     * @return String response for GUI
+     * @throws DukeException if tasks cannot be saved to hard disk
+     */
     public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskNum > tasks.getSize()) {
             throw new DukeException("Oh no! That task does not exist!");

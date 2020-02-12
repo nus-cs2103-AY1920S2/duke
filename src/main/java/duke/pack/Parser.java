@@ -20,127 +20,191 @@ public class Parser {
         String[] comm = command.split(" ");
 
         if (command.equals("list")) {
-            // list
-            Command c = new ListCommand();
-            return c;
+            // list command to print all the tasks
+            return new ListCommand();
 
         } else if (comm[0].equals("find")) {
-            // find
-            if (comm.length == 1) {
-                throw new DukeException("    Oh no! You have to specify what you want to find!");
-            }
-
-            Command c = new FindCommand(comm[1]);
-            return c;
+            // find command that returns tasks that match
+            return parseFind(comm);
 
         } else if (comm[0].equals("done")) {
-            // done
-            if (comm.length == 1) {
-                throw new DukeException("    Oh no! You have to specify which task is done!");
-            }
-
-            Command c = new DoneCommand(Integer.parseInt(comm[1]));
-            return c;
+            // done command to mark task as done
+            return parseDone(comm);
 
         } else if (comm[0].equals("delete")) {
-            // delete
-            if (comm.length == 1) {
-                throw new DukeException("    Oh no! You have to specify which task to delete!");
-            }
-
-            Command c = new DeleteCommand(Integer.parseInt(comm[1]));
-            return c;
+            // delete command to remove task from list
+            return parseDelete(comm);
 
         } else if (comm[0].equals("todo")) {
-            // to-do
-            // if no description is given
-            if (comm.length == 1) {
-                throw new DukeException("    Oh no! A todo cannot be empty!");
-            }
-
-            String[] arr = command.split("todo");
-            Task t = new Todo(arr[1].trim(), arr[1]);
-
-            Command c = new AddCommand(t);
-            return c;
+            // to-do command to add a to-do task
+            return parseTodo(command, comm);
 
         } else if (comm[0].equals("event")) {
-            // event
-            // if no description is given
-            if (comm.length == 1) {
-                throw new DukeException("    Oh no! An event cannot be empty!");
-            }
-
-            String[] arr = command.split("/at");
-            // if no "at" is given
-            if (arr.length == 1) {
-                throw new DukeException("    Oh no! Please include an at!");
-            }
-
-            String[] arr2 = arr[0].split("event");
-            String[] dateTime = arr[1].trim().split(" ");
-            if (dateTime.length == 1) {
-                throw new DukeException("    Oh no! Please include a time!");
-            }
-
-            String time = "";
-            time = dateTime[1].trim();
-
-            try {
-                LocalDate date = LocalDate.parse(dateTime[0].trim());
-                Task t = new Event(arr2[1].trim(), time, date, comm[1]);
-                Command c = new AddCommand(t);
-                return c;
-
-            } catch (DateTimeParseException e) {
-                throw new DukeException("    Oh no! Please follow the date format! " +
-                        "Example: 2020-01-27!");
-            }
+            // event command to add an event task
+            return parseEvent(command, comm);
 
         } else if (comm[0].equals("deadline")) {
-            // deadline
-            // if no description is given
-            if (comm.length == 1) {
-                throw new DukeException("    Oh no! A deadline cannot be empty!");
-            }
-
-            String[] arr = command.split("/by");
-            // if no "by" is given
-            if (arr.length == 1) {
-                throw new DukeException("    Oh no! You need to include by when!");
-            }
-
-            String[] arr2 = arr[0].split("deadline");
-            String[] dateTime = arr[1].trim().split(" ");
-
-            if (dateTime.length == 1) {
-                throw new DukeException("    Oh no! Please include a time!");
-            }
-
-            String time = "";
-            time = dateTime[1].trim();
-
-            try {
-                LocalDate date = LocalDate.parse(dateTime[0].trim());
-                // add to list
-                Task t = new Deadline(arr2[1].trim(), time, date, comm[1]);
-                Command c = new AddCommand(t);
-                return c;
-
-            } catch (DateTimeParseException e) {
-                throw new DukeException("    Oh no! Please follow the date format! " +
-                        "Example: 2020-01-27!");
-            }
+            // deadline command to add a deadline task
+            return parseDeadline(command, comm);
 
         } else if (command.equals("bye")) {
-            Command c = new ExitCommand();
-            return c;
+            // exit command to close programme
+            return new ExitCommand();
 
         } else {
             // invalid command
             throw new DukeException("    Oh no! I'm sorry, I do not understand that, please try again!");
         }
 
+    }
+
+    /**
+     * Interprets find command.
+     * @param comm String array of the command
+     * @return a FindCommand object
+     * @throws DukeException if no search keyword was provided
+     */
+    public static Command parseFind(String[] comm) throws DukeException {
+        if (comm.length == 1) {
+            throw new DukeException("    Oh no! You have to specify what you want to find!");
+        }
+
+        Command c = new FindCommand(comm[1]);
+        return c;
+    }
+
+    /**
+     * Interprets mark as done command.
+     * @param comm String array of command
+     * @return a DoneCommand object
+     * @throws DukeException if task number is not specified
+     */
+    public static Command parseDone(String[] comm) throws DukeException {
+        if (comm.length == 1) {
+            throw new DukeException("    Oh no! You have to specify which task is done!");
+        }
+
+        Command c = new DoneCommand(Integer.parseInt(comm[1]));
+        return c;
+    }
+
+    /**
+     * Interprets delete command.
+     * @param comm String array of command
+     * @return a DeleteCommand object
+     * @throws DukeException if task number is not specified
+     */
+    public static Command parseDelete(String[] comm) throws DukeException {
+        if (comm.length == 1) {
+            throw new DukeException("    Oh no! You have to specify which task to delete!");
+        }
+
+        Command c = new DeleteCommand(Integer.parseInt(comm[1]));
+        return c;
+    }
+
+    /**
+     * Interprets to-do command.
+     * @param fullCommand String of full command given
+     * @param comm String array of command
+     * @return an AddCommand object
+     * @throws DukeException if task description is not provided
+     */
+    public static Command parseTodo(String fullCommand, String[] comm) throws DukeException {
+        // if no description is given
+        if (comm.length == 1) {
+            throw new DukeException("    Oh no! A todo cannot be empty!");
+        }
+
+        String[] arr = fullCommand.split("todo");
+        Task t = new Todo(arr[1].trim(), arr[1]);
+
+        Command c = new AddCommand(t);
+
+        return c;
+    }
+
+    /**
+     * Interprets an event command.
+     * @param fullCommand String of full command given
+     * @param comm String array of command
+     * @return an AddCommand object
+     * @throws DukeException if task description is not provided, date and time details are not included
+     */
+    public static Command parseEvent(String fullCommand, String[] comm) throws DukeException {
+        // if no description is given
+        if (comm.length == 1) {
+            throw new DukeException("    Oh no! An event cannot be empty!");
+        }
+
+        String[] splitByAt = fullCommand.split("/at");
+        // if no "at" is given
+        if (splitByAt.length == 1) {
+            throw new DukeException("    Oh no! Please include an at!");
+        }
+        
+        String[] splitByEvent = splitByAt[0].split("event");
+        String[] dateTime = splitByAt[1].trim().split(" ");
+        if (dateTime.length == 1) {
+            throw new DukeException("    Oh no! Please include a time!");
+        }
+
+        String time = "";
+        time = dateTime[1].trim();
+
+        try {
+            LocalDate date = LocalDate.parse(dateTime[0].trim());
+            Task t = new Event(splitByEvent[1].trim(), time, date, comm[1]);
+            Command c = new AddCommand(t);
+            return c;
+
+        } catch (DateTimeParseException e) {
+            throw new DukeException("    Oh no! Please follow the date format! " +
+                    "Example: 2020-01-27!");
+        }
+    }
+
+
+    /**
+     * Interprets a deadline command.
+     * @param fullCommand String of full command given
+     * @param comm String array of command
+     * @return an AddCommand object
+     * @throws DukeException if task description is not provided, date and time details are not included
+     */
+    public static Command parseDeadline(String fullCommand, String[] comm) throws DukeException {
+        // if no description is given
+        if (comm.length == 1) {
+            throw new DukeException("    Oh no! A deadline cannot be empty!");
+        }
+
+        String[] splitByBy = fullCommand.split("/by");
+        // if no "by" is given
+        if (splitByBy.length == 1) {
+            throw new DukeException("    Oh no! You need to include by when!");
+        }
+
+        String[] splitByDeadline = splitByBy[0].split("deadline");
+        String[] dateTime = splitByBy[1].trim().split(" ");
+
+        if (dateTime.length == 1) {
+            throw new DukeException("    Oh no! Please include a time!");
+        }
+
+        String time = "";
+        time = dateTime[1].trim();
+
+        try {
+            LocalDate date = LocalDate.parse(dateTime[0].trim());
+            // add to list
+            Task t = new Deadline(splitByDeadline[1].trim(), time, date, comm[1]);
+            Command c = new AddCommand(t);
+            return c;
+
+        } catch (DateTimeParseException e) {
+            throw new DukeException("    Oh no! Please follow the date format! " +
+                    "Example: 2020-01-27!");
+        }
     }
 
 }

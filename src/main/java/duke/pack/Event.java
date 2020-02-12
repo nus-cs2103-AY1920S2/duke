@@ -10,6 +10,7 @@ public class Event extends Task {
     protected String fullDesc;
     protected String time;
     protected LocalDate date;
+    protected final String type = "E";
 
     /**
      * Creates an event type of task.
@@ -30,7 +31,6 @@ public class Event extends Task {
      */
     @Override
     public String formatForFile() {
-        String type = "E";
         String done;
         if (isDone) {
             done = "1";
