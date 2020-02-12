@@ -1,4 +1,4 @@
-package bot;
+package bot.store;
 
 import bot.loadsave.LoadAndSave;
 

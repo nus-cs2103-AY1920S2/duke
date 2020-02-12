@@ -1,6 +1,6 @@
 package bot.command.instruction.concrete;
 
-import bot.Storage;
+import bot.store.Storage;
 import bot.Ui;
 
 import bot.command.Command;

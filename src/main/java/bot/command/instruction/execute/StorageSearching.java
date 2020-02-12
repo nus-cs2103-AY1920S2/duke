@@ -1,6 +1,6 @@
 package bot.command.instruction.execute;
 
-import bot.Storage;
+import bot.store.Storage;
 import bot.Ui;
 
 /**

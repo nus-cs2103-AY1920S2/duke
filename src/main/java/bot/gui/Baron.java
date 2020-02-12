@@ -1,7 +1,7 @@
 package bot.gui;
 
 import bot.Executor;
-import bot.TaskStorage;
+import bot.store.TaskStorage;
 
 import bot.command.CommandParser;
 

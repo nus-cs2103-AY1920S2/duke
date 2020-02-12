@@ -3,7 +3,7 @@ package bot.gui;
 import java.io.IOException;
 
 import bot.Duke;
-import bot.TaskStorage;
+import bot.store.TaskStorage;
 
 import bot.command.CommandParser;
 

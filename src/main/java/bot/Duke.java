@@ -9,6 +9,7 @@ import bot.loadsave.DummyLoader;
 import bot.loadsave.LoadAndSave;
 import bot.loadsave.TasksToDisk;
 
+import bot.store.TaskStorage;
 import bot.task.Task;
 
 import bot.command.CommandParser;

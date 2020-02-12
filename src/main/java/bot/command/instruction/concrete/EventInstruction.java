@@ -1,6 +1,6 @@
 package bot.command.instruction.concrete;
 
-import bot.Storage;
+import bot.store.Storage;
 import bot.Ui;
 
 import bot.command.Command;
@@ -9,8 +9,6 @@ import bot.command.instruction.parse.AddTaskInstruction;
 
 import bot.task.Event;
 import bot.task.Task;
-
-import java.util.ArrayList;
 
 public class EventInstruction extends AddTaskInstruction
         implements StorageWriting<Task> {
