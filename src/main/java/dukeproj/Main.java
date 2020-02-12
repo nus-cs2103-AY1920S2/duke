@@ -2,6 +2,7 @@ package dukeproj;
 
 import java.io.IOException;
 
+import dukeproj.enums.SayType;
 import dukeproj.gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +25,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().displayDukeResponse(duke.getUi().say(SayType.INTRO));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
