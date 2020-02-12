@@ -26,12 +26,15 @@ public class Parser {
 
 
     public Parser(TaskList tasklist) {
+        assert tasklist != null : "Tasklist is null";
+
         this.tasklist = tasklist;
         this.sc = new Scanner(System.in);
         this.ui = new Ui();
     }
     public String parseCommands(String str) throws Exception {
-        //assert
+        assert str != null : "String for parsing commands is null";
+
         String reply = ui.lineBarrier();
 
         if (str.equals("bye")) {
