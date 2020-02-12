@@ -36,7 +36,7 @@ public class Command {
 class AddTaskCommand extends Command {
     private String first;
 
-    public AddTaskCommand(String first, Scanner sc) {
+    AddTaskCommand(String first, Scanner sc) {
         super(sc);
         this.first = first;
     }
@@ -77,7 +77,7 @@ class AddTaskCommand extends Command {
 }
 
 class ListCommand extends Command {
-    public ListCommand(Scanner sc) {
+    ListCommand(Scanner sc) {
         super(sc);
     }
 
@@ -97,7 +97,7 @@ class ListCommand extends Command {
 }
 
 class FindCommand extends Command {
-    public FindCommand(Scanner sc) {
+    FindCommand(Scanner sc) {
         super(sc);
     }
 
@@ -117,7 +117,7 @@ class FindCommand extends Command {
 }
 
 class DeleteCommand extends Command {
-    public DeleteCommand(Scanner sc) {
+    DeleteCommand(Scanner sc) {
         super(sc);
     }
 
@@ -137,7 +137,7 @@ class DeleteCommand extends Command {
 }
 
 class MarkAsDoneCommand extends Command {
-    public MarkAsDoneCommand(Scanner sc) {
+    MarkAsDoneCommand(Scanner sc) {
         super(sc);
     }
 
@@ -157,7 +157,7 @@ class MarkAsDoneCommand extends Command {
 }
 
 class ExitCommand extends Command {
-    public ExitCommand(Scanner sc) {
+    ExitCommand(Scanner sc) {
         super(sc);
     }
 

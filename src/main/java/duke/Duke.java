@@ -102,7 +102,7 @@ public class Duke extends Application {
             this.ui = new Gui(this.dialogContainer, this.userInput);
             if(this.ui.hasNextLine()) {
                 Command cmd = Parser.parse(this.ui.nextLine());
-                cmd.execute(this.tasks, this.ui = new Gui(this.dialogContainer, this.userInput), this.storage);
+                cmd.execute(this.tasks, this.ui, this.storage);
                 this.ui.clearUserInput();
             }
         } catch (Exception e) {
@@ -115,7 +115,7 @@ public class Duke extends Application {
         this.ui = new Gui(this.dialogContainer, this.userInput);
         if(this.ui.hasNextLine()) {
             Command cmd = Parser.parse(this.ui.nextLine());
-            cmd.execute(this.tasks, this.ui = new Gui(this.dialogContainer, this.userInput), this.storage);
+            cmd.execute(this.tasks, this.ui, this.storage);
             this.ui.clearUserInput();
         }
     }
