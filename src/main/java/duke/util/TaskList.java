@@ -10,10 +10,11 @@ import java.util.Scanner;
 public class TaskList {
 
     /**
-     * Mark task at pos in storedItems as Done
+     * Mark task at pos in storedItems as Done.
      * @param pos
      * @param storedItems
      * @throws OutOfBoundMarkingRequestException
+     * @return Ui String of marking task job.
      */
     public static String markItemAsDone(int pos, ArrayList<Task> storedItems) throws OutOfBoundMarkingRequestException {
         if (pos >= storedItems.size() || pos < 0)
@@ -24,10 +25,11 @@ public class TaskList {
     }
 
     /**
-     * Delete task at pos in storedItems
+     * Delete task at pos in storedItems.
      * @param pos
      * @param storedItems
      * @throws OutOfBoundMarkingRequestException
+     * @return Ui String of deletion job.
      */
     public static String deleteItem(int pos, ArrayList<Task> storedItems) throws OutOfBoundMarkingRequestException {
         if (pos >= storedItems.size() || pos < 0)
@@ -38,10 +40,11 @@ public class TaskList {
     }
 
     /**
-     * Search for tasks whose names contain the given sequence
-     * Print them to the screen by calling Ui method
+     * Search for tasks whose names contain the given sequence.
+     * Print them to the screen by calling Ui method.
      * @param str
      * @param storedItems
+     * @return Ui String of found tasks.
      */
     public static String findItem(String str, ArrayList<Task> storedItems) {
         ArrayList<Task> foundList = new ArrayList<>();

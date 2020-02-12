@@ -16,13 +16,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static final String BOT_NAME = "Duke";
     public static final String LIST_COMMAND = "list";
     public static final String BYE_COMMAND = "bye";
 
     private static String PADDING = "";
     private String USELESS_LINE = "-------------------------------------------------------------------------------------";
-    private String ADDED_PHRASE = "added: ";
     private ArrayList<Task> storedItems;
     private Storage storage;
     private Parser parser;

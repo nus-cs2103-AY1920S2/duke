@@ -5,12 +5,9 @@ import java.util.ArrayList;
 
 public class Ui {
     public static final String BOT_NAME = "Duke";
-    public static final String LIST_COMMAND = "list";
-    public static final String BYE_COMMAND = "bye";
 
     private static String PADDING = "       ";
     private static String USELESS_LINE = "-------------------------------------------------------------------------------------";
-    private static String ADDED_PHRASE = "added: ";
 
     /**
      * Print the greeting lines to the screen.
