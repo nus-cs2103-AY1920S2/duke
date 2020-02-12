@@ -36,7 +36,7 @@ public class TaskList {
      * @return response message to be printed to the user
      */
     public String done(int doneIndex) {
-        assert(doneIndex >= 0 && doneIndex < tasks.size());
+        assert doneIndex >= 0 && doneIndex < tasks.size() : "done task index out of bounds";
         tasks.get(doneIndex).markAsDone();
         String responseMessage = "";
         responseMessage += "Nice! I've marked this task as done: \n";
@@ -51,7 +51,7 @@ public class TaskList {
      * @return response message to be printed to the user
      */
     public String delete(int deleteIndex) {
-        assert(deleteIndex >= 0 && deleteIndex < tasks.size());
+        assert deleteIndex >= 0 && deleteIndex < tasks.size() : "delete task index out of bounds";
         // deleteIndex is 0-indexed
         String responseMessage = "";
         responseMessage += "Noted. I've removed this task:\n";
