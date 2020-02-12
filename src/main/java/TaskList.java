@@ -21,6 +21,8 @@ public class TaskList {
     }
 
     public int getLatest_index() {
+
+        assert latest_index < Integer.MAX_VALUE : "Too many tasks!";
         return latest_index;
     }
 
@@ -40,6 +42,8 @@ public class TaskList {
      * @param input the input, normally a number, that is entered
      */
     public String delete(String input) {
+        assert input != null : "Delete command input is empty!";
+
         sb = new StringBuilder();
         input = input.replace("delete","");
         input = input.trim();
@@ -83,6 +87,7 @@ public class TaskList {
      * @param input the description of the todo task that is inputted by the user
      */
     public String todo(String input) {
+        assert input != null : "Todo command input is empty!";
 
         int repeat = checkRepeats(input,"todo");
 
@@ -93,7 +98,7 @@ public class TaskList {
         input = input.trim();
 
         if (checkEmpty(input)) {
-            return "";
+            return ui.emptyCmd();
         }
         Todo todo = new Todo(input, ++latest_index);
         list.add(todo);
@@ -110,6 +115,8 @@ public class TaskList {
      * @param input the description of the task that is inputted by the user
      */
     public String done(String input) {
+        assert input != null : "Done command input is empty!";
+
         input = input.replace("done","");
         input = input.trim();
         try {
@@ -142,6 +149,7 @@ public class TaskList {
      * @param input the description of the deadline task that is inputted by the user
      */
     public String deadline(String input) {
+        assert input != null : "Deadline command input is empty!";
 
         int repeat = checkRepeats(input,"/by");
 
@@ -156,7 +164,7 @@ public class TaskList {
 
         try {
             if (checkEmpty(strings[0])) {
-                return "";
+                return ui.emptyCmd();
             }
 
             Deadline deadline = new Deadline(strings[0], strings[1],++latest_index);
@@ -183,6 +191,8 @@ public class TaskList {
      * @param desc a string of the Description of the task the user wants to find
      */
     public String find(String desc) {
+        assert input != null : "Find command input is empty!";
+
         desc = desc.replace("find","");
         desc = desc.trim();
         boolean at_least_one = false;
@@ -215,6 +225,7 @@ public class TaskList {
      * @param input the description of the task that is inputted by the user
      */
     public String event(String input) {
+        assert input != null : "Event command input is empty!";
 
         int repeat = checkRepeats(input,"/at");
 
@@ -229,7 +240,7 @@ public class TaskList {
 
         try {
             if (checkEmpty(strings[0])) {
-                return "";
+                return ui.emptyCmd();
             }
 
             Event event = new Event(strings[0],strings[1],++latest_index);
@@ -255,6 +266,8 @@ public class TaskList {
      * @param repeat string that is checked for repeats
      */
     public int checkRepeats(String input, String repeat) {
+        assert input != null : "checkRepeats input string is empty!";
+        assert repeat != null : "checkRepeats repeat string is empty!";
 
         int count = 0;
         String[] strings = input.split(" ");
@@ -263,6 +276,7 @@ public class TaskList {
                 count++;
             }
         }
+        assert count < Integer.MAX_VALUE : "Too many repeats!";
         return count;
     }
 
@@ -274,9 +288,9 @@ public class TaskList {
      * @return boolean value whether it is empty
      */
     public boolean checkEmpty(String cmd) {
+        assert input != null : "checkEmpty input is empty!";
 
         if (cmd.isEmpty()) {
-            System.out.println(ui.emptyCmd());
             return true;
         }
         return false;
