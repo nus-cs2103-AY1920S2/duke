@@ -2,10 +2,10 @@ package model;
 
 import exceptions.NoDescriptionException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.time.LocalDateTime;
-
 
 /**
  * Represents an event task in the inner-task list.
@@ -63,6 +63,11 @@ public class EventTask extends Task {
     @Override
     public String getTaskType() {
         return TASK_TYPE_CHA;
+    }
+
+    @Override
+    public boolean isOnDate(LocalDate targetDate) {
+        return at.toLocalDate().equals(targetDate);
     }
 
     /**

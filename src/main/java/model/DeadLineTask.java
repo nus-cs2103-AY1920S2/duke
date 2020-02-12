@@ -1,6 +1,8 @@
 package model;
 
 import exceptions.NoDescriptionException;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,6 +63,11 @@ public class DeadLineTask extends Task {
         return new ArrayList<String>(Arrays.asList(
                 this.description,
                 this.by.format(DATE_TIME_FORMAT)));
+    }
+
+    @Override
+    public boolean isOnDate(LocalDate targetDate) {
+        return by.toLocalDate().equals(targetDate);
     }
 
     /**

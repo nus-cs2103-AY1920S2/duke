@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,6 +19,7 @@ public class TaskList implements Iterable<Task> {
     private static final String ECHO_VIEW_TASK_LIST = "Here are the tasks in your list:\n";
     private static final String ECHO_COMPLETE_TASK = "Nice! I've marked this task as done:\n";
     private static final String ECHO_FIND_TASK = "Here are the matching tasks in your list:\n";
+    private static final String ECHO_VIEW_SCHEDULE = "Here are the tasks on Date:";
 
     public TaskList() {
 
@@ -105,6 +108,29 @@ public class TaskList implements Iterable<Task> {
             }
         }
         return matchedTasks.toString();
+    }
+
+    public String findTasksOnDate(LocalDate targetDate) {
+        StringBuilder tasksOnDate = new StringBuilder();
+        tasksOnDate.append(ECHO_VIEW_SCHEDULE);
+        tasksOnDate.append(" ");
+        tasksOnDate.append(targetDate);
+        tasksOnDate.append(":\n");
+
+        for (int i = 0; i < this.internalList.size(); i++) {
+            if (this.internalList.get(i) == null) {
+                continue;
+            }
+            Task currentTask = this.internalList.get(i);
+
+            if (currentTask.isOnDate(targetDate)) {
+                tasksOnDate.append(Integer.toString(i + 1));
+                tasksOnDate.append(".");
+                tasksOnDate.append(currentTask.toString());
+                tasksOnDate.append("\n");
+            }
+        }
+        return tasksOnDate.toString();
     }
 
     /**

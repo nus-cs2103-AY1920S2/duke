@@ -2,6 +2,8 @@ package model;
 
 import exceptions.NoDescriptionException;
 
+import java.time.LocalDate;
+
 /**
  * Represents an todo task in the inner-task list.
  */
@@ -41,6 +43,11 @@ public class ToDoTask extends Task {
     @Override
     public String getTaskType() {
         return TASK_TYPE_CHA;
+    }
+
+    @Override
+    public boolean isOnDate(LocalDate targetDate) {
+        return false;
     }
 
     /**
