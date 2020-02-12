@@ -52,26 +52,26 @@ public class DateTimeParser {
             return Optional.of(LocalDate.now().atTime(17, 0));
         case "tonight":
             return Optional.of(LocalDate.now().atTime(21, 0));
+        case "tmr":
+            // Fallthrough
         case "tomorrow":
             return Optional.of(LocalDate.now().plusDays(1).atTime(17, 0));
-        case "monday":
-            // Fallthrough
-        case "tuesday":
-            // Fallthrough
-        case "wednesday":
-            // Fallthrough
-        case "thursday":
-            // Fallthrough
-        case "friday":
-            // Fallthrough
-        case "saturday":
-            // Fallthrough
-        case "sunday":
-            return Optional.of(LocalDate.now()
-                    .with(TemporalAdjusters.next(DayOfWeek.valueOf(dateTimeString.toUpperCase()))).atTime(17, 0));
         default:
-            return Optional.empty();
+            try {
+                return Optional.of(LocalDate.now()
+                        .with(TemporalAdjusters.next(DayOfWeek.valueOf(
+                                extendDayOfWeek(dateTimeString).toUpperCase()))).atTime(17, 0));
+            } catch (IllegalArgumentException e) {
+                return Optional.empty();
+            }
         }
+    }
+
+    private static String extendDayOfWeek(String dateTimeString) {
+        if (dateTimeString.toLowerCase().endsWith("day")) {
+            return dateTimeString;
+        }
+        return dateTimeString + "day";
     }
 
     private static Optional<LocalDateTime> getDateTimeUsingDateTimePattern(String dateTimeString) {
