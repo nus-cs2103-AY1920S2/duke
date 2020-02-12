@@ -14,7 +14,7 @@
 
 # Usage
 
-## `todo` - Adds a To-Do task.
+## 1. `todo` - Adds a To-Do task.
 
 Adds a To-Do task into the task list.
 
@@ -28,7 +28,7 @@ Expected outcome:
 `Number of items in the list: 1`  
 
 
-## `event` - Adds an Event task.
+## 2. `event` - Adds an Event task.
 
 Adds an Event task into the task list.
 
@@ -46,7 +46,7 @@ Expected outcome:
 `Number of items in the list: 2`  
 
 
-## `deadline` - Adds a Deadline task.
+## 3. `deadline` - Adds a Deadline task.
 
 Adds a Deadline task into the task list.
 
@@ -65,7 +65,7 @@ Expected outcome:
 `Number of items in the list: 3`
   
 
-## `list` - Lists all tasks.
+## 4. `list` - Lists all tasks.
 
 Lists all tasks in the task list.
 
@@ -83,7 +83,7 @@ Expected outcome:
 `3.[D] Individual Project 0 (by: Feb 27 2020)`  
 
 
-## `delete` - Deletes a task.
+## 5. `delete` - Deletes a task.
 
 Deletes one of the tasks in the task list.  
 
@@ -99,7 +99,7 @@ Expected outcome:
 `Number of items in list: 2`  
 
   
-## `done` - Marks a task as done.
+## 6. `done` - Marks a task as done.
 
 Marks one of the tasks in the task list as done.  
 
@@ -115,7 +115,7 @@ Expected outcome:
 `[T] CS2103 Assignment 1`
 
 
-## `find` - Find related tasks.
+## 7. `find` - Find related tasks.
 
 Find all tasks related to the keyword provided by the user.  
 
@@ -131,8 +131,8 @@ Expected outcome:
 `These items are in your list:`  
 `1.[T] CS2103 Assignment 1`
 
-
-## `snooze` - Snooze/postpone a task.
+## 8. Snooze
+`snooze` - Snooze/postpone a task.
 
 Postpone a task by a set number of days. 
 
