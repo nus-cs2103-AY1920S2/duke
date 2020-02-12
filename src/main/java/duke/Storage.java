@@ -53,6 +53,7 @@ public class Storage {
                             LocalDateTime.parse(details[3])));
                     break;
                 default:
+                    assert false : "Invalid save file format.";
                     continue;
                 }
             }
