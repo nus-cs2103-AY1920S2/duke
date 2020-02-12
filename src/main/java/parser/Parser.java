@@ -18,13 +18,19 @@ public class Parser {
 
     private static final String DEFAULT_TIME = "23:59";
     private static final String EXIT_KEY = "bye";
-    private static final String  VIEW_LIST_KEY = "list";
-    private static final String DELETE_KEY = "(delete)(\\s+)(\\d+)";
-    private static final String FINISH_KEY = "(done)(\\s+)(\\d+)";
+    private static final String VIEW_LIST_KEY = "list";
+    private static final String DELETE_KEY = "(delete)\\s*(\\d+)";
+    private static final String FINISH_KEY = "(done)\\s*(\\d+)";
     private static final String TODO_KEY = "(todo)(.*)";
     private static final String DEADLINE_KEY = "(deadline)\\s*(\\S*)\\s*/by\\s*" + DATE_TIME_KEY;
     private static final String EVENT_KEY = "(event)\\s*(\\S*)\\s*/at\\s*" + DATE_TIME_KEY;
-    private static final String FIND_KEY = "(find)\\s*(\\S*)";
+    private static final String FIND_KEY = "(find)\\s*(\\S+)";
+
+    private static final int POSITION_TARGET_INDEX = 2;
+    private static final int POSITION_DESCRIPTION = 2;
+    private static final int POSITION_KEYWORD = 2;
+    private static final int POSITION_DATE = 3;
+    private static final int POSITION_TIME = 4;
 
     private static final Pattern DELETE_PATTERN = Pattern.compile(DELETE_KEY);
     private static final Pattern FINISH_PATTERN = Pattern.compile(FINISH_KEY);
@@ -32,6 +38,10 @@ public class Parser {
     private static final Pattern DEADLINE_PATTERN = Pattern.compile(DEADLINE_KEY);
     private static final Pattern EVENT_PATTERN = Pattern.compile(EVENT_KEY);
     private static final Pattern FIND_PATTERN = Pattern.compile(FIND_KEY);
+
+    /*Handle the difference that java list start from index 0 will human readable list
+      starts from 1.*/
+    private static final int DIFFERENCE_IN_START_INDEX = 1;
 
     /**
      * static method converts string to date time object.
@@ -42,17 +52,14 @@ public class Parser {
      */
     public static LocalDateTime parseDateTime(String dateString, String timeString) throws
             IllegalDateTimeFormatException {
-        //TODO: add a notification
         try {
             LocalDate date = LocalDate.parse(dateString);
             LocalTime time = LocalTime.parse(timeString == null ? DEFAULT_TIME : timeString);
             return date.atTime(time);
         } catch (DateTimeParseException dte) {
-
-            //TODO: change the error message
             throw new IllegalDateTimeFormatException(dte.getMessage() + '\n');
         } catch (NullPointerException npe) {
-            throw new IllegalDateTimeFormatException("No date time string being inputted.\n");
+            throw new IllegalDateTimeFormatException("Oops!!! The date string is missing!\n");
         }
     }
 
@@ -65,7 +72,9 @@ public class Parser {
     private int findIndex(Pattern pattern, String input) {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
-        return Integer.parseInt(matcher.group(3)) - 1;
+
+        String index = matcher.group(POSITION_TARGET_INDEX);
+        return Integer.parseInt(index) - DIFFERENCE_IN_START_INDEX;
     }
 
     /**
@@ -77,7 +86,8 @@ public class Parser {
     private String findDescription(Pattern pattern, String input) {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
-        return matcher.group(2).trim();
+
+        return matcher.group(POSITION_DESCRIPTION).trim();
     }
 
     /**
@@ -90,8 +100,8 @@ public class Parser {
     private LocalDateTime findDateTime(Pattern pattern, String input) throws IllegalDateTimeFormatException {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
-        String dateString = matcher.group(3);
-        String timeString = matcher.group(4);
+        String dateString = matcher.group(POSITION_DATE);
+        String timeString = matcher.group(POSITION_TIME);
 
         return parseDateTime(dateString, timeString);
     }
@@ -103,7 +113,8 @@ public class Parser {
     private String findKeyword(Pattern pattern, String input) {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
-        return matcher.group(2);
+
+        return matcher.group(POSITION_KEYWORD);
     }
 
     private static boolean isViewListKey(String input) {
@@ -178,7 +189,4 @@ public class Parser {
             throw new NoCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
     }
-
-
-
 }

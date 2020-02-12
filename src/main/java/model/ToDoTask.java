@@ -6,8 +6,9 @@ import exceptions.NoDescriptionException;
  * Represents an todo task in the inner-task list.
  */
 public class ToDoTask extends Task {
+    public static final String TASK_TYPE_CHA = "T";
+
     private static final String TASK_TYPE_STRING = "todo task";
-    private static final String TASK_TYPE_CHA = "T";
 
     public ToDoTask() {
 
@@ -20,6 +21,16 @@ public class ToDoTask extends Task {
      */
     public ToDoTask(String description) throws NoDescriptionException {
         super(description, TASK_TYPE_STRING);
+    }
+
+    /**
+     * Constructs an {@code ToDoTask} with input description and isDone status.
+     * @param description A not empty description.
+     * @param isDone A boolean indicating whether the task is done.
+     * @throws NoDescriptionException if the description is empty.
+     */
+    public ToDoTask(String description, boolean isDone) throws NoDescriptionException {
+        super(description, TASK_TYPE_STRING, isDone);
     }
 
     /**

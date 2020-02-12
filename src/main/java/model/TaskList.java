@@ -16,7 +16,7 @@ public class TaskList implements Iterable<Task> {
     private static final String ECHO_DELETE_TASK = "Noted. I have removed this task:\n";
     private static final String ECHO_VIEW_TASK_LIST = "Here are the tasks in your list:\n";
     private static final String ECHO_COMPLETE_TASK = "Nice! I've marked this task as done:\n";
-    private final String ECHO_FIND_TASK = "Here are the matching tasks in your list:\n";
+    private static final String ECHO_FIND_TASK = "Here are the matching tasks in your list:\n";
 
     public TaskList() {
 
@@ -113,18 +113,17 @@ public class TaskList implements Iterable<Task> {
      * @return string representation of the task list.
      */
     public String toString() {
-        String listOverView = ECHO_VIEW_TASK_LIST;
+        StringBuilder listOverView = new StringBuilder(ECHO_VIEW_TASK_LIST);
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
                 continue;
             }
-            listOverView = listOverView
-                    + Integer.toString(i + 1)
-                    + "."
-                    + this.internalList.get(i).toString()
-                    + "\n";
+            listOverView.append(Integer.toString(i + 1));
+            listOverView.append(".");
+            listOverView.append(this.internalList.get(i).toString());
+            listOverView.append("\n");
         }
-        return listOverView;
+        return listOverView.toString();
     }
 
     /**

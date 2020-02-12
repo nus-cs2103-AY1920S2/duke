@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
  * Represents an event task in the inner-task list.
  */
 public class EventTask extends Task {
+    public static final String TASK_TYPE_CHA = "E";
+
     private static final String TASK_TYPE_STRING = "event task";
-    private static final String TASK_TYPE_CHA = "E";
 
     private LocalDateTime at;
 
@@ -28,6 +29,18 @@ public class EventTask extends Task {
      */
     public EventTask(String description, LocalDateTime at) throws NoDescriptionException {
         super(description, TASK_TYPE_STRING);
+        this.at = at;
+    }
+
+    /**
+     * Constructs an {@code EventTask} with description, dateTime, and isDone status.
+     * @param description A not empty description.
+     * @param at A valid datetime object.
+     * @param isDone A boolean indicating whether the task is done.
+     * @throws NoDescriptionException if the description is empty.
+     */
+    public EventTask(String description, LocalDateTime at, boolean isDone) throws NoDescriptionException {
+        super(description, TASK_TYPE_STRING, isDone);
         this.at = at;
     }
 
