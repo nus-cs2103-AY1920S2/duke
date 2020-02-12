@@ -18,7 +18,8 @@ public class Ui {
     private static final String HELP_MESSAGE = "Available commands are :\n"
             + "todo (task description)\n" + "event (task description) /at (place)\n"
             + "deadline (task description) /by (date: yyyy-MM-dd HH:mm)\n"
-            + "list\n" + "done (number as shown in list)\n" + "delete (number as shown in list)";
+            + "list\n" + "done (number as shown in list)\n" + "delete (number as shown in list)"
+            + "undo";
 
     private final Scanner in;
 

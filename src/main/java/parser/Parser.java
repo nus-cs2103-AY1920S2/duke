@@ -2,8 +2,11 @@ package parser;
 
 import exception.InvalidFormatException;
 import exception.InvalidInstructionException;
+import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
+
+import java.util.Stack;
 
 /**
  * Deals with making sense of the user command.
@@ -15,25 +18,39 @@ public class Parser {
      * @param tasks TaskList containing existing tasks.
      * @return String representing response.
      */
+
+    private Stack<String> commands = new Stack<>();
+
     public String handleTaskCommand(String text, TaskList tasks, Ui ui) {
         String[] textArray = text.split(" ");
         String instruction = textArray[0];
         String response = "";
         try {
             if (instruction.equals("list")) {
-                return tasks.getTasksAsString();
+                response =  tasks.getTasksAsString();
+            } else if (instruction.equals("undo")) {
+                if (commands.empty()) {
+                    throw new InvalidInstructionException("Nothing to undo");
+                }
+                response = handleUndo(commands.pop(), tasks);
             } else if (instruction.equals("done")) {
-                return tasks.setDone(textArray[1]);
+                commands.push(text);
+                response = tasks.setDone(textArray[1]);
             } else if (instruction.equals("delete")) {
-                return tasks.deleteTask(textArray[1]);
+                commands.push(text);
+                response = tasks.deleteTask(textArray[1]);
             } else if (instruction.equals("find")) {
-                tasks.getListOfMatch(textArray[1]).getTasksAsString();
+                if (textArray.length <= 1) {
+                    throw new InvalidFormatException("Find nothing? Get nothing");
+                }
+                response = tasks.getListOfMatch(textArray[1]).getTasksAsString();
             } else if ((instruction.equals("todo")
                     || instruction.equals("deadline")
                     || instruction.equals("event"))) {
-                return tasks.addNewTask(textArray);
+                commands.push(text);
+                response = tasks.addNewTask(textArray);
             } else if (instruction.equals("help")) {
-                return ui.getHelpMessage();
+                response =  ui.getHelpMessage();
             } else {
                 throw new InvalidInstructionException("You have entered invalid input."
                         + "\nEnter help to all all possible commands.");
@@ -45,5 +62,18 @@ public class Parser {
         }
         assert !response.equals("") : "you should have a proper response by now";
         return response;
+    }
+
+    private String handleUndo(String text, TaskList tasks) {
+        String[] textArray = text.split(" ");
+        String instruction = textArray[0];
+        switch (instruction) {
+            case "done":
+                return tasks.setNotDone(textArray[1]);
+            case "delete":
+                return tasks.undoDelete();
+            default:
+                return tasks.deleteTask(String.valueOf(tasks.getTaskCount()));
+        }
     }
 }

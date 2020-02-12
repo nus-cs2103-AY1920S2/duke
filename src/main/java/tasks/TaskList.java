@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * A data structure serving Duke by storing a list of tasks.
@@ -15,6 +16,7 @@ import java.util.List;
 public class TaskList {
     private List<Task> tasks;
     private boolean isLoadedList;
+    private Stack<Task> deletedTasks = new Stack<>();
 
     /**
      * Constructor to create TaskList if we have a set of tasks for it.
@@ -57,6 +59,12 @@ public class TaskList {
         }
     }
 
+    public String setNotDone(String num) {
+        Task completedTask = this.tasks.get(Integer.parseInt(num) - 1);
+        completedTask.isDone = false;
+        return "You need to do this again:\n" + completedTask;
+    }
+
     /**
      * Removes an existing task from our list.
      * @param num Position of a task in the list.
@@ -65,10 +73,17 @@ public class TaskList {
     public String deleteTask(String num) {
         try {
             Task deletedTask = this.tasks.remove(Integer.parseInt(num) - 1);
+            deletedTasks.push(deletedTask);
             return "Deleted:\n" + deletedTask + "\nYou now have " + getTaskCount() + " tasks in the list";
         } catch (Exception e) {
             throw new InvalidFormatException("Enter \"delete number\", make sure number exists in list!");
         }
+    }
+
+    public String undoDelete() {
+        Task restoredTask = deletedTasks.pop();
+        tasks.add(restoredTask);
+        return "I have restored:\n" + restoredTask;
     }
 
     /**
