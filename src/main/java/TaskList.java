@@ -88,6 +88,7 @@ public class TaskList {
             if (taskNum <= this.size) {
                 Task deletedTask = this.taskList.get(taskNum - 1);
                 String status = deletedTask.getStatus();
+                assert status.equals("Done") || status.equals("Not Done") : "Only Done or Not Done";
                 if (status.equals("Not Done")) {
                     //Pending task count drops only if deleted task not completed
                     Duke.pendingTask--;
@@ -203,5 +204,14 @@ public class TaskList {
             output += taskList.get(i) + " ";
         }
         return output;
+    }
+
+    public int size() {
+        int count = 0;
+        for (int i = 0; i< taskList.size(); i++) {
+            count++;
+        }
+        assert count == taskList.size() : "count represents size of taskList";
+        return count;
     }
 }

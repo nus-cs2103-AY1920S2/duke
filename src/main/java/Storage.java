@@ -42,6 +42,7 @@ public class Storage {
             String loadTask = br.readLine();
             while (loadTask != null) {
                 String type = loadTask.substring(0, 1);
+                assert type.equals("T") || type.equals("E") || type.equals("D") : "Has to be a certain type of task";
                 int indexOfDescription = loadTask.indexOf("||");
                 switch (type) {
                     case "T":

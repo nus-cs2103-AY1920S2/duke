@@ -31,6 +31,7 @@ public class Parser {
         } else if (input.contains("done")) {
             try {
                 int taskNum = Integer.parseInt(input.substring(5));
+                assert taskNum <= taskList.size() : "Task number cannot be larger than list size";
                 return taskList.done(taskNum);
             } catch (Exception e) {
                 return "Please state a task number:)";
@@ -39,6 +40,7 @@ public class Parser {
             //Delete task
             try {
                 int taskNum = Integer.parseInt(input.substring(7));
+                assert taskNum <= taskList.size() : "Task number cannot be larger than list size";
                 return taskList.delete(taskNum);
             } catch (Exception e) {
                 return "Please state a proper delete command:(";

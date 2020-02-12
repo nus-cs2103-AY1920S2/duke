@@ -36,6 +36,7 @@ public class Task {
      * @return whether the task is "Done" or "Not Done"
      */
     public String getStatus() {
+        assert this.status == "Done" || this.status == "Not Done" : "Only 2 types of status";
         return this.status;
     }
 
