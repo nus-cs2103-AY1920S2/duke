@@ -12,6 +12,8 @@ import dukeproj.exception.InvalidCommandException;
 
 import javafx.application.Application;
 
+import java.io.File;
+
 /**
  * Represents the main working class of DukeProject.
  */
@@ -75,10 +77,10 @@ public class Duke {
      *
      * @param filepath Filepath of the Duke storage.
      */
-    public Duke(String filepath) {
+    public Duke() {
         ui = new Ui();
         schedule = new Schedule();
-        storage = new Storage(filepath);
+        storage = new Storage("." + File.separator + "data" + File.separator + "Task.txt");
         taskList = new TaskList(storage.printFileIntoList(schedule));
         parser = new Parser();
     }
@@ -90,6 +92,6 @@ public class Duke {
      * @param args Inputs by user on the CLI.
      */
     public static void main(String[] args) {
-        Application.launch(GuiApp.class, args);
+        Application.launch(Main.class, args);
     }
 }

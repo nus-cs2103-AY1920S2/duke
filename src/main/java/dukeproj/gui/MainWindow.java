@@ -8,17 +8,16 @@ import dukeproj.exception.InvalidCommandException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow {
+public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -48,11 +47,7 @@ public class MainWindow {
      * @param str String to be echoed into the GUI by Duke.
      */
     public void displayDukeResponse(String str) {
-        Label text = new Label(str);
-
-        text.setWrapText(true);
-
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(text, new ImageView(dukeIm)));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(str, dukeImage));
     }
 
     /**
@@ -66,14 +61,12 @@ public class MainWindow {
         Command command = getDukeCommand(dukeResponse);
         assert dukeResponse.length() > 0 : "Duke response cannot be empty";
         //set up labels for user and duke
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(dukeResponse.toString());
-        userText.setWrapText(true);
-        dukeText.setWrapText(true);
-        //add labels into dialog container
+        String userText = userInput.getText();
+        String dukeText = dukeResponse.toString();
+        //add input and response into dialog container
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(userIm)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(dukeIm))
+                DialogBox.getUserDialog(userText, userImage),
+                DialogBox.getDukeDialog(dukeText, dukeImage)
         );
         if (command.isExit()) {
             closeApp();
