@@ -11,10 +11,12 @@ public class Parser {
 
     /**
      * Gets the type of command aka what the user wants like add or delete tasks.
+     *
      * @param command The user command.
      * @return The type of the command.
      */
     public static String getCommandType(String command) {
+        // Split the string based on first space in command, first part is command type
         String[] splitted = command.split(" ", 2);
         return splitted[0];
     }
@@ -27,7 +29,8 @@ public class Parser {
      * @throws DukeMissingDescriptionException When there is no task number given.
      * @thows DukeUnknownInputException When what user gives is not a number.
      */
-    public static int markDoneNum(String command) {
+    public static int getMarkDoneNum(String command) throws DukeUnknownInputException {
+        // Check if command is longer than "Done "
         if (command.length() <= 5) {
             throw new DukeMissingDescriptionException("Task number missing.");
         }
@@ -46,7 +49,8 @@ public class Parser {
      * @return The description of the To Do task.
      * @throws DukeMissingDescriptionException If there is no description given.
      */
-    public static String todoDescription(String command) {
+    public static String getTodoDescription(String command) throws DukeMissingDescriptionException {
+        // Check if command is longer than "Todo "
         if (command.length() <= 5) {
             throw new DukeMissingDescriptionException("Todo description missing.");
         }
@@ -61,10 +65,13 @@ public class Parser {
      * @throws DukeMissingDescriptionException When no description of deadline is given by user.
      * @throws DukeUnknownInputException When /by is missing in command.
      */
-    public static String[] deadlineParams(String command) {
+    public static String[] getDeadlineParams(String command)
+            throws DukeMissingDescriptionException, DukeUnknownInputException {
+        // Check if command is longer than "Deadline "
         if (command.length() <= 9) {
             throw new DukeMissingDescriptionException("Deadline description and time missing.");
         }
+        // Split the command with the first /by. The 2nd part should be when the deadline is
         String[] splitted = command.substring(9).split(" /by ", 2);
         if (splitted.length < 2) {
             throw new DukeUnknownInputException("Need give/format deadline <description> /by <time>.");
@@ -90,10 +97,13 @@ public class Parser {
      * @throws DukeMissingDescriptionException When no description of event is given by user.
      * @throws DukeUnknownInputException When /at is missing in command.
      */
-    public static String[] eventParams(String command) {
+    public static String[] getEventParams(String command)
+            throws DukeMissingDescriptionException, DukeUnknownInputException {
+        // Check if command is longer than "Event "
         if (command.length() <= 6) {
             throw new DukeMissingDescriptionException("Event description and time missing.");
         }
+        // Split the command with the first /by. The 2nd part should be the when the event is
         String[] splitted = command.substring(6).split(" /at ", 2);
         if (splitted.length < 2) {
             throw new DukeUnknownInputException("Need format event <description> /at <time>.");
@@ -109,7 +119,9 @@ public class Parser {
      * @throws DukeMissingDescriptionException When no number is given.
      * @throws DukeUnknownInputException When what user give is not a number.
      */
-    public static int deleteNum(String command) {
+    public static int getDeleteNum(String command)
+            throws DukeMissingDescriptionException, DukeUnknownInputException {
+        // Check if command is longer than "Delete "
         if (command.length() <= 7) {
             throw new DukeMissingDescriptionException("Task number missing.");
         }
@@ -128,7 +140,8 @@ public class Parser {
      * @return Word to find in String format.
      * @throws DukeMissingDescriptionException When nothing is given to find by user.
      */
-    public static String findWord(String command) {
+    public static String getFindWord(String command) throws DukeMissingDescriptionException {
+        // Check if command is longer than "Find "
         if (command.length() <= 5) {
             throw new DukeMissingDescriptionException("Word to find missing.");
         }
@@ -144,28 +157,30 @@ public class Parser {
      * @return Output message to the user.
      * @throws DukeUnknownInputException When the command type is not recognized.
      */
-    public static String executeCommand(TaskList tasks, String command, Ui ui)  throws DukeUnknownInputException {
+    public static String executeCommand(TaskList tasks, String command, Ui ui) throws DukeUnknownInputException {
         String commandType = getCommandType(command);
         switch (commandType) {
         case "list":
             return ui.showList(tasks);
         case "todo":
-            String description = todoDescription(command);
+            String description = getTodoDescription(command);
             return ui.showAdded(tasks.addTodo(description), tasks.getLength());
         case "deadline":
-            String[] descByWhen = deadlineParams(command);
+            // descByWhen is size 2 array, first has description and second has deadline
+            String[] descByWhen = getDeadlineParams(command);
             return ui.showAdded(tasks.addDeadline(descByWhen[0], descByWhen[1]), tasks.getLength());
         case "event":
-            String[] descAtWhen = eventParams(command);
+            // descAtWhen is size 2 array, first has description and second has event time
+            String[] descAtWhen = getEventParams(command);
             return ui.showAdded(tasks.addEvent(descAtWhen[0], descAtWhen[1]), tasks.getLength());
         case "done":
-            int doneNum = markDoneNum(command);
+            int doneNum = getMarkDoneNum(command);
             return ui.showMarkedDone(tasks.markDone(doneNum));
         case "delete":
-            int deleteNum = deleteNum(command);
+            int deleteNum = getDeleteNum(command);
             return ui.showDeleted(tasks.delete(deleteNum), tasks.getLength());
         case "find":
-            String findWord = findWord(command);
+            String findWord = getFindWord(command);
             return ui.showFound(tasks.find(findWord));
         default:
             throw new DukeUnknownInputException("Sorry but I do not recognise your command.");

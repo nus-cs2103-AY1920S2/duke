@@ -35,7 +35,7 @@ public class Storage {
      * @throws DukeIoException If the file path cannot be read.
      * @throws DukeException If there is a task that does not make sense.
      */
-    public static ArrayList<Task> load() throws DukeException, DukeIoException {
+    public static ArrayList<Task> loadFromFile() throws DukeException, DukeIoException {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(filePath);
@@ -44,10 +44,14 @@ public class Storage {
                 if (line.equals("")) {
                     continue;
                 }
-                String code = line.substring(1, 2);
+                // From every line (task) read,
+                // Get command type which is either T, D or E
+                String commandTye = line.substring(1, 2);
+                // Get status of task if done or not (Y or N)
                 boolean isDone = line.substring(4, 5).equals("Y");
+                // Get whatever is left of the task after the [T][Y]
                 String taskArgs = line.substring(7);
-                Task task = buildTask(code, taskArgs, isDone);
+                Task task = buildTask(commandTye, taskArgs, isDone);
                 listOfTasks.add(task);
             }
             return listOfTasks;
@@ -80,25 +84,25 @@ public class Storage {
     /**
      * Constructs the task after line has been read from file.
      *
-     * @param code The first letter in the task to tell the type of task.
+     * @param commandTye The first letter in the task to tell the type of task.
      * @param args String where it's everything after the initial [X][X].
      * @param isDone The second letter in the task to tell if the task has been completed.
      * @return Task constructed.
      * @throws DukeIoException If the code does not match T, D or E.
      */
-    public static Task buildTask(String code, String args, boolean isDone) throws DukeIoException {
-        if (code.equals("T")) {
+    public static Task buildTask(String commandTye, String args, boolean isDone) throws DukeIoException {
+        if (commandTye.equals("T")) {
             // args lik "borrow book"
             Todo todo = new Todo(args, isDone);
             return todo;
-        } else if (code.equals("D")) {
+        } else if (commandTye.equals("D")) {
             // deadlineArgs like "homework (by: 22/12/2019 1800)"
             String[] deadlineArgs = args.split("[ ][//(][b][y][//:][ ]");
             String description = deadlineArgs[0];
             String byWhen = deadlineArgs[1].substring(0, deadlineArgs[1].length() - 1);
             Deadline deadline = new Deadline(description, byWhen, isDone);
             return deadline;
-        } else if (code.equals("E")) {
+        } else if (commandTye.equals("E")) {
             // eventArgs like {"attend festival", "2pm-4pm"}
             String[] eventArgs = args.split("[ ][//(][a][t][//:][ ]");
             String description = eventArgs[0];

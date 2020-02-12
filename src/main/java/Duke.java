@@ -23,7 +23,7 @@ public class Duke {
         parser = new Parser();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadFromFile());
         } catch (DukeException e) {
             ui.showError(e);
             tasks = new TaskList();
