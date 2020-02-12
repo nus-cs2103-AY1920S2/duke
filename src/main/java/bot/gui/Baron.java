@@ -1,6 +1,7 @@
 package bot.gui;
 
 import bot.Executor;
+
 import bot.store.TaskStorage;
 
 import bot.command.CommandParser;
@@ -10,6 +11,7 @@ import bot.command.exception.TooManyArgumentsException;
 import bot.command.exception.UnknownInstructionException;
 import bot.command.instruction.ParsedInstruction;
 import bot.command.instruction.concrete.TerminateInstruction;
+
 import bot.loadsave.LoadAndSave;
 
 import bot.task.Task;
