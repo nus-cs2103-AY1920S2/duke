@@ -72,8 +72,6 @@ public class ChatBox {
                 save();
                 break;
             case "delete":
-                //int b = Integer.parseInt(msg[1]);
-                //assert b >= 0 : "Index out of bounds!";
                 replyMsg = deleteTasks(msg);
                 save();
                 break;
@@ -160,6 +158,7 @@ public class ChatBox {
     private String deleteTasks(String ... msg) {
         String output = "";
         int i = 0;
+
         if (msg[1].equals("all")) {
             output = folder.deleteAll();
             return output;

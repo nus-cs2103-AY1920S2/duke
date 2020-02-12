@@ -14,10 +14,10 @@ public class Deadlines extends Tasks {
     Deadlines(Message msg) {
         super(msg);
         super.logo = "[D]";
-        String[] d = super.msg.getMsg().split("by: ");
-        String dates = d[1].substring(1,11);
+        String[] data = super.msg.getMsg().split("by: ");
+        String dates = data[1].substring(1,11);
         date = LocalDate.parse(dates);
-        String newMsg = d[0] + "by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        String newMsg = data[0] + "by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         super.msg = new Message(newMsg);
     }
 
@@ -30,7 +30,11 @@ public class Deadlines extends Tasks {
     @Override
     public String done() {
         status = "[o]";
-        Message output = new Message("Nice! I've finish this task:\n" + logo + status + " " + msg.getMsg());
+        Message output = new Message("Nice! I've finish this task:\n"
+                + logo
+                + status
+                + " "
+                + msg.getMsg());
         return output.getMsg();
     }
 

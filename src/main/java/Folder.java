@@ -56,7 +56,7 @@ public class Folder {
         int i = 1;
         String output = Message.lines + "Here are the tasks in your list:\n";
         for(Tasks x: listTasks) {
-            output += i + ": " + x;
+            output = output + i + ": " + x;
             i++;
         }
         output += Message.lines;

@@ -32,12 +32,13 @@ public class Duke {
     public String getResponse(String input) {
         String output;
         output = chatBox.reply(new Message(input));
-        return "Duke heard: " + output;
+        return output;
     }
 
     public void getResponse(String type, String detail) {
         String input = type + " " + detail;
-        chatBox.reply(new Message(input));
+        Message response = new Message(input);
+        chatBox.reply(response);
     }
 
     public boolean isClose() {
