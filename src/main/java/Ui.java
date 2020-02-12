@@ -10,7 +10,6 @@ public class Ui {
      * Ui class constructor.
      */
     public Ui() {
-
     }
 
     /**
