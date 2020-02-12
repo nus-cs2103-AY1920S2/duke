@@ -10,11 +10,6 @@ public class Ui {
     public static final String GOODBYE = LINE + "\tGoodbye! Hope to hear from you soon :)\n" + LINE;
 
     private String printResponse(String... strs) {
-//        System.out.println(LINE);
-//        for (String s: strs) {
-//            System.out.println("\t" + s);
-//        }
-//        System.out.println(LINE);
         StringBuilder sb = new StringBuilder(LINE);
         for (String s: strs) {
             sb.append('\t');
@@ -23,14 +18,6 @@ public class Ui {
         }
         sb.append(LINE);
         return sb.toString();
-    }
-
-    /**
-     * Reads one line from standard input
-     * @return the line from standard input
-     */
-    public String getInput() {
-        return sc.nextLine().trim();
     }
 
     /**
@@ -84,7 +71,6 @@ public class Ui {
      * Displays a goodbye greeting when the user exits
      */
     public String displayGoodbye() {
-//        return printResponse("Goodbye! Hope to hear from you soon :)");
         return GOODBYE;
     }
 

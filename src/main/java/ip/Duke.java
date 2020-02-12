@@ -27,26 +27,6 @@ public class Duke {
         }
     }
 
-//    public static void main(String[] args) {
-//        new Duke().start();
-//    }
-
-//    private void start() {
-//        ui.initialGreeting();
-//
-//        String input;
-//        while (true) {
-//            input = ui.getInput();
-//            Command c = parser.parse(input);
-//            if (c != null) {
-//                c.execute(tasks, ui);
-//                if (c.isExit()) {
-//                    break;
-//                }
-//            }
-//        }
-//        storage.writeToFile(tasks);
-//    }
     public void exit() {
         storage.writeToFile(tasks);
     }
