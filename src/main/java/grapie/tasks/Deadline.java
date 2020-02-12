@@ -1,6 +1,6 @@
-package Grapie.Tasks;
+package grapie.tasks;
 
-import Grapie.Exceptions.GrapieExceptions;
+import grapie.exceptions.GrapieExceptions;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

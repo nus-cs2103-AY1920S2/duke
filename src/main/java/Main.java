@@ -2,7 +2,7 @@
 
 import java.io.IOException;
 
-import Grapie.Exceptions.GrapieExceptions;
+import grapie.exceptions.GrapieExceptions;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -1,17 +1,16 @@
-package Grapie.Functions;
+package grapie.functions;
 
-import Grapie.Exceptions.GrapieExceptions;
-import Grapie.Tasks.Deadline;
-import Grapie.Tasks.Event;
-import Grapie.Tasks.Task;
-import Grapie.Tasks.Todo;
+import grapie.exceptions.GrapieExceptions;
+import grapie.tasks.Deadline;
+import grapie.tasks.Event;
+import grapie.tasks.Task;
+import grapie.tasks.Todo;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,7 +19,7 @@ public class Storage {
     List<Task> storingList;
 
     /**
-     * Constructor for Grapie.Functions.Storage class.
+     * Loads data from persistent storage
      *
      * @param filePath The filepath to get the Hard Disk data from.
      * @throws IOException Throws exception.
@@ -178,7 +177,6 @@ public class Storage {
         int counter = 1;
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
-            //System.out.println(data);
 
             if (counter == lineNumber) {
                 data = data.substring(0, 4) + "O" + data.substring(5, data.length());
@@ -198,6 +196,12 @@ public class Storage {
         fileOut.close();
     }
 
+    /**
+     * Store the tags into the hard disk.
+     * @param lineNumber The line number to store the tag at.
+     * @param tag The tag to be stored.
+     * @throws IOException Throw away exception.
+     */
     public void addTagToDisk(int lineNumber, String tag) throws IOException {
         File myObj = new File(filePath);
         Scanner myReader = new Scanner(myObj);
@@ -206,15 +210,16 @@ public class Storage {
         int counter = 1;
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
-            //System.out.println(data);
 
             if (counter == lineNumber) {
                 String[] dataSplited = data.split("\\|");
 
                 if (dataSplited.length == 4) {
-                    data = dataSplited[0] + "|" + dataSplited[1] + "|" + dataSplited[2] + "|" + dataSplited[3] + " " + tag;
+                    data = dataSplited[0] + "|" + dataSplited[1] + "|" + dataSplited[2] + "|" + dataSplited[3]
+                            + " " + tag;
                 } else {
-                    data = dataSplited[0] + "|" + dataSplited[1] + "|" + dataSplited[2] + "|" + dataSplited[3] + " " + tag + "|" + dataSplited[4];
+                    data = dataSplited[0] + "|" + dataSplited[1] + "|" + dataSplited[2] + "|" + dataSplited[3]
+                            + " " + tag + "|" + dataSplited[4];
                 }
             }
 

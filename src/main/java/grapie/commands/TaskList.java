@@ -1,13 +1,13 @@
-package Grapie.Commands;
+package grapie.commands;
 
-import Grapie.Exceptions.ErrorMsg;
-import Grapie.Exceptions.GrapieExceptions;
-import Grapie.Functions.Storage;
-import Grapie.Functions.Ui;
-import Grapie.Tasks.Deadline;
-import Grapie.Tasks.Event;
-import Grapie.Tasks.Task;
-import Grapie.Tasks.Todo;
+import grapie.exceptions.ErrorMsg;
+import grapie.exceptions.GrapieExceptions;
+import grapie.functions.Storage;
+import grapie.functions.Ui;
+import grapie.tasks.Deadline;
+import grapie.tasks.Event;
+import grapie.tasks.Task;
+import grapie.tasks.Todo;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,7 +44,7 @@ public class TaskList {
                 String detailsStr = inputStr.substring(5, inputStr.length());
                 String checkIfTodoIsEmpty = detailsStr.replaceAll("\\s", "");
 
-                assert(checkIfTodoIsEmpty.length() >= 0);
+                assert checkIfTodoIsEmpty.length() >= 0;
 
                 if (checkIfTodoIsEmpty.length() == 0) {
                     //That means it is empty behing todo
@@ -68,7 +68,7 @@ public class TaskList {
                 inputStr = inputStr.trim();
                 String[] eventAndTime = inputStr.substring(6, inputStr.length()).split(" /at ");
 
-                assert(eventAndTime.length >= 0);
+                assert eventAndTime.length >= 0;
 
                 if (eventAndTime.length <= 1) {
                     //not able to split string properly
@@ -94,7 +94,7 @@ public class TaskList {
                 inputStr.trim();
                 String[] eventAndTime = inputStr.substring(9, inputStr.length()).split(" /by ");
 
-                assert(eventAndTime.length >= 0);
+                assert eventAndTime.length >= 0;
 
                 if (eventAndTime.length > 1) {
                     Deadline deadline = new Deadline(eventAndTime[0], eventAndTime[1]);
@@ -117,6 +117,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add tags to a task.
+     * @param command The tag command.
+     * @return return the string after adding the tag.
+     * @throws IOException throws exception.
+     */
     public String tagTask(String command) throws IOException {
         //tag 1 #fun
         command = command.trim();
@@ -189,7 +195,8 @@ public class TaskList {
 
         if (storingList.size() >= numToDelete) {
             int newSize = storingList.size() - 1;
-            assert (newSize >= 0) ;
+
+            assert (newSize >= 0);
 
             String toPrint = " Alrighty. I've removed this task: \n"
                     + storingList.get(numToDelete - 1)

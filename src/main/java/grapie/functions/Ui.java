@@ -1,10 +1,6 @@
-package Grapie.Functions;
+package grapie.functions;
 
-import Grapie.Commands.TaskList;
-import Grapie.Exceptions.GrapieExceptions;
-import Grapie.Tasks.Task;
-
-import java.io.IOException;
+import grapie.tasks.Task;
 
 public class Ui {
     /**
@@ -41,6 +37,12 @@ public class Ui {
         return "Okie!! Goodbye!";
     }
 
+    /**
+     * Return formatting for printing of tasks.
+     * @param task task to be printed.
+     * @param size number of tasks left.
+     * @return formatted string to be printed out.
+     */
     public static String printAddingTask(Task task, int size) {
         String printStr = "Alrighty. I've added this task: \n"
                 + task + "\n"

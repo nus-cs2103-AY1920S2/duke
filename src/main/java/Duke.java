@@ -2,14 +2,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Grapie.Commands.CommandTypes;
-import Grapie.Exceptions.GrapieExceptions;
-import Grapie.Functions.Parser;
-import Grapie.Functions.Storage;
-import Grapie.Commands.TaskList;
-import Grapie.Functions.Ui;
+import grapie.commands.CommandTypes;
+import grapie.exceptions.GrapieExceptions;
+import grapie.functions.Parser;
+import grapie.functions.Storage;
+import grapie.commands.TaskList;
+import grapie.functions.Ui;
 
-import Grapie.Tasks.Task;
+import grapie.tasks.Task;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -62,47 +62,39 @@ public class Duke {
      * @throws IOException Throws away exception.
      */
     public String runDuke(String command) throws IOException, GrapieExceptions {
+        String result = "";
+
         try {
             CommandTypes.Commands typeResult = parser.parseCommand(command);
 
-            String result;
-
             switch (typeResult) {
                 case LIST:
-                    String list = tasks.listTheList();
-                    return list;
-
+                    result = tasks.listTheList();
+                    break;
                 case DONE:
                     result = tasks.completeTask(command);
-                    return result;
-
+                    break;
                 case ADD:
                     result = tasks.addToList(command);
-                    return result;
-
+                    break;
                 case DELETE:
                     result = tasks.deleteTask(command);
-                    return result;
-
+                    break;
                 case FIND:
                     result = tasks.findFromList(command);
-                    return result;
-
+                    break;
                 case TAG:
                     result = tasks.tagTask(command);
-                    return result;
-
+                    break;
                 default:
                     System.out.println("ERRORRR");
                     break;
             }
-
         } catch (GrapieExceptions grapieExceptions) {
             return grapieExceptions.toString();
         }
 
-
-        return "OOPS!!! I do not understand you :(";
+        return result;
     }
 
     /**
@@ -113,7 +105,6 @@ public class Duke {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 

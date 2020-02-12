@@ -1,4 +1,4 @@
-import Grapie.Exceptions.GrapieExceptions;
+import grapie.exceptions.GrapieExceptions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

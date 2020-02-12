@@ -1,15 +1,11 @@
-package Grapie.Functions;
+package grapie.functions;
 
 
-import Grapie.Commands.CommandTypes;
-import Grapie.Exceptions.ErrorMsg;
-import Grapie.Exceptions.GrapieExceptions;
+import grapie.commands.CommandTypes;
+import grapie.exceptions.ErrorMsg;
+import grapie.exceptions.GrapieExceptions;
 
 public class Parser {
-    public Parser() {
-        //deals with making sense of the user command
-    }
-
     /**
      * Check if a valid number is inputted in String form.
      *

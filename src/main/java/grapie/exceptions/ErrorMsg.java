@@ -1,4 +1,4 @@
-package Grapie.Exceptions;
+package grapie.exceptions;
 
 public class ErrorMsg {
     /**

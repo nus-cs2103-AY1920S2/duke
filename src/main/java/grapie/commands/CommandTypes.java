@@ -1,4 +1,4 @@
-package Grapie.Commands;
+package grapie.commands;
 
 public class CommandTypes {
 

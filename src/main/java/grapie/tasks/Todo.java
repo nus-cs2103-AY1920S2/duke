@@ -1,4 +1,4 @@
-package Grapie.Tasks;
+package grapie.tasks;
 
 public class Todo extends Task {
     /**
