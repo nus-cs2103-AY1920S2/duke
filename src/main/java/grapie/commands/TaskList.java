@@ -48,6 +48,7 @@ public class TaskList {
                 //trying to do A-Assertions as PR
                 assert checkIfTodoIsEmpty.length() >= 0;
 
+                //arrowhead?
                 if (checkIfTodoIsEmpty.length() == 0) {
                     //That means it is empty behing todo
                     throw new GrapieExceptions(ErrorMsg.emptyDescriptionError);
