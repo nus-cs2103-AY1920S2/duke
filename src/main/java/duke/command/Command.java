@@ -12,5 +12,5 @@ public class Command implements Executable {
 
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         return "";
-    };
+    }
 }

@@ -9,7 +9,10 @@ import javafx.application.Application;
  */
 public class Main {
     public static void main(String[] args) {
-        // new Duke("data/tasks.txt").run(new Cli("Duke"));
+
         Application.launch(Gui.class, args);
+
+        // Uncomment the following line and comment the above line for CLI.
+        // new Duke("data/tasks.txt").run(new Cli("Duke"));
     }
 }

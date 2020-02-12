@@ -18,21 +18,22 @@ public class FindCommand extends Command {
      * string.
      */
     public String execute(TaskList tasks, Storage storage) {
-        String output = Message.FIND_MESSAGE + "\n";
-        output += Message.DIVIDER + "\n";
-
         int taskCount = 0;
+        String filteredTasks = "";
 
         for (int i = 1; i <= tasks.getLength(); i++) {
             Task task = tasks.getTask(i);
             if (task.getDescription().contains(search)) {
-                output += i + "." + task + "\n";
+                filteredTasks += i + "." + task + "\n";
                 taskCount++;
             }
         }
 
-        output += Message.DIVIDER + "\n";
-        output += Message.showNumberOfTasksFound(taskCount);
+        String output = Message.TASK_ADDED + "\n"
+                + Message.DIVIDER + "\n"
+                + filteredTasks + "\n"
+                + Message.DIVIDER + "\n"
+                + Message.showNumberOfTasksFound(taskCount);
         return output;
     }
 }
