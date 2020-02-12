@@ -31,7 +31,8 @@ public class Ui {
      */
     public String bye() {
         StringBuilder sb = new StringBuilder("____________________________________________________________");
-        sb.append("\n").append("Bye! Come back again soon!\n").append("____________________________________________________________");
+        sb.append("\n").append("Bye! Come back again soon!\n")
+                .append("____________________________________________________________");
         sc.close();
         return sb.toString();
     }
