@@ -43,15 +43,15 @@ public class Parser {
                 case "list":
 
                     String output = "";
-                    output += "UwU you got some nice tasks:";
+                    output += "UwU you got some nice tasks: \n";
 
                     for (int i = 0; i < TaskList.getSize(); i++) {
                         int indexNumber = i + 1;
 
                         if (TaskList.getTask(i).getStatus() == 0) {
-                            output += indexNumber + "." + TaskList.getTask(i).toString();
+                            output += indexNumber + "." + TaskList.getTask(i).toString() + "\n";
                         } else {
-                            output += indexNumber + "." + TaskList.getTask(i).toString();
+                            output += indexNumber + "." + TaskList.getTask(i).toString() + "\n";
                         }
 
                     }
@@ -76,6 +76,7 @@ public class Parser {
 
                             ToDo newTask = new ToDo(oldTask.getDescription());
                             newTask.setStatusDone();
+                            assert newTask.getStatus() == 1 : "Status should be 1";
                             TaskList.set(index - 1, newTask);
                             Storage.updateFile(TaskList.taskList);
                             return "I... I've marked this as done... notice me pls: \n" + newTask.toString();
@@ -85,6 +86,7 @@ public class Parser {
 
                             Deadline newTask = new Deadline(oldTask.getDescription(), oldTask.getBy());
                             newTask.setStatusDone();
+                            assert newTask.getStatus() == 1 : "Status should be 1";
                             TaskList.set(index - 1, newTask);
                             Storage.updateFile(TaskList.taskList);
                             return "I... I've marked this as done... notice me pls: \n" + newTask.toString();
@@ -94,6 +96,7 @@ public class Parser {
 
                             Event newTask = new Event(oldTask.getDescription(), oldTask.getBy());
                             newTask.setStatusDone();
+                            assert newTask.getStatus() == 1 : "Status should be 1";
                             TaskList.set(index - 1, newTask);
                             Storage.updateFile(TaskList.taskList);
                             return "I... I've marked this as done... notice me pls: \n" + newTask.toString();
@@ -245,6 +248,8 @@ public class Parser {
 
                 }
 
+                //find will search for the tasks matching a specific keyword
+
                 case "find": {
 
                     ArrayList<Task> searchResults = new ArrayList<>();
@@ -260,7 +265,7 @@ public class Parser {
 
                     for (Task printingTask : searchResults) {
                         incrementer++;
-                        return incrementer + "." + printingTask;
+                        return incrementer + "." + printingTask + "\n";
                     }
 
                     return "Here are the matching tasks in your list:";
