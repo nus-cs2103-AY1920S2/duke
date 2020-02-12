@@ -69,6 +69,10 @@ public abstract class Task {
         this.description = description;
     }
 
+    public boolean hasKeyWord(String keyWord) {
+        return description.toLowerCase().contains(keyWord.toLowerCase());
+    }
+
     /**
      * An abstract method returning an single-character task type.
      */
@@ -78,7 +82,7 @@ public abstract class Task {
      * Return the status of whether the task is done.
      * @return tick if the task is done, cross if not done.
      */
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 

@@ -14,10 +14,9 @@ import java.util.regex.Pattern;
  * Implements methods to parse the input command.
  */
 public class Parser {
-    public static final String DATE_TIME_KEY = "(\\d{4}-\\d{2}-\\d{2})\\s*(\\d{2}:\\d{2})*";
+    public static final String DATE_TIME_KEY = "(\\d{4}-\\d{2}-\\d{2})?\\s*(\\d{2}:\\d{2})?";
 
     private static final String DEFAULT_TIME = "23:59";
-
     private static final String EXIT_KEY = "bye";
     private static final String  VIEW_LIST_KEY = "list";
     private static final String DELETE_KEY = "(delete)(\\s+)(\\d+)";
@@ -25,12 +24,14 @@ public class Parser {
     private static final String TODO_KEY = "(todo)(.*)";
     private static final String DEADLINE_KEY = "(deadline)\\s*(\\S*)\\s*/by\\s*" + DATE_TIME_KEY;
     private static final String EVENT_KEY = "(event)\\s*(\\S*)\\s*/at\\s*" + DATE_TIME_KEY;
+    private static final String FIND_KEY = "(find)\\s*(\\S*)";
 
     private static final Pattern DELETE_PATTERN = Pattern.compile(DELETE_KEY);
     private static final Pattern FINISH_PATTERN = Pattern.compile(FINISH_KEY);
     private static final Pattern TODO_PATTERN = Pattern.compile(TODO_KEY);
     private static final Pattern DEADLINE_PATTERN = Pattern.compile(DEADLINE_KEY);
     private static final Pattern EVENT_PATTERN = Pattern.compile(EVENT_KEY);
+    private static final Pattern FIND_PATTERN = Pattern.compile(FIND_KEY);
 
     /**
      * static method converts string to date time object.
@@ -50,6 +51,8 @@ public class Parser {
 
             //TODO: change the error message
             throw new IllegalDateTimeFormatException(dte.getMessage() + '\n');
+        } catch (NullPointerException npe) {
+            throw new IllegalDateTimeFormatException("No date time string being inputted.\n");
         }
     }
 
@@ -97,6 +100,12 @@ public class Parser {
         return EXIT_KEY.equals(input);
     }
 
+    private String findKeyword(Pattern pattern, String input) {
+        Matcher matcher = pattern.matcher(input);
+        matcher.find();
+        return matcher.group(2);
+    }
+
     private static boolean isViewListKey(String input) {
         return VIEW_LIST_KEY.equals(input);
     }
@@ -126,8 +135,13 @@ public class Parser {
         return eventMatcher.find();
     }
 
+    private static boolean isFindKey(String userInput) {
+        Matcher findMatcher = FIND_PATTERN.matcher(userInput);
+        return findMatcher.find();
+    }
+
     /**
-     * Return corresponding command with the parsed parameters.
+     * Returns corresponding command with the parsed parameters.
      * @param userInput String user input.
      * @return parsed command.
      * @throws NoCommandException If the user input can not be recognized as any command.
@@ -156,7 +170,11 @@ public class Parser {
             String description = this.findDescription(EVENT_PATTERN, userInput);
             LocalDateTime at = this.findDateTime(EVENT_PATTERN, userInput);
             return new AddEventCommand(description, at);
-        } else {
+        } else if (Parser.isFindKey(userInput)) {
+            String keyWord = this.findKeyword(FIND_PATTERN, userInput);
+            return new FindCommand(keyWord);
+        }
+        else {
             throw new NoCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
     }
