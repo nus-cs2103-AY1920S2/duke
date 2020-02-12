@@ -68,6 +68,8 @@ public class Gui implements Ui {
      * @param stage `Stage` object received from `Duke#start`
      */
     public void start(Stage stage) {
+        assert stage != null; //Precondition: `stage` is not null
+        
         this.stage = stage;
         
         //Step 1. Formatting the window to look as expected.
@@ -159,6 +161,8 @@ public class Gui implements Ui {
     }
 
     private void displayMessage(Message message) {
+        assert stage != null && dialogContainer != null;
+        
         Label label = getDialogLabel(message.text);
         dialogContainer.getChildren().add(label);
     }
