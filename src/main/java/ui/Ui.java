@@ -85,11 +85,12 @@ public class Ui {
      * @throws InvalidIndexException if any of the index is invalid
      */
     public void acknowledgeDone(TaskList tasks, int... arrayOfIndexes) throws InvalidIndexException {
-        System.out.println("Nice! I've marked this task(s) as done:");
-
         int[] arrayOfDoneIndexes = IntStream.of(arrayOfIndexes)
-                 .filter(index -> tasks.getTaskListSize() > index && index >= 0)
-                 .toArray();
+                                            .filter(index -> tasks.getTaskListSize() > index && index >= 0)
+                                            .toArray();
+
+        if (arrayOfDoneIndexes.length == 0) { throw new InvalidIndexException("Index does not match any task!"); }
+        System.out.println("Nice! I've marked this task(s) as done:");
 
         IntStream.of(arrayOfDoneIndexes)
                  .forEach(index -> tasks.getTask(index).markAsDone());

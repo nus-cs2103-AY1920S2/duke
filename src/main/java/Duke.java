@@ -10,7 +10,6 @@ import ui.Ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.DateTimeException;
-import java.util.stream.Stream;
 
 public class Duke {
     private Storage storage;
@@ -27,11 +26,12 @@ public class Duke {
         assert this.ui != null : "Ui should be instantiated";
         String filePath = "data/duke.txt";
         storage = new Storage(filePath);
-        assert this.storage != null : "storage should be instantiated";
+        assert this.storage != null : "Storage should be instantiated";
         try {
             tasks = new TaskList(storage.loadExistingFileTasks());
-            assert this.tasks != null : "tasks should be instantiated";
-        } catch (FileNotFoundException ex) {
+            assert this.tasks != null : "Tasks should be instantiated";
+            assert this.tasks.getTaskListSize() != 0 : "Tasks should should have been loaded";
+        } catch (FileNotFoundException | AssertionError ex) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -63,6 +63,8 @@ public class Duke {
 
                 case "done":
                     ui.acknowledgeDone(tasks, parser.getTaskIndexArray());
+                    assert tasks.getTask(parser.getTaskIndexArray()[0]).getStatus() == true
+                            : "Task should have been marked as done";
                     storage.saveTasksIntoFile(tasks);
                     break;
 
@@ -100,7 +102,7 @@ public class Duke {
                     ui.printUnknownCommand();
                     break;
                 }
-            } catch (DukeException | DateTimeException ex) {
+            } catch (DukeException | DateTimeException | AssertionError | IndexOutOfBoundsException ex) {
                 System.out.println(ex.getMessage());
                 continue;
             }
