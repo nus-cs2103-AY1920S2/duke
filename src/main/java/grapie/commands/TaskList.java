@@ -44,6 +44,8 @@ public class TaskList {
                 String detailsStr = inputStr.substring(5, inputStr.length());
                 String checkIfTodoIsEmpty = detailsStr.replaceAll("\\s", "");
 
+
+                //trying to do A-Assertions as PR
                 assert checkIfTodoIsEmpty.length() >= 0;
 
                 if (checkIfTodoIsEmpty.length() == 0) {
