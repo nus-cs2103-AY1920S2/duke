@@ -53,7 +53,7 @@ public class Duke {
         }
 
         if (input.equals("bye")) {
-            ui.bye();
+            System.out.println(ui.bye());
         }
     }
 
