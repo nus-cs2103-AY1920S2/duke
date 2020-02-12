@@ -27,9 +27,11 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tonystark.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/thanos.jpg"));
 
+    /**
+     * Initializes the GUI.
+     */
     @FXML
     public void initialize() {
-
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog("Hello! I'm Thanos. I will snap my fingers?", dukeImage)
