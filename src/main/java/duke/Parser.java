@@ -50,6 +50,8 @@ public class Parser {
         case "undo":
             outputCommand = Optional.of(new UndoCommand());
             break;
+        case "ls":
+            // Fallthrough, shortcut command for "list"
         case "list":
             outputCommand = Optional.of(new ListCommand());
             break;
@@ -68,6 +70,8 @@ public class Parser {
         case "event":
             outputCommand = getEventCommand(fullCommand, commandWords);
             break;
+        case "rm":
+            // Fallthrough, shortcut command for "delete"
         case "delete":
             outputCommand = getDeleteCommand(commandWords);
             break;
