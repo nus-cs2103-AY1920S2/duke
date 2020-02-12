@@ -6,13 +6,23 @@ import java.util.*;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * The Duke program implements an application to interact with a user's tasks
+ * Functionalities include:
+ * 1) Able to store and mark as done for three different types of tasks (to-do, deadline, events)
+ * 2) Able to  list down all the tasks in sequence
+ * 3) Able to delete the tasks
+ * 4) Able to find the task by it's name
+ */
 
 public class Duke{
 
 
     static Scanner sc = new Scanner(System.in);
 
-    // reading contents from taskList.txt and add them to tempTaskList arrayList
+    /**
+     * This method reads contents from taskList.txt and add them to tempTaskList arrayList
+     */
     private static void readFileContent(String filePath, ArrayList<String> tempTaskList ) throws FileNotFoundException{
         File f = new File(filePath); // create a file for the given file path
         Scanner s = new Scanner(f);// create a scanner using the File as the source
@@ -20,16 +30,22 @@ public class Duke{
             tempTaskList.add(s.nextLine());
         }
     }
+
+    /**
+     * This method is to append a string to tastList.txt
+     */
     static void appendToFile(String filePath, String textToAdd) throws IOException{
         FileWriter fw = new FileWriter(filePath , true);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * This method is to greet the user when Duke program runs
+     */
     static void printGreetings() {
         System.out.print("____________________________________________________________ \n" + "Hello! I'm Duke \n"
                 + "What can I do for you?\n" + "____________________________________________________________ \n"
-
         );
     }
 
@@ -59,7 +75,9 @@ public class Duke{
             tempTaskList.add(taskLine);
         }
 
-        // overwrite taskList.txt into nothing
+        /**
+         * Try to empty the taskList.txt
+         */
         try{
             overWriteFile("C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt" ,"");
         }
@@ -67,6 +85,10 @@ public class Duke{
             System.out.println("Something went wrong: " + e.getMessage());
         }
 
+        /**
+         * Re-insert all the tasks from list array to taskList.txt by
+         * appending each tasks again
+         */
         for(int i = 0 ; i < tempTaskList.size();i++){
             try{
                 appendToFile("C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt" , tempTaskList.get(i)  );
@@ -83,18 +105,18 @@ public class Duke{
 
     public static void main(String[] args) {
 
-        /*File f = new File("data/taskList.txt");
-        System.out.println("Full path: " + f.getAbsolutePath());
-        System.out.println("file exists? : " + f.exists());
-        System.out.println("is Directory?:" + f.isDirectory());
-        */
+        /**
+         * list arraylist - to store the Task objects
+         * type arraylist - to store the Task type (E - Event , T - to-do, D - Deadline)
+         * tempTaskList - a temporary arraylist to store each line of taskList.txt
+         */
+        ArrayList<Task> list = new ArrayList<Task>();
+        ArrayList<String> type = new ArrayList<String>();
+        ArrayList<String> tempTaskList = new ArrayList<String>();
 
-        ArrayList<Task> list = new ArrayList<Task>(); // Creating arraylist for list of things
-        ArrayList<String> type = new ArrayList<String>(); // arraylist for list type
-        ArrayList<String> tempTaskList = new ArrayList<String>(); // arraylist for each line of taskList.txt
-
-
-        // reading from taskList.txt anad transfer each line to  arraylist tempTaskList
+        /**
+         * This method reads from taskList.txt and transfer each line to  arraylist tempTaskList
+         */
         try{
             readFileContent("C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt", tempTaskList);
             for(int i = 0 ; i <tempTaskList.size();i++){
@@ -122,7 +144,7 @@ public class Duke{
                                 }
                                 break;
                     case "E":   type.add("E");
-                                event e = new event(strArray[2], strArray[3]);
+                                Event e = new Event(strArray[2], strArray[3]);
                                 list.add(e);
                                 if(strArray[1].contains("1")){
                                     list.get(i).markDone();
@@ -148,8 +170,56 @@ public class Duke{
 
 
         while (!input.equals("bye")) {
-            if(!input.equals("list") && !input.contains("done")){ //adding item to list
 
+
+            /**
+             * Adding item to list
+             */
+            if(!input.equals("list") && !input.contains("done")){
+
+                String findPrint = "Here are the matching tasks in your list: \n";
+                /**
+                 * Find task from the list
+                 */
+                if(input.contains("find")){
+                    int numOfWords = 0;
+                    for (String inputDisect : input.split(" ")) {
+                        numOfWords++;
+                    }
+                    /**
+                     * integer count to keep track of the number of similar task of the same name
+                     */
+                    int counter = 1;
+
+                    String taskDescription = input.replaceAll("find ", "");
+
+                    for(int i = 0 ; i < list.size();i++){
+
+                        /**
+                         * to check if list array contains the taskDescription
+                         */
+                        if((list.get(i).getDescription()).contains(taskDescription)){
+                            findPrint = findPrint + counter + "." + "[" + type.get(i) + "][" +
+                                    list.get(i).getStatus() + "] " + list.get(i).getDescription();
+
+                            if(type.get(i).equals("E") ||type.get(i).equals("D") ){
+                                findPrint = findPrint + " " + list.get(i).getWhen();
+                            }
+                            findPrint = findPrint + "\n";
+                            counter++;
+                        }
+                    }
+
+                    if(counter==1){
+                        findPrint = "Sorry there is no match for it. ):";
+                    }
+                    System.out.println(findPrint);
+
+                }
+
+                /**
+                 * Adding to-do task to the list
+                 */
                 if(input.contains("todo")) {
                     int numOfWords = 0;
                     for (String inputDisect : input.split(" ")) {
@@ -164,7 +234,9 @@ public class Duke{
                         System.out.println("[T][X] " + taskDescription);
                         System.out.println("Now you have " + (list.size()) + " tasks in the list.");
 
-                        //writing to the file
+                        /**
+                         * Writing data to taskList.txt
+                         */
                         try{
                             appendToFile(filePath, System.lineSeparator() +"T -0 -" + taskDescription);
                         }
@@ -173,11 +245,16 @@ public class Duke{
                         }
 
                     }
-                    //Error handling when todo doesnt have descriptions
+                    /**
+                     * Eror handling when to-do doesnt have descriptions
+                     */
+
                     else
                         System.out.println("OOPS!!! The description of todo cannot be empty.");
                 }
-
+                /**
+                 * Adding deadline task to the list
+                 */
                 if(input.contains("deadline")) {
 
                     int numOfWords = 0;
@@ -195,7 +272,9 @@ public class Duke{
                         System.out.println(t.toString());
                         System.out.println("Now you have " + (list.size()) + " tasks in the list.");
 
-                        //writing to the file
+                        /**
+                         * Writing to the tasklist.txt
+                         */
                         try{
                             appendToFile(filePath, System.lineSeparator() +"D -0 -" + strArray[0] + " -" + strArray[1] );
                         }
@@ -203,10 +282,16 @@ public class Duke{
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
                     }
-                    //Error handling when deadline doesnt have descriptions
+
+                    /**
+                     * Error handling when there is no description input for Deadline task
+                     */
                     else
                         System.out.println("OOPS!!! The description of deadline cannot be empty.");
                 }
+                /**
+                 * Adding Event task to the list
+                 */
                 if(input.contains("event")) {
                     int numOfWords = 0;
                     for (String inputDisect : input.split(" ")) {
@@ -216,14 +301,16 @@ public class Duke{
                         String taskDescription = input.replaceAll("event ", "");
                         String[] strArray = taskDescription.split("/at ");
 
-                        event t = new event(strArray[0], strArray[1]);
+                        Event t = new Event(strArray[0], strArray[1]);
                         list.add(t);
                         type.add("E");
                         System.out.println("Got it. I've added this task:");
                         System.out.println(t.toString());
                         System.out.println("Now you have " + (list.size()) + " tasks in the list.");
 
-                        //writing to the file
+                        /**
+                         * To write data to taskList.txt
+                         */
                         try{
                             appendToFile(filePath, System.lineSeparator() + "D -0 -" + strArray[0] + " -" + strArray[1] );
                         }
@@ -231,7 +318,10 @@ public class Duke{
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
                     }
-                    //Error handling when deadline doesnt have descriptions
+
+                    /**
+                     * Error handling when there is no description input for Event task
+                     */
                     else
                         System.out.println("OOPS!!! The description of deadline cannot be empty.");
                 }
@@ -240,7 +330,7 @@ public class Duke{
             }
             //Error handling when user type words that are not the intended instructions
             if(!input.contains("done") && !input.contains("list") && !input.contains("todo") &&  !input.contains("deadline")
-                    && !input.contains("event") && !input.contains("delete")){
+                    && !input.contains("event") && !input.contains("delete") && !input.contains("find")){
                 System.out.println("OPPS!!! I'm sorry, but I don't know what that means :-( ");
             }
             if(input.contains("done")){
