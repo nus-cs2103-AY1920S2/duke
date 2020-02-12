@@ -19,30 +19,53 @@ import javafx.stage.Stage;
 
 public class Gui extends Application {
 
-    Duke duke;
-    String filePath;
+    private Duke duke;
+    private String filePath;
 
-    //Step 1. Setting up required components
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private AnchorPane mainLayout;
 
     private Image userImg = new Image(this.getClass()
             .getResourceAsStream("/images/DaUser.png"));
     private Image dukeImg = new Image(this.getClass()
             .getResourceAsStream("/images/DaDuke.png"));
 
+    @Override
+    public void init() throws Exception {
+        super.init();
+
+        filePath = "data/tasks.txt";
+        duke = new Duke(filePath);
+    }
+
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other 
+     * containing Duke's reply and then appends them to the dialog container. 
+     * Clears the user input after processing.
+     * @param response The response of duke
+     */
+    private void createDialogBoxes(String response) {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(response);
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(userImg)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImg))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * Obtains duke's response to the user input.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-
         Command command = new Command();
         String response;
+
         try {
             command = Parser.parse(userInput.getText());
             response = duke.getResponse(command);
@@ -50,20 +73,17 @@ public class Gui extends Application {
             response = e.getMessage();
         }
 
-        System.out.println(response);
-
-        Label dukeText = new Label(response);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(userImg)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImg))
-        );
-        userInput.clear();
+        createDialogBoxes(response);
 
         if (command.isExit()) {
             exit();
         }
     }
 
+    /**
+     * Exits the application after 1 second so that duke's exit response will
+     * be shown.
+     */
     private void exit() {
         new Thread(new Runnable() {
             public void run() {
@@ -77,17 +97,10 @@ public class Gui extends Application {
         }).start();
     }
 
-    @Override
-    public void init() throws Exception {
-        super.init();
-
-        filePath = "data/tasks.txt";
-        duke = new Duke(filePath);
-    }
-
-    @Override
-    public void start(Stage stage) {
-
+    /**
+     * Creates instances of components.
+     */
+    private void createContainer() {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -96,11 +109,16 @@ public class Gui extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
-        AnchorPane mainLayout = new AnchorPane();
+        mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-    
+    }
+
+    /**
+     * Configures the settings of stage.
+     */
+    private void configureStage(Stage stage) {
         stage.setScene(scene);
         stage.show();
 
@@ -109,7 +127,12 @@ public class Gui extends Application {
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
-        
+    }
+
+    /**
+     * Configures the size of components.
+     */
+    private void configureDisplay() {
         mainLayout.setPrefSize(400.0, 600.0);
         
         scrollPane.setPrefSize(400, 545);
@@ -118,14 +141,22 @@ public class Gui extends Application {
         
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        
+
         // You will need to import `javafx.scene.layout.Region` for this. 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         
         userInput.setPrefWidth(325.0);
         
         sendButton.setPrefWidth(74.0);
-        
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Configures the position of components.
+     */
+    private void configureAnchorPosition() {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         
         AnchorPane.setBottomAnchor(sendButton, 1.0);
@@ -133,7 +164,12 @@ public class Gui extends Application {
         
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
+    /**
+     * Configures the event triggered by user interaction.
+     */
+    private void configureEvent() {
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -142,8 +178,14 @@ public class Gui extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+    }
 
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    @Override
+    public void start(Stage stage) {
+        createContainer();
+        configureStage(stage);
+        configureDisplay();
+        configureAnchorPosition();
+        configureEvent();
     }
 }
