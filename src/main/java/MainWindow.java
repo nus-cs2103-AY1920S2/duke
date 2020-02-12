@@ -21,6 +21,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Button exitButton;
 
     private Duke duke = new Duke ("src/main/java/data/duke.txt");
 
@@ -51,6 +53,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    @FXML
+    private void exitAndSave() throws Exception {
+        duke.save();
+        Platform.exit();
     }
 }
 

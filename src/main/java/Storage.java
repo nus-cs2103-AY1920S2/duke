@@ -108,15 +108,15 @@ public class Storage {
             for (int i = 0; i < lst.size(); i++) {
                 Task savedTask = lst.get(i);
                 bw.write(savedTask.saveFile() + "\n");
-                bw.close();
-                fr.close();
+                bw.flush();
+                fr.flush();
             }
         } else {
             BufferedWriter bw = new BufferedWriter(new FileWriter("duke.txt"));
             for (int i = 0; i < lst.size(); i++) {
                 Task savedTask = lst.get(i);
                 bw.write(savedTask.saveFile() + "\n");
-                bw.close();
+                bw.flush();
             }
         }
     }
