@@ -29,7 +29,7 @@ import java.util.Scanner;
  * Main driver class for 4LC3N-BOT
  */
 public class Duke {
-    public static final String FILE_DIRECTORY = "../user/data";
+    public static final String FILE_DIRECTORY = "./user/data";
     public static final String FILE_NAME_TASKS = "tasks.botstore";
     public static final String FILE_NAME_ALIASES = "aliases.botstore";
 
