@@ -4,6 +4,7 @@ import bot.Ui;
 
 import bot.command.Command;
 import bot.command.CommandParser;
+import bot.command.exception.InstructionAlreadyExistsException;
 import bot.command.instruction.Instruction;
 import bot.command.instruction.execute.StorageWriting;
 import bot.command.instruction.parse.ThreeWordsInstruction;
@@ -23,14 +24,23 @@ public class AliasInstruction extends ThreeWordsInstruction
     public void writeToStore(Storage<Pair<String, String>> commandStore,
             Ui ui, Pair<String, String> nameToReplace) {
 
-        // first in pair is the original name
-        // second in pair is the aliased name
-        commandStore.store(nameToReplace);
-        AliasInstruction.addAliasedName(
-                nameToReplace.getFirst(),
-                nameToReplace.getSecond()
-        );
-        ui.showAliasMessage();
+        boolean nameNotUsedBefore = false;
+        try {
+            commandStore.store(nameToReplace);
+            nameNotUsedBefore = true;
+        } catch (InstructionAlreadyExistsException e) {
+            ui.showError(e);
+        }
+
+        if (nameNotUsedBefore) {
+            // first in pair is the original name
+            // second in pair is the aliased name
+            AliasInstruction.addAliasedName(
+                    nameToReplace.getFirst(),
+                    nameToReplace.getSecond()
+            );
+            ui.showAliasMessage();
+        }
     }
 
     /**
@@ -48,6 +58,7 @@ public class AliasInstruction extends ThreeWordsInstruction
         // assumes aliased name is not used already
         Command aliased = new Command(altName);
         Instruction inst = CommandParser.INSTR_MAP.get(originalName);
+        inst.addToCommandList(aliased);
         // update maps
         CommandParser.INSTR_MAP.put(altName, inst);
         CommandParser.COMMAND_MAP.put(altName, aliased);

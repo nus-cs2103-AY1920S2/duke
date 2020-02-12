@@ -7,6 +7,7 @@ import bot.command.exception.UnknownInstructionException;
 import bot.command.instruction.Instruction;
 import bot.command.instruction.ParsedInstruction;
 
+import bot.command.instruction.concrete.AliasInstruction;
 import bot.command.instruction.concrete.DeadlineInstruction;
 import bot.command.instruction.concrete.DeleteInstruction;
 import bot.command.instruction.concrete.EventInstruction;
@@ -30,6 +31,7 @@ import java.util.HashMap;
  */
 public class CommandParser {
     public static final Instruction[] ALL_INSTRUCTIONS = {
+        new AliasInstruction(Command.ALIAS),
         new DeadlineInstruction(Command.DEADLINE),
         new DeleteInstruction(Command.DELETE),
         new EventInstruction(Command.EVENT),

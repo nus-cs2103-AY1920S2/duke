@@ -5,6 +5,7 @@ import bot.task.Event;
 import bot.task.Task;
 import bot.task.Todo;
 
+import bot.util.ClosedScanner;
 import bot.util.PrettyTime;
 
 import java.io.BufferedWriter;
@@ -47,7 +48,7 @@ public class TasksToDisk extends LoadAndSave<Task> {
         ArrayList<Task> storedTasks = new ArrayList<Task>();
         Scanner io = super.getToLoadFrom()
                 .map(fr -> new Scanner(fr))
-                .orElseGet(() -> TasksToDisk.getClosedScanner());
+                .orElseGet(() -> ClosedScanner.getClosedScanner());
 
         while (io.hasNext()) {
             // main loop to load each saved task
@@ -105,19 +106,7 @@ public class TasksToDisk extends LoadAndSave<Task> {
                     .append(task.getPrettyTime().toRaw())
                     .append("\n");
         }
-
-        File saveLocation = new File(super.getRelativeAddress());
-        try {
-            BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(saveLocation)
-            );
-            writer.write(toBeSaved.toString());
-            writer.close();
-        } catch (IOException e) {
-            // error in writing to file
-            System.err.println("IOException2");
-            System.err.println(e.getMessage());
-        }
+        FileSaver.saveStringAsFile(super.getRelativeAddress(), toBeSaved);
     }
 
     /**
@@ -135,17 +124,5 @@ public class TasksToDisk extends LoadAndSave<Task> {
         return Integer.parseInt(
                 Character.toString(typeAndDone.charAt(type.length()))
                 ) == 1;
-    }
-
-    /**
-     * A method that returns a closed Scanner,
-     * which is a Scanner that has no output
-     *
-     * @return The closed Scanner.
-     */
-    private static Scanner getClosedScanner() {
-        Scanner sc = new Scanner("");
-        sc.close();
-        return sc;
     }
 }

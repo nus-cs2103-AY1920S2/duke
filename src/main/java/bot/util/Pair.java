@@ -40,4 +40,10 @@ public class Pair<T, U> {
     public U getSecond() {
         return this.second;
     }
+
+    @Override
+    public String toString() {
+        return "(" + this.first.toString() + ", "
+                + this.second.toString() + ")";
+    }
 }

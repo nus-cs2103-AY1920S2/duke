@@ -1,5 +1,6 @@
 package bot.store;
 
+import bot.command.exception.InstructionAlreadyExistsException;
 import bot.loadsave.LoadAndSave;
 
 /**
@@ -14,7 +15,7 @@ public interface Storage<T> {
      *
      * @param toStore The item to be stored
      */
-    void store(T toStore);
+    void store(T toStore) throws InstructionAlreadyExistsException;
 
     /**
      * Saves the content of this Storage to

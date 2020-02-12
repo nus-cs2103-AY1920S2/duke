@@ -7,6 +7,7 @@ package bot.command;
  * changed by the user
  */
 public class Command {
+    public static final Command ALIAS = new Command("alias");
     public static final Command BYE = new Command("bye");
     public static final Command DELETE = new Command("delete");
     public static final Command DONE = new Command("done");
