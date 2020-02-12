@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import java.time.LocalDate;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -79,7 +80,7 @@ public class Storage {
      * @return a To-do object
      */
     public Task processTodo(String[] taskArr) {
-        Task todo = new Todo(taskArr[2].trim(), "0000-00-00");
+        Task todo = new Todo(taskArr[2].trim(), "0000-00-00", "00:00");
         if (taskArr[1].trim().equals("1")) {
             todo.setDone(true);
         }
@@ -93,9 +94,10 @@ public class Storage {
      */
     public Task processEvent(String[] taskArr) {
         LocalDate date = LocalDate.parse(taskArr[4].trim());
+        LocalTime time = LocalTime.parse(taskArr[3].trim());
         String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
 
-        Task event = new Event(taskArr[2].trim(), taskArr[3].trim(), date, date.toString());
+        Task event = new Event(taskArr[2].trim(), time, date, date.toString(), time.toString());
         if (taskArr[1].trim().equals("1")) {
             event.setDone(true);
         }
@@ -110,10 +112,11 @@ public class Storage {
      */
     public Task processDeadline(String[] taskArr) {
         LocalDate date = LocalDate.parse(taskArr[4].trim());
+        LocalTime time = LocalTime.parse(taskArr[3].trim());
 
         String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
 
-        Task deadline = new Deadline(taskArr[2].trim(), taskArr[3].trim(), date, date.toString());
+        Task deadline = new Deadline(taskArr[2].trim(), time, date, date.toString(), time.toString());
         if (taskArr[1].trim().equals("1")) {
             deadline.setDone(true);
         }

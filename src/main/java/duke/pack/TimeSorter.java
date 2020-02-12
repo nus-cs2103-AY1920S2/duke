@@ -2,8 +2,8 @@ package duke.pack;
 
 import java.util.Comparator;
 
-public class SortByDate implements Comparator<Task> {
-    public SortByDate() {
+public class TimeSorter implements Comparator<Task> {
+    public TimeSorter() {
     }
 
     @Override

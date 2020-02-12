@@ -1,6 +1,7 @@
 package duke.pack;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -126,7 +127,7 @@ public class Parser {
         }
 
         String[] arr = fullCommand.split("todo");
-        Task t = new Todo(arr[1].trim(), "0000-00-00");
+        Task t = new Todo(arr[1].trim(), "0000-00-00", "00:00");
 
         Command c = new AddCommand(t);
 
@@ -158,18 +159,16 @@ public class Parser {
             throw new DukeException("    Oh no! Please include a time!");
         }
 
-        String time = "";
-        time = dateTime[1].trim();
-
         try {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
-            Task t = new Event(splitByEvent[1].trim(), time, date, date.toString());
+            LocalTime time = LocalTime.parse(dateTime[1].trim());
+            Task t = new Event(splitByEvent[1].trim(), time, date, date.toString(), time.toString());
             Command c = new AddCommand(t);
             return c;
 
         } catch (DateTimeParseException e) {
             throw new DukeException("    Oh no! Please follow the date format! " +
-                    "Example: 2020-01-27!");
+                    "Example: 2020-01-27 13:00!");
         }
     }
 
@@ -200,19 +199,17 @@ public class Parser {
             throw new DukeException("    Oh no! Please include a time!");
         }
 
-        String time = "";
-        time = dateTime[1].trim();
-
         try {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
+            LocalTime time = LocalTime.parse(dateTime[1].trim());
             // add to list
-            Task t = new Deadline(splitByDeadline[1].trim(), time, date, date.toString());
+            Task t = new Deadline(splitByDeadline[1].trim(), time, date, date.toString(), time.toString());
             Command c = new AddCommand(t);
             return c;
 
         } catch (DateTimeParseException e) {
             throw new DukeException("    Oh no! Please follow the date format! " +
-                    "Example: 2020-01-27!");
+                    "Example: 2020-01-27 13:00!");
         }
     }
 

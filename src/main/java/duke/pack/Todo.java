@@ -9,9 +9,11 @@ public class Todo extends Task {
     /**
      * Creates a to-do type of task.
      * @param description task to be done
+     * @param dateToCompare date used in comparator
+     * @param timeToCompare time used in comparator
      */
-    public Todo(String description, String dateToCompare) {
-        super(description, dateToCompare);
+    public Todo(String description, String dateToCompare, String timeToCompare) {
+        super(description, dateToCompare, timeToCompare);
     }
 
     /**

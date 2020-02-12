@@ -1,13 +1,15 @@
 package duke.pack;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Represents a command to add a deadline type of task.
  */
 public class Deadline extends Task {
-    protected String time;
+    protected LocalTime time;
     protected LocalDate date;
     protected final String type = "D";
 
@@ -17,8 +19,10 @@ public class Deadline extends Task {
      * @param time the time the task is due
      * @param date the date the task is due
      */
-    public Deadline(String description, String time, LocalDate date, String dateToCompare) {
-        super(description, dateToCompare);
+    public Deadline(String description, LocalTime time, LocalDate date,
+                    String dateToCompare, String timeToCompare) {
+
+        super(description, dateToCompare, timeToCompare);
         this.time = time;
         this.date = date;
     }
@@ -37,13 +41,14 @@ public class Deadline extends Task {
         }
 
         return type + " | " + done + " | " + description
-                + " | " + time + " | " + date.toString() + "\n";
+                + " | " + time.toString() + " | " + date.toString() + "\n";
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +  ", " + time + ")";
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +  ", " +
+                time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + ")";
     }
 
 }

@@ -7,15 +7,19 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String dateToCompare;
+    protected String timeToCompare;
 
     /**
      * Creates a task with the specified description.
      * @param description the task description
+     * @param dateToCompare date used in comparator
+     * @param timeToCompare time used in comparator
      */
-    public Task(String description, String dateToCompare) {
+    public Task(String description, String dateToCompare, String timeToCompare) {
         this.description = description;
         this.isDone = false;
         this.dateToCompare = dateToCompare;
+        this.timeToCompare = timeToCompare;
     }
 
     /**
@@ -44,6 +48,10 @@ public class Task {
 
     public String getDateToCompare() {
         return dateToCompare;
+    }
+
+    public String getTimeToCompare() {
+        return timeToCompare;
     }
 
     public String formatForFile() {
