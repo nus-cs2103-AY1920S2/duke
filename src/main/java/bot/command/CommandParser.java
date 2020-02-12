@@ -49,9 +49,9 @@ public class CommandParser {
         new TodoInstruction(Command.TODO)
     };
 
-    private static final HashMap<String, Instruction> instrMap =
+    public static final HashMap<String, Instruction> INSTR_MAP =
             new HashMap<String, Instruction>();
-    private static final HashMap<String, Command> commandMap =
+    public static final HashMap<String, Command> COMMAND_MAP =
             new HashMap<String, Command>();
 
     public CommandParser() {
@@ -72,11 +72,11 @@ public class CommandParser {
             UnknownInstructionException {
 
         String firstWord = command.split("\\s+", 2)[0];
-        if (CommandParser.instrMap.containsKey(firstWord)
-                && CommandParser.commandMap.containsKey(firstWord)
+        if (CommandParser.INSTR_MAP.containsKey(firstWord)
+                && CommandParser.COMMAND_MAP.containsKey(firstWord)
         ) {
-            return CommandParser.instrMap.get(firstWord)
-                    .parse(command, CommandParser.commandMap.get(firstWord));
+            return CommandParser.INSTR_MAP.get(firstWord)
+                    .parse(command, CommandParser.COMMAND_MAP.get(firstWord));
         } else {
             throw new UnknownInstructionException(command);
         }
@@ -91,8 +91,8 @@ public class CommandParser {
         for (Instruction inst : ALL_INSTRUCTIONS) {
             Collection<Command> commands = inst.getCommandList();
             for (Command com : commands) {
-                CommandParser.instrMap.put(com.getWord(), inst);
-                CommandParser.commandMap.put(com.getWord(), com);
+                CommandParser.INSTR_MAP.put(com.getWord(), inst);
+                CommandParser.COMMAND_MAP.put(com.getWord(), com);
             }
         }
     }
