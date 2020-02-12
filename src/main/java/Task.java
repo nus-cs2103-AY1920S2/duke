@@ -11,6 +11,7 @@ public class Task {
     public LocalDate processedDate;
     public String fileDate;
     public boolean hasProcessedDate = false;
+    public int priority = 0;
 
     public Task(String type, String name) {
         this.type = type;
@@ -130,6 +131,9 @@ public class Task {
         }
     }
 
+    public void setPriority(int priorityLevel) {
+        this.priority = priorityLevel;
+    }
     public void addDate(String date) {
         this.date = date;
     }

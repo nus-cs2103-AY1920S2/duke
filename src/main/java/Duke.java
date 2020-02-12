@@ -274,6 +274,20 @@ public class Duke extends Application {
                         System.out.println(j + "." + foundTasks.get(i).getIcon() + foundTasks.get(i).status + " " + foundTasks.get(i).getDescription());
                     }
                     break;
+                case ("priority"):
+                    for (int i = 0; i < taskNames.size(); i++) {
+                        String[] currentTaskName = taskNames.get(i).split("\\s");
+                        for (int j = 0; j < currentTaskName.length; j++) {
+                            if (currentTaskName[j].equals(parser.getSearchQuery())) {
+                                foundTasks.add(arr.get(i));
+                            }
+                        }
+                        assert i >= taskNames.size() : "error";
+                    }
+                    for (int i = 0; i < foundTasks.size(); i++) {
+                        foundTasks.get(i).setPriority(1);
+                    }
+                    break;
                 case ("bye"):
                     System.out.println("Bye. Hope to see you again soon!");
                     break;

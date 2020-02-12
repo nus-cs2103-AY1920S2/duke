@@ -27,6 +27,17 @@ public class Parser {
             }
             this.setSearchQuery(searchQuery);
             return "find";
+        } else if (userInput.split("\\s")[0].equals("priority")) {
+            String searchQuery = "";
+            for (int i = 1; i < userInput.split("\\s").length; i++) {
+                if (i == 1) {
+                    searchQuery += userInput.split("\\s")[i];
+                } else {
+                    searchQuery += " " + userInput.split("\\s")[i];
+                }
+            }
+            this.setSearchQuery(searchQuery);
+            return "priority";
         } else if (userInput.split("\\s")[0].equals("bye")) {
             return "bye";
         } else {
