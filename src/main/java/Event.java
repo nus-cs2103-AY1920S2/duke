@@ -1,21 +1,19 @@
-package duke;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Event Class extends the Task Class to store objects with a description with a time but no date attached
+ * The Event Class extends the Task Class to store objects with a description with a time but no date attached.
  * @author qiujingying
  * @version 1.0
  */
-public class Event extends Task{
+public class Event extends Task {
 
     protected String time;
     protected LocalDateTime ldt;
     private TaskType type = TaskType.EVENT;
 
     /**
-     * Creates an Event object with a description and specific start and end time
+     * Creates an Event object with a description and specific start and end time.
      * @param description details of the Event
      * @param time start and end time
      */
@@ -27,7 +25,7 @@ public class Event extends Task{
     }
 
     /**
-     * Returns the type of the Task
+     * Returns the type of the Task.
      * @return TaskType.EVENT
      */
     public TaskType getType() {
