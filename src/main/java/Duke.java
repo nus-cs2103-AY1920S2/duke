@@ -9,10 +9,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -73,15 +71,18 @@ public class Duke {
 
                 String commandType = parser.getCommandType(command);
 
-                if (commandType.equals("list")) {
+                switch (commandType) {
+                case "list":
                     tasks.printList();
                     command = parser.readCommand();
-                } else if (commandType.equals("find")) {
+                    break;
+                case "find":
                     String findString = parser.getFind(command);
                     TaskList matchedTask = tasks.find(findString);
                     ui.printFind(matchedTask);
                     command = parser.readCommand();
-                } else if (commandType.equals("done")) {
+                    break;
+                case "done": {
                     int taskNo = parser.getTaskNo(command);
                     try {
                         tasks.setDone(taskNo);
@@ -90,14 +91,18 @@ public class Duke {
                         System.out.println("There is no task " + (taskNo + 1) + " in the list.");
                     }
                     command = parser.readCommand();
-                } else if (commandType.equals("delete")) {
+                    break;
+                }
+                case "delete": {
                     int taskNo = parser.getTaskNo(command);
                     Task task = tasks.getTask(taskNo);
                     ui.printDelete(task, tasks.getSize() - 1);
                     tasks.deleteTask(taskNo);
                     storage.saveFile(tasks.getTaskList());
                     command = parser.readCommand();
-                } else if (commandType.equals("deadline")) {
+                    break;
+                }
+                case "deadline":
                     try {
                         Deadline deadline = parser.getDeadline(command);
                         tasks.addTask(deadline);
@@ -107,7 +112,8 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
                     command = parser.readCommand();
-                } else if (commandType.equals("event")) {
+                    break;
+                case "event":
                     try {
                         Event event = parser.getEvent(command);
                         tasks.addTask(event);
@@ -117,7 +123,8 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
                     command = parser.readCommand();
-                } else if (commandType.equals("todo")) {
+                    break;
+                case "todo":
                     try {
                         ToDo toDo = parser.getToDo(command);
                         tasks.addTask(toDo);
@@ -127,6 +134,9 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
                     command = parser.readCommand();
+                    break;
+                default:
+                    System.out.println(new DukeException("Invalid command"));
                 }
             }
         } catch (DukeException e) {
