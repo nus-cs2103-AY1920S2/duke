@@ -146,4 +146,115 @@ public class Ui {
         System.out.println(DELIMITER);
         System.out.print("> ");
     }
+
+    /**
+     * Prints the starting message when Duke starts.
+     */
+    public String getGreeting() {
+        return DELIMITER + "\n" +
+        "> Hello! I'm Duchess\n" +
+        "> What can I do for you?\n" +
+        DELIMITER +
+        "> ";
+    }
+
+    /**
+     * Prints the exit message when user ends a Duke session.
+     */
+    public String getExitMessage() {
+        return "> Bye! Hope you don't come back!";
+    }
+
+    /**
+     * Prints out message showing the task the user added into the task list.
+     *
+     * @param tasks List of tasks.
+     * @param task The task the user added into the list of tasks.
+     */
+    public String getAddedTask(TaskList tasks, Task task) {
+        return DELIMITER +
+        "> Alrighty, you added:\n" +
+        "  " + task.toString() + "\n" +
+        String.format("> Now you have %d tasks in your list.\n", tasks.getSize()) +
+        DELIMITER;
+    }
+
+    /**
+     * Prints out message showing the task the user deleted from the task list.
+     *
+     * @param tasks List of tasks.
+     * @param task The task the user deleted from the list of tasks.
+     */
+    public String getDeletedTask(TaskList tasks, Task task) {
+        return DELIMITER +
+        "> Do you really want to remove this?\n" +
+        "> Fine. I've removed:\n>    " + task.description + "\n" +
+        String.format("> Now you have %d tasks in your list\n", tasks.getSize()) +
+        DELIMITER;
+    }
+
+    /**
+     * Prints out message showing the task the user marked as done.
+     *
+     * @param task The task the user marked as done.
+     */
+    public String getDoneTask(Task task) {
+        return DELIMITER + "\n" +
+        "> I've finally done this task: \n" +
+        task + "\n" +
+        DELIMITER;
+    }
+
+    /**
+     * Prints out message showing task(s) that the user searched for.
+     * @param tasks The task(s) that the user searched for
+     */
+    public String getFoundTasks(TaskList tasks) {
+        return DELIMITER + "\n" +
+        "Here are the matching tasks in your list: \n" +
+        tasks + "\n" +
+        DELIMITER;
+    }
+
+    /**
+     * Prints out an error message from any kind of DukeException caught.
+     *
+     * @param e DukeException caught.
+     */
+    public String getError(DukeException e) {
+        return e.toString();
+    }
+
+    /**
+     * Prints out an error message arising from reading in tasks from saved file.
+     *
+     * @param e Exception caught from trying to read the save file.
+     */
+    public String getLoadingError(Exception e) {
+        return "Can't load saved data\n" +
+        e.toString();
+    }
+
+    /**
+     * Prints out all the tasks from the task list.
+     *
+     * @param tasks List of tasks.
+     */
+    public static String getTaskList(TaskList tasks) {
+        return DELIMITER + "\n" +
+        "Here are the tasks that you will never complete: \n" +
+        tasks + "\n" +
+        DELIMITER;
+    }
+
+    /**
+     * Prints out all the tasks from the task list that got archived.
+     * @param tasks List of tasks.
+     */
+    public String getArchiveMessage(TaskList tasks) {
+        return DELIMITER + "\n" +
+        "Here are the tasks that you have archived: \n" +
+        tasks + "\n" +
+        DELIMITER;
+    }
 }
