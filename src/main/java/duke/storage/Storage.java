@@ -130,10 +130,7 @@ public class Storage {
      */
     private Task generateTodo(String[] data) {
         Task task = new Todo(data[2]);
-        if (data[1].equals("1")) {
-            task.setStatusDone();
-        }
-        return task;
+        return setStateDoneIfDataStateIs1(task, data);
     }
 
     /**
@@ -144,10 +141,7 @@ public class Storage {
      */
     private Task generateEvent(String[] data) throws DukeException {
         Task task = new Event(data[2], data[3]);
-        if (data[1].equals("1")) {
-            task.setStatusDone();
-        }
-        return task;
+        return setStateDoneIfDataStateIs1(task, data);
     }
 
     /**
@@ -158,6 +152,17 @@ public class Storage {
      */
     private Task generateDeadline(String[] data) throws DukeException {
         Task task = new Deadline(data[2], data[3]);
+        return setStateDoneIfDataStateIs1(task, data);
+    }
+
+    /**
+     * Set the status to done if the index 1 of data is 1.
+     *
+     * @param task Task required to set to done or not.
+     * @param data Data to indicate the status to be set as done.
+     * @return Task that either set status to done or not done.
+     */
+    public Task setStateDoneIfDataStateIs1(Task task, String[] data) {
         if (data[1].equals("1")) {
             task.setStatusDone();
         }
