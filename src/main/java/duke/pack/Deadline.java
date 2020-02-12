@@ -11,6 +11,7 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected String fullDesc;
     protected final String type = "D";
+    protected String dateToCompare;
 
     /**
      * Creates a deadline type of task.
@@ -19,8 +20,8 @@ public class Deadline extends Task {
      * @param date the date the task is due
      * @param fullDesc the full description of task
      */
-    public Deadline(String description, String time, LocalDate date, String fullDesc) {
-        super(description, fullDesc);
+    public Deadline(String description, String time, LocalDate date, String fullDesc, String dateToCompare) {
+        super(description, fullDesc, dateToCompare);
         this.time = time;
         this.date = date;
     }

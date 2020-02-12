@@ -7,16 +7,18 @@ public class Task {
     protected String description;
     protected String fullDesc;
     protected boolean isDone;
+    protected String dateToCompare;
 
     /**
      * Creates a task with the specified description.
      * @param description the task description
      * @param fullDesc the full description of the task
      */
-    public Task(String description, String fullDesc) {
+    public Task(String description, String fullDesc, String dateToCompare) {
         this.description = description;
         this.fullDesc = fullDesc;
         this.isDone = false;
+        this.dateToCompare = dateToCompare;
     }
 
     /**
@@ -48,6 +50,10 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    public String getDateToCompare() {
+        return dateToCompare;
     }
 
     public String formatForFile() {

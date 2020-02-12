@@ -11,6 +11,7 @@ public class Event extends Task {
     protected String time;
     protected LocalDate date;
     protected final String type = "E";
+    protected String dateToCompare;
 
     /**
      * Creates an event type of task.
@@ -19,8 +20,8 @@ public class Event extends Task {
      * @param date date of event
      * @param fullDesc the full description of the task
      */
-    public Event(String description, String time, LocalDate date, String fullDesc) {
-        super(description, fullDesc);
+    public Event(String description, String time, LocalDate date, String fullDesc, String dateToCompare) {
+        super(description, fullDesc, dateToCompare);
         this.time = time;
         this.date = date;
     }

@@ -1,6 +1,8 @@
 T | 1 | read book
 T | 1 | bloobloop
-T | 0 | borrow book
-T | 1 | watch lecture
-E | 0 | meeting | 1pm | 2020-02-12
 T | 0 | code code code
+T | 0 | script
+E | 0 | meeting | 1pm | 2020-02-12
+E | 0 | meeting | 10am | 2020-02-12
+E | 0 | lab | 4pm | 2020-02-13
+D | 0 | slides | 3pm | 2020-02-15

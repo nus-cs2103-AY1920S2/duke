@@ -6,14 +6,15 @@ package duke.pack;
 public class Todo extends Task {
     protected String fullDesc;
     protected final String type = "T";
+    protected String dateToCompare;
 
     /**
      * Creates a to-do type of task.
      * @param description task to be done
      * @param fullDesc the full description of the task
      */
-    public Todo(String description, String fullDesc) {
-        super(description, fullDesc);
+    public Todo(String description, String fullDesc, String dateToCompare) {
+        super(description, fullDesc, dateToCompare);
     }
 
     /**

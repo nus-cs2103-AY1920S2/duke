@@ -27,6 +27,10 @@ public class Parser {
             // find command that returns tasks that match
             return parseFind(comm);
 
+        } else if (comm[0].equals("sort")) {
+            // sort command to sort tasks chronologically
+            return parseSort();
+
         } else if (comm[0].equals("done")) {
             // done command to mark task as done
             return parseDone(comm);
@@ -56,6 +60,11 @@ public class Parser {
             throw new DukeException("    Oh no! I'm sorry, I do not understand that, please try again!");
         }
 
+    }
+
+    public static Command parseSort() {
+        Command c = new SortCommand();
+        return c;
     }
 
     /**
@@ -117,7 +126,7 @@ public class Parser {
         }
 
         String[] arr = fullCommand.split("todo");
-        Task t = new Todo(arr[1].trim(), arr[1]);
+        Task t = new Todo(arr[1].trim(), arr[1], "0000-00-00");
 
         Command c = new AddCommand(t);
 
@@ -154,7 +163,7 @@ public class Parser {
 
         try {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
-            Task t = new Event(splitByEvent[1].trim(), time, date, comm[1]);
+            Task t = new Event(splitByEvent[1].trim(), time, date, comm[1], date.toString());
             Command c = new AddCommand(t);
             return c;
 
@@ -197,7 +206,7 @@ public class Parser {
         try {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             // add to list
-            Task t = new Deadline(splitByDeadline[1].trim(), time, date, comm[1]);
+            Task t = new Deadline(splitByDeadline[1].trim(), time, date, comm[1], date.toString());
             Command c = new AddCommand(t);
             return c;
 
