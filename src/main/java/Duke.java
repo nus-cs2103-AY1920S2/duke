@@ -55,11 +55,11 @@ public class Duke {
                     addAndStoreTask(task);
                     break;
                 case "deadline":
-                    task = createADeadlineTask(instructionByWord, lengthOfArray);
+                    task = createDeadlineOrEventTask("deadline", instructionByWord, lengthOfArray);
                     addAndStoreTask(task);
                     break;
                 case "event":
-                    task = createAnEventTask(instructionByWord, lengthOfArray);
+                    task = createDeadlineOrEventTask("event", instructionByWord, lengthOfArray);
                     addAndStoreTask(task);
                     break;
                 case "done":
@@ -139,7 +139,7 @@ public class Duke {
                 }
             }
         }
-        System.out.println(count + " task(s) were found containing keyword " + keyword + " :");
+        System.out.println(count + " task(s) were found containing keyword " + keyword + ":");
         for (Integer index : selectedList.keySet()) {
             System.out.println(index + ". " + selectedList.get(index));
         }
@@ -192,23 +192,14 @@ public class Duke {
         return new Todo(description);
     }
 
-    private Task createADeadlineTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
+    private Task createDeadlineOrEventTask(String typeOfTask, String[] instructionByWord, int lengthOfArray)
+            throws DukeException {
+        assert typeOfTask.equals("deadline") || typeOfTask.equals("event"):
+                "this method should only create either a deadline task or an event task";
         try {
-            int indexOfBy = -1;
-            for (int i = 1; i < lengthOfArray; i++) {
-                if (instructionByWord[i].equals("/by")) {
-                    indexOfBy = i;
-                    break;
-                }
-            }
-            if (indexOfBy == -1 || indexOfBy == 1 || indexOfBy == (lengthOfArray - 1)) {
-                ui.throwWrongFormatException("\"deadline a_string_describing_the_task /by YYYY-MM-DD\"");
-            }
-            String description = String.join(" ",
-                    Arrays.copyOfRange(instructionByWord, 1, indexOfBy));
-            String deadline = String.join(" ",
-                    Arrays.copyOfRange(instructionByWord, indexOfBy + 1, lengthOfArray));
-            return new Deadline(description, LocalDate.parse(deadline));
+            int indexOfByOrAt = getIndexOfByOrAt(typeOfTask, instructionByWord, lengthOfArray);
+            checkIfIndexIsValid(typeOfTask, lengthOfArray, indexOfByOrAt);
+            return constructDeadlineOrEventTask(typeOfTask, instructionByWord, lengthOfArray, indexOfByOrAt);
         } catch (DateTimeParseException e) {
             throw new DukeException("Incorrect format of date.\n"
                     + "The correct format should be YYYY-MM-DD.");
@@ -217,28 +208,48 @@ public class Duke {
         }
     }
 
-    private Task createAnEventTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
-        try {
-            int indexOfAt = -1;
-            for (int i = 1; i < lengthOfArray; i++) {
+    private int getIndexOfByOrAt(String typeOfTask, String[] instructionByWord, int lengthOfArray) {
+        assert typeOfTask.equals("deadline") || typeOfTask.equals("event");
+        int indexOfByOrAt = -1;
+        for (int i = 1; i < lengthOfArray; i++) {
+            if (typeOfTask.equals("deadline")) {
+                if (instructionByWord[i].equals("/by")) {
+                    indexOfByOrAt = i;
+                    break;
+                }
+            } else {
                 if (instructionByWord[i].equals("/at")) {
-                    indexOfAt = i;
+                    indexOfByOrAt = i;
+                    break;
                 }
             }
-            if (indexOfAt == -1 || indexOfAt == 1 || indexOfAt == lengthOfArray) {
+        }
+        return indexOfByOrAt;
+    }
+
+    private void checkIfIndexIsValid(String typeOfTask, int lengthOfArray, int indexOfByOrAt) throws DukeException {
+        assert typeOfTask.equals("deadline") || typeOfTask.equals("event");
+        if (indexOfByOrAt == -1 || indexOfByOrAt == 1 || indexOfByOrAt == (lengthOfArray - 1)) {
+            if (typeOfTask.equals("deadline")) {
+                ui.throwWrongFormatException("\"deadline a_string_describing_the_task /by YYYY-MM-DD\"");
+            } else {
                 ui.throwWrongFormatException("\"event a_string_describing_the_task /at YYYY-MM-DD\"");
             }
-            String description = String.join(" ",
-                    Arrays.copyOfRange(instructionByWord, 1, indexOfAt));
-            String time = String.join(" ",
-                    Arrays.copyOfRange(instructionByWord, indexOfAt + 1, lengthOfArray));
-            return new Event(description, LocalDate.parse(time));
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Incorrect format of date.\n"
-                    + "The correct format should be YYYY-MM-DD.");
-        } catch (DateTimeException e) {
-            throw new DukeException("Invalid value for year/month/date");
         }
+    }
+
+    private Task constructDeadlineOrEventTask(String typeOfTask, String[] instructionByWord, int lengthOfArray, int indexOfByOrAt) {
+        String description = String.join(" ",
+                Arrays.copyOfRange(instructionByWord, 1, indexOfByOrAt));
+        String deadline = String.join(" ",
+                Arrays.copyOfRange(instructionByWord, indexOfByOrAt + 1, lengthOfArray));
+        Task task;
+        if (typeOfTask.equals("deadline")) {
+            task = new Deadline(description, LocalDate.parse(deadline));
+        } else {
+            task = new Event(description, LocalDate.parse(deadline));
+        }
+        return task;
     }
 
     public static void main(String[] args) {
