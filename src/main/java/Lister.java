@@ -1,5 +1,8 @@
+import java.util.HashMap;
+
 /**
  * The Lister Class parses commands and references TaskList and Storage Classes to store and retrieve Tasks.
+ *
  * @author qiujingying
  * @version 1.0
  */
@@ -137,27 +140,40 @@ public class Lister {
         return sb;
     }
 
+    /**
+     * Refactored to C-BetterSearch.
+     * Able to find items even if the keyword matches the item only partially.
+     * @param sb empty StringBuilder
+     * @param description keywords to be found
+     * @return StringBuilder with tasks that have matching keywords
+     */
     private StringBuilder findTask(StringBuilder sb, String description) {
         TaskList tempList = new TaskList();
         for (int i = 0; i < taskList.getSize(); i++) {
             Task tempTask = taskList.retrieveTask(i);
-            if (tempTask.description.equals(description)) {
-                tempList.addTask(tempTask);
+            String[] keywords = tempTask.description.split(" ");
+            for (String s:keywords) {
+                if (s.equals(description)) {
+                    tempList.addTask(tempTask);
+                    break;
+                }
             }
         }
+        return appendTasks(sb, tempList);
+    }
 
+    private StringBuilder appendTasks(StringBuilder sb, TaskList tp) {
         try {
-            tempList.retrieveTask(0);
+            tp.retrieveTask(0);
         } catch (IndexOutOfBoundsException e) {
             sb.append("Sorry there are no such tasks.");
             return sb;
         }
 
         sb.append("Here are the matching tasks in your list:\n");
-        for (int i = 0; i < tempList.getSize(); i++) {
-            sb.append((i + 1) + "." + tempList.retrieveTask(i).toString() + "\n");
+        for (int i = 0; i < tp.getSize(); i++) {
+            sb.append((i + 1) + "." + tp.retrieveTask(i).toString() + "\n");
         }
-
         return sb;
     }
 
