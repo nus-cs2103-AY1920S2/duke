@@ -39,6 +39,7 @@ public class CommandHandler {
     static String handleTodoCommand(String command, TaskList taskList,
                                     Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        assert commands.get(1).equalsIgnoreCase("todo"); // pre-condition
         if (commands.size() < 2) {
             throw new DuchessException(ERROR_TODO_MISSING_CONTENT);
         }
@@ -62,6 +63,7 @@ public class CommandHandler {
     static String handleEventCommand(String command, TaskList taskList,
                                      Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        assert commands.get(1).equalsIgnoreCase("event"); // pre-condition
         if (commands.size() < 2) {
             throw new DuchessException(ERROR_EVENT_MISSING_CONTENT);
         }
@@ -89,6 +91,7 @@ public class CommandHandler {
     static String handleDeadlineCommand(String command, TaskList taskList,
                                         Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        assert commands.get(1).equalsIgnoreCase("deadline"); // pre-condition
         if (commands.size() < 2) {
             throw new DuchessException(ERROR_DEADLINE_MISSING_CONTENT);
         }
@@ -113,6 +116,7 @@ public class CommandHandler {
      */
     static String handleListCommand(String command, TaskList taskList,
                                     Ui ui, Storage storage) throws DuchessException {
+        assert command.trim().equalsIgnoreCase("list"); // pre-condition
         return ui.printTaskList(taskList);
     }
 
@@ -130,6 +134,7 @@ public class CommandHandler {
     static String handleDoneCommand(String command, TaskList taskList,
                                     Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        assert commands.get(1).equalsIgnoreCase("done"); // pre-condition
         int indexAsInt = Integer.parseInt(commands.get(1).trim());
         if (indexAsInt < 0 || indexAsInt > taskList.size()) {
             throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);
@@ -152,6 +157,7 @@ public class CommandHandler {
      */
     static String handleFindCommand(String command, TaskList taskList, Ui ui, Storage storage) {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        assert commands.get(1).equalsIgnoreCase("find"); // pre-condition
         ArrayList<Pair<Task, Integer>> filteredTaskList = taskList.find(commands.get(1).trim());
         return ui.printFilteredTaskList(filteredTaskList);
     }
@@ -170,6 +176,7 @@ public class CommandHandler {
     static String handleDeleteCommand(String command, TaskList taskList,
                                       Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        assert commands.get(1).equalsIgnoreCase("delete"); // pre-condition
         int indexAsInt = Integer.parseInt(commands.get(1).trim());
         if (indexAsInt < 0 || indexAsInt > taskList.size()) {
             throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);
@@ -191,6 +198,7 @@ public class CommandHandler {
      * @param storage  Storage instance.
      */
     static String handleHelpCommand(String command, TaskList taskList, Ui ui, Storage storage) {
+        assert command.trim().equalsIgnoreCase("help"); // pre-condition
         return ui.printHelpMessage();
     }
 
@@ -203,6 +211,7 @@ public class CommandHandler {
      * @param storage  Storage instance.
      */
     static String handleByeCommand(String command, TaskList taskList, Ui ui, Storage storage) {
+        assert command.trim().equalsIgnoreCase("bye"); // pre-condition
         return ui.printGoodbye();
     }
 }
