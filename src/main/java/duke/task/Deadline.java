@@ -7,19 +7,15 @@ import java.time.format.DateTimeFormatter;
  * Class representing a Deadline.
  */
 public class Deadline extends Task {
-    /**
-     * Time that task must be completed by.
-     */
-    protected LocalDateTime time;
 
     /**
      * Creates a Deadline object.
      *
-     * @param task String containing what to do.
+     * @param description String containing what to do.
      * @param time LocalDateTime object representing time that task must be completed by.
      */
-    public Deadline(String task, LocalDateTime time) {
-        super(task);
+    public Deadline(String description, LocalDateTime time) {
+        super(description);
         this.time = time;
     }
 
@@ -43,6 +39,6 @@ public class Deadline extends Task {
     public String toSaveString() {
         String timeStr = this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         return String.format(
-                "%s || deadline || %s || %s", super.toSaveString(), this.task, timeStr);
+                "%s || deadline || %s || %s", super.toSaveString(), this.description, timeStr);
     }
 }

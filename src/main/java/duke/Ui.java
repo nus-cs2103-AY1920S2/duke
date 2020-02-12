@@ -113,6 +113,13 @@ public class Ui {
         printSmallLine();
     }
 
+    public void showUpdate(Task task, ArrayList<Task> tasks) {
+        printSmallLine();
+        System.out.println("\tGot it. I've changed this task to:");
+        System.out.printf("\t%s\n", task);
+        printSmallLine();
+    }
+
     /**
      * Prints the Exception.
      *

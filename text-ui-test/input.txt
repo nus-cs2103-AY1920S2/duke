@@ -29,4 +29,8 @@ todo your butt
 search book
 search
 search
+updatedeadline 1 desc/ say hello time/ 2020-01-01 1300
+updatetodo 3 desc/ your mom
+updateevent 3 desc/ say hello time/ 2020-01-01 1300
+list
 bye

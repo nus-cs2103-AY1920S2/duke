@@ -7,16 +7,15 @@ import java.time.format.DateTimeFormatter;
  * Class representing an Event.
  */
 public class Event extends Task {
-    protected LocalDateTime time;
 
     /**
      * Creates Event object.
      *
-     * @param task String representing the task that needs to be done
+     * @param description String representing the task that needs to be done
      * @param time LocalDateTime representing the time event is at.
      */
-    public Event(String task, LocalDateTime time) {
-        super(task);
+    public Event(String description, LocalDateTime time) {
+        super(description);
         this.time = time;
     }
 
@@ -39,6 +38,6 @@ public class Event extends Task {
     @Override
     public java.lang.String toSaveString() {
         String timeStr = this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        return String.format("%s || event || %s || %s", super.toSaveString(), this.task, timeStr);
+        return String.format("%s || event || %s || %s", super.toSaveString(), this.description, timeStr);
     }
 }

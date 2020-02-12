@@ -1,20 +1,31 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Class representation of Task.
  */
 public class Task {
 
-    protected String task;
+    protected String description;
+    protected LocalDateTime time = null;
     protected Boolean done = false;
 
     /**
      * Creates Task object.
      *
-     * @param task String describing what to do.
+     * @param description String describing what to do.
      */
-    Task(String task) {
-        this.task = task;
+    Task(String description) {
+        this.description = description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 
     /** Sets this task as done. */
@@ -30,9 +41,9 @@ public class Task {
     @Override
     public String toString() {
         if (done) {
-            return "[✓] " + this.task;
+            return "[✓] " + this.description;
         } else {
-            return "[✗] " + this.task;
+            return "[✗] " + this.description;
         }
     }
 
