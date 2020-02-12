@@ -14,6 +14,7 @@ public class Event extends Task {
         super(description);
         try {
             date = LocalDate.parse(at);
+            assert this.date.isAfter(LocalDate.now()): "Invalid early date";
             System.out.println("Parsed date successfully");
         } catch (DateTimeParseException de) {
             this.at = at;
@@ -26,7 +27,7 @@ public class Event extends Task {
      * @return Created Event class.
      */
     public static Event create(String[] strArr) {
-        Event t = new Event(strArr[2], strArr[3]);
+        Event t = new Event(strArr[TASK_NAME_INDEX], strArr[3]);
         if (strArr[1].equals("1")) {
             t.setDone();
         }

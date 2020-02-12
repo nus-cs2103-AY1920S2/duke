@@ -30,11 +30,7 @@ public class Ui {
      * @param s String to be wrapped by two divider lines.
      */
     public String divider(String s) {
-        if (s.length() == 0) {
-            return "";
-        } else {
-            return s;
-        }
+        return s;
     }
 
     /**

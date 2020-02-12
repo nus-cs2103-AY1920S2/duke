@@ -13,6 +13,7 @@ public class Deadline extends Task {
         super(description);
         try {
             this.date = LocalDate.parse(by);
+            assert this.date.isAfter(LocalDate.now()): "Invalid early date";
             System.out.println("Parsed date successfully");
         } catch (DateTimeParseException de) {
             this.by = by;
@@ -25,7 +26,7 @@ public class Deadline extends Task {
      * @return Created Deadline class.
      */
     public static Deadline create(String[] strArr) {
-        Deadline t = new Deadline(strArr[2], strArr[3]);
+        Deadline t = new Deadline(strArr[TASK_NAME_INDEX], strArr[3]);
         if (strArr[1].equals("1")) {
             t.setDone();
         }
