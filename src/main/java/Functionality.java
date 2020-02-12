@@ -38,7 +38,7 @@ public class Functionality {
         String taskType = s.substring(0, whitespaceidx);
         if (taskType.equals("todo")) {
             String theTask = s.substring(whitespaceidx + 1);
-            Todo t = new Todo(theTask, tasks.size() + 1);
+            Todo t = new Todo(theTask);
             tasks.add(t);
             System.out.println(linedivider + "Got it. I've added this task:\n " + t
                     + "\nNow you have " + tasks.size() + " tasks in the list.\n" + linedivider);
@@ -47,12 +47,12 @@ public class Functionality {
             String theTask = s.substring(whitespaceidx + 1, taskIdx - 1);
             String date = s.substring(taskIdx + 1);
             if (taskType.equals("deadline")) {
-                Deadline t = new Deadline(theTask, date, tasks.size() + 1);
+                Deadline t = new Deadline(theTask, date);
                 tasks.add(t);
                 System.out.println(linedivider + "Got it. I've added this task:\n " + t
                         + "\nNow you have " + tasks.size() + " tasks in the list.\n" + linedivider);
             } else if (taskType.equals("event")) {
-                Event t = new Event(theTask, date, tasks.size() + 1);
+                Event t = new Event(theTask, date);
                 tasks.add(t);
                 System.out.println(linedivider + "Got it. I've added this task:\n " + t
                         + "\nNow you have " + tasks.size() + " tasks in the list.\n" + linedivider);
