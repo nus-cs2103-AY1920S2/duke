@@ -33,6 +33,7 @@ public class Controller {
                     if (parsedInput.length < 2) {
                         throw new DukeException("\t☹ OOPS!!! The task number cannot be empty.");
                     }
+                    assert parsedInput.length == 2 : "Invalid arguments";
                     int deletedTaskNumber = Integer.parseInt(parsedInput[1]);
                     Task deletedTask = taskList.getTask(deletedTaskNumber);
                     taskList.deleteTask(deletedTaskNumber);
@@ -52,6 +53,7 @@ public class Controller {
                     if (parsedInput.length < 2) {
                         throw new DukeException("\tPlease indicate a keyword.");
                     }
+                    assert parsedInput.length == 2 : "Invalid arguments";
                     String keyword = parsedInput[1];
                     return UI.LIST + taskList.findTaskContainingKeyword(keyword);
                 case "todo":
@@ -64,6 +66,7 @@ public class Controller {
                     if (parsedInput.length < 2) {
                         throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
+                    assert parsedInput.length == 2 : "Invalid arguments";
                     String[] by = parsedInput[1].split("/");
                     if (by.length < 2) {
                         throw new DukeException("\t☹ OOPS!!! The date of a deadline cannot be empty.");

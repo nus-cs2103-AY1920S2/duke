@@ -31,6 +31,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert dateBy != null : "Date should be stored for deadlines";
         return "[D]" + super.toString() + " (by: " + dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
