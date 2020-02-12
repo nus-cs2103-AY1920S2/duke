@@ -42,6 +42,7 @@ public class TaskList {
             throw new DukeException("Task for this number doesn't exist.");
         }
         int index = taskNum - 1;
+        assert index >= 0;
         Task currTask = tasks.get(index);
         currTask.setDone();
         tasks.set(index, currTask);
@@ -94,6 +95,7 @@ public class TaskList {
      */
     public Task delete(int taskNum) {
         int index = taskNum - 1;
+        assert index >= 0;
         Task deletedTask = tasks.get(index);
         tasks.remove(index);
         return deletedTask;
