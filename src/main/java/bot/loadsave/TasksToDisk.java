@@ -45,7 +45,10 @@ public class TasksToDisk extends LoadAndSave<Task> {
     @Override
     public ArrayList<Task> loadFromDisk() {
         ArrayList<Task> storedTasks = new ArrayList<Task>();
-        Scanner io = new Scanner(super.getToLoadFrom());
+        Scanner io = super.getToLoadFrom()
+                .map(fr -> new Scanner(fr))
+                .orElseGet(() -> TasksToDisk.getClosedScanner());
+
         while (io.hasNext()) {
             // main loop to load each saved task
             String typeAndDone = io.nextLine();
@@ -132,5 +135,17 @@ public class TasksToDisk extends LoadAndSave<Task> {
         return Integer.parseInt(
                 Character.toString(typeAndDone.charAt(type.length()))
                 ) == 1;
+    }
+
+    /**
+     * A method that returns a closed Scanner,
+     * which is a Scanner that has no output
+     *
+     * @return The closed Scanner.
+     */
+    private static Scanner getClosedScanner() {
+        Scanner sc = new Scanner("");
+        sc.close();
+        return sc;
     }
 }
