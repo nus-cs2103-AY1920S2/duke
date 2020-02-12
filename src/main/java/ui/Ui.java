@@ -107,9 +107,8 @@ public class Ui {
      * @param todo index of which task is done.
      */
     public void acknowledgeTodo(TaskList tasks, Task todo) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("   " + todo);
-        System.out.println("Now you have " + tasks.getTaskListSize() + " task(s) in the list.");
+        System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.",
+                todo, tasks.getTaskListSize());
     }
 
     /**
@@ -119,9 +118,8 @@ public class Ui {
      * @param deadline time of deadline.
      */
     public void acknowledgeDeadline(TaskList tasks, Task deadline) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("   " + deadline);
-        System.out.println("Now you have " + tasks.getTaskListSize() + " task(s) in the list.");
+        System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.",
+                deadline, tasks.getTaskListSize());
     }
 
     /**
@@ -131,9 +129,8 @@ public class Ui {
      * @param event time of event.
      */
     public void acknowledgeEvent(TaskList tasks, Task event) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("   " + event);
-        System.out.println("Now you have " + tasks.getTaskListSize() + " task(s) in the list.");
+        System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.",
+                event, tasks.getTaskListSize());
     }
 
     /**
@@ -144,9 +141,7 @@ public class Ui {
      * @throws InvalidIndexException when index is out of bound.
      */
     public void acknowledgeDelete(TaskList tasks, int... arrayOfIndexes) throws InvalidIndexException {
-
         System.out.println("Noted. I've removed this task(s):");
-
         int[] arrayOfDeleteIndexes = IntStream.of(arrayOfIndexes)
                                               .filter(index -> tasks.getTaskListSize() > index && index >= 0)
                                               .toArray();
@@ -155,7 +150,6 @@ public class Ui {
                  .forEach(index -> System.out.printf("%d.  %s\n", index + 1, tasks.getTask(index)));
 
         tasks.removeTasks(arrayOfDeleteIndexes);
-
         System.out.println("Now you have " + tasks.getTaskListSize() + " tasks in the list");
     }
 
