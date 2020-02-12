@@ -13,5 +13,5 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/data/
+data/data.txt
 text-uiHandler-test/
