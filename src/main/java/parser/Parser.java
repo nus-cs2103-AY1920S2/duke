@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    public static final String DATE_TIME_KEY = "(\\d{4}-\\d{2}-\\d{2})\\s*(\\d{2}:\\d{2})*";
+    public static final String DATE_TIME_KEY = "(\\d{4}-\\d{2}-\\d{2})?\\s*(\\d{2}:\\d{2})?";
 
     private static final String EXIT_KEY = "bye";
     private static final String  VIEW_LIST_KEY = "list";
@@ -20,7 +20,7 @@ public class Parser {
     private static final String TODO_KEY = "(todo)(.*)";
     private static final String DEADLINE_KEY = "(deadline)\\s*(\\S*)\\s*\\/by\\s*" + DATE_TIME_KEY;
     private static final String EVENT_KEY = "(event)\\s*(\\S*)\\s*\\/at\\s*" + DATE_TIME_KEY;
-    private static final String FIND_KEY = "(find)(.*)";
+    private static final String FIND_KEY = "(find)\\s*(\\S*)";
 
     private static final String DEFAULT_TIME = "23:59";
 
@@ -42,6 +42,8 @@ public class Parser {
 
             //TODO: change the error message
             throw new IllegalDateTimeFormatException(dte.getMessage() + '\n');
+        } catch (NullPointerException npe) {
+            throw new IllegalDateTimeFormatException("No date time string being inputted.\n");
         }
     }
 
@@ -64,6 +66,12 @@ public class Parser {
         String timeString = matcher.group(4);
 
         return parseDateTime(dateString, timeString);
+    }
+
+    private String findKeyword(Pattern pattern, String input) {
+        Matcher matcher = pattern.matcher(input);
+        matcher.find();
+        return matcher.group(2);
     }
 
     private static boolean isExitKey(String input) { return EXIT_KEY.equals(input); }
@@ -131,7 +139,8 @@ public class Parser {
             return new AddEventCommand(description, at);
         }
         else if (this.isFindKey(userInput)) {
-            throw new NoCommandException("OOPS!!! This command has not been implemented :-(\n");
+            String keyWord = this.findKeyword(FIND_PATTERN, userInput);
+            return new FindCommand(keyWord);
         }
         else {
             throw new NoCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
