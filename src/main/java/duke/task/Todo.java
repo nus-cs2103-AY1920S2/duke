@@ -30,6 +30,6 @@ public class Todo extends Task {
      */
     @Override
     public java.lang.String toSaveString() {
-        return String.format("%s || todo || %s", super.toSaveString(), this.task);
+        return String.format("%s || todo || %s", super.toSaveString(), this.description);
     }
 }
