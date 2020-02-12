@@ -3,6 +3,9 @@ package parser;
 import exceptions.NoDescriptionException;
 import model.TaskList;
 
+/**
+ * Abstract class implementing part of the command object.
+ */
 public class Command {
     protected TaskList taskList;
 

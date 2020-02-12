@@ -6,15 +6,27 @@ import model.Task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Presents a command to add deadline task into inner-task list.
+ */
 public class AddDeadlineCommand extends Command {
     protected String description;
     protected LocalDateTime at;
 
+    /**
+     * Constructs an {@code AddDeadlineCommand}.
+     * @param description A valid description for a event task.
+     */
     public AddDeadlineCommand(String description, LocalDateTime at) {
         this.description = description;
         this.at = at;
     }
 
+    /**
+     * Create a deadline task with the inputted description and add it to inner-tasklist.
+     * @return response from the TaskList class as a string.
+     * @throws NoDescriptionException If the description is empty.
+     */
     @Override
     public String execute() throws NoDescriptionException {
         Task taskToAdd = new DeadLineTask(description, at);

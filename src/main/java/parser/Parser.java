@@ -14,6 +14,9 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Implements methods to parse the input command.
+ */
 public class Parser {
     public static final String EXIT_KEY = "bye";
     public static final String  VIEW_LIST_KEY = "list";
@@ -32,6 +35,13 @@ public class Parser {
     static final Pattern DEADLINE_PATTERN = Pattern.compile(DEADLINE_KEY);
     static final Pattern EVENT_PATTERN = Pattern.compile(EVENT_KEY);
 
+    /**
+     * static method converts string to date time object.
+     * @param dateString A valid string representing the date.
+     * @param timeString A valid string representing the time.
+     * @return LocalDateTime object.
+     * @throws IllegalDateTimeFormatException if the string is invalid.
+     */
     public static LocalDateTime parseDateTime(String dateString, String timeString) throws IllegalDateTimeFormatException {
         //TODO: add a notification
         try {
@@ -46,18 +56,37 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse the indicated position from the input command.
+     * @param pattern Java regular expression pattern.
+     * @param input String input.
+     * @return parsed position as integer.
+     */
     private int findIndex(Pattern pattern, String input) {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
         return Integer.parseInt(matcher.group(3)) - 1;
     }
 
+    /**
+     * Parse the description from the input command.
+     * @param pattern Java regular expression pattern.
+     * @param input String input.
+     * @return parsed description as string.
+     */
     private String findDescription(Pattern pattern, String input) {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
         return matcher.group(2).trim();
     }
 
+    /**
+     * Parse the date time from the command to LocalDateTime object.
+     * @param pattern Java regular expression pattern.
+     * @param input String user input.
+     * @return LocalDateTime object.
+     * @throws IllegalDateTimeFormatException If the string in invalid format.
+     */
     private LocalDateTime findDateTime(Pattern pattern, String input) throws IllegalDateTimeFormatException {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
@@ -96,6 +125,13 @@ public class Parser {
         return eventMatcher.find();
     }
 
+    /**
+     * Return corresponding command with the parsed parameters.
+     * @param userInput String user input.
+     * @return parsed command.
+     * @throws NoCommandException If the user input can not be recognized as any command.
+     * @throws IllegalDateTimeFormatException If the date time string is in invalid format.
+     */
     public Command parseCommand(String userInput) throws
             NoCommandException, IllegalDateTimeFormatException{
         if (this.isExitKey(userInput)) {
