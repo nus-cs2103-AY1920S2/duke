@@ -1,4 +1,5 @@
 language: java
 jdk: openjdk11
+cache: false
 install: ./gradlew assemble
 script: ./gradlew check
