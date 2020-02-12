@@ -51,6 +51,10 @@ public class Event extends Task {
         return this.deadline;
     }
 
+    /**
+     * Outputs Event Object as a string for text files.
+     * @return String to be appended to text files
+     */
     public String writeFormat() {
         StringBuilder output = new StringBuilder("E|" + name + "|" + deadline + "|" + (isCompleted ? "1" : "0"));
         if (this.getTags().size() > 0) {
@@ -83,7 +87,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name + " (at: "
+        return "[E][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name + " (at: "  // output is tick and cross
                 + deadline.format(formatter) + ") " + super.toString();
     }
 }

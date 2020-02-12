@@ -29,6 +29,10 @@ public class Todo extends Task {
         this.isCompleted = true;
     }
 
+    /**
+     * Outputs TodoTask Object as a string for text files.
+     * @return String to be appended to text files
+     */
     public String writeFormat() {
         StringBuilder output = new StringBuilder("T|" + name + "|" + (isCompleted ? "1" : "0"));
         if (this.getTags().size() > 0) {
@@ -61,6 +65,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name + " " + super.toString();
+        return "[T][" + (isCompleted ? "\u2713" : "\u2717") // output is tick and cross
+                + "] " + name + " " + super.toString();
     }
 }

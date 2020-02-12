@@ -51,6 +51,10 @@ public class Deadline extends Task {
         return this.deadline;
     }
 
+    /**
+     * Outputs Deadline Object as a string for text files.
+     * @return String to be appended to text files
+     */
     public String writeFormat() {
         StringBuilder output = new StringBuilder("D|" + name + "|" + deadline + "|" + (isCompleted ? "1" : "0"));
         if (this.getTags().size() > 0) {
@@ -84,7 +88,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name + " (by: "
+        return "[D][" + (isCompleted ? "\u2713" : "\u2717") + "] " + name + " (by: "  // unicode is tick and cross
                 + deadline.format(formatter) + ") " + super.toString();
     }
 }
