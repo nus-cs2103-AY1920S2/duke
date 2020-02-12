@@ -22,7 +22,7 @@ public class Reminder extends Task {
   }
 
   public void timedPrint(long delay) {
-	  MainWindow.triggerReminder();
+	  MainWindow.triggerReminder(description, delay);
   }
 
   /**

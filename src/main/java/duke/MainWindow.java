@@ -25,11 +25,11 @@ public class MainWindow extends AnchorPane {
   private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.jpeg"));
 
   @FXML
-  public static void triggerReminder() {
+  public static void triggerReminder(String message, long delay) {
     Timeline timeline =
         new Timeline(
             new KeyFrame(
-                Duration.millis(2500), ae -> MainWindow.showReminder("alerttt ols workkk")));
+                Duration.seconds(delay), ae -> MainWindow.showReminder(message)));
     timeline.play();
   }
 
