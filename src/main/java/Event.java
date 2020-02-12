@@ -15,7 +15,6 @@ public class Event extends Task {
     }
 
     @Override
-    /*Override the toString method for Event*/
     public String toString(){
         return "[E]" + super.toString() + "| at: " + time ;
     }
@@ -23,7 +22,7 @@ public class Event extends Task {
     /**
      * This method indicates that a new Event Task has been added to the ArrayList in Store.
      */
-    public String Output(){
+    public String output() {
         return "Got it. I've added this task: \n" + " [E]" + super.toString() + "| at: " + time;
     }
 
@@ -31,7 +30,7 @@ public class Event extends Task {
      * This method return the time of this Event Task.
      * @return String This is the time for the Event.
      */
-    public String getTime(){
+    public String getTime() {
         return time;
     }
 }

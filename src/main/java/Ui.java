@@ -23,7 +23,7 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
-    public static String welcomeMessage() {
+    public String welcomeMessage() {
         return "Hi, welcome to Duke! \nHow can I help you?";
     }
 

@@ -3,9 +3,9 @@ public class Task {
     protected boolean isDone; //status of the action
     private Ui ui = new Ui();
     protected String line = ui.line();
-    protected String StatusIcon;
+    protected String statusIcon;
 
-    public String Output(){
+    public String output(){
         return "";
     }
 
@@ -13,31 +13,33 @@ public class Task {
      * This methods updates the Task action and indicate that it is incomplete.
      * @param description This is the action for the Task.
      */
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.StatusIcon = "\u2718";
+        this.statusIcon = "\u2718";
     }
 
     /**
-     * This methods retrun the status icon.
-     * @return String This return the status icon.
+     * This methods changes the status icon.
      */
     public void getStatusIcon() {
         if (isDone) {
-            this.StatusIcon = "\u2713";
+            this.statusIcon = "\u2713";
         } else {
-            this.StatusIcon = "\u2718";
+            this.statusIcon = "\u2718";
         }
     }
 
+    /**
+     * This method set the status icon to 1 for easier storage.
+     */
     public void setStatusIcon() {
-        this.StatusIcon =  "1";
+        this.statusIcon =  "1";
     }
 
     @Override
-    public String toString(){
-        return "[" + StatusIcon + "] " + description;
+    public String toString() {
+        return "[" + statusIcon + "] " + description;
     }
 
 }

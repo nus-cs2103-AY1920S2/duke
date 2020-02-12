@@ -15,7 +15,6 @@ public class Deadline extends Task {
     }
 
     @Override
-    /*Override the toString method for Deadline*/
     public String toString() {
         return "[D]" + super.toString() + "| by: " + time ;
     }
@@ -23,7 +22,7 @@ public class Deadline extends Task {
     /**
      * This method indicates that a new Deadline Task has been added to the ArrayList in Store.
      */
-    public String Output() {
+    public String output() {
         return "Got it. I've added this task: \n" + " [D]" + super.toString() + "| by: " + time;
     }
 

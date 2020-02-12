@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(ui.welcomeMessage(), dukeImage)
+            DialogBox.getDukeDialog(ui.welcomeMessage(), dukeImage)
         );
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
@@ -52,34 +52,38 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String cmd = userInput.getText();
         String response = duke.getResponse(cmd);
+        boolean isTodo = cmd.contains("todo");
+        boolean isEvent = cmd.contains("event");
+        boolean isdeadline = cmd.contains("deadline");
+
         if (cmd.contains("bye")) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(cmd, userImage),
-                    DialogBox.getDukeDialog(response, dukeBye)
+                DialogBox.getUserDialog(cmd, userImage),
+                DialogBox.getDukeDialog(response, dukeBye)
             );
             System.exit(0); //exits program
-        }  else if (cmd.contains("done") || cmd.contains("delete")) {
+        }   else if (response.contains("OOPS") || response.contains("Invalid")) {
             dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(cmd, userImage),
+                DialogBox.getDukeDialog(response, dukeTroubled)
+            );
+            userInput.clear();
+        } else if (cmd.contains("done") || cmd.contains("delete")) {
+                dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(cmd, userImage),
                     DialogBox.getDukeDialog(response, dukeDone)
-            );
-            userInput.clear();
-        } else if (response.contains("OOPS") || response.contains("Invalid")) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(cmd, userImage),
-                    DialogBox.getDukeDialog(response, dukeTroubled)
-            );
-            userInput.clear();
+                );
+                userInput.clear();
         } else if (response.contains("matching")) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(cmd, userImage),
-                    DialogBox.getDukeDialog(response, dukeFind)
+                DialogBox.getUserDialog(cmd, userImage),
+                DialogBox.getDukeDialog(response, dukeFind)
             );
             userInput.clear();
-        } else if (response.contains("Got it")){
+        } else if (isTodo || isEvent || isdeadline) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(cmd, userImage),
-                    DialogBox.getDukeDialog(response, dukeFind)
+                DialogBox.getUserDialog(cmd, userImage),
+                DialogBox.getDukeDialog(response, dukeTask)
             );
             userInput.clear();
         } else {

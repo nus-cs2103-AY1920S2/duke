@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -13,7 +12,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 
 public class Duke extends Application {
@@ -31,7 +29,7 @@ public class Duke extends Application {
     private Ui ui = new Ui();
     private Scanner sn = new Scanner(System.in);
     private DukeException DE;
-    String[] CheckInput;
+    String[] checkInputs;
 
     /**
      * This method create a new Duke object.
@@ -43,15 +41,15 @@ public class Duke extends Application {
         File file = new File(filepath); //create a file obj with the given filepath.
         this.lib = new Store(file); //create store from absolute filepath
         try {
-            boolean result = file.exists();
-            if(!result){
+            boolean hasFile = file.exists();
+            if(!hasFile){
                 boolean isNewFile = file.createNewFile();
             } else {
-                    Scanner newSN = new Scanner(file);
-                    while(newSN.hasNextLine()){
-                        String nxtLine = newSN.nextLine();
-                        lib.load(nxtLine);
-                    } //end while: for reading existing file
+                Scanner newSN = new Scanner(file);
+                while(newSN.hasNextLine()){
+                    String nxtLine = newSN.nextLine();
+                    lib.load(nxtLine);
+                } //end while: for reading existing file
             }
         } catch (IOException e){
             e.printStackTrace();
@@ -141,8 +139,8 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * This method generate a response to user input.
+     * @return String of the the response of user input.
      */
     public String getResponse(String cmd) {
         if (cmd.equals("bye")) {
@@ -150,57 +148,57 @@ public class Duke extends Application {
         } else if (cmd.equals("list")) {
             return lib.list();
         } else if (cmd.contains("done")) {
-            String[] splited = cmd.split(" ");
-            if (splited.length < 2){
-                return DE.MissingDoneIndex();
+            String[] splits = cmd.split(" ");
+            if (splits.length < 2){
+                return DE.missingDoneIndex();
             } else {
-                int index = Integer.parseInt(splited[1]);
+                int index = Integer.parseInt(splits[1]);
                 return lib.done(index);
             }
         } else if (cmd.contains("delete")) {
-            String[] splited = cmd.split(" ");
-            int index = Integer.parseInt(splited[1]);
+            String[] splits = cmd.split(" ");
+            int index = Integer.parseInt(splits[1]);
             return lib.delete(index);
         } else if (cmd.contains("todo")) {
-            CheckInput = cmd.split(" ");
-            if (CheckInput.length < 2) {
-                return DE.IncorrectInputTodo();
+            checkInputs = cmd.split(" ");
+            if (checkInputs.length < 2) {
+                return DE.incorrectInputTodo();
             } else {
                 String NewInput = cmd.substring(5);
                 return lib.todo(NewInput);
             }
         } else if (cmd.contains("deadline")) {
-            CheckInput = cmd.split(" ");
-            if (CheckInput.length < 2) {
-                return DE.IncorrectInputDeadline();
+            checkInputs = cmd.split(" ");
+            if (checkInputs.length < 2) {
+                return DE.incorrectInputDeadline();
             } else if (!cmd.contains("/")) {
-                return DE.DeadlineMissingDate();
+                return DE.deadlineMissingDate();
             } else {
                 String NewInput = cmd.substring(9);
                 String[] ActionTime = NewInput.split("/", 2);
                 return lib.deadline(ActionTime);
             }
         } else if (cmd.contains("event")) {
-            CheckInput = cmd.split(" ");
-            if (CheckInput.length < 2) {
-                return DE.IncorrectInputEvent();
+            checkInputs = cmd.split(" ");
+            if (checkInputs.length < 2) {
+                return DE.incorrectInputEvent();
             } else if (!cmd.contains("/")) {
-                return DE.EventMissingDate();
+                return DE.eventMissingDate();
             } else {
-                String NewInput = cmd.substring(6);
-                String[] ActionTime = NewInput.split("/", 2);
-                return lib.event(ActionTime);
+                String newInput = cmd.substring(6);
+                String[] actionTime = newInput.split("/", 2);
+                return lib.event(actionTime);
             }
         } else if (cmd.contains("find")) {
-            CheckInput = cmd.split(" ");
-            if (CheckInput.length < 2) {
-                return DE.InvalidInput();
+            checkInputs = cmd.split(" ");
+            if (checkInputs.length < 2) {
+                return DE.invalidInput();
             } else {
-                String NewInput = cmd.substring(4).strip();
-                return lib.find(NewInput);
+                String newInput = cmd.substring(4).strip();
+                return lib.find(newInput);
             }
         } else {
-            return DE.InvalidInput();
+            return DE.invalidInput();
         }
     }
 }
