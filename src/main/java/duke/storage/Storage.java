@@ -73,32 +73,49 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DuchessException {
         try {
-            String fileContent = Files.readString(Path.of(this.filePath));
-            JsonArray array = JsonParser.parseString(fileContent).getAsJsonArray();
-            ArrayList<Task> result = new ArrayList<>();
-            for (int i = 0; i < array.size(); i++) {
-                JsonObject taskToCheck = (JsonObject) array.get(i);
-                if (taskToCheck.has(GSON_ATTR_DEADLINE)) {
-                    result.add(new Deadline(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
-                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
-                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
-                } else if (taskToCheck.has(GSON_ATTR_TIME_FRAME)) {
-                    result.add(new Event(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
-                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_TIME_FRAME), String.class),
-                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
-                } else {
-                    result.add(new ToDo(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
-                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
-                }
-            }
-            return result;
+            JsonArray jsonArray = readDataFromFilePath();
+            return readTaskArrayFromJsonArray(jsonArray);
         } catch (IOException e) {
-            File file = new File(this.filePath);
-            File directories = file.getParentFile();
-            if (!directories.exists() && !directories.mkdirs()) {
+            if (!isAbleToSave()) {
                 throw new DuchessException(ERROR_FAIL_TO_LOAD_AND_SAVE);
             }
             throw new DuchessException(ERROR_FAIL_TO_LOAD);
         }
+    }
+
+    // Private helper methods
+
+    private JsonArray readDataFromFilePath() throws IOException {
+        String fileContent = Files.readString(Path.of(this.filePath));
+        return JsonParser.parseString(fileContent).getAsJsonArray();
+    }
+
+    private ArrayList<Task> readTaskArrayFromJsonArray(JsonArray jsonArray) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JsonObject taskToCheck = (JsonObject) jsonArray.get(i);
+            if (taskToCheck.has(GSON_ATTR_DEADLINE)) {
+                // Task is a Deadline
+                result.add(new Deadline(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
+            } else if (taskToCheck.has(GSON_ATTR_TIME_FRAME)) {
+                // Task is an Event
+                result.add(new Event(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_TIME_FRAME), String.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
+            } else {
+                // Task is a ToDo
+                result.add(new ToDo(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
+            }
+        }
+        return result;
+    }
+
+    private boolean isAbleToSave() throws DuchessException {
+        File file = new File(this.filePath);
+        File directories = file.getParentFile();
+        return directories.exists() || !directories.mkdirs();
     }
 }
