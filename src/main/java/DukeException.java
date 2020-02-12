@@ -19,14 +19,20 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        if (!detail.equals("")) {
-            return "--------------------------------------------------\n" +
-                    "Why you so dumb? The description of " + detail + " cannot be empty! SMH \n" +
-                    "--------------------------------------------------\n";
+        boolean isNoCommand = detail.equals("");
+
+        String emptyDescError = "--------------------------------------------------\n" +
+                "Why you so dumb? The description of " + detail + " cannot be empty! SMH \n" +
+                "--------------------------------------------------\n";
+
+        String noCommandError = "--------------------------------------------------\n" +
+                "Nani? What talking you? \n" +
+                "--------------------------------------------------\n";
+
+        if (isNoCommand) {
+            return noCommandError;
         } else {
-            return "--------------------------------------------------\n" +
-                    "Nani? What talking you? \n" +
-                    "--------------------------------------------------\n";
+            return emptyDescError;
         }
     }
 }
