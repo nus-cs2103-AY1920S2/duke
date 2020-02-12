@@ -31,7 +31,7 @@ public class Parser {
         this.ui = new Ui();
     }
     public String parseCommands(String str) throws Exception {
-
+        //assert
         String reply = ui.lineBarrier();
 
         if (str.equals("bye")) {
