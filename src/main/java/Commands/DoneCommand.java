@@ -1,13 +1,17 @@
-package duke.commands;
+package com.duke.commands;
 
-import duke.dukeException.DukeParseException;
-import duke.Interpreter;
-import duke.Storage;
-import duke.TaskList;
+import com.duke.dukeException.DukeParseException;
+import com.duke.Interpreter;
+import com.duke.Storage;
+import com.duke.TaskList;
+import com.duke.DukeResponse;
 import java.util.List;
 import java.util.ArrayList;
-import duke.DukeResponse;
 
+
+/**
+ * This command marks tasks as done.
+ */
 public class DoneCommand extends Command {
 	public DoneCommand(String commandText) {
 		super(commandText);

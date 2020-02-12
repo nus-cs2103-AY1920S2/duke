@@ -1,9 +1,16 @@
-package duke;
-import java.util.List;
-import duke.task.*;
-import duke.dukeException.DukeException;
-import duke.DukeResponse;
+package com.duke;
 
+import java.util.List;
+import com.duke.task.Task;
+import com.duke.task.Event;
+import com.duke.task.Deadline;
+import com.duke.task.ToDo;
+import com.duke.dukeException.DukeException;
+import com.duke.DukeResponse;
+
+/**
+ * Interpreter with CLI interface, for testing. 
+ */
 public class CommandLineInterpreter {
 	static private final String separation = "_________________________________________________";
 	static private final String logo = " ____        _        \n"

@@ -1,10 +1,13 @@
-package duke.commands;
+package com.duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Interpreter;
-import duke.DukeResponse;
+import com.duke.Storage;
+import com.duke.TaskList;
+import com.duke.Interpreter;
+import com.duke.DukeResponse;
 
+/**
+ * This is termination command.
+ */
 public class ByeCommand extends Command {
 	static final String goodByeMessage = "Au revoir!";
 	public ByeCommand(String commandText) {

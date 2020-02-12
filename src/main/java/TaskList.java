@@ -1,16 +1,20 @@
-package duke;
+package com.duke;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
-import java.net.URL;
+import com.duke.task.Task;
+import com.duke.task.Event;
+import com.duke.task.ToDo;
+import com.duke.task.Deadline;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
-import duke.task.Task;
-import duke.task.Event;
-import duke.task.ToDo;
-import duke.task.Deadline;
+
+/**
+ * Store list of current tasks.
+ */
 
 public class TaskList {
 	private List<Task> containers;

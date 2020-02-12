@@ -1,11 +1,12 @@
-package duke.task;
+package com.duke.task;
+
 import java.util.List;
 import java.util.ArrayList;	
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
-import duke.dukeException.DukeParseException;
+import com.duke.dukeException.DukeParseException;
 
 /**
  * Abstract class Task, provide sharing codes for all task such as

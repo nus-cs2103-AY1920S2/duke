@@ -1,13 +1,18 @@
-package duke;
-import java.util.List;
-import java.util.Collections;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.dukeException.DukeException;
-import duke.DukeResponse;
+package com.duke;
 
+import java.util.List;
+import com.duke.task.Task;
+import com.duke.task.Event;
+import com.duke.task.Deadline;
+import com.duke.task.ToDo;
+import com.duke.dukeException.DukeException;
+import com.duke.DukeResponse;
+import java.util.Collections;
+
+/**
+ * 
+ * Get responses 
+ */
 public class Interpreter {
 	static private final String separation = "_________________________________________________";
 	static private final String logo = " ____        _        \n"

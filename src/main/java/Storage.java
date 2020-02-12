@@ -1,8 +1,11 @@
-package duke;
+package com.duke;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import duke.task.*;
+import com.duke.task.Task;
+import com.duke.task.Deadline;
+import com.duke.task.Event;
+import com.duke.task.ToDo;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
@@ -13,6 +16,9 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
+/**
+ * Load data from and into files.
+ */
 public class Storage {
 	private String pathToData;
 
