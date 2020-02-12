@@ -2,6 +2,7 @@ package com.duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 import com.duke.task.Task;
 import com.duke.task.Event;
 import com.duke.task.ToDo;
@@ -10,11 +11,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
-import java.net.URL;
 
 /**
  * Store list of current tasks.
  */
+
 public class TaskList {
 	private List<Task> containers;
 
@@ -51,6 +52,19 @@ public class TaskList {
 		for (Integer index: needy) {
 			assert(index >= 0);
 			this.containers.get(index).markAsDone();
+		}
+	}
+
+	public void deleteTask(List<Integer> needy) {
+		Collections.sort(needy, Collections.reverseOrder());
+		for (Integer index: needy) {
+			System.out.println(index);
+			System.out.println(containers.size());
+			try {
+				this.deleteAction(index.intValue());
+			} catch (Exception e) {
+				System.out.println("Out of index");
+			} 
 		}
 	}
 
