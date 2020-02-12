@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import dukeexception.DukeUnknownInputException;
+import javafx.util.Pair;
+
 import dukeexception.DukeException;
 
 import task.Task;
@@ -105,16 +108,52 @@ public class TaskList {
      * Gets a list of tasks that contains the word user is finding.
      *
      * @param word The word user wants to find.
-     * @return List of tasks that contains ward.
+     * @return List of Pair of Integer and Task, where int is the task number.
      */
-    public ArrayList<Task> find(String word) {
-        ArrayList<Task> tasksFound = new ArrayList<>();
+    public ArrayList<Pair<Integer, Task>> find(String word) {
+        ArrayList<Pair<Integer, Task>> tasksFound = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task currTask = tasks.get(i);
             if (currTask.toString().contains(word)) {
-                tasksFound.add(currTask);
+                tasksFound.add(new Pair<>(i, currTask));
             }
         }
         return tasksFound;
+    }
+
+    /**
+     * Updates a task in the tasks list.
+     *
+     * @param taskNum The task number to be updated.
+     * @param code T for time, D for description to decide which to be updated.
+     * @param change Information to be changed to.
+     * @return The updated task.
+     */
+    public Task update(int taskNum, String code, String change) {
+        int index = taskNum - 1;
+        assert index >= 0;
+        Task currTask = tasks.get(index);
+        Task updatedTask = null;
+        if (currTask instanceof Todo) {
+            if (code.equals("T")) {
+                throw new DukeUnknownInputException("Todo events has no time.");
+            } else {
+                updatedTask = new Todo(change, currTask.getisDone());
+            }
+        } else if (currTask instanceof Deadline) {
+            if (code.equals("D")) {
+                updatedTask = new Deadline(change, ((Deadline)currTask).getBy(), currTask.getisDone());
+            } else {
+                updatedTask = new Deadline(currTask.getDescription(), change, currTask.getisDone());
+            }
+        } else {
+            if (code.equals("D")) {
+                updatedTask = new Event(change, ((Event)currTask).getAt(), currTask.getisDone());
+            } else {
+                updatedTask = new Event(currTask.getDescription(), change, currTask.getisDone());
+            }
+        }
+        tasks.set(index, updatedTask);
+        return updatedTask;
     }
 }

@@ -51,10 +51,10 @@ public class Duke {
         }
         try {
             outputMsg = parser.executeCommand(tasks, command, ui);
+            storage.updateFile(tasks, tasks.getLength());
         } catch (DukeException e) {
             outputMsg = ui.showError(e);
         } finally {
-            storage.updateFile(tasks, tasks.getLength());
             return outputMsg;
         }
     }

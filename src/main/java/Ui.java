@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import dukeexception.DukeException;
 
+import javafx.util.Pair;
 import task.Task;
 
 /**
@@ -36,8 +37,20 @@ public class Ui {
         return byeMessage;
     }
 
+    /**
+     * Hello message consists of all the commands user can input.
+     *
+     * @return Entry hello msg
+     */
     public String showHello() {
-        String helloMessage = "Hello! I'm Duke\nWhat can I do for you?\n";
+        String helloMessage = "Hello! I'm Duke\n"
+                + "To see all tasks, type list\n"
+                + "Other commands are:\n"
+                + "todo (description)\n"
+                + "deadline or event (description) /by (time)\n"
+                + "done or delete (task number)\n"
+                + "find (keyword)\n"
+                + "update (task number) (D or T depending on description or time) (change)\n";
         return helloMessage;
     }
 
@@ -89,14 +102,26 @@ public class Ui {
     /**
      * Makes output msg of the tasks found from an ArrayList of tasks found.
      *
-     * @param tasksFound ArrayList of tasks found.
+     * @param tasksFound ArrayList of Pair containing taskNum and Task found.
      * @return Tasks found as a string nicely formatted.
      */
-    public String showFound(ArrayList<Task> tasksFound) {
+    public String showFound(ArrayList<Pair<Integer, Task>> tasksFound) {
         String foundMsg = "Here are the tasks found with keyword in your list:\n";
         for (int i = 0; i < tasksFound.size(); i++) {
-            foundMsg += i + 1 + "." + tasksFound.get(i) + "\n";
+            foundMsg += tasksFound.get(i).getKey() + "." + tasksFound.get(i).getValue() + "\n";
         }
         return foundMsg;
+    }
+
+    /**
+     * Makes output msg of updated task.
+     *
+     * @param task Updated task.
+     * @return Output msg of updated task as a string.
+     */
+    public String showUpdated(Task task) {
+        String updatedMsg = "Alright. I've updated the task to:\n"
+                + task + "\n";
+        return updatedMsg;
     }
 }

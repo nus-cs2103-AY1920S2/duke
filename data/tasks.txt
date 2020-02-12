@@ -6,5 +6,7 @@
 
 [E][N] cry in bed (at: Anytime)
 
-[T][N] drink
+[T][N] kill Benjamin
+
+[D][N] finish 2103 (by: Feb 2 2019)
 
