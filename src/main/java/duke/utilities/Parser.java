@@ -21,7 +21,7 @@ public class Parser {
      * @param task the task to parse
      * @return string representation of the task in the form (TYPE)|(0 or 1)|(description)|task time (if any)
      */
-    public static String parseTask(Task task) throws DukeException{
+    public static String parseTask(Task task) throws DukeException {
         String parsed;
         TaskType taskType = task.getTaskType();
         switch (taskType) {
@@ -35,6 +35,7 @@ public class Parser {
                 parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription() + "|" + ((Deadline) task).getTaskTime();
                 break;
             default:
+                parsed = null;
                 throw new DukeException(DukeError.TASKPARSE);
         }
         assert parsed != null : "parser unable to parse task, returns null";
@@ -43,11 +44,11 @@ public class Parser {
 
     /**
      * Parses line from tasks.txt into a Task object.
-     *
+     * Line is in the form of (TYPE)|(0 or 1)|(description)|(task time, if any).
      * @param line String representation of task
      * @return a Task object
      */
-    public static Task parseFile(String line) { // parses line from tasks.txt into a task
+    public static Task parseFile(String line) throws DukeException{ // parses line from tasks.txt into a task
         String[] split = line.split(Pattern.quote("|"));
         Task task;
         switch (split[0]) {
@@ -58,10 +59,11 @@ public class Parser {
                 task = new Event(split[1], split[2], split[3]);
                 break;
             case "D":
-                task =  new Deadline(split[1], split[2], split[3]);
+                task = new Deadline(split[1], split[2], split[3]);
                 break;
             default:
                 task = null;
+                throw new DukeException(DukeError.FILEPARSE);
         }
         assert task != null : "error in parsing file to task object";
         return task;
@@ -101,19 +103,19 @@ public class Parser {
                 Task task = new Task();
                 switch (taskType) {
                     case TODO:
-                        task = new ToDo(taskDetails);
+                        task = new ToDo("0",taskDetails);
                         break;
                     case EVENT:
                         String[] eventDetails = taskDetails.split("/at");
                         String eventDescription = eventDetails[0].trim();
                         String eventTime = eventDetails[1].trim();
-                        task = new Event(eventDescription, eventTime);
+                        task = new Event("0", eventDescription, eventTime);
                         break;
                     case DEADLINE:
                         String[] deadlineDetails = taskDetails.split("/by");
                         String deadlineDescription = deadlineDetails[0].trim();
                         String deadline = deadlineDetails[1].trim();
-                        task = new Deadline(deadlineDescription, deadline);
+                        task = new Deadline("0", deadlineDescription, deadline);
                         break;
                 }
 

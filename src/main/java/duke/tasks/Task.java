@@ -12,24 +12,8 @@ public class Task {
 
     }
 
-    /**
-     * A constructor for creating new tasks.
-     * Sets isDone to false by default.
-     *
-     * @param description description of the task
-     */
-    public Task(String description) { // constructor for duke.tasks.Task when creating new duke.tasks.Task
-        this.description = description.trim();
-        this.isDone = false;
-    }
-
-    /**
-     * Another constructor for creating tasks with isDone specified.
-     *
-     * @param status      0 - isDone is false, 1 - isDone is true
-     * @param description description of the task
-     */
-    public Task(String status, String description) { // constructor for duke.tasks.Task, if need to specify status (when parsing tasks from hard disk)
+    public Task(TaskType TYPE, String status, String description) {
+        this.TYPE = TYPE;
         this.isDone = status.equals("1");
         this.description = description;
     }

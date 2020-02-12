@@ -16,12 +16,11 @@ import java.util.ArrayList;
 public class Ui {
 
     public String start() {
-        return this.welcomeMsg() + this.promptMsg();
+        return "SQUIRTLE is here to help!!" + this.promptMsg();
     }
 
     public String promptMsg() {
-        this.lineBreak();
-        return "What will SQUIRTLE do?";
+        return "\nWhat will SQUIRTLE do?";
     }
 
     public String exitMsg() {
@@ -58,7 +57,7 @@ public class Ui {
     }
 
     public String deleteMsg(Task task) {
-        return "SQUIRTLE will forget: " + task.toString() + " ~~";
+        return "SQUIRTLE ate: " + task.toString() + " ~~";
     }
 
     public String doneMsg(Task task) {

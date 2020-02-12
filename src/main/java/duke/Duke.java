@@ -39,36 +39,44 @@ public class Duke extends Application {
     private Scene scene;
 
 
-    private Ui ui = new Ui();
-    private Storage storage = new Storage();
-    private TaskList taskList = new TaskList(storage.load());
-
-    public static void main(String[] args) {
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-        TaskList taskList = new TaskList(storage.load());
-        ui.start();
-        Scanner sc = new Scanner(System.in);
-        Boolean isRunning = true;
-        while (isRunning) {
-            try {
-                String userInput = sc.nextLine();
-                Command cmd = Parser.parseInput(userInput);
-                isRunning = cmd.isExitCommand();
-                System.out.println(cmd.execute(storage, taskList, ui));
-                System.out.println(ui.promptMsg());
-            } catch (DukeException e) {
-                ui.errorMsg(e);
-                ui.promptMsg();
-            }
-        }
-        sc.close();
-    }
+    private Ui ui;
+    private Storage storage;
+    private TaskList taskList;
+//
+//    public static void main(String[] args) {
+//        Ui ui = new Ui();
+//        Storage storage = new Storage();
+//        TaskList taskList = new TaskList(storage.load());
+//        ui.start();
+//        Scanner sc = new Scanner(System.in);
+//        Boolean isRunning = true;
+//        while (isRunning) {
+//            try {
+//                String userInput = sc.nextLine();
+//                Command cmd = Parser.parseInput(userInput);
+//                isRunning = cmd.isExitCommand();
+//                System.out.println(cmd.execute(storage, taskList, ui));
+//                System.out.println(ui.promptMsg());
+//            } catch (DukeException e) {
+//                ui.errorMsg(e);
+//                ui.promptMsg();
+//            }
+//        }
+//        sc.close();
+//    }
 
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
-        ui.start();
+        try {
+            ui = new Ui();
+            storage = new Storage();
+            taskList = new TaskList(storage.load());
+        }
+        catch(DukeException e) {
+            System.out.println(e);
+        }
+
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -116,6 +124,8 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        Label welcomeMsg = getDialogLabel(ui.start());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMsg, new ImageView(duke)));
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();

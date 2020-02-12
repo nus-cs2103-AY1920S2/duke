@@ -2,14 +2,8 @@ package duke.tasks;
 
 public class ToDo extends Task {
 
-    public ToDo(String description) {
-        super(description);
-        super.TYPE = TaskType.TODO;
-    }
-
     public ToDo(String status, String description) {
-        super(status, description);
-        super.TYPE = TaskType.TODO;
+        super(TaskType.TODO, status, description);
     }
 
     public String toString() {

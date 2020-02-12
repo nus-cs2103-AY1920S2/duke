@@ -8,25 +8,10 @@ import duke.utilities.TimeParser;
 public class Event extends Task implements TimeParser {
     protected LocalDate eventTime;
 
-    /**
-     * A constructor for creating a new Event.
-     * Sets isDone to false by default.
-     * Parses String representation of deadline into a LocalDate object.
-     *
-     * @param description description of event
-     * @param eventTime   String representation of the event time
-     * @throws DateTimeParseException
-     */
-    public Event(String description, String eventTime) throws DateTimeParseException { // constructor for creating new event
-        super(description);
-        this.eventTime = TimeParser.parseDate(eventTime);
-        super.TYPE = TaskType.EVENT;
-        assert this.eventTime != null: "event time is null after parsing in constructor";
-    }
 
     /**
      * Another constructor for creating Event
-     * This constructor is called in the Parser class when parsing file to string.
+     * This constructor is called in the Parser class when parsing file to string, or when parsing command to task.
      * Sets isDone to true or false according to status number (0 or 1).
      *
      * @param status      0 - isDone is false, 1 - isDone is true
@@ -35,10 +20,9 @@ public class Event extends Task implements TimeParser {
      * @throws DateTimeParseException
      */
     public Event(String status, String description, String eventTime) throws DateTimeParseException { // constructor for parsing tasks from hard disk
-        super(status, description);
-        super.TYPE = TaskType.EVENT;
+        super(TaskType.EVENT, status, description);
         this.eventTime = TimeParser.parseDate(eventTime);
-        assert this.eventTime != null: "event time is null after parsing in constructor";
+        assert this.eventTime != null : "event time is null after parsing in constructor";
     }
 
     public LocalDate getTaskTime() {
