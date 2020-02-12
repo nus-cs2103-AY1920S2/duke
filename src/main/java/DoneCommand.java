@@ -24,7 +24,9 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (description.equals("")) {
+        boolean isDescEmpty = description.equals("");
+
+        if (isDescEmpty) {
             throw new DukeException("done");
         } else {
             int num = Integer.parseInt(description);

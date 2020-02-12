@@ -21,7 +21,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (description.equals("")) {
+        boolean isDescEmpty = description.equals("");
+
+        if (isDescEmpty) {
             throw new DukeException("delete");
         } else {
             int num = Integer.parseInt(description);

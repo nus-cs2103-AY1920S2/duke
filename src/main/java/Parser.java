@@ -17,29 +17,38 @@ public class Parser {
      * @throws DukeException throws an exception if command is undefined
      */
     public static Command parse(String fullCommand) throws DukeException{
-        String[] arr = fullCommand.split(" ");
-        String command = arr[0];
+        String[] descArr = fullCommand.split(" ");
+        String command = descArr[0];
         String description = "";
 
-        if (arr.length > 1) {
+        boolean hasTaskDesc = descArr.length > 1;
+        boolean isByeCommand = command.equals("bye");
+        boolean isDeleteCommand = command.equals("delete");
+        boolean isDoneCommand = command.equals("done");
+        boolean isListCommand = command.equals("list");
+        boolean isAddCommand = command.equals("todo") || command.equals("deadline")
+                               || command.equals("event");
+        boolean isFindCommand = command.equals("find");
+
+        if (hasTaskDesc) {
             //get task description
-            for (int i = 1; i < arr.length - 1; i++) {
-                description = description + arr[i] + " ";
+            for (int i = 1; i < descArr.length - 1; i++) {
+                description = description + descArr[i] + " ";
             }
-            description = description + arr[arr.length - 1];
+            description = description + descArr[descArr.length - 1];
         }
 
-        if (command.equals("bye")) {
+        if (isByeCommand) {
             return new ExitCommand(command, description);
-        } else if (command.equals("delete")) {
+        } else if (isDeleteCommand) {
             return new DeleteCommand(command, description);
-        } else if (command.equals("done")) {
+        } else if (isDoneCommand) {
             return new DoneCommand(command, description);
-        } else if (command.equals("list")) {
+        } else if (isListCommand) {
             return new ListCommand(command, description);
-        } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+        } else if (isAddCommand) {
             return new AddCommand(command, description);
-        } else if (command.equals("find")) {
+        } else if (isFindCommand) {
             return new FindCommand(command, description);
         } else {
             throw new DukeException("");

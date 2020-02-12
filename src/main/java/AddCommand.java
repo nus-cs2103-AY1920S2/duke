@@ -25,26 +25,31 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String output = "";
+        boolean isTodo = command.equals("todo");
+        boolean isDeadline = command.equals("deadline");
+        boolean isDescEmpty = description.equals("");
 
-        if (command.equals("todo")) {
-            if (description.equals("")) {
+        if (isTodo) {
+            if (isDescEmpty) {
                 throw new DukeException("todo");
             } else {
                 output = tasks.addToDo(description);
             }
-        } else if (command.equals("deadline")) {
-            if (description.equals("")) {
+        } else if (isDeadline) {
+            if (isDescEmpty) {
                 throw new DukeException("deadline");
             } else {
-                String[] array = description.split(" /by ");
-                output = tasks.addDeadline(array[0], array[1]);
+                String[] descArray = description.split(" /by ");
+
+                output = tasks.addDeadline(descArray[0], descArray[1]);
             }
         } else {
-            if (description.equals("")) {
+            if (isDescEmpty) {
                 throw new DukeException("event");
             } else {
-                String[] array = description.split(" /at ");
-                output = tasks.addEvent(array[0], array[1]);
+                String[] descArray = description.split(" /at ");
+
+                output = tasks.addEvent(descArray[0], descArray[1]);
             }
         }
 
