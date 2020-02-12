@@ -8,10 +8,20 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a Command object specifically for finding tasks containing a keyword substring.
+ *
+ * @author Firzan Armani
+ */
 public class FindCommand extends Command {
     private String keyword = "";
     private ArrayList<Task> filteredTasks;
 
+    /**
+     * FindCommand constructor.
+     *
+     * @param keyword The substring to search for in the TaskList
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }

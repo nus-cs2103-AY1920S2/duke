@@ -14,6 +14,11 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
+/**
+ * Class for handling data to and from storage files.
+ *
+ * @author Firzan Armani
+ */
 public class Storage {
     private String filePath;
     private ArrayList<Task> taskList;

@@ -7,6 +7,11 @@ import java.time.format.DateTimeParseException;
 import duke.enums.ErrorCodes;
 import duke.exceptions.DukeException;
 
+/**
+ * Represents a Event task.
+ *
+ * @author Firzan Armani
+ */
 public class Event extends Task {
     private String eventDate;
     private LocalDate parsedDate;

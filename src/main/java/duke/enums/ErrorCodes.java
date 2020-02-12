@@ -1,5 +1,10 @@
 package duke.enums;
 
+/**
+ * Types of known error codes for DukeException.
+ *
+ * @author Firzan Armani
+ */
 public enum ErrorCodes {
     UNKNOWN_COMMAND,
     MISSING_TASK_NAME,

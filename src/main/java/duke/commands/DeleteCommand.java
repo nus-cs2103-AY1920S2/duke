@@ -7,9 +7,19 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a Command object specifically for adding a task to the TaskList.
+ *
+ * @author Firzan Armani
+ */
 public class DeleteCommand extends Command {
     int index = -1;
 
+    /**
+     * DeleteCommand constructor.
+     *
+     * @param index Index of the task to be removed from the TaskList
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

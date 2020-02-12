@@ -11,6 +11,11 @@ import duke.enums.ErrorCodes;
 import duke.enums.TaskTypes;
 import duke.exceptions.DukeException;
 
+/**
+ * Class with methods to parse user input and responds accordingly.
+ *
+ * @author Firzan Armani
+ */
 public class Parser {
     /**
      * Parses the full command input from the user and returns the appropriate command to be execute by caller.

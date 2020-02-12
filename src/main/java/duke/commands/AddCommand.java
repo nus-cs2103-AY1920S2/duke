@@ -11,10 +11,21 @@ import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 import duke.ui.Ui;
 
+/**
+ * Represents a Command object specifically for adding a task to the TaskList.
+ *
+ * @author Firzan Armani
+ */
 public class AddCommand extends Command {
     private TaskTypes taskType;
     private String inputArgs;
 
+    /**
+     * AddCommand constructor.
+     *
+     * @param taskType TaskTypes enum representing the type of task to be added
+     * @param inputArgs The combined arguments of the input task
+     */
     public AddCommand(TaskTypes taskType, String inputArgs) {
         this.taskType = taskType;
         this.inputArgs = inputArgs;

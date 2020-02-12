@@ -7,25 +7,17 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class for the Duke program.
+ *
+ * @author Firzan Armani
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private boolean isLoadedFromStorage = false;
-
-    /**
-     * Duke constructor.
-     */
-    public Duke() {
-        ui = new Ui();
-        storage = new Storage("data/duke.txt");
-        try {
-            tasks = new TaskList(storage.load());
-            this.isLoadedFromStorage = true;
-        } catch (DukeException e) {
-            tasks = new TaskList();
-        }
-    }
+    private static final String FILE_PATH = "data/duke.txt";
 
     /**
      * Duke constructor.
@@ -75,7 +67,7 @@ public class Duke {
      * @param args Command-line arguments. Unused.
      */
     public static void main(final String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke(FILE_PATH).run();
     }
 
     /**
@@ -89,7 +81,7 @@ public class Duke {
             output = c.execute(tasks, ui, storage);
             // TODO: If exit command, close application?
             // if (c.isExit()) {
-                //     isActive = false;
+            //     isActive = false;
             // }
         } catch (Exception e) {
             output = e.getMessage();

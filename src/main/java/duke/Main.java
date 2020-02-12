@@ -11,10 +11,13 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
+ *
+ * @author Firzan Armani
  */
 public class Main extends Application {
+    private static final String FILE_PATH = "data/duke.txt";
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke(FILE_PATH);
 
     @Override
     public void start(Stage stage) {
