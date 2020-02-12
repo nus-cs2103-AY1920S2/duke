@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 
-public class Functionality {
+public class Manager {
 
     private ArrayList<Task> tasks;
     private String linedivider = "____________________________________________________________\n";
-    public Functionality() {
-        tasks = new ArrayList<>();
+    public Manager(ArrayList<Task> t) {
+        tasks = t;
     }
+    private Storage storage = new Storage();
 
-    public void enter(String s) {
+    public void run(String s) {
         if (s.equals("list")) {
             list();
         } else if (s.length() > 5 && s.substring(0,4).equals("done")) {
@@ -21,7 +22,6 @@ public class Functionality {
             add(s);
         }
     }
-
 
     public void list() {
         System.out.println(linedivider + "Here are the tasks in your list:");
@@ -38,7 +38,7 @@ public class Functionality {
         String taskType = s.substring(0, whitespaceidx);
         if (taskType.equals("todo")) {
             String theTask = s.substring(whitespaceidx + 1);
-            Todo t = new Todo(theTask, tasks.size() + 1);
+            Todo t = new Todo(theTask);
             tasks.add(t);
             System.out.println(linedivider + "Got it. I've added this task:\n " + t
                     + "\nNow you have " + tasks.size() + " tasks in the list.\n" + linedivider);
@@ -47,30 +47,33 @@ public class Functionality {
             String theTask = s.substring(whitespaceidx + 1, taskIdx - 1);
             String date = s.substring(taskIdx + 1);
             if (taskType.equals("deadline")) {
-                Deadline t = new Deadline(theTask, date, tasks.size() + 1);
+                Deadline t = new Deadline(theTask, date);
                 tasks.add(t);
                 System.out.println(linedivider + "Got it. I've added this task:\n " + t
                         + "\nNow you have " + tasks.size() + " tasks in the list.\n" + linedivider);
             } else if (taskType.equals("event")) {
-                Event t = new Event(theTask, date, tasks.size() + 1);
+                Event t = new Event(theTask, date);
                 tasks.add(t);
                 System.out.println(linedivider + "Got it. I've added this task:\n " + t
                         + "\nNow you have " + tasks.size() + " tasks in the list.\n" + linedivider);
             }
 
         }
+        storage.save(tasks);
     }
 
     public void done(int n) {
         tasks.get(n-1).makeDone();
         System.out.println(linedivider + "Nice! I've marked this task as done:\n" + tasks.get(n-1)
                 + "\n" + linedivider);
+        storage.save(tasks);
     }
 
     public void delete(int n) {
         Task rm = tasks.remove(n - 1);
         System.out.println(linedivider + "Noted. I've removed this task:\n" + rm + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.\n" + linedivider);
+        storage.save(tasks);
     }
 
     public void error(String s) {

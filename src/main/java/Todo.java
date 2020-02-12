@@ -1,7 +1,11 @@
 public class Todo extends Task {
 
-    public Todo(String description, int entrynum) {
-        super(description, entrynum);
+    public Todo(String description) {
+        super(description);
+    }
+
+    public String toSaveForm() {
+        return "T , " + super.getStatusIcon() + " , " + description + "\n";
     }
 
     @Override

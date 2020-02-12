@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.logging.Level;
+import java.io.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,14 +13,15 @@ public class Duke {
         String linedivider = "____________________________________________________________\n";
         System.out.println(linedivider + "Hello! I'm Duke\nWhat can I do for you?\n" + linedivider);
         Scanner sc = new Scanner(System.in);
-        Functionality lvl = new Functionality();
+        Storage storage = new Storage();
+        Manager mngr = new Manager(storage.load());
         String entry = "";
         while (true) {
             entry = sc.nextLine();
             if (entry.equals("bye")) {
                 break;
             }
-            lvl.enter(entry);
+            mngr.run(entry);
         }
         System.out.println(linedivider + "Bye. Hope to see you again soon!" + "\n" + linedivider);
     }
