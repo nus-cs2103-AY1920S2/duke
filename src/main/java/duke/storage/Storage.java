@@ -71,6 +71,9 @@ public class Storage {
             taskList.add(new Event(eventArgs));
             break;
         default:
+            assert splitString[0].equals("T")
+                || splitString[0].equals("D")
+                || splitString[0].equals("E") : "There's an invalid line in the input file.";
             throw new DukeException(ErrorCodes.LOADING_ERROR, String.valueOf(lineNo));
         }
         if (splitString[1].equals("true")) {
