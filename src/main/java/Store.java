@@ -1,3 +1,4 @@
+import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,8 @@ public class Store {
     private DateFormat inputTime = new SimpleDateFormat("HHmm");        //input time in hhmm
     private DateFormat outputDate = new SimpleDateFormat("MMM dd yyyy");//output in MMM dd yyyy
     private DateFormat outputTime = new SimpleDateFormat("hh:mm a");    //output in hh:mm PM/AM
+    private String[] dateTimes = new String[2];
+    private DetectAnomalies detectA = new DetectAnomalies();
 
     /**
      * This method updates the existing variables.
@@ -101,17 +104,22 @@ public class Store {
         String timing;
         String detail;
         this.cmd = actionTime[0];
-        if(actionTime[1].length() <=1){
+        if(actionTime[1].length() <=1) {
             return DE.deadlineMissingDate();
         } else {
             detail = actionTime[1].substring(3).strip();
             timing = formatDateTime(detail);
-            Task task = new Deadline(cmd, timing);
-            Storage.add(task);
-            String output = task.output()
-                            + String.format("\nNow you have %d tasks in the list.\n", Storage.size());
-            writeToFile();
-            return output;
+            String output = detectA.checkForClash(Storage, dateTimes);
+            if (output.contains("No")) {
+                Task task = new Deadline(cmd, timing, dateTimes);
+                Storage.add(task);
+                output = task.output()
+                        + String.format("\nNow you have %d tasks in the list.\n", Storage.size());
+                writeToFile();
+                return output;
+            } else {
+                return output;
+            }
         }
     }
 
@@ -130,11 +138,16 @@ public class Store {
         } else {
             detail = actionTime[1].substring(3).strip();
             timing = formatDateTime(detail);
-            Task T = new Event(cmd, timing);
-            Storage.add(T);
-            String output = T.output() + String.format("\nNow you have %d tasks in the list.", Storage.size());
-            writeToFile();
-            return output;
+            String output = detectA.checkForClash(Storage, dateTimes);
+            if (output.contains("No")) {
+                Task T = new Event(cmd, timing, dateTimes);
+                Storage.add(T);
+                output = T.output() + String.format("\nNow you have %d tasks in the list.", Storage.size());
+                writeToFile();
+                return output;
+            } else {
+                return output;
+            }
         }
     }
 
@@ -188,22 +201,33 @@ public class Store {
             String[] results = S.split(" ", 2);
             Task task = new Todo(results[1]);
             task.isDone = alreadyDone;
+            if (alreadyDone){
+                task.getStatusIcon();
+            }
             Storage.add(task);
             writeToFile();
         } else if (S.contains("[D]")){
             String[] results = S.split(" ", 2);
             String[] actionTime = results[1].split("\\|");
             String time = actionTime[1].strip().substring(3).strip();
-            Task task = new Deadline(actionTime[0], time);
+            formatDateTimeForLoad(time);
+            Task task = new Deadline(actionTime[0], time, dateTimes);
             task.isDone = alreadyDone;
+            if (alreadyDone){
+                task.getStatusIcon();
+            }
             Storage.add(task);
             writeToFile();
         } else if (S.contains("[E]")){
             String[] results = S.split(" ", 2);
             String[] actionTime = results[1].split("\\|");
             String time = actionTime[1].strip().substring(3).strip();
-            Task task = new Event(actionTime[0], time);
+            formatDateTimeForLoad(time);
+            Task task = new Event(actionTime[0], time, dateTimes);
             task.isDone = alreadyDone;
+            if (alreadyDone){
+                task.getStatusIcon();
+            }
             Storage.add(task);
             writeToFile();
         }
@@ -230,7 +254,7 @@ public class Store {
         for (Task task : Storage) {
             String data = task.toString();
             if (data.contains(Action)) {
-             Matches.add(String.format("%d.", counter) + data);
+                Matches.add(String.format("%d.", counter) + data);
                 counter++;
             }
         }
@@ -252,22 +276,50 @@ public class Store {
      */
     public String formatDateTime(String detail) {
         String timing;
-        String[] dateTime = detail.split(" ");
+        String[] details = detail.split(" ");
         try {
-            Date date = inputDate.parse(dateTime[0]);
-            timing = outputDate.format(date);
-            if (dateTime.length == 2) {
+            Date date = inputDate.parse(details[0]);
+            dateTimes[0] = outputDate.format(date);
+            dateTimes[1] = " ";
+            if (details.length == 2) {
                 try {
-                    Date time = inputTime.parse(dateTime[1]);
-                    timing = timing + " " + outputTime.format(time);
-                } catch (DateTimeException d){
+                    Date time = inputTime.parse(details[1]);
+                    dateTimes[1] = outputTime.format(time);
+                } catch (DateTimeException | ParseException d){
+                    d.printStackTrace();
                     return DE.invalidTimeFormat();
                 }
             }
+            timing = dateTimes[0] + " " + dateTimes[1];
             return timing;
         } catch (DateTimeException | ParseException d){
+            d.printStackTrace();
             return DE.invalidDateFormat();
         }
     }
+
+    public void formatDateTimeForLoad (String detail){
+        SimpleDateFormat loadInputDate = new SimpleDateFormat("MMM dd yyyy");  //input date format of MMM dd yyyy
+        SimpleDateFormat loadInputTime = new SimpleDateFormat("hh:mm a");        //input time in hh:mm AM/PM
+        String[] details = detail.split(" ");
+
+        try {
+            Date date = loadInputDate.parse(details[0]);
+            dateTimes[0] = outputDate.format(date);
+            dateTimes[1] = " ";
+            if (details.length == 2) {
+                try {
+                    Date time = loadInputTime.parse(details[1]);
+                    dateTimes[1] = outputTime.format(time);
+                } catch (DateTimeException d){
+                    d.printStackTrace();
+                }
+            }
+        } catch (DateTimeException | ParseException d){
+            d.printStackTrace();
+        }
+    }
+
+
 }
 

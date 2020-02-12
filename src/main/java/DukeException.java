@@ -47,7 +47,7 @@ public class DukeException{
      * This method return the Error Message for Invalid Input.
      * @return String for error message.
      */
-    public String invalidInput(){
+    public String invalidInput() {
         return "OOPS!!! I'm sorry, but I don't know what that means.\n";
     }
 
@@ -55,7 +55,7 @@ public class DukeException{
      * This method return the Error Message for Invalid Number.
      * @return String for error message.
      */
-    public String exceedList(){
+    public String exceedList() {
         return "Invalid Number. Please Enter a valid number.\n";
     }
 

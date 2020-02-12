@@ -1,9 +1,12 @@
-public class Task {
+import java.util.Date;
+
+public abstract class Task {
     protected String description; //action to be taken
     protected boolean isDone; //status of the action
     private Ui ui = new Ui();
-    protected String line = ui.line();
     protected String statusIcon;
+    protected Date[] dateTimes = new Date[2];
+
 
     public String output(){
         return "";
@@ -37,9 +40,18 @@ public class Task {
         this.statusIcon =  "1";
     }
 
+    public Date getTime() {
+        return dateTimes[1];
+    }
+
+    public String getStrTime(){
+        return "";
+    }
     @Override
     public String toString() {
         return "[" + statusIcon + "] " + description;
     }
+
+
 
 }

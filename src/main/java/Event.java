@@ -1,17 +1,21 @@
+import java.util.Date;
+
 public class Event extends Task {
 
     private String time;
+    protected String[] dateTimes;
 
     /**
      * This method updates the action and time accordingly for Events.
      * @param description This is the details for Event.
      * @param time This is the time for the Event.
      */
-    public Event (String description, String time){
+    public Event (String description, String time, String[] dateTimes){
         super(description);
         assert description != null : "Description cannot bve empty";
         assert time != null : "Time cannot be empty";
         this.time = time;
+        this.dateTimes = dateTimes;
     }
 
     @Override
@@ -30,7 +34,7 @@ public class Event extends Task {
      * This method return the time of this Event Task.
      * @return String This is the time for the Event.
      */
-    public String getTime() {
-        return time;
+    public String getStrTime() {
+        return dateTimes[1];
     }
 }
