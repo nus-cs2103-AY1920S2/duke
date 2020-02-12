@@ -43,6 +43,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert due != null : "Due date does not exist.";
         return String.format("[D]%s (by: %s)", super.toString(), this.due.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }
