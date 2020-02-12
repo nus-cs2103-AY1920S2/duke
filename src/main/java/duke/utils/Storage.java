@@ -3,7 +3,7 @@ package duke.utils;
 import java.io.IOException;
 
 /**
- * Interface for storage object
+ * Interface for storage object.
  */
 public interface Storage {
 

@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.main.Ui;
+import duke.main.UiHandler;
 import duke.utils.Storage;
 import duke.utils.StorageStub;
 import duke.utils.TaskList;
@@ -14,12 +14,12 @@ public class ListCommandTest {
 
     Storage storage = new StorageStub();
     TaskList taskList = new TaskList();
-    Ui ui = new Ui();
+    UiHandler ui = new UiHandler();
 
     @Test
     public void executeEmptyListTest() {
         Command command = new ListCommand();
-        command.execute("list" , ui, storage, taskList);
+        command.execute("list", ui, storage, taskList);
         assertEquals(taskList.toString(), ui.getResponse());
     }
 
@@ -29,7 +29,7 @@ public class ListCommandTest {
         try {
             taskList.addToList("go to school", "todo");
             taskList.addToList("go to hell", "todo");
-            command.execute("list" , ui, storage, taskList);
+            command.execute("list", ui, storage, taskList);
             assertEquals(taskList.toString(), ui.getResponse());
         } catch (ParseException e) {
             e.printStackTrace();

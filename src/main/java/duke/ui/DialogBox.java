@@ -55,12 +55,25 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Generates DialogBox object for users.
+     * @param text user request
+     * @param img user image
+     * @return DialogBox object of user
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
-        dialogBox.setBackground(new Background(new BackgroundFill(Color.rgb(173, 216, 230), CornerRadii.EMPTY, Insets.EMPTY)));
+        dialogBox.setBackground(new Background(new BackgroundFill(Color.rgb(173, 216, 230),
+                CornerRadii.EMPTY, Insets.EMPTY)));
         return dialogBox;
     }
 
+    /**
+     * Generates DialogBox object for duke.
+     * @param text duke response
+     * @param img duke image
+     * @return DialogBox object of duke
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

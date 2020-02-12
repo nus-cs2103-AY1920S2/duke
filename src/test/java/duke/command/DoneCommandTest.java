@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.main.Ui;
+import duke.main.UiHandler;
 import duke.utils.Storage;
 import duke.utils.StorageStub;
 import duke.utils.TaskList;
@@ -12,12 +12,12 @@ public class DoneCommandTest {
 
     Storage storage = new StorageStub();
     TaskList taskList = new TaskList();
-    Ui ui = new Ui();
+    UiHandler ui = new UiHandler();
 
     @Test
     public void executeTest() {
         Command command = new DoneCommand();
-        command.execute("done 1" , ui, storage, taskList);
+        command.execute("done 1", ui, storage, taskList);
         assertEquals("No such task number", ui.getResponse());
     }
 

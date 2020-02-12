@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.main.Ui;
+import duke.main.UiHandler;
 import duke.utils.Storage;
 import duke.utils.StorageStub;
 import duke.utils.TaskList;
@@ -12,15 +12,15 @@ public class AddCommandTest {
 
     Storage storage = new StorageStub();
     TaskList taskList = new TaskList();
-    Ui ui = new Ui();
+    UiHandler ui = new UiHandler();
 
     @Test
     public void executeTest() {
         Command command = new AddCommand();
-        command.execute("todo go to school" , ui, storage, taskList);
-        assertEquals("I've added this task to the list:\n " +
-                taskList.getList().get(taskList.size() - 1) + "\n" +
-                "Now you have " + taskList.size() + " task(s) in the list", ui.getResponse());
+        command.execute("todo go to school", ui, storage, taskList);
+        assertEquals("I've added this task to the list:\n "
+                + taskList.getList().get(taskList.size() - 1) + "\n"
+                + "Now you have " + taskList.size() + " task(s) in the list", ui.getResponse());
     }
 
 }

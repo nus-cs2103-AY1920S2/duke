@@ -1,6 +1,13 @@
 package duke.utils;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.UnknownCommand;
+import duke.command.FindCommand;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -71,6 +78,18 @@ public class CommandParserTest {
     public void deadlineAddCommandTest() {
         Command command = CommandParser.commandParser("deadline asdfsadf");
         assertTrue(command instanceof AddCommand);
+    }
+
+    @Test
+    public void findCommandTest() {
+        Command command = CommandParser.commandParser("find asdfsadf");
+        assertTrue(command instanceof FindCommand);
+    }
+
+    @Test
+    public void unknownCommandTest() {
+        Command command = CommandParser.commandParser("asdfasfadf");
+        assertTrue(command instanceof UnknownCommand);
     }
 
 }

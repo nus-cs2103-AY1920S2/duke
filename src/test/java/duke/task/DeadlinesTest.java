@@ -4,11 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlinesTest {
 
-    Task task = new Deadlines("go to school", new Date(2019, 2, 4));
+    Task task = new Deadline("go to school", new Date(2019, 2, 4));
 
     @Test
     public void markDoneTest() {

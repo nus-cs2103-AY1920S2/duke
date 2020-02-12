@@ -18,11 +18,11 @@ public class Parser {
 
     /**
      * Parse string into date object.
-     * @param text
+     * @param text date in string format
      * @return date object from string
-     * @throws ParseException
+     * @throws ParseException parsing exception
      */
-    public static Date stringToDate(String text) throws ParseException{
+    public static Date stringToDate(String text) throws ParseException {
         Date date;
         SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT_1);
         date = formatter.parse(text);
@@ -31,7 +31,7 @@ public class Parser {
 
     /**
      * Check date format to see if it is in the form of yyyy-MM-dd.
-     * @param text
+     * @param text date in string format
      * @return boolean
      */
     public static boolean checkDateFormat(String text) {
@@ -50,7 +50,7 @@ public class Parser {
 
     /**
      * Convert date object to string in the format MMM dd yyyy.
-     * @param date
+     * @param date date in date format
      * @return string
      */
     public static String dateToString(Date date) {
@@ -61,7 +61,7 @@ public class Parser {
 
     /**
      * convert list of task to string to be stored.
-     * @param tasks
+     * @param tasks tasks in list of tasks format
      * @return string to be stored
      */
     public static String tasksToStorage(List<Task> tasks) {
@@ -69,7 +69,7 @@ public class Parser {
         SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT_1);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            String doneString = task.isDone()? "1" : "0";
+            String doneString = task.isDone() ? "1" : "0";
             data = data + task.getTaskType() + "&" + doneString + "&" + task.getTaskName();
             if (task.getTaskType() == "E" || task.getTaskType() == "D") {
                 data = data + "&" + formatter.format(task.getTaskTime());
@@ -83,12 +83,12 @@ public class Parser {
 
     /**
      * Convert string data loaded to list of tasks.
-     * @param data
+     * @param data tasks in string format
      * @return list of tasks
-     * @throws ParseException
+     * @throws ParseException parsing exception
      */
-    public static List<Task> storageToTask(String data) throws ParseException{
-        List<Task> tasks= new ArrayList<>();
+    public static List<Task> storageToTask(String data) throws ParseException {
+        List<Task> tasks = new ArrayList<>();
         String[] lines = data.split("\n");
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i];

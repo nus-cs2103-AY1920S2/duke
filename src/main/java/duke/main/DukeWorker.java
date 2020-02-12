@@ -29,6 +29,9 @@ public class DukeWorker {
         taskList = new TaskList();
     }
 
+    /**
+     * Initialize DukeWorker instance and load file storage.
+     */
     public void initializeWorker() {
         try {
             boolean fileExist = storage.checkFileExistence();

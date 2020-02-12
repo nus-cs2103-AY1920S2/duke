@@ -29,12 +29,18 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/image/user.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/image/duke.png"));
 
+    /**
+     * Constructor for Duke object.
+     */
     public Duke() {
         uiHandler = new UiHandler();
         worker = new DukeWorker(Constants.DUKE_FILE_PATH);
         worker.initializeWorker();
     }
 
+    /**
+     * Run instance of duke without GUI.
+     */
     public void run() {
         uiHandler.welcomeMessage();
         String request = "";
@@ -92,7 +98,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Part 3. Add functionality to handle user input.

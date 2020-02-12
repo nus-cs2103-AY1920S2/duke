@@ -35,11 +35,13 @@ public class AddCommand implements Command {
                 } catch (IOException e) {
                     System.out.println("Error in storing data");
                 }
-                uiHandler.setResponse("I've added this task to the list:\n " + taskList.getList().get(taskList.size() - 1) + "\n" +
-                        "Now you have " + taskList.size() + " task(s) in the list");
+                uiHandler.setResponse("I've added this task to the list:\n "
+                        + taskList.getList().get(taskList.size() - 1) + "\n"
+                        + "Now you have " + taskList.size() + " task(s) in the list");
                 return;
             } else {
-                uiHandler.setResponse("Adding task failed, either task body is empty or required time is not specified");
+                uiHandler.setResponse("Adding task failed, either task body is empty "
+                        + "or required time is not specified");
                 return;
             }
         } catch (ParseException e) {

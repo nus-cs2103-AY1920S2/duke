@@ -1,6 +1,5 @@
 E&1&go to school&2019-05-04
-T&1&build school
 D&1&burn school&2040-02-05
-T&0&go to hell
+T&1&go to hell
 T&0&go to class
-E&0&asggs&2022-08-05
+E&1&asggs&2022-08-05

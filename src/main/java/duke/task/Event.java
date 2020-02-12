@@ -68,7 +68,7 @@ public class Event extends ExecutableTask {
 
     @Override
     public String toString() {
-        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName() + " (at: " +
-                Parser.dateToString(getTaskTime()) + ")";
+        return "[" + getTaskType() + "]" + getDoneString() + " " + getTaskName() + " (at: "
+                + Parser.dateToString(getTaskTime()) + ")";
     }
 }

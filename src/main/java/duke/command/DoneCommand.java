@@ -1,7 +1,10 @@
 package duke.command;
 
 import duke.main.UiHandler;
-import duke.utils.*;
+import duke.utils.Parser;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Utils;
 
 import java.io.IOException;
 
@@ -36,7 +39,8 @@ public class DoneCommand implements Command {
             return;
         }
         taskList.markTaskAsDone(taskId);
-        String response = "Nice! Task(s) marked as done(unknown task number ignored):\n " + taskList.getList().get(taskId);
+        String response = "Nice! Task(s) marked as done(unknown task number ignored):\n "
+                + taskList.getList().get(taskId);
 
         for (int i = 1; i < indices.length; i++) {
             if (Utils.isNumeric(indices[i]) != true) {

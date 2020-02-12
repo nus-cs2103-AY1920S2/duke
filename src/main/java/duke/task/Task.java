@@ -3,36 +3,36 @@ package duke.task;
 import java.util.Date;
 
 /**
- * Interface for Task object
+ * Interface for Task object.
  */
 public interface Task {
 
     /**
-     * check if task is done
+     * Checks if task is done.
      * @return task done or not
      */
     public boolean isDone();
 
     /**
-     * get task name
+     * Gets task name.
      * @return task name
      */
     public String getTaskName();
 
     /**
-     * get task type
+     * Gets task type.
      * @return task type
      */
     public String getTaskType();
 
     /**
-     * get task time
+     * Gets task time.
      * @return task time
      */
     public Date getTaskTime();
 
     /**
-     * mark task as done
+     * Marks task as done.
      */
     public void markAsDone();
 }

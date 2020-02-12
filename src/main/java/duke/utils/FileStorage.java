@@ -15,7 +15,7 @@ public class FileStorage implements Storage {
 
     /**
      * File storage constructor.
-     * @param fileName
+     * @param fileName storage file name
      */
     public FileStorage(String fileName) {
         this.fileName = fileName;
@@ -23,7 +23,7 @@ public class FileStorage implements Storage {
 
     /**
      * Create storage if it doesn't exist.
-     * @throws IOException
+     * @throws IOException input exception
      */
     public void createStorage() throws IOException {
         //relative path
@@ -31,7 +31,9 @@ public class FileStorage implements Storage {
         File file = new File(relativePath);
         if (file.createNewFile()) {
             System.out.println(relativePath + " Save File Created");
-        } else System.out.println("File " + relativePath + " already exists");
+        } else {
+            System.out.println("File " + relativePath + " already exists");
+        }
     }
 
     /**
@@ -51,7 +53,7 @@ public class FileStorage implements Storage {
     /**
      * Load data from storage file.
      * @return data in the form of a string.
-     * @throws IOException
+     * @throws IOException input output exception
      */
     public String loadStorage() throws IOException {
         File file = new File(fileName);
@@ -67,7 +69,7 @@ public class FileStorage implements Storage {
     /**
      * Store data to storage file.
      * @param data in the form of a string.
-     * @throws IOException
+     * @throws IOException input output exception
      */
     public void storeData(String data) throws IOException {
         FileOutputStream fos = new FileOutputStream(fileName);

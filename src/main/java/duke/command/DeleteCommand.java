@@ -1,7 +1,10 @@
 package duke.command;
 
 import duke.main.UiHandler;
-import duke.utils.*;
+import duke.utils.Parser;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;

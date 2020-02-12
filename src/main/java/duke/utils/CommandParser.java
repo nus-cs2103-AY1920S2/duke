@@ -1,12 +1,25 @@
 package duke.utils;
 
-import duke.command.*;
+
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.UnknownCommand;
+import duke.command.FindCommand;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
 
 /**
  * Parser to parse commands made by user.
  */
 public class CommandParser {
 
+    /**
+     * Parses users' request and return the appropriate action.
+     * @param request users's request
+     * @return Command object
+     */
     public static Command commandParser(String request) {
         String[] token = request.split(" ", 2);
         if (token[0].equals("bye")) {

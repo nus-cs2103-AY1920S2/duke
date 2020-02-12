@@ -7,7 +7,7 @@ public class UiTest {
 
     @Test
     public void exitDukeTest() {
-        Ui ui = new Ui();
+        UiHandler ui = new UiHandler();
         assertEquals(ui.isExit(), false);
         ui.exitDuke();
         assertEquals(ui.isExit(), true);
@@ -15,7 +15,7 @@ public class UiTest {
 
     @Test
     public void getResponseTest() {
-        Ui ui = new Ui();
+        UiHandler ui = new UiHandler();
         ui.setResponse("hello");
         assertEquals(ui.getResponse(), "hello");
     }

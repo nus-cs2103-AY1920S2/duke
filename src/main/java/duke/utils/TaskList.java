@@ -29,7 +29,8 @@ public class TaskList {
     /**
      * Task list constructor with empty list.
      */
-    public TaskList() { }
+    public TaskList() {
+    }
 
     public List<Task> getList() {
         return tasks;
@@ -52,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * remove task at certain index
+     * remove task at certain index.
      * @param taskId to be removed
      */
     public void removeTask(int taskId) {
@@ -60,15 +61,15 @@ public class TaskList {
     }
 
     /**
-     * Finds tasks from task list with a given keyword
-     * @param word
+     * Finds tasks from task list with a given keyword.
+     * @param word keyword to search for
      * @return list of tasks with given keyword
      */
     public List<Task> findTasksByKeyword(String word) {
         List<Task> searchedTask = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             String[] tokens = tasks.get(i).getTaskName().split(" ");
-            if(Arrays.asList(tokens).contains(word)) {
+            if (Arrays.asList(tokens).contains(word)) {
                 searchedTask.add(tasks.get(i));
             }
         }
@@ -76,11 +77,11 @@ public class TaskList {
     }
 
     /**
-     * Adds item to task list
+     * Adds item to task list.
      * @param item name
      * @param type of item
      * @return whether addition is successful or not
-     * @throws ParseException
+     * @throws ParseException parsing exception
      */
     public boolean addToList(String item, String type) throws ParseException {
 
@@ -89,39 +90,39 @@ public class TaskList {
         String time;
 
         switch (type) {
-            case "todo":
-                newTask = new Todo(item);
-                break;
-            case "deadline":
-                tokens = item.split("/", 2);
-                if (tokens.length < 2) {
-                    return false;
-                }
-                if (!tokens[1].substring(0, 2).equals("by")) {
-                    return false;
-                }
-                time = tokens[1].substring(2).trim();
-                if (!Parser.checkDateFormat(time)) {
-                    return false;
-                }
-                newTask = new Deadline(tokens[0].trim(), Parser.stringToDate(time));
-                break;
-            case "event":
-                tokens = item.split("/", 2);
-                if (tokens.length < 2) {
-                    return false;
-                }
-                if (!tokens[1].substring(0, 2).equals("at")) {
-                    return false;
-                }
-                time = tokens[1].substring(2).trim();
-                if (!Parser.checkDateFormat(time)) {
-                    return false;
-                }
-                newTask = new Event(tokens[0].trim(), Parser.stringToDate(time));
-                break;
-            default:
-                newTask = null;
+        case "todo":
+            newTask = new Todo(item);
+            break;
+        case "deadline":
+            tokens = item.split("/", 2);
+            if (tokens.length < 2) {
+                return false;
+            }
+            if (!tokens[1].substring(0, 2).equals("by")) {
+                return false;
+            }
+            time = tokens[1].substring(2).trim();
+            if (!Parser.checkDateFormat(time)) {
+                return false;
+            }
+            newTask = new Deadline(tokens[0].trim(), Parser.stringToDate(time));
+            break;
+        case "event":
+            tokens = item.split("/", 2);
+            if (tokens.length < 2) {
+                return false;
+            }
+            if (!tokens[1].substring(0, 2).equals("at")) {
+                return false;
+            }
+            time = tokens[1].substring(2).trim();
+            if (!Parser.checkDateFormat(time)) {
+                return false;
+            }
+            newTask = new Event(tokens[0].trim(), Parser.stringToDate(time));
+            break;
+        default:
+            newTask = null;
         }
         tasks.add(newTask);
         return true;
