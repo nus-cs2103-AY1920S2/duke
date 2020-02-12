@@ -116,6 +116,6 @@ public class Storage {
     private boolean isAbleToSave() throws DuchessException {
         File file = new File(this.filePath);
         File directories = file.getParentFile();
-        return directories.exists() || !directories.mkdirs();
+        return directories.exists() || directories.mkdirs();
     }
 }
