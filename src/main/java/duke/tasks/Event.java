@@ -25,6 +25,7 @@ public class Event extends Task {
     public Event(String eventArgs) throws DukeException {
         super(eventArgs.split(" /at ")[0]);
         try {
+            getTags(eventArgs);
             this.eventDate = eventArgs.split(" /at ")[1];
             this.parsedDate = LocalDate.parse(eventDate);
         } catch (DateTimeParseException e) {
