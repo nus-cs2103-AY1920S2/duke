@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -11,10 +12,13 @@
          <font>
             <Font name="Consolas" size="14.0" />
          </font></Label>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
-            <Insets left="10.0" right="10.0" />
-         </HBox.margin></ImageView>
+            <Insets left="8.0" right="8.0" />
+         </HBox.margin>
+         <viewport>
+            <Rectangle2D />
+         </viewport></ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

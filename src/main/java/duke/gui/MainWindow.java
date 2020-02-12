@@ -33,8 +33,10 @@ public class MainWindow extends AnchorPane {
     private Image userIcon = new Image(
             this.getClass().getResourceAsStream("/images/user-icon-hiclipart.png"));
     // Mr Robot: https://www.usanetwork.com/mrrobot
+    // By USA Network - USA Network, Public Domain,
+    // https://commons.wikimedia.org/w/index.php?curid=49685837
     private Image mrRobotIcon = new Image(
-            this.getClass().getResourceAsStream("/images/mr-robot-logo.jpg"));
+            this.getClass().getResourceAsStream("/images/Mr_Robot_Logo.png"));
 
     /**
      * GUI start up.

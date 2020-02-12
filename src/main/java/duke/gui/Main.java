@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main extends Application {
     private Duke duke = new Duke();
-
     @Override
     public void start(Stage stage) {
         try {
@@ -24,6 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Mr. Robot");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
