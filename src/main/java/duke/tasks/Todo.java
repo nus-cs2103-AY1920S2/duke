@@ -16,8 +16,8 @@ public class Todo extends Task {
      * @return Created Todo class.
      */
     public static Todo create(String[] strArr) {
-        Todo t = new Todo(strArr[2]);
-        if (strArr[1].equals("1")) {
+        Todo t = new Todo(strArr[TASK_NAME_INDEX]);
+        if (strArr[IS_DONE_BOOLEAN_INDEX].equals("1")) {
             t.setDone();
         }
         return t;
