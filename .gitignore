@@ -3,6 +3,9 @@
 /out/
 /*.iml
 
+# Text File generated
+/duke_save.txt/
+
 # Gradle build files
 /.gradle/
 /build/
