@@ -47,7 +47,11 @@ public class TaskList {
     }
 
     public void deleteTask(int index) throws OutOfRangeException {
-        this.tasks.remove(index);
+        if (isValidTask(index)) {
+            this.tasks.remove(index);
+        } else {
+            throw new OutOfRangeException();
+        }
     }
 
     public void displayTasks() {
