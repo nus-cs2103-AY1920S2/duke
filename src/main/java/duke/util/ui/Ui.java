@@ -13,9 +13,6 @@ public class Ui {
     private static String ADDED_PHRASE = "added: ";
 
     /**
-     *
-     */
-    /**
      * Print the greeting lines to the screen.
      * The first thing the user will see.
      * @return The printable Ui greeting
@@ -42,6 +39,7 @@ public class Ui {
     /**
      * Print the bye-bye line to the screen.
      * Last thing the user will see before the application shuts off.
+     * @return The printable Ui good-bye.
      */
     public static String byeBye() {
         return "Bye-bye. It was nice talking to you. See ya soon!";
@@ -50,6 +48,7 @@ public class Ui {
     /**
      * Print all the tasks in storedItems to the screen.
      * @param storedItems
+     * @return The String with all the stored tasks.
      */
     public static String listStoredItems(ArrayList<Task> storedItems) {
         if (storedItems.isEmpty()) {
@@ -68,9 +67,10 @@ public class Ui {
     }
 
     /**
-     * Print the status after successfully storing a task
+     * Print the status after successfully storing a task.
      * @param task
      * @param storedItems
+     * @return The Ui String that signals storing job done.
      */
     public static String storeUserInput(Task task, ArrayList<Task> storedItems) {
         StringBuilder returnString = new StringBuilder();
@@ -80,7 +80,7 @@ public class Ui {
     }
 
     /**
-     * Print the status after successfully marking a task as Done
+     * Print the status after successfully marking a task as Done.
      * @param pos
      * @param storedItems
      */
@@ -95,6 +95,7 @@ public class Ui {
      * Print the status after successfully deleting a task
      * @param t
      * @param storedItems
+     * @return The Ui String that signals deleting job done.
      */
     public static String deleteItem(Task t, ArrayList<Task> storedItems) {
         StringBuilder returnString = new StringBuilder();
@@ -105,15 +106,17 @@ public class Ui {
     }
 
     /**
-     * React to a blank user input
+     * React to a blank user input.
+     * @return The Ui String telling the user to type something.
      */
     public static String blankInput() {
         return "Please type something. Don't leave it blank, plsss!";
     }
 
     /**
-     * Print the resulting foundList of a find request
+     * Print the resulting foundList of a find request.
      * @param foundList
+     * @return The Ui String containing all found results.
      */
     public static String printFoundList(ArrayList<Task> foundList) {
         StringBuilder returnString = new StringBuilder();

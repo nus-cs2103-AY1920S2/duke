@@ -20,7 +20,6 @@ public class Duke {
     public static final String LIST_COMMAND = "list";
     public static final String BYE_COMMAND = "bye";
 
-    //    private static String PADDING = "       ";
     private static String PADDING = "";
     private String USELESS_LINE = "-------------------------------------------------------------------------------------";
     private String ADDED_PHRASE = "added: ";
@@ -32,11 +31,13 @@ public class Duke {
      * Constructor.
      */
     public Duke() {
-        // Place-holder constructor, may need to extend later
         storedItems = new ArrayList<>();
+        assert storedItems != null;
         storage = new Storage();
+        assert storage != null;
         storage.getDataFile(storedItems);
         parser = new Parser();
+        assert parser != null;
     }
 
     /**
@@ -50,7 +51,7 @@ public class Duke {
     /**
      * Takes in the user input, run the Parser to determine what it means and acts accordingly.
      * @param str
-     * @return The proper response by the bot that will be used by the dialog box
+     * @return The proper response by the bot that will be used by the dialog box.
      * @throws InvalidCommandException
      * @throws OutOfBoundMarkingRequestException
      * @throws TaskErrorException
@@ -58,7 +59,6 @@ public class Duke {
     public String processUserInput(String str) throws InvalidCommandException, OutOfBoundMarkingRequestException, TaskErrorException {
         if (str.equals("")) {
             return Ui.blankInput();
-
         }
 
         if (parser.isFindRequest(str)) {
@@ -113,11 +113,9 @@ public class Duke {
         return ret;
     }
 
-    // Not very optimal handling these 3 methods are...
-    // But usable hmm
-
     private String handleToDo(String str) throws TaskErrorException {
         Scanner sc = new Scanner(str);
+        assert sc.hasNext();
         sc.next();
         if (!sc.hasNext())
             throw new TaskErrorException("Missing ToDo description");
@@ -128,6 +126,7 @@ public class Duke {
 
     private String handleDeadline(String str) throws TaskErrorException, InvalidCommandException {
         Scanner sc = new Scanner(str);
+        assert sc.hasNext();
         sc.next();
         String[] parts = sc.nextLine().trim().split("/");
 
@@ -145,6 +144,7 @@ public class Duke {
 
     private String handleEvent(String str) throws TaskErrorException, InvalidCommandException {
         Scanner sc = new Scanner(str);
+        assert sc.hasNext();
         sc.next();
         String[] parts = sc.nextLine().trim().split("/");
 
@@ -168,7 +168,7 @@ public class Duke {
 
     /**
      * Calls Ui method to list tasks saved.
-     * @return
+     * @return String with stored tasks.
      */
     public String listStoredItems() {
         return Ui.listStoredItems(storedItems);
@@ -176,7 +176,7 @@ public class Duke {
 
     /**
      * Interacts when the user says bye.
-     * @return Ui String that says good bye to the user
+     * @return Ui String that says good bye to the user.
      */
     public String byeBye() {
         storage.writeData(storedItems);
@@ -186,7 +186,7 @@ public class Duke {
     /**
      * Gets the response from the bot.
      * @param userInput
-     * @return The response String from the bot
+     * @return The response String from the bot.
      * @throws OutOfBoundMarkingRequestException
      * @throws TaskErrorException
      * @throws InvalidCommandException

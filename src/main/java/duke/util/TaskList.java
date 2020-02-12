@@ -47,7 +47,9 @@ public class TaskList {
         ArrayList<Task> foundList = new ArrayList<>();
 
         Scanner sc = new Scanner(str);
+        assert sc.hasNext();
         sc.next();
+        assert sc.hasNext();
         String criteria = sc.nextLine().trim();
         sc.close();
 

@@ -13,7 +13,7 @@ public class Deadline extends Task {
     private LocalTime localTime;
 
     /**
-     * Constructor with a name and byTime
+     * Constructor with a name and byTime.
      * @param name
      * @param byTime
      */
@@ -29,7 +29,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor with a name, a boolean and byTime
+     * Constructor with a name, a boolean and byTime.
      * @param name
      * @param isDone
      * @param byTime
@@ -42,24 +42,24 @@ public class Deadline extends Task {
     }
 
     /**
-     * Puts important details into a String that is suitable for storing in files
-     * @return a String in the save-file format
+     * Puts important details into a String that is suitable for storing in files.
+     * @return a String in the save-file format.
      */
     public String encoder() {
         return String.format("D:%s:%d:%s\n", super.name, (super.isDone ? 1 : 0), byTime);
     }
 
     /**
-     * Gets the TaskType of the Object
-     * @return type of the object
+     * Gets the TaskType of the Object.
+     * @return type of the object.
      */
     public TaskType getTaskType() {
         return type;
     }
 
     /**
-     * Stringify the object
-     * @return a String representing the Object
+     * Stringify the object.
+     * @return a String representing the Object.
      */
     @Override
     public String toString() {

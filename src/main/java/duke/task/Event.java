@@ -13,6 +13,11 @@ public class Event extends Task {
     private LocalDate localDate;
     private LocalTime localTime;
 
+    /**
+     * Constructor with a name and atTime.
+     * @param name
+     * @param atTime
+     */
     public Event(String name, String atTime) {
         super(name);
         this.atTime = atTime;
@@ -24,6 +29,12 @@ public class Event extends Task {
         localDate = LocalDate.parse(atTime.split(" ")[1]);
     }
 
+    /**
+     * Constructor with a name, a boolean and atTime.
+     * @param name
+     * @param isDone
+     * @param atTime
+     */
     public Event(String name, boolean isDone, String atTime) {
         super(name, isDone);
         this.atTime = atTime;
@@ -32,8 +43,8 @@ public class Event extends Task {
     }
 
     /**
-     * Puts important details into a String that is suitable for storing in files
-     * @return a String in the save-file format
+     * Puts important details into a String that is suitable for storing in files.
+     * @return a String in the save-file format.
      */
     public String encoder() {
         return String.format("E:%s:%d:%s\n", super.name, (super.isDone ? 1 : 0), atTime);
@@ -44,8 +55,8 @@ public class Event extends Task {
     }
 
     /**
-     * Stringify the object
-     * @return a String representing the Object
+     * Stringify the object.
+     * @return a String representing the Object.
      */
     @Override
     public String toString() {

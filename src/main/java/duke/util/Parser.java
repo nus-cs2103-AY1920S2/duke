@@ -14,6 +14,7 @@ public class Parser {
         int ret = -2;
         String ss = "";
         Scanner sc = new Scanner(str);
+        assert sc.hasNext();
 
         while (sc.hasNext()) {
             ss = sc.next();
@@ -40,6 +41,7 @@ public class Parser {
         int ret = -2;
         String ss = "";
         Scanner sc = new Scanner(str);
+        assert sc.hasNext();
 
         while (sc.hasNext()) {
             ss = sc.next();

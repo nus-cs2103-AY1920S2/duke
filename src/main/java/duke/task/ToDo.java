@@ -6,7 +6,7 @@ public class ToDo extends Task {
     private TaskType type;
 
     /**
-     * Constructor with a name
+     * Constructor with a name.
      * @param name
      */
     public ToDo(String name) {
@@ -15,7 +15,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Constructor with a name and a boolean
+     * Constructor with a name and a boolean.
      * @param name
      * @param isDone
      */
@@ -24,24 +24,24 @@ public class ToDo extends Task {
     }
 
     /**
-     * Puts important details into a String that is suitable for storing in files
-     * @return a String in the save-file format
+     * Puts important details into a String that is suitable for storing in files.
+     * @return a String in the save-file format.
      */
     public String encoder() {
         return String.format("T:%s:%d\n", name, (isDone ? 1 : 0));
     }
 
     /**
-     * Gets the TaskType of the Object
-     * @return type of the object
+     * Gets the TaskType of the Object.
+     * @return type of the object.
      */
     public TaskType getTaskType() {
         return type;
     }
 
     /**
-     * Stringify the object
-     * @return a String representing the Object
+     * Stringify the object.
+     * @return a String representing the Object.
      */
     @Override
     public String toString() {

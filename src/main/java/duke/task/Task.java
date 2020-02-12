@@ -15,7 +15,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor with a name
+     * Constructor with a name.
      * @param name
      */
     public Task(String name) {
@@ -24,7 +24,7 @@ public class Task {
     }
 
     /**
-     * Constructor with a name and a boolean
+     * Constructor with a name and a boolean.
      * @param name
      * @param isDone
      */
@@ -34,38 +34,38 @@ public class Task {
     }
 
     /**
-     * Place-holder encoder method
-     * @return an empty String
+     * Place-holder encoder method.
+     * @return an empty String.
      */
     public String encoder() {
         return "";
     }
 
     /**
-     * Gets the name of the Task
-     * @return String name
+     * Gets the name of the Task.
+     * @return String name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Mark the task as Done
+     * Mark the task as Done.
      */
     public void markDone() {
         isDone = true;
     }
 
     /**
-     * Mark the task as Not Done
+     * Mark the task as Not Done.
      */
     public void markNotDone() {
         isDone = false;
     }
 
     /**
-     * Stringify the object
-     * @return a String representing the Object
+     * Stringify the object.
+     * @return a String representing the Object.
      */
     @Override
     public String toString() {
