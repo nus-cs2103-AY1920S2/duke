@@ -63,8 +63,7 @@ public class TaskList {
      */
     public Task snoozeTask(int index, String time) throws InvalidClassException {
         // check whether the index is within bounds
-        assert index >= 0;
-        assert index < tasks.size();
+        assert index >= 0 && index < tasks.size();
 
         Task task = tasks.get(index);
         if (task.isSnoozeable()) {
@@ -88,8 +87,7 @@ public class TaskList {
      */
     public Task getTask(int index) {
         // check whether index is within bounds
-        assert index >= 0;
-        assert index < tasks.size();
+        assert index >= 0 && index < tasks.size();
 
         return tasks.get(index);
     }
