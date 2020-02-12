@@ -37,3 +37,8 @@ dukeclasses.Duke Increment | Tutorial
 
 * If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
 * We welcome pull requests too.
+
+
+#Acknowledgements
+FastReader.java was adapted from https://www.javatips.net/api/AlgoDS-master/src/timus/FastReader.java
+However, I tweaked some components to cater to my own needs. 
