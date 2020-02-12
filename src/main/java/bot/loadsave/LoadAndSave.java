@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * Class LoadAndSave handles loading and
@@ -18,7 +19,7 @@ import java.util.Collection;
 public abstract class LoadAndSave<T> {
     private final String fileDirectory;
     private final String fileName;
-    private final FileReader toLoadFrom;
+    private final Optional<FileReader> toLoadFrom;
 
     /**
      * Constructs a new LoadAndSave with the desired
@@ -59,7 +60,7 @@ public abstract class LoadAndSave<T> {
                 throw e;
             }
         }
-        this.toLoadFrom = fileLocation;
+        this.toLoadFrom = Optional.of(fileLocation);
     }
 
     /**
@@ -69,7 +70,7 @@ public abstract class LoadAndSave<T> {
     protected LoadAndSave() {
         this.fileDirectory = "";
         this.fileName = "";
-        this.toLoadFrom = null;
+        this.toLoadFrom = Optional.empty();
     }
 
     /**
@@ -119,12 +120,13 @@ public abstract class LoadAndSave<T> {
     }
 
     /**
-     * Gets the FileReader that will read
-     * from the given file directory and name
+     * Gets the Optional{@literal <FileReader>} that
+     * may contain the FileReader which reads from
+     * the given file directory and name
      *
      * @return A FileReader that reads the file
      */
-    public FileReader getToLoadFrom() {
+    public Optional<FileReader> getToLoadFrom() {
         return this.toLoadFrom;
     }
 
