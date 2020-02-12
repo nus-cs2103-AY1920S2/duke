@@ -23,20 +23,26 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
 
-        String[] arr = by.split(" ");
-        this.date = LocalDate.parse(arr[0]);
+        if (by.contains("-")) {
+            String[] arr = by.split(" ");
+            this.date = LocalDate.parse(arr[0]);
 
-        if (arr.length > 1) {
-            char[] charArr = arr[1].toCharArray();
-            String hour = "" + charArr[0] + charArr[1];
-            String mins = "" + charArr[2] + charArr[3];
-            this.time = LocalTime.parse(hour + ":" + mins);
+            if (arr.length > 1) {
+                char[] charArr = arr[1].toCharArray();
+                String hour = "" + charArr[0] + charArr[1];
+                String mins = "" + charArr[2] + charArr[3];
+                this.time = LocalTime.parse(hour + ":" + mins);
+            }
+
+            this.by = " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
+                    " " + time.format(DateTimeFormatter.ofPattern("hhmma")) + ")";
+        } else {
+            this.by = " (by: " + by + ")";
         }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-               " " + time.format(DateTimeFormatter.ofPattern("hhmma")) + ")";
+        return "[D]" + super.toString() + by;
     }
 }
