@@ -60,7 +60,7 @@ public class Duke {
      * Listen to the user input and take actions.
      */
     private void listen() {
-        Command command = new Command();
+        Command command = null;
 
         while (!ExitCommand.isExit(command)) {
             try {

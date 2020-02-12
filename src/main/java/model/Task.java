@@ -2,6 +2,7 @@ package model;
 
 import exceptions.NoDescriptionException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,6 +80,8 @@ public abstract class Task {
     public boolean hasKeyWord(String keyWord) {
         return description.toLowerCase().contains(keyWord.toLowerCase());
     }
+
+    public abstract boolean isOnDate(LocalDate targetDate);
 
     /**
      * An abstract method returning an single-character task type.
