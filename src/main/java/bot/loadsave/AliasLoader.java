@@ -1,6 +1,7 @@
 package bot.loadsave;
 
 
+import bot.command.instruction.concrete.AliasInstruction;
 import bot.util.ClosedScanner;
 import bot.util.Pair;
 
@@ -16,6 +17,20 @@ import java.util.Scanner;
  * of aliased commands from the disk
  */
 public class AliasLoader extends LoadAndSave<Pair<String, String>> {
+    private static final String DEFAULT_ALIASES =
+            "alias a\n"
+            + "bye b\n"
+            + "deadline d\n"
+            + "delete de\n"
+            + "done do\n"
+            + "event e\n"
+            + "find f\n"
+            + "help h\n"
+            + "list l\n"
+            + "notdone n\n"
+            + "search s\n"
+            + "todo t\n";
+
     /**
      * Constructor for a new AliasLoader for the
      * given file directory and name
@@ -27,7 +42,7 @@ public class AliasLoader extends LoadAndSave<Pair<String, String>> {
      *     or file name is invalid
      */
     public AliasLoader(String fd, String fn) throws FileNotFoundException {
-        super(fd, fn);
+        super(fd, fn, AliasLoader.DEFAULT_ALIASES);
     }
 
     @Override

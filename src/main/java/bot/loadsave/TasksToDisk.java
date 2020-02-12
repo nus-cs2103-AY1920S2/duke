@@ -34,7 +34,7 @@ public class TasksToDisk extends LoadAndSave<Task> {
      *     or file name is invalid
      */
     public TasksToDisk(String fd, String fn) throws FileNotFoundException {
-        super(fd, fn);
+        super(fd, fn, "");
     }
 
     /**

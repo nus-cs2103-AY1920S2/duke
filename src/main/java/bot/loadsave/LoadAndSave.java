@@ -27,11 +27,15 @@ public abstract class LoadAndSave<T> {
      *
      * @param fd Location of the file on the system
      * @param fn Name of the file in the directory
+     * @param def String representing the default data
+     *                to be loaded if file is not found
      *
      * @throws FileNotFoundException When file directory
      *     or file name is invalid
      */
-    public LoadAndSave(String fd, String fn) throws FileNotFoundException {
+    public LoadAndSave(String fd, String fn, String def)
+            throws FileNotFoundException {
+
         this.fileDirectory = fd;
         this.fileName = fn;
         String fullAddress = LoadAndSave.getFullFileAddress(fd, fn);
@@ -55,6 +59,7 @@ public abstract class LoadAndSave<T> {
                     );
                 }
 
+                FileSaver.saveStringAsFile(fullAddress, new StringBuilder(def));
                 fileLocation = new FileReader(fullAddress);
             } else {
                 throw e;
