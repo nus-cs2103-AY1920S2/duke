@@ -78,7 +78,8 @@ public class DeleteCommand implements Command {
         try {
             storage.storeData(Parser.tasksToStorage(taskList.getList()));
         } catch (IOException e) {
-            System.out.println("Error in storing data");
+            uiHandler.setResponse("There is an when trying to store data");
+            return;
         }
 
         response = "Nice! Deleted tasks(unknown task number ignored):\n " + response;

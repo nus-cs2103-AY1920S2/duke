@@ -58,7 +58,8 @@ public class DoneCommand implements Command {
         try {
             storage.storeData(Parser.tasksToStorage(taskList.getList()));
         } catch (IOException e) {
-            System.out.println("Error in storing data");
+            uiHandler.setResponse("There is an error when trying to store data");
+            return;
         }
         uiHandler.setResponse(response);
         return;

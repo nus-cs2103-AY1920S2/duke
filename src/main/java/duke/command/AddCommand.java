@@ -46,7 +46,8 @@ public class AddCommand implements Command {
                 return;
             }
         } catch (ParseException e) {
-            e.printStackTrace();
+            uiHandler.setResponse("There is an internal error when parsing command");
+            return;
         }
     }
 

@@ -20,10 +20,6 @@ public class DukeWorker {
         return storage;
     }
 
-    public TaskList getTaskList() {
-        return taskList;
-    }
-
     public DukeWorker(String storagePath) {
         storage = new FileStorage(storagePath);
         taskList = new TaskList();

@@ -94,15 +94,21 @@ public class Parser {
             String line = lines[i];
             String[] tokens = line.split("&");
             Task task = null;
-            if (tokens[0].equals("T")) {
+            switch (tokens[0]) {
+            case "T":
                 task = new Todo(tokens[2]);
                 if (tokens[1].equals("1")) {
                     task.markAsDone();
                 }
-            } else if (tokens[0].equals("E")) {
+                break;
+            case "E":
                 task = new Event(tokens[2], stringToDate(tokens[3]));
-            } else if (tokens[0].equals("D")) {
+                break;
+            case "D":
                 task = new Deadline(tokens[2], stringToDate(tokens[3]));
+                break;
+            default:
+                break;
             }
             if (task != null && tokens[1].equals("1")) {
                 task.markAsDone();
