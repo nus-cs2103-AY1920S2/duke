@@ -30,20 +30,12 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Kaguya.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Gintoki.png"));
-    private Image backImage = new Image(this.getClass().getResourceAsStream("/Images/Background.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        BackgroundImage backgroundImage = new BackgroundImage(backImage,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                BackgroundSize.DEFAULT);
-        Background background = new Background(backgroundImage);
         scrollPane.getStylesheets().add(
                 this.getClass().getResource("/css/ScrollPaneStyles.css").toString());
-        setBackground(background);
     }
 
     public void setDuke(Duke d) {
