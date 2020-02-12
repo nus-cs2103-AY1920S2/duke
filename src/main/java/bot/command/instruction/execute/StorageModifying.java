@@ -15,7 +15,7 @@ public interface StorageModifying<T> {
      *
      * @param store The Storage to write to
      * @param ui The Ui to display messages to
-     * @param index The index of the item to delete
+     * @param index The index of the item to modify
      */
     void modifyStore(Storage<T> store, Ui ui, int index);
 }

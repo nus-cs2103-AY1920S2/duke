@@ -4,12 +4,11 @@ import bot.Storage;
 import bot.Ui;
 
 import bot.command.Command;
-
 import bot.command.instruction.execute.StorageSearching;
-
 import bot.command.instruction.parse.TextInstruction;
 
 import bot.task.Task;
+
 import bot.util.PrettyTime;
 
 import java.util.ArrayList;

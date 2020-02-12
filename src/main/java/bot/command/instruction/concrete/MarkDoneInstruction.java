@@ -4,9 +4,7 @@ import bot.Storage;
 import bot.Ui;
 
 import bot.command.Command;
-
 import bot.command.instruction.execute.StorageModifying;
-
 import bot.command.instruction.parse.TwoWordsInstruction;
 
 import bot.task.Task;
