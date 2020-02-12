@@ -142,12 +142,21 @@ public class Ui {
         message.clearMessage();
         message.addSentence("Got it. I've added this task:", 1);
         message.addSentence(task.toString(), 3);
+        setMessageAccordingToAmountOfTask(amtOfTask);
+        return message.replyMessage();
+    }
+
+    /**
+     * Set the reply message according to the amount of task in the taskList.
+     *
+     * @param amtOfTask Number of task in the taskList.
+     */
+    public void setMessageAccordingToAmountOfTask(int amtOfTask) {
         if (amtOfTask > 1) {
             message.addSentence("Now you have " + amtOfTask + " tasks in the list.", 1);
         } else {
             message.addSentence("Now you have 1 task in the list.", 1);
         }
-        return message.replyMessage();
     }
 
     /**
