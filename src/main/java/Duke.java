@@ -9,10 +9,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -74,15 +72,18 @@ public class Duke extends Application {
 
                 String commandType = parser.getCommandType(command);
 
-                if (commandType.equals("list")) {
+                switch (commandType) {
+                case "list":
                     tasks.printList();
                     command = parser.readCommand();
-                } else if (commandType.equals("find")) {
+                    break;
+                case "find":
                     String findString = parser.getFind(command);
                     TaskList matchedTask = tasks.find(findString);
                     ui.printFind(matchedTask);
                     command = parser.readCommand();
-                } else if (commandType.equals("done")) {
+                    break;
+                case "done": {
                     int taskNo = parser.getTaskNo(command);
                     try {
                         tasks.setDone(taskNo);
@@ -91,14 +92,18 @@ public class Duke extends Application {
                         System.out.println("There is no task " + (taskNo + 1) + " in the list.");
                     }
                     command = parser.readCommand();
-                } else if (commandType.equals("delete")) {
+                    break;
+                }
+                case "delete": {
                     int taskNo = parser.getTaskNo(command);
                     Task task = tasks.getTask(taskNo);
                     ui.printDelete(task, tasks.getSize() - 1);
                     tasks.deleteTask(taskNo);
                     storage.saveFile(tasks.getTaskList());
                     command = parser.readCommand();
-                } else if (commandType.equals("deadline")) {
+                    break;
+                }
+                case "deadline":
                     try {
                         Deadline deadline = parser.getDeadline(command);
                         tasks.addTask(deadline);
@@ -108,7 +113,8 @@ public class Duke extends Application {
                         System.out.println(e.getMessage());
                     }
                     command = parser.readCommand();
-                } else if (commandType.equals("event")) {
+                    break;
+                case "event":
                     try {
                         Event event = parser.getEvent(command);
                         tasks.addTask(event);
@@ -118,7 +124,8 @@ public class Duke extends Application {
                         System.out.println(e.getMessage());
                     }
                     command = parser.readCommand();
-                } else if (commandType.equals("todo")) {
+                    break;
+                case "todo":
                     try {
                         ToDo toDo = parser.getToDo(command);
                         tasks.addTask(toDo);
@@ -128,6 +135,9 @@ public class Duke extends Application {
                         System.out.println(e.getMessage());
                     }
                     command = parser.readCommand();
+                    break;
+                default:
+                    ui.printBye();
                 }
             }
         } catch (DukeException e) {
@@ -211,20 +221,6 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     *
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
 
     /**
      * Iteration 2:
