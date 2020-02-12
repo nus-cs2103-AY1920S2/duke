@@ -8,11 +8,6 @@ import e0148811.duke.TaskList;
 import e0148811.duke.Todo;
 import e0148811.duke.Ui;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -20,13 +15,14 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Duke extends Application {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
     public Duke() {
+        new Duke("data/duke.txt");
     }
 
     public Duke(String filePath) {
@@ -241,14 +237,11 @@ public class Duke extends Application {
         new Duke("data/duke.txt").run();
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene1 = new Scene(helloWorld); // Setting the scene to be our Label
-        Scene scene2 = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene1); // Setting the stage to show our screen
-        stage.setScene(scene2); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
