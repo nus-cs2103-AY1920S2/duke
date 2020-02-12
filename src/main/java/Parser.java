@@ -9,7 +9,6 @@ public class Parser {
      * A list of Task objects to keep track of task changes
      */
     private TaskList taskList;
-    private Duke duke = new Duke ("java/data/duke.txt");
 
     /**
      * Creates a Parser object that is able to process user input
@@ -26,7 +25,7 @@ public class Parser {
      * @param input A command prompt by the user to Duke
      * @return a string to be printed out on the duke application GUI
      */
-    public String parse(String input) throws IOException {
+    public String parse(String input) throws Exception {
         if (input.equals("list")) {
             return taskList.list();
         } else if (input.contains("done")) {
@@ -54,19 +53,25 @@ public class Parser {
                 return "Where is your keyword:(";
             }
         } else if (input.equals ("bye")) {
-            duke.save();
+
             return "Cya soon:)";
         } else {
             //Create task using key words: "todo", "deadline", "event"
-            if (input.contains("todo")) {
-                //todo request format: todo<space><task>
-                return taskList.addTask("T", input);
-            } else if (input.contains("deadline")) {
-                //deadline request format: deadline<space><task></><yyyy-mm-dd>
-                return taskList.addTask("D", input);
-            } else if (input.contains("event")) {
-                //event request format: event<space><task></><yyyy-mm-dd><T><hh:mm-hh:mm>
-                return taskList.addTask("E", input);
+            if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+                if (taskList.containsDup(input)) {
+                    return "This task has already been added before!";
+                } else {
+                    if (input.contains("todo")) {
+                        //todo request format: todo<space><task>
+                        return taskList.addTask("T", input);
+                    } else if (input.contains("deadline")) {
+                        //deadline request format: deadline<space><task></><yyyy-mm-dd>
+                        return taskList.addTask("D", input);
+                    } else {
+                        //event request format: event<space><task></><yyyy-mm-dd><T><hh:mm-hh:mm>
+                        return taskList.addTask("E", input);
+                    }
+                }
             } else {
                 //must have todo/deadline/event request format
                 return "Back at you!";

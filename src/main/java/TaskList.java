@@ -43,6 +43,8 @@ public class TaskList {
         }
         if (num == 0) {
             output += "\n You have no task!";
+        } else {
+            output += "\n You have " + Duke.pendingTask + " pending task!";
         }
         return output;
     }
@@ -117,60 +119,44 @@ public class TaskList {
      * @param input Describes the task to be added to the list
      * @return A string to be printed out on duke application GUI on the status of the added task
      */
-    public String addTask(String type, String input) {
-        if (type.equals("T")) {
-            try {
-                String task1 = input.substring(5);
-                if (task1.isEmpty()) {
-                    return "OOOPS!! Cannot have empty todo request!!!";
-                } else {
-                    Todo todo = new Todo(task1);
-                    this.taskList.add(todo);
-                    Duke.pendingTask++;
-                    this.size++;
-                    return "Got it. I've added the following task:\n" +
-                            todo + "\nYou now have " + Duke.pendingTask + " task in the list";
-                }
-            } catch (Exception e) {
-                return "Huh? I do not understand this todo request:/";
-            }
-        } else if (type.equals("D")) {
-            //deadline request format: deadline<space><task></<yyyy-mm-dd>"
-            try {
-                int taskIndex = input.indexOf("/");
-                int byIndex = taskIndex + 1;
-                LocalDate date = LocalDate.parse(input.substring(byIndex));
-                Deadline deadline = new Deadline(input.substring(9, taskIndex), date);
-                this.taskList.add(deadline);
-                Duke.pendingTask++;
-                this.size++;
-                return "Got it. I've added the following task:\n" +
-                        deadline + "\nYou now have " + Duke.pendingTask + " task in the list";
-            } catch (Exception e) {
-                return "Huh? This deadline request does not make sense";
-            }
-        } else if (type.equals("E")) {
-            //event request format: event<space><task></><yyyy-mm-dd><T><hh:mm-hh:mm>
-            try {
-                int taskIndex = input.indexOf("/");
-                int atIndex = taskIndex + 1;
-                int timeIndex = atIndex + 11;
-                LocalDate date = LocalDate.parse(input.substring(atIndex, timeIndex - 1));
-                LocalTime start = LocalTime.parse(input.substring(timeIndex, timeIndex + 5));
-                LocalTime end = LocalTime.parse(input.substring(timeIndex + 6));
-                Event event = new Event(input.substring(6, taskIndex), date, start, end);
-                this.taskList.add(event);
-                Duke.pendingTask++;
-                this.size++;
-                return "Got it. I've added the following task:\n" +
-                        event + "\nYou now have " + Duke.pendingTask + " task in the list";
-            } catch (Exception e) {
-                return "What? What event is this??";
-            }
-        } else {
-            return "I do not understand this request:/";
+    public String addTask(String type, String input) throws Exception {
+        try {
+            Task task = taskConvertor(type, input);
+            this.taskList.add(task);
+            Duke.pendingTask++;
+            this.size++;
+            return "Got it. I've added the following task:\n" +
+                    task + "\nYou now have " + Duke.pendingTask + " task in the list";
+        } catch (Exception e){
+            return "Invalid task request:(";
         }
     }
+
+    public Task taskConvertor (String type, String input) throws Exception {
+        if (type.equals("T")) {
+            String task1 = input.substring(5);
+            Todo todo = new Todo(task1);
+            return todo;
+        } else if (type.equals("D")) {
+            int taskIndex = input.indexOf("/");
+            int byIndex = taskIndex + 1;
+            LocalDate date = LocalDate.parse(input.substring(byIndex));
+            Deadline deadline = new Deadline(input.substring(9, taskIndex), date);
+            return deadline;
+        } else if (type.equals("E")) {
+            int taskIndex = input.indexOf("/");
+            int atIndex = taskIndex + 1;
+            int timeIndex = atIndex + 11;
+            LocalDate date = LocalDate.parse(input.substring(atIndex, timeIndex - 1));
+            LocalTime start = LocalTime.parse(input.substring(timeIndex, timeIndex + 5));
+            LocalTime end = LocalTime.parse(input.substring(timeIndex + 6));
+            Event event = new Event(input.substring(6, taskIndex), date, start, end);
+            return event;
+        } else {
+            return null;
+        }
+    }
+
 
     /**
      * Prints out all task that contain a particular keyword
@@ -193,6 +179,24 @@ public class TaskList {
             output += "No task with such keyword:(";
         }
         return output;
+    }
+
+    public boolean containsDup (String taskName) throws Exception {
+        for (int i = 0; i < this.size; i++) {
+            String description = this.taskList.get(i).toString();
+            String task;
+            if (taskName.contains("todo")) {
+                 task = taskConvertor("T", taskName).toString();
+            } else if (taskName.contains ("deadline")) {
+                 task = taskConvertor ("D",taskName).toString();
+            } else {
+                 task = taskConvertor ("E",taskName).toString();
+            }
+            if (description.equals(task)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

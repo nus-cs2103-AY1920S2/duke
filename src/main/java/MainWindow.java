@@ -31,12 +31,9 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() throws IOException {
+        Duke.pendingTask = 0;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         duke.load();
-    }
-
-    public void setDuke(Duke d) {
-        duke = new Duke ("src/main/java/data/duke.txt");
     }
 
     /**

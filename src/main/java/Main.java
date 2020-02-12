@@ -14,7 +14,7 @@ public class Main extends Application {
     /**
      * Creates a Duke instance
      */
-    private Duke duke = new Duke ("src/main/java/data/duke.txt");
+    private Duke duke;
 
     /**
      * Starts up the duke application
@@ -28,7 +28,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke (duke);
+            fxmlLoader.<MainWindow>getController();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

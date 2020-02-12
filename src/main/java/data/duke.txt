@@ -1,5 +1,2 @@
-T|1||basketball
-T|1||running
-T|1||run
-T|0||swim
-T|0||ballet
+T|1||swim
+T|0||basketball

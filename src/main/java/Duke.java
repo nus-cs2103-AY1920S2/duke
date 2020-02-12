@@ -86,8 +86,8 @@ public class Duke extends Application {
 
     }
 
-    public static void main (String[] args) throws IOException {
-        new Duke ("src/main/java/data/duke.txt").run();
+    public static void main (String[] args) throws Exception {
+        new Duke ().run();
     }
 
     /**
@@ -95,7 +95,7 @@ public class Duke extends Application {
      *
      * @throws IOException if buffer reads a NULL input
      */
-    public void run() throws IOException {
+    public void run() throws Exception {
         ui.printOpeningScreen();
         Parser parser = new Parser (tasks);
         String input = "";
