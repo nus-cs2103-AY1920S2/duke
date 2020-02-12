@@ -8,9 +8,9 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         //deleteIndex is 0-indexed
-        ui.printString(tasks.delete(deleteIndex));
+        return tasks.delete(deleteIndex);
     }
 
     @Override

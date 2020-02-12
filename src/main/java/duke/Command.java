@@ -1,7 +1,7 @@
 package duke;
 
 public interface Command {
-    public void execute(TaskList tasks, Ui ui, Storage storage);
+    public String execute(TaskList tasks, Ui ui, Storage storage);
 
     public boolean isExit();
 }
