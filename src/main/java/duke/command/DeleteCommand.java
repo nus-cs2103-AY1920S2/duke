@@ -32,6 +32,7 @@ public class DeleteCommand implements Command {
             uiHandler.setResponse("Please specify which task to delete");
             return;
         }
+        assert(token[0].equals("delete"));
 
         String[] indices = token[1].split(" ");
         if (!Utils.isNumeric(indices[0])) {
