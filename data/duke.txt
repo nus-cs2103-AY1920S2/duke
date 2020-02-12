@@ -1,3 +1,3 @@
 T | 1 | joshua
-T | 0 | joshua chong
-D | 0 | eat dinner | 2020-02-20T20:20
+T | 1 | joshua chong
+D | 1 | eat dinner | 2020-02-20T20:20
