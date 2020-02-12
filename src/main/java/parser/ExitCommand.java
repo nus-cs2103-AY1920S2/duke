@@ -5,7 +5,7 @@ package parser;
  */
 public class ExitCommand extends Command {
 
-    static String exitGreeting = "Bye. Hope to see you again soon!\n";
+    private static final String EXIT_GREETING = "Bye. Hope to see you again soon!\n";
 
     /**
      * Static method to verify whether a command is an ExitCommand.
@@ -21,8 +21,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute() {
-        return exitGreeting;
-//        System.exit(0);
+        return EXIT_GREETING;
     }
 
 

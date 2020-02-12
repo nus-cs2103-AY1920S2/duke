@@ -10,13 +10,15 @@ import java.time.LocalDateTime;
 /**
  * Represents an event task in the inner-task list.
  */
-public class EventTask extends Task{
+public class EventTask extends Task {
     private static final String TASK_TYPE_STRING = "event task";
     private static final String TASK_TYPE_CHA = "E";
 
     private LocalDateTime at;
 
-    public EventTask() {}
+    public EventTask() {
+
+    }
 
     /**
      * Constructs an {@code EventTask}.

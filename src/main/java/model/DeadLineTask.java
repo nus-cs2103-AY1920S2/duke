@@ -14,7 +14,9 @@ public class DeadLineTask extends Task {
 
     private LocalDateTime by;
 
-    public DeadLineTask() {}
+    public DeadLineTask() {
+
+    }
 
     /**
      * Constructs an {@code DeadLineTask}.

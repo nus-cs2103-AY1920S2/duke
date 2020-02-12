@@ -9,16 +9,16 @@ import java.io.InputStreamReader;
  * Includes methods to read input, print normal message, print error message, etc.
  */
 public class Ui {
-    protected String userName;
-    protected BufferedReader br;
+    private String userName;
+    private BufferedReader br;
 
-    static String logo = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    static String line = "____________________________________________________________\n";
-    static String greeting = "I'm Duke.\n What can I do for you?\n";
+    private static final String LINE = "____________________________________________________________\n";
+    private static final String GREETING = "I'm Duke.\n What can I do for you?\n";
 
     /**
      * Constructs an {@code Ui} with a buffered reader.
@@ -40,7 +40,7 @@ public class Ui {
      * @param result A response from command execution as string.
      */
     public void printCommandResult(String result) {
-        System.out.println(line + result+ line);
+        System.out.println(LINE + result + LINE);
     }
 
     /**
@@ -48,7 +48,7 @@ public class Ui {
      * @param errorMessage The message of an raised exception.
      */
     public void printErrorMessage(String errorMessage) {
-        System.out.println(line + errorMessage + line);
+        System.out.println(LINE + errorMessage + LINE);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Ui {
      * Print message to greet the user.
      */
     public void greet() {
-        this.printCommandResult("Hello "+ this.userName + "! " + greeting);
+        this.printCommandResult("Hello " + this.userName + "! " + GREETING);
     }
 
     /**

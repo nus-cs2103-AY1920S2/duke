@@ -20,20 +20,24 @@ import java.io.IOException;
  */
 public class Duke {
 
-    protected String user_name;
+    protected String userName;
     protected Storage storage;
     protected TaskList taskList;
     protected Parser parser;
     protected Ui ui;
 
-    public Duke () {
-        this.user_name = "";
+    public Duke() {
+        this.userName = "";
     }
 
     /**
      * Load the storage from file into internal task list.
      * Initiate other components.
      */
+    public Duke(String userName) {
+        this.userName = userName;
+    }
+    
     private void start() {
         this.ui = new Ui();
         try {
@@ -45,7 +49,7 @@ public class Duke {
         } catch (InvalidStorageFilePathException | IOException e) {
             ui.printErrorMessage(e.getMessage());
             throw new RuntimeException(e);
-        } catch(StorageOperationException | NoDescriptionException | IllegalDateTimeFormatException err) {
+        } catch (StorageOperationException | NoDescriptionException | IllegalDateTimeFormatException err) {
             ui.printErrorMessage(err.getMessage());
         }
     }
@@ -60,7 +64,7 @@ public class Duke {
     /**
      * Listen to the user input and start interactions.
      */
-    public void run() {
+    private void run() {
         Command command = new Command();
         this.start();
 

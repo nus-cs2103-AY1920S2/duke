@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
  * Presents a command to add deadline task into inner-task list.
  */
 public class AddDeadlineCommand extends Command {
-    protected String description;
-    protected LocalDateTime at;
+    private String description;
+    private LocalDateTime at;
 
     /**
      * Constructs an {@code AddDeadlineCommand}.
      * @param description A valid description for a event task.
      */
-    public AddDeadlineCommand(String description, LocalDateTime at) {
+    AddDeadlineCommand(String description, LocalDateTime at) {
         this.description = description;
         this.at = at;
     }
@@ -30,7 +30,6 @@ public class AddDeadlineCommand extends Command {
     @Override
     public String execute() throws NoDescriptionException {
         Task taskToAdd = new DeadLineTask(description, at);
-        String commandResult = this.taskList.add(taskToAdd);
-        return commandResult;
+        return this.taskList.add(taskToAdd);
     }
 }

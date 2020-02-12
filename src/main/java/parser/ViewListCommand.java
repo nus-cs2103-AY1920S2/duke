@@ -5,7 +5,9 @@ package parser;
  */
 public class ViewListCommand extends Command {
 
-    public ViewListCommand() {}
+    public ViewListCommand() {
+
+    }
 
     /**
      * Convert the task list to string representation.
@@ -15,5 +17,5 @@ public class ViewListCommand extends Command {
     public String execute() {
         return this.taskList.toString();
     }
- }
+}
 

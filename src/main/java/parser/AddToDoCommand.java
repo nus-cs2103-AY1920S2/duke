@@ -8,13 +8,13 @@ import model.ToDoTask;
  * Presents a command to add todotask into inner-task list.
  */
 public class AddToDoCommand extends Command {
-    protected String description;
+    private String description;
 
     /**
      * Constructs an {@code AddToDoCommand}.
      * @param description A valid description for a todotask.
      */
-    public AddToDoCommand(String description) {
+    AddToDoCommand(String description) {
         this.description = description;
     }
 
@@ -26,7 +26,6 @@ public class AddToDoCommand extends Command {
     @Override
     public String execute() throws NoDescriptionException {
         Task taskToAdd = new ToDoTask(description);
-        String commandResult = this.taskList.add(taskToAdd);
-        return commandResult;
+        return this.taskList.add(taskToAdd);
     }
 }

@@ -3,14 +3,14 @@ package parser;
 /**
  * Presents a command to mark a task from task list as done.
  */
-public class FinishCommand extends Command{
-    protected Integer position;
+public class FinishCommand extends Command {
+    private Integer position;
 
     /**
      * Constructs a {@code FinishCommand} with a position indicating the task to mark.
      * @param position indicating the task to mark as done.
      */
-    public FinishCommand(Integer position) {
+    FinishCommand(Integer position) {
         this.position = position;
     }
 
@@ -19,8 +19,6 @@ public class FinishCommand extends Command{
      * @return response from the TaskList class as a string.
      */
     public String execute() {
-        String commandResult = this.taskList.markTaskAsDone(position);
-        return commandResult;
+        return this.taskList.markTaskAsDone(position);
     }
-
 }

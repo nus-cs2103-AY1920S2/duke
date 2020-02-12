@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
  * Presents a command to add event task into inner-task list.
  */
 public class AddEventCommand extends Command {
-    protected String description;
-    protected LocalDateTime at;
+    private String description;
+    private LocalDateTime at;
 
     /**
      * Constructs an {@code AddEventCommand}.
      * @param description A valid description for a event task.
      */
-    public AddEventCommand(String description, LocalDateTime at) {
+    AddEventCommand(String description, LocalDateTime at) {
         this.description = description;
         this.at = at;
     }
@@ -30,7 +30,6 @@ public class AddEventCommand extends Command {
     @Override
     public String execute() throws NoDescriptionException {
         Task taskToAdd = new EventTask(description, at);
-        String commandResult = this.taskList.add(taskToAdd);
-        return commandResult;
+        return this.taskList.add(taskToAdd);
     }
 }

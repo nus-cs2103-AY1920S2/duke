@@ -1,6 +1,10 @@
 package model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Iterator;
 
 /**
  * Implements an iterable containing a list of tasks object.
@@ -8,12 +12,14 @@ import java.util.*;
 public class TaskList implements Iterable<Task> {
     protected final List<Task> internalList = new ArrayList<Task>();
 
-    private static final String addTaskStart = "Got it. I've added this task:\n";
-    private static final String deleteTaskStart = "Noted. I have removed this task:\n";
-    private static final String viewListGreeting = "Here are the tasks in your list:\n";
-    private static final String taskCompleteCongrats = "Nice! I've marked this task as done:\n";
+    private static final String ECHO_ADD_TASK = "Got it. I've added this task:\n";
+    private static final String ECHO_DELETE_TASK = "Noted. I have removed this task:\n";
+    private static final String ECHO_VIEW_TASK_LIST = "Here are the tasks in your list:\n";
+    private static final String ECHO_COMPLETE_TASK = "Nice! I've marked this task as done:\n";
 
-    public TaskList() {}
+    public TaskList() {
+
+    }
 
     /**
      * Constructs a {@code Task} with multiple input tasks.
@@ -42,7 +48,10 @@ public class TaskList implements Iterable<Task> {
         StringBuilder addTaskEnd = new StringBuilder("Now you have  tasks in the list.\n");
 
         String addTaskEndStr = addTaskEnd.insert(13, this.internalList.size()).toString();
-        return addTaskStart + task.toString() + "\n" + addTaskEndStr;
+        return ECHO_ADD_TASK
+                + task.toString()
+                + "\n"
+                + addTaskEndStr;
     }
 
     /**
@@ -53,8 +62,13 @@ public class TaskList implements Iterable<Task> {
     public String remove(int position) {
         Task deletedTask = internalList.get(position);
         internalList.remove(position);
-        return deleteTaskStart + " " + deletedTask.toString() + "\n" +
-                "Now you have " + Integer.toString(this.internalList.size()) + " tasks in the list.\n";
+        return ECHO_DELETE_TASK
+                + " "
+                + deletedTask.toString()
+                + "\n"
+                + "Now you have "
+                + Integer.toString(this.internalList.size())
+                + " tasks in the list.\n";
     }
 
     /**
@@ -66,7 +80,10 @@ public class TaskList implements Iterable<Task> {
         Task finishedTask = this.internalList.get(position);
         finishedTask.markAsDone();
 
-        return taskCompleteCongrats + " " + finishedTask.toString() + "\n";
+        return ECHO_COMPLETE_TASK
+                + " "
+                + finishedTask.toString()
+                + "\n";
     }
 
     /**
@@ -75,13 +92,16 @@ public class TaskList implements Iterable<Task> {
      * @return string representation of the task list.
      */
     public String toString() {
-        String listOverView = viewListGreeting;
+        String listOverView = ECHO_VIEW_TASK_LIST;
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
                 continue;
             }
-            listOverView = listOverView + Integer.toString(i + 1) + "."
-                    + this.internalList.get(i).toString() + "\n";
+            listOverView = listOverView
+                    + Integer.toString(i + 1)
+                    + "."
+                    + this.internalList.get(i).toString()
+                    + "\n";
         }
         return listOverView;
     }

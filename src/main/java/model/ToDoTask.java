@@ -9,7 +9,9 @@ public class ToDoTask extends Task {
     private static final String TASK_TYPE_STRING = "todo task";
     private static final String TASK_TYPE_CHA = "T";
 
-    public ToDoTask() {}
+    public ToDoTask() {
+
+    }
 
     /**
      * Constructs an {@code ToDoTask}.

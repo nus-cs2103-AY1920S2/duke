@@ -4,13 +4,16 @@ import static parser.Parser.parseDateTime;
 import static storage.TaskListEncoder.FINISHED_STATUS;
 import static parser.Parser.DATE_TIME_KEY;
 
-import jdk.jfr.Event;
 import exceptions.IllegalDateTimeFormatException;
 import exceptions.NoDescriptionException;
 import exceptions.StorageOperationException;
-import model.*;
 
-import java.lang.reflect.Array;
+import model.DeadLineTask;
+import model.EventTask;
+import model.Task;
+import model.TaskList;
+import model.ToDoTask;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +25,9 @@ import java.util.regex.Pattern;
  * to real task objects.
  */
 public class TaskListDecoder {
-    static final String PERSON_DATA_ARGS = "\\s\\|\\s(T|E|D)\\s\\|\\s(1|0)\\s\\|\\s(\\S+)\\s?\\|?\\s?" + DATE_TIME_KEY;
-    static final Pattern PERSON_DATA_ARGS_FORMAT = Pattern.compile(PERSON_DATA_ARGS);
+    private static final String PERSON_DATA_ARGS = "\\s\\|\\s(T|E|D)\\s\\|\\s(1|0)\\s\\|\\s(\\S+)\\s?\\|?\\s?"
+            + DATE_TIME_KEY;
+    private static final Pattern PERSON_DATA_ARGS_FORMAT = Pattern.compile(PERSON_DATA_ARGS);
 
     /**
      * Decode task from a list of string to TaskList object.
@@ -33,7 +37,7 @@ public class TaskListDecoder {
      * @throws NoDescriptionException If there is no description for any task.
      * @throws IllegalDateTimeFormatException If date time string is in incorrect format.
      */
-    public static TaskList decodeTaskList(List<String> encodedTaskList) throws
+    static TaskList decodeTaskList(List<String> encodedTaskList) throws
             StorageOperationException, NoDescriptionException, IllegalDateTimeFormatException {
         final ArrayList<Task> tasks = new ArrayList<>();
         for (String t : encodedTaskList) {
@@ -50,7 +54,7 @@ public class TaskListDecoder {
      * @throws NoDescriptionException If there is no description for any task.
      * @throws IllegalDateTimeFormatException If the date time string is in invalid format.
      */
-    public static Task decodeTask(String encodedTask) throws
+    private static Task decodeTask(String encodedTask) throws
             StorageOperationException, NoDescriptionException, IllegalDateTimeFormatException {
         final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(encodedTask);
         if (!matcher.matches()) {

@@ -16,10 +16,11 @@ public abstract class Task {
     protected boolean isDone;
 
     private static final String DEFAULT_TASK_TYPE_STRING = "task";
-
     static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public Task() {}
+    public Task() {
+
+    }
 
     /**
      * Constructs a {@code Task} with the default task type string.
@@ -29,8 +30,9 @@ public abstract class Task {
     public Task(String description) throws NoDescriptionException {
         this.taskTypeString = DEFAULT_TASK_TYPE_STRING;
         if ("".equals(description)) {
-            throw new NoDescriptionException("OOPS!!! The description of a " +
-                    taskTypeString + " cannot be empty.\n");
+            throw new NoDescriptionException("OOPS!!! The description of a "
+                    + taskTypeString
+                    + " cannot be empty.\n");
         }
         this.description = description;
         this.isDone = false;
@@ -45,8 +47,9 @@ public abstract class Task {
     public Task(String description, String taskTypeString) throws NoDescriptionException {
         this.taskTypeString = taskTypeString;
         if ("".equals(description)) {
-            throw new NoDescriptionException("OOPS!!! The description of a " +
-                    this.taskTypeString + " cannot be empty.\n");
+            throw new NoDescriptionException("OOPS!!! The description of a "
+                    + this.taskTypeString
+                    + " cannot be empty.\n");
         }
         this.description = description;
         this.isDone = false;
@@ -59,8 +62,9 @@ public abstract class Task {
      */
     public void setDescription(String description) throws NoDescriptionException {
         if ("".equals(description)) {
-            throw new NoDescriptionException("OOPS!!! The description of a " +
-                    taskTypeString + " cannot be empty.\n");
+            throw new NoDescriptionException("OOPS!!! The description of a "
+                    + taskTypeString
+                    + " cannot be empty.\n");
         }
         this.description = description;
     }

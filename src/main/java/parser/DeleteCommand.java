@@ -4,13 +4,13 @@ package parser;
  * Presents a command to delete a task from inner-task list.
  */
 public class DeleteCommand extends Command {
-    protected Integer position;
+    private Integer position;
 
     /**
      * Constructs a {@code DeleteCommand}.
      * @param position A valid position within the bound of the task list indicating the task to remove.
      */
-    public DeleteCommand(Integer position) {
+    DeleteCommand(Integer position) {
         this.position = position;
     }
 
@@ -20,7 +20,6 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute() {
-        String commandResult = this.taskList.remove(this.position);
-        return commandResult;
+        return this.taskList.remove(this.position);
     }
 }

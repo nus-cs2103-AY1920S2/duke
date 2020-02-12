@@ -17,12 +17,12 @@ import java.util.List;
  * such that the program can load data from local disk or save data to files.
  */
 public class Storage {
-    public static final String DEFAULT_STORAGE_PATH = "tasks.txt";
+    private static final String DEFAULT_STORAGE_PATH = "tasks.txt";
 
-    public Path path;
+    private Path path;
 
     /**
-     * Default constructor with the default path of local data file
+     * Default constructor with the default path of local data file.
      * @throws InvalidStorageFilePathException
      */
     public Storage() throws InvalidStorageFilePathException {
@@ -47,7 +47,7 @@ public class Storage {
      * @param filePath
      * @return
      */
-    public static boolean isValidPath(Path filePath) {
+    private static boolean isValidPath(Path filePath) {
         return filePath.toString().endsWith(".txt");
     }
 
@@ -58,7 +58,7 @@ public class Storage {
      * @param taskList inner-list of the program.
      * @throws IOException
      */
-    public void save(TaskList taskList) throws IOException{
+    public void save(TaskList taskList) throws IOException {
         List<String> encodedTaskList = TaskListEncoder.encodeTask(taskList);
         Files.write(path, encodedTaskList);
     }
