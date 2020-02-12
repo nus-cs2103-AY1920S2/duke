@@ -39,6 +39,8 @@ public class TaskList {
         Task task = new ToDo(record);
         this.record.add(task);
 
+        assert this.record.size() <= 0 : "error";
+
         String output = "--------------------------------------------------\n"
                 + "piaked in: " + record + "\n" + task + "\n"
                 + "You has " + this.record.size() + " tasks in the list\n"
@@ -56,6 +58,8 @@ public class TaskList {
         Task task = new Deadline(record, by);
         this.record.add(task);
 
+        assert this.record.size() <= 0 : "error";
+
         String output = "--------------------------------------------------\n"
                 + "piaked in: " + record + "\n" + task + "\n"
                 + "You has " + this.record.size() + " tasks in the list\n"
@@ -72,6 +76,8 @@ public class TaskList {
     public String addEvent(String record, String at) {
         Task task = new Event(record, at);
         this.record.add(task);
+
+        assert this.record.size() <= 0 : "error";
 
         String output = "--------------------------------------------------\n"
                 + "piaked in: " + record + "\n" + task + "\n"
@@ -94,6 +100,8 @@ public class TaskList {
             str = str + (j + "." + current + "\n");
         }
 
+        assert record.size() < 0 : "error";
+
         output = output + str + "--------------------------------------------------\n";
 
         return output;
@@ -105,6 +113,8 @@ public class TaskList {
      */
     public String delete(int num) {
         Task task = record.remove(num - 1);
+
+        assert record.size() < 0 : "error";
 
         String output = "--------------------------------------------------\n"
                 + "Destroyed:\n" + " " + task + "\n"
