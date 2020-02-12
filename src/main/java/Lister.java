@@ -21,11 +21,12 @@ public class Lister {
      * Parses commands from command line.
      * @param command input to identify relevant Task objects to create and their description
      */
-    public void record(String command) {
+    public String record(String command) {
+        StringBuilder sb = new StringBuilder();
         if (command.equals("list")) {
-            System.out.println("Here are the tasks in your list:");
+            sb.append("Here are the tasks in your list: \n");
             for (int i = 0; i < taskList.getSize(); i++) {
-                System.out.println((i + 1) + "." + taskList.retrieveTask(i).toString());
+                sb.append((i + 1) + "." + taskList.retrieveTask(i).toString() + "\n");
             }
         } else {
             try {
@@ -34,30 +35,30 @@ public class Lister {
                 case "delete":
                     int b = Integer.valueOf(command.substring(x + 1)) - 1;
                     taskList.removeTask(b);
-                    System.out.println("Noted. I've removed this task:\n" + taskList.retrieveTask(b).toString());
-                    System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
+                    sb.append("Noted. I've removed this task:\n" + taskList.retrieveTask(b).toString() + "\n");
+                    sb.append("Now you have " + taskList.getSize() + " tasks in the list.\n");
                     break;
                 case "done":
                     int y = Integer.valueOf(command.substring(x + 1)) - 1;
                     taskList.retrieveTask(y).markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n" + taskList.retrieveTask(y).toString());
+                    sb.append("Nice! I've marked this task as done:\n" + taskList.retrieveTask(y).toString() + "\n");
                     break;
                 case "deadline":
                     int z = command.indexOf('/');
                     Task newDeadline = new Deadline(command.substring(x + 1, z - 1), command.substring(z + 4));
                     taskList.addTask(newDeadline);
-                    printTask(newDeadline);
+                    sb.append(stringTask(newDeadline));
                     break;
                 case "event":
                     int a = command.indexOf('/');
                     Task newEvent = new Event(command.substring(x + 1, a - 1), command.substring(a + 4));
                     taskList.addTask(newEvent);
-                    printTask(newEvent);
+                    sb.append(stringTask(newEvent));
                     break;
                 case "todo":
                     Task newToDo = new ToDo(command.substring(x + 1), "");
                     taskList.addTask(newToDo);
-                    printTask(newToDo);
+                    sb.append(stringTask(newToDo));
                     break;
                 case "find":
                     TaskList tempList = new TaskList();
@@ -72,32 +73,34 @@ public class Lister {
                     try {
                         tempList.retrieveTask(0);
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Sorry there are no such tasks.");
+                        sb.append("Sorry there are no such tasks.");
                         break;
                     }
 
-                    System.out.println("Here are the matching tasks in your list:");
+                    sb.append("Here are the matching tasks in your list:\n");
                     for (int i = 0; i < tempList.getSize(); i++) {
-                        System.out.println((i + 1) + "." + tempList.retrieveTask(i).toString());
+                        sb.append((i + 1) + "." + tempList.retrieveTask(i).toString() + "\n");
                     }
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + command.substring(0, x));
                 }
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                sb.append(e.getMessage());
             }
         }
         storage.storeData(taskList);
+        return sb.toString();
     }
 
     private int getIndex(String command) throws DukeException {
         int x;
         try {
             x = command.indexOf(' ');
-            if (x < 0) {
-                throw new StringIndexOutOfBoundsException();
-            }
+//            if (x < 0) {
+//                throw new StringIndexOutOfBoundsException();
+//            }
+            assert x >= 0;
         } catch (StringIndexOutOfBoundsException e) {
             switch (command) {
             case "todo":
@@ -109,8 +112,10 @@ public class Lister {
         return x > 0 ? x : 0;
     }
 
-    private void printTask(Task task) {
-        System.out.println("Got it. I've added this task:\n" + task.toString());
-        System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
+    private String stringTask(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:\n" + task.toString());
+        sb.append("\nNow you have " + taskList.getSize() + " tasks in the list.");
+        return sb.toString();
     }
 }

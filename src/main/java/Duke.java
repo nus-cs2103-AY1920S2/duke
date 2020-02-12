@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * The Main Class initialises all important objects for the program to run.
  * @author qiujingying
@@ -31,12 +33,8 @@ public class Duke {
 
     }
 
-    public void run() {
-        ui.echo(tasks, storage);
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    public String run(String command) {
+        return ui.echo(tasks, storage, command);
     }
 
     /**
@@ -44,6 +42,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        Duke eevee = new Duke("data/duke.txt");
+        return eevee.run(input);
     }
 }
