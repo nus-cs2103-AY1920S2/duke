@@ -7,7 +7,8 @@ public class TodoTest {
     @Test
     public void testFormatForFile() {
         assertEquals("T | 0 | read book\n",
-                new Todo("read book", "read book").formatForFile());
+                new Todo("read book", "read book",
+                        "0000-00-00").formatForFile());
     }
 
 }

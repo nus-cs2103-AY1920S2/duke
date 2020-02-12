@@ -79,7 +79,7 @@ public class Storage {
      * @return a To-do object
      */
     public Task processTodo(String[] taskArr) {
-        Task todo = new Todo(taskArr[2].trim(), taskArr[2].trim(), "0000-00-00");
+        Task todo = new Todo(taskArr[2].trim(), "0000-00-00");
         if (taskArr[1].trim().equals("1")) {
             todo.setDone(true);
         }
@@ -95,7 +95,7 @@ public class Storage {
         LocalDate date = LocalDate.parse(taskArr[4].trim());
         String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
 
-        Task event = new Event(taskArr[2].trim(), taskArr[3].trim(), date, fullDesc, date.toString());
+        Task event = new Event(taskArr[2].trim(), taskArr[3].trim(), date, date.toString());
         if (taskArr[1].trim().equals("1")) {
             event.setDone(true);
         }
@@ -113,7 +113,7 @@ public class Storage {
 
         String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
 
-        Task deadline = new Deadline(taskArr[2].trim(), taskArr[3].trim(), date, fullDesc, date.toString());
+        Task deadline = new Deadline(taskArr[2].trim(), taskArr[3].trim(), date, date.toString());
         if (taskArr[1].trim().equals("1")) {
             deadline.setDone(true);
         }

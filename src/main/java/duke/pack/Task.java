@@ -5,18 +5,15 @@ package duke.pack;
  */
 public class Task {
     protected String description;
-    protected String fullDesc;
     protected boolean isDone;
     protected String dateToCompare;
 
     /**
      * Creates a task with the specified description.
      * @param description the task description
-     * @param fullDesc the full description of the task
      */
-    public Task(String description, String fullDesc, String dateToCompare) {
+    public Task(String description, String dateToCompare) {
         this.description = description;
-        this.fullDesc = fullDesc;
         this.isDone = false;
         this.dateToCompare = dateToCompare;
     }
@@ -29,13 +26,6 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    /**
-     * Gets description of task.
-     * @return a string that is the task's description
-     */
-    public String getFullDesc() {
-        return fullDesc; //return task description
-    }
 
     /**
      * Sets the task to done or not done.

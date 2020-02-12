@@ -126,7 +126,7 @@ public class Parser {
         }
 
         String[] arr = fullCommand.split("todo");
-        Task t = new Todo(arr[1].trim(), arr[1], "0000-00-00");
+        Task t = new Todo(arr[1].trim(), "0000-00-00");
 
         Command c = new AddCommand(t);
 
@@ -163,7 +163,7 @@ public class Parser {
 
         try {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
-            Task t = new Event(splitByEvent[1].trim(), time, date, comm[1], date.toString());
+            Task t = new Event(splitByEvent[1].trim(), time, date, date.toString());
             Command c = new AddCommand(t);
             return c;
 
@@ -206,7 +206,7 @@ public class Parser {
         try {
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             // add to list
-            Task t = new Deadline(splitByDeadline[1].trim(), time, date, comm[1], date.toString());
+            Task t = new Deadline(splitByDeadline[1].trim(), time, date, date.toString());
             Command c = new AddCommand(t);
             return c;
 

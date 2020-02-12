@@ -9,19 +9,16 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected String time;
     protected LocalDate date;
-    protected String fullDesc;
     protected final String type = "D";
-    protected String dateToCompare;
 
     /**
      * Creates a deadline type of task.
      * @param description the task to be done
      * @param time the time the task is due
      * @param date the date the task is due
-     * @param fullDesc the full description of task
      */
-    public Deadline(String description, String time, LocalDate date, String fullDesc, String dateToCompare) {
-        super(description, fullDesc, dateToCompare);
+    public Deadline(String description, String time, LocalDate date, String dateToCompare) {
+        super(description, dateToCompare);
         this.time = time;
         this.date = date;
     }

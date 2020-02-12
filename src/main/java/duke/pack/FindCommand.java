@@ -29,7 +29,7 @@ public class FindCommand extends Command {
         int i = 1;
 
         for (Task t: list) {
-            if (t.getFullDesc().contains(query)) {
+            if (t.toString().contains(query)) {
                 System.out.println("    " + i + "." + t);
             }
             i++;
@@ -51,7 +51,7 @@ public class FindCommand extends Command {
         int i = 1;
 
         for (Task t: list) {
-            if (t.getFullDesc().contains(query)) {
+            if (t.toString().contains(query)) {
                 resp = resp + "    " + i + "." + t + "\n";
             }
             i++;
