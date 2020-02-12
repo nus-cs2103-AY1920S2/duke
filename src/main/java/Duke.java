@@ -7,11 +7,16 @@ import duke.util.Ui;
 
 import java.io.FileNotFoundException;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Represents a Duke chat bot, which supports basic todo list features such as adding and deleting tasks,
  * marking a task as done or list out all the tasks.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasklist;
@@ -53,5 +58,14 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
