@@ -16,62 +16,82 @@ public class TaskList {
     }
 
     /**
-     * Adds the given task to the TaskList.
+     * Adds the given task to the TaskList and returns a response message.
      * @param toAdd the task to be added
+     * @return response message to be printed to the user
      */
-    public void add(Task toAdd) {
+    public String add(Task toAdd) {
         tasks.add(toAdd);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(toAdd);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String responseMessage = "";
+        responseMessage += "Got it. I've added this task:\n";
+        responseMessage += toAdd.toString() + "\n";
+        responseMessage += "Now you have " + tasks.size() + " tasks in the list.\n";
+
+        return responseMessage;
     }
 
     /**
-     * Marks the task at doneIndex as done. doneIndex is 0-indexed.
+     * Marks the task at doneIndex as done and returns a response message. doneIndex is 0-indexed.
      * @param doneIndex the 0-indexed index of the task to be marked as done.
+     * @return response message to be printed to the user
      */
-    public void done(int doneIndex) {
+    public String done(int doneIndex) {
+        assert(doneIndex >= 0 && doneIndex < tasks.size());
         tasks.get(doneIndex).markAsDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(tasks.get(doneIndex));
+        String responseMessage = "";
+        responseMessage += "Nice! I've marked this task as done: \n";
+        responseMessage += tasks.get(doneIndex).toString() + "\n";
+
+        return responseMessage;
     }
 
     /**
-     * Deletes the task at deleteIndex as done. deleteIndex is 0-indexed.
+     * Deletes the task at deleteIndex as done and returns a response message. deleteIndex is 0-indexed.
      * @param deleteIndex the 0-indexed index of the task to be deleted.
+     * @return response message to be printed to the user
      */
-    public void delete(int deleteIndex) {
+    public String delete(int deleteIndex) {
+        assert(deleteIndex >= 0 && deleteIndex < tasks.size());
         // deleteIndex is 0-indexed
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(tasks.remove(deleteIndex));
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String responseMessage = "";
+        responseMessage += "Noted. I've removed this task:\n";
+        responseMessage +=tasks.remove(deleteIndex).toString() + "\n";
+        responseMessage +="Now you have " + tasks.size() + " tasks in the list.\n";
+
+        return responseMessage;
     }
 
     /**
-     * Prints all the tasks in the task list in pretty format.
+     * Returns the task list as a formatted string to be printed.
+     * @return the task list as a formatted string
      */
-    public void list() {
-        // TODO extract this to some UI method or something
+    public String list() {
+        String listAsString = "";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i).toString());
+            listAsString += (i + 1) + ". " + tasks.get(i).toString() + "\n";
         }
+        return listAsString;
     }
 
     /**
-     * Prints all the tasks whose descriptions contain the search phrase provided, in a pretty format.
+     * Returns all the tasks whose descriptions contain the search phrase
+     * provided as a formatted string to be printed.
      * @param searchPhrase string to be searched in the task's description.
+     * @return the list of tasks that contain the search phrase, asa formatted string to be printed
      */
-    public void findAndPrint(String searchPhrase) {
+    public String findAndPrint(String searchPhrase) {
         // filter tasks on description
         List<Task> foundTasks = this.tasks.stream()
-                .filter(task -> task.getDescription().contains(searchPhrase))
+                .filter(task -> task.getDescription().toLowerCase().contains(searchPhrase.toLowerCase()))
                 .collect(Collectors.toList());
 
         // print the tasks
-        System.out.println("Here are the matching tasks in your list:");
+        String foundListAsString = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < foundTasks.size(); i++) {
-            System.out.println((i + 1) + ". " + foundTasks.get(i).toString());
+            foundListAsString += (i + 1) + ". " + foundTasks.get(i).toString() + "\n";
         }
+
+        return foundListAsString;
     }
 
     public ArrayList<Task> getTasks() {

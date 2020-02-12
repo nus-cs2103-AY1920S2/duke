@@ -10,7 +10,7 @@ public class DeleteCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         //deleteIndex is 0-indexed
-        tasks.delete(deleteIndex);
+        ui.printString(tasks.delete(deleteIndex));
     }
 
     @Override

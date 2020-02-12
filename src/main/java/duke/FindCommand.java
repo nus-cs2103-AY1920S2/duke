@@ -9,7 +9,7 @@ public class FindCommand implements Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.findAndPrint(searchPhrase);
+        ui.printString(tasks.findAndPrint(searchPhrase));
     }
 
     @Override

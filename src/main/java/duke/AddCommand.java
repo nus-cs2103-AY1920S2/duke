@@ -1,9 +1,15 @@
 package duke;
 
-public class ListCommand implements Command {
+class AddCommand implements Command {
+    private Task toAdd;
+
+    public AddCommand(Task toAdd) {
+        this.toAdd = toAdd;
+    }
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printString(tasks.list());
+        ui.printString(tasks.add(toAdd));
     }
 
     @Override

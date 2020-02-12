@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
     public void showLoadingError() {
-        System.out.println("error loading from database. Starting with empty task list");
+        System.out.println("Error loading from database. Starting with empty task list");
     }
 
     /**
@@ -36,5 +36,9 @@ public class Ui {
 
     public void showSavingTasks() {
         System.out.println("Saving Tasks!");
+    }
+
+    public void printString(String s) {
+        System.out.println(s);
     }
 }
