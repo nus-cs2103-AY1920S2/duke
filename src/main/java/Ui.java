@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Ui {
-    protected String userName;
-    protected BufferedReader br;
+    private String userName;
+    private BufferedReader br;
 
-    static String logo = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    static String line = "____________________________________________________________\n";
-    static String greeting = "I'm Duke.\n What can I do for you?\n";
+    private static final String LINE = "____________________________________________________________\n";
+    private static final String GREETING = "I'm Duke.\n What can I do for you?\n";
 
     public Ui() {
         this.br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,11 +25,11 @@ public class Ui {
     }
 
     public void printCommandResult(String result) {
-        System.out.println(line + result+ line);
+        System.out.println(LINE + result+ LINE);
     }
 
     public void printErrorMessage(String errorMessage) {
-        System.out.println(line + errorMessage + line);
+        System.out.println(LINE + errorMessage + LINE);
     }
 
     public void askForName() {
@@ -39,7 +39,7 @@ public class Ui {
     }
 
     public void greet() {
-        this.printCommandResult("Hello "+ this.userName + "! " + greeting);
+        this.printCommandResult("Hello "+ this.userName + "! " + GREETING);
     }
 
     public String getUserInput() {

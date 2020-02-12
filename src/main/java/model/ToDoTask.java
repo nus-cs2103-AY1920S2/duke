@@ -3,8 +3,8 @@ package model;
 import exceptions.NoDescriptionException;
 
 public class ToDoTask extends Task {
-    static final String TASK_TYPE_STRING = "todo task";
-    static final String TASK_TYPE_CHA = "T";
+    private static final String TASK_TYPE_STRING = "todo task";
+    private static final String TASK_TYPE_CHA = "T";
 
     public ToDoTask() {}
 

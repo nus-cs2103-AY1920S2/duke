@@ -18,10 +18,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskListDecoder {
-    static final String PERSON_DATA_ARGS = "\\s\\|\\s(T|E|D)\\s\\|\\s(1|0)\\s\\|\\s(\\S+)\\s?\\|?\\s?" + DATE_TIME_KEY;
-    static final Pattern PERSON_DATA_ARGS_FORMAT = Pattern.compile(PERSON_DATA_ARGS);
+    private static final String PERSON_DATA_ARGS = "\\s\\|\\s(T|E|D)\\s\\|\\s(1|0)\\s\\|\\s(\\S+)\\s?\\|?\\s?" + DATE_TIME_KEY;
+    private static final Pattern PERSON_DATA_ARGS_FORMAT = Pattern.compile(PERSON_DATA_ARGS);
 
-    public static TaskList decodeTaskList(List<String> encodedTaskList) throws
+    static TaskList decodeTaskList(List<String> encodedTaskList) throws
             StorageOperationException, NoDescriptionException, IllegalDateTimeFormatException {
         final ArrayList<Task> tasks = new ArrayList<>();
         for (String t : encodedTaskList) {
@@ -30,7 +30,7 @@ public class TaskListDecoder {
         return new TaskList(tasks);
     }
 
-    public static Task decodeTask(String encodedTask) throws
+    private static Task decodeTask(String encodedTask) throws
             StorageOperationException, NoDescriptionException, IllegalDateTimeFormatException {
         final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(encodedTask);
         if (!matcher.matches()) {

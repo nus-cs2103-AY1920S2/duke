@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskListEncoder {
-    static final String SEPARATOR = " | ";
-    static final String FINISHED_STATUS = "1";
-    static final String UNFINISHED_STATUS = "0";
+    private static final String SEPARATOR = " | ";
+    public static final String FINISHED_STATUS = "1";
+    private static final String UNFINISHED_STATUS = "0";
 
     public static List<String> encodeTask(TaskList taskList) {
-        final List<String> encodedPersons = new ArrayList();
-        taskList.forEach((task) -> encodedPersons.add(
+        final ArrayList<String> encodedTasks = new ArrayList<String>();
+        taskList.forEach((task) -> encodedTasks.add(
                 encodeTaskToString(task)
         ));
 
-        return encodedPersons;
+        return encodedTasks;
     }
 
     private static String encodeTaskToString(Task task) {
-        final StringBuilder taskStringBuilder = new StringBuilder();
+        StringBuilder taskStringBuilder = new StringBuilder();
 
         taskStringBuilder.append(SEPARATOR);
 

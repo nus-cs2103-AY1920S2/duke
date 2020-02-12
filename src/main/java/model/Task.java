@@ -10,10 +10,8 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    static String TASK_TYPE_STRING = "task";
-    static String TASK_TYPE_CHA;
-
-    public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final String TASK_TYPE_STRING = "task";
+    static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public Task() {}
     

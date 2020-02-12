@@ -7,10 +7,10 @@ import model.Task;
 import java.time.LocalDateTime;
 
 public class AddEventCommand extends Command {
-    protected String description;
-    protected LocalDateTime at;
+    private String description;
+    private LocalDateTime at;
 
-    public AddEventCommand(String description, LocalDateTime at) {
+    AddEventCommand(String description, LocalDateTime at) {
         this.description = description;
         this.at = at;
     }
@@ -18,7 +18,6 @@ public class AddEventCommand extends Command {
     @Override
     public String execute() throws NoDescriptionException {
         Task taskToAdd = new EventTask(description, at);
-        String commandResult = this.taskList.add(taskToAdd);
-        return commandResult;
+        return this.taskList.add(taskToAdd);
     }
 }

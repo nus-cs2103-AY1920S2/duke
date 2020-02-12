@@ -13,9 +13,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Storage {
-    public static final String DEFAULT_STORAGE_PATH = "tasks.txt";
+    private static final String DEFAULT_STORAGE_PATH = "tasks.txt";
 
-    public Path path;
+    private Path path;
 
     public Storage() throws InvalidStorageFilePathException {
         this(DEFAULT_STORAGE_PATH);
@@ -28,7 +28,7 @@ public class Storage {
         }
     }
 
-    public static boolean isValidPath(Path filePath) {
+    private static boolean isValidPath(Path filePath) {
         return filePath.toString().endsWith(".txt");
     }
 

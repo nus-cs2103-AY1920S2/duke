@@ -1,15 +1,14 @@
 package parser;
 
 public class DeleteCommand extends Command {
-    protected Integer position;
+    private Integer position;
 
-    public DeleteCommand(Integer position) {
+    DeleteCommand(Integer position) {
         this.position = position;
     }
 
     @Override
     public String execute() {
-        String commandResult = this.taskList.remove(this.position);
-        return commandResult;
+        return this.taskList.remove(this.position);
     }
 }

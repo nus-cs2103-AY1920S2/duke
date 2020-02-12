@@ -2,8 +2,7 @@ package parser;
 
 public class ExitCommand extends Command {
 
-    static String line = "____________________________________________________________\n";
-    static String exitGreeting = "Bye. Hope to see you again soon!\n";
+    private static final String EXIT_GREETING = "Bye. Hope to see you again soon!\n";
 
     public static boolean isExit(Command command) {
         return command instanceof ExitCommand;
@@ -11,7 +10,7 @@ public class ExitCommand extends Command {
 
     @Override
     public String execute() {
-        return exitGreeting;
+        return EXIT_GREETING;
 //        System.exit(0);
     }
 

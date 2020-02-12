@@ -50,7 +50,7 @@ public class Duke {
         System.exit(0);
     }
 
-    public void run() {
+    private void run() {
         Command command = new Command();
         this.start();
 
