@@ -5,6 +5,7 @@ package duke.pack;
  */
 public class Todo extends Task {
     protected String fullDesc;
+    protected final String type = "T";
 
     /**
      * Creates a to-do type of task.
@@ -21,7 +22,6 @@ public class Todo extends Task {
      */
     @Override
     public String formatForFile() {
-        String type = "T";
         String done;
         if (isDone) {
             done = "1";

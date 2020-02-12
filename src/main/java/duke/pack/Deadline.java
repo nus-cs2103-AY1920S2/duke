@@ -10,6 +10,7 @@ public class Deadline extends Task {
     protected String time;
     protected LocalDate date;
     protected String fullDesc;
+    protected final String type = "D";
 
     /**
      * Creates a deadline type of task.
@@ -30,7 +31,6 @@ public class Deadline extends Task {
      */
     @Override
     public String formatForFile() {
-        String type = "D";
         String done;
         if (isDone) {
             done = "1";

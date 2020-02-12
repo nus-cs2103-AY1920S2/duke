@@ -6,6 +6,10 @@ package duke.pack;
 public class DoneCommand extends Command {
     protected int taskNum;
 
+    /**
+     * Creates a command to mark a task as done.
+     * @param taskNum the task to be marked as done
+     */
     public DoneCommand(int taskNum) {
         assert taskNum > 0: "task number must be 1 or more!";
         this.taskNum = taskNum;
@@ -29,6 +33,15 @@ public class DoneCommand extends Command {
 
     }
 
+
+    /**
+     * Executes done command and gets response for the GUI
+     * @param tasks TaskList containing all the added tasks
+     * @param ui UI that handles interactions with user
+     * @param storage Storage that handles updating of tasks in hard disk
+     * @return String response for GUI
+     * @throws DukeException if task cannot be updated to hard disk
+     */
     public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskNum > tasks.getSize()) {
             throw new DukeException("Oh no! That task does not exist!");

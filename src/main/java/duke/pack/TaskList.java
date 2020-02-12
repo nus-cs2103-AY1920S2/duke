@@ -8,10 +8,17 @@ import java.util.ArrayList;
 public class TaskList {
     protected ArrayList<Task> list;
 
+    /**
+     * Creates a new task list
+     */
     public TaskList() {
         list = new ArrayList<>();
     }
 
+    /**
+     * creates a task list using input from the ArrayList
+     * @param list list of tasks
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }

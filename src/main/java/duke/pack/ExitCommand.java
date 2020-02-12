@@ -4,6 +4,9 @@ package duke.pack;
  * Represents a command to exit the bot.
  */
 public class ExitCommand extends Command {
+    /**
+     * Creates an exit command.
+     */
     public ExitCommand() {
 
     }
@@ -20,7 +23,17 @@ public class ExitCommand extends Command {
         ui.exit();
     }
 
+
+    /**
+     * Executes exit command and gets response for the GUI
+     * @param tasks TaskList containing all the added tasks
+     * @param ui UI that handles interactions with user
+     * @param storage Storage that handles updating of tasks in hard disk
+     * @return String response for GUI
+     * @throws DukeException if tasks cannot be saved to hard disk
+     */
     public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        storage.save(tasks);
         String resp = "See you later! :)";
 
         return resp;

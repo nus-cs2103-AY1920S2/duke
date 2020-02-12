@@ -6,6 +6,9 @@ import java.util.ArrayList;
  * Represents a command to list all tasks.
  */
 public class ListCommand extends Command {
+    /**
+     * Creates a list command.
+     */
     public ListCommand() {
 
     }
@@ -20,6 +23,14 @@ public class ListCommand extends Command {
         tasks.printList();
     }
 
+
+    /**
+     * Executes list command and gets response for the GUI
+     * @param tasks TaskList containing all the added tasks
+     * @param ui UI that handles interactions with user
+     * @param storage Storage that handles updating of tasks in hard disk
+     * @return String response for GUI
+     */
     public String getResponse(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> list = tasks.getList();
         String resp = "Here are your tasks: \n";

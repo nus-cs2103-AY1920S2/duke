@@ -53,31 +53,15 @@ public class Storage {
                 String taskType = taskArr[0].trim();
 
                 if (taskType.equals("T")) {
-                    Task todo = new Todo(taskArr[2].trim(), taskArr[2].trim());
-                    if (taskArr[1].trim().equals("1")) {
-                        todo.setDone(true);
-                    }
+                    Task todo = processTodo(taskArr);
                     arrList.add(todo);
 
                 } else if (taskType.equals("E")) {
-                    LocalDate date = LocalDate.parse(taskArr[4].trim());
-                    String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
-
-                    Task event = new Event(taskArr[2].trim(), taskArr[3].trim(), date, fullDesc);
-                    if (taskArr[1].trim().equals("1")) {
-                        event.setDone(true);
-                    }
+                    Task event = processEvent(taskArr);
                     arrList.add(event);
 
                 } else if (taskType.equals("D")) {
-                    LocalDate date = LocalDate.parse(taskArr[4].trim());
-
-                    String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
-
-                    Task deadline = new Deadline(taskArr[2].trim(), taskArr[3].trim(), date, fullDesc);
-                    if (taskArr[1].trim().equals("1")) {
-                        deadline.setDone(true);
-                    }
+                    Task deadline = processDeadline(taskArr);
                     arrList.add(deadline);
                 }
             }
@@ -87,6 +71,54 @@ public class Storage {
         }
 
         return arrList;
+    }
+
+    /**
+     * Converts data from file into a To-do task.
+     * @param taskArr String array of the data
+     * @return a To-do object
+     */
+    public Task processTodo(String[] taskArr) {
+        Task todo = new Todo(taskArr[2].trim(), taskArr[2].trim());
+        if (taskArr[1].trim().equals("1")) {
+            todo.setDone(true);
+        }
+        return todo;
+    }
+
+    /**
+     * Converts data from file into an Event task.
+     * @param taskArr String array of the data
+     * @return an Event object
+     */
+    public Task processEvent(String[] taskArr) {
+        LocalDate date = LocalDate.parse(taskArr[4].trim());
+        String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
+
+        Task event = new Event(taskArr[2].trim(), taskArr[3].trim(), date, fullDesc);
+        if (taskArr[1].trim().equals("1")) {
+            event.setDone(true);
+        }
+
+        return event;
+    }
+
+    /**
+     * Converts data from file into a Deadline task.
+     * @param taskArr String array of the data
+     * @return a Deadline object
+     */
+    public Task processDeadline(String[] taskArr) {
+        LocalDate date = LocalDate.parse(taskArr[4].trim());
+
+        String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
+
+        Task deadline = new Deadline(taskArr[2].trim(), taskArr[3].trim(), date, fullDesc);
+        if (taskArr[1].trim().equals("1")) {
+            deadline.setDone(true);
+        }
+
+        return deadline;
     }
 
     /**

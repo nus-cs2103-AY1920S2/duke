@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class FindCommand extends Command {
     protected String query;
 
+    /**
+     * Creates a find command.
+     * @param query search keyword
+     */
     public FindCommand(String query) {
         this.query = query;
     }
@@ -32,7 +36,14 @@ public class FindCommand extends Command {
         }
     }
 
-    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    /**
+     * Executes find command and gets response for the GUI
+     * @param tasks TaskList containing all the added tasks
+     * @param ui UI that handles interactions with user
+     * @param storage Storage that handles updating of tasks in hard disk
+     * @return String response for GUI
+     */
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
         String resp = "I have found these matching tasks! \n";
 
         ArrayList<Task> list = tasks.getList();
