@@ -198,7 +198,7 @@ public class TaskList {
 
             assert (newSize >= 0);
 
-            String toPrint = " Alrighty. I've removed this task: \n"
+            String toPrint = "I've removed this task: \n"
                     + storingList.get(numToDelete - 1)
                     + "\n Now you have " + newSize + " tasks in the list.";
 

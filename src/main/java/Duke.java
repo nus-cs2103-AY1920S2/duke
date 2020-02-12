@@ -133,6 +133,6 @@ public class Duke {
             pause.play();
         }
 
-        return result;
+        return "Please don't eat me... \n" + result;
     }
 }

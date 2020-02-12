@@ -44,7 +44,7 @@ public class Ui {
      * @return formatted string to be printed out.
      */
     public static String printAddingTask(Task task, int size) {
-        String printStr = "Alrighty. I've added this task: \n"
+        String printStr = "I've added this task: \n"
                 + task + "\n"
                 + "Now you have " + size + " tasks in the list.";
 
