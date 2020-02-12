@@ -1,7 +1,6 @@
 package e0148811.duke;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,6 +38,8 @@ public class Storage {
 
     private static void addEventToList(List<Task> list, String line) {
         String[] lineByWord = line.split("//");
+        assert lineByWord.length == 4:
+                "A correct line description should contain 4 parts separated by \"//\"";
         boolean isDone;
         isDone = lineByWord[1].equals("T");
         switch (lineByWord[0]) {
