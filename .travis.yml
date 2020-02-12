@@ -1,4 +1,4 @@
 language: java
-
-install: skip
-script: ./gradlew build
+jdk: openjdk11
+install: ./gradlew assemble
+script: ./gradlew check
