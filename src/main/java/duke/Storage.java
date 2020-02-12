@@ -1,5 +1,8 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.exception.DukeIoException;
+import duke.exception.Messages;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -84,7 +87,7 @@ public class Storage {
             Files.createDirectories(parent);
             Files.createFile(path);
         } catch (IOException e) {
-            throw new DukeException("OOPS!!! Could not create file for data.");
+            throw new DukeIoException(Messages.MESSAGE_FAIL_CREATE_FILE);
         }
     }
 
@@ -96,13 +99,13 @@ public class Storage {
      */
     public void saveTasksToStorage(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter("data/duke.txt");
+            FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks.getTasks()) {
                 fw.write(task.toSaveName());
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("OOPS!!! Fail to save tasks to storage.");
+            throw new DukeIoException(Messages.MESSAGE_FAIL_SAVE_TASKS);
         }
 
     }

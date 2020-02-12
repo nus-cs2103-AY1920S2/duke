@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Thrown when any error occurs in Duke application.

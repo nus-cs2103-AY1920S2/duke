@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +37,7 @@ public class ParserTest {
             Parser.parse("done abc");
             fail();
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The description of done have to be a number", e.getMessage());
+            assertEquals("OOPS!!! The description of done have to be a number.", e.getMessage());
         }
 
         //wrong add command
@@ -44,7 +45,7 @@ public class ParserTest {
             Parser.parse("todo ");
             fail();
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The description of a task cannot be empty.", e.getMessage());
+            assertEquals("OOPS!!! The description of task cannot be empty.", e.getMessage());
         }
 
         //invalid command

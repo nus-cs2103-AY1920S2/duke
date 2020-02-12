@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.exception.Messages;
 import duke.task.Task;
 
 import java.util.Stack;
@@ -8,6 +10,10 @@ import java.util.Stack;
  * Keeps track of the history of task lists.
  */
 public class History {
+
+    public static final String COMMAND_ADD = "add";
+    public static final String COMMAND_DELETE = "del";
+    public static final String COMMAND_DONE = "done";
 
     private Stack<String> historyCommand;
     private Stack<Task> historyTask;
@@ -40,20 +46,20 @@ public class History {
      */
     public void removeHistory(TaskList taskList) throws DukeException {
         if (historyCommand.empty() && historyTask.empty()) {
-            throw new DukeException("OOPS!!! Can't undo further.");
+            throw new DukeException(Messages.MESSAGE_INVALID_UNDO);
         }
         String[] cmdAndDetails = historyCommand.pop().split(" ");
         String command = cmdAndDetails[0];
         Task task = historyTask.pop();
-        if (command.equals("add")) {
+        if (command.equals(COMMAND_ADD)) {
             int size = taskList.getSize();
             taskList.removeTask(size - 1);
-        } else if (command.equals("del")) {
+        } else if (command.equals(COMMAND_DELETE)) {
             assert cmdAndDetails.length == 2 : "missing info for del";
             String idx = cmdAndDetails[1];
             int index = Integer.parseInt(idx);
             taskList.getTasks().add(index, task);
-        } else if (command.equals("mark")) {
+        } else if (command.equals(COMMAND_DONE)) {
             task.markAsUndone();
         }
     }

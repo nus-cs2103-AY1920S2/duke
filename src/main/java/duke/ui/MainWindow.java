@@ -1,7 +1,7 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.DukeException;
+import duke.exception.DukeException;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

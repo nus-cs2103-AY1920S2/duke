@@ -1,13 +1,11 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.History;
-import duke.Storage;
 import duke.TaskList;
+import duke.exception.DukeException;
 import duke.ui.Ui;
 import duke.task.Task;
 
-import java.util.ArrayList;
 
 /**
  * Represents a delete command.
@@ -30,18 +28,15 @@ public class DeleteCommand extends Command {
      * Removes the task from the list of tasks and returns relevant messages.
      *
      * @param tasks The TaskList that contains list of tasks.
-     * @param ui The Ui that deals with interactions with user.
-     * @param storage The Storage deals with loading and saving tasks in file.
      * @param history The History that deals with past commands.
      * @return The relevant messages in the form of String.
      * @throws DukeException If index of out of range of the list.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage, History history) throws DukeException {
-        assert (index < tasks.getSize() && index >= 0) : "Index out of range!";
+    public String execute(TaskList tasks, History history) throws DukeException {
         Task task = tasks.removeTask(index);
-        history.updateHistory("del " + index, task);
+        history.updateHistory(History.COMMAND_DELETE + " " + index, task);
         String[] details = new String[] {" " + task.toString(), tasks.getSize() + ""};
-        return ui.generateDeleteMessage(details);
+        return Ui.generateDeleteMessage(details);
     }
 }

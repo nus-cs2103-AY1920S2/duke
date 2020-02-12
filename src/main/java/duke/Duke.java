@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.ui.Ui;
 
 /**
@@ -9,11 +10,17 @@ import duke.ui.Ui;
  */
 public class Duke {
 
+    public static final String FILE_PATH = "data/duke.txt";
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private boolean isExit;
+    private boolean isExit = false;
     private History history;
+
+    public Duke() {
+        this(FILE_PATH);
+    }
 
     /**
      * Constructs a Duke with Storage, TaskList and Ui being initialised.
@@ -23,7 +30,6 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        isExit = false;
         history = new History();
         try {
             tasks = new TaskList(storage.load());
@@ -71,9 +77,12 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             isExit = command.isExit();
-            return command.execute(tasks, ui, storage, history);
+            if (isExit) {
+                storage.saveTasksToStorage(tasks);
+            }
+            return command.execute(tasks, history);
         } catch (DukeException e) {
-            return ui.generateErrorMessage(e.getMessage());
+            return Ui.generateErrorMessage(e.getMessage());
         }
     }
 
@@ -88,10 +97,10 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line
                 Command c = Parser.parse(fullCommand);
-                System.out.println(c.execute(tasks, ui, storage, history));
+                System.out.println(c.execute(tasks, history));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                System.out.println(ui.generateErrorMessage(e.getMessage()));
+                System.out.println(Ui.generateErrorMessage(e.getMessage()));
             } finally {
                 ui.showLine();
             }
@@ -99,6 +108,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke(FILE_PATH).run();
     }
 }

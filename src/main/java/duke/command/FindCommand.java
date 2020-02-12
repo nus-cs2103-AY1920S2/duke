@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.History;
-import duke.Storage;
 import duke.TaskList;
 import duke.ui.Ui;
 import duke.task.Task;
@@ -26,17 +25,15 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Filter the list of tasks that match keyword and returns relevant messages.
+     * Filters the list of tasks that match keyword and returns relevant messages.
      *
      * @param tasks The TaskList that contains list of tasks.
-     * @param ui The Ui that deals with interactions with user.
-     * @param storage The Storage deals with loading and saving tasks in file.
      * @param history The History that deals with past commands.
      * @return The relevant messages in the form of String.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage, History history) {
+    public String execute(TaskList tasks, History history) {
         ArrayList<Task> matchingList = tasks.find(keyword);
-        return ui.generateMatchingListMessage(matchingList);
+        return Ui.generateMatchingListMessage(matchingList);
     }
 }

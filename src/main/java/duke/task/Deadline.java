@@ -1,6 +1,7 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidDateTimeException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -34,7 +35,7 @@ public class Deadline extends Task {
                 this.byTime = null;
             }
         } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!!! Format is yyyy-mm-dd HH:mm. Time is optional.");
+            throw new DukeInvalidDateTimeException();
         }
     }
 

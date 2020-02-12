@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidIndexException;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -37,15 +39,6 @@ public class TaskList {
     }
 
     /**
-     * Sets the list of tasks to new list of tasks.
-     *
-     * @param tasks The new list of tasks.
-     */
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = (ArrayList<Task>) tasks.clone();
-    }
-
-    /**
      * Adds a task to the end of the list of tasks.
      *
      * @param task The task to be added to the list.
@@ -65,7 +58,7 @@ public class TaskList {
         try {
             return tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Index is out of bounds.");
+            throw new DukeInvalidIndexException();
         }
     }
 
@@ -80,7 +73,7 @@ public class TaskList {
         try {
             return tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Index is out of bounds.");
+            throw new DukeInvalidIndexException();
         }
     }
 

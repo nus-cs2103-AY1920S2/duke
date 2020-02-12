@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/duke.txt");
+    private Duke duke = new Duke();
 
     /**
      * Starts the Duke application.

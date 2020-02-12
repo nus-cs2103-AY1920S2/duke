@@ -33,7 +33,7 @@ public class Task {
      * @return Y if the task is done or N if the task is not done.
      */
     public String getStatusIcon() {
-        return (isDone ? "Y" : "N"); //return Y or N symbols
+        return (isDone ? "Y" : "N");
     }
 
     /**

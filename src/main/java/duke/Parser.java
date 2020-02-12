@@ -8,6 +8,10 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.UndoCommand;
+import duke.exception.DukeException;
+import duke.exception.DukeMissingArgumentException;
+import duke.exception.DukeNumberFormatException;
+import duke.exception.Messages;
 
 /**
  * Represents a Parser in Duke application.
@@ -54,7 +58,7 @@ public class Parser {
                 command = createFindCommand(cmdAndDetails);
                 break;
             default:
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException(Messages.MESSAGE_INVALID_COMMAND);
             }
             return command;
         }
@@ -66,6 +70,26 @@ public class Parser {
     }
 
     /**
+     * Tests the validity of the details of command and throws relevant exceptions if invalid.
+     *
+     * @param command The specified command.
+     * @param cmdAndDetails The array containing command and description of the command.
+     * @throws DukeException If the command has missing information or in wrong format.
+     */
+    private static void testValidityOfInput(String command, String[] cmdAndDetails) throws DukeException {
+        try {
+            String taskDescription = cmdAndDetails[1].trim();
+            if (isEmptyDescription(taskDescription)) {
+                throw new DukeMissingArgumentException(String.format(
+                        Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeMissingArgumentException(String.format(
+                    Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
+        }
+    }
+
+    /**
      * Returns the Command object of DeleteCommand type.
      *
      * @param cmdAndDetails The array containing command and description of the command.
@@ -73,16 +97,13 @@ public class Parser {
      * @throws DukeException If the command has missing information or in wrong format.
      */
     private static Command createDeleteCommand(String[] cmdAndDetails) throws DukeException {
+        String command = cmdAndDetails[0];
+        testValidityOfInput(command, cmdAndDetails);
         try {
             String deleteTaskDescription = cmdAndDetails[1].trim();
-            if (isEmptyDescription(deleteTaskDescription)) {
-                throw new DukeException("OOPS!!! The description of delete cannot be empty.");
-            }
             return new DeleteCommand(Integer.parseInt(deleteTaskDescription) - 1);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The description of delete cannot be empty.");
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! The description of delete have to be a number.");
+            throw new DukeNumberFormatException(command);
         }
     }
 
@@ -94,16 +115,13 @@ public class Parser {
      * @throws DukeException If the command has missing information or in wrong format.
      */
     private static Command createDoneCommand(String[] cmdAndDetails) throws DukeException {
+        String command = cmdAndDetails[0];
+        testValidityOfInput(command, cmdAndDetails);
         try {
             String doneTaskDescription = cmdAndDetails[1].trim();
-            if (isEmptyDescription(doneTaskDescription)) {
-                throw new DukeException("OOPS!!! The description of done cannot be empty.");
-            }
             return new DoneCommand(Integer.parseInt(doneTaskDescription) - 1);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The description of done cannot be empty.");
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! The description of done have to be a number");
+            throw new DukeNumberFormatException(command);
         }
     }
 
@@ -115,15 +133,9 @@ public class Parser {
      * @throws DukeException If the command has missing information or in wrong format.
      */
     private static Command createAddCommand(String[] cmdAndDetails) throws DukeException {
-        try {
-            String taskDescription = cmdAndDetails[1].trim();
-            if (isEmptyDescription(taskDescription)) {
-                throw new DukeException("OOPS!!! The description of a task cannot be empty.");
-            }
-            return new AddCommand(cmdAndDetails[0], taskDescription);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
-        }
+        testValidityOfInput("task", cmdAndDetails);
+        String taskDescription = cmdAndDetails[1].trim();
+        return new AddCommand(cmdAndDetails[0], taskDescription);
     }
 
     /**
@@ -134,14 +146,8 @@ public class Parser {
      * @throws DukeException If the command has missing information or in wrong format.
      */
     private static Command createFindCommand(String[] cmdAndDetails) throws DukeException {
-        try {
-            String findTaskDescription = cmdAndDetails[1].trim();
-            if (isEmptyDescription(findTaskDescription)) {
-                throw new DukeException("OOPS!!! The description of find cannot be empty.");
-            }
-            return new FindCommand(findTaskDescription);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The description of find cannot be empty.");
-        }
+        testValidityOfInput("find", cmdAndDetails);
+        String findTaskDescription = cmdAndDetails[1].trim();
+        return new FindCommand(findTaskDescription);
     }
 }
