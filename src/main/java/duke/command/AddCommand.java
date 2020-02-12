@@ -65,6 +65,7 @@ public class AddCommand extends Command {
                     (LocalDateTime) details.get("datetime"));
             break;
         default:
+            assert false : "Task type should already be valid.";
             throw new DukeException(ErrorMessage.COMMAND_NOT_FOUND);
         }
 
