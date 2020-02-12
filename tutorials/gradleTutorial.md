@@ -149,12 +149,12 @@ src
 │     └─seedu/duke/Duke.java
 └─test
     └─java
-        └─seedu/duke/DukeTest.java
+        └─seedu/duke/duke.DukeTest.java
 ```
 
 If you have imported your Gradle project into IntelliJ IDEA, you will notice that IDEA is able to mark the test directory as the _Test root_ (colored in green by default) automatically.
 
-You can now write a test (e.g., `test/java/seedu/duke/DukeTest.java`) and run it with `gradlew test`.
+You can now write a test (e.g., `test/java/seedu/duke/duke.DukeTest.java`) and run it with `gradlew test`.
 
 **Resources**:
 * [Gradle documentation for JUnit](https://docs.gradle.org/current/userguide/java_testing.html#using_junit5)
