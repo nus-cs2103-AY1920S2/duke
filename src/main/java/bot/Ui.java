@@ -308,6 +308,13 @@ public class Ui {
     }
 
     /**
+     * Prints the alias message to the interface
+     */
+    public void showAliasMessage() {
+
+    }
+
+    /**
      * Displays the goodbye message
      */
     public void showGoodbye() {
