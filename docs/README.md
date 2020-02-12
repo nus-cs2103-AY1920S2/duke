@@ -25,7 +25,7 @@ Example of usage:
 Expected outcome:
 
 `Understood. I have added: [T] CS2103 Assignment 0`  
-`Number of items in the list: 1`
+`Number of items in the list: 1`  
 
 ##
 
@@ -44,7 +44,8 @@ Example of usage:
 Expected outcome:
 
 `Understood. I have added: [E] Temperature Taking 0 (at: Mar 3 2020)`  
-`Number of items in the list: 2`
+`Number of items in the list: 2`  
+
 ##
 ### `deadline` - Adds a Deadline task.
 
@@ -62,7 +63,8 @@ Expected outcome:
 
 
 `Understood. I have added: [D] Individual Project 0 (by: Feb 27 2020)`  
-`Number of items in the list: 3`
+`Number of items in the list: 3`  
+
 ##
 ### `list` - Lists all tasks.
 
@@ -79,7 +81,8 @@ Expected outcome:
 `These items are in your list.`  
 `1.[T] CS2103 Assignment 0`  
 `2.[E] Temperature Taking 0 (at: Mar 3 2020)`  
-`3.[D] Individual Project 0 (by: Feb 27 2020)`
+`3.[D] Individual Project 0 (by: Feb 27 2020)`  
+
 ##
 
 ### `delete` - Deletes a task.
@@ -95,8 +98,9 @@ Example of usage:
 Expected outcome:  
 
 `[D] Individual Project 0 (by: Feb 27 2020) has been removed.`  
-`Number of items in list: 2`
-##
+`Number of items in list: 2`  
+
+##  
 ### `done` - Marks a task as done.
 
 Marks one of the tasks in the task list as done.  
@@ -110,7 +114,8 @@ Example of usage:
 Expected outcome:  
 
 `You have completed this task.`  
-`[T] CS2103 Assignment 1`  
+`[T] CS2103 Assignment 1`
+
 ##
 ### `find` - Find related tasks.
 
@@ -126,7 +131,8 @@ Expected outcome:
 
 `These are the tasks that matched what you were looking for.`  
 `These items are in your list:`  
-`1.[T] CS2103 Assignment 1`  
+`1.[T] CS2103 Assignment 1`
+
 ##
 ### `snooze` - Snooze/postpone a task.
 
@@ -142,4 +148,3 @@ Expected outcome:
 
 `[E] Temperature Taking 0 (at: Mar 5 2020) has been snoozed for 2 days.`  
 
-##
