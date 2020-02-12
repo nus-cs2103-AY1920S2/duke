@@ -28,7 +28,7 @@ public class TaskStorage {
         Scanner scanner = new Scanner(this.file);
         while (scanner.hasNext()) {
             try {
-                taskList.add(TaskDispatch.dispatchTaskFromStorage(scanner.nextLine().split(" ")));
+                taskList.add(TaskDispatch.dispatchTaskFromStorage(scanner.nextLine().split("\\s+")));
             } catch (IllegalCommandException e) {
                 // Assumption is that data is checked to be valid before adding to the file
                 // Hence, when reading from it, the data should result in valid duke.task.Task objects

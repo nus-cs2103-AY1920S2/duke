@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.command.*;
+import duke.task.Priority;
 import exception.IllegalTextException;
 
 import java.util.regex.PatternSyntaxException;
@@ -17,17 +18,33 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
-            return new doneCommand(parseItemNumber(stringToParse));
+            return new DoneCommand(parseItemNumber(stringToParse));
         case "delete":
-            return new deleteCommand(parseItemNumber(stringToParse));
+            return new DeleteCommand(parseItemNumber(stringToParse));
         case "todo":
             return new TodoCommand(parseTodoArgs(stringToParse));
         case "event":
             return new EventCommand(parseEventArgs(stringToParse));
         case "deadline":
             return new DeadlineCommand(parseDeadlineArgs(stringToParse));
+        case "priority":
+            return new PriorityCommand(parsePriorityArgs(stringToParse));
         }
         return null;
+    }
+
+    private static String parsePriorityArgs(String stringToParse) throws IllegalTextException {
+        try {
+            String[] splittedString = stringToParse.split("\\s+");
+            if (splittedString.length <= 1) {
+                throw new IllegalTextException("Specify LOW, MEDIUM or HIGH priority");
+            } else if (!Priority.isValidPriority(splittedString[1])) {
+                throw new IllegalTextException("You typed an invalid priority level");
+            }
+            return splittedString[1];
+        } catch (IllegalTextException e) {
+            throw e;
+        }
     }
 
     private static String[] parseDeadlineArgs(String stringToParse) throws IllegalTextException {

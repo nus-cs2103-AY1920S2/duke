@@ -2,6 +2,8 @@ package duke.task;
 
 import exception.IllegalCommandException;
 
+import java.util.Arrays;
+
 public interface TaskDispatch {
 
     public static Task dispatchTaskFromInput(String[] commandArgs) throws IllegalCommandException {
