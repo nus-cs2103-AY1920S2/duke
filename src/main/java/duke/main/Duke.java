@@ -127,17 +127,6 @@ public class Duke extends Application {
         return textToAdd;
     }
 
-//    private void handleUserInput() {
-//        String userTextInput = userInput.getText();
-//        Label userText = new Label(userTextInput);
-//        Label dukeText = new Label(getResponse(userTextInput));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userTextInput, new ImageView(user)),
-//                DialogBox.getDukeDialog(getResponse(userTextInput), new ImageView(duke))
-//        );
-//        userInput.clear();
-//    }
-
     public String getResponse(String fullCommand) {
         String response = ui.divider("") + "\n";
         try {

@@ -14,10 +14,14 @@ public class Deadline extends Task {
         try {
             this.date = LocalDate.parse(by);
             assert this.date.isAfter(LocalDate.now()): "Invalid early date";
-            System.out.println("Parsed date successfully");
+            getParsed_date_successfully();
         } catch (DateTimeParseException de) {
             this.by = by;
         }
+    }
+
+    private void getParsed_date_successfully() {
+        System.out.println("Parsed date successfully");
     }
 
     /**
