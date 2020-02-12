@@ -2,6 +2,8 @@ package ip.task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList implements Serializable {
     private ArrayList<Task> tasks = new ArrayList<>();
@@ -12,6 +14,12 @@ public class TaskList implements Serializable {
 
     public Task delete(int i) {
         return tasks.remove(i);
+    }
+
+    public TaskList() {}
+
+    public TaskList(List<Task> list) {
+        this.tasks = (ArrayList<Task>) list;
     }
 
     public Task markTaskDone(int i) {
@@ -31,18 +39,16 @@ public class TaskList implements Serializable {
     /**
      * Returns a task at an index in the list
      * @param i the index of the task
-     * @return
+     * @return the task at index i
      */
     public Task get(int i) {
         return tasks.get(i);
     }
+
     public TaskList find(String keyword) {
-        TaskList found = new TaskList();
-        for (Task t: tasks) {
-            if (t.contains(keyword)) {
-                found.add(t);
-            }
-        }
-        return found;
+        List<Task> found = tasks.stream()
+                        .filter(t -> t.contains(keyword))
+                        .collect(Collectors.toList());
+        return new TaskList(found);
     }
 }
