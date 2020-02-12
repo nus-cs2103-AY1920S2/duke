@@ -23,6 +23,7 @@ public class Duke {
         ui = new Ui();
         parser = new Parser(ui);
         isExit = false;
+        storage.loadFile(taskList);
     }
 
     /**
@@ -67,17 +68,12 @@ public class Duke {
         try {
             Command command = parser.parseCommand(input);
             result += command.execute(input, taskList, ui, storage);
-            isExit = command.isExit();
         } catch (DukeException | IOException e) {
             result += e.getMessage();
         }
 
         return result;
 
-    }
-
-    public boolean getIsExit() {
-        return isExit;
     }
 
 }

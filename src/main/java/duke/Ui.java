@@ -70,7 +70,7 @@ public class Ui {
      * @param taskNumber the task number
      * @return the string
      */
-    public String showTaskDeletedMessage(MyList taskList, int taskNumber) {
+    public String showTaskDeletedMessage(MyList taskList, int taskNumber) throws DukeException {
         Task taskToDelete = taskList.getTask(taskNumber);
         String taskName = taskToDelete.getItem();
         return "I shall delete task: " + taskName;
@@ -137,6 +137,14 @@ public class Ui {
      */
     public String showNoTaskFoundMessage() {
         return "No task found that matches your description";
+    }
+
+    public String showOutOfBoundError() {
+        return "Task does not exist, you have input a wrong number";
+    }
+
+    public String showWrongDateException() {
+        return "Please key in a valid date in the format yyyy-MM-dd";
     }
 
 }

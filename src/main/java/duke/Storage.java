@@ -67,7 +67,7 @@ public class Storage {
                 default:  break;
                 }
             }
-        } catch (FileNotFoundException | ParseException e) {
+        } catch (FileNotFoundException | ParseException | DukeException e) {
             e.printStackTrace();
         }
     }
@@ -91,7 +91,7 @@ public class Storage {
      * @param list the list
      * @throws IOException the io exception
      */
-    public void newSave(MyList list) throws IOException {
+    public void newSave(MyList list) throws IOException, DukeException {
         File file = new File(filePath);
         FileWriter fileWriter = new FileWriter(file, false);
         for (int i = 1; i <= list.getArraySize(); i++) {
@@ -101,7 +101,8 @@ public class Storage {
     }
 
     private String[] splitString(String string) {
-        String[] result = new String[3];
+        final int ARRAY_LENGTH = 3;
+        String[] result = new String[ARRAY_LENGTH];
         String[] splitString = string.split("\\]");
         String[] retrieveTask = splitString[0].split("\\[");
         String[] retrieveStatus = splitString[1].split("\\[");

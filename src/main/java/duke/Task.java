@@ -37,6 +37,15 @@ public class Task {
     }
 
     /**
+     * Sets a new name for the item.
+     *
+     * @param newName input a new name
+     */
+    public void setItem(String newName) {
+        this.item = newName;
+    }
+
+    /**
      * Sets the boolean of the task completeness by taking in a boolean.
      *
      * @param isCompleted the is completed

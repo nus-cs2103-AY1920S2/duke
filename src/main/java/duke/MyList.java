@@ -14,6 +14,7 @@ public class MyList {
     }
 
     private ArrayList<Task> listArray = new ArrayList<>();
+    private Ui ui = new Ui();
     private int counter = 0;
 
     /**
@@ -41,7 +42,10 @@ public class MyList {
      * @param num the num
      * @return the task
      */
-    public Task getTask(int num) {
+    public Task getTask(int num) throws DukeException {
+        if (num > listArray.size() || num < 0) {
+            throw new DukeException(ui.showOutOfBoundError());
+        }
         return listArray.get(num - 1);
     }
 

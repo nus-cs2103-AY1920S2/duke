@@ -40,6 +40,10 @@ public class Parser {
             return new ListCommand();
         } else if (command.contains("find")) {
             return new FindCommand();
+        } else if (command.contains("edit name")) {
+            return new EditNameCommand();
+        } else if(command.contains("edit date")) {
+            return new EditDateCommand();
         } else {
             throw new DukeException(ui.showWrongCommandError());
         }
