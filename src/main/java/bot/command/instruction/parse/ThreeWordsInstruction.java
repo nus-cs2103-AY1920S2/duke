@@ -8,11 +8,11 @@ import bot.command.instruction.ParsedInstruction;
 
 /**
  * Abstract class for an Instruction that consists
- * of one fixed word and one more word as
- * its single argument
+ * of one fixed word and two more words as
+ * its two arguments
  */
-public abstract class TwoWordsInstruction extends Instruction {
-    public TwoWordsInstruction(Command... commands) {
+public class ThreeWordsInstruction extends Instruction {
+    public ThreeWordsInstruction(Command... commands) {
         super(commands);
     }
 
@@ -22,9 +22,9 @@ public abstract class TwoWordsInstruction extends Instruction {
 
         assert (rawCommand.startsWith(command.getWord()));
         String[] words = rawCommand.split("\\s+");
-        if (words.length == 2) {
-            return new ParsedInstruction(this, words[1]);
-        } else if (words.length < 2) {
+        if (words.length == 3) {
+            return new ParsedInstruction(this, words[1], words[2]);
+        } else if (words.length < 3) {
             System.out.println(command.getWord());
             throw new InadequateArgumentsException(command.getWord());
         } else {
