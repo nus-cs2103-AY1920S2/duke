@@ -5,4 +5,3 @@ public class EmptyTaskListException extends DukeException {
         super(message);
     }
 }
-    
