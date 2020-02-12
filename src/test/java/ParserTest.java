@@ -10,18 +10,18 @@ public class ParserTest {
     @Test
     void todoDescriptionCorrectIn() {
         String in = "todo drink";
-        assertEquals("drink", Parser.todoDescription(in));
+        assertEquals("drink", Parser.getTodoDescription(in));
     }
 
     @Test
     void deadlineParamsWrongIn() {
         String in = "deadline buy chocolate by 9pm";
-        assertThrows(DukeUnknownInputException.class, () -> Parser.deadlineParams(in));
+        assertThrows(DukeUnknownInputException.class, () -> Parser.getDeadlineParams(in));
     }
 
     @Test
     void eventParamsMissingDescription() {
         String in = "event ";
-        assertThrows(DukeMissingDescriptionException.class, () -> Parser.eventParams(in));
+        assertThrows(DukeMissingDescriptionException.class, () -> Parser.getEventParams(in));
     }
 }
