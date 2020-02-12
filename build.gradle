@@ -59,3 +59,5 @@ application {
 run {
     standardInput = System.in
 }
+
+sourceCompatibility = 1.11

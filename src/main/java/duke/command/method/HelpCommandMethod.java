@@ -18,7 +18,6 @@ public class HelpCommandMethod implements CommandMethod {
     }
 
     public void execute(Command command) {
-        Duke program = Duke.getProgram();
         StringBuilder output = new StringBuilder();
         output.append("Commands available:\n");
         for (CommandMethod method : Command.COMMANDS) {
@@ -28,6 +27,6 @@ public class HelpCommandMethod implements CommandMethod {
         }
         output.append("Datetime's must be in " + Task.DATE_TIME_INPUT_PATTERN + " format.\n");
         output.append("Tasks are saved at " + Duke.getProgram().getStorage().getFilePath());
-        program.getUi().print(output.toString());
+        Duke.getProgram().getUi().print(output.toString());
     }
 }
