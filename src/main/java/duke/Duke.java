@@ -1,19 +1,22 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeException;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
  * Main class for the duke application.
  */
 public class Duke {
+    public static final String FILE_PATH = "data/duke.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private boolean isExit;
+    private boolean isExit = false;
 
     public Duke() {
-        this("data/duke.txt");
+        this(FILE_PATH);
     }
 
     /**
@@ -24,7 +27,6 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        isExit = false;
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -34,7 +36,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke(FILE_PATH).run();
     }
 
     /**
@@ -47,7 +49,10 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             isExit = command.isExit();
-            return command.execute(tasks, ui, storage);
+            if (isExit) {
+                storage.save(tasks);
+            }
+            return command.execute(tasks);
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
@@ -63,7 +68,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 Command command = Parser.parse(fullCommand);
                 isExit = command.isExit();
-                ui.print(command.execute(tasks, ui, storage));
+                ui.print(command.execute(tasks));
             } catch (DukeException e) {
                 ui.print(ui.showError(e.getMessage()));
             }

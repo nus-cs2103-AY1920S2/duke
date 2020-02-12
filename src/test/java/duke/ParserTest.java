@@ -7,6 +7,7 @@ import duke.command.ExitCommand;
 import duke.command.GetCommand;
 import duke.command.ListCommand;
 
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -80,7 +81,7 @@ class ParserTest {
             Parser.parse("get 02-02-2020");
             fail();
         } catch (DukeException e) {
-            assertEquals("Incorrect date format. Format required: yyyy-mm-dd", e.getMessage());
+            assertEquals("Incorrect date or time format. Format required: yyyy-mm-dd", e.getMessage());
         }
         try {
             Parser.parse("find");

@@ -1,8 +1,10 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeFormatException;
+import duke.exception.MissingArgumentException;
+import duke.exception.UpdateException;
+import duke.task.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -33,24 +35,22 @@ public class UpdateCommand extends Command {
     /**
      * Updates the task at the specified index in the TaskList and returns an acknowledgement message.
      * @param tasks The TaskList containing the tasks.
-     * @param ui The Ui that interacts with the user.
-     * @param storage The Storage to load and save tasks into the data file.
      * @return A string with the message to be printed.
      * @throws DukeException If the details is invalid.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         Task task = tasks.get(index);
         if (task instanceof Todo) {
-            throw new DukeException("Todo cannot be updated.");
+            throw new UpdateException("Todo cannot be updated.");
         }
         if (details.trim().equals("")) {
-            throw new DukeException("The details of the task to update cannot be empty.");
+            throw new MissingArgumentException("details of the task to update");
         }
         int dateIndex = details.indexOf("/d ");
         int timeIndex = details.indexOf("/t ");
         if ((dateIndex != 0 && timeIndex != 0)) {
-            throw new DukeException("Invalid details format. "
+            throw new UpdateException("Invalid details format. "
                     + "Use d/ to indicate the new date and t/ to indicate the new time.");
         }
 
@@ -66,7 +66,7 @@ public class UpdateCommand extends Command {
         }
 
         updateTask(task, date, time);
-        return ui.showToUser(Ui.MESSAGE_UPDATE, Ui.INDENT + task);
+        return Ui.showToUser(Ui.MESSAGE_UPDATE, Ui.INDENT + task);
     }
 
     /**
@@ -104,8 +104,7 @@ public class UpdateCommand extends Command {
                 }
             }
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Incorrect date or time format. "
-                    + "Format required: yyyy-mm-dd for date and hh:mm for time");
+            throw new InvalidDateTimeFormatException("yyyy-mm-dd for date and hh:mm for time");
         }
     }
 }

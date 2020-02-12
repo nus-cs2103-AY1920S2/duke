@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.TaskList;
+import duke.task.TaskList;
 
 import java.util.Scanner;
 
@@ -20,7 +20,7 @@ public class Ui {
     public static final String MESSAGE_NO_TASK = "There are no tasks in the list.";
     public static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
 
-    private Scanner sc;
+    private static Scanner sc;
 
     /**
      * Constructs a new Ui.
@@ -60,7 +60,7 @@ public class Ui {
      *
      * @return The exit message when the duke application is terminated.
      */
-    public String showExit() {
+    public static String showExit() {
         sc.close();
         return MESSAGE_EXIT;
     }
@@ -71,7 +71,7 @@ public class Ui {
      * @param message The message to be printed.
      * @return A string representation of the message to be printed.
      */
-    public String showToUser(String... message) {
+    public static String showToUser(String... message) {
         return String.join(System.lineSeparator(), message);
     }
 

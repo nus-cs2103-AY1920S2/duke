@@ -1,6 +1,8 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeFormatException;
+import duke.exception.InvalidEventTimeException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -31,10 +33,10 @@ public class Event extends Task {
             this.startTime = LocalTime.parse(timeArray[0]);
             this.endTime = LocalTime.parse(timeArray[1]);
             if (startTime.isAfter(endTime)) {
-                throw new DukeException("Start time cannot be after end time.");
+                throw new InvalidEventTimeException();
             }
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Incorrect date or time format. Format required: yyyy-mm-dd hh:mm-hh:mm");
+            throw new InvalidDateTimeFormatException("yyyy-mm-dd hh:mm-hh:mm");
         }
     }
 

@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
+import duke.exception.DukeException;
+import duke.exception.MissingArgumentException;
+import duke.exception.UnknownCommandException;
+import duke.task.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -24,59 +25,62 @@ public class AddCommand extends Command {
      */
     public AddCommand(String type, String details) {
         this.type = type;
-        this.details = details;
+        this.details = details.trim();
     }
 
     /**
      * Adds the task to the TaskList and returns an acknowledgement message.
      *
      * @param tasks The TaskList where the task is to be added.
-     * @param ui The Ui that interacts with the user.
-     * @param storage The Storage to load and save tasks into the data file.
      * @return A string with the message to be printed.
      * @throws DukeException If the details is invalid.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         Task task;
         assert (type.equals("todo") || type.equals("deadline") || type.equals("event")) : "Invalid task type";
         switch (type) {
         case "todo":
-            if (details.trim().equals("")) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
+            checkEmptyDetails("The description of a todo cannot be empty.");
             task = new Todo(details);
             break;
         case "deadline":
-            if (details.trim().equals("")) {
-                throw new DukeException("The description and due date of a deadline cannot be empty.");
+            checkEmptyDetails("description and due date of a deadline");
+            if (details.startsWith("/by")) {
+                throw new MissingArgumentException("description of a deadline");
             }
-            if (details.trim().startsWith("/by")) {
-                throw new DukeException("The description of a deadline cannot be empty.");
-            }
-            if (details.trim().endsWith("/by") || !details.contains("/by")) {
-                throw new DukeException("The due date of a deadline cannot be empty.");
+            if (details.endsWith("/by") || !details.contains("/by")) {
+                throw new MissingArgumentException("due date of a deadline");
             }
             String[] deadlineArr = details.split("/by");
             task = new Deadline(deadlineArr[0].trim(), deadlineArr[1].trim());
             break;
         case "event":
-            if (details.equals("")) {
-                throw new DukeException("The description and date and time of an event cannot be empty.");
+            checkEmptyDetails("description and date and time of an event");
+            if (details.startsWith("/at")) {
+                throw new MissingArgumentException("description of an event");
             }
-            if (details.trim().startsWith("/at")) {
-                throw new DukeException("The description of an event cannot be empty.");
-            }
-            if (details.trim().endsWith("/at") || !details.contains("/at")) {
-                throw new DukeException("The date and time of an event cannot be empty.");
+            if (details.endsWith("/at") || !details.contains("/at")) {
+                throw new MissingArgumentException("date and time of an event");
             }
             String[] eventArr = details.split(" /at ");
             task = new Event(eventArr[0].trim(), eventArr[1].trim());
             break;
         default:
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new UnknownCommandException();
         }
         tasks.add(task);
-        return ui.showToUser(Ui.MESSAGE_ADD, Ui.INDENT + task, Ui.getNumberOfTasksMessage(tasks));
+        return Ui.showToUser(Ui.MESSAGE_ADD, Ui.INDENT + task, Ui.getNumberOfTasksMessage(tasks));
+    }
+
+    /**
+     * Checks if the details of the command is empty.
+     * @param message The message to be printed.
+     * @throws DukeException If the details of the command is empty.
+     */
+    private void checkEmptyDetails(String message) throws DukeException {
+        if (this.details.equals("")) {
+            throw new MissingArgumentException(message);
+        }
     }
 }

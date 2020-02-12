@@ -1,6 +1,7 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeFormatException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -28,7 +29,7 @@ public class Deadline extends Task {
             this.date = LocalDate.parse(dateTimeArray[0]);
             this.time = LocalTime.parse(dateTimeArray[1]);
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Incorrect date or time format. Format required: yyyy-mm-dd hh:mm");
+            throw new InvalidDateTimeFormatException("yyyy-mm-dd hh:mm");
         }
     }
 

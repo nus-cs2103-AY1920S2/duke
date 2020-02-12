@@ -1,8 +1,7 @@
-package duke;
+package duke.task;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
+import duke.exception.DukeException;
+import duke.exception.TaskCannotBeFoundException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class TaskList {
         try {
             return tasks.get(index - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Task cannot be found.");
+            throw new TaskCannotBeFoundException();
         }
     }
 
@@ -66,7 +65,7 @@ public class TaskList {
         try {
             return tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Task cannot be found.");
+            throw new TaskCannotBeFoundException();
         }
     }
 

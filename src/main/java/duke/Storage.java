@@ -1,8 +1,11 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.exception.StorageException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.Todo;
 
 import java.io.File;
@@ -56,7 +59,7 @@ public class Storage {
                     task = new Event(data[2], data[3], data[1].equals("1"));
                     break;
                 default:
-                    throw new DukeException("Could not load tasks.");
+                    throw new StorageException("Could not load tasks.");
                 }
                 tasks.add(task);
             }
@@ -81,7 +84,7 @@ public class Storage {
             }
             Files.createFile(path);
         } catch (IOException e) {
-            throw new DukeException("Could not create data file.");
+            throw new StorageException("Could not create data file.");
         }
     }
 
@@ -99,7 +102,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Could not save tasks.");
+            throw new StorageException("Could not save tasks.");
         }
     }
 }

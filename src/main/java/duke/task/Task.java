@@ -1,6 +1,7 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DoneException;
+import duke.exception.DukeException;
 
 /**
  * Represents a task.
@@ -55,7 +56,7 @@ public class Task {
      */
     public void markAsDone() throws DukeException {
         if (isDone) {
-            throw new DukeException("Task is already marked as done.");
+            throw new DoneException();
         }
         this.isDone = true;
     }
