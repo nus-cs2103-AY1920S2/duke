@@ -41,7 +41,13 @@ Run DUKE in 3 simple steps:
 
 1. Install JRE 11 or later.
 2. Download the latest `jar` file from [here](https://github.com/limdylan/duke/releases).
-3. Do `java -jar duke.jar` to run DUKE.
+3. To run DUKE with the GUI, either:
+   - Double-click the `jar` file, or
+   - Do `java -jar duke.jar`
+
+The above steps are for running DUKE with a GUI. To run DUKE entirely in the terminal without a GUI instead, do `java -jar duke.jar -t`
+
+Take note that DUKE can only be run without a GUI in Windows Subsystem for Linux (WSL), due to [a lack of official support for graphical programs from Microsoft](https://github.com/Microsoft/WSL/issues/2356).
 
 ## Commands
 
@@ -124,7 +130,7 @@ To-do tasks are identified by `[T]`.
 
 * Description cannot contain `|` (vertical pipe character).
 
-#### Example 1
+#### Example
 
 * Usage:
   * `todo Eat lunch`
