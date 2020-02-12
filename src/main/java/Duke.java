@@ -145,10 +145,18 @@ public class Duke {
         }
     }
 
-    private void doneOrDeleteATask(String command, String[] instructionByWord, int lengthOfArray) throws DukeException {
+    private void doneOrDeleteATask(String command, String[] instructionByWord, int lengthOfArray)
+            throws DukeException {
+        assert command.equals("done") || command.equals("delete"):
+                "only two types of commands (done and delete) are considered for this method";
         if (lengthOfArray != 2) {
-            ui.throwWrongFormatException(
-                    "\"done a_positive_integer_indicating_the_index_of_the_task_done\"");
+            if (command.equals("done")) {
+                ui.throwWrongFormatException(
+                        "\"done a_positive_integer_indicating_the_index_of_the_task_done\"");
+            } else {
+                ui.throwWrongFormatException(
+                        "\"delete a_positive_integer_indicating_the_index_of_the_task_you_want_to_delete\"");
+            }
         }
         try {
             int index = Integer.parseInt(instructionByWord[1]) - 1;

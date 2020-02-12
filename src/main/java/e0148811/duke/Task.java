@@ -1,6 +1,6 @@
 package e0148811.duke;
 
-public class Task {
+public abstract class Task {
     static String DONE = "Done";
     static String NOT_DONE = "Not Done";
     private boolean isDone;

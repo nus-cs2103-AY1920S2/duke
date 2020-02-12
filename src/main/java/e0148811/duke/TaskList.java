@@ -38,6 +38,7 @@ public class TaskList {
     }
 
     public void markATaskDone(int index) {
+        assert index < list.size(): "index is out of bound";
         Task taskToBeCompleted = list.get(index);
         taskToBeCompleted.setDone();
         System.out.println("Noted, the following task is marked done:");
@@ -45,6 +46,7 @@ public class TaskList {
     }
 
     public void deleteATask(int index) {
+        assert index < list.size(): "index is out of bound";
         Task t = list.remove(index);
         System.out.println("Noted, the following task is removed from the list:");
         System.out.println(t);
