@@ -16,6 +16,8 @@ bin/
 *.class
 *.txt
 
+*.classpath
+
 # VSCode Files
 .history
 .settings
