@@ -55,8 +55,8 @@ public class TaskList {
         // deleteIndex is 0-indexed
         String responseMessage = "";
         responseMessage += "Noted. I've removed this task:\n";
-        responseMessage +=tasks.remove(deleteIndex).toString() + "\n";
-        responseMessage +="Now you have " + tasks.size() + " tasks in the list.\n";
+        responseMessage += tasks.remove(deleteIndex).toString() + "\n";
+        responseMessage += "Now you have " + tasks.size() + " tasks in the list.\n";
 
         return responseMessage;
     }
