@@ -11,7 +11,7 @@ checkstyle {
 }
 
 group 'duke'
-version '0.2.0'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -51,7 +51,7 @@ test {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.2.0"
+    archiveVersion = "1.0.0"
     archiveClassifier = null
     archiveAppendix = null
 }

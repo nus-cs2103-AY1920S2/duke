@@ -104,17 +104,20 @@ public class Duke extends Application {
 
     //Custom exitDuke Method to handle data saving and timed termination
     private String exitDuke(TaskList taskList) {
+        StringBuilder sb = new StringBuilder();
+
         //Save new data to file before exiting
         try {
             storage.save(taskList);
         } catch (CannotSaveFileException e) {
-            return e.toString();
+            sb.append(e.toString()).append("\n");
         }
 
         //Timed exit to terminate the program while allowing you to see the Bye Message
         Executors.newSingleThreadScheduledExecutor()
             .schedule(() -> System.exit(0), 2, TimeUnit.SECONDS);
 
-        return ("Bye. Hope to see you again soon!");
+        sb.append("Bye. Hope to see you again soon!");
+        return sb.toString();
     }
 }
