@@ -12,8 +12,6 @@ public class Parser {
      * @param tasks the tasks available in current duke.main.Duke program
      */
     public String parse(String input, Ui ui, TaskList tasks) {
-
-
         String command = "";
 
         try {
