@@ -15,10 +15,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-import duke.parser.*;
+import duke.parser.Parser;
+import duke.parser.Command;
 import duke.storage.Storage;
-import duke.task.*;
-import duke.ui.*;
+import duke.task.TaskList;
+import duke.ui.UiText;
+import duke.ui.Ui;
+import duke.ui.Gui;
 
 import java.io.File;
 import java.net.URL;
@@ -70,10 +73,6 @@ public class Duke extends Application {
         } else {
             tasks = new TaskList();
         }
-        /*
-        if (gui) {
-            this.gui = new Gui(this.dialogContainer, this.userInput);
-        }*/
     }
 
     /**

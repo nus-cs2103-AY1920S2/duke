@@ -9,8 +9,6 @@ public class ToDoTask extends Task {
      * Main constructor used when creating this type of task
      *
      * @param name   = task name
-     * @param prepos = preposition to describe the time (eg. by , on...)
-     * @param time   = string inputted by user that describe the time
      */
     public ToDoTask(String name) {
         this(name, false);
@@ -18,7 +16,7 @@ public class ToDoTask extends Task {
 
     private ToDoTask(String name, boolean done) {
         super(name, TaskType.TODO_TASK);
-        this.done = done;
+        this.isDone = done;
     }
 
     /**

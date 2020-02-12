@@ -34,38 +34,38 @@ public class Command {
 }
 
 class AddTaskCommand extends Command {
-    private String first;
+    private String firstPhrase;
 
-    AddTaskCommand(String first, Scanner sc) {
+    AddTaskCommand(String firstPhrase, Scanner sc) {
         super(sc);
-        this.first = first;
+        this.firstPhrase = firstPhrase;
     }
 
     @Override
     public boolean execute(TaskList tasks, UiText ui, Storage storage) {
-        Task t = null;
+        Task task = null;
         try {
-            switch (this.first) {
+            switch (this.firstPhrase) {
                 case "todo":
-                    t = new ToDoTask(this.terms.nextLine().trim());
+                    task = new ToDoTask(this.terms.nextLine().trim());
                     break;
                 case "deadline":
-                    t = new DeadlineTask(this.terms.useDelimiter("/").next().trim(), this.terms.useDelimiter(" ").next().substring(1),
+                    task = new DeadlineTask(this.terms.useDelimiter("/").next().trim(), this.terms.useDelimiter(" ").next().substring(1),
                             this.terms.nextLine());
                     break;
                 case "event":
-                    t = new EventTask(this.terms.useDelimiter("/").next().trim(), this.terms.useDelimiter(" ").next().substring(1),
+                    task = new EventTask(this.terms.useDelimiter("/").next().trim(), this.terms.useDelimiter(" ").next().substring(1),
                             this.terms.nextLine());
                     break;
                 default:
             }
         } catch (Exception e) {
-            ui.respond("☹ OOPS!!! The description of a " + first + " cannot be empty.");
+            ui.respond("☹ OOPS!!! The description of a " + firstPhrase + " cannot be empty.");
             return true;
         }
-        if (t != null) {
-            tasks.add(t);
-            ui.respond("Got it. I've added this task:", "  " + t.toString(),
+        if (task != null) {
+            tasks.add(task);
+            ui.respond("Got it. I've added this task:", "  " + task.toString(),
                     "Now you have " + tasks.count() + " tasks in the list.");
             storage.save(tasks.getTaskList());
             return true;

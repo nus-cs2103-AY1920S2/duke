@@ -28,7 +28,7 @@ public class EventTask extends Task {
         super(name, TaskType.EVENT_TASK);
         this.prepos = prepos;
         this.time = time;
-        this.done = done;
+        this.isDone = done;
         try {
             this.ld = LocalDate.parse(time, defaultDateF);
         } catch (DateTimeParseException dtpe) {

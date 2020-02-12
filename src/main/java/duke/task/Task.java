@@ -5,7 +5,7 @@ import duke.storage.CSVParsable;
 
 public abstract class Task implements CSVParsable {
     private String name;
-    protected boolean done = false;
+    protected boolean isDone = false;
     protected TaskType type;
 
     protected Task(String name, TaskType type) {
@@ -19,7 +19,7 @@ public abstract class Task implements CSVParsable {
      * @return done
      */
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**
@@ -28,7 +28,7 @@ public abstract class Task implements CSVParsable {
      * @return true
      */
     public boolean setToDone() {
-        return this.done = true;
+        return this.isDone = true;
     }
 
     /**

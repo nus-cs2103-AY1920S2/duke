@@ -37,7 +37,7 @@ public class DeadlineTask extends Task {
         super(name, TaskType.DEADLINE_TASK);
         this.prepos = prepos;
         this.dateLine = time;
-        this.done = done;
+        this.isDone = done;
         try {
             this.ld = LocalDate.parse(time, defaultDateF);
         } catch (DateTimeParseException dtpe) {
