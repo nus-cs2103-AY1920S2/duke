@@ -37,34 +37,37 @@ public class DateTimeStringFormatter {
     public static String formatDateTime(LocalDateTime dateTime, boolean isCompleted) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         long differenceInDays = DAYS.between(dateTime.toLocalDate(), currentDateTime.toLocalDate());
+        boolean isToday = differenceInDays == 0;
+        boolean isOneDayDifference = Math.abs(differenceInDays) == 1;
+        boolean isDifferentYear = dateTime.getYear() != currentDateTime.getYear();
         if (dateTime.isBefore(currentDateTime)) {
-            if (differenceInDays == 0) {
+            if (isToday) {
                 return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES)
                         + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
-            } else {
-                if (differenceInDays == 1) {
-                    return DATE_TIME_YESTERDAY + dateTime.format(HOUR_MINUTES)
-                            + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
-                }
-                if (dateTime.getYear() != currentDateTime.getYear()) {
-                    return dateTime.format(MONTH_YEAR_HOUR_MINUTES)
-                            + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
-                }
-                return dateTime.format(MONTH_HOUR_MINUTES) + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
+            } else if (isOneDayDifference) {
+                // isYesterday
+                return DATE_TIME_YESTERDAY + dateTime.format(HOUR_MINUTES)
+                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
+            } else if (isDifferentYear) {
+                return dateTime.format(MONTH_YEAR_HOUR_MINUTES)
+                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
             }
-        } else {
-            if (differenceInDays == 0) {
-                return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES);
-            } else if (differenceInDays == -1) {
-                return DATE_TIME_TOMORROW + dateTime.format(HOUR_MINUTES);
-            } else if (differenceInDays > -7) {
-                return dateTime.format(WEEKDAY_HOUR_MINUTES);
-            } else {
-                if (dateTime.getYear() != currentDateTime.getYear()) {
-                    return dateTime.format(MONTH_YEAR_HOUR_MINUTES);
-                }
-                return dateTime.format(MONTH_HOUR_MINUTES);
-            }
+            return dateTime.format(MONTH_HOUR_MINUTES) + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
         }
+
+        boolean isThisWeek = differenceInDays > -7;
+        if (isToday) {
+            return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES);
+        } else if (isOneDayDifference) {
+            // isTomorrow
+            return DATE_TIME_TOMORROW + dateTime.format(HOUR_MINUTES);
+        } else if (isThisWeek) {
+            return dateTime.format(WEEKDAY_HOUR_MINUTES);
+        } else if (isDifferentYear) {
+            return dateTime.format(MONTH_YEAR_HOUR_MINUTES);
+        }
+        return dateTime.format(MONTH_HOUR_MINUTES);
+
+
     }
 }
