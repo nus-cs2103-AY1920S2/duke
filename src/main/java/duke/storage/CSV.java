@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  */
 public class CSV implements Comparable<CSV> {
     String s;
-    ArrayList<CSV> arr;
+    List<CSV> arr;
 
     public static void main(String[] args) {
         if (args.length > 0) {
@@ -82,13 +82,13 @@ public class CSV implements Comparable<CSV> {
                 this.s = str[0];
             }
         } else {
-            this.arr = new ArrayList<CSV>(Arrays.asList(str).stream().map(x -> new CSV(x)).collect(Collectors.toList()));
+            this.arr = Arrays.stream(str).map(CSV::new).collect(Collectors.toList());
         }
     }
 
     public CSV(List<String> lst) {
         if (lst.size() != 0) {
-            this.arr = new ArrayList<CSV>(lst.stream().map(CSV::new).collect(Collectors.toList()));
+            this.arr = lst.stream().map(CSV::new).collect(Collectors.toList());
         }
     }
 
@@ -104,12 +104,10 @@ public class CSV implements Comparable<CSV> {
     }
 
     public CSV get(int i) {
-        switch (this.getType()) {
-            default:
-                return this;
-            case 1:
-                return this.arr.get(i);
+        if (this.getType() == 1) {
+            return this.arr.get(i);
         }
+        return this;
     }
 
     public boolean remove() {
@@ -189,7 +187,7 @@ public class CSV implements Comparable<CSV> {
         if (getType() == 0) {
             this.s = deSFormat(this.s);
         } else if (getType() == 1) {
-            this.arr.forEach(x -> x.deS());
+            this.arr.forEach(CSV::deS);
         }
     }
 
@@ -212,18 +210,18 @@ public class CSV implements Comparable<CSV> {
         } else if (str.trim().startsWith("\"")) {
             Scanner sc = new Scanner(str.trim() + " ").useDelimiter("\"");
             String s = sc.next();
-            String ss = "";
+            StringBuilder ss = new StringBuilder();
             int i = 1; // no. of quotes encountered
             do {
                 do {
-                    ss += "\"" + s;
+                    ss.append("\"").append(s);
                     s = sc.next();
                     i++;
                 } while (s.length() == 0);
             } while (i % 2 != 0);
             CSV ans = parseCSV(ss.substring(1), 1);
             ans = new CSV(ans);
-            str = str.substring(ss.length() + str.indexOf(ss) + 1);
+            str = str.substring(ss.length() + str.indexOf(ss.toString()) + 1);
             if (str.trim().startsWith(",")) {
                 str = str.substring(str.indexOf(",") + 1);
             }
@@ -285,7 +283,7 @@ public class CSV implements Comparable<CSV> {
                 ans.add(this.s);
                 return ans;
             case 1:
-                return new ArrayList<String>(this.arr.stream().map(x -> x.toStrn(0)).collect(Collectors.toList()));
+                return this.arr.stream().map(x -> x.toStrn(0)).collect(Collectors.toCollection(ArrayList::new));
             default:
                 return new ArrayList<String>();
         }
