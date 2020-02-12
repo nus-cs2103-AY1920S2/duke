@@ -87,6 +87,11 @@ public class Ui {
             "\"!";
     public static final String HELP_MESSAGE =
             "Here is a list of words that I understand:\n\n"
+            + "alias <cmd> <name>         | Allows the command <cmd>\n"
+            + "                           | to be substituted by the\n"
+            + "                           | word <name> with the\n"
+            + "                           | exact same usage\n"
+            + "\n"
             + "bye                        | Terminates the bot\n"
             + "\n"
             + "deadline <text> /by <date> | Creates a new deadline with\n"

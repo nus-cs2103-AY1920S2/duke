@@ -47,6 +47,11 @@ public class GraphicalUi extends Ui {
             Ui.ALIAS_MESSAGE_THREE;
     private static final String HELP_MESSAGE =
             "Here is a list of words that I understand:\n\n"
+            + "alias    | Allows the command <cmd>\n"
+            + "<cmd>    | to be substituted by the\n"
+            + "<name>   | word <name> with the\n"
+            + "         | exact same usage\n"
+            + "\n"
             + "bye      | Terminates the bot\n"
             + "\n"
             + "deadline | Creates a new deadline with\n"
