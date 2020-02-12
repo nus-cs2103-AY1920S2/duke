@@ -23,6 +23,12 @@ public class Folder {
         return listTasks.remove(i-1).removed();
     }
 
+    public String deleteAll() {
+        String output = "Removed all items in list";
+        listTasks.clear();
+        return output;
+    }
+
     public String getText() {
         int j = 1;
         String output = "";

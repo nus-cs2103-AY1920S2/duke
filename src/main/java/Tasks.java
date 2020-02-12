@@ -8,6 +8,7 @@ public class Tasks {
     protected String status;
     public static int count;
     protected String logo;
+    private String text;
 
     public Tasks(Message msg) {
         this.msg = msg;
@@ -16,9 +17,22 @@ public class Tasks {
         count++;
     }
 
+    public Tasks(String logo, String text) {
+        this.logo = logo;
+        this.text = text;
+    }
+
     public Tasks() {
         this.status = "";
         this.logo = "";
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getLogo() {
+        return logo;
     }
 
     public Message getMsg() {

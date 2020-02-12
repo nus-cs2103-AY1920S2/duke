@@ -72,9 +72,9 @@ public class ChatBox {
                 save();
                 break;
             case "delete":
-                int b = Integer.parseInt(msg[1]);
-                assert b >= 0 : "Index out of bounds!";
-                replyMsg = folder.deleteTasks(b);
+                //int b = Integer.parseInt(msg[1]);
+                //assert b >= 0 : "Index out of bounds!";
+                replyMsg = deleteTasks(msg);
                 save();
                 break;
             case "find":
@@ -155,5 +155,26 @@ public class ChatBox {
             String error = "OOPS!! History is not loaded correctly, check the file location...";
             return error;
         }
+    }
+
+    private String deleteTasks(String ... msg) {
+        String output = "";
+        int i = 0;
+        if (msg[1].equals("all")) {
+            output = folder.deleteAll();
+            return output;
+        }
+
+        for (String x : msg) {
+            boolean isNumber = true;
+            isNumber = x.matches("\\d+(\\.\\d+)?");
+            if (isNumber) {
+                int number = Integer.parseInt(x);
+                output = output + folder.deleteTasks(number - i) + "\n";
+                i++;
+            }
+        }
+
+        return output.equals("") ? "Delete Nth" : output;
     }
 }

@@ -1,21 +1,27 @@
+import packagedirectory.test.Tasks;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+
+import java.util.ArrayList;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -29,6 +35,18 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Button writeButton;
+    @FXML
+    private TableView<Tasks> table;
+    @FXML
+    private TableColumn<Tasks, String> typeColumns;
+    @FXML
+    private TableColumn<Tasks, String> activitiesColumns;
+    @FXML
+    private TextField typeField;
+    @FXML
+    private TextField detailField;
 
     private Duke duke;
 
@@ -38,9 +56,14 @@ public class MainWindow extends AnchorPane {
 
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
+    private ObservableList<Tasks> observableList = FXCollections.observableArrayList();
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        typeColumns.setCellValueFactory(new PropertyValueFactory<>("logo"));
+        activitiesColumns.setCellValueFactory(new PropertyValueFactory<>("text"));
+        table.setItems(observableList);
     }
 
     public void setDuke(Duke d, Stage stage) {
@@ -49,6 +72,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(duke.initialize(), dukeImage)
         );
+        table.setEditable(true);
     }
 
     /**
@@ -71,4 +95,19 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    @FXML
+    private void handleUserWriteInput() throws InterruptedException {
+        String typeInput = typeField.getText();
+        String detailInput = detailField.getText();
+        table.getItems().add(new Tasks(typeInput, detailInput));
+        detailField.clear();
+    }
+
+    @FXML
+    private void handleUserExecuteInput() throws InterruptedException {
+        for (Tasks tasks : observableList) {
+            duke.getResponse(tasks.getLogo(), tasks.getText());
+        }
+        table.getItems().clear();
+    }
 }
