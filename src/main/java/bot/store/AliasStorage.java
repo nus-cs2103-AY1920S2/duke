@@ -2,6 +2,7 @@ package bot.store;
 
 import bot.command.CommandParser;
 import bot.command.exception.InstructionAlreadyExistsException;
+import bot.command.instruction.concrete.AliasInstruction;
 
 import bot.loadsave.LoadAndSave;
 
@@ -60,7 +61,9 @@ public class AliasStorage implements Storage<Pair<String, String>> {
                         + "is already a name");
             } else {
                 this.storedAliases.add(alias);
-                this.aliasMap.put(aliasedName, alias.getFirst());
+                String originalName = alias.getFirst();
+                this.aliasMap.put(aliasedName, originalName);
+                AliasInstruction.addAliasedName(originalName, aliasedName);
             }
         }
     }
