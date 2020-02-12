@@ -24,8 +24,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class Baron {
     private final CommandParser parser;
-    private final TaskStorage botStore;
-    private final LoadAndSave<Task> diskFile;
     private final Executor executor;
     private final GraphicalUi graphUi;
 
@@ -46,14 +44,12 @@ public class Baron {
             GraphicalUi gui
     ) {
         this.parser = comParse;
-        this.botStore = store;
-        this.diskFile = disk;
         this.graphUi = gui;
-        this.executor = new Executor(this.botStore, this.graphUi, this.diskFile);
+        this.executor = new Executor(store, this.graphUi, disk);
         // show welcome message
         this.graphUi.showInitial();
         // load stored items
-        this.botStore.importTasks(disk.loadFromDisk());
+        store.importTasks(disk.loadFromDisk());
     }
 
     /**
