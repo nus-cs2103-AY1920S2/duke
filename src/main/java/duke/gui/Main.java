@@ -4,6 +4,7 @@ import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -15,6 +16,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main extends Application {
     private Duke duke = new Duke();
+    // Robot icon By Bilboq - Own work, Public Domain,
+    // https://commons.wikimedia.org/w/index.php?curid=1118420
+    private Image launcherIcon = new Image(
+            this.getClass().getResourceAsStream("/images/launcher-icon.png"));
+
     @Override
     public void start(Stage stage) {
         try {
@@ -24,6 +30,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("Mr. Robot");
+            stage.getIcons().add(launcherIcon);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
