@@ -28,7 +28,7 @@ public class DoneCommand implements Command {
             uiHandler.setResponse("Please specify which task to mark as done");
             return;
         }
-        assert(token[0].equals("delete"));
+        assert token[0].equals("done");
         String[] indices = token[1].split(" ");
         if (indices.length < 1 || Utils.isNumeric(indices[0]) != true) {
             uiHandler.setResponse("Please specify which task to mark as done");

@@ -28,7 +28,7 @@ public class FindCommand implements Command {
             uiHandler.setResponse("Please specify a keyword to search for");
             return;
         }
-        assert(token[0].equals("delete"));
+        assert token[0].equals("find");
 
         if (token.length > 2) {
             uiHandler.setResponse("Only 1 keyword is allowed");

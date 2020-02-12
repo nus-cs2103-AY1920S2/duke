@@ -28,7 +28,7 @@ public class AddCommand implements Command {
             uiHandler.setResponse("Adding task failed, task body cannot be empty");
             return;
         }
-        assert(token[0].equals("todo") || token[0].equals("event") || token[0].equals("deadline"));
+        assert token[0].equals("todo") || token[0].equals("event") || token[0].equals("deadline");
         try {
             if (taskList.addToList(token[1], token[0])) {
                 try {
