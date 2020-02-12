@@ -35,11 +35,10 @@ public class AliasInstruction extends ThreeWordsInstruction
         if (nameNotUsedBefore) {
             // first in pair is the original name
             // second in pair is the aliased name
-            AliasInstruction.addAliasedName(
-                    nameToReplace.getFirst(),
-                    nameToReplace.getSecond()
-            );
-            ui.showAliasMessage();
+            String originalName = nameToReplace.getFirst();
+            String aliasedName = nameToReplace.getSecond();
+            AliasInstruction.addAliasedName(originalName, aliasedName);
+            ui.showAliasMessage(originalName, aliasedName);
         }
     }
 

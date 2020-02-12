@@ -39,6 +39,12 @@ public class GraphicalUi extends Ui {
             "Could not find local storage";
     private static final String THANKS_MESSAGE =
             Ui.THANKS_MESSAGE;
+    private static final String ALIAS_MESSAGE_ONE =
+            Ui.ALIAS_MESSAGE_ONE;
+    private static final String ALIAS_MESSAGE_TWO =
+            Ui.ALIAS_MESSAGE_TWO;
+    private static final String ALIAS_MESSAGE_THREE =
+            Ui.ALIAS_MESSAGE_THREE;
     private static final String HELP_MESSAGE =
             "Here is a list of words that I understand:\n\n"
             + "bye      | Terminates the bot\n"
@@ -211,6 +217,13 @@ public class GraphicalUi extends Ui {
     @Override
     public void showThanksMessage() {
         this.chatWindow.add(ChatBox.getBotBox(GraphicalUi.THANKS_MESSAGE));
+    }
+
+    @Override
+    public void showAliasMessage(String originalName, String aliasedName) {
+        System.out.println(GraphicalUi.ALIAS_MESSAGE_ONE + aliasedName
+                + GraphicalUi.ALIAS_MESSAGE_TWO + originalName
+                + GraphicalUi.ALIAS_MESSAGE_THREE);
     }
 
     /**

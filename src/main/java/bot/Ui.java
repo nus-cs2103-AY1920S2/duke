@@ -79,6 +79,12 @@ public class Ui {
             "Could not find local storage";
     public static final String THANKS_MESSAGE =
             "You are very welcome!";
+    public static final String ALIAS_MESSAGE_ONE =
+            "Got it! Now you can use \"";
+    public static final String ALIAS_MESSAGE_TWO =
+            "\" instead of \"";
+    public static final String ALIAS_MESSAGE_THREE =
+            "\"!";
     public static final String HELP_MESSAGE =
             "Here is a list of words that I understand:\n\n"
             + "bye                        | Terminates the bot\n"
@@ -309,9 +315,13 @@ public class Ui {
 
     /**
      * Prints the alias message to the interface
+     *
+     * @param originalName The original name of the command
+     * @param aliasedName The new alias for that command
      */
-    public void showAliasMessage() {
-
+    public void showAliasMessage(String originalName, String aliasedName) {
+        System.out.println(Ui.ALIAS_MESSAGE_ONE + aliasedName
+                + Ui.ALIAS_MESSAGE_TWO + originalName + Ui.ALIAS_MESSAGE_THREE);
     }
 
     /**

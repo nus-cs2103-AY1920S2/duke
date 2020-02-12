@@ -56,7 +56,8 @@ public class AliasStorage implements Storage<Pair<String, String>> {
                     || this.aliasMap.containsKey(aliasedName)) {
 
                 // the alias is already in use
-                // do nothing
+                System.err.println("import error: " + aliasedName
+                        + "is already a name");
             } else {
                 this.storedAliases.add(alias);
                 this.aliasMap.put(aliasedName, alias.getFirst());
