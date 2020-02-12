@@ -221,7 +221,11 @@ public class Parser {
         int eventDelimiterLength = eventDelimiter.length();
         int commandLength = command.length();
         String errorMessage = commandTypeFormatInfo.get("event");
+        int commandWordCount = commandWords.length;
 
+        if (commandWordCount < 4) {
+            throw new DukeException(errorMessage);
+        }
         if (commandLength == "event".length()) {
             // Empty event command given (e.g. "event")
             throw new DukeException(errorMessage);
