@@ -1,10 +1,2 @@
-T | 1 | read books
-D | 1 | study     | 2020-02-20T20:20
-E | 1 | go home     | 2012-03-30T20:00
-D | 1 | read more      | 2020-02-20T20:20
-E | 1 | abc     | 2020-03-30T23:00
-E | 0 | go out    | 2020-02-10T23:47
-D | 0 | do something   | 2020-02-20T20:20
-D | 0 | do something very very long  | 2020-02-20T20:00
-T | 0 | abcdef
-D | 1 | shut down | 2023-12-20T23:59
+T | 1 | ejkd
+D | 1 | do homework | 2020-02-20T20:20

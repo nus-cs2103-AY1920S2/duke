@@ -10,6 +10,7 @@ import ui.Ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.util.stream.Stream;
 
 public class Duke {
     private Storage storage;
@@ -61,9 +62,7 @@ public class Duke {
                     break;
 
                 case "done":
-                    ui.acknowledgeDone(tasks, parser.getTaskIndex());
-                    assert tasks.getTask(parser.getTaskIndex()).getStatus() == true
-                            : "Task should be marked as done.";
+                    ui.acknowledgeDone(tasks, parser.getTaskIndexArray());
                     storage.saveTasksIntoFile(tasks);
                     break;
 
@@ -89,7 +88,7 @@ public class Duke {
                     break;
 
                 case "delete":
-                    ui.acknowledgeDelete(tasks, parser.getTaskIndex());
+                    ui.acknowledgeDelete(tasks, parser.getTaskIndexArray());
                     storage.saveTasksIntoFile(tasks);
                     break;
 

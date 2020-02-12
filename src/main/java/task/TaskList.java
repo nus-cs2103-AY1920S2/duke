@@ -2,6 +2,9 @@ package task;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TaskList {
 
@@ -43,8 +46,11 @@ public class TaskList {
         return this.tasks;
     }
 
-    public void removeTask(Task targetedTask) {
-        this.tasks.remove(targetedTask);
+    public void removeTasks(int[] taskIndexes) {
+        List<Task> tasksToDelete = IntStream.of(taskIndexes)
+                                            .mapToObj(index -> this.tasks.get(index))
+                                            .collect(Collectors.toList());
+        this.tasks.removeAll(tasksToDelete);
     }
 
 }

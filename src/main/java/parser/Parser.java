@@ -4,6 +4,7 @@ import exception.EmptyDescriptionException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Stream;
 
 /**
  * Represents a program for parsing userInput into different components depending on user taskCommand.
@@ -72,16 +73,24 @@ public class Parser {
     }
 
     /**
-     * Gets the index for commands "done" and "delete".
+     * Returns an array of task indexes that user requests to delete.
      *
-     * @return an index integer for which task to manipulate.
-     * @throws EmptyDescriptionException if command lacks index description.
+     * @return an array of task indexes.
+     * @throws EmptyDescriptionException throws exception of index is not provided.
      */
-    public int getTaskIndex() throws EmptyDescriptionException {
+    public int[] getTaskIndexArray() throws EmptyDescriptionException {
         if (userInput.split(" ").length == 1) {
             throw new EmptyDescriptionException("You forgot to mention the index!");
         }
-        int idx = Integer.parseInt(userInput.split(" ")[1]) - 1;
-        return idx;
+
+        String[] arrayOfIndexStrings = userInput.split(" ", 2)[1].split(" ");
+
+        int[] arrayOfIndexes = Stream.of(arrayOfIndexStrings)
+                                     .mapToInt(Integer::parseInt)
+                                     .map(index -> index - 1)
+                                     .toArray();
+        return arrayOfIndexes;
     }
+
+
 }

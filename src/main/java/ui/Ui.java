@@ -8,6 +8,7 @@ import task.TaskList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Ui {
 
@@ -77,20 +78,26 @@ public class Ui {
     }
 
     /**
-     * Acknowledges once done task is done.
+     * Acknowledges when the task(s) has been completed.
      *
-     * @param tasks array list of tasks.
-     * @param index index of which task is done.
-     * @throws InvalidIndexException index out of bound.
+     * @param tasks array list of current tasks
+     * @param arrayOfIndexes varargs for inputted index(es) of task to mark as complete.
+     * @throws InvalidIndexException if any of the index is invalid
      */
-    public void acknowledgeDone(TaskList tasks, int index) throws InvalidIndexException {
-        if (tasks.getTaskListSize() <= index || index < 0) {
-            throw new InvalidIndexException("This index does not match any task in our list!! Try again...");
-        }
-        tasks.getTask(index).markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks.getTask(index));
+    public void acknowledgeDone(TaskList tasks, int... arrayOfIndexes) throws InvalidIndexException {
+        System.out.println("Nice! I've marked this task(s) as done:");
+
+        int[] arrayOfDoneIndexes = IntStream.of(arrayOfIndexes)
+                 .filter(index -> tasks.getTaskListSize() > index && index >= 0)
+                 .toArray();
+
+        IntStream.of(arrayOfDoneIndexes)
+                 .forEach(index -> tasks.getTask(index).markAsDone());
+
+        IntStream.of(arrayOfDoneIndexes)
+                 .forEach(index -> System.out.printf("%d.  %s\n", index + 1, tasks.getTask(index)));
     }
+
 
     /**
      * Acknowledges once todo task is added.
@@ -132,17 +139,22 @@ public class Ui {
      * Acknowledges once task is deleted.
      *
      * @param tasks array list of tasks.
-     * @param taskIndex index of task to be deleted.
+     * @param arrayOfIndexes integer array of task indexes to be deleted.
      * @throws InvalidIndexException when index is out of bound.
      */
-    public void acknowledgeDelete(TaskList tasks, int taskIndex) throws InvalidIndexException {
-        if (tasks.getTaskListSize() <= taskIndex || taskIndex < 0) {
-            throw new InvalidIndexException("This index does not match any task in our list!! Try again...");
-        }
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(tasks.getTask(taskIndex));
-        Task targetedTask = tasks.getTask(taskIndex);
-        tasks.removeTask(targetedTask);
+    public void acknowledgeDelete(TaskList tasks, int... arrayOfIndexes) throws InvalidIndexException {
+
+        System.out.println("Noted. I've removed this task(s):");
+
+        int[] arrayOfDeleteIndexes = IntStream.of(arrayOfIndexes)
+                                              .filter(index -> tasks.getTaskListSize() > index && index >= 0)
+                                              .toArray();
+
+        IntStream.of(arrayOfDeleteIndexes)
+                 .forEach(index -> System.out.printf("%d.  %s\n", index + 1, tasks.getTask(index)));
+
+        tasks.removeTasks(arrayOfDeleteIndexes);
+
         System.out.println("Now you have " + tasks.getTaskListSize() + " tasks in the list");
     }
 
@@ -156,6 +168,7 @@ public class Ui {
         System.out.println("Here are the matching tasks in your list:");
         AtomicInteger atomicIndex = new AtomicInteger(1);
         ArrayList<Task> taskList = tasks.getCurrentTasks();
+
         taskList.stream()
                 .filter(task -> task.toString().split(" ", 2)[1].split("\\(")[0]
                         .contains(taskSearchKey))
