@@ -21,6 +21,7 @@ public class Deadline extends Task implements TimeParser {
         super(description);
         this.deadline = TimeParser.parseDate(deadline);
         super.TYPE = TaskType.DEADLINE;
+        assert this.deadline != null: "date is null after parsing in constructor";
     }
 
     /**
@@ -37,6 +38,7 @@ public class Deadline extends Task implements TimeParser {
         super(status, description);
         super.TYPE = TaskType.DEADLINE;
         this.deadline = TimeParser.parseDate(deadline);
+        assert this.deadline != null: "date is null after parsing in constructor";
     }
 
     public LocalDate getTaskTime() {

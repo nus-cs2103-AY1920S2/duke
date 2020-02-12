@@ -18,6 +18,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.Scanner;
+
 /**
  * The Main class used to run the application.
  * Creates the Ui, Storage and TaskList objects.
@@ -40,26 +42,28 @@ public class Duke extends Application {
     private Ui ui = new Ui();
     private Storage storage = new Storage();
     private TaskList taskList = new TaskList(storage.load());
-//    public static void main(String[] args) {
-//        Ui ui = new Ui();
-//        Storage storage = new Storage("../resources/tasks.txt");
-//        TaskList taskList = new TaskList(storage.load());
-//        ui.start();
-//        Scanner sc = new Scanner(System.in);
-//        Boolean isRunning = true;
-//        while (isRunning) {
-//            try {
-//                String userInput = sc.nextLine();
-//                Command cmd = Parser.parseInput(userInput);
-//                isRunning = cmd.execute(storage, taskList, ui);
-//                ui.promptMsg();
-//            } catch (DukeException e) {
-//                ui.errorMsg(e);
-//                ui.promptMsg();
-//            }
-//        }
-//        sc.close();
-//    }
+
+    public static void main(String[] args) {
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        TaskList taskList = new TaskList(storage.load());
+        ui.start();
+        Scanner sc = new Scanner(System.in);
+        Boolean isRunning = true;
+        while (isRunning) {
+            try {
+                String userInput = sc.nextLine();
+                Command cmd = Parser.parseInput(userInput);
+                isRunning = cmd.isExitCommand();
+                System.out.println(cmd.execute(storage, taskList, ui));
+                System.out.println(ui.promptMsg());
+            } catch (DukeException e) {
+                ui.errorMsg(e);
+                ui.promptMsg();
+            }
+        }
+        sc.close();
+    }
 
     @Override
     public void start(Stage stage) {
@@ -109,7 +113,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -129,6 +133,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -164,7 +169,7 @@ public class Duke extends Application {
             Command cmd = Parser.parseInput(input);
             return cmd.execute(storage, taskList, ui);
         } catch (DukeException e) {
-               return  ui.errorMsg(e);
+            return ui.errorMsg(e);
         }
     }
 

@@ -39,8 +39,7 @@ public class Ui {
     public String listMsg(ArrayList<Task> lst) {
         if (lst.size() == 0) {
             return "SQUIRTLE has nothing to do ~~";
-        }
-        else {
+        } else {
             return "SQUIRTLE has to attack: \n" + this.printList(lst);
         }
     }
@@ -83,6 +82,10 @@ public class Ui {
                 return "SQUIRTLE doesn't understand this date!!";
             case KEYWORDS:
                 return "SQUIRTLE is confused!! Give SQUIRTLE one keyword!!";
+            case FILEPARSE:
+                return "SQUIRTLE cannot read your file!!";
+            case TASKPARSE:
+                return "SQUIRTLE cannot write on your file!!";
             default:
                 return "Error in error msg portion of Ui!";
         }

@@ -21,7 +21,7 @@ public class Parser {
      * @param task the task to parse
      * @return string representation of the task in the form (TYPE)|(0 or 1)|(description)|task time (if any)
      */
-    public static String parseTask(Task task) {
+    public static String parseTask(Task task) throws DukeException{
         String parsed;
         TaskType taskType = task.getTaskType();
         switch (taskType) {
@@ -35,8 +35,9 @@ public class Parser {
                 parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription() + "|" + ((Deadline) task).getTaskTime();
                 break;
             default:
-                parsed = ""; // TODO add error message, change duke.exceptions.DukeException to such task exists
+                throw new DukeException(DukeError.TASKPARSE);
         }
+        assert parsed != null : "parser unable to parse task, returns null";
         return parsed;
     }
 
@@ -48,17 +49,22 @@ public class Parser {
      */
     public static Task parseFile(String line) { // parses line from tasks.txt into a task
         String[] split = line.split(Pattern.quote("|"));
+        Task task;
         switch (split[0]) {
             case "T":
-                return new ToDo(split[1], split[2]);
+                task = new ToDo(split[1], split[2]);
+                break;
             case "E":
-                return new Event(split[1], split[2], split[3]);
+                task = new Event(split[1], split[2], split[3]);
+                break;
             case "D":
-                return new Deadline(split[1], split[2], split[3]);
+                task =  new Deadline(split[1], split[2], split[3]);
+                break;
             default:
-                System.out.println("Error in parser parse method"); // TODO add error message and duke.exceptions.DukeException
-                return null;
+                task = null;
         }
+        assert task != null : "error in parsing file to task object";
+        return task;
     }
 
     /**
@@ -110,6 +116,8 @@ public class Parser {
                         task = new Deadline(deadlineDescription, deadline);
                         break;
                 }
+
+                assert task != null : "task at the end of parseInput method cannot be null!";
 
                 return new AddCommand(task);
 

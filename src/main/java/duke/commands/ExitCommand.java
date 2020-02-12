@@ -20,4 +20,9 @@ public class ExitCommand extends Command {
     public String execute(Storage storage, TaskList taskList, Ui ui) {
         return ui.exitMsg();
     }
+
+    @Override
+    public boolean isExitCommand() {
+        return true;
+    }
 }

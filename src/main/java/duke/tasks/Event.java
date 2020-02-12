@@ -21,6 +21,7 @@ public class Event extends Task implements TimeParser {
         super(description);
         this.eventTime = TimeParser.parseDate(eventTime);
         super.TYPE = TaskType.EVENT;
+        assert this.eventTime != null: "event time is null after parsing in constructor";
     }
 
     /**
@@ -37,6 +38,7 @@ public class Event extends Task implements TimeParser {
         super(status, description);
         super.TYPE = TaskType.EVENT;
         this.eventTime = TimeParser.parseDate(eventTime);
+        assert this.eventTime != null: "event time is null after parsing in constructor";
     }
 
     public LocalDate getTaskTime() {

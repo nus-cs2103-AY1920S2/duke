@@ -1,5 +1,6 @@
 package duke.utilities;
 
+import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
 import java.io.*;
@@ -10,14 +11,13 @@ import java.util.ArrayList;
  * Storage class to load and add tasks to tasks.txt.
  */
 public class Storage {
-    String path = "tasks.txt";
-    Parser parser;
+    String path = "textfiles/tasks.txt";
 
     /**
      * Constructor for Storage.
      */
     public Storage() {
-        this.parser = new Parser();
+
     }
 
     /**
@@ -53,7 +53,7 @@ public class Storage {
      *
      * @param lst the updated ArrayList of tasks, to be parsed into the hard disk.
      */
-    public void update(ArrayList<Task> lst) { // update the file in the hard disk whenever the task list changes
+    public void update(ArrayList<Task> lst) throws DukeException { // update the file in the hard disk whenever the task list changes
         try {
             File file = this.getFile();
             FileOutputStream outputStream = new FileOutputStream(file);
@@ -71,7 +71,7 @@ public class Storage {
         }
     }
 
-    public File getFile() throws IOException{
+    public File getFile() throws IOException {
         File file = new File(getClass().getClassLoader().getResource(this.path).getFile());
         return file;
     }
