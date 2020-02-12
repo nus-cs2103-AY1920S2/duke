@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Ui {
 
     public String start() {
-        return "SQUIRTLE is here to help!!" + this.promptMsg();
+        return this.promptMsg();
     }
 
     public String promptMsg() {

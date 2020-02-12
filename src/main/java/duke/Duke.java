@@ -6,11 +6,9 @@ import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.exceptions.*;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -72,9 +70,19 @@ public class Duke extends Application {
             ui = new Ui();
             storage = new Storage();
             taskList = new TaskList(storage.load());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Welcome to Manager SQUIRTLE's platform!");
+            alert.setHeaderText("SQUIRTLE is here to help!");
+            alert.setContentText("type 'help' to see what SQUIRTLE can do!");
+
+            alert.showAndWait();
         }
         catch(DukeException e) {
-            System.out.println(e);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning!");
+            alert.setHeaderText("Error in loading file!");
+            alert.setContentText("SQUIRTLE cannot load your data from file!! Sorry!!");
+            alert.showAndWait();
         }
 
 
@@ -161,8 +169,8 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label userText = getDialogLabel(userInput.getText());
+        Label dukeText = getDialogLabel(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
