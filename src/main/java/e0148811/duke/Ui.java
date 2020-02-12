@@ -1,6 +1,8 @@
 package e0148811.duke;
 
 public class Ui {
+    TaskList tasks;
+
     static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -8,6 +10,15 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     static final String FORMAT_CORRECTION = "Invalid format for the instruction you gave.\n"
             + "The correct format should be ";
+
+    public void linkToTaskList(TaskList list) {
+        tasks = list;
+    }
+
+    public void throwInvalidIndexException() throws DukeException {
+        throw new DukeException("Invalid index.\n" + tasks.getNumOfTasksInString()
+                + " Please note that the index is one-based (begins with 1 instead of 0).");
+    }
 
     public void showLoadingError() {
         System.out.println("File not found, or cannot be read properly. "

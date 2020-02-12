@@ -1,12 +1,8 @@
 package e0148811.duke;
 
 public class Todo extends Task {
-    public Todo(String description) {
-        super(false, description);
-    }
-
-    public Todo(boolean isDone, String description) {
-        super(isDone, description);
+    public Todo(boolean isDone, String description, PriorityLevel level) {
+        super(isDone, description, level);
     }
 
     @Override
