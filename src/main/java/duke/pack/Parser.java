@@ -63,6 +63,10 @@ public class Parser {
 
     }
 
+    /**
+     * Handles sort command.
+     * @return a SortCommand object
+     */
     public static Command parseSort() {
         Command c = new SortCommand();
         return c;
