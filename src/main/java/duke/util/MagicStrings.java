@@ -13,6 +13,9 @@ public class MagicStrings {
     public static final String DATE_TIME_YESTERDAY = "Yesterday ";
 
     // Error messages
+    public static final String ERROR_COMMAND_MISSING_INDEX = "Your command needs the position of the task to "
+            + "operate with!";
+    public static final String ERROR_COMMAND_TOO_MANY_INDICES = "Your command can only work with a single index!";
     public static final String ERROR_DEADLINE_MISSING_CONTENT = "Your deadline content cannot be empty! "
             + "Type help if you need help.";
     public static final String ERROR_DEADLINE_MISSING_DEADLINE = "I don't know when your deadline is! "

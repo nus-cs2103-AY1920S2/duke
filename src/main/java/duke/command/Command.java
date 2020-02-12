@@ -10,15 +10,15 @@ import duke.util.QuadFunction;
  * recognised by {@code Duchess}.
  */
 public enum Command {
-    TODO(CommandHandler::handleTodoCommand),
-    EVENT(CommandHandler::handleEventCommand),
-    DEADLINE(CommandHandler::handleDeadlineCommand),
-    LIST(CommandHandler::handleListCommand),
-    DONE(CommandHandler::handleDoneCommand),
-    FIND(CommandHandler::handleFindCommand),
-    DELETE(CommandHandler::handleDeleteCommand),
-    HELP(CommandHandler::handleHelpCommand),
-    BYE(CommandHandler::handleByeCommand);
+    TODO(TaskCreationHandler::handleTodoCommand),
+    EVENT(TaskCreationHandler::handleEventCommand),
+    DEADLINE(TaskCreationHandler::handleDeadlineCommand),
+    LIST(TaskListCommandHandler::handleListCommand),
+    DONE(TaskListCommandHandler::handleDoneCommand),
+    FIND(TaskListCommandHandler::handleFindCommand),
+    DELETE(TaskListCommandHandler::handleDeleteCommand),
+    HELP(AdminCommandHandler::handleHelpCommand),
+    BYE(AdminCommandHandler::handleByeCommand);
 
     /**
      * Executes the command. Use {@code execute.apply} to run the function.
