@@ -71,7 +71,8 @@ public class Duke extends Application {
         stage.show();
 
         // more code to be added here later
-        stage.setTitle("Duke");
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke - Task Manager");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -93,7 +94,7 @@ public class Duke extends Application {
 
         userInput.setPrefWidth(325.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(70.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -104,22 +105,22 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         // Part 2
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
+//        sendButton.setOnMouseClicked((event) -> {
+//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            userInput.clear();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            userInput.clear();
+//        });
 
         //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
+        sendButton.setOnMouseClicked(mouseEvent -> {
             handleUserInput();
         });
 
-        userInput.setOnAction((event) -> {
+        userInput.setOnAction(actionEvent -> {
             handleUserInput();
         });
     }
@@ -158,7 +159,52 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Parser instruction = new Parser(input);
+            Command command = instruction.getCommand();
+
+            switch (command) {
+                case BYE:
+                    break;
+                case DONE:
+                    int doneTaskNum = Integer.parseInt(instruction.getParameter());
+                    tasks.setAsDone(doneTaskNum);
+                    return ui.getDoneTask(tasks.getTask(doneTaskNum));
+                case TODO:
+                    Task newToDo = new ToDo(instruction.getDescription());
+                    tasks.addToTasks(newToDo);
+                    return ui.getAddedTask(tasks, newToDo);
+                case DEADLINE:
+                    Task newDeadline = new Deadline(instruction.getDescription(), instruction.getDate());
+                    tasks.addToTasks(newDeadline);
+                    return ui.getAddedTask(tasks, newDeadline);
+                case EVENT:
+                    Task newEvent = new Event(instruction.getDescription(), instruction.getDate());
+                    tasks.addToTasks(newEvent);
+                    return ui.getAddedTask(tasks, newEvent);
+                case LIST:
+                    return ui.getTaskList(tasks);
+                case DELETE:
+                    int delTaskNum = Integer.parseInt(instruction.getParameter());
+                    Task toBeDeleted = tasks.getTask(delTaskNum);
+                    tasks.deleteFromTasks(delTaskNum);
+                    return ui.getDeletedTask(tasks, toBeDeleted);
+                case FIND:
+                    String searchTerm = instruction.getParameter();
+                    return ui.getFoundTasks(tasks.findTasks(searchTerm));
+                case ARCHIVE:
+                    Path archiveFilePath = Paths.get("data", "dukeArchive.txt");
+                    storage.archive(tasks, archiveFilePath);
+                    tasks.clean();
+                    return ui.getArchiveMessage(tasks);
+                default:
+                    ;
+            }
+        } catch (DukeException e) {
+            return ui.getError(e);
+        }
+        storage.update(tasks);
+        return ui.getExitMessage();
     }
 
     public static void main(String[] args) {
