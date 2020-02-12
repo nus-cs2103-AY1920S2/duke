@@ -38,7 +38,7 @@ public class Duke {
         try {
             this.taskList = new TaskList(this.storage.load());
         } catch (DuchessException e) {
-            this.ui.printLoadingError(e.getMessage());
+            this.ui.printToConsole(e.getMessage());
             this.taskList = new TaskList();
         }
     }
@@ -63,7 +63,7 @@ public class Duke {
             if (isGui) {
                 this.loadingErrorMessage = this.ui.printLoadingError(e.getMessage());
             } else {
-                this.ui.printLoadingError(e.getMessage());
+                this.ui.printToConsole(e.getMessage());
             }
             this.taskList = new TaskList();
         }
