@@ -2,3 +2,9 @@ language: java
 jdk:
   - oraclejdk11
   - openjdk11
+
+before_install:
+  - chmod +x gradlew
+
+after_success:
+  - ./gradlew jacocoTestReport coveralls
