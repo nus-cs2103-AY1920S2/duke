@@ -29,6 +29,7 @@ public class Parser {
         boolean isAddCommand = command.equals("todo") || command.equals("deadline")
                                || command.equals("event");
         boolean isFindCommand = command.equals("find");
+        boolean isUndoCommand = command.equals("undo");
 
         if (hasTaskDesc) {
             //get task description
@@ -50,6 +51,8 @@ public class Parser {
             return new AddCommand(command, description);
         } else if (isFindCommand) {
             return new FindCommand(command, description);
+        } else if (isUndoCommand) {
+            return new UndoCommand("undo", description);
         } else {
             throw new DukeException("");
         }

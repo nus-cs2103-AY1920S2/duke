@@ -5,6 +5,9 @@
  */
 public class DoneCommand extends Command {
 
+    TaskList tasks;
+    int taskNum;
+
     /**
      * A constructor to create a Done command object.
      * @param command command string
@@ -29,11 +32,25 @@ public class DoneCommand extends Command {
         if (isDescEmpty) {
             throw new DukeException("done");
         } else {
+            this.tasks = tasks;
             int num = Integer.parseInt(description);
+
+            taskNum = num;
 
             String output = tasks.setDone(num);
 
+            tasks.setLastCommand(this);
+
             return output;
         }
+    }
+
+    @Override
+    public String undo() {
+        String output = "";
+
+        output = tasks.setUnDone(taskNum);
+
+        return output;
     }
 }

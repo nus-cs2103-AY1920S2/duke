@@ -28,4 +28,6 @@ public abstract class Command {
      * @throws DukeException throws a DukeException if description is not added
      */
     abstract public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
+    abstract public String undo();
 }

@@ -26,4 +26,9 @@ public class ListCommand extends Command {
 
         return tasks.listRecord();
     }
+
+    @Override
+    public String undo() {
+        return "Nothing to undo";
+    }
 }

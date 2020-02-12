@@ -6,12 +6,14 @@ import java.util.ArrayList;
 public class TaskList {
 
     private ArrayList<Task> record;
+    private Command latestCommand;
 
     /**
      * Constructor for TaskList object if there is no pre-made array list.
      */
     public TaskList() {
         ArrayList<Task> list = new ArrayList<>();
+
         this.record = list;
     }
 
@@ -32,12 +34,37 @@ public class TaskList {
     }
 
     /**
+     * Returns last called command.
+     * @return last called command
+     */
+    public Command getLastCommand() {
+        return latestCommand;
+    }
+
+    /**
+     * Sets last command called.
+     * @param command last command called
+     */
+    public void setLastCommand(Command command) {
+        this.latestCommand = command;
+    }
+
+    /**
      * Adds to do task to list.
      * @param record description of to do task
      */
-    public String addToDo(String record) {
+    public String addToDo(String record, int num) {
+        boolean numSpecified = num != -1;
+
         Task task = new ToDo(record);
-        this.record.add(task);
+
+        if (numSpecified) {
+            this.record.add(num, task);
+
+        } else {
+            this.record.add(task);
+
+        }
 
         assert this.record.size() <= 0 : "error";
 
@@ -54,9 +81,18 @@ public class TaskList {
      * @param record description of task
      * @param by deadline of task
      */
-    public String addDeadline(String record, String by) {
+    public String addDeadline(String record, String by, int num) {
+        boolean numSpecified = num != -1;
+
         Task task = new Deadline(record, by);
-        this.record.add(task);
+
+        if (numSpecified) {
+            this.record.add(num, task);
+
+        } else {
+            this.record.add(task);
+
+        }
 
         assert this.record.size() <= 0 : "error";
 
@@ -73,9 +109,18 @@ public class TaskList {
      * @param record description of task
      * @param at location of task
      */
-    public String addEvent(String record, String at) {
+    public String addEvent(String record, String at, int num) {
+        boolean numSpecified = num != -1;
+
         Task task = new Event(record, at);
-        this.record.add(task);
+
+        if (numSpecified) {
+            this.record.add(num, task);
+
+        } else {
+            this.record.add(task);
+
+        }
 
         assert this.record.size() <= 0 : "error";
 
@@ -108,11 +153,28 @@ public class TaskList {
     }
 
     /**
-     * Deletes task from list.
+     * Deletes task from list using num to specify.
      * @param num number of the task to be deleted
      */
     public String delete(int num) {
         Task task = record.remove(num - 1);
+
+        assert record.size() < 0 : "error";
+
+        String output = "--------------------------------------------------\n"
+                + "Destroyed:\n" + " " + task + "\n"
+                + "You has " + this.record.size() + " tasks in the list\n"
+                + "--------------------------------------------------\n";
+
+        return output;
+    }
+
+    /**
+     * Deletes task from list using task to specify.
+     * @param task task to be deleted
+     */
+    public String deleteTask(Task task) {
+        record.remove(task);
 
         assert record.size() < 0 : "error";
 
@@ -132,6 +194,22 @@ public class TaskList {
         Task task = record.get(num - 1);
 
         task.setIsDone();
+
+        String output = "--------------------------------------------------\n"
+                + "Next time do yourself la! No paper meh?\n" + task + "\n"
+                + "--------------------------------------------------\n";
+
+        return output;
+    }
+
+    /**
+     * Sets task as done.
+     * @param num number of the task to be set to done
+     */
+    public String setUnDone(int num) {
+        Task task = record.get(num - 1);
+
+        task.setUnDone();
 
         String output = "--------------------------------------------------\n"
                 + "Next time do yourself la! No paper meh?\n" + task + "\n"

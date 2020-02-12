@@ -5,6 +5,9 @@
  */
 public class AddCommand extends Command {
 
+    TaskList tasks;
+    int addedTaskNum;
+
     /**
      * A constructor for AddCommand object.
      * @param command command called
@@ -33,25 +36,51 @@ public class AddCommand extends Command {
             if (isDescEmpty) {
                 throw new DukeException("todo");
             } else {
-                output = tasks.addToDo(description);
+                this.tasks = tasks;
+                tasks.setLastCommand(this);
+
+                output = tasks.addToDo(description, -1);
+
+                addedTaskNum = tasks.getRecord().size();
             }
         } else if (isDeadline) {
             if (isDescEmpty) {
                 throw new DukeException("deadline");
             } else {
+                this.tasks = tasks;
+
+                tasks.setLastCommand(this);
+
                 String[] descArray = description.split(" /by ");
 
-                output = tasks.addDeadline(descArray[0], descArray[1]);
+                output = tasks.addDeadline(descArray[0], descArray[1], -1);
+
+                addedTaskNum = tasks.getRecord().size();
             }
         } else {
             if (isDescEmpty) {
                 throw new DukeException("event");
             } else {
+                this.tasks = tasks;
+
+                tasks.setLastCommand(this);
+
                 String[] descArray = description.split(" /at ");
 
-                output = tasks.addEvent(descArray[0], descArray[1]);
+                output = tasks.addEvent(descArray[0], descArray[1], -1);
+
+                addedTaskNum = tasks.getRecord().size();
             }
         }
+
+        return output;
+    }
+
+    @Override
+    public String undo() {
+        String output = "";
+
+        output = tasks.delete(addedTaskNum);
 
         return output;
     }

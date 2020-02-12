@@ -27,4 +27,9 @@ public class FindCommand extends Command {
 
         return output;
     }
+
+    @Override
+    public String undo() {
+        return "Nothing to undo";
+    }
 }

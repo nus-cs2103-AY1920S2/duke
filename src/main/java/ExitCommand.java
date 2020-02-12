@@ -33,4 +33,9 @@ public class ExitCommand extends Command {
 
         return ui.goodBye();
     }
+
+    @Override
+    public String undo() {
+        return "Nothing to undo";
+    }
 }

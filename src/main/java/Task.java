@@ -17,7 +17,7 @@ public class Task {
     }
 
     /**
-     *Method to get description of task.
+     * Gets description of task.
      * @return description of task
      */
     public String getDescription() {
@@ -25,7 +25,7 @@ public class Task {
     }
 
     /**
-     * Method to change description of task.
+     * Changes description of task.
      * @param description description to be changed to
      */
     public void setDescription(String description) {
@@ -33,7 +33,7 @@ public class Task {
     }
 
     /**
-     * Method to get boolean isDone
+     * Gets boolean isDone
      * @return boolean isDone
      */
     public boolean getIsDone() {
@@ -41,14 +41,21 @@ public class Task {
     }
 
     /**
-     * Method to set isDone to true.
+     * Sets isDone to true.
      */
     public void setIsDone() {
         isDone = true;
     }
 
     /**
-     * Method to get icon for task status.
+     * Sets isDone to false.
+     */
+    public void setUnDone() {
+        isDone = false;
+    }
+
+    /**
+     * Gets icon for task status.
      * @return icon in string
      */
     public String getStatusIcon() {
