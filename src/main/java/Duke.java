@@ -23,35 +23,12 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
-    private static final String filepath = "data/duke.txt";
-
-
     /**
      * Duke class constructor for JavaFX.
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage(filepath);
-        tasks = new TaskList(storage.readFile());
-        Scanner sc = new Scanner(System.in);
-        parser = new Parser(sc);
-    }
-
-    /**
-     * Duke class constructor that creates a new instance of a Duke bot.
-     *
-     * @param filePath Path of file for instance of Storage class to be created.
-     */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage();
         tasks = new TaskList(storage.readFile());
         Scanner sc = new Scanner(System.in);
         parser = new Parser(sc);
@@ -63,9 +40,9 @@ public class Duke {
     public void run() {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(sc);
+        ui.printHello();
 
         String command = parser.readCommand();
-
         try {
             while (!parser.getCommandType(command).equals("bye")) {
 
@@ -148,7 +125,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 
     /**

@@ -61,4 +61,8 @@ public class Ui {
     public String printSnooze(Task task, int noDays) {
         return (task + " has been snoozed for " + noDays + " days.\n");
     }
+
+    public void printHello() {
+        System.out.println("Hello, I am DukeBot.");
+    }
 }

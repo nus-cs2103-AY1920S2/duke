@@ -16,11 +16,20 @@ public class Storage {
 
     /**
      * Storage class constructor.
-     * @param filepath Filepath of the file to load tasks from.
      */
-    public Storage(String filepath) {
-        assert filepath != null : "Filepath cannot be null";
-        this.file = new File(filepath);
+    public Storage() {
+        String rootDir = new File(System.getProperty("user.dir")).getParentFile().getPath();
+        StringBuilder path = new StringBuilder();
+        path.append(rootDir);
+
+        File dir = new File(path + "/duke/data");
+
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        this.file = new File(dir + "/duke.txt");
+        System.out.println(rootDir);
     }
 
     /**
