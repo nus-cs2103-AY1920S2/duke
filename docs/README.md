@@ -12,9 +12,9 @@
 #### 7. Find tasks: find
 #### 8. Postpone / snooze tasks: snooze
 
-## Usage
+# Usage
 
-### `todo` - Adds a To-Do task.
+## `todo` - Adds a To-Do task.
 
 Adds a To-Do task into the task list.
 
@@ -27,9 +27,8 @@ Expected outcome:
 `Understood. I have added: [T] CS2103 Assignment 0`  
 `Number of items in the list: 1`  
 
-##
 
-### `event` - Adds an Event task.
+## `event` - Adds an Event task.
 
 Adds an Event task into the task list.
 
@@ -46,8 +45,8 @@ Expected outcome:
 `Understood. I have added: [E] Temperature Taking 0 (at: Mar 3 2020)`  
 `Number of items in the list: 2`  
 
-##
-### `deadline` - Adds a Deadline task.
+
+## `deadline` - Adds a Deadline task.
 
 Adds a Deadline task into the task list.
 
@@ -63,10 +62,10 @@ Expected outcome:
 
 
 `Understood. I have added: [D] Individual Project 0 (by: Feb 27 2020)`  
-`Number of items in the list: 3`  
+`Number of items in the list: 3`
+  
 
-##
-### `list` - Lists all tasks.
+## `list` - Lists all tasks.
 
 Lists all tasks in the task list.
 
@@ -83,9 +82,8 @@ Expected outcome:
 `2.[E] Temperature Taking 0 (at: Mar 3 2020)`  
 `3.[D] Individual Project 0 (by: Feb 27 2020)`  
 
-##
 
-### `delete` - Deletes a task.
+## `delete` - Deletes a task.
 
 Deletes one of the tasks in the task list.  
 
@@ -100,8 +98,8 @@ Expected outcome:
 `[D] Individual Project 0 (by: Feb 27 2020) has been removed.`  
 `Number of items in list: 2`  
 
-##  
-### `done` - Marks a task as done.
+  
+## `done` - Marks a task as done.
 
 Marks one of the tasks in the task list as done.  
 
@@ -116,8 +114,8 @@ Expected outcome:
 `You have completed this task.`  
 `[T] CS2103 Assignment 1`
 
-##
-### `find` - Find related tasks.
+
+## `find` - Find related tasks.
 
 Find all tasks related to the keyword provided by the user.  
 
@@ -133,8 +131,8 @@ Expected outcome:
 `These items are in your list:`  
 `1.[T] CS2103 Assignment 1`
 
-##
-### `snooze` - Snooze/postpone a task.
+
+## `snooze` - Snooze/postpone a task.
 
 Postpone a task by a set number of days. 
 
