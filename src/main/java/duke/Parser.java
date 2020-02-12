@@ -223,6 +223,10 @@ public class Parser {
         String errorMessage = commandTypeFormatInfo.get("event");
         int commandWordCount = commandWords.length;
 
+        if (eventDelimiterIndex + eventDelimiterLength == commandLength) {
+            // Delimiter is at the end of command (e.g. "event /at")
+            throw new DukeException(errorMessage);
+        }
         if (commandWordCount < 4) {
             throw new DukeException(errorMessage);
         }
@@ -231,10 +235,6 @@ public class Parser {
             throw new DukeException(errorMessage);
         }
         if (!command.contains(eventDelimiter)) {
-            throw new DukeException(errorMessage);
-        }
-        if (eventDelimiterIndex + eventDelimiterLength == commandLength) {
-            // Delimiter is at the end of command (e.g. "event /at")
             throw new DukeException(errorMessage);
         }
     }
@@ -250,16 +250,20 @@ public class Parser {
         int deadlineDelimiterLength = deadlineDelimiter.length();
         int commandLength = command.length();
         String errorMessage = commandTypeFormatInfo.get("deadline");
+        int commandWordCount = commandWords.length;
 
+        if (deadlineDelimiterIndex + deadlineDelimiterLength == commandLength) {
+            // Delimiter is at the end of command (e.g. "deadline /by")
+            throw new DukeException(errorMessage);
+        }
+        if (commandWordCount < 4) {
+            throw new DukeException(errorMessage);
+        }
         if (commandLength == "deadline".length()) {
             // Empty deadline command given (e.g. "deadline")
             throw new DukeException(errorMessage);
         }
         if (!command.contains(deadlineDelimiter)) {
-            throw new DukeException(errorMessage);
-        }
-        if (deadlineDelimiterIndex + deadlineDelimiterLength == commandLength) {
-            // Delimiter is at the end of command (e.g. "deadline /by")
             throw new DukeException(errorMessage);
         }
     }
