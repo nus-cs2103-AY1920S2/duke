@@ -69,7 +69,7 @@ public class Parser {
     }
 
 
-    private String getDescAndDate(String cmd, String line) throws NoDescriptionException, 
+    private String getDescAndDate(String cmd, String line) throws NoDescriptionProvidedException,
               NoDateProvidedException {
         // TODO: throw NoDescriptionException when only date and task type is provided.
         String[] arr = line.split(" ", 2);
