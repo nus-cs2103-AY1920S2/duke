@@ -40,8 +40,10 @@ public class Storage {
      * {@code filePath}.
      *
      * @param filePath The file path to save to and if possible, load from.
+     * @throws IllegalArgumentException If {@code filePath} points to a non-json file. Storage
+     *                                  defaults to "data/tasks.json".
      */
-    public Storage(String filePath) {
+    public Storage(String filePath) throws IllegalArgumentException {
         this.filePath = filePath;
         this.gson = new Gson();
     }

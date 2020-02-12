@@ -23,6 +23,8 @@ public class MagicStrings {
             + "Please use /at [time here].";
     public static final String ERROR_INDEX_OUT_OF_BOUNDS = "You're referring to a task which does not exist!";
     public static final String ERROR_INVALID_COMMAND = "I don't see what I can do with what you just told me.";
+    //    public static final String ERROR_INVALID_FILE_PATH = "Your file path is invalid. A new JSON file will "
+    //            + "be used for saving.";
     public static final String ERROR_FAIL_TO_LOAD = "Failed to load save file! Creating new save file.";
     public static final String ERROR_FAIL_TO_LOAD_AND_SAVE = "Failed to load save file! "
             + "You will also not be able to save.";
@@ -30,7 +32,7 @@ public class MagicStrings {
     public static final String ERROR_TASK_ALREADY_COMPLETED = "You have already completed this task!";
     public static final String ERROR_TODO_MISSING_CONTENT = "Your todo content cannot be empty! "
             + "Type help if you need help.";
-    public static final String ERROR_WRONG_FORMAT = "Your input is of the wrong format.\n"
+    public static final String ERROR_WRONG_DATE_FORMAT = "Your input is of the wrong format.\n"
             + "\tType help to view the accepted formats.";
 
     // GSON helper strings.

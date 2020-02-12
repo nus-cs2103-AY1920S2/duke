@@ -56,8 +56,8 @@ public class Duke {
      */
     public Duke(String filePath, boolean isGui) {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
         try {
+            this.storage = new Storage(filePath);
             this.taskList = new TaskList(this.storage.load());
         } catch (DuchessException e) {
             if (isGui) {

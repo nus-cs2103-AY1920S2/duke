@@ -11,7 +11,8 @@ import static duke.util.MagicStrings.ERROR_INVALID_COMMAND;
  */
 public class Parser {
     /**
-     * Parses a given {@code String} into a {@code Command} of the appropriate type.
+     * Parses a given {@code String} into a {@code Command} of
+     * the appropriate type.
      *
      * @param command Entire command to be processed.
      * @return Command type of the given command.

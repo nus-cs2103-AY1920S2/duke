@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
 
-import static duke.util.MagicStrings.ERROR_WRONG_FORMAT;
+import static duke.util.MagicStrings.ERROR_WRONG_DATE_FORMAT;
 
 /**
  * The {@code DateTimeParser} is a helper class with static methods to parse
@@ -43,7 +43,7 @@ public class DateTimeParser {
         return getDateTimeFromWords(dateTimeString)
                 .or(() -> getDateTimeUsingDateTimePattern(dateTimeString)
                         .or(() -> getDateTimeUsingDatePattern(dateTimeString)))
-                .orElseThrow(() -> new DuchessException(ERROR_WRONG_FORMAT));
+                .orElseThrow(() -> new DuchessException(ERROR_WRONG_DATE_FORMAT));
     }
 
     private static Optional<LocalDateTime> getDateTimeFromWords(String dateTimeString) {
