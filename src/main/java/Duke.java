@@ -16,18 +16,18 @@ import java.io.IOException;
 
 public class Duke {
 
-    protected String user_name;
+    protected String userName;
     protected Storage storage;
     protected TaskList taskList;
     protected Parser parser;
     protected Ui ui;
 
     public Duke () {
-        this.user_name = "";
+        this.userName = "";
     }
 
-    public Duke (String user_name) {
-        this.user_name = user_name;
+    public Duke (String userName) {
+        this.userName = userName;
     }
     
     private void start() {
