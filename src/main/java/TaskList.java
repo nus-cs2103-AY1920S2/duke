@@ -31,6 +31,8 @@ public class TaskList {
 
     /**
      * Prints out all task in the list
+     *
+     * @return A String of elements in the tasklist
      */
     public String list() {
         //List out task
@@ -49,6 +51,7 @@ public class TaskList {
      * Marks the task that has been completed
      *
      * @param taskNum The task that has been done
+     * @return A string to be printed on duke application GUI to indicated status of done task
      */
     public String done(int taskNum) {
         String output = "";
@@ -81,6 +84,7 @@ public class TaskList {
      * Removes task from the list
      *
      * @param taskNum Task to be removed
+     * @return A string to be printed on duke application GUI to indicate status of deleted task
      */
     public String delete(int taskNum) {
         String output = "";
@@ -111,6 +115,7 @@ public class TaskList {
      *
      * @param type  Whether it is a todo,event of deadline task
      * @param input Describes the task to be added to the list
+     * @return A string to be printed out on duke application GUI on the status of the added task
      */
     public String addTask(String type, String input) {
         if (type.equals("T")) {
@@ -171,6 +176,7 @@ public class TaskList {
      * Prints out all task that contain a particular keyword
      *
      * @param keyWord keyword in task that you are looking for
+     * @return A string to be printed on duke application GUI to indicate the task that matches the keyword
      */
     public String find(String keyWord) {
         String output = "";
@@ -198,14 +204,11 @@ public class TaskList {
         return this.taskList;
     }
 
-    public String toString() {
-        String output = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            output += taskList.get(i) + " ";
-        }
-        return output;
-    }
-
+    /**
+     * Replaces .size() of arrayList to work around private access issues
+     *
+     * @return size of tasklist
+     */
     public int size() {
         int count = 0;
         for (int i = 0; i< taskList.size(); i++) {

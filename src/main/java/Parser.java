@@ -24,6 +24,7 @@ public class Parser {
      * Recognises command prompts and does the appropriate task handling
      *
      * @param input A command prompt by the user to Duke
+     * @return a string to be printed out on the duke application GUI
      */
     public String parse(String input) throws IOException {
         if (input.equals("list")) {

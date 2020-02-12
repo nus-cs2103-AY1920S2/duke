@@ -23,7 +23,7 @@ public class Storage {
      *
      * @param filePath Location of saved files
      */
-    public Storage(String filePath) {
+    public Storage (String filePath) {
         this.filePath = filePath;
     }
 
@@ -36,19 +36,20 @@ public class Storage {
     public ArrayList<Task> loadFiles() throws IOException {
         ArrayList<Task> lst = new ArrayList<>();
 
-        FileReader in = new FileReader(filePath);
-        BufferedReader br = new BufferedReader(in);
+        FileReader in = new FileReader (filePath);
+        BufferedReader br = new BufferedReader (in);
         try {
             String loadTask = br.readLine();
             while (loadTask != null) {
-                String type = loadTask.substring(0, 1);
-                assert type.equals("T") || type.equals("E") || type.equals("D") : "Has to be a certain type of task";
-                int indexOfDescription = loadTask.indexOf("||");
+                String type = loadTask.substring (0, 1);
+                assert type.equals ("T") || type.equals ("E")
+                        || type.equals ("D") : "Has to be a certain type of task";
+                int indexOfDescription = loadTask.indexOf ("||");
                 switch (type) {
                     case "T":
-                        String descriptionOfLoadedTask = loadTask.substring(indexOfDescription + 2);
-                        Todo loadedT = new Todo(descriptionOfLoadedTask);
-                        if (loadTask.substring(2, 3).equals("1")) {
+                        String descriptionOfLoadedTask = loadTask.substring (indexOfDescription + 2);
+                        Todo loadedT = new Todo (descriptionOfLoadedTask);
+                        if (loadTask.substring (2, 3).equals ("1")) {
                             loadedT.markAsDone();
                             Duke.pendingTask--;
                         }
@@ -59,25 +60,25 @@ public class Storage {
                     case "E":
                         int timeIndex = loadTask.indexOf("|||");
                         String loadedDescription = loadTask.substring(indexOfDescription + 2, timeIndex);
-                        if (type.equals("D")) {
-                            LocalDate loadedDDate = LocalDate.parse(loadTask.substring(timeIndex + 3));
-                            Deadline loadedD = new Deadline(loadedDescription, loadedDDate);
-                            if (loadTask.substring(2, 3).equals("1")) {
+                        if (type.equals ("D")) {
+                            LocalDate loadedDDate = LocalDate.parse (loadTask.substring(timeIndex + 3));
+                            Deadline loadedD = new Deadline (loadedDescription, loadedDDate);
+                            if (loadTask.substring (2, 3).equals ("1")) {
                                 loadedD.markAsDone();
                                 Duke.pendingTask--;
                             }
                             lst.add(loadedD);
                             Duke.pendingTask++;
                         } else {
-                            LocalDate loadedEDate = LocalDate.parse(loadTask.substring(timeIndex + 3, timeIndex + 13));
-                            LocalTime loadedStart = LocalTime.parse(loadTask.substring(timeIndex + 14, timeIndex + 19));
-                            LocalTime loadedEnd = LocalTime.parse(loadTask.substring(timeIndex + 20));
-                            Event loadedE = new Event(loadedDescription, loadedEDate, loadedStart, loadedEnd);
-                            if (loadTask.substring(2, 3).equals("1")) {
+                            LocalDate loadedEDate = LocalDate.parse (loadTask.substring (timeIndex + 3, timeIndex + 13));
+                            LocalTime loadedStart = LocalTime.parse (loadTask.substring (timeIndex + 14, timeIndex + 19));
+                            LocalTime loadedEnd = LocalTime.parse (loadTask.substring (timeIndex + 20));
+                            Event loadedE = new Event (loadedDescription, loadedEDate, loadedStart, loadedEnd);
+                            if (loadTask.substring (2, 3).equals ("1")) {
                                 loadedE.markAsDone();
                                 Duke.pendingTask--;
                             }
-                            lst.add(loadedE);
+                            lst.add (loadedE);
                             Duke.pendingTask++;
                         }
                         break;
@@ -99,16 +100,16 @@ public class Storage {
      * @param taskList List of task to be saved
      * @throws IOException when reader reads NULL input
      */
-    public void saveFiles(TaskList taskList) throws IOException {
+    public void saveFiles (TaskList taskList) throws IOException {
         ArrayList<Task> lst = taskList.getList();
-        File file = new File(filePath);
+        File file = new File (filePath);
         FileWriter fr;
         if (file.exists()) {
-            fr = new FileWriter(file, false);
+            fr = new FileWriter (file, false);
             BufferedWriter bw = new BufferedWriter(fr);
             for (int i = 0; i < lst.size(); i++) {
                 Task savedTask = lst.get(i);
-                bw.write(savedTask.saveFile() + "\n");
+                bw.write (savedTask.saveFile() + "\n");
                 bw.flush();
                 fr.flush();
             }
@@ -116,7 +117,7 @@ public class Storage {
             BufferedWriter bw = new BufferedWriter(new FileWriter("duke.txt"));
             for (int i = 0; i < lst.size(); i++) {
                 Task savedTask = lst.get(i);
-                bw.write(savedTask.saveFile() + "\n");
+                bw.write (savedTask.saveFile() + "\n");
                 bw.flush();
             }
         }

@@ -11,16 +11,24 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("src/main/java/data/duke.txt");
+    /**
+     * Creates a Duke instance
+     */
+    private Duke duke = new Duke ("src/main/java/data/duke.txt");
 
+    /**
+     * Starts up the duke application
+     *
+     * @param stage Stage layout of duke application
+     */
     @Override
-    public void start(Stage stage) {
+    public void start (Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader (Main.class.getResource ("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke (duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
