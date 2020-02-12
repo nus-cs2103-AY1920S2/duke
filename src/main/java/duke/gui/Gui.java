@@ -4,6 +4,7 @@ import duke.Duke;
 import duke.DukeException;
 import duke.Parser;
 import duke.command.Command;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -64,6 +65,9 @@ public class Gui extends Application {
         }
     }
 
+    /**
+     * Waits for a second before exiting.
+     */
     private void exit() {
         new Thread(new Runnable() {
             public void run() {
