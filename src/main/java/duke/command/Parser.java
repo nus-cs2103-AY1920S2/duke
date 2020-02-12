@@ -73,6 +73,14 @@ public class Parser {
             return this.listOfTasks.find(commandSplit[1]);
         }
 
+        assert(!basicCommand.equals("list"));
+        assert(!basicCommand.equals("done"));
+        assert(!basicCommand.equals("todo"));
+        assert(!basicCommand.equals("deadline"));
+        assert(!basicCommand.equals("event"));
+        assert(!basicCommand.equals("delete"));
+        assert(!basicCommand.equals("find"));
+
         return (new DukeException("error").toString());
     }
 }

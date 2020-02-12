@@ -84,16 +84,22 @@ public class TaskList {
     public String add(String type, String inputCommand) {
 
         try {
+
+            int currentTaskSize = this.storageData.size();
             
             if (type.equals("todo")) {
                 Task new_Task = new Todo(type, inputCommand);
                 this.storageData.add(new_Task);
+                assert(currentTaskSize + 1 == this.storageData.size());
             } else if (type.equals("deadline")) {
                 Task new_Task = new Deadline(type, inputCommand);
                 this.storageData.add(new_Task);
+                assert(currentTaskSize + 1 == this.storageData.size());
             } else {
+                assert(type.equals("event"));
                 Task new_Task = new Event(type, inputCommand);
                 this.storageData.add(new_Task);
+                assert(currentTaskSize + 1 == this.storageData.size());
             }
         } catch (DukeException dukeException) {
             System.out.println(dukeException);
@@ -118,11 +124,14 @@ public class TaskList {
         String output = "";
 
         int indexPosition = Integer.parseInt(position);
+        int currentTaskSize = this.storageData.size();
 
         try {
             output += DELETE_MESSAGE + "\n" + "       " + this.storageData.get(indexPosition - 1) + "\n";
             output += "Now you have " + (this.storageData.size() - 1) + " task(s) in the list.";
             this.storageData.remove(indexPosition - 1);
+
+            assert(currentTaskSize - 1 == this.storageData.size());
         } catch (IndexOutOfBoundsException e) {
             output = "OOPS! That number is not valid. You have " +
                     this.storageData.size() + " task(s) in your list.";
@@ -138,12 +147,13 @@ public class TaskList {
      */
     public String done(String position) {
 
-        int task_Done = Integer.parseInt(position);
+        int taskDone = Integer.parseInt(position);
 
-        this.storageData.get(task_Done - 1).taskDone();
+        this.storageData.get(taskDone - 1).taskDone();
+        assert(this.storageData.get(taskDone - 1).isDone == true);
 
         String output = TASK_DONE_MESSAGE;
-        output += "\n" + this.storageData.get(task_Done - 1);
+        output += "\n" + this.storageData.get(taskDone - 1);
 
         return output;
     }
