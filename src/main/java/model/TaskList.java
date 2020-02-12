@@ -46,6 +46,8 @@ public class TaskList implements Iterable<Task> {
 
     public String findByKeyWord(String keyWord) {
         StringBuilder matchedTasks = new StringBuilder();
+        matchedTasks.append(ECHO_FIND_TASK);
+
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
                 continue;
@@ -54,8 +56,7 @@ public class TaskList implements Iterable<Task> {
 
             if (currentTask.hasKeyWord(keyWord)) {
                 matchedTasks.append(
-                        ECHO_FIND_TASK
-                                + Integer.toString(i + 1)
+                        Integer.toString(i + 1)
                                 + "."
                                 + currentTask.toString()
                                 + "\n");
