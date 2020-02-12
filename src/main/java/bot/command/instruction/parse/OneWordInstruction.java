@@ -17,7 +17,8 @@ public abstract class OneWordInstruction extends Instruction {
 
     @Override
     public ParsedInstruction parse(String rawCommand, Command command) {
-        assert(rawCommand.startsWith(command.getWord()));
+        assert (rawCommand.startsWith(command.getWord()))
+                : "command parse failure in OneWordInstruction";
         return new ParsedInstruction(this);
     }
 }

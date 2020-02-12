@@ -57,7 +57,7 @@ public interface Storage<T> {
      * Gets the number of items stored here
      *
      * @return Returns an Integer representing
-     * number of stored items
+     *     number of stored items
      */
     int getSize();
 }
