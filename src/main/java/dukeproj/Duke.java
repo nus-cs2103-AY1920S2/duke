@@ -74,8 +74,6 @@ public class Duke {
 
     /**
      * Constructs a Duke object with a filepath to store the task list.
-     *
-     * @param filepath Filepath of the Duke storage.
      */
     public Duke() {
         ui = new Ui();
