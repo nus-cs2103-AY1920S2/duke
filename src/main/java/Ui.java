@@ -10,19 +10,7 @@ public class Ui {
      * Ui class constructor.
      */
     public Ui() {
-    }
 
-    /**
-     * Method to print Duke's name and a welcome message to the user.
-     */
-    public void printWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Greetings, I am\n" + logo);
-        System.out.println("How may I be of assistance today?");
     }
 
     /**
