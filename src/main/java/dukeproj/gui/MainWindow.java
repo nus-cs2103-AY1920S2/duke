@@ -11,8 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -29,12 +28,22 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Kaguya.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Gintoki.png"));
+    private Image backImage = new Image(this.getClass().getResourceAsStream("/Images/Background.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        BackgroundImage backgroundImage = new BackgroundImage(backImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                BackgroundSize.DEFAULT);
+        Background background = new Background(backgroundImage);
+        scrollPane.getStylesheets().add(
+                this.getClass().getResource("/css/ScrollPaneStyles.css").toString());
+        setBackground(background);
     }
 
     public void setDuke(Duke d) {
