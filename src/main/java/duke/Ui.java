@@ -3,6 +3,16 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
+    public static final String WELCOME_MESSAGE =
+            " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n"
+                    + "Hello! I'm Duke\n"
+                    + "What can I do for you?\n";
+
+
     public void showLoadingError() {
         System.out.println("Error loading from database. Starting with empty task list");
     }

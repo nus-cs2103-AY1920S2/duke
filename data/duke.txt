@@ -3,3 +3,6 @@ T|0|return book
 T|0|stuff
 D|0|something|2020-02-12
 E|0|something|town
+T|0|aaa
+T|0|bbb
+T|0|ccc
