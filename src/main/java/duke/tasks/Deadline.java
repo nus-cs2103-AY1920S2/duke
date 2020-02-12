@@ -13,10 +13,14 @@ public class Deadline extends Task {
         super(description);
         try {
             this.date = LocalDate.parse(by);
-            System.out.println("Parsed date successfully");
+            getParsed_date_successfully();
         } catch (DateTimeParseException de) {
             this.by = by;
         }
+    }
+
+    private void getParsed_date_successfully() {
+        System.out.println("Parsed date successfully");
     }
 
     /**
