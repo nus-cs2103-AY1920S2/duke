@@ -16,6 +16,7 @@ public class Storage {
     protected DateTimeFormatter df = DateTimeFormatter.ofPattern("d MMM yyyy");
 
     public Storage(String filepath) {
+        assert filepath != null : "filepath should not be empty.";
         this.filepath = filepath;
     }
 
