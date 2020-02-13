@@ -59,7 +59,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         if (input.equals("bye")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished( event -> stage.close() );
+            delay.setOnFinished(event -> stage.close());
             delay.play();
         }
 
