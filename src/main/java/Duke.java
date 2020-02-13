@@ -170,7 +170,9 @@ public class Duke extends Application {
     }
 
     static void printIntro() {
-        String introText = BORDER_LINE + "Hello! I'm Duke\nWhat can I do for you?\n" + BORDER_LINE;
+        String introText = BORDER_LINE + "Hello! I'm Duke\nWhat can I do for you?\n" +
+                "If you need any assistance, type 'help' in the command line\n" + BORDER_LINE;
+
         assert(introText == null): "Intro text should not be null";
     }
 
@@ -254,6 +256,9 @@ public class Duke extends Application {
             if (input.split(" ")[STARTING_VARIABLE].toLowerCase().equals("delete")) {
                 deleteTask(input);
                 storage.saveFile(taskToParse(tasks));
+            } else if (!input.toLowerCase().equals("help")){
+                Helper help = new Helper();
+                System.out.println(Helper.printHelp());
             } else {
                 addTask(input);
             }
