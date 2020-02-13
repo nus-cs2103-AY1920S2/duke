@@ -31,6 +31,8 @@ public class Event extends Task {
         if (strArr[1].equals("1")) {
             t.setDone();
         }
+        String tag = strArr[4];
+        t.setTag(tag);
         return t;
     }
 
@@ -40,12 +42,13 @@ public class Event extends Task {
         if (dateType.isEmpty()) {
             dateType = this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         }
-        return "E|" + (isDone ? "1" : "0") + "|" + this.description + "|" + dateType;
+        return "E|" + (isDone ? "1" : "0") + "|" + this.description + "|" + dateType + "|" + this.tag;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: "
-                + (at.isEmpty() ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : this.at) + ")";
+                + (at.isEmpty() ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : this.at) + ")"
+                + " " + this.returnTag();
     }
 }

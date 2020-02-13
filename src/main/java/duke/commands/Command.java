@@ -157,6 +157,27 @@ public class Command {
             break;
         }
 
+        case "tag": {
+            if (this.elements.length < 3) {
+                throw new DukeException("OOPS boi. Need moar arguments!!");
+            }
+            try {
+                Integer.parseInt(this.elements[1]);
+            } catch (Exception e) {
+                throw new DukeException("Input a number boi.");
+            }
+            if (Integer.parseInt(this.elements[1]) > taskList.getTaskList().size()) {
+                throw new DukeException("Boi. You don't have that many tasks boi! :)");
+            }
+            int taskNum = Integer.parseInt(this.elements[1]);
+            String tag = this.elements[2];
+            taskList.getTaskList().get(taskNum - 1).setTag(tag);
+            result += ui.showMessage(
+                    "Nice! I've tagged " + tag + " to the task:\n"
+                            + taskList.getTaskList().get(taskNum - 1).toString());
+            break;
+        }
+
         default:
             throw new DukeException("unknown command!!!");
         }

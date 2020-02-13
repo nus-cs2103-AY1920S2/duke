@@ -34,6 +34,8 @@ public class Deadline extends Task {
         if (strArr[1].equals("1")) {
             t.setDone();
         }
+        String tag = strArr[4];
+        t.setTag(tag);
         return t;
     }
 
@@ -43,12 +45,13 @@ public class Deadline extends Task {
         if (dateType.isEmpty()) {
             dateType = this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         }
-        return "D|" + (isDone ? "1" : "0") + "|" + this.description + "|" + dateType;
+        return "D|" + (isDone ? "1" : "0") + "|" + this.description + "|" + dateType + "|" + this.tag;
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: "
-                + (by.isEmpty() ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : this.by) + ")";
+                + (by.isEmpty() ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : this.by) + ")"
+                + " " + returnTag();
     }
 }

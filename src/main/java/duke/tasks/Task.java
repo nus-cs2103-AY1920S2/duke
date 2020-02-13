@@ -3,6 +3,7 @@ package duke.tasks;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String tag = "";
     protected final static int TASK_NAME_INDEX = 2;
     protected final static int IS_DONE_BOOLEAN_INDEX = 1;
 
@@ -21,6 +22,17 @@ public class Task {
 
     public String store() {
         return "Task|" + (isDone ? "1" : "0") + "|" + this.description;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    protected String returnTag() {
+        if (this.tag.length() > 0) {
+            return "#" + this.tag;
+        }
+        return "";
     }
 
     /**

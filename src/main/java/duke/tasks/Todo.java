@@ -7,7 +7,7 @@ public class Todo extends Task {
 
     @Override
     public String store() {
-        return "T|" + (isDone ? "1" : "0") + "|" + description;
+        return "T|" + (isDone ? "1" : "0") + "|" + description + "|" + this.tag;
     }
 
     /**
@@ -20,11 +20,13 @@ public class Todo extends Task {
         if (strArr[IS_DONE_BOOLEAN_INDEX].equals("1")) {
             t.setDone();
         }
+        String tag = strArr[3];
+        t.setTag(tag);
         return t;
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + " " + this.returnTag();
     }
 }
