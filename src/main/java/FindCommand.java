@@ -18,6 +18,8 @@ public class FindCommand extends Command {
      * @param tasks TaskList object from the driver Duke object.
      * @param ui Ui object from the driver Duke object.
      * @param storage Storage object from the driver Duke object
+     * @return String of the output to be returned to the user when tasks matching
+     *         the keyword are found.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();
