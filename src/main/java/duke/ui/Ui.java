@@ -4,9 +4,12 @@
 
 package duke.ui;
 
+import duke.expense.ExpenseItem;
+import duke.expense.ExpenseList;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -100,14 +103,36 @@ public class Ui {
     /**
      * Show tasks.
      *
-     * @param tl the tl
+     * @param tl the task list
+     * @param isFind formats the display information to the user if the find command is supplied
+     *
      */
     public String showTasks(TaskList tl, boolean isFind) {
         StringBuilder sb = new StringBuilder();
         sb.append("      Here are the " + (isFind ? "matching " : "") + "tasks in your list: \n");
         for (int count = 0; count < tl.getSize(); count++) {
             sb.append("      " + (count + 1) + ". ");
-            sb.append(tl.get(count) + "\n");
+            sb.append(tl.get(count)).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * Show expenses.
+     *
+     * @param expenses the expenses
+     * @param startDate start date
+     * @param endDate end date
+     */
+    public String showExpenses(ExpenseList expenses, LocalDate startDate, LocalDate endDate) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("      Here are the expenses you have made: \n " + (startDate != null ? "from " + startDate.toString()
+                +(endDate != null ? " to "  + endDate.toString() : "") : ""));
+        sb.append("\n");
+        for (int count = 0; count < expenses.getSize(); count++) {
+            sb.append("      " + (count + 1) + ". ");
+            sb.append(expenses.get(count)).append("\n");
         }
 
         return sb.toString();
@@ -136,9 +161,9 @@ public class Ui {
     }
 
     /**
-     * Task remove success.
+     * Task removed successfully.
      *
-     * @param cur  the cur
+     * @param cur current item
      * @param size the size
      */
     public String taskRemoveSuccess(Task cur, int size) {
@@ -150,9 +175,22 @@ public class Ui {
     }
 
     /**
-     * Task add success.
+     * Expense removed successfully.
      *
-     * @param cur  the cur
+     * @param e current item
+     * @param size the size
+     */
+    public String expenseRemoveSuccess(ExpenseItem e, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("      Noted. I've removed this expense: \n");
+        sb.append("      " + e + "\n");
+        return sb.toString();
+    }
+
+    /**
+     * Task is added successfully.
+     *
+     * @param cur current item
      * @param size the size
      */
     public String taskAddSuccess(Task cur, int size) {
@@ -162,5 +200,20 @@ public class Ui {
         sb.append("      Now you have " + size + " tasks in the list.  \n");
         return sb.toString();
     }
+
+    /**
+     * Expense is added successfully.
+     *
+     * @param e current item
+     * @param size the size
+     */
+    public String expenseAddSuccess(ExpenseItem e, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("      Got it. I've added:  \n");
+        sb.append("      " + e + "\n");
+        sb.append("      To view your expenses, type 'list expenses'. \n");
+        return sb.toString();
+    }
+
 
 }

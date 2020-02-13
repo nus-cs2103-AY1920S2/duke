@@ -20,7 +20,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Parses the.
+     * Parses the todo.
      *
      * @param taskString the task string
      * @return the todo

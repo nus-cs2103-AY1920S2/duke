@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class TaskListTest {
     @Test
     public void runTest() {
-        TaskList tl = new TaskList();
+        TaskList tl = new TaskList(null);
         tl.addTask(Arrays.asList("todo", "borrow", "book").toArray(String[]::new), new Storage("../data/duke.txt"));
         assert (tl.getSize() == 1);
     }

@@ -18,12 +18,17 @@ import java.util.stream.Collectors;
  */
 public class TaskList {
     private List<Task> tasks;
+    private Storage storage;
+
+
 
     /**
      * Instantiates a new task list.
      */
-    public TaskList() {
+    public TaskList(Storage storage) {
         tasks = new ArrayList<>();
+        this.storage = storage;
+
     }
 
     /**
@@ -61,16 +66,6 @@ public class TaskList {
      */
     public void addTask(Task t) {
         tasks.add(t);
-    }
-
-    /**
-     * Adds the task.
-     *
-     * @param pos the pos
-     * @param t   the task
-     */
-    public void addTask(int pos, Task t) {
-        tasks.add(pos, t);
     }
 
     /**
@@ -164,11 +159,11 @@ public class TaskList {
     /**
      * Delete task.
      *
-     * @param value   the value
-     * @param storage the storage
+     * @param id the task index
+     * @param storage storage
      */
-    public Task deleteTask(int value, Storage storage) {
-        Task cur = tasks.get(value - 1);
+    public Task deleteTask(int id, Storage storage) {
+        Task cur = tasks.get(id - 1);
         tasks.remove(cur);
         StringBuilder sb = new StringBuilder();
 
@@ -180,12 +175,24 @@ public class TaskList {
         return cur;
     }
 
-    //TODO add multiple tasks
-    //e.g event borrow book /at 6pm, deadline return book /by 6pm
+    /**
+     * Mark task as done.
+     *
+     * @param id the task index
+     */
+    public Task markTaskAsDone(int id){
+        int taskId = id - 1;
+        Task cur = tasks.get(taskId);
+        StringBuilder sb = new StringBuilder();
 
-    //TODO delete multiple tasks
-    //e.g. delete 1, 2
+        cur.markAsDone();
+        tasks.remove(taskId);
+        tasks.add(taskId, cur);
+        for (Task t : tasks) {
+            sb.append(t.print() + "\n");
+        }
+        storage.writeToFile(sb.toString());
+        return cur;
+    }
 
-    //TODO file multiple tasks
-    //e.g. todo/event borrow book
 }

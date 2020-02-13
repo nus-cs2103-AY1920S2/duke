@@ -4,6 +4,9 @@
 
 package duke.storage;
 
+import duke.expense.Category;
+import duke.expense.ExpenseItem;
+import duke.expense.ExpenseList;
 import duke.task.Deadline;
 import duke.task.EventObj;
 import duke.task.SearchTask;
@@ -17,6 +20,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 
@@ -76,7 +80,7 @@ public class Storage implements CheckTask {
      * @return the task list
      */
     public TaskList loadTasks() {
-        TaskList tasks = new TaskList();
+        TaskList tasks = new TaskList(this);
         try {
             File file = new File(filePath);
             if (!file.exists()) {
@@ -87,14 +91,19 @@ public class Storage implements CheckTask {
             String line;
             while ((line = rd.readLine()) != null) {
                 String type = line.split("|")[0];
-                if (type.equals("E")) {
-                    tasks.addTask(EventObj.parse(line));
-                } else if (type.equals("D")) {
-                    tasks.addTask(Deadline.parse(line));
-                } else if (type.equals("T")) {
-                    tasks.addTask(Todo.parse(line));
-                } else {
-                    //add code
+                switch (type) {
+                    case "E":
+                        tasks.addTask(EventObj.parse(line));
+                        break;
+                    case "D":
+                        tasks.addTask(Deadline.parse(line));
+                        break;
+                    case "T":
+                        tasks.addTask(Todo.parse(line));
+                        break;
+                    default:
+                        //add code
+                        break;
                 }
             }
             rd.close();
@@ -113,7 +122,7 @@ public class Storage implements CheckTask {
      */
     public TaskList findTasks(String... searchTerm) {
         TaskList tasks = loadTasks();
-        TaskList temp = new TaskList();
+        TaskList temp = new TaskList(this);
         int pos = 1;
         for (Task task : tasks.getTasks()) {
             if (Arrays.stream(searchTerm).parallel().anyMatch(task.getDescription()::contains)) {
@@ -128,4 +137,36 @@ public class Storage implements CheckTask {
     public boolean test(String task) {
         return task.equals("T") || task.equals("E") || task.equals("D");
     }
+
+
+
+    /**
+     * Load expenses from the file, if the file does not exist, create it and use
+     * it to store created tasks
+     * Parses the tasks based on tasks type enum specified in duke.expense.Category
+     *
+     * @return the expense list
+     */
+    public ExpenseList loadExpenses() {
+        ExpenseList expenseList = new ExpenseList(this);
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            BufferedReader rd = new BufferedReader(new FileReader(filePath));
+            String line;
+
+            while ((line = rd.readLine()) != null) {
+                expenseList.addExpense(ExpenseItem.parse(line));
+            }
+            rd.close();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return expenseList;
+    }
+
 }
