@@ -1,5 +1,6 @@
 package com.nus.duke.controller;
 
+import com.nus.duke.Exception.*;
 import com.nus.duke.dao.DAOInterface;
 import com.nus.duke.dao.InMemDAO;
 import com.nus.duke.parser.Parser;
@@ -41,39 +42,25 @@ public class TaskController {
         return true;
     }
 
-    public boolean setMark(String name, boolean isMark) {
-        Tasks t = this.getTask(name);
-        Tasks.TASK_STATUS status = isMark ? Tasks.TASK_STATUS.COMPLETE : Tasks.TASK_STATUS.INCOMPLETE;
-        return this.setTask(t, status);
+    public Tasks getTask(String name) throws TaskNotFoundException {
+        Tasks taskObj = dataObj.search(name);
+        if (taskObj == null) throw new TaskNotFoundException("Error! Task does not exist");
+        return taskObj;
     }
 
-    public boolean asTodo(String name) {
-        Tasks t = this.getTask(name);
-        return this.setTask(t, Tasks.TASK_CATEGORY.TODO);
-    }
-
-    public boolean asDeadline(String name) {
-        Tasks t = this.getTask(name);
-        return this.setTask(t, Tasks.TASK_CATEGORY.DEADLINE);
-    }
-
-    public boolean asEvent(String name) {
-        Tasks t = this.getTask(name);
-        return this.setTask(t, Tasks.TASK_CATEGORY.EVENT);
-    }
-
-    public boolean createNewTask(String name) {
+    public Tasks createNewTask(String name) {
         Tasks task = new Tasks(name);
-        Boolean result = this.dataObj.add(task);
-        return result;
+        this.dataObj.add(task);
+        return task;
     }
 
-    public Tasks getTask(String name) {
-        return dataObj.search(name);
-    }
-
-    public boolean checkTask(String name) {
-        return this.getTask(name) != null;
+    public boolean removeTask(String name) throws DeleteTaskException, TaskNotFoundException {
+        if (name == null) {
+            throw new DeleteTaskException("Error! Can only mark a defined task");
+        } else {
+            Tasks t = this.getTask(name);
+            return this.dataObj.delete(t);
+        }
     }
 
     public List<String> getAllTasks() {
@@ -84,8 +71,40 @@ public class TaskController {
         return taskString;
     }
 
-    public boolean removeTask(String name) {
-        Tasks t = this.getTask(name);
-        return this.dataObj.delete(t);
+    public boolean setMark(String name, boolean isMark) throws MarkException, TaskNotFoundException {
+        if (name == null) {
+            throw new MarkException("Error! Can only mark a defined task");
+        } else {
+            Tasks t = this.getTask(name);
+            Tasks.TASK_STATUS status = isMark ? Tasks.TASK_STATUS.COMPLETE : Tasks.TASK_STATUS.INCOMPLETE;
+            return this.setTask(t, status);
+        }
+    }
+
+    public boolean newTodo(String name) throws TodoException {
+        if (name == null) {
+            throw new TodoException("Error! The description of a todo cannot be empty.");
+        } else {
+            Tasks t = this.createNewTask(name);
+            return this.setTask(t, Tasks.TASK_CATEGORY.TODO);
+        }
+    }
+
+    public boolean newDeadline(String name) throws DeadlineException {
+        if (name == null) {
+            throw new DeadlineException("Error! The description of a todo cannot be empty.");
+        } else {
+            Tasks t = this.createNewTask(name);
+            return this.setTask(t, Tasks.TASK_CATEGORY.DEADLINE);
+        }
+    }
+
+    public boolean newEvent(String name) throws EventException {
+        if (name == null) {
+            throw new EventException("Error! The description of a todo cannot be empty.");
+        } else {
+            Tasks t = this.createNewTask(name);
+            return this.setTask(t, Tasks.TASK_CATEGORY.EVENT);
+        }
     }
 }
