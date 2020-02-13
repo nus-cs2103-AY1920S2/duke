@@ -1,16 +1,19 @@
 package duke;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
-import duke.command.AddCommand;
 import duke.command.Command;
-import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
+import duke.command.expense.AddExpenseCommand;
+import duke.command.expense.ListExpenseCommand;
+import duke.command.task.AddCommand;
+import duke.command.task.DeleteCommand;
+import duke.command.task.FindCommand;
+import duke.command.task.ListCommand;
+import duke.command.task.MarkCommand;
 import duke.common.ErrorMessage;
 import duke.task.TaskType;
 
@@ -22,13 +25,69 @@ public class Parser {
      * @return A LocalDateTime object.
      * @throws DukeException Error when parsing the date.
      */
-    static LocalDateTime parseDate(String datetime) throws DukeException {
+    static LocalDateTime parseDateTime(String datetime) throws DukeException {
         try {
             return LocalDateTime.parse(datetime.replace(' ', 'T'));
         } catch (DateTimeParseException e) {
             throw new DukeException("Date should be in the format of "
                     + "yyyy-MM-dd HH:mm");
         }
+    }
+
+    static LocalDate parseDate(String date) throws DukeException {
+        try {
+            return LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date should be in the format of "
+                    + "yyyy-MM-dd");
+        }
+    }
+
+    static Command parseList(String details) throws DukeException {
+        switch (details.toUpperCase()) {
+        case "TASKS":
+            return new ListCommand();
+        case "EXPENSES":
+            return new ListExpenseCommand();
+        default:
+            throw new DukeException("'LIST tasks' or 'LIST expenses'");
+        }
+    }
+
+    static Command parseExpense(String details) throws DukeException {
+        if (details.length() <= 0) {
+            throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
+        }
+
+        int keyPosition = details.indexOf(" /dollars ");
+        if (keyPosition == -1) {
+            throw new DukeException("EXPENSE requires a format of "
+                    + "<expense> /dollars <description> /on <date>.");
+        }
+
+        double expense = 0;
+        try {
+            expense = Double.parseDouble(details.substring(0, keyPosition));
+        } catch (Exception e) {
+            throw new DukeException("An integer amount for expense is required.");
+        }
+
+        details = details.substring(keyPosition + 10);
+
+        keyPosition = details.indexOf(" /on ");
+        if (keyPosition == -1) {
+            throw new DukeException("EXPENSE requires a format of "
+                    + "<expense> /dollars <description> /on <date>.");
+        }
+
+        String description = details.substring(0, keyPosition);
+        if (description.length() < 1) {
+            throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
+        }
+
+        LocalDate date = parseDate(details.substring(keyPosition + 5));
+
+        return new AddExpenseCommand(description, expense, date);
     }
 
     /**
@@ -68,7 +127,7 @@ public class Parser {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
 
-        LocalDateTime datetime = parseDate(details.substring(keyPosition + 5));
+        LocalDateTime datetime = parseDateTime(details.substring(keyPosition + 5));
 
         HashMap<String, Object> values = new HashMap<>();
         values.put("datetime", datetime);
@@ -99,7 +158,7 @@ public class Parser {
             throw new DukeException(ErrorMessage.EMPTY_DATETIME);
         }
 
-        LocalDateTime datetime = parseDate(details.substring(keyPosition + 5));
+        LocalDateTime datetime = parseDateTime(details.substring(keyPosition + 5));
 
         HashMap<String, Object> values = new HashMap<>();
         values.put("datetime", datetime);
@@ -195,8 +254,10 @@ public class Parser {
             return parseDeadline(details);
         case "EVENT":
             return parseEvent(details);
+        case "EXPENSE":
+            return parseExpense(details);
         case "LIST":
-            return new ListCommand();
+            return parseList(details);
         case "DONE":
             return parseDone(details);
         case "FIND":

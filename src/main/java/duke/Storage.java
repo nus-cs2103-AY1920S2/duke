@@ -1,6 +1,8 @@
 package duke;
 
 import duke.DukeException;
+import duke.expense.Expense;
+import duke.expense.ExpenseList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -9,19 +11,21 @@ import duke.task.Todo;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
 
-    private File file;
+    private File taskFile;
+    private File expenseFile;
 
-    public Storage(String filePath) {
-        this.file = new File(filePath);
+    public Storage(String saveFolder) {
+        this.taskFile = new File(saveFolder + File.separator + "tasks.txt");
+        this.expenseFile = new File(saveFolder + File.separator + "expenses.txt");
     }
 
     /**
@@ -29,11 +33,11 @@ public class Storage {
      * @return A list of tasks.
      * @throws DukeException Error when reading the file.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> loadTask() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
-            Scanner scanner = new Scanner(file);
+            Scanner scanner = new Scanner(taskFile);
             
             while (scanner.hasNextLine()) {
                 String[] details = scanner.nextLine().split(" \\| ");
@@ -59,11 +63,34 @@ public class Storage {
             }
 
             scanner.close();
-        } catch (FileNotFoundException e) {
-            throw new DukeException("Problem with reading save file.");
+        } catch (Exception e) {
+            throw new DukeException("Problem with reading task save file.");
         }
 
         return tasks;
+    }
+
+    public ArrayList<Expense> loadExpense() throws DukeException {
+        ArrayList<Expense> expenses = new ArrayList<>();
+
+        try {
+            Scanner scanner = new Scanner(expenseFile);
+
+            while (scanner.hasNextLine()) {
+                String[] details = scanner.nextLine().split(" \\| ");
+                LocalDate date = LocalDate.parse(details[0]);
+                double expense = Double.parseDouble(details[1]);
+                String description = details[2];
+
+                expenses.add(new Expense(description, expense, date));
+
+                scanner.close();
+            }
+        } catch (Exception e) {
+            throw new DukeException("Problem with reading expense save file.");
+        }
+
+        return expenses;
     }
 
     /**
@@ -73,19 +100,45 @@ public class Storage {
      */
     public void save(TaskList tasks) throws DukeException {
         // remove existing file
-        if (file.exists()) {
-            file.delete();
+        if (taskFile.exists()) {
+            taskFile.delete();
         }
 
         // create directory parent directory of file if 
         // it does not exist
-        new File(file.getParent()).mkdirs();
+        new File(taskFile.getParent()).mkdirs();
 
         try {
-            file.createNewFile();
+            taskFile.createNewFile();
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(taskFile));
             writer.write(tasks.toSaveFormat());
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException("Problem writing into save file.");
+        }
+    }
+
+    /**
+     * Saves the expenses to the given file path.
+     * @param expenses The expenses to be saved.
+     * @throws DukeException Error when writing to the file.
+     */
+    public void save(ExpenseList expenses) throws DukeException {
+        // remove existing file
+        if (expenseFile.exists()) {
+            expenseFile.delete();
+        }
+
+        // create directory parent directory of file if 
+        // it does not exist
+        new File(expenseFile.getParent()).mkdirs();
+
+        try {
+            expenseFile.createNewFile();
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(expenseFile));
+            writer.write(expenses.toSaveFormat());
             writer.close();
         } catch (IOException e) {
             throw new DukeException("Problem writing into save file.");
