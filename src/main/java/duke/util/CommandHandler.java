@@ -65,7 +65,7 @@ public class CommandHandler {
                 + "\tdone {task index} - marks task as done.\n"
                 + "\tdelete {task index} - deletes task from task list permanently.\n"
                 + "\tunmark {task index} - marks a previously done task as not done.\n"
-                + "\tbye - leaves the application.\n"
+                + "\tbye - closes the application.\n"
                 + "\thelp - gets this list of help information.";
     }
 }

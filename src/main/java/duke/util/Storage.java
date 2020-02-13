@@ -35,37 +35,6 @@ public class Storage {
     }
 
     /**
-     * Saves task to data file.
-     * @param task The task to be saved.
-     * @param isAppendMode The boolean checking if the file is to be opened in append mode.
-     * @throws IOException Error opening file.
-     */
-    protected void saveTask(Task task, boolean isAppendMode) throws IOException {
-        FileOutputStream ops = new FileOutputStream(new File(this.filePath), isAppendMode);
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ops));
-        String[] toSave = new String[4];
-        toSave[1] = task.isDone ? "1" : "0";
-        toSave[2] = task.getDescription();
-
-        if (task instanceof Event) {
-            toSave[0] = "E";
-            toSave[3] = ((Event) task).getScheduledTime().toString();
-        } else if (task instanceof Deadline) {
-            toSave[0] = "D";
-            toSave[3] = ((Deadline) task).getDueDate().toString();
-        } else {
-            toSave[0] = "T";
-        }
-
-        if (isAppendMode) {
-            bw.newLine();
-        }
-        bw.write(String.join(" | ", toSave));
-        bw.close();
-        ops.close();
-    }
-
-    /**
      * Loads tasks from data file to Duke.
      * @throws IOException Error opening file.
      */
@@ -101,9 +70,36 @@ public class Storage {
     }
 
     /**
-     * Clears all data on file.
+     * Saves task to data file.
+     * @param task The task to be saved.
+     * @param isAppendMode The boolean checking if the file is to be opened in append mode.
      * @throws IOException Error opening file.
      */
+    protected void saveTask(Task task, boolean isAppendMode) throws IOException {
+        FileOutputStream ops = new FileOutputStream(new File(this.filePath), isAppendMode);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ops));
+        String[] toSave = new String[4];
+        toSave[1] = task.isDone ? "1" : "0";
+        toSave[2] = task.getDescription();
+
+        if (task instanceof Event) {
+            toSave[0] = "E";
+            toSave[3] = ((Event) task).getScheduledTime().toString();
+        } else if (task instanceof Deadline) {
+            toSave[0] = "D";
+            toSave[3] = ((Deadline) task).getDueDate().toString();
+        } else {
+            toSave[0] = "T";
+        }
+
+        if (isAppendMode) {
+            bw.newLine();
+        }
+        bw.write(String.join(" | ", toSave));
+        bw.close();
+        ops.close();
+    }
+
     protected void clearAllData() throws IOException {
         FileOutputStream ops = new FileOutputStream(new File(this.filePath));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ops));

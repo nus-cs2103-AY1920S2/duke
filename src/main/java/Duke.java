@@ -30,7 +30,7 @@ public class Duke {
         // launcher can't recognise ../../../data/duke.txt and  machine can't recognise this lol
         // help T_T
         // TODO: fix path
-        storage = new Storage("./data/duke.txt");
+        storage = new Storage("data/duke.txt");
         ui = new Ui();
         tasks = new TaskList(storage, ui);
         cmd = new CommandHandler(tasks);
