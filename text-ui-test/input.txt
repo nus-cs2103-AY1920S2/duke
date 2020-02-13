@@ -1,0 +1,24 @@
+list
+todo read book
+deadline this project /by midnight tonight
+event lou hei /at my office
+list
+done 2
+list
+blah
+todo return book
+delete 3
+list
+error
+todo
+deadline
+deadline another project
+event
+event CNY
+list
+done
+done 10
+delete
+delete 20
+list
+bye
