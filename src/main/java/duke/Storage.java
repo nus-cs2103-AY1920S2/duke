@@ -88,6 +88,7 @@ public class Storage {
                 }
 
                 list.save(newTask);
+                assert list.size() > 0: "At least one task should have been added";
                 text = reader.readLine();
             }
 
