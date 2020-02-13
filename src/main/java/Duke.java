@@ -31,6 +31,7 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private static final String BORDER_LINE = "____________________________________________________________\n";
 
     @Override
     public void start(Stage stage) {
@@ -165,26 +166,21 @@ public class Duke extends Application {
     }
 
     static void printIntro() {
-        System.out.print(
-                "____________________________________________________________\n" +
-                        "Hello! I'm Duke\n" +
-                        "What can I do for you?\n" +
-                        "____________________________________________________________\n\n");
+        String introText = BORDER_LINE + "Hello! I'm Duke\nWhat can I do for you?\n" + BORDER_LINE;
+        assert(introText == null): "Intro text should not be null";
     }
 
     static void printReply(Task task) {
         System.out.print(
-                "____________________________________________________________\n" +
+                BORDER_LINE +
                         "Got it! I've added the task: \n" + task.toString() + "\nNow you have " + tasks.getSize() +
-                        " tasks in the list." +
-                        "\n____________________________________________________________\n");
+                        " tasks in the list.\n" + BORDER_LINE);
     }
 
     static void printGoodbye() {
-        System.out.print(
-                "____________________________________________________________\n" +
-                        "Bye. Hope to see you again soon!" +
-                        "\n____________________________________________________________\n");
+        String goodbyeText = BORDER_LINE + "\"Bye. Hope to see you again soon!\"n" + BORDER_LINE;
+        System.out.println(goodbyeText);
+        assert(goodbyeText == null): "Goodbye text should not be NULL";
     }
 
     static String stringToTime(String s) throws DukeException {
