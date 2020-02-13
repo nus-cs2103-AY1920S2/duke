@@ -1,11 +1,19 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public abstract class Task {
     protected String description;
     protected String type;
     protected LocalDate date;
     protected boolean isDone;
+    protected ArrayList<Tag> tagList;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+        this.tagList = new ArrayList<>();
+    }
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols

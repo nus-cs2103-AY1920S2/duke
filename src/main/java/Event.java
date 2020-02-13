@@ -2,10 +2,9 @@ import java.time.LocalDate;
 
 public class Event extends Task{
     public Event(String description, LocalDate date) {
-        this.description = description;
+        super(description);
         this.type = "E";
         this.date = date;
-        this.isDone = false;
     }
 
     @Override

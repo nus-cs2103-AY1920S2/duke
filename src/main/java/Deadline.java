@@ -2,10 +2,9 @@ import java.time.LocalDate;
 
 public class Deadline extends Task {
     public Deadline(String description, LocalDate date) {
-        this.description = description;
+        super(description);
         this.type = "D";
         this.date = date;
-        this.isDone = false;
     }
 
     @Override
