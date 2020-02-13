@@ -210,7 +210,7 @@ public class TaskList {
         if (!at_least_one) {
             return ui.noMatchingTasks();
         } else {
-            sb.append(ui.matchingTasks() + "\n");
+            sb.insert(0, ui.matchingTasks() + "\n");
             return sb.toString();
         }
     }
@@ -321,8 +321,37 @@ public class TaskList {
         }
 
         for (Task task : list) {
-            sb.append(task.get_Index() + ". " + task.toString() + "\n");
+            sb.append(task.toString() + "\n");
         }
         return sb.toString();
+    }
+
+
+
+    public String findDetails(String input) {
+        assert input != null : "Details command input is empty!";
+
+        String taskNumber = input.replace("details","");
+        taskNumber = taskNumber.trim();
+        sb = new StringBuilder();
+
+        if (taskNumber.equals("all")) {
+            for (Task t : list) {
+                sb.append(t.details() + "\n");
+            }
+        } else {
+            try {
+                int i = Integer.parseInt(taskNumber) - 1;
+                sb.append(list.get(i).details() + "\n");
+
+            } catch (IndexOutOfBoundsException e) {
+                sb.append(ui.nosuchNumber());
+
+            } catch (NumberFormatException e) {
+                sb.append(ui.inputNumber());
+            }
+        }
+        return sb.toString();
+
     }
 }
