@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -27,10 +26,13 @@ public class Deadline extends DateTask {
      * @param finishByTime Time of deadline.
      * @param finishByDate Date of deadline.
      */
-    public Deadline(String description, String finishByTime, String finishByDate) {
+    public Deadline(String description, String finishByTime, String finishByDate, String...tags) {
         super(description);
         this.finishByTime = LocalTime.parse(finishByTime);
         this.finishByDate = LocalDate.parse(finishByDate, dateFormatter);
+        for (String tag : tags) {
+            super.addTag(tag);
+        }
     }
 
     @Override
@@ -64,6 +66,6 @@ public class Deadline extends DateTask {
 
         String time = finishByTime == null ? "-" : finishByTime.toString();
         return "D | " + d + " | " + super.getDescription() + " | " + time
-                + " | " + finishByDate.format(dateFormatter);
+                + " | " + finishByDate.format(dateFormatter) + " | " + super.stringifyTagsToSaveFormat();
     }
 }

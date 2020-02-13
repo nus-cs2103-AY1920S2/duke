@@ -15,7 +15,10 @@ public class AddDeadlineCommand implements Command {
      * @param details List of description, time and date of deadline.
      */
     public AddDeadlineCommand(TaskList taskList, List<String> details) {
-        Deadline deadline = new Deadline(details.get(0), details.get(1), details.get(2));
+        String description = details.remove(0);
+        String time = details.remove(0);
+        String date = details.remove(0);
+        Deadline deadline = new Deadline(description, time, date, details.toArray(new String[details.size()]));
         this.taskList = taskList;
         this.deadline = deadline;
     }

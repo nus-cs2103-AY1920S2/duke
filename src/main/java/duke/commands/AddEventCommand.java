@@ -15,7 +15,10 @@ public class AddEventCommand implements Command {
      * @param details List of description, time and date of event.
      */
     public AddEventCommand(TaskList taskList, List<String> details) {
-        Event event = new Event(details.get(0), details.get(1), details.get(2));
+        String description = details.remove(0);
+        String time = details.remove(0);
+        String date = details.remove(0);
+        Event event = new Event(description, time, date, details.toArray(new String[details.size()]));
         this.taskList = taskList;
         this.event = event;
     }

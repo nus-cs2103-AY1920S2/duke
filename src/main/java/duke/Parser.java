@@ -11,6 +11,7 @@ import duke.commands.DoneCommand;
 import duke.commands.ExceptionCommand;
 import duke.commands.FindCommand;
 import duke.commands.FindDateCommand;
+import duke.commands.FindTagCommand;
 import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.exceptions.DateSearchFormatException;
@@ -80,6 +81,8 @@ public class Parser {
             return new FindCommand(taskList, validatedInput);
         case "list":
             return new ListCommand(taskList);
+        case "tag":
+            return new FindTagCommand(taskList, validatedInput);
         case "todo":
             return new AddTodoCommand(taskList, validatedInput);
         default:
@@ -94,17 +97,21 @@ public class Parser {
      * @return List of necessary details of the user command.
      */
     private List<String> validateInput(String input) {
-        String action = input.split(" ")[0];
+        String strippedInput = input.strip();
+        String action = strippedInput.charAt(0) == '#'
+                ? "tag"
+                : splitWhitespace(strippedInput)[0];
         List<String> data = new ArrayList<>();
         try {
             switch (action) {
             case "list":
             case "bye":
             case "help":
+                // no validation needed
                 break;
             case "done":
             case "delete":
-                String[] fields = input.split(" ");
+                String[] fields = splitWhitespace(strippedInput);
                 if (fields.length < 2) {
                     throw new InvalidTaskNumberException(taskList.size());
                 }
@@ -119,22 +126,18 @@ public class Parser {
                 data.add(String.valueOf(taskNumber));
                 break;
             case "todo":
-                fields = input.split("todo ");
-                if (fields.length < 2) {
-                    throw new EmptyDescriptionException("todo");
-                }
+                fields = checkForDescription(strippedInput, action);
                 assert fields.length > 1 : "Number of inputs should be more than 1";
 
-                String description = fields[1];
+                String[] descAndTags = fields[1].split("\\s+#");
+                String description = descAndTags[0];
                 data.add(description);
+                addRestOfFields(data, descAndTags, 1);
                 break;
             case "event":
             case "deadline":
                 // Validate description
-                fields = input.split(action + " ");
-                if (fields.length < 2) {
-                    throw new EmptyDescriptionException(action);
-                }
+                fields = checkForDescription(input, action);
                 assert fields.length > 1 : "Number of inputs should be more than 1";
 
                 // Validate existence of time
@@ -145,14 +148,14 @@ public class Parser {
                 if (descAndTimeFields.length < 2) {
                     throw new EmptyTimeException(action);
                 }
-                assert descAndTimeFields.length > 1 : "Number of inputs should be more than 1";
+
+                String[] timeAndTagsFields = descAndTimeFields[1].split("\\s+#");
 
                 // Validate existence of time and date
-                String[] timeAndDateFields = descAndTimeFields[1].split(" ");
+                String[] timeAndDateFields = timeAndTagsFields[0].split(" ");
                 if (timeAndDateFields.length < 2) {
                     throw new EmptyTimeException(action);
                 }
-                assert timeAndDateFields.length > 1 : "Number of inputs should be more than 1";
 
                 // Validate format of time and date; throws DateTimeException if invalid
                 try {
@@ -164,12 +167,13 @@ public class Parser {
                     data.add(description);
                     data.add(timeAndDateFields[0]);
                     data.add(timeAndDateFields[1]);
+                    addRestOfFields(data, timeAndTagsFields, 1);
                 } catch (DateTimeException ex) {
                     throw new DateSearchFormatException();
                 }
                 break;
             case "date":
-                fields = input.split(" ");
+                fields = splitWhitespace(strippedInput);
                 if (fields.length < 2) {
                     throw new EmptySearchException();
                 }
@@ -183,13 +187,17 @@ public class Parser {
                 }
                 break;
             case "find":
-                fields = input.split(" ");
+                fields = splitWhitespace(strippedInput);
                 if (fields.length < 2) {
                     throw new EmptySearchException();
                 }
 
                 String searchWord = fields[1];
                 data.add(searchWord);
+                break;
+            case "tag":
+                String tag = strippedInput.split("\\s+")[0].replace("#", "");
+                data.add(tag);
                 break;
             default:
                 throw new InvalidActionException();
@@ -201,6 +209,7 @@ public class Parser {
         } catch (DateTimeException ex) {
             data.add("exception");
             data.add(new DateSearchFormatException().toString());
+            return data;
         } catch (Exception ex) {
             data.add("exception");
             data.add(ex.toString());
@@ -213,5 +222,23 @@ public class Parser {
 
     private LocalDate formatDate(String date) throws DateTimeParseException {
         return LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy"));
+    }
+
+    private void addRestOfFields(List<String> data, String[] fields, int fromIndex) {
+        for (int i = fromIndex; i < fields.length; i++) {
+            data.add(fields[i]);
+        }
+    }
+
+    private String[] checkForDescription(String input, String action) throws EmptyDescriptionException {
+        String[] fields = input.split(action + "\\s+");
+        if (fields.length < 2) {
+            throw new EmptyDescriptionException(action);
+        }
+        return fields;
+    }
+
+    private String[] splitWhitespace(String s) {
+        return s.split("\\s+");
     }
 }

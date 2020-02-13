@@ -57,13 +57,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.equals("bye")) {
+        if (input.equals("")) {
+            return;
+        } else if (input.equals("bye")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished(event -> stage.close());
             delay.play();
         }
 
         String response = duke.getResponse(input);
+        if (response.equals("")) {
+            response = "No results found. Please try again!";
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
