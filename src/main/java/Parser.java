@@ -94,9 +94,13 @@ public class Parser {
 
         if (type.equals(TODO_TYPE)) {
             Task todo = new Todo(input);
-            taskList.add(todo);
-            Ui.printWithBorder("The following to-do has been added:\n    "
-                    + todo.toString() + str + taskList.size());
+            if (duplicatedTask(taskList, todo)) {
+                Ui.printWithBorder("This todo is already in your task list.");
+            } else {
+                taskList.add(todo);
+                Ui.printWithBorder("The following to-do has been added:\n    "
+                        + todo.toString() + str + taskList.size());
+            }
 
         } else if (type.equals(DEADLINE_TYPE)) {
             String[] arr = input.split("/", MINIMUM_DEADLINE_LENGTH);
@@ -106,9 +110,13 @@ public class Parser {
                 if (isLocalDate(by)) {
                     LocalDate deadlineDate = LocalDate.parse(by);
                     Deadline deadline = new Deadline(description, deadlineDate);
-                    taskList.add(deadline);
-                    Ui.printWithBorder("The following task has been added:\n"
-                            + "    " + deadline.toString() + str + taskList.size());
+                    if (duplicatedTask(taskList, deadline)) {
+                        Ui.printWithBorder("This deadline is already in your task list.");
+                    } else {
+                        taskList.add(deadline);
+                        Ui.printWithBorder("The following task has been added:\n"
+                                + "    " + deadline.toString() + str + taskList.size());
+                    }
                 } else {
                     throw new DukeTaskException("Invalid date format detected. "
                             + "Please ensure date is in yyyy-mm-dd (e.g. 2019-01-30).");
@@ -125,9 +133,13 @@ public class Parser {
                 if (isLocalDate(at)) {
                     LocalDate eventDate = LocalDate.parse(at);
                     Event event = new Event(description, eventDate);
-                    taskList.add(event);
-                    Ui.printWithBorder("The following task has been added:\n"
-                            + "    " + event.toString() + str + taskList.size());
+                    if (duplicatedTask(taskList, event)) {
+                        Ui.printWithBorder("This event is already in your task list.");
+                    } else {
+                        taskList.add(event);
+                        Ui.printWithBorder("The following task has been added:\n"
+                                + "    " + event.toString() + str + taskList.size());
+                    }
                 } else {
                     throw new DukeTaskException("Invalid date format detected. "
                             + "Please ensure date is in yyyy-mm-dd (e.g. 2019-02-28).");
@@ -210,5 +222,25 @@ public class Parser {
             }
             Ui.printWithBorder(sb.toString());
         }
+    }
+
+    /**
+     * Checks if there already exists a duplicated task in the user's TaskList.
+     * @param taskList User's list of Tasks.
+     * @param task New Task that is to be added.
+     * @return True if a duplicated Task exists, false otherwise.
+     */
+    public static boolean duplicatedTask(TaskList taskList, Task task) {
+        boolean isDuplicate = false;
+        for (int i = 0; i < taskList.size(); i++) {
+            Task current = taskList.get(i);
+            if (task.getDescription().equals(current.getDescription()) && current.getStatus().equals("[X]")) {
+                isDuplicate = true;
+                break;
+            } else {
+                continue;
+            }
+        }
+        return isDuplicate;
     }
 }
