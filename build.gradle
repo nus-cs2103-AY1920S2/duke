@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+
+
 }
 
 group 'seedu.duke'
