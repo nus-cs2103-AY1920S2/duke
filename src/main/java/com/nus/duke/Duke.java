@@ -13,72 +13,57 @@ public class Duke {
         Boolean contLoop = true;
         TaskController controller = new TaskController();
 
-        while(contLoop){
-            String input = scan.nextLine();
-            Pair<String, String> parsedInput = Parser.tokenize(input);
-            String taskName = parsedInput.getValue();
+        while (contLoop) {
+            try {
+                String input = scan.nextLine();
+                Pair<String, String> parsedInput = Parser.tokenize(input);
+                String taskName = parsedInput.getValue();
 
-            switch(parsedInput.getKey()) {
-            case "list":
-                List<String> tasks = controller.getAllTasks();
-                Greetings.prettyPrint(tasks);
-                break;
+                switch (parsedInput.getKey()) {
+                case "list":
+                    List<String> tasks = controller.getAllTasks();
+                    Greetings.prettyPrint(tasks);
+                    break;
 
-            case "mark":
-                if (controller.checkTask(taskName)) {
+                case "mark":
                     controller.setMark(taskName, true);
                     Greetings.prettyPrint(String.format("Marked task %s", taskName));
-                } else {
-                    Greetings.prettyPrint(String.format("Task does not exist", taskName));
-                }
-                break;
+                    break;
 
-            case "unmark":
-                if (controller.checkTask(taskName)) {
+                case "unmark":
                     controller.setMark(taskName, false);
                     Greetings.prettyPrint(String.format("Unmarked task %s", taskName));
-                } else {
-                    Greetings.prettyPrint(String.format("Task does not exist", taskName));
-                }
-                break;
+                    break;
 
-            case "todo":
-                if (!controller.checkTask(taskName)) {
-                    controller.createNewTask(taskName);
-                }
-                controller.asTodo(taskName);
-                Greetings.prettyPrint(String.format("Marked task as todo: %s", taskName));
-                break;
+                case "todo":
+                    controller.newTodo(taskName);
+                    Greetings.prettyPrint(String.format("Marked task as todo: %s", taskName));
+                    break;
 
-            case "deadline":
-                if (!controller.checkTask(taskName)) {
-                    controller.createNewTask(taskName);
-                }
-                controller.asDeadline(taskName);
-                Greetings.prettyPrint(String.format("Marked task as deadline: %s", taskName));
-                break;
+                case "deadline":
+                    controller.newDeadline(taskName);
+                    Greetings.prettyPrint(String.format("Marked task as deadline: %s", taskName));
+                    break;
 
-            case "event":
-                if (!controller.checkTask(taskName)) {
-                    controller.createNewTask(taskName);
-                }
-                controller.asEvent(taskName);
-                Greetings.prettyPrint(String.format("Marked task as event: %s", taskName));
-                break;
+                case "event":
+                    controller.newEvent(taskName);
+                    Greetings.prettyPrint(String.format("Marked task as event: %s", taskName));
+                    break;
 
-            case "delete":
-                if (controller.checkTask(taskName)) {
+                case "delete":
                     controller.removeTask(taskName);
-                }
-                Greetings.prettyPrint(String.format("Deleted task: %s", taskName));
-                break;
+                    Greetings.prettyPrint(String.format("Deleted task: %s", taskName));
+                    break;
 
-            case "quit":
-                Greetings.tearDown();
-                contLoop = false;
-                break;
-            default:
-                Greetings.handleUndefined();
+                case "quit":
+                    Greetings.tearDown();
+                    contLoop = false;
+                    break;
+                default:
+                    Greetings.handleUndefined();
+                }
+            } catch (Exception ex) {
+                Greetings.prettyPrint(ex.getMessage());
             }
         }
     }
