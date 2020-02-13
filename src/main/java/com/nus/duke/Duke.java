@@ -55,6 +55,9 @@ public class Duke {
                     Greetings.prettyPrint(String.format("Deleted task: %s", taskName));
                     break;
 
+                case "save":
+                    break;
+
                 case "quit":
                     Greetings.tearDown();
                     contLoop = false;

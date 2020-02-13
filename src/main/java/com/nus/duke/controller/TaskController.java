@@ -1,8 +1,8 @@
 package com.nus.duke.controller;
 
 import com.nus.duke.Exception.*;
+import com.nus.duke.dao.DAOFactory;
 import com.nus.duke.dao.DAOInterface;
-import com.nus.duke.dao.InMemDAO;
 import com.nus.duke.parser.Parser;
 import com.nus.duke.tasks.Tasks;
 import javafx.util.Pair;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskController {
-    private DAOInterface dataObj = new InMemDAO();
+    private DAOInterface dataObj = DAOFactory.getOrCreate();
 
     private String stringify(Tasks t) {
         StringBuilder strBldr = new StringBuilder();
