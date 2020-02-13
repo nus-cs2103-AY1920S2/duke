@@ -9,11 +9,18 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        StringBuilder tags = new StringBuilder();
+        if (!tagList.isEmpty()) {
+            tags.append(" | ");
+            tagList.forEach(tag -> tags.append(tag.getDetails()));
+        }
+
         return String.format(
-                "[%s][%s] %s (%s)",
+                "[%s][%s] %s (%s)%s",
                 this.getType(),
                 this.getStatusIcon(),
                 this.getDescription(),
-                this.formatDate(getDate()));
+                this.formatDate(getDate()),
+                tags);
     }
 }

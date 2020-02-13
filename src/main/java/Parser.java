@@ -13,7 +13,7 @@ public class Parser {
      * @param taskList TaskList that contains ArrayList<Task>.
      * @param ui Ui to print out user interface text.
      */
-    private static String handleTasks(String input, TaskList taskList, Ui ui) {
+    public static String handleTasks(String input, TaskList taskList, Ui ui) {
         try {
             String commandType = extractCommandType(input);
             String[] inputSplit = input.split(" ", 2);
@@ -27,7 +27,7 @@ public class Parser {
                     return taskList.addDeadline(arr[0], parseDate(arr[1]));
                 case "event":
                     arr = prepareEvent(inputSplit);
-                    return taskList.addDeadline(arr[0], parseDate(arr[1]));
+                    return taskList.addEvent(arr[0], parseDate(arr[1]));
                 case "done":
                     return taskList.markDone(prepareDoneDelete(inputSplit[1]));
                 case "delete":
@@ -36,17 +36,17 @@ public class Parser {
                     return taskList.listTasks(taskList);
                 case "find":
                     return taskList.findTask(inputSplit[1]);
+                case "tag":
+                    arr = prepareAddTag(inputSplit);
+                    return taskList.tagTask(Integer.parseInt(arr[0]), arr[1]);
                 case "bye":
                     return ui.exitDuke();
                 default:
-                    // assert false : input;
-                    throw new AssertionError(input);
+                    throw new InvalidCommandException("Uhh... You're gonna have to say that again, Red.");
                 }
         } catch (InvalidCommandException | InvalidTodoException
                 | InvalidDeadlineException | InvalidEventException ex) {
             return (ui.showError(ex.toString()));
-        } catch (AssertionError ar) {
-            return (ui.showError(ar.toString()));
         }
     }
 
@@ -67,8 +67,8 @@ public class Parser {
         boolean isValidCommand = isValidCommand(inputSplit[0]);
 
         if (!isValidCommand) {
-            // throw new InvalidCommandException(
-                    // "Uhh... You're gonna have to say that again, Red.");
+            throw new InvalidCommandException(
+                    "Uhh... You're gonna have to say that again, Red.");
         }
         return inputSplit[0];
     }
@@ -138,6 +138,10 @@ public class Parser {
         return Integer.parseInt(input);
     }
 
+    private static String[] prepareAddTag(String[] input) {
+        String[] fieldDetails = input[1].split(" ", 2);
+        return fieldDetails;
+    }
 
     /**
      * Checks if input is of valid command type.
@@ -151,6 +155,7 @@ public class Parser {
                 || type.equals("event")
                 || type.equals("list")
                 || type.equals("find")
+                || type.equals("tag")
                 || type.equals("done")
                 || type.equals("delete")
                 || type.equals("bye")) {

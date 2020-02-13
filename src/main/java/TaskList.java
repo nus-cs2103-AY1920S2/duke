@@ -70,6 +70,14 @@ public class TaskList {
         return output.toString();
     }
 
+    public String tagTask(int taskIndex, String tagDetails) {
+        Task task = tasks.get(taskIndex - 1);
+        Tag tag = new Tag(tagDetails);
+
+        task.tagList.add(tag);
+        return String.format("Added: %s to %s", tag.getDetails(), task);
+    }
+
     public void print(String string) {
         System.out.println(string);
     }

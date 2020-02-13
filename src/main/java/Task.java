@@ -32,6 +32,10 @@ public abstract class Task {
         return this.description;
     }
 
+    public ArrayList<Tag> getTagList() {
+        return this.tagList;
+    }
+
     public LocalDate getDate() {
         return this.date;
     }
