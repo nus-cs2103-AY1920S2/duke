@@ -17,6 +17,7 @@ public interface UiText {
 
     public void start(String... initials);
     public void respondLine(List<String> respondStr);
+    public void respondLine(String... respondStr);
     public void over(String... remarks);
     public void respond(String... respondStr);
     public void respond(List<String> respondStr);

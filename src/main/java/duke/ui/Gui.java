@@ -81,6 +81,10 @@ public class Gui implements UiText {
         }
     }
 
+    public void respondLine(String... respondStr) {
+        respondLine(Arrays.asList(respondStr));
+    }
+
     /**
      * Close the dialog box with some remarks
      *

@@ -6,6 +6,7 @@ import duke.storage.CSV;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -61,6 +62,14 @@ public class TaskList implements Copyable {
             ans = ans.filter(x -> x.getName().contains(str));
         }
         return ans.collect(Collectors.toList());
+    }
+
+    public List<Task> filter(Predicate<Task> p) {
+        return this.lst.stream().filter(p).collect(Collectors.toList());
+    }
+
+    public Stream<Task> stream() {
+        return this.lst.parallelStream();
     }
 
     public static TaskList fromCSVList(List<CSV> lst) {

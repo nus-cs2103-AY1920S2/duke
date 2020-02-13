@@ -93,7 +93,12 @@ class ListCommand extends Command {
         assert !this.isExecuted : Command.CMD_EXECUTED;
         this.isExecuted = true;
         try {
-            List<Task> lst = tasks.getTaskList();
+            List<Task> lst;
+            if(this.terms.hasNextLine() && this.terms.nextLine().trim().equals("not done")) {
+                lst = tasks.filter(Task::isDone);
+            } else {
+                lst = tasks.getTaskList();
+            }
             ui.start("Here are the tasks in your list:");
             ui.respondLine(lst.stream().map(x -> "" + (lst.indexOf(x) + 1) + "." + x).collect(Collectors.toList()));
             ui.over();
@@ -102,6 +107,22 @@ class ListCommand extends Command {
             ui.respond(UiText.dunno);
             return false;
         }
+    }
+}
+
+class StatCommand extends Command {
+    StatCommand(Scanner sc) {
+        super(sc);
+    }
+
+    @Override
+    public boolean execute(Duke main) {
+        TaskList tasks = main.tasks;
+        UiText ui = main.ui;
+        ui.start("total tasks due: ");
+        ui.respondLine(Integer.toString((int) tasks.stream().filter(x -> !x.isDone()).count()));
+        ui.over();
+        return true;
     }
 }
 

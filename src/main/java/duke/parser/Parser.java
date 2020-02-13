@@ -30,6 +30,8 @@ public class Parser {
                 return new MarkAsDoneCommand(sc);
             case "undo":
                 return new ReverseCommand(sc);
+            case "stats":
+                return new StatCommand(sc);
             case "exit":
                 return new ExitCommand(sc);
             default:

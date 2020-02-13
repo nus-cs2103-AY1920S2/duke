@@ -43,7 +43,7 @@ public class Ui implements UiText {
      *
      * @param respondStr = lines to respond
      */
-    void respondLine(String... respondStr) {
+    public void respondLine(String... respondStr) {
         respondLine(Arrays.asList(respondStr));
     }
 
