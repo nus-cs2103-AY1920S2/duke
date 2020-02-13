@@ -11,6 +11,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+    public static final int COMMAND_POSITION = 0;
+    public static final int DESCRIPTION_POSITION = 1;
+    public static final int MINIMUM_COMMAND_LENGTH = 2;
+
+    public static final String TODO_TYPE = "T";
+    public static final String DEADLINE_TYPE = "D";
+    public static final String EVENT_TYPE = "E";
+
+    public static final int MINIMUM_DEADLINE_LENGTH = 2;
+    public static final int DEADLINE_DESCRIPTION_POSITION = 0;
+    public static final int DEADLINE_TIME_POSITION = 1;
+
+    public static final int MINIMUM_EVENT_LENGTH = 2;
+    public static final int EVENT_DESCRIPTION_POSITION = 0;
+    public static final int EVENT_TIME_POSITION = 1;
 
     /**
      * Make sense of the user's command and execute their desired function(s).
@@ -19,43 +34,43 @@ public class Parser {
      * @param storage Storage class that reads from/write to a specified file.
      */
     public void parseAndExecute(String command, TaskList taskList, Storage storage) {
-        String[] commandArray = command.split(" ", 2);
+        String[] commandArray = command.split(" ", MINIMUM_COMMAND_LENGTH);
         try {
             if (command.toLowerCase().equals("list")) {
                 Ui.printWithBorder(taskList.showList());
-            } else if (commandArray[0].toLowerCase().equals("done")) {
-                if (commandArray.length >= 2) {
-                    markTaskAsDone(taskList, commandArray[1]);
+            } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("done")) {
+                if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
+                    markTaskAsDone(taskList, commandArray[DESCRIPTION_POSITION]);
                 } else {
                     throw new DukeArgumentException("Please specify which task to be marked as done.");
                 }
-            } else if (commandArray[0].toLowerCase().equals("delete")) {
-                if (commandArray.length >= 2) {
-                    deleteTask(taskList, commandArray[1]);
+            } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("delete")) {
+                if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
+                    deleteTask(taskList, commandArray[DESCRIPTION_POSITION]);
                 } else {
                     throw new DukeArgumentException("Please specify which task to be deleted.");
                 }
-            } else if (commandArray[0].toLowerCase().equals("find")) {
-                if (commandArray.length >= 2) {
-                    findTask(taskList, commandArray[1]);
+            } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("find")) {
+                if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
+                    findTask(taskList, commandArray[DESCRIPTION_POSITION]);
                 } else {
                     throw new DukeArgumentException("Please specify the keyword(s) that you want to search.");
                 }
-            } else if (commandArray[0].toLowerCase().equals("todo")) {
-                if (commandArray.length >= 2) {
-                    addTask(taskList, commandArray[1], "T");
+            } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("todo")) {
+                if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
+                    addTask(taskList, commandArray[DESCRIPTION_POSITION], TODO_TYPE);
                 } else {
                     throw new DukeArgumentException("Missing field in todo command.");
                 }
-            } else if (commandArray[0].toLowerCase().equals("deadline")) {
-                if (commandArray.length >= 2) {
-                    addTask(taskList, commandArray[1], "D");
+            } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("deadline")) {
+                if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
+                    addTask(taskList, commandArray[DESCRIPTION_POSITION], DEADLINE_TYPE);
                 } else {
                     throw new DukeArgumentException("Missing field in deadline command.");
                 }
-            } else if (commandArray[0].toLowerCase().equals("event")) {
-                if (commandArray.length >= 2) {
-                    addTask(taskList, commandArray[1], "E");
+            } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("event")) {
+                if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
+                    addTask(taskList, commandArray[DESCRIPTION_POSITION], EVENT_TYPE);
                 } else {
                     throw new DukeArgumentException("Missing field in event command.");
                 }
@@ -77,17 +92,17 @@ public class Parser {
     public static void addTask(TaskList taskList, String input, String type) throws DukeTaskException {
         String str = "\nCurrent number of task(s): ";
 
-        if (type.equals("T")) {
+        if (type.equals(TODO_TYPE)) {
             Task todo = new Todo(input);
             taskList.add(todo);
             Ui.printWithBorder("The following to-do has been added:\n    "
                     + todo.toString() + str + taskList.size());
 
-        } else if (type.equals("D")) {
-            String[] arr = input.split("/", 2);
-            if (arr.length > 1) {
-                String description = arr[0];
-                String by = arr[1].split(" ", 2)[1];
+        } else if (type.equals(DEADLINE_TYPE)) {
+            String[] arr = input.split("/", MINIMUM_DEADLINE_LENGTH);
+            if (arr.length >= MINIMUM_DEADLINE_LENGTH) {
+                String description = arr[DEADLINE_DESCRIPTION_POSITION];
+                String by = arr[DEADLINE_TIME_POSITION].split(" ", MINIMUM_DEADLINE_LENGTH)[DEADLINE_TIME_POSITION];
                 if (isLocalDate(by)) {
                     LocalDate deadlineDate = LocalDate.parse(by);
                     Deadline deadline = new Deadline(description, deadlineDate);
@@ -102,11 +117,11 @@ public class Parser {
                 throw new DukeTaskException("\'/by\' field is missing.");
             }
 
-        } else if (type.equals("E")) {
-            String[] arr = input.split("/", 2);
-            if (arr.length > 1) {
-                String description = arr[0];
-                String at = arr[1].split(" ", 2)[1];
+        } else if (type.equals(EVENT_TYPE)) {
+            String[] arr = input.split("/", MINIMUM_EVENT_LENGTH);
+            if (arr.length >= MINIMUM_EVENT_LENGTH) {
+                String description = arr[EVENT_DESCRIPTION_POSITION];
+                String at = arr[EVENT_TIME_POSITION].split(" ", MINIMUM_EVENT_LENGTH)[EVENT_TIME_POSITION];
                 if (isLocalDate(at)) {
                     LocalDate eventDate = LocalDate.parse(at);
                     Event event = new Event(description, eventDate);

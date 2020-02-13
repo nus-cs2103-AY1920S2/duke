@@ -15,6 +15,14 @@ public class Storage {
     protected String filepath;
     protected DateTimeFormatter df = DateTimeFormatter.ofPattern("d MMM yyyy");
 
+    public static final char TASK_DONE_STATUS = 'O';
+    public static final int SPLIT_TASK_LINE = 2;
+    public static final int SYMBOLS_POSITION = 0;
+    public static final int COMMAND_CHARACTER_POSITION = 1;
+    public static final int DONE_STATUS_POSITION = 4;
+    public static final int DESCRIPTION_POSITION = 1;
+    public static final int DATETIME_STRING_LENGTH = 6;
+
     public Storage(String filepath) {
         this.filepath = filepath;
     }
@@ -30,20 +38,21 @@ public class Storage {
         Scanner fs = new Scanner(f);
         while (fs.hasNextLine()) {
             String currentLine = fs.nextLine();
-            String[] input = currentLine.split(" ", 2);
-            char command = input[0].charAt(1);
-            boolean isDone = (input[0].charAt(4) == 'O');
+            String[] input = currentLine.split(" ", SPLIT_TASK_LINE);
+            char command = input[SYMBOLS_POSITION].charAt(COMMAND_CHARACTER_POSITION);
+            boolean isDone = (input[SYMBOLS_POSITION].charAt(DONE_STATUS_POSITION) == TASK_DONE_STATUS);
 
             if (command == 'T') {
-                Task t = new Todo(input[1]);
+                Task t = new Todo(input[DESCRIPTION_POSITION]);
                 if (isDone) {
                     t.markAsDone();
                 }
                 taskList.add(t);
             } else if (command == 'D') {
-                int byStart = input[1].indexOf(" (by:");
-                String description = input[1].substring(0, byStart);
-                String by = input[1].substring(byStart + 6, input[1].length() - 1);
+                int byStart = input[DESCRIPTION_POSITION].indexOf(" (by:");
+                String description = input[DESCRIPTION_POSITION].substring(0, byStart);
+                String by = input[DESCRIPTION_POSITION].substring(byStart + DATETIME_STRING_LENGTH,
+                        input[DESCRIPTION_POSITION].length() - 1);
                 LocalDate byDate = LocalDate.parse(by, df);
                 Task t = new Deadline(description, byDate);
                 if (isDone) {
@@ -51,9 +60,10 @@ public class Storage {
                 }
                 taskList.add(t);
             } else if (command == 'E') {
-                int atStart = input[1].indexOf(" (at:");
-                String description = input[1].substring(0, atStart);
-                String at = input[1].substring(atStart + 6, input[1].length() - 1);
+                int atStart = input[DESCRIPTION_POSITION].indexOf(" (at:");
+                String description = input[DESCRIPTION_POSITION].substring(0, atStart);
+                String at = input[DESCRIPTION_POSITION].substring(atStart + DATETIME_STRING_LENGTH,
+                        input[DESCRIPTION_POSITION].length() - 1);
                 LocalDate atDate = LocalDate.parse(at, df);
                 Task t = new Event(description, atDate);
                 if (isDone) {
