@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.Note;
 import duke.Ui;
 
 /**
@@ -53,6 +54,12 @@ public class AddCommand extends Command {
             Deadline newDeadline = new Deadline(taskName, timePeriod);
             taskList.addTask(newDeadline);
             result = ui.showAddTaskMessage(newDeadline);
+            break;
+
+        case "note":
+            Note newNote = new Note(taskName);
+            taskList.addTask(newNote);
+            result = ui.showAddTaskMessage(newNote);
             break;
 
         default:

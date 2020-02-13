@@ -5,6 +5,7 @@ import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.task.Event;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -105,8 +106,10 @@ public class Ui {
             identifier = "to do";
         } else if (newTask instanceof Deadline) {
             identifier = "deadline";
-        } else {
+        } else if (newTask instanceof Event) {
             identifier = "event";
+        } else {
+            identifier = "note";
         }
         return "Awesome! I've added this " + identifier + " :" + "\n" + newTask.toString();
     }

@@ -125,6 +125,21 @@ public class Parser {
             }
             return new AddCommand("deadline", deadlineName, dueDate);
 
+        case "note":
+            String[] noteTokens = instruction.split(" ");
+            String note;
+
+            try {
+                note = instruction.split("note ")[1];
+                if (note.equals("")) {
+                    throw new DukeException("\t" + "Invalid Note Format.");
+                }
+            } catch (ArrayIndexOutOfBoundsException aiobe) {
+                throw new DukeException("\t" + "Please do not leave the note description (partially) empty.");
+            }
+
+            return new AddCommand("note", note);
+
         case "find":
             String[] findTokens = instruction.split(" ");
             String keyWord;
