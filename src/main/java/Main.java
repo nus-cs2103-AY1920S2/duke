@@ -4,10 +4,11 @@ import duke.gui.Gui;
 
 import javafx.application.Application;
 
-/**
- * Executes a new Duke instance.
- */
 public class Main {
+
+    /**
+     * Executes a new Duke instance.
+     */
     public static void main(String[] args) {
 
         Application.launch(Gui.class, args);

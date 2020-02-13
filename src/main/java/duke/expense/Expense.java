@@ -8,6 +8,12 @@ public class Expense {
     private double expense;
     private LocalDate date;
 
+    /**
+     * Creates an add expense.
+     * @param description The description of the expense.
+     * @param expense The amount of expense.
+     * @param date The date of the expense.
+     */
     public Expense(String description, double expense, LocalDate date) {
         this.description = description;
         this.expense = expense;

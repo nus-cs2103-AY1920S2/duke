@@ -23,6 +23,10 @@ public class Storage {
     private File taskFile;
     private File expenseFile;
 
+    /**
+     * Create a new Storage object givent the folder for information saving.
+     * @param saveFolder The path of the save folder.
+     */
     public Storage(String saveFolder) {
         this.taskFile = new File(saveFolder + File.separator + "tasks.txt");
         this.expenseFile = new File(saveFolder + File.separator + "expenses.txt");
@@ -70,6 +74,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Loads the expenses from the file.
+     * @return A list of expenses.
+     * @throws DukeException Error when reading the file.
+     */
     public ArrayList<Expense> loadExpense() throws DukeException {
         ArrayList<Expense> expenses = new ArrayList<>();
 
