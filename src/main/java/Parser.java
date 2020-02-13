@@ -13,7 +13,7 @@ public class Parser {
      * @param taskList TaskList that contains ArrayList<Task>.
      * @param ui Ui to print out user interface text.
      */
-    public static String handleTasks(String input, TaskList taskList, Ui ui) {
+    private static String handleTasks(String input, TaskList taskList, Ui ui) {
         try {
             String commandType = extractCommandType(input);
             String[] inputSplit = input.split(" ", 2);
@@ -39,11 +39,14 @@ public class Parser {
                 case "bye":
                     return ui.exitDuke();
                 default:
-                    throw new InvalidCommandException("Uhh... You're gonna have to say that again, Red.");
+                    // assert false : input;
+                    throw new AssertionError(input);
                 }
         } catch (InvalidCommandException | InvalidTodoException
                 | InvalidDeadlineException | InvalidEventException ex) {
             return (ui.showError(ex.toString()));
+        } catch (AssertionError ar) {
+            return (ui.showError(ar.toString()));
         }
     }
 
@@ -64,8 +67,8 @@ public class Parser {
         boolean isValidCommand = isValidCommand(inputSplit[0]);
 
         if (!isValidCommand) {
-            throw new InvalidCommandException(
-                    "Uhh... You're gonna have to say that again, Red.");
+            // throw new InvalidCommandException(
+                    // "Uhh... You're gonna have to say that again, Red.");
         }
         return inputSplit[0];
     }
