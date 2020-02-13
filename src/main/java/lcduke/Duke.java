@@ -20,10 +20,10 @@ import java.text.ParseException;
  */
 
 public class Duke extends Application {
-
     public static Storage storage;
     public static TaskList tasks;
     private Ui ui;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -62,10 +62,6 @@ public class Duke extends Application {
             //newInput = new Parser(userInput);
         }
         ui.bye();
-    }
-
-    public static void main(String[] args) {
-        new Duke("./src/main/java/savedTaskList.txt").run();
     }
 
     @Override
