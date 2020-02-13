@@ -18,6 +18,9 @@ public class Parser {
             this.command = input.split(" ")[0];
         } else {
             this.done = input.split(" ")[0];
+
+            assert this.done.equals("1") || this.done.equals("0") : "Flag for done is invalid in data file!";
+
             this.command = input.split(" ")[1];
         }
     }
