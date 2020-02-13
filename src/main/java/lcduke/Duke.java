@@ -58,8 +58,6 @@ public class Duke extends Application {
         while(!ui.userInput.equals("bye")){
             userInput = ui.input();
             ui.inputProcess(userInput, storage, tasks);
-            //userInput = ui.input();
-            //newInput = new Parser(userInput);
         }
         ui.bye();
     }
