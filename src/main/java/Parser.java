@@ -54,6 +54,8 @@ public class Parser {
             }
             command = cmdToReturn;
         default:
+            // If the user input is not valid, it will be classified as
+            // other command, which will be flagged as an error
             command = new OtherCommand(input);
             break;
         }
