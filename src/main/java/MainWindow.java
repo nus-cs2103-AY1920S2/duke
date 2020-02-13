@@ -11,6 +11,8 @@ import javafx.util.Duration;
 
 import common.Message;
 
+import java.awt.*;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
