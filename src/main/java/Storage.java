@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Storage {
 
-    private final String fileName = "../../../duke_save.txt";
+    private final String fileName = "duke_save.txt";
     private int latestIndex = 0;
     private BufferedWriter bw;
 
@@ -20,6 +20,7 @@ public class Storage {
             br = new BufferedReader(new FileReader(fileName));
             try {
                 while ((line = br.readLine()) != null) {
+                    System.out.println(line);
                     list = processLines(line, list);
                 }
             } catch (Exception e) {
@@ -51,10 +52,10 @@ public class Storage {
 
         int time_start_index = 0;
         int desc_end_index = 0;
+        line = line.substring(3);
         String desc;
         String time;
         String new_line = line.substring(7);
-
         if (line.charAt(1) == 'E') {
             boolean done = line.charAt(4) == 'N' ? false : true;
             for (int i = 7; i < line.length() - 5; i++) {
