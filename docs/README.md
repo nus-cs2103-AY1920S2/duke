@@ -35,7 +35,7 @@ is that?
 
 <img src="Ui.png" width="200">
 
-###Your regular events and deadlines
+### Your regular events and deadlines
 Duke helps you to manage your tasks, that are categorized into three types:
 - Todo
 - Deadline
@@ -43,11 +43,11 @@ Duke helps you to manage your tasks, that are categorized into three types:
 
 You can add, delete, and mark the done tasks in your list.
 
-###Reminds your upcoming events and deadlines
+### Reminds your upcoming events and deadlines
 Whenever you start Duke, you will be given a warm-welcome message, and your nearest events and deadlines, so that
 you are keep reminded.
 
-###Archive your tasks
+### Archive your tasks
 Duke can archive your tasks and retrieve them back upon your command.
 
 ###Take random notes
@@ -59,14 +59,14 @@ Duke can bid farewell to you, simply by typing `bye` in your text box. As simple
 
 ## Usage
 
-###List tasks
+### List tasks
 List all the tasks that Duke has memorized.<br>
 `list`<br>
 
 Example of usage:
 `list`<br>It will show all the tasks in the list.
 
-###Adds a task
+### Adds a task
 Adds a new task to your list so Duke can memorize it for you. Since Duke classifies a task into three types, you can
 have the following format:
 - `todo [description]`<br>Adds your to-do task to your list.
@@ -86,7 +86,7 @@ chat you back to inform whether it is added successfully or there exists a forma
 Adds a new deadline task with description `CS2103 Duke Project` which due at `14-02-2020 23:59`. Duke will 
 chat you back to inform whether it is added successfully or there exists a format error, such as the due date format.
 
-###Deletes a task
+### Deletes a task
 Removes a task from your list, according to its number inside the list.<br>
 `delete [task-index]`<br>
 
@@ -95,7 +95,7 @@ Example of usage:
 Removes the first task that appears in your task list. Duke will chat you back to inform whether it is deleted
 successfully or there exists an error, such as the number exceeds the number of tasks in the list.
 
-###Marks a task as done
+### Marks a task as done
 Marks a task in a list, according to its number inside the list.<br>
 `done [task-index]`<br>
 
@@ -104,7 +104,7 @@ Example of usage:
 Marks the first task as done. Duke will chat you back to inform whether it is deleted successfully or there exists 
 an error, such as the number exceeds the number of tasks in the list.
 
-###Finds tasks
+### Finds tasks
 Lists all the task with certain keyword.<br>
 `find [keyword]`<br>
 
@@ -112,7 +112,7 @@ Example of usage:
 `find CS2103`<br>
 Displays all the tasks that contains `CS2103` in their description.
 
-###Archives
+### Archives
 Duke can put your tasks into an archive. The archived tasks can be deleted, or added back to the list. The commands 
 regarding to archives are listed below:
 - `archive-list`<br>Displays all the archived tasks.
@@ -130,7 +130,7 @@ Duke will delete the first task in the archived task list from the archive.
 - `unarchive 1`<br>
 Duke will unarchive the first task in the archived list.
 
-###Notes
+### Notes
 Duke can memorize random notes from the user. The commands regarding to notes are listed below:
 - `notes-list`<br>Displays all the notes that Duke has memorized.
 - `notes-add [description]`<br> Adds a note with the description.
