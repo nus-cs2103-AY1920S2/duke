@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -28,24 +29,30 @@ public class Storage {
      * Searches for an existing file with a previous task list store.
      * If no such file found, create a new task list.
      */
-    public static TaskList readFromFile() {
+    public static void readFromFile(Duke duke) {
         try {
-            FileReader fileReader = new FileReader(userDirectory + "/data.json");
-            return new TaskList(gson.fromJson(fileReader, new TypeToken<List<Task>>() {
-            }.getType()));
+            FileReader task = new FileReader(userDirectory + "/data.json");
+            FileReader fileReader = new FileReader(userDirectory + "/alias.json");
+            duke.setTaskList(gson.fromJson(task, TaskList.class));
+            duke.setFriendlierSyntax(gson.fromJson(fileReader, FriendlierSyntax.class));
         } catch (FileNotFoundException e) {
-            return new TaskList(new ArrayList<Task>());
+            duke.setFriendlierSyntax(new FriendlierSyntax());
+            duke.setTaskList(new TaskList());
         }
     }
 
     /**
      * Writes task list into hard drive.
      */
-    public static void saveFile(TaskList taskList) {
+    public static void saveFile(TaskList taskList, FriendlierSyntax alias) {
         try {
             FileWriter fileWriter = new FileWriter(userDirectory + "/data.json");
-            gson.toJson(taskList.getList(), fileWriter);
+            FileWriter aliasFile = new FileWriter(userDirectory + "/alias.json");
+            gson.toJson(taskList, fileWriter);
+            gson.toJson(alias, aliasFile);
             fileWriter.flush();
+            aliasFile.flush();
+            aliasFile.close();
             fileWriter.close();
         } catch (IOException io) {
             System.err.println(io);
