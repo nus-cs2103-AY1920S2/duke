@@ -99,6 +99,9 @@ public class TaskList {
             Task task = list.get(taskIndex - 1);
 
             this.list.remove(task);
+
+            this.reindexList();
+
             this.saveList();
 
             return task;
@@ -106,6 +109,17 @@ public class TaskList {
         } catch ( IndexOutOfBoundsException e){
             throw new DukeException(e);
         }
+    }
+
+    private void reindexList(){
+
+        int index = 1;
+
+        for( Task task: list ){
+            task.indexTask( index );
+            index++;
+        }
+
     }
 
     /**

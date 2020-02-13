@@ -9,12 +9,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -27,9 +32,21 @@ import javafx.scene.layout.Region;
  */
 public abstract class DialogBox extends HBox {
     @FXML
+    protected HBox dialogContainer;
+    @FXML
     protected Label dialog;
     @FXML
-    protected ImageView displayPicture;
+    protected Circle displayPicture;
+    @FXML
+    protected StackPane displayPictureContainer;
+
+    protected final CornerRadii dialogRadius = new CornerRadii( 10 );
+    protected final Insets dialogMargin = new Insets(12);
+    protected final Insets dialogPadding = new Insets(24);
+    protected final Insets displayPicturePadding = new Insets( 12, 0, 0, 8 );
+    protected final Color colorBlue = Color.rgb(0, 102, 227 );
+    protected final Color colorTransparent = Color.TRANSPARENT;
+    protected final Color colorWhite = Color.WHITE;
 
     public DialogBox( User user) {
 
@@ -44,18 +61,15 @@ public abstract class DialogBox extends HBox {
 
         dialog.setText( user.getText() );
         dialog.prefHeight( Region.USE_COMPUTED_SIZE );
-//        displayPicture.setImage( user.getImage() );
+        dialog.setBackground( new Background( new BackgroundFill( colorWhite, dialogRadius, dialogMargin ) ) );
+        dialog.setPadding(dialogPadding);
 
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    protected void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+
+
+    protected void flip(){
+        dialogContainer.setAlignment( Pos.TOP_RIGHT );
     }
 
 }

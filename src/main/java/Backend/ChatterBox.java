@@ -65,6 +65,7 @@ public class ChatterBox {
 
             for ( Task task: Tasks ){
                 str.append( task.toString() );
+                str.append( "\n" );
             }
 
             return str.toString();

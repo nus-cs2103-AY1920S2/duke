@@ -8,6 +8,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return index + "." +"[T]" + super.toString();
+        return index + "." +" [T]" + super.toString();
     }
 }

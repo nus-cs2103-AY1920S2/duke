@@ -1,8 +1,5 @@
-1.[D][Y] hmwk (by: 2020-02-02)
-2.[T][Y] fuck
-3.[T][Y] 2
-4.[T][N] cs2103T stuff like duke project
-5.[T][N] me
-6.[T][N] u
-7.[T][N] u
-8.[T][N] shit
+1.[T][Y] fuck
+2.[T][Y] 2
+3.[T][N] me
+4.[T][N] u
+5.[T][N] u

@@ -12,7 +12,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return index + "." + "[E]" + super.toString() + " (at: " + date.getDateString() + ")";
+        return index + "." + " [E]" + super.toString() + " (at: " + date.getDateString() + ")";
     }
 
 }

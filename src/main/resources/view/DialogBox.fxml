@@ -2,9 +2,17 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 
-<fx:root alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-      <Label fx:id="dialog" alignment="TOP_LEFT" prefHeight="159.0" prefWidth="400.0" text="Label" textFill="#000" wrapText="true"/>
+    <HBox fx:id="dialogContainer" prefWidth="400.0">
+          <StackPane fx:id="displayPictureContainer" alignment="TOP_LEFT">
+              <Circle radius="24" fx:id="displayPicture"/>
+          </StackPane>
+          <Label fx:id="dialog" alignment="TOP_LEFT" text="Label" textFill="#000" wrapText="true"/>
+    </HBox>
   </children>
 </fx:root>

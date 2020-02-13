@@ -2,14 +2,14 @@ package Frontend;
 
 import Backend.ChatterBox;
 import Backend.Exceptions.DukeException;
-import Backend.Parsers.TimeOfDay;
 import Backend.Storage;
 import Backend.Switcher;
 import Backend.TaskList;
-import Backend.Parsers.DateParser;
+
 import Frontend.Components.DialogBox.DukeDialogBox;
 import Frontend.Components.DialogBox.UserDialogBox;
 import Frontend.Objects.User;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,13 +19,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.function.Supplier;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.function.Function;
 
 /**
  * This class handles all frontend rendering of components.
@@ -45,7 +38,7 @@ public class Main extends Application {
     private Scene scene;
     private AnchorPane mainLayout;
 
-    private User user = new User("/images/DaUser.png");
+    private User user = new User();
     private User duke = new User("/images/DaDuke.png");
 
     private TaskList taskList;
@@ -55,6 +48,11 @@ public class Main extends Application {
     public void start( Stage stage ) {
         initialiseBackendComponents();
         initialiseComponents();
+
+        stage.setScene(scene);
+        stage.show();
+        stage.setTitle("Duke v1.0");
+
         resizeComponents(stage);
         setHandlers();
         greet();
@@ -196,10 +194,6 @@ public class Main extends Application {
      * @param stage top level JavaFX container
      */
     private void resizeComponents(Stage stage){
-
-        stage.setScene(scene);
-        stage.show();
-        stage.setTitle("Frontend.Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

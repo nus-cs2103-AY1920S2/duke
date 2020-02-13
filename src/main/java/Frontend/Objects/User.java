@@ -14,6 +14,10 @@ public class User {
 
     }
 
+    public User(){
+        this.text = "";
+    }
+
     public void addText( String text ){
         this.text = text;
     }
