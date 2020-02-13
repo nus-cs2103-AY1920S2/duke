@@ -1,3 +1,7 @@
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a object that makes sense of the user input into the program.
  */
@@ -11,7 +15,8 @@ public class Parser {
      * @return a Command object based on the user's input.
      * @throws NullPointerException thrown if the user input is not in the correct format.
      */
-    public Command parse(String input) throws NullPointerException {
+    public Command parse(String input) throws DukeException {
+        assert (!input.isEmpty());
         String[] splitInput = input.split(" ");
         String cmd = splitInput[0];
         Command command = null;
@@ -35,10 +40,19 @@ public class Parser {
             command = new FindCommand(input);
             break;
         case "todo":
-        case "deadline":
         case "event":
             command = new AddTaskCommand(cmd, input);
             break;
+        case "deadline":
+            Command cmdToReturn;
+            if (inputValidDateFormat(input)) {
+                // check if the input has the correct date format
+                cmdToReturn = new AddTaskCommand(cmd, input);
+            } else {
+               // else classify it as another, unrecognized command
+                cmdToReturn = new OtherCommand(input);
+            }
+            command = cmdToReturn;
         default:
             command = new OtherCommand(input);
             break;
@@ -46,4 +60,14 @@ public class Parser {
         return command;
     }
 
+    private boolean inputValidDateFormat(String input) {
+        String[] arr = input.split("/by");
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+            LocalDate deadline = LocalDate.parse(arr[1].trim(), formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
 }

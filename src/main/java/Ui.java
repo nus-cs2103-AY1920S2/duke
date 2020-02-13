@@ -109,6 +109,15 @@ public class Ui {
         return sb.toString();
     }
 
+    public String flagWrongDateFormat() {
+        StringBuilder sb = new StringBuilder();
+        String sorryStr = "Sorry! You have entered an invalid date format!\n";
+        String correctDateFormatStr = "Please enter your date in the yyyy-MM-d format!";
+        sb.append(sorryStr);
+        sb.append(correctDateFormatStr);
+        return sb.toString();
+    }
+
     public String printTaskList(ArrayList<Task> taskList) {
         StringBuilder sb = new StringBuilder();
         if (taskList.size() == 0) {
