@@ -1,5 +1,6 @@
 package duke;
 
+// Wildcard import is used because all classes in the package are imported
 import duke.command.*;
 import duke.task.Task;
 

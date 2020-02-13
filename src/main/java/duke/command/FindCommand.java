@@ -46,9 +46,4 @@ public class FindCommand extends Command {
         }
         return false;
     }
-
-    @Override
-    public void executeGui(Storage storageController, ArrayList<Task> storage) {
-        execute(storageController, storage);
-    }
 }

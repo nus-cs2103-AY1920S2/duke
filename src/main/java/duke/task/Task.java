@@ -1,5 +1,4 @@
 package duke.task;
-
 /**
  * Am abstract representation of a task issued to the Duke program.
  */

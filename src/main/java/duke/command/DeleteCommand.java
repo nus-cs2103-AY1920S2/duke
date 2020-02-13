@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     /**
      * Constructs the DeleteCommand object with specified index for deletion i.
      *
-     * @param i a nonnegative, integer index for a Task object in the currently processed ArrayList.
+     * @param i a non-negative, integer index for a Task object in the currently processed ArrayList.
      */
     public DeleteCommand(int i) {
         this.index = i;
@@ -41,10 +41,5 @@ public class DeleteCommand extends Command {
             Controller.raiseException(e);
         }
         return false;
-    }
-
-    @Override
-    public void executeGui(Storage storageController, ArrayList<Task> storage) {
-        execute(storageController, storage);
     }
 }

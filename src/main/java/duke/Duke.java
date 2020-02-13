@@ -41,6 +41,9 @@ public class Duke extends Application {
         this.controller = new Controller(storageController);
     }
 
+    /**
+     * Constructs a Duke instance with file path set to src/data/data.csv. This is primarily for the sake of GUI.
+     */
     public Duke() {
         this("src/data/data.csv");
         try {
@@ -58,6 +61,9 @@ public class Duke extends Application {
         bot.run();
     }
 
+    /**
+     * A driver method for the program Duke.
+     */
     private void run() {
         Scanner scan = new Scanner(System.in);
         Ui.greet();
@@ -79,6 +85,11 @@ public class Duke extends Application {
 
     }
 
+    /**
+     * Starts rendering process by JavaFX
+     *
+     * @param stage a Stage object for JavaFX
+     */
     @Override
     public void start(Stage stage) {
         ScrollPane scrollPane = new ScrollPane();
@@ -147,6 +158,12 @@ public class Duke extends Application {
 
     }
 
+    /**
+     * Handles user input
+     *
+     * @param userInput       a TextField object containing a String user input.
+     * @param dialogContainer a VBox object that will contain the dialogue boxes for Duke and the user characters.
+     */
     private void handleUserInput(TextField userInput, VBox dialogContainer) {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -166,6 +183,12 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Returns a response for a text user input in the
+     *
+     * @param text
+     * @return
+     */
     private String getResponse(String text) {
         try {
             Optional<Command> parsed = Parser.parse(text);
@@ -176,6 +199,4 @@ public class Duke extends Application {
         }
         return Ui.getContent();
     }
-
-
 }

@@ -12,10 +12,8 @@ import java.util.ArrayList;
  */
 public class AddCommand extends Command {
     private Task task;
-
     /**
      * Constructs an AddCommand object with a specified Task object.
-     *
      * @param task a Task object to be added by Duke.
      */
     public AddCommand(Task task) {
@@ -25,7 +23,6 @@ public class AddCommand extends Command {
     /**
      * Executes this AddCommand and writes the specified task represented by the Task object to the file that is
      * currently specified by the file path in the Duke instance.
-     *
      * @param storageController a Storage object
      * @param storage           an ArrayList collection of Task objects for processing in-program.
      * @return false
@@ -41,10 +38,5 @@ public class AddCommand extends Command {
             Controller.raiseException(e);
         }
         return false;
-    }
-
-    @Override
-    public void executeGui(Storage storageController, ArrayList<Task> storage) {
-        execute(storageController, storage);
     }
 }

@@ -30,6 +30,10 @@ class DeadlineTask extends Task {
         if (lastBy == -1) {
             throw new Exception("Keyword \"by\" missing");
         } else {
+            /*
+                The second try clause handles when a task is read from data.csv, wherein its date format is
+                MMM d yyyy hh:mma
+             */
             try {
                 this.time = LocalDateTime.parse(this.description.substring(lastBy + 4),
                         DateTimeFormatter.ofPattern("yyyy-LL-dd HHmm"));

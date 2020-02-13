@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 
-
 /**
  * The Controller class that facilitates execution of the Duke program
  */
@@ -34,6 +33,11 @@ public class Controller {
         return hasReachedExit;
     }
 
+    /**
+     * Gets the status of the current run of Duke.
+     *
+     * @return true iff the latest successful command is an exit command, false otherwise.
+     */
     public boolean getStatus() {
         return hasReachedExit;
     }

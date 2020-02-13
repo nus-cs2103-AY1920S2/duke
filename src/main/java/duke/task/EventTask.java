@@ -31,6 +31,10 @@ class EventTask extends Task {
         if (lastAt == -1) {
             throw new Exception("Keyword \"at\" missing");
         } else {
+            /*
+                The second try clause handles when a task is read from data.csv, wherein its date format is
+                MMM d yyyy hh:mma
+             */
             try {
                 this.time = LocalDateTime.parse(this.description.substring(lastAt + 4),
                         DateTimeFormatter.ofPattern("yyyy-LL-dd HHmm"));

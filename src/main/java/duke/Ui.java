@@ -7,6 +7,11 @@ public class Ui {
         System.out.println(content);
     }
 
+    /**
+     * Returns the content currently handled by the Ui component.
+     *
+     * @return a String content.
+     */
     public static String getContent() {
         return content;
     }
@@ -99,7 +104,11 @@ public class Ui {
         System.out.println(content);
     }
 
-
+    /**
+     * Prints the list of tasks currently stored.
+     *
+     * @param lst a string made from concatenation of all tasks currently stored in data.csv.
+     */
     public static void printList(String lst) {
         content = lst;
         System.out.println(lst);
