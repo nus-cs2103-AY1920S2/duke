@@ -50,11 +50,11 @@ you are keep reminded.
 ### Archive your tasks
 Duke can archive your tasks and retrieve them back upon your command.
 
-###Take random notes
+### Take random notes
 Duke provides a service for you to put miscellaneous notes, such as the size of your girlfriend's clothes,
 the movies that your mother like, etc. Duke is perfect for you who have a goldfish memory :p.
 
-###Close your Duke without clicking
+### Close your Duke without clicking
 Duke can bid farewell to you, simply by typing `bye` in your text box. As simple as that.
 
 ## Usage
