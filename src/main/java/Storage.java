@@ -29,7 +29,6 @@ public class Storage {
         }
 
         this.file = new File(dir + "/duke.txt");
-        System.out.println(rootDir);
     }
 
     /**
