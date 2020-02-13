@@ -4,27 +4,33 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.exceptions.IncorrectArgumentException;
 import duke.exceptions.InvalidCommandException;
+import duke.task.Task;
 
-/** 
- * Class which deals with making sense of the user command. 
- * Deconstructs a line into a String[] of arguments, with the first item being the cmd and the rest the arg.
- * Afterwards, performs checks for the validity of cmd and arg and throws exceptions if not valid.
- * If no exceptions are thrown, it calls the respective classes to execute the command. 
+/**
+ * Class which deals with making sense of the user command. Deconstructs a line
+ * into a String[] of arguments, with the first item being the cmd and the rest
+ * the arg. Afterwards, performs checks for the validity of cmd and arg and
+ * throws exceptions if not valid. If no exceptions are thrown, it calls the
+ * respective classes to execute the command.
  */
 class Parser {
     Storage storage;
     Ui ui;
     TaskList tasks;
-    
+
     /**
-     * Public constructor which creates a Parser. As it passes valid commands to be executed by the respective
-     * classes, a reference to the corresponding classes is passed in during construction.
+     * Public constructor which creates a Parser. As it passes valid commands to be
+     * executed by the respective classes, a reference to the corresponding classes
+     * is passed in during construction.
+     * 
      * @param storage a reference to the underlying Storage object.
-     * @param ui a reference to the underlying Ui object.
-     * @param tasks a reference to the TaskList that the current application uses to hold Task entities.
+     * @param ui      a reference to the underlying Ui object.
+     * @param tasks   a reference to the TaskList that the current application uses
+     *                to hold Task entities.
      */
     public Parser(Storage storage, Ui ui, TaskList tasks) {
         this.storage = storage;
@@ -33,13 +39,17 @@ class Parser {
     }
 
     /**
-     * Parses the entire comment line by verifying the command and arguments, and then passes on the command 
-     * to the corresponding methods.
+     * Parses the entire comment line by verifying the command and arguments, and
+     * then passes on the command to the corresponding methods.
+     * 
      * @param line the entire command line retrieved from Scanner.nextLine()
      * @return A string describing duke's response.
-     * @throws IncorrectArgumentException when the wrong number or type of arguments are supplied to the command.
-     * @throws InvalidCommandException when a command is entered that does not exist.
-     * @throws IOException when the Storage object fails in saving the TaskList to file.
+     * @throws IncorrectArgumentException when the wrong number or type of arguments
+     *                                    are supplied to the command.
+     * @throws InvalidCommandException    when a command is entered that does not
+     *                                    exist.
+     * @throws IOException                when the Storage object fails in saving
+     *                                    the TaskList to file.
      */
     public String[] parse(String line) throws IncorrectArgumentException, InvalidCommandException, IOException {
         String[] cmd = line.split(" ", 2);
@@ -47,9 +57,6 @@ class Parser {
         assert !line.equals("");
         try {
             switch (cmd[0].toLowerCase()) {
-            case "bye":
-                response = new String[]{"bye"};
-                break;
             case "list":
                 response = parseList();
                 break;
@@ -67,6 +74,10 @@ class Parser {
                 break;
             case "delete":
                 response = parseDelete(Integer.parseInt(cmd[1]));
+                break;
+            case "clear":
+                response = new String[] { "All Tasks Cleared!" };
+                tasks.load(new ArrayList<Task>());
                 break;
             case "find":
                 response = parseFind(cmd[1]);

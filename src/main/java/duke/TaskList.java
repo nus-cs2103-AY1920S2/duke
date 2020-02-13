@@ -20,12 +20,9 @@ class TaskList {
      * @return true if the tasks were successfully loaded and false otherwise.
      */
     public boolean load(ArrayList<Task> tasks) {
-        if (lTasks.isEmpty()) {
-            lTasks.addAll(tasks);
-            return true;
-        } else {
-            return false;
-        }
+        lTasks.clear();
+        lTasks.addAll(tasks);
+        return true;
     }
 
     /**

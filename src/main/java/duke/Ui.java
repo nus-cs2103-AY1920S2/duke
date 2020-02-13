@@ -46,7 +46,7 @@ public class Ui {
 	public String respond(String[] ss) {
         String response = "";
         for (String s : ss) {
-            System.out.println(s);
+            // System.out.println(s);
             response = response.concat(s + "\n");
         }
         return response;
