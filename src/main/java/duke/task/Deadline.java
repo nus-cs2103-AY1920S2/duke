@@ -50,8 +50,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the TaskType of the Object.
-     * @return type of the object.
+     * Gets the TaskType of the Task.
+     * @return DEADLINE type.
      */
     public TaskType getTaskType() {
         return type;

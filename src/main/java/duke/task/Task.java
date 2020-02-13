@@ -64,6 +64,14 @@ public class Task {
     }
 
     /**
+     * Get the Task's type.
+     * @return UNKNOWN type for a generic Task.
+     */
+    public TaskType getTaskType() {
+        return TaskType.UNKNOWN;
+    }
+
+    /**
      * Stringify the object.
      * @return a String representing the Object.
      */

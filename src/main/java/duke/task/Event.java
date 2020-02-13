@@ -50,6 +50,10 @@ public class Event extends Task {
         return String.format("E:%s:%d:%s\n", super.name, (super.isDone ? 1 : 0), atTime);
     }
 
+    /**
+     * Get the TaskType of the Task.
+     * @return EVENT type.
+     */
     public TaskType getTaskType() {
         return type;
     }

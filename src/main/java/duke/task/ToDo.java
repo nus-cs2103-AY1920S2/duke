@@ -21,6 +21,7 @@ public class ToDo extends Task {
      */
     public ToDo(String name, boolean isDone) {
         super(name, isDone);
+        type = TaskType.TODO;
     }
 
     /**
@@ -32,8 +33,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Gets the TaskType of the Object.
-     * @return type of the object.
+     * Gets the TaskType of the Task.
+     * @return TODO type.
      */
     public TaskType getTaskType() {
         return type;
@@ -45,7 +46,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s",
+        return String.format("[T] [%s] %s",
                 (super.isDone ? doneSymbol : notDoneYetSymbol), name);
     }
 }

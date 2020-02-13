@@ -47,6 +47,11 @@ public class TaskList {
      * @return Ui String of found tasks.
      */
     public static String findItem(String str, ArrayList<Task> storedItems) {
+        assert str.startsWith("find");
+        if (str.contains("/")) {
+            return findAdvancedByType(str, storedItems);
+        }
+
         ArrayList<Task> foundList = new ArrayList<>();
 
         Scanner sc = new Scanner(str);
@@ -59,9 +64,58 @@ public class TaskList {
         int len = storedItems.size();
         for (int i = 0; i < len; i++) {
             Task cur = storedItems.get(i);
-            if (cur.getName().contains(criteria))
+            if (cur.getName().contains(criteria)) {
                 foundList.add(cur);
+            }
         }
+
+        return Ui.printFoundList(foundList);
+    }
+
+    /**
+     * Implementing BetterSearch feature.
+     * Can customize search to by certain Task type,
+     * @param str
+     * @param storedItems
+     * @return Ui String of found tasks.
+     */
+    private static String findAdvancedByType(String str, ArrayList<Task> storedItems) {
+        ArrayList<Task> foundList = new ArrayList<>();
+        System.out.println("doing advanced search: " + str);
+        String[] parts = str.split("/");
+        assert parts[0].equals("find ");
+        Scanner sc = new Scanner(parts[1]);
+        String option = sc.next();
+        String criteria = sc.nextLine().trim();
+        sc.close();
+        System.out.println(criteria);
+        Task.TaskType toFindType = Task.TaskType.UNKNOWN;
+        switch (option) {
+            case "todo":
+                toFindType = Task.TaskType.TODO;
+                break;
+            case "deadline":
+                toFindType = Task.TaskType.DEADLINE;
+                break;
+            case "event":
+                toFindType = Task.TaskType.EVENT;
+                break;
+            default:
+                break;
+        }
+        System.out.println("toFindType = " + toFindType);
+        assert toFindType != Task.TaskType.UNKNOWN;
+
+        int len = storedItems.size();
+        for (int i = 0; i < len; i++) {
+            Task cur = storedItems.get(i);
+            System.out.println("cur = " + cur);
+            System.out.println(cur.getTaskType());
+            if (cur.getTaskType() == toFindType && cur.getName().contains(criteria)) {
+                foundList.add(cur);
+            }
+        }
+
 
         return Ui.printFoundList(foundList);
     }
