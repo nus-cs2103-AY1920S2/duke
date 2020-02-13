@@ -119,6 +119,10 @@ class TaskList {
         };
     }
 
+    public int numberOfTasks() {
+        return lTasks.size();
+    }
+
 	public String[] find(String query) {
         ArrayList<Task> search = new ArrayList<Task>(lTasks);
         if (search.removeIf((Task t) -> t.toString().contains(query))) {

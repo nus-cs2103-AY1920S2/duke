@@ -49,6 +49,7 @@ class Parser {
             switch (cmd[0].toLowerCase()) {
             case "bye":
                 response = new String[]{"bye"};
+                break;
             case "list":
                 response = parseList();
                 break;
@@ -77,7 +78,6 @@ class Parser {
             e.printStackTrace();
             throw new IncorrectArgumentException("missing arguments!");
         }
-        storage.saveToFile(tasks);
         return response;
     }
 
@@ -154,7 +154,11 @@ class Parser {
     }
 
     private String[] parseDelete(int i) {
-        return tasks.delete(i);
+        if (tasks.numberOfTasks() + 1 > i) {
+            return tasks.delete(i);
+        } else {
+            return new String[]{"No Such Task Found!"};
+        }
     }
 
     private String[] parseFind(String query) {

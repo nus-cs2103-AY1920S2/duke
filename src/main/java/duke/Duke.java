@@ -29,6 +29,7 @@ public class Duke {
      * Initializes Duke and loads the TaskList from the files in the save directory.
      */
     public Duke() {
+        ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser(storage, ui, tasks);
         try {
@@ -45,19 +46,23 @@ public class Duke {
 
     /** Starts Duke and begins reading commands from input. */
     private void run() {       
-        ui = new Ui();
         ui.out("Hello! I'm Duke", "What can I do for you?");
-        boolean isShutdown = false;
         assert (ui != null);
-        while (!isShutdown) {
+        while (true) {
             String input = ui.getLine();
-            isShutdown = input.equals("bye");
+            if(input.equals("bye")) {
+                break;
+            }
             try {
-                ui.out(parser.parse(input));
-                storage.saveToFile(tasks);
+                if (input.equals("undo")) {
+                    storage.loadFromFile(tasks);
+                } else {
+                    storage.saveToFile(tasks);
+                    ui.out(parser.parse(input));
+                }
             } catch (InvalidCommandException | IncorrectArgumentException e) {
                 ui.out(e.getMessage());
-            } catch (IOException | NumberFormatException e) {
+            } catch (IOException | NumberFormatException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
@@ -66,14 +71,20 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        String response; 
+        String response = ""; 
         try {
-            response = ui.respond(parser.parse(input));
-            storage.saveToFile(tasks);
+            if (input.equals("undo")) {
+                storage.loadFromFile(tasks);
+                response = "Last Command Undone!";
+            } else {
+                storage.saveToFile(tasks);
+                System.out.println("saved before " + input);
+                response = ui.respond(parser.parse(input));
+            }
         } catch (InvalidCommandException | IncorrectArgumentException e) {
             response = e.getMessage();
             System.out.println(e.getMessage());
-        } catch (IOException | NumberFormatException e) {
+        } catch (IOException | NumberFormatException | ClassNotFoundException e) {
             response = e.getMessage();
             e.printStackTrace();
         }
