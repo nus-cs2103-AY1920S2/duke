@@ -27,8 +27,30 @@ public class Storage {
      */
     public Storage(String filePath, List<Task> storingList) throws IOException {
         // deals with loading tasks from the file and saving tasks in the dukeStorage.txt file.
+
+        //OS independent
+//        String home = System.getProperty("user.home");
+//
+//        // inserts correct file path separator on *nix and Windows
+//        // works on *nix
+//        // works on Windows
+//        java.nio.file.Path path = java.nio.file.Paths.get(home, "my", "app", "dir")
+//        boolean directoryExists = java.nio.file.Files.exists(path);
+        //
+
+
         this.filePath = filePath;
         File file = new File(filePath);
+        File dataFile = new File("./data");
+
+        //File file = new File("c:\\data\\input-file.txt");
+
+        boolean fileExists = dataFile.exists();
+
+        if (!fileExists) {
+            boolean dirCreated = dataFile.mkdir();
+        }
+
         file.createNewFile();
         this.storingList = storingList;
     }
