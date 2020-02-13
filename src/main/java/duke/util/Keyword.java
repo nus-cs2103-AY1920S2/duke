@@ -32,11 +32,12 @@ public enum Keyword {
      * <li>ARCHIVE_LIST</li>
      * <li>ARCHIVE_ADD</li>
      * <li>ARCHIVE_DELETE</li>
+     * <li>UNARCHIVE</li>
      * <li>NOTE_LIST</li>
      * <li>NOTE_ADD</li>
      * <li>NOTE_DELETE</li>
      */
 
     LIST, DONE, TODO, DEADLINE, EVENT, DELETE, FIND, BYE, REMINDER, ARCHIVE_LIST, ARCHIVE_ADD, ARCHIVE_DELETE,
-    NOTE_LIST, NOTE_ADD, NOTE_DELETE;
+    UNARCHIVE, NOTE_LIST, NOTE_ADD, NOTE_DELETE;
 }

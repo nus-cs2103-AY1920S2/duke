@@ -14,6 +14,7 @@ import duke.command.ReminderCommand;
 import duke.command.NoteAddCommand;
 import duke.command.NoteDeleteCommand;
 import duke.command.NoteListCommand;
+import duke.command.UnarchiveCommand;
 import duke.exception.DukeInvalidArgumentFormatException;
 import duke.exception.DukeInvalidDateFormatException;
 import duke.exception.DukeUnknownKeywordException;
@@ -54,6 +55,7 @@ public class Parser {
             put("archive-list", Keyword.ARCHIVE_LIST);
             put("archive-add", Keyword.ARCHIVE_ADD);
             put("archive-delete", Keyword.ARCHIVE_DELETE);
+            put("unarchive", Keyword.UNARCHIVE);
             put("note-list", Keyword.NOTE_LIST);
             put("note-add", Keyword.NOTE_ADD);
             put("note-delete", Keyword.NOTE_DELETE);
@@ -156,6 +158,9 @@ public class Parser {
             break;
         case ARCHIVE_DELETE:
             command = checkValidArchiveDeleteArgument(details, archiveList);
+            break;
+        case UNARCHIVE:
+            command = checkValidUnarchiveArgument(details, archiveList);
             break;
         case NOTE_LIST:
             command = checkValidNoteListArgument(details);
@@ -416,6 +421,29 @@ public class Parser {
             throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
         }
         return new ArchiveDeleteCommand(index);
+    }
+
+    /**
+     * Verifies that the command entered by the client is a valid unarchive command.
+     * @param details The details of the command.
+     * @param taskList The list of the archives.
+     * @return The UnarchiveCommand instance of the corresponding input.
+     */
+
+    private UnarchiveCommand checkValidUnarchiveArgument(String details, IList<Task> taskList) throws
+            DukeInvalidArgumentFormatException {
+        int index = -1;
+        try {
+            index = Integer.parseInt(details);
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! "
+                    + "The argument for 'archive-delete' command requires a number.");
+        }
+
+        if (index <= 0 || index > taskList.size()) {
+            throw new DukeInvalidArgumentFormatException("☹ OOPS!!! The index given is out of bound.");
+        }
+        return new UnarchiveCommand(index);
     }
 
     /**

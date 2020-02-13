@@ -52,7 +52,7 @@ public class UnarchiveCommand extends Command {
         Task task = archiveList.getTask(this.index);
         archiveList.deleteArchivedTask(this.index, storage);
         taskList.addTask(task, storage);
-        return "Done! I have successfully unarchived: " + task;
+        return "Done! I have successfully unarchived:\n" + task;
     }
 
     /**
