@@ -6,10 +6,12 @@
 public class Task{
     protected String description;
     protected boolean isDone;
+    protected String priorityLevel;
 
     public Task(String description){
         this.description = description;
         this.isDone = false;
+        this.priorityLevel = "Not-urgent";
     }
      /**
      * This method is to validate the status of a task
@@ -20,7 +22,22 @@ public class Task{
     }
 
     /**
-     * This method is to return the description parameter as a string
+     * Getter method for priorityLevel
+     * @return priorityLevel
+     */
+    public String getPriority(){
+        return this.priorityLevel;
+    }
+
+    /**
+     * Setter method for priorityLevel to High
+     */
+    public void setPriorityHigh(){
+        priorityLevel = "Urgent";
+    }
+
+    /**
+     * Getter method is to return the description parameter as a string
      * @return description
      */
     public String getDescription(){
@@ -28,7 +45,7 @@ public class Task{
     }
 
     /**
-     * This method is flag isDone parameter to true (done)
+     * Setter method is flag isDone parameter to true (done)
      * @return nothing
      */
     public void markDone(){

@@ -97,12 +97,7 @@ public class Duke{
                 System.out.println("Something went wrong: " + e.getMessage());
             }
         }
-
     }
-
-
-
-
     public static void main(String[] args) {
 
         /**
@@ -151,8 +146,6 @@ public class Duke{
                                 }
                                 break;
                 }
-
-
             }
         }
         catch (FileNotFoundException e){
@@ -160,17 +153,15 @@ public class Duke{
         }
 
         String filePath = "C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt";
-
-
         printGreetings();
         String input = sc.nextLine();
         int count = 1;
-        Iterator itr = list.iterator();
-
-
 
         while (!input.equals("bye")) {
-
+            /**
+             * Adding Assertion when user enter a space or nothing
+             */
+            assert input.equals(" ") : "Please enter something!";
 
             /**
              * Adding item to list
@@ -178,8 +169,8 @@ public class Duke{
             if(!input.equals("list") && !input.contains("done")){
 
                 String findPrint = "Here are the matching tasks in your list: \n";
-                /**
-                 * Find task from the list
+
+                 /* Find task from the list
                  */
                 if(input.contains("find")){
                     int numOfWords = 0;
@@ -214,7 +205,6 @@ public class Duke{
                         findPrint = "Sorry there is no match for it. ):";
                     }
                     System.out.println(findPrint);
-
                 }
 
                 /**
@@ -243,12 +233,11 @@ public class Duke{
                         catch(IOException e){
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
-
                     }
+
                     /**
                      * Eror handling when to-do doesnt have descriptions
                      */
-
                     else
                         System.out.println("OOPS!!! The description of todo cannot be empty.");
                 }
@@ -318,17 +307,16 @@ public class Duke{
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
                     }
-
                     /**
                      * Error handling when there is no description input for Event task
                      */
                     else
                         System.out.println("OOPS!!! The description of deadline cannot be empty.");
                 }
-
-
             }
-            //Error handling when user type words that are not the intended instructions
+            /*
+             *Error handling when user type words that are not the intended instructions
+             */
             if(!input.contains("done") && !input.contains("list") && !input.contains("todo") &&  !input.contains("deadline")
                     && !input.contains("event") && !input.contains("delete") && !input.contains("find")){
                 System.out.println("OPPS!!! I'm sorry, but I don't know what that means :-( ");
@@ -363,11 +351,10 @@ public class Duke{
                 }
             }
             if(input.contains("delete")){
+
                 System.out.println("Noted. I've removed this task: ");
                 int itemPos = Integer.parseInt(input.replaceAll("[^0-9]" , ""));
                 itemPos-- ;
-
-
                 System.out.println("[" + type.get(itemPos) + "][" + list.get(itemPos).getStatus() + "] " +
                         list.get(itemPos).getDescription() + list.get(itemPos).getWhen());
 
@@ -398,9 +385,9 @@ public class Duke{
                 }
             }
             if(input.equals("list")){
+
                 count = 1;
                 System.out.println("____________________________________________________________\n");
-
 
                 for(int i = 0 ; i < list.size();i++){
                     String icon = list.get(i).getStatus();
@@ -415,18 +402,12 @@ public class Duke{
                     System.out.println(count + ".[" + type.get(i) + "][" + icon + "] "
                             + list.get(i).getDescription() + addInfo);
                     count++;
-
                 }
-
                 System.out.println("____________________________________________________________\n");
-
-
             }
             input = sc.nextLine();
-
         }
         System.out.println("____________________________________________________________\n" + "Bye. Hope to see you again soon!\n"
                 + "____________________________________________________________\n");
-
     }
 }
