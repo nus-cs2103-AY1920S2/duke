@@ -53,6 +53,10 @@ public class Parser {
                 cmdToReturn = new OtherCommand(input);
             }
             command = cmdToReturn;
+            break;
+        case "trivia":
+            command = new TriviaCommand(input);
+            break;
         default:
             // If the user input is not valid, it will be classified as
             // other command, which will be flagged as an error

@@ -65,6 +65,9 @@ public class Duke {
         }
     }
 
+    public Ui getUi() {
+        return this.ui;
+    }
     public static void main(String[] args) {
         new Duke("list.txt").run();
     }
