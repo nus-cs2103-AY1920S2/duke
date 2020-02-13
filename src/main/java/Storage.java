@@ -12,6 +12,10 @@ import java.util.Scanner;
 public class Storage {
 
     protected String filepath;
+    public static final int TASK_COMMAND = 0;
+    public static final int DONE = 1;
+    public static final int TASK_DESCRIPTION = 2;
+    public static final int TIME = 3;
 
     /**
      * Constructor for storage.
@@ -27,7 +31,6 @@ public class Storage {
      */
     public ArrayList<Task> readFile() {
         ArrayList<Task> list = new ArrayList<>();
-
         try {
             File f = new File(filepath);
             Scanner s = new Scanner(f);
@@ -35,20 +38,20 @@ public class Storage {
                 String word = s.nextLine();
                 String[] parsed = TextParser.myThirdParser(word);
                 Task currentTask = null;
-                switch (parsed[0]) {
+                switch (parsed[TASK_COMMAND]) {
                 case "T":
-                    currentTask = new Todo(parsed[2]);
+                    currentTask = new Todo(parsed[TASK_DESCRIPTION]);
                     break;
                 case "D":
-                    currentTask = new Deadline(parsed[2], LocalDate.parse(parsed[3]));
+                    currentTask = new Deadline(parsed[TASK_DESCRIPTION], LocalDate.parse(parsed[TIME]));
                     break;
                 case "E":
-                    currentTask = new Event(parsed[2], LocalDate.parse(parsed[3]));
+                    currentTask = new Event(parsed[TASK_DESCRIPTION], LocalDate.parse(parsed[TIME]));
                     break;
                 default:
                 }
 
-                if (parsed[1].equals("1")) { // 1 means done
+                if (parsed[DONE].equals("1")) { // 1 means done
                     currentTask.markAsDone();
                 }
                 list.add(currentTask);
