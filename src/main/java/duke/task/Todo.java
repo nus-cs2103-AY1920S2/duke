@@ -1,6 +1,6 @@
 package duke.task;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Todo object extending from ExecutableTask.
@@ -50,7 +50,7 @@ public class Todo extends ExecutableTask {
      * @return null as todos do not have time
      */
     @Override
-    public Date getTaskTime() {
+    public LocalDate getTaskTime() {
         return null;
 
     }
@@ -61,6 +61,11 @@ public class Todo extends ExecutableTask {
     @Override
     public void markAsDone() {
         this.done = true;
+    }
+
+    @Override
+    public void setTaskTime(LocalDate taskTime) {
+
     }
 
     @Override

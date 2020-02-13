@@ -2,7 +2,7 @@ package duke.task;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EventsTest {
 
-    Task task = new Event("go to school", new Date(2019, 2, 4));
+    Task task = new Event("go to school", LocalDate.of(2019, 2, 4));
 
     @Test
     public void markDoneTest() {
@@ -26,7 +26,7 @@ public class EventsTest {
 
     @Test
     public void getTaskTimeTest() {
-        assertEquals(task.getTaskTime(), new Date(2019, 2, 4));
+        assertEquals(task.getTaskTime(), LocalDate.of(2019, 2, 4));
     }
 
 }
