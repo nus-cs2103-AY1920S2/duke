@@ -1,6 +1,5 @@
 package duke.constants;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,6 +15,9 @@ public class Constants {
     public static final String DATE_FORMAT_1 = "yyyy-MM-dd";
     public static final String DATE_FORMAT_2 = "MMM d yyyy";
 
-    public static final List<String> COMMAND_LIST = Arrays.asList(new String[]{"deadline", "todo", "find", "event",
-            "done", "delete", "bye", "list", "help"});
+    public static final List<String> COMMAND_LIST = Arrays.asList(
+            new String[]{
+                "deadline", "todo", "find", "event", "done", "delete", "bye", "list", "help", "snooze"
+            });
 }
+

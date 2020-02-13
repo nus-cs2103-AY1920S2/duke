@@ -2,7 +2,7 @@ package duke.task;
 
 import duke.utils.Parser;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Deadline object extending from ExecutableTask.
@@ -11,14 +11,14 @@ public class Deadline extends ExecutableTask {
 
     private boolean done = false;
     private String name;
-    private Date time;
+    private LocalDate time;
 
     /**
      * Deadline object constructor.
      * @param name task name
      * @param time task time
      */
-    public Deadline(String name, Date time) {
+    public Deadline(String name, LocalDate time) {
         this.name = name;
         this.time = time;
     }
@@ -54,7 +54,7 @@ public class Deadline extends ExecutableTask {
      * gets task time.
      * @return task time
      */
-    public Date getTaskTime() {
+    public LocalDate getTaskTime() {
         return time;
     }
 
@@ -64,6 +64,11 @@ public class Deadline extends ExecutableTask {
     @Override
     public void markAsDone() {
         this.done = true;
+    }
+
+    @Override
+    public void setTaskTime(LocalDate taskTime) {
+        this.time = taskTime;
     }
 
     @Override

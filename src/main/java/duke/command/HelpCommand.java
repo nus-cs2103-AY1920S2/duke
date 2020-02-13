@@ -48,9 +48,14 @@ public class HelpCommand implements Command {
                 case "find":
                     uiHandler.setResponse(HelpConstants.FIND_HELP);
                     return;
+                case "snooze":
+                    uiHandler.setResponse(HelpConstants.SNOOZE_HELP);
+                    return;
                 case "list":
                     uiHandler.setResponse(HelpConstants.LIST_HELP);
                     return;
+                default:
+                    break;
                 }
             }
         }
@@ -58,7 +63,8 @@ public class HelpCommand implements Command {
         String response = "1." + HelpConstants.DEADLINE_HELP + "\n" + "2." + HelpConstants.EVENT_HELP + "\n"
                 + "3." + HelpConstants.TODO_HELP + "\n" + "4." + HelpConstants.DELETE_HELP + "\n"
                 + "5." + HelpConstants.DONE_HELP + "\n" + "6." + HelpConstants.EXIT_HELP + "\n"
-                + "7." + HelpConstants.FIND_HELP + "\n" + "8." + HelpConstants.LIST_HELP + "\n";
+                + "7." + HelpConstants.FIND_HELP + "\n" + "8." + HelpConstants.SNOOZE_HELP + "\n"
+                + "9." + HelpConstants.LIST_HELP + "\n";
         uiHandler.setResponse(response);
     }
 }
