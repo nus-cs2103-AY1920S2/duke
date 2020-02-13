@@ -120,7 +120,7 @@ public class Storage {
                 }
             });
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! Data is corrupted.");
+            throw new DukeException("OOPS!!! Data is corrupted.");
         }
         return tasks;
     }
@@ -168,7 +168,7 @@ public class Storage {
             }
             tasks = convertStringToList(tasksString.substring(1));
         } catch (Exception e) {
-            throw new DukeException("☹ OOPS!!! Failed to load list!");
+            throw new DukeException("OOPS!!! Failed to load list!");
         }
         return tasks;
     }

@@ -51,11 +51,15 @@ public class Event extends Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Event event = (Event) o;
-        return Objects.equals(fromTimeToTime, event.fromTimeToTime) &&
-                Objects.equals(date, event.date);
+        return Objects.equals(fromTimeToTime, event.fromTimeToTime)
+                && Objects.equals(date, event.date);
     }
 
     @Override

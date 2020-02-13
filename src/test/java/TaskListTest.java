@@ -1,3 +1,4 @@
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -36,7 +38,11 @@ public class TaskListTest {
     @Test
     public void getSize_getsSizeOfList() {
         assertEquals(taskList.size(), 0, "Size of empty list should be 0.");
-        taskList.add(new Todo("123"));
+        try {
+            taskList.add(new Todo("123"));
+        } catch (DukeException e) {
+            assertFalse(true);
+        }
         assertEquals(taskList.size(), 1, "Size of list should be 1.");
     }
 
@@ -48,14 +54,22 @@ public class TaskListTest {
 
     @Test
     public void delete_hasTasks_deletesTask() {
-        taskList.add(new Todo("123"));
+        try {
+            taskList.add(new Todo("123"));
+        } catch (DukeException e) {
+            assertFalse(true);
+        }
         taskList.delete(0);
         assertEquals(taskList.size(), 0, "Deleting from a non-empty list should delete the task.");
     }
 
     @Test
     public void add_emptyList_addsTask() {
-        taskList.add(new Todo("123"));
+        try {
+            taskList.add(new Todo("123"));
+        } catch (DukeException e) {
+            assertFalse(true);
+        }
         assertEquals(taskList.size(), 1, "Adding to empty list should add the task.");
     }
 }

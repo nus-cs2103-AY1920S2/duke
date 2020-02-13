@@ -68,6 +68,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Check whether task list has a duplicate of the given task.
+     * @param task the given task
+     * @return true if there is no duplicate, else false
+     */
     public boolean hasNoDuplicates(Task task) {
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).equals(task)) {

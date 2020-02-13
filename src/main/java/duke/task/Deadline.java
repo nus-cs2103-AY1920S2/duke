@@ -52,11 +52,15 @@ public class Deadline extends Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Deadline deadline = (Deadline) o;
-        return Objects.equals(date, deadline.date) &&
-                Objects.equals(time, deadline.time);
+        return Objects.equals(date, deadline.date)
+                && Objects.equals(time, deadline.time);
     }
 
     @Override

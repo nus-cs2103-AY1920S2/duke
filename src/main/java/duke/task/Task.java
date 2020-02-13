@@ -60,11 +60,15 @@ public class Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Task task = (Task) o;
-        return isDone &&
-                Objects.equals(description, task.description);
+        return isDone
+                && Objects.equals(description, task.description);
     }
 
     @Override
