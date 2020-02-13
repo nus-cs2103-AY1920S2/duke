@@ -6,8 +6,8 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +20,11 @@ public class Parser {
      * Parse string into date object.
      * @param text date in string format
      * @return date object from string
-     * @throws ParseException parsing exception
      */
-    public static Date stringToDate(String text) throws ParseException {
-        Date date;
-        SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT_1);
-        date = formatter.parse(text);
+    public static LocalDate stringToDate(String text) {
+        LocalDate date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.DATE_FORMAT_1);
+        date = LocalDate.parse(text, formatter);
         return date;
     }
 
@@ -53,9 +52,9 @@ public class Parser {
      * @param date date in date format
      * @return string
      */
-    public static String dateToString(Date date) {
-        SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT_2);
-        String text = formatter.format(date);
+    public static String dateToString(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.DATE_FORMAT_2);
+        String text = date.format(formatter);
         return text;
     }
 
@@ -66,7 +65,7 @@ public class Parser {
      */
     public static String tasksToStorage(List<Task> tasks) {
         String data = "";
-        SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT_1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.DATE_FORMAT_1);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String doneString = task.isDone() ? "1" : "0";

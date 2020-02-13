@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -29,10 +30,12 @@ public interface Task {
      * Gets task time.
      * @return task time
      */
-    public Date getTaskTime();
+    public LocalDate getTaskTime();
 
     /**
      * Marks task as done.
      */
     public void markAsDone();
+
+    public void setTaskTime(LocalDate taskTime);
 }

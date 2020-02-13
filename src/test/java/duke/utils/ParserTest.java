@@ -3,6 +3,7 @@ package duke.utils;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,12 +14,8 @@ public class ParserTest {
 
     @Test
     public void validStringToDateTest() {
-        try {
-            Date date = Parser.stringToDate("2019-02-12");
-            assertEquals(1, 1);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        LocalDate date = Parser.stringToDate("2019-02-12");
+        assertEquals(1, 1);
     }
 
     @Test

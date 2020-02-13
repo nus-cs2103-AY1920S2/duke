@@ -9,6 +9,7 @@ import duke.command.UnknownCommand;
 import duke.command.FindCommand;
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
+import duke.command.SnoozeCommand;
 
 /**
  * Parser to parse commands made by user.
@@ -34,6 +35,8 @@ public class CommandParser {
             return new AddCommand();
         } else if (token[0].equals("find")) {
             return new FindCommand();
+        } else if (token[0].equals("snooze")) {
+            return new SnoozeCommand();
         } else {
             return new UnknownCommand();
         }
