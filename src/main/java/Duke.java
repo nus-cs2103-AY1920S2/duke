@@ -20,7 +20,7 @@ public class Duke {
     public static final String TODO_COMMAND = "todo";
     public static final String EVENT_COMMAND = "event";
     public static final String DEADLINE_COMMAND = "deadline";
-
+    public static final String STAT_COMMAND = "statistic";
     /**
      * Constructor of Duke.
      * Initialise Ui, Storage and Tasklist
@@ -43,6 +43,8 @@ public class Duke {
             if (keyword.equals(BYE_COMMAND)) {
                 this.storage.writeFile(this.tasklist.mylist);
                 message = message + ui.printMessage("Bye. Hope to see you again soon!");
+            } else if (keyword.equals(STAT_COMMAND)) {
+                message = message + tasklist.printStatistic();
             } else if (keyword.equals(LIST_COMMAND)) {
                 message = message + ui.printMessage("Here are the task in your list");
                 message = message + tasklist.printList();

@@ -78,6 +78,37 @@ public class Tasklist {
     }
 
     /**
+     * Print a summary of task.
+     * @return String of the summary
+     */
+    public String printStatistic() {
+        String message = "";
+        int todo = 0;
+        int deadline = 0;
+        int event = 0;
+        int done = 0;
+        for (Task current : mylist) {
+            if (current instanceof Todo) {
+                todo++;
+            } else if (current instanceof Deadline) {
+                deadline++;
+            } else if (current instanceof Event) {
+                event++;
+            }
+            if (current.isDone) {
+                done++;
+            }
+        }
+        message = message + String.format("_____SUMMARY_____\n");
+        message = message + String.format("Currently you have\n");
+        message = message + String.format("%d todo\n", todo);
+        message = message + String.format("%d deadline\n" , deadline);
+        message = message + String.format("%d event\n", event);
+        message = message + String.format("%d tasks done\n", done);
+        return message;
+    }
+
+    /**
      * Print the list of tasks with the keyword inside.
      * @param keyword String
      * @return String of the result
