@@ -9,6 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextBoundsType;
+import javafx.application.Platform;
+import javafx.scene.layout.Region;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -32,7 +36,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        //initTextField();
+        sendWelcomeText();
     }
 
 
@@ -54,14 +58,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        //justadded
-
-        /*userInput.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                userInput.setPrefWidth(userInput.getText().length() * 7); // why 7? Totally trial number.
-            }
-        });*/
         String response;
         try {
             response = duke.getResponse(input);
