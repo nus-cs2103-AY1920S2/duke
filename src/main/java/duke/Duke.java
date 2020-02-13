@@ -67,6 +67,8 @@ public class Duke {
             t = null;
             Command command = parser.parse(ui.readCmd(input), taskList);
 
+            assert command != null;
+
             switch (command.getCommandType()) {
             case LIST_CMD:
                 return ui.printTaskList(taskList);

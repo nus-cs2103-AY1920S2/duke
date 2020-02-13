@@ -54,6 +54,7 @@ test {
 
 application {
     // Change this to your main class.
+    applicationDefaultJvmArgs = ['-ea']
     mainClassName = "Launcher"
 }
 
