@@ -10,6 +10,7 @@ public enum Message {
     DATE_NOT_RECOGNIZED,
     DELETE,
     DONE,
+    DUPLICATE_TASK,
     EMPTY_COMMAND,
     GOODBYE,
     INDEX_NAN,

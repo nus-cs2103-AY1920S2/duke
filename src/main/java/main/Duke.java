@@ -9,6 +9,7 @@ import command.FindCommand;
 import command.ListCommand;
 import command.TodoCommand;
 import exception.DuplicateMarkAelitaException;
+import exception.DuplicateTaskAelitaException;
 import exception.EmptyInputAelitaException;
 import exception.InsufficientArgumentAelitaException;
 import exception.InvalidArgumentAelitaException;
@@ -115,11 +116,17 @@ public class Duke {
                 }
 
             }
+        } catch (DateTimeParseException e) {
+            return new Response(Message.DATE_NOT_RECOGNIZED, null);
+
+        } catch (DuplicateMarkAelitaException e) {
+            return new Response(Message.TASK_COMPLETED, null);
+
+        } catch (DuplicateTaskAelitaException e) {
+            return new Response(Message.DUPLICATE_TASK, null);
+
         } catch (EmptyInputAelitaException e) {
             return new Response(Message.EMPTY_COMMAND, null);
-
-        } catch (IoAelitaException e) {
-            return new Response(Message.IO_ERROR, null);
 
         } catch (InsufficientArgumentAelitaException e) {
 
@@ -152,20 +159,17 @@ public class Duke {
                 return null;
             }
 
-        } catch (InvalidListItemAelitaException e) {
-            return new Response(Message.ITEM_NOT_FOUND, null);
-
-        } catch (DuplicateMarkAelitaException e) {
-            return new Response(Message.TASK_COMPLETED, null);
+        } catch (InvalidArgumentAelitaException e) {
+            return new Response(Message.INVALID_ARGUMENT, null);
 
         } catch (InvalidCommandAelitaException e) {
             return new Response(Message.COMMAND_NOT_RECOGNIZED, null);
 
-        } catch (InvalidArgumentAelitaException e) {
-            return new Response(Message.INVALID_ARGUMENT, null);
+        } catch (InvalidListItemAelitaException e) {
+            return new Response(Message.ITEM_NOT_FOUND, null);
 
-        } catch (DateTimeParseException e) {
-            return new Response(Message.DATE_NOT_RECOGNIZED, null);
+        } catch (IoAelitaException e) {
+            return new Response(Message.IO_ERROR, null);
 
         } catch (NumberFormatException e) {
             return new Response(Message.INDEX_NAN, null);

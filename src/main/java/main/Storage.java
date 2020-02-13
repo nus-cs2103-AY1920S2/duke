@@ -1,6 +1,7 @@
 package main;
 
 import exception.DuplicateMarkAelitaException;
+import exception.DuplicateTaskAelitaException;
 import exception.IoAelitaException;
 import task.Deadline;
 import task.Event;
@@ -47,15 +48,27 @@ public class Storage {
                 String[] task = sc.nextLine().split("/");
                 switch (task[0]) {
                 case "T":
-                    taskList.add(new Todo(task[2]));
+                    try {
+                        taskList.add(new Todo(task[2]));
+                    } catch (DuplicateTaskAelitaException e) {
+                        //Not possible. tasklist is new.
+                    }
                     break;
 
                 case "D":
-                    taskList.add(new Deadline(task[2], LocalDate.parse(task[3])));
+                    try {
+                        taskList.add(new Deadline(task[2], LocalDate.parse(task[3])));
+                    } catch (DuplicateTaskAelitaException e) {
+                        //Not possible. tasklist is new.
+                    }
                     break;
 
                 case "E":
-                    taskList.add(new Event(task[2], LocalDate.parse(task[3]), task[4], task[5]));
+                    try {
+                        taskList.add(new Event(task[2], LocalDate.parse(task[3]), task[4], task[5]));
+                    } catch (DuplicateTaskAelitaException e) {
+                        //Not possible. tasklist is new.
+                    }
                     break;
 
                 default:

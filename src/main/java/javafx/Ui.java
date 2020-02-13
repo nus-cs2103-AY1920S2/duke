@@ -24,6 +24,7 @@ public class Ui extends AnchorPane {
     private static final String DATE_NOT_RECOGNIZED_MSG = "Sorry. I only recognize date in the format YYYY-MM-DD";
     private static final String DELETE_MSG = "The task has been removed.\n";
     private static final String DONE_MSG = "Another task off the list. Good job!\n";
+    private static final String DUPLICATE_TASK_MSG = "The task already exists.";
     private static final String EMPTY_CMD_MSG = "Aren't you a quiet type.";
     private static final String IO_ERR_MSG = "Opps. Something went wrong when saving your tasks.";
     private static final String INDEX_NAN_MSG = "The index is not a number.";
@@ -137,6 +138,10 @@ public class Ui extends AnchorPane {
         case DONE:
             message = DONE_MSG;
             message += "    " + duke.getTaskList().get((int) response.getArgument());
+            break;
+
+        case DUPLICATE_TASK:
+            message = DUPLICATE_TASK_MSG;
             break;
 
         case EMPTY_COMMAND:

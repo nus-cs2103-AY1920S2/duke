@@ -1,5 +1,6 @@
 package command;
 
+import exception.DuplicateTaskAelitaException;
 import main.Message;
 import main.Response;
 import main.TaskList;
@@ -32,7 +33,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public Response execute() {
+    public Response execute() throws DuplicateTaskAelitaException {
 
         Task deadLine = new Deadline(description, date);
         taskList.add(deadLine);

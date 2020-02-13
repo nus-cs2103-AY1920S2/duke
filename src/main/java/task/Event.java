@@ -8,18 +8,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    /**
-     * The Date.
-     */
-    protected LocalDate date;
-    /**
-     * The Start time.
-     */
-    protected String startTime;
-    /**
-     * The End time.
-     */
-    protected String endTime;
+    private LocalDate date;
+    private String startTime;
+    private String endTime;
 
     /**
      * Constructs a new instance of task.Event.
@@ -47,14 +38,40 @@ public class Event extends Task {
         return date;
     }
 
+    /**
+     * Gets the start time of this event.
+     *
+     * @return the start time
+     */
     public String getStartTime() {
 
         return startTime;
     }
 
+    /**
+     * Gets the end time of this event.
+     *
+     * @return the end time
+     */
     public String getEndTime() {
 
         return endTime;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+
+        if (this == object) {
+            return true;
+        }
+
+        if (!(object instanceof Event)) {
+            return false;
+        }
+
+        Event event = (Event) object;
+        return compareEvents(event);
+
     }
 
     @Override
@@ -62,6 +79,22 @@ public class Event extends Task {
 
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
                 + startTime + "-" + endTime + ")";
+    }
+
+    /**
+     * Compares this event with another
+     *
+     * @param event the event to compare with
+     * @return boolean whether this event is the same as the parameter
+     */
+    private boolean compareEvents(Event event) {
+
+        boolean hasSameDescription = (description.equals(event.description));
+        boolean hasSameDate = (date.equals(event.date));
+        boolean hasSameStartTime = (startTime.equals(event.startTime));
+        boolean hasSameEndTime = (endTime.equals(event.endTime));
+
+        return hasSameDate && hasSameDescription && hasSameStartTime && hasSameEndTime;
     }
 
 }

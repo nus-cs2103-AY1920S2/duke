@@ -8,10 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    /**
-     * The deadline.
-     */
-    protected LocalDate date;
+    private LocalDate date;
 
     /**
      * Constructs a new instance of task.Deadline.
@@ -25,15 +22,50 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    /**
+     * Gets the date associated with the deadline.
+     *
+     * @return the date
+     */
     public LocalDate getDate() {
 
         return date;
     }
 
     @Override
+    public boolean equals(Object object) {
+
+        if (this == object) {
+            return true;
+        }
+
+        if (!(object instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline deadline = (Deadline) object;
+        return compareDeadline(deadline);
+
+    }
+
+    @Override
     public String toString() {
 
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+    }
+
+    /**
+     * Compares this deadline with another
+     *
+     * @param deadline the deadline to compare with
+     * @return boolean whether this deadline is the same as the parameter
+     */
+    private boolean compareDeadline(Deadline deadline) {
+
+        boolean hasSameDescription = (description.equals(deadline.description));
+        boolean hasSameDate = (date.equals(deadline.date));
+
+        return hasSameDate && hasSameDescription;
     }
 
 }

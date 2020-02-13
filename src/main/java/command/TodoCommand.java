@@ -1,10 +1,12 @@
 package command;
 
+import exception.DuplicateTaskAelitaException;
 import exception.InsufficientArgumentAelitaException;
 import main.Message;
 import main.Response;
 import main.TaskList;
 import task.Task;
+import task.Todo;
 
 /**
  * The Todo command.
@@ -27,13 +29,13 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public Response execute() throws InsufficientArgumentAelitaException {
+    public Response execute() throws InsufficientArgumentAelitaException, DuplicateTaskAelitaException {
 
         checkSufficientTokens(descriptionTokens, "todo");
 
         assert descriptionTokens.length > 0 : "There should be a description";
 
-        Task task = new Task(reconstructDescription(descriptionTokens));
+        Task task = new Todo(reconstructDescription(descriptionTokens));
         taskList.add(task);
 
         return new Response(Message.ADD_TASK, task);

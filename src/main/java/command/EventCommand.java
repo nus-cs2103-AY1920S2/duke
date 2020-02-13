@@ -1,5 +1,6 @@
 package command;
 
+import exception.DuplicateTaskAelitaException;
 import exception.InsufficientArgumentAelitaException;
 import main.Message;
 import main.Response;
@@ -33,7 +34,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public Response execute() throws InsufficientArgumentAelitaException {
+    public Response execute() throws InsufficientArgumentAelitaException, DuplicateTaskAelitaException {
 
         String[] dateTime = extractDateTime(at);
         LocalDate eventDate = LocalDate.parse(dateTime[0]);

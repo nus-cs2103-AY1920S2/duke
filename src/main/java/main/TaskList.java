@@ -1,12 +1,14 @@
 package main;
 
 import exception.DuplicateMarkAelitaException;
+import exception.DuplicateTaskAelitaException;
 import exception.EmptyInputAelitaException;
 import exception.InvalidArgumentAelitaException;
 import exception.InvalidListItemAelitaException;
 import task.Deadline;
 import task.Event;
 import task.Task;
+import task.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,8 +24,15 @@ public class TaskList {
      * Adds a task into the list.
      *
      * @param task the new task.
+     * @throws DuplicateTaskAelitaException the duplicate task aelita exception
      */
-    public void add(Task task) {
+    public void add(Task task) throws DuplicateTaskAelitaException {
+
+        boolean taskExists = searchForTask(task);
+
+        if (taskExists) {
+            throw new DuplicateTaskAelitaException();
+        }
 
         taskList.add(task);
     }
@@ -116,10 +125,18 @@ public class TaskList {
         for (Task task : taskList) {
 
             if (task instanceof Deadline && ((Deadline) task).getDate().equals(date)) {
-                tmp.add(task);
+                try {
+                    tmp.add(task);
+                } catch (DuplicateTaskAelitaException e) {
+                    //Not possible because tmp is new
+                }
 
             } else if (task instanceof Event && ((Event) task).getDate().equals(date)) {
-                tmp.add(task);
+                try {
+                    tmp.add(task);
+                } catch (DuplicateTaskAelitaException e) {
+                    //Not possible because tmp is new
+                }
 
             }
         }
@@ -144,7 +161,11 @@ public class TaskList {
                 for (String word : words) {
 
                     if (word.toLowerCase().equals(keyword)) {
-                        tmp.add(task);
+                        try {
+                            tmp.add(task);
+                        } catch (DuplicateTaskAelitaException e) {
+                            //Not possible because tmp is new
+                        }
                     }
                 }
 
@@ -169,6 +190,25 @@ public class TaskList {
         }
 
         return builder.toString();
+    }
+
+    /**
+     * Search the task list for the task wanted.
+     *
+     * @param task the task of interest
+     * @return if the task exists in the task list.
+     */
+
+    private boolean searchForTask(Task task) {
+
+        for (Task entry : taskList) {
+
+            if (entry.equals(task)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
