@@ -4,6 +4,8 @@ import com.nus.duke.Exception.*;
 import com.nus.duke.dao.DAOFactory;
 import com.nus.duke.dao.DAOInterface;
 import com.nus.duke.parser.Parser;
+import com.nus.duke.storage.FileStorage;
+import com.nus.duke.storage.StorageInterface;
 import com.nus.duke.tasks.Tasks;
 import javafx.util.Pair;
 
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class TaskController {
     private DAOInterface dataObj = DAOFactory.getOrCreate();
+    private StorageInterface storage = new FileStorage();
 
     private String stringify(Tasks t) {
         StringBuilder strBldr = new StringBuilder();
@@ -106,5 +109,11 @@ public class TaskController {
             Tasks t = this.createNewTask(name);
             return this.setTask(t, Tasks.TASK_CATEGORY.EVENT);
         }
+    }
+
+    public boolean persist() {
+        final String fileLocation = "/Users/johan.kok/Desktop/nus/CS2103/duke/src/main/java/resources/storage/save.txt";
+        storage.save(fileLocation);
+        return true;
     }
 }

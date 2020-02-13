@@ -56,6 +56,8 @@ public class Duke {
                     break;
 
                 case "save":
+                    controller.persist();
+                    Greetings.prettyPrint(String.format("Tasks saved to disk"));
                     break;
 
                 case "quit":
