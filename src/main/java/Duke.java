@@ -72,6 +72,9 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
+        assert ui != null;
+        assert storage != null;
+        assert tasks != null;
         // Create stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(baos);
