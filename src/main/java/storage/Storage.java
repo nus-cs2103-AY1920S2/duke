@@ -63,7 +63,7 @@ public class Storage {
             char taskCommand = line.charAt(0);
             char taskDoneStatus = line.charAt(4);
             String taskAction = line.substring(8);
-            String[] taskActionAndTime = taskAction.split("\\| ");
+            String[] taskActionAndTime = taskAction.split(" \\| ");
 
             if (taskCommand == 'T') {
                 taskListFromFile.add(new Todo(taskAction));

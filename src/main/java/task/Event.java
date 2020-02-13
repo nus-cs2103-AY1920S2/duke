@@ -20,7 +20,7 @@ public class Event extends Task {
 
     @Override
     public String toStringForFileStorage() {
-        return super.getStatus() ? String.format("E | 1 | %s | %s", super.getTask(), this.eventTime)
-                : String.format("E | 0 | %s | %s", super.getTask(), this.eventTime);
+        return super.getStatus() ? String.format("E | 1 | %s | %s", super.getTaskAction(), this.eventTime)
+                : String.format("E | 0 | %s | %s", super.getTaskAction(), this.eventTime);
     }
 }

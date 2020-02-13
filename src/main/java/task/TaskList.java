@@ -19,11 +19,11 @@ public class TaskList {
     }
 
     public Task getTask(int idx) {
-        return tasks.get(idx);
+        return this.tasks.get(idx);
     }
 
     public void addNewTodo(String task) {
-        tasks.add(new Todo(task));
+        this.tasks.add(new Todo(task));
     }
 
     public void addTask(Task task) {
@@ -53,4 +53,18 @@ public class TaskList {
         this.tasks.removeAll(tasksToDelete);
     }
 
+    public List<String> getAllTasksAction() {
+        List<String> taskActions = this.tasks.stream()
+                                             .map(task -> task.getTaskAction())
+                                             .collect(Collectors.toList());
+        return taskActions;
+    }
+
+    public boolean checkDuplicate(Task newTask) {
+        List<String> taskActions = this.tasks.stream()
+                                             .map(task -> task.getTaskAction())
+                                             .collect(Collectors.toList());
+
+        return taskActions.contains(newTask.getTaskAction());
+    }
 }

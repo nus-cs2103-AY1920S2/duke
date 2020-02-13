@@ -63,28 +63,23 @@ public class Duke {
 
                 case "done":
                     ui.acknowledgeDone(tasks, parser.getTaskIndexArray());
-                    assert tasks.getTask(parser.getTaskIndexArray()[0]).getStatus() == true
-                            : "Task should have been marked as done";
                     storage.saveTasksIntoFile(tasks);
                     break;
 
                 case "todo":
                     Todo todo = new Todo(parser.getTaskAction());
-                    tasks.addTask(todo);
                     ui.acknowledgeTodo(tasks, todo);
                     storage.saveTasksIntoFile(tasks);
                     break;
 
                 case "deadline":
                     Deadline deadline = new Deadline(parser.getTaskAction(), parser.getTaskDate());
-                    tasks.addTask(deadline);
                     ui.acknowledgeDeadline(tasks, deadline);
                     storage.saveTasksIntoFile(tasks);
                     break;
 
                 case "event":
                     Task event = new Event(parser.getTaskAction(), parser.getTaskDate());
-                    tasks.addTask(event);
                     ui.acknowledgeEvent(tasks, event);
                     storage.saveTasksIntoFile(tasks);
                     break;

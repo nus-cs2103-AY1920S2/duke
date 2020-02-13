@@ -107,8 +107,13 @@ public class Ui {
      * @param todo index of which task is done.
      */
     public void acknowledgeTodo(TaskList tasks, Task todo) {
-        System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.",
-                todo, tasks.getTaskListSize());
+        if (tasks.checkDuplicate(todo)) {
+            System.out.println("Hey man! This todo task already exists in the list. You don't wanna duplicate!");
+        } else {
+            tasks.addTask(todo);
+            System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.\n",
+                    todo, tasks.getTaskListSize());
+        }
     }
 
     /**
@@ -118,8 +123,14 @@ public class Ui {
      * @param deadline time of deadline.
      */
     public void acknowledgeDeadline(TaskList tasks, Task deadline) {
-        System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.",
-                deadline, tasks.getTaskListSize());
+        if (tasks.checkDuplicate(deadline)) {
+            System.out.println("Note!! This task action already exists in the list!");
+            System.out.printf("Now you have %d tasks in the list.\n", tasks.getTaskListSize());
+        } else {
+            tasks.addTask(deadline);
+            System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.\n",
+                    deadline, tasks.getTaskListSize());
+        }
     }
 
     /**
@@ -129,8 +140,14 @@ public class Ui {
      * @param event time of event.
      */
     public void acknowledgeEvent(TaskList tasks, Task event) {
-        System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.",
-                event, tasks.getTaskListSize());
+        if (tasks.checkDuplicate(event)) {
+            System.out.println("Note!! This task action already exists in the list!");
+            System.out.printf("Now you have %d tasks in the list.\n", tasks.getTaskListSize());
+        } else {
+            tasks.addTask(event);
+            System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.\n",
+                    event, tasks.getTaskListSize());
+        }
     }
 
     /**

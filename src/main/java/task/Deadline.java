@@ -20,7 +20,7 @@ public class Deadline extends Task {
 
     @Override
     public String toStringForFileStorage() {
-        return super.getStatus() ? String.format("D | 1 | %s | %s", super.getTask(), this.deadlineTime)
-                : String.format("D | 0 | %s | %s", super.getTask(), this.deadlineTime);
+        return super.getStatus() ? String.format("D | 1 | %s | %s", super.getTaskAction(), this.deadlineTime)
+                : String.format("D | 0 | %s | %s", super.getTaskAction(), this.deadlineTime);
     }
 }

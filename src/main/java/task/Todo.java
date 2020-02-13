@@ -12,7 +12,7 @@ public class Todo extends Task {
     }
 
     public String toStringForFileStorage() {
-        return super.getStatus() ? String.format("T | 1 | %s", super.getTask())
-                : String.format("T | 0 | %s", super.getTask());
+        return super.getStatus() ? String.format("T | 1 | %s", super.getTaskAction())
+                : String.format("T | 0 | %s", super.getTaskAction());
     }
 }
