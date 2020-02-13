@@ -20,7 +20,7 @@ public class Duke {
     /**
      * Creates a Duke object given the save file path. 
      * The tasklist will obtain the saved task, if available.
-     * @param filePath The path of the save file.
+     * @param saveFolder The folder of the save file.
      */
     public Duke(String saveFolder) {
         this.storage = new Storage(saveFolder);

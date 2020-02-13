@@ -14,6 +14,12 @@ public class AddExpenseCommand extends ExpenseCommand {
     private double expense;
     private LocalDate date;
 
+    /**
+     * Creates an add expense command.
+     * @param description The description of the expense.
+     * @param expense The amount of expense.
+     * @param date The date of the expense.
+     */
     public AddExpenseCommand(String description, double expense, LocalDate date) {
         this.description = description;
         this.expense = expense;
@@ -23,6 +29,9 @@ public class AddExpenseCommand extends ExpenseCommand {
     /**
      * Executes the command. Check for the type of task to be added, and add
      * the relevant task to task list. The current list of tasks are then saved.
+     * @param expenses The list of expenses to be executed upon.
+     * @param storage The storage to save the expenses.
+     * @return The response from executing the command.
      */
     public String execute(ExpenseList expenses, Storage storage)
             throws DukeException {
