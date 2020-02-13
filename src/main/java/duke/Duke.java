@@ -51,6 +51,7 @@ public class Duke {
         boolean isShutdown = false;
         while (!isShutdown) {
             String input = ui.getLine();
+            isShutdown = input.equals("bye");
             try {
                 ui.out(parser.parse(input));
                 storage.saveToFile(tasks);
@@ -77,7 +78,7 @@ public class Duke {
             e.printStackTrace();
         } catch (ShutdownException e) {
             System.out.println(e.getMessage());
-            response = "Bye command given";
+            response = "Bye!";
         }
         return response;
     }

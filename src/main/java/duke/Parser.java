@@ -45,30 +45,31 @@ class Parser {
     public String[] parse(String line) throws IncorrectArgumentException, InvalidCommandException, IOException, ShutdownException {
         String[] cmd = line.split(" ", 2);
         String[] response;
+        assert !line.equals("");
         try {
             switch (cmd[0].toLowerCase()) {
             case "bye":
                 throw new ShutdownException(bye());
             case "list":
-                response = list();
+                response = parseList();
                 break;
             case "done":
-                response = done(Integer.parseInt(cmd[1]));
+                response = parseDone(Integer.parseInt(cmd[1]));
                 break;
             case "todo":
-                response = todo(cmd[1]);
+                response = parseAddTodo(cmd[1]);
                 break;
             case "deadline":
-                response = deadline(cmd[1]);
+                response = parseAddDeadline(cmd[1]);
                 break;
             case "event":
-                response = event(cmd[1]);
+                response = parseAddEvent(cmd[1]);
                 break;
             case "delete":
-                response = delete(Integer.parseInt(cmd[1]));
+                response = parseDelete(Integer.parseInt(cmd[1]));
                 break;
             case "find":
-                response = find(cmd[1]);
+                response = parseFind(cmd[1]);
                 break;
             default:
                 throw new InvalidCommandException("invalid command:\n " + line + "\nplease try again");
@@ -87,15 +88,15 @@ class Parser {
         return "Shutting Down...";
     }
 
-    private String[] list() {
+    private String[] parseList() {
         return tasks.list();
     }
 
-    private String[] done(int i) {
+    private String[] parseDone(int i) {
         return tasks.done(i);
     }
 
-    private String[] todo(String args) throws IncorrectArgumentException {
+    private String[] parseAddTodo(String args) throws IncorrectArgumentException {
         String[] argv = args.split("/");
         if (argv[0].equals("")) {
             throw new IncorrectArgumentException("Oops! Missing required arguments: Task Description");
@@ -105,7 +106,7 @@ class Parser {
         return tasks.addTodo(argv[0]);
     }
 
-    private String[] deadline(String args) throws IncorrectArgumentException {
+    private String[] parseAddDeadline(String args) throws IncorrectArgumentException {
         String[] argv = args.split(" /by ");
         if (argv[0].equals("")) {
             throw new IncorrectArgumentException(
@@ -132,7 +133,7 @@ class Parser {
         return resp;
     }
 
-    private String[] event(String args) throws IncorrectArgumentException {
+    private String[] parseAddEvent(String args) throws IncorrectArgumentException {
         String[] argv = args.split(" /at ");
         if (argv[0].equals("")) {
             throw new IncorrectArgumentException(
@@ -159,11 +160,11 @@ class Parser {
         return resp;
     }
 
-    private String[] delete(int i) {
+    private String[] parseDelete(int i) {
         return tasks.delete(i);
     }
 
-    private String[] find(String query) {
+    private String[] parseFind(String query) {
         return tasks.find(query);
     }
 
