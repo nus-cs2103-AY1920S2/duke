@@ -35,7 +35,7 @@ public class Parser {
     public String parseCommands(String str) throws Exception {
         assert str != null : "String for parsing commands is null";
 
-        String reply = ui.lineBarrier();
+        String reply;
 
         if (str.equals("bye")) {
             reply = tasklist.bye();
@@ -62,10 +62,13 @@ public class Parser {
         } else if (str.contains("find")) {
             reply = tasklist.find(str);
 
+        } else if (str.contains("details")) {
+            reply = tasklist.findDetails(str);
+
         } else {
             reply = ui.unknownCommand();
         }
-        return reply + ui.lineBarrier() + "\n\n";
+        return reply;
     }
 }
 
