@@ -5,6 +5,7 @@
 package duke.task;
 
 import duke.command.Operation;
+import duke.util.DateUtil;
 
 import java.time.format.DateTimeFormatter;
 
@@ -56,7 +57,7 @@ public abstract class Task implements TaskPrintable, Parseable {
     /**
      * Instantiates a new task.
      *
-     * @param isDone      1 if the task is done
+     * @param isDone 1 if the task is done
      * @param description description
      */
     private Task(boolean isDone, String description) {
@@ -70,22 +71,7 @@ public abstract class Task implements TaskPrintable, Parseable {
      * @param dt the new datetime
      */
     protected void setDatetime(String dt) {
-        assert (!dt.isEmpty());
-        dt = dt.replaceAll("\\s", "");
-        try {
-            java.time.format.DateTimeFormatter formatter
-                    = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            datetime = java.time.LocalDate.parse(dt, formatter);
-        } catch (Exception ex) {
-            try {
-                java.time.format.DateTimeFormatter formatter
-                        = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
-                datetime = java.time.LocalDate.parse(dt, formatter);
-            } catch (Exception ex2) {
-                System.out.println();
-            }
-
-        }
+        datetime = DateUtil.formatDate(dt);
     }
 
     /**
