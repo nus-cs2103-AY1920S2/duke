@@ -31,9 +31,10 @@ public abstract class Command {
      * @param storage The writer to the hard disk.
      * @param archiveList The list of archived tasks.
      * @param archiveStorage The storage of the archive.
+     * @param noteList The list of notes.
+     * @param noteStorage The storage of the notes.
      * @return The String representing the outcome of the execution.
      */
-
     public abstract String execute(TaskList taskList, Storage storage, ArchiveList archiveList, Storage archiveStorage,
                                    NoteList noteList, NoteStorage noteStorage);
 

@@ -37,6 +37,10 @@ public class NoteListCommand extends Command {
      * Executes the list command.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
+     * @param archiveList The list of archived tasks.
+     * @param archiveStorage The storage of the archive.
+     * @param noteList The list of notes.
+     * @param noteStorage The storage of the notes.
      * @return The String representing the outcome of the execution.
      */
 

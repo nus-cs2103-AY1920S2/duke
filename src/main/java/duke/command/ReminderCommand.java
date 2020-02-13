@@ -36,9 +36,13 @@ public class ReminderCommand extends Command {
 
     /**
      * Executes the reminder command.
-     * @param taskList The list of the tasks.
-     * @param storage The storage of the Duke.
-     * @return The output String of the result.
+     * @param taskList The list of tasks.
+     * @param storage The writer to the hard disk.
+     * @param archiveList The list of archived tasks.
+     * @param archiveStorage The storage of the archive.
+     * @param noteList The list of notes.
+     * @param noteStorage The storage of the notes.
+     * @return The String representing the outcome of the execution.
      */
 
     @Override

@@ -56,6 +56,7 @@ public class ArchiveList implements IList<Task> {
      * Archives the task with the corresponding
      * type, and the description provided by the client.
      * @param task The task that wants to be archived.
+     * @return The output message.
      */
 
     public String archiveTask(Task task, Storage storage) {
@@ -71,6 +72,7 @@ public class ArchiveList implements IList<Task> {
      * Deletes the task of a particular index
      * from the archive, then remove it from the file.
      * @param index The index of the task in the archive to be deleted.
+     * @return The output message.
      */
 
     public String deleteArchivedTask(int index, Storage storage) {

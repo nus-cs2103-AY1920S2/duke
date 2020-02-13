@@ -77,6 +77,8 @@ public class Parser {
      * @param commandString The command string entered by the client.
      * @return An Argument instance, initialized by the constructor.
      * @throws DukeUnknownKeywordException If the command keyword (the first word) is invalid.
+     * @throws DukeInvalidDateFormatException If the date is invalid.
+     * @throws DukeInvalidArgumentFormatException If the format of the command is invalid.
      */
 
     public Command parse(String commandString, IList<Task> taskList, IList<Task> archiveList, IList<Note> noteList)
@@ -121,6 +123,19 @@ public class Parser {
                 : "";
     }
 
+    /**
+     * Validates the command and returns the corresponding Command instance if
+     * the command string is valid.
+     * @param keyword The keyword of the command.
+     * @param details The details of the command.
+     * @param taskList The list of tasks.
+     * @param archiveList The list of archived tasks.
+     * @param noteList The list of notes.
+     * @return The corresponding Command instance.
+     * @throws DukeInvalidArgumentFormatException If the command is in invalid format.
+     * @throws DukeInvalidDateFormatException If the date is in invalid format.
+     */
+    
     private Command validateCommand(Keyword keyword, String details, IList<Task> taskList,
                                     IList<Task> archiveList, IList<Note> noteList) throws
             DukeInvalidArgumentFormatException, DukeInvalidDateFormatException {

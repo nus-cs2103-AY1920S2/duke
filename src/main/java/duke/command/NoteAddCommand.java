@@ -41,6 +41,10 @@ public class NoteAddCommand extends Command {
      * and write the details in the hard disk.
      * @param taskList The list of tasks.
      * @param storage The writer to the hard disk.
+     * @param archiveList The list of archived tasks.
+     * @param archiveStorage The storage of the archive.
+     * @param noteList The list of notes.
+     * @param noteStorage The storage of the notes.
      * @return The String representing the outcome of the execution.
      */
 

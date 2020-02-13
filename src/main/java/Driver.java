@@ -31,6 +31,7 @@ import java.io.IOException;
 public class Driver extends Application {
     private static final String STAGE_TITLE = "Duke";
     private static final String BYE_STRING = "bye";
+    private static final String MAIN_WINDOW_FXML = "/view/MainWindow.fxml";
     /**
      * The main method runs the program.
      * @param args The command line arguments entered into the program.
@@ -76,7 +77,7 @@ public class Driver extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource(MAIN_WINDOW_FXML));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle(STAGE_TITLE);

@@ -50,6 +50,7 @@ public class NoteReader implements IReader<Note> {
      * @return The ArrayList containing the tasks loaded from the file.
      * @throws IOException From the InputStreamReader
      * @throws DukeInvalidTaskFormatException If there is an error in the format.
+     * @throws DukeInvalidDateFormatException If there is an error in the date format.
      */
 
     public ArrayList<Note> load() throws IOException, DukeInvalidTaskFormatException,
@@ -74,6 +75,7 @@ public class NoteReader implements IReader<Note> {
      * @param counter The index of the line
      * @return The corresponding note of the line
      * @throws DukeInvalidTaskFormatException If the note is not properly formatted.
+     * @throws DukeInvalidDateFormatException If there is an error in the date format.
      */
 
     private Note parseNote(String line, int counter) throws DukeInvalidTaskFormatException,
