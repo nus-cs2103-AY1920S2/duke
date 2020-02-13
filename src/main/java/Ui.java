@@ -9,7 +9,17 @@ public class Ui {
     }
 
     public static String welcomeMessage() {
-        return "Hello ! I'm Ashley Bot\nOi What u want\n";
+        return "\n" +
+                ".---.  .---..-./`)  \n" +
+                "|   |  |_ _|\\ .-.') \n" +
+                "|   |  ( ' )/ `-' \\ \n" +
+                "|   '-(_{;}_)`-'`\"` \n" +
+                "|      (_,_) .---.  \n" +
+                "| _ _--.   | |   |  \n" +
+                "|( ' ) |   | |   |  \n" +
+                "(_{;}_)|   | |   |  \n" +
+                "'(_,_) '---' '---'  \n" +
+                "                    \n" + "Hello ! I'm Cat Bot\n What u want\n";
     }
 
     public String lineBarrier() {

@@ -12,6 +12,7 @@ public class Deadline extends Task {
     protected String time;
     protected LocalDate date;
     protected int index;
+    protected LocalDate currentDate = LocalDate.now();
 
     public Deadline(String description, String time, int index) {
         super(description, index);
@@ -36,13 +37,18 @@ public class Deadline extends Task {
     public void format_Date() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm").withLocale(Locale.ENGLISH);
         date = LocalDate.parse(time,formatter);
-        //System.out.println(date);
     }
 
 
     @Override
     public String toString() {
-        String temp = "[" + type + "]" + "[" + getStatusIcon() + "] " + description + " (by: " +  time + ")";
+        String temp =  get_Index() + ". " + "[" + type + "]" + "[" + getStatusIcon() + "] " + description + " (by: " +  time + ")";
         return temp;
+    }
+
+
+    public String details() {
+        return this.get_Index() + ". " + "[" + type + "]" + "[" + getStatusIcon() + "] " + description
+                + "\n(started on: " + currentDate.toString() + ") \n(by: " +  time + ")";
     }
 }

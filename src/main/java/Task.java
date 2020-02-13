@@ -38,7 +38,11 @@ public class Task {
      */
     @Override
     public String toString() {
-        String temp = "[" + type + "]" + "[" + getStatusIcon() + "] " + description;
+        String temp = get_Index() + ". " + "[" + type + "]" + "[" + getStatusIcon() + "] " + description;
         return temp;
+    }
+
+    public String details() {
+        return this.toString();
     }
 }

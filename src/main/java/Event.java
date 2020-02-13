@@ -34,7 +34,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String temp = "[" + type + "]" + "[" + getStatusIcon() + "] " + description + " (at: " +  time + ")";
+        String temp =  get_Index() + ". " + "[" + type + "]" + "[" + getStatusIcon() + "] " + description + " (at: " +  time + ")";
         return temp;
     }
 
