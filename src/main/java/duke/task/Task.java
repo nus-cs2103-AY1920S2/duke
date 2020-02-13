@@ -41,7 +41,6 @@ public abstract class Task {
         return this.description;
     }
 
-
     /**
      * Returns the status of the Task object
      *
@@ -53,7 +52,6 @@ public abstract class Task {
 
     /**
      * Sets the isDone field to true. If isDone is already true, throws an exception.
-     *
      * @throws Exception when value of isDone field is already true
      */
     public void setDone() throws Exception {

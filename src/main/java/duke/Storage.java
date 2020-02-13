@@ -3,7 +3,6 @@ package duke;
 import duke.task.Task;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,11 +41,12 @@ public class Storage {
                     task.setDone();
                 }
                 lst.add(task);
+                String type = task.getType();
+                //This assertion will trigger if data.csv is modified outside the program
+                assert (type.equals("deadline") || type.equals("event") || type.equals("todo")) : "Unknown task type!";
             }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            Controller.raiseException(e);
         }
         return lst;
     }

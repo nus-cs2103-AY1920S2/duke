@@ -96,7 +96,6 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -159,7 +158,8 @@ public class Duke extends Application {
 
         if (controller.getStatus()) {
             try {
-                this.stop();
+                Thread.sleep(1500);
+                System.exit(0);
             } catch (Exception e) {
                 Controller.raiseException(e);
             }
@@ -170,10 +170,7 @@ public class Duke extends Application {
         try {
             Optional<Command> parsed = Parser.parse(text);
             System.out.println(parsed.isPresent());
-            if (parsed.isPresent()) {
-                System.out.println(parsed.get());
-                controller.execute(parsed.get());
-            }
+            parsed.ifPresent(command -> controller.execute(command));
         } catch (Exception e) {
             return e.getMessage();
         }
