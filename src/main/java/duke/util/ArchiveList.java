@@ -91,7 +91,7 @@ public class ArchiveList implements IList<Task> {
      * @return The Task instance of an index provided by the client.
      */
 
-    private Task getTask(int index) {
+    public Task getTask(int index) {
         return tasks.get(index - 1);
     }
 
