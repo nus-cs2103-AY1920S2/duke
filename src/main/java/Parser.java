@@ -59,7 +59,7 @@ public class Parser {
      * @return String representing the command type.
      * @throws InvalidCommandException DukeException for invalid commands.
      */
-    public static String extractCommandType(String input) throws InvalidCommandException{
+    private static String extractCommandType(String input) throws InvalidCommandException{
         String[] inputSplit = input.split(" ", 2);
         boolean isValidCommand = isValidCommand(inputSplit[0]);
 
@@ -77,7 +77,7 @@ public class Parser {
      * @return String of description for Todo task.
      * @throws InvalidTodoException DukeException for invalid Todo tasks.
      */
-    public static String prepareTodo(String[] input) throws InvalidTodoException {
+    private static String prepareTodo(String[] input) throws InvalidTodoException {
         if (isValidTodo(input)) {
             return input[1];
         } else {
@@ -93,7 +93,7 @@ public class Parser {
      * @return String array of description and date for Deadline task.
      * @throws InvalidDeadlineException DukeException for invalid Deadline task.
      */
-    public static String[] prepareDeadline(String[] input) throws InvalidDeadlineException {
+    private static String[] prepareDeadline(String[] input) throws InvalidDeadlineException {
         String[] fieldDetails = input[1].split("/", 2);
 
         if (!isValidDeadline(fieldDetails)) {
@@ -112,7 +112,7 @@ public class Parser {
      * @return String array of description and date for Event task.
      * @throws InvalidEventException DukeException for invalid Event task.
      */
-    public static String[] prepareEvent(String[] input) throws InvalidEventException {
+    private static String[] prepareEvent(String[] input) throws InvalidEventException {
         String[] fieldDetails = input[1].split("/", 2);
 
         if (!isValidEvent(fieldDetails)) {
@@ -131,7 +131,7 @@ public class Parser {
      * @param input String of command line input after splitting by " ".
      * @return int value representing index + 1 of desired item to be marked as done or deleted.
      */
-    public static int prepareDoneDelete(String input) {
+    private static int prepareDoneDelete(String input) {
         return Integer.parseInt(input);
     }
 
@@ -142,7 +142,7 @@ public class Parser {
      * @param type String representing command type.
      * @return boolean dictating if command is valid or invalid.
      */
-    public static boolean isValidCommand(String type) {
+    private static boolean isValidCommand(String type) {
         if (type.equals("todo")
                 || type.equals("deadline")
                 || type.equals("event")
@@ -163,7 +163,7 @@ public class Parser {
      * @param input String array containing task's type and description.
      * @return boolean dictating if array has enough elements for a valid Todo task.
      */
-    public static boolean isValidTodo(String[] input) {
+    private static boolean isValidTodo(String[] input) {
         return input.length == 2;
     }
 
@@ -173,7 +173,7 @@ public class Parser {
      * @param input String array containing task's type, description, and do by date.
      * @return boolean dictating if array has enough elements for a valid Deadline task.
      */
-    public static boolean isValidDeadline(String[] input) {
+    private static boolean isValidDeadline(String[] input) {
         return input.length == 2;
     }
 
@@ -183,7 +183,7 @@ public class Parser {
      * @param input String array containing task's type, description, and do at date.
      * @return boolean dictating if array has enough elements for a valid Event task.
      */
-    public static boolean isValidEvent(String[] input) {
+    private static boolean isValidEvent(String[] input) {
         return input.length == 2;
     }
 }
