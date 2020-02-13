@@ -11,6 +11,8 @@ import duke.util.Storage;
 import duke.util.Task;
 import duke.util.TaskList;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /*
@@ -35,10 +37,13 @@ public class Duke {
     private ArchiveList archiveList;
     private Storage taskStorage;
     private Storage archiveStorage;
-    private Storage storage;
     private NoteStorage noteStorage;
     private NoteList noteList;
     private Parser parser;
+    private static final String DATA_DIRECTORY = "./data";
+    private static final String TASK_DIRECTORY = "./data/tasks.txt";
+    private static final String ARCHIVE_DIRECTORY = "./data/archive.txt";
+    private static final String NOTES_DIRECTORY = "./data/notes.txt";
 
     /**
      * Constructs the Duke instance that has a list that
@@ -68,9 +73,10 @@ public class Duke {
      */
 
     public static Duke start() throws DukeInvalidTaskFormatException, DukeInvalidDateFormatException {
-        Storage taskStorage = new Storage("./data/tasks.txt");
-        Storage archiveStorage = new Storage("./data/archive.txt");
-        NoteStorage noteStorage = new NoteStorage("./data/notes.txt");
+        setStorage();
+        Storage taskStorage = new Storage(TASK_DIRECTORY);
+        Storage archiveStorage = new Storage(ARCHIVE_DIRECTORY);
+        NoteStorage noteStorage = new NoteStorage(NOTES_DIRECTORY);
         ArrayList<Task> tasks = new ArrayList<>();
         ArrayList<Task> archives = new ArrayList<>();
         ArrayList<Note> notes = new ArrayList<>();
@@ -113,6 +119,75 @@ public class Duke {
             return command.execute(taskList, taskStorage, archiveList, archiveStorage, noteList, noteStorage);
         } catch (DukeException exc) {
             return exc.getMessage();
+        }
+    }
+
+    /**
+     * Sets up the storage for Duke to read and write the contents.
+     */
+
+    private static void setStorage() {
+        createDataDirectory();
+        createTaskFile();
+        createArchiveFile();
+        createNoteFile();
+    }
+    /**
+     * Creates the data directory if it is not exist yet.
+     */
+
+    private static void createDataDirectory() {
+        File file = new File(DATA_DIRECTORY);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+    }
+
+    /**
+     * Creates the tasks.txt file inside the data directory if not exist yet.
+     */
+
+    private static void createTaskFile() {
+        File file = new File(TASK_DIRECTORY);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    /**
+     * Creates the archive.txt file inside the data directory if not exist yet.
+     */
+
+    private static void createArchiveFile() {
+        File file = new File(ARCHIVE_DIRECTORY);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    /**
+     * Creates the notes.txt file inside the data directory if not exist yet.
+     */
+
+    private static void createNoteFile() {
+        File file = new File(NOTES_DIRECTORY);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }

@@ -25,8 +25,6 @@ GUI.
 ## Requirements
 - Duke runs in Java 11 or later.
 - The `.jar` file of Duke can be found [here](https://github.com/mario7lorenzo/duke/releases)
-- Make sure you have created `./data` directory, and the directory path is relative to the `.jar`
-file, with three files: `archive.txt`, `notes.txt`, and `tasks.txt` inside the `./data` directory.
 
 ## Features 
 ### Interactive GUI
@@ -120,6 +118,7 @@ regarding to archives are listed below:
 - `archive-list`<br>Displays all the archived tasks.
 - `archive-add [task-index]`<br>Moves the task of a given index in the list to the archive.
 - `archive-delete [archived-task-index]`<br>Deletes the task permanently from the archive.
+- `unarchive [archived-task-index]`<br>Unarchives the task from the archive.
 
 Example of usage:
 - `archive-list`<br>
@@ -128,6 +127,8 @@ Duke will list all the archived tasks.
 Duke will move the first task in the current list to the archive.
 - `archive-delete 1`<br>
 Duke will delete the first task in the archived task list from the archive.
+- `unarchive 1`<br>
+Duke will unarchive the first task in the archived list.
 
 ###Notes
 Duke can memorize random notes from the user. The commands regarding to notes are listed below:

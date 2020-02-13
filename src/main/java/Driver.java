@@ -29,7 +29,7 @@ import java.io.IOException;
  */
 
 public class Driver extends Application {
-    private final String STAGE_TITLE = "Duke";
+    private static final String STAGE_TITLE = "Duke";
     private static final String BYE_STRING = "bye";
     /**
      * The main method runs the program.
