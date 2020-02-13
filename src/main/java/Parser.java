@@ -42,6 +42,7 @@ public class Parser {
         } else {
             throw new DukeException();
         }
+        assert ! msg.equals("") : "Response is not empty";
         return msg;
     }
 

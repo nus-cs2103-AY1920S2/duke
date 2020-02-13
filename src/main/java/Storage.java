@@ -72,6 +72,7 @@ public class Storage {
             str = "E | " + done + " | " + t.getDescription() + " | " + ((Event) t).getDayTime();
         if (t instanceof Deadline)
             str = "D | " + done + " | " + t.getDescription() + " | " + ((Deadline) t).getDayTime();
+        assert ! str.equals("") : "String has information";
         return str + "\n";
     }
 }
