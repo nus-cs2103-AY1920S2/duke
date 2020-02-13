@@ -18,12 +18,16 @@ public class Controller {
      * @param input input received from user.
      * @return output to be displayed to user.
      */
-    public static String readInput(String input, TaskList taskList) throws DukeException {
+    public static String readInput(String input, TaskList taskList, FriendlierSyntax friendlierSyntax) throws DukeException {
         String[] parsedInput = input.split(" ", 2);
         try {
-            switch (parsedInput[0]) {
+            switch (friendlierSyntax.findCommand(parsedInput[0])) {
                 case "bye":
                     return UI.BYE;
+                case "alias":
+                    String[] alias = parsedInput[1].split(" ");
+                    friendlierSyntax.addAlias(alias[0], alias[1]);
+                    return UI.ALIAS;
                 case "list":
                     if (taskList.isEmpty()) {
                         return UI.EMPTY_LIST;

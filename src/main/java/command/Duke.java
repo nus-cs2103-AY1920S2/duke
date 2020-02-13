@@ -1,7 +1,6 @@
-import command.Controller;
-import command.DukeException;
-import command.Storage;
-import command.UI;
+package command;
+
+import java.util.HashMap;
 import java.util.Scanner;
 
 import tasks.TaskList;
@@ -13,20 +12,21 @@ import tasks.TaskList;
 public class Duke {
 
     private TaskList taskList;
+    private FriendlierSyntax friendlierSyntax;
 
     /**
      * Starts the chat bot by first retrieving saved file from hard disk then
      * obtaining input from the user.
      */
     public void start() {
-        taskList = Storage.readFromFile();
+        Storage.readFromFile(this);
     }
 
     /**
      * Saves the task list into the storage file when user terminates the programme.
      */
     public void end() {
-        Storage.saveFile(taskList);
+        Storage.saveFile(taskList, friendlierSyntax);
     }
 
     /**
@@ -36,6 +36,18 @@ public class Duke {
      */
     public TaskList getTaskList() {
         return taskList;
+    }
+
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
+    }
+
+    public FriendlierSyntax getFriendlierSyntax() {
+        return friendlierSyntax;
+    }
+
+    public void setFriendlierSyntax(FriendlierSyntax friendlierSyntax) {
+        this.friendlierSyntax = friendlierSyntax;
     }
 }
 

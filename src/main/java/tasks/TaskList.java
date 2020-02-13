@@ -11,11 +11,12 @@ import java.util.ArrayList;
 public class TaskList {
     public ArrayList<Task> list;
 
+
     /**
      * Initializes the task list.
      */
-    public TaskList(ArrayList<Task> currentList) {
-        list = currentList;
+    public TaskList() {
+        list = new ArrayList<Task>();
     }
 
     /**

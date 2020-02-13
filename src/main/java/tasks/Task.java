@@ -26,10 +26,11 @@ public class Task {
         return description;
     }
 
+
     /**
      * Returns a tick for tasks marked as done and a cross for tasks not done.
      *
-     * @returna tick for tasks marked as done and a cross for tasks not done.
+     * @return tick for tasks marked as done and a cross for tasks not done.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
