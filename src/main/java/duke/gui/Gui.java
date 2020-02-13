@@ -4,6 +4,7 @@ import duke.Duke;
 import duke.DukeException;
 import duke.Parser;
 import duke.command.Command;
+import duke.command.DummyCommand;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
 public class Gui extends Application {
 
     private Duke duke;
-    private String filePath;
+    private String saveFolder;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -39,8 +40,8 @@ public class Gui extends Application {
     public void init() throws Exception {
         super.init();
 
-        filePath = "data/tasks.txt";
-        duke = new Duke(filePath);
+        saveFolder = "data";
+        duke = new Duke(saveFolder);
     }
 
     /**
@@ -64,7 +65,7 @@ public class Gui extends Application {
      * Obtains duke's response to the user input.
      */
     private void handleUserInput() {
-        Command command = new Command();
+        Command command = new DummyCommand();
         String response;
 
         try {

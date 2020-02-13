@@ -1,22 +1,21 @@
-package duke.command;
+package duke.command.task;
 
 import duke.DukeException;
 import duke.Storage;
 import duke.common.ErrorMessage;
 import duke.common.Message;
-import duke.task.Task;
 import duke.task.TaskList;
 
-public class DeleteCommand extends Command {
+public class MarkCommand extends TaskCommand {
 
     private int index;
 
-    public DeleteCommand(int index) {
+    public MarkCommand(int index) {
         this.index = index;
     }
-
+    
     /**
-     * Executes the command and deletes the task with the given index.
+     * Executes the command and mark the index in the list as done.
      * Then, displays the response to the user.
      */
     public String execute(TaskList tasks, Storage storage)
@@ -25,16 +24,13 @@ public class DeleteCommand extends Command {
             throw new DukeException(ErrorMessage.INVALID_INDEX);
         }
         
-        Task task = tasks.getTask(index);
-        tasks.deleteTask(index);
+        tasks.markDone(index);
         storage.save(tasks);
         
-        String output = Message.DELETE_MESSAGE + "\n"
+        String output = Message.MARK_DONE + "\n"
                 + Message.DIVIDER + "\n"
-                + "  " + task + "\n"
-                + Message.DIVIDER + "\n"
-                + Message.showNumberOfTasks(tasks.getLength()) + "\n";
-
+                + tasks.getTask(index) + "\n"
+                + Message.DIVIDER + "\n";
         return output;
     }
 }

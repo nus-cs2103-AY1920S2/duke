@@ -1,11 +1,11 @@
-package duke.command;
+package duke.command.task;
 
 import duke.Storage;
 import duke.common.Message;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class FindCommand extends Command {
+public class FindCommand extends TaskCommand {
 
     private String search;
 

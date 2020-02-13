@@ -13,6 +13,6 @@ public class Main {
         Application.launch(Gui.class, args);
 
         // Uncomment the following line and comment the above line for CLI.
-        // new Duke("data/tasks.txt").run(new Cli("Duke"));
+        // new Duke("data").run(new Cli("Duke"));
     }
 }

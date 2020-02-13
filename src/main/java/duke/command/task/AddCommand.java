@@ -1,4 +1,4 @@
-package duke.command;
+package duke.command.task;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.task.Todo;
 
-public class AddCommand extends Command {
+public class AddCommand extends TaskCommand {
 
     private TaskType type;
     private String description;
