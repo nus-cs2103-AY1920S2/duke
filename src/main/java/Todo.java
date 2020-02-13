@@ -17,6 +17,10 @@ public class Todo extends Task {
         return "T - " + getDoneInt() + " - " + getCommand();
     }
 
+    public void setDetails(String details) {
+        this.command = details;
+    }
+
     @Override
     public String toString() {
         return "[T][" + getDoneSymbol() + "] " + getCommand();

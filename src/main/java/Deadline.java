@@ -55,6 +55,33 @@ public class Deadline extends Task {
         return "D - " + getDoneInt() + " - " + getCommand() + " - " + getDeadlineDateAndTime();
     }
 
+    public void setDeadlineDate(String deadlineDate) {
+        this.deadlineDate = deadlineDate;
+    }
+
+    public void setDeadlineTime(String deadlineTime) {
+        this.deadlineTime = deadlineTime;
+    }
+
+    public void setDetails(String details) {
+        String[] strArr = details.split(" ", 2);
+        String newDeadlineDate = strArr[0];
+        System.out.println(newDeadlineDate);
+        String newDeadlineTime = strArr[1];
+        System.out.println(newDeadlineTime);
+        this.deadlineDate = newDeadlineDate;
+        this.deadlineTime = newDeadlineTime;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
+            Date deadlineTimeParsed = sdf.parse(deadlineTime);
+            SimpleDateFormat sdftoFormat = new SimpleDateFormat("hhmm aa");
+            this.deadline = LocalDate.parse(deadlineDate).format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                    + sdftoFormat.format(deadlineTimeParsed);
+        } catch (ParseException exception) {
+            exception.printStackTrace();
+        }
+    }
+
     @Override
     public String toString() {
         return "[D][" + getDoneSymbol() + "] " + getCommand() + "(by: " + deadline + ")";

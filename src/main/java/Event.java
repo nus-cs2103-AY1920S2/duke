@@ -22,6 +22,10 @@ public class Event extends Task {
         return "E - " + getDoneInt() + " - " + getCommand() + " - " + timing;
     }
 
+    public void setDetails(String details) {
+        this.timing = details;
+    }
+
     @Override
     public String toString() {
         return "[E][" + getDoneSymbol() + "] " + getCommand() + "(at: " + timing + ")";

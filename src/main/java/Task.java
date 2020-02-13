@@ -54,4 +54,5 @@ public abstract class Task {
     }
 
     public abstract String updateFile();
+    public abstract void setDetails(String details);
 }

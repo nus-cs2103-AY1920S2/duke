@@ -113,4 +113,8 @@ public class Ui {
                 "Now you have " + taskList.size() + " tasks in the list.";
         return strToReturn;
     }
+
+    public String printUpdatingDone() {
+        return "Updating done! Key 'list' again to check:)";
+    }
 }

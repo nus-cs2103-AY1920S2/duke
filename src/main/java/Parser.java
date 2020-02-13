@@ -80,6 +80,21 @@ public class Parser {
         return ui.printRemainingList(currTask, taskList);
     }
 
+    public String handleUpdate(String command) {
+        Task currTask = null;
+        String[] strArr = command.split(" ", 2)[1].split("/", 2);
+        String commandToFind = strArr[0];
+        String detailsToUpdate = strArr[1];
+        for (Task task : taskList) {
+            if (task.getCommand().contains(commandToFind.trim())) {
+                currTask = task;
+            }
+        }
+        assert currTask != null;
+        currTask.setDetails(detailsToUpdate);
+        return ui.printUpdatingDone();
+    }
+
     /**
      * Makes sense of the user commands.
      *
@@ -103,6 +118,8 @@ public class Parser {
             } else if (command.contains("find")) {
                 String[] strArr = command.split(" ", 2);
                 return ui.printTasksFound(taskList, strArr[1]);
+            } else if (command.contains("update")) {
+                return handleUpdate(command);
             } else {
                 throw new DukeException("OTHERS");
             }
