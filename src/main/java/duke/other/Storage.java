@@ -74,6 +74,7 @@ public class Storage {
                     taskList.add(new Event(taskDesc, LocalDate.parse(noteArr[3]), taskIsDone));
                 }
             } else {
+                assert noteType.equals("D") : noteType;
                 if (noteArr.length == 5) {
                     taskList.add(new Deadline(taskDesc, LocalDate.parse(noteArr[3]), LocalTime.parse(noteArr[4]),
                             taskIsDone));
