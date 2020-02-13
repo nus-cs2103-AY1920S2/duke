@@ -14,6 +14,7 @@ public class DeleteCommand extends Command {
      * @param tasks Task list that is updated.
      * @param ui Ui to display interaction messages with the user.
      * @param storage Storage where the updated list is saved into.
+     * @return The reply by the Ui as a String.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

@@ -39,8 +39,8 @@ public class Storage {
     public void writeFile(TaskList list) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-            for (int i = 0; i < list.arr.size(); i++) {
-                String line = list.arr.get(i).toLine();
+            for (int i = 0; i < list.size(); i++) {
+                String line = list.get(i).toLine();
                 writer.write(line);
                 writer.newLine();
             }

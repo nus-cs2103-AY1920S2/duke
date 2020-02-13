@@ -11,14 +11,10 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public static String showWelcome() {
+        String logo = " /\\_/\\\n" +
+                      "( o.o )\n";
+        return logo + "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     public String readCommand() {
@@ -55,12 +51,12 @@ public class Ui {
 
     public String showDeletedTask(TaskList tasks, int option) {
         assert tasks.arr.size() > 0 : "Size of the task list cannot be 0";
-        return "Noted. I've removed this task: \n  " + tasks.arr.get(option - 1) + "\nNow you have " + (tasks.arr.size() - 1) + " tasks in the list.";
+        return "Noted. I've removed this task: \n  " + tasks.get(option - 1) + "\nNow you have " + (tasks.size() - 1) + " tasks in the list.";
     }
 
     public String showAddedTask(Task task, TaskList tasks) {
         assert tasks.arr.size() > 0 : "Size of the task list cannot be 0";
-        return "Got it. I've added this task: \n " + task + "\nNow you have " + tasks.arr.size() + " tasks in the list.";
+        return "Got it. I've added this task: \n " + task + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     public String showFoundTasks(ArrayList<Task> tasksFound) {
@@ -73,8 +69,8 @@ public class Ui {
 
     public String printList(TaskList list) {
         String s = "Here are the tasks in your list:\n";
-        for (int i = 0; i < list.arr.size(); i++) {
-            s += i + 1 + ". " + list.arr.get(i) + "\n";
+        for (int i = 0; i < list.size(); i++) {
+            s += i + 1 + ". " + list.get(i) + "\n";
         }
         return s;
     }

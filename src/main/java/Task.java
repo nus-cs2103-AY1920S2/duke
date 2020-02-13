@@ -10,9 +10,6 @@ public abstract class Task {
         this.done = false;
     }
 
-    /**
-     * Sets the status of a task to be done.
-     */
     public void setDone() {
         this.done = true; //✓
     }

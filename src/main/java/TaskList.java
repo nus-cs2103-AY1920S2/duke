@@ -11,6 +11,23 @@ public class TaskList {
     }
 
     /**
+     * Gets a Task.
+     * @param index Specific index of the task in the list.
+     * @return Returns a Task from the task list from the specified index.
+     */
+    public Task get(int index) {
+        return arr.get(index);
+    }
+
+    /**
+     * Gives the size of task list.
+     * @return Returns the array size of the task list.
+     */
+    public int size() {
+        return arr.size();
+    }
+
+    /**
      * Marks the task to be done.
      * @param option Specific index of task in the list.
      */
