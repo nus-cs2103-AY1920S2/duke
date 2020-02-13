@@ -36,6 +36,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Create one dialog box, with duke introduction.
+     */
     @FXML
     public void handleIntroduction() {
         dialogContainer.getChildren().add(

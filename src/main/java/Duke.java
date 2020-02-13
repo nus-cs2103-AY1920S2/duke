@@ -69,8 +69,6 @@ public class Duke {
             }
         } catch (DukeException e) {
             message = message + ui.printMessage(e.getMessage());
-        } finally {
-
         }
         return message;
     }

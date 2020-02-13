@@ -22,8 +22,8 @@ public class Storage {
     }
 
     /**
-     * Read the file and convert into a arraylist of tasks.
-     * @return ArrayList</Task>
+     * Read the file and convert into a Arraylist of tasks.
+     * @return ArrayList of task
      */
     public ArrayList<Task> readFile() {
         ArrayList<Task> list = new ArrayList<>();
@@ -36,17 +36,16 @@ public class Storage {
                 String[] parsed = TextParser.myThirdParser(word);
                 Task currentTask = null;
                 switch (parsed[0]) {
-                    case "T":
-                        currentTask = new Todo(parsed[2]);
-                        break;
-                    case "D":
-                        currentTask = new Deadline(parsed[2], LocalDate.parse(parsed[3]));
-                        break;
-                    case "E":
-                        currentTask = new Event(parsed[2], LocalDate.parse(parsed[3]));
-                        break;
-                    default:
-                        break;
+                case "T":
+                    currentTask = new Todo(parsed[2]);
+                    break;
+                case "D":
+                    currentTask = new Deadline(parsed[2], LocalDate.parse(parsed[3]));
+                    break;
+                case "E":
+                    currentTask = new Event(parsed[2], LocalDate.parse(parsed[3]));
+                    break;
+                default:
                 }
 
                 if (parsed[1].equals("1")) { // 1 means done
@@ -64,7 +63,7 @@ public class Storage {
 
     /**
      * Writes the arraylist of task into the file.
-     * @param taskList ArrayList</Task>
+     * @param taskList ArrayList of tasks
      */
     public void writeFile(ArrayList<Task> taskList) {
         FileWriter writer = null;
@@ -78,8 +77,8 @@ public class Storage {
                     writer.write("D" + "/" + current.checkDone() + "/" + current.getTask() + "/"
                             + ((Deadline) current).getDate() + System.lineSeparator());
                 } else if (current instanceof Event) {
-                    writer.write("E" + "/" + current.checkDone() + "/" + current.getTask() + "/" +
-                            ((Event) current).getDate() + System.lineSeparator());
+                    writer.write("E" + "/" + current.checkDone() + "/" + current.getTask() + "/"
+                            + ((Event) current).getDate() + System.lineSeparator());
                 }
             }
             writer.close();
