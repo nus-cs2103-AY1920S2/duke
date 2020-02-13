@@ -26,7 +26,7 @@ public class Parser {
         String arr[] = this.input.split(" ", 2);
 
         if (input.equals("bye")) {
-            Storage storage = new Storage("../../../data/duke.txt");
+            Storage storage = new Storage("duke.txt");
             storage.store(taskList);
             ui.showGoodbye();
             System.exit(0);
