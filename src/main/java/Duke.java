@@ -157,6 +157,20 @@ public class Duke {
                                 String showList = "Honk! Here's your updated current task list: \n" + storage.loadList();
                                 return undoMessage + showList;
 
+                            case("help"):
+                                String help = "Honk! Here's what Goose can do:\n\n" +
+                                        "list: Shows list of to-dos\n\n" +
+                                        "todo [description]: Adds a task to your list\n\n" +
+                                        "event [description] /at [DD/MM/YYYY] [24-hr Time]: Adds an event to your list\n\n" +
+                                        "deadline [description] /by [DD/MM/YYYY] [24-hr Time]: Adds a deadline to your list\n\n" +
+                                        "undo: Undo your last action\n\n" +
+                                        "find [keyword]: Retrieves all tasks with the keyword\n\n" +
+                                        "delete [task index]: Deletes the task at index specified\n\n" +
+                                        "done [task index]: Marks task at index specified as done\n\n" +
+                                        "undone [task index]: Marks task at index specified as undone\n\n" +
+                                        "bye: Say goodbye to Goose :(";
+                                return help;
+
                             default:
                                 return "What? Goose no understand.";
                         }

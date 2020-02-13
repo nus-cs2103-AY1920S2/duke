@@ -17,7 +17,7 @@ public class Parser {
     public static String parseCommand(String input) throws GooseUnrecognisedException {
         String[] inputArr = input.split(" ");
         if (!isValid(input)) {
-            throw new GooseUnrecognisedException("Honk honk??");
+            throw new GooseUnrecognisedException("Honk honk?? Send 'help' to get help.");
         }
         return inputArr[0];
     }
@@ -27,6 +27,6 @@ public class Parser {
         return inputArr[0].equals("done") || inputArr[0].equals("deadline") || inputArr[0].equals("undone")
                 || inputArr[0].equals("event") || inputArr[0].equals("todo") || inputArr[0].equals("delete")
                 || inputArr[0].equals("find") || isBye(inputArr[0]) || input.equalsIgnoreCase("list")
-                || inputArr[0].equals("undo");
+                || inputArr[0].equals("undo") || inputArr[0].equals("help");
     }
 }
