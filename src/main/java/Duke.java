@@ -204,6 +204,5 @@ public class Duke {
      */
     public String getResponse(String input) {
         return this.runGUI(input);
-//        return "Duke heard: " + input;
     }
 }
