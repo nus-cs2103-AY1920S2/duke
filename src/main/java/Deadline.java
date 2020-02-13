@@ -1,8 +1,10 @@
+import java.time.LocalDate;
+
 public class Deadline extends Task {
-    public Deadline(String description, String date) {
+    public Deadline(String description, LocalDate date) {
         this.description = description;
         this.type = "D";
-        this.date = parseDate(date);
+        this.date = date;
         this.isDone = false;
     }
 

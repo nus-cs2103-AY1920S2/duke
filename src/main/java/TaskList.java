@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 /**
  *
@@ -14,47 +15,59 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public void addTodo(String task) {
-        Todo newTask = new Todo(task);
+    public String addTodo(String details) {
+        Todo newTask = new Todo(details);
         tasks.add(newTask);
-        print("added new todo: " + task);
+        return ("added new todo: " + details);
     }
 
-    public void addEvent(String[] task) {
-        Event newTask = new Event(task[0], task[1]);
+    public String addEvent(String details, LocalDate date) {
+        Event newTask = new Event(details, date);
         tasks.add(newTask);
-        print("added new event: " + task.toString());
+        return ("added new event: " + newTask);
     }
 
-    public void addDeadline(String[] task) {
-        Deadline newTask = new Deadline(task[0], task[1]);
+    public String addDeadline(String details, LocalDate date) {
+        Deadline newTask = new Deadline(details, date);
         print(newTask.toString());
         tasks.add(newTask);
-        print("added new deadline: " + task.toString());
+        return ("added new deadline: " + newTask);
     }
 
-    public void markDone(int taskIndex) {
+    public String markDone(int taskIndex) {
         Task task = tasks.get(taskIndex - 1);
         task.markAsDone();
-        print("That's another one down. That'll be: ");
-        print(task.toString());
+        return ("That's another one down. That'll be: " + task);
     }
 
-    public void deleteTask(int taskIndex) {
+    public String deleteTask(int taskIndex) {
         Task task = tasks.get(taskIndex - 1);
         tasks.remove(taskIndex - 1);
-        print("Don't need this here anymore eh? Off it goes.");
-        print(task.toString());
+        return ("Don't need this here anymore eh? Off it goes." + task);
     }
 
-    public void findTask(String keyword) {
+    public String listTasks(TaskList taskList) {
+        StringBuilder output = new StringBuilder();
+        taskList.tasks.forEach(task -> output.append(String.format(
+                "%d. %s \n",
+                (taskList.tasks.indexOf(task) + 1),
+                task.toString())));
+        return (output.append(String.format(
+                "That's %d in the list.", taskList.tasks.size())).toString());
+    }
+
+    public String findTask(String keyword) {
         TaskList foundTasks = new TaskList();
+        StringBuilder output = new StringBuilder();
+
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 foundTasks.tasks.add(task);
             }
         }
-        foundTasks.tasks.forEach(task -> print(task.toString()));
+        foundTasks.tasks.forEach(task -> output.append(task));
+
+        return output.toString();
     }
 
     public void print(String string) {

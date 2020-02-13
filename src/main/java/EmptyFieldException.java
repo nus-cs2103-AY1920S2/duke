@@ -5,6 +5,6 @@ public class EmptyFieldException extends DukeException {
 
     @Override
     public String toString() {
-        return "";
+        return this.getMessage();
     }
 }

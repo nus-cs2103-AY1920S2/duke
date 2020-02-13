@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -12,49 +13,42 @@ public class Parser {
      * @param taskList TaskList that contains ArrayList<Task>.
      * @param ui Ui to print out user interface text.
      */
-    public static void handleTasks(TaskList taskList, Ui ui) {
-        Scanner scanner = new Scanner(System.in);
-        boolean loop = true;
-        do {
-            try {
-                String input = scanner.nextLine();
-                String commandType = extractCommandType(input);
-                String[] inputSplit = input.split(" ", 2);
+    public static String handleTasks(String input, TaskList taskList, Ui ui) {
+        try {
+            String commandType = extractCommandType(input);
+            String[] inputSplit = input.split(" ", 2);
+            String[] arr = new String[2];
 
-                switch (commandType) {
-                    case "todo":
-                        taskList.addTodo(prepareTodo(inputSplit));
-                        break;
-                    case "deadline":
-                        taskList.addDeadline(prepareDeadline(inputSplit));
-                        break;
-                    case "event":
-                        taskList.addEvent(prepareEvent(inputSplit));
-                        break;
-                    case "done":
-                        taskList.markDone(prepareDoneDelete(inputSplit[1]));
-                        break;
-                    case "delete":
-                        taskList.deleteTask(prepareDoneDelete(inputSplit[1]));
-                        break;
-                    case "list":
-                        ui.listTasks(taskList);
-                        break;
-                    case "find":
-                        taskList.findTask(inputSplit[1]);
-                        break;
-                    case "bye":
-                        ui.exitDuke();
-                        loop = false;
-                        break;
-                    default:
-                        throw new InvalidCommandException("");
-                    }
-            } catch (InvalidCommandException | InvalidTodoException
-                    | InvalidDeadlineException | InvalidEventException ex) {
-                System.out.println(ex);
-            }
-        } while (loop);
+            switch (commandType) {
+                case "todo":
+                    return taskList.addTodo(prepareTodo(inputSplit));
+                case "deadline":
+                    arr = prepareDeadline(inputSplit);
+                    return taskList.addDeadline(arr[0], parseDate(arr[1]));
+                case "event":
+                    arr = prepareEvent(inputSplit);
+                    return taskList.addDeadline(arr[0], parseDate(arr[1]));
+                case "done":
+                    return taskList.markDone(prepareDoneDelete(inputSplit[1]));
+                case "delete":
+                    return taskList.deleteTask(prepareDoneDelete(inputSplit[1]));
+                case "list":
+                    return taskList.listTasks(taskList);
+                case "find":
+                    return taskList.findTask(inputSplit[1]);
+                case "bye":
+                    return ui.exitDuke();
+                default:
+                    throw new InvalidCommandException("Uhh... You're gonna have to say that again, Red.");
+                }
+        } catch (InvalidCommandException | InvalidTodoException
+                | InvalidDeadlineException | InvalidEventException ex) {
+            return (ui.showError(ex.toString()));
+        }
+    }
+
+    public static LocalDate parseDate(String stringDate) {
+        return LocalDate.parse(stringDate);
     }
 
     /**
@@ -70,9 +64,9 @@ public class Parser {
         boolean isValidCommand = isValidCommand(inputSplit[0]);
 
         if (!isValidCommand) {
-            throw new InvalidCommandException("");
+            throw new InvalidCommandException(
+                    "Uhh... You're gonna have to say that again, Red.");
         }
-
         return inputSplit[0];
     }
 
@@ -87,7 +81,8 @@ public class Parser {
         if (isValidTodo(input)) {
             return input[1];
         } else {
-            throw new InvalidTodoException("");
+            throw new InvalidTodoException(
+                    "You're usually not that taciturn, Red. Explain things to me.");
         }
     }
 
@@ -102,7 +97,10 @@ public class Parser {
         String[] fieldDetails = input[1].split("/", 2);
 
         if (!isValidDeadline(fieldDetails)) {
-            throw new InvalidDeadlineException("");
+            throw new InvalidDeadlineException(
+                    "We're running short of time, so make sure you note it down."
+                            + "Give a description of what we gotta do,"
+                            + "and the date as /YYYY-MM-DD");
         } else {
             return fieldDetails;
         }
@@ -118,7 +116,10 @@ public class Parser {
         String[] fieldDetails = input[1].split("/", 2);
 
         if (!isValidEvent(fieldDetails)) {
-            throw new InvalidEventException("");
+            throw new InvalidEventException(
+                    "We're running short of time, so make sure you note it down."
+                            + "Give a description of what we gotta do,"
+                            + "and the date as /YYYY-MM-DD");
         } else {
             return fieldDetails;
         }

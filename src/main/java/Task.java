@@ -32,10 +32,6 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public LocalDate parseDate(String stringDate) {
-        return LocalDate.parse(stringDate);
-    }
-
     public String formatDate(LocalDate date) {
         return date.format(
                 DateTimeFormatter.ofPattern("MMM dd yyyy"));
