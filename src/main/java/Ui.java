@@ -22,7 +22,6 @@ public class Ui {
      * @param text Text to be framed.
      */
     public static void printWithBorder(String text) {
-        assert text != null : "Should not print empty border without text";
         System.out.println("\n" + separator);
         System.out.println(text);
         System.out.println(separator + "\n");
