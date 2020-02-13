@@ -1,7 +1,10 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,25 +12,43 @@ import java.util.Scanner;
  * Handles saving and loading of task list data into hard drive.
  */
 public class Storage {
-    private String listPath;
-    private String prevListPath;
-    private String arrayPath;
-    private String prevArrayPath;
+    private File listPath;
+    private File prevListPath;
+    private File arrayPath;
+    private File prevArrayPath;
     private Ui ui;
 
     /**
      * Constructor for storage class to handle saving and loading to and from hard disk.
-     *
-     * @param listPath Relative file path for storing the list
-     * @param arrayPath Relative file path for storing the array
      */
-    public Storage(String listPath, String prevListPath,
-                   String arrayPath, String prevArrayPath) {
-        this.listPath = listPath;
-        this.prevListPath = prevListPath;
-        this.arrayPath = arrayPath;
-        this.prevArrayPath = prevArrayPath;
+    public Storage() {
         this.ui = new Ui();
+
+//        String rootDir = System.getProperty("user.dir");
+        String rootDir = System.getProperty("user.dir");
+        StringBuilder path = new StringBuilder();
+        path.append(rootDir);
+
+        File dir = new File(path + "/data");
+
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        this.listPath = new File(dir + "/mainList.txt");
+        this.prevListPath = new File(dir + "/mainList_prev.txt");
+        this.arrayPath = new File(dir + "/duke.txt");
+        this.prevArrayPath = new File(dir + "/duke_prev.txt");
+
+        try {
+            listPath.createNewFile();
+            prevArrayPath.createNewFile();
+            arrayPath.createNewFile();
+            prevArrayPath.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     /**
@@ -38,8 +59,6 @@ public class Storage {
      */
     public void save(ArrayList<Task> taskList) throws IOException { // saves to both duke.txt and array.txt
         // save mainList array
-        File arrayFile = new File(arrayPath);
-        arrayFile.createNewFile();
 
         FileWriter af = new FileWriter(arrayPath);
         String stringList = "";
@@ -67,9 +86,6 @@ public class Storage {
         af.close();
 
         // save list
-        File listFile = new File(listPath);
-        listFile.createNewFile();
-
         FileWriter fw = new FileWriter(listPath);
         String text = "";
         if (taskList.size() != 0) {
@@ -78,7 +94,7 @@ public class Storage {
                     break;
                 }
                 int indexNum = i + 1;
-                String item = " " + indexNum + "." + taskList.get(i).toString();
+                String item = " " + indexNum + ". " + taskList.get(i).toString();
                 if (i != taskList.size() - 1) {
                     item += "\n";
                 }
@@ -96,13 +112,8 @@ public class Storage {
      * @throws IOException If array file not found on hard disk
      */
     public ArrayList<Task> load() throws IOException {
-        File f = new File(arrayPath);
-        f.createNewFile();
-        File lf = new File(listPath);
-        lf.createNewFile();
-
-        Scanner s = new Scanner(f);
-        if (f.length() == 0) {
+        Scanner s = new Scanner(arrayPath);
+        if (arrayPath.length() == 0) {
             return new ArrayList<>();
         } else {
             ArrayList<Task> ml = new ArrayList<>();
@@ -138,13 +149,8 @@ public class Storage {
     }
 
     private ArrayList<Task> loadPrevious() throws IOException {
-        File f = new File(prevArrayPath);
-        f.createNewFile();
-        File lf = new File(prevListPath);
-        lf.createNewFile();
-
-        Scanner s = new Scanner(f);
-        if (f.length() == 0) {
+        Scanner s = new Scanner(prevArrayPath);
+        if (prevArrayPath.length() == 0) {
             return new ArrayList<>();
         } else {
             ArrayList<Task> ml = new ArrayList<>();
@@ -172,7 +178,7 @@ public class Storage {
                         ml.add(addEvent);
                         break;
                     default:
-                        ui.showError("Format error! Honk!");
+                        ui.showError("Format error! Honk!!");
                 }
             }
             return ml;
@@ -183,19 +189,25 @@ public class Storage {
      * Loads task list as a String.
      *
      * @return String representing indexed task list
-     * @throws FileNotFoundException If list file not found in hard disk
+     * @throws IOException If list file not found in hard disk
      */
-    public String loadList() throws FileNotFoundException {
-        File f = new File(listPath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        if (f.length() == 0) { // if the file is empty or doesn't exist
-            return "  You haven't added any tasks. Honk...";
+    public String loadList() throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(listPath))) {
+            String line = null;
+            String printedList = "";
+            boolean isEmpty = true;
+            while ((line = br.readLine()) != null) {
+                printedList += line + "\n";
+                isEmpty = false;
+            }
+
+            if (isEmpty) {
+                return "  You haven't added any tasks. Honk...";
+            }
+            return printedList;
+        } catch (IOException e) {
+            return e.getMessage();
         }
-        String printedList = "";
-        while (s.hasNextLine()) {
-            printedList += s.nextLine() + "\n";
-        }
-        return printedList;
     }
 
     /**
@@ -207,9 +219,6 @@ public class Storage {
      */
     public void saveLastState(ArrayList<Task> taskList) throws IOException {
         // save prev mainList array
-        File arrayFile = new File(prevArrayPath);
-        arrayFile.createNewFile();
-
         FileWriter af = new FileWriter(prevArrayPath);
         String stringList = "";
         for (Task task : taskList) {
@@ -236,9 +245,6 @@ public class Storage {
         af.close();
 
         // save prev list
-        File listFile = new File(prevListPath);
-        listFile.createNewFile();
-
         FileWriter fw = new FileWriter(prevListPath);
         String text = "";
         if (taskList.size() != 0) {
@@ -247,7 +253,7 @@ public class Storage {
                     break;
                 }
                 int indexNum = i + 1;
-                String item = " " + indexNum + "." + taskList.get(i).toString();
+                String item = " " + indexNum + ". " + taskList.get(i).toString();
                 if (i != taskList.size() - 1) {
                     item += "\n";
                 }
