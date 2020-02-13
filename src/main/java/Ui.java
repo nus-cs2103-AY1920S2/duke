@@ -15,7 +15,6 @@ public class Ui {
 
         logo = logo + "Hello! I 'm Duke\n";
         logo = logo + "What can I do for you?\n";
-        logo = logo + "________________________________________\n";
         return logo;
     }
 

@@ -70,7 +70,7 @@ public class Duke {
         } catch (DukeException e) {
             message = message + ui.printMessage(e.getMessage());
         } finally {
-            message = message + ui.printLine();
+
         }
         return message;
     }
