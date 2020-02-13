@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import java.io.IOException;
 import java.nio.file.Files;
+=======
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -82,7 +87,8 @@ public class Duke {
                     try {
                         int breakPos = command.indexOf("/");
                         if ((breakPos == -1) && (command.length() == 8)) throw new DukeException("No desc Deadline");
-                        newTask = new Deadline(command.substring(0, breakPos - 1), command.substring(breakPos + 4));
+                        LocalDate date = LocalDate.parse(command.substring(breakPos + 4));
+                        newTask = new Deadline(command.substring(0, breakPos - 1), date);
                         taskList.add(newTask);
                         System.out.println("Got it. I've added this task: \n" + newTask);
                         System.out.println("Now you have " + taskList.size() + " tasks in the list");
@@ -90,13 +96,16 @@ public class Duke {
                         System.out.println("Deadline description cannot be empty");
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Please re-enter the date for Deadline");
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please enter a valid date format in the form of YYYY-MM-DD");
                     }
                 } else
                 if (command.contains("event")) {
                     try {
                         int breakPos = command.indexOf("/");
                         if ((breakPos == -1) && (command.length() == 5)) throw new DukeException("No desc Event");
-                        newTask = new Event(command.substring(0, breakPos - 1), command.substring(breakPos + 4));
+                        LocalDate date = LocalDate.parse(command.substring(breakPos + 4));
+                        newTask = new Event(command.substring(0, breakPos - 1), date);
                         taskList.add(newTask);
                         System.out.println("Got it. I've added this task: \n" + newTask);
                         System.out.println("Now you have " + taskList.size() + " tasks in the list");
@@ -104,6 +113,8 @@ public class Duke {
                     System.out.println("Event description cannot be empty");
                     } catch (IndexOutOfBoundsException e) {
                       System.out.println("Please re-enter the date for Event");
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please enter a valid date format in the form of YYYY-MM-DD");
                     }
                 } else {
                     System.out.println("Please input a valid command");
