@@ -28,6 +28,7 @@ public class Duke {
         try {
             String[] parsed = TextParser.myFirstParser(command);
             String keyword = parsed[0];
+            assert keyword != "" : "Should contain a keyword else command is a empty string";
             if (keyword.equals("bye")) {
                 this.storage.writeFile(this.tasklist.mylist);
                 message = message + ui.printMessage("Bye. Hope to see you again soon!");
@@ -70,6 +71,7 @@ public class Duke {
         } catch (DukeException e) {
             message = message + ui.printMessage(e.getMessage());
         }
+        assert message != "" : " message should contain some text";
         return message;
     }
 
