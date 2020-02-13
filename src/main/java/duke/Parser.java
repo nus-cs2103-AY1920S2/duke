@@ -7,7 +7,6 @@ import java.time.format.DateTimeParseException;
 
 import duke.exceptions.IncorrectArgumentException;
 import duke.exceptions.InvalidCommandException;
-import duke.exceptions.ShutdownException;
 
 /** 
  * Class which deals with making sense of the user command. 
@@ -42,13 +41,13 @@ class Parser {
      * @throws InvalidCommandException when a command is entered that does not exist.
      * @throws IOException when the Storage object fails in saving the TaskList to file.
      */
-    public String[] parse(String line) throws IncorrectArgumentException, InvalidCommandException, IOException, ShutdownException {
+    public String[] parse(String line) throws IncorrectArgumentException, InvalidCommandException, IOException {
         String[] cmd = line.split(" ", 2);
         String[] response;
         try {
             switch (cmd[0].toLowerCase()) {
             case "bye":
-                throw new ShutdownException(bye());
+                response = new String[]{"bye"};
             case "list":
                 response = list();
                 break;
@@ -79,12 +78,6 @@ class Parser {
         }
         storage.saveToFile(tasks);
         return response;
-    }
-
-    private String bye() {
-        ui.out("Bye. Hope to see you again soon!");
-        ui.close();
-        return "Shutting Down...";
     }
 
     private String[] list() {
