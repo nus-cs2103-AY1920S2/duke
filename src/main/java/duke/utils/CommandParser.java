@@ -1,14 +1,7 @@
 package duke.utils;
 
 
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.UnknownCommand;
-import duke.command.FindCommand;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
+import duke.command.*;
 
 /**
  * Parser to parse commands made by user.
@@ -34,7 +27,9 @@ public class CommandParser {
             return new AddCommand();
         } else if (token[0].equals("find")) {
             return new FindCommand();
-        } else {
+        } else if (token[0].equals("help")) {
+            return new HelpCommand();
+        }else {
             return new UnknownCommand();
         }
     }
