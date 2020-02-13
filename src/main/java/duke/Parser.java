@@ -43,7 +43,7 @@ public class Parser {
     }
 
     /**
-     * Does the main work of parsing raw commands from user input.
+     * Parses raw commands from user input.
      *
      * @param cmd The raw command entered by user.
      * @param tasks The current task-list.

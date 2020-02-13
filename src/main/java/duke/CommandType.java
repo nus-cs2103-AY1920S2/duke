@@ -15,7 +15,7 @@ public enum CommandType {
 
     private String name;
 
-    private CommandType(String name) {
+    CommandType(String name) {
         this.name = name;
     }
 
