@@ -192,7 +192,6 @@ public class Duke extends Application {
     private String getResponse(String text) {
         try {
             Optional<Command> parsed = Parser.parse(text);
-            System.out.println(parsed.isPresent());
             parsed.ifPresent(command -> controller.execute(command));
         } catch (Exception e) {
             return e.getMessage();

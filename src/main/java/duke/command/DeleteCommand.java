@@ -3,6 +3,7 @@ package duke.command;
 import duke.Controller;
 import duke.Storage;
 import duke.Ui;
+import duke.state.StateController;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -31,12 +32,13 @@ public class DeleteCommand extends Command {
      * @return false
      */
     @Override
-    public boolean execute(Storage storageController, ArrayList<Task> storage) {
+    public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
         try {
             int storageSize = storage.size();
             Ui.printDel(storage.get(index).toString(), storageSize - 1);
             storage.remove(index);
             storageController.writeTask(storage);
+            stateController.commit(this, storage);
         } catch (Exception e) {
             Controller.raiseException(e);
         }

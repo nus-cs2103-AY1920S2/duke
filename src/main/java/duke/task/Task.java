@@ -51,6 +51,7 @@ public abstract class Task {
 
     /**
      * Sets the isDone field to true. If isDone is already true, throws an exception.
+     *
      * @throws Exception when value of isDone field is already true
      */
     public void setDone() throws Exception {
@@ -59,6 +60,15 @@ public abstract class Task {
         }
         isDone = true;
     }
+
+    /**
+     *
+     */
+    public void setUndone() {
+        assert this.isDone;
+        this.isDone = false;
+    }
+
     /**
      * Generates a Task object based on the input. The Task object can be a DeadlineTask, an EventTask, or a TodoTask.
      *
@@ -85,6 +95,7 @@ public abstract class Task {
 
 
     }
+
 }
 
 

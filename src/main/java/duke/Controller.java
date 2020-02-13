@@ -1,12 +1,14 @@
 package duke;
 
 import duke.command.Command;
+import duke.state.StateController;
 
 /**
  * The Controller class that facilitates execution of the Duke program
  */
 public class Controller {
     protected Storage storageController;
+    private StateController stateController;
     private boolean hasReachedExit = false;
 
     /**
@@ -16,6 +18,7 @@ public class Controller {
      */
     public Controller(Storage storageController) {
         this.storageController = storageController;
+        this.stateController = new StateController(storageController.generateTaskList());
     }
 
     public static void raiseException(Exception e) {
@@ -29,7 +32,7 @@ public class Controller {
      * @return a boolean value that is returned by the method call execute() to the Command object.
      */
     public boolean execute(Command command) {
-        hasReachedExit = command.execute(storageController, storageController.generateTaskList());
+        hasReachedExit = command.execute(stateController, storageController, storageController.generateTaskList());
         return hasReachedExit;
     }
 

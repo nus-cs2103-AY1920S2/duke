@@ -3,6 +3,7 @@ package duke.command;
 import duke.Controller;
 import duke.Storage;
 import duke.Ui;
+import duke.state.StateController;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class ListCommand extends Command {
      * @return false
      */
     @Override
-    public boolean execute(Storage storageController, ArrayList<Task> storage) {
+    public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
         try {
             String lst = "";
             for (int i = 0; i < storage.size(); i++) {

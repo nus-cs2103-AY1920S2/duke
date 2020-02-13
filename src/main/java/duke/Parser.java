@@ -54,6 +54,12 @@ public class Parser {
                 }
                 return Optional.of(new ListCommand());
 
+            case "undo":
+                if (arr.length > 1) {
+                    Controller.raiseException(new Exception("Too wordy for me"));
+                }
+                return Optional.of(new UndoCommand());
+
             default:
                 try {
                     return Optional.of(new AddCommand(Task.generateTask(arr)));

@@ -3,6 +3,7 @@ package duke.command;
 import duke.Controller;
 import duke.Storage;
 import duke.Ui;
+import duke.state.StateController;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -22,6 +23,10 @@ public class DoneCommand extends Command {
         this.index = i;
     }
 
+    public int getIndex() {
+        return this.index;
+    }
+
     /**
      * Executes this DoneCommand.
      *
@@ -30,12 +35,13 @@ public class DoneCommand extends Command {
      * @return false
      */
     @Override
-    public boolean execute(Storage storageController, ArrayList<Task> storage) {
+    public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
         try {
             int storageSize = storage.size();
             storage.get(index).setDone();
             Ui.printDone(storage.get(index).toString(), storageSize);
             storageController.writeTask(storage);
+            stateController.commit(this, storage);
         } catch (Exception e) {
             Controller.raiseException(e);
         }

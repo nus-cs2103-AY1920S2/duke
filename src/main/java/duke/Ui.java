@@ -100,9 +100,19 @@ public class Ui {
                 + "\n4. done [index] : complete the task at given index"
                 + "\n5. delete [index] : delete the task at given index"
                 + "\n6. find [one single keyword] : find records that contain the specified keyword"
-                + "\n7. bye : say goodbye and quit";
+                + "\n7. undo : jump before the latest command was executed"
+                + "\n8. bye : say goodbye and quit ";
         System.out.println(content);
     }
+
+    /**
+     * Prints a message when an undo command has been executed.
+     */
+    public static void printUndo() {
+        content = "I have successfully restored the previous state";
+        System.out.println(content);
+    }
+
 
     /**
      * Prints the list of tasks currently stored.

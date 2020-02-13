@@ -3,6 +3,7 @@ package duke.command;
 import duke.Controller;
 import duke.Storage;
 import duke.Ui;
+import duke.state.StateController;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class FindCommand extends Command {
      * @return false
      */
     @Override
-    public boolean execute(Storage storageController, ArrayList<Task> storage) {
+    public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
         try {
             AtomicInteger index = new AtomicInteger(1);
             Ui.printFindPre(keyword);

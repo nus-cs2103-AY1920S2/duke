@@ -3,6 +3,7 @@ package duke.command;
 import duke.Controller;
 import duke.Storage;
 import duke.Ui;
+import duke.state.StateController;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -23,17 +24,19 @@ public class AddCommand extends Command {
     /**
      * Executes this AddCommand and writes the specified task represented by the Task object to the file that is
      * currently specified by the file path in the Duke instance.
+     *
      * @param storageController a Storage object
      * @param storage           an ArrayList collection of Task objects for processing in-program.
      * @return false
      */
     @Override
-    public boolean execute(Storage storageController, ArrayList<Task> storage) {
+    public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
         try {
             storage.add(task);
             int storageSize = storage.size();
             Ui.printAdd(task.toString(), storageSize);
             storageController.writeTask(storage);
+            stateController.commit(this, storage);
         } catch (Exception e) {
             Controller.raiseException(e);
         }
