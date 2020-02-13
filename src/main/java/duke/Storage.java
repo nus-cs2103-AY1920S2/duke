@@ -15,6 +15,12 @@ import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
 class Storage {
+    private static final int TASK_TYPE_POSITION = 1;
+    private static final int COMPLETION_STATUS_POSITION = 4;
+    private static final int INFO_START_POSITION = 7;
+    private static final int DESCRIPTION_POSITION = 0;
+    private static final int TIME_POSITION = 1;
+
     private Path file;
 
     Storage(String filepath) {
@@ -32,24 +38,23 @@ class Storage {
                     .flatMap(x -> {
                             try {
                                 Task task;
-                                char taskType = x.charAt(1);
-                                boolean isDone = (x.charAt(4) == '\u2713');
-                                x = x.substring(7);
+                                char taskType = x.charAt(TASK_TYPE_POSITION);
+                                boolean isDone = (x.charAt(COMPLETION_STATUS_POSITION) == '\u2713');
+                                x = x.substring(INFO_START_POSITION);
                                 String[] info;
                                 switch(taskType) {
                                 case 'T':
                                     task = new Todo(x);
                                     break;
                                 case 'D':
-                                    x = x.substring(0, x.length() - 1);
-                                    info = x.split(" \\(by: ");
-                                    task = new Deadline(info[0],
-                                            LocalDate.parse(info[1], DateTimeFormatter.ofPattern("d MMM yyyy")));
+                                    info = x.substring(0, x.length() - 1).split(" \\(by: ");
+                                    task = new Deadline(info[DESCRIPTION_POSITION],
+                                            LocalDate.parse(info[TIME_POSITION],
+                                                DateTimeFormatter.ofPattern("d MMM yyyy")));
                                     break;
                                 case 'E':
-                                    x = x.substring(0, x.length() - 1);
-                                    info = x.split(" \\(at: ");
-                                    task = new Event(info[0], info[1]);
+                                    info = x.substring(0, x.length() - 1).split(" \\(at: ");
+                                    task = new Event(info[DESCRIPTION_POSITION], info[TIME_POSITION]);
                                     break;
                                 default:
                                     return Stream.empty();
