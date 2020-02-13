@@ -10,7 +10,6 @@ public class DukeException extends Exception {
      * @param s The message of the error.
      */
     public DukeException(String s) {
-        // Call constructor of parent Exception
         super(s);
     }
 

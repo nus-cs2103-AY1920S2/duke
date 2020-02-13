@@ -33,6 +33,6 @@ public class Command {
      * @return Command arguments.
      */
     public String[] getParams() {
-        return params;
+        return this.params;
     }
 }

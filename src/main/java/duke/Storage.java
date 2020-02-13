@@ -28,7 +28,6 @@ public class Storage {
         file = new File(filePath);
 
         if (!file.exists()) {
-            // Create file if it does not already exists
             file.createNewFile();
         }
 
