@@ -2,39 +2,45 @@ public class Ui {
 
     /**
      * Prints the introduction welcome message when duke runs.
+     * @return String the introduction
      */
-    public void printIntro() {
+    public String printIntro() {
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        logo = "Hello from\n" + logo;
 
-        System.out.println("Hello! I 'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println("________________________________________");
+        logo = logo + "Hello! I 'm Duke\n";
+        logo = logo + "What can I do for you?\n";
+        logo = logo + "________________________________________\n";
+        return logo;
     }
 
     /**
      * Prints the introduction exit message when duke exit.
+     * @return string of the message
      */
-    public void printEnding() {
-        System.out.println("Bye. Hope not to see you again soon!");
+    public String printEnding() {
+        return ("Bye. Hope not to see you again soon!\n");
     }
 
     /**
      * Prints any message by duke.
      * @param message of duke
+     * @return String ot the message
      */
-    public void printMessage(String message) {
-        System.out.println(message);
+    public String printMessage(String message) {
+        return message + "\n";
     }
 
     /**
      * Prints a line in the terminal.
+     * @return String of a line
      */
-    public void printLine() {
-        System.out.println("________________________________________");
+    public String printLine() {
+        return "________________________________________\n";
     }
 }

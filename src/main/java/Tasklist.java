@@ -66,25 +66,31 @@ public class Tasklist {
     }
 
     /**
-     * Prints the arraylist of task.
+     * Print the arraylist of task.
+     * @return String of the list
      */
-    public void printList() {
+    public String printList() {
+        String list = "";
         for (int i = 0; i < mylist.size(); i++) {
-            System.out.println(i + 1 + ". " + mylist.get(i));
+            list = list + (i + 1 + ". " + mylist.get(i) + "\n");
         }
+        return list;
     }
 
     /**
      * Print the list of tasks with the keyword inside.
      * @param keyword String
+     * @return String of the result
      */
-    public void findKeyword(String keyword) {
+    public String findKeyword(String keyword) {
+        String result = "";
         int j = 1;
         for (int i = 0; i < mylist.size(); i++) {
             if (mylist.get(i).description.contains(keyword)) {
-                System.out.println(j + ". " + mylist.get(i));
+                result = result + (j + ". " + mylist.get(i) + "\n");
                 j++;
             }
         }
+        return result;
     }
 }
