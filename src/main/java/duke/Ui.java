@@ -5,6 +5,8 @@ import duke.task.Task;
 import java.util.Scanner;
 
 class Ui {
+    private static final int HORIZONTAL_LINE_LENGTH = 76;
+
     String getInput(Scanner sc) {
         return sc.nextLine();
     }
@@ -37,7 +39,7 @@ class Ui {
     }
 
     String format(String message) {
-        String horizontalLine = new String(new char[76]).replace("\0", "-");
+        String horizontalLine = new String(new char[HORIZONTAL_LINE_LENGTH]).replace("\0", "-");
         message = horizontalLine + "\n" + message + "\n" + horizontalLine;
         return message.lines()
             .map(x -> "    " + x + "\n")

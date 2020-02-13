@@ -20,6 +20,8 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final int DIALOG_POSITION = 0;
+
     @FXML
     private Label dialog;
     @FXML
@@ -57,7 +59,7 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         dialog.setAlignment(Pos.BOTTOM_LEFT);
-        tmp.set(0, dialog);
+        tmp.set(DIALOG_POSITION, dialog);
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.BOTTOM_LEFT);
