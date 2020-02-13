@@ -191,7 +191,7 @@ public class TaskList {
      * @param desc a string of the Description of the task the user wants to find
      */
     public String find(String desc) {
-        assert input != null : "Find command input is empty!";
+        assert desc != null : "Find command input is empty!";
 
         desc = desc.replace("find","");
         desc = desc.trim();
@@ -288,7 +288,7 @@ public class TaskList {
      * @return boolean value whether it is empty
      */
     public boolean checkEmpty(String cmd) {
-        assert input != null : "checkEmpty input is empty!";
+        assert cmd != null : "checkEmpty input is empty!";
 
         if (cmd.isEmpty()) {
             return true;

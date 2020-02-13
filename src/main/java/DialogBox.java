@@ -20,6 +20,13 @@ import javafx.stage.Stage;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.WritableImage;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -43,27 +50,14 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        displayPicture.setImage(img);
-        // set a clip to apply rounded border to the original image.
-        Rectangle clip = new Rectangle(
-                displayPicture.getFitWidth(), displayPicture.getFitHeight()
-        );
-        clip.setArcWidth(50);
-        clip.setArcHeight(50);
-        displayPicture.setClip(clip);
 
-        // snapshot the rounded image.
-        SnapshotParameters parameters = new SnapshotParameters();
-        parameters.setFill(Color.TRANSPARENT);
-        WritableImage image = displayPicture.snapshot(parameters, null);
-
-        // remove the rounding clip so that our effect can show through.
-        displayPicture.setClip(null);
-
-        // apply a shadow effect.
-        //displayPicture.setEffect(new DropShadow(20, Color.BLACK));
+        double w = displayPicture.getFitWidth();
+        double h = displayPicture.getFitHeight();
+        Ellipse ellipse = new Ellipse(w / 2.6, h / 2.6, w / 2.6, h / 2.6);
+        displayPicture.setClip(ellipse);
+        dialog.setFont(new Font("Arial", 12));
         dialog.setText(text);
-        displayPicture.setImage(image);
+        displayPicture.setImage(img);
 
     }
 

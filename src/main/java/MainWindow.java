@@ -5,6 +5,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.ImageView;
+import javafx.beans.value.ObservableValue;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -15,6 +19,7 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
+
     @FXML
     private Button sendButton;
 
@@ -27,7 +32,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //initTextField();
     }
+
+
 
     public void setDuke(Duke d) {
         duke = d;
@@ -46,6 +54,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        //justadded
+
+        /*userInput.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                userInput.setPrefWidth(userInput.getText().length() * 7); // why 7? Totally trial number.
+            }
+        });*/
         String response;
         try {
             response = duke.getResponse(input);

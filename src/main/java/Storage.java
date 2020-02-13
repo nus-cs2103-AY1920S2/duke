@@ -8,7 +8,7 @@ import java.util.*;
 public class Storage {
 
     private final String fileName = "../../../duke_save.txt";
-    private int latest_index = 0;
+    private int latestIndex = 0;
     private BufferedWriter bw;
 
     public ArrayList<Task> readFile() {
@@ -23,14 +23,14 @@ public class Storage {
                     list = processLines(line, list);
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         } catch (FileNotFoundException e) {
             try {
                 File file = new File(fileName);
                 file.createNewFile();
             } catch (Exception f) {
-                System.out.println(f);
+                f.printStackTrace();
             }
         }
         return list;
@@ -70,7 +70,7 @@ public class Storage {
             time = line.substring(time_start_index);
             time = time.substring(0, time.length() - 1);
 
-            Event event = new Event(desc, time, ++latest_index);
+            Event event = new Event(desc, time, ++latestIndex);
             event.isDone = done;
             list.add(event);
 
@@ -90,7 +90,7 @@ public class Storage {
             desc = line.substring(7, desc_end_index);
             time = line.substring(time_start_index);
             time = time.substring(0, time.length() - 1);
-            Deadline deadline = new Deadline(desc, time, ++latest_index);
+            Deadline deadline = new Deadline(desc, time, ++latestIndex);
             deadline.isDone = done;
             list.add(deadline);
 
@@ -100,7 +100,7 @@ public class Storage {
             boolean done = line.charAt(4) == 'N' ? false : true;
             desc = new_line;
 
-            Todo todo = new Todo(desc, ++latest_index);
+            Todo todo = new Todo(desc, ++latestIndex);
             list.add(todo);
             todo.isDone = done;
 
@@ -132,6 +132,6 @@ public class Storage {
 
 
     public int returnInitialIndex() {
-        return latest_index;
+        return latestIndex;
     }
 }
