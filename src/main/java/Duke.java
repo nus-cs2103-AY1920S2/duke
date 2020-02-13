@@ -68,8 +68,9 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Method parses the user input in the gui to translate into designated output by the program.
+     * @param input input that user enters
+     * @return returns a string of output that is displayed in the GUI
      */
     protected String getResponse(String input) {
         // Create stream to hold the output
