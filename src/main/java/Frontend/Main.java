@@ -48,11 +48,7 @@ public class Main extends Application {
     public void start( Stage stage ) {
         initialiseBackendComponents();
         initialiseComponents();
-
-        stage.setScene(scene);
-        stage.show();
-        stage.setTitle("Duke v1.0");
-
+        setTheStage(stage);
         resizeComponents(stage);
         setHandlers();
         greet();
@@ -221,6 +217,12 @@ public class Main extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
+
+    private void setTheStage(Stage stage){
+        stage.setScene(scene);
+        stage.show();
+        stage.setTitle("Duke v1.0");
     }
 
     /**
