@@ -62,6 +62,7 @@ public class DataParser {
     /**
      * Enables the parser to serialize and deserialize LocalDate.
      */
+    //Solution below adapted from https://stackoverflow.com/questions/5800433/polymorphism-with-gson with modification
     private static class LocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
 
         @Override
