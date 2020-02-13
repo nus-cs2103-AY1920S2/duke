@@ -29,6 +29,8 @@ import java.io.IOException;
  */
 
 public class Driver extends Application {
+    private final String STAGE_TITLE = "Duke";
+    private static final String BYE_STRING = "bye";
     /**
      * The main method runs the program.
      * @param args The command line arguments entered into the program.
@@ -42,7 +44,7 @@ public class Driver extends Application {
 
             String command = userInterface.readCommand();
             userInterface.printLine();
-            while (!command.equals("bye")) {
+            while (isNotEqualBye(command)) {
                 String message = duke.processCommand(command);
                 userInterface.displayMessage(message);
                 userInterface.printLine();
@@ -58,6 +60,16 @@ public class Driver extends Application {
     }
 
     /**
+     * Returns whether the command string equals to bye.
+     * @param command The command entered by the client.
+     * @return The boolean value.
+     */
+
+    private static boolean isNotEqualBye(String command) {
+        return !command.equals(BYE_STRING);
+    }
+
+    /**
      * Starts the app's GUI by loading the resources from MainWindow.fxml.
      * @param stage The stage of the GUI.
      */
@@ -67,6 +79,7 @@ public class Driver extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle(STAGE_TITLE);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(Duke.start());
             stage.show();
