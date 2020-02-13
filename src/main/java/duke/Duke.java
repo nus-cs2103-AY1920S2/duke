@@ -103,6 +103,8 @@ public class Duke {
                 foundTaskList = taskList.findByKeyword(command.getParams()[0]);
 
                 return ui.printFoundTaskList(foundTaskList);
+            case HELP_CMD:
+                return ui.printHelpMsg();
             case BYE_CMD:
                 return ui.printByeMsg();
             default:

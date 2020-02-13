@@ -11,6 +11,16 @@ public class Ui {
     public static final String LF = "\r\n";
     private static final String WELCOME_MSG = "Hello! I'm duke.Duke" + LF + "What can I do for you?" + LF;
     public static final String BYE_MSG = "Bye, hope to see you again soon!" + LF;
+    public static final String HELP_MSG = "Here are the list of supported commands:" + LF
+            + "list - Lists all Tasks" + LF
+            + "done [Task index] - Marks the specified task as done" + LF
+            + "delete [Task index] - Deletes the specified task" + LF
+            + "todo [Task name] - Creates a new Task" + LF
+            + "deadline [Task name] [date] - Creates a new (Deadline) Task" + LF
+            + "event [Task name] [date] - Creates a new (Event) Task" + LF
+            + "find [Task name] - Finds a Task based on a certain name keyword" + LF
+            + "help - Prints this Help message" + LF
+            + "bye - Exits the application" + LF;
 
     /**
      * Constructs a new UI object.
@@ -32,6 +42,13 @@ public class Ui {
      */
     public String printByeMsg() {
         return BYE_MSG;
+    }
+
+    /**
+     * Print the bye message.
+     */
+    public String printHelpMsg() {
+        return HELP_MSG;
     }
 
     /**

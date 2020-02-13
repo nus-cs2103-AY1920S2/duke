@@ -11,6 +11,7 @@ public enum CommandType {
     DEADLINE_CMD("deadline"),
     EVENT_CMD("event"),
     FIND_CMD("find"),
+    HELP_CMD("help"),
     BYE_CMD("bye");
 
     private String name;

@@ -132,6 +132,8 @@ public class Parser {
             str1  = cmd.split("find\\s+")[1];
 
             return new Command(CommandType.FIND_CMD, new String[] { str1 });
+        } else if (cmd.equals(CommandType.HELP_CMD.toString())) {
+            return new Command(CommandType.HELP_CMD, null);
         } else if (cmd.equals(CommandType.BYE_CMD.toString())) {
             return new Command(CommandType.BYE_CMD, null);
         } else {
