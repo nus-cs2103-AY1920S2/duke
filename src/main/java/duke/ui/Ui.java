@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 import java.util.Arrays;
@@ -8,6 +9,10 @@ import java.util.List;
 public class Ui implements UiText {
     private boolean isOpen = false;
     protected Scanner sc;
+
+    public Ui(InputStream is) {
+        this.sc = new Scanner(is);
+    }
 
     public Ui(Scanner inputSc) {
         this.sc = inputSc;

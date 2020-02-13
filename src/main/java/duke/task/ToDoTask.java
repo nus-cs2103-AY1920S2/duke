@@ -11,12 +11,11 @@ public class ToDoTask extends Task {
      * @param name   = task name
      */
     public ToDoTask(String name) {
-        this(name, false);
+        this(name, false, false);
     }
 
-    private ToDoTask(String name, boolean done) {
-        super(name, TaskType.TODO_TASK);
-        this.isDone = done;
+    private ToDoTask(String name, boolean done, boolean isScrapped) {
+        super(name, done, TaskType.TODO_TASK, isScrapped);
     }
 
     /**
@@ -24,7 +23,7 @@ public class ToDoTask extends Task {
      */
     @Override
     public CSV toCSV() {
-        return new CSV(new CSV(ToDoTask.TYPE_STR), new CSV(Boolean.toString(isDone())), new CSV(getName()));
+        return new CSV(new CSV(ToDoTask.TYPE_STR), new CSV(Boolean.toString(isDone())), new CSV(Boolean.toString(isScrapped())), new CSV(getName()));
     }
 
     /**
@@ -34,7 +33,7 @@ public class ToDoTask extends Task {
      * @return previously saved task
      */
     public static ToDoTask parseFromCSV(CSV csv) {
-        return new ToDoTask(csv.getStr(2), Boolean.parseBoolean(csv.getStr(1)));
+        return new ToDoTask(csv.getStr(3), Boolean.parseBoolean(csv.getStr(1)), Boolean.parseBoolean(csv.getStr(2)));
     }
 
     /**
@@ -43,5 +42,9 @@ public class ToDoTask extends Task {
     @Override
     public String toString() {
         return sqB(ToDoTask.TYPE_STR) + sqB(gou()) + " " + getName();
+    }
+
+    public ToDoTask getCopy() {
+        return new ToDoTask(this.name, this.isDone, this.isScrapped);
     }
 }

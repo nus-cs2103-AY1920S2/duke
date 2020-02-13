@@ -21,14 +21,13 @@ public class EventTask extends Task {
      * @param time   = string inputted by user that describe the time
      */
     public EventTask(String name, String prepos, String time) {
-        this(name, prepos, time, false);
+        this(name, prepos, time, false, false);
     }
 
-    private EventTask(String name, String prepos, String time, boolean done) {
-        super(name, TaskType.EVENT_TASK);
+    private EventTask(String name, String prepos, String time, boolean done, boolean isScrapped) {
+        super(name, done, TaskType.EVENT_TASK, isScrapped);
         this.prepos = prepos;
         this.time = time;
-        this.isDone = done;
         try {
             this.ld = LocalDate.parse(time, defaultDateF);
         } catch (DateTimeParseException dtpe) {
@@ -41,7 +40,7 @@ public class EventTask extends Task {
      */
     @Override
     public CSV toCSV() {
-        return new CSV(new CSV(EventTask.TYPE_STR), new CSV(this.prepos), new CSV(this.time),
+        return new CSV(new CSV(EventTask.TYPE_STR), new CSV(this.prepos), new CSV(this.time), new CSV(Boolean.toString(isScrapped())),
                 new CSV(Boolean.toString(isDone())), new CSV(getName()));
     }
 
@@ -52,7 +51,7 @@ public class EventTask extends Task {
      * @return previously saved task
      */
     public static EventTask parseFromCSV(CSV csv) {
-        return new EventTask(csv.getStr(4), csv.getStr(1), csv.getStr(2), Boolean.parseBoolean(csv.getStr(3)));
+        return new EventTask(csv.getStr(5), csv.getStr(1), csv.getStr(2), Boolean.parseBoolean(csv.getStr(3)), Boolean.parseBoolean(csv.getStr(4)));
     }
 
     private String timeRemStr() {
@@ -70,5 +69,9 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return sqB(EventTask.TYPE_STR) + sqB(gou()) + " " + getName() + " (" + timeRemStr() + ")";
+    }
+
+    public EventTask getCopy() {
+        return new EventTask(this.name, this.prepos, this.time, this.isDone, this.isScrapped);
     }
 }

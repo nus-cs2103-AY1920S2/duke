@@ -12,6 +12,8 @@ public interface UiText {
     public static String bye = "Bye. Hope to see you again soon!";
     public static String dunno = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static String loadingErrorMsg = "File not exist";
+    public static String revertSuccess = "Yay! I have nullified your previous command!";
+    public static String revertError = "No history available";
 
     public void start(String... initials);
     public void respondLine(List<String> respondStr);

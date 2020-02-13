@@ -15,7 +15,7 @@ public class Parser {
     public static Command parse(String cmdLine) {
         Scanner sc = new Scanner(cmdLine);
         String first = sc.next();
-        switch(first) {
+        switch (first) {
             case "todo":
             case "deadline":
             case "event":
@@ -28,6 +28,8 @@ public class Parser {
                 return new FindCommand(sc);
             case "done":
                 return new MarkAsDoneCommand(sc);
+            case "undo":
+                return new ReverseCommand(sc);
             case "exit":
                 return new ExitCommand(sc);
             default:

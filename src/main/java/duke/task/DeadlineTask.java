@@ -21,7 +21,7 @@ public class DeadlineTask extends Task {
      * @param time   = string inputted by user that describe the time
      */
     public DeadlineTask(String name, String prepos, String time) {
-        this(name, prepos, time, false);
+        this(name, prepos, time, false, false);
     }
 
     private String timeRemStr() {
@@ -33,11 +33,10 @@ public class DeadlineTask extends Task {
         }
     }
 
-    private DeadlineTask(String name, String prepos, String time, boolean done) {
-        super(name, TaskType.DEADLINE_TASK);
+    private DeadlineTask(String name, String prepos, String time, boolean done, boolean isScrapped) {
+        super(name, done, TaskType.DEADLINE_TASK, isScrapped);
         this.prepos = prepos;
         this.dateLine = time;
-        this.isDone = done;
         try {
             this.ld = LocalDate.parse(time, defaultDateF);
         } catch (DateTimeParseException dtpe) {
@@ -51,7 +50,7 @@ public class DeadlineTask extends Task {
     @Override
     public CSV toCSV() {
         return new CSV(new CSV(DeadlineTask.TYPE_STR), new CSV(this.prepos), new CSV(this.dateLine),
-                new CSV(Boolean.toString(isDone())), new CSV(getName()));
+                new CSV(Boolean.toString(isDone())), new CSV(Boolean.toString(isScrapped())), new CSV(getName()));
     }
 
     /**
@@ -61,7 +60,7 @@ public class DeadlineTask extends Task {
      * @return previously saved task
      */
     public static DeadlineTask parseFromCSV(CSV csv) {
-        return new DeadlineTask(csv.getStr(4), csv.getStr(1), csv.getStr(2), Boolean.parseBoolean(csv.getStr(3)));
+        return new DeadlineTask(csv.getStr(5), csv.getStr(1), csv.getStr(2), Boolean.parseBoolean(csv.getStr(3)), Boolean.parseBoolean(csv.getStr(4)));
     }
 
     /**
@@ -70,5 +69,9 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         return sqB(DeadlineTask.TYPE_STR) + sqB(gou()) + " " + getName() + " (" + timeRemStr() + ")";
+    }
+
+    public DeadlineTask getCopy() {
+        return new DeadlineTask(this.name, this.prepos, this.dateLine, this.isDone, this.isScrapped);
     }
 }
