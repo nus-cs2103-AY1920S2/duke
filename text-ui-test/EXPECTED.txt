@@ -1,0 +1,35 @@
+____________________________________________________________
+                  M"""""""`YM""MMMMM""MP""""""`MM
+                  M  mmmm.  M  MMMMM  M  mmmmm..M
+          .d8888b.M  MMMMM  M  MMMMM  M.      `YM
+          88'  `88M  MMMMM  M  MMMMM  MMMMMMM.  M
+          88.  .88M  MMMMM  M  `MMM'  M. .MMM'  M
+          `88888P'M  MMMMM  Mb       dMb.     .dM
+                  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+   Hello!
+   The oNUS is on me to help you be productive! (>‿◠)✌
+____________________________________________________________
+
+____________________________________________________________
+   Got it. I've added this task:
+      [T] [?]  borrow book
+   Now you have 1 task in the list.
+____________________________________________________________
+
+____________________________________________________________
+
+   1. [T] [?]  borrow book
+____________________________________________________________
+
+____________________________________________________________
+   Got it. I've added this task:
+      [D] [?]  return book (by Sunday)
+   Now you have 2 tasks in the list.
+____________________________________________________________
+
+____________________________________________________________
+   Got it. I've added this task:
+      [E] [?] event project meeting (at Mon 2-4pm)
+   Now you have 3 tasks in the list.
+____________________________________________________________
+
