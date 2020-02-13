@@ -1,3 +1,7 @@
+import duke.DukeException;
+import duke.Task;
+import duke.TaskList;
+import duke.ToDo;
 import org.junit.Test;
 
 import java.util.ArrayList;
