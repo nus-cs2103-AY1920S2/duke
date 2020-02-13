@@ -2,10 +2,10 @@
  * Represents a command that marks a task to be done before updating it into the task list.
  */
 public class DoneCommand extends Command {
-    protected int option;
+    protected int[] options;
 
-    public DoneCommand(int option) {
-        this.option = option;
+    public DoneCommand(int[] options) {
+        this.options = options;
     }
 
     /**
@@ -17,10 +17,14 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.markAsDone(option);
-        String s = ui.showDoneTask(tasks.arr.get(option - 1));
-        storage.writeFile(tasks);
-        return s;
+        String string = "";
+        for (int i = 0; i < options.length; i++) {
+            tasks.markAsDone(options[i]);
+            String s = ui.showDoneTask(tasks.arr.get(options[i] - 1)) + "\n";
+            storage.writeFile(tasks);
+            string += s;
+        }
+        return string;
     }
 
     /**

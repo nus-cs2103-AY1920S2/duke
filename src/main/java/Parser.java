@@ -44,9 +44,19 @@ public class Parser {
                 }
             }
         } else if (command.equals("done")) {
-            return new DoneCommand(Integer.parseInt(arr[1]));
+            String[] array = arr[1].split("\\s+");
+            int[] options = new int[array.length];
+            for (int i = 0; i < options.length; i++) {
+                options[i] = Integer.parseInt(array[i]);
+            }
+            return new DoneCommand(options);
         } else if (command.equals("delete")) {
-            return new DeleteCommand(Integer.parseInt(arr[1]));
+            String[] array = arr[1].split("\\s+");
+            int[] options = new int[array.length];
+            for (int i = 0; i < options.length; i++) {
+                options[i] = Integer.parseInt(array[i]);
+            }
+            return new DeleteCommand(options);
         } else if (command.equals("list")) {
             return new ListCommand();
         } else if (command.equals("find")) {

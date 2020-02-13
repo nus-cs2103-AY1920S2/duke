@@ -39,8 +39,8 @@ public class TaskList {
      * Removes the task from the list.
      * @param option Specific index of task in the list.
      */
-    public void deleteTask(int option) {
-        arr.remove(option - 1);
+    public void deleteTask(Task task) {
+        arr.remove(task);
     }
 
     /**
@@ -64,4 +64,5 @@ public class TaskList {
         }
         return tasksFound;
     }
+
 }

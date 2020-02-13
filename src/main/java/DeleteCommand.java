@@ -1,11 +1,13 @@
+import java.util.ArrayList;
+
 /**
  * Represents a command that executes the deletion of a task into the task list.
  */
 public class DeleteCommand extends Command {
-    protected int option;
+    protected int[] options;
 
-    public DeleteCommand(int option) {
-        this.option = option;
+    public DeleteCommand(int[] options) {
+        this.options = options;
     }
 
     /**
@@ -18,10 +20,21 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String s = ui.showDeletedTask(tasks, option);
-        tasks.deleteTask(option);
+        String string = "";
+        ArrayList<Task> deleted = new ArrayList<>();
+
+        for (int i = 0; i < options.length; i++) {
+            String s = ui.showDeletedTask(tasks, options[i]) + "\n";
+            deleted.add(tasks.get(options[i] - 1));
+            string += s;
+        }
+
+        for (int i = 0; i < deleted.size(); i++) {
+           tasks.deleteTask(deleted.get(i));
+        }
+
         storage.writeFile(tasks);
-        return s;
+        return string;
     }
 
     /**
