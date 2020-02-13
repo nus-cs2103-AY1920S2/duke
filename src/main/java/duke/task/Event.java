@@ -13,11 +13,6 @@ public class Event extends Task {
     // for the date and time option
     private String at;
 
-    // isDay if the user uses "../at Monday" instead of a standard yyyy-mm-dd format
-    //private static boolean isDay = false;
-    // Days array to determine if its a day or a yyyy-mm-dd format
-    //String[] days;
-
     /**
      * Instantiates a new Event.
      *
@@ -33,7 +28,7 @@ public class Event extends Task {
     }
 
     /**
-     *  Sets the date and time of the event task.
+     * Sets the date and time of the event task.
      *
      * @param s the s
      */
@@ -50,14 +45,10 @@ public class Event extends Task {
         super.setD1(getAt());
     }
 
-    // Covers exceptions caused by empty descriptions
-    // Incorrect use of identifiers "../at" (More stringent check of formatting)
-    // No deadline descriptors. Eg: "deadline /by Monday"
-    // Same for TO-DO, duke.task.Deadline and duke.task.Event classes!
-    // throws exception when Eg: use ../by instead of ../at
     /**
      * From the input given by the user, filter out the commands (Event)
      * And returns the description of the string.
+     *
      * @param s the s
      * @return String without "event"
      * @throws DukeException when the user enters an empty description or use the wrong event format.

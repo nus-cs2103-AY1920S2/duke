@@ -10,8 +10,7 @@ import java.util.ArrayList;
 /**
  * The type Ui.
  */
-// Deals with interactions with the user
-// Shows the lines, errors etc
+
 public class Ui {
 
     private DeadlineEventHash deadlineEventHash = new DeadlineEventHash();

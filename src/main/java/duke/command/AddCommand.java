@@ -46,7 +46,6 @@ public class AddCommand extends Command {
             throws DukeException, IOException {
 
         if (userInput.contains("deadline")) {
-            // Assert that the programmer accidently change the field in contains
             assert (userInput.contains("deadline")) : "userInput should contain deadline!";
             Deadline newDeadLine = new Deadline(userInput);
             newDeadLine.setDescription(userInput);

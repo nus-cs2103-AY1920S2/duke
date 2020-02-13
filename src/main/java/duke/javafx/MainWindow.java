@@ -38,11 +38,17 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Trump.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Putin.jpg"));
 
+
+    /**
+     * Initializes the Launcher to certain properties set.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog("Sup Putin, my best Friend", userImage));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Welcome Mr Trump!", dukeImage));
     }
+
 
     public void setDukeJavaFxRunner(DukeJavaFxRunner d) {
         dukeJavaFxRunner = d;
@@ -59,7 +65,7 @@ public class MainWindow extends AnchorPane {
 
         String input = userInput.getText();
         String response = "";
-        // Gets the response from the fxrunner thing we set.
+        // Gets the response from MainWindow.
         try {
             response = duke.run(input);
         } catch (Exception e) {

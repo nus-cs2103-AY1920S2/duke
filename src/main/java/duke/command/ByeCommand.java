@@ -1,7 +1,6 @@
 package duke.command;
 
 
-import duke.duke.Duke;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;

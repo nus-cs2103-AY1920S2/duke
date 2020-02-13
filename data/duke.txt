@@ -209,3 +209,22 @@ T |  ✘ | run
  [T] [✘] hahahs
  [T] [✘] hahahahaha
  [T] [✘] lala
+ [T] [✘] running
+ [T] [✘] run
+ [T] [✘] run
+ [T] [✘] run
+ [T] [✘] run
+ [D] [✘] project (by: Feb 17 2020 00:00)
+ [T] [✘] run
+ [D] [✘] sleep (by: Feb 17 2020 00:00)
+ [D] [✘] sleep (by: Feb 17 2020 18:00)
+ [E] [✘] run (at: Feb 17 2020 00:00)
+ [E] [✘] play csgo (at: Feb 17 2020 20:00)
+ [T] [✘] run
+ [D] [✘] project (by: Feb 17 2020 18:00)
+ [T] [✘] run
+ [E] [✘] sleep (at: Feb 17 2020 18:00)
+ [D] [✘] speech (by: Feb 18 2020 20:00)
+ [T] [✘] run
+ [E] [✘] sleep (at: Feb 17 2020 18:00)
+ [D] [✘] speech (by: Feb 18 2020 14:00)

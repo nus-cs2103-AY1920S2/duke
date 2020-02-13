@@ -27,18 +27,7 @@ public class DukeJavaFxRunner extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Duke dukes;
     private MainWindow mainWindow;
-
-
-    public static void main(String[] args) throws IOException, DukeException {
-        new Duke().run("");
-        
-    }
-
-    public void setDukes(Duke dukes) {
-        this.dukes = dukes;
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {

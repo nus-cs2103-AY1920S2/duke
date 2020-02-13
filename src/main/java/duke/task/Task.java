@@ -21,7 +21,7 @@ public class Task {
     private DaysOfWeek dm = new DaysOfWeek();
     private String[] days;
     private boolean isDay;
-    // To check if there is time inclusive in the command a not
+    // To check if there is time inclusive in the command
     private boolean hasTime;
     private DeadlineEventHash deadlineEventHash;
 

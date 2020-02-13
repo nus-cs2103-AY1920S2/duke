@@ -25,18 +25,11 @@ public class Deadline extends Task {
         super(description);
     }
 
-
-    // One way to get the time is we split the string, then we check if there
-    // Is more character elements after the year.
-    // If there is, then it means that there is time inclusive
-
     /**
      * Sets the date and time of the deadline task.
      *
      * @param by the by
      */
-    // Then for the date wise right, can just check if there is only one element
-    // Or two elements.
     public void setBy(String by) {
         this.by = super.set_by_at(by);
     }
@@ -57,6 +50,7 @@ public class Deadline extends Task {
     /**
      * From the input given by the user, filter out the commands (Deadline)
      * And returns the description of the string.
+     *
      * @param s the s
      * @return String without "deadline"
      * @throws DukeException when the user enters an empty description or use the wrong deadline format
