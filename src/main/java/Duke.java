@@ -32,6 +32,10 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
     private static final String BORDER_LINE = "____________________________________________________________\n";
+    private static final int STARTING_VARIABLE = 0;
+    private static final int VARIABLE_ENTRY_ONE = 1;
+    private static final int SPLIT_BY_TWO = 2;
+
 
     @Override
     public void start(Stage stage) {
@@ -186,9 +190,9 @@ public class Duke extends Application {
     static String stringToTime(String s) throws DukeException {
         try {
             // Convert DATE to expected format
-            LocalDate d = LocalDate.parse(s.split(" ")[0]);
+            LocalDate d = LocalDate.parse(s.split(" ")[STARTING_VARIABLE]);
             SimpleDateFormat sdf = new SimpleDateFormat("H:mm");
-            Date dateObj = sdf.parse(s.split(" ")[1]);
+            Date dateObj = sdf.parse(s.split(" ")[VARIABLE_ENTRY_ONE]);
             return d.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + new SimpleDateFormat("HH:mm aa").format(dateObj);
         } catch (Exception e) {
             System.out.println("Please give a correct format (ie. yyyy-mm-dd hh:mm)");
@@ -200,30 +204,30 @@ public class Duke extends Application {
         try {
             if (input.toLowerCase().equals("list")) {
                 tasks.printList();
-            } else if (input.split(" ")[0].equals("done")) {
-                int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
+            } else if (input.split(" ")[STARTING_VARIABLE].equals("done")) {
+                int taskNumber = Integer.parseInt(input.split(" ")[VARIABLE_ENTRY_ONE]) - 1;
                 tasks.markTaskDone(taskNumber);
                 storage.saveFile(taskToParse(tasks));
-            } else if (input.split(" ")[0].equals("todo")) {
+            } else if (input.split(" ")[STARTING_VARIABLE].equals("todo")) {
                 if (input.split(" ").length == 1) {
                     throw new TodoException(input);
                 }
-                Task task = new Todo(input.split(" ", 2)[1]);
+                Task task = new Todo(input.split(" ", SPLIT_BY_TWO)[1]);
                 tasks.addTask(task);
                 storage.saveFile(taskToParse(tasks));
                 printReply(task);
-            } else if (input.split(" ")[0].equals("deadline")) {
-                Task task = new Deadline(input.split("/by ", 2)[0].split(" ", 2)[1], stringToTime(input.split("/by ", 2)[1]));
+            } else if (input.split(" ")[STARTING_VARIABLE].equals("deadline")) {
+                Task task = new Deadline(input.split("/by ", SPLIT_BY_TWO)[STARTING_VARIABLE].split(" ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE], stringToTime(input.split("/by ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE]));
                 tasks.addTask(task);
                 storage.saveFile(taskToParse(tasks));
                 printReply(task);
-            } else if (input.split(" ")[0].equals("event")) {
-                Task task = new Event(input.split("/at", 2)[0].split(" ", 2)[1], stringToTime(input.split("/at ", 2)[1]));
+            } else if (input.split(" ")[STARTING_VARIABLE].equals("event")) {
+                Task task = new Event(input.split("/at", SPLIT_BY_TWO)[STARTING_VARIABLE].split(" ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE], stringToTime(input.split("/at ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE]));
                 tasks.addTask(task);
                 storage.saveFile(taskToParse(tasks));
                 printReply(task);
-            } else if (input.split(" ")[0].equals("find")){
-                tasks.search(input.split(" ", 2)[1]);
+            } else if (input.split(" ")[STARTING_VARIABLE].equals("find")){
+                tasks.search(input.split(" ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE]);
             } else {
                 throw new DukeException(input);
             }
@@ -235,7 +239,7 @@ public class Duke extends Application {
     }
 
     static void deleteTask(String input) {
-        int pos = Integer.parseInt(input.split(" ")[1]);
+        int pos = Integer.parseInt(input.split(" ")[VARIABLE_ENTRY_ONE]);
         Task task = tasks.removeTask(pos - 1);
         System.out.println("____________________________________________________________\n"
                 + " Noted. I've removed this task: \n  "
@@ -247,7 +251,7 @@ public class Duke extends Application {
         printIntro();
         String input = sc.nextLine();
         while (!input.toLowerCase().equals("bye")) {
-            if (input.split(" ")[0].toLowerCase().equals("delete")) {
+            if (input.split(" ")[STARTING_VARIABLE].toLowerCase().equals("delete")) {
                 deleteTask(input);
                 storage.saveFile(taskToParse(tasks));
             } else {
