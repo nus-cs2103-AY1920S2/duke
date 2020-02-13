@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,6 +14,9 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         ArrayList<Task> taskList = new ArrayList<>();
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "duke", "duke.txt");
+        boolean directoryExists = java.nio.file.Files.exists(path);
 
         //Greet the user
         System.out.println("Hello! I'm Duke");
@@ -23,6 +28,16 @@ public class Duke {
         while (s.hasNext()) {
             command = s.nextLine();
             if (command.equals("bye")) {
+                //Write remaining tasks to file
+                String output = "";
+                for (int i = 0; i < taskList.size(); i++) {
+                    output += taskList.get(i).toString() + System.lineSeparator();
+                }
+                try {
+                    Files.write(path, output.getBytes());
+                } catch (IOException e) {
+                    System.out.println("Oops something went wrong");
+                }
                 //Exit
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
