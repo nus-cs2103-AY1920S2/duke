@@ -18,14 +18,7 @@ public class Main extends Application {
      * Creates a Main instance object.
      */
     public Main() {
-        //try {
-            duke = new Duke();
-        /*} catch (IOException e) {
-            System.out.println("Sorry, an IO error has occurred:");
-            e.printStackTrace();
-            System.exit(0);
-        }*/
-
+        duke = new Duke();
     }
 
     @Override
