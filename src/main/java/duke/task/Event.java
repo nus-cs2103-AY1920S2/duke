@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
- * The duke.task.Event class represents a task that start at a specific time and ends at a specific time e.g.,
+ * The Event class represents a task that start at a specific time and ends at a specific time e.g.,
  * team project meeting on 2/10/2019 2-4pm.
  */
 public class Event extends Task {

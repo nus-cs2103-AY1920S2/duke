@@ -63,7 +63,7 @@ public class Ui {
                 tasksString += "\n     ";
             }
         }
-        tasksString = tasksString.equals("") ? "There is nothing on your list." : tasksString;
+        tasksString = tasksString.equals("") ? "There is nothing on your list.\n" : tasksString;
         return tasksString;
     }
 
@@ -121,7 +121,7 @@ public class Ui {
      * @return message to be displayed
      */
     public String showStartLine() {
-        return "    ______________________DUKE______________________";
+        return "    ______________________DUKE______________________\n";
     }
 
     /**

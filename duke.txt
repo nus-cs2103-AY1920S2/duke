@@ -1,4 +1,2 @@
-T | 1 | 123
-T | 0 | return book submit
-E | 0 | read | 2019-12-12 2-4pm
-T | 1 | add
+T | 1 | read book
+D | 0 | go | 2020-10-10 18:00
