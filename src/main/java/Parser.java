@@ -1,9 +1,10 @@
 
 /**
- * CS2103 Individual Project
+ * CS2103 Individual Project.
+ * Parser class is to decipher and break down the user's input.
  * @author Wei Cheng
- * Parser class is to decipher and break down the user's input
  */
+
 public class Parser {
     String command;
     String description = "";
@@ -12,6 +13,7 @@ public class Parser {
      * constructor for the Parser class.
      * @param userInput string representation of the user input
      */
+
     public Parser(String[] userInput) {
         this.command = userInput[0];
         if (userInput.length > 1) {
@@ -20,18 +22,20 @@ public class Parser {
     }
 
     /**
-     * @return command given by user
+     * To obtain the command of the user.
+     * @return command given by user.
      */
-    public String getCommand(){
+    public String getCommand() {
 
         return command;
     }
 
     /**
-     * @return description of the user input
+     * To obtain the description of the task.
+     * @return description of the user input.
      */
-    public String getDescription(){
 
+    public String getDescription() {
         return description;
     }
 }

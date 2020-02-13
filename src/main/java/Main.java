@@ -1,18 +1,17 @@
 import javafx.application.Application;
-
 import java.io.IOException;
-
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
 /**
+ * CS2103 Individual Project.
  * A GUI for Duke using FXML.
+ * @author Wei Cheng
  */
+
 public class Main extends Application {
 
     private Duke duke = new Duke("Data/Duke.txt");

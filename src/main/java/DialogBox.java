@@ -60,6 +60,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Create dialog box for duke and initiate the flip method.
+     * @param text the response given by duke
+     * @param img the image of duke
+     * @return the a dialog box for duke
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -1,75 +1,103 @@
 package sampletest;
+
 /**
- * CS2103 Individual Project
+ * CS2103 Individual Project.
+ * Task correspond to the actions depending on the command given by the user.
  * @author Wei Cheng
- * Task correspond to the actions
- * depending on the command given by the user.
  */
-public class Task {
+
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor for the Task class
-     * @param description description of the task
+     * Constructor for the Task class.
+     * @param description description of the task.
      */
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
     /**
-     * Constructor for the Task class
+     * Constructor for the Task class.
      * when we are loading from the saved file.
-     * @param description description of the task
-     * @param status status of the Task
+     * @param description description of the task.
+     * @param status status of the Task.
      */
-    public Task(String description, String status){
+
+    public Task(String description, String status) {
         this.description = description;
         this.isDone = status.equals("Yes");
     }
 
     /**
-     * @return an icon of tick when done
-     *      * or cross when it is not done
+     * obtain the icon corresponding to the status of the Task.
+     * @return an icon of tick when done or cross when it is not done.
      */
+
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "✓" : "✗");
     }
 
     /**
-     * @return a new instance of Task
-     * by changing the status to Done
+     * change an undone task to a completed task.
+     * @return a new instance of Task by changing the status to Done.
      */
-    public Task markAsDone(){
+
+    public Task markAsDone() {
         this.isDone = true;
         return this;
     }
 
     /**
-     * @return a String representation of Yes or No
-     * depending on the Status of the project
+     * obtain a string representation of yes or no.
+     * @return a String representation of Yes or No depending on the Status of the project.
      */
-    public String checkDone(){
 
-        return(isDone ? "Yes" : "No");
+    public String checkDone() {
+
+        return (isDone ? "Yes" : "No");
     }
 
     /**
-     *
-     * @return a String representation of the description of the task
+     * Get the description of the string.
+     * @return a String representation of the description of the task.
      */
-    public String getDescription(){
+
+    public String getDescription() {
 
         return this.description;
     }
 
-    /**
-     *  The toString method
-     * @return String
-     */
+    public boolean isUrgent() {
+        return false;
+    }
+
+    public int getCompletionDate() {
+        return Integer.parseInt(null);
+    }
+
     @Override
-    public String toString(){
-            return " [T][" + this.getStatusIcon() + "]" + this.description;
+    public int compareTo(Task task) {
+        if (task.isUrgent() && this.isUrgent()) {
+            return task.getCompletionDate() -  this.getCompletionDate();
+        } else if (task.isUrgent() && !this.isUrgent()) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     *  The toString method.
+     * @return String.
+     */
+
+    @Override
+    public String toString() {
+        assert this.description.length() > 0 : "The description of the Task is not valid";
+        return " [T][" + this.getStatusIcon() + "]" + this.description;
     }
 }

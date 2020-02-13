@@ -8,13 +8,15 @@ import javafx.scene.layout.VBox;
 import sampletest.Task;
 import sampletest.Events;
 import sampletest.Deadlines;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
+
 /**
- * CS2103 Individual Project
- * author Wei Cheng
- * The class for the ChatBot
+ * CS2103 Individual Project.
+ * The class for the ChatBot.
+ * @author Wei Cheng
  */
+
 public class Duke  {
     private Storage storage;
     private TaskList tasks;
@@ -50,97 +52,102 @@ public class Duke  {
     /**
      * To run the conversation with the user.
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        String[] userInput = sc.nextLine().split(" ", 2);
+    public String run(String input) {
+        String[] userInput = input.split(" ", 2);
         Parser parser = new Parser(userInput);
         String command = parser.getCommand();
-        while (!command.equals("bye")) {
-            try {
-                ExceptionGenerator.checkInputLength(userInput);
-                ExceptionGenerator.checkInputAction(userInput);
-                switch (command) {
-                    case "done":
-                        int taskNo = Integer.parseInt(parser.getDescription());
-                        this.tasks.getTask(taskNo - 1).markAsDone();
-                        ui.transmitMessage("Nice! I've marked this task as done:\n "
-                                + this.tasks.getTask(taskNo - 1).toString());
-                        break;
-                    case "delete":
-                        taskNo = Integer.parseInt(userInput[1]) - 1;
-                        Task removedTask = this.tasks.getTask(taskNo);
-                        this.tasks.removeTask(taskNo);
-                        ui.transmitMessage("Noted. I've removed this task:\n"
-                                + removedTask.toString());
-                        break;
-                    case "list":
-                        this.printText();
-                        break;
-                    case "todo":
-                        String description = parser.getDescription();
-                        ui.transmitMessage("Got it. I've added this task:");
-                        this.tasks.add(new Task(description));
-                        break;
-                    case "deadline":
-                        String[] tokens = parser.getDescription().split(" /by ");
-                        ui.transmitMessage("Got it. I've added this task:");
-                        this.tasks.add(new Deadlines(tokens[0], tokens[1]));
-                        Deadlines d =  new Deadlines(tokens[0], tokens[1]);
-                        ui.transmitMessage((d.getDate()).toString());
-                        break;
-                    case "event":
-                        tokens = parser.getDescription().split(" /at ");
-                        ui.transmitMessage("Got it. I've added this task:");
-                        this.tasks.add(new Events(tokens[0], tokens[1]));
-                        break;
-                    case "find":
-                        String keyWord = parser.getDescription();
-                        ArrayList<Task>  matchingTasks = new ArrayList<>();
-                        for(int i = 0 ; i < tasks.taskStorage.size() ; i++) {
-                            Task task = tasks.taskStorage.get(i);
-                            if((task.getDescription()).contains(keyWord)){
-                                matchingTasks.add(task);
-                            }
-                        }
-                        if(matchingTasks.size() == 0){
-                            ui.transmitMessage("There is no matching task in your list");
-                        }
-                        else {
-                            System.out.println("Here are the matching tasks in your list:");
-                            for (Task task : matchingTasks){
-                                System.out.println(task.toString());
-                            }
-                        }
-                        break;
-                }
+        try {
+            ExceptionGenerator.checkInputLength(userInput);
+            ExceptionGenerator.checkInputAction(userInput);
+            switch (command) {
+            case "done":
+                int taskNo = Integer.parseInt(parser.getDescription());
+                this.tasks.getTask(taskNo - 1).markAsDone();
+                Integer numbOfTask = this.tasks.taskStorage.size();
+                return ("Nice! I've marked this task as done:\n "
+                        + this.tasks.getTask(taskNo - 1).toString()
+                        + "\nNow you have " + numbOfTask.toString() + " tasks in the list.");
+            case "delete":
+                taskNo = Integer.parseInt(userInput[1]) - 1;
+                Task removedTask = this.tasks.getTask(taskNo);
+                this.tasks.removeTask(taskNo);
+                numbOfTask = this.tasks.taskStorage.size();
+                return ("Noted. I've removed this task:\n"
+                        + removedTask.toString()
+                        + "\nNow you have " + numbOfTask.toString() + " tasks in the list.");
+                //break;
+            case "list":
+                numbOfTask = this.tasks.taskStorage.size();
+                return this.printText() + ("\nNow you have " + numbOfTask.toString() + " tasks in the list.");
+            case "todo":
+                String description = parser.getDescription();
+                Task task = new Task(description);
+                this.tasks.add(task);
+                numbOfTask = this.tasks.taskStorage.size();
+                return ("Got it. I've added this task:\n" + task.toString()
+                        + "\nNow you have " + numbOfTask + " tasks in the list.");
+                //break;
+            case "deadline":
+                String[] tokens = parser.getDescription().split(" /by ");
+                Deadlines deadlines = new Deadlines(tokens[0], tokens[1]);
+                this.tasks.add(deadlines);
+                numbOfTask = this.tasks.taskStorage.size();
+                return ("Got it. I've added this task:\n" + (deadlines.getDate()).toString()
+                        + "\nNow you have " + numbOfTask.toString() + " tasks in the list.");
+            case "event":
+                tokens = parser.getDescription().split(" /at ");
+                Events event = new Events(tokens[0], tokens[1]);
+                this.tasks.add(event);
+                numbOfTask = this.tasks.taskStorage.size();
+                return ("Got it. I've added this task:\n" + event.toString()
+                        + "\nNow you have " + numbOfTask.toString() + " tasks in the list.");
+            case "sort":
+                Collections.sort(this.tasks.taskStorage);
+                numbOfTask = this.tasks.taskStorage.size();
+                return this.printText() + ("\nNow you have " + numbOfTask.toString() + " tasks in the list.");
 
-                int numbOfTask = this.tasks.taskStorage.size();
-                if(numbOfTask > 0 && !command.equals("list") && !command.equals("delete") && !command.equals("done")) {
-                    ui.transmitMessage(this.tasks.getTask(numbOfTask - 1).toString());
+            case "find":
+                String keyWord = parser.getDescription();
+                ArrayList<Task> matchingTasks = new ArrayList<>();
+                for (int i = 0; i < tasks.taskStorage.size(); i++) {
+                    task = tasks.taskStorage.get(i);
+                    if ((task.getDescription()).contains(keyWord)) {
+                        matchingTasks.add(task);
+                    }
                 }
-                    ui.transmitMessage("Now you have " + numbOfTask + " tasks in the list.");
-            } catch (DukeException ex){
-                ex.printStackTrace();
+                if (matchingTasks.size() == 0) {
+                    return ("There is no matching task in your list");
+                } else {
+                    StringBuilder taskInformation = new StringBuilder("Here are the matching tasks in your list:");
+                    for (Task t : matchingTasks) {
+                        taskInformation.append(t.toString());
+                    }
+                    return taskInformation.toString();
+                }
+            default:
+                return Ui.initiateFareWell();
             }
-            userInput = sc.nextLine().split(" ", 2);
-            parser = new Parser(userInput);
-            command = parser.getCommand();
-            storage.saveToDisk(this.tasks.taskStorage);
+        } catch (DukeException ex) {
+            return ex.getMessage(); //potential error
         }
-        ui.initiateFareWell();
+    }
+
+    private void updateData(ArrayList<Task> taskStorage) {
+        storage.saveToDisk(this.tasks.taskStorage);
     }
 
     /**
      * To print out all the task in the
-     * TaskStorage
+     * TaskStorage.
      */
-    public void printText() {
+    public String printText() {
         int counter = 1;
-        for(Task task : this.tasks.taskStorage){
-            ui.transmitMessage(Integer.valueOf(counter).toString() + "." + task.toString());
+        StringBuilder text = new StringBuilder();
+        for (Task task : this.tasks.taskStorage) {
+            text.append(Integer.valueOf(counter).toString() + "." + task.toString() + "\n");
             counter++;
         }
-
+        return text.toString();
     }
 
     /**
@@ -157,84 +164,8 @@ public class Duke  {
 
         return textToAdd;
     }
-   /* @Override
-    public void start(Stage stage) {
 
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
-         /*sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-            // current code ...
-
-            //Scroll down to the end every time dialogContainer's height changes.
-            dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        });
-    //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event)->
-
-    {
-        handleUserInput();
-    });
-
-        userInput.setOnAction((event)->
-
-    {
-        handleUserInput();
-    });*/
-
-    }
+}
 
 
 
