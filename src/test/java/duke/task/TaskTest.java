@@ -10,7 +10,7 @@ class TaskTest {
 
     @Test
     void getStatusIcon() {
-        Todo task = new Todo("Eat dinner", false);
+        Todo task = new Todo("Eat dinner", false, LocalDate.MAX);
         assertEquals("X", task.getStatusIcon());
     }
 
