@@ -15,7 +15,7 @@
 ## <a name="introduction"></a> Introduction
 This product is a Personal Assistant Chatbot that helps a person keep track of various tasks.
 
-## <a name="quick start"></a> Quick Start
+## <a name="quick-start"></a> Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 
 1. Download the latest `duke.jar` here.
@@ -42,7 +42,7 @@ Example:
 
 Note: recurring task recurs every week.
 
-### <a name="deleting task"></a> Deleting task `delete`
+### <a name="deleting-task"></a> Deleting task `delete`
 Delete the indexed task from the duke. 
 
 Format:  
@@ -51,7 +51,7 @@ Format:
 Example:  
 `delete 3`
 
-### <a name="marking task as done"></a> Marking task as done `done`
+### <a name="marking-task-as-done"></a> Marking task as done `done`
 Mark the indexed task as done.  
 
 Format:  
@@ -62,7 +62,7 @@ Example:
 
 Note: if the indexed task is recurring task, it will recur.
 
-### <a name="finding task"></a> Finding task `find`
+### <a name="finding-task"></a> Finding task `find`
 Find the tasks with the specified keyword.  
 
 Format:  
@@ -71,25 +71,25 @@ Format:
 Example:  
 `find read`
 
-### <a name="checking the list of tasks"></a> Checking the list of tasks `list`
+### <a name="checking-the-list-of-tasks"></a> Checking the list of tasks `list`
 Check all the tasks in the program.  
 
 Format:  
 `list`  
 
-### <a name="resetting the program"></a>Resetting the program `reset`
+### <a name="resetting-the-program"></a>Resetting the program `reset`
 Clear all the tasks store in the program.
 
 Format:  
 `reset`
 
-### <a name="exiting the program"></a> Exiting the program `bye`
+### <a name="exiting-the-program"></a> Exiting the program `bye`
 Exit the program.
 
 Format:  
 `bye`
 
-## <a name="command summary"></a> Command Summary
+## <a name="command-summary"></a> Command Summary
 * Add   
 `todo description`  
 `deadline description /by yyyy-MM-dd`  
