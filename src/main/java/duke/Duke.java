@@ -23,12 +23,12 @@ public class Duke {
      * Runs the main loop of Duke.
      */
     public void run() {
+        ui.showGreeting();
+
         // Setup in-memory and disk storage
         String filePath = "data/tasks.txt";
         Storage storage = new TextStorage(filePath);
         TaskList tasks = loadTasks(storage);
-
-        ui.showGreeting();
 
         activate(new CommandHandler(tasks, ui, storage));
 

@@ -35,6 +35,7 @@ public class Main extends Application {
         Gui gui = fxmlLoader.<Gui>getController();
         gui.setDuke(duke);
 
+        stage.setTitle("Duke");
         stage.setScene(scene);
         stage.resizableProperty().setValue(false);
         // Handle case where user manually exits
