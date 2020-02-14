@@ -3,18 +3,128 @@
 ## Features 
 
 ### Feature 1 
-Description of feature.
+
+- Tracker for various types of tasks
+- Deletes a task
+- Mark a task as done
+- List all existing tasks
+- Find specific tasks
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - Creates a new todo task
 
-Describe action and its outcome.
+Creates a new todo task
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo [description]`
 
 Expected outcome:
+![Todo](/docs/Todo.png)
 
-`outcome`
+### `deadline` - Creates a new deadline task
+
+Creates a new deadline task
+
+Example of usage: 
+
+`deadline [description] /by [time/date]`
+
+Expected outcome:
+![Deadline](/docs/Deadline.png)
+
+### `event` - Creates a new event task
+
+Creates a new event task
+
+Example of usage: 
+
+`event [description] /at [time/date]`
+
+Expected outcome:
+![Event](/docs/Event.png)
+
+### `delete` - Deletes a task
+
+Deletes a task
+
+Example of usage: 
+
+`delete [index]`
+
+Expected outcome:
+![GitHub Logo](/images/Rainbow.jpg)
+Format: ![Alt Text](url)
+
+### `done` - Marks a task as done
+
+Marks a task as done
+
+Example of usage: 
+
+`done [index]`
+
+Expected outcome:
+![GitHub Logo](/images/Rainbow.jpg)
+Format: ![Alt Text](url)
+
+### `list` - Lists all the tasks
+
+Lists all the tasks in the to-do list
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+![GitHub Logo](/images/Rainbow.jpg)
+Format: ![Alt Text](url)
+
+### `find` - Finds a task
+
+Finds a task that contains the keyword
+
+Example of usage: 
+
+`find [keyword]`
+
+Expected outcome:
+![GitHub Logo](/images/Rainbow.jpg)
+Format: ![Alt Text](url)
+
+### `addNote` - Adds a note to a task
+
+Adds a note to a task
+
+Example of usage: 
+
+`addNote [index] [note]`
+
+Expected outcome:
+![AddNote](/docs/AddNote.png)
+
+### `note` - Retrieves a note of a task
+
+Retrieves a note of a particular task
+
+Example of usage: 
+
+`note [index]`
+
+Expected outcome:
+![Note](/docs/Note.png)
+
+### `bye` - Exits the program
+
+Saves your tasks and exits the program
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+![GitHub Logo](/images/Rainbow.jpg)
+Format: ![Alt Text](url)
+)
+
