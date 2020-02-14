@@ -4,7 +4,7 @@
 
 package duke.storage;
 
-import duke.expense.Category;
+import duke.alias.AliasList;
 import duke.expense.ExpenseItem;
 import duke.expense.ExpenseList;
 import duke.task.Deadline;
@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Arrays;
 
 
@@ -49,12 +48,7 @@ public class Storage implements CheckTask {
     public void writeToFile(String myContent) {
         BufferedWriter writer = null;
         try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            }
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(createDataFile());
             writer = new BufferedWriter(fw);
             writer.write(myContent);
             writer.flush();
@@ -82,28 +76,24 @@ public class Storage implements CheckTask {
     public TaskList loadTasks() {
         TaskList tasks = new TaskList(this);
         try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            }
+            createDataFile();
             BufferedReader rd = new BufferedReader(new FileReader(filePath));
             String line;
             while ((line = rd.readLine()) != null) {
                 String type = line.split("|")[0];
                 switch (type) {
-                    case "E":
-                        tasks.addTask(EventObj.parse(line));
-                        break;
-                    case "D":
-                        tasks.addTask(Deadline.parse(line));
-                        break;
-                    case "T":
-                        tasks.addTask(Todo.parse(line));
-                        break;
-                    default:
-                        //add code
-                        break;
+                case "E":
+                    tasks.addTask(EventObj.parse(line));
+                    break;
+                case "D":
+                    tasks.addTask(Deadline.parse(line));
+                    break;
+                case "T":
+                    tasks.addTask(Todo.parse(line));
+                    break;
+                default:
+                    //add code
+                    break;
                 }
             }
             rd.close();
@@ -139,10 +129,8 @@ public class Storage implements CheckTask {
     }
 
 
-
     /**
-     * Load expenses from the file, if the file does not exist, create it and use
-     * it to store created tasks
+     * Load expenses from the file.
      * Parses the tasks based on tasks type enum specified in duke.expense.Category
      *
      * @return the expense list
@@ -150,11 +138,7 @@ public class Storage implements CheckTask {
     public ExpenseList loadExpenses() {
         ExpenseList expenseList = new ExpenseList(this);
         try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            }
+            createDataFile();
             BufferedReader rd = new BufferedReader(new FileReader(filePath));
             String line;
 
@@ -167,6 +151,44 @@ public class Storage implements CheckTask {
             System.out.println(ex.getMessage());
         }
         return expenseList;
+    }
+
+    /**
+     * Load alias from the file.
+     * Retrieves all the alias from the file.
+     *
+     * @return the expense list
+     */
+    public AliasList loadAlias() {
+        AliasList aliasList = new AliasList(this);
+        try {
+            createDataFile();
+            BufferedReader rd = new BufferedReader(new FileReader(filePath));
+            String line;
+
+            while ((line = rd.readLine()) != null) {
+                String[] parts = line.split(" ");
+
+                aliasList.addAlias(parts[0], parts[1]);
+            }
+            rd.close();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return aliasList;
+    }
+
+    /**
+     * If the file does not exist, create it and use it to store created alias.
+     */
+    public File createDataFile() throws IOException {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+        return file;
     }
 
 }

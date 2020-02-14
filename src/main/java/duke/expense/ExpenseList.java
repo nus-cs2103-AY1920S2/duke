@@ -1,11 +1,7 @@
 package duke.expense;
 
 import duke.DukeException;
-import duke.NoValueProvidedException;
-import duke.command.Operation;
 import duke.storage.Storage;
-import duke.task.Task;
-import duke.util.DateUtil;
 import duke.util.EnumUtil;
 
 import java.time.LocalDate;
@@ -68,14 +64,15 @@ public class ExpenseList {
      *
      * @return the size
      */
-    public ExpenseList filterExpensesByDate(LocalDate startDate, LocalDate endDate){
+    public ExpenseList filterExpensesByDate(LocalDate startDate, LocalDate endDate) {
         List<ExpenseItem> myItems = new ArrayList<>();
 
-        if (startDate == null && endDate == null){
+        if (startDate == null && endDate == null) {
             return new ExpenseList(items, storage);
-        } else{
-            for (ExpenseItem item : items){
-                if (item.dateTime.compareTo(startDate) >= 0 && ((endDate == null) || item.dateTime.compareTo(endDate) < 0)){
+        } else {
+            for (ExpenseItem item : items) {
+                if (item.dateTime.compareTo(startDate) >= 0 && ((endDate == null)
+                        || item.dateTime.compareTo(endDate) < 0)) {
                     myItems.add(item);
                 }
             }
@@ -99,15 +96,15 @@ public class ExpenseList {
      *
      * @param current adds the current item to the list
      */
-    public ExpenseItem addExpense(String[] current, Storage storage){
+    public ExpenseItem addExpense(String[] current, Storage storage) {
         assert (storage != null);
         String[] expense = Arrays.stream(current).skip(1).toArray(String[]::new);
-        if (expense.length == 0){
+        if (expense.length == 0) {
             throw new DukeException("☹ OOPS!!! Please specify what you have spent on. ");
         }
 
         String category = expense[0];
-        if (!EnumUtil.isValidCategory(category)){
+        if (!EnumUtil.isValidCategory(category)) {
             throw new DukeException("☹ OOPS!!! There is no such category. ");
         }
 
@@ -121,7 +118,7 @@ public class ExpenseList {
         }
 
         String desc = "";
-        if (expense.length > 2 && expense[2] != null){
+        if (expense.length > 2 && expense[2] != null) {
             desc = expense[2];
         }
 
@@ -141,7 +138,7 @@ public class ExpenseList {
     /**
      * Delete expense.
      *
-     * @param id the expense index
+     * @param id      the expense index
      * @param storage storage
      */
     public ExpenseItem deleteExpense(int id, Storage storage) {

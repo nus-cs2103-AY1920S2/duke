@@ -21,7 +21,6 @@ public class TaskList {
     private Storage storage;
 
 
-
     /**
      * Instantiates a new task list.
      */
@@ -71,14 +70,12 @@ public class TaskList {
     /**
      * Adds the task.
      *
-     * @param current the current
+     * @param command the current
      * @param storage the storage
      * @throws DukeException the duke exception
      */
-    public Task addTask(String[] current, Storage storage) throws DukeException {
+    public Task addTask(String command, String[] words, Storage storage) throws DukeException {
         assert (storage != null);
-        String[] words = Arrays.stream(current).skip(1).toArray(String[]::new);
-        String command = current[0];
 
         if (words.length == 0) {
             throw new DukeException("☹ OOPS!!! The description of a "
@@ -159,7 +156,7 @@ public class TaskList {
     /**
      * Delete task.
      *
-     * @param id the task index
+     * @param id      the task index
      * @param storage storage
      */
     public Task deleteTask(int id, Storage storage) {
@@ -180,7 +177,7 @@ public class TaskList {
      *
      * @param id the task index
      */
-    public Task markTaskAsDone(int id){
+    public Task markTaskAsDone(int id) {
         int taskId = id - 1;
         Task cur = tasks.get(taskId);
         StringBuilder sb = new StringBuilder();

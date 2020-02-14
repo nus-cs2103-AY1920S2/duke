@@ -1,5 +1,5 @@
 package duke.command;
 
 public enum Mode {
-    TASKS, EXPENSES
+    TASKS, EXPENSES, ALIAS
 }

@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/tasks.txt", "data/expenses.txt");
+    private Duke duke = new Duke("data/tasks.txt", "data/expenses.txt", "data/alias.txt");
 
     @Override
     public void start(Stage stage) {
