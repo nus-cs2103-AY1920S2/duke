@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * */
 public class Command {
     private ArrayList<Task> Tasks = new ArrayList<>();
-    private final String FILEPATH = "main/java/data/list.txt";
+    private final String FILEPATH = "list.txt";
     private final File FILE = new File(FILEPATH);
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -162,6 +162,8 @@ public class Command {
             } catch (Exception e) {
 
             }
+        } else if (command.equals("help")) {
+            response = ui.showHelp();
         }
         else {
             try {

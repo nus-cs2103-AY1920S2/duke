@@ -33,7 +33,18 @@ public class Ui {
         return ("Here are the tasks in your list: ");
     }
 
-
+    public String showHelp() {
+        return ("Commands:\n" +
+                "list: Shows current tasks in list\n" +
+                "todo: add todo in format ~todo task~\n" +
+                "deadline: add task in format ~deadline task /by YYYY-mm-DD HH:mm~\n" +
+                "event: add task in format ~event task /at YYYY-mm-DD HH:mm~\n" +
+                "delete: delete task in format ~delete task num~\n" +
+                "done: mark task as done in format ~done task num~\n" +
+                "find: finds task with word in format ~find word~\n" +
+                "viewschedule: shows schedule for day in format ~viewschedule /at YYYY-mm-DD\n" +
+                "bye: saves tasks to storage\n");
+    }
 
     public String errmessage() {
         return "Invalid Input, Please check instructions";
