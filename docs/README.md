@@ -1,7 +1,7 @@
 # User Guide
 
-1. [Introduction](#Introduction)
-1. [Quick Start](#Quick Start)
+1. [Introduction](#introduction)
+1. [Quick Start](#quickstart)
 1. [Features](#Features)  
     * 3.1. [Adding task](#Adding task) `todo` `deadline` `event` `recurring` 
     * 3.2. [Deleting task](#Deleting task) `delete`
@@ -12,10 +12,10 @@
     * 3.7. [Exiting the program](#Exiting the program) `bye`
 1. [Command Summary](#Command Summary)
 
-## Introduction
+## <a name="introduction"></a> Introduction
 This product is a Personal Assistant Chatbot that helps a person keep track of various tasks.
 
-## Quick Start
+## <a name="quickstart"></a> Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 
 1. Download the latest `duke.jar` here.
