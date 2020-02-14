@@ -2,6 +2,9 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import parser.Command;
@@ -18,6 +21,7 @@ import model.TaskList;
 
 import storage.Storage;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -91,8 +95,14 @@ public class Duke extends Application{
 
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        Image image = new Image(".\\img\\Duke_waving.svg.png", 80, 100, false, false);
+        Label duke_icon = new Label("Welcome to Duke!"); // Creating a new Label control
+
+        duke_icon.setGraphic(new ImageView(image));
+        duke_icon.setFont(new Font("Arial", 50));
+
+        Scene scene = new Scene(duke_icon); // Setting the scene to be our Label
 
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
