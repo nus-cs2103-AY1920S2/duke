@@ -12,8 +12,6 @@ import tasks.TaskList;
  */
 
 public class Ui {
-    private static final String STRING= "    ____________________________________________________________";
-    private static final String SPACE = "     ";
     private Scanner sc;
     private String response;
 
@@ -22,32 +20,15 @@ public class Ui {
         this.response = "";
     }
 
-//    public void showLine() {
-//        setResponse(STRING);
-//    }
-//
-//    public void showWelcome() {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        setResponse("Hello from");
-//        setResponse(logo);
-//        setResponse("Hello! I'm Duke");
-//        setResponse("What can I do for you?");
-//        System.out.println(this.response);
-//    }
-
     public void showFarewell() {
         this.sc.close();
-        String bye = "Bye. Hope to see you again soon!";
+        String bye = "Meow! Hope to see you again soon!";
         setResponse(bye);
         System.out.println(this.response);
     }
 
     public void showAddedTask(Task taskAdded, int numOfTasks) {
-        setResponse("Got it. I've added this task:");
+        setResponse("Meow. I've added this task:");
         setResponse("  " + taskAdded.toString());
         if (numOfTasks == 1 || numOfTasks == 0) {
             setResponse("Now you have " + numOfTasks + " task in the list");
@@ -58,7 +39,7 @@ public class Ui {
     }
 
     public void showDeletedTask(Task taskDeleted, int numOfTasks) {
-        setResponse("Noted. I've removed this task: ");
+        setResponse("Meow. I've removed this task: ");
         setResponse("  " + taskDeleted.toString());
         if (numOfTasks == 1 || numOfTasks == 0) {
             setResponse("Now you have " + numOfTasks + " task in the list");
@@ -78,7 +59,7 @@ public class Ui {
     }
 
     public void showDoneTask(Task taskDone) {
-        setResponse("Nice! I've marked this task as done: ");
+        setResponse("Meow! I've marked this task as done: ");
         setResponse("  " + taskDone.toString());
         System.out.println(this.response);
     }
@@ -93,7 +74,7 @@ public class Ui {
     }
 
     public void showAddedNote(Task noteAddedTask) {
-        setResponse("Nice! I've added a note to this task: ");
+        setResponse("Meow! I've added a note to this task: ");
         setResponse("  " + noteAddedTask.toString());
         System.out.println(this.response);
     }

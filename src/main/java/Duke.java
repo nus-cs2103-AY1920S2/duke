@@ -20,7 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-// can add a IndexOutOfBound exception for delete task and done task
+
 /**
  * The main class that runs the whole Task manager
  */
