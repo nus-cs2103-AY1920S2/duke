@@ -26,7 +26,6 @@ public class Duke {
     protected Storage storage;
     protected TaskList taskList;
     protected Parser parser;
-    protected Ui ui;
 
     public Duke() {
 
@@ -55,7 +54,7 @@ public class Duke {
     /**
      * Listen to the user input and take actions.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws RuntimeException{
         Command command = null;
         try {
             command = parser.parseCommand(input);
@@ -66,7 +65,6 @@ public class Duke {
         } catch (NoDescriptionException | NoCommandException | IllegalDateTimeFormatException e) {
             return e.getMessage();
         } catch (IOException e) {
-            ui.printErrorMessage(e.getMessage());
             throw new RuntimeException(e);
         }
     }
