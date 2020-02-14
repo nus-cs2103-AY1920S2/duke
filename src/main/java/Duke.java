@@ -1,7 +1,6 @@
 //package java;
 
 import parser.Command;
-import parser.ExitCommand;
 import parser.Parser;
 
 import exceptions.IllegalDateTimeFormatException;
@@ -40,68 +39,35 @@ public class Duke {
     public Duke(String userName) {
         this.userName = userName;
     }
-    
-    private void start() {
-        ui = new Ui();
-        try {
-            parser = new Parser();
-            storage = new Storage();
-            taskList = storage.load();
-            ui.askForName();
-            ui.greet();
-        } catch (InvalidStorageFilePathException | IOException e) {
-            ui.printErrorMessage(e.getMessage());
-            throw new RuntimeException(e);
-        } catch (StorageOperationException | NoDescriptionException | IllegalDateTimeFormatException err) {
-            ui.printErrorMessage(err.getMessage());
-        }
+
+    public static boolean isExitKey(String input) {
+        return Parser.isExitKey(input);
+    }
+
+    public void start() throws
+            InvalidStorageFilePathException, IllegalDateTimeFormatException,
+            NoDescriptionException, StorageOperationException, IOException {
+        parser = new Parser();
+        storage = new Storage();
+        taskList = storage.load();
     }
 
     /**
      * Listen to the user input and take actions.
      */
-    private void listen() {
-        Command command = null;
-
-        while (!ExitCommand.isExit(command)) {
-            try {
-                String input = ui.getUserInput();
-                command = parser.parseCommand(input);
-                command.setTaskList(taskList);
-                ui.printCommandResult(command.execute());
-                storage.save(taskList);
-            } catch (NoDescriptionException | NoCommandException | IllegalDateTimeFormatException e) {
-                ui.printErrorMessage(e.getMessage());
-            } catch (IOException e) {
-                ui.printErrorMessage(e.getMessage());
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    /**
-     * exit with status 0.
-     */
-    private void exit() {
-        System.exit(0);
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
-    private void run() {
-        start();
-        listen();
-        exit();
-    }
-
-    public static void main(String[] args) {
-        Duke myDuke = new Duke();
-        myDuke.run();
+        Command command = null;
+        try {
+            command = parser.parseCommand(input);
+            command.setTaskList(taskList);
+            String commandResult = command.execute();
+            storage.save(taskList);
+            return commandResult;
+        } catch (NoDescriptionException | NoCommandException | IllegalDateTimeFormatException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            ui.printErrorMessage(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 }

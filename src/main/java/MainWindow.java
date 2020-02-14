@@ -1,3 +1,7 @@
+import exceptions.IllegalDateTimeFormatException;
+import exceptions.InvalidStorageFilePathException;
+import exceptions.NoDescriptionException;
+import exceptions.StorageOperationException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,6 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -29,7 +37,41 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        duke = d;
+        try {
+            duke = d;
+            duke.start();
+        } catch (InvalidStorageFilePathException | IOException e) {
+            throw new RuntimeException(e);
+        } catch (StorageOperationException | NoDescriptionException | IllegalDateTimeFormatException err) {
+            dukeSpeak(err.getMessage());
+        }
+    }
+
+    private void dukeSpeak(String input) {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(input, dukeImage)
+        );
+    }
+
+    private void userSpeak(String input) {
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(input, userImage)
+        );
+    }
+
+    /**
+     * exit with status 0.
+     */
+    private void exit() {
+        System.exit(0);
+    }
+
+    private void halt(int numSeconds) {
+        try {
+            TimeUnit.SECONDS.sleep(numSeconds);
+        } catch (InterruptedException e) {
+            dukeSpeak(e.getMessage());
+        }
     }
 
     /**
@@ -38,12 +80,15 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        userSpeak(input);
+        dukeSpeak(response);
         userInput.clear();
+
+        if (Duke.isExitKey(input)) {
+            halt(1);
+            exit();
+        }
     }
 }
