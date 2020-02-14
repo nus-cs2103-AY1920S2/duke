@@ -81,6 +81,7 @@ Example of usage:
 `list`
 
 Expected outcome:
+
 ![List](/docs/List.png)
 
 ### `find` - Finds a task
@@ -92,6 +93,7 @@ Example of usage:
 `find [keyword]`
 
 Expected outcome:
+
 ![Find](/docs/Find.png)
 
 ### `addNote` - Adds a note to a task
@@ -130,5 +132,4 @@ Expected outcome:
 
 ![Bye](/docs/Bye.png)
 
-)
 
