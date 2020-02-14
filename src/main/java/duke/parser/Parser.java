@@ -35,9 +35,9 @@ public class Parser {
         String[] partialCommands = splitCommand(fullCommand);
         switch (partialCommands[0]) {
         case "bye":
-            return getByeCommand();
+            return getByeCommand(partialCommands);
         case "list":
-            return getListCommand();
+            return getListCommand(partialCommands);
         case "delete":
             return getDeleteCommand(partialCommands);
         case "done":
@@ -179,11 +179,17 @@ public class Parser {
         }
     }
 
-    private static Command getListCommand() {
+    private static Command getListCommand(String[] partialCommands) throws DukeInvalidCommandException {
+        if (partialCommands.length > 1) {
+            throw new DukeInvalidCommandException();
+        }
         return new ListCommand();
     }
 
-    private static Command getByeCommand() {
+    private static Command getByeCommand(String[] partialCommands) throws DukeInvalidCommandException {
+        if (partialCommands.length > 1) {
+            throw new DukeInvalidCommandException();
+        }
         return new ExitCommand();
     }
 }
