@@ -135,7 +135,7 @@ public class Parser {
         return matcher.group(POSITION_KEYWORD);
     }
 
-    private static boolean isExitKey(String input) {
+    public static boolean isExitKey(String input) {
         return EXIT_KEY.equals(input);
     }
 
