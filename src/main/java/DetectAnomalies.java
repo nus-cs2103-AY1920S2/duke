@@ -4,7 +4,13 @@ public class DetectAnomalies {
 
     public DetectAnomalies () {
     }
-
+    /**
+     * This method is to check for clashes on the same day same time.
+     * The commented part are to filter for the same day only.
+     * @param taskLists List for all the tasks in storage.
+     * @param dateTimes string[] that store the date and time of the current task.
+     * @return result of the check if there is clashes or no clashes.
+     */
     public String checkForClash(ArrayList<Task> taskLists, String[] dateTimes) {
         //uncomment the codes to filter for same day task as well.
         String output;
