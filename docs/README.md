@@ -21,6 +21,7 @@ Example of usage:
 `todo [description]`
 
 Expected outcome:
+
 ![Todo](/docs/Todo.png)
 
 ### `deadline` - Creates a new deadline task
@@ -32,6 +33,7 @@ Example of usage:
 `deadline [description] /by [time/date]`
 
 Expected outcome:
+
 ![Deadline](/docs/Deadline.png)
 
 ### `event` - Creates a new event task
@@ -43,6 +45,7 @@ Example of usage:
 `event [description] /at [time/date]`
 
 Expected outcome:
+
 ![Event](/docs/Event.png)
 
 ### `delete` - Deletes a task
@@ -54,8 +57,8 @@ Example of usage:
 `delete [index]`
 
 Expected outcome:
-![GitHub Logo](/images/Rainbow.jpg)
-Format: ![Alt Text](url)
+
+![Delete](/docs/Delete.png)
 
 ### `done` - Marks a task as done
 
@@ -66,8 +69,8 @@ Example of usage:
 `done [index]`
 
 Expected outcome:
-![GitHub Logo](/images/Rainbow.jpg)
-Format: ![Alt Text](url)
+
+![Done](/docs/Done.png)
 
 ### `list` - Lists all the tasks
 
@@ -78,8 +81,7 @@ Example of usage:
 `list`
 
 Expected outcome:
-![GitHub Logo](/images/Rainbow.jpg)
-Format: ![Alt Text](url)
+![List](/docs/List.png)
 
 ### `find` - Finds a task
 
@@ -90,8 +92,7 @@ Example of usage:
 `find [keyword]`
 
 Expected outcome:
-![GitHub Logo](/images/Rainbow.jpg)
-Format: ![Alt Text](url)
+![Find](/docs/Find.png)
 
 ### `addNote` - Adds a note to a task
 
@@ -102,6 +103,7 @@ Example of usage:
 `addNote [index] [note]`
 
 Expected outcome:
+
 ![AddNote](/docs/AddNote.png)
 
 ### `note` - Retrieves a note of a task
@@ -113,6 +115,7 @@ Example of usage:
 `note [index]`
 
 Expected outcome:
+
 ![Note](/docs/Note.png)
 
 ### `bye` - Exits the program
@@ -124,7 +127,8 @@ Example of usage:
 `bye`
 
 Expected outcome:
-![GitHub Logo](/images/Rainbow.jpg)
-Format: ![Alt Text](url)
+
+![Bye](/docs/Bye.png)
+
 )
 
