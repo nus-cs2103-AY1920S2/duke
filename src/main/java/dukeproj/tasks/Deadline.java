@@ -64,10 +64,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (isDone) {
-            return  "[D][✓] " + task + " (by: "
+            return  "[D][Y] " + task + " (by: "
                     + date.format(Parser.DATE_READ_FORMATTER) + ")";
         } else {
-            return "[D][✗] " + task + " (by: "
+            return "[D][N] " + task + " (by: "
                     + date.format(Parser.DATE_READ_FORMATTER) + ")";
         }
     }

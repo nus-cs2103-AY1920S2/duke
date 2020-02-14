@@ -64,10 +64,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (isDone) {
-            return  "[E][✓] " + task + " (at: "
+            return  "[E][Y] " + task + " (at: "
                     + date.format(Parser.DATE_READ_FORMATTER) + ")";
         } else {
-            return "[E][✗] " + task + " (at: "
+            return "[E][N] " + task + " (at: "
                     + date.format(Parser.DATE_READ_FORMATTER) + ")";
         }
     }
