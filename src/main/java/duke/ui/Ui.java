@@ -19,13 +19,13 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public void showWelcome() {
-        System.out.println("Hello I'm Duke." + "\n"
-                + "What can I do for you?");
+    public static String showWelcome() {
+        return "Hello I'm Duke." + "\n"
+                + "What can I do for you?";
     }
 
-    public void showLine() {
-        System.out.println("____________________________________________________________");
+    public String showLine() {
+        return "____________________________________________________________";
     }
 
     public String readCommand() {
@@ -33,42 +33,50 @@ public class Ui {
         return line;
     }
 
-    public void showLoadingError() {
-        System.out.println("no data to load, new list is empty.");
+    public String showLoadingError() {
+        return "no data to load, new list is empty.";
     }
 
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
-    public void printList(List<Task> list) {
+    public String printList(List<Task> list) {
+        String output = "";
         if (!list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
                 Task t = list.get(i);
-                System.out.println((i+1) + "." + t.toString());
+                output += (i+1) + "." + t.toString() + "\n";
             }
         }
+        return output;
     }
 
-    public void printDone(TaskList tasks, int doneTask) {
-        System.out.println("Nice! I've marked this task as done:");
+    public String printDone(TaskList tasks, int doneTask) {
+        String output = "";
+        output += "Nice! I've marked this task as done:" + "\n";
         Task t = tasks.getList().get(doneTask);
-        System.out.println(t.toString());
+        output += t.toString();
+        return output;
     }
 
-    public void printDelete(TaskList tasks, int deleteTask) {
+    public String printDelete(TaskList tasks, int deleteTask) {
+        String output = "";
         List<Task> list = tasks.getList();
-        System.out.println("Noted. I've removed this task:");
+        output += "Noted. I've removed this task:" + "\n";
         Task t = list.get(deleteTask);
-        System.out.println(t.toString());
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        output += t.toString() + "\n";
+        output += "Now you have " + (list.size() - 1) + " tasks in the list.";
+        return output;
     }
 
-    public void printAddTask(TaskList tasks) {
+    public String printAddTask(TaskList tasks) {
+        String output = "";
         List<Task> list = tasks.getList();
         Task t = list.get(list.size() - 1);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(t.toString());
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        output += "Got it. I've added this task:" + "\n";
+        output += t.toString() + "\n";
+        output += "Now you have " + list.size() + " tasks in the list.";
+        return output;
     }
 }

@@ -24,9 +24,11 @@ public class ListCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        System.out.println("Here are the tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        String output = "";
+        output += "Here are the tasks in your list:" + "\n";
         List<Task> list = tasks.getList();
-        ui.printList(list);
+        output += ui.printList(list);
+        return output;
     }
 }

@@ -21,7 +21,7 @@ public class DoneCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         String arr[] = command.split(" ", 2);
         String firstWord = arr[0];
 
@@ -32,11 +32,10 @@ public class DoneCommand extends Command {
 
             //CALL TASKLIST: set that task to done
             tasks.setDone(doneTask);
-            //CALL UI: print output
-            ui.printDone(tasks, doneTask);
             //CALL STORAGE: write new file
             storage.updateTask(doneTask, tasks);
-
+            //CALL UI: print output
+            return ui.printDone(tasks, doneTask);
         } else {
             throw new DukeException("☹ OOPS!!! Please specify which task you've done.");
         }

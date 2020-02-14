@@ -24,8 +24,9 @@ public class FindCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        System.out.println("Here are the matching tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        String output = "";
+        output += "Here are the matching tasks in your list:" + "\n";
         List<Task> matchList = new ArrayList<Task>();
         String arr[] = command.split(" ", 2);
         String word = arr[1];
@@ -38,6 +39,7 @@ public class FindCommand extends Command {
                 matchList.add(task);
             }
         }
-        ui.printList(matchList);
+        output += ui.printList(matchList);
+        return output;
     }
 }

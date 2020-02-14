@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
         return true;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        return "Bye. Hope to see you again soon!";
     }
 }

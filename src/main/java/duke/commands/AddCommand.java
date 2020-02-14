@@ -21,7 +21,7 @@ public class AddCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         String arr[] = command.split(" ", 2);
         String firstWord = arr[0];
 
@@ -30,10 +30,10 @@ public class AddCommand extends Command {
 
                 //CALL TASKLIST: add task
                 tasks.addTodo(arr[1]);
-                //CALL UI: print output
-                ui.printAddTask(tasks);
                 //CALL STORAGE: write new file
                 storage.addTodo(tasks);
+                //CALL UI: print output
+                return ui.printAddTask(tasks);
             } else {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
@@ -46,10 +46,10 @@ public class AddCommand extends Command {
 
                     //CALL TASKLIST: add task
                     tasks.addDeadline(arr2[0], arr3[1]);
-                    //CALL UI: print output
-                    ui.printAddTask(tasks);
                     //CALL STORAGE: write new file
                     storage.addDeadline(tasks);
+                    //CALL UI: print output
+                    return ui.printAddTask(tasks);
                 } else {
                     throw new DukeException("☹ OOPS!!! Please specify the deadline.");
                 }
@@ -65,10 +65,10 @@ public class AddCommand extends Command {
 
                     //CALL TASKLIST: add task
                     tasks.addEvent(arr2[0], arr3[1]);
-                    //CALL UI: print output
-                    ui.printAddTask(tasks);
                     //CALL STORAGE: write new file
                     storage.addEvent(tasks);
+                    //CALL UI: print output
+                    return ui.printAddTask(tasks);
                 } else {
                     throw new DukeException("☹ OOPS!!! Please specify event time.");
                 }
@@ -76,6 +76,6 @@ public class AddCommand extends Command {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
             }
         }
-
+        return "";
     }
 }

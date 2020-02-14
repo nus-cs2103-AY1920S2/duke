@@ -19,7 +19,7 @@ public class NullCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        System.out.println("");
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return "";
     }
 }
