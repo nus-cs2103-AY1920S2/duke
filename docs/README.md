@@ -24,8 +24,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`
-`  [T][✘] 2103 IP`
+`Got it. I've added this task:`<br/>
+`  [T][✘] 2103 IP`<br/>
 `Now you have x tasks in the list.`
 
 ### `Keyword` - deadline
@@ -38,8 +38,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`
-`  [D][✘] 2103 IP submission (by: Feb 24 2020, 00:00)`
+`Got it. I've added this task:`<br/>
+`  [D][✘] 2103 IP submission (by: Feb 24 2020, 00:00)`<br/>
 `Now you have 2 tasks in the list.`
 
 ### `Keyword` - event
@@ -52,8 +52,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`
-`  [E][✘] 2103 tutorial (at: Feb 19 2020, 12:00 to Feb 19 2020, 13:00)`
+`Got it. I've added this task:`<br/>
+`  [E][✘] 2103 tutorial (at: Feb 19 2020, 12:00 to Feb 19 2020, 13:00)`<br/>
 `Now you have 3 tasks in the list.`
 
 ### `Keyword` - done
@@ -66,7 +66,7 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:`
+`Nice! I've marked this task as done:`<br/>
 `  [T][✓] 2103 IP`
 
 ### `Keyword` - done
@@ -79,7 +79,7 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:`
+`Nice! I've marked this task as done:`<br/>
 `  [T][✓] 2103 IP`
 
 ### `Keyword` - list
@@ -92,9 +92,9 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:`
-`1.[T][✓] 2103 IP`
-`2.[D][✘] 2103 IP submission (by: Feb 24 2020, 00:00)`
+`Here are the tasks in your list:`<br/>
+`1.[T][✓] 2103 IP`<br/>
+`2.[D][✘] 2103 IP submission (by: Feb 24 2020, 00:00)`<br/>
 `3.[E][✘] 2103 tutorial (at: Feb 19 2020, 12:00 to Feb 19 2020, 13:00)`
 
 ### `Keyword` - delete
@@ -107,8 +107,8 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task:`
-`  [E][✘] 2103 tutorial (at: Feb 19 2020, 12:00 to Feb 19 2020, 13:00)`
+`Noted. I've removed this task:`<br/>
+`  [E][✘] 2103 tutorial (at: Feb 19 2020, 12:00 to Feb 19 2020, 13:00)`<br/>
 `Now you have 2 tasks in the list.`
 
 ### `Keyword` - find
@@ -121,7 +121,7 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list:`
+`Here are the matching tasks in your list:`<br/>
 `1.[D][✘] 2103 IP submission (by: Feb 24 2020, 00:00)`
 
 ### `Keyword` - reschedule
@@ -134,7 +134,7 @@ Example of usage:
 
 Expected outcome:
 
-`I've rescheduled this task:`
+`I've rescheduled this task:`<br/>
 `  [D][✘] 2103 IP submission (by: Dec 25 2020, 00:00)`
 
 ### `Keyword` - bye
