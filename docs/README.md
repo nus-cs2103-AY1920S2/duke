@@ -6,7 +6,9 @@
 **Duke** can help you remember your to-dos,deadlines and events. 
 **Duke** will also remind you of your upcoming and overdue undone tasks.
 With **Duke**, you can get an overview of your tasks at a glance. 
+
 ![Representative Screenshot](Ui.png?raw=true)
+
 *Figure 1: The graphical user interface for **Duke**.*
 
 ## About
