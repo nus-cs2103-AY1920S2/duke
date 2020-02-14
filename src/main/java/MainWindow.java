@@ -1,5 +1,6 @@
 import core.Duke;
 import core.UiMessage;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,7 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -24,7 +26,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private static String TERMINATE = "bye";
+    private static final String TERMINATE = "bye";
+    private static final long delayDuration = 1000;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -35,9 +38,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(UiMessage.GREETING.toString(), dukeImage)
-        );
+        startUp();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -58,15 +59,29 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        try {
-            if (input.equals(TERMINATE)) {
-                TimeUnit.SECONDS.sleep(1);
-                Main.close();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         userInput.clear();
+        if (input.equals(TERMINATE)) {
+            exit();
+        }
     }
 
+    /**
+     * Displays the welcome message during the start up.
+     */
+    private void startUp() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(UiMessage.GREETING.toString(), dukeImage)
+        );
+    }
+
+    /**
+     * Delays the exit and give time to display the exit message.
+     */
+    private void exit() {
+        new Timer().schedule(new TimerTask() {
+            public void run() {
+                Platform.exit();
+            }
+        }, delayDuration);
+    }
 }

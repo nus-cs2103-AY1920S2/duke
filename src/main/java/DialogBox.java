@@ -53,6 +53,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates dialog box for duke to respond.
+     *
      * @param text response text
      * @param img  image of duke
      * @return dialog box to be displayed

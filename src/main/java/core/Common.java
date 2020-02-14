@@ -20,8 +20,8 @@ public class Common {
      *
      * @throws DukeException when there is error loading data.
      */
-    public Common() throws DukeException {
-        storage = new Storage();
+    public Common(String filepath) throws DukeException {
+        storage = new Storage(filepath);
         taskManager = new TaskManager();
         loadData();
     }

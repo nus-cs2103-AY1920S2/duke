@@ -17,11 +17,11 @@ public class Duke {
     /**
      * Constructor to initialize essential components of the program.
      */
-    public Duke() {
+    public Duke(String filepath) {
         ui = new Ui();
         try {
             parser = new Parser();
-            common = new Common();
+            common = new Common(filepath);
         } catch (DukeException e) {
             ui.errorLog(e.getMessage());
         }
@@ -44,11 +44,6 @@ public class Duke {
                 ui.errorLog(e.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 
     /**

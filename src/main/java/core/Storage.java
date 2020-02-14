@@ -16,15 +16,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
-    private static final String fileName = "duke.txt";
     private File file;
     private DataParser dataParser;
 
     /**
      * Constructor to initialize the path of the external storage.
      */
-    public Storage() {
-        file = new File(fileName);
+    public Storage(String filepath) throws StorageException {
+        try {
+            file = new File(filepath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new StorageException("Error in locate/creating the file.");
+        }
         dataParser = new DataParser();
     }
 
