@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -11,7 +13,7 @@ public class Storage {
     /**
      * Adds all tasks found in storage to input tasks.
      *
-     * @param tasks TaskList to add read tasks to.
+     * @param tasks duke.TaskList to add read tasks to.
      * @throws FileNotFoundException Thrown when file is not found.
      */
     public static void readFile(TaskList tasks) throws IOException {
@@ -34,7 +36,7 @@ public class Storage {
     /**
      * Writes task to storage.
      *
-     * @param task Task to store in storage.
+     * @param task duke.Task to store in storage.
      * @throws IOException Thrown when I/O error occurs.
      */
     public static void addTask(String task) throws IOException {

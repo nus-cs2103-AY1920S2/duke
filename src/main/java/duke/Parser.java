@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     private String input;
     private String done;
@@ -5,10 +7,10 @@ public class Parser {
     private boolean isStorage;
 
     /**
-     * Creates a Parser object.
+     * Creates a duke.Parser object.
      *
      * @param input     User input of a command.
-     * @param isStorage Is constructor called from Storage class.
+     * @param isStorage Is constructor called from duke.Storage class.
      */
     public Parser(String input, boolean isStorage) {
         this.isStorage = isStorage;
