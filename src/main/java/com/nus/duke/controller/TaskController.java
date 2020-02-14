@@ -24,10 +24,11 @@ public class TaskController {
         return true;
     }
 
-    public Tasks getTask(String name) throws TaskNotFoundException {
-        Tasks taskObj = dataObj.search(name);
-        if (taskObj == null) throw new TaskNotFoundException("Error! Task does not exist");
-        return taskObj;
+    private List<String> tasksToString(List<Tasks> tasks) {
+        List<String> formattedTasks = tasks.stream()
+                                            .map(eachTask -> DisplayTaskFormatter.stringify(eachTask))
+                                            .collect(Collectors.toList());
+        return formattedTasks;
     }
 
     public Tasks createNewTask(String name) {
@@ -36,21 +37,20 @@ public class TaskController {
         return task;
     }
 
-    public boolean removeTask(String name) throws DeleteTaskException, TaskNotFoundException {
-        if (name == null) {
-            throw new DeleteTaskException("Error! Can only mark a defined task");
-        } else {
-            Tasks t = this.getTask(name);
-            return this.dataObj.delete(t);
-        }
+    public Tasks getTask(String name) throws TaskNotFoundException {
+        Tasks taskObj = dataObj.search(name);
+        if (taskObj == null) throw new TaskNotFoundException("Error! Task does not exist");
+        return taskObj;
+    }
+
+    public List<String> filterTasks(String filterString) {
+        List<Tasks> tasks = dataObj.filter(filterString);
+        return this.tasksToString(tasks);
     }
 
     public List<String> getAllTasks() {
-        List<Tasks> Tasks = dataObj.getAll();
-        List<String> taskString = Tasks.stream()
-                                        .map(eachTask -> DisplayTaskFormatter.stringify(eachTask))
-                                        .collect(Collectors.toList());
-        return taskString;
+        List<Tasks> tasks = dataObj.getAll();
+        return this.tasksToString(tasks);
     }
 
     public boolean setMark(String name, boolean isMark) throws MarkException, TaskNotFoundException {
@@ -94,5 +94,14 @@ public class TaskController {
         final String fileLocation = "/Users/johan.kok/Desktop/nus/CS2103/duke/src/main/java/resources/storage/save.txt";
         storage.save(fileLocation);
         return true;
+    }
+
+    public boolean removeTask(String name) throws DeleteTaskException, TaskNotFoundException {
+        if (name == null) {
+            throw new DeleteTaskException("Error! Can only mark a defined task");
+        } else {
+            Tasks t = this.getTask(name);
+            return this.dataObj.delete(t);
+        }
     }
 }
