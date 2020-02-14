@@ -62,7 +62,7 @@ public class DataParser {
     /**
      * Enables the parser to serialize and deserialize LocalDate.
      */
-    //Solution below adapted from https://stackoverflow.com/questions/5800433/polymorphism-with-gson with modification
+    //Solution below adapted from https://stackoverflow.com/questions/39192945/serialize-java-8-localdate-as-yyyy-mm-dd-with-gson
     private static class LocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
 
         @Override
@@ -80,6 +80,7 @@ public class DataParser {
     /**
      * Enables the parser to serialize and deserialize Task and its sub-class.
      */
+    //Solution below adapted from https://stackoverflow.com/questions/5800433/polymorphism-with-gson with modification
     private static class TaskAdapter implements JsonSerializer<Task>, JsonDeserializer<Task> {
 
         private static Map<String, Class> map = new TreeMap<>();

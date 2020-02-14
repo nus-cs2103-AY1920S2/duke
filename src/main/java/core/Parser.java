@@ -181,6 +181,7 @@ public class Parser {
     private LocalDate parseDate(String date) throws DukeException {
         for (DateUtil format : DateUtil.values()) {
             try {
+
                 return LocalDate.parse(date, DateTimeFormatter.ofPattern(format.toString()));
             } catch (DateTimeParseException ignored) {
                 // nothing to catch

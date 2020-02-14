@@ -1,15 +1,3 @@
-{"description":"rea","typeIcon":"T","isDone":false}
-{"description":"werfsd","typeIcon":"T","isDone":false}
-{"description":"werf","typeIcon":"T","isDone":false}
-{"description":"rwgvdszc","typeIcon":"T","isDone":false}
-{"description":"ergsdv","typeIcon":"T","isDone":false}
-{"description":"rgsdvc","typeIcon":"T","isDone":false}
-{"description":"rgsdcqds","typeIcon":"T","isDone":false}
-{"description":"ergfv","typeIcon":"T","isDone":false}
-{"description":"wfed","typeIcon":"T","isDone":false}
-{"description":"qwdas","typeIcon":"T","isDone":false}
-{"description":"wedsax","typeIcon":"T","isDone":false}
-{"description":"edasx","typeIcon":"T","isDone":false}
-{"description":"ewdas","typeIcon":"T","isDone":false}
-{"description":"ewdas","typeIcon":"T","isDone":false}
-{"description":"wesf","typeIcon":"T","isDone":false}
+{"description":"read book","typeIcon":"T","isDone":false}
+{"deadline":"2020-02-15","description":"cs2103 homework","typeIcon":"D","isDone":false}
+{"eventTime":"2020-02-14","description":"cs2103 lecture","typeIcon":"E","isDone":false}
