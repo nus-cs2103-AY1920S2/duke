@@ -1,4 +1,8 @@
 //package java;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import parser.Command;
 import parser.ExitCommand;
@@ -20,7 +24,7 @@ import java.io.IOException;
  * An application capable of recording the tasks and events to help the users
  * manage the schedule.
  */
-public class Duke {
+public class Duke extends Application{
 
     protected String userName;
     protected Storage storage;
@@ -40,7 +44,7 @@ public class Duke {
         this.userName = userName;
     }
     
-    private void start() {
+    private void duke_start() {
         ui = new Ui();
         try {
             parser = new Parser();
@@ -85,8 +89,17 @@ public class Duke {
         System.exit(0);
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
     private void run() {
-        start();
+        duke_start();
         listen();
         exit();
     }
