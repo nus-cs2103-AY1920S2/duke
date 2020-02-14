@@ -1,21 +1,21 @@
 # User Guide
 
 1. [Introduction](#introduction)
-1. [Quick Start](#quickstart)
-1. [Features](#Features)  
-    * 3.1. [Adding task](#Adding task) `todo` `deadline` `event` `recurring` 
-    * 3.2. [Deleting task](#Deleting task) `delete`
-    * 3.3. [Marking task as done](#Marking task as done) `done`
-    * 3.4. [Finding task](#Finding task) `find`
-    * 3.5. [Checking the list of tasks](#Checking the list of tasks) `list`
-    * 3.6. [Resetting the program](#Resetting the program) `reset`
-    * 3.7. [Exiting the program](#Exiting the program) `bye`
-1. [Command Summary](#Command Summary)
+1. [Quick Start](#quick-start)
+1. [Features](#features)  
+    * 3.1. [Adding task](#adding-task) `todo` `deadline` `event` `recurring` 
+    * 3.2. [Deleting task](#deleting-task) `delete`
+    * 3.3. [Marking task as done](#marking-task-as-done) `done`
+    * 3.4. [Finding task](#finding-task) `find`
+    * 3.5. [Checking the list of tasks](#checking-the-list-of-tasks) `list`
+    * 3.6. [Resetting the program](#resetting-the-program) `reset`
+    * 3.7. [Exiting the program](#exiting-the-program) `bye`
+1. [Command Summary](#command-summary)
 
 ## <a name="introduction"></a> Introduction
 This product is a Personal Assistant Chatbot that helps a person keep track of various tasks.
 
-## <a name="quickstart"></a> Quick Start
+## <a name="quick start"></a> Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 
 1. Download the latest `duke.jar` here.
@@ -24,8 +24,8 @@ This product is a Personal Assistant Chatbot that helps a person keep track of v
 
 1. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-## Features 
-### Adding task `todo` `deadline` `event` `recurring`
+## <a name="features"></a> Features 
+### <a name="adding task"></a> Adding task `todo` `deadline` `event` `recurring`
 Add a task into the duke.  
 
 Format:  
@@ -42,7 +42,7 @@ Example:
 
 Note: recurring task recurs every week.
 
-### Deleting task `delete`
+### <a name="deleting task"></a> Deleting task `delete`
 Delete the indexed task from the duke. 
 
 Format:  
@@ -51,7 +51,7 @@ Format:
 Example:  
 `delete 3`
 
-### Marking task as done `done`
+### <a name="marking task as done"></a> Marking task as done `done`
 Mark the indexed task as done.  
 
 Format:  
@@ -62,7 +62,7 @@ Example:
 
 Note: if the indexed task is recurring task, it will recur.
 
-### Finding task `find`
+### <a name="finding task"></a> Finding task `find`
 Find the tasks with the specified keyword.  
 
 Format:  
@@ -71,25 +71,25 @@ Format:
 Example:  
 `find read`
 
-### Checking the list of tasks `list`
+### <a name="checking the list of tasks"></a> Checking the list of tasks `list`
 Check all the tasks in the program.  
 
 Format:  
 `list`  
 
-### Resetting the program `reset`
+### <a name="resetting the program"></a>Resetting the program `reset`
 Clear all the tasks store in the program.
 
 Format:  
 `reset`
 
-### Exiting the program `bye`
+### <a name="exiting the program"></a> Exiting the program `bye`
 Exit the program.
 
 Format:  
 `bye`
 
-## Command Summary
+## <a name="command summary"></a> Command Summary
 * Add   
 `todo description`  
 `deadline description /by yyyy-MM-dd`  
