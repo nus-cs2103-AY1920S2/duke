@@ -6,6 +6,7 @@ public class DetectAnomalies {
     }
 
     public String checkForClash(ArrayList<Task> taskLists, String[] dateTimes) {
+        //uncomment the codes to filter for same day task as well.
         String output;
         String sameTiming = "";
         String sameDay = "";
