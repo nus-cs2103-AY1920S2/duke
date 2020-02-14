@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -11,8 +13,8 @@ public class Storage {
     /**
      * Adds all tasks found in storage to input tasks.
      *
-     * @param tasks TaskList to add read tasks to
-     * @throws FileNotFoundException Thrown when file is not found
+     * @param tasks duke.TaskList to add read tasks to.
+     * @throws FileNotFoundException Thrown when file is not found.
      */
     public static void readFile(TaskList tasks) throws IOException {
         try {
@@ -34,8 +36,8 @@ public class Storage {
     /**
      * Writes task to storage.
      *
-     * @param task Task to store in storage
-     * @throws IOException Thrown when I/O error occurs
+     * @param task duke.Task to store in storage.
+     * @throws IOException Thrown when I/O error occurs.
      */
     public static void addTask(String task) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH, true);
@@ -46,8 +48,8 @@ public class Storage {
     /**
      * Delete task from storage.
      *
-     * @param index Index of task to remove from storage
-     * @throws IOException Thrown when I/O error occurs
+     * @param index Index of task to remove from storage.
+     * @throws IOException Thrown when I/O error occurs.
      */
     public static void deleteTask(int index) throws IOException {
         File f = new File(FILE_PATH);
@@ -72,8 +74,8 @@ public class Storage {
     /**
      * Perform task in storage.
      *
-     * @param index Index of the task to perform
-     * @throws IOException Thrown when I/O error occurs
+     * @param index Index of the task to perform.
+     * @throws IOException Thrown when I/O error occurs.
      */
     public static void doTask(int index) throws IOException {
         File f = new File(FILE_PATH);

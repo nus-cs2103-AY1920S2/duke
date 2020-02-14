@@ -1,3 +1,6 @@
+package duke;
+
+import approxsearch.Search;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -53,7 +56,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("duke.Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -112,7 +115,7 @@ public class Duke extends Application {
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      *
-     * @param text String containing text to add
+     * @param text String containing text to add.
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
@@ -125,7 +128,7 @@ public class Duke extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
@@ -143,7 +146,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-//        return "Duke heard: " + input;
+//        return "duke.Duke heard: " + input;
         Parser parse = new Parser(input, false);
 
         int index;
@@ -187,12 +190,14 @@ public class Duke extends Application {
         case FIND:
             try {
                 String searchTerm = parse.getSearchTerm();
+                Search search = new Search(tasks);
+
                 result += "Here are the matching tasks in your list:\n";
+                TaskList searchResults = search.search(searchTerm);
+
                 int number = 1;
-                for (int i = 0; i < tasks.size(); i++) {
-                    if (tasks.get(i).toString().contains(searchTerm)) {
-                        result += String.format("%d.%s\n", number++, tasks.get(i));
-                    }
+                for (int i = 0; i < searchResults.size(); i++) {
+                    result += String.format("%d.%s\n", number++, searchResults.get(i));
                 }
 
                 return result;

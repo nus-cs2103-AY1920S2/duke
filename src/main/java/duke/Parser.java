@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     private String input;
     private String done;
@@ -5,10 +7,10 @@ public class Parser {
     private boolean isStorage;
 
     /**
-     * Creates a Parser object.
+     * Creates a duke.Parser object.
      *
-     * @param input     User input of a command
-     * @param isStorage Is constructor called from Storage class
+     * @param input     User input of a command.
+     * @param isStorage Is constructor called from duke.Storage class.
      */
     public Parser(String input, boolean isStorage) {
         this.isStorage = isStorage;
@@ -18,6 +20,9 @@ public class Parser {
             this.command = input.split(" ")[0];
         } else {
             this.done = input.split(" ")[0];
+
+            assert this.done.equals("1") || this.done.equals("0") : "Flag for done is invalid in data file!";
+
             this.command = input.split(" ")[1];
         }
     }
@@ -25,7 +30,7 @@ public class Parser {
     /**
      * Getter for command.
      *
-     * @return String of the command
+     * @return String of the command.
      */
     public String getCommandString() {
         return this.command;
@@ -34,7 +39,7 @@ public class Parser {
     /**
      * Gets the command in enum form.
      *
-     * @return The command in enum form
+     * @return The command in enum form.
      */
     public Command getCommand() {
         switch (this.command) {
@@ -62,8 +67,8 @@ public class Parser {
     /**
      * Creates a task according to input and whether we are parsing commands from storage.
      *
-     * @return The task created
-     * @throws IndexOutOfBoundsException Thrown when input is invalid
+     * @return The task created.
+     * @throws IndexOutOfBoundsException Thrown when input is invalid.
      */
     public Task createTask() throws IndexOutOfBoundsException {
         String typeRemoved = this.isStorage
@@ -86,7 +91,7 @@ public class Parser {
     /**
      * Get relevant index of delete and done commands.
      *
-     * @return Index specified in input
+     * @return Index specified in input.
      */
     public int getIndex() {
         return Integer.parseInt(this.input.split(" ")[1]) - 1;
@@ -95,7 +100,7 @@ public class Parser {
     /**
      * Get search term from find command.
      *
-     * @return Search term
+     * @return Search term.
      */
     public String getSearchTerm() {
         return this.input.split(" ")[1];
