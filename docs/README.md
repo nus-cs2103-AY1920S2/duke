@@ -2,8 +2,6 @@
 
 ## Features 
 
-### Feature 1 
-
 - Tracker for various types of tasks
 - Deletes a task
 - Mark a task as done
