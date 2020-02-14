@@ -83,7 +83,7 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String toReturn = "\n";
+        String toReturn = "";
 
         int listNo = 1;
         for (Task task : tasks) {
