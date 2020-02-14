@@ -116,3 +116,13 @@ Expected outcome:
 `Here are the matching tasks in your list:`
 
 `1. [E][X] project meeting on Feb 20 2020 03:00 PM`
+
+### `bye` - Exit Duke
+
+Example of usage: bye
+
+`bye`
+
+Expected outcome:
+
+`Bye. Hope to see you again soon!`
