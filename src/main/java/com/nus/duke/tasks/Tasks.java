@@ -1,5 +1,8 @@
 package com.nus.duke.tasks;
 
+import javafx.util.Pair;
+import com.nus.duke.parser.Parser;
+
 public class Tasks {
     public enum TASK_STATUS {
         INCOMPLETE {
@@ -39,7 +42,6 @@ public class Tasks {
     public Tasks(String name) {
         this(name, TASK_STATUS.INCOMPLETE, TASK_CATEGORY.TODO);
     }
-
     public Tasks(String name, TASK_STATUS status, TASK_CATEGORY category) {
         this.name = name;
         this.status = status;

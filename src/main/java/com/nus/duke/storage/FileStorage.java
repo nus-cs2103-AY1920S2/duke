@@ -2,6 +2,7 @@ package com.nus.duke.storage;
 
 import com.nus.duke.dao.DAOFactory;
 import com.nus.duke.dao.DAOInterface;
+import com.nus.duke.tasks.DisplayTaskFormatter;
 import com.nus.duke.tasks.Tasks;
 import java.io.FileWriter;
 import java.io.Writer;
@@ -24,7 +25,7 @@ public class FileStorage implements StorageInterface {
     }
 
     private void write(Tasks tasks, Writer writer) {
-        String taskString = tasks.toString();
+        String taskString = DisplayTaskFormatter.stringify(tasks);
         this.write(taskString, writer);
     }
 

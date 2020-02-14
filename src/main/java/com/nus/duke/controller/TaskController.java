@@ -3,37 +3,16 @@ package com.nus.duke.controller;
 import com.nus.duke.Exception.*;
 import com.nus.duke.dao.DAOFactory;
 import com.nus.duke.dao.DAOInterface;
-import com.nus.duke.parser.Parser;
 import com.nus.duke.storage.FileStorage;
 import com.nus.duke.storage.StorageInterface;
+import com.nus.duke.tasks.DisplayTaskFormatter;
 import com.nus.duke.tasks.Tasks;
-import javafx.util.Pair;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskController {
     private DAOInterface dataObj = DAOFactory.getOrCreate();
     private StorageInterface storage = new FileStorage();
-
-    private String stringify(Tasks t) {
-        StringBuilder strBldr = new StringBuilder();
-        strBldr.append(String.format("[%s][%s] ", t.getStatus().toString(), t.getType().toString()));
-
-        if (t.getName().contains("/by")) {
-            Pair<String, String> parsedInput = Parser.tokenize(t.getName(), "/by");
-            strBldr.append(String.format("%s (by: %s)", parsedInput.getKey(), parsedInput.getValue()));
-        }
-        else if (t.getName().contains("/at")) {
-            Pair<String, String> parsedInput = Parser.tokenize(t.getName(), "/at");
-            strBldr.append(String.format("%s (at: %s)", parsedInput.getKey(), parsedInput.getValue()));
-        }
-        else {
-            strBldr.append(String.format("%s", t.getName()));
-        }
-
-        return strBldr.toString();
-    }
 
     private boolean setTask(Tasks task, Tasks.TASK_STATUS lvl) {
         this.dataObj.set(task, lvl);
@@ -69,7 +48,7 @@ public class TaskController {
     public List<String> getAllTasks() {
         List<Tasks> Tasks = dataObj.getAll();
         List<String> taskString = Tasks.stream()
-                                        .map(eachTask -> stringify(eachTask))
+                                        .map(eachTask -> DisplayTaskFormatter.stringify(eachTask))
                                         .collect(Collectors.toList());
         return taskString;
     }
