@@ -28,7 +28,7 @@ Creates a new deadline task
 
 Example of usage: 
 
-`deadline [description] /by [time/date]`
+`deadline [description] /by [yyyy-mm-dd] [hh:mm]`
 
 Expected outcome:
 
@@ -40,7 +40,7 @@ Creates a new event task
 
 Example of usage: 
 
-`event [description] /at [time/date]`
+`event [description] /at [yyyy-mm-dd] [hh:mm]`
 
 Expected outcome:
 
