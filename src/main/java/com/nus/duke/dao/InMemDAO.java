@@ -3,6 +3,8 @@ package com.nus.duke.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.nus.duke.tasks.Tasks;
 import static com.nus.duke.tasks.Tasks.TASK_STATUS;
 
@@ -33,8 +35,16 @@ public class InMemDAO implements DAOInterface {
                                     .stream()
                                     .filter(eachTask -> name.equals(eachTask.getName()))
                                     .findFirst();
-
         return task.isPresent() ? task.get() : null;
+    }
+
+    @Override
+    public List<Tasks> filter(String condition) {
+        List<Tasks> tasks = this.tasksList
+                                .stream()
+                                .filter(eachTask -> eachTask.getName().contains(condition))
+                                .collect(Collectors.toList());
+        return tasks;
     }
 
     @Override

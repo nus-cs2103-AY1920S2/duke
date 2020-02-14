@@ -25,6 +25,12 @@ public class Duke {
                 Greetings.prettyPrint(tasks);
                 break;
 
+            case "find":
+                tasks = controller.filterTasks(taskName);
+                Greetings.prettyPrint(String.format("Found the following tasks based on filter"));
+                Greetings.prettyPrint(tasks);
+                break;
+
             case "mark":
                 controller.setMark(taskName, true);
                 Greetings.prettyPrint(String.format("Marked task %s", taskName));
