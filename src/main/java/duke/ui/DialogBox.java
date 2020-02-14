@@ -17,12 +17,13 @@ import javafx.scene.layout.Region;
 
 import duke.exceptions.DukeException;
 
-
 /**
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * This control represents a dialog box consisting of an ImageView to represent
+ * the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    // @@author joel-lim-reused
+    // Reused from JavaFx Tutorial by Jeffry Lum.
     @FXML
     private Label dialog;
     @FXML
@@ -43,7 +44,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the ImageView is on the left and text on the
+     * right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -52,13 +54,21 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets a DialogBox with the User's image.
+     */
     public static DialogBox getUserDialog(String text, Image img) throws DukeException {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Gets a flipped DialogBox with Duke's image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) throws DukeException {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
+
+    // @@author
 }

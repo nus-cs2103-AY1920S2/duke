@@ -21,6 +21,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        // Solution below adapted from JavaFx Tutorial by Jeffry Lum.
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Gui.fxml"));
         AnchorPane ap;
         try {
@@ -48,6 +49,5 @@ public class Main extends Application {
         new Thread(() -> {
             duke.run();
         }).start();
-
     }
 }

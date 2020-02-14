@@ -15,6 +15,7 @@ public interface Command {
      * @param arg   Arguments for the command (may be empty).
      * @param tasks List of Tasks.
      * @param ui    User interface for Duke.
+     * @param storage Storage for Duke.
      * @throws DukeException If inputs are invalid.
      */
     void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException;

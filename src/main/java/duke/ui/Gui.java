@@ -18,6 +18,7 @@ import duke.exceptions.DukeException;
  * Controller for the Main Window of the GUI for Duke.
  */
 public class Gui extends AnchorPane implements Ui {
+    // Solution below adapted from JavaFx Tutorial by Jeffry Lum.
     @FXML
     private ScrollPane scrollPane;
     @FXML
