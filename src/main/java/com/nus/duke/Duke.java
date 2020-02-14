@@ -55,6 +55,11 @@ public class Duke {
                     Greetings.prettyPrint(String.format("Deleted task: %s", taskName));
                     break;
 
+                case "save":
+                    controller.persist();
+                    Greetings.prettyPrint(String.format("Tasks saved to disk"));
+                    break;
+
                 case "quit":
                     Greetings.tearDown();
                     contLoop = false;
