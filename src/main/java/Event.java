@@ -64,7 +64,7 @@ public class Event extends Task {
      */
     public String obtainTaskInfo() {
         String taskInfo = super.obtainTaskInfo();
-        return taskInfo + " at " + this.getDate() + " " + this.getTiming();
+        return taskInfo + " on " + this.getDate() + " " + this.getTiming();
     }
 
     /**
