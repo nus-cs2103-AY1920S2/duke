@@ -40,7 +40,7 @@ public class Duke {
      */
     public Duke() {
         ui = new GuiUi();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage("duke.txt");
         prevCommands = new ArrayList<String>();
         deletedTasks = new ArrayList<Task>();
     }
@@ -58,7 +58,7 @@ public class Duke {
         } catch (FileNotFoundException exception) {
             tasks = new TaskList();
 
-            File file = new File("data/duke.txt");
+            File file = new File("duke.txt");
 
             try {
                 file.createNewFile();
