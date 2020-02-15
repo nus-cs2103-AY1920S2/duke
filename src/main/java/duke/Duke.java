@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 
 import duke.exception.DukeException;
+import duke.parser.Parsers;
 
 import java.nio.file.Paths;
 
@@ -57,8 +58,8 @@ public class Duke {
         // TODO: Fix immutability of Ui
         try {
             ui.clear();
-            Command c = Parser.parse(input);
-            tasks = c.execute(tasks, ui, storage); // Update the task list
+            Command c = Parsers.parse(input);
+            tasks = c.execute(tasks, ui, storage); // Let the command handle the processing
             isExit = c.isExit();
             return ui.getResponse();
         } catch (DukeException e) {
