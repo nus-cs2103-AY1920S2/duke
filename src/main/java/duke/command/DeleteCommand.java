@@ -14,7 +14,7 @@ import duke.util.Storage;
  */
 public class DeleteCommand extends Command {
 
-    int indexToDelete;
+    private int indexToDelete;
 
     public DeleteCommand() {
 

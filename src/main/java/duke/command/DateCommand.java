@@ -42,30 +42,34 @@ public class DateCommand extends Command {
      */
     public void execute(TaskList taskList, Storage storage) {
         String latestResponse = "";
+
         try {
             LocalDate date =  LocalDate.parse(dateStr);
             Ui.showLine();
             int count = 0;
             for (Task t: taskList.getList()) {
-                if (t instanceof DatedTask) {
-                    DatedTask datedTask = (DatedTask)t;
-                    if (datedTask.getDate().toLocalDate().isEqual(date)) {
-                        count++;
-                        latestResponse += count + "." + datedTask.toString() + "\n";
-                        Ui.printWithIndent(count + "." + datedTask.toString());
-                    }
+                if (!(t instanceof DatedTask)) {
+                    continue;
                 }
+                DatedTask datedTask = (DatedTask)t;
+                if (!datedTask.getDate().toLocalDate().isEqual(date)) {
+                    continue;
+                }
+                count++;
+                latestResponse += count + "." + datedTask.toString() + "\n";
+                Ui.printWithIndent(count + "." + datedTask.toString());
             }
+
             latestResponse += "You have " + count + " thing" + (count != 1 ? "s" : "")
                     + " happening on: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             Ui.setLatestResponse(latestResponse);
-            Ui.printWithIndent("You have " + count + " thing" + (count != 1 ? "s" : "")
-                    + " happening on: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            Ui.printWithIndent(latestResponse);
             Ui.showLine();
         } catch (DateTimeParseException e) {
             latestResponse = "Please input a valid date. E.g. 2020-12-26";
             Ui.showLine();
             Ui.printWithIndent(latestResponse);
+            Ui.setLatestResponse(latestResponse);
             Ui.showLine();
         }
     }

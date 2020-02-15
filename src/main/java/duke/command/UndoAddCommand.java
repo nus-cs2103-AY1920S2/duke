@@ -23,12 +23,15 @@ public class UndoAddCommand extends Command {
         String output = taskList.deleteTask(
                 taskList.getList().size() - 1
         );
-        if (output != null) {
-            storage.saveTaskListToFile(taskList);
-            Ui.showTaskDelete(output, taskList.getList().size());
-        } else {
+
+        if (output == null) {
             Ui.showTaskNotFound();
+            return;
         }
+
+        storage.saveTaskListToFile(taskList);
+        Ui.showTaskDelete(output, taskList.getList().size());
+
     }
 
     /**

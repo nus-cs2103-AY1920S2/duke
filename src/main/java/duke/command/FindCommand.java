@@ -42,21 +42,22 @@ public class FindCommand extends Command {
         if (keyword.isBlank()) {
             latestResponse = "Sorry, I need a keyword.";
             Ui.printWithIndent(latestResponse);
-        } else {
-            int count = 0;
-            for (Task t: taskList.getList()) {
-                if (t.getName().contains(keyword)) {
-                    count++;
-                    latestResponse += count + "." + t.toString() + "\n";
-                    Ui.printWithIndent(count + "." + t.toString());
-                }
-            }
-            latestResponse += "You have " + count + " matching task" + (count != 1 ? "s" : "")
-                    + " for keyword: " + keyword;
-            Ui.setLatestResponse(latestResponse);
-            Ui.printWithIndent("You have " + count + " matching task" + (count != 1 ? "s" : "")
-                    + " for keyword: " + keyword);
+            return;
         }
+        int count = 0;
+        for (Task t: taskList.getList()) {
+            if (!t.getName().contains(keyword)) {
+                continue;
+            }
+            count++;
+            latestResponse += count + "." + t.toString() + "\n";
+            Ui.printWithIndent(count + "." + t.toString());
+        }
+        latestResponse += "You have " + count + " matching task" + (count != 1 ? "s" : "")
+                + " for keyword: " + keyword;
+        Ui.setLatestResponse(latestResponse);
+        Ui.printWithIndent("You have " + count + " matching task" + (count != 1 ? "s" : "")
+                + " for keyword: " + keyword);
         Ui.showLine();
     }
 

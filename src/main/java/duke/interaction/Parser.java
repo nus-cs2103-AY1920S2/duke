@@ -51,7 +51,7 @@ public class Parser {
             case "delete":
                 return new DeleteCommand((in.hasNextInt() ? in.nextInt() - 1 : -1));
             case "date":
-                return new DateCommand(in.nextLine().trim());
+                return new DateCommand((in.hasNextLine() ? in.nextLine().trim() : ""));
             case "find":
                 return new FindCommand((in.hasNextLine() ? in.nextLine().trim() : ""));
             case "help":

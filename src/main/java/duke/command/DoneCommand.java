@@ -13,7 +13,7 @@ import duke.util.Storage;
  */
 public class DoneCommand extends Command {
 
-    int doneIndex;
+    private int doneIndex;
 
     public DoneCommand() {
 
