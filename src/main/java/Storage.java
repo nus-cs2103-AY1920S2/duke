@@ -12,6 +12,10 @@ public class Storage {
     String filePath;
     File file;
 
+    /**
+     * Constructs a Storage object.
+     * @param filePath Path where the file is saved or should be saved.
+     */
     public Storage(String filePath) {
         file = new File(filePath);
         try {
@@ -24,7 +28,6 @@ public class Storage {
 
     /**
      * Loads tasks data from file.
-     *
      * @return Array list of Task.
      * @throws FileNotFoundException If file fails to load.
      */
@@ -41,7 +44,7 @@ public class Storage {
             if (command.equals("D")) {
                 splitBySlash = line.split("/");
 
-                //Splits second time
+                //Splits String the second time to get the description of deadline task
                 String[] splitBySpace2 = splitBySlash[0].split(" ");
                 String getDesc = "";
                 for (int i = 2; i < splitBySpace2.length; i++) {
@@ -56,7 +59,7 @@ public class Storage {
             } else if (command.equals("E")) {
                 splitBySlash = line.split("/");
 
-                //Splits second time
+                //Splits String the second time to get the description of event task
                 String[] splitBySpace2 = splitBySlash[0].split(" ");
                 String getDesc = "";
                 for (int i = 2; i < splitBySpace2.length; i++) {
@@ -87,7 +90,6 @@ public class Storage {
 
     /**
      * Writes list of tasks into file.
-     *
      * @param tasks Contains list of tasks.
      * @throws IOException If unable to write file.
      */

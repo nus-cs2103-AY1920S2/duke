@@ -1,3 +1,5 @@
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents tasks that are added into task list.
  */
@@ -5,13 +7,17 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructs a Task object.
+     * @param description Description of deadline task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
     /**
-     * Depending on whether the current status is done or not, it will return tick if done, or X is not done.
+     * Gets the current status of task.
      * @return Tick or X symbol.
      */
     public String getStatusIcon() {
@@ -26,8 +32,7 @@ public class Task {
     }
 
     /**
-     * Depending on whether the current status of the task is done or not. This function's purpose
-     * is for saving tasks into a file.
+     * Gets the current status of task.
      * @return 1 if done, or 0 if not done.
      */
     public String getStatusInNumber() {
@@ -35,8 +40,7 @@ public class Task {
     }
 
     /**
-     * The purpose of getDescription function is for the usage of finding keywords within
-     * each task's description for level 9 features.
+     * Gets the description of the task.
      * @return The description of the task, eg. read book.
      */
     public String getDescription() {
@@ -44,7 +48,7 @@ public class Task {
     }
 
     /**
-     * The purpose of format function is to set the format for saving task into a file.
+     * Formats the task details into text file for saving and loading.
      * @return The description of the format, eg. T 0 read.
      */
     public String format() {
@@ -52,7 +56,7 @@ public class Task {
     }
 
     /**
-     * To print out the task's status and description.
+     * Prints out the task's status and description.
      * @return String of task status.
      */
     @Override

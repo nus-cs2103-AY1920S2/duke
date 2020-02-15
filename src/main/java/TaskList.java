@@ -6,10 +6,17 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> dukeList;
 
+    /**
+     * Constructs a TaskList object if there exists a save file.
+     * @param dukeList Tasks from the save file.
+     */
     public TaskList(ArrayList<Task> dukeList) {
         this.dukeList = dukeList;
     }
 
+    /**
+     * Constructs a new TaskList object if there is no save file.
+     */
     public TaskList() {
         dukeList = new ArrayList<>();
     }

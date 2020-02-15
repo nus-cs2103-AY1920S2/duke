@@ -9,7 +9,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import org.w3c.dom.Text;
 
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -57,17 +56,23 @@ public class MainWindow extends AnchorPane {
 
         userInput.clear();
 
-        if (duke.toClose()) {
+        if (duke.getGoodbye()) {
             close();
         }
     }
 
+    /**
+     * Initialises the message that Duke displays when the user opens the application.
+     */
     public void initialiseMsg() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.getUi().welcome(), dukeImage)
         );
     }
 
+    /**
+     * Closes the Duke application launcher.
+     */
     private void close(){
         Platform.exit();
         System.exit(0);

@@ -4,6 +4,10 @@
 public class DukeException extends Exception {
     String errorMsg = "";
 
+    /**
+     * Constructs DukeException object in the event that the user typed something Duke could not understand.
+     * @param errorMsg Error message.
+     */
     public DukeException(String errorMsg) {
         super(errorMsg);
         this.errorMsg = errorMsg;

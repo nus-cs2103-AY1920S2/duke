@@ -41,7 +41,7 @@ javafx {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 run {
@@ -53,4 +53,10 @@ shadowJar {
     archiveVersion = "0.1.3"
     archiveClassifier = null
     archiveAppendix = null
+}
+
+jar {
+  manifest {
+   attributes 'Main-Class': 'Launcher'
+  }
 }

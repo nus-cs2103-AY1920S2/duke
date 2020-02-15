@@ -5,7 +5,7 @@ import java.util.Scanner;
  */
 public class Ui {
     /**
-     * Function called when there is error loading the file.
+     * Shows error in loading file.
      */
     public void showLoadingError() {
         System.out.println("There is an error in loading the file.");

@@ -10,6 +10,12 @@ public class Duke {
     private Parser parser;
     private boolean isGoodbye = false;
 
+    static final String UNKNOWN_ERROR = "Unknown error has occurred.";
+
+    /**
+     * Constructs Duke object to use the chatbot function of Duke.
+     * @param filePath The path where the data is saved.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
@@ -23,6 +29,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke chatbot program.
+     * @param input User's input.
+     * @return Duke's reply to user's input.
+     * @throws IOException Writing data into storage.
+     */
     public String run(String input) throws IOException {
         String fullCommand = input;
         String[] splitBySpace;
@@ -31,7 +43,7 @@ public class Duke {
         String desc;
         String by;
 
-        if (fullCommand.equals("bye")) {
+        if (fullCommand.equals("bye") || fullCommand.equals("goodbye")) {
             storage.writeData(tasks);
             isGoodbye = true;
             return ui.printGoodbye();
@@ -55,13 +67,13 @@ public class Duke {
                 }
             case DONE:
                 num = parser.parseNum(fullCommand, tasks);
-                assert num <= -3 : "Unknown error has occurred.";
+                assert num <= -3 : UNKNOWN_ERROR;
 
                 tasks.markDone(num);
                 return ui.printMarkDone(tasks.getSize(), num, tasks.getDukeList().get(num - 1).toString());
             case DELETE:
                 num = parser.parseNum(fullCommand, tasks);
-                assert num <= -3 : "Unknown error has occurred.";
+                assert num <= -3 : UNKNOWN_ERROR;
 
                 Task taskToRemove = tasks.getDukeList().get(num - 1);
                 tasks.removeTask(num);
@@ -109,11 +121,19 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets the Ui.
+     * @return Ui.
+     */
     public Ui getUi() {
         return ui;
     }
 
-    public boolean toClose() {
+    /**
+     * Gets isGoodbye boolean type.
+     * @return True if user typed "bye", or false if user did not type "bye".
+     */
+    public boolean getGoodbye() {
         return isGoodbye ? true : false;
     }
 }

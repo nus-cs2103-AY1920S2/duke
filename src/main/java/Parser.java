@@ -1,12 +1,10 @@
-import java.time.format.DateTimeParseException;
-
 /**
  * Parser class takes care of the parsing of full commands that the user typed.
  */
 public class Parser {
 
     /**
-     * This function handles the parsing of command recognised by the bot.
+     * Parses the command recognised by the bot.
      * @param fullCommand Command that the user typed.
      * @return Command from enum.
      * @throws DukeException Exception is thrown when the user typed other commands that the bot do not understand.
@@ -48,7 +46,7 @@ public class Parser {
     }
 
     /**
-     * This function will parse the description of todo command.
+     * Parses the description of todo command.
      * @param fullCommand Command that the user typed.
      * @return The description of todo command.
      */
@@ -71,7 +69,7 @@ public class Parser {
     }
 
     /**
-     * This function will parse the description of event and deadline command.
+     * Parses the description of event and deadline command.
      * @param fullCommand Command that the user typed.
      * @return Description of event and deadline command.
      */
@@ -99,7 +97,7 @@ public class Parser {
     }
 
     /**
-     * This function will parse the "deadline" typed by the user. Function will only be called if the command is
+     * Parses the "deadline" typed by the user. Function will only be called if the command is
      * event or deadline.
      * @param fullCommand Command that the user typed.
      * @return The description of what the user typed to be deadline.
@@ -122,7 +120,7 @@ public class Parser {
     }
 
     /**
-     * This function will parse the number in the command. Function is for delete and done command.
+     * Parses the number in the command. Function is for delete and done command.
      * @param fullCommand Command that the user typed.
      * @param tasks List of tasks.
      * @return The parsed number.

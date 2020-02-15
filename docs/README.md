@@ -1,20 +1,34 @@
-# User Guide
+# Duke User Guide
 
-## Features 
+### Introduction 
+Duke is a personalized chatbot that enables user to store tasks in the form of todo, event and deadline tasks. This enables the user to organize his or her tasks in a neat way.
 
-### Feature 1 
-Description of feature.
+### Commands
+* `todo` or `t` - Creates a todo task.
+    
+    Example: `todo read book`
+    
+* `event` or `e` - Creates an event task.
 
-## Usage
+    Example: `event read book /by Sunday` or `event read book /by 2020-02-25`
+    
+    Note: `event` accepts date format in `YYYY-MM-DD`, and can convert the date to `DD MMM YYYY`.
+    
+* `deadline` or `dl` - Creates a deadline task.
 
-### `Keyword` - Describe action
+    Example: `deadline read book /by Sunday` or `deadline read book /by 2020-02-25`
+    
+    Note: `event` accepts date format in `YYYY-MM-DD`, and can convert the date to `DD MMM YYYY`.
+    
+* `list` or `l` - Show tasks.
 
-Describe action and its outcome.
+* `done` or `d` - Mark a task as done.
 
-Example of usage: 
+* `delete` or `del` - Delete a task.
 
-`keyword (optional arguments)`
+* `find` or `f` - Find a keyword in your task list.
 
-Expected outcome:
+* `bye` `goodbye` - Saves task and exit application.
 
-`outcome`
+### Exceptions
+If Duke cannot understand your message, Duke will reply the respective message to your command.
