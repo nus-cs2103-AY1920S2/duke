@@ -33,7 +33,7 @@ Press `enter` to execute the command after typing.
 
 + ### `todo`
 
-    Adds a 'To-do' task into the list. 
+    - Adds a 'To-do' task into the list. 
 
     Usage: 
 
@@ -48,7 +48,7 @@ Press `enter` to execute the command after typing.
 
 + ### `event` 
 
-    Adds an 'Event' task into the list. 
+    - Adds an 'Event' task into the list. 
 
     Usage: 
 
@@ -63,7 +63,7 @@ Press `enter` to execute the command after typing.
 
 + ### `deadline`
 
-    Adds a 'Deadline' task into the list. 
+    - Adds a 'Deadline' task into the list. 
 
     Usage: 
 
@@ -78,7 +78,7 @@ Press `enter` to execute the command after typing.
     
 + ### `find` 
     
-    Searches for task(s) with user-specified keyword.  
+    - Searches for task(s) with user-specified keyword.  
 
     Usage: 
 
@@ -93,7 +93,7 @@ Press `enter` to execute the command after typing.
     
 + ### `urgent`
 
-    Generates a list of urgent task(s). 
+    - Generates a list of urgent task(s). 
 
     Usage: 
 
@@ -108,7 +108,7 @@ Press `enter` to execute the command after typing.
     
 + #### `done` 
 
-    Marks a task as completed.
+    - Marks a task as completed.
 
     Usage: 
 
@@ -123,7 +123,7 @@ Press `enter` to execute the command after typing.
     
 + #### `delete`
 
-    Deletes a task from the task list.
+    - Deletes a task from the task list.
 
     Usage: 
 
@@ -138,7 +138,7 @@ Press `enter` to execute the command after typing.
     
 + #### `bye`
  
-    Exit the application. 
+    - Exit the application. 
 
     Usage: 
 
