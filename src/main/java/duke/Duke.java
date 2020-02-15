@@ -6,6 +6,7 @@ import duke.command.Parser;
 import duke.command.ReminderCommand;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateFormatException;
+import duke.exception.InvalidTimeFormatException;
 import duke.task.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -41,6 +42,8 @@ public class Duke {
             System.err.println(" Sorry, I could not read the save file.\n");
         } catch (InvalidDateFormatException e) {
             System.err.println(e.getMessage() + "(Save file date formatting error)\n");
+        } catch (InvalidTimeFormatException e) {
+            System.err.println(e.getMessage() + "(Save file time formatting error)\n");
         }
     }
 

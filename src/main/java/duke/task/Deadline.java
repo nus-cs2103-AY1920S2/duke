@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.InvalidDateFormatException;
+import duke.exception.InvalidTimeFormatException;
 import duke.temporal.DateTimeParser;
 
 import java.time.LocalDate;
@@ -23,11 +24,21 @@ public class Deadline extends Task {
      * @param description description of the task.
      * @param byDateTime date and time the deadline task is due.
      * @throws InvalidDateFormatException if the date format is invalid.
+     * @throws InvalidTimeFormatException if the time format is invalid.
      */
-    public Deadline(String description, String byDateTime) throws InvalidDateFormatException {
+    public Deadline(String description, String byDateTime)
+            throws InvalidDateFormatException, InvalidTimeFormatException  {
         super(description, false);
-        this.byDate = LocalDate.parse(DateTimeParser.getParsableDate(byDateTime));
-        this.byTime = LocalTime.parse(DateTimeParser.getParsableTime(byDateTime));
+        try {
+            this.byDate = LocalDate.parse(DateTimeParser.getParsableDate(byDateTime));
+        } catch (Exception e) {
+            throw new InvalidDateFormatException(DateTimeParser.DATE_FORMAT_ERROR_MESSAGE);
+        }
+        try {
+            this.byTime = LocalTime.parse(DateTimeParser.getParsableTime(byDateTime));
+        } catch (Exception e) {
+            throw new InvalidTimeFormatException(DateTimeParser.TIME_FORMAT_ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -37,11 +48,21 @@ public class Deadline extends Task {
      * @param isDone done status of the task.
      * @param byDateTime date and time the deadline task is due.
      * @throws InvalidDateFormatException if the date format is invalid.
+     * @throws InvalidTimeFormatException if the time format is invalid.
      */
-    public Deadline(String description, boolean isDone, String byDateTime) throws InvalidDateFormatException {
+    public Deadline(String description, boolean isDone, String byDateTime)
+            throws InvalidDateFormatException, InvalidTimeFormatException {
         super(description, isDone);
-        this.byDate = LocalDate.parse(DateTimeParser.getParsableDate(byDateTime));
-        this.byTime = LocalTime.parse(DateTimeParser.getParsableTime(byDateTime));
+        try {
+            this.byDate = LocalDate.parse(DateTimeParser.getParsableDate(byDateTime));
+        } catch (Exception e) {
+            throw new InvalidDateFormatException(DateTimeParser.DATE_FORMAT_ERROR_MESSAGE);
+        }
+        try {
+            this.byTime = LocalTime.parse(DateTimeParser.getParsableTime(byDateTime));
+        } catch (Exception e) {
+            throw new InvalidTimeFormatException(DateTimeParser.TIME_FORMAT_ERROR_MESSAGE);
+        }
     }
 
     /**

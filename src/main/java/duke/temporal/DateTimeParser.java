@@ -1,11 +1,13 @@
 package duke.temporal;
 
 import duke.exception.InvalidDateFormatException;
+import duke.exception.InvalidTimeFormatException;
 
 import java.security.PrivilegedExceptionAction;
 
 public class DateTimeParser {
-    private static final String DATE_FORMAT_ERROR_MESSAGE = "HEY!!! The date format you entered is invalid!\n";
+    public static final String DATE_FORMAT_ERROR_MESSAGE = "HEY!!! The date format you entered is invalid!\n";
+    public static final String TIME_FORMAT_ERROR_MESSAGE = "HEY!!! The time format you entered is invalid!\n";
 
     /**
      * Take in the raw date and time and returns a date string parsable by LocalDate.
@@ -36,15 +38,20 @@ public class DateTimeParser {
      *
      * @param rawDateTime Raw date and time string of format dd/MM/yyyy hhmm.
      * @return time string parsable by LocalTime.
+     * @throws InvalidTimeFormatException if the time format is invalid.
      */
-    public static String getParsableTime(String rawDateTime) {
-        String[] separatedDateTime = rawDateTime.split(" ");
-        String hour = separatedDateTime[1].substring(0, 2);
-        if (hour.equals("24")) {
-            hour = "00";
+    public static String getParsableTime(String rawDateTime) throws InvalidTimeFormatException {
+        try {
+            String[] separatedDateTime = rawDateTime.split(" ");
+            String hour = separatedDateTime[1].substring(0, 2);
+            if (hour.equals("24")) {
+                hour = "00";
+            }
+            String minute = separatedDateTime[1].substring(2, 4);
+            String formattedTime = hour + ":" + minute + ":00";
+            return formattedTime;
+        } catch (Exception e) {
+            throw new InvalidTimeFormatException(TIME_FORMAT_ERROR_MESSAGE);
         }
-        String minute = separatedDateTime[1].substring(2, 4);
-        String formattedTime = hour + ":" + minute + ":00";
-        return formattedTime;
     }
 }

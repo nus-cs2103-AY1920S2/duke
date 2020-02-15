@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.InvalidDateFormatException;
+import duke.exception.InvalidTimeFormatException;
 import duke.temporal.DateTimeParser;
 
 import java.time.LocalDate;
@@ -23,11 +24,21 @@ public class Event extends Task {
      * @param description description of the task.
      * @param atDateTime date and time the event task is happening.
      * @throws InvalidDateFormatException if the date format is invalid.
+     * @throws InvalidTimeFormatException if the time format is invalid.
      */
-    public Event(String description, String atDateTime) throws InvalidDateFormatException {
+    public Event(String description, String atDateTime)
+            throws InvalidDateFormatException, InvalidTimeFormatException {
         super(description, false);
-        this.atDate = LocalDate.parse(DateTimeParser.getParsableDate(atDateTime));
-        this.atTime = LocalTime.parse(DateTimeParser.getParsableTime(atDateTime));
+        try {
+            this.atDate = LocalDate.parse(DateTimeParser.getParsableDate(atDateTime));
+        } catch (Exception e) {
+            throw new InvalidDateFormatException(DateTimeParser.DATE_FORMAT_ERROR_MESSAGE);
+        }
+        try {
+            this.atTime = LocalTime.parse(DateTimeParser.getParsableTime(atDateTime));
+        } catch (Exception e) {
+            throw new InvalidTimeFormatException(DateTimeParser.TIME_FORMAT_ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -37,11 +48,21 @@ public class Event extends Task {
      * @param isDone done status of the task.
      * @param atDateTime date and time the event task is happening.
      * @throws InvalidDateFormatException if the date format is invalid.
+     * @throws InvalidTimeFormatException if the time format is invalid.
      */
-    public Event(String description, boolean isDone, String atDateTime) throws InvalidDateFormatException {
+    public Event(String description, boolean isDone, String atDateTime)
+            throws InvalidDateFormatException, InvalidTimeFormatException {
         super(description, isDone);
-        this.atDate = LocalDate.parse(DateTimeParser.getParsableDate(atDateTime));
-        this.atTime = LocalTime.parse(DateTimeParser.getParsableTime(atDateTime));
+        try {
+            this.atDate = LocalDate.parse(DateTimeParser.getParsableDate(atDateTime));
+        } catch (Exception e) {
+            throw new InvalidDateFormatException(DateTimeParser.DATE_FORMAT_ERROR_MESSAGE);
+        }
+        try {
+            this.atTime = LocalTime.parse(DateTimeParser.getParsableTime(atDateTime));
+        } catch (Exception e) {
+            throw new InvalidTimeFormatException(DateTimeParser.TIME_FORMAT_ERROR_MESSAGE);
+        }
     }
 
     /**
