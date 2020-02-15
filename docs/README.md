@@ -39,7 +39,7 @@ Expected outcome:
 
 Note that the number of tasks varies.
 
-#
+<br/>
 
 ### `deadline` - Adds a new deadline to your list.
 
@@ -59,7 +59,7 @@ Expected outcome:
 
 Note that the number of tasks varies.
 
-#
+<br/>
 
 ### `event` - Adds a new event to your list.
 
@@ -80,7 +80,7 @@ Expected outcome:
 
 Note that the number of tasks varies.
 
-#
+<br/>
 
 ### `list` - Displays all tasks in the list.
 
@@ -98,7 +98,7 @@ Outcome for empty list:
 
 `Empty List. You are currently free! Upz lah!`
 
-#
+<br/>
 
 ### `done` - Sets a task in the list to 'done' status.
 
@@ -113,7 +113,7 @@ Expected outcome:
 `Nice! I've marked this task as done:`<br>
 `[T][√] Tomorrow's Homework`<br>
 
-#
+<br/>
 
 ### `delete` - Removes a task from the list.
 
@@ -129,7 +129,7 @@ Expected outcome:
 `[T][√] Tomorrow's Homework`<br>
 `Now tou have 2 tasks in the list.`
 
-#
+<br/>
 
 ### `date` - Shows all tasks on a certain date.
 
@@ -146,7 +146,7 @@ Expected outcome:
 `2.[D][✘] Science Quiz (by: Mar 9 2020 11.59pm)`<br>
 `You have 2 things happening on: Mar 9 2020`
 
-#
+<br/>
 
 ### `find` - Shows all tasks that match a keyword.
 
@@ -162,7 +162,7 @@ Expected outcome:
 `2.[T][✘] Submit English Assignment`<br>
 `You have 2 matching tasks for keyword: Assignment`
 
-#
+<br/>
 
 ### `undo` - Undoes the latest change to the task list.
 
@@ -182,14 +182,13 @@ Outcome for no prior changes:
 
 `Nothing to undo.`
 
-#
+<br/>
 
 ### `help` - Prints all possible user commands.
 
 All commands possible are printed along with some explanations.
 
-#
+<br/>
 
 ### `bye` - Exits the program.
 
-#
