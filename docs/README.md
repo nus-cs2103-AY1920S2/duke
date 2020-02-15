@@ -8,16 +8,19 @@ A personal assistant for tracking the tasks to be done.
 ## Features 
 
 ### Adding Task
-* Adding task as Todo, Event or Deadline to the list to `task.txt`.
+* You can add task as either Todo or Event or Deadline to the list to `task.txt`.
 
 ### Delete Task
-* Delete task from the list.
+* You can delete task from the list.
+
+### Mark Task as Done
+* You can mark the task as done.
 
 ### List Tasks
-* List the tasks out for the user to see.
+* You can ist the tasks out to see.
 
 ### Storing tasks to `task.txt`
-* Store the list of tasks into hard disk in the file `task.txt`.
+* You can store the list of tasks into hard disk in the file `task.txt`.
 
 ## Usage
 
@@ -30,8 +33,8 @@ update the list in `task.txt`.
 `todo read topics for CS2103`
 
 * Expected outcome: <br/><br/>
-`Got it. I've added this task:` <br/>
-`[T][N] read topics for CS2103T`<br/>
+`Got it. I've added this task: <br/>
+[T][N] read topics for CS2103T`<br/>
 ` Now you have 1 task in the list.`
 
 <img src="Todo.png" alt="Screenshot for todo command" about="Screenshot for todo command" align="center">
@@ -86,7 +89,7 @@ Expected outcomes:
 
 <img src="List.png" alt="Screenshot for list command" about="Screenshot for list command" align="center">
 
-* When there are no task in the list:<br/>
+* When there are no task in the list: <br/>
 `Horray! You do not have any task now!`
 
 <img src="ListWithNoTask.png" alt="Screenshot for empty list" about="Screenshot for empty list" align="center">
@@ -117,7 +120,7 @@ Example of usage:
 
 Expected outcomes:
 
-`Nice! I've removed this task:` <br/>
+`Nice! I've removed this task:` <br/> 
 `[E][N] party (at: Mar 12 2020 2215)`
 
 <img src="Delete.png" alt="Screenshot for delete command" about="Screenshot for delete command" align="center">
