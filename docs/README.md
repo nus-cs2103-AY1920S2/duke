@@ -16,7 +16,7 @@
 * Find tasks by keywords
 
 ### Feature 1 
-Create and add different tasks into a list
+Create and add todo into a list
 
 ## Usage
 
@@ -31,4 +31,6 @@ Example of usage:
 
 Expected outcome:
 
-`Saving now....\n  [T][x] bake cake for mum\n  Aiyo still got 1 tasks(s), what you doing sia`
+`Saving now....`
+`  [T][x] bake cake for mum`
+`  Aiyo still got 1 tasks(s), what you doing sia`
