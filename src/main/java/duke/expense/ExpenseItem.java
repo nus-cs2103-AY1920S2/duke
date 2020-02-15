@@ -1,6 +1,5 @@
 package duke.expense;
 
-import duke.task.Todo;
 import duke.util.DateUtil;
 
 import java.time.LocalDate;
@@ -14,6 +13,9 @@ public class ExpenseItem {
     protected LocalDate dateTime;
     protected String description;
 
+    /**
+     * Instantiates the expense item with default datetime.
+     */
     public ExpenseItem(Category category, double amount, String description) {
         this.amount = amount;
         this.category = category;
@@ -53,7 +55,8 @@ public class ExpenseItem {
     }
 
     /**
-     * Prints out the string
+     * Prints out the string.
+     *
      * @return the string
      */
     public String toString() {

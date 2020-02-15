@@ -3,6 +3,11 @@ package duke.util;
 import java.time.LocalDate;
 
 public class DateUtil {
+    /**
+     * Formats the date in the accepted format.
+     *
+     * @param dt the datetime
+     */
     public static LocalDate formatDate(String dt) {
         assert (!dt.isEmpty());
         dt = dt.replaceAll("\\s", "");

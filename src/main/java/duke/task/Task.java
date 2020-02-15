@@ -57,7 +57,7 @@ public abstract class Task implements TaskPrintable, Parseable {
     /**
      * Instantiates a new task.
      *
-     * @param isDone 1 if the task is done
+     * @param isDone      1 if the task is done
      * @param description description
      */
     private Task(boolean isDone, String description) {
