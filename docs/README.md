@@ -4,7 +4,7 @@
 Peachy is your new employed personal assistant 
 who will help you through your daily tasks and schedule
 to make sure you stay organised and productive!
-<p style="text-align:center;"><img src="Ui.png" alt="Ui" width="1424" height="1868"></p>
+<p style="text-align:center;"><img src="Ui.png" alt="Ui></p>
 
 ## Features 
 
