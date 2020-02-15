@@ -94,6 +94,9 @@ public class Duke {
                 case FIND:
                     System.out.println(ui.showFound(tasks.findTasks(instruction.getParameters())));
                     break;
+                case TAG:
+                    System.out.println(addTag(instruction.getParameters()));
+                    break;
                 default:
                     ;
                 }

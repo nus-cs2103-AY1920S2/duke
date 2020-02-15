@@ -123,7 +123,7 @@ public class Ui {
         if (foundTasks.isEmpty()) {
             sb.append("No matching tasks found.");
         } else {
-            sb.append("These are the matching tasks in your list:");
+            sb.append("These are the matching tasks in your list:\n");
             for (int i = 0; i < foundTasks.size(); i++) {
                 sb.append(String.format("%d.%s%n", i + 1, foundTasks.get(i)));
             }
