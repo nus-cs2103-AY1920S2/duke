@@ -1,7 +1,6 @@
-package duke;
+package duke.task;
 
 import duke.exception.DukeException;
-import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.HashSet;
