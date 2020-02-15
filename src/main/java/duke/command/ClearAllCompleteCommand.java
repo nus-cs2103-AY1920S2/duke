@@ -37,6 +37,7 @@ public class ClearAllCompleteCommand extends Command {
                 reply += ("\n  " + Constant.SPACE + numbering++ + ".");
                 reply += (task);
                 tasks.removeTask(i);
+                i = i - 1;
             }
         }
         return reply;
