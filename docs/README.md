@@ -127,7 +127,7 @@ Expected outcome:
 
 `Noted! I've removed this task:`<br>
 `[T][√] Tomorrow's Homework`<br>
-`Now tou have 2 tasks in the list.`
+`Now you have 2 tasks in the list.`
 
 <br/>
 
