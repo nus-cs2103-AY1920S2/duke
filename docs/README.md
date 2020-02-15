@@ -1,6 +1,6 @@
 # Duke User Guide
 
-##Description
+## Description
 Duke is a customised task manager for you, you can easily categorized your 
 tasks into deadlines, events and todos and manage them by adding new tasks, deleting tasks,
 tagging tasks and etc.
