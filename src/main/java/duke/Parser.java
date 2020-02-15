@@ -70,26 +70,6 @@ public class Parser {
     }
 
     /**
-     * Tests the validity of the details of command and throws relevant exceptions if invalid.
-     *
-     * @param command The specified command.
-     * @param cmdAndDetails The array containing command and description of the command.
-     * @throws DukeException If the command has missing information or in wrong format.
-     */
-    private static void testValidityOfInput(String command, String[] cmdAndDetails) throws DukeException {
-        try {
-            String taskDescription = cmdAndDetails[1].trim();
-            if (isEmptyDescription(taskDescription)) {
-                throw new DukeMissingArgumentException(String.format(
-                        Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeMissingArgumentException(String.format(
-                    Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
-        }
-    }
-
-    /**
      * Returns the Command object of DeleteCommand type.
      *
      * @param cmdAndDetails The array containing command and description of the command.
@@ -98,10 +78,16 @@ public class Parser {
      */
     private static Command createDeleteCommand(String[] cmdAndDetails) throws DukeException {
         String command = cmdAndDetails[0];
-        testValidityOfInput(command, cmdAndDetails);
         try {
             String deleteTaskDescription = cmdAndDetails[1].trim();
+            if (isEmptyDescription(deleteTaskDescription)) {
+                throw new DukeMissingArgumentException(String.format(
+                        Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
+            }
             return new DeleteCommand(Integer.parseInt(deleteTaskDescription) - 1);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeMissingArgumentException(String.format(
+                    Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
         } catch (NumberFormatException e) {
             throw new DukeNumberFormatException(command);
         }
@@ -116,10 +102,16 @@ public class Parser {
      */
     private static Command createDoneCommand(String[] cmdAndDetails) throws DukeException {
         String command = cmdAndDetails[0];
-        testValidityOfInput(command, cmdAndDetails);
         try {
             String doneTaskDescription = cmdAndDetails[1].trim();
+            if (isEmptyDescription(doneTaskDescription)) {
+                throw new DukeMissingArgumentException(String.format(
+                        Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
+            }
             return new DoneCommand(Integer.parseInt(doneTaskDescription) - 1);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeMissingArgumentException(String.format(
+                    Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
         } catch (NumberFormatException e) {
             throw new DukeNumberFormatException(command);
         }
@@ -133,9 +125,18 @@ public class Parser {
      * @throws DukeException If the command has missing information or in wrong format.
      */
     private static Command createAddCommand(String[] cmdAndDetails) throws DukeException {
-        testValidityOfInput("task", cmdAndDetails);
-        String taskDescription = cmdAndDetails[1].trim();
-        return new AddCommand(cmdAndDetails[0], taskDescription);
+        String command = cmdAndDetails[0];
+        try {
+            String taskDescription = cmdAndDetails[1].trim();
+            if (isEmptyDescription(taskDescription)) {
+                throw new DukeMissingArgumentException(String.format(
+                        Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
+            }
+            return new AddCommand(cmdAndDetails[0], taskDescription);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeMissingArgumentException(String.format(
+                    Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
+        }
     }
 
     /**
@@ -146,8 +147,17 @@ public class Parser {
      * @throws DukeException If the command has missing information or in wrong format.
      */
     private static Command createFindCommand(String[] cmdAndDetails) throws DukeException {
-        testValidityOfInput("find", cmdAndDetails);
-        String findTaskDescription = cmdAndDetails[1].trim();
-        return new FindCommand(findTaskDescription);
+        String command = cmdAndDetails[0];
+        try {
+            String findTaskDescription = cmdAndDetails[1].trim();
+            if (isEmptyDescription(findTaskDescription)) {
+                throw new DukeMissingArgumentException(String.format(
+                        Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
+            }
+            return new FindCommand(findTaskDescription);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeMissingArgumentException(String.format(
+                    Messages.MESSAGE_MISSING_COMMAND_DESCRIPTION, command));
+        }
     }
 }

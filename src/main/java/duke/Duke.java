@@ -82,7 +82,7 @@ public class Duke {
             }
             return command.execute(tasks, history);
         } catch (DukeException e) {
-            return Ui.generateErrorMessage(e.getMessage());
+            return ui.generateErrorMessage(e.getMessage());
         }
     }
 
@@ -100,7 +100,7 @@ public class Duke {
                 System.out.println(c.execute(tasks, history));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                System.out.println(Ui.generateErrorMessage(e.getMessage()));
+                System.out.println(ui.generateErrorMessage(e.getMessage()));
             } finally {
                 ui.showLine();
             }

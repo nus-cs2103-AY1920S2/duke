@@ -15,31 +15,31 @@ Duke is a Personal Assistant Chatbot that helps a person to keep track of variou
 ![Screenshot of Ui](Ui.png)
 
 ## 4. Features
-##### 4.1 Add task
+#### 4.1 Add task
 
 Adds a task as todo, deadline or event to your task list.
 
-##### 4.2 List
+#### 4.2 List
 
 Shows the overview of all the tasks in your task list.
 
-##### 4.3 Mark a task as done
+#### 4.3 Mark a task as done
 
 Marks as task as done.
 
-##### 4.4 Delete a task
+#### 4.4 Delete a task
 
 Deletes a task from your task list.
 
-##### 4.5 Find a task
+#### 4.5 Find a task
 
 Finds the task from your task list.
 
-##### 4.6 Undo command
+#### 4.6 Undo command
 
 Undo commands you made in the current session when you open the application.
 
-##### 4.7 Save data
+#### 4.7 Save data
 
 The data of your tasks are saved in the hard disk automatically after exiting the application. There is no need to save manually.
 
@@ -48,7 +48,7 @@ The data of your tasks are saved in the hard disk automatically after exiting th
 - Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo quiz`.
 - Items in square brackets are optional e.g. `deadline DESCRIPTION /by DATE [TIME]` can be used as `deadline quiz /by 2020-06-06` or `deadline quiz /by 2020-06-06 13:00`.
 
-#### 5.1 `todo DESCRIPTION`
+### 5.1 `todo DESCRIPTION`
 
 Adds a todo task to your task list.
 
@@ -63,7 +63,7 @@ Got it. I've added this task:
  [T][N] read book
 Now you have 1 tasks in the list.
 ```
-#### 5.2 `deadline DESCRIPTION /by DATE [TIME]`
+### 5.2 `deadline DESCRIPTION /by DATE [TIME]`
 
 Adds a deadline to your task list. The time of a deadline is optional. The date follows `yyyy-mm-dd` format while the time follows `hh:mm` format (24 hour).
 
@@ -78,7 +78,7 @@ Got it. I've added this task:
  [D][N] return book (by: Jun 6 2020 1:00PM)
 Now you have 1 tasks in the list.
 ```
-#### 5.3 `event DESCRIPTION /at DATE [TIME]`
+### 5.3 `event DESCRIPTION /at DATE [TIME]`
 
 Adds an event to your task list. The time of a deadline is optional. The date follows `yyyy-mm-dd` format while the time follows `hh:mm` format (24 hour).
 
@@ -93,7 +93,7 @@ Got it. I've added this task:
  [E][N] meeting (at: Aug 7 2020 1:00PM)
 Now you have 1 tasks in the list.
 ```
-#### 5.4 `list`
+### 5.4 `list`
 
 Shows the list of all the tasks in your task list.
 
@@ -109,7 +109,7 @@ Here are the tasks in your list:
 2. [D][N] return book (by: Jun 6 2020)
 3. [E][N] project meeting (at: Aug 7 2020 1:00PM)
 ```
-#### 5.5 `done INDEX`
+### 5.5 `done INDEX`
 
 Marks a task as done. The index is the index of the task in your task list.
 
@@ -123,7 +123,7 @@ Expected outcome:
 Nice! I've marked this task as done:
  [T][Y] join sports club
 ```
-#### 5.6 `delete INDEX`
+### 5.6 `delete INDEX`
 
 Deletes a task from your task list. The index is the index of the task in your task list.
 
@@ -138,7 +138,7 @@ Noted. I've removed this task:
  [T][Y] join sports club
 Now you have 2 tasks in the list.
 ```
-#### 5.7 `find KEYWORD`
+### 5.7 `find KEYWORD`
 
 Finds the tasks from your task list which have their descriptions containing the given keyword.
 
@@ -154,7 +154,7 @@ Here are the matching tasks in your list:
 2. [D][N] return book (by: Jun 6 2020)
 3. [T][N] borrow book
 ```
-#### 5.8 `undo`
+### 5.8 `undo`
 
 Undo commands you made in the current session when you start the application.
 
@@ -171,7 +171,7 @@ Here are the current tasks in your list:
 1. [T][Y] read book
 2. [D][N] return book (by: Jun 6 2020)
 ```
-#### 5.9 `bye`
+### 5.9 `bye`
 
 Exits the application.
 

@@ -50,7 +50,7 @@ public class Ui {
      * @param msg The error message to be shown to user.
      * @return The error message.
      */
-    public static String generateErrorMessage(String msg) {
+    public String generateErrorMessage(String msg) {
         return msg;
     }
 

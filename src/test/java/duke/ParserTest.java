@@ -45,7 +45,7 @@ public class ParserTest {
             Parser.parse("todo ");
             fail();
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The description of task cannot be empty.", e.getMessage());
+            assertEquals("OOPS!!! The description of todo cannot be empty.", e.getMessage());
         }
 
         //invalid command
