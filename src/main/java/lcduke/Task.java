@@ -3,16 +3,16 @@ package lcduke;
 /** Ths creates a task object.
  */
 public abstract class Task {
-    protected String description;
+    private String description;
     protected boolean isDone;
-    protected String markSymbol;
+    private String markSymbol;
     protected static int taskNo = 0;
 
     /** This is the constructor to create the Task Object.
      *
      * @param description Description of user's input.
      */
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
         taskNo++;
@@ -22,13 +22,13 @@ public abstract class Task {
      *
      * @return icon of the task.
      */
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /** This updates the status of the isDone.
      */
-    public void markAsDone() {
+    protected void markAsDone() {
         this.isDone = true;
     }
 
@@ -36,7 +36,7 @@ public abstract class Task {
      *
      * @return isDone.
      */
-    public boolean getDone(){
+    protected boolean getDone(){
         return isDone;
     }
 
@@ -44,11 +44,11 @@ public abstract class Task {
      *
      * @return description of task
      */
-    public String getDescription(){
+    protected String getDescription(){
         return description;
     }
 
-    public abstract String printInit();
+    protected abstract String printInit();
 
     /** This generates the description in the list.
      * @return the description in the list

@@ -2,14 +2,12 @@ package lcduke;
 
 /** Ths creates a Todo object.
  */
-
 public class Todo extends Task {
-
     /** This is the constructor to create the Todo Object.
      *
      * @param description Description of user's input.
      */
-    public Todo(String description) {
+    protected Todo(String description) {
         super(description);
     }
 

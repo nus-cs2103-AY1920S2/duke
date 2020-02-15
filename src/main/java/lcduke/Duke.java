@@ -8,13 +8,13 @@ import java.text.ParseException;
 public class Duke {
     private static Storage storage;
     private static TaskList tasks;
-    public Ui ui;
+    private Ui ui;
 
     /** This is the constructor to create the Deadline Object.
      *
      * @param filePath File path of user's hard disk.
      */
-    public Duke(String filePath) {
+    protected Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -24,28 +24,11 @@ public class Duke {
         }
     }
 
-    public void run(){
-            String userInput;
-        while(!ui.userInput.equals("bye")){
-            userInput = ui.input();
-            ui.inputProcess(userInput, storage, tasks);
-        }
-        ui.bye();
-    }
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        String response;
-        if(!ui.userInput.equals("bye")){
-            response = ui.inputProcess(input, storage, tasks);
-        } else {
-            response = ui.bye();
-            assert response == "     Bye. Hope to see you again soon!\n"
-                    : "ui should have correct bye message\n";
-        }
-        return response;
+    protected String getResponse(String input) {
+        return ui.inputProcess(input, storage, tasks);
     }
 }

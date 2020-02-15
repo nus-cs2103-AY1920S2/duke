@@ -6,16 +6,16 @@ import static java.lang.Integer.parseInt;
 /** Ths creates a TaskList object.
  */
 public class TaskList {
-    static Task[] totalTasks = new Task[100];
-    static int totalTasksCount;
+    protected static Task[] totalTasks = new Task[100];
+    protected static int totalTasksCount;
 
     /** This is the constructor to create the TaskList Object.
      */
-    public TaskList() {
+    protected TaskList() {
         totalTasksCount = 0;
     }
 
-    public TaskList(String[] totalTasks, int storageNo) throws ParseException {
+    protected TaskList(String[] totalTasks, int storageNo) throws ParseException {
         for(int i = 0; i < storageNo; i++) {
             if (totalTasks[i].contains("[T]")) {
                 this.toDo("todo" + totalTasks[i].substring(totalTasks[i].indexOf(" ")));
@@ -67,8 +67,8 @@ public class TaskList {
                     part2 = "0" + part2;
                 }
                 temp = part3 + "-" + part1 + "-" + part2;
-                this.deadline("deadline" + totalTasks[i].substring(totalTasks[i].indexOf(" "), totalTasks[i].indexOf("by:") - 1)
-                        + "/by " + temp);
+                this.deadline("deadline" + totalTasks[i].substring(totalTasks[i].indexOf(" "),
+                        totalTasks[i].indexOf("by:") - 1) + "/by " + temp);
 
             } else {
                 String temp = totalTasks[i].substring(totalTasks[i].indexOf("at:") + 4, totalTasks[i].length() - 1);
@@ -118,7 +118,6 @@ public class TaskList {
                     part2 = "0" + part2;
                 }
                 temp = part3 + "-" + part1 + "-" + part2;
-                System.out.println(temp);
                 this.event("event" + totalTasks[i].substring(totalTasks[i].indexOf(" "),
                         totalTasks[i].indexOf("at:") - 1) + "/at " + temp);
             }
@@ -128,7 +127,7 @@ public class TaskList {
         }
     }
 
-    public void delete(String userInput){
+    protected void delete(String userInput){
         String deleteSelect = userInput.substring(7);
         int deleteSelectNo = parseInt(deleteSelect) - 1;
         if (deleteSelectNo != totalTasksCount) {
@@ -141,7 +140,7 @@ public class TaskList {
         Task.taskNo = Task.taskNo - 1;
     }
 
-    public String toDo(String userInput){
+    protected String toDo(String userInput){
         String content = userInput.substring(5);
         Task t = new Todo(content);
         totalTasks[totalTasksCount] = t;
@@ -149,7 +148,7 @@ public class TaskList {
         return t.printInit();
     }
 
-    public String deadline(String userInput){
+    protected String deadline(String userInput){
         userInput = userInput.substring(9);
         String contentTasks = userInput.substring(0, userInput.indexOf("/by") - 1);
         String taskDeadline = userInput.substring(userInput.indexOf("/by") + 4);
@@ -159,7 +158,7 @@ public class TaskList {
         return t.printInit();
     }
 
-    public String event(String userInput){
+    protected String event(String userInput){
         userInput = userInput.substring(6);
         String contentTasks = userInput.substring(0, userInput.indexOf("/at") - 1);
         String taskTime = userInput.substring(userInput.indexOf("/at") + 4);
@@ -168,7 +167,7 @@ public class TaskList {
         totalTasksCount++;
         return t.printInit();
     }
-    public String find(String userInput){
+    protected String find(String userInput){
         String response;
         String keyword = userInput.substring(5);
         response = "     Here are the matching tasks in your list:\n";

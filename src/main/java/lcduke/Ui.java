@@ -5,42 +5,53 @@ import java.util.Scanner;
 
 /** Ths creates an Ui object.
  */
-
 public class Ui {
-    String userInput = "startProcess";
-    Parser newInput;
+    private String userInput = "startProcess";
+    private Parser newInput;
+    private static String command;
 
     /** This is the constructor to create the Ui Object.
      */
-    public Ui() {
+    protected Ui() {
         //this is the constructor of ui
     }
 
-    public String init() {
+    private String init() {
         return "     Hello! I'm Duke\n" + "     What can I do for you?\n";
     }
 
-    public String inputProcess(String userInput, Storage storage, TaskList tasks) {
+    protected String inputProcess(String userInput, Storage storage, TaskList tasks) {
         this.userInput = userInput;
         newInput = new Parser(this.userInput);
         String response;
+
+        if(this.userInput.contains(" ")){
+            command = this.userInput.substring(0, userInput.indexOf(" "));
+        } else {
+            command = this.userInput;
+        }
+
         if(newInput.getIsProblem()) {
             Parser.isProblem = false;
             response = Parser.errorMessage;
 
         } else {
-            if (this.userInput.equals("list")) {
+            switch (command) {
+            case "list":
                 response = this.list();
-            } else if (this.userInput.contains("hi")) {
+                break;
+            case "hi":
                 response = this.init();
-            } else if (this.userInput.contains("done")) {
+                break;
+            case "done":
                 response = this.done(this.userInput);
                 try {
                     storage.save();
                 } catch (IOException e) {
                     response = "Cannot write file";
                 }
-            } else if (this.userInput.contains("delete")) {
+                break;
+            case "delete":
                 tasks.delete(this.userInput);
                 response = "This task is deleted";
                 try {
@@ -48,27 +59,36 @@ public class Ui {
                 } catch (IOException e) {
                     response = "Cannot write file";
                 }
-            }else if (this.userInput.contains("find")){
+                break;
+            case "find":
                 response = tasks.find(this.userInput);
-            } else if (this.userInput.contains("todo")) {
+                break;
+            case "todo":
                 response = tasks.toDo(this.userInput);
-                //TaskList.totalTasks[TaskList.totalTasksCount -1].printInit();
                 try {
                     storage.save();
                 } catch (IOException e) {
                     response = "Cannot write file";
                 }
-            } else if (this.userInput.contains("deadline")) {
+                break;
+            case "deadline":
                 response = tasks.deadline(this.userInput);
-                //TaskList.totalTasks[TaskList.totalTasksCount - 1].printInit();
                 try {
                     storage.save();
                 } catch (IOException e) {
                     response = "Cannot write file";
                 }
-            } else if (this.userInput.contains("reminders")) {
+                break;
+            case "reminders":
                 response = this.reminders();
-            } else {
+                break;
+            //default is event
+            case "bye":
+                response = this.bye();
+                assert response == "     Bye. Hope to see you again soon!\n"
+                        : "ui should have correct bye message\n";
+                break;
+            default:
                 response = tasks.event(this.userInput);
                 try {
                     storage.save();
@@ -84,14 +104,14 @@ public class Ui {
      *
      * @return description of task from the user.
      */
-    public String input(){
+    private String input(){
         Scanner myObj = new Scanner(System.in);
         return myObj.nextLine();
     }
 
     /** This outputs the response to bye request.
      */
-    public String bye(){
+    private String bye(){
         return "     Bye. Hope to see you again soon!\n";
     }
 

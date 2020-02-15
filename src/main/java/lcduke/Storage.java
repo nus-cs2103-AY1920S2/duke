@@ -9,20 +9,21 @@ import java.util.Scanner;
 /** Ths creates a Storage object.
  */
 public class Storage {
-    File savedTaskList;
-    String filePath;
-    static int StorageNo = 0;
+    private File savedTaskList;
+    private String filePath;
+    private static int StorageNo = 0;
+    private static FileWriter fw;
 
     /** This is the constructor to create the Storage Object.
      *
      * @param filePath FilePath of user's hard disk.
      */
-    public Storage(String filePath) {
+    protected Storage(String filePath) {
         this.filePath = filePath;
         this.savedTaskList = new File(filePath);
     }
 
-    public String[] load() throws FileNotFoundException {
+    protected String[] load() throws FileNotFoundException {
         String[] totalTasks = new String[100];
         Scanner scanSavedTaskList = new Scanner(this.savedTaskList);
         int i = 0;
@@ -34,12 +35,12 @@ public class Storage {
         return totalTasks;
     }
 
-    public int getStorageNo() {
+    protected int getStorageNo() {
         return StorageNo;
     }
 
-    public void save() throws IOException {
-        FileWriter fw = new FileWriter(this.filePath);
+    protected void save() throws IOException {
+        fw = new FileWriter(this.filePath);
         int i = 0;
         while (i < TaskList.totalTasksCount) {
             fw.write(TaskList.totalTasks[i].toString() + System.lineSeparator());
