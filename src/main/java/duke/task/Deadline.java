@@ -25,9 +25,9 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
-            String[] dateTimeArray = by.split(" ");
-            this.date = LocalDate.parse(dateTimeArray[0]);
-            this.time = LocalTime.parse(dateTimeArray[1]);
+            String[] dateTimeArray = by.split(" ", 2);
+            this.date = LocalDate.parse(dateTimeArray[0].trim());
+            this.time = LocalTime.parse(dateTimeArray[1].trim());
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             throw new InvalidDateTimeFormatException("yyyy-mm-dd hh:mm");
         }

@@ -41,7 +41,7 @@ public class AddCommand extends Command {
         assert (type.equals("todo") || type.equals("deadline") || type.equals("event")) : "Invalid task type";
         switch (type) {
         case "todo":
-            checkEmptyDetails("The description of a todo cannot be empty.");
+            checkEmptyDetails("description of a todo");
             task = new Todo(details);
             break;
         case "deadline":

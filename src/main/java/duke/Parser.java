@@ -30,10 +30,11 @@ public class Parser {
      * @throws DukeException If the command is invalid.
      */
     public static Command parse(String command) throws DukeException {
-        if (command.trim().equals("bye")) {
+        command = command.trim();
+        if (command.equals("bye")) {
             return new ExitCommand();
         }
-        if (command.trim().equals("list")) {
+        if (command.equals("list")) {
             return new ListCommand();
         }
         Command cmd;

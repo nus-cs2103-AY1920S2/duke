@@ -10,7 +10,7 @@ Interested? Jump to Section 2, “Quick Start” to get started. Enjoy!
 ## 2. Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest jar file for Duke [here](https://github.com/zixinn/duke/releases/tag/v0.2).
+2. Download the latest jar file for Duke [here](https://github.com/zixinn/duke/releases/tag/v0.2.1).
 3. Copy the file to the folder you want to use as the home folder for Duke.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 ![Screenshot](Ui.png)

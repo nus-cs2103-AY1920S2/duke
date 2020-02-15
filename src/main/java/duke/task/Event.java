@@ -27,11 +27,11 @@ public class Event extends Task {
     public Event(String description, String at) throws DukeException {
         super(description);
         try {
-            String[] dateTimeArray = at.split(" ");
-            this.date = LocalDate.parse(dateTimeArray[0]);
+            String[] dateTimeArray = at.split(" ", 2);
+            this.date = LocalDate.parse(dateTimeArray[0].trim());
             String[] timeArray = dateTimeArray[1].split("-");
-            this.startTime = LocalTime.parse(timeArray[0]);
-            this.endTime = LocalTime.parse(timeArray[1]);
+            this.startTime = LocalTime.parse(timeArray[0].trim());
+            this.endTime = LocalTime.parse(timeArray[1].trim());
             if (startTime.isAfter(endTime)) {
                 throw new InvalidEventTimeException();
             }
