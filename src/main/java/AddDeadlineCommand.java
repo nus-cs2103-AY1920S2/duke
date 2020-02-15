@@ -12,7 +12,7 @@ public class AddDeadlineCommand extends Command {
         try {
             String[] inputParsed = this.getInputCommand().trim().split(" ");
             // to check if the command violates any rules
-            if (!this.getInputCommand().contains("/by")) {
+            if (!this.getInputCommand().contains(" /by ")) {
                 throw new DukeException("Deadline command must contain [/by] as stated!");
             }
             if (inputParsed.length == 1) {
@@ -32,7 +32,7 @@ public class AddDeadlineCommand extends Command {
             storage.writeToFile(list.getTaskList());
             return ui.prettyPrinting(taskName.toString() + " added!");
         } catch (DukeException e) {
-            throw new DukeException("Deadline description cannot be empty or must conatins [/by]!");
+            throw new DukeException("Deadline description cannot be empty or must conatins [ /by ]!");
         } catch (Exception e) {
             throw new DukeException("Incorrect date format! Please refer to following example: 31-12-2020 23:59");
         }
