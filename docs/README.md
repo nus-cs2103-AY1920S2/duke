@@ -23,6 +23,14 @@ Duke can perform the following:
 6. **Undo** a command
 7. **Exit**
 
+## Running Duke on Windows
+1. Locate the jar file in the File Explorer 
+2. Type 'cmd' on the search bar and press 'Enter' to launch Command Prompt 
+3. Execute the following command, assuming the jar file 
+is named "duke-0.2.jar"
+   * > java -jar -Dfile.encoding="UTF-8" duke-0.2.jar
+
+
 ## Features 
 
 ### 1. Add a task 
