@@ -21,11 +21,12 @@ public class Deadline extends Task {
     
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)%s", super.toString(), this.getFormattedDate(), super.getTags());
+        return String.format("[D]%s (by: %s)%s", super.toString(), this.getFormattedDate(), super.getTagsAsStr());
     }
     
     @Override
     protected String getFileFormattedLine() {
-        return String.format("D|%s|%s|%s", super.isDone ? "1" : "0", this.description, this.by);
+        return String.format("D|%s|%s|%s|%s",
+                super.isDone ? "1" : "0", this.description, super.tags.toString(), this.by);
     }
 }

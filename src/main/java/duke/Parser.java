@@ -27,13 +27,28 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new InvalidInstructionException("Task number given is not an integer");
             }
-        } else if (this.command == Command.TODO || this.command == Command.TAG) {
+            
+        } else if (this.command == Command.TODO) {
             this.parameters = extractDescription(instruction);
+            
         } else if (this.command == Command.DEADLINE || this.command == Command.EVENT) {
             this.parameters = extractDescription(instruction);
             this.date = extractDate(instruction);
+            
         } else if (this.command == Command.FIND) {
             this.parameters = extractFirstParam(instruction);
+            
+        } else if (this.command == Command.TAG) {
+            String[] paramsList = extractDescription(instruction).split(" ");
+            if (paramsList.length < 2) {
+                throw new InvalidInstructionException("Not enough parameters given");
+            }
+            try {
+                Integer.parseInt(paramsList[0]);
+            } catch (NumberFormatException e) {
+                throw new InvalidInstructionException("Task number given is not an integer");
+            }
+            this.parameters = extractDescription(instruction);
         }
     }
 

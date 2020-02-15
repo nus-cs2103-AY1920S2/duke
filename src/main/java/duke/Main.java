@@ -1,6 +1,5 @@
 package duke;
 
-//@Override
 import java.io.IOException;
 
 import javafx.application.Application;

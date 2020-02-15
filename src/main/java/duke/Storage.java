@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -54,24 +56,39 @@ public class Storage {
             String type = lineArr[0];
             String doneStatus = lineArr[1];
             String description = lineArr[2];
+            String tagsStr = lineArr[3];
             
             Task task;
-            if (type.equals("T")) {
+            switch (type) {
+            case "T":
                 task = new Todo(description);
-            } else if (type.equals("D")) {
-                task = new Deadline(description, LocalDate.parse(lineArr[3]));
-            } else {
-                task = new Event(description, LocalDate.parse(lineArr[3]));
+                break;
+            case "D":
+                task = new Deadline(description, LocalDate.parse(lineArr[4]));
+                break;
+            case "E":
+                task = new Event(description, LocalDate.parse(lineArr[4]));
+                break;
+            default:
+                task = new Task(description);  // unknown, use generic type
             }
 
             if (doneStatus.equals("1")) {
                 task.isDone = true;
             }
+            
+            List<String> tags = Arrays.asList(convertArrStrToStrArr(tagsStr));
+            task.setTags(tags);
 
             tasks.add(task);
         }
         
         return tasks;
+    }
+    
+    private String[] convertArrStrToStrArr(String arrStr) {
+        String elemStr = arrStr.substring(1, arrStr.length() - 1);
+        return elemStr.split(", ");
     }
 
     /**
@@ -87,6 +104,4 @@ public class Storage {
         }
         fw.close();
     }
-    
-    // todo: write/read task tags to/from file 
 }

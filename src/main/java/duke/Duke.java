@@ -26,7 +26,7 @@ public class Duke {
             storage = new Storage("data/tasks.txt");
             tasks = new TaskList(storage.loadTasks());
             ui = new Ui(tasks);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Error: Cannot read or write to file");
             tasks = new TaskList();
             ui = new Ui(tasks);
@@ -55,6 +55,7 @@ public class Duke {
     /**
      * Starts the Duke task management assistant in CLI mode. The user will input commands and the appropriate
      * actions will be performed. Enter "bye" to exit the program.
+     * This is the old version.
      */
     public void runCli() {
         System.out.println(ui.showGreeting());
@@ -166,20 +167,12 @@ public class Duke {
         return ui.showDeleteTask(delTask);
     }
     
-    private String addTag(String parameters) throws InvalidInstructionException {
-        // todo: move logic to Parser
+    private String addTag(String parameters) throws InvalidInstructionException, IOException {
         String[] paramsList = parameters.split(" ");
-        
-        if (paramsList.length < 2) {
-            throw new InvalidInstructionException("Not enough parameters given");
-        }
-        
-        try {
-            int taskNum = Integer.parseInt(paramsList[0]);
-            tasks.getTask(taskNum).addTag(paramsList[1]);
-            return ui.showTagTask(tasks.getTask(taskNum));
-        } catch (NumberFormatException e) {
-            throw new InvalidInstructionException("Task number given is not an integer");
-        }
+
+        int taskNum = Integer.parseInt(paramsList[0]);
+        tasks.getTask(taskNum).addTag(paramsList[1]);
+        storage.writeToFile(tasks);
+        return ui.showTagTask(tasks.getTask(taskNum));
     }
 }

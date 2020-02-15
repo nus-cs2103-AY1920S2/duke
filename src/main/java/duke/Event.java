@@ -21,11 +21,12 @@ public class Event extends Task {
     
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)%s", super.toString(), this.getFormattedDate(), super.getTags());
+        return String.format("[E]%s (at: %s)%s", super.toString(), this.getFormattedDate(), super.getTagsAsStr());
     }
 
     @Override
     protected String getFileFormattedLine() {
-        return String.format("E|%s|%s|%s", super.isDone ? "1" : "0", this.description, this.at);
+        return String.format("E|%s|%s|%s|%s",
+                super.isDone ? "1" : "0", this.description, super.tags.toString(), this.at);
     }
 }

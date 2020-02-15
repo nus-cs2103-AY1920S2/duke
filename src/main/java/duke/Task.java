@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Task contains information about a given task, including its description and done status.
@@ -52,7 +53,7 @@ public class Task {
      * @return Task represented as a string for saving into a file.
      */
     protected String getFileFormattedLine() {
-        return String.format("G|%s|%s", this.isDone ? "1" : "0", this.description);
+        return String.format("G|%s|%s|%s", this.isDone ? "1" : "0", this.description, this.tags.toString());
     }
 
     /**
@@ -65,11 +66,15 @@ public class Task {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
     
-    protected String getTags() {
+    protected String getTagsAsStr() {
         return (this.tags.isEmpty() ? "" : " " + String.join(" ", this.tags));
     }
     
     protected void addTag(String tag) {
         this.tags.add("#" + tag);
+    }
+    
+    protected void setTags(List<String> tags) {
+        this.tags = new ArrayList<>(tags);
     }
 }

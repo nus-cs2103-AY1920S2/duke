@@ -11,11 +11,11 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[T]%s%s", super.toString(), super.getTags());
+        return String.format("[T]%s%s", super.toString(), super.getTagsAsStr());
     }
 
     @Override
     protected String getFileFormattedLine() {
-        return String.format("T|%s|%s", super.isDone ? "1" : "0", this.description);
+        return String.format("T|%s|%s|%s", super.isDone ? "1" : "0", this.description, super.tags.toString());
     }
 }
