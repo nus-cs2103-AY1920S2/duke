@@ -130,16 +130,16 @@ public class TaskList {
 
     @Override
     public String toString() {
-        StringBuilder tasks = new StringBuilder();
+        StringBuilder taskDescriptions = new StringBuilder();
 
         for (int i = 1; i <= this.tasks.size(); i++) {
-            tasks.append(getFormattedTask(i)).append("\n");
+            taskDescriptions.append(getFormattedTask(i)).append("\n");
         }
 
-        if (tasks.length() > 0) {
-            tasks.deleteCharAt(tasks.length() - 1);
+        if (taskDescriptions.length() > 0) {
+            taskDescriptions.deleteCharAt(taskDescriptions.length() - 1);
         }
 
-        return tasks.toString();
+        return taskDescriptions.toString();
     }
 }
