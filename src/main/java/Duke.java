@@ -26,7 +26,7 @@ import javafx.scene.image.ImageView;
  */
 
 public class Duke extends Application {
-    public static String filePath = "/Users/catherine/Desktop/Duke/src/main/duke.txt";
+    public static String filePath = "duke.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
