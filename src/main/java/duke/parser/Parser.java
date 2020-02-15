@@ -87,12 +87,17 @@ public class Parser {
 
             if (inputArr.length <= 1) {
                 throw new DukeException("Please enter the description for your deadline!");
+            } else if (!input.contains("/")) {
+                throw new DukeException("Please ensure your format is correct! Refer to user guide if in doubt.");
             }
 
             // Pre-processing
             int idx = input.indexOf(" ");
             String taskInput = input.substring(idx + 1);
             String[] taskInputArr = taskInput.split("/");
+            if (taskInputArr.length <= 1) {
+                throw new DukeException("Please enter the description for your deadline!");
+            }
             String taskName = taskInputArr[0];
             String dateTime = taskInputArr[1];
             idx = dateTime.indexOf(" ");
@@ -110,12 +115,17 @@ public class Parser {
 
             if (inputArr.length <= 1) {
                 throw new DukeException("Please enter the description for your event!");
+            } else if (!input.contains("/")) {
+                    throw new DukeException("Please ensure your format is correct! Refer to user guide if in doubt.");
             }
 
             // Pre-processing
             int idx = input.indexOf(" ");
             String taskInput = input.substring(idx + 1);
             String[] taskInputArr = taskInput.split("/");
+            if (taskInputArr.length <= 1) {
+                throw new DukeException("Please enter the description for your event!");
+            }
             String taskName = taskInputArr[0];
             String dateTime = taskInputArr[1];
             idx = dateTime.indexOf(" ");
