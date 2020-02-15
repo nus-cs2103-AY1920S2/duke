@@ -72,7 +72,7 @@ public class Ui {
      * @return Farewell message and exit notice.
      */
     public String showFarewell() {
-        return "Have a nice day!\n" + "Exiting...";
+        return "Have a nice day!\n";
     }
 
     /**

@@ -47,8 +47,13 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText();        
         String response = duke.processInstruction(input);
+
+        if (input.equals("bye")) {
+            userInput.setVisible(false);
+            sendButton.setVisible(false);
+        }
         
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
