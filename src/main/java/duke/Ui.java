@@ -135,14 +135,19 @@ public class Ui {
      */
     public void showFind(TaskList tasks, List<Integer> taskIds) {
         // TODO: exception if taskIds contains duplicate elements
-
         String title = "Here are the matching tasks in your list:\n\n";
+
         StringBuilder foundTasks = new StringBuilder();
 
         for (int i = 0; i < taskIds.size(); i++) {
             int taskId = taskIds.get(i);
             foundTasks.append(tasks.getFormattedTask(taskId)).append("\n");
         }
+
+        if (foundTasks.length() > 0) {
+            foundTasks.deleteCharAt(foundTasks.length() - 1);
+        }
+
         response += title + foundTasks.toString();
     }
 
