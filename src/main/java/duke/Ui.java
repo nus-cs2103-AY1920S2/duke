@@ -29,7 +29,7 @@ public class Ui {
         return typeSetting("    Hello, I'm Popuko.  (´・ω・`)\n    " +
                 "What can I do for you?   _(:3」∠)_   _(:3」∠)_\n");
     }
-    
+
     /**
      * shows a specific message when a Task in the list has been marked as done.
      * @param num the index of the Task which has been marked.
