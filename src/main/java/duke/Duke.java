@@ -40,28 +40,10 @@ public class Duke extends Application {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
-//
-//    public static void main(String[] args) {
-//        Ui ui = new Ui();
-//        Storage storage = new Storage();
-//        TaskList taskList = new TaskList(storage.load());
-//        ui.start();
-//        Scanner sc = new Scanner(System.in);
-//        Boolean isRunning = true;
-//        while (isRunning) {
-//            try {
-//                String userInput = sc.nextLine();
-//                Command cmd = Parser.parseInput(userInput);
-//                isRunning = cmd.isExitCommand();
-//                System.out.println(cmd.execute(storage, taskList, ui));
-//                System.out.println(ui.promptMsg());
-//            } catch (DukeException e) {
-//                ui.errorMsg(e);
-//                ui.promptMsg();
-//            }
-//        }
-//        sc.close();
-//    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage stage) {

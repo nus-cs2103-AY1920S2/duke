@@ -15,7 +15,13 @@ public class Parser {
 
     }
 
+    /**
+     * A boolean to indicate if the Parser is currently at the updating stage (as update contains two stages). Cannot move on to other commands if the update is not complete, just in case the user passes another command without completing the update stage.
+     */
     static boolean isUpdating = false;
+    /**
+     * The current update command, if the user is updating a task.
+     */
     static UpdateCommand updateCommand;
 
     /**
@@ -110,8 +116,8 @@ public class Parser {
                 return updateCommand;
             } else if (isUpdating) {
                 assert updateCommand != null; // the updateCommand cannot be null if parser is set to update
-                String[] split = input.split(" ", 2);
-                if (!split[0].equals("description") && !split[0].equals("date")) {
+                String[] split = input.split(" ", 2); // user input here will be "<item to update> <update>"
+                if (!split[0].equals("des") && !split[0].equals("date")) {
                     throw new DukeException(DukeError.UPDATE);
                 } else {
                     isUpdating = false;
