@@ -73,6 +73,7 @@ Got it. I've added this task:
 
  [T][x] submit homework(by: Mar 1 2020)
 ````
+
 ###`done/delete` - Mark/Delete a task
 
 These commands access a task in the list through index.
@@ -86,6 +87,7 @@ Noted. I've removed this task:
 
  [T][x] call Mum
 ````
+
 ###`Tag` - Tag and Query
 
 You can tag a task and search through the list using the tag.
@@ -112,6 +114,7 @@ Here are the tasks with tag 'important':
 
  1. [T][x] call Mum
 ````
+
 ###`find` - Search the list using keyword
 
 You can also search through a list using a keyword.
@@ -129,7 +132,9 @@ Here are the matching tasks in your list:
 ````
 
 ##Author
+
 * Zhu Ruicong(Zhu-Ruicong)
+
 ##Acknowledgement
 
 * se-edu/duke
