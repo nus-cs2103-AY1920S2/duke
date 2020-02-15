@@ -47,6 +47,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        setMaxHeight(1000.0);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

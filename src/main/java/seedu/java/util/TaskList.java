@@ -98,6 +98,10 @@ public class TaskList {
         }
     }
 
+    private String getHelp(){
+        return Text.print(Text.HELPLIST);
+    }
+
     /**
      * Reads an input from UI, performs an operation, and returns a string to be printed.
      * @param input from user
@@ -123,11 +127,13 @@ public class TaskList {
                 return "0";
             case FIND:
                 return findTask(Parser.readTask(input));
+            case HELP:
+                return getHelp();
             default:
-                return "Cannot compute";
+                return "Cannot compute. type wrongly? key in 'help' :)";
             }
         } catch (Exception e) {
-            return "Cannot Compute :(";
+            return "Cannot compute. type wrongly? key in 'help' :)";
         }
     }
 }

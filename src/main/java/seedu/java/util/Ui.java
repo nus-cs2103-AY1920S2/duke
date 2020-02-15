@@ -1,5 +1,12 @@
 package seedu.java.util;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+
 import java.util.Scanner;
 
 /**
@@ -14,6 +21,14 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    Image user = new Image(this.getClass().getResourceAsStream("/images/cutecat.jpeg"));
+    Image duke = new Image(this.getClass().getResourceAsStream("/images/angrydog.jpeg"));
 
     /**
      * Prints the logo & gives instructions.

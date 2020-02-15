@@ -73,6 +73,10 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Components for setup.
+     * + handle user input & get response.
+     */
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -101,9 +105,6 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
-
-        // more code to be added here later
-
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
@@ -178,7 +179,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return tasks.read(input);
     }
 }
 
