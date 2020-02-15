@@ -43,6 +43,9 @@ public class DateTimeParser {
     public static String getParsableTime(String rawDateTime) throws InvalidTimeFormatException {
         try {
             String[] separatedDateTime = rawDateTime.split(" ");
+            if (separatedDateTime[1].length() < 4) {
+                separatedDateTime[1] = "0" + separatedDateTime[1];
+            }
             String hour = separatedDateTime[1].substring(0, 2);
             if (hour.equals("24")) {
                 hour = "00";
