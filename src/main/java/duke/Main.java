@@ -1,6 +1,8 @@
 package duke;
 
 import java.io.IOException;
+
+import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +13,8 @@ import javafx.stage.Stage;
  * GUI for Duke using FXML.
  */
 public class Main extends Application {
+
+    private Duke duke = new Duke();
 
     /**
      * Initializes and starts the application.
@@ -26,6 +30,7 @@ public class Main extends Application {
             stage.setTitle("Duke Program");
             stage.setScene(scene);
             stage.setResizable(false);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

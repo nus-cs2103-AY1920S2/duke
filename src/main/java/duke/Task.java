@@ -25,7 +25,7 @@ public class Task implements Comparable<Task> {
      * @return Returns as a string.
      */
     public String getStatusIcon() {
-        return (isDone ? "[✓] " : "[✘] ");
+        return (isDone ? "[\u2713] " : "[\u2718] "); //return tick or X symbols
     }
 
     /**

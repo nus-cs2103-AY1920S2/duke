@@ -61,6 +61,9 @@ public class Parser {
         case "SORT":
             msg = new SortCommand().execute(storage, tasks);
             break;
+        case "BYE":
+            msg = "Bye. Hope to see you again soon!";
+            break;
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.DukeException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,17 +30,19 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Initializes the main window and displays the welcome message.
-     * If an error occurs while initializing duke, an exception message will be displayed instead.
      */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        try {
-            duke = new Duke();
-        } catch (DukeException e) {
-            dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(e.getMessage(), dukeImage));
-        }
+    }
+
+    /**
+     * Saves the Duke object locally and display a welcome message to the user.
+     *
+     * @param d The Duke to be saved.
+     */
+    public void setDuke(Duke d) {
+        duke = d;
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage));
     }
@@ -53,7 +54,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.equals("bye")) {
+        if (input.equalsIgnoreCase("bye")) {
             Platform.exit();
         }
         String response = duke.getResponse(input);

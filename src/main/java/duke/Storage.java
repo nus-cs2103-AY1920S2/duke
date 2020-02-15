@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.file.Files;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -20,12 +22,16 @@ public class Storage {
     File file;
 
     /**
-     * Initialize the file with the filepath specified by user.
+     * Initializes the file with the filepath specified.
      *
      * @param filepath The location where the program data will be saved or loaded from.
      */
-    public Storage(String filepath) {
-        file = new File(new File(filepath).getAbsolutePath());
+    public Storage(String filepath) throws IOException {
+        File dir = new File(new File(filepath.substring(0, filepath.lastIndexOf("/"))).getAbsolutePath());
+        if (!dir.exists()) {
+            Files.createDirectories(dir.toPath());
+        }
+        file = new File(dir + filepath.substring(filepath.lastIndexOf("/")));
     }
 
     /**
