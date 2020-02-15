@@ -77,8 +77,7 @@ public class Ui {
      * @param task the tasks that has been added to the list.
      */
     public void showAdd(Task task) {
-        String confirmation = "Okie! I've added this task:\n\n";
-        response += confirmation + indent(task.toString(), 2);
+        showText("Okie! I've added this task:\n\n" + indent(task.toString(), 2));
     }
 
     /**
@@ -90,7 +89,7 @@ public class Ui {
         String praise = "Good job completing this task!\n"
                 + "Here's a tick for completing it!\n\n";
 
-        response += praise + indent(task.toString(), 2);
+        showText(praise + indent(task.toString(), 2));
     }
 
     /**
@@ -99,8 +98,7 @@ public class Ui {
      * @param tasks the list of tasks to display.
      */
     public void showList(TaskList tasks) {
-        String title = "Here are the tasks in your list:\n\n";
-        response += title + tasks.toString();
+        showText("Here are the tasks in your list:\n\n" + tasks.toString());
     }
 
     /**
@@ -109,8 +107,7 @@ public class Ui {
      * @param task the deleted task.
      */
     public void showDelete(Task task) {
-        String comment = "Alright! I'll remove this task:\n\n";
-        response += comment + indent(task.toString(), 2);
+        showText("Alright! I'll remove this task:\n\n" + indent(task.toString(), 2));
     }
 
     /**
@@ -119,8 +116,7 @@ public class Ui {
      * @param tasks the task list to count and display.
      */
     public void showTaskCount(TaskList tasks) {
-        String count = "There are now " + tasks.getNumTasks() + " tasks in the list.";
-        response += count;
+        showText("There are now " + tasks.getNumTasks() + " tasks in the list.");
     }
 
     /** Logs a farewell to the user. */
@@ -149,7 +145,7 @@ public class Ui {
             foundTasks.deleteCharAt(foundTasks.length() - 1);
         }
 
-        response += title + foundTasks.toString();
+        showText(title + foundTasks.toString());
     }
 
     /** Displays a line in the chat-bot. */
@@ -160,13 +156,9 @@ public class Ui {
         response += indent(lineSymbol.repeat(lineWidth), 4);
     }
 
-    /**
-     * Displays a line break in the chat-bot.
-     *
-     * @param numLines the number of line breaks to display.
-     */
-    public void showLineBreak(int numLines) {
-        response += "\n".repeat(numLines);
+    /** Displays text in the chat-bot. */
+    public void showText(String text) {
+        response += text;
     }
 
     /**

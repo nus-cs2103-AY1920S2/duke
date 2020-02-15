@@ -27,7 +27,7 @@ public class AddCommand extends Command {
         TaskList newTasks = tasks.addTask(task);
 
         ui.showAdd(task);
-        ui.showLineBreak(2);
+        ui.showText("\n\n");
         ui.showTaskCount(newTasks);
 
         // Save immediately
