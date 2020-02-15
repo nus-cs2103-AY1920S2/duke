@@ -7,12 +7,21 @@ import database.Storage;
  * Initialises the bot and holds strings pertaining to bot initialisation
  */
 public class DukeInit {
-    private static String logo = " ____        _        \n"
+    /*private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
+            + "|____/ \\__,_|_|\\_\\___|\n";*/
+    //got it from some text generator
+    private static String logo = "\n" +
+            "__   __ _   _ ______  _____ \n" +
+            "\\ \\ / /| | | || ___ \\|_   _|\n" +
+            " \\ V / | | | || |_/ /  | |  \n" +
+            "  \\ /  | | | ||    /   | |  \n" +
+            "  | |  | |_| || |\\ \\  _| |_ \n" +
+            "  \\_/   \\___/ \\_| \\_| \\___/ \n" +
+            "                            \n" +
+            "                            ";
     /**
      * Initalises bot.
      */
