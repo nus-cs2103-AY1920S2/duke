@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.NoNumberDeleteException;
 import duke.exception.NoSuchTaskException;
+import duke.exception.NotNumberException;
 import duke.exception.UnableToSaveException;
 import duke.main.Constant;
 import duke.main.Storage;
@@ -28,11 +29,16 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
-            throws NoNumberDeleteException, NoSuchTaskException, UnableToSaveException {
-        if (inputArr.length < 2) {
+            throws NoNumberDeleteException, NoSuchTaskException, NotNumberException, UnableToSaveException {
+        if (inputArr.length < Constant.MAX_INPUT_SIZE) {
             throw new NoNumberDeleteException();
-        } 
-        int taskToDelete = Integer.parseInt(inputArr[1]);
+        }
+        int taskToDelete;
+        try{ 
+            taskToDelete = Integer.parseInt(inputArr[1]);
+        } catch(NumberFormatException e) {
+            throw new NotNumberException();
+        }
         if (taskToDelete > tasks.size()) {
             throw new NoSuchTaskException();
         } 

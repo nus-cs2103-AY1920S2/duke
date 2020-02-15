@@ -13,4 +13,5 @@ public class Constant {
             .ofPattern("dd MMM yyyy hh:mm a");
     public static final String CHECK_DONE = "[✓] ";
     public static final String CHECK_NOTDONE = "[✗] ";
+    public static final int MAX_INPUT_SIZE = 2;
 }

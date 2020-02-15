@@ -5,6 +5,7 @@ import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
 import duke.exception.NoSuchTaskException;
+import duke.exception.NotNumberException;
 import duke.exception.UnableToSaveException;
 
 public class DoneCommand extends Command {
@@ -24,8 +25,13 @@ public class DoneCommand extends Command {
      * @throws UnableToSaveException If unable to save to storage.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws UnableToSaveException, NoSuchTaskException{
-        int taskNo = Integer.parseInt(inputArr[1]) - 1;
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws UnableToSaveException, NoSuchTaskException, NotNumberException {
+        int taskNo;
+        try {
+            taskNo = Integer.parseInt(inputArr[1]) - 1;
+        } catch (NumberFormatException e){
+            throw new NotNumberException();
+        }
         if (taskNo > tasks.size()){
             throw new NoSuchTaskException();
         }
