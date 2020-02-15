@@ -1,7 +1,7 @@
 # User Guide
 Duke is a personal assistant that helps you to keep track of your tasks, such as todos, deadlines and events.
 
-![GitHub Logo](Ui.png)
+<img src="Ui.png" width="200">
 
 ## Features 
 
@@ -20,28 +20,27 @@ Easily find your tasks with the 'find' and 'sort' commands.
 ## Usage
 
 ### Adding a task
-- 'todo [description]' - Adds the todo task to the list.
-- 'deadline [description] /by [YYYY-MM-DD]' - Adds the deadline with the due date to the list.
-- 'event [description] /at [YYYY-MM-DD]' - Adds the event with the event date to the list.
+- `todo [description]` - Adds the todo task to the list.
+- `deadline [description] /by [YYYY-MM-DD]` - Adds the deadline with the due date to the list.
+- `event [description] /at [YYYY-MM-DD]` - Adds the event with the event date to the list.
 
 Expected outcome:
-![GitHub Logo](AddTask.png)
+<img src="AddTask.png" width="200">
 
 ### Displaying the tasks
-- 'list' - Displays the task list.
-- 'find [keyword]' - Displays all the tasks in the task list that matches with the keyword.
-- 'sort' - Sorts the task list in alphabetical order.
+- `list` - Displays the task list.
+- `find [keyword]` - Displays all the tasks in the task list that matches with the keyword.
+- `sort` - Sorts the task list in alphabetical order.
 
 Expected outcome:
-![GitHub Logo](ListFindTask.png)
-![GitHub Logo](SortTask.png)
+<img src="ListFindTask.png" width="200">
 
 ### Modifying the tasks
-- 'done [task-index]' - Mark the specific task in the task list as done.
-- 'delete [task-index]' - Delete the specific task in the task list.
+- `done [task-index]` - Mark the specific task in the task list as done.
+- `delete [task-index]` - Delete the specific task in the task list.
 
 Expected outcome:
-![GitHub Logo](DoneDeleteTask.png)
+<img src="DoneDeleteTask.png" width="200">
 
 ### Exiting the program
-- 'bye' - Terminates the Duke Program.
+- `bye` - Terminates the Duke Program.
