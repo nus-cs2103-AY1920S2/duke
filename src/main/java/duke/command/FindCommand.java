@@ -2,13 +2,14 @@ package duke.command;
 
 import duke.task.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a FindCommand.
  * Used to execute the FindCommand.
  */
 public class FindCommand implements Command {
-    private static final String NO_MATCHING_TASKS_MESSAGE = "There are no matching tasks in your list.";
+    private static final String NO_MATCHING_TASKS_MESSAGE = "There are no matching tasks in your list.\n";
 
     /** String argument for the command. */
     private String arg = "";
@@ -26,16 +27,16 @@ public class FindCommand implements Command {
      * Executes the find command.
      *
      * @param tasks TaskList object that contains the tasks of the application.
+     * @param ui Ui object for the command to interact with the user.
      * @param storage storage object for the retrieval/saving of tasks.
-     * @return The program's output.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         String relevantTasks = tasks.findTasksBySearchPhrase(arg);
         if (relevantTasks.equals("")) {
-            return NO_MATCHING_TASKS_MESSAGE;
+            ui.addMessage(NO_MATCHING_TASKS_MESSAGE);
         } else {
-            return "Here are the matching tasks in your list:\n" + relevantTasks;
+            ui.addMessage("Here are the matching tasks in your list:\n" + relevantTasks);
         }
     }
 }

@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.task.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a HelpCommand.
@@ -27,12 +28,12 @@ public class HelpCommand implements Command {
      * Executes the help command.
      *
      * @param tasks TaskList object that contains the tasks of the application.
+     * @param ui Ui object for the command to interact with the user.
      * @param storage storage object for the retrieval/saving of tasks.
-     * @return the help dialog.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
-        return HELP_MESSAGE + BYE_INFO + LIST_INFO + DONE_INFO + DELETE_INFO + TODO_INFO + DEADLINE_INFO + EVENT_INFO
-                + FIND_INFO + REMINDER_INFO;
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.addMessage(HELP_MESSAGE + BYE_INFO + LIST_INFO + DONE_INFO + DELETE_INFO + TODO_INFO + DEADLINE_INFO
+                + EVENT_INFO + FIND_INFO + REMINDER_INFO);
     }
 }

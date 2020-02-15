@@ -4,6 +4,7 @@ import duke.exception.InvalidCommandException;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -13,7 +14,7 @@ import java.io.IOException;
  */
 public class DeleteCommand implements Command {
     private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
-            + " (Error when writing to save file).";
+            + " (Error when writing to save file).\n";
 
     /** Index of the task to be deleted. */
     private int index = 0;
@@ -31,22 +32,22 @@ public class DeleteCommand implements Command {
      * Executes the delete command.
      *
      * @param tasks TaskList object that contains the tasks of the application.
+     * @param ui Ui object for the command to interact with the user.
      * @param storage storage object for the retrieval/saving of tasks.
-     * @return The program's output.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task taskDeleted = tasks.deleteTask(index);
             assert taskDeleted != null : "There cannot be a null deleted task";
             storage.saveTasks(tasks.getList());
-            return String.format("Here I go! My ultimate destructive magic! EXPLOSION!\n"
+            ui.addMessage(String.format("Here I go! My ultimate destructive magic! EXPLOSION!\n"
                     + "I have successfully eradicated this task:\n  %s\n"
-                    + "Now you have %d tasks in the list.\n", taskDeleted, tasks.getSize());
+                    + "Now you have %d tasks in the list.\n", taskDeleted, tasks.getSize()));
         } catch (InvalidCommandException e) {
-            return e.getMessage();
+            ui.addMessage(e.getMessage());
         } catch (IOException e) {
-            return SAVE_WRITE_ERROR_MESSAGE;
+            ui.addMessage(SAVE_WRITE_ERROR_MESSAGE);
         }
     }
 }

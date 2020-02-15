@@ -5,6 +5,7 @@ import duke.task.Deadline;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -13,8 +14,8 @@ import java.io.IOException;
  * Used to execute the deadline command.
  */
 public class DeadlineCommand implements Command {
-    private static final String NO_DATE_ERROR_MESSAGE = "HEY!!! The date of a deadline cannot be empty.";
-    private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item"
+    private static final String NO_DATE_ERROR_MESSAGE = "HEY!!! The date of a deadline cannot be empty.\n";
+    private static final String SAVE_WRITE_ERROR_MESSAGE = "Sorry, I could not write to the magic saving item\n"
             + " (Error when writing to save file).";
 
     /** String array for the command arguments. */
@@ -33,11 +34,11 @@ public class DeadlineCommand implements Command {
      * Executes the deadline command.
      *
      * @param tasks TaskList object that contains the tasks of the application.
+     * @param ui Ui object for the command to interact with the user.
      * @param storage storage object for the retrieval/saving of tasks.
-     * @return The program's output.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             //check if arg length is complete for the command to execute
             if (args.length < 2) {
@@ -47,12 +48,12 @@ public class DeadlineCommand implements Command {
             Task newDeadlineTask = new Deadline(args[0], args[1]);
             tasks.addTask(newDeadlineTask);
             storage.saveTasks(tasks.getList());
-            return String.format("Got it. I've added this task:\n  %s\n"
-                    + "Now you have %d tasks in the list.\n", newDeadlineTask, tasks.getSize());
+            ui.addMessage(String.format("Got it. I've added this task:\n  %s\n"
+                    + "Now you have %d tasks in the list.\n", newDeadlineTask, tasks.getSize()));
         } catch (InvalidCommandException e) {
-            return e.getMessage();
+            ui.addMessage(e.getMessage());
         } catch (IOException e) {
-            return SAVE_WRITE_ERROR_MESSAGE;
+            ui.addMessage(SAVE_WRITE_ERROR_MESSAGE);
         }
     }
 }

@@ -82,7 +82,7 @@ public class Parser {
             return new HelpCommand();
         case REMINDER:
             if (commandLine.length < 2) {
-                throw new InvalidCommandException(INVALID_FIND_COMMAND_MESSAGE);
+                throw new InvalidCommandException(INVALID_REMINDER_COMMAND_MESSAGE);
             } else {
                 return new ReminderCommand(commandLine[1]);
             }
