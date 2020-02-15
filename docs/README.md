@@ -24,7 +24,7 @@ Duke can perform the following:
 
 ## Features 
 
-### Add a task 
+### 1. Add a task 
 The specific steps used to add a task depends on the task type.
 
 You can add a task to your list by using one of the following
@@ -48,6 +48,7 @@ Example of usage:
 `todo Pwn the Deus Group`
 
 Expected outcome:
+
 ![Add todo task successfully](add_todo_success.png)
 
 
@@ -62,6 +63,7 @@ Example of usage:
 `event Five/Nine /at 2015-05-09`
 
 Expected outcome:
+
 ![Add event task successfully](add_event_success.png)
 
 ### `deadline` - Add a new deadline task
@@ -75,10 +77,114 @@ Example of usage:
 `deadline Coding Assignment /by 2020-02-02`
 
 Expected outcome:
+
 ![Add deadline task successfully](add_deadline_success.png)
 
 
-### Feature 2 
+### 2. Delete a task
+Allows you to remove a task.
+
+## Usage
+
+### `delete` or `rm` - Remove a task
+
+Removes a task by providing a task number.
+
+The task number starts from 1 and has a maximum value
+based on the number of tasks in your list.
+
+> **Unsure of the task number?**
+>
+> You can check using the `list` command!
+
+Removing a task requires one of the following format:
+
+1. `delete [task number]`
+
+2. `rm [task number]`
+
+Example of usage: 
+
+1. `delete 1`
+
+2. `rm 1`
+
+Expected outcome:
+
+![Successfully deleted a task](delete_task_success.png)
+
+
+### 3. Mark a task as completed
+Allows you to mark a task as done.
+
+## Usage
+
+### `done` - Mark task as done
+
+Mark a task as done by providing a task number.
+
+The task number starts from 1 and has a maximum value
+based on the number of tasks in your list.
+
+> **Unsure of the task number?**
+>
+> You can check using the `list` command!
+
+Marking a task as done requires the following format:
+
+`done [task number]`
+
+Example of usage: 
+
+`done 1`
+
+Expected outcome:
+
+![Task marked as completed](mark_task_done_success.png)
+
+
+### 4. Find a specific task using a given keyword
+Allows you to find all tasks with descriptions matching
+a given **keyword**.
+
+## Usage
+
+### `find` - Find tasks with descriptions containing given keyword
+
+Returns a list of tasks that have descriptions matching the given keyword.
+
+Finding a task requires the following format:
+
+`find [keyword to search]`
+
+Example of usage: 
+
+`find deus group`
+
+Expected outcome:
+
+![Find command success](find_task_success.png)
+
+
+### Feature 5
+Description of feature.
+
+## Usage
+
+### `Keyword` - Describe action
+
+Describe action and its outcome.
+
+Example of usage: 
+
+`keyword (optional arguments)`
+
+Expected outcome:
+
+`outcome`
+
+
+### Feature 6
 Description of feature.
 
 ## Usage
