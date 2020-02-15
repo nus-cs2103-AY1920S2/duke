@@ -3,7 +3,8 @@
 A brief User Guide for "My Little Tracker".
 The features of the tracker is listed below!
 
-![Ui](../docs/Ui.png)
+![Ui]([[https://github.com/joshlay96/duke/blob/master/img/octocat.png|alt=octocat]]
+)
 
 ## Features 
 
