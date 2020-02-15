@@ -58,6 +58,11 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+
+    /**
+     * Loads welcome message from text file and prints it out in GUI.
+     * @return the Welcome message when Duke is first launched.
+     */
     public static String welcomeMsg() throws IOException {
         File f = new File("/Users/jadetay/duke/src/main/resources/text/welcomeMsg.txt");
         FileReader fr = new FileReader(f);

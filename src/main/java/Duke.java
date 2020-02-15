@@ -42,13 +42,16 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
-            if (input.equals("bye")) {
-                Executors.newSingleThreadScheduledExecutor()
-                        .schedule(() -> System.exit(0), 1, TimeUnit.SECONDS);
+            if (input.equals("help")) {
+                 return MainWindow.welcomeMsg();
+            } else {
+                Command c = Parser.parse(input);
+                if (input.equals("bye")) {
+                    Executors.newSingleThreadScheduledExecutor()
+                            .schedule(() -> System.exit(0), 1, TimeUnit.SECONDS);
+                }
+                return c.execute(tasks, ui, storage);
             }
-
-            return c.execute(tasks, ui, storage);
         } catch (DukeException | IOException e) {
             return e.getMessage();
         }
