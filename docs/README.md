@@ -1,15 +1,16 @@
 # User Guide
 
-This guide teaches you how to get Jerry to work for you. 
+This guide explains how to torture Jerry by getting him to work for you. 
 
-## Start 
+## View 
 
-You may start the application in GUI-mode or CLI-mode. 
+You may use the application in GUI-mode or CLI-mode. 
 
 +  ### Graphic User Interface 
 There are two ways to start the application in GUI-mode:
 1. Double click on the JAR file
 2. Enter `./gradlew run --args="gui"` in the `duke` root folder.
+
 
 +  ### Command Line Interface 
 Enter `./gradlew run` in the `duke` root folder.
@@ -19,18 +20,20 @@ Enter `./gradlew run` in the `duke` root folder.
 Get Jerry to manage your tasks. 
 
 +  ### Task Types
-Task types are categorized into: 
 1. `To-do`
 2. `Event`
 3. `Deadline` 
 
-You may enter a date along with Event or Deadline. 
+You may enter a date alongside an Event or a Deadline. 
 
 ## Commands 
 
-After you finish typing each command, press enter to execute the command. 
+Press `enter` to execute the command after typing. 
 
-+ ### `todo` - Adds a 'To-do' task into the list. 
+
++ ### `todo`
+
+    Adds a 'To-do' task into the list. 
 
     Usage: 
 
@@ -42,7 +45,10 @@ After you finish typing each command, press enter to execute the command.
     
     `Jerry will show you the updated task list.`
 
-+ ### `event` - Adds an 'Event' task into the list. 
+
++ ### `event` 
+
+    Adds an 'Event' task into the list. 
 
     Usage: 
 
@@ -54,7 +60,10 @@ After you finish typing each command, press enter to execute the command.
     
     `Jerry will show you the updated task list.`
 
-+ ### `deadline` - Adds a 'Deadline' task into the list. 
+
++ ### `deadline`
+
+    Adds a 'Deadline' task into the list. 
 
     Usage: 
 
@@ -66,7 +75,10 @@ After you finish typing each command, press enter to execute the command.
     
     `Jerry will show you the updated task list.`
     
-+ ### `find` - Searches for task(s) with user-specified keyword.  
+    
++ ### `find` 
+    
+    Searches for task(s) with user-specified keyword.  
 
     Usage: 
 
@@ -78,7 +90,10 @@ After you finish typing each command, press enter to execute the command.
     
     `Jerry will show you the a list of task(s) that contains your keyword.`    
     
-+ ### `urgent` - Generates a list of urgent task(s). 
+    
++ ### `urgent`
+
+    Generates a list of urgent task(s). 
 
     Usage: 
 
@@ -90,7 +105,10 @@ After you finish typing each command, press enter to execute the command.
     
     `Jerry will show you the a list of task(s) that is/are due in the following two weeks.`      
     
-+ #### `done` - Marks a task as completed.
+    
++ #### `done` 
+
+    Marks a task as completed.
 
     Usage: 
 
@@ -102,7 +120,10 @@ After you finish typing each command, press enter to execute the command.
     
     `Jerry will mark the appropriate task as completed (with a tick).`   
     
-+ #### `delete` - Deletes a task from the task list.
+    
++ #### `delete`
+
+    Deletes a task from the task list.
 
     Usage: 
 
@@ -114,7 +135,10 @@ After you finish typing each command, press enter to execute the command.
     
     `Jerry will delete the appropriate task.`   
     
-+ #### `bye` - Exits the application. 
+    
++ #### `bye`
+ 
+    Exit the application. 
 
     Usage: 
 
