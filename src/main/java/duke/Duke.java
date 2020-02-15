@@ -27,6 +27,7 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
+    private boolean hasInitError = false;
 
     /**
      * Constructs Duke with the default save directory.
@@ -39,11 +40,17 @@ public class Duke {
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (IOException e) {
-            System.err.println(" Sorry, I could not read the save file.\n");
+            ui.addMessage(" Sorry, I could not read the save file.\n"
+                    + "Please fix before relaunching.\n");
+            hasInitError = true;
         } catch (InvalidDateFormatException e) {
-            System.err.println(e.getMessage() + "(Save file date formatting error)\n");
+            ui.addMessage(e.getMessage() + "(Save file date formatting error)\n"
+                    + "Please fix before relaunching.\n");
+            hasInitError = true;
         } catch (InvalidTimeFormatException e) {
-            System.err.println(e.getMessage() + "(Save file time formatting error)\n");
+            ui.addMessage(e.getMessage() + "(Save file time formatting error)\n"
+                    + "Please fix before relaunching.\n");
+            hasInitError = true;
         }
     }
 
@@ -52,6 +59,12 @@ public class Duke {
      * Runs the program until the exit command is called.
      */
     public void runUntilExit() {
+        //Ensure that program does not continue when there is initialization error to protect save file.
+        if (hasInitError) {
+            ui.printBufferMessage();
+            return;
+        }
+
         ui.printMessage(WELCOME_MESSAGE);
         ui.printMessage(getReminder());
         boolean isRunning = true;
@@ -79,9 +92,7 @@ public class Duke {
         try {
             Command command = Parser.parseCommand(input);
             command.execute(tasks, ui, storage);
-            String message = ui.getMessageBuffer();
-            ui.clearBuffer();
-            return message;
+            return getUiMessage();
         } catch (InvalidCommandException e) {
             return e.getMessage();
         }
@@ -105,6 +116,24 @@ public class Duke {
         //use the reminder command execution to reuse code
         ReminderCommand reminderCommand = new ReminderCommand("all");
         reminderCommand.execute(tasks, ui, storage);
+        return getUiMessage();
+    }
+
+    /**
+     * Gets whether there is error during initialization.
+     *
+     * @return true if there is initialization error, false otherwise.
+     */
+    public boolean getHasInitError() {
+        return hasInitError;
+    }
+
+    /**
+     * Gets the message in the ui buffer and clears the buffer.
+     *
+     * @return message in the ui buffer.
+     */
+    public String getUiMessage() {
         String message = ui.getMessageBuffer();
         ui.clearBuffer();
         return message;

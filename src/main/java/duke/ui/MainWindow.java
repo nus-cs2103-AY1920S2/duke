@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String INIT_FAIL_ERROR_MESSAGE = "Due to initialization error"
+            + ", please exit the application and fix them before relaunching.";
     /** ScrollPane object of the UI.*/
     @FXML
     private ScrollPane scrollPane;
@@ -35,6 +37,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        if (duke.getHasInitError()) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(duke.getUiMessage(), dukeImage));
+            return;
+        }
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage));
         dialogContainer.getChildren().add(
@@ -48,9 +55,15 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        //get duke's response based on user input.
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = "";
+
+        //Ensure that program only allows quitting when there is initialization error to protect save file.
+        if (duke.getHasInitError() && !input.equals("bye")) {
+            response = INIT_FAIL_ERROR_MESSAGE;
+        } else {
+            response = duke.getResponse(input);
+        }
 
         //append dialog boxes to dialog container and clear user input.
         dialogContainer.getChildren().addAll(
