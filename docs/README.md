@@ -18,10 +18,10 @@
 ### Feature 1 
 Create and add todo into a list
 
-## Usage
+#### Usage
 To record a task without a deadline
 
-### `Keyword` - Describe action
+#### `Keyword` 
 Create a todo and add into the list  
 `todo (name of todo)`
 
@@ -38,10 +38,10 @@ Saving now....
 ### Feature 2 
 Create and add deadline into a list
 
-## Usage
+#### Usage
 To record a task with a deadline
 
-### `Keyword` - Describe action
+#### `Keyword`
 Create a deadline and add into the list. Date of deadline is required.  
 `deadline (name of deadline) /by (date in format yyyy/MM/dd)`
 
@@ -58,10 +58,10 @@ Saving now....
 ### Feature 3 
 Create and add event into a list
 
-## Usage
+#### Usage
 To record an event
 
-### `Keyword` - Describe action
+#### `Keyword` 
 Create an event and add into the list. Date and time of event is required.  
 `event (name of event) /at (date in format yyyy/MM/dd HHmm)`
 
@@ -78,10 +78,10 @@ Saving now....
 ### Feature 4 
 Delete 1 task at a time
 
-## Usage
+#### Usage
 Used to remove a task that is no longer needed
 
-### `Keyword` - Describe action
+#### `Keyword` 
 `Delete (task number)` 
 
 Example of usage: 
@@ -96,10 +96,10 @@ Okcan. I will remove this task:
 ### Feature 5 
 Delete all completed tasks
 
-## Usage
+#### Usage
 Remove all tasks at once for convenience
 
-### `Keyword` - Describe action
+#### `Keyword`
 `delete complete`
 
 Example of usage: 
@@ -115,10 +115,10 @@ I have deleted all the completed tasks as shown:
 ### Feature 6
 Check tasks as done on the list
 
-## Usage
+#### Usage
 Mark a task as done
 
-### `Keyword` - Describe action
+#### `Keyword` 
 `done (task number)`
 
 Example of usage: 
@@ -133,10 +133,10 @@ Okcan, I mark this task as done:
 ### Feature 7
 Display all tasks from list
 
-## Usage
+#### Usage
 
 
-### `Keyword` - Describe action
+#### `Keyword` 
 `list`
 
 Example of usage: 
@@ -151,10 +151,10 @@ I told you save liao loh........
 ### Feature 8
 Display tasks on a specified date
 
-## Usage
+#### Usage
 Easily access all the tasks on the same day
 
-### `Keyword` - Describe action
+#### `Keyword` 
 `list (date in yyyy/MM/dd)`
 
 Example of usage: 
@@ -169,10 +169,10 @@ This are all the tasks with that date
 ### Feature 9
 Find tasks with specified keyword
 
-## Usage
+#### Usage
 Able to search tasks through keyword. Can be just part of the word.
 
-### `Keyword` - Describe action
+#### `Keyword` 
 `find (keyword)`
 
 Example of usage: 
