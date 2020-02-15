@@ -1,7 +1,7 @@
 # User Guide
 Duke is a personal assistant that helps you to keep track of your tasks, such as todos, deadlines and events.
 
-<img src="Ui.png" width="400">
+<img src="Ui.png" width="300" align="center">
 
 ## Features
 
@@ -26,8 +26,8 @@ Easily find your tasks with the 'find' and 'sort' commands.
 
 Expected outcome:
 
-<img src="TodoDeadlineTask.png" width="400">
-<img src="EventTask.png" width="400">
+<img src="TodoDeadlineTask.png" width="300">
+<img src="EventTask.png" width="300">
 
 ### Displaying the tasks
 - `list` - Displays the task list.
@@ -36,8 +36,8 @@ Expected outcome:
 
 Expected outcome:
 
-<img src="ListFindTask.png" width="400">
-<img src="SortTask.png" width="400">
+<img src="ListFindTask.png" width="300">
+<img src="SortTask.png" width="300">
 
 ### Modifying the tasks
 - `done [task-index]` - Mark the specific task in the task list as done.
@@ -45,7 +45,7 @@ Expected outcome:
 
 Expected outcome:
 
-<img src="DoneDeleteTask.png" width="400">
+<img src="DoneDeleteTask.png" width="300" align="center">
 
 ### Exiting the program
 - `bye` - Terminates the Duke Program.
