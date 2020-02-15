@@ -39,7 +39,9 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke duke) {
         this.duke = duke;
+    }
 
+    public void init() {
         if (!this.duke.isLoaded()) {
             addDialogBox(DialogBox.getDukeDialog(duke.getLoadingError(), dukeImage));
         }
