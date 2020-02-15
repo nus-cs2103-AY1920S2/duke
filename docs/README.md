@@ -1,7 +1,17 @@
-# User Guide
+# Introduction
 
 A brief User Guide for "My Little Tracker".
 The features of the tracker is listed below!
+
+## Quick Start
+
+Ensure you have Java 11 or above installed in your Computer.
+
+Download the latest duke.jar here! (https://github.com/joshlay96/duke/releases/download/v0.2/Duke-0.2.jar).
+
+Copy the file to the folder you want to use as the home folder for the tracker!
+
+Double-click the file to start the app. The GUI should appear in a few seconds.
 
 ![](https://github.com/joshlay96/duke/blob/master/docs/Ui.png)
 
@@ -17,7 +27,7 @@ The features of the tracker is listed below!
     2. Set To-do/Deadlines/Events to done
     3. Shows Tasks as a list
 
-##Setting Tasks
+## Setting Tasks
 
 ### Set To-Do Tasks
 Allows a user to set a task *without* a specific deadline.
@@ -45,7 +55,7 @@ Expected outcome:
     Now you have 1 task in the list.
     ---------------------------------
 
-####Legend  for Todo Identifiers
+#### Legend  for Todo Identifiers
 
 `[T]` is an identifier to represent To-Do tasks. 
 
@@ -94,14 +104,13 @@ get the following formats.
 Refer to `Example of Usage` to know which type of outcome will be produced
 
 1. If a predefined date and time is used
-
-
-    ------------------------------------------
-    Got it. I have added this task:
-    [D][x] Give Speech (by: Apr 18 2019 18:00)
-    Now you have 1 task in the list.
-    ------------------------------------------
-    
+<pre><code>
+   ---------------------------------------------
+   Got it. I have added this task:
+   [D][x] Give Speech (by: Apr 18 2019 18:00)
+   Now you have 1 task in the list.
+   ---------------------------------------------- 
+</code></pre>    
 2 . If only a predefined date is used 
 (The time is preset to 00:00 if no time is added)
    
@@ -131,7 +140,7 @@ Refer to `Example of Usage` to know which type of outcome will be produced
     ----------------------------------------------  
     
     
-####Legend for Deadline Identifiers  
+#### Legend for Deadline Identifiers  
 
 `[D]` is an identifier to represent Deadline tasks. 
 
@@ -181,14 +190,13 @@ get the following formats.
 Refer to `Example of Usage` to know which type of outcome will be produced
 
 1. If a predefined date and time is used
-
-
+<pre><code>
     ------------------------------------------
     Got it. I have added this task:
     [E][x] Give Speech (by: Apr 18 2019 18:00)
     Now you have 1 task in the list.
     ------------------------------------------
-    
+</code></pre>    
 2 . If only a predefined date is used 
 (The time is preset to 00:00 if no time is added)
    
@@ -218,7 +226,7 @@ Refer to `Example of Usage` to know which type of outcome will be produced
     ----------------------------------------------  
     
     
-####Legend for Event Identifiers  
+#### Legend for Event Identifiers  
 
 `[E]` is an identifier to represent Event tasks. 
 
@@ -226,7 +234,7 @@ Refer to `Example of Usage` to know which type of outcome will be produced
 
 ### Editing Set Tasks
 
-####Delete To-Do/Deadlines/Events
+#### Delete To-Do/Deadlines/Events
 
 Allows a user to delete various kinds of tasks
 
@@ -250,7 +258,7 @@ Expected outcome:
     ---------------------------------
     
     
-####Set To-Do/Deadlines Events to done
+#### Set To-Do/Deadlines Events to done
 
 Allows a user to set a task to be done
 
@@ -271,7 +279,7 @@ Expected outcome:
     [T][✔] run
     ---------------------------------
     
-####Shows Tasks as a List
+#### Shows Tasks as a List
 
 
 ## Usage
