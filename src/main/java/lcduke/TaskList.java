@@ -1,6 +1,9 @@
 package lcduke;
 
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static java.lang.Integer.parseInt;
 
 /** Ths creates a TaskList object.
@@ -16,111 +19,31 @@ public class TaskList {
     }
 
     protected TaskList(String[] totalTasks, int storageNo) throws ParseException {
+        String taskMark;
+        String dateString;
+
         for(int i = 0; i < storageNo; i++) {
-            if (totalTasks[i].contains("[T]")) {
-                this.toDo("todo" + totalTasks[i].substring(totalTasks[i].indexOf(" ")));
-            } else if (totalTasks[i].contains("[D]")) {
-                String temp = totalTasks[i].substring(totalTasks[i].indexOf("by:") + 4, totalTasks[i].length() - 1);
-                String part1 = temp.substring(0, 4);
-                String part2 = temp.substring(4);
-                part2 = part2.substring(0, part2.indexOf(" "));
-                String part3 = temp.substring(temp.length()-4, temp.length());
+            taskMark = totalTasks[i].substring(0, 3);
 
-                switch(part1){
-                    case("Dec"):
-                        part1 = "12";
-                        break;
-                    case("Nov"):
-                        part1 = "11";
-                        break;
-                    case("Oct"):
-                        part1 = "10";
-                        break;
-                    case("Sep"):
-                        part1 = "09";
-                        break;
-                    case("Aug"):
-                        part1 = "08";
-                        break;
-                    case("Jul"):
-                        part1 = "07";
-                        break;
-                    case("Jun"):
-                        part1 = "06";
-                        break;
-                    case("May"):
-                        part1 = "05";
-                        break;
-                    case("Apr"):
-                        part1 = "04";
-                        break;
-                    case("Mar"):
-                        part1 = "03";
-                        break;
-                    case("Feb"):
-                        part1 = "02";
-                        break;
-                    default:
-                        part1 = "01";
-                }
-                if (part2.length() < 2){
-                    part2 = "0" + part2;
-                }
-                temp = part3 + "-" + part1 + "-" + part2;
+            switch(taskMark){
+            case "[T]":
+                this.toDo("todo" +
+                        totalTasks[i].substring(totalTasks[i].indexOf(" ")));
+                break;
+            case "[D]":
+                dateString = totalTasks[i].substring(totalTasks[i].indexOf("by:")
+                        + 4, totalTasks[i].length() - 1);
                 this.deadline("deadline" + totalTasks[i].substring(totalTasks[i].indexOf(" "),
-                        totalTasks[i].indexOf("by:") - 1) + "/by " + temp);
-
-            } else {
-                String temp = totalTasks[i].substring(totalTasks[i].indexOf("at:") + 4, totalTasks[i].length() - 1);
-                String part1 = temp.substring(0, 4);
-                String part2 = temp.substring(4);
-                part2 = part2.substring(0, part2.indexOf(" "));
-                String part3 = temp.substring(temp.length()-4, temp.length());
-
-                switch(part1){
-                    case("Dec"):
-                        part1 = "12";
-                        break;
-                    case("Nov"):
-                        part1 = "11";
-                        break;
-                    case("Oct"):
-                        part1 = "10";
-                        break;
-                    case("Sep"):
-                        part1 = "09";
-                        break;
-                    case("Aug"):
-                        part1 = "08";
-                        break;
-                    case("Jul"):
-                        part1 = "07";
-                        break;
-                    case("Jun"):
-                        part1 = "06";
-                        break;
-                    case("May"):
-                        part1 = "05";
-                        break;
-                    case("Apr"):
-                        part1 = "04";
-                        break;
-                    case("Mar"):
-                        part1 = "03";
-                        break;
-                    case("Feb"):
-                        part1 = "02";
-                        break;
-                    default:
-                        part1 = "01";
-                }
-                if (part2.length() < 2){
-                    part2 = "0" + part2;
-                }
-                temp = part3 + "-" + part1 + "-" + part2;
+                        totalTasks[i].indexOf("by:") - 1) + "/by " + this.standardDate(dateString));
+                break;
+            default:
+                dateString = totalTasks[i].substring(totalTasks[i].indexOf("at:") + 4,
+                        totalTasks[i].length() - 1);
+                System.out.println(dateString);
                 this.event("event" + totalTasks[i].substring(totalTasks[i].indexOf(" "),
-                        totalTasks[i].indexOf("at:") - 1) + "/at " + temp);
+                        totalTasks[i].indexOf("at:") - 1) + "/at " + this.standardDate(dateString));
             }
+
             if(totalTasks[i].contains("\u2713")){
                 this.totalTasks[i].markAsDone();
             }
@@ -179,5 +102,16 @@ public class TaskList {
             }
         }
         return response;
+    }
+
+    /** this is to convert saved date into standard date format, e.g. Jan 15 2019 -> 2019-10-09
+     *
+     * @param dateString date of the task from the hard disk
+     * @return the correct format of date in String format
+    */
+    private String standardDate(String dateString) {
+        DateTimeFormatter formatterIn = DateTimeFormatter.ofPattern("MMM d yyyy");
+        LocalDate date = LocalDate.parse(dateString, formatterIn);
+        return String.valueOf(date);
     }
 }
