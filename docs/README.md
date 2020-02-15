@@ -4,8 +4,7 @@
 
 ## Features 
 
-+ ### Feature 1 
-Description of feature.
++ ### Task List 
 
 ## Usage
 
