@@ -7,9 +7,7 @@ import duke.task.Todo;
 
 import java.security.InvalidKeyException;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * contains methods which deal with making sense of the user command.
@@ -24,6 +22,7 @@ public class Parser {
         put("event", Message.EVENT);
         put("list", Message.LIST);
         put("hey", Message.HEY);
+        put("tag", Message.TAG);
     }};
 
     /**
@@ -68,6 +67,15 @@ public class Parser {
         return LocalDate.parse(str);
     }
 
+    public List<String> parseTags(String tagsInString) {
+        StringTokenizer st = new StringTokenizer(tagsInString);
+        List<String> tags = new ArrayList<>();
+        while (st.hasMoreTokens()) {
+            tags.add(st.nextToken("#").trim());
+        }
+        return tags;
+    }
+
     /**
      * decode the String gotten from the data file into a Task.
      * @param data a String gotten from the data file
@@ -78,27 +86,28 @@ public class Parser {
         String className = st.nextToken("~");
         String status = st.nextToken("~");
         String description = st.nextToken("~");
-        if (st.hasMoreTokens()) {
+
+        Task task;
+
+        if (className.equals("Deadline")) {
             String extra = st.nextToken("~");
-            if (className.equals("Deadline")) {
-                Deadline ddl =  new Deadline(description, getLocalDate(extra));
-                if (status.equals("1")) {
-                    ddl.markAsDone();
-                }
-                return ddl;
-            } else {
-                Event ev =  new Event(description, getLocalDate(extra));
-                if (status.equals("1")) {
-                    ev.markAsDone();
-                }
-                return ev;
-            }
+            task =  new Deadline(description, getLocalDate(extra));
+        } else if (className.equals("Event")){
+            String extra = st.nextToken("~");
+            task = new Event(description, getLocalDate(extra));
+        } else {
+            task = new Todo(description);
         }
-        Todo td = new Todo(description);
+
         if (status.equals("1")) {
-            td.markAsDone();
+            task.markAsDone();
         }
-        return td;
+
+        if (st.hasMoreTokens()) {
+            task.setTags(parseTags(st.nextToken("~")));
+        }
+        
+        return task;
     }
 
     public int extractRequestNumber(String str) {

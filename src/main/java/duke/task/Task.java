@@ -1,11 +1,15 @@
 package duke.task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * defines Task class with basic properties and is set to be not done initally.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected List<String> tags = new ArrayList<>();
 
     /**
      * constructs a Task instance by its description.
@@ -39,8 +43,20 @@ public class Task {
         return this.description;
     }
 
+    public void addTag(String tag) {
+        this.tags.add(tag);
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public String printAllTags() {
+        return tags.isEmpty() ? "" : " #" + String.join(" #", tags);
+    }
+
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + getStatusIcon() + "] " + description + printAllTags();
     }
 }

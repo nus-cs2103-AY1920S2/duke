@@ -43,11 +43,11 @@ public class Ui {
     /**
      * shows a specific message when a Task in the list has been marked as done.
      * @param num the index of the Task which has been marked.
-     * @param list the list of Tasks which we are dealing with.
+     * @param taskDone the Task which we are are going to mark as done.
      */
-    public String doneMessage(int num, List<Task> list) {
-        return typeSetting("    👍 Nice! I've marked this duke.task as done: " + num
-                + "\n" + "      " + list.get(num - 1));
+    public String doneMessage(int num, Task taskDone) {
+        return typeSetting("    👍 Nice! I've marked this task as done: " + num
+                + "\n" + "      " + taskDone);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Ui {
      * @param index the number of tasks in the list after deleting.
      */
     public String deleteMessage(int num, Task t, int index) {
-        return typeSetting("    👌 Noted. I've removed this duke.task: " + num
+        return typeSetting("    👌 Noted. I've removed this task: " + num
                 + "\n" + "      " + t + "\n" +
                 "    Now you have " + index + " tasks in the list.");
     }
@@ -68,9 +68,13 @@ public class Ui {
      * @param index the number of Tasks in the list after adding.
      */
     public String addMessage(Task t, int index) {
-        return typeSetting("    🟢 Got it. I've added this duke.task: \n      " +
+        return typeSetting("    🟢 Got it. I've added this task: \n      " +
                 t + "\n" +
                 "    Now you have " + index + " tasks in the list.");
+    }
+
+    public String tagMessage(Task t) {
+        return typeSetting("    🟢 Got it. I've tagged this task as you wish: \n      " + t);
     }
 
     /**

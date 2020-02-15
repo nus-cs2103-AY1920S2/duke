@@ -8,5 +8,6 @@ public enum Message {
     DEADLINE,
     EVENT,
     LIST,
-    HEY;
+    HEY,
+    TAG;
 }

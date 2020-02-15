@@ -40,6 +40,7 @@ public class Storage {
                     add(t.getClass().getSimpleName());
                     add(t.getStatus());
                     add(getSpecificDescription(t));
+                    add(t.printAllTags().trim());
                 }};
             textToWrite.append(String.join("~", details)).append("\n");
         }

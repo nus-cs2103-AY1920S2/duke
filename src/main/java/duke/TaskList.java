@@ -74,8 +74,19 @@ public class TaskList {
         return new TaskList(matchingTasks);
     }
 
+    public void tagTask(int requestNumber, String tag) throws IllegalArgumentException {
+        if (inRange(requestNumber, this.tasks.size())) {
+            throw new IllegalArgumentException("OOPS!!! The number you checked for may not be valid.");
+        }
+        this.tasks.get(requestNumber - 1).addTag(tag);
+    }
+
     public ArrayList<Task> getTasks() {
         return this.tasks;
+    }
+
+    public Task getTask(int num) {
+        return getTasks().get(num - 1);
     }
 
     public int size() {

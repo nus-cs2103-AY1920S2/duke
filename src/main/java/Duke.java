@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  * Represents a Duke bot. This is also the main class of duke project.
  */
 public class Duke {
-    public static String taskData = "./data/duke.txt";
+    //public static String taskData = "./data/duke.txt";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -24,8 +24,7 @@ public class Duke {
      */
     String getResponse(String input) {
         try {
-            Duke duke = new Duke(taskData);
-            return duke.processRequest(input);
+            return this.processRequest(input);
         } catch (InvalidKeyException | IllegalArgumentException | EmptyDescriptionException
                 | IOException e) {
             return e.toString();
@@ -75,19 +74,19 @@ public class Duke {
         switch (parser.getMessage(first)) {
         case DONE:
             this.parser.checkDescriptionWhetherExit(str, "done".length());
-            int requestNumber = parser.extractRequestNumber(st.nextToken());
-            assert requestNumber <= taskList.size() : "The number entered is invalid.";
-            this.taskList.markDone(requestNumber);
-            output += this.ui.doneMessage(requestNumber, taskList.getTasks());
+            int doneRequestNumber = parser.extractRequestNumber(st.nextToken());
+            assert doneRequestNumber <= taskList.size() : "The number entered is invalid.";
+            this.taskList.markDone(doneRequestNumber);
+            output += this.ui.doneMessage(doneRequestNumber, taskList.getTask(doneRequestNumber));
             this.storage.rewriteFile(taskList);
             break;
 
         case DELETE:
             this.parser.checkDescriptionWhetherExit(str, "delete".length());
-            int requestNumber2 = parser.extractRequestNumber(st.nextToken());
-            assert requestNumber2 <= taskList.size() : "The number entered is invalid.";
-            Task taskDeleted = this.taskList.delete(requestNumber2);
-            output += this.ui.deleteMessage(requestNumber2, taskDeleted, this.taskList.size());
+            int deleteRequestNumber = parser.extractRequestNumber(st.nextToken());
+            assert deleteRequestNumber <= taskList.size() : "The number entered is invalid.";
+            Task taskDeleted = this.taskList.delete(deleteRequestNumber);
+            output += this.ui.deleteMessage(deleteRequestNumber, taskDeleted, this.taskList.size());
             this.storage.rewriteFile(taskList);
             break;
 
@@ -128,6 +127,15 @@ public class Duke {
 
         case HEY:
             output += this.ui.greet(taskList);
+            break;
+
+        case TAG:
+            parser.checkDescriptionWhetherExit(str, "tag".length());
+            int tagRequestNumber = parser.extractRequestNumber(st.nextToken());
+            assert tagRequestNumber <= taskList.size() : "The number entered is invalid.";
+            this.taskList.tagTask(tagRequestNumber, st.nextToken("").trim());
+            output += this.ui.tagMessage(taskList.getTask(tagRequestNumber));
+            this.storage.rewriteFile(taskList);
             break;
 
         default:
