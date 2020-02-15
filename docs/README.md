@@ -33,7 +33,7 @@ Press `enter` to execute the command after typing.
 
 + ### `todo`
 
-    - Adds a 'To-do' task into the list. 
+    - **Adds a 'To-do' task into the list.** 
 
     Usage: 
 
@@ -48,7 +48,7 @@ Press `enter` to execute the command after typing.
 
 + ### `event` 
 
-    - Adds an 'Event' task into the list. 
+    - **Adds an 'Event' task into the list.** 
 
     Usage: 
 
@@ -63,7 +63,7 @@ Press `enter` to execute the command after typing.
 
 + ### `deadline`
 
-    - Adds a 'Deadline' task into the list. 
+    - **Adds a 'Deadline' task into the list.** 
 
     Usage: 
 
@@ -78,7 +78,7 @@ Press `enter` to execute the command after typing.
     
 + ### `find` 
     
-    - Searches for task(s) with user-specified keyword.  
+    - **Searches for task(s) with user-specified keyword.** 
 
     Usage: 
 
@@ -91,7 +91,7 @@ Press `enter` to execute the command after typing.
     `Jerry will show you the a list of task(s) that contains your keyword.`    
     
     
-+ ### `urgent`
++ ### **`urgent`**
 
     - Generates a list of urgent task(s). 
 
