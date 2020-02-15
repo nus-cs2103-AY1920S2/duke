@@ -18,6 +18,7 @@ class TaskList {
 
     TaskList add(Task task) {
         tasks.add(task);
+        assert !tasks.isEmpty();
         return this;
     }
 
@@ -26,6 +27,7 @@ class TaskList {
             int taskIndex = taskNumber - 1;
             Task completedTask = tasks.get(taskIndex).complete();
             tasks.set(taskIndex, completedTask);
+            assert tasks.get(taskIndex).isCompleted();
             return completedTask;
         } catch (IndexOutOfBoundsException e) {
             throw new TaskNumberOutOfBoundsException(taskNumber);

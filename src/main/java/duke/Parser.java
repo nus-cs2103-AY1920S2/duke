@@ -14,6 +14,7 @@ class Parser {
     private static final int NUMBER_OF_EVENT_COMMAND_ARGUMENTS = 2;
 
     Command parseCommand(String input) throws InvalidCommandException {
+        assert input != null;
         Command command;
         String[] parsedInput = input.strip().split("\\s+", MAX_NUMBER_OF_COMMAND_SECTIONS);
         switch (parsedInput[COMMAND_POSITION]) {
@@ -72,14 +73,17 @@ class Parser {
     }
 
     String parseTaskInfo(String input) {
+        assert input != null;
         return input.strip().split("\\s+", MAX_NUMBER_OF_COMMAND_SECTIONS)[ARGUMENT_POSITION];
     }
 
     String parseDeadlineDescription(String info) {
+        assert info != null;
         return info.split("\\s*/by\\s*", NUMBER_OF_DEADLINE_COMMAND_ARGUMENTS)[DESCRIPTION_POSITION];
     }
 
     LocalDate parseDeadlineDate(String info) throws InvalidCommandException {
+        assert info != null;
         try {
             return LocalDate.parse(info.split("\\s*/by\\s*", NUMBER_OF_DEADLINE_COMMAND_ARGUMENTS)[TIME_POSITION]);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -90,10 +94,12 @@ class Parser {
     }
 
     String parseEventDescription(String info) {
+        assert info != null;
         return info.split("\\s*/at\\s*", NUMBER_OF_EVENT_COMMAND_ARGUMENTS)[DESCRIPTION_POSITION];
     }
 
     String parseEventTime(String info) throws InvalidCommandException {
+        assert info != null;
         try {
             return info.split("\\s*/at\\s*", NUMBER_OF_EVENT_COMMAND_ARGUMENTS)[TIME_POSITION];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -102,10 +108,12 @@ class Parser {
     }
 
     String parseSearchTerm(String input) {
+        assert input != null;
         return input.strip().split("\\s+", MAX_NUMBER_OF_COMMAND_SECTIONS)[ARGUMENT_POSITION];
     }
 
     int parseTaskNumber(String input) throws InvalidCommandException {
+        assert input != null;
         try {
             String[] parsedInput = input.strip().split("\\s+", MAX_NUMBER_OF_COMMAND_SECTIONS);
             int taskNumber = Integer.parseInt(parsedInput[ARGUMENT_POSITION]);

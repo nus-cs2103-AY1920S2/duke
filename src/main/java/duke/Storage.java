@@ -24,6 +24,7 @@ class Storage {
     private Path file;
 
     Storage(String filepath) {
+        assert filepath != null;
         file = Paths.get(filepath);
     }
 
@@ -77,6 +78,7 @@ class Storage {
         try {
             Files.createDirectories(file.getParent());
             Files.write(file, tasks.asList().stream().map(Task::toString).collect(Collectors.toList()));
+            assert Files.exists(file);
         } catch (IOException e) {
             throw new StorageException("Unable to save tasks to " + file, e);
         }
