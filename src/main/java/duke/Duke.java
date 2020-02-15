@@ -41,7 +41,7 @@ public class Duke {
                 storage.save(tasks);
                 return ui.outputTask(event, tasks.size());
             case LIST:
-                if (tasks.size() == 0) {
+                if (tasks.isEmpty()) {
                     return "There are no tasks now.";
                 } else {
                     return tasks.list();
@@ -49,7 +49,7 @@ public class Duke {
             case FIND:
                 String searchTerm = parser.parseSearchTerm(input);
                 TaskList matchingTasks = tasks.find(searchTerm);
-                if (matchingTasks.size() == 0) {
+                if (matchingTasks.isEmpty()) {
                     return "I didn't manage to find any matching tasks in your list :(";
                 } else {
                     return "Here are the matching tasks in your list:\n" + matchingTasks.list();

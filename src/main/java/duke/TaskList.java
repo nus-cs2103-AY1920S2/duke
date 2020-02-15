@@ -69,6 +69,10 @@ class TaskList {
         return tasks.size();
     }
 
+    boolean isEmpty() {
+        return tasks.isEmpty();
+    }
+
     List<Task> asList() {
         return new ArrayList<>(tasks);
     }
