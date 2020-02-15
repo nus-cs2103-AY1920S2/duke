@@ -36,7 +36,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        Circle circle = new Circle(48, 33, 25);
+        Circle circle = new Circle(48, 48.5, 49);
         displayPicture.setClip(circle);
     }
 

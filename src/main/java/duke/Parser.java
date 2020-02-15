@@ -106,7 +106,7 @@ public class Parser {
         if (st.hasMoreTokens()) {
             task.setTags(parseTags(st.nextToken("~")));
         }
-        
+
         return task;
     }
 

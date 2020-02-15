@@ -11,17 +11,17 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" prefWidth="840.0" spacing="10.0" style="-fx-background-color: #120310;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" prefWidth="992.0" spacing="10.0" style="-fx-background-color: #120310;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" lineSpacing="10.0" text="labellabellabelllabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabelabellabellabellabellabellabellabellabellabellabellabellabellabel" wrapText="true">
+        <Label fx:id="dialog" lineSpacing="18.0" text="labellabellabelllabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabelabellabellabellabellabellabellabellabellabellabellabellabellabel" wrapText="true">
          <padding>
-            <Insets top="20.0" />
+            <Insets bottom="10.0" top="15.0" />
          </padding>
          <font>
             <Font name="PT Mono Bold" size="15.0" />
          </font>
          <HBox.margin>
-            <Insets left="11.0" right="11.0" />
+            <Insets bottom="25.0" left="5.0" right="5.0" top="25.0" />
          </HBox.margin>
          <textFill>
             <LinearGradient cycleMethod="REFLECT" endX="0.9448441247002397" endY="0.39328537170263794" startX="0.14388489208633087" startY="0.7553956834532374">
@@ -34,13 +34,13 @@
          </textFill></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/thumb-350-1017001.jpg" />
+            <Image url="@../images/110019499.jpg" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <HBox.margin>
-            <Insets left="5.0" right="5.0" />
+            <Insets bottom="25.0" left="35.0" right="35.0" top="25.0" />
          </HBox.margin></ImageView>
     </children>
     <padding>

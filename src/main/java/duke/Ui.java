@@ -18,28 +18,18 @@ public class Ui {
      * @param s the message intended to wrap up.
      */
     public String typeSetting(String s) {
-        return (horizontalLine + s + "\n" + horizontalLine);
+        return (horizontalLine + s + horizontalLine);
     }
 
     /**
      * shows greeting messages to the user and reminds the user what tasks are there in the list.
-     * @param taskList the list of Task that stores in the hard disk.
      */
-    public String greet(TaskList taskList) {
+    public String greet() {
         //welcome message and showing the list to the user
-        String s = typeSetting("    Hello, I'm Bob. 👶 👶 👶\n    " +
-                "What can I do for you? 😃\n");
-        return s + printCurrentList(taskList);
+        return typeSetting("    Hello, I'm Popuko.  (´・ω・`)\n    " +
+                "What can I do for you?   _(:3」∠)_   _(:3」∠)_\n");
     }
-
-    /**
-     * shows exiting message.
-     */
-
-    public String bye() {
-        return typeSetting("    Are you sure you want to leave me alone? 🥺 (y/n)\n");
-    }
-
+    
     /**
      * shows a specific message when a Task in the list has been marked as done.
      * @param num the index of the Task which has been marked.

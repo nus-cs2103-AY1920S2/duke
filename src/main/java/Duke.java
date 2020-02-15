@@ -61,7 +61,6 @@ public class Duke {
             throws InvalidKeyException, IllegalArgumentException, EmptyDescriptionException, IOException {
 
         assert !str.isBlank() : "Your request is missing!!!";
-        //assert false : "testing";
 
         if (str.equals("")) {
             throw new InvalidKeyException("Try to say something to me.");
@@ -126,7 +125,7 @@ public class Duke {
             break;
 
         case HEY:
-            output += this.ui.greet(taskList);
+            output += this.ui.greet();
             break;
 
         case TAG:
