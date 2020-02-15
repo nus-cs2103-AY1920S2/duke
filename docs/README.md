@@ -1,26 +1,25 @@
 # Duke User Guide
 
 ## Description
-Duke is a customised task manager for you, you can easily categorized your 
+* Duke is a customised task manager for you, you can easily categorized your 
 tasks into deadlines, events and todos and manage them by adding new tasks, deleting tasks,
 tagging tasks and etc.
 
 ## Features 
 
 ### Categorized tasks
-Duke helps you to categorize your regular tasks into the following three types:
-- todo
-- event
-- deadline
+* Duke helps you to categorize your regular tasks into the following three types:
+    - todo
+    - event
+    - deadline
 
 ### Basic CRUD functions
 * You can easily create, read, update and delete your tasks in Duke.
 
 ### Interactive GUI
 * Duke has a pretty cool and good-looking GUI, you will definitely enjoy using it daily as a Task Manager
-and even as a close friend who is always here for you.
-
-    <img src="Ui.png" alt="Screenshot of Duke GUI" width = "800">
+and even as a close friend who is always here for you.<br><br>
+<img src="Ui.png" alt="Screenshot of Duke GUI" width = "1000"><br><br>
 
 ### Warm greetings
 * When you say hello to Duke, it will greet you with warm welcome.
@@ -43,9 +42,10 @@ and even as a close friend who is always here for you.
 
 ## Usage
 
-### `hey` - Say hello to the Duke bot
+### 1. `hey` - Say hello to the Duke bot
 
 * Say hello to the Duke bot and Duke bot will introduce herself to you.
+
 
 * Example of usage: 
 
@@ -54,11 +54,11 @@ and even as a close friend who is always here for you.
 * Expected outcome:
 
     `Hello, I'm Popuko.`<br>
-    `What can I do for you?`
+    `What can I do for you?`<br><br>
     
-    <img src = "Hey.png" alt = "Screenshot for hey command" width = "800">
+<img src = "Hey.png" alt = "Screenshot for hey command" width = "1000"><br><br>
     
-### `todo [description]` - Add a todo task to your list
+### 2. `todo [description]` - Add a todo task to your list
 
 * Ask Duke to add a todo task to your list by given the description of the todo task.
 
@@ -70,11 +70,11 @@ and even as a close friend who is always here for you.
 
     `Got it. I've added this task:`<br>
     `[T][✘] CS2103T individual project`<br>
-    `Now you have 1 tasks in the list.`
+    `Now you have 1 tasks in the list.`<br><br>
     
-    <img src = "Todo.png" alt = "Screenshot for todo command" width = "800">
+<img src = "Todo.png" alt = "Screenshot for todo command" width = "1000"><br><br>
     
-### `event [description] /at [scheduled date]` - Add an event task to your list
+### 3. `event [description] /at [scheduled date]` - Add an event task to your list
 
 * Ask Duke to add an event task to your list by given the description
 and the scheduled date of the event.
@@ -87,12 +87,12 @@ and the scheduled date of the event.
 
     `Got it. I've added this task:`<br>
     `[E][✘] CS2103T meeting (at: Feb 15 2020)`<br>
-    `Now you have 2 tasks in the list.`
+    `Now you have 2 tasks in the list.`<br><br>
     
-    <img src = "Event.png" alt = "Screenshot for event command" width = "800">
+<img src = "Event.png" alt = "Screenshot for event command" width = "1000"><br><br>
     
    
-### `deadline [description] /by [due date]` - Add an deadline task to your list
+### 4. `deadline [description] /by [due date]` - Add an deadline task to your list
 
 * Ask Duke to add a deadline task to your list by given the description
 and the due date of the deadline task.
@@ -105,12 +105,12 @@ and the due date of the deadline task.
 
     `Got it. I've added this task:`<br>
     `[D][✘] CS2103T post lecture quiz (by: Mar 10 2020)`<br>
-    `Now you have 3 tasks in the list.`
+    `Now you have 3 tasks in the list.`<br><br>
     
-    <img src = "Deadline.png" alt = "Screenshot for deadline command" width = "800">
+<img src = "Deadline.png" alt = "Screenshot for deadline command" width = "1000"><br><br>
     
     
-### `list` - List all tasks you have added to the task list
+### 5. `list` - List all tasks you have added to the task list
 
 * Ask Duke to show all tasks you have asked her to record.
 
@@ -123,12 +123,12 @@ and the due date of the deadline task.
     `📜 Here are the tasks in your list:`<br>
     `[T][✘] CS2103T individual project`<br>
     `[E][✘] CS2103T meeting (at: Feb 15 2020)`<br>
-    `[D][✘] CS2103T post lecture quiz (by: Mar 10 2020)`<br>
+    `[D][✘] CS2103T post lecture quiz (by: Mar 10 2020)`<br><br>
     
-    <img src = "List.png" alt = "Screenshot for list command" width = "800">
+<img src = "List.png" alt = "Screenshot for list command" width = "1000"><br><br>
     
     
-### `done [task index]` - Mark the specific task as done
+### 6. `done [task index]` - Mark the specific task as done
 
 * Ask Duke to mark a task as done according the the given index of the task.
 
@@ -139,12 +139,12 @@ and the due date of the deadline task.
 * Expected outcome:
 
     `👍 Nice! I've marked this task as done:`<br>
-    `[E][✓] CS2103T meeting (at: Feb 15 2020)`<br>
+    `[E][✓] CS2103T meeting (at: Feb 15 2020)`<br><br>
     
-    <img src = "Done.png" alt = "Screenshot for done command" width = "800">
+<img src = "Done.png" alt = "Screenshot for done command" width = "1000"><br><br>
     
     
-### `delete [task index]` - Delete the specific task in the list
+### 7. `delete [task index]` - Delete the specific task in the list
 
 * Ask Duke to remove a task from the list according the the given index of the task.
 
@@ -156,12 +156,12 @@ and the due date of the deadline task.
 
     `👌 Noted. I've removed this task:`<br>
     `[E][✓] CS2103T meeting (at: Feb 15 2020)`<br>
-    `Now you have 2 tasks in the list.`
+    `Now you have 2 tasks in the list.`<br><br>
     
-    <img src = "Delete.png" alt = "Screenshot for delete command" width = "800">
+<img src = "Delete.png" alt = "Screenshot for delete command" width = "1000"><br><br>
     
     
-### `find [keyword]` - Find out all tasks which contain the keyword given
+### 8. `find [keyword]` - Find out all tasks which contain the keyword given
 
 * Ask Duke to find all tasks that contain the keyword given.
 
@@ -173,12 +173,12 @@ and the due date of the deadline task.
 
     `📜 Here are the matching tasks in your list:`<br>
     `[T][✘] CS2103T individual project`<br>
-    `[E][✘] CS2103T meeting (at: Feb 15 2020)`<br>
+    `[E][✘] CS2103T meeting (at: Feb 15 2020)`<br><br>
         
-    <img src = "Find.png" alt = "Screenshot for find command" width = "800">
+<img src = "Find.png" alt = "Screenshot for find command" width = "1000"><br><br>
     
     
-### `tag [task index] [tag name]` - Add tag to a specific task
+### 9. `tag [task index] [tag name]` - Add tag to a specific task
 
 * Ask Duke to add a tag to a task by the given task index and name of the tag.
 
@@ -189,12 +189,12 @@ and the due date of the deadline task.
 * Expected outcome:
 
     `🟢 Got it. I've tagged this task as you wish:`<br>
-    `[T][✘] CS2103T individual project #important`<br>
+    `[T][✘] CS2103T individual project #important`<br><br>
         
-    <img src = "Tag.png" alt = "Screenshot for tag command" width = "800">
+<img src = "Tag.png" alt = "Screenshot for tag command" width = "1000"><br><br>
 
 
-### `bye` - Exit Duke application
+### 10. `bye` - Exit Duke application
 
 * Say goodbye to Duke bot to quit the application without clicking any button.
 
