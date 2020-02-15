@@ -46,10 +46,28 @@ public class Storage {
      *
      * @param path Indicate the path of the file located.
      */
-    private void setHomeAndFilePath(String[] path) {
+    private void setHomeAndFilePath(String... path) {
         this.home = System.getProperty("user.dir");
-        this.filePath = Paths.get(this.home, "src", path[0], path[1]);
+        this.filePath = Paths.get(this.home, copyFilePath(path));
         this.absolutePath = this.filePath.toAbsolutePath().toString();
+    }
+
+    /**
+     * Copy file path to another array and add "src" at the first index of the String array.
+     *
+     * @param path File path to be copy
+     * @return File path with "src" at the first index of the String array.
+     */
+    private String[] copyFilePath(String... path) {
+        String[] filePath = new String[path.length + 1];
+        filePath[0] = "src";
+
+        int i = 1;
+        for (String word : path) {
+            filePath[i] = word;
+            i++;
+        }
+        return filePath;
     }
 
     /**
@@ -212,9 +230,31 @@ public class Storage {
     public void createFile(String path) throws DukeException {
         try {
             File file = new File(path);
+            makeDirectory(retrieveFileDirectoryFromAbsolutePath(path));
             file.createNewFile();
         } catch (IOException e) {
             throw new DukeException("Sorry! I am unable to create new file at the path!");
+        }
+    }
+
+    /**
+     * Return the directory back without the file name back.
+     *
+     * @param path Path to the file.
+     * @return Directory without the file name.
+     */
+    private String retrieveFileDirectoryFromAbsolutePath(String path) {
+        return path.substring(0, path.lastIndexOf('\\'));
+    }
+
+    /**
+     * Create Directory based on the path given if it does not exists.
+     *
+     * @param path path to be created.
+     */
+    private void makeDirectory(String path) {
+        if(!checkFileExists(filePath)) {
+            new File(path).mkdirs();
         }
     }
 
