@@ -21,7 +21,7 @@ Create and add todo into a list
 #### Usage
 To record a task without a deadline
 
-#### `Keyword` 
+#### Keyword
 Create a todo and add into the list  
 `todo (name of todo)`
 
@@ -41,7 +41,7 @@ Create and add deadline into a list
 #### Usage
 To record a task with a deadline
 
-#### `Keyword`
+#### Keyword
 Create a deadline and add into the list. Date of deadline is required.  
 `deadline (name of deadline) /by (date in format yyyy/MM/dd)`
 
@@ -61,7 +61,7 @@ Create and add event into a list
 #### Usage
 To record an event
 
-#### `Keyword` 
+#### Keyword 
 Create an event and add into the list. Date and time of event is required.  
 `event (name of event) /at (date in format yyyy/MM/dd HHmm)`
 
@@ -81,7 +81,7 @@ Delete 1 task at a time
 #### Usage
 Used to remove a task that is no longer needed
 
-#### `Keyword` 
+#### Keyword 
 `Delete (task number)` 
 
 Example of usage: 
@@ -99,7 +99,7 @@ Delete all completed tasks
 #### Usage
 Remove all tasks at once for convenience
 
-#### `Keyword`
+#### Keyword
 `delete complete`
 
 Example of usage: 
@@ -118,7 +118,7 @@ Check tasks as done on the list
 #### Usage
 Mark a task as done
 
-#### `Keyword` 
+#### Keyword 
 `done (task number)`
 
 Example of usage: 
@@ -136,7 +136,7 @@ Display all tasks from list
 #### Usage
 
 
-#### `Keyword` 
+#### Keyword 
 `list`
 
 Example of usage: 
@@ -154,7 +154,7 @@ Display tasks on a specified date
 #### Usage
 Easily access all the tasks on the same day
 
-#### `Keyword` 
+#### Keyword 
 `list (date in yyyy/MM/dd)`
 
 Example of usage: 
@@ -172,7 +172,7 @@ Find tasks with specified keyword
 #### Usage
 Able to search tasks through keyword. Can be just part of the word.
 
-#### `Keyword` 
+#### Keyword 
 `find (keyword)`
 
 Example of usage: 
