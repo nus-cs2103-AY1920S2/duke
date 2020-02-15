@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 /** Ths creates a Deadline object.
  */
-
 public class Deadline extends Task {
     protected LocalDate taskDate;
 
@@ -27,11 +26,9 @@ public class Deadline extends Task {
      */
     public String printInit(){
         String response;
-        response = "    ____________________________________________________________"
-                + "     Got it. I've added this task: "
+        response = "     Got it. I've added this task: "
                 + "       " + this.toString()
-                + "     Now you have " + taskNo + " tasks in the list."
-                + "    ____________________________________________________________\n";
+                + "     Now you have " + taskNo + " tasks in the list.";
         return response;
     }
 
@@ -40,6 +37,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

@@ -17,12 +17,7 @@ public class Ui {
     }
 
     public String init() {
-        String response;
-        response = "    ____________________________________________________________"
-                + "     Hello! I'm Duke"
-                + "     What can I do for you?"
-                + "    ____________________________________________________________\n";
-        return response;
+        return "     Hello! I'm Duke\n" + "     What can I do for you?\n";
     }
 
     public String inputProcess(String userInput, Storage storage, TaskList tasks) {
@@ -31,17 +26,19 @@ public class Ui {
         String response;
         if(newInput.getIsProblem()) {
             Parser.isProblem = false;
-            response = "there is Problem with user's Input";
+            response = Parser.errorMessage;
 
         } else {
             if (this.userInput.equals("list")) {
                 response = this.list();
+            } else if (this.userInput.contains("hi")) {
+                response = this.init();
             } else if (this.userInput.contains("done")) {
                 response = this.done(this.userInput);
                 try {
                     storage.save();
                 } catch (IOException e) {
-                    System.out.println("Cannot write file");
+                    response = "Cannot write file";
                 }
             } else if (this.userInput.contains("delete")) {
                 tasks.delete(this.userInput);
@@ -49,7 +46,7 @@ public class Ui {
                 try {
                     storage.save();
                 } catch (IOException e) {
-                    System.out.println("Cannot write file");
+                    response = "Cannot write file";
                 }
             }else if (this.userInput.contains("find")){
                 response = tasks.find(this.userInput);
@@ -59,7 +56,7 @@ public class Ui {
                 try {
                     storage.save();
                 } catch (IOException e) {
-                    System.out.println("Cannot write file");
+                    response = "Cannot write file";
                 }
             } else if (this.userInput.contains("deadline")) {
                 response = tasks.deadline(this.userInput);
@@ -67,7 +64,7 @@ public class Ui {
                 try {
                     storage.save();
                 } catch (IOException e) {
-                    System.out.println("Cannot write file");
+                    response = "Cannot write file";
                 }
             } else if (this.userInput.contains("reminders")) {
                 response = this.reminders();
@@ -76,15 +73,11 @@ public class Ui {
                 try {
                     storage.save();
                 } catch (IOException e) {
-                    System.out.println("Cannot write file");
+                    response = "Cannot write file";
                 }
             }
         }
         return response;
-    }
-
-    public void showLoadingError(){
-
     }
 
     /** This is to input tasks from user.
@@ -99,20 +92,15 @@ public class Ui {
     /** This outputs the response to bye request.
      */
     public String bye(){
-        String response;
-        response = "    ____________________________________________________________\n"
-        + "     Bye. Hope to see you again soon!\n"
-        + "    ____________________________________________________________\n";
-        return response;
+        return "     Bye. Hope to see you again soon!\n";
     }
 
     /** This is to output all tasks from the task list.
      *
      */
-    public String list(){
+    private String list(){
         String response;
-        response = "    ____________________________________________________________\n"
-                +"     Here are the tasks in your list:\n";
+        response = "     Here are the tasks in your list:\n";
         int i = 0;
         int j = 1;
         while (i < TaskList.totalTasksCount) {
@@ -120,29 +108,25 @@ public class Ui {
             i++;
             j++;
         }
-        response = response + "    ____________________________________________________________\n";
         return response;
     }
 
     /** This is to mark a task is done.
      *
      */
-    public String done(String userInput){
+    private String done(String userInput){
         String response;
         int taskNo = Integer.parseInt(userInput.substring(userInput.indexOf(" ") + 1));
-        response = "    ____________________________________________________________\n"
-                + "     Nice! I've marked this task as done: \n";
+        response = "     Nice! I've marked this task as done: \n";
         TaskList.totalTasks[taskNo - 1].markAsDone(); // to mark as done; -1 as since count in totalTasks starts from 0
         response = response + "       " + TaskList.totalTasks[taskNo - 1].getStatusIcon() + " "
                 + TaskList.totalTasks[taskNo - 1].getDescription() + "\n";
-        response = response + "    ____________________________________________________________\n";
         return response;
     }
 
-    public String reminders(){
+    private String reminders(){
         String response;
-        response = "    ____________________________________________________________\n"
-                +"     Here are the reminders of your tasks:\n";
+        response = "     Here are the reminders of your tasks:\n";
         int i = 0;
         int j = 1;
         while (i < TaskList.totalTasksCount) {
@@ -152,7 +136,6 @@ public class Ui {
             }
             i++;
         }
-        response = response + "    ____________________________________________________________\n";
         return response;
     }
 }

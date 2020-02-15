@@ -2,7 +2,6 @@ package lcduke;
 
 /** Ths creates a task object.
  */
-
 public abstract class Task {
     protected String description;
     protected boolean isDone;

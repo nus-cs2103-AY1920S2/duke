@@ -17,11 +17,9 @@ public class Todo extends Task {
      */
     public String printInit(){
         String response;
-        response = "    ____________________________________________________________"
-                + "     Got it. I've added this task: "
-                + "       " + this.toString()
-                + "     Now you have " + taskNo + " tasks in the list."
-                + "    ____________________________________________________________\n";
+        response = "     Got it. I've added this task: \n"
+                + "       " + this.toString() + "\n"
+                + "     Now you have " + taskNo + " tasks in the list.\n";
         return response;
     }
 

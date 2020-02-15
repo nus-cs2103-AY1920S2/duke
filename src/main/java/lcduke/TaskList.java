@@ -5,7 +5,6 @@ import static java.lang.Integer.parseInt;
 
 /** Ths creates a TaskList object.
  */
-
 public class TaskList {
     static Task[] totalTasks = new Task[100];
     static int totalTasksCount;
@@ -120,8 +119,8 @@ public class TaskList {
                 }
                 temp = part3 + "-" + part1 + "-" + part2;
                 System.out.println(temp);
-                this.event("event" + totalTasks[i].substring(totalTasks[i].indexOf(" "), totalTasks[i].indexOf("at:") - 1)
-                        + "/at " + temp);
+                this.event("event" + totalTasks[i].substring(totalTasks[i].indexOf(" "),
+                        totalTasks[i].indexOf("at:") - 1) + "/at " + temp);
             }
             if(totalTasks[i].contains("\u2713")){
                 this.totalTasks[i].markAsDone();
@@ -172,16 +171,14 @@ public class TaskList {
     public String find(String userInput){
         String response;
         String keyword = userInput.substring(5);
-        response = "    ____________________________________________________________"
-                + "     Here are the matching tasks in your list:";
+        response = "     Here are the matching tasks in your list:\n";
         int i = 1;
         for(int j = 0; j < totalTasksCount; j++) {
             if(totalTasks[j].getDescription().contains(keyword)){
-                response = response + "     " + i + "." + totalTasks[j].toString();
+                response = response + "     " + i + "." + totalTasks[j].toString() + "\n";
                 i++;
             }
         }
-        response = response + "    ____________________________________________________________";
         return response;
     }
 }

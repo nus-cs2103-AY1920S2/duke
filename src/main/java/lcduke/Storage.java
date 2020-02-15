@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 /** Ths creates a Storage object.
  */
-
 public class Storage {
     File savedTaskList;
     String filePath;

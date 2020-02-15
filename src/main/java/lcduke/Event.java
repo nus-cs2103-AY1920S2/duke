@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 /** Ths creates an Event object.
  */
-
 public class Event extends Task {
     protected LocalDate taskDate;
 
@@ -26,11 +25,9 @@ public class Event extends Task {
      */
     public String printInit(){
         String response;
-        response = "    ____________________________________________________________"
-                + "     Got it. I've added this task: "
-                + "       " + this.toString()
-                + "     Now you have " + taskNo + " tasks in the list."
-                + "    ____________________________________________________________\n";
+        response = "     Got it. I've added this task: \n"
+                + "       " + this.toString() + "\n"
+                + "     Now you have " + taskNo + " tasks in the list.\n";
         return response;
     }
 
@@ -39,6 +36,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
