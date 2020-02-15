@@ -19,7 +19,7 @@ public class Ui {
         String line = "    ____________________________________________________________" + "\n";
         String fiveSpaces = "      ";
         System.out.println(line + fiveSpaces + "Hello! I'm Duke.\n" + fiveSpaces
-                + "Type help to see the available commands.\n" + line);
+                + "How can I be of your service?\n" + line);
     }
     /**
      * Welcome message formatted tos string.
@@ -28,7 +28,7 @@ public class Ui {
 
     public String showWelcomeString() {
         String fiveSpaces = "      ";
-        return fiveSpaces + "Hello! I'm Duke.\n" + fiveSpaces + "Type help to see the available commands.\n";
+        return fiveSpaces + "Hello! I'm Duke.\n" + fiveSpaces + "How can I be of your service?\n";
     }
     /**
      * Reads the command entered by the user.

@@ -20,7 +20,8 @@ public class DukeException extends Exception {
         if (exception.equals("todo")) {
             return "      OOPS!!! The description of a todo cannot be empty.";
         } else {
-            return "      OOPS!!! I'm sorry, but I don't know what that means :-(";
+            return "      OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                    "      Type help to see the available commands.";
         }
     }
 }
