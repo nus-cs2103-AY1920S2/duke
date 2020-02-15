@@ -3,6 +3,8 @@
 A brief User Guide for "My Little Tracker".
 The features of the tracker is listed below!
 
+![Ui](../docs/Ui.png)
+
 ## Features 
 
 1. Setting Tasks
@@ -24,7 +26,7 @@ After the user has completed the task, he can set the task to be done
 and delete it. 
 
 ## Usage
-![To-Do Task](../out/production/resources/images/Todo.png)
+![To-Do Task](../docs/Todo.png)
 
 ### `To-Do` - Creates a new To-Do task
 After adding the To-Do Task, you will see your To-Do task displayed.
@@ -59,7 +61,7 @@ After the user has completed the task, he can set the task to be done
 and delete it. 
 
 ## Usage
-![Deadline](../out/production/resources/images/Deadline.png)
+![Deadline](../docs/Deadline.png)
 
 ### `Deadline` - To add a new Deadline
 After adding the Deadline, you will see your Deadline displayed.
@@ -146,7 +148,7 @@ After the user has completed the task, he can set the task to be done
 and delete it. 
 
 ## Usage
-![Event](../out/production/resources/images/Event.png)
+![Event](../docs/Event.png)
 
 ### `Event` - To add a new Event
 After adding the Event, you will see your Event displayed.
@@ -229,7 +231,7 @@ Refer to `Example of Usage` to know which type of outcome will be produced
 Allows a user to delete various kinds of tasks
 
 ## Usage
-![Delete](../out/production/resources/images/Delete2.png)
+![Delete](../docs/Delete2.png)
 
 ### `delete` - Deletes a task
 Deletes a task, according to its position in the list.
@@ -253,7 +255,7 @@ Expected outcome:
 Allows a user to set a task to be done
 
 ## Usage
-![Done](../out/production/resources/images/Done.png)
+![Done](../docs/Done.png)
 
 ### `done` - Marks a task as done
 Marks a task as done, according to its position in the list.
@@ -273,7 +275,7 @@ Expected outcome:
 
 
 ## Usage
-![List](../out/production/resources/images/List.png)
+![List](../docs/List.png)
 
 ### `list` - Shows the list
 Shows the user the remaining tasks in as a list

@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 // Main class to run javaFX.
-// TODO Ask why cannot run from Duke.java :(
 // Workaround is to create a new wrapper class to run this
 
 public class DukeJavaFxRunner extends Application {
