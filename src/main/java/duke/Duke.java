@@ -2,11 +2,15 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
 Represents the Duke object with which the user interacts.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -28,6 +32,19 @@ public class Duke {
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
         }
+    }
+
+    public Duke() {
+        this("data/data.txt");
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World");
+        Scene scene =  new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
