@@ -4,3 +4,5 @@
 [D][✓] return book (by: Jan 1 2019)
 [T][✓] abcd
 [T][✘] avasda
+[T][✘] watch video
+[T][✘] abs

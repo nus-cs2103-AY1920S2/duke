@@ -19,6 +19,8 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load(), storage.getStorageNo());
+
+        //if there is a problem with reading file, it will create a new TaskList
         } catch (FileNotFoundException | ParseException e) {
             tasks = new TaskList();
         }

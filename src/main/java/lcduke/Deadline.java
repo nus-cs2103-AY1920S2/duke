@@ -15,7 +15,7 @@ public class Deadline extends Task {
      */
     protected Deadline(String description, String by) {
         super(description);
-        if(by.contains("/")){
+        if (by.contains("/")) {
             by = by.replaceAll("/", "-");
         }
         this.taskDate = LocalDate.parse(by);
@@ -23,7 +23,7 @@ public class Deadline extends Task {
 
     /** This prints the response after adding a Deadline object to task list.
      */
-    protected String printInit(){
+    protected String printInit() {
         String response;
         response = "     Got it. I've added this task: "
                 + "       " + this.toString()

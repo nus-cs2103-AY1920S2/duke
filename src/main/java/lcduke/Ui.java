@@ -24,6 +24,7 @@ public class Ui {
         this.userInput = userInput;
         newInput = new Parser(this.userInput);
         String response;
+        String fileSaveErrorMessage = "error in input process";
 
         if(this.userInput.contains(" ")){
             command = this.userInput.substring(0, userInput.indexOf(" "));
@@ -45,39 +46,23 @@ public class Ui {
                 break;
             case "done":
                 response = this.done(this.userInput);
-                try {
-                    storage.save();
-                } catch (IOException e) {
-                    response = "Cannot write file";
-                }
+                fileSaveErrorMessage = this.toSave(storage);
                 break;
             case "delete":
                 tasks.delete(this.userInput);
-                response = "This task is deleted";
-                try {
-                    storage.save();
-                } catch (IOException e) {
-                    response = "Cannot write file";
-                }
+                response = this.delete();
+                fileSaveErrorMessage = this.toSave(storage);
                 break;
             case "find":
                 response = tasks.find(this.userInput);
                 break;
             case "todo":
                 response = tasks.toDo(this.userInput);
-                try {
-                    storage.save();
-                } catch (IOException e) {
-                    response = "Cannot write file";
-                }
+                fileSaveErrorMessage = this.toSave(storage);
                 break;
             case "deadline":
                 response = tasks.deadline(this.userInput);
-                try {
-                    storage.save();
-                } catch (IOException e) {
-                    response = "Cannot write file";
-                }
+                fileSaveErrorMessage = this.toSave(storage);
                 break;
             case "reminders":
                 response = this.reminders();
@@ -90,12 +75,23 @@ public class Ui {
                 break;
             default:
                 response = tasks.event(this.userInput);
-                try {
-                    storage.save();
-                } catch (IOException e) {
-                    response = "Cannot write file";
-                }
+                fileSaveErrorMessage = this.toSave(storage);
             }
+        }
+
+        if (fileSaveErrorMessage != "saved successfully!" && fileSaveErrorMessage != "error in input process"){
+            response = fileSaveErrorMessage;
+        }
+
+        return response;
+    }
+    private String toSave(Storage storage){
+        String response;
+        try {
+            storage.save();
+            response = "saved successfully!";
+        } catch (IOException e) {
+            response = e.getMessage();
         }
         return response;
     }
@@ -113,6 +109,12 @@ public class Ui {
      */
     private String bye(){
         return "     Bye. Hope to see you again soon!\n";
+    }
+
+    /** This outputs the response to delete request.
+     */
+    private String delete(){
+        return "     This task is deleted\"\n";
     }
 
     /** This is to output all tasks from the task list.

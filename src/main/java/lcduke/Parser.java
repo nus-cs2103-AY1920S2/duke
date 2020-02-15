@@ -15,6 +15,7 @@ public class Parser {
             testMessage(userInput);
         } catch (DukeException ex) {
             isProblem = true;
+            errorMessage = ex.getMessage();
         }
     }
 
@@ -27,13 +28,11 @@ public class Parser {
                 && !userInput.contains("delete") && !userInput.contains("todo") && !userInput.contains("reminders")
                 && !userInput.contains("deadline") && !userInput.contains("event") && !userInput.contains("find")
                 && !userInput.contains("hi")) {
-            errorMessage = "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
-            throw new DukeException("I don't know what that means");
+            throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
 
         } else if (!userInput.contains(" ") && !userInput.contains("bye") && !userInput.contains("list")
                 && !userInput.contains("reminders") && !userInput.contains("hi")){
-            errorMessage = "     ☹ OOPS!!! The description of a " + userInput + " cannot be empty.\n";
-            throw new DukeException("Empty");
+            throw new DukeException("     ☹ OOPS!!! The description of a " + userInput + " cannot be empty.\n");
         }
     }
 }
