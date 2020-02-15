@@ -11,7 +11,7 @@ public class Ui {
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|____/ \\__,_|_|\\_\\___|";
 
     /** The previous response from Duke. */
     private String response;
