@@ -68,14 +68,14 @@ public class Duke {
     private String runOnGui(String input) {
         try {
             Command c = Parser.parse(input);
-            assert c != null: "command fails to be meaningful";
+            assert c != null : "command fails to be meaningful";
             String message = c.executeOnGui(tasks, ui, storage, tags);
-            assert message != null: "output message is empty";
+            assert message != null : "output message is empty";
             message = ui.getLine() + "\n" + message + "\n";
             return message;
         } catch (DukeException e) {
             String message = ui.getErrorMessage(e.getMessage());
-            assert message !=null:"output message is empty";
+            assert message != null : "output message is empty";
             message = ui.getLine() + "\n" + message + "\n";
             return message;
         }

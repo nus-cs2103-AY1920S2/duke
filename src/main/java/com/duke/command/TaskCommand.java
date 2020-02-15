@@ -29,7 +29,7 @@ public class TaskCommand extends Command {
      * @param tasks   the TaskList of the current Duke session.
      * @param ui      the User Interface of the current Duke session.
      * @param storage the storage file of the current Duke session.
-     * @param tags
+     * @param tags    the list of tags that is tracked on the current Duke session.
      * @throws DukeException when the saving of the file fails.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {

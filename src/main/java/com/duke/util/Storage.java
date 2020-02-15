@@ -25,8 +25,8 @@ public class Storage {
     private String filePath;
 
     /**
-     *
-     * @param taskfilePath
+     * Instantiates a storage handler with the storage file in the hard-drive given as input.
+     * @param taskfilePath The file path of the data file storing user information.
      */
     public Storage(String taskfilePath) {
         this.filePath = taskfilePath;
@@ -72,6 +72,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads all the tags that are associated with a task in the hard drive into the Task object.
+     * @param t The task to have its tags added.
+     * @param tags The String representation of all its tags.
+     */
     public void loadTaskTag(Task t, String tags) {
         if (tags.equals("")) {
             return;
@@ -86,6 +91,11 @@ public class Storage {
 
     }
 
+    /**
+     * Loads all the tags of all the tasks in the task list into one single TagList object for the current duke session.
+     * @param taskList The list of tasks to process tags with.
+     * @return A list of tags associated with all the tasks in the task list.
+     */
     public TagList loadTags(TaskList taskList) {
         TagList tagList = new TagList();
         for (Task t: taskList.tasks) {

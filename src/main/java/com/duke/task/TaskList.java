@@ -80,6 +80,11 @@ public class TaskList {
         return out;
     }
 
+    /**
+     * Tags a task in the task list with the specified index.
+     * @param index The index of the tag in the task list.
+     * @param t The tag to use for tagging.
+     */
     public void tagTask(int index, Tag t) {
         Task task = tasks.get(index - 1);
         task.setTag(t.getTagName());

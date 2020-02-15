@@ -1,8 +1,14 @@
 package com.duke.util;
 
-
-import com.duke.Duke;
-import com.duke.command.*;
+import com.duke.command.Command;
+import com.duke.command.DeleteCommand;
+import com.duke.command.DoneCommand;
+import com.duke.command.ExitCommand;
+import com.duke.command.FindCommand;
+import com.duke.command.FindTagCommand;
+import com.duke.command.ListCommand;
+import com.duke.command.TagCommand;
+import com.duke.command.TaskCommand;
 import com.duke.task.Deadline;
 import com.duke.task.Event;
 import com.duke.task.Task;
@@ -62,8 +68,8 @@ public class Parser {
             try {
                 cmd = cmd.substring(4);
                 if (cmd.equals("")) {
-                    throw new DukeException("Enter 'tag <tag> <task_index>' to add tag" +
-                            " or 'tag <tag>' to query");
+                    throw new DukeException("Enter 'tag <tag> <task_index>' to add tag"
+                            + " or 'tag <tag>' to query");
                 }
                 String[] temp = cmd.split(" ");
 
@@ -76,14 +82,14 @@ public class Parser {
                     int num = Integer.parseInt(temp[1]);
                     output = new TagCommand(tag, num);
                 } else {
-                    throw new DukeException("Enter 'tag <tag> <task_index>' to add tag" +
-                            " or 'tag <tag>' to query");
+                    throw new DukeException("Enter 'tag <tag> <task_index>' to add tag"
+                            + " or 'tag <tag>' to query");
                 }
             } catch (DukeException e) {
                 throw e;
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("Enter 'tag <tag> <task_index>' to add tag" +
-                        " or 'tag <tag>' to query");
+                throw new DukeException("Enter 'tag <tag> <task_index>' to add tag"
+                        + " or 'tag <tag>' to query");
             }
         }
 

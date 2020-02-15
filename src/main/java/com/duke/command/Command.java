@@ -23,7 +23,7 @@ public abstract class Command {
      * @param tasks   the TaskList of the current Duke session.
      * @param ui      the User Interface of the current Duke session.
      * @param storage the storage file of the current Duke session.
-     * @param tags
+     * @param tags    the list of tags recorded by the Duke session.
      * @throws DukeException happens when there is a problem executing the command.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException;

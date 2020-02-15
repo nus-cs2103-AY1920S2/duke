@@ -11,6 +11,7 @@ import java.util.List;
 
 public class FindTagCommand extends Command {
     public String tagName;
+
     public FindTagCommand(String tag) {
         this.tagName = tag;
     }
@@ -20,6 +21,7 @@ public class FindTagCommand extends Command {
         Tag tag = tags.findTag(tagName);
         ui.showFindTagMessage(tag);
     }
+
     @Override
     public String executeOnGui(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         Tag tag = tags.findTag(tagName);

@@ -29,7 +29,7 @@ public class Ui {
      * Outputs a String of the error message to the user to communicate that
      * there is a problem loading data from storage.
      * @return the error message to the user to communicate that
-     * there is a problem loading data from storage.
+     *     there is a problem loading data from storage.
      */
     public String getLoadingErrorMessage() {
         return SPACE + "OOPS! There is a problem loading save file";
@@ -182,7 +182,7 @@ public class Ui {
      * @param t     the task of be removed from the list.
      * @param count the number of task left on the task list.
      * @return The message that a task t is deleted from the task list, and
-     * indicate the number of task left on the list.
+     *     indicate the number of task left on the list.
      */
     public String getDeleteMessage(Task t, int count) {
         String output = SPACE + "Noted. I've removed this task: "
@@ -230,7 +230,7 @@ public class Ui {
      * keyword specified in a Find command.
      * @param tasks The list of tasks that contain the keyword.
      * @return The list of tasks found in the storage that contains the
-     * keyword specified in a Find command.
+     *     keyword specified in a Find command.
      */
     public String getFindMessage(ArrayList<Task> tasks) {
         String out = SPACE + "Here are the matching tasks in your list: ";
@@ -242,20 +242,41 @@ public class Ui {
         return out;
     }
 
+    /**
+     * Prints the message that a tag has been associated with a task.
+     * @param tag The tag relevant in this tagging event.
+     * @param t   The task relevant in this tagging event.
+     */
     public void showTagTaskMessage(Tag tag, Task t) {
         System.out.println(getTagTaskMessage(tag, t));
     }
 
+    /**
+     * Gets the message that a tag has been successfully associated with a task.
+     * @param tag The tag relevant in this tagging event.
+     * @param t   The task relevant in this tagging event.
+     * @return A String representation of the tagging event.
+     */
     public String getTagTaskMessage(Tag tag, Task t) {
         String out = SPACE + "I have tagged the following task with tag '" + tag.getTagName() + "': "
                 + "\n" + SPACE + t;
         return out;
     }
 
+    /** Prints the list of tasks found in the storage that contains the
+     * tag specified in the command.
+     * @param tag The tag added to the task.
+     */
     public void showFindTagMessage(Tag tag) {
         System.out.println(getFindTagMessage(tag));
     }
 
+    /**
+     * Prints the list of tasks found in the storage that contains the
+     * tag specified in the command.
+     * @param tag The tag added to the task.
+     * @return The string representation of the message.
+     */
     public String getFindTagMessage(Tag tag) {
         if (tag == null) {
             return "The tag is not recognized.";
@@ -269,6 +290,4 @@ public class Ui {
         }
         return out;
     }
-
-
 }
