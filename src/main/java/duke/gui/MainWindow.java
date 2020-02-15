@@ -80,7 +80,7 @@ public class MainWindow extends AnchorPane {
      * @param response Message reply to user
      */
     private void checkIsExit(String response) {
-        if (response.equals("     Alright! See you next time!\n")) {
+        if (response.equals("     Alright! See you next time!    \n")) {
             Platform.exit();
         }
     }

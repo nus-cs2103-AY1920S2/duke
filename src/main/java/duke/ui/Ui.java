@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-    protected int numOfIndentation = 4;
-    protected ReplyFormat message;
-    protected static Scanner userInput;
+    private int numOfIndentation = 4;
+    private ReplyFormat message;
+    private static Scanner userInput;
+    private boolean isGui;
 
     /**
      * Class Constructor of Ui.
@@ -16,7 +17,8 @@ public class Ui {
     public Ui() {
         message = new ReplyFormat();
         userInput = new Scanner(System.in);
-        message.setIndentationInFront(numOfIndentation);
+        message.setIndentation(numOfIndentation);
+        isGui = true;
     }
 
     /**
@@ -33,6 +35,13 @@ public class Ui {
     }
 
     /**
+     * Set isGui to false
+     */
+    public void setNotGui() {
+        isGui = false;
+    }
+
+    /**
      * Close all scanners if available.
      */
     public void closeScanner() {
@@ -45,17 +54,34 @@ public class Ui {
      * @return Return the greeting message back
      */
     public String greetWithoutPrint() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = setLogoAccordingToConsoleOrGui();
         message.clearMessage();
         message.addSentence("Hello! I'm ", 1);
         message.addParagraph(logo, 15);
         message.addEmptyLine();
         message.addSentence("What can I do for you?", 1);
         return message.replyMessage();
+    }
+
+    /**
+     * Return logo according to whether the output is console or gui.
+     *
+     * @return Logo message in string.
+     */
+    public String setLogoAccordingToConsoleOrGui() {
+        if (isGui) {
+            return "____          _                               \n"
+                    + "|  _  \\ _    _| | _____                   \n"
+                    + "| |  |  |  |  |  | |/ / __ \\              \n"
+                    + "| |_ |  |  |_|  |  <   __/                 \n"
+                    + "|____/ \\__,_|_|\\_\\___|                  \n";
+        } else {
+            return " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+        }
     }
 
     /**

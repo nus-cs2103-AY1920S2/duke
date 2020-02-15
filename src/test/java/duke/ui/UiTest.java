@@ -45,15 +45,16 @@ public class UiTest {
     @Test
     public void greetMethod_shouldProduceExpectedMessage() {
         Ui ui = new Ui();
+        ui.setNotGui();
         ui.setOutline();
         String expected = "    ____________________________________________________________\n"
-                + "     Hello! I'm \n"
-                + "                    ____        _        \n"
-                + "                   |  _ \\ _   _| | _____ \n"
-                + "                   | | | | | | | |/ / _ \\\n"
-                + "                   | |_| | |_| |   <  __/\n"
-                + "                   |____/ \\__,_|_|\\_\\___|\n"
-                + "    \n" + "     What can I do for you?\n"
+                + "     Hello! I'm     \n"
+                + "                    ____        _            \n"
+                + "                   |  _ \\ _   _| | _____     \n"
+                + "                   | | | | | | | |/ / _ \\    \n"
+                + "                   | |_| | |_| |   <  __/    \n"
+                + "                   |____/ \\__,_|_|\\_\\___|    \n"
+                + "        \n" + "     What can I do for you?    \n"
                 + "    ____________________________________________________________\n";
         ui.greet();
         Assertions.assertEquals(expected, os.toString());
@@ -69,8 +70,8 @@ public class UiTest {
         Task task = new Todo("borrow book");
         task.setStatusDone();
         String expected = "    ____________________________________________________________\n"
-                + "     Nice! I've marked this task as done:\n"
-                + "         [T][Y] borrow book\n"
+                + "     Nice! I've marked this task as done:    \n"
+                + "         [T][Y] borrow book    \n"
                 + "    ____________________________________________________________\n";
         Assertions.assertEquals(expected, ui.replyDone(task));
     }

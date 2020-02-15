@@ -5,10 +5,10 @@ import duke.task.Task;
 import java.util.List;
 
 public class ReplyFormat {
-    private String indentationInFront;
+    private String indentation;
     private String message;
     private String outline = "____________________________________________________________";
-    private int numOfIndentInFront;
+    private int numOfIndent;
     private boolean hasOutline;
 
     /**
@@ -16,8 +16,8 @@ public class ReplyFormat {
      */
     public ReplyFormat() {
         message = "";
-        numOfIndentInFront = 0;
-        indentationInFront = "";
+        numOfIndent = 0;
+        indentation = "";
         hasOutline = false;
     }
 
@@ -28,8 +28,8 @@ public class ReplyFormat {
      * @param numOfIndent number of additional indent required to add
      */
     public void addSentence(String sentence, int numOfIndent) {
-        message = message + indentationInFront + setAdditionalIndent(numOfIndent) + sentence + '\n';
-        assert message.contains(indentationInFront + setAdditionalIndent(numOfIndent) + sentence + '\n')
+        message = message + indentation + setAdditionalIndent(numOfIndent) + sentence + indentation+'\n';
+        assert message.contains(indentation + setAdditionalIndent(numOfIndent) + sentence + indentation+'\n')
                 : "Message are not added inside";
     }
 
@@ -48,7 +48,7 @@ public class ReplyFormat {
      * @return the outline with indentation
      */
     public String addOutlineWithIndentation() {
-        return indentationInFront + outline + '\n';
+        return indentation + outline + '\n';
     }
 
     /**
@@ -100,15 +100,15 @@ public class ReplyFormat {
     }
 
     /**
-     * Set the amount of indentation in front of message.
+     * Set the amount of indentation in front and behind of message.
      *
      * @param numOfIndent number of indentation required
      */
-    public void setIndentationInFront(int numOfIndent) {
-        numOfIndentInFront = numOfIndent;
-        indentationInFront = "";
-        for (int i = 0; i < numOfIndentInFront; i++) {
-            indentationInFront = indentationInFront.concat(" ");
+    public void setIndentation(int numOfIndent) {
+        this.numOfIndent = numOfIndent;
+        indentation = "";
+        for (int i = 0; i < this.numOfIndent; i++) {
+            indentation = indentation.concat(" ");
         }
     }
 

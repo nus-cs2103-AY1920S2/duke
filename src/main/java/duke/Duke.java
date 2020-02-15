@@ -16,6 +16,7 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private boolean isGui;
 
     /**
      * Class constructor of Duke.
@@ -80,11 +81,29 @@ public class Duke {
     }
 
     /**
+     * Set Ui output to not Gui.
+     */
+    public void setUiToNotGui() {
+        if (!isGui) {
+            ui.setNotGui();
+        }
+    }
+
+    /**
+     * Set consoleOutput to false.
+     */
+    public void setNotGui() {
+        isGui = false;
+    }
+
+    /**
      * The main programme runs here.
      *
      * @param args input from the console
      */
     public static void main(String[] args) {
-        new Duke().run();
+        Duke duke = new Duke();
+        duke.setUiToNotGui();
+        duke.run();
     }
 }
