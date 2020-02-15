@@ -31,122 +31,122 @@ You may enter a date alongside an Event or a Deadline.
 Press `enter` to execute the command after typing. 
 
 
-+ ### `todo`
++ ### **`todo`**
 
-    - **Adds a 'To-do' task into the list.** 
+    **Adds a 'To-do' task into the list.** 
 
-    Usage: 
+    *Usage*: 
 
     |Command|Example|
     |------|-------|
     |`todo (task)`| `todo eat`|
 
-    Expected outcome:
+    *Expected outcome*:
     
     `Jerry will show you the updated task list.`
 
 
-+ ### `event` 
++ ### **`event`** 
 
-    - **Adds an 'Event' task into the list.** 
+    **Adds an 'Event' task into the list.** 
 
-    Usage: 
+    *Usage*: 
 
     |Command|Example|
     |------|-------|
     |`event (task) / (yyyy-mm-dd)`| `event project meeting / 2020-12-01`|
 
-    Expected outcome:
+    *Expected outcome*:
     
     `Jerry will show you the updated task list.`
 
 
-+ ### `deadline`
++ ### **`deadline`**
 
-    - **Adds a 'Deadline' task into the list.** 
+    **Adds a 'Deadline' task into the list.** 
 
-    Usage: 
+    *Usage*: 
 
     |Command|Example|
     |------|-------|
     |`deadline (task) / (yyyy-mm-dd)`| `deadline return library book / 2020-12-01`|
 
-    Expected outcome:
+    *Expected outcome*:
     
     `Jerry will show you the updated task list.`
     
     
-+ ### `find` 
++ ### **`find`** 
     
-    - **Searches for task(s) with user-specified keyword.** 
+    **Searches for task(s) with user-specified keyword.** 
 
-    Usage: 
+    *Usage*: 
 
     |Command|Example|
     |------|-------|
     |`find (keyword)`| `find eat`|
 
-    Expected outcome:
+    *Expected outcome*:
     
     `Jerry will show you the a list of task(s) that contains your keyword.`    
     
     
 + ### **`urgent`**
 
-    - Generates a list of urgent task(s). 
+    **Generates a list of urgent task(s).** 
 
-    Usage: 
+    *Usage*: 
 
     |Command|Example|
     |------|-------|
     |`urgent`| `urgent`|
 
-    Expected outcome:
+    *Expected outcome*:
     
     `Jerry will show you the a list of task(s) that is/are due in the following two weeks.`      
     
     
-+ #### `done` 
++ #### **`done`** 
 
-    - Marks a task as completed.
+    **Marks a task as completed.**
 
-    Usage: 
+    *Usage*: 
 
     |Command|Example|
     |------|-------|
     |`done (task number)`| `done 1`|
 
-    Expected outcome:
+    *Expected outcome*:
     
     `Jerry will mark the appropriate task as completed (with a tick).`   
     
     
-+ #### `delete`
++ #### **`delete`**
 
-    - Deletes a task from the task list.
+    **Deletes a task from the task list.**
 
-    Usage: 
+    *Usage*: 
 
     |Command|Example|
     |------|-------|
     |`delete (task number)`| `delete 1`|
 
-    Expected outcome:
+    *Expected outcome*:
     
     `Jerry will delete the appropriate task.`   
     
     
-+ #### `bye`
++ #### **`bye`**
  
-    - Exit the application. 
+    **Exit the application.** 
 
-    Usage: 
+    *Usage*: 
 
     |Command|Example|
     |------|-------|
     |`bye`| `bye`|
 
-    Expected outcome:
+    *Expected outcome*:
     
     `Jerry retreats to his mouse-hole.`    
     
