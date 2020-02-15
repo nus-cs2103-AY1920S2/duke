@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  *  contains methods which deal with loading tasks from the file and saving tasks in the file.
@@ -23,8 +24,20 @@ public class Storage {
      * @param filePath a String indicates where the tasks are going to be saved.
      */
     public Storage(String filePath) {
-        assert (new File(filePath)).exists() : "Given file path cannot be found";
         this.filePath = filePath;
+
+        try {
+            if (!(new File(filePath)).exists()) {
+                String rootLocation = Paths.get("").toAbsolutePath().toString();
+                StringTokenizer st = new StringTokenizer(filePath);
+                String newDirectoryLocation = rootLocation + File.separator + st.nextToken("/");
+                String newFileLocation = newDirectoryLocation + File.separator + st.nextToken("/");
+                Files.createDirectories(Paths.get(newDirectoryLocation));
+                Files.createFile(Paths.get(newFileLocation));
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
     /**
