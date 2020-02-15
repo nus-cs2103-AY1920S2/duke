@@ -63,7 +63,7 @@ Expected outcome:
     Now you have 1 tasks in the list.
 ```
 
-### `deadline [description] \by [yyyy-mm-dd]`
+### `deadline [description] /by [yyyy-mm-dd]`
 
 Add a deadline to your task list.
 
@@ -79,7 +79,7 @@ Expected outcome:
      Now you have 2 tasks in the list.
 ```
 
-### `event [description] \at [yyyy-mm-dd]`
+### `event [description] /at [yyyy-mm-dd]`
 
 Add an event to your task list.
 
