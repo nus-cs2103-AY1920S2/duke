@@ -33,8 +33,8 @@ update the list in `task.txt`.
 `todo read topics for CS2103`
 
 * Expected outcome: <br/><br/>
-`Got it. I've added this task: <br/>
-[T][N] read topics for CS2103T`<br/>
+`Got it. I've added this task:` <br/>
+`[T][N] read topics for CS2103T`<br/>
 ` Now you have 1 task in the list.`
 
 <img src="images/Todo.png" alt="Screenshot for todo command" about="Screenshot for todo command" align="center">
