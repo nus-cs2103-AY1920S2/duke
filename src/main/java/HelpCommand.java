@@ -19,7 +19,9 @@ public class HelpCommand extends Command {
         helpCommands += "7) find [word]: find all tasks with that word.\n";
         helpCommands += "8) priority [number] [low/medium/high]: sets that task to the stated priority.\n";
         helpCommands += "9) list-priority: lists tasks based on ascending priority.\n";
-        helpCommands += "10) bye: exit the chatBot.";
+        helpCommands += "10) help: provide help commands.\n";
+        helpCommands += "11) undo: undo the last command, max 5 previous commands.\n";
+        helpCommands += "12) bye: exit the chatBot.";
         ui.prettyPrinting(helpCommands);
         return helpCommands;
     }
