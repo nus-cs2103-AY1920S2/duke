@@ -7,11 +7,12 @@ import java.util.List;
 
 public class Ui {
     /** The logo for Duke. */
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|";
+    private static final String HEADER = ""
+            + "    PSYCHIATRIC    \n"
+            + "      HELP 5¢      \n\n"
+            + "     c o _ o ɔ     \n\n"
+            + "    THE  DOCTOR    \n"
+            + "     IS [ IN ]     ";
 
     /** The previous response from Duke. */
     private String response;
@@ -46,7 +47,7 @@ public class Ui {
      * @return a welcome message in the chat-bot.
      */
     public String getWelcome() {
-        return "Hello from\n" + LOGO;
+        return HEADER;
     }
 
     /**
@@ -56,7 +57,7 @@ public class Ui {
      * @return an error message in the chat-bot.
      */
     public String getError(DukeException e) {
-        String message = "☹ OOPS!!!\n";
+        String message = "AAUGH!!\n";
         return message + e.getMessage();
     }
 
@@ -124,7 +125,7 @@ public class Ui {
 
     /** Logs a farewell to the user. */
     public void showGoodbye() {
-        response += "Bye! Please give a review if you like this program!";
+        showText("Five cents, please!");
     }
 
     /**
