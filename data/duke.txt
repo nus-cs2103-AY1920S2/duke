@@ -1,2 +1,6 @@
-T|0|asdfasdfsa|must_do,
-T|0|adfsdfads|must_do,must_doo,
+T|1|Call mum|
+D|0|CS2106 Lecture|2020-02-10|
+E|0|Arts Festival|2020-02-13|
+E|0|Valentine's Day|2020-02-14|
+T|0|Do homework|
+D|0|CS2106 homework x2|2020-12-01|

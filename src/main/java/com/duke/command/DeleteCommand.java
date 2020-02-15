@@ -26,6 +26,10 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         try {
+            if (index >= tasks.tasks.size() || index < 0) {
+                throw new DukeException("OOPS!! Please enter a valid task number");
+            }
+
             Task t = tasks.deleteTask(index);
             storage.save(tasks);
             ui.showDelete(t, tasks.tasks.size());
@@ -37,6 +41,9 @@ public class DeleteCommand extends Command {
     @Override
     public String executeOnGui(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         try {
+            if (index >= tasks.tasks.size() || index < 0) {
+                throw new DukeException("OOPS!! Please enter a valid task number");
+            }
             Task t = tasks.deleteTask(index);
             storage.save(tasks);
             return ui.getDeleteMessage(t, tasks.tasks.size());

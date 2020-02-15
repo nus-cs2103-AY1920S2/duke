@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML.
@@ -21,7 +23,7 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -31,11 +33,14 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            dialog.setText(text);
+            dialog.setWrappingWidth(280);
+            dialog.setTextAlignment(TextAlignment.RIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
+        //dialog.setText(text);
         displayPicture.setImage(img);
     }
 
@@ -46,6 +51,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+        this.dialog.setTextAlignment(TextAlignment.LEFT);
         setAlignment(Pos.TOP_LEFT);
     }
 
