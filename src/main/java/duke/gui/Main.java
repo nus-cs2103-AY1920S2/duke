@@ -1,5 +1,8 @@
 package duke.gui;
 
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,9 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A GUI for Duke using FXML.
@@ -31,6 +31,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("Mr. Robot");
             stage.getIcons().add(launcherIcon);
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
