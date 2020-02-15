@@ -28,6 +28,8 @@ public class DukeJavaFxRunner extends Application {
     private Button sendButton;
     private Scene scene;
     private MainWindow mainWindow;
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Trump.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Putin.jpg"));
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -57,7 +59,7 @@ public class DukeJavaFxRunner extends Application {
         primaryStage.setMinHeight(600.0);
         primaryStage.setMinWidth(400.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(400.0, 800.0);
 
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -69,7 +71,7 @@ public class DukeJavaFxRunner extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(100.0);
 
         sendButton.setPrefWidth(55.0);
 

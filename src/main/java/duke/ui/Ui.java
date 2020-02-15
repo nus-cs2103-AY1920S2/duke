@@ -44,7 +44,7 @@ public class Ui {
      * @param taskList the task list
      */
     public String printList(TaskList taskList) {
-        return LINES + System.lineSeparator() + taskList.print_elements() + LINES + System.lineSeparator();
+        return  LINES + System.lineSeparator() + taskList.print_elements() + LINES + System.lineSeparator();
     }
 
     /**
@@ -92,7 +92,7 @@ public class Ui {
      * @param taskList    the task list
      */
     public String printDelete(Task deletedTask, TaskList taskList) {
-        return "The deleted task is " + deletedTask + System.lineSeparator() + LINES + System.lineSeparator()
+        return SPACE + "The deleted task is " + deletedTask + System.lineSeparator() + LINES + System.lineSeparator()
                 + SPACE + "Noted. I've removed this task:" + System.lineSeparator() + SPACE + deletedTask
                 + System.lineSeparator() + SPACE + "Now you have " + taskList.sizeOfList() + " tasks in the list."
                 + System.lineSeparator() + LINES + System.lineSeparator();
