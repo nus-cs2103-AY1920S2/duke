@@ -127,12 +127,12 @@ public class TaskList {
         List<Deadline> overdueDeadlines =
                 unDoneDeadlines.parallelStream()
                         .filter(deadline -> deadline.by.compareTo(LocalDate.now()) < 0)
-                        .sorted()
+                        .sorted((a, b) -> a.by.compareTo(b.by))
                         .collect(Collectors.toList());
         List<Deadline> upcomingDeadlines =
                 unDoneDeadlines.parallelStream()
                         .filter(deadline -> deadline.by.compareTo(LocalDate.now()) >= 0)
-                        .sorted()
+                        .sorted((a, b) -> a.by.compareTo(b.by))
                         .collect(Collectors.toList());
 
         String output = "";
