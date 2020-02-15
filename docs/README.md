@@ -25,15 +25,15 @@ A personal assistant for tracking the tasks to be done.
 
 ### `todo` - Add todo to the list
 
-* Inform duke to add the todo with the description provided to the list and\
+* Inform duke to add the todo with the description provided to the list and <br/>
 update the list in `task.txt`.
 
 * Example of usage: <br/><br/>
 `todo read topics for CS2103`
 
 * Expected outcome: <br/><br/>
-`Got it. I've added this task:` \
-`[T][N] read topics for CS2103T`\
+`Got it. I've added this task:` <br/>
+`[T][N] read topics for CS2103T`<br/>
 ` Now you have 1 task in the list.`
 
 <p align="center">
@@ -42,15 +42,15 @@ update the list in `task.txt`.
 
 ### `deadline` - Add deadline to the list
 
-* Inform duke to add the deadline with the description and due date provided to the list \
+* Inform duke to add the deadline with the description and due date provided to the list <br/>
 and update the list in `task.txt`. 
 
 * Example of usage: <br/><br/>
 `deadline project /by 2020-02-20`
 
 * Expected outcome: <br/><br/>
-`Got it. I've added this task:` \
-`[D][N] project (by: Feb 20 2020)`\
+`Got it. I've added this task:` <br/>
+`[D][N] project (by: Feb 20 2020)`<br/>
 ` Now you have 1 task in the list.`
 
 <p align="center">
@@ -59,7 +59,7 @@ and update the list in `task.txt`.
 
 ### `event` - Add event to the list
 
-Inform duke to add the event with the description, date and time provided to the list \
+Inform duke to add the event with the description, date and time provided to the list <br/>
 and update the list in `task.txt`. 
 
 Example of usage: 
@@ -68,8 +68,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:` \
-`[E][N] party (at: Mar 12 2020 2215)`\
+`Got it. I've added this task:` <br/>
+`[E][N] party (at: Mar 12 2020 2215)`<br/>
 ` Now you have 1 task in the list.`
 
 <p align="center">
@@ -86,17 +86,17 @@ Example of usage:
 
 Expected outcomes:
 
-* When there are three tasks in the list:\
-`Here are the tasks in your list:` \
-`1.[E][N] party (at: Mar 12 2020 2215)`\
-`2.[T][N] do readme for CS2103T iP`\
+* When there are three tasks in the list:<br/>
+`Here are the tasks in your list:` <br/>
+`1.[E][N] party (at: Mar 12 2020 2215)`<br/>
+`2.[T][N] do readme for CS2103T iP`<br/>
 `3.[T][Y] read topics for cs2103T`
 
 <p align="center">
   <img src="List.png" alt="Screenshot for list command" about="Screenshot for list command">
 </p>
 
-* When there are no task in the list:\
+* When there are no task in the list:<br/>
 `Horray! You do not have any task now!`
 
 <p align="center">
@@ -113,7 +113,7 @@ Example of usage:
 
 Expected outcomes:
 
-`Nice! I've marked this task as done:` \
+`Nice! I've marked this task as done:` <br/>
 `[T][Y] do readme for CS2103T iP`
 
 <p align="center">
@@ -122,7 +122,7 @@ Expected outcomes:
 
 ### `delete` - Remove the specific task at the index from the list
 
-Tell Duke to remove the specific task at the index from the list and\
+Tell Duke to remove the specific task at the index from the list and <br/>
  update the list in `task.txt`.
 
 Example of usage: 
@@ -131,7 +131,7 @@ Example of usage:
 
 Expected outcomes:
 
-`Nice! I've removed this task:` \
+`Nice! I've removed this task:` <br/>
 `[E][N] party (at: Mar 12 2020 2215)`
 
 <p align="center">
