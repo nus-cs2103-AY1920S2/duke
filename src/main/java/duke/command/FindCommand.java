@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.Optional;
+
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.Optional;
 
 /**
  * Represents a command used to find a task by searching for a keyword.
@@ -31,7 +31,8 @@ public class FindCommand extends Command {
     public Optional<TaskList> execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = new TaskList();
         for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) {
+            String taskDescription = task.getDescription().toLowerCase();
+            if (taskDescription.contains(keyword.toLowerCase())) {
                 matchingTasks.addTask(task);
             }
         }
