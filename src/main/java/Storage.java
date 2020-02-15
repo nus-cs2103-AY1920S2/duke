@@ -10,6 +10,9 @@ import java.util.Scanner;
 
 public class Storage {
     //private static Path defaultPath = Paths.get("src", "main", "java", "src" , "taskStore.txt");
+    private static final String TASK_FILE = "taskStore.txt";
+    private static final String TAG_FILE = "tagStore.txt";
+
     private static final String NEXT_TASK_TAG = "NEXT_TASK";
     /**
      * Attempts to store a list of tasks into a txt file.
@@ -18,8 +21,8 @@ public class Storage {
      * @throws IOException if file can't be found
      */
     public static void storeIntoFile(List<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter("src/taskStore.txt");
-        FileWriter tagWriter =  new FileWriter("src/tagStore.txt");
+        FileWriter fw = new FileWriter(TASK_FILE);
+        FileWriter tagWriter =  new FileWriter(TAG_FILE);
         for (Task task : tasks) {
             fw.write(task.formatToStore() + "\n");
             String tagToStore = "";
@@ -44,8 +47,14 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
-            File f = new File("src/taskStore.txt");
-            File tagFile = new File("src/tagStore.txt");
+            File f = new File(TASK_FILE);
+            File tagFile = new File(TAG_FILE);
+            try {
+                f.createNewFile();
+                tagFile.createNewFile();
+            } catch (IOException e){
+
+            }
             Scanner s1 = new Scanner(f);
             Scanner tagScan = new Scanner(tagFile);
             while (s1.hasNext()) {
@@ -62,6 +71,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
+
             System.out.println("File unable to be found");
         }
         return tasks;
