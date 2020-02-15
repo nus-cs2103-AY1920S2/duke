@@ -40,6 +40,8 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         // got from online
+        //@@author wxwxwxwx9-reused
+        // Reused from https://stackoverflow.com/questions/25622445/how-to-make-imageviews-rounded with minor modifications
         Rectangle clip = new Rectangle(
             displayPicture.getFitWidth(), displayPicture.getFitHeight()
         );
