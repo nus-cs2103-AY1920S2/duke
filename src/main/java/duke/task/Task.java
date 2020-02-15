@@ -5,6 +5,7 @@ public abstract class Task {
     protected final boolean isCompleted;
 
     protected Task(String description, boolean isCompleted) {
+        assert description != null;
         this.description = description;
         this.isCompleted = isCompleted;
     }

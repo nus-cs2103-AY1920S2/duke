@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 
 class Parser {
     Command parseCommand(String input) throws InvalidCommandException {
+        assert input != null;
         Command command;
         String[] parsedInput = input.strip().split("\\s+", 2);
         switch (parsedInput[0]) {
@@ -63,14 +64,17 @@ class Parser {
     }
 
     String parseTaskInfo(String input) {
+        assert input != null;
         return input.strip().split("\\s+", 2)[1];
     }
 
     String parseDeadlineDescription(String info) {
+        assert info != null;
         return info.split("\\s*/by\\s*", 2)[0];
     }
 
     LocalDate parseDeadlineDate(String info) throws InvalidCommandException {
+        assert info != null;
         try {
             return LocalDate.parse(info.split("\\s*/by\\s*", 2)[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -81,10 +85,12 @@ class Parser {
     }
 
     String parseEventDescription(String info) {
+        assert info != null;
         return info.split("\\s*/at\\s*", 2)[0];
     }
 
     String parseEventTime(String info) throws InvalidCommandException {
+        assert info != null;
         try {
             return info.split("\\s*/at\\s*", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -93,10 +99,12 @@ class Parser {
     }
 
     String parseSearchTerm(String input) {
+        assert input != null;
         return input.strip().split("\\s+", 2)[1];
     }
 
     int parseTaskNumber(String input) throws InvalidCommandException {
+        assert input != null;
         try {
             String[] parsedInput = input.strip().split("\\s+", 2);
             int taskNumber = Integer.parseInt(parsedInput[1]);

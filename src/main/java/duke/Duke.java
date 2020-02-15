@@ -16,6 +16,7 @@ public class Duke {
     private Scanner sc;
 
     public String getResponse(String input) {
+        assert input != null;
         try {
             Command command = parser.parseCommand(input);
             String info;
