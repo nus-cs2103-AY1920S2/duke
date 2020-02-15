@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Completes the task specified by the index
+     * Completes the task specified by the index.
      *
      * @param index the index of the task to be completed
      * @return the completed task
@@ -56,7 +56,7 @@ public class TaskList {
     }
 
     /**
-     * Completes the task specified by the index.
+     * Snoozes the task specified by the index.
      *
      * @param index the index of the task to be completed
      * @param time the new time
