@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -28,13 +29,17 @@ public class EventTask extends Task {
         Scanner sc = new Scanner(timing);
         assert(!timing.isEmpty());
 
-        if (!sc.next().equals("at")) {
-            throw new InvalidInputException("The timing should start with keyword [at]");
-        }
-        this.inputTiming = sc.nextLine();
-        this.timing = TimeHandler.dateFromString(this.inputTiming);
-        if (this.timing.isEmpty()) {
-            throw new InvalidInputException("Wrong date format");
+        try {
+            if (!sc.next().equals("at")) {
+                throw new InvalidInputException("The timing should start with keyword [at]");
+            }
+            this.inputTiming = sc.nextLine();
+            this.timing = TimeHandler.dateFromString(this.inputTiming);
+            if (this.timing.isEmpty()) {
+                throw new InvalidInputException("Wrong date format");
+            }
+        } catch(NoSuchElementException e) {
+            throw new InvalidInputException("I need to know the time!");
         }
     }
 

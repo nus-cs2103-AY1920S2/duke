@@ -36,7 +36,7 @@ public class TaskList {
      * @throws InvalidIndexException
      */
     public String done(int index) throws InvalidIndexException {
-        if (index > usrInputs.size()) {
+        if (index > usrInputs.size() || index < 1) {
             throw new InvalidIndexException();
 
         }
@@ -53,11 +53,12 @@ public class TaskList {
      * @throws InvalidIndexException
      */
     public String delete(int index) throws InvalidIndexException {
-        if (index > usrInputs.size()) {
+        if (index > usrInputs.size() || index < 1) {
             throw new InvalidIndexException();
         }
 
         Task removedTask = usrInputs.remove(index - 1);
+        this.saveToDisk();
         return ("I have removed the following task\n" + removedTask + "\n");
 
     }
@@ -69,8 +70,18 @@ public class TaskList {
      */
     public String add(Task task) {
         usrInputs.add(task);
+        this.saveToDisk();
         return ("Got it! I've added the following task \n" + task +
                 "\nNow you have " + usrInputs.size() + " tasks\n");
+    }
+
+    public String tag(int index, String tagDescription) throws InvalidIndexException{
+        if (index > usrInputs.size() || index < 1) {
+            throw new InvalidIndexException();
+        }
+        Task currentTask = this.usrInputs.get(index - 1);
+        Tag myTag = currentTask.addTag(tagDescription);
+        return "I have added this tag: '" + myTag + "' to this task:\n" + currentTask;
     }
 
     /**

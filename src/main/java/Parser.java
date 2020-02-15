@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Parser {
-    private TaskList tasks = new TaskList();
+    private static TaskList tasks = new TaskList();
     private ActionHandler actions = new ActionHandler();
     private boolean isExiting = false;
 
@@ -16,8 +16,6 @@ public class Parser {
         Action currentAction = actions.decideAction(input);
         String myResponse = currentAction.doSomething(tasks);
         this.isExiting = !currentAction.hasNextAction();
-
-        tasks.saveToDisk();
 
         return myResponse;
     }

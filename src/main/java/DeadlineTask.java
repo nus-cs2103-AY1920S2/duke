@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -27,13 +28,17 @@ public class DeadlineTask extends Task {
 
         //checks if deadline is of the form "by yyyy-MM-dd"
         Scanner sc = new Scanner(deadline);
-        if (!sc.next().equals("by")) {
-            throw new InvalidInputException("The deadline should start with [by]");
-        }
-        this.inputDeadline = sc.nextLine();
-        this.deadline = TimeHandler.dateFromString(this.inputDeadline);
-        if (this.deadline.isEmpty()) {
-            throw new InvalidInputException("Wrong date format. Should be yyyy-MM-dd");
+        try {
+            if (!sc.next().equals("by")) {
+                throw new InvalidInputException("The deadline should start with [by]");
+            }
+            this.inputDeadline = sc.nextLine();
+            this.deadline = TimeHandler.dateFromString(this.inputDeadline);
+            if (this.deadline.isEmpty()) {
+                throw new InvalidInputException("Wrong date format. Should be yyyy-MM-dd");
+            }
+        } catch(NoSuchElementException e){
+            throw new InvalidInputException("I need to know the time!");
         }
     }
 

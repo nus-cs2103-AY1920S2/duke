@@ -14,8 +14,10 @@ public class tagAction implements Action {
 
     @Override
     public String doSomething(TaskList tasks) {
-        Task currentTask = tasks.getList().get(this.index - 1);
-        Tag myTag = currentTask.addTag(tagDescription);
-        return "I have added this tag: '" + myTag + "' to this task:\n" + currentTask;
+        try {
+            return tasks.tag(index, tagDescription);
+        } catch (InvalidIndexException e){
+            return e.toString();
+        }
     }
 }

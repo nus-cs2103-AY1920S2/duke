@@ -29,12 +29,12 @@ public class TaskHandler {
             return new ToDoTask(taskDescription);
         case "deadline":
             if (taskAndTiming.length < 2) {
-                throw new InvalidInputException();
+                throw new InvalidInputException("The deadline task requires some description");
             }
             return new DeadlineTask(taskAndTiming[0], taskAndTiming[1]);
         case "event":
             if (taskAndTiming.length < 2) {
-                throw new InvalidInputException();
+                throw new InvalidInputException("Event task needs some description");
             }
             return new EventTask(taskAndTiming[0], taskAndTiming[1]);
         }
