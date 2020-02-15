@@ -3,7 +3,7 @@
 ## Description
 A personal assistant for tracking the tasks to be done.
 
-![GitHub Logo](Ui.PNG)
+![GitHub Logo](Ui.png)
 
 ## Features 
 
@@ -33,7 +33,7 @@ Expected outcome:
 `[T][N] read topics for CS2103T`\
 ` Now you have 1 task in the list.`
 
-![GitHub Logo](../src/main/resources/images/Todo.PNG)
+![GitHub Logo](../src/main/resources/images/Todo.png)
 
 ### `deadline` - Add deadline to the list
 
@@ -50,7 +50,7 @@ Expected outcome:
 `[D][N] project (by: Feb 20 2020)`\
 ` Now you have 1 task in the list.`
 
-![GitHub Logo](../src/main/resources/images/Deadline.PNG)
+![GitHub Logo](../src/main/resources/images/Deadline.png)
 
 ### `event` - Add event to the list
 
@@ -67,7 +67,7 @@ Expected outcome:
 `[E][N] party (at: Mar 12 2020 2215)`\
 ` Now you have 1 task in the list.`
 
-![GitHub Logo](../src/main/resources/images/Event.PNG)
+![GitHub Logo](../src/main/resources/images/Event.png)
 
 ### `List` - List the tasks
 
@@ -85,12 +85,12 @@ Expected outcomes:
 `2.[T][N] do readme for CS2103T iP`\
 `3.[T][Y] read topics for cs2103T`
 
-![GitHub Logo](../src/main/resources/images/List.PNG)
+![GitHub Logo](../src/main/resources/images/List.png)
 
 * When there are no task in the list:\
 `Horray! You do not have any task now!`
 
-![GitHub Logo](../src/main/resources/images/ListWithNoTask.PNG)
+![GitHub Logo](../src/main/resources/images/ListWithNoTask.png)
 
 ### `done` - Mark the task done
 
@@ -105,7 +105,7 @@ Expected outcomes:
 `Nice! I've marked this task as done:` \
 `[T][Y] do readme for CS2103T iP`
 
-![GitHub Logo](../src/main/resources/images/Done.PNG)
+![GitHub Logo](../src/main/resources/images/Done.png)
 
 ### `delete` - Remove the specific task at the index from the list
 
@@ -121,7 +121,7 @@ Expected outcomes:
 `Nice! I've removed this task:` \
 `[E][N] party (at: Mar 12 2020 2215)`
 
-![GitHub Logo](../src/main/resources/images/Delete.PNG)
+![GitHub Logo](../src/main/resources/images/Delete.png)
 
  ### `bye` - Exit the program
  
@@ -135,4 +135,4 @@ Expected outcomes:
  
  `Alright! See you next time!`
  
- ![GitHub Logo](../src/main/resources/images/Bye.PNG)
+ ![GitHub Logo](../src/main/resources/images/Bye.png)
