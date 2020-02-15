@@ -37,7 +37,7 @@ update the list in `task.txt`.
 [T][N] read topics for CS2103T`<br/>
 ` Now you have 1 task in the list.`
 
-<img src="Todo.png" alt="Screenshot for todo command" about="Screenshot for todo command" align="center">
+<img src="images/Todo.png" alt="Screenshot for todo command" about="Screenshot for todo command" align="center">
 
 ### `deadline` - Add deadline to the list
 
@@ -52,7 +52,7 @@ and update the list in `task.txt`.
 `[D][N] project (by: Feb 20 2020)`<br/>
 ` Now you have 1 task in the list.`
 
-<img src="Deadline.png" alt="Screenshot for deadline command" about="Screenshot for deadline command" align="center">
+<img src="images/Deadline.png" alt="Screenshot for deadline command" about="Screenshot for deadline command" align="center">
 
 ### `event` - Add event to the list
 
@@ -69,7 +69,7 @@ Expected outcome:
 `[E][N] party (at: Mar 12 2020 2215)`<br/>
 ` Now you have 1 task in the list.`
 
-<img src="Event.png" alt="Screenshot for event command" about="Screenshot for event command" align="center">
+<img src="images/Event.png" alt="Screenshot for event command" about="Screenshot for event command" align="center">
 
 ### `List` - List the tasks
 
@@ -87,12 +87,12 @@ Expected outcomes:
 `2.[T][N] do readme for CS2103T iP`<br/>
 `3.[T][Y] read topics for cs2103T`
 
-<img src="List.png" alt="Screenshot for list command" about="Screenshot for list command" align="center">
+<img src="images/List.png" alt="Screenshot for list command" about="Screenshot for list command" align="center">
 
 * When there are no task in the list: <br/>
 `Horray! You do not have any task now!`
 
-<img src="ListWithNoTask.png" alt="Screenshot for empty list" about="Screenshot for empty list" align="center">
+<img src="images/ListWithNoTask.png" alt="Screenshot for empty list" about="Screenshot for empty list" align="center">
 
 ### `done` - Mark the task done
 
@@ -107,7 +107,7 @@ Expected outcomes:
 `Nice! I've marked this task as done:` <br/>
 `[T][Y] do readme for CS2103T iP`
 
-<img src="Done.png" alt="Screenshot for done command" about="Screenshot for done command" align="center">
+<img src="images/Done.png" alt="Screenshot for done command" about="Screenshot for done command" align="center">
 
 ### `delete` - Remove the specific task at the index from the list
 
@@ -123,7 +123,7 @@ Expected outcomes:
 `Nice! I've removed this task:` <br/> 
 `[E][N] party (at: Mar 12 2020 2215)`
 
-<img src="Delete.png" alt="Screenshot for delete command" about="Screenshot for delete command" align="center">
+<img src="images/Delete.png" alt="Screenshot for delete command" about="Screenshot for delete command" align="center">
 
  ### `bye` - Exit the program
  
@@ -137,4 +137,4 @@ Expected outcomes:
  
  `Alright! See you next time!`
  
-<img src="Bye.png" alt="Screenshot for bye command" about="Screenshot for bye command" align="center">
+<img src="images/Bye.png" alt="Screenshot for bye command" about="Screenshot for bye command" align="center">
