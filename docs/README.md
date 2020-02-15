@@ -3,9 +3,7 @@
 ## Description
 A personal assistant for tracking the tasks to be done.
 
-<p align="center">
-<img src="Ui.png" alt="Screenshot for Duke GUI" about="Screenshot for Duke GUI">
-</p>
+<img src="Ui.png" alt="Screenshot for Duke GUI" about="Screenshot for Duke GUI" align="center">
 
 ## Features 
 
@@ -36,9 +34,7 @@ update the list in `task.txt`.
 `[T][N] read topics for CS2103T`<br/>
 ` Now you have 1 task in the list.`
 
-<p align="center">
-  <img src="Todo.png" alt="Screenshot for todo command" about="Screenshot for todo command">
-</p>
+<img src="Todo.png" alt="Screenshot for todo command" about="Screenshot for todo command" align="center">
 
 ### `deadline` - Add deadline to the list
 
@@ -53,9 +49,7 @@ and update the list in `task.txt`.
 `[D][N] project (by: Feb 20 2020)`<br/>
 ` Now you have 1 task in the list.`
 
-<p align="center">
-  <img src="Deadline.png" alt="Screenshot for deadline command" about="Screenshot for deadline command">
-</p>
+<img src="Deadline.png" alt="Screenshot for deadline command" about="Screenshot for deadline command" align="center">
 
 ### `event` - Add event to the list
 
@@ -72,9 +66,7 @@ Expected outcome:
 `[E][N] party (at: Mar 12 2020 2215)`<br/>
 ` Now you have 1 task in the list.`
 
-<p align="center">
-  <img src="Event.png" alt="Screenshot for event command" about="Screenshot for event command">
-</p>
+<img src="Event.png" alt="Screenshot for event command" about="Screenshot for event command" align="center">
 
 ### `List` - List the tasks
 
@@ -92,16 +84,12 @@ Expected outcomes:
 `2.[T][N] do readme for CS2103T iP`<br/>
 `3.[T][Y] read topics for cs2103T`
 
-<p align="center">
-  <img src="List.png" alt="Screenshot for list command" about="Screenshot for list command">
-</p>
+<img src="List.png" alt="Screenshot for list command" about="Screenshot for list command" align="center">
 
 * When there are no task in the list:<br/>
 `Horray! You do not have any task now!`
 
-<p align="center">
-  <img src="ListWithNoTask.png" alt="Screenshot for empty list" about="Screenshot for empty list">
-</p>
+<img src="ListWithNoTask.png" alt="Screenshot for empty list" about="Screenshot for empty list" align="center">
 
 ### `done` - Mark the task done
 
@@ -116,9 +104,7 @@ Expected outcomes:
 `Nice! I've marked this task as done:` <br/>
 `[T][Y] do readme for CS2103T iP`
 
-<p align="center">
-  <img src="Done.png" alt="Screenshot for done command" about="Screenshot for done command">
-</p>
+<img src="Done.png" alt="Screenshot for done command" about="Screenshot for done command" align="center">
 
 ### `delete` - Remove the specific task at the index from the list
 
@@ -134,9 +120,7 @@ Expected outcomes:
 `Nice! I've removed this task:` <br/>
 `[E][N] party (at: Mar 12 2020 2215)`
 
-<p align="center">
-  <img src="Delete.png" alt="Screenshot for delete command" about="Screenshot for delete command">
-</p>
+<img src="Delete.png" alt="Screenshot for delete command" about="Screenshot for delete command" align="center">
 
  ### `bye` - Exit the program
  
@@ -150,6 +134,4 @@ Expected outcomes:
  
  `Alright! See you next time!`
  
-<p align="center">
-  <img src="Bye.png" alt="Screenshot for bye command" about="Screenshot for bye command">
-</p>
+<img src="Bye.png" alt="Screenshot for bye command" about="Screenshot for bye command" align="center">
