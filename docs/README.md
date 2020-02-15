@@ -21,6 +21,7 @@ Duke can perform the following:
 4. **Find** a specific task using a given keyword
 5. **List** out all tasks
 6. **Undo** a command
+7. **Exit**
 
 ## Features 
 
@@ -164,7 +165,7 @@ Expected outcome:
 ![Find command success](find_task_success.png)
 
 
-### List out all tasks
+### 5. List out all tasks
 Allows you to view all tasks.
 
 ## Usage
@@ -183,7 +184,7 @@ Expected outcome:
 ![List command](list.png)
 
 
-### Undo a command
+### 6. Undo a command
 Allows you to revert actions done on your list.
 
 > You can undo commands up to the initial starting state of your list
@@ -212,3 +213,19 @@ Expected outcome:
 
 ![](undo_success_1.png) 
 ![](undo_success_2.png)
+
+
+### 7. Exit 
+Command to terminate application.
+
+## Usage
+
+### `bye` - Terminate application
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+![Terminate Application](exit.png)
