@@ -22,7 +22,7 @@ Create and add todo into a list
 To record a task without a deadline
 
 ### `Keyword` - Describe action
-Create a todo and add into the list
+Create a todo and add into the list  
 `todo (name of todo)`
 
 Example of usage: 
@@ -42,7 +42,7 @@ Create and add deadline into a list
 To record a task with a deadline
 
 ### `Keyword` - Describe action
-Create a deadline and add into the list. Date of deadline is required.
+Create a deadline and add into the list. Date of deadline is required.  
 `deadline (name of deadline) /by (date in format yyyy/MM/dd)`
 
 Example of usage: 
@@ -62,7 +62,7 @@ Create and add event into a list
 To record an event
 
 ### `Keyword` - Describe action
-Create an event and add into the list. Date and time of event is required.
+Create an event and add into the list. Date and time of event is required.  
 `event (name of event) /at (date in format yyyy/MM/dd HHmm)`
 
 Example of usage: 
