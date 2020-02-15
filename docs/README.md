@@ -100,13 +100,11 @@ based on the number of tasks in your list.
 Removing a task requires one of the following format:
 
 1. `delete [task number]`
-
 2. `rm [task number]`
 
 Example of usage: 
 
 1. `delete 1`
-
 2. `rm 1`
 
 Expected outcome:
@@ -166,37 +164,51 @@ Expected outcome:
 ![Find command success](find_task_success.png)
 
 
-### Feature 5
-Description of feature.
+### List out all tasks
+Allows you to view all tasks.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `list` or `ls` - List all tasks
 
-Describe action and its outcome.
+Displays a list of tasks.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+1. `list`
+2. `ls`
 
 Expected outcome:
 
-`outcome`
+![List command](list.png)
 
 
-### Feature 6
-Description of feature.
+### Undo a command
+Allows you to revert actions done on your list.
+
+> You can undo commands up to the initial starting state of your list
+> (When you first launch the application)
 
 ## Usage
 
-### `Keyword` - Describe action
+### `undo` - Revert state of list to previous state, if applicable
 
-Describe action and its outcome.
+No action will be performed if the list has returned to the state when the application
+was first launched.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`undo`
 
 Expected outcome:
 
-`outcome`
+> Undo is not possible
+
+`Nothing to undo...`
+
+![Undo failed](undo_fail.png)
+
+> Undo is possible
+
+![](undo_success_1.png) 
+![](undo_success_2.png)
