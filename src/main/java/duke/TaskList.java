@@ -5,13 +5,13 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- *  A duke.TaskList contains the duke.task list e.g., it has operations to add/delete tasks in the list.
+ *  A TaskList contains the task list e.g., it has operations to add/delete tasks in the list.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * construct a duke.TaskList by the list of Tasks given.
+     * construct a TaskList by the list of Tasks given.
      * @param tasks a list of Tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -21,7 +21,7 @@ public class TaskList {
     /**
      * checks whether the number input is valid.
      * @param num the number given by the user.
-     * @param index the size of the duke.TaskList.
+     * @param index the size of the TaskList.
      * @return true if num is within the correct range.
      */
     public boolean inRange(int num, int index) {
@@ -29,9 +29,9 @@ public class TaskList {
     }
 
     /**
-     * marks a specific Task in the list as done by parsing the string given as an integer.
-     * @param requestNumber a string which tells us which Task we will be dealing with.
-     * @throws IllegalArgumentException if the string is parsed into a number which is out of the range.
+     * marks a specific Task in the list as done.
+     * @param requestNumber the index of the Task we will be dealing with.
+     * @throws IllegalArgumentException if index is out of range.
      */
     public void markDone(int requestNumber) throws IllegalArgumentException {
         if (inRange(requestNumber, this.tasks.size())) {
@@ -41,7 +41,7 @@ public class TaskList {
     }
 
     /**
-     * adds a Task to the duke.TaskList.
+     * adds a Task to the TaskList.
      * @param t the Task being added.
      */
     public void addTask(Task t) {
@@ -49,9 +49,9 @@ public class TaskList {
     }
 
     /**
-     * deletes a Task in the duke.TaskList by parsing the String given as an Integer.
-     * @param requestNumber the String being parsed into an integer
-     * @throws IllegalArgumentException if the string is parsed into a number which is out of the range.
+     * deletes a Task in the TaskList.
+     * @param requestNumber the index of the Task we are dealing with.
+     * @throws IllegalArgumentException if the index is out of range.
      */
     public Task delete(int requestNumber) throws IllegalArgumentException {
         if (inRange(requestNumber, this.tasks.size())) {
@@ -61,7 +61,7 @@ public class TaskList {
     }
 
     /**
-     * finds the tasks which contain the keyword given by the user and construct a duke.TaskList by the resulting tasks.
+     * finds the tasks which contain the keyword given by the user and construct a TaskList by the resulting tasks.
      * @param keyWord a String represents the input of the user.
      */
     public TaskList find(String keyWord) {
@@ -74,6 +74,12 @@ public class TaskList {
         return new TaskList(matchingTasks);
     }
 
+    /**
+     * tags a Task in the TaskList by parsing the String given as an Integer.
+     * @param requestNumber the index of the Task we are dealing with.
+     * @param tag name of the tag.
+     * @throws IllegalArgumentException if the index is out of range.
+     */
     public void tagTask(int requestNumber, String tag) throws IllegalArgumentException {
         if (inRange(requestNumber, this.tasks.size())) {
             throw new IllegalArgumentException("OOPS!!! The number you checked for may not be valid.");
@@ -85,10 +91,19 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * gets the specific Task given the index of the Task.
+     * @param num the index of the Task.
+     * @return the Task in the TaskList of that index.
+     */
     public Task getTask(int num) {
         return getTasks().get(num - 1);
     }
 
+    /**
+     * gets the number of Tasks in this TaskList.
+     * @return the number of Tasks in this TaskList.
+     */
     public int size() {
         return this.tasks.size();
     }

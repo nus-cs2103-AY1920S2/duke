@@ -1,4 +1,8 @@
-import duke.*;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.EmptyDescriptionException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
