@@ -31,6 +31,7 @@ Example of usage:
 
 Expected outcome:
 
-`Saving now....`
-`  [T][x] bake cake for mum`
-`  Aiyo still got 1 tasks(s), what you doing sia`
+```Saving now....
+  [T][x] bake cake for mum`
+  Aiyo still got 1 tasks(s), what you doing sia
+```
