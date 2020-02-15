@@ -17,10 +17,15 @@ A personal assistant for tracking the tasks to be done.
 * You can mark the task as done.
 
 ### List Tasks
-* You can ist the tasks out to see.
+* You can list the tasks out to see.
 
 ### Storing tasks to `task.txt`
 * You can store the list of tasks into hard disk in the file `task.txt`.
+
+### Sorting tasks
+* You would not required to sort the tasks manually. <br/>
+Duke will sort the tasks according to date and time first. If it is same for both tasks, <br/> 
+Duke will sort them according to their descriptions in alphabetical order.
 
 ## Usage
 
