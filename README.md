@@ -1,4 +1,4 @@
-# Setting up
+# Setting up [![Build Status](https://travis-ci.com/amrl/duke.svg?branch=master)](https://travis-ci.com/amrl/duke)
 
 **Prerequisites**
 
