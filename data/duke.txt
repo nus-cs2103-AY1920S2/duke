@@ -1,5 +1,0 @@
-T/0/go for a run 
-E/0/read book /2020-12-12
-D/0/return book /2020-09-20
-T/0/got run 
-E/0/jog /2020-12-12

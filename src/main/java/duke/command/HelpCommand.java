@@ -5,6 +5,10 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.io.IOException;
+/**
+ * Represents the command of displaying all the available commands in duke. A <code>ByeCommand</code> object corresponds
+ * to the command of displaying the tasks.
+ */
 
 public class HelpCommand extends Command {
     /**

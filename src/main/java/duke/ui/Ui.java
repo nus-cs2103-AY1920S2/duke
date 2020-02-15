@@ -107,9 +107,14 @@ public class Ui {
      */
 
     public void printList(TaskList taskList) {
-        System.out.println("     Here are the tasks in your list:");
-        for (int i = 0; i < taskList.tasks.size(); i++) {
-            System.out.println("      " + Integer.toString(i + 1) + "." + taskList.getTask(i));
+        if(taskList.isEmpty()){
+            System.out.println("     Woohoo! You have no tasks to complete! Have a break, have a KitKat!");
+        }
+        else {
+            System.out.println("     Here are the tasks in your list:");
+            for (int i = 0; i < taskList.tasks.size(); i++) {
+                System.out.println("      " + Integer.toString(i + 1) + "." + taskList.getTask(i));
+            }
         }
     }
     /**
