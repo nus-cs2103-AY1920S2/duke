@@ -1,10 +1,10 @@
 # User Guide
 
-##What is Duke?
+## What is Duke?
 Duke is a task bot build to keep track of all your task and schedules.
 Users can add and delete their tasks and Duke will keep track of all your task for you.
 
-##Who is Yuri?
+## Who is Yuri?
 ![Image of Yuki](https://github.com/Deunitato/duke/blob/master/src/main/resources/images/meanGirl.jpeg)
 Yuri is personality build on top of Duke, the original bot. Yuri aims to ensure that you as a user understand her pain of keeping track of all your task. Even thou she is supposed to track the task for you, she will not hesitate to express her displeasure at your laziness and irresponsibility in handling your own to do list.
 
