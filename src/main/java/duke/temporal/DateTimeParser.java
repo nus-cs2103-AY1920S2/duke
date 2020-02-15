@@ -1,23 +1,34 @@
 package duke.temporal;
 
+import duke.exception.InvalidDateFormatException;
+
+import java.security.PrivilegedExceptionAction;
+
 public class DateTimeParser {
+    private static final String DATE_FORMAT_ERROR_MESSAGE = "HEY!!! The date format you entered is invalid!\n";
+
     /**
      * Take in the raw date and time and returns a date string parsable by LocalDate.
      *
      * @param rawDateTime Raw date and time string of format dd/MM/yyyy hhmm.
      * @return date string parsable by LocalDate.
+     * @throws InvalidDateFormatException if the date format is invalid.
      */
-    public static String getParsableDate(String rawDateTime) {
-        String[] separatedDateTime = rawDateTime.split(" ");
-        String[] date = separatedDateTime[0].split("/");
-        if (date[0].length() < 2) {
-            date[0] = "0" + date[0];
+    public static String getParsableDate(String rawDateTime) throws InvalidDateFormatException {
+        try {
+            String[] separatedDateTime = rawDateTime.split(" ");
+            String[] date = separatedDateTime[0].split("/");
+            if (date[0].length() < 2) {
+                date[0] = "0" + date[0];
+            }
+            if (date[1].length() < 2) {
+                date[1] = "0" + date[1];
+            }
+            String formattedDate = date[2] + "-" + date[1] + "-" + date[0];
+            return formattedDate;
+        } catch (Exception e) {
+            throw new InvalidDateFormatException(DATE_FORMAT_ERROR_MESSAGE);
         }
-        if (date[1].length() < 2) {
-            date[1] = "0" + date[1];
-        }
-        String formattedDate = date[2] + "-" + date[1] + "-" + date[0];
-        return formattedDate;
     }
 
     /**

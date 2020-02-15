@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.InvalidDateFormatException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -45,8 +47,9 @@ public class Storage {
      *
      * @return list of task from save file.
      * @throws IOException if there is issues accessing the file.
+     * @throws InvalidDateFormatException if the date format is invalid.
      */
-    public List<Task> loadTasks() throws IOException {
+    public List<Task> loadTasks() throws IOException, InvalidDateFormatException {
         //new task array list to store the loaded tasks
         List<Task> tasks = new ArrayList<>();
 

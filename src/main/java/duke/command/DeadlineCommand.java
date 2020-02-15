@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateFormatException;
 import duke.task.Deadline;
 import duke.task.Storage;
 import duke.task.Task;
@@ -51,6 +52,8 @@ public class DeadlineCommand implements Command {
             ui.addMessage(String.format("Got it. I've added this task:\n  %s\n"
                     + "Now you have %d tasks in the list.\n", newDeadlineTask, tasks.getSize()));
         } catch (InvalidCommandException e) {
+            ui.addMessage(e.getMessage());
+        } catch (InvalidDateFormatException e) {
             ui.addMessage(e.getMessage());
         } catch (IOException e) {
             ui.addMessage(SAVE_WRITE_ERROR_MESSAGE);

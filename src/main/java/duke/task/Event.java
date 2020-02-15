@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.InvalidDateFormatException;
 import duke.temporal.DateTimeParser;
 
 import java.time.LocalDate;
@@ -21,8 +22,9 @@ public class Event extends Task {
      *
      * @param description description of the task.
      * @param atDateTime date and time the event task is happening.
+     * @throws InvalidDateFormatException if the date format is invalid.
      */
-    public Event(String description, String atDateTime) {
+    public Event(String description, String atDateTime) throws InvalidDateFormatException {
         super(description, false);
         this.atDate = LocalDate.parse(DateTimeParser.getParsableDate(atDateTime));
         this.atTime = LocalTime.parse(DateTimeParser.getParsableTime(atDateTime));
@@ -34,8 +36,9 @@ public class Event extends Task {
      * @param description description of the task.
      * @param isDone done status of the task.
      * @param atDateTime date and time the event task is happening.
+     * @throws InvalidDateFormatException if the date format is invalid.
      */
-    public Event(String description, boolean isDone, String atDateTime) {
+    public Event(String description, boolean isDone, String atDateTime) throws InvalidDateFormatException {
         super(description, isDone);
         this.atDate = LocalDate.parse(DateTimeParser.getParsableDate(atDateTime));
         this.atTime = LocalTime.parse(DateTimeParser.getParsableTime(atDateTime));

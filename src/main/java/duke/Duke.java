@@ -5,6 +5,7 @@ import duke.command.ExitCommand;
 import duke.command.Parser;
 import duke.command.ReminderCommand;
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateFormatException;
 import duke.task.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -33,12 +34,14 @@ public class Duke {
         String workingDir = System.getProperty("user.dir");
         Path savePath = Paths.get(workingDir, "data", "duke.txt");
         storage = new Storage(savePath);
+        ui = new Ui();
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (IOException e) {
-            System.err.println(e);
+            System.err.println(" Sorry, I could not read the save file.\n");
+        } catch (InvalidDateFormatException e) {
+            System.err.println(e.getMessage() + "(Save file date formatting error)\n");
         }
-        ui = new Ui();
     }
 
     /**
@@ -46,12 +49,6 @@ public class Duke {
      * Runs the program until the exit command is called.
      */
     public void runUntilExit() {
-        try {
-            tasks = new TaskList(storage.loadTasks());
-        } catch (IOException e) {
-            ui.addMessage(" Sorry, I could not read the save file.\n");
-            ui.printBufferMessage();
-        }
         ui.printMessage(WELCOME_MESSAGE);
         ui.printMessage(getReminder());
         boolean isRunning = true;

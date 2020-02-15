@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.InvalidDateFormatException;
 import duke.temporal.DateTimeParser;
 
 import java.time.LocalDate;
@@ -21,8 +22,9 @@ public class Deadline extends Task {
      *
      * @param description description of the task.
      * @param byDateTime date and time the deadline task is due.
+     * @throws InvalidDateFormatException if the date format is invalid.
      */
-    public Deadline(String description, String byDateTime) {
+    public Deadline(String description, String byDateTime) throws InvalidDateFormatException {
         super(description, false);
         this.byDate = LocalDate.parse(DateTimeParser.getParsableDate(byDateTime));
         this.byTime = LocalTime.parse(DateTimeParser.getParsableTime(byDateTime));
@@ -34,8 +36,9 @@ public class Deadline extends Task {
      * @param description description of the task.
      * @param isDone done status of the task.
      * @param byDateTime date and time the deadline task is due.
+     * @throws InvalidDateFormatException if the date format is invalid.
      */
-    public Deadline(String description, boolean isDone, String byDateTime) {
+    public Deadline(String description, boolean isDone, String byDateTime) throws InvalidDateFormatException {
         super(description, isDone);
         this.byDate = LocalDate.parse(DateTimeParser.getParsableDate(byDateTime));
         this.byTime = LocalTime.parse(DateTimeParser.getParsableTime(byDateTime));
