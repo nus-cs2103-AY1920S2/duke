@@ -4,12 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import main.Launcher;
 
 import java.io.IOException;
@@ -40,6 +46,9 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        Circle clip = new Circle(40, 40, 35);
+        displayPicture.setClip(clip);
     }
 
     /**
@@ -51,21 +60,26 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
 
-        return new DialogBox(text, img);
+        DialogBox userDialogBox = new DialogBox(text, img);
+        userDialogBox.setBackground(new Background(new BackgroundFill(Color.rgb(204, 229, 255),
+                CornerRadii.EMPTY, Insets.EMPTY)));
+        return userDialogBox;
     }
 
     /**
-     * Creates a new dialog box for main.Duke's side with the specified text and image.
+     * Creates a new dialog box for Aelita's side with the specified text and image.
      *
      * @param text the text of the dialog box.
-     * @param img  the image associated with main.Duke.
-     * @return a new main.Duke dialog box with the specified text and image.
+     * @param img  the image associated with Aelita.
+     * @return a new Aelita dialog box with the specified text and image.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getAelitaDialog(String text, Image img) {
 
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        DialogBox aelitaDialogBox = new DialogBox(text, img);
+        aelitaDialogBox.setBackground(new Background(new BackgroundFill(Color.WHITE,
+                CornerRadii.EMPTY, Insets.EMPTY)));
+        aelitaDialogBox.flip();
+        return aelitaDialogBox;
     }
 
     /**

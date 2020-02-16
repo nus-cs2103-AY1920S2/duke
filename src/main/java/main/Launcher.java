@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Launcher extends Application {
 
     private TaskList taskList = new TaskList();
-    private Duke duke = new Duke(taskList);
+    private Aelita aelita = new Aelita(taskList);
 
     public static void main(String[] args) {
 
@@ -36,7 +36,8 @@ public class Launcher extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<Ui>getController().setDuke(duke);
+            stage.setTitle("Aelita");
+            fxmlLoader.<Ui>getController().setAelita(aelita);
             stage.show();
 
         } catch (IOException e) {
