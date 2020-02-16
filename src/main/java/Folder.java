@@ -19,6 +19,12 @@ public class Folder {
         return listTasks.get(i-1).done();
     }
 
+    public String finishAll() {
+        String output = "Finished all items in list";
+        listTasks.stream().forEach(x -> x.done());
+        return output;
+    }
+
     public String deleteTasks(int i) {
         return listTasks.remove(i-1).removed();
     }

@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ChatBox {
@@ -66,9 +68,7 @@ public class ChatBox {
                 replyMsg = folder.show();
                 break;
             case "done":
-                int i = Integer.parseInt(msg[1]);
-                assert i >= 0 : "Index out of bounds";
-                replyMsg = folder.finishTasks(i);
+                replyMsg = finishTasks(msg);
                 save();
                 break;
             case "delete":
@@ -87,13 +87,16 @@ public class ChatBox {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             String er = "OOPS!! The description of a " + key + " cannot be empty";
-            System.out.println(new DukeException(er));
+            return er;
+            // System.out.println(new DukeException(er));
         } catch (IllegalArgumentException e) {
             String er = "OOPS!!! Dont understand what you are saying...";
-            System.out.println(new DukeException(er));
+            return er;
+            //System.out.println(new DukeException(er));
         } catch (IOException e) {
             String er = "OOPS!!! No such directory to save the file...";
-            System.out.println(new DukeException(er));
+            return er;
+            //System.out.println(new DukeException(er));
         }
         return replyMsg;
     }
@@ -165,7 +168,7 @@ public class ChatBox {
         }
 
         for (String x : msg) {
-            boolean isNumber = true;
+            boolean isNumber;
             isNumber = x.matches("\\d+(\\.\\d+)?");
             if (isNumber) {
                 int number = Integer.parseInt(x);
@@ -175,5 +178,27 @@ public class ChatBox {
         }
 
         return output.equals("") ? "Delete Nth" : output;
+    }
+
+    private String finishTasks(String ... msg) {
+        String output = "";
+        int i = 0;
+
+        if (msg[1].equals("all")) {
+            output = folder.finishAll();
+            return output;
+        }
+
+        for (String x : msg) {
+            boolean isNumber;
+            isNumber = x.matches("\\d+(\\.\\d+)?");
+            if (isNumber) {
+                int number = Integer.parseInt(x);
+                output = output + folder.finishTasks(number - i) + "\n";
+                i++;
+            }
+        }
+
+        return output.equals("") ? "Finish Nth" : output;
     }
 }

@@ -6,7 +6,7 @@ package packagedirectory.test;
  */
 
 public class Message {
-    public static String lines = "--------------------------------------------------\n";
+    public static String lines = "\n";
     private String message;
 
     public Message(){
