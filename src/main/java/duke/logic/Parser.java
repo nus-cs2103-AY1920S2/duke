@@ -129,6 +129,7 @@ public class Parser {
                 // Editing Deadline or Event (expected, but not necessarily)
                 if (regex != null) {
                     String[] descElements = idxDescElements[1].split(regex, 2);
+                    Parser.checkArr(command, true, descElements);
                     LocalDate date = LocalDate.parse(descElements[1].trim());
                     // Only edit the time
                     if (descElements[0].trim().isEmpty()) {

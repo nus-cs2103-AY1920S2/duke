@@ -19,6 +19,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private boolean canLoad = true;
+    private String errorMsg; // For debug
 
     /**
      * Creates a Duke object and initialises Ui, Storage and TaskList.
@@ -30,6 +31,7 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             canLoad = false;
+            errorMsg = e.getMessage();
             tasks = new TaskList();
         }
     }
@@ -42,7 +44,8 @@ public class Duke {
         if (canLoad) {
             return ui.getWelcome();
         } else {
-            return ui.getLoadingError();
+            return ui.getError(errorMsg);
+            //return ui.getLoadingError();
         }
     }
 

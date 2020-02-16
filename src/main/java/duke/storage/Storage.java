@@ -64,11 +64,17 @@ public class Storage {
     public ArrayList<Task> load() throws LoadingException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(this.filePath);
+        f.getParentFile().mkdirs();
         Scanner s;
         try {
             s = new Scanner(f);
         } catch (FileNotFoundException e) {
-            throw new LoadingException();
+            try {
+                f.createNewFile();
+                s = new Scanner(f);
+            } catch (IOException e1) {
+                throw new LoadingException(f.getAbsolutePath());
+            }
         }
         while (s.hasNextLine()) {
             String currLine = s.nextLine();
