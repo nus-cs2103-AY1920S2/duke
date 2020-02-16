@@ -1,7 +1,7 @@
 # User Guide
 Spongebob Organiser is an organiser which helps you manage your tasks
 
-![OnStart](Ui.png)
+![OnStart](./Ui.png)
 
 ## Tasks 
 There are 3 types of tasks that Spongebob can help you track.
