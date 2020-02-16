@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Hello! I'm Thanos. I will snap my fingers?", dukeImage)
+                DialogBox.getDukeDialog("Hello! I'm Thanos. Should I snap my fingers?", dukeImage)
         );
     }
 
