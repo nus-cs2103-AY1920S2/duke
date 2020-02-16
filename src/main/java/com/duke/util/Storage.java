@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -40,10 +43,16 @@ public class Storage {
      *         and their relevant status.
      * @throws FileNotFoundException If the file path provided is invalid.
      */
-    public ArrayList<Task> loadTaskList() throws FileNotFoundException {
+    public ArrayList<Task> loadTaskList() throws IOException {
         File f = new File(filePath);
-        Scanner s = new Scanner(f);
+        if (!f.exists()) {
+            Path p = Paths.get(filePath);
+            Path p1 = p.getParent();
+            Files.createDirectories(p1);
+            Files.createFile(Paths.get(filePath));
+        }
 
+        Scanner s = new Scanner(f);
         if (!s.hasNext()) {
             return new ArrayList<>();
         } else {

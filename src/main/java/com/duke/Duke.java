@@ -9,6 +9,7 @@ import com.duke.util.Storage;
 import com.duke.util.Ui;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Driver class of the Duke program. To start a new session,
@@ -32,7 +33,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.loadTaskList());
             tags = storage.loadTags(tasks);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
