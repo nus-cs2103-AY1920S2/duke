@@ -79,7 +79,7 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
 
 - `list` <br>
     Lists all your tasks.
-    Example: `list` returns you all the tasks in your listOfTasks <br>
+    Example: `list` returns you all the tasks in your listOfTask <br>
     Expected Output: ![](list_success_image.png)
                      Picture: list Success Image
 
