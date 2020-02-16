@@ -225,8 +225,9 @@ public class TaskList {
         //remember to add check for already completed task
         String keyword = command.substring(5, command.length()).trim();
 
-        String finalStr = "Here are the matching tags in your list:\n";
+        String finalStr = "";
         if (keyword.substring(0,1).equals("#")) {
+            finalStr = "Here are the matching tags in your list:\n";
             //tag
             int counter = 1;
             for (int i = 0; i < storingList.size(); i++) {
@@ -249,6 +250,7 @@ public class TaskList {
                 }
             }
         } else {
+            finalStr = "Here are the matching keywords in your list:\n";
             int counter = 1;
             for (int i = 0; i < storingList.size(); i++) {
                 Task task = storingList.get(i);

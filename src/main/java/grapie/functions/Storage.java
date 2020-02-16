@@ -29,15 +29,13 @@ public class Storage {
         // deals with loading tasks from the file and saving tasks in the dukeStorage.txt file.
 
         //OS independent
-//        String home = System.getProperty("user.home");
-//
-//        // inserts correct file path separator on *nix and Windows
-//        // works on *nix
-//        // works on Windows
-//        java.nio.file.Path path = java.nio.file.Paths.get(home, "my", "app", "dir")
-//        boolean directoryExists = java.nio.file.Files.exists(path);
-        //
+        //String home = System.getProperty("user.home");
 
+        // inserts correct file path separator on *nix and Windows
+        // works on *nix
+        // works on Windows
+        //java.nio.file.Path path = java.nio.file.Paths.get(home, "data", "dukeStorage.txt");
+        //boolean directoryExists = java.nio.file.Files.exists(path);
 
         this.filePath = filePath;
         File file = new File(filePath);
