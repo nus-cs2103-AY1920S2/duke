@@ -13,58 +13,58 @@ class Parser {
     private static final int NUMBER_OF_DEADLINE_COMMAND_ARGUMENTS = 2;
     private static final int NUMBER_OF_EVENT_COMMAND_ARGUMENTS = 2;
 
-    Command parseCommand(String input) throws InvalidCommandException {
+    Duke.Command parseCommand(String input) throws InvalidCommandException {
         assert input != null;
-        Command command;
+        Duke.Command command;
         String[] parsedInput = input.strip().split("\\s+", MAX_NUMBER_OF_COMMAND_SECTIONS);
         switch (parsedInput[COMMAND_POSITION]) {
         case "todo":
             if (parsedInput.length < MAX_NUMBER_OF_COMMAND_SECTIONS) {
                 throw new InvalidCommandException("Oops! The description of a todo cannot be empty.");
             }
-            command = Command.TODO;
+            command = Duke.Command.TODO;
             break;
         case "deadline":
             if (parsedInput.length < MAX_NUMBER_OF_COMMAND_SECTIONS) {
                 throw new InvalidCommandException("Oops! The description of a deadline cannot be empty.");
             }
-            command = Command.DEADLINE;
+            command = Duke.Command.DEADLINE;
             break;
         case "event":
             if (parsedInput.length < MAX_NUMBER_OF_COMMAND_SECTIONS) {
                 throw new InvalidCommandException("Oops! The description of an event cannot be empty.");
             }
-            command = Command.EVENT;
+            command = Duke.Command.EVENT;
             break;
         case "list":
             if (parsedInput.length > MIN_NUMBER_OF_COMMAND_SECTIONS) {
                 throw new InvalidCommandException("Hmm... I don't understand. Try \"list\" instead.");
             }
-            command = Command.LIST;
+            command = Duke.Command.LIST;
             break;
         case "find":
             if (parsedInput.length < MAX_NUMBER_OF_COMMAND_SECTIONS) {
                 throw new InvalidCommandException("Hmm... I'm not sure what you're looking for.");
             }
-            command = Command.FIND;
+            command = Duke.Command.FIND;
             break;
         case "done":
             if (parsedInput.length < MAX_NUMBER_OF_COMMAND_SECTIONS) {
                 throw new InvalidCommandException("Oh no! The task number is missing.");
             }
-            command = Command.DONE;
+            command = Duke.Command.DONE;
             break;
         case "delete":
             if (parsedInput.length < MAX_NUMBER_OF_COMMAND_SECTIONS) {
                 throw new InvalidCommandException("Oh no! The task number is missing.");
             }
-            command = Command.DELETE;
+            command = Duke.Command.DELETE;
             break;
         case "bye":
             if (parsedInput.length > MIN_NUMBER_OF_COMMAND_SECTIONS) {
                 throw new InvalidCommandException("Hmm... I don't understand. Try \"bye\" instead.");
             }
-            command = Command.BYE;
+            command = Duke.Command.BYE;
             break;
         default:
             throw new InvalidCommandException("Hmm... I don't know what that means :(");
