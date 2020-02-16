@@ -1,0 +1,3 @@
+dukeClasses.ToDo|0|borrow book|1
+dukeClasses.Deadline|0|read book by |2020-02-14|0
+dukeClasses.Event|0|go library |Friday|0

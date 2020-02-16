@@ -1,8 +1,8 @@
-# JavaFX Tutorial Part 2 - Creating a GUI for Duke
+# JavaFX Tutorial Part 2 - Creating a GUI for dukeclasses.Duke
 
-In this tutorial, we will be creating a GUI for Duke from scratch based on the following mockup.
+In this tutorial, we will be creating a GUI for dukeclasses.Duke from scratch based on the following mockup.
 
-![Mockup for Duke](assets/DukeMockup.png)
+![Mockup for dukeclasses.Duke](assets/DukeMockup.png)
 
 ## JavaFX controls
 
@@ -34,7 +34,7 @@ But how do we get the exact layout we want in the UI? JavaFX provides that funct
 
 One way to obtain the layout in the mockup is as follows. 
 
-![Duke's layout](assets/DukeSceneGraph.png) 
+![dukeclasses.Duke's layout](assets/DukeSceneGraph.png) 
 
 To get that layout, we create a new `AnchorPane` and add our controls to it. Similarly, we create a new `VBox` to hold the contents of the `ScrollPane`. The code should look something like this:
 
@@ -88,7 +88,7 @@ public class Duke extends Application {
 
 Run the application and you should see something like this:
 
-![Duke's raw layout](assets/RawLayout.png)
+![dukeclasses.Duke's raw layout](assets/RawLayout.png)
  
 That is not what we were expecting, what did we forget to do?
 
@@ -100,7 +100,7 @@ Add the following code to the bottom of the `start` method. You'll have to add `
 
 ```java
     @Override
-    public void start(Stage stage) {
+   public void start(Stage stage) {
         //Step 1. Formatting the window to look as expected.
          
         //...
@@ -141,7 +141,7 @@ Add the following code to the bottom of the `start` method. You'll have to add `
 
 Run the application again. It should now look like this:
 
-![Duke's Final layout](assets/FinalLayout.png)
+![dukeclasses.Duke's Final layout](assets/FinalLayout.png)
 
 ## Exercises
 
