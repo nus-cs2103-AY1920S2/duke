@@ -31,7 +31,6 @@ public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -43,7 +42,6 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
-        ui = new Ui();
         String filePath = "data/tasks.txt";
         storage = new Storage(filePath);
         try {
