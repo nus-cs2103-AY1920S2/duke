@@ -37,10 +37,11 @@ public class Duke {
      * @return A relevant response to the user input.
      */
     public String run(String instruction) {
-        String result = "";
+        String result;
         try {
             Command c = Parser.parse(instruction);
             result = c.execute(tasks, ui);
+
             assert !result.equals("") : "No result was returned.";
         } catch (DukeException e) {
             result = ui.showError(e);
