@@ -85,7 +85,7 @@ Now you have 1 task in the list.
 
 <img src="images/Event.png" alt="Screenshot for event command" about="Screenshot for event command" align="center">
 
-### `List` - List the tasks {#list}
+### `List` - List the tasks
 
 Tell Duke to list all of the tasks out.
 
@@ -146,7 +146,7 @@ Nice! I've removed this task:
 
 <img src="images/Delete.png" alt="Screenshot for delete command" about="Screenshot for delete command" align="center">
 
-### `bye` - Exit the program 
+### `bye` - Exit the program
  
  Say goodbye to Duke and exit the program.
  
