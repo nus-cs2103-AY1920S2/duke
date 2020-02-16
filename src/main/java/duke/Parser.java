@@ -49,11 +49,12 @@ public class Parser {
 
         case "done":
             String[] doneTokens = instruction.split(" ");
+            int completedTaskNumber;
+
             if (doneTokens.length != 2) {
                 throw new InvalidDoneException();
             }
 
-            int completedTaskNumber;
             try {
                 completedTaskNumber = Integer.parseInt(doneTokens[1]);
             } catch (NumberFormatException ne) {
@@ -63,11 +64,12 @@ public class Parser {
 
         case "delete":
             String[] delTokens = instruction.split(" ");
+            int deletedTaskNumber;
+
             if (delTokens.length != 2) {
                 throw new InvalidDeleteException();
             }
 
-            int deletedTaskNumber;
             try {
                 deletedTaskNumber = Integer.parseInt(delTokens[1]);
             } catch (NumberFormatException ne) {
@@ -89,6 +91,7 @@ public class Parser {
 
         case "todo":
             String taskName;
+
             try {
                 taskName = instruction.trim().split("todo ")[1];
             } catch (Exception e) {
@@ -100,6 +103,7 @@ public class Parser {
             String[] eventTokens = instruction.split("/at ");
             String timePeriod;
             String eventName;
+
             try {
                 timePeriod = eventTokens[1];
                 eventName = eventTokens[0].trim().split("event ")[1];
@@ -134,6 +138,7 @@ public class Parser {
         case "find":
             String[] findTokens = instruction.trim().split(" ");
             String keyWord;
+
             try {
                 keyWord = findTokens[1];
             } catch (Exception e) {
