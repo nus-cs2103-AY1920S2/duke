@@ -24,8 +24,9 @@ public class TaskList {
         return this.taskArrayList.get(index-1); //-1 because indexing for user starts from 1, but 0 for arraylist.
     }
 
-    public void addTask(String type, String description){
+    public String addTask(String type, String description){
         Task task = new Task("sample");
+        String output = "";
         if(type.equals("event")) {
             //handle event
             try {
@@ -48,37 +49,43 @@ public class TaskList {
             task = new ToDo(description);
             taskArrayList.add(task);
         }
-        Ui.promptUser("Got it. I've added this task:");
-        Ui.promptUser(task.toString());
-        Ui.promptUser("Now you have " + taskArrayList.size() + " tasks in your list.");
+        output += "Got it. I've added this task:" + "\n";
+        output += task.toString() + "\n";
+        output += "Now you have " + taskArrayList.size() + " tasks in your list." + "\n";
+        return output;
     }
 
     public ArrayList<Task> getTaskList() {
         return this.taskArrayList;
     }
-    /*
+
+
+    /**
     Marks a task as done and informs the user about the same
      */
-    public void markDone(int index) {
+    public String markDone(int index) {
         if (index > taskArrayList.size()) {
-            Ui.promptUser("There is no such task in the list. Please try again...");
+            return "There is no such task in the list. Please try again...";
         } else {
-            Ui.promptUser("Nice! I've marked this task as done: ");
+            String output = "Nice! I've marked this task as done: " + "\n";
             taskArrayList.get(index-1).markAsDone();
-            Ui.promptUser(taskArrayList.get(index-1).toString());
+            output += taskArrayList.get(index-1).toString() + "\n";
+            return output;
         }
     }
 
-    /*
+    /**
     Lists all the currently stored tasks on the system output
      */
-    public void printList() {
+    public String printList() {
         int n = taskArrayList.size();
-        Ui.promptUser("Here are the tasks in your list:");
+        String output = "";
+        output += "Here are the tasks in your list:";
         for(int i = 0; i < n; i++) {
             String stringNew = String.format("%d. %s", i + 1, this.taskArrayList.get(i));
-            Ui.promptUser(stringNew);
+            output += stringNew + "\n";
         }
+        return output;
     }
 
 
@@ -86,7 +93,7 @@ public class TaskList {
      * Finds all matching cases of a string and prints those cases to console
      * @param input
      */
-    public void find(String input) {
+    public String find(String input) {
         int n = taskArrayList.size();
         String concat = "";
         int matches = 1;
@@ -98,26 +105,27 @@ public class TaskList {
             }
         }
         if (matches > 1) {
-            Ui.promptUser("Here are the matching tasks in your list:");
-            Ui.promptUser(concat);
+            concat = "Here are the matching tasks in your list:" + concat;
         } else {
-            Ui.promptUser("No tasks with given search keyword found. Please try again");
+            concat = "No tasks with given search keyword found. Please try again";
         }
+        return concat;
     }
 
 
-    /*
+    /**
     Deletes the task at specified index if it exists. Otherwise displays error message to user
      */
-    public void deleteTaskByIndex(int index) {
+    public String deleteTaskByIndex(int index) {
         if (index > taskArrayList.size()) {
-            Ui.promptUser("There is no such task in the list. Please try again...");
+            return "There is no such task in the list. Please try again...";
         } else {
             Task deleted = taskArrayList.get(index - 1);
             this.taskArrayList.remove(index - 1);
-            Ui.promptUser("Noted. I've removed this task:");
-            Ui.promptUser(deleted.toString());
-            Ui.promptUser(String.format("Now you have %d tasks in your list", taskArrayList.size()));
+            String output = "Noted. I've removed this task:" + "\n";
+            output += deleted.toString() + "\n";
+            output += String.format("Now you have %d tasks in your list", taskArrayList.size()) + "\n";
+            return output;
         }
     }
 

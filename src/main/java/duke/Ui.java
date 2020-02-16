@@ -16,8 +16,9 @@ public class Ui {
         promptUser("What can I do for you?");
     }
 
-    public void byeMessage(){
-        promptUser("Bye. Hope to see you again soon!");
+    public String byeMessage(){
+
+        return "Bye. Hope to see you again soon!";
     }
 
     public void timeErrorMessage() {
