@@ -1,5 +1,7 @@
-T | 0 | read book
-T | 0 | make script
-E | 0 | thingy | 10:00 | 2020-02-13
-E | 0 | bio lab | 16:00 | 2020-02-13
-D | 0 | submission | 18:00 | 2020-02-12
+T | 1 | read book
+T | 1 | read content
+D | 0 | submit thing | 14:00 | 2020-02-18
+E | 0 | meeting | 14:00 | 2020-02-16
+T | 0 | nap
+T | 0 | ah
+T | 0 | blah

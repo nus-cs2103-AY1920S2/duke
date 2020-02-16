@@ -58,7 +58,7 @@ public class Parser {
 
         } else {
             // invalid command
-            throw new DukeException("    Oh no! I'm sorry, I do not understand that, please try again!");
+            throw new DukeException("Oh no! I'm sorry, I do not understand that, please try again!");
         }
 
     }

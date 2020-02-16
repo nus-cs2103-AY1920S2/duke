@@ -40,7 +40,12 @@ public class AddCommand extends Command {
         tasks.addTask(task);
         storage.save(tasks);
 
-        String resp = "Alright! I have added: \n" + task;
+        int taskNum = tasks.getSize();
+        String count = "You now have " + taskNum + " tasks in your list!";
+
+        String resp = "Alright! I have added: \n" + task + "\n" + count;
+
+
 
         return resp;
     }

@@ -36,7 +36,7 @@ public class ListCommand extends Command {
         String resp = "Here are your tasks: \n";
 
         for (int i = 1; i <= list.size(); i++) {
-            resp = resp + "    " + i + ". " + list.get(i - 1) + "\n";
+            resp = resp +  i + ". " + list.get(i - 1) + "\n";
         }
 
         return resp;
