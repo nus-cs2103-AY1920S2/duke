@@ -96,8 +96,10 @@ public class Parser {
             if (index < 0 || index > taskList.size() - 1) {
                 throw new DukeException("delete");
             } else {
+                int size = taskList.size();
                 Task t = taskList.get(index);
                 taskList.deleteTask(index);
+                assert taskList.size() == size-1 : "Task failed to be deleted!";
                 this.storage.save();
                 this.ui.printDeletedTask(t);
             }
