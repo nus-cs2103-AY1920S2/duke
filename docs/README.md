@@ -26,7 +26,7 @@ Example:
 
 Expected outcome:  
 `Got it. I've added this task:`  
-&#8203;`    [T][✗] read book`  
+&#8203;`  [T][✗] read book`  
 `There is now 1 task in the list.`
 
 #### 2.1.2 `deadline` - Adds a deadline task
@@ -39,7 +39,7 @@ Example:
 
 Expected outcome:  
 `Got it. I've added this task:`  
-&#8203;`    [D][✗] do homework (by: 30 Jun 2020)`  
+&#8203;`  [D][✗] do homework (by: 30 Jun 2020)`  
 `There are now 2 tasks in the list.`
 
 #### 2.1.3 `event` - Adds an event task
@@ -52,7 +52,7 @@ Example:
 
 Expected outcome:  
 `Got it. I've added this task:`  
-&#8203;`    [E][✗] project meeting (by: Monday 3pm)`  
+&#8203;`  [E][✗] project meeting (by: Monday 3pm)`  
 `There are now 3 tasks in the list.`
 
 ### 2.2 Listing tasks
@@ -63,7 +63,7 @@ Usage:
 Example:  
 `list`
 
-Expected outcome: 
+Expected outcome:  
 
 ### 2.3 Finding tasks
 
@@ -85,7 +85,7 @@ Example:
 
 Expected outcome:  
 `Nice! I've marked this task as done:`  
-&#8203;`    [E][✗] project meeting (by: Monday 3pm)`
+&#8203;`  [E][✗] project meeting (by: Monday 3pm)`
 
 ### 2.5 Deleting a task
 
@@ -97,7 +97,7 @@ Example:
 
 Expected outcome:  
 `Noted. I've removed this task:`  
-&#8203;`    [T][✗] read book`
+&#8203;`  [T][✗] read book`
 
 ## Usage
 
