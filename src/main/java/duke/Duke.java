@@ -1,12 +1,16 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Todo;
+import duke.task.CannotSnoozeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAmount;
 
 public class Duke {
     private Storage storage;
@@ -19,8 +23,9 @@ public class Duke {
         TODO {
             @Override
             String execute(Duke duke, String input) throws StorageException {
-                String info = duke.parser.parseTaskInfo(input);
-                Todo todo = new Todo(info);
+                String arguments = duke.parser.parseArguments(input);
+                String description = duke.parser.parseTodoDescription(arguments);
+                Todo todo = new Todo(description);
                 duke.tasks.add(todo);
                 duke.storage.save(duke.tasks);
                 return duke.ui.outputTask(todo, duke.tasks.size());
@@ -30,10 +35,11 @@ public class Duke {
         DEADLINE {
             @Override
             String execute(Duke duke, String input) throws InvalidCommandException, StorageException {
-                String info = duke.parser.parseTaskInfo(input);
-                String description = duke.parser.parseDeadlineDescription(info);
-                LocalDate date = duke.parser.parseDeadlineDate(info);
-                Deadline deadline = new Deadline(description, date);
+                String arguments = duke.parser.parseArguments(input);
+                String description = duke.parser.parseDeadlineDescription(arguments);
+                LocalDate date = duke.parser.parseDeadlineDate(arguments);
+                LocalTime time = duke.parser.parseDeadlineTime(arguments);
+                Deadline deadline = new Deadline(description, LocalDateTime.of(date, time));
                 duke.tasks.add(deadline);
                 duke.storage.save(duke.tasks);
                 return duke.ui.outputTask(deadline, duke.tasks.size());
@@ -43,9 +49,9 @@ public class Duke {
         EVENT {
             @Override
             String execute(Duke duke, String input) throws InvalidCommandException, StorageException {
-                String info = duke.parser.parseTaskInfo(input);
-                String description = duke.parser.parseEventDescription(info);
-                String time = duke.parser.parseEventTime(info);
+                String arguments = duke.parser.parseArguments(input);
+                String description = duke.parser.parseEventDescription(arguments);
+                String time = duke.parser.parseEventTime(arguments);
                 Event event = new Event(description, time);
                 duke.tasks.add(event);
                 duke.storage.save(duke.tasks);
@@ -67,7 +73,8 @@ public class Duke {
         FIND {
             @Override
             String execute(Duke duke, String input) {
-                String searchTerm = duke.parser.parseSearchTerm(input);
+                String arguments = duke.parser.parseArguments(input);
+                String searchTerm = duke.parser.parseFindSearchTerm(arguments);
                 TaskList matchingTasks = duke.tasks.find(searchTerm);
                 if (matchingTasks.isEmpty()) {
                     return "I didn't manage to find any matching tasks in your list :(";
@@ -77,10 +84,23 @@ public class Duke {
             }
         },
 
+        SNOOZE {
+            @Override
+            String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException, CannotSnoozeException, StorageException {
+                String arguments = duke.parser.parseArguments(input);
+                int taskNumber = duke.parser.parseSnoozeTaskNumber(arguments);
+                TemporalAmount duration = duke.parser.parseSnoozeDuration(arguments);
+                Task snoozedTask = duke.tasks.snooze(taskNumber, duration);
+                duke.storage.save(duke.tasks);
+                return "Noted. Here is the updated task:\n" + snoozedTask;
+            }
+        },
+
         DONE {
             @Override
             String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException, StorageException {
-                int taskNumber = duke.parser.parseTaskNumber(input);
+                String arguments = duke.parser.parseArguments(input);
+                int taskNumber = duke.parser.parseDoneTaskNumber(arguments);
                 Task completedTask = duke.tasks.complete(taskNumber);
                 duke.storage.save(duke.tasks);
                 return "Nice! I've marked this task as done:\n  " + completedTask;
@@ -90,7 +110,8 @@ public class Duke {
         DELETE {
             @Override
             String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException, StorageException {
-                int taskNumber = duke.parser.parseTaskNumber(input);
+                String arguments = duke.parser.parseArguments(input);
+                int taskNumber = duke.parser.parseDeleteTaskNumber(arguments);
                 Task deletedTask = duke.tasks.delete(taskNumber);
                 duke.storage.save(duke.tasks);
                 return "Noted. I've removed this task:\n  " + deletedTask;

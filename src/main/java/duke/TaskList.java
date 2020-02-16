@@ -1,7 +1,10 @@
 package duke;
 
+import duke.task.CannotSnoozeException;
+import duke.task.Snoozable;
 import duke.task.Task;
 
+import java.time.temporal.TemporalAmount;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,6 +23,19 @@ class TaskList {
         tasks.add(task);
         assert !tasks.isEmpty();
         return this;
+    }
+
+    Task snooze(int taskNumber, TemporalAmount duration) throws TaskNumberOutOfBoundsException, CannotSnoozeException {
+        try {
+            int taskIndex = taskNumber - 1;
+            Task snoozedTask = (Task) ((Snoozable) tasks.get(taskIndex)).snooze(duration);
+            tasks.set(taskIndex, snoozedTask);
+            return snoozedTask;
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskNumberOutOfBoundsException(taskNumber);
+        } catch (ClassCastException e) {
+            throw new CannotSnoozeException("Oops! This task cannot be snoozed.");
+        }
     }
 
     Task complete(int taskNumber) throws TaskNumberOutOfBoundsException {

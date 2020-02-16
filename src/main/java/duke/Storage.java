@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
@@ -19,6 +19,7 @@ class Storage {
     private static final int COMPLETION_STATUS_POSITION = 4;
     private static final int INFO_START_POSITION = 7;
     private static final int DESCRIPTION_POSITION = 0;
+    private static final int DATETIME_POSITION = 1;
     private static final int TIME_POSITION = 1;
 
     private Path file;
@@ -50,8 +51,8 @@ class Storage {
                                 case 'D':
                                     info = x.substring(0, x.length() - 1).split(" \\(by: ");
                                     task = new Deadline(info[DESCRIPTION_POSITION],
-                                            LocalDate.parse(info[TIME_POSITION],
-                                                DateTimeFormatter.ofPattern("d MMM yyyy")));
+                                            LocalDateTime.parse(info[DATETIME_POSITION],
+                                                DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm")));
                                     break;
                                 case 'E':
                                     info = x.substring(0, x.length() - 1).split(" \\(at: ");
