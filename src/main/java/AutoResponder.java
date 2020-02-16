@@ -91,7 +91,7 @@ public class AutoResponder {
         } else if (PATTERN_TAG.matcher(input).find()) {
             Matcher m = PATTERN_TAG.matcher(input);
             m.find();
-            return this.tagTask(Integer.parseInt(m.group(1)), input);
+            return this.tagTask(Integer.parseInt(m.group(1)) - 1, input);
         } else if (PATTERN_TAG_CLEAR.matcher(input).find()) {
             Matcher m = PATTERN_TAG_CLEAR.matcher(input);
             m.find();
@@ -102,6 +102,10 @@ public class AutoResponder {
     }
 
     private String processList() {
+        toPrint.append("Here is your list:\n");
+        if (taskList.size() == 0) {
+            toPrint.append("\n There are no items in your list...");
+        }
         for (int i = 1; i <= taskList.size(); ++i) {
             toPrint.append(i).append(". ").append(taskList.get(i - 1)).append("\n");
         }
