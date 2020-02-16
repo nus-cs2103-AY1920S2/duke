@@ -19,38 +19,13 @@ public class TimeFormatter {
         this.strDate = strDate.trim();
     }
 
-    /**
-     * Checks if the input date format is valid for translation.
-     *
-     * @return a boolean value whether the format is valid
-     */
-    public boolean checkValidDateFormat() {
-        if (this.strDate.trim().equals("")) {
-            return false;
-        }
-        return Integer.parseInt(this.strDate.substring(5, 7)) <= 12;
-    }
-
-    /**
-     * Converts the original date to a desired format.
-     *
-     * @return the string of the desired format of date
-     */
-    public String toDesiredFormat() {
-        LocalDate localDate = LocalDate.parse(this.strDate);
-        return localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-    }
-
-    /**
-     * Processes the date object.
-     *
-     * @return the original or modified version of date
-     */
-    public String processDate() {
-        if (!this.checkValidDateFormat()) {
+    public String parseToFormat() {
+        try {
+            LocalDate thisLocalDate = LocalDate.parse(strDate);
+            return thisLocalDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } catch (Exception exo) {
             return this.strDate;
-        } else {
-            return this.toDesiredFormat();
         }
     }
+
 }
