@@ -63,7 +63,7 @@ public class Duke extends Application {
         while (run) {
             try {
                 run = Parser.parseCommand(Ui.getInput(), taskList);
-            } catch (UnknownCommandException ex) {
+            } catch (DukeException ex) {
                 Ui.printException(ex);
             }
         }
@@ -81,7 +81,7 @@ public class Duke extends Application {
             if (!run) {
                 Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), 2, TimeUnit.SECONDS);
             }
-        } catch (UnknownCommandException ex) {
+        } catch (DukeException ex) {
             Ui.printException(ex);
         }
     }

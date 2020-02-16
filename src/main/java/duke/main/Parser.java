@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.FindCommand;
+import duke.command.SnoozeCommand;
 import duke.command.TodoCommand;
 import duke.command.DeadlineCommand;
 import duke.command.ByeCommand;
@@ -27,7 +28,7 @@ public class Parser {
      * @param taskList TaskList object containing list of Tasks
      * @return boolean true if ByeCommand is invoked by user
      */
-    static boolean parseCommand(String input, TaskList taskList) throws UnknownCommandException {
+    static boolean parseCommand(String input, TaskList taskList) throws DukeException {
         try {
             String param;
             String[] tokens = input.split(" ", 2);
@@ -68,13 +69,16 @@ public class Parser {
             case FIND:
                 FindCommand.run(taskList, param.split(" "));
                 break;
+            case SNOOZE:
+                SnoozeCommand.run(taskList, param);
+                break;
             default:
                 throw new UnknownCommandException();
             }
         } catch (IllegalArgumentException ex) {
             throw new UnknownCommandException();
-        } catch (Exception ex) {
-            System.out.println(ex);
+        } catch (DukeException ex) {
+           throw ex;
         }
         return true;
     }

@@ -98,7 +98,7 @@ public class TaskList {
     public List<String> printTaskList() {
         List<String> output = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
-            output.add((i + 1) + "." + taskList.get(i));
+            output.add((i + 1) + ". " + taskList.get(i));
         }
         return output;
     }

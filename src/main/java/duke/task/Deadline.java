@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exceptions.InvalidArgumentException;
+import duke.exceptions.InvalidDateTimeFormatException;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public class Deadline extends Task {
      * @param description Description of the Deadline
      * @param by String representation of Date & Time at which the deadline is
      */
-    public Deadline(String description, String by) throws InvalidArgumentException {
+    public Deadline(String description, String by) throws InvalidDateTimeFormatException {
         super(description);
         try {
             DateTimeFormatter inputDtf = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -30,7 +31,7 @@ public class Deadline extends Task {
             this.by = LocalDateTime.parse(outputDt.format(outputDtF),
                 DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a"));
         } catch (DateTimeException ex) {
-            throw new InvalidArgumentException();
+            throw new InvalidDateTimeFormatException();
         }
     }
 
@@ -42,5 +43,11 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: "
             + by.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a")) + ")";
+    }
+
+
+    public boolean snooze(LocalDateTime datetime) {
+        this.by = datetime;
+        return true;
     }
 }

@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.exceptions.InvalidDateTimeFormatException;
+
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,12 +21,16 @@ public class Event extends Task {
      * @param description Description of the Event
      * @param at String representation of Date & Time at which the event is happening
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws InvalidDateTimeFormatException {
         super(description);
-        DateTimeFormatter inputDtf = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        LocalDateTime outputDt = LocalDateTime.parse(at, inputDtf);
-        DateTimeFormatter outputDtf = DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a");
-        this.at = LocalDateTime.parse(outputDt.format(outputDtf), DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a"));
+        try {
+            DateTimeFormatter inputDtf = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            LocalDateTime outputDt = LocalDateTime.parse(at, inputDtf);
+            DateTimeFormatter outputDtf = DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a");
+            this.at = LocalDateTime.parse(outputDt.format(outputDtf), DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a"));
+        } catch (DateTimeException exception) {
+            throw new InvalidDateTimeFormatException();
+        }
     }
 
     /**
@@ -34,5 +41,10 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a"))
             + ")";
+    }
+
+    public boolean snooze(LocalDateTime datetime) {
+        this.at = datetime;
+        return true;
     }
 }

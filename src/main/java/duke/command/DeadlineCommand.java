@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exceptions.InvalidArgumentException;
+import duke.exceptions.InvalidDateTimeFormatException;
 import duke.exceptions.MissingDeadlineParamException;
 import duke.exceptions.MissingDescriptionException;
 import duke.main.TaskList;
@@ -10,7 +10,7 @@ import duke.task.Task;
 
 public class DeadlineCommand extends TaskCommand {
     public static boolean run(TaskList taskList, String param) throws MissingDescriptionException,
-        MissingDeadlineParamException, InvalidArgumentException {
+        MissingDeadlineParamException, InvalidDateTimeFormatException {
         if (param.equals("")) {
             throw new MissingDescriptionException();
         } else if (!param.contains(" /by ")) {

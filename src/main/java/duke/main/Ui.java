@@ -4,6 +4,7 @@ import duke.exceptions.DukeException;
 import duke.task.Task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
@@ -148,7 +149,7 @@ public class Ui {
     
     /**
      * Prints out the list of Tasks in TaskList which matches a search term
-     * @param lines String representation of the Tasks to be printed
+     * @param tasks String representation of the Tasks to be printed
      */
     public static void printFindResults(List<Task> tasks) {
         if (tasks.size() == 0) {
@@ -175,6 +176,11 @@ public class Ui {
      */  
     public static void printException(Exception ex) {
         print(ex);
+    }
+
+    public static void taskSnoozed(Task task) {
+        print("Noted. I've snoozed this task:");
+        print(task);
     }
 
     public static String getBuffer() {
