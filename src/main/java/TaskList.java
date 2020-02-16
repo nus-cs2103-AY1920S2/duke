@@ -28,7 +28,6 @@ public class TaskList {
      */
     public void add(Task mytask) {
         tasks.add(mytask);
-        ui.addMessage((this.tasks).size(), mytask);
         storage.store(this, ui);
     }
 
@@ -42,7 +41,6 @@ public class TaskList {
         // Split the string to get the
         // index of the task to be deleted
         int sizeBeforeDeletion = getsize();
-        ui.deletedTaskMessage(getsize() - 1, tasks.get(index));
         tasks.remove(index); // Deletes from task list
 
         assert sizeBeforeDeletion - 1 == getsize() : "Task not deleted!";
@@ -54,8 +52,10 @@ public class TaskList {
      * that is passed in as argument.
      *
      * @param word keyword to find in the list.
+     * @return TaskList return a TaskList object which is a filtered list
+     * where it contains the tasks that is related to the keyword input by user
      */
-    public void find(String word, Storage storage) {
+    public TaskList find(String word, Storage storage) {
         TaskList filteredlist= new TaskList(new ArrayList<Task>(), ui, storage);
         for (Task task : this.tasks) {
             String description = ((task.getDesc()).toLowerCase());
@@ -63,8 +63,7 @@ public class TaskList {
             if (description.matches("(?i)" + "(" + word.toLowerCase() + ")" + ".*"))
                 filteredlist.add(task);
         }
-        ui.foundMessage();
-        ui.listAllTasks(filteredlist);
+        return filteredlist;
     }
 
     /**

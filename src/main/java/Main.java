@@ -14,8 +14,7 @@ public class Main extends Application {
 
     private static Logger LOGGER = Logger.getLogger("LOGGER");
 
-    private Duke duke = new Duke();
-
+    private Duke duke = new Duke("data/duke.txt");
     @Override
     public void start(Stage stage) {
         try {

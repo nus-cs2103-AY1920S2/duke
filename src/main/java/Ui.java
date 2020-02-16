@@ -9,18 +9,14 @@ public class Ui {
     /**
      * A horizontal line.
      */
-    public void HorizontalLine() {
-        System.out.println("____________________________________________________________");
-    }
+    public void HorizontalLine() { System.out.println("____________________________________________________________"); }
 
     /**
-     * Greets user.
+     * A welcome message to greet user
+     * @return String Welcome Message
      */
-    public void greetUser(){
-        HorizontalLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        HorizontalLine();
+    public String welcomeMessage() {
+        return "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 
     /**
@@ -31,6 +27,7 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
         HorizontalLine();
     }
+
 
     /**
      * Print error message to the user.
@@ -49,12 +46,10 @@ public class Ui {
      * @param listsize size of the tasklist.
      * @param mytask Task object. Able to take in objects of its subclasses.
      */
-    public void addMessage(int listsize, Task mytask) {
-        HorizontalLine();
-        System.out.println("Got it. I've added this task:");
-        System.out.println(mytask);
-        System.out.println("Now you have " + listsize + " tasks in the list.");
-        HorizontalLine();
+    public String addedMessage(int listsize, Task mytask) {
+        return "Got it. I've added this task:" + "\n" +
+                mytask + "\n" +
+                "Now you have " + listsize + " tasks in the list.";
     }
 
     /**
@@ -62,14 +57,14 @@ public class Ui {
      *
      * @param list TaskList object.
      */
-    public void listAllTasks(TaskList list) {
+    public String listCommand(TaskList list) {
+        String printMessage = "";
         // Print all the tasks added
         int counter = 1;
         for (Task currtask : list.getListOfTask()) {
-            System.out.println(counter++ + "." + currtask);
+            printMessage = printMessage + counter++ + "." + currtask + "\n";
         }
-
-        HorizontalLine();
+        return printMessage;
     }
 
     /**
@@ -77,12 +72,11 @@ public class Ui {
      *
      * @param doneTask The Task object that is set as done.
      */
-    public void doneMessage(Task doneTask) {
-        HorizontalLine();
-        System.out.println("Nice! I've marked this as done:");
-        System.out.println(doneTask);
-        HorizontalLine();
+    public String finishMessage(Task doneTask) {
+        return "Nice! I've marked this as done:" + "\n" +
+                doneTask;
     }
+
 
     /**
      * Tell the user that the task that they want to delete is already deleted.
@@ -90,19 +84,16 @@ public class Ui {
      * @param num remaining number of tasks in the list.
      * @param deletedTask The Task object to be deleted.
      */
-    public void deletedTaskMessage(int num, Task deletedTask) {
-        HorizontalLine();
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deletedTask);
-        System.out.println("Now you have " + num + " tasks in the list.");
-        HorizontalLine();
+    public String deletedMessage(int num, Task deletedTask) {
+        return "Noted. I've removed this task:" + "\n" +
+                deletedTask + "\n" +
+                "Now you have " + num + " tasks in the list.";
     }
 
     /**
      * Show user the list that matches to the input keyword.
      */
-    public void foundMessage() {
-        HorizontalLine();
-        System.out.println("Here are the matching tasks in your list:");
+    public String findMessage() {
+        return "Here are the matching tasks in your list:";
     }
 }

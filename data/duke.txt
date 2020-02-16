@@ -3,3 +3,4 @@
 [T] N Homework
 [E] N Running%Mar 13 2020 9:00am
 [D] Y submission%Apr 30 2020 5:00am
+[D] N sitting%Feb 2 2019 2:00am

@@ -29,6 +29,7 @@ public class Parser {
         assert !commandpairing.isEmpty() : "Error adding key-value objects in HashMap";
     }
 
+
     /**
      * Minimally check if the main command make sense to the code.
      * However, it will parse to the DukeEnumEceptions to check for other errors
@@ -60,4 +61,35 @@ public class Parser {
         return true;
     }
 
+
+    /**
+     * Minimally check if the main command make sense to the code.
+     * However, it will parse to the DukeEnumEceptions to check for other errors
+     * such as IndexOutOfBounds exception, etc.
+     *
+     * @param tasklist Pass in the TaskList object as an argument.
+     * @return boolean true when there is no error and return false if otherwise and throws an Exception.
+     */
+    public String detectError(TaskList tasklist) {
+        String[] arguments = fullcommand.split(" ");
+        String myMessage = "";
+        try {
+            // If input is not recognisable by the code
+            if (!commandpairing.containsKey((arguments[0]).toLowerCase()))
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+            // Execute the error-checking
+            DukeEnumExceptions.valueOf(arguments[0].toUpperCase())
+                    .checkError(fullcommand, commandpairing.get((arguments[0]).toLowerCase()), tasklist);
+        } catch (DukeException ex){
+            myMessage = ex.getMessage();
+        } catch (DateTimeParseException exception) {
+            myMessage = "Input date in the form of yyy-mm-dd and " +
+                    "remember to add time in 24-hour format \n" + exception.getMessage();
+        } finally {
+            return myMessage;
+        }
+
+        //return true;
+    }
 }

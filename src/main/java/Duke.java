@@ -41,17 +41,27 @@ public class Duke {
     }
 
     /**
+     *  Handles message that is parsed in for Duke to answer.
+     * @param message The message for Duke to reply to user
+     */
+    public void dukeAnswer(String message) {
+        System.out.println("_______________________________________________________" +
+                "\n" + message + "\n" +
+                "_______________________________________________________");
+    }
+    /**
      * Find out the type of command and execute it.
      *
      * @param input The line input by the user.
      * @param tasks TaskList object to acces to list of tasks.
      * @param storage Storage object.
+     * @return String message that Duke has to tell the user
      */
-    public static void execute(String input, TaskList tasks, Ui ui, Storage storage) {
+    public static String executeCommmand(String input, TaskList tasks, Ui ui, Storage storage) {
         // Split arguments to get the first index
         String[] arguments = input.split(" ");
 
-        DukeCommand.valueOf(arguments[0].toUpperCase()).execute(input, tasks, ui, storage);
+        return DukeCommand.valueOf(arguments[0].toUpperCase()).execute(input, tasks, ui, storage);
     }
 
     /**
@@ -68,24 +78,31 @@ public class Duke {
      */
     public void run() {
         // Greet the user
-        ui.greetUser();
+        this.dukeAnswer(ui.welcomeMessage());
 
         Scanner sc = new Scanner(System.in);
 
+        // Assumption : To add things into the list, the user has to
+        // type a [command][description]. For example, to add
+        // "read book" into the list, the user has to type
+        // "todo read book" instead of just typing "read book"
+        // as typing "read book" will cause the code to throw an exception
         // Exits when the user types 'bye'
         String line = sc.nextLine();
         while (!line.equals("bye")) {
             // Check for any errors in the command
             // by passing command to Parser object
-            // If no errors, method checkForError()
-            // will returns true else return false
-            if (new Parser(line, ui).checkForError(tasks))
-                // Assumption : To add things into the list, the user has to
-                // type a [command][description]. For example, to add
-                // "read book" into the list, the user has to type
-                // "todo read book" instead of just typing "read book"
-                // as typing "read book" will cause the code to throw an exception
-                execute(line, tasks, ui, storage);
+            // If no errors, method detectForError()
+            // will returns an empty String
+            String ErrorMessage = new Parser(line, ui).detectError(tasks);
+
+            if (ErrorMessage.equals("")) {
+                // Run this line of code when there is no error with the command
+                this.dukeAnswer(executeCommmand(line, tasks, ui, storage));
+            } else {
+                this.dukeAnswer(ErrorMessage);
+            }
+
             // Wait for next input command
             line = sc.nextLine();
         }

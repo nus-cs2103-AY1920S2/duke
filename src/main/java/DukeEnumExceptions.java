@@ -37,7 +37,7 @@ public enum DukeEnumExceptions {
 
             if (list.hasDuplicates(new Todo(allargs[1]))) {
                 throw new DukeException("OOPS!!! There is a same task already added into the list " +
-                        "or there is a clash of timing with one of the tasks in your list!");
+                        "\n" + "or there is a clash of timing with one of the tasks in your list!");
             }
         }
     },
@@ -50,7 +50,7 @@ public enum DukeEnumExceptions {
             // Therefore, it is important to test if the limit is less than 9
             if (s1.lastIndexOf(s2) == -1) {
                 throw new DukeException("Please add a '/by' and then add the date/time subsequently " +
-                        "in the form of [Deadline] [Description] /by [yyyy-mm-dd] [time in 24-hour]");
+                        "\n" + "in the form of [Deadline] [Description] /by [yyyy-mm-dd] [time in 24-hour]");
             } else if (limit < 9) {
                 throw new DukeException("No description! Please add description to your deadline");
             } else {
@@ -71,7 +71,7 @@ public enum DukeEnumExceptions {
             // Therefore, it is important to test if the limit is less than 6
             if (s1.lastIndexOf(s2) == -1) {
                 throw new DukeException("Please add a '/at' and then add the date/time subsequently " +
-                        "in the form of [Event] [Description] /at [yyyy-mm-dd] [time in 24-hour]");
+                        "\n" + "in the form of [Event] [Description] /at [yyyy-mm-dd] [time in 24-hour]");
             } else if (limit < 6) {
                 throw new DukeException("No description! Please add description to your event");
             } else {
@@ -79,6 +79,7 @@ public enum DukeEnumExceptions {
                 if ((stringTest.replaceAll("( )+", "")).equals("")) {
                     throw new DukeException("No description! Please add description to your event");
                 }
+
             }
         }
     },

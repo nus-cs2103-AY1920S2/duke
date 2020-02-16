@@ -16,14 +16,13 @@ public enum DukeCommand {
      */
     LIST {
         @Override
-        public void execute(String s1, TaskList list, Ui ui, Storage storage) {
-            ui.HorizontalLine();
-            ui.listAllTasks(list);
+        public String execute(String s1, TaskList list, Ui ui, Storage storage) {
+            return ui.listCommand(list);
         }
     },
     DONE {
         @Override
-        public void execute(String s1, TaskList list, Ui ui, Storage storage) {
+        public String execute(String s1, TaskList list, Ui ui, Storage storage) {
             // Split the string to get the
             // index of the task to be done
             String[] arr = s1.split("\\s+");
@@ -36,21 +35,26 @@ public enum DukeCommand {
             assert taskToBeCompleted.getStatusIcon() == "Y" : "Task is not made done";
 
             storage.store(list, ui);
+
             // Show message to user
             // Indicate that task is done
-            ui.doneMessage(taskToBeCompleted);
+            return ui.finishMessage(taskToBeCompleted);
         }
     },
     TODO {
         @Override
-        public void execute(String s1, TaskList list, Ui ui, Storage storage) {
+        public String execute(String s1, TaskList list, Ui ui, Storage storage) {
             String[] arr = s1.split("\\s+", 2);
-            list.add(new Todo(arr[1]));
+            Todo todotask = new Todo(arr[1]);
+            list.add(todotask);
+            return ui.addedMessage((list.getListOfTask()).size(), todotask);
         }
     },
     DEADLINE {
         @Override
-        public void execute(String s1, TaskList list, Ui ui, Storage storage) {
+        public String execute(String s1, TaskList list, Ui ui, Storage storage) {
+            String DukeMessage = "";
+
             // Manipulating the String by separating the actual command
             // with the word '/by' to get the description and date/time
             int limit = s1.lastIndexOf("/by") - 1;
@@ -86,22 +90,28 @@ public enum DukeCommand {
 
                 if (list.hasDuplicates(FormattedDeadline)) {
                     throw new DukeException("OOPS!!! There is a same task already added into the list " +
-                            "or there is a clash of timing with one of the tasks in your list!");
+                            "\n" + "or there is a clash of timing with one of the tasks in your list!");
                 }
 
                 list.add(FormattedDeadline);
+                DukeMessage = ui.addedMessage((list.getListOfTask()).size(), FormattedDeadline);
+
             } catch (DateTimeParseException exception){
-                ui.showErrorMessage(exception.getMessage() + "\n" +
+                DukeMessage = exception.getMessage() + "\n" +
                         "Input date in the form of yyy-mm-dd and " +
-                        "remember to add time in 24-hour format");
+                        "\n" + "remember to add time in 24-hour format";
             } catch (DukeException ex) {
-                ui.showErrorMessage(ex.getMessage());
+                DukeMessage = ex.getMessage();
+            } finally {
+                return DukeMessage;
             }
 
         }
     },
     EVENT {
-        public void execute(String s1, TaskList list, Ui ui, Storage storage){
+        public String execute(String s1, TaskList list, Ui ui, Storage storage){
+            String DukeMessage = "";
+
             // Manipulating the String by separating the actual command
             // with the word '/at' to get the description and date/time
             int limit = s1.lastIndexOf("/at") - 1;
@@ -122,12 +132,16 @@ public enum DukeCommand {
                 // Time Validation
                 if (validator.isTwentyFourHourFormat(inputdate[1]))
                     throw new DukeException("Please enter time in the form of 24 hour format!");
+
                 int dateInt = Integer.parseInt(inputdate[1]);
                 int timeTest = dateInt % 100;
+
 
                 // Check if the minute is valid
                 if (validator.isValidTime(timeTest, dateInt))
                     throw new DukeException("Invalid time!");
+
+
 
                 // Convert time to AM/PM format
                 inputdate[1] = timeformat.toAMPMFormat(timeTest, dateInt);
@@ -138,40 +152,49 @@ public enum DukeCommand {
 
                 if (list.hasDuplicates(FormattedEvent)) {
                     throw new DukeException("OOPS!!! There is a same task already added into the list " +
-                            "or there is a clash of timing with one of the tasks in your list!");
+                            "\n" + "or there is a clash of timing with one of the tasks in your list!");
                 }
 
+
                 list.add(FormattedEvent);
+                DukeMessage =  ui.addedMessage((list.getListOfTask()).size(), FormattedEvent);
+
             } catch (DateTimeParseException exception){
-                ui.showErrorMessage(exception.getMessage() + "\n" +
+                DukeMessage = exception.getMessage() + "\n" +
                         "Input date in the form of yyy-mm-dd and " +
-                        "remember to add time in 24-hour format");
+                        "\n" + "remember to add time in 24-hour format";
             } catch (Exception ex) {
-                ui.showErrorMessage(ex.getMessage());
+                DukeMessage = ex.getMessage();
+            } finally {
+                return DukeMessage;
             }
+
+
 
         }
     },
     DELETE {
         @Override
-        public void execute(String s1, TaskList list, Ui ui, Storage storage) {
+        public String execute(String s1, TaskList list, Ui ui, Storage storage) {
             // Split the string to get the
             // index of the task to be deleted
             String[] arrdel = s1.split("\\s+");
             int pos = Integer.parseInt(arrdel[1]) - 1;
-
+            Task deletedTask = (list.getListOfTask()).get(pos);
             list.delete(pos, storage);
+            return ui.deletedMessage(list.getsize(), deletedTask);
         }
     },
     FIND {
       @Override
-      public void execute(String s1, TaskList list, Ui ui, Storage storage) {
+      public String execute(String s1, TaskList list, Ui ui, Storage storage) {
           String[] commandarray = s1.split("\\s+", 2);
           String keyword = commandarray[1];
 
-          list.find(keyword, storage);
+          TaskList filteredList = list.find(keyword, storage);
+          return ui.findMessage() + "\n" + ui.listCommand(filteredList);
       }
     };
 
-    public abstract void execute(String s1, TaskList list, Ui ui, Storage storage);
+    public abstract String execute(String s1, TaskList list, Ui ui, Storage storage);
 }
