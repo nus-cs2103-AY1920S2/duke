@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.WrongEventFormatException;
+import duke.parser.*;
 import duke.storage.Storage;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -32,7 +33,7 @@ public class AddEventCommand implements Command {
 
             String date = dateTime[0];
             String time = dateTime[1];
-            task = new Event(taskTitle, Task.parseDate(date), Task.parseTime(time));
+            task = new Event(taskTitle, Parser.parseDate(date), Parser.parseTime(time));
         } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
             throw new WrongEventFormatException();
         }

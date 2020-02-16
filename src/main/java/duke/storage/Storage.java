@@ -12,6 +12,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.parser.*;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -61,14 +62,14 @@ public class Storage {
                 task = new Todo(description);
                 break;
             case 'D':
-                LocalDate deadlineDate = LocalDate.parse(taskDetails[3], Deadline.dateFormatter);
+                LocalDate deadlineDate = LocalDate.parse(taskDetails[3], Parser.outputDateFormatter);
 
                 task = new Deadline(description, deadlineDate);
                 break;
             case 'E':
                 String[] dateTimeString = taskDetails[3].split("-");
-                LocalDate eventDate = LocalDate.parse(dateTimeString[0], Deadline.dateFormatter);
-                LocalTime eventTime = LocalTime.parse(dateTimeString[1], Event.timeFormatter);
+                LocalDate eventDate = LocalDate.parse(dateTimeString[0], Parser.outputDateFormatter);
+                LocalTime eventTime = LocalTime.parse(dateTimeString[1], Parser.outputTimeFormatter);
 
                 task = new Event(description, eventDate, eventTime);
                 break;

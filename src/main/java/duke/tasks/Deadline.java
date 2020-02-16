@@ -3,6 +3,8 @@
  */
 package duke.tasks;
 
+import duke.parser.Parser;
+
 import java.time.LocalDate;
 
 public class Deadline extends Task {
@@ -26,6 +28,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + dateFormatter.format(deadlineDate) + ")";
+                + Parser.outputDateFormatter.format(deadlineDate) + ")";
     }
 }

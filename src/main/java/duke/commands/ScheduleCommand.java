@@ -1,7 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.WrongScheduleFormatException;
-import duke.tasks.Task;
+import duke.parser.Parser;
 import duke.tasks.TaskList;
 import duke.exceptions.DukeException;
 
@@ -18,13 +18,13 @@ public class ScheduleCommand implements Command {
 
         LocalDate taskDate;
         try {
-            taskDate = Task.parseDate(date);
+            taskDate = Parser.parseDate(date);
         } catch (DateTimeParseException e) {
             throw new WrongScheduleFormatException();
         }
 
         StringBuilder output = new StringBuilder();
-        output.append("This is your schedule on " + date + ":\n");
+        output.append("This is your schedule on " + Parser.outputDateFormatter.format(taskDate) + ":\n");
         output.append(tasks.printSchedule(taskDate));
 
         return output.toString();

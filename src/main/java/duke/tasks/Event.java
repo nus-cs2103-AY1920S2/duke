@@ -3,6 +3,8 @@
  */
 package duke.tasks;
 
+import duke.parser.Parser;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -30,7 +32,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + Task.dateFormatter.format(eventDate) + "-"
-                + Task.timeFormatter.format(eventTime) + ")";
+                + Parser.outputDateFormatter.format(eventDate) + "-"
+                + Parser.outputTimeFormatter.format(eventTime) + ")";
     }
 }
