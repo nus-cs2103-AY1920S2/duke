@@ -104,23 +104,24 @@ public class ChatBox {
     public Tasks categories(String key, String status, String input) throws IllegalArgumentException {
         Tasks tasks = new Tasks();
         Message message = new Message(input);
+        String data = Arrays.stream(input.split(key))
+                .dropWhile(x -> x.equals("") || x.equals(" "))
+                .findFirst()
+                .get();
 
         if (key.equals("todo")) {
-            String data = input.split("todo ")[1];
             tasks = new ToDos(new Message(data));
         }
 
         if (key.equals("deadline")) {
-            String s1 = input.split("deadline ")[1];
-            String s2 = s1.split("/by")[0];
-            String s3 = s1.split("/by")[1];
+            String s2 = data.split("/by")[0];
+            String s3 = data.split("/by")[1];
             tasks = new Deadlines(new Message(s2 + "(by: " + s3 + ")"));
         }
 
         if (key.equals("event")) {
-            String s1 = input.split("event ")[1];
-            String s2 = s1.split("/at")[0];
-            String s3 = s1.split("/at")[1];
+            String s2 = data.split("/at")[0];
+            String s3 = data.split("/at")[1];
             tasks = new Events(new Message(s2 + "(at: " + s3 + ")"));
         }
 
