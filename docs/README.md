@@ -5,7 +5,7 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
 
 ## Usage
 
-### Key Commands for Jarvis: 
+### Key Commands for Edith: 
 
 1. **Add** a task
 
@@ -41,7 +41,6 @@ How to executes those commands ?
     Example: `event return book /at library` or <br>
     `event return book /at 2020-04-20`
     
-    
 - `delete` <br>
     Removes a task by providing the task's index.
     Task number starts from 1. <br>
@@ -75,6 +74,4 @@ How to executes those commands ?
     Terminates the application <br>
     Example: `bye` exits the program 
 
-Expected outcome:
 
-`outcome`
