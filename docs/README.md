@@ -40,7 +40,7 @@ update the list in `task.txt`.
 * Expected outcome: <br/><br/>
 `Got it. I've added this task:` <br/>
 `[T][N] read topics for CS2103T`<br/>
-` Now you have 1 task in the list.`
+`Now you have 1 task in the list.`
 
 <img src="images/Todo.png" alt="Screenshot for todo command" about="Screenshot for todo command" align="center">
 
@@ -55,7 +55,7 @@ and update the list in `task.txt`.
 * Expected outcome: <br/><br/>
 `Got it. I've added this task:` <br/>
 `[D][N] project (by: Feb 20 2020)`<br/>
-` Now you have 1 task in the list.`
+`Now you have 1 task in the list.`
 
 <img src="images/Deadline.png" alt="Screenshot for deadline command" about="Screenshot for deadline command" align="center">
 
@@ -72,7 +72,7 @@ Expected outcome:
 
 `Got it. I've added this task:` <br/>
 `[E][N] party (at: Mar 12 2020 2215)`<br/>
-` Now you have 1 task in the list.`
+`Now you have 1 task in the list.`
 
 <img src="images/Event.png" alt="Screenshot for event command" about="Screenshot for event command" align="center">
 
