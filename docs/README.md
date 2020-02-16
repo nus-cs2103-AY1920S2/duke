@@ -24,7 +24,7 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
 8. **Bye** exits jarvis
 
 
-How to executes those commands ? 
+###How to executes those commands ? 
 
  - `Add` <br>
  There are 3 types of tasks that you can add. 
