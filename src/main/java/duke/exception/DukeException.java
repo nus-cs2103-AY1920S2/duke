@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Houses all the exceptions specific to the Duke Application.
+ * Parent class of all the exceptions specific to the Duke Application.
  */
 public class DukeException extends Exception {
     // to avoid warning because of inheriting from a Serializable class
