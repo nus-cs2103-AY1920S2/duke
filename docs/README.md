@@ -1,4 +1,6 @@
-# User Guide
+# User 
+
+All icons used in the application are made by Freepik from www.flaticon.com.
 
 ## Features 
 
@@ -33,14 +35,9 @@ Simply input your task description to add your new task to the list.
 
 List out all tasks.
 
-## Usage
-
 ### `list` 
 
-
 ### Marking tasks as done
-
-## Usage
 
 ### `done` 
 
@@ -48,8 +45,6 @@ Mum displays your current **numbered** task list
 and prompts you to select the task number to mark as done.
 
 ### Deleting tasks
-
-## Usage
 
 ### `delete` 
 
@@ -59,8 +54,6 @@ and prompts you to select the task number to delete.
 ### Finding tasks
 
 List out all tasks that contain a certain word/phrase.
-
-## Usage
 
 ### `find` 
 
