@@ -123,6 +123,7 @@ public class Parser {
                 c = new FindCommand(inputElements[1]);
             } else if (command.equals("edit")) {
                 String[] idxDescElements = inputElements[1].split(" ", 2);
+                Parser.checkArr(command, false, idxDescElements);
                 int i = Integer.parseInt(idxDescElements[0]);
                 String regex = getValidRegex(idxDescElements[1]);
                 // Editing Deadline or Event (expected, but not necessarily)
@@ -136,7 +137,7 @@ public class Parser {
                         c = new ChangeCommand(i - 1, descElements[0].trim(), date);
                     }
                 } else { // Can be editing any task, but only the description
-                    c = new ChangeCommand(i - 1, idxDescElements[1]);
+                    c = new ChangeCommand(i - 1, idxDescElements[1].trim());
                 }
             } else {
                 c = new UnknownCommand();

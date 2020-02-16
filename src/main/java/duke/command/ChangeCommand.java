@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.MissingInfoException;
 import duke.logic.TaskList;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -49,12 +50,18 @@ public class ChangeCommand extends Command {
         this.date = date;
     }
 
+    private void handleEmptyDesc(String desc) throws MissingInfoException {
+        if (desc == null || desc.isEmpty()) {
+            throw new MissingInfoException("task", false);
+        }
+    }
+
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task oldTask;
         String field;
         if (this.date == null) {
-            assert this.desc != null;
+            handleEmptyDesc(this.desc);
             oldTask = tasks.editTask(this.idx, this.desc);
             field = "description";
         } else {
@@ -69,6 +76,7 @@ public class ChangeCommand extends Command {
                     field = "description and date";
                 }
             } else {
+                handleEmptyDesc(this.desc);
                 oldTask = tasks.editTask(this.idx, this.desc);
                 field = "description";
             }
