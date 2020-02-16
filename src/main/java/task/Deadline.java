@@ -12,6 +12,10 @@ public class Deadline extends Task {
         this.deadlineTime = deadlineTime;
     }
 
+    public LocalDateTime getDeadlineTime() {
+        return this.deadlineTime;
+    }
+
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(),

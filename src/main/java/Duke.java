@@ -1,3 +1,4 @@
+import command.Command;
 import exception.DukeException;
 import parser.Parser;
 import storage.Storage;
@@ -42,77 +43,87 @@ public class Duke {
      *
      * @throws IOException if there are file exceptions.
      */
-    public void run() throws IOException {
-        ui.print();
+    public String run(String userInput) throws IOException {
+//        ui.printWelcomeMessage();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readCommand();
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showError(e.getMessage());
+//            } finally {
+//                ui.showLine();
+//            }
+//        }
 
-        outerloop:
-        while (ui.hasNextInput()) {
-            try {
-                String userNextInput = ui.getNextInput();
-                Parser parser = new Parser(userNextInput);
-                String userCommand = parser.getCommand();
+        try {
+            Parser parser = new Parser(userInput);
+            String userCommand = parser.getCommand();
 
-                switch (userCommand) {
-                case "bye":
-                    ui.printExit();
-                    break outerloop;
+            switch (userCommand) {
+            case "bye":
+                return ui.getExitMessage();
 
-                case "list":
-                    ui.listAllTasks(tasks);
-                    break;
+            case "list":
+                return ui.listAllTasks(tasks);
 
-                case "done":
-                    ui.acknowledgeDone(tasks, parser.getTaskIndexArray());
-                    storage.saveTasksIntoFile(tasks);
-                    break;
+            case "done":
+                String doneMessage = ui.acknowledgeDone(tasks, parser.getTaskIndexArray());
+                storage.saveTasksIntoFile(tasks);
+                return doneMessage;
 
-                case "todo":
-                    Todo todo = new Todo(parser.getTaskAction());
-                    ui.acknowledgeTodo(tasks, todo);
-                    storage.saveTasksIntoFile(tasks);
-                    break;
+            case "todo":
+                Todo todo = new Todo(parser.getTaskAction());
+                String todoMessage = ui.acknowledgeTodo(tasks, todo);
+                storage.saveTasksIntoFile(tasks);
+                return todoMessage;
 
-                case "deadline":
-                    Deadline deadline = new Deadline(parser.getTaskAction(), parser.getTaskDate());
-                    ui.acknowledgeDeadline(tasks, deadline);
-                    storage.saveTasksIntoFile(tasks);
-                    break;
+            case "deadline":
+                Deadline deadline = new Deadline(parser.getTaskAction(), parser.getTaskDate());
+                String deadlineMessage = ui.acknowledgeDeadline(tasks, deadline);
+                storage.saveTasksIntoFile(tasks);
+                return deadlineMessage;
 
-                case "event":
-                    Task event = new Event(parser.getTaskAction(), parser.getTaskDate());
-                    ui.acknowledgeEvent(tasks, event);
-                    storage.saveTasksIntoFile(tasks);
-                    break;
+            case "event":
+                Event event = new Event(parser.getTaskAction(), parser.getTaskDate());
+                String eventMessage = ui.acknowledgeEvent(tasks, event);
+                storage.saveTasksIntoFile(tasks);
+                return eventMessage;
 
-                case "delete":
-                    ui.acknowledgeDelete(tasks, parser.getTaskIndexArray());
-                    storage.saveTasksIntoFile(tasks);
-                    break;
+            case "delete":
+                String deleteMessage = ui.acknowledgeDelete(tasks, parser.getTaskIndexArray());
+                storage.saveTasksIntoFile(tasks);
+                return deleteMessage;
 
-                case "find":
-                    ui.acknowledgeFound(tasks, parser.getTaskAction());
-                    break;
+            case "find":
+                return ui.acknowledgeFound(tasks, parser.getTaskAction());
 
-                default:
-                    ui.printUnknownCommand();
-                    break;
-                }
-            } catch (DukeException | DateTimeException | AssertionError | IndexOutOfBoundsException ex) {
-                System.out.println(ex.getMessage());
-                continue;
+            default:
+                return ui.printUnknownCommand();
             }
+        } catch (DukeException | DateTimeException | AssertionError | IndexOutOfBoundsException ex) {
+            return ex.getMessage();
         }
     }
+
 
     /**
      * Duke responds in GUI.
      *
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            return new Duke().run(input);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
     }
 
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
-    }
+//    public static void main(String[] args) throws IOException {
+//        new Duke().run();
+//    }
 }

@@ -5,9 +5,12 @@ import exception.EmptyTaskListException;
 import exception.InvalidIndexException;
 import task.Task;
 import task.TaskList;
+
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Ui {
@@ -30,25 +33,19 @@ public class Ui {
         System.out.println("Ooops! Cannot find file...");
     }
 
-    /**
-     * Prints out DUKE interface.
-     */
-    public void print() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-    }
+    String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    public String welcomeMessage = "Hello from\n" + logo + "What can I do for you?";
 
     /**
      * Prints exit message.
      */
-    public void printExit() {
-        System.out.println("Bye. Hope to see you again soon!");
-        return;
+    public String getExitMessage() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -56,16 +53,18 @@ public class Ui {
      *
      * @param tasks array list of tasks.
      */
-    public void listAllTasks(TaskList tasks) throws EmptyTaskListException {
+    public String listAllTasks(TaskList tasks) throws EmptyTaskListException {
         if (tasks.getTaskListSize() == 0) {
             throw new EmptyTaskListException("There is no task in your list. Please try again...");
         }
-        System.out.println("Here are the tasks in your list:");
+        String s = "Here are the tasks in your list:\n";
         AtomicInteger atomicIndex = new AtomicInteger(1);
 
         for (Task task: tasks.getCurrentTasks()) {
-            System.out.printf("%d.  %s\n", atomicIndex.getAndIncrement(), task);
+            s += String.format("%d.  %s\n", atomicIndex.getAndIncrement(), task);
         }
+
+        return s;
     }
 
     /**
@@ -73,8 +72,8 @@ public class Ui {
      *
      * @throws CommandNotFoundException if command not recognised.
      */
-    public void printUnknownCommand() throws CommandNotFoundException {
-        throw new CommandNotFoundException("We don't recognise this command!!!!");
+    public String printUnknownCommand() throws CommandNotFoundException {
+        throw new CommandNotFoundException("We don't recognise this command!!!!\n");
     }
 
     /**
@@ -84,19 +83,26 @@ public class Ui {
      * @param arrayOfIndexes varargs for inputted index(es) of task to mark as complete.
      * @throws InvalidIndexException if any of the index is invalid
      */
-    public void acknowledgeDone(TaskList tasks, int... arrayOfIndexes) throws InvalidIndexException {
+    public String acknowledgeDone(TaskList tasks, int... arrayOfIndexes) throws InvalidIndexException {
         int[] arrayOfDoneIndexes = IntStream.of(arrayOfIndexes)
                                             .filter(index -> tasks.getTaskListSize() > index && index >= 0)
                                             .toArray();
 
-        if (arrayOfDoneIndexes.length == 0) { throw new InvalidIndexException("Index does not match any task!"); }
-        System.out.println("Nice! I've marked this task(s) as done:");
+        if (arrayOfDoneIndexes.length == 0) { throw new InvalidIndexException("Index does not match any task!\n"); }
+        String doneResponse = "Nice! I've marked this task(s) as done:\n";
 
         IntStream.of(arrayOfDoneIndexes)
                  .forEach(index -> tasks.getTask(index).markAsDone());
 
-        IntStream.of(arrayOfDoneIndexes)
-                 .forEach(index -> System.out.printf("%d.  %s\n", index + 1, tasks.getTask(index)));
+        List<String> listOFPrintedDoneTasks =
+                IntStream.of(arrayOfDoneIndexes)
+                         .mapToObj(index -> String.format("%d.  %s\n", index + 1, tasks.getTask(index)))
+                         .collect(Collectors.toList());
+
+        listOFPrintedDoneTasks.add(0, doneResponse);
+
+        return String.join("", listOFPrintedDoneTasks);
+
     }
 
 
@@ -106,12 +112,12 @@ public class Ui {
      * @param tasks array list of tasks.
      * @param todo index of which task is done.
      */
-    public void acknowledgeTodo(TaskList tasks, Task todo) {
+    public String acknowledgeTodo(TaskList tasks, Task todo) {
         if (tasks.checkDuplicate(todo)) {
-            System.out.println("Hey man! This todo task already exists in the list. You don't wanna duplicate!");
+            return "Hey man! This todo task already exists in the list. You don't wanna duplicate!\n";
         } else {
             tasks.addTask(todo);
-            System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.\n",
+            return String.format("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.\n",
                     todo, tasks.getTaskListSize());
         }
     }
@@ -122,13 +128,15 @@ public class Ui {
      * @param tasks array list of tasks.
      * @param deadline time of deadline.
      */
-    public void acknowledgeDeadline(TaskList tasks, Task deadline) {
+    public String acknowledgeDeadline(TaskList tasks, Task deadline) {
         if (tasks.checkDuplicate(deadline)) {
-            System.out.println("Note!! This task action already exists in the list!");
-            System.out.printf("Now you have %d tasks in the list.\n", tasks.getTaskListSize());
+//            System.out.println("Note!! This task action already exists in the list!");
+//            System.out.printf("Now you have %d tasks in the list.\n", tasks.getTaskListSize());
+            String s = "Note!! This task action already exists in the list!\n";
+            return s + String.format("Now you have %d tasks in the list.\n", tasks.getTaskListSize());
         } else {
             tasks.addTask(deadline);
-            System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.\n",
+            return String.format("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.\n",
                     deadline, tasks.getTaskListSize());
         }
     }
@@ -139,13 +147,13 @@ public class Ui {
      * @param tasks array list of tasks.
      * @param event time of event.
      */
-    public void acknowledgeEvent(TaskList tasks, Task event) {
+    public String acknowledgeEvent(TaskList tasks, Task event) {
         if (tasks.checkDuplicate(event)) {
-            System.out.println("Note!! This task action already exists in the list!");
-            System.out.printf("Now you have %d tasks in the list.\n", tasks.getTaskListSize());
+            String s = "Note!! This task action already exists in the list!\n";
+            return s + String.format("Now you have %d tasks in the list.\n", tasks.getTaskListSize());
         } else {
             tasks.addTask(event);
-            System.out.printf("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.\n",
+            return String.format("Got it. I've added this task\n    %s\nNow you have %d task(s) in the list.\n",
                     event, tasks.getTaskListSize());
         }
     }
@@ -157,17 +165,25 @@ public class Ui {
      * @param arrayOfIndexes integer array of task indexes to be deleted.
      * @throws InvalidIndexException when index is out of bound.
      */
-    public void acknowledgeDelete(TaskList tasks, int... arrayOfIndexes) throws InvalidIndexException {
-        System.out.println("Noted. I've removed this task(s):");
+    public String acknowledgeDelete(TaskList tasks, int... arrayOfIndexes) throws InvalidIndexException {
+        String s = "Noted. I've removed this task(s):\n";
         int[] arrayOfDeleteIndexes = IntStream.of(arrayOfIndexes)
                                               .filter(index -> tasks.getTaskListSize() > index && index >= 0)
                                               .toArray();
 
-        IntStream.of(arrayOfDeleteIndexes)
-                 .forEach(index -> System.out.printf("%d.  %s\n", index + 1, tasks.getTask(index)));
+        if (arrayOfDeleteIndexes.length == 0) { throw new InvalidIndexException("Index does not match any task!\n"); }
+
+        List<String> listOFPrintedDeleteTasks =
+                IntStream.of(arrayOfDeleteIndexes)
+                         .mapToObj(index -> String.format("%d.  %s\n", index + 1, tasks.getTask(index)))
+                         .collect(Collectors.toList());
 
         tasks.removeTasks(arrayOfDeleteIndexes);
-        System.out.println("Now you have " + tasks.getTaskListSize() + " tasks in the list");
+        String taskSizeMessage = String.format("Now you have " + tasks.getTaskListSize() + " tasks in the list");
+        listOFPrintedDeleteTasks.add(0, s);
+        listOFPrintedDeleteTasks.add(taskSizeMessage);
+
+        return String.join("", listOFPrintedDeleteTasks);
     }
 
     /**
@@ -176,17 +192,19 @@ public class Ui {
      * @param tasks array list of tasks.
      * @param taskSearchKey String task to search for.
      */
-    public void acknowledgeFound(TaskList tasks, String taskSearchKey) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String acknowledgeFound(TaskList tasks, String taskSearchKey) {
+        String s = "Here are the matching tasks in your list:\n";
         AtomicInteger atomicIndex = new AtomicInteger(1);
         ArrayList<Task> taskList = tasks.getCurrentTasks();
 
-        taskList.stream()
-                .filter(task -> task.toString().split(" ", 2)[1].split("\\(")[0]
-                        .contains(taskSearchKey))
-                .forEach(task -> {
-                    System.out.printf("%d.  ", atomicIndex.getAndIncrement());
-                    System.out.println(task);
-                });
+        List<String> foundTaskList =
+                taskList.stream()
+                        .filter(task -> task.toString().split(" ", 2)[1].split("\\(")[0]
+                                    .contains(taskSearchKey))
+                        .map(task -> String.format("%d.  %s\n", atomicIndex.getAndIncrement(), task))
+                        .collect(Collectors.toList());
+
+        foundTaskList.add(0, s);
+        return String.join("", foundTaskList);
     }
 }

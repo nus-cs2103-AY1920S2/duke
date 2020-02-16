@@ -12,6 +12,10 @@ public class Event extends Task {
         this.eventTime = event;
     }
 
+    public LocalDateTime getEventTime() {
+        return this.eventTime;
+    }
+
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(),

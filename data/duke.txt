@@ -1,5 +1,5 @@
 T | 1 | abc
 D | 1 | do homework | 2020-02-20T20:20
-E | 1 | do something | 2020-02-20T20:20
-T | 0 | abcxyz
-E | 0 | do something | 2020-02-20T20:20
+T | 1 | abcxyz
+D | 0 | do your job | 2013-03-12T13:00
+E | 0 | do nothing | 1204-04-23T12:03
