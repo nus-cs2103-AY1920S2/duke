@@ -2,18 +2,9 @@
 
 This guide explains how to torture Jerry by getting him to work for you. 
 
-## View 
+## Start 
 
-You may use the application in GUI-mode or CLI-mode. 
-
-+  ### Graphic User Interface 
-There are two ways to start the application in GUI-mode:
-1. Double click on the JAR file
-2. Enter `./gradlew run --args="gui"` in the `duke` root folder.
-
-
-+  ### Command Line Interface 
-Enter `./gradlew run` in the `duke` root folder.
+Double click on the JAR file. 
 
 ## Features 
 
