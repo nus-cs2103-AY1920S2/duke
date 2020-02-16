@@ -20,8 +20,16 @@ public abstract class Task {
     }
 
     public abstract String getType();
+
+    /**
+     * Generates the string needed for saving.
+     * @return The string needed.
+     */
     public abstract String saveString();
 
+    /**
+     * Marks task as done.
+     */
     public void markAsDone() {
         isDone = true;
     }

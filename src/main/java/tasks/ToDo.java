@@ -3,7 +3,7 @@ package tasks;
 /**
  * This class is a type of task.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * The constructor of this class.

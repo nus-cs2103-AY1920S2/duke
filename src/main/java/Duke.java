@@ -32,7 +32,12 @@ public class Duke {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 
-
+    /**
+     * Makes a response for a given command.
+     * @param command The command provided by the user.
+     * @return The response.
+     * @throws IOException Throws IOException.
+     */
     String getResponse(String command) throws IOException{
         String response;
         if (!command.equals("bye")) {
@@ -40,7 +45,6 @@ public class Duke {
                 response = handle(command);
             } catch (DukeException e) {
                 response = e.getMessage();
-//                System.out.println(response);
             }
         } else {
             storage.saveData();

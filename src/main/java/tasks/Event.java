@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * The Event class is a type of task.
  */
-public class Event extends Task{
+public class Event extends Task {
     /**
      * The constructor for the Event class.
      * @param description The description of the event.
