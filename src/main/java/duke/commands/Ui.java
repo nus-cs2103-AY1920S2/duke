@@ -58,7 +58,7 @@ public class Ui {
      * @param command the line input by the user
      * @param insert the name of the command (either done or delete)
      * @param listSize the current size of Tasklist
-     * @throws DukeException throws an exception is the command is invalid
+     * @throws DukeException throws an exception if the command is invalid
      */
     public void checkCommand(String command, String insert,
                              int listSize) throws DukeException {
@@ -104,6 +104,26 @@ public class Ui {
         if (time.length < 2) {
             throw new DukeException("The time of a " + insert
                     + " cannot be empty.");
+        }
+    }
+
+    /**
+     * Checks whether done/delete command entered by used is valid.
+     *
+     * @param command the line input by the user
+     * @param listSize the current size of Tasklist
+     * @throws DukeException throws an exception if the command is invalid
+     */
+    public void checkUpdate(String command, int listSize) throws DukeException {
+        String[] arr = command.split(" ");
+        int testIndex;
+        try {
+            testIndex = Integer.parseInt(command.split(" ")[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("The task to be updated must be specified");
+        }
+        if (testIndex >= listSize) {
+            throw new DukeException("Task " + arr[1] + " does not exist");
         }
     }
 }

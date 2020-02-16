@@ -47,7 +47,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        assert this.getDescription() != null : "No description for this deadline";
+        assert this.getDescription() != null
+                : "No description for this deadline";
         assert this.by != null : "No timing for this deadline";
         return "[D]" + super.toString() + " (by: " + by.format(FORMATTER) + ")";
     }
@@ -59,7 +60,8 @@ public class Deadline extends Task {
      */
     @Override
     public String fileString() {
-        assert this.getDescription() != null : "No description for this deadline";
+        assert this.getDescription() != null
+                : "No description for this deadline";
         assert this.by != null : "No timing for this deadline";
         return "D | " + this.getStatusIcon() + " | " + getDescription() + " | "
                 + by.format(FORMATTER);

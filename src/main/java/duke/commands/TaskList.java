@@ -36,7 +36,8 @@ public class TaskList {
             for (int i = 0; i < newList.size(); i += 1) {
                 output += ((i + 1) + ". " + newList.get(i).toString() + "\n");
                 assert newList.get(i) != null : "No task to list out";
-                assert newList.get(i).getDescription() != null : "No description for this task";
+                assert newList.get(i).getDescription() != null
+                        : "No description for this task";
             }
         }
         return output;
@@ -52,7 +53,8 @@ public class TaskList {
         assert newList.size() > 0 : "No tasks in list";
         newList.get(index).markAsDone();
         assert newList.get(index) != null : "No task to mark as done";
-        assert newList.get(index).getDescription() != null : "No description for this task";
+        assert newList.get(index).getDescription() != null
+                : "No description for this task";
         return ("Nice! I've marked this task as done: \n"
                 + newList.get(index).toString() + "\n");
     }
@@ -66,7 +68,8 @@ public class TaskList {
     public String delete(int index) {
         assert newList.size() > 0 : "No tasks in list";
         assert newList.get(index) != null : "No task to delete";
-        assert newList.get(index).getDescription() != null : "No description for this task";
+        assert newList.get(index).getDescription() != null
+                : "No description for this task";
         Task task = newList.get(index);
         newList.remove(index);
         return ("Noted. I've removed this task:\n" + task.toString() + "\n"
@@ -84,7 +87,8 @@ public class TaskList {
     public String add(Task newTask, boolean print) {
         newList.add(newTask);
         assert newTask != null : "No task to add";
-        assert newTask.getDescription() != null : "No description for this task";
+        assert newTask.getDescription() != null
+                : "No description for this task";
         if (print) {
             return ("Got it. I've added this task:\n"
                     + newTask.toString() + "\n"
@@ -112,7 +116,8 @@ public class TaskList {
      */
     public Task get(int index) {
         assert newList.get(index) != null : "No task to get";
-        assert newList.get(index).getDescription() != null : "No description for this task";
+        assert newList.get(index).getDescription() != null
+                : "No description for this task";
         return newList.get(index);
     }
 
@@ -146,9 +151,11 @@ public class TaskList {
     }
 
     /**
-     * Updates the timing of a deadline or an event
+     * Updates the timing of a deadline or an event.
      *
      * @param index the index of the task to update
+     * @param time the new timing
+     * @param format the format of the parser
      * @return response to "update" command
      */
     public String update(int index, String time, DateTimeFormatter format) {

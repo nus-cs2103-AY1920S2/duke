@@ -84,6 +84,8 @@ public class Parser {
                 return taskList.find(description[1]);
 
             } else if (command.startsWith("update")) {
+                ui.checkUpdate(command, taskList.size());
+                ui.checkTime(arr, "update");
                 return taskList.update(Integer.valueOf(command.split(" ")[1]) - 1,
                         arr[1].split(" ", 2)[1], PARSER);
 

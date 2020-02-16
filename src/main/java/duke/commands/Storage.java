@@ -70,7 +70,8 @@ public class Storage {
             }
             taskList.add(newTask, false);
             assert newTask != null : "No task to retrieve";
-            assert newTask.getDescription() != null : "No description for this task";
+            assert newTask.getDescription() != null
+                    : "No description for this task";
         }
     }
 
@@ -84,7 +85,8 @@ public class Storage {
         for (int i = 0; i < taskList.size(); i += 1) {
             fileString += taskList.get(i).fileString() + "\n";
             assert taskList.get(i) != null : "No task to update";
-            assert taskList.get(i).getDescription() != null : "No description for this task";
+            assert taskList.get(i).getDescription() != null
+                    : "No description for this task";
         }
         new File(filePath).createNewFile();
         FileWriter fw = new FileWriter(filePath);
