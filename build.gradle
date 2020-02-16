@@ -27,6 +27,10 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 

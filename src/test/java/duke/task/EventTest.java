@@ -9,7 +9,7 @@ public class EventTest {
     @Test
     public void testStringConversion() throws DukeException {
         //a unit test for toString() method of "Event" class
-        assertEquals("Event: [Incomplete] Level-9 (at: 1997-05-27T12:22)",
+        assertEquals("Event: [Pending] Level-9 (at: May 27 1997 12:22)",
                 new Event("Level-9", "27-05-1997 12:22").toString());
     }
 
