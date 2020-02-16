@@ -1,3 +1,2 @@
-T | 0 | 1234
-D | 0 | UROP | 3月 31 2019
-D | 0 | UROP | March 31 2019
+T | 0 | study CS2103
+D | 1 | finish Duke  | 2月 20 2020
