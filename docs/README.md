@@ -30,7 +30,9 @@ How to executes those commands ?
  There are 3 types of tasks that you can add. 
     - todo <br>
     `todo [description]` <br>
-     Example: `todo borrow book`
+     Example: `todo borrow book` <br>
+     Expected Output: ![TodoSuccess](todo_success_image.png)
+                 
      
     - deadline <br>
     `deadline [description] /by [YYYY-MM-DD]` <br>
