@@ -2,19 +2,24 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### B-Tagging
+Tags Tasks with identifiers. 
 
 ## Usage
 
-### `Keyword` - Describe action
+### `tag` - Tags task with identifier
 
-Describe action and its outcome.
+Tags the selected task with a string for easier searching and identification
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`tag [index] #[identifier]`
 
 Expected outcome:
 
-`outcome`
+`Task tagged successfully`
+
+On next occurrence of task being printed out, 
+the corresponding tag will be printed at the end. 
+
+`[E][X] CS2103 Exam (at Apr 25 2020 1300) Tags: #sad`
