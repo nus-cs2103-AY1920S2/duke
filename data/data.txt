@@ -1,6 +1,6 @@
-dukeClasses.ToDo|0|prevent Thanos from snapping his fingers|0
 dukeClasses.Deadline|0|kill Thanos |2020-04-11|1
-dukeClasses.Event|0|cut his head off |Endgame|0
+dukeClasses.Event|1|cut his head off |Endgame|0
 dukeClasses.ToDo|0|borrow book|0
 dukeClasses.Deadline|0|return book |2020-02-19|1
 dukeClasses.Event|0|Endgame Movie |Vivocity|0
+dukeClasses.ToDo|0|sell book|0

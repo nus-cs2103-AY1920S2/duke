@@ -48,25 +48,40 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
     `event return book /at 2020-04-20`
     Expected Output: ![](event_success_image.png)
                      Picture: event Success Image
-    
+
+<br>
+
 - `delete` <br>
     Removes a task by providing the task's index.
     Task number starts from 1. <br>
     Example: `delete 1` removes the task at index 1
+    Expected Output: ![](delete_success_image.png)
+                     Picture: delete Success Image
     
+<br> 
 
 - `done` <br>
     Mark a task as completed by providing the task's index.
     Task number starts from 1. <br>
     Example: `done 2` mark task at index 2 as completed
-    
+    Expected Output: ![](done_success_image.png)
+                     Picture: done Success Image
+
+<br>
+
 - `find` <br>
     Allows you to find all tasks with that given keyword in your listsOfTasks. <br>
     Example: `find book` returns you only tasks with "book" in its description
-    
+    Expected Output: ![](find_success_image.png)
+                     Picture: find Success Image
+
+<br>
+
 - `list` <br>
     Lists all your tasks.
     Example: `list` returns you all the tasks in your listOfTasks
+    Expected Output: ![](list_success_image.png)
+                     Picture: list Success Image
     
 - `high priorty` <br>
     Sets the task of this index as high priority so you will be able to view it easily.
