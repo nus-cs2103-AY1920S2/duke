@@ -3,6 +3,7 @@ import tasks.Task;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -10,7 +11,7 @@ import java.nio.file.Paths;
  */
 public class Storage {
     TaskList taskList = new TaskList();
-    private File file = new File("./data/duke.txt");
+    private File file = new File("data/duke.txt");
 
     /**
      * Loads tasks stored in duke.txt in the hard disk. Creates and add the tasks into the ArrayList of tasks.
@@ -19,25 +20,29 @@ public class Storage {
      */
     public void loadData() throws IOException, DukeException {
         // load data from ./data/duke.txt
-        file.createNewFile();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String str;
 
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String str;
+            while ((str = br.readLine()) != null) {
+                Task task;
+                String[] data = str.split("\\|");
+                if (data[0].equals("T")) {
+                    task = taskList.createAndAddTask("todo", "todo " + data[2]);
+                } else if (data[0].equals("E")){
+                    task = taskList.createAndAddTask("event", "event " + data[2] + " /at " + data[3]);
+                } else {
+                    task = taskList.createAndAddTask("deadline", "deadline " + data[2] + " /by " + data[3]);
+                }
 
-        while ((str = br.readLine()) != null) {
-            Task task;
-            String[] data = str.split("\\|");
-            if (data[0].equals("T")) {
-                task = taskList.createAndAddTask("todo", "todo " + data[2]);
-            } else if (data[0].equals("E")){
-                task = taskList.createAndAddTask("event", "event " + data[2] + " /at " + data[3]);
-            } else {
-                task = taskList.createAndAddTask("deadline", "deadline " + data[2] + " /by " + data[3]);
+                if (data[1].equals("1")) {
+                    task.markAsDone();
+                }
             }
-
-            if (data[1].equals("1")) {
-                task.markAsDone();
-            }
+        } catch (FileNotFoundException e) {
+            Path path = Paths.get("data/duke.txt");
+            Files.createDirectories(path.getParent());
+            Files.createFile(path);
         }
     }
 

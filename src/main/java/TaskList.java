@@ -26,30 +26,43 @@ public class TaskList {
     public Task createAndAddTask(String type, String whole) throws DukeException {
         Task task;
         if (parser.numOfParts(whole) == 1) {
-            throw new InvalidCommandException("\u2639 OOPS!!! The description of a " + type + " cannot be empty.");
+            throw new InvalidCommandException(":-( Oops!!! Please give me more details! :-(");
         }
 
         if (doesTaskExist(type, whole)) {
-            throw new DuplicateTaskException("\u2639 OOPS!!! That task already exists!");
+            throw new DuplicateTaskException(":-( Oops!!! That task already exists! :-(");
         }
 
-        if (type.equals("todo")) {
-            String desc = parser.getDesc(whole);
-            task = new ToDo(desc);
+        switch (type) {
+            case "todo": {
+                String desc = parser.getDesc(whole);
+                task = new ToDo(desc);
 
-        } else if (type.equals("event")) {
-            String desc = parser.getDesc(whole);
-            LocalDate date = parser.getDate(whole);
-            task = new Event(desc, date);
+                break;
+            }
+            case "event": {
+                if (whole.split(" ").length != 4) {
+                    throw new InvalidCommandException(":-( Oops!!! Please give me more details! :-(");
+                }
+                String desc = parser.getDesc(whole);
+                LocalDate date = parser.getDate(whole);
+                task = new Event(desc, date);
 
-        } else if (type.equals("deadline")) {
-            String desc =parser.getDesc(whole);
-            LocalDate date = parser.getDate(whole);
-            task = new Deadline(desc, date);
+                break;
+            }
+            case "deadline": {
+                if (whole.split(" ").length != 4) {
+                    throw new InvalidCommandException(":-( Oops!!! Please give me more details! :-(");
+                }
+                String desc = parser.getDesc(whole);
+                LocalDate date = parser.getDate(whole);
+                task = new Deadline(desc, date);
 
-        } else {
-            assert !type.equals("todo") : "type should not be todo";
-            throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                break;
+            }
+            default:
+                assert !type.equals("todo") : "type should not be todo";
+                throw new InvalidCommandException(":-( Oops!!! I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(task);
         return task;
@@ -62,7 +75,7 @@ public class TaskList {
      * @return True if it exists already and false if it is new.
      */
     //ASSERT TYPE IS VALID
-    public boolean doesTaskExist(String type, String whole) {
+    public boolean doesTaskExist(String type, String whole) throws InvalidCommandException {
         switch (type) {
             case "todo" :
                 for (Task task : tasks) {

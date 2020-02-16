@@ -57,6 +57,9 @@ public class Ui {
      */
     public String printList() {
         String result;
+        if (taskList.numOfTasks() == 0) {
+            return "Gr8! You currently have no tasks!";
+        }
         result = "Here are the tasks in your list:\n";
         int count = 1;
         for (int i = 0; i < taskList.numOfTasks(); i++) {

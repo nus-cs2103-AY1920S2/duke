@@ -40,7 +40,7 @@ public class Duke {
                 response = handle(command);
             } catch (DukeException e) {
                 response = e.getMessage();
-                System.out.println(response);
+//                System.out.println(response);
             }
         } else {
             storage.saveData();
@@ -103,7 +103,7 @@ public class Duke {
             case "done" :
                 int taskNum = parser.getTaskIndex(command);
                 if (taskNum > tasks.numOfTasks() || taskNum <= 0) {
-                    throw new InvalidTaskIndexException("\u2639 OOPS!! Not a valid number");
+                    throw new InvalidTaskIndexException(":-( Oops!! Not a valid number :-(");
                 } else {
                     tasks.getTask(taskNum - 1).markAsDone();
                     response = ui.doneMessage(tasks.getTask(taskNum - 1));
@@ -113,7 +113,7 @@ public class Duke {
             case "delete" :
                 int taskNo = parser.getTaskIndex(command);
                 if (taskNo > tasks.numOfTasks() || taskNo <= 0) {
-                    throw new InvalidTaskIndexException("\u2639 OOPS!! Not a valid number");
+                    throw new InvalidTaskIndexException(":-( Oops!! Not a valid number :-(");
                 } else {
                     response = ui.deleteMessage(tasks.getTask(taskNo - 1));
                     tasks.removeTask(taskNo - 1);
@@ -138,7 +138,7 @@ public class Duke {
                 break;
             default :
                 // invalid command
-                throw new InvalidCommandException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new InvalidCommandException(":-( Oops!!! I'm sorry, but I don't know what that means :-(");
         }
         return response;
     }

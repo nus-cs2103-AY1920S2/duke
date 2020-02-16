@@ -1,3 +1,5 @@
+import exception.InvalidCommandException;
+
 import java.time.LocalDate;
 
 /**
@@ -52,13 +54,31 @@ public class Parser {
      * @param wholeCommand The user command.
      * @return The date.
      */
-    public LocalDate getDate(String wholeCommand) {
+    public LocalDate getDate(String wholeCommand) throws InvalidCommandException {
         String type = getType(wholeCommand);
         if (type.equals("event")) {
-            return LocalDate.parse(wholeCommand.substring(6).split(" /at ")[1]);
+            if (checkDateFormat(wholeCommand.substring(6).split(" /at ")[1])) {
+                return LocalDate.parse(wholeCommand.substring(6).split(" /at ")[1]);
+            } else {
+                throw new InvalidCommandException(":-( The format of date must be YYYY-MM-DD :-(");
+            }
 
         } else {
-            return LocalDate.parse(wholeCommand.substring(6).split(" /by ")[1]);
+            if (checkDateFormat(wholeCommand.substring(9).split(" /by ")[1])) {
+                return LocalDate.parse(wholeCommand.substring(9).split(" /by ")[1]);
+            } else {
+                throw new InvalidCommandException(":-( The format of date must be YYYY-MM-DD :-(");
+            }
         }
+    }
+
+    /**
+     * Checks the format of the date supplied by the user.
+     * @param string The command by the user.
+     * @return True if it is correct and false otherwise.
+     */
+    public boolean checkDateFormat(String string) {
+        String[] strings = string.split("-");
+        return (strings[0].length() == 4) && (strings[1].length() == 2) && (strings[2].length() == 2);
     }
 }
