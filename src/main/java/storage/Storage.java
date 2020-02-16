@@ -7,11 +7,7 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.FileWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,9 +18,8 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    public String pathName;
+    private String pathName;
     public ArrayList<Task> taskList;
-    public static final String FILE_PATH = "data/tasks.txt";
 
     /**
      * Constructor for creating new Storage object and creates new ArrayList to store Tasks.
@@ -44,7 +39,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws LoadException {
         try {
-            File file = new File(FILE_PATH);
+            File file = new File(this.pathName);
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -95,9 +90,13 @@ public class Storage {
      * @param tasks This is the ArrayList where the Task is being stored.
      * @throws SaveException thrown when not able to save tasks into file.
      */
-    public static void saveTasks(ArrayList<Task> tasks) throws SaveException {
+    public void saveTasks(ArrayList<Task> tasks) throws SaveException {
         try {
-            FileWriter fw = new FileWriter(FILE_PATH);
+            File myFile =  new File(this.pathName);
+            if (!myFile.getParentFile().exists()) {
+                myFile.getParentFile().mkdirs();
+            }
+            FileWriter fw = new FileWriter(this.pathName);
             assert fw != null : "Assert error: Error saving into file!";
             for (Task t : tasks) {
                 fw.write(formatSavedFile(t) + "\n");
@@ -135,7 +134,12 @@ public class Storage {
     }
 
     public void newFile(String noteType) throws IOException {
-        File file = new File("data/notes/" + noteType + ".txt");
+        String filePath = "data/notes/" + noteType + ".txt";
+        File myFile =  new File(filePath);
+        if (!myFile.getParentFile().exists()) {
+            myFile.getParentFile().mkdirs();
+        }
+        File file = new File(filePath);
         if (!file.exists()) {
             file.createNewFile();
         }
@@ -147,9 +151,4 @@ public class Storage {
         fw.write("• " + notes + "\n");
         fw.close();
     }
-
-    private String formatNotes(String notes) {
-        return "• " + notes;
-    }
-
 }

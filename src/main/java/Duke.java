@@ -6,7 +6,8 @@ import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
 
-import java.io.*;
+
+import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -18,8 +19,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Duke {
 
-    private Storage storage;
-    private TaskList tasks;
+    Storage storage;
+    TaskList tasks;
     private Ui ui;
 
     /**
@@ -27,14 +28,16 @@ public class Duke {
      * Creates a new Duke object when called.
      */
     public Duke() {
+        storage = new Storage("./data/tasks.txt");
+        ui = new Ui();
         try {
-            storage = new Storage("data/tasks.txt");
             tasks = new TaskList(storage.load());
-            ui = new Ui();
         } catch (LoadException e) {
             e.getMessage();
+            tasks = new TaskList();
         }
     }
+
 
     /**
      * This method takes in user input to give necessary output.
