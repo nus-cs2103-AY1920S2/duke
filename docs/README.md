@@ -146,4 +146,4 @@ Expected outcomes:
 
 ## Acknowledgements
 Credit to Jeffry Lum for the fxml and java files for JAVAFX GUI - <br/>
-https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md
+[JavaFx TutorialPart 4](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md).
