@@ -9,7 +9,7 @@ Mbot Jr is a personal assistant chatbot who will help you keep track of your tas
 
 ### `todo` - Adds a to-do task 
 
-Describe action and its outcome.
+Adds a task to be done, with a description. 
 
 Example of usage: 
 
@@ -21,7 +21,7 @@ Expected outcome:
 
 ### `event` - Adds an event task 
 
-Describe action and its outcome.
+Adds an event with a description, date and time.
 
 Example of usage: 
 
@@ -33,7 +33,7 @@ Expected outcome:
 
 ### `deadline` - Adds a deadline task 
 
-Describe action and its outcome.
+Adds a task that has a deadline, with a description, date and time. 
 
 Example of usage: 
 
@@ -45,7 +45,7 @@ Expected outcome:
 
 ### `done` - Marks a task as done
 
-Describe action and its outcome.
+When a task has been completed, mark it as done.
 
 Example of usage: 
 
@@ -57,7 +57,7 @@ Expected outcome:
 
 ### `delete` - Deletes a task 
 
-Describe action and its outcome.
+Delete a task that you no longer want or need.
 
 Example of usage: 
 
@@ -69,7 +69,7 @@ Expected outcome:
 
 ### `list` - Lists all tasks 
 
-Describe action and its outcome.
+Provides a list of all tasks you have added.
 
 Example of usage: 
 
@@ -81,7 +81,7 @@ Expected outcome:
 
 ### `find` - Searches for tasks with keyword 
 
-Describe action and its outcome.
+Shows all tasks that contain the keyword you searched.
 
 Example of usage: 
 
@@ -93,7 +93,7 @@ Expected outcome:
 
 ### `sort` - Sorts tasks chronologically 
 
-Describe action and its outcome.
+Organises the tasks according to date and time.
 
 Example of usage: 
 
@@ -105,7 +105,7 @@ Expected outcome:
 
 ### `bye` - Exits the application 
 
-Describe action and its outcome.
+Exits the application and closes the chatbot.
 
 Example of usage: 
 
