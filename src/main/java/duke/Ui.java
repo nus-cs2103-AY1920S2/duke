@@ -6,35 +6,31 @@ import java.util.ArrayList;
  * UI handles what user sees on display.
  */
 public class Ui {
-    protected String format = "    -----------------------------------------------------------------\n";
+
+    public Ui() {
+    }
+
+    public String format = "    ----------------------------------------------\n";
 
     /**
      * Method prints greeting message.
      */
-    public void showGreeting() {
-        String logo =
-                "      ____        _        \n"
-                        + "     |  _ \\ _   _| | _____ \n"
-                        + "     | | | | | | | |/ / _ \\\n"
-                        + "     | |_| | |_| |   <  __/\n"
-                        + "     |____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println(format + "      Hello! I'm\n" + logo);
-        System.out.println("      What can I do for you? :)\n" + format);
+    public String showGreeting() {
+        return (format + "      Aloha, I'm Stitch!\n      What can I do for you? :)\n" + format);
     }
 
     /**
      * Method prints loading error if data loading error occurs.
      */
-    public void showLoadingError() {
-        System.out.println(format + "      Oops! Something went wrong :(\n" + format);
+    public String showLoadingError() {
+        return (format + "      Oops! Something went wrong :(\n" + format);
     }
 
     /**
      * Method prints goodbye message when program terminates.
      */
-    public void showGoodbye() {
-        System.out.println(format + "      Bye. Hope to see you again soon! :)\n" + format);
+    public String showGoodbye() {
+        return (format + "      Bye. Hope to see you again soon! :)\n" + format);
     }
 
     /**
@@ -42,14 +38,16 @@ public class Ui {
      *
      * @param taskList
      */
-    public void showList(TaskList taskList) {
-        System.out.println(format + "      Here are the tasks in your list:");
+    public String showList(TaskList taskList) {
+        String response = (format + "      Here are the tasks in your list:\n");
 
         for (int i = 1; i < taskList.tasks.size() + 1; i++) {
             Task current = taskList.tasks.get(i - 1);
-            System.out.println("      " + i + ". " + current);
+            response += ("      " + i + ". " + current + "\n");
         }
-        System.out.println(format);
+        response += format;
+
+        return response;
     }
 
     /**
@@ -57,8 +55,8 @@ public class Ui {
      *
      * @param task
      */
-    public void showDone(Task task) {
-        System.out.println(format
+    public String showDone(Task task) {
+        return (format
                 + "      Nice! I've marked this task as done:\n "
                 + "        " + task + "\n"
                 + format);
@@ -69,21 +67,24 @@ public class Ui {
      *
      * @param taskList
      */
-    public void showFound(ArrayList<Task> taskList) {
-        System.out.println(format + "      Here are the matching tasks in your list:");
+    public String showFound(ArrayList<Task> taskList) {
+        String response = "";
+        response = (format + "      Here are the matching tasks in your list:\n");
 
         for (int i = 1; i < taskList.size() + 1; i++) {
             Task current = taskList.get(i - 1);
-            System.out.println("      " + i + ". " + current);
+            response += ("      " + i + ". " + current + "\n");
         }
-        System.out.println(format);
+        response += format;
+
+        return response;
     }
 
     /**
      * Method prints error message when user enters invalid task number.
      */
-    public void showTaskError() {
-        System.out.println(format + "      Sorry, this task does not exist :(\n" + format);
+    public String showTaskError() {
+        return (format + "      Sorry, this task does not exist :(\n" + format);
     }
 
     /**
@@ -92,8 +93,8 @@ public class Ui {
      * @param task
      * @param tasks
      */
-    public void showTaskAdded(Task task, ArrayList<Task> tasks) {
-        System.out.println(format
+    public String showTaskAdded(Task task, ArrayList<Task> tasks) {
+        return (format
                 + "      Got it. I've added this task:\n"
                 + "        " + task + "\n"
                 + "      Now you have " + tasks.size() + " tasks in the list.\n"
@@ -105,8 +106,8 @@ public class Ui {
      * @param task
      * @param tasks
      */
-    public void showTaskDeleted(Task task, ArrayList<Task> tasks) {
-        System.out.println(format
+    public String showTaskDeleted(Task task, ArrayList<Task> tasks) {
+        return (format
                 + "      I've removed this task:\n "
                 + "        " + task + "\n"
                 + "      Now you have " + tasks.size() + " tasks in the list.\n"
@@ -116,8 +117,8 @@ public class Ui {
     /**
      * Method prints error message when user enters invalid date format.
      */
-    public void showDateError() {
-        System.out.println(format
+    public String showDateError() {
+        return (format
                 + "      Please enter a date in this format: YYYY-MM-DD !\n"
                 + format);
     }
@@ -125,8 +126,8 @@ public class Ui {
     /**
      * Method prints error message when user enters invalid date and time format.
      */
-    public void showDateTimeError() {
-        System.out.println(format
+    public String showDateTimeError() {
+        return (format
                 + "      Please enter a date & time in this format: YYYY-MM-DDTHH:MM !\n"
                 + format);
     }

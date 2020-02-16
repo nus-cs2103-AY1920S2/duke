@@ -26,13 +26,14 @@ public class TaskList {
      *
      * @param arr
      */
-    public void add(String[] arr) {
+    public String add(String[] arr) {
         try {
             String taskType = arr[0];
             String[] temp;
             String task = "";
             checkDescription(arr.length);
             Task newTask = new Task("");
+            String response = "";
 
             switch (taskType) {
             case "todo":
@@ -49,7 +50,7 @@ public class TaskList {
                     newTask = new Deadline(task, localDate);
                     this.tasks.add(newTask);
                 } catch (DateTimeParseException ex) {
-                    ui.showDateError();
+                    response = ui.showDateError();
                 }
                 break;
 
@@ -63,16 +64,18 @@ public class TaskList {
                     this.tasks.add(newTask);
 
                 } catch (DateTimeParseException ex) {
-                    ui.showDateTimeError();
+                    response = ui.showDateTimeError();
                 }
             }
 
             if (!newTask.description.equals("")) {
-                ui.showTaskAdded(newTask, this.tasks);
+                response = ui.showTaskAdded(newTask, this.tasks);
             }
 
+            return response;
+
         } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
+            return ex.getMessage();
         }
     }
 
@@ -81,23 +84,26 @@ public class TaskList {
      *
      * @param arr
      */
-    public void delete(String[] arr) {
+    public String delete(String[] arr) {
         try {
             checkNum(arr.length);
             checkValid(arr[1]);
             int taskNum = Integer.parseInt(arr[1]) - 1;
+            String response = "";
 
             if (this.tasks.size() > taskNum) {
                 Task current = this.tasks.get(taskNum);
                 this.tasks.remove(taskNum);
-                ui.showTaskDeleted(current, this.tasks);
+                response = ui.showTaskDeleted(current, this.tasks);
 
             } else {
-                ui.showTaskError();
+                response = ui.showTaskError();
             }
 
+            return response;
+
         } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
+            return ex.getMessage();
         }
     }
 
@@ -106,23 +112,26 @@ public class TaskList {
      *
      * @param arr
      */
-    public void done(String[] arr) {
+    public String done(String[] arr) {
         try {
             checkNum(arr.length);
             checkValid(arr[1]);
             int taskNum = Integer.parseInt(arr[1]) - 1;
+            String response = "";
 
             if (this.tasks.size() > taskNum) {
                 Task current = this.tasks.get(taskNum);
                 current.markDone();
-                ui.showDone(current);
+                response = ui.showDone(current);
 
             } else {
-                ui.showTaskError();
+                response = ui.showTaskError();
             }
 
+            return response;
+
         } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
+           return ex.getMessage();
         }
     }
 
@@ -131,7 +140,7 @@ public class TaskList {
      *
      * @param arr
      */
-    public void find(String[] arr) {
+    public String find(String[] arr) {
         String input = arr[1];
         ArrayList<Task> temp = new ArrayList<>();
 
@@ -141,7 +150,7 @@ public class TaskList {
                 temp.add(task);
             }
         }
-        ui.showFound(temp);
+        return ui.showFound(temp);
     }
 
     /**

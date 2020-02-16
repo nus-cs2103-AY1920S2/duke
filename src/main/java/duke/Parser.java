@@ -22,36 +22,37 @@ public class Parser {
     /**
      * Method to determine action based on user input.
      */
-    public void readCommand() {
+    public String readCommand() {
         String arr[] = this.input.split(" ", 2);
+        String response = "";
 
         if (input.equals("bye")) {
-            Storage storage = new Storage("duke.txt");
-            storage.store(taskList);
-            ui.showGoodbye();
+            response = ui.showGoodbye();
             System.exit(0);
 
         } else if (input.equals("list")) {
-            ui.showList(taskList);
+            response = ui.showList(taskList);
 
         } else if (arr[0].equals("find")) {
-            taskList.find(arr);
+            response = taskList.find(arr);
 
         } else if (arr[0].equals("done")) {
-            taskList.done(arr);
+            response = taskList.done(arr);
 
         } else if (arr[0].equals("delete")) {
-            taskList.delete(arr);
+            response = taskList.delete(arr);
 
         } else {
             try {
                 checkAction(arr[0]);
-                taskList.add(arr);
+                response = taskList.add(arr);
 
             } catch (DukeException ex) {
-                System.out.println(ex.getMessage());
+                return ex.getMessage();
             }
         }
+
+        return response;
     }
 
     /**
