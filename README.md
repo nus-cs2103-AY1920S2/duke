@@ -1,35 +1,43 @@
-# User Guide
+# Duke
 
-## Introduction
+[![Build Status](https://travis-ci.com/JeremyLoh/duke.svg?branch=master)](https://travis-ci.com/JeremyLoh/duke)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd6f84251f874eb7ad0e2a944755e4df)](https://www.codacy.com/manual/JeremyLoh/duke?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JeremyLoh/duke&amp;utm_campaign=Badge_Grade)
 
-![Duke Ui](Ui.png)
+### Setting up
 
-Duke is a Personal Productivity Chatbot that helps a user keep track of various todos, notes, events and deadlines. All of the aforementioned are in the form of tasks.
+**Prerequisites**
+  * JDK 11
+  * Recommended: IntelliJ IDE
+  * Fork this repo to your GitHub account and clone the fork to your computer
 
-> There are 3 types of Tasks:
-1. **Todo**: Tasks without any date attached to them.
-2. **Event**: Tasks that occur on a specific date and time.
-3. **Deadline**: Tasks that should be done by a particular date and time.
+**Importing the project into IntelliJ**
+1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
 
-Duke can perform any of the following commands:
-1. **Add** a task.
-2. **Delete** a task.
-3. **Mark as complete** for any specific task.
-4. **Find** a particular task using a keyword.
-5. **List** out all of User's tasks stored by Duke.
-6. **Whatsup** find out any event or deadline occurring on a given date.
-7. **Exit** terminate the program.
+2. Set up the correct JDK version.
+   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
+   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
+   * Click `OK`.
+3. Click `Import Project`.
+4. Locate the project directory and click `OK`.
+5. Select `Create project from existing sources` and click `Next`.
+6. Rename the project if you want. Click `Next`.
+7. Ensure that your src folder is checked. Keep clicking `Next`.
+8. Click `Finish`.
 
-## Setting up
-### Prerequisites
-* JDK 11
+## Tutorials 
 
-### Running Duke
-1. Locate the jar file in the File Explorer
-2. Type ‘cmd’ on the search bar and press ‘Enter’ to launch Command Prompt if on Windows or run Terminal on MacOS.
-3. Execute the following command, assuming the jar file is named “duke-0.2.jar”
-> `java -jar duke-0.2-all.jar`
+duke.Duke Increment | Tutorial
+---------------|---------------
+`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
+`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
+`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for duke.Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
 
+[fx1]: <tutorials/javaFxTutorialPart1.md>
+[fx2]: <tutorials/javaFxTutorialPart2.md>
+[fx3]: <tutorials/javaFxTutorialPart3.md>
+[fx4]: <tutorials/javaFxTutorialPart4.md>
 
-
-
+## Feedback, Bug Reports
+  * If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se
+ -edu/duke/issues).
+  * We welcome pull requests too.
