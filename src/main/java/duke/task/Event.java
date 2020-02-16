@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidEventException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -24,9 +25,7 @@ public class Event extends Task {
         try {
             this.timePeriod = LocalDateTime.parse(timePeriod, formatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("\t" + "Please write the date and time in this format:"
-                    + "dd-MM-yyyy h:m. For example, 05-27-1997 21:02 is the format"
-                    + " to represent 9:02pm on 27 May 1997");
+            throw new InvalidEventException();
         }
     }
 

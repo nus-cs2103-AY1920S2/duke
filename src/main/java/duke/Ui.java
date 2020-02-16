@@ -14,15 +14,6 @@ import java.util.ArrayList;
  * Responsible for user interaction in terms of returning output to each user.
  */
 public class Ui {
-
-    /**
-     * Returns message to user to inform a new save file was created, in the case no such file existed initially.
-     * @return Returns message to user to inform a new save file was created.
-     */
-    public String showLoadingError() {
-        return "A new save file has been initialised for you." + "\n";
-    }
-
     /**
      * Returns useful message to user on why exception was generated.
      * @param e Contains the message on why exception was generated.
@@ -38,7 +29,8 @@ public class Ui {
      * @return Returns welcome message to user, upon initialisation.
      */
     public static String showWelcomeMessage() {
-        return "Hello there! I am Duke, your personal assistant. Do let me know what I can do for you!" + "\n";
+        return "\n" + "Hello there! I am Duke, your personal assistant. Before I take on the Iron Throne,"
+                + " how may I be of service?" + "\n";
     }
 
     /**
@@ -46,7 +38,7 @@ public class Ui {
      * @return Returns final message to user before program is terminated.
      */
     public String showFarewellMessage() {
-        return "Adios. It was my pleasure assisting you. Keep smiling." + "\n";
+        return "\n" + "It was my pleasure assisting you. Keep smiling while you can. Winter is coming." + "\n";
     }
 
     /**
@@ -56,9 +48,9 @@ public class Ui {
      */
     public String showList(TaskList taskList) {
         if (taskList.getList().isEmpty()) {
-            return "There are no tasks in the list yet.";
+            return "\n" + "There are no tasks in the list yet.";
         }
-        return taskList.toString() + "\n";
+        return "\n" + taskList.toString() + "\n";
     }
 
     /**
@@ -67,7 +59,8 @@ public class Ui {
      * @return An output of a completed Done command.
      */
     public String showDoneMessage(Task completed) {
-        return "Hooray! You've finally managed to finish this task:" + "\n" + completed.toString() + "\n";
+        return "\n" + "Hooray! You've finally managed to finish this task:" + "\n"
+                + "\t" + completed.toString() + "\n";
     }
 
     /**
@@ -76,7 +69,7 @@ public class Ui {
      * @return An output of a completed Delete command.
      */
     public String showDeleteMessage(Task deleted) {
-        return "Got it! I've removed this task:" + "\n" + deleted.toString() + "\n";
+        return "\n" + "Got it! I've removed this task:" + "\n" + "\t" + deleted.toString() + "\n";
     }
 
     /**
@@ -86,11 +79,11 @@ public class Ui {
      */
     public String showWhatsupMessage(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            return "You have nothing assigned on that day.";
+            return "\n" + "You have nothing assigned on that day.";
         }
-        String result = "The tasks you have on that day are:" + "\n";
+        String result = "\n" + "The tasks you have on that day are:" + "\n";
         for (Task task: tasks) {
-            result += task.toString() + "\n";
+            result += "\t" + task.toString() + "\n";
         }
         return result;
     }
@@ -111,7 +104,7 @@ public class Ui {
         } else {
             identifier = "note";
         }
-        return "Awesome! I've added this " + identifier + " :" + "\n" + newTask.toString();
+        return "\n" + "Awesome! I've added this " + identifier + " :" + "\n" + newTask.toString();
     }
 
     /**
@@ -121,11 +114,11 @@ public class Ui {
      */
     public String showFindMessage(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            return "There were no tasks matching what you said.";
+            return "\n" + "There were no tasks matching what you said.";
         }
-        String result = "Here you go, this is probably what you were finding:" + "\n";
+        String result = "\n" + "Here you go, this is probably what you were finding:" + "\n";
         for (Task task: tasks) {
-            result += task.toString() + "\n";
+            result += "\t" + task.toString() + "\n";
         }
         return result;
     }
