@@ -10,7 +10,7 @@ public class InvalidFindException extends InvalidFormatException {
 
     @Override
     public String toString() {
-        return super.toString() + "\n\n" + "For find commands, follow this format: find " +
-                "{(complete or partial) task or note name}";
+        return super.toString() + "\n\n" + "For find commands, follow this format: find "
+                + "{(complete or partial) task or note name}";
     }
 }
