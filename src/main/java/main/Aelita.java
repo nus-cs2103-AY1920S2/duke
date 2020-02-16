@@ -23,27 +23,27 @@ import java.time.format.DateTimeParseException;
 /**
  * The main class of the project.
  */
-public class Duke {
+public class Aelita {
 
     private Storage storage;
     private TaskList taskList;
 
     /**
-     * Constructs a new instance of main.Duke.
+     * Constructs a new instance of Aelita.
      *
      * @param taskList the task list
      */
-    public Duke(TaskList taskList) {
+    public Aelita(TaskList taskList) {
 
-        storage = new Storage(Paths.get(System.getProperty("user.home"), "data", "duke.txt"));
+        storage = new Storage(Paths.get(System.getProperty("user.home"), "data", "aelita.txt"));
         this.taskList = taskList;
         storage.loadTasks(taskList);
     }
 
     /**
-     * Gets main.Duke's task list.
+     * Gets Aelita's task list.
      *
-     * @return main.Duke's task list.
+     * @return Aelita's task list.
      */
     public TaskList getTaskList() {
 

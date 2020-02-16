@@ -16,7 +16,7 @@
                 <Insets/>
             </opaqueInsets>
         </Label>
-        <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
             <HBox.margin>
                 <Insets bottom="5.0" top="5.0"/>
             </HBox.margin>

@@ -43,7 +43,7 @@ public class EventCommand extends Command {
 
         Task event = new Event(description, eventDate, dateTime[1], dateTime[2]);
         taskList.add(event);
-        return new Response(Message.ADD_TASK, "event");
+        return new Response(Message.ADD_TASK, event);
     }
 
     /**

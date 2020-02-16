@@ -8,7 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import main.Duke;
+
+import main.Aelita;
 import main.Response;
 import main.TaskList;
 import task.Task;
@@ -55,10 +56,10 @@ public class Ui extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Aelita aelita;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Phoenix.jpg"));
+    private Image aelitaImage = new Image(this.getClass().getResourceAsStream("/images/Aelita.jpg"));
 
     /**
      * Initializes the scroll pane to bind to the dialog container. Also prints out the welcome message on the chat.
@@ -71,18 +72,18 @@ public class Ui extends AnchorPane {
     }
 
     /**
-     * Initializes duke.
+     * Initializes Aelita.
      *
-     * @param d the duke
+     * @param aelita the Aelita
      */
-    public void setDuke(Duke d) {
+    public void setAelita(Aelita aelita) {
 
-        duke = d;
+        this.aelita = aelita;
     }
 
     /**
      * Obtains the input command from the text field and creates a user dialog box containing the command. Clears the
-     * text field after creating the dialog box. The command is passed to main.Duke and processed to get the appropriate
+     * text field after creating the dialog box. The command is passed to Aelita and processed to get the appropriate
      * response, which is used to create another dialog box and appended to the dialog container.
      */
     @FXML
@@ -93,7 +94,7 @@ public class Ui extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(command, userImage));
         userInput.clear();
 
-        printResponse(duke.executeCommand(command));
+        printResponse(aelita.executeCommand(command));
     }
 
     /**
@@ -101,9 +102,9 @@ public class Ui extends AnchorPane {
      */
     public void printGreeting() {
 
-        String greeting = "Hi! I'm main.Duke.\nHow can I help you?";
+        String greeting = "Hi! I'm Aelita.\nHow can I help you?";
 
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greeting, dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getAelitaDialog(greeting, aelitaImage));
     }
 
     /**
@@ -137,7 +138,7 @@ public class Ui extends AnchorPane {
 
         case DONE:
             message = DONE_MSG;
-            message += "    " + duke.getTaskList().get((int) response.getArgument());
+            message += "    " + aelita.getTaskList().get((int) response.getArgument());
             break;
 
         case DUPLICATE_TASK:
@@ -242,7 +243,7 @@ public class Ui extends AnchorPane {
         default:
             //Do nothing
         }
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(message, dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getAelitaDialog(message, aelitaImage));
     }
 
 }
