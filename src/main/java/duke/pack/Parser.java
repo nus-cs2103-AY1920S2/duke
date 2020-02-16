@@ -80,7 +80,7 @@ public class Parser {
      */
     public static Command parseFind(String[] comm) throws DukeException {
         if (comm.length == 1) {
-            throw new DukeException("    Oh no! You have to specify what you want to find!");
+            throw new DukeException("Oh no! You have to specify what you want to find!");
         }
 
         Command c = new FindCommand(comm[1]);
@@ -95,7 +95,7 @@ public class Parser {
      */
     public static Command parseDone(String[] comm) throws DukeException {
         if (comm.length == 1) {
-            throw new DukeException("    Oh no! You have to specify which task is done!");
+            throw new DukeException("Oh no! You have to specify which task is done!");
         }
 
         Command c = new DoneCommand(Integer.parseInt(comm[1]));
@@ -110,7 +110,7 @@ public class Parser {
      */
     public static Command parseDelete(String[] comm) throws DukeException {
         if (comm.length == 1) {
-            throw new DukeException("    Oh no! You have to specify which task to delete!");
+            throw new DukeException("Oh no! You have to specify which task to delete!");
         }
 
         Command c = new DeleteCommand(Integer.parseInt(comm[1]));
@@ -127,7 +127,7 @@ public class Parser {
     public static Command parseTodo(String fullCommand, String[] comm) throws DukeException {
         // if no description is given
         if (comm.length == 1) {
-            throw new DukeException("    Oh no! A todo cannot be empty!");
+            throw new DukeException("Oh no! A todo cannot be empty!");
         }
 
         String[] arr = fullCommand.split("todo");
@@ -148,19 +148,19 @@ public class Parser {
     public static Command parseEvent(String fullCommand, String[] comm) throws DukeException {
         // if no description is given
         if (comm.length == 1) {
-            throw new DukeException("    Oh no! An event cannot be empty!");
+            throw new DukeException("Oh no! An event cannot be empty!");
         }
 
         String[] splitByAt = fullCommand.split("/at");
         // if no "at" is given
         if (splitByAt.length == 1) {
-            throw new DukeException("    Oh no! Please include an at!");
+            throw new DukeException("Oh no! Please include an at!");
         }
         
         String[] splitByEvent = splitByAt[0].split("event");
         String[] dateTime = splitByAt[1].trim().split(" ");
         if (dateTime.length == 1) {
-            throw new DukeException("    Oh no! Please include a time!");
+            throw new DukeException("Oh no! Please include a time!");
         }
 
         try {
@@ -171,7 +171,7 @@ public class Parser {
             return c;
 
         } catch (DateTimeParseException e) {
-            throw new DukeException("    Oh no! Please follow the date format! " +
+            throw new DukeException("Oh no! Please follow the date format! \n" +
                     "Example: 2020-01-27 13:00!");
         }
     }
@@ -187,20 +187,20 @@ public class Parser {
     public static Command parseDeadline(String fullCommand, String[] comm) throws DukeException {
         // if no description is given
         if (comm.length == 1) {
-            throw new DukeException("    Oh no! A deadline cannot be empty!");
+            throw new DukeException("Oh no! A deadline cannot be empty!");
         }
 
         String[] splitByBy = fullCommand.split("/by");
         // if no "by" is given
         if (splitByBy.length == 1) {
-            throw new DukeException("    Oh no! You need to include by when!");
+            throw new DukeException("Oh no! You need to include by when!");
         }
 
         String[] splitByDeadline = splitByBy[0].split("deadline");
         String[] dateTime = splitByBy[1].trim().split(" ");
 
         if (dateTime.length == 1) {
-            throw new DukeException("    Oh no! Please include a time!");
+            throw new DukeException("Oh no! Please include a time!");
         }
 
         try {
@@ -212,7 +212,7 @@ public class Parser {
             return c;
 
         } catch (DateTimeParseException e) {
-            throw new DukeException("    Oh no! Please follow the date format! " +
+            throw new DukeException("Oh no! Please follow the date format! \n" +
                     "Example: 2020-01-27 13:00!");
         }
     }

@@ -1,5 +1,5 @@
 T | 1 | read book
 T | 0 | take a nap
+T | 0 | look for mushrooms
 E | 0 | meeting | 14:00 | 2020-02-17
 D | 0 | submit quiz | 16:00 | 2020-02-19
-T | 0 | look for mushrooms

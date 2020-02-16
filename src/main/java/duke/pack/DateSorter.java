@@ -2,7 +2,13 @@ package duke.pack;
 
 import java.util.Comparator;
 
+/**
+ * Represents a comparator to sort according to date.
+ */
 public class DateSorter implements Comparator<Task> {
+    /**
+     * Creates a DateSorter object.
+     */
     public DateSorter() {
     }
 

@@ -16,9 +16,10 @@ public class Duke {
     private Ui ui;
     private static final String path = "data/duke.txt";
 
-    public Duke() {
-    }
-
+    /**
+     * Creates a Duke object.
+     * @param filePath String representing the file path
+     */
     public Duke(String filePath) {
         // following code from module website
 

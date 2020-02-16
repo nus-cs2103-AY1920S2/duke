@@ -45,8 +45,6 @@ public class AddCommand extends Command {
 
         String resp = "Alright! I have added: \n" + task + "\n" + count;
 
-
-
         return resp;
     }
 

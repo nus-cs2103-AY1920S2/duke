@@ -6,8 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.time.LocalDate;
-
 import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,7 +34,7 @@ public class Storage {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException e) {
-            throw new DukeException("    Oh no, file could not be created!\n");
+            throw new DukeException("Oh no, file could not be created!\n");
         }
     }
 
@@ -68,7 +68,7 @@ public class Storage {
             }
 
         } catch (FileNotFoundException e) {
-            throw new DukeException("    Oh no, file could not be found, please check your file path!\n");
+            throw new DukeException("Oh no, file could not be found, please check your file path!\n");
         }
 
         return arrList;
@@ -95,7 +95,6 @@ public class Storage {
     public Task processEvent(String[] taskArr) {
         LocalDate date = LocalDate.parse(taskArr[4].trim());
         LocalTime time = LocalTime.parse(taskArr[3].trim());
-        String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
 
         Task event = new Event(taskArr[2].trim(), time, date, date.toString(), time.toString());
         if (taskArr[1].trim().equals("1")) {
@@ -113,8 +112,6 @@ public class Storage {
     public Task processDeadline(String[] taskArr) {
         LocalDate date = LocalDate.parse(taskArr[4].trim());
         LocalTime time = LocalTime.parse(taskArr[3].trim());
-
-        String fullDesc = taskArr[2].trim() + " " + taskArr[3].trim() + " " + taskArr[4].trim();
 
         Task deadline = new Deadline(taskArr[2].trim(), time, date, date.toString(), time.toString());
         if (taskArr[1].trim().equals("1")) {
