@@ -30,14 +30,14 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
  There are 3 types of tasks that you can add. 
     - todo <br>
     `todo [description]` <br>
-     Example: `todo borrow book`
+     Example: `todo borrow book`<br>
      Expected Output: ![](todo_success_image.png)
                       Picture: todo Success Image
      <br>
      
     - deadline <br>
     `deadline [description] /by [YYYY-MM-DD]` <br>
-    Example: `deadline return book /by 2020-02-19`
+    Example: `deadline return book /by 2020-02-19` <br>
     Expected Output: ![](deadline_success_image.png)
                      Picture: deadline Success Image
     <br>
@@ -45,7 +45,7 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
     - event <br>
     `event [description] /at [a location or time]` <br>
     Example: `event Endgame Movie /at Vivocity` or <br>
-    `event return book /at 2020-04-20`
+    `event return book /at 2020-04-20` <br>
     Expected Output: ![](event_success_image.png)
                      Picture: event Success Image
 
@@ -54,7 +54,7 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
 - `delete` <br>
     Removes a task by providing the task's index.
     Task number starts from 1. <br>
-    Example: `delete 1` removes the task at index 1
+    Example: `delete 1` removes the task at index 1 <br>
     Expected Output: ![](delete_success_image.png)
                      Picture: delete Success Image
     
@@ -63,7 +63,7 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
 - `done` <br>
     Mark a task as completed by providing the task's index.
     Task number starts from 1. <br>
-    Example: `done 2` mark task at index 2 as completed
+    Example: `done 2` mark task at index 2 as completed <br>
     Expected Output: ![](done_success_image.png)
                      Picture: done Success Image
 
@@ -71,7 +71,7 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
 
 - `find` <br>
     Allows you to find all tasks with that given keyword in your listsOfTasks. <br>
-    Example: `find book` returns you only tasks with "book" in its description
+    Example: `find book` returns you only tasks with "book" in its description <br>
     Expected Output: ![](find_success_image.png)
                      Picture: find Success Image
 
@@ -79,20 +79,31 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
 
 - `list` <br>
     Lists all your tasks.
-    Example: `list` returns you all the tasks in your listOfTasks
+    Example: `list` returns you all the tasks in your listOfTasks <br>
     Expected Output: ![](list_success_image.png)
                      Picture: list Success Image
-    
+
+<br>
+
 - `high priorty` <br>
     Sets the task of this index as high priority so you will be able to view it easily.
     <br>
-    Example: `highpriority 4` sets the task at index 4 as high priority. 
+    Example: `highpriority 4` sets the task at index 4 as high priority. <br>
+    Expected Output: ![](highpriority_success_image.png)
+                     Picture: highpriority Success Image
     
     
+<br>
+ 
 - `list urgent task` <br>
     Lists **only** tasks that are marked as high priority <br>
     Example: `list urgent task` returns a list containing of tasks that are high priority.
-  
+    <br>
+    Expected Output: ![](listurgenttask_success_image.png)
+                     Picture: listurgenttask Success Image
+                     
+<br>    
+
 - `bye` <br>
     Terminates the application <br>
     Example: `bye` exits the program 
