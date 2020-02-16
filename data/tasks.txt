@@ -1,2 +1,5 @@
 T | 0 | borrow book
 T | 0 | read book
+D | 0 | return book | Apr 3 2020
+E | 0 | project | Apr 3 2020-15:00
+E | 0 | meeting | Apr 3 2020-18:00

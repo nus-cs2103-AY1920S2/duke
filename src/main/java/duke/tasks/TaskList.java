@@ -8,10 +8,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-import duke.exceptions.MissingKeywordException;
-import duke.exceptions.UnknownTaskException;
+import duke.exceptions.*;
 import duke.storage.Storage;
-import duke.exceptions.DukeException;
 
 public class TaskList {
 
@@ -70,12 +68,11 @@ public class TaskList {
     /**
      * Prints to console the existing list of tasks
      */
-    public String printTaskList() {
+    public String printTaskList() throws DukeException {
         StringBuilder output = new StringBuilder();
         if (size() == 0) {
-            output.append("Your list of tasks is currently empty.\n");
+            throw new EmptyListException();
         } else {
-            output.append("This is your list of tasks:\n");
             int taskIdx = 1;
             for (Task task : tasks) {
                 output.append(taskIdx + ". ");
@@ -89,12 +86,11 @@ public class TaskList {
     /**
      * Prints to console the schedule specified
      */
-    public String printSchedule(LocalDate date) {
+    public String printSchedule(LocalDate date) throws DukeException {
         StringBuilder output = new StringBuilder();
         if (size() == 0) {
-            output.append("Your list of tasks is currently empty.\n");
+            throw new NoTasksScheduledException();
         } else {
-            output.append("This is your schedule on " + date + ":\n");
             int taskIdx = 1;
             for (Task task : schedule) {
                 if (task.getDate().toString().equals(date.toString())) {

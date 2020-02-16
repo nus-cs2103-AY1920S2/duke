@@ -13,8 +13,14 @@ public class FindCommand implements Command {
      * @throws DukeException If keyword is not in list of tasks
      */
     public static String execute(String keyword, TaskList tasks) throws DukeException {
+        StringBuilder output = new StringBuilder();
+
         TaskList matchingTasks = tasks.findKeyWord(keyword);
-        return matchingTasks.printTaskList();
+        output.append("This is your lists of tasks that contain '"
+                + keyword + "':\n");
+        output.append(matchingTasks.printTaskList());
+
+        return output.toString();
     }
 }
 

@@ -23,6 +23,10 @@ public class ScheduleCommand implements Command {
             throw new WrongScheduleFormatException();
         }
 
-        return tasks.printSchedule(taskDate);
+        StringBuilder output = new StringBuilder();
+        output.append("This is your schedule on " + date + ":\n");
+        output.append(tasks.printSchedule(taskDate));
+
+        return output.toString();
     }
 }

@@ -13,7 +13,11 @@ public class ListCommand implements Command {
      * @param tasks List of current tasks
      * @throws DukeException If input format is wrong. Not used here
      */
-    public static String execute(TaskList tasks) {
-        return tasks.printTaskList();
+    public static String execute(TaskList tasks) throws DukeException {
+        StringBuilder output = new StringBuilder();
+
+        output.append("This is your list of tasks:\n");
+        output.append(tasks.printTaskList());
+        return output.toString();
     }
 }
