@@ -142,7 +142,7 @@ public class Ui {
      * Prints the goodbye message for the user.
      */
     public void printGoodbyeMessage() {
-        System.out.println("Data has been saved! Goodbye Mr.Stark!!!!");
+        System.out.println("Data has been saved! Goodbye Mr.Stark!!!!!");
         System.out.println(horizontalLine);
     }
 }
