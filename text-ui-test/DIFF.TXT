@@ -1,0 +1,170 @@
+Comparing files ACTUAL.TXT and EXPECTED.TXT
+***** ACTUAL.TXT
+        ************************************************************
+        hewwo fwom
+         _____     _
+        |     |___| |_ ___ ___ ___ ___ ___ ___
+        |   --| .'|  _| . | -_|  _|_ -| . |   |
+        |_____|__,|_| |  _|___|_| |___|___|_|_|
+                      |_|
+        ************************************************************
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        ..\src\data\data.txt (The system cannot find the file specified)
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        ************************************************************
+        how may i sewve u today nya?
+        ************************************************************
+***** EXPECTED.TXT
+hewwo fwom
+ _____     _
+|     |___| |_ ___ ___ ___ ___ ___ ___
+|   --| .'|  _| . | -_|  _|_ -| . |   |
+|_____|__,|_| |  _|___|_| |___|___|_|_|
+              |_|
+how may i sewve u today nya?
+        ************************************************************
+        Hewe awe the tasks in youw wist:
+        list is empty qwq
+        ************************************************************
+*****
+
+***** ACTUAL.TXT
+        ************************************************************
+        Hewe awe the tasks in youw wist:
+        list is empty ^qwq^
+        ************************************************************
+***** EXPECTED.TXT
+        ************************************************************
+        Got it UwU I've added this task:
+        [T][✘] take care of kyaru
+        Nyow you have 1 tasks in the wist.
+        ************************************************************
+*****
+
+***** ACTUAL.TXT
+        ************************************************************
+        Got it ^UwU^ I've added this task: 
+        [T][✘] take care of kyaru 
+        Nyow you have 1 tasks in the wist.
+        ************************************************************
+***** EXPECTED.TXT
+        ************************************************************
+        Got it UwU I've added this task:
+        [D][✘] refill catfood  (by: 6pm)
+        Nyow you have 2 tasks in the wist.
+        ************************************************************
+*****
+
+***** ACTUAL.TXT
+        ************************************************************
+        Got it ^UwU^ I've added this task: 
+        [D][✘] refill catfood  (by: Saturday, 25 Jan 2020 18:30)
+        Nyow you have 2 tasks in the wist.
+        ************************************************************
+***** EXPECTED.TXT
+        ************************************************************
+        Got it UwU I've added this task:
+        [E][✘] kishi-san meeting  (at: Friday 7pm)
+        Nyow you have 3 tasks in the wist.
+        ************************************************************
+DukeException:  ************************************************************
+        OOPS owo  I'm sowwy, but I don't knyow what that means :-(
+        ************************************************************
+*****
+
+***** ACTUAL.TXT
+        ************************************************************
+        Got it ^UwU^ I've added this task: 
+        [E][✘] kishi-san meeting  (at: Friday, 31 Jan 2020)
+        Nyow you have 3 tasks in the wist.
+        ************************************************************
+***** EXPECTED.TXT
+        ************************************************************
+        Hewe awe the tasks in youw wist:
+        1. [T][✘] take care of kyaru
+        2. [D][✘] refill catfood  (by: 6pm)
+        3. [E][✘] kishi-san meeting  (at: Friday 7pm)
+        ************************************************************
+        ************************************************************
+        Nyice ;;w;;  I've mawked this task as donye:
+        [T][✓] take care of kyaru
+        ************************************************************
+        ************************************************************
+        Nyice ;;w;;  I've mawked this task as donye:
+        [D][✓] refill catfood  (by: 6pm)
+        ************************************************************
+        ************************************************************
+        Nyoted (・`ω´・)  I've wemuvd this task:
+        [D][✓] refill catfood  (by: 6pm)
+        Nyow you have 2 tasks in the wist.
+        ************************************************************
+        ************************************************************
+        Hewe awe the tasks in youw wist:
+        1. [T][✓] take care of kyaru
+        2. [E][✘] kishi-san meeting  (at: Friday 7pm)
+        ************************************************************
+        ************************************************************
+        Bye. Hope to see you again soon >w<
+        ************************************************************
+*****
+
+***** ACTUAL.TXT
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        OOPS owo  I'm sowwy, but I don't knyow what that means ^;;w;;^
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        OOPS (・`ω´・)  The descwiption of a todo cannyot be empty.
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        OOPS ;;w;;  The descwiption of a deadwinye cannyot be empty.
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        OOPS owo  The descwiption of a event cannyot be empty.
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        ************************************************************
+        Got it ^UwU^ I've added this task: 
+        [T][✘] that has a timing 
+        Nyow you have 4 tasks in the wist.
+        ************************************************************
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        OOPS ;;w;;  The descwiption of a deadwinye cannyot be empty.
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        ************************************************************
+        Got it ^UwU^ I've added this task: 
+        [E][✘] typed in wrong order  (at: Wednesday, 5 Feb 2020 6:00)
+        Nyow you have 5 tasks in the wist.
+        ************************************************************
+        ************************************************************
+        Hewe awe the tasks in youw wist:
+        1. [T][✘] take care of kyaru 
+        2. [D][✘] refill catfood  (by: Saturday, 25 Jan 2020 18:30)
+        3. [E][✘] kishi-san meeting  (at: Friday, 31 Jan 2020)
+        4. [T][✘] that has a timing 
+        5. [E][✘] typed in wrong order  (at: Wednesday, 5 Feb 2020 6:00)
+        ************************************************************
+        ************************************************************
+        Nyice ^;;w;;^  I've mawked this task as donye: 
+        [T][✓] take care of kyaru 
+        ************************************************************
+        ************************************************************
+        Nyice ^;;w;;^  I've mawked this task as donye: 
+        [D][✓] refill catfood  (by: Saturday, 25 Jan 2020 18:30)
+        ************************************************************
+        ************************************************************
+        Nyoted (^・`ω´・^)  I've wemuvd this task: 
+        [T][✓] take care of kyaru 
+        Nyow you have 4 tasks in the wist.
+        ************************************************************
+        ************************************************************
+        Hewe awe the tasks in youw wist:
+        1. [D][✓] refill catfood  (by: Saturday, 25 Jan 2020 18:30)
+        2. [E][✘] kishi-san meeting  (at: Friday, 31 Jan 2020)
+        3. [T][✘] that has a timing 
+        4. [E][✘] typed in wrong order  (at: Wednesday, 5 Feb 2020 6:00)
+        ************************************************************
+        ************************************************************
+        Bye. Hope to see you again soon ^>w<^
+        ************************************************************
+***** EXPECTED.TXT
+*****
+

@@ -1,0 +1,17 @@
+list
+todo take care of kyaru
+deadline refill catfood /by 25/1/2020 18:30
+event kishi-san meeting /at 31/1/2020
+you don't know what this means
+todo
+deadline
+event
+todo that has a timing /at 1/2/2020 18:00
+deadline /by 20/1/2020
+event /at 5/2/2020 6:00 typed in wrong order
+list
+done 1
+done 2
+delete 1
+list
+bye

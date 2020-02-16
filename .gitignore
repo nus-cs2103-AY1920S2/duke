@@ -12,3 +12,14 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# text-ui-test output files
+/text-ui-test/ACTUAL.TXT
+/text-ui-test/DIFF.TXT
+/text-ui-test/EXPECTED.txt
+
+# JUnit test input / output files
+/src/test/data.txt
+
+# IntelliJ build
+/out/
