@@ -16,7 +16,7 @@ public class ScheduleCommand implements Command {
      */
     public static String execute(String date, TaskList tasks) throws DukeException {
 
-        LocalDate taskDate = null;
+        LocalDate taskDate;
         try {
             taskDate = Task.parseDate(date);
         } catch (DateTimeParseException e) {

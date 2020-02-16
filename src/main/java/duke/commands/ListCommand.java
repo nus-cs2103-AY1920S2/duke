@@ -1,12 +1,9 @@
 package duke.commands;
 
-import duke.tasks.*;
-import duke.ui.Ui;
-import duke.storage.Storage;
+import duke.tasks.TaskList;
 import duke.exceptions.DukeException;
 
 public class ListCommand implements Command {
-
 
     /**
      * Prints out the current list of tasks

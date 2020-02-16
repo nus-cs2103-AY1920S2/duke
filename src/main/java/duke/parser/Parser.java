@@ -3,7 +3,16 @@
  */
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.CommandType;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.DoneCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.ScheduleCommand;
+import duke.commands.AddTodoCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.MissingDetailsException;
 import duke.exceptions.UnrecognizedCommandException;

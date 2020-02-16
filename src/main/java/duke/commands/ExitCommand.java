@@ -1,9 +1,5 @@
 package duke.commands;
 
-import duke.tasks.TaskList;
-import duke.storage.Storage;
-import duke.exceptions.DukeException;
-
 public class ExitCommand implements Command {
 
     /**
