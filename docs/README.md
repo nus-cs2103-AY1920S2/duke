@@ -33,16 +33,18 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
      Example: `todo borrow book`
      Expected Output: ![](todo_success_image.png)
                       Picture: todo Success Image
+     <br>
      
     - deadline <br>
     `deadline [description] /by [YYYY-MM-DD]` <br>
-    Example: `deadline read book /by 2020-04-11`
+    Example: `deadline return book /by 2020-02-19`
     Expected Output: ![](deadline_success_image.png)
                      Picture: deadline Success Image
+    <br>
     
     - event <br>
     `event [description] /at [a location or time]` <br>
-    Example: `event return book /at library` or <br>
+    Example: `event Endgame Movie /at Vivocity` or <br>
     `event return book /at 2020-04-20`
     Expected Output: ![](event_success_image.png)
                      Picture: event Success Image
