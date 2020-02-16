@@ -53,21 +53,24 @@ public class Storage {
 
         Character taskType = taskDetails[0].charAt(0);
         boolean taskIsDone = taskDetails[1].equals("1");
+        String description = taskDetails[2];
         Task task = null;
 
         switch (taskType) {
             case 'T':
-                task = new Todo(taskDetails[2]);
+                task = new Todo(description);
                 break;
             case 'D':
                 LocalDate deadlineDate = LocalDate.parse(taskDetails[3], Deadline.dateFormatter);
-                task = new Deadline(taskDetails[2], deadlineDate);
+
+                task = new Deadline(description, deadlineDate);
                 break;
             case 'E':
                 String[] dateTimeString = taskDetails[3].split("-");
                 LocalDate eventDate = LocalDate.parse(dateTimeString[0], Deadline.dateFormatter);
                 LocalTime eventTime = LocalTime.parse(dateTimeString[1], Event.timeFormatter);
-                task = new Event(taskDetails[2], eventDate, eventTime);
+
+                task = new Event(description, eventDate, eventTime);
                 break;
         }
 
