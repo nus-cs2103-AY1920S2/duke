@@ -1,7 +1,5 @@
 T | 1 | read book
-T | 1 | read content
-D | 0 | submit thing | 14:00 | 2020-02-18
-E | 0 | meeting | 14:00 | 2020-02-16
-T | 0 | nap
-T | 0 | ah
-T | 0 | blah
+T | 0 | take a nap
+E | 0 | meeting | 14:00 | 2020-02-17
+D | 0 | submit quiz | 16:00 | 2020-02-19
+T | 0 | look for mushrooms

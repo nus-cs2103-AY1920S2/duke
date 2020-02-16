@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
-        String logo = "Hello, I'm Mbot Jr! How may I help you?";
+        String logo = "Hello, I'm Mbot Jr! The M stands for mushrooms, FYI. How may I help you today?";
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(logo, dukeImage)
