@@ -130,8 +130,10 @@ public class TaskList {
         }
         Task task = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
-        schedule.remove(task);
 
+        if (task instanceof Deadline || task instanceof Event) {
+            schedule.remove(task);
+        }
         return task.toString();
     }
 
