@@ -1,6 +1,8 @@
 # User Guide
 Spongebob Organiser is an organiser which helps you manage your tasks
+
 ![OnStart](Ui.png)
+
 ## Tasks 
 There are 3 types of tasks that Spongebob can help you track.
 * Todo
@@ -52,6 +54,7 @@ Spongebob shows all the tasks that he is tracking.
 Format: `list`
 
 Expected outcome:
+
 ![List](./images/list.png)
 
 ### `todo` - Add a new Todo task
