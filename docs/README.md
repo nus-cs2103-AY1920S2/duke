@@ -1,19 +1,79 @@
-# User Guide
+# User Guide for Edith
 
-## Features 
-
-### Feature 1 
-Description of feature.
+## Brief Description
+Edith is a Personal Assistant Chatbot that helps a user keep track of various tasks.
 
 ## Usage
 
-### `Keyword` - Describe action
+### Key Commands for Jarvis: 
 
-Describe action and its outcome.
+1. **Add** a task
 
-Example of usage: 
+2. **Delete** a task
 
-`keyword (optional arguments)`
+3. **Done** mark a task as completed
+
+4. **Find** tasks with that given keyword
+
+5. **List** out all tasks
+
+6. **High Priority** set a task as high priority
+
+7. **List urgent task** lists all the high priority tasks
+
+8. **Bye** exits jarvis
+
+
+How to executes those commands ? 
+
+ - `Add` <br>
+ There are 3 types of tasks that you can add. 
+    - todo <br>
+    `todo [description]` <br>
+     Example: `todo borrow book`
+     
+    - deadline <br>
+    `deadline [description] /by [YYYY-MM-DD]` <br>
+    Example: `deadline read book /by 2020-04-11`
+    
+    - event <br>
+    `event [description] /at [a location or time]` <br>
+    Example: `event return book /at library` or <br>
+    `event return book /at 2020-04-20`
+    
+    
+- `delete` <br>
+    Removes a task by providing the task's index.
+    Task number starts from 1. <br>
+    Example: `delete 1` removes the task at index 1
+    
+
+- `done` <br>
+    Mark a task as completed by providing the task's index.
+    Task number starts from 1. <br>
+    Example: `done 2` mark task at index 2 as completed
+    
+- `find` <br>
+    Allows you to find all tasks with that given keyword in your listsOfTasks. <br>
+    Example: `find book` returns you only tasks with "book" in its description
+    
+- `list` <br>
+    Lists all your tasks.
+    Example: `list` returns you all the tasks in your listOfTasks
+    
+- `high priorty` <br>
+    Sets the task of this index as high priority so you will be able to view it easily.
+    <br>
+    Example: `highpriority 4` sets the task at index 4 as high priority. 
+    
+    
+- `list urgent task` <br>
+    Lists **only** tasks that are marked as high priority <br>
+    Example: `list urgent task` returns a list containing of tasks that are high priority.
+  
+- `bye` <br>
+    Terminates the application <br>
+    Example: `bye` exits the program 
 
 Expected outcome:
 

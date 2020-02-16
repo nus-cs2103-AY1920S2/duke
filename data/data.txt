@@ -1,3 +1,3 @@
-dukeClasses.ToDo|0|borrow book|1
-dukeClasses.ToDo|0|ff fewfwe|0
-dukeClasses.Deadline|0|ff3434 |2020-04-19|1
+dukeClasses.ToDo|0|prevent Thanos from snapping his fingers|0
+dukeClasses.Deadline|0|kill Thanos |2020-04-11|0
+dukeClasses.Event|0|cut his head off |Endgame|0
