@@ -180,6 +180,10 @@ public class Ui {
     public static String getBuffer() {
         String buffer = Ui.buffer;
         Ui.buffer = "";
+        // Ensure that the UI buffer is cleared
+        assert(Ui.buffer.isEmpty());
+        // Ensure that there is at least some data retrieved from the buffer
+        assert(!buffer.isEmpty());
         return buffer;
     }
 }
