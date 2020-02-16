@@ -36,6 +36,7 @@ public class Storage {
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(filePath);
+        file.getParentFile().mkdir();
 
         try {
             Scanner sc = new Scanner(file);
