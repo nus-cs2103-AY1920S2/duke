@@ -63,6 +63,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
 
+        // creates a delay of 0.5s before exiting the application to show the bye message
         if (response.equals(bye)) {
             new Timer().schedule(new TimerTask() {
                 @Override
