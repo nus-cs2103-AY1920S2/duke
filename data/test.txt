@@ -1,1 +1,4 @@
- [T] [✘] run
+ [T] [✓] hehe                 
+ [T] [✓] hoho                 
+ [T] [✘] hohoho                 
+ [T] [✘] hohohoho                 

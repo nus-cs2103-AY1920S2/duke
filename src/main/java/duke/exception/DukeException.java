@@ -15,5 +15,4 @@ public class DukeException extends Exception {
         super("OOPS!! " + errorMessage);
     }
 
-
 }

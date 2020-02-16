@@ -7,9 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class Main extends Application {
 
-    private DukeJavaFxRunner dukeJavaFxRunner = new DukeJavaFxRunner();
+public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws DukeException {
@@ -19,7 +18,6 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDukeJavaFxRunner(dukeJavaFxRunner);
             stage.show();
         } catch (Exception e) {
 

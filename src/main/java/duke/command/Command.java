@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.FindException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -23,7 +24,7 @@ public abstract class Command {
      *
      * @param userInput the user input
      */
-    public Command(String userInput) {
+    Command(String userInput) {
         this.userInput = userInput;
     }
 
@@ -36,5 +37,6 @@ public abstract class Command {
      * @throws DukeException Main exception method I have created
      * @throws IOException   For any potential Input/Output exceptions from incorrect file
      */
-    public abstract String execute(Storage storage, Ui ui, TaskList tasklist) throws IOException, DukeException;
+    public abstract String execute(Storage storage, Ui ui, TaskList tasklist)
+            throws DukeException, FindException, IOException;
 }

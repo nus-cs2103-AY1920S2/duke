@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.io.File;
+import java.util.Scanner;
+
 
 /**
  * The type List command to show the user the list of items.
@@ -33,7 +36,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
         try {
-            return ui.printList(taskList);
+            return ui.printList(taskList, storage);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }

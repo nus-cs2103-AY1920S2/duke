@@ -1,11 +1,14 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.FindException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -15,21 +18,23 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(Storage storage, Ui ui, TaskList tasklist) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList tasklist)
+            throws FindException {
         String description = obtainItemToBeFound("find ", this.userInput);
+        System.out.println("The description is " + description);
         TaskList foundTasks = new TaskList();
-
-        for (Task k : tasklist.getList()) {
-            if (k.getDescription().contains(description)) {
-                foundTasks.addToList(k);
+        String[] storageArray = storage.getStoredItems().split(System.lineSeparator());
+        ArrayList<String> foundArray = new ArrayList<>();
+        for (String s : storageArray) {
+            if (s.contains(description)) {
+                foundArray.add(s);
             }
         }
-
-        if (foundTasks.getList().isEmpty()) {
-            throw new DukeException("There are no tasks with this keyword :'( ");
+        if (foundTasks.getList().isEmpty() && foundArray.isEmpty()) {
+            throw new FindException("There are no tasks with this keyword :'( ");
         } else {
             assert (!foundTasks.getList().isEmpty()) : "The foundTasks list should be empty";
-            return ui.printList(foundTasks);
+            return ui.printFoundList(foundTasks, foundArray);
         }
 
     }

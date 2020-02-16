@@ -23,7 +23,6 @@ public class Task {
     private boolean isDay;
     // To check if there is time inclusive in the command
     private boolean hasTime;
-    private DeadlineEventHash deadlineEventHash;
 
 
     /**
@@ -55,9 +54,10 @@ public class Task {
      *
      * @return the status icon
      */
-    public String getStatusIcon() {
+    String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
+
 
     /**
      * Gets description.

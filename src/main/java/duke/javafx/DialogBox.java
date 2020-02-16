@@ -20,7 +20,7 @@ import javafx.scene.shape.Circle;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+class DialogBox extends HBox {
 
     @FXML
     private Label dialog;
@@ -38,7 +38,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setClip(new Circle(50,35,35));
+        displayPicture.setClip(new Circle(50, 35, 35));
         displayPicture.setImage(img);
     }
 
@@ -54,22 +54,24 @@ public class DialogBox extends HBox {
 
     /**
      * For the User's dialog box.
+     *
      * @param text What the user has entered.
-     * @param img Image of the user.
+     * @param img  Image of the user.
      * @return A DialogBox.
      */
 
-    public static DialogBox getUserDialog(String text, Image img) {
+    static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
     /**
      * For Dukes reply dialog box.
+     *
      * @param text What is to be returned (text).
-     * @param img Image of Duke.
+     * @param img  Image of Duke.
      * @return A Dialogbox.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

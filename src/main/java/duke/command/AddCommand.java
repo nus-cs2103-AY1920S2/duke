@@ -12,7 +12,6 @@ import duke.task.Todo;
 
 
 import java.io.IOException;
-import java.util.stream.Stream;
 
 /**
  * Class which consists of Tasks which adds to the List
@@ -53,14 +52,14 @@ public class AddCommand extends Command {
             newDeadLine.setD1();
             taskList.addToList(newDeadLine);
             storage.saveTask(newDeadLine);
-            return ui.printTasks(newDeadLine, taskList.getList());
+            return ui.printTasks(newDeadLine, taskList.getList(), storage);
         } else if (userInput.contains("todo")) {
             assert (userInput.contains("todo")) : "userInput should contain todo!";
             Task newTodoTask = new Todo(userInput);
             newTodoTask.setDescription(newTodoTask.formatTasks("todo"));
             taskList.addToList(newTodoTask);
             storage.saveTask(newTodoTask);
-            return ui.printTasks(newTodoTask, taskList.getList());
+            return ui.printTasks(newTodoTask, taskList.getList(), storage);
         } else if (userInput.contains("event")) {
             assert (userInput.contains("event")) : "userInput should contain event!";
             Event newEvent = new Event(userInput);
@@ -69,7 +68,7 @@ public class AddCommand extends Command {
             newEvent.setD1();
             taskList.addToList(newEvent);
             storage.saveTask(newEvent);
-            return ui.printTasks(newEvent, taskList.getList());
+            return ui.printTasks(newEvent, taskList.getList(), storage);
         } else {
             return ui.invalidAddTaskException();
         }

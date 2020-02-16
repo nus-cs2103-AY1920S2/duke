@@ -1,12 +1,14 @@
 package duke.duke;
 
 import duke.exception.DukeException;
+import duke.exception.FindException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.command.Command;
 import duke.task.TaskList;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -23,7 +25,7 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage("data/test.txt");
     }
 
     /**
@@ -35,7 +37,7 @@ public class Duke {
      * @throws DukeException when the user enters a wrong message.
      * @throws IOException   when the user enters a wrong input.
      */
-    public String run(String input) throws DukeException, IOException {
+    public String run(String input) throws DukeException, FindException, IOException {
         String fullCommand = ui.readCommand(input);
         Command c = Parser.parseCommand(fullCommand, input);
         return c.execute(storage, ui, taskList);

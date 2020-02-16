@@ -2,6 +2,7 @@ package duke.javafx;
 
 import duke.duke.Duke;
 import duke.exception.DukeException;
+import duke.exception.FindException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -33,10 +35,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private DukeJavaFxRunner dukeJavaFxRunner;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Trump.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Putin.jpg"));
+
+    public MainWindow() {
+    }
 
 
     /**
@@ -47,11 +50,6 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Welcome Mr Trump!", dukeImage));
-    }
-
-
-    public void setDukeJavaFxRunner(DukeJavaFxRunner d) {
-        dukeJavaFxRunner = d;
     }
 
     /**
@@ -68,8 +66,8 @@ public class MainWindow extends AnchorPane {
         // Gets the response from MainWindow.
         try {
             response = duke.run(input);
-        } catch (Exception e) {
-            response = "Please enter todo/deadline/event/list. The program will close if "
+        } catch (DukeException | IOException e) {
+            response = "Please enter todo/deadline/event/list/find. The program will close if "
                     + "you enter " + (3 - counter) + " more wrong format";
             counter++;
 
@@ -79,6 +77,8 @@ public class MainWindow extends AnchorPane {
                 Platform.exit();
             }
 
+        } catch (FindException e) {
+            response = e.getMessage();
         }
 
         dialogContainer.getChildren().addAll(
@@ -88,4 +88,5 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
     }
+
 }

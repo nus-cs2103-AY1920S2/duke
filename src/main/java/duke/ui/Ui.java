@@ -1,19 +1,23 @@
 package duke.ui;
 
 import duke.exception.DukeException;
-import duke.task.DeadlineEventHash;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * The type Ui.
  */
-
 public class Ui {
 
-    private DeadlineEventHash deadlineEventHash = new DeadlineEventHash();
     /**
      * The Lines.
      */
@@ -31,6 +35,8 @@ public class Ui {
 
     /**
      * Print bye.
+     *
+     * @return the string
      */
     public String printBye() {
         return LINES + System.lineSeparator() + "        Bye. Hope to see you again soon"
@@ -42,9 +48,30 @@ public class Ui {
      * Print list.
      *
      * @param taskList the task list
+     * @param storage  the storage
+     * @return the string
+     * @throws FileNotFoundException the file not found exception
      */
-    public String printList(TaskList taskList) {
-        return  LINES + System.lineSeparator() + taskList.print_elements() + LINES + System.lineSeparator();
+    public String printList(TaskList taskList, Storage storage) throws FileNotFoundException {
+
+        storage.getNumberOfTasks();
+        return LINES + System.lineSeparator() + "There are " + storage.getNumberOfTasks() + " of items in the list "
+                + System.lineSeparator() + storage.getStoredItems() + LINES + System.lineSeparator();
+    }
+
+    /**
+     * Print found list from FindCommand.
+     *
+     * @param taskList    the task list
+     * @param storageList the storage list
+     * @return the string
+     */
+    public String printFoundList(TaskList taskList, ArrayList<String> storageList) {
+        String fromStorageList = storageList.stream().collect(Collectors.joining(System.lineSeparator()));
+        return LINES + System.lineSeparator() + fromStorageList
+                + taskList.print_elements() + LINES + System.lineSeparator();
+
+
     }
 
     /**
@@ -57,46 +84,83 @@ public class Ui {
         throw new DukeException("You have entered an invalid number!");
     }
 
+    /**
+     * Invalid add task exception string.
+     *
+     * @return the string
+     */
     public String invalidAddTaskException() {
         return "You have entered a wrong AddTaskCommand";
     }
 
     /**
-     * Print done.
+     * Print tasks marked as done. Only used when reading tasks from .txt file
      *
-     * @param finishedTask the finished task
+     * @param storageElements the storage elements
+     * @param storage         the storage
+     * @param modifiedString  the modified string
+     * @return the string
+     * @throws IOException the io exception
      */
-    // Tells the user that the task is done.
-    public String printDone(Task finishedTask) {
-        return LINES + System.lineSeparator() + SPACE + "Nice! I've marked this task as done" + System.lineSeparator()
-                + SPACE + " [" + finishedTask.getStatusIcon() + "]" + " " + finishedTask.getDescription()
+    public String printDone(ArrayList<String> storageElements,
+                            Storage storage, String modifiedString) throws IOException {
+        File file = new File(storage.getFilePath());
+        file.getParentFile().mkdirs();
+        FileWriter fw = new FileWriter(file);
+
+        for (String s : storageElements) {
+            fw.write(s + System.lineSeparator());
+        }
+        fw.close();
+
+        return LINES + System.lineSeparator() + SPACE + "Nice! I've marked this task as done"
+                + System.lineSeparator() + SPACE + modifiedString
                 + System.lineSeparator() + LINES + System.lineSeparator();
+
     }
 
     /**
      * Print tasks.
      *
-     * @param task the task
-     * @param list the list
+     * @param task    the task
+     * @param list    the list
+     * @param storage the storage
+     * @return the string
+     * @throws FileNotFoundException the file not found exception
      */
-    public String printTasks(Task task, ArrayList<Task> list) {
-        return LINES + System.lineSeparator() + SPACE + " Got it. I've added this task: " + System.lineSeparator()
-                + SPACE + task + System.lineSeparator() + SPACE + " Now you have " + list.size() + " tasks in the list."
+    public String printTasks(Task task, ArrayList<Task> list, Storage storage) throws FileNotFoundException {
+        return LINES + System.lineSeparator() + SPACE
+                + " Got it. I've added this task: " + System.lineSeparator()
+                + SPACE + task + System.lineSeparator() + SPACE + " Now you have "
+                + storage.getNumberOfTasks() + " tasks in the list."
                 + System.lineSeparator() + LINES;
     }
 
     /**
-     * Print delete.
+     * Print delete string.
      *
+     * @param list        the list
+     * @param storage     the storage
      * @param deletedTask the deleted task
-     * @param taskList    the task list
+     * @return the string
+     * @throws IOException the io exception
      */
-    public String printDelete(Task deletedTask, TaskList taskList) {
-        return SPACE + "The deleted task is " + deletedTask + System.lineSeparator() + LINES + System.lineSeparator()
+    public String printDelete(ArrayList<String> list, Storage storage, String deletedTask) throws IOException {
+
+        File file = new File(storage.getFilePath());
+        file.getParentFile().mkdirs();
+        FileWriter fw = new FileWriter(file);
+
+        for (String s : list) {
+            fw.write(s + System.lineSeparator());
+        }
+        fw.close();
+        return SPACE + LINES + System.lineSeparator()
                 + SPACE + "Noted. I've removed this task:" + System.lineSeparator() + SPACE + deletedTask
-                + System.lineSeparator() + SPACE + "Now you have " + taskList.sizeOfList() + " tasks in the list."
+                + System.lineSeparator() + SPACE + "Now you have " + storage.getNumberOfTasks() + " tasks in the list."
                 + System.lineSeparator() + LINES + System.lineSeparator();
     }
+
 
     /**
      * Read command string.
@@ -124,5 +188,6 @@ public class Ui {
             throw new DukeException("You have entered a wrong command");
         }
     }
+
 
 }

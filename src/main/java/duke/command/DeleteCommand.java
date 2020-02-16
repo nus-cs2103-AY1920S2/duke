@@ -3,13 +3,12 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
-import duke.task.Task;
 import duke.task.TaskList;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * The type Delete command which deletes from the list.
@@ -34,32 +33,34 @@ public class DeleteCommand extends Command {
      * @param ui       Deals with interactions with the user
      * @param taskList List containing all the tasks
      * @throws DukeException Main exception method I have created
+     * @throws IOException   For wrong input/output exceptions
      */
 
     @Override
-    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
-        Task deletedTask = taskList.getList().get(obtainIndexToBeDeleted(" ", userInput, taskList, ui));
-        taskList.removeFromList(deletedTask);
-        assert (!taskList.getList().contains(deletedTask)) : "taskList should not contain the deleted task!";
-        return ui.printDelete(deletedTask, taskList);
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException, IOException {
+        int indexToBeMarkedDone = obtainIndexToBeDeleted(" ", userInput, taskList, ui,
+                storage.getNumberOfTasks());
+        String[] storageArrays = storage.getStoredItems().split(System.lineSeparator());
+        ArrayList<String> storageElements = new ArrayList<>(Arrays.asList(storageArrays));
 
+        // Now if we modifying from the file itself.
+        String preModifiedString = storageElements.get(indexToBeMarkedDone - 1);
+        storageElements.remove(preModifiedString);
+        return ui.printDelete(storageElements, storage, preModifiedString);
     }
 
     private int obtainIndexToBeDeleted(String regrexWanted, String userInput, TaskList taskList,
-                                       Ui ui) throws DukeException {
+                                       Ui ui, int numOfElementsInStorage) throws DukeException {
 
         String[] splittedString = userInput.split(regrexWanted);
-
         String stringValue = Arrays.stream(splittedString)
                 .filter(x -> x.equals(splittedString[1]))
                 .collect(Collectors.joining());
-
-        Integer arrayIndex = Integer.valueOf(stringValue);
-
-        if (arrayIndex > taskList.sizeOfList()) {
+        int arrayIndex = Integer.parseInt(stringValue);
+        int index = taskList.sizeOfList() + numOfElementsInStorage;
+        if (arrayIndex > index) {
             ui.invalidNumberException();
         }
-
-        return arrayIndex - 1;
+        return arrayIndex;
     }
 }
