@@ -30,18 +30,22 @@ How to executes those commands ?
  There are 3 types of tasks that you can add. 
     - todo <br>
     `todo [description]` <br>
-     Example: `todo borrow book` <br>
-     Expected Output: ![TodoSuccess](todo_success_image.png)
-                 
+     Example: `todo borrow book`
+     Expected Output: ![](todo_success_image.png)
+                      Picture: todo Success Image
      
     - deadline <br>
     `deadline [description] /by [YYYY-MM-DD]` <br>
     Example: `deadline read book /by 2020-04-11`
+    Expected Output: ![](deadline_success_image.png)
+                     Picture: deadline Success Image
     
     - event <br>
     `event [description] /at [a location or time]` <br>
     Example: `event return book /at library` or <br>
     `event return book /at 2020-04-20`
+    Expected Output: ![](event_success_image.png)
+                     Picture: event Success Image
     
 - `delete` <br>
     Removes a task by providing the task's index.
