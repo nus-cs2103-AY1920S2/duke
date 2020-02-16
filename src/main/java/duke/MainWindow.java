@@ -52,12 +52,11 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * startDuke Method to print the welcome message, on first run.
+     * startDuke method to show the welcome message on start
      */
-    @FXML
     private void startDuke() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.welcome(), dukeImage)
+                DialogBox.getDukeDialog(Ui.welcomeMsg, dukeImage)
         );
     }
 }

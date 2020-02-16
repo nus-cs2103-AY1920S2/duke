@@ -12,9 +12,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.FileCreationFailure;
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 public class Storage {
 
@@ -28,30 +30,21 @@ public class Storage {
      * Looks for a file of existing list of tasks to be loaded into an ArrayList.
      * Creates a new file if file is not found
      * @return ArrayList of tasks
-     * @throws DukeException If file cannot be found
+     * @throws IOException If file cannot be found and created
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(filePath);
 
-        if (file.exists()) {
-            try {
-                Scanner sc = new Scanner(file);
-                while (sc.hasNext()) {
-                    String currentTask = sc.nextLine();
-                    taskList.add(parseTask(currentTask));
-                }
-            } catch (FileNotFoundException e) {
-                throw new FileCreationFailure();
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String currentTask = sc.nextLine();
+                taskList.add(parseTask(currentTask));
             }
-        } else {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new FileCreationFailure();
-            }
+        } catch (FileNotFoundException e) {
+            file.createNewFile();
         }
-
         return taskList;
     }
 
@@ -135,7 +128,7 @@ public class Storage {
         } else if (task instanceof Event) {
             Event eventTask = (Event) task;
             sb.append("E | " + isDone + " | " + eventTask.getDescription() + " | " + eventTask.getDateString()
-            + "-" + eventTask.getTimeString());
+                    + "-" + eventTask.getTimeString());
         }
         sb.append("\n");
         return sb.toString();

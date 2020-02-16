@@ -10,7 +10,6 @@ package duke;
 
 import duke.storage.Storage;
 import duke.exceptions.DukeException;
-import duke.ui.Ui;
 import duke.tasks.TaskList;
 import duke.parser.Parser;
 
@@ -26,6 +25,8 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.io.IOException;
 
 public class Duke extends Application {
 
@@ -46,8 +47,7 @@ public class Duke extends Application {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
             tasks = new TaskList();
         }
     }

@@ -1,18 +1,22 @@
 package duke.ui;
 
-import java.util.Scanner;
+import duke.DialogBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
 public class Ui {
 
-    public static void showLoadingError() {
-        System.out.println("Loading error");
+    public static String welcomeMsg = "Hello! I'm Duke!\n" + "What can I do for you?\n";
+
+    public static void showMessage(VBox dialogContainer, Image dukeImage, String msg) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(msg, dukeImage)
+        );
     }
 
-    public static void showError(String message) {
-        System.out.println(message);
-    }
-
-    public static String welcome() {
-        return "Hello! I'm Duke!\n" + "What can I do for you?\n";
+    public static void showLoadingError(VBox dialogContainer, Image image) {
+        String errorMsg = "Data found could not be found or created.\n"
+                + "Please restart Duke and check your file structure.\n";
+        showMessage(dialogContainer, image, errorMsg);
     }
 }
