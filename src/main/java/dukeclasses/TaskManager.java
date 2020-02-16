@@ -100,7 +100,17 @@ public class TaskManager {
             } else {
                 textEntered = textEntered.substring(9);
                 String[] temp = (textEntered.split("/by ")); //leaving only the date and time portion
-                assert temp.length > 1 : "Deadline format must be (deadline homework /by YYYY-MM_DD)";
+
+                //assert temp.length > 1 : "Deadline format must be (deadline homework /by YYYY-MM_DD)";
+
+                try {
+                    LocalDate checkIfDateIsCorrectFormat = LocalDate.parse(temp[1]);
+                } catch (Exception e) {
+                    throw new DukeException("Deadline format must be (deadline homework /by YYYY-MM_DD)");
+                }
+
+
+
                 String tempDate = temp[1];
                 LocalDate date;
                 try {
@@ -119,9 +129,19 @@ public class TaskManager {
                 throw new DukeException("The description of an event cannot be empty");
             } else {
                 textEntered = textEntered.substring(6);
-                String[] temp = (textEntered.split("/"));
-                assert temp.length > 1 : "Event format must be (event party /at location)";
-                newTask = new Event(temp[0], temp[1].substring(3));
+                String[] temp = (textEntered.split("/at "));
+
+
+                //assert temp.length > 1 : "Event format must be (event party /at location)";
+                try {
+                    String checkIfItsNull = temp[1];
+                } catch (Exception e) {
+                    throw new DukeException("Event format must be (event attend party /at location)");
+                }
+
+
+
+                newTask = new Event(temp[0], temp[1]);
                 this.listOfTasks.add(newTask);
             }
         }
@@ -185,7 +205,6 @@ public class TaskManager {
      */
     public void markTaskAsHighPriority(int index) {
 
-        assert index > 0 : "index must be bigger than 0";
         listOfTasks.get(index - 1).markAsHighPriority();
         storage.saveExistingData(listOfTasks);
         System.out.println("Nice! I've marked this task as high priority:");

@@ -113,10 +113,18 @@ public class Ui {
                 System.out.println(ex);
             }
         } else if (textEntered.contains("highpriority")) {
+
+            int indexOfTaskToBeHighPriority = 0;
+
             Parser parser = new Parser();
-            int indexOfTaskDone = parser.handleHighPriorityCommands(textEntered);
             try {
-                manager.markTaskAsHighPriority(indexOfTaskDone);
+                indexOfTaskToBeHighPriority = parser.handleHighPriorityCommands(textEntered);
+            } catch (DukeException ex) {
+                System.out.println("highpriority must be followed by a number.");
+            }
+
+            try {
+                manager.markTaskAsHighPriority(indexOfTaskToBeHighPriority);
             } catch (ArrayIndexOutOfBoundsException ex) {
                 System.out.println("highpriority must be followed by a number");
             } catch (IndexOutOfBoundsException ex) {

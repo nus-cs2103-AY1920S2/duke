@@ -58,11 +58,16 @@ public class Parser {
      * @return index
      */
 
-    public int handleHighPriorityCommands(String textEntered)  {
+    public int handleHighPriorityCommands(String textEntered) throws DukeException {
 
         String[] temporary = textEntered.split(" ");
-        int indexOfTaskDone = Integer.parseInt(temporary[1]);
-        return indexOfTaskDone;
+        int indexOfTaskToBeHighPriority;
+        try {
+            indexOfTaskToBeHighPriority = Integer.parseInt(temporary[1]);
+            return indexOfTaskToBeHighPriority;
+        } catch (Exception ex) {
+            throw new DukeException("done must be followed by a number");
+        }
 
 
     }
