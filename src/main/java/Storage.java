@@ -19,6 +19,16 @@ public class Storage {
      */
     public Storage(String filePath) {
         file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                file = new File("data");
+                file.mkdir();
+                file = new File("data/duke.txt");
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     /**

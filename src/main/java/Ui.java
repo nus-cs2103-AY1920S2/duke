@@ -87,6 +87,9 @@ public class Ui {
      * @param tasks A TaskList object that contains ArrayList of Task.
      */
     public String listTask(TaskList tasks) {
+        if (tasks.getList().size() == 0) {
+            return "There are no task in the list! FREEDOM!";
+        }
         String temp = "Here are the " + (tasks.getList().size() == 1 ? "task" : "tasks") + " in your list:\n";
         for (int i = 1; i <= tasks.getList().size(); i++) {
             temp += i + "." + tasks.getList().get(i - 1) + "\n";
