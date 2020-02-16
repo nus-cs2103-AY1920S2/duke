@@ -12,6 +12,12 @@ shadowJar {
     archiveAppendix = null
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'Launcher'
+    }
+}
+
 group 'seedu.duke'
 version '0.1.0'
 
@@ -34,7 +40,7 @@ dependencies {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 run {
