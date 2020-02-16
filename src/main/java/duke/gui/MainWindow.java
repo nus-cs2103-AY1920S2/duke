@@ -14,6 +14,10 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    //@@author Exeexe93-reused
+    //Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md
+    //with minor modifications.
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -43,8 +47,11 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke d) {
         duke = d;
+        //@@author Exeexe93
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(d.getGreeting(), dukeImage));
     }
+
+    //@@author Jeffry Lum
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply
@@ -55,9 +62,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        //@@author Exeexe93
         showDialogBoxes(input, response);
+        //@@author Jeffry Lum
         userInput.clear();
-
+        //@@author Exeexe93
         checkIsExit(response);
     }
 
@@ -68,11 +77,15 @@ public class MainWindow extends AnchorPane {
      * @param response  Reply message to user
      */
     private void showDialogBoxes(String userInput, String response) {
+        //@@author Exeexe93-reused
+        //Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md.
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userInput, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
     }
+
+    //@@author Exeexe93
 
     /**
      * Check whether is it goodbye message, if yes, close gui.

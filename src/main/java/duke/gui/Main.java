@@ -34,19 +34,25 @@ public class Main extends Application {
         }
     }
 
+    //@@author Exeexe93-reused
+    //Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md.
+
     /**
      * Load the MainWindow fxml file and connect logic to MainWindow controller.
      *
      * @return Ui style loaded.
      */
     private AnchorPane loadFxml() throws DukeException {
+        //@@author Exeexe93
         AnchorPane ap = null;
+        //@@author Jeffry Lum
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             ap = fxmlLoader.load();
             fxmlLoader.<MainWindow>getController().setDuke(duke);
         } catch (IOException e) {
             e.printStackTrace();
+            //@@author Exeexe93
         } catch (NullPointerException e) {
             throw new DukeException("Error loading the fxml file from MainWindow.fxml");
         }

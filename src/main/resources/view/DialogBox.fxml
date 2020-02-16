@@ -5,6 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
+<!-- @@author Jeffry Lum -->
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <Label fx:id="dialog" alignment="TOP_LEFT" graphicTextGap="40.0" minHeight="-Infinity" style="-fx-background-color: lightblue; -fx-background-radius: 20; -fx-padding: 10;" text="Label" wrapText="true">
      <HBox.margin>

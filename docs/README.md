@@ -143,3 +143,7 @@ Expected outcomes:
  `Alright! See you next time!`
  
 <img src="images/Bye.png" alt="Screenshot for bye command" about="Screenshot for bye command" align="center">
+
+## Acknowledgements
+Credit to Jeffry Lum for the fxml and java files for JAVAFX GUI - <br/>
+https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md

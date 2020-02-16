@@ -24,6 +24,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    //@@author Exeexe93-reused
+    //Reused from https://github.com/Exeexe93/duke/blob/master/tutorials/javaFxTutorialPart4.md.
+
     /**
      * Set the text and image based on the arguments into the dialog box.
      *
@@ -36,6 +39,10 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    //@@author Exeexe93-reused
+    //Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md
+    //with minor modifications
+
     /**
      * Load the style from DialogBox.fxml and set the controller to this instance and load it.
      * Print out any IOException occurs in the terminal.
@@ -47,9 +54,13 @@ public class DialogBox extends HBox {
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
+            //@@author Exeexe93
             System.out.println(e.getMessage());
         }
     }
+
+    //@@author Exeexe93-reused
+    //Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md.
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
@@ -61,6 +72,9 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    //@@author Exeexe93-reused
+    //Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md.
+
     /**
      * Return user Dialog Box with the text and image in it.
      *
@@ -71,6 +85,9 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
+
+    //@@author Exeexe93-reused
+    //Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md.
 
     /**
      * Return Duke Dialog Box with the text and image in it. Invert the dialog object around the vertical axis.
