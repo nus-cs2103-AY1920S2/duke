@@ -1,5 +1,6 @@
 # Eevee User Guide
 Eevee is your personal task manager, specially catered towards busy SoC students who need to record down their busy schedules.
+![Image of Product](./Ui.png)
 
 ## Features 
 
