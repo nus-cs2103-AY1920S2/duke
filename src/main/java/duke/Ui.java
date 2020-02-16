@@ -104,7 +104,7 @@ public class Ui {
         } else {
             identifier = "note";
         }
-        return "\n" + "Awesome! I've added this " + identifier + " :" + "\n" + newTask.toString();
+        return "\n" + "Awesome! I've added this " + identifier + " :" + "\n" + "\t" + newTask.toString();
     }
 
     /**
