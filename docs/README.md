@@ -1,6 +1,10 @@
 # User Guide
 A guide on how to use Duke.
-## Features 
+
+## 1. Screenshot
+![Screenshot of Duke](https://github.com/heidicrq/duke/blob/master/docs/Ui.png)
+
+## 2. Features 
 
 * #### Add task
 * #### Remove duplicate task
@@ -9,121 +13,121 @@ A guide on how to use Duke.
 * #### List tasks
 * #### Auto-save task
 
-## Types of tasks
-#### `todo` - a normal task
-#### `event` - a task occurring at a date
-####  `deadline` - a task that you need to complete before a date
+## 3. Types of tasks
+* #### `todo` - a normal task
+* #### `event` - a task occurring at a date
+* ####  `deadline` - a task that you need to complete before a date
 
-## Usage
+## 4. Usage
 After typing the command, press `enter` to see a reply.
 
-* ### `todo`
+### 4.1 `todo` 
 
-    Adds a todo task by typing, `todo "task"`.
-    
-    Example of usage: 
+Adds a todo task by typing, `todo "task"`.
 
-    `todo buy groceries`
+Example of usage: 
 
-    Expected outcome:
+`todo buy groceries`
 
-    ```
-    Got it. I've added this task: 
-    [T][✗] buy groceries
-    Now you have 1 task in the list.
-    ```
+Expected outcome:
+
+```
+Got it. I've added this task: 
+[T][✗] buy groceries
+Now you have 1 task in the list.
+```
 
 
-* ### `event`
+### 4.2 `event`
 
-    Adds an event task by typing, `event "task" /at "yyyy-mm-dd"`.
-    
-    Example of usage: 
+Adds an event task by typing, `event "task" /at "yyyy-mm-dd"`.
 
-    `event family outing /at 2020-09-20`
+Example of usage: 
 
-    Expected outcome:
+`event family outing /at 2020-09-20`
 
-    ```
-    Got it. I've added this task: 
-    [E][✗] family outing (at: Sep 20 2020)
-    Now you have 1 task in the list.
-    ```
+Expected outcome:
+
+```
+Got it. I've added this task: 
+[E][✗] family outing (at: Sep 20 2020)
+Now you have 1 task in the list.
+```
   
-* ### `deadline`
+### 4.3 `deadline`
 
-    Adds a deadline task by typing, `deadline "task" /by "yyyy-mm-dd"`.
+Adds a deadline task by typing, `deadline "task" /by "yyyy-mm-dd"`.
 
-    Example of usage: 
+Example of usage: 
 
-    `deadline submit application form /by 2020-05-03`
+`deadline submit application form /by 2020-05-03`
 
-    Expected outcome:
+Expected outcome:
 
-    ```
-    Got it. I've added this task: 
-    [D][✗] submit application form (by: May 3 2020)
-    Now you have 1 task in the list.
-    ```
+```
+Got it. I've added this task: 
+[D][✗] submit application form (by: May 3 2020)
+Now you have 1 task in the list.
+```
   
-* ### `list`
+### 4.4 `list`
 
-    Displays a list of tasks by typing, `list`.
+Displays a list of tasks by typing, `list`.
 
-    Example of usage: 
+Example of usage: 
 
-    `list`
+`list`
 
-    Expected outcome:
+Expected outcome:
 
-    ```
-    Here are the tasks in your list:
-    1. [T][✗] buy groceries
-    2. [E][✗] family outing (at: Sep 20 2020)
-    3. [D][✗] submit application form (by: May 3 2020)
-    ```
+```
+Here are the tasks in your list:
+1. [T][✗] buy groceries
+2. [E][✗] family outing (at: Sep 20 2020)
+3. [D][✗] submit application form (by: May 3 2020)
+```
   
-* ### `done`
+### 4.5 `done`
 
-    Marks a task as done by typing: `done "index"`
+Marks a task as done by typing: `done "index"`
 
-    Example of usage: 
+Example of usage: 
 
-    `done 1`
+`done 1`
 
-    Expected outcome:
+Expected outcome:
 
-    ```
-    Nice! I've marked this task as done:
-    [T][✓] buy groceries
-    ```
+```
+Nice! I've marked this task as done:
+[T][✓] buy groceries
+```
   
-* ### `delete`
+### 4.6 `delete`
 
-    Deletes the task from the list of tasks by typing, `delete "index"`.
+Deletes the task from the list of tasks by typing, `delete "index"`.
 
-    Example of usage: 
+Example of usage: 
 
-    `delete 1`
+`delete 1`
 
-    Expected outcome:
+Expected outcome:
 
-    ```
-    Noted. I've removed this task:
-    [T][✓] buy groceries
-    Now you have 2 tasks in the list.
-    ```
+```
+Noted. I've removed this task:
+[T][✓] buy groceries
+Now you have 2 tasks in the list.
+```
   
   
-* ### `bye`
+### 4.7 `bye`
 
-    Exit the application by typing, `bye`.
+Exit the application by typing, `bye`.
 
-    Example of usage: 
+Example of usage: 
 
-    `bye`
+`bye`
 
-    Expected outcome:
-    
-    Application closes.
+Expected outcome:
+
+Application closes.
   
