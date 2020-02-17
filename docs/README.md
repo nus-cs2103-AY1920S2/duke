@@ -13,8 +13,8 @@ You can add three different kinds of tasks: `Todo`, `Deadline` and `Event` for C
 Command | Parameters | Description
 --------|------------|-------------
 `todo`|`description`| Adds a `todo` Task with `description` for Cathulhu to Track.
-`deadline`|`description`\n /by`by` | Adds a `deadline` Task with `description` for Cathulhu to Track. `by` notes the deadline time, in the format yyyy-mm-dd \[hh:mm\]
-`event`|`description`\n /at`at` | Adds a `deadline` Task with `description` for Cathulhu to Track. `at` notes important details about the event such as venue and participants.
+`deadline`|`description` /by`by` | Adds a `deadline` Task with `description` for Cathulhu to Track. `by` notes the deadline time, in the format yyyy-mm-dd \[hh:mm\]
+`event`|`description` /at`at` | Adds a `deadline` Task with `description` for Cathulhu to Track. `at` notes important details about the event such as venue and participants.
 
 
 ### Example of usage: 
@@ -59,7 +59,7 @@ Find tasks with `find` and modify a task with `update`.
 Command | Parameters | Description
 --------|------------|-------------
 `find`|`search keyword`|Searches and lists down all tasks that contains the `search keyword`
-`update`|`task id`\n `parameter1`=`updated value1`,\n`parameter2`=`updated value2`,...  | Updates the entered parameters of the task with `task id`.
+`update`|`task id` `parameter1`=`updated value1`,`parameter2`=`updated value2`,...  | Updates the entered parameters of the task with `task id`.
 
 
 
