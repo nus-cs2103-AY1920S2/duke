@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+import commands.CommandInvoker;
+import database.Storage;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -38,4 +41,10 @@ public class Main extends Application {
         }
     }
 
+    @Override
+    public void stop() throws Exception {
+        Storage.saveMemory();
+        CommandInvoker.stop();
+        super.stop();
+    }
 }
