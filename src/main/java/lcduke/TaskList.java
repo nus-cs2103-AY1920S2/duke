@@ -3,7 +3,6 @@ package lcduke;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import static java.lang.Integer.parseInt;
 
 /** Ths creates a TaskList object.
@@ -39,7 +38,6 @@ public class TaskList {
             default:
                 dateString = totalTasks[i].substring(totalTasks[i].indexOf("at:") + 4,
                         totalTasks[i].length() - 1);
-                System.out.println(dateString);
                 this.event("event" + totalTasks[i].substring(totalTasks[i].indexOf(" "),
                         totalTasks[i].indexOf("at:") - 1) + "/at " + this.standardDate(dateString));
             }

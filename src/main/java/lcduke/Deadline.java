@@ -18,7 +18,6 @@ public class Deadline extends Task {
         if (by.contains("/")) {
             by = by.replaceAll("/", "-");
         }
-        this.taskDate = LocalDate.parse(by);
     }
 
     /** This prints the response after adding a Deadline object to task list.

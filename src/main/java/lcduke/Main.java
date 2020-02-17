@@ -108,9 +108,7 @@ public class Main extends Application {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(
-                duke.getResponse(userInput.getText())
-        );
+        Label dukeText = new Label(duke.getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(customerSupport))
