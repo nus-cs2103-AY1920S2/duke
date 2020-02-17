@@ -52,13 +52,15 @@ public class Parser {
             } catch (Exception e) {
                 return "Where is your keyword:(";
             }
+        } else if (input.contains ("clear list")) {
+            return taskList.clearList();
         } else if (input.equals ("bye")) {
 
             return "Cya soon:)";
         } else {
             //Create task using key words: "todo", "deadline", "event"
             if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
-                if (taskList.containsDup(input)) {
+                if (taskList.size() > 0 && taskList.containsDup(input)) {
                     return "This task has already been added before!";
                 } else {
                     if (input.contains("todo")) {

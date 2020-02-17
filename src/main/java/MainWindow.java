@@ -31,7 +31,6 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() throws IOException {
-        Duke.pendingTask = 0;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         duke.load();
     }

@@ -29,16 +29,13 @@ import java.util.Scanner;
  * delete</space></taskNumber>
  * find</space></taskNumber>
  * todo</space></name of task>
+ *
  * deadline</space></name of task></backslash></Date in yyyy-mm-dd format>
  * event</space></name of task></backslash></Date in yyyy-mm-dd format><T></Time in mm:ss-mm:ss format>
  * bye
  */
 public class Duke extends Application {
 
-    /**
-     * Keeps of number of task left undone
-     */
-    public static int pendingTask = 0;
     /**
      * To take in user input
      */

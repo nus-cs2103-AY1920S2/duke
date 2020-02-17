@@ -11,10 +11,8 @@ public class TaskList {
      * An list to store the task
      */
     private ArrayList<Task> taskList;
-    /**
-     * Number of task in the list
-     */
-    private int size = 0;
+
+    private int pendingTask;
 
     /**
      * Creates a TaskList object
@@ -24,8 +22,11 @@ public class TaskList {
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
-            this.taskList.add(taskList.get(i));
-            this.size++;
+            Task taskToBeAdded = taskList.get(i);
+            this.taskList.add(taskToBeAdded);
+            if (taskToBeAdded.getStatus().equals ("Not Done")) {
+                this.pendingTask++;
+            }
         }
     }
 
@@ -37,14 +38,14 @@ public class TaskList {
     public String list() {
         //List out task
         String output = "";
-        int num = this.taskList.size();
+        int num = taskList.size();
         for (int i = 0; i < num; i++) {
             output += (i + 1) + ". " + this.taskList.get(i) + "\n";
         }
         if (num == 0) {
             output += "\n You have no task!";
         } else {
-            output += "\n You have " + Duke.pendingTask + " pending task!";
+            output += "\n You have " + this.pendingTask + " pending task!";
         }
         return output;
     }
@@ -58,20 +59,20 @@ public class TaskList {
     public String done(int taskNum) {
         String output = "";
         try {
-            if (taskNum <= this.size) {
+            if (taskNum <= taskList.size()) {
                 Task completedTask = this.taskList.get(taskNum - 1);
                 if (completedTask.getStatus().equals("Done")) {
                     output+= "You have already completed this task!";
                 } else {
                     completedTask.markAsDone();
-                    Duke.pendingTask--;
+                    this.pendingTask--;
                     output+= "Nice! I've marked this task as done:\n"
                             + "[" + completedTask.getStatus() + "] " + completedTask.getDescription();
                 }
-                if (Duke.pendingTask == 0) {
+                if (this.pendingTask == 0) {
                     output+= "\nYay! You have no more task remaining!";
                 } else {
-                    output += "\nYou have " + Duke.pendingTask + " tasks remaining!";
+                    output += "\nYou have " + this.pendingTask + " tasks remaining!";
                 }
                 return output;
             } else {
@@ -91,18 +92,17 @@ public class TaskList {
     public String delete(int taskNum) {
         String output = "";
         try {
-            if (taskNum <= this.size) {
+            if (taskNum <= taskList.size()) {
                 Task deletedTask = this.taskList.get(taskNum - 1);
                 String status = deletedTask.getStatus();
                 assert status.equals("Done") || status.equals("Not Done") : "Only Done or Not Done";
                 if (status.equals("Not Done")) {
                     //Pending task count drops only if deleted task not completed
-                    Duke.pendingTask--;
+                    this.pendingTask--;
                 }
                 output += "Noted. I've removed this task:\n" + deletedTask
-                        + "\nNow you have " + Duke.pendingTask + " tasks in the list.";
+                        + "\nNow you have " + this.pendingTask + " tasks in the list.";
                 this.taskList.remove(taskNum - 1);
-                this.size--;
                 return output;
             } else {
                 return "Sorry, there is no such task!";
@@ -123,10 +123,9 @@ public class TaskList {
         try {
             Task task = taskConvertor(type, input);
             this.taskList.add(task);
-            Duke.pendingTask++;
-            this.size++;
+            this.pendingTask++;
             return "Got it. I've added the following task:\n" +
-                    task + "\nYou now have " + Duke.pendingTask + " task in the list";
+                    task + "\nYou now have " + this.pendingTask + " task in the list";
         } catch (Exception e){
             return "Invalid task request:(";
         }
@@ -168,7 +167,7 @@ public class TaskList {
         String output = "";
         output += "Here are the matching tasks in your list:\n";
         int j = 0;
-        for (int i = 0; i < this.size; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             String description = this.taskList.get(i).toString();
             if (description.contains(keyWord)) {
                 output+= (i + 1) + "." + description + "\n";
@@ -182,7 +181,7 @@ public class TaskList {
     }
 
     public boolean containsDup (String taskName) throws Exception {
-        for (int i = 0; i < this.size; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             String description = this.taskList.get(i).toString();
             String task;
             if (taskName.contains("todo")) {
@@ -199,6 +198,14 @@ public class TaskList {
         return false;
     }
 
+    public String clearList() {
+        for (int i = 0; i < taskList.size(); i++) {
+            taskList.remove(0);
+        }
+        this.pendingTask = 0;
+        return "Done! You have no more task!";
+    }
+
     /**
      * Gives the arraylist storing all the task
      *
@@ -208,17 +215,16 @@ public class TaskList {
         return this.taskList;
     }
 
+    public void initialisePendingTaskCount(int count) {
+        this.pendingTask = count;
+    }
+
     /**
      * Replaces .size() of arrayList to work around private access issues
      *
      * @return size of tasklist
      */
     public int size() {
-        int count = 0;
-        for (int i = 0; i< taskList.size(); i++) {
-            count++;
-        }
-        assert count == taskList.size() : "count represents size of taskList";
-        return count;
+        return taskList.size();
     }
 }
