@@ -203,3 +203,10 @@ Here are the available commands:
 ```
 ![help pic](help.png)
 
+##Acknowledgements
+Credit to Jeffry Lum for the fxml and java files for [JAVAFX GUI](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md).
+
+Credit to @MintBerryCrunch for the [code to create a new thread and terminating the program](https://stackoverflow.com/questions/52393982/javafx-problem-with-platform-runlater-delayed-rendering-of-canvas-graphic).
+
+Credit to @Ernest Friedman-Hill for the [redirection code](https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java/8708357).
+
