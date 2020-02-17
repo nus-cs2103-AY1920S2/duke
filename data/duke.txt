@@ -1,6 +1,5 @@
-T | 0 | Finish 2103T week 6 tutorial
-D | 0 | Individual Project | 21/02/2020 2300
-E | 0 | Family dinner | 23/02/2020 1900
-T | 0 | finish assignment
-T | 0 | read week 7 topics
-T | 0 | read week 7 topics
+T | 1 | task 4
+T | 0 | tutorial 5
+D | 0 | tutorial 2 | 20/02/2020 2000
+E | 0 | tutorial 3 | 20/02/2020 2000
+T | 0 | homework 2

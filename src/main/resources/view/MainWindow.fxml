@@ -17,7 +17,7 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="557.0" maxWidth="400.0" prefHeight="557.0" prefWidth="400.0" stylesheets="@../style/MainWindow.css" vbarPolicy="ALWAYS" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="557.0" prefWidth="400.0" stylesheets="@../style/MainWindow.css" vbarPolicy="ALWAYS" vvalue="1.0">
             <content>
                 <VBox fx:id="dialogContainer" prefWidth="388.0" />
             </content>
