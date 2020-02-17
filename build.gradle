@@ -20,7 +20,9 @@ application {
 
 run {
     standardInput = System.in
+    enableAssertions = true
 }
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }

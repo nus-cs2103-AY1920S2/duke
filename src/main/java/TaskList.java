@@ -38,7 +38,6 @@ public class TaskList {
     }
     public void showSearch(String stringToSearch) {
         ArrayList<Task> searchList = new ArrayList<>();
-
         for (int i = 0; i < listOfTexts.size(); i++) {
             String taskDescription = listOfTexts.get(i).getDescription();
             if (taskDescription.contains(stringToSearch)) {
@@ -55,10 +54,10 @@ public class TaskList {
      * @param command Type of Command described by .getCommand() which return a <code>String</code> description.
      */
     public void runCommand(Command command) {
+        assert (command != null) :"Input something correct into me! todo/deadline(/by)/event(/at)/find/list/delete/done";
         try {
             switch (command.getCommand()) {
                 case "bye": {
-                    Ui.printAfterBye();
                     break;
                 }
                 case "list": {
@@ -103,7 +102,6 @@ public class TaskList {
                 default: {
                     throw new DukeException("☹ OOPS!!! I'm sorry, you have entered wrong command. Error in TaskList! ☹ OOPS!!!");
                 }
-
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
