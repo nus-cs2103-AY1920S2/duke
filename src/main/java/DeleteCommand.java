@@ -1,5 +1,5 @@
 /**
- * Represents a DeleteCommand given to TaskList.
+ * Represent a DeleteCommand given to TaskList.
  */
 public class DeleteCommand extends Command {
 

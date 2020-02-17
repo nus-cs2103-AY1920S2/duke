@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -8,12 +13,13 @@ import java.util.ArrayList;
  * Storage loads tasks from the file at <code>filePath</code> upon startup
  * and saves tasks into the file at <code>filePath</code>
  * every time there is changes to the to do list.
- *
  */
 public class Storage {
     private File f;
+
     /**
      * Constructor for Storage class.
+     *
      * @param filePath relative directory of the file.
      */
     public Storage(String filePath) {
@@ -23,6 +29,7 @@ public class Storage {
     /**
      * Load the data from the saved file into the current to do list. load() is called upon startup.
      * The file is read as <code>String</code> and being translated into a <code>Task</code>.
+     *
      * @return ArrayList that contains all Task in the current saved file.
      * @throws DukeException Exception is thrown when there is no file with the <code>filePath</code>.
      */
@@ -108,6 +115,7 @@ public class Storage {
     /**
      * Saves the current to do list into the file at <code>filePath</code>.
      * save(Tasklist tasklist) is called every time a new Command is run.
+     *
      * @param tasklist Tasklist containing all the tasks and methods to modify the list.
      */
     public void save(TaskList tasklist) {

@@ -1,5 +1,5 @@
 /**
- * Represents a "list" command given to TaskList.
+ * Represent a "list" command given to TaskList.
  */
 public class ListCommand extends Command {
 

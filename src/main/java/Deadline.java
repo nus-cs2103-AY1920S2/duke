@@ -2,10 +2,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Deadline.
+ * Represent a Deadline.
  * Deadline is a Task and is described by its String <code>description</code> and
- *  * a boolean <code>isDone</code> to indicate whether a Deadline is completed.
- *  <code>by</code> describes the date at which the Deadline is due.
+ * * a boolean <code>isDone</code> to indicate whether a Deadline is completed.
+ * <code>by</code> describes the date at which the Deadline is due.
  */
 public class Deadline extends Task {
     private LocalDate by;

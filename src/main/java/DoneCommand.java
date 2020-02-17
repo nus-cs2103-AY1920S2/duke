@@ -1,5 +1,5 @@
 /**
- * Represents a "done" command given to TaskList.
+ * Represent a "done" command given to TaskList.
  */
 public class DoneCommand extends Command {
 
