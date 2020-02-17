@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # Welcome to Squirtle Manager!
 Squirtle Manager is a lightweight command line interface application built with Java and JavaFX. Squirtle Manager makes use of local storage to remember your agenda, and is an _easy_, _quick_ and _fun_ way to stay on top of your tasks.
 
@@ -63,4 +61,3 @@ Squirtle Manager is based on the popular [Duke][a2] software engineering tutoria
 * If you have feedback or bug reports, please post in [airshhlay/duke issue tracker](https://github.com/airshhlay/duke/issues).
 * I welcome pull requests too.
 
->>>>>>> master
