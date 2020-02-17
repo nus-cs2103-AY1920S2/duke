@@ -85,7 +85,7 @@ public class MainWindow extends AnchorPane {
 
     private void exit() {
         PauseTransition pause = new PauseTransition(Duration.seconds(4));
-        pause.setOnFinished( event -> stage.close() );
+        pause.setOnFinished(event -> stage.close());
         pause.play();
     }
 }
