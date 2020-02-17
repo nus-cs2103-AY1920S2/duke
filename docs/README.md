@@ -31,17 +31,33 @@ Example of usage:
 
 *`todo (arguments)` : todo helloworld
 
+    Expected outcome : 
+
+> Got it. I've added this task:
+>
+> [T][x] helloworld
+>
+> Now you have N tasks in the list
+
 *`deadline (arguments) /by (YYYY-MM-DD)` : deadline hello world /by 2019-06-01
+
+    Expected outcome : 
+
+> Got it. I've added this task:
+>
+> [D][x] hello world (by: Jun 01 2019)
+>
+> Now you have N tasks in the list
 
 *`events (arguments) /at (arguments)` : event gjfasjfa /at hello
 
-Expected outcome:
+    Expected outcome : 
 
-Please refer the specific outcomes from the picture provided above.
-
-* task list 2
-* task list 1
-* task list 12
+> Got it. I've added this task:
+>
+> [E][x] gjfasjfa (at: hello)
+>
+> Now you have N tasks in the list
 
 ### `Delete, Done` - Updates command
 
@@ -49,10 +65,37 @@ Example of usage:
 
 *`delete (argument 1) (argument 2) ... (argument n)` : delete 1 2 3 ... n 
 
+    Expected outcome : 
+
+> Noted. I've removed this task:
+>
+> [E][x] gjfasjfa (at: hello)
+>
+> Now you have N tasks in the list
+>
+> Noted. I've removed this task:
+>
+> [Di][x] hello world (by: Jun 01 2019)
+>
+> Now you have N tasks in the list
+
 *`delete all`
+
+    Expected outcome : 
+
+> Removed all items in list
 
 *`done (argument 1) (argument 2) ... (argument n)` : done 1 2 3 ... n 
 
+    Expected outcome : 
+
+> Nice! I've finish this task:
+>
+> [T][o] gjfasjfa (at: hello)
+>
+
 *`done all`
 
-Expected outcome:
+    Expected outcome : 
+
+> Finished all items in list
