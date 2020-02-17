@@ -27,7 +27,7 @@ This product is a Personal Assistant Chatbot that helps a person keep track of v
 ## <a name="features"></a> Features
 
 **Sample**
-![sample usage](Ui.png)
+![Ui](Ui.png)
  
 ### <a name="adding task"></a> Adding task `todo` `deadline` `event` `recurring`
 Add a task into the duke.  
