@@ -15,7 +15,8 @@
 }
 
 .label{
-  -fx-padding: 5;
+  -fx-padding: 10;
+
 }
 
 /*Taken from http://fxexperience.com/2011/12/styling-fx-buttons-with-css/*/
