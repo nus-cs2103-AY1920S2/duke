@@ -1,4 +1,3 @@
-import exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -30,8 +29,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
-        // welcome the user upon start up
+        dialogContainer.setStyle("-fx-background-color: #e9f7f4;");
         String response = "Greetings from Duke!\nWhat do you want to do today?";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -47,7 +45,7 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes.
      */
     @FXML
-    private void handleUserInput() throws IOException, DukeException {
+    private void handleUserInput() throws IOException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

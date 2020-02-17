@@ -41,7 +41,7 @@ public class TaskList {
                 break;
             }
             case "event": {
-                if (whole.split(" ").length != 4) {
+                if (whole.split(" ").length < 4) {
                     throw new InvalidCommandException(":-( Oops!!! Please give me more details! :-(");
                 }
                 String desc = parser.getDesc(whole);
@@ -51,7 +51,7 @@ public class TaskList {
                 break;
             }
             case "deadline": {
-                if (whole.split(" ").length != 4) {
+                if (whole.split(" ").length < 4) {
                     throw new InvalidCommandException(":-( Oops!!! Please give me more details! :-(");
                 }
                 String desc = parser.getDesc(whole);
