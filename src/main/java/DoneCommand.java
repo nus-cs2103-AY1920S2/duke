@@ -13,7 +13,7 @@ class DoneCommand extends Command {
      * The constructor for a DoneCommand takes in a task number specified by the user
      * to update the status of the specific task in the TaskList.
      *
-     * @param taskNum
+     * @param taskNum The task number of a particular task.
      */
     DoneCommand(int taskNum) {
         this.taskNum = taskNum;

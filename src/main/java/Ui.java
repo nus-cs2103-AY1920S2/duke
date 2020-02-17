@@ -31,8 +31,8 @@ class Ui {
     }
 
     void showByeMessage() {
-        System.out.println("Bye-bye! See you again, my friend! " +
-                "Please close this window if you do not wish to continue this session.");
+        System.out.println("Bye-bye! See you again, my friend! "
+                + "Please close this window if you do not wish to continue this session.");
     }
 
     void showDoneMessage() {

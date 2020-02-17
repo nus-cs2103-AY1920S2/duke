@@ -7,7 +7,6 @@ class Task {
     protected static int taskNumber = 1; // for Level 2
     protected int currentTaskNumber;
     protected boolean isDone; // for Level 3
-    protected String taskType;
 
     /**
      * Constructor for a Task takes in a String task name that is specified by the user.
@@ -19,13 +18,12 @@ class Task {
         this.taskName = taskName;
         currentTaskNumber = taskNumber;
         this.taskNumber++;
-        this.taskType = taskType;
     }
 
     /**
      * This method serves to get the status of a specific task to check if the task is done or not.
      *
-      * @return Returns [Y] if the task is done and [N] if the task is not done.
+     * @return Returns [Y] if the task is done and [N] if the task is not done.
      */
     public String getStatusIcon() {
         return (isDone ? "[Y]" : "[N]");
@@ -42,24 +40,18 @@ class Task {
 
     /**
      * This method returns the name of a specified task.
-     *
      * @return A String of the name of the task.
      */
     public String getTaskName() {
         return taskName.trim();
     }
 
-    public String getTaskType() {
-        return taskType;
-    }
-
     /**
      * The toString method of a Task object returns the status of the task and the name of the task.
-     *
      * @return A String containing details of a task object.
      */
     @Override
     public String toString() {
-            return getStatusIcon() + " " + getTaskName() + " ";
+        return getStatusIcon() + " " + getTaskName() + " ";
     }
 }

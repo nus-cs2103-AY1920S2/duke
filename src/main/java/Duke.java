@@ -18,7 +18,7 @@ import java.time.format.DateTimeParseException;
  * execute the user's commands and input.
  */
 public class Duke {
-    public final static String LINE = "__________________________________________";
+    public static final String LINE = "__________________________________________";
     private static Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -32,13 +32,19 @@ public class Duke {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * The constructor for Duke takes in a String that contains the file path of the txt file
+     * The empty constructor for Duke calls the Duke constructor that
+     * takes in a String that contains the file path of the txt file
      * to update the TaskList in the txt file.
      */
     public Duke() {
         this("data/duke.txt");
     }
 
+    /**
+     * Constructor for Duke takes in a String that contains the file path of the txt file.
+     *
+     * @param filePath The file path of the duke.txt file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -83,7 +89,7 @@ public class Duke {
     /**
      * Duke's main method which serves to update the given txt file with the updated list of tasks.
      *
-     * @param args
+     * @param args A String[] input.
      * @throws DateTimeParseException if user's date input is not of 'yyyy-MM-dd' format.
      */
     public static void main(String[] args) throws DateTimeParseException {
@@ -97,7 +103,8 @@ public class Duke {
     public String getResponse(String input) {
         ByteArrayOutputStream formattedOutput = new ByteArrayOutputStream();
         System.setOut(new PrintStream(formattedOutput));
-        String reply = "";
+        // Solution above adapted from
+        // https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java
         assert tasks != null : "The list of tasks should not be null";
         assert ui != null : "The Ui object should not be null";
         assert storage != null : "The storage object should not be null";
@@ -108,7 +115,7 @@ public class Duke {
         } catch (IOException | DukeException e) {
             System.out.println(e.getMessage());
         }
-        reply = formattedOutput.toString();
+        String reply = formattedOutput.toString();
         while (reply.contains(Duke.LINE)) {
             reply = reply.replace(Duke.LINE, "");
         }

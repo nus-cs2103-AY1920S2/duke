@@ -11,7 +11,7 @@ class FindCommand extends Command {
     /**
      * Constructor for FindCommand which takes in the input keyed in by user.
      *
-     * @param command
+     * @param command The command to be found within the list of tasks.
      */
     FindCommand(String command) {
         this.command = command;

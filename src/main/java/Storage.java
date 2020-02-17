@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,10 +14,10 @@ import java.util.Scanner;
  */
 class Storage {
     static List<Task> savedList = new ArrayList<>();
-    private final static String ROOT_PATH = Paths.get("").toAbsolutePath().toString();
-    private final static String NEWLINE = System.lineSeparator();
+    private static final String ROOT_PATH = Paths.get("").toAbsolutePath().toString();
+    private static final String NEWLINE = System.lineSeparator();
     private String absolutePath;
-    private File file_path;
+    private File pathFile;
 
     /**
      * Constructor for a Storage object takes in a String file path.
@@ -23,9 +26,9 @@ class Storage {
      */
     public Storage(String filePath) {
         String path = Paths.get(ROOT_PATH + System.getProperty("file.separator") + filePath).toString();
-            File file = new File(path);
-            this.file_path = file;
-            this.absolutePath = path;
+        File file = new File(path);
+        this.pathFile = file;
+        this.absolutePath = path;
     }
 
     /**
@@ -35,7 +38,7 @@ class Storage {
      * @throws FileNotFoundException if the file path is invalid
      */
     public List<Task> load() throws FileNotFoundException {
-        Scanner scan = new Scanner(file_path);
+        Scanner scan = new Scanner(pathFile);
         while (scan.hasNextLine()) {
             String command = scan.nextLine();
             String[] arrOfCommands = command.split(" \\| ");

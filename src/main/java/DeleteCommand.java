@@ -10,7 +10,7 @@ class DeleteCommand extends Command {
 
     /**
      * The constructor for DeleteCommand which takes in a String command that starts with "delete".
-     * @param command
+     * @param command command indicated by user input
      */
     DeleteCommand(String command) {
         this.command = command;
@@ -29,10 +29,10 @@ class DeleteCommand extends Command {
     void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         String[] commands = command.split(" ");
         if (!(commands[1].trim().equals("all"))) {
-            Task toBeRemoved = tasks.getTaskList().get(Integer.parseInt(commands[1])-1);
-            tasks.taskList.remove(Integer.parseInt(commands[1])-1);
+            List<Task> taskList = tasks.getTaskList();
+            final Task toBeRemoved = taskList.get(Integer.parseInt(commands[1]) - 1);
+            tasks.taskList.remove(Integer.parseInt(commands[1]) - 1);
             storage.save(tasks);
-
             ui.showLine();
             System.out.println("\n" + "Alright, I've removed this task:" + "\n");
             System.out.println(toBeRemoved + "\n");
@@ -65,8 +65,7 @@ class DeleteCommand extends Command {
                             remainingTasks.add(task);
                         }
                     }
-                }
-                else {
+                } else {
                     throw new DukeException("There was no invalid input after 'all'. Please try again.");
                 }
             } catch (DukeException e) {

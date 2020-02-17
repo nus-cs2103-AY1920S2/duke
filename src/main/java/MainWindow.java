@@ -21,16 +21,22 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    // Images retrieved from:
+    // https://vignette.wikia.nocookie.net/characters/images/7/7f/Tom_Cat.jpg/revision/latest/scale-to-width-down/340?cb=20190404160415
+    // https://lh3.googleusercontent.com/proxy/l-96E2T1rPzS0xBTgaZZNfYQ4f2GymIie60JMw3oY1RvEUpqmqap19OvLhmJeZgh7oA5vEak_TYbOOVdhl0YMw3q26H4G27TOsgwSCzMS1UpUGlHs_BZTQP_wdGSY6PTpxaoE22FBzgFehLs
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
+    /**
+     * This method initialises the main window of the GUI that is responsible for
+     * user interaction.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Hello I am Duke. What can I do for you today?" +
-                                "\n Type 'help' to see the list of commands that I accept",
+                DialogBox.getDukeDialog("Hello I am Duke. What can I do for you today?"
+                                + "\n Type 'help' to see the list of commands that I accept",
                         dukeImage));
     }
 
@@ -55,13 +61,14 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        // //Solution below adapted from
+        // https://stackoverflow.com/questions/52393982/javafx-problem-with-platform-runlater-delayed-rendering-of-canvas-graphic
         if (response.startsWith("Bye-bye!")) {
             Ui ui = new Ui();
             new Thread(() -> {
-                try{
-                    Thread.sleep(500);
-                }
-                catch(InterruptedException exc) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException exc) {
                     ui.showError(exc.getMessage());
                 }
                 Platform.exit();

@@ -51,6 +51,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * This method is responsible for outputting the response to the user.
+     *
+     * @param text The text message to be printed.
+     * @param img The Duke image to be displayed.
+     * @return A DialogBox object to be formatted by FXML.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

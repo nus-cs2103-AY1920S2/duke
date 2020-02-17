@@ -43,7 +43,7 @@ class AddCommand extends Command {
                     } else {
                         throw new DukeException("");
                     }
-                } catch (DukeException e ) {
+                } catch (DukeException e) {
                     ui.showLine();
                     System.out.println("There is no valid input after deadline. Please try again.");
                     ui.showLine();

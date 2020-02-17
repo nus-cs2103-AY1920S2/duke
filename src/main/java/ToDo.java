@@ -2,10 +2,10 @@
  * This class extends from Task and is created when users input starts with 'todo'.
  */
 class ToDo extends Task {
-    protected String taskType = "todo";
+
     /**
      * Constructor for a ToDo object takes in a String with the name of the task.
-     * @param taskName
+     * @param taskName The task to be done.
      */
     ToDo(String taskName) {
         super(taskName);

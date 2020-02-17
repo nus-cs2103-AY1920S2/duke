@@ -8,7 +8,6 @@ class Event extends Task {
     protected LocalDate dateAt;
     DateTimeFormatter formattedOutput = DateTimeFormatter.ofPattern("MMM d yyyy");
     DateTimeFormatter input = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    protected String taskType;
 
     /**
      * Constructor for Event tasks that takes in a task name and a date in 'yyyy-MM-dd' format.
@@ -19,7 +18,6 @@ class Event extends Task {
     Event(String taskName, LocalDate dateAt) {
         super(taskName);
         this.dateAt = dateAt;
-        this.taskType = "event";
     }
 
     /**
@@ -39,7 +37,7 @@ class Event extends Task {
      */
     @Override
     public String toString() {
-            return "[E]" + super.toString()
-                    + "(at:" + dateAt.format(formattedOutput) + ")";
+        return "[E]" + super.toString()
+                + "(at:" + dateAt.format(formattedOutput) + ")";
     }
 }
