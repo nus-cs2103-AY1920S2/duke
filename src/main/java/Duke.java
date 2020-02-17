@@ -11,7 +11,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for main class for the program.
+     * Constructor for main class for the program to be run on the command line.
      *
      * @param filePath relative path of the file that the data of to do list is saved in.
      */

@@ -55,7 +55,7 @@ public class TaskList {
      * @param command Type of Command described by .getCommand() which return a <code>String</code> description.
      */
     public void runCommand(Command command) {
-        assert (command != null) : "Input something correct into me! todo/deadline(/by)/event(/at)/find/list/delete/done";
+        assert (command != null) : "Input something correct into me! todo/deadline(/by)/event(/at)/fixedtask(/needs)/find/list/delete/done";
         try {
             switch (command.getCommand()) {
                 case "bye": {
@@ -98,6 +98,12 @@ public class TaskList {
                     Task currentTask = command.getTask();
                     addTask(currentTask);
                     Ui.printAfterEvent((Event) currentTask, listOfTexts);
+                    break;
+                }
+                case "fixedTask": {
+                    Task currentTask = command.getTask();
+                    addTask(currentTask);
+                    Ui.printAfterFixedTask((FixedDurationTask) currentTask, listOfTexts);
                     break;
                 }
                 default: {
