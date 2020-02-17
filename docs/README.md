@@ -29,7 +29,7 @@ java -jar {location of the downloaded jar file}
 
 For example, 
 ```
-java -jar Documents/Downloads/Duke-v2.0.jar
+java -jar ~/Desktop/Downloads/Duke-v2.0.jar
 ```
 
 
@@ -247,7 +247,7 @@ Now have 1 task(s) in your list!
 ### 4. Summary of all the Commands
 
 Keywords |Description| Example Usage 
------------- | --------------- | -------------
+------------ | -------------------- | ----------------------------
 `bye` | Closes Ding Ding | `bye` 
 `date` |  Shows the tasks on Date. | `date 2020/3/2` 
 `deadline` | Creates a deadline task | `deadline finish CS2103T tutorial /by 2020/3/2 23:59` 
