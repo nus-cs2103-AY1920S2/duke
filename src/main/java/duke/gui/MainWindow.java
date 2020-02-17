@@ -39,6 +39,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the duke of the display window and add a greeting from duke.
+     * @param duke The Duke object used.
+     */
     public void setDuke(Duke duke) {
         this.duke = duke;
         dialogContainer.getChildren().add(

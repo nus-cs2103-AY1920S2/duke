@@ -71,10 +71,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets user dialog box.
+     * @param text The user input.
+     * @param img The user avatar.
+     * @return The dialog box with user avatar and input.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, Color.LIGHTGRAY);
     }
 
+    /**
+     * Gets duke dialog box.
+     * @param text Duke's response.
+     * @param img Duke's avatar.
+     * @return The dialog box with Duke's avatar and response.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, Color.PALETURQUOISE);
         db.flip();
