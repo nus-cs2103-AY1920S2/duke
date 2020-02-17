@@ -5,4 +5,4 @@ dist: trusty
 jdk: oraclejdk11
 
 script:
-  - ./gradlw build --scan -s
+  - ./gradlew build --scan -s
