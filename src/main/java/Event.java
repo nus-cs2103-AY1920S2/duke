@@ -36,6 +36,28 @@ public class Event extends task {
     }
 
     /**
+     * Method handles Snooze for Event class
+     * @param newDate
+     * @return String
+     */
+    @Override
+    public void snooze(String newDate) {
+        String[] temp = newDate.split("/");
+        this.ld = LocalDate.parse(temp[0]);
+        this.date = temp[0] + " " + temp[1];
+        this.from = temp[1];
+    }
+
+    /**
+     * Return false cause this is toDo;
+     * @return
+     */
+    @Override
+    public boolean isToDo() {
+        return false;
+    }
+
+    /**
      * Generic to print function
      * @return String
      */

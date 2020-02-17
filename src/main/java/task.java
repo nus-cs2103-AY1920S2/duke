@@ -35,6 +35,8 @@ public class task {
         }
     }
 
+
+
     /**
      * Method sets Task as done
      */
@@ -49,6 +51,22 @@ public class task {
     public String toSave() {
         String s = "";
         return s;
+    }
+
+    /**
+     * Method template for Deadline, Event and ToDo
+     * @param newDate
+     */
+    public void snooze(String newDate) {
+
+    }
+
+    /**
+     * Method to check if current instance is toDo
+     * @return
+     */
+    public boolean isToDo () {
+        return false;
     }
 
     /**

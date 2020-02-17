@@ -24,6 +24,20 @@ public class ToDo extends task {
         }
     }
 
+    @Override
+    public void snooze(String newDate) {
+
+    }
+
+    /**
+     * Return true cause this is toDo;
+     * @return
+     */
+    @Override
+    public boolean isToDo() {
+        return true;
+    }
+
     /**
      * Generic to print function
      * @return String

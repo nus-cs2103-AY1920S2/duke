@@ -1,19 +1,17 @@
-import javafx.concurrent.Task;
-
-import java.io.IOException;
-import java.util.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Duke extends Application {
 
@@ -245,6 +243,23 @@ public class Duke extends Application {
         return output;
     }
 
+    public String handleSnooze(int snoozeIndex, String snoozeRaw) {
+        String output = "";
+        try {
+            task toSnooze = mylist.get(snoozeIndex - 1);
+            if (toSnooze.isToDo()) {
+                output = output + "☹ OOPS!!! You can't snooze a toDo Task.";
+            } else {
+                toSnooze.snooze(snoozeRaw);
+                output = output + "YAY! Your event has been snoozed to " + snoozeRaw + "\n" + toSnooze;
+                storage.updateTxtFile(mylist);
+            }
+        } catch (IndexOutOfBoundsException | IOException e) {
+            output = output + "☹ OOPS!!! You're missing some descriptions for your Snooze.";
+        }
+        return output;
+    }
+
     public String getResponse(String input) {
         while(flag == 0) {
             String[] inarr = input.split(" ");
@@ -266,6 +281,8 @@ public class Duke extends Application {
                 return handleDelete(Integer.parseInt(inarr[1]));
             } else if (inarr[0].equals("find")) {
                 return handleFind(input);
+            } else if (inarr[0].equals("snooze")) {
+                return handleSnooze(Integer.parseInt(inarr[1]), inarr[2]);
             } else {
                 return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             }

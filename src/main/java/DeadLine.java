@@ -33,6 +33,26 @@ public class DeadLine extends task {
     }
 
     /**
+     * Handles Snooze function for deadlines
+     * @param newDate
+     * @return String
+     */
+    @Override
+    public void snooze(String newDate) {
+        this.ld = LocalDate.parse(newDate);
+        this.date = newDate;
+    }
+
+    /**
+     * Return false cause this is toDo;
+     * @return
+     */
+    @Override
+    public boolean isToDo() {
+        return false;
+    }
+
+    /**
      * Generic to print function
      * @return String
      */
