@@ -103,4 +103,18 @@ public final class Date {
     public String toString() {
         return this.date.format(this.formatter);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (other == null || other.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Date otherDate = (Date) other;
+        return this.date.equals(otherDate.date);
+    }
 }

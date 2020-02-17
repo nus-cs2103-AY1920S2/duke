@@ -19,4 +19,20 @@ final class EventTask extends Task {
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.description, this.when.toString());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (other == null || other.getClass() != this.getClass()) {
+            return false;
+        }
+        
+        EventTask otherTask = (EventTask) other;
+        boolean hasSameDescription = this.description.equals(otherTask.description);
+        boolean hasSameWhen = this.when.equals(otherTask.when);
+        return hasSameDescription && hasSameWhen;
+    }
 }
