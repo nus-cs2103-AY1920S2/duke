@@ -3,10 +3,13 @@ import dukeApp.files.*;
 import dukeApp.files.Storage;
 import dukeApp.files.TaskList;
 import dukeApp.files.Ui;
+import javafx.application.Application;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke {
+    private static Duke d;
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
@@ -18,43 +21,42 @@ public class Duke {
 
         try {
             ui = new Ui();
-            tasks = new TaskList(storage.load(), storage.getReminders());
+            tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
+    public String getWelcome() {
+        return "Hello I am Pusheen, your personal task manager! What can I do for you?\n";
+    }
+
     /**
      * Run the app by reading user commands and writing to file to save changes
      *
      */
-    public void run() throws DukeException {
-        ui.input(tasks);
+    public String run(String input) throws DukeException {
+        String msg = ui.input(tasks, input);
         try {
             storage.appendToFile(tasks.aList);
         } catch (IOException e) {
-            System.out.println("Something went wrong: " +e.getMessage());
+            msg = "Something went wrong: " +e.getMessage();
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        return msg;
     }
 
     public static void main(String[] args) throws DukeException {
-        final String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-        new Duke("data\\duke.txt").run();
+        d = new Duke("data\\duke.txt");
+        Application.launch(Main.class, args);
     }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "dukeApp.duke.Duke heard: " + input;
+    public String getResponse(String input) throws DukeException {
+        input = d.run(input);
+        return input;
     }
 }

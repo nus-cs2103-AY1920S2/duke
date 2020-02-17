@@ -1,9 +1,12 @@
 package dukeApp.duke;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,8 +25,10 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Pusheen");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            fxmlLoader.<MainWindow>getController().startScreen(duke.getWelcome());
         } catch (IOException e) {
             e.printStackTrace();
         }

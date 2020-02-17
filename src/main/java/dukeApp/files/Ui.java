@@ -2,31 +2,27 @@ package dukeApp.files;
 
 import dukeApp.parse.Parse;
 
-import java.util.Scanner;
-
 public class Ui {
-    Scanner sc;
-
     public Ui() {}
+
     /**
      * Accept user inputs
      * @param tasks list of task retrieved from file
      */
-    public void input(TaskList tasks) throws DukeException {
-        sc = new Scanner(System.in);
-        String statement = sc.nextLine();
-
-        while (!statement.equals("bye")) {
-            Parse parse = new Parse(statement);
-            parse.decode(tasks);
-            statement = sc.nextLine();
+    public String input(TaskList tasks, String input) throws DukeException {
+        if (!input.equals("bye")) {
+            Parse parse = new Parse(input);
+            return parse.decode(tasks);
+        }
+        else {
+            return "Bye. Hope to see you again soon!";
         }
     }
 
     /**
      * Prints error message if data from file cannot be loaded
      */
-    public void showLoadingError() {
-        System.out.println("File not found");
+    public String showLoadingError() {
+        return "File not found";
     }
 }

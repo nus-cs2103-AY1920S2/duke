@@ -1,6 +1,6 @@
 package dukeApp.files;
 
-public class DukeException extends Throwable {
+public class DukeException extends Throwable{
     protected String task;
     protected String str;
 

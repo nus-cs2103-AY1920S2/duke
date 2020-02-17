@@ -1,12 +1,15 @@
 package dukeApp.duke;
 
+import dukeApp.files.DukeException;
+import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for dukeApp.duke.MainWindow. Provides the layout for the other controls.
@@ -29,6 +32,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        BackgroundFill background_fill = new BackgroundFill(Color.LAVENDER, CornerRadii.EMPTY, Insets.EMPTY);
+        Background background = new Background(background_fill);
+        dialogContainer.setBackground(background);
     }
 
     public void setDuke(Duke d) {
@@ -40,7 +46,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -48,5 +54,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    public void startScreen(String msg) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(msg, dukeImage)
+        );
     }
 }

@@ -6,11 +6,9 @@ import java.util.ArrayList;
 
 public class TaskList {
     public ArrayList<Task> aList;
-    public ArrayList<Task> reminderList;
 
-    public TaskList(ArrayList<Task> aList, ArrayList<Task> reminderList) {
+    public TaskList(ArrayList<Task> aList) {
         this.aList = aList;
-        this.reminderList = reminderList;
     }
 
     public TaskList() {}
@@ -22,17 +20,26 @@ public class TaskList {
     /**
      * Prints task in the list
      */
-    public void printList() {
-        System.out.println("Here are the tasks in your list:");
-        print(aList);
+    public String printList() {
+        return "Here are the tasks in your list:\n" + print(aList);
     }
 
     /**
      * Prints reminders for deadlines in the list
      */
-    public void reminderList() {
-        System.out.println("Here are the upcoming deadlines in your list:");
-        print(reminderList);
+    public String reminderList() {
+        ArrayList<Task> reminderList = new ArrayList<>();
+        for (int i = 0; i < aList.size(); i++) {
+            if ((aList.get(i).getType()).equals("D") && (aList.get(i).getStatusIcon()).equals("\u2718")) {
+                reminderList.add(aList.get(i));
+            }
+        }
+        if (reminderList.size() != 0) {
+            return "Here are the upcoming deadlines in your list:\n" + print(reminderList);
+        }
+        else {
+            return "There are no upcoming deadlines.";
+        }
     }
 
     /**
@@ -40,17 +47,17 @@ public class TaskList {
      * @param rank task number in the list
      * @param dd string indicating delete or done action
      */
-    public void deleteDone(int rank, String dd) throws DukeException {
+    public String deleteDone(int rank, String dd) throws DukeException {
         Action action = new Action(rank, aList);
 
         if (!action.checkNum()) {
-            throw new DukeException("No such task exist.\n");
+            return new DukeException("No such task exist.\n").toString();
         }
         else {
             if (dd.equals("delete")) {
-                deleteAction(rank, aList);
+                return deleteAction(rank, aList);
             } else {
-                doneAction(rank, aList);
+                return doneAction(rank, aList);
             }
         }
     }
@@ -59,54 +66,58 @@ public class TaskList {
      * Call to action for the different task type
      * @param statement task description
      */
-    public void find(String statement) {
+    public String find(String statement) {
         Find f = new Find(statement, aList);
         ArrayList<Task> matchTask = f.match();
-        System.out.println("Here are the matching tasks in your list:");
-        print(matchTask);
+        return "Here are the matching tasks in your list:" + print(matchTask);
     }
 
     /**
      * Prints the corresponding list required
      * @param listOfTask the required list of task
      */
-    private void print(ArrayList<Task> listOfTask){
+    private String print(ArrayList<Task> listOfTask){
         Task t;
+        String msg = "";
         for (int i=1; i <= listOfTask.size(); i++) {
             t = listOfTask.get(i-1);
-            System.out.println(i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.toString());
+            msg += i + ". [" +t.getType()+ "][" +t.getStatusIcon()+ "]" +t.toString() + "\n";
         }
-        System.out.println("");
+        return msg + "\n";
     }
 
     //call to actions for different task type
-    public void add(String taskType, String statement) {
+    public String add(String taskType, String statement) {
         Task t;
+        String msg = "";
         if (!taskType.equals("todo")) {
             ArrayList<String> details = breakStatement(statement);
             String description = details.get(0);
             String date = details.get(1);
             String time = details.get(2);
             try {
-                checkDate(date);
+                if (!date.contains("-") || date.split("-")[0].length()<4
+                        || Integer.parseInt(date.split("-")[1])>12) {
+                    throw new DukeException("Invalid date format. Format should be YYYY-MM-DD.\n");
+                }
                 //print msg task added
                 if (taskType.equals("event")) {
                     t = new Event(description, date, time);
                 } else {
                     t = new Deadline(description, date, time);
-                    reminderList.add(t);
                 }
                 aList.add(t);
-                printAdded(t, aList); //print msg task added
+                msg = printAdded(t, aList); //print msg task added
             } catch(DukeException e) {
-                System.out.println(e);
+                msg = e.toString();
             }
         }
         else {
             t = new Todo(statement);
             aList.add(t);
-            printAdded(t, aList); //print msg task added
+            msg = printAdded(t, aList); //print msg task added
         }
+        return msg;
     }
 
     public ArrayList<String> breakStatement(String s) {
@@ -121,28 +132,17 @@ public class TaskList {
     }
 
     /**
-     * Checks if the date string is in the correct format
-     * @param date user input date
-     * @throws DukeException if date is in wrong format
-     */
-    public void checkDate(String date) throws DukeException{
-        if (!date.contains("-") || date.split("-")[0].length()<4
-                || Integer.parseInt(date.split("-")[1])>12) {
-            throw new DukeException("Invalid date format. Format should be YYYY-MM-DD.\n");
-        }
-    }
-
-    /**
      * Actions to be executed if delete is called
      * @param rank task number in the list
      * @param tempList task list
      */
-    public void deleteAction(int rank, ArrayList<Task> tempList) {
+    public String deleteAction(int rank, ArrayList<Task> tempList) {
+        String msg = "";
         Delete delete = new Delete(rank, tempList);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(delete);
+        msg += "Noted. I've removed this task:\n";
+        msg += delete;
         delete.deleteTask();
-        System.out.println("Now you have " + tempList.size() + " tasks in the list.\n");
+        return msg += "\nNow you have " + tempList.size() + " tasks in the list.\n";
     }
 
     /**
@@ -150,12 +150,13 @@ public class TaskList {
      * @param rank task number in the list
      * @param tempList task list
      */
-    public void doneAction(int rank, ArrayList<Task> tempList) {
+    public String doneAction(int rank, ArrayList<Task> tempList) {
+        String msg = "";
         Done done = new Done(rank, tempList);
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(done);
+        msg += "Nice! I've marked this task as done:\n";
+        msg += done;
         done.markDone();
-        System.out.println("Now you have " + tempList.size() + " tasks in the list.\n");
+        return msg += "\nNow you have " + tempList.size() + " tasks in the list.\n";
     }
 
     /**
@@ -163,9 +164,9 @@ public class TaskList {
      * @param t the specific task in the list
      * @param tempList task list
      */
-    public void printAdded(Task t, ArrayList<Task> tempList) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  [" + t.getType() + "][" + t.getStatusIcon() + "]" + t.toString());
-        System.out.println("Now you have " + tempList.size() + " tasks in the list.\n");
+    public String printAdded(Task t, ArrayList<Task> tempList) {
+        return "Got it. I've added this task:\n"
+                + "  [" + t.getType() + "][" + t.getStatusIcon() + "]" + t.toString()
+                + "\nNow you have " + tempList.size() + " tasks in the list.\n";
     }
 }
