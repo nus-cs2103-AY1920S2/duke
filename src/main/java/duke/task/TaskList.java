@@ -3,6 +3,8 @@ package duke.task;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -78,11 +80,16 @@ public class TaskList {
      */
     public TaskList deleteTaskByIndexes(List<Integer> indexes) throws DukeException {
         TaskList deletedTasks = new TaskList();
-        int deleteCounter = 1;
         try {
+            // This for loop is to ensure the sequence of returned deletedTasks.
             for (int index : indexes) {
-                deletedTasks.addTask(tasks.remove(index - deleteCounter));
-                deleteCounter++;
+                deletedTasks.addTask(tasks.get(index - 1));
+            }
+
+            // Sort the list in reverse order before deleting.
+            indexes.sort(Collections.reverseOrder());
+            for (int index : indexes) {
+                tasks.remove(index - 1);
             }
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("OOPS!!! We don't have some number in list!!!");

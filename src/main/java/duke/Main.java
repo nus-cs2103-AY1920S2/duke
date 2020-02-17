@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -15,6 +16,8 @@ public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
 
+    private Image icon = new Image(this.getClass().getResourceAsStream("/images/launcher-icon.png"));
+
     @Override
     public void start(Stage stage) {
         try {
@@ -23,6 +26,9 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setResizable(false);
+            stage.setTitle("Duke");
+            stage.getIcons().add(icon);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

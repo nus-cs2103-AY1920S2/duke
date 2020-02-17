@@ -22,7 +22,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private static final String WELCOME_MESSAGE = "Welcome to Duke Application!!! \n";
+    private static final String WELCOME_MESSAGE = "Welcome to Duke Application!!!";
 
     private Duke duke;
 
@@ -65,7 +65,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         // check if the user is going to exit the application
-        if (response.startsWith("Bye!!!")) {
+        if (input.equals("bye")) {
             handleExit();
         }
     }

@@ -8,6 +8,7 @@ import duke.task.TaskList;
  * Represent the user interface for the program to prepare reply string to user.
  */
 public class Ui {
+    private static final String SEPARATOR = "#####################################";
     private static final String LS = System.lineSeparator();
     private static final String NUM_OF_TASKS = "Now you have %d tasks in the list.";
     private static final String ADD_TASK = "Got it. I've added this task: ";
@@ -23,9 +24,21 @@ public class Ui {
      * @param message message given
      */
     private void showToUser(String... message) {
+        //System.out.println(SEPARATOR);
         for (String m : message) {
             System.out.println(m.replace("\n", LS));
         }
+        //System.out.println(SEPARATOR);
+    }
+
+    /**
+     * Format the output to same format.
+     *
+     * @param message message to format
+     * @return the formatted string
+     */
+    public String formatOutput(String message) {
+        return String.format("%s\n%s\n%s", SEPARATOR, message, SEPARATOR).replace("\n", LS);
     }
 
     /**

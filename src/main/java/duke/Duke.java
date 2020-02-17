@@ -63,4 +63,14 @@ public class Duke {
         System.setOut(systemOutput);
         return respond.toString();
     }
+
+    /**
+     * Get the output in desired format.
+     *
+     * @param message message to format
+     * @return formatted message
+     */
+    public String getOutput(String message) {
+        return ui.formatOutput(message);
+    }
 }
