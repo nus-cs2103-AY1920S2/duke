@@ -99,7 +99,7 @@ Here are the tasks in your list:
 
 ![list pic](list.png)
 
-##`delete` - Removes a task from the list.
+## `delete` - Removes a task from the list.
 By keying in the `delete` command along with the index of the task, one can remove a task from the task list.
 
 Example of usage: 
@@ -116,7 +116,7 @@ Now you have 2 tasks in the list.
 
 ![delete pic](delete.png)
 
-##`done` - Marks a task as done in the task list.
+## `done` - Marks a task as done in the task list.
 
 By keying the command `done` followed by the index of the task, one can mark the task as done.
 
@@ -133,7 +133,7 @@ Nice! I've marked this task as done:
 
 ![done pic](done.png)
 
-##`find` - Displays all the tasks with the keyword provided in the task list.
+## `find` - Displays all the tasks with the keyword provided in the task list.
 
 By keying the command `find` followed by the keyword, one can see the list of tasks with that keyword.
 
@@ -150,7 +150,7 @@ Here are the tasks in your list:
 
 ![find pic](find.png)
 
-##`bye` - Terminates the program.
+## `bye` - Terminates the program.
 
 By keying in the command `bye`, one can terminate the duke program.
 
@@ -164,7 +164,7 @@ Expected outcome:
 See ya later alligator!
 ```
 
-##`help` - Displays all the tasks with the keyword provided in the task list.
+## `help` - Displays all the tasks with the keyword provided in the task list.
 
 By keying the command `help` followed by the keyword, one can see all the available commands in duke.
 
@@ -203,7 +203,7 @@ Here are the available commands:
 ```
 ![help pic](help.png)
 
-##Acknowledgements
+## Acknowledgements
 Credit to Jeffry Lum for the fxml and java files for [JAVAFX GUI](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md).
 
 Credit to @MintBerryCrunch for the [code to create a new thread and terminating the program](https://stackoverflow.com/questions/52393982/javafx-problem-with-platform-runlater-delayed-rendering-of-canvas-graphic).
