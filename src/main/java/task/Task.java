@@ -41,6 +41,11 @@ public class Task {
         return (isDone ? "✓" : "✗");
     }
 
+
+    public boolean getDoneStatus(){
+        return isDone;
+    }
+
     /**
      * this method return the string of the task description and status
      *

@@ -64,7 +64,7 @@ public class Command {
             return uiHelper.parserOutputMess(customeriseTopMes, taskMes, customeriseBottomMes); // parse
         } else if (command.equals("delete")) {
             int arrPos = Integer.parseInt(taskEntered);
-
+            assert arrPos > 0 : "Please enter a positive index ";
             if (taskList.size() == 0) {
                 return "  Sorry there is no any task for you to do the command";
             } else if (arrPos > taskList.size()) {
@@ -79,19 +79,21 @@ public class Command {
 
         } else if (command.equals("done")) {
             int arrPos = Integer.parseInt(taskEntered); // assign index
-
+            assert arrPos > 0 : "Please enter a positive index ";
             if (taskList.size() == 0) { // check if size of arrayList is large then 1
                 return "  Sorry there is no any task for you to do the command";
             } else if (arrPos > taskList.size()) {
                 return "You entered wrong index of task, please try again later";
             } else {
+                assert !taskList.get(arrPos - 1).getDoneStatus() : "The task status is set to done already";
                 taskList.get(arrPos - 1).setDone(); // set Done to the task object
-                String doneMesTop = uiHelper.markAsDone(); // assign done message
+                String doneMesTop = uiHelper.markAsDone(); // assign done
                 String doneResult = "    [" + taskList.get(arrPos - 1).getStatusIcon() + "] " + taskList.get(arrPos - 1).getDescription();
                 String doneMesBot = "  -------------";
                 return uiHelper.parserOutputMess(doneMesTop, doneResult, doneMesBot); // parse the message together and return to Duke
             }
         } else if (command.equals("find")) {
+            assert taskList.size() > 0 : "Execution command failed because there is task created " ;
             ArrayList<String> matchResult = new ArrayList<String>();
             String searchWord = taskEntered;
             for (int i = 0; i < taskList.size(); i++) {
@@ -106,15 +108,17 @@ public class Command {
             }
             return uiHelper.parserOutputMess(topFindMess, match, "------------");
         } else {
-            return "Sorry i dont know what is means ";
+            return "Sorry i do not know what is means ";
         }
     }
 
-    public static String formatDate(String date) throws Exception {
+    private static String formatDate(String date) throws Exception {
+        assert !date.substring(2,3).equalsIgnoreCase("-") : "Please Enter date in correct format YYYY-MM-DD";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date1 = formatter.parse(date);
         formatter = new SimpleDateFormat("E, MMM d yyyy");
         return (formatter.format(date1));
-
     }
+
+
 }

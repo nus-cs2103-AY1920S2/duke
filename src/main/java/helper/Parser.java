@@ -1,4 +1,5 @@
 package helper;
+
 import exception.IncorrectInputException;
 
 /**
@@ -13,9 +14,10 @@ public class Parser {
     }
 
     public Command parse(String userInput) {
-
+      
         try {
-            if(!userInput.equalsIgnoreCase("list") && !userInput.equalsIgnoreCase("bye") ){
+            assert !userInput.equalsIgnoreCase("") : "Please Enter a Command and Task !!";
+            if (!userInput.equalsIgnoreCase("list") && !userInput.equalsIgnoreCase("bye")) {
                 uiHelper.checkIsTaskEmpty(userInput);
             }
             if (userInput.equals("bye")) {
@@ -32,9 +34,9 @@ public class Parser {
                 return new Command("delete", userInput.replace("delete ", ""));
             } else if (userInput.split(" ")[0].equals("done")) {
                 return new Command("done", userInput.replace("done ", ""));
-            }else if(userInput.split(" ")[0].equals("find")){
-                return new Command("find",userInput.replace("find ",""));
-            }else {
+            } else if (userInput.split(" ")[0].equals("find")) {
+                return new Command("find", userInput.replace("find ", ""));
+            } else {
                 return new Command("");
             }
         } catch (IncorrectInputException e) {
