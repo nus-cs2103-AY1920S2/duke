@@ -19,18 +19,26 @@ It has three main features which are:
 
 ## How to use
 
-![User Interface](/Users/edmondong/Downloads/Project/Week1/duke/docs/Ui.png=250x250)
+![User Interface](https://github.com/EdmondOng/duke/blob/master/docs/Ui.png?raw=true=50x50)
 
-There is 
+Refer to the image above. There is two ways that you can enter the inputs into the application,
+which is one on the left and the another on the right.
 
-### `Keyword` - Describe action
 
-Describe action and its outcome.
+### `Todo, Deadline, Event` - Commands lines
 
 Example of usage: 
 
-`keyword (optional arguments)`
+*`todo (arguments)` : todo helloworld
+
+*`deadline (arguments) /by (YYYY-MM-DD)` : deadline hello world /by 2019-06-01
+
+*`events (arguments) /at (arguments)` : event gjfasjfa /at hello
 
 Expected outcome:
 
-`outcome`
+Please refer the specific outcomes from the picture provided above.
+
+* task list 2
+* task list 1
+* task list 12
