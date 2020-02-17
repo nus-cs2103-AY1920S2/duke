@@ -74,6 +74,7 @@ public class Storage {
 
         if (mylist.size() == 0) {
             overwrite("Wow..much emptiness");
+            assert mylist.size() == 0 : " Must be 0";
         }
         for (Task t: mylist) {
             String[] splitted = t.toString().split(" ", 3);
