@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
 
 
     /**
-     * Initialises the ScrollPane for the GUI
+     * Initialises the ScrollPane for the GUI.
      */
     @FXML
     public void initialize() {

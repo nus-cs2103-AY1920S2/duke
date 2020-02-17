@@ -10,9 +10,12 @@ public class Duke {
     private Ui ui;
     private boolean isLastGuiCmd;
 
+    /**
+     * Constructs the Duke class object.
+     */
     public Duke() {
         ui = new Ui();
-        try{
+        try {
             storage = new Storage();
             this.tasks = storage.loadTasksFile();
         } catch (Exception e) {
@@ -23,7 +26,7 @@ public class Duke {
 
 
     /**
-     * Process commands in the CLI version of Duke
+     * Process commands in the CLI version of Duke.
      */
     private void interact() {
 
@@ -50,7 +53,7 @@ public class Duke {
 
 
     /**
-     * Process commands in the GUI version of Duke, based on user input
+     * Process commands in the GUI version of Duke, based on user input.
      */
     private String interactGui(String input) {
         ui.printLine1();

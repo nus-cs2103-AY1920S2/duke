@@ -1,6 +1,6 @@
 package duke;
 
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /**
      * Returns exceptions for invalid Duke inputs.

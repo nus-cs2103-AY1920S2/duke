@@ -9,7 +9,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructor for the TaskList class
+     * Constructs a TaskList object, which maintains an array list of Task objects.
      */
     public TaskList() {
         tasks = new ArrayList<>();

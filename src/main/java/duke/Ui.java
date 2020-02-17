@@ -9,7 +9,7 @@ public class Ui {
     private String cathulhuSaysString;
 
     /**
-     * Constructor for the UI class
+     * Constructs the Ui object.
      */
     public Ui() {
         sc = new Scanner(System.in);
@@ -33,7 +33,7 @@ public class Ui {
 
 
     /**
-     * Returns everything Cathulhu wanted to say and clears them from Cathulhu's memory
+     * Returns everything Cathulhu wanted to say and clears them from Cathulhu's memory.
      *
      * @return String to be shown to the user
      */
@@ -45,7 +45,7 @@ public class Ui {
 
 
     /**
-     * Clears what Cathulhu want to say from his memory
+     * Clears what Cathulhu want to say from his memory.
      */
     public void flush() {
         this.cathulhuSaysString = "";
@@ -73,7 +73,7 @@ public class Ui {
 
 
     /**
-     * Prints a line before each user command response
+     * Prints a line before each user command response.
      */
     public void printLine1() {
         cathulhuSays("\t-------------C-A-T-H-U-L-H-U-------------");
@@ -81,7 +81,7 @@ public class Ui {
 
 
     /**
-     * Prints a line after each user command response
+     * Prints a line after each user command response.
      */
     public void printLine2() {
         cathulhuSays("\t----------------M-E-O-W-S----------------\n");
@@ -89,45 +89,45 @@ public class Ui {
 
 
     /**
-     * Shows the goodbye message for this program
+     * Shows the goodbye message for this program.
      */
     public void showGoodbye() {
         sc.close();
         String catLeaves = ".......................................Iä! Iä! .......................\n"
-                +"...........................................Cthul......................\n"
-                +"............................................hu fh.....................\n"
-                +".........','...............................tagn!......................\n"
-                +"........'Ph'nglui mglw'nfah Cthulhu R'lyeh wgah.......................\n"
-                +".......'nagl fhatgn! Iä! Iä! Cthulhu fhtagn! P........................\n"
-                +".......h'nglui mglw'nfah Cthulhu R'lyeh wgah'n........................\n"
-                +"........agl fhtagn! Iä! Iä! Cthulhu fhtagn! P.........................\n"
-                +"...............h'nglui mglw'nfah Cthulhu R'ly;........................\n"
-                +"................yeh wgah'nagl fhtagn! Iä! Iä!,........................\n"
-                +"...............Cthul...hufht.....agn!Ph'nglui ........................\n"
-                +"..............mglw.....'nfah.....Cthu.....lhu.........................\n"
-                +".............R'ly........ehw....gah'.......nag........................\n"
-                +".............lf...........ht....ag..........n!........................\n";
+                + "...........................................Cthul......................\n"
+                + "............................................hu fh.....................\n"
+                + ".........','...............................tagn!......................\n"
+                + "........'Ph'nglui mglw'nfah Cthulhu R'lyeh wgah.......................\n"
+                + ".......'nagl fhatgn! Iä! Iä! Cthulhu fhtagn! P........................\n"
+                + ".......h'nglui mglw'nfah Cthulhu R'lyeh wgah'n........................\n"
+                + "........agl fhtagn! Iä! Iä! Cthulhu fhtagn! P.........................\n"
+                + "...............h'nglui mglw'nfah Cthulhu R'ly;........................\n"
+                + "................yeh wgah'nagl fhtagn! Iä! Iä!,........................\n"
+                + "...............Cthul...hufht.....agn!Ph'nglui ........................\n"
+                + "..............mglw.....'nfah.....Cthu.....lhu.........................\n"
+                + ".............R'ly........ehw....gah'.......nag........................\n"
+                + ".............lf...........ht....ag..........n!........................\n";
         cathulhuSays("Be gone then, mortal.\n" + catLeaves);
     }
 
 
     /**
-     * Shows the welcome message for this program
+     * Shows the welcome message for this program.
      */
     public void showWelcome() {
         String logo = "         _..._                                                                          \n"
-                +"      .-'_..._''.                                         .---.                         \n"
-                +"    .' .'      '.\\                    .                   |   |   .                     \n"
-                +"   / .'                             .'|                   |   | .'|                     \n"
-                +"  . '                           .| <  |                   |   |<  |                     \n"
-                +"  | |                 __      .' |_ | |                   |   | | |                     \n"
-                +"  | |              .:--.'.  .'     || | .'''-.     _    _ |   | | | .'''-.     _    _   \n"
-                +"  . '             / |   \\ |'--.  .-'| |/.'''. \\   | '  / ||   | | |/.'''. \\   | '  / |  \n"
-                +"   \\ '.          .`\" __ | |   |  |  |  /    | |  .' | .' ||   | |  /    | |  .' | .' |  \n"
-                +"    '. `._____.-'/ .'.''| |   |  |  | |     | |  /  | /  ||   | | |     | |  /  | /  |  \n"
-                +"      `-.______ / / /   | |_  |  '.'| |     | | |   `'.  |'---' | |     | | |   `'.  |  \n"
-                +"               `  \\ \\._,\\ '/  |   / | '.    | '.'   .'|  '/     | '.    | '.'   .'|  '/ \n"
-                +"                  `--'  `\"   `'-'  '---'   '---'`-'  `--'      '---'   '---'`-'  `--'  \n";
+                + "      .-'_..._''.                                         .---.                         \n"
+                + "    .' .'      '.\\                    .                   |   |   .                     \n"
+                + "   / .'                             .'|                   |   | .'|                     \n"
+                + "  . '                           .| <  |                   |   |<  |                     \n"
+                + "  | |                 __      .' |_ | |                   |   | | |                     \n"
+                + "  | |              .:--.'.  .'     || | .'''-.     _    _ |   | | | .'''-.     _    _   \n"
+                + "  . '             / |   \\ |'--.  .-'| |/.'''. \\   | '  / ||   | | |/.'''. \\   | '  / |  \n"
+                + "   \\ '.          .`\" __ | |   |  |  |  /    | |  .' | .' ||   | |  /    | |  .' | .' |  \n"
+                + "    '. `._____.-'/ .'.''| |   |  |  | |     | |  /  | /  ||   | | |     | |  /  | /  |  \n"
+                + "      `-.______ / / /   | |_  |  '.'| |     | | |   `'.  |'---' | |     | | |   `'.  |  \n"
+                + "               `  \\ \\._,\\ '/  |   / | '.    | '.'   .'|  '/     | '.    | '.'   .'|  '/ \n"
+                + "                  `--'  `\"   `'-'  '---'   '---'`-'  `--'      '---'   '---'`-'  `--'  \n";
         cathulhuSays(logo + "\tIt's you again, mortal. \n\tWhy have thou summoned meow this time?\n");
     }
 }

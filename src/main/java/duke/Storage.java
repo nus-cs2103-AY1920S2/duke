@@ -7,12 +7,20 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 public class Storage {
 
     private File tasksFile;
 
+    /**
+     * Constructs the Storage object which handles reading and saving to data file.
+     * @throws DukeException If the tasks file directory cannot be created.
+     * @throws IOException For errors with accessing and editing the task file.
+     */
     public Storage() throws DukeException, IOException {
 
         File tasksFileDirectory = new File(System.getProperty("user.dir") + "/dukeData");
@@ -32,18 +40,14 @@ public class Storage {
      * @throws FileNotFoundException if Scanner object is not able to find the tasks data file
      */
     public TaskList loadTasksFile() throws FileNotFoundException {
-
         // Assert that the tasksFile is still at the specified path and has not been shifted by some naughty user
         assert tasksFile.isFile();
 
         Scanner sc = new Scanner(tasksFile);
         TaskList taskData = new TaskList();
-
         while (sc.hasNextLine()) {
-
             String[] taskString = sc.nextLine().split(":;:");
-
-            switch(taskString[0]) {
+            switch (taskString[0]) {
             case "T":
                 Task tdTask = new ToDo(taskString[2]);
                 if (taskString[1].equals("1")) {
@@ -51,7 +55,6 @@ public class Storage {
                 }
                 taskData.addTask(tdTask);
                 break;
-
             case "D":
                 try {
                     Task dlTask = new Deadline(taskString[2], taskString[3]);
@@ -63,9 +66,7 @@ public class Storage {
                     System.out.println("Error loading data from tasksFile.txt. Skipping the following line:");
                     System.out.println(Arrays.asList(taskString).toString());
                 }
-
                 break;
-
             case "E":
                 Task evTask = new Event(taskString[2], taskString[3]);
                 if (taskString[1].equals("1")) {
@@ -73,7 +74,6 @@ public class Storage {
                 }
                 taskData.addTask(evTask);
                 break;
-
             default:
                 break;
             }

@@ -13,7 +13,7 @@ public class DeadlineTest {
      */
     public void toStringTest() {
         String response;
-        try{
+        try {
             Deadline dl = new Deadline("CS2103 IP", "2020-01-28 23:59");
             dl.markAsDone();
             response = dl.toString();
@@ -29,7 +29,7 @@ public class DeadlineTest {
      */
     public void toDataStringTest() {
         String response;
-        try{
+        try {
             response = new Deadline("CS2103", "2020-01-28").toDataString();
         } catch (DukeException e) {
             response = e.getMessage();

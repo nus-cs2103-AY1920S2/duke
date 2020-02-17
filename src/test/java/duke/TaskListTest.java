@@ -17,7 +17,6 @@ public class TaskListTest {
         TaskList tl = new TaskList();
         tl.addTask(new Task("qwerty"));
         tl.addTask(new Task("asdfgh"));
-        tl.addTask(new Task("zxcvbn"));
         response = tl.getTask(1).toString();
 
         assertEquals("[N] asdfgh", response);
