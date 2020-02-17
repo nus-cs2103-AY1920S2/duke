@@ -1,5 +1,8 @@
 # User Guide
 
+## Product Interface
+<img src="Ui.png" width="400">
+
 ## Features 
 
 ### Feature 1 
