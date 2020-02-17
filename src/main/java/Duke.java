@@ -58,7 +58,7 @@ public class Duke {
                     || keyword.equals(FIND_COMMAND)
                     || keyword.equals(TODO_COMMAND)) { // commands with one arguments
                 if (parsed.length <= 1) {
-                    throw new DukeException("I think u need one argument");
+                    throw new DukeException("I think u need more argument");
                 }
                 if (keyword.equals(DONE_COMMAND)) {
                     int taskNumber = Integer.valueOf(parsed[NUMBER]);
@@ -69,10 +69,13 @@ public class Duke {
                 } else if (keyword.equals(FIND_COMMAND)) {
                     message = findCommand(parsed[SECOND_WORD]);
                 } else if (keyword.equals(TODO_COMMAND)) {
-                    this.tasklist.addTask(new Todo(parsed[SECOND_WORD]));
+                    message = todoCommand(parsed[SECOND_WORD]);
                 }
             } else if (keyword.equals(DEADLINE_COMMAND)
                     || keyword.equals(EVENT_COMMAND)) { // commands with two or more argument
+                if (parsed.length <= 1) {
+                    throw new DukeException("I think u need more arguments");
+                }
                 String word2 = parsed[SECOND_WORD];
                 String[] parsed2 = TextParser.mySecondParser(word2);
                 if (parsed2.length <= 1) {
@@ -87,7 +90,7 @@ public class Duke {
                 message = message + ui.printMessage("" + this.tasklist.getTask(this.tasklist.getSize()));
                 message = message + ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
             } else {
-                throw new DukeException("I DK how to process this -> " + command);
+                throw new DukeException("I DK how to process this -> " + command); // command not recognised
             }
         } catch (DukeException e) {
             message = message + ui.printMessage(e.getMessage());
@@ -183,6 +186,20 @@ public class Duke {
     private String findCommand(String keyword) {
         String message = "";
         message = tasklist.findKeyword(keyword);
+        return message;
+    }
+
+    /**
+     * Runs the todoCommand
+     * @param taskDescription of the task
+     * @return message generated to inform user
+     */
+    private String todoCommand(String taskDescription) {
+        String message = "";
+        tasklist.addTask(new Todo(taskDescription));
+        message = message + ui.printMessage("Got it. I 've added this task:");
+        message = message + ui.printMessage("" + this.tasklist.getTask(this.tasklist.getSize()));
+        message = message + ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
         return message;
     }
 }
