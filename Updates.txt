@@ -240,3 +240,9 @@ Things maybe wanted to implement
 2. Time bot has been running 
 Seperate usercommands
 
+
+Bug fixes
+Update 1-1
+Fix bug where bot dont save memory when closed
+Fix bug where cannot see past certain amount of items
+
