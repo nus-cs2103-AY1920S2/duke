@@ -141,7 +141,7 @@ Expected outcome:
 
 ```
 Noted. I've removed this task: 
-  [T][X] borrow book
+  [T][V] borrow book
 Now you have 2 tasks in the list.
 ```
 
