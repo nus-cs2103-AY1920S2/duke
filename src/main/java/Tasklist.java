@@ -99,10 +99,10 @@ public class Tasklist {
                 done++;
             }
         }
-        message = message + String.format("_____SUMMARY_____\n");
+        message = message + String.format("___________SUMMARY__________\n");
         message = message + String.format("Currently you have\n");
         message = message + String.format("%d todo\n", todo);
-        message = message + String.format("%d deadline\n" , deadline);
+        message = message + String.format("%d deadline\n", deadline);
         message = message + String.format("%d event\n", event);
         message = message + String.format("total task = %d, %d tasks done\n", mylist.size(), done);
         return message;
