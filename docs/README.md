@@ -19,7 +19,7 @@ It has three main features which are:
 
 ## How to use
 
-![User Interface](https://github.com/EdmondOng/duke/tree/master/docs/Ui.png=250x250)
+![User Interface](/Users/edmondong/Downloads/Project/Week1/duke/docs/Ui.png=250x250)
 
 There is 
 
