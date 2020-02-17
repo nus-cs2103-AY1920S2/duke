@@ -53,12 +53,9 @@ public class Duke {
                 message = doneCommand(taskNumber);
             } else if (keyword.equals(DEL_COMMAND)) {
                 int taskNumber = Integer.valueOf(parsed[NUMBER]);
-                message = message + ui.printMessage("Noted. I've removed this task");
-                message = message + ui.printMessage("" + this.tasklist.getTask(taskNumber));
-                this.tasklist.removeTask(taskNumber);
-                message = message + ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
+                message = delCommand(taskNumber);
             } else if (keyword.equals(FIND_COMMAND)) {
-                this.tasklist.findKeyword(parsed[SECOND_WORD]);
+                message = findCommand(parsed[SECOND_WORD]);
             } else if (keyword.equals(TODO_COMMAND) || keyword.equals(DEADLINE_COMMAND) || keyword.equals(EVENT_COMMAND)) {
                 if (parsed.length <= 1) {
                     throw new DukeException("I think u need more arguments");
@@ -144,6 +141,35 @@ public class Duke {
             message = message + ui.printMessage("Nice! I've marked this task as done:");
             message = message + ui.printMessage("" + taskNumber + ". " + tasklist.getTask(taskNumber));
         }
+        return message;
+    }
+
+    /**
+     * Runs the delete command
+     * @param taskNumber in the list
+     * @return message generated to inform the user
+     * @throws DukeException invalid number
+     */
+    private String delCommand(int taskNumber) throws DukeException {
+        String message = "";
+        if (taskNumber <= 0 || taskNumber > tasklist.getSize()) {
+            throw new DukeException("The task number is invalid !!!");
+        }
+        message = message + ui.printMessage("Noted. I've removed this task:");
+        message = message + ui.printMessage("" + this.tasklist.getTask(taskNumber));
+        tasklist.removeTask(taskNumber);
+        message = message + ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
+        return message;
+    }
+
+    /**
+     * Runs the find command
+     * @param keyword to be searched
+     * @return message generated to inform user
+     */
+    private String findCommand(String keyword) {
+        String message = "";
+        message = tasklist.findKeyword(keyword);
         return message;
     }
 }
