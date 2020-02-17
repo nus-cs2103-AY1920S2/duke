@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Ui {
 
     private Scanner sc;
-
     private String cathulhuSaysString;
 
     /**
