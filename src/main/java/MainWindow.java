@@ -20,14 +20,14 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/patrick.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/spongebob.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String logo = "";
-        logo += ("Hello! I'm Duke.\nWhat can I do for you?\n");
+        logo += ("Hello! I'm BOB the SPONGE.\nWhat can I do for you?\n");
         logo += ("-----------------------------------\n");
         logo += ("Please enter your commands below:\n");
         dialogContainer.getChildren().addAll(
