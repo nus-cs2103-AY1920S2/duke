@@ -16,7 +16,7 @@ public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
 
-    private Image icon = new Image(this.getClass().getResourceAsStream("/images/launcher-icon.png"));
+    private final Image icon = new Image(this.getClass().getResourceAsStream("/images/launcher-icon.png"));
 
     @Override
     public void start(Stage stage) {
