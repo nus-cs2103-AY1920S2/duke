@@ -58,28 +58,24 @@ public class TaskList {
      */
     public String done(int taskNum) {
         String output = "";
-        try {
-            if (taskNum <= taskList.size()) {
-                Task completedTask = this.taskList.get(taskNum - 1);
-                if (completedTask.getStatus().equals("Done")) {
-                    output+= "You have already completed this task!";
-                } else {
-                    completedTask.markAsDone();
-                    this.pendingTask--;
-                    output+= "Nice! I've marked this task as done:\n"
-                            + "[" + completedTask.getStatus() + "] " + completedTask.getDescription();
-                }
-                if (this.pendingTask == 0) {
-                    output+= "\nYay! You have no more task remaining!";
-                } else {
-                    output += "\nYou have " + this.pendingTask + " tasks remaining!";
-                }
-                return output;
+        if (taskNum <= taskList.size()) {
+            Task completedTask = this.taskList.get(taskNum - 1);
+            if (completedTask.getStatus().equals("Done")) {
+                output+= "You have already completed this task!";
             } else {
-                return "Sorry, there is no such task!";
+                completedTask.markAsDone();
+                this.pendingTask--;
+                output+= "Nice! I've marked this task as done:\n"
+                        + "[" + completedTask.getStatus() + "] " + completedTask.getDescription();
             }
-        } catch (Exception e) {
-            return "Sorry, I dont understand your request!";
+            if (this.pendingTask == 0) {
+                output+= "\nYay! You have no more task remaining!";
+            } else {
+                output += "\nYou have " + this.pendingTask + " tasks remaining!";
+            }
+            return output;
+        } else {
+            return "Sorry, there is no such task!";
         }
     }
 
@@ -91,23 +87,19 @@ public class TaskList {
      */
     public String delete(int taskNum) {
         String output = "";
-        try {
-            if (taskNum <= taskList.size()) {
-                Task deletedTask = this.taskList.get(taskNum - 1);
-                String status = deletedTask.getStatus();
-                assert status.equals("Done") || status.equals("Not Done") : "Only Done or Not Done";
-                if (status.equals("Not Done")) {
-                    //Pending task count drops only if deleted task not completed
-                    this.pendingTask--;
-                }
-                output += "Noted. I've removed this task:\n" + deletedTask
-                        + "\nNow you have " + this.pendingTask + " tasks in the list.";
-                this.taskList.remove(taskNum - 1);
-                return output;
-            } else {
-                return "Sorry, there is no such task!";
+        if (taskNum <= taskList.size()) {
+            Task deletedTask = this.taskList.get(taskNum - 1);
+            String status = deletedTask.getStatus();
+            assert status.equals("Done") || status.equals("Not Done") : "Only Done or Not Done";
+            if (status.equals("Not Done")) {
+                //Pending task count drops only if deleted task not completed
+                this.pendingTask--;
             }
-        } catch (Exception e) {
+            output += "Noted. I've removed this task:\n" + deletedTask
+                    + "\nNow you have " + this.pendingTask + " tasks in the list.";
+            this.taskList.remove(taskNum - 1);
+            return output;
+        } else {
             return "Sorry, there is no such task!";
         }
     }
@@ -213,10 +205,6 @@ public class TaskList {
      */
     public ArrayList<Task> getList() {
         return this.taskList;
-    }
-
-    public void initialisePendingTaskCount(int count) {
-        this.pendingTask = count;
     }
 
     /**
