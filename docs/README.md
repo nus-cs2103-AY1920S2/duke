@@ -26,7 +26,7 @@ You can save the tasks and exit the program.
 
 ## Usage
 
-### `help` : lists out all the commands
+###`help` : lists out all the commands
 
 `help` displays all the available commands
 
@@ -51,7 +51,9 @@ Expected outcome:
 Example:
 ![help](help.png)
 
-### `todo` : adds a Todo task
+___
+
+###`todo` : adds a Todo task
 
 `todo [description]` adds a Todo task
 
@@ -68,7 +70,9 @@ You now have 1 tasks!
 Example:
 ![todo](todo.png)
 
-### `event` : adds a Event task
+___
+
+###`event` : adds a Event task
 
 `event [description] /by [YYYY-MM-DD]` adds an Event task
 
@@ -85,7 +89,9 @@ You now have 2 tasks!
 Example:
 ![event](event.png)
 
-### `deadline` : adds a Deadline task
+___
+
+###`deadline` : adds a Deadline task
 
 `deadline [description] /by [YYYY-MM-DD]` adds a Deadline task
 
@@ -102,7 +108,9 @@ You now have 3 tasks!
 Example:
 ![deadline](deadline.png)
 
-### `list` : lists out all the tasks
+___
+
+###`list` : lists out all the tasks
 
 `list` displays all the current tasks in the list
 
@@ -121,7 +129,9 @@ Here are the tasks in your list:
 Example:
 ![list](list.png)
 
-### `done` : marks indicated task as complete
+___
+
+###`done` : marks indicated task as complete
 
 `done [index]` marks the task at index as complete
 
@@ -138,7 +148,9 @@ You now have 3 tasks left!
 Example:
 ![done](done.png)
 
-### `delete` : deletes the indicated task
+___
+
+###`delete` : deletes the indicated task
 
 `delete [index]` removes the task at index from the list
 
@@ -155,7 +167,9 @@ You now have 2 tasks remaining!
 Example:
 ![delete](delete.png)
 
-### `find` : searches through the list for the keyword
+___
+
+###`find` : searches through the list for the keyword
 
 `find [keyword]` displays all the tasks with the keyword
 
@@ -172,7 +186,9 @@ Here are the matching tasks in your list:
 Example:
 ![find](find.png)
 
-### `bye` : saves and exits
+___
+
+###`bye` : saves and exits
 
 `bye` saves and exits the program
 
