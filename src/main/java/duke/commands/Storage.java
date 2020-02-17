@@ -48,9 +48,13 @@ public class Storage {
      *
      * @throws FileNotFoundException if the file cannot be found
      */
-    public void retrieveInfo() throws FileNotFoundException {
+    public void retrieveInfo() throws IOException {
+        File data = new File(filePath);
+        if (!data.exists()) {
+            data.createNewFile();
+        }
 
-        Scanner scanner = new Scanner(new File(filePath));
+        Scanner scanner = new Scanner(data);
         while (scanner.hasNextLine()) {
             String[] arr  = scanner.nextLine().split("[|]");
             Task newTask = null;

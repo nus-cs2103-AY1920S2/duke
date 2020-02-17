@@ -33,8 +33,8 @@ public abstract class Task {
      * @return Y or N depending on whether isDone is true or false
      */
     public String getStatusIcon() {
-        //return (isDone ? "\u2713" : "\u2718"); //return tick or cross symbols
-        return (isDone ? "Y" : "N"); //return Y or N symbols
+        return (isDone ? "\u2713" : "\u2718"); //return tick or cross symbols
+        //return (isDone ? "Y" : "N"); //return Y or N symbols
     }
 
     /**

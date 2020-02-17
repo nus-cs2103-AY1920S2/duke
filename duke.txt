@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 T | N | THE DUKE.TXT FOR GRADLE IS HERE
 =======
 T | N | read book
@@ -40,3 +41,10 @@ D | Y | do homework | Oct 29 2020 12PM
 =======
 D | Y | do homework | Jun 5 2020 2PM
 >>>>>>> aa97a8f... added checkUpdate()
+=======
+T | ? | read book
+D | ? | return book | Feb 21 2020 4PM
+E | ? | project meeting | Apr 13 2020 6PM
+D | ? | do homework | Oct 29 2020 12PM
+T | ? | borrow book
+>>>>>>> 53e80cb... Add a representative screenshot

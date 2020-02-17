@@ -61,7 +61,7 @@ public class Duke extends Application {
         storage = new Storage("duke.txt", taskList);
         try {
             storage.retrieveInfo();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             ui.dukePrint("Something went wrong: " + e.getMessage());
             return;
         }
@@ -79,7 +79,7 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws InterruptedException {
+    public void start(Stage stage) throws InterruptedException, IOException {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -139,7 +139,7 @@ public class Duke extends Application {
         String output = "";
         try {
             storage.retrieveInfo();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             output = ("Something went wrong: " + e.getMessage());
             dukeText = (output);
             dialogContainer.getChildren().addAll(
