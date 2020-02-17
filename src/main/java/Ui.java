@@ -7,11 +7,6 @@
 public class Ui {
 
     /**
-     * A horizontal line.
-     */
-    public void HorizontalLine() { System.out.println("____________________________________________________________"); }
-
-    /**
      * A welcome message to greet user
      * @return String Welcome Message
      */
@@ -19,27 +14,13 @@ public class Ui {
         return "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 
-    /**
-     * Exits the code.
-     */
-    public void exit(){
-        HorizontalLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        HorizontalLine();
+    public String exitMessage() {
+        return "Bye! Hope to see you soon.";
     }
 
-
-    /**
-     * Print error message to the user.
-     *
-     * @param errormessage Message to inform the user of the error.
-     */
-    public void showErrorMessage(String errormessage) {
-        HorizontalLine();
-        System.out.println(errormessage);
-        HorizontalLine();
+    public void showErrorMessage(String error) {
+        System.out.println(error);
     }
-
     /**
      * Informs user that the task has been added.
      *

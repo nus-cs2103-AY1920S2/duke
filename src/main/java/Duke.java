@@ -26,7 +26,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load(), ui, storage);
         } catch (IOException e) {
-            ui.showErrorMessage(e.getMessage());
+            dukeAnswer(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -40,6 +40,13 @@ public class Duke {
         return "Duke heard: " + input;
     }
 
+    public TaskList getTaskList() {
+        return this.tasks;
+    }
+
+    public Storage getStorage() {
+        return this.storage;
+    }
     /**
      *  Handles message that is parsed in for Duke to answer.
      * @param message The message for Duke to reply to user
@@ -109,7 +116,7 @@ public class Duke {
 
         storage.store(tasks, ui);
         // Say 'bye' to the user
-        ui.exit();
+        dukeAnswer(ui.exitMessage());
     }
 
     /**
