@@ -195,7 +195,7 @@ public class ChatBox {
             isNumber = x.matches("\\d+(\\.\\d+)?");
             if (isNumber) {
                 int number = Integer.parseInt(x);
-                output = output + folder.finishTasks(number - i) + "\n";
+                output = output + folder.finishTasks(number) + "\n";
                 i++;
             }
         }
