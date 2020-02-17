@@ -35,37 +35,32 @@ features such as add and delete.
 ### 2. Delete task
 
 - Deletes task at the specified index
-
-
-    delete [index of task]
+ 
+      delete [index of task]
     
-###3. Find task
+### 3. Find task
    
 - Finds all task with matching keyword
    
-    
-    find [keyword]
+      find [keyword]
 
 ### 4. List task
 
 - Lists all tasks that the bot is managing
 
-
-    list
+      list
     
 ### 5. Mark task as done
 
 - Updates the status of a task at specified index from undone to done
 
-
-     done [index of task]
+      done [index of task]
 
 ### 6. Exit
 
 - Terminates the application
 
-
-     bye 
+      bye 
   
      
 
