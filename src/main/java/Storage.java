@@ -82,6 +82,21 @@ public class Storage {
                         }
                         break;
                     }
+                    case "F": {
+                        String hours = task.substring(task.indexOf("needs") + 6, task.indexOf("hour(s))") - 1);
+                        if (task.charAt(4) == 'D') {
+                            // means task done
+                            String fixedTaskDescription = task.substring(10, task.indexOf("needs") - 2);
+                            FixedDurationTask fdt = new FixedDurationTask(fixedTaskDescription, Integer.parseInt(hours));
+                            fdt.markAsDone();
+                            tasks.add(fdt);
+                        } else {
+                            String fixedTaskDescription = task.substring(12, task.indexOf("needs") - 2);
+                            FixedDurationTask fdt = new FixedDurationTask(fixedTaskDescription, Integer.parseInt(hours));
+                            tasks.add(fdt);
+                        }
+                        break;
+                    }
                     case "D": {
                         String dateFromStorage = task.substring(task.indexOf("by:") + 4, task.length() - 1);
                         if (task.charAt(4) == 'D') {

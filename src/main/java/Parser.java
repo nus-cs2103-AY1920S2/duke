@@ -39,6 +39,30 @@ public class Parser {
             int index = Integer.parseInt(splitStr[1]) - 1;
             return new DeleteCommand(index);
         }
+        if (splitStr[0].toLowerCase().equals("fixedtask")) {
+            try {
+                 int neededHours = -1;
+                String fixedTaskDescription = "";
+                for (int i = 1; i < splitStr.length; i++) {
+                    if ((splitStr[i].equals("/needs"))) {
+                            neededHours = Integer.parseInt(splitStr[i+1]);
+                        break;
+                    } else {
+                        fixedTaskDescription += splitStr[i] + " ";
+                    }
+                }
+                if (neededHours == -1) {
+                    throw new DukeException("☹ OOPS!!! How long is this FixedDurationTask????? use /needs <hours> to tell me! ☹ OOPS!!!");
+                } else {
+                    fixedTaskDescription = fixedTaskDescription.substring(0, fixedTaskDescription.length() - 1);
+                    FixedDurationTask fdt = new FixedDurationTask(fixedTaskDescription, neededHours);
+                    return new FixedTaskCommand(fdt);
+                }
+            } catch (DukeException error) {
+                System.out.println(error.getMessage());
+            }
+
+        }
 
         if (splitStr[0].toLowerCase().equals("deadline")) {
             try {

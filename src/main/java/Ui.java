@@ -53,30 +53,36 @@ public class Ui {
     }
 
     public static void printAfterDelete(Task currentTask, ArrayList<Task> listOfTexts) {
-        assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event now! ☹ OOPS!!!";
+        assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event/fixedDurationTask now! ☹ OOPS!!!";
         System.out.println("Bye bye Task! I've removed this task:");
         System.out.println(currentTask);
         System.out.println("Now you have " + listOfTexts.size() + " tasks in the list.");
     }
 
     public static void printAfterTodo(Todo todo, ArrayList<Task> listOfTexts) {
-        assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event now! ☹ OOPS!!!";
+        assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event/fixedDurationTask now! ☹ OOPS!!!";
         System.out.println("Got you covered! Added this task to the list: ");
         System.out.println(todo);
         System.out.println("Now you have " + listOfTexts.size() + " tasks in the list.");
     }
 
     public static void printAfterDeadline(Deadline d, ArrayList<Task> listOfTexts) {
-        assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event now! ☹ OOPS!!!";
+        assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event/fixedDurationTask now! ☹ OOPS!!!";
         System.out.println("Got you covered! Added this deadline to the list:");
         System.out.println(d);
         System.out.println("Now you have " + listOfTexts.size() + " tasks in the list.");
     }
 
     public static void printAfterEvent(Event e, ArrayList<Task> listOfTexts) {
-        assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event now! ☹ OOPS!!!";
+        assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event/fixedDurationTask now! ☹ OOPS!!!";
         System.out.println("Got you covered! Added this event to the list: ");
         System.out.println(e);
+        System.out.println("Now you have " + listOfTexts.size() + " tasks in the list.");
+    }
+    public static void printAfterFixedTask(FixedDurationTask fdt, ArrayList<Task> listOfTexts) {
+        assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event/fixedDurationTask now! ☹ OOPS!!!";
+        System.out.println("Got you covered! Added this fixed duration task to the list: ");
+        System.out.println(fdt);
         System.out.println("Now you have " + listOfTexts.size() + " tasks in the list.");
     }
 
