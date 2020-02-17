@@ -6,11 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -21,10 +20,14 @@ import java.util.Collections;
  */
 public class DialogBox extends HBox {
 
+    final Circle clip = new Circle(35, 50, 50);
+
     @FXML
     private Text dialog;
     @FXML
     private ImageView displayPicture;
+
+
 
     /**
      * Creates a DialogBox for GUI to show the user's input and bot's response.
@@ -40,6 +43,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        displayPicture.setClip(clip);
         displayPicture.setImage(img);
     }
 

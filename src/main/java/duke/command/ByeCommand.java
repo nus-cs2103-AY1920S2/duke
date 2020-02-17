@@ -22,6 +22,6 @@ public class ByeCommand extends Command {
         isExit = true;
         storage.saveFile(taskList);
         System.out.println("    Bye! See ya later, alligator!");
-        return "    Bye! See ya later, alligator!";
+        return "Bye! See ya later, alligator!";
     }
 }
