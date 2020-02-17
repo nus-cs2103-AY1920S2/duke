@@ -5,8 +5,7 @@ dist: trusty
 jdk: oraclejdk11
 
 before_install:
-  - echo $(HOME)
-  - ls $(HOME)
+  - ls JKOK005/duke
 
 script:
-  - ./gradlew build --scan -s
+  - JKOK005/duke/gradlew build --scan -s
