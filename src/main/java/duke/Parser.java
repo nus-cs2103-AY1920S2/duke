@@ -11,6 +11,7 @@ import duke.command.ListCommand;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyCommandException;
+import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidDeleteException;
 import duke.exception.InvalidDoneException;
@@ -148,7 +149,7 @@ public class Parser {
             return new FindCommand(keyWord);
 
         default:
-            throw new EmptyCommandException();
+            throw new InvalidCommandException();
         }
     }
 }

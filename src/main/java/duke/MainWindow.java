@@ -58,6 +58,11 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage), DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
+        // if Duke responds with goodbye message, terminate program.
+        if (response.equals("Duke: " + "\n" + "\n" + "It was my pleasure assisting you. Keep smiling while you can."
+                + " Winter is coming." + "\n")) {
+            System.exit(0);
+        }
     }
 
     /**
