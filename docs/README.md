@@ -26,7 +26,7 @@ You can save the tasks and exit the program.
 
 ## Usage
 
-###`help` : lists out all the commands
+### `help` : lists out all the commands
 
 `help` displays all the available commands
 
@@ -53,7 +53,7 @@ Example:
 
 ___
 
-###`todo` : adds a Todo task
+### `todo` : adds a Todo task
 
 `todo [description]` adds a Todo task
 
@@ -72,7 +72,7 @@ Example:
 
 ___
 
-###`event` : adds a Event task
+### `event` : adds a Event task
 
 `event [description] /by [YYYY-MM-DD]` adds an Event task
 
@@ -91,7 +91,7 @@ Example:
 
 ___
 
-###`deadline` : adds a Deadline task
+### `deadline` : adds a Deadline task
 
 `deadline [description] /by [YYYY-MM-DD]` adds a Deadline task
 
@@ -110,7 +110,7 @@ Example:
 
 ___
 
-###`list` : lists out all the tasks
+### `list` : lists out all the tasks
 
 `list` displays all the current tasks in the list
 
@@ -131,7 +131,7 @@ Example:
 
 ___
 
-###`done` : marks indicated task as complete
+### `done` : marks indicated task as complete
 
 `done [index]` marks the task at index as complete
 
@@ -150,7 +150,7 @@ Example:
 
 ___
 
-###`delete` : deletes the indicated task
+### `delete` : deletes the indicated task
 
 `delete [index]` removes the task at index from the list
 
@@ -169,7 +169,7 @@ Example:
 
 ___
 
-###`find` : searches through the list for the keyword
+### `find` : searches through the list for the keyword
 
 `find [keyword]` displays all the tasks with the keyword
 
@@ -188,7 +188,7 @@ Example:
 
 ___
 
-###`bye` : saves and exits
+### `bye` : saves and exits
 
 `bye` saves and exits the program
 
