@@ -1,7 +1,7 @@
 T:;:1:;:testing
-D:;:1:;:deadline test :;:2020-02-02 10:00
+D:;:0:;:updated description of deadline that is so very exceedingly long that text wrapping is necessary:;:2020-02-02 10:00
 T:;:0:;:Testing
-T:;:0:;:test4
+T:;:1:;:updated description of deadline that is so very exceedingly long that text wrapping is necessary
 T:;:0:;:test5
 T:;:0:;:test6
 T:;:0:;:test7

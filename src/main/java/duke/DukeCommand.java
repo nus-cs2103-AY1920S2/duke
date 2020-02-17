@@ -165,7 +165,7 @@ public enum DukeCommand {
             int taskPos;
             String[] updateStringArr;
             try {
-                taskPos = Integer.parseInt(splitCmds[0]);
+                taskPos = Integer.parseInt(splitCmds[0]) - 1;
                 updateStringArr = splitCmds[1].split(",");
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("\tPlease give the numerical index of the task you want to update, mortal!");
