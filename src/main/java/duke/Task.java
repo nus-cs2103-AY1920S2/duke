@@ -11,11 +11,13 @@ public class Task {
      * @param description
      */
     public Task(String description) {
+        assert description.length() > 0 : "Description for todo provided by the user is empty";
         this.description = description;
         this.isDone = false;
     }
 
     public Task(String description, boolean isDone){
+        assert description.length() > 0 : "Description for todo in the file is empty";
         this.description = description;
         this.isDone = isDone;
     }

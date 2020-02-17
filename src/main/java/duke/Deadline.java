@@ -21,6 +21,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
+        assert description.length() > 0 : "Description of Deadline is empty";
         this.by = by;
         dueDatePresent = false;
         if (this.by.matches("\\d{4}-\\d{2}-\\d{2}")) {
@@ -38,6 +39,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
+        assert description.length() > 0 : "Description of Deadline is empty";
         this.by = by;
         dueDatePresent = false;
         if (this.by.matches("\\d{4}-\\d{2}-\\d{2}")) {

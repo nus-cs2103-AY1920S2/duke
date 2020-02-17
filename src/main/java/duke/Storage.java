@@ -43,6 +43,7 @@ public class Storage {
     }
 
     public static void fillFileWithTasks(ArrayList<Task> tasks) throws IOException {
+        assert tasks.size() > 1 : "Task list provided is empty";
         FileWriter fw = new FileWriter("data/data.txt");
         String accumulatedTasks = "";
         for(int i = 0; i < tasks.size(); i++){

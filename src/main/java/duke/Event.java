@@ -20,6 +20,7 @@ public class Event extends Task {
      */
     public Event(String description, String time) {
         super(description);
+        assert description.length() > 0 : "Description of Event is empty";
         this.time = time;
         timePresent = false;
         if(this.time.matches("\\d{4}-\\d{2}-\\d{2}")) { //YYYY-MM-DD
@@ -36,6 +37,7 @@ public class Event extends Task {
      */
     public Event(String description, String time, boolean isDone) {
         super(description, isDone);
+        assert description.length() > 0 : "Description of Event is empty";
         this.time = time;
         timePresent = false;
         if(this.time.matches("\\d{4}-\\d{2}-\\d{2}")) { //YYYY-MM-DD

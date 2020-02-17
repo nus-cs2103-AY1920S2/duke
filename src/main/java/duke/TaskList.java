@@ -64,7 +64,7 @@ public class TaskList {
     Marks a task as done and informs the user about the same
      */
     public String markDone(int index) {
-        if (index > taskArrayList.size()) {
+        if (index > taskArrayList.size() || index < 0) {
             return "There is no such task in the list. Please try again...";
         } else {
             String output = "Nice! I've marked this task as done: " + "\n";
@@ -117,7 +117,7 @@ public class TaskList {
     Deletes the task at specified index if it exists. Otherwise displays error message to user
      */
     public String deleteTaskByIndex(int index) {
-        if (index > taskArrayList.size()) {
+        if (index > taskArrayList.size() || index < 0) {
             return "There is no such task in the list. Please try again...";
         } else {
             Task deleted = taskArrayList.get(index - 1);
