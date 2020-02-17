@@ -75,4 +75,19 @@ public class Task {
     public String toString() {
         return String.format("[T][%s] %s", this.getStatusIcon(), this.description);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (other == null || other.getClass() != this.getClass()) {
+            return false;
+        }
+        
+        Task otherTask = (Task) other;
+        boolean hasSameDescription = this.description.equals(otherTask.description);
+        return hasSameDescription;
+    }
 }
