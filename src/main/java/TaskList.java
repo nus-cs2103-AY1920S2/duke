@@ -119,7 +119,7 @@ public class TaskList {
      * @param input Describes the task to be added to the list
      * @return A string to be printed out on duke application GUI on the status of the added task
      */
-    public String addTask(String type, String input) throws Exception {
+    public String addTask(String type, String input) {
         try {
             Task task = taskConvertor(type, input);
             this.taskList.add(task);
@@ -131,7 +131,7 @@ public class TaskList {
         }
     }
 
-    public Task taskConvertor (String type, String input) throws Exception {
+    public Task taskConvertor (String type, String input) {
         if (type.equals("T")) {
             String task1 = input.substring(5);
             Todo todo = new Todo(task1);
@@ -180,7 +180,7 @@ public class TaskList {
         return output;
     }
 
-    public boolean containsDup (String taskName) throws Exception {
+    public boolean containsDup (String taskName) {
         for (int i = 0; i < taskList.size(); i++) {
             String description = this.taskList.get(i).toString();
             String task;

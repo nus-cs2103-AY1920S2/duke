@@ -25,57 +25,63 @@ public class Parser {
      * @param input A command prompt by the user to Duke
      * @return a string to be printed out on the duke application GUI
      */
-    public String parse(String input) throws Exception {
+    public String parse(String input) {
+
         if (input.equals("list")) {
             return taskList.list();
         } else if (input.contains("done")) {
-            try {
-                int taskNum = Integer.parseInt(input.substring(5));
-                assert taskNum <= taskList.size() : "Task number cannot be larger than list size";
-                return taskList.done(taskNum);
-            } catch (Exception e) {
-                return "Please state a task number:)";
+            if (input.length() >= 6) {
+                try {
+                    int taskNum = Integer.parseInt(input.substring(5));
+                    assert taskNum <= taskList.size() : "Task number cannot be larger than list size";
+                    return taskList.done(taskNum);
+                } catch (NumberFormatException e) {
+                    return "Please state a proper task number:(";
+                }
+            } else {
+                return "Please state a task number:(";
             }
         } else if (input.contains("delete")) {
             //Delete task
-            try {
-                int taskNum = Integer.parseInt(input.substring(7));
-                assert taskNum <= taskList.size() : "Task number cannot be larger than list size";
-                return taskList.delete(taskNum);
-            } catch (Exception e) {
-                return "Please state a proper delete command:(";
+            if (input.length() >= 8) {
+                try {
+                    int taskNum = Integer.parseInt(input.substring(7));
+                    assert taskNum <= taskList.size() : "Task number cannot be larger than list size";
+                    return taskList.delete(taskNum);
+                } catch (NumberFormatException e) {
+                    return "PLease state a proper task number to delete:(";
+                }
+            } else {
+                return "Please state a task number to delete:(";
             }
         } else if (input.contains("find")) {
-            try {
+            if (input.length() >= 6) {
                 String keyWord = input.substring(5);
                 return taskList.find(keyWord);
-            } catch (Exception e) {
+            } else {
                 return "Where is your keyword:(";
             }
         } else if (input.contains ("clear list")) {
             return taskList.clearList();
         } else if (input.equals ("bye")) {
-
             return "Cya soon:)";
         } else {
             //Create task using key words: "todo", "deadline", "event"
             if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+                //if there are no task, no need to check for duplicates
                 if (taskList.size() > 0 && taskList.containsDup(input)) {
                     return "This task has already been added before!";
                 } else {
                     if (input.contains("todo")) {
-                        //todo request format: todo<space><task>
                         return taskList.addTask("T", input);
                     } else if (input.contains("deadline")) {
-                        //deadline request format: deadline<space><task></><yyyy-mm-dd>
                         return taskList.addTask("D", input);
                     } else {
-                        //event request format: event<space><task></><yyyy-mm-dd><T><hh:mm-hh:mm>
                         return taskList.addTask("E", input);
                     }
                 }
             } else {
-                //must have todo/deadline/event request format
+                //invalid task format
                 return "Back at you!";
             }
         }
