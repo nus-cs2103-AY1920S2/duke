@@ -34,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * The main logic of the chatbot.
+     * The main logic of the chat bot.
      */
     public String run(String command) {
         String message = "";
@@ -50,9 +50,7 @@ public class Duke {
                 message = listCommand();
             } else if (keyword.equals(DONE_COMMAND)) {
                 int taskNumber = Integer.valueOf(parsed[NUMBER]);
-                this.tasklist.markDone(taskNumber);
-                message = message + ui.printMessage("Nice! I've marked this task as done:");
-                message = message + ui.printMessage("" + taskNumber + ". " + this.tasklist.getTask(taskNumber));
+                message = doneCommand(taskNumber);
             } else if (keyword.equals(DEL_COMMAND)) {
                 int taskNumber = Integer.valueOf(parsed[NUMBER]);
                 message = message + ui.printMessage("Noted. I've removed this task");
@@ -103,7 +101,7 @@ public class Duke {
     private String byeCommand() {
         String message = "";
         storage.writeFile(tasklist.mylist);
-        message = ui.printMessage("Bye. I have saved the list to a file! You can exit the program now");
+        message = ui.printMessage("Bye. I have saved the list to a file! You can exit the program now :)");
         return message;
     }
 
@@ -117,6 +115,10 @@ public class Duke {
         return message;
     }
 
+    /**
+     * Runs the list command.
+     * @return message generated to inform the user
+     */
     private String listCommand() {
         String message = "";
         message = message + ui.printMessage("Here are the task in your list");
@@ -124,4 +126,24 @@ public class Duke {
         return message;
     }
 
+    /**
+     * Runs the done command.
+     * @param taskNumber in the list
+     * @return message generated to inform the user
+     * @throws DukeException invalid number
+     */
+    private String doneCommand(int taskNumber) throws DukeException {
+        String message = "";
+        if (taskNumber <= 0 || taskNumber > tasklist.getSize()) {
+            throw new DukeException("The task number is invalid !!!");
+        }
+        if (tasklist.getTask(taskNumber).isDone) {
+            message = ui.printMessage("It is already been marked as done !!");
+        } else {
+            tasklist.markDone(taskNumber);
+            message = message + ui.printMessage("Nice! I've marked this task as done:");
+            message = message + ui.printMessage("" + taskNumber + ". " + tasklist.getTask(taskNumber));
+        }
+        return message;
+    }
 }
