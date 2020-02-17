@@ -1,8 +1,20 @@
+/**
+ * <h1>ToDo Class</h1>
+ * Class for ToDo task
+ */
 public class ToDo extends task {
+    /**
+     * Class Constructor
+     * @param name
+     */
     public ToDo(String name) {
         super(name);
     }
 
+    /**
+     * Method to generate string to save to text file
+     * @return String
+     */
     @Override
     public String toSave() {
         if (this.isDone()) {
@@ -12,6 +24,10 @@ public class ToDo extends task {
         }
     }
 
+    /**
+     * Generic to print function
+     * @return String
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

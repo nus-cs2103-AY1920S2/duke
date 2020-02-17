@@ -4,14 +4,26 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * <h1>Storage Class</h1>
+ * handles interaction with text file for duke
+ */
 public class Storage {
 
     private File file;
 
+    /**
+     * Class Constructor
+     */
     public Storage() {
         this.file = new File("Duke.txt");
     }
 
+    /**
+     * Method updates text file with current list of tasks
+     * @param ls
+     * @throws IOException
+     */
     public void updateTxtFile (ArrayList<task> ls) throws IOException {
         PrintWriter pw = new PrintWriter(this.file);
         pw.write("");
@@ -28,6 +40,12 @@ public class Storage {
         toWrite.close();
     }
 
+    /**
+     * Method reads text file from filepath and return arraylist of tasks if present
+     * if not, returns empty arraylist.
+     * @return Arraylist
+     * @throws IOException
+     */
     public ArrayList<task> readTxtFile () throws IOException {
         boolean check = this.file.exists();
         this.file.createNewFile();

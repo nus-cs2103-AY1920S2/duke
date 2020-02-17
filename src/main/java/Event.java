@@ -1,12 +1,19 @@
-import java.time.LocalDateTime;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
+/**
+ * <h1>Event class</h1>
+ * Class to create event task for duke
+ */
 public class Event extends task {
     private String date;
     private String from;
     private LocalDate ld;
 
+    /**
+     * Class Constructor
+     * @param name
+     * @param date
+     */
     public Event (String name, String date) {
         super(name);
         String[] temp = date.split(" ");
@@ -15,6 +22,10 @@ public class Event extends task {
         this.from = temp[1];
     }
 
+    /**
+     * Method to generate string to save to text file
+     * @return String
+     */
     @Override
     public String toSave() {
         if (this.isDone()) {
@@ -24,6 +35,10 @@ public class Event extends task {
         }
     }
 
+    /**
+     * Generic to print function
+     * @return String
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + ld.getDayOfMonth() + " " + ld.getMonth() + " " + ld.getYear() + " " + from + ")";

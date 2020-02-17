@@ -1,15 +1,28 @@
 import java.time.LocalDate;
 
+/**
+ * <h1>Deadline class</h1>
+ * Class to create deadline task for duke
+ */
 public class DeadLine extends task {
     private String date;
     private LocalDate ld;
 
+    /**
+     * Class Constructor
+     * @param name
+     * @param end
+     */
     public DeadLine (String name, String end) {
         super(name);
         this.date = end;
         this.ld = LocalDate.parse(end);
     }
 
+    /**
+     * Method to generate string to save to text file
+     * @return String
+     */
     @Override
     public String toSave() {
         if (this.isDone()) {
@@ -19,6 +32,10 @@ public class DeadLine extends task {
         }
     }
 
+    /**
+     * Generic to print function
+     * @return String
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + ld.getDayOfMonth() + " " + ld.getMonth() + " " + ld.getYear() + ")";
