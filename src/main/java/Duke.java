@@ -42,37 +42,50 @@ public class Duke {
             String[] parsed = TextParser.myFirstParser(command);
             String keyword = parsed[COMMAND];
             assert keyword != "" : "Should contain a keyword else command is a empty string";
-            if (keyword.equals(BYE_COMMAND)) {
-                message = byeCommand();
-            } else if (keyword.equals(STAT_COMMAND)) {
-                message = statCommand();
-            } else if (keyword.equals(LIST_COMMAND)) {
-                message = listCommand();
-            } else if (keyword.equals(DONE_COMMAND)) {
-                int taskNumber = Integer.valueOf(parsed[NUMBER]);
-                message = doneCommand(taskNumber);
-            } else if (keyword.equals(DEL_COMMAND)) {
-                int taskNumber = Integer.valueOf(parsed[NUMBER]);
-                message = delCommand(taskNumber);
-            } else if (keyword.equals(FIND_COMMAND)) {
-                message = findCommand(parsed[SECOND_WORD]);
-            } else if (keyword.equals(TODO_COMMAND) || keyword.equals(DEADLINE_COMMAND) || keyword.equals(EVENT_COMMAND)) {
-                if (parsed.length <= 1) {
-                    throw new DukeException("I think u need more arguments");
-                } else {
-                    String word2 = parsed[SECOND_WORD];
-                    String[] parsed2 = TextParser.mySecondParser(word2);
-                    if (keyword.equals(TODO_COMMAND)) {
-                        this.tasklist.addTask(new Todo(parsed2[FIRST_WORD]));
-                    } else if (keyword.equals(DEADLINE_COMMAND)) {
-                        this.tasklist.addTask(new Deadline(parsed2[FIRST_WORD], LocalDate.parse(parsed2[TIME])));
-                    } else if (keyword.equals(EVENT_COMMAND)) {
-                        this.tasklist.addTask(new Event(parsed2[FIRST_WORD], LocalDate.parse(parsed2[TIME])));
-                    }
-                    message = message + ui.printMessage("Got it. I 've added this task:");
-                    message = message + ui.printMessage("" + this.tasklist.getTask(this.tasklist.getSize()));
-                    message = message + ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
+
+            if (keyword.equals(BYE_COMMAND)
+                    || keyword.equals(STAT_COMMAND)
+                    || keyword.equals(LIST_COMMAND)) { // commands with no arguments
+                if (keyword.equals(BYE_COMMAND)) {
+                    message = byeCommand();
+                } else if (keyword.equals(STAT_COMMAND)) {
+                    message = statCommand();
+                } else if (keyword.equals(LIST_COMMAND)) {
+                    message = listCommand();
                 }
+            } else if (keyword.equals(DONE_COMMAND)
+                    || keyword.equals(DEL_COMMAND)
+                    || keyword.equals(FIND_COMMAND)
+                    || keyword.equals(TODO_COMMAND)) { // commands with one arguments
+                if (parsed.length <= 1) {
+                    throw new DukeException("I think u need one argument");
+                }
+                if (keyword.equals(DONE_COMMAND)) {
+                    int taskNumber = Integer.valueOf(parsed[NUMBER]);
+                    message = doneCommand(taskNumber);
+                } else if (keyword.equals(DEL_COMMAND)) {
+                    int taskNumber = Integer.valueOf(parsed[NUMBER]);
+                    message = delCommand(taskNumber);
+                } else if (keyword.equals(FIND_COMMAND)) {
+                    message = findCommand(parsed[SECOND_WORD]);
+                } else if (keyword.equals(TODO_COMMAND)) {
+                    this.tasklist.addTask(new Todo(parsed[SECOND_WORD]));
+                }
+            } else if (keyword.equals(DEADLINE_COMMAND)
+                    || keyword.equals(EVENT_COMMAND)) { // commands with two or more argument
+                String word2 = parsed[SECOND_WORD];
+                String[] parsed2 = TextParser.mySecondParser(word2);
+                if (parsed2.length <= 1) {
+                    throw new DukeException("I think u need more arguments");
+                }
+                if (keyword.equals(DEADLINE_COMMAND)) {
+                    this.tasklist.addTask(new Deadline(parsed2[FIRST_WORD], LocalDate.parse(parsed2[TIME])));
+                } else if (keyword.equals(EVENT_COMMAND)) {
+                    this.tasklist.addTask(new Event(parsed2[FIRST_WORD], LocalDate.parse(parsed2[TIME])));
+                }
+                message = message + ui.printMessage("Got it. I 've added this task:");
+                message = message + ui.printMessage("" + this.tasklist.getTask(this.tasklist.getSize()));
+                message = message + ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
             } else {
                 throw new DukeException("I DK how to process this -> " + command);
             }
