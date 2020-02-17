@@ -41,6 +41,7 @@ public class DoneCommand extends Command {
         storage.writeToFile(tasks.getList());
         this.doneTask = tasks.getList().get(this.index);
         return textUi.showDoneTask_Str(this.index, tasks);
+
     }
 
     /**

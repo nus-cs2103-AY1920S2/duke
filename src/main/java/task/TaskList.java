@@ -1,6 +1,7 @@
 package task;
 
 import java.util.ArrayList;
+import exception.DukeException;
 
 public class TaskList {
 
@@ -57,7 +58,7 @@ public class TaskList {
      */
     public void remove(Task removedTask) {
         for (int i = 0; i < this.list.size(); i++) {
-            if(removedTask == this.list.get(i)) {
+            if(removedTask.toString().equals(this.list.get(i).toString())) {
                 this.list.remove(i);
             }
         }
@@ -88,10 +89,12 @@ public class TaskList {
      */
     public void unDone(Task givenTask) {
         for (int i = 0; i < this.list.size(); i++) {
-            if(givenTask == this.list.get(i)) {
+            if(givenTask.toString().equals(this.list.get(i).toString())) {
                 this.list.get(i).markAsUndone();
+                givenTask.markAsUndone();
             }
         }
+
     }
 
     /**

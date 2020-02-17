@@ -1,3 +1,4 @@
-T | 0 | study CS2103
-D | 1 | finish Duke | 2月 20 2020
-E | 1 | feeling lost | today
+T | 1 | check3
+T | 1 | check
+T | 1 | check
+T | 0 | newCheck

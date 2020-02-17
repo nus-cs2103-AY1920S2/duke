@@ -84,7 +84,7 @@ public class TextUi {
      * @param tasks
      * @return
      */
-    public String showRemovingTask(Task givenTask, TaskList tasks) {
+    public String showRemovingTask(Task givenTask, TaskList tasks)  {
         StringBuilder sb = new StringBuilder();
         sb.append(Message.MESSAGE_LINE + "\n");
         sb.append(Message.MESSAGE_REMOVE + "\n");
@@ -113,7 +113,6 @@ public class TextUi {
     /**
      * Returns the done task message to the user.
      *
-     * @param index the index of the done task in the task list
      * @param tasks the task list
      */
     public String showDoneTask_Str(int index, TaskList tasks) {
