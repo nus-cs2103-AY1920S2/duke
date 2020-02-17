@@ -9,7 +9,7 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="182.0" prefWidth="400.0" styleClass="chatBox" stylesheets="@styles.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="TOP_RIGHT" styleClass="chatBubCharVersion" stylesheets="@styles.css" text="Label" textAlignment="CENTER" wrapText="true">
+        <Label fx:id="dialog" alignment="TOP_RIGHT" styleClass="chatBubCharVersion" stylesheets="@styles.css" text="Label" wrapText="true">
          <padding>
             <Insets bottom="2.0" right="20.0" />
          </padding>

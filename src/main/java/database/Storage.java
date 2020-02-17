@@ -27,7 +27,7 @@ public class Storage {
      */
     public static void memoryInit() {
         try {
-            file = new File("memory.txt");
+            file = new File("DataFile.txt");
             if (file.createNewFile()) {
                 System.out.println("Init new memory");
             } else {
