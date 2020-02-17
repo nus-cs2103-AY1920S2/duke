@@ -24,10 +24,14 @@ Duke allows you to Add, Mark and Delete to manage your Todo, Deadline, Event and
     - [bye](#bye---close-duke)
     
 
-##Requirements
+## Requirements
 You need to have the following installed to be able to use Duke.
 1. Java SE Development Kit 11
 2. 
+<br>
+<br>
+<br>
+ <a href="#top">Back to top</a>
 
 ## Features 
 Here are some features that Duke offers to keep you on track with your to do list.
@@ -40,26 +44,49 @@ In Duke, you can add up to **4** types of Tasks.
 ###### Task type 3: Event
 `Event` is a task that start at a specific time and ends at a specific time. _e.g., team project meeting (at: 2/10/2019 2-4pm)_
 ###### Task type 4: FixedDurationTask
-`FixedDurationTask` is a task that takes a fixed amount of time but does not have a fixed start/end time. _e.g., reading the sales report (needs 2 hours)_
+`FixedDurationTask` is a task that takes a fixed amount of time but does not have a fixed start/end time. _e.g., reading the sales report (needs 2 hours)_<br>
+<br>
+<br>
+<a href="#top">Back to top</a>
 
 ### Feature 2: Finished task? Delete it.
 You can `delete` a task from the to do list anytime by entering `delete` `task_number` into Duke.<br>
 `task_number` is the position of the task in the to do list.
-
+<br>
+<br>
+<br>
+ <a href="#top">Back to top</a>
+ 
 ### Feature 3: Done Task? Mark it.
 You can mark a task as `done` anytime by entering `done` `task_number` into Duke. <br>
 `task_number` is the position of the task in the to do list.
+<br>
+<br>
+<br>
+ <a href="#top">Back to top</a>
 
 ### Feature 4: Searching for a Task? Find it.
 You can `find` a task in the to do list anytime by entering `find` `task_name` into Duke. <br>
 `task_name` is the keyword that make up the task name.
+<br>
+<br>
+<br>
 
+ <a href="#top">Back to top</a>
+ 
 ### Feature 5: Displaying your tasks? List it.
 You can `list` all the tasks in the to do list anytime by entering `list` into Duke.
+<br>
+<br>
+<br>
+ <a href="#top">Back to top</a>
 
 ### Feature 6: Close Duke? Just say bye.
 You can close Duke anytime by entering `bye` into Duke.
-
+<br>
+<br>
+<br>
+ <a href="#top">Back to top</a>
 
 
 ## Commands
@@ -77,6 +104,10 @@ Expected outcome:
 `Got you covered! Added this task to the list:` <br>
  `[T][UNDONE] study for finals` <br>
  `Now you have 1 task in the list.`
+<br>
+<br>
+<br>
+ <a href="#top">Back to top</a>
 
 ### `deadline` - Add a Deadline to the to do list.
 
@@ -92,7 +123,11 @@ Expected outcome:
 `Got you covered! Added this deadline to the list:` <br>
 `[D][UNDONE] submit report (by: Mar 04 2020)`<br>
 `Now you have 2 tasks in the list.`
-
+<br>
+<br>
+<br>
+ <a href="#top">Back to top</a>
+ 
 ### `event` - Add an Event to the to do list.
 
 Add an `Event` task to the to do list with the command `event task_name` `/at` `time`.
@@ -106,7 +141,11 @@ Expected outcome:
 `Got you covered! Added this event to the list:` <br>
  `[E][UNDONE] nus open day (at: utown 2pm)` <br>
  `Now you have 3 tasks in the list.`
- 
+ <br>
+ <br>
+ <br>
+  <a href="#top">Back to top</a>
+  
  ### `fixedtask` - Add a FixedDurationTask to the to do list.
  
  Add a `FixedDurationTask` task to the to do list with the command `fixedtask task_name` `/needs` `time`.<br>
@@ -122,6 +161,12 @@ Expected outcome:
 `[F][UNDONE] sleep (needs 8 hour(s))`<br>
 `Now you have 4 tasks in the list.`
 
+<br>
+<br>
+<br>
+
+ <a href="#top">Back to top</a>
+ 
 
   ### `delete` - Delete a task from the to do list.
   
@@ -138,6 +183,13 @@ Expected outcome:
 `[D][UNDONE] submit report (by: Mar 04 2020)`<br>
 `Now you have 3 tasks in the list.`
 
+<br>
+<br>
+<br>
+
+ <a href="#top">Back to top</a>
+ 
+
   ### `done` - Mark a task as Done in the to do list.
   
  Mark a task in the to do list as Done with the command `done task_number`.<br>
@@ -151,6 +203,13 @@ Expected outcome:
   
 `Nice! I've marked this task as done and dusted:`<br>
 `[T][DONE] study for finals`
+
+<br>
+<br>
+<br>
+
+ <a href="#top">Back to top</a>
+ 
 
   ### `find` - Find a task in the to do list.
   
@@ -166,6 +225,14 @@ Expected outcome:
 `Here are the matching tasks in your list:`<br>
 `1. [E][UNDONE] nus open day (at: utown 2pm)`
 
+
+<br>
+<br>
+<br>
+
+ <a href="#top">Back to top</a>
+ 
+
   ### `list` - List all tasks in the to do list.
   
  List all tasks in the to do list with the command `list`.
@@ -180,7 +247,12 @@ Expected outcome:
 `2. [E][UNDONE] nus open day (at: utown 2pm)`<br>
 `3. [F][UNDONE] sleep (needs 8 hour(s))`
 
+<br>
+<br>
+<br>
 
+ <a href="#top">Back to top</a>
+ 
   ### `bye` - Close Duke
   
  Duke will terminate when the command `bye` is entered.
@@ -194,5 +266,10 @@ Expected outcome:
 `====================================================================================`<br>
 `Bye bye! Thank you for using me! Hope to see you again soon.`
 
+<br>
+<br>
+<br>
+
+ <a href="#top">Back to top</a>
 
 
