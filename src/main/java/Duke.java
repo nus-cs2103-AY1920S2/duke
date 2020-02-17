@@ -47,8 +47,7 @@ public class Duke {
             } else if (keyword.equals(STAT_COMMAND)) {
                 message = statCommand();
             } else if (keyword.equals(LIST_COMMAND)) {
-                message = message + ui.printMessage("Here are the task in your list");
-                message = message + tasklist.printList();
+                message = listCommand();
             } else if (keyword.equals(DONE_COMMAND)) {
                 int taskNumber = Integer.valueOf(parsed[NUMBER]);
                 this.tasklist.markDone(taskNumber);
@@ -117,4 +116,12 @@ public class Duke {
         message = tasklist.printStatistic();
         return message;
     }
+
+    private String listCommand() {
+        String message = "";
+        message = message + ui.printMessage("Here are the task in your list");
+        message = message + tasklist.printList();
+        return message;
+    }
+
 }
