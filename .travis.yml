@@ -5,8 +5,8 @@ dist: trusty
 jdk: oraclejdk11
 
 before_install:
-  - echo ${HOME}
-  - ls ${HOME}
+  - echo $(HOME)
+  - ls $(HOME)
 
 script:
   - ./gradlew build --scan -s
