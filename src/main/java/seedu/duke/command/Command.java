@@ -12,18 +12,18 @@ public abstract class Command {
     public enum Type {
         bye("bye"),
         list("list"),
+        sort("sort"),
+
         done("done"),
-        todo("todo"),
         delete("delete"),
+
         find("find"),
 
+        todo("todo"),
         deadline("deadline"),
         deadline_by("/by"),
-
         event("event"),
-        event_at("/at"),
-
-        sort("sort");
+        event_at("/at");
 
         private final String command;
 
