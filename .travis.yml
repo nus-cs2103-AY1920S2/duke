@@ -5,4 +5,5 @@ dist: trusty
 jdk: oraclejdk11
 
 script:
+  - ls ${pwd}
   - ./gradlew build --scan -s
