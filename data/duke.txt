@@ -7,3 +7,4 @@ E , 0 , testing , 2020-01-01
 D , 0 , testing2 , 2020-01-02
 T , 1 , buy tissue
 T , 0 , hello
+E , 0 , byebye , 2020-01-02

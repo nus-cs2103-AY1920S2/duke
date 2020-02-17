@@ -100,8 +100,12 @@ public class Parser {
                     command = new FindCommand(rest);
                 }
                 break;
+            case "help":
+                command = new HelpCommand();
+                break;
             default:
-                throw new DukeException("Sorry! Please enter a valid command");
+                throw new DukeException("Sorry! Please enter a valid command.\n" +
+                        "Type 'help' to list available commands");
         }
         return command;
     }

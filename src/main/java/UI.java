@@ -19,6 +19,17 @@ public class UI {
      */
     private static String horizontalLine = "**********************************************";
 
+    private static final String HELPLIST =
+            "help - lists out available commands\n" +
+            "list - lists out all the tasks\n" +
+            "todo <task name> - adds a ToDo task\n" +
+            "event <task name> /by <event date: YYYY-MM-DD> - adds an Event task\n" +
+            "deadline <task name> /by <event date: YYYY-MM-DD> - adds a Deadline task\n" +
+            "done <task number> - marks indicated task as complete\n" +
+            "delete <task number> - deletes the indicated task\n" +
+            "find <keyword> - searches for tasks with <keyword>\n" +
+            "bye - saves and closes the program";
+
     public String readCommand() {
         return this.scanner.nextLine();
     }
@@ -36,6 +47,7 @@ public class UI {
                         + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
         System.out.println("Hello, I'm Duke \n" + "How can I help you today?");
+        System.out.println("Type 'help' to list available commands");
         System.out.println(horizontalLine);
     }
 
@@ -112,5 +124,9 @@ public class UI {
         System.out.println(horizontalLine);
         System.out.println("The task '" + task.getTaskName() + "' you are adding already exists!");
         System.out.println(horizontalLine);
+    }
+
+    public void printHelp() {
+        System.out.println(HELPLIST);
     }
 }
