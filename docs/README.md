@@ -8,40 +8,40 @@ Be charmed by the cute Duke and enjoy the voice acting!
 
 ## Usage
 
-### alias <old> <new>
+### alias \<current name> \<new name>
 * Changes the name of a command.
 
-### todo <name>
+### todo \<name>
 * Adds a todo to your task list.
 
-### deadline <name> /by <time>
+### deadline \<task name> /by \<time>
 * Adds a deadline to your task list.
 
-### event <name> /at <time>
+### event \<task name> /at \<time>
 * Adds a event to your task list.
 
 ### list
 * Displays your task list.
 
-### find <query>
+### find \<query>
 * Finds a task which has <query> as a substring of the task's name.
 
-### done <task index>
+### done \<task index>
 * Marks the task as done.
 
-### delete <task index>
+### delete \<task index>
 * Deletes the task.
 
-### reschedule <task index> <time>
+### reschedule \<task index> \<time>
 * Reschedules the task.
 
-### add_contact <name> <number>
+### add_contact \<contact name> \<number>
 * Adds a new contact.
 
 ### contacts
 * Displays your contact list.
 
-### delete_contact <task index>
+### delete_contact \<contact index>
 * Deletes the contact.
 
 ### bye
