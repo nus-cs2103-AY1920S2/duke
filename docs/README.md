@@ -150,6 +150,8 @@ Enter `Bye` will exit Duke within 3 seconds. The task file will be preserved at 
 
 **A:** Install Duke in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Duke folder.
 
+## 8. Latest Version
+Duke v0.2
 
 
 
