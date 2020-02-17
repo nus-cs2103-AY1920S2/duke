@@ -9,7 +9,7 @@ class Ui {
      * Shows the Duke logo when the Duke program is started.
      */
     String showWelcome() {
-        return "Hello! I am Duke. What can I do for you today?";
+        return "Hello! I am Tom. What can I do for you today?";
     }
 
     /**
