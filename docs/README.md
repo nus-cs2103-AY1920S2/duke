@@ -1,8 +1,8 @@
 # User Guide
 
 ## Navigation
-1. [Introduction]
-2. [Instructions]
+1. [Introduction](#introduction)
+2. [Instructions](#instructions)
 3. [Features]
   3.1 [Overview]
   3.2 [Task List]
