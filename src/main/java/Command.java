@@ -25,4 +25,8 @@ public abstract class Command {
     public Task getTask() {
         return this.task;
     }
+
+    public String toString() {
+        return this.command;
+    }
 }

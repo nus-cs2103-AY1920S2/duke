@@ -1,16 +1,5 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 /**
  * Duke is a chat bot program that builds a to do list. Current functions include:
@@ -21,13 +10,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Constructor for main class for the program.
@@ -44,7 +26,15 @@ public class Duke {
         }
     }
     public Duke() {
-
+        String filePath = "./data/duke.txt";
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
     /**
@@ -56,30 +46,75 @@ public class Duke {
         ui.showLineBreak();
         boolean isFinished = false;
         while (!(isFinished)) {
-            try {
                 String inputFromUser = ui.handleInput();
                 Command c = Parser.parse(inputFromUser);
                 if (c == null) {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-( ☹ OOPS!!!");
+                    System.out.println("Input something into me!");
                 }
                 tasks.runCommand(c);
                 if (c.getCommand().equals("bye")) {
                     isFinished = true;
                 }
-            } catch (DukeException e) {
-                System.out.println("Invalid command received: " + e.getMessage());
-            } finally {
                 this.storage.save(tasks);
-            }
         }
         ui.terminateMessage();
     }
+
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Shows the welcome message for the GUI
+     * @return String Welcome Message in the GUI
      */
+    public String getWelcomeMessage() {
+        // Create a stream to hold the output
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+
+        ui.welcomeMessage();
+        tasks.showCurrentTasks();
+        ui.showLineBreak();
+
+        System.out.flush();
+        System.setOut(old);
+        return baos.toString();
+    }
+
+
+    /**
+     * Shows the current tasks in Duke
+     * @return String of current tasks in duke
+     */
+    public String getCurrentTasksInDuke() {
+        // Create a stream to hold the output
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+
+        tasks.showCurrentTasks();
+        ui.showLineBreak();
+
+        System.out.flush();
+        System.setOut(old);
+        return baos.toString();
+    }
+
+
     public String getResponse(String input) {
-        return "Duke SAYS: " + input;
+        // Create a stream to hold the output
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+            Command c = Parser.parse(input);
+        assert (c != null) : "Input something correct into me! todo deadline (/by) event (/at) find list delete done" ;
+        tasks.runCommand(c);
+        this.storage.save(tasks);
+        System.out.flush();
+        System.setOut(old);
+        return baos.toString();
+
     }
 
     public static void main(String[] args) {

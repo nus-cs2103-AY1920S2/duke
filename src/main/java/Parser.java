@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
  * Parser makes sense of the text that is being input to Duke.
  */
 public class Parser {
-    static String exitInput = "bye";
+    final static String exitInput = "bye";
     /**
      * Returns a Command for Duke to run on.
      * @param text Input from user.
@@ -59,7 +59,7 @@ public class Parser {
                     return new DeadlineCommand(d);
                 }
             } catch (DukeException e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
         }
 
@@ -87,7 +87,7 @@ public class Parser {
                     return new EventCommand(e);
                 }
             } catch (DukeException error) {
-                System.out.println(error);
+                System.out.println(error.getMessage());
             }
         }
 
@@ -105,7 +105,7 @@ public class Parser {
                     return new TodoCommand(t);
                 }
             } catch (DukeException m) {
-                System.out.println(m);
+                System.out.println(m.getMessage());
             }
 
         }

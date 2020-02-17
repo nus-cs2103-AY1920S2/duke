@@ -58,6 +58,7 @@ public class TaskList {
         try {
             switch (command.getCommand()) {
                 case "bye": {
+                    Ui.printAfterBye();
                     break;
                 }
                 case "list": {
