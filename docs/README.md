@@ -21,7 +21,7 @@ Command | Parameters | Description
 
 `deadline test deadline /by 2020-02-02 10:00`
 
-[Image of feature 1](./feature1.png)
+![Image of feature 1](./feature1.png)
 
 
 ### Feature 2
@@ -40,16 +40,16 @@ Command | Parameters | Description
 ### Example of usage: 
 `list`
 
-[Image of feature 2a](./feature2a.png)
+![Image of feature 2a](./feature2a.png)
 
 
 `done 1`
 
-[Image of feature 2b](./feature2b.png)
+![Image of feature 2b](./feature2b.png)
 
 `delete 1`
 
-[Image of feature 2c](./feature2c.png)
+![Image of feature 2c](./feature2c.png)
 
 ### Feature 3
 Find tasks with `find` and modify a task with `update`.
@@ -66,12 +66,12 @@ Command | Parameters | Description
 ### Example of usage: 
 `find test`
 
-[Image of feature 3a](./feature3a.png)
+![Image of feature 3a](./feature3a.png)
 
 
 `update 0 done=true, description=updated test deadline`
 
-[Image of feature 3b](./feature3b.png)
+![Image of feature 3b](./feature3b.png)
 
 
 ### Feature 4
@@ -80,4 +80,4 @@ Terminate the program with `bye`
 ### Example of usage:
 `bye`
 
-[Image of feature 4](./feature4.png)
+![Image of feature 4](./feature4.png)
