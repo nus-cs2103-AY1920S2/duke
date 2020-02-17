@@ -70,6 +70,6 @@ public class Deadline extends Task {
     public String getHelpFormat() {
         return "Please type deadline task in this following format:\n" +
                 "deadline <task_name> /by yyyy-mm-dd\n" +
-                "deadline key word must be in lower case, spacing must be adhere and date format must include dashes!";
+                "deadline key word must be in lower case, spacing must be adhered and date format must include dashes!";
     }
 }

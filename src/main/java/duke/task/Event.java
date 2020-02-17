@@ -68,6 +68,6 @@ public class Event extends Task {
     public String getHelpFormat() {
         return "Please type event task in this following format:\n" +
                 "event <task_name> /by yyyy-mm-dd\n" +
-                "event key word must be in lower case, spacing must be adhere and date format must include dashes!";
+                "event key word must be in lower case, spacing must be adhered and date format must include dashes!";
     }
 }

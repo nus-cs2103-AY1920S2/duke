@@ -1,6 +1,28 @@
 # EXE User Guide
 By: [Kenny Ho](https://github.com/khsc96) Since: Jan 2020
 
+## Table of Contents
+* [Introduction](#introduction)
+* [Features](#features)
+    * [Adding Todo Task](#adding-todo-task)
+    * [Adding Event Task](#adding-event-task)
+    * [Adding Deadline task](#adding-deadline-task)
+    * [Deleting existing task](#deleting-existing-task)
+    * [Exiting the application](#exiting-the-application)
+    * [List out all existing tasks](#list-out-all-existing-tasks)
+    * [Marking task as done](#marking-task-as-done)
+    * [Viewing help menu](#viewing-help-menu)
+* [Usage](#usage) 
+    * [Add todo task usage](#add-todo-task-usage)
+    * [Add event task usage](#add-event-task-usage)
+    * [Add deadline task usage](#add-deadline-task-usage)
+    * [Deleting tasks](#deleting-task)
+    * [Exiting application](#exiting-application)
+    * [Listing out all tasks](#listing-out-all-tasks)
+    * [Marking task as done](#marking-task-as-done)
+    * [Help menu](#help-menu)
+* [Acknowledgements](#acknowledgements)
+  
 ## Introduction
 EXE is your very own personal assistant chatbot. EXE will always be there for you if you need someone to voluntarily 
 record and remind you on your own personal tasks. 

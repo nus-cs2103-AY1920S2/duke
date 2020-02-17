@@ -27,7 +27,7 @@ public class Delete extends Command {
     public String getHelpFormat() {
         return "Please type delete command in following format:\n" +
                 "delete <task_number>\n" +
-                "delete key word must be in lower case, spacing must be adhere" +
+                "delete key word must be in lower case, spacing must be adhered " +
                 "and type list command to find out task number!";
     }
 }

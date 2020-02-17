@@ -55,6 +55,6 @@ public class ToDo extends Task {
     public String getHelpFormat() {
         return "Please type todo task in this following format:\n" +
                 "todo <task_name>\n" +
-                "todo key word must be in lower case, spacing must be adhere!";
+                "todo key word must be in lower case, spacing must be adhered!";
     }
 }
