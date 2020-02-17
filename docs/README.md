@@ -3,7 +3,7 @@
 2. Features
 
 ## Introduction
-<img src="https://github.com/XinPei-ng/duke/blob/master/docs/Ui.png" alt="Image of ChuChu bot">
+![Image of ChuChu Bot](https://raw.githubusercontent.com/XinPei-ng/duke/master/docs/Ui.png)
 
 ChuChu Bot is a task management bot built on Duke. It is 
 capable of managing different kinds of task and also has various
