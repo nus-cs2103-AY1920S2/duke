@@ -62,7 +62,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String formattedDate = time.format(outputFormat);
-        return String.format("[%s]%s (by: %s)", eventLogo, super.toString(), formattedDate);
+        return String.format("[%s]%s\n       (by: %s)", eventLogo, super.toString(), formattedDate);
     }
 
     public String getHelpFormat() {

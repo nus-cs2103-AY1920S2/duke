@@ -1,4 +1,2 @@
 T | 0 | run
-E | 0 | project meeting | Feb 20 2020
-D | 0 | okokok | Feb 20 2020
 E | 0 | project meeting | Feb 02 2020

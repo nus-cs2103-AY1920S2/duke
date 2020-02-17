@@ -64,7 +64,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedDate = by.format((outputFormat));
-        return String.format("[%s]%s (by: %s)", deadlineLogo, super.toString(), formattedDate);
+        return String.format("[%s]%s\n       (by: %s)", deadlineLogo, super.toString(), formattedDate);
     }
 
     public String getHelpFormat() {

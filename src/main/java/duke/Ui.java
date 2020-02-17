@@ -159,7 +159,7 @@ public class Ui {
         Task currentTask;
         for (int i = 0; i < listOfTask.getSize(); i++) {
             currentTask = listOfTask.getTask(i);
-            stringBuilder.append(String.format(" %d. %s" + NEWLINE, i + 1, currentTask.toString()));
+            stringBuilder.append(String.format("%d. %s" + NEWLINE, i + 1, currentTask.toString()));
         }
         stringBuilder
                 .append(String.format("In case you can't count! you have %d task(s) in your list",
