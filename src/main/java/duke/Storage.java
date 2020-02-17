@@ -17,7 +17,7 @@ public class Storage {
     /**
      * The File path.
      */
-    String filePath = "data/duke.txt";
+    String filePath = "../../data/duke.txt";
     /**
      * The Date input.
      */

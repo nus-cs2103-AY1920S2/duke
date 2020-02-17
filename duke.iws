@@ -2,17 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cce01ba2-cbf3-481b-887e-e296ec670939" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/duke.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/List.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MyList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/duke.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke.iws" beforeDir="false" afterPath="$PROJECT_DIR$/duke.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Storage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -37,6 +53,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -44,9 +64,8 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="duke" />
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="duke.Main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -70,41 +89,60 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580652286379">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="495" y="82" key="#Main" timestamp="1581299697336">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="495" y="82" key="#Main/0.0.1536.824@0.0.1536.824" timestamp="1581299697336" />
+    <state x="331" y="139" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581299626166">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="331" y="139" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1581299626166" />
     <state x="414" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580652286379" />
+    <state x="498" y="203" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581299637847">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="203" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1581299637847" />
     <state x="557" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1580726148970">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="557" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580726148970" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1580731226018">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="357" key="GridCell.Tab.0.bottom" timestamp="1581299733572">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="357" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581299733572" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580731226018" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1580731226018">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="357" key="GridCell.Tab.0.center" timestamp="1581299733572">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="357" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581299733572" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580731226018" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1580731226018">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="357" key="GridCell.Tab.0.left" timestamp="1581299733572">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="357" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581299733572" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580731226018" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1580731226018">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="357" key="GridCell.Tab.0.right" timestamp="1581299733572">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="357" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581299733572" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580731226018" />
     <state x="461" y="163" key="SettingsEditor" timestamp="1580727850018">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1580727850018" />
+    <state x="498" y="315" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1581299669019">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="315" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824@0.0.1536.824" timestamp="1581299669019" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1580727836588">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

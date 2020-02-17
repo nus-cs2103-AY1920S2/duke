@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'seedu.duke'
@@ -17,7 +18,7 @@ checkstyle {
 
 
 dependencies {
-    String javaFxVersion = '11.0.1'
+    String javaFxVersion = '11'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 
@@ -42,9 +43,18 @@ test {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Main"
+    mainClassName = "duke.Launcher"
 }
 
 run {
     standardInput = System.in
 }
+
+
+shadowJar {
+    archiveBaseName = "Duke"
+    archiveVersion = "0.2.1"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
