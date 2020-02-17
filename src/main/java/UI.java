@@ -38,7 +38,6 @@ public class UI {
      * Prints the introduction logo when program is first started.
      */
     static void printIntro() {
-        System.out.println(horizontalLine);
         String logo =
                 " ____        _        \n"
                         + "|  _ \\ _   _| | _____ \n"
@@ -48,7 +47,6 @@ public class UI {
         System.out.println(logo);
         System.out.println("Hello, I'm Duke \n" + "How can I help you today?");
         System.out.println("Type 'help' to list available commands");
-        System.out.println(horizontalLine);
     }
 
     /**
