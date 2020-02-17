@@ -53,7 +53,6 @@ public class Ui {
     }
 
     public static void printAfterDelete(Task currentTask, ArrayList<Task> listOfTexts) {
-        assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event/fixedDurationTask now! ☹ OOPS!!!";
         System.out.println("Bye bye Task! I've removed this task:");
         System.out.println(currentTask);
         System.out.println("Now you have " + listOfTexts.size() + " tasks in the list.");
@@ -81,7 +80,7 @@ public class Ui {
     }
     public static void printAfterFixedTask(FixedDurationTask fdt, ArrayList<Task> listOfTexts) {
         assert (listOfTexts.size() != 0) : "☹ OOPS!!! No tasks to show: add some todo/deadline/event/fixedDurationTask now! ☹ OOPS!!!";
-        System.out.println("Got you covered! Added this fixed duration task to the list: ");
+        System.out.println("Got you covered! Added this FixedDurationTask to the list: ");
         System.out.println(fdt);
         System.out.println("Now you have " + listOfTexts.size() + " tasks in the list.");
     }
@@ -91,7 +90,6 @@ public class Ui {
     }
 
     static void printSearch(ArrayList<Task> searchList) {
-        System.out.println(searchList.size());
         assert (searchList.size() != 0) : "☹ OOPS!!! No match on your search! Are you sure you've added it? ☹ OOPS!!!";
         int counter = 1;
         for (int i = 0; i < searchList.size(); i++) {

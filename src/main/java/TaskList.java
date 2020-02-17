@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * TaskList contains the task list and all its operations to add/delete tasks in the list.
- * Contains a .run() method as well.
+ * Contains a .run() method as well to run the Command related to the Task.
  */
 public class TaskList {
     private ArrayList<Task> listOfTexts;

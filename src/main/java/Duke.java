@@ -70,6 +70,8 @@ public class Duke {
      *
      * @return String Welcome Message in the GUI
      */
+    //@@author garysyndromes-reused
+    //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications
     public String getWelcomeMessage() {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -83,6 +85,7 @@ public class Duke {
 
         System.out.flush();
         System.setOut(old);
+        //@@author
         return baos.toString();
     }
 
@@ -92,6 +95,8 @@ public class Duke {
      *
      * @return String of current tasks in duke
      */
+    //@@author garysyndromes-reused
+    //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications
     public String getCurrentTasksInDuke() {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -104,14 +109,18 @@ public class Duke {
 
         System.out.flush();
         System.setOut(old);
+        //@@author
         return baos.toString();
     }
+
 
     /**
      * Handles the responses of duke
      *
      * @return String of current response to the input
      */
+    //@@author garysyndromes-reused
+    //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications
     public String getResponse(String input) {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -124,6 +133,7 @@ public class Duke {
         this.storage.save(tasks);
         System.out.flush();
         System.setOut(old);
+        //@@author
         return baos.toString();
 
     }
