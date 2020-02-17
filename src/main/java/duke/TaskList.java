@@ -2,23 +2,34 @@ package duke;
 import java.util.ArrayList;
 
 /**
-Represents the task list that stores the tasks of Duke
+ * Represents the TaskList object that stores and retrieves the tasks to/from the hard drive.
  */
 public class TaskList {
+    public static final String EVENT = "event";
+    public static final String DEADLINE = "deadline";
+    public static final String TODO = "todo";
     private ArrayList<Task> taskArrayList;
     private Ui ui = new Ui();
 
+    /**
+     * Creates a Tasklist object with given ArrayList of Tasks
+     * @param tasks
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.taskArrayList = tasks;
     }
 
+    /**
+     * Creates a TaskList object with an empty tasks ArrayList.
+     */
     public TaskList() {
-        //initiate new list
         this.taskArrayList = new ArrayList<Task>();
     }
 
-    /*
-    Gets a task at index specified
+    /**
+     * Gets a Task object at the specified index in the Task List
+     * @param index
+     * @return
      */
     public Task getTaskByIndex(int index) {
         return this.taskArrayList.get(index-1); //-1 because indexing for user starts from 1, but 0 for arraylist.
@@ -27,7 +38,7 @@ public class TaskList {
     public String addTask(String type, String description){
         Task task = new Task("sample");
         String output = "";
-        if(type.equals("event")) {
+        if(type.equals(EVENT)) {
             //handle event
             try {
                 String[] args = description.split("/", 2);
@@ -36,7 +47,7 @@ public class TaskList {
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.timeErrorMessage();
             }
-        } else if (type.equals("deadline")) {
+        } else if (type.equals(DEADLINE)) {
             //handle deadline
             try {
                 String[] args = description.split("/", 2);
@@ -45,9 +56,11 @@ public class TaskList {
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.timeErrorMessage();
             }
-        } else {
+        } else if (type.equals(TODO)) {
             task = new ToDo(description);
             taskArrayList.add(task);
+        } else {
+            return "Incorrect task added";
         }
         output += "Got it. I've added this task:" + "\n";
         output += task.toString() + "\n";
@@ -58,7 +71,6 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return this.taskArrayList;
     }
-
 
     /**
     Marks a task as done and informs the user about the same

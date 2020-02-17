@@ -7,6 +7,7 @@ import java.util.Optional;
  * Represents a Deadline which inherits from Task and is stored/managed by Duke
  */
 public class Deadline extends Task {
+    public static final String DESCRIPTION_ERROR_MESSAGE = "Description of Deadline is empty";
     /**
      * Stores the time the deadline is supposed to be complete
      */
@@ -21,7 +22,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        assert description.length() > 0 : "Description of Deadline is empty";
+        assert description.length() > 0 : DESCRIPTION_ERROR_MESSAGE;
         this.by = by;
         dueDatePresent = false;
         if (this.by.matches("\\d{4}-\\d{2}-\\d{2}")) {
@@ -39,7 +40,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
-        assert description.length() > 0 : "Description of Deadline is empty";
+        assert description.length() > 0 : DESCRIPTION_ERROR_MESSAGE;
         this.by = by;
         dueDatePresent = false;
         if (this.by.matches("\\d{4}-\\d{2}-\\d{2}")) {
