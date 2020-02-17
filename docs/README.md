@@ -18,13 +18,17 @@ This product is a Personal Assistant Chatbot that helps a person keep track of v
 ## <a name="quick-start"></a> Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `duke.jar` here.
+1. Download the latest [duke.jar](https://github.com/FangShaoHua94/duke/releases/tag/v0.3) here.
 
 1. Copy the file to the folder you want to use as the home folder for your Address Book.
 
 1. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-## <a name="features"></a> Features 
+## <a name="features"></a> Features
+
+**Sample**
+![sample usage](Ui.png)
+ 
 ### <a name="adding task"></a> Adding task `todo` `deadline` `event` `recurring`
 Add a task into the duke.  
 
