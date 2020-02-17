@@ -25,7 +25,7 @@ Refer to the image above. There is two ways that you can enter the inputs into t
 which is one on the left and the another on the right.
 
 
-### `Todo, Deadline, Event` - Commands lines
+### `Todo, Deadline, Event` - Inputs command
 
 Example of usage: 
 
@@ -42,3 +42,17 @@ Please refer the specific outcomes from the picture provided above.
 * task list 2
 * task list 1
 * task list 12
+
+### `Delete, Done` - Updates command
+
+Example of usage: 
+
+*`delete (argument 1) (argument 2) ... (argument n)` : delete 1 2 3 ... n 
+
+*`delete all`
+
+*`done (argument 1) (argument 2) ... (argument n)` : done 1 2 3 ... n 
+
+*`done all`
+
+Expected outcome:
