@@ -26,7 +26,7 @@ public class HelpCommand extends DukeCommand {
      */
     @Override
     public String execute(DukeList dl, DukeStorage ds, DukeUI dui) throws InvalidEntryException {
-        dui.holdCurrentMessage(helpString);
+        dui.holdCurrentMessage(HELPSTRING);
         return dui.getCurrentMessage();
     }
 
@@ -36,10 +36,10 @@ public class HelpCommand extends DukeCommand {
     }
 
     public String getHelpString() {
-        return helpString;
+        return HELPSTRING;
     }
 
-    private final String helpString =
+    private final String HELPSTRING =
             "    All available commands are: \n"
                     + "    1. 'help' to see all available commands.\n"
                     + "    2. 'list' to see all listed tasks.\n"

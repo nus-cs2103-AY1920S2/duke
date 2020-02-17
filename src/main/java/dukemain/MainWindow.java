@@ -1,3 +1,5 @@
+package dukemain;
+
 import dukecommand.HelpCommand;
 import dukeui.DukeUI;
 import javafx.fxml.FXML;

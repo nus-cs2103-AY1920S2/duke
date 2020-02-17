@@ -14,10 +14,9 @@ import java.util.Scanner;
 
 public class DukeUI {
     private String currMessage = "";
-    private final Scanner in;
-    private final PrintStream out;
-    private final String line = "    ____________________________________________________________";
-    private final String logo =
+    private final Scanner IN;
+    private final PrintStream OUT;
+    private final String LOGO =
               "     ____         _        \n"
             + "    |  _ \\ _   _| | _____ \n"
             + "    | | | | | | | |/ / _ \\\n"
@@ -29,12 +28,12 @@ public class DukeUI {
     }
 
     public DukeUI(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
+        this.IN = new Scanner(in);
+        this.OUT = out;
     }
 
-    public void holdCurrentMessage(String customM) {
-        currMessage += customM + "\n";
+    public void holdCurrentMessage(String customMessage) {
+        currMessage += customMessage + "\n";
     }
 
     public String getCurrentMessage() {
@@ -49,7 +48,7 @@ public class DukeUI {
      * @return String welcome message.
      */
     public String getWelcomeMessage() {
-        this.holdCurrentMessage(logo);
+        this.holdCurrentMessage(LOGO);
         this.holdCurrentMessage("    Hello I'm Duke");
         this.holdCurrentMessage("    What can I do for you?");
         return this.getCurrentMessage();

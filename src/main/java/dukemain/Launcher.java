@@ -1,3 +1,5 @@
+package dukemain;
+
 import javafx.application.Application;
 
 /**

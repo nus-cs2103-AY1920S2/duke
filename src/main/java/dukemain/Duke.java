@@ -1,3 +1,5 @@
+package dukemain;
+
 import dukecommand.DukeCommand;
 import dukeexceptions.DukeException;
 import dukelist.DukeList;
