@@ -5,7 +5,7 @@ dist: trusty
 jdk: oraclejdk11
 
 before_install:
-  - ls JKOK005/duke
+  - ls -la
 
 script:
-  - JKOK005/duke/gradlew build --scan -s
+  - ./gradlew build --scan -s
