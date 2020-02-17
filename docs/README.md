@@ -3,6 +3,8 @@
 ## 1. Introduction
 DingDing the chat bot is a personal chat bot that helps you manage your everyday tasks! 
 
+![Screenshot of DingDing](https://github.com/Denise-Ng/duke/tree/master/docs/Ui.png)
+
 
 ## 2. Quick Start
 Download the latest version of the jar file e.g. Duke-v2.0.jar from the repository. 
