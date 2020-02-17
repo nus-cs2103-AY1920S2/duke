@@ -21,7 +21,9 @@ public class ToDo extends Task {
         return this.done;
     }
 
-    public String getClassName() { return "todo"; }
+    public String getClassName() {
+        return "todo";
+    }
 
     /**
      * Converts ToDo into a String to be saved to file.

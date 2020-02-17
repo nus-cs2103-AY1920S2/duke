@@ -24,35 +24,25 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    PrintStream old;
 
     String filePath;
     Storage storage;
     TaskList taskList;
 
+    /**
+     * Method to initialise Duke.
+     */
 
     public Duke() {
         filePath = "data/duke.txt";
         storage = new Storage(filePath);
         try {
             taskList = storage.getTaskList(); // initialise from text file
-//            Parser.scan(taskList, storage);
         } catch (IOException e) {
             System.out.println(e);
         }
     }
-
-//    public static void main(String[] args) {
-//        Ui.printHello();
-//        String filePath = "data/duke.txt";
-//        Storage storage = new Storage(filePath);
-//        TaskList taskList;
-//        try {
-//            taskList = storage.getTaskList(); // initialise from text file
-//            Parser.scan(taskList, storage);
-//        } catch (IOException e) {
-//            System.out.println(e);
-//        }
-//    }
 
     @Override
     public void start(Stage stage) {
@@ -101,7 +91,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -155,17 +145,14 @@ public class Duke extends Application {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
+        old = System.out;
         // Tell Java to use your special stream
         System.setOut(ps);
-
-        if(input.toLowerCase().contains("bye")) {
+        if (input.toLowerCase().contains("bye")) {
             System.exit(0);
         } else {
             Parser.read(input, taskList, storage);
         }
-
-
         System.out.flush();
         System.setOut(old);
 

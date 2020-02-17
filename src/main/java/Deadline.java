@@ -26,9 +26,13 @@ public class Deadline extends Task {
         return this.done;
     }
 
-    public String getClassName() { return "deadline"; }
+    public String getClassName() {
+        return "deadline";
+    }
 
-    public LocalDate getDateObj() { return this.dateObj; }
+    public LocalDate getDateObj() {
+        return this.dateObj;
+    }
 
     /**
      * Converts Deadline into a String to be saved to file.
