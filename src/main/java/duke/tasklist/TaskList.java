@@ -15,8 +15,8 @@ import java.util.ArrayList;
  * The TaskList program manages the taskList. It is able to add, delete, list and mark tasks in
  * taskList as done. It also contains Storage.
  *
- * @version 1.1
- * @since 4/2/2020
+ * @version 1.2
+ * @since 17/2/2020
  */
 public class TaskList {
 
@@ -73,15 +73,15 @@ public class TaskList {
 
         Task task = null;
         switch (type) {
-        case TODO:
+        case T:
             ToDo task1 = new ToDo(dateTime, taskDescription);
             task = task1;
             break;
-        case DEADLINE:
+        case D:
             Deadline task2 = new Deadline(dateTime, taskDescription);
             task = task2;
             break;
-        case EVENT:
+        case E:
             Event task3 = new Event(dateTime, taskDescription);
             task = task3;
             break;
@@ -115,15 +115,15 @@ public class TaskList {
         dateTime[1] = dateTimeEnd;
         Task task = null;
         switch (type) {
-        case TODO:
+        case T:
             ToDo task1 = new ToDo(dateTime, taskDescription);
             task = task1;
             break;
-        case DEADLINE:
+        case D:
             Deadline task2 = new Deadline(dateTime, taskDescription);
             task = task2;
             break;
-        case EVENT:
+        case E:
             Event task3 = new Event(dateTime, taskDescription);
             task = task3;
             break;

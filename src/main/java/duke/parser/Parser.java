@@ -6,6 +6,7 @@ import duke.exceptions.InvalidDateError;
 import duke.exceptions.InvalidInputError;
 import duke.exceptions.MissingKeywordError;
 import duke.exceptions.MissingTaskNumberError;
+import duke.task.Task;
 
 import java.lang.String;
 import java.time.LocalDateTime;
@@ -14,8 +15,8 @@ import java.time.format.DateTimeFormatter;
 /**
  * The Parser program passes user input, date and time related to a task.
  *
- * @version 1.0
- * @since 28/1/2020
+ * @version 1.1
+ * @since 17/2/2020
  */
 public class Parser {
 
@@ -80,16 +81,15 @@ public class Parser {
 
         if (whiteSpaceIndex == -1) {
 
+            outputArr[0] = input;
             if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
 
-                outputArr[0] = input;
                 outputArr[1] = "EmptyDescription";
                 outputArr[2] = "";
 
                 throw new EmptyDescriptionError(input);
             } else {
 
-                outputArr[0] = input;
                 outputArr[1] = "InvalidInput";
                 outputArr[2] = "";
 
@@ -98,7 +98,7 @@ public class Parser {
 
         } else if (input.startsWith("todo")) {
 
-            outputArr[0] = input.substring(0, whiteSpaceIndex);
+            outputArr[0] = Task.Types.T.toString();
             outputArr[1] = input.substring(whiteSpaceIndex + 1);
             outputArr[2] = "";
 
@@ -118,7 +118,7 @@ public class Parser {
 
                 int indexBy = input.indexOf("/by ");
 
-                outputArr[0] = input.substring(0, whiteSpaceIndex);
+                outputArr[0] = Task.Types.D.toString();
 
                 if (indexBy == -1) {
                     outputArr[1] = "EmptyDate";
@@ -135,9 +135,8 @@ public class Parser {
 
             } else {
 
-                outputArr[0] = input.substring(0, whiteSpaceIndex);
-
-                assert outputArr[0] == "event" : "task type is not event";
+                assert input.startsWith("event") : "task type is not event";
+                outputArr[0] = Task.Types.E.toString();
 
                 if (indexAt == -1) {
 
@@ -147,7 +146,6 @@ public class Parser {
                     throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
                 } else {
 
-                    outputArr[0] = input.substring(0, whiteSpaceIndex);
                     outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
                     outputArr[2] = input.substring(index + 4);
                 }
@@ -168,41 +166,99 @@ public class Parser {
      */
     public LocalDateTime[] parseDateTime(String dateTime, String type) throws InvalidDateError {
 
-        try {
 
-            String[] split =  null;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
-            LocalDateTime[] parsed = new LocalDateTime[2];
+        String[] split = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
+        LocalDateTime[] parsed = new LocalDateTime[2];
 
-            if (type.equals("todo")) {
+        if (type.equals("T")) {
 
-                parsed[0] = LocalDateTime.parse("12/12/1212 12:12", formatter);
-                parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
+            parsed[0] = LocalDateTime.parse("12/12/1212 12:12", formatter);
+            parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
 
-            } else if (type.equals("event")) {
+        } else if (type.equals("E")) {
 
-                split = dateTime.split(" to ");
+            split = dateTime.split(" to ");
+
+            try {
+
                 parsed[0] = LocalDateTime.parse(split[0], formatter);
                 parsed[1] = LocalDateTime.parse(split[1], formatter);
 
-            } else if (type.equals("deadline")) {
+            } catch (Exception e) {
+
+                throw new InvalidDateError(type, "format");
+
+            }
+
+            boolean isValid = checkDateTimeValidity(parsed, "E");
+
+            if (!isValid) {
+
+                throw new InvalidDateError(type, "Date");
+
+            }
+
+        } else if (type.equals("D")) {
+
+            try {
 
                 parsed[0] = LocalDateTime.parse(dateTime, formatter);
                 parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
 
+            } catch (Exception e) {
+
+                throw new InvalidDateError(type, "format");
+
             }
 
-            assert parsed[0] != null && parsed[1] != null : "Dates are empty";
+            boolean isValid = checkDateTimeValidity(parsed, "D");
 
-            return parsed;
+            if (!isValid) {
 
-        } catch (Exception e) {
+                throw new InvalidDateError(type, "Date");
 
-            throw new InvalidDateError(type);
+            }
+
+        }
+
+        assert parsed[0] != null && parsed[1] != null : "Dates are empty";
+
+        return parsed;
+
+
+    }
+
+    /**
+     * Checks if date parsed is valid.
+     *
+     * @param times refers to the start and end dateTime of the task.
+     * @param type refers to the type of event.
+     * @return true if date is valid and false, otherwise.
+     */
+
+    boolean checkDateTimeValidity(LocalDateTime[] times, String type) {
+
+        boolean isEndLaterThanStart = false;
+        boolean isStartLaterThanNow = false;
+
+        if(type.equals("D")) {
+
+            isStartLaterThanNow = times[0].isAfter(LocalDateTime.now());
+
+            return isStartLaterThanNow;
+
+        } else {
+
+            assert type.equals("E") : "Wrong event type!";
+
+            isStartLaterThanNow = times[0].isAfter(LocalDateTime.now());
+            isEndLaterThanStart = times[1].isAfter(times[0]);
+
+            return isEndLaterThanStart && isStartLaterThanNow;
 
         }
 
     }
-
 
 }

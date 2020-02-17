@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exceptions.DuplicateTaskError;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -10,8 +11,8 @@ import java.time.LocalDateTime;
 /**
  * The AddCommand program call method to add task into the taskList.
  *
- * @version 1.1
- * @since 3/2/2020
+ * @version 1.2
+ * @since 17/2/2020
  */
 public class AddCommand extends Command {
 
@@ -41,22 +42,30 @@ public class AddCommand extends Command {
 
             Parser parser = new Parser();
             LocalDateTime[] dateTime = parser.parseDateTime(taskDescriptionArr[2], taskDescriptionArr[0]);
+
+            String hasDup = new CheckDupCommand(null, taskList).executeCommand(taskDescriptionArr, dateTime);
+
+            if(hasDup.equals("t")) {
+
+                throw new DuplicateTaskError(taskDescriptionArr[0]);
+            }
+
             String start = "Got it. I've added this task: \n";
 
-            if (taskDescriptionArr[0].equals("todo")) {
+            if (taskDescriptionArr[0].equals("T")) {
 
                 return start + taskList.addTask(taskDescriptionArr[1],
-                        dateTime, Task.Types.TODO) + "\n" + taskList.reportTotal();
+                        dateTime, Task.Types.T) + "\n" + taskList.reportTotal();
 
-            } else if (taskDescriptionArr[0].equals("deadline")) {
-
-                return start + taskList.addTask(taskDescriptionArr[1],
-                        dateTime, Task.Types.DEADLINE) + "\n" + taskList.reportTotal();
-
-            } else if (taskDescriptionArr[0].equals("event")) {
+            } else if (taskDescriptionArr[0].equals("D")) {
 
                 return start + taskList.addTask(taskDescriptionArr[1],
-                        dateTime, Task.Types.EVENT) + "\n" + taskList.reportTotal();
+                        dateTime, Task.Types.D) + "\n" + taskList.reportTotal();
+
+            } else if (taskDescriptionArr[0].equals("E")) {
+
+                return start + taskList.addTask(taskDescriptionArr[1],
+                        dateTime, Task.Types.E) + "\n" + taskList.reportTotal();
 
             }
 

@@ -1,12 +1,6 @@
 package duke.ui;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -71,11 +65,11 @@ public class Ui {
 
             } else {
 
-                assert  taskDescriptionArr[0] == "todo" ||
-                        taskDescriptionArr[0] == "event" ||
-                        taskDescriptionArr[0] == "deadline": taskDescriptionArr[0];
+                assert  taskDescriptionArr[0] == "E" ||
+                        taskDescriptionArr[0] == "T" ||
+                        taskDescriptionArr[0] == "D": taskDescriptionArr[0];
 
-                c = new AddCommand(storage, taskList);
+                    c = new AddCommand(storage, taskList);
             }
 
             return c.executeCommand(taskDescriptionArr);

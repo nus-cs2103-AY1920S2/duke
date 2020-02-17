@@ -1,16 +1,22 @@
 package duke.exceptions;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
- * The InvalidDateError program is an error thrown when user inputs an invalid date format.
+ * The InvalidDateError program is an error thrown when user inputs an invalid date.
  *
- * @version 1.1
- * @since 9/2/2020
+ * @version 1.2
+ * @since 17/2/2020
  */
 public class InvalidDateError extends Exceptions {
 
-    public InvalidDateError(String type) {
+    String issue;
+    public InvalidDateError(String type, String issue) {
 
         super(type);
+        this.issue = issue;
+
     }
 
 
@@ -22,14 +28,34 @@ public class InvalidDateError extends Exceptions {
     @Override
     public String toString() {
 
-        if (type.equals("DEADLINE")) {
+        if (issue.equals("Date")) {
 
-            return "Date should be in d/MM/yyyy HH:mm format";
+            if (type.equals("D")) {
+
+                return "Date should be after " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm"));
+
+            } else {
+
+                assert type.equals("E") : "Wrong event type";
+
+                return "Start date should be after " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm"))
+                        + " and end date should be after start date";
+
+            }
 
         } else {
 
-            return "Date should be in d/MM/yyyy HH:mm to /MM/yyyy HH:mm format";
+            if (type.equals("D")) {
 
+                return "Date should be in d/MM/yyyy HH:mm format";
+
+            } else {
+
+                assert type.equals("E") : "Wrong event type";
+
+                return "Date should be in d/MM/yyyy HH:mm to /MM/yyyy HH:mm format";
+
+            }
         }
     }
 }

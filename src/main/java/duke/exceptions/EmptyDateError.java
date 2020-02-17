@@ -20,6 +20,7 @@ public class EmptyDateError extends Exceptions {
      */
     @Override
     public String toString() {
+
         return "OPPS! The date of a " + super.getType() + " cannot be empty.";
     }
 }

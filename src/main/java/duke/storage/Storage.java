@@ -51,11 +51,12 @@ public class Storage {
 
         try {
             File f = new File(path);
+            f.createNewFile();
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
-            String content = null;
-            String[] contentArr = null;
+            String content;
+            String[] contentArr;
             String type;
             String status;
             int lines = 0;
@@ -68,50 +69,50 @@ public class Storage {
 
                 switch (type) {
 
-                case "TODO":
+                case "T":
 
                     if (status.equals("Y")) {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.TODO, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.T, Task.Status.Y);
 
                     } else {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.TODO, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.T, Task.Status.N);
 
                     }
                     lines ++;
                     break;
 
-                case "DEADLINE":
+                case "D":
 
                     if (status.equals("Y")) {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.DEADLINE, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.D, Task.Status.Y);
 
                     } else {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.DEADLINE, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.D, Task.Status.N);
 
                     }
                     lines ++;
                     break;
 
-                case "EVENT":
+                case "E":
 
                     if (status.equals("Y")) {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.EVENT, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.E, Task.Status.Y);
 
 
                     } else {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.EVENT, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]),Task.Types.E, Task.Status.N);
 
                     }
                     lines ++;
