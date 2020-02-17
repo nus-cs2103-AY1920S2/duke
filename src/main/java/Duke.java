@@ -1,10 +1,8 @@
-import command.Command;
 import exception.DukeException;
 import parser.Parser;
 import storage.Storage;
 import task.Deadline;
 import task.Event;
-import task.Task;
 import task.TaskList;
 import task.Todo;
 import ui.Ui;
@@ -44,21 +42,6 @@ public class Duke {
      * @throws IOException if there are file exceptions.
      */
     public String run(String userInput) throws IOException {
-//        ui.printWelcomeMessage();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.showError(e.getMessage());
-//            } finally {
-//                ui.showLine();
-//            }
-//        }
-
         try {
             Parser parser = new Parser(userInput);
             String userCommand = parser.getCommand();
@@ -122,8 +105,4 @@ public class Duke {
         }
         return "";
     }
-
-//    public static void main(String[] args) throws IOException {
-//        new Duke().run();
-//    }
 }

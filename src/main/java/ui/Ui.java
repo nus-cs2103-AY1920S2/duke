@@ -5,7 +5,6 @@ import exception.EmptyTaskListException;
 import exception.InvalidIndexException;
 import task.Task;
 import task.TaskList;
-
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.ArrayList;
@@ -39,7 +38,11 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public String welcomeMessage = "Hello from\n" + logo + "What can I do for you?";
+    private String welcomeMessage = "Hello from\n" + logo + "What can I do for you?";
+
+    public String getWelcomeMessage() {
+        return this.welcomeMessage;
+    }
 
     /**
      * Prints exit message.
@@ -130,8 +133,6 @@ public class Ui {
      */
     public String acknowledgeDeadline(TaskList tasks, Task deadline) {
         if (tasks.checkDuplicate(deadline)) {
-//            System.out.println("Note!! This task action already exists in the list!");
-//            System.out.printf("Now you have %d tasks in the list.\n", tasks.getTaskListSize());
             String s = "Note!! This task action already exists in the list!\n";
             return s + String.format("Now you have %d tasks in the list.\n", tasks.getTaskListSize());
         } else {
