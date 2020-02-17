@@ -1,5 +1,6 @@
-D | X | 2103T project |  | 2020-02-28
+D | X | 2103T project |   #lol| 2020-02-28
 E | X | dance performance |  | 2020-04-11
-T | X | read chapter 2 | 
 E | X | dance competition |  | 2020-03-24
 T | X | CS2101 OP |  #memorize
+T | O | lsm1303 | 
+T | X | edit gui | 
