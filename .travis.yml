@@ -4,6 +4,8 @@ os: linux
 dist: trusty
 jdk: oraclejdk11
 
-script:
+before_install:
   - ls ${pwd}
+
+script:
   - ./gradlew build --scan -s
