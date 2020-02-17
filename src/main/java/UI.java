@@ -38,7 +38,6 @@ public class UI {
      * Prints the introduction logo when program is first started.
      */
     static void printIntro() {
-        System.out.println(horizontalLine);
         String logo =
                 " ____        _        \n"
                         + "|  _ \\ _   _| | _____ \n"
