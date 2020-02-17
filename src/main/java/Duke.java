@@ -45,7 +45,7 @@ public class Duke {
             if (keyword.equals(BYE_COMMAND)) {
                 message = byeCommand();
             } else if (keyword.equals(STAT_COMMAND)) {
-                message = message + tasklist.printStatistic();
+                message = statCommand();
             } else if (keyword.equals(LIST_COMMAND)) {
                 message = message + ui.printMessage("Here are the task in your list");
                 message = message + tasklist.printList();
@@ -98,12 +98,23 @@ public class Duke {
     }
 
     /**
-     * Saves the tasks to a file and prompt the user to exit the program.
+     * Runs the bye command.
+     * @return the message generated to inform the user
      */
     private String byeCommand() {
         String message = "";
         storage.writeFile(tasklist.mylist);
         message = ui.printMessage("Bye. I have saved the list to a file! You can exit the program now");
+        return message;
+    }
+
+    /**
+     * Runs the statistic command.
+     * @return message generated to inform the user
+     */
+    private String statCommand() {
+        String message = "";
+        message = tasklist.printStatistic();
         return message;
     }
 }
