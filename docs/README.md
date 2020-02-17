@@ -28,9 +28,10 @@ You can mass delete tasks from Tom's list of tasks based on a particular type of
 ### Exit Application
 You can exit the application by inputting `bye` and it will be automatically closed.
 
-
-
 ## Usage
+`Todo` - Adds a 'todo' task to the list and updates the `duke.txt` file.
+
+
 
 ### `Keyword` - Describe action
 
