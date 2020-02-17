@@ -8,4 +8,4 @@ before_install:
   - ls -la
 
 script:
-  - ./gradlew build --scan -s
+  - ./gradlw build --scan -s
