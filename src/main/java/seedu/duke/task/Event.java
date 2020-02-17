@@ -22,7 +22,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String formattedEventDate = " (at: " + this.eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String formattedEventDate = " (at: " + eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         return "[E]" + super.toString() + formattedEventDate;
     }
 

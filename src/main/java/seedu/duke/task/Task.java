@@ -14,7 +14,7 @@ public abstract class Task implements Comparable<Task> {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -30,7 +30,7 @@ public abstract class Task implements Comparable<Task> {
      * Marks a task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -43,12 +43,12 @@ public abstract class Task implements Comparable<Task> {
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 
     public abstract int compareTo(Task task);

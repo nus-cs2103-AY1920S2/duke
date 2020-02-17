@@ -1,13 +1,7 @@
 package seedu.duke.parser;
 
+import seedu.duke.command.*;
 import seedu.duke.task.TaskList;
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.DoneCommand;
-import seedu.duke.command.ListCommand;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.FindCommand;
-import seedu.duke.command.ByeCommand;
 import seedu.duke.enums.TaskTypes;
 import seedu.duke.exception.InvalidCommandException;
 import seedu.duke.ui.Ui;
@@ -26,7 +20,6 @@ public class Parser {
      */
     public Command handleCommands(String[] inputs, TaskList taskList) {
         String command = inputs[0].trim();
-        System.out.println(inputs[0]);
         Command cmd = null;
         Ui ui = new Ui();
         try {
@@ -59,7 +52,7 @@ public class Parser {
                 throw new InvalidCommandException();
             }
         } catch (InvalidCommandException e) {
-            ui.print(e.toString());
+            cmd = new ErrorCommand(e.toString());
         }
         return cmd;
     }
