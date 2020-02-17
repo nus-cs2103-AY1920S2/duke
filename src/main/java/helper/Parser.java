@@ -49,6 +49,8 @@ public class Parser {
                 return new Command("done", userInput.replace("done ", ""));
             } else if (userInput.split(" ")[0].equals("find")) {
                 return new Command("find", userInput.replace("find ", ""));
+            } else if (userInput.split(" ")[0].equals("tag")) {
+                return new Command("tag", userInput.replace("tag ", ""));
             } else {
                 return new Command("");
             }

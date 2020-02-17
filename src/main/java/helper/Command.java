@@ -1,11 +1,14 @@
 package helper;
 
+import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import task.Task;
 
 import java.util.ArrayList;
 import java.util.Date;
+
 
 public class Command {
     /**
@@ -14,6 +17,7 @@ public class Command {
      */
     private String command;
     private String taskEntered;
+    private Storage storage;
 
     /**
      * Command constructor without task (bye,list).
@@ -97,6 +101,17 @@ public class Command {
                     String deleteBotMess = uiHelper.getBottomTwoLine(taskList);
                     return uiHelper.parserOutputMess(deleteTopMess, deleteMess, deleteBotMess); // parse
                 }
+            case "tag":
+                String[] command = taskEntered.split("as");
+                String taskSelected = command[0];
+                String tag = command[1];
+                Task foundTask = searchTask(taskList, taskSelected);
+                if (foundTask != null) {
+                    foundTask.setTag(tag);
+                } else {
+                    return "there is no such task in your list ";
+                }
+                return uiHelper.parserOutputMess("", "The tag " + tag + "is successfully added to " + foundTask.getDescription(), "");
             case "done":
                 int doneArrPos = Integer.parseInt(taskEntered); // assign index
                 assert doneArrPos > 0 : "Please enter a positive index ";
@@ -140,5 +155,44 @@ public class Command {
         return (formatter.format(date1));
     }
 
+    private void addTag() {
+
+    }
+
+//    private ArrayList<Task> viewSchedule(String date) throws ParseException, FileNotFoundException {
+//        // date in
+//        String fileData = storage.readFile();
+//        assert fileData.length() > 0 : "There is no task or deadline or meeting in the list!!";
+//        String [] dataArray = fileData.split("(");
+//
+//        SimpleDateFormat formatter = new SimpleDateFormat("E, MMM d yyyy");
+//        Date date1 = formatter.parse(date);
+//        // Retrieve All task
+//        for (int i = 0; i < taskList.size(); i++) {
+//           if(taskList.get(i).getDate().equals(date1)){
+//               matchDateTaskList.add(taskList.get(i));
+//           }
+//        }
+//        return matchDateTaskList;
+//    }
+
+
+    //
+//            case "view":
+//                ArrayList<Task> matchArray = new ArrayList<Task>();
+//                matchArray = viewSchedule(taskEntered,taskList);
+//                for(int i = 0 ; i < matchArray.size() ; i++){
+//                    System.out.println(matchArray.get(i).toString());
+//                }
+
+    private Task searchTask(ArrayList<Task> tasksList, String searchQuery) {
+        assert tasksList.size() > 0 : "There is no task in the list now ";
+        for (int i = 0; i < tasksList.size(); i++) {
+            if (tasksList.get(i).getDescription().contains(searchQuery)) {
+                return tasksList.get(i);
+            }
+        }
+        return null;
+    }
 
 }

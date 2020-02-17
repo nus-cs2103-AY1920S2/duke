@@ -18,4 +18,9 @@ public class Deadline extends Task {
     public String toString() {
         return "[D][" + super.getStatusIcon() + "] " + super.getDescription() + "(" + by + ")";
     }
+
+    @Override
+    public String getDate(){
+        return this.by;
+    }
 }

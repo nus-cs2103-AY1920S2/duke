@@ -7,6 +7,7 @@ public class Task {
      */
     private String description;
     private boolean isDone;
+    private String tag;
 
     public Task() {
     }
@@ -14,6 +15,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = "";
     }
 
     /**
@@ -41,10 +43,18 @@ public class Task {
         return (isDone ? "✓" : "✗");
     }
 
+    public String getDate(){
+        return "there is no date in task ";
+    }
+
+    public void setTag(String tag){
+        this.tag = "#" + tag;
+    }
 
     public boolean getDoneStatus(){
         return isDone;
     }
+
 
     /**
      * this method return the string of the task description and status
@@ -52,6 +62,6 @@ public class Task {
      * @return params statusIcon and description
      */
     public String toString() {
-        return "[T][" + this.getStatusIcon() + "] " + this.getDescription();
+        return "[T][" + this.getStatusIcon() + "] " + this.getDescription() + "  tag:"+this.tag;
     }
 }
