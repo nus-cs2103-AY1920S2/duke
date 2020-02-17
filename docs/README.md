@@ -8,49 +8,49 @@ Be charmed by the cute Duke and enjoy the voice acting!
 
 ## Usage
 
-alias <old> <new>
--- Changes the name of a command.
+### alias <old> <new>
+* Changes the name of a command.
 
-todo <name>
--- Adds a todo to your task list.
+### todo <name>
+* Adds a todo to your task list.
 
-deadline <name> /by <time>
--- Adds a deadline to your task list.
+### deadline <name> /by <time>
+* Adds a deadline to your task list.
 
-event <name> /at <time>
- -- Adds a event to your task list.
+### event <name> /at <time>
+* Adds a event to your task list.
 
-list
--- Displays your task list.
+### list
+* Displays your task list.
 
-find <query>
--- Finds a task which has <query> as a substring of the task's name.
+### find <query>
+* Finds a task which has <query> as a substring of the task's name.
 
-done <task index>
--- Marks the task as done.
+### done <task index>
+* Marks the task as done.
 
-delete <task index>
--- Deletes the task.
+### delete <task index>
+* Deletes the task.
 
-reschedule <task index> <time>
--- Reschedules the task.
+### reschedule <task index> <time>
+* Reschedules the task.
 
-add_contact <name> <number>
--- Adds a new contact.
+### add_contact <name> <number>
+* Adds a new contact.
 
-contacts
--- Displays your contact list.
+### contacts
+* Displays your contact list.
 
-delete_contact <task index>
--- Deletes the contact.
+### delete_contact <task index>
+* Deletes the contact.
 
-bye
--- Exits this application.
+### bye
+* Exits this application.
 
-reset
--- The forbidden Command. Please never use it... Duke'll forget everything.
+### reset
+* The forbidden Command. Please never use it... Duke'll forget everything.
 
-#Acknowledgements
+## Acknowledgements
 
 **Resources**
 
