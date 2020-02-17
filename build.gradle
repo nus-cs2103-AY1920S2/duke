@@ -10,18 +10,34 @@ buildscript {
 
 plugins {
     id 'java'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 dependencies {
+    String javaFxVersion = '11'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
     testCompile "org.mockito:mockito-core:2.+"
     implementation 'junit:junit:4.12'
     testCompile 'org.powermock:powermock-module-junit4:2.0.2'
     testCompile 'org.powermock:powermock-api-mockito2:2.0.2'
+
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'linux'
 }
 
 checkstyle {
@@ -42,11 +58,6 @@ version '0.1.0'
 repositories {
     jcenter()
     mavenCentral()
-}
-
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.media' ]
 }
 
 mainClassName = "dukebot.Launcher"
