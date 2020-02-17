@@ -1,7 +1,7 @@
 # Cathulhu Planner User Guide
 Cathulhu Planner is a task manager based off the Duke Project https://github.com/nus-cs2103-AY1920S2/duke.
 This planner offers better efficiency for users who prefer using a Command Line Interface (CLI). The simplistic gui design undoubtedly attracts all who loves Cathulhu and shoebills. 
-[Image of Cathulhu Planner UI](./UI.png)
+[Image of Cathulhu Planner UI](./Ui.png)
 
 ## Features 
 
