@@ -13,11 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TaskListTest {
 
     private TaskList taskList;
-    private List<String> list;
 
     @BeforeEach
     void init() {
-        list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("T | O | borrow book");
         list.add("D | X | return book | 2000-01-02");
         list.add("E | O | project meeting | 2001-02-03");
