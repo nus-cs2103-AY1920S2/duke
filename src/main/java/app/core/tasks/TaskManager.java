@@ -56,6 +56,12 @@ public class TaskManager {
     }
 
     private String add(Task task) throws StorageFileException {
+        for (Task t : this.taskList) {
+            if (task.equals(t)) {
+                return "This task is duplicated!";
+            }
+        }
+
         this.taskList.add(task);
         this.storageManager.save(this.taskList);
         return String.format("Got it. I've added this task:\n"
