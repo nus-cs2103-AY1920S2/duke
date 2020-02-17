@@ -95,7 +95,7 @@ public class Storage {
         File file = new File(filePath);
         FileWriter fileWriter = new FileWriter(file, false);
         for (int i = 1; i <= list.getArraySize(); i++) {
-            fileWriter.write(list.getTask(i).toString());
+            fileWriter.write(list.getTask(i).toString() + "\n");
         }
         fileWriter.close();
     }
