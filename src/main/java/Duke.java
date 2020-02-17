@@ -56,6 +56,7 @@ public class Duke {
     }
 
     public boolean getIsExit() {
+
         return isExit;
     }
 

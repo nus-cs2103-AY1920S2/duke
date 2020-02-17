@@ -33,6 +33,7 @@ public class Main extends Application {
     }
 
     public static void end() {
+
         stageCopy.close();
     }
 
