@@ -24,7 +24,9 @@ public class Event extends Task {
         return this.done;
     }
 
-    public String getClassName() { return "event"; }
+    public String getClassName() {
+        return "event";
+    }
 
     /**
      * Converts Event into a String to be saved to file.
