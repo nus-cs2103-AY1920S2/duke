@@ -1,22 +1,22 @@
 package duke;
 
 /**
- * The Lister Class parses commands and references TaskList and Storage Classes to store and retrieve Tasks.
+ * The Parser Class parses commands and references TaskList and Storage Classes to store and retrieve Tasks.
  *
  * @author qiujingying
  * @version 1.0
  */
-public class Lister {
+public class Parser {
     private TaskList taskList;
     private Storage storage;
     private static String HELP_MESSAGE = "Type 'help' for the commands that I can process!";
 
     /**
-     * Creates a Lister object to reference to TaskList and Storage objects.
+     * Creates a Parser object to reference to TaskList and Storage objects.
      * @param tasks initial TaskList stores Tasks
      * @param storage initial storage with filepath to store data
      */
-    public Lister(TaskList tasks, Storage storage) {
+    public Parser(TaskList tasks, Storage storage) {
         this.taskList = tasks;
         this.storage = storage;
     }
@@ -90,13 +90,14 @@ public class Lister {
     }
 
     private StringBuilder help() {
-        String COMMAND_GUIDE = "'list' - to list all tasks stored\n" +
-                "'delete' [index] - to delete the task of the particular index from the storage\n" +
-                "'done' [index] -  to mark the task of the particular index as done\n" +
-                "'todo' [name of todo] - adds a todo to storage" +
-                "'deadline' [name of deadline] /by [date of deadline in the format of DD/MM/YYY HHMM] - adds a deadline to storage\n" +
-                "'event' [name of event] /by [date of event in the format of DD/MM/YYY HHMM] - adds an event to storage\n" +
-                "'find' [name of task] - returns all the tasks with the particular name";
+        String COMMAND_GUIDE = "Hello! Here are the commands that I can understand:\n" +
+                "\u2022 'list' - to list all tasks stored\n" +
+                "\u2022 'delete' [index] - to delete the task of the particular index from the storage\n" +
+                "\u2022 'done' [index] -  to mark the task of the particular index as done\n" +
+                "\u2022 'todo' [name of todo] - adds a todo to storage\n" +
+                "\u2022 'deadline' [name of deadline] /by [YYYY-MM-DD HHMM] - adds a deadline to storage\n" +
+                "\u2022 'event' [name of event] /by [YYYY-MM-DD HHMM-HHMM] - adds an event to storage\n" +
+                "\u2022 'find' [name of task] - returns all the tasks with the particular name";
         StringBuilder sb = new StringBuilder(COMMAND_GUIDE);
         return sb;
     }

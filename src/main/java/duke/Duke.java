@@ -34,7 +34,7 @@ public class Duke {
     }
 
     public String run(String command) {
-        return ui.echo(tasks, storage, command);
+        return ui.startConversation(tasks, storage, command);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        Duke eevee = new Duke("data/duke.txt");
-        return eevee.run(input);
+        Duke eevee = new Duke("duke.txt");
+        return eevee.run(input.toLowerCase());
     }
 }

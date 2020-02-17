@@ -11,7 +11,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     protected String time;
-    protected LocalDateTime ldt;
+    protected LocalDateTime startTime;
+    protected LocalDateTime endTime;
     private TaskType type = TaskType.EVENT;
 
     /**
@@ -22,8 +23,10 @@ public class Event extends Task {
     public Event(String description, String time) {
         super(description, time);
         this.time = time;
-        TimeParser tp = new TimeParser(time);
-        ldt = tp.getTime();
+        String startTimeString = time.substring(0, 15);
+        String endTimeString = time.substring(0, 11) + time.substring(16, 20);
+        startTime = new TimeParser(startTimeString).getTime();
+        endTime = new TimeParser(endTimeString).getTime();
     }
 
     /**
@@ -36,7 +39,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + ldt.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
+        return "[E]" + super.toString() + " (at: " + startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"))
+                + " till " + endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
     }
 
 }
