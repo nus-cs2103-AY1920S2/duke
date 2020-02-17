@@ -237,3 +237,14 @@ Example of usage:
 Expected outcome:
 
 ![Terminate Application](exit.png)
+
+## Acknowledgements
+GUI was done using the
+[JavaFX Tutorial](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md)
+done by [Jeffry Lum](https://github.com/j-lum)
+
+User icon image obtained from
+https://www.hiclipart.com/free-transparent-background-png-clipart-dlzoi/
+
+Mr Robot icon: By USA Network - USA Network, Public Domain,
+https://commons.wikimedia.org/w/index.php?curid=49685837
