@@ -46,21 +46,21 @@ features such as add and delete.
     
     find [keyword]
 
-###4. List task
+### 4. List task
 
 - Lists all tasks that the bot is managing
 
 
     list
     
-###5. Mark task as done
+### 5. Mark task as done
 
 - Updates the status of a task at specified index from undone to done
 
 
      done [index of task]
 
-###6. Exit
+### 6. Exit
 
 - Terminates the application
 
