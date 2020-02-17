@@ -1,5 +1,20 @@
 # User Guide
 
+## Navigation
+1. [Introduction]
+2. [Instructions]
+3. [Features]
+  3.1 [Overview]
+  3.2 [Task List]
+  3.2 [Storage]
+4. [Usage]
+  4.1 [`bye`]
+  4.2 [`todo`]
+  4.3 [`deadline`]
+  4.4 [`event`]
+  4.5 [`list`]
+  4.6 [`find`]
+
 ## Introduction
 
 Project Duke is a personalised chat bot for a user
@@ -41,7 +56,7 @@ Expected outcome:
 
 ``
 
-### `todo [TaskAction]` 
+### `todo` [TaskAction]
  
 Adds a todo task into the list.
 
@@ -55,7 +70,7 @@ Expected outcome:
  [T][x] wake up
 Now you have 1 tasks in the list.`
 
-### `deadline [TaskAction] /by [Date Time]`
+### `deadline` [TaskAction] /by [Date Time]
 
 Adds a task representing a deadline to the list with a deadline specified
 
@@ -69,7 +84,7 @@ Expected outcome:
  [D][x] return book (by: Feb 20 2020 08:20PM)
 Now you have 2 tasks in the list.`
 
-### `event [TaskAction] /at [Date Time]`
+### `event` [TaskAction] /at [Date Time]
 
 Adds a task representing an event to the list with the time specified
 
@@ -98,7 +113,7 @@ Expected outcome:
 2. [D][x] return book (by: Feb 20 2020 08:20PM)
 3. [E][x] book sharing (at: Feb 20 2020 08:40PM)`
 
-### `find [TaskAction]`
+### `find` [TaskAction]
 
 Finds all tasks whose TaskAction contains the keyword specified.
 
