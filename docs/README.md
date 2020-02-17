@@ -40,6 +40,8 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
+![todo pic](todo.png)
+
 ## `event` - Adds an event task into the task list.
 
 By keying in the `event` command along with the description of task, followed by an `/at` and the date of the event, one 
@@ -56,6 +58,8 @@ Got it. I've added this task:
  [E][Not Done] project meeting (at: Apr 26 2020)
 Now you have 2 tasks in the list.
 ```
+
+![event pic](event.png)
 
 ## `deadline` - Adds a deadline task into the task list.
 
@@ -74,6 +78,8 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ```
 
+![deadline pic](deadline.png)
+
 ## `list` - Displays all the tasks in the task list.
 
 By keying in the `list` command, one can see all the tasks in the task list.
@@ -91,20 +97,7 @@ Here are the tasks in your list:
 3.[D][Not Done] return book (by: Apr 26 2020)
 ```
 
-##`delete` - Removes a task from the list.
-By keying in the `delete` command along with the index of the task, one can remove a todo task from the task list.
-
-Example of usage: 
-
-`delete 1`
-
-Expected outcome:
-
-```
-Noted. I've removed this task:
- [T][Not Done] go for a run
-Now you have 2 tasks in the list.
-```
+![list pic](list.png)
 
 ##`delete` - Removes a task from the list.
 By keying in the `delete` command along with the index of the task, one can remove a task from the task list.
@@ -121,6 +114,8 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 ```
 
+![delete pic](delete.png)
+
 ##`done` - Marks a task as done in the task list.
 
 By keying the command `done` followed by the index of the task, one can mark the task as done.
@@ -136,6 +131,8 @@ Nice! I've marked this task as done:
  [E][Done] project meeting (at: Apr 26 2020)
 ```
 
+![done pic](done.png)
+
 ##`find` - Displays all the tasks with the keyword provided in the task list.
 
 By keying the command `find` followed by the keyword, one can see the list of tasks with that keyword.
@@ -150,6 +147,8 @@ Expected outcome:
 Here are the tasks in your list:
  1.[D][Not Done] return book (by: Apr 26 2020)
 ```
+
+![find pic](find.png)
 
 ##`bye` - Terminates the program.
 
@@ -202,5 +201,5 @@ Here are the available commands:
 7) bye: To terminate the program, enter the bye command.
    For example: bye 
 ```
-
+![help pic](help.png)
 
