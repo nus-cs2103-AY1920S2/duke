@@ -2,6 +2,7 @@ package duke;
 
 import java.util.Scanner;
 import java.io.File;
+import java.lang.StringBuilder;
 import java.io.IOException;
 
 import duke.task.TaskList;
@@ -78,7 +79,7 @@ public class Duke {
                     throw new InvalidCommandException();
                 }
             } catch (InvalidCommandException e) {
-                Ui.printLines("Sorry, invalid command. Try again with the following:\n     todo, deadline, event");
+                Ui.printLines("Sorry, invalid command. Try again with the following:\ntodo, deadline, event");
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ui.printLines("Sorry, invalid syntax or command. Please try again!");
             }
@@ -88,6 +89,43 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        StringBuilder response = new StringBuilder();
+        String result = "";
+
+            try {
+                String[] split = input.split(" ");
+                String command = split[0];
+
+                if (parser.parseCommand(command, "list")) {
+                    result = tasks.toString();
+                } else if (parser.parseCommand(command, "bye")) {
+                    result = ui.printGoodbye();
+                } else if (parser.parseCommand(command, "delete")) {
+                    int idx = Integer.parseInt(split[1]);
+                    result = tasks.deleteTask(idx - 1);
+                    storage.deleteTask(idx);
+                } else if (parser.parseCommand(command, "done")) {
+                    int idx = Integer.parseInt(split[1]);
+                    result = tasks.doTask(idx - 1);
+                    storage.doTask(idx);
+                } else if (parser.parseCommand(command, "find")) {
+                    result = tasks.findKeyword(input);
+                } else if (parser.parseCommand(command, "todo")) {
+                    result = tasks.manageTodo(storage, input, fileName);
+                } else if (parser.parseCommand(command, "event")) {
+                    result = tasks.manageEvent(storage, input, fileName);
+                } else if (parser.parseCommand(command, "deadline")) {
+                    result = tasks.manageDeadline(storage, input, fileName);
+                } else {
+                    throw new InvalidCommandException();
+                }
+            } catch (InvalidCommandException e) {
+                result = "Sorry, invalid command. Try again with the following:\ntodo, deadline, event";
+            } catch (ArrayIndexOutOfBoundsException e) {
+                result = "Sorry, invalid syntax or command. Please try again!";
+            }
+
+        response.append(result);
+        return response.toString();
     }
 }
