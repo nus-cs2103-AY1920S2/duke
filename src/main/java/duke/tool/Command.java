@@ -118,7 +118,8 @@ public class Command {
                 }
                 return outputString.toString();
             case "help":
-                outputString.append(ui.print("List of available commands: todo, event, deadline, list, sort, find, done, delete, bye"));
+                outputString.append(ui.print("List of available commands: todo, event, deadline, list, sort, find, done, delete, bye\n\n" +
+                        "Detailed user guide is at: https://shengxue97.github.io/duke/"));
                 return outputString.toString();
             case "todo":
                 if (arguments.equals("todo")){
