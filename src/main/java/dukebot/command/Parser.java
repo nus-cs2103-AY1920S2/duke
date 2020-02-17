@@ -133,6 +133,8 @@ public class Parser {
             case "Master":
             case "master":
                 return new UiOnlyCommand(LineName.SAY_DUKE);
+            case "credits":
+                return new UiOnlyCommand(LineName.CREDITS);
             default:
                 break;
             }

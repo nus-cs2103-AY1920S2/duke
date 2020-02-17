@@ -124,6 +124,7 @@ public class Ui {
                     + "contacts \n-- Displays your contact list.\n\n"
                     + "delete_contact <task index>\n-- Deletes the contact.\n\n"
                     + "bye\n-- Exits this application.\n\n"
+                    + "credits\n-- See credits for the resources which went into Duke!\n\n"
                     + "reset\n-- The forbidden Command. Please never use it... Duke'll forget everything."
             );
             break;
@@ -271,6 +272,17 @@ public class Ui {
             dukeExpression = DukeExpression.SAD;
             dukeSays("It was nice knowing Master... Duke'll go somewhere far away now...");
             break;
+        case CREDITS:
+            dukeVoice = DukeVoice.LAUGHTER;
+            dukeExpression = DukeExpression.BLUSH;
+            dukeSays("Duke would like to thank the many people who made Duke possible!\n");
+            dukeSays( "Author:\nhttps://github.com/gerhean/duke\n\n"
+                    + "Background:\nhttps://wallpapersafari.com/w/SQfFKk\n\n"
+                    + "Duke Images:\nhttps://liah0227.itch.io/female-student-1\n\n"
+                    + "User Image:\nhttps://www.uihere.com/free-cliparts/koyomi-araragi-counter-"
+                    + "strike-nexon-zombies-monogatari-series-anime-others-6828824\n\n"
+                    + "Duke Voice:\nhttps://cicifyre.itch.io/free-voice-clips-pack-bright-female");
+            break;
         case ERROR_PLACEHOLDER:
             // Purely for testing, should never be called in deployment
             // Fallthrough
@@ -319,7 +331,7 @@ public class Ui {
      * Prints message based on LineName with task information.
      *
      * @param lineName Line to say.
-     * @param task Task to use.
+     * @param task     Task to use.
      */
     public void sayLineWithTask(LineNameWithTask lineName, Task task) {
         switch (lineName) {
@@ -372,7 +384,7 @@ public class Ui {
      * Prints message based on LineName with contact information.
      *
      * @param lineName Line to say.
-     * @param contact Contact to use.
+     * @param contact  Contact to use.
      */
     public void sayLineWithContact(LineNameWithContact lineName, ContactDetail contact) {
         switch (lineName) {
