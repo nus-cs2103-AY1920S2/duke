@@ -3,9 +3,8 @@ Welcome, this is an application that is made to help you store and manage your s
 ## Table Of Content 
 * Introduction
 * How to use
-* Help
 
-### Introduction
+## Introduction
 This is a note taker application. The data is stored automatically when you entered a command into the application. 
 It has three main features which are: 
 
