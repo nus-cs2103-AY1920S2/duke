@@ -19,7 +19,7 @@ It has three main features which are:
 
 ## How to use
 
-![User Interface](../../../docs/Ui.png)
+![User Interface](https://github.com/EdmondOng/duke/tree/master/docs/Ui.png)
 
 There is 
 
