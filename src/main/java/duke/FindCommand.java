@@ -8,8 +8,8 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printString(tasks.findAndPrint(searchPhrase));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.find(searchPhrase);
     }
 
     @Override

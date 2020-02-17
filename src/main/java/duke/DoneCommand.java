@@ -8,9 +8,9 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         //doneIndex is 0-indexed
-        ui.printString(tasks.done(doneIndex));
+        return tasks.done(doneIndex);
     }
 
     @Override

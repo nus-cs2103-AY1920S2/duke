@@ -79,7 +79,7 @@ public class TaskList {
      * @param searchPhrase string to be searched in the task's description.
      * @return the list of tasks that contain the search phrase, asa formatted string to be printed
      */
-    public String findAndPrint(String searchPhrase) {
+    public String find(String searchPhrase) {
         // filter tasks on description
         List<Task> foundTasks = this.tasks.stream()
                 .filter(task -> task.getDescription().toLowerCase().contains(searchPhrase.toLowerCase()))

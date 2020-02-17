@@ -8,8 +8,8 @@ class AddCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printString(tasks.add(toAdd));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.add(toAdd);
     }
 
     @Override

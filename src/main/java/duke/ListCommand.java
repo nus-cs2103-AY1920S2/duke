@@ -2,8 +2,8 @@ package duke;
 
 public class ListCommand implements Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printString(tasks.list());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.list();
     }
 
     @Override

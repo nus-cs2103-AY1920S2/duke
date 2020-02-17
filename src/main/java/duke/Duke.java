@@ -1,5 +1,18 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -11,58 +24,51 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    private boolean isExit = false;
+
     /**
-     * Constructor for duke.Duke
+     * Constructor for Duke.
      * @param filePath provide a hardcoded directory path to the text file to be used as a database
      */
     public Duke(String filePath) {
-        ui = new duke.Ui();
-        storage = new duke.Storage(filePath);
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            tasks = new duke.TaskList(storage.load());
+            tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             System.out.println("file not found exception when loading database");
             ui.showLoadingError();
-            tasks = new duke.TaskList();
+            tasks = new TaskList();
         }
     }
 
-    /**
-     * Runs the todo list.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                duke.Command c = duke.Parser.parse(fullCommand); //throws duke.DukeException
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (duke.DukeException e) {
-                ui.showError(e.getErrorMessage());
-            } finally {
-                ui.showLine();
-            }
+    //package-private
+    String getResponse(String command) {
+        String response;
+
+        try {
+            Command c = Parser.parse(command);
+            response = c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+        } catch (DukeException e) {
+            e.printStackTrace();
+            return e.getErrorMessage();
         }
 
-        // saving tasks
+        //seems inefficient to write to file after every command
+        //TODO: implement saving only upon exit
         try {
-            ui.showSavingTasks();
-            ui.showLine();
             storage.save(tasks);
         } catch (IOException e) {
             System.out.println("error saving tasks");
             e.printStackTrace();
+            return e.getMessage();
         }
+
+        return response;
     }
 
-    /**
-     * Entry point for the JVM.
-     * @param args default main method signature
-     */
-    public static void main(String[] args) {
-        new Duke("C:\\Users\\Pang Jia Da\\Desktop\\CS2103\\duke\\data\\duke.txt").run();
+    public boolean isExit() {
+        return isExit;
     }
 }
