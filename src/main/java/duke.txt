@@ -1,3 +1,3 @@
-T/Not Done/swim
-E/Not Done/IHG /2020-02-02
-D/Not Done/IP /2020-02-02
+T/N/swim
+E/Y/IHG /2020-02-02
+D/N/IP /2020-02-02
