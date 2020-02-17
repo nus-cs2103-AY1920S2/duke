@@ -25,18 +25,27 @@ public class Parser {
      * @throws DukeInvalidCommandException If the command is not valid.
      */
     public String checkCommand(String command) throws DukeInvalidCommandException {
-        if (command.split(" ").length == 1) {
-            String wrongCmd = command.split(" ")[0];
-            if (wrongCmd.equals("todo") || wrongCmd.equals("deadline") || wrongCmd.equals("event")) {
-                throw new DukeInvalidCommandException(":( OOPS!!! The description of a " + wrongCmd
-                        + " cannot be " + "empty.");
-            } else {
-                throw new DukeInvalidCommandException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
+        if (command.split(" ").length != 1) {
+            return getCommand(command);
         }
-        return command.split(" ")[0];
+
+        String wrongCmd = getCommand(command);
+        if (wrongCmd.equals("todo") || wrongCmd.equals("deadline") || wrongCmd.equals("event")) {
+            throw new DukeInvalidCommandException(":( OOPS!!! The description of a " + wrongCmd
+                    + " cannot be " + "empty.");
+        }
+        throw new DukeInvalidCommandException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+    /**
+     * Extracts the command from the string entered by the client.
+     *
+     * @param command The String containing the command entered by the client.
+     * @return The String, regarding the command entered.
+     */
+    private String getCommand(String command) {
+        return command.split(" ")[0];
+    }
 
     /**
      * Trims the command of leading and trailing spaces.
@@ -49,5 +58,6 @@ public class Parser {
     }
 
 }
+
 
 

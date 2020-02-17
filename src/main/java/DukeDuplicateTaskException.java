@@ -24,3 +24,4 @@ public class DukeDuplicateTaskException extends DukeException {
     }
 
 }
+

@@ -23,6 +23,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a DialogBox instance.
+     *
+     * @param text The message that is being displayed.
+     * @param img The image of the sender.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -38,7 +44,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the ImageView is on the left and text is on the right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -47,6 +53,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box when the user wants to send a command.
+     *
+     * @param text The command message that the user wants to send to Duke.
+     * @param img The image of the user.
+     * @return The DialogBox instance.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
@@ -55,7 +68,7 @@ public class DialogBox extends HBox {
      * Creates a dialog box when Duke wants to send a message.
      *
      * @param text The message that Duke wants to show.
-     * @param img  The Duke image.
+     * @param img The Duke image.
      * @return The DialogBox instance.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
@@ -63,4 +76,5 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
 }

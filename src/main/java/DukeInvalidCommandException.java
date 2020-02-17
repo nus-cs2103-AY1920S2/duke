@@ -24,3 +24,4 @@ public class DukeInvalidCommandException extends DukeException {
     }
 
 }
+

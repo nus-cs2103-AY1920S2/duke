@@ -31,37 +31,31 @@ public class Storage {
      */
     public List<Task> loadFile() throws IOException {
         tasks = new ArrayList<>();
-        Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
-        if (!Files.exists(path)) {
-            Files.createDirectories(path.getParent());
-            Files.createFile(path);
-        }
-        File file = new File(path.toString());
+        File file = getFile();
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
-            String[] task = sc.nextLine().split("\\|");
-            switch (task[0]) {
+            String[] taskContent = sc.nextLine().split("\\|");
+            String taskType = taskContent[0];
+            String status = taskContent[1];
+            String description = taskContent[2];
+            switch (taskType) {
             case "T":
-                Task toDo = new ToDo(task[2]);
-                if (task[1].equals("true")) {
+                Task toDo = new ToDo(description);
+                if (status.equals("true")) {
                     toDo.markAsDone();
                 }
                 tasks.add(toDo);
                 break;
             case "D":
-                Task deadLine = new Deadline(task[2],
-                        LocalDate.parse(task[3].substring(3, 13)),
-                        task[3].substring(14));
-                if (task[1].equals("true")) {
+                Task deadLine = new Deadline(description, getDate(taskContent[3]), getTime(taskContent[3]));
+                if (status.equals("true")) {
                     deadLine.markAsDone();
                 }
                 tasks.add(deadLine);
                 break;
             case "E":
-                Task event = new Event(task[2],
-                        LocalDate.parse(task[3].substring(3, 13)),
-                        task[3].substring(14));
-                if (task[1].equals("true")) {
+                Task event = new Event(description, getDate(taskContent[3]), getTime(taskContent[3]));
+                if (status.equals("true")) {
                     event.markAsDone();
                 }
                 tasks.add(event);
@@ -74,18 +68,33 @@ public class Storage {
     }
 
     /**
+     * Extracts the time of the task from the given string.
+     *
+     * @param s The string provided.
+     * @return The String, i.e. the time of the event or deadline task provided in the string.
+     */
+    private String getTime(String s) {
+        return s.substring(14);
+    }
+
+    /**
+     * Extracts the date of the task from the given string.
+     *
+     * @param s The string provided.
+     * @return LocalDate, i.e. the date of the event or deadline task provided in the string.
+     */
+    private LocalDate getDate(String s) {
+        return LocalDate.parse(s.substring(3, 13));
+    }
+
+    /**
      * Saves the List of tasks to the file.
      *
      * @param tasks The list of tasks.
      * @throws IOException If an I/O error occurred.
      */
     public void saveFile(List<Task> tasks) throws IOException {
-        Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
-        if (!Files.exists(path)) {
-            Files.createDirectories(path.getParent());
-            Files.createFile(path);
-        }
-        File file = new File(path.toString());
+        File file = getFile();
         FileWriter writer = new FileWriter(file);
         for (Task task : tasks) {
             if (task instanceof ToDo) {
@@ -100,4 +109,22 @@ public class Storage {
         }
         writer.close();
     }
+
+    /**
+     * Creates a file to store Duke's data if the file does not exist,
+     * otherwise returns the existing file containing Duke's data.
+     *
+     * @return File, the file containing Duke's data.
+     * @throws IOException If an I/O error occurred.
+     */
+    private File getFile() throws IOException {
+        Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+        if (!Files.exists(path)) {
+            Files.createDirectories(path.getParent());
+            Files.createFile(path);
+        }
+        return new File(path.toString());
+    }
+
 }
+

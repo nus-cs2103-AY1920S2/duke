@@ -23,28 +23,6 @@ public class Ui {
     }
 
     /**
-     * Prints a horizontal line.
-     */
-    private void printLine() {
-        print("____________________________________________________");
-    }
-
-    /**
-     * Displays a greeting, separated by horizontal header lines.
-     */
-    public void greet() {
-        printLine();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        print("Hello from\n" + logo);
-        print("What can I do for you?");
-        printLine();
-    }
-
-    /**
      * Prints all the tasks stored in the given list.
      *
      * @param tasks The list containing all the tasks.
@@ -59,7 +37,6 @@ public class Ui {
         for (int i = 1; i <= tasks.size(); i++) {
             print(i + "." + tasks.get(i - 1));
         }
-        printLine();
     }
 
     /**
@@ -77,7 +54,6 @@ public class Ui {
         for (int i = 1; i <= tasks.size(); i++) {
             print(i + "." + tasks.get(i - 1));
         }
-        printLine();
     }
 
     /**
@@ -99,12 +75,20 @@ public class Ui {
     }
 
     /**
+     * Displays a greeting by Duke.
+     */
+    public String greet() {
+        return "Hello from Duke\nWhat can I do for you?\n";
+
+    }
+
+    /**
      * Displays the goodbye message.
      * followed by a horizontal line.
      */
     public void printBye() {
         print("Bye. Hope to see you again soon!");
-        printLine();
         System.exit(0);
     }
+
 }

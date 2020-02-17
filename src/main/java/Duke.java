@@ -25,9 +25,6 @@ public class Duke {
         storage = new Storage();
     }
 
-
-    private Boolean haveGreeted = false;
-
     /**
      * Function to generate a response to user input.
      *
@@ -46,10 +43,6 @@ public class Duke {
         System.setOut(ps);
 
         tasks = storage.loadFile();
-        if (!haveGreeted) {
-            uI.greet();
-            haveGreeted = true;
-        }
 
         if (input.contains("bye")) {
             uI.printBye();
@@ -104,5 +97,5 @@ public class Duke {
         }
         storage.saveFile(tasks);
     }
-}
 
+}

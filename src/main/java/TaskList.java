@@ -23,10 +23,6 @@ public class TaskList {
         System.out.println(s);
     }
 
-    private void printLine() {
-        print("____________________________________________________");
-    }
-
     /**
      * Deletes the task from the tasks list,
      * then return the updated list.
@@ -45,7 +41,6 @@ public class TaskList {
         print("  " + tasks.get(i));
         tasks.remove(tasks.get(i));
         print("Now you have " + tasks.size() + " task(s) in the list.");
-        printLine();
         return tasks;
     }
 
@@ -91,19 +86,16 @@ public class TaskList {
             task = new ToDo(command.trim());
             break;
         case "event":
-            task = new Event(command.split("/at ")[0].trim(),
-                    LocalDate.parse(command.split("/at ")[1].trim().split(" ")[0]),
-                    command.split("/at ")[1].split(" ")[1]);
+            task = new Event(getDescription(command, "/at "), getDate(command, "/at "),
+                    getTime(command, "/at "));
             break;
         case "deadline":
-            task = new Deadline(command.split("/by ")[0].trim(),
-                    LocalDate.parse(command.split("/by ")[1].trim().split(" ")[0]),
-                    command.split("/by ")[1].split(" ")[1].trim());
+            task = new Deadline(getDescription(command, "/by "), getDate(command, "/by "),
+                    getTime(command, "/by "));
             break;
         default:
             throw new DukeInvalidCommandException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        assert task != null : "task can't be null"; //redundant?
 
         if (tasks.contains(task)) {
             throw new DukeDuplicateTaskException("OOPS!!! This task already exists in the list!");
@@ -113,8 +105,40 @@ public class TaskList {
         print("Got it. I've added this task:");
         print("  " + task);
         print("Now you have " + tasks.size() + " task(s) in the list.");
-        printLine();
         return tasks;
+    }
+
+    /**
+     * Extracts the time of the task from the string entered by the client.
+     *
+     * @param command The string entered by the client.
+     * @param s The String to represent an event or a deadline task.
+     * @return The String, i.e. the time of the event or deadline task entered by the client.
+     */
+    private String getTime(String command, String s) {
+        return command.split(s)[1].split(" ")[1];
+    }
+
+    /**
+     * Extracts the description of the task from the string entered by the client.
+     *
+     * @param command The string entered by the client.
+     * @param s The String to represent an event or a deadline task.
+     * @return The String, i.e. the description of the event or deadline task entered by the client.
+     */
+    private String getDescription(String command, String s) {
+        return command.split(s)[0].trim();
+    }
+
+    /**
+     * Extracts the date of the task from the string entered by the client.
+     *
+     * @param command The string entered by the client.
+     * @param s The String to represent an event or a deadline task.
+     * @return LocalDate, i.e. the date of the event or deadline task entered by the client.
+     */
+    private LocalDate getDate(String command, String s) {
+        return LocalDate.parse(command.split(s)[1].trim().split(" ")[0]);
     }
 
     /**
@@ -134,8 +158,8 @@ public class TaskList {
         tasks.get(i).markAsDone();
         print("Nice! I've marked this task as done: ");
         print(tasks.get(i).toString());
-        printLine();
         return tasks;
     }
 
 }
+
