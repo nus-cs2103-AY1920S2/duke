@@ -36,6 +36,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
+
         UI.UIString = "";
         taskList = new TaskList();
         storage = new Storage("tasks.txt", taskList);

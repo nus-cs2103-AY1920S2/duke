@@ -1,0 +1,37 @@
+/*
+    Document   : controlStyle1
+*/
+
+.root{
+    -fx-font-size: 14pt;
+    -fx-font-family: "Tahoma";
+    -fx-base: #DFB951;
+    -fx-focus-color: #B6A678;
+}
+
+.button1{
+    -fx-text-fill: #006464;
+    -fx-background-color: #DFB951;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+}
+
+.button2{
+    -fx-text-fill: #c10000;
+    -fx-background-color: #DFB951;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+}
+
+.slider{
+    -fx-border-color: white;
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+    -fx-background-image: url('/images/mountains_snow.jpg');
+}

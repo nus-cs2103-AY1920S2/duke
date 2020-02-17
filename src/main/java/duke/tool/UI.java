@@ -17,7 +17,7 @@ public class UI {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello! I'm Snow\nWhat can I do for you?\n" + logo + "\n";
+        return "Hello! I'm Snow\nWhat can I do for you?\n" + "\n";
     }
 
 
