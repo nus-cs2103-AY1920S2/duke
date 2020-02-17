@@ -276,7 +276,7 @@ public class Ui {
             dukeVoice = DukeVoice.LAUGHTER;
             dukeExpression = DukeExpression.BLUSH;
             dukeSays("Duke would like to thank the many people who made Duke possible!\n");
-            dukeSays( "Author:\nhttps://github.com/gerhean/duke\n\n"
+            dukeSays("Author:\nhttps://github.com/gerhean/duke\n\n"
                     + "Background:\nhttps://wallpapersafari.com/w/SQfFKk\n\n"
                     + "Duke Images:\nhttps://liah0227.itch.io/female-student-1\n\n"
                     + "User Image:\nhttps://www.uihere.com/free-cliparts/koyomi-araragi-counter-"
