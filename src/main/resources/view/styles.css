@@ -1,0 +1,33 @@
+
+.background{
+      -fx-background-color: white, #ffccff;
+      -fx-background-image: url("resources/images/nezu_background_byDeunitato.jpg");
+       -fx-background-size: 100% 100%;
+}
+
+.chatBox{
+   -fx-border-style: solid;
+   -fx-border-width: 1px;
+}
+
+.chatBubCharVersion{
+    -fx-fill: #f0f8ff;
+}
+
+.label{
+  -fx-padding: 10;
+
+}
+
+/*Taken from http://fxexperience.com/2011/12/styling-fx-buttons-with-css/*/
+.round-red {
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+/*Taken from https://blog.e-zest.com/gradients-in-javafx-2/*/
+.linear-grad-repeat3{
+ -fx-background-color: linear-gradient(from 30% 30% to 23% 30%, repeat,  #ffccff 62%, white 88%);
+}
