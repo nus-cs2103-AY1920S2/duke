@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * The Parser program passes user input, date and time related to a task.
  *
- * @version 1.1
+ * @version 1.2
  * @since 17/2/2020
  */
 public class Parser {
@@ -45,10 +45,6 @@ public class Parser {
 
             if (splitInput.length < 2) {
 
-                outputArr[0] = "MissingTaskNumber";
-                outputArr[1] = "";
-                outputArr[2] = "";
-
                 throw new MissingTaskNumberError();
 
             } else {
@@ -61,10 +57,6 @@ public class Parser {
 
             String[] splitInput = input.split(" ");
             if (splitInput.length < 2) {
-
-                outputArr[0] = "MissingKeyWord";
-                outputArr[1] = "";
-                outputArr[2] = "";
 
                 throw new MissingKeywordError();
 
@@ -81,19 +73,14 @@ public class Parser {
 
         if (whiteSpaceIndex == -1) {
 
-            outputArr[0] = input;
             if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
 
-                outputArr[1] = "EmptyDescription";
-                outputArr[2] = "";
-
                 throw new EmptyDescriptionError(input);
+
             } else {
 
-                outputArr[1] = "InvalidInput";
-                outputArr[2] = "";
-
                 throw new InvalidInputError();
+
             }
 
         } else if (input.startsWith("todo")) {
@@ -103,10 +90,6 @@ public class Parser {
             outputArr[2] = "";
 
         } else if (index == -1) {
-
-            outputArr[0] = input.substring(0, whiteSpaceIndex);
-            outputArr[1] = "EmptyDate";
-            outputArr[2] = "";
 
             throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
 
@@ -118,39 +101,32 @@ public class Parser {
 
                 int indexBy = input.indexOf("/by ");
 
-                outputArr[0] = Task.Types.D.toString();
-
                 if (indexBy == -1) {
-                    outputArr[1] = "EmptyDate";
-                    outputArr[2] = "";
 
                     throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
 
                 } else {
 
+                    outputArr[0] = Task.Types.D.toString();
                     outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
                     outputArr[2] = input.substring(index + 4);
-
                 }
 
             } else {
 
                 assert input.startsWith("event") : "task type is not event";
-                outputArr[0] = Task.Types.E.toString();
 
                 if (indexAt == -1) {
 
-                    outputArr[1] = "EmptyDate";
-                    outputArr[2] = "";
-
                     throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
+
                 } else {
 
+                    outputArr[0] = Task.Types.E.toString();
                     outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
                     outputArr[2] = input.substring(index + 4);
                 }
             }
-
         }
 
         return outputArr;
