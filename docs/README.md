@@ -1,7 +1,7 @@
 # User Guide
 
 ## Description
-A **Personal Assistant ChatBot** to help for tracking various tasks.
+Duke is a **Personal Assistant ChatBot** to help for tracking various tasks.
 
 ![Duke Ui](Ui.png)
 
