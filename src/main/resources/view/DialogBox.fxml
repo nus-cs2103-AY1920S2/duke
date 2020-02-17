@@ -5,11 +5,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
 <fx:root alignment="CENTER_RIGHT" prefHeight="360.0" prefWidth="906.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" lineSpacing="1.2" prefHeight="340.0" prefWidth="696.0" style="-fx-border-width: 4px; -fx-border-color: #008ED8; -fx-border-style: dotted; -fx-border-radius: 20px; -fx-background-color: #D8FBF1;" text="Label" textOverrun="CLIP">
+        <Label fx:id="dialog" lineSpacing="1.2" prefHeight="340.0" prefWidth="696.0" style="-fx-border-width: 4px; -fx-border-color: #008ED8; -fx-border-style: dotted; -fx-border-radius: 20px; -fx-background-color: #D8FBF1;" text="Label">
         </Label>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-radius: 50%;">
          <children>
