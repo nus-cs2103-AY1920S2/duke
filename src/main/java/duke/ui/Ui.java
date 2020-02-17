@@ -40,6 +40,7 @@ public class Ui {
         Parser parser = new Parser();
 
         try {
+
             taskDescriptionArr = parser.parseUserInput(input);
             Command c;
 

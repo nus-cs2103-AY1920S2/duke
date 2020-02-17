@@ -12,7 +12,7 @@ public class Exceptions extends Exception {
 
     /**
      * Constructor.
-     * @param type refers to the type of Task.
+     * @param type refers to the string rep of type of Task.
      */
     public Exceptions(String type) {
 
@@ -22,7 +22,7 @@ public class Exceptions extends Exception {
 
 
     /**
-     * Gets the type of task with error.
+     * Gets the string rep type of task with error.
      *
      * @return type of task.
      */
@@ -39,6 +39,7 @@ public class Exceptions extends Exception {
      */
     @Override
     public String toString() {
+
         return this.toString();
     }
 }

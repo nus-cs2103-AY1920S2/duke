@@ -30,13 +30,13 @@ public class InvalidDateError extends Exceptions {
 
         if (issue.equals("Date")) {
 
-            if (type.equals("D")) {
+            if (type.equals("deadline")) {
 
                 return "Date should be after " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm"));
 
             } else {
 
-                assert type.equals("E") : "Wrong event type";
+                assert type.equals("event") : "Wrong event type";
 
                 return "Start date should be after " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm"))
                         + " and end date should be after start date";
@@ -45,13 +45,13 @@ public class InvalidDateError extends Exceptions {
 
         } else {
 
-            if (type.equals("D")) {
+            if (type.equals("deadline")) {
 
                 return "Date should be in d/MM/yyyy HH:mm format";
 
             } else {
 
-                assert type.equals("E") : "Wrong event type";
+                assert type.equals("event") : "Wrong event type";
 
                 return "Date should be in d/MM/yyyy HH:mm to /MM/yyyy HH:mm format";
 

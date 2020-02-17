@@ -31,7 +31,15 @@ public class Parser {
 
         String[] outputArr = new String[3];
 
-        if (input.equals("list") || input.equals("bye")) {
+         boolean isValidInput = checkValidInput(input);
+
+         if(!isValidInput) {
+
+             throw new InvalidInputError();
+
+         }
+
+         if (input.equals("list") || input.equals("bye")) {
 
             outputArr[0] = input;
             outputArr[1] = "";
@@ -67,21 +75,14 @@ public class Parser {
             }
         }
 
+
         int index = input.indexOf("/");
         int whiteSpaceIndex = input.indexOf(" ");
 
 
         if (whiteSpaceIndex == -1) {
 
-            if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
-
                 throw new EmptyDescriptionError(input);
-
-            } else {
-
-                throw new InvalidInputError();
-
-            }
 
         } else if (input.startsWith("todo")) {
 
@@ -163,7 +164,7 @@ public class Parser {
 
             } catch (Exception e) {
 
-                throw new InvalidDateError(type, "format");
+                throw new InvalidDateError("event", "format");
 
             }
 
@@ -171,7 +172,7 @@ public class Parser {
 
             if (!isValid) {
 
-                throw new InvalidDateError(type, "Date");
+                throw new InvalidDateError("event", "Date");
 
             }
 
@@ -184,7 +185,7 @@ public class Parser {
 
             } catch (Exception e) {
 
-                throw new InvalidDateError(type, "format");
+                throw new InvalidDateError("deadline", "format");
 
             }
 
@@ -192,7 +193,7 @@ public class Parser {
 
             if (!isValid) {
 
-                throw new InvalidDateError(type, "Date");
+                throw new InvalidDateError("deadline", "Date");
 
             }
 
@@ -202,6 +203,19 @@ public class Parser {
 
         return parsed;
 
+
+    }
+
+    boolean checkValidInput(String input) {
+
+        boolean isList = input.equals("list");
+        boolean isBye = input.equals("bye");
+        boolean isDone = input.startsWith("done");
+        boolean isDelete = input.startsWith("delete");
+        boolean isFind = input.startsWith("find");
+        boolean isEvent = input.startsWith("todo") || input.startsWith("event") || input.startsWith("deadline");
+
+        return isList || isBye || isDone || isDelete || isFind || isEvent;
 
     }
 
