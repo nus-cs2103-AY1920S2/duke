@@ -4,7 +4,8 @@ package duke.exceptions;
  * The DuplicateTask program is an error thrown when user inputs
  * an already existing task.
  *
- *
+ * @version 1.1
+ * @since 17/2/2020
  */
 public class DuplicateTaskError extends Exceptions {
 
