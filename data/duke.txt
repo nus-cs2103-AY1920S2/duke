@@ -1,3 +1,2 @@
-D|true|finish iP|by 2020-02-19 1800
-E|false|project meeting|at 2020-02-05 2-4pm
-T|false|read book
+T|true|read book
+E|false|party|at 2020-02-06 1400
