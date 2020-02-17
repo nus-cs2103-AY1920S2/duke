@@ -52,8 +52,7 @@ Alright, I've added this task:
 You currently have 1 task(s) in the list.
 ```
 
-<img src="./images/ToDo.png" alt="Image for ToDo command" about="Screenshot of ToDo command"
- align="center">
+![todo_pic](images/ToDo.png)
 
 ### `deadline` - Add a Deadline task to the list
 
@@ -73,8 +72,7 @@ Alright, I've added this task:
 Now you have 1 task(s) in the list.
 ```
 
-<img src="./images/Deadline.png" alt="Image for Deadline command" about="Screenshot of Deadline command"
- align="center">
+![deadline_pic](images/Deadline.png)
 
 ### `event` - Add an Event task to the list
 
@@ -94,8 +92,7 @@ Alright, I've added this task:
 You currently have 1 task(s) in the list.
 ```
 
-<img src="./images/Event.png" alt="Image for Event command" about="Screenshot of Event command"
- align="center">
+![event_pic](images/Event.png)
 
 ### `List` - Displays the entire list of tasks 
 
@@ -110,8 +107,7 @@ Expected outcomes:
 * When the list of tasks is empty: <br>
 `Your current list of tasks is empty! Try adding some tasks.`
 
-<img src="./images/EmptyList.png" alt="Image for empty list" about="Screenshot of empty list"
- align="center">
+![emptyList_pic](images/EmptyList.png)
 
 * When there are tasks in the list of tasks: <br>
 ```
@@ -121,8 +117,7 @@ Here are your tasks!
 3. [E][N] project meeting (at:Mar 12 2020)
 ```
 
-<img src="images/FilledList.png" alt="Image for list command" about="Screenshot of list command"
- align="center">
+![filledList_pic](images/FilledList.png)
 
 ### `done` - Mark a particular task as done
 
@@ -140,8 +135,7 @@ Fantastic! This task is a done-deal!
 [E][Y] project meeting (at:Mar 12 2020)
 ```
 
-<img src="./images/Done.png" alt="Image for done command" about="Screenshot of done command"
- align="center">
+![done_pic](images/Done.png)
 
 ### `delete` - Deletes the specified task from the list of tasks
 
@@ -159,8 +153,7 @@ Alright, I've removed this task:
 [D][N] return book (by:Jun 12 2020)
 ```
 
-<img src="./images/Delete.png" alt="Image delete command" about="Screenshot of delete command"
- align="center">
+![delete_pic](images/Delete.png)
 
 ### `delete all` - Mass deletion of a particular type of tasks
 
@@ -177,8 +170,7 @@ Alright, I've removed all todo tasks.
 You currently have 1 task(s) in the list.
 ```
 
-<img src="./images/MassDelete.png" alt="Image for mass deletion" about="Screenshot of mass deletion"
- align="center">
+![massDelete_pic](images/MassDelete.png)
 
 
 ### `bye` - Terminates the program
@@ -196,5 +188,11 @@ Bye-bye! See you again, my friend!
 Please close this window if you do not wish to continue this session.
 ```
 
-<img src="./images/Exit.png" alt="Image for exit" about="Screenshot of exit"
- align="center">
+![exit_pic](images/Exit.png)
+
+## Acknowledgements
+The GUI was done based on the 
+[JavaFX Tutorial](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md)
+written by Jeffry Lum.
+
+
