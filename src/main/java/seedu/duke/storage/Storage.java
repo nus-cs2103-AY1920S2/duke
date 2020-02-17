@@ -6,8 +6,15 @@ import seedu.duke.task.Deadline;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 import seedu.duke.task.Event;
+import seedu.duke.ui.Ui;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -29,6 +36,26 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+    }
+
+    //@@author johannagwan-reused
+    //Reused from https://www.w3schools.com/java/java_files_create.asp with minor modifications.
+    /**
+     *
+     */
+    public void makeNewFile() {
+        Ui ui = new Ui();
+        try {
+            String newFilePath = "data/duke.txt";
+            File newFile = new File(newFilePath);
+            if (!newFile.createNewFile()) {
+                ui.printDuplicateFile();
+            } else { // if file is successfully created, change the file path to the new one.
+                filePath = newFilePath;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

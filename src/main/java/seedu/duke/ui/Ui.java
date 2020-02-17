@@ -13,8 +13,8 @@ public class Ui {
 
     }
 
-    public void greet() {
-        System.out.println("Hi there, I'm Dodo!\nHow may I help you today?");
+    public String greet() {
+        return "Hi there, I'm Dodo!\nHow may I help you today?";
     }
 
     public void showLoadingError() {
@@ -56,6 +56,12 @@ public class Ui {
     public void printTaskDone() {
         System.out.println("Good job! One off your chest!");
     }
+
+    public void printDuplicateFile() {
+        System.out.println("File already exists.");
+    }
+
+
 
     /**
      * Updates the user of the remaining number of tasks in the list.

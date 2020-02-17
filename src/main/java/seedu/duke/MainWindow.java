@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -32,8 +33,10 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        Ui ui = new Ui();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.greet(), dukeImage));
     }
 
     public void setDuke(Duke d) {

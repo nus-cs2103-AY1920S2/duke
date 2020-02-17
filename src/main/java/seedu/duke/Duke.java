@@ -11,6 +11,7 @@ import seedu.duke.ui.Ui;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -26,7 +27,7 @@ public class Duke {
      *
      * @throws IOException If an input or output exception occurred.
      */
-    public Duke() throws IOException {
+    public Duke() {
         String filePath = "data/duke.txt";
         ui = new Ui();
         storage = new Storage(filePath);
@@ -35,6 +36,9 @@ public class Duke {
         } catch (DukeException e) {
             ui.showLoadingError();
             taskList = new TaskList(null, null);
+        } catch (IOException e) { // if file path does not exist.
+            storage.makeNewFile();
+            taskList = new TaskList(new ArrayList<>(), storage);
         }
     }
 

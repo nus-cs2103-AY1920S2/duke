@@ -22,11 +22,7 @@ public class Main extends Application {
     private Duke duke;
 
     {
-        try {
-            duke = new Duke();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        duke = new Duke();
     }
 
     @Override
