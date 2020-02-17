@@ -1,12 +1,9 @@
-package duke.command.task;
-
-import java.time.LocalDateTime;
-import java.util.HashMap;
+package duke.task.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.common.ErrorMessage;
-import duke.common.Message;
+import duke.common.message.ErrorMessage;
+import duke.common.message.Message;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -14,7 +11,10 @@ import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.task.Todo;
 
-public class AddCommand extends TaskCommand {
+import java.time.LocalDateTime;
+import java.util.HashMap;
+
+public class AddTaskCommand extends TaskCommand {
 
     private TaskType type;
     private String description;
@@ -25,7 +25,7 @@ public class AddCommand extends TaskCommand {
      * @param type The type of task to be added.
      * @param description The description of the task.
      */
-    public AddCommand(TaskType type, String description) {
+    public AddTaskCommand(TaskType type, String description) {
         this.type = type;
         this.description = description;
         this.details = new HashMap<>();
@@ -37,7 +37,7 @@ public class AddCommand extends TaskCommand {
      * @param description The description of the task.
      * @param details The details specific to the task type.
      */
-    public AddCommand(TaskType type, String description,
+    public AddTaskCommand(TaskType type, String description,
             HashMap<String, Object> details) {
         this.type = type;
         this.description = description;
@@ -66,7 +66,7 @@ public class AddCommand extends TaskCommand {
             break;
         default:
             assert false : "Task type should already be valid.";
-            throw new DukeException(ErrorMessage.COMMAND_NOT_FOUND);
+            throw new DukeException(ErrorMessage.getRandomCommandErrorMessage());
         }
 
         tasks.add(task);

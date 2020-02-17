@@ -22,8 +22,8 @@ import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * This control represents a dialog box consisting of an ImageView to represent 
+ * the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -31,9 +31,16 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img, Color color) {
+    /**
+     * Creates a dialog box given a string, image and color.
+     * @param text The text of the dialog.
+     * @param image The avatar image.
+     * @param color The background color of the dialog.
+     */
+    private DialogBox(String text, Image image, Color color) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -44,7 +51,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setBackground(new Background(
                 new BackgroundFill(color, new CornerRadii(5), Insets.EMPTY)));
-        displayPicture.setImage(img);
+        displayPicture.setImage(image);
 
         Circle circle = new Circle(40, 40, 40);
         displayPicture.setClip(circle);

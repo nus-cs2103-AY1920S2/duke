@@ -1,15 +1,14 @@
 package duke;
 
-import duke.DukeException;
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.expense.ExpenseCommand;
-import duke.command.task.TaskCommand;
-import duke.common.ErrorMessage;
-import duke.common.Message;
-import duke.expense.ExpenseList;
-import duke.task.TaskList;
 import duke.cli.Cli;
+import duke.common.command.Command;
+import duke.common.command.ExitCommand;
+import duke.common.message.ErrorMessage;
+import duke.common.message.Message;
+import duke.expense.ExpenseList;
+import duke.expense.command.ExpenseCommand;
+import duke.task.TaskList;
+import duke.task.command.TaskCommand;
 
 public class Duke {
 
@@ -61,7 +60,7 @@ public class Duke {
             return ((ExitCommand) command).execute();
         }
         
-        throw new DukeException(ErrorMessage.COMMAND_NOT_FOUND);
+        throw new DukeException(ErrorMessage.getRandomCommandErrorMessage());
     }
 
     /**

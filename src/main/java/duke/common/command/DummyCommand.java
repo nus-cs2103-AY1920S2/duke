@@ -1,6 +1,4 @@
-package duke.command;
-
-import duke.command.Command;
+package duke.common.command;
 
 public class DummyCommand extends Command {
     // empty class

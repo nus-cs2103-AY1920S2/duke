@@ -1,6 +1,7 @@
 package duke.expense;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Expense {
 
@@ -34,6 +35,8 @@ public class Expense {
 
     @Override
     public String toString() {
-        return String.format("%s - $%.2f", description, expense);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        return String.format("[%s] %s - $%.2f", date.format(formatter),
+                description, expense);
     }
 }

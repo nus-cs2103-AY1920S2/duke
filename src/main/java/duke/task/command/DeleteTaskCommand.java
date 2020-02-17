@@ -1,17 +1,17 @@
-package duke.command.task;
+package duke.task.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.common.ErrorMessage;
-import duke.common.Message;
+import duke.common.message.ErrorMessage;
+import duke.common.message.Message;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class DeleteCommand extends TaskCommand {
+public class DeleteTaskCommand extends TaskCommand {
 
     private int index;
 
-    public DeleteCommand(int index) {
+    public DeleteTaskCommand(int index) {
         this.index = index;
     }
 

@@ -68,6 +68,7 @@ public class Storage {
 
             scanner.close();
         } catch (Exception e) {
+            System.err.println(e);
             throw new DukeException("Problem with reading task save file.");
         }
 
@@ -93,9 +94,11 @@ public class Storage {
 
                 expenses.add(new Expense(description, expense, date));
 
-                scanner.close();
             }
+            
+            scanner.close();
         } catch (Exception e) {
+            System.err.println(e);
             throw new DukeException("Problem with reading expense save file.");
         }
 

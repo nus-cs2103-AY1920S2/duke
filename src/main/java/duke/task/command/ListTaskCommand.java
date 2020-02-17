@@ -1,16 +1,16 @@
-package duke.command.task;
+package duke.task.command;
 
 import duke.Storage;
-import duke.common.Message;
+import duke.common.message.Message;
 import duke.task.TaskList;
 
-public class ListCommand extends TaskCommand {
+public class ListTaskCommand extends TaskCommand {
 
     /**
      * Executes the command and lists all the tasks.
      */
     public String execute(TaskList tasks, Storage storage) {
-        String output = Message.LIST_MESSAGE + "\n"
+        String output = Message.TASK_MESSAGE + "\n"
                 + tasks.toString();
         return output;
     }

@@ -1,8 +1,8 @@
-package duke.command.expense;
+package duke.expense.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.command.Command;
+import duke.common.command.Command;
 import duke.expense.ExpenseList;
 
 public abstract class ExpenseCommand extends Command {

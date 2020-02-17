@@ -1,21 +1,22 @@
 package duke;
 
+import duke.common.command.Command;
+import duke.common.command.ExitCommand;
+import duke.common.message.ErrorMessage;
+import duke.expense.command.AddExpenseCommand;
+import duke.expense.command.DeleteExpenseCommand;
+import duke.expense.command.ListExpenseCommand;
+import duke.task.TaskType;
+import duke.task.command.AddTaskCommand;
+import duke.task.command.DeleteTaskCommand;
+import duke.task.command.FindTaskCommand;
+import duke.task.command.ListTaskCommand;
+import duke.task.command.MarkTaskCommand;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
-
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.expense.AddExpenseCommand;
-import duke.command.expense.ListExpenseCommand;
-import duke.command.task.AddCommand;
-import duke.command.task.DeleteCommand;
-import duke.command.task.FindCommand;
-import duke.command.task.ListCommand;
-import duke.command.task.MarkCommand;
-import duke.common.ErrorMessage;
-import duke.task.TaskType;
 
 public class Parser {
 
@@ -46,7 +47,7 @@ public class Parser {
     static Command parseList(String details) throws DukeException {
         switch (details.toUpperCase()) {
         case "TASKS":
-            return new ListCommand();
+            return new ListTaskCommand();
         case "EXPENSES":
             return new ListExpenseCommand();
         default:
@@ -101,7 +102,7 @@ public class Parser {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
 
-        return new AddCommand(TaskType.TODO, details);
+        return new AddTaskCommand(TaskType.TODO, details);
     }
 
     /**
@@ -132,7 +133,7 @@ public class Parser {
         HashMap<String, Object> values = new HashMap<>();
         values.put("datetime", datetime);
 
-        return new AddCommand(TaskType.DEADLINE, description, values);
+        return new AddTaskCommand(TaskType.DEADLINE, description, values);
     }
 
     /**
@@ -163,7 +164,7 @@ public class Parser {
         HashMap<String, Object> values = new HashMap<>();
         values.put("datetime", datetime);
 
-        return new AddCommand(TaskType.DEADLINE, description, values);
+        return new AddTaskCommand(TaskType.DEADLINE, description, values);
     }
 
     /**
@@ -185,7 +186,7 @@ public class Parser {
             throw new DukeException(ErrorMessage.INVALID_INDEX);
         }
 
-        return new MarkCommand(index);
+        return new MarkTaskCommand(index);
     }
 
     /**
@@ -199,7 +200,7 @@ public class Parser {
             throw new DukeException(ErrorMessage.EMPTY_SEARCH);
         }
 
-        return new FindCommand(details);
+        return new FindTaskCommand(details);
     }
 
     /**
@@ -209,19 +210,39 @@ public class Parser {
      * @throws DukeException Error when parsing the delete command.
      */
     static Command parseDelete(String details) throws DukeException {
+        int splitIndex = details.indexOf(' ');
+
+        if (splitIndex < 0) {
+            throw new DukeException("'DELETE task <index>' or 'DELETE expense <index>'");
+        }
+
+        String listType = details.substring(0, splitIndex).toUpperCase();
+        if (!listType.equals("TASK") && !listType.equals("EXPENSE")) {
+            throw new DukeException("'DELETE task <index>' or 'DELETE expense <index>'");
+        }
+
+        String indexDetails = details.substring(splitIndex + 1);
         int index;
 
-        if (details.length() == 0) {
+        if (indexDetails.length() == 0) {
             throw new DukeException(ErrorMessage.EMPTY_INDEX);
         }
         
         try {
-            index = Integer.parseInt(details);
+            index = Integer.parseInt(indexDetails);
         } catch (NumberFormatException e) {
             throw new DukeException(ErrorMessage.INVALID_INDEX);
         }
 
-        return new DeleteCommand(index);
+        switch (listType) {
+        case "TASK":
+            return new DeleteTaskCommand(index);
+        case "EXPENSE":
+            return new DeleteExpenseCommand(index);
+        default:
+            assert false : "listType should be in the cases";
+            throw new DukeException(ErrorMessage.getRandomCommandErrorMessage());
+        }
     }
 
     /**
@@ -258,6 +279,9 @@ public class Parser {
             return parseExpense(details);
         case "LIST":
             return parseList(details);
+        case "EXPENSES": // continue
+        case "TASKS":
+            return parseList(instruction);
         case "DONE":
             return parseDone(details);
         case "FIND":
@@ -267,7 +291,7 @@ public class Parser {
         case "BYE":
             return new ExitCommand();
         default:
-            throw new DukeException(ErrorMessage.COMMAND_NOT_FOUND);
+            throw new DukeException(ErrorMessage.getRandomCommandErrorMessage());
         }
     }
 }

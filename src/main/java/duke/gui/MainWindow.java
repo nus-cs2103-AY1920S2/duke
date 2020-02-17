@@ -3,8 +3,8 @@ package duke.gui;
 import duke.Duke;
 import duke.DukeException;
 import duke.Parser;
-import duke.command.Command;
-import duke.command.DummyCommand;
+import duke.common.command.Command;
+import duke.common.command.DummyCommand;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,23 +29,26 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass()
+            .getResourceAsStream("/images/github.png"));
+    private Image dukeImage = new Image(this.getClass()
+            .getResourceAsStream("/images/reddit.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(duke.getGreeting(), dukeImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other 
+     * containing Duke's reply and then appends them to the dialog container. 
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -71,8 +74,7 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other 
      * containing Duke's reply and then appends them to the dialog container. 
      * Clears the user input after processing.
-     * @param input The input message
-     * @param response The response of duke
+     * @param response The response of duke.
      */
     @FXML
     private void createDialogBoxes(String response) {

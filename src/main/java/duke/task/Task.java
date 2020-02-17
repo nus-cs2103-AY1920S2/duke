@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.common.Saveable;
+
 public abstract class Task implements Saveable {
 
     private String description;
