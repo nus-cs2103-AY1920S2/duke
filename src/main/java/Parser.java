@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Parser class. This class manages the input of the user.
  */
 public class Parser {
-    Scanner sc;
+    private Scanner sc;
 
     /**
      * Constructor. Initialises the Scanner class.
@@ -16,6 +16,8 @@ public class Parser {
     /**
      * This method reads the input of the users and subsequently does the appropriate actions via the
      * methods in the TaskList class.
+     *
+     * @param fullCommand This is the full input from the user.
      */
     public static Command parse(String fullCommand) throws DukeException {
         Command command = null;

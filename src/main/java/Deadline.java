@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    String by;
-    String strDoneStatus;
-    LocalDate date;
+    private String by;
+    private String strDoneStatus;
+    private LocalDate date;
 
     /**
      * Constructor that takes in 2 params.

@@ -9,12 +9,15 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Main Duke class.
@@ -41,7 +44,6 @@ public class Duke extends Application {
 
     /**
      * Constructor. Initialises the UI, Storage and TaskList classes.
-     *
      * @param filePath Path of the file to be read / written to.
      */
     public Duke(String filePath) {
@@ -152,7 +154,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      *
      * @param text String containing text to add
@@ -166,7 +167,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -184,6 +184,7 @@ public class Duke extends Application {
      * Gets the response of Duke.
      */
     public String getResponse(String input) {
+        //Solution below adapted from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java/8708357
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         PrintStream old = System.out;

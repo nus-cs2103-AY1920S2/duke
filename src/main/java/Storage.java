@@ -54,7 +54,6 @@ public class Storage {
 
     /**
      * Writes the tasks in the ArrayList of tasks to the output file.
-     *
      * @throws IOException Throws an error if there is some sort of I/O error.
      */
     public void writeList(TaskList tasks) throws IOException {

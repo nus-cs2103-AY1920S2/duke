@@ -25,6 +25,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/messi.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ronaldo.jpg"));
 
+    /**
+     * Initialises the dialog box with the welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -57,6 +60,10 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * This method terminates the application after sleeping for 1.2 seconds
+     * Solution below is adapted from https://stackoverflow.com/questions/52393982/javafx-problem-with-platform-runlater-delayed-rendering-of-canvas-graphic
+     */
     private void exit() {
         new Thread(() -> {
             try {
