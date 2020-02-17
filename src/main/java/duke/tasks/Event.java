@@ -17,26 +17,6 @@ public class Event extends Task {
         this.at = at;
     }
 
-    /**
-     * Updates this task object attributes without creating a new object
-     *
-     * @param updateStrArr String[] containing data for the update
-     * @return the reference of this object
-     */
-    @Override
-    public Task update(String[] updateStrArr) throws DukeException {
-        super.update(updateStrArr);
-        for (String updateStr : updateStrArr) {
-            String[] attrToChange = updateStr.split("=");
-            String attr = attrToChange[0].strip();
-            String newValue = attrToChange[1].strip();
-            if (attr.equalsIgnoreCase("at")) {
-                this.at = newValue;
-            }
-        }
-        return this;
-    }
-
 
     /**
      * Formats this object as a String to be written into the data file.
@@ -57,5 +37,26 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
+    }
+
+
+    /**
+     * Updates this task object attributes without creating a new object.
+     *
+     * @param updateStrArr String[] containing data for the update
+     * @return the reference of this object
+     */
+    @Override
+    public Task update(String[] updateStrArr) throws DukeException {
+        super.update(updateStrArr);
+        for (String updateStr : updateStrArr) {
+            String[] attrToChange = updateStr.split("=");
+            String attr = attrToChange[0].strip();
+            String newValue = attrToChange[1].strip();
+            if (attr.equalsIgnoreCase("at")) {
+                this.at = newValue;
+            }
+        }
+        return this;
     }
 }

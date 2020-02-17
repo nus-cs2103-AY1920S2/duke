@@ -2,32 +2,13 @@ package duke;
 
 import java.io.IOException;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/theshoebill.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/thecathulhu.jpg"));
+    private boolean isLastGuiCmd;
 
     public Duke() {
         ui = new Ui();
@@ -37,18 +18,22 @@ public class Duke extends Application {
         } catch (Exception e) {
             ui.printError(e);
         }
+        this.isLastGuiCmd = false;
     }
 
 
+    /**
+     * Process commands in the CLI version of Duke
+     */
     private void interact() {
 
         boolean byebye = false;
-        ui.showWelcome();
+        System.out.println(initialise());
 
         while (!byebye) {
             ui.printLine1();
             try {
-                byebye = Parser.parse(tasks, ui);
+                byebye = Parser.parseNextCmd(tasks, ui);
                 storage.writeTasksFile(tasks);
             } catch (DukeException e) {
                 ui.printError(e);
@@ -57,105 +42,59 @@ public class Duke extends Application {
                 break;
             }
             ui.printLine2();
+            System.out.println(ui.cathulhuSaysItOut());
         }
         ui.showGoodbye();
+        System.out.println(ui.cathulhuSaysItOut());
     }
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-    }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
+     * Process commands in the GUI version of Duke, based on user input
+     */
+    private String interactGui(String input) {
+        ui.printLine1();
+        try {
+            this.isLastGuiCmd = Parser.parseNextCmd(tasks, ui, input);
+            storage.writeTasksFile(tasks);
+        } catch (Exception e) {
+            ui.printError(e);
+        }
+        ui.printLine2();
+
+        if (this.isLastGuiCmd) {
+            ui.flush();
+            ui.showGoodbye();
+        }
+
+        return ui.cathulhuSaysItOut();
+    }
+
+
+    /**
+     * Displays the welcome message for Cathulhu.
      *
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
+     * @return String welcome message.
      */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+    public String initialise() {
+        ui.showWelcome();
+        return ui.cathulhuSaysItOut();
     }
+
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Wraps the handler method for inputs from the GUI.
+     *
+     * @param input String input from the user on the GUI.
+     * @return String output to be displayed on the GUI.
      */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
+    public String getResponse(String input) {
+        if (this.isLastGuiCmd) {
+            return "I am done with you, mortal. Do not disturb me nyaa~ ";
+        }
+        return interactGui(input);
     }
 
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
 
     public static void main(String[] args) {
         new Duke().interact();

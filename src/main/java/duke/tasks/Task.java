@@ -37,6 +37,7 @@ public class Task {
         this.isDone = true;
     }
 
+
     /**
      * Formats this object as a String to be written into the data file.
      *
@@ -46,8 +47,20 @@ public class Task {
         return (isDone ? "1" : "0") + ":;:" + this.description;
     }
 
+
     /**
-     * Updates this task object attributes without creating a new object
+     * Formats this object as a String to be printed out.
+     *
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+
+    /**
+     * Updates this task object attributes without creating a new object.
      *
      * @param updateStrArr String[] containing data for the update
      * @return the reference of this object
@@ -68,15 +81,5 @@ public class Task {
             }
         }
         return this;
-    }
-
-    /**
-     * Formats this object as a String to be printed out.
-     *
-     * @return String
-     */
-    @Override
-    public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

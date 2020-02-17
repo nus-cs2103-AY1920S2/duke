@@ -24,6 +24,7 @@ public class Deadline extends Task {
         this.by = parseBy(this.byString);
     }
 
+
     /**
      * Parses input String object into a LocalDateTime object based on set patterns.
      *
@@ -44,26 +45,6 @@ public class Deadline extends Task {
         }
     }
 
-    /**
-     * Updates this task object attributes without creating a new object
-     *
-     * @param updateStrArr String[] containing data for the update
-     * @return the reference of this object
-     */
-    @Override
-    public Task update(String[] updateStrArr) throws DukeException {
-        super.update(updateStrArr);
-        for (String updateStr : updateStrArr) {
-            String[] attrToChange = updateStr.split("=");
-            String attr = attrToChange[0].strip();
-            String newValue = attrToChange[1].strip();
-            if (attr.equalsIgnoreCase("by")) {
-                this.byString = newValue;
-                this.by = parseBy(this.byString);
-            }
-        }
-        return this;
-    }
 
     /**
      * Formats this object as a String to be written into the data file.
@@ -85,5 +66,27 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString()
                 + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm ")) + ")";
+    }
+
+
+    /**
+     * Updates this task object attributes without creating a new object.
+     *
+     * @param updateStrArr String[] containing data for the update
+     * @return the reference of this object
+     */
+    @Override
+    public Task update(String[] updateStrArr) throws DukeException {
+        super.update(updateStrArr);
+        for (String updateStr : updateStrArr) {
+            String[] attrToChange = updateStr.split("=");
+            String attr = attrToChange[0].strip();
+            String newValue = attrToChange[1].strip();
+            if (attr.equalsIgnoreCase("by")) {
+                this.byString = newValue;
+                this.by = parseBy(this.byString);
+            }
+        }
+        return this;
     }
 }

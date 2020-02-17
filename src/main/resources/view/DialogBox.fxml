@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<fx:root alignment="CENTER_RIGHT" prefHeight="360.0" prefWidth="906.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" lineSpacing="1.2" prefHeight="340.0" prefWidth="696.0" style="-fx-border-width: 4px; -fx-border-color: #008ED8; -fx-border-style: dotted; -fx-border-radius: 20px; -fx-background-color: #D8FBF1;" text="Label" textOverrun="CLIP">
+        </Label>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-radius: 50%;">
+         <children>
+              <ImageView fx:id="displayPicture" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>

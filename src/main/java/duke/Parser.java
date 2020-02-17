@@ -7,6 +7,33 @@ import java.util.Scanner;
 public class Parser {
 
     /**
+     * Directs input command from System.in to the parse method.
+     *
+     * @param tasks TaskList that stores all the current tasks
+     * @param ui UI for interaction with the user
+     * @return boolean. true indicates that the user has terminated the program (by typing "bye")
+     * @throws DukeException for invalid user commands
+     */
+    public static boolean parseNextCmd(TaskList tasks, Ui ui) throws DukeException {
+        return parse(tasks, ui, ui.getUserCmd());
+    }
+
+
+    /**
+     * Directs input command from the GUI to the parse method.
+     *
+     * @param tasks TaskList that stores all the current tasks
+     * @param ui UI for interaction with the user
+     * @param userCmd String input from GUI
+     * @return boolean. true indicates that the user has terminated the program (by typing "bye")
+     * @throws DukeException for invalid user commands
+     */
+    public static boolean parseNextCmd(TaskList tasks, Ui ui, String userCmd) throws DukeException {
+        return parse(tasks, ui, userCmd);
+    }
+
+
+    /**
      * Parses the command the user enters and execute it.
      *
      * @param tasks TaskList that stores all the current tasks
@@ -14,9 +41,9 @@ public class Parser {
      * @return boolean. true indicates that the user has terminated the program (by typing "bye")
      * @throws DukeException for invalid user commands
      */
-    public static boolean parse(TaskList tasks, Ui ui) throws DukeException {
+    private static boolean parse(TaskList tasks, Ui ui, String userCmd) throws DukeException {
 
-        String[] cmdString = ui.getUserCmd()
+        String[] cmdString = userCmd
                 .strip()
                 .split(" ", 2);
 
@@ -54,16 +81,22 @@ public class Parser {
             if (tasks.size() <= taskIndex) {
                 throw new DukeException("\tMortal, thou have no such task!");
             }
-            System.out.printf("\tMortal, the following task has been deleted:\n\t  %s\n\tYou have %d tasks left\n",
-                    tasks.removeTask(taskIndex), tasks.size());
+            ui.cathulhuSays("\tMortal, the following task has been deleted:\n\t  "
+                    + tasks.removeTask(taskIndex)
+                    + "\n\tYou have "
+                    + tasks.size()
+                    + " tasks left\n");
 
         } else if (cmdString[0].equalsIgnoreCase("todo")) { //todo
             if (cmdString.length == 1) {
                 throw new DukeException("\tA \"todo\" task must have a description, mortal!");
             }
             tasks.addTask(new ToDo(cmdString[1]));
-            System.out.printf("\tTask added: \n\t  %s\n\tYou have %d tasks now, mortal\n",
-                    tasks.getTask(tasks.size() - 1), tasks.size());
+            ui.cathulhuSays("\tTask added: \n\t  "
+                    + tasks.getTask(tasks.size() - 1)
+                    + "\n\tYou have "
+                    + tasks.size()
+                    + " tasks now, mortal\n");
 
         } else if (cmdString[0].equalsIgnoreCase("deadline")) { //deadline
             if (cmdString.length == 1) {
@@ -74,8 +107,11 @@ public class Parser {
                 throw new DukeException("\tA \"deadline\" task must have a deadline, mortal!");
             }
             tasks.addTask(new Deadline(byString[0], byString[1]));
-            System.out.printf("\tTask added: \n\t  %s\n\tYou have %d tasks now, mortal\n",
-                    tasks.getTask(tasks.size() - 1), tasks.size());
+            ui.cathulhuSays("\tTask added: \n\t  "
+                    + tasks.getTask(tasks.size() - 1)
+                    + "\n\tYou have "
+                    + tasks.size()
+                    + " tasks now, mortal\n");
 
         } else if (cmdString[0].equalsIgnoreCase("event")) { //event
             if (cmdString.length == 1) {
@@ -86,8 +122,11 @@ public class Parser {
                 throw new DukeException("\tAn \"event\" task must have a time, mortal!");
             }
             tasks.addTask(new Event(atString[0], atString[1]));
-            System.out.printf("\tTask added: \n\t  %s\n\tYou have %d tasks now, mortal\n",
-                    tasks.getTask(tasks.size() - 1), tasks.size());
+            ui.cathulhuSays("\tTask added: \n\t  "
+                    + tasks.getTask(tasks.size() - 1)
+                    + "\n\tYou have "
+                    + tasks.size()
+                    + " tasks now, mortal\n");
 
         } else if (cmdString[0].equalsIgnoreCase("find")) { //find
             if (cmdString.length == 1) {
@@ -110,7 +149,11 @@ public class Parser {
             if (cmdString.length == 1) {
                 throw new DukeException("\tWhat do you want to update, mortal?");
             }
-            int taskPos = new Scanner(cmdString[1]).useDelimiter("\\D+").nextInt();
+            int taskPos = new Scanner(cmdString[1]).useDelimiter("\\D+").nextInt() + 1;
+            if (!cmdString[1].contains("=") ) {
+                throw new DukeException("Attributes to update in the task must be comma separated, " +
+                        "in the following format: attributeName1=newValue1, attributeName2=newValue2, ...");
+            }
             String[] updateStringArr = cmdString[1].substring(cmdString[1].indexOf(String.valueOf(taskPos)))
                     .split(",");
             String originalTask = tasks.getTask(taskPos).toString();
@@ -122,7 +165,6 @@ public class Parser {
             throw new DukeException("\tMortal, that's an invalid Task!");
 
         }
-
         return false;
     }
 }
