@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+
+<fx:root fx:id="dukeDialogBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
+         type="HBox" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/">
+    <StackPane>
+        <Circle fx:id="avatar" fill="#c4e0f9" radius="50.0" stroke="#475672" strokeType="INSIDE" strokeWidth="3.0"/>
+    </StackPane>
+    <Label fx:id="dialog" text="Label" wrapText="true"/>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+    </padding>
+</fx:root>

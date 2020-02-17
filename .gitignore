@@ -12,3 +12,8 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Duke files
+**/data/duke.txt
+text-ui-test/
+local.properties

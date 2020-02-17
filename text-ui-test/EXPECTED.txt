@@ -1,0 +1,267 @@
+	____________________________________________________________
+	  ____        _        
+	 |  _ \ _   _| | _____ 
+	 | | | | | | | |/ / _ \
+	 | |_| | |_| |   <  __/
+	 |____/ \__,_|_|\_\___|
+	 
+	 Hello! I'm Duke.
+	 What can I do for you?
+	____________________________________________________________
+
+	____________________________________________________________
+	 There are currently no tasks in your list.
+	 Add a task by using one of the following commands: 
+	   todo [description]
+	   deadline [description] /by [time]
+	   event [description] /at [time]
+	 Time should be in the format of 'dd/MM/yyyy HH:mm'
+	____________________________________________________________
+
+	____________________________________________________________
+	 Got it. I've added this task: 
+	   [T][✘] read book
+	 Now you have 1 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 Got it. I've added this task: 
+	   [D][✘] return book (by: 06 Jun 2020, 05:00PM)
+	 Now you have 2 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 Got it. I've added this task: 
+	   [E][✘] project meeting (at: 06 Aug 2020, 02:00PM)
+	 Now you have 3 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 Got it. I've added this task: 
+	   [T][✘] exercise
+	 Now you have 4 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 Here are the tasks in your list: 
+	 1.[T][✘] read book
+	 2.[D][✘] return book (by: 06 Jun 2020, 05:00PM)
+	 3.[E][✘] project meeting (at: 06 Aug 2020, 02:00PM)
+	 4.[T][✘] exercise
+	____________________________________________________________
+
+	____________________________________________________________
+	 Nice! I've marked this task as done: 
+	   [T][✓] read book
+	____________________________________________________________
+
+	____________________________________________________________
+	 Here are the tasks in your list: 
+	 1.[T][✓] read book
+	 2.[D][✘] return book (by: 06 Jun 2020, 05:00PM)
+	 3.[E][✘] project meeting (at: 06 Aug 2020, 02:00PM)
+	 4.[T][✘] exercise
+	____________________________________________________________
+
+	____________________________________________________________
+	 Noted. I've removed this task: 
+	   [T][✘] exercise
+	 Now you have 3 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 Here are the tasks in your list: 
+	 1.[T][✓] read book
+	 2.[D][✘] return book (by: 06 Jun 2020, 05:00PM)
+	 3.[E][✘] project meeting (at: 06 Aug 2020, 02:00PM)
+	____________________________________________________________
+
+	____________________________________________________________
+	 Got it. I've added this task: 
+	   [T][✘] join sports club
+	 Now you have 4 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 Nice! I've marked this task as done: 
+	   [D][✓] return book (by: 06 Jun 2020, 05:00PM)
+	____________________________________________________________
+
+	____________________________________________________________
+	 Noted. I've removed this task: 
+	   [E][✘] project meeting (at: 06 Aug 2020, 02:00PM)
+	 Now you have 3 tasks in the list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 Here are the tasks in your list: 
+	 1.[T][✓] read book
+	 2.[D][✓] return book (by: 06 Jun 2020, 05:00PM)
+	 3.[T][✘] join sports club
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 I'm sorry, but I don't know what that means.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 I'm sorry, but I don't know what that means.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 I'm sorry, but I don't know what that means.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 You forgot to include a description.
+	 To add a todo, tell me in this format: 
+	   todo [description]
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 You forgot to include a description.
+	 To add a deadline, tell me in this format: 
+	   todo [description] /by [time]
+	   Time should be in the format of 'dd/MM/yyyy HH:mm'
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 You forgot to include a description.
+	 To add a deadline, tell me in this format: 
+	   todo [description] /by [time]
+	   Time should be in the format of 'dd/MM/yyyy HH:mm'
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 You forgot to include a time.
+	 To add a deadline, tell me in this format: 
+	   todo [description] /by [time]
+	   Time should be in the format of 'dd/MM/yyyy HH:mm'
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 You forgot to include a time.
+	 To add a deadline, tell me in this format: 
+	   todo [description] /by [time]
+	   Time should be in the format of 'dd/MM/yyyy HH:mm'
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 You forgot to include a description.
+	 To add an event, tell me in this format: 
+	   todo [description] /at [time]
+	   Time should be in the format of 'dd/MM/yyyy HH:mm'
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 You forgot to include a description.
+	 To add an event, tell me in this format: 
+	   todo [description] /at [time]
+	   Time should be in the format of 'dd/MM/yyyy HH:mm'
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 You forgot to include a time.
+	 To add an event, tell me in this format: 
+	   todo [description] /at [time]
+	   Time should be in the format of 'dd/MM/yyyy HH:mm'
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 You forgot to include a time.
+	 To add an event, tell me in this format: 
+	   todo [description] /at [time]
+	   Time should be in the format of 'dd/MM/yyyy HH:mm'
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 I don't understand the time entered.
+	 Time should be in the format of 'dd/MM/yyyy HH:mm'
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 The task of index -1 cannot be found in your list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 The task of index 1000 cannot be found in your list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 This command should only have a valid task index as the argument.
+	 To mark a task as done, tell me in this format: 
+	   done [task_index]
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 This command should only have a valid task index as the argument.
+	 To mark a task as done, tell me in this format: 
+	   done [task_index]
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 This command should only have a valid task index as the argument.
+	 To mark a task as done, tell me in this format: 
+	   done [task_index]
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 The task of index -1 cannot be found in your list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 The task of index 1000 cannot be found in your list.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 This command should only have a valid task index as the argument.
+	 To delete a task, tell me in this format: 
+	   delete [task_index]
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 This command should only have a valid task index as the argument.
+	 To delete a task, tell me in this format: 
+	   delete [task_index]
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!!
+	 This command should only have a valid task index as the argument.
+	 To delete a task, tell me in this format: 
+	   delete [task_index]
+	____________________________________________________________
+
+	____________________________________________________________
+	 Here are the tasks in your list: 
+	 1.[T][✓] read book
+	 2.[D][✓] return book (by: 06 Jun 2020, 05:00PM)
+	 3.[T][✘] join sports club
+	____________________________________________________________
+
+	____________________________________________________________
+	 Bye. Hope to see you again soon!
+	____________________________________________________________
+

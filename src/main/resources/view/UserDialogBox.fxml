@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+
+<fx:root fx:id="userDialogBox" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308"
+         maxWidth="1.7976931348623157E308" prefWidth="400.0"
+         type="HBox" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/">
+    <Label fx:id="dialog" text="Label" wrapText="true"/>
+    <StackPane>
+        <Circle radius="6.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0">
+            <fill>
+                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                    <stops>
+                        <Stop color="#f40076"/>
+                        <Stop color="#ffffff00" offset="1.0"/>
+                    </stops>
+                </RadialGradient>
+            </fill>
+        </Circle>
+    </StackPane>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+    </padding>
+</fx:root>

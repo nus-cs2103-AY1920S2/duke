@@ -1,0 +1,39 @@
+list
+todo read book
+deadline return book /by 6/6/2020 17:00
+event project meeting /at 6/8/2020 14:00
+todo exercise
+list
+done 1
+list
+delete 4
+list
+todo join sports club
+done 2
+delete 3
+list
+blah
+list all
+bye bye
+todo
+deadline
+deadline /by 3/8/2020 21:30
+deadline project
+deadline project /at 3/8/2020 21:30
+event
+event /at 23/5/2020 17:00
+event interview
+event interview /by 23 Aug 2020 5pm
+event interview /at 23 Aug 2020 5pm
+done -1
+done 1000
+done 0.1
+done 1 2 3
+done one
+delete -1
+delete 1000
+delete 0.1
+delete 1 2 3
+delete one
+list
+bye

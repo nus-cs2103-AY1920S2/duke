@@ -1,0 +1,40 @@
+.root {
+    -fx-background-color: #FFC6AC;
+    -fx-font-family: "Roboto Medium";
+}
+
+.text-field {
+    -fx-background-color: transparent, #C4E0F9;
+}
+
+.text-field:focused {
+    -fx-background-color: #67D1FA, #B3E8FC;
+}
+
+#scrollPane {
+    -fx-background: #FFC6AC;
+    -fx-background-color: #FFC6AC;
+}
+
+#helpText {
+    -fx-text-fill: #002A32;
+    -fx-font-family: "Paytone One";
+}
+
+#dialogContainer > #dukeDialogBox {
+    -fx-background-color: #F4CED0;
+    -fx-background-insets: 5px;
+    -fx-background-radius: 20px;
+}
+
+#dialogContainer > #dukeDialogBox > .label {
+    -fx-background-insets: 5px;
+    -fx-padding: 10px;
+}
+
+
+#dialogContainer > #userDialogBox {
+    -fx-background-color: #EBA6A9;
+    -fx-background-insets: 5px;
+    -fx-background-radius: 20px;
+}
