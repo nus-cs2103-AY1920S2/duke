@@ -48,8 +48,8 @@ test {
 
 application {
     // Change this to your main class.
-//    mainClassName = "seedu.duke.Duke"
-    mainClassName = "duke.Duke"
+//    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 run {
