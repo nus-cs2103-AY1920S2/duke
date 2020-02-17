@@ -10,7 +10,7 @@ public abstract class Task {
     }
 
     public String getIcon() {
-        return (check ? "Y" : "N");
+        return (check ? "Done" : "Not Done");
     }
 
     public void setCheck() {

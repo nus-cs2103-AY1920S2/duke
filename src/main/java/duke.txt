@@ -1,3 +1,3 @@
-T/N/borrow book
-E/N/SECC meeting /2020-01-01
-D/N/IP /2020-02-02
+T/Not Done/swim
+E/Not Done/IHG /2020-02-02
+D/Not Done/IP /2020-02-02

@@ -18,7 +18,7 @@ public class Ui {
     }
 
     public String displayIntro() {
-        String hi = "Hello! I'm Duke\n" + "What can I do for you?";
+        String hi = "Hello! I'm Dwayne\n" + "What can I do for you?" ;
         return hi;
     }
 

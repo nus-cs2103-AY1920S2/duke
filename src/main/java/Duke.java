@@ -32,8 +32,8 @@ public class Duke {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/nerd.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/dwayne.png"));
 
 
     public Duke() throws IOException{
