@@ -1,10 +1,2 @@
-T , 1 , test
-E , 0 , read book , 2020-01-01
-T , 0 , drink water
-T , 0 , buy wallet
-E , 1 , ihg closing , 2020-02-10
-E , 0 , testing , 2020-01-01
-D , 0 , testing2 , 2020-01-02
-T , 1 , buy tissue
-T , 0 , hello
-E , 0 , byebye , 2020-01-02
+E , 0 , olympics , 2020-06-01
+D , 0 , finish assignment , 2020-03-01
