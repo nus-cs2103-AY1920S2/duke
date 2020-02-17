@@ -4,8 +4,5 @@ os: linux
 dist: trusty
 jdk: oraclejdk11
 
-before_install:
-  - ls -la
-
 script:
   - ./gradlw build --scan -s
