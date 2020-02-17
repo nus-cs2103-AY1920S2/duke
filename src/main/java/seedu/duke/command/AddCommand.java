@@ -37,8 +37,8 @@ public class AddCommand extends Command {
      * @param taskDescription Description of task.
      */
     public AddCommand(Command.Type taskType, String taskDescription) {
-        // TODO: catch exception when type is deadline or event but date not given
         this(taskType, taskDescription, null);
+        assert taskType == Type.todo : "AddCommand constructor invoked with no date but the type is not todo.";
     }
 
     @Override

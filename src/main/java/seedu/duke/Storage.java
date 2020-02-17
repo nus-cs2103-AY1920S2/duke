@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.exception.DukeIoException;
-import seedu.duke.task.Task;
 
 import java.io.IOException;
 import java.nio.file.Files;
