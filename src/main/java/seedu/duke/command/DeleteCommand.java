@@ -53,6 +53,8 @@ public class DeleteCommand extends Command {
 
     }
 
+    //@@author johannagwan-reused
+    //Reused from https://www.baeldung.com/java-check-string-number with minor modifications.
     /**
      * Checks if a string can be converted to an integer.
      *
@@ -70,6 +72,7 @@ public class DeleteCommand extends Command {
         }
         return true;
     }
+    //@@author
 
     @Override
     public boolean hasNextCommand() {

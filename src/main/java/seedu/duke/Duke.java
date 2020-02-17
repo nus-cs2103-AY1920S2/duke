@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import javafx.application.Platform;
 import seedu.duke.command.Command;
 import seedu.duke.exception.DukeException;
 import seedu.duke.parser.Parser;
@@ -71,6 +72,9 @@ public class Duke {
         duke.runDuke();
     }
 
+    //@@author johannagwan-reused
+    //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java/8708357
+    //with minor modifications.
     /**
      * Generates a response to user input.
      *
@@ -78,10 +82,6 @@ public class Duke {
      * @return Duke's response.
      */
     protected String getResponse(String input) throws IOException {
-//            if (!parser.hasNextCommand()) {
-//                break;
-//            }
-        // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         PrintStream old = System.out;
@@ -92,8 +92,13 @@ public class Duke {
         Command cmd = parser.handleCommands(inputs, taskList);
         cmd.execute(taskList, ui, storage);
 
+        if (!cmd.hasNextCommand()) {
+            Platform.exit();
+        }
+
         System.out.flush();
         System.setOut(old);
         return baos.toString();
     }
+    //@@author
 }

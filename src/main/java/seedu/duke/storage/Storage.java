@@ -2,7 +2,10 @@ package seedu.duke.storage;
 
 import seedu.duke.exception.InvalidDateException;
 import seedu.duke.exception.InvalidTaskInputException;
-import seedu.duke.task.*;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Task;
+import seedu.duke.task.Todo;
+import seedu.duke.task.Event;
 
 import java.io.*;
 import java.text.ParseException;
@@ -164,6 +167,9 @@ public class Storage {
         tasks.add(event);
     }
 
+    //@@author johannagwan-reused
+    //Reused from http://www.java2s.com/Tutorial/Java/0120__Development/CheckifaStringisavaliddate.htm
+    //with minor modifications.
     /**
      * Checks if an input date is written in a valid date format.
      *
@@ -180,6 +186,7 @@ public class Storage {
         }
         return true;
     }
+    //@@author
 
     /**
      * Saves the task that the user inputs into the hard disk.

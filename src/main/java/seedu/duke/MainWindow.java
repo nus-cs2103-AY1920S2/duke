@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
+//@@author johannagwan-reused
+//Reused from https://github.com/johannagwan/duke/blob/master/tutorials/javaFxTutorialPart4.md with minor modifications.
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -53,3 +55,4 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 }
+//@@author

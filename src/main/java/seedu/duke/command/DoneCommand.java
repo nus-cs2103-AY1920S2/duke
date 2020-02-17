@@ -59,6 +59,8 @@ public class DoneCommand extends Command {
         return true;
     }
 
+    //@@author johannagwan-reused
+    //Reused from https://www.baeldung.com/java-check-string-number with minor modifications.
     /**
      * Checks if a string can be converted to an integer.
      *
@@ -76,4 +78,5 @@ public class DoneCommand extends Command {
         }
         return true;
     }
+    //@@author
 }

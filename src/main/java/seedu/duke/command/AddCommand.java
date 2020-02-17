@@ -1,6 +1,10 @@
 package seedu.duke.command;
 
-import seedu.duke.exception.*;
+import seedu.duke.exception.EmptyDescriptionException;
+import seedu.duke.exception.InvalidCommandException;
+import seedu.duke.exception.InvalidDateException;
+import seedu.duke.exception.InvalidTaskInputException;
+import seedu.duke.exception.DukeException;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
@@ -106,6 +110,9 @@ public class AddCommand extends Command {
         return true;
     }
 
+    //@@author johannagwan-reused
+    //Reused from http://www.java2s.com/Tutorial/Java/0120__Development/CheckifaStringisavaliddate.htmv
+    //with minor modifications.
     /**
      * Checks if an input date is written in a valid date format.
      *
@@ -122,4 +129,5 @@ public class AddCommand extends Command {
         }
         return true;
     }
+    //@@author
 }

@@ -26,6 +26,7 @@ public class Parser {
      */
     public Command handleCommands(String[] inputs, TaskList taskList) {
         String command = inputs[0].trim();
+        System.out.println(inputs[0]);
         Command cmd = null;
         Ui ui = new Ui();
         try {
