@@ -12,7 +12,7 @@ public class task {
      */
     public task(String name) {
         this.Name = name;
-        this.status = "✗";
+        this.status = "\u2718";
     }
 
     /**
@@ -28,7 +28,7 @@ public class task {
      * @return Boolean
      */
     public boolean isDone() {
-        if (this.status.equals("✗")) {
+        if (this.status.equals("\u2718")) {
             return false;
         } else {
             return true;
@@ -39,7 +39,7 @@ public class task {
      * Method sets Task as done
      */
     public void markDone() {
-        this.status = "✓";
+        this.status = "\u2713";
     }
 
     /**
