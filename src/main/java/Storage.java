@@ -21,10 +21,11 @@ public class Storage {
 
     /**
      * Method updates text file with current list of tasks
+     *
      * @param ls
      * @throws IOException
      */
-    public void updateTxtFile (ArrayList<task> ls) throws IOException {
+    public void updateTxtFile(ArrayList<task> ls) throws IOException {
         PrintWriter pw = new PrintWriter(this.file);
         pw.write("");
         pw.close();
@@ -43,10 +44,11 @@ public class Storage {
     /**
      * Method reads text file from filepath and return arraylist of tasks if present
      * if not, returns empty arraylist.
+     *
      * @return Arraylist
      * @throws IOException
      */
-    public ArrayList<task> readTxtFile () throws IOException {
+    public ArrayList<task> readTxtFile() throws IOException {
         boolean check = this.file.exists();
         this.file.createNewFile();
         Scanner fsc = new Scanner(this.file);
@@ -61,7 +63,7 @@ public class Storage {
 
                 if (temparr[0].equals("T")) {
                     ToDo td = new ToDo(temparr[2]);
-
+                    assert (temparr[1].equals("1") || temparr[1].equals("0"));
                     if (temparr[1].equals("1")) {
                         td.markDone();
                     } else {
@@ -69,9 +71,9 @@ public class Storage {
                     }
 
                     mylist.add(td);
-                } else  if (temparr[0].equals("D")) {
+                } else if (temparr[0].equals("D")) {
                     DeadLine d = new DeadLine(temparr[2], temparr[3]);
-
+                    assert (temparr[1].equals("1") || temparr[1].equals("0"));
                     if (temparr[1].equals("1")) {
                         d.markDone();
                     } else {
@@ -81,7 +83,7 @@ public class Storage {
                     mylist.add(d);
                 } else if (temparr[0].equals("E")) {
                     Event e = new Event(temparr[2], temparr[3]);
-
+                    assert (temparr[1].equals("1") || temparr[1].equals("0"));
                     if (temparr[1].equals("1")) {
                         e.markDone();
                     } else {
