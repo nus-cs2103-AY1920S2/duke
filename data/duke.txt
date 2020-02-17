@@ -1,5 +1,1 @@
-T | 1 | task 4
-T | 0 | tutorial 5
-D | 0 | tutorial 2 | 20/02/2020 2000
-E | 0 | tutorial 3 | 20/02/2020 2000
-T | 0 | homework 2
+T | 0 | abc
