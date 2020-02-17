@@ -104,7 +104,7 @@ public class Tasklist {
         message = message + String.format("%d todo\n", todo);
         message = message + String.format("%d deadline\n" , deadline);
         message = message + String.format("%d event\n", event);
-        message = message + String.format("%d tasks done\n", done);
+        message = message + String.format("total task = %d, %d tasks done\n", mylist.size(), done);
         return message;
     }
 

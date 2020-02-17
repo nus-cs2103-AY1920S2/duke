@@ -9,6 +9,8 @@ public class Duke {
     protected Storage storage;
     protected Tasklist tasklist;
 
+    public static final int COMMAND = 0;
+    public static final int NUMBER = 1;
     public static final int FIRST_WORD = 0;
     public static final int SECOND_WORD = 1;
     public static final int TIME = 1;
@@ -38,23 +40,22 @@ public class Duke {
         String message = "";
         try {
             String[] parsed = TextParser.myFirstParser(command);
-            String keyword = parsed[FIRST_WORD];
+            String keyword = parsed[COMMAND];
             assert keyword != "" : "Should contain a keyword else command is a empty string";
             if (keyword.equals(BYE_COMMAND)) {
-                this.storage.writeFile(this.tasklist.mylist);
-                message = message + ui.printMessage("Bye. Hope to see you again soon!");
+                message = byeCommand();
             } else if (keyword.equals(STAT_COMMAND)) {
                 message = message + tasklist.printStatistic();
             } else if (keyword.equals(LIST_COMMAND)) {
                 message = message + ui.printMessage("Here are the task in your list");
                 message = message + tasklist.printList();
             } else if (keyword.equals(DONE_COMMAND)) {
-                int taskNumber = Integer.valueOf(parsed[SECOND_WORD]);
+                int taskNumber = Integer.valueOf(parsed[NUMBER]);
                 this.tasklist.markDone(taskNumber);
                 message = message + ui.printMessage("Nice! I've marked this task as done:");
                 message = message + ui.printMessage("" + taskNumber + ". " + this.tasklist.getTask(taskNumber));
             } else if (keyword.equals(DEL_COMMAND)) {
-                int taskNumber = Integer.valueOf(parsed[SECOND_WORD]);
+                int taskNumber = Integer.valueOf(parsed[NUMBER]);
                 message = message + ui.printMessage("Noted. I've removed this task");
                 message = message + ui.printMessage("" + this.tasklist.getTask(taskNumber));
                 this.tasklist.removeTask(taskNumber);
@@ -92,7 +93,17 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    protected String getResponse(String input) {
+    public String getResponse(String input) {
         return this.run(input);
+    }
+
+    /**
+     * Saves the tasks to a file and prompt the user to exit the program.
+     */
+    private String byeCommand() {
+        String message = "";
+        storage.writeFile(tasklist.mylist);
+        message = ui.printMessage("Bye. I have saved the list to a file! You can exit the program now");
+        return message;
     }
 }
