@@ -52,7 +52,7 @@ Alright, I've added this task:
 You currently have 1 task(s) in the list.
 ```
 
-![todo_pic](images/ToDo.png)
+![todo_pic](images/Todo.png)
 
 ### `deadline` - Add a Deadline task to the list
 
