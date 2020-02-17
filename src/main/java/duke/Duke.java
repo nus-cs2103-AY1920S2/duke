@@ -39,6 +39,14 @@ public class Duke {
     }
 
     /**
+     * Gets greeting from duke.
+     * @return The greeting message.
+     */
+    public String getGreeting() {
+        return Message.GREET;
+    }
+
+    /**
      * Returns the response to the command input by the user.
      * @param command The user command.
      * @return The response to the command.
