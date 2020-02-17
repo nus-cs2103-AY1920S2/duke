@@ -1,5 +1,5 @@
 /**
- * Represents the Command that is sent to the TaskList to handle the Tasks in TaskList.
+ * Represent the Command that is sent to the TaskList to handle the Tasks in TaskList.
  * A Command is represented by:
  * a String <code>command</code> which describes the type of command.
  * an int <code>index</code> which is used by DeleteCommand and DoneCommand.
@@ -18,6 +18,7 @@ public abstract class Command {
     public int getIndex() {
         return this.index;
     }
+
     public String getTaskToSearch() {
         return this.taskToSearch;
     }
@@ -29,4 +30,5 @@ public abstract class Command {
     public String toString() {
         return this.command;
     }
+
 }

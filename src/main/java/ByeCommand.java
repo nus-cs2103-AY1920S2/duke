@@ -1,5 +1,5 @@
 /**
- * Represents a "bye" command given to TaskList.
+ * Represent a "bye" command given to TaskList.
  */
 public class ByeCommand extends Command {
 

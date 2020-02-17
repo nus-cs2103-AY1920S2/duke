@@ -36,6 +36,7 @@ public class TaskList {
             counter++;
         }
     }
+
     public void showSearch(String stringToSearch) {
         ArrayList<Task> searchList = new ArrayList<>();
         for (int i = 0; i < listOfTexts.size(); i++) {
@@ -54,7 +55,7 @@ public class TaskList {
      * @param command Type of Command described by .getCommand() which return a <code>String</code> description.
      */
     public void runCommand(Command command) {
-        assert (command != null) :"Input something correct into me! todo/deadline(/by)/event(/at)/find/list/delete/done";
+        assert (command != null) : "Input something correct into me! todo/deadline(/by)/event(/at)/find/list/delete/done";
         try {
             switch (command.getCommand()) {
                 case "bye": {

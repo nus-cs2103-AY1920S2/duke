@@ -1,5 +1,5 @@
 /**
- * Represents a "event" command given to TaskList.
+ * Represent a "event" command given to TaskList.
  */
 public class EventCommand extends Command {
 

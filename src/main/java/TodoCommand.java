@@ -1,5 +1,5 @@
 /**
- * Represents a "todo" command given to TaskList.
+ * Represent a "todo" command given to TaskList.
  */
 public class TodoCommand extends Command {
 

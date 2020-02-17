@@ -7,8 +7,10 @@ import java.time.temporal.ChronoUnit;
  */
 public class Parser {
     final static String exitInput = "bye";
+
     /**
      * Returns a Command for Duke to run on.
+     *
      * @param text Input from user.
      * @return Command to run. Returns null when no input matches the correct Commands.
      */
@@ -100,7 +102,7 @@ public class Parser {
                     for (int i = 1; i < splitStr.length; i++) {
                         todo += splitStr[i] + " ";
                     }
-                    todo.substring(0, todo.length() - 1);
+                    todo = todo.substring(0, todo.length() - 1);
                     Todo t = new Todo(todo);
                     return new TodoCommand(t);
                 }

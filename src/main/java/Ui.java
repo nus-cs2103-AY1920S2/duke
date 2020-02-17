@@ -11,6 +11,7 @@ public class Ui {
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
+
     /**
      * print message with logo on startup.
      */
@@ -78,9 +79,11 @@ public class Ui {
         System.out.println(e);
         System.out.println("Now you have " + listOfTexts.size() + " tasks in the list.");
     }
+
     static void printBeforeSearch() {
         System.out.println("Here are the matching tasks in your list:");
     }
+
     static void printSearch(ArrayList<Task> searchList) {
         System.out.println(searchList.size());
         assert (searchList.size() != 0) : "☹ OOPS!!! No match on your search! Are you sure you've added it? ☹ OOPS!!!";
@@ -91,7 +94,4 @@ public class Ui {
         }
     }
 
-    public static void printAfterBye() {
-        System.out.println("Bye bye! Thank you for using me! Hope to see you again soon.");
-    }
 }
