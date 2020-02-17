@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Hello I am Duke. What can I do for you today?"
+                DialogBox.getDukeDialog("Hello I am Tom. What can I do for you today?"
                                 + "\n Type 'help' to see the list of commands that I accept",
                         dukeImage));
     }
@@ -67,7 +67,7 @@ public class MainWindow extends AnchorPane {
             Ui ui = new Ui();
             new Thread(() -> {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 } catch (InterruptedException exc) {
                     ui.showError(exc.getMessage());
                 }
