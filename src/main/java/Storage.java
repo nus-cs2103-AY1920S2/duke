@@ -1,6 +1,7 @@
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,9 +11,11 @@ import java.util.ArrayList;
 public class Storage {
 
     String path;
+    File file;
 
     Storage(String filePath) {
         this.path = filePath;
+        this.file = new File(filePath);
     }
 
     //if duke.txt is empty-> raise exception, else create list and return it
@@ -31,7 +34,13 @@ public class Storage {
             }
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            try {
+                file.createNewFile();
+                FileReader fr = new FileReader(path);
+                Scanner sc = new Scanner(fr);
+            } catch (IOException f) {
+                f.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
