@@ -19,6 +19,10 @@ It has three main features which are:
 
 ## How to use
 
+![User Interface](../../../docs/Ui.png)
+
+There is 
+
 ### `Keyword` - Describe action
 
 Describe action and its outcome.
