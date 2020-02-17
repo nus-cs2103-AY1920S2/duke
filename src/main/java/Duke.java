@@ -58,7 +58,7 @@ public class Duke {
                     || keyword.equals(FIND_COMMAND)
                     || keyword.equals(TODO_COMMAND)) { // commands with one arguments
                 if (parsed.length <= 1) {
-                    throw new DukeException("I think u need more argument");
+                    throw new DukeException("I think u need one more argument");
                 }
                 if (keyword.equals(DONE_COMMAND)) {
                     int taskNumber = Integer.valueOf(parsed[NUMBER]);
@@ -74,21 +74,18 @@ public class Duke {
             } else if (keyword.equals(DEADLINE_COMMAND)
                     || keyword.equals(EVENT_COMMAND)) { // commands with two or more argument
                 if (parsed.length <= 1) {
-                    throw new DukeException("I think u need more arguments");
+                    throw new DukeException("There is no argument");
                 }
                 String word2 = parsed[SECOND_WORD];
                 String[] parsed2 = TextParser.mySecondParser(word2);
                 if (parsed2.length <= 1) {
-                    throw new DukeException("I think u need more arguments");
+                    throw new DukeException("I think u need one more argument");
                 }
                 if (keyword.equals(DEADLINE_COMMAND)) {
-                    this.tasklist.addTask(new Deadline(parsed2[FIRST_WORD], LocalDate.parse(parsed2[TIME])));
+                    message = deadlineCommand(parsed2[FIRST_WORD], LocalDate.parse(parsed2[TIME]));
                 } else if (keyword.equals(EVENT_COMMAND)) {
-                    this.tasklist.addTask(new Event(parsed2[FIRST_WORD], LocalDate.parse(parsed2[TIME])));
+                    message = eventCommand(parsed2[FIRST_WORD], LocalDate.parse(parsed2[TIME]));
                 }
-                message = message + ui.printMessage("Got it. I 've added this task:");
-                message = message + ui.printMessage("" + this.tasklist.getTask(this.tasklist.getSize()));
-                message = message + ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
             } else {
                 throw new DukeException("I DK how to process this -> " + command); // command not recognised
             }
@@ -197,6 +194,36 @@ public class Duke {
     private String todoCommand(String taskDescription) {
         String message = "";
         tasklist.addTask(new Todo(taskDescription));
+        message = message + ui.printMessage("Got it. I 've added this task:");
+        message = message + ui.printMessage("" + this.tasklist.getTask(this.tasklist.getSize()));
+        message = message + ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
+        return message;
+    }
+
+    /**
+     * Runs the deadline command
+     * @param taskDescription of the task
+     * @param date of the task
+     * @return message generated to inform user
+     */
+    private String deadlineCommand(String taskDescription, LocalDate date) {
+        String message = "";
+        tasklist.addTask(new Deadline(taskDescription, date));
+        message = message + ui.printMessage("Got it. I 've added this task:");
+        message = message + ui.printMessage("" + this.tasklist.getTask(this.tasklist.getSize()));
+        message = message + ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
+        return message;
+    }
+
+    /**
+     * Runs the event command
+     * @param taskDescription of the task
+     * @param date of the task
+     * @return message generated to inform user
+     */
+    private String eventCommand(String taskDescription, LocalDate date) {
+        String message = "";
+        tasklist.addTask(new Event(taskDescription, date));
         message = message + ui.printMessage("Got it. I 've added this task:");
         message = message + ui.printMessage("" + this.tasklist.getTask(this.tasklist.getSize()));
         message = message + ui.printMessage("Now you have " + this.tasklist.getSize() + " in the list.");
