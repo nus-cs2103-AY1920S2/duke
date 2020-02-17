@@ -1,3 +1,0 @@
-T | [N] | read book
-D | [N] | return book | 2020-12-10
-T | [N] | run 5km

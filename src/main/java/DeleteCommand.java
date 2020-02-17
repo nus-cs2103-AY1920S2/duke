@@ -28,6 +28,7 @@ class DeleteCommand extends Command {
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         String[] commands = command.split(" ");
+        TaskList before = tasks;
         if (!(commands[1].trim().equals("all"))) {
             List<Task> taskList = tasks.getTaskList();
             final Task toBeRemoved = taskList.get(Integer.parseInt(commands[1]) - 1);
@@ -39,6 +40,7 @@ class DeleteCommand extends Command {
         } else {
             // It is a mass deletion task
             List<Task> remainingTasks = new ArrayList<>();
+            boolean error = false;
 
             try {
                 if (commands[2].equals("todo")) {
@@ -66,22 +68,23 @@ class DeleteCommand extends Command {
                         }
                     }
                 } else {
+                    error = true;
                     throw new DukeException("There was no invalid input after 'all'. Please try again.");
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
 
-
-
-            tasks.taskList = remainingTasks;
-            storage.save(tasks);
-            ui.showLine();
-            System.out.println("\n" + "Alright, I've removed all " + commands[2] + " tasks." + "\n");
+            if (!error) {
+                tasks.taskList = remainingTasks;
+                storage.save(tasks);
+                ui.showLine();
+                System.out.println("\n" + "Alright, I've removed all " + commands[2] + " tasks." + "\n");
+                System.out.println("You currently have "
+                        + tasks.taskList.size()
+                        + " task(s) in the list.");
+            }
         }
-        System.out.println("You currently have "
-                + tasks.taskList.size()
-                + " task(s) in the list.");
     }
 
     /**
