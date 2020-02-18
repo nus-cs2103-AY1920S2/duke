@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Represents the CLI user interface that interacts with the user and acts as a view.
+ * Represents the user interface that interacts with the user and acts as a view.
  */
 public class Ui {
     private Scanner scanner = new Scanner(System.in);
