@@ -1,0 +1,50 @@
+.root {
+    -fx-accent: #272727;
+    -fx-focus-color: -fx-accent;
+    -fx-base: #121212;
+    -fx-control-inner-background: #272727;
+    -fx-control-inner-background-alt: -fx-control-inner-background;
+}
+
+.label{
+    -fx-text-fill: lightgray;
+}
+
+.text-field {
+    -fx-prompt-text-fill: gray;
+}
+
+.titulo{
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.button{
+    -fx-focus-traversable: false;
+}
+
+.button:hover{
+    -fx-text-fill: white;
+}
+
+.separator *.line {
+    -fx-background-color: #3C3C3C;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+}
+
+.scroll-bar{
+    -fx-background-color: #272727;
+}
+
+.button:default {
+    -fx-base: -fx-accent ;
+}
+
+.user-speech-bubble {
+    -fx-background-color: green;
+}
+
+.window-top-bar {
+    -fx-background-color: #272727;
+}

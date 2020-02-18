@@ -3,7 +3,6 @@ package duke;
 import duke.controller.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -15,12 +14,21 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        VBox ap = new MainWindow(duke);
+        MainWindow ap = new MainWindow(duke);
         Scene scene = new Scene(ap);
         stage.setScene(scene);
         stage.setMinHeight(600);
         stage.setHeight(600);
         stage.setMinWidth(400);
+        stage.setTitle("Duchess");
+        scene.getStylesheets().add("/styles/duchess.css");
+        ap.themeToggle.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
+            if (isSelected) {
+                scene.getStylesheets().add("/styles/dark-duchess.css");
+            } else {
+                scene.getStylesheets().remove("/styles/dark-duchess.css");
+            }
+        });
         stage.show();
     }
 }

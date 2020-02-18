@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
@@ -16,6 +17,8 @@ import java.io.IOException;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends VBox {
+    @FXML
+    public ToggleButton themeToggle;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -28,7 +31,7 @@ public class MainWindow extends VBox {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuchess.png"));
 
     /**
      * Initialises {@code MainWindow} via FXML.
@@ -67,6 +70,9 @@ public class MainWindow extends VBox {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.isEmpty()) {
+            return;
+        }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage));

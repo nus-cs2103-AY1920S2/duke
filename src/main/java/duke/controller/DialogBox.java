@@ -20,6 +20,10 @@ import java.util.Collections;
  * represent the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String USER_SPEECH_BUBBLE_CLASS = "user-speech-bubble";
+
+    @FXML
+    private HBox SpeechBubble;
     @FXML
     private Label dialog;
     @FXML
@@ -34,6 +38,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        dialog.setMinHeight(Label.USE_PREF_SIZE);
         dialog.setText(text);
         displayPicture.setImage(img);
         double width = displayPicture.getFitWidth();
@@ -60,7 +65,9 @@ public class DialogBox extends HBox {
      * @return Dialog for user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDialog = new DialogBox(text, img);
+        userDialog.SpeechBubble.getStyleClass().add(USER_SPEECH_BUBBLE_CLASS);
+        return userDialog;
     }
 
     /**
