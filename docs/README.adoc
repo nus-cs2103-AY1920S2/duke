@@ -26,7 +26,7 @@ Jay-z's task manager serves as a personal chatbot assistant to help individuals 
 .  Download the latest `v0.2.jar` link:https://github.com/ljiazh3ng/duke/releases[here].
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-images::Ui.png[width="790"]
+image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`i`* and pressing kbd:[Enter] will open the instruction window.
