@@ -48,6 +48,11 @@ public class Parser {
             String keyword = response.replace("find ", "");
             return new FindCommand(response, keyword);
 
+        } else if (messageType.equals("reminders")) {
+
+            return new RemindersCommand();
+
+
         } else {
 
             throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -93,6 +98,10 @@ public class Parser {
 
         if (response.contains("find")) {
             return "find";
+        }
+
+        if (response.contains("reminders")) {
+            return "reminders";
         }
 
         throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

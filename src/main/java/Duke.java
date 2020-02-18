@@ -154,7 +154,7 @@ public class Duke extends Application {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
-        final PrintStream OLD = System.out;
+        final PrintStream old = System.out;
         // use my special stream instead.
         System.setOut(ps);
         // Print output, this output goes to the print stream to be captured.
@@ -174,7 +174,7 @@ public class Duke extends Application {
         }
         // Put things back
         System.out.flush();
-        System.setOut(OLD);
+        System.setOut(old);
         Label userText = new Label(input);
         Label dukeText = new Label(baos.toString());
         dialogContainer.getChildren().addAll(

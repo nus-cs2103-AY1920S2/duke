@@ -17,6 +17,10 @@ public abstract class Command {
 
     }
 
+    public Command() {
+        this.response = null;
+    }
+
     /**
      * Abstract execute for the child classes to implement.
      * @param tasksStorage storage for the task, deals with storing data and retrieving data from hard disk.
