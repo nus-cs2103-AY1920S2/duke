@@ -4,7 +4,7 @@
 2. [Features](#2-features)
 3. [Adding a Task](#adding-a-task)
 #1. Introduction
-<img src = "/images/Ui.png">
+![Duke](/images/Ui.png)
 
 Duke is a task handler that **keeps all your tasks in a list**. This application is
 suitable for anyone who wants to keep track of a huge amount of tasks. 
