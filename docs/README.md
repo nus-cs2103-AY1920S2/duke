@@ -13,7 +13,7 @@
 
 4. [Usage](#usage)
 
-+ 4.1 [`bye`](#bye)
++ 4.1 [`bye`](#4.1)
   
 + 4.2 [`todo`](#todo)
   
