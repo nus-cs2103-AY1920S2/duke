@@ -24,7 +24,7 @@ Tired of being a procrastinator? Fret not! Dodo is here to make sure you do your
 
 You can save your todo, deadline, event list--all in one!
 
-![Figure of Dodo](https://github.com/johannagwan/duke/blob/master/docs/Ui.png)
+![Figure of Dodo](img src="Ui.png")
 ##### Figure 1. Screenshot of Dodo
 
 ## 2. Quick Start
