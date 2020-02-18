@@ -58,11 +58,12 @@ public class AddTaskCommand extends TaskCommand {
             break;
         case DEADLINE:
             task = new Deadline(false, description,
-                    (LocalDateTime) details.get("datetime"));
+                    (LocalDateTime) details.get("deadline"));
             break;
         case EVENT:
             task = new Event(false, description,
-                    (LocalDateTime) details.get("datetime"));
+                    (LocalDateTime) details.get("start"),
+                    (LocalDateTime) details.get("end"));
             break;
         default:
             assert false : "Task type should already be valid.";

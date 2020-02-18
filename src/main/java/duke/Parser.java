@@ -26,7 +26,7 @@ public class Parser {
      * @return A LocalDateTime object.
      * @throws DukeException Error when parsing the date.
      */
-    static LocalDateTime parseDateTime(String datetime) throws DukeException {
+    public static LocalDateTime parseDateTime(String datetime) throws DukeException {
         try {
             return LocalDateTime.parse(datetime.replace(' ', 'T'));
         } catch (DateTimeParseException e) {
@@ -35,7 +35,13 @@ public class Parser {
         }
     }
 
-    static LocalDate parseDate(String date) throws DukeException {
+    /**
+     * Parses a string into LocalDate object.
+     * @param date The string to be parsed.
+     * @return A LocalDate object.
+     * @throws DukeException Error when parsing the date.
+     */
+    public static LocalDate parseDate(String date) throws DukeException {
         try {
             return LocalDate.parse(date);
         } catch (DateTimeParseException e) {
@@ -44,7 +50,13 @@ public class Parser {
         }
     }
 
-    static Command parseList(String details) throws DukeException {
+    /**
+     * Parses the list command to obtain different lists.
+     * @param details The details of the list command.
+     * @return The respective list command.
+     * @throws DukeException
+     */
+    public static Command parseList(String details) throws DukeException {
         switch (details.toUpperCase()) {
         case "TASKS":
             return new ListTaskCommand();
@@ -55,13 +67,21 @@ public class Parser {
         }
     }
 
-    static Command parseExpense(String details) throws DukeException {
-        if (details.length() <= 0) {
+    /**
+     * Parses some details to obtain an AddExpenseCommand object.
+     * @param details The details of the command.
+     * @return An AddExpenseCommand object with the details.
+     * @throws DukeException Error when parsing the expense.
+     */
+    public static Command parseExpense(String details) throws DukeException {
+        if (details.length() == 0) {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
 
         int keyPosition = details.indexOf(" /dollars ");
-        if (keyPosition == -1) {
+        int keyPosition2 = details.indexOf(" /on ");
+
+        if (keyPosition == -1 || keyPosition2 == -1) {
             throw new DukeException("EXPENSE requires a format of "
                     + "<expense> /dollars <description> /on <date>.");
         }
@@ -73,32 +93,24 @@ public class Parser {
             throw new DukeException("An integer amount for expense is required.");
         }
 
-        details = details.substring(keyPosition + 10);
-
-        keyPosition = details.indexOf(" /on ");
-        if (keyPosition == -1) {
-            throw new DukeException("EXPENSE requires a format of "
-                    + "<expense> /dollars <description> /on <date>.");
-        }
-
-        String description = details.substring(0, keyPosition);
-        if (description.length() < 1) {
+        String description = details.substring(keyPosition + 10, keyPosition2);
+        if (description.length() == 0) {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
 
-        LocalDate date = parseDate(details.substring(keyPosition + 5));
+        LocalDate date = parseDate(details.substring(keyPosition2 + 5));
 
         return new AddExpenseCommand(description, expense, date);
     }
 
     /**
-     * Parses some details to obtain an AddCommand object of todo type.
+     * Parses some details to obtain an AddTaskCommand object of todo type.
      * @param details The details of the command.
-     * @return An AddCommand object with the details.
+     * @return An AddTaskCommand object with the details.
      * @throws DukeException Error when parsing the todo.
      */
-    static Command parseTodo(String details) throws DukeException {
-        if (details.length() <= 0) {
+    public static Command parseTodo(String details) throws DukeException {
+        if (details.length() == 0) {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
 
@@ -106,12 +118,12 @@ public class Parser {
     }
 
     /**
-     * Parses some details to obtain an AddCommand object of deadline type.
+     * Parses some details to obtain an AddTaskCommand object of deadline type.
      * @param details The details of the command.
-     * @return An AddCommand object with the details.
+     * @return An AddTaskCommand object with the details.
      * @throws DukeException Error when parsing the deadline.
      */
-    static Command parseDeadline(String details) throws DukeException {
+    public static Command parseDeadline(String details) throws DukeException {
         if (details.length() == 0) {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
@@ -124,47 +136,50 @@ public class Parser {
         }
 
         String description = details.substring(0, keyPosition);
-        if (description.length() < 1) {
+        if (description.length() == 0) {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
 
         LocalDateTime datetime = parseDateTime(details.substring(keyPosition + 5));
 
         HashMap<String, Object> values = new HashMap<>();
-        values.put("datetime", datetime);
+        values.put("deadline", datetime);
 
         return new AddTaskCommand(TaskType.DEADLINE, description, values);
     }
 
     /**
-     * Parses some details to obtain an AddCommand object of event type.
+     * Parses some details to obtain an AddTaskCommand object of event type.
      * @param details The details of the command.
-     * @return An AddCommand object with the details.
+     * @return An AddTaskCommand object with the details.
      * @throws DukeException Error when parsing the event.
      */
-    static Command parseEvent(String details) throws DukeException {
+    public static Command parseEvent(String details) throws DukeException {
         if (details.length() == 0) {
             throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
 
-        int keyPosition = details.indexOf(" /at ");
+        int keyPosition = details.indexOf(" /from ");
+        int keyPosition2 = details.indexOf(" /to ");
 
-        if (keyPosition == -1) {
+        if (keyPosition == -1 || keyPosition2 == -1) {
             throw new DukeException("EVENT requires a format of "
-                    + "<description> /at <datetime>.");
+                    + "<description> /from <start time> /to <end time>.");
         }
 
         String description = details.substring(0, keyPosition);
-        if (description.length() < 1) {
-            throw new DukeException(ErrorMessage.EMPTY_DATETIME);
+        if (description.length() == 0) {
+            throw new DukeException(ErrorMessage.EMPTY_DESCRIPTION);
         }
 
-        LocalDateTime datetime = parseDateTime(details.substring(keyPosition + 5));
+        LocalDateTime from = parseDateTime(details.substring(keyPosition + 7, keyPosition2));
+        LocalDateTime to = parseDateTime(details.substring(keyPosition2 + 5));
 
         HashMap<String, Object> values = new HashMap<>();
-        values.put("datetime", datetime);
+        values.put("start", from);
+        values.put("end", to);
 
-        return new AddTaskCommand(TaskType.DEADLINE, description, values);
+        return new AddTaskCommand(TaskType.EVENT, description, values);
     }
 
     /**
@@ -173,7 +188,7 @@ public class Parser {
      * @return A MarkCommand with an index in the list to be marked.
      * @throws DukeException Error when parsing the done command.
      */
-    static Command parseDone(String details) throws DukeException {
+    public static Command parseDone(String details) throws DukeException {
         int index;
 
         if (details.length() == 0) {
@@ -209,7 +224,7 @@ public class Parser {
      * @return A DeleteCommand with an index in the list to be deleted.
      * @throws DukeException Error when parsing the delete command.
      */
-    static Command parseDelete(String details) throws DukeException {
+    public static Command parseDelete(String details) throws DukeException {
         int splitIndex = details.indexOf(' ');
 
         if (splitIndex < 0) {
