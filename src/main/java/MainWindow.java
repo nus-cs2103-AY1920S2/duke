@@ -23,12 +23,13 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/BugCat.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Capoo.png"));
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greetings(), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -48,5 +49,24 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    /**
+     * Returns string with welcome message.
+     * @return string containing welcome message.
+     */
+    public static String greetings() {
+        String tinga = "         __\n"
+                + "     _|    |_    ○\n"
+                + "    |_       _\\    _      _   ___        _____          ___  __\n"
+                + "       |    |      |   \\  |    '       \\   /     __    \\    /     _ `   |\n"
+                + "       |    |      |    | |    |  |    | |    |__|    | |    (__|    |\n"
+                + "       |__|      |__| |__|  |__|   \\____     |   \\____, __|\n"
+                + "                                                /  \\__|   |\n"
+                + "                                                \\______/\n";
+        tinga += "Hey there! I'm tinga :)\n";
+        tinga += "What can I do for you?\n";
+        tinga += "Bugcat capoo images by Yara\n";
+        return tinga;
     }
 }

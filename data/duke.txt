@@ -1,4 +1,3 @@
 D | 1 | cs3230 assignment | Feb 6 2020
 T | 0 | dance
 T | 1 | cry
-T | 0 | UPDATEDD
