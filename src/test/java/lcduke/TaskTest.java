@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskTest {
     @Test
     public void testGetDoneOutput(){
-        lcduke.Task task1 = new lcduke.Todo("todo read book");
+        lcduke.Task task1 = new lcduke.Todo("todo testing todo function");
         assertEquals(false, task1.getDone());
     }
 
@@ -14,7 +14,7 @@ public class TaskTest {
     public void testToStringOutput(){
         lcduke.Task task1 = new lcduke.Todo("todo read book");
         task1.markAsDone();
-        assertEquals("[" + "\u2713" + "] " + "todo read book",
+        assertEquals("[T][" + "\u2713" + "] " + "todo read book",
                 task1.toString());
     }
 
