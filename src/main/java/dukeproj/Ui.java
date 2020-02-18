@@ -24,11 +24,11 @@ public class Ui {
         case LIST:
             return "Here are all your tasks: ";
         case ADD:
-            return "Okay! I have added the following task: ";
+            return "I have added the following task: ";
         case DONE:
-            return "Okay! I have marked the following task as done: ";
+            return "I have marked the following task as done: ";
         case DELETE:
-            return "Okay! I have deleted the following task: ";
+            return "I have deleted the following task: ";
         case FIND:
             return "Here are your matching tasks: ";
         case SEARCH:
@@ -40,7 +40,7 @@ public class Ui {
         case BAD_DATE:
             return "HEY! Bad date format!\nMake sure the format is: dd mm yy";
         case BAD_DESCRIPTION:
-            return "OOPS! ";
+            return "Tsk! ";
         case HELP:
             return getHelp();
         default:
@@ -52,19 +52,20 @@ public class Ui {
      * Prints out the exit message for DukeProject.
      */
     public String getExit() {
-        return "Bye! Come again soon!";
+        return "Get Lost.";
     }
 
     private String getHelp() {
-        return "Here are the commands:\nList: returns a list of all your tasks\n"
-                + "Todo: makes a new todo task\n  Format: todo (task)\n"
-                + "Deadline: makes a new deadline task\n  Format: deadline (task) /by (dd mm yy)\n"
-                + "Event: makes a new event task\n  Format: event (task) /at (dd mm yy)\n"
-                + "Done: marks a task as done\n  Format: done (task index)\n"
-                + "Delete: deletes a task\n  Format: delete (task index)\n"
-                + "Schedule: view schedule for a specific date\n  Format: schedule (dd mm yy)\n"
-                + "Find: find tasks using keywords\n  Format: find (keywords)\n"
-                + "Bye: exits duke";
+        return "Here are the commands, you better follow them\n"
+                + "\nList: returns a list of all your tasks\n"
+                + "\nTodo: makes a new todo task\n  Format: todo (task)\n"
+                + "\nDeadline: makes a new deadline task\n  Format: deadline (task) /by (dd mm yy)\n"
+                + "\nEvent: makes a new event task\n  Format: event (task) /at (dd mm yy)\n"
+                + "\nDone: marks a task as done\n  Format: done (task index)\n"
+                + "\nDelete: deletes a task\n  Format: delete (task index)\n"
+                + "\nSchedule: view schedule for a specific date\n  Format: schedule (dd mm yy)\n"
+                + "\nFind: find tasks using keywords\n  Format: find (keywords)\n"
+                + "\nBye: exits duke";
     }
 
     private String getGuiIntroduction() {
