@@ -21,6 +21,7 @@ public class Parser {
         String[] substrings = userInput.split(" ", 2);
         String commandWord = substrings[0];
         String arguments = "";
+        assert substrings.length > 0 : "invalid command";
         if (substrings.length > 1) {
             arguments = substrings[1];
         }
