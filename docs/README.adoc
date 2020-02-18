@@ -41,7 +41,7 @@ e.g. typing *`i`* and pressing kbd:[Enter] will open the instruction window.
 == Features
 
 === Viewing instructions : `i`
-
+Shows the list of instructions/help.
 Format: `i`
 
 === Adding a Todo task: `todo`
@@ -49,22 +49,22 @@ Format: `i`
 Adds a todo task into the sorted task list. +
 Format: `todo title` +
 Examples: + 
-*  `todo return books`
-*  `todo get cap 5`
+`todo return books`
+`todo get cap 5`
 Expected output: +
-*  `[T][X] return books`
-*  `[T][X] get cap 5`
+`[T][X] return books`
+`[T][X] get cap 5`
 
 === Adding a Deadline task: `deadline`
 
 Adds a deadline task into the sorted task list. +
 Format: `deadline title /by date` +
 Examples: + 
-*  `deadline return books /by sunday`
-*  `deadline CS2103 /by 2019-10-15`
+`deadline return books /by sunday`
+`deadline CS2103 /by 2019-10-15`
 Expected output: +
-*  `[D][X] return books (by: sunder)`
-*  `[D][X] get cap 5 (by: Oct 15 2019)`
+`[D][X] return books (by: sunder)`
+`[D][X] get cap 5 (by: Oct 15 2019)`
 
 
 === Adding a Event task: `event`
@@ -72,11 +72,11 @@ Expected output: +
 Adds a event task into the sorted task list. +
 Format: `event title /at date` +
 Examples: + 
-*  `event return books /at date`
-*  `event career fair /at 2019-10-15`
+`event return books /at date`
+`event career fair /at 2019-10-15`
 Expected Output: +
-*  `[E][X] return books (at: date)`
-*  `[E][X] career fair (at: Oct 15 2019)`
+`[E][X] return books (at: date)`
+`[E][X] career fair (at: Oct 15 2019)`
 
 === Listing the conetent of current directory : `list`
 
@@ -89,7 +89,7 @@ Finds task whose title contain any of the given keywords. +
 Format: `find KEYWORD` 
 
 Example:
-*  `find abc` +
+`find abc` +
 Display a list of task named `abcdef` and `abc`.
 
 === Deleting a person : `delete`
