@@ -1,4 +1,4 @@
-package duke.command;
+package duke.common.command;
 
 public abstract class Command {
 

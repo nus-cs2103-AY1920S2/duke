@@ -1,24 +1,30 @@
-package duke.common;
+package duke.common.message;
 
 public class Message {
 
     public static final String DELETE_MESSAGE = 
-            "Removed and never to be seen again.";
+            "I wish to remove you from my life too.";
 
     public static final String DIVIDER = "----------";
 
     public static final String EXIT_MESSAGE = "Bye, see you never!";
 
+    public static final String EXPENSE_ADDED = "Spend as much as you want. "
+            + "Your expenses don't add up to much anyway.";
+
+    public static final String EXPENSE_MESSAGE = "Tracking expenses are for nerds.";
+
     public static final String FIND_MESSAGE = "Who am I? Your secretary?";
 
     public static final String GREET = "I'm busy. What do you want?";
-
-    public static final String LIST_MESSAGE = "This is your useless list.";
 
     public static final String MARK_DONE = 
             "Tsk! I've marked this as done, you owe me.";
 
     public static final String TASK_ADDED = "I have increased your workload.";
+
+    public static final String TASK_MESSAGE = 
+            "You have lot of work to do! Chop Chop!";
 
     /**
      * Generates a message to display the number of tasks given the number.

@@ -1,17 +1,17 @@
-package duke.command.expense;
+package duke.expense.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.common.ErrorMessage;
-import duke.common.Message;
+import duke.common.message.ErrorMessage;
+import duke.common.message.Message;
 import duke.expense.Expense;
 import duke.expense.ExpenseList;
 
-public class DeleteCommand extends ExpenseCommand {
+public class DeleteExpenseCommand extends ExpenseCommand {
 
     private int index;
 
-    public DeleteCommand(int index) {
+    public DeleteExpenseCommand(int index) {
         this.index = index;
     }
 

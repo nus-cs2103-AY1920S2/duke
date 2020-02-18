@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.common.Saveable;
+
 import java.util.ArrayList;
 
 public class TaskList implements Saveable {

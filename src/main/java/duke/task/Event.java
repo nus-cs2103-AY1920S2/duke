@@ -5,20 +5,30 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    private LocalDateTime datetime;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
-    public Event(boolean isDone, String description, LocalDateTime datetime) {
+    /**
+     * Contsructor of the event task object.
+     * @param isDone Whether the task is done.
+     * @param description The description of the task.
+     * @param start The start time of the event.
+     * @param end The end time of the event.
+     */
+    public Event(boolean isDone, String description, LocalDateTime start, LocalDateTime end) {
         super(isDone, description);
-        this.datetime = datetime;
+        this.start = start;
+        this.end = end;
     }
 
     public String toSaveFormat() {
-        return String.format("E | %s | %s", super.toSaveFormat(), datetime);
+        return String.format("E | %s | %s | %s", super.toSaveFormat(), start, end);
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(),
-            datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm");
+        return String.format("[E]%s (time: %s to %s)", super.toString(),
+                start.format(formatter), end.format(formatter));
     }
 }

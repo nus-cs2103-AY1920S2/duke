@@ -1,16 +1,16 @@
-package duke.command.task;
+package duke.task.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.common.ErrorMessage;
-import duke.common.Message;
+import duke.common.message.ErrorMessage;
+import duke.common.message.Message;
 import duke.task.TaskList;
 
-public class MarkCommand extends TaskCommand {
+public class MarkTaskCommand extends TaskCommand {
 
     private int index;
 
-    public MarkCommand(int index) {
+    public MarkTaskCommand(int index) {
         this.index = index;
     }
     

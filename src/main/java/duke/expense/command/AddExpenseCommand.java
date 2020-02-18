@@ -1,12 +1,12 @@
-package duke.command.expense;
-
-import java.time.LocalDate;
+package duke.expense.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.common.Message;
+import duke.common.message.Message;
 import duke.expense.Expense;
 import duke.expense.ExpenseList;
+
+import java.time.LocalDate;
 
 public class AddExpenseCommand extends ExpenseCommand {
 
@@ -40,11 +40,10 @@ public class AddExpenseCommand extends ExpenseCommand {
         expenses.add(expenseItem);
         storage.save(expenses);
         
-        String output = Message.TASK_ADDED + "\n"
+        String output = Message.EXPENSE_ADDED + "\n"
                 + Message.DIVIDER + "\n"
                 + "  " + expenseItem + "\n"
-                + Message.DIVIDER + "\n"
-                + Message.showNumberOfTasks(expenses.getLength());
+                + Message.DIVIDER;
         return output;
     }
 }

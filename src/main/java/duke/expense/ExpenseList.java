@@ -2,6 +2,8 @@ package duke.expense;
 
 import java.util.ArrayList;
 
+import duke.common.message.Message;
+
 public class ExpenseList {
 
     private ArrayList<Expense> expenses;
@@ -82,13 +84,12 @@ public class ExpenseList {
 
     @Override
     public String toString() {
-        String output = "----------\n";
+        String output = Message.DIVIDER + "\n";
         for (int i = 0; i < expenses.size(); i++) {
             output += String.format("%d. %s\n", i + 1, expenses.get(i));
         }
-        output += "----------\n"
-                + "Total: $" + String.format("%.2f", getTotalExpense()) + "\n"
-                + "----------";
+        output += Message.DIVIDER + "\n"
+                + "Total: $" + String.format("%.2f", getTotalExpense());
 
         return output;
     }

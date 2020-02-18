@@ -1,15 +1,15 @@
-package duke.command.task;
+package duke.task.command;
 
 import duke.Storage;
-import duke.common.Message;
+import duke.common.message.Message;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class FindCommand extends TaskCommand {
+public class FindTaskCommand extends TaskCommand {
 
     private String search;
 
-    public FindCommand(String search) {
+    public FindTaskCommand(String search) {
         this.search = search;
     }
 

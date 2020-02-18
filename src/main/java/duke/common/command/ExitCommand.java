@@ -1,6 +1,6 @@
-package duke.command;
+package duke.common.command;
 
-import duke.common.Message;
+import duke.common.message.Message;
 
 public class ExitCommand extends Command {
 

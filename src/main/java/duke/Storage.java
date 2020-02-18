@@ -58,7 +58,8 @@ public class Storage {
                     break;
                 case "E":
                     tasks.add(new Event(isDone, description,
-                            LocalDateTime.parse(details[3])));
+                            LocalDateTime.parse(details[3]),
+                            LocalDateTime.parse(details[4])));
                     break;
                 default:
                     assert false : "Invalid save file format.";
@@ -68,6 +69,7 @@ public class Storage {
 
             scanner.close();
         } catch (Exception e) {
+            System.err.println(e);
             throw new DukeException("Problem with reading task save file.");
         }
 
@@ -93,9 +95,11 @@ public class Storage {
 
                 expenses.add(new Expense(description, expense, date));
 
-                scanner.close();
             }
+            
+            scanner.close();
         } catch (Exception e) {
+            System.err.println(e);
             throw new DukeException("Problem with reading expense save file.");
         }
 
