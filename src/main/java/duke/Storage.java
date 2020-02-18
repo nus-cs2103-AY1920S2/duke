@@ -13,7 +13,7 @@ public class Storage {
     /***
      * Start reading the data when first launch
      */
-    protected void startReading() {
+    protected void startReading() throws IOException {
         try {
             printFileContents("data/duke.txt");
         } catch (FileNotFoundException e) {
@@ -26,39 +26,42 @@ public class Storage {
      * @param filePath
      * @throws FileNotFoundException
      */
-    private static void printFileContents(String filePath) throws FileNotFoundException {
+    private static void printFileContents(String filePath) throws IOException {
         File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            String sentence = s.nextLine();
-            String type = sentence.substring(4, 5);
-            boolean isDone = true;
-            if (sentence.substring(7, 8).equals("x")) {
-                isDone = false;
+        f.getParentFile().mkdirs();
+        if (!f.createNewFile()) {
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            while (s.hasNext()) {
+                String sentence = s.nextLine();
+                String type = sentence.substring(4, 5);
+                boolean isDone = true;
+                if (sentence.substring(7, 8).equals("x")) {
+                    isDone = false;
+                }
+                if (type.equals("T")) {
+                    String substr = sentence.substring(10);
+                    ToDo task = new ToDo(substr, isDone);
+                    Duke.commandList.add(task);
+
+                } else if (type.equals("D")) {
+                    String substr = sentence.substring(10);
+                    String[] deadlineSplit = substr.split(" \\| by: ");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                    LocalDate date = LocalDate.parse(deadlineSplit[1], formatter);
+                    Deadline task = new Deadline(deadlineSplit[0], date, isDone);
+                    Duke.commandList.add(task);
+
+                } else {
+                    String substr = sentence.substring(10);
+                    String[] eventSplit = substr.split(" \\| at: ");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                    LocalDate date = LocalDate.parse(eventSplit[1], formatter);
+                    Event task = new Event(eventSplit[0], date, isDone);
+                    Duke.commandList.add(task);
+
+                }
+
             }
-            if (type.equals("T")) {
-                String substr = sentence.substring(10);
-                ToDo task = new ToDo(substr, isDone);
-                Duke.commandList.add(task);
-
-            } else if (type.equals("D")) {
-                String substr = sentence.substring(10);
-                String[] deadlineSplit = substr.split(" \\| by: ");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-                LocalDate date = LocalDate.parse(deadlineSplit[1], formatter);
-                Deadline task = new Deadline(deadlineSplit[0], date, isDone);
-                Duke.commandList.add(task);
-
-            } else {
-                String substr = sentence.substring(10);
-                String[] eventSplit = substr.split(" \\| at: ");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-                LocalDate date = LocalDate.parse(eventSplit[1], formatter);
-                Event task = new Event(eventSplit[0], date, isDone);
-                Duke.commandList.add(task);
-
-            }
-
         }
     }
 
