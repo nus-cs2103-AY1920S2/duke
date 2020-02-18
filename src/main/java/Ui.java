@@ -9,30 +9,10 @@ public class Ui {
     }
 
     /**
-     * Print hello message.
-     */
-    public static void printHello() {
-        String logo = "      ____        _        \n"
-                + "     |  _ \\ _   _| | _____ \n"
-                + "     | | | | | | | |/ / _ \\\n"
-                + "     | |_| | |_| |   <  __/\n"
-                + "     |____/ \\__,_|_|\\_\\___|\n";
-        String greetingText = "    ____________________________________________________________\n"
-                + logo
-                + "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n"
-                + "    ____________________________________________________________";
-        System.out.println(greetingText);
-    }
-
-    /**
      * Print goodbye message.
      */
     public static void printBye() {
-        String byeText = "____________________________________________________________\n"
-                + "Bye. Hope to see you again soon!\n"
-                + "____________________________________________________________";
-        System.out.println(byeText);
+        System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -40,12 +20,10 @@ public class Ui {
      * @param taskList TaskList to print tasks from
      */
     public static void printList(TaskList taskList) {
-        System.out.println("____________________________________________________________\n"
-                + "Here are the tasks in your list:");
+        System.out.println("Here are the tasks in your list:");
         for (Task s : taskList.arrList) {
-            System.out.println((taskList.arrList.indexOf(s) + 1) + ". " + s);
+            System.out.println((taskList.arrList.indexOf(s) + 1) + "." + s);
         }
-        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -53,12 +31,10 @@ public class Ui {
      * @param filteredList ArrayList to print tasks from
      */
     public static void printFilteredList(ArrayList<Task> filteredList) {
-        System.out.println("____________________________________________________________\n"
-                + "Here are the matching tasks in your list:");
+        System.out.println("Here are the matching tasks in your list:");
         for (Task s : filteredList) {
             System.out.println((filteredList.indexOf(s) + 1) + ". " + s);
         }
-        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -75,9 +51,8 @@ public class Ui {
      * @param arrList ArrayList from which Task is deleted from
      */
     public static void printDelete(Task task, ArrayList<Task> arrList) {
-        System.out.println("____________________________________________________________\n"
-                + "Noted. I've removed this task: \n"
-                + task + "\n"
+        System.out.println("Noted. I've removed this task: \n"
+                + task + "\n\n"
                 + "Now you have " + arrList.size() + " tasks in the list.");
     }
 
@@ -87,10 +62,8 @@ public class Ui {
      * @param arrList ArrayList from which Task is marked
      */
     public static void printDone(Task task, ArrayList<Task> arrList) {
-        System.out.println("____________________________________________________________\n"
-                + "Nice! I've marked this task as done: \n"
-                + task + "\n"
-                + "____________________________________________________________");
+        System.out.println("Nice! I've marked this task as done: \n"
+                + task);
     }
 
     /**
@@ -99,9 +72,8 @@ public class Ui {
      * @param arrList ArrayList to which task is added
      */
     public static void printAdd(Task task, ArrayList<Task> arrList) {
-        System.out.println("____________________________________________________________\n"
-                + "Got it. I've added this task: \n"
-                + task + "\n"
+        System.out.println("Got it. I've added this task: \n"
+                + task + "\n\n"
                 + "Now you have " + arrList.size() + " tasks in the list.");
     }
 

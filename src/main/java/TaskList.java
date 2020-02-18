@@ -5,7 +5,6 @@ import java.util.Comparator;
 
 public class TaskList {
     public ArrayList<Task> arrList;
-
     /**
      * Constructor. To create and bind an arrayList.
      */
@@ -39,6 +38,26 @@ public class TaskList {
      */
     public void addList(Task task) {
         arrList.add(task);
+        sortTasks();
+        Ui.printAdd(task, arrList);
+    }
+
+    /**
+     * Finds tasks with taskSubString in their name.
+     * @param taskSubString String to be found in Task name
+     */
+    public void findTasks(String taskSubString) {
+        sortTasks();
+        ArrayList<Task> filteredList = new ArrayList<Task>();
+        for (Task t : arrList) {
+            if (t.getName().contains(taskSubString)) {
+                filteredList.add(t);
+            }
+        }
+        Ui.printFilteredList(filteredList);
+    }
+
+    public void sortTasks() {
         Collections.sort(arrList, new Comparator<Task>() {
             public int compare(Task t1, Task t2) {
                 String thisClass = t1.getClassName();
@@ -59,20 +78,5 @@ public class TaskList {
                 return 0;
             }
         });
-        Ui.printAdd(task, arrList);
-    }
-
-    /**
-     * Finds tasks with taskSubString in their name.
-     * @param taskSubString String to be found in Task name
-     */
-    public void findTasks(String taskSubString) {
-        ArrayList<Task> filteredList = new ArrayList<Task>();
-        for (Task t : arrList) {
-            if (t.getName().contains(taskSubString)) {
-                filteredList.add(t);
-            }
-        }
-        Ui.printFilteredList(filteredList);
     }
 }

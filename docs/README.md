@@ -19,7 +19,8 @@ Duke can:
 3. Complete task
 4. List all tasks
 5. Find tasks based on keyword
-6. Exit
+6. Sort tasks
+7. Exit
 # Features:
 
 ## 1. Add task
@@ -44,11 +45,11 @@ Expected outcome:
 
 `event` - Add new event
 
-Format: `event [name] /at [date in yyyy-mm-dd]`
+Format: `event [name] /at [date in ANY format]`
 
 Provide a name for Duke to associate the event to.
 
-Example of usage: `event book fair /at 2020-08-06`
+Example of usage: `event book fair /at 25 Jan 07`
 
 Expected outcome:
 
@@ -56,13 +57,13 @@ Expected outcome:
 
 `deadline` - Add new deadline
 
-Format: `deadline [name]`
+Format: `deadline [name] /by [date in yyyy-mm-dd]`
 
 Provide a name for Duke to associate the deadline to.
 
 Example of usage: 
 
-`deadline submit essay /by [date in `
+`deadline submit essay /by 2020-08-06`
 
 Expected outcome:
 
@@ -137,7 +138,15 @@ Expected outcome:
 
 [INSERT SCREENSHOT OF DUKE RESPONSE]
 
-## 6. Exit
+## 6. Sort Tasks
+
+Tasks will be sorted by type and date/time.
+
+When `find` or `list` commands are run, the list generated and displayed
+will be sorted by type in the order Todo, Event and Deadline. Deadlines
+are sorted chronologically by their date/time.
+
+## 7. Exit
 
 Close application
 

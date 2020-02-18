@@ -156,6 +156,6 @@ public class Duke extends Application {
         System.out.flush();
         System.setOut(old);
 
-        return "Duke heard: " + baos.toString();
+        return baos.toString();
     }
 }
