@@ -12,11 +12,13 @@ import java.util.ArrayList;
  */
 public class Storage {
     protected File file;
+    protected TaskList tasks;
     protected ArrayList<Task> taskList;
 
     public Storage(String filePath) {
         this.file = new File(filePath);
-        this.taskList = new ArrayList<>();
+        this.tasks = new TaskList();
+        this.taskList = tasks.getList();
     }
 
     /**
@@ -31,7 +33,7 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = br.readLine();
             while (line != null) {
-                Parser HDParser = new Parser(taskList);
+                Parser HDParser = new Parser(tasks);
                 HDParser.loadText(line);
                 line = br.readLine();
             }

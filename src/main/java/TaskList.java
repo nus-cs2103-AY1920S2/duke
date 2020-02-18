@@ -9,7 +9,6 @@ public class TaskList {
 
     public TaskList() {
         this.taskList = new ArrayList<>();
-        System.out.println("Task list created!");
     }
 
     /**
@@ -19,5 +18,23 @@ public class TaskList {
      */
     public ArrayList<Task> getList() {
         return taskList;
+    }
+
+    /**
+     * Adds the task to the task list.
+     *
+     * @param task task to be added to the task list.
+     */
+    public void addTask(Task task) {
+        taskList.add(task);
+    }
+
+    /**
+     * Deletes specified task from the task list.
+     *
+     * @param task task to be deleted from the task list.
+     */
+    public void deleteTask(Task task) {
+        taskList.remove(task);
     }
 }

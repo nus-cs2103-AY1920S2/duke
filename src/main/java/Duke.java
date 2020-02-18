@@ -49,7 +49,7 @@ public class Duke extends Application {
             tasks = new TaskList();
             storage.updateTaskList(tasks.getList());
         }
-        parser = new Parser(tasks.getList());
+        parser = new Parser(tasks);
     }
 
     @Override

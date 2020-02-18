@@ -6,11 +6,13 @@ import java.util.ArrayList;
  * <code>task list</code> it stores.
  */
 public class Parser {
+    protected TaskList tasks;
     protected ArrayList<Task> taskList;
     protected Ui ui;
 
-    public Parser(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+    public Parser(TaskList tasks) {
+        this.tasks = tasks;
+        this.taskList = tasks.getList();
         this.ui = new Ui();
     }
 
@@ -45,7 +47,7 @@ public class Parser {
             throw new DukeException("TODO_NO_DESC");
         }
         Todo newTask = new Todo(strArr[1]);
-        taskList.add(newTask);
+        tasks.addTask(newTask);
         return ui.printTodoTask(newTask, taskList);
     }
 
@@ -71,7 +73,7 @@ public class Parser {
         String deadline = cmdArr[1].split(" ", 2)[1];
         String[] deadlineArr = deadline.split(" ", 2);
         Deadline newTask = new Deadline(command, deadlineArr[0], deadlineArr[1]);
-        taskList.add(newTask);
+        tasks.addTask(newTask);
         return ui.printDeadlineTask(newTask, taskList);
     }
 
@@ -96,7 +98,7 @@ public class Parser {
         command = cmdArr[0];
         String timing = cmdArr[1].split(" ", 2)[1];
         Event newTask = new Event(command, timing);
-        taskList.add(newTask);
+        tasks.addTask(newTask);
         return ui.printEventTask(newTask, taskList);
     }
 
@@ -113,7 +115,7 @@ public class Parser {
             throw new DukeException("UNK_TASK_TO_DELETE");
         }
         Task currTask = taskList.get(Integer.parseInt(strArr[1]) - 1);
-        taskList.remove(currTask);
+        tasks.deleteTask(currTask);
         return ui.printRemainingList(currTask, taskList);
     }
 
@@ -154,7 +156,6 @@ public class Parser {
             } else if (command.contains("todo")) {
                 return handleTodo(command);
             } else if (command.contains("deadline")) {
-                System.out.println("DEADLINE TASK!");
                 return handleDeadline(command);
             } else if (command.contains("event")) {
                 return handleEvent(command);
@@ -188,7 +189,7 @@ public class Parser {
         switch (strArr[0]) {
         case "T":
             Todo newTodoTask = new Todo(strArr[2]);
-            taskList.add(newTodoTask);
+            tasks.addTask(newTodoTask);
             if (strArr[1].equals("1")) {
                 newTodoTask.setDone();
             }
@@ -196,14 +197,14 @@ public class Parser {
         case "D":
             String[] deadlineArr = strArr[3].split(" ", 2);
             Deadline newDeadlineTask = new Deadline(strArr[2], deadlineArr[0], deadlineArr[1]);
-            taskList.add(newDeadlineTask);
+            tasks.addTask(newDeadlineTask);
             if (strArr[1].equals("1")) {
                 newDeadlineTask.setDone();
             }
             break;
         case "E":
             Event newEventTask = new Event(strArr[2], strArr[3]);
-            taskList.add(newEventTask);
+            tasks.addTask(newEventTask);
             if (strArr[1].equals("1")) {
                 newEventTask.setDone();
             }
