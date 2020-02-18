@@ -38,12 +38,18 @@ public class Storage {
     }
 
     public void archive() throws DukeException{
+        try {
             File archiveFile = new File(ARCHIVE_PATH);
-            File oldFile= new File(DESTINATION_PATH);
+            File oldFile = new File(DESTINATION_PATH);
             boolean success = oldFile.renameTo(archiveFile);
-            if (success) {
+            FileWriter fw = new FileWriter(oldFile);
+            fw.close();
+            if (!success) {
                 throw new DukeException("Archive file already exists!");
             }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
 
