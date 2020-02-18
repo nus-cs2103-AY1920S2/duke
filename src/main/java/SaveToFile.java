@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 
 public class SaveToFile {
+
     /**
      * Saves tasks to out.txt.
      *
@@ -15,9 +16,18 @@ public class SaveToFile {
      * @throws IOException If file not available.
      */
     public static void usingFileWriter(String list) throws IOException {
-        FileWriter fileWriter = new FileWriter("./out.txt");
-        fileWriter.write(list);
-        fileWriter.close();
+        File file = new File("./out.txt");
+        if (file.exists()) {
+            FileWriter fileWriter = new FileWriter("./out.txt");
+            fileWriter.write(list);
+            fileWriter.close();
+        }
+        else{
+            file.createNewFile();
+            FileWriter fileWriter = new FileWriter("./out.txt");
+            fileWriter.write(list);
+            fileWriter.close();
+        }
     }
 
     /**
