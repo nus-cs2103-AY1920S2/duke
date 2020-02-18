@@ -91,7 +91,7 @@ public class TaskList {
         if (taskToComplete.isCompleted) {
             throw new DuchessException(ERROR_TASK_ALREADY_COMPLETED);
         }
-        taskToComplete.toggleIsCompleted();
+        taskToComplete.completeTask();
         return taskToComplete;
     }
 

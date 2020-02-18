@@ -40,8 +40,8 @@ public class Task {
     /**
      * Toggles the completion status of the task.
      */
-    public void toggleIsCompleted() {
-        this.isCompleted = !this.isCompleted;
+    public void completeTask() {
+        this.isCompleted = true;
     }
 
     /**

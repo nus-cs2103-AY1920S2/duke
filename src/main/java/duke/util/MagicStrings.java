@@ -32,6 +32,8 @@ public class MagicStrings {
     public static final String ERROR_FAIL_TO_LOAD_AND_SAVE = "Failed to load save file! "
             + "You will also not be able to save.";
     public static final String ERROR_FAIL_TO_SAVE = "Facing difficulties saving your tasks right now.";
+    public static final String ERROR_RECURRING_TASK_MISSING_DEADLINE = "This recurring task "
+            + "seem to have no deadline!";
     public static final String ERROR_TASK_ALREADY_COMPLETED = "You have already completed this task!";
     public static final String ERROR_TODO_MISSING_CONTENT = "Your todo content cannot be empty! "
             + "Type help if you need help.";

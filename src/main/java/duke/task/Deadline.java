@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
  * a {@code LocalDateTime deadline}.
  */
 public class Deadline extends Task {
-    private static final String DEADLINE_SYMBOL = "[D]";
-    private LocalDateTime deadline;
+    protected static final String DEADLINE_SYMBOL = "[D]";
+    protected LocalDateTime deadline;
 
     /**
      * Initialises the {@code Deadline} instance with its description and deadline.
