@@ -1,3 +1,5 @@
+import java.util.InvalidPropertiesFormatException;
+
 /**
  * Represents a template for tasks, with a description and
  * an indicator for whether it is completed.
@@ -56,7 +58,7 @@ public class Task {
      * @param time the time after snoozing
      * @return the snoozed version of task
      */
-    public Task snooze(String time) {
+    public Task snooze(String time) throws InvalidPropertiesFormatException {
         // not snoozeable
         return null;
     }

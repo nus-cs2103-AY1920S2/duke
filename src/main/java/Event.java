@@ -1,6 +1,7 @@
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InvalidPropertiesFormatException;
 
 /**
  * Represents an event with a description, start time and end time.
@@ -18,7 +19,7 @@ public class Event extends Task {
      * @param timeRange String containing the start and end time, separated by " to ",
      *                  in the "yyyy-mm-dd HH:mm" format
      */
-    public Event(String description, String timeRange) {
+    public Event(String description, String timeRange) throws InvalidPropertiesFormatException {
         super(description);
 
         type = "Event";
@@ -32,6 +33,11 @@ public class Event extends Task {
 
         startTime = format.parse(times[0], new ParsePosition(0));
         endTime = format.parse(times[1], new ParsePosition(0));
+
+        if (this.startTime == null || this.endTime == null) {
+            // invalid format
+            throw new InvalidPropertiesFormatException("Wrong date format");
+        }
     }
 
     @Override
@@ -46,7 +52,7 @@ public class Event extends Task {
      * @return
      */
     @Override
-    public Task snooze(String time) {
+    public Task snooze(String time) throws InvalidPropertiesFormatException {
         return new Event(description, time);
     }
 

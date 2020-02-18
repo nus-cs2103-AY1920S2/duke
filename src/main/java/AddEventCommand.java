@@ -1,3 +1,5 @@
+import java.util.InvalidPropertiesFormatException;
+
 /**
  * Represents a command to add an event to the task list,
  * to be executed later.
@@ -11,7 +13,7 @@ public class AddEventCommand extends AddCommand {
      * @param description the description of the event
      * @param timeRange the string representing the start and end time
      */
-    public AddEventCommand(String description, String timeRange) {
+    public AddEventCommand(String description, String timeRange) throws InvalidPropertiesFormatException {
         task = new Event(description, timeRange);
     }
 }

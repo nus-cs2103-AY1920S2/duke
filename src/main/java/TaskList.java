@@ -1,5 +1,6 @@
 import java.io.InvalidClassException;
 import java.util.ArrayList;
+import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 
 /**
@@ -64,7 +65,7 @@ public class TaskList {
      *
      * @throws InvalidClassException when the task is not snoozeable
      */
-    public Task snoozeTask(int index, String time) throws InvalidClassException {
+    public Task snoozeTask(int index, String time) throws InvalidClassException, InvalidPropertiesFormatException {
         // check whether the index is within bounds
         assert index >= 0 && index < tasks.size();
 

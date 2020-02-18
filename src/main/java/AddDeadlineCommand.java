@@ -1,3 +1,5 @@
+import java.util.InvalidPropertiesFormatException;
+
 /**
  * Represents a command to add a task with deadline to the task list,
  * to be executed later.
@@ -11,7 +13,7 @@ public class AddDeadlineCommand extends AddCommand {
      * @param description the description of the task
      * @param deadline the string representing the deadline of the task
      */
-    public AddDeadlineCommand(String description, String deadline) {
+    public AddDeadlineCommand(String description, String deadline) throws InvalidPropertiesFormatException {
         task = new Deadline(description, deadline);
     }
 }

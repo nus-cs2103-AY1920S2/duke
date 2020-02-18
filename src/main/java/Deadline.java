@@ -1,6 +1,7 @@
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InvalidPropertiesFormatException;
 
 /**
  * Represents a task with a description and a deadline.
@@ -19,13 +20,18 @@ public class Deadline extends Task {
      * @param description the description of the task
      * @param deadline the deadline of the task
      */
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, String deadline) throws InvalidPropertiesFormatException {
         super(description);
         type = "Deadline";
         isSnoozeable = true;
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm");
         this.deadline = format.parse(deadline, new ParsePosition(0));
+
+        if (this.deadline == null) {
+            // invalid format
+            throw new InvalidPropertiesFormatException("Wrong date format");
+        }
     }
 
     @Override
@@ -34,7 +40,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Task snooze(String time) {
+    public Task snooze(String time) throws InvalidPropertiesFormatException {
         return new Deadline(description, time);
     }
 

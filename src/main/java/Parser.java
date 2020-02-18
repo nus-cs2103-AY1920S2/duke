@@ -1,3 +1,5 @@
+import java.util.InvalidPropertiesFormatException;
+
 /**
  * Represents a parser that takes in user-typed commands and
  * returns the equivalent Command object.
@@ -36,19 +38,19 @@ public class Parser {
             default:
                 return new InvalidCommand();
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | InvalidPropertiesFormatException e) {
             return new InvalidFormatCommand();
         }
     }
 
-    private static Command parseDeadline(String details) throws IndexOutOfBoundsException {
+    private static Command parseDeadline(String details) throws IndexOutOfBoundsException, InvalidPropertiesFormatException {
         String description = details.split(" /by ")[0];
         String deadline = details.split(" /by ")[1];
 
         return new AddDeadlineCommand(description, deadline);
     }
 
-    private static Command parseEvent(String details) throws IndexOutOfBoundsException {
+    private static Command parseEvent(String details) throws IndexOutOfBoundsException, InvalidPropertiesFormatException {
         String description = details.split(" /at ")[0];
         String time = details.split(" /at ")[1];
 
