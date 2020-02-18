@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,7 +35,8 @@ public class Duke extends Application {
      * Duke Constructor.
      */
     public Duke() {
-        String filePath = "/Users/gerrenseow/Documents/Gerren/MODULES/Y2S2/CS2103T/Individual_Project/duke/src/main/java/data/data.txt";
+//        String filePath = "/Users/gerrenseow/Documents/Gerren/MODULES/Y2S2/CS2103T/Individual_Project/duke/src/main/java/data/data.txt";
+        String filePath = "data.txt";
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
@@ -160,6 +162,9 @@ public class Duke extends Application {
         String output = "";
         try {
             output = parser.commandHandler2(command, tasks.tasks, storage.filepath);
+            if (output.equals("Bye! See You Soon!")) {
+                Platform.exit();
+            }
         } catch (DukeException e) {
             output = e.getMessage();
         }

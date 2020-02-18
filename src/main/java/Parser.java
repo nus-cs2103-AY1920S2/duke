@@ -212,6 +212,9 @@ public class Parser {
             output += (store.get(Integer.parseInt(check[1]) - 1));
             saveTasks(store, filepath);
             break;
+        case "bye":
+            output = "Bye! See You Soon!";
+            break;
         default:
             throw new DukeException("OOPS! I'm sorry but I don't know what that means :-(");
         }
