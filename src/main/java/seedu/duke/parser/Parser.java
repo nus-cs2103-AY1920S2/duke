@@ -28,7 +28,6 @@ public class Parser {
     public Command handleCommands(String[] inputs, TaskList taskList) {
         String command = inputs[0].trim();
         Command cmd = null;
-        Ui ui = new Ui();
         try {
             switch (command) {
             case "list":
