@@ -71,7 +71,7 @@ Expected outcome:
 
 `Bye. Hope to see you again soon!`
 
-### ```4.2  todo [TaskAction]```
+### ```4.2 todo [TaskAction]```
  
 Adds a todo task into the list.
 
