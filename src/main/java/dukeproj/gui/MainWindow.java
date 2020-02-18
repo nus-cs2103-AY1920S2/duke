@@ -40,6 +40,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.getStylesheets().add(
                 this.getClass().getResource("/css/ScrollPaneStyles.css").toString());
+        sendButton.getStylesheets().add(
+                this.getClass().getResource("/css/ButtonStyles.css").toString());
+        userInput.getStylesheets().add(
+                this.getClass().getResource("/css/TextFieldStyles.css").toString());
     }
 
     public void setDuke(Duke d) {
