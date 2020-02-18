@@ -45,7 +45,7 @@ public class Duke {
             response = c.execute(tasks, ui, storage);
             isExit = c.isExit();
         } catch (DukeException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return e.getErrorMessage();
         }
 

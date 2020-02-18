@@ -35,7 +35,7 @@ public class TaskList {
      * @param doneIndex the 0-indexed index of the task to be marked as done.
      * @return response message to be printed to the user
      */
-    public String done(int doneIndex) {
+    public String done(int doneIndex) throws IndexOutOfBoundsException {
         assert doneIndex >= 0 && doneIndex < tasks.size() : "done task index out of bounds";
         tasks.get(doneIndex).markAsDone();
         String responseMessage = "";
@@ -50,7 +50,7 @@ public class TaskList {
      * @param deleteIndex the 0-indexed index of the task to be deleted.
      * @return response message to be printed to the user
      */
-    public String delete(int deleteIndex) {
+    public String delete(int deleteIndex) throws IndexOutOfBoundsException {
         assert deleteIndex >= 0 && deleteIndex < tasks.size() : "delete task index out of bounds";
         // deleteIndex is 0-indexed
         String responseMessage = "";

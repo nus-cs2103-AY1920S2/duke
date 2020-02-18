@@ -43,7 +43,6 @@ public class Parser {
                 // the input is 1-indexed. duke.DeleteCommand takes in 0-indexed
                 return new DeleteCommand(Integer.parseInt(otherArgs) - 1);
             } else if (firstArg.equals("find")) {
-                // assumes command is only "find" and a single word search phrase
                 // currently will search the remainder of the command
                 return new FindCommand(otherArgs);
             } else {

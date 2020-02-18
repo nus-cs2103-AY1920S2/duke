@@ -10,7 +10,12 @@ public class DoneCommand implements Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         //doneIndex is 0-indexed
-        return tasks.done(doneIndex);
+        try {
+            return tasks.done(doneIndex);
+        } catch (IndexOutOfBoundsException e) {
+            return "Index out of bounds. Please input an index between 0 and " +
+                    (tasks.getTasks().size() - 1) + ".";
+        }
     }
 
     @Override
