@@ -14,7 +14,7 @@
          <HBox.margin>
             <Insets left="5.0" right="5.0" />
          </HBox.margin></Label>
-      <Circle fx:id="circle" fill="#24619a" radius="38.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fx:id="circle" fill="#24619a" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
