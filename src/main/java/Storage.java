@@ -10,6 +10,9 @@ import java.util.Scanner;
 public class Storage {
     String filePath;
     File file;
+    static final String TODO_INITIAL = "T";
+    static final String EVENT_INITIAL = "E";
+    static final String DEADLINE_INITIAL = "D";
 
     /**
      * Constructor. Links this storage object to a specific file path. Create a file if it does not exist.
@@ -55,16 +58,16 @@ public class Storage {
         boolean isTaskDone = taskDetails[1].equals("1");
         String taskName = taskDetails[2];
 
-        if (taskType.equals("T")) {
+        if (taskType.equals(TODO_INITIAL)) {
             Task newTask = new ToDo(taskName);
             newTask.done = isTaskDone;
             taskList.arrList.add(newTask);
-        } else if (taskType.equals("D")) {
+        } else if (taskType.equals(DEADLINE_INITIAL)) {
             String taskTime = taskDetails[3];
             Task newTask = new Deadline(taskName, taskTime);
             newTask.done = isTaskDone;
             taskList.arrList.add(newTask);
-        } else if (taskType.equals("E")) {
+        } else if (taskType.equals(EVENT_INITIAL)) {
             String taskTime = taskDetails[3];
             Task newTask = new Event(taskName, taskTime);
             newTask.done = isTaskDone;
