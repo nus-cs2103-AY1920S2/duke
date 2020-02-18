@@ -69,7 +69,7 @@ public class TaskManager {
 
         listOfTasks.get(index - 1).markAsDone();
         storage.saveExistingData(listOfTasks);
-        assert listOfTasks.get(index - 1).isDone: "Supposed to be marked as done";
+        assert listOfTasks.get(index - 1).isDone : "Supposed to be marked as done";
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + listOfTasks.get(index - 1).toString());
     }
@@ -200,7 +200,7 @@ public class TaskManager {
 
         listOfTasks.get(index - 1).markAsHighPriority();
         storage.saveExistingData(listOfTasks);
-        assert listOfTasks.get(index - 1).isHighPriority: "Supposed to be set as high priority";
+        assert listOfTasks.get(index - 1).isHighPriority : "Supposed to be set as high priority";
         System.out.println("Nice! I've marked this task as high priority:");
         System.out.println("  " + listOfTasks.get(index - 1).toString());
 
