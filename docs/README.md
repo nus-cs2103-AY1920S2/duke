@@ -64,16 +64,13 @@ that the description that the user supplies will not be formatted.
 Adds a deadline to the task list.
 A deadline is a task that has a completion date,
 which must be specified after the `/by` keyword.
+\
+\
+Format: `deadline [description] /by [date]`
 
-`deadline [description] /by [date]`
+Example of usage: 
 
-Example of usage:
-
-`deadline Unwrap present /by 2020-12-25`
-
-Expected outcome:
-
-`outcome`
+![deadline](deadline.png)
 
 
 &nbsp;
@@ -82,16 +79,13 @@ Expected outcome:
 Adds an event to the task list.
 An event is a task that has a scheduled date and time interval,
 which must be specified in that order after the `/at` keyword.
-
-`event [description] /at [date] [time]`
+\
+\
+Format: `event [description] /at [date] [time]`
 
 Example of usage: 
 
-`event Unwrap present /at 2020-12-25 2-5pm`
-
-Expected outcome:
-
-`outcome`
+![event](event.png)
 
 
 &nbsp;
@@ -99,16 +93,13 @@ Expected outcome:
 
 Adds a todo to the task list.
 A todo is a task that only has a description.
-
-`todo [description]`
+\
+\
+Format: `todo [description]`
 
 Example of usage: 
 
-`todo Unwrap present`
-
-Expected outcome:
-
-`outcome`
+![todo](todo.png)
 
 
 &nbsp;
@@ -116,16 +107,13 @@ Expected outcome:
 
 Removes a task from the task list by specifying their position in the current list.
 To obtain the `[task id]` of the task to remove, use the `list` command.
-
-`delete [task id]`
+\
+\
+Format: `delete [task id]`
 
 Example of usage: 
 
-`delete 5`
-
-Expected outcome:
-
-`outcome`
+![delete](delete.png)
 
 
 &nbsp;
@@ -134,16 +122,14 @@ Expected outcome:
 Marks a task as done in the task list by specifying their position in the current list.
 A tick should appear next to the description of the task if it has been marked as done correctly.
 To obtain the `[task id]` of the task to mark as done, use the `list` command.
-
-`done [task id]`
+\
+\
+Format: `done [task id]`
 
 Example of usage: 
 
-`done 5`
+![done](done.png)
 
-Expected outcome:
-
-`outcome`
 
 &nbsp;
 ### `find` - Find tasks by keyword
@@ -151,16 +137,13 @@ Expected outcome:
 Searches through the list of tasks, and displays all tasks that contain
 the keyword in their description. The keyword used to search is `CASE_INSENSITVE`, meaning that
 all the task descriptions and the keyword will be compared in `LOWER_CASE`.
-
-`find [keyword]`
+\
+\
+Format: `find [keyword]`
 
 Example of usage: 
 
-`find cream`
-
-Expected outcome:
-
-`outcome`
+![find](find.png)
 
 
 &nbsp;
@@ -168,14 +151,13 @@ Expected outcome:
 
 Displays the list of tasks by ordering them numerically . Tasks will be listed in
 the order that they were inserted into the list.
+\
+\
+Format: `list`
 
 Example of usage: 
 
-`list`
-
-Expected outcome:
-
-`outcome`
+![list](list.png)
 
 
 &nbsp;
@@ -183,11 +165,10 @@ Expected outcome:
 
 Finish managing the task list. The user can continue to input commands,
 but they will not be processed. Duke must be restarted in order to process more commands.
+\
+\
+Format: `bye`
 
 Example of usage: 
 
-`bye`
-
-Expected outcome:
-
-`outcome`
+![bye](bye.png)
