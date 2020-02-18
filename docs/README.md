@@ -33,7 +33,7 @@ Describe action and its outcome.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
 
@@ -45,19 +45,7 @@ Describe action and its outcome.
 
 Example of usage: 
 
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
-
-### `todo <task description>` - Creates a task of todo type
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
+`todo upload meeting minutes`
 
 Expected outcome:
 
@@ -69,7 +57,7 @@ Describe action and its outcome.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`deadline CS2103T duke submission /by 2020-03-02`
 
 Expected outcome:
 
@@ -81,7 +69,7 @@ Describe action and its outcome.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`event project meeting /at 2020-02-18`
 
 Expected outcome:
 

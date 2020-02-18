@@ -11,8 +11,7 @@ import duke.util.Ui;
 /**
  * Represents the chat bot Duke.
  *
- * <p>
- * CS2103T AY19/20 Semester 2
+ * <p>CS2103T AY19/20 Semester 2
  * Individual Duke project
  * 11 Feb 2020
  *
