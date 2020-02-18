@@ -7,10 +7,6 @@ import duke.util.Ui;
 
 import java.io.FileNotFoundException;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 /**
  * Represents a Duke chat bot, which supports basic todo list features such as adding and deleting tasks,
@@ -21,6 +17,10 @@ public class Duke {
     private Storage storage;
     private TaskList tasklist;
     private Ui ui;
+
+    public Duke() {
+
+    }
 
     /**
      * Constructs a Duke chat bot instance.
@@ -58,5 +58,13 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
