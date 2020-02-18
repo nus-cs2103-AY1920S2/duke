@@ -60,4 +60,8 @@ public class Duke {
 
         Ui.printMessage("Bye! Hope you visit again soon!");
     }
+
+    public String getResponse(String input) {
+        return String.format("Duke repeats: %s", input);
+    }
 }
