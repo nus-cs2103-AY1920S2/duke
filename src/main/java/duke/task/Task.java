@@ -103,6 +103,8 @@ public abstract class Task implements Serializable {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
 
+    public abstract String toFormatString();
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

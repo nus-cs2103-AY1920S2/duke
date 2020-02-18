@@ -42,6 +42,13 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toFormatString() {
+        // Date format is MMM d yyyy
+        String formatDate = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return String.format("[D]%s\nby:\n%s", super.toString(), formatDate);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (super.equals(obj) && obj instanceof Deadline) {
             Deadline deadline = (Deadline)obj;

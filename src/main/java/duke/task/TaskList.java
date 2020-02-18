@@ -124,19 +124,37 @@ public class TaskList {
      * @return a task in the list as a formatted text.
      */
     public String getFormattedTask(int taskId) {
-        return String.format("%2d.%s", taskId, tasks.get(taskId - 1));
+        String description = tasks.get(taskId - 1).toFormatString();
+
+        int paramIndex = description.indexOf("\n");
+
+        if (paramIndex >= 0) {
+            String indent = "      ";
+
+            String parameters = description.substring(paramIndex + 1);
+            parameters = parameters.replaceAll("(?m)^", indent);
+
+            description = description.substring(0, paramIndex);
+
+            return String.format("%4d. %s\n%s", taskId, description, parameters);
+
+        } else {
+            return String.format("%4d. %s", taskId, description);
+        }
     }
 
     @Override
     public String toString() {
         StringBuilder taskDescriptions = new StringBuilder();
+        String spacing = "\n\n";
 
         for (int i = 1; i <= this.tasks.size(); i++) {
-            taskDescriptions.append(getFormattedTask(i)).append("\n");
+            taskDescriptions.append(getFormattedTask(i)).append(spacing);
         }
 
         if (taskDescriptions.length() > 0) {
-            taskDescriptions.deleteCharAt(taskDescriptions.length() - 1);
+            int stringLength = taskDescriptions.length();
+            taskDescriptions.delete(stringLength - spacing.length(), stringLength);
         }
 
         return taskDescriptions.toString();

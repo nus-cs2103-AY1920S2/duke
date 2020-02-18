@@ -30,6 +30,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String toFormatString() {
+        return toString();
+    }
+
+    @Override
     public boolean equals(Object obj) {
         return super.equals(obj) && obj instanceof Todo;
     }

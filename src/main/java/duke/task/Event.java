@@ -40,6 +40,9 @@ public class Event extends Task {
         return String.format("[E]%s (at: %s %s)", super.toString(), at, timeInterval);
     }
 
+    @Override
+    public String toFormatString() {
+        return String.format("[E]%s\nat:\n%s\n%s", super.toString(), at, timeInterval);
     }
 
     @Override
