@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 
 public abstract class Task {
@@ -13,7 +15,7 @@ public abstract class Task {
      * Status of the Task is instantiated to X.
      * @param msg Details of the Task.
      */
-    public Task(String msg) {
+    public Task(String msg) throws DukeException {
         this.msg = msg;
         status = "X";
     }

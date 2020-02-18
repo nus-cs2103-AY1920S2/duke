@@ -8,6 +8,13 @@ public abstract class DateTask extends Task {
     protected LocalDate date;
     protected String connectorWord;
 
+    /**
+     * Creates a DateTask with the details, date and connector word (at/by) stored.
+     * Status of the Task is instantiated to X.
+     * @param msg Details of the Task.
+     * @param date Date of the DateTask.
+     * @param connector String for the connector word (at/by).
+     */
     public DateTask(String msg, LocalDate date, String connector) {
         super(msg);
         this.date = date;

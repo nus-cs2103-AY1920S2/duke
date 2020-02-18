@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.exception.DukeException;
+import duke.exception.DukeExceptionIndex;
 import duke.interact.UiDesign;
 
 public class CommandDel implements Command {
@@ -12,10 +13,21 @@ public class CommandDel implements Command {
 
     /**
      * Saves the index in the TaskList to be deleted in execute.
-     * @param index Index of task to be deleted.
+     * @param line String the user had input.
+     * @param size Integer size of TaskList.
+     * @throws DukeException Exception thrown when user input an incorrect index.
      */
-    public CommandDel(int index) {
-        this.index = index;
+    public CommandDel(String line, int size) throws DukeException {
+        String[] splitThroughWhitespace = line.split("\\s", 2);
+        if (splitThroughWhitespace.length == 1) {
+            throw new DukeExceptionIndex("delete");
+        }
+
+        index = Integer.parseInt(splitThroughWhitespace[1]) - 1;
+        if (index > size - 1) {
+            throw new DukeExceptionIndex("delete");
+        }
+        assert index >= 0 : "Index should be greater than 0.";
     }
 
     /**

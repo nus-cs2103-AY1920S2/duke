@@ -1,8 +1,10 @@
 package duke.command;
 
+import duke.Duke;
 import duke.Storage;
 import duke.TaskList;
 import duke.exception.DukeException;
+import duke.exception.DukeExceptionIndex;
 import duke.interact.UiDesign;
 
 /**
@@ -15,10 +17,20 @@ public class CommandDone implements Command {
 
     /**
      * Saves the index of the Task that will be marked done.
-     * @param index Index of Task that will be marked done.
+     * @param line String the user had input.
+     * @throws DukeException Exception thrown when user input an incorrect index.
      */
-    public CommandDone(int index) {
-        this.index = index;
+    public CommandDone(String line, int size) throws DukeException {
+        String[] splitThroughWhitespace = line.split("\\s", 2);
+        if (splitThroughWhitespace.length == 1) {
+            throw new DukeExceptionIndex("done");
+        }
+
+        index = Integer.parseInt(splitThroughWhitespace[1]) - 1;
+
+        if (index > size - 1) {
+            throw new DukeExceptionIndex("done");
+        }
     }
 
 
