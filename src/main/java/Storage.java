@@ -46,7 +46,7 @@ public class Storage {
                 splitted = line.split(" ", 2);
                 tmp = splitted[1].split(" ", 2);
 
-                if (line.charAt(4) == '\u2713') {
+                if (line.charAt(4) == '0') {
                     done = true;
                 } else {
                     done = false;

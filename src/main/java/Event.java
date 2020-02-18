@@ -31,7 +31,7 @@ public class Event extends Item {
      * in the txt file when it is marked done.
      */
     public String tobeReplaced() {
-        String temp = "   [E][" + "\u2718" + "] " + super.getName() + " (at: " + date + ")\n";
+        String temp = "   [E][" + 1 + "] " + super.getName() + " (at: " + date + ")\n";
         return temp;
     }
 
@@ -39,7 +39,7 @@ public class Event extends Item {
      * Returns the string corresponds to the current item.
      */
     public String currentString() {
-        String temp = "   [E]" + super.toString() + " (at: " + date + ")\n";
+        String temp =  "   [E][" + 0 + "] " + super.getName() + " (by: " + date + ")\n";
         return temp;
     }
 

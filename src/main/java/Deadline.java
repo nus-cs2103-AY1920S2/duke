@@ -33,7 +33,7 @@ public class Deadline extends Item {
      * used for string substitution in the txt file when it is marked done.
      */
     public String tobeReplaced() {
-        String temp =  "   [D][" + "\u2718" + "] " + super.getName() + " (by: " + date + ")\n";
+        String temp =  "   [D][" + 1 + "] " + super.getName() + " (by: " + date + ")\n";
         return temp;
     }
 
@@ -41,7 +41,7 @@ public class Deadline extends Item {
      * Returns the string corresponds to the current item.
      */
     public String currentString() {
-        String temp = "   [D]" + super.toString() + " (by: " + date + ")\n";
+        String temp =  "   [D][" + 0 + "] " + super.getName() + " (by: " + date + ")\n";
         return temp;
     }
 
