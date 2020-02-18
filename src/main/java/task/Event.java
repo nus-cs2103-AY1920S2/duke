@@ -51,7 +51,7 @@ public class Event extends Task {
      * @return The string of event task to be displayed to user.
      */
     public String toString() {
-        return "[E]" + super.toString() + "(at: "
+        return "[E]" + super.toString() + " (at: "
                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:ss a")) + ")";
     }
 

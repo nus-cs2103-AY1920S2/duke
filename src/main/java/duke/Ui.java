@@ -86,7 +86,7 @@ public class Ui {
      **/
     public static String showDone(Task updatedTask) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Nice! I've marked this task as done:");
+        sb.append("Nice! I've marked this task as done:\n");
         sb.append(updatedTask + "\n");
         return sb.toString();
     }

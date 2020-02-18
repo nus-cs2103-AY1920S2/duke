@@ -136,8 +136,8 @@ public class Parser {
      * @return Boolean value whether text has a / separator.
      **/
     public static String getDateAndTimeOnly (String message) {
-        String beforeDate = message.substring(message.indexOf("/") + 1, message.indexOf("/") + 4);
-        assert beforeDate.equals("/by ") || beforeDate.equals("/at");
+        String beforeDate = message.substring(message.indexOf("/"), message.indexOf("/") + 4);
+        assert beforeDate.equals("/by ") || beforeDate.equals("/at ");
         return message.substring(message.indexOf("/") + 4);
     }
 
@@ -180,7 +180,6 @@ public class Parser {
      * @return String array of day, month, year of the message date.
      **/
     private static String[] getDayMonthYearArray(String message) {
-        System.out.println(message);
         if (message.contains(" ")) {
             return message.substring(0, message.indexOf(" "))
                     .split("/");
