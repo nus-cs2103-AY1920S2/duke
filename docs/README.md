@@ -15,58 +15,56 @@ By: Ng Jun Guang, Jarrod
     3.8. [Find Items - `find`](#find)  
     3.9. [Exit Program - `bye`](#bye)  
 4. [Acknowledgements](#acknowledgements)  
-<a name="intro"/>
-## 1. Introduction
 
+## 1. Introduction <a name="intro"/>
 Jarvis is a program that is adapted from Duke by Se-edu. It is primarily a task management application suitable for users
 who prefer to use the **Command Line Interface** while still having the benefits of a 
 **Graphical User Interface**.
-<a name="quickstart"/>
-## 2. Quick Start
 
+## 2. Quick Start <a name="quickstart"/>
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Double-click the file to start the program.    
-<a name="features"/>
-## 3. Features
+
+## 3. Features <a name="features"/>
 The program has the following in-built functionalities:
-<a name="help"/>
-### 3.1. Usage Help - `help`
+
+### 3.1. Usage Help - `help` <a name="help"/>
 Gives a list of all functions that are possible, and their formats.
 <br/>Format: `help`
-<a name="todo"/>
-### 3.2. Add a todo item - `todo`
+
+### 3.2. Add a todo item - `todo` <a name="todo"/>
 Adds a todo item to the list.
 <br/>Format: `todo ITEM`
-<a name="event"/>
-### 3.3. Add an event item - `event`
+
+### 3.3. Add an event item - `event` <a name="event"/>
 Adds an event item with the date the event is at to the list.
 <br/>Format: `event ITEM /at DATE`
-<a name="deadline"/>
-### 3.4. Add a deadline item - `deadline`
+
+### 3.4. Add a deadline item - `deadline` <a name="deadline"/>
 Adds a deadline item with the date it is due to the list.
 <br/>Format: `deadline ITEM /by DATE`
-<a name="list"/>
-### 3.5. View all items in list - `list`
+
+### 3.5. View all items in list - `list` <a name="list"/>
 Displays, in order of addition, all the items in the current list.
 <br/>Format: `list`
-<a name="done"/>
-### 3.6. Complete an item in the list - `done`
+
+### 3.6. Complete an item in the list - `done` <a name="done"/>
 Sets the status of the item in the list at the given index as 'done'.
 <br/>Format: `done INDEX`
-<a name="delete"/>
-### 3.7. Delete an item from the list - `delete`
+
+### 3.7. Delete an item from the list - `delete` <a name="delete"/>
 Deletes the item in the list at the given index.
 <br/>Format: `delete INDEX`
-<a name="find"/>
-### 3.8. Find Items - `find`
+
+### 3.8. Find Items - `find` <a name="find"/>
 Finds all items in the list that contains KEYWORD as its substring.
 <br/>Format: `find KEYWORD`
-<a name="bye"/>
-### 3.9. Exit Program - `bye`
+
+### 3.9. Exit Program - `bye` <a name="bye"/>
 Exits the program and closes the Ui window.
 <br/>Format: `bye`
-<a name="acknowledgements"/>
-## 4. Acknowledgements
+
+## 4. Acknowledgements <a name="acknowledgements"/>
 Code Organization adapted from seedu-ab-2.  
 Referenced from: https://github.com/se-edu/addressbook-level2/tree/master/src/seedu/addressbook
 
