@@ -27,6 +27,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
     private static final String TERMINATE = "bye";
+    private static final String WELCOME_MESSAGE = "A long time ago in a galaxy far, far away...\n"
+            + "Hello! I'm Luke\n"
+            + "How may i serve you.";
     private static final long delayDuration = 2000;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/stormtrooper.png"));
@@ -70,7 +73,7 @@ public class MainWindow extends AnchorPane {
      */
     private void startUp() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(UiMessage.GREETING.toString(), dukeImage)
+                DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage)
         );
     }
 

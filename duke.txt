@@ -1,6 +1,3 @@
-{"description":"read book","typeIcon":"T","isDone":false}
-{"deadline":"2020-02-15","description":"cs2103 homework","typeIcon":"D","isDone":false}
-{"eventTime":"2020-02-14","description":"cs2103 lecture","typeIcon":"E","isDone":false}
-{"description":"qwe","typeIcon":"T","isDone":false}
-{"description":"qw","typeIcon":"T","isDone":false}
-{"description":"qwe","typeIcon":"T","isDone":false}
+{"description":"destroy the death star","typeIcon":"T","isDone":false}
+{"deadline":"3040-01-04","description":"save Princess Leia","typeIcon":"D","isDone":false}
+{"eventTime":"3040-05-01","description":"face my father","typeIcon":"E","isDone":false}
