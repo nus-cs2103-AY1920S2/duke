@@ -85,7 +85,7 @@ public class HelpCommand extends Command {
 
         String additionalHelpMessage = "";
         if (isIndexedCommand(command)) {
-            additionalHelpMessage = "Use list, today, check or find to see each tasks' index.";
+            additionalHelpMessage = "Use list or filter the tasks via today, check or find to see each tasks' index.";
         } else if (isDateCommand(command)) {
             additionalHelpMessage = "Use 'help -date' to learn more about the different date formats.";
         }

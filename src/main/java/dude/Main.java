@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
+ *
+ * @@author j-lum-reused
+ * Reused from tutorials/javaFxTutorialPart4.md with modifications
  */
 public class Main extends Application {
     private Duke duke;
@@ -26,6 +29,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Dude - your chillest taskbot");
 
             // Wire up Duke class (main application logic) and UI components
             MainWindow mainWindow = fxmlLoader.getController();
