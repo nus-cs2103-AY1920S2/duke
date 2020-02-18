@@ -14,10 +14,10 @@ public class Ui {
      * @return String to greet the user with instructions on how to use Duke.
      */
     public static String welcome() {
-        return "Hello, E-1337 here! :D I am an android crafted specifically \n"
+        return "Hello, E-1337 here! :D I am an android crafted specifically "
             + "by my inventor Eugene to help you humans out with your memory.\n"
-            + "I'm feeling good and ready to go!\n"
-            + "What can I do for you today?\n"
+            + "\n"
+            + "I'm feeling good and ready to go! What can I do for you today?\n"
             + "\n"
             + "If you're unsure, here are some things I can do:\n"
             + "1. Add a Todo [T]\n"
@@ -74,8 +74,8 @@ public class Ui {
      * @param allTasks TaskList containing all the Tasks in Duke.
      * @return String indicating removal of a given Task, of its index then and the current number of Tasks remaining.
      */
-    public static String taskRemovalMessage(int index, Task removedTask, TaskList allTasks) {
-        return "Removed Task #" + (index + 1) + ": " + removedTask
+    public static String taskRemovalMessage(Task removedTask, TaskList allTasks) {
+        return "Removed Task: " + removedTask
                 + "\nHope it's worth it!\nYou are now left with " + allTasks.sizeOf() + " tasks.";
     }
 

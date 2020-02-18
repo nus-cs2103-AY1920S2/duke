@@ -240,7 +240,7 @@ public class TaskList {
                 Task removedTask = allTasks.remove(indexToRemove);
 
                 // Update String result and store changes
-                deleteTaskResponse += Ui.taskRemovalMessage(indexToRemove, removedTask, this) + "\n";
+                deleteTaskResponse += Ui.taskRemovalMessage(removedTask, this) + "\n";
                 Storage.saveChanges(this);
 
             }

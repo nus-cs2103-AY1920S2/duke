@@ -100,18 +100,21 @@ public class MainWindow extends AnchorPane {
      */
     private String getDukeResponse(String input) {
 
+        String result = "\n";
+
         // automatically exit leaving Ui's goodbye message
         if (input.equals("bye")) {
             Timer timer = new Timer();
             TimerTask exitTask = new TimerTask() {
                 public void run() {
                     Platform.exit();
+                    System.exit(0);
                 }
             };
             timer.schedule(exitTask,3000);
         }
 
-        String result = (input.equals("bye")) ? Ui.goodbye() : duke.run(input);
+        result += (input.equals("bye")) ? Ui.goodbye() : duke.run(input);
 
         assert (result != null || result.equals(" ")) : "Duke has to reply something, which is currently missing.";
 
