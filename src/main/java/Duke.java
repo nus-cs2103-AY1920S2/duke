@@ -19,7 +19,7 @@ public class Duke {
     }
 
     public String greet() {
-        return "Hello, I am Duke, your personal assistant.";
+        return "Hello, I am Karen, your personal assistant.";
     }
 
     /**
