@@ -13,7 +13,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:`<br/>
-`  [T][✘] sleep`<br/>
+`[T][✘] sleep`<br/>
 `Now you have 1 task(s) in the list.`
 
 Example of usage: 
@@ -23,7 +23,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:`<br/>
-`  [E][✘] wedding (at: May 15 2019)`<br/>
+`[E][✘] wedding (at: May 15 2019)`<br/>
 `Now you have 2 task(s) in the list.`
 
 Example of usage: 
@@ -33,7 +33,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:`<br/>
-`  [D][✘] submission (at: Apr 22 2019)`<br/>
+`[D][✘] submission (at: Apr 22 2019)`<br/>
 `Now you have 3 task(s) in the list.`
 
 ### Listing out Tasks: `list`
