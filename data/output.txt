@@ -9,6 +9,3 @@
    [D][✘] have (by: 2019-09-20)
    [D][✓] sth (by: 2020-01-01)
    [T][✘] have
-   [T][✘] helloajasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdjjasoidjoiasdj
-   [D][✘] sth (by: 2020-01-29)
-   [T][?] lst
