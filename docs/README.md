@@ -30,7 +30,7 @@ features such as add and delete.
       
 - *event* - add event task
      
-      event [task description] /at [d/MM/yyyy HH:mm to /MM/yyyy HH:mm]
+      event [task description] /at [d/MM/yyyy HH:mm to d/MM/yyyy HH:mm]
   
 ### 2. Delete task
 
