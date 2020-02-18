@@ -20,8 +20,11 @@ public class TaskList {
         if (pos >= storedItems.size() || pos < 0)
             throw new OutOfBoundMarkingRequestException(pos+1);
 
+        if (storedItems.get(pos).isDoneTask())
+            return Ui.markItemAsDone(pos, storedItems, true);
+
         storedItems.get(pos).markDone();
-        return Ui.markItemAsDone(pos, storedItems);
+        return Ui.markItemAsDone(pos, storedItems, false);
     }
 
     /**

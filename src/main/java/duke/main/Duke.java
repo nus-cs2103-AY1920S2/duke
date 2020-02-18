@@ -74,6 +74,7 @@ public class Duke {
                 System.out.println(
                         String.format("markPos error\n%s%s\n%s%s\n%s%s",
                                 PADDING, USELESS_LINE, PADDING, e, PADDING, USELESS_LINE));
+                return e.getMessage();
             }
         } else if (delPos != -2) {
             try {
@@ -82,6 +83,7 @@ public class Duke {
                 System.out.println(
                         String.format("delPos error\n%s%s\n%s%s\n%s%s",
                                 PADDING, USELESS_LINE, PADDING, e, PADDING, USELESS_LINE));
+                return e.getMessage();
             }
         } else {
             try {
@@ -102,9 +104,11 @@ public class Duke {
             } catch (InvalidCommandException e) {
                 System.out.println(String.format("%s%s\n%s%s\n%sPlease type something legit\n%s%s",
                         PADDING, USELESS_LINE, PADDING, e, PADDING, PADDING, USELESS_LINE));
+                return e.getMessage();
             } catch (TaskErrorException e) {
                 System.out.println(String.format("%s%s\n%s%s\n%s%s",
                         PADDING, USELESS_LINE, PADDING, e, PADDING, USELESS_LINE));
+                return e.getMessage();
             }
         }
 

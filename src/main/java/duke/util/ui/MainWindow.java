@@ -5,6 +5,7 @@ import duke.exception.OutOfBoundMarkingRequestException;
 import duke.exception.TaskErrorException;
 import duke.main.DialogBox;
 import duke.main.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -12,6 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import static java.lang.System.exit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -52,5 +57,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equals(Duke.BYE_COMMAND)) {
+            Platform.exit();
+        }
     }
 }

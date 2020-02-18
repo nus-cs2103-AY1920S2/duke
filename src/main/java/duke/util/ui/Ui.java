@@ -80,11 +80,18 @@ public class Ui {
      * Print the status after successfully marking a task as Done.
      * @param pos
      * @param storedItems
+     * @param alreadyDone
      */
-    public static String markItemAsDone(int pos, ArrayList<Task> storedItems) {
+    public static String markItemAsDone(int pos, ArrayList<Task> storedItems, boolean alreadyDone) {
         StringBuilder returnString = new StringBuilder();
-        returnString.append(String.format("Nice nice. I've marked the task as done for you\n"));
+
+        if (alreadyDone) {
+            returnString.append(String.format("Task %d has already been done!\n", pos + 1));
+        } else {
+            returnString.append(String.format("Nice nice. I've marked the task as done for you\n"));
+        }
         returnString.append(String.format("   %s", storedItems.get(pos)));
+
         return returnString.toString();
     }
 

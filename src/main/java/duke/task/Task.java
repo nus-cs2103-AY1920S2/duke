@@ -64,6 +64,14 @@ public class Task {
     }
 
     /**
+     * Checks if the task is done.
+     * @return True if the Task is done, False otherwise.
+     */
+    public boolean isDoneTask() {
+        return this.isDone;
+    }
+
+    /**
      * Get the Task's type.
      * @return UNKNOWN type for a generic Task.
      */
