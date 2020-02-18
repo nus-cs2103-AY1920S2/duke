@@ -41,6 +41,10 @@
     -fx-base: -fx-accent ;
 }
 
+.speech-bubble {
+    -fx-background-color: derive(-fx-base, 50%);
+}
+
 .user-speech-bubble {
     -fx-background-color: green;
 }
