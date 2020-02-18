@@ -61,7 +61,7 @@ public class Event extends Task {
     public String fileString() {
         assert this.getDescription() != null : "No description for this event";
         assert this.at != null : "No timing for this event";
-        return "E | " + this.getStatusIcon() + " | " + getDescription() + " | "
+        return "E | " + this.getFileIcon() + " | " + getDescription() + " | "
                 + at.format(FORMATTER);
     }
 }

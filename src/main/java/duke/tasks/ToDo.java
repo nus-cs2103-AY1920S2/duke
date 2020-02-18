@@ -36,7 +36,7 @@ public class ToDo extends Task {
     @Override
     public String fileString() {
         assert this.getDescription() != null : "No description for this todo";
-        return "T | " + this.getStatusIcon() + " | " + this.getDescription();
+        return "T | " + this.getFileIcon() + " | " + this.getDescription();
     }
 
     @Override

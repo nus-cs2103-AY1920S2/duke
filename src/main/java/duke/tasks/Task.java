@@ -16,6 +16,10 @@ public abstract class Task {
      */
     private boolean isDone;
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     /**
      * creates a new Task.
      *
@@ -35,6 +39,16 @@ public abstract class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or cross symbols
         //return (isDone ? "Y" : "N"); //return Y or N symbols
+    }
+
+    /**
+     * returns the file icon.
+     *
+     * @return Y or N depending on whether isDone is true or false
+     */
+    public String getFileIcon() {
+        //return (isDone ? "\u2713" : "\u2718"); //return tick or cross symbols
+        return (isDone ? "Y" : "N"); //return Y or N symbols
     }
 
     /**

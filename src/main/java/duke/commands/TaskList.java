@@ -51,6 +51,9 @@ public class TaskList {
      */
     public String done(int index) {
         assert newList.size() > 0 : "No tasks in list";
+        if (newList.get(index).isDone()) {
+            return ("The task has already been marked as done.");
+        }
         newList.get(index).markAsDone();
         assert newList.get(index) != null : "No task to mark as done";
         assert newList.get(index).getDescription() != null

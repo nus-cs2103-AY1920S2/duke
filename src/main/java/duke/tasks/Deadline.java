@@ -63,7 +63,7 @@ public class Deadline extends Task {
         assert this.getDescription() != null
                 : "No description for this deadline";
         assert this.by != null : "No timing for this deadline";
-        return "D | " + this.getStatusIcon() + " | " + getDescription() + " | "
+        return "D | " + this.getFileIcon() + " | " + getDescription() + " | "
                 + by.format(FORMATTER);
     }
 }
