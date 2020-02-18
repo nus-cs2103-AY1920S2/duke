@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
      * @param d Duke instance to be set.
      */
     public void setDuke(Duke d) {
-        duke = d;
+        this.duke = d;
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog("Hello! I'm Duke\nEnter 'help' for a list of commands you can use.",
                         dukeImage)
