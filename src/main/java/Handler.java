@@ -49,7 +49,17 @@ public class Handler {
         String respText;
 
         try {
-            if (userText.equals("bye")) {
+            if (userText.equals("help")) {
+                 respText = String.join("\n",
+                    "Here's a list of command examples you can use:",
+                    "1. todo read book 2",
+                    "2. deadline finish book /by 2020-02-30 5",
+                    "3. event book meeting /at 2020-03-02 1",
+                    "4. list",
+                    "5. done 2",
+                    "6. delete 2",
+                    "7. bye");
+            } else if (userText.equals("bye")) {
 
                 //          exit the program
 
