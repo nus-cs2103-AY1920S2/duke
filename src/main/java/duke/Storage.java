@@ -24,6 +24,8 @@ public class Storage {
             String line = input.nextLine();
             String[] data = line.split(" \\| ");
             Task task;
+            boolean isValidBooleanLiteral = data[1].equals("0") || data[1].equals("1");
+            assert isValidBooleanLiteral : "Invalid Boolean Literal";
             switch (data[0]) {
                 case "T":
                     task = new ToDo(data[2], getBooleanFromString(data[1]));

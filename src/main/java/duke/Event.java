@@ -8,6 +8,7 @@ import java.util.Optional;
  */
 public class Event extends Task {
     public static final String DESCRIPTION_ERROR = "Description of Event is empty";
+    public static final String REGEX_DATE = "\\d{4}-\\d{2}-\\d{2}";
     /**
      * Stores the time the event is supposed to take place
      */
@@ -25,7 +26,7 @@ public class Event extends Task {
         assert description.length() > 0 : DESCRIPTION_ERROR;
         this.time = time;
         timePresent = false;
-        if(this.time.matches("\\d{4}-\\d{2}-\\d{2}")) { //YYYY-MM-DD
+        if(this.time.matches(REGEX_DATE)) { //YYYY-MM-DD
             this.dueTime = Optional.of(LocalDate.parse(this.time));
             timePresent = true;
         }
@@ -42,7 +43,7 @@ public class Event extends Task {
         assert description.length() > 0 : DESCRIPTION_ERROR;
         this.time = time;
         timePresent = false;
-        if(this.time.matches("\\d{4}-\\d{2}-\\d{2}")) { //YYYY-MM-DD
+        if(this.time.matches(REGEX_DATE)) { //YYYY-MM-DD
             this.dueTime = Optional.of(LocalDate.parse(this.time));
             timePresent = true;
         }

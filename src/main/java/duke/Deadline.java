@@ -8,6 +8,7 @@ import java.util.Optional;
  */
 public class Deadline extends Task {
     public static final String DESCRIPTION_ERROR_MESSAGE = "Description of Deadline is empty";
+    public static final String REGEX_DATE = "\\d{4}-\\d{2}-\\d{2}";
     /**
      * Stores the time the deadline is supposed to be complete
      */
@@ -25,7 +26,7 @@ public class Deadline extends Task {
         assert description.length() > 0 : DESCRIPTION_ERROR_MESSAGE;
         this.by = by;
         dueDatePresent = false;
-        if (this.by.matches("\\d{4}-\\d{2}-\\d{2}")) {
+        if (this.by.matches(REGEX_DATE)) {
             this.dueDate = Optional.of(LocalDate.parse(this.by));
             dueDatePresent = true;
         }
@@ -43,7 +44,7 @@ public class Deadline extends Task {
         assert description.length() > 0 : DESCRIPTION_ERROR_MESSAGE;
         this.by = by;
         dueDatePresent = false;
-        if (this.by.matches("\\d{4}-\\d{2}-\\d{2}")) {
+        if (this.by.matches(REGEX_DATE)) {
             this.dueDate = Optional.of(LocalDate.parse(this.by));
             dueDatePresent = true;
         }
