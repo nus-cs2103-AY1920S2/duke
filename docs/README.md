@@ -17,6 +17,7 @@ There are three types of tasks you can add:
 - Event: a task with a description and time
 
 #### 2.1.1 `todo` - Adds a todo task
+This command adds a todo item to your list.
 
 Usage:  
 `todo [description]`
@@ -30,19 +31,23 @@ Expected outcome:
 `There is now 1 task in the list.`
 
 #### 2.1.2 `deadline` - Adds a deadline task
+This command adds a deadline to your list.
 
 Usage:  
-`deadline [description] /by [date in yyyy-mm-dd format]`
+`deadline [description] /by [date] [time]`  
+The date has to be in yyyy-mm-dd format, and the time has to be in HH:mm format.
+Providing the time is optional. If you do not indicate the time, it will be automatically set to 23:59.
 
 Example:  
-`deadline do homework /by 2020-06-30`
+`deadline do homework /by 2020-06-30 17:00`
 
 Expected outcome:  
 `Got it. I've added this task:`  
-&#8203;`  [D][✗] do homework (by: 30 Jun 2020)`  
+&#8203;`  [D][✗] do homework (by: 30 Jun 2020, 17:00)`  
 `There are now 2 tasks in the list.`
 
 #### 2.1.3 `event` - Adds an event task
+This command adds an event to your list.
 
 Usage:  
 `event [description] /at [time]`
@@ -55,17 +60,21 @@ Expected outcome:
 &#8203;`  [E][✗] project meeting (by: Monday 3pm)`  
 `There are now 3 tasks in the list.`
 
-### 2.2 Listing tasks
+### 2.2 Viewing tasks
+
+#### 2.2.1 `list` - Lists tasks
+This command lists all the tasks that you have added.
 
 Usage:  
 `list`
 
-Example:  
-`list`
-
 Expected outcome:  
+`1. [T][✗] read book`  
+`2. [D][✗] do homework (by: 30 Jun 2020)`  
+`3. [E][✗] project meeting (by: Monday 3pm)`
 
-### 2.3 Finding tasks
+#### 2.2.2 `find` - Finds tasks
+This command lists for all tasks whose descriptions contain the search term you specify.
 
 Usage:  
 `find [search term]`
@@ -74,8 +83,25 @@ Example:
 `find book`
 
 Expected outcome:  
+`1. [T][✗] read book`
 
-### 2.4 Marking a task as done
+### 2.3 Editing tasks
+
+#### 2.3.1 `snooze` - Snoozes a task
+This command postpones the time/deadline of a task.
+
+Usage:
+`snooze [task number] [duration]`
+
+Example:
+`snooze 2 1 day`
+
+Expected outcome:
+`Noted. Here's the updated task:`  
+&#8203;`  [D][✗] do homework (by: 1 Jul 2020, 17:00)`
+
+#### 2.3.2 `done` - Marks a task as done
+This command marks a task as completed.
 
 Usage:  
 `done [task number]`
@@ -85,9 +111,10 @@ Example:
 
 Expected outcome:  
 `Nice! I've marked this task as done:`  
-&#8203;`  [E][✗] project meeting (by: Monday 3pm)`
+&#8203;`  [E][✓] project meeting (by: Monday 3pm)`
 
-### 2.5 Deleting a task
+#### 2.5 `deletes` - Deletes a task
+This command removes a task from your list of tasks.
 
 Usage:  
 `delete [task number]`
@@ -98,17 +125,3 @@ Example:
 Expected outcome:  
 `Noted. I've removed this task:`  
 &#8203;`  [T][✗] read book`
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage:
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
