@@ -125,7 +125,8 @@ public class Ui {
      * @return help info as a string
      */
     public String formatHelp() {
-        return "Hello there! here is a list of commands you can try! "
+        return "Here are a list of commands you can try! "
+            + "\n\thello - say hello to duke"
             + "\n\ttodo - to create a new todo task"
             + "\n\tevent - to create a new event task"
             + "\n\tdeadline - to create a new deadline task"
@@ -134,5 +135,15 @@ public class Ui {
             + "\n\tdelete - to delete am existing task"
             + "\n\thelp - to get help information"
             + "\n\texit - to leave duke";
+    }
+
+    /**
+     * Format Hello message.
+     *
+     * @return hello message as a string
+     */
+    public String formatHello() {
+        return "Hello there, my name is DUKE and I'm here to help you get organized! "
+            + "To see what I can help you with you could try the `help` command.";
     }
 }

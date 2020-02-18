@@ -39,5 +39,9 @@ enum Command {
     /**
      * Help command command.
      */
-    HELP_COMMAND
+    HELP_COMMAND,
+    /**
+     * Hello command command.
+     */
+    HELLO_COMMAND
 }

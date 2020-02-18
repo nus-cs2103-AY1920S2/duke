@@ -92,6 +92,9 @@ public class Duke extends Application {
         case "help":
             command = Command.HELP_COMMAND;
             break;
+        case "hello":
+            command = Command.HELLO_COMMAND;
+            break;
         default:
             throw new InvalidDukeCommandException();
         }
@@ -136,6 +139,9 @@ public class Duke extends Application {
             case HELP_COMMAND:
                 response = handleHelp();
                 break;
+            case HELLO_COMMAND:
+                response = handleHello();
+                break;
             default:
                 throw new InvalidDukeCommandException();
             }
@@ -148,6 +154,10 @@ public class Duke extends Application {
 
     private String handleHelp() {
         return ui.formatHelp();
+    }
+
+    private String handleHello() {
+        return ui.formatHello();
     }
 
     private String handleEvent(String parameters) throws InvalidDukeFormatException {
