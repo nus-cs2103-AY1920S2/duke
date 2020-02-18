@@ -1,6 +1,5 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -8,7 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -20,8 +20,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
@@ -45,7 +43,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException, InterruptedException {
+    private void handleUserInput() throws IOException {
         String input = userInput.getText();
 
         String response = duke.getResponse(input);
@@ -56,8 +54,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (response.equals("Bye. Hope to see you again soon!")) {
-            // TimeUnit.SECONDS.sleep(2);
-            Platform.exit();
+            new Timer().schedule(new TimerTask() {
+                public void run () { Platform.exit(); }
+            }, 3000);
         }
     }
 }
