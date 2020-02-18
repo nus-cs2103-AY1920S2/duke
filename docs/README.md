@@ -40,7 +40,7 @@ This keyword creates a new todo task.
 
 **Expected outcome:**
 
-_Task of type todo will be created and added to **MySponge's** database.
+_Task of type todo will be created and added to **MySponge's** database_.
 
 ### `deadline`
 **Purpose:**
