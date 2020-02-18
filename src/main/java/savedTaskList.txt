@@ -1,4 +1,5 @@
-[D][✘] read (by: Oct 30 2019 23:10)
-[E][✓] adsd (at: Oct 20 2020 10:10)
-[T][✘] abcd
-[E][✘] attend as (at: Oct 20 2020 08:10)
+[T][✘] cs2103 assignments
+[E][✘] chienese new year (at: Jan 21 2021 10:01)
+[D][✓] cs2103 Individual Project (by: Feb 18 2020 23:02)
+[T][✘] cook lunch
+[E][✘] prepare for examination (at: Mar 15 2020 10:03)
