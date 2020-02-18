@@ -37,7 +37,7 @@ public class Task {
      * Toggle status of the done attribute of task.
      */
     public void toggleDone() {
-        this.done = !this.done;
+        this.done = true;
     }
 
     /**
