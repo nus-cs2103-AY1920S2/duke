@@ -169,3 +169,19 @@ Displays the list of all tasks.
     3. [D][✗] borrow book (by: Feb 19 2020)
     4. [T][✗] read book
     
+### 8. `bye` - exits program
+
+#### Format
+
+    bye
+
+Ends tinga program.
+
+#### Example of usage: 
+
+    bye
+
+#### Expected outcome:
+
+    Bye. Hope to see you again soon!
+    
