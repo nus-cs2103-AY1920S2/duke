@@ -1,7 +1,9 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import java.util.Date;
 
 /**
@@ -47,7 +49,7 @@ public class Deadline extends Task {
     /**
      * Returns the deadline date and time of a Deadline task.
      *
-     * @return deadline date and the deadline time.
+     * @return deadline date and deadline time.
      */
     public String getDeadlineDateAndTime() {
         String date = deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd YYYY"));

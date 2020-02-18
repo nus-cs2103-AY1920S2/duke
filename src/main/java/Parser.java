@@ -57,11 +57,11 @@ public class Parser {
      */
     public String handleTodo (String command) throws DukeException {
         String[] strArr = command.split(" ", 2);
-
         if (strArr.length == 1) {
             throw new DukeException("TODO_NO_DESC");
         }
-        Todo newTask = new Todo(strArr[1]);
+        String todoCommand = strArr[1];
+        Todo newTask = new Todo(todoCommand);
         tasks.addTask(newTask);
         return ui.printTodoTask(newTask, taskList);
     }
@@ -76,7 +76,6 @@ public class Parser {
      */
     public String handleDeadline (String command) throws DukeException {
         String[] strArr = command.split(" ", 2);
-
         if (strArr.length == 1) {
             throw new DukeException("DEADLINE_NO_DESC");
         }
@@ -84,10 +83,12 @@ public class Parser {
         if (cmdArr.length == 1) {
             throw new DukeException("DEADLINE_NO_DEADLINE");
         }
-        command = cmdArr[0];
-        String deadline = cmdArr[1].split(" ", 2)[1];
-        String[] deadlineArr = deadline.split(" ", 2);
-        Deadline newTask = new Deadline(command, deadlineArr[0], deadlineArr[1]);
+        String deadlineCommand = cmdArr[0];
+        String deadlineDetails = cmdArr[1].split(" ", 2)[1];
+        String[] deadlineDetailsArr = deadlineDetails.split(" ", 2);
+        String deadlineDate = deadlineDetailsArr[0];
+        String deadlineTime = deadlineDetailsArr[1];
+        Deadline newTask = new Deadline(deadlineCommand, deadlineDate, deadlineTime);
         tasks.addTask(newTask);
         return ui.printDeadlineTask(newTask, taskList);
     }
@@ -102,7 +103,6 @@ public class Parser {
      */
     public String handleEvent (String command) throws DukeException {
         String[] strArr = command.split(" ", 2);
-
         if (strArr.length == 1) {
             throw new DukeException("EVENT_NO_DESC");
         }
@@ -110,9 +110,9 @@ public class Parser {
         if (cmdArr.length == 1) {
             throw new DukeException("EVENT_NO_DATE_AND_TIME");
         }
-        command = cmdArr[0];
+        String eventCommand = cmdArr[0];
         String timing = cmdArr[1].split(" ", 2)[1];
-        Event newTask = new Event(command, timing);
+        Event newTask = new Event(eventCommand, timing);
         tasks.addTask(newTask);
         return ui.printEventTask(newTask, taskList);
     }

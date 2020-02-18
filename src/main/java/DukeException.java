@@ -23,14 +23,13 @@ public class DukeException extends Exception {
             return "Please let me know which task you are done with!:)";
         case "UNK_TASK_TO_DELETE": // for not specifying which task to delete
             return "Please let me know which task you want to delete!:)";
-        case "UNK_TASK_TO_FIND":
+        case "UNK_TASK_TO_FIND": // for not specifying which task to find
             return "You have not specify what item you want me to look for!!";
-        case "ITEM_NOT_FOUND":
+        case "ITEM_NOT_FOUND": // when the keyword inputted cannot be found in any of the tasks in the task list
             return "The keyword cannot be found in any of the tasks in your task list!";
         case "UPDATE_DEADLINE_DATE_TIME_NEEDED": // new deadline date and time not provided
-            return "Please provide the date and time for this deadline task, even if you did not change one of it:)" +
-                    "\n" + "Reminder: It needs to be specified in the following format: YYYY/MM/DD HHmm " +
-                    "e.g. 2019/02/01 0900";
+            return "Please provide both the date and time for this deadline task:)" + "\n" + "Reminder: It needs to " +
+                    "be specified in the following format: YYYY/MM/DD HHmm e.g. 2019/02/01 0900";
         case "COMMAND_NOT_FOUND":
             return "Task not found! Please check the list if you forgot the task you inputted!";
         case "LOAD_ERROR": // file loading error

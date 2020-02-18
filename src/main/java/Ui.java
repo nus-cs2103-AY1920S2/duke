@@ -4,8 +4,6 @@ import java.util.ArrayList;
  * A Ui object deals with interaction with the user, by printing the appropriate response to the user input.
  */
 public class Ui {
-    String strToReturn;
-
     /**
      * Prints welcome message when Duke is started.
      */
@@ -44,8 +42,7 @@ public class Ui {
      * @return message showing the task completed by user.
      */
     public String printTaskMarkedDone(Task task) {
-        strToReturn =  "Okay noted! You have completed the below task:\n" + task + "\n";
-        return strToReturn;
+        return "Okay noted! You have completed the below task:\n" + task + "\n";
     }
 
     /**
@@ -56,9 +53,8 @@ public class Ui {
      * @return message showing the Todo task user has inputted and the total number of tasks in the task list.
      */
     public String printTodoTask(Task task, ArrayList<Task> taskList) {
-        strToReturn = "Okay! I have taken note of the following:\n" + task + "\n" +
-                "Now you have " + taskList.size() + " tasks in the list.";
-        return strToReturn;
+        return "Okay! I have taken note of the following:\n" + task + "\n" + "Now you have " + taskList.size() +
+                " tasks in the list.";
     }
 
     /**
@@ -70,9 +66,8 @@ public class Ui {
      * task list.
      */
     public String printDeadlineTask(Task task, ArrayList<Task> taskList) {
-        strToReturn = "Okay! I have taken note of the following:\n" + task + "\n" +
-                "Now you have " + taskList.size() + " tasks in the list.";
-        return strToReturn;
+        return "Okay! I have taken note of the following:\n" + task + "\n" + "Now you have " + taskList.size() +
+                " tasks in the list.";
     }
 
     /**
@@ -84,9 +79,8 @@ public class Ui {
      * task list.
      */
     public String printEventTask(Task task, ArrayList<Task> taskList) {
-        strToReturn = "Okay! I have taken note of the following:\n" + task + "\n" +
-        "Now you have " + taskList.size() + " tasks in the list.";
-        return strToReturn;
+        return "Okay! I have taken note of the following:\n" + task + "\n" + "Now you have " + taskList.size() +
+                " tasks in the list.";
     }
 
     /**
@@ -97,7 +91,7 @@ public class Ui {
      * @return message showing all tasks in the task list that contains the keyword the user has inputted.
      */
     public String printTasksFound(ArrayList<Task> taskList, String keyword) throws DukeException {
-        strToReturn = "I have found these matching items from your task list:\n";
+        String strToReturn = "I have found these matching items from your task list:\n";
         String originalString = strToReturn;
         for (Task task : taskList) {
             if (task.getCommand().contains(keyword)) {
@@ -117,7 +111,7 @@ public class Ui {
      * @return message showing all tasks saved in the task list.
      */
     public String printList(ArrayList<Task> taskList) {
-        strToReturn = "The below is what you have told me so far. Have you completed them?\n";
+        String strToReturn = "The below is what you have told me so far. Have you completed them?\n";
         for (Task task : taskList) {
             strToReturn = strToReturn + task + "\n";
         }
@@ -132,9 +126,8 @@ public class Ui {
      * @return message showing the remaining tasks in task list after task mentioned is deleted from the list.
      */
     public String printRemainingList(Task taskDeleted, ArrayList<Task> taskList) {
-        strToReturn = "Okay noted! I have deleted the below task:\n" + taskDeleted + "\n" +
-                "Now you have " + taskList.size() + " tasks in the list.";
-        return strToReturn;
+        return "Okay noted! I have deleted the below task:\n" + taskDeleted + "\n" + "Now you have " +
+                taskList.size() + " tasks in the list.";
     }
 
     /**
