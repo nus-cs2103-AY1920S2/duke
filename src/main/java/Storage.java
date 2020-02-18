@@ -42,8 +42,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the file stored in hard disk with all the tasks that are still present in the task list at the point when
+     * the user decides to exit the application.
+     *
+     * @throws IOException if there is error in writing to the file.
+     */
     public void updateHD() throws IOException {
-        // update task list before exiting
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         for (Task task: taskList) {
             writer.write(task.updateFile() + "\n");

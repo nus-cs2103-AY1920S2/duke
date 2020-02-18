@@ -55,20 +55,18 @@ public class Deadline extends Task {
         return "D - " + getDoneInt() + " - " + getCommand() + " - " + getDeadlineDateAndTime();
     }
 
-    public void setDeadlineDate(String deadlineDate) {
-        this.deadlineDate = deadlineDate;
-    }
-
-    public void setDeadlineTime(String deadlineTime) {
-        this.deadlineTime = deadlineTime;
-    }
-
-    public void setDetails(String details) {
-        String[] strArr = details.split(" ", 2);
+    /**
+     * Updates the date and time details for the Deadline task.
+     *
+     * @param newDateAndTime date and time to be updated.
+     */
+    public void updateDetails(String newDateAndTime) throws DukeException {
+        String[] strArr = newDateAndTime.split(" ", 2);
+        if (strArr.length == 1) {
+            throw new DukeException("UPDATE_DEADLINE_DATE_TIME_NEEDED");
+        }
         String newDeadlineDate = strArr[0];
-        System.out.println(newDeadlineDate);
         String newDeadlineTime = strArr[1];
-        System.out.println(newDeadlineTime);
         this.deadlineDate = newDeadlineDate;
         this.deadlineTime = newDeadlineTime;
         try {

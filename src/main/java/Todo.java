@@ -17,7 +17,12 @@ public class Todo extends Task {
         return "T - " + getDoneInt() + " - " + getCommand();
     }
 
-    public void setDetails(String details) {
+    /**
+     * Updates the command details for the Todo task.
+     *
+     * @param details command to be updated.
+     */
+    public void updateDetails(String details) {
         this.command = details;
     }
 

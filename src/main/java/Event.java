@@ -22,8 +22,13 @@ public class Event extends Task {
         return "E - " + getDoneInt() + " - " + getCommand() + " - " + timing;
     }
 
-    public void setDetails(String details) {
-        this.timing = details;
+    /**
+     * Updates the timing details for the Event task.
+     *
+     * @param newTiming timing to be updated.
+     */
+    public void updateDetails(String newTiming) {
+        this.timing = newTiming;
     }
 
     @Override

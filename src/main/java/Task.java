@@ -54,5 +54,6 @@ public abstract class Task {
     }
 
     public abstract String updateFile();
-    public abstract void setDetails(String details);
+
+    public abstract void updateDetails(String details) throws DukeException;
 }

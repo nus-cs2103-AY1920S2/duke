@@ -17,7 +17,8 @@ public class DukeException extends Exception {
         case "EVENT_NO_DESC": // event task needs a description
             return "Oh no! :( The description for event cannot be empty.";
         case "EVENT_NO_DATE_AND_TIME": // event task needs a date and time
-            return "Please include the date and time of this event!";
+            return "Please include the date and time of this event!\nIt needs to be specified in the following " +
+                    "format: YYYY/MM/DD HHmm e.g. 2019/02/01 0900";
         case "OTHERS": // for any unrecognised commands
             return "Oh no! I am not sure what you are talking about:(";
         case "UNK_TASK_DONE": // for not specifying which task is done
@@ -26,6 +27,10 @@ public class DukeException extends Exception {
             return "Please let me know which task you want to delete!:)";
         case "LOAD_ERROR": // file loading error
             return null;
+        case "UPDATE_DEADLINE_DATE_TIME_NEEDED": // new deadline date and time not provided
+            return "Please provide the date and time for this deadline task, even if you did not change one of it:)";
+        case "COMMAND_NOT_FOUND":
+            return "Command not found! Please check the list if you forgot the command you inputted!";
         default:
             return "Error!";
         }

@@ -14,6 +14,13 @@ public class Parser {
         this.ui = new Ui();
     }
 
+    /**
+     * Parses a command to mark a certain task in the task list as done.
+     *
+     * @param command command inputted by user to mark a certain task as done.
+     * @return message showing the task completed by user.
+     * @throws DukeException if command for task that is completed is not specified.
+     */
     public String handleDone (String command) throws DukeException {
         String[] strArr = command.split(" ");
         if (strArr.length == 1) {
@@ -24,6 +31,13 @@ public class Parser {
         return ui.printTaskMarkedDone(currTask);
     }
 
+    /**
+     * Parses a 'Todo' event.
+     *
+     * @param command command inputted by user to add a Todo task.
+     * @return message showing the Todo task user has inputted and the total number of tasks in the task list.
+     * @throws DukeException if command for Todo task is not inputted.
+     */
     public String handleTodo (String command) throws DukeException {
         String[] strArr = command.split(" ", 2);
 
@@ -35,6 +49,14 @@ public class Parser {
         return ui.printTodoTask(newTask, taskList);
     }
 
+    /**
+     * Parses a 'Deadline' event.
+     *
+     * @param command command inputted by user to add a Deadline task.
+     * @return message showing the Deadline task that the user has just inputted and the total number of tasks in the
+     * task list.
+     * @throws DukeException if command or the deadline date and time for the task is not inputted.
+     */
     public String handleDeadline (String command) throws DukeException {
         String[] strArr = command.split(" ", 2);
 
@@ -53,6 +75,14 @@ public class Parser {
         return ui.printDeadlineTask(newTask, taskList);
     }
 
+    /**
+     * Parses a 'Event' event.
+     *
+     * @param command command inputted by user to add a Event task.
+     * @return message showing the Event task that the user has just inputted and the total number of tasks in the
+     * task list.
+     * @throws DukeException if command or the event date and time for the task is not inputted.
+     */
     public String handleEvent (String command) throws DukeException {
         String[] strArr = command.split(" ", 2);
 
@@ -70,6 +100,13 @@ public class Parser {
         return ui.printEventTask(newTask, taskList);
     }
 
+    /**
+     * Parses a command to delete a certain task.
+     *
+     * @param command String with command of the task to be deleted.
+     * @return message showing the remaining tasks in task list after task mentioned is deleted from the list.
+     * @throws DukeException if the index of the task to be deleted is not inputted.
+     */
     public String handleDelete (String command) throws DukeException {
         String[] strArr = command.split(" ");
         if (strArr.length == 1) {
@@ -80,7 +117,14 @@ public class Parser {
         return ui.printRemainingList(currTask, taskList);
     }
 
-    public String handleUpdate(String command) {
+    /**
+     * Parses a command to update a particular task.
+     *
+     * @param command String with command of the task previously inputted and the details to be updated for that task.
+     * @return message that updating of the details of a task has been done.
+     * @throws DukeException if the command cannot be found in any of the tasks previously inputted.
+     */
+    public String handleUpdate(String command) throws DukeException {
         Task currTask = null;
         String[] strArr = command.split(" ", 2)[1].split("/", 2);
         String commandToFind = strArr[0];
@@ -90,16 +134,18 @@ public class Parser {
                 currTask = task;
             }
         }
-        assert currTask != null;
-        currTask.setDetails(detailsToUpdate);
+        if (currTask == null) {
+            throw new DukeException("COMMAND_NOT_FOUND");
+        }
+        currTask.updateDetails(detailsToUpdate);
         return ui.printUpdatingDone();
     }
 
     /**
      * Makes sense of the user commands.
      *
-     * @param command user commands inputted by user through standard output.
-     * @return String for the command to be outputted by DukeBot
+     * @param command user commands inputted by user.
+     * @return String for the command to be outputted by DukeBot.
      */
     public String parse(String command) {
         try {
@@ -130,6 +176,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Updates the task list with tasks noted down in the file saved in hard disk.
+     *
+     * @param line String containing the type of event (T / D / E) and the corresponding command and details.
+     * @return task list which is updated with tasks noted down in the file saved in hard disk.
+     */
     public ArrayList<Task> loadText(String line) {
         String[] strArr = line.split(" - ");
         switch (strArr[0]) {
