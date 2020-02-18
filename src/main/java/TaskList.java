@@ -114,9 +114,6 @@ public class TaskList {
     }
 
     public String date() {
-        //date 29/12/2020
-        // retrieve 29/12/2020
-        //should be the same as this.by
         String date = description.substring(5);
         String toPrint = ui.date(date) + "\n";
         for(int i=0; i<store.size(); i++) {
@@ -169,8 +166,7 @@ public class TaskList {
 
 
     public String printList() {
-        ui.taskList();
-        String toPrint = "";
+        String toPrint = ui.taskList();
         for (int i = 0; i < store.size(); i++) {
             counter++;
             toPrint += "\n" + counter + ". " + store.get(i).toString();
