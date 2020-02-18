@@ -4,7 +4,7 @@
 <img src="Ui.png" width="400">
 
 ## Overview
-Tinga is an Personal Assistant Chatbot that you can use to keep track of your tasks.
+Tinga is an Personal Assistant Chatbot that helps you keep track of your tasks.
 
 ## Features 
 
@@ -26,13 +26,13 @@ View list of all tasks.
 
 ## Usage
 
-### 1. todo - Create a To do task
+### 1. todo - Adds a To do task
 
 #### Format
 
     todo {description} 
 
-Create a To do task and adds it to the list.
+Creates a To do task and adds it to the list.
 
 #### Example of usage: 
 
@@ -41,36 +41,41 @@ Create a To do task and adds it to the list.
 #### Expected outcome:
 
     Got it. I've added this task:
-    [T][✓] read book
+    [T][✗] read book
     Now you have 5 tasks in the list.
 
-### deadline - Create a To do task
+### 2. deadline - Adds a Deadline task
 
 #### Format
-{description} 
 
-Create a To do task and adds it to the list.
+    deadline {description} /by {yyyy-mm-dd}
 
-Example of usage: 
+Creates a Deadline task and adds it to the list.
 
-`todo read book`
+#### Example of usage: 
 
-Expected outcome:
+    deadline borrow book /by 2020-02-19
 
-`Got it. I've added this task:`
-`[T][✓] read book`
-`Now you have 5 tasks in the list.`
+#### Expected outcome:
 
-### event {description} - Create a To do task
+    Got it. I've added this task:
+    [D][✗] borrow book (by: Feb 19 2020)
+    Now you have 6 tasks in the list.
+    
+### 3. event - Adds an Event task
 
-Create a To do task and adds it to the list.
+#### Format
 
-Example of usage: 
+    event {description} /at {yyyy-mm-dd}
 
-`todo read book`
+Creates an Event task and adds it to the list.
 
-Expected outcome:
+#### Example of usage: 
 
-`Got it. I've added this task:`
-`[T][✓] read book`
-`Now you have 5 tasks in the list.`
+    event return book /at 2020-02-20
+
+#### Expected outcome:
+
+    Got it. I've added this task:
+    [D][✗] return book (by: Feb 20 2020)
+    Now you have 6 tasks in the list.
