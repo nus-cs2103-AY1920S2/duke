@@ -13,7 +13,7 @@ public class TodoCommand extends Command {
 
     public TodoCommand(String[] cmdArgs) throws DukeException {
         if (!hasValidNumOfArgs(cmdArgs.length)) {
-            throw new InsufficientArgumentsException("☹ OOPS!!! The description of a TODO cannot be empty!");
+            throw new InsufficientArgumentsException("OOPS!!! The description of a TODO cannot be empty!");
         } else {
             this.description = cmdArgs[1];
         }

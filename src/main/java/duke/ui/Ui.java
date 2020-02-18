@@ -12,10 +12,10 @@ public class Ui {
     }
 
     public static void printMessage(String msg) {
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\t" + msg);
-        System.out.println("\t____________________________________________________________");
-        System.out.println();
+        //System.out.println("\t____________________________________________________________");
+        System.out.println(msg);
+        //System.out.println("\t____________________________________________________________");
+        //System.out.println();
     }
 
     public static void printWelcomeMessage() {
@@ -29,7 +29,7 @@ public class Ui {
     }
 
     public static void displayAddTaskSuccessMsg(Task task, int numOfTasks) {
-        Ui.printMessage("Got it! I've added the task:\n\t\t" + task + "\n\tNow you have " + numOfTasks
+        Ui.printMessage("Got it! I've added the task:\n\t" + task + "\nNow you have " + numOfTasks
                         + " tasks in the list.");
     }
 

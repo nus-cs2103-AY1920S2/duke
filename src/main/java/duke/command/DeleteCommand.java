@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
             try {
                 this.index = Integer.parseInt(cmdArgs[1]) - 1;
             } catch (NumberFormatException ex) {
-                throw new DukeException("☹ OOPS!!! Please enter a Integer value!");
+                throw new DukeException("OOPS!!! Please enter a Integer value!");
             }
         }
     }
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
         assert task != null : "Task should not be null.";
         tasks.deleteTask(this.index);
 
-        Ui.printMessage("Noted! I've removed this task:\n\t\t" + task + "\n\tNow you have " + tasks.getNumberOfTasks()
+        Ui.printMessage("Noted! I've removed this task:\n\t" + task + "\nNow you have " + tasks.getNumberOfTasks()
                         + " tasks in the list.");
 
         storage.storeTasks(tasks.getTasks());
