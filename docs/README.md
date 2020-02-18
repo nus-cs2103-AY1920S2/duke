@@ -1,7 +1,7 @@
 # User Guide
 
 ## Introduction 
-[Picture of Duke GUI]
+![GUI](Ui.png)
 
 Duke is a Chatbot Personal Assistant to help keep track of various types of **tasks**.
 
@@ -41,7 +41,7 @@ Example of usage: `todo read book`
 
 Expected outcome:
 
-[INSERT SCREENSHOT OF DUKE RESPONSE]
+![Todo Success](todo-expected.png)
 
 `event` - Add new event
 
@@ -53,7 +53,7 @@ Example of usage: `event book fair /at 25 Jan 07`
 
 Expected outcome:
 
-[INSERT SCREENSHOT OF DUKE RESPONSE]
+![Event Success](event-expected.png)
 
 `deadline` - Add new deadline
 
@@ -67,7 +67,7 @@ Example of usage:
 
 Expected outcome:
 
-[INSERT SCREENSHOT OF DUKE RESPONSE]
+![Deadline Success](deadline-expected.png)
 
 ## 2. Delete task
 Delete an existing task.
@@ -85,7 +85,7 @@ Example of usage: `delete 3`
 
 Expected outcome: 
 
-[INSERT SCREENSHOT OF DUKE RESPONSE]
+![Delete Success](delete-expected.png)
 
 ## 3. Complete task
 Complete an existing task.
@@ -103,7 +103,7 @@ Example of usage: `done 2`
 
 Expected outcome: 
 
-[INSERT SCREENSHOT OF DUKE RESPONSE]
+![Done Success](done-expected.png)
 
 ## 4. List all tasks
 
@@ -118,7 +118,7 @@ Example of usage: `list`
 
 Expected outcome: 
 
-[INSERT SCREENSHOT OF DUKE RESPONSE]
+![List Success](list-expected.png)
 
 ## 5. Find tasks based on keyword
 
@@ -136,7 +136,7 @@ Example of usage: `find book`
 
 Expected outcome: 
 
-[INSERT SCREENSHOT OF DUKE RESPONSE]
+![Find Success](find-expected.png)
 
 ## 6. Sort Tasks
 
@@ -156,10 +156,5 @@ Close application
 Returns a list of tasks with names that contain the given keyword.
 
 Example of usage: `bye`
-
-Expected outcome: 
-
-[INSERT SCREENSHOT OF DUKE RESPONSE]
-
 
 ## Acknowledgements
