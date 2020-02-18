@@ -11,18 +11,20 @@ public class ListCommand extends Command {
      * @param storage Pass in Storage class
      * @param taskList Pass in TaskList class
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
         try {
+            String response;
             if (taskList.getTaskListSize() == 0) {
                 throw new EmptyListException();
             } else {
-                System.out.println("Here are the task in your list:");
+                response = "Here are the task in your list: \n";
                 for (int i = 0; i < taskList.getTaskListSize(); i++) {
-                    System.out.println((i + 1) + ". " + taskList.getTask(i).toString());
+                    response += (i + 1) + ". " + taskList.getTask(i).toString() + "\n";
                 }
+                return response;
             }
         } catch (DukeException ex) {
-            System.out.print(ex);
+            return ex.toString();
         }
     }
 }

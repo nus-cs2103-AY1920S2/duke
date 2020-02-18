@@ -23,19 +23,21 @@ public class FindCommand extends Command {
      * @param storage Pass in Storage class
      * @param taskList Pass in TaskList class
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
         for(int i = 0; i < taskList.getTaskListSize(); i ++) {
             if (taskList.getTask(i).description.contains(getDescription())) {
                 foundList.add(taskList.getTask(i));
             }
         }
         if (foundList.size() != 0) {
-            ui.printFound();
+            String response;
+            response =  ui.printFound() + "\n";
             for (int j = 0; j < foundList.size(); j++) {
-                System.out.println((j + 1) + ". " + foundList.get(j).toString());
+                response += (j + 1) + ". " + foundList.get(j).toString() + "\n";
             }
+            return response;
         } else {
-            ui.printNotFound();
+            return ui.printNotFound();
         }
     }
 

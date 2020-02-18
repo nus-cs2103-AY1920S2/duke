@@ -22,7 +22,7 @@ public class Parser {
      * @param cmd takes in a command
      * @return the command class
      */
-    public static Command parse(String cmd) {
+    public static Command parse(String cmd) throws DukeException {
         try {
             if (cmd.equals("bye")) {
                 return new ExitCommand();
@@ -61,11 +61,10 @@ public class Parser {
                     throw new UnknownCommandException();
                 }
             }
+        }  catch (IllegalArgumentException ex) {
+            throw new UnknownCommandException();
         } catch (DukeException ex) {
             System.out.println(ex);
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Incorrect Command");
-            return parse(scanner.nextLine());
         }
         return new ExitCommand();
     }

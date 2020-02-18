@@ -28,11 +28,11 @@ public class DeadLineCommand extends Command {
      * @param storage Pass in Storage class
      * @param taskList Pass in TaskList class
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
         Task t = new Deadline(getIndex(), fin);
         taskList.addTask(t);
         storage.store(taskList.getEntireList());
-        ui.printTodoComplete(t, taskList.getTaskListSize());
+        return ui.printTodoComplete(t, taskList.getTaskListSize());
     }
 
     /**

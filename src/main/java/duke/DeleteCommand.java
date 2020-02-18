@@ -20,14 +20,15 @@ public class DeleteCommand extends Command {
      * @param storage Pass in Storage class
      * @param taskList Pass in taskList class
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
         String num = getIndex();
-        System.out.println("Noted! I've removed this task:\n");
-        System.out.println(num + ". " + "[" + taskList.getTask(Integer.parseInt(num) - 1).getStatusIcon() + "] "
-                + taskList.getTask(Integer.parseInt(num) - 1).getDescription());
+        String response = "Noted! I've removed this task:\n";
+        response += num + ". " + "[" + taskList.getTask(Integer.parseInt(num) - 1).getStatusIcon() + "] "
+                + taskList.getTask(Integer.parseInt(num) - 1).getDescription();
         taskList.removeTask(Integer.parseInt(num) - 1);
         storage.store(taskList.getEntireList());
-        System.out.println("Now you have " + taskList.getTaskListSize() + " tasks in the list");
+        response += "Now you have " + taskList.getTaskListSize() + " tasks in the list";
+        return response;
     }
 
     /**

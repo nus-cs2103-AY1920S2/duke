@@ -21,13 +21,15 @@ public class DoneCommand extends Command {
      * @param storage Pass in Storage class
      * @param taskList Pass in taskList class
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
+        String response;
         String num = getIndex();
-        System.out.println("Nice! I've marked this task as done:\n");
+        response = "Nice! I've marked this task as done:\n";
         taskList.getTask(Integer.parseInt(num) - 1).markAsDone();
         storage.store(taskList.getEntireList());
-        System.out.println(num + ". " + "[" + taskList.getTask(Integer.parseInt(num) - 1).getStatusIcon() + "] "
-                + taskList.getTask(Integer.parseInt(num) - 1).getDescription());
+        response += num + ". " + "[" + taskList.getTask(Integer.parseInt(num) - 1).getStatusIcon() + "] "
+                + taskList.getTask(Integer.parseInt(num) - 1).getDescription();
+        return response;
     }
 
     /**

@@ -10,27 +10,27 @@ public class Ui {
     /**
      * Display a welcome text.
      */
-    public static void showWelcome() {
-        System.out.println("Hello! I'm duke\nWhat can I do for you?");
+    public static String showWelcome() {
+        return "Hello! I'm duke\nWhat can I do for you?";
     }
 
     /**
      * Display the duke Logo.
      */
-    public static void printLogo() {
+    public static String printLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        return "Hello from\n" + logo;
     }
 
     /**
      * Prints out a line.
      */
-    public void printLine() {
-        System.out.println("--------------------------------");
+    public String printLine() {
+        return "--------------------------------";
     }
 
     /**
@@ -45,8 +45,8 @@ public class Ui {
     /**
      * Prints out exit message.
      */
-    public void printExit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printExit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -54,23 +54,22 @@ public class Ui {
      * @param t takes in a task
      * @param i takes in task list size
      */
-    public void printTodoComplete(Task t, int i) {
-        System.out.println("Got it. I've added this task");
-        System.out.println(t.toString());
-        System.out.println("Now you have " + i + " tasks in the list");
+    public String printTodoComplete(Task t, int i) {
+        return "Got it. I've added this task\n" + t.toString()
+                + "Now you have " + i + " tasks in the list";
     }
 
     /**
      * Print found message.
      */
-    public void printFound() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String printFound() {
+        return "Here are the matching tasks in your list:";
     }
 
     /**
      * Print Not Found message.
      */
-    public void printNotFound() {
-        System.out.println("There was no matching task");
+    public String printNotFound() {
+        return "There was no matching task";
     }
 }

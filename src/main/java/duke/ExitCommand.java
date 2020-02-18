@@ -11,8 +11,7 @@ public class ExitCommand extends Command {
      * @param storage Pass in Storage class
      * @param taskList Pass in TaskList class
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
-        ui.printExit();
-        System.exit(0);
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
+        return ui.printExit();
     }
 }
