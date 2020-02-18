@@ -3,6 +3,8 @@
 The official guide to using Dude to his full potential!
 
 ## Table of Contents
+--------------------
+
 1. [Screenshot](#screenshot)
 2. [Installation](#installation)
 3. [Quick Start](#quick-start)
@@ -23,30 +25,74 @@ The official guide to using Dude to his full potential!
 7. [Acknowledgements](#acknowledgements)
 
 
-## Screenshot
+Screenshot
+==========
 ![](Ui.png)
 
-## Installation
-
+Installation
+============
 Make sure you have [java](https://www.oracle.com/java/technologies/javase-downloads.html) installed on your computer.
 
 Head over to the [releases](https://github.com/CornCobs/duke/releases) page and download the latest version of Dude!
 
-## Quick Start
-
+Quick Start
+===========
 To start Dude, double click the jar file. Alternatively, on the command prompt / terminal, navigate to the directory where the jar file is and run the following:
 
 ```
 > java -jar dude-0.2.2.jar
 ```
-After Dude has started up, type "help" to see the available commands, and type "bye" to exit. That's all you need to get started!
+After Dude has started up, enter "help" to see the available commands, and enter "bye" to exit. That's all you need to get started!
 
-## Command Guide 
+Command Guide 
+=============
+### **4.1 Help**
+Dude lends you a helping hand! The help command can give you more information of how to use Dude, what kinds of input Dude understands and what the various commands do.
 
-### Help
-Description of feature.
+If no arguments are given, Dude tells you the format of all of the commands he understands.
 
-## Usage
+If the name of a command is specified, Dude gives more information about that command - the format, and what it does.
+
+If you ask for `help -date`, Dude explains the types of dates he can understand.
+
+**Format**
+```
+help [command | -date]
+```
+
+**Example Usage**
+
+![](Help.png)
+
+### **Bye**
+---
+Closes Dude. Before closing, Dude makes sure to save all of the tasks you have currently in ./data so when you start him up again, it's as if you never left!
+
+### Format
+```
+bye
+```
+
+4.3 List
+----
+Shows all the tasks you currently have, and their completion status - unless you don't have any, of course!
+
+### Format
+```
+list
+```
+
+### Example Usage
+![](List.png)
+
+Todo
+----
+
+Deadline
+--------
+
+Event
+-----
 
 ### `Keyword` - Describe action
 
