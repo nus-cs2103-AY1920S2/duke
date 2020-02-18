@@ -37,6 +37,11 @@ public class Storage {
     public List<Task> load() throws DukeException {
         try {
             File saveFile = new File(filePath);
+
+            if (!saveFile.exists()) {
+                saveFile.mkdirs(); // Create a new save file
+            }
+
             Scanner sc = new Scanner(saveFile);
 
             List<Task> tasks = new ArrayList<>();
