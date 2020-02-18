@@ -1,6 +1,12 @@
 package duke.util;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.FindCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.AddCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
 import duke.exception.CommandNotFoundException;
 import duke.exception.InvalidDukeArgumentException;
 import duke.task.Deadline;
@@ -16,6 +22,7 @@ import java.util.StringTokenizer;
  */
 public class Parser {
     private static HashMap<String, CommandIdentifier> COMMAND_IDENTIFIERS = new HashMap<>();
+
     static {
         COMMAND_IDENTIFIERS.put("bye", CommandIdentifier.BYE);
         COMMAND_IDENTIFIERS.put("list", CommandIdentifier.LIST);
@@ -35,7 +42,8 @@ public class Parser {
      * @throws CommandNotFoundException If the command is not found.
      * @throws InvalidDukeArgumentException If the argument is invalid, either not a number or out of range.
      */
-    public Command parse(String fullCommand, TaskList tasklist) throws CommandNotFoundException, InvalidDukeArgumentException {
+    public Command parse(String fullCommand, TaskList tasklist)
+            throws CommandNotFoundException, InvalidDukeArgumentException {
         StringTokenizer st = new StringTokenizer(fullCommand);
         String identifier = st.nextToken();
         try {
@@ -71,6 +79,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the command identifier from the user input.
+     * @param identifier The String that acts as a key to find the command identifier.
+     * @return The corresponding command identifier.
+     * @throws CommandNotFoundException When the command identifier is not found.
+     */
     public CommandIdentifier getCommandIdentifier(String identifier) throws CommandNotFoundException {
         if (COMMAND_IDENTIFIERS.get(identifier) == null) {
             throw new CommandNotFoundException("OOPS!!! I don't understand this command. ☹\n");
