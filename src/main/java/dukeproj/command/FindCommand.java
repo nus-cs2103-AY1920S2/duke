@@ -30,8 +30,8 @@ public class FindCommand extends Command {
         if (keyword.isEmpty()) {
             throw new DukeDescriptionException("Empty Description");
         }
-        TaskList outputList = new TaskList(taskList.find(keyword.split(" ")));
-        return ui.say(SayType.FIND) + "\n" + outputList.toString();
+        //TaskList outputList = new TaskList(taskList.find(keyword.split(" ")));
+        return ui.say(SayType.FIND) + "\n" + taskList.find(keyword.split(" "));
     }
 
     /**

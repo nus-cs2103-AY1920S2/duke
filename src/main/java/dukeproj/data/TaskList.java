@@ -3,6 +3,7 @@ package dukeproj.data;
 import dukeproj.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Represents a list of tasks using ArrayList.
@@ -73,16 +74,31 @@ public class TaskList {
      * @param keywords The varargs of keywords used to find tasks.
      * @return The ArrayList of tasks found using the keywords.
      */
-    public ArrayList<Task> find(String...keywords) {
-        ArrayList<Task> outputList = new ArrayList<>();
-        for (Task task: tasks) {
+    public String find(String...keywords) {
+        ArrayList<Task> outputs = new ArrayList<>();
+        HashMap<Task, Integer> indexes = new HashMap<>();
+        inputFound(outputs, indexes, keywords);
+        return changeFoundToString(outputs, indexes);
+    }
+
+    private void inputFound(ArrayList<Task> outputs, HashMap<Task, Integer> indexes, String...keywords) {
+        for (int i = 0; i < tasks.size(); i++) {
             for (String str: keywords) {
-                if (task.getTask().contains(str) && !outputList.contains(task)) {
-                    outputList.add(task);
+                Task task = tasks.get(i);
+                if (task.getTask().contains(str) && !outputs.contains(task)) {
+                    outputs.add(task);
+                    indexes.put(task, i + 1);
                 }
             }
         }
-        return outputList;
+    }
+
+    private String changeFoundToString(ArrayList<Task> outputs, HashMap<Task, Integer> indexes) {
+        StringBuilder output = new StringBuilder();
+        for (Task task: outputs) {
+            output.append(indexes.get(task)).append(".").append(task).append("\n");
+        }
+        return output.toString();
     }
 
     /**
