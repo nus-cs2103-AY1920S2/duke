@@ -92,7 +92,7 @@ public class Parser {
         return COMMAND_IDENTIFIERS.get(identifier);
     }
 
-    private int getCommandIndex(StringTokenizer st, TaskList tasklist) throws InvalidDukeArgumentException {
+    public int getCommandIndex(StringTokenizer st, TaskList tasklist) throws InvalidDukeArgumentException {
         int index = 0;
         try {
             index = Integer.parseInt(st.nextToken());
@@ -105,7 +105,7 @@ public class Parser {
         return index;
     }
 
-    private String getTaskDescription(StringTokenizer st) throws InvalidDukeArgumentException {
+    public String getTaskDescription(StringTokenizer st) throws InvalidDukeArgumentException {
         String description = "";
         try {
             description = st.nextToken("").trim();
@@ -115,7 +115,7 @@ public class Parser {
         return description;
     }
 
-    private String[] getTaskDescriptionAndTime(StringTokenizer st) {
+    public String[] getTaskDescriptionAndTime(StringTokenizer st) {
         String description = st.nextToken("/").trim();
         String time = st.nextToken("/").trim().substring(3);
         String[] descriptionAndTime = new String[]{description, time};

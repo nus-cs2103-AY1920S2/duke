@@ -1,11 +1,14 @@
-import duke.command.Command;
+import duke.command.*;
+import duke.exception.CommandNotFoundException;
 import duke.exception.DukeException;
-import duke.util.Parser;
-import duke.util.Storage;
-import duke.util.TaskList;
-import duke.util.Ui;
+import duke.exception.InvalidDukeArgumentException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.util.*;
 
 import java.io.FileNotFoundException;
+import java.util.StringTokenizer;
 
 
 /**
@@ -65,6 +68,39 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Parser parser = new Parser();
+        StringTokenizer st = new StringTokenizer(input);
+        String identifier = st.nextToken();
+        try {
+            CommandIdentifier commandIdentifier = parser.getCommandIdentifier(identifier);
+            switch (commandIdentifier) {
+            case BYE:
+                return "Hope to see you next time! xD\n";
+            case LIST:
+                return tasklist.listTask();
+            case DONE:
+                int doneIndex = parser.getCommandIndex(st, tasklist);
+                return tasklist.doneTask(doneIndex, storage);
+            case DELETE:
+                int deleteIndex = parser.getCommandIndex(st, tasklist);
+                return tasklist.deleteTask(deleteIndex, storage);
+            case TODO:
+                String todoDescription = parser.getTaskDescription(st);
+                return tasklist.addTask(new Todo(todoDescription), storage);
+            case DEADLINE:
+                String[] deadlineDescriptionAndTime = parser.getTaskDescriptionAndTime(st);
+                return tasklist.addTask(new Deadline(deadlineDescriptionAndTime[0], deadlineDescriptionAndTime[1]), storage);
+            case EVENT:
+                String[] eventDescriptionAndTime = parser.getTaskDescriptionAndTime(st);
+                return tasklist.addTask(new Event(eventDescriptionAndTime[0], eventDescriptionAndTime[1]), storage);
+            case FIND:
+                String keyword = parser.getTaskDescription(st);
+                return tasklist.findTask(keyword);
+            default:
+                return "Hope to see you next time! xD\n";
+            }
+        } catch (CommandNotFoundException | InvalidDukeArgumentException e) {
+            return e.getMessage();
+        }
     }
 }

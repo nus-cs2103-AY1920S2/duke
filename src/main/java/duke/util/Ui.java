@@ -44,8 +44,8 @@ public class Ui {
     }
 
     public void showFarewell() {
-        String message = "Hope to see you next time! xD\n";
-        showMessage(message);
+        String farewell = "Hope to see you next time! xD\n";
+        showMessage(farewell);
     }
 
     public void showLoadingError() {
