@@ -68,6 +68,9 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        Duke duke = new Duke("./data/duke.txt");
+        TaskList tasklist = duke.tasklist;
+        Storage storage = duke.storage;
         Parser parser = new Parser();
         StringTokenizer st = new StringTokenizer(input);
         String identifier = st.nextToken();
