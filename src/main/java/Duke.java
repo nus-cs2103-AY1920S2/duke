@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -36,18 +37,23 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/BugCat.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Capoo.png"));
+
+    public Duke() throws IOException {
+        this("data/duke.txt");
+    }
 
     /**
-     * Creates a Duke chatbot that helps a person to keep track of various things.
-     * @param filePath path to file that stores a list of user's tasks.
+     * Creates a Duke object.
+     * @param filePath The file path to Duke.txt.
+     * @throws IOException If Duke.txt is not found.
      */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(this.storage.load());
+            tasks = new TaskList(storage.load());
         } catch (IOException e) {
             ui.showLoadingError();
             File file = new File("data");
@@ -56,20 +62,6 @@ public class Duke extends Application {
                 new File("data").mkdir();
             }
             new File(filePath).createNewFile();
-            tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Creates a Duke chatbot that helps a person to keep track of various things.
-     */
-    public Duke() {
-        ui = new Ui();
-        storage = new Storage("/Users/HuiTing/duke/data/duke.txt");
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -197,6 +189,9 @@ public class Duke extends Application {
         try {
             Command command = Parser.parse(input);
             result = command.execute(tasks, ui, storage);
+            if (result.equals("Bye. Hope to see you again soon!")) {
+                Platform.exit();
+            }
         } catch (DukeException e) {
             result = e.getMessage();
         }
