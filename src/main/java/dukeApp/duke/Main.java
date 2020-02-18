@@ -28,7 +28,7 @@ public class Main extends Application {
             stage.setTitle("Pusheen");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-            fxmlLoader.<MainWindow>getController().startScreen(duke.getWelcome());
+            fxmlLoader.<MainWindow>getController().startScreen(duke.getWelcome()); //gets welcome message
         } catch (IOException e) {
             e.printStackTrace();
         }

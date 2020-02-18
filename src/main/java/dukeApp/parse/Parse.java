@@ -13,6 +13,7 @@ public class Parse {
     /**
      * Breaks down statement from user to determine task specified
      * @param tasks list of existing tasks
+     * @return message in response to user input
      */
     public String decode(TaskList tasks) {
         String[] taskArray = statement.split(" "); //task array is each line from input file
@@ -27,7 +28,8 @@ public class Parse {
             //any command that's not list and reminder
             else if (taskArray.length == 1) {
                 throw emptyCommandDecode(taskArray[0]);
-            } else {
+            }
+            else {
                 switch (taskArray[0]) {
                     case "find":
                         msg = tasks.find(taskArray[1]);
@@ -37,9 +39,12 @@ public class Parse {
                         int rank = Integer.parseInt(taskArray[1]); //rank of task to be deleted or marked as done
                         msg = tasks.deleteDone(rank, taskArray[0]);
                         break;
-                    default:
+                    case "todo": case "event": case "deadline":
                         statement = statement.substring(statement.indexOf(" "));
                         msg = tasks.add(taskArray[0], statement);
+                        break;
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                 }
             }
         } catch (DukeException e) {
@@ -51,7 +56,7 @@ public class Parse {
     /**
      * Error thrown when no details follow a command that require details, or an unknown command given
      * @param s command given by user
-     * @return the error string
+     * @return DukeException that contains the error message
      */
     private DukeException emptyCommandDecode(String s) throws DukeException {
         if (s.equals("todo") || s.equals("deadline") || s.equals("event")) {
@@ -66,6 +71,7 @@ public class Parse {
     /**
      * Actions that follow when a list command is specified
      * @param tasks list of existing tasks
+     * @return task list or if an error if it's empty
      */
     private String listDecode(TaskList tasks) {
         String msg = "";

@@ -19,6 +19,7 @@ public class TaskList {
 
     /**
      * Prints task in the list
+     * @return message to list task
      */
     public String printList() {
         return "Here are the tasks in your list:\n" + print(aList);
@@ -26,6 +27,7 @@ public class TaskList {
 
     /**
      * Prints reminders for deadlines in the list
+     * @return message to show reminders
      */
     public String reminderList() {
         ArrayList<Task> reminderList = new ArrayList<>();
@@ -46,6 +48,7 @@ public class TaskList {
      * Actions to be done for delete & done tasks
      * @param rank task number in the list
      * @param dd string indicating delete or done action
+     * @return message to show a task has been marked as done or deleted
      */
     public String deleteDone(int rank, String dd) throws DukeException {
         Action action = new Action(rank, aList);
@@ -65,16 +68,23 @@ public class TaskList {
     /**
      * Call to action for the different task type
      * @param statement task description
+     * @return message to show matching tasks
      */
     public String find(String statement) {
         Find f = new Find(statement, aList);
         ArrayList<Task> matchTask = f.match();
-        return "Here are the matching tasks in your list:" + print(matchTask);
+        if (matchTask.size() > 0) {
+            return "Here are the matching tasks in your list:\n" + print(matchTask);
+        }
+        else {
+            return "There are no matching tasks in your list.";
+        }
     }
 
     /**
      * Prints the corresponding list required
      * @param listOfTask the required list of task
+     * @return list of tasks
      */
     private String print(ArrayList<Task> listOfTask){
         Task t;
@@ -86,7 +96,12 @@ public class TaskList {
         return msg + "\n";
     }
 
-    //call to actions for different task type
+    /**
+     * Add a new task to the list
+     * @param taskType the type of task to be added (todo, event, deadline)
+     * @param statement task description
+     * @return message to show successful adding of task
+     */
     public String add(String taskType, String statement) {
         Task t;
         String msg = "";
@@ -120,6 +135,11 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * To breakdown the task description stated by user into parts
+     * @param s task description
+     * @return an arraylist containing the details splitted
+     */
     public ArrayList<String> breakStatement(String s) {
         ArrayList<String> details = new ArrayList<>();
         details.add(s.split("\\(")[0]); //store description string
@@ -135,6 +155,7 @@ public class TaskList {
      * Actions to be executed if delete is called
      * @param rank task number in the list
      * @param tempList task list
+     * @return the message to show task successfully deleted
      */
     public String deleteAction(int rank, ArrayList<Task> tempList) {
         String msg = "";
@@ -149,13 +170,14 @@ public class TaskList {
      * Actions to be executed if done is called
      * @param rank task number in the list
      * @param tempList task list
+     * @return message to show task successfully marked as done
      */
     public String doneAction(int rank, ArrayList<Task> tempList) {
         String msg = "";
         Done done = new Done(rank, tempList);
         msg += "Nice! I've marked this task as done:\n";
-        msg += done;
         done.markDone();
+        msg += done;
         return msg += "\nNow you have " + tempList.size() + " tasks in the list.\n";
     }
 
@@ -163,6 +185,7 @@ public class TaskList {
      * Print statements when a new task is added
      * @param t the specific task in the list
      * @param tempList task list
+     * @return message showing successful adding of task
      */
     public String printAdded(Task t, ArrayList<Task> tempList) {
         return "Got it. I've added this task:\n"

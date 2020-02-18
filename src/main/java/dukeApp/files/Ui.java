@@ -8,6 +8,9 @@ public class Ui {
     /**
      * Accept user inputs
      * @param tasks list of task retrieved from file
+     * @param input user input
+     * @return message in response to the user input
+     * @throws DukeException
      */
     public String input(TaskList tasks, String input) throws DukeException {
         if (!input.equals("bye")) {
@@ -21,6 +24,7 @@ public class Ui {
 
     /**
      * Prints error message if data from file cannot be loaded
+     * @return error message
      */
     public String showLoadingError() {
         return "File not found";

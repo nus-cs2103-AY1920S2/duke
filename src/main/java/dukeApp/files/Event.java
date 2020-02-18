@@ -14,10 +14,11 @@ public class Event extends Task {
     }
 
     /**
-     * Change the date in the original format to write to file
+     * Obtain the task description in storage format where date is in YYYY-MM-DD
+     * @return task description
      */
-    public void changeDate() {
-        date = originalDate;
+    public String storageFormat() {
+        return description + "(at: " +originalDate+ " " +time+ ")";
     }
 
     /**
@@ -29,18 +30,14 @@ public class Event extends Task {
         return "E";
     }
 
-    /**
-     * Returns only the task description without the date
-     * @return task description
-     */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Returns the task date description
+     * Returns the task description where the date is in format MMM DD YYYY
      *
-     * @return task date description
+     * @return task description
      */
     @Override
     public String toString() {

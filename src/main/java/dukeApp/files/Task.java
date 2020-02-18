@@ -35,4 +35,6 @@ public abstract class Task {
     public int getDone() {
         return isDone ? 1 : 0;
     }
+
+    public abstract String storageFormat();
 }

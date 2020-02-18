@@ -65,14 +65,8 @@ public class Storage {
         StringBuilder s = new StringBuilder();
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < newList.size(); i++) {
-            if ((newList.get(i).getType()).equals("E")) {
-                ((Event)newList.get(i)).changeDate();
-            }
-            else if ((newList.get(i).getType()).equals("D")){
-                ((Deadline)newList.get(i)).changeDate();
-            }
             s.append(newList.get(i).getType()).append(" ").append(newList.get(i).getDone())
-                    .append(newList.get(i).toString());
+                    .append(newList.get(i).storageFormat());
             if (i != newList.size()-1) {
                 s.append(System.lineSeparator());
             }

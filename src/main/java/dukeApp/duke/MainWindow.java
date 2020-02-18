@@ -56,6 +56,10 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Creates the Pusheen dialog box to display the welcome message when the app is first started
+     * @param msg welcome message
+     */
     public void startScreen(String msg) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(msg, dukeImage)

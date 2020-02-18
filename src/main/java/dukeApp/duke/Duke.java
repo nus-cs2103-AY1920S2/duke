@@ -28,13 +28,19 @@ public class Duke {
         }
     }
 
+    /**
+     * Retrieve the welcome message when the app is start, and before any user input
+     * @return welcome message
+     */
     public String getWelcome() {
         return "Hello I am Pusheen, your personal task manager! What can I do for you?\n";
     }
 
     /**
      * Run the app by reading user commands and writing to file to save changes
-     *
+     * @param input input by user
+     * @return response by Pusheen
+     * @throws DukeException
      */
     public String run(String input) throws DukeException {
         String msg = ui.input(tasks, input);
@@ -52,11 +58,13 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * returns the response to the input by the user
+     * @param input user input
+     * @return the String response to the input
+     * @throws DukeException
      */
     public String getResponse(String input) throws DukeException {
-        input = d.run(input);
-        return input;
+        String response = d.run(input);
+        return response;
     }
 }

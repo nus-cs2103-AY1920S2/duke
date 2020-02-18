@@ -11,6 +11,10 @@ public class Find {
         this.aList = aList;
     }
 
+    /**
+     * Look through the task list to find task with matching keywords
+     * @return the list of tasks with matching keywords
+     */
     public ArrayList<Task> match() {
         ArrayList<Task> matchList = new ArrayList<>();
 

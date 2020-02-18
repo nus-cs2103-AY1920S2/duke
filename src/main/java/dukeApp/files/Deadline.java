@@ -23,35 +23,21 @@ public class Deadline extends Task {
     }
 
     /**
-     * Change the date in the original format to write to file
-     * Returns the task date description
-     *
-     * @return task date description
+     * Obtain the task description in storage format where date is in YYYY-MM-DD
+     * @return task description
      */
-    public String getTask() {
-        return description;
+    public String storageFormat() {
+        return description + "(at: " +originalDate+ " " +time+ ")";
     }
 
-    /**
-     * Changes the date into a specified format by passing into dukeApp.files.DateTime
-     * @return changed date format
-     */
-    public void changeDate() {
-        date = originalDate;
-    }
-
-    /**
-     * Changes the time into a specified format by passing into dukeApp.files.DateTime
-     * @return changed time format
-     */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Returns the task date description
+     * Returns the task  description where the date is in format MMM DD YYYY
      *
-     * @return task date description
+     * @return task description
      */
     @Override
     public String toString() {

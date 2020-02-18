@@ -16,7 +16,7 @@ public class Todo extends Task {
 
     @Override
     public String getDescription() {
-        return null;
+        return "";
     }
 
     /**
@@ -26,6 +26,10 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
+        return description;
+    }
+
+    public String storageFormat() {
         return description;
     }
 }
