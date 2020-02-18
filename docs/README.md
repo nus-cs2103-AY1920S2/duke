@@ -1,6 +1,4 @@
 # Duke - User Guide
-:repoURL: https://github.com/jiachen/duke
-
 By: `@jiachen247`      Since: `Jun 2020`      Licence: `MIT`
 
 ## Introduction
@@ -9,16 +7,16 @@ Duke is for those who *prefer to use a desktop app for managing tasks*. More imp
 
 ## Quick Start
 
-.  Ensure you have Java `11` installed in your Computer.
-.  Download the latest `duke.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for Duke.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
-+
+- Ensure you have Java `11` installed in your Computer.
+- Download the latest `duke.jar` link:{repoURL}/releases[here].
+-  Copy the file to the folder you want to use as the home folder for Duke.
+-  Double-click the file to start the app. The GUI should appear in a few seconds.
+
 ![](Ui.png?raw=true)
-+
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+
+-  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+-  Some example commands you can try:
 
 * *`hello`* : say hello to duke
 * *`todo`* : add a todo task
@@ -31,7 +29,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * *`help`* : ask duke for help
 * *`exit`* : exit duke
 
-.  Refer to <<Features>> for details of each command.
+-  Refer to <<Features>> for details of each command.
 
 [[Features]]
 ## Features
