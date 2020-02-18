@@ -4,7 +4,7 @@ Duke is a chatbot that can help you manage your tasks. You can tell Duke to add,
 ## Table of Contents
 - [Requirements](#requirements)
 - [Features](#features)
-    - [Custom save file location](#custom-save-file-location)
+    - [Interactive Graphical User Interface](#interacctive-graphical-user-interface)
     - [Types of tasks](#types-of-tasks)
     - [Search for tasks](#search-for-tasks)
 - [Usage](#usage)
@@ -21,9 +21,9 @@ Duke is a chatbot that can help you manage your tasks. You can tell Duke to add,
 
 ## Features 
 
-### Custom save file location
-When Duke starts, you can enter a custom save file location relative to the folder the Duke executable is hosted in, or you can enter an empty string to set it to the default save location: `~/data/duke.txt`.
-
+### Interactive Graphical User Interface
+Duke comes with a GUI to provide users with visual feedback when Duke performs tasks.
+<img src="Ui.png" width="250">
 
 ### Types of tasks
 Duke manages your tasks which are categorized into three types:
