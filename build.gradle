@@ -7,7 +7,7 @@ plugins {
 }
 
 group "duke"
-version "0.2.0"
+version "1.0.0"
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
@@ -43,7 +43,7 @@ checkstyle {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.2.0"
+    archiveVersion = "1.0.0"
     classifier = ""
 }
 
