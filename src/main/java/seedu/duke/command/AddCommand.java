@@ -3,7 +3,7 @@ package seedu.duke.command;
 import seedu.duke.exception.EmptyDescriptionException;
 import seedu.duke.exception.InvalidCommandException;
 import seedu.duke.exception.InvalidDateException;
-import seedu.duke.exception.InvalidTaskInputException;
+import seedu.duke.exception.InvalidInputFormatException;
 import seedu.duke.exception.DukeException;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
@@ -61,7 +61,7 @@ public class AddCommand extends Command {
             case DEADLINE:
                 String[] deadlineDescs = desc.split(" /by |\\|");
                 if (deadlineDescs.length == 1) { // invalid Deadline input format
-                    throw new InvalidTaskInputException();
+                    throw new InvalidInputFormatException();
                 }
 
                 String deadlineDesc = deadlineDescs[0].trim();
@@ -77,7 +77,7 @@ public class AddCommand extends Command {
             case EVENT:
                 String[] eventDescs = desc.split(" /at |\\|");
                 if (eventDescs.length == 1) { // invalid Event input format
-                    throw new InvalidTaskInputException();
+                    throw new InvalidInputFormatException();
                 }
                 String eventDesc = eventDescs[0].trim();
                 String eventDate = eventDescs[1].trim();

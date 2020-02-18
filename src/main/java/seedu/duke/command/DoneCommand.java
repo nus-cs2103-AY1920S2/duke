@@ -5,7 +5,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
 import seedu.duke.exception.EmptyDescriptionException;
-import seedu.duke.exception.InvalidTaskInputException;
+import seedu.duke.exception.InvalidInputFormatException;
 import seedu.duke.exception.TaskIndexOutOfBoundsException;
 
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class DoneCommand extends Command {
             }
 
             if (!isNumeric(inputs[1])) {
-                throw new InvalidTaskInputException();
+                throw new InvalidInputFormatException();
             }
             int index = Integer.parseInt(inputs[1]);
             if (index < 1 || index > taskList.getTasks().size()) {

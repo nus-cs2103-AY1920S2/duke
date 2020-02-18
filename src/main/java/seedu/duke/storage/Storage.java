@@ -1,7 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.exception.InvalidDateException;
-import seedu.duke.exception.InvalidTaskInputException;
+import seedu.duke.exception.InvalidInputFormatException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
@@ -63,10 +63,10 @@ public class Storage {
      *
      * @return A task list with content from the hard disk.
      * @throws IOException If an input or output exception occurred.
-     * @throws InvalidTaskInputException If an invalid task command is input.
+     * @throws InvalidInputFormatException If an input is keyed in a wrong format.
      * @throws InvalidDateException If a date is input in a wrong format.
      */
-    public List<Task> load() throws IOException, InvalidTaskInputException, InvalidDateException {
+    public List<Task> load() throws IOException, InvalidInputFormatException, InvalidDateException {
         tasks = new ArrayList<>();
         String inputLine;
         File file = new File(filePath);
@@ -84,7 +84,7 @@ public class Storage {
             } else if (type.equalsIgnoreCase("E")) {
                 addEvent(desc, doneStatus);
             } else {
-                throw new InvalidTaskInputException();
+                throw new InvalidInputFormatException();
             }
         }
 
@@ -97,11 +97,11 @@ public class Storage {
     /**
      * Sorts the content inside the hard disk according to due dates and alphabetical order.
      *
-     * @throws InvalidTaskInputException If an invalid task command is input.
+     * @throws InvalidInputFormatException If an input is keyed in a wrong format.
      * @throws InvalidDateException If a date is input in a wrong format.
      * @throws IOException If an input or output exception occurred.
      */
-    public void sortStorage() throws InvalidTaskInputException, InvalidDateException, IOException {
+    public void sortStorage() throws InvalidInputFormatException, InvalidDateException, IOException {
         List<Task> tasksInStorage = new ArrayList<>();
         tasksInStorage = load();
         Collections.sort(tasksInStorage);
@@ -153,14 +153,14 @@ public class Storage {
      *
      * @param desc The details of the deadline task.
      * @param doneStatus An indicator which shows whether a deadline task has been completed or not.
-     * @throws InvalidTaskInputException If an invalid task command is input.
+     * @throws InvalidInputFormatException If an input is keyed in a wrong format.
      * @throws InvalidDateException If a date is input in a wrong format.
      */
     private void addDeadline(String desc, String doneStatus)
-            throws InvalidTaskInputException, InvalidDateException {
+            throws InvalidInputFormatException, InvalidDateException {
         String[] descs = desc.split(" /by |\\|");
         if (descs.length == 1) { // invalid Deadline input format
-            throw new InvalidTaskInputException();
+            throw new InvalidInputFormatException();
         }
 
         String deadlineDesc = descs[0].trim();
@@ -186,14 +186,14 @@ public class Storage {
      *
      * @param desc The details of the event task.
      * @param doneStatus An indicator which shows whether an event task has been completed or not.
-     * @throws InvalidTaskInputException If an invalid task command is input.
+     * @throws InvalidInputFormatException If an input is keyed in a wrong format.
      * @throws InvalidDateException If a date is input in a wrong format.
      */
     private void addEvent(String desc, String doneStatus)
-            throws InvalidTaskInputException, InvalidDateException {
+            throws InvalidInputFormatException, InvalidDateException {
         String[] descs = desc.split(" /at |\\|");
         if (descs.length == 1) { // invalid Event input format
-            throw new InvalidTaskInputException();
+            throw new InvalidInputFormatException();
         }
         String eventDesc = descs[0].trim();
         String eventDate = descs[1].trim();

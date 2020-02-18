@@ -5,7 +5,7 @@ Tired of being a procrastinator? Fret not! Dodo is here to make sure you do your
 
 You can save your todo, deadline, event list--all in one!
 
-Figure 1. Screenshot of Dodo
+######Figure 1. Screenshot of Dodo
 
 [Figure of Dodo](https://github.com/johannagwan/duke/blob/master/docs/Ui.png)
 
@@ -19,30 +19,69 @@ Figure 1. Screenshot of Dodo
 ### 3.1. Chatting
 Dodo is a personalised chatbot who will reply you in an instant. It's your friend!
 
-### 3.2. Add new task
+### 3.2. Load task immediately from hard disk
+When Dodo starts, it will automatically load your tasks from your hard disk file. If you have no existing file, Dodo will automatically create one for you as you add your tasks to the list.
+
+### 3.3. Add a new task
 You can add your upcoming todo, deadline and event into your list of tasks. It is automatically saved by Dodo!
 
-### 3.3. Display list of tasks
+Details of the different types of task are as follows: 
+* Todo: a task to complete without a specified due date.
+* Deadline: a task to complete with a specified due date.
+* Event: an occasion that will happen in a specified date.
+
+### 3.4. Display list of tasks
 Dodo can display the list of tasks (todo, deadline, and event) that you have saved in chronological order according to the due dates and in alphabetical order.
 
-### 3.4. Mark task as done
-When you have accomplished your task, don't forget to inform Dodo. 
+### 3.5. Mark task as done
+All tasks are initially marked as undone. When you have accomplished your task, don't forget to inform Dodo, by marking your task as done. Before ticking off your task, remember that you have to type `list` to check your task's index, as the index may change if you previously add or delete a task.
 
-### 3.5. Delete a task
-### 3.6. Find a task
-### 3.7. Close the chatbot with user input
-### 3.8. Load task immediately from hard disk
+### 3.6. Delete a task
+If you accidentally add a new task, or simply want to reduce your task clutter, you can delete your task according to its index. Remember that you have to type `list` to check your task's index, as the index may change if you previously add or delete a task.
 
-## Usage
+### 3.7. Find a task
+Want to find a task with a specified keyword? Fret not, Dodo got your back. Dodo can display a list of tasks which contain the keyword you input.
 
-### `Keyword` - Describe action
+### 3.8. Close the chatbot with user input
+You can close the chatbot by simply keying in `bye`.
 
-Describe action and its outcome.
+## 4. Usage
 
-Example of usage: 
+### 4.1. Add a new task
+All tasks must be input in the correct format to be added successfully. Don't worry if you do not remember the exact format, Dodo will remind you as a good friend.
+```
 
-`keyword (optional arguments)`
+```
+
+#### 4.1.1. `todo <description>`
+Creates a new todo task with a description.
+
+Example of usage: `todo running at gym`
 
 Expected outcome:
+> Gotcha. Added this to your list:\
+> [T][N] running at gym\
+> Now you got 5 tasks in your list!
 
-`outcome`
+####4.1.2. `deadline <description> /by <due date in yyyy-mm-dd>`
+Creates a new deadline task with a description and a due date.
+
+Example of usage: `deadline assignment 1 /by 2020-02-02`
+
+Expected outcome:
+> Gotcha. Added this to your list:\
+> [D][N] assignment 1 (by: Feb 2 2020)\
+> Now you got 5 tasks in your list!
+
+####4.1.3. `event <description> /at <date in yyyy-mm-dd>`
+Creates a new event task with a description and a date.
+
+Example of usage: `event formal dinner /at 2020-02-16`
+
+Expected outcome:
+> Gotcha. Added this to your list:\
+> [E][N] formal dinner (at: Feb 16 2020)\
+> Now you got 5 tasks in your list!
+
+### 4.2. Display list of tasks
+### 4.3. 
