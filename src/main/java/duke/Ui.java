@@ -61,6 +61,7 @@ public class Ui {
                 + "which can be space-separated\n"
                 + "9. bye (Say bye to you :) )\n"
                 + "10. help\n"
+                + "\n"
                 + "Note that all dates follow the format YYYY-MM-DD\n"
                 + "\n"
                 + "PS: A '[V]' indicates a completed task while a '[X]' indicates an incomplete task";
@@ -69,7 +70,6 @@ public class Ui {
     /**
      * Gives String indicating removal of a given task, of its index then and the current number of Tasks remaining.
      *
-     * @param index index of the Task to remove.
      * @param removedTask the Task which we are to remove.
      * @param allTasks TaskList containing all the Tasks in Duke.
      * @return String indicating removal of a given Task, of its index then and the current number of Tasks remaining.
