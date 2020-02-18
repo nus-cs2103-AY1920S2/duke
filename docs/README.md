@@ -3,6 +3,8 @@
 ## Brief Description
 Edith is a Personal Assistant Chatbot that helps a user keep track of various tasks.
 
+![](edith.jpg)
+
 ## Usage
 
 ### Key Commands for Edith: 

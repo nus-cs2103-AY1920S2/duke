@@ -41,9 +41,10 @@ dukeclasses.Duke Increment | Tutorial
 
 #Acknowledgements
 FastReader.java was adapted from https://www.javatips.net/api/AlgoDS-master/src/timus/FastReader.java.
-
 However, I tweaked some components to cater to my own needs. 
 
 Thanos Image for GUI is from https://www.theverge.com/2018/4/16/17243794/avengers-infinity-wars-thanos-origin-story-marvel
 
 Tony Stark Image is from https://pngimage.net/tony-stark-png-5/
+
+Edith Image is from https://www.amazon.com/Glasses-Sticker-Trucks-Laptop-NOK163/dp/B07VS9NPPL
