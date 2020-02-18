@@ -16,8 +16,6 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -29,6 +27,9 @@ public class Duke {
 
     private final String FILE_NAME = "./data/duke.txt";
     private Ui ui = new Ui();
+    private Storage storage = new Storage(FILE_NAME);
+    private TaskList tasks = new TaskList(storage);
+
     // Empty constructor required for Launcher
     public Duke() {
     }
@@ -39,9 +40,7 @@ public class Duke {
     }
 
     private void run() {
-        storage = new Storage(FILE_NAME);
-        tasks = new TaskList(storage);
-        sc = new Scanner(System.in);
+
         ui.showWelcomeMessage();
     }
 
@@ -67,7 +66,7 @@ public class Duke {
         if (userInput.equals("bye")) {
             return ui.showGoodbyeMessage();
         } else if (userInput.equals("list")) {
-            tasks.printTasks();
+            return tasks.printTasks();
         } else if (userInput.startsWith("done")) {
             tasks.makeTaskDone(-1 + Integer.parseInt(userInput.split(" ")[1]));
         } else if (userInput.startsWith("todo")) {

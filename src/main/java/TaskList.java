@@ -34,9 +34,7 @@ public class TaskList {
 
     public String makeTaskDone(int taskNumber) {
         tasks.get(taskNumber).markAsDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(tasks.get(taskNumber));
-        return "1";
+        return "Nice! I've marked this task as done: " + "\n" + tasks.get(taskNumber);
     }
 
     public void deleteTask(int taskNumber) {
@@ -54,38 +52,35 @@ public class TaskList {
     }
 
 
-    public void printTasks() {
-        System.out.println("Here are the tasks in your list: ");
-        this.printTasksOnly();
+    public String printListTasks() {
+        return "Here are the tasks in your list: " + this.printTasks();
     }
 
-    public void printTasksOnly() {
+    public String printTasks() {
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
+            result.append((i + 1) + "." + tasks.get(i).toString() + "\n");
         }
+        return result.toString();
     }
 
-    public void showFilteredBySpecificDate(String date) {
+    public String showFilteredBySpecificDate(String date) {
         TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().equals(LocalDate.parse(date))).collect(Collectors.toList()));
-        System.out.println("Here are the tasks on date " + date);
-        filteredTasks.printTasksOnly();
+        return "Here are the tasks on date " + date + filteredTasks.printTasks();
     }
 
-    public void showFilteredBySpecificYear(int year) {
+    public String showFilteredBySpecificYear(int year) {
         TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().getYear() == year).collect(Collectors.toList()));
-        System.out.println("Here are the tasks in the year " + year);
-        filteredTasks.printTasksOnly();
+        return "Here are the tasks in the year " + year + filteredTasks.printTasks();
     }
 
-    public void showFilteredBySpecificMonth(int month) {
+    public String showFilteredBySpecificMonth(int month) {
         TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().getMonthValue() == month).collect(Collectors.toList()));
-        System.out.println("Here are the tasks in the month " + month);
-        filteredTasks.printTasksOnly();
+        return "Here are the tasks in the month " + month + filteredTasks.printTasks();
     }
 
-    public void showFilteredByName(String word) {
+    public String showFilteredByName(String word) {
         TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDescription().contains(word)).collect(Collectors.toList()));
-        System.out.println("Here are the matching tasks in your list:");
-        filteredTasks.printTasksOnly();
+        return "Here are the matching tasks in your list:" + filteredTasks.printTasks();
     }
 }
