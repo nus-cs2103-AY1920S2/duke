@@ -1,3 +1,4 @@
 D | 1 | cs3230 assignment | Feb 6 2020
-T | 0 | dance
-T | 1 | cry
+E | 1 | dance | Feb 16 2020
+T | 1 | read book
+T | 0 | read book
