@@ -1,6 +1,7 @@
 package dude;
 
 import javafx.application.Application;
+
 /**
  * @@author j-lum-reused
  * Reused from tutorials/javaFxTutorialPart4.md

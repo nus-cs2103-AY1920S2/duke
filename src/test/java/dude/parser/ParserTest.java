@@ -45,7 +45,7 @@ class ParserTest {
         } catch (ParsingException e) {
             assertEquals("I don't understand this date: " + dateString
                     + ". Type 'help -date' to see the date formats I accept.", e.getMessage());
-            assertEquals("deadline description /by yyyy-mm-dd", e.getUsageMsg());
+            assertEquals("deadline description /by date", e.getUsageMsg());
         }
     }
 
@@ -63,7 +63,7 @@ class ParserTest {
             fail();
         } catch (ParsingException e) {
             assertEquals("Look's like your command is incomplete, mate", e.getMessage());
-            assertEquals("event description /from yyyy-mm-dd /to yyyy-mm-dd", e.getUsageMsg());
+            assertEquals("event description /from date /to date", e.getUsageMsg());
         }
     }
 }

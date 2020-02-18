@@ -19,7 +19,6 @@ import javafx.scene.text.TextAlignment;
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
- *
  * @@author j-lum-reused
  * Reused from tutorials/javaFxTutorialPart4.md with modifications
  */

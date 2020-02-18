@@ -15,9 +15,9 @@ import dude.task.Event;
 import dude.task.Todo;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Parser {
@@ -31,12 +31,20 @@ public class Parser {
         USAGES.put("today", "today");
         USAGES.put("done", "done index_of_task");
         USAGES.put("delete", "delete index_of_task");
-        USAGES.put("check", "check yyyy-mm-dd");
+        USAGES.put("check", "check date");
         USAGES.put("todo", "todo description");
-        USAGES.put("deadline", "deadline description /by yyyy-mm-dd");
-        USAGES.put("event", "event description /from yyyy-mm-dd /to yyyy-mm-dd");
+        USAGES.put("deadline", "deadline description /by date");
+        USAGES.put("event", "event description /from date /to date");
         USAGES.put("find", "find word");
     }
+
+    public static final List<IDateParser> DATE_PARSERS = List.of(
+        new FullDateParser("yyyy-MM-dd", new String[] {"2020-02-02"},
+                "ISO 8601 - the absolute gold standard. You can't go wrong with this!"),
+        new FullDateParser("d MMM yyyy", new String[] {"2 Feb 2020"},
+                "An easier format to remember and type!"),
+        new DayOfWeekParser(),
+        new DateOffsetParser());
 
     /** Regex for whitespace, for greater clarity. */
     private static final String WHITESPACE = "\\s+";
@@ -120,7 +128,7 @@ public class Parser {
             return new DeleteCommand(indexDelete);
 
         case "check":
-            LocalDate checkDate = DateParser.parse(args, "check");
+            LocalDate checkDate = parseDate(args, "check");
             return new CheckDateCommand(checkDate);
 
         case "todo":
@@ -153,17 +161,32 @@ public class Parser {
         }
     }
 
+    private static LocalDate parseDate(String dateString, String command) throws ParsingException {
+        LocalDate date;
+        for (IDateParser parser : DATE_PARSERS) {
+            date = parser.parse(dateString);
+            if (date != null) {
+                return date;
+            }
+        }
+
+        // If none of the parsers match, throw ParsingException
+        String errorMsg = "I don't understand this date: " + dateString
+                + ". Type 'help -date' to see the date formats I accept.";
+        throw new ParsingException(errorMsg, Parser.USAGES.get(command));
+    }
+
     private static Event parseEvent(String args) throws ParsingException {
         String[] eventArgs = args.split(WHITESPACE + "/from" + WHITESPACE, 2);
         String[] eventDateStrings = eventArgs[1].split(WHITESPACE + "/to" + WHITESPACE, 2);
-        LocalDate from = DateParser.parse(eventDateStrings[0], "event");
-        LocalDate to = DateParser.parse(eventDateStrings[1], "event");
+        LocalDate from = parseDate(eventDateStrings[0], "event");
+        LocalDate to = parseDate(eventDateStrings[1], "event");
         return new Event(eventArgs[0], from, to, false);
     }
 
     private static Deadline parseDeadline(String args) throws ParsingException {
         String[] deadlineArgs = args.split(WHITESPACE + "/by" + WHITESPACE, 2);
-        LocalDate by = DateParser.parse(deadlineArgs[1], "deadline");
+        LocalDate by = parseDate(deadlineArgs[1], "deadline");
         return new Deadline(deadlineArgs[0], by, false);
     }
 }
