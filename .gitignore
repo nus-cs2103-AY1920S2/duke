@@ -18,3 +18,8 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# VSCode files
+.classpath
+.project
+.settings/
