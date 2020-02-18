@@ -1,4 +1,4 @@
-# User Guide
+# Duke User Guide
 
 ## Features
 
