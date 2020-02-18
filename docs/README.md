@@ -1,129 +1,141 @@
 # User Guide
-Duke is a Personal Assistant Chatbot that helps the user to keep track of various tasks
+Duke is a Personal Assistant Chatbot that helps the user to keep track of various tasks.
 
 ## Features 
 
 ### Quit and Save
-Saves all the data and automatically closes the GUI.
+Saves data and closes the GUI.
 
 #### Usage
 
-##### `Keyword` - Describe action
-
-Describe action and its outcome.
+##### `bye` - Saves all the data in the TaskList and automatically closes the GUI.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`bye`
 
 Expected outcome:
 
-`outcome`
+`(GUI closes)`
 
 ### Add Task
 Adds a new ToDo, Event or Deadline depending on the user input.
 
-ToDos: tasks without any date/time attached to it e.g., visit new theme park
+ToDos: tasks without any date/time attached to it e.g., visit new theme park.
 
-Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm
+Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm.
 
-Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
+Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm.
 
 #### Usage
 
-##### `Keyword` - Describe action
-
-Describe action and its outcome.
+##### `todo <description>` - Adds a new task of type todo.
+##### `deadline <description> /by <dd-MM-yyyy HHmm>` - Adds a new task of type deadline.
+##### `event <description> /at <dd-MM-yyyy HHmm>` - Adds a new task of type event.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo borrow book`
+
+`deadline return book /by 5-6-2020 1400`
+
+`event project meeting /at 17-8-2020 1000`
 
 Expected outcome:
 
-`outcome`
+`Got it. I've added this task:
+ [T][N] borrow book
+ Now you have 5 tasks in the list.`
+ 
+`Got it. I've added this task:
+ [D][N] return book  (by: Jun 5 2020 2PM)
+ Now you have 6 tasks in the list.`
+ 
+`Got it. I've added this task:
+ [E][N] project meeting  (at: Aug 17 2020 10AM)
+ Now you have 7 tasks in the list.`
 
 ### List Tasks
-Displays all the tasks back to the user in a list from least to most recently added.
+Displays all the tasks in the TaskList.
 
 #### Usage
 
-##### `Keyword` - Describe action
-
-Describe action and its outcome.
+##### `list` - Displays all the tasks back to the user in the TaskList from least to most recently added.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
 
-`outcome`
+`Here are the tasks in your list:
+ 1. [T][N] read book
+ 2. [D][N] return book  (by: Feb 21 2020 4PM)
+ 3. [E][N] project meeting  (at: Apr 13 2020 6PM)
+ 4. [T][N] join sports club`
 
 ### Mark as Done
 Mark a task as done when completed.
 
 #### Usage
 
-##### `Keyword` - Describe action
-
-Describe action and its outcome.
+##### `done <index>` - Mark the task at the specified index in the TaskList with a checkmark.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`done 2`
 
 Expected outcome:
 
-`outcome`
+`Nice! I've marked this task as done: 
+ [E][Y] project meeting  (at: Apr 13 2020 6PM)`
 
 ### Delete Task
 Remove a task from the list.
 
 #### Usage
 
-##### `Keyword` - Describe action
-
-Describe action and its outcome.
+##### `delete <index>` - Remove the task at the specified index from the TaskList permanently.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`delete 2`
 
 Expected outcome:
 
-`outcome`
+`Noted. I've removed this task:
+ [D][N] return book  (by: Feb 21 2020 4PM)
+ Now you have 7 tasks in the list.`
 
 ### Find Tasks
 Find (a) task(s) by searching for a keyword in the description.
 
 #### Usage
 
-##### `Keyword` - Describe action
-
-Describe action and its outcome.
+##### `find <pattern>` - lists all tasks containing the specified input <pattern> within their description.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`find book`
 
 Expected outcome:
 
-`outcome`
+`Here are the matching tasks in your list:
+      1.[T][✓] read book
+      2.[D][✓] return book (by: June 6th)`
 
 ### Update Task 
 Edit the timing field for a task of type event or deadline.
 
 #### Usage
 
-##### `Keyword` - Describe action
-
-Describe action and its outcome.
+##### `update <index> <time>` - Updates the event or deadline at the specified index with a new timing.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`update 1 13-4-2020 1800`
 
 Expected outcome:
 
-`outcome`
+`Noted. I've updated this task:
+ [E][N] project meeting  (at: Apr 13 2020 6PM)`
