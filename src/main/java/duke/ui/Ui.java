@@ -68,8 +68,8 @@ public class Ui {
      * @return the loading error message in the chat-bot.
      */
     public String getLoadingError() {
-        return "Sorry... the task list could not be loaded from a save file.\n\n"
-                + "Here's a new task list for you to use.";
+        return "AAUGH!! I can't read from the save file.\n\n"
+                + "Nevermind. You can start from scratch again.";
     }
 
     /**
@@ -78,7 +78,7 @@ public class Ui {
      * @param task the tasks that has been added to the list.
      */
     public void showAdd(Task task) {
-        showText("Okie! I've added this task:\n\n" + indent(task.toString(), 2));
+        showText("Another task to remember?:\n\n" + indent(task.toString(), 2));
     }
 
     /**
@@ -87,8 +87,8 @@ public class Ui {
      * @param task the completed task.
      */
     public void showDone(Task task) {
-        String praise = "Good job completing this task!\n"
-                + "Here's a tick for completing it!\n\n";
+        String praise = "Finally!!\n"
+                + "Don't tell anyone that I gave you a tick!\n\n";
 
         showText(praise + indent(task.toString(), 2));
     }
@@ -99,7 +99,7 @@ public class Ui {
      * @param tasks the list of tasks to display.
      */
     public void showList(TaskList tasks) {
-        showText("Here are the tasks in your list:\n\n" + tasks.toString());
+        showText("I can remember all these tasks!:\n\n" + tasks.toString());
     }
 
     /**
@@ -108,7 +108,7 @@ public class Ui {
      * @param task the deleted task.
      */
     public void showDelete(Task task) {
-        showText("Alright! I'll remove this task:\n\n" + indent(task.toString(), 2));
+        showText("Phew! One less thing to remember:\n\n" + indent(task.toString(), 2));
     }
 
     /**
@@ -117,7 +117,7 @@ public class Ui {
      * @param tasks the task list to count and display.
      */
     public void showTaskCount(TaskList tasks) {
-        showText("There are now " + tasks.getNumTasks() + " tasks in the list.");
+        showText("I'm remembering " + tasks.getNumTasks() + " tasks at the moment.");
     }
 
     /** Logs a farewell to the user. */
@@ -133,7 +133,7 @@ public class Ui {
      */
     public void showFind(TaskList tasks, List<Integer> taskIds) {
         // TODO: exception if taskIds contains duplicate elements
-        String title = "Here are the matching tasks in your list:\n\n";
+        String title = "Aren't I great for helping you find these tasks?:\n\n";
 
         StringBuilder foundTasks = new StringBuilder();
 
@@ -147,14 +147,6 @@ public class Ui {
         }
 
         showText(title + foundTasks.toString());
-    }
-
-    /** Displays a line in the chat-bot. */
-    public void showLine() {
-        int lineWidth = 60;
-        String lineSymbol = "-";
-
-        response += indent(lineSymbol.repeat(lineWidth), 4);
     }
 
     /** Displays text in the chat-bot. */

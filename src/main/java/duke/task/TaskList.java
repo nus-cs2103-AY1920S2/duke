@@ -66,7 +66,7 @@ public class TaskList {
      */
     public TaskList addTask(Task task) throws DukeException {
         if (taskCounters.contains(task)) {
-            throw new DukeException("Duplicate entered. Please try again!");
+            throw new DukeException("Don't make me remember the same thing!");
         }
         List<Task> newTasks = new ArrayList<>(tasks);
         newTasks.add(task);

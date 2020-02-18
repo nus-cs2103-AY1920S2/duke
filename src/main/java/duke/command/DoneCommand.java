@@ -23,7 +23,7 @@ public class DoneCommand extends Command {
     public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Invalid task number
         if (taskId <= 0 || taskId > tasks.getNumTasks()) {
-            throw new DukeException("Your task number does not exist.");
+            throw new DukeException("I can't find that task number!");
         }
 
         // Mark task as done
