@@ -24,10 +24,13 @@ public class Ui {
         return (this.parseInput())[1];
     }
 
+    /**
+     *
+     * Gets task number
+     * */
     public String getNumber() {
         return (this.parseInput())[1];
     }
-
 
     public String showList() {
         return ("Here are the tasks in your list: ");
@@ -46,26 +49,17 @@ public class Ui {
                 "bye: saves tasks to storage\n");
     }
 
-    public String errmessage() {
-        return "Invalid Input, Please check instructions";
-    }
-
     public String doneTask(Task task) {
-
         return ("Nice I have marked this task as done\n" +
         " " + task.getDescription() + "\n");
     }
-
-
 
     public String deleteTask(String task) {
         return ("Deleted task: " + task);
     }
 
     public String addedTask(Task todo) {
-        return (todo.toString() + "\n");
+        return ("Added task: " + todo.toString() + "\n");
     }
-
-
 
 } 

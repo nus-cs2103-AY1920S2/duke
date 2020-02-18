@@ -29,12 +29,22 @@ public class Command {
     public Command(){}
 
     protected void loadList() {
-        try {
-            tl.loadFromStorage();
+        if(isTaskListLoaded) {
+            System.out.println(isTaskListLoaded);
+            System.out.println("load alr" +
+                    "");
+        } else {
+            System.out.println(isTaskListLoaded);
             isTaskListLoaded = true;
-        } catch (Exception e) {
-            e.getMessage();
+            try {
+                tl.loadFromStorage();
+            } catch (Exception e) {
+                e.getMessage();
+            }
         }
+
+
+
     }
 
     /**
@@ -125,8 +135,7 @@ public class Command {
                     S += tl.TL.get(i).toString() + '\n';
                 }
                 storage.writeToFile(FILEPATH, S);
-                response = "bye see you soon";
-
+                //return ("bye see you soon");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

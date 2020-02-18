@@ -1,4 +1,4 @@
-# User Guide
+# Duke User Guide
 
 ## Features 
 
@@ -45,6 +45,5 @@ Example of usage:
 `bye`
 
 
-Expected outcome:
+<img src = "Ui.png.jpeg">
 
-`outcome`

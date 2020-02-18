@@ -1,33 +1,21 @@
 package main.java;
 
 
-import java.io.*;
-
-
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-
-
-
-
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 
@@ -90,6 +78,7 @@ public class Duke extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
 
+
         userInput.setPrefWidth(275.0);
 
 
@@ -110,6 +99,25 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput, 2.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        // create a input stream
+        FileInputStream input = new FileInputStream("main/java/marble.jpg");
+
+        // create a image
+        Image image = new Image(input);
+
+        // create a background image
+        BackgroundImage backgroundimage = new BackgroundImage(image,
+                BackgroundRepeat.REPEAT,
+                BackgroundRepeat.REPEAT,
+                BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+
+        // create Background
+        Background background = new Background(backgroundimage);
+
+        // set background
+        dialogContainer.setBackground(background);
 
 
 
@@ -175,7 +183,16 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = null;
         try {
-            dukeText = new Label(command.getResponse(userInput.getText()));
+            if(userInput.getText().equals("bye")) {
+                command.getResponse("bye");
+                dukeText = new Label("bye see you soon");
+                dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                );
+                System.exit(0);
+            } else {
+                dukeText = new Label(command.getResponse(userInput.getText()));
+            }
         } catch (DukeException e) {
             e.printStackTrace();
         }
