@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 public class TaskList {
     public ArrayList<Task> arrList;
+
     /**
      * Constructor. To create and bind an arrayList.
      */
@@ -57,6 +58,9 @@ public class TaskList {
         Ui.printFilteredList(filteredList);
     }
 
+    /**
+     * Sort the arrList bound to this object.
+     */
     public void sortTasks() {
         Collections.sort(arrList, new Comparator<Task>() {
             public int compare(Task t1, Task t2) {

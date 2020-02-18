@@ -20,7 +20,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private static final String WELCOME_MESSAGE
-            = " Hello! I'm iɔniV ɒႧ\n"
+            = " Hello! I'm Da Vinci\n"
             + " What can I do for you?\n";
 
     private Duke duke;
