@@ -11,13 +11,13 @@
     * [3.5. Mark task as done](#35-mark-task-as-done)
     * [3.6. Delete a task](#36-delete-a-task)
     * [3.7. Find a task](#37-find-a-task)
-    * [3.8. Close the chatbot with user input](#38close-the-chatbot-with-user-input)
+    * [3.8. Close the chatbot with user input](#38-close-the-chatbot-with-user-input)
 * [4. Usage](#4-usage)
     * [4.1. Add a new task](#41-add-a-new-task)
     * [4.2. `list`](#42-list)
-    * [4.3. `done [index of task]`](#43-done-[index-of-task])
-    * [4.4. `delete [index of task]`](#44-delete-[index-of-task])
-    * [4.5. `find [keyword]`](#45-find-[keyword])
+    * [4.3. `done [index of task]`](#43-done-index-of-task)
+    * [4.4. `delete [index of task]`](#44-delete-index-of-task)
+    * [4.5. `find [keyword]`](#45-find-keyword)
 
 ## 1. Introduction
 Tired of being a procrastinator? Fret not! Dodo is here to make sure you do your work.
