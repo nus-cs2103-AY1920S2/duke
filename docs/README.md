@@ -15,12 +15,12 @@ For example: `todo TASK`, `TASK` is a parameter to be supplied by the user.
 * All commands are not case-sensitive. For example: `list`, `LiSt`, `LIST` are all `list` commands.
 
 ****
-### 2.1. View all Commands: `help`
+### 2.1. View All Commands: `help`
 Show all commands and their format in the GUI.
 
 Format: `help`
 
-### 2.2. List tasks: `list`
+### 2.2. List Tasks: `list`
 List out all the tasks currently inside the task list.
 
 Format: `list`
