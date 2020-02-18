@@ -96,6 +96,7 @@ public class TaskList implements Iterable<Task> {
 
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
+                assert false: "element in arraylist is null";
                 continue;
             }
             Task currentTask = this.internalList.get(i);
@@ -119,6 +120,7 @@ public class TaskList implements Iterable<Task> {
 
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
+                assert false: "element in arraylist is null";
                 continue;
             }
             Task currentTask = this.internalList.get(i);
@@ -142,6 +144,7 @@ public class TaskList implements Iterable<Task> {
         StringBuilder listOverView = new StringBuilder(ECHO_VIEW_TASK_LIST);
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
+                assert false: "element in arraylist is null";
                 continue;
             }
             listOverView.append(Integer.toString(i + 1));
