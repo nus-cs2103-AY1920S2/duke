@@ -36,6 +36,8 @@ public class Parser {
         String[] split = input.split(" ");
         String command = split[0];
 
+        assert split.length > 1 : "User input minimally must consist of one command and another argument";
+
         switch (command) {
         case "list":
             result = new ListCommand(input, false);

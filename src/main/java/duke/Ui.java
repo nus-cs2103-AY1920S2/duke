@@ -29,6 +29,8 @@ public class Ui {
      * @param content The content within the divider lines.
      */
     public static String printLines(String content) {
+        assert content.length() != 0 : "Content should not be empty.";
+        
         StringBuilder result = new StringBuilder();
 
         result.append("    ____________________________________________________________");
