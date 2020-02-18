@@ -25,6 +25,9 @@ public class Duke {
             return ("Bye. Hope to see you again soon!");
 
         } else if (command.equals("list")) {
+            if (taskList.list.size() == 0) {
+                return ("OOPS list is empty!");
+            }
             return (taskList.toString());
 
         } else if (command.equals("done")) {
@@ -78,6 +81,9 @@ public class Duke {
             return ("Got it. I've added this task: \n" + t + "\nNow you have " + numOfTask + " task(s) in the list.");
 
         } else if (command.equals("find")) {
+            if (split.length == 1) {
+                return ("Please enter a keyword after \"find\"!");
+            }
             String keyword = split[1];
             tasks = storage.readFromFile();
             String found = storage.findTask(tasks, keyword);
