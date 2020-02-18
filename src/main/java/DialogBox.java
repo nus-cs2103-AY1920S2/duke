@@ -14,8 +14,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * An example of a custom control using FXML. This control represents a dialog
+ * box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
@@ -39,7 +39,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the ImageView is on the left and text on the
+     * right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -52,6 +53,14 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Similar to {@code getUserDialog}, except that the whole node is flipped
+     * horizontally.
+     * 
+     * @param text input string
+     * @param img  input image
+     * @return returns a {@code DialogBox}
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

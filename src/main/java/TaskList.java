@@ -7,6 +7,13 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<>();
 
+    /**
+     * Adds a task into the {@code TaskList} while checking for duplicates.
+     * 
+     * @param task the {@code Task} to add
+     * @throws DukeException if a duplicate {@code Task} is found in
+     *                       {@code TaskList}
+     */
     public void addTask(Task task) throws DukeException {
         for (Task t : taskList) {
             if (task.getClass() == t.getClass() && task.isSimilarTask(t)) {

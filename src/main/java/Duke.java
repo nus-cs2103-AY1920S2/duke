@@ -7,6 +7,9 @@ public class Duke {
     private final TaskList taskList = new TaskList();
     private final Storage storage = new Storage();
 
+    /**
+     * Constructor for the {@code Duke} class.
+     */
     public Duke() {
         try {
             this.initialise();

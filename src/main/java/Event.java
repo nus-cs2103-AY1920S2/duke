@@ -8,6 +8,13 @@ public class Event extends Task {
     private LocalDate date;
     private String formattedDate;
 
+    /**
+     * Constructor for the {@code Event} class.
+     * 
+     * @param description description of the task
+     * @param isDone      indicates if this task is done
+     * @param date        the duedate of the task
+     */
     public Event(String description, boolean isDone, LocalDate date) {
         super(description, isDone);
         this.date = date;

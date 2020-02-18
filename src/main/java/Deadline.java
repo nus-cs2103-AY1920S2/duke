@@ -8,6 +8,13 @@ public class Deadline extends Task {
     private LocalDate date;
     private String formattedDate;
 
+    /**
+     * Constructor for the {@code Deadline} class.
+     * 
+     * @param description description of the task
+     * @param isDone      indicates if this task is done
+     * @param date        the duedate of the task
+     */
     public Deadline(String description, boolean isDone, LocalDate date) {
         super(description, isDone);
         this.date = date;

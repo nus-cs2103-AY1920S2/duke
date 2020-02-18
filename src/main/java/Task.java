@@ -6,6 +6,12 @@ public abstract class Task {
     private String description;
     private boolean isDone;
 
+    /**
+     * Constructor for the {@code Task} class.
+     * 
+     * @param description description of the task
+     * @param isDone      indicates if this task is done
+     */
     public Task(String description, boolean isDone) {
         assert description != null;
         this.description = description;
