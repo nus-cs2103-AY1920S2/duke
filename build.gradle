@@ -37,7 +37,7 @@ test {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 checkstyle {

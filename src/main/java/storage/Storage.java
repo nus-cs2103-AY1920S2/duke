@@ -50,6 +50,14 @@ public class Storage {
      */
     public TaskList load() {
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
+            try {
+                Files.createDirectory(path.getParent());
+                Files.createFile(path);
+            } catch (FileAlreadyExistsException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return new TaskList();
         }
         TaskList tasks = new TaskList();
@@ -78,7 +86,8 @@ public class Storage {
     public static void write(String s, Path path) {
         if (!Files.exists(path)) {
             try {
-                Files.createDirectory(path);
+                Files.createDirectory(path.getParent());
+                Files.createFile(path);
             } catch (FileAlreadyExistsException e) {
                 e.printStackTrace();
             } catch (IOException e) {
