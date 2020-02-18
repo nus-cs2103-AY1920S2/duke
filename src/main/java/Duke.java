@@ -150,6 +150,8 @@ public class Duke {
             } catch (NoSuchElementException e) {
                 return ui.showMissingParemeters();
             }
+        } else if (userInput.startsWith("sort deadlines")) {
+            return tasks.sortDeadlinesByTime();
         } else {
             return ui.showCommandNotFound() + ui.showLineOfUnderscores();
         }

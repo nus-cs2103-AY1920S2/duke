@@ -102,4 +102,13 @@ public class TaskList {
                 .collect(Collectors.toList()));
         return "Here are the matching tasks in your list:" + "\n" + filteredTasks.printTasks();
     }
+
+    public String sortDeadlinesByTime() {
+        TaskList filteredTasks = new TaskList(tasks.stream()
+                .filter(task -> task.getTypeName() == "D")
+                .filter(task -> task.getDate().compareTo(LocalDate.now()) > 0)
+                .sorted()
+                .collect(Collectors.toList()));
+        return "These are the nearest upcoming deadlines. Take note!" + "\n" + filteredTasks.printTasks();
+    }
 }

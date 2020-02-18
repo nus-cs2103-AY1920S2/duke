@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
  * Class Deadline to represent a Deadline Task. A Deadline
  * consists of a description and a endTime.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable {
     protected LocalDate endTime; // this will be startTime or endTime depending on the underlying class.
     /**
      * Creates a new Deadline with {@code description} and specified {@code endTime}.
@@ -49,7 +49,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + endTime.format(DateTimeFormatter.ofPattern("d MMM YYYY"));
+        return "[D] " + super.toString() + " " + endTime.format(DateTimeFormatter.ofPattern("d MMM YYYY"));
     }
 
     /**
@@ -60,5 +60,15 @@ public class Deadline extends Task {
     @Override
     public String toStringFile() {
         return "D" + " | " + super.toStringFile();
+    }
+
+    /**
+     * Compares the two Deadlines for order.
+     * Nearer deadlines are considered smaller
+     */
+    @Override
+    public int compareTo(Object o) {
+        assert (o instanceof Deadline); // can only compare between deadlines
+        return this.getDate().compareTo(((Deadline) o).getDate());
     }
 }
