@@ -12,3 +12,13 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# java compiled files
+*.class
+
+# Storage file used by Duke
+duke.txt
+
+.classpath
+.project
+/.settings/

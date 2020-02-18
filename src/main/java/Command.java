@@ -1,0 +1,11 @@
+enum Command {
+    ADD_TODO,
+    ADD_DEADLINE,
+    ADD_EVENT,
+    LIST_TASKS,
+    FIND_TASKS,
+    MARK_TASK_AS_DONE,
+    EXIT_DUKE,
+    DELETE_TASK,
+    NOT_FOUND
+}
