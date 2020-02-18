@@ -36,12 +36,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-//remove the javafx thing below and rebuild jar if it fails to work on macOS
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
 test {
     useJUnitPlatform()
 }
