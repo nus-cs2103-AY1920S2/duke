@@ -18,10 +18,12 @@ public class Parser {
                 return new ListCommand();
             } else if (fullCommand.equals("bye")) {
                 return new ExitCommand();
-            } else if (fullCommand.equals("todo")) {
-                throw new EmptyToDoException();
             } else if (fullCommand.equals("help")) {
                 return new ListHelpCommand();
+            } else if (fullCommand.equals("clear")) {
+                return new ClearCommand();
+            } else if (fullCommand.equals("todo")) {
+                throw new EmptyToDoException();
             } else {
                 throw new UndefinedCommandException();
             }

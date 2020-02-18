@@ -1,5 +1,9 @@
 # User Guide
 
+## Introduction
+
+## Quick Start
+
 ## Features 
 
 ### Feature 1 
@@ -18,3 +22,7 @@ Example of usage:
 Expected outcome:
 
 `outcome`
+
+## FAQ
+
+## Command Summary

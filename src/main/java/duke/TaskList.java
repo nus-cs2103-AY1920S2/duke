@@ -118,4 +118,12 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Deletes all tasks in this TaskList.
+     * @return response message to be displayed to user.
+     */
+    public String clear() {
+        tasks.clear();
+        return "I have deleted all tasks!";
+    }
 }

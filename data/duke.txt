@@ -1,5 +1,0 @@
-E|0|Party at Shane's|The Capitol
-D|0|Week 6 deliverables|2020-02-18
-T|1|Submit proposal draft
-T|0|Return John's call
-T|0|Bake cookies
