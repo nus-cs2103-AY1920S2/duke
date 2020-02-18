@@ -40,6 +40,9 @@ Example of usage:
 ### `list` - Shows list of tasks
 Example of usage:
 `list`
+### `help` - Shows list of commands
+Example of usage:
+`help`
 ### `bye` - Saves tasks to storage
 Example of usage: 
 `bye`
