@@ -97,7 +97,7 @@ public class Duke {
     private void prioritiseTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 3) {
             ui.throwWrongFormatException("\"priority index_of_the_task level_of_priority"
-                    + " (which can be one of the following: h/high, t/top)\"");
+                    + " (which can be one of the following: n/normal, h/high, t/top)\"");
         }
         int index = getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_1_BASED_INDEX_INTO_0_BASED;
         if (index < 0 || index >= tasks.getList().size()) {
@@ -111,6 +111,8 @@ public class Duke {
             tasks.assignPriorityToTask(index, PriorityLevel.HIGH);
         } else if (level.equals("t") || level.equals("top")) {
             tasks.assignPriorityToTask(index, PriorityLevel.TOP);
+        } else if (level.equals("n") || level.equals("normal")) {
+            tasks.assignPriorityToTask(index, PriorityLevel.NORMAL);
         } else {
             ui.throwOtherException("Invalid level of priority.\n"
                     + "Please input one of the following: h/high, t/top");

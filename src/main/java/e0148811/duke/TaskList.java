@@ -23,6 +23,10 @@ public class TaskList {
             break;
         case TOP:
             task.setTopPriority();
+            break;
+        case NORMAL:
+            task.setNormalPriority();
+            break;
         }
     }
 

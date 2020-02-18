@@ -21,6 +21,10 @@ public abstract class Task {
         level = PriorityLevel.TOP;
     }
 
+    public void setNormalPriority() {
+        level = PriorityLevel.NORMAL;
+    }
+
     public boolean isDone() {
         return isDone;
     }
