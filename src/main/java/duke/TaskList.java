@@ -210,13 +210,20 @@ public class TaskList {
         try {
             // Create an int array of task numbers to remove
             String taskNumbersString = command.substring("delete ".length());
-            String[] taskNumbersStringArray = taskNumbersString.split(" ");
-            int[] taskNumbers = new int[taskNumbersStringArray.length];
+            String[] taskNumbersArgumentString = taskNumbersString.split(" ");
+
+            if (taskNumbersArgumentString[0].equals("all")) {
+                allTasks = new ArrayList<Task>();
+                Storage.saveChanges(this);
+                return "All tasks deleted!";
+            }
+
+            int[] taskNumbers = new int[taskNumbersArgumentString.length];
             // Removing one Task will eventually cause the length to decrease
             // hence for each value we have to deduct the value by its positional index
             // in the String array
-            for (int i = 0; i < taskNumbersStringArray.length; i++) {
-                taskNumbers[i] = Integer.parseInt(taskNumbersStringArray[i]) - i;
+            for (int i = 0; i < taskNumbersArgumentString.length; i++) {
+                taskNumbers[i] = Integer.parseInt(taskNumbersArgumentString[i]) - i;
             }
 
             // validity check

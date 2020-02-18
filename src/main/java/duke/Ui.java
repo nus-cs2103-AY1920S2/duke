@@ -23,9 +23,12 @@ public class Ui {
             + "3. deadline <deadlined task name> /by <deadline date> (adds a task with a deadline)\n"
             + "4. list (lists down all current tasks)\n"
             + "5. done <task number> (marks task labelled <task number> as done)\n"
-            + "6. delete <task number> (deletes task labelled <task number> from the list)\n"
-            + "7. find <keywords separated by space> (finds the tasks in the list with the keyword(s)) \n"
-            + "8. bye (duke says bye to you :) )\n"
+            + "6. delete <task number> (deletes task labelled <task number> from the list) or simply delete all\n"
+            + "7. find <keywords separated by space> (finds the tasks in the list with the keyword(s)) "
+            + "which can be space-separated\n"
+            + "8. loan <person> /value <monetary amount>\n"
+            + "9. bye (duke says bye to you :) )\n"
+            + "10. help\n"
             + "Note that all dates follow the format YYYY-MM-DD\n"
             + "\nPS: A '[V]' indicates a completed task while a '[X]' indicates an incomplete task";
     }
@@ -37,7 +40,7 @@ public class Ui {
      */
     public static String goodbye() {
         return "====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D\n"
-            + "Please exit by clicking the big red X button, unless you have more things to do.";
+            + "Please exit by clicking the big red X button, or I'll close it for you soon.";
     }
 
     /**

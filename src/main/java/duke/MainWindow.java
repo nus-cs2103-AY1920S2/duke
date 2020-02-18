@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for duke.MainWindow. Provides the layout for the other controls.
@@ -96,6 +99,18 @@ public class MainWindow extends AnchorPane {
      * @return Duke's response after processing the user input.
      */
     private String getDukeResponse(String input) {
+
+        // automatically exit leaving Ui's goodbye message
+        if (input.equals("bye")) {
+            Timer timer = new Timer();
+            TimerTask exitTask = new TimerTask() {
+                public void run () {
+                    Platform.exit();
+                }
+            };
+            timer.schedule(exitTask,3000);
+        }
+
         String result = (input.equals("bye")) ? Ui.goodbye() : duke.run(input);
 
         assert (result != null || result.equals(" ")) : "Duke has to reply something, which is currently missing.";
