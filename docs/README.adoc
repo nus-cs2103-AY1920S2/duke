@@ -26,7 +26,7 @@ Jay-z's task manager serves as a personal chatbot assistant to help individuals 
 .  Download the latest `Jay-Z.jar` link:https://github.com/ljiazh3ng/duke/releases[here].
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+images::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`i`* and pressing kbd:[Enter] will open the instruction window.
@@ -49,24 +49,34 @@ Format: `i`
 Adds a todo task into the sorted task list. +
 Format: `todo title` +
 Examples: + 
-* `todo return books`
-* `todo get cap 5`
+*  `todo return books`
+*  `todo get cap 5`
+Expected output: +
+*  `[T][X] return books`
+*  `[T][X] get cap 5`
 
 === Adding a Deadline task: `deadline`
 
 Adds a deadline task into the sorted task list. +
 Format: `deadline title /by date` +
 Examples: + 
-* `deadline return books /by sunday`
-* `deadline CS2103 /by 28-10-2020`
+*  `deadline return books /by sunday`
+*  `deadline CS2103 /by 2019-10-15`
+Expected output: +
+*  `[D][X] return books (by: sunder)`
+*  `[D][X] get cap 5 (by: Oct 15 2019)`
+
 
 === Adding a Event task: `event`
 
 Adds a event task into the sorted task list. +
 Format: `event title /at date` +
 Examples: + 
-* `event return books /at date`
-* `event career fair /at SR1 sunday`
+*  `event return books /at date`
+*  `event career fair /at 2019-10-15`
+Expected Output: +
+*  `[E][X] return books (at: date)`
+*  `[E][X] career fair (at: Oct 15 2019)`
 
 === Listing the conetent of current directory : `list`
 
@@ -79,8 +89,8 @@ Finds task whose title contain any of the given keywords. +
 Format: `find KEYWORD` 
 
 Example:
-* `find abc` +
-Returns `abcdef` and `abc`
+*  `find abc` +
+Display a list of task named `abcdef` and `abc`.
 
 === Deleting a person : `delete`
 
@@ -95,7 +105,7 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list` +
+*  `list` +
 `delete 2` +
 Deletes the 2nd task in the TaskList.
 
@@ -113,12 +123,6 @@ There is no need to save manually.
 
 Notably will display the list of features and commands available as well as their uses. +
 Format : `i`
-
-=== Create a new note : `new`
-
-You can create a new note in your current working directory. +
-Format: `new -t {TITLE} -b {BODY} -o` +
-Examples: new -t Notably -b Lorem ipsum dolor sit amer
 
 == Command Summary
 
