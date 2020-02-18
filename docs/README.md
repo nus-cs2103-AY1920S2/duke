@@ -63,7 +63,7 @@ Marks a task in the list as done, according to the index given.
 Format: `done INDEX`
 
 Example:
-* done 1
+* `done 1`
  
 ### 2.5. Delete a Task: `delete`
 
@@ -72,7 +72,7 @@ Deletes a task in the list, according to the index given.
 Format: `delete INDEX`
 
 Example:
-* delete 2
+* `delete 2`
 
 ### 2.6. Find Tasks Based on Keywords: `find`
 
