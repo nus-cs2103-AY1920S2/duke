@@ -1,17 +1,11 @@
 package main.java;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.FileAlreadyExistsException;
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
@@ -23,10 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -77,7 +69,7 @@ public class Duke extends Application {
 
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws FileNotFoundException {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -116,9 +108,11 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(270.0);
 
         sendButton.setPrefWidth(55.0);
+
+        startButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setRightAnchor(scrollPane, 1.0);
@@ -126,15 +120,21 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setTopAnchor(startButton, 1.0);
-        AnchorPane.setLeftAnchor(startButton, 1.0);
+        AnchorPane.setBottomAnchor(startButton, 1.0);
+        AnchorPane.setRightAnchor(startButton, 70.0);
 
         AnchorPane.setLeftAnchor(userInput, 2.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
+        });
+
+        startButton.setOnMouseClicked((event) -> {
+            loadTasks();
         });
 
         userInput.setOnAction((event) -> {
@@ -165,6 +165,36 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+
+    private void loadTasks() {
+        if(isTaskListLoaded == true) {
+            Label dukeText = null;
+            try {
+                dukeText = new Label("Application has already started");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            );
+        } else {
+            isTaskListLoaded = true;
+            try {
+                tl.loadFromStorage();
+            } catch (Exception e) {
+                e.getMessage();
+            }
+            Label dukeText = null;
+            try {
+                dukeText = new Label("Hi I am Duke, what can i do for you?");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            );
+        }
+    }
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = null;
