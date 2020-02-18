@@ -21,6 +21,7 @@ public class Parser {
     private static final String INVALID_REMINDER_COMMAND_MESSAGE = "HEY!!! Please state"
             + " what you want to be reminded of.";
     private static final String NO_SUCH_COMMAND_MESSAGE = "HEY!!! I don't know what that means :-(";
+    private static final String INVALID_INDEX_MESSAGE = "HEY!!! You need to enter a number for the task's index!";
 
     /**
      * Parses the user input into the respective command.
@@ -43,49 +44,57 @@ public class Parser {
         case DONE:
             if (commandLine.length < 2) {
                 throw new InvalidCommandException(INVALID_DONE_COMMAND_MESSAGE);
-            } else {
+            }
+
+            try {
                 return new DoneCommand(Integer.parseInt(commandLine[1]));
+            } catch (NumberFormatException e) {
+                throw new InvalidCommandException(INVALID_INDEX_MESSAGE);
             }
         case DELETE:
             if (commandLine.length < 2) {
                 throw new InvalidCommandException(INVALID_DELETE_COMMAND_MESSAGE);
-            } else {
+            }
+
+            try {
                 return new DeleteCommand(Integer.parseInt(commandLine[1]));
+            } catch (NumberFormatException e) {
+                throw new InvalidCommandException(INVALID_INDEX_MESSAGE);
             }
         case TODO:
             if (commandLine.length < 2) {
                 throw new InvalidCommandException(INVALID_TODO_COMMAND_MESSAGE);
-            } else {
-                return new TodoCommand(commandLine[1]);
             }
+
+            return new TodoCommand(commandLine[1]);
         case DEADLINE:
             if (commandLine.length < 2) {
                 throw new InvalidCommandException(INVALID_DEADLINE_COMMAND_MESSAGE);
-            } else {
-                String[] deadlineDescriptionDate = commandLine[1].split(" /by ");
-                return new DeadlineCommand(deadlineDescriptionDate);
             }
+
+            String[] deadlineDescriptionDate = commandLine[1].split(" /by ");
+            return new DeadlineCommand(deadlineDescriptionDate);
         case EVENT:
             if (commandLine.length < 2) {
                 throw new InvalidCommandException(INVALID_EVENT_COMMAND_MESSAGE);
-            } else {
-                String[] eventDescriptionDate = commandLine[1].split(" /at ");
-                return new EventCommand(eventDescriptionDate);
             }
+
+            String[] eventDescriptionDate = commandLine[1].split(" /at ");
+            return new EventCommand(eventDescriptionDate);
         case FIND:
             if (commandLine.length < 2) {
                 throw new InvalidCommandException(INVALID_FIND_COMMAND_MESSAGE);
-            } else {
-                return new FindCommand(commandLine[1]);
             }
+
+            return new FindCommand(commandLine[1]);
         case HELP:
             return new HelpCommand();
         case REMINDER:
             if (commandLine.length < 2) {
                 throw new InvalidCommandException(INVALID_REMINDER_COMMAND_MESSAGE);
-            } else {
-                return new ReminderCommand(commandLine[1]);
             }
+
+            return new ReminderCommand(commandLine[1]);
         default:
             throw new InvalidCommandException(NO_SUCH_COMMAND_MESSAGE);
         }
