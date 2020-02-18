@@ -4,7 +4,7 @@
 public class Task {
 
     private String description;
-    protected boolean completed;
+    protected boolean isCompleted;
     protected int completedCode;
 
     /**
@@ -14,17 +14,17 @@ public class Task {
     public Task(String description) {
 
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
         this.completedCode = 0;
 
     }
 
     /**
-     * Changes the status of completed of the task, if method is invoked, completed will be turn to true.
+     * Changes the status of the isCompleted variable. If the method is invoked, isCompleted will be turn to true.
      */
     public void completedTask() {
 
-        this.completed = true;
+        this.isCompleted = true;
         this.completedCode = 1;
     }
 
@@ -53,7 +53,7 @@ public class Task {
     @Override
     public String toString() {
 
-        if (this.completed) {
+        if (this.isCompleted) {
             return ("[✔] " + this.description);
         } else {
             return ("[✘] " + this.description);

@@ -3,17 +3,17 @@
  */
 public class DoneCommand extends Command {
 
-    private int numDone;
+    private int taskID;
 
     /**
      * Creates a DoneCommand to mark a task as done.
      * @param response full instruction that is to be carried out, including the task number to be considered done.
-     * @param numDone Task's id to be marked as done, parsed by Parser class.
+     * @param taskID Task's id to be marked as done, parsed by Parser class.
      */
-    public DoneCommand(String response, int numDone) {
+    public DoneCommand(String response, int taskID) {
 
         super(response);
-        this.numDone = numDone;
+        this.taskID = taskID;
 
     }
 
@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
      */
     public void execute(Storage tasksStorage, TaskList taskList, Ui ui) throws DukeException {
 
-        Task doneTask = taskList.getTask(this.numDone - 1);
+        Task doneTask = taskList.getTask(this.taskID - 1);
         doneTask.completedTask();
         System.out.println("      Nice! I've marked this task as done: ");
         System.out.println("        " + doneTask);

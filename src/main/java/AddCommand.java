@@ -21,7 +21,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Execute the command that is given, based on it being a todo task, a deadline task or an event task.
+     * Execute the respective command, based on it being a todo task, a deadline task or an event task.
      * @param tasksStorage storage for the task, deals with storing data and retrieving data from hard disk.
      * @param taskList the list where all the tasks is being stored.
      * @param ui ui that is responsible for interaction with the user.
