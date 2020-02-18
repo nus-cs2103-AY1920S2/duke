@@ -77,8 +77,8 @@ The keyword within the angle brackets indicate what you should replace them with
 
 **Examples**
 
-- `event Piano exam /at 2020-10-20`
-- `event Mum's birthday /at 2020-04-23`
+- `deadline Finish IP /by 2020-10-20`
+- `deadline Procrastinate even more /by 1997-01-01`
 
 ### 4.4. `list` Command
 
