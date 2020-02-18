@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -56,11 +57,12 @@ public class MainWindow extends AnchorPane {
         Parser parser = new Parser(input.split(" "));
         String command = parser.getCommand();
         String response = this.getResponse(this.duke.run(input)); //potential bug
-        this.dialogContainer.setStyle("-fx-border-color:GREEN;-fx-background-color:#ffb508");
+       this.dialogContainer.setStyle("-fx-border-color:GREEN;-fx-background-color:#ffb508");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        userInput.clear();
+     /*   if (input.equals("bye")) Stage.close();
+        userInput.clear();*/
     }
 }

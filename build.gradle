@@ -34,12 +34,15 @@ dependencies {
 }
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
+    archiveVersion = "v0.2"
     archiveClassifier = null
     archiveAppendix = null
 }
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    runtimeOnly 'org.openjfx:javafx-graphics:$javafx.version:win'
+    runtimeOnly 'org.openjfx:javafx-graphics:$javafx.version:linux'
+    runtimeOnly 'org.openjfx:javafx-graphics:$javafx.version:mac'
 }
 test {
     useJUnitPlatform()
@@ -51,7 +54,7 @@ javafx {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Launcher" //seedu.
+    mainClassName = "Launcher" //seedu.
 }
 
 run {
