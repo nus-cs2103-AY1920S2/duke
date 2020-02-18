@@ -8,7 +8,14 @@
 /build/
 src/main/resources/docs/
 
+# Gradlew files
+/gradlew
+/gradlew.bat
+/gradle/wrapper/gradle-wrapper.jar
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
+
+/.settings/

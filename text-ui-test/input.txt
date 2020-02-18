@@ -1,0 +1,12 @@
+todo read book
+deadline return book /by 2020-06-06
+event project meeting /at 2020-08-06
+todo join sports club
+done 1
+done 4
+todo borrow book
+list
+deadline return book /by 2020-01-26
+event project meeting /at 2020-01-27
+find book
+bye
