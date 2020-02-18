@@ -12,12 +12,16 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private Duke duke = new Duke("./duke.txt");
 
+    // @@author FeliciaTay--reused
+    // Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md with
+    // minor modifications
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            // @@author
             stage.setTitle("DukeBot");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
