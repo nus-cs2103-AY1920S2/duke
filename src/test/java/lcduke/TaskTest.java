@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
     @Test
-    public void testGetDoneOutput(){
+    public void testGetDoneOutput() {
         lcduke.Task task1 = new lcduke.Todo("todo testing todo function");
         assertEquals(false, task1.getDone());
     }
 
     @Test
-    public void testToStringOutput(){
+    public void testToString() {
         lcduke.Task task1 = new lcduke.Todo("todo read book");
         task1.markAsDone();
         assertEquals("[T][" + Character.toString((char)43) + "] " + "todo read book",
@@ -36,13 +36,5 @@ public class TaskTest {
 
     @Test
     void printInit() {
-    }
-
-    @Test
-    void testToString() {
-    }
-
-    @Test
-    void testToString1() {
     }
 }
