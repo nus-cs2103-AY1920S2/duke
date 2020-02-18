@@ -12,11 +12,26 @@ public class Task {
     protected boolean isSnoozeable;
 
     /**
+     * String of class name for JSON compatibility.
+     */
+    String type;
+
+    /**
+     * Returns String of class name for JSON compatibility.
+     *
+     * @return String of class name
+     */
+    protected String getType() {
+        return type;
+    };
+
+    /**
      * Constructor for Task that takes in the description of the task.
      *
      * @param description the description of the task.
      */
     public Task(String description) {
+        this.type = "Task";
         this.description = description;
         this.isDone = false;
         this.isSnoozeable = false;
