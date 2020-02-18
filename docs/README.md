@@ -45,5 +45,5 @@ Example of usage:
 `bye`
 
 
-<img src = "Ui.png.jpeg">
+<img src = "Ui.png">
 
