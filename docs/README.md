@@ -20,7 +20,7 @@ Adds a to do task which has a description and no deadline.
 
 Command: `todo DESCRIPTION` 
 
-For example, if the user types `todo art homework`,
+For example, if the user types `todo art homework`
 
 The expected outcome would be: 
 ```
@@ -34,7 +34,7 @@ Adds an event task that describes an event that would occur at a certain date.
 
 Command: `event DESCRIPTION YYYY-MM-DD`
 
-For example, if the user types `event meet nemo /at 2020-02-19`,
+For example, if the user types `event meet nemo /at 2020-02-19`
 
 The expected outcome would be:
  ```
@@ -77,7 +77,7 @@ Deletes the task at the specified index.
 
 Command: `delete INDEX`
 
-For example, if the user enters `delete 2`, 
+For example, if the user enters `delete 2`
 
 The expected outcome is:
 ```
@@ -93,7 +93,7 @@ Marks the task at the specified index as done.
 
 Command: `done INDEX`
 
-For example, if the user enters `done 2`,
+For example, if the user enters `done 2`
 
 The expected outcome is:
 ```
@@ -106,7 +106,7 @@ Lists the tasks that contain the specified keyword.
 
 Command: `find KEYWORD`
 
-For example, if the user enters `find class`,
+For example, if the user enters `find class`
 
 The expected outcome is:
 ```
@@ -120,7 +120,7 @@ Updates the message of the task at the specified index.
 
 Command: `updatem INDEX MESSAGE` 
 
-For example, if the user enters `updatem 1 go for math classes`,
+For example, if the user enters `updatem 1 go for math classes`
 
 The expected outcome is:
 ```
@@ -133,7 +133,7 @@ Updates the date of a event or deadline task at the specified index.
 
 Command: `updated INDEX YYYY-MM-DD`
 
-For example, if the user enters `updated 3 2020-05-02`,
+For example, if the user enters `updated 3 2020-05-02`
 
 The expected outcome is: 
 ```
