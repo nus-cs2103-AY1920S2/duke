@@ -23,7 +23,7 @@ Jay-z's task manager serves as a personal chatbot assistant to help individuals 
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `Jay-Z.jar` link:https://github.com/ljiazh3ng/duke/releases[here].
+.  Download the latest `v0.2.jar` link:https://github.com/ljiazh3ng/duke/releases[here].
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 images::Ui.png[width="790"]

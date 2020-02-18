@@ -35,6 +35,7 @@ public class DeleteCommand extends Command {
         try {
             Task temp = taskList.deleteTask(taskIndex);
             storage.saveTask(taskList);
+            taskList.updateList(storage);
             ui.deleteTaskSuccess(temp);
             return new CommandResult(SUCCESS);
         } catch (Exception ex) {
