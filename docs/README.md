@@ -135,7 +135,7 @@ This feature allows the user to exit the application and Duke will save the task
 1. bye
 
 #### Expected Outcome
-Duke will reply with a bye message. Example:
+Duke will reply with a goodbye message. Example:
 
 Bye! Hope to see you again soon!
 
