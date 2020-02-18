@@ -129,7 +129,7 @@ public class Parser {
                     toReturn = (ui.printOutFound(tasks.getMatches(getDescription())));
                     break;
                 case "snooze":
-                    tasks.getTask(getIndex() -1).snooze(timing);
+                    tasks.getTask(getIndex() - 1).snooze(timing);
                     break;
                 case "event":
                     tasks.newEvent(getDescription(), getTiming());
@@ -142,6 +142,8 @@ public class Parser {
                 case "deadline":
                     try {
                         tasks.newDeadline(getDescription(), getTiming());
+                        toReturn = ui.printOutAdded(tasks);
+                        break;
                     } catch (DateTimeParseException e) {
                         throw new DukeException("Invalid date format for deadline used! "
                                 + "Please re-try using the date format 'yyyy-mm-dd HHMM'");
