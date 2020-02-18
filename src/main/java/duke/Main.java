@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Main extends Application {
     private static final String MAIN_WINDOW_FXML_PATH = "/view/MainWindow.fxml";
     private static final String SCROLL_PANE_CSS_PATH = "view/ScrollPane.css";
-    private static final String ICON_PATH = "/images/icon.jpg";
+    private static final String ICON_PATH = "/images/icon.png";
     private static final String APPLICATION_NAME = "Megumin";
 
     /**
