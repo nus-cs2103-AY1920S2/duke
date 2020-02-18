@@ -66,5 +66,5 @@ Exits the program and closes the Ui window.
 
 ## 4. Acknowledgements <a name="acknowledgements"/>
 Code Organization adapted from seedu-ab-2.  
-Referenced from: https://github.com/se-edu/addressbook-level2/tree/master/src/seedu/addressbook
+Referenced from: [https://github.com/se-edu/addressbook-level2/tree/master/src/seedu/addressbook](https://github.com/se-edu/addressbook-level2/tree/master/src/seedu/addressbook)
 
