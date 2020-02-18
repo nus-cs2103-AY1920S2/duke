@@ -35,7 +35,7 @@ public class AddCommand extends Command {
      * @param storage The storage client of the bot that writes to the data file.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.showMessage(tasklist.addTask(task, storage));
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        return tasklist.addTask(task, storage);
     }
 }

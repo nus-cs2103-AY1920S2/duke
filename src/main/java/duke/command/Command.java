@@ -20,5 +20,5 @@ public abstract class Command {
      * @param ui The User Interface of the chat bot.
      * @param storage The storage client of the bot that writes to the data file.
      */
-    public abstract void execute(TaskList tasklist, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasklist, Ui ui, Storage storage);
 }

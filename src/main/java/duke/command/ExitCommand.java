@@ -24,7 +24,7 @@ public class ExitCommand extends Command {
      * @param storage The storage client of the bot that writes to the data file.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.showFarewell();
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        return "Hope to see you next time! xD\n";
     }
 }

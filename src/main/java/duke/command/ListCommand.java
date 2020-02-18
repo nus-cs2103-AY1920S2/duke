@@ -24,7 +24,7 @@ public class ListCommand extends Command {
      * @param storage The storage client of the bot that writes to the data file.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.showMessage(tasklist.listTask());
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        return tasklist.listTask();
     }
 }

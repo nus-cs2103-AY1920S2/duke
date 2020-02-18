@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
      * @param storage The storage client of the bot that writes to the data file.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.showMessage(tasklist.deleteTask(index, storage));
+    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        return tasklist.deleteTask(index, storage);
     }
 }
