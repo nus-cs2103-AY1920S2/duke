@@ -6,6 +6,8 @@ import duke.command.ByeCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.UpdateDescriptionCommand;
+import duke.command.UpdateTimeCommand;
 import duke.command.TodoCommand;
 import duke.command.EventCommand;
 import duke.command.DeadlineCommand;
@@ -32,7 +34,7 @@ public class Parser {
      * @return
      */
     public Command parseCommand(String input) throws InvalidCommandException {
-        Command result;
+        Command result = new ByeCommand(input, true);
         String[] split = input.split(" ");
         String command = split[0];
 
@@ -57,6 +59,15 @@ public class Parser {
 
         case "find":
             result = new FindCommand(input, false);
+            break;
+
+        case "update" :
+            String secondCommand = split[1];
+            if (secondCommand.compareTo("description") == 0) {
+                result = new UpdateDescriptionCommand(input, false);
+            } else if (secondCommand.compareTo("time") == 0) {
+                result = new UpdateTimeCommand(input, false);
+            }
             break;
 
         case "todo":

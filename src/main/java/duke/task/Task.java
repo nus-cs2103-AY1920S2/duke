@@ -4,7 +4,7 @@ package duke.task;
  * Represents a Task.
  * It has a description, and is marked as done or not.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -37,6 +37,12 @@ public class Task {
             return "[X] ";
         }
     }
+
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    public abstract void setTime(String newTime);
 
     /**
      * Sets the task as done.

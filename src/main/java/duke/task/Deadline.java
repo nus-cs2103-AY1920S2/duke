@@ -26,6 +26,10 @@ public class Deadline extends Task {
         return this.time;
     }
 
+    public void setTime(String newTime) {
+        this.time = newTime;
+    }
+
     @Override
     public String toString() {
         String str = "[D]";

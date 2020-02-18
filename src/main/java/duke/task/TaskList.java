@@ -91,6 +91,32 @@ public class TaskList {
         return results;
     }
 
+    public String updateDescription(int idx, String input) {
+        try {
+            Task task = this.tasks.get(idx);
+            int newDescriptionIndex = input.indexOf("" + (idx + 1));
+            String newDescription = input.substring(newDescriptionIndex + 2);
+            task.setDescription(newDescription);
+            return "Noted. I've updated this task:\n"
+                + task.toString();
+        } catch (IndexOutOfBoundsException e) {
+            return ("Task index is invalid. Try again!");
+        }
+    }
+
+    public String updateTime(int idx, String input) {
+        try {
+            Task task = this.tasks.get(idx);
+            int newTimeIndex = input.indexOf("" + (idx + 1));
+            String newTime = Parser.reformatDateAndTime(input.substring(newTimeIndex + 2));
+            task.setTime(newTime);
+            return "Noted. I've updated this task:\n"
+                + newTime;
+        } catch (IndexOutOfBoundsException e) {
+            return ("Task index is invalid. Try again!");
+        }
+    }
+
     /**
      * Manages a Todo task by parsing user input and storing it into the task list.
      * @param storage The Storage instance used to write the task into the task list file.
