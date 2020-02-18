@@ -25,15 +25,12 @@ You can perform simple actions such as add, remove and mark tasks from a task li
 A basic search feature is also available for you to search from the task list.
 
 There are 3 types of tasks:
-- Todo
-- Deadline
-- Event
 
 Task Type   |Description
 ------------|------------
 Todo        |The most basic task which one can mark as completed.
 Deadline    |A todo task with a deadline.
-Event       |Similar to a deadline task. However, an event date will be used instead of a deadline.
+Event       |An event task with start and end time.
 
 ### Expense Management
 
@@ -73,36 +70,38 @@ If you key in commands that the chatbot does not recognize, you'll receive a ran
 
 ## Commands
 
-1. [General](#general-commands)
+1. General
     - [`bye` - Exit the program](#bye---exit-the-program)
-2. [Task](#task-commands)
-    - [`tasks` - List tasks](#tasks---List-tasks)
-    - [`todo` - Add a todo task](#todo---Add-a-todo-task)
-    - [`deadline` - Add a deadline task](#deadline---Add-a-deadline-task)
-    - [`event` - Add an event task](#event---Add-an-event-task)
-    - [`done` - Mark a task](#done---Mark-a-task)
-    - [`find` - Find a task](#find---Find-a-task)
-    - [`delete task` - Remove a task](#delete-task---Remove-a-task)
-3. [Expense](#expense-commands)
-    - [`expenses` - List expenses](#expenses---List-expenses)
-    - [`expense` - Add an expense record](#expense---Add-an-expense-record)
-    - [`delete expense` - Remove an expense record](#delete-expense---Remove-an-expense-record)
+2. Task
+    - [`tasks` - List tasks](#tasks---list-tasks)
+    - [`todo` - Add a todo task](#todo---add-a-todo-task)
+    - [`deadline` - Add a deadline task](#deadline---add-a-deadline-task)
+    - [`event` - Add an event task](#event---add-an-event-task)
+    - [`done` - Mark a task](#done---mark-a-task)
+    - [`find` - Find a task](#find---find-a-task)
+    - [`delete task` - Remove a task](#delete-task---remove-a-task)
+3. Expense
+    - [`expenses` - List expenses](#expenses---list-expenses)
+    - [`expense` - Add an expense record](#expense---add-an-expense-record)
+    - [`delete expense` - Remove an expense record](#delete-expense---remove-an-expense-record)
 
-### General Commands
+---
 
-#### `bye` - Exit the program
+### `bye` - Exit the program
 
 **Command:**
 
-```bye```
+```
+bye
+```
 
 **Result:**
 
 Exits the program after 1 minute.
 
-### Task Commands
+---
 
-#### `tasks` - List tasks
+### `tasks` - List tasks
 
 **Command:**
 
@@ -114,7 +113,9 @@ tasks
 
 List all the tasks.
 
-#### `todo` - Add a todo task
+---
+
+### `todo` - Add a todo task
 
 **Command:**
 
@@ -136,7 +137,9 @@ Name            |Format             |Required   |Description
 
 Adds a todo task to the task list.
 
-#### `deadline` - Add a deadline task
+---
+
+### `deadline` - Add a deadline task
 
 **Command:**
 
@@ -159,7 +162,9 @@ Name            |Format             |Required   |Description
 
 Adds a deadline task to the task list.
 
-#### `event` - Add an event task
+---
+
+### `event` - Add an event task
 
 **Command:**
 
@@ -183,7 +188,9 @@ Name            |Format             |Required   |Description
 
 Adds an event task to the task list.
 
-#### `done` - Mark a task
+---
+
+### `done` - Mark a task
 
 **Command:**
 
@@ -205,7 +212,9 @@ Name            |Format             |Required   |Description
 
 Marks a task as done.
 
-#### `find` - Find a task
+---
+
+### `find` - Find a task
 
 **Command:**
 
@@ -227,7 +236,9 @@ Name            |Format             |Required   |Description
 
 Searches the tasks which contains the description and lists them.
 
-#### `delete task` - Remove a task
+---
+
+### `delete task` - Remove a task
 
 **Command:**
 
@@ -249,9 +260,9 @@ Name            |Format             |Required   |Description
 
 Removes the task from the task list.
 
-### Expense Commands
+---
 
-#### `expenses` - List expenses
+### `expenses` - List expenses
 
 **Command:**
 
@@ -263,7 +274,9 @@ expenses
 
 List all the expenses and view the total amount spent.
 
-#### `expense` - Add an expense record
+---
+
+### `expense` - Add an expense record
 
 **Command:**
 
@@ -287,7 +300,9 @@ Name            |Format             |Required   |Description
 
 Adds a deadline task to the task list.
 
-#### `delete expense` - Remove an expense record
+---
+
+### `delete expense` - Remove an expense record
 
 **Command:**
 
