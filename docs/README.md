@@ -23,38 +23,37 @@ Close the application.
 ### `list` - list all tasks in the list
 
 Example of usage: 
-![Image of list]
-(https://github.com/joycelynteo/duke/tree/master/docs/images/list.png)
+![Image of list](images/list.png) 
 
 ### `todo {task}` - add a todo task
 
 Example of usage: 
-(https://github.com/joycelynteo/duke/tree/master/docs/images/addTodo.png)
+![Image of list](images/todo.png) 
 
 ### `deadline {task} {deadline}` - add a deadline task
 
 Example of usage: 
-(https://github.com/joycelynteo/duke/tree/master/docs/images/addDeadline.png)
+![Image of list](images/deadline.png) 
 
 ### `event {task} {date and time}` - add an event
 
 Example of usage: 
-(https://github.com/joycelynteo/duke/tree/master/docs/images/addEvent.png)
+![Image of list](images/event.png) 
 
 ### `done {task number}` - add a deadline task
 
 Example of usage: 
-(https://github.com/joycelynteo/duke/tree/master/docs/images/done.png)
+![Image of list](images/done.png) 
 
 ### `delete {task number}` - remove a task from the list
 
 Example of usage: 
-(https://github.com/joycelynteo/duke/tree/master/docs/images/delete.png)
+![Image of list](images/delete.png) 
 
 ### `undo` - undo previous command
 
 Example of usage: 
-(https://github.com/joycelynteo/duke/tree/master/docs/images/undo.png)
+![Image of list](images/undo.png) 
 
 ### `bye` - closes the application
 
