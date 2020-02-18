@@ -1,22 +1,22 @@
 # Duke User Guide
 
 Table of Content
-1. [Introduction](#1.-introduction)
-2. [Features](#2-features)
-3. [Adding a Task](#3-adding-a-task)
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Adding a Task](#adding-a-task)
     
-    3.1 [Todo](#31-todo---adding-a-todo-task)
+    3.1 [Todo](#todo---adding-a-todo-task)
 
-    3.2 [Event](#32-event---adding-an-event-task)
+    3.2 [Event](#event---adding-an-event-task)
 
-    3.3 [Deadline](#33-deadline---adding-an-deadline-task)
-4. [List](#4-list-all-tasks)
-5. [Done](#5-mark-task-as-done)
-6. [Find](#6-find-a-task)
-7. [Delete](#7-delete-a-task)
-8. [Bye](#8-exit-the-program)
+    3.3 [Deadline](#deadline---adding-an-deadline-task)
+4. [List](#list-all-tasks)
+5. [Done](#mark-task-as-done)
+6. [Find](#find-a-task)
+7. [Delete](#delete-a-task)
+8. [Bye](#exit-the-program)
 
-#1. Introduction
+# Introduction
 
 ![Duke](images/Ui.png)
 
@@ -27,11 +27,13 @@ Duke is an AI in which you are able to interact with. Treat him as a helper whom
 can trust. Give him a command and he will execute it for you. Once he is done, 
 he will inform you.
 
-##2. Features 
+## Features 
+
 In this section, it will show all the available commands that you can key in 
 to Duke.
 
-###3. Adding a task  
+## Adding a task  
+
 The add command allows you to add new tasks to the list. 
 
 There are three things you can add :
@@ -45,13 +47,14 @@ The list will then be stored in an internal txt file.
 
 However, you should not be adding a duplicate task in the list as Duke will
 detect it and print out an error message: 
+
 ```
 OOPS!!! There is a same task already added into the list
 or there is a clash of timing with one of the tasks in your list!
 ```
-## Usage
 
-###3.1 `todo` - Adding a Todo Task
+## `todo` - Adding a Todo Task
+
 To add a todo task, you have to type two arguments. The first is to type **todo**, 
 the second is to type **description of task**
 
@@ -69,7 +72,8 @@ Got it. I've added this task:
  Now you have 1 tasks in the list.
 ```
 
-###3.2 `event` - Adding an Event Task
+## `event` - Adding an Event Task
+
 To add a event task, you have to type as follows : 
 
 event **[event description]** /at [Date yyyy/mm/dd] [Time in 24 hour format]
@@ -88,7 +92,8 @@ Got it. I've added this task:8 0900
 Now you have 1 tasks in the list.
 ```
 
-###3.3 `deadline` - Adding an Deadline Task
+## `deadline` - Adding an Deadline Task
+
 To add a deadline task, you have to type as follows : 
 
 deadline **[deadline description]** /by [Date yyyy/mm/dd] [Time in 24 hour format]
@@ -107,12 +112,12 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-###4. List all tasks  
+# List all tasks  
+
 List down all the tasks that is added by you.
 
-## Usage
+## `list` - list down all tasks
 
-### `list` - list down all tasks
 Duke will print out all the tasks in your list. Simply type `list`. 
 
 Example of usage:
@@ -132,12 +137,12 @@ Expected outcome:
 However if there are no tasks left:
 
 ![No tasks left in list](images/empty.png)
-###5. Mark task as done  
+## Mark task as done  
+
 Whenever you completed a task, you can command Duke to mark your task as done.
 
-## Usage
-
 ### `done` - Set task as done
+
 Duke will change your task status as done. 
 [N] - Your task is not done
 [Y] - Your Task is done 
@@ -169,14 +174,15 @@ And if you use the `list` command again:
 2.[E][N] hackathon (at: Mar 18 2020 9:00am)
 3.[D][N] submit iP (by: Feb 19 2020 11:59pm)
 ```
+
 You can see that the status of your first task is changed from N to Y.
 
-###6. Find a task  
+# Find a task  
+
 You can find a specific task in the list with the help of Duke.
 
-## Usage
+## `find` - find task in a list
 
-### `find` - find task in a list
 To `find` the task that you want, you have to enter the description of your task and 
 Duke will find all tasks that are related to the keyword that you have entered.
 
@@ -196,11 +202,13 @@ Here are the matching tasks in your list:
 If Duke can't find the task that you have given :
 
 ![Duke can't find a task](images/nofind.png)
-###7. Delete a task  
-Removing a task from your list
-## Usage
 
-### `delete` - deleting your task
+# Delete a task  
+
+Removing a task from your list
+
+## `delete` - deleting your task
+
 The `delete` command will make Duke delete a specific task at a given index from you 
 Example of usage:
 
@@ -218,6 +226,7 @@ Before Delete:
 3.[D][N] submit iP (by: Feb 19 2020 11:59pm)
 
 ```
+
 During Delete:
  
 You will receive the message shown below
@@ -234,11 +243,8 @@ After Delete:
 
 ```
 
-###8. Exit the program  
+## Exit the program  
 
-## Usage
-
-### `bye` - Exits the Program
 Type the `bye` command to exit the program 
 
 Example of usage:
