@@ -33,10 +33,10 @@ public class Ui {
     }
 
     String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/\\__,_|_|\\_\\___|\n";
 
     private String welcomeMessage = "Hello from\n" + logo + "What can I do for you?";
 
