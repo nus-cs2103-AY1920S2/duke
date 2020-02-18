@@ -28,28 +28,28 @@ Event tasks are tasks that have to be done on a particular date and time. In Duk
 #### Command
 `todo <description>` - Creates a new To-Do task \
 `deadline <description> /by <date>` - Creates a new Deadline task \
-`event <description> /at <date>` - Creates a new Event task \
+`event <description> /at <date>` - Creates a new Event task
 
 ### Listing Tasks
 After creating your tasks, you may view the list of tasks that you have added into Duke.
 #### Command
-`list` - Lists all tasks saved in Duke \
+`list` - Lists all tasks saved in Duke
 
 ### Searching Tasks
 You can search for tasks that contain a particular string
 #### Command
-`find <string_to_match>` - Shows a list of tasks that contain a particular string \
+`find <string_to_match>` - Shows a list of tasks that contain a particular string
 
 ### Updating Tasks
 Once you have finished your task, you can update the task and mark it as done.
 #### Command
-`done <task_number>` - Set a task a done \
+`done <task_number>` - Set a task a done
 
 ### Deleting Tasks
 You can also choose to delete any task from Duke
 #### Command
-`delete <task_number>` - Permanently deletes the chosen task from Duke \
+`delete <task_number>` - Permanently deletes the chosen task from Duke
 
 ### Closing Duke
 #### Command
-`bye` - Closes Duke \
+`bye` - Closes Duke
