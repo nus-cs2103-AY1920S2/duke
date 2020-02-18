@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns DiaglogBox with input image on the right of the input text.
+     * Mainly used for user's input message.
+     * @param text to be displayed in the dialogbox
+     * @param img to be used as profile picture in dialogbox
+     * @return the DialogBox with the given image and text
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns DiaglogBox with input image on the left of the input text.
+     * Mainly used for Duke's response.
+     * @param text to be displayed in the dialogbox
+     * @param img to be used as profile picture in dialogbox
+     * @return the DialogBox with the given image and text
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

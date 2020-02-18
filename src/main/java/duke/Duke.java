@@ -34,14 +34,6 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
-
-//        try {
-//            tasks = new TaskList(storage.load());
-//        } catch (FileNotFoundException e) {
-//            System.out.println("file not found exception when loading database");
-//            ui.showLoadingError();
-//            tasks = new TaskList();
-//        }
     }
 
     //package-private
