@@ -30,7 +30,7 @@ public class CommandUpDetail implements Command {
         }
 
         indexToUpdate = Integer.parseInt(splitThroughWhitespace[1]) - 1;
-        newDetail = splitThroughWhitespace[2];
+        newDetail = " " + splitThroughWhitespace[2];
         if (indexToUpdate < 0 || indexToUpdate > size - 1) {
             throw new DukeExceptionIndex("update detail");
         }
