@@ -36,10 +36,12 @@ Duke will sort them according to their descriptions in alphabetical order.
 
 Inform duke to add the todo with the description provided to the list and update the list in `task.txt`.
 
-* Example of usage: <br/><br/>
+Example of usage:
+
 `todo read topics for CS2103`
 
-* Expected outcome: <br/>
+Expected outcome:
+
 ```
 Got it. I've added this task: 
   [T][N] read topics for CS2103T
@@ -54,10 +56,12 @@ Now you have 1 task in the list.
 Inform duke to add the deadline with the description and due date provided to the list 
 and update the list in `task.txt`. 
 
-* Example of usage: <br/><br/>
+Example of usage:
+
 `deadline project /by 2020-02-20`
 
-* Expected outcome: <br/>
+Expected outcome:
+
 ```
 Got it. I've added this task:
  [D][N] project (by: Feb 20 2020)
@@ -71,7 +75,7 @@ Now you have 1 task in the list.
 Inform duke to add the event with the description, date and time provided to the list 
 and update the list in `task.txt`. 
 
-Example of usage: 
+Example of usage:
 
 `event party /at 2020-03-12 2215`
 
@@ -89,14 +93,13 @@ Now you have 1 task in the list.
 
 Tell Duke to list all of the tasks out.
 
-Example of usage: 
-
+Example of usage:
+ 
 `list`
 
 Expected outcomes:
 
 * When there are three tasks in the list:<br/>
-
 ```
 Here are the tasks in your list:
   1.[E][N] party (at: Mar 12 2020 2215)
