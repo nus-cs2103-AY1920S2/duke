@@ -158,3 +158,12 @@ Returns a list of tasks with names that contain the given keyword.
 Example of usage: `bye`
 
 ## Acknowledgements
+
+GUI done with
+[JavaFX Tutorial](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md)
+by [Jeffry Lum](https://github.com/j-lum)
+
+Da Vinci from https://upload.wikimedia.org/wikipedia/commons/b/ba/Leonardo_self.jpg
+
+Mona Lisa from
+https://upload.wikimedia.org/wikipedia/commons/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg
