@@ -22,7 +22,7 @@ import java.time.LocalDate;
  * @author Jel
  */
 public class Storage {
-    protected String filePath;
+    protected File file;
     protected List<Task> tasks;
 
     /**
@@ -31,7 +31,17 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.tasks = new ArrayList<>();
-        this.filePath = filePath;
+        File tmp = new File(filePath);
+        this.file = tmp;
+        if (!tmp.exists()) {
+            tmp.getParentFile().mkdirs();
+            try {
+                tmp.createNewFile();
+                this.file = tmp;
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
     }
 
     /**
@@ -39,7 +49,7 @@ public class Storage {
      * @throws IOException Error opening file.
      */
     public void loadTasks() throws IOException {
-        FileInputStream ips = new FileInputStream(new File(this.filePath));
+        FileInputStream ips = new FileInputStream(file);
         BufferedReader br = new BufferedReader(new InputStreamReader(ips));
         String line;
 
@@ -76,7 +86,7 @@ public class Storage {
      * @throws IOException Error opening file.
      */
     protected void saveTask(Task task, boolean isAppendMode) throws IOException {
-        FileOutputStream ops = new FileOutputStream(new File(this.filePath), isAppendMode);
+        FileOutputStream ops = new FileOutputStream(file, isAppendMode);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ops));
         String[] toSave = new String[4];
         toSave[1] = task.isDone ? "1" : "0";
@@ -101,7 +111,7 @@ public class Storage {
     }
 
     protected void clearAllData() throws IOException {
-        FileOutputStream ops = new FileOutputStream(new File(this.filePath));
+        FileOutputStream ops = new FileOutputStream(file);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ops));
         bw.close();
         ops.close();

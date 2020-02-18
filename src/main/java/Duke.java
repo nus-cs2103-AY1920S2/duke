@@ -1,5 +1,6 @@
 import duke.util.CommandHandler;
 
+import java.io.File;
 import java.io.IOException;
 
 import duke.util.Parser;
@@ -10,9 +11,8 @@ import duke.util.Ui;
 /**
  * Represents the chat bot Duke.
  *
- * <p>CS2103T AY19/20 Semester 2
- * Individual Duke project
- * 11 Feb 2020
+ * <p>
+ * CS2103T AY19/20 Semester 2 Individual Duke project 11 Feb 2020
  *
  * @author Jel
  */
@@ -27,11 +27,8 @@ public class Duke {
      * Constructs a Duke instance.
      */
     public Duke() {
-        // launcher can't recognise ../../../data/duke.txt and  machine can't recognise this lol
-        // help T_T
-        // TODO: fix path
-        storage = new Storage("data/duke.txt");
         ui = new Ui();
+        storage = new Storage("data/duke.txt");
         tasks = new TaskList(storage, ui);
         cmd = new CommandHandler(tasks);
         parser = new Parser(cmd, ui);
@@ -45,10 +42,11 @@ public class Duke {
 
     /**
      * Driver method for CLI version of Duke.
+     * 
      * @param args Command line arguments supplied.
      */
     public static void main(String[] args) {
-        new Duke().run();
+        (new Duke()).run();
         String input = ui.getInput();
         while (!input.equals("bye")) {
             System.out.println(parser.parseLine(input));
@@ -71,6 +69,7 @@ public class Duke {
 
     /**
      * Gets Duke's response given input from user.
+     * 
      * @param input User's input.
      * @return Duke's response as a string.
      */
