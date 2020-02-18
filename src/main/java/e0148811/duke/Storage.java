@@ -38,19 +38,31 @@ public class Storage {
 
     private static void addEventToList(List<Task> list, String line) {
         String[] lineByWord = line.split("//");
-        assert lineByWord.length == 4:
-                "A correct line description should contain 4 parts separated by \"//\"";
         boolean isDone;
         isDone = lineByWord[1].equals("T");
+        PriorityLevel level;
+        switch (lineByWord[2]) {
+        case "!!!":
+            level = PriorityLevel.TOP;
+            break;
+        case "!!":
+            level = PriorityLevel.HIGH;
+            break;
+        default:
+            level = PriorityLevel.NORMAL;
+        }
         switch (lineByWord[0]) {
         case "T":
-            list.add(new Todo(isDone, lineByWord[2]));
+            assert lineByWord.length == 4: "A correct line description should contain 4 parts separated by \"//\"";
+            list.add(new Todo(isDone, lineByWord[3], level));
             break;
         case "D":
-            list.add(new Deadline(isDone, lineByWord[2], LocalDate.parse(lineByWord[3])));
+            assert lineByWord.length == 5: "A correct line description should contain 5 parts separated by \"//\"";
+            list.add(new Deadline(isDone, lineByWord[3], LocalDate.parse(lineByWord[4]), level));
             break;
         case "E":
-            list.add(new Event(isDone, lineByWord[2], LocalDate.parse(lineByWord[3])));
+            assert lineByWord.length == 5: "A correct line description should contain 5 parts separated by \"//\"";
+            list.add(new Event(isDone, lineByWord[3], LocalDate.parse(lineByWord[4]), level));
             break;
         }
     }

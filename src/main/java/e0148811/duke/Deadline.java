@@ -5,13 +5,8 @@ import java.time.LocalDate;
 public class Deadline extends Task {
     private LocalDate deadline;
 
-    public Deadline(String description, LocalDate deadline) {
-        super(false, description);
-        this.deadline = deadline;
-    }
-
-    public Deadline(boolean isDone, String description, LocalDate deadline) {
-        super(isDone, description);
+    public Deadline(boolean isDone, String description, LocalDate deadline, PriorityLevel level) {
+        super(isDone, description, level);
         this.deadline = deadline;
     }
 

@@ -14,19 +14,35 @@ public class TaskList {
         this.list = list;
     }
 
+    public void assignPriorityToTask(int index, PriorityLevel level) {
+        assert index >= 0 && index < list.size() : "index is out of bound";
+        Task task = list.get(index);
+        switch (level) {
+        case HIGH:
+            task.setHighPriority();
+            break;
+        case TOP:
+            task.setTopPriority();
+            break;
+        case NORMAL:
+            task.setNormalPriority();
+            break;
+        }
+    }
+
     public void printList() {
         System.out.println("Here is the task list:");
         for (int i = 1; i <= list.size(); i++) {
             System.out.println(i + ". " + list.get(i - 1));
         }
-        System.out.println(getNumOfTasks());
+        System.out.println(getNumOfTasksInString());
     }
 
     public List<Task> getList() {
         return list;
     }
 
-    public String getNumOfTasks() {
+    public String getNumOfTasksInString() {
         return "Currently there is/are " + list.size() + " task(s) in the list.";
     }
 
@@ -34,11 +50,11 @@ public class TaskList {
         list.add(task);
         System.out.println("Noted, the following task is stored:");
         System.out.println(task);
-        System.out.println(getNumOfTasks());
+        System.out.println(getNumOfTasksInString());
     }
 
     public void markATaskDone(int index) {
-        assert index < list.size(): "index is out of bound";
+        assert index < list.size() : "index is out of bound";
         Task taskToBeCompleted = list.get(index);
         taskToBeCompleted.setDone();
         System.out.println("Noted, the following task is marked done:");
@@ -46,11 +62,11 @@ public class TaskList {
     }
 
     public void deleteATask(int index) {
-        assert index < list.size(): "index is out of bound";
+        assert index < list.size() : "index is out of bound";
         Task t = list.remove(index);
         System.out.println("Noted, the following task is removed from the list:");
         System.out.println(t);
-        System.out.println(getNumOfTasks());
+        System.out.println(getNumOfTasksInString());
     }
 
     public Task getTask(int index) {
@@ -71,5 +87,10 @@ public class TaskList {
         list = newList;
         System.out.println("List cleared.");
         printList();
+    }
+
+    public void showTaskPrioritised(int index) {
+        System.out.println("Noted. The priority level of the following task has been set:");
+        System.out.println(list.get(index));
     }
 }

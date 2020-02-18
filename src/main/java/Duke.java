@@ -2,6 +2,7 @@ import e0148811.duke.Deadline;
 import e0148811.duke.DukeException;
 import e0148811.duke.Event;
 import e0148811.duke.Parser;
+import e0148811.duke.PriorityLevel;
 import e0148811.duke.Storage;
 import e0148811.duke.Task;
 import e0148811.duke.TaskList;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class Duke {
+    private static int ONE_TO_CONVERT_1_BASED_INDEX_INTO_0_BASED = 1;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -36,6 +38,7 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         } finally {
+            ui.linkToTaskList(tasks);
             ui.greet();
         }
     }
@@ -46,33 +49,37 @@ public class Duke {
             try {
                 int lengthOfArray = instructionByWord.length;
                 String actionWord = instructionByWord[0].toLowerCase();
+                Task task;
                 switch (actionWord) {
-                case "list":
-                    printList(lengthOfArray);
-                    break;
-                case "todo":
-                    Task task = createATodoTask(instructionByWord, lengthOfArray);
-                    addAndStoreTask(task);
+                case "clear":
+                    clearList(instructionByWord, lengthOfArray);
                     break;
                 case "deadline":
                     task = createDeadlineOrEventTask("deadline", instructionByWord, lengthOfArray);
                     addAndStoreTask(task);
                     break;
-                case "event":
-                    task = createDeadlineOrEventTask("event", instructionByWord, lengthOfArray);
-                    addAndStoreTask(task);
+                case "delete":
+                    doneOrDeleteATask("delete", instructionByWord, lengthOfArray);
                     break;
                 case "done":
                     doneOrDeleteATask("done", instructionByWord, lengthOfArray);
                     break;
-                case "delete":
-                    doneOrDeleteATask("delete", instructionByWord, lengthOfArray);
+                case "event":
+                    task = createDeadlineOrEventTask("event", instructionByWord, lengthOfArray);
+                    addAndStoreTask(task);
                     break;
                 case "find":
                     findTasks(instructionByWord[1], lengthOfArray);
                     break;
-                case "clear":
-                    clearList(instructionByWord, lengthOfArray);
+                case "list":
+                    printList(lengthOfArray);
+                    break;
+                case "priority":
+                    prioritiseTask(instructionByWord, lengthOfArray);
+                    break;
+                case "todo":
+                    task = createATodoTask(instructionByWord, lengthOfArray);
+                    addAndStoreTask(task);
                     break;
                 case "":
                     ui.throwEmptyLineException();
@@ -85,6 +92,43 @@ public class Duke {
             }
         }
         ui.sayGoodbye();
+    }
+
+    private void prioritiseTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
+        if (lengthOfArray != 3) {
+            ui.throwWrongFormatException("\"priority index_of_the_task level_of_priority"
+                    + " (which can be one of the following: n/normal, h/high, t/top)\"");
+        }
+        int index = getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_1_BASED_INDEX_INTO_0_BASED;
+        if (index < 0 || index >= tasks.getList().size()) {
+            ui.throwInvalidIndexException();
+        }
+        assignPriorityToTask(instructionByWord[2], index);
+    }
+
+    private void assignPriorityToTask(String level, int index) throws DukeException {
+        if (level.equals("h") || level.equals("high")) {
+            tasks.assignPriorityToTask(index, PriorityLevel.HIGH);
+        } else if (level.equals("t") || level.equals("top")) {
+            tasks.assignPriorityToTask(index, PriorityLevel.TOP);
+        } else if (level.equals("n") || level.equals("normal")) {
+            tasks.assignPriorityToTask(index, PriorityLevel.NORMAL);
+        } else {
+            ui.throwOtherException("Invalid level of priority.\n"
+                    + "Please input one of the following: h/high, t/top");
+        }
+        tasks.showTaskPrioritised(index);
+    }
+
+    private int getIndexOfTaskToBePrioritised(String[] instructionByWord) throws DukeException {
+        int index = -1;
+        try {
+            index = Integer.parseInt(instructionByWord[1]);
+        } catch (NumberFormatException e) {
+            ui.throwWrongFormatException("\"priority index_of_the_task level_of_priority"
+                    + "(which can be one of the following: h/high, t/top)\"");
+        }
+        return index;
     }
 
     void clearList(String[] instructionByWord, int lengthOfArray) throws DukeException, IOException {
@@ -147,7 +191,7 @@ public class Duke {
 
     private void doneOrDeleteATask(String command, String[] instructionByWord, int lengthOfArray)
             throws DukeException {
-        assert command.equals("done") || command.equals("delete"):
+        assert command.equals("done") || command.equals("delete") :
                 "only two types of commands (done and delete) are considered for this method";
         if (lengthOfArray != 2) {
             if (command.equals("done")) {
@@ -159,10 +203,9 @@ public class Duke {
             }
         }
         try {
-            int index = Integer.parseInt(instructionByWord[1]) - 1;
+            int index = Integer.parseInt(instructionByWord[1]) - ONE_TO_CONVERT_1_BASED_INDEX_INTO_0_BASED;
             if (index >= tasks.getList().size() || index < 0) {
-                throw new DukeException("Invalid index.\n" + tasks.getNumOfTasks()
-                        + " Please note that the index is one-based (begins with 1 instead of 0).");
+                ui.throwInvalidIndexException();
             } else {
                 if (command.equals("done")) {
                     tasks.markATaskDone(index);
@@ -189,12 +232,12 @@ public class Duke {
         }
         String description = String.join(" ",
                 Arrays.copyOfRange(instructionByWord, 1, lengthOfArray));
-        return new Todo(description);
+        return new Todo(false, description, PriorityLevel.NORMAL);
     }
 
     private Task createDeadlineOrEventTask(String typeOfTask, String[] instructionByWord, int lengthOfArray)
             throws DukeException {
-        assert typeOfTask.equals("deadline") || typeOfTask.equals("event"):
+        assert typeOfTask.equals("deadline") || typeOfTask.equals("event") :
                 "this method should only create either a deadline task or an event task";
         try {
             int indexOfByOrAt = getIndexOfByOrAt(typeOfTask, instructionByWord, lengthOfArray);
@@ -238,16 +281,17 @@ public class Duke {
         }
     }
 
-    private Task constructDeadlineOrEventTask(String typeOfTask, String[] instructionByWord, int lengthOfArray, int indexOfByOrAt) {
+    private Task constructDeadlineOrEventTask(String typeOfTask, String[] instructionByWord,
+                                              int lengthOfArray, int indexOfByOrAt) {
         String description = String.join(" ",
                 Arrays.copyOfRange(instructionByWord, 1, indexOfByOrAt));
         String deadline = String.join(" ",
                 Arrays.copyOfRange(instructionByWord, indexOfByOrAt + 1, lengthOfArray));
         Task task;
         if (typeOfTask.equals("deadline")) {
-            task = new Deadline(description, LocalDate.parse(deadline));
+            task = new Deadline(false, description, LocalDate.parse(deadline), PriorityLevel.NORMAL);
         } else {
-            task = new Event(description, LocalDate.parse(deadline));
+            task = new Event(false, description, LocalDate.parse(deadline), PriorityLevel.NORMAL);
         }
         return task;
     }
