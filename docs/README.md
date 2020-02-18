@@ -63,7 +63,7 @@ You will see an application similar to the one shown below:
 ![User Interface Screenshot](Ui.png)
 
 Key [Commands](#commands) into the text box at the bottom of the window. 
-You can press `<ENTER>` or click the `Send` butoon to sen your messages.
+You can press `<ENTER>` or click the `Send` button to send your messages.
 The chatbot will instantly reply you.
 
 If you key in commands that the chatbot does not recognize, you'll receive a random message from the chatbot.
