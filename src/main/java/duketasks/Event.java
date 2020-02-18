@@ -9,12 +9,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     protected LocalDate by;
-    private static final String eventTaskCode = "E";
+    private static final String EVENTTASKCODE = "E";
 
 
     public Event(String desc, LocalDate by) {
         super(desc,
-                eventTaskCode);
+                EVENTTASKCODE);
         this.by = by;
     }
 

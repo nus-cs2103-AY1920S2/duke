@@ -5,10 +5,10 @@ package duketasks;
  */
 
 public class Todo extends Task {
-    private static final String todoTaskCode = "T";
+    private static final String TODOTASKCODE = "T";
 
     public Todo(String taskName) {
-        super(taskName, todoTaskCode);
+        super(taskName, TODOTASKCODE);
     }
 
     /**

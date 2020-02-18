@@ -9,10 +9,10 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDate by;
-    private static final String deadlineTaskCode = "D";
+    private static final String DEADLINETASKCODE = "D";
 
     public Deadline(String desc, LocalDate by) {
-        super(desc, deadlineTaskCode);
+        super(desc, DEADLINETASKCODE);
         this.by = by;
     }
 
