@@ -14,7 +14,7 @@ By: Ng Jun Guang, Jarrod
     3.7. [Delete an item from the list - `delete`](#delete)  
     3.8. [Find Items - `find`](#find)  
     3.9. [Exit Program - `bye`](#bye)  
-4. [Acknowledgements](#acknowledgements) 
+4. [Acknowledgements](#acknowledgements)  
 <a name="intro"/>
 ## 1. Introduction
 
@@ -23,8 +23,9 @@ who prefer to use the **Command Line Interface** while still having the benefits
 **Graphical User Interface**.
 <a name="quickstart"/>
 ## 2. Quick Start
+
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Double-click the file to start the program.  
+2. Double-click the file to start the program.    
 <a name="features"/>
 ## 3. Features
 The program has the following in-built functionalities:
