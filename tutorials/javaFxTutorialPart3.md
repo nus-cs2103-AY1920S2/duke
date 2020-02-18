@@ -96,7 +96,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 ```
 
-Next, add two images to the `main/resources/images` folder.
+Next, add two images to the `main/resources/images` folder.Log
 For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and Duke's avatar respectively but you can use any image you want.
 
 Image|Filename
