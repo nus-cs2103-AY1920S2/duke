@@ -69,8 +69,8 @@ public class TaskList {
     public String listTask() {
         StringBuilder sb = new StringBuilder();
         if (tasks.size() == 0) {
-            sb.append("There is currently no pending task. " +
-                    "Please add some tasks by using the \"todo\", \"event\" or \"deadline\" command\n");
+            sb.append("There is currently no pending task. "
+                    + "Please add some tasks by using the \"todo\", \"event\" or \"deadline\" command\n");
         } else {
             sb.append("Here are all the tasks in your list:\n").append(tasksToString(tasks));
         }
@@ -91,6 +91,11 @@ public class TaskList {
         return doneMessage;
     }
 
+    /**
+     * Finds the tasks that contain the give keyword.
+     * @param keyword The keyword that needs to be searched.
+     * @return The matching tasks.
+     */
     public String findTask(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
@@ -100,8 +105,8 @@ public class TaskList {
         }
         String findMessage = "";
         if (matchingTasks.size() == 0) {
-            findMessage = "Sorry, I can't find any task that matches the keyword :(\nMaybe you want to try a different" +
-                    " keyword? :D\n";
+            findMessage = "Sorry, I can't find any task that matches the keyword :(\nMaybe you want to try a different"
+                    + " keyword? :D\n";
         } else {
             findMessage = "Here are the matching tasks in your list:\n" + tasksToString(matchingTasks);
         }

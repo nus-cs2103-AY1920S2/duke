@@ -30,6 +30,9 @@ public class Ui {
         System.out.println(formatMessage(message));
     }
 
+    /**
+     * Shows the welcome message on start up.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
