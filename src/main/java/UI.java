@@ -75,6 +75,7 @@ public class UI {
 
     /**
      * Prints out task as done.
+     *
      * @param task Task to be marked as done.
      * @param taskNumber Index of the task.
      * @param tasks Task list where task can be found.
@@ -86,6 +87,7 @@ public class UI {
 
     /**
      * Prints out task as deleted.
+     *
      * @param task Task to be deleted.
      * @param taskNumber Index of the task.
      * @param tasks Task list where the task can be found.
@@ -98,6 +100,7 @@ public class UI {
 
     /**
      * Prints out the tasks found.
+     *
      * @param list Takes in a list to print out.
      */
     public void printFoundTasks(ArrayList<Task> list) {
