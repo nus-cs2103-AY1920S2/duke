@@ -12,8 +12,8 @@ public class UndoCommand implements Command {
         try {
             return tasks.undo(undoIndex);
         } catch (IndexOutOfBoundsException e) {
-            return "Index out of bounds. Please input an index between 0 and " +
-                    (tasks.getTasks().size() - 1) + ".";
+            return "Index out of bounds. Please input an index between 0 and "
+                    + (tasks.getTasks().size() - 1) + ".";
         }
     }
 

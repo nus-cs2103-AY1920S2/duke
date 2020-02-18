@@ -45,13 +45,12 @@ public class Duke {
             response = c.execute(tasks, ui, storage);
             isExit = c.isExit();
         } catch (DukeException e) {
-//            e.printStackTrace();
+            //e.printStackTrace();
             return e.getErrorMessage();
         }
 
         //saves after every command so data isn't lost in event of
         //sudden application close
-        //TODO: implement saving only upon exit
         try {
             storage.save(tasks);
         } catch (IOException e) {

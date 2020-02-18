@@ -13,8 +13,8 @@ public class DeleteCommand implements Command {
         try {
             return tasks.delete(deleteIndex);
         } catch (IndexOutOfBoundsException e) {
-            return "Index out of bounds. Please input an index between 0 and " +
-                    (tasks.getTasks().size() - 1) + ".";
+            return "Index out of bounds. Please input an index between 0 and "
+                    + (tasks.getTasks().size() - 1) + ".";
         }
     }
 

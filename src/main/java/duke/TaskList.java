@@ -34,6 +34,7 @@ public class TaskList {
      * Marks the task at doneIndex as done and returns a response message. doneIndex is 0-indexed.
      * @param doneIndex the 0-indexed index of the task to be marked as done.
      * @return response message to be printed to the user
+     * @throws IndexOutOfBoundsException when doneIndex is out of bounds for the tasks in the TaskList
      */
     public String done(int doneIndex) throws IndexOutOfBoundsException {
         assert doneIndex >= 0 && doneIndex < tasks.size() : "done task index out of bounds";
@@ -45,6 +46,12 @@ public class TaskList {
         return responseMessage;
     }
 
+    /**
+     * Marks the task at undoIndex as undone and returns a response message. undoIndex is 0-indexed.
+     * @param undoIndex the 0-indexed index of the task to be marked as undone.
+     * @return response message to be printed to the user
+     * @throws IndexOutOfBoundsException when undoIndex is out of bounds for the tasks in the TaskList
+     */
     public String undo(int undoIndex) throws IndexOutOfBoundsException {
         tasks.get(undoIndex).markAsUndone();
         String responseMessage = "";
