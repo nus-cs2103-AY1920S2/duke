@@ -32,23 +32,23 @@ Adds a new task. There are three different type of tasks:
 1. Tasks with a deadline `deadline`
 1. Tasks held at a certain date `event`
 
-  #### 2.3.a. To-do Task: `todo`
-  Format: `todo TASK`
+#### 2.3.a. To-do Task: `todo`
+Format: `todo TASK`
 
-  Example:
-  * `todo borrow book`
+Example:
+* `todo borrow book`
 
-  #### 2.3.b. Deadline Task: `deadline`
-  Format: `deadline TASK /by DD MM YY`
+#### 2.3.b. Deadline Task: `deadline`
+Format: `deadline TASK /by DD MM YY`
 
-  Example:
-  * `deadline return book /by 18 02 20` adds a deadline task, `return book`, to be done by `18th Feb 2020`
+Example:
+* `deadline return book /by 18 02 20` adds a deadline task, `return book`, to be done by `18th Feb 2020`
 
-  #### 2.3.c. Event Task: `event`
-  Format: `event TASK /at DD MM YY`
+#### 2.3.c. Event Task: `event`
+Format: `event TASK /at DD MM YY`
 
-  Example:
-  * `event project meeting /at 18 02 20` adds an event task, `project meeting`, to be done by `18th Feb 2020`
+Example:
+* `event project meeting /at 18 02 20` adds an event task, `project meeting`, to be done by `18th Feb 2020`
 
 ### 2.4. Mark Task as Done: `done`
 Marks a task in the list as done, according to the index given.
