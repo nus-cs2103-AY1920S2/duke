@@ -33,11 +33,6 @@ public class Duke extends Application {
     private Ui ui;
     Parser parser;
 
-    // just an empty constructor
-    public Duke() {
-
-    }
-
     /**
      * Creates a Ui object to deal with user interaction , a Storage object to deal with loading or saving tasks and a
      * new TaskList object, loaded with the file storing the task list, if the file exists.
@@ -52,6 +47,7 @@ public class Duke extends Application {
         } catch (DukeException | IOException exception) {
             ui.printLoadingError();
             tasks = new TaskList();
+            storage.updateTaskList(tasks.getList());
         }
         parser = new Parser(tasks.getList());
     }

@@ -31,15 +31,20 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = br.readLine();
             while (line != null) {
-                Parser dummyParser = new Parser(taskList);
-                dummyParser.loadText(line);
+                Parser HDParser = new Parser(taskList);
+                HDParser.loadText(line);
                 line = br.readLine();
             }
             return taskList;
         } else {
             boolean isFileCreated = file.createNewFile();
+
             throw new DukeException("LOAD_ERROR");
         }
+    }
+
+    public void updateTaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
     }
 
     /**

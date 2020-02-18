@@ -130,7 +130,7 @@ public class Parser {
         String commandToFind = strArr[0];
         String detailsToUpdate = strArr[1];
         for (Task task : taskList) {
-            if (task.getCommand().contains(commandToFind.trim())) {
+            if (task.getCommand().trim().equals(commandToFind.trim())) {
                 currTask = task;
             }
         }
@@ -154,6 +154,7 @@ public class Parser {
             } else if (command.contains("todo")) {
                 return handleTodo(command);
             } else if (command.contains("deadline")) {
+                System.out.println("DEADLINE TASK!");
                 return handleDeadline(command);
             } else if (command.contains("event")) {
                 return handleEvent(command);
