@@ -36,6 +36,9 @@ public class Parser {
                 return new AddCommand(new Todo(otherArgs));
             } else if (firstArg.equals("deadline")) {
                 String[] splitby = otherArgs.split(" /by ");    //note surrounding spaces
+                if (splitby.length == 1) {
+                    throw new UndefinedCommandException();
+                }
                 try {
                     LocalDate dueDate = LocalDate.parse(splitby[1]);
                     return new AddCommand(new Deadline(splitby[0], dueDate));
@@ -44,19 +47,34 @@ public class Parser {
                 }
             } else if (firstArg.equals("event")) {
                 String[] splitat = otherArgs.split(" /at ");    //note surrounding spaces
+                if (splitat.length == 1) {
+                    throw new UndefinedCommandException();
+                }
                 return new AddCommand(new Event(splitat[0], splitat[1]));
             } else if (firstArg.equals("done")) {
                 // assumes command is only "done" and an int
                 // the input is 1-indexed. duke.DoneCommand takes in 0-indexed
-                return new DoneCommand(Integer.parseInt(otherArgs) - 1);
+                try {
+                    return new DoneCommand(Integer.parseInt(otherArgs) - 1);
+                } catch (NumberFormatException e) {
+                    throw new InvalidIndexException();
+                }
             } else if (firstArg.equals("undo")) {
                 // assumes command is only "undo" and an int
                 // the input is 1-indexed. duke. UndoCommand takes in 0-indexed
-                return new UndoCommand(Integer.parseInt(otherArgs) - 1);
+                try {
+                    return new UndoCommand(Integer.parseInt(otherArgs) - 1);
+                } catch (NumberFormatException e) {
+                    throw new InvalidIndexException();
+                }
             } else if (firstArg.equals("delete")) {
                 // assumes command is only "delete" and an int
                 // the input is 1-indexed. duke.DeleteCommand takes in 0-indexed
-                return new DeleteCommand(Integer.parseInt(otherArgs) - 1);
+                try {
+                    return new DeleteCommand(Integer.parseInt(otherArgs) - 1);
+                } catch (NumberFormatException e) {
+                    throw new InvalidIndexException();
+                }
             } else if (firstArg.equals("find")) {
                 // currently will search the remainder of the command
                 return new FindCommand(otherArgs);

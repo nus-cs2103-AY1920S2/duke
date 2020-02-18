@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
     public static final String WELCOME_MESSAGE =
-            /*
+                /*
             " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
