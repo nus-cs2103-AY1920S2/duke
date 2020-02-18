@@ -4,8 +4,62 @@ import java.io.Serializable;
 
 public abstract class Task implements Serializable {
 
+    public enum Priority {
+        PRIORITY_HIGH("High"),
+        PRIORITY_MEDIUM("Medium"),
+        PRIORITY_LOW("Low"),
+        PRIORITY_DEFAULT("");
+
+        private String name;
+
+        private Priority(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+
+        public String getIcon() {
+            String icon = "[";
+            switch (name) {
+            case "High":
+                icon += "*";
+                // Fallthrough
+            case "Medium":
+                icon += "*";
+                // Fallthrough
+            case "Low":
+                icon += "*";
+                break;
+            default:
+                return "";
+            }
+
+            return icon + "]";
+        }
+
+        public static Priority getEnumByString(String value) {
+            for (Priority p : Priority.values()) {
+                if (p.name.toLowerCase().equals(value.toLowerCase())) {
+                    return p;
+                }
+            }
+
+            return null;
+        }
+    }
+
+    public enum TaskType {
+        TASK_TYPE_TODO,
+        TASK_TYPE_EVENT,
+        TASK_TYPE_DEADLINE
+    }
+
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
     /**
      * Constructor of the Task.
@@ -15,6 +69,7 @@ public abstract class Task implements Serializable {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = Priority.PRIORITY_DEFAULT;
     }
 
     /**
@@ -24,6 +79,10 @@ public abstract class Task implements Serializable {
      */
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public void setPriority(Priority newPriority) {
+        this.priority = newPriority;
     }
 
     /**
@@ -45,12 +104,6 @@ public abstract class Task implements Serializable {
 
     @Override
     public String toString() {
-        return getTypeIcon() + getStatusIcon() + " " + description;
-    }
-
-    public enum TaskType {
-        TASK_TYPE_TODO,
-        TASK_TYPE_EVENT,
-        TASK_TYPE_DEADLINE
+        return priority.getIcon() + getTypeIcon() + getStatusIcon() + " " + description;
     }
 }
