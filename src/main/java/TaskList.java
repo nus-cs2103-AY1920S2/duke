@@ -178,7 +178,7 @@ public class TaskList {
             assert n > 0 : "Number out of bounds";
             output = "Nice! I've marked this task as done:\n";
             tasks.get(n - 1).markAsDone();
-            output = tasks.get(n - 1) + "\n";
+            output = output + tasks.get(n - 1) + "\n";
         }
         return output;
     }
