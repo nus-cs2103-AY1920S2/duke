@@ -58,6 +58,16 @@ Lists all tasks that contain the input search phrase in the task name. The searc
 
 E.g. a task with description `return book` can be found by search phrases `ReTuRn` or `rn bo`.
 
+### Mark a task as done: `done`
+Format: `done INDEX`
+
+Marks the task at the displayed index as done. The displayed index is the bullet number of the task when viewed with the command `list`. The task will now have a tick to represent completion.
+
+### Mark a task as undone: `undo`
+Format: `undo INDEX`
+
+Marks the task at the displayed index as undone. The displayed index is the bullet number of the task when viewed with the command `list`. The task will now have a cross to represent uncompletion.
+
 ### Deleting a task: `delete`
 Format: `delete INDEX`
 

@@ -19,14 +19,16 @@ public class Ui {
 
     public static final String HELP_PAGE =
             "Here are the commands I understand:\n"
+            + "help\n"
             + "list\n"
             + "todo TASK_NAME\n"
             + "event EVENT_NAME /at LOCATION\n"
             + "deadline DEADLINE_NAME /by YYYY-MM-DD\n"
+            + "find\n"
             + "done INDEX\n"
             + "undo INDEX\n"
             + "delete INDEX\n"
-            + "help\n"
+            + "clear\n"
             + "bye\n";
 
 
