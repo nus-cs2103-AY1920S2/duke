@@ -18,3 +18,4 @@ Example of usage:
 Expected outcome:
 
 `outcome`
+<img src="Ui.png" width="250">
