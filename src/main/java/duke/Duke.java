@@ -90,6 +90,8 @@ public class Duke {
     // }
 
     public String getResponse(String input) {
+        assert input.length() > 0 : "Input cannot be empty";
+
         StringBuilder response = new StringBuilder();
         String result = "";
 
