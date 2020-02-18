@@ -31,7 +31,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 -  Refer to <<Features>> for details of each command.
 
-[[Features]]
 ## Features
 
 ###
