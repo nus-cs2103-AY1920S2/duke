@@ -1,4 +1,6 @@
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 
 /**
@@ -22,6 +24,15 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
+            File file = new File("data");
+            if (!file.exists()) {
+                new File("data").mkdir();
+            }
+            try {
+                new File(filePath).createNewFile();
+            } catch (IOException IoError) {
+                System.out.println("Error in creating new file duke.txt " + IoError.getMessage());
+            }
             tasks = new TaskList();
         }
     }
@@ -38,9 +49,20 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
+            File file = new File("data");
+            if (!file.exists()) {
+                new File("data").mkdir();
+            }
+            try {
+                new File(filePath).createNewFile();
+            } catch (IOException IoError) {
+                System.out.println("Error in creating new file duke.txt " + IoError.getMessage());
+            }
             tasks = new TaskList();
         }
     }
+
+
 
     /**
      * Main driver for Duke program.
