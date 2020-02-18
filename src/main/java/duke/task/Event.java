@@ -6,38 +6,40 @@ public class Event extends Task {
     /** The date of this event. */
     protected final String at;
     /** The start and end time of this event. */
-    protected final String timeSlot;
+    protected final String timeInterval;
 
     /**
      * Constructs a new event with a date, start time and end time.
      *
      * @param description the details of the deadline
      * @param at the date of the event.
-     * @param timeSlot the start and end time of the event.
+     * @param timeInterval the start and end time of the event.
      */
-    public Event(String description, String at, String timeSlot) {
-        this(description, false, at, timeSlot);
+    public Event(String description, String at, String timeInterval) {
+        this(description, false, at, timeInterval);
     }
 
-    private Event(String description, boolean isDone, String at, String timeSlot) {
+    private Event(String description, boolean isDone, String at, String timeInterval) {
         super(description, isDone);
         this.at = at;
-        this.timeSlot = timeSlot;
+        this.timeInterval = timeInterval;
     }
 
     @Override
     public Event markDone() {
-        return new Event(description, true, at, timeSlot);
+        return new Event(description, true, at, timeInterval);
     }
 
     @Override
     public String serialize() {
-        return serialize("E", at, timeSlot);
+        return serialize("E", at, timeInterval);
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s %s)", super.toString(), at, timeSlot);
+        return String.format("[E]%s (at: %s %s)", super.toString(), at, timeInterval);
+    }
+
     }
 
     @Override
@@ -45,7 +47,7 @@ public class Event extends Task {
         if (super.equals(obj) && obj instanceof Event) {
             Event event = (Event)obj;
             return this.at.equals(event.at)
-                    && this.timeSlot.equals(event.timeSlot);
+                    && this.timeInterval.equals(event.timeInterval);
         } else {
             return false;
         }
@@ -53,6 +55,6 @@ public class Event extends Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), at, timeSlot);
+        return Objects.hash(super.hashCode(), at, timeInterval);
     }
 }
