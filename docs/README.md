@@ -24,9 +24,8 @@ Tired of being a procrastinator? Fret not! Dodo is here to make sure you do your
 
 You can save your todo, deadline, event list--all in one!
 
-###### Figure 1. Screenshot of Dodo
-
 ![Figure of Dodo](https://github.com/johannagwan/duke/blob/master/docs/Ui.png)
+##### Figure 1. Screenshot of Dodo
 
 ## 2. Quick Start
 1. Install `java 11` or above in your computer.
