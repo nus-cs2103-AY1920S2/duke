@@ -21,10 +21,8 @@ public class DoneException extends DukeException {
      */
     @Override
     public String toString() {
-        return ExceptionsConstant.FORMAT_LINE
-                + "\nSeems like you are kinda tired. Please remember to define a Task Number!\n"
-                + "Or, you could also take a break. :)\n"
-                + ExceptionsConstant.FORMAT_LINE;
+        return "Seems like you are kinda tired. Please remember to define a Task Number!\n"
+                + "Or, you could also take a break. :)";
     }
 
 }

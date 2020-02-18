@@ -1,3 +1,7 @@
 1. [X] [T] item4
 2. [X] [T] item5
 3. [X] [E] goodEvent (at: Apr 3 2019)
+4. [X] [E] someEvent (at: Mar 2 2019)
+5. [V] [E]  (at: Mar 4 2019)
+6. [X] [T]  
+7. [X] [D]  (by: Apr 3 2019)

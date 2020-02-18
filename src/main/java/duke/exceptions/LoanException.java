@@ -21,10 +21,8 @@ public class LoanException extends DukeException {
      */
     @Override
     public String toString() {
-        return ExceptionsConstant.FORMAT_LINE
-                + "\nLoans should be tagged with someone's name and a value.\n"
-                + "Please try again!\n"
-                + ExceptionsConstant.FORMAT_LINE;
+        return "Loans should be tagged with someone's name and a value.\n"
+                + "Please try again!";
     }
 
 }

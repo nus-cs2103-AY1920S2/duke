@@ -14,8 +14,7 @@ public class Ui {
      * @return String to greet the user with instructions on how to use Duke.
      */
     public static String welcome() {
-        return Constant.FORMAT_LINE
-            + "Hello, Duke here! :D \n"
+        return "Hello, Duke here! :D \n"
             + "I'm feeling good and ready to go!\n"
             + "What can I do for you?\n"
             + "Here, you can do the following:\n"
@@ -27,7 +26,8 @@ public class Ui {
             + "6. delete <task number> (deletes task labelled <task number> from the list)\n"
             + "7. find <keywords separated by space> (finds the tasks in the list with the keyword(s)) \n"
             + "8. bye (duke says bye to you :) )\n"
-            + Constant.FORMAT_LINE;
+            + "Note that all dates follow the format YYYY-MM-DD\n"
+            + "\nPS: A '[V]' indicates a completed task while a '[X]' indicates an incomplete task";
     }
 
     /**
@@ -36,10 +36,8 @@ public class Ui {
      * @return String to say farewell to the user, for now.
      */
     public static String goodbye() {
-        return Constant.FORMAT_LINE
-            + "====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D\n"
-            + "Please exit by clicking the big red X button, unless you have more things to do."
-            + Constant.FORMAT_LINE;
+        return "====> Alright byeee thanks for coming and see ya soon! <==== \n:D :D :D :D :D\n"
+            + "Please exit by clicking the big red X button, unless you have more things to do.";
     }
 
     /**
@@ -51,17 +49,15 @@ public class Ui {
      * @return String indicating removal of a given Task, of its index then and the current number of Tasks remaining.
      */
     public static String taskRemovalMessage(int index, Task removedTask, TaskList allTasks) {
-        return Constant.FORMAT_LINE
-                + "Removed Task #" + (index + 1) + ": " + removedTask
-                + "\nHope it's worth it!\nYou are now left with " + allTasks.sizeOf() + " tasks."
-                + Constant.FORMAT_LINE;
+        return "Removed Task #" + (index + 1) + ": " + removedTask
+                + "\nHope it's worth it!\nYou are now left with " + allTasks.sizeOf() + " tasks.";
     }
 
     /**
      * Gives the String for all Tasks, their number order, and their completion status for the list command.
      */
     public static String listMessage(String tasks) {
-        return Constant.FORMAT_LINE + "\n" + tasks + Constant.FORMAT_LINE;
+        return tasks;
     }
 
     /**
@@ -70,15 +66,12 @@ public class Ui {
      * @param t Task that has been completed via doTask method.
      */
     public static String taskCompleteMessage(Task t) {
-        String result = Constant.FORMAT_LINE;
         if (t.getIsDone()) {
-            result += "That's already done, try another. Or did you make a careless mistake? XD";
+            return "That's already done, try another. Or did you make a careless mistake? XD";
         } else {
-            result += "Nice! The following task has been marked completed:\n"
+            return "Nice! The following task has been marked completed:\n"
                     + "===> [V] " + t + " <===";
         }
-        result += Constant.FORMAT_LINE;
-        return result;
     }
 
     /**
@@ -87,7 +80,7 @@ public class Ui {
      * @param exceptionType String for the exception message.
      */
     public static String exceptionMessage(String exceptionType) {
-        return Constant.FORMAT_LINE + exceptionType + "\n" + Constant.FORMAT_LINE;
+        return exceptionType;
     }
 
     /**
@@ -96,7 +89,7 @@ public class Ui {
      * @param customMessage String of interest.
      */
     public static String customMessage(String customMessage) {
-        return Constant.FORMAT_LINE + customMessage + "\n" + Constant.FORMAT_LINE;
+        return customMessage;
     }
 
 }

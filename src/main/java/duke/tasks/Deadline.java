@@ -28,9 +28,7 @@ public class Deadline extends Task {
      */
     @Override
     public String taskAddedMessage() {
-        return TasksConstant.FORMAT_LINE + "\n"
-            + "==> Added unique Deadline task: " + this + "\n"
-            + TasksConstant.FORMAT_LINE;
+        return "==> Added unique Deadline task: " + this;
     }
 
     /**

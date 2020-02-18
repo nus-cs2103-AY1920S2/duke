@@ -21,11 +21,10 @@ public class InputUnclearException extends DukeException {
      */
     @Override
     public String toString() {
-        return ExceptionsConstant.FORMAT_LINE
-                + "\nPlease enter another command, this time, with "
+        return "I'm not quite sure I understand you :(\n"
+                + "Please enter another command, this time, with "
                 + "a known command word/valid number;\n"
-                + "I'm not quite sure I understand you :(\n"
-                + ExceptionsConstant.FORMAT_LINE;
+                + "You can try typing 'help' if you're unsure!";
     }
 
 }

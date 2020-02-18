@@ -30,7 +30,7 @@ public class Duke {
         this.ui = new Ui();
         this.file = new Storage();
 
-        // Initialise Duke with any last saved user data
+        // Load any last saved user data, else create a new file to store future data
         this.initialisePastUserData();
 
     }
@@ -49,7 +49,7 @@ public class Duke {
      * Loads previously saved files if any. Creates new file otherwise.
      */
     public void initialisePastUserData() {
-        // To update allTasks to last saved preferences
+        // Updates taskList to last saved items
         file.readFromLastSavedFile(taskList);
     }
 

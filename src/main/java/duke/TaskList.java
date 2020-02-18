@@ -115,7 +115,6 @@ public class TaskList {
 
         String[] commandWords = command.split("\\s"); // 0: "find", 1: keyword
 
-        // check for input invalidity
         if (!logic.satisfiesMinimumDoneCommandLength(commandWords)) {
             // invalid command
             throw new DoneException("");
@@ -126,7 +125,7 @@ public class TaskList {
         }
 
         // this is a valid command
-        // user inputs will be "done _____"
+        // user inputs will be "done <indexNumber>"
         // Take only the very next token which must be an integer
         int taskNumber = Integer.parseInt(commandWords[1]);
         return doTask(taskNumber);
@@ -220,6 +219,11 @@ public class TaskList {
                 taskNumbers[i] = Integer.parseInt(taskNumbersStringArray[i]) - i;
             }
 
+            // validity check
+            if (taskNumbers.length == 0) {
+                throw new DeleteException("");
+            }
+
             // Delete Tasks and get String result
             String deleteTaskResponse = "";
             for (int i = 0; i < taskNumbers.length; i++) {
@@ -284,10 +288,17 @@ public class TaskList {
      * @throws ToDoException Exception arising from creating To-Do Task due to wrong inputs.     *
      */
     private String addNewToDo(String command) throws ToDoException {
-        if (command.length() < 6) {
+        final int PREFIX_LENGTH_TODO = 6;
+        if (command.length() < PREFIX_LENGTH_TODO) {
             throw new ToDoException("");
         }
         String toDoCommand = command.substring("todo".length() + 1);
+
+        // validity checking
+        if (toDoCommand.equals(" ")) {
+            throw new ToDoException("");
+        }
+
         return addTaskToStored(new ToDo(toDoCommand));
     }
 
@@ -301,12 +312,14 @@ public class TaskList {
      */
     private String addNewDeadline(String command) throws DeadlineException {
         try {
-            // need to identify deadline limit
             String dateDetails = getRestriction("/by", command);
             String deadlineLimit = getPresentableDate(dateDetails);
 
-            // filter to obtain command
             String deadlineCommand = getCommand("deadline", "/by", command);
+            // validity checking
+            if (deadlineCommand.equals(" ")) {
+                throw new DeadlineException("");
+            }
 
             return addTaskToStored(new Deadline(deadlineCommand, deadlineLimit));
         } catch (Exception e) {
@@ -324,12 +337,15 @@ public class TaskList {
      */
     private String addNewEvent(String command) throws EventException {
         try {
-            // need to identify event time
             String dateDetails = getRestriction("/at", command);
             String eventTime = getPresentableDate(dateDetails);
 
-            // filter to obtain command
             String eventCommand = getCommand("event", "/at", command);
+            // validity checking
+            if (eventCommand.equals(" ")) {
+                throw new EventException("");
+            }
+
 
             return addTaskToStored(new Event(eventCommand, eventTime));
         } catch (Exception e) {

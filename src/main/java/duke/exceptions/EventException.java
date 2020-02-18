@@ -21,11 +21,9 @@ public class EventException extends DukeException {
      */
     @Override
     public String toString() {
-        return ExceptionsConstant.FORMAT_LINE
-                + "\nEvent tasks should be named/specified with time duration, Blur! XD\n"
+        return "Event tasks should be named/specified with time duration, Blur! XD\n"
                 + "The format for the time/date should be 'YYYY-MM-DD' or 'YYYY/MM/DD'\n"
-                + "Please try again!\n"
-                + ExceptionsConstant.FORMAT_LINE;
+                + "Please try again!";
     }
 
 }

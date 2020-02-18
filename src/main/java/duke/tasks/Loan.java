@@ -28,10 +28,8 @@ public class Loan extends Task {
      */
     @Override
     public String taskAddedMessage() {
-        return TasksConstant.FORMAT_LINE + "\n"
-                + "==> Added a Loan to " + this.getBorrower() + " with value of "
-                + this.getLoanValue() + "\n"
-                + TasksConstant.FORMAT_LINE;
+        return "==> Added a Loan to " + this.getBorrower() + " with value of "
+                + this.getLoanValue();
     }
 
     /**

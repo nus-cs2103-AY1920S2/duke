@@ -97,7 +97,9 @@ public class MainWindow extends AnchorPane {
      */
     private String getDukeResponse(String input) {
         String result = (input.equals("bye")) ? Ui.goodbye() : duke.run(input);
-        assert (result != null) : "Duke has to reply something, which is currently missing.";
+
+        assert (result != null || result.equals(" ")) : "Duke has to reply something, which is currently missing.";
+
         return "Duke: " + result;
     }
 

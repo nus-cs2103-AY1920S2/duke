@@ -21,11 +21,9 @@ public class ToDoException extends DukeException {
      */
     @Override
     public String toString() {
-        return ExceptionsConstant.FORMAT_LINE
-                + "\nPlease enter another todo command, this time, with "
+        return "Please enter another todo command, this time, with "
                 + "a known command word/valid number;\n"
-                + "For example, 'todo good'\n"
-                + ExceptionsConstant.FORMAT_LINE;
+                + "For example, 'todo good'";
     }
 
 }

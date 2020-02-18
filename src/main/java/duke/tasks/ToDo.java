@@ -21,9 +21,7 @@ public class ToDo extends Task {
      */
     @Override
     public String taskAddedMessage() {
-        return TasksConstant.FORMAT_LINE + "\n"
-                + "==> Added unique ToDo task: " + this + "\n"
-                + TasksConstant.FORMAT_LINE;
+        return "==> Added unique ToDo task: " + this;
     }
 
     /**

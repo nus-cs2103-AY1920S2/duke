@@ -54,7 +54,7 @@ public class Storage {
                 // This is the line of interest
                 String line = fileScanner.nextLine();
 
-                // We want to get these useful Strings using our Parser
+                // Obtain useful Strings using our Parser
                 Parser logic = new Parser();
                 String taskType = logic.determineTaskTypeFromFileLine(line);
                 String doneStatus = logic.determineTaskDoneStatusFromFileLine(line);
@@ -78,12 +78,11 @@ public class Storage {
                     int loanValue = getLoanValue(details);
                     Task currentLoan = new Loan(loanBorrower, loanValue);
 
-                    // Check if done/paid
+                    // Check if paid (here we classify 'paid' as 'done')
                     if (logic.isDone(doneStatus)) {
                         currentLoan.doTask();
                     }
 
-                    // Finally, add the correct Task
                     allTasks.addSavedTaskToStored(currentLoan);
                     break;
 
@@ -93,12 +92,10 @@ public class Storage {
                     String deadlineLimit = getDeadlineLimit(details);
                     Task currentDeadline = new Deadline(deadlineCommand, deadlineLimit);
 
-                    // Check if done
                     if (logic.isDone(doneStatus)) {
                         currentDeadline.doTask();
                     }
 
-                    // Finally, add the correct Task
                     allTasks.addSavedTaskToStored(currentDeadline);
                     break;
 
@@ -108,17 +105,15 @@ public class Storage {
                     String eventLimit = getEventTime(details);
                     Task currentEvent = new Event(eventCommand, eventLimit);
 
-                    // Check if done
                     if (logic.isDone(doneStatus)) {
                         currentEvent.doTask();
                     }
 
-                    // Finally, add the correct Task
                     allTasks.addSavedTaskToStored(currentEvent);
                     break;
 
                 default:
-                    assert false : "Tasks should either be ToDo (T), Deadline (D), or Event (E).";
+                    assert false : "Tasks should either be ToDo (T), Deadline (D), or Event (E) or Loan (L).";
                     break;
 
                 }
@@ -209,15 +204,6 @@ public class Storage {
                 details.lastIndexOf(")"));
         assert (loanValueString != null) : "Loan should have a value.";
         return Integer.parseInt(loanValueString);
-    }
-
-    /**
-     * Prints a given String.
-     *
-     * @param s String to be printed.
-     */
-    private static void print(String s) {
-        System.out.println(s);
     }
 
 }

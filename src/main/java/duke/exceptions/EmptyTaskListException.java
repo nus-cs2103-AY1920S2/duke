@@ -21,9 +21,7 @@ public class EmptyTaskListException extends DukeException {
      */
     @Override
     public String toString() {
-        return ExceptionsConstant.FORMAT_LINE
-                + "\nNo tasks! You're good to go!\nPlease exit using 'bye' command. :)\n"
-                + ExceptionsConstant.FORMAT_LINE;
+        return "No tasks! You're good to go!\nPlease exit using 'bye' command. :)";
     }
 
 
