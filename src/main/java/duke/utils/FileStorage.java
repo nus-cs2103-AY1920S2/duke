@@ -25,10 +25,14 @@ public class FileStorage implements Storage {
      * Create storage if it doesn't exist.
      * @throws IOException input exception
      */
-    public void createStorage() throws IOException {
+    public void createStorage() throws IOException, IllegalStateException {
         //relative path
         String relativePath = fileName;
         File file = new File(relativePath);
+        File parent = file.getParentFile();
+        if (!parent.exists() && !parent.mkdirs()) {
+            throw new IllegalStateException("Couldn't create dir: " + parent);
+        }
         if (file.createNewFile()) {
             System.out.println(relativePath + " Save File Created");
         } else {

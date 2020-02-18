@@ -10,7 +10,7 @@ public class Constants {
     public static final String ITALIC = "\033[3m";
     public static final String ITALIC_RESET = "\033[0m";
 
-    public static final String DUKE_FILE_PATH = "..\\duke\\data\\duke.txt";
+    public static final String DUKE_FILE_PATH = ".\\data\\duke.txt";
 
     public static final String DATE_FORMAT_1 = "yyyy-MM-dd";
     public static final String DATE_FORMAT_2 = "MMM d yyyy";

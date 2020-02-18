@@ -42,6 +42,8 @@ public class DukeWorker {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
         }
     }
 
