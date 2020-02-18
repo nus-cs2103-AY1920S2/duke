@@ -113,7 +113,7 @@ Expected outcome:
 `Nice! I've marked this task as done:`  
 &#8203;`  [E][✓] project meeting (by: Monday 3pm)`
 
-#### 2.5 `deletes` - Deletes a task
+#### 2.3.3 `deletes` - Deletes a task
 This command removes a task from your list of tasks.
 
 Usage:  
