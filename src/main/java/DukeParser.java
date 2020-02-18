@@ -10,6 +10,11 @@ public class DukeParser {
         this.tasks = tasks;
     }
 
+    /**
+     *
+     * @param command
+     * @return Bot response after processing user's command
+     */
     public String parseCommand(String command) {
 
             String[] command_broken = command.split(" ",2);

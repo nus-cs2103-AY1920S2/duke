@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-//Wrapper class for the list of tasks
+/**
+ * Wrapper class for the list of Tasks
+ */
 public class TaskList {
     private List<Task> allTasks;
     private List<Task> archivedTasks;
@@ -16,6 +18,10 @@ public class TaskList {
         return s;
     }
 
+    /**
+     * Prints current Task
+     * @return List of Current Task
+     */
     public String printTasks() {
         return getString(allTasks);
     }
@@ -58,6 +64,10 @@ public class TaskList {
         return archiveMessage;
     }
 
+    /**
+     * Prints archived task
+     * @return List of archived task
+     */
     public String showArchived() {
         return getString(archivedTasks);
     }

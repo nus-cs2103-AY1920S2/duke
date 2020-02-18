@@ -1,3 +1,6 @@
+/**
+ * Represents a to do object
+ */
 public class ToDos extends Task {
 
     public ToDos(String description, Boolean isDone) {

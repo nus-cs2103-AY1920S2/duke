@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Handles all storage in duke
+ */
 public class DukeStorage {
     private String filePath;
 
@@ -11,6 +14,10 @@ public class DukeStorage {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves tasks to a .txt file in the same directory
+     * @param tasks
+     */
     public void saveTasks(TaskList tasks) {
         List<Task> allTasks = tasks.getAllTasks();
         try (FileWriter writer = new FileWriter(filePath)) {
@@ -35,6 +42,10 @@ public class DukeStorage {
         }
     }
 
+    /**
+     * Reads .txt file from same directory
+     * @return
+     */
     public TaskList readText() {
         TaskList tasks = new TaskList();
         try {

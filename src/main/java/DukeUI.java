@@ -1,4 +1,6 @@
-
+/**
+ * User interface class for DUke
+ */
 public class DukeUI {
 
     public DukeUI() {
@@ -7,12 +9,7 @@ public class DukeUI {
     public static String showWelcomeMessage () {
         StringBuilder sb = new StringBuilder();
         sb.append("DEMOCRACY IS NON NEGOTIABLE\n");
-        sb.append( " _     ___________ ___________ _______   __ ____________ ________  ___ _____\n"
-                + "| |   |_   _| ___ \\  ___| ___ \\_   _\\ \\ / / | ___ \\ ___ \\_   _|  \\/  ||  ___|\n"
-                + "| |     | | | |_/ / |__ | |_/ / | |  \\ V /  | |_/ / |_/ / | | | .  . || |__  \n"
-                + "| |     | | | ___ \\  __||    /  | |   \\ /   |  __/|    /  | | | |\\/| ||  __|\n"
-                + "| |_____| |_| |_/ / |___| |\\ \\  | |   | |   | |   | |\\ \\ _| |_| |  | || |___\n"
-                + "\\_____/\\___/\\____/\\____/\\_| \\_| \\_/   \\_/   \\_|   \\_| \\_|\\___/\\_|  |_/\\____/\n");
+        sb.append( "HI I'M:\n\n LIBERTY PRIME" );
 
         return sb.toString();
     }
@@ -30,7 +27,7 @@ public class DukeUI {
     }
 
     public static String showCreationMsg(Task task) {
-        return "UNDERSTOOD \n" + task.toString() + "\nADDED";
+        return "UNDERSTOOD \n\n        " + task.toString() + "\nADDED";
     }
 
     public static String showDeleteMsg() {
@@ -46,7 +43,7 @@ public class DukeUI {
     }
 
     public static String showArchivedMsg(Task task) {
-        return task.toString() + "\n        IS NOW ARCHIVED";
+        return task.toString() + "\n\n        IS NOW ARCHIVED";
     }
 
 }

@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,22 +16,26 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class Duke extends Application {
 
     private DukeStorage storage;
     private TaskList tasks;
     private DukeParser parser;
+    @FXML
     private ScrollPane scrollPane;
+    @FXML
     private VBox dialogContainer;
+    @FXML
     private TextField userInput;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public Duke() {
-        String filePath = "data/tasks.txt";
+    public Duke() throws IOException {
+        String filePath = "tasks.txt";
         storage = new DukeStorage(filePath);
         tasks = storage.readText();
         parser = new DukeParser(this.tasks);
@@ -118,10 +123,10 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+    @FXML
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));

@@ -1,3 +1,6 @@
+/**
+ * Represents a Task object
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -7,7 +10,13 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public static Task createStartingTask(String[] taskParams) {
+    /**
+     * Creates a task using the .txt file at the start of the programme
+     * @param taskParams
+     * @return New task added to Task List
+     * @throws RuntimeException
+     */
+    public static Task createStartingTask(String[] taskParams) throws RuntimeException{
         String type = taskParams[0];
         boolean isDone = taskParams[1].equals("true");
         String description = taskParams[2];
@@ -35,7 +44,6 @@ public class Task {
         return isDone;
     }
 
-    //returns "O" if done, "X" if not
     public String getStatusIcon() {
         return (isDone ? "X" : "O");
     }
@@ -44,6 +52,9 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Marks a task as done
+     */
     public void markAsDone() {
         this.isDone = true;
         System.out.println(this);
