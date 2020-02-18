@@ -130,9 +130,10 @@ public class Ui {
             + "\n\ttodo - to create a new todo task"
             + "\n\tevent - to create a new event task"
             + "\n\tdeadline - to create a new deadline task"
-            + "\n\tlist - to list all tasks"
             + "\n\tdone - to mark a task as done"
             + "\n\tdelete - to delete am existing task"
+            + "\n\tlist - to list all tasks"
+            + "\n\tfind - find certain tasks"
             + "\n\thelp - to get help information"
             + "\n\texit - to leave duke";
     }
