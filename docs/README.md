@@ -5,7 +5,9 @@ Duke is a desktop chatbot that can keep track of your tasks, including its statu
 
 ### Duke GUI 
 The chatbot has an aesthetic and user-friendly GUI. It will greet you when you first start it. For every command that you put in the text field of the chat, you can either just 'Enter' or click the 'Send' button and Duke will process the input from the user.
-<img src="Ui.png" width=60% height=100% display=block><br>
+<br>
+<img src="Ui.png" width=30% display=block>
+<br>
 There is a scrollbar on the right side of the window. When the chat gets long and oy exceeds the window size, you can use the scrollbar to see the previous chat that you and Duke has had. 
 
 ### Storing Task 
