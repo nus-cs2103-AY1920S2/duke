@@ -10,6 +10,7 @@ public class DeadLineTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[D][✗] hello world (by: 02 Dec 2012)", (new Deadline("hello world", false, "2012/12/02")).toString());
+        assertEquals("[D][✗] hello world (by: 02 Dec 2012)", 
+            (new Deadline("hello world", false, "2012/12/02")).toString());
     }
 }

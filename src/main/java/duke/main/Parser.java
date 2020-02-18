@@ -1,6 +1,16 @@
 package duke.main;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.ClearAllCompleteCommand;
+import duke.command.Command;
+import duke.command.CreateDeadlineCommand;
+import duke.command.CreateEventCommand;
+import duke.command.CreateTodoCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
 
 public class Parser {
 
@@ -22,7 +32,7 @@ public class Parser {
         } else if (inputArr[0].equals("find")) {
             return new FindCommand(inputArr);
         } else if (inputArr[0].equals("delete")) {
-            if (inputArr[1].equals("complete")){
+            if (inputArr[1].equals("complete")) {
                 return new ClearAllCompleteCommand(inputArr);
             } else {
                 return new DeleteCommand(inputArr);

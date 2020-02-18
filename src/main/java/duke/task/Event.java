@@ -39,11 +39,11 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (completed) {
-            return "[E]" + Constant.CHECK_DONE + this.name + " (at: " + dateTime.format(Constant.FORMATTER_OUTPUT_DATE_TIME)
-                    + ")";
+            return "[E]" + Constant.CHECK_DONE + this.name + " (at: " 
+                + dateTime.format(Constant.FORMATTER_OUTPUT_DATE_TIME) + ")";
         } else {
-            return "[E]" + Constant.CHECK_NOTDONE + this.name + " (at: " + dateTime.format(Constant.FORMATTER_OUTPUT_DATE_TIME)
-                    + ")";
+            return "[E]" + Constant.CHECK_NOTDONE + this.name + " (at: " 
+                + dateTime.format(Constant.FORMATTER_OUTPUT_DATE_TIME) + ")";
         }
     }
 }

@@ -39,9 +39,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (completed) {
-            return "[D]" + Constant.CHECK_DONE + this.name + " (by: " + date.format(Constant.FORMATTER_OUTPUT_DATE) + ")";
+            return "[D]" + Constant.CHECK_DONE + this.name + " (by: " 
+                + date.format(Constant.FORMATTER_OUTPUT_DATE) + ")";
         } else {
-            return "[D]" + Constant.CHECK_NOTDONE + this.name + " (by: " + date.format(Constant.FORMATTER_OUTPUT_DATE) + ")";
+            return "[D]" + Constant.CHECK_NOTDONE + this.name + " (by: " 
+                + date.format(Constant.FORMATTER_OUTPUT_DATE) + ")";
         }
     }
 }

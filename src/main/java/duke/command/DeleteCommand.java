@@ -25,7 +25,9 @@ public class DeleteCommand extends Command {
      * @throws NoNumberDeleteException If task number to be deleted is not
      *                                 specified.
      * @throws UnableToSaveException   If unable to save to storage.
-     * @throws NoSuchDeleteException   If task to be deleted does not exist.
+     * @throws NoSuchTaskException     If task to be deleted does not exist.
+     * @throws NoNumberDeleteException   If no task number is specifed.
+     * @throws NotNumberException     If not a number is specified.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
@@ -34,9 +36,9 @@ public class DeleteCommand extends Command {
             throw new NoNumberDeleteException();
         }
         int taskToDelete;
-        try{ 
+        try { 
             taskToDelete = Integer.parseInt(inputArr[1]);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new NotNumberException();
         }
         if (taskToDelete > tasks.size()) {

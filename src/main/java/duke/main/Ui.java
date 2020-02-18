@@ -9,7 +9,7 @@ public class Ui {
 
     public String showDateTimeError() {
         return "☹ DATE FORMAT is yyyy/mm/dd!\n" 
-                + "TIME FORMAT is HHmm!\n" ;
+                + "TIME FORMAT is HHmm!\n";
     }
 
     public String reply(String reply) {

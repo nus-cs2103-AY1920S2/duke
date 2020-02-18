@@ -46,7 +46,8 @@ public class CreateDeadlineCommand extends Command {
         String saveReply = "Saving now....\n     ";
         saveReply += newD.toString();
         storage.saveToSave(tasks);
-        return ui.reply(saveReply + "\n" + Constant.SPACE + "Aiyo still got " + tasks.size() + " task(s), what you doing sia");
+        return ui.reply(saveReply + "\n" + Constant.SPACE 
+            + "Aiyo still got " + tasks.size() + " task(s), what you doing sia");
     }
 
     @Override

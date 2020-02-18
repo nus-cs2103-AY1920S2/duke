@@ -13,6 +13,9 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Initialises DialogBox with width and height and image.
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -40,6 +43,9 @@ public class DialogBox extends HBox {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Creates a dialog box for Duke and flips it such that user and duke alternates.
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();

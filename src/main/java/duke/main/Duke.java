@@ -34,7 +34,12 @@ public class Duke extends Application {
     private Ui ui;
     private Parser parser;
 
-    public Duke(){
+    /**
+     * Initialises the classes need for Duke.
+     * They include UI, Storage, Parser
+     * @throws UnableToLoadException If cannot load from storage.
+     */
+    public Duke() {
         ui = new Ui();
         storage = new Storage(System.getProperty("user.dir"));
         parser = new Parser();
@@ -113,7 +118,8 @@ public class Duke extends Application {
             handleUserInput();
         });
 
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(new Label(ui.sayHi()), new ImageView(duke)), new Label(Constant.LINE));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(new Label(ui.sayHi()), 
+            new ImageView(duke)), new Label(Constant.LINE));
 
     }
 
@@ -147,12 +153,13 @@ public class Duke extends Application {
         }
         
         Label dukeText = new Label(getResponse(response));
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)), new Label(Constant.LINE),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke)), new Label(Constant.LINE));
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, 
+            new ImageView(user)), new Label(Constant.LINE),
+            DialogBox.getDukeDialog(dukeText, new ImageView(duke)), new Label(Constant.LINE));
         userInput.clear();
 
         Boolean isExit = command.isExit();
-        if(isExit){
+        if (isExit) {
             stage.close();
         }
     }

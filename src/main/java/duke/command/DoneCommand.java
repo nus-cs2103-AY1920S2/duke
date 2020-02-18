@@ -25,14 +25,15 @@ public class DoneCommand extends Command {
      * @throws UnableToSaveException If unable to save to storage.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws UnableToSaveException, NoSuchTaskException, NotNumberException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) 
+        throws UnableToSaveException, NoSuchTaskException, NotNumberException {
         int taskNo;
         try {
             taskNo = Integer.parseInt(inputArr[1]) - 1;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new NotNumberException();
         }
-        if (taskNo > tasks.size()){
+        if (taskNo > tasks.size()) {
             throw new NoSuchTaskException();
         }
         tasks.setDone(taskNo);
