@@ -78,6 +78,16 @@ public class Ui {
         return output;
     }
 
+    public String showUpdate(Tracker tracker, int index, String type,
+                             String content, Storage storage) throws DukeException{
+        tracker.update(index, type, content);
+        String output = "Alright. I've updated this task:\n"
+                + "  " + tracker.showList().get(index);
+        storage.saveData(tracker.showList());
+
+        return output;
+    }
+
     public String showError(Exception exception) {
         return exception.getMessage();
     }

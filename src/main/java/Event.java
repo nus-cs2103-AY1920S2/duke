@@ -14,6 +14,11 @@ public class Event extends Task {
         this.at = LocalDate.parse(at);
     }
 
+    @Override
+    public void updateDate(String date) {
+        this.at = LocalDate.parse(date);
+    }
+
     /**
      * Returns a string describing the event in the format for saving.
      * @return String describing the event.

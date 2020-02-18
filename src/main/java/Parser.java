@@ -6,12 +6,12 @@ public class Parser {
     /**
      * Creates a parser object to make sense of the user command.
      * @param command Command given by user.
-     * @throws DukeException If command is not bye/list/done/todo/deadline/event/delete/find.
+     * @throws DukeException If command is not bye/list/done/todo/deadline/event/delete/find/update.
      */
     public Parser(String command) throws DukeException {
         boolean isValidCommand = command.equals("bye")|command.equals("list")|command.equals("done")
                 |command.equals("todo")|command.equals("deadline")|command.equals("event")
-                |command.equals("delete")|command.equals("find");
+                |command.equals("delete")|command.equals("find")|command.equals("update");
 
         if (isValidCommand) {
             this.cmd = command.toLowerCase();
@@ -49,6 +49,14 @@ public class Parser {
         }
     }
 
+    public Parser(int index, String type, String content) {
+        if (type.equals("description")) {
+        } else if (type.equals("deadline")) {
+        } else {
+        }
+
+    }
+
     public boolean isBye() {
         return this.cmd.equals("bye");
     }
@@ -67,6 +75,10 @@ public class Parser {
 
     public boolean isFind() {
         return this.cmd.equals("find");
+    }
+
+    public boolean isUpdate() {
+        return this.cmd.equals("update");
     }
 
     public String getCommand() {

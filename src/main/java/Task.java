@@ -15,6 +15,12 @@ public class Task {
         return this.content;
     }
 
+    public void updateContent(String content) {
+        this.content = content;
+    }
+
+    public void updateDate(String date) {}
+
     public String toStore() {
         if (isDone) {
             return "[\u2713] " + content;

@@ -25,6 +25,7 @@ public class Duke {
 
     public String run(String input) {
         Parser command;
+        Parser content;
         String output;
 
         try {
@@ -44,13 +45,20 @@ public class Duke {
             } else if (command.isFind()) {
                 String keyword = this.scanner.nextLine();
                 output = this.ui.showSearchResults(this.tracker, keyword);
+            } else if (command.isUpdate()) {
+                try {
+                    int index = this.scanner.nextInt() - 1;
+                    output = this.ui.showUpdate(this.tracker, index, this.scanner.next(),
+                            this.scanner.nextLine(), this.data);
+                } catch (DukeException exception) {
+                    output = this.ui.showError(exception);
+                }
             } else {
                 boolean isRemainingCommands = command.getCommand().equals("todo")
                         || command.getCommand().equals("event") || command.getCommand().equals("deadline");
                 assert isRemainingCommands;
 
                 // InvocationTargetException
-                Parser content;
 
                 try {
                     content = new Parser(this.scanner.nextLine(), command);

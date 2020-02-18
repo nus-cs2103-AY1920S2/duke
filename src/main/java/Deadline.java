@@ -14,6 +14,11 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    @Override
+    public void updateDate(String date) {
+        this.by = LocalDate.parse(date);
+    }
+
     /**
      * Returns a string describing the deadline in the format for saving.
      * @return String describing the deadline.

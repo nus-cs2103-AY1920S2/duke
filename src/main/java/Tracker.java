@@ -58,6 +58,18 @@ public class Tracker {
         return matchingTasks;
     }
 
+    public void update(int index, String type, String content) throws DukeException {
+        Task task = this.list.get(index);
+
+        if (type.equals("description")) {
+            task.updateContent(content);
+        } else if (type.equals("date")) {
+            task.updateDate(content);
+        } else {
+            throw new DukeException("OOPS!!! I can't edit that :-(");
+        }
+    }
+
     /**
      * Returns list of tasks being tracked.
      * @return List of tasks.
