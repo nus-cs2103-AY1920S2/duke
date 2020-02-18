@@ -22,7 +22,7 @@ class TaskParser extends Parser {
             throw new MissingParsedArgumentsException();
         }
 
-        Task task = new Deadline(args[0], parseDate(args[1]));
+        Task task = new Deadline(args[0], StringParser.parseDate(args[1]));
         return new AddCommand(task);
     }
 

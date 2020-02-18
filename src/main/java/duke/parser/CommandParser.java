@@ -24,7 +24,7 @@ class CommandParser extends Parser {
             throw new MissingParsedArgumentsException();
         }
 
-        int taskId = parseInt(input[1]);
+        int taskId = StringParser.parseInt(input[1]);
         return new DoneCommand(taskId);
     }
 
@@ -33,7 +33,7 @@ class CommandParser extends Parser {
             throw new MissingParsedArgumentsException();
         }
 
-        int taskId = parseInt(input[1]);
+        int taskId = StringParser.parseInt(input[1]);
         return new DeleteCommand(taskId);
     }
 

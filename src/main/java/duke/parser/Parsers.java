@@ -48,10 +48,10 @@ public class Parsers {
         default:
             if (command.strip().isEmpty()) {
                 // Blank input
-                throw new DukeException("I'm sorry. You didn't ask me anything.");
+                throw new DukeException("Speak up! I can't hear you.");
             } else {
                 // Unknown command
-                throw new DukeException("I'm sorry, but I don't know what that means :(");
+                throw new DukeException("What on earth does that mean?");
             }
         }
     }
