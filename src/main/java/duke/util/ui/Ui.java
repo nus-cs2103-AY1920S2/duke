@@ -126,7 +126,7 @@ public class Ui {
         StringBuilder returnString = new StringBuilder();
         returnString.append(String.format("Here are the matching tasks in your list:\n"));
         if (foundList.isEmpty()) {
-            returnString.append("%s~~~~~Oops! There are no matching tasks!");
+            returnString.append("~~~~~Oops! There are no matching tasks!");
         } else {
             int i = 1;
             for (Task task : foundList) {
