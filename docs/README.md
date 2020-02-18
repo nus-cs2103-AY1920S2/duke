@@ -32,7 +32,7 @@ Loan
 
 - Help
 - Add a Task
-- List down all Tasks
+- List All Tasks
 - Mark Tasks as Done
 - Find Tasks by Keywords
 - Delete Tasks
@@ -42,7 +42,7 @@ Loan
 
 ### `Help`
 
-The 'help' command provides the users with a list of instructions on how to use the chatbot.
+The `help` command provides the users with a list of instructions on how to use the chatbot.
 
 Example of usage: 
 
@@ -118,7 +118,7 @@ Expected outcome:
 
 <img src="Loan.png" alt="Loan Example" width="600" height="400"/>
 
-### `List down all Tasks`
+### `List All Tasks`
 
 To list down all Tasks that have been recorded, simply use the command `list`.
 
@@ -189,7 +189,7 @@ Example of usage:
 
 - Suppose we wanted to Delete Tasks 3 (Samuel's Birthday Party) and 5 (GooD) from the list.
 
-<img src="ExampleList.png" alt="Example List" width="500"/>
+<img src="ExampleList.png" alt="Example List"/>
 
 `delete 3 5`
 
@@ -203,7 +203,7 @@ Example of usage:
 
 - Suppose we wanted to delete all the Tasks in the list.
 
-<img src="ExampleList.png" alt="Example List" width="500"/>
+<img src="ExampleList.png" alt="Example List"/>
 
 `delete all`
 
