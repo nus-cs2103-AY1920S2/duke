@@ -31,8 +31,9 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
     - todo <br>
     `todo [description]` <br>
      Example: `todo borrow book`<br>
-     Expected Output: ![](todo_success_image.png)
-                      Picture: todo Success Image
+     Expected Output: 
+     ![](todo_success_image.png)
+                     
      <br>
      
     - deadline <br>
