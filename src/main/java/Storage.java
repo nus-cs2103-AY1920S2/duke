@@ -5,13 +5,19 @@ import java.io.FileReader;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.nio.file.Path;
+import java.util.Scanner;
+import java.io.File;
+
 /**
  * This class loads, stores and updates user's todo-list in a local txt file.
  */
 
 public class Storage {
+    private File file = Path.of(System.getProperty("user.dir")).resolve("data/output.txt").toFile();
     public Storage() {
     }
+
 
     /**
      * This method add a new item to the txt file.
@@ -33,30 +39,30 @@ public class Storage {
     public TaskList loadTxt(Ui ui) throws DateTimeParseException {
         TaskList list = new TaskList();
         try {
-            BufferedReader file = new BufferedReader(new FileReader("data/output.txt"));
-            String line;
-            while ((line = file.readLine()) != null) {
-                if (line.equals("")) {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String[] data = scanner.nextLine().split(" \\| ");
+                if (data[0].equals("")) {
                     continue;
                 }
-                line = line.trim();
+                data[0] = data[0].trim();
                 boolean done;
                 String[] splitted;
                 String[] tmp;
-                splitted = line.split(" ", 2);
-                tmp = splitted[1].split(" ", 2);
-
-                if (line.charAt(4) == '0') {
+                splitted = data[0].split(" ", 2);
+                tmp = splitted[1].split(" \\(", 2);
+                if (data[0] .charAt(4) == '0') {
                     done = true;
                 } else {
                     done = false;
                 }
-                if (line.charAt(1) == 'E') {
-                    tmp[1] = tmp[1].replaceAll("\\(at: ","");
+                if (data[0] .charAt(1) == 'E') {
+
+                    tmp[1] = tmp[1].replaceAll("at: ","");
                     tmp[1] = tmp[1].replaceAll("\\)","");
                     list.addItem(new Event(tmp[0], LocalDate.parse(tmp[1]), done));
-                } else if (line.charAt(1) == 'D') {
-                    tmp[1] = tmp[1].replaceAll("\\(by: ","");
+                } else if (data[0] .charAt(1) == 'D') {
+                    tmp[1] = tmp[1].replaceAll("by: ","");
                     tmp[1] = tmp[1].replaceAll("\\)","");
                     list.addItem(new Deadline(tmp[0], LocalDate.parse(tmp[1]), done));
                 } else {
@@ -64,7 +70,6 @@ public class Storage {
                 }
             }
             ui.printLoad();
-            file.close();
         } catch (DateTimeParseException e) {
             ui.printDateErr();
         } catch (IOException e) {

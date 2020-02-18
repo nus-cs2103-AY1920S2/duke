@@ -37,9 +37,9 @@ public class Ui {
         return bye;
     }
 
-    public String removeTask(TaskList list, int index) {
-        return ("Noted. I've removed this task:\n" + space + list.items.get(index) + space
-                + "Now you have " + list.count + " task");
+    public String removeTask(int count, String task) {
+        return ("Noted. I've removed this task:\n" + space + task
+                + "Now you have " + count + " task");
     }
 
     public String searchTask() {

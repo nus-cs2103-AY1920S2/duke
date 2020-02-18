@@ -54,9 +54,10 @@ public class Parser {
                     assert list.items.get(index - 1).getDone() == true;
                     return ui.markDone(list.items.get(index - 1));
                 } else {
-                    storage.updateTxt(list.items.get(index - 1).currentString(), "", ui);
+                    storage.updateTxt(list.items.get(index - 1).checkString(), "", ui);
+                    String taskDeleted = list.items.get(index - 1).toString();
                     list.delete(index - 1);
-                    return ui.removeTask(list, index);
+                    return ui.removeTask(list.count, taskDeleted);
                 }
             } else if (tmp[0].equals("todo")) {
                 if (task.equals("")) {
@@ -74,7 +75,6 @@ public class Parser {
                 if (e.length < 2) {
                     return "Time cannot be empty";
                 }
-                assert e.length >= 2;
                 Event event = new Event(e[0], LocalDate.parse(e[1]));
                 list.addItem(event);
                 storage.addTxt(event.currentString(), ui);
@@ -87,7 +87,6 @@ public class Parser {
                 if (d.length < 2) {
                     return "Time cannot be empty";
                 }
-                assert d.length >= 2;
                 Deadline ddl = new Deadline(d[0], LocalDate.parse(d[1]));
                 list.addItem(ddl);
                 storage.addTxt(ddl.currentString(), ui);

@@ -22,7 +22,7 @@ public class Todo extends Item {
      * used for string substitution in the txt file when it is marked done.
      */
     public String tobeReplaced() {
-        String temp = "   [T][" + 1 + "] " + super.getName() + "\n";
+        String temp = "   [T][" + 0 + "] " + super.getName() + "\n";
         return temp;
     }
 
@@ -30,9 +30,21 @@ public class Todo extends Item {
      * Returns the string corresponds to the current item.
      */
     public String currentString() {
-        String temp = "   [T][" + 0 + "] " + super.getName() + "\n";
+        String temp = "   [T][" + 1 + "] " + super.getName() + "\n";
         return temp;
     }
+
+    public String checkString() {
+        String temp = "   [T][";
+        if (super.getDone()) {
+            temp += "0";
+        } else {
+            temp += "1";
+        }
+        temp += "] " + super.getName();
+        return temp;
+    }
+
 
     public LocalDate getDate() {
         return LocalDate.now();
