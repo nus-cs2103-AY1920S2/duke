@@ -122,7 +122,7 @@ public class Ui {
             "6. delete 2",
             "7. bye");
 
-        dialogContainer.getChildren().add(getDialogLabel(introText));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(getDialogLabel(introText), new ImageView(duke)));
 
         //step 3
         sendButton.setOnMouseClicked((event) -> {
