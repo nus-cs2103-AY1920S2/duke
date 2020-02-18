@@ -46,9 +46,10 @@ Example of usage:
 
 Expected outcome:
 
-![Help Command](Help.png)
+![Help Command](Help.png){:height="400px" width="600px"}
 
 ### `Add a Task`
+
 - Adding a Task requires users to know what kind of Task they would like to add. Here, users can choose
 from ToDo, Deadline, Event, or Loan. Below are some provided examples.
 
@@ -56,6 +57,7 @@ from ToDo, Deadline, Event, or Loan. Below are some provided examples.
 The format for adding Tasks is as follows:
 <Task Type> <Task Name> </separator> <Date as YYYY-MM-DD>
 ```
+
 #### `Add a ToDo`
 
 For ToDo Tasks, simply type `todo` and the Task name.
@@ -68,7 +70,7 @@ Example of usage:
 
 Expected outcome:
 
-![ToDo Example](ToDo.png)
+![ToDo Example](ToDo.png){:height="400px" width="600px"}
 
 #### `Add a Deadline`
 
@@ -82,7 +84,7 @@ Example of usage:
 
 Expected outcome:
 
-![Deadline Example](Deadline.png)
+![Deadline Example](Deadline.png){:height="400px" width="600px"}
 
 #### `Add an Event`
 
@@ -96,7 +98,7 @@ Example of usage:
 
 Expected outcome:
 
-![Event Example](Event.png)
+![Event Example](Event.png){:height="400px" width="600px"}
 
 #### `Add a Loan`
 
@@ -110,7 +112,7 @@ Example of usage:
 
 Expected outcome:
 
-![Loan Example](Loan.png)
+![Loan Example](Loan.png){:height="400px" width="600px"}
 
 ### `List down all Tasks`
 
@@ -122,15 +124,16 @@ Example of usage:
 
 Expected outcome:
 
-![List Command](List.png)
+![List Command](List.png){:height="400px" width="600px"}
 
 Should the list of Tasks be empty, running the `list` command gives the outcome below.
 
-![Empty List](EmptyList.png)
+![Empty List](EmptyList.png){:height="400px" width="600px"}
 
 ### `Marking Tasks as Done`
 
 To indicate a Task has been Done, we simply use `done <index number>`.
+
 - `[V]` denotes a Task as Complete, while `[X]` denotes a Task as Incomplete.
 - Note: The `index number` would be the same we obtain from performing a `list` command.
 
@@ -142,7 +145,7 @@ Example of usage:
 
 Expected outcome:
 
-![Done Command](Done.png)
+![Done Command](Done.png){:height="400px" width="600px"}
 
 ### `Find Tasks by Keywords`
 
@@ -152,13 +155,13 @@ To do so, simply use the `find <keyword>` command.
 Example of usage:
 
 - Suppose we want to find any Task containing the variant of 'good' from the list shown.
-![Full List](FullList.png)
+![Full List](FullList.png){:height="400px" width="600px"}
 
 - Performing the `find good` command provides the desired outcome.
 
 Expected outcome:
 
-![Find Command](Find.png)
+![Find Command](Find.png){:height="400px" width="600px"}
 
 ### `Delete Tasks`
 
@@ -215,7 +218,7 @@ Example of usage:
 
 Expected outcome:
 
-![Bye](Bye.png)
+![Bye](Bye.png){:height="400px" width="600px"}
 
 - Note: Upon exit, should there have been any changes (addition, removal, update) of Tasks, a file (LastSavedTasks.txt)
 is created.
