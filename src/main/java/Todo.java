@@ -21,7 +21,7 @@ public class Todo extends Item {
      * Returns the string before it is marked done,
      * used for string substitution in the txt file when it is marked done.
      */
-    public String replace() {
+    public String tobeReplaced() {
         String temp = "   [T][" + "\u2718" + "] " + super.getName() + "\n";
         return temp;
     }
@@ -29,7 +29,7 @@ public class Todo extends Item {
     /**
      * Returns the string corresponds to the current item.
      */
-    public String now() {
+    public String currentString() {
         return this.toString();
     }
 
