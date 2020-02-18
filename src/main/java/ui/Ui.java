@@ -17,10 +17,19 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
+    /**
+     * Creates a Ui Object with the system's I/O as input and output streams, if the user did not provide.
+     */
     public Ui() {
         this(System.in, System.out);
     }
 
+    /**
+     * Creates a Ui Object with the specified InputStreams and Printstreams, which need not be the in-built
+     * System I/O.
+     * @param in The InputStream to be used by the program.
+     * @param out The PrintStream to be used by the program.
+     */
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;

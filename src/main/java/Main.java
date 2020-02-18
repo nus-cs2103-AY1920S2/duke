@@ -24,6 +24,7 @@ public class Main extends Application {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Please check your I/O and re-execute the program.");
         }
     }
 }
