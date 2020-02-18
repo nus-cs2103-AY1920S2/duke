@@ -41,7 +41,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // initializes the application with a welcome message
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, dukeImage));
+        // setPrefHeight to prevent truncation of dialogContainer
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
     }
 
@@ -68,7 +70,9 @@ public class MainWindow extends AnchorPane {
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
+                    // terminates the JavaFX application
                     Platform.exit();
+                    // terminates the currently running JVM
                     System.exit(0);
                 }
             }, 500);
