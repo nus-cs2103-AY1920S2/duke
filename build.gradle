@@ -9,6 +9,9 @@ plugins {
 group "duke"
 version "0.2.0"
 
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
 repositories {
     mavenCentral()
 }
@@ -41,8 +44,7 @@ checkstyle {
 shadowJar {
     archiveBaseName = "duke"
     archiveVersion = "0.2.0"
-    archiveClassifier = null
-    archiveAppendix = null
+    classifier = ""
 }
 
 javafx {
