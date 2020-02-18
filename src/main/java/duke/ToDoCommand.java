@@ -22,6 +22,7 @@ public class ToDoCommand extends Command {
      */
     public String execute(Ui ui, Storage storage, TaskList taskList) {
         Task t = new Todo(getIndex());
+        assert t != null;
         taskList.addTask(t);
         storage.store(taskList.getEntireList());
         return ui.printTodoComplete(t, taskList.getTaskListSize());
