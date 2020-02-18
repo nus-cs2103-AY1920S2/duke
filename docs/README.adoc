@@ -119,11 +119,6 @@ Format: `bye`
 Task list data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== View Help : `i`
-
-Notably will display the list of features and commands available as well as their uses. +
-Format : `i`
-
 == Command Summary
 
 * *todo* `todo title` +
