@@ -13,12 +13,12 @@ public class DoneCommand extends Command {
     public DoneCommand(String[] cmdArgs) throws DukeException {
         // TODO: add varargs (etc: done 4 2 1)
         if (!hasValidNumOfArgs(cmdArgs.length)) {
-            throw new InsufficientArgumentsException("☹ OOPS!!! DONE command expects 1 integer argument!");
+            throw new InsufficientArgumentsException("OOPS!!! DONE command expects 1 integer argument!");
         } else {
             try {
                 this.index = Integer.parseInt(cmdArgs[1]) - 1;
             } catch (NumberFormatException ex) {
-                throw new DukeException("☹ OOPS!!! DONE command expects 1 integer argument!");
+                throw new DukeException("OOPS!!! DONE command expects 1 integer argument!");
             }
         }
     }

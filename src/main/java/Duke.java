@@ -1,5 +1,3 @@
-package duke;
-
 import duke.command.Command;
 import duke.command.Parser;
 import duke.exception.DukeException;
@@ -7,24 +5,29 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.Scanner;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class Duke {
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    public Storage storage;
+    public TaskList tasks;
+    public Ui ui;
 
     /**
      * Instantiates a Duke instance with a path to a save file.
+     *
      * @param filePath The save file location relative to the project root
      */
     public Duke() {
         this.ui = new Ui();
+        this.storage = new Storage("data/duke.txt");
+        this.tasks = new TaskList(storage.loadTasks());
     }
 
     /**
      * The main method of the Duke class.
+     *
      * @param args Arguments to be passed into Duke
      */
     public static void main(String[] args) {
@@ -59,5 +62,32 @@ public class Duke {
         }
 
         Ui.printMessage("Bye! Hope you visit again soon!");
+    }
+
+    public String getResponse(String input) {
+        String response;
+
+        // Change stdout for duke
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException dukeException) {
+            // Display error message
+            System.out.print(dukeException.getMessage());
+        }
+
+        response = output.toString();
+        response = response.trim();
+
+        // Reset stdout for duke
+        System.setOut(System.out);
+        return response;
+    }
+
+    public String printWelcome() {
+        return Ui.printWelcomeMessage();
     }
 }

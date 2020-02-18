@@ -58,7 +58,7 @@ public class TaskList {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             if (i != tasks.size() - 1) {
-                result.append(String.format("%d. %s\n\t", i + 1, tasks.get(i)));
+                result.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
             } else {
                 result.append(String.format("%d. %s", i + 1, tasks.get(i)));
             }

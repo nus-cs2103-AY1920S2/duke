@@ -16,11 +16,11 @@ public class DeadlineCommand extends Command {
 
     public DeadlineCommand(String[] cmdArgs) throws DukeException {
         if (!hasValidNumOfArgs(cmdArgs.length)) {
-            throw new InsufficientArgumentsException("☹ OOPS!!! The description of a DEADLINE cannot be empty!");
+            throw new InsufficientArgumentsException("OOPS!!! The description of a DEADLINE cannot be empty!");
         } else {
             String[] deadlineArgs = cmdArgs[1].split(" /by ", 2);
             if (!hasValidNumOfArgs(deadlineArgs.length)) {
-                throw new InsufficientArgumentsException("☹ OOPS!!! Missing deadline parameters!");
+                throw new InsufficientArgumentsException("OOPS!!! Missing deadline parameters!");
             } else {
                 this.deadlineArgs = deadlineArgs;
             }
@@ -36,7 +36,7 @@ public class DeadlineCommand extends Command {
             ui.displayAddTaskSuccessMsg(newTask, tasks.getNumberOfTasks());
             storage.storeTasks(tasks.getTasks());
         } catch (DateTimeParseException ex) {
-            Ui.printMessage("☹ OOPS!!! Please enter a valid date: YYYY-MM-DD");
+            Ui.printMessage("OOPS!!! Please enter a valid date: YYYY-MM-DD");
         }
     }
 
