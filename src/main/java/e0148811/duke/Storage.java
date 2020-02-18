@@ -10,9 +10,11 @@ import java.util.List;
 
 public class Storage {
     private String path;
+    private Ui ui;
 
-    public Storage(String filePath) {
+    public Storage(String filePath, Ui ui) {
         path = filePath;
+        this.ui = ui;
     }
 
     public List<Task> load() throws DukeException {
@@ -42,13 +44,13 @@ public class Storage {
         isDone = lineByWord[1].equals("T");
         PriorityLevel level;
         switch (lineByWord[2]) {
-        case "!!!":
+        case "t":
             level = PriorityLevel.TOP;
             break;
-        case "!!":
+        case "h":
             level = PriorityLevel.HIGH;
             break;
-        case ".":
+        case "l":
             level = PriorityLevel.LOW;
             break;
         default:
@@ -70,11 +72,16 @@ public class Storage {
         }
     }
 
-    public void writeToHardDisk(List<Task> list) throws IOException {
-        FileWriter writer = new FileWriter("data/duke.txt");
-        for (Task t : list) {
-            writer.write(t.toSimplerString() + "\n");
+    public void writeToHardDisk(List<Task> list) throws DukeException {
+        try {
+            FileWriter writer = new FileWriter("data/duke.txt");
+            for (Task t : list) {
+                writer.write(t.toSimplerString() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            ui.throwIOException();
         }
-        writer.close();
+
     }
 }

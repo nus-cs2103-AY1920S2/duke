@@ -16,7 +16,7 @@ public class Ui {
     }
 
     public void throwInvalidIndexException() throws DukeException {
-        throw new DukeException("Invalid index.\n" + tasks.getNumOfTasksInString()
+        throw new DukeException("Invalid index.\n" + tasks.getTotalNumOfTasks()
                 + " Please note that the index is one-based (begins with 1 instead of 0).");
     }
 
@@ -62,6 +62,7 @@ public class Ui {
 
     public void throwUnknownCommandException() throws DukeException {
         throw new DukeException("I don't understand this instruction.\n"
-                + "The valid instructions include: todo, deadline, event, list, done, bye.");
+                + "The valid instructions include: b/bye, c/clear, d/deadline, " +
+                "done, e/vent, f/find, l/list, p/priority, r/remove, t/todo");
     }
 }

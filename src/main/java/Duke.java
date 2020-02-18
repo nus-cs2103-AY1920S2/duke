@@ -9,7 +9,6 @@ import e0148811.duke.TaskList;
 import e0148811.duke.Todo;
 import e0148811.duke.Ui;
 
-import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -17,7 +16,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class Duke {
-    private static int ONE_TO_CONVERT_1_BASED_INDEX_INTO_0_BASED = 1;
+    private static int ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX = 1;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -29,14 +28,14 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, ui);
         parser = new Parser(ui);
         try {
             ui.showLogo();
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            tasks = new TaskList(ui);
         } finally {
             ui.linkToTaskList(tasks);
             ui.greet();
@@ -44,13 +43,19 @@ public class Duke {
     }
 
     public void run() {
-        while (!parser.readInputLine().equals("bye")) {
+        while (true) {
+            parser.readInputLine();
             String[] instructionByWord = parser.breakIntoWords();
             try {
                 int lengthOfArray = instructionByWord.length;
                 String actionWord = instructionByWord[0].toLowerCase();
                 Task task;
                 switch (actionWord) {
+                case "b":
+                    // Fallthrough
+                case "bye":
+                    ui.sayGoodbye();
+                    return;
                 case "c":
                     // Fallthrough
                 case "clear":
@@ -62,11 +67,8 @@ public class Duke {
                     task = createDeadlineOrEventTask("deadline", instructionByWord, lengthOfArray);
                     addAndStoreTask(task);
                     break;
-                case "delete":
-                    doneOrDeleteATask("delete", instructionByWord, lengthOfArray);
-                    break;
                 case "done":
-                    doneOrDeleteATask("done", instructionByWord, lengthOfArray);
+                    doneOrRemoveTask("done", instructionByWord, lengthOfArray);
                     break;
                 case "e":
                     // Fallthrough
@@ -82,12 +84,17 @@ public class Duke {
                 case "l":
                     // Fallthrough
                 case "list":
-                    printList(lengthOfArray);
+                    printList(instructionByWord, lengthOfArray);
                     break;
                 case "p":
                     // Fallthrough
                 case "priority":
                     prioritiseTask(instructionByWord, lengthOfArray);
+                    break;
+                case "r":
+                    // Fallthrough
+                case "remove":
+                    doneOrRemoveTask("remove", instructionByWord, lengthOfArray);
                     break;
                 case "t":
                     // Fallthrough
@@ -101,11 +108,10 @@ public class Duke {
                 default:
                     ui.throwUnknownCommandException();
                 }
-            } catch (DukeException | IOException e) {
+            } catch (DukeException e) {
                 ui.printErrorMessage(e);
             }
         }
-        ui.sayGoodbye();
     }
 
     private void prioritiseTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
@@ -113,26 +119,17 @@ public class Duke {
             ui.throwWrongFormatException("\"priority index_of_the_task level_of_priority"
                     + " (which can be one of the following: l/low, n/normal, h/high, t/top)\"");
         }
-        int index = getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_1_BASED_INDEX_INTO_0_BASED;
+        int index = getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;
         if (index < 0 || index >= tasks.getList().size()) {
             ui.throwInvalidIndexException();
         }
         assignPriorityToTask(instructionByWord[2], index);
+        storage.writeToHardDisk(tasks.getList());
     }
 
-    private void assignPriorityToTask(String level, int index) throws DukeException {
-        if (level.equals("h") || level.equals("high")) {
-            tasks.assignPriorityToTask(index, PriorityLevel.HIGH);
-        } else if (level.equals("t") || level.equals("top")) {
-            tasks.assignPriorityToTask(index, PriorityLevel.TOP);
-        } else if (level.equals("n") || level.equals("normal")) {
-            tasks.assignPriorityToTask(index, PriorityLevel.NORMAL);
-        } else if (level.equals("l") || level.equals("low")) {
-            tasks.assignPriorityToTask(index, PriorityLevel.LOW);
-        } else {
-            ui.throwOtherException("Invalid level of priority.\n"
-                    + "Please input one of the following: l/low, n/normal, h/high, t/top");
-        }
+    private void assignPriorityToTask(String priorityLevel, int index) throws DukeException {
+        PriorityLevel level = determinePriorityLevel(priorityLevel);
+        tasks.assignPriorityToTask(index, level);
         tasks.showTaskPrioritised(index);
     }
 
@@ -147,38 +144,82 @@ public class Duke {
         return index;
     }
 
-    void clearList(String[] instructionByWord, int lengthOfArray) throws DukeException, IOException {
-        if (lengthOfArray != 2
-                || !((instructionByWord[1].equals("all")) || (instructionByWord[1].equals("done")))) {
-            ui.throwWrongFormatException("\"clear all/done\"");
+    void clearList(String[] instructionByWord, int lengthOfArray) throws DukeException {
+        if (lengthOfArray == 1) {
+            clearAllTasks();
         } else {
-            String word = instructionByWord[1];
-            if (word.equals("all")) {
-                System.out.println("Are sure you want to clear all the tasks in the list?");
+            if (instructionByWord[1].contains("a")) {
+                clearAllTasks();
+            } else if (instructionByWord[1].contains("d")) {
+                clearCompletedTasks();
             } else {
-                System.out.println("Are sure you want to clear all completed tasks in the list?");
-            }
-            System.out.println("Type \"yes\" or \"y\" to proceed. Type any other input to cancel.");
-            String input = parser.readInputLine();
-            if (input.equals("yes") || input.equals("y")) {
-                if (word.equals("all")) {
-                    tasks.clearTheList();
-                    System.out.println("List is now empty.");
-                } else {
-                    tasks.cleanTheList();
-                }
-                storage.writeToHardDisk(tasks.getList());
-            } else {
-                System.out.println("Canceled.");
+                ui.throwWrongFormatException("\"clear\" (if you want to remove all the tasks) " +
+                        "OR \"clear d/done\" (if you only want to remove tasks that are marked done)");
             }
         }
     }
 
-    private void printList(int lengthOfArray) throws DukeException {
-        if (lengthOfArray != 1) {
-            ui.throwWrongFormatException("\"list\"");
+    private void clearCompletedTasks() throws DukeException {
+        System.out.println("Are sure you want to clear all completed tasks in the list?");
+        System.out.println("Type \"yes\" or \"y\" to proceed. Type any other input to cancel.");
+        String input = parser.readInputLine();
+        if (input.equals("yes") || input.equals("y")) {
+            tasks.removeCompletedTasks();
+            System.out.println("All completed tasks are removed.");
+            storage.writeToHardDisk(tasks.getList());
+        } else {
+            System.out.println("Clearing canceled.");
         }
-        tasks.printList();
+    }
+
+    private void clearAllTasks() throws DukeException {
+        System.out.println("Are sure you want to clear all the tasks in the list?");
+        System.out.println("Type \"yes\" or \"y\" to proceed. Type any other input to cancel.");
+        String input = parser.readInputLine();
+        if (input.equals("yes") || input.equals("y")) {
+            tasks.removeAllTasks();
+            System.out.println("All tasks are removed. List is now empty.");
+            storage.writeToHardDisk(tasks.getList());
+        } else {
+            System.out.println("Clearing canceled.");
+        }
+    }
+
+    private void printList(String[] instructionByWord, int lengthOfArray) throws DukeException {
+        if (lengthOfArray == 1) {
+            tasks.printList();
+        } else if (lengthOfArray == 2) {
+            PriorityLevel level = determinePriorityLevel(instructionByWord[1]);
+            tasks.printListBasedOnPriority(level);
+        } else {
+            ui.throwWrongFormatException("\"list\"" + "OR" + "\"list a_priority_level" +
+                    "(which include: l/low, n/normal, h/high, t/top)\"");
+        }
+    }
+
+    private PriorityLevel determinePriorityLevel(String priorityLevel) throws DukeException {
+        switch (priorityLevel) {
+        case "h":
+            // Fallthrough
+        case "high":
+            return PriorityLevel.HIGH;
+        case "l":
+            // Fallthrough
+        case "low":
+            return PriorityLevel.LOW;
+        case "n":
+            // Fallthrough
+        case "normal":
+            return PriorityLevel.NORMAL;
+        case "t":
+            // Fallthrough
+        case "top":
+            return PriorityLevel.TOP;
+        default:
+            ui.throwOtherException("Invalid level of priority.\n"
+                    + "Please input one of the following: l/low, n/normal, h/high, t/top");
+        }
+        return PriorityLevel.NORMAL;
     }
 
     void findTasks(String keyword, int lengthOfArray) throws DukeException {
@@ -192,7 +233,7 @@ public class Duke {
             String taskDescription = task.getDescription();
             String[] descriptionByWord = taskDescription.split(" ");
             for (String s : descriptionByWord) {
-                if (s.equals(keyword)) {
+                if (s.contains(keyword)) {
                     selectedList.put(j + 1, task);
                     count++;
                     break;
@@ -205,39 +246,37 @@ public class Duke {
         }
     }
 
-    private void doneOrDeleteATask(String command, String[] instructionByWord, int lengthOfArray)
+    private void doneOrRemoveTask(String command, String[] instructionByWord, int lengthOfArray)
             throws DukeException {
-        assert command.equals("done") || command.equals("delete") :
-                "only two types of commands (done and delete) are considered for this method";
+        assert command.equals("done") || command.equals("remove") :
+                "only two types of commands (done and remove) are considered for this method";
         if (lengthOfArray != 2) {
             if (command.equals("done")) {
                 ui.throwWrongFormatException(
                         "\"done a_positive_integer_indicating_the_index_of_the_task_done\"");
             } else {
                 ui.throwWrongFormatException(
-                        "\"delete a_positive_integer_indicating_the_index_of_the_task_you_want_to_delete\"");
+                        "\"remove a_positive_integer_indicating_the_index_of_the_task_you_want_to_remove\"");
             }
         }
         try {
-            int index = Integer.parseInt(instructionByWord[1]) - ONE_TO_CONVERT_1_BASED_INDEX_INTO_0_BASED;
+            int index = Integer.parseInt(instructionByWord[1]) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;
             if (index >= tasks.getList().size() || index < 0) {
                 ui.throwInvalidIndexException();
             } else {
                 if (command.equals("done")) {
                     tasks.markATaskDone(index);
                 } else {
-                    tasks.deleteATask(index);
+                    tasks.removeATask(index);
                 }
             }
             storage.writeToHardDisk(tasks.getList());
         } catch (NumberFormatException e) {
             ui.throwWrongFormatException("\"done a_positive_integer\"");
-        } catch (IOException e) {
-            ui.throwIOException();
         }
     }
 
-    void addAndStoreTask(Task t) throws IOException {
+    void addAndStoreTask(Task t) throws DukeException {
         tasks.addTaskToList(t);
         storage.writeToHardDisk(tasks.getList());
     }

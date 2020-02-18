@@ -60,16 +60,16 @@ public abstract class Task {
         String priorityIndication = " ";
         switch (level) {
         case LOW:
-            priorityIndication = ".";
+            priorityIndication = "l";
             break;
         case NORMAL:
-            priorityIndication = "!";
+            priorityIndication = "n";
             break;
         case HIGH:
-            priorityIndication = "!!";
+            priorityIndication = "h";
             break;
         case TOP:
-            priorityIndication = "!!!";
+            priorityIndication = "t";
         }
         String isDone;
         if (this.isDone) {
@@ -82,5 +82,9 @@ public abstract class Task {
 
     public String getDescription() {
         return task;
+    }
+
+    public PriorityLevel getPriorityLevel() {
+        return level;
     }
 }
