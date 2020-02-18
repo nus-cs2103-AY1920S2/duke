@@ -21,16 +21,17 @@ public class Todo extends Item {
      * Returns the string before it is marked done,
      * used for string substitution in the txt file when it is marked done.
      */
-    public String replace() {
-        String temp = "   [T][" + "\u2718" + "] " + super.getName() + "\n";
+    public String tobeReplaced() {
+        String temp = "   [T][" + 1 + "] " + super.getName() + "\n";
         return temp;
     }
 
     /**
      * Returns the string corresponds to the current item.
      */
-    public String now() {
-        return this.toString();
+    public String currentString() {
+        String temp = "   [T][" + 0 + "] " + super.getName() + "\n";
+        return temp;
     }
 
     public LocalDate getDate() {

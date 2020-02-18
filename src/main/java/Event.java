@@ -30,16 +30,16 @@ public class Event extends Item {
      * Returns the string before it is marked done, used for string substitution
      * in the txt file when it is marked done.
      */
-    public String replace() {
-        String temp = "   [E][" + "\u2718" + "] " + super.getName() + " (at: " + date + ")\n";
+    public String tobeReplaced() {
+        String temp = "   [E][" + 1 + "] " + super.getName() + " (at: " + date + ")\n";
         return temp;
     }
 
     /**
      * Returns the string corresponds to the current item.
      */
-    public String now() {
-        String temp = "   [E]" + super.toString() + " (at: " + date + ")\n";
+    public String currentString() {
+        String temp =  "   [E][" + 0 + "] " + super.getName() + " (by: " + date + ")\n";
         return temp;
     }
 
