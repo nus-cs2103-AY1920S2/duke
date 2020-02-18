@@ -1,11 +1,12 @@
 package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 /**
 Represents the Duke object with which the user interacts.
  */
 public class Duke {
-
     public static final String FILE_PATH = "data/data.txt";
     public static final String BYE_COMMAND = "bye";
     public static final String DONE_COMMAND = "done";
@@ -16,8 +17,10 @@ public class Duke {
     public static final String EVENT = "event";
     public static final String LIST = "list";
     public static final String TASK_DESCRIPTION_ERROR = "OOPS, task description cannot be empty";
-    public static final String INPUT_ERROR_MESSAGE = "OOPS, I don't understand this input. Please use a known command and try again";
-    public static final String FILE_SAVING_ERROR = "Error saving to file. Please check if 'data.txt' is present in '/data/";
+    public static final String INPUT_ERROR_MESSAGE = "OOPS, I don't understand this input. Please use a known command "
+        + "and try again";
+    public static final String FILE_SAVING_ERROR = "Error saving to file. Please check if 'data.txt' is present in "
+        + "'/data/";
 
     private Storage storage;
     private TaskList tasks;
@@ -26,8 +29,8 @@ public class Duke {
 
 
     /**
-     * Creates a Duke Instance with given filePath
-     * @param filePath
+     * Creates a Duke Instance with given filePath.
+     * @param filePath is a String describing the relative path of the File object to which Duke will write/read.
      */
     public Duke(String filePath) {
         this.ui = new Ui();
