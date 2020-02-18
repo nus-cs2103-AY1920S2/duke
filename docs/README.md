@@ -31,8 +31,8 @@ Ooooooh here is the user guide for Duke.
 7. Find tasks that contains specific keywords
 8. Help to show commands usable. 
 9. Bye
-## Usage
 
+## Usage
 ### `todo [description]` - Adds a todo task.  
 Example of usage: 
 
