@@ -74,7 +74,7 @@ public class Ui {
             try {
                 manager.setTaskAsDone(indexOfTaskDone);
             } catch (ArrayIndexOutOfBoundsException ex) {
-                System.out.println("Done must be followed by a number");
+                System.out.println("Done must be followed by a number.");
             } catch (IndexOutOfBoundsException ex) {
                 System.out.println("There is no task with that index! ");
             }
