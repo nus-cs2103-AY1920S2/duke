@@ -28,8 +28,8 @@ public class ReplyFormat {
      * @param numOfIndent number of additional indent required to add
      */
     public void addSentence(String sentence, int numOfIndent) {
-        message = message + indentation + setAdditionalIndent(numOfIndent) + sentence + indentation+'\n';
-        assert message.contains(indentation + setAdditionalIndent(numOfIndent) + sentence + indentation+'\n')
+        message = message + indentation + setAdditionalIndent(numOfIndent) + sentence + indentation + '\n';
+        assert message.contains(indentation + setAdditionalIndent(numOfIndent) + sentence + indentation + '\n')
                 : "Message are not added inside";
     }
 

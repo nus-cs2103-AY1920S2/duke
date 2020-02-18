@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.Duke;
 import duke.DukeException;
 
 import duke.task.Deadline;
@@ -11,7 +12,6 @@ import duke.tasklist.TaskList;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.File;
-import java.nio.file.Files;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +30,7 @@ public class Storage {
     protected Path filePath;
     protected String absolutePath;
     protected Scanner taskScanner;
+    protected String fileSeparator;
 
     /**
      * Class constructor of Storage which take in filePath in String format.
@@ -38,6 +39,7 @@ public class Storage {
      */
     public Storage(String filePath) throws DukeException {
         setHomeAndFilePath(filePath.split("/"));
+        createFile(absolutePath);
         initialiseScanner();
     }
 
@@ -47,31 +49,14 @@ public class Storage {
      * @param path Indicate the path of the file located.
      */
     private void setHomeAndFilePath(String... path) {
-        this.home = System.getProperty("user.dir");
-        this.filePath = Paths.get(this.home, copyFilePath(path));
+        this.home = Paths.get("").toAbsolutePath().toString();
+        this.filePath = Paths.get(this.home, path);
         this.absolutePath = this.filePath.toAbsolutePath().toString();
+        this.fileSeparator = File.separator;
     }
 
     /**
-     * Copy file path to another array and add "src" at the first index of the String array.
-     *
-     * @param path File path to be copy
-     * @return File path with "src" at the first index of the String array.
-     */
-    private String[] copyFilePath(String... path) {
-        String[] filePath = new String[path.length + 1];
-        filePath[0] = "src";
-
-        int i = 1;
-        for (String word : path) {
-            filePath[i] = word;
-            i++;
-        }
-        return filePath;
-    }
-
-    /**
-     * Initialise Scanner to the filepath, if file not exists, create new file.
+     * Initialise Scanner to the filepath, throw DukeException when file not exist.
      *
      * @throws DukeException Occur when file is not exist at that path.
      */
@@ -79,7 +64,7 @@ public class Storage {
         try {
             this.taskScanner = new Scanner(this.filePath);
         } catch (IOException e) {
-            createFile(this.absolutePath);
+            new DukeException("Unable to scan the file!");
         }
     }
 
@@ -88,16 +73,6 @@ public class Storage {
      */
     public String getHomeDirectory() {
         return home;
-    }
-
-    /**
-     * Check file exist at that path.
-     *
-     * @param path path the file located
-     * @return true: File exists, false: File not exists
-     */
-    public boolean checkFileExists(Path path) {
-        return Files.exists(path);
     }
 
     /**
@@ -203,7 +178,6 @@ public class Storage {
     public void saveTasks(TaskList taskList) throws DukeException {
         int numOfTasks = taskList.getAmountOfTask();
         int num = 1;
-        createFile(absolutePath);
         clearFile(absolutePath);
         while (numOfTasks != 0) {
             addTask(taskList.getTask(num));
@@ -230,7 +204,7 @@ public class Storage {
     public void createFile(String path) throws DukeException {
         try {
             File file = new File(path);
-            makeDirectory(retrieveFileDirectoryFromAbsolutePath(path));
+            createDirectory();
             file.createNewFile();
         } catch (IOException e) {
             throw new DukeException("Sorry! I am unable to create new file at the path!");
@@ -238,14 +212,12 @@ public class Storage {
     }
 
     /**
-     * Return the directory back without the file name back.
-     *
-     * @param path Path to the file.
-     * @return Directory without the file name.
+     * Create directory with data folder.
      */
-    private String retrieveFileDirectoryFromAbsolutePath(String path) {
-        return path.substring(0, path.lastIndexOf('\\'));
+    public void createDirectory() {
+        makeDirectory(home + fileSeparator + "data");
     }
+
 
     /**
      * Create Directory based on the path given if it does not exists.
@@ -253,8 +225,9 @@ public class Storage {
      * @param path path to be created.
      */
     private void makeDirectory(String path) {
-        if(!checkFileExists(filePath)) {
-            new File(path).mkdirs();
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdir();
         }
     }
 

@@ -5,6 +5,10 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     String javaFxVersion = '11'
 
@@ -41,10 +45,6 @@ checkstyle {
 
 group 'seedu.duke'
 version '0.1.0'
-
-repositories {
-    mavenCentral()
-}
 
 application {
     // Change this to your main class.

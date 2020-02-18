@@ -35,7 +35,7 @@ public class Ui {
     }
 
     /**
-     * Set isGui to false
+     * Set isGui to false.
      */
     public void setNotGui() {
         isGui = false;
