@@ -44,9 +44,9 @@ public abstract class Item {
         return this.name;
     }
 
-    public abstract String replace();
+    public abstract String tobeReplaced();
 
-    public abstract String now();
+    public abstract String currentString();
 
     public abstract LocalDate getDate();
 

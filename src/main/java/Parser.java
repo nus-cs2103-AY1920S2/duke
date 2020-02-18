@@ -49,11 +49,12 @@ public class Parser {
                 int index = Integer.parseInt(tmp[1]);
                 if (tmp[0].equals("done")) {
                     list.items.get(index - 1).markDone();
-                    storage.updateTxt(list.items.get(index - 1).replace(), list.items.get(index - 1).now(), ui);
+                    storage.updateTxt(list.items.get(index - 1).tobeReplaced(),
+                            list.items.get(index - 1).currentString(), ui);
                     assert list.items.get(index - 1).getDone() == true;
                     return ui.markDone(list.items.get(index - 1));
                 } else {
-                    storage.updateTxt(list.items.get(index - 1).now(), "", ui);
+                    storage.updateTxt(list.items.get(index - 1).currentString(), "", ui);
                     list.delete(index - 1);
                     return ui.removeTask(list, index);
                 }
@@ -63,7 +64,7 @@ public class Parser {
                 }
                 Todo todo = new Todo(task);
                 list.addItem(todo);
-                storage.addTxt(todo.now(), ui);
+                storage.addTxt(todo.currentString(), ui);
                 return ui.addTask(list);
             } else if (tmp[0].equals("event")) {
                 if (task.equals("")) {
@@ -75,7 +76,7 @@ public class Parser {
                 }
                 Event event = new Event(e[0], LocalDate.parse(e[1]));
                 list.addItem(event);
-                storage.addTxt(event.now(), ui);
+                storage.addTxt(event.currentString(), ui);
                 return ui.addTask(list);
             } else if (tmp[0].equals("deadline")) {
                 if (task.equals("")) {
@@ -87,7 +88,7 @@ public class Parser {
                 }
                 Deadline ddl = new Deadline(d[0], LocalDate.parse(d[1]));
                 list.addItem(ddl);
-                storage.addTxt(ddl.now(), ui);
+                storage.addTxt(ddl.currentString(), ui);
                 return ui.addTask(list);
             }  else if (tmp[0].equals("find")) {
                 return ui.searchTask() + list.search(task);
