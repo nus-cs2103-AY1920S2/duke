@@ -1,38 +1,38 @@
 # User Guide
 
-##Table of Contents
-* [1. Introduction](##1.-introduction)
-* [2. Quick Start](##2.-quick-start)
-* [3. Feature](###3.-feature)
-    * [3.1. Chatting](###3.1.-chatting)
-    * [3.2. Load task immediately from hard disk](###3.2.-load-task-immediately-from-hard-disk)
-    * [3.3. Add a new task](###3.3.-add-a-new-task)
-    * [3.4. Display list of tasks](###3.4.-display-list-of-tasks)
-    * [3.5. Mark task as done](###-3.5.-mark-task-as-done)
-    * [3.6. Delete a task](###3.6.-delete-a-task)
-    * [3.7. Find a task](###3.7.-find-a-task)
-    * [3.8. Close the chatbot with user input](###3.8.-close-the-chatbot-with-user-input)
-* [4. Usage](##4.-usage)
-    * [4.1. Add a new task](###4.1.-add-a-new-task)
-    * [4.2. `list`](###4.2.-`list`)
-    * [4.3. `done [index of task]`](###4.3.-`done [index of task]`)
-    * [4.4. `delete [index of task]`](###4.4.-`delete [index of task]`)
-    * [4.5. `find [keyword]`](###4.5.-`find [keyword]`)
+## Table of Contents
+* [1. Introduction](#1-introduction)
+* [2. Quick Start](#2-quick-start)
+* [3. Feature](#3-feature)
+    * [3.1. Chatting](#31-chatting)
+    * [3.2. Load task immediately from hard disk](#32-load-task-immediately-from-hard-disk)
+    * [3.3. Add a new task](#33-add-a-new-task)
+    * [3.4. Display list of tasks](#34-display-list-of-tasks)
+    * [3.5. Mark task as done](#35-mark-task-as-done)
+    * [3.6. Delete a task](#36-delete-a-task)
+    * [3.7. Find a task](#37-find-a-task)
+    * [3.8. Close the chatbot with user input](#38close-the-chatbot-with-user-input)
+* [4. Usage](#4-usage)
+    * [4.1. Add a new task](#41-add-a-new-task)
+    * [4.2. `list`](#42-list)
+    * [4.3. `done [index of task]`](#43-done-[index-of-task])
+    * [4.4. `delete [index of task]`](#44-delete-[index-of-task])
+    * [4.5. `find [keyword]`](#45-find-[keyword])
 
 ## 1. Introduction
 Tired of being a procrastinator? Fret not! Dodo is here to make sure you do your work.
 
 You can save your todo, deadline, event list--all in one!
 
-######Figure 1. Screenshot of Dodo
+###### Figure 1. Screenshot of Dodo
 
-[Figure of Dodo](https://github.com/johannagwan/duke/blob/master/docs/Ui.png)
+![Figure of Dodo](https://github.com/johannagwan/duke/blob/master/docs/Ui.png)
 
 ## 2. Quick Start
 1. Install `java 11` or above in your computer.
 2. Download the `jar` file [here](https://github.com/johannagwan/duke/releases/tag/v0.2)
 3. In your terminal, run `java -jar [path to jar file]` to run the jar file.
-4. Type your input accordingly. List of commands are available at [Section 4](##4.-usage). 
+4. Type your input accordingly. List of commands are available at [Section 4](#4-usage). 
 
 ## 3. Feature
 ### 3.1. Chatting
@@ -91,7 +91,7 @@ Gotcha. Added this to your list:
 Now you got 1 task in your list!
 ```
 
-####4.1.2. `deadline [description] /by [due date in yyyy-mm-dd]`
+#### 4.1.2. `deadline [description] /by [due date in yyyy-mm-dd]`
 Creates a new deadline task with a description and a due date.
 
 Example of usage: `deadline assignment 1 /by 2020-02-02`
@@ -103,7 +103,7 @@ Gotcha. Added this to your list:
 Now you got 2 tasks in your list!
 ```
 
-####4.1.3. `event [description] /at [date in yyyy-mm-dd]`
+#### 4.1.3. `event [description] /at [date in yyyy-mm-dd]`
 Creates a new event task with a description and a date.
 
 Example of usage: `event formal dinner /at 2020-02-16`
