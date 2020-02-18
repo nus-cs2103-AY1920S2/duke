@@ -5,27 +5,27 @@
 
 3. [Features](#features)
 
-+ 3.1 [Overview](#overview)
+    3.1 [Overview](#overview)
 
-+ 3.2 [Task List](#task-list)
+    3.2 [Task List](#task-list)
 
-+ 3.3 [Storage](#storage)
+    3.3 [Storage](#storage)
 
-4\. [Usage](#usage)
+4. [Usage](#usage)
 
-+ 4.1 [`bye`](#41-bye)
+    4.1 [`bye`](#41-bye)
   
-+ 4.2 [`todo`](#42-todo-taskaction)
+    4.2 [`todo`](#42-todo-taskaction)
   
-+ 4.3 [`deadline`](#43-deadline-taskaction-by-date-time)
+    4.3 [`deadline`](#43-deadline-taskaction-by-date-time)
   
-+ 4.4 [`event`](#44-event-taskaction-at-date-time)
+    4.4 [`event`](#44-event-taskaction-at-date-time)
   
-+ 4.5 [`list`](#45-list)
+    4.5 [`list`](#45-list)
   
-+ 4.6 [`find`](#46-find-taskaction)
+    4.6 [`find`](#46-find-taskaction)
 
-+ 4.7 [`done`](#47-done-index)
+    4.7 [`done`](#47-done-index)
 
 ## Introduction
 
@@ -59,7 +59,7 @@ tasks.
 
 ## Usage
 
-### 4.1  `bye`
+### ```4.1 bye```
 
 Exits from the application.
 
@@ -71,7 +71,7 @@ Expected outcome:
 
 `Bye. Hope to see you again soon!`
 
-### 4.2  `todo [TaskAction]`
+### ```4.2  todo [TaskAction]```
  
 Adds a todo task into the list.
 
@@ -87,7 +87,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### 4.3  `deadline [TaskAction] /by [Date Time]`
+### ```4.3 deadline [TaskAction] /by [Date Time]```
 
 Adds a task representing a deadline to the list with a deadline specified
 
@@ -103,7 +103,7 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
 
-### 4.4  `event [TaskAction] /at [Date Time]`
+### ```4.4 event [TaskAction] /at [Date Time]```
 
 Adds a task representing an event to the list with the time specified
 
@@ -119,7 +119,7 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ```
 
-### 4.5  `list`
+### ```4.5 list```
 
 Prints all the tasks in the list with their indexes.
 
@@ -136,7 +136,7 @@ Here are the tasks in your list:
 3. [E][x] book sharing (at: Feb 20 2020, 8:40PM)
 ```
 
-### 4.6  `find [TaskAction]` 
+### ```4.6 find [TaskAction]```
 
 Finds all tasks whose TaskAction contains the keyword specified.
 
@@ -152,7 +152,7 @@ Here are the matching tasks in your list:
 2. [T][x] borrow book (at: Feb 20 2020, 8:40PM)`
 ```
 
-### 4.7  `done [Index]` 
+### ```4.7 done [Index]```
 
 Mark indexed tasks as done.
 
