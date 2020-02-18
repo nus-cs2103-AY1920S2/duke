@@ -86,12 +86,16 @@ public class Ui {
      * @param keyword keyword to find.
      * @return message showing all tasks in the task list that contains the keyword the user has inputted.
      */
-    public String printTasksFound(ArrayList<Task> taskList, String keyword) {
+    public String printTasksFound(ArrayList<Task> taskList, String keyword) throws DukeException {
         strToReturn = "I have found these matching items from your task list:\n";
+        String originalString = strToReturn;
         for (Task task : taskList) {
             if (task.getCommand().contains(keyword)) {
                 strToReturn = strToReturn + task + "\n";
             }
+        }
+        if (strToReturn.equals(originalString)) {
+            throw new DukeException("ITEM_NOT_FOUND");
         }
         return strToReturn;
     }
@@ -103,7 +107,7 @@ public class Ui {
      * @return message showing all tasks saved in the task list.
      */
     public String printList(ArrayList<Task> taskList) {
-        strToReturn = "The below is what you have told me so far. Have you completed them?\n";
+        strToReturn = "\u263A" + " The below is what you have told me so far. Have you completed them?\n";
         for (Task task : taskList) {
             strToReturn = strToReturn + task + "\n";
         }

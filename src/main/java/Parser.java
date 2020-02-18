@@ -37,6 +37,21 @@ public class Parser {
     }
 
     /**
+     * Parses a command to find a certain task by searching for a keyword.
+     *
+     * @param command keyword inputted by user to look for a certain task.
+     * @return message showing tasks that contain the keyword the user has inputted.
+     * @throws DukeException if keyword to look for is not specified.
+     */
+    public String handleFind(String command) throws DukeException {
+        String[] strArr = command.split(" ", 2);
+        if (strArr.length == 1) {
+            throw new DukeException("UNK_TASK_TO_FIND");
+        }
+        return ui.printTasksFound(taskList, strArr[1]);
+    }
+
+    /**
      * Parses a 'Todo' event.
      *
      * @param command command inputted by user to add a Todo task.
@@ -167,8 +182,7 @@ public class Parser {
             } else if (command.contains("delete")) {
                 return handleDelete(command);
             } else if (command.contains("find")) {
-                String[] strArr = command.split(" ", 2);
-                return ui.printTasksFound(taskList, strArr[1]);
+                return handleFind(command);
             } else if (command.contains("update")) {
                 return handleUpdate(command);
             } else {

@@ -40,8 +40,7 @@ public class Storage {
             }
             return taskList;
         } else {
-            boolean isFileCreated = file.createNewFile();
-
+            boolean fileCreated = file.createNewFile();
             throw new DukeException("LOAD_ERROR");
         }
     }
