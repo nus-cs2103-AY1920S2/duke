@@ -3,6 +3,7 @@ package duke;
 import duke.exception.DukeException;
 
 import duke.exception.MissingParsedArgumentsException;
+import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -16,9 +17,6 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,16 +115,13 @@ public class Storage {
             throw new MissingParsedArgumentsException();
         }
 
-        boolean hasIsDoneArgument = isBoolean(args[1]);
-
-        if (!hasIsDoneArgument) {
-            // Task could not be read properly
-            throw new DukeException("Arguments cannot be used to construct a valid task.");
-        }
-
         Task task = readTaskType(args);
-        task = markTaskIfDone(args[1], task);
 
+        boolean isDone = Parser.parseBoolean(args[1], "1", "0");
+
+        if (isDone) {
+            task = task.markDone();
+        }
         return task;
     }
 
@@ -181,7 +176,7 @@ public class Storage {
             throw new MissingParsedArgumentsException();
         }
 
-        return new Deadline(args[2], parseDate(args[3]));
+        return new Deadline(args[2], Parser.parseDate(args[3]));
     }
 
     /**
@@ -210,84 +205,5 @@ public class Storage {
      */
     private boolean hasNumArguments(String[] input, int length) {
         return input.length == length;
-    }
-
-    /**
-     * Return true if a token can be parsed as a boolean, otherwise false.
-     * The token must either be a "0" or "1".
-     *
-     * @param token a token read from a file input.
-     * @return true if the token can be parsed as a boolean, otherwise false.
-     */
-    private boolean isBoolean(String token) {
-        String trueInput = "1";
-        String falseInput = "0";
-
-        return token.equals(trueInput) || token.equals(falseInput);
-    }
-
-    /**
-     * Parses a boolean from a string.
-     *
-     * @param input a string to convert into a boolean.
-     * @return the boolean representation of the string.
-     * @throws DukeException if input cannot be parsed as a boolean.
-     */
-    private boolean parseBoolean(String input) throws AssertionError {
-        String trueInput = "1";
-        String falseInput = "0";
-
-        assert input.equals(trueInput) || input.equals(falseInput) : "Invalid input - " + input;
-
-        if (input.equals(trueInput)) {
-            return true;
-        } else if (input.equals(falseInput)) {
-            return false;
-        } else {
-            throw new AssertionError();
-            // throw new DukeException("Could not parse input as a boolean.\n"
-            //        + "Inputs that are true: 0\n"
-            //        + "Inputs that are false: 1");
-        }
-    }
-
-    /**
-     * Parses a date from a string.
-     *
-     * @param input a string to convert into a date, in yyyy-mm-dd format.
-     * @return the date representation of the string.
-     * @throws DukeException if input cannot be parsed as a date object.
-     */
-    private LocalDate parseDate(String input) throws DukeException {
-        try {
-            return LocalDate.parse(input, DateTimeFormatter.ISO_LOCAL_DATE);
-
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Please ensure your input matches the date format:\n"
-                    + " yyyy-mm-dd.");
-        }
-    }
-
-    /**
-     * Marks a task as completed or not based on a token read from a file input.
-     *
-     * @param isCompleted a token read from file input representing whether
-     *                    the task has been completed or not.
-     * @param task the task read from a file input.
-     * @return a task that has been marked as completed based on a token read from
-     *         a file input.
-     */
-    private Task markTaskIfDone(String isCompleted, Task task) {
-        // TODO: Abstract out this check
-        assert isBoolean(isCompleted) : "Invalid token - " + isCompleted;
-        assert !task.isDone() : "Task should not be marked as completed when constructed";
-
-        boolean isDone = parseBoolean(isCompleted);
-
-        if (isDone) {
-            return task.markDone();
-        } else {
-            return task;
-        }
     }
 }
