@@ -2,6 +2,7 @@
  * Represents a normal task with only a description.
  */
 public class Todo extends Task {
+
     /**
      * Constructor that takes in the description of the task.
      *
@@ -9,6 +10,12 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+        type = "Todo";
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 
     @Override

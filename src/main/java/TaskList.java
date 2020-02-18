@@ -8,7 +8,7 @@ import java.util.List;
 public class TaskList {
     private List<Task> tasks;
 
-    private TaskList(List<Task> tasks) {
+    protected TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 

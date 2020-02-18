@@ -14,11 +14,11 @@ public class GuiDuke extends Duke {
     public GuiDuke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        tasks = new TaskList();
         try {
             tasks = storage.load();
         } catch (FileNotFoundException e) {
             // fail silently
-            tasks = new TaskList();
         }
     }
 

@@ -6,6 +6,7 @@ import java.util.Date;
  * Represents an event with a description, start time and end time.
  */
 public class Event extends Task {
+
     Date startTime;
     Date endTime;
 
@@ -20,6 +21,7 @@ public class Event extends Task {
     public Event(String description, String timeRange) {
         super(description);
 
+        type = "Event";
         isSnoozeable = true;
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm");
@@ -30,6 +32,11 @@ public class Event extends Task {
 
         startTime = format.parse(times[0], new ParsePosition(0));
         endTime = format.parse(times[1], new ParsePosition(0));
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 
     /**
