@@ -104,7 +104,7 @@ public class MainWindow extends AnchorPane {
         if (input.equals("bye")) {
             Timer timer = new Timer();
             TimerTask exitTask = new TimerTask() {
-                public void run () {
+                public void run() {
                     Platform.exit();
                 }
             };

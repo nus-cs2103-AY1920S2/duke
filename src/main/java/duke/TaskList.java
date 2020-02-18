@@ -295,8 +295,8 @@ public class TaskList {
      * @throws ToDoException Exception arising from creating To-Do Task due to wrong inputs.     *
      */
     private String addNewToDo(String command) throws ToDoException {
-        final int PREFIX_LENGTH_TODO = 6;
-        if (command.length() < PREFIX_LENGTH_TODO) {
+        int todoPrefixLength = 6;
+        if (command.length() < todoPrefixLength) {
             throw new ToDoException("");
         }
         String toDoCommand = command.substring("todo".length() + 1);
