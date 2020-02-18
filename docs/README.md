@@ -185,4 +185,5 @@ Bye!!! See you again :)
 ![Duke Ui](bye.png)
 
 ## Acknowledgements
-Credit to Jeffry Lum for the fxml and java files for JAVAFX GUI -  [JavaFx TutorialPart 4](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md).
+Credit to Jeffry Lum for the fxml and java files for JAVAFX GUI -  [JavaFx TutorialPart 4](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md).  
+Credit to Software Engineering Education addressbook-level2 for code Organization - [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
