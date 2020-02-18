@@ -27,6 +27,8 @@ public class ToDoCommand implements Command {
      * @param storage Storage object to read and write TaskList state from files
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null && ui != null && storage != null; //Precondition: non-null arguments
+        
         Task newTask = new ToDo(description);
         tasks.addTask(newTask);
         

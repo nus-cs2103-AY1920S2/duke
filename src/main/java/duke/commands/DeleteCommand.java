@@ -27,6 +27,8 @@ public class DeleteCommand implements Command {
      * @param storage Storage object to read and write TaskList state from files
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null && ui != null && storage != null; //Precondition: non-null arguments
+        
         try {
             Task task = tasks.removeTask(taskIndex - 1);
             ui.showRemoveTaskMessage(task, tasks.size());

@@ -19,6 +19,8 @@ public class FindCommand implements Command {
      * @param storage Storage object to read and write TaskList state from files
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null && ui != null && storage != null; //Precondition: non-null arguments
+        
         ui.showMatchingTasksMessage();
         
         int c = 0;

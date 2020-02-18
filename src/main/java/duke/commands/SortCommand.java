@@ -14,6 +14,8 @@ public class SortCommand implements Command {
      * Tasks without a date (e.g. `ToDo`) will be placed after all tasks with a date.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null && ui != null && storage != null; //Precondition: non-null arguments
+        
         tasks.sort();
         
         ui.showSortMessage();

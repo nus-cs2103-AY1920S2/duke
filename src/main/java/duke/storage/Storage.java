@@ -25,12 +25,16 @@ public class Storage {
     private ArrayList<Task> loadTaskState()
         throws IOException, ClassNotFoundException, ClassCastException {
         FileInputStream f = new FileInputStream(STORAGE_SAVE_PATH);
-        ObjectInputStream o = new ObjectInputStream(f);
+        ObjectInputStream out = new ObjectInputStream(f);
         
         @SuppressWarnings("unchecked") //necessary due to unchecked cast to ArrayList<Task>
-        ArrayList<Task> tasks = (ArrayList<Task>)o.readObject();
+        ArrayList<Task> tasks = (ArrayList<Task>)out.readObject();
         
-        o.close();
+        for (Object obj : tasks) {
+            assert obj instanceof Task;
+        }
+        
+        out.close();
         
         return tasks;
     }
@@ -52,6 +56,8 @@ public class Storage {
     }
 
     private void saveTaskState(ArrayList<Task> tasks) throws IOException {
+        assert tasks != null;
+        
         //recursively create directories to save path if they don't exist
         Files.createDirectories(Paths.get(STORAGE_SAVE_PATH).getParent());
         
@@ -68,6 +74,8 @@ public class Storage {
      * @throws DukeException if the `tasks` list cannot be saved to file
      */
     public void save(ArrayList<Task> tasks) throws DukeException {
+        assert tasks != null;
+        
         try {
             saveTaskState(tasks);
         } catch (IOException e) {

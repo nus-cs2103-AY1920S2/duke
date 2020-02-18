@@ -17,6 +17,9 @@ public class Event extends DatedTask {
      */
     public Event(String description, LocalDate eventTime) {
         super(description);
+        
+        assert description != null && eventTime != null; //Precondition: non-null arguments
+        
         this.eventTime = eventTime;
     }
 

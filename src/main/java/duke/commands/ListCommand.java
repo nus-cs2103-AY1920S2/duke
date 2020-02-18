@@ -13,6 +13,8 @@ public class ListCommand implements Command {
      * Prints the tasks in the task list to the UI.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null && ui != null && storage != null; //Precondition: non-null arguments
+        
         for (int i = 0; i < tasks.size(); i++) {
             ui.showNumberedEntry(i + 1, tasks.getTask(i));
         }
