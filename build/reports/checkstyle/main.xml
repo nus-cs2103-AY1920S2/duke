@@ -12,6 +12,8 @@
 </file>
 <file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/AddCommand.java">
 </file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/CheckDupCommand.java">
+</file>
 <file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/Command.java">
 </file>
 <file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/DeleteCommand.java">
@@ -23,6 +25,8 @@
 <file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/FindCommand.java">
 </file>
 <file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/ListCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/DuplicateTaskError.java">
 </file>
 <file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/EmptyDateError.java">
 </file>

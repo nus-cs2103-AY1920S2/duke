@@ -20,18 +20,6 @@ public class Exceptions extends Exception {
 
     }
 
-
-    /**
-     * Gets the string rep type of task with error.
-     *
-     * @return type of task.
-     */
-    public String getType() {
-
-        return type;
-
-    }
-
     /**
      * String representation of the exception.
      *

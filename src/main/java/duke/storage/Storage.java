@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Constructor.
+     *
      * @param path refers to the path of file.
      */
     public Storage(String path) {
@@ -74,15 +75,15 @@ public class Storage {
                     if (status.equals("Y")) {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.T, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]), Task.Types.T, Task.Status.Y);
 
                     } else {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.T, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]), Task.Types.T, Task.Status.N);
 
                     }
-                    lines ++;
+                    lines++;
                     break;
 
                 case "D":
@@ -90,15 +91,15 @@ public class Storage {
                     if (status.equals("Y")) {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.D, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]), Task.Types.D, Task.Status.Y);
 
                     } else {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.D, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]), Task.Types.D, Task.Status.N);
 
                     }
-                    lines ++;
+                    lines++;
                     break;
 
                 case "E":
@@ -106,16 +107,16 @@ public class Storage {
                     if (status.equals("Y")) {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.E, Task.Status.Y);
+                                LocalDateTime.parse(contentArr[4]), Task.Types.E, Task.Status.Y);
 
 
                     } else {
 
                         taskList.addTask(contentArr[2], LocalDateTime.parse(contentArr[3]),
-                                LocalDateTime.parse(contentArr[4]),Task.Types.E, Task.Status.N);
+                                LocalDateTime.parse(contentArr[4]), Task.Types.E, Task.Status.N);
 
                     }
-                    lines ++;
+                    lines++;
                     break;
 
                 default:

@@ -68,7 +68,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
 
-        if(duke.getIsExit()) {
+        if (duke.getIsExit()) {
 
             PauseTransition pause = new PauseTransition(Duration.seconds(2.0));
             pause.setOnFinished(event -> Main.end());

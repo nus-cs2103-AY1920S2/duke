@@ -4,8 +4,8 @@ package duke.exceptions;
  * The DuplicateTask program is an error thrown when user inputs
  * an already existing task.
  *
- * @version 1.1
- * @since 17/2/2020
+ * @version 1.2
+ * @since 19/2/2020
  */
 public class DuplicateTaskError extends Exceptions {
 
@@ -22,6 +22,20 @@ public class DuplicateTaskError extends Exceptions {
     @Override
     public String toString() {
 
-        return "OPPS! The task already exists!";
+        if (super.type.equals("T")) {
+
+            return "OPPS! The todo task already exists!";
+
+        } else if (super.type.equals("D")) {
+
+            return "OPPS! The deadline task already exists!";
+
+        }
+
+        assert super.type.equals("E") : "Wrong task type!";
+
+        return "OPPS! The event task already exists!";
+
     }
+
 }

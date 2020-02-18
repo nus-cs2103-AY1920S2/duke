@@ -3,8 +3,8 @@ package duke.exceptions;
 /**
  * The EmptyDateError program is an error thrown when user input is missing required date.
  *
- * @version 1.1
- * @since 9/2/2020
+ * @version 1.2
+ * @since 19/2/2020
  */
 public class EmptyDateError extends Exceptions {
 
@@ -21,6 +21,14 @@ public class EmptyDateError extends Exceptions {
     @Override
     public String toString() {
 
-        return "OPPS! The date of a " + super.getType() + " cannot be empty.";
+        if (super.type.equals("D")) {
+
+            return "OPPS! The date of a deadline task cannot be empty.";
+
+        }
+
+        assert super.type.equals("E") : "Wrong task type!";
+
+        return "OPPS! The date of a event task cannot be empty.";
     }
 }

@@ -25,7 +25,19 @@ public class CheckDupCommand extends Command {
         super(storage, taskList);
     }
 
-    public String executeCommand(String[] taskDescriptionArr, LocalDateTime[] dateTime) {
+    /**
+     * Checks if the task user wants to add
+     * already exists in the list.
+     *
+     * @param taskDescriptionArr is a parsed task description which
+     *                           contains information such as date
+     *                           of task.
+     *
+     * @param dateTime is a an array containing date and time
+     *                 of the task.
+     * @return true if there is duplicate and false otherwise.
+     */
+    public boolean executeCommand(String[] taskDescriptionArr, LocalDateTime[] dateTime) {
 
         ArrayList taskList = super.taskList.getList();
 
@@ -40,13 +52,13 @@ public class CheckDupCommand extends Command {
 
                 if (dateTime[0].isEqual(dateTimeCurrent[0]) && dateTime[1].isEqual(dateTimeCurrent[1])) {
 
-                    return "t";
+                    return true;
                 }
 
             }
 
         }
 
-        return "f";
+        return false;
     }
 }

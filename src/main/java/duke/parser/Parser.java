@@ -15,13 +15,14 @@ import java.time.format.DateTimeFormatter;
 /**
  * The Parser program passes user input, date and time related to a task.
  *
- * @version 1.2
- * @since 17/2/2020
+ * @version 1.3
+ * @since 19/2/2020
  */
 public class Parser {
 
     /**
-     * Parses user input.
+     * Calls relevant parser or throws error if
+     * input is incorrect.
      *
      * @param input refers to the user input.
      * @return string array consisting of the parsed input.
@@ -29,17 +30,206 @@ public class Parser {
      */
     public String[] parseUserInput(String input) throws Exception {
 
+        boolean isValidInput = checkValidInput(input);
+
+        if (!isValidInput) {
+
+            throw new InvalidInputError();
+
+        }
+
+        String typeOfCommand = getTypeOfCommand(input);
+
+        if (typeOfCommand.equals("invalid")) {
+
+            throw new InvalidInputError();
+
+        } else if (typeOfCommand.equals("add")) {
+
+            return parseAddCommand(input);
+
+        } else if (typeOfCommand.equals("notAdd")) {
+
+            return parseCommand(input);
+        }
+
+        return new String[3];
+    }
+
+    /**
+     * Parses date and time of the task. If task do not have date, a dummy date
+     * is used.
+     *
+     * @param dateTime the date and time of the task.
+     * @return parsed date and time in form of LocalDateTime object.
+     * @throws InvalidDateError is an error thrown when date has incorrect format.
+     */
+    public LocalDateTime[] parseDateTime(String dateTime, String type) throws InvalidDateError {
+
+
+        String[] split = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
+        LocalDateTime[] parsed = new LocalDateTime[2];
+
+        if (type.equals("T")) {
+
+            parsed[0] = LocalDateTime.parse("12/12/1212 12:12", formatter);
+            parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
+
+        } else if (type.equals("E")) {
+
+            split = dateTime.split(" to ");
+
+            try {
+
+                parsed[0] = LocalDateTime.parse(split[0], formatter);
+                parsed[1] = LocalDateTime.parse(split[1], formatter);
+
+            } catch (Exception e) {
+
+                throw new InvalidDateError(type, "format");
+
+            }
+
+            boolean isValid = checkDateTimeValidity(parsed, type);
+
+            if (!isValid) {
+
+                throw new InvalidDateError(type, "Date");
+
+            }
+
+        } else if (type.equals("D")) {
+
+            try {
+
+                parsed[0] = LocalDateTime.parse(dateTime, formatter);
+                parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
+
+            } catch (Exception e) {
+
+                throw new InvalidDateError(type, "format");
+
+            }
+
+            boolean isValid = checkDateTimeValidity(parsed, type);
+
+            if (!isValid) {
+
+                throw new InvalidDateError(type, "Date");
+
+            }
+
+        }
+
+        assert parsed[0] != null && parsed[1] != null : "Dates are empty";
+
+        return parsed;
+
+
+    }
+
+    /**
+     * Parses user command relevant to
+     * adding a new task.
+     *
+     * @param input refers to user input.
+     * @return String[] containing parsed input.
+     * @throws EmptyDescriptionError is thrown when task is missing task description.
+     * @throws EmptyDateError        is thrown when task is missing start or end date or both.
+     * @throws InvalidDateError      is thrown when date has incorrect format or has already past.
+     */
+    String[] parseAddCommand(String input) throws EmptyDescriptionError, EmptyDateError, InvalidDateError {
+
         String[] outputArr = new String[3];
 
-         boolean isValidInput = checkValidInput(input);
+        int whiteSpaceIndex = input.indexOf(" ");
 
-         if(!isValidInput) {
+        if (input.startsWith("todo")) {
 
-             throw new InvalidInputError();
+            String trimWhiteSpace = input.trim();
 
-         }
+            if (trimWhiteSpace.equals("todo")) {
 
-         if (input.equals("list") || input.equals("bye")) {
+                throw new EmptyDescriptionError(Task.Types.T.toString());
+            }
+
+            outputArr[0] = Task.Types.T.toString();
+            outputArr[1] = input.substring(whiteSpaceIndex + 1);
+            outputArr[2] = "";
+
+        } else {
+
+            int indexOfSlash = input.indexOf("/");
+            String trimWhiteSpace = input.trim();
+
+            if (input.startsWith("deadline")) {
+
+                int indexBy = input.indexOf("/by ");
+
+                if (trimWhiteSpace.equals("deadline")) {
+
+                    throw new EmptyDescriptionError(Task.Types.D.toString());
+
+                } else if (indexOfSlash == -1) {
+
+                    throw new EmptyDateError(Task.Types.D.toString());
+
+                } else if (indexBy == -1) {
+
+                    throw new InvalidDateError(Task.Types.D.toString(), "format");
+
+                } else {
+
+                    outputArr[0] = Task.Types.D.toString();
+                    outputArr[1] = input.substring(whiteSpaceIndex + 1, indexOfSlash);
+                    outputArr[2] = input.substring(indexOfSlash + 4);
+                }
+
+            } else {
+
+                assert input.startsWith("event") : "task type is not event";
+
+                int indexAt = input.indexOf("/at ");
+
+                if (trimWhiteSpace.equals("event")) {
+
+                    throw new EmptyDescriptionError(Task.Types.E.toString());
+
+                } else if (indexOfSlash == -1) {
+
+                    throw new EmptyDateError(Task.Types.E.toString());
+
+                } else if (indexAt == -1) {
+
+                    throw new InvalidDateError(Task.Types.E.toString(), "format");
+
+                } else {
+
+                    outputArr[0] = Task.Types.E.toString();
+                    outputArr[1] = input.substring(whiteSpaceIndex + 1, indexOfSlash);
+                    outputArr[2] = input.substring(indexOfSlash + 4);
+                }
+            }
+        }
+
+        return outputArr;
+    }
+
+    /**
+     * Parses all other command that
+     * are not adding new task.
+     *
+     * @param input refers to user input
+     * @return String[] containing parsed input.
+     * @throws MissingTaskNumberError is thrown when command is missing task index.
+     * @throws MissingKeywordError    is thrown when command is missing keyword.
+     */
+    String[] parseCommand(String input) throws MissingTaskNumberError, MissingKeywordError {
+
+        String[] outputArr = new String[3];
+
+        if (input.equals("list") || input.equals("bye")) {
 
             outputArr[0] = input;
             outputArr[1] = "";
@@ -75,137 +265,17 @@ public class Parser {
             }
         }
 
-
-        int index = input.indexOf("/");
-        int whiteSpaceIndex = input.indexOf(" ");
-
-
-        if (whiteSpaceIndex == -1) {
-
-                throw new EmptyDescriptionError(input);
-
-        } else if (input.startsWith("todo")) {
-
-            outputArr[0] = Task.Types.T.toString();
-            outputArr[1] = input.substring(whiteSpaceIndex + 1);
-            outputArr[2] = "";
-
-        } else if (index == -1) {
-
-            throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
-
-        } else {
-
-            int indexAt = input.indexOf("/at ");
-
-            if (input.startsWith("deadline")) {
-
-                int indexBy = input.indexOf("/by ");
-
-                if (indexBy == -1) {
-
-                    throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
-
-                } else {
-
-                    outputArr[0] = Task.Types.D.toString();
-                    outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
-                    outputArr[2] = input.substring(index + 4);
-                }
-
-            } else {
-
-                assert input.startsWith("event") : "task type is not event";
-
-                if (indexAt == -1) {
-
-                    throw new EmptyDateError(input.substring(0, whiteSpaceIndex));
-
-                } else {
-
-                    outputArr[0] = Task.Types.E.toString();
-                    outputArr[1] = input.substring(whiteSpaceIndex + 1, index);
-                    outputArr[2] = input.substring(index + 4);
-                }
-            }
-        }
-
         return outputArr;
     }
 
+
     /**
-     * Parses date and time of the task. If task do not have date, a dummy date
-     * is used.
+     * Checks if input has a valid command
+     * before parsing it.
      *
-     * @param dateTime the date and time of the task.
-     * @return parsed date and time in form of LocalDateTime object.
-     * @throws InvalidDateError is an error thrown when date has incorrect format.
+     * @param input refers to the user input/\.
+     * @return true if input is valid and false otherwise.
      */
-    public LocalDateTime[] parseDateTime(String dateTime, String type) throws InvalidDateError {
-
-
-        String[] split = null;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
-        LocalDateTime[] parsed = new LocalDateTime[2];
-
-        if (type.equals("T")) {
-
-            parsed[0] = LocalDateTime.parse("12/12/1212 12:12", formatter);
-            parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
-
-        } else if (type.equals("E")) {
-
-            split = dateTime.split(" to ");
-
-            try {
-
-                parsed[0] = LocalDateTime.parse(split[0], formatter);
-                parsed[1] = LocalDateTime.parse(split[1], formatter);
-
-            } catch (Exception e) {
-
-                throw new InvalidDateError("event", "format");
-
-            }
-
-            boolean isValid = checkDateTimeValidity(parsed, "E");
-
-            if (!isValid) {
-
-                throw new InvalidDateError("event", "Date");
-
-            }
-
-        } else if (type.equals("D")) {
-
-            try {
-
-                parsed[0] = LocalDateTime.parse(dateTime, formatter);
-                parsed[1] = LocalDateTime.parse("12/12/1212 12:12", formatter);
-
-            } catch (Exception e) {
-
-                throw new InvalidDateError("deadline", "format");
-
-            }
-
-            boolean isValid = checkDateTimeValidity(parsed, "D");
-
-            if (!isValid) {
-
-                throw new InvalidDateError("deadline", "Date");
-
-            }
-
-        }
-
-        assert parsed[0] != null && parsed[1] != null : "Dates are empty";
-
-        return parsed;
-
-
-    }
-
     boolean checkValidInput(String input) {
 
         boolean isList = input.equals("list");
@@ -223,16 +293,15 @@ public class Parser {
      * Checks if date parsed is valid.
      *
      * @param times refers to the start and end dateTime of the task.
-     * @param type refers to the type of event.
+     * @param type  refers to the type of event.
      * @return true if date is valid and false, otherwise.
      */
-
     boolean checkDateTimeValidity(LocalDateTime[] times, String type) {
 
         boolean isEndLaterThanStart = false;
         boolean isStartLaterThanNow = false;
 
-        if(type.equals("D")) {
+        if (type.equals("D")) {
 
             isStartLaterThanNow = times[0].isAfter(LocalDateTime.now());
 
@@ -246,6 +315,37 @@ public class Parser {
             isEndLaterThanStart = times[1].isAfter(times[0]);
 
             return isEndLaterThanStart && isStartLaterThanNow;
+
+        }
+
+    }
+
+    /**
+     * Gets the type of command input is.
+     *
+     * @param input refers to user input
+     * @return String telling the type of command.
+     */
+    String getTypeOfCommand(String input) {
+
+        boolean isList = input.equals("list");
+        boolean isBye = input.equals("bye");
+        boolean isDone = input.startsWith("done");
+        boolean isDelete = input.startsWith("delete");
+        boolean isFind = input.startsWith("find");
+        boolean isEvent = input.startsWith("todo") || input.startsWith("event") || input.startsWith("deadline");
+
+        if (isEvent) {
+
+            return "add";
+
+        } else if (isList || isBye || isDone || isDelete || isFind) {
+
+            return "notAdd";
+
+        } else {
+
+            return "invalid";
 
         }
 

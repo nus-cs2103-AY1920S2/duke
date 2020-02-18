@@ -43,9 +43,9 @@ public class AddCommand extends Command {
             Parser parser = new Parser();
             LocalDateTime[] dateTime = parser.parseDateTime(taskDescriptionArr[2], taskDescriptionArr[0]);
 
-            String hasDup = new CheckDupCommand(null, taskList).executeCommand(taskDescriptionArr, dateTime);
+            boolean hasDup = new CheckDupCommand(null, taskList).executeCommand(taskDescriptionArr, dateTime);
 
-            if(hasDup.equals("t")) {
+            if (hasDup) {
 
                 throw new DuplicateTaskError(taskDescriptionArr[0]);
             }
@@ -73,7 +73,7 @@ public class AddCommand extends Command {
 
             return e.toString();
 
-            }
+        }
 
         return "";
     }

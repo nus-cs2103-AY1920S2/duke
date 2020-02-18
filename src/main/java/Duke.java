@@ -41,7 +41,7 @@ public class Duke {
      */
     String getResponse(String input) {
 
-        if(input.equals("bye")) {
+        if (input.equals("bye")) {
             isExit = true;
         }
 

@@ -6,12 +6,19 @@ import java.time.format.DateTimeFormatter;
 /**
  * The InvalidDateError program is an error thrown when user inputs an invalid date.
  *
- * @version 1.2
- * @since 17/2/2020
+ * @version 1.3
+ * @since 19/2/2020
  */
 public class InvalidDateError extends Exceptions {
 
     String issue;
+
+    /**
+     * Constructor.
+     *
+     * @param type refers to the type of task.
+     * @param issue refers to the reason date input is wrong.
+     */
     public InvalidDateError(String type, String issue) {
 
         super(type);
@@ -30,30 +37,32 @@ public class InvalidDateError extends Exceptions {
 
         if (issue.equals("Date")) {
 
-            if (type.equals("deadline")) {
+            if (type.equals("D")) {
 
-                return "Date should be after " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm"));
+                return "Date should be after "
+                        + LocalDateTime.now().format(DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm"));
 
             } else {
 
-                assert type.equals("event") : "Wrong event type";
+                assert type.equals("E") : "Wrong task type!";
 
-                return "Start date should be after " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm"))
+                return "Start date should be after "
+                        + LocalDateTime.now().format(DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm"))
                         + " and end date should be after start date";
 
             }
 
         } else {
 
-            if (type.equals("deadline")) {
+            if (type.equals("D")) {
 
-                return "Date should be in d/MM/yyyy HH:mm format";
+                return "Date should be in /by d/MM/yyyy HH:mm format";
 
             } else {
 
-                assert type.equals("event") : "Wrong event type";
+                assert type.equals("E") : "Wrong task type";
 
-                return "Date should be in d/MM/yyyy HH:mm to d/MM/yyyy HH:mm format";
+                return "Date should be in /at d/MM/yyyy HH:mm to d/MM/yyyy HH:mm format";
 
             }
         }

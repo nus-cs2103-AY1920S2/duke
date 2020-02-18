@@ -40,7 +40,7 @@ public class DoneCommand extends Command {
 
             Task t = taskList.getTask(Integer.parseInt(taskDescriptionArr[1]));
 
-            if(t.getStatus().equals(Task.Status.Y)) {
+            if (t.getStatus().equals(Task.Status.Y)) {
 
                 return "Task is already done!";
             }

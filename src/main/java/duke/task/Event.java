@@ -50,6 +50,6 @@ public class Event extends Task {
         return "[" + Types.E + "]"
                 + "[" + super.getStatus() + "]"
                 + " " + super.getTaskDescription()
-                + "(at:" + dateStart + " to " + dateEnd + ")";
+                + "(at: " + dateStart + " to " + dateEnd + ")";
     }
 }

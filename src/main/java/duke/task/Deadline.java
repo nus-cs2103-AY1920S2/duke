@@ -49,6 +49,6 @@ public class Deadline extends Task {
         return "[" + Types.D + "]"
                 + "[" + super.getStatus() + "]"
                 + " " + super.getTaskDescription()
-                + "(by:" + date + ")";
+                + "(by: " + date + ")";
     }
 }
