@@ -20,8 +20,6 @@ public class Deadline extends Task {
         dateTime = LocalDateTime.parse(by);
     }
 
-    public String getType() { return "D"; }
-
     @Override
     public String getDetails() { return by; }
 

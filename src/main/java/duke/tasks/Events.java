@@ -21,8 +21,6 @@ public class Events extends Task {
         dateTime = LocalDateTime.parse(at);
     }
 
-    public String getType() { return "E"; }
-
     @Override
     public String getDetails() { return at; }
 
