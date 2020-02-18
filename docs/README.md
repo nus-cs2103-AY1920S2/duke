@@ -4,8 +4,15 @@
 ![alt text][screenshot]
 
 [screenshot]: Ui.png 
-
 ## Features 
+
+1. CRUD operations on todo/deadline/event
+1. List Task - Lists the tasks you have.
+1. Mark a task as done
+1. Sort tasks by dates
+1. Find a task
+
+## List of Commands
 
 ### 1. Adding a todo task: `todo` 
 
