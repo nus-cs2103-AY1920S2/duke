@@ -14,9 +14,11 @@ public class Ui {
      * @return String to greet the user with instructions on how to use Duke.
      */
     public static String welcome() {
-        return "Hello, Duke here! :D \n"
+        return "Hello, E-1337 here! :D I am an android crafted specifically \n"
+            + "by my inventor Eugene to help you humans out with your memory.\n"
             + "I'm feeling good and ready to go!\n"
             + "What can I do for you today?\n"
+            + "\n"
             + "If you're unsure, here are some things I can do:\n"
             + "1. Add a Todo [T]\n"
             + "2. Add an Event [E]\n"
@@ -28,7 +30,7 @@ public class Ui {
             + "8. Find Tasks by Keyword\n"
             + "9. Say Goodbye\n"
             + "\n"
-            + "If you're unsure on how to use me, try entering 'help'\n";
+            + "If you're unfamiliar on how to use me, try entering 'help'\n";
     }
 
     /**

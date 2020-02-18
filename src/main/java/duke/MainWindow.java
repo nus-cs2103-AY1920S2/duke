@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
 
     // Supporting Images for Duke and User display photos
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDukeCustom.png"));
 
     /**
      * Initialises the Main Window for the Application, prompting user to use Duke.
@@ -115,7 +115,7 @@ public class MainWindow extends AnchorPane {
 
         assert (result != null || result.equals(" ")) : "Duke has to reply something, which is currently missing.";
 
-        return "Duke: " + result;
+        return "E-1337: " + result;
     }
 
 }
