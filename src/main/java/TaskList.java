@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,6 +8,8 @@ import java.util.stream.Collectors;
  * TaskList is a wrapper class for a List of Tasks.
  */
 public class TaskList {
+    protected LocalDate DEFAULT_DATE = LocalDate.parse("2099-12-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
     private List<Task> tasks;
 
     public TaskList() {
@@ -38,20 +41,23 @@ public class TaskList {
         return "Nice! I've marked this task as done: " + "\n" + tasks.get(taskNumber);
     }
 
-    public void deleteTask(int taskNumber) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(tasks.get(taskNumber));
+    public String deleteTask(int taskNumber) {
+        StringBuilder message = new StringBuilder();
+        message.append("Noted. I've removed this task: \n");
+        message.append(tasks.get(taskNumber)+"\n");
         tasks.remove(taskNumber);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        message.append("Now you have " + tasks.size() + " tasks in the list. \n");
+        return message.toString();
     }
 
-    public void addTask(Task task) {
+    public String addTask(Task task) {
+        StringBuilder message = new StringBuilder();
         tasks.add(task);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        message.append("Got it. I've added this task: \n");
+        message.append(task + "\n");
+        message.append("Now you have " + tasks.size() + " tasks in the list.");
+        return message.toString();
     }
-
 
     public String printListTasks() {
         return "Here are the tasks in your list: " + this.printTasks();
@@ -67,29 +73,33 @@ public class TaskList {
 
     public String showFilteredBySpecificDate(String date) {
         TaskList filteredTasks = new TaskList(tasks.stream()
+                .filter(task -> !task.getDate().equals(DEFAULT_DATE))
                 .filter(task -> task.getDate().equals(LocalDate.parse(date)))
                 .collect(Collectors.toList()));
-        return "Here are the tasks on date " + date + filteredTasks.printTasks();
+        return "Here are the tasks on date " + date + "\n" + filteredTasks.printTasks();
     }
 
     public String showFilteredBySpecificYear(int year) {
         TaskList filteredTasks = new TaskList(tasks.stream()
+                .filter(task -> !task.getDate().equals(DEFAULT_DATE))
                 .filter(task -> task.getDate().getYear() == year)
                 .collect(Collectors.toList()));
-        return "Here are the tasks in the year " + year + filteredTasks.printTasks();
+        return "Here are the tasks in the year " + year + "\n" + filteredTasks.printTasks();
     }
 
     public String showFilteredBySpecificMonth(int month) {
         TaskList filteredTasks = new TaskList(tasks.stream()
+                .filter(task -> !task.getDate().equals(DEFAULT_DATE))
                 .filter(task -> task.getDate().getMonthValue() == month)
                 .collect(Collectors.toList()));
-        return "Here are the tasks in the month " + month + filteredTasks.printTasks();
+        return "Here are the tasks in the month " + month + "\n" + filteredTasks.printTasks();
     }
 
     public String showFilteredByName(String word) {
         TaskList filteredTasks = new TaskList(tasks.stream()
+                .filter(task -> !task.getDate().equals(DEFAULT_DATE))
                 .filter(task -> task.getDescription().contains(word))
                 .collect(Collectors.toList()));
-        return "Here are the matching tasks in your list:" + filteredTasks.printTasks();
+        return "Here are the matching tasks in your list:" + "\n" + filteredTasks.printTasks();
     }
 }

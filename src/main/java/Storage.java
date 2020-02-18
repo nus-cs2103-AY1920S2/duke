@@ -3,8 +3,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 /**
  * Storage class is for database I/O.
  * Methods to load Tasks from database and save Tasks to database are available.
@@ -29,14 +32,20 @@ public class Storage {
         while (inputStream.hasNextLine()) {
             String currentLine = inputStream.nextLine();
             String[] nextLine = currentLine.split("\\|");
-            // index 0: type, index 1: 1/0 (isDone), index 2: description, index 3: time
-            if (nextLine[0].trim().equals("T")) { // Todo
-                tasks.add(new Todo(nextLine[2].trim())); //trim space
-            } else if (nextLine[0].trim().equals("D")) {
-                tasks.add(new Deadline(nextLine[2].trim(), nextLine[3].trim()));
-            } else if (nextLine[0].trim().equals("E")) {
-                tasks.add(new Event(nextLine[2].trim(), nextLine[3].trim()));
+
+            Task task = new Todo((nextLine[2])); // default
+            if (nextLine[0].equals("T")) { // Todo
+                task = new Todo(nextLine[2]);
+            } else if (nextLine[0].equals("D")) {
+                task = new Deadline(nextLine[2], nextLine[3]);
+            } else if (nextLine[0].equals("E")) {
+                task = new Deadline(nextLine[2], nextLine[3]);
             }
+
+            if (nextLine[1].trim().equals("1")) {
+                task.markAsDone();
+            }
+            tasks.add(task);
         }
         return tasks;
     }
@@ -50,7 +59,7 @@ public class Storage {
                     task.getTypeName() + "|"
                             + isDone + "|"
                             + task.getDescription() + "|"
-                            + task.getTime()
+                            + task.getTimeToDatabase()
             );
         }
         pw.close();

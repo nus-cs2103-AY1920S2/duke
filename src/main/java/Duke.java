@@ -57,8 +57,11 @@ public class Duke {
                 int position = -1 + Integer.parseInt(userInput.split(" ")[1]);
                 assert (position < tasks.getTasksLength()); // out of bounds
                 tasks.makeTaskDone(position);
+                storage.saveAllTasksToFile(tasks);
             } catch (NumberFormatException error) {
                 return "The task number you chose to delete is not valid"; // task index is not numeric
+            } catch (FileNotFoundException error) {
+                return "Database error. Please try again later!";
             }
             return "I have marked that task as done!";
         } else if (userInput.startsWith("todo")) {
