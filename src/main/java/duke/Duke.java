@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
@@ -73,13 +74,14 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        sendButton = new Button("Go!");
+        sendButton.setStyle("-fx-background-color: skyblue; -fx-text-fill: white;");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
+        scene.setFill(Color.SKYBLUE); // add colour to the top bar
         stage.setScene(scene);
         stage.show();
 
@@ -88,6 +90,7 @@ public class Duke extends Application {
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
+        stage.setResizable(true);
 
         mainLayout.setPrefSize(400.0, 600.0);
 
@@ -113,8 +116,9 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        Label welcomeMsg = getDialogLabel(ui.start());
+        Label welcomeMsg = getDialogLabel(ui.start()); // print the welcome message
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMsg, new ImageView(duke)));
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();

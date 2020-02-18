@@ -23,7 +23,7 @@ public class Ui {
      * @return prompt string
      */
     public String promptMsg() {
-        return "\nWhat will SQUIRTLE do?";
+        return "What will SQUIRTLE do?";
     }
 
     /**
