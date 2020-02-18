@@ -27,7 +27,8 @@ public class Ui {
      */
     public String printAdd(Task toAdd) {
         String temp = "Got it. I've added this task:" + "\n" + toAdd + "\n"
-                + "Now you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks")
+                + "Now you have " + TaskList.size() + " "
+                + (TaskList.size() == 1 ? "task" : "tasks")
                 + " in the list.";
         return temp;
     }
@@ -39,7 +40,8 @@ public class Ui {
      */
     public String printDelete(Task toDelete) {
         String temp = "Noted. I've removed this task:" + "\n" + toDelete + "\n"
-                + "Now you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks")
+                + "Now you have " + TaskList.size() + " "
+                + (TaskList.size() == 1 ? "task" : "tasks")
                 + " in the list.";
         return temp;
     }

@@ -127,17 +127,4 @@ public class Command {
             }
         }
     }
-
-    /**
-     * Gets a boolean (true/false) depending on user's command.
-     *
-     * @return true if user's command is "bye".
-     */
-    public boolean isExit() {
-        boolean flag = false;
-        if (command.equals("bye")) {
-            flag = true;
-        }
-        return flag;
-    }
 }

@@ -13,7 +13,8 @@ public class Storage {
     private File file;
 
     /**
-     * Creates a Storage object.
+     * Creates a Storage object with the filepath provided.
+     * If filepath does not exist, then the file will be created.
      *
      * @param filePath A string representation of the file directory.
      */
