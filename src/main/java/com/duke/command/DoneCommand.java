@@ -38,6 +38,9 @@ public class DoneCommand extends Command {
     @Override
     public String executeOnGui(TaskList tasks, Ui ui, Storage storage, TagList tags) throws DukeException {
         try {
+            if (index >= tasks.tasks.size()) {
+                throw new DukeException("OOPS!!! Invalid index!");
+            }
             Task t = tasks.markTask(index);
             storage.save(tasks);
             return ui.getDoneMessage(t);
