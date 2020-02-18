@@ -2,19 +2,35 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Task list
+Keeps track of tasks that you are working on.
+
+### Adding and removing tasks
+You can modify your task list by adding or removing tasks from it using commands.
+
+### Marking tasks as completed
+You can mark a task as completed using the `done` command.
+
+### Save to disk
+Your task list is automatically saved to disk on exit.
+
 
 ## Usage
+### Entering commands
+1. Select the text box on the bottom of the window.
+    Click on it to focus on the text box.
+2. Type your command into the text box.
+3. Press Enter to send the command to Duke.
+4. The result of the command is displayed in the space above the text box.
 
-### `Keyword` - Describe action
+### `help` command
+Displays help for the given command name.
 
-Describe action and its outcome.
+Example of usage:
+`help [name of command]`
 
-Example of usage: 
+### `todo` command
+Adds a ToDo task, which has no associated time, to your task list.
 
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+Example of usage:
+`todo [name of task]`
