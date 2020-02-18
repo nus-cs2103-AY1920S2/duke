@@ -39,9 +39,13 @@ public class Storage {
             } else if (nextLine[0].trim().equals("E")) {
                 tasks.add(new Event(nextLine[2].trim(), nextLine[3].trim()));
             }
+            /*
             if (nextLine[1].trim().equals("1")) { // marked as done
-                tasks.get(tasks.size() - 1).markAsDone(); // last element
+                if (tasks.size() > 0) {
+                    tasks.get(tasks.size() - 1).markAsDone(); // last element
+                }
             }
+            */
         }
         return tasks;
     }

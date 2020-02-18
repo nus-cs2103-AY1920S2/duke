@@ -40,7 +40,6 @@ public class Duke {
     }
 
     private void run() {
-
         ui.showWelcomeMessage();
     }
 
@@ -63,21 +62,26 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String userInput) {
+        System.out.println(tasks);
         if (userInput.equals("bye")) {
             return ui.showGoodbyeMessage();
         } else if (userInput.equals("list")) {
             return tasks.printTasks();
         } else if (userInput.startsWith("done")) {
             tasks.makeTaskDone(-1 + Integer.parseInt(userInput.split(" ")[1]));
+            return "I have marked that task as done!";
         } else if (userInput.startsWith("todo")) {
             lineScanner = new Scanner(userInput);
             lineScanner.next(); // skip todo word
+
+            // can only accept yyyy-mm-dd
             try {
                 Task task = new Todo(lineScanner.nextLine().substring(1)); // skip space
                 tasks.addTask(task);
                 storage.saveAllTasksToFile(tasks);
+                return "I have added that todo!";
             } catch (NoSuchElementException | FileNotFoundException error) {
-                ui.showEmptyDescription("todo");
+                return ui.showEmptyDescription("todo");
             }
         } else if (userInput.startsWith("deadline")) {
             lineScanner = new Scanner(userInput);
@@ -87,8 +91,9 @@ public class Duke {
                 Task task = new Deadline(theRest.split("/")[0].substring(1), theRest.split("/")[1]);
                 tasks.addTask(task);
                 storage.saveAllTasksToFile(tasks);
+                return "I have added that deadline!";
             } catch (NoSuchElementException | FileNotFoundException error) {
-                ui.showEmptyDescription("deadline");
+                return ui.showEmptyDescription("deadline");
             }
         } else if (userInput.startsWith("event")) {
             lineScanner = new Scanner(userInput);
@@ -98,45 +103,45 @@ public class Duke {
                 Task task = new Event(theRest.split("/")[0].substring(1), theRest.split("/")[1]);
                 tasks.addTask(task);
                 storage.saveAllTasksToFile(tasks);
+                return "I have added that event!";
             } catch (NoSuchElementException | FileNotFoundException error) {
-                ui.showEmptyDescription("event");
+                return ui.showEmptyDescription("event");
             }
         } else if (userInput.startsWith("delete")) {
             try {
                 int taskNumber = -1 + Integer.parseInt(userInput.split(" ")[1]);
                 tasks.getTasks().get(taskNumber); // try to get exception
                 tasks.deleteTask(taskNumber);
+                return "I have deleted your task!";
             } catch (IndexOutOfBoundsException error) {
-                ui.showInvalidRemoval();
+                return ui.showInvalidRemoval();
             }
         } else if (userInput.startsWith("filter")) { //filter {date/month/year} {value}
             try {
                 String criterion = userInput.split(" ")[1];
                 if (criterion.equals("month")) {
                     int month = Integer.parseInt(userInput.split(" ")[2]);
-                    tasks.showFilteredBySpecificMonth(month);
+                    return tasks.showFilteredBySpecificMonth(month);
                 } else if (criterion.equals("year")) {
                     int year = Integer.parseInt(userInput.split(" ")[2]);
-                    tasks.showFilteredBySpecificYear(year);
+                    return tasks.showFilteredBySpecificYear(year);
                 } else if (criterion.equals("date")) {
                     String date = userInput.split(" ")[2];
-                    tasks.showFilteredBySpecificDate(date);
+                    return tasks.showFilteredBySpecificDate(date);
                 }
             } catch (NoSuchElementException e) {
-                ui.showMissingParemeters();
-                ui.showLineOfUnderscores();
+                return ui.showMissingParemeters() + "\n" + ui.showLineOfUnderscores();
             }
         } else if (userInput.startsWith("find")) {
             try {
                 String word = userInput.split(" ")[1];
-                tasks.showFilteredByName(word);
+                return tasks.showFilteredByName(word);
             } catch (NoSuchElementException e) {
-                ui.showMissingParemeters();
+                return ui.showMissingParemeters();
             }
         } else {
-            ui.showCommandNotFound();
-            ui.showLineOfUnderscores();
+            return ui.showCommandNotFound() + ui.showLineOfUnderscores();
         }
-        return "d";
+        return "I don't understand what you are saying";
     }
 }
