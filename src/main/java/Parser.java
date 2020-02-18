@@ -1,6 +1,8 @@
 import java.io.IOException;
-import java.util.Scanner;
 
+/**
+ * Parser class to handle inputs and initiate the appropriate actions.
+ */
 public class Parser {
     public Parser(Ui ui) {
     }

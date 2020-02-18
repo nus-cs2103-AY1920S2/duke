@@ -1,7 +1,10 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+/**
+ * TaskList class to hold Task objects and perform necessary actions on them.
+ */
 
 public class TaskList {
     public ArrayList<Task> arrList;

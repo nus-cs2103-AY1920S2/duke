@@ -3,6 +3,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Storage object to read and write from and to a file in the given file path.
+ */
+
 public class Storage {
     String filePath;
     File file;
