@@ -18,6 +18,7 @@ public final class Launcher extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(new Duke());
             
             stage.setScene(scene);
+            stage.setTitle("Duke");
             stage.show();
             stage.setMinWidth(stage.getWidth());
             stage.setMinHeight(stage.getHeight());
