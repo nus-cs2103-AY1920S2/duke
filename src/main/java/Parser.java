@@ -25,87 +25,87 @@ public class Parser {
         String rest;
         String action = commandSplit[0];
         switch (action.toLowerCase()) {
-            case "bye":
-                command = new ExitCommand();
-                break;
-            case "list":
-                command = new ListCommand();
-                break;
-            case "todo":
-                rest = commandSplit[1];
-                if (rest.isBlank()) {
-                    throw new DukeException("Sorry! Description cannot be empty");
+        case "bye":
+            command = new ExitCommand();
+            break;
+        case "list":
+            command = new ListCommand();
+            break;
+        case "todo":
+            rest = commandSplit[1];
+            if (rest.isBlank()) {
+                throw new DukeException("Sorry! Description cannot be empty");
+            } else {
+                command = new AddCommand(new ToDos(rest.trim()));
+            }
+            break;
+        case "event":
+            rest = commandSplit[1];
+            if (rest.isBlank()) {
+                throw new DukeException("Sorry! Description cannot be empty");
+            } else {
+                String[] restArr = rest.split("/by");
+                if (restArr.length == 1) {
+                    throw new DukeException("Sorry! Please enter a date.");
                 } else {
-                    command = new AddCommand(new ToDos(rest.trim()));
+                    command = new AddCommand(new Event(restArr[0].trim(), restArr[1].trim()));
                 }
-                break;
-            case "event":
-                rest = commandSplit[1];
-                if (rest.isBlank()) {
-                    throw new DukeException("Sorry! Description cannot be empty");
+            }
+            break;
+        case "deadline":
+            rest = commandSplit[1];
+            if (rest.isBlank()) {
+                throw new DukeException("Sorry! Description cannot be empty");
+            } else {
+                String[] restArr = rest.split("/by");
+                if (restArr.length == 1) {
+                    throw new DukeException("Sorry! Please enter a date.");
                 } else {
-                    String[] restArr = rest.split("/by");
-                    if (restArr.length == 1) {
-                        throw new DukeException("Sorry! Please enter a date.");
-                    } else {
-                        command = new AddCommand(new Event(restArr[0].trim(), restArr[1].trim()));
-                    }
+                    command = new AddCommand(new Deadline(restArr[0].trim(), restArr[1].trim()));
                 }
-                break;
-            case "deadline":
-                rest = commandSplit[1];
-                if (rest.isBlank()) {
-                    throw new DukeException("Sorry! Description cannot be empty");
-                } else {
-                    String[] restArr = rest.split("/by");
-                    if (restArr.length == 1) {
-                        throw new DukeException("Sorry! Please enter a date.");
-                    } else {
-                        command = new AddCommand(new Deadline(restArr[0].trim(), restArr[1].trim()));
-                    }
-                }
-                break;
-            case "done":
-                if (commandSplit.length < 2) {
-                    throw new DukeException("Sorry! Please enter a task number");
-                }
-                rest = commandSplit[1];
-                if (rest.isBlank()) {
-                    throw new DukeException("Sorry! Please enter a task number");
-                } else {
-                    int taskNum = Integer.parseInt(rest.trim());
-                    command = new DoneCommand(taskNum);
-                }
-                break;
-            case "delete":
-                if (commandSplit.length < 2) {
-                    throw new DukeException("Sorry! Please enter a task number");
-                }
-                rest = commandSplit[1];
-                if (rest.isBlank()) {
-                    throw new DukeException("Sorry! Please enter a task number");
-                } else {
-                    int taskNum = Integer.parseInt(rest.trim());
-                    command = new DeleteCommand(taskNum);
-                }
-                break;
-            case "find":
-                if (commandSplit.length < 2) {
-                    throw new DukeException("Sorry! Please enter a keyword");
-                }
-                rest = commandSplit[1];
-                if (rest.isBlank()) {
-                    throw new DukeException("Sorry! Please enter a keyword");
-                } else {
-                    command = new FindCommand(rest);
-                }
-                break;
-            case "help":
-                command = new HelpCommand();
-                break;
-            default:
-                throw new DukeException("Sorry! Please enter a valid command.\n" +
-                        "Type 'help' to list available commands");
+            }
+            break;
+        case "done":
+            if (commandSplit.length < 2) {
+                throw new DukeException("Sorry! Please enter a task number");
+            }
+            rest = commandSplit[1];
+            if (rest.isBlank()) {
+                throw new DukeException("Sorry! Please enter a task number");
+            } else {
+                int taskNum = Integer.parseInt(rest.trim());
+                command = new DoneCommand(taskNum);
+            }
+            break;
+        case "delete":
+            if (commandSplit.length < 2) {
+                throw new DukeException("Sorry! Please enter a task number");
+            }
+            rest = commandSplit[1];
+            if (rest.isBlank()) {
+                throw new DukeException("Sorry! Please enter a task number");
+            } else {
+                int taskNum = Integer.parseInt(rest.trim());
+                command = new DeleteCommand(taskNum);
+            }
+            break;
+        case "find":
+            if (commandSplit.length < 2) {
+                throw new DukeException("Sorry! Please enter a keyword");
+            }
+            rest = commandSplit[1];
+            if (rest.isBlank()) {
+                throw new DukeException("Sorry! Please enter a keyword");
+            } else {
+                command = new FindCommand(rest);
+            }
+            break;
+        case "help":
+            command = new HelpCommand();
+            break;
+        default:
+            throw new DukeException("Sorry! Please enter a valid command.\n"
+                    + "Type 'help' to list available commands");
         }
         return command;
     }

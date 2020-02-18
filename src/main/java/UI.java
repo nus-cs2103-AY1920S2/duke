@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class UI {
 
     Scanner scanner;
+
     /**
      * Empty constructor.
      */
@@ -14,21 +15,15 @@ public class UI {
         this.scanner = new Scanner(System.in);
     }
 
-    /**
-     * String of asterisks for design purposes.
-     */
-    private static String horizontalLine = "**********************************************";
-
-    private static final String HELPLIST =
-            "1. help - lists out available commands\n" +
-            "2. list - lists out all the tasks\n" +
-            "3. todo <task name> - adds a ToDo task\n" +
-            "4. event <task name> /by <event date: YYYY-MM-DD> - adds an Event task\n" +
-            "5. deadline <task name> /by <event date: YYYY-MM-DD> - adds a Deadline task\n" +
-            "6. done <task number> - marks indicated task as complete\n" +
-            "7. delete <task number> - deletes the indicated task\n" +
-            "8. find <keyword> - searches for tasks with <keyword>\n" +
-            "9. bye - saves and closes the program";
+    private static final String HELP_LIST = "1. help - lists out available commands\n"
+            + "2. list - lists out all the tasks\n"
+            + "3. todo <task name> - adds a ToDo task\n"
+            + "4. event <task name> /by <event date: YYYY-MM-DD> - adds an Event task\n"
+            + "5. deadline <task name> /by <event date: YYYY-MM-DD> - adds a Deadline task\n"
+            + "6. done <task number> - marks indicated task as complete\n"
+            + "7. delete <task number> - deletes the indicated task\n"
+            + "8. find <keyword> - searches for tasks with <keyword>\n"
+            + "9. bye - saves and closes the program";
 
     public String readCommand() {
         return this.scanner.nextLine();
@@ -78,12 +73,23 @@ public class UI {
         }
     }
 
+    /**
+     * Prints out task as done.
+     * @param task Task to be marked as done.
+     * @param taskNumber Index of the task.
+     * @param tasks Task list where task can be found.
+     */
     public void printDone(Task task, int taskNumber, TaskList tasks) {
-        //I have marked 1. <name> as done!
         System.out.println("I have marked " + taskNumber + ". " + task + " as done!");
         System.out.println("You now have " + tasks.getTaskList().size() + " tasks left!");
     }
 
+    /**
+     * Prints out task as deleted.
+     * @param task Task to be deleted.
+     * @param taskNumber Index of the task.
+     * @param tasks Task list where the task can be found.
+     */
     public void printDelete(Task task, int taskNumber, TaskList tasks) {
         //I have deleted <task>
         System.out.println("I have deleted " + taskNumber + ". " + task);
@@ -106,11 +112,18 @@ public class UI {
         }
     }
 
+    /**
+     * Prints out that the task is duplicated.
+     * @param task The duplicated task.
+     */
     public void printDuplicate(Task task) {
         System.out.println("The task '" + task.getTaskName() + "' you are adding already exists!");
     }
 
+    /**
+     * Prints out the HELP_LIST.
+     */
     public void printHelp() {
-        System.out.println(HELPLIST);
+        System.out.println(HELP_LIST);
     }
 }
