@@ -1,19 +1,38 @@
 # User Guide
 
+## Product Interface
+<img src="Ui.png" width="400">
+
+## Product Overview
+Tinga is 
+
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Feature 1 - Create 
+Create a tasks (To do, event or deadline) and add it to your tasks list.
+You can specify dates for events and deadline tasks.
+
+### Feature 2 - Edit 
+Edit or modify the description of a task.
+
+### Feature 3 - Delete 
+Delete a task from the list.
+
+### Feature 4 - Search 
+Search the list for tasks containing a keyword.
+
+### Feature 5 - View 
+View list of all tasks.
 
 ## Usage
 
-### `Keyword` - Describe action
+### todo {description} - Create a To do task
 
-Describe action and its outcome.
+Create a To do task and adds it to the list.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo read book`
 
 Expected outcome:
 
