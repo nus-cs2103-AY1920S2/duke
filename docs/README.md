@@ -73,9 +73,9 @@ This keyword creates a new event task.
 
 **Expected outcome:**
 
-_Task of type event will be created and added to **MySponge's** database. Example:_</br>
-`Got it. I've added this task:`</br>
-`[E][X] (name of task) (at: Commonwealth MRT Station)`</br>
+_Task of type event will be created and added to **MySponge's** database. Example:_
+`Got it. I've added this task:`
+`[E][X] (name of task) (at: Commonwealth MRT Station)`
 `Now you have 3 tasks in this list.`
 
 
@@ -91,9 +91,9 @@ This keyword generates the list of tasks currently being tracked in **MySponge**
 
 **Expected outcome:**
 
-_A list of tasks will be displayed to the user. Example:_</br>
-`Here are the tasks in your list:`</br>
-`1. [T][X] activity1`</br>
+_A list of tasks will be displayed to the user. Example:_
+`Here are the tasks in your list:`
+`1. [T][X] activity1`
 `2. [D][X] activity2 (by: Jun 11 2019 8:30pm)`
 
 
@@ -108,9 +108,9 @@ This keyword alters a specific task's progress, from incomplete to completed.
 
 **Expected outcome:**
 
-_The task represented with the corresponding integer value index will be deemed complete, the cross beside the task details will be replaced with a check instead. Example:_</br>
-`Got it. I've added this task:`</br>
-`Nice! I've marked this task as done:`</br>
+_The task represented with the corresponding integer value index will be deemed complete, the cross beside the task details will be replaced with a check instead. Example:_
+`Got it. I've added this task:`
+`Nice! I've marked this task as done:`
 `[T][✅] activity1`
 
 
@@ -126,8 +126,8 @@ This keyword removes a specific task's from **MySponge**.
 **Expected outcome:**
 
 _The task represented with the corresponding integer value index will be removed from database. Example:_
-`Noted. I've removed this task:`</br>
-`[T][✅] activity1`</br>
+`Noted. I've removed this task:`
+`[T][✅] activity1`
 `Now you have 2 tasks in the list.`
 
 ### `tag`
@@ -142,7 +142,7 @@ This keyword places a tag on a specific task.
 **Expected outcome:**
 
 _The task represented with the corresponding integer value index will have a newly created tag visible. Example:_
-`Nice! I've added a tag for this task:`</br>
+`Nice! I've added a tag for this task:`
 `[T][✅][#School] activity1`
 
 ### `find`
@@ -157,8 +157,8 @@ This keyword returns a list of tasks containing the keyword specified by the Use
 **Expected outcome:**
 
 _All tasks contaning the keyword specified will be displayed. Example:_
-`Here are the matching tasks in your list:`</br>
-`1. [T][X] activity1`</br>
+`Here are the matching tasks in your list:`
+`1. [T][X] activity1`
 `2. [D][X] activity2 (by: Jun 11 2019 8:30pm)`
 
 ### `bye`
