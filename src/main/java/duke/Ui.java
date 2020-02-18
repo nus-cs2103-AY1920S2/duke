@@ -11,9 +11,8 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-    public void welcomeMessage() {
-        promptUser("Hello! I'm Duke");
-        promptUser("What can I do for you?");
+    public static String getWelcomeMessage() {
+        return "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 
     public String byeMessage(){

@@ -76,7 +76,7 @@ public class Duke {
             String[] parsedInput = parser.parse(input, 2);
             if(input.startsWith(TODO) || input.startsWith(DEADLINE) || input.startsWith(EVENT)) {
                 try {
-                    tasks.addTask(parsedInput[0], parsedInput[1]);
+                    output = tasks.addTask(parsedInput[0], parsedInput[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     output += TASK_DESCRIPTION_ERROR;
                 }

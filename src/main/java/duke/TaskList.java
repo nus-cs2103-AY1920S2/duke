@@ -39,7 +39,6 @@ public class TaskList {
         Task task = new Task("sample");
         String output = "";
         if(type.equals(EVENT)) {
-            //handle event
             try {
                 String[] args = description.split("/", 2);
                 task = new Event(args[0], args[1]);
@@ -48,7 +47,6 @@ public class TaskList {
                 ui.timeErrorMessage();
             }
         } else if (type.equals(DEADLINE)) {
-            //handle deadline
             try {
                 String[] args = description.split("/", 2);
                 task = new Deadline(args[0], args[1]);
