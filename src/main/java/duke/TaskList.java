@@ -62,7 +62,7 @@ public class TaskList {
             switch (commandType) {
 
             case "help":
-                return Ui.welcome();
+                return Ui.help();
 
             case "bye":
                 return Ui.goodbye();
