@@ -169,7 +169,7 @@ Displays the list of all tasks.
     3. [D][✗] borrow book (by: Feb 19 2020)
     4. [T][✗] read book
     
-### 8. `bye` - exits program
+### 8. `bye` - Exits program
 
 #### Format
 
