@@ -19,16 +19,33 @@ public class Storage {
      * @return An ArrayList of tasks that is potentially empty.
      * @throws FileNotFoundException is thrown if file is unable to be opened.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
 
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            tasks.add(databaseStringToTask(s.nextLine()));
+        try {
+            File f = new File(filePath);
+            Scanner s = s = new Scanner(f);
+
+            while (s.hasNext()) {
+                tasks.add(databaseStringToTask(s.nextLine()));
+            }
+        } catch (FileNotFoundException e) {
+            createSaveFile();
+            System.out.println("file not found, creating new empty file");
         }
 
         return tasks;
+    }
+
+    private void createSaveFile() {
+        File tempFile = new File(filePath);
+        tempFile.getParentFile().mkdir();
+        try {
+            tempFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error creating new save file");
+        }
     }
 
     private static Task databaseStringToTask(String s) {

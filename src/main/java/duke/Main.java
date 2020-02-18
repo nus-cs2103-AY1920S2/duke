@@ -20,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 //        duke = new Duke("C:\\Users\\Pang Jia Da\\Desktop\\CS2103\\duke\\data\\duke.txt");
-        duke = new Duke("C:/Users/Pang Jia Da/Desktop/CS2103/duke/data/duke.txt");
+        duke = new Duke("data/duke.txt");
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));

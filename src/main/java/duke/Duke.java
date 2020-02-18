@@ -33,13 +33,15 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            System.out.println("file not found exception when loading database");
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+        tasks = new TaskList(storage.load());
+
+//        try {
+//            tasks = new TaskList(storage.load());
+//        } catch (FileNotFoundException e) {
+//            System.out.println("file not found exception when loading database");
+//            ui.showLoadingError();
+//            tasks = new TaskList();
+//        }
     }
 
     //package-private
@@ -55,7 +57,8 @@ public class Duke {
             return e.getErrorMessage();
         }
 
-        //seems inefficient to write to file after every command
+        //saves after every command so data isn't lost in event of
+        //sudden application close
         //TODO: implement saving only upon exit
         try {
             storage.save(tasks);
