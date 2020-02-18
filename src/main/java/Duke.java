@@ -55,6 +55,7 @@ public class Duke extends Application {
                 Command c = parser.parse(fullCommand);
                 c.execute(taskStorage, tasks, ui);
                 isExit = c.isExit();
+                taskStorage.storeToStorage(tasks.getList());
 
             } catch (DukeException ex) {
 
@@ -65,8 +66,6 @@ public class Duke extends Application {
 
             }
         }
-
-        taskStorage.storeToStorage(tasks.getList());
 
     }
 
@@ -162,6 +161,7 @@ public class Duke extends Application {
             ui.printFormatting();
             Command c = parser.parse(input);
             c.execute(taskStorage, tasks, ui);
+            taskStorage.storeToStorage(tasks.getList());
 
         } catch (DukeException ex) {
 

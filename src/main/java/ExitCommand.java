@@ -24,7 +24,6 @@ public class ExitCommand extends Command {
 
         this.isExit = true;
         System.out.println("     Bye. Hope to see you again soon!");
-        tasksStorage.storeToStorage(taskList.getList());
 
     }
 }
