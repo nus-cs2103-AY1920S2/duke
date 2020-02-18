@@ -7,6 +7,7 @@ import task.TaskList;
 import ui.Ui;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 
@@ -37,13 +38,17 @@ public class Duke {
 
 
     public Duke() throws IOException{
-        String filePath = "/Users/Simon/Desktop/Y2S2/CS2103T/duke/src/main/java/duke.txt";
+        String filePath = "data/duke.txt";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
             ui.displayLoadError();
+            File file = new File("data");
+            if (!file.exists()) {
+                new File("data").mkdir();
+            }
             tasks = new TaskList();
         }
     }
