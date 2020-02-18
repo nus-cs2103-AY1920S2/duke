@@ -1,7 +1,11 @@
 package duke;
 
+import duke.command.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.exception.InvalidCommandException;
 
 /**
  * Represents a parser to parse commands from input strings.
@@ -19,12 +23,49 @@ public class Parser {
      * @param command The command to check against.
      * @return
      */
-    public boolean parseCommand(String input, String command) {
-        if (input.compareTo(command) == 0) {
-            return true;
-        } else {
-            return false;
+    public Command parseCommand(String input) throws InvalidCommandException {
+        Command result;
+        String[] split = input.split(" ");
+        String command = split[0];
+
+        switch (command) {
+        case "list":
+            result = new ListCommand(input, false);
+            break;
+        
+        case "bye":
+            result = new ByeCommand(input, true);
+            break;
+
+        case "delete":
+            result = new DeleteCommand(input, false);
+            break;
+
+        case "done":
+            result = new DoneCommand(input, false);
+            break;
+
+        case "find":
+            result = new FindCommand(input, false);
+            break;
+
+        case "todo":
+            result = new TodoCommand(input, false);
+            break;
+
+        case "event":
+            result = new EventCommand(input, false);
+            break;
+
+        case "deadline":
+            result = new DeadlineCommand(input, false);
+            break;
+
+        default:
+            throw new InvalidCommandException();
         }
+
+        return result;
     }
 
     /**

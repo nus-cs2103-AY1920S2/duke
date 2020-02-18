@@ -26,6 +26,10 @@ public class Storage {
         this.fileName = fileName;
     }
 
+    public String getFileName() {
+        return this.fileName;
+    }
+
     /**
      * Loads tasks from the input file, and returns them in an ArrayList.
      * @return An ArrayList of all stored tasks.
