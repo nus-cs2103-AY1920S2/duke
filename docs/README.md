@@ -23,6 +23,7 @@ Duke is a chatbot that can help you manage your tasks. You can tell Duke to add,
 
 ### Interactive Graphical User Interface
 Duke comes with a GUI to provide users with visual feedback when Duke performs tasks.
+
 <img src="Ui.png" width="250">
 
 ### Types of tasks
