@@ -1,6 +1,6 @@
 # User Guide
 
-![Duke Showcase](Ui.png =600x400)
+<img src="Ui.png" alt="Duke Showcase" width="600" height="400"/>
 
 E-1337 is a Personal Assistant Chatbot which stores and records your to-dos, deadlines, events, and loans.
 This User Guide will demonstrate how to use its capabilities, such that users will have a smooth and productive
@@ -46,7 +46,7 @@ Example of usage:
 
 Expected outcome:
 
-![Help Command](Help.png =600x400)
+<img src="Help.png" alt="Help Command" width="600" height="400"/>
 
 ### `Add a Task`
 
@@ -70,7 +70,7 @@ Example of usage:
 
 Expected outcome:
 
-![ToDo Example](ToDo.png =600x400)
+<img src="ToDo.png" alt="ToDo Example" width="600" height="400"/>
 
 #### `Add a Deadline`
 
@@ -84,7 +84,7 @@ Example of usage:
 
 Expected outcome:
 
-![Deadline Example](Deadline.png =600x400)
+<img src="Deadline.png" alt="Deadline Example" width="600" height="400"/>
 
 #### `Add an Event`
 
@@ -98,7 +98,7 @@ Example of usage:
 
 Expected outcome:
 
-![Event Example](Event.png =600x400)
+<img src="Event.png" alt="Event Example" width="600" height="400"/>
 
 #### `Add a Loan`
 
@@ -112,7 +112,7 @@ Example of usage:
 
 Expected outcome:
 
-![Loan Example](Loan.png =600x400)
+<img src="Loan.png" alt="Loan Example" width="600" height="400"/>
 
 ### `List down all Tasks`
 
@@ -124,11 +124,11 @@ Example of usage:
 
 Expected outcome:
 
-![List Command](List.png =600x400)
+<img src="List.png" alt="List Command" width="600" height="400"/>
 
 Should the list of Tasks be empty, running the `list` command gives the outcome below.
 
-![Empty List](EmptyList.png =600x400)
+<img src="EmptyList.png" alt="Empty List" width="600" height="400"/>
 
 ### `Marking Tasks as Done`
 
@@ -145,7 +145,7 @@ Example of usage:
 
 Expected outcome:
 
-![Done Command](Done.png =600x400)
+<img src="Done.png" alt="Done Command" width="600" height="400"/>
 
 ### `Find Tasks by Keywords`
 
@@ -155,13 +155,14 @@ To do so, simply use the `find <keyword>` command.
 Example of usage:
 
 - Suppose we want to find any Task containing the variant of 'good' from the list shown.
-![Full List](FullList.png =600x400)
+
+<img src="FullList.png" alt="Full List" width="600" height="400"/>
 
 - Performing the `find good` command provides the desired outcome.
 
 Expected outcome:
 
-![Find Command](Find.png =600x400)
+<img src="Find.png" alt="Find Command" width="600" height="400"/>
 
 ### `Delete Tasks`
 
@@ -218,7 +219,7 @@ Example of usage:
 
 Expected outcome:
 
-![Bye](Bye.png =600x400)
+<img src="Bye.png" alt="Bye" width="600" height="400"/>
 
 - Note: Upon exit, should there have been any changes (addition, removal, update) of Tasks, a file (LastSavedTasks.txt)
 is created.
