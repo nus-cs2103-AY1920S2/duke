@@ -8,6 +8,6 @@ public class DeadlineTest {
     public void TestToStringOutput() {
         Task task1 = new Deadline( "description", "2019-08-01 23:08");
         assertEquals("[D][" + Character.toString((char)45) + "] description (by: "
-                        + "Aug 1 2019 23:08" + ")", task1.toString());
+                + "Aug 1 2019 23:08" + ")", task1.toString());
     }
 }
