@@ -1,10 +1,10 @@
 # User Guide
 
-## Product Interface
+## Interface
 <img src="Ui.png" width="400">
 
-## Product Overview
-Tinga is 
+## Overview
+Tinga is an Personal Assistant Chatbot that you can use to keep track of your tasks.
 
 ## Features 
 
@@ -36,4 +36,4 @@ Example of usage:
 
 Expected outcome:
 
-`outcome`
+<img src="TodoOutcome.png" width="400">
