@@ -7,6 +7,19 @@ plugins {
 group 'seedu.duke'
 version '0.1.0'
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+                'Implementation-Version': version,
+                'Main-Class': 'Launcher'
+    }
+    baseName = project.name + '-all'
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
+}
+
 repositories {
     mavenCentral()
     jcenter()
