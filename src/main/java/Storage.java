@@ -5,13 +5,20 @@ import java.util.Scanner;
 
 public class Storage {
     String filePath;
+    File file;
 
     /**
-     * Constructor. Links this storage object to a specific file path.
+     * Constructor. Links this storage object to a specific file path. Create a file if it does not exist.
      * @param filePath Path of the file.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath) throws IOException {
         this.filePath = filePath;
+        this.file = new File(filePath);
+        if (!this.file.exists()) {
+            this.file.getParentFile().mkdirs();
+            this.file.createNewFile();
+            this.file = new File(this.filePath);
+        }
     }
 
     /**

@@ -36,8 +36,8 @@ public class Duke extends Application {
 
     public Duke() {
         filePath = "data/duke.txt";
-        storage = new Storage(filePath);
         try {
+            storage = new Storage(filePath);
             taskList = storage.getTaskList(); // initialise from text file
         } catch (IOException e) {
             System.out.println(e);
