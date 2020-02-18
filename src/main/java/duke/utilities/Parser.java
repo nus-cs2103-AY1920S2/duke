@@ -44,7 +44,6 @@ public class Parser {
                 parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription() + "|" + ((Deadline) task).getTaskTime();
                 break;
             default:
-                parsed = null;
                 throw new DukeException(DukeError.TASKPARSE);
         }
         assert parsed != null : "parser unable to parse task, returns null";
@@ -72,7 +71,6 @@ public class Parser {
                 task = new Deadline(split[1], split[2], split[3]);
                 break;
             default:
-                task = null;
                 throw new DukeException(DukeError.FILEPARSE);
         }
         assert task != null : "error in parsing file to task object";
@@ -89,42 +87,40 @@ public class Parser {
     public static Command parseInput(String input) throws DukeException {
         try {
             input = input.trim(); // trim any opening and trailing whitespace
-            if (input.equals("bye")) { // parse exit command
+            if (input.equals("bye")) { // exit command
                 return new ExitCommand();
-            } else if (input.equals("list")) { // parse list command
+            } else if (input.equals("list")) { // list command
                 return new ListCommand();
             } else if (input.equals("help")) {
                 return new HelpCommand();
-            } else if (input.startsWith("done")) { // parse done command
+            } else if (input.startsWith("done")) { // done command
                 int taskNumber = Integer.parseInt(input.split(" ", 2)[1]) - 1;
                 return new DoneCommand(taskNumber);
-            } else if (input.startsWith("delete")) { // parse delete command
+            } else if (input.startsWith("delete")) { // delete command
                 int taskNumber = Integer.parseInt(input.split(" ", 2)[1]) - 1;
                 return new DeleteCommand(taskNumber);
-            } else if (input.startsWith("find")) { // parse find by keyword command
+            } else if (input.startsWith("find")) { // find command
                 String[] split = input.split(" ");
-                if (split.length > 2) { // if more than one keyword given, throw error
+                if (split.length > 2) { // if more than one keyword supplied by user, throw DukeException
                     throw new DukeException(DukeError.KEYWORDS);
-                } else {
-                    return new FindCommand(split[1]);
                 }
-            } else if (input.startsWith("update")) {
+                return new FindCommand(split[1]);
+            } else if (input.startsWith("update")) { // first update stage
                 assert isUpdating == false : "isUpdating boolean should be false!";
                 int taskNumber = Integer.parseInt(input.split(" ", 2)[1]) - 1;
                 isUpdating = true;
                 updateCommand = new UpdateCommand(taskNumber);
                 return updateCommand;
-            } else if (isUpdating) {
+            } else if (isUpdating) { // second update stage
                 assert updateCommand != null; // the updateCommand cannot be null if parser is set to update
                 String[] split = input.split(" ", 2); // user input here will be "<item to update> <update>"
                 if (!split[0].equals("des") && !split[0].equals("date")) {
                     throw new DukeException(DukeError.UPDATE);
-                } else {
-                    isUpdating = false;
-                    Command nextStage = updateCommand.nextUpdateStage(split[0], split[1]);
-                    updateCommand = null;
-                    return nextStage;
                 }
+                isUpdating = false;
+                Command nextStage = updateCommand.nextUpdateStage(split[0], split[1]);
+                updateCommand = null;
+                return nextStage;
             } else { // parse task command
                 String[] split = input.split(" ", 2);
                 TaskType taskType = TaskType.valueOf(split[0].toUpperCase());
@@ -146,6 +142,8 @@ public class Parser {
                         String deadline = deadlineDetails[1].trim();
                         task = new Deadline("0", deadlineDescription, deadline);
                         break;
+                    default:
+                        throw new DukeException(DukeError.COMMAND);
                 }
 
                 assert task != null : "task at the end of parseInput method cannot be null!";

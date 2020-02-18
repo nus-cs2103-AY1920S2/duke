@@ -174,14 +174,11 @@ public class Ui {
             case UPDATE:
                 return "SQUIRTLE cannot understand your update! Check your update item!";
             default:
-                return "Error in error msg portion of Ui!";
+                assert false: "No exception that is not a duke exception should be caught in the main Duke class";
+                return "An error not included in DukeExceptions was thrown";
         }
     }
 
-    private String lineBreak() {
-        String lineBreak = "\n------------------------------\n";
-        return lineBreak;
-    }
 
     private String blankLine() {
         return "\n\n";

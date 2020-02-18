@@ -27,7 +27,7 @@ import java.util.Scanner;
  */
 public class Duke extends Application {
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Red.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Pikachu.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Squirtle.png"));
 
     private ScrollPane scrollPane;
