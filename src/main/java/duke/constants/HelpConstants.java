@@ -39,7 +39,7 @@ public class HelpConstants {
     public static final String SNOOZE_HELP = "Snooze: "
             + "delays the selected task by a certain specified amount of days. Usage: \n"
             + "  snooze <task index> <days>\n"
-            + " eg.  find homework\n";
+            + " eg.  snooze 4 20\n";
 
     public static final String LIST_HELP = "List: "
             + "lists down all tasks stored by duke. Usage: \n"
