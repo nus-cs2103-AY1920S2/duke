@@ -1,3 +1,4 @@
 T | 0 | finalize duke | null
 E | 1 | project meeting | 2020-02-14
-D | 0 | user stories for tP | 2020-02-14
+D | 1 | user stories for tP | 2020-02-14
+E | 0 | OP meeting | 2020-02-18

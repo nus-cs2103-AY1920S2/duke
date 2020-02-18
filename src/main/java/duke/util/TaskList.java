@@ -43,7 +43,7 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             sb.append("\t").append(i + 1).append(".").append(tasks.get(i)).append("\n");
         }
-        sb.append(separator);
+        //sb.append(separator);
         return sb.toString();
     }
 
@@ -126,8 +126,8 @@ public class TaskList {
         if (isValidIndex(taskNum, size)) {
             sb.append("Alright, I've removed this task.\n\t" + tasks.get(taskNum - 1));
             tasks.remove(taskNum - 1);
-            sb.append(String.format("\nYou now have %d %s in the list.\n", size - 1, (size - 1 > 1 ? "tasks" : "task")))
-                    .append(separator);
+            sb.append(String.format("\nYou now have %d %s in the list.\n", size - 1, (size - 1 > 1 ? "tasks" : "task")));
+                    //.append(separator);
             storage.clearAllData();
             storage.updateData();
             return sb.toString();
@@ -148,10 +148,10 @@ public class TaskList {
         if (isValidIndex(taskNum, size)) {
             Task t = tasks.get(taskNum - 1);
             if (t.isDone) {
-                sb.append("This task was already marked as done.\n").append(separator);
+                sb.append("This task was already marked as done.\n");//.append(separator);
             } else {
                 t.markAsDone();
-                sb.append("Great job! I've marked this task as done:\n\t").append(t).append("\n").append(separator);
+                sb.append("Great job! I've marked this task as done:\n\t").append(t);//.append("\n").append(separator);
                 storage.clearAllData();
                 storage.updateData();
             }
@@ -168,11 +168,11 @@ public class TaskList {
             Task t = tasks.get(taskNum - 1);
             if (t.isDone) {
                 t.markAsNotDone();
-                sb.append("Ok, I've marked this task as not done:\n\t").append(t).append("\n").append(separator);
+                sb.append("Ok, I've marked this task as not done:\n\t").append(t);//.append("\n").append(separator);
                 storage.clearAllData();
                 storage.updateData();
             } else {
-                sb.append("This task has not yet been completed.\n\t").append(separator);
+                sb.append("This task has not yet been completed.\n\t");//.append(separator);
             }
             return sb.toString();
         } else {
@@ -198,7 +198,8 @@ public class TaskList {
             }
         }
         if (count > 0) {
-            return sb.toString().trim() + "\n" + separator;
+            return sb.toString().trim();
+            // return sb.toString().trim() + "\n" + separator;
         }
         return String.format("There are no matching tasks for the keyword '%s'.", keyword);
     }
