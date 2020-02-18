@@ -18,7 +18,7 @@ public enum ErrorMessage {
     String msg;
 
     ErrorMessage(String msg) {
-        this.msg = "OOPS!!! " + msg;
+        this.msg = "It's a trap! " + msg;
     }
 
 

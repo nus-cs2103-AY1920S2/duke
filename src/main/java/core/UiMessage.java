@@ -5,10 +5,12 @@ package core;
  */
 public enum UiMessage {
 
-    GREETING("Hello! I'm Duke",
-            "What can I do for you?"),
-    FAREWELL("Bye. Hope to see you again soon!"),
-    RESET("The system has been reset.");
+    GREETING("A long time ago in a galaxy far, far away...",
+            "Hello! I'm Luke",
+            "How may i serve you."),
+    FAREWELL("Bye. Someday I will be the most powerful Jedi ever."),
+    RESET("Train yourself to let go of everything you fear to lose.",
+            "The system has been reset.");
 
     String[] msg;
 

@@ -27,10 +27,10 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
     private static final String TERMINATE = "bye";
-    private static final long delayDuration = 1000;
+    private static final long delayDuration = 2000;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/stormtrooper.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/luke.png"));
 
 
     /**
