@@ -1,6 +1,4 @@
 T , X , hello
 T , O , swim
-T , O , eat dory
 E , X , hello , 2020-10-20
 D , X , munch , 2020-02-19
-D , X , hi , 2020-01-01
