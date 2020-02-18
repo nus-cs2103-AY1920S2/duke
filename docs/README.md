@@ -5,19 +5,19 @@ Ooooooh here is the user guide for Duke.
 
 -[Usage](#usage)
 
--[Todo](todo.png)
+-[Todo](#todo-description---adds-a-todo-task)
 
--[Event](event.png)
+-[Event](#event-description-at-yyyy-mm-dd---adds-an-event-task)
 
--[Deadline](deadline.png)
+-[Deadline](#deadline-description-by-yyyy-mm-dd---adds-a-deadline-task)
 
--[List](list.png)
+-[List](#list---show-all-tasks-in-list)
 
--[Done](done.png)
+-[Done](#done-task-number---sets-a-specific-task-as-done)
 
--[Find](find.png)
+-[Find](#find-task-decription---finds-task-with-keywords-specified)
 
--[Help](help.png)
+-[Help](#help---show-commands-available)
 
 -[Bye](#bye---terminate-program)
 
