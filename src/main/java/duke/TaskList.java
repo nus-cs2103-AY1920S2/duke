@@ -260,7 +260,7 @@ public class TaskList {
      * @return String to indicate adding a new Loan.
      * @throws LoanException Exception arising from creating Loan Task due to wrong inputs.
      */
-    private  String addNewLoan(String command) throws LoanException {
+    private String addNewLoan(String command) throws LoanException {
         try {
             // need to identify value
             String valueString = getRestriction("/value", command);

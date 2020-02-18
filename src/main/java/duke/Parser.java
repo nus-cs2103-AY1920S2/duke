@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Logical brain of processing information given in a raw format, mainly through the use of useful methods.
+ * Logical brain to support processing information.
  */
 public class Parser {
 
