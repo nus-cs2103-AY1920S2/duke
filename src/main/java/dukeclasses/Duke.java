@@ -50,6 +50,9 @@ public class Duke {
      * @param input the string that input.
      * @return the intended string output.
      */
+
+    boolean isItFirstTimeRunning = true;
+
     protected String getResponse(String input) {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -58,6 +61,18 @@ public class Duke {
         System.setOut(ps);
         TaskManager manager = new TaskManager();
         Ui ui = new Ui(manager);
+
+        if (isItFirstTimeRunning) {
+            Storage store = new Storage();
+            try {
+                store.checkFileDir();
+                store.checkFile();
+                isItFirstTimeRunning = false;
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
         manager.loadExistingData();
 
         if (input.contains("bye")) {

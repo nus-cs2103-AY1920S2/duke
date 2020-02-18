@@ -38,7 +38,7 @@ shadowJar {
 
 application {
     // this below makes my jar runs as a CLI.
-    // mainClassName = "dukeclasses.Duke"
+     //mainClassName = "dukeclasses.Duke"
     // this below makes my jar runs as a GUI
     mainClassName = "dukeclasses.Launcher"
 

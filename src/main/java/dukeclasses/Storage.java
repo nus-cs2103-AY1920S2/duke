@@ -1,5 +1,6 @@
 package dukeclasses;
 
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,23 +20,33 @@ public class Storage {
     protected ArrayList<Task> listOfTasks = new ArrayList<>();
     protected String dataDirPath = "data/";
 
+
+    protected String fileSeparator = File.separator;
+    protected String projectRootPath = Paths.get("").toAbsolutePath().toString();
+    protected String dataDirectoryPath = projectRootPath + fileSeparator + "data";
+    protected String saveFilePath = dataDirectoryPath + fileSeparator + "data.txt";
+
+
     public Storage() {
     }
 
     /**
-     * Create a folder to store user's data.
+     * Check and create a folder to store user's data, if its not there.
      *
      * @throws IOException If the folder cannot be created, inform the user.
      */
     public void checkFileDir() throws IOException { //check if data folder exists, if not create it
-        File dataDirectory = new File(Paths.get(dataDirPath).toUri());
+
+        File dataDirectory = new File(dataDirectoryPath);
+
         //If data folder does not exists then create a folder for it
         if (!dataDirectory.exists()) {
-            boolean success = dataDirectory.mkdir();
-            //If failed to create successfully, need to inform user
-            if (!success) {
-                throw new IOException("Failed to create directory ");
+            try {
+                Files.createDirectories(Paths.get(dataDirectoryPath));
+            } catch (IOException e) {
+                System.out.println("Cannot create file");
             }
+
         } else {
             System.out.println("Connecting to Stark's secure database...");
         }
@@ -47,13 +58,13 @@ public class Storage {
      * @throws IOException throws exception if file is not found
      */
     public void checkFile() throws IOException {
-        File dataFile = new File(Paths.get(dataDirPath.concat("data.txt")).toUri());
+
+        File dataFile = new File(saveFilePath);
         if (!dataFile.exists()) {
-            boolean fileCreated = dataFile.createNewFile();
-            if (fileCreated) {
-                System.out.println("New file created successfully");
-            } else {
-                System.out.println("Cannot create file");
+            try {
+                Files.createFile(Paths.get(saveFilePath));
+            } catch (Exception e) {
+                throw new IOException();
             }
         } else {
             System.out.println("Data file found! Proceeding to load existing data!");
@@ -66,7 +77,7 @@ public class Storage {
      * @return returns an array List with the data filled in from data.txt
      */
     public ArrayList<Task> loadExistingData() {
-        String fileName = "data/data.txt";
+        String fileName = saveFilePath;
         String line;
 
         try {
@@ -134,7 +145,7 @@ public class Storage {
      */
 
     public void saveExistingData(ArrayList<Task> list) {
-        String fileName = "data/data.txt";
+        String fileName = saveFilePath;
         try {
             // Assume default encoding.
             FileWriter fileWriter = new FileWriter(fileName);
