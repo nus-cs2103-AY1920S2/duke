@@ -1,9 +1,10 @@
 # User Guide
+Duke is a Personal Assistant Chatbot that helps the user to keep track of various tasks
 
 ## Features 
 
 ### Quit and Save
-Description of feature.
+Saves all the data and automatically closes the GUI.
 
 #### Usage
 
@@ -20,7 +21,13 @@ Expected outcome:
 `outcome`
 
 ### Add Task
-Description of feature.
+Adds a new ToDo, Event or Deadline depending on the user input.
+
+ToDos: tasks without any date/time attached to it e.g., visit new theme park
+
+Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm
+
+Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
 
 #### Usage
 
@@ -37,7 +44,7 @@ Expected outcome:
 `outcome`
 
 ### List Tasks
-Description of feature.
+Displays all the tasks back to the user in a list from least to most recently added.
 
 #### Usage
 
@@ -54,7 +61,7 @@ Expected outcome:
 `outcome`
 
 ### Mark as Done
-Description of feature.
+Mark a task as done when completed.
 
 #### Usage
 
@@ -70,8 +77,8 @@ Expected outcome:
 
 `outcome`
 
-### Delete Tasks
-Description of feature.
+### Delete Task
+Remove a task from the list.
 
 #### Usage
 
@@ -88,7 +95,7 @@ Expected outcome:
 `outcome`
 
 ### Find Tasks
-Description of feature.
+Find (a) task(s) by searching for a keyword in the description.
 
 #### Usage
 
@@ -104,8 +111,8 @@ Expected outcome:
 
 `outcome`
 
-### Update Tasks 
-Description of feature.
+### Update Task 
+Edit the timing field for a task of type event or deadline.
 
 #### Usage
 
