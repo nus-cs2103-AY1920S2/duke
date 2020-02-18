@@ -57,10 +57,9 @@ public class Storage {
                             LocalDateTime.parse(details[3])));
                     break;
                 case "E":
-                    String[] dates = details[3].split(" ");
                     tasks.add(new Event(isDone, description,
-                            LocalDateTime.parse(dates[0]),
-                            LocalDateTime.parse(dates[1])));
+                            LocalDateTime.parse(details[3]),
+                            LocalDateTime.parse(details[4])));
                     break;
                 default:
                     assert false : "Invalid save file format.";

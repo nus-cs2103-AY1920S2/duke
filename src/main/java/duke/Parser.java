@@ -54,7 +54,7 @@ public class Parser {
      * Parses the list command to obtain different lists.
      * @param details The details of the list command.
      * @return The respective list command.
-     * @throws DukeException
+     * @throws DukeException Error when parsing the list command.
      */
     public static Command parseList(String details) throws DukeException {
         switch (details.toUpperCase()) {

@@ -8,7 +8,8 @@ public class Deadline extends Task {
     private LocalDateTime datetime;
 
     /**
-     * Contsructor of the deadline object.
+     * Contsructor of the deadline task object.
+     * @param isDone Whether the task is done.
      * @param description The task description.
      * @param datetime The deadline date/time.
      */
