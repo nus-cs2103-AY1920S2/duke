@@ -1,20 +1,1 @@
-# User Guide
-
-## Features 
-
-### Feature 1 
-Description of feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+#User Guide##1. Features ###1.1 Viewing List: listReturns all the tasks in the list.Format:     **list**###2.1 Adding Todo Task: todo Adds a Todo task to the list.Format: **todo (todo details)**Examples:  * todo eat * todo homework  ###2.3 Adding Deadline Task: deadline .../by Adds a deadline task to the list.  Format: **deadline (deadline details) /by (deadline)**  Examples:   * deadline return book /by 18/2/2020 1800  * deadline submit work /by 20/2/2020 1000  ###2.4 Adding Event Task: event .../atAdds a event task to the list.   Format: **event (event details) /at (event date)**   Examples:   * event group project meeting /at 21/2/2020 1500  * event charity work /at 25/2/2020 0900  ###2.5 Find Task: find Finds tasks whose tasks contains any of the given keywords Format: **find KEYWORD**   Examples:   * find charity     Returns:                                     [E][X] charity work    * find work     Returns:              [E][X] charity work              [D][X] submit work                        [T][X] todo homework   ###2.6 View Tasks via Date: dateView all the tasks on the specific date.Format: **date (dd/MM/YYYY)**      Examples:   * date 21/2/2020  Returns:                 [E][X] group project meeting (at: 21 Feb 2020 3PM)        ###2.7 View Tasks via Type: **view**Views all the tasks of one type, either Todo, Event or Deadline.   Format: **view (task type)**   Examples:   * view todo    Returns:                  [T][X] eat         [T][X] do homework           * view event    Returns:                   [E][X] group project meeting (at: 21 Feb 2020 3PM)         [E][X] charity work (at: 25 Feb 2020 9AM)           ###2.8 Done Tasks: doneMark the specific task as done with a Tick.Format: **done (index of task in list)**      Examples:   * done 1 ###2.9 Delete Tasks: deleteDelete and remove the specific task from the list.Format: **delete (index of task in list)**      Examples:   * delete 1  
