@@ -17,7 +17,8 @@ public class Storage {
     /**
      * The File path.
      */
-    String filePath = "../../data/duke.txt";
+    String filePath = "duke.txt";
+    File file = new File(filePath);
     /**
      * The Date input.
      */
@@ -34,7 +35,6 @@ public class Storage {
      */
     public void loadFile(MyList myList) {
         try {
-            File file = new File(filePath);
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String listItem = sc.nextLine();
@@ -67,7 +67,7 @@ public class Storage {
                 default:  break;
                 }
             }
-        } catch (FileNotFoundException | ParseException | DukeException e) {
+        } catch (ParseException | DukeException | FileNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -79,8 +79,11 @@ public class Storage {
      * @throws IOException the io exception
      */
     public void saveToFile(String string) throws IOException {
-        File file = new File(filePath);
-        FileWriter fileWriter = new FileWriter(file, true);
+        FileWriter fileWriter = null;
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        fileWriter = new FileWriter(file, true);
         fileWriter.write(string + "\n");
         fileWriter.close();
     }
@@ -92,8 +95,11 @@ public class Storage {
      * @throws IOException the io exception
      */
     public void newSave(MyList list) throws IOException, DukeException {
-        File file = new File(filePath);
-        FileWriter fileWriter = new FileWriter(file, false);
+        FileWriter fileWriter = null;
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        fileWriter = new FileWriter(file, false);
         for (int i = 1; i <= list.getArraySize(); i++) {
             fileWriter.write(list.getTask(i).toString() + "\n");
         }
