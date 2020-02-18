@@ -1,0 +1,58 @@
+DialogBox {
+    -fx-spacing: 10.0;
+    -fx-padding: 10.0;
+}
+
+#dialogContainer {
+    -fx-background-color: #2d3c66;
+    /*-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #2d3c66, #D03E3E)*/
+}
+
+
+#displayPicture {
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
+    -fx-border-color: white;
+}
+
+#dialog {
+    -fx-fill: #c2cff2;
+    -fx-border-width: 1;
+    -fx-border-color: #c2cff2;
+}
+
+#sendButton {
+    -fx-text-fill: #c2cff2;
+    -fx-background-color: #137F97;
+    -fx-border-width: 4;
+    -fx-border-color: #2d3c66;
+    -fx-border-radius: 10;
+    -fx-background-radius: 15;
+}
+
+#userInput {
+    -fx-border-radius: 22;
+    -fx-border-color: #2d3c66;
+    -fx-border-width: 4;
+    -fx-background-color: #137F97;
+    -fx-background-radius: 22;
+    -fx-text-fill: #c2cff2;
+}
+
+#scrollPane {
+    -fx-background-color: #2d3c66;
+}
+
+.track-background {
+    -fx-background-color: #2d3c66;
+}
+
+.track {
+    /*-fx-background-color: #c2cff2;*/
+    -fx-border-radius: 10.0;
+}
+
+.thumb {
+    -fx-background-color: #c2cff2;
+    -fx-background-radius: 10.0;
+}

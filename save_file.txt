@@ -1,0 +1,7 @@
+D | 0 | homework | 12:00 | 3/2/2020 | impt | high
+E | 0 | meetup | 12:00 | 3/3/2020 | impt | meetup
+T | 1 | read book | low
+T | 1 | run | high | oneday
+E | 0 | meeting | 13:30 | 4/4/2020 | 
+D | 0 | tutorial | 23:59 | 10/2/2020 | 
+D | 0 | CS2103T Tutorial | 23:59 | 20/2/2020 | iP | duke | userguide
