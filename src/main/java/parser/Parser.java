@@ -21,6 +21,13 @@ public class Parser {
 
     private Stack<String> commands = new Stack<>();
 
+    /**
+     * Handles commands represented as text and returns a string representing feedback.
+     * @param text String representing command.
+     * @param tasks TaskList that we act on given certain commands.
+     * @param ui Ui that we use to retrieve replies.
+     * @return String message in response to command.
+     */
     public String handleTaskCommand(String text, TaskList tasks, Ui ui) {
         String[] textArray = text.split(" ");
         String instruction = textArray[0];
@@ -68,12 +75,12 @@ public class Parser {
         String[] textArray = text.split(" ");
         String instruction = textArray[0];
         switch (instruction) {
-            case "done":
-                return tasks.setNotDone(textArray[1]);
-            case "delete":
-                return tasks.undoDelete();
-            default:
-                return tasks.deleteTask(String.valueOf(tasks.getTaskCount()));
+        case "done":
+            return tasks.setNotDone(textArray[1]);
+        case "delete":
+            return tasks.undoDelete();
+        default:
+            return tasks.deleteTask(String.valueOf(tasks.getTaskCount()));
         }
     }
 }

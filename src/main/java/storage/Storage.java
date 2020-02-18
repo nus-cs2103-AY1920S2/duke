@@ -15,7 +15,7 @@ import java.util.List;
  * Storage components which handles loading and saving of file.
  */
 public class Storage {
-    // deals with loading tasks from the file and saving tasks in the file
+
     private String filePath;
 
     /**
@@ -30,6 +30,9 @@ public class Storage {
      * Returns a list of tasks.
      * @return TaskList which is an abstraction of our task list.
      */
+    //Reused from https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
+    // and https://mkyong.com/java/how-to-create-directory-in-java/
+    // with minor modifications
     public TaskList load() {
         TaskList tasks = new TaskList(new ArrayList<Task>(), true);
         try {

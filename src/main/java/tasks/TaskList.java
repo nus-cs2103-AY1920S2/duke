@@ -59,6 +59,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Sets the done attribute of a task to not done.
+     * @param num String representing position of task in list.
+     * @return String that reminds user a task needs to be done.
+     */
     public String setNotDone(String num) {
         Task completedTask = this.tasks.get(Integer.parseInt(num) - 1);
         completedTask.isDone = false;
@@ -80,6 +85,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Undoes the last deleted task by adding it back into tasks.
+     * @return String saying task has been added back.
+     */
     public String undoDelete() {
         Task restoredTask = deletedTasks.pop();
         tasks.add(restoredTask);
