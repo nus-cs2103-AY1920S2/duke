@@ -37,6 +37,9 @@ public abstract class Task {
     public String toString() {
         String priorityIndication = " ";
         switch (level) {
+        case LOW:
+            priorityIndication = "[  not important ] ";
+            break;
         case NORMAL:
             priorityIndication = "[    ordinary    ] ";
             break;
@@ -56,6 +59,9 @@ public abstract class Task {
     public String toSimplerString() {
         String priorityIndication = " ";
         switch (level) {
+        case LOW:
+            priorityIndication = ".";
+            break;
         case NORMAL:
             priorityIndication = "!";
             break;

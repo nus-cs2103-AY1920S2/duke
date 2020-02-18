@@ -48,6 +48,9 @@ public class Storage {
         case "!!":
             level = PriorityLevel.HIGH;
             break;
+        case ".":
+            level = PriorityLevel.LOW;
+            break;
         default:
             level = PriorityLevel.NORMAL;
         }

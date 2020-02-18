@@ -51,9 +51,13 @@ public class Duke {
                 String actionWord = instructionByWord[0].toLowerCase();
                 Task task;
                 switch (actionWord) {
+                case "c":
+                    // Fallthrough
                 case "clear":
                     clearList(instructionByWord, lengthOfArray);
                     break;
+                case "d":
+                    // Fallthrough
                 case "deadline":
                     task = createDeadlineOrEventTask("deadline", instructionByWord, lengthOfArray);
                     addAndStoreTask(task);
@@ -64,19 +68,29 @@ public class Duke {
                 case "done":
                     doneOrDeleteATask("done", instructionByWord, lengthOfArray);
                     break;
+                case "e":
+                    // Fallthrough
                 case "event":
                     task = createDeadlineOrEventTask("event", instructionByWord, lengthOfArray);
                     addAndStoreTask(task);
                     break;
+                case "f":
+                    // Fallthrough
                 case "find":
                     findTasks(instructionByWord[1], lengthOfArray);
                     break;
+                case "l":
+                    // Fallthrough
                 case "list":
                     printList(lengthOfArray);
                     break;
+                case "p":
+                    // Fallthrough
                 case "priority":
                     prioritiseTask(instructionByWord, lengthOfArray);
                     break;
+                case "t":
+                    // Fallthrough
                 case "todo":
                     task = createATodoTask(instructionByWord, lengthOfArray);
                     addAndStoreTask(task);
@@ -97,7 +111,7 @@ public class Duke {
     private void prioritiseTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 3) {
             ui.throwWrongFormatException("\"priority index_of_the_task level_of_priority"
-                    + " (which can be one of the following: n/normal, h/high, t/top)\"");
+                    + " (which can be one of the following: l/low, n/normal, h/high, t/top)\"");
         }
         int index = getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_1_BASED_INDEX_INTO_0_BASED;
         if (index < 0 || index >= tasks.getList().size()) {
@@ -113,9 +127,11 @@ public class Duke {
             tasks.assignPriorityToTask(index, PriorityLevel.TOP);
         } else if (level.equals("n") || level.equals("normal")) {
             tasks.assignPriorityToTask(index, PriorityLevel.NORMAL);
+        } else if (level.equals("l") || level.equals("low")) {
+            tasks.assignPriorityToTask(index, PriorityLevel.LOW);
         } else {
             ui.throwOtherException("Invalid level of priority.\n"
-                    + "Please input one of the following: h/high, t/top");
+                    + "Please input one of the following: l/low, n/normal, h/high, t/top");
         }
         tasks.showTaskPrioritised(index);
     }
