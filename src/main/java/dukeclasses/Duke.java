@@ -6,7 +6,7 @@ import java.io.PrintStream;
 /**
  * Contains a product name dukeClasses.Duke , a personal assistant chat bot that keeps track,
  * of various tasks that needs.
- * to be done. It classifies tasks into deadline, todo and event.
+ * to be done. It classifies tasks into deadline, to-do and event.
  * It can add, delete, list all the tasks, find task with a keyword and mark them as done.
  */
 public class Duke {
@@ -44,7 +44,12 @@ public class Duke {
 
     }
 
-
+    /**
+     * This method redirects all my System.out.print to a PrintStream and returns that.
+     *
+     * @param input the string that input.
+     * @return the intended string output.
+     */
     protected String getResponse(String input) {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

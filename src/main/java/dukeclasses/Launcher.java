@@ -13,7 +13,7 @@ public class Launcher {
      * @param args runs method
      */
     public static void main(String[] args) {
-        //Can have 2 public static void main in a project. Just choose which psvm
+        //It is possible to have 2 public static void main in a project. Just choose which psvm
         //to run from by selecting the top right.
         Application.launch(Main.class, args);
     }

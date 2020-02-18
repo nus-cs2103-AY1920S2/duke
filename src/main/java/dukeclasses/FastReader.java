@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 /**
  * This class handles reading in the input faster.
  * It is slightly faster than Scanner.
+ * Adapted from online and modified a bit to my own.
  */
 public class FastReader {
     BufferedReader br;
@@ -44,7 +45,6 @@ public class FastReader {
 
         return Long.parseLong(next());
     }
-
 
 
     String nextLine() {

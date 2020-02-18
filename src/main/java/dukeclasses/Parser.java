@@ -9,7 +9,7 @@ public class Parser {
     }
 
     /**
-     * Handles the "done ..." inputs.
+     * Handles the parsing of the "done ..." inputs.
      *
      * @param textEntered user's input
      * @return indexOfTask done
@@ -28,7 +28,7 @@ public class Parser {
     }
 
     /**
-     * Handles "delete .." inputs.
+     * Handles the parsing of the "delete .." inputs.
      *
      * @param textEntered user's input
      * @return index of task to be deleted
@@ -40,12 +40,11 @@ public class Parser {
     }
 
     /**
-     * Handles "find .." inputs.
+     * Handles the parsing of the "find .." inputs.
      *
      * @param textEntered user's input
      * @return a String[]  to be passed into TaskManager.
      */
-
     public String[] handleFindCommands(String textEntered) {
 
         return textEntered.split(" ");
@@ -57,7 +56,6 @@ public class Parser {
      * @param textEntered chooses which index of task to be set as high priority.
      * @return index
      */
-
     public int handleHighPriorityCommands(String textEntered) throws DukeException {
 
         String[] temporary = textEntered.split(" ");
@@ -68,7 +66,6 @@ public class Parser {
         } catch (Exception ex) {
             throw new DukeException("done must be followed by a number");
         }
-
 
     }
 

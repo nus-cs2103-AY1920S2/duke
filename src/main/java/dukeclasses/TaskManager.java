@@ -69,6 +69,7 @@ public class TaskManager {
 
         listOfTasks.get(index - 1).markAsDone();
         storage.saveExistingData(listOfTasks);
+        assert listOfTasks.get(index - 1).isDone: "Supposed to be marked as done";
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + listOfTasks.get(index - 1).toString());
     }
@@ -99,17 +100,13 @@ public class TaskManager {
                 throw new DukeException("The description of a deadline cannot be empty");
             } else {
                 textEntered = textEntered.substring(9);
-                String[] temp = (textEntered.split("/by ")); //leaving only the date and time portion
-
-                //assert temp.length > 1 : "Deadline format must be (deadline homework /by YYYY-MM_DD)";
+                String[] temp = (textEntered.split("/by ")); //leaving only the date portion
 
                 try {
                     LocalDate checkIfDateIsCorrectFormat = LocalDate.parse(temp[1]);
                 } catch (Exception e) {
                     throw new DukeException("Deadline format must be (deadline homework /by YYYY-MM_DD)");
                 }
-
-
 
                 String tempDate = temp[1];
                 LocalDate date;
@@ -131,15 +128,11 @@ public class TaskManager {
                 textEntered = textEntered.substring(6);
                 String[] temp = (textEntered.split("/at "));
 
-
-                //assert temp.length > 1 : "Event format must be (event party /at location)";
                 try {
                     String checkIfItsNull = temp[1];
                 } catch (Exception e) {
                     throw new DukeException("Event format must be (event attend party /at location)");
                 }
-
-
 
                 newTask = new Event(temp[0], temp[1]);
                 this.listOfTasks.add(newTask);
@@ -207,6 +200,7 @@ public class TaskManager {
 
         listOfTasks.get(index - 1).markAsHighPriority();
         storage.saveExistingData(listOfTasks);
+        assert listOfTasks.get(index - 1).isHighPriority: "Supposed to be set as high priority";
         System.out.println("Nice! I've marked this task as high priority:");
         System.out.println("  " + listOfTasks.get(index - 1).toString());
 
@@ -218,13 +212,11 @@ public class TaskManager {
     public void listHighPriority() {
         System.out.println("Here are your high priority tasks in your list: ");
         for (int j = 0; j < this.listOfTasks.size(); j++) {
-            if (this.listOfTasks.get(j).isHighPriority == true) {
+            if (this.listOfTasks.get(j).isHighPriority) {
                 System.out.println("  " + (j + 1) + ". " + this.listOfTasks.get(j).toString());
             }
         }
     }
-
-
 
 
     /**

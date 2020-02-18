@@ -20,9 +20,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * returns the dynamic state of the dukeClasses.ToDo.
+     * returns the dynamic state of the dukeClasses.todo.
      *
-     * @return the state of dukeClasses.ToDo, to be saved in data.txt
+     * @return the state of dukeClasses.todo, to be saved in data.txt
      */
     public String saveData() {
         String isItDone = this.isDone ? "1" : "0";    //1 is done, 0 is not done
