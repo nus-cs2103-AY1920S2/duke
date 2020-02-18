@@ -14,6 +14,9 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+    public void setTime(String newTime) {
+    }
+
     @Override
     public String toString() {
         String str = "[T]";

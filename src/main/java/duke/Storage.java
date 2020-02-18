@@ -150,4 +150,92 @@ public class Storage {
             Ui.printLines("IOException");
         }
     }
+
+    public void updateDescription(int idx, String input) {
+        File originalFile = new File(this.fileName);
+        File tempFile = new File("src/main/data/temp.txt");
+
+        try {
+            FileWriter fw = new FileWriter("src/main/data/temp.txt", false);
+            Scanner sc = new Scanner(originalFile);
+            int i = 1;
+
+            while (sc.hasNext()) {
+                if (i == idx) {
+                    String originalTask = sc.nextLine();
+                    String[] splitTask = originalTask.split("~");
+
+                    int newDescriptionIndex = input.indexOf("" + idx);
+                    String newDescription = input.substring(newDescriptionIndex + 2);
+
+                    splitTask[2] = newDescription;
+                    String modifiedTask = "";
+                    for (int j = 0; j < splitTask.length; j++) {
+                        modifiedTask += splitTask[j];
+                        if (j != splitTask.length -1) {
+                            modifiedTask += "~";
+                        }
+                    }
+                    fw.write(modifiedTask + "\n");
+                } else {
+                    fw.write(sc.nextLine() + "\n");
+                }
+                i++;
+            }
+            sc.close();
+            fw.close();
+
+            originalFile.delete();
+      
+            tempFile.renameTo(originalFile);
+        } catch (FileNotFoundException e) {
+            Ui.printLines("File not found. Try again!");
+        } catch (IOException e) {
+            Ui.printLines("IOException");
+        }
+    }
+
+    public void updateTime(int idx, String input) {
+        File originalFile = new File(this.fileName);
+        File tempFile = new File("src/main/data/temp.txt");
+
+        try {
+            FileWriter fw = new FileWriter("src/main/data/temp.txt", false);
+            Scanner sc = new Scanner(originalFile);
+            int i = 1;
+
+            while (sc.hasNext()) {
+                if (i == idx) {
+                    String originalTask = sc.nextLine();
+                    String[] splitTask = originalTask.split("~");
+
+                    int newTimeIndex = input.indexOf("" + idx);
+                    String newTime = Parser.reformatDateAndTime(input.substring(newTimeIndex+ 2));
+
+                    splitTask[3] = newTime;
+                    String modifiedTask = "";
+                    for (int j = 0; j < splitTask.length; j++) {
+                        modifiedTask += splitTask[j];
+                        if (j != splitTask.length -1) {
+                            modifiedTask += "~";
+                        }
+                    }
+                    fw.write(modifiedTask + "\n");
+                } else {
+                    fw.write(sc.nextLine() + "\n");
+                }
+                i++;
+            }
+            sc.close();
+            fw.close();
+
+            originalFile.delete();
+      
+            tempFile.renameTo(originalFile);
+        } catch (FileNotFoundException e) {
+            Ui.printLines("File not found. Try again!");
+        } catch (IOException e) {
+            Ui.printLines("IOException");
+        }
+    }
 }
