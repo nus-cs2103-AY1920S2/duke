@@ -5,10 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.time.format.DateTimeParseException;
 
 
@@ -36,7 +33,7 @@ public class Duke {
      * takes in a String that contains the file path of the txt file
      * to update the TaskList in the txt file.
      */
-    public Duke() {
+    public Duke() throws IOException {
         this("data/duke.txt");
     }
 
@@ -45,13 +42,18 @@ public class Duke {
      *
      * @param filePath The file path of the duke.txt file.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
+            File file = new File("data");
+            if (!file.exists()) {
+                new File("data").mkdir();
+            }
+            new File(filePath).createNewFile();
             // shown when current saved task list in the txt file is empty
             tasks = new TaskList();
             // therefore, there is a need to make a new task list.
@@ -92,7 +94,7 @@ public class Duke {
      * @param args A String[] input.
      * @throws DateTimeParseException if user's date input is not of 'yyyy-MM-dd' format.
      */
-    public static void main(String[] args) throws DateTimeParseException {
+    public static void main(String[] args) throws DateTimeParseException, IOException {
         new Duke().run();
     }
 
