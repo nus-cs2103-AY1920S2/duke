@@ -25,6 +25,10 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    public String toSave() {
+        return (isDone ? "Y" : "N");
+    }
+
     /**
      * Task's markAsDone method.
      */

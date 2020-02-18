@@ -238,17 +238,17 @@ public class Parser {
                 if (t instanceof Deadline) {
                     Deadline temp = (Deadline) t;
                     letter = "D";
-                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.tag + " | " + temp.description + " | " + temp.dL;
+                    saveAll += letter + " | " + temp.toSave() + " | " + temp.tag + " | " + temp.description + " | " + temp.dL;
                     saveAll += "\n";
                 } else if (t instanceof Event) {
                     Event temp = (Event) t;
                     letter = "E";
-                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.tag + " | " + temp.description + " | " + temp.time;
+                    saveAll += letter + " | " + temp.toSave() + " | " + temp.tag + " | " + temp.description + " | " + temp.time;
                     saveAll += "\n";
                 } else if (t instanceof ToDo) {
                     ToDo temp = (ToDo) t;
                     letter = "T";
-                    saveAll += letter + " | " + temp.getStatusIcon() + " | " + temp.tag + " | " + temp.description;
+                    saveAll += letter + " | " + temp.toSave() + " | " + temp.tag + " | " + temp.description;
                     saveAll += "\n";
                 } else {
                     continue;

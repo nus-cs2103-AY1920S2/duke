@@ -38,7 +38,7 @@ public class Storage {
                 if (newParts[0].equals("T")) {
                     ToDo temp = new ToDo(newParts[3]);
                     temp.setTag(newParts[2]);
-                    if (newParts[1].equals("\u2713")) {
+                    if (newParts[1].equals("Y")) {
                         temp.isDone = true;
                     }
                     store.add(temp);
@@ -46,14 +46,14 @@ public class Storage {
                     LocalDateTime d1 = LocalDateTime.parse(newParts[4]);
                     Deadline temp = new Deadline(newParts[3],d1);
                     temp.setTag(newParts[2]);
-                    if (newParts[1].equals("\u2713")) {
+                    if (newParts[1].equals("Y")) {
                         temp.isDone = true;
                     }
                     store.add(temp);
                 } else if (newParts[0].equals("E")) {
                     Event temp = new Event(newParts[3], newParts[4]);
                     temp.setTag(newParts[2]);
-                    if (newParts[1].equals("\u2713")) {
+                    if (newParts[1].equals("Y")) {
                         temp.isDone = true;
                     }
                     store.add(temp);
