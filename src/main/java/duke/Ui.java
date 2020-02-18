@@ -4,12 +4,15 @@ import java.util.Scanner;
 
 public class Ui {
     public static final String WELCOME_MESSAGE =
+            /*
             " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n"
-                + "Hello! I'm Duke\n"
+                +
+             */
+                "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
                 + "\n"
                 + "Type \"help\" to see a list of possible commands.";
@@ -23,7 +26,8 @@ public class Ui {
             + "done INDEX\n"
             + "undo INDEX\n"
             + "delete INDEX\n"
-            + "help\n";
+            + "help\n"
+            + "bye\n";
 
 
 

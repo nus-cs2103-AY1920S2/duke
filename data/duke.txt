@@ -1,4 +1,5 @@
-T|0|ajsdlfkjadsf
-T|0|jalkdsjflkewjlkrwjer
-D|1|iP|2020-02-02
-D|0|something|1997-01-01
+E|0|Party at Shane's|The Capitol
+D|0|Week 6 deliverables|2020-02-18
+T|1|Submit proposal draft
+T|0|Return John's call
+T|0|Bake cookies
