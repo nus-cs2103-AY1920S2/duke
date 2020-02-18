@@ -13,6 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -28,8 +32,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Kaguya.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Gintoki.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserCat.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeWolf.jpg"));
 
     @FXML
     public void initialize() {
@@ -69,10 +73,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(userText, userImage),
                 DialogBox.getDukeDialog(dukeText, dukeImage)
         );
-        if (command.isExit()) {
-            closeApp();
-        }
         userInput.clear();
+
+        if (command.isExit()) {
+            delayExit();
+        }
     }
 
     private Command getDukeCommand(StringBuilder response) {
@@ -86,14 +91,20 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    private void delayExit() {
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.schedule(MainWindow::closeApp,2, TimeUnit.SECONDS);
+        executorService.shutdown();
+    }
+
     /**
      * Closes the GUI Application.
      */
-    private void closeApp() {
+    public static void closeApp() {
         try {
             Platform.exit();
         } catch (Exception e) {
-            displayDukeResponse("Oh dear! I cant seem to close, please alt+F4");
+            System.err.println("error in closing Duke, Please alt+F4");
         }
     }
 
