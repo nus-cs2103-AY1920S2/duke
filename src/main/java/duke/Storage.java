@@ -83,7 +83,7 @@ public class Storage {
      * Loads information from the file specified for this Storage.
      * @return An Array List of tasks loaded from the file.
      **/
-    public ArrayList<Task> loadFile () throws IOException {
+    public ArrayList<Task> loadFile () throws IOException, DukeException {
         Scanner s = new Scanner(this.file);
         return readData(s);
     }
@@ -92,7 +92,7 @@ public class Storage {
      * Reads task list from the scanner that reads a file.
      * @return An Array List of tasks.
      **/
-    private ArrayList<Task> readData(Scanner s) {
+    private ArrayList<Task> readData(Scanner s) throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNextLine()) {
             String curr = s.nextLine();
@@ -105,11 +105,19 @@ public class Storage {
                 String name = curr.substring(4, curr.indexOf('|', 4));
                 String date = curr.substring(curr.indexOf('|', 4) + 1);
                 if (type.equals("D")) {
-                    add = new Deadline(name, Parser.formatDateAndTime(date),
-                            !isDone.equals("0"));
+                    try {
+                        add = new Deadline(name, Parser.formatDateAndTime(date),
+                                !isDone.equals("0"));
+                    } catch (DukeException de) {
+                        throw new DukeException("☹ OOPS!!! The file duke.txt has an invalid date and time format");
+                    }
                 } else {
-                    add = new Event(name, Parser.formatDateAndTime(date),
-                            !isDone.equals("0"));
+                    try {
+                        add = new Event(name, Parser.formatDateAndTime(date),
+                                !isDone.equals("0"));
+                    } catch (DukeException de) {
+                        throw new DukeException("☹ OOPS!!! The file duke.txt has an invalid date and time format");
+                    }
                 }
             }
             tasks.add(add);

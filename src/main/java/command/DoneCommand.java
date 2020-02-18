@@ -32,6 +32,10 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
+            if (this.taskNumber > tasks.size()) {
+                return Ui.showException(new DukeException(
+                        "☹ OOPS!!! You only have " + tasks.size() + " tasks in the list, you cannot update task number " + taskNumber));
+            }
             Task updatedTask = tasks.get(this.taskNumber - 1).setDone();
             tasks.set(this.taskNumber - 1, updatedTask);
             storage.deleteFromFile(this.taskNumber);

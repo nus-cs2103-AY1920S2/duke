@@ -19,11 +19,20 @@ public class Ui {
     }
 
     /**
-     * Shows an error message of loading a file to the user.
+     * Shows an error message of loading a file to the user, when loading throws an IOException.
      * @param e The exception to be shown.
      * @return Message of the error.
      **/
     String showLoadingError(IOException e) {
+        return e.toString();
+    }
+
+    /**
+     * Shows an error message of loading a file to the user, when loading throws a DukeException.
+     * @param e The exception to be shown.
+     * @return Message of the error.
+     **/
+    String showLoadingError(DukeException e) {
         return e.toString();
     }
 

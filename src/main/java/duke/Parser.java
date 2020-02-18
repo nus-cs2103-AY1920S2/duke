@@ -40,12 +40,19 @@ public class Parser {
             case "bye":
                 return new ExitCommand();
             case "schedule":
-                return new ScheduleCommand(Parser.extractDate(Parser.getDateAndTimeOnly(trimCommand)));
+                try {
+                    return new ScheduleCommand(Parser.formatDate(Parser.getDateAndTimeOnly(trimCommand)));
+                } catch (DukeException de) {
+                    return new ErrorCommand(de);
+                }
             case "find":
                 return new FindCommand(Parser.getSecond(trimCommand));
             case "done":
                 try {
                     return new DoneCommand(Integer.valueOf(Parser.getSecond(trimCommand)));
+                } catch (NumberFormatException nfe) {
+                    return new ErrorCommand(new DukeException(
+                            "☹ OOPS!!! The description of a done should be an integer."));
                 } catch (IndexOutOfBoundsException e) {
                     return new ErrorCommand(new DukeException(
                             "☹ OOPS!!! The description of a done cannot be empty."));
@@ -53,6 +60,9 @@ public class Parser {
             case "delete":
                 try {
                     return new DeleteCommand(Integer.valueOf(Parser.getSecond(trimCommand)));
+                } catch (NumberFormatException nfe) {
+                    return new ErrorCommand(new DukeException(
+                            "☹ OOPS!!! The description of a delete should be an integer."));
                 } catch (IndexOutOfBoundsException e) {
                     return new ErrorCommand(new DukeException(
                             "☹ OOPS!!! The description of a delete cannot be empty."));
@@ -68,17 +78,21 @@ public class Parser {
                 try {
                     return new AddDeadlineCommand(Parser.getTaskName(trimCommand),
                             Parser.formatDateAndTime(Parser.getDateAndTimeOnly(trimCommand)));
+                } catch (DukeException de) {
+                    return new ErrorCommand(de);
                 } catch (IndexOutOfBoundsException e) {
                     return new ErrorCommand(new DukeException(
-                            "☹ OOPS!!! The description of a deadline cannot be empty."));
+                            "☹ OOPS!!! The description of a deadline have to include a name, date and time of the deadline task."));
                 }
             case "event":
                 try {
                     return new AddEventCommand(Parser.getTaskName(trimCommand),
                             Parser.formatDateAndTime(Parser.getDateAndTimeOnly(trimCommand)));
+                } catch (DukeException de) {
+                    return new ErrorCommand(de);
                 } catch (IndexOutOfBoundsException e) {
                     return new ErrorCommand(new DukeException(
-                            "☹ OOPS!!! The description of an event cannot be empty."));
+                            "☹ OOPS!!! The description of an event have to include a name, date and time of the event task."));
                 }
             default:
                 return new ErrorCommand(new DukeException(
@@ -106,8 +120,11 @@ public class Parser {
             assert taskType.equals("deadline") || taskType.equals("event");
             return getBeforeSeparator(message);
         } else {
-            assert taskType.equals("todo") : taskType;
-            return message.trim().substring(5);
+            if (taskType.equals("todo")) {
+                return message.trim().substring(5);
+            } else {
+                throw new IndexOutOfBoundsException();
+            }
         }
     }
 
@@ -142,13 +159,31 @@ public class Parser {
     }
 
     /**
+     * Retrieves the date and time format of the command.
+     * @param message The message text.
+     * @return Date format of the of the command of the task
+     **/
+    public static LocalDateTime formatDateAndTime(String message) throws DukeException {
+        //String time = getTime(message);
+        if (isDateValid(message) && isTimeValid(message)) {
+            String time = getTime(message);
+            return extractDate(message).atTime(LocalTime.parse(time));
+        } else {
+            throw new DukeException("☹ OOPS!!! Sorry, but your date and time format needs to be dd/mm/yy hhmm");
+        }
+    }
+
+    /**
      * Retrieves the date format of the command.
      * @param message The message text.
      * @return Date format of the of the command of the task
      **/
-    public static LocalDateTime formatDateAndTime(String message) {
-        String time = getTime(message);
-        return extractDate(message).atTime(LocalTime.parse(time));
+    public static LocalDate formatDate (String message) throws DukeException {
+        if (isDateValid(message)) {
+            return extractDate(message);
+        } else {
+            throw new DukeException("☹ OOPS!!! Sorry, but your date format needs to be dd/mm/yy");
+        }
     }
 
     /**
@@ -156,11 +191,39 @@ public class Parser {
      * @param message The message text.
      * @return Date format of the of the string format of the date
      **/
-    public static LocalDate extractDate(String message) {
+    public static LocalDate extractDate(String message) throws DukeException {
         String[] original = getDayMonthYearArray(message);
         String[] reversed = getYearMonthDayArray(original);
         String date = String.join("-", reversed);
         return LocalDate.parse(date);
+    }
+
+    private static boolean isDateValid (String message) {
+        String[] original = getDayMonthYearArray(message);
+        if (original.length != 3) {
+            return false;
+        }
+        String day = original[0];
+        String month = original[1];
+        String year = original[2];
+        Integer intDay;
+        Integer intMonth;
+        Integer intYear;
+        try {
+            intDay = Integer.valueOf(day);
+            intMonth = Integer.valueOf(month);
+            intYear = Integer.valueOf(year);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        if (day.length() > 2 || intDay > 31 || intDay < 1) {
+            return false;
+        } else if (month.length() > 2 || intMonth > 12 || intMonth < 1) {
+            return false;
+        } else if (year.length() > 4 || intYear < 0) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -172,6 +235,28 @@ public class Parser {
         StringBuilder time = new StringBuilder(message.substring(message.indexOf(" ") + 1));
         time.insert(2, ':');
         return time.toString();
+    }
+
+    /**
+     * Checks whether the time from the message time is valid.
+     * @param message The message string time.
+     */
+    private static boolean isTimeValid (String message) {
+        try {
+            if ((!message.contains(" "))) {
+                return false;
+            }
+            String stringAssumedTime = message.substring(message.indexOf(" ") + 1);
+            Integer intAssumedTime = Integer.valueOf(stringAssumedTime);
+            if (stringAssumedTime.length() != 4) {
+                return false;
+            } else if (intAssumedTime < 0 || intAssumedTime > 2400) {
+                    return false;
+            }
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
     /**
