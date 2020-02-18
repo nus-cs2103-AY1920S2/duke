@@ -2,19 +2,30 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Command Format
+- Words in square brackets are user specified items e.g. [NAME] can be John.
+- All date and time is given using the format YYYY-MM-DD HH:MM.
+- All parameters must be given in order.
 
-## Usage
+### Adding a todo: `todo`
+Format: `todo [DESCRIPTION]`
 
-### `Keyword` - Describe action
+### Adding a deadline: `deadline`
+Format: `deadline [DESCRIPTION] /by [DATETIME]`
 
-Describe action and its outcome.
+### Adding an event: `event`
+Format: `event [DESCRIPTION] /at [DATETIME] to [DATETIME]`
 
-Example of usage: 
+### Listing all tasks: `list`
+Format: `list`
 
-`keyword (optional arguments)`
+### Finding relevant tasks: `find`
+Format: `find [DESCRIPTION]`
 
-Expected outcome:
+### Snoozing tasks: `snooze`
+Format: `snooze [INDEX] [DATETIME]` for deadlines
 
-`outcome`
+Format: `snooze [INDEX] [DATETIME] to [DATETIME]` for events
+
+
+
