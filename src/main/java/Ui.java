@@ -99,7 +99,7 @@ public class Ui {
         if (str.isEmpty()) {
             return "Missing task number.";
         } else {
-            return str + "not complete";
+            return str + " not complete";
         }
     }
 

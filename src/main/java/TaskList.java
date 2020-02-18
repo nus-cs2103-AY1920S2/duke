@@ -58,8 +58,10 @@ public class TaskList {
     public String findTask(String description) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
+        String buffer = description.toLowerCase();
         for (Task task : tasks) {
-            if (task.description.contains(description)) {
+            String s = task.description.toLowerCase();
+            if (s.contains(buffer)) {
                 foundTasks.add(task);
             }
         }
@@ -71,7 +73,7 @@ public class TaskList {
                 sb.append(i + 1 + ". " + foundTasks.get(i).toString() + "\n");
             }
             Ui.showLine();
-            return (sb.toString().strip());
+            return ("Found your matching tasks in your list:\n" + sb.toString().strip());
         } else {
             Ui.showLine();
             System.out.println("There are no matching tasks in your list");

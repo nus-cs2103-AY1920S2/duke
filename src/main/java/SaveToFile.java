@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -34,7 +35,9 @@ public class SaveToFile {
                 String[] fileStringArr = fileInput.split("\\[");
                 if (fileStringArr[1].equalsIgnoreCase("T]")) {
                     String[] todoSplit = fileStringArr[2].split(" ");
-                    Todo readTodo = new Todo(todoSplit[1]);
+                    String[] todoDescription = Arrays.copyOfRange(todoSplit, 1, todoSplit.length);
+                    String str = String.join(" ", todoDescription);
+                    Todo readTodo = new Todo(str);
                     readTodo.isDone(todoSplit[0]);
                     arr.add(readTodo);
                 } else if (fileStringArr[1].equalsIgnoreCase("D]")) {
