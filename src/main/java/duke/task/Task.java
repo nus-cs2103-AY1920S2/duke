@@ -35,6 +35,9 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
 
     /**
      * From the input given by the user, filter out the commands (TO-DO/Deadline/Event)

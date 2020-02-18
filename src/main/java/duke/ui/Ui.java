@@ -54,9 +54,16 @@ public class Ui {
      */
     public String printList(TaskList taskList, Storage storage) throws FileNotFoundException {
 
-        storage.getNumberOfTasks();
-        return LINES + System.lineSeparator() + "There are " + storage.getNumberOfTasks() + " of items in the list "
-                + System.lineSeparator() + storage.getStoredItems() + LINES + System.lineSeparator();
+        String finalList = "";
+
+        int numberOfTasks = storage.getNumberOfTasks();
+        String storedItems = storage.getStoredItems();
+        String[] storedArrays = storedItems.split(System.lineSeparator());
+
+        finalList = formatFromStorage(storedArrays);
+
+        return LINES + System.lineSeparator() + "There are " + numberOfTasks + " items in the list "
+                + System.lineSeparator() + finalList + LINES + System.lineSeparator();
     }
 
     /**
@@ -67,8 +74,13 @@ public class Ui {
      * @return the string
      */
     public String printFoundList(TaskList taskList, ArrayList<String> storageList) {
+        String finalList = "";
         String fromStorageList = storageList.stream().collect(Collectors.joining(System.lineSeparator()));
-        return LINES + System.lineSeparator() + fromStorageList
+        String[] fromStorageLists = fromStorageList.split(System.lineSeparator());
+
+        finalList = formatFromStorage(fromStorageLists);
+
+        return LINES + System.lineSeparator() + finalList
                 + taskList.print_elements() + LINES + System.lineSeparator();
 
 
@@ -104,19 +116,17 @@ public class Ui {
      */
     public String printDone(ArrayList<String> storageElements,
                             Storage storage, String modifiedString) throws IOException {
-        File file = new File(storage.getFilePath());
-        file.getParentFile().mkdirs();
-        FileWriter fw = new FileWriter(file);
 
-        for (String s : storageElements) {
-            fw.write(s + System.lineSeparator());
+        writeToFile(storageElements, storage);
+        String markedAsDone = "";
+        if (modifiedString.contains("1")) {
+            markedAsDone = modifiedString.substring(0, 6) + getStatusIcon(true) + modifiedString.substring(7);
+        } else {
+            markedAsDone = modifiedString.substring(0, 6) + getStatusIcon(false) + modifiedString.substring(7);
         }
-        fw.close();
-
         return LINES + System.lineSeparator() + SPACE + "Nice! I've marked this task as done"
-                + System.lineSeparator() + SPACE + modifiedString
+                + System.lineSeparator() + SPACE + markedAsDone
                 + System.lineSeparator() + LINES + System.lineSeparator();
-
     }
 
     /**
@@ -147,14 +157,7 @@ public class Ui {
      */
     public String printDelete(ArrayList<String> list, Storage storage, String deletedTask) throws IOException {
 
-        File file = new File(storage.getFilePath());
-        file.getParentFile().mkdirs();
-        FileWriter fw = new FileWriter(file);
-
-        for (String s : list) {
-            fw.write(s + System.lineSeparator());
-        }
-        fw.close();
+        writeToFile(list, storage);
         return SPACE + LINES + System.lineSeparator()
                 + SPACE + "Noted. I've removed this task:" + System.lineSeparator() + SPACE + deletedTask
                 + System.lineSeparator() + SPACE + "Now you have " + storage.getNumberOfTasks() + " tasks in the list."
@@ -188,6 +191,36 @@ public class Ui {
             throw new DukeException("You have entered a wrong command");
         }
     }
+
+    private void writeToFile(ArrayList<String> tasks, Storage storage) throws IOException {
+        File file = new File(storage.getFilePath());
+        file.getParentFile().mkdirs();
+        FileWriter fw = new FileWriter(file);
+
+        for (String s : tasks) {
+            fw.write(s + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    private String getStatusIcon(boolean isDone) {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    private String formatFromStorage(String[] storedArrays) {
+        String finalList = "";
+
+        for (String s : storedArrays) {
+            if (s.substring(6, 7).equals("1")) {
+                finalList += s.substring(0, 6) + getStatusIcon(true) + s.substring(7) + System.lineSeparator();
+            } else {
+                finalList += s.substring(0, 6) + getStatusIcon(false) + s.substring(7) + System.lineSeparator();
+            }
+        }
+
+        return finalList;
+    }
+
 
 
 }

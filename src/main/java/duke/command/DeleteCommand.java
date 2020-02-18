@@ -40,13 +40,15 @@ public class DeleteCommand extends Command {
     public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException, IOException {
         int indexToBeMarkedDone = obtainIndexToBeDeleted(" ", userInput, taskList, ui,
                 storage.getNumberOfTasks());
-        String[] storageArrays = storage.getStoredItems().split(System.lineSeparator());
-        ArrayList<String> storageElements = new ArrayList<>(Arrays.asList(storageArrays));
+        String[] tasksFromStorages = storage.getStoredItems().split(System.lineSeparator());
+        ArrayList<String> storageTasks = new ArrayList<>(Arrays.asList(tasksFromStorages));
 
         // Now if we modifying from the file itself.
-        String preModifiedString = storageElements.get(indexToBeMarkedDone - 1);
-        storageElements.remove(preModifiedString);
-        return ui.printDelete(storageElements, storage, preModifiedString);
+        String preModifiedString = storageTasks.get(indexToBeMarkedDone - 1);
+        preModifiedString = formatModifiedString(preModifiedString);
+        storageTasks.remove(storageTasks.get(indexToBeMarkedDone - 1));
+
+        return ui.printDelete(storageTasks, storage, preModifiedString);
     }
 
     private int obtainIndexToBeDeleted(String regrexWanted, String userInput, TaskList taskList,
@@ -63,4 +65,16 @@ public class DeleteCommand extends Command {
         }
         return arrayIndex;
     }
+
+
+    private String formatModifiedString(String s) {
+        String returnedString = "";
+        if (s.substring(6, 7).equals("1")) {
+            returnedString = s.substring(0, 6) + getStatusIcon(true) + s.substring(7);
+        } else {
+            returnedString = s.substring(0, 6) + getStatusIcon(false) + s.substring(7);
+        }
+        return returnedString;
+    }
+
 }

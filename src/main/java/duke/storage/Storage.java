@@ -36,7 +36,16 @@ public class Storage {
     public void saveTask(Task task) throws IOException {
         file.getParentFile().mkdirs();
         FileWriter fw = new FileWriter(file, true);
-        fw.write(task.toString() + System.lineSeparator());
+        String test = task.toString();
+
+        // Means if the task is done
+        if (task.isDone()) {
+            test = test.substring(0,6) + "1" + test.substring(7);
+        } else {
+            test = test.substring(0,6) + "0" + test.substring(7);
+        }
+        System.out.println("The test value is " + test);
+        fw.write(test + System.lineSeparator());
         fw.close();
     }
 
@@ -61,7 +70,8 @@ public class Storage {
         Scanner myScanner = new Scanner(object);
         storedItems = "";
         while (myScanner.hasNextLine()) {
-            storedItems += myScanner.nextLine() + System.lineSeparator();
+            String nextLine = myScanner.nextLine();
+            storedItems += nextLine + System.lineSeparator();
             counter++;
         }
         return counter;

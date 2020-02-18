@@ -39,4 +39,11 @@ public abstract class Command {
      */
     public abstract String execute(Storage storage, Ui ui, TaskList tasklist)
             throws DukeException, FindException, IOException;
+
+
+
+    protected String getStatusIcon(boolean isDone) {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
 }

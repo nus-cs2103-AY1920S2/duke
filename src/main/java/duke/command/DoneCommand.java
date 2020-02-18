@@ -50,7 +50,7 @@ public class DoneCommand extends Command {
         StringBuilder stringFromStorage = new StringBuilder(preModifiedString);
         // TODO Why cant you set an ascii code to a character?
         //stringFromStorage.setCharAt(6, '\u2713');
-        String postModifiedString = stringFromStorage.substring(0,6) + this.getStatusIcon()
+        String postModifiedString = stringFromStorage.substring(0,6) + "1"
                 + stringFromStorage.substring(7);
         storageElements.add(indexToBeMarkedDone - 1, postModifiedString);
         return ui.printDone(storageElements, storage, postModifiedString);
