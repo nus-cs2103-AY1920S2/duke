@@ -41,4 +41,8 @@ public class GuiDuke extends Duke {
         c.execute(tasks, ui, storage);
         return ui.getResponse();
     }
+
+    public boolean isExit(String command) {
+        return Parser.parse(command).isExit();
+    }
 }

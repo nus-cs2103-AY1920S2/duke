@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -31,6 +32,12 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(GuiDuke d) {
         duke = d;
+
+        // show welcome message
+        duke.ui.showWelcome();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(duke.ui.getResponse(), dukeImage)
+        );
     }
 
     /**
@@ -46,5 +53,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (duke.isExit(input)) {
+            Platform.exit();
+        }
     }
 }
