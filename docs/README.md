@@ -23,6 +23,7 @@ Close the application.
 ### `list` - list all tasks in the list
 
 Example of usage: 
+![Image of list]
 (https://github.com/joycelynteo/duke/tree/master/docs/images/list.png)
 
 ### `todo {task}` - add a todo task
