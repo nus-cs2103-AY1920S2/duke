@@ -8,20 +8,20 @@ Tinga is an Personal Assistant Chatbot that helps you keep track of your tasks.
 
 ## Features 
 
-### Create 
+### `Create` 
 Create a tasks (To do, event or deadline) and add it to your tasks list.
 You can specify dates for events and deadline tasks.
 
-### Edit 
+### `Edit`
 Edit or modify the description of a task.
 
-### Delete 
+### `Delete` 
 Delete a task from the list.
 
-### Search 
+### `Search` 
 Search the list for tasks containing a keyword.
 
-### View 
+### `View` 
 View list of all tasks.
 
 ## Usage
@@ -77,7 +77,7 @@ Creates an Event task and adds it to the list.
 #### Expected outcome:
 
     Got it. I've added this task:
-    [D][✗] return book (by: Feb 20 2020)
+    [E][✗] return book (at: Feb 20 2020)
     Now you have 6 tasks in the list.
     
 ### 4. `update` - Edits description of task
