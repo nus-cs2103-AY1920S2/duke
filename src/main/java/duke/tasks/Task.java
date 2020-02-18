@@ -26,6 +26,8 @@ public class Task {
         isDone = true;
     }
 
+    public void undoDone() { isDone = false; }
+
     public String getDescription() {
         return description;
     }

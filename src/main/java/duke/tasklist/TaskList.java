@@ -34,6 +34,11 @@ public class TaskList {
         t.setDone();
     }
 
+    public void undoDone(int doneTask) {
+        Task t = list.get(doneTask);
+        t.undoDone();
+    }
+
     public void deleteTask(int deleteTask) {
         Task t = list.get(deleteTask);
         list.remove(deleteTask);

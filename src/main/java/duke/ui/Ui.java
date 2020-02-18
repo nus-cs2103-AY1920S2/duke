@@ -60,6 +60,14 @@ public class Ui {
         return output;
     }
 
+    public String printUndoDone(TaskList tasks, int doneTask) {
+        String output = "";
+        output += "I've set this task back to undone" + "\n";
+        Task t = tasks.getList().get(doneTask);
+        output += t.toString();
+        return output;
+    }
+
     public String printDelete(TaskList tasks, int deleteTask) {
         String output = "";
         List<Task> list = tasks.getList();

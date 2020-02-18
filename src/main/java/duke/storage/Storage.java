@@ -5,6 +5,7 @@
 
 package duke.storage;
 
+import duke.parser.Parser;
 import duke.tasks.Task;
 import duke.tasks.Events;
 import duke.tasks.Deadline;
@@ -102,6 +103,37 @@ public class Storage {
     }
 
     /**
+     * undoUpdateTask() updates the information int the text file when a task is undone
+     */
+    public void undoUpdateTask(int doneTask, TaskList tasks) throws IOException {
+        List<Task> list = tasks.getList();
+        FileReader fr = new FileReader(filepath);
+        BufferedReader br = new BufferedReader(fr);
+        List<String> tempArr = new ArrayList<String>();
+        for (int i = 0; i < list.size(); i++) {
+            if (i == doneTask) {
+                String oldLine = br.readLine();
+                String updatedLine = oldLine.replaceFirst("1", "0");
+                tempArr.add(updatedLine);
+            } else {
+                tempArr.add(br.readLine());
+            }
+        }
+        Files.delete(Paths.get(filepath));
+        File newFile = new File(filepath);
+        FileWriter fw = new FileWriter(filepath);
+        for (int j = 0; j < tempArr.size(); j++) {
+            if (j == 0) {
+                fw.write(tempArr.get(j));
+            } else {
+                fw.write("\n");
+                fw.write(tempArr.get(j));
+            }
+        }
+        fw.close();
+    }
+
+    /**
      * deleteTask() updates the information int the text file when a task is deleted
      */
     public void deleteTask(int deleteTask, TaskList tasks) throws IOException {
@@ -112,6 +144,7 @@ public class Storage {
         for (int i = 0; i < list.size(); i++) {
             if (i == deleteTask) {
                 String delete = br.readLine();
+                Parser.lastDeleted = delete;
                 continue;
             } else {
                 tempArr.add(br.readLine());
