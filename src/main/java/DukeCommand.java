@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.lang.String;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,9 +34,11 @@ public enum DukeCommand {
 
             // Asserting the task, check if it is done
             assert taskToBeCompleted.getStatusIcon() == "Y" : "Task is not made done";
-
-            storage.store(list, ui);
-
+            try {
+                storage.store(list, ui);
+            } catch (IOException ioex) {
+                return ioex.getMessage();
+            }
             // Show message to user
             // Indicate that task is done
             return ui.finishMessage(taskToBeCompleted);

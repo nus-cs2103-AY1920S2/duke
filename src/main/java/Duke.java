@@ -105,18 +105,28 @@ public class Duke {
 
             if (ErrorMessage.equals("")) {
                 // Run this line of code when there is no error with the command
-                this.dukeAnswer(executeCommmand(line, tasks, ui, storage));
+                // But when specific tasks (Event/Deadline) is added, the date
+                // and time will be validated here. Therefore, it will still
+                // print out error code when the date or time format input
+                // is incorrect
+                 this.dukeAnswer(executeCommmand(line, tasks, ui, storage));
             } else {
+                // Invalid command
                 this.dukeAnswer(ErrorMessage);
             }
 
             // Wait for next input command
             line = sc.nextLine();
         }
+            try {
+                storage.store(tasks, ui);
+            } catch (IOException ioex) {
+                dukeAnswer(ioex.getMessage());
+            } finally {
+                // Say 'bye' to the user
+                dukeAnswer(ui.exitMessage());
+            }
 
-        storage.store(tasks, ui);
-        // Say 'bye' to the user
-        dukeAnswer(ui.exitMessage());
     }
 
     /**

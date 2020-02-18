@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,13 @@ public class TaskList {
      */
     public void add(Task mytask) {
         tasks.add(mytask);
-        storage.store(this, ui);
+
+        // Storing list into a txt file
+        try {
+            storage.store(this, ui);
+        } catch(IOException ioex) {
+            ui.showErrorMessage(ioex.getMessage());
+        }
     }
 
     /**
@@ -44,7 +51,13 @@ public class TaskList {
         tasks.remove(index); // Deletes from task list
 
         assert sizeBeforeDeletion - 1 == getsize() : "Task not deleted!";
-        storage.store(this, ui);
+
+        //Storing list into a txt file
+        try {
+            storage.store(this, ui);
+        } catch(IOException ioex) {
+            ui.showErrorMessage(ioex.getMessage());
+        }
     }
 
     /**
@@ -87,6 +100,7 @@ public class TaskList {
     public boolean hasDuplicates(Task taskCheck) {
         for (Task task : this.tasks) {
             if (task.equals(taskCheck)) {
+                // Duplicate found
                 return true;
             }
         }

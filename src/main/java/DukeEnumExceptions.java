@@ -15,27 +15,32 @@ public enum DukeEnumExceptions {
     },
     DONE {
         public void checkError(String s1, String s2, TaskList list) throws DukeException{
-            int numOfArgs = Integer.parseInt(s2);
-            String[] allargs = s1.split("\\s+");
+            try {
+                int numOfArgs = Integer.parseInt(s2);
+                String[] allargs = s1.split("\\s+");
 
-            if (allargs.length != numOfArgs) {
-                throw new DukeException("'done' command should only have 2 arguments");
-            } else if (Integer.parseInt(allargs[1]) > list.getsize()
-                    || Integer.parseInt(allargs[1]) < 0) {
-                throw new DukeException("Task index is not found!");
+                if (allargs.length != numOfArgs) {
+                    throw new DukeException("'done' command should only have 2 arguments");
+                } else if (Integer.parseInt(allargs[1]) > list.getsize()
+                        || Integer.parseInt(allargs[1]) < 0) {
+                    throw new DukeException("Task index is not found!");
+                }
+            } catch (NumberFormatException ex) {
+                throw new DukeException("The second argument should be an integer!");
             }
+
+
+
         }
     },
     TODO {
         public void checkError(String s1, String s2, TaskList list) throws DukeException {
             int numOfArgs = Integer.parseInt(s2);
-            String[] allargs = s1.split("\\s+");
+            String[] allargs = s1.split("\\s+", 2);
 
             if (numOfArgs > allargs.length) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
-
-            if (list.hasDuplicates(new Todo(allargs[1]))) {
+            } else if (list.hasDuplicates(new Todo(allargs[1]))) {
                 throw new DukeException("OOPS!!! There is a same task already added into the list " +
                         "\n" + "or there is a clash of timing with one of the tasks in your list!");
             }

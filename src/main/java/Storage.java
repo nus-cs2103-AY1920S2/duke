@@ -30,7 +30,6 @@ public class Storage {
         List<Task> Tasklist = new ArrayList<Task>();
 
         BufferedReader reader = new BufferedReader(new FileReader(this.filePath));
-
         String currentline = reader.readLine();
 
         while (currentline != null) {
@@ -89,33 +88,29 @@ public class Storage {
      * @param ui       Ui object for printing to user.
      * @param alltasks TaskList object as argument.
      */
-    public void store(TaskList alltasks, Ui ui) {
-        try {
-            String line = "";
-            BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
+    public void store(TaskList alltasks, Ui ui) throws IOException {
+        String line = "";
+        BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
 
-            // Iterate through the list and put data in .txt file
-            for (Task task : alltasks.getListOfTask()) {
-                if (task.getType().equals("[T]")) {
-                    // Todo objects
-                    line = "[T] " + task.getStatusIcon() + " " + task.getDesc();
-                } else {
-                    // Deadline/Event objects
-                    // Add a "%" as a boundary between the description
-                    // and the date/time. Will be used to get the two separately.
-                    line = task.getType() + " " + task.getStatusIcon() + " " +
-                            task.getDesc() + "%" + task.getDate();
-                }
-
-                writer.write(line);
-                writer.newLine();
-                line = "";
+        // Iterate through the list and put data in .txt file
+        for (Task task : alltasks.getListOfTask()) {
+            if (task.getType().equals("[T]")) {
+                // Todo objects
+                line = "[T] " + task.getStatusIcon() + " " + task.getDesc();
+            } else {
+                // Deadline/Event objects
+                // Add a "%" as a boundary between the description
+                // and the date/time. Will be used to get the two separately.
+                line = task.getType() + " " + task.getStatusIcon() + " " +
+                        task.getDesc() + "%" + task.getDate();
             }
-            writer.close();
-        } catch (IOException ioex) {
-            ui.showErrorMessage(ioex.getMessage());
 
+            writer.write(line);
+            writer.newLine();
+            line = "";
         }
+        writer.close();
+
     }
 
 }

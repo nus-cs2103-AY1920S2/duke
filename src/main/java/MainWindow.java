@@ -5,6 +5,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -53,11 +56,16 @@ public class MainWindow extends AnchorPane {
             // javafx-problem-with-platform-runlater-delayed-rendering-of-canvas-graphic
                 new Thread(() -> {
                     try {
+                        duke.getStorage().store(duke.getTaskList(), ui);
                         Thread.sleep(100);
                     } catch (InterruptedException exc) {
                         dialogContainer.getChildren().addAll(
                                 DialogBox.getUserDialog(input, userImage),
                                 DialogBox.getDukeDialog(dukeRespond(exc.getMessage()), dukeImage)
+                        );
+                    } catch (IOException ioex) {
+                        dialogContainer.getChildren().addAll(
+                                DialogBox.getDukeDialog(dukeRespond(ioex.getMessage()), dukeImage)
                         );
                     }
                     Platform.exit();
