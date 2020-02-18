@@ -35,6 +35,7 @@ public class Storage {
     public Storage(String filepath) {
         this.filepath = filepath;
         file = new File(filepath);
+        file.getParentFile().mkdir();
     }
 
     /**

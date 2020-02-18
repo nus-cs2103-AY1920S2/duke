@@ -87,7 +87,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Spongebob Organiser");
+        stage.setTitle("todo list");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

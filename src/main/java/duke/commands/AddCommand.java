@@ -51,7 +51,7 @@ public class AddCommand extends Command {
                     //CALL UI: print output
                     return ui.printAddTask(tasks);
                 } else {
-                    throw new DukeException("☹ OOPS!!! Please specify the deadline.");
+                    throw new DukeException("☹ OOPS!!! Please specify the deadline in the format 2015-02-20T06:30:00.");
                 }
             } else {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -70,7 +70,7 @@ public class AddCommand extends Command {
                     //CALL UI: print output
                     return ui.printAddTask(tasks);
                 } else {
-                    throw new DukeException("☹ OOPS!!! Please specify event time.");
+                    throw new DukeException("☹ OOPS!!! Please specify event time in the format 2015-02-20T06:30:00");
                 }
             } else {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
