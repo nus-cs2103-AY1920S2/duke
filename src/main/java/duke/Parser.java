@@ -40,7 +40,6 @@ public class Parser {
             } else {
                 TaskEnum taskEnum;
                 String comm = cmd.split(" ")[0];
-                System.out.println(comm);
                 taskEnum = TaskEnum.valueOf(comm.toUpperCase());
                 switch (taskEnum) {
                 case TODO:
