@@ -92,7 +92,7 @@ public class Duke {
                 TemporalAmount duration = duke.parser.parseSnoozeDuration(arguments);
                 Task snoozedTask = duke.tasks.snooze(taskNumber, duration);
                 duke.storage.save(duke.tasks);
-                return "Noted. Here is the updated task:\n" + snoozedTask;
+                return "Noted. Here's the updated task:\n  " + snoozedTask;
             }
         },
 
