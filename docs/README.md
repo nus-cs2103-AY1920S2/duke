@@ -71,18 +71,6 @@ The chatbot will instantly reply you.
 
 If you key in commands that the chatbot does not recognize, you'll receive a random message from the chatbot.
 
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
-
 ## Commands
 
 1. [General](#general-commands)
@@ -118,7 +106,9 @@ Exits the program after 1 minute.
 
 **Command:**
 
-```tasks```
+```
+tasks
+```
 
 **Result:**
 
@@ -128,7 +118,9 @@ List all the tasks.
 
 **Command:**
 
-```todo [description]```
+```
+todo [description]
+```
 
 **Arguments:**
 
@@ -148,7 +140,9 @@ Adds a todo task to the task list.
 
 **Command:**
 
-```deadline [description] /by [datetime]```
+```
+deadline [description] /by [datetime]
+```
 
 **Arguments:**
 
@@ -169,7 +163,9 @@ Adds a deadline task to the task list.
 
 **Command:**
 
-```event [description] /from [start datetime] /to [end datetime]```
+```
+event [description] /from [start datetime] /to [end datetime]
+```
 
 **Arguments:**
 
@@ -191,7 +187,9 @@ Adds an event task to the task list.
 
 **Command:**
 
-```done [index]```
+```
+done [index]
+```
 
 **Arguments:**
 
@@ -211,7 +209,9 @@ Marks a task as done.
 
 **Command:**
 
-```find [description]```
+```
+find [description]
+```
 
 **Arguments:**
 
@@ -231,7 +231,9 @@ Searches the tasks which contains the description and lists them.
 
 **Command:**
 
-```delete task [index]```
+```
+delete task [index]
+```
 
 **Arguments:**
 
@@ -253,7 +255,9 @@ Removes the task from the task list.
 
 **Command:**
 
-```expenses```
+```
+expenses
+```
 
 **Result:**
 
@@ -263,7 +267,9 @@ List all the expenses and view the total amount spent.
 
 **Command:**
 
-```expense [amount] /dollar [description] /on [date]```
+```
+expense [amount] /dollar [description] /on [date]
+```
 
 **Arguments:**
 
@@ -285,7 +291,9 @@ Adds a deadline task to the task list.
 
 **Command:**
 
-```delete expense [index]```
+```
+delete expense [index]
+```
 
 **Arguments:**
 
