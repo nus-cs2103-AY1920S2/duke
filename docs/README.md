@@ -1,5 +1,7 @@
 # User Guide
 
+Welcome to using Duke! Theres a music toggle if you like to have music on
+
 ## Features 
 
 ### Contact Command
