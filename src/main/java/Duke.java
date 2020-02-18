@@ -42,7 +42,7 @@ public class Duke {
     }
 
     public Storage getStorage() {
-        assert storage != null: "Storage not initialised properly";
+        assert storage != null : "Storage not initialised properly";
         return storage;
     }
 

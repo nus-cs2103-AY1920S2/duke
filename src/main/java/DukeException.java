@@ -13,8 +13,8 @@ public class DukeException extends Exception {
         case "DEADLINE_NO_DESC": // deadline task needs a description
             return "Oh no! :( The description of deadline cannot be empty.";
         case "DEADLINE_NO_DEADLINE": // deadline task needs a deadline
-            return "Please include the deadline of this task! \nIt needs to be specified in the following " +
-                    "format: YYYY/MM/DD HHmm e.g. 2019/02/01 0900";
+            return "Please include the deadline of this task! \nIt needs to be specified in the following "
+                    + "format: YYYY/MM/DD HHmm e.g. 2019/02/01 0900";
         case "EVENT_NO_DESC": // event task needs a description
             return "Oh no! :( The description for event cannot be empty.";
         case "EVENT_NO_DATE_AND_TIME": // event task needs a date and time
@@ -28,8 +28,8 @@ public class DukeException extends Exception {
         case "ITEM_NOT_FOUND": // when the keyword inputted cannot be found in any of the tasks in the task list
             return "The keyword cannot be found in any of the tasks in your task list!";
         case "UPDATE_DEADLINE_DATE_TIME_NEEDED": // new deadline date and time not provided
-            return "Please provide both the date and time for this deadline task:)" + "\n" + "Reminder: It needs to " +
-                    "be specified in the following format: YYYY/MM/DD HHmm e.g. 2019/02/01 0900";
+            return "Please provide both the date and time for this deadline task:)" + "\n" + "Reminder: It needs to "
+                    + "be specified in the following format: YYYY/MM/DD HHmm e.g. 2019/02/01 0900";
         case "COMMAND_NOT_FOUND":
             return "Task not found! Please check the list if you forgot the task you inputted!";
         case "LOAD_ERROR": // file loading error

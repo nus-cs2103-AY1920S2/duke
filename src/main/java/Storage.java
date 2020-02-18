@@ -34,8 +34,8 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = br.readLine();
             while (line != null) {
-                Parser HDParser = new Parser(tasks);
-                HDParser.loadText(line);
+                Parser hdParser = new Parser(tasks);
+                hdParser.loadText(line);
                 line = br.readLine();
             }
             return taskList;
@@ -55,7 +55,7 @@ public class Storage {
      *
      * @throws IOException if there is error in writing to the file.
      */
-    public void updateHD() throws IOException {
+    public void updateHd() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         for (Task task: taskList) {
             writer.write(task.updateFile() + "\n");

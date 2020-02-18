@@ -23,7 +23,7 @@ public class Parser {
      * @return message showing the task completed by user.
      * @throws DukeException if command for task that is completed is not specified.
      */
-    public String handleDone (String command) throws DukeException {
+    public String handleDone(String command) throws DukeException {
         String[] strArr = command.split(" ");
         if (strArr.length == 1) {
             throw new DukeException("UNK_TASK_DONE");
@@ -55,7 +55,7 @@ public class Parser {
      * @return message showing the Todo task user has inputted and the total number of tasks in the task list.
      * @throws DukeException if command for Todo task is not inputted.
      */
-    public String handleTodo (String command) throws DukeException {
+    public String handleTodo(String command) throws DukeException {
         String[] strArr = command.split(" ", 2);
         if (strArr.length == 1) {
             throw new DukeException("TODO_NO_DESC");
@@ -71,10 +71,10 @@ public class Parser {
      *
      * @param command command inputted by user to add a Deadline task.
      * @return message showing the Deadline task that the user has just inputted and the total number of tasks in the
-     * task list.
+     *     task list.
      * @throws DukeException if command or the deadline date and time for the task is not inputted.
      */
-    public String handleDeadline (String command) throws DukeException {
+    public String handleDeadline(String command) throws DukeException {
         String[] strArr = command.split(" ", 2);
         if (strArr.length == 1) {
             throw new DukeException("DEADLINE_NO_DESC");
@@ -98,10 +98,10 @@ public class Parser {
      *
      * @param command command inputted by user to add a Event task.
      * @return message showing the Event task that the user has just inputted and the total number of tasks in the
-     * task list.
+     *     task list.
      * @throws DukeException if command or the event date and time for the task is not inputted.
      */
-    public String handleEvent (String command) throws DukeException {
+    public String handleEvent(String command) throws DukeException {
         String[] strArr = command.split(" ", 2);
         if (strArr.length == 1) {
             throw new DukeException("EVENT_NO_DESC");
@@ -124,7 +124,7 @@ public class Parser {
      * @return message showing the remaining tasks in task list after task mentioned is deleted from the list.
      * @throws DukeException if the index of the task to be deleted is not inputted.
      */
-    public String handleDelete (String command) throws DukeException {
+    public String handleDelete(String command) throws DukeException {
         String[] strArr = command.split(" ");
         if (strArr.length == 1) {
             throw new DukeException("UNK_TASK_TO_DELETE");

@@ -54,12 +54,12 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         // @@author
         if (input.equals("bye")) {
-            duke.getStorage().updateHD();
+            duke.getStorage().updateHd();
             Stage stage = (Stage) sendButton.getScene().getWindow();
             stage.close();
         }
         String response = duke.getResponse(input);
-        assert !(response.equals(input)): "Parser not working properly";
+        assert !(response.equals(input)) : "Parser not working properly";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

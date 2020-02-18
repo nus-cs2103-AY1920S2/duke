@@ -30,19 +30,31 @@ public class Deadline extends Task {
         this.deadline = deadlineDate + " " + deadlineTime;
     }
 
+    /**
+     * Converts String to LocalDate.
+     *
+     * @param deadlineDate deadline date in String to be converted to LocalDate.
+     * @return LocalDate deadline date converted from String.
+     */
     public LocalDate parseDate(String deadlineDate) {
         return LocalDate.parse(deadlineDate);
     }
 
+    /**
+     * Converts String to Date.
+     *
+     * @param deadlineTime deadline time in String to be converted to Date.
+     * @return Date deadline time converted from String.
+     */
     public Date parseTime(String deadlineTime) {
         Date deadlineTimeParsed = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
             deadlineTimeParsed = sdf.parse(deadlineTime);
-        } catch (ParseException exception){
+        } catch (ParseException exception) {
             exception.printStackTrace();
         }
-        assert deadlineTimeParsed != null: "Error in parsing deadline time!";
+        assert deadlineTimeParsed != null : "Error in parsing deadline time!";
         return deadlineTimeParsed;
     }
 
