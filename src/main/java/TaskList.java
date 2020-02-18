@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 /**
  * TaskList is a wrapper class for a List of Tasks.
  */
@@ -65,22 +66,30 @@ public class TaskList {
     }
 
     public String showFilteredBySpecificDate(String date) {
-        TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().equals(LocalDate.parse(date))).collect(Collectors.toList()));
+        TaskList filteredTasks = new TaskList(tasks.stream()
+                .filter(task -> task.getDate().equals(LocalDate.parse(date)))
+                .collect(Collectors.toList()));
         return "Here are the tasks on date " + date + filteredTasks.printTasks();
     }
 
     public String showFilteredBySpecificYear(int year) {
-        TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().getYear() == year).collect(Collectors.toList()));
+        TaskList filteredTasks = new TaskList(tasks.stream()
+                .filter(task -> task.getDate().getYear() == year)
+                .collect(Collectors.toList()));
         return "Here are the tasks in the year " + year + filteredTasks.printTasks();
     }
 
     public String showFilteredBySpecificMonth(int month) {
-        TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDate().getMonthValue() == month).collect(Collectors.toList()));
+        TaskList filteredTasks = new TaskList(tasks.stream()
+                .filter(task -> task.getDate().getMonthValue() == month)
+                .collect(Collectors.toList()));
         return "Here are the tasks in the month " + month + filteredTasks.printTasks();
     }
 
     public String showFilteredByName(String word) {
-        TaskList filteredTasks = new TaskList(tasks.stream().filter(task -> task.getDescription().contains(word)).collect(Collectors.toList()));
+        TaskList filteredTasks = new TaskList(tasks.stream()
+                .filter(task -> task.getDescription().contains(word))
+                .collect(Collectors.toList()));
         return "Here are the matching tasks in your list:" + filteredTasks.printTasks();
     }
 }

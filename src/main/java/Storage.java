@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,12 +10,7 @@ import java.util.Scanner;
  * Methods to load Tasks from database and save Tasks to database are available.
  */
 public class Storage {
-    /**
-     * referenced from
-     * https://crunchify.com/java-saving-and-loading-data-from-a-file-simple-production-ready-utility-for-file-readwrite-operation/
-     */
 
-    //String fileName = "./data/duke.txt"; // relative path
     private Scanner inputStream;
     private String fileName;
 
@@ -39,13 +37,6 @@ public class Storage {
             } else if (nextLine[0].trim().equals("E")) {
                 tasks.add(new Event(nextLine[2].trim(), nextLine[3].trim()));
             }
-            /*
-            if (nextLine[1].trim().equals("1")) { // marked as done
-                if (tasks.size() > 0) {
-                    tasks.get(tasks.size() - 1).markAsDone(); // last element
-                }
-            }
-            */
         }
         return tasks;
     }

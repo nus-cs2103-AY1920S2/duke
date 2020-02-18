@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected LocalDate time;
+    protected LocalDate time; // this will be startTime or endTime depending on the underlying class.
 
     /**
      * Creates a new Task with {@code description}.
@@ -64,7 +64,9 @@ public class Task {
      * @return boolean to indicate whether our Task is completed.
      *
      */
-    public boolean isTaskDone() { return isDone; }
+    public boolean isTaskDone() {
+        return isDone;
+    }
 
     /**
      * gets the Date for our Task.

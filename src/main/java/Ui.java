@@ -3,7 +3,7 @@
  * Currently, Ui is mainly responsible for System.out.println statements to our output.
  */
 public class Ui {
-    private final String logo = " ____        _        \n"
+    private final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -13,7 +13,7 @@ public class Ui {
     }
 
     public String showWelcomeMessage() {
-        return "Hello from\n" + logo + "I am here to help you with anything you need!";
+        return "Hello from\n" + LOGO + "I am here to help you with anything you need!";
     }
 
     public String showLineOfUnderscores() {

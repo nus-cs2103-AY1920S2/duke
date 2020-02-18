@@ -10,8 +10,8 @@ public class Todo extends Task {
      * @param description the description/details of our task
      */
     public Todo(String description) {
-        super(description, "2099-12-31");
-    }
+        super(description, "");
+    } // time attribute is not needed in this class
 
     /**
      * returns a String representation of a Todo instance.
