@@ -13,19 +13,19 @@
 
 4. [Usage](#usage)
 
-+ 4.1 [`bye`](#4.1-bye)
++ 4.1 [`bye`](#41-bye)
   
-+ 4.2 [`todo`](#todo)
++ 4.2 [`todo`](#42-todo-taskaction)
   
-+ 4.3 [`deadline`](#deadline)
++ 4.3 [`deadline`](#43-deadline-taskaction-by-date-time)
   
-+ 4.4 [`event`](#event)
++ 4.4 [`event`](#44-event-taskaction-at-date-time)
   
-+ 4.5 [`list`](#list)
++ 4.5 [`list`](#45-list)
   
-+ 4.6 [`find`](#find)
++ 4.6 [`find`](#46-find-taskaction)
 
-+ 4.7 [`done`](#done)
++ 4.7 [`done`](#47-done-index)
 
 ## Introduction
 
@@ -35,10 +35,10 @@ track of their tasks. Generally, user can add, mark
 the task as complete, delete and find a combination of 
 tasks. 
 
-![](Ui.png)
+![app display](Ui.png)
 
 ## Instructions
-  1. Download the jar file [here](#build/libs/duke-0.1.3.jar).
+  1. Download the jar file [here](/build/libs/duke-0.1.3.jar).
   2. Open the jar file to launch the app.
   3. Type in the text box your command or instruction. Hit `Enter` or the `Send` button to execute.
   4. See Section [4. Usage] for different commands.
@@ -48,8 +48,6 @@ tasks.
 ### Overview
 
 > The app currently processes 3 types of user tasks: **Todo**, **Deadline** and **Event**. Each of these tasks will require a different input from the user to be recorded and kept track of their completion. 
-
-
 
 ### Task List
 
