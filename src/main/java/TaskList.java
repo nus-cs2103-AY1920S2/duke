@@ -1,7 +1,10 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.lang.StringBuilder;
+import java.io.IOException;
 
 /**
- * Represents a TaskList which handles adding, removing or listing out tasks as depicted by commands from the
+ * Represents a TaskList which contains functions which handles adding,
+ * removing or listing out tasks as depicted by commands from the
  * user.
  */
 
@@ -17,7 +20,6 @@ public class TaskList {
         this.ui = new Ui();
         this.latest_index = latest_index;
         this.storage = storage;
-
     }
 
     public int getLatest_index() {
@@ -27,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Updates the Index of each task whenever a task is deleted
+     * Updates the Index of each task whenever a task is deleted.
      */
     public void updateIndex() {
         int count = 1;
@@ -39,7 +41,8 @@ public class TaskList {
     /**
      * Deletes the task at the position that is inputted or deletes all tasks if 'delete all' in inputted. Also
      * informs the user if there is no such position in the list or if the input is not a number.
-     * @param input the input, normally a number, that is entered
+     * @param input the input, normally a number, that is entered.
+     * @return the reply message to be sent back to the user.
      */
     public String delete(String input) {
         assert input != null : "Delete command input is empty!";
@@ -85,6 +88,7 @@ public class TaskList {
      * and a Todo class object will not be produced.
      *
      * @param input the description of the todo task that is inputted by the user
+     * @return the reply message to be sent back to the user
      */
     public String todo(String input) {
         assert input != null : "Todo command input is empty!";
@@ -112,7 +116,8 @@ public class TaskList {
      * Tasks that are done cannot be done again - the user will be informed should he/she try to do the task
      * more than once.
      *
-     * @param input the description of the task that is inputted by the user
+     * @param input the description of the task that is inputted by the user.
+     * @return the reply message to be sent back to the user.
      */
     public String done(String input) {
         assert input != null : "Done command input is empty!";
@@ -135,7 +140,7 @@ public class TaskList {
             return ui.inputNumber();
 
         } catch (Exception e) {
-            return e.toString();
+            e.printStackTrace();
         }
     }
 
@@ -145,8 +150,8 @@ public class TaskList {
      * Deadline object that is created. Should the 'deadline'
      * command be given more than once or the '/by' command not given, the user will be informed and
      * the object will not be created.
-     *
-     * @param input the description of the deadline task that is inputted by the user
+     * @param input the description of the deadline task that is inputted by the user.
+     * @return the reply message to be sent back to the user.
      */
     public String deadline(String input) {
         assert input != null : "Deadline command input is empty!";
@@ -178,7 +183,7 @@ public class TaskList {
             return ui.inputByCmd();
 
         } catch (Exception e) {
-            return e.toString();
+            e.printStackTrace();
         }
     }
 
@@ -188,7 +193,8 @@ public class TaskList {
      * for the user to see. If there is no such task found, a message telling the user that there
      * is no matching tasks will be displayed.
      *
-     * @param desc a string of the Description of the task the user wants to find
+     * @param desc String of the Description of the task the user wants to find.
+     * @return the reply message to be sent back to the user
      */
     public String find(String desc) {
         assert desc != null : "Find command input is empty!";
@@ -223,6 +229,7 @@ public class TaskList {
      * the object will not be created.
      *
      * @param input the description of the task that is inputted by the user
+     * @return the reply message to be sent back to the user
      */
     public String event(String input) {
         assert input != null : "Event command input is empty!";
@@ -252,9 +259,8 @@ public class TaskList {
 
         } catch (ArrayIndexOutOfBoundsException e) {
             return ui.inputAtCmd();
-
         } catch (Exception e) {
-            return e.toString();
+            e.printStackTrace();
         }
     }
 
@@ -262,8 +268,10 @@ public class TaskList {
     /**
      * Checks Repeats within a string. This function is used for checking repeats of commands entered.
      *
-     * @param input string input entered by the user
-     * @param repeat string that is checked for repeats
+     * @param input string input entered by the user.
+     * @param repeat string that is checked for repeats.
+     * @return Number of repeats in the string.
+
      */
     public int checkRepeats(String input, String repeat) {
         assert input != null : "checkRepeats input string is empty!";
@@ -282,10 +290,10 @@ public class TaskList {
 
 
     /**
-     * Checks if the input by the user is empty
+     * Checks if the input by the user is empty.
      *
-     * @param cmd Command entered by the user
-     * @return boolean value whether it is empty
+     * @param cmd Command entered by the user.
+     * @return boolean value whether it is empty.
      */
     public boolean checkEmpty(String cmd) {
         assert cmd != null : "checkEmpty input is empty!";
@@ -300,19 +308,24 @@ public class TaskList {
     /**
      * Bye function which runs when the user inputs 'bye'. The list is then written into a text file and saved
      * until future running of the application.
-     *
+     * @return the reply message to be sent back to the user
      * @throws Exception If any issue with any function
      */
     public String bye() throws Exception {
-        storage.writeFile(list);
+        try {
+            storage.writeFile(list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ui.sayBye();
     }
 
 
     /**
-     * Prints the list when the user inputs 'list' Iterates through all the tasks in the list and calls
-     * the overloaded toString function.
-     *
+     * Returns the list in the form of a string when the user inputs the 'list' function into the UI.
+     * Iterates through all the tasks in the list and calls
+     * the overloaded toString function of the respective Tasks.
+     * @return the list of Tasks to be sent back to the user.
      */
     public String printList() {
         sb = new StringBuilder();
@@ -326,7 +339,11 @@ public class TaskList {
         return sb.toString();
     }
 
-
+    /**
+     * Retrieves the full details of a particular task. If all details are requested,
+     * details of all the Tasks in the list are returned.
+     * @return sends the full list of Tasks along with all additional details in a string format.
+     */
 
     public String findDetails(String input) {
         assert input != null : "Details command input is empty!";
@@ -352,6 +369,5 @@ public class TaskList {
             }
         }
         return sb.toString();
-
     }
 }
