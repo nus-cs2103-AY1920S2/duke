@@ -10,9 +10,9 @@ import java.io.PrintStream;
 
 public class Duke {
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    public Storage storage;
+    public TaskList tasks;
+    public Ui ui;
 
     /**
      * Instantiates a Duke instance with a path to a save file.
@@ -87,7 +87,7 @@ public class Duke {
         return response;
     }
 
-    public void printWelcome() {
-        Ui.printWelcomeMessage();
+    public String printWelcome() {
+        return Ui.printWelcomeMessage();
     }
 }

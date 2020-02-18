@@ -12,20 +12,23 @@ public class Ui {
     }
 
     public static void printMessage(String msg) {
-        //System.out.println("\t____________________________________________________________");
         System.out.println(msg);
-        //System.out.println("\t____________________________________________________________");
-        //System.out.println();
     }
 
-    public static void printWelcomeMessage() {
+    public static String printWelcomeMessage() {
+        //System.out.println("Hello from\n" + logo + "\n");
+        //Ui.printMessage("Greetings! I'm Duke!\n\tPlease enter location of save file (default: data/duke.txt): ");
+
+        StringBuilder result = new StringBuilder();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\n");
-        Ui.printMessage("Greetings! I'm Duke!\n\tPlease enter location of save file (default: data/duke.txt): ");
+
+        //result.append("Greetings from\n" + logo + "\nHow can I help you?");
+        result.append("Greetings from Duke! How can I help you?");
+        return result.toString();
     }
 
     public static void displayAddTaskSuccessMsg(Task task, int numOfTasks) {
