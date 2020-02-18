@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,7 +58,7 @@ public class Storage {
             newTask = new Todo(split[2]);
             break;
         case "D":
-            newTask = new Deadline(split[2], split[3]);
+            newTask = new Deadline(split[2], LocalDate.parse(split[3]));
             break;
         case "E":
             newTask = new Event(split[2], split[3]);
