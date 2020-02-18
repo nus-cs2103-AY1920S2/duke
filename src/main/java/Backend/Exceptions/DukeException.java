@@ -2,6 +2,7 @@ package Backend.Exceptions;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.format.DateTimeParseException;
 
 public class DukeException extends Exception {
@@ -36,6 +37,8 @@ public class DukeException extends Exception {
             return "I couldn't find the file I was supposed to sir. I'll try again tomorrow.";
         } else if( e instanceof IOException){
             return "I lost the tasks you gave me sir. My resignation will be on your table shortly.";
+        } else if( e instanceof URISyntaxException ){
+            return "I couldn't secure you access to that sir. My apologies.";
         } else {
             return "Something went wrong and I'm not sure what";
         }

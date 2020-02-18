@@ -6,7 +6,7 @@ public abstract class Task {
 
     public String content;
     int index;
-    boolean done = false;
+    public boolean done = false;
     public DateParser date;
 
     public Task( String content, DateParser date ) {

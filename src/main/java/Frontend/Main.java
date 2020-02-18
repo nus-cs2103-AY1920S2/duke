@@ -8,7 +8,11 @@ import Backend.TaskList;
 
 import Frontend.Components.DialogBox.DukeDialogBox;
 import Frontend.Components.DialogBox.UserDialogBox;
+import Frontend.Components.Link;
+import Frontend.Components.SendButton.SendButton;
 import Frontend.Objects.User;
+
+import java.net.URI;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -18,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
 import javafx.stage.Stage;
 
 /**
@@ -37,6 +42,7 @@ public class Main extends Application {
     private Button sendButton;
     private Scene scene;
     private AnchorPane mainLayout;
+    private Link link;
 
     private User user = new User();
     private User duke = new User("/images/DaDuke.png");
@@ -57,10 +63,8 @@ public class Main extends Application {
     /**
      * Displays the text value of multiple users and handles empty texts.
      * Clears the text field and the text value of the user once display is done.
-     * @param duke The Duke
-     * @param user The User
      */
-    private void displayUserInput(User duke, User user){
+    private void displayUserInput(){
 
         if( user.getText().length() > 0 ){
             dialogContainer.getChildren().add(
@@ -114,7 +118,7 @@ public class Main extends Application {
             user.addText( userText );
             duke.addText( switcher.res(user.getText()) );
 
-            displayUserInput( duke, user );
+            displayUserInput();
 
             System.out.println( userText );
             if( userText.equals("exit") ){
@@ -124,7 +128,7 @@ public class Main extends Application {
         } catch ( DukeException e ){
 
             duke.addText(e.getErrorMsg());
-            displayUserInput( duke, user );
+            displayUserInput();
 
         }
 
@@ -168,20 +172,26 @@ public class Main extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        sendButton = new SendButton("Send");
+
+        link = new Link( "User Guide", "https://github.com/waynewee/duke/wiki/Duke-User-Guide" );
+
+        link.setOnAction( event -> {
+            try {
+                link.openLink();
+            } catch (DukeException e) {
+                duke.addText( e.getErrorMsg() );
+                displayUserInput();
+            }
+        } );
+
 
         mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, link);
 
         scene = new Scene(mainLayout);
 
-        /**
-         * adding css files
-         */
-        scene.getStylesheets().addAll(
-                "/view/MainWindow.css",
-                "/view/DialogBox.css"
-        );
+
     }
 
     /**
@@ -196,9 +206,11 @@ public class Main extends Application {
 
         mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(385, 535.0);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setPadding( new Insets(0, 0, 12.5, 0) );
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
@@ -215,6 +227,8 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
+        AnchorPane.setBottomAnchor( link, 27.5 );
+
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
@@ -222,10 +236,10 @@ public class Main extends Application {
     private void setTheStage(Stage stage){
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("Duke v1.0");
+        stage.setTitle("Duke v1.0 - Type \"help\" for more");
     }
 
-    /**
+    /**e
      * Binds functions to various components
      */
     private void setHandlers(){

@@ -87,10 +87,10 @@ public class Parser {
 
         try {
             //get type
-            char taskChar = line.charAt(3);
-            char doneChar = line.charAt(6);
+            char taskChar = line.charAt(4);
+            char doneChar = line.charAt(7);
 
-            String subString = line.substring(8);
+            String subString = line.substring(9);
 
             String dateString = null;
 

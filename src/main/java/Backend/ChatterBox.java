@@ -19,7 +19,8 @@ public class ChatterBox {
         private final static String byeMsg = "If you really have to leave sir, please type 'exit'.";
         private final static String notFoundMsg = "I looked long and hard but couldn't find what you were looking for. A different search term perhaps?";
         private final static String foundMsg = "Here's what you were looking for sir:\n";
-        private final static String markAsDoneMsg = "Great job sir! ";
+        private final static String markAsDoneMsg = "Great job sir!\n";
+        private final static String taskAlreadyDoneMsg = "This task was already completed sir.\n";
         private final static String addedTaskMsg = "Nicely done sir. I've added your task.\n";
         private final static String removedTaskMsg = "I assume you've completed this sir... I've removed it from the list.\n";
         private final static String noTasksMsg = "You currently have no tasks sir.";
@@ -74,6 +75,10 @@ public class ChatterBox {
 
         public static String sayMarkedTaskAsDone( Task task ){
             return markAsDoneMsg + task.toString();
+        }
+
+        public static String sayTaskAlreadyDone( Task task ){
+            return taskAlreadyDoneMsg + task.toString();
         }
 
         public static String sayAddedTask( Task task ){
