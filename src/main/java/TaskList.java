@@ -62,7 +62,7 @@ public class TaskList {
      */
     public String addMessage(Task addedTask) {
         String output = "Got it. I've added this task:\n" + addedTask + "\n";
-        output = "Now you have " + tasks.size() + " tasks in your list.\n";
+        output = output + "Now you have " + tasks.size() + " tasks in your list.\n";
         return output;
     }
 
