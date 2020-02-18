@@ -23,7 +23,7 @@ javafx {
 
 application {
     // Change this to your main class.
-    mainClassName = "lcduke.Duke"
+    mainClassName = "lcduke.Launcher"
 }
 
 run {

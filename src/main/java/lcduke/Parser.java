@@ -30,7 +30,7 @@ public class Parser {
         }
     }
 
-    protected boolean getIsProblem(){
+    protected boolean getIsProblem() {
         return isProblem;
     }
 
@@ -42,11 +42,15 @@ public class Parser {
             throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
 
         } else if (!userInput.contains(" ") && !userInput.contains("bye") && !userInput.contains("list")
-                && !userInput.contains("reminders") && !userInput.contains("hi")){
+                && !userInput.contains("reminders") && !userInput.contains("hi")) {
             throw new DukeException("     ☹ OOPS!!! The description of a " + userInput + " cannot be empty.\n");
         }
     }
 
+    /** Ths is used to test the validity of the date format.
+     *
+     * @param message user's input message
+     */
     public void testDateFormat(String message) throws DukeException {
         String dt = null;
         if (message.contains("/by")) {
@@ -54,11 +58,11 @@ public class Parser {
         } else if (message.contains("/at")) {
             dt = message.substring(message.indexOf("/at") + 4, message.length());
         }
-        if (dt == null){
+        if (dt == null) {
             throw new DukeException("date and time is empty");
         }
 
-        if(dt.contains(" ")){
+        if (dt.contains(" ")) {
             dt = dt.replace(" ", "T");
         } else {
             throw new DukeException("date format is wrong");
@@ -66,7 +70,7 @@ public class Parser {
 
         try {
             LocalDateTime.parse(dt);
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             throw new DukeException("date format is wrong");
         }
     }

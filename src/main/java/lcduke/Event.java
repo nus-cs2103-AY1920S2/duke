@@ -21,7 +21,7 @@ public class Event extends Task {
 
     /** This prints the response after adding an Event object to task list.
      */
-    protected String printInit(){
+    protected String printInit() {
         String response;
         response = "     Got it. I've added this task: \n"
                 + "       " + this.toString() + "\n"

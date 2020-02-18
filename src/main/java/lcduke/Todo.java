@@ -13,7 +13,7 @@ public class Todo extends Task {
 
     /** This prints the response after adding a Todo object to task list.
      */
-    public String printInit(){
+    public String printInit() {
         String response;
         response = "     Got it. I've added this task: \n"
                 + "       " + this.toString() + "\n"

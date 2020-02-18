@@ -24,13 +24,13 @@ public class TaskList {
         String taskMark;
         String dateString;
 
-        for(int i = 0; i < storageNo; i++) {
+        for (int i = 0; i < storageNo; i++) {
             taskMark = totalTasks[i].substring(0, 3);
 
-            switch(taskMark){
+            switch (taskMark) {
             case "[T]":
-                this.toDo("todo" +
-                        totalTasks[i].substring(totalTasks[i].indexOf(" ")));
+                this.toDo("todo"
+                        + totalTasks[i].substring(totalTasks[i].indexOf(" ")));
                 break;
             case "[D]":
                 dateString = totalTasks[i].substring(totalTasks[i].indexOf("by:")
@@ -45,13 +45,13 @@ public class TaskList {
                         totalTasks[i].indexOf("at:") - 1) + "/at " + this.standardDate(dateString));
             }
 
-            if(totalTasks[i].contains("\u2713")){
+            if (totalTasks[i].contains(Character.toString((char)43))) {
                 this.totalTasks[i].markAsDone();
             }
         }
     }
 
-    protected void delete(String userInput){
+    protected void delete(String userInput) {
         String deleteSelect = userInput.substring(7);
         int deleteSelectNo = parseInt(deleteSelect) - 1;
         if (deleteSelectNo != totalTasksCount) {
@@ -64,7 +64,7 @@ public class TaskList {
         Task.taskNo = Task.taskNo - 1;
     }
 
-    protected String toDo(String userInput){
+    protected String toDo(String userInput) {
         String content = userInput.substring(5);
         Task t = new Todo(content);
         totalTasks[totalTasksCount] = t;
@@ -72,7 +72,7 @@ public class TaskList {
         return t.printInit();
     }
 
-    protected String deadline(String userInput){
+    protected String deadline(String userInput) {
         userInput = userInput.substring(9);
         String contentTasks = userInput.substring(0, userInput.indexOf("/by") - 1);
         String taskDeadline = userInput.substring(userInput.indexOf("/by") + 4);
@@ -82,7 +82,7 @@ public class TaskList {
         return t.printInit();
     }
 
-    protected String event(String userInput){
+    protected String event(String userInput) {
         userInput = userInput.substring(6);
         String contentTasks = userInput.substring(0, userInput.indexOf("/at") - 1);
         String taskTime = userInput.substring(userInput.indexOf("/at") + 4);
@@ -91,13 +91,14 @@ public class TaskList {
         totalTasksCount++;
         return t.printInit();
     }
-    protected String find(String userInput){
+
+    protected String find(String userInput) {
         String response;
         String keyword = userInput.substring(5);
         response = "     Here are the matching tasks in your list:\n";
         int i = 1;
-        for(int j = 0; j < totalTasksCount; j++) {
-            if(totalTasks[j].getDescription().contains(keyword)){
+        for (int j = 0; j < totalTasksCount; j++) {
+            if (totalTasks[j].getDescription().contains(keyword)) {
                 response = response + "     " + i + "." + totalTasks[j].toString() + "\n";
                 i++;
             }
@@ -114,7 +115,7 @@ public class TaskList {
         //[E][✘] asd (at: Oct 30 2123 23:10)
         String date;
         String time;
-        if(dateString.substring(5, 6).contains(" ")){
+        if (dateString.substring(5, 6).contains(" ")) {
             date = dateString.substring(0, 10);
             time = dateString.substring(11, dateString.length());
         } else {

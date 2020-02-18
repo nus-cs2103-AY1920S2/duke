@@ -14,7 +14,7 @@ public class TaskTest {
     public void testToStringOutput(){
         lcduke.Task task1 = new lcduke.Todo("todo read book");
         task1.markAsDone();
-        assertEquals("[T][" + "\u2713" + "] " + "todo read book",
+        assertEquals("[T][" + Character.toString((char)43) + "] " + "todo read book",
                 task1.toString());
     }
 

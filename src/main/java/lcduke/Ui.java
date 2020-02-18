@@ -26,13 +26,13 @@ public class Ui {
         String response;
         String fileSaveErrorMessage = "error in input process";
 
-        if(this.userInput.contains(" ")){
+        if (this.userInput.contains(" ")) {
             command = this.userInput.substring(0, userInput.indexOf(" "));
         } else {
             command = this.userInput;
         }
 
-        if(newInput.getIsProblem()) {
+        if (newInput.getIsProblem()) {
             Parser.isProblem = false;
             response = Parser.errorMessage;
 
@@ -79,13 +79,14 @@ public class Ui {
             }
         }
 
-        if (fileSaveErrorMessage != "saved successfully!" && fileSaveErrorMessage != "error in input process"){
+        if (fileSaveErrorMessage != "saved successfully!" && fileSaveErrorMessage != "error in input process") {
             response = fileSaveErrorMessage;
         }
 
         return response;
     }
-    private String toSave(Storage storage){
+
+    private String toSave(Storage storage) {
         String response;
         try {
             storage.save();
@@ -100,27 +101,27 @@ public class Ui {
      *
      * @return description of task from the user.
      */
-    private String input(){
+    private String input() {
         Scanner myObj = new Scanner(System.in);
         return myObj.nextLine();
     }
 
     /** This outputs the response to bye request.
      */
-    private String bye(){
+    private String bye() {
         return "     Bye. Hope to see you again soon!\n";
     }
 
     /** This outputs the response to delete request.
      */
-    private String delete(){
+    private String delete() {
         return "     This task is deleted\"\n";
     }
 
     /** This is to output all tasks from the task list.
      *
      */
-    private String list(){
+    private String list() {
         String response;
         response = "     Here are the tasks in your list:\n";
         int i = 0;
@@ -136,7 +137,7 @@ public class Ui {
     /** This is to mark a task is done.
      *
      */
-    private String done(String userInput){
+    private String done(String userInput) {
         String response;
         int taskNo = Integer.parseInt(userInput.substring(userInput.indexOf(" ") + 1));
         response = "     Nice! I've marked this task as done: \n";
@@ -146,7 +147,7 @@ public class Ui {
         return response;
     }
 
-    private String reminders(){
+    private String reminders() {
         String response;
         response = "     Here are the reminders of your tasks:\n";
         int i = 0;
