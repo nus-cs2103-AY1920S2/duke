@@ -33,8 +33,8 @@ public class DukeParser {
 
                     String context = command_broken[1];
                     int taskNo = Integer.parseInt(context);
-                    tasks.markDone(taskNo);
-                    return DukeUI.showDoneMsg();
+
+                    return DukeUI.showDoneMsg(tasks.markDone(taskNo));
 
                 } else if (action.equalsIgnoreCase("delete")) {
 

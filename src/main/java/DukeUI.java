@@ -8,7 +8,7 @@ public class DukeUI {
 
     public static String showWelcomeMessage () {
         StringBuilder sb = new StringBuilder();
-        sb.append("DEMOCRACY IS NON NEGOTIABLE\n");
+        sb.append("DEMOCRACY IS NON NEGOTIABLE\n\n");
         sb.append( "HI I'M:\n\n LIBERTY PRIME" );
 
         return sb.toString();
@@ -22,8 +22,8 @@ public class DukeUI {
         return "USERTEXT DATA IS NOT FOUND";
     }
 
-    public static String showDoneMsg() {
-        return "TASK COMPLETED";
+    public static String showDoneMsg(Task task) {
+        return "TASK COMPLETED:\n\n        " + task.toString();
     }
 
     public static String showCreationMsg(Task task) {

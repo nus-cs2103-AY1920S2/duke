@@ -6,17 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.awt.*;
-import java.io.IOException;
 
 public class Duke extends Application {
 
@@ -29,30 +26,16 @@ public class Duke extends Application {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
-    public Duke() throws IOException {
+    public Duke() {
         String filePath = "tasks.txt";
         storage = new DukeStorage(filePath);
         tasks = storage.readText();
         parser = new DukeParser(this.tasks);
     }
-
-/*    public void run() {
-        DukeUI.showWelcomeMessage();
-        this.tasks = parser.parseCommand();
-        storage.saveTasks(tasks);
-    }*/
-
-/*    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }*/
 
     @Override
     public void start(Stage stage) {

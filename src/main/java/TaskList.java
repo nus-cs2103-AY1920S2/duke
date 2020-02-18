@@ -38,8 +38,8 @@ public class TaskList {
         this.allTasks.add(task);
     }
 
-    public void markDone(int taskNo) {
-        allTasks.get(taskNo - 1).markAsDone();
+    public Task markDone(int taskNo) {
+        return allTasks.get(taskNo - 1).markAsDone();
     }
 
     public String removeTask(int taskNo) {

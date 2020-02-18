@@ -1,20 +1,65 @@
 # User Guide
+![](Ui.png)
+## DUKE
+_**HATES LEFTOVER TASKS**_
 
-## Features 
+### Add Todo, Event and Deadline: `todo` `event` `deadline`
 
-### Feature 1 
-Description of feature.
+Examples:
+* todo `<description>`
+    * todo this
+    > [T][O] this
+    
+* event `<description>` /at `<place>` 
+    * event fly kite /at sentosa
+    > [E][O] fly kite at sentosa
+    
+* deadline `<description>` /by `<yyyy-mm-dd format>`
+    * deadline do ip /by 2020-03-01
+    > [D][O]do ip by MAR 01 2020
 
-## Usage
 
-### `Keyword` - Describe action
+### Mark tasks as done: `done`
 
-Describe action and its outcome.
+Example:
+* done `<index>`
+    * done 1
+    > [T][X] this
 
-Example of usage: 
+### Delete task: `delete`
 
-`keyword (optional arguments)`
+Example: 
+* delete `<index>`
+    * delete 1
 
-Expected outcome:
+### List all tasks: `list`
 
-`outcome`
+Example: 
+* list
+> 1. [E][O] fly kite at sentosa
+> 2. [D][O] do ip by MAR 01 2020
+
+### Find a task: `find`
+
+Example: 
+* find `<desciption>`
+
+    * find todo
+    
+    `OR`
+    * find kite
+    
+### Archive: `archive`, `showarchived`
+
+Example:
+* archive 1
+* showarchived
+    
+### Exit duke: `bye`
+
+Example: 
+* bye
+
+**DUKE SAVES ALL YOUR TASKS BEFORE LEAVING**
+
+##GET YOUR FREE COPY OF DUKE FOR ONLY $19.99!

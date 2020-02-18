@@ -55,9 +55,9 @@ public class Task {
     /**
      * Marks a task as done
      */
-    public void markAsDone() {
+    public Task markAsDone() {
         this.isDone = true;
-        System.out.println(this);
+        return this;
     }
 
     @Override
