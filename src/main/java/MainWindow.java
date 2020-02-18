@@ -83,6 +83,15 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(dukeResponse, dukeImage)
             );
+
+            // Store data back to file
+            try {
+                duke.getStorage().store(duke.getTaskList(), ui);
+            } catch (IOException ioex) {
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getDukeDialog(dukeRespond(ioex.getMessage()), dukeImage)
+                );
+            }
         }
         userInput.clear();
     }

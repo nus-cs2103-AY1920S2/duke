@@ -18,7 +18,8 @@ public enum DukeCommand {
     LIST {
         @Override
         public String execute(String s1, TaskList list, Ui ui, Storage storage) {
-            return ui.listCommand(list);
+            return list.getsize() != 0 ? ui.listCommand(list) :
+                    "It looks like there are no more tasks in the list!";
         }
     },
     DONE {
@@ -195,7 +196,9 @@ public enum DukeCommand {
           String keyword = commandarray[1];
 
           TaskList filteredList = list.find(keyword, storage);
-          return ui.findMessage() + "\n" + ui.listCommand(filteredList);
+          return filteredList.getsize() != 0 ? ui.findMessage() + "\n" +
+                  ui.listCommand(filteredList) : "Oh no! There are no tasks " +
+                  "that matches the keyword that you have given";
       }
     };
 
