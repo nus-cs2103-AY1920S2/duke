@@ -55,6 +55,7 @@ public class Duke {
      */
     public String getResponse(String input) throws RuntimeException{
         Command command = null;
+//        assert false: "this is for testing";
         try {
             command = parser.parseCommand(input);
             command.setTaskList(taskList);

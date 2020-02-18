@@ -214,8 +214,7 @@ public class Parser {
         } else if (Parser.isViewScheduleKey(userInput)) {
             LocalDate targetDate = this.findDate(VIEW_SCHEDULE_PATTERN, userInput);
             return new ViewScheduleCommand(targetDate);
-        }
-        else {
+        } else {
             throw new NoCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
     }

@@ -60,6 +60,9 @@ public class DeadLineTask extends Task {
      */
     @Override
     public ArrayList<String> getDetails() {
+        assert description != null: "task description is null";
+        assert description.length() > 0: "task description is empty while storage";
+
         return new ArrayList<String>(Arrays.asList(
                 this.description,
                 this.by.format(DATE_TIME_FORMAT)));
