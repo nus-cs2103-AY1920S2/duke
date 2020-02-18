@@ -87,6 +87,7 @@ public class Parser {
                 if (d.length < 2) {
                     return "Time cannot be empty";
                 }
+                assert d.length >= 2;
                 Deadline ddl = new Deadline(d[0], LocalDate.parse(d[1]));
                 list.addItem(ddl);
                 storage.addTxt(ddl.currentString(), ui);
