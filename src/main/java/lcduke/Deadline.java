@@ -1,12 +1,12 @@
 package lcduke;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /** Ths creates a Deadline object.
  */
 public class Deadline extends Task {
-    private LocalDate taskDate;
+    private LocalDateTime taskDate;
 
     /** This is the constructor to create the Deadline Object.
      *
@@ -15,9 +15,8 @@ public class Deadline extends Task {
      */
     protected Deadline(String description, String by) {
         super(description);
-        if (by.contains("/")) {
-            by = by.replaceAll("/", "-");
-        }
+        by = by.replace(" ", "T");
+        taskDate = LocalDateTime.parse(by);
     }
 
     /** This prints the response after adding a Deadline object to task list.
@@ -36,6 +35,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:MM")) + ")";
     }
 }

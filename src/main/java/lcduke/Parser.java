@@ -1,6 +1,6 @@
 package lcduke;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 /** Ths creates a Parser object, which is to check exception of user's input.
@@ -48,17 +48,24 @@ public class Parser {
     }
 
     public void testDateFormat(String message) throws DukeException {
-        String date = null;
+        String dt = null;
         if (message.contains("/by")) {
-            date = message.substring(message.indexOf("/by") + 4, message.length());
+            dt = message.substring(message.indexOf("/by") + 4, message.length());
         } else if (message.contains("/at")) {
-            date = message.substring(message.indexOf("/at") + 4, message.length());
+            dt = message.substring(message.indexOf("/at") + 4, message.length());
         }
-        if (date == null){
+        if (dt == null){
             throw new DukeException("date and time is empty");
         }
+
+        if(dt.contains(" ")){
+            dt = dt.replace(" ", "T");
+        } else {
+            throw new DukeException("date format is wrong");
+        }
+
         try {
-            LocalDate.parse(date);
+            LocalDateTime.parse(dt);
         } catch (DateTimeParseException e){
             throw new DukeException("date format is wrong");
         }

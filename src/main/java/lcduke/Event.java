@@ -1,12 +1,12 @@
 package lcduke;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /** Ths creates an Event object.
  */
 public class Event extends Task {
-    protected LocalDate taskDate;
+    private LocalDateTime taskDate;
 
     /** This is the constructor to create the Event Object.
      *
@@ -15,10 +15,8 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        if(at.contains("/")){
-            at = at.replaceAll("/", "-");
-        }
-        this.taskDate = LocalDate.parse(at);
+        at = at.replace(" ", "T");
+        taskDate = LocalDateTime.parse(at);
     }
 
     /** This prints the response after adding an Event object to task list.
@@ -37,6 +35,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + this.taskDate.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:MM")) + ")";
     }
 }

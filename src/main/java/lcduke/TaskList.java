@@ -2,7 +2,10 @@ package lcduke;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
 import static java.lang.Integer.parseInt;
 
 /** Ths creates a TaskList object.
@@ -108,8 +111,21 @@ public class TaskList {
      * @return the correct format of date in String format
     */
     private String standardDate(String dateString) {
-        DateTimeFormatter formatterIn = DateTimeFormatter.ofPattern("MMM d yyyy");
-        LocalDate date = LocalDate.parse(dateString, formatterIn);
-        return String.valueOf(date);
+        //[E][✘] asd (at: Oct 30 2123 23:10)
+        String date;
+        String time;
+        if(dateString.substring(5, 6).contains(" ")){
+            date = dateString.substring(0, 10);
+            time = dateString.substring(11, dateString.length());
+        } else {
+            date = dateString.substring(0, 11);
+            time = dateString.substring(12, dateString.length());
+        }
+        LocalDateTime dt = LocalDateTime.of(
+                LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy")),
+                        LocalTime.parse(time)
+        );
+
+        return String.valueOf(dt.format(DateTimeFormatter.ofPattern("yyyy-mm-dd HH:MM")));
     }
 }
