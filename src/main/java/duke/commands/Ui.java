@@ -27,8 +27,8 @@ public class Ui {
      * @return Duke's introduction
      */
     public String start() {
-        String output = "Hello from\n" + LOGO;
-        output += "Hello! I'm Duke\nWhat can I do for you?\n";
+        //String output = "Hello from\n" + LOGO;
+        String output = "Hello! I'm Duke\nWhat can I do for you?\n";
         return output;
     }
 

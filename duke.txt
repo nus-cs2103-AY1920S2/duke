@@ -56,4 +56,8 @@ E | Y | project meeting | Apr 13 2020 6PM
 D | Y | do homework | Oct 29 2020 12PM
 T | Y | borrow book
 T | Y | test
+<<<<<<< HEAD
 >>>>>>> eb9b577... fixed unicode characters
+=======
+T | N | test again
+>>>>>>> ab1211f... draft README
