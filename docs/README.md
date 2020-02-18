@@ -26,7 +26,28 @@ View list of all tasks.
 
 ## Usage
 
-### todo {description} - Create a To do task
+### 1. todo - Create a To do task
+
+#### Format
+
+    todo {description} 
+
+Create a To do task and adds it to the list.
+
+#### Example of usage: 
+
+    todo read book
+
+#### Expected outcome:
+
+    Got it. I've added this task:
+    [T][✓] read book
+    Now you have 5 tasks in the list.
+
+### deadline - Create a To do task
+
+#### Format
+{description} 
 
 Create a To do task and adds it to the list.
 
@@ -36,4 +57,20 @@ Example of usage:
 
 Expected outcome:
 
-<img src="TodoOutcome.png" width="400">
+`Got it. I've added this task:`
+`[T][✓] read book`
+`Now you have 5 tasks in the list.`
+
+### event {description} - Create a To do task
+
+Create a To do task and adds it to the list.
+
+Example of usage: 
+
+`todo read book`
+
+Expected outcome:
+
+`Got it. I've added this task:`
+`[T][✓] read book`
+`Now you have 5 tasks in the list.`
