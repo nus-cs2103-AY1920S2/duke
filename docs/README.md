@@ -30,112 +30,146 @@ Users are able to search and display tasks using keywords. Tasks with keywords p
 ## Usage
 
 ### `todo` 
-Purpose:
+**Purpose:**
 
 This keyword creates a new todo task.
 
-Example of usage: 
+**Example of usage:**
 
 `todo (name of task)`
 
-Expected outcome:
+**Expected outcome:**
 
-_Task of type todo will be created and added to **MySponge's** database._
+_Task of type todo will be created and added to **MySponge's** database. Example:_<br/>
+`Got it. I've added this task:`<br/>
+`[T][X] (name of task)`</br>
+`Now you have 1 tasks in this list.`
 
 ### `deadline`
-Purpose:
+**Purpose:**
 
 This keyword creates a new deadline task.
 
-Example of usage: 
+**Example of usage:**
 
 `deadline (name of task) /by (YYYY-MM-dd HHmm)` Note: Date and Time must be expressed in proper format specified.
 
-Expected outcome:
+**Expected outcome:**
 
-_Task of type deadline will be created and added to **MySponge's** database._
+_Task of type deadline will be created and added to **MySponge's** database. Example:_</br>
+`Got it. I've added this task:`</br>
+`[D][X] (name of task) (by: Jun 11 2019 8:30pm)`</br>
+`Now you have 2 tasks in this list.`
 
 
 ### `event`
-Purpose:
+**Purpose:**
 
 This keyword creates a new event task.
 
-Example of usage: 
+**Example of usage:** 
 
 `event (name of task) /at (details)`
 
-Expected outcome:
+**Expected outcome:**
 
-_Task of type event will be created and added to **MySponge's** database._
+_Task of type event will be created and added to **MySponge's** database. Example:_</br>
+`Got it. I've added this task:`</br>
+`[E][X] (name of task) (at: Commonwealth MRT Station)`</br>
+`Now you have 3 tasks in this list.`
 
 
 ### `list`
 
-Purpose:
+**Purpose:**
 
 This keyword generates the list of tasks currently being tracked in **MySponge**.
 
-Example of usage: 
+**Example of usage:** 
 
 `list`
 
-Expected outcome:
+**Expected outcome:**
 
-_A list of tasks will be displayed to the user._
+_A list of tasks will be displayed to the user. Example:_</br>
+`Here are the tasks in your list:`</br>
+`1. [T][X] activity1`</br>
+`2. [D][X] activity2 (by: Jun 11 2019 8:30pm)`
 
 
 ### `done`
-Purpose:
+**Purpose:**
 
 This keyword alters a specific task's progress, from incomplete to completed.
 
-Example of usage: 
+**Example of usage:** 
 
 `done (integer value)`
 
-Expected outcome:
+**Expected outcome:**
 
-_The task represented with the corresponding integer value index will be deemed complete, the cross beside the task details will be replaced with a check instead._
+_The task represented with the corresponding integer value index will be deemed complete, the cross beside the task details will be replaced with a check instead. Example:_</br>
+`Got it. I've added this task:`</br>
+`Nice! I've marked this task as done:`</br>
+`[T][✅] activity1`
 
 
 ### `delete`
-Purpose:
+**Purpose:**
 
 This keyword removes a specific task's from **MySponge**.
 
-Example of usage: 
+**Example of usage:** 
 
 `delete (integer value)`
 
-Expected outcome:
+**Expected outcome:**
 
-_The task represented with the corresponding integer value index will be removed from database_.
-
+_The task represented with the corresponding integer value index will be removed from database. Example:_
+`Noted. I've removed this task:`</br>
+`[T][✅] activity1`</br>
+`Now you have 2 tasks in the list.`
 
 ### `tag`
-Purpose:
+**Purpose:**
 
 This keyword places a tag on a specific task.
 
-Example of usage: 
+**Example of usage:** 
 
 `tag (integer value) #(tag name)`
 
-Expected outcome:
+**Expected outcome:**
 
-_The task represented with the corresponding integer value index will have a newly created tag visible._
-
+_The task represented with the corresponding integer value index will have a newly created tag visible. Example:_
+`Nice! I've added a tag for this task:`</br>
+`[T][✅][#School] activity1`
 
 ### `find`
-Purpose:
+**Purpose:**
 
 This keyword returns a list of tasks containing the keyword specified by the User.
 
-Example of usage: 
+**Example of usage:** 
 
 `find (keyword)`
 
-Expected outcome:
+**Expected outcome:**
 
-_All tasks contaning the keyword specified will be displayed._
+_All tasks contaning the keyword specified will be displayed. Example:_
+`Here are the matching tasks in your list:`</br>
+`1. [T][X] activity1`</br>
+`2. [D][X] activity2 (by: Jun 11 2019 8:30pm)`
+
+### `bye`
+**Purpose:**
+
+This keyword closes the application window.
+
+**Example of usage:** 
+
+`bye`
+
+**Expected outcome:**
+
+_Application window will be closed._
