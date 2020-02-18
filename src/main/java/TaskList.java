@@ -160,9 +160,11 @@ public class TaskList {
         output += "Here are the matching tasks in your list:\n";
         int j = 0;
         for (int i = 0; i < taskList.size(); i++) {
-            String description = this.taskList.get(i).toString();
+            String task = this.taskList.get(i).toString();
+            int indexOfDescription = task.indexOf("Done]") + 6;
+            String description = task.substring(indexOfDescription);
             if (description.contains(keyWord)) {
-                output+= (i + 1) + "." + description + "\n";
+                output+= (i + 1) + "." + task + "\n";
                 j++;
             }
         }
@@ -191,7 +193,8 @@ public class TaskList {
     }
 
     public String clearList() {
-        for (int i = 0; i < taskList.size(); i++) {
+        int size  = taskList.size();
+        for (int i = 0; i < size; i++) {
             taskList.remove(0);
         }
         this.pendingTask = 0;
