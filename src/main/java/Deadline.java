@@ -1,3 +1,4 @@
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -10,8 +11,8 @@ import java.util.Date;
  * e.g., <code>2020-02-01</code> and the deadline time e.g., <code>1000</code> of the task.
  */
 public class Deadline extends Task {
-    protected String deadlineDate;
-    protected String deadlineTime;
+    protected LocalDate deadlineDate;
+    protected Date deadlineTime;
     protected String deadline;
 
     /**
@@ -23,17 +24,25 @@ public class Deadline extends Task {
      */
     public Deadline(String command, String deadlineDate, String deadlineTime) {
         super(command);
-        this.deadlineDate = deadlineDate;
-        this.deadlineTime = deadlineTime;
+        this.deadlineDate = parseDate(deadlineDate);
+        this.deadlineTime = parseTime(deadlineTime);
+        this.deadline = deadlineDate + " " + deadlineTime;
+    }
+
+    public LocalDate parseDate(String deadlineDate) {
+        return LocalDate.parse(deadlineDate);
+    }
+
+    public Date parseTime(String deadlineTime) {
+        Date deadlineTimeParsed = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
-            Date deadlineTimeParsed = sdf.parse(deadlineTime);
-            SimpleDateFormat sdftoFormat = new SimpleDateFormat("hhmm aa");
-            this.deadline = LocalDate.parse(deadlineDate).format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
-                    + sdftoFormat.format(deadlineTimeParsed);
-        } catch (ParseException exception) {
+            deadlineTimeParsed = sdf.parse(deadlineTime);
+        } catch (ParseException exception){
             exception.printStackTrace();
         }
+        assert deadlineTimeParsed != null: "Error in parsing deadline time!";
+        return deadlineTimeParsed;
     }
 
     /**
@@ -42,7 +51,10 @@ public class Deadline extends Task {
      * @return deadline date and the deadline time.
      */
     public String getDeadlineDateAndTime() {
-        return deadlineDate + " " + deadlineTime;
+        String date = deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd YYYY"));
+        SimpleDateFormat sdf = new SimpleDateFormat("hhmm aa");
+        String time = sdf.format(this.deadlineTime);
+        return date + " " + time;
     }
 
     /**
@@ -52,7 +64,7 @@ public class Deadline extends Task {
      * @return information about the task.
      */
     public String updateFile() {
-        return "D - " + getDoneInt() + " - " + getCommand() + " - " + getDeadlineDateAndTime();
+        return "D - " + getDoneInt() + " - " + getCommand() + " - " + deadline;
     }
 
     /**
@@ -67,21 +79,12 @@ public class Deadline extends Task {
         }
         String newDeadlineDate = strArr[0];
         String newDeadlineTime = strArr[1];
-        this.deadlineDate = newDeadlineDate;
-        this.deadlineTime = newDeadlineTime;
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
-            Date deadlineTimeParsed = sdf.parse(deadlineTime);
-            SimpleDateFormat sdftoFormat = new SimpleDateFormat("hhmm aa");
-            this.deadline = LocalDate.parse(deadlineDate).format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
-                    + sdftoFormat.format(deadlineTimeParsed);
-        } catch (ParseException exception) {
-            exception.printStackTrace();
-        }
+        this.deadlineDate = parseDate(newDeadlineDate);
+        this.deadlineTime = parseTime(newDeadlineTime);
     }
 
     @Override
     public String toString() {
-        return "[D][" + getDoneSymbol() + "] " + getCommand() + "(by: " + deadline + ")";
+        return "[D][" + getDoneSymbol() + "] " + getCommand() + "(by: " + getDeadlineDateAndTime() + ")";
     }
 }
