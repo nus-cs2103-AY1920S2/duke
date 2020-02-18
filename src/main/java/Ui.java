@@ -14,6 +14,16 @@ public class Ui {
     }
 
     /**
+     * Returns DukeBot's welcome message at startup.
+     *
+     * @return DukeBot's welcome message.
+     */
+    public String printGuiWelcome() {
+        return "Hello!! " + "\u263A" + " I am DukeBot, ready to receive your commands!!\n\n" + "You may type 'manual' " +
+                "you need help!";
+    }
+
+    /**
      * Prints message that task list is not found.
      */
     public void printLoadingError() {
@@ -107,7 +117,7 @@ public class Ui {
      * @return message showing all tasks saved in the task list.
      */
     public String printList(ArrayList<Task> taskList) {
-        strToReturn = "\u263A" + " The below is what you have told me so far. Have you completed them?\n";
+        strToReturn = "The below is what you have told me so far. Have you completed them?\n";
         for (Task task : taskList) {
             strToReturn = strToReturn + task + "\n";
         }
