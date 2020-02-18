@@ -1,0 +1,131 @@
+= JayZ bot Task Manager:- User Guide
+:site-section: UserGuide
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:imagesDir: images
+:stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: ://github.com/ljiazh3ng/duke
+
+By: `Lua Jia Zheng`      Since: `Feb 2020`      Licence: `MIT`
+
+== Introduction
+
+Jay-z's task manager serves as a personal chatbot assistant to help individuals manage and record their daily tasks in a readily available format. For those who prefer to work with a Command Line Interface (CLI) on top of a beautiful Graphical User Interface (GUI), this application will be perfect for you!
+
+== Quick Start
+
+.  Ensure you have Java `11` or above installed in your Computer.
+.  Download the latest `Jay-Z.jar` link:https://github.com/ljiazh3ng/duke/releases[here].
+.  Double-click the file to start the app. The GUI should appear in a few seconds.
++
+image::Ui.png[width="790"]
++
+.  Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`i`* and pressing kbd:[Enter] will open the instruction window.
+.  Some example commands you can try:
+
+* *`list`* : Shows a list of task in your TaskList.
+* *`bye`* : exits the app
+
+.  Refer to <<Features>> for details of each command.
+
+[[Features]]
+== Features
+
+=== Viewing instructions : `i`
+
+Format: `i`
+
+=== Adding a Todo task: `todo`
+
+Adds a todo task into the sorted task list. +
+Format: `todo title` +
+Examples: + 
+* `todo return books`
+* `todo get cap 5`
+
+=== Adding a Deadline task: `deadline`
+
+Adds a deadline task into the sorted task list. +
+Format: `deadline title /by date` +
+Examples: + 
+* `deadline return books /by sunday`
+* `deadline CS2103 /by 28-10-2020`
+
+=== Adding a Event task: `event`
+
+Adds a event task into the sorted task list. +
+Format: `event title /at date` +
+Examples: + 
+* `event return books /at date`
+* `event career fair /at SR1 sunday`
+
+=== Listing the conetent of current directory : `list`
+
+Shows a list of task in the current Task List. +
+Format: `list`
+
+=== Locating persons by name: `find`
+
+Finds task whose title contain any of the given keywords. +
+Format: `find KEYWORD` 
+
+Example:
+* `find abc` +
+Returns `abcdef` and `abc`
+
+=== Deleting a person : `delete`
+
+Deletes the specified task from the task list. +
+Format: `delete INDEX`
+
+****
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd task in the TaskList.
+
+=== Exiting the program : `bye`
+
+Exits the program. +
+Format: `bye`
+
+=== Saving the data
+
+Task list data are saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually.
+
+=== View Help : `i`
+
+Notably will display the list of features and commands available as well as their uses. +
+Format : `i`
+
+=== Create a new note : `new`
+
+You can create a new note in your current working directory. +
+Format: `new -t {TITLE} -b {BODY} -o` +
+Examples: new -t Notably -b Lorem ipsum dolor sit amer
+
+== Command Summary
+
+* *todo* `todo title` +
+* *deadline* : `deadline title /by date`
+* *event* : `event title /at location time`  +
+* *Find* : `find KEYWORD` +
+* *List* : `list`
+* *Instruction* : `i`
+
