@@ -27,7 +27,8 @@ public class AddCommand extends DukeCommand {
      * @param dui DukeUI from the main Duke program
      */
     public String execute(DukeList dl, DukeStorage ds, DukeUI dui) {
-        dl.addTask(toBeAdded);
+        assert this.toBeAdded != null : "Task to be added cannot be null!";
+        dl.addTask(this.toBeAdded);
         ds.save(dl);
 
         dui.holdCurrentMessage("    Got it I've added this task:");

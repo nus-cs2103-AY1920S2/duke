@@ -37,6 +37,7 @@ public class DukeList {
      * @return Total number of tasks in the list
      */
     public int getNumOfTasks() {
+        assert this.numOfTasks >= 0 : "Number of tasks cannot be negative";
         return this.numOfTasks;
     }
 

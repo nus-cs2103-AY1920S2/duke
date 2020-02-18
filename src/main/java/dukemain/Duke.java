@@ -43,7 +43,6 @@ public class Duke {
     public String getResponse(String input) {
         String command;
         String output = "";
-
         try {
             command = input;
             DukeCommand currCommand = parser.handleCommand(command);

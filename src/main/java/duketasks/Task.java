@@ -29,6 +29,11 @@ public class Task {
     }
 
     public String getIsDoneString() {
+        if(this.isDone) {
+            assert isDoneString == "O" : "Done String should be O instead of X if is done!";
+        } else {
+            assert isDoneString == "X" : "Done String should be X instead of O if not done!";
+        }
         return isDoneString;
     }
 

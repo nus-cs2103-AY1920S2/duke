@@ -43,7 +43,6 @@ public class DukeStorage {
         ArrayList<Task> inputDL = dl.getListOfTasks();
         List<String> outputList = saveEncoder(inputDL);
         try {
-            System.out.println("Trying to save");
             Path test = Files.write(path, outputList);
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
@@ -67,14 +66,11 @@ public class DukeStorage {
      */
     public DukeList load() throws IOException {
         if (!Files.exists(path)) {
-            System.out.println("Path is empty!");
             return new DukeList();
         } else {
-            System.out.println("Path is not empty!");
             DukeList output = new DukeList();
             try {
                 List<String> input = Files.readAllLines(path);
-                System.out.println("Successfully loaded");
                 return loadDecoder(input, output);
             } catch (IOException ioe) {
                 throw ioe;
