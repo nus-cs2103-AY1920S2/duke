@@ -27,4 +27,7 @@ public class ListCommand extends Command {
             return ex.toString();
         }
     }
+    public String execute(Ui ui, Storage storage, ContactList contacts) {
+        return "";
+    }
 }

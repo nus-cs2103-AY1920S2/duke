@@ -41,6 +41,9 @@ public class FindCommand extends Command {
         }
     }
 
+    public String execute(Ui ui, Storage storage, ContactList contacts) {
+        return "";
+    }
     /**
      * Method to return the description.
      * @return returns the description in the class

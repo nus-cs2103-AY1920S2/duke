@@ -15,4 +15,5 @@ public abstract class Command {
      * @param taskList Pass in TaskList class
      */
     public abstract String execute(Ui ui, Storage storage, TaskList taskList);
+    public abstract String execute(Ui ui, Storage storage, ContactList contactList);
 }

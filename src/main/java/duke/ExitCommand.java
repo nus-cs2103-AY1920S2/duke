@@ -5,6 +5,9 @@ package duke;
  */
 public class ExitCommand extends Command {
 
+    public String execute(Ui ui, Storage storage, ContactList contacts) {
+        return "";
+    }
     /**
      * Execute the command.
      * @param ui Pass in Ui class

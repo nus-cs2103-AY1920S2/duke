@@ -35,6 +35,10 @@ public class DeadLineCommand extends Command {
         return ui.printTodoComplete(t, taskList.getTaskListSize());
     }
 
+    public String execute(Ui ui, Storage storage, ContactList contacts) {
+        return "";
+    }
+
     /**
      * Method to return the index.
      * @return returns the index in the class

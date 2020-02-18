@@ -14,7 +14,7 @@ public class Parser {
      * Enums for task.
      */
     enum TaskEnum {
-      TODO, DEADLINE, EVENT
+      TODO, DEADLINE, EVENT, CONTACT
     }
 
     /**
@@ -28,6 +28,8 @@ public class Parser {
                 return new ExitCommand();
             } else if (cmd.equals("list")) {
                 return new ListCommand();
+            } else if (cmd.contains("cList")) {
+                return new ContactListCommand();
             } else if (cmd.contains("done")) {
                 String which = cmd.split(" ")[1];
                 return new DoneCommand(which);
@@ -56,6 +58,11 @@ public class Parser {
                     String eventDescription = eventcomm.split("/at")[0];
                     String atTime = eventcomm.split("/at")[1];
                     return new EventCommand(eventcomm, eventDescription, atTime);
+                case CONTACT:
+                    String ccomm = cmd.split("contact")[1];
+                    String contactName = ccomm.split("/number")[0];
+                    String phoneNumber = cmd.split("/number")[1];
+                    return new ContactCommand(contactName, phoneNumber);
                 default:
                     throw new UnknownCommandException();
                 }

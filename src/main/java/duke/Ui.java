@@ -72,4 +72,8 @@ public class Ui {
     public String printNotFound() {
         return "There was no matching task";
     }
+
+    public String printContactComplete() {
+        return "Contact Saved";
+    }
 }

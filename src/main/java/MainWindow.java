@@ -53,11 +53,11 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = "User says:\n" + userInput.getText();
-        String response = "Duke says:\n" + duke.getResponse(input);
+        String input =  userInput.getText();
+        String response =  duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog("User says:\n" +input, userImage),
+                DialogBox.getDukeDialog("Duke says:\n" +response, dukeImage)
         );
         if (response.contains("Bye. Hope to see you again")) {
             System.exit(0);

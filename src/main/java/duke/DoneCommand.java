@@ -32,6 +32,9 @@ public class DoneCommand extends Command {
         return response;
     }
 
+    public String execute(Ui ui, Storage storage, ContactList contacts) {
+        return "";
+    }
     /**
      * Method to return the index.
      * @return returns the index in the class

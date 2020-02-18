@@ -12,17 +12,21 @@ public class Duke extends Application{
 
     public Ui ui;
     public Storage storage;
+    public Storage storagec;
     public TaskList tasks;
+    public ContactList contacts;
 
     /**
      * Initialize duke.
      */
     public Duke() {
         String filepath = "dukeStorage";
+        String filepathc = "dukeContact";
         ui = new Ui();
         storage = new Storage(filepath);
+        storagec = new Storage(filepathc);
         tasks = new TaskList(storage.load());
-
+        contacts = new ContactList(storagec.loadC());
     }
 
     /**
@@ -63,9 +67,14 @@ public class Duke extends Application{
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        String reply;
         try {
             Command d = Parser.parse(input);
-            String reply = d.execute(ui, storage, tasks);
+            if (d instanceof ContactCommand || d instanceof ContactListCommand) {
+                reply = d.execute(ui, storagec, contacts);
+            } else {
+                reply = d.execute(ui, storage, tasks);
+            }
             return reply;
         } catch (DukeException ex) {
             return ex.toString();
