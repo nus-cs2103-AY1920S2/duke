@@ -110,7 +110,19 @@ public class Ui {
         user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
         duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-        dialogContainer.getChildren().add(getDialogLabel("Hello! I'm Duke\nWhat can I do for you?"));
+        String introText = String.join("\n",
+            "Hello! I'm Duke",
+            "What can I do for you?",
+            "Here's a list of command examples you can use:",
+            "1. todo read book 2",
+            "2. deadline finish book /by 2020-02-30 5",
+            "3. event book meeting /at 2020-03-02 1",
+            "4. list",
+            "5. done 2",
+            "6. delete 2",
+            "7. bye");
+
+        dialogContainer.getChildren().add(getDialogLabel(introText));
 
         //step 3
         sendButton.setOnMouseClicked((event) -> {
