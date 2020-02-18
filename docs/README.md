@@ -13,7 +13,7 @@ features such as add and delete.
 
 ### 1. Add new task
 
-** Duplicate task will not be added
+ **Duplicate task will not be added**
 - There are 3 kinds of task:
    1. todo: task with no date and time attached
    2. deadline: task with an end date and time

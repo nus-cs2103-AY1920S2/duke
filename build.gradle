@@ -8,13 +8,14 @@ plugins {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "1.1"
+    archiveVersion = "1.2"
     archiveClassifier = null
     archiveAppendix = null
 }
 
 /*javafx {
     version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
  */

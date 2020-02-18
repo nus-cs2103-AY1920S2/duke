@@ -53,7 +53,7 @@ public class InvalidDateError extends Exceptions {
 
                 assert type.equals("event") : "Wrong event type";
 
-                return "Date should be in d/MM/yyyy HH:mm to /MM/yyyy HH:mm format";
+                return "Date should be in d/MM/yyyy HH:mm to d/MM/yyyy HH:mm format";
 
             }
         }
