@@ -73,6 +73,7 @@ public class Parser {
                 if (e.length < 2) {
                     return "Time cannot be empty";
                 }
+                assert e.length >= 2;
                 Event event = new Event(e[0], LocalDate.parse(e[1]));
                 list.addItem(event);
                 storage.addTxt(event.now(), ui);
@@ -105,4 +106,6 @@ public class Parser {
         }
         return "Task completed";
     }
+
+    public static void main(String[] args){}
 }
