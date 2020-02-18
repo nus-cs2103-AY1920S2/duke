@@ -1,2 +1,6 @@
 T@1@read book
 D@1@project@2016-08-23T22:12:45
+T@0@sleep
+T@0@read
+T@1@shower
+T@1@drink 

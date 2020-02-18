@@ -30,6 +30,8 @@ public class DoneCommand extends Command {
             String secNum = arr[1];
             int doneTask = Integer.parseInt(secNum) - 1;
 
+            assert doneTask > tasks.getList().size(): "number not valid";
+
             //CALL TASKLIST: set that task to done
             tasks.setDone(doneTask);
             //CALL STORAGE: write new file

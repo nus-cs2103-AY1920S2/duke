@@ -30,6 +30,8 @@ public class DeleteCommand extends Command {
             String secNum = arr[1];
             int deleteTask = Integer.parseInt(secNum) - 1;
 
+            assert deleteTask > tasks.getList().size(): "number not valid";
+
             //CALL STORAGE: write new file
             storage.deleteTask(deleteTask, tasks);
             //CALL UI: print output
