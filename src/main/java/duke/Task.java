@@ -30,5 +30,9 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public void markAsUndone() {
+        this.isDone = false;
+    }
+
     abstract String toDatabaseString();
 }

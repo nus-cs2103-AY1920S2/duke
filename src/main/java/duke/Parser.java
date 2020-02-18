@@ -45,6 +45,10 @@ public class Parser {
                 // assumes command is only "done" and an int
                 // the input is 1-indexed. duke.DoneCommand takes in 0-indexed
                 return new DoneCommand(Integer.parseInt(otherArgs) - 1);
+            } else if (firstArg.equals("undo")) {
+                // assumes command is only "undo" and an int
+                // the input is 1-indexed. duke. UndoCommand takes in 0-indexed
+                return new UndoCommand(Integer.parseInt(otherArgs) - 1);
             } else if (firstArg.equals("delete")) {
                 // assumes command is only "delete" and an int
                 // the input is 1-indexed. duke.DeleteCommand takes in 0-indexed

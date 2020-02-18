@@ -45,6 +45,15 @@ public class TaskList {
         return responseMessage;
     }
 
+    public String undo(int undoIndex) throws IndexOutOfBoundsException {
+        tasks.get(undoIndex).markAsUndone();
+        String responseMessage = "";
+        responseMessage += "Okay, I've marked this task as undone: \n";
+        responseMessage += tasks.get(undoIndex).toString() + "\n";
+
+        return responseMessage;
+    }
+
     /**
      * Deletes the task at deleteIndex as done and returns a response message. deleteIndex is 0-indexed.
      * @param deleteIndex the 0-indexed index of the task to be deleted.
@@ -101,4 +110,5 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
+
 }
