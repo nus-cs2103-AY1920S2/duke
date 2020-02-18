@@ -189,7 +189,7 @@ Example of usage:
 
 - Suppose we wanted to Delete Tasks 3 (Samuel's Birthday Party) and 5 (GooD) from the list.
 
-<img src="ExampleList.png" alt="Example List" width="600" height="400"/>
+<img src="ExampleList.png" alt="Example List" width="500"/>
 
 `delete 3 5`
 
@@ -203,7 +203,7 @@ Example of usage:
 
 - Suppose we wanted to delete all the Tasks in the list.
 
-<img src="ExampleList.png" alt="Example List" width="600" height="400"/>
+<img src="ExampleList.png" alt="Example List" width="500"/>
 
 `delete all`
 
