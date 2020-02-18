@@ -25,8 +25,9 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Duke");
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            fxmlLoader.<MainWindow>getController().displayDukeResponse(duke.getUi().say(SayType.INTRO));
+            MainWindow mainWindow = fxmlLoader.<MainWindow>getController();
+            mainWindow.setDuke(duke);
+            mainWindow.displayDukeResponse(duke.getUi().say(SayType.INTRO));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
