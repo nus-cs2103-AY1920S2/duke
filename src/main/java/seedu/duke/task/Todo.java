@@ -20,7 +20,6 @@ public class Todo extends Task {
 
     @Override
     public int compareTo(Task task) {
-            return toString().compareTo(task.toString());
-//        }
+        return toString().compareTo(task.toString());
     }
 }

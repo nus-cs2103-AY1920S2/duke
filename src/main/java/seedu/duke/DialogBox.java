@@ -39,7 +39,6 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-//        dialog.setWrapText(true);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
@@ -58,6 +57,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Displays Duke's response as a dialog.
+     *
+     * @param text Duke's response.
+     * @param img Image of Duke.
+     * @return DialogBox.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

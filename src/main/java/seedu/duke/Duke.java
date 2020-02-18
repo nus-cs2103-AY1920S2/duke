@@ -60,9 +60,9 @@ public class Duke {
                 }
                 cmd.execute(taskList, ui, storage);
             } catch (NullPointerException e) {
-
+                ui.print(e.toString());
             } catch (IOException e) {
-
+                ui.print(e.toString());
             }
         }
     }
@@ -88,7 +88,6 @@ public class Duke {
     protected String getResponse(String input) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
-        PrintStream old = System.out;
         System.setOut(ps);
 
         Parser parser = new Parser();
@@ -101,6 +100,7 @@ public class Duke {
         }
 
         System.out.flush();
+        PrintStream old = System.out;
         System.setOut(old);
         return baos.toString();
     }

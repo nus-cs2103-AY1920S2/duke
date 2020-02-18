@@ -1,18 +1,19 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.storage.Storage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
     public void testIsValidDate() throws IOException {
+        Storage storage = new Storage("data/duke.txt");
         assertEquals(true,
-                new TaskList(new ArrayList<Task>(), new Storage("data/test.txt")).isValidDate("2020-01-01"));
+                storage.isValidDate("2020-01-01"));
         assertEquals(false,
-                new TaskList(new ArrayList<Task>(), new Storage("data/test.txt")).isValidDate("1 Jan 2020"));
+                storage.isValidDate("1 Jan 2020"));
     }
 }

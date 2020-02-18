@@ -41,12 +41,12 @@ public class Storage {
     //@@author johannagwan-reused
     //Reused from https://www.w3schools.com/java/java_files_create.asp with minor modifications.
     /**
-     *
+     * Creates new file when the data file specified in the file path does not exist.
      */
     public void makeNewFile() {
         Ui ui = new Ui();
         try {
-            String newFilePath = "data/duke.txt";
+            String newFilePath = "duke.txt";
             File newFile = new File(newFilePath);
             if (!newFile.createNewFile()) {
                 ui.printDuplicateFile();
@@ -94,6 +94,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Sorts the content inside the hard disk according to due dates and alphabetical order.
+     *
+     * @throws InvalidTaskInputException If an invalid task command is input.
+     * @throws InvalidDateException If a date is input in a wrong format.
+     * @throws IOException If an input or output exception occurred.
+     */
     public void sortStorage() throws InvalidTaskInputException, InvalidDateException, IOException {
         List<Task> tasksInStorage = new ArrayList<>();
         tasksInStorage = load();
@@ -102,6 +109,11 @@ public class Storage {
         addAllToStorage(tasksInStorage);
     }
 
+    /**
+     * Deletes all content inside the hard disk.
+     *
+     * @throws IOException If an input or output exception occurred.
+     */
     public void deleteAllInStorage() throws IOException {
         String data = "";
         FileOutputStream fileOutputStr = new FileOutputStream(filePath);
@@ -109,6 +121,12 @@ public class Storage {
         fileOutputStr.close();
     }
 
+    /**
+     * Adds all the sorted tasks into the hard disk.
+     *
+     * @param sortedTasks The list of sorted tasks.
+     * @throws IOException If an input or output exception occurred.
+     */
     public void addAllToStorage(List<Task> sortedTasks) throws IOException {
         for (Task task : sortedTasks) {
             addToStorage(task);
@@ -203,7 +221,7 @@ public class Storage {
      * @param inDate The input date.
      * @return true if the input date is written in a valid date format.
      */
-    private static boolean isValidDate(String inDate) {
+    public static boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         dateFormat.setLenient(false);
         try {
