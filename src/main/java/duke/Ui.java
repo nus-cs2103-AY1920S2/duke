@@ -5,12 +5,26 @@ import java.util.Scanner;
 public class Ui {
     public static final String WELCOME_MESSAGE =
             " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n"
-                    + "Hello! I'm Duke\n"
-                    + "What can I do for you?\n";
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n"
+                + "Hello! I'm Duke\n"
+                + "What can I do for you?\n"
+                + "\n"
+                + "Type \"help\" to see a list of possible commands.";
+
+    public static final String HELP_PAGE =
+            "Here are the commands I understand:\n"
+            + "list\n"
+            + "todo TASK_NAME\n"
+            + "event EVENT_NAME /at LOCATION\n"
+            + "deadline DEADLINE_NAME /by YYYY-MM-DD\n"
+            + "done INDEX\n"
+            + "undo INDEX\n"
+            + "delete INDEX\n"
+            + "help\n";
+
 
 
     public void showLoadingError() {

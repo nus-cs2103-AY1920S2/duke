@@ -20,6 +20,8 @@ public class Parser {
                 return new ExitCommand();
             } else if (fullCommand.equals("todo")) {
                 throw new EmptyToDoException();
+            } else if (fullCommand.equals("help")) {
+                return new ListHelpCommand();
             } else {
                 throw new UndefinedCommandException();
             }
