@@ -57,38 +57,48 @@ public class TaskList {
     }
 
     /**
-     * Returns an {@code ArrayList<String>} of the tasks currently in the list,
-     * where each element (representing a task) is formatted to be human readable.
+     * Returns an {@code String} of the tasks currently in the list, where each
+     * element (representing a task) is formatted to be human readable.
      * 
-     * @return {@code ArrayList<String>} of the tasks
+     * @return {@code String} of the tasks
      */
     public String listTasks() {
-        String lines = "";
         if (taskList.isEmpty()) {
-            lines += "Nothing in the list, good job! " + new String(Character.toChars(0x1F60A));
-        } else {
-            for (int i = 0; i < this.taskList.size(); i++) {
-                lines += (i + 1) + ". " + this.taskList.get(i).getFullDescription() + "\n";
-            }
+            return "Nothing in the list, good job! " + new String(Character.toChars(0x1F60A));
+        }
+
+        String lines = "Here are your tasks:\n";
+        for (int i = 0; i < this.taskList.size(); i++) {
+            lines += (i + 1) + ". " + this.taskList.get(i).getFullDescription() + "\n";
         }
         return lines.trim();
     }
 
+    /**
+     * Returns an {@code String} of the tasks with description matching that of the
+     * input {@code description}, where each element (representing a task) is
+     * formatted to be human readable.
+     * 
+     * @return {@code String} of the tasks
+     */
     public String findTasks(String description) {
-        String lines = "";
         if (taskList.isEmpty()) {
-            lines += "Sorry, you have no tasks.";
-        } else {
-            int index = 1;
-            for (Task task : this.taskList) {
-                if (task.getDescription().contains(description)) {
-                    lines += index + ". " + task.getFullDescription() + "\n";
-                }
-            }
-            if (lines.isEmpty()) {
-                lines += "Sorry, nothing found.";
+            return "Sorry, you don't seem to have any tasks yet.";
+        }
+
+        String lines = "";
+        int index = 1;
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(description)) {
+                lines += index + ". " + task.getFullDescription() + "\n";
+                index++;
             }
         }
-        return lines.trim();
+
+        if (lines.isEmpty()) {
+            return "Sorry, nothing found.";
+        }
+
+        return "Here's what I found\n" + lines.trim();
     }
 }
