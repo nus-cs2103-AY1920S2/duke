@@ -32,10 +32,11 @@ public class TaskList {
         return tasks.get(taskNumber);
     }
 
-    public void makeTaskDone(int taskNumber) {
+    public String makeTaskDone(int taskNumber) {
         tasks.get(taskNumber).markAsDone();
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(tasks.get(taskNumber));
+        return "1";
     }
 
     public void deleteTask(int taskNumber) {

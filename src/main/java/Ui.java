@@ -12,32 +12,31 @@ public class Ui {
     public Ui() {
     }
 
-    public void showWelcomeMessage() {
-        System.out.println("Hello from\n" + logo);
-        System.out.println("I am here to help you with anything you need!");
+    public String showWelcomeMessage() {
+        return "Hello from\n" + logo + "I am here to help you with anything you need!";
     }
 
-    public void showLineOfUnderscores() {
-        System.out.println("____________________________________________________________");
+    public String showLineOfUnderscores() {
+        return "____________________________________________________________";
     }
 
-    public void showGoodbyeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    public void showEmptyDescription(String type) {
-        System.out.println("☹ OOPS!!! The description of a " + type + " cannot be empty.");
+    public String showEmptyDescription(String type) {
+        return "☹ OOPS!!! The description of a " + type + " cannot be empty.";
     }
 
-    public void showInvalidRemoval() {
-        System.out.println("This item is not valid to remove.");
+    public String showInvalidRemoval() {
+        return "This item is not valid to remove.";
     }
 
-    public void showCommandNotFound() {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public String showCommandNotFound() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
-    public void showMissingParemeters() {
-        System.out.println("☹ OOPS!!! Either filter criterion (date/month/year) or its value is missing. Please try again.");
+    public String showMissingParemeters() {
+        return "☹ OOPS!!! Either filter criterion (date/month/year) or its value is missing. Please try again.";
     }
 }
