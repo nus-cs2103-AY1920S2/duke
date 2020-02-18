@@ -1,6 +1,6 @@
 # User Guide
 
-<img src="Ui.png" alt="Duke Showcase" width="600" height="400"/>
+<img src="Ui.png" alt="Duke Showcase" width="450" height="500"/>
 
 E-1337 is a Personal Assistant Chatbot which stores and records your to-dos, deadlines, events, and loans.
 This User Guide will demonstrate how to use its capabilities, such that users will have a smooth and productive
@@ -8,9 +8,11 @@ experience with the software.
 
 
 ## Start Program
+
 - Simply open the .jar file on your computer/machine to launch the program.
 - Upon creating an entry or updating any Tasks, a separate file will be created so that you can
 refer to it outside of the program.
+
 ```
 Note: this file will be used for subsequent launches of the program, hence any edits will be reflected the next launch.
 Note: Should this file be absent, a new empty file will be created in its place.
@@ -18,6 +20,7 @@ Note: Should this file be absent, a new empty file will be created in its place.
 
 ## Task Types
 There are 4 types of Tasks that E-1337 can process. These include:
+
 ```
 ToDo
 Deadline
@@ -26,6 +29,7 @@ Loan
 ```
 
 ## Features 
+
 - Help
 - Add a Task
 - List down all Tasks
@@ -177,8 +181,7 @@ Example of usage:
 
 Expected outcome:
 
-![Delete 4 Command](Delete4.png =600x400)
-
+<img src="Delete4.png" alt="Delete 4 Command" width="600" height="400"/>
 
 We can also **delete Multiple Tasks** with their index number specified.
 
@@ -186,13 +189,13 @@ Example of usage:
 
 - Suppose we wanted to Delete Tasks 3 (Samuel's Birthday Party) and 5 (GooD) from the list.
 
-![Example List](ExampleList.png =600x400)
+<img src="ExampleList.png" alt="Example List" width="600" height="400"/>
 
 `delete 3 5`
 
 Expected outcome:
 
-![Delete 3 5](Delete35.png =600x400)
+<img src="Delete35.png" alt="Delete 3 5" width="600" height="400"/>
 
 We can also delete the **entire list** using `delete all`.
 
@@ -200,13 +203,13 @@ Example of usage:
 
 - Suppose we wanted to delete all the Tasks in the list.
 
-![Example List](ExampleList.png =600x400)
+<img src="ExampleList.png" alt="Example List" width="600" height="400"/>
 
 `delete all`
 
 Expected outcome:
 
-![Delete All](DeleteAll.png =600x400)
+<img src="DeleteAll.png" alt="Delete All" width="600" height="400"/>
 
 ### `Exit the Program`
 
