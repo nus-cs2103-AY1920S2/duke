@@ -176,7 +176,7 @@ Example of usage:
 
 Expected outcome:
 
-![Delete 4 Command](Delete4.png)
+![Delete 4 Command](Delete4.png =600x400)
 
 
 We can also **delete Multiple Tasks** with their index number specified.
@@ -185,13 +185,13 @@ Example of usage:
 
 - Suppose we wanted to Delete Tasks 3 (Samuel's Birthday Party) and 5 (GooD) from the list.
 
-![Example List](ExampleList.png)
+![Example List](ExampleList.png =600x400)
 
 `delete 3 5`
 
 Expected outcome:
 
-![Delete 3 5](Delete35.png)
+![Delete 3 5](Delete35.png =600x400)
 
 We can also delete the **entire list** using `delete all`.
 
@@ -199,13 +199,13 @@ Example of usage:
 
 - Suppose we wanted to delete all the Tasks in the list.
 
-![Example List](ExampleList.png)
+![Example List](ExampleList.png =600x400)
 
 `delete all`
 
 Expected outcome:
 
-![Delete All](DeleteAll.png)
+![Delete All](DeleteAll.png =600x400)
 
 ### `Exit the Program`
 
