@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class Deadline to represent a Deadline Task. A Deadline
  * consists of a description and a endTime.
  */
 public class Deadline extends Task {
-
+    protected LocalDate endTime; // this will be startTime or endTime depending on the underlying class.
     /**
      * Creates a new Deadline with {@code description} and specified {@code endTime}.
      *
@@ -11,7 +14,8 @@ public class Deadline extends Task {
      * @param endTime end time
      */
     public Deadline(String description, String endTime) {
-        super(description, endTime);
+        super(description);
+        this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     /**
@@ -24,6 +28,20 @@ public class Deadline extends Task {
         return "D";
     }
 
+    @Override
+    public String getTimeOutput() {
+        return endTime.format(DateTimeFormatter.ofPattern("d MMM YYYY"));
+    }
+
+    @Override
+    public String getTimeToDatabase() {
+        return endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return endTime;
+    }
     /**
      * returns a String representation of a Deadline instance.
      *
@@ -31,7 +49,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString();
+        return "[D]" + super.toString() + endTime.format(DateTimeFormatter.ofPattern("d MMM YYYY"));
     }
 
     /**

@@ -1,3 +1,7 @@
-E|0|project meeting|Oct 10 2020
-D|0|return book|Oct 10 2019
-Task|0|project meeting/2020-10-10|Dec 31 2099
+D|1|project meeting|2020-01-01
+D|1|return book|2021-10-10
+D|1|eat|2020-01-01
+D|0|yay|2020-01-01
+D|0|add|2019-01-02
+T|1|add|
+T|0|7|

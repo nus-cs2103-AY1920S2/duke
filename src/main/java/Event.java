@@ -1,16 +1,22 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class Event to represent a Event Task. An Event
  * consists of a description and a time period.
  */
 public class Event extends Task {
+    protected LocalDate startTime; // this will be startTime or endTime depending on the underlying class.
+
     /**
      * Creates a new Event with {@code description} and specified {@code time}.
      *
      * @param description the description/details of our task
-     * @param time the time that the event happens
+     * @param startTime the time that the event happens
      */
-    public Event(String description, String time) {
-        super(description, time);
+    public Event(String description, String startTime) {
+        super(description);
+        this.startTime = LocalDate.parse(startTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     /**
@@ -23,6 +29,22 @@ public class Event extends Task {
         return "E";
     }
 
+    @Override
+    public String getTimeOutput() {
+        return startTime.format(DateTimeFormatter.ofPattern("d MMM YYYY"));
+    }
+
+    @Override
+    public String getTimeToDatabase() {
+        return startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return startTime;
+    }
+
+
     /**
      * returns a String representation of an Event instance.
      *
@@ -30,7 +52,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString();
+        return "[E]" + super.toString() + startTime.format(DateTimeFormatter.ofPattern("d MMM YYYY"));
     }
 
     /**
