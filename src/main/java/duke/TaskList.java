@@ -66,11 +66,15 @@ public class TaskList {
      * @return the task list as a formatted string
      */
     public String list() {
-        String listAsString = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            listAsString += (i + 1) + ". " + tasks.get(i).toString() + "\n";
+        if (tasks.isEmpty()) {
+            return "You currently have no saved tasks.";
+        } else {
+            String listAsString = "Here are the tasks I've remembered.\n";
+            for (int i = 0; i < tasks.size(); i++) {
+                listAsString += (i + 1) + ". " + tasks.get(i).toString() + "\n";
+            }
+            return listAsString;
         }
-        return listAsString;
     }
 
     /**
