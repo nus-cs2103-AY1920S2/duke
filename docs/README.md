@@ -1,6 +1,6 @@
 # Duke
 * Duke is a very simple CLI task management application.
-* This version of Duke was developed by Nhat Nguyen | NNpanpan.
+* This version of Duke was developed by Nhat Nguyen.
 
 ## User Guide
 * Below is the guide to the usage of Duke. All the commands are listed.
