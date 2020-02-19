@@ -13,8 +13,9 @@ public class DoneCommand implements Command {
         try {
             return tasks.done(doneIndex);
         } catch (IndexOutOfBoundsException e) {
-            return "Index out of bounds. Please input an index between 0 and "
-                    + (tasks.getTasks().size() - 1) + ".";
+            //the index the user inputs is 1-indexed
+            return "Index out of bounds. Please input an index between 1 and "
+                    + tasks.getTasks().size() + ".";
         }
     }
 
