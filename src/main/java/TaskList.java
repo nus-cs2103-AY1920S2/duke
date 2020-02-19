@@ -128,15 +128,18 @@ public class TaskList {
      * @param code T for time, D for description to decide which to be updated.
      * @param change Information to be changed to.
      * @return The updated task.
+     * @throws DukeUnknownInputException If user tries to change time of a Todo task.
      */
-    public Task update(int taskNum, String code, String change) {
+    public Task update(int taskNum, String code, String change) throws DukeUnknownInputException {
         int index = taskNum - 1;
         assert index >= 0;
         Task currTask = tasks.get(index);
         Task updatedTask = null;
         if (currTask instanceof Todo) {
             if (code.equals("T")) {
-                throw new DukeUnknownInputException("Todo events has no time.");
+                throw new DukeUnknownInputException("Sorry but Todo events have no time.\n"
+                        + "Did you mean to type:\n"
+                        + "update " + taskNum + " D " + change);
             } else {
                 updatedTask = new Todo(change, currTask.getisDone());
             }

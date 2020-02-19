@@ -53,7 +53,7 @@ public class Duke {
             outputMsg = parser.executeCommand(tasks, command, ui);
             storage.updateFile(tasks, tasks.getLength());
         } catch (DukeException e) {
-            outputMsg = ui.showError(e);
+            outputMsg = ui.showError(e) + "\nType help if you need Oppa's help!";
         } finally {
             return outputMsg;
         }

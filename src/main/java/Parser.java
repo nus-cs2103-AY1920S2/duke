@@ -32,14 +32,16 @@ public class Parser {
     public static int getMarkDoneNum(String command) throws DukeUnknownInputException {
         // Check if command is longer than "Done "
         if (command.length() <= 5) {
-            throw new DukeMissingDescriptionException("Task number missing.");
+            throw new DukeMissingDescriptionException("Sorry I need the task number.\n"
+                    + "e.g. done 2");
         }
         String num = command.substring(5);
         assert num != null;
         try {
             return Integer.valueOf(num);
         } catch (NumberFormatException e) {
-            throw new DukeUnknownInputException("Need task NUMBER.");
+            throw new DukeUnknownInputException("Sorry I need a task NUMBER.\n"
+                    + "e.g. done 2");
         }
     }
 
@@ -53,7 +55,7 @@ public class Parser {
     public static String getTodoDescription(String command) throws DukeMissingDescriptionException {
         // Check if command is longer than "Todo "
         if (command.length() <= 5) {
-            throw new DukeMissingDescriptionException("Todo description missing. e.g. todo eat");
+            throw new DukeMissingDescriptionException("Sorry I need the Todo description.\ne.g. todo eat");
         }
         return command.substring(5);
     }
@@ -70,15 +72,18 @@ public class Parser {
             throws DukeMissingDescriptionException, DukeUnknownInputException {
         // Check if command is longer than "Deadline "
         if (command.length() <= 9) {
-            throw new DukeMissingDescriptionException("Deadline description and time missing.\n"
-                    + "e.g. deadline eat /by tonight");
+            throw new DukeMissingDescriptionException("Sorry I need the Deadline description and time.\n"
+                    + "e.g. deadline eat /by tonight\n"
+                    + "e.g. deadline drink /by 2019-12-02");
         }
         // Split the command with the first /by
         // Index 0 is description, index 1 is when the deadline is
         String[] splitted = command.substring(9).split(" /by ", 2);
         if (splitted.length < 2) {
-            throw new DukeUnknownInputException("Need format deadline (description) /by (time)\n"
-                    + "e.g. deadline eat /by tonight");
+            throw new DukeUnknownInputException("Sorry please format as such:\n"
+                    + "deadline (description) /by (time)\n"
+                    + "e.g. deadline eat /by tonight\n"
+                    + "e.g. deadline drink /by 2019-12-02");
         }
         // Check if date is parsable
         String byWhen = "";
@@ -106,17 +111,31 @@ public class Parser {
             throws DukeMissingDescriptionException, DukeUnknownInputException {
         // Check if command is longer than "Event "
         if (command.length() <= 6) {
-            throw new DukeMissingDescriptionException("Event description and time missing\n"
-                    + "e.g. event eat /at Monday 6pm");
+            throw new DukeMissingDescriptionException("Sorry I need Event description and time.\n"
+                    + "e.g. event eat /at Monday 6pm\n"
+                    + "e.g. event meet oppa /at 2019-12-02");
         }
         // Split the command with the first /at
         // Index 0 is description, index 1 is when the event is
         String[] splitted = command.substring(6).split(" /at ", 2);
         if (splitted.length < 2) {
-            throw new DukeUnknownInputException("Need format event (description) /at (time)\n"
-                    + "e.g. event eat /at Monday 6pm");
+            throw new DukeUnknownInputException("Sorry please format as such:\n"
+                    + "event (description) /at (time)\n"
+                    + "e.g. event eat /at Monday 6pm\n"
+                    + "e.g. event meet oppa /at 2019-12-02");
         }
-        return splitted;
+        // Check if date is parsable
+        String atWhen = "";
+        try {
+            LocalDate date = LocalDate.parse(splitted[1]);
+            //Format date e.g. from 2019-12-02 to Dec 2 2019
+            atWhen = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (DateTimeParseException e) {
+            atWhen = splitted[1];
+        } finally {
+            String[] descriptionAndAt = {splitted[0], atWhen};
+            return descriptionAndAt;
+        }
     }
 
     /**
@@ -131,14 +150,16 @@ public class Parser {
             throws DukeMissingDescriptionException, DukeUnknownInputException {
         // Check if command is longer than "Delete "
         if (command.length() <= 7) {
-            throw new DukeMissingDescriptionException("Task number missing.");
+            throw new DukeMissingDescriptionException("Sorry I need task number.\n"
+                    + "e.g. delete 2");
         }
         String num = command.substring(7);
         assert num != null;
         try {
             return Integer.valueOf(num);
         } catch (NumberFormatException e) {
-            throw new DukeUnknownInputException("Need task NUMBER.");
+            throw new DukeUnknownInputException("Sorry I need a task NUMBER.\n"
+                    + "e.g. delete 2");
         }
     }
 
@@ -152,7 +173,8 @@ public class Parser {
     public static String getFindWord(String command) throws DukeMissingDescriptionException {
         // Check if command is longer than "Find "
         if (command.length() <= 5) {
-            throw new DukeMissingDescriptionException("Word to find missing.\ne.g. find eat");
+            throw new DukeMissingDescriptionException("Sorry I need what you're trying to find.\n"
+                    + "e.g. find eat");
         }
         return command.substring(5);
     }
@@ -165,24 +187,26 @@ public class Parser {
      */
     public static String[] getUpdateParams(String command)
             throws DukeMissingDescriptionException, DukeUnknownInputException {
-        // Check if command is longer than e.g. "Update 2 D "
+        // Check if command is longer than e.g. "update 2 D "
         if (command.length() <= 11) {
-            throw new DukeMissingDescriptionException("Update command incomplete.\n"
+            throw new DukeMissingDescriptionException("Sorry your Update command is incomplete.\n"
                     + "e.g. update 2 T tomorrow afternoon");
         }
         // Splits the command by first 2 spaces
         // Index 0 is task number, index 1 is D or T, index 2 is info to change
         String[] splitted = command.substring(7).split(" ", 3);
         if (splitted.length < 3) {
-            throw new DukeUnknownInputException("Need format"
-                    + "update (task number) (D or T depending on description or time) (change)"
+            throw new DukeUnknownInputException("Sorry please format as such:\n"
+                    + "update (task number) (D or T depending on description or time) (change)\n"
                     + "e.g. update 2 T tomorrow afternoon");
         } else if (!splitted[0].matches("-?\\d+")) {
-            throw new DukeUnknownInputException("Need a task number after update\ne.g. update 2 T tomorrow afternoon");
-        } else if (!splitted[1].equals("D") && !splitted[1].equals("T")) {
-            throw new DukeUnknownInputException("Need either D or T after task number"
-                    + "depending on changing description or time\n"
+            throw new DukeUnknownInputException("Sorry I need a task number after update.\n"
                     + "e.g. update 2 T tomorrow afternoon");
+        } else if (!splitted[1].equals("D") && !splitted[1].equals("T")) {
+            throw new DukeUnknownInputException("Sorry I need either D or T after task number"
+                    + "depending on if you are changing description or time\n"
+                    + "e.g. update 2 T tomorrow afternoon\n"
+                    + "e.g. update 3 D sleep");
         } else {
             return splitted;
         }
@@ -200,6 +224,8 @@ public class Parser {
     public static String executeCommand(TaskList tasks, String command, Ui ui) throws DukeUnknownInputException {
         String commandType = getCommandType(command);
         switch (commandType) {
+        case "help":
+            return ui.showHello();
         case "list":
             return ui.showList(tasks);
         case "todo":

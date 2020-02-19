@@ -12,11 +12,6 @@ import task.Task;
  */
 public class Ui {
     Scanner sc = new Scanner(System.in);
-    String divider = "____________________________________________________________";
-
-    public String readCommand() {
-        return sc.nextLine();
-    }
 
     /**
      * Makes output msg of the entire list of tasks from TaskList.
@@ -43,14 +38,16 @@ public class Ui {
      * @return Entry hello msg
      */
     public String showHello() {
-        String helloMessage = "Hello! I'm Duke\n"
+        String helloMessage = "Hello! I'm Park Seo Jun Oppa!\n"
                 + "To see all tasks, type list\n"
                 + "Other commands are:\n"
-                + "todo (description)\n"
-                + "deadline or event (description) /by (time)\n"
-                + "done or delete (task number)\n"
-                + "find (keyword)\n"
-                + "update (task number) (D or T depending on description or time) (change)\n";
+                + "- todo (description)\n"
+                + "- deadline or event (description) /by (time)\n"
+                + "- done or delete (task number)\n"
+                + "- find (keyword)\n"
+                + "- update (task number) (D or T depending on description or time) (change)\n\n"
+                + "If you ever need help, just type help and Oppa will be here to help!\n"
+                + "Type bye when you're done with oppa.";
         return helloMessage;
     }
 

@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaHomer.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaParkSeoJun.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaIU.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaParkSeoJun2.jpg"));
 
     /**
      * Bind the dialog container to the button of the scroll pane, and greet the user.
