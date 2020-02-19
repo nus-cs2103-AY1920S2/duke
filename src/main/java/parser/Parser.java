@@ -22,8 +22,8 @@ public class Parser {
     private static final String DELETE_KEY = "(delete)\\s*(\\d+)";
     private static final String FINISH_KEY = "(done)\\s*(\\d+)";
     private static final String TODO_KEY = "(todo)(.*)";
-    private static final String DEADLINE_KEY = "(deadline)\\s*(\\S*)\\s*/by\\s*" + DATE_TIME_KEY;
-    private static final String EVENT_KEY = "(event)\\s*(\\S*)\\s*/at\\s*" + DATE_TIME_KEY;
+    private static final String DEADLINE_KEY = "(deadline)(.*)/by\\s*" + DATE_TIME_KEY;
+    private static final String EVENT_KEY = "(event)(.*)/at\\s*" + DATE_TIME_KEY;
     private static final String FIND_KEY = "(find)\\s*(\\S+)";
     private static final String VIEW_SCHEDULE_KEY = "(view schedule)\\s*" + DATE_TIME_KEY;
 
