@@ -57,7 +57,7 @@ Okay! I have taken note of the following:
 [T][❌] exercise
 Now you have 1 tasks in the list.
 ```
-![Github Logo](./UG/Todo.png)
+<img src ="./UG/Todo.png">
 
 <br/>
 
