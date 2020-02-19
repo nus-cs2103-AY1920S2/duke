@@ -1,14 +1,13 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
-checkstyle {
-    toolVersion = '8.23'
-}
+//checkstyle {
+//    toolVersion = '8.23'
+//}
 
 shadowJar {
     archiveBaseName = "duke"

@@ -1,4 +1,7 @@
-# Frontend.Objects.User Guide
+# Duke User Guide
+
+Duke is the only app needed for the modern day professional. Plan and manage your tasks easily 
+through a simple interface.
 
 ## Features 
 
