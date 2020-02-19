@@ -18,7 +18,7 @@ public class ToDoTest {
         ToDo testToDo = new ToDo("Hello world!");
         assertEquals("Hello world!", testToDo.getDescription());
         assertFalse(testToDo.isCompleted());
-        testToDo.toggleIsCompleted();
+        testToDo.completeTask();
         assertTrue(testToDo.isCompleted());
         assertTrue(new ToDo("Already completed", true).isCompleted());
     }

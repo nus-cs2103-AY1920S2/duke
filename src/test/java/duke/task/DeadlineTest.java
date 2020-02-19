@@ -20,7 +20,7 @@ public class DeadlineTest {
         Deadline testDeadline = new Deadline("Event pizza!", LocalDateTime.now());
         assertEquals("Event pizza!", testDeadline.getDescription());
         assertFalse(testDeadline.isCompleted());
-        testDeadline.toggleIsCompleted();
+        testDeadline.completeTask();
         assertTrue(testDeadline.isCompleted());
         assertTrue(new Deadline("Already completed", LocalDateTime.now(), true).isCompleted());
     }

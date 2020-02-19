@@ -35,10 +35,8 @@ public class TaskTest {
     public void testToggleIsCompleted() {
         Task testTask = new Task("Task description");
         assertFalse(testTask.isCompleted());
-        testTask.toggleIsCompleted();
+        testTask.completeTask();
         assertTrue(testTask.isCompleted());
-        testTask.toggleIsCompleted();
-        assertFalse(testTask.isCompleted());
     }
 
     /**
@@ -48,7 +46,7 @@ public class TaskTest {
     public void testToString() {
         Task testTask = new Task("What's up world!");
         assertEquals("[\u2718] What's up world!", testTask.toString()); // cross mark
-        testTask.toggleIsCompleted();
+        testTask.completeTask();
         assertEquals("[\u2713] What's up world!", testTask.toString()); // tick mark
 
     }

@@ -18,7 +18,7 @@ public class EventTest {
         Event testEvent = new Event("Event pizza!", "3-5pm");
         assertEquals("Event pizza!", testEvent.getDescription());
         assertFalse(testEvent.isCompleted());
-        testEvent.toggleIsCompleted();
+        testEvent.completeTask();
         assertTrue(testEvent.isCompleted());
         assertTrue(new Event("Already completed", "Random time", true).isCompleted());
     }
