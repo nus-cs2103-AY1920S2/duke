@@ -1,0 +1,8 @@
+E | 1 | dance Event  | 3-4pm city Hall
+D | 0 | return book  | Jun 6 2020  06:00 PM
+D | 1 | essay  | Dec 15 2020  04:00 PM
+D | 1 | Assignment  | Oct 11 2020  01:00 PM
+T | 1 | run 
+T | 0 | Eat 
+D | 1 | Return book  | Jun 12 2020  06:00 PM
+T | 1 | eat
