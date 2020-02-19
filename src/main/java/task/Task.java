@@ -40,7 +40,7 @@ public class Task {
      * @return params isDone
      */
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗");
+        return (isDone ? "Done" : "NoDone");
     }
 
     public String getDate(){
