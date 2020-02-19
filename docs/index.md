@@ -20,16 +20,37 @@
 ---
 ## Installation
 
-- All the `code` required to get started
-- Images of what it should look like
+- Download the .jar file from the <a href="https://github.com/waynewee/duke/releases">release page</a>
+- Create a directory or use an existing directory to store the downloaded file
+- Double-click the file to get started!
 
 ---
 ## Features
+
+> Your wish is my command.
+
+####Duke is packed with features:
+
+- Manage your tasks from **anywhere**
+- Tasks are saved to your computer periodically to ensure **no data is lost**
+- **Keep track** of the tasks you've completed and the tasks you've yet to give attention to
+- Commands are **simple and intuitive**
+- Easily **search** for and retrieve tasks
 
 ---
 
 ### Commands
 
+`todo {task_name}` - adds `task_name` to the list of tasks
+`event {task_name} /at {task_date}` - adds `task_name` as an event and specifies that it occurs at `task_date`
+`deadline {task_name} /by {task_date}` - adds `task_name` as a deadline and specifies that it is due on `task_date`
+`done {task_index}` - marks the task at `task_index` as done
+`delete {task_index}` - deletes the task at `task_index`
+`list` - lists all tasks
+`find {search_term}` - searches for tasks that contain `search_term`
+`date /on {date}` - searches for tasks that occur on or are due by `date`
+`history` - prints out the list of past commands _(Max: 20)_
+`exit` - exits the application
 ---
 
 ## Team
