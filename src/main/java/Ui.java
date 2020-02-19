@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Ui {
     String logo = "DUKE!\n";
-    Scanner sc;
     Parser parser;
     TaskList taskList;
 
