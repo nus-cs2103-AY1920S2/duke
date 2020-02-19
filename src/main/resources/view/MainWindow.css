@@ -1,0 +1,7 @@
+#sendButton {
+    -fx-background-color: #CCF5FF;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-color: #009999;
+}
