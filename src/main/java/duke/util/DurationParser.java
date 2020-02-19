@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 import static duke.util.MagicStrings.ERROR_INVALID_SNOOZE_DURATION;
 import static duke.util.MagicStrings.ERROR_INVALID_UNIT_OF_TIME;
+import static duke.util.StringCleaner.cleanString;
 
 /**
  * The {@code DurationParser} is a helper class with static methods to parse
@@ -74,8 +75,8 @@ public class DurationParser {
         if (inputs.size() < 2) {
             throw new DuchessException(ERROR_INVALID_SNOOZE_DURATION);
         }
-        int value = Integer.parseInt(inputs.get(0).trim());
-        switch (inputs.get(1).trim().toLowerCase()) {
+        int value = Integer.parseInt(cleanString(inputs.get(0)));
+        switch (cleanString(inputs.get(1))) {
         case "hour":
             // Fallthrough
         case "hours":

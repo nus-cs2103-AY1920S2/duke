@@ -164,6 +164,15 @@ public class Ui {
     }
 
     /**
+     * Returns a {@code TaskList} sorted success message formatted appropriately.
+     *
+     * @return The success message {@code String}.
+     */
+    public String printTaskListSorted() {
+        return this.print("Your list of tasks has been sorted.", "Type 'list' to see the new order.");
+    }
+
+    /**
      * Returns an error message formatted appropriately.
      *
      * @param errorMessage ErrorMessage to print.
@@ -200,6 +209,7 @@ public class Ui {
                 "done INDEX: Complete task at index.",
                 "find WORD(S): Find tasks with said word(s) in name.",
                 "delete INDEX: Delete task at index.",
+                "sort: Sorts your list of tasks.",
                 "snooze INDEX /for DURATION: Pushes back deadline by given duration.",
                 "bye: Bid farewell (sounds great!).",
                 "help: See this message again.",

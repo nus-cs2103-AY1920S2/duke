@@ -43,7 +43,7 @@ public class FrequencyParser {
     private static boolean isContainingFortnightlyKeywords(String userInput) {
         boolean isContainingBigWords = userInput.contains("biweek") || userInput.contains("fortnight");
         boolean isContainingSmallWords =
-                userInput.contains("weekly") && (userInput.contains("two") || userInput.contains("2"));
+                userInput.contains("week") && (userInput.contains("two") || userInput.contains("2"));
         return isContainingBigWords || isContainingSmallWords;
     }
 

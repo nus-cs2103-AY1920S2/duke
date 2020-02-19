@@ -23,6 +23,9 @@ import static duke.util.MagicStrings.ERROR_EVENT_MISSING_CONTENT;
 import static duke.util.MagicStrings.ERROR_EVENT_MISSING_TIME_FRAME;
 import static duke.util.MagicStrings.ERROR_INVALID_COMMAND;
 import static duke.util.MagicStrings.ERROR_TODO_MISSING_CONTENT;
+import static duke.util.StringCleaner.cleanAndLowerString;
+import static duke.util.StringCleaner.cleanString;
+
 
 /**
  * The {@code TaskCreationHandler} class contains all static methods
@@ -34,7 +37,7 @@ public class TaskCreationHandler {
      * Creates a {@code ToDo} based on the command and given the entire command and
      * the supporting instances.
      *
-     * @param command  Full user command string.
+     * @param command  Full raw user command string.
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
@@ -50,7 +53,7 @@ public class TaskCreationHandler {
      * Creates a {@code Event} based on the command and given the entire command and
      * the supporting instances.
      *
-     * @param command  Full user command string.
+     * @param command  Full raw user command string.
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
@@ -67,7 +70,7 @@ public class TaskCreationHandler {
      * Creates a {@code Deadline} based on the command and given the entire command
      * and the supporting instances.
      *
-     * @param command  Full user command string.
+     * @param command  Full raw user command string.
      * @param taskList List of tasks.
      * @param ui       Ui instance.
      * @param storage  Storage instance.
@@ -87,17 +90,18 @@ public class TaskCreationHandler {
      * processes. the input and checks for any errors. If error is found, an
      * appropriate error is thrown.
      *
-     * @param command Command to process.
+     * @param command Raw uncleaned command to process.
      * @return Task created from command.
      * @throws DuchessException If the given command is of an invalid format.
      */
     private static Task getTaskFromCommand(String command) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        String type = cleanAndLowerString(commands.get(0));
         if (commands.size() < 2) {
-            handleMissingContent(commands.get(0).toLowerCase());
+            handleMissingContent(type);
         }
-        assert commands.get(0).equals("todo");
-        return new ToDo(commands.get(1).trim());
+        assert Command.TODO.commands.contains(type);
+        return new ToDo(cleanString(commands.get(1)));
     }
 
     /**
@@ -105,23 +109,24 @@ public class TaskCreationHandler {
      * processes. the input and checks for any errors. If error is found, an
      * appropriate error is thrown.
      *
-     * @param command Command to process.
+     * @param command Raw uncleaned command to process.
      * @return Task created from command.
      * @throws DuchessException If the given command is of an invalid format.
      */
     private static Task getTaskFromCommand(String command, String detailsKeyword) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        String type = cleanAndLowerString(commands.get(0));
         if (commands.size() < 2) {
-            handleMissingContent(commands.get(0).toLowerCase());
+            handleMissingContent(type);
         }
         ArrayList<String> details = new ArrayList<>(Arrays.asList(commands.get(1).split(detailsKeyword)));
         if (details.size() < 2) {
-            handleMissingDetails(commands.get(0).toLowerCase());
+            handleMissingDetails(type);
         }
-        if (commands.get(0).equalsIgnoreCase("event")) {
-            return new Event(details.get(0).trim(), details.get(1).trim());
+        if (Command.EVENT.hasCommand(type)) {
+            return new Event(cleanString(details.get(0)), cleanString(details.get(1)));
         }
-        assert commands.get(0).equalsIgnoreCase("deadline");
+        assert Command.DEADLINE.commands.contains(type);
         return getDeadlineFromDetails(commands.get(1));
     }
 
@@ -142,13 +147,13 @@ public class TaskCreationHandler {
             String[] commands = detail.split("\\s", 2);
             switch (commands[0].toLowerCase()) {
             case "by":
-                deadline = DateTimeParser.parseDateTime(commands[1].trim().toLowerCase());
+                deadline = DateTimeParser.parseDateTime(cleanAndLowerString(commands[1]));
                 break;
             case "every":
-                frequency = FrequencyParser.parseFrequency(commands[1].trim().toLowerCase());
+                frequency = FrequencyParser.parseFrequency(cleanAndLowerString(commands[1]));
                 break;
             case "stop":
-                recurrenceEndTime = DateTimeParser.parseDateTime(commands[1].trim().toLowerCase());
+                recurrenceEndTime = DateTimeParser.parseDateTime(cleanAndLowerString(commands[1]));
                 break;
             default:
                 // Means unrecognized keyword was given. Not an issue unless key details are missing.
@@ -158,30 +163,30 @@ public class TaskCreationHandler {
         if (deadline == null) {
             throw new DuchessException(ERROR_DEADLINE_MISSING_DEADLINE);
         }
+        String description = cleanString(details.get(0));
         if (frequency == null) {
-            return new Deadline(details.get(0).trim(), deadline);
+            return new Deadline(description, deadline);
         }
         if (recurrenceEndTime == null) {
-            return new RecurringDeadline(details.get(0).trim(), deadline, frequency);
+            return new RecurringDeadline(description, deadline, frequency);
         }
-        return new RecurringDeadline(details.get(0).trim(), deadline, frequency, recurrenceEndTime);
+        return new RecurringDeadline(description, deadline, frequency, recurrenceEndTime);
     }
 
     /**
      * Throws the appropriate missing content error.
      *
-     * @param type Type of task with missing content.
+     * @param type Cleaned {@code String} indicating type of task with missing content.
      * @throws DuchessException An exception with an appropriate error message.
      */
     private static void handleMissingContent(String type) throws DuchessException {
-        switch (type) {
-        case "todo":
+        if (Command.TODO.commands.contains(type)) {
             throw new DuchessException(ERROR_TODO_MISSING_CONTENT);
-        case "event":
+        } else if (Command.EVENT.commands.contains(type)) {
             throw new DuchessException(ERROR_EVENT_MISSING_CONTENT);
-        case "deadline":
+        } else if (Command.DEADLINE.commands.contains(type)) {
             throw new DuchessException(ERROR_DEADLINE_MISSING_CONTENT);
-        default:
+        } else {
             throw new DuchessException(ERROR_INVALID_COMMAND);
         }
     }
@@ -193,10 +198,10 @@ public class TaskCreationHandler {
      * @throws DuchessException An exception with an appropriate error message.
      */
     private static void handleMissingDetails(String type) throws DuchessException {
-        if (type.equals("event")) {
+        if (Command.EVENT.commands.contains(type)) {
             throw new DuchessException(ERROR_EVENT_MISSING_TIME_FRAME);
         }
-        assert type.equals("deadline");
+        assert Command.DEADLINE.commands.contains(type);
         throw new DuchessException(ERROR_DEADLINE_MISSING_DEADLINE);
     }
 

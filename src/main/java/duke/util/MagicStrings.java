@@ -39,6 +39,7 @@ public class MagicStrings {
     public static final String ERROR_RECURRING_TASK_MISSING_DEADLINE = "This recurring task "
             + "seem to have no deadline!";
     public static final String ERROR_SNOOZING_NON_DEADLINE = "You can't snooze a task with no deadline!";
+    public static final String ERROR_SORTING_EMPTY_LIST = "You don't have any tasks... Sort yourself out first.";
     public static final String ERROR_TASK_ALREADY_COMPLETED = "You have already completed this task!";
     public static final String ERROR_TASK_CREATED_BEFORE = "You have an existing task with the same information!";
     public static final String ERROR_TODO_MISSING_CONTENT = "Your todo content cannot be empty! "

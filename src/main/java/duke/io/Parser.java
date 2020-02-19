@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.exception.DuchessException;
 
 import static duke.util.MagicStrings.ERROR_INVALID_COMMAND;
+import static duke.util.StringCleaner.cleanAndLowerString;
 
 /**
  * The {@code Parser} class helps to parse given user inputs into a
@@ -19,10 +20,13 @@ public class Parser {
      * @throws DuchessException If the command is not recognised.
      */
     public static Command parse(String command) throws DuchessException {
-        try {
-            return Command.valueOf(command.split("\\s", 2)[0].toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new DuchessException(ERROR_INVALID_COMMAND);
+        String formattedCommand = cleanAndLowerString(command.split("\\s", 2)[0]);
+        for (Command cmd : Command.values()) {
+            if (cmd.hasCommand(formattedCommand)) {
+                return cmd;
+            }
         }
+        throw new DuchessException(ERROR_INVALID_COMMAND);
+
     }
 }

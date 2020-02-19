@@ -11,6 +11,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
 
 import static duke.util.MagicStrings.ERROR_WRONG_DATE_FORMAT;
+import static duke.util.StringCleaner.cleanAndLowerString;
 
 /**
  * The {@code DateTimeParser} is a helper class with static methods to parse
@@ -34,12 +35,13 @@ public class DateTimeParser {
      * "Monday"; relative timings e.g. "Today", "Tonight"; of datetime format
      * "d-M-yy" or "d-M-yy HHmm".
      *
-     * @param dateTimeString User provided input in {@code String} format.
+     * @param dateTimeString Cleaned user provided input in {@code String} format.
      * @return {@code LocalDateTime} object based on given {@code dateTimeString}.
      * @throws DuchessException If {@code dateTimeString} is not of the correct
      *                          format.
      */
     public static LocalDateTime parseDateTime(String dateTimeString) throws DuchessException {
+        assert dateTimeString.equals(cleanAndLowerString(dateTimeString));
         return getDateTimeFromWords(dateTimeString)
                 .or(() -> getDateTimeUsingDateTimePattern(dateTimeString)
                         .or(() -> getDateTimeUsingDatePattern(dateTimeString)))
@@ -47,7 +49,7 @@ public class DateTimeParser {
     }
 
     private static Optional<LocalDateTime> getDateTimeFromWords(String dateTimeString) {
-        switch (dateTimeString.toLowerCase()) {
+        switch (dateTimeString) {
         case "today":
             return Optional.of(LocalDate.now().atTime(17, 0));
         case "tonight":
@@ -68,7 +70,7 @@ public class DateTimeParser {
     }
 
     private static String extendDayOfWeek(String dateTimeString) {
-        if (dateTimeString.toLowerCase().endsWith("day")) {
+        if (dateTimeString.endsWith("day")) {
             return dateTimeString;
         }
         return dateTimeString + "day";
