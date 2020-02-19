@@ -1,7 +1,7 @@
 # User Guide
 
 ## Brief Description
-Ronaldo is a personal task manager in the form of a chatbot. Simply key in the command and your task. It's that easy!
+Ronaldo is a **personal task manager** in the form of a chatbot. Simply key in the command and your task. It's that easy!
 
 ## Features 
 
@@ -210,3 +210,7 @@ Credit to @j-lum (Jeffry Lum) for the FXML and Java files for [JAVAFX GUI](https
 Credit to MintBerryCrunch for the [code that creates a new thread to display the bye message and terminating the program](https://stackoverflow.com/questions/52393982/javafx-problem-with-platform-runlater-delayed-rendering-of-canvas-graphic).
 
 Credit to Ernest Friedman-Hill for the [code to redirect console output to string in Java](https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java/8708357).
+
+Credit to Skysports.com for the [Ronaldo](https://www.skysports.com/football/news/12961/11812691/cristiano-ronaldo-says-he-deserves-more-ballon-dors-than-lionel-messi) image.
+
+Credit to Biography.com for the [Messi](https://www.biography.com/athlete/lionel-messi) image.
