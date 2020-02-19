@@ -1,3 +1,5 @@
+// @@author zhuhanming-reused
+// Reused from https://stackoverflow.com/a/58441758 with minor modifications
 .root {
     -fx-accent: #272727;
     -fx-focus-color: -fx-accent;
@@ -40,6 +42,8 @@
 .button:default {
     -fx-base: -fx-accent ;
 }
+
+// @@author
 
 .speech-bubble {
     -fx-background-color: derive(-fx-base, 50%);

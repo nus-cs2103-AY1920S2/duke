@@ -38,11 +38,9 @@ public class Ui {
      */
     public String print(String... strings) {
         StringBuilder returnString = new StringBuilder();
-
         for (String string : strings) {
             returnString.append(this.formatString(string));
         }
-
         return returnString.toString();
     }
 
@@ -75,6 +73,7 @@ public class Ui {
      */
     public String printTaskList(TaskList taskList) throws DuchessException {
         if (taskList.size() > 0) {
+            // Solution below adapted from https://stackoverflow.com/a/18552071
             List<String> result = IntStream.range(0, taskList.size())
                     .mapToObj(i -> (i + 1) + ".\t" + taskList.getTask(i)).collect(Collectors.toList());
             result.add(0, "Sighs... you never remember what you say, don't you.");
@@ -99,6 +98,7 @@ public class Ui {
                     "I sure hope you're not testing me!");
         } else {
             this.print("Not bad, I found the following:");
+            // Solution below adapted from https://stackoverflow.com/a/18552071
             List<String> result = IntStream.range(0, filteredTaskList.size()).mapToObj(i -> {
                 Pair<Task, Integer> pair = filteredTaskList.get(i);
                 return (i + 1) + ".\t" + pair.getFirst() + "\n\t[REF INDEX FOR DELETE/DONE: " + (pair.getSecond() + 1)
@@ -258,6 +258,7 @@ public class Ui {
      * character.
      */
     public void printLine() {
+        // Solution below adapted from https://stackoverflow.com/a/2807731
         System.out.println(new String(new char[65]).replace("\0", "\u2501")); // border character
     }
 

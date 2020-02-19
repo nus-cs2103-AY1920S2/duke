@@ -38,9 +38,11 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         dialog.setMinHeight(Label.USE_PREF_SIZE);
         dialog.setText(text);
         displayPicture.setImage(img);
+        // Solution below adapted from https://stackoverflow.com/a/38010904
         double width = displayPicture.getFitWidth();
         double height = displayPicture.getFitHeight();
         Ellipse ellipse = new Ellipse(width / 2, height / 2, width / 2, height / 2);

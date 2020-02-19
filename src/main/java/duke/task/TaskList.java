@@ -136,6 +136,7 @@ public class TaskList {
      */
     public ArrayList<Pair<Task, Integer>> find(String searchWords) {
         assert searchWords.equals(cleanAndLowerString(searchWords));
+        // Solution below adapted from https://stackoverflow.com/a/18552071
         return IntStream.range(0, this.tasks.size()).mapToObj(i -> new Pair<>(this.tasks.get(i), i))
                 .filter(p -> p.getFirst().description.toLowerCase().contains(searchWords))
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -171,11 +172,15 @@ public class TaskList {
      * @return Immutable deep copy.
      */
     public List<Task> getImmutableDeepCopy() {
+        // @@author zhuhanming-reused
+        // Reused from https://howtodoinjava.com/java/collections/arraylist/arraylist-clone-deep-copy/
+        // Point 3 with minor modifications
         ArrayList<Task> tasksClone = new ArrayList<>();
         Iterator<Task> iterator = tasks.iterator();
         while (iterator.hasNext()) {
             tasksClone.add((Task) iterator.next().clone());
         }
+        // @@author
         return List.<Task>of(tasksClone.toArray(new Task[tasksClone.size()]));
     }
 

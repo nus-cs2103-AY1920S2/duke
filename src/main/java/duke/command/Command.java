@@ -14,6 +14,8 @@ import java.util.Arrays;
  * recognised by {@code Duchess}.
  */
 public enum Command {
+    // Implementation below adapted from my CS2030 code, which was previously
+    // adapted from https://www.youtube.com/watch?v=F02LKnWJWF4 at around 40:00
     TODO(TaskCreationHandler::handleTodoCommand, "todo", "t"),
     EVENT(TaskCreationHandler::handleEventCommand, "event", "e"),
     DEADLINE(TaskCreationHandler::handleDeadlineCommand, "deadline", "dl"),
@@ -43,6 +45,7 @@ public enum Command {
      *
      * @param execute The {@code QuadFunction} for the Command type.
      */
+    // Solution below adapted from https://stackoverflow.com/a/4198066
     Command(QuintFunction<String, TaskList, Ui, Storage, SaveStateStack> execute, String... commands) {
         this.execute = execute;
         this.commands = new ArrayList<>(Arrays.asList(commands));

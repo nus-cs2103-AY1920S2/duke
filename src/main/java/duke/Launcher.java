@@ -18,6 +18,7 @@ public class Launcher {
      * @param args Settings for the app.
      */
     public static void main(String[] args) {
+        // Solution below adapted from https://stackoverflow.com/a/1254338
         final List<String> arguments = Arrays.asList(args);
         final int modeIndex = arguments.indexOf("-mode");
         final String mode = modeIndex == -1 ? "gui" : arguments.get(modeIndex + 1);

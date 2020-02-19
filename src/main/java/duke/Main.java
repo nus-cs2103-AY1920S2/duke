@@ -22,6 +22,8 @@ public class Main extends Application {
         stage.setMinWidth(400);
         stage.setTitle("Duchess");
         scene.getStylesheets().add("/styles/duchess.css");
+        // @@author zhuhanming-reused
+        // Reused from https://stackoverflow.com/a/49159612 with minor modifications
         ap.themeToggle.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
             if (isSelected) {
                 scene.getStylesheets().add("/styles/dark-duchess.css");
@@ -29,6 +31,7 @@ public class Main extends Application {
                 scene.getStylesheets().remove("/styles/dark-duchess.css");
             }
         });
+        // @@author
         stage.show();
     }
 }

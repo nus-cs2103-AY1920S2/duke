@@ -48,6 +48,8 @@ public class DateTimeParser {
                 .orElseThrow(() -> new DuchessException(ERROR_WRONG_DATE_FORMAT));
     }
 
+    // Solutions below are adapted from https://www.youtube.com/watch?v=F02LKnWJWF4, around 17:00
+    // Uses Optional to handle null cases and exceptions
     private static Optional<LocalDateTime> getDateTimeFromWords(String dateTimeString) {
         switch (dateTimeString) {
         case "today":

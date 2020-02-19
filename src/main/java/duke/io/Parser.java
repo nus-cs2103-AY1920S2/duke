@@ -21,6 +21,7 @@ public class Parser {
      */
     public static Command parse(String command) throws DuchessException {
         String formattedCommand = cleanAndLowerString(command.split("\\s", 2)[0]);
+        // Solution below adapted from https://stackoverflow.com/a/4198066
         for (Command cmd : Command.values()) {
             if (cmd.hasCommand(formattedCommand)) {
                 return cmd;
