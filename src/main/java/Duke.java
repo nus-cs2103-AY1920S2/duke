@@ -22,14 +22,30 @@ public class Duke {
         this.tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Generate Duke response according to user input.
+     *
+     * @param input User put in.
+     * @return A string of Duke response.
+     */
     public String getResponse(String input) {
         return Parser.parse(input).run(ui, storage,tasks);
     }
 
+    /**
+     * Shows Duke logo on the user page.
+     *
+     * @return a String of Duke's logo.
+     */
     public String getLogo() {
         return ui.showLogo();
     }
 
+    /**
+     * Shows Duke greeting sentences on the user page.
+     *
+     * @return Duke's greeting sentences.
+     */
     public String getGreet() {
         return ui.showGreet();
     }
