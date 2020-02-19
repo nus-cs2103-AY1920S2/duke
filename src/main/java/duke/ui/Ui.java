@@ -137,6 +137,15 @@ public class Ui {
     }
 
     /**
+     * Returns the success message for the deletion of all tasks.
+     *
+     * @return The deletion message {@code String}.
+     */
+    public String printAllDeleted() {
+        return this.print("All tasks have been deleted. If you regret this, try undoing.");
+    }
+
+    /**
      * Returns the task completed message formatted appropriately.
      *
      * @param task The task that is completed.
@@ -208,7 +217,7 @@ public class Ui {
                 "deadline DESC /by TIME [/every FREQ] [/stop TIME]: Create Deadline.",
                 "done INDEX: Complete task at index.",
                 "find WORD(S): Find tasks with said word(s) in name.",
-                "delete INDEX: Delete task at index.",
+                "delete INDEX / all: Delete task at index / delete all tasks.",
                 "sort: Sorts your list of tasks.",
                 "snooze INDEX /for DURATION: Pushes back deadline by given duration.",
                 "undo: Undo your last command that changed your tasks",

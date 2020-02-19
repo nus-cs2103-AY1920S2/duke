@@ -103,6 +103,14 @@ public class TaskListCommandHandler {
      */
     static String handleDeleteCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                       SaveStateStack saveStateStack) throws DuchessException {
+        ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        if (commands.size() == 2 && cleanAndLowerString(commands.get(1)).equals("all")) {
+            SaveState newSaveState = new SaveState(taskList, command);
+            saveStateStack.push(newSaveState);
+            taskList.removeAllTasks();
+            storage.save(taskList);
+            return ui.printAllDeleted();
+        }
         int index = getIntegerFromCommand(command);
         checkBoundsOfIndex(index, taskList);
         final Task taskToDelete = taskList.getTask(index - 1);
