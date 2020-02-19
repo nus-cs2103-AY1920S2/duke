@@ -19,15 +19,6 @@ public class Ui {
         return user_input;
     }
 
-    // PRINT STATEMENTS: ===========================================================================
-
-    /**
-     * Prints the greeting statement for Duke.
-     */
-    public String printGreeting() {
-        return "Hello! I am a Pyramid 480 Medical class Operator. Nice to see you!";
-    }
-
     /**
      * Prints the goodbye statement for Duke.
      */
