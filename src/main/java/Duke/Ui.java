@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package Duke;
 
 public class Ui {
     String logo = "DUKE!\n";

@@ -1,3 +1,5 @@
+package Duke.command;
+
 public class EmptyCommand extends Command {
 
     public EmptyCommand() {
