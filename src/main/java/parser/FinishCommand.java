@@ -1,5 +1,7 @@
 package parser;
 
+import static parser.Parser.FINISH_PATTERN;
+
 /**
  * Presents a command to mark a task from task list as done.
  */
@@ -8,10 +10,10 @@ public class FinishCommand extends Command {
 
     /**
      * Constructs a {@code FinishCommand} with a position indicating the task to mark.
-     * @param position indicating the task to mark as done.
+     * @param userInput input from user.
      */
-    FinishCommand(Integer position) {
-        this.position = position;
+    FinishCommand(String userInput) {
+        position = this.findIndex(FINISH_PATTERN, userInput);
     }
 
     /**

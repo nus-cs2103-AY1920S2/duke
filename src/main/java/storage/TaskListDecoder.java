@@ -14,7 +14,6 @@ import model.Task;
 import model.TaskList;
 import model.ToDoTask;
 
-import java.awt.event.MouseAdapter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +25,20 @@ import java.util.regex.Pattern;
  * to real task objects.
  */
 public class TaskListDecoder {
-    private static final String PERSON_DATA_ARGS = "\\s\\|\\s(T|E|D)\\s\\|\\s(1|0)\\s\\|\\s(\\S+)\\s?\\|?\\s?"
+    private static final String TODO_TASK_ARGS = "\\s\\|\\sT\\s\\|\\s(1|0)\\s\\|(.*)";
+    private static final String EVENT_TASK_ARGS = "\\s\\|\\sE\\s\\|\\s(1|0)\\s\\|(.*)\\|\\s"
             + DATE_TIME_KEY;
-    private static final Pattern PERSON_DATA_ARGS_FORMAT = Pattern.compile(PERSON_DATA_ARGS);
+    private static final String DEADLINE_TASK_ARGS = "\\s\\|\\sD\\s\\|\\s(1|0)\\s\\|(.*)\\|\\s"
+            + DATE_TIME_KEY;
 
-    private static final int POSITION_TASK_TYPE = 1;
-    private static final int POSITION_TASK_IS_DONE = 2;
-    private static final int POSITION_TASK_DESCRIPTION = 3;
-    private static final int POSITION_DATE = 4;
-    private static final int POSITION_TIME = 5;
+    private static final Pattern TODO_TASK_ARGS_PATTERN = Pattern.compile(TODO_TASK_ARGS);
+    private static final Pattern EVENT_TASK_ARGS_PATTERN = Pattern.compile(EVENT_TASK_ARGS);
+    private static final Pattern DEADLINE_TASK_ARGS_PATTERN = Pattern.compile(DEADLINE_TASK_ARGS);
+
+    private static final int POSITION_TASK_IS_DONE = 1;
+    private static final int POSITION_TASK_DESCRIPTION = 2;
+    private static final int POSITION_DATE =3;
+    private static final int POSITION_TIME = 4;
 
     /**
      * Decode task from a list of string to TaskList object.
@@ -64,40 +68,57 @@ public class TaskListDecoder {
     private static Task decodeTask(String encodedTask) throws
             StorageOperationException, NoDescriptionException, IllegalDateTimeFormatException {
 
-        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(encodedTask);
-        if (!matcher.matches()) {
-            throw new StorageOperationException("Encoded task in invalid format. Unable to decode");
-        }
-        String taskType = decodeTaskType(matcher);
-        boolean isFinished = decodeTaskIsDone(matcher);
-        String description = decodeTaskDescription(matcher);
-
-        if (ToDoTask.TASK_TYPE_CHA.equals(taskType)) {
+        if (isTodoTask(encodedTask)) {
+            boolean isFinished = decodeTaskIsDone(TODO_TASK_ARGS_PATTERN, encodedTask);
+            String description = decodeTaskDescription(TODO_TASK_ARGS_PATTERN, encodedTask);
             return new ToDoTask(description, isFinished);
-        } else if (EventTask.TASK_TYPE_CHA.equals(taskType)) {
-            return new EventTask(description, decodeTaskDateTime(matcher), isFinished);
-        } else if (DeadLineTask.TASK_TYPE_CHA.equals(taskType)) {
-            return new DeadLineTask(description, decodeTaskDateTime(matcher), isFinished);
+        } else if (isEventTask(encodedTask)) {
+            boolean isFinished = decodeTaskIsDone(EVENT_TASK_ARGS_PATTERN, encodedTask);
+            String description = decodeTaskDescription(EVENT_TASK_ARGS_PATTERN, encodedTask);
+            LocalDateTime at = decodeTaskDateTime(EVENT_TASK_ARGS_PATTERN, encodedTask);
+            return new EventTask(description, at, isFinished);
+        } else if (isDeadlineTask(encodedTask)) {
+            boolean isFinished = decodeTaskIsDone(DEADLINE_TASK_ARGS_PATTERN, encodedTask);
+            String description = decodeTaskDescription(DEADLINE_TASK_ARGS_PATTERN, encodedTask);
+            LocalDateTime by = decodeTaskDateTime(DEADLINE_TASK_ARGS_PATTERN, encodedTask);
+            return new DeadLineTask(description, by, isFinished);
         } else {
             throw new StorageOperationException("Encoded task in invalid format. Unable to decode");
         }
     }
 
-    private static String decodeTaskType(Matcher matcher) {
-        return matcher.group(POSITION_TASK_TYPE);
+    private static boolean isTodoTask(String encodedTask) {
+        Matcher matcher = TODO_TASK_ARGS_PATTERN.matcher(encodedTask);
+        return matcher.matches();
     }
 
-    private static boolean decodeTaskIsDone(Matcher matcher) {
+    private static boolean isEventTask(String encodedTask) {
+        Matcher matcher = EVENT_TASK_ARGS_PATTERN.matcher(encodedTask);
+        return matcher.matches();
+    }
+
+    private static boolean isDeadlineTask(String encodedTask) {
+        Matcher matcher = DEADLINE_TASK_ARGS_PATTERN.matcher(encodedTask);
+        return matcher.matches();
+    }
+
+    private static boolean decodeTaskIsDone(Pattern pattern, String encodedTask) {
+        Matcher matcher = pattern.matcher(encodedTask);
+        matcher.find();
         String taskIsDone = matcher.group(POSITION_TASK_IS_DONE);
         return FINISHED_STATUS.equals(taskIsDone);
     }
 
-    private static String decodeTaskDescription(Matcher matcher) {
-        return matcher.group(POSITION_TASK_DESCRIPTION);
+    private static String decodeTaskDescription(Pattern pattern, String encodedTask) {
+        Matcher matcher = pattern.matcher(encodedTask);
+        matcher.find();
+        return matcher.group(POSITION_TASK_DESCRIPTION).trim();
     }
 
-    private static LocalDateTime decodeTaskDateTime(Matcher matcher) throws
+    private static LocalDateTime decodeTaskDateTime(Pattern pattern, String encodedTask) throws
             IllegalDateTimeFormatException {
+        Matcher matcher = pattern.matcher(encodedTask);
+        matcher.find();
         String dateString = matcher.group(POSITION_DATE);
         String timeString = matcher.group(POSITION_TIME);
         return parseDateTime(dateString, timeString);

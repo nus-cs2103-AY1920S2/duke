@@ -1,17 +1,19 @@
 package parser;
 
+import static parser.Parser.DELETE_PATTERN;
+
 /**
  * Presents a command to delete a task from inner-task list.
  */
 public class DeleteCommand extends Command {
-    private Integer position;
+    private int position;
 
     /**
      * Constructs a {@code DeleteCommand}.
-     * @param position A valid position within the bound of the task list indicating the task to remove.
+     * @param userInput input from user.
      */
-    DeleteCommand(Integer position) {
-        this.position = position;
+    DeleteCommand(String userInput) {
+        position = this.findIndex(DELETE_PATTERN, userInput);
     }
 
     /**

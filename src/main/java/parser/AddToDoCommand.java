@@ -1,5 +1,7 @@
 package parser;
 
+import static parser.Parser.TODO_PATTERN;
+
 import exceptions.NoDescriptionException;
 import model.Task;
 import model.ToDoTask;
@@ -12,10 +14,10 @@ public class AddToDoCommand extends Command {
 
     /**
      * Constructs an {@code AddToDoCommand}.
-     * @param description A valid description for a todotask.
+     * @param userInput input from user.
      */
-    AddToDoCommand(String description) {
-        this.description = description;
+    AddToDoCommand(String userInput) {
+        description = findDescription(TODO_PATTERN, userInput);
     }
 
     /**

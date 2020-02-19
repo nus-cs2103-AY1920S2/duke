@@ -1,5 +1,8 @@
 package parser;
 
+import static parser.Parser.EVENT_PATTERN;
+
+import exceptions.IllegalDateTimeFormatException;
 import exceptions.NoDescriptionException;
 import model.EventTask;
 import model.Task;
@@ -14,12 +17,18 @@ public class AddEventCommand extends Command {
     private LocalDateTime at;
 
     /**
-     * Constructs an {@code AddEventCommand}.
+     *
      * @param description A valid description for a event task.
      */
-    AddEventCommand(String description, LocalDateTime at) {
-        this.description = description;
-        this.at = at;
+
+    /**
+     * Constructs an {@code AddEventCommand}.
+     * @param userInput input from user.
+     * @throws IllegalDateTimeFormatException If the user input is in invalid format.
+     */
+    AddEventCommand(String userInput) throws IllegalDateTimeFormatException {
+        description = this.findDescription(EVENT_PATTERN, userInput);
+        at = this.findDateTime(EVENT_PATTERN, userInput);
     }
 
     /**

@@ -1,5 +1,8 @@
 package parser;
 
+import static parser.Parser.DEADLINE_PATTERN;
+
+import exceptions.IllegalDateTimeFormatException;
 import exceptions.NoDescriptionException;
 import model.DeadLineTask;
 import model.Task;
@@ -11,15 +14,16 @@ import java.time.LocalDateTime;
  */
 public class AddDeadlineCommand extends Command {
     private String description;
-    private LocalDateTime at;
+    private LocalDateTime by;
 
     /**
      * Constructs an {@code AddDeadlineCommand}.
-     * @param description A valid description for a event task.
+     * @param userInput input from user.
+     * @throws IllegalDateTimeFormatException If the date time is empty or in invalid format.
      */
-    AddDeadlineCommand(String description, LocalDateTime at) {
-        this.description = description;
-        this.at = at;
+    AddDeadlineCommand(String userInput) throws IllegalDateTimeFormatException {
+        description = this.findDescription(DEADLINE_PATTERN, userInput);
+        by = this.findDateTime(DEADLINE_PATTERN, userInput);
     }
 
     /**
@@ -29,7 +33,7 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute() throws NoDescriptionException {
-        Task taskToAdd = new DeadLineTask(description, at);
+        Task taskToAdd = new DeadLineTask(description, by);
         return this.taskList.add(taskToAdd);
     }
 }
