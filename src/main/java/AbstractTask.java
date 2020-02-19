@@ -13,13 +13,13 @@ public abstract class AbstractTask implements Task {
      * @param taskName Name or description of the event
      * @param preposition English word string to indicate the date clearly (eg. at, by, before, between)
      * @param date Date of event
-     * @param time Time of event
+     * @param time Time of event (OPTIONAL)
      */
-    public AbstractTask(String taskName, String preposition, LocalDate date, String time) {
+    public AbstractTask(String taskName, String preposition, LocalDate date, String... time) {
         this.taskName = taskName;
         this.preposition = preposition;
         this.date = date;
-        this.time = time;
+        this.time = (time.length == 0) ? null : time[0];
         this.isDone = false;
     }
 
@@ -29,13 +29,13 @@ public abstract class AbstractTask implements Task {
      * @param preposition English word string to indicate the date clearly (eg. at, by, before, between)
      * @param date Date of event
      */
-    public AbstractTask(String taskName, String preposition, LocalDate date) {
-        this.taskName = taskName;
-        this.preposition = preposition;
-        this.date = date;
-        this.time = null;
-        this.isDone = false;
-    }
+//    public AbstractTask(String taskName, String preposition, LocalDate date) {
+//        this.taskName = taskName;
+//        this.preposition = preposition;
+//        this.date = date;
+//        this.time = null;
+//        this.isDone = false;
+//    }
 
     /**
      * Constructor for AbstractTask class.
