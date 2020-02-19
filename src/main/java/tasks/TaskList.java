@@ -129,6 +129,18 @@ public class TaskList {
         return printedList;
     }
 
+    public String findTaskContainingTag(String tag) {
+        String printedList = "";
+        int taskNumber = 1;
+        for (Task task : list) {
+            if (task.checkTags(tag)) {
+                printedList = printedList + "\n\t\t" + taskNumber + ". \t" + task;
+                taskNumber++;
+            }
+        }
+        return printedList;
+    }
+
     /**
      * Prints all tasks in this task list in a numbered order.
      *
