@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.IllegalPositionException;
+
 import java.time.LocalDate;
 
 import java.util.ArrayList;
@@ -65,9 +67,15 @@ public class TaskList implements Iterable<Task> {
      * @param position A position within the bound of the list.
      * @return response of the remove action.
      */
-    public String remove(int position) {
+    public String remove(int position) throws IllegalPositionException {
         assert this.internalList.size() > 0: "task list is empty, cannot delete";
 
+
+        if (position < 0 || position >= internalList.size()) {
+            throw new IllegalPositionException("Oops!!! The input position "
+                    + Integer.toString(position)
+                    + " is out of the boundary!\n");
+        }
         Task deletedTask = internalList.get(position);
         internalList.remove(position);
         return ECHO_DELETE_TASK
@@ -84,9 +92,14 @@ public class TaskList implements Iterable<Task> {
      * @param position A position within the bound of the list.
      * @return response of the mark action.
      */
-    public String markTaskAsDone(Integer position) {
+    public String markTaskAsDone(int position) throws IllegalPositionException {
         assert this.internalList.size() > 0: "task list is empty, cannot mark";
 
+        if (position < 0 || position >= internalList.size()) {
+            throw new IllegalPositionException("Oops!!! The input position "
+                    + Integer.toString(position)
+                    + " is out of the boundary!\n");
+        }
         Task finishedTask = this.internalList.get(position);
         finishedTask.markAsDone();
         return ECHO_COMPLETE_TASK

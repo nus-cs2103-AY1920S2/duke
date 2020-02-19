@@ -1,5 +1,7 @@
 package parser;
 
+import exceptions.IllegalPositionException;
+
 import static parser.Parser.FINISH_PATTERN;
 
 /**
@@ -20,7 +22,7 @@ public class FinishCommand extends Command {
      * Mark a task at the inputted position as done.
      * @return response from the TaskList class as a string.
      */
-    public String execute() {
+    public String execute() throws IllegalPositionException {
         return this.taskList.markTaskAsDone(position);
     }
 }

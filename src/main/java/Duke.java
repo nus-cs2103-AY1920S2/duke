@@ -1,13 +1,8 @@
 //package java;
 
+import exceptions.*;
 import parser.Command;
 import parser.Parser;
-
-import exceptions.IllegalDateTimeFormatException;
-import exceptions.InvalidStorageFilePathException;
-import exceptions.NoCommandException;
-import exceptions.StorageOperationException;
-import exceptions.NoDescriptionException;
 
 import model.TaskList;
 
@@ -66,7 +61,10 @@ public class Duke {
             assert commandResult.length() > 0: "The response message is empty";
 
             return commandResult;
-        } catch (NoDescriptionException | NoCommandException | IllegalDateTimeFormatException e) {
+        } catch (NoDescriptionException
+                | NoCommandException
+                | IllegalDateTimeFormatException
+                | IllegalPositionException e) {
             return e.getMessage();
         } catch (IOException e) {
             throw new RuntimeException(e);

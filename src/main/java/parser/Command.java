@@ -1,6 +1,7 @@
 package parser;
 
 import exceptions.IllegalDateTimeFormatException;
+import exceptions.IllegalPositionException;
 import exceptions.NoDescriptionException;
 import model.TaskList;
 
@@ -113,5 +114,5 @@ public abstract class Command {
         return matcher.group(POSITION_KEYWORD);
     }
 
-    public abstract String execute() throws NoDescriptionException;
+    public abstract String execute() throws NoDescriptionException, IllegalPositionException;
 }

@@ -1,5 +1,7 @@
 package parser;
 
+import exceptions.IllegalPositionException;
+
 import static parser.Parser.DELETE_PATTERN;
 
 /**
@@ -21,7 +23,7 @@ public class DeleteCommand extends Command {
      * @return response from the TaskList class as a string.
      */
     @Override
-    public String execute() {
+    public String execute() throws IllegalPositionException {
         return this.taskList.remove(this.position);
     }
 }
