@@ -1,1 +1,5 @@
-1. [T][Y] cs2106 lab 2
+1. [T][Y] bday
+2. [D][Y] bday (by: 2020-02-02)
+3. [D][Y] bday (by: 2020-02-02)
+4. [E][Y] bday (at: 2020-02-02)
+5. [T][N] shit

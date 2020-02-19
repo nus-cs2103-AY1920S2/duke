@@ -1,5 +1,6 @@
 package Backend;
 
+import Backend.Constants.Messages;
 import Backend.Exceptions.DukeException;
 import Backend.Objects.Task.Task;
 import Backend.Parsers.DateParser;
@@ -9,7 +10,6 @@ import java.time.format.DateTimeParseException;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
@@ -23,7 +23,7 @@ public class TaskList {
     }
 
     /**
-     * Parses a string of data into separate tasks and loads up the task list
+     * Parses a string of data into separate tasks and loads up the task list.
      * @param data data string to be parsed into tasks and loaded into the task list
      * @throws DukeException exception rethrown from parseTask
      */
@@ -33,23 +33,25 @@ public class TaskList {
 
         int i = 1;
 
-        for( String line : dataArray ){
-            Task task = Parser.formatTaskString( line, i );
+        for( String line : dataArray ) {
+            Task task = Parser.parseSavedTask( line, i );
             list.add( task );
             i++;
         }
 
+
     }
 
     /**
-     * Saves a list of tasks as a string in a file
-     * @throws DukeException exception rethrown from writeToFile
+     * Saves a list of tasks as lines in a file.
+     * Each task is written to a file that can be loaded from upon restarting the app.
      */
     private void saveList() throws DukeException {
 
         StringBuilder data = new StringBuilder();
 
         for ( Task task : this.list ){
+
             data.append( task.toString() ).append( "\n" );
         }
 
@@ -57,31 +59,38 @@ public class TaskList {
 
     }
 
-    public int getLength(){
-        return list.size();
-    }
-
     public List<Task> getList(){
         return list;
     }
 
+    /**
+     * Gets the task in the list by its index.
+     * @param taskIndex the number the task is indexed as to the user, not the actual index of the task in the list.
+     * @return the task at index - 1 in the list.
+     */
+    public Task getTask( int taskIndex ){
+        return list.get(taskIndex - 1);
+    }
+
     public String printTasks(){
-        return ChatterBox.sayTaskList( list );
+        return DynamicMessenger.sayTaskList( list );
     }
 
 
-    public String printTasks(String req) throws DukeException {
+    /**
+     * Prints the task list by streaming the list through a date filter.
+     * @param date the date to filter the tasks by
+     * @return a pretty-printed string of the tasks, filtered by date, in the task list
+     */
+    public String printTasksByDate(DateParser date) throws DukeException {
 
         try {
-
-            Parser parser = new Parser(req);
-            DateParser date = new DateParser(parser.parseDateString());
 
             List<Task> filteredTaskList = list.stream()
                                             .filter( task -> task.date != null && task.date.getDateString().equals(date.getDateString()))
                                             .collect(Collectors.toList());
 
-            return ChatterBox.sayTaskList( filteredTaskList );
+            return DynamicMessenger.sayTaskList( filteredTaskList );
 
         } catch ( DateTimeParseException e ) {
             throw new DukeException(e);
@@ -90,9 +99,45 @@ public class TaskList {
     }
 
     /**
-     * deletes task
-     * @param taskIndex index of task to be deleted
-     * @throws DukeException if no task found for index
+     * Prints the task list by streaming the list through a search term filter.
+     * A task is determined to match if the search term matches one or more words in the task's content.
+     * @param searchTerm the search term to filter the tasks by.
+     * @return a pretty-printed string of the tasks, filtered by search term, in the task list
+     */
+    public String printTasksBySearchTerm( String searchTerm ){
+
+        Pattern p = Pattern.compile( searchTerm );
+
+        List<Task> filteredTaskList = list.stream()
+                                        .filter( task -> {
+                                            String[] wordArray = task.content.split(" ");
+
+                                            boolean isMatch = false;
+
+                                            for (String word : wordArray ){
+
+                                                Matcher m = p.matcher( word.trim() );
+
+                                                isMatch = m.matches();
+
+                                            }
+
+                                            return isMatch;
+                                        })
+                                        .collect( Collectors.toList());
+
+        if( filteredTaskList.size() == 0 ){
+            return Messages.NOT_FOUND_MSG;
+        } else {
+            return DynamicMessenger.sayTaskList( filteredTaskList );
+        }
+
+    }
+
+    /**
+     * Deletes a task from the task list by its index.
+     * @param taskIndex the number the task is indexed as to the user, not the actual index of the task in the list.
+     * @return the task that was deleted.
      */
     public Task deleteTask(int taskIndex) throws DukeException {
         try {
@@ -111,6 +156,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Re-indexes a list to ensure that each task is indexed consecutively.
+     */
     private void reindexList(){
 
         int index = 1;
@@ -123,54 +171,19 @@ public class TaskList {
     }
 
     /**
-     * adds task to list
-     * @param task task to be added
-     * @throws DukeException if no date
+     * Adds a task to the list.
+     * @param task the task to be added
      */
-    public Task addTask(Task task) throws DukeException {
-
+    public void addTask(Task task) throws DukeException {
         task.indexTask( this.list.size() + 1 );
         this.list.add( task );
         this.saveList();
-
-        return task;
-    }
-
-    public String findTask(String req){
-
-        Parser parser = new Parser(req);
-        String searchTerm = parser.parseContent();
-        Pattern p = Pattern.compile( searchTerm );
-        List<Task> foundTasks = new ArrayList<>(  );
-
-        for ( Task task : list ){
-
-            String[] wordArray = task.content.split(" ");
-
-            for (String word : wordArray ){
-
-                Matcher m = p.matcher( word.trim() );
-
-                if( m.matches() ){
-                    foundTasks.add(task);
-                }
-
-            }
-
-        }
-
-        if( foundTasks.size() == 0 ){
-            return ChatterBox.sayNotFound();
-        } else {
-            return ChatterBox.sayFound( foundTasks );
-        }
-
     }
 
     /**
-     * marks task as done
-     * @param taskIndex index of task to be marked as done
-     * @throws DukeException if index out of bounds
+     * Marks a task as done by its index.
+     * @param taskIndex the number the task is indexed as to the user, not the actual index of the task in the list.
+     * @return the task that was marked as done
      */
     public Task markTask(int taskIndex) throws DukeException {
 

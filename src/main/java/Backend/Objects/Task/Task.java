@@ -1,5 +1,6 @@
 package Backend.Objects.Task;
 
+import Backend.Constants.TaskChars;
 import Backend.Parsers.DateParser;
 
 public abstract class Task {
@@ -8,14 +9,17 @@ public abstract class Task {
     int index;
     public boolean done = false;
     public DateParser date;
+    private char taskChar;
 
-    public Task( String content, DateParser date ) {
+    public Task( String content, DateParser date, char taskChar ) {
         this.content = content;
         this.date = date;
+        this.taskChar = taskChar;
     }
 
-    protected Task( String content ){
+    protected Task( String content, char taskChar ){
         this.content = content;
+        this.taskChar = taskChar;
     }
 
     public void indexTask( int index ){
@@ -25,9 +29,9 @@ public abstract class Task {
     @Override
     public String toString() {
 
-        String done = this.done?"Y": "N";
+        char done = this.done? TaskChars.DONE_CHAR : TaskChars.UNDONE_CHAR;
 
-        return "[" + done + "] " + this.content;
+        return index + ". [" + taskChar + "]" + "[" + done + "] " + this.content;
     }
 
     /**

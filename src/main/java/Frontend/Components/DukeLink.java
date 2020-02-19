@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class Link extends Hyperlink{
+public class DukeLink extends Hyperlink{
 
     String url;
     String title;
 
-    public Link( String title, String url ){
+    public DukeLink( String title, String url ){
         super(title);
         this.title = title;
         this.url = url;

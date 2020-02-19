@@ -1,5 +1,6 @@
 package Frontend.Objects;
 
+import Frontend.Constants.Config;
 import javafx.scene.image.Image;
 
 public class User {
@@ -10,24 +11,20 @@ public class User {
     public User(String imgPath){
 
         this.img = new Image(this.getClass().getResourceAsStream( imgPath ));
-        this.text = "";
+        this.text = Config.USER_EMPTY_TEXT;
 
     }
 
     public User(){
-        this.text = "";
+        this.text = Config.USER_EMPTY_TEXT;
     }
 
     public void addText( String text ){
         this.text = text;
     }
 
-    public void addImg( String imgPath ){
-        this.img = new Image(this.getClass().getResourceAsStream(imgPath));
-    }
-
     public void clearText(){
-        this.text = "";
+        this.text = Config.USER_EMPTY_TEXT;
     }
 
     public String getText(){

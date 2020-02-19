@@ -1,5 +1,7 @@
 package Backend;
 
+import Backend.Constants.Commands;
+import Backend.Constants.Messages;
 import Backend.Exceptions.DukeException;
 import Backend.Objects.Task.Deadline;
 import Backend.Objects.Task.Event;
@@ -13,42 +15,55 @@ import java.util.Optional;
 public class Switcher {
 
     private TaskList taskList;
+    private Cache cache;
 
-    public Switcher( TaskList taskList ){
+    /**
+     * Contains the logic required to interpret commands
+     * @param taskList the task list instantiated in the main function
+     * @param cache the cache instantiated in the main function
+     */
+    public Switcher( TaskList taskList, Cache cache ){
+        this.cache = cache;
         this.taskList = taskList;
     }
 
     /**
-     * switches on command and decides what is printed
-     * @param req user input
-     * @throws DukeException
+     * Decides what action is to be executed based on the user input.
+     * Contains two switches. First switch deals with commands that do not manipulate the data while the second deals with commands
+     * that manipulate the data.
+     * @param req request of the user from a frontend component
+     * @return a string representing the reply to the user containing the relevant requested information
      */
     public String res(String req) throws DukeException {
 
-        if( req.equals( "exit" )){
-            return ChatterBox.sayExit();
+        if( req.equals( Commands.EXIT )){
+            return Messages.EXIT_MSG;
         }
 
-        if( req.equals("bye") ){
-            return ChatterBox.sayBye();
+        if( req.equals(Commands.BYE) ){
+            return Messages.BYE_MSG;
         }
 
+        /**
+         * Prints what is requested and does no data manipulation
+         */
         try {
             Parser parser = new Parser(req);
             String command = parser.parseCommand();
 
-            /**
-             * commands that have to do with printing
-             */
             switch( command ){
-                case "help":
-                    return ChatterBox.sayHelp();
-                case "list":
+                case Commands.HISTORY:
+                    return cache.printUserInputHistory();
+                case Commands.HELP:
+                    return DynamicMessenger.sayHelp();
+                case Commands.LIST:
                     return taskList.printTasks();
-                case "date":
-                    return taskList.printTasks(req);
-                case "find":
-                    return taskList.findTask(req);
+                case Commands.DATE:
+                    DateParser date = new DateParser(parser.parseDateString());
+                    return taskList.printTasksByDate(date);
+                case Commands.FIND:
+                    String searchTerm = parser.parseContent();
+                    return taskList.printTasksBySearchTerm(searchTerm);
             }
 
             Optional<Integer> indexOptional = parser.parseContentAsInt();
@@ -60,27 +75,34 @@ public class Switcher {
             }
 
             /**
-             * functional commands
+             * Manipulates the data
              */
             switch( command ) {
-                case "done":
-                    Task markedTask = taskList.markTask( index );
-                    return ChatterBox.sayMarkedTaskAsDone( markedTask );
-                case "delete":
+                case Commands.DONE:
+                    Task taskToBeMarked = taskList.getTask( index );
+
+                    if( taskToBeMarked.done ){
+                        return DynamicMessenger.sayTaskAlreadyDone( taskToBeMarked );
+                    } else {
+                        taskToBeMarked = taskList.markTask( index );
+                        return DynamicMessenger.sayMarkedTaskAsDone( taskToBeMarked );
+                    }
+
+                case Commands.DELETE:
                     Task removedTask = taskList.deleteTask(index);
-                    return ChatterBox.sayRemovedTask(removedTask);
+                    return DynamicMessenger.sayRemovedTask(removedTask);
                 default:
                     String content = parser.parseContent();
                     Task task;
 
                     switch( command ) {
-                        case "event":
+                        case Commands.EVENT:
                             task = new Event( content, new DateParser(parser.parseDateString() ));
                             break;
-                        case "deadline":
+                        case Commands.DEADLINE:
                             task = new Deadline(content, new DateParser(parser.parseDateString()));
                             break;
-                        case "todo":
+                        case Commands.TODO:
                             task = new Todo( content );
                             break;
                         default:
@@ -88,7 +110,7 @@ public class Switcher {
                     }
 
                     taskList.addTask(task);
-                    return ChatterBox.sayAddedTask( task );
+                    return DynamicMessenger.sayAddedTask( task );
             }
 
         } catch (StringIndexOutOfBoundsException e){

@@ -1,9 +1,12 @@
 package Backend.Parsers;
 
-import java.sql.Time;
+import Backend.Constants.DateFormats;
+import Backend.Exceptions.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 public class DateParser {
@@ -11,11 +14,8 @@ public class DateParser {
     private LocalDate date;
     private String dateString;
 
-    private static final String noonString = "12:00";
-    private static final String eveningString = "19:00";
-
     /**
-     * creates a DateParser object given a LocalDate
+     * Creates a DateParser object given a LocalDate
      * @param date - LocalDate object
      */
     public DateParser( LocalDate date ) {
@@ -24,35 +24,39 @@ public class DateParser {
     }
 
     /**
-     * creates a DateParser object given a DateString.
-     * reduces the need for repeated conversion.
-     * @param dateString - string in format YYYY-MM-DD
+     * Creates a DateParser object given a string. This reduces the need for repeated conversion.
+     * @param dateString string in format YYYY-MM-DD
      */
-    public DateParser( String dateString ) {
+    public DateParser( String dateString ) throws DukeException{
         this.date = convertToDate( dateString );
         this.dateString = dateString;
     }
 
     /**
-     * converts String to LocalDate object
-     * @param dateString
+     * Converts a string to LocalDate object
+     * @param dateString string in format YYYY-MM-DD
      * @return LocalDate object
      */
-    public static LocalDate convertToDate(String dateString){
-        return LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE);
+    public static LocalDate convertToDate(String dateString) throws DukeException {
+
+        try{
+            return LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch ( DateTimeParseException e ){
+            throw new DukeException( e );
+        }
     }
 
     /**
-     * converts LocalDate object to String
+     * Converts LocalDate object to String
      * @param date LocalDate object
-     * @return date string in format YYYY-MM-DD
+     * @return string in format YYYY-MM-DD
      */
     public static String convertToString(LocalDate date){
         return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
     }
 
     /**
-     * getter for LocalDate object
+     * Gets LocalDate object
      * @return LocalDate object
      */
     public LocalDate getDate(){
@@ -60,28 +64,30 @@ public class DateParser {
     }
 
     /**
-     * getter for datestring
-     * @return dateString
+     * Gets date string
+     * @return string in format YYYY-MM-DD
      */
     public String getDateString(){
         return this.dateString;
     }
 
     /**
-     * gets the timeOfDay enum depending on the LocalDateTime
+     * Gets the timeOfDay enum depending on the LocalDateTime.
+     * Takes the current time and compares it with two other times set as NOON and EVENING.
+     * If current time is before NOON, it is MORNING.
+     * If current time is after EVENING it is NIGHT.
+     * Otherwise, it is AFTERNOON.
      * @return enum timeOfDay
      */
     public static TimeOfDay getTimeOfDay(){
 
-        String formatString = "yyyy-MM-dd HH:mm";
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatString);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern( DateFormats.DATE_TIME_FORMAT );
 
         LocalDateTime now = LocalDateTime.now();
         String nowString = now.format(formatter);
         String dateString = nowString.split(" ")[0];
-        LocalDateTime noon = LocalDateTime.parse(dateString + " " + noonString, formatter);
-        LocalDateTime night = LocalDateTime.parse( dateString + " " + eveningString, formatter);
+        LocalDateTime noon = LocalDateTime.parse(dateString + " " + DateFormats.NOON_STRING, formatter);
+        LocalDateTime night = LocalDateTime.parse( dateString + " " + DateFormats.EVENING_STRING, formatter);
 
         assert( noon.isBefore( night ));
 

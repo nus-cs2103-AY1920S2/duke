@@ -1,13 +1,11 @@
 package Backend.Objects.Task;
 
+import Backend.Constants.TaskChars;
+
 public class Todo extends Task {
 
     public Todo(String content){
-        super(content);
+        super(content, TaskChars.TODO_CHAR);
     }
 
-    @Override
-    public String toString() {
-        return index + "." +" [T]" + super.toString();
-    }
 }

@@ -1,28 +1,18 @@
 package Frontend;
 
-import Backend.ChatterBox;
+import Backend.*;
 import Backend.Exceptions.DukeException;
-import Backend.Storage;
-import Backend.Switcher;
-import Backend.TaskList;
 
+import Frontend.Components.*;
 import Frontend.Components.DialogBox.DukeDialogBox;
 import Frontend.Components.DialogBox.UserDialogBox;
-import Frontend.Components.Link;
-import Frontend.Components.SendButton.SendButton;
+import Frontend.Constants.Config;
+import Frontend.Constants.Styles;
 import Frontend.Objects.User;
-
-import java.net.URI;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.geometry.Insets;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
@@ -36,24 +26,27 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
+    private DukeScrollPane scrollPane;
+    private DialogContainer dialogContainer;
+    private DukeInput userInput;
+    private SendButton sendButton;
     private Scene scene;
-    private AnchorPane mainLayout;
-    private Link link;
+    private DukeAnchorPane mainLayout;
+    private DukeLink link;
 
     private User user = new User();
-    private User duke = new User("/images/DaDuke.png");
+    private User duke = new User( Config.DUKE_IMG_PATH );
 
     private TaskList taskList;
     private Switcher switcher;
+    private Cache cache = new Cache();
+
+    private int userInputHistoryIndex = 0;
 
     @Override
     public void start( Stage stage ) {
-        initialiseBackendComponents();
-        initialiseComponents();
+        initBackendComponents();
+        initComponents();
         setTheStage(stage);
         resizeComponents(stage);
         setHandlers();
@@ -67,7 +60,7 @@ public class Main extends Application {
     private void displayUserInput(){
 
         if( user.getText().length() > 0 ){
-            dialogContainer.getChildren().add(
+            dialogContainer.addChild(
                     new UserDialogBox( user )
             );
 
@@ -75,7 +68,7 @@ public class Main extends Application {
         }
 
         if( duke.getText().length() > 0 ){
-            dialogContainer.getChildren().add(
+            dialogContainer.addChild(
                     new DukeDialogBox( duke )
             );
 
@@ -83,7 +76,6 @@ public class Main extends Application {
         }
 
         userInput.clear();
-
     }
 
     /**
@@ -93,17 +85,31 @@ public class Main extends Application {
 
         String str = "";
 
-        str += ChatterBox.sayHello();
+        str += DynamicMessenger.sayHello();
         str += "\n";
-        str += ChatterBox.sayTaskList( taskList.getList() );
+        str += DynamicMessenger.sayTaskList( taskList.getList() );
 
         duke.addText( str );
 
-        dialogContainer.getChildren().add(
+        dialogContainer.addChild(
                 new DukeDialogBox( duke )
         );
 
         duke.clearText();
+    }
+
+    private void handleKeyPress( KeyCode keyCode){
+
+        if( keyCode == KeyCode.UP || keyCode == KeyCode.DOWN ){
+            String latestCommand = cache.getUserInputHistory( userInputHistoryIndex % cache.getUserInputHistorySize() );
+            userInput.setText(latestCommand);
+            userInput.positionCaret( latestCommand.length() );
+
+            userInputHistoryIndex++;
+        } else {
+            userInputHistoryIndex = 0;
+        }
+
     }
 
     /**
@@ -115,21 +121,20 @@ public class Main extends Application {
         try {
             String userText = userInput.getText();
 
+            cache.addUserInput(userText);
+
             user.addText( userText );
             duke.addText( switcher.res(user.getText()) );
 
             displayUserInput();
 
             System.out.println( userText );
-            if( userText.equals("exit") ){
+            if( userText.equals( Config.EXIT_CMD ) ){
                 exitDuke();
             }
 
         } catch ( DukeException e ){
-
-            duke.addText(e.getErrorMsg());
-            displayUserInput();
-
+            displayError( e );
         }
 
     }
@@ -137,7 +142,7 @@ public class Main extends Application {
     private void exitDuke(){
         new Thread( () -> {
             try {
-                Thread.sleep( 1000 );
+                Thread.sleep( Config.EXIT_DELAY );
                 System.exit(0);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -148,17 +153,15 @@ public class Main extends Application {
     /**
      * Handles the initialisation of all backend components
      */
-    private void initialiseBackendComponents(){
+    private void initBackendComponents(){
         taskList = new TaskList();
 
         try {
             taskList.loadTasks( Storage.loadDataFromFile() );
-        } catch ( DukeException ignored){
-
+        } catch ( DukeException e ){
+            System.out.println("Unable to load file");
         } finally {
-
-            switcher = new Switcher( taskList );
-
+            switcher = new Switcher( taskList, cache );
         }
 
     }
@@ -166,32 +169,29 @@ public class Main extends Application {
     /**
      * Handles the initialisation of all rendered components
      */
-    private void initialiseComponents(){
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
+    private void initComponents(){
 
-        userInput = new TextField();
-        sendButton = new SendButton("Send");
-
-        link = new Link( "User Guide", "https://github.com/waynewee/duke/wiki/Duke-User-Guide" );
+        dialogContainer = new DialogContainer();
+        scrollPane = new DukeScrollPane(dialogContainer);
+        userInput = new DukeInput();
+        sendButton = new SendButton();
+        link = new DukeLink( Config.LINK_TEXT, Config.LINK_URL );
 
         link.setOnAction( event -> {
             try {
                 link.openLink();
             } catch (DukeException e) {
-                duke.addText( e.getErrorMsg() );
-                displayUserInput();
+                displayError(e);
             }
         } );
 
-
-        mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, link);
-
+        mainLayout = new DukeAnchorPane(scrollPane, userInput, sendButton, link);
         scene = new Scene(mainLayout);
+    }
 
-
+    private void displayError(DukeException e){
+        duke.addText( e.getErrorMsg() );
+        displayUserInput();
     }
 
     /**
@@ -201,42 +201,14 @@ public class Main extends Application {
      */
     private void resizeComponents(Stage stage){
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535.0);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setPadding( new Insets(0, 0, 12.5, 0) );
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setBottomAnchor( link, 27.5 );
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        stage.setMinHeight( Styles.STAGE_MIN_HEIGHT );
+        stage.setMinWidth( Styles.STAGE_MIN_WIDTH );
     }
 
     private void setTheStage(Stage stage){
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("Duke v1.0 - Type \"help\" for more");
+        stage.setTitle( Config.APP_TITLE );
     }
 
     /**e
@@ -251,7 +223,11 @@ public class Main extends Application {
             handleUserInput();
         });
 
-        //handles key press
+        userInput.setOnKeyPressed((event) -> {
+            handleKeyPress(event.getCode());
+        });
+
+        //handles press send
         userInput.setOnAction((event) -> {
             handleUserInput();
         });

@@ -1,5 +1,7 @@
 package Backend.Exceptions;
 
+import Backend.Constants.Messages;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -21,7 +23,7 @@ public class DukeException extends Exception {
     @Override
     public String toString() {
 
-        return "I was unable to complete your request due to this exception, sir:\n " + errorMsg;
+        return Messages.ERROR_MSG + errorMsg;
 
     }
 

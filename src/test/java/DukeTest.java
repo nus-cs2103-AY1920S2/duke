@@ -1,11 +1,9 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import Backend.Cache;
 import Backend.Exceptions.DukeException;
 import Backend.TaskList;
 import Backend.Objects.Task.Task;
-import Backend.Objects.Task.Todo;
-import Backend.Objects.Task.Event;
-import Backend.Objects.Task.Deadline;
 import Backend.Switcher;
 
 import Backend.Parsers.Parser;
@@ -13,7 +11,8 @@ import Backend.Parsers.Parser;
 public class DukeTest {
 
     TaskList taskList = new TaskList();
-    Switcher switcher = new Switcher(taskList);
+    Cache cache = new Cache();
+    Switcher switcher = new Switcher(taskList, cache);
 
     public static void main(String[] args){
 
@@ -51,7 +50,7 @@ public class DukeTest {
 
         String line = "2.[D][N] duke project (by: 2020-01-31)";
 
-        Task task = Parser.formatTaskString(line, 2);
+        Task task = Parser.parseSavedTask(line, 2);
 
         assertEquals( task.toString(), line);
 

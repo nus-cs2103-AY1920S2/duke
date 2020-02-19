@@ -3,6 +3,7 @@ package Backend.Parsers;
 import java.io.IOException;
 import java.util.Optional;
 
+import Backend.Constants.TaskChars;
 import Backend.Exceptions.DukeException;
 import Backend.Objects.Task.Task;
 import Backend.Objects.Task.Todo;
@@ -12,25 +13,23 @@ import Backend.Objects.Task.Deadline;
 public class Parser {
 
     private String input;
-    /**
-     * Backend.Utils.Utils.Parser
-     * Each input starts with a COMMAND, followed by the CONTENT and optionally, the DATE
-     */
+
     public Parser( String input ){
         this.input = input;
     }
 
     /**
-     * Gets command, first word of input string
-     * @return command
+     * Gets a command word based on a given input string. The command is the first word of the string
+     * @return a string representing a command
      */
     public String parseCommand(){
         return input.split(" ")[0].trim();
     }
 
     /**
-     * Gets content, removes command and everything after slash
-     * @return content
+     * Gets the content of a given input string. The content is everything in the string apart from
+     * the command and the date string (if present)
+     * @return a string representing the content of the input string
      */
     public String parseContent(){
 
@@ -45,8 +44,8 @@ public class Parser {
     }
 
     /**
-     * Gets dateString
-     * @return dateString
+     * Gets the date as inputted by the user. The only valid format for this date string is YYYY-MM-DD.
+     * @return a date string in the format YYYY-MM-DD
      */
     public String parseDateString(){
 
@@ -61,8 +60,9 @@ public class Parser {
     }
 
     /**
-     * if content is integer, casts content to integer
-     * @return content as integer
+     * Gets the content of an input string and, if the content consists of only integers, converts the string to an Optional Integer.
+     * This methods handles commands that deal with task indices.
+     * @return an integer representing a task index
      */
     public Optional<Integer> parseContentAsInt(){
 
@@ -78,12 +78,13 @@ public class Parser {
     }
 
     /**
-     * parses line to derive task arguments
-     * @param line line to be parsed
-     * @param index index of task
-     * @return task
+     * Parses a saved task string to retrieve the content, type of task and date string.
+     * Also creates a task object from the values parsed.
+     * @param line a line representing a saved task
+     * @param index the index of the line that is parsed
+     * @return a task
      */
-    public static Task formatTaskString( String line, int index) throws DukeException {
+    public static Task parseSavedTask( String line, int index) throws DukeException {
 
         try {
             //get type
@@ -101,15 +102,15 @@ public class Parser {
             Task task;
 
             switch (taskChar){
-                case 'T':
+                case TaskChars.TODO_CHAR:
                     String content = subString.trim();
                     task = new Todo(content);
                     break;
-                case 'D':
+                case TaskChars.DEADLINE_CHAR:
                     content = subString.split("\\(")[0].trim();
                     task =  new Deadline(content, new DateParser(dateString));
                     break;
-                case 'E':
+                case TaskChars.EVENT_CHAR:
                     content = subString.split("\\(")[0].trim();
                     task =  new Event(content, new DateParser(dateString));
                     break;
@@ -119,7 +120,7 @@ public class Parser {
 
             task.indexTask( index );
 
-            if( doneChar == 'Y' ){
+            if( doneChar == TaskChars.DONE_CHAR ){
                 task.markAsDone();
             }
 

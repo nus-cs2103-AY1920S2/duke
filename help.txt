@@ -1,16 +1,5 @@
 Duke v1.0
 
-I help manage your daily tasks. You can utilise my services by sending me the following commands:
+The user manual can be found at https://github.com/waynewee/duke/wiki/Duke-User-Guide.
 
-- todo TODO_NAME
-- event EVENT_NAME /at YYYY-MM-DD
-- deadline DEADLINE_NAME /by YYYY-MM-DD
-
-- done TASK_INDEX
-- delete TASK_INDEX
-
-- list
-- find TASK_NAME
-- date /on YYYY-MM-DD
-
-- exit
+Copy and paste this url or click the link at the bottom left of this window.

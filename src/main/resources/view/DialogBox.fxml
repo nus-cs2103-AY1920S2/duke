@@ -8,11 +8,11 @@
 
 <fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <HBox fx:id="dialogContainer" prefWidth="400.0">
-          <StackPane fx:id="displayPictureContainer" alignment="TOP_LEFT">
-              <Circle radius="24" fx:id="displayPicture"/>
+    <HBox fx:id="dialogContainer">
+          <StackPane fx:id="displayPictureContainer">
+              <Circle fx:id="displayPicture"/>
           </StackPane>
-          <Label fx:id="dialog" alignment="TOP_LEFT" text="Label" textFill="#000" wrapText="true"/>
+          <Label fx:id="dialog"/>
     </HBox>
   </children>
 </fx:root>

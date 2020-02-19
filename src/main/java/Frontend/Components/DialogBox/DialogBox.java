@@ -1,24 +1,15 @@
 package Frontend.Components.DialogBox;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import Frontend.Components.MainWindow;
+import Frontend.Constants.Styles;
 import Frontend.Objects.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.shape.Circle;
 
 /**
@@ -40,18 +31,10 @@ public abstract class DialogBox extends HBox {
     @FXML
     protected StackPane displayPictureContainer;
 
-    protected final CornerRadii dialogRadius = new CornerRadii( 10 );
-    protected final Insets dialogMargin = new Insets(12);
-    protected final Insets dialogPadding = new Insets(24);
-    protected final Insets displayPicturePadding = new Insets( 12, 0, 0, 8 );
-    protected final Color colorBlue = Color.rgb(0, 102, 227 );
-    protected final Color colorTransparent = Color.TRANSPARENT;
-    protected final Color colorWhite = Color.WHITE;
-
     public DialogBox( User user) {
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader( MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader( MainWindow.class.getResource( Styles.DIALOG_BOX_FXML ));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -59,10 +42,20 @@ public abstract class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        dialogContainer.setPrefWidth( Styles.DIALOG_CONTAINER_WIDTH );
+
+        displayPictureContainer.setAlignment( Styles.DISPLAY_PICTURE_CONTAINER_ALIGNMENT );
+
+        displayPicture.setRadius( Styles.DISPLAY_PICTURE_RADIUS );
+
         dialog.setText( user.getText() );
-        dialog.prefHeight( Region.USE_COMPUTED_SIZE );
-        dialog.setBackground( new Background( new BackgroundFill( colorWhite, dialogRadius, dialogMargin ) ) );
-        dialog.setPadding(dialogPadding);
+        dialog.setBackground( new Background( new BackgroundFill( Styles.COLOR_WHITE, Styles.DIALOG_RADIUS, Styles.DIALOG_MARGIN ) ) );
+        dialog.setPadding( Styles.DIALOG_PADDING );
+
+        dialog.setAlignment( Styles.DIALOG_ALIGNMENT );
+        dialog.setTextFill( Styles.COLOR_BLACK );
+        dialog.setWrapText( Styles.DIALOG_WRAP_TEXT );
+
 
     }
 
