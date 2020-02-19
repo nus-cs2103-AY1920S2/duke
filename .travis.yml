@@ -4,4 +4,4 @@ notifications:
     recipients:
       - yingxu.he1998@gmail.com
     if: branch = master
-    on_success: always
+    on_failure: always
