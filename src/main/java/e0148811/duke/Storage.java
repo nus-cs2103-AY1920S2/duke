@@ -21,10 +21,8 @@ public class Storage {
         try {
             List<Task> list = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader(path));
-            boolean isEmptyFile = true;
             String line;
             while ((line = br.readLine()) != null) {
-                isEmptyFile = false;
                 addEventToList(list, line);
             }
             return list;

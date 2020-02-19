@@ -16,12 +16,12 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         Storage storage = new Storage("data/duke.txt", ui);
-        parser = new Parser(ui);
+        parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             readFileMessage = ui.returnLoadingError();
-            tasks = new TaskList(ui);
+            tasks = new TaskList();
         } finally {
             assert tasks != null;
             if (tasks.getList().size() == 0) {

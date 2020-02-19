@@ -27,7 +27,7 @@ public abstract class Task {
 
     public void setLowPriority(){
         level = PriorityLevel.LOW;
-    };
+    }
 
     public boolean isDone() {
         return isDone;

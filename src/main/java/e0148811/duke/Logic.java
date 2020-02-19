@@ -1,6 +1,5 @@
 package e0148811.duke;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -44,6 +43,10 @@ public class Logic {
                 // Fallthrough
             case "find":
                 return findTasks(instructionByWord, lengthOfArray);
+            case "hello":
+                // Fallthrough
+            case "hi":
+                return Ui.greet() + Ui.showValidInstructions();
             case "l":
                 // Fallthrough
             case "list":
@@ -256,10 +259,8 @@ public class Logic {
             checkIfFormatIsValid(typeOfTask, lengthOfArray, indexOfByOrAt);
             return constructDeadlineOrEventTask(typeOfTask, instructionByWord, lengthOfArray, indexOfByOrAt);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Incorrect format of date.\n"
+            throw new DukeException("Incorrect format of date, or the date is invalid.\n"
                     + "The correct format should be YYYY-MM-DD.");
-        } catch (DateTimeException e) {
-            throw new DukeException("Invalid value for year/month/date");
         }
     }
 

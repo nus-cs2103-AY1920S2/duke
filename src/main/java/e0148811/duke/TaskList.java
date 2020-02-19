@@ -5,11 +5,9 @@ import java.util.List;
 
 public class TaskList {
     private static int ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX = 1;
-    private Ui ui;
     List<Task> list;
 
-    public TaskList(Ui ui) {
-        this.ui = ui;
+    public TaskList() {
         list = new ArrayList<>();
     }
 
@@ -46,7 +44,7 @@ public class TaskList {
         return output.toString();
     }
 
-    public String printListBasedOnPriority(PriorityLevel level) throws DukeException {
+    public String printListBasedOnPriority(PriorityLevel level) {
         StringBuilder output = new StringBuilder("Here is the task list of the given priority level:\n");
         int count = 0;
         for (int i = 1; i <= list.size(); i++) {
