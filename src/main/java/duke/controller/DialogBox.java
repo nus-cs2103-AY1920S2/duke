@@ -23,7 +23,7 @@ public class DialogBox extends HBox {
     private static final String USER_SPEECH_BUBBLE_CLASS = "user-speech-bubble";
 
     @FXML
-    private HBox SpeechBubble;
+    private HBox speechBubble;
     @FXML
     private Label dialog;
     @FXML
@@ -66,7 +66,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialog = new DialogBox(text, img);
-        userDialog.SpeechBubble.getStyleClass().add(USER_SPEECH_BUBBLE_CLASS);
+        userDialog.speechBubble.getStyleClass().add(USER_SPEECH_BUBBLE_CLASS);
         return userDialog;
     }
 

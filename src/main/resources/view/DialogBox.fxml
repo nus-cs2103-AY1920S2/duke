@@ -7,7 +7,7 @@
 
 <fx:root alignment="CENTER_RIGHT" minWidth="-Infinity" prefWidth="380.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <HBox fx:id="SpeechBubble" alignment="CENTER_RIGHT" styleClass="speech-bubble">
+      <HBox fx:id="speechBubble" alignment="CENTER_RIGHT" styleClass="speech-bubble">
          <children>
               <Label fx:id="dialog" text="Label" wrapText="true" HBox.hgrow="ALWAYS">
                   <padding>
