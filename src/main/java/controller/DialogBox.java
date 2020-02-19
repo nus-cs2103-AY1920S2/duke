@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML. This control represents a dialog box consisting of an
@@ -21,7 +22,7 @@ public class DialogBox extends HBox {
     @FXML public Text dialog;
     @FXML private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, Boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -30,8 +31,9 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
+        dialog.setWrappingWidth(200);
+        dialog.setTextAlignment(isUser ? TextAlignment.RIGHT : TextAlignment.LEFT);
         displayPicture.setImage(img);
     }
 
@@ -49,7 +51,7 @@ public class DialogBox extends HBox {
      * @return DialogBox DialogBox floated to the right
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, true);
     }
 
     /**
@@ -58,7 +60,7 @@ public class DialogBox extends HBox {
      * @return DialogBox DialogBox floated to the left
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, false);
         db.flip();
         return db;
     }
