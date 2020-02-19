@@ -49,11 +49,11 @@ public class ChatBox {
             //String er = "Creating new file directory.";
             throw new DukeException(errorMsg.getMessage());
         } catch (IllegalArgumentException e) {
-            String er = "OOPS!!! Dont understand what you are saying...";
-            throw new DukeException(er);
+            String errorMsg = "OOPS!!! Dont understand what you are saying...";
+            throw new DukeException(errorMsg);
         } catch (IOException e) {
-            String er = "Could not create file...";
-            throw new DukeException(er);
+            String errorMsg = "Could not create file...";
+            throw new DukeException(errorMsg);
         }
     }
 
@@ -169,9 +169,9 @@ public class ChatBox {
             output = Message.welcome();
             load();
             return output;
-        } catch (DukeException errorMsg) {
-            String error = "OOPS!! History is not loaded correctly, check the file location...";
-            return error;
+        } catch (DukeException e) {
+            String errorMsg = "OOPS!! History is not loaded correctly, check the file location...";
+            return errorMsg;
         }
     }
 
