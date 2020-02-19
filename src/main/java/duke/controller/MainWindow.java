@@ -2,6 +2,7 @@ package duke.controller;
 
 import duke.Duke;
 import duke.Main;
+import duke.command.Command;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+
+import static duke.util.StringCleaner.cleanString;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -78,7 +81,7 @@ public class MainWindow extends VBox {
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
-        if (input.trim().equalsIgnoreCase("bye")) {
+        if (Command.BYE.hasCommand(cleanString(input))) {
             Platform.exit();
         }
     }
