@@ -10,16 +10,15 @@ import java.util.Scanner;
  * Storage to store and retrieve all data that is stored in the hard disk.
  */
 public class Storage {
-
-    String home;
+    
     Path path;
 
     /**
      * Creates an instance of Storage object with the path to the file.
      */
     public Storage() {
-        this.home = System.getProperty("user.home");
-        this.path = Paths.get(home, "Desktop", "NUS Y2S2", "CS2103T", "project", "duke", "data", "duke.txt");
+
+        this.path = Paths.get("data", "duke.txt");
 
     }
 

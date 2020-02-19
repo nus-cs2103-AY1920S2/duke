@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -176,7 +177,12 @@ public class Duke extends Application {
         System.out.flush();
         System.setOut(old);
         Label userText = new Label(input);
-        Label dukeText = new Label(baos.toString());
+        String dukeResponse = baos.toString();
+        Label dukeText = new Label(dukeResponse);
+        System.out.println(dukeResponse);
+        if (dukeResponse.contains("Bye")) {
+            Platform.exit();
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
