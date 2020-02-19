@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DuchessException;
-import duke.save.SaveState;
 import duke.save.SaveStateStack;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -50,8 +49,7 @@ public class TaskCreationHandler {
     static String handleTodoCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                     SaveStateStack saveStateStack) throws DuchessException {
         Task newTask = getTaskFromCommand(command);
-        SaveState newSaveState = new SaveState(taskList, command);
-        saveStateStack.push(newSaveState);
+        saveStateStack.saveState(command, taskList);
         return saveTask(newTask, taskList, storage, ui);
     }
 
@@ -71,8 +69,7 @@ public class TaskCreationHandler {
     static String handleEventCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                      SaveStateStack saveStateStack) throws DuchessException {
         Task newTask = getTaskFromCommand(command, "/at");
-        SaveState newSaveState = new SaveState(taskList, command);
-        saveStateStack.push(newSaveState);
+        saveStateStack.saveState(command, taskList);
         return saveTask(newTask, taskList, storage, ui);
     }
 
@@ -92,8 +89,7 @@ public class TaskCreationHandler {
     static String handleDeadlineCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                         SaveStateStack saveStateStack) throws DuchessException {
         Task newTask = getTaskFromCommand(command, "/by");
-        SaveState newSaveState = new SaveState(taskList, command);
-        saveStateStack.push(newSaveState);
+        saveStateStack.saveState(command, taskList);
         return saveTask(newTask, taskList, storage, ui);
     }
 

@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DuchessException;
-import duke.save.SaveState;
 import duke.save.SaveStateStack;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -18,6 +17,7 @@ import java.util.Arrays;
 import static duke.util.MagicStrings.ERROR_COMMAND_MISSING_INDEX;
 import static duke.util.MagicStrings.ERROR_COMMAND_TOO_MANY_INDICES;
 import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
+import static duke.util.MagicStrings.ERROR_INVALID_COMMAND;
 import static duke.util.MagicStrings.ERROR_INVALID_SNOOZE_DURATION;
 import static duke.util.MagicStrings.ERROR_SNOOZING_NON_DEADLINE;
 import static duke.util.MagicStrings.ERROR_SORTING_EMPTY_LIST;
@@ -61,8 +61,7 @@ public class TaskListCommandHandler {
                                     SaveStateStack saveStateStack) throws DuchessException {
         int index = getIntegerFromCommand(command);
         checkBoundsOfIndex(index, taskList);
-        SaveState newSaveState = new SaveState(taskList, command);
-        saveStateStack.push(newSaveState);
+        saveStateStack.saveState(command, taskList);
         Task taskCompleted = taskList.completeTask(index - 1);
         storage.save(taskList);
         return ui.printTaskCompleted(taskCompleted);
@@ -105,8 +104,7 @@ public class TaskListCommandHandler {
                                       SaveStateStack saveStateStack) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         if (commands.size() == 2 && cleanAndLowerString(commands.get(1)).equals("all")) {
-            SaveState newSaveState = new SaveState(taskList, command);
-            saveStateStack.push(newSaveState);
+            saveStateStack.saveState(command, taskList);
             taskList.removeAllTasks();
             storage.save(taskList);
             return ui.printAllDeleted();
@@ -114,8 +112,7 @@ public class TaskListCommandHandler {
         int index = getIntegerFromCommand(command);
         checkBoundsOfIndex(index, taskList);
         final Task taskToDelete = taskList.getTask(index - 1);
-        SaveState newSaveState = new SaveState(taskList, command);
-        saveStateStack.push(newSaveState);
+        saveStateStack.saveState(command, taskList);
         taskList.removeTask(index - 1);
         storage.save(taskList);
         return ui.printTaskDeleted(taskToDelete, taskList.size());
@@ -148,8 +145,7 @@ public class TaskListCommandHandler {
         }
         String duration = cleanAndLowerString(commands.get(1));
         TemporalAmount snoozePeriod = DurationParser.parseDuration(duration);
-        SaveState newSaveState = new SaveState(taskList, command);
-        saveStateStack.push(newSaveState);
+        saveStateStack.saveState(command, taskList);
         ((Deadline) taskToSnooze).snooze(snoozePeriod);
         storage.save(taskList);
         return ui.printTaskSnoozed(taskToSnooze, DurationParser.parseDurationToString(duration));
@@ -171,8 +167,7 @@ public class TaskListCommandHandler {
         if (taskList.size() == 0) {
             throw new DuchessException(ERROR_SORTING_EMPTY_LIST);
         }
-        SaveState newSaveState = new SaveState(taskList, command);
-        saveStateStack.push(newSaveState);
+        saveStateStack.saveState(command, taskList);
         taskList.sort();
         storage.save(taskList);
         return ui.printTaskListSorted();
@@ -181,7 +176,11 @@ public class TaskListCommandHandler {
     private static Integer getIntegerFromCommand(String command) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         checkSizeOfCommands(commands);
-        return Integer.parseInt(commands.get(1).trim());
+        try {
+            return Integer.parseInt(commands.get(1).trim());
+        } catch (NumberFormatException e) {
+            throw new DuchessException(ERROR_INVALID_COMMAND);
+        }
     }
 
     private static void checkSizeOfCommands(ArrayList<String> commands) throws DuchessException {

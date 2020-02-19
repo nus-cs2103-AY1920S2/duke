@@ -1,5 +1,7 @@
 package duke.save;
 
+import duke.task.TaskList;
+
 import java.util.ArrayList;
 
 public class SaveStateStack {
@@ -40,5 +42,17 @@ public class SaveStateStack {
         SaveState latestSaveState = this.saveStates.get(lastIndex);
         this.saveStates.remove(lastIndex);
         return latestSaveState;
+    }
+
+    /**
+     * Saves the current command and task list by creating a new save state and
+     * pushing it into the stack.
+     *
+     * @param command  Latest command.
+     * @param taskList Task list before update.
+     */
+    public void saveState(String command, TaskList taskList) {
+        SaveState newSaveState = new SaveState(taskList, command);
+        this.push(newSaveState);
     }
 }
