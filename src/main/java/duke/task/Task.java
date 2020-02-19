@@ -1,9 +1,13 @@
 package duke.task;
 
+import duke.exception.DuchessException;
+
+import static duke.util.MagicStrings.ERROR_CANNOT_UNDO;
+
 /**
  * The {@code Task} class creates a task with a description and isCompleted state.
  */
-public class Task {
+public class Task implements Cloneable {
     protected boolean isCompleted;
     protected String description;
 
@@ -35,6 +39,19 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    @Override
+    protected Object clone() throws DuchessException {
+        Task clonedTask = null;
+        try {
+            clonedTask = (Task) super.clone();
+            clonedTask.description = this.description; // Safe due to immutability of strings.
+            clonedTask.isCompleted = this.isCompleted;
+            return clonedTask;
+        } catch (CloneNotSupportedException e) {
+            throw new DuchessException(ERROR_CANNOT_UNDO);
+        }
     }
 
     /**

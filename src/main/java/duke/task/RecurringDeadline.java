@@ -49,6 +49,14 @@ public class RecurringDeadline extends Deadline {
     }
 
     @Override
+    protected Object clone() throws DuchessException {
+        RecurringDeadline clonedRecurringDeadline = (RecurringDeadline) super.clone();
+        clonedRecurringDeadline.frequency = this.frequency; // The Frequency enum is immutable
+        clonedRecurringDeadline.repeatEndTime = this.repeatEndTime; // LocalDateTime is immutable
+        return clonedRecurringDeadline;
+    }
+
+    @Override
     public void completeTask() {
         LocalDateTime nextDeadline;
         switch (this.frequency) {

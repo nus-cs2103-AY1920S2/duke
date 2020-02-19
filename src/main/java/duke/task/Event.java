@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DuchessException;
+
 /**
  * The {@code Event} class extends from {@code Task} to allow
  * the setting of a {@code String timeFrame}.
@@ -45,5 +47,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         return EVENT_SYMBOL + super.toString() + " (at: " + this.timeFrame + ")";
+    }
+
+    @Override
+    protected Object clone() throws DuchessException {
+        Event clonedEvent = (Event) super.clone();
+        clonedEvent.timeFrame = this.timeFrame; // String is immutable
+        return clonedEvent;
     }
 }

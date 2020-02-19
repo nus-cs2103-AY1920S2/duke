@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.DuchessException;
 import duke.util.DateTimeStringFormatter;
 
 import java.time.LocalDateTime;
@@ -62,5 +63,12 @@ public class Deadline extends Task {
     public String toString() {
         return DEADLINE_SYMBOL + super.toString() + " (by: "
                 + DateTimeStringFormatter.formatDateTime(this.deadline, this.isCompleted) + ")";
+    }
+
+    @Override
+    protected Object clone() throws DuchessException {
+        Deadline clonedDeadline = (Deadline) super.clone();
+        clonedDeadline.deadline = this.deadline; // as LocalDateTime is immutable
+        return clonedDeadline;
     }
 }
