@@ -53,7 +53,7 @@ public class Duke extends Application {
 
     public Duke() {
         ui = new Ui();
-        storage = new Storage("./data/tasks.txt");
+        storage = new Storage("./tasks.txt");
         try {
             tasks = storage.buildTaskList();
         } catch (DukeException e) {
@@ -164,7 +164,7 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/tasks.txt").run();
+        new Duke("./tasks.txt").run();
     }
 
 }
