@@ -35,25 +35,19 @@ Events: tasks that start at a specific time and ends at a specific time e.g., te
 
 Example of usage: 
 
-`todo borrow book`
+![ToDo-in](todo-in.png)
 
-`deadline return book /by 5-6-2020 1400`
+![Deadline-in](deadline-in.png)
 
-`event project meeting /at 17-8-2020 1000`
+![Event-in](event-in.png)
 
 Expected outcome:
 
-`Got it. I've added this task:
- [T][N] borrow book
- Now you have 5 tasks in the list.`
+![ToDo-in](todo-out.png)
  
-`Got it. I've added this task:
- [D][N] return book  (by: Jun 5 2020 2PM)
- Now you have 6 tasks in the list.`
- 
-`Got it. I've added this task:
- [E][N] project meeting  (at: Aug 17 2020 10AM)
- Now you have 7 tasks in the list.`
+![Deadline-input](deadline-out.png)
+
+![Event-in](event-out.png)
 
 ### List Tasks
 Displays all the tasks in the TaskList.
@@ -129,11 +123,12 @@ Edit the timing field for a task of type event or deadline.
 
 #### Usage
 
-##### `update <index> <time>` - Updates the event or deadline at the specified index with a new timing.
+##### `update <index> (/by or /at) <time>` - Updates the event or deadline at the specified index with a new timing.
 
 Example of usage: 
 
-`update 1 13-4-2020 1800`
+`update 1 /by 13-4-2020 1800`
+`update 2 /at 13-4-2020 1800`
 
 Expected outcome:
 
