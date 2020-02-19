@@ -1,8 +1,9 @@
-# Duke of NNpanpan
-Duke is a very simple CLI task management application.\
-Simple run the Java Jar file to start. Commands are listed below.
+# Duke
+Duke is a very simple CLI task management application.
+Simply run the Java Jar file to start. Commands are listed below.
+This version of Duke was developed by Nhat Nguyen | NNpanpan.
 
-#User Guide
+## User Guide
 Below is the guide to the usage of Duke.
 
 ## Features 
