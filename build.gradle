@@ -25,9 +25,9 @@ run {
     standardInput = System.in
 }
 
-checkstyle {
-    toolVersion = '8.23'
-}
+//checkstyle {
+//    toolVersion = '8.23'
+//}
 
 test {
     useJUnitPlatform()
