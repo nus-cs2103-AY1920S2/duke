@@ -14,6 +14,7 @@ public class Duke {
         ui = new Ui();
         tranScribeHandler = new TranScribeHandler();
         storage = new Storage("data/duke.txt");
+        //storage = new Storage("duke/data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
