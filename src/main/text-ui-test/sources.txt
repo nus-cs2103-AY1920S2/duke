@@ -1,0 +1,10 @@
+C:\Users\Courts\Desktop\CS2103T\iP\duke\src\main\java\Deadline.java
+C:\Users\Courts\Desktop\CS2103T\iP\duke\src\main\java\Duke.java
+C:\Users\Courts\Desktop\CS2103T\iP\duke\src\main\java\DukeException.java
+C:\Users\Courts\Desktop\CS2103T\iP\duke\src\main\java\Event.java
+C:\Users\Courts\Desktop\CS2103T\iP\duke\src\main\java\Parser.java
+C:\Users\Courts\Desktop\CS2103T\iP\duke\src\main\java\Storage.java
+C:\Users\Courts\Desktop\CS2103T\iP\duke\src\main\java\Task.java
+C:\Users\Courts\Desktop\CS2103T\iP\duke\src\main\java\TaskList.java
+C:\Users\Courts\Desktop\CS2103T\iP\duke\src\main\java\Todo.java
+C:\Users\Courts\Desktop\CS2103T\iP\duke\src\main\java\Ui.java

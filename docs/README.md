@@ -76,7 +76,7 @@ Okay! I have taken note of the following:
 [D][❌] Assignment 1 (by: Feb 01 2020 1200 PM)
 Now you have 1 tasks in the list.
 ```
-![Github Logo](./UG/Deadline.png)
+<img src ="./UG/Deadline.png">
 
 <br/> 
 
