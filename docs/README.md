@@ -85,7 +85,7 @@ Format: `notes modify INDEX n/NEW_MESSAGE`
 Adds a note.
 Format: `notes add m/MESSAGE`
 
-###2.8.6 Deleting a note
+### 2.8.6 Deleting a note
 Deletes a note.
 Format: `notes delete INDEX`
 
