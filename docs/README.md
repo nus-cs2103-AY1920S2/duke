@@ -4,8 +4,8 @@
 
 ## Features 
 
-### Getting all your tasks
-`list` will show a list of all tasks
+### UNLIMITED TASK STORAGE
+store up to 1TB of tasks!! (for all you busy bees out there)
 
 ### Storable, **WOW**
 have your lists from previous sessions stored and restored on reboots
