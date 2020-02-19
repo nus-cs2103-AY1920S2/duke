@@ -15,7 +15,7 @@ Tag tasks using the command tag.
 
 ### `Alias` - Create shortcut for commands.
 
-"alias: creates shortcut [alias] [command]"
+alias: creates shortcut [alias] [command]
 
 Example of usage: 
 alias b bye
