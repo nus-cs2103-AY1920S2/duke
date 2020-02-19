@@ -1,6 +1,8 @@
-# User Guide
+# About Duke
 Duke is a very simple CLI task management application.\
 Simple run the Java Jar file to start. Commands are listed below.
+
+#User Guide
 
 ## Features 
 
