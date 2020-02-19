@@ -44,7 +44,7 @@ Example of usage:
 
 Expected outcome:
 
-![Event](/docs/Event.png)
+![Event](https://github.com/loycatherine/duke/blob/master/docs/Event.png)
 
 ### `delete` - Deletes a task
 
