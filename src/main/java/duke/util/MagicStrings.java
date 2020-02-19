@@ -13,6 +13,7 @@ public class MagicStrings {
     public static final String DATE_TIME_YESTERDAY = "Yesterday ";
 
     // Error messages
+    public static final String ERROR_CANNOT_UNDO = "Failed to save your actions... You wont't be able to undo!";
     public static final String ERROR_COMMAND_MISSING_INDEX = "Your command needs the position of the task to "
             + "operate with!";
     public static final String ERROR_COMMAND_TOO_MANY_INDICES = "Your command can only work with a single index!";
@@ -36,6 +37,7 @@ public class MagicStrings {
     public static final String ERROR_FAIL_TO_LOAD_AND_SAVE = "Failed to load save file! "
             + "You will also not be able to save.";
     public static final String ERROR_FAIL_TO_SAVE = "Facing difficulties saving your tasks right now.";
+    public static final String ERROR_NO_MORE_UNDOS = "Sorry, you're all out of undos!";
     public static final String ERROR_RECURRING_TASK_MISSING_DEADLINE = "This recurring task "
             + "seem to have no deadline!";
     public static final String ERROR_SNOOZING_NON_DEADLINE = "You can't snooze a task with no deadline!";

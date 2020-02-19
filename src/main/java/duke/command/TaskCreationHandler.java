@@ -1,6 +1,8 @@
 package duke.command;
 
 import duke.exception.DuchessException;
+import duke.save.SaveState;
+import duke.save.SaveStateStack;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -43,9 +45,11 @@ public class TaskCreationHandler {
      * @param storage  Storage instance.
      * @throws DuchessException If the list fails to be saved.
      */
-    static String handleTodoCommand(String command, TaskList taskList,
-                                    Ui ui, Storage storage) throws DuchessException {
+    static String handleTodoCommand(String command, TaskList taskList, Ui ui, Storage storage,
+                                    SaveStateStack saveStateStack) throws DuchessException {
         Task newTask = getTaskFromCommand(command);
+        SaveState newSaveState = new SaveState(taskList, command);
+        saveStateStack.push(newSaveState);
         return saveTask(newTask, taskList, storage, ui);
     }
 
@@ -60,9 +64,11 @@ public class TaskCreationHandler {
      * @throws DuchessException If the list fails to be saved or /at [details] is
      *                          missing.
      */
-    static String handleEventCommand(String command, TaskList taskList,
-                                     Ui ui, Storage storage) throws DuchessException {
+    static String handleEventCommand(String command, TaskList taskList, Ui ui, Storage storage,
+                                     SaveStateStack saveStateStack) throws DuchessException {
         Task newTask = getTaskFromCommand(command, "/at");
+        SaveState newSaveState = new SaveState(taskList, command);
+        saveStateStack.push(newSaveState);
         return saveTask(newTask, taskList, storage, ui);
     }
 
@@ -77,9 +83,11 @@ public class TaskCreationHandler {
      * @throws DuchessException If the list fails to be saved or /by is missing or
      *                          the deadline is of an unrecognizable format.
      */
-    static String handleDeadlineCommand(String command, TaskList taskList,
-                                        Ui ui, Storage storage) throws DuchessException {
+    static String handleDeadlineCommand(String command, TaskList taskList, Ui ui, Storage storage,
+                                        SaveStateStack saveStateStack) throws DuchessException {
         Task newTask = getTaskFromCommand(command, "/by");
+        SaveState newSaveState = new SaveState(taskList, command);
+        saveStateStack.push(newSaveState);
         return saveTask(newTask, taskList, storage, ui);
     }
 

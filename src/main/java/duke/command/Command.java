@@ -1,9 +1,10 @@
 package duke.command;
 
+import duke.save.SaveStateStack;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.util.QuadFunction;
+import duke.util.QuintFunction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,16 +20,17 @@ public enum Command {
     LIST(TaskListCommandHandler::handleListCommand, "list", "l", "li"),
     DONE(TaskListCommandHandler::handleDoneCommand, "done", "d", "complete"),
     FIND(TaskListCommandHandler::handleFindCommand, "find", "f", "search"),
-    DELETE(TaskListCommandHandler::handleDeleteCommand, "delete", "d", "del"),
+    DELETE(TaskListCommandHandler::handleDeleteCommand, "delete", "del"),
     SNOOZE(TaskListCommandHandler::handleSnoozeCommand, "snooze"),
     SORT(TaskListCommandHandler::handleSortCommand, "sort", "s"),
     HELP(AdminCommandHandler::handleHelpCommand, "help", "h"),
+    UNDO(AdminCommandHandler::handleUndoCommand, "undo"),
     BYE(AdminCommandHandler::handleByeCommand, "bye", "exit", "quit");
 
     /**
      * Executes the command. Use {@code execute.apply} to run the function.
      */
-    public final QuadFunction<String, TaskList, Ui, Storage> execute;
+    public final QuintFunction<String, TaskList, Ui, Storage, SaveStateStack> execute;
 
     /**
      * Contains all valid user inputs that maps to this type of command.
@@ -41,7 +43,7 @@ public enum Command {
      *
      * @param execute The {@code QuadFunction} for the Command type.
      */
-    Command(QuadFunction<String, TaskList, Ui, Storage> execute, String... commands) {
+    Command(QuintFunction<String, TaskList, Ui, Storage, SaveStateStack> execute, String... commands) {
         this.execute = execute;
         this.commands = new ArrayList<>(Arrays.asList(commands));
     }

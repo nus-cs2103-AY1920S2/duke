@@ -221,6 +221,11 @@ public class Ui {
                 "Monday/Tuesday etc.");
     }
 
+    public String printUndoMessage(String lastCommand) {
+        return this.print("I've helped to fix your mistakes again. Your last command:",
+                lastCommand, "has been undone.");
+    }
+
     // Console Mode Specific Methods
 
     /**
@@ -246,7 +251,7 @@ public class Ui {
      * @param output String to print.
      */
     public void printToConsole(String output) {
-        System.out.print(output);
+        System.out.println(output);
     }
 
     /**

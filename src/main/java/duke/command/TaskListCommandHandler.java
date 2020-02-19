@@ -1,6 +1,8 @@
 package duke.command;
 
 import duke.exception.DuchessException;
+import duke.save.SaveState;
+import duke.save.SaveStateStack;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
@@ -34,8 +36,8 @@ public class TaskListCommandHandler {
      * @param ui       Ui instance.
      * @param storage  Storage instance.
      */
-    static String handleListCommand(String command, TaskList taskList,
-                                    Ui ui, Storage storage) throws DuchessException {
+    static String handleListCommand(String command, TaskList taskList, Ui ui, Storage storage,
+                                    SaveStateStack saveStateStack) throws DuchessException {
         assert Command.LIST.hasCommand(cleanAndLowerString(command)); // pre-condition
         return ui.printTaskList(taskList);
     }
@@ -51,10 +53,12 @@ public class TaskListCommandHandler {
      * @throws DuchessException If the list fails to be saved or the index is out of
      *                          bounds or the task is already completed.
      */
-    static String handleDoneCommand(String command, TaskList taskList,
-                                    Ui ui, Storage storage) throws DuchessException {
+    static String handleDoneCommand(String command, TaskList taskList, Ui ui, Storage storage,
+                                    SaveStateStack saveStateStack) throws DuchessException {
         int index = getIntegerFromCommand(command);
         checkBoundsOfIndex(index, taskList);
+        SaveState newSaveState = new SaveState(taskList, command);
+        saveStateStack.push(newSaveState);
         Task taskCompleted = taskList.completeTask(index - 1);
         storage.save(taskList);
         return ui.printTaskCompleted(taskCompleted);
@@ -70,7 +74,8 @@ public class TaskListCommandHandler {
      * @param ui       Ui instance.
      * @param storage  Storage instance.
      */
-    static String handleFindCommand(String command, TaskList taskList, Ui ui, Storage storage) {
+    static String handleFindCommand(String command, TaskList taskList, Ui ui,
+                                    Storage storage, SaveStateStack saveStateStack) {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         assert Command.FIND.hasCommand(cleanAndLowerString(commands.get(0))); // pre-condition
         ArrayList<Pair<Task, Integer>> filteredTaskList = taskList.find(cleanAndLowerString(commands.get(1)));
@@ -88,11 +93,13 @@ public class TaskListCommandHandler {
      * @throws DuchessException If the list fails to be saved or the index is out of
      *                          bounds.
      */
-    static String handleDeleteCommand(String command, TaskList taskList,
-                                      Ui ui, Storage storage) throws DuchessException {
+    static String handleDeleteCommand(String command, TaskList taskList, Ui ui, Storage storage,
+                                      SaveStateStack saveStateStack) throws DuchessException {
         int index = getIntegerFromCommand(command);
         checkBoundsOfIndex(index, taskList);
         Task taskToDelete = taskList.getTask(index - 1);
+        SaveState newSaveState = new SaveState(taskList, command);
+        saveStateStack.push(newSaveState);
         taskList.removeTask(index - 1);
         storage.save(taskList);
         return ui.printTaskDeleted(taskToDelete, taskList.size());
@@ -109,8 +116,8 @@ public class TaskListCommandHandler {
      * @throws DuchessException If the list fails to be saved or the index is out of
      *                          bounds or the task does not have a deadline to snooze.
      */
-    static String handleSnoozeCommand(String command, TaskList taskList,
-                                      Ui ui, Storage storage) throws DuchessException {
+    static String handleSnoozeCommand(String command, TaskList taskList, Ui ui, Storage storage,
+                                      SaveStateStack saveStateStack) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("/for", 2)));
         if (commands.size() < 2) {
             throw new DuchessException(ERROR_INVALID_SNOOZE_DURATION);
@@ -123,6 +130,8 @@ public class TaskListCommandHandler {
         }
         String duration = cleanAndLowerString(commands.get(1));
         TemporalAmount snoozePeriod = DurationParser.parseDuration(duration);
+        SaveState newSaveState = new SaveState(taskList, command);
+        saveStateStack.push(newSaveState);
         ((Deadline) taskToSnooze).snooze(snoozePeriod);
         storage.save(taskList);
         return ui.printTaskSnoozed(taskToSnooze, DurationParser.parseDurationToString(duration));
@@ -137,11 +146,13 @@ public class TaskListCommandHandler {
      * @param storage  Storage instance.
      * @throws DuchessException If the list is empty and has nothing to sort.
      */
-    static String handleSortCommand(String command, TaskList taskList,
-                                    Ui ui, Storage storage) throws DuchessException {
+    static String handleSortCommand(String command, TaskList taskList, Ui ui, Storage storage,
+                                    SaveStateStack saveStateStack) throws DuchessException {
         if (taskList.size() == 0) {
             throw new DuchessException(ERROR_SORTING_EMPTY_LIST);
         }
+        SaveState newSaveState = new SaveState(taskList, command);
+        saveStateStack.push(newSaveState);
         taskList.sort();
         storage.save(taskList);
         return ui.printTaskListSorted();
@@ -164,7 +175,7 @@ public class TaskListCommandHandler {
 
     private static void checkBoundsOfIndex(int index, TaskList taskList) throws DuchessException {
         boolean isIndexTooLow = index < 0;
-        boolean isIndexTooHigh = index >= taskList.size();
+        boolean isIndexTooHigh = index > taskList.size();
         if (isIndexTooLow || isIndexTooHigh) {
             throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);
         }

@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.exception.DuchessException;
 import duke.io.Parser;
+import duke.save.SaveStateStack;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -24,6 +25,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private String loadingErrorMessage;
+    private SaveStateStack saveStateStack;
 
     /**
      * Initialises a newly created {@code Duke} object that uses the
@@ -35,6 +37,7 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
+        this.saveStateStack = new SaveStateStack();
         try {
             this.taskList = new TaskList(this.storage.load());
         } catch (DuchessException e) {
@@ -56,6 +59,7 @@ public class Duke {
      */
     public Duke(String filePath, boolean isGui) {
         this.ui = new Ui();
+        this.saveStateStack = new SaveStateStack();
         try {
             this.storage = new Storage(filePath);
             this.taskList = new TaskList(this.storage.load());
@@ -82,7 +86,8 @@ public class Duke {
                 String fullCommand = this.ui.readCommand();
                 this.ui.printLine();
                 Command command = Parser.parse(fullCommand);
-                String response = command.execute.apply(fullCommand, this.taskList, this.ui, this.storage);
+                String response = command.execute.apply(fullCommand, this.taskList,
+                        this.ui, this.storage, this.saveStateStack);
                 this.ui.printToConsole(response);
                 if (command == Command.BYE) {
                     isRunning = false;
@@ -104,7 +109,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
-            return command.execute.apply(input, this.taskList, this.ui, this.storage);
+            return command.execute.apply(input, this.taskList, this.ui, this.storage, this.saveStateStack);
         } catch (DuchessException e) {
             return ui.printError(e.getMessage());
         }
