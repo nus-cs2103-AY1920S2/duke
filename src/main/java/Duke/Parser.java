@@ -44,6 +44,9 @@ public class Parser {
             outputString = statsCommand.execute(); //TODO: outputString in this class instead
         } else if (in.equals("help")) {
             Command helpCommand = new HelpCommand();
+            outputString = ((HelpCommand) helpCommand).executeSimple();
+        } else if (in.equals("help-detailed")) {
+            Command helpCommand = new HelpCommand();
             outputString = helpCommand.execute();
         } else {
             String taskType = in.split(" ", 2)[0];
