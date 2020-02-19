@@ -211,6 +211,7 @@ public class Ui {
                 "delete INDEX: Delete task at index.",
                 "sort: Sorts your list of tasks.",
                 "snooze INDEX /for DURATION: Pushes back deadline by given duration.",
+                "undo: Undo your last command that changed your tasks",
                 "bye: Bid farewell (sounds great!).",
                 "help: See this message again.",
                 new String(new char[45]).replace("\0", "-"),
@@ -218,7 +219,13 @@ public class Ui {
                 "d-m-YY e.g. 2-12-20",
                 "d-m-YY HHmm e.g. 2-12-20 1600",
                 "Today/Tonight/Tomorrow",
-                "Monday/Tuesday etc.");
+                "Monday/Tuesday etc.",
+                new String(new char[45]).replace("\0", "-"),
+                "Accepted frequency formats are:",
+                "Daily/Weekly/Biweekly/Fortnightly/Yearly",
+                new String(new char[45]).replace("\0", "-"),
+                "Accepted duration formats are:",
+                "[number] hours/days/weeks/months/years");
     }
 
     public String printUndoMessage(String lastCommand) {
