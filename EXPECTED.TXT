@@ -1,0 +1,94 @@
+    ______________________________________
+    Hello! I'm Duke
+    What can I do for you?
+    ______________________________________
+    ______________________________________
+    Sorry, I don't know what you mean. Try again?
+    ______________________________________
+    ______________________________________
+    Empty List. You are currently free! Upz lah!
+    ______________________________________
+    ______________________________________
+    Got it. I've added this task:
+    [T][✘] homework
+    Now you have 1 tasks in the list.
+    ______________________________________
+    ______________________________________
+    Whoa there! I need to know what you are "ToDo-ing"!
+    ______________________________________
+    ______________________________________
+    Got it. I've added this task:
+    [D][✘] Quiz (by: Friday 2359)
+    Now you have 2 tasks in the list.
+    ______________________________________
+    ______________________________________
+    Whoa there! I need to know what is the deadline!
+    ______________________________________
+    ______________________________________
+    Whoa there! I need to know what is the deadline!
+    ______________________________________
+    ______________________________________
+    Whoa there! I need to know when is the deadline! E.g. "deadline quiz /by 4 July
+    ______________________________________
+    ______________________________________
+    Got it. I've added this task:
+    [E][✘] Nat Day (at: 9 Aug)
+    Now you have 3 tasks in the list.
+    ______________________________________
+    ______________________________________
+    Whoa there! I need to know what's the event!
+    ______________________________________
+    ______________________________________
+    Got it. I've added this task:
+    [T][✘] eat sushi
+    Now you have 4 tasks in the list.
+    ______________________________________
+    ______________________________________
+    Got it. I've added this task:
+    [D][✘] proj deliverable (by: Wednesday 2359)
+    Now you have 5 tasks in the list.
+    ______________________________________
+    ______________________________________
+    Got it. I've added this task:
+    [E][✘] Bday (at: 10 Mar)
+    Now you have 6 tasks in the list.
+    ______________________________________
+    ______________________________________
+    1.[T][✘] homework
+    2.[D][✘] Quiz (by: Friday 2359)
+    3.[E][✘] Nat Day (at: 9 Aug)
+    4.[T][✘] eat sushi
+    5.[D][✘] proj deliverable (by: Wednesday 2359)
+    6.[E][✘] Bday (at: 10 Mar)
+    ______________________________________
+    ______________________________________
+    Nice! I've marked this task as done:
+    [T][✓] homework
+    ______________________________________
+    ______________________________________
+    1.[T][✓] homework
+    2.[D][✘] Quiz (by: Friday 2359)
+    3.[E][✘] Nat Day (at: 9 Aug)
+    4.[T][✘] eat sushi
+    5.[D][✘] proj deliverable (by: Wednesday 2359)
+    6.[E][✘] Bday (at: 10 Mar)
+    ______________________________________
+    ______________________________________
+    Nice! I've marked this task as done:
+    [E][✓] Nat Day (at: 9 Aug)
+    ______________________________________
+    ______________________________________
+    Noted! I've removed this task:
+    [D][✘] proj deliverable (by: Wednesday 2359)
+    Now you have 5 tasks in the list.
+    ______________________________________
+    ______________________________________
+    1.[T][✓] homework
+    2.[D][✘] Quiz (by: Friday 2359)
+    3.[E][✓] Nat Day (at: 9 Aug)
+    4.[T][✘] eat sushi
+    5.[E][✘] Bday (at: 10 Mar)
+    ______________________________________
+    ______________________________________
+    Bye. Hope to see you again soon!
+    ______________________________________

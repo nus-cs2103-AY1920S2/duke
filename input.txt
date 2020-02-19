@@ -1,0 +1,20 @@
+hello there
+list
+todo homework
+todo
+deadline Quiz /by Friday 2359
+deadline      /by
+deadline      /by dsadas
+deadline Test /by
+event Nat Day /at 9 Aug
+event    /at
+todo eat sushi
+deadline proj deliverable /by Wednesday 2359
+event Bday /at 10 Mar
+list
+done 1
+list
+done 3
+delete 5
+list
+bye
