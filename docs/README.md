@@ -3,6 +3,8 @@ Duke is a personalized to do list that helps you keeps track of the tasks you ha
 <br>
 Duke allows you to Add, Mark and Delete to manage your Todo, Deadline, Event and FixedDurationTask.
 
+![User interface](Ui.png)
+
 ## Table of Contents
 - [Requirements](#requirements)
 - [Features](#features)
