@@ -32,3 +32,6 @@ Duke is a personalized chatbot that enables user to store tasks in the form of t
 
 ### Exceptions
 If Duke cannot understand your message, Duke will reply the respective message to your command.
+
+### Acknowledgement
+Special thanks to @nus-cs2103-AY1920S2 for creating JavaFX tutorial!
