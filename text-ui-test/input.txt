@@ -1,0 +1,6 @@
+todo read book
+todo return book
+done 1
+deadline homework /by Sunday
+event project /at 6th Aug 2-4pm
+done 4

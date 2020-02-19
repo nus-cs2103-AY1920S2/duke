@@ -9,7 +9,7 @@ While we have produced a fully functional prototype, there are a few major probl
    Every small change requires us to rebuild and run the application.  
 
 1. Components are heavily dependent on each other:
-   Why does `Main` need to know that `DialogBox` needs a `Label`? 
+   Why does `Main` need to know that `Togepi.DialogBox` needs a `Label`?
    What happens if we change the `Label` to a custom `ColoredLabel` in the future?  
     
     We need to minimize the amount of information each control needs to know about another.
@@ -29,7 +29,7 @@ FXML is a XML-based language that allows us to define our user interface. Proper
 
 The FXML snippet define a TextField similar to the one that we programmatically defined previous in Tutorial 2. Notice how concise FXML is compared to the plain Java version.
 
-Let's return to Duke and convert it to use FXML instead.
+Let's return to Togepi.Duke and convert it to use FXML instead.
 
 # Rebuilding the Scene using FXML
 
@@ -60,7 +60,7 @@ Create the following files in `src/main/resources/view`:
 </AnchorPane>
 ```
 
-**DialogBox.fxml**
+**Togepi.DialogBox.fxml**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -94,14 +94,14 @@ We will get to that later.
  
    ![Controller for MainWindow](assets/MainWindowController.png)
 
-1. Let’s repeat the process for `DialogBox`.
-   The main difference here is that DialogBox checks `Use fx:root construct` and _does not define a controller class_. 
+1. Let’s repeat the process for `Togepi.DialogBox`.
+   The main difference here is that Togepi.DialogBox checks `Use fx:root construct` and _does not define a controller class_.
 
-   ![Settings for DialogBox](assets/DialogBoxController.png)
+   ![Settings for Togepi.DialogBox](assets/DialogBoxController.png)
 
 ## Using Controllers
 
-As part of the effort to separate the code handling Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
+As part of the effort to separate the code handling Togepi.Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
 We call these UI classes _controllers_. 
 
 Let's implement the `MainWindow` controller class that we specified in `MainWindow.fxml`.
@@ -128,7 +128,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Togepi.Duke Togepi;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -138,21 +138,21 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Togepi.Duke d) {
+        Togepi = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Togepi.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = Togepi.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                Togepi.DialogBox.getUserDialog(input, userImage),
+                Togepi.DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }
@@ -168,7 +168,7 @@ Similarly, methods like private methods like `handleUserInput` can be used in FX
 
 ## Using FXML in our application
 
-Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
+Let's create a new `Main` class as the bridge between the existing logic in `Togepi.Duke` and the UI in `MainWindow`.
 
 **Main.java**
 ```java
@@ -182,11 +182,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Togepi.Duke using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Togepi.Duke Togepi = new Togepi.Duke();
 
     @Override
     public void start(Stage stage) {
@@ -195,7 +195,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(Togepi);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -206,9 +206,9 @@ public class Main extends Application {
 
 Again, we can interact with the `AnchorPane` defined in the FXML as we would have if we created the `AnchorPane` ourselves.
 
-For our custom `DialogBox`, we did not define a controller so let's create a controller for it.
+For our custom `Togepi.DialogBox`, we did not define a controller so let's create a controller for it.
 
-**DialogBox.java**
+**Togepi.DialogBox.java**
 ```java
 import java.io.IOException;
 import java.util.Collections;
@@ -229,15 +229,15 @@ import javafx.scene.layout.HBox;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+public class Togepi.DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private Togepi.DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/Togepi.DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -259,23 +259,23 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static Togepi.DialogBox getUserDialog(String text, Image img) {
+        return new Togepi.DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static Togepi.DialogBox getDukeDialog(String text, Image img) {
+        var db = new Togepi.DialogBox(text, img);
         db.flip();
         return db;
     }
 }
 ```
 
-When we create a new instance of `DialogBox`, we set both the controller and root Node to `DialogBox`. 
-From this point onwards we can interact with `DialogBox` as we have in the previous tutorials.
+When we create a new instance of `Togepi.DialogBox`, we set both the controller and root Node to `Togepi.DialogBox`.
+From this point onwards we can interact with `Togepi.DialogBox` as we have in the previous tutorials.
 
-The last change that we have to make is to point our `Launcher` class in the right direction:
-In `Launcher.java`
+The last change that we have to make is to point our `Togepi.Launcher` class in the right direction:
+In `Togepi.Launcher.java`
 ```java
 //...    
 Application.launch(Main.class, args);
