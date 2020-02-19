@@ -1,0 +1,3 @@
+[T][✘] beat Elite Four
+[D][✘] deliver package    (by: Mar 22 2020)
+[E][✓] Game Freak Mew   (date: Mar 19 2016)

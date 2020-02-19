@@ -34,7 +34,7 @@ public  class Duke{
     public Duke() {
         storage = new Storage("save.txt");
         try {
-            tasks = new TaskList(storage.load());
+            tasks = storage.load();
         } catch (DukeException e) {
             Ui.showError(e);
             tasks = new TaskList();
@@ -130,7 +130,7 @@ public  class Duke{
                 return "Charmander ticks out the task.\n" + tasks.get(index);
             case DELETE:
                 index = Parser.parseIndex(input);
-                Task deleted = tasks.delete(index - 1);
+                Task deleted = tasks.delete(index);
                 storage.save(tasks);
                 return "Charmander used delete on the task\n" +
                         deleted + "\n" +
@@ -139,11 +139,14 @@ public  class Duke{
                 String keyword = Parser.parseWord(input);
                 TaskList found = tasks.find(keyword);
                 return "Charmander found the following tasks:\n" + tasks;
+            case UNDO:
+                tasks = storage.undo();
+                return "Charmander undoes your last command.";
             default:
                 Task newTask = Parser.parseTask(input);
                 tasks.add(newTask);
                 storage.save(tasks);
-                return "Charmander writes a task. You peek over and it says:" + newTask;
+                return "Charmander writes a task. You peek over and it says:\n" + newTask;
             }
         } catch (DukeException e) {
             Ui.showError(e);

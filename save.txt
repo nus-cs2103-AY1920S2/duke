@@ -1,11 +1,4 @@
-[T][✘] aaaaaaaaaaaaaa
-[E][✘] c           (date: Oct 10 2019)
-[E][✓] d           (date: Feb 2 2019)
-[D][✘] f          (by: Jan 1 0001)
-[T][✘] apples
-[E][✓] booooostah wolf         (date: Jul 3 0737)
-[T][✘] red
-[T][✘] green
-[T][✘] blue
-[T][✘] a
-[T][✘] hmm
+[T][✘] beat Elite Four
+[D][✘] deliver package     (by: Mar 22 2020)
+[E][✓] Game Freak Mew    (date: Mar 19 2016)
+[T][✘] evolve into charmeleon

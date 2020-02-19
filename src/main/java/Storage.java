@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -8,14 +9,16 @@ import java.util.List;
  * Saves and loads files as TaskList
  */
 public class Storage {
-    String filepath;
+    File saveFile;
+    File undoFile;
 
     /**
      * Creates a Storage object, which helps with saving and loading the list
      * @param filepath path of the savefile
      */
     public Storage(String filepath) {
-        this.filepath = filepath;
+        this.saveFile = new File(filepath);
+        this.undoFile = new File("save_undo.txt");
     }
 
     private static Task stringToTask(String string) {
@@ -56,10 +59,10 @@ public class Storage {
      * @return the loaded list of Tasks
      * @throws DukeException if the save file doesn't exist
      */
-    public List<Task> load() throws DukeException{
+    public TaskList load() throws DukeException{
         List<Task> taskList = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(saveFile))) {
             String line = reader.readLine();
             while(line != null) {
                 Task task = stringToTask(line);
@@ -71,7 +74,7 @@ public class Storage {
             throw new DukeException("Something's wrong with loading the save file...");
         }
 
-        return taskList;
+        return new TaskList(taskList);
 
     }
 
@@ -82,13 +85,27 @@ public class Storage {
      */
     public void save(TaskList tasks) throws DukeException{
         try {
-            PrintWriter pw = new PrintWriter(new FileOutputStream(filepath));
+            undoFile.delete();
+            saveFile.renameTo(undoFile);
+            //Files.move(saveFile.toPath(), undoFile.toPath());
+
+            PrintWriter pw = new PrintWriter(new FileOutputStream(saveFile));
             for (int i = 0; i < tasks.size(); i++) {
                 pw.println(tasks.get(i));
             }
             pw.close();
-        } catch (FileNotFoundException e) {
-            throw new DukeException("Something's wrong with saving the save file...");
+        } catch (IOException e) {
+            throw new DukeException("Something's wrong with saving the save or undo file...");
+        }
+    }
+
+    public TaskList undo() throws DukeException{
+        if (undoFile.exists()) {
+            saveFile.delete();
+            undoFile.renameTo(saveFile);
+            return load();
+        } else {
+            throw new DukeException("Charmander can only remember one undo!");
         }
     }
 }

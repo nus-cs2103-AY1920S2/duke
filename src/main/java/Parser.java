@@ -37,7 +37,7 @@ public class Parser {
             throw new DukeException("Charmander needs a number!");
         }
 
-        return index;
+        return index - 1; // displayed list starts at 1
     }
 
     /**
