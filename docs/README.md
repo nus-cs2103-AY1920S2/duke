@@ -44,6 +44,7 @@
 * Format: `find <STRING>`
 * Find and return the tasks whose names contain **STRING**.
 * Example: `find soc`
+
 #### Advanced `find`
 * Format: `find /TASK_TYPE <STRING>`
 * Find and return the tasks with type **TASK_TYPE** whose names contain **STRING**.
