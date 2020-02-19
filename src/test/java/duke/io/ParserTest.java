@@ -28,6 +28,7 @@ public class ParserTest {
         assertEquals(Command.FIND, Parser.parse("find run"));
         assertEquals(Command.DELETE, Parser.parse("delete 2"));
         assertEquals(Command.HELP, Parser.parse("help"));
+        assertEquals(Command.SNOOZE, Parser.parse("snooze 3 /for 3 weeks"));
     }
 
     /**
