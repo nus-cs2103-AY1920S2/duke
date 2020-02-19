@@ -16,7 +16,8 @@ public class Main extends Application {
 
     private static Stage stage;
 
-    private static final String filepath = System.getProperty("user.dir") + "\\duke.txt";
+    private static final String filepath = System.getProperty("user.dir")
+            + System.getProperty("file.separator") + "duke.txt";
 
     private Duke duke = new Duke(filepath);
 
