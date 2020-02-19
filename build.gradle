@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+plugins {
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+group 'seedu.duke'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    // Change this to your main class.
+    mainClassName = "main.java.Duke"
+}
+
+run {
+    standardInput = System.in
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+//cant find file on gradle but can find on javac
+//try to clean up packaging issue

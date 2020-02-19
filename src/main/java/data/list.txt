@@ -1,0 +1,8 @@
+[E][✓]bday partee /at 2020-12-12 12:30
+[T][✓]luv timmy chalamet
+[T][✓]watch the king
+[T][✓]timmy hehheehheh
+[T][✓]watch timmy host oscars
+[D][✓]write a book /by 2020-12-12
+[E][✘]wedding /at 2020-12-12 12:30
+[D][✘]jar /by 2020-12-12 12:30
