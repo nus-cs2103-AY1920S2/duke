@@ -31,6 +31,7 @@ public class MainWindow extends AnchorPane {
             + "Hello! I'm Luke\n"
             + "How may i serve you.";
     private static final long delayDuration = 2000;
+    private boolean disableInput=false;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/stormtrooper.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/luke.png"));
@@ -56,15 +57,18 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
-        if (input.equals(TERMINATE)) {
-            exit();
+        if(!disableInput) {
+            String input = userInput.getText();
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            userInput.clear();
+            if (input.equals(TERMINATE)) {
+                disableInput=true;
+                exit();
+            }
         }
     }
 
