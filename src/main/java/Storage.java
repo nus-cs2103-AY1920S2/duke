@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,6 +25,22 @@ public class Storage {
      * @param filePath The file path to the file to load the tasks in from.
      */
     public Storage(Path filePath) {
+        if (!Files.exists(filePath)) {
+            Path dataPath = Paths.get("", "data");
+            if (!Files.exists(dataPath)) {
+                try {
+                    Files.createDirectories(dataPath);
+                } catch (IOException e) {
+                    System.err.println(e);
+                }
+            }
+            String emptyString = "";
+            try {
+                Files.write(filePath, emptyString.getBytes());
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
         this.filePath = filePath;
     }
 

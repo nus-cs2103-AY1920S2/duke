@@ -34,8 +34,7 @@ public class Duke {
      * Empty constructor for JavaFx GUI to run.
      */
     public Duke() {
-        this(java.nio.file.Paths.get(System.getProperty("user.home"),
-                "IdeaProjects", "duke", "data", "tasks.txt"));
+        this(java.nio.file.Paths.get("", "data", "tasks.txt"));
     }
 
     /**
