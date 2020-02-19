@@ -17,7 +17,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗");
+        return (isDone ? "\u2714" : "\u274C");
     }
 
     public String store() {

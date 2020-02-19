@@ -34,8 +34,10 @@ public class Deadline extends Task {
         if (strArr[1].equals("1")) {
             t.setDone();
         }
-        String tag = strArr[4];
-        t.setTag(tag);
+        if (strArr.length > 4) {
+            String tag = strArr[4];
+            t.setTag(tag);
+        }
         return t;
     }
 

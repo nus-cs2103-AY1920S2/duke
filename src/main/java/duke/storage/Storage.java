@@ -1,13 +1,13 @@
 package duke.storage;
 
+import duke.exception.DukeException;
+import duke.tasks.*;
+
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
-
-import duke.tasks.*;
-import duke.exception.DukeException;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Provides functionality for reading and writing from storage file.
@@ -34,6 +34,7 @@ public class Storage {
         List<Task> taskList = new ArrayList<>();
         try {
             Scanner scan = new Scanner(data);
+            System.out.println("Scanner on data ok");
             while (scan.hasNext()) {
                 String elementLine = scan.nextLine();
                 String[] elements = elementLine.split("\\|");
@@ -55,6 +56,7 @@ public class Storage {
             scan.close();
             return new TaskList(taskList);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new DukeException("Error building task list from file path. Creating new task.txt");
         }
     }

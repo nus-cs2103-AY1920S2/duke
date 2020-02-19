@@ -20,8 +20,10 @@ public class Todo extends Task {
         if (strArr[IS_DONE_BOOLEAN_INDEX].equals("1")) {
             t.setDone();
         }
-        String tag = strArr[3];
-        t.setTag(tag);
+        if (strArr.length > 3) {
+            String tag = strArr[3];
+            t.setTag(tag);
+        }
         return t;
     }
 

@@ -39,7 +39,7 @@ test {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.main.Duke"
+    mainClassName = "duke.main.Launcher"
 }
 
 run {

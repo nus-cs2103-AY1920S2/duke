@@ -146,7 +146,6 @@ public class Duke extends Application {
      * Executes the main function of Duke.
      */
     public void run() {
-        ui.welcomeUser();
         boolean isExit = false;
         while (!isExit) {
             try {

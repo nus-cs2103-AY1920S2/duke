@@ -21,7 +21,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch(IOException e) {
-            System.out.println("ncrwjke");
+            System.out.println("Aiyo! Exception.");
             e.printStackTrace();
         }
     }
