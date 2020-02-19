@@ -59,7 +59,7 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Remove the task at the specific index from the inner-list.
+     * Removes the task at the specific index from the inner-list.
      * @param position A position within the bound of the list.
      * @return response of the remove action.
      */
@@ -133,6 +133,14 @@ public class TaskList implements Iterable<Task> {
             }
         }
         return tasksOnDate.toString();
+    }
+
+    /**
+     * Returns the size of the intertalist.
+     * @return the size of the intertalist.
+     */
+    public int size() {
+        return internalList.size();
     }
 
     /**

@@ -30,6 +30,9 @@ public class AddEventCommand extends Command {
     @Override
     public String execute() throws NoDescriptionException {
         Task taskToAdd = new EventTask(description, at);
-        return this.taskList.add(taskToAdd);
+
+        String commandResult = this.taskList.add(taskToAdd);
+        assert this.taskList.size() > 0: "task not added";
+        return commandResult;
     }
 }

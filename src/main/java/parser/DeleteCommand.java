@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute() {
+        assert this.taskList.size() > 0: "task list is empty, cannot delete";
         return this.taskList.remove(this.position);
     }
 }
