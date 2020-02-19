@@ -4,23 +4,27 @@ import duke.exception.DuchessException;
 import duke.util.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
 import static duke.util.MagicStrings.ERROR_TASK_ALREADY_COMPLETED;
+import static duke.util.MagicStrings.ERROR_TASK_CREATED_BEFORE;
 
 /**
  * The {@code TaskList} object helps to store and manage {@code Task}s.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+    private HashMap<String, Boolean> taskDescriptions;
 
     /**
      * Initialises an empty {@code TaskList}.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
+        this.taskDescriptions = new HashMap<>();
     }
 
     /**
@@ -30,6 +34,10 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+        this.taskDescriptions = new HashMap<>();
+        for (Task task : this.tasks) {
+            taskDescriptions.put(task.description.trim().toLowerCase(), true);
+        }
     }
 
     /**
@@ -46,7 +54,10 @@ public class TaskList {
      *
      * @param task {@code Task} to be added.
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws DuchessException {
+        if (this.taskDescriptions.containsKey(task.description.trim().toLowerCase())) {
+            throw new DuchessException(ERROR_TASK_CREATED_BEFORE);
+        }
         this.tasks.add(task);
     }
 
