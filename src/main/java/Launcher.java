@@ -1,5 +1,4 @@
-package Frontend;
-
+import Frontend.Main;
 import javafx.application.Application;
 
 /**

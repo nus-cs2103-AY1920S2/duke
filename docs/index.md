@@ -6,7 +6,7 @@
 
 [![DUKE GENERIC SCREENSHOT](https://raw.githubusercontent.com/waynewee/duke/master/screenshots/generic.png)]()
 
----
+
 ## User Guide
 
 > Overwhelmed by the extensive features? The following materials might help:

@@ -2,7 +2,7 @@ package Frontend.Constants;
 
 public final class Config {
 
-    public static final String APP_TITLE = "Duke v1.0";
+    public static final String APP_TITLE = "Duke v2.0";
 
     public static final String DUKE_IMG_PATH = "/images/DaDuke.png";
 

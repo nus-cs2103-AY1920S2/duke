@@ -76,8 +76,8 @@ public class Frontend.Main extends Application {
 
 Note how we have created a `Label` to contain the text that we want to show. We then create the `Scene` and set its content. Finally, we set the stage and show it. 
 
-Next, we create another Java class, `Frontend.Launcher`, as an entry point to our application.
-The `Frontend.Launcher` class is reproduced below in its entirety.
+Next, we create another Java class, `Launcher`, as an entry point to our application.
+The `Launcher` class is reproduced below in its entirety.
 
 ```java
 import javafx.application.Application;
@@ -85,14 +85,14 @@ import javafx.application.Application;
 /**
  * A launcher class to workaround classpath issues.
  */
-public class Frontend.Launcher {
+public class Launcher {
     public static void main(String[] args) {
         Application.launch(Frontend.Main.class, args);
     }
 }
 ```
 
-Run `Frontend.Launcher` and you should see something like this:
+Run `Launcher` and you should see something like this:
 
 ![Hello World](assets/HelloWorld.png) 
 
