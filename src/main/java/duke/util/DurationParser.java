@@ -11,7 +11,22 @@ import java.util.Arrays;
 import static duke.util.MagicStrings.ERROR_INVALID_SNOOZE_DURATION;
 import static duke.util.MagicStrings.ERROR_INVALID_UNIT_OF_TIME;
 
+/**
+ * The {@code DurationParser} is a helper class with static methods to parse
+ * user provided inputs into {@code TemporalAmount} and {@code String} objects.
+ */
 public class DurationParser {
+    /**
+     * Returns a {@code TemporalAmount} object based on the given
+     * {@code userInput}.
+     *
+     * <p>Allowed formats for {@code TemporalAmount} are durations such as "1 hour",
+     * "3 weeks", "4 days", "1 month", "2 years", etc.
+     *
+     * @param userInput User provided input in {@code String} format.
+     * @return {@code TemporalAmount} object based on given {@code userInput}.
+     * @throws DuchessException If {@code userInput} is not of the correct format.
+     */
     public static TemporalAmount parseDuration(String userInput) throws DuchessException {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList(userInput.split("\\s", 2)));
         if (inputs.size() < 2) {
@@ -44,6 +59,16 @@ public class DurationParser {
         }
     }
 
+    /**
+     * Returns a {@code String} object based on the given {@code userInput}.
+     *
+     * <p>Allowed formats for {@code TemporalAmount} are durations such as "1 hour",
+     * "3 weeks", "4 days", "1 month", "2 years", etc.
+     *
+     * @param userInput User provided input in {@code String} format.
+     * @return {@code String} object based on given {@code userInput}.
+     * @throws DuchessException If {@code userInput} is not of the correct format.
+     */
     public static String parseDurationToString(String userInput) throws DuchessException {
         ArrayList<String> inputs = new ArrayList<>(Arrays.asList(userInput.split("\\s", 2)));
         if (inputs.size() < 2) {
@@ -54,23 +79,23 @@ public class DurationParser {
         case "hour":
             // Fallthrough
         case "hours":
-            return String.valueOf(value) + " hour" + (value > 1 ? "s" : "");
+            return value + " hour" + (value > 1 ? "s" : "");
         case "day":
             // Fallthrough
         case "days":
-            return String.valueOf(value) + " day" + (value > 1 ? "s" : "");
+            return value + " day" + (value > 1 ? "s" : "");
         case "week":
             // Fallthrough
         case "weeks":
-            return String.valueOf(value) + " week" + (value > 1 ? "s" : "");
+            return value + " week" + (value > 1 ? "s" : "");
         case "month":
             // Fallthrough
         case "months":
-            return String.valueOf(value) + " month" + (value > 1 ? "s" : "");
+            return value + " month" + (value > 1 ? "s" : "");
         case "year":
             // Fallthrough
         case "years":
-            return String.valueOf(value) + " year" + (value > 1 ? "s" : "");
+            return value + " year" + (value > 1 ? "s" : "");
         default:
             throw new DuchessException(ERROR_INVALID_UNIT_OF_TIME);
         }

@@ -52,7 +52,7 @@ public class Deadline extends Task {
     /**
      * Snoozes the deadline by the given amount of time.
      *
-     * @param snoozePeriod
+     * @param snoozePeriod The amount of time to snooze the deadline for.
      */
     public void snooze(TemporalAmount snoozePeriod) {
         this.deadline = this.deadline.plus(snoozePeriod);

@@ -151,9 +151,16 @@ public class Ui {
         return this.print("Oh? You actually completed something? Impressive...", task.toString());
     }
 
+    /**
+     * Returns the task snoozed message formatted appropriately.
+     *
+     * @param task         The task that is snoozed.
+     * @param snoozePeriod The duration that the task was snoozed for.
+     * @return The success message {@code String}.
+     */
     public String printTaskSnoozed(Task task, String snoozePeriod) {
-        return this.print("Behind schedule as always... " +
-                "I've pushed back the deadline for you by " + snoozePeriod, task.toString());
+        return this.print("Behind schedule as always... "
+                + "I've pushed back the deadline for you by " + snoozePeriod + ".", task.toString());
     }
 
     /**
