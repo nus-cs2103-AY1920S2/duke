@@ -1,8 +1,10 @@
-User Guide 
-1.Features
-_Todo, Deadline, Event, Done, Find**_ 
+# **User Guide**
 
-1.1 Todo    
+## 1.Features
+
+### _Todo, Deadline, Event, Done, Find**_ 
+
+####1.1 Todo   
     todo is a task without any time or deadlines assigned to: 
     Example: user can add a todo task -- Visit NTU 
     Format: Todo [activity]
@@ -13,7 +15,7 @@ _Todo, Deadline, Event, Done, Find**_
                      Now you have 1 task in the list
                      ----------
        
-1.2 Deadline
+####1.2 Deadline
     Deadline is deadline task with a date is assigned to
     Format: deadline [activity] [/by yyyy-mm-dd]
     Usage: deadline return book /by 2019-10-19
@@ -22,7 +24,7 @@ _Todo, Deadline, Event, Done, Find**_
                     Now you have 2 task in the list
                     -------
                  
-1.3 Event
+####1.3 Event
     Event is a event task with a date is assigned to it. 
     Format: event [activity] [/at yyyy-mm--dd]
     Usage: event project meeting /at 2019-12-24
@@ -32,7 +34,7 @@ _Todo, Deadline, Event, Done, Find**_
                      -------
 
 
-1.4 List 
+####1.4 List 
     Display all the task in the list 
     Format:list
     Usage: list
@@ -42,7 +44,7 @@ _Todo, Deadline, Event, Done, Find**_
                     3. [E][NotDone] project meeting (Tue, Dec 24 2019)
                     -----------------------
                          
-1.5 Done 
+####1.5 Done 
     Done command is used to update a task status in the task list 
     Format: done [index of task]
     Usage done 1 
@@ -52,7 +54,7 @@ _Todo, Deadline, Event, Done, Find**_
                      3. [E][NotDone] project meeting (Tue, Dec 24 2019)
                      -----------------------
                      
-1.6 Find 
+####1.6 Find 
     Find command allows user to search his/her task with keywords entered. The apps will return matching words
     Format: find [keywords]
     Usage: find visit
@@ -61,7 +63,7 @@ _Todo, Deadline, Event, Done, Find**_
                     1.[T][NoDone] visit NTU tag:
                     -------------------
                     
-1.7 Tag
+####1.7 Tag
     Add a tag to the task 
     Format: tag [keywords] as [#tag]
     Usage tag visit as work 
@@ -69,7 +71,7 @@ _Todo, Deadline, Event, Done, Find**_
                     the tag work is successfully added to visit NTU 
                     -------------------
  
-1.8 Delete 
+####1.8 Delete 
     delete command allows user to deleta a task or event or deadline that he entered
     Format: delete [index of task]
     Usage delete 2
