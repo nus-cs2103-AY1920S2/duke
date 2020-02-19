@@ -18,7 +18,7 @@ This product is a Personal Assistant Chatbot that helps a person keep track of v
 ## <a name="quick-start"></a> Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest [duke.jar](https://github.com/FangShaoHua94/duke/releases/tag/v0.3) here.
+1. Download the latest [duke.jar](https://github.com/FangShaoHua94/duke/releases/tag/v0.5) here.
 
 1. Copy the file to the folder you want to use as the home folder for your Address Book.
 
