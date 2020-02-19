@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskListTest {
+
+    HistoryManager historyManager = new HistoryManager();
+
     @Test
     public void getTaskListSizeTest() {
         ArrayList<Task> t = new ArrayList<>();
@@ -23,7 +26,7 @@ public class TaskListTest {
         t.add(new ToDo("Test4"));
         t.add(new ToDo("Test5"));
         TaskList list = new TaskList(t);
-        Task deleted = list.deleteTask(3);
+        Task deleted = list.deleteTask(3, historyManager);
         assertEquals("Test3", deleted.getTaskName());
     }
 

@@ -13,6 +13,11 @@ public class HistoryManager {
         return this.history.size() != 0;
     }
 
+    /**
+     * Performs a deep copy of the current list.
+     * @param list of the current tasks.
+     * @return duplicated task list.
+     */
     public TaskList copyList(TaskList list) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task task : list.getTaskList()) {
@@ -25,13 +30,22 @@ public class HistoryManager {
         return new TaskList(tasks);
     }
 
+    /**
+     * Adds the state of the list to the stack for future undo.
+     * @param current current state of the list.
+     */
     public void addState(TaskList current) {
-       if (!this.canAdd()) {
-           this.history.removeLast();
-       }
-       this.history.addFirst(this.copyList(current));
+        if (!this.canAdd()) {
+            this.history.removeLast();
+        }
+        this.history.addFirst(this.copyList(current));
     }
 
+    /**
+     * Gets the last state of the task list.
+     * @param current current tasklist.
+     * @return if no last state, then return the current state.
+     */
     public TaskList getLastState(TaskList current) {
         if (canUndo()) {
             return this.history.removeFirst();
@@ -40,13 +54,18 @@ public class HistoryManager {
         }
     }
 
+    /**
+     * Performs a deep copy of the task.
+     * @param task to be copied.
+     * @return deep copy of the task.
+     */
     public Task copyTask(Task task) {
         if (task instanceof ToDo) {
             return new ToDo(task.getTaskName(), task.getPriority());
         } else if (task instanceof Deadline) {
-            return new Deadline(task.getTaskName(),((Deadline) task).getDateTime() ,task.getPriority());
+            return new Deadline(task.getTaskName(), ((Deadline) task).getDateTime(), task.getPriority());
         } else {
-            return new Event(task.getTaskName(), ((Event)task).getDateTime() ,task.getPriority());
+            return new Event(task.getTaskName(), ((Event)task).getDateTime(), task.getPriority());
         }
     }
 }

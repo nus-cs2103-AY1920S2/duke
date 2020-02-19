@@ -18,6 +18,11 @@ public class UndoCommand extends Command {
         }
     }
 
+    /**
+     * Transfers the last state list to current state.
+     * @param list current list.
+     * @param previousState previous list.
+     */
     public void transferList(TaskList list, TaskList previousState) {
         ArrayList<Task> destination = list.getTaskList();
         ArrayList<Task> source = previousState.getTaskList();

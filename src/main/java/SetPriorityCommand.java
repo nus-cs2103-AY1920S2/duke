@@ -30,13 +30,19 @@ public class SetPriorityCommand extends Command {
         }
     }
 
+    /**
+     * Extracts the priority inputted to numbers.
+     * @param inputPriority the String inputted.
+     * @return int value where 1 is high, 2 is medium and 3 is low.
+     * @throws DukeException if the input string is not recognized.
+     */
     public int extractPriority(String inputPriority) throws DukeException {
         String toLower = inputPriority.trim().toLowerCase();
         if (toLower.contains("high")) {
             return 3;
         } else if (toLower.contains("medium")) {
             return 2;
-        } else if (toLower.contains("low")){
+        } else if (toLower.contains("low")) {
             return 1;
         } else {
             throw new DukeException("Invalid input of priority!");

@@ -23,6 +23,12 @@ public class Deadline extends Task {
         this.constructDate(dateTime);
     }
 
+    /**
+     * Contructor for the Deadline task.
+     * @param taskName description of the deadline.
+     * @param dateTime date and time when the task is due.
+     * @param priority priority of the deadline.
+     */
     public Deadline(String taskName, String dateTime, int priority) {
         super(taskName, "D", priority);
         this.dateTime = dateTime;

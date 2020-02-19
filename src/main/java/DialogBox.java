@@ -38,15 +38,16 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Group rootGroup = new Group();
+
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
-
         // add circular frame to image of duke or user
         Circle circle = new Circle(49);
         circle.setStroke(Color.LIGHTPINK);
         circle.setFill(new ImagePattern(img));
         circle.setEffect(new DropShadow(+25d, 0d, +2d, Color.DEEPPINK));
+
+        Group rootGroup = new Group();
         rootGroup.getChildren().add(circle);
         imageGroup.getChildren().add(rootGroup);
     }

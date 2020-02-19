@@ -12,7 +12,7 @@ public class ToDo extends Task {
     }
 
     public ToDo(String taskName, int priority) {
-        super (taskName, "T", priority);
+        super(taskName, "T", priority);
     }
 
     @Override

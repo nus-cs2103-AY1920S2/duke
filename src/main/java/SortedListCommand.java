@@ -35,12 +35,21 @@ public class SortedListCommand extends Command {
         return listings;
     }
 
+    /**
+     * Initialize the HashMap to store the priorities.
+     * @param map map containing the events from low to high priority.
+     */
     public void initializeHashMap(HashMap<Integer, ArrayList<Task>> map) {
         map.put(1, new ArrayList<Task>());
         map.put(2, new ArrayList<Task>());
         map.put(3, new ArrayList<Task>());
     }
 
+    /**
+     * Get the String representation of the priority.
+     * @param priority int value.
+     * @return String representation.
+     */
     public String getPriorityString(int priority) {
         if (priority == 1) {
             return "LOW";

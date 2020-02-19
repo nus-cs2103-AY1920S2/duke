@@ -66,7 +66,7 @@ public class Storage {
         Task result;
         switch (taskType) {
         case "T":
-            result = new ToDo(contents[2], Integer.parseInt(contents[3])); //as the file is hardcoded, the contents[2] should be the description
+            result = new ToDo(contents[2], Integer.parseInt(contents[3]));
             break;
         case "E":
             result = new Event(contents[2], contents[3], Integer.parseInt(contents[4]));

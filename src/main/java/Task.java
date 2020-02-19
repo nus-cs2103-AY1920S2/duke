@@ -21,6 +21,12 @@ public abstract class Task {
         this.priority = 2;
     }
 
+    /**
+     * Constructor.
+     * @param taskName name of task.
+     * @param taskType what type is it.
+     * @param priority what priority does the task hold.
+     */
     public Task(String taskName, String taskType, int priority) {
         this.taskName = taskName;
         this.taskType = taskType;
@@ -65,6 +71,11 @@ public abstract class Task {
         return this.priority;
     }
 
+    /**
+     * Set the priority of task.
+     * @param priority priority to be set.
+     * @return if the priority has been successfully changed.
+     */
     public boolean setPriority(int priority) {
         if (this.priority == priority) {
             return false;
@@ -74,6 +85,10 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Returns String representation of priority.
+     * @return String representation.
+     */
     public String getPriorityString() {
         if (this.priority == 1) {
             return "LOW";

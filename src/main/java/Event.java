@@ -19,8 +19,8 @@ public class Event extends Task {
     }
 
     public Event(String taskName, String dateTime, int priority) {
-       super(taskName, "E", priority);
-       this.dateTime = dateTime;
+        super(taskName, "E", priority);
+        this.dateTime = dateTime;
     }
 
     @Override
