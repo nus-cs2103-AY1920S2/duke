@@ -16,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            stage.setTitle("NUS-Duke");
+            stage.setTitle("NUS-Duke task manager");
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

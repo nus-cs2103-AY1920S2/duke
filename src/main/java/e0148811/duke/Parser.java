@@ -20,4 +20,8 @@ public class Parser {
     public String[] breakIntoWords() {
         return currentLine.split(" ");
     }
+
+    public String getCurrentLine() {
+        return currentLine;
+    }
 }

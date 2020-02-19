@@ -3,11 +3,11 @@ package e0148811.duke;
 public class Ui {
     TaskList tasks;
 
-    static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String LOGO = " ____         __        \n"
+                                    + "|  _ \\ _   _  | | _____ \n"
+                                    + "| | | | | | | | |/ / __ \\\n"
+                                    + "| |_| | |_| | |   <  ___/\n"
+                                    + "|____/ \\____| |_|\\_\\____|\n";
     static final String FORMAT_CORRECTION = "Invalid format for the instruction you gave.\n"
             + "The correct format should be ";
 
@@ -29,13 +29,13 @@ public class Ui {
         System.out.println(LOGO);
     }
 
-    public void greet() {
-        System.out.println("Hello, this is NUS-Duke. "
-                + "Please give me an instruction followed by relevant description.");
+    public static String greet() {
+        return "Hello, this is NUS-Duke. "
+                + "Please give me an instruction followed by relevant description.\n";
     }
 
-    public void sayGoodbye() {
-        System.out.println("Goodbye. See you next time!");
+    public String sayGoodbye() {
+        return "Goodbye. See you next time!";
     }
 
     public void printErrorMessage(Exception e) {
@@ -62,7 +62,7 @@ public class Ui {
 
     public void throwUnknownCommandException() throws DukeException {
         throw new DukeException("I don't understand this instruction.\n"
-                + "The valid instructions include: b/bye, c/clear, d/deadline, " +
+                + "The valid instructions include: bye, c/clear, d/deadline, " +
                 "done, e/vent, f/find, l/list, p/priority, r/remove, t/todo");
     }
 }
