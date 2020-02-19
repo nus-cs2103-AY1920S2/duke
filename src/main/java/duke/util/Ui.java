@@ -132,7 +132,7 @@ public class Ui {
                 + "- tag [task number] [tag]: add one tag to this task.\n"
                 + "- delete [task number]: delete this task from your list.\n"
                 + "- find [keywords]: find all tasks containing the keywords.\n"
-                + "- exit: say goodbye!\n";
+                + "- bye: say goodbye!\n";
     }
 
     /**
