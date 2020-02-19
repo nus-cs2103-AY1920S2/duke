@@ -21,7 +21,7 @@ public class Parser {
      * The formatter used for the file data format.
      */
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter
-            .ofPattern("MMM d yyyy ha");
+            .ofPattern("MMM d yyyy hhmma");
 
     /**
      * Creates a new Ui object to access functions.

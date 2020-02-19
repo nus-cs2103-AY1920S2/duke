@@ -163,6 +163,9 @@ public class TaskList {
      */
     public String update(int index, String time, DateTimeFormatter format) {
         Task task = newList.get(index);
+        if (task.getClass().getSimpleName().equals("ToDo")) {
+            return ("Sorry, a ToDo does not have any timing to update.\n");
+        }
         task.update(time, format);
         return ("Noted. I've updated this task:\n" + task.toString() + "\n");
     }

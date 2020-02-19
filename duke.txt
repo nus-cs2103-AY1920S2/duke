@@ -3,6 +3,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 T | N | THE DUKE.TXT FOR GRADLE IS HERE
 =======
 T | N | read book
@@ -61,3 +62,8 @@ T | Y | test
 =======
 T | N | test again
 >>>>>>> ab1211f... draft README
+=======
+E | N | test | Feb 19 2020 1159PM
+D | N | test2 | Feb 19 2020 1159PM
+T | N | test
+>>>>>>> 4952496... updated Ui.png
