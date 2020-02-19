@@ -166,7 +166,9 @@ public class Parser {
      */
     public String parse(String command) {
         try {
-            if (command.contains("done")) {
+            if (command.equals("manual")) {
+                return ui.printManual();
+            } else if (command.contains("done")) {
                 return handleDone(command);
             } else if (command.contains("todo")) {
                 return handleTodo(command);

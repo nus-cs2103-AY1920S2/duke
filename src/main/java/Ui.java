@@ -18,7 +18,7 @@ public class Ui {
      */
     public String printGuiWelcome() {
         return "Hello!! " + "\u263A" + " I am DukeBot, ready to receive your commands!!\n\n" + "You may type 'manual' "
-                + "you need help!";
+                + "if you need help!";
     }
 
     /**
@@ -137,5 +137,36 @@ public class Ui {
      */
     public String printUpdatingDone() {
         return "Updating done! Key 'list' again to check:)";
+    }
+
+    /**
+     *Prints out information about all possible commands that the user can input.
+     *
+     * @return message showing all possible commands that the user can input, and example inputs.
+     */
+    public String printManual() {
+        String helpMsg = "Don't be shy to ask for help!! \nThese are the commands that I can understand, please "
+                + "follow them so I can reply to you accordingly!^-^";
+        String todoTask = "1. todo "  + "\n" + "- To add a Todo task to the task list, with the corresponding "
+                + "description of the task\n" + "e.g. 'todo exercise'";
+        String deadlineTask = "2. deadline " + "\n" + "- To add a Deadline task to the task list, with the description "
+                + "and the corresponding date and time at which the task is due\n" + "e.g. 'deadline Assignment 1 /by "
+                + "2020-02-01 1200'";
+        String eventTask = "3. event " + "\n" + "- To add a Event task to the task list, with the description and the "
+                + "timing details of the event\n" + "'e.g. event meeting /at "
+                + "Sunday 2pm'";
+        String listCommand = "4. list " + "\n" + "- To list out all lists available in the task list\n" + "e.g. 'list'";
+        String doneCommand = "5. done " + "\n" + "- To mark a task as completed, with its index specified" + "\n"
+                + "e.g. 'done 1' (this will mark the first task in the list as done)";
+        String findCommand = "6. find " + "\n" + "- To find all tasks present in the task list that fit a keyword "
+                + "inputted" + "\n" + "e.g 'find book'";
+        String deleteCommand = "7. delete " + "\n" + "- To delete a task from the task list, with its index specified"
+                + "\n" + "e.g. 'delete 1' (this will delete the first task in the task list)";
+        String updateCommand = "8. update " + "\n" + "- To update the description of a Todo task, the deadline date "
+                + "and time of a Deadline task or the timing details of a Event task, using the specific command "
+                + "entered previously" + "\n" + "e.g. 'update borrow book /borrow children's book for YRO' "
+                + "(given that 'todo borrow book' was inputted previously)";
+        return helpMsg + "\n\n" + todoTask + "\n\n" + deadlineTask + "\n\n" + eventTask + "\n\n" + listCommand
+                + "\n\n" + doneCommand + "\n\n" + findCommand + "\n\n" + deleteCommand + "\n\n" + updateCommand;
     }
 }
