@@ -73,8 +73,11 @@ public class DukeMain extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        URL url = new File("src/main/java/duke/fxml/main.fxml").toURI().toURL();
-        Parent root = FXMLLoader.load(url);
+        //URL url = new File("src/main/java/duke/fxml/main.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader();
+        URL url = DukeMain.class.getResource("/fxml/main.fxml");
+        loader.setLocation(url);
+        Parent root = loader.load();
 
         Scene scene = new Scene(root, 300, 275);
 
