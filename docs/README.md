@@ -1,7 +1,7 @@
 # Welcome to Squirtle Manager!
 Squirtle Manager is a lightweight command line interface application built with Java and JavaFX. Squirtle Manager makes use of local storage to remember your agenda, and is an _easy_, _quick_ and _fun_ way to stay on top of your tasks.
 
-###### **What Squirtle Can Do:**
+## What Squirtle Can Do:
 
 **1. Task tracking**
 
@@ -26,11 +26,12 @@ Squirtle Manager can track 3 types of tasks:
 **6. Find tasks using given keyword**
 
 
-# Setting up
+## Setting up
 * Download the jar file
 * Run it using the command line command java -jar <name of jar file>
 * Alternatively, double-click on the jar application to launch
-#Command List
+
+## Command List
 Words in brackets refer to placeholders. Replace them with the appropriate command.
 
 Example|
