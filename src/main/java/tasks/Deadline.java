@@ -21,12 +21,17 @@ public class Deadline extends Task {
         this.dateBy = dateBy;
     }
 
+    public Deadline(String description, LocalDate dateBy, String tags) {
+        super(description, tags);
+        this.dateBy = dateBy;
+    }
+
     /**
      * Returns the string of the task with a deadline indicating [D] for deadline followed by the description
      * then do by date in MMM d yyyy.
      *
      * @return the string of the deadline task indicating [D] for deadline followed by the description
-     *     then do by date in MMM d yyyy.
+     * then do by date in MMM d yyyy.
      */
     @Override
     public String toString() {

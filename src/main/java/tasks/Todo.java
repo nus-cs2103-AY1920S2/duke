@@ -14,6 +14,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, String tags) {
+        super(description, tags);
+    }
+
     /**
      * Returns the string of the task containing the description.
      *

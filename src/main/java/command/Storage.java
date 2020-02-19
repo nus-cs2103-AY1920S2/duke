@@ -18,10 +18,7 @@ import tasks.TaskList;
  * Handles the loading and saving of task lists to the hard disk.
  */
 public class Storage {
-    static Gson gson = new GsonBuilder()
-            .enableComplexMapKeySerialization()
-            .setPrettyPrinting()
-            .create();
+    static Gson gson = new Gson();
 
     static String userDirectory = System.getProperty("user.dir");
 

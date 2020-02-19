@@ -21,12 +21,17 @@ public class Event extends Task {
         this.dateAt = dateAt;
     }
 
+    public Event(String description, LocalDate dateAt, String tags) {
+        super(description, tags);
+        this.dateAt = dateAt;
+    }
+
     /**
      * Returns the string of the task that is an event indicating [E] for event followed by the description
      * then date of the event in MMM d yyyy.
      *
      * @return the string of the task that is an event indicating [E] for event followed by the description
-     *     then date of the event in MMM d yyyy.
+     * then date of the event in MMM d yyyy.
      */
     @Override
     public String toString() {

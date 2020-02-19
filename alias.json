@@ -1,0 +1,25 @@
+{
+  "friendlierSyntax": {
+    "add": "todo",
+    "a": "alias",
+    "b": "bye",
+    "c": "clear",
+    "e": "event",
+    "f": "find",
+    "clear": "clear",
+    "dn": "done",
+    "l": "list",
+    "list": "list",
+    "ddln": "deadline",
+    "dlt": "delete",
+    "delete": "delete",
+    "bye": "bye",
+    "todo": "todo",
+    "t": "todo",
+    "find": "find",
+    "alias": "alias",
+    "tag": "tag",
+    "deadline": "deadline",
+    "event": "event"
+  }
+}
