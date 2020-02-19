@@ -92,13 +92,19 @@ Now you have 4 tasks in the list.
 stats
 ```
 
-### 6. View help : `help`
+### 6. View simple help : `help`
 ### Format:
 ```
 help
 ```
 
-### 7. Exit TGD : `bye`
+### 7. View detailed help : `help-detailed`
+### Format:
+```
+help-detailed
+```
+
+### 8. Exit TGD : `bye`
 ### Format:
 ```
 bye
