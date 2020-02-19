@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * @return String find command message
      */
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) {
+    public String execute(Storage storage, TaskList taskList, Ui ui) { // TODO change implementation to streams
         ArrayList<Task> lst = taskList.getTaskList();
         ArrayList<Task> found = new ArrayList<>();
         for (Task task : lst) {

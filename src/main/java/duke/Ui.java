@@ -101,7 +101,7 @@ public class Ui {
      * @return task message
      */
     public String taskMsg(Task task, int lstSize) {
-        return "SQUIRTLE is adding: " + task.toString() + "!" + "\nSQUIRTLE now has "
+        return "SQUIRTLE is adding: \n\t" + task.toString() + "!" + "\nSQUIRTLE now has "
                 + lstSize + " thing(s) to do!";
     }
 

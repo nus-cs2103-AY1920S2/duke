@@ -11,8 +11,7 @@ import java.util.ArrayList;
  * Storage class to load and add tasks to tasks.txt.
  */
 public class Storage {
-    String path = "textfiles/tasks.txt";
-
+    private String path = "src/main/resources/data/tasks.txt";
     /**
      * Constructor for Storage.
      */
@@ -36,7 +35,7 @@ public class Storage {
             String line;
 
             while ((line = br.readLine()) != null) {
-                line = line.replaceAll("[^\\x00-\\x7F]", "");
+                line = line.replaceAll("[^\\x00-\\x7F]", ""); // remove any unwanted ascii characters
                 lst.add(Parser.parseFile(line));
             }
             br.close();
@@ -72,7 +71,11 @@ public class Storage {
     }
 
     public File getFile() throws IOException {
-        File file = new File(getClass().getClassLoader().getResource(this.path).getFile());
+        File file = new File(path);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
         return file;
     }
 }
