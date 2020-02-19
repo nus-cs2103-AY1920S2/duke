@@ -1,20 +1,27 @@
 # User Guide
 
 ## Features 
+1. List all tasks
+2. Add a todo task
+3. Add an event task
+4. Add a deadline task
+5. Mark a task as done
+6. Delete a task from the list
+7. Update a task description and time
+8. Find a task by keyword
 
-### Feature 1 
-Description of feature.
-
+### List all tasks
 ## Usage
+`list`
 
-### `Keyword` - Describe action
+### `list` - Describe action
 
-Describe action and its outcome.
+Displays an indexed list of all tasks.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
 
-`outcome`
+`1. [D][X] Assignment (by: 20 Apr 2019)`
