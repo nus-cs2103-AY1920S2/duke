@@ -16,6 +16,7 @@ import java.util.Arrays;
 import static duke.util.MagicStrings.ERROR_COMMAND_MISSING_INDEX;
 import static duke.util.MagicStrings.ERROR_COMMAND_TOO_MANY_INDICES;
 import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
+import static duke.util.MagicStrings.ERROR_INVALID_SNOOZE_DURATION;
 import static duke.util.MagicStrings.ERROR_SNOOZING_NON_DEADLINE;
 
 /**
@@ -98,6 +99,9 @@ public class TaskListCommandHandler {
     static String handleSnoozeCommand(String command, TaskList taskList,
                                       Ui ui, Storage storage) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("/for", 2)));
+        if (commands.size() < 2) {
+            throw new DuchessException(ERROR_INVALID_SNOOZE_DURATION);
+        }
         int index = getIntegerFromCommand(commands.get(0));
         checkBoundsOfIndex(index, taskList);
         Task taskToSnooze = taskList.getTask(index - 1);
@@ -128,7 +132,7 @@ public class TaskListCommandHandler {
 
     private static void checkBoundsOfIndex(int index, TaskList taskList) throws DuchessException {
         boolean isIndexTooLow = index < 0;
-        boolean isIndexTooHigh = index > taskList.size();
+        boolean isIndexTooHigh = index >= taskList.size();
         if (isIndexTooLow || isIndexTooHigh) {
             throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);
         }
