@@ -12,19 +12,11 @@ import java.util.concurrent.TimeUnit;
 public class Event extends Task {
   LocalDate timing;
   String description;
-  ScheduledExecutorService executorService;
 
   Event(String input) throws DukeException {
     super(input);
     this.timing = getTiming(input);
     this.description = getDescription(input);
-    this.executorService = Executors.newScheduledThreadPool(1);
-    timedPrint();
-  }
-
-  public void timedPrint() {
-  	Runnable printShit = () -> System.out.println("testy test");
-  	executorService.schedule(printShit, 10, TimeUnit.SECONDS);
   }
 
   /**
