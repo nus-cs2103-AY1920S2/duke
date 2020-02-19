@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ChatBox {
@@ -29,6 +31,8 @@ public class ChatBox {
     public void load() throws DukeException {
         try {
             File file = new File(location);
+            file.getParentFile().mkdirs();
+            file.createNewFile();
             Scanner data = new Scanner(file);
             while (data.hasNextLine()) {
                 String[] retrieveMsg = data.nextLine().split("=");
@@ -39,9 +43,16 @@ public class ChatBox {
                 folder.add(tasks);
             }
         } catch (FileNotFoundException errorMsg) {
+            //File file = new File("data/duke.txt");
+            //file.getParentFile().mkdirs();
+            //file.createNewFile();
+            //String er = "Creating new file directory.";
             throw new DukeException(errorMsg.getMessage());
         } catch (IllegalArgumentException e) {
             String er = "OOPS!!! Dont understand what you are saying...";
+            throw new DukeException(er);
+        } catch (IOException e) {
+            String er = "Could not create file...";
             throw new DukeException(er);
         }
     }
@@ -86,17 +97,20 @@ public class ChatBox {
                 save();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            String er = "OOPS!! The description of a " + key + " cannot be empty";
-            return er;
-            // System.out.println(new DukeException(er));
+            String errorMsg = "OOPS!! The description of a " + key + " cannot be empty";
+            return errorMsg;
+            // System.out.println(new DukeException(errorMsg));
         } catch (IllegalArgumentException e) {
-            String er = "OOPS!!! Dont understand what you are saying...";
-            return er;
+            String errorMsg = "OOPS!!! Dont understand what you are saying...";
+            return errorMsg;
             //System.out.println(new DukeException(er));
         } catch (IOException e) {
-            String er = "OOPS!!! No such directory to save the file...";
-            return er;
+            String errorMsg = "OOPS!!! No such directory to save the file...";
+            return errorMsg;
             //System.out.println(new DukeException(er));
+        } catch (NoSuchElementException e) {
+            String errorMsg = "You have entered a number out of range...";
+            return errorMsg;
         }
         return replyMsg;
     }
@@ -114,15 +128,15 @@ public class ChatBox {
         }
 
         if (key.equals("deadline")) {
-            String s2 = data.split("/by")[0];
-            String s3 = data.split("/by")[1];
-            tasks = new Deadlines(new Message(s2 + "(by: " + s3 + ")"));
+            String detail = data.split("/by")[0];
+            String date = data.split("/by")[1];
+            tasks = new Deadlines(new Message(detail + "(by: " + date + ")"));
         }
 
         if (key.equals("event")) {
-            String s2 = data.split("/at")[0];
-            String s3 = data.split("/at")[1];
-            tasks = new Events(new Message(s2 + "(at: " + s3 + ")"));
+            String detail = data.split("/at")[0];
+            String date = data.split("/at")[1];
+            tasks = new Events(new Message(detail + "(at: " + date + ")"));
         }
 
         if (key.equals("[T]")) {
@@ -139,7 +153,9 @@ public class ChatBox {
 
         if (!tasks.isEmpty()) {
            return tasks;
-        } else throw new IllegalArgumentException("wrong liao");
+        } else {
+            throw new IllegalArgumentException("wrong liao");
+        }
 
     }
 
