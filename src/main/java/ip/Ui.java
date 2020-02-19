@@ -6,7 +6,7 @@ import ip.task.TaskList;
 
 public class Ui {
     private Scanner sc = new Scanner(System.in);
-    private static final String LINE = "\t__________________________________________________________\n";
+    private static final String LINE = "\t_________________________\n";
     public static final String GOODBYE = LINE + "\tGoodbye! Hope to hear from you soon :)\n" + LINE;
 
     private String printResponse(String... strs) {

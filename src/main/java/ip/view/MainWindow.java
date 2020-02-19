@@ -26,7 +26,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image leftImage = new Image(this.getClass().getResourceAsStream("/images/left_red.png"));
+    private Image leftImage = new Image(this.getClass().getResourceAsStream("/images/left_pig.png"));
     private Image rightImage = new Image(this.getClass().getResourceAsStream("/images/right_red.png"));
 
     @FXML
@@ -34,6 +34,7 @@ public class MainWindow extends AnchorPane {
         assert scrollPane != null;
         assert dialogContainer != null;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setFitToWidth(true);
         dialogContainer.getChildren().add(DialogBox.getRightDialog(Ui.initialGreeting(), rightImage));
     }
 
@@ -56,6 +57,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getRightDialog(response, rightImage)
         );
         userInput.clear();
+        if (response.equals("")){
+            return;
+        }
         if (response.equals(Ui.GOODBYE)){
             duke.exit();
             new Thread(() -> {

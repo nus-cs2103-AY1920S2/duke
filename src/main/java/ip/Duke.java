@@ -18,7 +18,11 @@ public class Duke {
 
     public String getResponse(String input) {
         Command c = parser.parse(input);
-        return c.execute(tasks, ui);
+        if (c == null){
+            return "";
+        } else {
+            return c.execute(tasks, ui);
+        }
     }
 
     public static class DukeException extends Exception {

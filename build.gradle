@@ -50,7 +50,7 @@ run {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.1"
+    archiveVersion = "0.2"
     archiveClassifier = null
     archiveAppendix = null
 }
