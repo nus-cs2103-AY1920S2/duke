@@ -2,7 +2,7 @@
 
 ## Description
 DukeBot is a personal chat bot to help a user keep track of tasks to be done by storing them in a task list.
-![Github Logo](./UG/Start-up.png)
+<img src ="./UG/Start-up.png">
  
 ## Features 
 
