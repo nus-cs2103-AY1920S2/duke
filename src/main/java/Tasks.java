@@ -40,18 +40,33 @@ public class Tasks {
     }
 
     public String added() {
-        String output = Message.lines + "added: " + msg.getMsg() + "\n" + Message.lines;
+        String output = Message.lines
+                + "Got it. I've added this task:\n"
+                + this + "\n"
+                + "Now you have "
+                + count
+                + " tasks in the list.\n"
+                + Message.lines;
         return output;
     }
 
     public String done() {
         status = "[o]";
-        Message output = new Message("Nice! I've finish this task:\n" + status + " " + msg.getMsg());
+        Message output = new Message("Nice! I've finish this task:\n"
+                + logo
+                + status
+                + " "
+                + msg.getMsg());
         return output.getMsg();
     }
 
     public String removed() {
-        Message output = new Message("Noted. I've removed this task:\n" + status + " " + msg.getMsg());
+        count--;
+        Message output = new Message("Noted. I've removed this tasks:\n"
+                + logo
+                + status
+                + " " + msg.getMsg() +
+                "\nNow you have " + count + " tasks in the list.\n");
         return output.getMsg();
     }
 

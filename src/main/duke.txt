@@ -1,8 +1,0 @@
-[D]=[x]=hello world (by: Jun 01 2019)
-[T]=[x]=helloworld
-[T]=[x]=hello
-[T]=[x]=sadsa
-[T]=[x]=helloworld
-[T]=[x]=slap 
-[T]=[x]=hello shaopeng
-[T]=[o]=slap shaopeng
