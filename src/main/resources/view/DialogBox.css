@@ -1,3 +1,7 @@
+.dialog-text {
+    -fx-padding: 10;
+}
+
 .user-dialog {
     -fx-alignment: center-right;
 }
