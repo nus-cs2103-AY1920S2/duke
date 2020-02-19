@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>JayZ bot Task Manager:- User Guide</title>
+<date>2020-02-19</date>
+</info>
+<simpara>By: <literal>Lua Jia Zheng</literal>      Since: <literal>Feb 2020</literal>      Licence: <literal>MIT</literal></simpara>
+<section xml:id="_introduction">
+<title>Introduction</title>
+<simpara>Jay-z&#8217;s task manager serves as a personal chatbot assistant to help individuals manage and record their daily tasks in a readily available format. For those who prefer to work with a Command Line Interface (CLI) on top of a beautiful Graphical User Interface (GUI), this application will be perfect for you!</simpara>
+</section>
+<section xml:id="_quick_start">
+<title>Quick Start</title>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Ensure you have Java <literal>11</literal> or above installed in your Computer.</simpara>
+</listitem>
+<listitem>
+<simpara>Download the latest <literal>v0.2.jar</literal> <link xl:href="https://github.com/ljiazh3ng/duke/releases">here</link>.</simpara>
+</listitem>
+<listitem>
+<simpara>Double-click the file to start the app. The GUI should appear in a few seconds.</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/Ui.png" contentwidth="790"/>
+</imageobject>
+<textobject><phrase>Ui</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</listitem>
+<listitem>
+<simpara>Type the command in the command box and press <keycap>Enter</keycap> to execute it.<?asciidoc-br?>
+e.g. typing <emphasis role="strong"><literal>i</literal></emphasis> and pressing <keycap>Enter</keycap> will open the instruction window.</simpara>
+</listitem>
+<listitem>
+<simpara>Some example commands you can try:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><emphasis role="strong"><literal>list</literal></emphasis> : Shows a list of task in your TaskList.</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong"><literal>bye</literal></emphasis> : exits the app</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>Refer to <xref linkend="Features"/> for details of each command.</simpara>
+</listitem>
+</orderedlist>
+</section>
+<section xml:id="Features">
+<title>Features</title>
+<section xml:id="_viewing_instructions_i">
+<title>Viewing instructions : <literal>i</literal></title>
+<simpara>Shows the list of instructions/help.
+Format: <literal>i</literal></simpara>
+</section>
+<section xml:id="_adding_a_todo_task_todo">
+<title>Adding a Todo task: <literal>todo</literal></title>
+<simpara>Adds a todo task into the sorted task list.<?asciidoc-br?>
+Format: <literal>todo title</literal><?asciidoc-br?>
+Examples:<?asciidoc-br?>
+<literal>todo return books</literal>
+<literal>todo get cap 5</literal>
+Expected output:<?asciidoc-br?>
+<literal>[T][X] return books</literal>
+<literal>[T][X] get cap 5</literal></simpara>
+</section>
+<section xml:id="_adding_a_deadline_task_deadline">
+<title>Adding a Deadline task: <literal>deadline</literal></title>
+<simpara>Adds a deadline task into the sorted task list.<?asciidoc-br?>
+Format: <literal>deadline title /by date</literal><?asciidoc-br?>
+Examples:<?asciidoc-br?>
+<literal>deadline return books /by sunday</literal>
+<literal>deadline CS2103 /by 2019-10-15</literal>
+Expected output:<?asciidoc-br?>
+<literal>[D][X] return books (by: sunder)</literal>
+<literal>[D][X] get cap 5 (by: Oct 15 2019)</literal></simpara>
+</section>
+<section xml:id="_adding_a_event_task_event">
+<title>Adding a Event task: <literal>event</literal></title>
+<simpara>Adds a event task into the sorted task list.<?asciidoc-br?>
+Format: <literal>event title /at date</literal><?asciidoc-br?>
+Examples:<?asciidoc-br?>
+<literal>event return books /at date</literal>
+<literal>event career fair /at 2019-10-15</literal>
+Expected Output:<?asciidoc-br?>
+<literal>[E][X] return books (at: date)</literal>
+<literal>[E][X] career fair (at: Oct 15 2019)</literal></simpara>
+</section>
+<section xml:id="_mark_event_as_done_done">
+<title>Mark event as done: <literal>done</literal></title>
+<simpara>Mark event as done.<?asciidoc-br?>
+Format: <literal>done index</literal><?asciidoc-br?></simpara>
+</section>
+<section xml:id="_listing_the_conetent_of_current_directory_list">
+<title>Listing the conetent of current directory : <literal>list</literal></title>
+<simpara>Shows a list of task in the current Task List.<?asciidoc-br?>
+Format: <literal>list</literal></simpara>
+</section>
+<section xml:id="_locating_persons_by_name_find">
+<title>Locating persons by name: <literal>find</literal></title>
+<simpara>Finds task whose title contain any of the given keywords.<?asciidoc-br?>
+Format: <literal>find KEYWORD</literal></simpara>
+<simpara>Example:
+<literal>find abc</literal><?asciidoc-br?>
+Display a list of task named <literal>abcdef</literal> and <literal>abc</literal>.</simpara>
+</section>
+<section xml:id="_deleting_a_person_delete">
+<title>Deleting a person : <literal>delete</literal></title>
+<simpara>Deletes the specified task from the task list.<?asciidoc-br?>
+Format: <literal>delete INDEX</literal></simpara>
+<sidebar>
+<itemizedlist>
+<listitem>
+<simpara>Deletes the task at the specified <literal>INDEX</literal>.</simpara>
+</listitem>
+<listitem>
+<simpara>The index refers to the index number shown in the displayed person list.</simpara>
+</listitem>
+<listitem>
+<simpara>The index <emphasis role="strong">must be a positive integer</emphasis> 1, 2, 3, &#8230;&#8203;</simpara>
+</listitem>
+</itemizedlist>
+</sidebar>
+<simpara>Examples:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><literal>list</literal><?asciidoc-br?>
+<literal>delete 2</literal><?asciidoc-br?>
+Deletes the 2nd task in the TaskList.</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section xml:id="_exiting_the_program_bye">
+<title>Exiting the program : <literal>bye</literal></title>
+<simpara>Exits the program.<?asciidoc-br?>
+Format: <literal>bye</literal></simpara>
+</section>
+<section xml:id="_saving_the_data">
+<title>Saving the data</title>
+<simpara>Task list data are saved in the hard disk automatically after any command that changes the data.<?asciidoc-br?>
+There is no need to save manually.</simpara>
+</section>
+</section>
+<section xml:id="_command_summary">
+<title>Command Summary</title>
+<itemizedlist>
+<listitem>
+<simpara><emphasis role="strong">todo</emphasis> <literal>todo title</literal><?asciidoc-br?></simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">deadline</emphasis> : <literal>deadline title /by date</literal></simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">event</emphasis> : <literal>event title /at location time</literal> <?asciidoc-br?></simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Find</emphasis> : <literal>find KEYWORD</literal><?asciidoc-br?></simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">List</emphasis> : <literal>list</literal></simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Instruction</emphasis> : <literal>i</literal></simpara>
+</listitem>
+</itemizedlist>
+</section>
+</article>

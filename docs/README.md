@@ -1,0 +1,140 @@
+By: `Lua Jia Zheng` Since: `Feb 2020` Licence: `MIT`
+
+Introduction
+============
+
+Jay-z’s task manager serves as a personal chatbot assistant to help
+individuals manage and record their daily tasks in a readily available
+format. For those who prefer to work with a Command Line Interface (CLI)
+on top of a beautiful Graphical User Interface (GUI), this application
+will be perfect for you!
+
+Quick Start
+===========
+
+1.  Ensure you have Java `11` or above installed in your Computer.
+
+2.  Download the latest `v0.2.jar`
+    [here](https://github.com/ljiazh3ng/duke/releases).
+
+3.  Double-click the file to start the app. The GUI should appear in a
+    few seconds.
+
+    ![Ui](images/Ui.png)
+
+4.  Type the command in the command box and press Enter to execute it.  
+    e.g. typing **`i`** and pressing Enter will open the instruction
+    window.
+
+5.  Some example commands you can try:
+
+    -   **`list`** : Shows a list of task in your TaskList.
+
+    -   **`bye`** : exits the app
+
+6.  Refer to [Features](#Features) for details of each command.
+
+Features
+========
+
+Viewing instructions : `i`
+--------------------------
+
+Shows the list of instructions/help. Format: `i`
+
+Adding a Todo task: `todo`
+--------------------------
+
+Adds a todo task into the sorted task list.  
+Format: `todo title`  
+Examples:  
+`todo return books` `todo get cap 5` Expected output:  
+`[T][X] return books` `[T][X] get cap 5`
+
+Adding a Deadline task: `deadline`
+----------------------------------
+
+Adds a deadline task into the sorted task list.  
+Format: `deadline title /by date`  
+Examples:  
+`deadline return books /by sunday` `deadline CS2103 /by 2019-10-15`
+Expected output:  
+`[D][X] return books (by: sunder)` `[D][X] get cap 5 (by: Oct 15 2019)`
+
+Adding a Event task: `event`
+----------------------------
+
+Adds a event task into the sorted task list.  
+Format: `event title /at date`  
+Examples:  
+`event return books /at date` `event career fair /at 2019-10-15`
+Expected Output:  
+`[E][X] return books (at: date)` `[E][X] career fair (at: Oct 15 2019)`
+
+Mark event as done: `done`
+--------------------------
+
+Mark event as done.  
+Format: `done index`  
+
+Listing the conetent of current directory : `list`
+--------------------------------------------------
+
+Shows a list of task in the current Task List.  
+Format: `list`
+
+Locating persons by name: `find`
+--------------------------------
+
+Finds task whose title contain any of the given keywords.  
+Format: `find KEYWORD`
+
+Example: `find abc`  
+Display a list of task named `abcdef` and `abc`.
+
+Deleting a person : `delete`
+----------------------------
+
+Deletes the specified task from the task list.  
+Format: `delete INDEX`
+
+-   Deletes the task at the specified `INDEX`.
+
+-   The index refers to the index number shown in the displayed person
+    list.
+
+-   The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+-   `list`  
+    `delete 2`  
+    Deletes the 2nd task in the TaskList.
+
+Exiting the program : `bye`
+---------------------------
+
+Exits the program.  
+Format: `bye`
+
+Saving the data
+---------------
+
+Task list data are saved in the hard disk automatically after any
+command that changes the data.  
+There is no need to save manually.
+
+Command Summary
+===============
+
+-   **todo** `todo title`  
+
+-   **deadline** : `deadline title /by date`
+
+-   **event** : `event title /at location time`  
+
+-   **Find** : `find KEYWORD`  
+
+-   **List** : `list`
+
+-   **Instruction** : `i`
