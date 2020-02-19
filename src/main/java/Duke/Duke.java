@@ -17,15 +17,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    /*
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/study-desk.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/village.jpg"));
-     */
 
     /**
      * Constructor for Duke class.
