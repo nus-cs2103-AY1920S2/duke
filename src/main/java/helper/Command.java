@@ -187,6 +187,7 @@ public class Command {
 
     private Task searchTask(ArrayList<Task> tasksList, String searchQuery) {
         assert tasksList.size() > 0 : "There is no task in the list now ";
+        System.out.println(searchQuery);
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).getDescription().contains(searchQuery)) {
                 return tasksList.get(i);
