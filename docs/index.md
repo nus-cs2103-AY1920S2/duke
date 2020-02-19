@@ -1,8 +1,4 @@
-# Duke
-
-
-
-**The task management tool for every busy professional**
+_**The task management tool for every busy professional**_
 
 [![DUKE GENERIC SCREENSHOT](https://raw.githubusercontent.com/waynewee/duke/master/screenshots/generic.png)]()
 
@@ -29,8 +25,6 @@
 
 > Your wish is my command.
 
-####Duke is packed with features:
-
 - Manage your tasks from **anywhere**
 - Tasks are saved to your computer periodically to ensure **no data is lost**
 - **Keep track** of the tasks you've completed and the tasks you've yet to give attention to
@@ -41,16 +35,20 @@
 
 ### Commands
 
-`todo {task_name}` - adds `task_name` to the list of tasks
-`event {task_name} /at {task_date}` - adds `task_name` as an event and specifies that it occurs at `task_date`
-`deadline {task_name} /by {task_date}` - adds `task_name` as a deadline and specifies that it is due on `task_date`
-`done {task_index}` - marks the task at `task_index` as done
-`delete {task_index}` - deletes the task at `task_index`
-`list` - lists all tasks
-`find {search_term}` - searches for tasks that contain `search_term`
-`date /on {date}` - searches for tasks that occur on or are due by `date`
-`history` - prints out the list of past commands _(Max: 20)_
-`exit` - exits the application
+- `todo {task_name}` - adds `task_name` to the list of tasks
+- `event {task_name} /at {task_date}` - adds `task_name` as an event and specifies that it occurs at `task_date`
+- `deadline {task_name} /by {task_date}` - adds `task_name` as a deadline and specifies that it is due on `task_date`
+- `done {task_index}` - marks the task at `task_index` as done
+- `delete {task_index}` - deletes the task at `task_index`
+- `list` - lists all tasks
+- `find {search_term}` - searches for tasks that contain `search_term`
+- `date /on {date}` - searches for tasks that occur on or are due by `date`
+- `history` - prints out the list of past commands _(Max: 20)_
+- `exit` - exits the application
+
+**Advanced commands**
+- <kbd>keyup</kbd> - cycles through command history
+- <kbd>ctrl</kbd> + <kbd>c</kbd> - clears the input bar 
 ---
 
 ## Team
