@@ -4,12 +4,16 @@ import duke.exception.DuchessException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.RecurringDeadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
 import duke.util.DateTimeParser;
+import duke.util.Frequency;
+import duke.util.FrequencyParser;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -118,8 +122,49 @@ public class TaskCreationHandler {
             return new Event(details.get(0).trim(), details.get(1).trim());
         }
         assert commands.get(0).equalsIgnoreCase("deadline");
-        String timeDetails = details.get(1).trim().toLowerCase();
-        return new Deadline(details.get(0).trim(), DateTimeParser.parseDateTime(timeDetails));
+        return getDeadlineFromDetails(commands.get(1));
+    }
+
+    /**
+     * Returns a {@code Deadline} object if the user input suggests that
+     * recurrence is desired, else return null.
+     *
+     * @param command Original user command.
+     * @return {@code Deadline} object.
+     */
+    private static Deadline getDeadlineFromDetails(String command) throws DuchessException {
+        ArrayList<String> details = new ArrayList<>(Arrays.asList(command.split("/")));
+        Frequency frequency = null;
+        LocalDateTime deadline = null;
+        LocalDateTime recurrenceEndTime = null;
+        for (int i = 1; i < details.size(); i++) {
+            String detail = details.get(i);
+            String[] commands = detail.split("\\s", 2);
+            switch (commands[0].toLowerCase()) {
+            case "by":
+                deadline = DateTimeParser.parseDateTime(commands[1].trim().toLowerCase());
+                break;
+            case "every":
+                frequency = FrequencyParser.parseFrequency(commands[1].trim().toLowerCase());
+                break;
+            case "stop":
+                recurrenceEndTime = DateTimeParser.parseDateTime(commands[1].trim().toLowerCase());
+                break;
+            default:
+                // Means unrecognized keyword was given. Not an issue unless key details are missing.
+                break;
+            }
+        }
+        if (deadline == null) {
+            throw new DuchessException(ERROR_DEADLINE_MISSING_DEADLINE);
+        }
+        if (frequency == null) {
+            return new Deadline(details.get(0).trim(), deadline);
+        }
+        if (recurrenceEndTime == null) {
+            return new RecurringDeadline(details.get(0).trim(), deadline, frequency);
+        }
+        return new RecurringDeadline(details.get(0).trim(), deadline, frequency, recurrenceEndTime);
     }
 
     /**

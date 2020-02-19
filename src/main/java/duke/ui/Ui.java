@@ -143,6 +143,11 @@ public class Ui {
      * @return The completion message {@code String}.
      */
     public String printTaskCompleted(Task task) {
+        if (!task.isCompleted()) {
+            return this.print("Oh? You actually completed something? Impressive...",
+                    "Your recurring task has been updated to its next recurrence.",
+                    task.toString());
+        }
         return this.print("Oh? You actually completed something? Impressive...", task.toString());
     }
 
@@ -175,13 +180,22 @@ public class Ui {
     public String printHelpMessage() {
         return this.print("Is this the first time I'm talking with you?",
                 "I can't do everything for you, you know? Here's what I do:",
-                new String(new char[65]).replace("\0", "-"), "list \t\t\t\t\tView current tasks.",
-                "todo [desc.] \t\t\t\tCreate ToDo.", "event [desc.] /at [time] \t\tCreate Event.",
-                "deadline [desc.] /by [time] \t\tCreate Deadline.", "done [index] \t\t\t\tComplete task at index.",
-                "find [word(s)] \t\t\t\tFind tasks with said word(s).", "delete [index] \t\t\t\tDelete task at index.",
-                "bye \t\t\t\t\tBid farewell (sounds great!).", "help \t\t\t\t\tSee this message again.",
-                new String(new char[65]).replace("\0", "-"), "Accepted time formats are:",
-                "d/m/YY \t\t\t\t\td/m/YY HHmm", "Today/Tonight/Tomorrow \t\t\tMonday/Tuesday etc.");
+                new String(new char[45]).replace("\0", "-"),
+                "list: View current tasks.",
+                "todo DESC: Create ToDo.",
+                "event DESC /at TIME: Create Event.",
+                "deadline DESC /by TIME [/every FREQ] [/stop TIME]: Create Deadline.",
+                "done INDEX: Complete task at index.",
+                "find WORD(S): Find tasks with said word(s) in name.",
+                "delete INDEX: Delete task at index.",
+                "bye: Bid farewell (sounds great!).",
+                "help: See this message again.",
+                new String(new char[45]).replace("\0", "-"),
+                "Accepted time formats are:",
+                "d-m-YY e.g. 2-12-20",
+                "d-m-YY HHmm e.g. 2-12-20 1600",
+                "Today/Tonight/Tomorrow",
+                "Monday/Tuesday etc.");
     }
 
     // Console Mode Specific Methods

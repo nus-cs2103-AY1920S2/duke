@@ -18,13 +18,13 @@ import static duke.util.MagicStrings.ERROR_WRONG_DATE_FORMAT;
  */
 public class DateTimeParser {
     /**
-     * {@code DateTimeFormatter} that recognises the pattern "d/M/yy HHmm".
+     * {@code DateTimeFormatter} that recognises the pattern "d-M-yy HHmm".
      */
-    public static DateTimeFormatter dateTimePattern = DateTimeFormatter.ofPattern("d/M/yy HHmm");
+    public static DateTimeFormatter dateTimePattern = DateTimeFormatter.ofPattern("d-M-yy HHmm");
     /**
-     * {@code DateTimeFormatter} that recognises the pattern "d/M/yy".
+     * {@code DateTimeFormatter} that recognises the pattern "d-M-yy".
      */
-    public static DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("d/M/yy");
+    public static DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("d-M-yy");
 
     /**
      * Returns a {@code LocalDateTime} object based on the given
@@ -32,7 +32,7 @@ public class DateTimeParser {
      *
      * <p>Allowed formats for {@code dateTimeString} are days of the week e.g.
      * "Monday"; relative timings e.g. "Today", "Tonight"; of datetime format
-     * "d/M/yy" or "d/M/yy HHmm".
+     * "d-M-yy" or "d-M-yy HHmm".
      *
      * @param dateTimeString User provided input in {@code String} format.
      * @return {@code LocalDateTime} object based on given {@code dateTimeString}.

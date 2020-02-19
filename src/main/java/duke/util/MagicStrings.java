@@ -37,12 +37,16 @@ public class MagicStrings {
     public static final String ERROR_TASK_ALREADY_COMPLETED = "You have already completed this task!";
     public static final String ERROR_TODO_MISSING_CONTENT = "Your todo content cannot be empty! "
             + "Type help if you need help.";
-    public static final String ERROR_WRONG_DATE_FORMAT = "Your input is of the wrong format.\n"
-            + "\tType help to view the accepted formats.";
+    public static final String ERROR_WRONG_DATE_FORMAT = "Your date is of the wrong format.\n"
+            + "Type help to view the accepted formats.";
+    public static final String ERROR_WRONG_FREQUENCY_FORMAT = "Your frequency is of the wrong format.\n"
+            + "Type help to view the accepted formats.";
 
     // GSON helper strings.
     public static final String GSON_ATTR_DEADLINE = "deadline";
     public static final String GSON_ATTR_DESCRIPTION = "description";
+    public static final String GSON_ATTR_FREQUENCY = "frequency";
     public static final String GSON_ATTR_IS_COMPLETED = "isCompleted";
     public static final String GSON_ATTR_TIME_FRAME = "timeFrame";
+    public static final String GSON_ATTR_REPEAT_END_TIME = "repeatEndTime";
 }

@@ -7,9 +7,11 @@ import com.google.gson.JsonParser;
 import duke.exception.DuchessException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.RecurringDeadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
+import duke.util.Frequency;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -24,7 +26,9 @@ import static duke.util.MagicStrings.ERROR_FAIL_TO_LOAD_AND_SAVE;
 import static duke.util.MagicStrings.ERROR_FAIL_TO_SAVE;
 import static duke.util.MagicStrings.GSON_ATTR_DEADLINE;
 import static duke.util.MagicStrings.GSON_ATTR_DESCRIPTION;
+import static duke.util.MagicStrings.GSON_ATTR_FREQUENCY;
 import static duke.util.MagicStrings.GSON_ATTR_IS_COMPLETED;
+import static duke.util.MagicStrings.GSON_ATTR_REPEAT_END_TIME;
 import static duke.util.MagicStrings.GSON_ATTR_TIME_FRAME;
 
 /**
@@ -94,7 +98,23 @@ public class Storage {
         ArrayList<Task> result = new ArrayList<>();
         for (int i = 0; i < jsonArray.size(); i++) {
             JsonObject taskToCheck = (JsonObject) jsonArray.get(i);
-            if (taskToCheck.has(GSON_ATTR_DEADLINE)) {
+            if (taskToCheck.has(GSON_ATTR_FREQUENCY) && taskToCheck.has(GSON_ATTR_DEADLINE)) {
+                // Task is a RecurringDeadline
+                if (taskToCheck.has(GSON_ATTR_REPEAT_END_TIME)) {
+                    result.add(new RecurringDeadline(
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_FREQUENCY), Frequency.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_REPEAT_END_TIME), LocalDateTime.class)
+                    ));
+                } else {
+                    result.add(new RecurringDeadline(
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_FREQUENCY), Frequency.class)
+                    ));
+                }
+            } else if (taskToCheck.has(GSON_ATTR_DEADLINE)) {
                 // Task is a Deadline
                 result.add(new Deadline(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
