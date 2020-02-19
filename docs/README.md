@@ -2,7 +2,7 @@
 This is a chatbot to store your Todos, Deadlines, and Events!
 Everything is powered by a digitized Charmander, doing their best to be useful to you! (No Charmanders were hurt in the process of making this program)
 
-![Image of the program!][Ui.png]
+![Image of the program!](Ui.png)
 
 ## Commands
 *ps: Commands are case-insensitive!
@@ -31,4 +31,4 @@ Charmander will add an EVENT containing the **desc** and a **date**.
 ### undo
 Charmander will undo the last thing you did. Can't be used consecutively. Please forgive Charmander and their bad memory.
 
-![CHARMANDER][charmander.jpg]
+![CHARMANDER](charmander.jpg)
