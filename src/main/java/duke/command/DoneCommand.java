@@ -1,10 +1,9 @@
 package duke.command;
 
+import duke.exceptions.InvalidIndexError;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-
-import java.io.IOException;
 
 /**
  * The DoneCommand program calls method to mark task as done.
@@ -38,6 +37,11 @@ public class DoneCommand extends Command {
 
         try {
 
+            if (taskList.getList().size() < Integer.parseInt(taskDescriptionArr[1])) {
+
+                throw new InvalidIndexError(taskList.getList().size());
+            }
+
             Task t = taskList.getTask(Integer.parseInt(taskDescriptionArr[1]));
 
             if (t.getStatus().equals(Task.Status.Y)) {
@@ -47,7 +51,7 @@ public class DoneCommand extends Command {
 
             return "Nice! I've marked this task as done:\n" + taskList.markDone(t);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
 
             return e.toString();
 

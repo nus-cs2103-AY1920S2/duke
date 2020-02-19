@@ -52,6 +52,7 @@ public class Storage {
 
         try {
             File f = new File(path);
+            f.getParentFile().mkdir();
             f.createNewFile();
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
@@ -143,8 +144,6 @@ public class Storage {
     public void updateFile() throws IOException {
 
         ArrayList<Task> list = taskList.getList();
-
-        assert list.size() > 0 : "list is empty";
 
         FileWriter writer = new FileWriter(new File(path));
         String input;

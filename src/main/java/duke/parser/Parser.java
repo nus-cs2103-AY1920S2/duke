@@ -136,8 +136,8 @@ public class Parser {
      * @param input refers to user input.
      * @return String[] containing parsed input.
      * @throws EmptyDescriptionError is thrown when task is missing task description.
-     * @throws EmptyDateError        is thrown when task is missing start or end date or both.
-     * @throws InvalidDateError      is thrown when date has incorrect format or has already past.
+     * @throws EmptyDateError is thrown when task is missing start or end date or both.
+     * @throws InvalidDateError is thrown when date has incorrect format or has already past.
      */
     String[] parseAddCommand(String input) throws EmptyDescriptionError, EmptyDateError, InvalidDateError {
 
@@ -298,11 +298,9 @@ public class Parser {
      */
     boolean checkDateTimeValidity(LocalDateTime[] times, String type) {
 
-        boolean isEndLaterThanStart = false;
-        boolean isStartLaterThanNow = false;
-
         if (type.equals("D")) {
 
+            boolean isStartLaterThanNow = false;
             isStartLaterThanNow = times[0].isAfter(LocalDateTime.now());
 
             return isStartLaterThanNow;
@@ -311,10 +309,13 @@ public class Parser {
 
             assert type.equals("E") : "Wrong event type!";
 
-            isStartLaterThanNow = times[0].isAfter(LocalDateTime.now());
+            boolean isEndLaterThanNow = false;
+            boolean isEndLaterThanStart = false;
+
+            isEndLaterThanNow = times[1].isAfter(LocalDateTime.now());
             isEndLaterThanStart = times[1].isAfter(times[0]);
 
-            return isEndLaterThanStart && isStartLaterThanNow;
+            return isEndLaterThanStart && isEndLaterThanNow;
 
         }
 

@@ -33,6 +33,11 @@ public class ListCommand extends Command {
     @Override
     public String executeCommand(String[] taskDescriptionArr) {
 
+        if (taskList.getList().size() == 0) {
+
+            return "The task list is empty.";
+        }
+
         return taskList.list();
 
     }

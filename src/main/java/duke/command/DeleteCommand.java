@@ -1,9 +1,8 @@
 package duke.command;
 
+import duke.exceptions.InvalidIndexError;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-
-import java.io.IOException;
 
 /**
  * The DeleteCommand program calls method to delete task from taskList and storage.
@@ -36,12 +35,17 @@ public class DeleteCommand extends Command {
 
         try {
 
+            if (taskList.getList().size() < Integer.parseInt(taskDescriptionArr[1])) {
+
+                throw new InvalidIndexError(taskList.getList().size());
+            }
+
             String start = "Noted. I've removed this task: \n";
 
             return start + taskList.deleteTask(Integer.parseInt(taskDescriptionArr[1]))
                     + "\n" + taskList.reportTotal();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
 
             return e.toString();
 

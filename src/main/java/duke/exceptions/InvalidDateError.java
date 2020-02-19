@@ -46,9 +46,9 @@ public class InvalidDateError extends Exceptions {
 
                 assert type.equals("E") : "Wrong task type!";
 
-                return "Start date should be after "
+                return "End date should be after "
                         + LocalDateTime.now().format(DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm"))
-                        + " and end date should be after start date";
+                        + " and start date";
 
             }
 

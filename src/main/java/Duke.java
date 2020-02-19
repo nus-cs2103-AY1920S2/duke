@@ -21,7 +21,7 @@ public class Duke {
     public void setup() {
 
         TaskList taskList = new TaskList();
-        Storage storage = new Storage("../../DataFile.txt");
+        Storage storage = new Storage("data/DataFile.txt");
 
         taskList.addStorage(storage);
         storage.addTaskList(taskList);

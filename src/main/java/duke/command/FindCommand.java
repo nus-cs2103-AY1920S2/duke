@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exceptions.InvalidIndexError;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
@@ -33,6 +34,12 @@ public class FindCommand extends Command {
     @Override
     public String executeCommand(String[] taskDescriptionArr) {
 
+        if (taskList.getList().size() == 0) {
+
+            return "The task list is empty.";
+        }
+
         return taskList.findTask(taskDescriptionArr[1]);
+
     }
 }
