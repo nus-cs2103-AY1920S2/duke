@@ -7,6 +7,7 @@
     "e": "event",
     "f": "find",
     "clear": "clear",
+    "h": "help",
     "dn": "done",
     "l": "list",
     "list": "list",
@@ -15,13 +16,12 @@
     "delete": "delete",
     "bye": "bye",
     "todo": "todo",
+    "help": "help",
     "t": "todo",
     "find": "find",
     "alias": "alias",
     "tag": "tag",
     "deadline": "deadline",
-    "event": "event",
-    "help": "help",
-    "h": "help"
+    "event": "event"
   }
 }
