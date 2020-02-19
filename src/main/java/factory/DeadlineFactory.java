@@ -6,6 +6,9 @@ import command.Parser;
 
 import java.time.LocalDate;
 
+/**
+ * Generates deadline objects based on user input.
+ */
 public class DeadlineFactory implements Factory<Deadline> {
     private Parser parser;
 
@@ -13,11 +16,14 @@ public class DeadlineFactory implements Factory<Deadline> {
         parser = new Parser();
     }
 
+    /**
+     * Creates a deadline object from user input.
+     *
+     * @param input input given by user
+     * @return deadline object with the specified parameters
+     */
     public Deadline create(String input) {
         String[] by = input.split("/");
-        if (by.length < 2) {
-            throw new DukeException("\t☹ OOPS!!! The date of a deadline cannot be empty.");
-        }
         if (parser.checkForTags(input)) {
             String[] tags = by[1].split(" ", 2);
             return new Deadline(by[0], LocalDate.parse(tags[0]), tags[1]);

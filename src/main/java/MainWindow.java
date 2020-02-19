@@ -33,10 +33,35 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
+        start();
     }
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    public void start() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(UI.START, dukeImage)
+        );
+    }
+
+    @FXML
+    public void exit() {
+        duke.end();
+        System.exit(0);
+    }
+
+    @FXML
+    public void clear() {
+        dialogContainer.getChildren().clear();
+    }
+
+    @FXML
+    public void help() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(UI.HELP, dukeImage)
+        );
     }
 
     /**
@@ -48,8 +73,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = getResponse(input, duke);
         if (response.equals(UI.BYE)) {
-            duke.end();
-            System.exit(0);
+            exit();
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

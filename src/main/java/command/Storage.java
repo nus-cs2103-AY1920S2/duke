@@ -4,29 +4,29 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import tasks.Task;
 import tasks.TaskList;
 
 /**
  * Handles the loading and saving of task lists to the hard disk.
  */
 public class Storage {
-    static Gson gson = new Gson();
-
-    static String userDirectory = System.getProperty("user.dir");
+    private Gson gson;
+    private String userDirectory;
 
     /**
-     * Searches for an existing file with a previous task list store.
+     * Initialises a storage object with gson and user directory.
+     */
+    public Storage() {
+        gson = new Gson();
+        userDirectory = System.getProperty("user.dir");
+    }
+
+    /**
+     * Searches for an existing file with a previous task list and alias store.
      * If no such file found, create a new task list.
      */
-    public static void readFromFile(Duke duke) {
+    public void readFromFile(Duke duke) {
         try {
             FileReader task = new FileReader(userDirectory + "/data.json");
             FileReader fileReader = new FileReader(userDirectory + "/alias.json");
@@ -39,9 +39,9 @@ public class Storage {
     }
 
     /**
-     * Writes task list into hard drive.
+     * Writes task list and alias into hard drive.
      */
-    public static void saveFile(TaskList taskList, FriendlierSyntax alias) {
+    public void saveFile(TaskList taskList, FriendlierSyntax alias) {
         try {
             FileWriter fileWriter = new FileWriter(userDirectory + "/data.json");
             FileWriter aliasFile = new FileWriter(userDirectory + "/alias.json");

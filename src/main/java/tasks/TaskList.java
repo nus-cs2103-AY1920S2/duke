@@ -1,6 +1,7 @@
 package tasks;
 
 import command.DukeException;
+import command.UI;
 
 import java.util.ArrayList;
 
@@ -132,13 +133,18 @@ public class TaskList {
     public String findTaskContainingTag(String tag) {
         String printedList = "";
         int taskNumber = 1;
+        boolean noTasksWithTag = true;
         for (Task task : list) {
             if (task.checkTags(tag)) {
                 printedList = printedList + "\n\t\t" + taskNumber + ". \t" + task;
                 taskNumber++;
             }
         }
-        return printedList;
+        if (noTasksWithTag) {
+            return UI.NO_TAGS;
+        } else {
+            return printedList;
+        }
     }
 
     /**

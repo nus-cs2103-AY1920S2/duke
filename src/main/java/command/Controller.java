@@ -36,14 +36,14 @@ public class Controller {
      * @return output to be displayed to user.
      */
     public String readInput(String input, TaskList taskList, FriendlierSyntax friendlierSyntax) throws DukeException {
-        input = input.toLowerCase();
-        parser.validateInput(input);
-        String command = parser.getCommand(input);
-        String description = "";
-        if (parser.hasDescription(input)) {
-            description = parser.getDescription(input);
-        }
         try {
+            input = input.toLowerCase();
+            parser.validateInput(input);
+            String command = parser.getCommand(input);
+            String description = "";
+            if (parser.hasDescription(input)) {
+                description = parser.getDescription(input);
+            }
             switch (command) {
                 case "bye":
                     return UI.BYE;
@@ -51,6 +51,8 @@ public class Controller {
                     String[] alias = description.split(" ");
                     friendlierSyntax.addAlias(alias[0], alias[1]);
                     return UI.ALIAS;
+                case "hello":
+                    return UI.HELLO;
                 case "list":
                     if (taskList.isEmpty()) {
                         return UI.EMPTY_LIST;
@@ -89,11 +91,11 @@ public class Controller {
                     taskList.addTask(newEvent);
                     return UI.ADD + "\t\t" + newEvent.toString() + taskList.printTotalTasks();
                 default:
-                    throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    return "";
             }
         } catch (DukeException e) {
             System.err.println(e);
-            return "Please try again.";
+            return e.getMessage();
         }
     }
 }

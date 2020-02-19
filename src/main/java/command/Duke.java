@@ -14,13 +14,15 @@ public class Duke {
     private TaskList taskList;
     private FriendlierSyntax friendlierSyntax;
     private Controller controller;
+    private Storage storage;
 
     /**
      * Starts the chat bot by first retrieving saved file from hard disk then
      * obtaining input from the user.
      */
     public void start() {
-        Storage.readFromFile(this);
+        storage = new Storage();
+        storage.readFromFile(this);
         controller = new Controller();
     }
 
@@ -28,7 +30,7 @@ public class Duke {
      * Saves the task list into the storage file when user terminates the programme.
      */
     public void end() {
-        Storage.saveFile(taskList, friendlierSyntax);
+        storage.saveFile(taskList, friendlierSyntax);
     }
 
     /**
@@ -40,6 +42,11 @@ public class Duke {
         return taskList;
     }
 
+    /**
+     * Returns the controller.
+     *
+     * @return the controller.
+     */
     public Controller getController() {
         return controller;
     }

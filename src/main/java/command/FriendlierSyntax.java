@@ -5,6 +5,9 @@ import java.util.HashMap;
 public class FriendlierSyntax {
     public HashMap<String, String> friendlierSyntax = new HashMap<>();
 
+    /**
+     * Instantiates the list of friendlier syntax which includes shortcuts for each command.
+     */
     public FriendlierSyntax() {
         friendlierSyntax.put("a", "alias");
         friendlierSyntax.put("alias", "alias");
@@ -32,6 +35,12 @@ public class FriendlierSyntax {
         this.friendlierSyntax = friendlierSyntax;
     }
 
+    /**
+     * Checks the hashmap for the command that the alias corresponds to.
+     *
+     * @param alias alias input by the user.
+     * @return the command which the alias corresponds to.
+     */
     public String findCommand(String alias) {
         if (friendlierSyntax.get(alias) != null) {
             return friendlierSyntax.get(alias);
@@ -40,10 +49,21 @@ public class FriendlierSyntax {
         }
     }
 
+    /**
+     * Adds alias and corresponding command into mappings.
+     *
+     * @param alias   alias for command.
+     * @param command command selected.
+     */
     public void addAlias(String alias, String command) {
         friendlierSyntax.put(alias, command);
     }
 
+    /**
+     * Returns the list of friendlier syntax mappings.
+     *
+     * @return
+     */
     public HashMap<String, String> getFriendlierSyntax() {
         return this.friendlierSyntax;
     }

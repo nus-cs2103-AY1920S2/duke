@@ -6,6 +6,9 @@ import tasks.Event;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+/**
+ * Generates event objects based on user input.
+ */
 public class EventFactory implements Factory<Event> {
     private Parser parser;
 
@@ -13,6 +16,12 @@ public class EventFactory implements Factory<Event> {
         parser = new Parser();
     }
 
+    /**
+     * Creates a event object from user input.
+     *
+     * @param input input given by user
+     * @return event object with the specified parameters
+     */
     public Event create(String input) {
         String[] at = input.split("/");
         if (parser.checkForTags(input)) {

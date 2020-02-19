@@ -5,6 +5,9 @@ import tasks.Todo;
 
 import java.time.LocalDate;
 
+/**
+ * Generates todo objects based on user input.
+ */
 public class TodoFactory implements Factory<Todo> {
     private Parser parser;
 
@@ -12,6 +15,12 @@ public class TodoFactory implements Factory<Todo> {
         parser = new Parser();
     }
 
+    /**
+     * Creates a todo object from user input.
+     *
+     * @param input input given by user.
+     * @return todo object with the specified parameters.
+     */
     public Todo create(String input) {
         String[] parsed = input.split(" ", 2);
         if (parser.checkForTags(input)) {
