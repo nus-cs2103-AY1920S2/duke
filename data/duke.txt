@@ -1,5 +1,3 @@
-1. [T][Y] bday
-2. [D][Y] bday (by: 2020-02-02)
-3. [D][Y] bday (by: 2020-02-02)
-4. [E][Y] bday (at: 2020-02-02)
-5. [T][N] shit
+1. [T][N] CS2103T Week 6 IP
+2. [D][Y] Finish CS2106 Lab 2 (by: 2020-02-29)
+3. [E][N] Birthday Party for Dan (at: 2020-03-15)
