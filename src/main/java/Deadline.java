@@ -40,7 +40,7 @@ public class Deadline extends Task {
             this.by = " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
                     " " + time.format(DateTimeFormatter.ofPattern("hhmma")) + ")";
         } else {
-            this.by = " (by: " + by + ")";
+            this.by = " " + by;
         }
     }
 
