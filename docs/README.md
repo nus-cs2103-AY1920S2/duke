@@ -20,7 +20,7 @@ Example of usage:
 
 Expected outcome:
 
-![Todo](/docs/Todo.png)
+![Todo](https://raw.githubusercontent.com/loycatherine/duke/master/docs/Todo.png)
 
 ### `deadline` - Creates a new deadline task
 
@@ -32,7 +32,7 @@ Example of usage:
 
 Expected outcome:
 
-![Deadline](/docs/Deadline.png)
+![Deadline](https://raw.githubusercontent.com/loycatherine/duke/master/docs/Deadline.png)
 
 ### `event` - Creates a new event task
 
@@ -44,7 +44,7 @@ Example of usage:
 
 Expected outcome:
 
-![Event](https://github.com/loycatherine/duke/blob/master/docs/Event.png)
+![Event](https://raw.githubusercontent.com/loycatherine/duke/master/docs/Event.png)
 
 ### `delete` - Deletes a task
 
@@ -56,7 +56,7 @@ Example of usage:
 
 Expected outcome:
 
-![Delete](/docs/Delete.png)
+![Delete](https://raw.githubusercontent.com/loycatherine/duke/master/docs/Delete.png)
 
 ### `done` - Marks a task as done
 
@@ -68,7 +68,7 @@ Example of usage:
 
 Expected outcome:
 
-![Done](/docs/Done.png)
+![Done](https://raw.githubusercontent.com/loycatherine/duke/master/docs/Done.png)
 
 ### `list` - Lists all the tasks
 
@@ -80,7 +80,7 @@ Example of usage:
 
 Expected outcome:
 
-![List](/docs/List.png)
+![List](https://raw.githubusercontent.com/loycatherine/duke/master/docs/List.png)
 
 ### `find` - Finds a task
 
@@ -92,7 +92,7 @@ Example of usage:
 
 Expected outcome:
 
-![Find](/docs/Find.png)
+![Find](https://raw.githubusercontent.com/loycatherine/duke/master/docs/Find.png)
 
 ### `addNote` - Adds a note to a task
 
@@ -104,7 +104,7 @@ Example of usage:
 
 Expected outcome:
 
-![AddNote](/docs/AddNote.png)
+![AddNote](https://raw.githubusercontent.com/loycatherine/duke/master/docs/AddNote.png)
 
 ### `note` - Retrieves a note of a task
 
@@ -116,7 +116,7 @@ Example of usage:
 
 Expected outcome:
 
-![Note](/docs/Note.png)
+![Note](https://raw.githubusercontent.com/loycatherine/duke/master/docs/Note.png)
 
 ### `bye` - Exits the program
 
@@ -128,6 +128,6 @@ Example of usage:
 
 Expected outcome:
 
-![Bye](/docs/Bye.png)
+![Bye](https://raw.githubusercontent.com/loycatherine/duke/master/docs/Bye.png)
 
 
