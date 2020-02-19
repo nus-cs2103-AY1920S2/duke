@@ -20,8 +20,11 @@ Expected outcome:
 
 ### Add Task
 Adds a new ToDo, Event or Deadline depending on the user input.
+
 ToDos: tasks without any date/time attached to it e.g., visit new theme park.
+
 Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm.
+
 Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm.
 
 #### Usage
@@ -33,13 +36,17 @@ Events: tasks that start at a specific time and ends at a specific time e.g., te
 Example of usage: 
 
 ![ToDo-in](todo-in.png)
+
 ![Deadline-in](deadline-in.png)
+
 ![Event-in](event-in.png)
 
 Expected outcome:
 
 ![ToDo-out](todo-out.png)
+
 ![Deadline-out](deadline-out.png)
+
 ![Event-out](event-out.png)
 
 ### List Tasks
@@ -113,9 +120,11 @@ Edit the timing field for a task of type event or deadline.
 Example of usage: 
 
 ![update1-in](update1-in.png)
+
 ![update2-in](update2-in.png)
 
 Expected outcome:
 
 ![update1-out](update1-out.png)
+
 ![update2-out](update2-out.png)
