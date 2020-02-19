@@ -88,6 +88,7 @@ public class Parser {
         matcher.find();
 
         String index = matcher.group(POSITION_TARGET_INDEX);
+        assert index != null: "cannot find index";
         return Integer.parseInt(index) - DIFFERENCE_IN_START_INDEX;
     }
 
@@ -101,7 +102,9 @@ public class Parser {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
 
-        return matcher.group(POSITION_DESCRIPTION).trim();
+        String description = matcher.group(POSITION_DESCRIPTION);
+        assert description != null: "cannot find index";
+        return description.trim();
     }
 
     /**
@@ -117,6 +120,8 @@ public class Parser {
         String dateString = matcher.group(POSITION_DATE);
         String timeString = matcher.group(POSITION_TIME);
 
+        assert dateString != null: "cannot find date string";
+        assert timeString != null: "cannot find time string";
         return parseDateTime(dateString, timeString);
     }
 
@@ -125,6 +130,7 @@ public class Parser {
         matcher.find();
         String dateString = matcher.group(POSITION_VIEW_SCHEDULE_DATE);
 
+        assert dateString != null: "cannot find date string";
         return parseDate(dateString);
     }
 
@@ -132,6 +138,8 @@ public class Parser {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
 
+        String keyWord = matcher.group(POSITION_KEYWORD);
+        assert keyWord != null: "cannot find keyword";
         return matcher.group(POSITION_KEYWORD);
     }
 
