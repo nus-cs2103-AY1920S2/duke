@@ -5,14 +5,10 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Loads and saves Duke data file.
@@ -35,25 +31,20 @@ public class Storage {
      * @return A list of old tasks record.
      */
     public ArrayList<Task> load() {
-        FileReader fr = null;
+        File file = new File(this.path);
+
+        Scanner sc = null;
         try {
-            fr = new FileReader(path);
+            sc = new Scanner(file);
         } catch (FileNotFoundException e) {
-            System.out.println("    Cannot open data file in path: " + path);
+            System.out.println("Cannot open data file!");
+            return new ArrayList<>();
         }
-        BufferedReader br = new BufferedReader(fr);
 
         ArrayList<Task> tasks = new ArrayList<>();
 
-        String line = null;
-        while (true) {
-            try {
-                if ((line = br.readLine()) == null) {
-                    break;
-                }
-            } catch (IOException e) {
-                System.out.println("    Cannot read data!");
-            }
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
             Task currTask = decodeTaskFromString(line);
             tasks.add(currTask);
         }

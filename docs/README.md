@@ -22,7 +22,7 @@
 
 2. Download the latest jar file to your local computer
 
-3. Run the application in your terminal by command: `java -jar PATH_OF_DDDUKE` or double click the jar file.
+3. Run the application in your terminal by command: `java -jar PATH_OF_DDDUKE`.
 
    If you run correctly, you will see this page:
 

@@ -12,8 +12,9 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private String dir = System.getProperty("user.dir");
-    private String path = dir + File.separator + "data" + File.separator + "duke.txt";
+    //private String dir = System.getProperty("user.dir");
+    //private String path = dir + File.separator + "data" + File.separator + "duke.txt";
+    private String path = "duke.txt";
 
     private Duke duke = new Duke(path);
 
