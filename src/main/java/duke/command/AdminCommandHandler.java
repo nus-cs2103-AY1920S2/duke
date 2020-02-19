@@ -18,10 +18,12 @@ public class AdminCommandHandler {
     /**
      * Prints the help message with the given {@code Ui} instance.
      *
-     * @param command  Full raw user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Help message.
      */
     static String handleHelpCommand(String command, TaskList taskList, Ui ui,
                                     Storage storage, SaveStateStack saveStateStack) {
@@ -32,10 +34,12 @@ public class AdminCommandHandler {
     /**
      * Prints the goodbye message with the given {@code Ui} instance.
      *
-     * @param command  Full user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return String containing the goodbye message.
      */
     static String handleByeCommand(String command, TaskList taskList, Ui ui,
                                    Storage storage, SaveStateStack saveStateStack) {
@@ -43,6 +47,17 @@ public class AdminCommandHandler {
         return ui.printGoodbye();
     }
 
+    /**
+     * Undos the last action by the user.
+     *
+     * @param command        Full user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Success message of undo.
+     * @throws DuchessException If no more undos are allowed.
+     */
     static String handleUndoCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                     SaveStateStack saveStateStack) throws DuchessException {
         assert Command.UNDO.hasCommand(cleanAndLowerString(command));

@@ -172,6 +172,12 @@ public class TaskList {
         return List.<Task>of(tasksClone.toArray(new Task[tasksClone.size()]));
     }
 
+    /**
+     * Replaces the existing array of tasks with a new one. This is only relevant when
+     * undoing.
+     *
+     * @param taskList New task list to replace current task list.
+     */
     public void replaceTaskList(ArrayList<Task> taskList) {
         this.tasks = taskList;
         this.taskDescriptions = new HashMap<>();

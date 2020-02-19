@@ -39,10 +39,12 @@ public class TaskCreationHandler {
      * Creates a {@code ToDo} based on the command and given the entire command and
      * the supporting instances.
      *
-     * @param command  Full raw user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full raw user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Success message of todo creation.
      * @throws DuchessException If the list fails to be saved.
      */
     static String handleTodoCommand(String command, TaskList taskList, Ui ui, Storage storage,
@@ -57,10 +59,12 @@ public class TaskCreationHandler {
      * Creates a {@code Event} based on the command and given the entire command and
      * the supporting instances.
      *
-     * @param command  Full raw user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full raw user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Success message of event creation.
      * @throws DuchessException If the list fails to be saved or /at [details] is
      *                          missing.
      */
@@ -76,10 +80,12 @@ public class TaskCreationHandler {
      * Creates a {@code Deadline} based on the command and given the entire command
      * and the supporting instances.
      *
-     * @param command  Full raw user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full raw user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Success message of deadline creation.
      * @throws DuchessException If the list fails to be saved or /by is missing or
      *                          the deadline is of an unrecognizable format.
      */
@@ -117,7 +123,8 @@ public class TaskCreationHandler {
      * processes. the input and checks for any errors. If error is found, an
      * appropriate error is thrown.
      *
-     * @param command Raw uncleaned command to process.
+     * @param command        Raw uncleaned command to process.
+     * @param detailsKeyword Keyword to split command by.
      * @return Task created from command.
      * @throws DuchessException If the given command is of an invalid format.
      */
@@ -144,6 +151,7 @@ public class TaskCreationHandler {
      *
      * @param command Original user command.
      * @return {@code Deadline} object.
+     * @throws DuchessException If the deadline format is invalid.
      */
     private static Deadline getDeadlineFromDetails(String command) throws DuchessException {
         ArrayList<String> details = new ArrayList<>(Arrays.asList(command.split("/")));

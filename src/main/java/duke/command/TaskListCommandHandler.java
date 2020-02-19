@@ -31,10 +31,12 @@ public class TaskListCommandHandler {
     /**
      * Prints out the given {@code TaskList} with the given {@code Ui} instance.
      *
-     * @param command  Full user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return String containing all {@code Task}s.
      */
     static String handleListCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                     SaveStateStack saveStateStack) throws DuchessException {
@@ -46,10 +48,12 @@ public class TaskListCommandHandler {
      * Completes a {@code Task} based on the command and given the entire command
      * and the supporting instances.
      *
-     * @param command  Full user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Success message for completing the task.
      * @throws DuchessException If the list fails to be saved or the index is out of
      *                          bounds or the task is already completed.
      */
@@ -69,10 +73,12 @@ public class TaskListCommandHandler {
      * command and the supporting instances. The list of {@code Task}s are then
      * printed out with the given {@code Ui} instance.
      *
-     * @param command  Full user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Message containing list of found tasks.
      */
     static String handleFindCommand(String command, TaskList taskList, Ui ui,
                                     Storage storage, SaveStateStack saveStateStack) {
@@ -86,10 +92,12 @@ public class TaskListCommandHandler {
      * Deletes a {@code Task} based on the command and given the entire command and
      * the supporting instances.
      *
-     * @param command  Full user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Success message for deletion of task.
      * @throws DuchessException If the list fails to be saved or the index is out of
      *                          bounds.
      */
@@ -97,7 +105,7 @@ public class TaskListCommandHandler {
                                       SaveStateStack saveStateStack) throws DuchessException {
         int index = getIntegerFromCommand(command);
         checkBoundsOfIndex(index, taskList);
-        Task taskToDelete = taskList.getTask(index - 1);
+        final Task taskToDelete = taskList.getTask(index - 1);
         SaveState newSaveState = new SaveState(taskList, command);
         saveStateStack.push(newSaveState);
         taskList.removeTask(index - 1);
@@ -109,10 +117,12 @@ public class TaskListCommandHandler {
      * Snoozes a {@code Task} based on the command and given the entire command and
      * the supporting instances.
      *
-     * @param command  Full user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Success message for the snoozing of deadlines.
      * @throws DuchessException If the list fails to be saved or the index is out of
      *                          bounds or the task does not have a deadline to snooze.
      */
@@ -140,10 +150,12 @@ public class TaskListCommandHandler {
     /**
      * Sorts the {@code TaskList} given the entire command and the supporting instances.
      *
-     * @param command  Full user command string.
-     * @param taskList List of tasks.
-     * @param ui       Ui instance.
-     * @param storage  Storage instance.
+     * @param command        Full user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Success message after sorting the array.
      * @throws DuchessException If the list is empty and has nothing to sort.
      */
     static String handleSortCommand(String command, TaskList taskList, Ui ui, Storage storage,
