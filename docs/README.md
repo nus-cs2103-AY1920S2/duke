@@ -95,7 +95,7 @@ Okay! I have taken note of the following:
 [E][❌] meeting (at: Sunday 2pm)
 Now you have 1 tasks in the list.
 ```
-![Github Logo](./UG/Event.png)
+<img src ="./UG/Event.png">
 
 <br/> 
 
