@@ -16,7 +16,15 @@ public class Storage {
       this.file = new File(filePath);
       this.fileScanner = new Scanner(file);
     } catch (FileNotFoundException f) {
-      throw new DukeException("file", "");
+		File dir = new File("data");
+		dir.mkdir();
+		this.file = new File(dir, "duke.txt");
+		try {
+			file.createNewFile();
+			this.fileScanner = new Scanner(file);
+		} catch (IOException e) {
+			throw new DukeException("file", "");
+		}
     }
   }
 
