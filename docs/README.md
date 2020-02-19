@@ -2,8 +2,8 @@
 
 ## Description
 DukeBot is a personal chat bot to help a user keep track of tasks to be done by storing them in a task list.
-<img src ="./UG/Start-up.png">
- 
+![Github Logo](./UG/Start-up.png)
+
 ## Features 
 
 ### Add task
@@ -57,7 +57,7 @@ Okay! I have taken note of the following:
 [T][❌] exercise
 Now you have 1 tasks in the list.
 ```
-<img src ="./UG/Todo.png">
+![Github Logo](./UG/Todo.png)
 
 <br/>
 
@@ -76,7 +76,7 @@ Okay! I have taken note of the following:
 [D][❌] Assignment 1 (by: Feb 01 2020 1200 PM)
 Now you have 1 tasks in the list.
 ```
-<img src ="./UG/Deadline.png">
+![Github Logo](./UG/Deadline.png)
 
 <br/> 
 
@@ -95,7 +95,7 @@ Okay! I have taken note of the following:
 [E][❌] meeting (at: Sunday 2pm)
 Now you have 1 tasks in the list.
 ```
-<img src ="./UG/Event.png">
+![Github Logo](./UG/Event.png)
 
 <br/> 
 
