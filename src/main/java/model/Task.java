@@ -78,6 +78,8 @@ public abstract class Task {
     }
 
     public boolean hasKeyWord(String keyWord) {
+        assert description != null: "description not assigned";
+        assert description.length() > 0: "task description is empty";
         return description.toLowerCase().contains(keyWord.toLowerCase());
     }
 
@@ -101,6 +103,8 @@ public abstract class Task {
      * @return description of the task.
      */
     public String getDescription() {
+        assert description != null: "description not assigned";
+        assert description.length() > 0: "task description is empty";
         return this.description;
     }
 
@@ -109,6 +113,8 @@ public abstract class Task {
      * @return an arraylist including the description.
      */
     public ArrayList<String> getDetails() {
+        assert description != null: "description not assigned";
+        assert description.length() > 0: "task description is empty";
         return new ArrayList<String>(Collections.singletonList(this.description));
     }
 
@@ -132,6 +138,8 @@ public abstract class Task {
      * @return String.
      */
     public String toString() {
+        assert description != null: "description not assigned";
+        assert description.length() > 0: "task description is empty";
         return "[" + this.getStatusIcon() + "]" + " " + this.getDescription();
     }
 }

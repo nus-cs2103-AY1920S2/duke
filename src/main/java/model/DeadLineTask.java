@@ -60,8 +60,8 @@ public class DeadLineTask extends Task {
      */
     @Override
     public ArrayList<String> getDetails() {
-        assert description != null: "task description is null";
-        assert description.length() > 0: "task description is empty while storage";
+        assert description != null: "task description not assigned";
+        assert description.length() > 0: "task description is empty";
 
         return new ArrayList<String>(Arrays.asList(
                 this.description,
@@ -70,6 +70,7 @@ public class DeadLineTask extends Task {
 
     @Override
     public boolean isOnDate(LocalDate targetDate) {
+        assert by != null: "the value of 'by' not assigned";
         return by.toLocalDate().equals(targetDate);
     }
 
@@ -79,6 +80,7 @@ public class DeadLineTask extends Task {
      */
     @Override
     public String toString() {
+        assert by != null: "the value of 'by' not assigned";
         return "[" + TASK_TYPE_CHA + "]" + super.toString() + " (by: " + by.format(DATE_TIME_FORMAT) + ")";
     }
 }
