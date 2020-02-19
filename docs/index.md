@@ -45,7 +45,7 @@ _**The task management tool for every busy professional**_
 - `date /on {date}` - searches for tasks that occur on or are due by `date`
 - `history` - prints out the list of past commands _(Max: 20)_
 - `exit` - exits the application
-- <kbd>keyup</kbd> - cycles through command history 
+- keyup - allows you to cycle through command history
 ---
 
 ## Team
