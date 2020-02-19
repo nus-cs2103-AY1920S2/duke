@@ -2,17 +2,21 @@ package duke.command;
 
 import duke.exception.DuchessException;
 import duke.storage.Storage;
+import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import duke.util.DurationParser;
 import duke.util.Pair;
 
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static duke.util.MagicStrings.ERROR_COMMAND_MISSING_INDEX;
 import static duke.util.MagicStrings.ERROR_COMMAND_TOO_MANY_INDICES;
 import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
+import static duke.util.MagicStrings.ERROR_SNOOZING_NON_DEADLINE;
 
 /**
  * The {@code CommandHandler} class contains all static methods to handle
@@ -89,6 +93,22 @@ public class TaskListCommandHandler {
         taskList.removeTask(index - 1);
         storage.save(taskList);
         return ui.printTaskDeleted(taskToDelete, taskList.size());
+    }
+
+    static String handleSnoozeCommand(String command, TaskList taskList,
+                                      Ui ui, Storage storage) throws DuchessException {
+        ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("/for", 2)));
+        int index = getIntegerFromCommand(commands.get(0));
+        checkBoundsOfIndex(index, taskList);
+        Task taskToSnooze = taskList.getTask(index - 1);
+        if (!(taskToSnooze instanceof Deadline)) {
+            throw new DuchessException(ERROR_SNOOZING_NON_DEADLINE);
+        }
+        String duration = commands.get(1).trim().toLowerCase();
+        TemporalAmount snoozePeriod = DurationParser.parseDuration(duration);
+        ((Deadline) taskToSnooze).snooze(snoozePeriod);
+        storage.save(taskList);
+        return ui.printTaskSnoozed(taskToSnooze, DurationParser.parseDurationToString(duration));
     }
 
     private static Integer getIntegerFromCommand(String command) throws DuchessException {

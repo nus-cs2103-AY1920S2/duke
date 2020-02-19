@@ -4,6 +4,7 @@ import duke.exception.DuchessException;
 import duke.util.Frequency;
 
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAmount;
 
 import static duke.util.MagicStrings.ERROR_RECURRING_TASK_MISSING_DEADLINE;
 
@@ -71,6 +72,14 @@ public class RecurringDeadline extends Deadline {
             return;
         }
         super.completeTask();
+    }
+
+    @Override
+    public void snooze(TemporalAmount snoozePeriod) {
+        super.snooze(snoozePeriod);
+        if (this.repeatEndTime != null) {
+            this.repeatEndTime = this.repeatEndTime.plus(snoozePeriod);
+        }
     }
 
     private String getFrequency() throws DuchessException {

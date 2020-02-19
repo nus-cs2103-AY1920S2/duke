@@ -28,12 +28,17 @@ public class MagicStrings {
     public static final String ERROR_INVALID_COMMAND = "I don't see what I can do with what you just told me.";
     //    public static final String ERROR_INVALID_FILE_PATH = "Your file path is invalid. A new JSON file will "
     //            + "be used for saving.";
+    public static final String ERROR_INVALID_SNOOZE_DURATION = "Your snooze duration is not valid! Something "
+            + "like '/for 3 days' would work";
+    public static final String ERROR_INVALID_UNIT_OF_TIME = "Your unit of time is not recognised! Please use "
+            + "hours/days/weeks/months/years.";
     public static final String ERROR_FAIL_TO_LOAD = "Failed to load save file! Creating new save file.";
     public static final String ERROR_FAIL_TO_LOAD_AND_SAVE = "Failed to load save file! "
             + "You will also not be able to save.";
     public static final String ERROR_FAIL_TO_SAVE = "Facing difficulties saving your tasks right now.";
     public static final String ERROR_RECURRING_TASK_MISSING_DEADLINE = "This recurring task "
             + "seem to have no deadline!";
+    public static final String ERROR_SNOOZING_NON_DEADLINE = "You can't snooze a task with no deadline!";
     public static final String ERROR_TASK_ALREADY_COMPLETED = "You have already completed this task!";
     public static final String ERROR_TODO_MISSING_CONTENT = "Your todo content cannot be empty! "
             + "Type help if you need help.";

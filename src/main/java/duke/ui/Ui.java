@@ -151,6 +151,11 @@ public class Ui {
         return this.print("Oh? You actually completed something? Impressive...", task.toString());
     }
 
+    public String printTaskSnoozed(Task task, String snoozePeriod) {
+        return this.print("Behind schedule as always... " +
+                "I've pushed back the deadline for you by " + snoozePeriod, task.toString());
+    }
+
     /**
      * Returns an error message formatted appropriately.
      *
@@ -188,6 +193,7 @@ public class Ui {
                 "done INDEX: Complete task at index.",
                 "find WORD(S): Find tasks with said word(s) in name.",
                 "delete INDEX: Delete task at index.",
+                "snooze INDEX /for DURATION: Pushes back deadline by given duration.",
                 "bye: Bid farewell (sounds great!).",
                 "help: See this message again.",
                 new String(new char[45]).replace("\0", "-"),

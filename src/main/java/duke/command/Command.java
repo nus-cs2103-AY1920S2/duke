@@ -17,6 +17,7 @@ public enum Command {
     DONE(TaskListCommandHandler::handleDoneCommand),
     FIND(TaskListCommandHandler::handleFindCommand),
     DELETE(TaskListCommandHandler::handleDeleteCommand),
+    SNOOZE(TaskListCommandHandler::handleSnoozeCommand),
     HELP(AdminCommandHandler::handleHelpCommand),
     BYE(AdminCommandHandler::handleByeCommand);
 

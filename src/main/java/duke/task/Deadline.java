@@ -3,6 +3,7 @@ package duke.task;
 import duke.util.DateTimeStringFormatter;
 
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAmount;
 
 /**
  * The {@code Deadline} class extends from {@code Task} to allow the setting of
@@ -46,6 +47,15 @@ public class Deadline extends Task {
      */
     public LocalDateTime getDeadline() {
         return deadline;
+    }
+
+    /**
+     * Snoozes the deadline by the given amount of time.
+     *
+     * @param snoozePeriod
+     */
+    public void snooze(TemporalAmount snoozePeriod) {
+        this.deadline = this.deadline.plus(snoozePeriod);
     }
 
     @Override
