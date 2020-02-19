@@ -22,11 +22,11 @@ public class Controller {
     /**
      * Constructor for the controller object which instantiates factory objects to create various tasks.
      */
-    public Controller() {
+    public Controller(Duke duke) {
         deadlineFactory = new DeadlineFactory();
         eventFactory = new EventFactory();
         todoFactory = new TodoFactory();
-        parser = new Parser();
+        parser = new Parser(duke);
     }
 
     /**
@@ -90,6 +90,8 @@ public class Controller {
                     Event newEvent = eventFactory.create(description);
                     taskList.addTask(newEvent);
                     return UI.ADD + "\t\t" + newEvent.toString() + taskList.printTotalTasks();
+                case "help":
+                    return UI.HELP;
                 default:
                     return "";
             }

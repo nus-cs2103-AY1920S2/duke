@@ -23,7 +23,7 @@ public class Duke {
     public void start() {
         storage = new Storage();
         storage.readFromFile(this);
-        controller = new Controller();
+        controller = new Controller(this);
     }
 
     /**

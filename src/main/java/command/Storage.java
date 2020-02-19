@@ -33,6 +33,7 @@ public class Storage {
             duke.setTaskList(gson.fromJson(task, TaskList.class));
             duke.setFriendlierSyntax(gson.fromJson(fileReader, FriendlierSyntax.class));
         } catch (FileNotFoundException e) {
+            System.err.println(e);
             duke.setFriendlierSyntax(new FriendlierSyntax());
             duke.setTaskList(new TaskList());
         }

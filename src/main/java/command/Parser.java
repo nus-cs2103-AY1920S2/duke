@@ -3,8 +3,12 @@ package command;
 public class Parser {
     private FriendlierSyntax friendlierSyntax;
 
+    public Parser(Duke duke) {
+        friendlierSyntax = duke.getFriendlierSyntax();
+    }
+
     public Parser() {
-        friendlierSyntax = new FriendlierSyntax();
+
     }
 
     /**
@@ -78,6 +82,8 @@ public class Parser {
                 } else {
                     return;
                 }
+            case "help":
+                return;
             case "tag":
                 if (parsedInput.length < 2) {
                     throw new DukeException("Pawdon me, I think you furgot to include the tag.");

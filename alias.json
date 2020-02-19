@@ -20,6 +20,8 @@
     "alias": "alias",
     "tag": "tag",
     "deadline": "deadline",
-    "event": "event"
+    "event": "event",
+    "help": "help",
+    "h": "help"
   }
 }

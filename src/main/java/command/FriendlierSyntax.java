@@ -45,6 +45,7 @@ public class FriendlierSyntax {
         if (friendlierSyntax.get(alias) != null) {
             return friendlierSyntax.get(alias);
         } else {
+            System.out.println("not found");
             return "error";
         }
     }
