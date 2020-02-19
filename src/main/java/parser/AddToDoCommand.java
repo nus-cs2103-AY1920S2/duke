@@ -26,9 +26,6 @@ public class AddToDoCommand extends Command {
     @Override
     public String execute() throws NoDescriptionException {
         Task taskToAdd = new ToDoTask(description);
-
-        String commandResult = this.taskList.add(taskToAdd);
-        assert this.taskList.size() > 0: "task not added";
-        return commandResult;
+        return this.taskList.add(taskToAdd);
     }
 }

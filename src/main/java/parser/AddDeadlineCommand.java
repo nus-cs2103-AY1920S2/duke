@@ -30,9 +30,6 @@ public class AddDeadlineCommand extends Command {
     @Override
     public String execute() throws NoDescriptionException {
         Task taskToAdd = new DeadLineTask(description, at);
-        String commandResult = this.taskList.add(taskToAdd);
-
-        assert this.taskList.size() > 0: "task not added";
-        return commandResult;
+        return this.taskList.add(taskToAdd);
     }
 }

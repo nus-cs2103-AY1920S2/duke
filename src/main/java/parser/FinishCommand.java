@@ -19,8 +19,6 @@ public class FinishCommand extends Command {
      * @return response from the TaskList class as a string.
      */
     public String execute() {
-
-        assert this.taskList.size() > 0: "task list is empty, cannot mark any task";
         return this.taskList.markTaskAsDone(position);
     }
 }
