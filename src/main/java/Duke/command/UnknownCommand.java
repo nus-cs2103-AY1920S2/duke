@@ -1,3 +1,5 @@
+package Duke.command;
+
 public class UnknownCommand extends Command {
 
     public UnknownCommand() {

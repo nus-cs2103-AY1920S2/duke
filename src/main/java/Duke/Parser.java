@@ -1,3 +1,12 @@
+package Duke;
+
+import Duke.command.*;
+import Duke.exception.DukeException;
+import Duke.task.Deadline;
+import Duke.task.Event;
+import Duke.task.Task;
+import Duke.task.ToDo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -33,6 +42,9 @@ public class Parser {
         } else if (in.equals("statistics") || in.equals("stats")) {
             Command statsCommand = new StatsCommand(taskList);
             outputString = statsCommand.execute(); //TODO: outputString in this class instead
+        } else if (in.equals("help")) {
+            Command helpCommand = new HelpCommand();
+            outputString = helpCommand.execute();
         } else {
             String taskType = in.split(" ", 2)[0];
             if (isValidTask(taskType)) {

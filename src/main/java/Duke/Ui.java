@@ -1,7 +1,7 @@
-import java.util.Scanner;
+package Duke;
 
 public class Ui {
-    String logo = "DUKE!\n";
+    String logo = "THE GRANDEST DUKE!\n";
     Parser parser;
     TaskList taskList;
 
@@ -18,24 +18,11 @@ public class Ui {
     }
 
     /**
-     * Scans for user input indefinitely and terminates when user inputs "bye".
-     */
-    /*
-    public void awaitUserInput() {
-        String in = sc.nextLine();
-        while (!in.equals("bye")) {
-            parser.getInput(in);
-            in = sc.nextLine();
-        }
-        System.out.println("     Bye. Hope to see you again soon!");
-    }
-    */
-
-    /**
      * String to be printed by Duke on Duke's startup.
      */
     String startupString() {
-        return "Hello from " + logo;
+        String helpString = parser.getOutputString("help");
+        return "Welcome, welcome to... " + logo + "\n" + helpString;
     }
 
     /**

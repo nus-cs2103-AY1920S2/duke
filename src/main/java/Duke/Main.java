@@ -1,3 +1,5 @@
+package Duke;
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -23,6 +25,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("The Grandest Duke");
             stage.resizableProperty().setValue(false);
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent event) {
@@ -32,7 +35,7 @@ public class Main extends Application {
                 }
             });
             stage.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

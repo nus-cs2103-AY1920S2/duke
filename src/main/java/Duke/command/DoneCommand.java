@@ -1,3 +1,8 @@
+package Duke.command;
+
+import Duke.TaskList;
+import Duke.task.Task;
+
 public class DoneCommand extends Command {
     Task taskDone;
 
@@ -10,7 +15,7 @@ public class DoneCommand extends Command {
         String in = taskDesc;
         String out;
         try {
-            int num = Integer.parseInt(in.substring(5));
+            int num = Integer.parseInt(in);
             taskDone = list.get(num - 1);
             taskDone.markDone();
             stats.add(this);
