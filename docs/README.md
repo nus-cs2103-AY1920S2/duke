@@ -59,7 +59,7 @@ from ToDo, Deadline, Event, or Loan. Below are some provided examples.
 
 ```
 The format for adding Tasks is as follows:
-<Task Type> <Task Name> </separator> <Date as YYYY-MM-DD>
+<Task Type> <Task Name> </separator> <Date (YYYY-MM-DD) or Loan Value>
 ```
 
 #### `Add a ToDo`
