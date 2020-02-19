@@ -26,6 +26,8 @@ public class MainPage extends AnchorPane {
     private Ui uiHelper;
 
 
+
+    
     @FXML
     private ScrollPane scrollPane;
     @FXML
