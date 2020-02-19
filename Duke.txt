@@ -1,0 +1,5 @@
+T /n 1 /n read book
+D /n 1 /n return book /n 2020-02-03
+E /n 0 /n project meeting /n 2020-03-20 4-6pm
+T /n 0 /n join sports club
+T /n 0 /n borrow book
