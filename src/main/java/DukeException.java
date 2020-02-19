@@ -64,7 +64,7 @@ public class DukeException{
      * @return String for error message.
      */
     public String invalidDateFormat(){
-        return "Invalid Date Format! Enter in /by yyyy-mm-dd\n";
+        return "Invalid Date Format! Enter in /by dd/mm/yyyy\n";
     }
 
     /**
@@ -72,7 +72,7 @@ public class DukeException{
      * @return String for error message.
      */
     public String invalidTimeFormat(){
-        return "Invalid Date Format! Enter in hh:mm\n";
+        return "Invalid Date Format! Enter in hhmm\n";
     }
 
     /**

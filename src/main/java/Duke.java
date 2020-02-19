@@ -70,7 +70,7 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();                //create a textfield
-        sendButton = new Button("Send");       //set button with "Send" label
+        sendButton = new Button("Enter");
 
         AnchorPane mainLayout = new AnchorPane();   //the background
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);

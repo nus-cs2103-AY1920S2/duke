@@ -3,28 +3,8 @@ public class Ui {
     public Ui(){
     }
 
-    /**
-     * This method forms a divider line.
-     * @return String This is the line to be return.
-     */
-    public String line(){
-        return "____________________________________________________________\n";
-    }
-
-    /**
-     * This method prints the welcome message when user first run the program.
-     */
-    public void logo(){
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
     public String welcomeMessage() {
-        return "Hi, welcome to Duke! \nHow can I help you?";
+        return "Hi, welcome to your very own Personal Schedule! \nHow can I help you?";
     }
 
     /**
@@ -42,7 +22,7 @@ public class Ui {
      * @return String This is the Message for the Delete action.
      */
     public String DeleteMessage(String Action, int amt){
-        String Output = String.format("\nNow you have %d tasks in the list\n", amt);
+        String Output = String.format("\nNow you have %d tasks in the list.\n", amt);
         return "Noted. I've removed this task: \n" + Action + Output;
     }
 

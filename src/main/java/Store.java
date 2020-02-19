@@ -252,6 +252,7 @@ public class Store {
         String output;
         int counter = 1;
         for (Task task : Storage) {
+            task.getStatusIcon();
             String data = task.toString();
             if (data.contains(Action)) {
                 Matches.add(String.format("%d.", counter) + data);
