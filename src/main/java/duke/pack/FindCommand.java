@@ -52,7 +52,7 @@ public class FindCommand extends Command {
 
         for (Task t: list) {
             if (t.toString().contains(query)) {
-                resp = resp + "    " + i + "." + t + "\n";
+                resp = resp + i + "." + t + "\n";
             }
             i++;
         }
