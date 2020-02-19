@@ -20,13 +20,12 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        int originalSize = tasks.size();
         String string = "";
         ArrayList<Task> deleted = new ArrayList<>();
 
         for (int i = 0; i < options.length; i++) {
-            String s = ui.showDeletedTask(tasks, options[i]) + "\n";
             deleted.add(tasks.get(options[i] - 1));
-            string += s;
         }
 
         for (int i = 0; i < deleted.size(); i++) {
@@ -34,7 +33,7 @@ public class DeleteCommand extends Command {
         }
 
         storage.writeFile(tasks);
-        return string;
+        return ui.showDeletedTask(deleted, originalSize);
     }
 
     /**

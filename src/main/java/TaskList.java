@@ -37,7 +37,7 @@ public class TaskList {
 
     /**
      * Removes the task from the list.
-     * @param option Specific index of task in the list.
+     * @param task Specific task in the list.
      */
     public void deleteTask(Task task) {
         arr.remove(task);

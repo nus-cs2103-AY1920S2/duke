@@ -14,7 +14,7 @@ public class Ui {
     public static String showWelcome() {
         String logo = " /\\_/\\\n" +
                       "( o.o )\n";
-        return logo + "Hello! I'm Duke\nWhat can I do for you?";
+        return logo + "Hello! I'm Momo :3\nWhat can I do for you?";
     }
 
     public String readCommand() {
@@ -49,14 +49,34 @@ public class Ui {
         return "Nice! I've marked this task as done:\n  " + task;
     }
 
-    public String showDeletedTask(TaskList tasks, int option) {
-        assert tasks.arr.size() > 0 : "Size of the task list cannot be 0";
-        return "Noted. I've removed this task: \n  " + tasks.get(option - 1) + "\nNow you have " + (tasks.size() - 1) + " tasks in the list.";
+    public String showDeletedTask(ArrayList<Task> deletedTasks, int originalSize) {
+        String s = "";
+        s += "Noted. I've removed this task: \n ";
+        for (int i = 0; i < deletedTasks.size(); i++) {
+            String task = deletedTasks.get(i).toString() + "\n";
+            s += task;
+        }
+        int size = originalSize - deletedTasks.size();
+        String taskOrTasks = "";
+        if (size == 1) {
+            taskOrTasks = " task";
+        } else {
+            taskOrTasks = " tasks";
+        }
+        s += "Now you have " + size + taskOrTasks +  " in the list.";
+        return s;
     }
 
     public String showAddedTask(Task task, TaskList tasks) {
         assert tasks.arr.size() > 0 : "Size of the task list cannot be 0";
-        return "Got it. I've added this task: \n " + task + "\nNow you have " + tasks.size() + " tasks in the list.";
+        int size = tasks.size();
+        String taskOrTasks = "";
+        if (size == 1) {
+            taskOrTasks = " task";
+        } else {
+            taskOrTasks = " tasks";
+        }
+        return "Got it. I've added this task: \n " + task + "\nNow you have " + size + taskOrTasks + " in the list.";
     }
 
     public String showFoundTasks(ArrayList<Task> tasksFound) {

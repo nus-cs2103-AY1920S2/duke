@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -54,9 +51,9 @@ public class Storage {
      * Loads existing tasks from the file to a list.
      * @return ArrayList representation of the list of tasks.
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws IOException, FileNotFoundException {
         ArrayList<Task> data = new ArrayList<>();
-        try {
+//        try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             while (true) {
                 String str = br.readLine();
@@ -84,9 +81,9 @@ public class Storage {
                     data.add(task);
                 }
             }
-        } catch (Exception e) {
-            ui.showFileNotFoundError();
-        }
+//        } catch (Exception e) {
+//            ui.showFileNotFoundError();
+//        }
         return data;
     }
 
