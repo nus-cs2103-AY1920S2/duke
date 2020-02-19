@@ -13,12 +13,17 @@ public class Storage {
     private PrintWriter writer;
     private String filePath;
 
+    /**
+     * Creates a file if it does not exists.
+     * @param filePath location of file
+     * @throws DukeException file not found
+     */
     public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
-        if(!new File(filePath).exists()) {
+        if (!new File(filePath).exists()) {
             try {
                 new File(filePath).createNewFile();
-            } catch (IOException e){
+            } catch (IOException e) {
                 throw new DukeException("File not found.");
             }
         }

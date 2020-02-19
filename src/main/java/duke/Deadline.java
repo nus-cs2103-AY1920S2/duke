@@ -26,7 +26,8 @@ public class Deadline extends Task {
             TimeParser tp = new TimeParser(time);
             ldt = tp.getTime();
         } catch (Exception e) {
-            throw new DukeException(time + " is not a valid date time format! Try 'help' to look at the correct format");
+            throw new DukeException(time + " is not a valid date time format! "
+                    + "\nTry 'help' to look at the correct format");
         }
     }
 

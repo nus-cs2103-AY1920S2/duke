@@ -17,8 +17,8 @@ public class Eevee {
 
         Parser parser = new Parser(tasks, storage);
         if (command.equals("bye")) {
-             sb.append("Bye! Hope to see you again soon!");
-             return sb.toString();
+            sb.append("Bye! Hope to see you again soon!");
+            return sb.toString();
         } else {
             try {
                 sb.append(parser.record(command));

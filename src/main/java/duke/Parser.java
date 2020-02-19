@@ -57,8 +57,8 @@ public class Parser {
                     throw new DukeException("Unexpected command: " + command);
                 }
             } catch (Exception e) {
-                throw new DukeException("Error: " + e.getMessage() +
-                        "\nType 'help' to refer to commands and their formats.");
+                throw new DukeException("Error: " + e.getMessage()
+                        + "\nType 'help' to refer to commands and their formats.");
             }
         }
         storage.storeData(taskList);
@@ -72,11 +72,11 @@ public class Parser {
             x = command.indexOf(' ');
             assert x >= 0;
         } catch (StringIndexOutOfBoundsException e) {
-            switch(command) {
-                case "todo":
-                    throw new DukeException("The description of a todo cannot be empty");
-                default:
-                    throw new DukeException("I'm sorry but I don't know what that means :(");
+            switch (command) {
+            case "todo":
+                throw new DukeException("The description of a todo cannot be empty");
+            default:
+                throw new DukeException("I'm sorry but I don't know what that means :(");
             }
         }
         return x > 0 ? x : 0;
@@ -91,15 +91,15 @@ public class Parser {
     }
 
     private StringBuilder help() {
-        String COMMAND_GUIDE = "Hello! Here are the commands that I can understand:\n" +
-                "\u2022 'list'\n" +
-                "\u2022 'delete' [index]\n" +
-                "\u2022 'done' [index]\n" +
-                "\u2022 'todo' [name of todo]\n" +
-                "\u2022 'deadline' [name of deadline] /by [YYYY-MM-DD HHMM]\n" +
-                "\u2022 'event' [name of event] /by [YYYY-MM-DD HHMM-HHMM]\n" +
-                "\u2022 'find' [name of task]";
-        StringBuilder sb = new StringBuilder(COMMAND_GUIDE);
+        String commandGuide = "Hello! Here are the commands that I can understand:\n"
+                + "- 'list'\n"
+                + "- 'delete' [index]\n"
+                + "- 'done' [index]\n"
+                + "- 'todo' [name of todo]\n"
+                + "- 'deadline' [name of deadline] /by [YYYY-MM-DD HHMM]\n"
+                + "- 'event' [name of event] /by [YYYY-MM-DD HHMM-HHMM]\n"
+                + "- 'find' [name of task]";
+        StringBuilder sb = new StringBuilder(commandGuide);
         return sb;
     }
 
