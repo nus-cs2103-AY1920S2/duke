@@ -78,6 +78,11 @@ Expected Output: +
 `[E][X] return books (at: date)`
 `[E][X] career fair (at: Oct 15 2019)`
 
+=== Mark event as done: `done`
+
+Mark event as done. +
+Format: `done index` +
+
 === Listing the conetent of current directory : `list`
 
 Shows a list of task in the current Task List. +

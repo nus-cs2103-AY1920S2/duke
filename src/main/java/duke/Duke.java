@@ -25,8 +25,7 @@ public class Duke {
      * Empty constructor so that Launcher works.
      */
     public Duke() {
-        String home = System.getProperty("user.home");
-        Path filePath = java.nio.file.Paths.get(home, "Desktop", "GitHub", "duke","data","data.txt");
+        Path filePath = java.nio.file.Paths.get("data","data.txt");
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {

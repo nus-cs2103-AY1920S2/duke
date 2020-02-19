@@ -109,11 +109,11 @@ public class Ui {
      * Prints all the tasks stored.
      */
     public void printStoredTask(TaskList tasksList) {
-        TreeMap<Integer,Task> tasks = tasksList.getList();
         System.out.println(String.format("%60s",' ').replace(' ','*'));
         System.out.println(String.format("%-57s",' '));
         System.out.println(String.format("  %-55s", "The following task below are stored in the Task List."));
         int counter = 1;
+        TreeMap<Integer,Task> tasks = tasksList.getList();
         for (Map.Entry<Integer, Task> entry : tasks.entrySet()) {
             Task message = entry.getValue();
             System.out.println(String.format("%d.%-55s", counter, message));
