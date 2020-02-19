@@ -40,7 +40,7 @@ public class MagicStrings {
             + "seem to have no deadline!";
     public static final String ERROR_SNOOZING_NON_DEADLINE = "You can't snooze a task with no deadline!";
     public static final String ERROR_TASK_ALREADY_COMPLETED = "You have already completed this task!";
-    public static final String ERROR_TASK_CREATED_BEFORE = "You have an existing task with the same description!";
+    public static final String ERROR_TASK_CREATED_BEFORE = "You have an existing task with the same information!";
     public static final String ERROR_TODO_MISSING_CONTENT = "Your todo content cannot be empty! "
             + "Type help if you need help.";
     public static final String ERROR_WRONG_DATE_FORMAT = "Your date is of the wrong format.\n"

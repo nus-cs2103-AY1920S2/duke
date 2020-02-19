@@ -36,7 +36,7 @@ public class TaskList {
         this.tasks = tasks;
         this.taskDescriptions = new HashMap<>();
         for (Task task : this.tasks) {
-            taskDescriptions.put(task.description.trim().toLowerCase(), true);
+            this.taskDescriptions.put(hashTaskToString(task), true);
         }
     }
 
@@ -55,7 +55,7 @@ public class TaskList {
      * @param task {@code Task} to be added.
      */
     public void addTask(Task task) throws DuchessException {
-        if (this.taskDescriptions.containsKey(task.description.trim().toLowerCase())) {
+        if (this.taskDescriptions.containsKey(hashTaskToString(task))) {
             throw new DuchessException(ERROR_TASK_CREATED_BEFORE);
         }
         this.tasks.add(task);
@@ -128,5 +128,19 @@ public class TaskList {
         return IntStream.range(0, this.tasks.size()).mapToObj(i -> new Pair<>(this.tasks.get(i), i))
                 .filter(p -> p.getFirst().description.toLowerCase().contains(searchWords.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private String hashTaskToString(Task task) {
+        String description = task.description.trim().toLowerCase();
+        if (task instanceof ToDo) {
+            return description;
+        } else if (task instanceof Event) {
+            String timeFrame = ((Event) task).getTimeFrame().trim().toLowerCase();
+            return description + timeFrame;
+        } else {
+            assert task instanceof Deadline;
+            String deadline = ((Deadline) task).getDeadline().toString();
+            return description + deadline;
+        }
     }
 }
