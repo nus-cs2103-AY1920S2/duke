@@ -33,7 +33,7 @@ _**The task management tool for every busy professional**_
 
 ---
 
-### Commands
+## Commands
 
 - `todo {task_name}` - adds `task_name` to the list of tasks
 - `event {task_name} /at {task_date}` - adds `task_name` as an event and specifies that it occurs at `task_date`
