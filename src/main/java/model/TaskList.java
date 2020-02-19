@@ -52,6 +52,8 @@ public class TaskList implements Iterable<Task> {
         StringBuilder addTaskEnd = new StringBuilder("Now you have  tasks in the list.\n");
 
         String addTaskEndStr = addTaskEnd.insert(13, this.internalList.size()).toString();
+
+        assert this.internalList.size() > 0: "task not added";
         return ECHO_ADD_TASK
                 + task.toString()
                 + "\n"
@@ -59,11 +61,13 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Remove the task at the specific index from the inner-list.
+     * Removes the task at the specific index from the inner-list.
      * @param position A position within the bound of the list.
      * @return response of the remove action.
      */
     public String remove(int position) {
+        assert this.internalList.size() > 0: "task list is empty, cannot delete";
+
         Task deletedTask = internalList.get(position);
         internalList.remove(position);
         return ECHO_DELETE_TASK
@@ -81,9 +85,10 @@ public class TaskList implements Iterable<Task> {
      * @return response of the mark action.
      */
     public String markTaskAsDone(Integer position) {
+        assert this.internalList.size() > 0: "task list is empty, cannot mark";
+
         Task finishedTask = this.internalList.get(position);
         finishedTask.markAsDone();
-
         return ECHO_COMPLETE_TASK
                 + " "
                 + finishedTask.toString()
@@ -96,6 +101,7 @@ public class TaskList implements Iterable<Task> {
 
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
+                assert false: "element in arraylist is null";
                 continue;
             }
             Task currentTask = this.internalList.get(i);
@@ -119,6 +125,7 @@ public class TaskList implements Iterable<Task> {
 
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
+                assert false: "element in arraylist is null";
                 continue;
             }
             Task currentTask = this.internalList.get(i);
@@ -134,6 +141,14 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Returns the size of the intertalist.
+     * @return the size of the intertalist.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
+    /**
      * Converts the task list to a string by looping through the tasks and concatenate
      * all the string representation of tasks.
      * @return string representation of the task list.
@@ -142,6 +157,7 @@ public class TaskList implements Iterable<Task> {
         StringBuilder listOverView = new StringBuilder(ECHO_VIEW_TASK_LIST);
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
+                assert false: "element in arraylist is null";
                 continue;
             }
             listOverView.append(Integer.toString(i + 1));

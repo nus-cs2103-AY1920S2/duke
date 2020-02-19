@@ -55,11 +55,16 @@ public class Duke {
      */
     public String getResponse(String input) throws RuntimeException{
         Command command = null;
+//        assert false: "this is for testing";
         try {
             command = parser.parseCommand(input);
             command.setTaskList(taskList);
             String commandResult = command.execute();
             storage.save(taskList);
+
+            assert commandResult != null: "The response message is null";
+            assert commandResult.length() > 0: "The response message is empty";
+
             return commandResult;
         } catch (NoDescriptionException | NoCommandException | IllegalDateTimeFormatException e) {
             return e.getMessage();
