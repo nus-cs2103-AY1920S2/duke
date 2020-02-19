@@ -55,7 +55,10 @@ public class DialogBox extends HBox {
      * @return a DialogBox with both the image and the text
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.getStyleClass().add("user-dialog");
+        db.displayPicture.getStyleClass().add("profile-image");
+        return db;
     }
 
     /**
@@ -68,6 +71,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.getStyleClass().add("duke-dialog");
         return db;
     }
 }

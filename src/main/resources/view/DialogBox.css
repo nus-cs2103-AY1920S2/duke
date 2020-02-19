@@ -1,0 +1,11 @@
+.user-dialog {
+    -fx-alignment: center-right;
+}
+
+.duke-dialog {
+    -fx-alignment: center-left;
+}
+
+.profile-image {
+    -fx-background-radius: 50%;
+}

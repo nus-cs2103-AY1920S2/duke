@@ -5,3 +5,10 @@
     -fx-border-style: solid;
     -fx-border-color: #009999;
 }
+
+#dialogContainer {
+}
+
+#scrollPane {
+    -fx-fit-to-width: true;
+}
