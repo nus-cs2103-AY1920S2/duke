@@ -55,3 +55,7 @@ run {
 test {
     useJUnitPlatform()
 }
+
+tasks.withType(Test) {
+    enableAssertions = true
+}
