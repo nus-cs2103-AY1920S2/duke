@@ -56,8 +56,9 @@ public class MainWindow extends AnchorPane {
             new Timer().schedule(new TimerTask() {
                 public void run() {
                     Platform.exit();
+                    System.exit(0);
                 }
-            }, 1000);
+            }, 1500);
         }
     }
 
