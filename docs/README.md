@@ -1,7 +1,7 @@
 # Welcome to Squirtle Manager!
 Squirtle Manager is a lightweight command line interface application built with Java and JavaFX. Squirtle Manager makes use of local storage to remember your agenda, and is an _easy_, _quick_ and _fun_ way to stay on top of your tasks.
  
-![ui-image](Ui.png)
+![ui-image](Ui.png)  
 ## What Squirtle Can Do:
 
 **1. Task tracking**
@@ -24,13 +24,12 @@ Squirtle Manager can track 3 types of tasks:
 **5. Task listing**
 * Get a list of all your ongoing tasks, and their done status
 
-**6. Find tasks using given keyword**
-
+**6. Find tasks using given keyword**  
 
 ## Setting up
 * Download the jar file
 * Run it using the command line command java -jar <name of jar file>
-* Alternatively, double-click on the jar application to launch
+* Alternatively, double-click on the jar application to launch  
 
 ## Command List
 Words in brackets refer to placeholders. Replace them with the appropriate command.
@@ -49,16 +48,17 @@ Function | Command | Notes
 **Update Task** Stage 1|update (item number)|Upon entering this command, Squirtle Manager will ask you to indicate which items to update, and what to update to.<br>See: Update Task Stage 2
 **Update Task** Stage 2|(des/date) (update)|_Eg. to change the date of task to 9 February 2020: <br>date 9/2/2020_
 **Find Task**|find (keyword)|Squirtle Manager currently only accepts one keyword. Plans are being made to accept more keywords at one go to improve application versatility.
-**Mark Task as Done**|done (item number)|Item number corresponds to the sequence of the task on the list.
+**Mark Task as Done**|done (item number)|Item number corresponds to the sequence of the task on the list.  
 
-# Sample Use
+## Sample Use
 Creating different tasks:
 ![create-task-image](creatingtasks.png)
 
 Updating a selected task:
-![updating-image](updating.png)
+![updating-image](updating.png)  
+
 # Credits
-Squirtle Manager is based on the popular [Duke][a2] software engineering tutorial, while this repository is forked from [this repo][a1], which contains modified code for instruction in module CS2103T taught by National University of Singapore.
+Squirtle Manager is based on the popular [Duke][a2] software engineering tutorial, while this repository is forked from [this repo][a1], which contains modified code for instruction in module CS2103T taught by National University of Singapore.  
 
 [a1]:https://github.com/nus-cs2103-AY1920S2/duke
 [a2]:https://github.com/se-edu/duke
