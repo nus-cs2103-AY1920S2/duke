@@ -47,8 +47,7 @@ _**The task management tool for every busy professional**_
 - `exit` - exits the application
 
 **Advanced commands**
-- <kbd>keyup</kbd> - cycles through command history
-- <kbd>ctrl</kbd> + <kbd>c</kbd> - clears the input bar 
+- <kbd>keyup</kbd> - cycles through command history 
 ---
 
 ## Team
