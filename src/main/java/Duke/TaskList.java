@@ -1,12 +1,10 @@
-import java.io.File;
-import java.io.IOException;
+package Duke;
+
+import Duke.command.Command;
+import Duke.task.Task;
+
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.format.DateTimeParseException;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 public class TaskList implements Serializable {
     private List<Task> taskList;

@@ -1,3 +1,7 @@
+package Duke.task;
+
+import Duke.Duke;
+
 import java.io.Serializable;
 
 public interface Task extends Serializable {

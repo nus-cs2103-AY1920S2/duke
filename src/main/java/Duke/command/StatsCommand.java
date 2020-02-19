@@ -1,4 +1,6 @@
-import java.util.List;
+package Duke.command;
+
+import Duke.TaskList;
 
 public class StatsCommand extends Command {
 
