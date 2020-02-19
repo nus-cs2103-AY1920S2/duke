@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public abstract class AbstractTask implements Task {
-    String taskName;
-    boolean isDone;
-    String preposition;
-    LocalDate date;
-    String time;
+    protected String taskName;
+    protected boolean isDone;
+    protected String preposition;
+    protected LocalDate date;
+    protected String time;
 
     /**
      * Constructor for AbstractTask class with additional info provided after date taken to be time.
@@ -51,12 +51,12 @@ public abstract class AbstractTask implements Task {
         this.isDone = false;
     }
 
-    protected String taskStateString() {
+    public String taskStateString() {
         return (this.isDone) ? "[✓]" : "[✗]";
 
     }
 
-    protected String formattedDate() {
+    public String formattedDate() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 

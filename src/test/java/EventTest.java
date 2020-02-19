@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+
+import Duke.task.Event;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
