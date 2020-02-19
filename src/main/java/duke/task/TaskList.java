@@ -5,6 +5,8 @@ import duke.util.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -154,6 +156,28 @@ public class TaskList {
                 return 0;
             }
         });
+    }
+
+    /**
+     * Returns an immutable deep copy of the {@code TaskList}.
+     *
+     * @return Immutable deep copy.
+     */
+    public List<Task> getImmutableDeepCopy() {
+        ArrayList<Task> tasksClone = new ArrayList<>();
+        Iterator<Task> iterator = tasks.iterator();
+        while (iterator.hasNext()) {
+            tasksClone.add((Task) iterator.next().clone());
+        }
+        return List.<Task>of(tasksClone.toArray(new Task[tasksClone.size()]));
+    }
+
+    public void replaceTaskList(ArrayList<Task> taskList) {
+        this.tasks = taskList;
+        this.taskDescriptions = new HashMap<>();
+        for (Task task : this.tasks) {
+            this.taskDescriptions.put(hashTaskToString(task), true);
+        }
     }
 
     private String hashTaskToString(Task task) {
