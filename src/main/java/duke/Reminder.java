@@ -11,13 +11,11 @@ public class Reminder extends Task {
 
   LocalDateTime timing;
   String description;
-  ScheduledExecutorService executorService;
 
   Reminder(String input) throws DukeException {
     super(input);
     this.timing = getTiming(input);
     this.description = getDescription(input);
-    this.executorService = Executors.newScheduledThreadPool(1);
     setReminder();
   }
 
@@ -54,10 +52,14 @@ public class Reminder extends Task {
     }
   }
 
-  private void setReminder() {
-  	LocalDateTime currentTime = LocalDateTime.now();
-  	Duration duration = Duration.between(currentTime, timing);
-  	timedPrint(duration.getSeconds());
+  private void setReminder() throws DukeException{
+		LocalDateTime currentTime = LocalDateTime.now();
+		Duration duration = Duration.between(currentTime, timing);
+		if (duration.getSeconds() >= 0) {
+			timedPrint(duration.getSeconds());
+		} else {
+			throw new DukeException("exceedTime", description);
+		}
   }
 
   /**

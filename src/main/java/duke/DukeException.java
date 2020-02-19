@@ -36,6 +36,9 @@ public class DukeException extends Exception {
       case "emptyLoad":
         message = "OOPS!!! The save file is empty. A new task list will be created!";
         break;
+	case "exceedTime":
+		message = "OOPS!! The reminder " + inputType + "is passed it's current time!";
+		break;
     }
     return message;
   }
