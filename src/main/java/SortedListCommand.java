@@ -24,9 +24,7 @@ public class SortedListCommand extends Command {
             listings += ui.getDecoration().trim() + "\n";
             for (Task task: listing) {
                 listings += counter + "." + task.toString();
-                if (counter != list.getSize()) {
-                    listings += "\n";
-                }
+                listings += "\n";
                 counter++;
             }
             currentPriority++;
