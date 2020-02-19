@@ -1,20 +1,34 @@
-# User Guide
+# CharDuke!
+This is a chatbot to store your Todos, Deadlines, and Events!
+Everything is powered by a digitized Charmander, doing their best to be useful to you! (No Charmanders were hurt in the process of making this program)
 
-## Features 
+![Image of the program!][/Ui.png]
 
-### Feature 1 
-Description of feature.
+## Commands
+*ps: Commands are case-insensitive!
 
-## Usage
+### list
+Charmander will display whatever he has on his list so far.
 
-### `Keyword` - Describe action
+### done [index]
+Chamander will tick the **indexed task** as DONE.
 
-Describe action and its outcome.
+### delete [index]
+Charmander will destroy the **indexed task** from its existance.
 
-Example of usage: 
+### find [word_to_find]
+Charmander will look through and show you which tasks contain the **word_to_find**!
 
-`keyword (optional arguments)`
+### todo [desc]
+Charmander will add a TODO containing the **desc**.
 
-Expected outcome:
+### deadline [desc] /by [yyyy-mm-dd]
+Charmander will add a DEADLINE containing the **desc** and a **date**.
 
-`outcome`
+### event [desc] /by [yyyy-mm-dd]
+Charmander will add an EVENT containing the **desc** and a **date**.
+
+### undo
+Charmander will undo the last thing you did. Can't be used consecutively. Please forgive Charmander and their bad memory.
+
+![CHARMANDER][charmander.jpg]
