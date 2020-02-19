@@ -29,6 +29,6 @@ public class DeleteCommand extends Command {
     }
 
     public String toString() {
-        return taskDesc;
+        return "Deleted task: " + taskDeleted;
     }
 }

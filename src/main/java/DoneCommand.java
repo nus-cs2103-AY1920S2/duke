@@ -28,7 +28,7 @@ public class DoneCommand extends Command {
     }
 
     public String toString() {
-        return taskDesc;
+        return "Done task: " + taskDone;
     }
 
 }
