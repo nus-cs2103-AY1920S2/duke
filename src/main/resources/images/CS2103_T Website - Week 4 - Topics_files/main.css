@@ -1,0 +1,49 @@
+.website-content {
+    margin: 12px auto 40px auto;
+    max-width: 800px;
+    overflow: hidden;
+    text-align: justify
+}
+
+mark {
+    background-color: rgba(255, 231, 2, 0.15);
+    border-radius: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.important {
+    color: #980000;
+}
+
+.alt-python {
+    display: none;
+}
+
+.flat {
+    display: none;
+}
+
+.indented-less {
+    padding-left: 10px;
+}
+
+.indented {
+    padding-left: 20px;
+}
+
+.indented-level1 {
+    padding-left: 20px;
+}
+
+.indented-level2 {
+    padding-left: 40px;
+}
+
+.indented-level3 {
+    padding-left: 60px;
+}
+
+.indented-level4 {
+    padding-left: 80px;
+}
