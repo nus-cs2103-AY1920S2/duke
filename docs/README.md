@@ -1,128 +1,77 @@
 # User Guide
 
-## Features 
+## 1. Introduction
+Duke is a Personal Assistant Chatbot that helps a person to keep track of various tasks and events. Duke is optimised for people who prefer typing and working with the Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).   
 
-### Save tasks
-Allows a user to add different types of tasks, namely: 
+## 2. Features 
 
-1. Todo tasks which do not have any deadlines or timings. 
-2. Events which have a specific starting time. 
-3. Deadlines which have a specific date by which the task needs to be completed.
+### 2.1 Add a Deadline task: `deadline`
+Adds a deadline task to Duke.
 
-### List tasks
-Allows a user to list all tasks that have been saved in the TaskList.
+Format: `deadline DESCRIPTION /by DATE TIME`
 
-### Track progress
-Allows a user to mark a task as done when completed to track one's own progress. 
+- `DATE`: yyyy-mm-dd
+- `TIME`: HH:mm
 
-### Delete tasks 
-Allows a user to delete a task when it has been completed or when it does not have to be done anymore. 
+### 2.2 Add an Event: `Event`
+Adds an event to Duke.
 
-### Find tasks 
-Allows a user to find tasks that contains a certain keyword. 
+Format: `event DESCRIPTION /on DATE TIME `
 
-## Usage
+- `DATE`: yyyy-mm-dd
+- `TIME`: HH:mm
 
-### `todo` - Add a todo task to the list
+### 2.3 Add a To-Do task: `todo`
+Adds a normal task, without any deadlines or timing, to Duke.
 
-Example of usage: todo (description)
+Format: `todo DESCRIPTION`
 
-`todo borrow book`
+### 2.4 Delete tasks: `delete`
+Deletes a currently saved task or event from Duke. 
 
-Expected outcome:
+Format: `delete INDEX`
 
-`Got it. I've added this task:`
+- `INDEX` refers to the index number shown in the displayed list (under 2.7) and must be a positive integer. 
 
-  `[T][X] borrow book`
-  
-`Now you have 1 task in the list.`
+### 2.5 Mark task as done: `done`
+Mark a currently saved task or event as done. 
 
-### `event` - Add an event to the list
+Format: `done INDEX`
 
-Example of usage: event (description) /on (date)
+- `INDEX` refers to the index number shown in the displayed list (under 2.7) and must be a positive integer. 
 
-`event project meeting /on 2020-02-20 15:00`
+### 2.6 Find tasks using a keyword: `find`
+Finds all tasks and events that contain a particular keyword.
 
-Expected outcome:
+Format: `find KEYWORD`
 
-`Got it. I've added this task:`
+### 2.7 List all tasks: `list`
+List all tasks and events saved in Duke.
 
-  `[E][X] project meeting on Feb 20 2020 03:00 PM`
-  
-`Now you have 2 tasks in the list.`
+Format: `list`
 
-### `deadline` - Add a deadline task to the list
+### 2.8 Undo the previous command: `undo`
+Undo previous commands.
 
-Example of usage: deadline (description) /by (date)
+Format: `undo`
 
-`deadline CS2103 iP /by 2020-02-19 23:59`
+- Only commands that changed the data can be undone.
 
-Expected outcome:
+### 2.9 Exit Duke: `bye`
+Exit the Duke.
 
-`Got it. I've added this task:`
+Format: `bye`
 
-  `[D][X] CS2103 iP by Feb 19 2020 11:59 PM`
-  
-`Now you have 3 tasks in the list.`
+### 2.10 Saving the data
+Duke data are saved in the hard disks automatically after any command that changes the data. There is no need to save automatically.
 
-### `list` - List all the tasks currently in the taskList
-
-Example of usage: list
-
-`list`
-
-Expected outcome:
-
-`1. [T][X] borrow book`
-
-`2. [E][X] project meeting on Feb 20 2020 03:00 PM`
-
-`3. [D][X] CS2103 iP by Feb 19 2020 11:59 PM`
-
-### `done` - Mark completed tasks as done
-
-Example of usage: done (index of task completed)
-
-`done 1`
-
-Expected outcome:
-
-`Nice! I've marked this task as done:`
-
-`[T][Y] borrow book`
-
-### `delete` - Delete tasks that are no longer needed
-
-Example of usage: delete (index of task to be deleted)
-
-`delete 1`
-
-Expected outcome:
-
-`Noted. I've removed this task:`
-
-`[T][Y] borrow book`
-
-`Now you have 2 tasks in the list.`
-
-### `find` - Find tasks using a given keyword
-
-Example of usage: find (keyword)
-
-`find project`
-
-Expected outcome:
-
-`Here are the matching tasks in your list:`
-
-`1. [E][X] project meeting on Feb 20 2020 03:00 PM`
-
-### `bye` - Exit Duke
-
-Example of usage: bye
-
-`bye`
-
-Expected outcome:
-
-`Bye. Hope to see you again soon!`
+## 3. Command Summary
+- Add a deadline task: `deadline DESCRIPTION /by DATE TIME`
+- Add an event: `event DESCRIPTION /on DATE TIME`
+- Add a To-Do task: `todo DESCRIPTION`
+- Delete task or event: `delete INDEX`
+- Mark task or event as done: `done INDEX`
+- Find: `find KEYWORD`
+- List tasks and events: `list`
+- Undo: `undo` 
+- Exit: `bye`

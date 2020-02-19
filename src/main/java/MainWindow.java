@@ -6,6 +6,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -47,6 +51,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (response.contains("Bye")) {
+            new Timer().schedule(new TimerTask() {
+                public void run() {
+                    Platform.exit();
+                }
+            }, 1000);
+        }
     }
 
     /**

@@ -121,6 +121,10 @@ public class GuiUi {
      * @return List of tasks that matches keyword.
      */
     public String getTargets(ArrayList<Task> targets) {
+        if (targets.size() == 0) {
+            return "There are no matching tasks.\n";
+        }
+
         String response = "Here are the matching tasks in your list:\n";
 
         for (int i = 1; i < targets.size() + 1; i++) {
