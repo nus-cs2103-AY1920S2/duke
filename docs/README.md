@@ -1,8 +1,9 @@
-# About Duke
+# Duke of NNpanpan
 Duke is a very simple CLI task management application.\
 Simple run the Java Jar file to start. Commands are listed below.
 
 #User Guide
+Below is the guide to the usage of Duke.
 
 ## Features 
 
