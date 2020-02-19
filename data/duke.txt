@@ -1,4 +1,0 @@
-T | 0 | read book
-T | 0 | read article
-T | 0 | read mindfulness stuff
-T | 0 | cry

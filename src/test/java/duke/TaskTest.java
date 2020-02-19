@@ -1,16 +1,12 @@
 package duke;
 
-import duke.DukeException;
-import duke.Task;
-import duke.TaskList;
-import duke.ToDo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MainTest {
+public class TaskTest {
     private TaskList taskList;
     private ArrayList<Task> dummy;
 
@@ -27,9 +23,4 @@ public class MainTest {
         assertEquals("[✘] read book", taskList.retrieveTask(0).toString());
     }
 
-    @Test
-    public void dukeTodoTest() {
-        ToDo test = new ToDo("go out", "");
-        assertEquals("[T][✘] go out", test.toString());
-    }
 }

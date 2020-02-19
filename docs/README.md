@@ -28,8 +28,9 @@ Eevee is your personal task manager, specially catered towards busy SoC students
 
   Expected outcome:
 
-  `outcome`
-
+  `Here are the tasks in your list:`<br />
+  `1.[T][✗] read documentation`<br />
+  
 * ### `todo [name of task]` - adds a todo :closed_book:
 
   A ToDo is a task that does not have any date or time arguments. It is a simple and straightforward way to record down what you need to do.
@@ -40,7 +41,9 @@ Eevee is your personal task manager, specially catered towards busy SoC students
 
   Expected outcome:
 
-  `outcome`
+  `Got it. I've added this task:`<br />
+  `[T][✗] clean my room`<br />
+  `Now you have 2 tasks in the list.`<br />
 
 * ### `deadline [name of task] /by [YYYY-MM-DD HHMM]` - adds a deadline :green_book:
 
@@ -52,7 +55,9 @@ Eevee is your personal task manager, specially catered towards busy SoC students
 
   Expected outcome:
 
-  `outcome`
+  `Got it. I've added this task:`<br />
+  `[D][✗] return book (by: Mar 12 2020 1800)`<br />
+  `Now you have 3 tasks in the list.`<br />
 
 * ### `event [name of task] /by [YYYY-MM-DD HHMM-HHMM]` - adds an event :orange_book:
 
@@ -60,11 +65,13 @@ Eevee is your personal task manager, specially catered towards busy SoC students
 
   Example of usage: 
 
-  `event CS2103 finals /by 2020-04-25 1300`
+  `event cs2103 finals /by 2020-04-25 1300-1500`
 
   Expected outcome:
 
-  `outcome`
+  `Got it. I've added this task:`<br />
+  `[E][✗] cs2103 finals (at: Apr 25 2020 1300 till Apr 25 2020 1500`<br />
+  `Now you have 4 tasks in the list.`<br />
 
 * ### `done [index]` - marks a task as done :ballot_box_with_check:
 
@@ -76,7 +83,8 @@ Eevee is your personal task manager, specially catered towards busy SoC students
 
   Expected outcome:
 
-  `outcome`
+  `Nice! I've marked this task as done:`<br />
+  `[T][✓] read documentation`<br />
 
 * ### `delete [index]` - deletes a task :x:
 
@@ -88,7 +96,9 @@ Eevee is your personal task manager, specially catered towards busy SoC students
 
   Expected outcome:
 
-  `outcome`
+  `Noted. I've removed this task:`<br />
+  `[T][✓] read documentation`<br />
+  `Now you have 3 tasks in the list.`<br />
 
 * ### `find [keyword(s)]` - searches for matching tasks :mag:
 
@@ -100,4 +110,6 @@ Eevee is your personal task manager, specially catered towards busy SoC students
 
   Expected outcome:
 
-  `outcome`
+  `Here are the matching tasks in your list:`<br />
+  `[T][✗] study cs2103`<br />
+  `[T][✗] study cs2106`<br />
