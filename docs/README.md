@@ -79,16 +79,18 @@ Removes the selected tasks from the list.
     delete 1
         
 #### Expected outcome 1: 
-    Nice! I've marked this task as done:
+    Nice! I've removed this task:
      [T][✓] complete assignment
+     Now you have 2 tasks in the list.
      
 #### Example of usage 2: 
     delete 1 2  
         
 #### Expected outcome 2: 
-    Nice! I've marked this task as done:
+    Nice! I've removed this task:
      [T][✓] complete assignment
      [T][✓] complete assignment (by: Jan 1 2020)
+     Now you have 1 task in the list.
 
 ### 7. `Find` task(s) 
 Search for specific task(s) from the task list by specifying a keyword.
