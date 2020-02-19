@@ -9,6 +9,9 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Set task to be done.
+     */
     public void doTask() {
         this.isDone = true;
     }
