@@ -1,8 +1,10 @@
 package duke;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -11,8 +13,15 @@ public class Storage {
     private PrintWriter writer;
     private String filePath;
 
-    public Storage(String filePath) {
+    public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
+        if(!new File(filePath).exists()) {
+            try {
+                new File(filePath).createNewFile();
+            } catch (IOException e){
+                throw new DukeException("File not found.");
+            }
+        }
     }
 
     /**

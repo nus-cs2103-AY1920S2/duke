@@ -17,8 +17,8 @@ public class Duke {
      */
     public Duke(String filepath) {
         ui = new Eevee();
-        storage = new Storage(filepath);
         try {
+            storage = new Storage(filepath);
             tasks = new TaskList(storage.loadData());
         } catch (DukeException e) {
             ui.showLoadingError();

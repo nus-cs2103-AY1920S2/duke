@@ -19,11 +19,15 @@ public class Deadline extends Task {
      * @param description details of the Deadline
      * @param time start and end time and date
      */
-    public Deadline(String description, String time) {
+    public Deadline(String description, String time) throws DukeException {
         super(description, time);
         this.time = time;
-        TimeParser tp = new TimeParser(time);
-        ldt = tp.getTime();
+        try {
+            TimeParser tp = new TimeParser(time);
+            ldt = tp.getTime();
+        } catch (Exception e) {
+            throw new DukeException(time + " is not a valid date time format! Try 'help' to look at the correct format");
+        }
     }
 
     /**

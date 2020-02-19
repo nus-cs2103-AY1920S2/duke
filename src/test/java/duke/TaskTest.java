@@ -1,3 +1,5 @@
+package duke;
+
 import duke.DukeException;
 import duke.Task;
 import duke.TaskList;

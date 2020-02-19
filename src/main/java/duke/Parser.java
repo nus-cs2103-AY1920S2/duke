@@ -25,7 +25,7 @@ public class Parser {
      * Parses commands from command line.
      * @param command input to identify relevant Task objects to create and their description
      */
-    public String record(String command) {
+    public String record(String command) throws DukeException {
         StringBuilder sb;
         if (command.equals("list")) {
             sb = list(new StringBuilder());
@@ -56,8 +56,9 @@ public class Parser {
                 default:
                     throw new DukeException("Unexpected command: " + command);
                 }
-            } catch (DukeException e) {
-                return e.getMessage() + "\n\n" + HELP_MESSAGE;
+            } catch (Exception e) {
+                throw new DukeException("Error: " + e.getMessage() +
+                        "\nType 'help' to refer to commands and their formats.");
             }
         }
         storage.storeData(taskList);
@@ -71,7 +72,7 @@ public class Parser {
             x = command.indexOf(' ');
             assert x >= 0;
         } catch (StringIndexOutOfBoundsException e) {
-            switch (command) {
+            switch(command) {
                 case "todo":
                     throw new DukeException("The description of a todo cannot be empty");
                 default:
@@ -91,19 +92,19 @@ public class Parser {
 
     private StringBuilder help() {
         String COMMAND_GUIDE = "Hello! Here are the commands that I can understand:\n" +
-                "\u2022 'list' - to list all tasks stored\n" +
-                "\u2022 'delete' [index] - to delete the task of the particular index from the storage\n" +
-                "\u2022 'done' [index] -  to mark the task of the particular index as done\n" +
-                "\u2022 'todo' [name of todo] - adds a todo to storage\n" +
-                "\u2022 'deadline' [name of deadline] /by [YYYY-MM-DD HHMM] - adds a deadline to storage\n" +
-                "\u2022 'event' [name of event] /by [YYYY-MM-DD HHMM-HHMM] - adds an event to storage\n" +
-                "\u2022 'find' [name of task] - returns all the tasks with the particular name";
+                "\u2022 'list'\n" +
+                "\u2022 'delete' [index]\n" +
+                "\u2022 'done' [index]\n" +
+                "\u2022 'todo' [name of todo]\n" +
+                "\u2022 'deadline' [name of deadline] /by [YYYY-MM-DD HHMM]\n" +
+                "\u2022 'event' [name of event] /by [YYYY-MM-DD HHMM-HHMM]\n" +
+                "\u2022 'find' [name of task]";
         StringBuilder sb = new StringBuilder(COMMAND_GUIDE);
         return sb;
     }
 
     private StringBuilder deleteTask(StringBuilder sb, String position) {
-        int b = Integer.valueOf(position);
+        int b = Integer.valueOf(position) - 1;
         Task temp = taskList.retrieveTask(b);
         taskList.removeTask(b);
         sb.append("Noted. I've removed this task:\n" + temp.toString() + "\n");
@@ -118,12 +119,16 @@ public class Parser {
         return sb;
     }
 
-    private StringBuilder createDeadline(StringBuilder sb, String deadline) {
+    private StringBuilder createDeadline(StringBuilder sb, String deadline) throws DukeException {
         int z = deadline.indexOf('/');
-        Task newDeadline = new Deadline(deadline.substring(0, z - 1), deadline.substring(z + 4));
-        taskList.addTask(newDeadline);
-        sb.append(stringTask(newDeadline));
-        return sb;
+        try {
+            Task newDeadline = new Deadline(deadline.substring(0, z - 1), deadline.substring(z + 4));
+            taskList.addTask(newDeadline);
+            sb.append(stringTask(newDeadline));
+            return sb;
+        } catch (DukeException e) {
+            throw e;
+        }
     }
 
     private StringBuilder createEvent(StringBuilder sb, String event) {

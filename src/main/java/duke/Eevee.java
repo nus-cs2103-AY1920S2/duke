@@ -20,8 +20,12 @@ public class Eevee {
              sb.append("Bye! Hope to see you again soon!");
              return sb.toString();
         } else {
-            sb.append(parser.record(command));
-            return sb.toString();
+            try {
+                sb.append(parser.record(command));
+                return sb.toString();
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
         }
 
     }
