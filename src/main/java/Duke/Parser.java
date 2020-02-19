@@ -39,7 +39,7 @@ public class Parser {
         } else if (in.equals("list")) {
             Command listCommand = new ListCommand(taskList);
             outputString = listCommand.execute(); //TODO: outputString in this class instead
-        } else if (in.equals("statistics") || in.equals("stats")) {
+        } else if (in.equals("stats")) {
             Command statsCommand = new StatsCommand(taskList);
             outputString = statsCommand.execute(); //TODO: outputString in this class instead
         } else if (in.equals("help")) {
