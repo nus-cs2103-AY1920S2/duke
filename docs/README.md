@@ -117,5 +117,16 @@ Edith is a Personal Assistant Chatbot that helps a user keep track of various ta
 - `bye` <br>
     Terminates the application <br>
     Example: `bye` exits the program 
+    
+    
+    
+## Acknowledgements
+Credit to Jeffry Lum for the fxml and java files for JAVAFX GUI -  [JavaFx TutorialPart 4](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md).  
+Acknowledgements FastReader.java was adapted from https://www.javatips.net/api/AlgoDS-master/src/timus/FastReader.java. However, I tweaked some components to cater to my own needs.
 
+Thanos Image for GUI is from https://www.theverge.com/2018/4/16/17243794/avengers-infinity-wars-thanos-origin-story-marvel
+
+Tony Stark Image is from https://pngimage.net/tony-stark-png-5/
+
+Edith Image is from https://www.amazon.com/Glasses-Sticker-Trucks-Laptop-NOK163/dp/B07VS9NPPL
 
