@@ -4,7 +4,6 @@
 
 ### _Todo, Deadline, Event, Done, Find**_ 
 
-
 #### 1.1 Todo   
     todo is a task without any time or deadlines assigned to: 
     Example: user can add a todo task -- Visit NTU 
