@@ -1,3 +1,0 @@
-{"description":"destroy the death star","typeIcon":"T","isDone":false}
-{"deadline":"3040-01-04","description":"save Princess Leia","typeIcon":"D","isDone":false}
-{"eventTime":"3040-05-01","description":"face my father","typeIcon":"E","isDone":false}
