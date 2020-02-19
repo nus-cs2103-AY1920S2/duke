@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.IllegalPositionException;
 import org.junit.jupiter.api.Test;
 
 import static TestUtils.TypicalTasks.TODO_TOPICS;
@@ -27,7 +28,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testRemoveTask() {
+    public void testRemoveTask() throws IllegalPositionException {
         TaskList testTaskList = new TaskList();
         testTaskList.add(TODO_TOPICS);
         testTaskList.add(TODO_IP);
