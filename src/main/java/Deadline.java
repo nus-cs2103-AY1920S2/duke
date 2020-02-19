@@ -40,7 +40,7 @@ public class Deadline extends Task {
      * @param dateTime the String that represents the date and time in the format dd-mm-yyy HH:mm.
      */
     public void constructDate(String dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         this.date = LocalDateTime.parse(this.dateTime, formatter);
     }
 
@@ -70,7 +70,7 @@ public class Deadline extends Task {
      * @throws Exception when the date is not the right format.
      */
     public static void validDate(String date) throws Exception {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime d = LocalDateTime.parse(date, formatter);
     }
 
