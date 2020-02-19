@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    private String latestCommand;
+    public String latestCommand;
 
 
     public Parser() {
@@ -278,32 +278,31 @@ public class Parser {
                 case "undo": {
 
                     String[] latestCommandArray = latestCommand.split(" ");
-                    ArrayList<Task> originalTaskList = TaskList.taskList;
 
                     switch (latestCommandArray[0]) {
 
                         case "done" : {
 
                             int indexOfDoneTask = Integer.parseInt(latestCommandArray[1]);
-                            originalTaskList.get(indexOfDoneTask - 1);
+                            TaskList.getTask(indexOfDoneTask - 1).setStatusUndone();
 
                         }
 
                         case "todo" : {
 
-                            originalTaskList.remove(originalTaskList.size() - 1);
+                            TaskList.taskList.remove(TaskList.taskList.size() - 1);
 
                         }
 
                         case "event" : {
 
-                            originalTaskList.remove(originalTaskList.size() - 1);
+                            TaskList.taskList.remove(TaskList.taskList.size() - 1);
 
                         }
 
                         case "deadline" : {
 
-                            originalTaskList.remove(originalTaskList.size() - 1);
+                            TaskList.taskList.remove(TaskList.taskList.size() - 1);
 
                         }
 
