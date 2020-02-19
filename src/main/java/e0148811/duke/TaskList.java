@@ -30,13 +30,16 @@ public class TaskList {
         case NORMAL:
             task.setNormalPriority();
             break;
+        case LOW:
+            task.setLowPriority();
+            break;
         }
     }
 
     public String printList() {
         StringBuilder output = new StringBuilder("Here is the task list:\n");
         for (int i = 1; i <= list.size(); i++) {
-            output.append(i).append(". ")
+            output.append(i).append(") ")
                     .append(list.get(i - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX)).append("\n");
         }
         output.append(getTotalNumOfTasks());
@@ -44,12 +47,12 @@ public class TaskList {
     }
 
     public String printListBasedOnPriority(PriorityLevel level) throws DukeException {
-        StringBuilder output = new StringBuilder("Here is the task list of the given priority level:");
+        StringBuilder output = new StringBuilder("Here is the task list of the given priority level:\n");
         int count = 0;
         for (int i = 1; i <= list.size(); i++) {
             Task task = list.get(i - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX);
             if (task.getPriorityLevel().equals(level)) {
-                output.append(i).append(". ").append(task);
+                output.append(i).append(". ").append(task).append("\n");
                 count++;
             }
         }
@@ -59,7 +62,7 @@ public class TaskList {
     }
 
     private String getNumOfSelectedTasks(int count) {
-        return count + " task(s) belong to the specified priority level.";
+        return count + " task(s) belong to the specified priority level.\n";
     }
 
     public List<Task> getList() {
@@ -67,7 +70,7 @@ public class TaskList {
     }
 
     public String getTotalNumOfTasks() {
-        return "Currently there is/are " + list.size() + " task(s) in the whole task list.\n";
+        return "Currently there is/are " + list.size() + " task(s) in the task list.\n";
     }
 
     public String addTaskToList(Task task) {

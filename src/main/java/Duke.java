@@ -11,33 +11,35 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
     private Ui ui;
+    private static String readFileMessage;
 
     public Duke() {
         ui = new Ui();
         Storage storage = new Storage("data/duke.txt", ui);
         parser = new Parser(ui);
         try {
-            ui.showLogo();
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            readFileMessage = ui.returnLoadingError();
             tasks = new TaskList(ui);
         } finally {
+            assert tasks != null;
+            if (tasks.getList().size() == 0) {
+                readFileMessage = ui.returnFoundEmptyFile();
+            } else {
+                readFileMessage = ui.returnLoadingSuccess();
+            }
             logic = new Logic(storage, tasks, ui);
             ui.linkToTaskList(tasks);
-            Ui.greet();
         }
     }
 
-    public void run() {
-        while (!(parser.readInputLine().equals("bye"))) {
-            System.out.println(logic.execute(parser.breakIntoWords()));
-        }
-        System.out.println(ui.sayGoodbye());
+    public static String getReadFileMessage() {
+        return readFileMessage;
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke();
     }
 
     /**
@@ -45,6 +47,15 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "test";
+        if (input.equals("bye") || input.equals("b")) {
+            isClosed = true;
+            return ui.sayGoodbye();
+        }
+        String[] instructionByWords = parser.parse(input);
+        return logic.execute(instructionByWords);
+    }
+
+    public boolean isClosed() {
+        return isClosed;
     }
 }

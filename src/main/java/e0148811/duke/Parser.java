@@ -21,6 +21,10 @@ public class Parser {
         return currentLine.split(" ");
     }
 
+    public String[] parse(String input) {
+        return input.split(" ");
+    }
+
     public String getCurrentLine() {
         return currentLine;
     }

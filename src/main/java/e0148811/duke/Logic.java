@@ -43,7 +43,7 @@ public class Logic {
             case "f":
                 // Fallthrough
             case "find":
-                return findTasks(instructionByWord[1], lengthOfArray);
+                return findTasks(instructionByWord, lengthOfArray);
             case "l":
                 // Fallthrough
             case "list":
@@ -68,15 +68,15 @@ public class Logic {
                 ui.throwUnknownCommandException();
             }
         } catch (DukeException e) {
-            ui.printErrorMessage(e);
+            return ui.returnErrorMessage(e);
         }
         return "";
     }
 
     private String prioritiseTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 3) {
-            ui.throwWrongFormatException("\"priority index_of_the_task level_of_priority"
-                    + " (which can be one of the following: l/low, n/normal, h/high, t/top)\"");
+            ui.throwWrongFormatException("\"priority index_of_the_task (a positive integer) level_of_priority"
+                    + " (which include: l/low, n/normal, h/high, t/top)\"");
         }
         int index = getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;
         if (index < 0 || index >= tasks.getList().size()) {
@@ -130,7 +130,7 @@ public class Logic {
 
     private String clearAllTasks() throws DukeException {
         tasks.removeAllTasks();
-        String output = "All tasks are removed. List is now empty.";
+        String output = "All tasks are removed. Task list is now empty.";
         storage.writeToHardDisk(tasks.getList());
         return output;
     }
@@ -142,8 +142,8 @@ public class Logic {
             PriorityLevel level = determinePriorityLevel(instructionByWord[1]);
             return tasks.printListBasedOnPriority(level);
         } else {
-            ui.throwWrongFormatException("\"list\"" + "OR" + "\"list a_priority_level" +
-                    "(which include: l/low, n/normal, h/high, t/top)\"");
+            ui.throwWrongFormatException("\"list\"" + " OR " + "\"list a_priority_level" +
+                    " (which include: l/low, n/normal, h/high, t/top)\"");
         }
         return "";
     }
@@ -173,10 +173,11 @@ public class Logic {
         return PriorityLevel.NORMAL;
     }
 
-    String findTasks(String keyword, int lengthOfArray) throws DukeException {
+    String findTasks(String[] instructionByWords, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 2) {
-            ui.throwWrongFormatException("\"find a_single_word_without_empty_space\"");
+            ui.throwWrongFormatException("\"find key_word (a character sequence)\"");
         }
+        String keyword = instructionByWords[1];
         HashMap<Integer, Task> selectedList = new HashMap<>();
         int count = 0;
         for (int j = 0; j < tasks.getList().size(); j++) {
@@ -205,10 +206,10 @@ public class Logic {
         if (lengthOfArray != 2) {
             if (command.equals("done")) {
                 ui.throwWrongFormatException(
-                        "\"done a_positive_integer_indicating_the_index_of_the_task_done\"");
+                        "\"done index_of_the_task_completed (a positive integer)\"");
             } else {
                 ui.throwWrongFormatException(
-                        "\"remove a_positive_integer_indicating_the_index_of_the_task_you_want_to_remove\"");
+                        "\"remove index_of_the_task_you_want_to_remove (a positive integer)\"");
             }
         }
         try {
@@ -252,7 +253,7 @@ public class Logic {
                 "this method should only create either a deadline task or an event task";
         try {
             int indexOfByOrAt = getIndexOfByOrAt(typeOfTask, instructionByWord, lengthOfArray);
-            checkIfIndexIsValid(typeOfTask, lengthOfArray, indexOfByOrAt);
+            checkIfFormatIsValid(typeOfTask, lengthOfArray, indexOfByOrAt);
             return constructDeadlineOrEventTask(typeOfTask, instructionByWord, lengthOfArray, indexOfByOrAt);
         } catch (DateTimeParseException e) {
             throw new DukeException("Incorrect format of date.\n"
@@ -281,7 +282,7 @@ public class Logic {
         return indexOfByOrAt;
     }
 
-    private void checkIfIndexIsValid(String typeOfTask, int lengthOfArray, int indexOfByOrAt) throws DukeException {
+    private void checkIfFormatIsValid(String typeOfTask, int lengthOfArray, int indexOfByOrAt) throws DukeException {
         assert typeOfTask.equals("deadline") || typeOfTask.equals("event");
         if (indexOfByOrAt == -1 || indexOfByOrAt == 1 || indexOfByOrAt == (lengthOfArray - 1)) {
             if (typeOfTask.equals("deadline")) {

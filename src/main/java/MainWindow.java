@@ -1,4 +1,6 @@
 import e0148811.duke.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -22,13 +25,14 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserNew.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeNew.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.greet(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Duke.getReadFileMessage()
+                        + Ui.greet() + Ui.showValidInstructions(), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -48,5 +52,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (duke.isClosed()) {
+            PauseTransition delay = new PauseTransition((Duration.seconds(1)));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
+        }
     }
 }

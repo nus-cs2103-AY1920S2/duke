@@ -1,7 +1,7 @@
 package e0148811.duke;
 
 public abstract class Task {
-    static String DONE = "  Done  ";
+    static String DONE = "    Done   ";
     static String NOT_DONE = "Not Done";
     private boolean isDone;
     private String task;
@@ -25,6 +25,10 @@ public abstract class Task {
         level = PriorityLevel.NORMAL;
     }
 
+    public void setLowPriority(){
+        level = PriorityLevel.LOW;
+    };
+
     public boolean isDone() {
         return isDone;
     }
@@ -41,10 +45,10 @@ public abstract class Task {
             priorityIndication = "[  not important ] ";
             break;
         case NORMAL:
-            priorityIndication = "[    ordinary    ] ";
+            priorityIndication = "[      ordinary      ] ";
             break;
         case HIGH:
-            priorityIndication = "[   important!   ] ";
+            priorityIndication = "[    important!    ] ";
             break;
         case TOP:
             priorityIndication = "[very important!!] ";

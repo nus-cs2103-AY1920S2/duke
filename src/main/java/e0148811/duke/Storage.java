@@ -27,11 +27,6 @@ public class Storage {
                 isEmptyFile = false;
                 addEventToList(list, line);
             }
-            if (isEmptyFile) {
-                System.out.println("File found but empty. Start with an empty task list.");
-            } else {
-                System.out.println("File found. Load saved task list.");
-            }
             return list;
         } catch (IOException e) {
             throw new DukeException("Cannot find or read the file properly.");

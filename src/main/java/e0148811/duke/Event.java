@@ -12,7 +12,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ", " + time.getDayOfWeek() + ")";
+        return "[E]" + super.toString() + "\n    (at: " + time + ", " + time.getDayOfWeek() + ")";
     }
 
     @Override
