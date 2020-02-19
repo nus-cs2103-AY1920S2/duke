@@ -3,7 +3,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-
+/*
 public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
@@ -20,3 +20,4 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(text, displayPicture);
     }
 }
+*/
