@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
 import static duke.util.MagicStrings.ERROR_TASK_ALREADY_COMPLETED;
 import static duke.util.MagicStrings.ERROR_TASK_CREATED_BEFORE;
+import static duke.util.StringCleaner.cleanAndLowerString;
 
 /**
  * The {@code TaskList} object helps to store and manage {@code Task}s.
@@ -120,14 +121,39 @@ public class TaskList {
      * list. This allows the user to see the list with new indices while being able
      * to delete or complete tasks using the original indices.
      *
-     * @param searchWords Word(s) to search for in the tasks' descriptions.
+     * @param searchWords Cleaned word(s) to search for in the tasks' descriptions.
      * @return An array of pairs of {@code Task}s and {@code Integer}s. Returns an
      *         empty array if no tasks meet the requirement.
      */
     public ArrayList<Pair<Task, Integer>> find(String searchWords) {
+        assert searchWords.equals(cleanAndLowerString(searchWords));
         return IntStream.range(0, this.tasks.size()).mapToObj(i -> new Pair<>(this.tasks.get(i), i))
-                .filter(p -> p.getFirst().description.toLowerCase().contains(searchWords.toLowerCase()))
+                .filter(p -> p.getFirst().description.toLowerCase().contains(searchWords))
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Sorts the task array, with {@code Deadline}s at the front, and earlier deadlines
+     * at the front.
+     */
+    public void sort() {
+        this.tasks.sort((a, b) -> {
+            boolean isAActiveDeadline = a instanceof Deadline && !a.isCompleted;
+            boolean isBActiveDeadline = b instanceof Deadline && !b.isCompleted;
+            if (isAActiveDeadline && !isBActiveDeadline) {
+                return -1;
+            } else if (isBActiveDeadline && !isAActiveDeadline) {
+                return 1;
+            } else if (isAActiveDeadline && isBActiveDeadline) {
+                return ((Deadline) a).getDeadline().compareTo(((Deadline) b).getDeadline());
+            } else if (a.isCompleted && !b.isCompleted) {
+                return 1;
+            } else if (b.isCompleted && !a.isCompleted) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
     }
 
     private String hashTaskToString(Task task) {
