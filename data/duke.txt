@@ -1,4 +1,2 @@
-T , N , read book
-D , N , return book , June 6th
-E , N , project meeting , Aug 6th 2-4pm
-D , N , sleep , now
+T , N , take drug
+D , N , 2103T iP , 2020-02-21
