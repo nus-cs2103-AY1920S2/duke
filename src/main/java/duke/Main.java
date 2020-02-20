@@ -18,7 +18,7 @@ public class Main extends Application {
         try {
             TaskList tasks = new TaskList();
             Storage.readFile(tasks);
-            duke = new Duke(tasks);
+            duke = new Duke(tasks, stage);
 
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

@@ -26,13 +26,15 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Stage stage;
 
     public static void main(String[] args) {
         // ...
     }
 
-    public Duke(TaskList tasks) {
+    public Duke(TaskList tasks, Stage stage) {
         this.tasks = tasks;
+        this.stage = stage;
     }
 
     @Override
@@ -228,7 +230,8 @@ public class Duke extends Application {
                         + parse.getCommandString() + " cannot be empty.");
             }
         case BYE:
-            return "Press the close button.";
+            stage.close();
+            return "";
         default:
             return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
