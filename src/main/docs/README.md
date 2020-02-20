@@ -4,6 +4,7 @@
 
 ### _Todo, Deadline, Event, Done, Find**_ 
 
+
 #### 1.1 Todo   
     todo is a task without any time or deadlines assigned to: 
     Example: user can add a todo task -- Visit NTU 
@@ -71,7 +72,7 @@
                     the tag work is successfully added to visit NTU 
                     -------------------
  
-#### 1.8 Delete 
+####1.8 Delete 
     delete command allows user to deleta a task or event or deadline that he entered
     Format: delete [index of task]
     Usage delete 2

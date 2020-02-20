@@ -1,0 +1,7 @@
+.anchor{
+    -fx-background-image:url('file:/C:/Users/jyong/Desktop/Year4Sem2/CS2103/duke/src/main/resources/images/background.png');
+}
+
+.answerBox {
+    background-color: #00ff00;
+}
