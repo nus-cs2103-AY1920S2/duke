@@ -1,3 +1,10 @@
+package duke.logic.parser;
+
+import duke.commons.exceptions.DukeException;
+import duke.commons.exceptions.EmptyDescriptionException;
+import duke.commons.exceptions.InvalidCommandException;
+import duke.logic.commands.*;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 
@@ -9,7 +16,7 @@ public class Parser {
     public Parser() {
     }
 
-    public static Command parse(String fullCommand) throws DukeException{
+    public static Command parse(String fullCommand) throws DukeException {
         String[] commands = fullCommand.split(" ", 2);
         String commandWord = commands[0];
         checkCommand(commandWord, commands);
@@ -51,7 +58,7 @@ public class Parser {
         }
     }
 
-    public static void checkDetails(String[] commands) throws EmptyDescriptionException{
+    public static void checkDetails(String[] commands) throws EmptyDescriptionException {
         if (commands.length < 2) {
             throw new EmptyDescriptionException("Sorry dude but where are the arguments???");
         }

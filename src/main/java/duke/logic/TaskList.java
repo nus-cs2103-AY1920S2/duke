@@ -1,3 +1,11 @@
+package duke.logic;
+import duke.commons.Deadline;
+import duke.commons.Event;
+import duke.commons.Task;
+import duke.commons.Todo;
+import duke.commons.exceptions.InvalidIndexException;
+import duke.ui.Ui;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -11,7 +19,7 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public Task getTask(int index) throws InvalidIndexException{
+    public Task getTask(int index) throws InvalidIndexException {
         try {
             return this.taskList.get(index);
         } catch (IndexOutOfBoundsException e) {
