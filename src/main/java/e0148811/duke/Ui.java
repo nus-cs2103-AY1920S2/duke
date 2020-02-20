@@ -16,8 +16,7 @@ public class Ui {
     }
 
     public String returnLoadingError() {
-        return "File not found, or cannot be read properly. "
-                + "Start with an empty task list.\n";
+        return "File not found. Start with an empty task list.\n";
     }
 
     public String returnFoundEmptyFile() {

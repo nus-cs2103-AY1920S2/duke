@@ -84,7 +84,7 @@ public class Logic {
         int index = getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;
         checkIfIndexIsValid(index);
         String output = assignPriorityToTask(instructionByWord[2], index);
-        storage.writeToHardDisk(tasks.getList());
+        storage.writeToFile(tasks.getList());
         return output;
     }
 
@@ -131,14 +131,14 @@ public class Logic {
     private String clearCompletedTasks() throws DukeException {
         tasks.removeCompletedTasks();
         String output = "Noted, all completed tasks are removed.";
-        storage.writeToHardDisk(tasks.getList());
+        storage.writeToFile(tasks.getList());
         return output;
     }
 
     private String clearAllTasks() throws DukeException {
         tasks.removeAllTasks();
-        String output = "Noted, all tasks are removed. Task list is now empty.";
-        storage.writeToHardDisk(tasks.getList());
+        String output = "Noted, all tasks are removed.\nTask list is now empty.";
+        storage.writeToFile(tasks.getList());
         return output;
     }
 
@@ -228,7 +228,7 @@ public class Logic {
             } else {
                 output = tasks.removeATask(index);
             }
-            storage.writeToHardDisk(tasks.getList());
+            storage.writeToFile(tasks.getList());
             return output;
         } catch (NumberFormatException e) {
             ui.throwWrongFormatException("\"done a_positive_integer\"");
@@ -238,7 +238,7 @@ public class Logic {
 
     private String addAndStoreTask(Task t) throws DukeException {
         String output = tasks.addTaskToList(t);
-        storage.writeToHardDisk(tasks.getList());
+        storage.writeToFile(tasks.getList());
         return output;
     }
 

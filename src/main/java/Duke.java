@@ -15,7 +15,7 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
-        Storage storage = new Storage("data/duke.txt", ui);
+        Storage storage = new Storage("duke.txt", ui);
         parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
@@ -46,6 +46,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
+        input = input.trim();
         if (input.equals("bye") || input.equals("b")) {
             isClosed = true;
             return ui.sayGoodbye();

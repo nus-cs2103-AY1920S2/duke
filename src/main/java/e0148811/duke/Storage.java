@@ -65,9 +65,9 @@ public class Storage {
         }
     }
 
-    public void writeToHardDisk(List<Task> list) throws DukeException {
+    public void writeToFile(List<Task> list) throws DukeException {
         try {
-            FileWriter writer = new FileWriter("data/duke.txt");
+            FileWriter writer = new FileWriter("duke.txt");
             for (Task t : list) {
                 writer.write(t.toSimplerString() + "\n");
             }
