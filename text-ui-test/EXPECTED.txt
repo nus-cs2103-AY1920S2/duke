@@ -1,4 +1,4 @@
-4LC3N v0.1.0
+4LC3N v1.0.0
       _.-'''''-._
     /=_.-~-~-~-._=\      .-.  _
    :    _     _    :     | | / )
@@ -11,6 +11,7 @@
 =======================================================
                   LOADING ... ... ...
 =======================================================
+Could not find local storage
 Could not find local storage
 4LC3N-BOT initialised.
 Greetings, humans!

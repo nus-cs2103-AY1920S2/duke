@@ -13,9 +13,15 @@
  fi
 
  # delete saved tasks from previous run
- if [ -e "../user/data/tasks.botstore" ]
+ if [ -e "./user/data/tasks.botstore" ]
  then
-     rm ../user/data/tasks.botstore
+     rm ./user/data/tasks.botstore
+ fi
+
+ # delete saved aliases from previous run
+ if [ -e "./user/data/aliases.botstore" ]
+ then
+     rm ./user/data/aliases.botstore
  fi
 
  # compile the code into the bin folder, terminates if error occurred

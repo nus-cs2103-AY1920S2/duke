@@ -4,7 +4,7 @@ package bot;
  * Class that represents the UI of 4LC3N-BOT
  */
 public class Ui {
-    public static final String VERSION = "4LC3N v0.1.0";
+    public static final String VERSION = "4LC3N v1.0.0";
     private static final String LOAD =
             "=======================================================\n"
             + "                  LOADING ... ... ...\n"
