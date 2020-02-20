@@ -45,9 +45,9 @@ delete 3
 
 **priority**
 ```
-priority 3 
+priority cut grass 
 ```
-* sets the task at the specified index to be of high priority
+* sets the task with the specified task name to be of high priority
 
 **find**
 ```
