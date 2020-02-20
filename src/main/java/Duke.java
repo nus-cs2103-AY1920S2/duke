@@ -1,16 +1,15 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<String> instructions = new ArrayList<>(100);
+    private static ArrayList<Task> instructions = new ArrayList<>(100);
 
     private static void greet() {
         System.out.println("Hello! I'm Duke\n What can I do for you?");
     }
 
     private static void addTask(String instruction) {
-        instructions.add(instruction);
+        instructions.add(new Task(instruction));
         System.out.println("added: " + instruction);
     }
 
@@ -21,9 +20,14 @@ public class Duke {
     private static void printList() {
         for (int i = 0; i < instructions.size(); i++) {
             if (instructions.get(i) != null) {
-                System.out.println((i + 1) + ". " + instructions.get(i));
+                System.out.println((i + 1) + ". " + instructions.get(i).toString());
             }
         }
+    }
+
+    private static void doneTask(int n) {
+        instructions.get(n-1).setDone();
+        System.out.println("Nice! I've marked this task as done: \n" + instructions.get(n-1).toString());
     }
 
     public static void main(String[] args) {
@@ -43,8 +47,11 @@ public class Duke {
                 exit();
             } else if (instruction.equals("list")) {
                 printList();
+            } else if (instruction.split(" ")[0].equals("done")) {
+                doneTask(Integer.parseInt(instruction.split(" ")[1]));
             } else {
                 addTask(instruction);
             }
         }
     }
+}
