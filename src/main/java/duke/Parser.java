@@ -132,6 +132,8 @@ class Parser {
             resp = tasks.addDeadline(argv[0], date, time);
         } catch (DateTimeParseException e) {
             throw new IncorrectArgumentException("Incorrect Date/Time format!\n     Correct format: yyyy-MM-dd HHmm");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IncorrectArgumentException("Missing Date/Time!");
         }
 
         return resp;
