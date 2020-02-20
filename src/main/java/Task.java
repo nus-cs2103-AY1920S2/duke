@@ -22,9 +22,9 @@ public class Task {
     @Override
     public String toString() {
         if (isDone) {
-            return "[\u2713]" + this.instruction;
+            return "[\u2713]" + instruction;
         } else {
-            return "[\u2718]" + this.instruction;
+            return "[\u2718]" + instruction;
         }
     }
 }

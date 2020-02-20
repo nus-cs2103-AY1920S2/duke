@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collections;
 
 public class Duke {
     private static ArrayList<Task> instructions = new ArrayList<>(100);
@@ -8,9 +9,10 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n What can I do for you?");
     }
 
-    private static void addTask(String instruction) {
-        instructions.add(new Task(instruction));
-        System.out.println("added: " + instruction);
+    private static void addTask(Task task) {
+        instructions.add(task);
+        System.out.println("Got it. I've added this task:\n" + task.toString() 
+            + "\n Now you have " + instructions.size() + " tasks in the list.");
     }
 
     private static void exit() {
@@ -49,8 +51,19 @@ public class Duke {
                 printList();
             } else if (instruction.split(" ")[0].equals("done")) {
                 doneTask(Integer.parseInt(instruction.split(" ")[1]));
+            } else if (instruction.split(" ")[0].equals("todo")) {
+                String task = instruction.replace("todo ", "");
+                addTask(new ToDo(task));
+            } else if (instruction.split(" ")[0].equals("deadline")) {
+                String task = instruction.split("/")[0].replace("deadline ", "");
+                String time = instruction.split("/")[1].replace("by ", "");
+                addTask(new Deadline(task, time));
+            } else if (instruction.split(" ")[0].equals("event")) {
+                String task = instruction.split("/")[0].replace("event ", "");
+                String time = instruction.split("/")[1].replace("at ", "");
+                addTask(new Event(task, time));
             } else {
-                addTask(instruction);
+                addTask(new Task(instruction));
             }
         }
     }
