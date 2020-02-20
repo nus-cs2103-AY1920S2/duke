@@ -46,7 +46,11 @@ public class Task {
     @Override
     public String toString() {
         String toReturn = "";
-        if (this instanceof Todo) {
+        if (this instanceof TodoWithinPeriod) {
+            toReturn = "[T][" + getStatusIcon() + "] " + description
+                     + " (between " + ((TodoWithinPeriod) this).getBetweenDate()
+                     + " to " + ((TodoWithinPeriod) this).getToDate() +")";
+        } else if (this instanceof Todo) {
             toReturn = "[T][" + getStatusIcon() + "] " + description;
         } else if (this instanceof Event) {
             toReturn = "[E][" + getStatusIcon() + "] " + description + " (at: " + ((Event) this).getDayTime() + ")";

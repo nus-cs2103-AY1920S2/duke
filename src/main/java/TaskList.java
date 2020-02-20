@@ -39,7 +39,16 @@ public class TaskList {
         Task toAdd = new Task();
         if (taskType.equals("todo")) {
             try {
-                toAdd = new Todo(taskParts[1]);
+                String[] taskInfo = taskParts[1].split(" /between " );
+                if (taskInfo.length == 1) {
+                    toAdd = new Todo(taskInfo[0]);
+                } else {
+                    String task = taskInfo[0];
+                    String[] betweenToDates = taskInfo[1].split(" /to ");
+                    String betweenDate = betweenToDates[0];
+                    String toDate = betweenToDates[1];
+                    toAdd = new TodoWithinPeriod(task, betweenDate, toDate);
+                }
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new EmptyDescriptionException();
             }
