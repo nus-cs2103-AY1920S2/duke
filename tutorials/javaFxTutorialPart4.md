@@ -274,8 +274,8 @@ public class DialogBox extends HBox {
 When we create a new instance of `DialogBox`, we set both the controller and root Node to `DialogBox`. 
 From this point onwards we can interact with `DialogBox` as we have in the previous tutorials.
 
-The last change that we have to make is to point our `Launcher` class in the right direction:
-In `Launcher.java`
+The last change that we have to make is to point our `duke.Launcher` class in the right direction:
+In `duke.Launcher.java`
 ```java
 //...    
 Application.launch(Main.class, args);

@@ -27,8 +27,14 @@ public class Storage {
     public Storage(String filePath) throws IOException {
         file = new File(filePath);
 
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         if (!file.exists()) {
-            file.createNewFile();
+            if (!file.createNewFile()) {
+                System.out.println("error");
+            }
         }
 
         scanner = new Scanner(this.file);
