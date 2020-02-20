@@ -65,15 +65,11 @@ public class Ui {
     }
 
     public String printNotFoundTaskMessage() {
-<<<<<<< HEAD
-        return "Sorry dude I found nothing :(";
+        return "Sorry dude but I found nothing :(";
     }
 
     public String printDuplicateMessage() {
         return "Hey you already have this task dude!";
-=======
-        return "Sorry dude but I can't find anything :(";
->>>>>>> branch-A-Jar
     }
 
     public String printTask(int i, Task task) {
