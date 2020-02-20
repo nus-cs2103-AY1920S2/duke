@@ -2,7 +2,16 @@
 
 ## Introduction
 
-**duke** is a task management application for people who prefer typing and CLI. 
+**duke** is a task management application for busy people who prefer typing.
+
+## Getting Started
+
+1. Ensure you have Java 11 or above installed in your computer.
+2. Download the latest version of duke.jar (duke-0.1.3.jar).
+3. Copy the file to the folder you want to use as the home folder for duke.
+4. Open terminal
+5. `cd` into home folder of duke.
+6. Run `java -jar duke-0.1.3.jar`
 
 ## Features 
 
@@ -15,18 +24,18 @@
 > `event CS2103 homework /by 2020-02-12 2359` would be a valid command.
 
 List of features:
-* `list`
-* `todo`
-* `deadline`
-* `event`
-* `delete`
-* `done`
-* `search`
-* `updatetodo`
-* `updatedeadline`
-* `updateevent`
+* Listing all tasks: `list`
+* Adding a todo task: `todo`
+* Adding a deadline task: `deadline`
+* Adding an event task: `event`
+* Deleting a task: `delete`
+* Setting a task as done: `done`
+* Searching for task: `search`
+* Updating a todo task: `updatetodo`
+* Updating a deadline task: `updatedeadline`
+* Updating an event task: `updateevent`
 * Saving
-* `bye`
+* Exiting the program: `bye`
 
 ### Listing all tasks: `list`
 Displays all tasks in the task list.
@@ -101,12 +110,14 @@ Adding tasks by using `deadline`, `event`, and `todo`:
 >     [T][✗] eat dinner
 >     Now you have 1 tasks in the list.
 >```
+
 `deadline CS2103 homework /by 2020-03-15 2359`
 > ```$xslt
 >     Got it. I've added this task:
 >     [D][✗] CS2103 homework (by: 23:59, Mar 15 2020)
 >     Now you have 2 tasks in the list.
 >```
+
 `event CS2103 tutorial /at 2020-07-07 1000`
 > ```$xslt
 >     Got it. I've added this task:
@@ -126,6 +137,7 @@ Listing all tasks using `list`:
 
 ### Setting a task as done
 Listing all tasks using `done`:
+
 `done 1`
 > ```$xslt
 >    Nice! I've marked this task as done:
