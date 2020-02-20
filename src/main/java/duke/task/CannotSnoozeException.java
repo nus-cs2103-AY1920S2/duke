@@ -3,14 +3,13 @@ package duke.task;
 import duke.DukeException;
 
 /**
- * CannotSnoozeException is an exception that is raised when an attempt is made
- * to snooze a task that does not implement the Snoozable interface.
+ * Thrown when an attempt to snooze a task is unsuccesful.
  */
 public class CannotSnoozeException extends DukeException {
     /**
-     * Instantiates a CannotSnoozeException with a message.
+     * Constructs a <code>CannotSnoozeException</code> with the specified detail message.
      *
-     * @param message the message for the exception
+     * @param message the detail message
      */
     public CannotSnoozeException(String message) {
         super(message);
