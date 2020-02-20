@@ -2,6 +2,6 @@ E | 1 | project meeting  | Mon 2-4pm
 T | 1 | redbook
 D | 1 | finish hw  | by Sunday
 T | 1 | read book
-T | 0 | borrow book
+T | 1 | borrow book
 D | 1 | return gadget  | by Wed
 E | 0 | project meeting  | at Mon 2-4 pm
