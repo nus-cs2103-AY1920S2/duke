@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -223,6 +224,6 @@ public class Duke extends Application {
     }
 
     public void load() throws IOException {
-        tasks = new TaskList (storage.loadFiles());
+            tasks = new TaskList(storage.loadFiles());
     }
 }

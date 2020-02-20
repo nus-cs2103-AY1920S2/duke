@@ -19,7 +19,7 @@ checkstyle {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 run {

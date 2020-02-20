@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,12 +36,26 @@ public class Storage {
      */
     public ArrayList<Task> loadFiles() throws IOException {
         ArrayList<Task> lst = new ArrayList<>();
-
-        FileReader in = new FileReader (filePath);
-        BufferedReader br = new BufferedReader (in);
-        String loadTask = null;
+        String directoryPath = "src/main/java/data";
+        File directory = new File (directoryPath);
 
         try {
+            if (!directory.exists()) {
+                File file = new File ("data/duke.txt");
+                 if (file.exists()) {
+                     directoryPath = "data";
+                } else {
+                    System.out.println("directory does not exist");
+                    directory = new File("data");
+                    directory.mkdir();
+                    File newFile = new File(directoryPath, "duke.txt");
+                }
+            }
+            System.out.println (directoryPath);
+            FileReader in = new FileReader(directoryPath + "/" + "duke.txt");
+            BufferedReader br = new BufferedReader(in);
+            String loadTask = null;
+
             while ((loadTask = br.readLine()) != null) {
                 String type = loadTask.substring (0, 1);
 
@@ -80,7 +95,7 @@ public class Storage {
                 }
             }
             br.close();
-        } catch (NullPointerException e) {
+        } catch (FileNotFoundException e) {
             System.out.println ("No files man");
         }
         return lst;
@@ -106,7 +121,7 @@ public class Storage {
                 fr.flush();
             }
         } else {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("duke.txt"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("data/duke.txt"));
             for (int i = 0; i < lst.size(); i++) {
                 Task savedTask = lst.get(i);
                 bw.write (savedTask.saveFile() + "\n");
