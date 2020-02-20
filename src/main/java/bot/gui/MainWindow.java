@@ -12,6 +12,9 @@ import javafx.scene.layout.VBox;
  * MainWindow is the class that provides the layout
  * for the other components of 4LC3N-BOT's
  * graphical user interface
+ *
+ * <p>Adapted from MainWindow in JavaFX tutorial found at
+ * https://github.com/se-edu/duke/tree/master/tutorials
  */
 public class MainWindow extends AnchorPane {
     @FXML

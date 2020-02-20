@@ -16,6 +16,15 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
+/**
+ * A class that describes a ChatBox component
+ * used in the GUI (appears when the user enters
+ * a command, to contain the user's command and
+ * the bot's reply)
+ *
+ * <p>Adapted from DialogBox in JavaFX tutorial found at
+ * https://github.com/se-edu/duke/tree/master/tutorials
+ */
 public class ChatBox extends HBox {
     private static Image USER_IMAGE;
     private static Image BOT_IMAGE;

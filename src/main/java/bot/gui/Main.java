@@ -23,6 +23,9 @@ import javafx.stage.Stage;
  * The Main class extends the FXML application,
  * and it is called by the Launcher to start
  * the graphical user interface in a window
+ *
+ * <p>Adapted from Main in JavaFX tutorial found at
+ * https://github.com/se-edu/duke/tree/master/tutorials
  */
 public class Main extends Application {
     @Override
