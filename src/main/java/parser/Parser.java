@@ -1,20 +1,10 @@
 package parser;
 
-import command.Command;
-import command.DeadlineCommand;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.EventCommand;
-import command.FindCommand;
-import command.ListCommand;
-import command.TodoCommand;
 import exception.EmptyDescriptionException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
-import command.ByeCommand;
-import task.Todo;
 
 /**
  * Represents a program for parsing userInput into different components depending on user taskCommand.

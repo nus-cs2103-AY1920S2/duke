@@ -5,6 +5,10 @@ import task.Event;
 import task.Task;
 import task.TaskList;
 import task.Todo;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,7 +25,6 @@ import java.time.LocalDateTime;
 public class Storage {
 
     private String storageFilePath;
-    private File storageFile;
 
     /**
      * Constructs a storage.
@@ -31,7 +34,6 @@ public class Storage {
      */
     public Storage(String filePath) throws IOException {
         this.storageFilePath = filePath;
-        this.storageFile = new File(filePath);
     }
 
     /**
@@ -54,31 +56,38 @@ public class Storage {
      * @return an array list of current tasks stored in file.
      * @throws FileNotFoundException if the filePath is wrong.
      */
-    public ArrayList<Task> loadExistingFileTasks() throws FileNotFoundException {
-        Scanner sc = new Scanner(storageFile);
+    public ArrayList<Task> loadExistingFileTasks() throws IOException {
         ArrayList<Task> taskListFromFile = new ArrayList<>();
 
-        while (sc.hasNext()) {
-            String line = sc.nextLine();
-            char taskCommand = line.charAt(0);
-            char taskDoneStatus = line.charAt(4);
-            String taskAction = line.substring(8);
-            String[] taskActionAndTime = taskAction.split(" \\| ");
+        try {
+            File storageFile = new File(this.storageFilePath);
+            Scanner sc = new Scanner(storageFile);
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                char taskCommand = line.charAt(0);
+                char taskDoneStatus = line.charAt(4);
+                String taskAction = line.substring(8);
+                String[] taskActionAndTime = taskAction.split(" \\| ");
 
-            if (taskCommand == 'T') {
-                taskListFromFile.add(new Todo(taskAction));
-            } else if (taskCommand == 'D') {
-                taskListFromFile.add(new Deadline(taskActionAndTime[0], LocalDateTime.parse(taskActionAndTime[1])));
-            } else if (taskCommand == 'E') {
-                taskListFromFile.add(new Event(taskActionAndTime[0], LocalDateTime.parse(taskActionAndTime[1])));
-            }
+                if (taskCommand == 'T') {
+                    taskListFromFile.add(new Todo(taskAction));
+                } else if (taskCommand == 'D') {
+                    taskListFromFile.add(new Deadline(taskActionAndTime[0], LocalDateTime.parse(taskActionAndTime[1])));
+                } else if (taskCommand == 'E') {
+                    taskListFromFile.add(new Event(taskActionAndTime[0], LocalDateTime.parse(taskActionAndTime[1])));
+                }
 
-            //if this task from file has status '1', mark this task status in the current task list as done.
-            if (taskDoneStatus == '1') {
-                int currentTaskListSize = taskListFromFile.size();
-                int taskIndexToUpdate = currentTaskListSize - 1;
-                taskListFromFile.get(taskIndexToUpdate).markAsDone();
+                //if this task from file has status '1', mark this task status in the current task list as done.
+                if (taskDoneStatus == '1') {
+                    int currentTaskListSize = taskListFromFile.size();
+                    int taskIndexToUpdate = currentTaskListSize - 1;
+                    taskListFromFile.get(taskIndexToUpdate).markAsDone();
+                }
             }
+        } catch (FileNotFoundException ex) {
+            Path pathToStorageFile = Paths.get(this.storageFilePath);
+            Files.createDirectories(pathToStorageFile.getParent());
+            Files.createFile(pathToStorageFile);
         }
         return taskListFromFile;
     }

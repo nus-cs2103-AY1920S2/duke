@@ -23,8 +23,7 @@ public class Duke {
     public Duke() throws IOException {
         ui = new Ui();
         assert this.ui != null : "Ui should be instantiated";
-        String filePath = "data/duke.txt";
-        storage = new Storage(filePath);
+        storage = new Storage("data/duke.txt");
         assert this.storage != null : "Storage should be instantiated";
         try {
             tasks = new TaskList(storage.loadExistingFileTasks());

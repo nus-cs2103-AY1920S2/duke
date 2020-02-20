@@ -26,6 +26,8 @@
     4.6 [`find`](#46-find-taskaction)
 
     4.7 [`done`](#47-done-index)
+    
+    4.8 [`delete`](#48-delete-index)
 
 ## Introduction
 
@@ -41,7 +43,7 @@ tasks.
   1. Download the jar file [here](/build/libs/duke-0.1.3.jar).
   2. Open the jar file to launch the app.
   3. Type in the text box your command or instruction. Hit `Enter` or the `Send` button to execute.
-  4. See Section [4. Usage] for different commands.
+  4. See Section [4. Usage](#usage) for different commands.
 
 ## Features 
 
@@ -69,7 +71,9 @@ Example of usage:
 
 Expected outcome:
 
-`Bye. Hope to see you again soon!`
+```
+Bye. Hope to see you again soon!
+```
 
 ### ```4.2 todo [TaskAction]```
  
@@ -168,3 +172,19 @@ Nice! I've marked this task(s) as done:
 2. [T][^] borrow book (at: Feb 20 2020, 8:40PM)`
 ```
 
+### ```4.8 delete [Index]```
+
+Delete indexed tasks.
+
+Example of usage:
+
+`delete 1 2`
+
+Expected outcome:
+
+```
+Noted. I've removed this task(s):
+1. [D][^] return book (by: Feb 20 2020, 8:20PM)
+2. [T][^] borrow book (at: Feb 20 2020, 8:40PM)
+Now you have 1 tasks in the list
+```
