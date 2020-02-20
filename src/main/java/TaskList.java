@@ -66,7 +66,7 @@ public class TaskList {
 
         }
 
-        assert this.record.size() <= 0 : "error";
+        assert this.record.size() > 0 : "error";
 
         String output = "--------------------------------------------------\n"
                 + "piaked in: " + record + "\n" + task + "\n"
@@ -94,7 +94,7 @@ public class TaskList {
 
         }
 
-        assert this.record.size() <= 0 : "error";
+        assert this.record.size() > 0 : "error";
 
         String output = "--------------------------------------------------\n"
                 + "piaked in: " + record + "\n" + task + "\n"
@@ -122,7 +122,7 @@ public class TaskList {
 
         }
 
-        assert this.record.size() <= 0 : "error";
+        assert this.record.size() > 0 : "error";
 
         String output = "--------------------------------------------------\n"
                 + "piaked in: " + record + "\n" + task + "\n"
@@ -145,7 +145,7 @@ public class TaskList {
             str = str + (j + "." + current + "\n");
         }
 
-        assert record.size() < 0 : "error";
+        assert this.record.size() >= 0 : "error";
 
         output = output + str + "--------------------------------------------------\n";
 
@@ -159,7 +159,7 @@ public class TaskList {
     public String delete(int num) {
         Task task = record.remove(num - 1);
 
-        assert record.size() < 0 : "error";
+        assert this.record.size() >= 0 : "error";
 
         String output = "--------------------------------------------------\n"
                 + "Destroyed:\n" + " " + task + "\n"
@@ -169,22 +169,6 @@ public class TaskList {
         return output;
     }
 
-    /**
-     * Deletes task from list using task to specify.
-     * @param task task to be deleted
-     */
-    public String deleteTask(Task task) {
-        record.remove(task);
-
-        assert record.size() < 0 : "error";
-
-        String output = "--------------------------------------------------\n"
-                + "Destroyed:\n" + " " + task + "\n"
-                + "You has " + this.record.size() + " tasks in the list\n"
-                + "--------------------------------------------------\n";
-
-        return output;
-    }
 
     /**
      * Sets task as done.

@@ -12,6 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+//@@author {BryanYap972}-reused
+//https://github.com/nus-cs2103-AY1920S2/duke/tree/master/tutorials - javaFX tutorials
+
 /**
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -69,3 +72,5 @@ public class DialogBox extends HBox {
         return db;
     }
 }
+
+//@@author
