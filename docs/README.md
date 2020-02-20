@@ -1,11 +1,13 @@
 # User Guide
 
+![Screenshot](/docs/Ui.png)
 ## Features 
 
 ### Feature 1 
-Description of feature.
 
 ## Usage
+1. **list**
+    list all tasks
 
 ### `Keyword` - Describe action
 
