@@ -17,6 +17,7 @@ Users are able to create three types of tasks
 - Todo
 - Events
 - Deadlines
+
 These tasks will be recorded and stored in a **MyNeckbeard**'s database
 
 ### Feature 2 - `Update Tasks`
