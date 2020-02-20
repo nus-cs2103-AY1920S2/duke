@@ -6,6 +6,7 @@ import duke.utilities.TaskList;
 import duke.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class FindCommand extends Command {
     String keyword;
@@ -26,12 +27,9 @@ public class FindCommand extends Command {
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) { // TODO change implementation to streams
         ArrayList<Task> lst = taskList.getTaskList();
-        ArrayList<Task> found = new ArrayList<>();
-        for (Task task : lst) {
-            if (task.getDescription().contains(this.keyword)) {
-                found.add(task);
-            }
-        }
+        ArrayList<Task> found = lst.stream()
+                .filter(task -> task.getDescription().contains(this.keyword))
+                .collect(Collectors.toCollection(ArrayList::new));
         return ui.findMsg(found, this.keyword);
     }
 }
