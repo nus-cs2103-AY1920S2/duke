@@ -7,7 +7,7 @@
 ## Getting Started
 
 1. Ensure you have Java 11 or above installed in your computer.
-2. Download the latest version of duke.jar (duke-0.1.3.jar).
+2. Download the latest version of duke.jar (duke-0.2.jar) [here](https://github.com/helloImHai/duke/releases/tag/v2.0).
 3. Copy the file to the folder you want to use as the home folder for duke.
 4. Open terminal
 5. `cd` into home folder of duke.

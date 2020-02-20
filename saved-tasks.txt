@@ -1,17 +1,12 @@
 0 || deadline || Hello world || 2020-03-03 1500
 0 || event || eat lunch || 2020-02-02 1200
-1 || todo || cry
-0 || todo || sleep 
 0 || event || team meeting || 2020-02-05 1600
 0 || todo || eat dinner
 0 || todo || hello
 1 || todo || def
 0 || event || 4 cry || 2020-01-01 1300
-1 || todo || eat dinner
 0 || deadline || CS2103 homework || 2020-03-15 2359
 0 || event || CS2103 tutorial || 2020-07-07 1300
-0 || todo || cry
-0 || todo || cry
 0 || todo || fill up this baby 
 0 || todo || add more tasks 
 0 || todo || make this UI look better
