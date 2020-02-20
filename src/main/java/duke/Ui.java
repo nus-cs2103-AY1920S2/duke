@@ -20,6 +20,7 @@ public class Ui {
 
     /**
      * Prompts the user for next command.
+     *
      * @return prompt string
      */
     public String promptMsg() {
@@ -28,6 +29,7 @@ public class Ui {
 
     /**
      * Exit message.
+     *
      * @return exit string
      */
     public String exitMsg() {
@@ -36,7 +38,8 @@ public class Ui {
 
     /**
      * Finds tasks that contain the keyword given by the user. If no task found, prints a separate message.
-     * @param lst ArrayList of all tasks filtered by the TaskList that contain the keyword.
+     *
+     * @param lst     ArrayList of all tasks filtered by the TaskList that contain the keyword.
      * @param keyword String passed by the user
      * @return tasks found string
      */
@@ -50,6 +53,7 @@ public class Ui {
 
     /**
      * Lists all the tasks currently in the TaskList. If no tasks in the TaskList, prints a separate message.
+     *
      * @param lst ArrayList of all tasks currently in the TaskList.
      * @return list of tasks
      */
@@ -63,6 +67,7 @@ public class Ui {
 
     /**
      * A helper method for listMsg() that prints each given task in a separate line.
+     *
      * @param lst ArrayList of all tasks currently in the TaskList.
      * @return list of tasks
      */
@@ -78,8 +83,9 @@ public class Ui {
      * Returns a string to guide the user in updating tasks. Updating has 2 stages:
      * 1. When the user is selecting which task they wish to update, and
      * 2. The user selects what part of the task to update, and provides the desired change.
+     *
      * @param updateStage current update stage
-     * @param task task the user wishes to update, or the newly updated task
+     * @param task        task the user wishes to update, or the newly updated task
      * @return a message depending on the current updating stage
      */
     public String updateMsg(int updateStage, Task task) {
@@ -96,7 +102,8 @@ public class Ui {
 
     /**
      * Returns a message when the user is adding a task to the TaskList.
-     * @param task the task the user just created
+     *
+     * @param task    the task the user just created
      * @param lstSize number of tasks so far
      * @return task message
      */
@@ -107,6 +114,7 @@ public class Ui {
 
     /**
      * Returns a message when the user is deleting a task
+     *
      * @param task the task being deleted
      * @return delete message
      */
@@ -116,6 +124,7 @@ public class Ui {
 
     /**
      * Returns a message when the user indicates that they are done with a task.
+     *
      * @param task the task to mark as done
      * @return done message
      */
@@ -125,6 +134,7 @@ public class Ui {
 
     /**
      * Returns a list of all available commands for duke. This method is called when the user types in 'help'.
+     *
      * @return a list of all available commands for the user.
      */
     public String helpMsg() {
@@ -134,24 +144,24 @@ public class Ui {
                 "\n\ttodo <description>" +
                 "\n\tevent <description> /at <date>" +
                 "\n\tdeadline <description> /by <date>" +
-                   this.blankLine() +
+                this.blankLine() +
                 "update task:\n\tupdate <task number>" +
-                   this.blankLine() +
+                this.blankLine() +
                 "find task:\n\tfind <keyword>" +
-                   this.blankLine() +
+                this.blankLine() +
                 "delete task:\n\tdelete <task number>" +
-                   this.blankLine() +
+                this.blankLine() +
                 "mark task as done:\n\tdone <task number>" +
-                   this.blankLine() +
+                this.blankLine() +
                 "list all tasks:\n\tlist" +
-                   this.blankLine() +
+                this.blankLine() +
                 "type help to ask SQUIRTLE what SQUIRTLE can do again!";
     }
 
 
-
     /**
      * Called in the main Duke class, when any DukeException is thrown. Returns customised messages based on the type of DukeError the DukeException contains.
+     *
      * @param e the DukeException being passed
      * @return customised error message
      */
@@ -174,7 +184,7 @@ public class Ui {
             case UPDATE:
                 return "SQUIRTLE cannot understand your update! Check your update item!";
             default:
-                assert false: "No exception that is not a duke exception should be caught in the main Duke class";
+                assert false : "No exception that is not a duke exception should be caught in the main Duke class";
                 return "An error not included in DukeExceptions was thrown";
         }
     }

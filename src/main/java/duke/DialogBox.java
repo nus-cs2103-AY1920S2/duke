@@ -29,7 +29,7 @@ public class DialogBox extends HBox {
 
         text.setWrapText(true);
         text.setFont(new Font("Rockwell", 12));
-        text.setPadding(new Insets(15,12,0,12));
+        text.setPadding(new Insets(15, 12, 0, 12));
         displayPicture.setFitWidth(70.0);
         displayPicture.setFitHeight(70.0);
 

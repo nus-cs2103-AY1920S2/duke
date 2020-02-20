@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class Storage {
     private String path = "tasks.txt";
+
     /**
      * Constructor for Storage.
      */
