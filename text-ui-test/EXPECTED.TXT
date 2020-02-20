@@ -4,9 +4,9 @@ Hello I'm your task manager!
 
     -----
     Tasks loaded from disk:
-    1. [D][✓] return book (by: 15:30, Mar 15 2020)
+    1. [D][✓] say hello (by: 13:00, Jan 1 2020)
     2. [E][✗] project meeting (at: 07:07, Jul 7 2020)
-    3. [T][✗] your butt
+    3. [T][✗] your mom
     -----
 
 ----------------------------
@@ -14,7 +14,7 @@ What tasks do you have dude?
 ----------------------------
     -----
     Nice! I've deleted this task:
-    [D][✓] return book (by: 15:30, Mar 15 2020)
+    [D][✓] say hello (by: 13:00, Jan 1 2020)
     Now you have 2 tasks in the list.
     -----
     -----
@@ -24,7 +24,7 @@ What tasks do you have dude?
     -----
     -----
     Nice! I've deleted this task:
-    [T][✗] your butt
+    [T][✗] your mom
     Now you have 0 tasks in the list.
     -----
     -----
@@ -134,6 +134,23 @@ What tasks do you have dude?
     -----
     -----
     duke.exception.MissingParameterException: Missing parameters for Search
+    -----
+    -----
+	Got it. I've changed this task to:
+	[D][✓] say hello (by: 13:00, Jan 1 2020)
+    -----
+    -----
+	Got it. I've changed this task to:
+	[T][✗] your mom
+    -----
+    -----
+    duke.exception.DukeException: Task is not an Event
+    -----
+    -----
+    Here are the tasks in your list:
+    1. [D][✓] say hello (by: 13:00, Jan 1 2020)
+    2. [E][✗] project meeting (at: 07:07, Jul 7 2020)
+    3. [T][✗] your mom
     -----
     -----
     Bye bye friend!
