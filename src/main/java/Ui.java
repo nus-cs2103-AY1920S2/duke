@@ -8,18 +8,21 @@ public class Ui {
         return "There is nothing in your list now";
     }
 
+    /**
+     * Creates and sends a welcome message to the user.
+     * @return a welcome 'Hi' message to the user.
+     */
     public static String welcomeMessage() {
-        return "\n" +
-                ".---.  .---..-./`)  \n" +
-                "|   |  |_ _|\\ .-.') \n" +
-                "|   |  ( ' )/ `-' \\ \n" +
-                "|   '-(_{;}_)`-'`\"` \n" +
-                "|      (_,_) .---.  \n" +
-                "| _ _--.   | |   |  \n" +
-                "|( ' ) |   | |   |  \n" +
-                "(_{;}_)|   | |   |  \n" +
-                "'(_,_) '---' '---'  \n" +
-                "                    \n" + "Hello ! I'm Cat Bot\n What u want\n";
+        return "\n" + ".---.  .---..-./`)  \n"
+                + "|   |  |_ _|\\ .-.') \n"
+                + "|   |  ( ' )/ `-' \\ \n"
+                + "|   '-(_{;}_)`-'`\"` \n"
+                + "|      (_,_) .---.  \n"
+                + "| _ _--.   | |   |  \n"
+                + "|( ' ) |   | |   |  \n"
+                + "(_{;}_)|   | |   |  \n"
+                + "'(_,_) '---' '---'  \n"
+                + "                    \n" + "Hello ! I'm Cat Bot\n What u want\n";
     }
 
     public String lineBarrier() {
@@ -76,5 +79,13 @@ public class Ui {
 
     public String deleteAll() {
         return "Your whole list has been cleared!";
+    }
+
+    public String error() {
+        return "There has been an error! Contact @seanlo_oy for more details!";
+    }
+
+    public String dateRequired() {
+        return "Follow the format dd/MM/YYYY HHMM if you want the timing to be recorded!\n\n";
     }
 }

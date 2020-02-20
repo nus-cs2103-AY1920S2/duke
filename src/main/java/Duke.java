@@ -13,10 +13,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
+
+/**
+ * The main Duke class which contains construction of the user interface
+ */
 public class Duke extends Application {
 
     private ArrayList<Task> list;
-    private int latest_index;
+    private int latestIndex;
     private Ui ui;
     private Storage storage;
     private Parser parser;
@@ -33,8 +37,7 @@ public class Duke extends Application {
 
 
     /**
-     * Run function which runs the Duke application
-     * @throws Exception should any issue occur with any function
+     * Start function which sets the stage for the UI application for Duke.
      */
     @Override
     public void start(Stage stage) {
@@ -84,7 +87,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -150,16 +153,19 @@ public class Duke extends Application {
 
     }
 
-
+    /**
+     * Run function which runs the Duke application.
+     * @throws Exception should any issue occur with any function.
+     */
     public void run() throws Exception {
 
         this.storage = new Storage();
         this.ui = new Ui();
 
         this.list = storage.readFile();
-        this.latest_index = storage.returnInitialIndex();
+        this.latestIndex = storage.returnInitialIndex();
 
-        TaskList tasklist = new TaskList(list, latest_index, storage);
+        TaskList tasklist = new TaskList(list, latestIndex, storage);
         this.parser = new Parser(tasklist);
     }
 }

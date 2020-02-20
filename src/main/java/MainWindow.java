@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 import javafx.application.Platform;
 import javafx.scene.layout.Region;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -26,6 +27,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private Button sendButton;
+
 
     private Duke duke;
 
@@ -45,6 +47,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Sends the welcome text via the bot to the user.
+     */
     public void sendWelcomeText() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.welcomeMessage(), dukeImage)

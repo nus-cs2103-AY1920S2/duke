@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Represents a Parser which handles commands inputted by the user
+ * Represents a Parser which handles commands inputted by the user.
  */
 
 public class Parser {
@@ -10,7 +10,13 @@ public class Parser {
     private Scanner sc;
     private boolean bye = false;
 
-    public String parse(String input) throws Exception {
+    /**
+     * Function to handle the input by the user. If the input is empty the user will be notified.
+     *
+     * @param input the input or command entered by the user.
+     * @return reply from the bot to the user.
+     */
+    public String parse(String input) {
         String reply;
         String str = input;
 
@@ -25,6 +31,11 @@ public class Parser {
     }
 
 
+    /**
+     * Constructor for Parser that handles all the inputs of the user.
+     *
+     * @param tasklist the tasklist containing all the tasks.
+     */
     public Parser(TaskList tasklist) {
         assert tasklist != null : "Tasklist is null";
 
@@ -32,7 +43,7 @@ public class Parser {
         this.sc = new Scanner(System.in);
         this.ui = new Ui();
     }
-    public String parseCommands(String str) throws Exception {
+    public String parseCommands(String str) {
         assert str != null : "String for parsing commands is null";
 
         String reply;

@@ -39,6 +39,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for DialogBox that takes in a string text message as well as the image of the the sender.
+     *
+     * @param text the text that is to be sent by the user.
+     * @param img the Image to be used in the Dialog box.
+     */
 
     private DialogBox(String text, Image img) {
         try {
@@ -73,6 +79,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box by the user, with certain modifications to the text colour and dialog box colour.
+     * @param text the message the user inputs
+     * @param img the image represented by the user
+     * @return the Dialogbox of the user
+     */
+
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setSpacing(5);
@@ -86,6 +99,12 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Creates a dialog box by the bot, with certain modifications to the text colour and dialog box colour.
+     * @param text the message the bot replies with
+     * @param img the image represented by the bot
+     * @return the Dialogbox of the bot
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

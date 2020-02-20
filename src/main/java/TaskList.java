@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.lang.StringBuilder;
 import java.io.IOException;
 
+
 /**
  * Represents a TaskList which contains functions which handles adding,
  * removing or listing out tasks as depicted by commands from the
  * user.
  */
-
 public class TaskList {
     private ArrayList<Task> list;
     private Ui ui;
@@ -141,6 +141,7 @@ public class TaskList {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return ui.error();
         }
     }
 
@@ -155,6 +156,7 @@ public class TaskList {
      */
     public String deadline(String input) {
         assert input != null : "Deadline command input is empty!";
+        sb = new StringBuilder();
 
         int repeat = checkRepeats(input,"/by");
 
@@ -175,16 +177,25 @@ public class TaskList {
             Deadline deadline = new Deadline(strings[0], strings[1],++latest_index);
             list.add(deadline);
 
+            if (!deadline.getDateSavedStatus()) {
+                sb.append(ui.dateRequired());
+            }
 
-            return "Got it. I have added this task:\n" + deadline.toString() +
-                    "\nNow you have a total of " + latest_index + " Tasks in your list";
+            sb.append("Got it. I have added this task:\n" + deadline.toString() +
+                    "\nNow you have a total of " + latest_index + " Tasks in your list");
+
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            return ui.inputByCmd();
+            sb.append(ui.inputByCmd());
 
         } catch (Exception e) {
             e.printStackTrace();
+            sb.append(ui.error());
+        } finally {
+            return sb.toString();
         }
+
+
     }
 
 
@@ -233,6 +244,7 @@ public class TaskList {
      */
     public String event(String input) {
         assert input != null : "Event command input is empty!";
+        sb = new StringBuilder();
 
         int repeat = checkRepeats(input,"/at");
 
@@ -254,13 +266,21 @@ public class TaskList {
             list.add(event);
 
 
-            return "Got it. I have added this task:\n" + event.toString() +
-                    "\nNow you have a total of " + latest_index + " Tasks in your list";
+            if (!event.getDateSavedStatus()) {
+                sb.append(ui.dateRequired());
+            }
+
+            sb.append("Got it. I have added this task:\n" + event.toString() +
+                    "\nNow you have a total of " + latest_index + " Tasks in your list");
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            return ui.inputAtCmd();
+            sb.append(ui.inputByCmd());
+
         } catch (Exception e) {
             e.printStackTrace();
+            sb.append(ui.error());
+        } finally {
+            return sb.toString();
         }
     }
 
@@ -311,7 +331,7 @@ public class TaskList {
      * @return the reply message to be sent back to the user
      * @throws Exception If any issue with any function
      */
-    public String bye() throws Exception {
+    public String bye() {
         try {
             storage.writeFile(list);
         } catch (IOException e) {
