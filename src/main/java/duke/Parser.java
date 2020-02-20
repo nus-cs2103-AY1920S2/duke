@@ -3,11 +3,25 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.regex.Pattern;
 
-import duke.command.*;
-
-import duke.exception.*;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.command.SearchCommand;
+import duke.command.UpdateDeadlineCommand;
+import duke.command.UpdateEventCommand;
+import duke.command.UpdateTodoCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
+import duke.exception.MissingParameterException;
+import duke.exception.MissingTimeException;
+import duke.exception.TimeFormatException;
+import duke.exception.UnknownCommandException;
 
 /**
  * Class representing the parser with methods to parse strings.
