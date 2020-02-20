@@ -1,7 +1,8 @@
 # Welcome to Squirtle Manager!
 Squirtle Manager is a lightweight command line interface application built with Java and JavaFX. Squirtle Manager makes use of local storage to remember your agenda, and is an _easy_, _quick_ and _fun_ way to stay on top of your tasks.
  
-![ui-image](Ui.png)  
+![ui-image](Ui.png)
+
 ## What Squirtle Can Do:
 
 **1. Task tracking**
@@ -52,10 +53,16 @@ Function | Command | Notes
 
 ## Sample Use
 Creating different tasks:
-![create-task-image](creatingtasks.png)
+![create-task-image](taskcreation.png)
+
+Deleting a task:
+![delete-task-image](delete.png)
 
 Updating a selected task:
-![updating-image](updating.png)  
+![updating-image](update.png)  
+
+Finding a task:
+![find-task-image](find.png)
 
 # Credits
 Squirtle Manager is based on the popular [Duke][a2] software engineering tutorial, while this repository is forked from [this repo][a1], which contains modified code for instruction in module CS2103T taught by National University of Singapore.  
