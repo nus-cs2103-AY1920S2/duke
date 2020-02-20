@@ -24,6 +24,12 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: \n" + instructions.get(n-1).toString());
     }
 
+    private static void deleteTask(int n) {
+        System.out.println("Noted. I've removed this task:\n" + instructions.get(n-1).toString());
+        instructions.remove(n-1);
+        System.out.println("Now you have " + instructions.size() + " tasks in the list.");
+    }
+
     private static void printList() {
         for (int i = 0; i < instructions.size(); i++) {
             if (instructions.get(i) != null) {
@@ -44,6 +50,8 @@ public class Duke {
             printList();
         } else if (instruction.split(" ")[0].equals("done")) {
             doneTask(Integer.parseInt(instruction.split(" ")[1]));
+        } else if (instruction.split(" ")[0].equals("delete")) {
+            deleteTask(Integer.parseInt(instruction.split(" ")[1]));
         } else if (instruction.split(" ")[0].equals("todo")) {
             String task = instruction.replace("todo", "");
             if (!task.equals("")) {
