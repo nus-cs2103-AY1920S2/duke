@@ -48,3 +48,15 @@ delete 3
 priority 3 
 ```
 * sets the task at the specified index to be of high priority
+
+**find**
+```
+find flowers
+```
+* returns a list of tasks with the specified keyword in the task name
+
+**bye**
+```
+bye
+```
+* terminates the program
