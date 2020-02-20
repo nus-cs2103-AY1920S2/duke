@@ -16,15 +16,15 @@ public class Task {
     public Task(String type, String name) {
         this.type = type;
         this.name = name;
-        this.status = "[✗]";
+        this.status = "[\u2718]";
     }
 
     public void setDone() {
-        this.status = "[✓]";
+        this.status = "[\u2713]";
     }
 
     public int getStatusBinary() {
-        if (this.status == "[✓]") {
+        if (this.status.equals("[\u2713]")) {
             return 1;
         } else {
             return 0;
@@ -50,19 +50,25 @@ public class Task {
 
     public String getProcessedDate() {
         String dateFormatted = "";
-        this.date.split("\\s");
-        for (int i = 1; i < this.date.split("\\s").length; i++) {
+        String taskType = this.date.split("\\s")[0];
+        for (int i = 1; i < this.date.split("\\s").length; i++) {       // starts from i = 1 to remove the "by" or the "at"
             if (i == 1) {
                 dateFormatted += this.date.split("\\s")[i];
             } else {
                 dateFormatted += " " + this.date.split("\\s")[i];
             }
         }
-        LocalDate ld = LocalDate.parse(dateFormatted);
-        this.processedDate = ld;
-        this.hasProcessedDate = true;
-        this.fileDate = ld.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return this.fileDate;
+
+        if (taskType.equals("at")) {                                            // event, so no need local date format
+            this.fileDate = dateFormatted;
+            return this.fileDate;
+        } else {                                                                // deadline, so need local date format
+            LocalDate ld = LocalDate.parse(dateFormatted);
+            this.processedDate = ld;
+            this.hasProcessedDate = true;
+            this.fileDate = ld.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return this.fileDate;
+        }
     }
 
     public String addProcessedDate(String dateFormatted) {
@@ -123,11 +129,7 @@ public class Task {
                 return this.name + " (by: " + this.fileDate + ")";
             }
         } else {                  // event
-            if (this.hasProcessedDate == false) {
-                return this.name + " (at: " + this.getProcessedDate() + ")";
-            } else {
-                return this.name + " (at: " + this.fileDate + ")";
-            }
+            return this.name + " (at: " + this.fileDate + ")";
         }
     }
 

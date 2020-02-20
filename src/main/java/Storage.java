@@ -26,12 +26,24 @@ public class Storage {
                 String line = sc.nextLine();
                 String taskType = "";
                 String taskFormattedDate = "";
-                String taskName = line.split("\\s")[4];
+                String[] lineMinusDate = line.split("\\(")[0].split("\\s");
+                String taskName = "";
+//                int isTaskDone = Integer.getInteger(lineMinusDate[2]);
+//                if (isTaskDone == 1) {
+//
+//                }
+                for (int i = 4; i < lineMinusDate.length; i++) {
+                    if (i == 4) {
+                        taskName += lineMinusDate[i];
+                    } else {
+                        taskName += " " + lineMinusDate[i];
+                    }
+                }
 
                 if (line.split("\\s")[0].equals("[T]")) {
                     taskType = "todo";
                     Task curr = new Task(taskType, taskName);
-                    if (line.split("\\s")[2] == "1") {
+                    if (Integer.parseInt(line.split("\\s")[2]) == 1) {
                         curr.setDone();
                     }
                     arr.add(curr);
@@ -53,10 +65,10 @@ public class Storage {
                     taskType = "event";
                     taskFormattedDate = line.split("at: ")[1].substring(0, line.split("at: ")[1].length() - 1);
                     Task curr = new Task(taskType, taskName);
-                    if (line.split("\\s")[2].equals(1)) {
+                    if (Integer.parseInt(line.split("\\s")[2]) == 1) {
                         curr.setDone();
                     }
-                    curr.addProcessedDate(taskFormattedDate);
+                    curr.fileDate = taskFormattedDate;
                     arr.add(curr);
                 }
             }

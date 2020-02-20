@@ -11,10 +11,16 @@ public class TaskList {
         return arr;
     }
 
-    public void print() {
+    public String print() {
+        String str = "";
         for (int i = 1; i <= arr.size(); i++) {
-            System.out.println(i + "." + arr.get(i - 1).getIcon() + arr.get(i - 1).status + " " + arr.get(i - 1).getDescription());
+            if (i == 0) {
+                str += (i + "." + arr.get(i - 1).getIcon() + arr.get(i - 1).status + " " + arr.get(i - 1).getDescription());
+            } else {
+                str += "\n" + (i + "." + arr.get(i - 1).getIcon() + arr.get(i - 1).status + " " + arr.get(i - 1).getDescription());
+            }
         }
+        return str;
     }
     public void clear() {
         arr.clear();
