@@ -1,11 +1,18 @@
 package duke.commons;
+
+import duke.commons.exceptions.DuplicateTaskException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a type of task that could be added. A <code>Deadline</code> object corresponds to
+ * a task with a specific date and time to be completed by.
+ */
+
 public class Deadline extends Task {
 
-    protected String type;
     protected String byString;
     protected LocalDate date;
     protected LocalTime time;
@@ -24,16 +31,31 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a <code>String</code> object representing the type of this <code>Task</code>.
+     *
+     * @return the <code>String</code> "D".
+     */
     public String getTypeSymbol() {
         return "D";
     }
 
+    /**
+     * Returns an array of <code>String</code> objects representing this <code>Deadline</code>.
+     *
+     * @return a string array representation of the <code>Deadline</code> object.
+     */
     @Override
     public String[] toDataTokens() {
         String isDoneString = String.valueOf(super.isDone);
         return new String[] {getTypeSymbol(), isDoneString, super.description, this.byString};
     }
 
+    /**
+     * Returns a <code>String</code> object representing this <code>Deadline</code>.
+     *
+     * @return a string representation of the <code>Deadline</code> object.
+     */
     @Override
     public String toString() {
         String dateTime = "";

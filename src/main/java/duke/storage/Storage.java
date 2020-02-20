@@ -1,4 +1,5 @@
 package duke.storage;
+
 import duke.commons.Deadline;
 import duke.commons.Event;
 import duke.commons.Task;
@@ -14,6 +15,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents the storage manager that loads <code>Task</code> objects from the data file and
+ * saves <code>Task</code> objects to the data file.
+ */
 public class Storage {
 
     private String filePath;
@@ -24,6 +29,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns an <code>ArrayList</code> of <code>Task</code> objects loaded from the data file.
+     *
+     * @return an <code>ArrayList</code> of <code>Task</code> objects loaded from the data file.
+     * @throws IOException If the <code>Task</code> objects could not be loaded.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
@@ -59,6 +70,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the current <code>Task</code> in the data file.
+     *
+     * @param tasks <code>TaskList</code> object of the program.
+     * @throws IOException If the <code>Task</code> objects could not be saved.
+     */
     public void update(TaskList tasks) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false));
         ArrayList<Task> taskList = tasks.getTaskList();
@@ -71,6 +88,9 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Creates a new data file called "tasks.txt" if such file does not exist when the program first starts.
+     */
     public void initialiseData() {
         File file = new File("data/tasks.txt");
         try {

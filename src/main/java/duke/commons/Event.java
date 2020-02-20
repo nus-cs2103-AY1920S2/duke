@@ -1,7 +1,13 @@
 package duke.commons;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+/**
+ * Represents a type of task that could be added. A <code>Event</code> object corresponds to
+ * a task that occurs at a specific date and time.
+ */
 
 public class Event extends Task {
 
@@ -24,16 +30,31 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a <code>String</code> object representing the type of this <code>Task</code>.
+     *
+     * @return the <code>String</code> "E".
+     */
     public String getTypeSymbol() {
         return "E";
     }
 
+    /**
+     * Returns an array of <code>String</code> objects representing this <code>Event</code>.
+     *
+     * @return a string array representation of the <code>Event</code> object.
+     */
     @Override
     public String[] toDataTokens() {
         String isDoneString = String.valueOf(super.isDone);
         return new String[] {getTypeSymbol(), isDoneString, super.description, this.atString};
     }
 
+    /**
+     * Returns a <code>String</code> object representing this <code>Event</code>.
+     *
+     * @return a string representation of the <code>Event</code> object.
+     */
     @Override
     public String toString() {
         String dateTime = "";

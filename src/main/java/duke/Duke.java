@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -22,6 +23,9 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Main class of the program.
+ */
 public class Duke extends Application {
 
     private ScrollPane scrollPane;
@@ -107,7 +111,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -121,6 +124,13 @@ public class Duke extends Application {
         userInput.clear();
     }
 
+    /**
+     * Parses the input and executes the corresponding <code>Command</code>,
+     * then returns the <code>String</code> message showing the result of the execution.
+     *
+     * @param input input <code>String</code> provided by user.
+     * @return the <code>String</code> message showing the result of the execution.
+     */
     public String getResponse(String input) {
         String output = "";
         try {
@@ -135,6 +145,5 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-
     }
 }

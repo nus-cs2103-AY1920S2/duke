@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -30,6 +31,11 @@ public class MainWindow {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Links the Controller to the <code>Duke</code> object of the program.
+     *
+     * @param d <code>Duke</code> object constructed when the program starts.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

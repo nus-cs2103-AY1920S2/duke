@@ -1,4 +1,5 @@
 package duke.ui;
+
 import java.io.IOException;
 
 import javafx.collections.FXCollections;
@@ -11,6 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Represents the dialog box component of the GUI of the program.
+ */
 public class DialogBox extends HBox {
 
     @FXML
@@ -42,10 +46,26 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Returns a <code>DialogBox</code> object representing the user.
+     * The dialog box will echo the user's input.
+     *
+     * @param text text input by the user.
+     * @param image profile picture of the user.
+     * @return a <code>DialogBox</code> object representing the user, with the specified text and profile image.
+     */
     public static DialogBox getUserDialog(Label text, ImageView image) {
         return new DialogBox(text, image);
     }
 
+    /**
+     * Returns a <code>DialogBox</code> object representing Duke.
+     * The dialog box will contain Duke's reply.
+     *
+     * @param text text output by Duke.
+     * @param image profile picture of Duke.
+     * @return a <code>DialogBox</code> object representing Duke, with the specified text and profile image.
+     */
     public static DialogBox getDukeDialog(Label text, ImageView image) {
         var db = new DialogBox(text, image);
         db.flip();
