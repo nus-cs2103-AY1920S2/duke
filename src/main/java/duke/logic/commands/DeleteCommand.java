@@ -1,3 +1,11 @@
+package duke.logic.commands;
+
+import duke.commons.Task;
+import duke.commons.exceptions.InvalidIndexException;
+import duke.logic.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {

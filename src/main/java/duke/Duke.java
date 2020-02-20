@@ -1,5 +1,14 @@
+package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import duke.commons.exceptions.DukeException;
+import duke.logic.TaskList;
+import duke.logic.commands.Command;
+import duke.logic.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.DialogBox;
+import duke.ui.Ui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

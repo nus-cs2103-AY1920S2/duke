@@ -1,36 +1,37 @@
+package duke.commons;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class Deadline extends Task {
 
     protected String type;
-    protected String atString;
+    protected String byString;
     protected LocalDate date;
     protected LocalTime time;
 
-    public Event(String type, boolean isDone, String description, String atString) {
+    public Deadline(String type, boolean isDone, String description, String byString) {
         super(type, isDone, description);
-        this.atString = atString;
+        this.byString = byString;
 
         //Date input format: yyyy-mm-dd HHmm
-        String[] at = atString.split(" ");
-        this.date = LocalDate.parse(at[0]);
-        if (at.length > 1) {
-            this.time = LocalTime.parse(at[1], DateTimeFormatter.ofPattern("HHmm"));
+        String[] by = byString.split(" ");
+        this.date = LocalDate.parse(by[0]);
+        if (by.length > 1) {
+            this.time = LocalTime.parse(by[1], DateTimeFormatter.ofPattern("HHmm"));
         } else {
             this.time = null;
         }
     }
 
     public String getTypeSymbol() {
-        return "E";
+        return "D";
     }
 
     @Override
     public String[] toDataTokens() {
         String isDoneString = String.valueOf(super.isDone);
-        return new String[] {getTypeSymbol(), isDoneString, super.description, this.atString};
+        return new String[] {getTypeSymbol(), isDoneString, super.description, this.byString};
     }
 
     @Override
@@ -40,6 +41,6 @@ public class Event extends Task {
         if (this.time != null) {
             dateTime += " " + this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
         }
-        return "[" + getTypeSymbol() + "]" + super.toString() + " (at: " + dateTime + ")";
+        return "[" + getTypeSymbol() + "]" + super.toString() + " (by: " + dateTime + ")";
     }
 }

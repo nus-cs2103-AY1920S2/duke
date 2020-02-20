@@ -1,3 +1,10 @@
+package duke.logic.commands;
+
+import duke.commons.exceptions.InvalidIndexException;
+import duke.logic.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 public abstract class Command {
 
     protected String commandWord;

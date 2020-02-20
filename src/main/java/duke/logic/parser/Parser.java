@@ -1,3 +1,10 @@
+package duke.logic.parser;
+
+import duke.commons.exceptions.DukeException;
+import duke.commons.exceptions.EmptyDescriptionException;
+import duke.commons.exceptions.InvalidCommandException;
+import duke.logic.commands.*;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 
