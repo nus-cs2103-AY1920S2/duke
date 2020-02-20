@@ -12,3 +12,11 @@
 ```
 list
 ```
+* lists out all the tasks
+
+
+```
+todo pick up delivery
+```
+* adds a new task to be done
+
