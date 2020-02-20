@@ -11,7 +11,6 @@
 3.7 Adding a deadline task: deadline.  
 3.8 Adding an event task: event.  
 3.9. Saving the data: exit.  
-3.10. Encrypting data files [coming in v2.0].  
 4. FAQ.  
 5. Command Summary.  
 
@@ -26,6 +25,8 @@ Duke is for those who prefer to use a desktop app for managing tasks. More impor
 3) Copy the file to the folder you want to use as the home folder for your Duke app.
 
 4) Double-click the file to start the app. The GUI should appear in a few seconds.
+
+(https://github.com/SHAUNGOH97/duke/master/docs/UI.png)
 
 5) Type the command in the command box and press Enter to execute it.
 e.g. typing help and pressing Enter will open the help window.
