@@ -1,5 +1,5 @@
 # Duke - Interactive Task Tracker
- ![User interface screenshot](Ui.PNG)
+ ![User interface screenshot](Ui.png)
 * This is a desktop task tracking application. It has a GUI but most of the user interaction happens using a CLI (Command Line interface)
 
 # User Guide
