@@ -40,7 +40,7 @@ tasks.
 ![app display](Ui.png)
 
 ## Instructions
-  1. Download the jar file [here](#https://github.com/nhamhung/duke/releases/tag/A-Release).
+  1. Download the jar file [here](https://github.com/nhamhung/duke/releases/tag/A-Release).
   2. Open the jar file to launch the app.
   3. Type in the text box your command or instruction. Hit `Enter` or the `Send` button to execute.
   4. See Section [4. Usage](#usage) for different commands.
