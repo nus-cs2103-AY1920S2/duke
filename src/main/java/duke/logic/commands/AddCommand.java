@@ -1,5 +1,6 @@
 package duke.logic.commands;
 import duke.commons.Task;
+import duke.commons.exceptions.DuplicateTaskException;
 import duke.logic.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
