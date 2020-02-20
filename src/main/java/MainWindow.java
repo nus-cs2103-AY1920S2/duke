@@ -1,5 +1,4 @@
 import core.Duke;
-import core.UiMessage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,7 +30,7 @@ public class MainWindow extends AnchorPane {
             + "Hello! I'm Luke\n"
             + "How may i serve you.";
     private static final long delayDuration = 2000;
-    private boolean disableInput=false;
+    private boolean disableInput = false;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/stormtrooper.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/luke.png"));
@@ -57,7 +56,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        if(!disableInput) {
+        if (!disableInput) {
             String input = userInput.getText();
             String response = duke.getResponse(input);
             dialogContainer.getChildren().addAll(
@@ -66,7 +65,7 @@ public class MainWindow extends AnchorPane {
             );
             userInput.clear();
             if (input.equals(TERMINATE)) {
-                disableInput=true;
+                disableInput = true;
                 exit();
             }
         }
