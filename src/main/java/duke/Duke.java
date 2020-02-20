@@ -1,6 +1,8 @@
-import java.util.*;
-import java.util.logging.Level;
-import java.io.*;
+package duke;
+
+import duke.tasks.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
 
 public class Duke {
     private Storage storage;

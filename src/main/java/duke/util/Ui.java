@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -17,7 +19,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(linedivider + "Hello! I'm Duke\nWhat can I do for you?\n" + linedivider);
+        System.out.println(linedivider + "Hello! I'm Duke.Duke\nWhat can I do for you?\n" + linedivider);
     }
 
     public void bye() {
