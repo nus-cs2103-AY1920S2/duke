@@ -19,16 +19,15 @@ public class Duke {
         parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            readFileMessage = ui.returnLoadingError();
-            tasks = new TaskList();
-        } finally {
-            assert tasks != null;
             if (tasks.getList().size() == 0) {
                 readFileMessage = ui.returnFoundEmptyFile();
             } else {
                 readFileMessage = ui.returnLoadingSuccess();
             }
+        } catch (DukeException e) {
+            readFileMessage = ui.returnLoadingError();
+            tasks = new TaskList();
+        } finally {
             logic = new Logic(storage, tasks, ui);
             ui.linkToTaskList(tasks);
         }

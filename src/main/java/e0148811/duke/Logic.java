@@ -82,12 +82,16 @@ public class Logic {
                     + " (which include: l/low, n/normal, h/high, t/top)\"");
         }
         int index = getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;
-        if (index < 0 || index >= tasks.getList().size()) {
-            ui.throwInvalidIndexException();
-        }
+        checkIfIndexIsValid(index);
         String output = assignPriorityToTask(instructionByWord[2], index);
         storage.writeToHardDisk(tasks.getList());
         return output;
+    }
+
+    private void checkIfIndexIsValid(int index) throws DukeException {
+        if (index < 0 || index >= tasks.getList().size()) {
+            ui.throwInvalidIndexException();
+        }
     }
 
     private String assignPriorityToTask(String priorityLevel, int index) throws DukeException {
@@ -107,7 +111,7 @@ public class Logic {
         return index;
     }
 
-    String clearList(String[] instructionByWord, int lengthOfArray) throws DukeException {
+    private String clearList(String[] instructionByWord, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 2) {
             ui.throwWrongFormatException("\"clear a/all\" (if you want to remove all the tasks) " +
                     "OR \"clear d/done\" (if you only want to remove tasks that are marked done)");
@@ -126,14 +130,14 @@ public class Logic {
 
     private String clearCompletedTasks() throws DukeException {
         tasks.removeCompletedTasks();
-        String output = "All completed tasks are removed.";
+        String output = "Noted, all completed tasks are removed.";
         storage.writeToHardDisk(tasks.getList());
         return output;
     }
 
     private String clearAllTasks() throws DukeException {
         tasks.removeAllTasks();
-        String output = "All tasks are removed. Task list is now empty.";
+        String output = "Noted, all tasks are removed. Task list is now empty.";
         storage.writeToHardDisk(tasks.getList());
         return output;
     }
@@ -176,7 +180,7 @@ public class Logic {
         return PriorityLevel.NORMAL;
     }
 
-    String findTasks(String[] instructionByWords, int lengthOfArray) throws DukeException {
+    private String findTasks(String[] instructionByWords, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 2) {
             ui.throwWrongFormatException("\"find key_word (a character sequence)\"");
         }
@@ -218,14 +222,11 @@ public class Logic {
         try {
             int index = Integer.parseInt(instructionByWord[1]) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;
             String output = "";
-            if (index >= tasks.getList().size() || index < 0) {
-                ui.throwInvalidIndexException();
+            checkIfIndexIsValid(index);
+            if (command.equals("done")) {
+                output = tasks.markATaskDone(index);
             } else {
-                if (command.equals("done")) {
-                    output = tasks.markATaskDone(index);
-                } else {
-                    output = tasks.removeATask(index);
-                }
+                output = tasks.removeATask(index);
             }
             storage.writeToHardDisk(tasks.getList());
             return output;
@@ -235,7 +236,7 @@ public class Logic {
         return "";
     }
 
-   String addAndStoreTask(Task t) throws DukeException {
+    private String addAndStoreTask(Task t) throws DukeException {
         String output = tasks.addTaskToList(t);
         storage.writeToHardDisk(tasks.getList());
         return output;

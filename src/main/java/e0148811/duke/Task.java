@@ -13,22 +13,6 @@ public abstract class Task {
         this.level = level;
     }
 
-    public void setHighPriority() {
-        level = PriorityLevel.HIGH;
-    }
-
-    public void setTopPriority() {
-        level = PriorityLevel.TOP;
-    }
-
-    public void setNormalPriority() {
-        level = PriorityLevel.NORMAL;
-    }
-
-    public void setLowPriority(){
-        level = PriorityLevel.LOW;
-    }
-
     public boolean isDone() {
         return isDone;
     }
@@ -91,4 +75,8 @@ public abstract class Task {
     public PriorityLevel getPriorityLevel() {
         return level;
     }
+
+    public void setPriority(PriorityLevel level) {
+        this.level = level;
+    };
 }

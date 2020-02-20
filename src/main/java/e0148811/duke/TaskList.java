@@ -18,20 +18,7 @@ public class TaskList {
     public void assignPriorityToTask(int index, PriorityLevel level) {
         assert index >= 0 && index < list.size() : "index is out of bound";
         Task task = list.get(index);
-        switch (level) {
-        case HIGH:
-            task.setHighPriority();
-            break;
-        case TOP:
-            task.setTopPriority();
-            break;
-        case NORMAL:
-            task.setNormalPriority();
-            break;
-        case LOW:
-            task.setLowPriority();
-            break;
-        }
+        task.setPriority(level);
     }
 
     public String printList() {
@@ -67,7 +54,7 @@ public class TaskList {
         return list;
     }
 
-    public String getTotalNumOfTasks() {
+    String getTotalNumOfTasks() {
         return "Currently there is/are " + list.size() + " task(s) in the task list.\n";
     }
 
