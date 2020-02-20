@@ -8,6 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+//@@author huixianc-reused
+// reused from https://github.com/huixianc/duke/blob/master/tutorials/ JavaFX tutorials
+
 /**
  * A GUI for Duke using FXML.
  */
@@ -35,3 +38,5 @@ public class Main extends Application {
         }
     }
 }
+
+//@@author

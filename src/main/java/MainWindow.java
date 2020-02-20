@@ -7,6 +7,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+//@@author huixianc-reused
+// reused from https://github.com/huixianc/duke/blob/master/tutorials/ JavaFX tutorials
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -65,3 +68,5 @@ public class MainWindow extends AnchorPane {
 
     }
 }
+
+//@@author
