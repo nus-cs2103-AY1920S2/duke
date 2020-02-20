@@ -48,8 +48,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void printHello() {
-        String hello = "\t------------------------------\n\tHello I'm your task manager!\n"
-                + "\tWhat tasks do you have dude?\n\t------------------------------\n";
+        String hello = "\t----------------------------------\n\n\tHello I'm your task manager!\n"
+                + "\tWhat tasks do you have old dude?\n\n\t----------------------------------\n";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(String.format("%s", hello), dukeImage)
         );
