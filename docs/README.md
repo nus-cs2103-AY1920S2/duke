@@ -2,6 +2,7 @@
 1. Introduction
 2. Quick Start
 3. Features
+
 3.1 Listing all tasks: list
 3.2 Clearing all tasks: clear list
 3.3 Marking a task as done: done
