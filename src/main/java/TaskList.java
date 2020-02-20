@@ -157,6 +157,12 @@ public class TaskList {
     public String deadline(String input) {
         assert input != null : "Deadline command input is empty!";
         sb = new StringBuilder();
+        input = input.replace("deadline","");
+        input = input.trim();
+
+        if (input.substring(0,3).equals("/by")) {
+            return ui.emptyDesc();
+        }
 
         int repeat = checkRepeats(input,"/by");
 
@@ -164,10 +170,8 @@ public class TaskList {
             return ui.oneCommand();
         }
 
-        input = input.replace("deadline","");
-        input = input.trim();
-
         String[] strings = input.split("/by");
+
 
         try {
             if (checkEmpty(strings[0])) {
@@ -219,7 +223,7 @@ public class TaskList {
         for (Task task : list) {
             if (task.description.contains(desc)) {
                 at_least_one = true;
-                sb.append(task.get_Index() + ". " + task.toString());
+                sb.append(task.toString());
                 sb.append("\n");
             }
         }
@@ -242,9 +246,18 @@ public class TaskList {
      * @param input the description of the task that is inputted by the user
      * @return the reply message to be sent back to the user
      */
+
+
+
     public String event(String input) {
         assert input != null : "Event command input is empty!";
         sb = new StringBuilder();
+        input = input.replace("event","");
+        input = input.trim();
+
+        if (input.substring(0,3).equals("/at")) {
+            return ui.emptyDesc();
+        }
 
         int repeat = checkRepeats(input,"/at");
 
@@ -252,13 +265,11 @@ public class TaskList {
             return ui.oneCommand();
         }
 
-        input = input.replace("event","");
-        input = input.trim();
 
         String[] strings = input.split("/at");
 
         try {
-            if (checkEmpty(strings[0])) {
+            if (checkEmpty(strings[0]) || checkEmpty(strings[1])) {
                 return ui.emptyCmd();
             }
 
@@ -349,8 +360,11 @@ public class TaskList {
      */
     public String printList() {
         sb = new StringBuilder();
+
         if (latest_index == 0) {
             sb.append(ui.emptyList());
+        } else {
+            sb.append(ui.currList());
         }
 
         for (Task task : list) {
@@ -372,14 +386,19 @@ public class TaskList {
         taskNumber = taskNumber.trim();
         sb = new StringBuilder();
 
-        if (taskNumber.equals("all")) {
+        if (list.size() == 0) {
+            return ui.emptyList();
+        }
+        else if (taskNumber.equals("all")) {
             for (Task t : list) {
                 sb.append(t.details() + "\n");
             }
+            sb.insert(0, "Your Task Details are as follows:\n\n");
         } else {
             try {
                 int i = Integer.parseInt(taskNumber) - 1;
                 sb.append(list.get(i).details() + "\n");
+                sb.insert(0, "Your Task Details are as follows:\n\n");
 
             } catch (IndexOutOfBoundsException e) {
                 sb.append(ui.nosuchNumber());
