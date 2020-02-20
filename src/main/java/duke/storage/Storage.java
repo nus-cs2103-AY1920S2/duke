@@ -1,10 +1,6 @@
 package duke.storage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
+import java.io.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -28,6 +24,10 @@ public class Storage {
 
     public boolean fileExist() {
         return this.originFl.exists();
+    }
+
+    public boolean createFile() throws IOException  {
+        return new File(this.originFl.getParent()).mkdirs() && this.originFl.createNewFile();
     }
 
     /**

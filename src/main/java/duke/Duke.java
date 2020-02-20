@@ -34,6 +34,11 @@ public class Duke implements Copyable {
                 this.tasks = new TaskList();
             }
         } else {
+            try {
+                this.storage.createFile();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
             tasks = new TaskList();
         }
     }
