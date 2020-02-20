@@ -1,5 +1,2 @@
-T | 1 | finalize duke | null
-E | 0 | OP meeting | 2020-02-18
-D | 0 | user stories for tP | 2020-02-14
-D | 0 | CS2103T duke submission | 2020-03-02
-E | 0 | project meeting | 2020-02-18
+T | 1 | new todo | null
+T | 0 | new test | null

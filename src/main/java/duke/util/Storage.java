@@ -86,12 +86,15 @@ public class Storage {
      * @throws IOException Error opening file.
      */
     protected void saveTask(Task task, boolean isAppendMode) throws IOException {
+        if (file.length() == 0) {
+            isAppendMode = false;
+        }
         FileOutputStream ops = new FileOutputStream(file, isAppendMode);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(ops));
         String[] toSave = new String[4];
         toSave[1] = task.isDone ? "1" : "0";
         toSave[2] = task.getDescription();
-
+        System.out.println("file length: " + file.length());
         if (task instanceof Event) {
             toSave[0] = "E";
             toSave[3] = ((Event) task).getScheduledTime().toString();

@@ -56,11 +56,10 @@ public class Parser {
                 throw new InvalidCommandException();
             }
         } catch (DukeException e) {
-            StringBuilder sb = new StringBuilder("____________________________________________________________\n");
-            sb.append(e).append("\n").append("____________________________________________________________");
+            StringBuilder sb = new StringBuilder("");
+            sb.append(e).append("\n");
             return sb.toString();
         }
-
         return commandHandler.handleCommand(new String[] {cmd, descAndDate}, taskNum, keyword);
     }
 
