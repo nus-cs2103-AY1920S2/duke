@@ -16,7 +16,7 @@
 5. Command Summary.  
 
 ## 1. Introduction
-Duke is for those who prefer to use a desktop app for managing tasks. More importantly, Duke is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can help manage your busy schedule better than traditional GUI apps. Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
+Duke is for those who prefer to use a desktop app for managing tasks. More importantly, Duke is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke can help manage your busy schedule better than traditional GUI apps. Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
 
 ## 2. Quick Start 
 1) Ensure you have Java 11 or above installed in your Computer.
@@ -26,6 +26,8 @@ Duke is for those who prefer to use a desktop app for managing tasks. More impor
 3) Copy the file to the folder you want to use as the home folder for your Duke app.
 
 4) Double-click the file to start the app. The GUI should appear in a few seconds.
+
+image::Ui.png[width="790"]
 
 
 
