@@ -7,18 +7,6 @@ import java.util.Arrays;
 
 public class Gui {
 
-    /** Returns the string representing the Greeting. */
-    public String greeting() {
-        return "\t----------------------------\n\tHello I'm your task manager!\n\t----------------------------\n";
-    }
-
-    /**
-     * Returns the string representing the Initial Prompt.
-     */
-    public String initPrompt() {
-        return "\t----------------------------\n\tWhat tasks do you have dude?\n\t----------------------------\n";
-    }
-
     /**
      * Returns the string representing bye message.
      */

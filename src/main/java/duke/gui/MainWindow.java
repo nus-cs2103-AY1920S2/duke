@@ -30,10 +30,21 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        printHello();
     }
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    @FXML
+    public void printHello() {
+        String hello = "\t------------------------------\n\tHello I'm your task manager!\n"
+                + "\tWhat tasks do you have dude?\n\t------------------------------\n";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(String.format("%s", hello), dukeImage)
+        );
+        userInput.clear();
     }
 
     /**
