@@ -79,4 +79,8 @@ public class Gui {
         return String.format("\tI don't know this error homie, take a look:\n\t%s\n", e.toString())
                 + Arrays.toString(e.getStackTrace());
     }
+
+    public String showUpdate(Task task, ArrayList<Task> tasks) {
+        return String.format("\tGot it. I've changed this task to:\n\t%s\n", task);
+    }
 }

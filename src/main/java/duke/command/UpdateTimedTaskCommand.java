@@ -37,6 +37,9 @@ public class UpdateTimedTaskCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Gui gui) {
-        return null;
+        Task task = getTask(taskList);
+        task.setDescription(description);
+        task.setTime(time);
+        return gui.showUpdate(task, taskList.getTaskList());
     }
 }
