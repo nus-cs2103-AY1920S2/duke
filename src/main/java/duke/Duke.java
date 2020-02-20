@@ -133,6 +133,7 @@ public class Duke {
         assert input != null;
         try {
             Command command = parser.parseCommand(input);
+            parser.checkArguments(command, input);
             return command.execute(this, input);
         } catch (DukeException e) {
             return ui.outputException(e);
