@@ -6,6 +6,10 @@ import duke.commands.TaskList;
 import duke.commands.Ui;
 import duke.exceptions.DukeException;
 
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,13 +21,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
-
 
 /**
  * Contains the main function to run the programme.
@@ -194,6 +191,8 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other
      * containing Duke's reply and then appends them to the dialog container.
      * Clears the user input after processing.
+     *
+     * @param stage the GUI window
      */
     private void handleUserInput(Stage stage) throws InterruptedException {
         String userText = (userInput.getText());

@@ -25,6 +25,6 @@ public class TaskListTest {
         taskList.add(new ToDo("return book"), false);
         taskList.delete(0);
         taskList.done(0);
-        assertEquals("[T][Y] return book", taskList.get(0).toString());
+        assertEquals("[T][\u2713] return book", taskList.get(0).toString());
     }
 }

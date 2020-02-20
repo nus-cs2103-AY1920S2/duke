@@ -1,9 +1,10 @@
 package duke.tasks;
 
+import static duke.commands.Parser.FORMATTER;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import static duke.commands.Parser.FORMATTER;
+import java.time.format.DateTimeParseException;
 
 /**
  * Events: tasks that start at a specific time and ends at a specific time
@@ -20,24 +21,25 @@ public class Event extends Task {
      * creates a new Event.
      *
      * @param description the description of the event
-     * @param at the time of the event
+     * @param time the time of the event
      * @param format the format to be used to parse this
      */
-    public Event(String description, String at, DateTimeFormatter format) {
+    public Event(String description, String time, DateTimeFormatter format)
+            throws DateTimeParseException {
         super(description);
         assert description != null : "No description for this event";
-        this.at = LocalDateTime.parse(at, format);
-        assert at != null : "No timing for this event";
+        this.at = LocalDateTime.parse(time, format);
+        assert this.at != null : "No timing for this event";
     }
 
     /**
      * Updates the timing.
      *
-     * @param at the new timing
+     * @param time the new timing
      * @param format the format to be used to parse this
      */
-    public void update(String at, DateTimeFormatter format) {
-        this.at = LocalDateTime.parse(at, format);
+    public void update(String time, DateTimeFormatter format) {
+        this.at = LocalDateTime.parse(time, format);
     }
 
     /**

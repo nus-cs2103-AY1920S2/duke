@@ -10,7 +10,7 @@ public class EventTest {
     @Test
     public void toStringTest() {
         Event event = new Event("test", "28-1-2020 1200", Parser.PARSER);
-        assertEquals("[E][N] test (at: Jan 28 2020 12PM)", event.toString());
+        assertEquals("[E][\u2718] test (at: Jan 28 2020 1200PM)", event.toString());
     }
 
     /**
@@ -19,6 +19,6 @@ public class EventTest {
     @Test
     public void fileStringTest() {
         Event event = new Event("test", "28-1-2020 1200", Parser.PARSER);
-        assertEquals("E | N | test | Jan 28 2020 12PM", event.fileString());
+        assertEquals("E | N | test | Jan 28 2020 1200PM", event.fileString());
     }
 }

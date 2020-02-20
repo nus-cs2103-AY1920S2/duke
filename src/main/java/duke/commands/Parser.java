@@ -6,6 +6,7 @@ import duke.tasks.Event;
 import duke.tasks.ToDo;
 
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Deals with making sense of the user command.
@@ -35,10 +36,10 @@ public class Parser {
     /**
      * Creates a new Parser object and gets Tasklist from Duke.
      *
-     * @param taskList the TaskList
+     * @param list the TaskList
      */
-    public Parser(TaskList taskList) {
-        this.taskList = taskList;
+    public Parser(TaskList list) {
+        this.taskList = list;
     }
 
     /**
@@ -71,14 +72,24 @@ public class Parser {
             } else if (command.startsWith("deadline")) {
                 ui.checkDescription(description, "deadline");
                 ui.checkTime(arr, "deadline");
-                return taskList.add(new Deadline(description[1],
-                        arr[1].split(" ", 2)[1], PARSER), true);
+                try {
+                    return taskList.add(new Deadline(description[1],
+                            arr[1].split(" ", 2)[1], PARSER), true);
+                } catch (DateTimeParseException e) {
+                    return "Please enter the time in the <dd-MM-yyyy HHmm>"
+                            + "format";
+                }
 
             } else if (command.startsWith("event")) {
                 ui.checkDescription(description, "event");
                 ui.checkTime(arr, "event");
-                return taskList.add(new Event(description[1],
-                        arr[1].split(" ", 2)[1], PARSER), true);
+                try {
+                    return taskList.add(new Event(description[1],
+                            arr[1].split(" ", 2)[1], PARSER), true);
+                } catch (DateTimeParseException e) {
+                    return "Please enter the time in the <dd-MM-yyyy HHmm> "
+                            + "format";
+                }
 
             } else if (command.startsWith("find")) {
                 return taskList.find(description[1]);

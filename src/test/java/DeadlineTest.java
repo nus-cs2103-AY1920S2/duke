@@ -11,7 +11,7 @@ public class DeadlineTest {
     public void toStringTest() {
         Deadline deadline = new Deadline("test", "28-1-2020 1200",
                 Parser.PARSER);
-        assertEquals("[D][N] test (by: Jan 28 2020 12PM)", deadline.toString());
+        assertEquals("[D][\u2718] test (by: Jan 28 2020 1200PM)", deadline.toString());
     }
 
     /**
@@ -21,6 +21,6 @@ public class DeadlineTest {
     public void fileStringTest() {
         Deadline deadline = new Deadline("test", "28-1-2020 1200",
                 Parser.PARSER);
-        assertEquals("D | N | test | Jan 28 2020 12PM", deadline.fileString());
+        assertEquals("D | N | test | Jan 28 2020 1200PM", deadline.fileString());
     }
 }

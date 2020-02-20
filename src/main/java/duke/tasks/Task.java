@@ -16,6 +16,12 @@ public abstract class Task {
      */
     private boolean isDone;
 
+    /**
+     * returns a boolean value based on whether the task has been completed or
+     * not.
+     *
+     * @return the status of the task
+     */
     public boolean isDone() {
         return isDone;
     }
@@ -23,10 +29,10 @@ public abstract class Task {
     /**
      * creates a new Task.
      *
-     * @param description the description of the task
+     * @param input the description of the task
      */
-    public Task(String description) {
-        this.description = description;
+    public Task(String input) {
+        this.description = input;
         assert description != null : "No description for this task";
         this.isDone = false;
     }

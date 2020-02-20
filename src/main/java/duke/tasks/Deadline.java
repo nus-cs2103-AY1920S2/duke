@@ -1,9 +1,10 @@
 package duke.tasks;
 
+import static duke.commands.Parser.FORMATTER;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import static duke.commands.Parser.FORMATTER;
+import java.time.format.DateTimeParseException;
 
 /**
  * Deadlines: tasks that need to be done before a specific date/time
@@ -20,24 +21,25 @@ public class Deadline extends Task {
      * creates a new Deadline.
      *
      * @param description the description of the deadline
-     * @param by the time of the deadline
+     * @param time the time of the deadline
      * @param format the format to be used to parse this
      */
-    public Deadline(String description, String by, DateTimeFormatter format) {
+    public Deadline(String description, String time, DateTimeFormatter format)
+            throws DateTimeParseException {
         super(description);
         assert description != null : "No description for this deadline";
-        this.by = LocalDateTime.parse(by, format);
-        assert by != null : "No timing for this deadline";
+        this.by = LocalDateTime.parse(time, format);
+        assert this.by != null : "No timing for this deadline";
     }
 
     /**
      * Updates the timing.
      *
-     * @param by the new timing
+     * @param time the new timing
      * @param format the format to be used to parse this
      */
-    public void update(String by, DateTimeFormatter format) {
-        this.by = LocalDateTime.parse(by, format);
+    public void update(String time, DateTimeFormatter format) {
+        this.by = LocalDateTime.parse(time, format);
     }
 
     /**

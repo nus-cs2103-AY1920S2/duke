@@ -9,7 +9,7 @@ public class ToDoTest {
     @Test
     public void toStringTest() {
         ToDo todo = new ToDo("test");
-        assertEquals("[T][N] test", todo.toString());
+        assertEquals("[T][\u2718] test", todo.toString());
     }
 
     /**
