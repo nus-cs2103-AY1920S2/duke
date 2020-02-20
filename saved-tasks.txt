@@ -1,7 +1,6 @@
 0 || deadline || sleep || 2000-01-01 1300
 1 || todo || sleep
 1 || todo || test
-0 || todo || your mom 
 0 || deadline || homework || 2020-10-10 1500
 0 || event || eat lunch || 2020-02-02 1200
 0 || todo || cry
@@ -9,4 +8,4 @@
 0 || event || team meeting || 2020-02-05 1600
 0 || todo || eat dinner
 0 || todo || test 
-0 || todo || another test
+1 || todo || another test
