@@ -19,14 +19,14 @@ repositories {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'duke.Duke'
+                'Main-Class': 'duke.Launcher'
         )
     }
 }
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 test {
@@ -39,7 +39,7 @@ run {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.1"
+    archiveVersion = "0.2"
     archiveClassifier = null
     archiveAppendix = null
 }
