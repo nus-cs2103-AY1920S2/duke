@@ -1,13 +1,32 @@
 package duke.task;
 
+/**
+ * Event is a subclass of Task. It represents a task with a description and
+ * completion status, as well as the time of the event.
+ */
 public class Event extends Task {
     protected final String time;
 
+    /**
+     * Instantiates an Event object with the specified description and time,
+     * marked as incomplete.
+     *
+     * @param description the description of the event
+     * @param time the time of the event
+     */
     public Event(String description, String time) {
         super(description, false);
         this.time = time;
     }
 
+    /**
+     * Instantiates an Event object with the specified description, time, and
+     * completion status.
+     *
+     * @param description the description of the event
+     * @param time the time of the event
+     * @param isCompleted the completion status of the event
+     */
     public Event(String description, String time, boolean isCompleted) {
         super(description, isCompleted);
         this.time = time;
