@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import duke.task.TaskList;
 
 /**
- * JUnit test class for {@code SaveState}
+ * JUnit test class for {@code SaveState}.
  */
 public class SaveStateTest {
     @Test
