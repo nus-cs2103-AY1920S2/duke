@@ -1,5 +1,9 @@
 package duke;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
+
 /**
  * Parser handles user input.
  */
@@ -11,8 +15,8 @@ public class Parser {
     /**
      * Constructor that takes in user input and loaded task list.
      *
-     * @param input
-     * @param taskList
+     * @param input of user
+     * @param taskList loaded from storage
      */
     public Parser(String input, TaskList taskList) {
         this.input = input;
@@ -23,12 +27,14 @@ public class Parser {
      * Method to determine action based on user input.
      */
     public String readCommand() {
-        String arr[] = this.input.split(" ", 2);
+        String[] arr = this.input.split(" ", 2);
         String response = "";
 
         if (input.equals("bye")) {
             response = ui.showGoodbye();
-            System.exit(0);
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
 
         } else if (input.equals("list")) {
             response = ui.showList(taskList);
@@ -58,8 +64,8 @@ public class Parser {
     /**
      * Method to check if user enters a valid input.
      *
-     * @param action
-     * @throws DukeException
+     * @param action Input of user
+     * @throws DukeException error
      */
     public static void checkAction(String action) throws DukeException {
         Ui ui = new Ui();

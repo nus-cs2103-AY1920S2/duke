@@ -13,8 +13,8 @@ public class Event extends Task {
     /**
      * Constructor that takes in description and date time of task.
      *
-     * @param description
-     * @param at
+     * @param description of the task
+     * @param at what date and time is the event
      */
     public Event(String description, LocalDateTime at) {
         super(description);

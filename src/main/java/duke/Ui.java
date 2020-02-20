@@ -30,13 +30,13 @@ public class Ui {
      * Method prints goodbye message when program terminates.
      */
     public String showGoodbye() {
-        return (format + "      Bye. Hope to see you again soon! :)\n" + format);
+        return (format + "      Aloha! Hope to see you again soon! :)\n" + format);
     }
 
     /**
      * Method prints list of tasks in user's task list.
      *
-     * @param taskList
+     * @param taskList of user tasks
      */
     public String showList(TaskList taskList) {
         String response = (format + "      Here are the tasks in your list:\n");
@@ -53,7 +53,7 @@ public class Ui {
     /**
      * Method prints confirmation message when user marks a task as done.
      *
-     * @param task
+     * @param task to be marked done
      */
     public String showDone(Task task) {
         return (format
@@ -65,15 +65,20 @@ public class Ui {
     /**
      * Method prints list of tasks found with matching keyword.
      *
-     * @param taskList
+     * @param taskList of found tasks
      */
     public String showFound(ArrayList<Task> taskList) {
         String response = "";
-        response = (format + "      Here are the matching tasks in your list:\n");
 
-        for (int i = 1; i < taskList.size() + 1; i++) {
-            Task current = taskList.get(i - 1);
-            response += ("      " + i + ". " + current + "\n");
+        if (taskList.isEmpty()) {
+            response = (format + "      Sorry, there are no matching tasks :(\n");
+        } else {
+            response = (format + "      Here are the matching tasks in your list:\n");
+
+            for (int i = 1; i < taskList.size() + 1; i++) {
+                Task current = taskList.get(i - 1);
+                response += ("      " + i + ". " + current + "\n");
+            }
         }
         response += format;
 
@@ -90,8 +95,8 @@ public class Ui {
     /**
      * Method prints confirmation message when user adds a new task.
      *
-     * @param task
-     * @param tasks
+     * @param task added
+     * @param tasks ArrayList of user tasks
      */
     public String showTaskAdded(Task task, ArrayList<Task> tasks) {
         return (format
@@ -103,8 +108,8 @@ public class Ui {
 
     /**
      * Method prints confirmation message when user deletes a task.
-     * @param task
-     * @param tasks
+     * @param task deleted
+     * @param tasks ArrayList of user tasks
      */
     public String showTaskDeleted(Task task, ArrayList<Task> tasks) {
         return (format
@@ -135,7 +140,7 @@ public class Ui {
     /**
      * Method prints error message when user enters more than 1 task number.
      *
-     * @return
+     * @return error message
      */
     public String showValidError() {
         return format + "      Please enter a only one Task number!\n" + format;
@@ -144,7 +149,7 @@ public class Ui {
     /**
      * Method prints error message when user does not enter any task number.
      *
-     * @return
+     * @return error message
      */
     public String showNumError() {
         return format + "      Please enter a Task number!\n" + format;
@@ -153,7 +158,7 @@ public class Ui {
     /**
      * Method prints error message when user does not enter task description.
      *
-     * @return
+     * @return error message
      */
     public String showDescriptionError() {
         return format + "      Please enter a Task description!\n" + format;
@@ -162,7 +167,7 @@ public class Ui {
     /**
      * Method prints error message when user enters invalid action.
      *
-     * @return
+     * @return error message
      */
     public String showActionError() {
         return format + "      Sorry, I didn't understand that :( Please try again.\n" + format;
