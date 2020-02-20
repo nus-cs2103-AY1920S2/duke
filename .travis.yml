@@ -20,4 +20,4 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - ./gradlew test --debug
+  - ./gradlew build -s

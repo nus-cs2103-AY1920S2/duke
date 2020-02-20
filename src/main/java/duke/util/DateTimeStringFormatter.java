@@ -1,14 +1,14 @@
 package duke.util;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import static duke.util.MagicStrings.BLANK;
 import static duke.util.MagicStrings.DATE_TIME_OVERDUE;
 import static duke.util.MagicStrings.DATE_TIME_TODAY;
 import static duke.util.MagicStrings.DATE_TIME_TOMORROW;
 import static duke.util.MagicStrings.DATE_TIME_YESTERDAY;
 import static java.time.temporal.ChronoUnit.DAYS;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The {@code DateTimeStringFormatter} is a helper class with
@@ -42,31 +42,33 @@ public class DateTimeStringFormatter {
         boolean isDifferentYear = dateTime.getYear() != currentDateTime.getYear();
         if (dateTime.isBefore(currentDateTime)) {
             if (isToday) {
-                return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES)
-                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
+                return (DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES)
+                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE)).replace("AM", "am").replace("PM", "pm");
+
             } else if (isOneDayDifference) {
                 // isYesterday
-                return DATE_TIME_YESTERDAY + dateTime.format(HOUR_MINUTES)
-                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
+                return (DATE_TIME_YESTERDAY + dateTime.format(HOUR_MINUTES)
+                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE)).replace("AM", "am").replace("PM", "pm");
             } else if (isDifferentYear) {
-                return dateTime.format(MONTH_YEAR_HOUR_MINUTES)
-                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
+                return (dateTime.format(MONTH_YEAR_HOUR_MINUTES)
+                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE)).replace("AM", "am").replace("PM", "pm");
             }
-            return dateTime.format(MONTH_HOUR_MINUTES) + (isCompleted ? BLANK : DATE_TIME_OVERDUE);
+            return (dateTime.format(MONTH_HOUR_MINUTES)
+                    + (isCompleted ? BLANK : DATE_TIME_OVERDUE)).replace("AM", "am").replace("PM", "pm");
         }
 
         boolean isThisWeek = differenceInDays > -7;
         if (isToday) {
-            return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES);
+            return (DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES)).replace("AM", "am").replace("PM", "pm");
         } else if (isOneDayDifference) {
             // isTomorrow
-            return DATE_TIME_TOMORROW + dateTime.format(HOUR_MINUTES);
+            return (DATE_TIME_TOMORROW + dateTime.format(HOUR_MINUTES)).replace("AM", "am").replace("PM", "pm");
         } else if (isThisWeek) {
-            return dateTime.format(WEEKDAY_HOUR_MINUTES);
+            return (dateTime.format(WEEKDAY_HOUR_MINUTES)).replace("AM", "am").replace("PM", "pm");
         } else if (isDifferentYear) {
-            return dateTime.format(MONTH_YEAR_HOUR_MINUTES);
+            return (dateTime.format(MONTH_YEAR_HOUR_MINUTES)).replace("AM", "am").replace("PM", "pm");
         }
-        return dateTime.format(MONTH_HOUR_MINUTES);
+        return (dateTime.format(MONTH_HOUR_MINUTES)).replace("AM", "am").replace("PM", "pm");
 
 
     }
