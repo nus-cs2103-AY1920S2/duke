@@ -5,3 +5,4 @@ E | false | meeting | 2020-12-12 1400
 D | false | meeting | 2020-12-12 1400
 T | false | study
 D | false | study | 2020-06-07 1500
+T | false | study

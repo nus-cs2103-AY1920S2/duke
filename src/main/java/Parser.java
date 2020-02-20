@@ -37,8 +37,8 @@ public class Parser {
         if (!commandWord.equals("list") && !commandWord.equals("bye")) {
             checkDetails(commands);
         } else {
-            // commandWord is either "list" or "bye" -- commands with no arguments required
-            assert commandWord.equals("list") || commandWord.equals("bye") : "invalid command";
+            // commandWord is either "list" or "bye", with no arguments required
+            assert commands.length == 1 : "invalid arguments";
         }
     }
 
@@ -46,7 +46,7 @@ public class Parser {
         if (!validCommands.contains(commandWord)) {
             throw new InvalidCommandException("Sorry dude but that won't command me!");
         } else {
-            // commandWord is valid and found in the list of validCommands
+            // valid commandWord
             assert validCommands.contains(commandWord) : "invalid command";
         }
     }

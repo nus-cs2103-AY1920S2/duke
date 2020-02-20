@@ -31,7 +31,7 @@ public class Storage {
             if (type.equals("T")) {
                 task = new Todo("todo", isDone, description);
             } else {
-                // tokens = {type, isDone, description, time}
+                // Deadline/Event has tokens = {type, isDone, description, time}
                 assert tokens.length == 4 : "missing argument(s)";
                 String time = tokens[3];
                 if (type.equals("D")) {

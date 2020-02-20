@@ -65,6 +65,7 @@ public class TaskList {
         default:
             assert 1 == 0 : "default reached";
         }
+        assert task != null : "null task";
         this.taskList.add(task);
         return task;
     }
