@@ -1,4 +1,4 @@
-de# Gradle Tutorial
+# Gradle Tutorial
 
 Gradle is a _build automation tool_ used to automate build processes. There are many ways of integrating Gradle into a project. In this guide, we will be using the _Gradle wrapper_.
 

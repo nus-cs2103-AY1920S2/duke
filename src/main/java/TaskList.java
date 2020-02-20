@@ -34,30 +34,28 @@ public class TaskList {
      * @throws DukeException If string format is invalid.
      */
     public String add(String s) throws DukeException {
-        String typeOfTask = s.split(" ", 2)[0];
+        String[] taskParts = s.split(" ", 2);
+        String taskType = taskParts[0];
         Task toAdd = new Task();
-        if (typeOfTask.equals("todo")) {
+        if (taskType.equals("todo")) {
             try {
-                String task = s.split(" ", 2)[1];
-                toAdd = new Todo(task);
+                toAdd = new Todo(taskParts[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new TodoException();
+                throw new EmptyDescriptionException();
             }
-        } else if (typeOfTask.equals("event")) {
+        } else if (taskType.equals("event")) {
             try {
-                String task = s.split(" ", 2)[1];
-                String[] taskParts = task.split(" /at ");
-                toAdd = new Event(taskParts[0], taskParts[1]);
+                String[] taskInfo = taskParts[1].split(" /at ");
+                toAdd = new Event(taskInfo[0], taskInfo[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new EventException();
+                throw new EmptyDescriptionException();
             }
-        } else if (typeOfTask.equals("deadline")) {
+        } else if (taskType.equals("deadline")) {
             try {
-                String task = s.split(" ", 2)[1];
-                String[] taskParts = task.split(" /by ");
-                toAdd = new Deadline(taskParts[0], taskParts[1]);
+                String[] taskInfo = taskParts[1].split(" /by ");
+                toAdd = new Deadline(taskInfo[0], taskInfo[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DeadlineException();
+                throw new EmptyDescriptionException();
             }
         }
         taskList.add(toAdd);
