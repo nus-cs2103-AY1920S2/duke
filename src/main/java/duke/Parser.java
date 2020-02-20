@@ -97,7 +97,11 @@ class Parser {
     }
 
     private String[] parseDone(int i) {
-        return tasks.done(i);
+        if (tasks.numberOfTasks() + 1 > i) {
+            return tasks.done(i);
+        } else {
+            return new String[]{"No Such Task Found!"};
+        }
     }
 
     private String[] parseAddTodo(String args) throws IncorrectArgumentException {
