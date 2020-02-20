@@ -1,5 +1,18 @@
 package duke.command;
 
+import static duke.util.MagicStrings.ERROR_DEADLINE_MISSING_CONTENT;
+import static duke.util.MagicStrings.ERROR_DEADLINE_MISSING_DEADLINE;
+import static duke.util.MagicStrings.ERROR_EVENT_MISSING_CONTENT;
+import static duke.util.MagicStrings.ERROR_EVENT_MISSING_TIME_FRAME;
+import static duke.util.MagicStrings.ERROR_INVALID_COMMAND;
+import static duke.util.MagicStrings.ERROR_TODO_MISSING_CONTENT;
+import static duke.util.StringCleaner.cleanAndLowerString;
+import static duke.util.StringCleaner.cleanString;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.exception.DuchessException;
 import duke.save.SaveStateStack;
 import duke.storage.Storage;
@@ -13,19 +26,6 @@ import duke.ui.Ui;
 import duke.util.DateTimeParser;
 import duke.util.Frequency;
 import duke.util.FrequencyParser;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static duke.util.MagicStrings.ERROR_DEADLINE_MISSING_CONTENT;
-import static duke.util.MagicStrings.ERROR_DEADLINE_MISSING_DEADLINE;
-import static duke.util.MagicStrings.ERROR_EVENT_MISSING_CONTENT;
-import static duke.util.MagicStrings.ERROR_EVENT_MISSING_TIME_FRAME;
-import static duke.util.MagicStrings.ERROR_INVALID_COMMAND;
-import static duke.util.MagicStrings.ERROR_TODO_MISSING_CONTENT;
-import static duke.util.StringCleaner.cleanAndLowerString;
-import static duke.util.StringCleaner.cleanString;
 
 
 /**
@@ -154,7 +154,7 @@ public class TaskCreationHandler {
         Frequency frequency = null;
         LocalDateTime deadline = null;
         LocalDateTime recurrenceEndTime = null;
-        for (int i = 1; i < details.size(); i++) {
+        for (int i = details.size() - 1; i > -1; i--) {
             String detail = details.get(i);
             String[] commands = detail.split("\\s", 2);
             switch (commands[0].toLowerCase()) {
@@ -168,7 +168,11 @@ public class TaskCreationHandler {
                 recurrenceEndTime = DateTimeParser.parseDateTime(cleanAndLowerString(commands[1]));
                 break;
             default:
-                // Means unrecognized keyword was given. Not an issue unless key details are missing.
+                // Means a slash was inside the command. Assume it to be part of the previous segment,
+                // thus we will append it to the previous segment.
+                if (i != 0) {
+                    details.set(i - 1, details.get(i - 1) + "/" + detail);
+                }
                 break;
             }
         }
