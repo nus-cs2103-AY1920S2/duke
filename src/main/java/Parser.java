@@ -61,8 +61,8 @@ public class Parser {
             }
         } else if (input.contains ("clear list")) {
             return taskList.clearList();
-        } else if (input.equals ("bye")) {
-            return "Cya soon:)";
+        } else if (input.equals ("commands")) {
+            return taskList.commandList();
         } else {
             //Create task using key words: "todo", "deadline", "event"
             if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {

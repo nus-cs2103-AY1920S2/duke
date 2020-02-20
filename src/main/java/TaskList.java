@@ -30,6 +30,22 @@ public class TaskList {
         }
     }
 
+    public String commandList() {
+        return "  Command List:\n" +
+                "__________________________________________\n" +
+                " - commands: Returns command list\n" +
+                " - list: Returns list of tasks\n" +
+                " - done: Format: done(space)(task number)\n Marks specified task as done\n" +
+                " - delete: Format: delete(space)(task number)\n Deletes specified task\n" +
+                " - find: Format: find(space)(keyword)\n Finds all tasks that matches keyword\n" +
+                " - todo: Format: todo(space)(task name)\n Adds a new todo task to your list\n" +
+                " - deadline: Format: deadline(space)(task name)(/)(Date in yyyy-mm-dd format)" +
+                "\n Adds a new deadline task to your list\n" +
+                " - event Format: event(space)(task name)(/)(Date in yyyy-mm-dd format)(T)(Time in hh:mm-hh:mm format)\n" +
+                "Adds a new event task to your list\n" +
+                " - clear list: Clears your task list\n";
+    }
+
     /**
      * Prints out all task in the list
      *
@@ -112,38 +128,42 @@ public class TaskList {
      * @return A string to be printed out on duke application GUI on the status of the added task
      */
     public String addTask(String type, String input) {
-        try {
-            Task task = taskConvertor(type, input);
-            this.taskList.add(task);
-            this.pendingTask++;
-            return "Got it. I've added the following task:\n" +
-                    task + "\nYou now have " + this.pendingTask + " task in the list";
-        } catch (Exception e){
-            return "Invalid task request:(";
+        Task task = taskConvertor(type, input);
+        if (task == null) {
+            return "Invalid Task Request:(";
         }
+        this.taskList.add(task);
+        this.pendingTask++;
+        return "Got it. I've added the following task:\n" +
+                task + "\nYou now have " + this.pendingTask + " task in the list";
+
     }
 
     public Task taskConvertor (String type, String input) {
-        if (type.equals("T")) {
-            String task1 = input.substring(5);
-            Todo todo = new Todo(task1);
-            return todo;
-        } else if (type.equals("D")) {
-            int taskIndex = input.indexOf("/");
-            int byIndex = taskIndex + 1;
-            LocalDate date = LocalDate.parse(input.substring(byIndex));
-            Deadline deadline = new Deadline(input.substring(9, taskIndex), date);
-            return deadline;
-        } else if (type.equals("E")) {
-            int taskIndex = input.indexOf("/");
-            int atIndex = taskIndex + 1;
-            int timeIndex = atIndex + 11;
-            LocalDate date = LocalDate.parse(input.substring(atIndex, timeIndex - 1));
-            LocalTime start = LocalTime.parse(input.substring(timeIndex, timeIndex + 5));
-            LocalTime end = LocalTime.parse(input.substring(timeIndex + 6));
-            Event event = new Event(input.substring(6, taskIndex), date, start, end);
-            return event;
-        } else {
+        try {
+            if (type.equals("T")) {
+                String task1 = input.substring(5);
+                Todo todo = new Todo(task1);
+                return todo;
+            } else if (type.equals("D")) {
+                int taskIndex = input.indexOf("/");
+                int byIndex = taskIndex + 1;
+                LocalDate date = LocalDate.parse(input.substring(byIndex));
+                Deadline deadline = new Deadline(input.substring(9, taskIndex), date);
+                return deadline;
+            } else if (type.equals("E")) {
+                int taskIndex = input.indexOf("/");
+                int atIndex = taskIndex + 1;
+                int timeIndex = atIndex + 11;
+                LocalDate date = LocalDate.parse(input.substring(atIndex, timeIndex - 1));
+                LocalTime start = LocalTime.parse(input.substring(timeIndex, timeIndex + 5));
+                LocalTime end = LocalTime.parse(input.substring(timeIndex + 6));
+                Event event = new Event(input.substring(6, taskIndex), date, start, end);
+                return event;
+            } else {
+                return null;
+            }
+        } catch (StringIndexOutOfBoundsException e) {
             return null;
         }
     }

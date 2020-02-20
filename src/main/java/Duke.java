@@ -32,7 +32,7 @@ import java.util.Scanner;
  * todo</space></name of task>
  *
  * deadline</space></name of task></backslash></Date in yyyy-mm-dd format>
- * event</space></name of task></backslash></Date in yyyy-mm-dd format><T></Time in mm:ss-mm:ss format>
+ * event</space></name of task></backslash></Date in yyyy-mm-dd format><T></Time in hh:mm-hh:mm format>
  * bye
  */
 public class Duke extends Application {
@@ -132,7 +132,7 @@ public class Duke extends Application {
         stage.setScene (scene);
         stage.show();
 
-        stage.setTitle ("Duke");
+        stage.setTitle ("Polar Express");
         stage.setResizable (false);
         stage.setMinHeight (600.0);
         stage.setMinWidth (400.0);
@@ -192,28 +192,6 @@ public class Duke extends Application {
         return textToAdd;
     }
 
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        String userText = userInput.getText();
-        String dukeText = getResponse (userInput.getText());
-        dialogContainer.getChildren().addAll (
-                DialogBox.getUserDialog (userText, user),
-                DialogBox.getUserDialog (dukeText, duke)
-        );
-        userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse (String input) {
-        return "Duke replies: " + input;
-    }
 
     public TaskList getTaskList() {
         return tasks;

@@ -1,5 +1,6 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -26,13 +27,20 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke = new Duke ("src/main/java/data/duke.txt");
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Penguin.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/santa.png"));
 
     @FXML
     public void initialize() throws IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         duke.load();
+        String openingPage = "Welcome to Polar Express:)" +
+                "\nI am your personal task assistant!" +
+                "\nIf this is your first time here, \ntype 'commands' to see all possible tasks I can do for you:)";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(openingPage, dukeImage)
+        );
+        userInput.clear();
     }
 
     /**
@@ -55,6 +63,17 @@ public class MainWindow extends AnchorPane {
     private void exitAndSave() throws Exception {
         duke.save();
         Platform.exit();
+    }
+
+    @FXML
+    private void showInfoBox() throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Launcher.class.getResource("resources/view/InfoBox.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
