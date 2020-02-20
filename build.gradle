@@ -38,7 +38,7 @@ javafx {
 
 shadowJar {
     archiveBaseName = "4lc3n-bot"
-    archiveVersion = "0.1.0"
+    archiveVersion = "1.0.0"
     archiveClassifier = null
     archiveAppendix = null
 }
