@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-group 'seedu.duke'
+group 'Duke'
 version '0.1.0'
 
 repositories {
@@ -12,7 +12,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.gui.Launcher"
 }
 
 dependencies {
@@ -28,6 +28,7 @@ repositories {
 }
 
 dependencies {
+
     String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
@@ -42,6 +43,13 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'duke.gui.Launcher'
+    }
 }
 
 run {

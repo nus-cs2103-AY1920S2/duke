@@ -1,9 +1,8 @@
 package duke;
 
 import duke.command.Command;
-import gui.components.DialogBox;
+import duke.gui.components.DialogBox;
 import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,9 +15,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -28,8 +24,18 @@ import java.util.Scanner;
 public class Duke extends Application {
     private Controller controller;
 
-    private Image user;
-    private Image duke;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/andrew.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/ricky.png"));
+
+
+    /**
+     * Constructs a Duke instance with file path set to src/data/data.csv. This is primarily for the sake of GUI.
+     */
+    public Duke() {
+        this("src/data/data.csv");
+
+
+    }
 
     /**
      * Constructs a Duke instance with the specified file path
@@ -41,20 +47,7 @@ public class Duke extends Application {
         this.controller = new Controller(storageController);
     }
 
-    /**
-     * Constructs a Duke instance with file path set to src/data/data.csv. This is primarily for the sake of GUI.
-     */
-    public Duke() {
-        this("src/data/data.csv");
-        try {
-            user = SwingFXUtils.toFXImage(ImageIO.read(new File("src/main/resources/images/ricky.png")), null);
-            duke = SwingFXUtils.toFXImage(ImageIO.read(new File("src/main/resources/images/andrew.png")), null);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public static void main(String[] args) {
         Duke bot = new Duke("src/data/data.csv");
@@ -109,12 +102,12 @@ public class Duke extends Application {
 
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(800.0);
+        stage.setMinWidth(500.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(500.0, 800.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(485, 735);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -124,7 +117,7 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(425.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -153,7 +146,6 @@ public class Duke extends Application {
             handleUserInput(userInput, dialogContainer);
         });
 
-
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
     }
@@ -172,7 +164,6 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
-
         if (controller.getStatus()) {
             try {
                 Thread.sleep(1500);
