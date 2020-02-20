@@ -7,8 +7,7 @@
 
 ## Product Interface
 
-![GitHub Logo](/docs/Ui.png)
-Format: ![Alt Text](url)
+<img src = "Ui.png" width = "400">
 
 ## Features present
 
