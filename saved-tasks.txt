@@ -1,4 +1,3 @@
-0 || deadline || sleep || 2000-01-01 1300
 1 || todo || sleep
 1 || todo || test
 0 || deadline || homework || 2020-10-10 1500
