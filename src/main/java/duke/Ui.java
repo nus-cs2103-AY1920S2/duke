@@ -7,21 +7,25 @@ import java.util.Scanner;
 class Ui {
     private static final int HORIZONTAL_LINE_LENGTH = 76;
 
-    String getInput(Scanner sc) {
-        return sc.nextLine();
-    }
-
-    String greet() {
+    String getLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        return(logo + "\nHello, I'm Duke!\nWhat can I do for you?");
+        return logo;
     }
 
-    String exit() {
+    String sayHello() {
+        return("Hello, I'm Duke!\nWhat can I do for you?");
+    }
+
+    String sayBye() {
         return "Goodbye. Hope to see you again soon!";
+    }
+
+    String getInput(Scanner sc) {
+        return sc.nextLine();
     }
 
     String outputTask(Task task, int numberOfTasks) {
@@ -34,7 +38,7 @@ class Ui {
         return String.format("Got it. I've added this task:\n  %s\n%s", task, status);
     }
 
-    String outputException(Exception e) {
+    String outputException(DukeException e) {
         return e.getMessage();
     }
 
@@ -44,5 +48,9 @@ class Ui {
         return message.lines()
             .map(x -> "    " + x + "\n")
             .reduce("", (x, y) -> x + y);
+    }
+
+    void print(String message) {
+        System.out.println(message);
     }
 }

@@ -20,7 +20,7 @@ public class Duke {
     private Scanner sc;
 
     enum Command {
-        TODO {
+        TODO(false) {
             @Override
             String execute(Duke duke, String input) throws StorageException {
                 String arguments = duke.parser.parseArguments(input);
@@ -32,7 +32,7 @@ public class Duke {
             }
         },
 
-        DEADLINE {
+        DEADLINE(false) {
             @Override
             String execute(Duke duke, String input) throws InvalidCommandException, StorageException {
                 String arguments = duke.parser.parseArguments(input);
@@ -46,7 +46,7 @@ public class Duke {
             }
         },
 
-        EVENT {
+        EVENT(false) {
             @Override
             String execute(Duke duke, String input) throws InvalidCommandException, StorageException {
                 String arguments = duke.parser.parseArguments(input);
@@ -59,7 +59,7 @@ public class Duke {
             }
         },
 
-        LIST {
+        LIST(false) {
             @Override
             String execute(Duke duke, String input) {
                 if (duke.tasks.isEmpty()) {
@@ -70,7 +70,7 @@ public class Duke {
             }
         },
 
-        FIND {
+        FIND(false) {
             @Override
             String execute(Duke duke, String input) {
                 String arguments = duke.parser.parseArguments(input);
@@ -84,7 +84,7 @@ public class Duke {
             }
         },
 
-        SNOOZE {
+        SNOOZE(false) {
             @Override
             String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException, CannotSnoozeException, StorageException {
                 String arguments = duke.parser.parseArguments(input);
@@ -96,7 +96,7 @@ public class Duke {
             }
         },
 
-        DONE {
+        DONE(false) {
             @Override
             String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException, StorageException {
                 String arguments = duke.parser.parseArguments(input);
@@ -107,7 +107,7 @@ public class Duke {
             }
         },
 
-        DELETE {
+        DELETE(false) {
             @Override
             String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException, StorageException {
                 String arguments = duke.parser.parseArguments(input);
@@ -118,25 +118,23 @@ public class Duke {
             }
         },
 
-        BYE {
+        BYE(true) {
             @Override
             String execute(Duke duke, String input) {
-                System.exit(0);
-                return null;
+                return duke.ui.sayBye();
             }
         };
 
-        abstract String execute(Duke duke, String input) throws DukeException;
-    }
+        private final boolean isTerminating;
 
-    public String getResponse(String input) {
-        assert input != null;
-        try {
-            Command command = parser.parseCommand(input);
-            parser.checkArguments(command, input);
-            return command.execute(this, input);
-        } catch (DukeException e) {
-            return ui.outputException(e);
+        private Command(boolean isTerminating) {
+            this.isTerminating = isTerminating;
+        }
+
+        abstract String execute(Duke duke, String input) throws DukeException;
+
+        boolean isTerminating() {
+            return isTerminating;
         }
     }
 
@@ -166,10 +164,57 @@ public class Duke {
     }
 
     private void run() {
-        ui.greet();
+        printWelcomeMessage();
         while (true) {
-            String input = ui.getInput(sc);
-            getResponse(input);
+            try {
+                String input = getInput(sc);
+                Command command = getCommand(input);
+                String response = getResponse(command, input);
+                printResponse(response);
+                if (command.isTerminating()) {
+                    break;
+                }
+            } catch (DukeException e) {
+                printException(e);
+            }
         }
+    }
+
+    public String getGreeting() {
+        return ui.sayHello();
+    }
+
+    public Command getCommand(String input) throws InvalidCommandException {
+        assert input != null;
+        Command command = parser.parseCommand(input);
+        parser.checkArguments(command, input);
+        return command;
+    }
+
+    public String getResponse(Command command, String input) throws DukeException {
+        assert command != null;
+        assert input != null;
+        return command.execute(this, input);
+    }
+
+    public String getExceptionMessage(DukeException e) {
+        return ui.outputException(e);
+    }
+
+    private void printWelcomeMessage() {
+        ui.print(ui.getLogo());
+        ui.print(ui.format(ui.sayHello()));
+    }
+
+    private String getInput(Scanner sc) {
+        return ui.getInput(sc);
+    }
+
+    private void printResponse(String response) {
+        ui.print(ui.format(response));
+    }
+
+    private void printException(DukeException e) {
+        ui.print(ui.format(ui.outputException(e)));
     }
 }
