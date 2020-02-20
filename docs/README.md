@@ -2,7 +2,10 @@
 
 ## Features 
 
-### B-Tagging
+### Tasks
+Creation of Todo Tasks (without date) as well as Deadline and Event Tasks (with date). 
+
+### Tagging
 Tags Tasks with identifiers. 
 
 ## Usage
