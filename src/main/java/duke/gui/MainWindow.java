@@ -38,10 +38,14 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
     }
+
     public void setStage(Stage s) {
         stage = s;
     }
 
+    /**
+     *  Prints hello on the dialog container.
+     */
     @FXML
     public void printHello() {
         String hello = "\t------------------------------\n\tHello I'm your task manager!\n"

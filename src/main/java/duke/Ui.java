@@ -102,8 +102,8 @@ public class Ui {
     /**
      * Prints the task added to list.
      *
-     * @param task task that is added
-     * @param tasks task list
+     * @param task task that is added.
+     * @param tasks task list.
      */
     public void showAdd(Task task, ArrayList<Task> tasks) {
         printSmallLine();
@@ -113,6 +113,11 @@ public class Ui {
         printSmallLine();
     }
 
+    /**
+     * Prints updated task.
+     * @param task updated task.
+     * @param tasks list of tasks.
+     */
     public void showUpdate(Task task, ArrayList<Task> tasks) {
         printSmallLine();
         System.out.println("\tGot it. I've changed this task to:");

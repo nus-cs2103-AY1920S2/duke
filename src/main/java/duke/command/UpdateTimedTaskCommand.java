@@ -13,12 +13,23 @@ public class UpdateTimedTaskCommand extends Command {
     protected String description;
     protected LocalDateTime time;
 
+    /**
+     * Creates Update timed task command.
+     * @param index index of timed task to update.
+     * @param description updated description.
+     * @param time updated time.
+     */
     public UpdateTimedTaskCommand(int index, String description, LocalDateTime time) {
         this.index = index;
         this.description = description;
         this.time = time;
     }
 
+    /**
+     * Gets the task with index saved to update timed task.
+     * @param taskList list of tasks.
+     * @return tasks with index saved in command.
+     */
     public Task getTask(TaskList taskList) {
         try {
             return taskList.getTaskList().get(index);

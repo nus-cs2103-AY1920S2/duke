@@ -15,6 +15,11 @@ public class SearchCommand extends Command {
         this.searchKey = searchKey;
     }
 
+    /**
+     * Search for task.
+     * @param taskList List of tasks.
+     * @return Tasks that have keyword.
+     */
     public ArrayList<Task> search(TaskList taskList) {
         ArrayList<Task> tasksWithKey = new ArrayList<>();
         for (Task t : taskList.getTaskList()) {

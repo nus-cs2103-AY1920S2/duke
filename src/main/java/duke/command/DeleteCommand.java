@@ -14,6 +14,11 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Deletes task from list of tasks.
+     * @param taskList List of tasks.
+     * @return The task deleted
+     */
     public Task delete(TaskList taskList) {
         try {
             Task task = taskList.getTaskList().get(index);

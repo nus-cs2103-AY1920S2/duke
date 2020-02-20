@@ -13,6 +13,7 @@ public class UpdateEventCommand extends UpdateTimedTaskCommand {
     public UpdateEventCommand(int index, String description, LocalDateTime time) {
         super(index, description, time);
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui) {
         if (!(super.getTask(taskList) instanceof Event)) {
@@ -20,6 +21,7 @@ public class UpdateEventCommand extends UpdateTimedTaskCommand {
         }
         super.execute(taskList, ui);
     }
+
     @Override
     public String execute(TaskList taskList, Gui gui) {
         if (!(super.getTask(taskList) instanceof Deadline)) {

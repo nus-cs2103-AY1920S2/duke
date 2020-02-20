@@ -15,6 +15,11 @@ public class UpdateTodoCommand extends Command {
         this.description = description;
     }
 
+    /**
+     * Gets the task with index saved to update timed task.
+     * @param taskList list of tasks.
+     * @return tasks with index saved in command.
+     */
     public Task getTask(TaskList taskList) {
         try {
             return taskList.getTaskList().get(index);

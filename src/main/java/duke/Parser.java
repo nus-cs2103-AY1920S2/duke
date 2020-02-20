@@ -74,6 +74,7 @@ public class Parser {
             throw new UnknownCommandException(keywords[0]);
         }
     }
+
     private String[] tokenizeUpdateCommand(String description) {
         String[] tokenArr = description.split("desc/|time/");
         if (tokenArr.length < 2) {
@@ -154,7 +155,7 @@ public class Parser {
     public AddDeadlineCommand parseDeadline(String longDescription) {
         String[] strArr = longDescription.split(" /by ", 2);
         if (strArr.length == 1) {
-            assert !longDescription.contains(" /by "): "Deadline has time";
+            assert !longDescription.contains(" /by ") : "Deadline has time";
             throw new MissingTimeException("Deadline");
         }
         String description = strArr[0];
@@ -171,7 +172,7 @@ public class Parser {
     public AddEventCommand parseEvent(String longDescription) {
         String[] strArr = longDescription.split(" /at ", 2);
         if (strArr.length == 1) {
-            assert !longDescription.contains(" /at "): "Event has time";
+            assert !longDescription.contains(" /at ") : "Event has time";
             throw new MissingTimeException("Event");
         }
         String description = strArr[0];

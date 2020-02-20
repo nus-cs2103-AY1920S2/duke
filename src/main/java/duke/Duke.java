@@ -25,7 +25,7 @@ public class Duke {
      *
      * @throws IOException If Exception is raised during loading and saving.
      */
-    public Duke() throws IOException{
+    public Duke() throws IOException {
         ui = new Ui();
         parser = new Parser();
         taskList = new TaskList();
@@ -42,7 +42,7 @@ public class Duke {
      * Exits when a "bye" command is given.
      */
     public void run() {
-        assert ( storage != null && ui != null && parser != null && taskList != null ): "Duke instantiation error";
+        assert (storage != null && ui != null && parser != null && taskList != null) : "Duke instantiation error";
 
         ui.greeting();
         ui.showList(taskList.getTaskList(), "Tasks loaded from disk:");

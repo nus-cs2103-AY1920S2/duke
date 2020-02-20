@@ -38,8 +38,8 @@ public class Storage {
     public void saveBaby(ArrayList<Task> taskList) throws IOException {
         BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
         StringBuilder tasks = new StringBuilder();
-        for (Task task : taskList) {
-            assert task.toSaveString().split(" \\|\\| ").length >= 3: "Save failure";
+        for (Task task: taskList) {
+            assert task.toSaveString().split(" \\|\\| ").length >= 3 : "Save failure";
             tasks.append(task.toSaveString()).append("\n");
         }
         taskWriter.write(tasks.toString());
@@ -62,24 +62,24 @@ public class Storage {
         String longCommand = taskLoader.readLine();
         while (longCommand != null) {
             String[] keywords = longCommand.split(" \\|\\| ");
-            assert keywords.length >= 3: "Load tasks failure";
+            assert keywords.length >= 3 : "Load tasks failure";
             String taskDone = keywords[0];
             String taskType = keywords[1];
             String taskDesc = keywords[2];
             Task cur = null;
             switch (taskType) {
             case "todo":
-                assert (keywords.length == 3): "Todo load failure";
+                assert (keywords.length == 3) : "Todo load failure";
                 cur = new Todo(taskDesc);
                 taskList.getTaskList().add(cur);
                 break;
             case "deadline":
-                assert (keywords.length == 4): "Deadline load failure";
+                assert (keywords.length == 4) : "Deadline load failure";
                 cur = new Deadline(taskDesc, parser.stringToTime(keywords[3]));
                 taskList.getTaskList().add(cur);
                 break;
             case "event":
-                assert (keywords.length == 4): "Deadline load failure";
+                assert (keywords.length == 4) : "Deadline load failure";
                 cur = new Event(taskDesc, parser.stringToTime(keywords[3]));
                 taskList.getTaskList().add(cur);
                 break;

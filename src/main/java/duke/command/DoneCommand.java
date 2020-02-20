@@ -14,6 +14,11 @@ public class DoneCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Set task as done.
+     * @param taskList List of tasks.
+     * @return task that is set as done.
+     */
     public Task setDone(TaskList taskList) {
         try {
             Task task = taskList.getTaskList().get(index);
