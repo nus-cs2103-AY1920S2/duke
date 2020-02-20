@@ -44,8 +44,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        // Step 1. Setting up required components
-
         // The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -61,7 +59,7 @@ public class Duke extends Application {
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
 
-        // Step 2. Formatting the window to look as expected
+        // Formatting the window to look as expected
         stage.setTitle("My Dude");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -90,7 +88,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
         AnchorPane.setLeftAnchor(userInput, 1.0);
 
-        // Step 3. Add functionality to handle user input.
+        // Handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -132,5 +130,6 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
+
     }
 }

@@ -1,10 +1,14 @@
+import java.util.ArrayList;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<String> tagList;
 
     public Task(boolean isDone, String description) {
         this.description = description;
         this.isDone = isDone;
+        this.tagList = new ArrayList<>();
     }
 
     public String getDescription() {
@@ -18,6 +22,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public void addTag(String tag) {
+        this.tagList.add(tag);
     }
 
     public String[] toDataTokens() {
