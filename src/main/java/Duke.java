@@ -53,6 +53,7 @@ public class Duke {
      * @return String representing exit message.
      */
     public String getExit() {
+        assert false : "testing for fun bruh";
         return ui.getExitMessage();
     }
 
