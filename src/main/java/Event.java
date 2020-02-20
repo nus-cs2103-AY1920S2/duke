@@ -12,7 +12,7 @@ public class Event extends Task{
     }
 
     public String toSaveForm() {
-        return "E , " + super.getStatusIcon() + " , " + description + " , " + at + "\n";
+        return "E , " + super.getStatusIcon() + " , " + description + " , " + ld.toString() + "\n";
     }
 
     @Override

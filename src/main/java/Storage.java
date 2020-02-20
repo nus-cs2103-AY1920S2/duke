@@ -23,6 +23,9 @@ public class Storage {
         try {
             List<String> dataLines = Files.readAllLines(dataPath);
             for (String s : dataLines) {
+                if (dataLines.isEmpty() || s.isBlank()) {
+                    return tasks;
+                }
                 tasks.add(Parser.parseDataFromFile(s));
             }
         } catch (IOException e) {

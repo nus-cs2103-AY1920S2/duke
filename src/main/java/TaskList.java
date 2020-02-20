@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class Manager {
+public class TaskList {
 
     private ArrayList<Task> tasks;
-    private String linedivider = "____________________________________________________________\n";
-    public Manager(ArrayList<Task> t) {
+    private String linedivider = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    public TaskList(ArrayList<Task> t) {
         tasks = t;
     }
     private Storage storage = new Storage();

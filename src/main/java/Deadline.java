@@ -11,7 +11,7 @@ public class Deadline extends Task{
     }
 
     public String toSaveForm() {
-        return "D , " + super.getStatusIcon() + " , " + description + " , " + by + "\n";
+        return "D , " + super.getStatusIcon() + " , " + description + " , " + ld.toString() + "\n";
     }
 
     @Override

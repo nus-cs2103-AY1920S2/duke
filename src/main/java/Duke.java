@@ -3,26 +3,30 @@ import java.util.logging.Level;
 import java.io.*;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        String linedivider = "____________________________________________________________\n";
-        System.out.println(linedivider + "Hello! I'm Duke\nWhat can I do for you?\n" + linedivider);
-        Scanner sc = new Scanner(System.in);
-        Storage storage = new Storage();
-        Manager mngr = new Manager(storage.load());
-        String entry = "";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        tasks = new TaskList(storage.load());
+    }
+
+    public void run() {
+        ui.welcome();
         while (true) {
-            entry = sc.nextLine();
+            String entry = ui.input();
             if (entry.equals("bye")) {
+                ui.bye();
                 break;
             }
-            mngr.run(entry);
+            tasks.run(entry);
         }
-        System.out.println(linedivider + "Bye. Hope to see you again soon!" + "\n" + linedivider);
+
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
