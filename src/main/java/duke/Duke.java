@@ -78,9 +78,8 @@ public class Duke {
                 storage.loadFromFile(tasks);
                 response = "Last Command Undone!";
             } else if (input.equals("bye")) {
-                storage.saveToFile(tasks);
-                ui.close();
-                response = "bye";
+                shutdown();
+                response = "Bye!";
             } else {
                 System.out.println(Arrays.toString(tasks.list()));
                 storage.saveToFile(tasks);
@@ -94,5 +93,14 @@ public class Duke {
             e.printStackTrace();
         }
         return response;
+    }
+
+    public void shutdown() {
+        try {
+            storage.saveToFile(tasks);
+            ui.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

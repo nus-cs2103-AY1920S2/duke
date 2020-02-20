@@ -30,4 +30,10 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void stop(){
+        System.out.println("Stage is closing");
+        duke.shutdown();
+    }
 }
