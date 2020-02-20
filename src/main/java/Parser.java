@@ -30,7 +30,7 @@ public class Parser {
             throw new DukeException("UNK_TASK_DONE");
         }
         int index = Integer.parseInt(strArr[1]) - 1;
-        if (index < 0 | index > taskList.size()) {
+        if (index < 0 | index >= taskList.size()) {
             throw new DukeException("OUT_OF_BOUNDS");
         }
         Task currTask = taskList.get(index);
@@ -135,7 +135,7 @@ public class Parser {
             throw new DukeException("UNK_TASK_TO_DELETE");
         }
         int index = Integer.parseInt(strArr[1]) - 1;
-        if (index < 0 | index > taskList.size()) {
+        if (index < 0 | index >= taskList.size()) {
             throw new DukeException("OUT_OF_BOUNDS");
         }
         Task currTask = taskList.get(index);
