@@ -99,7 +99,11 @@ class TaskList {
      * @return a String logging the change being executed.
      */
     public String[] done(int i) {
-        return new String[]{ "Nice! I've marked this task as done:", lTasks.get(i - 1).done() };
+        if (lTasks.get(i - 1).done()) {
+            return new String[]{ "Nice! I've marked this task as done:", lTasks.get(i - 1).toString() };
+        } else {
+            return new String[]{ "Task has already been completed."};
+        }
     }
 
     /**
@@ -122,7 +126,7 @@ class TaskList {
 
 	public String[] find(String query) {
         ArrayList<Task> search = new ArrayList<Task>(lTasks);
-        if (search.removeIf((Task t) -> t.toString().contains(query))) {
+        if (search.removeIf((Task t) -> !t.toString().contains(query))) {
             String[] result = new String[search.size() + 1];
             result[0] = "Here are the matching tasks in your list:";
             for (int i = 0; i < search.size(); i++) {

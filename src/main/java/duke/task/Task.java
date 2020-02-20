@@ -31,11 +31,15 @@ public abstract class Task implements Serializable {
 
     /**
      * Sets the status of this task to 'Done'
-     * @return a string representing the new state of the task
+     * @return a boolean representing if the state was successfully modified.
      */
-    public String done() {
-        isDone = true;
-        return toString();
+    public boolean done() {
+        if (isDone) {
+            return false;
+        } else {
+            isDone = true;
+            return true;
+        }
     }
 
 }
