@@ -18,7 +18,7 @@ Users are able to create three types of tasks
 - Events
 - Deadlines
 
-These tasks will be recorded and stored in a **MyNeckbeard**'s database
+These tasks will be recorded and stored in **MyNeckbeard**'s database
 
 ### Feature 2 - `Update Tasks`
 
