@@ -65,5 +65,10 @@ T | N | test again
 =======
 E | N | test | Feb 19 2020 1159PM
 D | N | test2 | Feb 19 2020 1159PM
+<<<<<<< HEAD
 T | N | test
 >>>>>>> 4952496... updated Ui.png
+=======
+T | Y | test
+T | N | dvjbdaj;nawr
+>>>>>>> 200f900... fix coding style
