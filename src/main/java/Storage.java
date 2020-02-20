@@ -35,7 +35,11 @@ public class Storage {
             Task t = new Task();
             switch (elements[0]) {
             case "T":
-                t = new Todo(elements[2]);
+                if (elements.length > 3) {
+                    t = new TodoWithinPeriod(elements[2], elements[3], elements[4]);
+                } else {
+                    t = new Todo(elements[2]);
+                }
                 break;
             case "E":
                 t = new Event(elements[2], elements[3]);
@@ -66,6 +70,9 @@ public class Storage {
     private static String taskToString(Task t) {
         String str = "";
         int done = t.getIsDone() ? 1 : 0;
+        if (t instanceof TodoWithinPeriod)
+            str = "T | " + done + " | " + t.getDescription() + " | " + ((TodoWithinPeriod) t).getBetweenDate()
+                    + " | " + ((TodoWithinPeriod) t).getToDate();
         if (t instanceof Todo)
             str = "T | " + done + " | " + t.getDescription();
         if (t instanceof Event)
