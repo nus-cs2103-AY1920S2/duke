@@ -3,6 +3,7 @@ import duke.commons.Deadline;
 import duke.commons.Event;
 import duke.commons.Task;
 import duke.commons.Todo;
+import duke.commons.exceptions.DuplicateTaskException;
 import duke.commons.exceptions.InvalidIndexException;
 import duke.ui.Ui;
 
@@ -87,7 +88,7 @@ public class TaskList {
         this.taskList.remove(deleteIndex);
     }
 
-    public void detectDuplicate(String command, String description) throws DuplicateTaskException{
+    public void detectDuplicate(String command, String description) throws DuplicateTaskException {
         for (int i = 1; i <= this.taskList.size(); i++) {
             Task task = this.taskList.get(i - 1);
             if (task.getType().equals(command) && task.getDescription().equals(description)) {
