@@ -2,15 +2,15 @@
 1. Introduction
 2. Quick Start
 3. Features
-3.1. Viewing help : help
-3.2. Adding a person: add
-3.3. Listing all persons : list
-3.4. Editing a person : edit
-3.5. Locating persons by name: find
-3.6. Deleting a person : delete
-3.7. Clearing all entries : clear
-3.8. Exiting the program : exit
-3.9. Saving the data
+3.1 Listing all tasks: list
+3.2 Clearing all tasks: clear list
+3.3 Marking a task as done: done
+3.4 Finding a task through keyword: find
+3.5 Deleting a task: delete
+3.6 Adding a todo task: todo
+3.7 Adding a deadline task: deadline
+3.8 Adding an event task: event
+3.9. Saving the data: exit
 3.10. Encrypting data files [coming in v2.0]
 4. FAQ
 5. Command Summary
