@@ -21,7 +21,7 @@ public enum DukeEnumExceptions {
 
                 if (allargs.length != numOfArgs) {
                     throw new DukeException("'done' command should only have 2 arguments");
-                } else if (Integer.parseInt(allargs[1]) > list.getsize()
+                } else if (Integer.parseInt(allargs[1]) > list.getSize()
                         || Integer.parseInt(allargs[1]) < 0) {
                     throw new DukeException("Task index is not found!");
                 }
@@ -96,7 +96,7 @@ public enum DukeEnumExceptions {
 
             if (allargs.length != numOfArgs) {
                 throw new DukeException("'delete' command should only have 2 arguments");
-            } else if (Integer.parseInt(allargs[1]) > list.getsize() ||
+            } else if (Integer.parseInt(allargs[1]) > list.getSize() ||
                     Integer.parseInt(allargs[1]) < 0) {
                 throw new DukeException("Task index is not found!");
             }

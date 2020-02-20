@@ -72,7 +72,9 @@ public class Ui {
     }
 
     /**
-     * Show user the list that matches to the input keyword.
+     * Returns a message after a find Command.
+     *
+     * @return String Message to user, showing them a list of tasks
      */
     public String findMessage() {
         return "Here are the matching tasks in your list:";

@@ -1,9 +1,5 @@
-import java.io.IOException;
 import java.lang.String;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
 
 /**
  * The enum class for all Duke commands. User will input the command and
@@ -17,14 +13,15 @@ public enum DukeCommand {
      */
     LIST {
         @Override
-        public String execute(String s1, TaskList list, Ui ui, Storage storage) {
-            return list.getsize() != 0 ? ui.listCommand(list) :
+        public String execute(String s1, TaskList list, Ui ui) {
+            return list.getSize() != 0 ? ui.listCommand(list) :
                     "It looks like there are no more tasks in the list!";
         }
     },
     DONE {
         @Override
-        public String execute(String s1, TaskList list, Ui ui, Storage storage) {
+        public String execute(String s1, TaskList list, Ui ui) {
+            Storage storage = list.getStorage();
             // Split the string to get the
             // index of the task to be done
             String[] arr = s1.split("\\s+");
@@ -35,11 +32,9 @@ public enum DukeCommand {
 
             // Asserting the task, check if it is done
             assert taskToBeCompleted.getStatusIcon() == "Y" : "Task is not made done";
-            try {
-                storage.store(list, ui);
-            } catch (IOException ioex) {
-                return ioex.getMessage();
-            }
+
+            // Update file
+            storage.updateFile(list, ui);
             // Show message to user
             // Indicate that task is done
             return ui.finishMessage(taskToBeCompleted);
@@ -47,7 +42,7 @@ public enum DukeCommand {
     },
     TODO {
         @Override
-        public String execute(String s1, TaskList list, Ui ui, Storage storage) {
+        public String execute(String s1, TaskList list, Ui ui) {
             String[] arr = s1.split("\\s+", 2);
             Todo todotask = new Todo(arr[1]);
             list.add(todotask);
@@ -56,7 +51,7 @@ public enum DukeCommand {
     },
     DEADLINE {
         @Override
-        public String execute(String s1, TaskList list, Ui ui, Storage storage) {
+        public String execute(String s1, TaskList list, Ui ui) {
             String DukeMessage = "";
 
             // Manipulating the String by separating the actual command
@@ -113,7 +108,7 @@ public enum DukeCommand {
         }
     },
     EVENT {
-        public String execute(String s1, TaskList list, Ui ui, Storage storage){
+        public String execute(String s1, TaskList list, Ui ui){
             String DukeMessage = "";
 
             // Manipulating the String by separating the actual command
@@ -179,28 +174,28 @@ public enum DukeCommand {
     },
     DELETE {
         @Override
-        public String execute(String s1, TaskList list, Ui ui, Storage storage) {
+        public String execute(String s1, TaskList list, Ui ui) {
             // Split the string to get the
             // index of the task to be deleted
             String[] arrdel = s1.split("\\s+");
             int pos = Integer.parseInt(arrdel[1]) - 1;
             Task deletedTask = (list.getListOfTask()).get(pos);
-            list.delete(pos, storage);
-            return ui.deletedMessage(list.getsize(), deletedTask);
+            list.delete(pos);
+            return ui.deletedMessage(list.getSize(), deletedTask);
         }
     },
     FIND {
       @Override
-      public String execute(String s1, TaskList list, Ui ui, Storage storage) {
+      public String execute(String s1, TaskList list, Ui ui) {
           String[] commandarray = s1.split("\\s+", 2);
           String keyword = commandarray[1];
 
-          TaskList filteredList = list.find(keyword, storage);
-          return filteredList.getsize() != 0 ? ui.findMessage() + "\n" +
+          TaskList filteredList = list.find(keyword);
+          return filteredList.getSize() != 0 ? ui.findMessage() + "\n" +
                   ui.listCommand(filteredList) : "Oh no! There are no tasks " +
                   "that matches the keyword that you have given";
       }
     };
 
-    public abstract String execute(String s1, TaskList list, Ui ui, Storage storage);
+    public abstract String execute(String s1, TaskList list, Ui ui);
 }

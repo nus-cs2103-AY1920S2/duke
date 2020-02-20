@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +21,9 @@ public class TaskList {
         this.storage = storage;
     }
 
+    public Storage getStorage() {
+        return this.storage;
+    }
     /**
      * Add a new task into the current list.
      *
@@ -30,34 +32,26 @@ public class TaskList {
     public void add(Task mytask) {
         tasks.add(mytask);
 
-        // Storing list into a txt file
-        try {
-            storage.store(this, ui);
-        } catch(IOException ioex) {
-            ui.showErrorMessage(ioex.getMessage());
-        }
+        // Update .txt file
+        storage.updateFile(this, ui);
     }
 
     /**
      * Deletes the task at the particular index of the list.
      *
      * @param index index of the object in the list to be deleted.
-     * @param storage Storage object to be used to store a task.
      */
-    public void delete(int index, Storage storage) {
+    public void delete(int index) {
         // Split the string to get the
         // index of the task to be deleted
-        int sizeBeforeDeletion = getsize();
+        int sizeBeforeDeletion = this.getSize();
         tasks.remove(index); // Deletes from task list
 
-        assert sizeBeforeDeletion - 1 == getsize() : "Task not deleted!";
+        assert sizeBeforeDeletion - 1 == this.getSize() : "Task not deleted!";
 
-        //Storing list into a txt file
-        try {
-            storage.store(this, ui);
-        } catch(IOException ioex) {
-            ui.showErrorMessage(ioex.getMessage());
-        }
+        // Update .txt file
+        storage.updateFile(this, ui);
+
     }
 
     /**
@@ -68,9 +62,9 @@ public class TaskList {
      * @return TaskList return a TaskList object which is a filtered list
      * where it contains the tasks that is related to the keyword input by user
      */
-    public TaskList find(String word, Storage storage) {
+    public TaskList find(String word) {
         TaskList filteredlist= new TaskList(new ArrayList<Task>(), ui, storage);
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             String description = ((task.getDesc()).toLowerCase());
 
             if (description.matches("(?i)" + "(" + word.toLowerCase() + ")" + ".*"))
@@ -85,7 +79,7 @@ public class TaskList {
      * @return List<Task> A list containing the Tasks.
      */
     public List<Task> getListOfTask() {
-        return tasks;
+        return this.tasks;
     }
 
     /**
@@ -93,12 +87,12 @@ public class TaskList {
      *
      * @return int number of items in the list.
      */
-    public int getsize() {
+    public int getSize() {
         return tasks.size();
     }
 
     public boolean hasDuplicates(Task taskCheck) {
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             if (task.equals(taskCheck)) {
                 // Duplicate found
                 return true;

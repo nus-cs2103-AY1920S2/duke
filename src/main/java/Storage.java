@@ -3,6 +3,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +17,19 @@ import java.util.List;
  */
 public class Storage {
 
-    private String filePath;
-
+    public static String filePath;
+    protected String home;
+    protected Path parent;
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.parent = Paths.get(".", filePath).normalize().toAbsolutePath();
+        this.filePath = this.parent.toString();
+
+        try {
+            Files.createDirectories((this.parent).getParent());
+        } catch(IOException ioex) {
+            ioex.printStackTrace();
+        }
+
     }
 
     /**
@@ -30,6 +42,7 @@ public class Storage {
         List<Task> Tasklist = new ArrayList<Task>();
 
         BufferedReader reader = new BufferedReader(new FileReader(this.filePath));
+
         String currentline = reader.readLine();
 
         while (currentline != null) {
@@ -113,4 +126,18 @@ public class Storage {
 
     }
 
+    /**
+     * Updates the txt file
+     *
+     * @param list List object that contains the list of tasks
+     * @param ui A Ui object which has methods that return message
+     *           after executing a specific command
+     */
+    public void updateFile(TaskList list, Ui ui) {
+        try {
+            this.store(list, ui);
+        } catch (IOException ioex) {
+            ui.showErrorMessage(ioex.getMessage());
+        }
+    }
 }
