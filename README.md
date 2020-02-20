@@ -1,4 +1,4 @@
-#Features#
+# Features
  
 * Create Tasks (todo, deadline, and event)
 * Mark Completed Tasks as Done
@@ -6,7 +6,7 @@
 * Find Tasks
 * Set Task Priority
 
-#Commands#
+# Commands
 **list**
 ```
 list
