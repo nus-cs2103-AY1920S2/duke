@@ -30,3 +30,21 @@ deadline send flowers /by 2020-02-14
 event celebrate Valentines Day with Angela /at TPC
 ```
 * adds a new "event" task to be done at a specified location
+
+**done**
+```
+done 2
+```
+* sets the task status for the task at the specified index as completed
+
+**delete**
+```
+delete 3
+```
+* deletes the task at the specified index
+
+**priority**
+```
+priority 3 
+```
+* sets the task at the specified index to be of high priority
