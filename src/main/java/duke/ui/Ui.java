@@ -35,6 +35,13 @@ public class Ui {
         return "Marking as done error: " + message;
     }
 
+    /**
+     * Returns a <code>String</code> message to confirm successful addition of task.
+     *
+     * @param tasks <code>TaskList</code> manager object of the program.
+     * @param task the <code>Task</code> object to be added.
+     * @return a <code>String</code> message to confirm successful addition of task.
+     */
     public String printAddingMessage(TaskList tasks, Task task) {
         return "Got it dude! I've added this task:" + "\n"
                 + task + "\n"
@@ -45,6 +52,13 @@ public class Ui {
         return "Got it dude! I've marked this task as done:" + "\n" + task;
     }
 
+    /**
+     * Returns a <code>String</code> message to confirm successful deletion of task.
+     *
+     * @param tasks <code>TaskList</code> manager object of the program.
+     * @param task the <code>Task</code> object to be deleted.
+     * @return a <code>String</code> message to confirm successful deletion of task.
+     */
     public String printDeletingMessage(TaskList tasks, Task task) {
         return "Got it dude! I've deleted this task:" + "\n"
                 + task + "\n"

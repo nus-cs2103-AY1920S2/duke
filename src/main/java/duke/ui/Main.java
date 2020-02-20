@@ -18,7 +18,7 @@ public class Main extends Application {
     /**
      * Starts the program.
      *
-     * @param stage
+     * @param stage the <code>Stage</code> to be set up.
      */
     @Override
     public void start(Stage stage) {

@@ -22,7 +22,7 @@ public abstract class Command {
      * Returns <code>true</code> if, and only if, this <code>Command</code> is an <code>ExitCommand</code>.
      *
      * @return <code>true</code> if this <code>Command</code> is an <code>ExitCommand</code>,
-     * and <code>false</code> otherwise.
+     *     and <code>false</code> otherwise.
      */
     public boolean isExit() {
         return this instanceof ExitCommand;

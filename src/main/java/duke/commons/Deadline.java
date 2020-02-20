@@ -1,7 +1,5 @@
 package duke.commons;
 
-import duke.commons.exceptions.DuplicateTaskException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +15,13 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Constructor for <code>Deadline</code>.
+     * @param type <code>String</code> representing the type of the <code>Task</code> ("deadline").
+     * @param isDone true if the <code>Task</code> is completed, false otherwise.
+     * @param description <code>String</code> representing the description of the <code>Task</code>.
+     * @param byString <code>String</code> representing the deadline of the <code>Task</code>.
+     */
     public Deadline(String type, boolean isDone, String description, String byString) {
         super(type, isDone, description);
         this.byString = byString;
