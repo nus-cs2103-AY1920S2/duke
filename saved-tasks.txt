@@ -9,3 +9,6 @@
 0 || todo || hello
 1 || todo || def
 0 || event || 4 cry || 2020-01-01 1300
+1 || todo || eat dinner
+0 || deadline || CS2103 homework || 2020-03-15 2359
+0 || event || CS2103 tutorial || 2020-07-07 1300
