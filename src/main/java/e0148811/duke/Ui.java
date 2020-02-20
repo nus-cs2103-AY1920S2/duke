@@ -12,7 +12,7 @@ public class Ui {
 
     public void throwInvalidIndexException() throws DukeException {
         throw new DukeException("Invalid index.\n" + tasks.getTotalNumOfTasks()
-                + "Please note that the index is one-based (begins with 1 instead of 0).");
+                + "Please note that the index is one-based (index begins with 1 instead of 0).");
     }
 
     public String returnLoadingError() {
@@ -55,14 +55,14 @@ public class Ui {
     public void throwEmptyLineException() throws DukeException {
         throw new DukeException("Empty line input. "
                 + "Please specify an instruction followed by relevant description.\n"
-                + "The valid instructions include: b/bye, c/clear, d/deadline, "
-                + "done, e/vent, f/find, hi/hello, l/list, p/priority, r/remove, t/todo");
+                + "Valid instructions include: b/bye, c/clear, d/deadline, "
+                + "done, e/event, f/find, hi/hello, l/list, p/priority, r/remove, t/todo.");
     }
 
     public void throwUnknownCommandException() throws DukeException {
         throw new DukeException("I don't understand this instruction.\n"
-                + "The valid instructions include: b/bye, c/clear, d/deadline, "
-                + "done, e/vent, f/find, hi/hello, l/list, p/priority, r/remove, t/todo");
+                + "Valid instructions include: b/bye, c/clear, d/deadline, "
+                + "done, e/event, f/find, hi/hello, l/list, p/priority, r/remove, t/todo.");
     }
 
     public static String showValidInstructions() {
@@ -72,7 +72,7 @@ public class Ui {
         output += "        - e/event: add an event task\n";
         output += "        - d/deadline: add a deadline task\n";
         output += "- done: mark a task as done\n";
-        output += "- f/find: find tasks by some key word\n";
+        output += "- f/find: find tasks by searching some key word\n";
         output += "- l/list: list all tasks or tasks with a specified priority level\n";
         output += "- p/priority: change the priority level of a task\n";
         output += "- r/remove: remove a task from task list\n";

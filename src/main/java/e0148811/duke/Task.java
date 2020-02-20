@@ -78,5 +78,5 @@ public abstract class Task {
 
     public void setPriority(PriorityLevel level) {
         this.level = level;
-    };
+    }
 }

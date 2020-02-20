@@ -79,7 +79,8 @@ public class Logic {
     private String prioritiseTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 3) {
             ui.throwWrongFormatException("\"priority index_of_the_task\n(a positive integer) level_of_priority"
-                    + " (which include: l/low, n/normal, h/high, t/top)\"");
+                    + " (which include: l/low\n[not important], n/normal [ordinary],"
+                    + " h/high [important], t/top [very important])\"");
         }
         int index = getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;
         checkIfIndexIsValid(index);
@@ -129,8 +130,8 @@ public class Logic {
     }
 
     private String clearCompletedTasks() throws DukeException {
-        tasks.removeCompletedTasks();
-        String output = "Noted, all completed tasks are removed.";
+        String output = "Noted, all completed tasks are removed.\n";
+        output += tasks.removeCompletedTasks();
         storage.writeToFile(tasks.getList());
         return output;
     }
@@ -149,8 +150,9 @@ public class Logic {
             PriorityLevel level = determinePriorityLevel(instructionByWord[1]);
             return tasks.printListBasedOnPriority(level);
         } else {
-            ui.throwWrongFormatException("\"list\"" + " OR " + "\"list a_priority_level" +
-                    " (which include: l/low, n/normal, h/high, t/top)\"");
+            ui.throwWrongFormatException("\"list\"" + " OR " + "\"list a_priority_level"
+                    + " (which include: l/low [not important], n/normal [ordinary],"
+                    + " h/high [important], t/top [very important])\"");
         }
         return "";
     }
@@ -174,19 +176,29 @@ public class Logic {
         case "top":
             return PriorityLevel.TOP;
         default:
-            ui.throwOtherException("Invalid level of priority.\n"
-                    + "Please input one of the following: l/low, n/normal, h/high, t/top");
+            ui.throwOtherException("Invalid level of priority. "
+                    + "Please input one of the following:\n"
+                    + "l/low [not important], n/normal [ordinary],\nh/high [important], t/top [very important].");
         }
         return PriorityLevel.NORMAL;
     }
 
     private String findTasks(String[] instructionByWords, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 2) {
-            ui.throwWrongFormatException("\n\"find key_word (a character sequence)\"");
+            ui.throwWrongFormatException("\n\"find key_word (a character sequence without white space)\"");
         }
         String keyword = instructionByWords[1];
         HashMap<Integer, Task> selectedList = new HashMap<>();
         int count = 0;
+        count = addAndCountTasksContainingKeyWord(keyword, selectedList, count);
+        StringBuilder output = new StringBuilder((count + " task(s) were found containing keyword " + keyword + ":\n"));
+        for (Integer index : selectedList.keySet()) {
+            output.append(index).append(") ").append(selectedList.get(index)).append("\n");
+        }
+        return output.toString();
+    }
+
+    private int addAndCountTasksContainingKeyWord(String keyword, HashMap<Integer, Task> selectedList, int count) {
         for (int j = 0; j < tasks.getList().size(); j++) {
             Task task = tasks.getTask(j);
             String taskDescription = task.getDescription();
@@ -199,11 +211,7 @@ public class Logic {
                 }
             }
         }
-        StringBuilder output = new StringBuilder((count + " task(s) were found containing keyword " + keyword + ":"));
-        for (Integer index : selectedList.keySet()) {
-            output.append(index).append(". ").append(selectedList.get(index)).append("\n");
-        }
-        return output.toString();
+        return count;
     }
 
     private String doneOrRemoveTask(String command, String[] instructionByWord, int lengthOfArray)

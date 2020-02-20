@@ -32,12 +32,13 @@ public class TaskList {
     }
 
     public String printListBasedOnPriority(PriorityLevel level) {
-        StringBuilder output = new StringBuilder("Here is the task list of the given priority level:\n");
+        StringBuilder output = new StringBuilder("Here is the list of tasks " +
+                "with your specified priority level:\n");
         int count = 0;
         for (int i = 1; i <= list.size(); i++) {
             Task task = list.get(i - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX);
             if (task.getPriorityLevel().equals(level)) {
-                output.append(i).append(". ").append(task).append("\n");
+                output.append(i).append(") ").append(task).append("\n");
                 count++;
             }
         }
@@ -47,7 +48,7 @@ public class TaskList {
     }
 
     private String getNumOfSelectedTasks(int count) {
-        return count + " task(s) belong to the specified priority level.\n";
+        return count + " task(s) belong to this priority level.\n";
     }
 
     public List<Task> getList() {
@@ -72,13 +73,12 @@ public class TaskList {
         Task taskToBeCompleted = list.get(index);
         String output = "";
         if (taskToBeCompleted.isDone()) {
-            output += "The specified task is already marked done:\n";
+            output += "The specified task is already marked as done:\n";
         } else {
             taskToBeCompleted.setDone();
-            output += "Noted, the following task is marked done:\n";
+            output += "Noted, the following task is marked as done:\n";
         }
-        output += ((index + ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX)
-                + ". " + taskToBeCompleted);
+        output += taskToBeCompleted;
         return output;
     }
 
@@ -100,7 +100,7 @@ public class TaskList {
         list = new ArrayList<>();
     }
 
-    public void removeCompletedTasks() {
+    public String removeCompletedTasks() {
         List<Task> newList = new ArrayList<>();
         for (Task t : list) {
             if (!t.isDone()) {
@@ -108,12 +108,11 @@ public class TaskList {
             }
         }
         list = newList;
-        System.out.println("List cleared.");
-        printList();
+        return printList();
     }
 
     public String showTaskPrioritised(int index) {
-        String output = "Noted. The priority level of the following task has been set:\n";
+        String output = "Noted, the priority level of the following task has been set:\n";
         output += list.get(index);
         return output;
     }
