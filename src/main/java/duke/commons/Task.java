@@ -12,6 +12,12 @@ public class Task {
     protected boolean isDone;
     protected ArrayList<String> tagList;
 
+    /**
+     * Constructor for <code>Task</code>.
+     * @param type <code>String</code> representing the type of the <code>Task</code>.
+     * @param isDone true if the <code>Task</code> is completed, false otherwise.
+     * @param description <code>String</code> representing the description of the <code>Task</code>.
+     */
     public Task(String type, boolean isDone, String description) {
         this.type = type;
         this.description = description;
@@ -54,6 +60,11 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Adds tag to the <code>Task</code>.
+     *
+     * @param tag the <code>Tag</code> to be added to the <code>Task</code>.
+     */
     public void addTag(String tag) {
         this.tagList.add(tag);
     }

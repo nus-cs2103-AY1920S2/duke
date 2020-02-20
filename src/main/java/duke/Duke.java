@@ -38,6 +38,9 @@ public class Duke extends Application {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for <code>Duke</code>.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");

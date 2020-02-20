@@ -16,6 +16,13 @@ public class Event extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Constructor for <code>Event</code>.
+     * @param type <code>String</code> representing the type of the <code>Task</code> ("event").
+     * @param isDone true if the <code>Task</code> is completed, false otherwise.
+     * @param description <code>String</code> representing the description of the <code>Task</code>.
+     * @param atString <code>String</code> representing the time of the <code>Task</code>.
+     */
     public Event(String type, boolean isDone, String description, String atString) {
         super(type, isDone, description);
         this.atString = atString;

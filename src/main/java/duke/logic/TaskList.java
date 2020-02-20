@@ -63,7 +63,7 @@ public class TaskList {
      *
      * @param ui the <code>Ui</code> object of the program.
      * @return a <code>String</code> representing the <code>Task</code> objects in the task list,
-     * or a <code>String</code> stating that the task list is empty.
+     *     or a <code>String</code> stating that the task list is empty.
      */
     public String printTaskList(Ui ui) {
         String output;
@@ -157,7 +157,7 @@ public class TaskList {
      * @param ui <code>Ui</code> object of the program.
      * @param keyword keyword provided by the user.
      * @return a <code>String</code> representing the <code>Task</code> objects that matches the keyword provided,
-     * or a message stating that there is no <code>Task</code> object matching the keyword provided.
+     *     or a message stating that there is no <code>Task</code> object matching the keyword provided.
      */
     public String findTask(Ui ui, String keyword) {
         boolean isFound = false;

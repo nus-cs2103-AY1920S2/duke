@@ -9,6 +9,12 @@ public class Todo extends Task {
 
     protected String type;
 
+    /**
+     * Constructor for <code>Todo</code>.
+     * @param type <code>String</code> representing the type of the <code>Task</code> ("todo").
+     * @param isDone true if the <code>Task</code> is completed, false otherwise.
+     * @param description <code>String</code> representing the description of the <code>Task</code>.
+     */
     public Todo(String type, boolean isDone, String description) {
         super(type, isDone, description);
     }

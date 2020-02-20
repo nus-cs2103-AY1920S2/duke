@@ -3,7 +3,13 @@ package duke.logic.parser;
 import duke.commons.exceptions.DukeException;
 import duke.commons.exceptions.EmptyDescriptionException;
 import duke.commons.exceptions.InvalidCommandException;
-import duke.logic.commands.*;
+import duke.logic.commands.Command;
+import duke.logic.commands.AddCommand;
+import duke.logic.commands.DeleteCommand;
+import duke.logic.commands.DoneCommand;
+import duke.logic.commands.FindCommand;
+import duke.logic.commands.ListCommand;
+import duke.logic.commands.ExitCommand;
 
 import java.util.Arrays;
 import java.util.ArrayList;
