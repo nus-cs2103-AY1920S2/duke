@@ -15,7 +15,7 @@ public class TaskList {
     /**
      * Constructor that takes in list of tasks.
      *
-     * @param tasks
+     * @param tasks that user has
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -24,7 +24,7 @@ public class TaskList {
     /**
      * Method to add task into task list.
      *
-     * @param arr
+     * @param arr User input
      */
     public String add(String[] arr) {
         try {
@@ -34,6 +34,7 @@ public class TaskList {
             checkDescription(arr.length);
             Task newTask = new Task("");
             String response = "";
+            int initialSize = this.tasks.size();
 
             switch (taskType) {
             case "todo":
@@ -66,12 +67,17 @@ public class TaskList {
                 } catch (DateTimeParseException ex) {
                     response = ui.showDateTimeError();
                 }
+                break;
+
+            default:
+                task = "";
             }
 
             if (!newTask.description.equals("")) {
                 response = ui.showTaskAdded(newTask, this.tasks);
             }
 
+            assert (this.tasks.size() - initialSize) == 1 : "Task list should increment by 1";
             return response;
 
         } catch (DukeException ex) {
@@ -82,7 +88,7 @@ public class TaskList {
     /**
      * Method to delete task in task list.
      *
-     * @param arr
+     * @param arr User input
      */
     public String delete(String[] arr) {
         try {
@@ -90,6 +96,7 @@ public class TaskList {
             checkValid(arr[1]);
             int taskNum = Integer.parseInt(arr[1]) - 1;
             String response = "";
+            int initialSize = this.tasks.size();
 
             if (this.tasks.size() > taskNum) {
                 Task current = this.tasks.get(taskNum);
@@ -100,6 +107,7 @@ public class TaskList {
                 response = ui.showTaskError();
             }
 
+            assert (initialSize - this.tasks.size()) == 1 : "Task list should decrease by 1";
             return response;
 
         } catch (DukeException ex) {
@@ -110,7 +118,7 @@ public class TaskList {
     /**
      * Method to mark task as done.
      *
-     * @param arr
+     * @param arr User input
      */
     public String done(String[] arr) {
         try {
@@ -122,6 +130,7 @@ public class TaskList {
             if (this.tasks.size() > taskNum) {
                 Task current = this.tasks.get(taskNum);
                 current.markDone();
+                assert current.isDone == true : "Task should be marked as done";
                 response = ui.showDone(current);
 
             } else {
@@ -131,14 +140,14 @@ public class TaskList {
             return response;
 
         } catch (DukeException ex) {
-           return ex.getMessage();
+            return ex.getMessage();
         }
     }
 
     /**
      * Method to find tasks with matching keywords.
      *
-     * @param arr
+     * @param arr User input
      */
     public String find(String[] arr) {
         String input = arr[1];
@@ -156,8 +165,8 @@ public class TaskList {
     /**
      * Method to check if user has entered task description.
      *
-     * @param size
-     * @throws DukeException
+     * @param size of String array of user input
+     * @throws DukeException error
      */
     public static void checkDescription(int size) throws DukeException {
         Ui ui = new Ui();
@@ -170,8 +179,8 @@ public class TaskList {
     /**
      * Method to check if user has entered only 1 task number.
      *
-     * @param input
-     * @throws DukeException
+     * @param input of user
+     * @throws DukeException error
      */
     public static void checkValid(String input) throws DukeException {
         String[] arr = input.split(" ");
@@ -185,8 +194,8 @@ public class TaskList {
     /**
      * Method to check if user has entered a task number.
      *
-     * @param size
-     * @throws DukeException
+     * @param size of String array of user input
+     * @throws DukeException error
      */
     public static void checkNum(int size) throws DukeException {
         Ui ui = new Ui();

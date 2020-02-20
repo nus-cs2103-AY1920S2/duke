@@ -12,7 +12,7 @@ public class Task implements Serializable {
     /**
      * Constructor that takes in description of task.
      *
-     * @param description
+     * @param description of task
      */
     public Task(String description) {
         this.description = description;
@@ -22,7 +22,7 @@ public class Task implements Serializable {
     /**
      * Method returns status of task.
      *
-     * @return
+     * @return status of whether a task is done
      */
     public String getStatusIcon() {
         return (isDone ? "Y" : "N"); //return tick or X symbols

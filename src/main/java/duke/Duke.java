@@ -22,7 +22,7 @@ public class Duke extends Application {
      * Constructor that takes in path of file to be read.
      * Initializes UI, Storage and TaskList classes.
      *
-     * @param filePath
+     * @param filePath of stored data
      */
     private void loadDuke(String filePath) {
         ui = new Ui();
@@ -33,8 +33,8 @@ public class Duke extends Application {
     /**
      * Runs duke, loads and stores tasks.
      *
-     * @param input
-     * @return
+     * @param input of user
+     * @return response of Duke
      */
     public String runDuke(String input) {
         try {
@@ -45,6 +45,7 @@ public class Duke extends Application {
             response = parser.readCommand();
             storage.store(parser.taskList);
 
+            assert !response.equals("") : "Response should not be empty";
             return response;
 
         } catch (Exception e) {

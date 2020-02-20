@@ -13,8 +13,8 @@ public class Deadline extends Task {
     /**
      * Constructor that takes in description and date of task.
      *
-     * @param description
-     * @param by
+     * @param description of the task
+     * @param by when the task should be completed
      */
     public Deadline(String description, LocalDate by) {
         super(description);
