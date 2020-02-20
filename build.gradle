@@ -49,7 +49,7 @@ test {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.3"
+    archiveVersion = "1.0"
     archiveClassifier = null
     archiveAppendix = null
 }
