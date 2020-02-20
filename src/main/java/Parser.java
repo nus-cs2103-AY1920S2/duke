@@ -1,3 +1,4 @@
+import java.lang.reflect.InvocationTargetException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -28,7 +29,11 @@ public class Parser {
         if (strArr.length == 1) {
             throw new DukeException("UNK_TASK_DONE");
         }
-        Task currTask = taskList.get(Integer.parseInt(strArr[1]) - 1);
+        int index = Integer.parseInt(strArr[1]) - 1;
+        if (index < 0 | index > taskList.size()) {
+            throw new DukeException("OUT_OF_BOUNDS");
+        }
+        Task currTask = taskList.get(index);
         currTask.setDone();
         return ui.printTaskMarkedDone(currTask);
     }
@@ -129,7 +134,11 @@ public class Parser {
         if (strArr.length == 1) {
             throw new DukeException("UNK_TASK_TO_DELETE");
         }
-        Task currTask = taskList.get(Integer.parseInt(strArr[1]) - 1);
+        int index = Integer.parseInt(strArr[1]) - 1;
+        if (index < 0 | index > taskList.size()) {
+            throw new DukeException("OUT_OF_BOUNDS");
+        }
+        Task currTask = taskList.get(index);
         tasks.deleteTask(currTask);
         return ui.printRemainingList(currTask, taskList);
     }

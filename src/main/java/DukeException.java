@@ -34,6 +34,8 @@ public class DukeException extends Exception {
             return "Task not found! Please check the list if you forgot the task you inputted!";
         case "LOAD_ERROR": // file loading error
             return null;
+        case "OUT_OF_BOUNDS":
+            return "Please input a valid index!";
         case "OTHERS": // for any unrecognised commands
             return "\u2620" + " Oh no! I am not sure what you are talking about!";
         default:
