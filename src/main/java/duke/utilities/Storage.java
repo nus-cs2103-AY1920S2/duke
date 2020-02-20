@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Storage class to load and add tasks to tasks.txt.
  */
 public class Storage {
-    private String path = "src/main/resources/data/tasks.txt";
+    private String path = "tasks.txt";
     /**
      * Constructor for Storage.
      */
@@ -73,7 +73,6 @@ public class Storage {
     public File getFile() throws IOException {
         File file = new File(path);
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
             file.createNewFile();
         }
         return file;
