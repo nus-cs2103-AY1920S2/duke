@@ -97,7 +97,7 @@ class Parser {
     }
 
     private String[] parseDone(int i) {
-        if (tasks.numberOfTasks() + 1 > i) {
+        if (tasks.numberOfTasks() + 1 > i || i < 1) {
             return tasks.done(i);
         } else {
             return new String[]{"No Such Task Found!"};
@@ -171,7 +171,7 @@ class Parser {
     }
 
     private String[] parseDelete(int i) {
-        if (tasks.numberOfTasks() + 1 > i) {
+        if (tasks.numberOfTasks() + 1 > i || i < 1) {
             return tasks.delete(i);
         } else {
             return new String[]{"No Such Task Found!"};
