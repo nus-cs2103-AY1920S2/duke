@@ -1,2 +1,4 @@
 T , N , take drug
 D , N , 2103T iP , 2020-02-21
+D , N , death , 2020-10-12
+D , Y , 2101 reflection , 2020-02-23

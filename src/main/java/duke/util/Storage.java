@@ -21,8 +21,8 @@ public class Storage {
     protected Path dataPath;
 
     public Storage() {
-        this.rootPath = Paths.get(home).getParent().getParent().getParent();
-        this.dataPath = Paths.get(rootPath.toString(),  "data", "duke.txt");
+        this.rootPath = Paths.get(home);
+        this.dataPath = Paths.get(rootPath.toString(), "data", "duke.txt");
     }
 
     public ArrayList<Task> load() {
