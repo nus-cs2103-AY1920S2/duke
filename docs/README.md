@@ -1,5 +1,7 @@
 # User Guide
 
+![A screenshot of 4LC3N-B0T](https://raw.githubusercontent.com/alcen/duke/master/docs/Ui.png)
+
 Welcome to the user guide for 4LC3N-B0T!
 This guide will tell you all about how to
 use this application, as well as some tips
