@@ -8,16 +8,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Duke.MainWindow">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #3B4CCA #3B4CCA;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Duke.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" style="-fx-background-color: #FFDE00;" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" contentDisplay="CENTER" layoutX="324.0" layoutY="558.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: #CC0000;" text="SEND" textAlignment="CENTER" textFill="WHITE">
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" promptText="Enter command here!" style="-fx-background-color: #FFDE00;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0">
+         <font>
+            <Font name="Indie Flower" size="15.0" />
+         </font></TextField>
+        <Button fx:id="sendButton" contentDisplay="CENTER" layoutX="324.0" layoutY="558.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: #CC0000;" text="SEND" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font name="Shadows Into Light" size="19.0" />
          </font></Button>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" style="-fx-background-color: #3B4CCA #3B4CCA;" vvalue="1.0" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" style="-fx-background-color: #3B4CCA;">
+                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" style="-fx-background-color: #3B4CCA #3B4CCA #3B4CCA #3B4CCA;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></VBox>
