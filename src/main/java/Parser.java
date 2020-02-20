@@ -22,25 +22,27 @@ public class Parser {
      */
     public String parseInput(String input) throws DukeException {
         String msg = "";
+        String[] inputParts = input.split(" ");
+        String command = inputParts[0];
         if (input.equals("list")) {
             msg = taskList.showList();
-        } else if (input.split(" ")[0].equals("done")) {
-            int taskNum = Integer.parseInt(input.split(" ")[1]);
+        } else if (command.equals("done")) {
+            int taskNum = Integer.parseInt(inputParts[1]);
             msg = taskList.done(taskNum);
-        } else if (input.split(" ")[0].equals("todo") ||
-                input.split(" ")[0].equals("event") ||
-                input.split(" ")[0].equals("deadline")) {
+        } else if (command.equals("todo") ||
+                command.equals("event") ||
+                command.equals("deadline")) {
             msg = taskList.add(input);
-        } else if (input.split(" ")[0].equals("delete")) {
-            int taskNum = Integer.parseInt(input.split(" ")[1]);
+        } else if (command.equals("delete")) {
+            int taskNum = Integer.parseInt(inputParts[1]);
             msg = taskList.delete(taskNum);
-        } else if (input.split(" ")[0].equals("find")) {
-            String query = input.split(" ")[1];
+        } else if (command.equals("find")) {
+            String query = inputParts[1];
             msg = taskList.find(query);
-        } else if (input.split(" ")[0].equals("bye")) {
+        } else if (command.equals("bye")) {
             msg = "Bye. Hope to serve you again soon!";
         } else {
-            throw new DukeException();
+            throw new UnrecognisedCommandException();
         }
         assert ! msg.equals("") : "Response is not empty";
         return msg;
