@@ -15,21 +15,19 @@
 4. FAQ.  
 5. Command Summary.  
 
-## Features 
+## 1. Introduction
+Duke is for those who prefer to use a desktop app for managing tasks. More importantly, Duke is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can help manage your busy schedule better than traditional GUI apps. Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
 
-### Feature 1 
-Description of feature.
+## 2. Quick Start 
+1) Ensure you have Java 11 or above installed in your Computer.
 
-## Usage
+2) Download the latest duke.jar from the build/libs folder.
 
-### `Keyword` - Describe action
+3) Copy the file to the folder you want to use as the home folder for your Duke app.
 
-Describe action and its outcome.
+4) Double-click the file to start the app. The GUI should appear in a few seconds.
 
-Example of usage: 
 
-`keyword (optional arguments)`
 
-Expected outcome:
+## 3. Features
 
-`outcome`
