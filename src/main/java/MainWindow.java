@@ -19,20 +19,18 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
     private Ui ui = new Ui();
-    private Storage storage;
-    private TaskList tasks;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(duke.dukeAnswer(ui.welcomeMessage()), dukeImage));
     }
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(duke.dukeAnswer(ui.welcomeMessage()), dukeImage));
     }
 
 
@@ -42,9 +40,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        storage = duke.getStorage();
-        tasks = duke.getTaskList();
-
+        Storage storage = duke.getStorage();
+        TaskList tasks = duke.getTaskList();
         String input = userInput.getText();
 
         if (input.equals("bye")) {
