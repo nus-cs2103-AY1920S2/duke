@@ -78,7 +78,7 @@ public class Logic {
 
     private String prioritiseTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 3) {
-            ui.throwWrongFormatException("\"priority index_of_the_task (a positive integer) level_of_priority"
+            ui.throwWrongFormatException("\"priority index_of_the_task\n(a positive integer) level_of_priority"
                     + " (which include: l/low, n/normal, h/high, t/top)\"");
         }
         int index = getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;
@@ -182,7 +182,7 @@ public class Logic {
 
     private String findTasks(String[] instructionByWords, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 2) {
-            ui.throwWrongFormatException("\"find key_word (a character sequence)\"");
+            ui.throwWrongFormatException("\n\"find key_word (a character sequence)\"");
         }
         String keyword = instructionByWords[1];
         HashMap<Integer, Task> selectedList = new HashMap<>();
@@ -213,7 +213,7 @@ public class Logic {
         if (lengthOfArray != 2) {
             if (command.equals("done")) {
                 ui.throwWrongFormatException(
-                        "\"done index_of_the_task_completed (a positive integer)\"");
+                        "\n\"done index_of_the_task_completed (a positive integer)\"");
             } else {
                 ui.throwWrongFormatException(
                         "\"remove index_of_the_task_you_want_to_remove (a positive integer)\"");
@@ -221,7 +221,7 @@ public class Logic {
         }
         try {
             int index = Integer.parseInt(instructionByWord[1]) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;
-            String output = "";
+            String output;
             checkIfIndexIsValid(index);
             if (command.equals("done")) {
                 output = tasks.markATaskDone(index);
@@ -244,7 +244,7 @@ public class Logic {
 
     private Task createATodoTask(String[] instructionByWord, int lengthOfArray) throws DukeException {
         if (lengthOfArray == 1) {
-            ui.throwWrongFormatException("\"todo a_string_describing_the_task\"");
+            ui.throwWrongFormatException("\n\"todo a_string_describing_the_task\"");
         }
         String description = String.join(" ",
                 Arrays.copyOfRange(instructionByWord, 1, lengthOfArray));
@@ -288,9 +288,9 @@ public class Logic {
         assert typeOfTask.equals("deadline") || typeOfTask.equals("event");
         if (indexOfByOrAt == -1 || indexOfByOrAt == 1 || indexOfByOrAt == (lengthOfArray - 1)) {
             if (typeOfTask.equals("deadline")) {
-                ui.throwWrongFormatException("\"deadline a_string_describing_the_task /by YYYY-MM-DD\"");
+                ui.throwWrongFormatException("\n\"deadline a_string_describing_the_task /by YYYY-MM-DD\"");
             } else {
-                ui.throwWrongFormatException("\"event a_string_describing_the_task /at YYYY-MM-DD\"");
+                ui.throwWrongFormatException("\n\"event a_string_describing_the_task /at YYYY-MM-DD\"");
             }
         }
     }

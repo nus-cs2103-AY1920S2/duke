@@ -32,7 +32,7 @@ public abstract class Task {
             priorityIndication = "[      ordinary      ] ";
             break;
         case HIGH:
-            priorityIndication = "[    important!    ] ";
+            priorityIndication = "[     important!    ] ";
             break;
         case TOP:
             priorityIndication = "[very important!!] ";

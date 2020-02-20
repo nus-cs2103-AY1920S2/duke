@@ -28,8 +28,8 @@ public class Ui {
     }
 
     public static String greet() {
-        return "Hello, this is NUS-Duke. "
-                + "Please give me an instruction followed by relevant description.\n";
+        return "Hello, this is NUS-Duke."
+                + " Please give me an instruction followed by relevant description.\n";
     }
 
     public String sayGoodbye() {
@@ -55,27 +55,30 @@ public class Ui {
     public void throwEmptyLineException() throws DukeException {
         throw new DukeException("Empty line input. "
                 + "Please specify an instruction followed by relevant description.\n"
-                + "The valid instructions include: todo, deadline, event, list, done, bye.");
+                + "The valid instructions include: b/bye, c/clear, d/deadline, "
+                + "done, e/vent, f/find, hi/hello, l/list, p/priority, r/remove, t/todo");
     }
 
     public void throwUnknownCommandException() throws DukeException {
         throw new DukeException("I don't understand this instruction.\n"
-                + "The valid instructions include: b/bye, c/clear, d/deadline, " +
-                "done, e/vent, f/find, l/list, p/priority, r/remove, t/todo");
+                + "The valid instructions include: b/bye, c/clear, d/deadline, "
+                + "done, e/vent, f/find, hi/hello, l/list, p/priority, r/remove, t/todo");
     }
 
     public static String showValidInstructions() {
-        String output = "\nThe valid instructions are as follows:\n";
-        output += "b/bye: exit the app\n";
-        output += "c/clear: clear all tasks or only completed tasks\n";
-        output += "d/deadline: add a deadline task into task list\n";
-        output += "done: mark a task as done\n";
-        output += "e/event: add an event task into task list\n";
-        output += "f/find: find tasks by some key word\n";
-        output += "l/list: list all tasks or tasks with some priority level\n";
-        output += "p/priority: change the priority level of a task\n";
-        output += "r/remove: remove a task from task list\n";
-        output += "t/todo: add a todo task into task list\n";
+        String output = "The valid instructions are as follows:\n";
+        output += "   -- Add a task into the task list --\n";
+        output += "        - t/todo: add a todo task\n";
+        output += "        - e/event: add an event task\n";
+        output += "        - d/deadline: add a deadline task\n";
+        output += "- done: mark a task as done\n";
+        output += "- f/find: find tasks by some key word\n";
+        output += "- l/list: list all tasks or tasks with a specified priority level\n";
+        output += "- p/priority: change the priority level of a task\n";
+        output += "- r/remove: remove a task from task list\n";
+        output += "- c/clear: clear all tasks or only completed tasks\n";
+        output += "- hi/hello: show this greeting message again\n";
+        output += "- b/bye: exit the app\n";
         return output;
     }
 }
