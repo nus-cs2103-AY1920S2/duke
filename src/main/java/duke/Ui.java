@@ -3,10 +3,8 @@ package duke;
 import duke.tasks.Task;
 import duke.exceptions.*;
 
-//import java.io.IOException;
+
 import java.util.ArrayList;
-//import java.io.BufferedReader;
-//import java.io.FileReader;
 
 /**
  * The UI class for Duke.

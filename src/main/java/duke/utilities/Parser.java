@@ -87,9 +87,7 @@ public class Parser {
     public static Command parseInput(String input) throws DukeException {
         try {
             input = input.trim(); // trim any opening and trailing whitespace
-            if (input.equals("bye")) { // exit command
-                return new ExitCommand();
-            } else if (input.equals("list")) { // list command
+            if (input.equals("list")) { // list command
                 return new ListCommand();
             } else if (input.equals("help")) {
                 return new HelpCommand();
@@ -125,7 +123,7 @@ public class Parser {
                 String[] split = input.split(" ", 2);
                 TaskType taskType = TaskType.valueOf(split[0].toUpperCase());
                 String taskDetails = split[1];
-                Task task = null;
+                Task task;
                 switch (taskType) {
                     case TODO:
                         task = new ToDo("0", taskDetails);

@@ -6,7 +6,6 @@ import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.exceptions.*;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -16,8 +15,6 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.util.Scanner;
 
 /**
  * The Main class used to run the application.
