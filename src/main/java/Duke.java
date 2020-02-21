@@ -1,3 +1,4 @@
+import java.nio.file.Path;
 import java.util.HashMap;
 
 /** Main class. */
@@ -24,10 +25,10 @@ public class Duke {
      * persistent storage. TaskList stores tasks and provide functions to maintain these tasks.
      * Parser parses input. Factory creates task objects. UiV2 handles GUI user interaction.
      *
-     * @param filepath path where TaskList is stored.
+     * @param path path where TaskList is stored.
      */
-    public Duke(String filepath) {
-        this.storage = new Storage(filepath);
+    public Duke(Path path) {
+        this.storage = new Storage(path);
         this.lst = storage.load();
         this.parser = new Parser();
         this.factory = new Factory();

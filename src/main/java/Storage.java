@@ -6,18 +6,19 @@ import java.io.ObjectOutputStream;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 
 /** Handles storing and loading of TaskList to and from persistent storage. */
 public class Storage {
 
-    protected String filePath;
+    protected Path filePath;
 
     /**
      * Constructor for Storage class.
      *
      * @param filepath path where TaskList is stored.
      */
-    public Storage(String filepath) {
+    public Storage(Path filepath) {
         this.filePath = filepath;
     }
 
@@ -30,7 +31,7 @@ public class Storage {
         TaskList res = new TaskList();
 
         try {
-            File savedData = new File(filePath);
+            File savedData = new File(String.valueOf(filePath));
             FileInputStream fis = new FileInputStream(savedData);
             ObjectInputStream ois = new ObjectInputStream(fis);
             TaskList lstSaved = (TaskList) ois.readObject();
@@ -55,7 +56,7 @@ public class Storage {
      */
     public void save(TaskList lst) {
         try {
-            FileOutputStream fos = new FileOutputStream(filePath);
+            FileOutputStream fos = new FileOutputStream(String.valueOf(filePath));
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(lst);
         } catch (IOException e) {
