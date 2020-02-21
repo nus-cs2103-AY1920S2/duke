@@ -4,7 +4,6 @@
 /*.iml
 
 # Gradle build files
-/.gradle/
 /build/
 src/main/resources/docs/
 
@@ -12,3 +11,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Local data
+src/main/data/
