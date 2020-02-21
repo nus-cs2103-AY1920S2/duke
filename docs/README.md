@@ -4,7 +4,7 @@
 
 ## Introduction
 The Grandest Duke (TGD) is a task tracker desktop application aimed at helping user keep track
-of their daily tasks. It has a clean and simple GUI which accepts user input as its main
+of their daily tasks. It has a clean and simple GUI which accepts user keyboard input as its main
 mode of interaction.
 
 ## Quick start
@@ -12,7 +12,7 @@ mode of interaction.
 <img src="quick-start.png">
 
 User input commands are entered in the highlighted field. Press the 'SEND' button to send commands to TGD.
-**Note: Unless stated otherwise, all input commands in TGD are non case-sensitive**
+#####**Note: Unless stated otherwise, all input commands in TGD are non case-sensitive**
 
 ## Features 
 
