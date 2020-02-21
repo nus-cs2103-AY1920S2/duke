@@ -7,7 +7,7 @@ public class TodoTest {
     @Test
     public void testTodo() throws Throwable {
 
-        Todo todo = new Todo("testing");
+        Todo todo = new Todo("testing", 1);
 
         String status = todo.getStatusIcon();
 
