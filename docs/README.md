@@ -317,13 +317,14 @@ Saves the list into a text file and guides the user to exit the application.
 
 Example of usage:
 
-```bye```
+```
+bye
+```
 
 Expected outcome:
 
 ```
 Your List has been saved, Bye! Hope to see you again soon! Press the exit button!
-
 ```
 #### Acceptable input formats:
 * bye
