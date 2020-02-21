@@ -323,6 +323,7 @@ Expected outcome:
 
 ```
 Your List has been saved, Bye! Hope to see you again soon! Press the exit button!
+
 ```
 #### Acceptable input formats:
 * bye
