@@ -1,14 +1,13 @@
 # User Guide: Cat Bot
 
 ![Cat Bot](https://github.com/seanlowcy77/duke/blob/master/docs/Ui.png)
-</br></br>
+
+
 Missing a Todo list? 
-</br></br>
+
 Or sometimes requiring a Todo list while offline?
-</br></br>
+
 Cat bot saves a list of things you want to do!
-</br></br>
-</br></br>
 
 ## Features 
 
@@ -29,8 +28,7 @@ Has an easy to use user interface with intuitive commands, along with theme togg
 Saves your tasks when you exit from the program and keeps your tasks until the next
 time you open the program.
 
-</br></br>
-
+<br>
 
 
 ## Usage
@@ -328,7 +326,6 @@ Your List has been saved, Bye! Hope to see you again soon! Press the exit button
 ```
 #### Acceptable input formats:
 * bye
-</br></br></br>
 
 
 
@@ -350,7 +347,7 @@ Exits the application but does not save the list.
 <br>
 A 'bye' command is required for the list to be saved.
 
-</br></br></br>
+
 ## Acknowledgements
 
 ### Photos used
