@@ -3,7 +3,7 @@
 ## Introduction
 This is a **chat-bot** called **Duke** for tracking the user's tasks.
 
-![My GUI interface](/docs/Ui.png)
+![My GUI interface](https://github.com/hans555/duke/blob/master/docs/Ui.png)
 
 ### Type of tasks
 There are three types of task.
@@ -32,7 +32,7 @@ Example of usage:
 
 Expected outcome:
 
-![feature1](/src/main/resources/feature1.png)
+![feature1](https://github.com/hans555/duke/blob/master/src/main/resources/feature1.png)
 
 ### Feature 2 - Deleting a task
 
@@ -49,7 +49,7 @@ Example of usage:
 
 Expected outcome:
 
-![feature2](/src/main/resources/feature2.png)
+![feature2](https://github.com/hans555/duke/blob/master/src/main/resources/feature2.png)
 
 ### Feature 3 - Mark a task as done
 Allows the user to mark a task in the list as done.
@@ -63,7 +63,7 @@ Example of usage:
 
 Expected outcome:
 
-![feature3](/src/main/resources/feature3.png)
+![feature3](https://github.com/hans555/duke/blob/master/src/main/resources/feature3.png)
 
 ### Feature 4 - Print the existing list of task
 Allows the user to print the list of task.
@@ -76,7 +76,7 @@ Example of usage:
 
 Expected outcome:
 
-![feature4](/src/main/resources/feature4.png)
+![feature4](https://github.com/hans555/duke/blob/master/src/main/resources/feature4.png)
 
 ### Feature 5 - Find the task using a **keyword**
 Allows the user find the list of task containing the **keyword**.
@@ -87,9 +87,9 @@ Example of usage:
 
 `find book` (Print a list of task containing the word "book")
 
-Expected outcome:
+Expected outcome
 
-![feature5](/src/main/resources/feature5.png)
+![feature5](https://github.com/hans555/duke/blob/master/src/main/resources/feature5.png)
 
 ### Feature 6 - Statistic
 Allows the user see the summary of the tasks in the list.
@@ -103,7 +103,7 @@ Example of usage:
 
 Expected outcome:
 
-![feature6](/src/main/resources/feature6.png)
+![feature6](https://github.com/hans555/duke/blob/master/src/main/resources/feature6.png)
 
 ### Feature 7 - Save and exit
 Allows the user to save the list of task to a file.
@@ -116,7 +116,7 @@ Example of usage:
 
 Expected outcome:
 
-![feature7](/src/main/resources/feature7.png)
+![feature7](https://github.com/hans555/duke/blob/master/src/main/resources/feature7.png)
 
 
 
