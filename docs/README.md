@@ -126,7 +126,9 @@ Shows the tasks currently in your list.
 
 Example of usage: 
 
-```list```
+```
+list 
+```
 
 Expected outcome:
 
@@ -162,7 +164,9 @@ marked with 'Y' instead of 'N'.
 
 Command entered:
 
-```list```
+```
+list 
+```
 
 Reply from bot:
 
