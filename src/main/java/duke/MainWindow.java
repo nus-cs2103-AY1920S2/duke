@@ -23,6 +23,10 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    /* I do not own the rights to these photos. These photos have been taken from the following websites:
+    https://en.wikipedia.org/wiki/Night_King
+    https://m.buro247.sg/images/culture/game-of-thrones-jamie-lannister-burosingapore-ca.jpg
+     */
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
