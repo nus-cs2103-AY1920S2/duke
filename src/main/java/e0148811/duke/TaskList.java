@@ -34,6 +34,13 @@ public class TaskList {
     public String printListBasedOnPriority(PriorityLevel level) {
         StringBuilder output = new StringBuilder("Here is the list of tasks " +
                 "with your specified priority level:\n");
+        int count = addAndCountTasksWithGivenPriority(level, output);
+        output.append(getNumOfSelectedTasks(count));
+        output.append(getTotalNumOfTasks());
+        return output.toString();
+    }
+
+    private int addAndCountTasksWithGivenPriority(PriorityLevel level, StringBuilder output) {
         int count = 0;
         for (int i = 1; i <= list.size(); i++) {
             Task task = list.get(i - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX);
@@ -42,9 +49,7 @@ public class TaskList {
                 count++;
             }
         }
-        output.append(getNumOfSelectedTasks(count));
-        output.append(getTotalNumOfTasks());
-        return output.toString();
+        return count;
     }
 
     private String getNumOfSelectedTasks(int count) {
