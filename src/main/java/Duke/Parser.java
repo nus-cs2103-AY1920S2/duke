@@ -18,6 +18,7 @@ public class Parser {
     private static final String INVALID_DESCRIPTION_ERROR = "☹ OOPS!!! The description of a task must be added in " +
             "the format:\nTask-type Task-description /Preposition Date Time(optional)";
     private static final String INVALID_TASK_ERROR = "Attempting to add invalid task. Operation aborted.";
+    private static final String EMPTY_LIST_PROMPT = "\nList is empty! Start by creating a task first.";
 
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;
@@ -29,58 +30,69 @@ public class Parser {
      * @return Output string by Duke
      */
     String getOutputString(String input) {
-        String in = input.trim().toLowerCase();
-        String outputString;
-      
+        String in = input.trim();
+        String commandType = in.split(" ", 2)[0].toLowerCase(); //case-insensitive to input commands
+        String outputString = "";
+
         assert this.taskList != null;
-        if (in.equals("bye")) {
-            Command exitCommand = new ExitCommand();
-            outputString = exitCommand.execute(); //TODO: outputString in this class instead
-        } else if (in.equals("list")) {
-            Command listCommand = new ListCommand(taskList);
-            outputString = listCommand.execute(); //TODO: outputString in this class instead
-        } else if (in.equals("stats")) {
-            Command statsCommand = new StatsCommand(taskList);
-            outputString = statsCommand.execute(); //TODO: outputString in this class instead
-        } else if (in.equals("help")) {
-            Command helpCommand = new HelpCommand();
-            outputString = ((HelpCommand) helpCommand).executeSimple();
-        } else if (in.equals("help-detailed")) {
-            Command helpCommand = new HelpCommand();
-            outputString = helpCommand.execute();
-        } else {
-            String taskType = in.split(" ", 2)[0];
-            if (isValidTask(taskType)) {
-                try {
-                    String taskDesc = in.split(" ", 2)[1]; //all String after taskType
-                    if (taskType.equals("done")) {
-                        Command doneCommand = new DoneCommand(taskList, taskDesc);
-                        outputString = doneCommand.execute(); //TODO: outputString in this class instead
-                    } else if (taskType.equals("delete")) {
-                        Command deleteCommand = new DeleteCommand(taskList, taskDesc);
-                        outputString = deleteCommand.execute(); //TODO: outputString in this class instead
-                    } else {
-                        Task newTask = createTask(taskType, taskDesc);
-                        Command addCommand = new AddCommand(taskList, newTask);
-                        outputString = addCommand.execute(); //TODO: outputString in this class instead
-                    }
-                } catch (DateTimeParseException e) {
-                    outputString = DATE_TIME_PARSE_ERROR;
-                } catch (IndexOutOfBoundsException e) {
-                    outputString = EMPTY_DESCRIPTION_ERROR;
-                } catch (DukeException e) {
-                    outputString = e.toString();
-                }
-            } else if (in.isEmpty() || in == null) {
-                Command emptyCommand = new EmptyCommand();
-                outputString = emptyCommand.execute(); //TODO: outputString in this class instead
+
+        try {
+            if (commandType.equals("bye")) {
+                Command exitCommand = new ExitCommand();
+                outputString = exitCommand.execute();
+            } else if (commandType.equals("list")) {
+                Command listCommand = new ListCommand(taskList);
+                outputString = listCommand.execute();
+            } else if (commandType.equals("stats")) {
+                Command statsCommand = new StatsCommand(taskList);
+                outputString = statsCommand.execute();
+            } else if (commandType.equals("help")) {
+                Command helpCommand = new HelpCommand();
+                outputString = ((HelpCommand) helpCommand).executeSimple();
+            } else if (commandType.equals("help-detailed")) {
+                Command helpCommand = new HelpCommand();
+                outputString = helpCommand.execute();
             } else {
-                Command unknownCommand = new UnknownCommand();
-                outputString = unknownCommand.execute(); //TODO: outputString in this class instead
+                if (Task.isValidTask(commandType)) {
+                    String taskDesc = in.split(" ", 2)[1]; //all Strings after commandType
+                    Task newTask = createTask(commandType, taskDesc);
+                    Command addCommand = new AddCommand(taskList, newTask);
+                    outputString = addCommand.execute();
+                } else if (isValidCommand(commandType)) {
+                    if (commandType.equals("done")) {
+                        Command doneCommand = new DoneCommand(taskList, in);
+                        outputString = doneCommand.execute();
+                    } else if (commandType.equals("delete")) {
+                        Command deleteCommand = new DeleteCommand(taskList, in);
+                        outputString = deleteCommand.execute();
+                    } else if (commandType.equals("find")) {
+                        Command findCommand = new FindCommand(taskList, in);
+                        outputString = findCommand.execute();
+                    } else {
+
+                    }
+                } else if (in.isEmpty() || in == null) {
+                    Command emptyCommand = new EmptyCommand();
+                    outputString = emptyCommand.execute();
+                } else {
+                    Command unknownCommand = new UnknownCommand();
+                    outputString = unknownCommand.execute();
+                }
             }
+        } catch (DateTimeParseException e) {
+            outputString = DATE_TIME_PARSE_ERROR;
+        } catch (IndexOutOfBoundsException e) { //from null taskDesc
+            outputString = EMPTY_DESCRIPTION_ERROR;
+        } catch (DukeException e) {
+            outputString = e.getMessage();
         }
-        assert outputString != null;
-        return outputString;
+        finally {
+            if (taskList.getTaskList().isEmpty()) { //Prompt user to add task if list is empty
+                outputString += EMPTY_LIST_PROMPT;
+            }
+            assert outputString != null;
+            return outputString;
+        }
     }
 
     private static Task createTask(String taskType, String taskDesc) throws DukeException {
@@ -138,7 +150,7 @@ public class Parser {
         }
     }
 
-    private static boolean isValidTask(String taskType) {
-        return taskType.equals("done") || taskType.equals("delete") || Task.isValidTask(taskType);
+    private static boolean isValidCommand(String taskType) {
+        return taskType.equals("done") || taskType.equals("delete") || taskType.equals("find");
     }
 }

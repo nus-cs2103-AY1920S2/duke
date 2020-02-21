@@ -2,6 +2,7 @@ package Duke.command;
 
 import Duke.Storage;
 import Duke.TaskList;
+import Duke.exception.DukeException;
 import Duke.task.Task;
 import java.io.Serializable;
 import java.util.List;
@@ -36,5 +37,5 @@ public abstract class Command implements Serializable {
         this.statStorage = tl.getStatStorage();
     }
 
-    public abstract String execute();
+    public abstract String execute() throws DukeException;
 }

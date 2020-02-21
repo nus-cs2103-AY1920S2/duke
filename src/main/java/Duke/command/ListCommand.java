@@ -13,12 +13,16 @@ public class ListCommand extends Command {
      * String of every item in taskList.
      */
     public String execute() {
-        String out = "Here are the tasks in your list:\n";
+        StringBuilder res = new StringBuilder();
+        String listHeader = "Here are the tasks in your list:\n";
         int i = 1;
-        for (Task task : list) {
-            out += "     " + i + "." + task + "\n";
+        for (Task task : this.list) {
+            res.append("     " + i + "." + task + "\n");
             i++;
         }
-        return out;
+        if (res.length() != 0) {
+            res.insert(0, listHeader);
+        }
+        return res.toString();
     }
 }
