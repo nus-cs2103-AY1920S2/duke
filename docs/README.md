@@ -69,7 +69,6 @@ Expected outcome:
 Got it. I have added this task:
 2. [D][N] tutorial 2  (by: 7/3/2020 2200)
 Now you have a total of 2 Tasks in your list
-
 ```
 
 Works as well for other deadlines without specific date and times.
@@ -111,7 +110,6 @@ Follow the format dd/MM/YYYY HHMM if you want the timing to be recorded!
 Got it. I have added this task:
 4. [E][N] eat with friends  (at: tonight)
 Now you have a total of 4 Tasks in your list
-
 ```
 
 #### Acceptable input formats:
@@ -259,7 +257,6 @@ Your Task Details are as follows:
 (started on: 2020-02-22) 
 (by: tonight)
 4. [E][N] eat with friends  (at: tonight)
-
 ```
 
 ##### Acceptable input formats:
@@ -322,7 +319,6 @@ Expected outcome:
 
 ```
 Your List has been saved, Bye! Hope to see you again soon! Press the exit button!
-
 ```
 #### Acceptable input formats:
 * bye
