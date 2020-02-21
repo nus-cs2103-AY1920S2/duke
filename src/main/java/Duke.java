@@ -51,6 +51,7 @@ public class Duke {
                     || keyword.equals(LIST_COMMAND)) { // commands with no arguments
                 if (keyword.equals(BYE_COMMAND)) {
                     message = byeCommand();
+                    //System.exit(0);
                 } else if (keyword.equals(STAT_COMMAND)) {
                     message = statCommand();
                 } else if (keyword.equals(LIST_COMMAND)) {
