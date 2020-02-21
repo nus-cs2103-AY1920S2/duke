@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import duke.utilities.TimeParser;
 
 public class Deadline extends Task implements TimeParser {
-    protected LocalDate date;
+    private LocalDate date;
 
     /**
      * Another constructor for creating Deadline.

@@ -71,7 +71,7 @@ public class Storage {
         }
     }
 
-    public File getFile() throws IOException {
+    private File getFile() throws IOException {
         File file = new File(path);
         if (!file.exists()) {
             file.createNewFile();

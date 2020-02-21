@@ -11,6 +11,11 @@ import java.util.stream.Collectors;
 public class FindCommand extends Command {
     String keyword;
 
+    /**
+     * Constructor for FindCommand.
+     *
+     * @param keyword a keyword supplied the user
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }

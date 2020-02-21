@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for delete command. Supports multi-delete using varArgs
+     *
      * @param taskNumbers integer array of varied length, depending on number of items the user wants to delete.
      */
     public DeleteCommand(int... taskNumbers) {

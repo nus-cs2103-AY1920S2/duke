@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import duke.utilities.TimeParser;
 
 public class Event extends Task implements TimeParser {
-    protected LocalDate date;
+    private LocalDate date;
 
 
     /**

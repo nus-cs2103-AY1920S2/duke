@@ -5,7 +5,6 @@ import duke.tasks.*;
 import duke.exceptions.*;
 
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -80,7 +79,7 @@ public class Parser {
     }
 
     /**
-     * Parses user input into a Command object.
+     * Parses user input into a Command object. The user input is received from the main Duke class.
      *
      * @param input user input eg. "date blah /by 9/2/2020"
      * @return a Command representing the action to be taken as directed by user
@@ -99,7 +98,7 @@ public class Parser {
             } else if (input.startsWith("delete")) { // delete command
                 String[] split = input.split(" ", 2);
                 String[] numberStrings = split[1].split(" ");
-                int[] taskNumbers = Stream.of(numberStrings).mapToInt(x -> Integer.parseInt(x) - 1).toArray();
+                int[] taskNumbers = Stream.of(numberStrings).mapToInt(x -> Integer.parseInt(x) - 1).toArray(); // split into int[] of indices
                 return new DeleteCommand(taskNumbers);
             } else if (input.startsWith("find")) { // find command
                 String[] split = input.split(" ");

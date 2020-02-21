@@ -147,7 +147,7 @@ public class Ui {
                 this.blankLine() +
                 "find task:\n\tfind <keyword>" +
                 this.blankLine() +
-                "delete task:\n\tdelete <task number>" +
+                "delete task:\n\tdelete <task numbers>" +
                 this.blankLine() +
                 "mark task as done:\n\tdone <task number>" +
                 this.blankLine() +
