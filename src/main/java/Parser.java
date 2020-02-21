@@ -59,10 +59,10 @@ public class Parser {
             } else {
                 return "Where is your keyword:(";
             }
-        } else if (input.contains ("clear list")) {
+        } else if (input.equals ("clear list")) {
             return taskList.clearList();
         } else if (input.equals ("commands")) {
-            return taskList.commandList();
+            return taskList.commands();
         } else {
             //Create task using key words: "todo", "deadline", "event"
             if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {

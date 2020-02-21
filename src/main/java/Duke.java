@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,7 +31,6 @@ import java.util.Scanner;
  * delete</space></taskNumber>
  * find</space></taskNumber>
  * todo</space></name of task>
- *
  * deadline</space></name of task></backslash></Date in yyyy-mm-dd format>
  * event</space></name of task></backslash></Date in yyyy-mm-dd format><T></Time in hh:mm-hh:mm format>
  * bye

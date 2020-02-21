@@ -30,20 +30,17 @@ public class TaskList {
         }
     }
 
-    public String commandList() {
-        return "  Command List:\n" +
-                "__________________________________________\n" +
-                " - commands: Returns command list\n" +
-                " - list: Returns list of tasks\n" +
-                " - done: Format: done(space)(task number)\n Marks specified task as done\n" +
-                " - delete: Format: delete(space)(task number)\n Deletes specified task\n" +
-                " - find: Format: find(space)(keyword)\n Finds all tasks that matches keyword\n" +
-                " - todo: Format: todo(space)(task name)\n Adds a new todo task to your list\n" +
-                " - deadline: Format: deadline(space)(task name)(/)(Date in yyyy-mm-dd format)" +
-                "\n Adds a new deadline task to your list\n" +
-                " - event Format: event(space)(task name)(/)(Date in yyyy-mm-dd format)(T)(Time in hh:mm-hh:mm format)\n" +
-                "Adds a new event task to your list\n" +
-                " - clear list: Clears your task list\n";
+    public String commands() {
+        return "Command list" +
+                "\n\n_______________________________" +
+                "\n\n 1) list: Returns list of all tasks" +
+                "\n\n 2) clear list: Clears list" + "" +
+                "\n\n 3) done: Marks a task as done" +
+                "\n\n 4) find: Returns all tasks that contains keyword" +
+                "\n\n 5) delete: Deletes tasks" +
+                "\n\n 6) todo: Adds a new task to the list" +
+                "\n\n 7) deadline: Adds a new deadline task to the list" +
+                "\n\n 8) event: Adds a new event task to the list";
     }
 
     /**

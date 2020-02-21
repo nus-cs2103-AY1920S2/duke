@@ -12,7 +12,6 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
         <items>
           <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitAndSave" text="Exit" />
-            <Button mnemonicParsing="false" onAction="#showInfoBox" prefHeight="31.0" prefWidth="80.0" text="Info" />
         </items>
       </ToolBar>
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
