@@ -29,8 +29,8 @@ public class Ui {
         return "---------------------------------------";
     }
 
-    public String sayBye() {
-        return "Your List has been saved, Bye! Hope to see you again soon!";
+    public static String sayBye() {
+        return "Your List has been saved, Bye! Hope to see you again soon! Press the exit button!";
     }
 
     public String unknownCommand() {
@@ -58,7 +58,7 @@ public class Ui {
     }
 
     public String inputByCmd() {
-        return "Please give me an approximate timing using '/by'!";
+        return "Please give me an approximate timing /by or /at!";
     }
 
     public String inputAtCmd() {
@@ -69,12 +69,20 @@ public class Ui {
         return "Please do not give an empty command :(";
     }
 
+    public String emptyDesc() {
+        return "Please do not give an empty description :(";
+    }
+
     public String noMatchingTasks() {
         return "There are no matching tasks :/";
     }
 
     public String matchingTasks() {
         return "Here are the matching tasks in your list:";
+    }
+
+    public String currList() {
+        return "Here are the tasks in your list:\n";
     }
 
     public String deleteAll() {
