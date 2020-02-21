@@ -12,7 +12,7 @@ public class Deadline extends Task implements Snoozable<Deadline> {
     protected final LocalDateTime deadline;
 
     /**
-     * Instantiates a Deadline object with the specified description and due
+     * Constructs a Deadline object with the specified description and due
      * date, marked as incomplete.
      *
      * @param description the description of the deadline
@@ -24,7 +24,7 @@ public class Deadline extends Task implements Snoozable<Deadline> {
     }
 
     /**
-     * Instantiates a Deadline object with the specified description, due date,
+     * Constructs a Deadline object with the specified description, due date,
      * and completion status.
      *
      * @param description the description of the deadline

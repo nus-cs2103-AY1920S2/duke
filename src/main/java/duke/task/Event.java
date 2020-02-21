@@ -8,7 +8,7 @@ public class Event extends Task {
     protected final String time;
 
     /**
-     * Instantiates an Event object with the specified description and time,
+     * Constructs an Event object with the specified description and time,
      * marked as incomplete.
      *
      * @param description the description of the event
@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     /**
-     * Instantiates an Event object with the specified description, time, and
+     * Constructs an Event object with the specified description, time, and
      * completion status.
      *
      * @param description the description of the event
