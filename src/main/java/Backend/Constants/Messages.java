@@ -15,4 +15,9 @@ public final class Messages {
     public final static String NO_TASKS_MSG = "You currently have no tasks sir.";
     public final static String LIST_TASKS_MSG = "Here are your tasks sir:\n";
     public final static String ERROR_MSG = "I was unable to complete your request due to this exception, sir:\n ";
+    public final static String HELP_MSG = "Duke v1.0\n" +
+            "\n" +
+            "The user manual can be found at https://github.com/waynewee/duke/wiki/Duke-User-Guide.\n" +
+            "\n" +
+            "Copy and paste this url or click the link at the bottom left of this window.";
 }

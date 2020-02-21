@@ -11,8 +11,15 @@ import Frontend.Constants.Styles;
 import Frontend.Objects.User;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 /**
@@ -48,9 +55,21 @@ public class Main extends Application {
         initBackendComponents();
         initComponents();
         setTheStage(stage);
-        resizeComponents(stage);
+        resizeStage(stage);
         setHandlers();
         greet();
+    }
+
+    private void addUserInputHistoryIndex(){
+
+        if( cache.getUserInputHistorySize() > 0 ){
+            String latestCommand = cache.getUserInputHistory( userInputHistoryIndex % cache.getUserInputHistorySize() );
+            userInput.setText(latestCommand);
+            userInput.positionCaret( latestCommand.length() );
+
+            userInputHistoryIndex++;
+        }
+
     }
 
     /**
@@ -98,16 +117,26 @@ public class Main extends Application {
         duke.clearText();
     }
 
-    private void handleKeyPress( KeyCode keyCode){
+    private void handleKeyEvent( KeyEvent keyEvent){
 
-        if( keyCode == KeyCode.UP || keyCode == KeyCode.DOWN ){
-            String latestCommand = cache.getUserInputHistory( userInputHistoryIndex % cache.getUserInputHistorySize() );
-            userInput.setText(latestCommand);
-            userInput.positionCaret( latestCommand.length() );
+        KeyCode keyCode = keyEvent.getCode();
 
-            userInputHistoryIndex++;
+        boolean isKeyUp = keyCode == KeyCode.UP;
+        boolean isKeyCtrlC = ( keyCode == KeyCode.C && keyEvent.isControlDown() );
+        boolean isKeyCtrlD = ( keyCode == KeyCode.D && keyEvent.isControlDown() );
+
+        if( isKeyUp ){
+            addUserInputHistoryIndex();
         } else {
-            userInputHistoryIndex = 0;
+            resetUserInputHistoryIndex();
+        }
+
+        if( isKeyCtrlC ){
+            userInput.clear();
+        }
+
+        if( isKeyCtrlD ){
+            exitDuke();
         }
 
     }
@@ -124,11 +153,11 @@ public class Main extends Application {
             cache.addUserInput(userText);
 
             user.addText( userText );
+
             duke.addText( switcher.res(user.getText()) );
 
             displayUserInput();
 
-            System.out.println( userText );
             if( userText.equals( Config.EXIT_CMD ) ){
                 exitDuke();
             }
@@ -194,12 +223,16 @@ public class Main extends Application {
         displayUserInput();
     }
 
+    private void resetUserInputHistoryIndex(){
+        userInputHistoryIndex = 0;
+    }
+
     /**
      * Sets widths and heights for various components.
      * Sets positioning of child elements
      * @param stage top level JavaFX container
      */
-    private void resizeComponents(Stage stage){
+    private void resizeStage(Stage stage){
         stage.setResizable(false);
         stage.setMinHeight( Styles.STAGE_MIN_HEIGHT );
         stage.setMinWidth( Styles.STAGE_MIN_WIDTH );
@@ -223,9 +256,7 @@ public class Main extends Application {
             handleUserInput();
         });
 
-        userInput.setOnKeyPressed((event) -> {
-            handleKeyPress(event.getCode());
-        });
+        userInput.setOnKeyPressed( this::handleKeyEvent );
 
         //handles press send
         userInput.setOnAction((event) -> {

@@ -1,5 +1,6 @@
 package Backend;
 
+import Backend.Constants.AdvCommands;
 import Backend.Constants.Commands;
 import Backend.Constants.Messages;
 import Backend.Exceptions.DukeException;
@@ -57,11 +58,13 @@ public class Switcher {
                 case Commands.HELP:
                     return DynamicMessenger.sayHelp();
                 case Commands.LIST:
+                case AdvCommands.LIST:
                     return taskList.printTasks();
                 case Commands.DATE:
                     DateParser date = new DateParser(parser.parseDateString());
                     return taskList.printTasksByDate(date);
                 case Commands.FIND:
+                case AdvCommands.FIND:
                     String searchTerm = parser.parseContent();
                     return taskList.printTasksBySearchTerm(searchTerm);
             }
@@ -89,6 +92,7 @@ public class Switcher {
                     }
 
                 case Commands.DELETE:
+                case AdvCommands.DELETE:
                     Task removedTask = taskList.deleteTask(index);
                     return DynamicMessenger.sayRemovedTask(removedTask);
                 default:

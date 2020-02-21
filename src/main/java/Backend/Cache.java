@@ -15,7 +15,6 @@ public class Cache {
      */
     public Cache(){
         userInputHistory = new ArrayDeque<>();
-        userInputHistory.add( Commands.HELP );
     }
 
     /**
@@ -24,14 +23,11 @@ public class Cache {
      * @param userInput most recent user input
      */
     public void addUserInput( String userInput ){
-
-        if( userInputHistory.size() < MAX ){
-            userInputHistory.offerFirst(userInput);
-        } else {
+        if (userInputHistory.size() >= MAX) {
             userInputHistory.pollLast();
-            userInputHistory.offerFirst(userInput);
         }
 
+        userInputHistory.offerFirst(userInput);
     }
 
     /**
@@ -55,14 +51,14 @@ public class Cache {
     public String printUserInputHistory(){
         Object[] arr = userInputHistory.toArray();
 
-        StringBuilder userInputHistory = new StringBuilder();
+        StringBuilder userInputHistoryString = new StringBuilder();
 
+        int j = 0;
         for( int i = arr.length - 1; i > 0; i-- ){
-            userInputHistory.append( (String) arr[i] ).append( "\n" );
+            userInputHistoryString.append( i ).append(". ").append( arr[i] ).append( "\n" );
         }
 
-        return userInputHistory.toString();
-
+        return userInputHistoryString.toString();
     }
 
 

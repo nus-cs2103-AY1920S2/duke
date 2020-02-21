@@ -34,7 +34,7 @@ public class DukeException extends Exception {
         } else if( e instanceof  IndexOutOfBoundsException ){
             return "I don't think that exists sir.";
         } else if( e instanceof DateTimeParseException ){
-            return "The date you gave was familiar... but could you perhaps format it as YYYY-MM-MM?";
+            return "The date you gave was familiar... but could you perhaps format it as YYYY-MM-DD?";
         } else if( e instanceof FileNotFoundException ){
             return "I couldn't find the file I was supposed to sir. I'll try again tomorrow.";
         } else if( e instanceof IOException){

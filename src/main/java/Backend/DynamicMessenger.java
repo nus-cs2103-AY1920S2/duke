@@ -29,7 +29,7 @@ public class DynamicMessenger {
         }
 
         public static String sayHelp() throws DukeException{
-            return Storage.loadHelpFromFile();
+            return Messages.HELP_MSG;
         }
 
         public static String sayMarkedTaskAsDone( Task task ){

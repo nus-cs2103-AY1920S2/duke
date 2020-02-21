@@ -35,6 +35,7 @@ _**The task management tool for every busy professional**_
 
 ## Commands
 
+###Basic
 - `todo {task_name}` - adds `task_name` to the list of tasks
 - `event {task_name} /at {task_date}` - adds `task_name` as an event and specifies that it occurs at `task_date`
 - `deadline {task_name} /by {task_date}` - adds `task_name` as a deadline and specifies that it is due on `task_date`
@@ -43,9 +44,16 @@ _**The task management tool for every busy professional**_
 - `list` - lists all tasks
 - `find {search_term}` - searches for tasks that contain `search_term`
 - `date /on {date}` - searches for tasks that occur on or are due by `date`
-- `history` - prints out the list of past commands _(Max: 20)_
 - `exit` - exits the application
+
+###Advanced
+- `history` - prints out the list of past commands _(Max: 20)_
+- `rm {task_index}` - deletes the task at `task_index`
+- `ls` - lists all tasks
+- `grep {search_term}` - searches for tasks that contain `search_term`
 - <kbd>keyup</kbd> - cycles through the command history
+- <kbd>ctrl</kbd>+<kbd>c</kbd> - clears the input box
+- <kbd>ctrl</kbd>+<kbd>d</kbd> - exits the application
 
 ---
 
