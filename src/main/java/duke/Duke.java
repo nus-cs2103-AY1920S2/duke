@@ -65,7 +65,7 @@ public class Duke {
                 if (duke.tasks.isEmpty()) {
                     return "There are no tasks now.";
                 } else {
-                    return duke.tasks.list();
+                    return duke.tasks.toString();
                 }
             }
         },
@@ -79,7 +79,7 @@ public class Duke {
                 if (matchingTasks.isEmpty()) {
                     return "I didn't manage to find any matching tasks in your list :(";
                 } else {
-                    return "Here are the matching tasks in your list:\n" + matchingTasks.list();
+                    return "Here are the matching tasks in your list:\n" + matchingTasks;
                 }
             }
         },

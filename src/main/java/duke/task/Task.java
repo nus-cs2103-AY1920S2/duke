@@ -31,7 +31,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns true if the task is completed, false otherwise.
+     * Returns <code>true</code> if the task is completed, <code>false</code> otherwise.
      *
      * @return the completion status of task
      */
