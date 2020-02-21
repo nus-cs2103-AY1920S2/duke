@@ -24,7 +24,7 @@ Duke can perform any of the following commands:
 ## Running Duke
 1. Locate the jar file in the File Explorer or Finder.
 2. Type ‘cmd’ on the search bar and press ‘Enter’ to launch Command Prompt if on Windows or run Terminal if on MacOS.
-3. Execute the following command, assuming the jar file is named “duke-0.2.jar”
+3. Execute the following command, assuming the jar file is named “duke-0.2-all.jar”
 > `java -jar duke-0.2-all.jar`
 
 ## Features 
