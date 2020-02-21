@@ -262,7 +262,8 @@ public class Duke extends Application {
         printGoodbye();
     }
 
-    public Duke(String filePath) {
+    public Duke() {
+        String filePath = FILEPATH;
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -274,8 +275,7 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) throws DukeException {
-        new Duke(FILEPATH).run();
+        new Duke().run();
     }
 
-    public Duke(){}
 }
