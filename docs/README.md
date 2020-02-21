@@ -7,6 +7,13 @@ The Grandest Duke (TGD) is a task tracker desktop application aimed at helping u
 of their daily tasks. It has a clean and simple GUI which accepts user input as its main
 mode of interaction.
 
+## Quick start
+
+<img src="quick-start.png">
+
+User input commands are entered in the highlighted field. Press the 'SEND' button to send commands to TGD.
+**Note: Unless stated otherwise, all input commands in TGD are non case-sensitive**
+
 ## Features 
 
 ### 1. Adding a task : `todo`, `deadline`, `event`
@@ -21,7 +28,10 @@ todo <task description>
 deadline <task description> /<preposition> <date> <time>
 event <task description> /<preposition> <date> <time>
 ```
-Note: Date in ``YYYY-MM-DD`` format
+Note: 
+1. Date in ``YYYY-MM-DD`` format 
+2. Time is optional
+3. Task description is **case-sensitive** and will be reflected in the list accordingly 
 
 #### Example of usage:
 ```
@@ -37,7 +47,7 @@ When adding the commands in 'Examples of usage' in order, upon
 entering the 4th command `event Birthday party /on 2020-03-30 4pm`:
 ```
 Got it. I've added this task:
-[E][X] birthday party on Mar 30 2020 4pm
+[E][X] Birthday party on Mar 30 2020 4pm
 Now you have 4 tasks in the list.
 ```
 
@@ -62,8 +72,8 @@ done 1
 #### Expected outcome:
 With the existing tasks in the list,
 ```
-Nice! i've makred this task as done:
-    [T][✓]read a book
+Nice! i've marked this task as done:
+    1.[T][✓] read a book
 ```
 
 ### 4. Delete task : `delete`
@@ -78,12 +88,28 @@ Note: Task index is the task's number obtained from the `list` command
 delete 2
 ```
 
+### 5. Find task in list with keyword : `find`
+### Format:
+```
+find <keyword>
+```
+Note: 
+1. Keyword must be either
+    - Task description obtained from the `list` command
+    - Existing task type (ie. ``task``, ``todo``, ``event``, ``deadline``)
+2. Keyword 'task' will show all tasks (ie. same as ``list``)
+3. Search is *non case-sensitive*
+
+#### Example of usage:
+```
+find read
+```
+
 #### Expected outcome:
 With the existing tasks in the list,
 ```
-Noted. I've removed this task:
-[D][✗]AI project by Dec 30 2019 1300h
-Now you have 4 tasks in the list.
+Here are the matching tasks found in your list:
+    1.[T][✓] read a book
 ```
 
 ### 5. View TGD stats : `stats`
