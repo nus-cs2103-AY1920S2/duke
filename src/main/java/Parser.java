@@ -33,44 +33,46 @@ public class Parser {
      * @param taskList User's TaskList.
      * @param storage Storage class that reads from/write to a specified file.
      */
-    public void parseAndExecute(String command, TaskList taskList, Storage storage) {
+    public String parseAndExecute(String command, TaskList taskList, Storage storage) {
         String[] commandArray = command.split(" ", MINIMUM_COMMAND_LENGTH);
         try {
-            if (command.toLowerCase().equals("list")) {
-                Ui.printWithBorder(taskList.showList());
+            if (command.toLowerCase().equals("bye")) {
+                return "I believe this is farewell, my friend.";
+            } else if (command.toLowerCase().equals("list")) {
+                return taskList.showList();
             } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("done")) {
                 if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
-                    markTaskAsDone(taskList, commandArray[DESCRIPTION_POSITION]);
+                    return markTaskAsDone(taskList, commandArray[DESCRIPTION_POSITION]);
                 } else {
                     throw new DukeArgumentException("Please specify which task to be marked as done.");
                 }
             } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("delete")) {
                 if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
-                    deleteTask(taskList, commandArray[DESCRIPTION_POSITION]);
+                    return deleteTask(taskList, commandArray[DESCRIPTION_POSITION]);
                 } else {
                     throw new DukeArgumentException("Please specify which task to be deleted.");
                 }
             } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("find")) {
                 if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
-                    findTask(taskList, commandArray[DESCRIPTION_POSITION]);
+                    return findTask(taskList, commandArray[DESCRIPTION_POSITION]);
                 } else {
                     throw new DukeArgumentException("Please specify the keyword(s) that you want to search.");
                 }
             } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("todo")) {
                 if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
-                    addTask(taskList, commandArray[DESCRIPTION_POSITION], TODO_TYPE);
+                    return addTask(taskList, commandArray[DESCRIPTION_POSITION], TODO_TYPE);
                 } else {
                     throw new DukeArgumentException("Missing field in todo command.");
                 }
             } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("deadline")) {
                 if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
-                    addTask(taskList, commandArray[DESCRIPTION_POSITION], DEADLINE_TYPE);
+                    return addTask(taskList, commandArray[DESCRIPTION_POSITION], DEADLINE_TYPE);
                 } else {
                     throw new DukeArgumentException("Missing field in deadline command.");
                 }
             } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("event")) {
                 if (commandArray.length >= MINIMUM_COMMAND_LENGTH) {
-                    addTask(taskList, commandArray[DESCRIPTION_POSITION], EVENT_TYPE);
+                    return addTask(taskList, commandArray[DESCRIPTION_POSITION], EVENT_TYPE);
                 } else {
                     throw new DukeArgumentException("Missing field in event command.");
                 }
@@ -78,7 +80,7 @@ public class Parser {
                 throw new DukeUnknownException("Apologies, I do not recognise this command.");
             }
         } catch (DukeException err) {
-            Ui.printWithBorder(err.getMessage());
+            return err.getMessage();
         }
     }
 
@@ -89,33 +91,34 @@ public class Parser {
      * @param type Type of Task ("T" for Todo, "D" for Deadline, "E" for Event).
      * @throws DukeTaskException Throws exception related to Duke Task class.
      */
-    public static void addTask(TaskList taskList, String input, String type) throws DukeTaskException {
+    public static String addTask(TaskList taskList, String input, String type) throws DukeTaskException {
         String str = "\nCurrent number of task(s): ";
 
-        if (type.equals(TODO_TYPE)) {
+        switch (type) {
+        case TODO_TYPE:
             Task todo = new Todo(input);
             if (duplicatedTask(taskList, todo)) {
-                Ui.printWithBorder("This todo is already in your task list.");
+                return "This todo is already in your task list.";
             } else {
                 taskList.add(todo);
-                Ui.printWithBorder("The following to-do has been added:\n    "
-                        + todo.toString() + str + taskList.size());
+                return "The following to-do has been added:\n    "
+                        + todo.toString() + str + taskList.size();
             }
 
-        } else if (type.equals(DEADLINE_TYPE)) {
-            String[] arr = input.split("/", MINIMUM_DEADLINE_LENGTH);
-            if (arr.length >= MINIMUM_DEADLINE_LENGTH) {
-                String description = arr[DEADLINE_DESCRIPTION_POSITION];
-                String by = arr[DEADLINE_TIME_POSITION].split(" ", MINIMUM_DEADLINE_LENGTH)[DEADLINE_TIME_POSITION];
+        case DEADLINE_TYPE:
+            String[] arr1 = input.split("/", MINIMUM_DEADLINE_LENGTH);
+            if (arr1.length >= MINIMUM_DEADLINE_LENGTH) {
+                String description = arr1[DEADLINE_DESCRIPTION_POSITION];
+                String by = arr1[DEADLINE_TIME_POSITION].split(" ", MINIMUM_DEADLINE_LENGTH)[DEADLINE_TIME_POSITION];
                 if (isLocalDate(by)) {
                     LocalDate deadlineDate = LocalDate.parse(by);
                     Deadline deadline = new Deadline(description, deadlineDate);
                     if (duplicatedTask(taskList, deadline)) {
-                        Ui.printWithBorder("This deadline is already in your task list.");
+                        return "This deadline is already in your task list.";
                     } else {
                         taskList.add(deadline);
-                        Ui.printWithBorder("The following task has been added:\n"
-                                + "    " + deadline.toString() + str + taskList.size());
+                        return "The following task has been added:\n"
+                                + "    " + deadline.toString() + str + taskList.size();
                     }
                 } else {
                     throw new DukeTaskException("Invalid date format detected. "
@@ -125,20 +128,20 @@ public class Parser {
                 throw new DukeTaskException("\'/by\' field is missing.");
             }
 
-        } else if (type.equals(EVENT_TYPE)) {
-            String[] arr = input.split("/", MINIMUM_EVENT_LENGTH);
-            if (arr.length >= MINIMUM_EVENT_LENGTH) {
-                String description = arr[EVENT_DESCRIPTION_POSITION];
-                String at = arr[EVENT_TIME_POSITION].split(" ", MINIMUM_EVENT_LENGTH)[EVENT_TIME_POSITION];
+        case EVENT_TYPE:
+            String[] arr2 = input.split("/", MINIMUM_EVENT_LENGTH);
+            if (arr2.length >= MINIMUM_EVENT_LENGTH) {
+                String description = arr2[EVENT_DESCRIPTION_POSITION];
+                String at = arr2[EVENT_TIME_POSITION].split(" ", MINIMUM_EVENT_LENGTH)[EVENT_TIME_POSITION];
                 if (isLocalDate(at)) {
                     LocalDate eventDate = LocalDate.parse(at);
                     Event event = new Event(description, eventDate);
                     if (duplicatedTask(taskList, event)) {
-                        Ui.printWithBorder("This event is already in your task list.");
+                        return "This event is already in your task list.";
                     } else {
                         taskList.add(event);
-                        Ui.printWithBorder("The following task has been added:\n"
-                                + "    " + event.toString() + str + taskList.size());
+                        return "The following task has been added:\n"
+                                + "    " + event.toString() + str + taskList.size();
                     }
                 } else {
                     throw new DukeTaskException("Invalid date format detected. "
@@ -147,7 +150,9 @@ public class Parser {
             } else {
                 throw new DukeTaskException("\'/at\' field is missing.");
             }
+
         }
+        return "";
     }
 
     /**
@@ -170,14 +175,14 @@ public class Parser {
      * @param userIndex Index of Task to be marked as done.
      * @throws DukeArgumentException Throws exception related to invalid argument provided.
      */
-    public void markTaskAsDone(TaskList taskList, String userIndex) throws DukeArgumentException {
+    public String markTaskAsDone(TaskList taskList, String userIndex) throws DukeArgumentException {
         int index = Integer.parseInt(userIndex) - 1;
         if (taskList.isEmpty()) {
-            Ui.printWithBorder("There is no task in your list to be marked as done.");
+            return Ui.sendReply("There is no task in your list to be marked as done.");
         } else if (index < taskList.size()) {
             Task t = taskList.get(index);
             t.markAsDone();
-            Ui.printWithBorder("As per requested, the following task has been marked as done:\n"
+            return Ui.sendReply("As per requested, the following task has been marked as done:\n"
                     + "    " + t.toString());
         } else {
             throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
@@ -190,14 +195,14 @@ public class Parser {
      * @param userIndex Index of Task to be deleted.
      * @throws DukeArgumentException Throws exception related to invalid argument provided.
      */
-    public void deleteTask(TaskList taskList, String userIndex) throws DukeArgumentException {
+    public String deleteTask(TaskList taskList, String userIndex) throws DukeArgumentException {
         int index = Integer.parseInt(userIndex) - 1;
         if (taskList.isEmpty()) {
-            Ui.printWithBorder("There is no task in your list to be deleted.");
+            return Ui.sendReply("There is no task in your list to be deleted.");
         } else if (index < taskList.size()) {
             Task t = taskList.get(index);
             taskList.remove(index);
-            Ui.printWithBorder("As per requested, the following task has been deleted:\n"
+            return Ui.sendReply("As per requested, the following task has been deleted:\n"
                     + "    " + t.toString() + "\nCurrent number of task(s): " + taskList.size());
         } else {
             throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
@@ -209,10 +214,10 @@ public class Parser {
      * @param taskList User's TaskList.
      * @param keyword Keyword used to search the TaskList.
      */
-    public void findTask(TaskList taskList, String keyword) {
+    public String findTask(TaskList taskList, String keyword) {
         TaskList searchResult = taskList.findTask(keyword);
         if (searchResult.isEmpty()) {
-            Ui.printWithBorder("Apologies, I could not find any matching task.");
+            return "Apologies, I could not find any matching task.";
         } else {
             StringBuilder sb = new StringBuilder("After much deliberation, I found these matching tasks:");
             for (int i = 0; i < searchResult.size(); i++) {
@@ -220,7 +225,7 @@ public class Parser {
                 sb.append("\n    ");
                 sb.append(t.toString());
             }
-            Ui.printWithBorder(sb.toString());
+            return sb.toString();
         }
     }
 
@@ -237,8 +242,6 @@ public class Parser {
             if (task.getDescription().equals(current.getDescription()) && current.getStatus().equals("[X]")) {
                 isDuplicate = true;
                 break;
-            } else {
-                continue;
             }
         }
         return isDuplicate;

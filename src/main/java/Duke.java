@@ -13,9 +13,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Duke extends Application {
+    private Parser parser;
     private Storage storage;
     private TaskList taskList;
-    private boolean newUser;
+    private boolean isNewUser;
+    private static final String FILEPATH = "data/duke.txt";
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -26,46 +28,19 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public Duke () {}
-
     /**
      * Constructor for Duke class.
-     * @param filepath File path of .txt file for memory storage.
      */
-    public Duke(String filepath) {
-        storage = new Storage(filepath);
+    public Duke() {
+        parser = new Parser();
+        storage = new Storage(FILEPATH);
         try {
             taskList = storage.getTaskFromMemory();
-            newUser = false;
+            isNewUser = false;
         } catch (FileNotFoundException e) {
             taskList = new TaskList();
-            newUser = true;
+            isNewUser = true;
         }
-    }
-
-    /**
-     * Main running function of the Duke class.
-     * Integrates Storage, TaskList, Ui and Parser to perform the main intended function.
-     */
-    public void run() {
-        Ui.hello();
-        if (newUser) {
-            Ui.newUser();
-        } else {
-            Ui.oldUser();
-        }
-        Parser p = new Parser();
-        String command = Ui.readCommand();
-        while (!command.toLowerCase().equals("bye")) {
-            p.parseAndExecute(command, taskList, storage);
-            storage.writeTaskToMemory(taskList);
-            command = Ui.readCommand();
-        }
-        Ui.bye();
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 
     @Override
@@ -178,6 +153,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return parser.parseAndExecute(input, taskList, storage);
     }
 }

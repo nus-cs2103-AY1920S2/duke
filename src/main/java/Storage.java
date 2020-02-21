@@ -95,7 +95,7 @@ public class Storage {
             fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
-            Ui.printWithBorder(e.getMessage());
+            Ui.sendReply(e.getMessage());
         }
     }
 }
