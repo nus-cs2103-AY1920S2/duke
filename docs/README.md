@@ -1,6 +1,6 @@
 # User Guide: Cat Bot
 
-![Cat Bot](https://github.com/seanlowcy77/duke/blob/master/docs/Ui_light.png)
+![Cat Bot](https://github.com/seanlowcy77/duke/blob/master/docs/Ui.png)
 </br></br>
 Missing a Todo list? 
 </br></br>
@@ -338,7 +338,7 @@ Your List has been saved, Bye! Hope to see you again soon! Press the exit button
 
 Allows the user to toggle the colour theme.
 
-![Pixel Positions](https://github.com/seanlowcy77/duke/blob/master/docs/Ui_dark.png)
+![Pixel Positions](https://github.com/seanlowcy77/duke/blob/master/docs/Ui2.png)
 
 <br>
 
