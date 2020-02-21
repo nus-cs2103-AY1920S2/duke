@@ -2,10 +2,10 @@
 
 ## 1. Introduction
 
-Duke is an interactive To-Do List. :octocat:
+Duke is an interactive To-Do List.
 
 ## 2. Quick Start
-1. Download the `duke.jar` file.
+1. Download the `duke.jar` file [here](https://github.com/ziyingli/duke/releases/tag/A-Release).
 2. Copy the file to the folder you want to use. 
 3. Double click the file to start the app. 
 
