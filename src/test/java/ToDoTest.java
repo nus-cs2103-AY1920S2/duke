@@ -1,3 +1,4 @@
+import Duke.exception.DukeException;
 import Duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +15,7 @@ class ToDoTest {
     }
 
     @Test
-    void markDone() {
+    void markDone() throws DukeException {
         assertEquals(true, newToDo().markDone());
     }
 

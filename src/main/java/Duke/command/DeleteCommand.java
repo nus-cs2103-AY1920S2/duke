@@ -22,9 +22,9 @@ public class DeleteCommand extends Command {
             out = "Noted. I've removed this task:\n" +  currTask + "\nNow you have " + list.size()
                     + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            StringBuilder errMsg = new StringBuilder("☹ Ahhh!!! Please input a valid number in the range of the " +
-                    "task list to delete.\nUnsure? List the tasks out by typing the 'list' command to see your " +
-                    "available tasks and their respective task number.");
+            StringBuilder errMsg = new StringBuilder("☹ Ahhh!!! Please input a valid number in the range of the "
+                    + "task list to delete.\nUnsure? List the tasks out by typing the 'list' command to see your "
+                    + "available tasks and their respective task number.");
             if (!list.isEmpty()) {
                 if (list.size() == 1) {
                     errMsg.append("Available range: 1");
@@ -35,9 +35,9 @@ public class DeleteCommand extends Command {
             throw new DukeException(errMsg.toString());
 
         } catch (NumberFormatException e) { // when non-int arg provided
-            out = "☹ Ahhh!!! Delete must take a valid INTEGER in the range of the task list.\nUnsure? List the " +
-                    "tasks out by typing the 'list' command to see your available tasks and their respective " +
-                    "task number.";
+            out = "☹ Ahhh!!! Delete must take a valid INTEGER in the range of the task list.\nUnsure? List the "
+                    + "tasks out by typing the 'list' command to see your available tasks and their respective "
+                    + "task number.";
             throw new DukeException(out);
         } finally {
             storage.saveTask(list);

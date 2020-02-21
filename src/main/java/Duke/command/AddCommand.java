@@ -13,18 +13,22 @@ public class AddCommand extends Command {
         this.taskAdded = newTask;
     }
 
+    /**
+     * Executes the add command, to add task to task list, and save command in stats. Finally, save the task list.
+     * @return Success message if succesfully added task, otherwise, failure message.
+     */
     public String execute() {
         String out;
-            if (Objects.isNull(taskAdded)) {
-                out = "Attempting to add invalid task. Operation aborted.";
-            } else {
-                list.add(taskAdded);
-                stats.add(this);
-                out = "Got it. I've added this task:\n" + taskAdded + "\n" + "Now you have "
-                        + list.size() + " tasks in the list.";
-            }
-            storage.saveTask(list);
-            statStorage.saveStats(stats);
+        if (Objects.isNull(taskAdded)) {
+            out = "Attempting to add invalid task. Operation aborted.";
+        } else {
+            list.add(taskAdded);
+            stats.add(this);
+            out = "Got it. I've added this task:\n" + taskAdded + "\n" + "Now you have "
+                    + list.size() + " tasks in the list.";
+        }
+        storage.saveTask(list);
+        statStorage.saveStats(stats);
         return out;
     }
 

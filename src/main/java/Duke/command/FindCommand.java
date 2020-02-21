@@ -10,6 +10,11 @@ public class FindCommand extends Command {
         super(taskList, taskDesc);
     }
 
+    /**
+     * Executes the find command.
+     * @return success message if successfully executed, otherwise, throws DukeException
+     * @throws DukeException thrown when no keyword provided by user
+     */
     public String execute() throws DukeException {
         String out = "";
         try {

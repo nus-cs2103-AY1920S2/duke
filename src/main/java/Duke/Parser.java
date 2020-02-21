@@ -15,8 +15,8 @@ public class Parser {
     private static final String DATE_TIME_PARSE_ERROR =
             "Error parsing date and time. Please input date and time as YYYY-mm-dd hh:mm. (Time is optional)";
     private static final String EMPTY_DESCRIPTION_ERROR = "☹ OOPS!!! The description of a task cannot be empty.";
-    private static final String INVALID_DESCRIPTION_ERROR = "☹ OOPS!!! The description of a task must be added in " +
-            "the format:\nTask-type Task-description /Preposition Date Time(optional)";
+    private static final String INVALID_DESCRIPTION_ERROR = "☹ OOPS!!! The description of a task must be added in "
+            + "the format:\nTask-type Task-description /Preposition Date Time(optional)";
     private static final String INVALID_TASK_ERROR = "Attempting to add invalid task. Operation aborted.";
     private static final String EMPTY_LIST_PROMPT = "\nList is empty! Start by creating a task first.";
 
@@ -58,19 +58,15 @@ public class Parser {
                     Task newTask = createTask(commandType, taskDesc);
                     Command addCommand = new AddCommand(taskList, newTask);
                     outputString = addCommand.execute();
-                } else if (isValidCommand(commandType)) {
-                    if (commandType.equals("done")) {
-                        Command doneCommand = new DoneCommand(taskList, in);
-                        outputString = doneCommand.execute();
-                    } else if (commandType.equals("delete")) {
-                        Command deleteCommand = new DeleteCommand(taskList, in);
-                        outputString = deleteCommand.execute();
-                    } else if (commandType.equals("find")) {
-                        Command findCommand = new FindCommand(taskList, in);
-                        outputString = findCommand.execute();
-                    } else {
-
-                    }
+                } else if (commandType.equals("done")) {
+                    Command doneCommand = new DoneCommand(taskList, in);
+                    outputString = doneCommand.execute();
+                } else if (commandType.equals("delete")) {
+                    Command deleteCommand = new DeleteCommand(taskList, in);
+                    outputString = deleteCommand.execute();
+                } else if (commandType.equals("find")) {
+                    Command findCommand = new FindCommand(taskList, in);
+                    outputString = findCommand.execute();
                 } else if (in.isEmpty() || in == null) {
                     Command emptyCommand = new EmptyCommand();
                     outputString = emptyCommand.execute();
@@ -85,14 +81,14 @@ public class Parser {
             outputString = EMPTY_DESCRIPTION_ERROR;
         } catch (DukeException e) {
             outputString = e.getMessage();
-        }
-        finally {
+        } finally {
             if (taskList.getTaskList().isEmpty()) { //Prompt user to add task if list is empty
                 outputString += EMPTY_LIST_PROMPT;
             }
-            assert outputString != null;
+            assert (outputString != null) && (!outputString.trim().isEmpty());
             return outputString;
         }
+
     }
 
     private static Task createTask(String taskType, String taskDesc) throws DukeException {
@@ -148,9 +144,5 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(INVALID_DESCRIPTION_ERROR);
         }
-    }
-
-    private static boolean isValidCommand(String taskType) {
-        return taskType.equals("done") || taskType.equals("delete") || taskType.equals("find");
     }
 }

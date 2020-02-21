@@ -26,7 +26,6 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("The Grandest Duke");
-//            stage.resizableProperty().setValue(false);
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent event) {
                     event.consume();

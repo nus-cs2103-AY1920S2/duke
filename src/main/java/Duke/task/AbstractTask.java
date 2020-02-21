@@ -28,20 +28,6 @@ public abstract class AbstractTask implements Task {
     }
 
     /**
-     * Constructor for AbstractTask class with additional date field.
-     * @param taskName Name or description of the event
-     * @param preposition English word string to indicate the date clearly (eg. at, by, before, between)
-     * @param date Date of event
-     */
-//    public AbstractTask(String taskName, String preposition, LocalDate date) {
-//        this.taskName = taskName;
-//        this.preposition = preposition;
-//        this.date = date;
-//        this.time = null;
-//        this.isDone = false;
-//    }
-
-    /**
      * Constructor for AbstractTask class.
      * @param taskName Name or description of the event
      */
@@ -64,6 +50,11 @@ public abstract class AbstractTask implements Task {
 
     protected abstract String taskType();
 
+    /**
+     * Marks task as done, and throws exception if the task is already done.
+     * @return true if task is done, otherwise, false
+     * @throws DukeException if task is already done, exception thrown indicating task is already done
+     */
     public boolean markDone() throws DukeException {
         if (this.isDone) {
             throw new DukeException("Good job! Task has already been done!");

@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
                     + "List the tasks out by typing the 'list' command to see your available tasks and their respective"
                     + " task number.";
             if (!list.isEmpty()) {
-                out += (list.size() == 1) ? "\nAvailable range: 1": "Available range from 1 to " + list.size();
+                out += (list.size() == 1) ? "\nAvailable range: 1" : "Available range from 1 to " + list.size();
             }
             throw new DukeException(out);
 

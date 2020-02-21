@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 
+import Duke.exception.DukeException;
 import Duke.task.Event;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +24,7 @@ class EventTest {
     }
 
     @Test
-    void markDone() {
+    void markDone() throws DukeException {
         assertEquals(true, newEvent().markDone());
     }
 

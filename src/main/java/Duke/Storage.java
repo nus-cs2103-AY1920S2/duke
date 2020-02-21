@@ -3,7 +3,13 @@ package Duke;
 import Duke.command.Command;
 import Duke.task.Task;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -79,7 +85,7 @@ public class Storage implements Serializable {
 
     /**
      * Saves statistics to current storage.
-     * @param stats Statistic to be saved in storage
+     * @param commandList Command list to be saved in storage
      */
     public void saveStats(List<Command> commandList) {
         try {

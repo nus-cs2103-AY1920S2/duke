@@ -18,8 +18,13 @@ public abstract class Command implements Serializable {
     /**
      * Default constructor for empty, exit and unknown command, which are not recorded in statistics.
      */
-    public Command() {}
+    public Command() {
+    }
 
+    /**
+     * Constructor for command class with associated taskList.
+     * @param tl taskList which command will operate on
+     */
     public Command(TaskList tl) {
         this.tl = tl;
         this.list = tl.getTaskList();
@@ -28,6 +33,11 @@ public abstract class Command implements Serializable {
         this.statStorage = tl.getStatStorage();
     }
 
+    /**
+     * Constructor for command class with associated taskList and task description.
+     * @param tl taskList which command will operate on
+     * @param taskDesc task description
+     */
     public Command(TaskList tl, String taskDesc) {
         this.tl = tl;
         this.taskDesc = taskDesc;

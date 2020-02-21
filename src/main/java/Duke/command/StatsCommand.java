@@ -11,6 +11,10 @@ public class StatsCommand extends Command {
         super(taskList);
     }
 
+    /**
+     * Executes stats command.
+     * @return Statistics related to user input on add, done, and delete task operations on the task list.
+     */
     public String execute() {
         StringBuilder output;
         List<Command> addStats = stats.stream().filter(p -> p instanceof AddCommand)
@@ -36,7 +40,7 @@ public class StatsCommand extends Command {
         return output.toString();
     }
 
-    public StringBuilder appendCommandString(List<Command> commandList) {
+    private StringBuilder appendCommandString(List<Command> commandList) {
         StringBuilder output = new StringBuilder();
         int i = 1;
         for (Command c : commandList) {
