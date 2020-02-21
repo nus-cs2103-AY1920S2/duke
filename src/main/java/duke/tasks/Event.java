@@ -9,6 +9,12 @@ public class Event extends TimedTask {
     protected LocalDateTime start;
     protected LocalDateTime end;
 
+    /**
+     * Initialises an Event with the given name, start time and end time.
+     * @param name Name of Event.
+     * @param start Start of Event.
+     * @param end End of Event.
+     */
     public Event(String name, LocalDateTime start, LocalDateTime end) {
         super(name);
         this.start = start;

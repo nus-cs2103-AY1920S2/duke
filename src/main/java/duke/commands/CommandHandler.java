@@ -21,6 +21,12 @@ public class CommandHandler {
     private HashMap<String, Command> commands;
     private boolean isActive;
 
+    /**
+     * Creates a CommandHandler.
+     * @param tasks List of tasks.
+     * @param ui User interface.
+     * @param storage Persistent storage.
+     */
     public CommandHandler(TaskList tasks, Ui ui, Storage storage) {
         this.tasks = tasks;
         this.ui = ui;

@@ -19,6 +19,4 @@ public abstract class TimedTask extends Task {
         return dtf.format(dt);
     }
 
-    @Override
-    abstract public String toString();
 }

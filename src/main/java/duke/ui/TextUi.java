@@ -17,6 +17,9 @@ public class TextUi implements Ui {
         System.out.print(formatReply(error));
     }
 
+    /**
+     * Displays a text greeting to the user.
+     */
     public void showGreeting() {
         StringBuilder sb = new StringBuilder();
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"

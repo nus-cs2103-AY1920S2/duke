@@ -65,7 +65,7 @@ public class TaskList {
     }
 
     /**
-     * Removes a specified Task from the TaskList
+     * Removes a specified Task from the TaskList.
      * 
      * @param taskNo Task number to be removed.
      * @return Task object that has been removed.

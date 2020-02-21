@@ -21,12 +21,19 @@ import duke.exceptions.DukeException;
 public class TextStorage implements Storage {
     private String filePath;
 
+    /**
+     * Initialises a TextStorage that saves to the given filepath.
+     * @param filePath Location of save file.
+     */
     public TextStorage(String filePath) {
         this.filePath = filePath;
         // Create directories if they do not exist
         new File(filePath).getParentFile().mkdirs();
     }
 
+    /**
+     * Loads a list of tasks from the filePath.
+     */
     public List<Task> load() throws FileNotFoundException, DukeException {
         List<Task> tasks = new ArrayList<>();
         Scanner s = new Scanner(new File(filePath));
@@ -56,6 +63,9 @@ public class TextStorage implements Storage {
         return tasks;
     }
 
+    /**
+     * Saves a list of tasks to the filePath.
+     */
     public void save(List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks) {

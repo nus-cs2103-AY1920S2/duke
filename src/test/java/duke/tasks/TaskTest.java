@@ -12,15 +12,15 @@ public class TaskTest {
         task.markAsDone();
         assertEquals("\u2713", task.getStatus());
     }
-}
 
-class TaskStub extends Task {
-    public TaskStub(String name) {
-        super(name);
-    }
+    class TaskStub extends Task {
+        public TaskStub(String name) {
+            super(name);
+        }
 
-    @Override
-    public String toString() {
-        return name;
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 }

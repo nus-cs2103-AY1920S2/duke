@@ -90,6 +90,9 @@ public class Gui extends AnchorPane implements Ui {
         }
     }
 
+    /**
+     * Obtains input from the user.
+     */
     @FXML
     public String getInput() {
         try {
@@ -104,13 +107,16 @@ public class Gui extends AnchorPane implements Ui {
         return input;
     }
 
+    /**
+     * Shuts down the Gui.
+     */
     public void shutDown() {
         try {
             Thread.sleep(1000);
             Platform.exit();
-		} catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             showError("Interrupted!");
-		}
+        }
     }
 
     /**

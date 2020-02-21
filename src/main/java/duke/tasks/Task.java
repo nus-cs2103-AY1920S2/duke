@@ -28,7 +28,8 @@ public abstract class Task {
     }
 
     /**
-     * @return A unicode tick or cross to represent Task completion status.
+     * Gets the Task completion status.
+     * @return A unicode tick or cross.
      */
     public String getStatus() {
         return isDone ? "\u2713" : "\u2718";

@@ -11,12 +11,14 @@ import java.time.temporal.TemporalAccessor;
 import duke.exceptions.DukeException;
 
 /**
- * A wrapper around multiple DateTimeFormatters that parses user-entered
- * date/times
+ * A wrapper around multiple DateTimeFormatters that parses user-entered date/times.
  */
 public class DateTimeParser {
     private List<DateTimeFormatter> dtFormatters = new ArrayList<>();
 
+    /**
+     * Initialises a DateTimeParser.
+     */
     public DateTimeParser() {
         dtFormatters.add(DateTimeFormatter.ofPattern("dd/MM/yyyy[ HH][:][mm][:ss]"));
         dtFormatters.add(DateTimeFormatter.ofPattern("dd-MM-yyyy[ HH][:][mm][:ss]"));
@@ -28,8 +30,8 @@ public class DateTimeParser {
      * specified, it is automatically set to start of day.
      * 
      * @param str User-entered string representing date/time.
-     * @throws DukeException If unable to parse string.
      * @return LocalDateTime parsed from user input.
+     * @throws DukeException If unable to parse string.
      */
     public LocalDateTime parse(String str) throws DukeException {
         assert dtFormatters.size() > 0 : "There should be at least one DateTimeFormatter";

@@ -15,18 +15,12 @@ public class DateTimeParserTest {
     @Test
     public void testParsingOfDateTimes() throws DukeException {
         DateTimeParser dtp = new DateTimeParser();
-        String invalidDate = "11/13/2000";
-        String validDateWithSlash = "11/12/2000";
-        String validDateWithDash = "11-12-2000";
-        String validDateWithSpace = "11 12 2000";
         LocalDateTime expectedDate = LocalDate.parse("2000-12-11").atStartOfDay();
-        String validDateTime = "11/12/2000 1600";
-        LocalDateTime expectedDateTime = LocalDateTime.parse("2000-12-11T16:00:00");
 
-        assertThrows(DukeException.class, () -> dtp.parse(invalidDate));
-        assertEquals(expectedDate, dtp.parse(validDateWithSlash));
-        assertEquals(expectedDate, dtp.parse(validDateWithDash));
-        assertEquals(expectedDate, dtp.parse(validDateWithSpace));
-        assertEquals(expectedDateTime, dtp.parse(validDateTime));
+        assertThrows(DukeException.class, () -> dtp.parse("11/13/2000")); // invalid date
+        assertEquals(expectedDate, dtp.parse("11/12/2000")); // date with slash
+        assertEquals(expectedDate, dtp.parse("11-12-2000")); // date with dash
+        assertEquals(expectedDate, dtp.parse("11 12 2000")); // date with space
+        assertEquals(LocalDateTime.parse("2000-12-11T16:00:00"), dtp.parse("11/12/2000 1600"));
     }
 }

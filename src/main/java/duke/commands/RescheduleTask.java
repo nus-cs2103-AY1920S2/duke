@@ -17,7 +17,7 @@ import duke.exceptions.DukeException;
  * Reschedules an existing Task.
  */
 class RescheduleTask extends TimedCommand {
-    final int NOT_FOUND = -1;
+    private final int NOT_FOUND = -1;
 
     public RescheduleTask(DateTimeParser dtParser) {
         super(dtParser);
