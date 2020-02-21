@@ -5,6 +5,7 @@ import duke.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * A class to add, delete and mark tasks as done.
@@ -44,12 +45,13 @@ public class TaskList {
         try {
             Arrays.sort(taskNumbers);
             for (int i = taskNumbers.length - 1; i >= 0; i--) {
-                Task task = taskList.remove(i);
+                Task task = taskList.remove(taskNumbers[i]);
                 deletedTasks.add(task);
             }
         } catch (IndexOutOfBoundsException e) { // throw DukeException
             throw new DukeException(DukeError.NUMBER);
         }
+        Collections.reverse(deletedTasks);
         return deletedTasks;
     }
 
