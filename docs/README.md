@@ -1,6 +1,6 @@
 # User Guide: Cat Bot
 
-![Cat Bot](https://github.com/seanlowcy77/duke/blob/master/docs/Ui.png)
+![Cat Bot](./Ui.png)
 
 
 Missing a Todo list? 
@@ -13,7 +13,7 @@ Cat bot saves a list of things you want to do!
 
 ### Easy to use GUI
 
-Has an easy to use user interface with intuitive commands, along with theme toggling and exit button functionality.
+Has an easy-to-use user interface with intuitive commands, along with theme toggling and exit button functionality.
 
 ### Holds 3 different task types
 
@@ -335,7 +335,7 @@ Your List has been saved, Bye! Hope to see you again soon! Press the exit button
 
 Allows the user to toggle the colour theme.
 
-![Pixel Positions](https://github.com/seanlowcy77/duke/blob/master/docs/Ui2.png)
+![Pixel Positions](./Ui2.png)
 
 <br>
 
