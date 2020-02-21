@@ -1,7 +1,7 @@
 # User Guide
 
 ## Introduction
-This is a **chat-bot** called *Duke* for tracking the user's tasks.
+This is a **chat-bot** called **Duke** for tracking the user's tasks.
 
 
 ### Type of tasks
@@ -33,7 +33,7 @@ Example of usage:
 
 #### Usage
 Allows the user to delete a task in the list.
-Requires a valid *index number* of the task.
+Requires a valid **index number** of the task.
 
 
 #### keyword `delete [index]`
@@ -44,7 +44,7 @@ Example of usage:
 
 ### Feature 3 - Mark a task as done
 Allows the user to mark a task in the list as done.
-Requires a valid *index number* of the task.
+Requires a valid **index number** of the task.
 
 #### keyword `done [index]`
 
@@ -61,8 +61,8 @@ Example of usage:
 
 `list` (Print the list of tasks)
 
-### Feature 5 - Find the task using a *keyword*
-Allows the user find the list of task containing the *keyword*.
+### Feature 5 - Find the task using a **keyword**
+Allows the user find the list of task containing the **keyword**.
 
 #### keyword `find [keyword]`
 
