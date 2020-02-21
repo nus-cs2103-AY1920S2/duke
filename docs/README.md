@@ -113,3 +113,8 @@ Eevee is your personal task manager, specially catered towards busy SoC students
   `Here are the matching tasks in your list:`<br />
   `[T][✗] study cs2103`<br />
   `[T][✗] study cs2106`<br />
+
+## Acknowledgements
+- Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
+  _Marco Jakob_.
+- Libraries used: https://openjfx.io/[JavaFX], https://github.com/junit-team/junit5[JUnit5]

@@ -57,7 +57,7 @@ public class Parser {
                     throw new DukeException("Unexpected command: " + command);
                 }
             } catch (Exception e) {
-                throw new DukeException("Error: " + e.getMessage()
+                throw new DukeException("There is an error!"
                         + "\nType 'help' to refer to commands and their formats.");
             }
         }
