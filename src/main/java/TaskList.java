@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.lang.StringBuilder;
 import java.io.IOException;
 
-
 /**
  * Represents a TaskList which contains functions which handles adding,
  * removing or listing out tasks as depicted by commands from the
@@ -11,22 +10,27 @@ import java.io.IOException;
 public class TaskList {
     private ArrayList<Task> list;
     private Ui ui;
-    private int latest_index;
+    private int latestIndex;
     private Storage storage;
     private StringBuilder sb;
 
-    public TaskList(ArrayList<Task> list, int latest_index, Storage storage) {
+    /**
+     * Constructor for TaskList which takes in the list of tasks, the latest task index
+     * as well as the storage object to store the list.
+     *
+     * @param list the list of tasks.
+     * @param latestIndex the latest index of the tasks.
+     * @param storage the storage object to store the asks after the application closes.
+     */
+
+
+    public TaskList(ArrayList<Task> list, int latestIndex, Storage storage) {
         this.list = list;
         this.ui = new Ui();
-        this.latest_index = latest_index;
+        this.latestIndex = latestIndex;
         this.storage = storage;
     }
 
-    public int getLatest_index() {
-
-        assert latest_index < Integer.MAX_VALUE : "Too many tasks!";
-        return latest_index;
-    }
 
     /**
      * Updates the Index of each task whenever a task is deleted.
@@ -41,6 +45,7 @@ public class TaskList {
     /**
      * Deletes the task at the position that is inputted or deletes all tasks if 'delete all' in inputted. Also
      * informs the user if there is no such position in the list or if the input is not a number.
+     *
      * @param input the input, normally a number, that is entered.
      * @return the reply message to be sent back to the user.
      */
@@ -53,7 +58,7 @@ public class TaskList {
 
         if (input.equals("all")) {
             list.clear();
-            latest_index = 0;
+            latestIndex = 0;
             return ui.deleteAll();
         }
 
@@ -68,9 +73,9 @@ public class TaskList {
 
             list.remove(i);
             updateIndex();
-            latest_index--;
+            latestIndex--;
 
-            sb.append("\nNow you have a total of " + latest_index + " Tasks in your list");
+            sb.append("\nNow you have a total of " + latestIndex + " Tasks in your list");
 
         } catch (IndexOutOfBoundsException e) {
             sb.append(ui.nosuchNumber());
@@ -104,10 +109,10 @@ public class TaskList {
         if (checkEmpty(input)) {
             return ui.emptyCmd();
         }
-        Todo todo = new Todo(input, ++latest_index);
+        Todo todo = new Todo(input, ++latestIndex);
         list.add(todo);
-        return "Got it. I have added this task:\n" + todo.toString() +
-                "\nNow you have a total of " + latest_index + " Tasks in your list";
+        return "Got it. I have added this task:\n" + todo.toString()
+                + "\nNow you have a total of " + latestIndex + " Tasks in your list";
 
     }
 
@@ -148,9 +153,9 @@ public class TaskList {
 
     /**
      * Produces a Deadline class object which is added into the list. The user will also be informed of the
-     * Deadline object that is created. Should the 'deadline'
-     * command be given more than once or the '/by' command not given, the user will be informed and
-     * the object will not be created.
+     * Deadline object that is created. Should the 'deadline' command be given more than once or the '/by'
+     * command not given, the user will be informed and the object will not be created.
+     *
      * @param input the description of the deadline task that is inputted by the user.
      * @return the reply message to be sent back to the user.
      */
@@ -178,15 +183,15 @@ public class TaskList {
                 return ui.emptyCmd();
             }
 
-            Deadline deadline = new Deadline(strings[0], strings[1],++latest_index);
+            Deadline deadline = new Deadline(strings[0], strings[1],++latestIndex);
             list.add(deadline);
 
             if (!deadline.getDateSavedStatus()) {
                 sb.append(ui.dateRequired());
             }
 
-            sb.append("Got it. I have added this task:\n" + deadline.toString() +
-                    "\nNow you have a total of " + latest_index + " Tasks in your list");
+            sb.append("Got it. I have added this task:\n" + deadline.toString()
+                    + "\nNow you have a total of " + latestIndex + " Tasks in your list");
 
 
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -198,8 +203,6 @@ public class TaskList {
         } finally {
             return sb.toString();
         }
-
-
     }
 
 
@@ -216,19 +219,19 @@ public class TaskList {
 
         desc = desc.replace("find","");
         desc = desc.trim();
-        boolean at_least_one = false;
+        boolean atLeastOne = false;
         int count = 1;
         sb = new StringBuilder();
 
         for (Task task : list) {
             if (task.description.contains(desc)) {
-                at_least_one = true;
+                atLeastOne = true;
                 sb.append(task.toString());
                 sb.append("\n");
             }
         }
 
-        if (!at_least_one) {
+        if (!atLeastOne) {
             return ui.noMatchingTasks();
         } else {
             sb.insert(0, ui.matchingTasks() + "\n");
@@ -239,16 +242,12 @@ public class TaskList {
 
     /**
      * Produces an Event class object which is added into the list. The user will also be informed of the
-     * Event object that is created. Should the 'event'
-     * command be given more than once or the '/at' command not given, the user will be informed and
-     * the object will not be created.
+     * Event object that is created. Should the 'event' command be given more than once or the '/at'
+     * command not given, the user will be informed and the object will not be created.
      *
-     * @param input the description of the task that is inputted by the user
-     * @return the reply message to be sent back to the user
+     * @param input the description of the task that is inputted by the user.
+     * @return the reply message to be sent back to the user.
      */
-
-
-
     public String event(String input) {
         assert input != null : "Event command input is empty!";
         sb = new StringBuilder();
@@ -273,7 +272,7 @@ public class TaskList {
                 return ui.emptyCmd();
             }
 
-            Event event = new Event(strings[0],strings[1],++latest_index);
+            Event event = new Event(strings[0],strings[1],++latestIndex);
             list.add(event);
 
 
@@ -281,8 +280,8 @@ public class TaskList {
                 sb.append(ui.dateRequired());
             }
 
-            sb.append("Got it. I have added this task:\n" + event.toString() +
-                    "\nNow you have a total of " + latest_index + " Tasks in your list");
+            sb.append("Got it. I have added this task:\n" + event.toString()
+                    + "\nNow you have a total of " + latestIndex + " Tasks in your list");
 
         } catch (ArrayIndexOutOfBoundsException e) {
             sb.append(ui.inputByCmd());
@@ -339,8 +338,9 @@ public class TaskList {
     /**
      * Bye function which runs when the user inputs 'bye'. The list is then written into a text file and saved
      * until future running of the application.
-     * @return the reply message to be sent back to the user
-     * @throws Exception If any issue with any function
+     *
+     * @return the reply message to be sent back to the user.
+     * @throws Exception If any issue with any function.
      */
     public String bye() {
         try {
@@ -354,14 +354,15 @@ public class TaskList {
 
     /**
      * Returns the list in the form of a string when the user inputs the 'list' function into the UI.
-     * Iterates through all the tasks in the list and calls
-     * the overloaded toString function of the respective Tasks.
+     * Iterates through all the tasks in the list and calls the overloaded
+     * toString function of the respective Tasks.
+     *
      * @return the list of Tasks to be sent back to the user.
      */
     public String printList() {
         sb = new StringBuilder();
 
-        if (latest_index == 0) {
+        if (latestIndex == 0) {
             sb.append(ui.emptyList());
         } else {
             sb.append(ui.currList());
@@ -376,6 +377,8 @@ public class TaskList {
     /**
      * Retrieves the full details of a particular task. If all details are requested,
      * details of all the Tasks in the list are returned.
+     *
+     * @param input the input sent by the user.
      * @return sends the full list of Tasks along with all additional details in a string format.
      */
 
@@ -388,12 +391,13 @@ public class TaskList {
 
         if (list.size() == 0) {
             return ui.emptyList();
-        }
-        else if (taskNumber.equals("all")) {
+
+        } else if (taskNumber.equals("all")) {
             for (Task t : list) {
                 sb.append(t.details() + "\n");
             }
             sb.insert(0, "Your Task Details are as follows:\n\n");
+
         } else {
             try {
                 int i = Integer.parseInt(taskNumber) - 1;

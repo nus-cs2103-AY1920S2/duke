@@ -43,6 +43,12 @@ public class Parser {
         this.sc = new Scanner(System.in);
         this.ui = new Ui();
     }
+
+    /**
+     * Function to parse commands inputted by the user.
+     * @param str the string containing the input by the user.
+     * @return the response by the bot.
+     */
     public String parseCommands(String str) {
         assert str != null : "String for parsing commands is null";
 

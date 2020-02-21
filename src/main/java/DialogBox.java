@@ -45,7 +45,6 @@ public class DialogBox extends HBox {
      * @param text the text that is to be sent by the user.
      * @param img the Image to be used in the Dialog box.
      */
-
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -56,6 +55,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // Solution below adapted from https://stackoverflow.com/a/38010904
         double w = displayPicture.getFitWidth();
         double h = displayPicture.getFitHeight();
         Ellipse ellipse = new Ellipse(w / 2.7, h / 2.7, w / 2.7, h / 2.7);
@@ -65,8 +65,6 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
     }
-
-
 
 
     /**
@@ -90,12 +88,14 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.setSpacing(5);
         db.setStyle("-fx-padding: 5;");
+        //@@author {ybchen97}-reused setStyle code template with some modifications
         db.dialog.setStyle("-fx-background-color: linear-gradient(#f7d2d4, #deadaf, #f7d2d4);"
                 + "-fx-background-radius: 10;"
                 + "-fx-padding: 10;"
                 + "-fx-text-fill: #85464a;"
                 + "-fx-stroke-width: 50;"
                 + "-fx-stroke: pin;");
+        //@@author
         return db;
     }
 
@@ -110,11 +110,13 @@ public class DialogBox extends HBox {
         db.flip();
         db.setSpacing(5);
         db.setStyle("-fx-padding: 5;");
+        //@@author {ybchen97}-reused setStyle code template with some modifications
         db.dialog.setStyle("-fx-background-color: #ffffff;"
                 + "-fx-background-radius: 10;"
                 + "-fx-padding: 10;"
                 + "-fx-text-fill: #9b6a6c;"
                 + "-fx-max-height: 400;");
+        //@@author
         return db;
     }
 }

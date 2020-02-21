@@ -17,6 +17,13 @@ public class Storage {
     private int latestIndex = 0;
     private BufferedWriter bw;
 
+    /**
+     * Reads the text file holding a record of the list of tasks in string format, adding them into an Arraylist.
+     * Activates when the application first runs. A new text file is created if there is no
+     * record of tasks to be read.
+     *
+     * @return an arraylist holding all the tasks
+     */
     public ArrayList<Task> readFile() {
         ArrayList<Task> list = new ArrayList<>();
         String line;
@@ -26,7 +33,6 @@ public class Storage {
             br = new BufferedReader(new FileReader(fileName));
             try {
                 while ((line = br.readLine()) != null) {
-                    System.out.println(line);
                     list = processLines(line, list);
                 }
             } catch (Exception e) {
@@ -43,38 +49,36 @@ public class Storage {
         return list;
     }
 
-/*
     /**
-     * Returns lateral location of the specified position.
-     * If the position is unset, NaN is returned.
+     * Processes each line from the text file containing the tasks in string format, creating
+     * new Task objects and adding them into the arraylist.
      *
-     * @param x  X coordinate of position.
-     * @param y Y coordinate of position.
-     * @param zone Zone of position.
-     * @return Lateral location.
-     * @throws IllegalArgumentException  If zone is <= 0.
+     * @param line the line of each task in string format.
+     * @param list the list containing the tasks.
+     * @return a list containing the tasks.
      */
     public ArrayList<Task> processLines(String line, ArrayList<Task> list) {
 
-        int time_start_index = 0;
-        int desc_end_index = 0;
+        int timeStartIndex = 0;
+        int descEndIndex = 0;
         line = line.substring(3);
         String desc;
         String time;
-        String new_line = line.substring(7);
+        boolean done;
+        String newLine = line.substring(7);
         if (line.charAt(1) == 'E') {
-            boolean done = line.charAt(4) == 'N' ? false : true;
+            done = line.charAt(4) == 'N' ? false : true;
             for (int i = 7; i < line.length() - 5; i++) {
                 if (line.substring(i, i + 5).equals("(at: ")) {
 
-                    time_start_index = i + 4;
-                    desc_end_index = i - 1;
+                    timeStartIndex = i + 4;
+                    descEndIndex = i - 1;
                     break;
                 }
             }
 
-            desc = line.substring(7, desc_end_index);
-            time = line.substring(time_start_index);
+            desc = line.substring(7, descEndIndex);
+            time = line.substring(timeStartIndex);
             time = time.substring(0, time.length() - 1);
 
             Event event = new Event(desc, time, ++latestIndex);
@@ -83,19 +87,19 @@ public class Storage {
 
 
         } else if (line.charAt(1) == 'D') {
-            boolean done = line.charAt(4) == 'N' ? false : true;
+            done = line.charAt(4) == 'N' ? false : true;
 
             for (int i = 7; i < line.length() - 5; i++) {
                 if (line.substring(i, i + 5).equals("(by: ")) {
 
-                    time_start_index = i + 4;
-                    desc_end_index = i - 1;
+                    timeStartIndex = i + 4;
+                    descEndIndex = i - 1;
                     break;
                 }
             }
 
-            desc = line.substring(7, desc_end_index);
-            time = line.substring(time_start_index);
+            desc = line.substring(7, descEndIndex);
+            time = line.substring(timeStartIndex);
             time = time.substring(0, time.length() - 1);
             Deadline deadline = new Deadline(desc, time, ++latestIndex);
             deadline.isDone = done;
@@ -103,9 +107,9 @@ public class Storage {
 
 
 
-        } else if (line.charAt(1) == 'T'){
-            boolean done = line.charAt(4) == 'N' ? false : true;
-            desc = new_line;
+        } else if (line.charAt(1) == 'T') {
+            done = line.charAt(4) == 'N' ? false : true;
+            desc = newLine;
 
             Todo todo = new Todo(desc, ++latestIndex);
             list.add(todo);
@@ -118,20 +122,15 @@ public class Storage {
         return list;
     }
 
-    /*
     /**
-     * Returns lateral location of the specified position.
-     * If the position is unset, NaN is returned.
+     * Function to store the tasks in a text file when user wants to close the application.
      *
-     * @param x  X coordinate of position.
-     * @param y Y coordinate of position.
-     * @param zone Zone of position.
-     * @return Lateral location.
-     * @throws IllegalArgumentException  If zone is <= 0.
+     * @param tasklist the tasklist containing a list of tasks.
+     * @throws IOException If any issue with bufferedwriter.
      */
-    public void writeFile(ArrayList<Task> temp_list) throws IOException {
+    public void writeFile(ArrayList<Task> tasklist) throws IOException {
         bw = new BufferedWriter(new FileWriter(fileName));
-        for (Task t : temp_list) {
+        for (Task t : tasklist) {
             bw.write(t.toString() + "\n");
         }
         bw.close();
