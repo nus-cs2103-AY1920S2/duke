@@ -20,7 +20,6 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-            //fxmlLoader.<MainWindow>getController().sendWelcomeText();
             duke.run();
         } catch (Exception e) {
             e.printStackTrace();

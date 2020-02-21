@@ -10,7 +10,13 @@ public class Task {
     protected String type = "-";
     protected int index;
 
-
+    /**
+     * Constructor for Task object which contains a description as well as a number.
+     * When a Task object is first created, it is not done.
+     *
+     * @param description the description of the task.
+     * @param index the index or number associated to the task.
+     */
     public Task(String description, int index) {
         this.description = description;
         this.isDone = false;
@@ -18,8 +24,8 @@ public class Task {
     }
 
 
-    public void set_Index(int new_index) {
-        index = new_index;
+    public void set_Index(int newIndex) {
+        index = newIndex;
     }
 
     public int get_Index() {
@@ -27,15 +33,15 @@ public class Task {
     }
 
     /**
-     * Returns 'Y' if the task is done, 'N' if it is not done.
+     * Function to return a status icon depending on whether the task is done.
+     *
+     * @return "Y" if the task is done, "N" if it is not done.
      */
     public String getStatusIcon() {
         return (isDone ? "Y" : "N"); //return tick or X symbols
     }
 
-    /**
-     * toString function of the Task object.
-     */
+
     @Override
     public String toString() {
         String temp = get_Index() + ". " + "[" + type + "]" + "[" + getStatusIcon() + "] " + description;

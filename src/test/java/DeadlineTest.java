@@ -7,13 +7,13 @@ public class DeadlineTest {
     @Test
     public void testDeadline() throws Throwable {
 
-        Deadline deadline = new Deadline("testing","10/10/2020 2359");
+        Deadline deadline = new Deadline("testing", "10/10/2020 2359", 1);
 
         LocalDate date = deadline.get_Date();
 
-        String date_string = date.toString();
+        String dateString = date.toString();
 
-        assertEquals("2020-10-10",date_string);
+        assertEquals("2020-10-10",dateString);
 
 
     }
