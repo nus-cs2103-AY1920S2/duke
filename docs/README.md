@@ -43,7 +43,7 @@ deadline download Squirtle Manager /by 19/2/2020|
 
 Function | Command | Notes
 ---------|---------|-------
-**Create new task**|todo (description)<br><br>deadline /by (description) (deadline)<br><br>event /at (description) (date)|Leave a space between each item. Refer to above example.<br>Note the difference in construction between creating an event and deadline. (typing '/at' _vs_ '/by')
+**Create new task**|todo (description)<br><br>deadline /by (description) (deadline)<br><br>event /at (description) (date)|Leave a space between each item. Refer to above example.<br><br>**date format: d/M/YYYY** or **today** or **tomorrow**<br><br>Note the difference in construction between creating an event and deadline. (typing '/at' _vs_ '/by')
 **List Tasks**|list|Gives a numbered list of all your current tasks.
 **Delete Tasks**|delete (item number)|Item number corresponds to the sequence of the task in the list.<br>You can delete multiple tasks by adding a space between task numbers.<br>_eg. delete 1 2 3_
 **Update Task** Stage 1|update (item number)|Upon entering this command, Squirtle Manager will ask you to indicate which items to update, and what to update to.<br>See: Update Task Stage 2

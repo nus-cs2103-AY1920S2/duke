@@ -3,6 +3,7 @@ package duke.utilities;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 /**
  * An interface to parse date and time.
@@ -11,7 +12,7 @@ import java.time.format.DateTimeParseException;
 public interface TimeParser {
     /**
      * Parses given string representation of date.
-     * Allows for 2 formats, one for parsing user input in the format "d/M/yyyy".
+     * Allows for 2 formats, one for parsing user input in the format "d/M/yyyy" or "today".
      * The second format is for parsing dates in the default LocalDate pattern from file.
      *
      * @param date String representation of date
@@ -19,10 +20,19 @@ public interface TimeParser {
      * @throws DateTimeParseException if no valid date format is given
      */
     static LocalDate parseDate(String date) throws DateTimeParseException {
-        try {
-            return LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy"));
-        } catch (DateTimeParseException e) {
-            return LocalDate.parse(date); // parse the default pattern
+        if (date.equals("today")) {
+            return LocalDate.now();
+        }
+        else if (date.equals("tomorrow")) {
+            return LocalDate.now().plus(1, ChronoUnit.DAYS);
+        }
+        else {
+            try {
+                return LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy"));
+            }
+            catch(DateTimeParseException e) {
+                return LocalDate.parse(date);
+            }
         }
     }
 
