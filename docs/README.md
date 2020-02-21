@@ -45,7 +45,7 @@ Function | Command | Notes
 ---------|---------|-------
 **Create new task**|todo (description)<br><br>deadline /by (description) (deadline)<br><br>event /at (description) (date)|Leave a space between each item. Refer to above example.<br>Note the difference in construction between creating an event and deadline. (typing '/at' _vs_ '/by')
 **List Tasks**|list|Gives a numbered list of all your current tasks.
-**Delete Task**|delete (item number)|Item number corresponds to the sequence of the task in the list.
+**Delete Tasks**|delete (item number)|Item number corresponds to the sequence of the task in the list.<br>You can delete multiple tasks by adding a space between task numbers.<br>_eg. delete 1 2 3_
 **Update Task** Stage 1|update (item number)|Upon entering this command, Squirtle Manager will ask you to indicate which items to update, and what to update to.<br>See: Update Task Stage 2
 **Update Task** Stage 2|(des/date) (update)|_Eg. to change the date of task to 9 February 2020: <br>date 9/2/2020_
 **Find Task**|find (keyword)|Squirtle Manager currently only accepts one keyword. Plans are being made to accept more keywords at one go to improve application versatility.
@@ -57,6 +57,9 @@ Creating different tasks:
 
 Deleting a task:
 ![delete-task-image](delete.png)
+
+Deleting multiple tasks at once:
+![multidelete-image](multidelete.png)
 
 Updating a selected task:
 ![updating-image](update.png)  
