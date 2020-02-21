@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke(Paths.get("src","main", "data", "tasks.ser"));
+    private Duke duke = new Duke(Paths.get("data", "tasks.ser"));
 
     @Override
     public void start(Stage stage) {

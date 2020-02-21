@@ -32,6 +32,11 @@ public class Storage {
 
         try {
             File savedData = new File(String.valueOf(filePath));
+            if (!savedData.exists()) {
+                File newFile = new File("data");
+                newFile.mkdir();
+                savedData = new File(String.valueOf(filePath));
+            }
             FileInputStream fis = new FileInputStream(savedData);
             ObjectInputStream ois = new ObjectInputStream(fis);
             TaskList lstSaved = (TaskList) ois.readObject();
