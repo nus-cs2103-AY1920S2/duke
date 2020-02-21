@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Ui {
 
     static final String COMMAND_NOT_FOUND = "Oops! Command not found!";
@@ -20,43 +18,8 @@ public class Ui {
     static final String DELETED_TASK = "Removed this task:\n    ";
     static final String UPDATED_TASK = "Updated this task to:\n    ";
     static final String NO_FIELD_TO_UPDATE = "No field to update!";
+    static final String CANNOT_SET_DATE_TIME_TO_TODO = "Cannot set date or time to todo!";
     static final String WELCOME_MESSAGE = "Welcome to Duke! What can I do for you today?";
-    static final String EXIT_MESSAGE = "Thank you for using Duke.\nHave a nice day!\n";
-
-    public static void showLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-    }
-
-    public static boolean askBeforeQuitting(Scanner scanner, TaskList tasklist) {
-        System.out.println("Save before Quitting?\nY: Save Changes\nN: Discard Changes\n" +
-                "Press any other key to Cancel and Return");
-        String choice = scanner.nextLine();
-
-        if (choice.equalsIgnoreCase("Y")) {
-            try {
-                Storage.save(tasklist);
-                System.out.println(CHANGES_SAVED);
-            } catch (Exception e) {
-                System.out.println("Oops! Unable to write to file due to " + e + "!");
-            }
-
-            return false;
-        } else {
-            return !(choice.equalsIgnoreCase("N"));
-        }
-    }
-
-    public static String readNextCommand(Scanner scanner, TaskList tasklist) {
-        System.out.print("> ");
-        String input = scanner.nextLine().strip();
-        String[] command = Parser.parseInput(input);
-        return Parser.processCommand(command, tasklist);
-    }
 
     public static String readNextCommand(String input, TaskList tasklist) {
         String[] command = Parser.parseInput(input.strip());

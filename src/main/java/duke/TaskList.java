@@ -18,6 +18,8 @@ public class TaskList {
         this.list = new ArrayList<Task>();
     }
 
+
+
     /**
      * Adds a new Task to this TaskList and saves the changes to the data file.
      * @param task the new Task to be added into this list.
@@ -47,8 +49,7 @@ public class TaskList {
      * @throws IOException if the changes are unable to be saved into the data file.
      */
     public String newTodo(boolean isDone, String taskName) throws IOException {
-        Task task = new Todo(isDone, taskName);
-        return this.add(task);
+        return this.add(new Todo(isDone, taskName));
     }
 
     /**
@@ -60,8 +61,7 @@ public class TaskList {
      * @throws IOException if the changes are unable to be saved into the data file.
      */
     public String newEvent(boolean isDone, String taskName, String taskDateTime) throws IOException {
-        Task task = new Event(isDone, taskName, taskDateTime);
-        return this.add(task);
+        return this.add(new Event(isDone, taskName, taskDateTime));
     }
 
     /**
@@ -73,8 +73,7 @@ public class TaskList {
      * @throws IOException if the changes are unable to be saved into the data file.
      */
     public String newDeadline(boolean isDone, String taskName, String taskDateTime) throws IOException {
-        Task task = new Deadline(isDone, taskName, taskDateTime);
-        return this.add(task);
+        return this.add(new Deadline(isDone, taskName, taskDateTime));
     }
 
     /**
@@ -117,23 +116,29 @@ public class TaskList {
         if (fields.length == 1) {
             return Ui.NO_FIELD_TO_UPDATE;
         }
+
+        Task targetTask = this.list.get(taskID - 1);
+
         if (fields[0].equalsIgnoreCase("name")) {
-            this.list.get(taskID - 1).setTaskName(fields[1]);
+            targetTask.setTaskName(fields[1]);
+
         } else if (fields[0].equalsIgnoreCase("date")) {
-            this.list.get(taskID - 1).setTaskDate(fields[1]);
+            if (targetTask instanceof Deadline || targetTask instanceof Event) {
+                targetTask.setTaskDate(fields[1]);
+            } else {
+                return Ui.CANNOT_SET_DATE_TIME_TO_TODO;
+            }
+
         } else if (fields[0].equalsIgnoreCase("time")) {
-            this.list.get(taskID - 1).setTaskTime(fields[1]);
+            if (targetTask instanceof Deadline || targetTask instanceof Event) {
+                targetTask.setTaskTime(fields[1]);
+            } else {
+                return Ui.CANNOT_SET_DATE_TIME_TO_TODO;
+            }
+
         }
         Storage.save(this);
-        return Ui.UPDATED_TASK + this.list.get(taskID - 1);
-    }
-
-    /**
-     * Returns the size of this list.
-     * @return the size of the list.
-     */
-    public int getSize() {
-        return this.list.size();
+        return Ui.UPDATED_TASK + targetTask;
     }
 
     /**

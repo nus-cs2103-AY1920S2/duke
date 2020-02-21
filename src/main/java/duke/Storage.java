@@ -14,8 +14,9 @@ import java.io.IOException;
 import java.io.File;
 
 public class Storage {
-    static File savedData = new File("data/duke.txt");
-    static File thisLoc = new File(System.getProperty("user.dir") + "/data");
+    static final File savedData = new File("data/duke.txt");
+    static final File thisLoc = new File(System.getProperty("user.dir") + "/data");
+    static final String delimiter = " ~ ";
 
     /**
      * This method handles loading of an existing data file stored in the directory 'data', where the program is
@@ -28,48 +29,40 @@ public class Storage {
         TaskList tasklist = new TaskList();
 
         try {
-            if (thisLoc.mkdir()) {
-                System.out.println("No save directory found.\n" +
-                        "Creating new directory at " + thisLoc.toString() + " ...");
-            }
+            // Checks if the directory exists, and creates it if it does not exist.
+            thisLoc.mkdir();
 
-            if (savedData.createNewFile()) {
-                System.out.println("No save file found.\n" +
-                        "Creating new file 'duke.txt' ...");
-            }
+            // Checks if the file exists, and creates it if it does not exist.
+            savedData.createNewFile();
 
-            FileReader fr = new FileReader(savedData);
-            BufferedReader br = new BufferedReader(fr);
+            BufferedReader reader = new BufferedReader(new FileReader(savedData));
             System.out.println("Loading file 'duke.txt'... ");
 
             while (true) {
                 try {
-                    String line = br.readLine();
+                    String line = reader.readLine();
                     if (line == null) {
                         break;
                     }
-                    String[] taskContent = line.split(" ~ ");
-                    boolean isDone = false;
-                    if (taskContent[1].equals("1")) {
-                        isDone = true;
-                    }
+
+                    String[] taskContent = line.split(delimiter);
+                    boolean isDone = taskContent[1].equals("1");
 
                     if (taskContent[0].equals("T")) {
                         tasklist.newTodo(isDone, taskContent[2]);
-                    } else {
-                        if (taskContent[0].equals("D")) {
-                            tasklist.newDeadline(isDone, taskContent[2], taskContent[3]);
-
-                        } else if (taskContent[0].equals("E")) {
-                            tasklist.newEvent(isDone, taskContent[2], taskContent[3]);
-                        }
+                    } else if (taskContent[0].equals("D")) {
+                        tasklist.newDeadline(isDone, taskContent[2], taskContent[3]);
+                    } else if (taskContent[0].equals("E")) {
+                        tasklist.newEvent(isDone, taskContent[2], taskContent[3]);
                     }
+
                 } catch (IOException e) {
                     System.out.println("Oops! Unable to read save file due to " + e + "!");
                     break;
                 }
 
             }
+            reader.close();
 
         } catch (Exception e) {
             System.out.println("Oops! Unable to create or load save file due to " + e + "!");
@@ -84,17 +77,17 @@ public class Storage {
      * @param tasklist the TaskList object to parse into the data file.
      */
     public static void save(TaskList tasklist) throws IOException {
-        FileWriter fw = new FileWriter(savedData);
-        BufferedWriter bw = new BufferedWriter(fw);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(savedData));
+        String delimiter = " ~ ";
 
         for (Task thisTask : tasklist.getList()) {
-            String taskStr = thisTask.getTaskType() + " ~ "
-                    + (thisTask.getDoneStatus() ? "1" : "0") + " ~ "
-                    + thisTask.getTaskName() + " ~ "
-                    + (thisTask.getTaskType() == 'T' ? "" : thisTask.getTaskDateTime()) + "\n";
-            bw.write(taskStr);
+            String taskStr = thisTask.getTaskType() + delimiter
+                    + (thisTask.isDone() ? "1" : "0") + delimiter
+                    + thisTask.getTaskName() + delimiter
+                    + (thisTask instanceof Todo ? "" : thisTask.getTaskDateTime()) + "\n";
+            writer.write(taskStr);
         }
-        bw.close();
+        writer.close();
     }
 
 }

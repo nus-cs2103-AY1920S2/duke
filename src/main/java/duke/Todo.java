@@ -13,4 +13,10 @@ public class Todo extends Task {
     public Todo(boolean isDone, String taskName) {
         super('T', isDone, taskName, "");
     }
+
+    @Override
+    public String toString() {
+        return "[T] " + "[" + super.getDoneStatusUnicode() + "] "
+                + super.getTaskName();
+    }
 }

@@ -14,4 +14,10 @@ public class Deadline extends Task {
     public Deadline(boolean isDone, String taskName, String taskDateTime) {
         super('D', isDone, taskName, taskDateTime);
     }
+
+    @Override
+    public String toString() {
+        return "[D] " + "[" + super.getDoneStatusUnicode() + "] "
+                + super.getTaskName() + " (by: " + super.getTaskDateTime() + ")";
+    }
 }

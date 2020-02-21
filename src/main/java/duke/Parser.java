@@ -12,18 +12,18 @@ import java.util.List;
 import java.util.HashSet;
 
 public class Parser {
-    static HashSet<String> commandList = new HashSet<String>(
+    static final HashSet<String> commandList = new HashSet<String>(
             List.of("todo", "event", "deadline",
                     "list", "done", "delete",
                     "find", "update", "upcoming",
                     "view", "save", "exit"));
-
+    static final LocalDate TODAY = LocalDate.now();
 
     /**
      * Analyzes the user input and splits them into a String array:
      * - Index 0 contains the action that the program should take.
-     * - Index 1 contains the message tagged to the program, if applicable.
-     * - Index 2 contains the date/time tagged to the program, if applicable.
+     * - Index 1 contains the argument tagged to the action, if applicable.
+     * - Index 2 contains the date/time tagged to the action, if applicable.
      * @param input the original user input
      * @return a String array containing a segmentized version of the user input for processing.
      */
@@ -128,10 +128,8 @@ public class Parser {
                 return "Oops! Unable to write to file due to " + e + "!";
             }
 
-        } else if (command.length == 2) {
-            return Ui.TASK_NEEDS_DATE_TIME;
         } else {
-            return Ui.TASK_NEEDS_NAME;
+            return (command.length == 2) ? Ui.TASK_NEEDS_DATE_TIME : Ui.TASK_NEEDS_NAME;
         }
     }
 
@@ -150,15 +148,16 @@ public class Parser {
             } catch (IOException e) {
                 return "Oops! Unable to write to file due to " + e + "!";
             }
-        } else if (command.length == 2) {
-            return Ui.TASK_NEEDS_DATE_TIME;
         } else {
-            return Ui.TASK_NEEDS_NAME;
+            return (command.length == 2) ? Ui.TASK_NEEDS_DATE_TIME : Ui.TASK_NEEDS_NAME;
         }
     }
 
     /**
-     * Lists the number of Tasks present in the TaskList.
+     * Lists the number of Tasks present in the TaskList, with either 0 or 1 argument.
+     * If no argument is present or the argument is "all", displays all available Tasks.
+     * If the argument is either "todo", "deadline" or "event", displays only Todo, Deadline,
+     * or Event Tasks respectively.
      * @param tasklist the target TaskList.
      * @return a message displaying the number of tasks in the list.
      */
@@ -174,19 +173,10 @@ public class Parser {
                     query.tempAdd(t);
                 }
             }
-            if (query.isEmpty()) {
-                return Ui.NO_MATCHING_TASK_IN_LIST;
-            } else {
-                return Ui.DISPLAY_MATCHING_TASK_LIST + "\n" + query;
-            }
+            return query.isEmpty() ? Ui.NO_MATCHING_TASK_IN_LIST : (Ui.DISPLAY_MATCHING_TASK_LIST + "\n" + query);
         }
 
-        if (tasklist.isEmpty()) {
-            return Ui.NO_TASK_IN_LIST;
-        } else {
-            return Ui.DISPLAY_TASK_LIST + "\n" + tasklist;
-        }
-
+        return tasklist.isEmpty() ? Ui.NO_TASK_IN_LIST : (Ui.DISPLAY_TASK_LIST + "\n" + tasklist);
     }
 
     /**
@@ -237,11 +227,7 @@ public class Parser {
                 query.tempAdd(thisTask);
             }
         }
-        if (query.isEmpty()) {
-            return Ui.NO_MATCHING_TASK_IN_LIST;
-        } else {
-            return Ui.DISPLAY_MATCHING_TASK_LIST + "\n" + query;
-        }
+        return query.isEmpty() ? Ui.NO_MATCHING_TASK_IN_LIST : (Ui.DISPLAY_MATCHING_TASK_LIST + "\n" + query);
     }
 
     /**
@@ -283,17 +269,13 @@ public class Parser {
         }
 
         try {
-            LocalDate TODAY = LocalDate.now();
             TaskList upcomingEvents = new TaskList();
             TaskList upcomingDeadlines = new TaskList();
             int dayRangeUntil = Integer.parseInt(command[1]);
-            for (Task t : tasklist.getList()) {
-                if (!t.getTaskDate().isBefore(TODAY) && t.getTaskDate().compareTo(TODAY) <= dayRangeUntil) {
-                    if (t instanceof Event) {
-                        upcomingEvents.tempAdd(t);
-                    } else if (t instanceof Deadline && !t.getDoneStatus()) {
-                        upcomingDeadlines.tempAdd(t);
-                    }
+
+            for (Task task : tasklist.getList()) {
+                if (taskDateIsInRange(task, dayRangeUntil) && !(task instanceof Todo)) {
+                    populate(task, upcomingEvents, upcomingDeadlines);
                 }
             }
 
@@ -315,9 +297,9 @@ public class Parser {
             LocalDate targetDate;
 
             if (command[1].equals("today")) {
-                targetDate = LocalDate.now();
+                targetDate = TODAY;
             } else if (command[1].equals("tomorrow")) {
-                targetDate = LocalDate.now().plusDays(1);
+                targetDate = TODAY.plusDays(1);
             } else {
                 targetDate = LocalDate.parse(command[1], Task.DATE_FORMATTER);
             }
@@ -325,13 +307,9 @@ public class Parser {
             TaskList upcomingEvents = new TaskList();
             TaskList upcomingDeadlines = new TaskList();
 
-            for (Task t : tasklist.getList()) {
-                if (t.getTaskDate().equals(targetDate)) {
-                    if (t instanceof Event) {
-                        upcomingEvents.tempAdd(t);
-                    } else if (t instanceof Deadline && !t.getDoneStatus()) {
-                        upcomingDeadlines.tempAdd(t);
-                    }
+            for (Task task : tasklist.getList()) {
+                if (task.getTaskDate().equals(targetDate) && !(task instanceof Todo)) {
+                    populate(task, upcomingEvents, upcomingDeadlines);
                 }
             }
 
@@ -354,6 +332,19 @@ public class Parser {
             return Ui.CHANGES_SAVED;
         } catch (Exception e) {
             return "Oops! Unable to write to file due to " + e + "!";
+        }
+    }
+
+
+    public static boolean taskDateIsInRange(Task t, int dayRangeUntil) {
+        return !t.getTaskDate().isBefore(TODAY) && t.getTaskDate().compareTo(TODAY) <= dayRangeUntil;
+    }
+
+    public static void populate(Task task, TaskList upcomingEvents, TaskList upcomingDeadlines) {
+        if (task instanceof Event) {
+            upcomingEvents.tempAdd(task);
+        } else if (task instanceof Deadline && !task.isDone()) {
+            upcomingDeadlines.tempAdd(task);
         }
     }
 

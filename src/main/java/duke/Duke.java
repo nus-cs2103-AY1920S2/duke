@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -30,45 +29,11 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     List<String> log;
-    TaskList tasklist;
+    TaskList masterList;
 
     public Duke() {
         this.log = new ArrayList<String>();
-        this.tasklist = Storage.load();
-    }
-
-    public static void main(String[] args) {
-        run();
-    }
-
-    public static void run() {
-        Scanner scanner = new Scanner(System.in);
-        List<String> log = new ArrayList<String>();
-
-        Ui.showLogo();
-        TaskList tasklist = Storage.load();
-        System.out.println("");
-        System.out.println(Ui.WELCOME_MESSAGE);
-
-        boolean didNotExit = true;
-        while (didNotExit) {
-            String thisResult = Ui.readNextCommand(scanner, tasklist);
-            log.add(thisResult);
-
-            if (thisResult.equals("exit")) {
-                if (log.isEmpty() || tasklist.getList().isEmpty()) {
-                    didNotExit = false;
-                } else {
-                    didNotExit = Ui.askBeforeQuitting(scanner, tasklist);
-                }
-            } else {
-                System.out.println(thisResult);
-            }
-            System.out.println("");
-        }
-
-        System.out.println(Ui.EXIT_MESSAGE);
-        scanner.close();
+        this.masterList = Storage.load();
     }
 
     @Override
@@ -124,11 +89,12 @@ public class Duke extends Application {
 
 
         Label welcomeMessage = new Label(Ui.WELCOME_MESSAGE);
-        Label startupUpcomingWeekView = new Label(Parser.upcomingCommand(new String[] {"upcoming", "7"}, this.tasklist));
+        Label startupUpcomingWeekView = new Label(Parser.upcomingCommand(new String[] {"upcoming", "7"}, this.masterList));
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, new ImageView(duke)),
                 DialogBox.getDukeDialog(startupUpcomingWeekView, new ImageView(duke))
         );
+
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -183,7 +149,7 @@ public class Duke extends Application {
      * @return the result after processing the user input.
      */
     private String getResponse(String input) {
-        return Ui.readNextCommand(input, this.tasklist);
+        return Ui.readNextCommand(input, this.masterList);
     }
 
 

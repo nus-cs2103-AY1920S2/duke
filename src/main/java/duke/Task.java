@@ -14,29 +14,37 @@ abstract class Task {
     private char taskType;
     private boolean isDone;
     private String taskName;
-
     private LocalDate taskDate;
     private LocalTime taskTime;
 
-    static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy");
-    static DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
+    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy");
+    static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
     /**
      * Constructor for a new generic Task object.
      * @param taskType defines the type of this Task.
      * @param isDone whether the Task is done.
      * @param taskName the name of the Task.
-     * @param taskDateTime the given date-time of the Task.
+     * @param taskDateTime the given date and/or time of the Task.
      * @throws DateTimeParseException if the date or time provided is in the wrong format.
      */
     public Task(char taskType, boolean isDone, String taskName, String taskDateTime) throws DateTimeParseException {
         this.taskType = taskType;
         this.isDone = isDone;
         this.taskName = taskName;
-
         this.taskDate = LocalDate.EPOCH;
         this.taskTime = LocalTime.MAX;
 
+        parseDateTime(taskDateTime);
+
+    }
+
+    /**
+     * Parses the date and time given and stores it in the object.
+     * @param taskDateTime the given date and/or time of the Task.
+     * @throws DateTimeParseException if the date or time provided is in the wrong format.
+     */
+    public void parseDateTime(String taskDateTime) throws DateTimeParseException {
         if (!taskDateTime.isEmpty()) {
             String[] dateTime = taskDateTime.split(" ");
             this.taskDate = LocalDate.parse(dateTime[0], DATE_FORMATTER);
@@ -50,7 +58,7 @@ abstract class Task {
      * Returns if this Task is done.
      * @return the status of the Task.
      */
-    public boolean getDoneStatus() {
+    public boolean isDone() {
         return isDone;
     }
 
@@ -139,21 +147,5 @@ abstract class Task {
         }
         this.isDone = true;
         return Ui.MARKED_AS_DONE + this;
-    }
-
-
-    @Override
-    public String toString() {
-        if (this.taskType == 'T') {
-            return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName;
-
-        } else if (this.taskType == 'D') {
-            return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName + " (by: " + this.getTaskDateTime() + ")";
-
-        } else if (this.taskType == 'E') {
-            return "[" + taskType + "] " + "[" + getDoneStatusUnicode() + "] " + this.taskName + " (at: " + this.getTaskDateTime() + ")";
-        } else {
-            return "";
-        }
     }
 }

@@ -14,4 +14,10 @@ public class Event extends Task {
     public Event(boolean isDone, String taskName, String taskDateTime) {
         super('E', isDone, taskName, taskDateTime);
     }
+
+    @Override
+    public String toString() {
+        return "[E] " + "[" + super.getDoneStatusUnicode() + "] "
+                + super.getTaskName() + " (at: " + this.getTaskDateTime() + ")";
+    }
 }
