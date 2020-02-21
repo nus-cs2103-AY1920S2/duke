@@ -88,7 +88,6 @@ public class Parser {
             assert (outputString != null) && (!outputString.trim().isEmpty());
             return outputString;
         }
-
     }
 
     private static Task createTask(String taskType, String taskDesc) throws DukeException {
