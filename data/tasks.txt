@@ -1,7 +1,4 @@
-E | true | Math Vision | 2020-02-08 0930
-T | true | borrow book
-T | true | borrow
-E | false | meeting | 2020-12-12 1400
-D | false | meeting | 2020-12-12 1400
-T | false | study
-D | false | study | 2020-06-07 1500
+T | true | read book
+E | false | group meeting | 2020-02-21 1000
+T | false | laundry
+E | false | seminar | 2020-02-21 1000

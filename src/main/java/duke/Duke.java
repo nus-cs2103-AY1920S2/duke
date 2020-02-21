@@ -31,6 +31,8 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
@@ -62,12 +64,12 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        Button sendButton = new Button("Send");
+        sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        Scene scene = new Scene(mainLayout); // Setting the scene to be our layout
+        scene = new Scene(mainLayout); // Setting the scene to be our layout
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
 
@@ -76,6 +78,7 @@ public class Duke extends Application {
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
+        stage.setMaximized(true);
 
         mainLayout.setPrefSize(400.0, 600.0);
 
