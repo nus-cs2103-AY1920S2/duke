@@ -1,5 +1,7 @@
 package Duke.task;
 
+import Duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,6 +11,7 @@ public abstract class AbstractTask implements Task {
     protected String preposition;
     protected LocalDate date;
     protected String time;
+    protected String taskType;
 
     /**
      * Constructor for AbstractTask class with additional info provided after date taken to be time.
@@ -49,6 +52,7 @@ public abstract class AbstractTask implements Task {
         this.date = null;
         this.time = null;
         this.isDone = false;
+        this.taskType = this.getClass().toString();
     }
 
     public String taskStateString() {
@@ -62,9 +66,16 @@ public abstract class AbstractTask implements Task {
 
     protected abstract String taskType();
 
-    public boolean markDone() {
+    public boolean markDone() throws DukeException {
+        if (this.isDone) {
+            throw new DukeException("Good job! Task has already been done!");
+        }
         this.isDone = true;
         return this.isDone;
+    }
+
+    public String getTaskType() {
+        return taskType;
     }
 
     @Override
