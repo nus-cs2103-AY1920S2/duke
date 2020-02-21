@@ -12,7 +12,7 @@ mode of interaction.
 <img src="quick-start.png">
 
 User input commands are entered in the highlighted field. Press the 'SEND' button to send commands to TGD.
-##### **Note: Unless stated otherwise, all input commands in TGD are non case-sensitive**
+#### **Note: Unless stated otherwise, all input commands in TGD are non case-sensitive**
 
 ## Features 
 
