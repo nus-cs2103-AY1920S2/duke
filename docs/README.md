@@ -3,7 +3,7 @@
 ## Introduction
 This is a **chat-bot** called **Duke** for tracking the user's tasks.
 
-![My GUI interface](/docs/Ui.png)
+<img src="docs/Ui.png">
 
 ### Type of tasks
 There are three types of task.
@@ -32,7 +32,8 @@ Example of usage:
 
 Expected outcome:
 
-![feature1](/screenshot/feature1.png)
+<img src="screenshot/feature1.png">
+
 ### Feature 2 - Deleting a task
 
 #### Usage
@@ -48,7 +49,7 @@ Example of usage:
 
 Expected outcome:
 
-![feature2](/screenshot/feature2.png)
+<img src="screenshot/feature2.png">
 
 ### Feature 3 - Mark a task as done
 Allows the user to mark a task in the list as done.
@@ -62,7 +63,7 @@ Example of usage:
 
 Expected outcome:
 
-![feature3](/screenshot/feature3.png)
+<img src="screenshot/feature3.png">
 
 ### Feature 4 - Print the existing list of task
 Allows the user to print the list of task.
@@ -75,7 +76,7 @@ Example of usage:
 
 Expected outcome:
 
-![feature4](/screenshot/feature4.png)
+<img src="screenshot/feature4.png">
 
 ### Feature 5 - Find the task using a **keyword**
 Allows the user find the list of task containing the **keyword**.
@@ -88,7 +89,7 @@ Example of usage:
 
 Expected outcome
 
-![feature5](/screenshot/feature5.png)
+<img src="screenshot/feature5.png">
 
 ### Feature 6 - Statistic
 Allows the user see the summary of the tasks in the list.
@@ -102,7 +103,7 @@ Example of usage:
 
 Expected outcome:
 
-![feature6](/screenshot/feature6.png)
+<img src="screenshot/feature6.png">
 
 ### Feature 7 - Save and exit
 Allows the user to save the list of task to a file.
@@ -115,7 +116,10 @@ Example of usage:
 
 Expected outcome:
 
-![feature7](/screenshot/feature7.png)
+<img src="screenshot/feature7.png">
+
+# Acknowledgement
+JavaFX Tutorials by Jeffry Lum
 
 
 
