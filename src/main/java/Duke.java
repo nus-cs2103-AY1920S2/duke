@@ -1,6 +1,8 @@
 import java.nio.file.Path;
 import java.util.HashMap;
 
+import static javafx.application.Platform.exit;
+
 /** Main class. */
 public class Duke {
 
@@ -73,6 +75,7 @@ public class Duke {
                 switch (command) {
                 case BYE:
                     res = "Bye little kid, have  fun in school!";
+                    exit();
                     break;
                 case LIST:
                     res = uiV2.sendList(lst);
