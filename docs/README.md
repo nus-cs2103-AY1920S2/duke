@@ -52,13 +52,13 @@ Now you have 4 tasks in the list.
 ```
 
 ### 2. Viewing all tasks : `list`
-### Format:
+#### Format:
 ```
 list
 ```
 
 ### 3. Mark task as done : `done`
-### Format:
+#### Format:
 ```
 done <task index>
 ```
@@ -77,7 +77,7 @@ Nice! i've marked this task as done:
 ```
 
 ### 4. Delete task : `delete`
-### Format:
+#### Format:
 ```
 delete <task index>
 ```
@@ -89,7 +89,7 @@ delete 2
 ```
 
 ### 5. Find task in list with keyword : `find`
-### Format:
+#### Format:
 ```
 find <keyword>
 ```
@@ -113,25 +113,25 @@ Here are the matching tasks found in your list:
 ```
 
 ### 5. View TGD stats : `stats`
-### Format:
+#### Format:
 ```
 stats
 ```
 
 ### 6. View simple help : `help`
-### Format:
+#### Format:
 ```
 help
 ```
 
 ### 7. View detailed help : `help-detailed`
-### Format:
+#### Format:
 ```
 help-detailed
 ```
 
 ### 8. Exit TGD : `bye`
-### Format:
+#### Format:
 ```
 bye
 ```
