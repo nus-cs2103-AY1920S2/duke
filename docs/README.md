@@ -14,6 +14,8 @@ Show list.
 Find tasks from list.
 ### Feature 6
 Undo last action.
+### Feature 7
+Exit.
 
 ## Usage
 
@@ -105,3 +107,13 @@ Expected outcome:
 
 If the last command was to add a task to list, undo will remove the task from the list.
 
+### `bye` - exits the application and saves the list into a text file.
+Undoes the last command input by the user.
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+Application exits.
