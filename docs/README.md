@@ -1,4 +1,7 @@
 # Duke User Guide
+Duke is for those who prefer to use a desktop application to schedule their tasks. Its
+Command Line Interface(CLI), paired with a Graphical User Interface(GUI) gives fast typers 
+the convenience of quickly logging their tasks into the scheduler without sacrificing clear visuals.
 
 ## Features 
 
@@ -49,4 +52,3 @@ Example of usage:
 
 
 <img src = "Ui.png">
-
