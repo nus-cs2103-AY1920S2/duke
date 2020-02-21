@@ -4,6 +4,8 @@ import duke.tasks.Task;
 import duke.exceptions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * A class to add, delete and mark tasks as done.
@@ -24,16 +26,22 @@ public class TaskList {
     /**
      * Deletes task from taskList.
      *
-     * @param index the index where the task to be removed is at in the ArrayList
+     * @param taskNumbers an int[] of indices to delete.
      * @return the deleted task
      * @throws DukeException
      */
-    public Task deleteTask(int index) throws DukeException { // deletes task at the index provided, and returns the deleted task
+    public ArrayList<Task> deleteTasks(int... taskNumbers) throws DukeException { // deletes task at the index provided, and returns the deleted task
+        ArrayList<Task> deletedTasks = new ArrayList<>();
         try {
-            return taskList.remove(index);
+            Arrays.sort(taskNumbers);
+            for (int i = taskNumbers.length- 1; i >= 0; i--) {
+                Task task = taskList.remove(i);
+                deletedTasks.add(task);
+            }
         } catch (IndexOutOfBoundsException e) { // throw exception if the task does not exist at index provided
             throw new DukeException(DukeError.NUMBER);
         }
+        return deletedTasks;
     }
 
     /**

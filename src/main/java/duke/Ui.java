@@ -113,11 +113,11 @@ public class Ui {
     /**
      * Returns a message when the user is deleting a task
      *
-     * @param task the task being deleted
+     * @param deletedTasks an arraylist of tasks that were deleted.
      * @return delete message
      */
-    public String deleteMsg(Task task) {
-        return "SQUIRTLE ate: " + task.toString();
+    public String deleteMsg(ArrayList<Task> deletedTasks) {
+        return "SQUIRTLE ate: \n" + printList(deletedTasks);
     }
 
     /**

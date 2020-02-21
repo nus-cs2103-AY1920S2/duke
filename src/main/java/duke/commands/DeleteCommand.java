@@ -5,11 +5,17 @@ import duke.tasks.*;
 import duke.Ui;
 import duke.exceptions.DukeException;
 
-public class DeleteCommand extends Command {
-    int taskNumber;
+import java.util.ArrayList;
 
-    public DeleteCommand(int taskNumber) {
-        this.taskNumber = taskNumber;
+public class DeleteCommand extends Command {
+    int[] taskNumbers;
+
+    /**
+     * Constructor for delete command. Supports multi-delete using varArgs
+     * @param taskNumbers integer array of varied length, depending on number of items the user wants to delete.
+     */
+    public DeleteCommand(int... taskNumbers) {
+        this.taskNumbers = taskNumbers;
     }
 
     /**
@@ -25,8 +31,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
-        Task task = taskList.deleteTask(this.taskNumber);
+        ArrayList<Task> deletedTasks = taskList.deleteTasks(taskNumbers);
         storage.update(taskList.getTaskList());
-        return ui.deleteMsg(task);
+        return ui.deleteMsg(deletedTasks);
     }
 }

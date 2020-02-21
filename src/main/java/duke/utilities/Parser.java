@@ -5,7 +5,9 @@ import duke.tasks.*;
 import duke.exceptions.*;
 
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * A general parser to parse user input as well as tasks to and from tasks.txt.
@@ -95,8 +97,10 @@ public class Parser {
                 int taskNumber = Integer.parseInt(input.split(" ", 2)[1]) - 1;
                 return new DoneCommand(taskNumber);
             } else if (input.startsWith("delete")) { // delete command
-                int taskNumber = Integer.parseInt(input.split(" ", 2)[1]) - 1;
-                return new DeleteCommand(taskNumber);
+                String[] split = input.split(" ", 2);
+                String[] numberStrings = split[1].split(" ");
+                int[] taskNumbers = Stream.of(numberStrings).mapToInt(x -> Integer.parseInt(x) - 1).toArray();
+                return new DeleteCommand(taskNumbers);
             } else if (input.startsWith("find")) { // find command
                 String[] split = input.split(" ");
                 if (split.length > 2) { // if more than one keyword supplied by user, throw DukeException
