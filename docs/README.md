@@ -3,7 +3,7 @@
 ## Introduction
 This is a **chat-bot** called **Duke** for tracking the user's tasks.
 
-![My GUI interface](../docs/Ui.png)
+<img src="Ui.png">
 
 ### Type of tasks
 There are three types of task.
