@@ -48,15 +48,18 @@ public class Storage {
      * @throws DukeException when filePath is incorrect.
      */
     @SuppressWarnings("unchecked")
+    // referred to https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file and
+    // https://mkyong.com/java/how-to-create-directory-in-java/
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
-        File savedFile = new File(filePath);
-        File directory = new File(savedFile.getParent());
         try {
             // read from save file
-            if (!savedFile.exists() && !directory.exists()) {
-                boolean mkdirs = directory.mkdirs();
-            } else if (!savedFile.exists()) {
+            File savedFile = new File(filePath);
+            if (!savedFile.exists()) {
+                File directory = new File(savedFile.getParent());
+                if (!directory.exists()) {
+                    boolean mkdirs = directory.mkdir();
+                }
                 boolean newFile = savedFile.createNewFile();
             } else {
                 FileInputStream readFile = new FileInputStream(savedFile);
