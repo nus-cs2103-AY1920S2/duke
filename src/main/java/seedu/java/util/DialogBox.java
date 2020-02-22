@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML.
@@ -37,6 +38,10 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        dialog.setMinHeight(Label.USE_PREF_SIZE);
+        dialog.setWrapText(true);
+        dialog.setTextAlignment(TextAlignment.RIGHT);
+
     }
 
     /**
@@ -46,8 +51,8 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+        dialog.setTextAlignment(TextAlignment.LEFT);
         setAlignment(Pos.TOP_LEFT);
-        setMaxHeight(1000.0);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
@@ -55,10 +60,10 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates a new Duke Dialog.
-     * @param text text to be spawned as label
-     * @param img to be spawned as ImageView
-     * @return a DialogBox with text & image
+     * Returns a dialogBox as the Duke using the flip() function.
+     * @param text to be displayed.
+     * @param img duke's image.
+     * @return a dialogBox displaying these.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

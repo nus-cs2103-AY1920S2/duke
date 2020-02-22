@@ -98,8 +98,15 @@ public class TaskList {
         }
     }
 
-    private String getHelp(){
-        return Text.print(Text.HELPLIST);
+    private String getHelp(String input) {
+        String testForError = "";
+        try {
+            Command cmdHelp = Parser.readNextCommand(input);
+            testForError += Text.printHelpForCommands(cmdHelp);
+        } catch (Exception e) {
+            testForError += Text.printGeneralHelp();
+        }
+        return testForError;
     }
 
     /**
@@ -128,12 +135,12 @@ public class TaskList {
             case FIND:
                 return findTask(Parser.readTask(input));
             case HELP:
-                return getHelp();
+                return getHelp(input);
             default:
                 return "Cannot compute. type wrongly? key in 'help' :)";
             }
         } catch (Exception e) {
-            return "Cannot compute. type wrongly? key in 'help' :)";
+            return "Still Cannot compute. type wrongly? key in 'help' :)";
         }
     }
 }

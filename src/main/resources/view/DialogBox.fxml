@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--credits to yuting for providing the solution to auto resize the dialogbox-->
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_RIGHT" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="dialogRoot" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="580.0" minHeight="-Infinity" minWidth="570.0" opacity="0.9" prefWidth="580.0" style="-fx-background-insets: 5px;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="TOP_RIGHT" maxHeight="1000.0" maxWidth="279.0" prefHeight="100.0" prefWidth="269.0" text="Label" textAlignment="RIGHT" wrapText="true">
-         <padding>
-            <Insets right="10.0" />
-         </padding></Label>
-      <HBox disable="true" focusTraversable="true" maxHeight="1000.0" prefHeight="77.0" prefWidth="90.0">
-         <children>
-              <ImageView fx:id="displayPicture" fitHeight="102.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" smooth="false" x="40.0" />
-         </children>
-      </HBox>
+        <Label fx:id="dialog" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" minHeight="-Infinity" text="Label" textAlignment="RIGHT" textFill="#362612" textOverrun="CLIP" wrapText="true">
+            <HBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </HBox.margin>
+        </Label>
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+         <HBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </HBox.margin>
+      </ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </fx:root>

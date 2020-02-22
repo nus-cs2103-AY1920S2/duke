@@ -23,9 +23,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cutecat.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/angrydog.jpeg"));
-
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/grumpycat.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/servant.jpg"));
 
     @FXML
     public void initialize() {
@@ -40,6 +39,7 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();

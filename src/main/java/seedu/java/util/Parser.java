@@ -12,10 +12,20 @@ public class Parser {
      * Static method. Returns a Command (inferred instruction).
      * @param input from UI
      * @return Command
-     * @throws Exception your command got problem
+     * @throws DukeException your command got problem
      */
-    public static Command readCommand(String input) throws Exception {
+    public static Command readCommand(String input) throws DukeException {
         return Command.convert(input.split(" ")[0]);
+    }
+
+    /**
+     * Same as readCommand(), but it reads the next string in the array. Intended for help X.
+     * @param input from UI
+     * @return Command
+     * @throws DukeException your help command got problem
+     */
+    public static Command readNextCommand(String input) throws DukeException {
+        return Command.convert(input.split(" ")[1]);
     }
 
     /**
@@ -24,7 +34,7 @@ public class Parser {
      * @return String - task that the user wants to do
      * @throws Exception - when the parser fails to interpret the task
      */
-    public static String readTask(String input) throws Exception  {
+    public static String readTask(String input) throws DukeException  {
         String[] arr = input.split(" ");
         String task = "";
         int i = 1;
@@ -32,7 +42,7 @@ public class Parser {
             task += arr[i++] + " ";
         }
         if (task.equals("")) {
-            throw new Exception();
+            throw new DukeException();
         } else {
             return task;
         }
@@ -44,7 +54,7 @@ public class Parser {
      * @return String - the timing
      * @throws Exception - when the parser fails to interpret the task
      */
-    public static String readTiming(String input) throws Exception {
+    public static String readTiming(String input) throws DukeException {
         String[] arr = input.split(" ");
         String timing = "";
         int i = 1;
