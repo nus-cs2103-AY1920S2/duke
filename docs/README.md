@@ -154,7 +154,7 @@ Sort all events and deadlines by descending dates.
 Format: `sortDes`
 
 ### 10. Saving the data
-The lists are automatically saved in a txt file and loaded everytime the programme starts.
+The tasks are automatically saved in a txt file and loaded everytime the programme starts.
 
 ### 10. Exit the programme
 The window will be closed if the user enters "bye".
