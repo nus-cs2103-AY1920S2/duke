@@ -61,7 +61,7 @@ public class UpdateCommand extends Command {
                 break;
             case 2: // updating at stage 2 - user gives the details of update
                 assert this.task != null;
-                if (updateItem.equals("description")) {
+                if (updateItem.equals("des")) {
                     task.changeDescription(this.update);
                 } else if (updateItem.equals("date")) {
                     task.changeDate(this.update);
