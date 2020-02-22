@@ -1,7 +1,10 @@
-# Duke User Guide
+# Duke Chatbot User Guide
 
 ### Introduction 
-Duke is a personalized chatbot that enables user to store tasks in the form of todo, event and deadline tasks. This enables the user to organize his or her tasks in a neat way.
+Duke Chatbot is a personalized chatbot that enables user to store tasks in the form of todo, event and deadline tasks. This enables the user to organize his or her tasks in a neat way.
+
+This is how Duke Chatbot look like.
+<img src="Ui.png">
 
 ### Commands
 * `todo` or `t` - Creates a todo task.
@@ -36,5 +39,5 @@ If Duke cannot understand your message, Duke will reply the respective message t
 ### Acknowledgement
 Special thanks to @nus-cs2103-AY1920S2 for creating JavaFX tutorial!
 
-### Images used in Duke chatbot
+### Images used in Duke Chatbot
 All the images are done by me.
