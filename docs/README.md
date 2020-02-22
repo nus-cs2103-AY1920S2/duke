@@ -4,7 +4,7 @@
 Duke Chatbot is a personalized chatbot that enables user to store tasks in the form of todo, event and deadline tasks. This enables the user to organize his or her tasks in a neat way.
 
 This is how Duke Chatbot look like.
-<img src="Ui.png">
+<img src="Ui.png" height="300">
 
 ### Commands
 * `todo` or `t` - Creates a todo task.
