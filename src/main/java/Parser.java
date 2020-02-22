@@ -1,11 +1,15 @@
+import java.io.IOException;
+import java.util.List;
+
 /**
  *  makes sense of the user command
  */
 public class Parser {
 
     private Ui ui = new Ui();
+    private Storage storage = new Storage("duke.txt");
 
-    public Parser() {
+    public Parser() throws IOException {
     }
 
     /**
@@ -16,6 +20,9 @@ public class Parser {
         String toPrint = "";
 
             if(command.startsWith("bye", 0)) {
+                TaskList allTask = new TaskList();
+                List<Task> tasks = allTask.getDoneTasks();
+                storage.load(tasks);
                 toPrint = ui.bye();
 
             } else if (command.startsWith("view", 0)) {

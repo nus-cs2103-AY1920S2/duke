@@ -28,20 +28,31 @@ public class TaskList {
 
     public String convertToString() {
         String s = "";
-        return allInstructions.stream().map(i -> i)
-                .collect(Collectors.joining("\n"));
+//        return allInstructions.stream().map(i -> i)
+//                .collect(Collectors.joining("\n"));
+        for (int i=0; i<allInstructions.size(); i++) {
+            s += allInstructions.get(i);
+        }
+        return s;
     }
+
+//    public List<Task> convertToTask() {
+//        for (int i=0; i<allInstructions.size(); i++) {
+//            String instruction = allInstructions.get(i);
+//            String[] arr = instruction.split(" | ");
+//            if (arr[0].equals("E")) {
+//
+//            }
+//
+//        }
+//    }
 
     public List<Task> getDoneTasks() {
         return this.store;
     }
 
-    public List<String> getAllInstructions() {
-        return this.allInstructions;
-    }
-
-    public void setAllInstructions(List<String> i) {
-        this.allInstructions = i;
+    public void setTask(List<Task> i) {
+        this.store = i;
     }
 
     public String delete() {

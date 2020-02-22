@@ -3,6 +3,7 @@ import java.io.IOException;
 public class Duke {
     private Storage storage;
     private Parser parser = new Parser();
+    private Ui ui = new Ui();
     private TaskList tasklist;
     private String allInst;
 
@@ -10,18 +11,22 @@ public class Duke {
      * initialises Storage and TaskList classes.
      * @param filePath file to be read / written to.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
+        ui.greeting();
+        storage = new Storage(filePath);
         try {
-            storage = new Storage(filePath); //reads txt file
-            tasklist = storage.readFileContents();
-            allInst =  tasklist.convertToString();
+            storage.readFileContents();
         } catch (IOException e) {
-            System.err.println(e);
+            tasklist = new TaskList();
         }
     }
 
-    public Duke() {
+    public Duke() throws IOException {
 
+    }
+
+    public String getGreet() {
+        return ui.greeting();
     }
 
     /**

@@ -1,11 +1,7 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -18,6 +14,7 @@ public class Storage {
     private List<Task> doneTasks = new ArrayList<>();
     private String filePath;
     private File file;
+    private TaskList tasklist = new TaskList();
 
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
@@ -34,13 +31,35 @@ public class Storage {
         Scanner s = new Scanner(f);
         while (s.hasNextLine()) {
             String instruction = s.nextLine();
-            allInstructions.add(instruction);
+            System.out.println(instruction);
+            String[] arr = instruction.split(" | ");
+            if (arr[0].equals("E")) {
+                Event e = new Event(arr[4], arr[6] + " " + arr[7]);
+                System.out.println(e);
+                if (Integer.parseInt(arr[2]) == 1) {
+                    e.markAsDone();
+                }
+                doneTasks.add(e);
             }
-        TaskList taskL = new TaskList();
-        taskL.setAllInstructions(allInstructions);
-        return taskL;
+            if (arr[0].equals("T")) {
+                Todo t = new Todo(arr[4]);
+                if (Integer.parseInt(arr[2]) == 1) {
+                    System.out.println(t);
+                    t.markAsDone();
+                }
+                doneTasks.add(t);
+            }
+            if (arr[0].equals("D")) {
+                Deadline d = new Deadline(arr[4], arr[6] + " " + arr[7]);
+                if (Integer.parseInt(arr[2]) == 1) {
+                    d.markAsDone();
+                }
+                doneTasks.add(d);
+            }
         }
-
+        tasklist.setTask(doneTasks);
+        return tasklist;
+    }
 
     void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -51,7 +70,7 @@ public class Storage {
     /**
      * run through all the tasks and prints it out in .txt file
      */
-    public void load() {
+    public void load(List<Task> doneTasks) {
         try {
             String tasks = "";
             for (int i = 0; i < doneTasks.size(); i++) {
@@ -81,10 +100,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(" Something went wrong: " + e.getMessage());
         }
-    }
-
-    void setDoneTasks(List<Task> i) {
-        this.doneTasks = i;
     }
 
 }

@@ -46,4 +46,12 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+    public void greet() {
+        String response = duke.getGreet();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+    }
+
 }
