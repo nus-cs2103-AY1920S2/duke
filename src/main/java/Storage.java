@@ -1,11 +1,11 @@
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Represents a Storage which stores tasks. Should the application close, tasks in the list will be saved
