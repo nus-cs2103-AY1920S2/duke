@@ -39,7 +39,7 @@ public class Ui {
 
     public String removeTask(int count, String task) {
         return ("Noted. I've removed this task:\n" + space + task
-                + "Now you have " + count + " task" + (count > 1 ? "s ": " "));
+                + "Now you have " + count + " task" + (count > 1 ? "s " : " "));
     }
 
     public String searchTask() {
@@ -48,7 +48,7 @@ public class Ui {
 
     public String addTask(TaskList list) {
         return (" Got it. I've added this task:\n" + space + list.items.get(list.items.size() - 1)
-                + " Now you have " + list.count + " task" + (list.count > 1 ? "s ": " ") + "in the list.");
+                + " Now you have " + list.count + " task" + (list.count > 1 ? "s " : " ") + "in the list.");
     }
 
     public String markDone(Item item) {

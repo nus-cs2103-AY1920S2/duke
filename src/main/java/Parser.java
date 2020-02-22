@@ -41,7 +41,7 @@ public class Parser {
                 if (tmp.length < 2) {
                     return ("OOPS!!! The index of a task cannot be empty.");
                 } else if (Integer.parseInt(tmp[1]) > list.items.size() || Integer.parseInt(tmp[1]) <= 0) {
-                    return ("OOPS!!! The index of a task is out of range.");
+                    return ("OOPS!!! The index of the task is out of range.");
                 }
                 assert tmp.length >= 2;
                 int index = Integer.parseInt(tmp[1]);
