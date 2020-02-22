@@ -13,6 +13,7 @@ public class Ui {
      * @return a welcome 'Hi' message to the user.
      */
     public static String welcomeMessage() {
+        // Text below adapted from http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
         return "\n" + ".---.  .---..-./`)  \n"
                 + "|   |  |_ _|\\ .-.') \n"
                 + "|   |  ( ' )/ `-' \\ \n"
