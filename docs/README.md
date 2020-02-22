@@ -29,12 +29,13 @@ and outputs result in the form of chat boxes.
 
 ### `t/todo [string description]` - Add a todo task
 
-A todo task will be created and added to the end of the task list. Upon creation,
- the task is marked as `Not Done` and its priority level is `ordinary` (i.e. normal).
- The description of the task can contain white spaces. 
+The application will create a todo task and add it to the end of the task list. 
+Upon creation, the task is marked as `Not Done` and its priority level is `ordinary` (i.e. normal).
+Please note that the description of the task can contain white spaces, but not
+double slashes (i.e. `//`). 
  
- The application will print the task created, and report the number of tasks 
- (of all types) in the whole list.
+The application will then print the task created, and report the number of tasks 
+(of all types) in the whole list.
 
 Example of usage: 
 
@@ -48,10 +49,11 @@ Expected outcome:
 
 ### `d/deadline [string description] /by YYYY-MM-DD` - Add a deadline task
 
-A deadline task will be created and added to the end of the task list.  Upon creation,
-the task is marked as `Not Done` and its priority level is `ordinary` (i.e. normal).
- The description of the task can contain white spaces. Note that you must specify the date
- of the deadline, and you need to type `/by` between task description and the date.
+The application will create a deadline task and add it to the end of the task list. 
+Upon creation, the task is marked as `Not Done` and its priority level is `ordinary` (i.e. normal).
+Please note that the description of the task can contain white spaces, but not
+double slashes (i.e. `//`). In addition, you must specify the due date of the 
+deadline, and you need to type `/by` between task description and the date.
 
  The application will print the task created, and report the number of tasks 
  (of all types) in the whole list.
@@ -69,13 +71,14 @@ Expected outcome:
 
 ### `e/event [string description] /at YYYY-MM-DD` - Add an event task
 
-An event task will be created and added to the end of the task list.  Upon creation,
-the task is marked as `Not Done` and its priority level is `ordinary` (i.e. normal).
- The description of the task can contain white spaces. Note that you must specify the date
- of the deadline, and you need to type `/at` between task description and the date.
+The application will create an event task and add it to the end of the task list. 
+Upon creation, the task is marked as `Not Done` and its priority level is `ordinary` (i.e. normal).
+Please note that the description of the task can contain white spaces, but not
+double slashes (i.e. `//`). In addition, you must specify the occurring date
+of the event, and you need to type `/at` between task description and the date.
 
- The application will print the task created, and report the number of tasks 
- (of all types) in the whole list.
+The application will print the task created, and report the number of tasks 
+(of all types) in the whole list.
  
 Example of usage: 
 
@@ -88,7 +91,7 @@ Expected outcome:
        (at: 2020-02-19, WEDNESDAY)
     Currently there is/are 3 task(s) in the task list.
 
-### `done [a positive integer indicating the index of the task]` - Mark a task as done
+### `done [a positive integer (index of the task)]` - Mark a task as done
 
 The application will set the indexed task as `Done` and print it. Note that
 the index specified by the user is one-based (i.e. the index of the first task
@@ -130,7 +133,7 @@ Expected outcome:
     2) [D][Not Done][  ordinary  ] complete CS2103 iP
        (at: 2020-02-24, MONDAY)   
  
-### `l/list (*optional*: priority level)` - List all tasks or tasks with a specified priority level
+### `l/list (optional: priority level)` - List all tasks or tasks with a specified priority level
  
 The application will print the list of all tasks, or tasks whose priority level matches
 the level specified by the user. The index of these tasks are also shown, facilitating
@@ -166,7 +169,7 @@ Expected outcome:
     3 task(s) belong to this priority level.
     Currently there is/are 3 tasks(s) in the task list. 
    
-### `p/priority [a positive integer indicating the index of the task]` - Change the priority level of a task
+### `p/priority [a positive integer (index of the task)]` - Change the priority level of a task
   
 The application will change the priority level of 
 the indexed task and print it. Note that
@@ -184,12 +187,13 @@ Expected outcome:
     [D][Not Done][very important!!] complete CS2103 iP
        (by: 2020-02-24, MONDAY)
  
-### `r/remove [a positive integer indicating the index of the task]` - Remove a task from the list
+### `r/remove [a positive integer (index of the task)]` - Remove a task from the list
   
 The application will delete the indexed task from the list and print it.  
 It will also report the number of tasks in the list after deletion. Note that
 the index specified by the user is one-based (i.e. the index of the first task
-in the list is 1, instead of 0). 
+in the list is 1, instead of 0). In addition, 
+after the deletion, the indexes of the remaining tasks are adjusted.
   
 Example of usage: 
   
@@ -201,7 +205,7 @@ Expected outcome:
     [T][Not Done][  ordinary  ] read CS3243 textbook
     Currently there is/are 2 task(s) in the task list.
 
-### `c/clear [a/all/d/done]` - Remove all tasks or tasks that are marked as done
+### `c/clear [a/all/d/done]` - Remove all tasks or tasks marked as done
   
 If the user specified `d/done` after `c/clear`, the application will delete all tasks 
 that are marked as `Done` from the list and print the remaining tasks. Noted that
@@ -210,7 +214,7 @@ from the list.
   
 Example of usage 1: 
 
-`done 1`  (outcome not shown)
+`done 1`  (outcome not shown)  
 `c done`
   
 Expected outcome:
