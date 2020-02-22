@@ -1,4 +1,4 @@
 T | true | read book
-E | false | group meeting | 2020-02-21 1000
-T | false | laundry
+E | true | group meeting | 2020-02-21 1000
+T | true | laundry
 E | false | seminar | 2020-02-21 1000
