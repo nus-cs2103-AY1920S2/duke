@@ -24,8 +24,8 @@ import java.util.Scanner;
 public class Duke extends Application {
     private Controller controller;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/andrew.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/ricky.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/andrew.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/ricky.png"));
 
 
     /**
@@ -175,10 +175,10 @@ public class Duke extends Application {
     }
 
     /**
-     * Returns a response for a text user input in the
+     * Returns a response for a text user input in the text fjeld.
      *
-     * @param text
-     * @return
+     * @param text a String-form user input
+     * @return a String response for the given user input
      */
     private String getResponse(String text) {
         try {
