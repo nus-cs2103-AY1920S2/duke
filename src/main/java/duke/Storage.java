@@ -14,6 +14,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
+/**
+ * This class handles the storage and retrieval of tasks in a database on the hard disk.
+ */
 class Storage {
     private static final int TASK_TYPE_POSITION = 1;
     private static final int COMPLETION_STATUS_POSITION = 4;
@@ -24,15 +27,28 @@ class Storage {
 
     private Path file;
 
-    Storage(String filepath) {
-        assert filepath != null;
-        file = Paths.get(filepath);
+    /**
+     * Constructs a new <code>Storage</code> object using the file at the specified URI as the database.
+     *
+     * @param path the URI of the database
+     */
+    Storage(String path) {
+        assert path != null;
+        file = Paths.get(path);
     }
 
+    /**
+     * Returns an empty <code>Storage</code> object with no database.
+     */
     static Storage empty() {
         return new EmptyStorage();
     }
 
+    /**
+     * Returns a <code>TaskList</code> containing the tasks in the database (if any).
+     *
+     * @return the task list containing tasks in the database
+     */
     TaskList load() throws StorageException {
         try {
             return new TaskList(Files.readAllLines(file)
@@ -75,6 +91,11 @@ class Storage {
         }
     }
 
+    /**
+     * Stores the tasks in the specified task list into the database.
+     *
+     * @param tasks the task list
+     */
     void save(TaskList tasks) throws StorageException {
         try {
             Files.createDirectories(file.getParent());
@@ -85,6 +106,9 @@ class Storage {
         }
     }
 
+    /**
+     * This represents a <code>Storage</code> object with no database.
+     */
     private static class EmptyStorage extends Storage {
         EmptyStorage() {
             super("");
