@@ -7,6 +7,9 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAmount;
 
+/**
+ * A command parser for Duke.
+ */
 class Parser {
     private static final int NUMBER_OF_COMMAND_SECTIONS = 2;
     private static final int COMMAND_POSITION = 0;
@@ -23,6 +26,12 @@ class Parser {
     private static final int SNOOZE_AMOUNT_POSITION = 1;
     private static final int SNOOZE_TIME_UNIT_POSITION = 2;
 
+    /**
+     * Returns the type of Duke command parsed from the user input.
+     *
+     * @param input the user input
+     * @return the type of Duke command
+     */
     Duke.Command parseCommand(String input) throws InvalidCommandException {
         assert input != null;
         Duke.Command command;
@@ -62,6 +71,13 @@ class Parser {
         return command;
     }
 
+    /**
+     * Returns <code>true</code> if the arguments in the user input can be parsed for the specified Duke command.
+     *
+     * @param command the type of Duke command
+     * @param input the user input
+     * @return <code>true</code> if the arguments in the user input can be parsed for the specified Duke command
+     */
     boolean checkArguments(Duke.Command command, String input) throws InvalidCommandException {
         assert command != null;
         assert input != null;
@@ -117,10 +133,22 @@ class Parser {
         return true;
     }
 
+    /**
+     * Returns <code>true</code> if the user input contains arguments, <code>false</code> otherwise.
+     *
+     * @param input the user input
+     * @return <code>true</code> if the user input contains arguments, <code>false</code> otherwise
+     */
     boolean hasArguments(String input) {
         return input.strip().split("\\s+", NUMBER_OF_COMMAND_SECTIONS).length == NUMBER_OF_COMMAND_SECTIONS;
     }
 
+    /**
+     * Returns a string containing the arguments from the user input.
+     *
+     * @param input the user input
+     * @return the arguments from the user input
+     */
     String parseArguments(String input) {
         if (!hasArguments(input)) {
             return null;
