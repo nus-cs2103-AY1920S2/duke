@@ -1,4 +1,4 @@
-package e0148811.duke;
+package liaomeng.duke;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package e0148811.duke;
+package liaomeng.duke;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,8 @@ public class TaskList {
     }
 
     public String printListBasedOnPriority(PriorityLevel level) {
-        StringBuilder output = new StringBuilder("Here is the list of tasks " +
-                "with your specified priority level:\n");
+        StringBuilder output = new StringBuilder("Here is the list of tasks "
+                + "with your specified priority level:\n");
         int count = addAndCountTasksWithGivenPriority(level, output);
         output.append(getNumOfSelectedTasks(count));
         output.append(getTotalNumOfTasks());

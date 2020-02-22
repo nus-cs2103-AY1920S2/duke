@@ -1,4 +1,4 @@
-package e0148811.duke;
+package liaomeng.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -114,16 +114,16 @@ public class Logic {
 
     private String clearList(String[] instructionByWord, int lengthOfArray) throws DukeException {
         if (lengthOfArray != 2) {
-            ui.throwWrongFormatException("\"clear a/all\" (if you want to remove all the tasks) " +
-                    "OR \"clear d/done\" (if you only want to remove tasks that are marked done)");
+            ui.throwWrongFormatException("\"clear a/all\" (if you want to remove all the tasks) "
+                    + "OR \"clear d/done\" (if you only want to remove tasks that are marked done)");
         } else {
             if (instructionByWord[1].contains("a")) {
                 return clearAllTasks();
             } else if (instructionByWord[1].contains("d")) {
                 return clearCompletedTasks();
             } else {
-                ui.throwWrongFormatException("\"clear (all)\" (if you want to remove all tasks) " +
-                        "OR \"clear d/done\" (if you only want to remove tasks that are marked done)");
+                ui.throwWrongFormatException("\"clear (all)\" (if you want to remove all tasks) "
+                        + "OR \"clear d/done\" (if you only want to remove tasks that are marked done)");
             }
         }
         return "";

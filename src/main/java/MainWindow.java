@@ -1,4 +1,4 @@
-import e0148811.duke.Ui;
+import liaomeng.duke.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

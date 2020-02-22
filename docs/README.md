@@ -133,7 +133,8 @@ Expected outcome:
     2) [D][Not Done][  ordinary  ] complete CS2103 iP
        (at: 2020-02-24, MONDAY)   
  
-### `l/list (optional: priority level)` - List all tasks or tasks with a specified priority level
+### `l/list (optional: priority level)` 
+### - List all tasks or tasks with a specified priority level
  
 The application will print the list of all tasks, or tasks whose priority level matches
 the level specified by the user. The index of these tasks are also shown, facilitating
@@ -169,7 +170,8 @@ Expected outcome:
     3 task(s) belong to this priority level.
     Currently there is/are 3 tasks(s) in the task list. 
    
-### `p/priority [a positive integer (index of the task)]` - Change the priority level of a task
+### `p/priority [a positive integer (index of the task)]` 
+### - Change the priority level of a task
   
 The application will change the priority level of 
 the indexed task and print it. Note that
@@ -187,7 +189,8 @@ Expected outcome:
     [D][Not Done][very important!!] complete CS2103 iP
        (by: 2020-02-24, MONDAY)
  
-### `r/remove [a positive integer (index of the task)]` - Remove a task from the list
+### `r/remove [a positive integer (index of the task)]` 
+### - Remove a task from the list
   
 The application will delete the indexed task from the list and print it.  
 It will also report the number of tasks in the list after deletion. Note that

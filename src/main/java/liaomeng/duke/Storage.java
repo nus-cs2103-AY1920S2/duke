@@ -1,4 +1,4 @@
-package e0148811.duke;
+package liaomeng.duke;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -51,16 +51,18 @@ public class Storage {
         }
         switch (lineByWord[0]) {
         case "T":
-            assert lineByWord.length == 4: "A correct line description should contain 4 parts separated by \"//\"";
+            assert lineByWord.length == 4 : "A correct line description should contain 4 parts separated by \"//\"";
             list.add(new Todo(isDone, lineByWord[3], level));
             break;
         case "D":
-            assert lineByWord.length == 5: "A correct line description should contain 5 parts separated by \"//\"";
+            assert lineByWord.length == 5 : "A correct line description should contain 5 parts separated by \"//\"";
             list.add(new Deadline(isDone, lineByWord[3], LocalDate.parse(lineByWord[4]), level));
             break;
         case "E":
-            assert lineByWord.length == 5: "A correct line description should contain 5 parts separated by \"//\"";
+            assert lineByWord.length == 5 : "A correct line description should contain 5 parts separated by \"//\"";
             list.add(new Event(isDone, lineByWord[3], LocalDate.parse(lineByWord[4]), level));
+            break;
+        default:
             break;
         }
     }
@@ -73,7 +75,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            ui.throwIOException();
+            ui.throwIoException();
         }
 
     }

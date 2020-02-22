@@ -1,4 +1,4 @@
-package e0148811.duke;
+package liaomeng.duke;
 
 public abstract class Task {
     static String DONE = "    Done   ";
@@ -23,19 +23,18 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String priorityIndication = " ";
+        String priorityIndication;
         switch (level) {
         case LOW:
             priorityIndication = "[  not important ] ";
-            break;
-        case NORMAL:
-            priorityIndication = "[      ordinary      ] ";
             break;
         case HIGH:
             priorityIndication = "[     important!    ] ";
             break;
         case TOP:
-            priorityIndication = "[very important!!] ";
+        default:
+            priorityIndication = "[      ordinary      ] ";
+            break;
         }
         if (isDone) {
             return "[" + Task.DONE + "]" + priorityIndication + task;
@@ -45,19 +44,20 @@ public abstract class Task {
     }
 
     public String toSimplerString() {
-        String priorityIndication = " ";
+        String priorityIndication;
         switch (level) {
         case LOW:
             priorityIndication = "l";
-            break;
-        case NORMAL:
-            priorityIndication = "n";
             break;
         case HIGH:
             priorityIndication = "h";
             break;
         case TOP:
             priorityIndication = "t";
+            break;
+        default:
+            priorityIndication = "n";
+            break;
         }
         String isDone;
         if (this.isDone) {
