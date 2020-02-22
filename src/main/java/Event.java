@@ -36,13 +36,16 @@ public class Event extends Item {
     }
 
     /**
-     * Returns the string corresponds to the current item.
+     * Returns the string corresponds to the current item marked as not done.
      */
     public String currentString() {
         String temp =  "   [E][" + 1 + "] " + super.getName() + " (at: " + date + ")\n";
         return temp;
     }
 
+    /**
+     * Returns the string corresponds to the current item.
+     */
     public String checkString() {
         String temp = "   [E][";
         if (super.getDone()) {

@@ -1,13 +1,28 @@
-   [T][1] sth
-   [T][1] sth
-   [T][1] sth
+
+
+
 
    [T][0] whatever
-   [T][0] sthlongsthlongsthlongsthlongsthlongsthlongsthlongsthlongsthlong
+longsthlongsthlongsthlongsthlongsthlongsthlongsthlongsthlong
 
 
-   [D][1] sth sth (by: 2020-09-10)
-   [T][1] 3
+
 
    [T][1] NEW
    [T][1] todo todo todo todotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodotodo
+
+ sth
+   [D][0] st (by: 2020-01-20)
+   [E][0] sth (at: 2020-09-09)
+
+
+ sth
+   [T][0] new
+   [T][0] old  
+   [T][0] 2
+   [T][1] 3
+   [T][0] 4
+   [D][0] sth (by: 2020-01-20)
+   [D][0] sthsth (by: 2020-01-22)
+   [E][0] s (at: 2020-09-10)
+   [E][1] at (at: 3939-01-20)

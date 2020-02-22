@@ -33,8 +33,6 @@ public class Parser {
             String task = append(tmp);
             if (temp.equals("list")) {
                 return list.toString();
-            } else if (temp.equals("bye")) {
-                return ui.bye();
             } else if (temp.equals("sortAsc")) {
                 return list.sortAsc().toString();
             } else if (temp.equals("sortDes")) {
@@ -42,15 +40,15 @@ public class Parser {
             } else if (tmp[0].equals("done") || tmp[0].equals("delete")) {
                 if (tmp.length < 2) {
                     return ("OOPS!!! The index of a task cannot be empty.");
-                } else if (Integer.parseInt(tmp[1]) > list.items.size()) {
+                } else if (Integer.parseInt(tmp[1]) > list.items.size() || Integer.parseInt(tmp[1]) <= 0) {
                     return ("OOPS!!! The index of a task is out of range.");
                 }
                 assert tmp.length >= 2;
                 int index = Integer.parseInt(tmp[1]);
                 if (tmp[0].equals("done")) {
                     list.items.get(index - 1).markDone();
-                    storage.updateTxt(list.items.get(index - 1).tobeReplaced(),
-                            list.items.get(index - 1).currentString(), ui);
+                    storage.updateTxt(list.items.get(index - 1).currentString(),
+                            list.items.get(index - 1).tobeReplaced(), ui);
                     assert list.items.get(index - 1).getDone() == true;
                     return ui.markDone(list.items.get(index - 1));
                 } else {
@@ -73,7 +71,7 @@ public class Parser {
                 }
                 String[] e = task.split(" /at ");
                 if (e.length < 2) {
-                    return "Time cannot be empty";
+                    return "Time or description cannot be empty";
                 }
                 Event event = new Event(e[0], LocalDate.parse(e[1]));
                 list.addItem(event);
@@ -85,7 +83,7 @@ public class Parser {
                 }
                 String[] d = task.split(" /by ");
                 if (d.length < 2) {
-                    return "Time cannot be empty";
+                    return "Time or description cannot be empty";
                 }
                 Deadline ddl = new Deadline(d[0], LocalDate.parse(d[1]));
                 list.addItem(ddl);
@@ -93,7 +91,7 @@ public class Parser {
                 return ui.addTask(list);
             }  else if (tmp[0].equals("find")) {
                 return ui.searchTask() + list.search(task);
-            } else {
+            }  else {
                 return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (IllegalInstructionException e) {
@@ -105,8 +103,9 @@ public class Parser {
         } catch (DateTimeParseException e) {
             ui.printDateErr();
         }
-        return "Task completed";
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
-    public static void main(String[] args){}
+    public static void main(String[] args) {
+    }
 }

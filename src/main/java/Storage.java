@@ -15,6 +15,7 @@ import java.io.File;
 
 public class Storage {
     private File file = Path.of(System.getProperty("user.dir")).resolve("data/output.txt").toFile();
+
     public Storage() {
     }
 
@@ -51,17 +52,16 @@ public class Storage {
                 String[] tmp;
                 splitted = data[0].split(" ", 2);
                 tmp = splitted[1].split(" \\(", 2);
-                if (data[0] .charAt(4) == '0') {
+                if (data[0].charAt(4) == '0') {
                     done = true;
                 } else {
                     done = false;
                 }
-                if (data[0] .charAt(1) == 'E') {
-
+                if (data[0].charAt(1) == 'E') {
                     tmp[1] = tmp[1].replaceAll("at: ","");
                     tmp[1] = tmp[1].replaceAll("\\)","");
                     list.addItem(new Event(tmp[0], LocalDate.parse(tmp[1]), done));
-                } else if (data[0] .charAt(1) == 'D') {
+                } else if (data[0].charAt(1) == 'D') {
                     tmp[1] = tmp[1].replaceAll("by: ","");
                     tmp[1] = tmp[1].replaceAll("\\)","");
                     list.addItem(new Deadline(tmp[0], LocalDate.parse(tmp[1]), done));

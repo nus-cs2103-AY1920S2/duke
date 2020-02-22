@@ -45,6 +45,9 @@ public class TaskList {
                 temp += ui.space + items.get(i);
             }
         }
+        if (temp.equals("")) {
+            temp = ui.space + "No search results";
+        }
         return temp;
     }
 
@@ -53,21 +56,35 @@ public class TaskList {
      */
     public TaskList sortAsc() {
         ArrayList<Item> sorted = new ArrayList<Item>();
-        sorted.addAll(items);
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) instanceof Todo) {
+                continue;
+            } else {
+                sorted.add(items.get(i));
+            }
+        }
+
         DateCompareAsc compare = new DateCompareAsc();
         Collections.sort(sorted, compare);
-        return new TaskList(sorted, count);
+        return new TaskList(sorted, sorted.size());
     }
 
     /**
-     * Returns TaskList sorted by descending dates.
+     * Returns TaskList sorted by descending dates for events and deadlines.
      */
     public TaskList sortDes() {
         ArrayList<Item> sorted = new ArrayList<Item>();
-        sorted.addAll(items);
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) instanceof Todo) {
+                continue;
+            } else {
+                sorted.add(items.get(i));
+            }
+        }
+
         DateCompareDes compare = new DateCompareDes();
         Collections.sort(sorted, compare);
-        return new TaskList(sorted, count);
+        return new TaskList(sorted, sorted.size());
     }
 
     @Override

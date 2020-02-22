@@ -38,13 +38,16 @@ public class Deadline extends Item {
     }
 
     /**
-     * Returns the string corresponds to the current item.
+     * Returns the string corresponds to the current item marked as not done.
      */
     public String currentString() {
         String temp =  "   [D][" + 1 + "] " + super.getName() + " (by: " + date + ")\n";
         return temp;
     }
 
+    /**
+     * Returns the string corresponds to the current item.
+     */
     public String checkString() {
         String temp = "   [D][";
         if (super.getDone()) {

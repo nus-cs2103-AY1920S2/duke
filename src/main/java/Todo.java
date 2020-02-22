@@ -27,13 +27,16 @@ public class Todo extends Item {
     }
 
     /**
-     * Returns the string corresponds to the current item.
+     * Returns the string corresponds to the current item with marked as not done.
      */
     public String currentString() {
         String temp = "   [T][" + 1 + "] " + super.getName() + "\n";
         return temp;
     }
 
+    /**
+     * Returns the string corresponds to the current item.
+     */
     public String checkString() {
         String temp = "   [T][";
         if (super.getDone()) {

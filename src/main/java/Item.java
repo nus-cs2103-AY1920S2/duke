@@ -47,7 +47,9 @@ public abstract class Item {
     public abstract String tobeReplaced();
 
     public abstract String currentString();
+
     public abstract String checkString();
+
     public abstract LocalDate getDate();
 
 }

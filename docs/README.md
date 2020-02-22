@@ -6,11 +6,12 @@
 [screenshot]: Ui.png 
 ## Features 
 
-1. CRUD operations on todo/deadline/event
+1. Create and delete operations on todo/deadline/event
 1. List Task - Lists the tasks you have.
 1. Mark a task as done
-1. Sort tasks by dates
+1. Sort tasks by dates (for events and deadlines)
 1. Find a task
+1. Exit the programme
 
 ## List of Commands
 
@@ -143,14 +144,17 @@ Here are the matching tasks in your list:
 ```
 
 ### 8. Undoing previous command: `sortAsc`
-Sort the lists by ascending dates, dates of todo items are treated today.
+Sort all events and deadlines by ascending dates.
 
 Format: `sortAsc`
 
 ### 9. Redoing the previously undone command: `sortDes`
-Sort the lists by ascending dates, dates of todo items are treated today.
+Sort all events and deadlines by ascending dates.
 
 Format: `sortDes`
 
-### 12. Saving the data
+### 10. Saving the data
 The lists are automatically saved in a txt file and loaded everytime the programme starts.
+
+### 10. Exit the programme
+The window will be closed if the user enters "bye".
