@@ -1,6 +1,8 @@
 package sampletest;
 
 import java.time.LocalDate;
+import exception.ExceptionGenerator;
+
 
 /**
  * CS2103 Individual Project
@@ -14,12 +16,13 @@ public class Events extends Task {
     /**
      * Constructor for the Events by taking in a description and time.
      * @param newDescripton Description of events.
-     * @param newTime time of event.
+     * @param newDate time of event.
      */
 
-    public Events(String newDescripton, String newTime) {
+    public Events(String newDescripton, String newDate) {
         super(newDescripton);
-        this.date = LocalDate.parse(newTime);
+        ExceptionGenerator.checkDateFormat(newDate);
+        this.date = LocalDate.parse(newDate);
     }
 
     /**

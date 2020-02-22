@@ -35,7 +35,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-  //      dialog.setStyle("-fx-border-color:crismson; -fx-padding:3px;-fx-background-color:skyblue");
+        dialog.setStyle("-fx-background-color:skyblue");
         dialog.setText(text);
         dialog.setTextFill(Color.CRIMSON);
         displayPicture.setImage(img);

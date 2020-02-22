@@ -56,13 +56,24 @@ public class MainWindow extends AnchorPane {
         assert input.length() > 0 : "The user's input is not valid.";
         Parser parser = new Parser(input.split(" "));
         String command = parser.getCommand();
-        String response = this.getResponse(this.duke.run(input)); //potential bug
+        String response = this.getResponse(this.duke.run(input));
+
        this.dialogContainer.setStyle("-fx-border-color:GREEN;-fx-background-color:#ffb508");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-     /*   if (input.equals("bye")) Stage.close();
-        userInput.clear();*/
+        userInput.clear();
+        this.isGoodbye(input);
+    }
+    /**
+     * Check the user input to verify if duke should bid goodbye to user.
+     */
+
+    private void isGoodbye(String userInput) {
+        if (userInput.equals("bye")) {
+            Stage stage = (Stage) scrollPane.getScene().getWindow();
+            stage.close();
+        }
     }
 }

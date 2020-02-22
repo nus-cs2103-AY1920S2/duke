@@ -1,3 +1,4 @@
+package exception;
 
 /**
  * CS2103 Individual Project.

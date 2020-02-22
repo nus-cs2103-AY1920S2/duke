@@ -10,6 +10,8 @@ import sampletest.Events;
 import sampletest.Deadlines;
 import java.util.ArrayList;
 import java.util.Collections;
+import exception.DukeException;
+import exception.ExceptionGenerator;
 
 /**
  * CS2103 Individual Project.
@@ -27,10 +29,6 @@ public class Duke  {
     private Button sendButton;
     private Scene scene;
 
-
-    public Duke() {
-
-    }
 
     /**
      * Constructor to create an instance of Duke.
@@ -89,6 +87,7 @@ public class Duke  {
                 //break;
             case "deadline":
                 String[] tokens = parser.getDescription().split(" /by ");
+                ExceptionGenerator.checkDeadlinesInput(tokens);
                 Deadlines deadlines = new Deadlines(tokens[0], tokens[1]);
                 this.tasks.add(deadlines);
                 numbOfTask = this.tasks.taskStorage.size();
@@ -96,6 +95,7 @@ public class Duke  {
                         + "\nNow you have " + numbOfTask.toString() + " tasks in the list.");
             case "event":
                 tokens = parser.getDescription().split(" /at ");
+                ExceptionGenerator.checkEventInput(tokens);
                 Events event = new Events(tokens[0], tokens[1]);
                 this.tasks.add(event);
                 numbOfTask = this.tasks.taskStorage.size();
@@ -128,7 +128,7 @@ public class Duke  {
                 return Ui.initiateFareWell();
             }
         } catch (DukeException ex) {
-            return ex.getMessage(); //potential error
+            return ex.getMessage();
         }
     }
 

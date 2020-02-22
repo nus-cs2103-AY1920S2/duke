@@ -1,6 +1,7 @@
 package sampletest;
 
 import java.time.LocalDate;
+import exception.ExceptionGenerator;
 
 /**
  * CS2103 Individual Project.
@@ -13,12 +14,13 @@ public class Deadlines extends Task {
     /**
      * Constructor for the Deadlines by taking in a description and time.
      * @param newDescripton description of deadline.
-     * @param newTime time of the deadline.
+     * @param newDate time of the deadline.
      */
 
-    public Deadlines(String newDescripton, String newTime) {
+    public Deadlines(String newDescripton, String newDate) {
         super(newDescripton);
-        this.date = LocalDate.parse(newTime);
+        ExceptionGenerator.checkDateFormat(newDate);
+        this.date = LocalDate.parse(newDate);
     }
 
     /**
@@ -44,9 +46,20 @@ public class Deadlines extends Task {
                 + Integer.valueOf(this.date.getYear()).toString();
     }
 
+    /**
+     * Give a particular instance deadline priority over other tasks
+     * @return boolean variable
+     */
+
     public boolean isUrgent() {
         return true;
     }
+
+    /**
+     * get the completion date in the integer format of
+     * 30012020 for 30-jan-2020.
+     * @return an integer value of the date
+     */
 
     public int getCompletionDate() {
         return date.getDayOfMonth() * 1000000 + date.getMonthValue()  * 10000 + date.getYear();
