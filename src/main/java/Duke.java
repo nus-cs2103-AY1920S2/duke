@@ -44,7 +44,6 @@ public class Duke {
         try {
             String[] parsed = TextParser.myFirstParser(command);
             String keyword = parsed[COMMAND];
-            assert keyword != "" : "Should contain a keyword else command is a empty string";
 
             if (keyword.equals(BYE_COMMAND)
                     || keyword.equals(STAT_COMMAND)
@@ -66,10 +65,12 @@ public class Duke {
                 }
                 if (keyword.equals(DONE_COMMAND)) {
                     int taskNumber = Integer.valueOf(parsed[NUMBER]);
+                    assert Integer.valueOf(parsed[NUMBER]) != 0 : " should not be 0";
                     message = doneCommand(taskNumber);
                 } else if (keyword.equals(DEL_COMMAND)) {
                     int taskNumber = Integer.valueOf(parsed[NUMBER]);
                     message = delCommand(taskNumber);
+                    assert Integer.valueOf(parsed[NUMBER]) != 0 : " should not be 0";
                 } else if (keyword.equals(FIND_COMMAND)) {
                     message = findCommand(parsed[SECOND_WORD]);
                 } else if (keyword.equals(TODO_COMMAND)) {
