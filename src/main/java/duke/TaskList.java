@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * TaskList is a class that represents an ordered list of tasks.
+ * An ordered list of tasks.
  */
 class TaskList {
     private List<Task> tasks;
