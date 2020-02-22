@@ -4,21 +4,21 @@ You're a cat and this is your *hooman* who will serve your every needs possible.
 ## Features 
 
 ### Adding To-do Task 
-Adds a to-do task. 
+Adds a to-do task using `todo`.
 ### Adding Task with a Deadline 
-Adds a to-do task that has a deadline.
+Adds a to-do task that has a deadline using `deadline`.
 ### Adding Event 
-Adds an event with a span of timing.
+Adds an event with a span of timing using `event`.
 ### Showing a List of your tasks
-Shows your entire tasklist.
+Shows your entire tasklist via `list`.
 ### Completing Task
-Completes a task.
+Completes a task using `done`.
 ### Deleting Task
-Removes a task from your tasklist.
+Removes a task from your tasklist using `delete`.
 ### Finding Task
-Search for all task relating to a keyword.
+Search for all task relating to a keyword with `find`.
 ### Terminate Program
-Goodbye.
+Goodbye. `bye`
 
 ## Usage
 
