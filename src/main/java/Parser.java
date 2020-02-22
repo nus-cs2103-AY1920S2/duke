@@ -1,120 +1,120 @@
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.util.Arrays;
 
 
-/**
- * <h1> Parser</h1>
- * The Parser class handles directly the user's command. After parsing the command, the Parser object will call the
- * relevant methods in response to the command.
- * <p> A Parser object has Storage, Ui, TaskList and Scanner objects as its attribute</p>
- */
 public class Parser {
-    private Storage storage;
-    private Ui ui;
-    private TaskList taskList;
-    private Scanner sc;
 
-    /**
-     * Constructor for the Parser class. Takes in Storage, Ui, TaskList and Scanner as its input.
-     * @param storage Storage object specific to this parser
-     * @param ui Ui object specific to this parser
-     * @param taskList TaskList object specific to this parser
-     * @param sc Scanner object specific to this parser
-     */
-    public Parser(Storage storage, Ui ui, TaskList taskList, Scanner sc) {
-        this.storage = storage;
-        this.ui = ui;
-        this.taskList = taskList;
-        this.sc = sc;
-    }
+    private static String[] timeRegexes = {
+            "H:m", "Hmm", "H.m", "h.m a", "h.m a", "h:m a", "h:m a", "hmm a", "hmma", "h a", "ha", "H"
+    };
 
-    /**
-     * This method makes sense of the user's command and calls the appropriate methods in response.
-     * @param command This is the user's command
-     * @throws DukeException
-     * @throws IOException
-     */
-    public void parse(String command) throws DukeException, IOException {
-        if (command.equals("list")) {
-            this.ui.printList();
-        } else if (command.equals("done")) {
-            int index = sc.nextInt() - 1;
-            if (index < 0 || index > this.taskList.size() - 1) {
-                throw new DukeException("done");
-            } else {
-                this.ui.markAsDone(index);
-                this.storage.save();
+    private static String[] dateRegexes = {
+            "ddMMyyyy", "yyyyMMdd", "d-M-yyyy", "d/M/yyyy", "yyyy-M-d", "yyyy/M/d"
+    };
+
+    public boolean isDoneOrDelete(String input) throws DukeException {
+        String doneRegex =
+                "(^(done|delete)\\s+.*|.*\\s+(done|delete)$)";
+        String actionWithNumRegex = "^(done|delete)\\s+\\d+$";
+        String actionAtFrontRegex =  "^(done|delete)\\s+.*";
+
+        if(Pattern.matches(doneRegex, input)) {
+            if(!Pattern.matches(actionAtFrontRegex, input)) {
+                throw new DukeException("Command should be placed at the front!");
+            } else if (!Pattern.matches(actionWithNumRegex, input)) {
+                throw new DukeException("Please provided the task number!");
             }
-        } else if (command.equals("todo")) {
-            String str = sc.nextLine();
-            if (str.split("").length > 1) {
-                ToDo t = new ToDo(str.trim());
-                this.taskList.addTask(t);
-                this.storage.save();
-                this.ui.printTask(t);
-            } else {
-                throw new DukeException("todo");
-            }
-        } else if (command.equals("deadline")) {
-            String str = sc.nextLine();
-            if (str.split("").length > 1) {
-                String[] splitStr = str.split("/by");
-                if (splitStr[1].trim().split("\\s+").length > 1) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-                    LocalDateTime dateTime = LocalDateTime.parse(splitStr[1].trim(), formatter);
-                    DeadLine t = new DeadLine(splitStr[0].trim(), dateTime);
-                    this.taskList.addTask(t);
-                    this.storage.save();
-                    this.ui.printTask(t);
-                } else {
-                    throw new DukeException("timing");
-                }
-            } else {
-                throw new DukeException("deadline");
-            }
-        } else if (command.equals("event")) {
-            String str = sc.nextLine();
-            if (str.split("").length > 1) {
-                String[] splitStr = str.split("/at");
-                if (splitStr[1].trim().split("\\s+").length > 1) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-                    LocalDateTime dateTime = LocalDateTime.parse(splitStr[1].trim(), formatter);
-                    Event t = new Event(splitStr[0].trim(), dateTime);
-                    this.taskList.addTask(t);
-                    this.storage.save();
-                    this.ui.printTask(t);
-                } else {
-                    throw new DukeException("timing");
-                }
-            } else {
-                throw new DukeException("event");
-            }
-        } else if (command.equals("delete")) {
-            int index = sc.nextInt() - 1;
-            if (index < 0 || index > taskList.size() - 1) {
-                throw new DukeException("delete");
-            } else {
-                int size = taskList.size();
-                Task t = taskList.get(index);
-                taskList.deleteTask(index);
-                assert taskList.size() == size-1 : "Task failed to be deleted!";
-                this.storage.save();
-                this.ui.printDeletedTask(t);
-            }
-        } else if (command.equals("find")){
-            String keyWord = sc.next();
-            TaskList tempTaskList = new TaskList();
-            for(int i = 0; i < taskList.size(); i ++) {
-                Task t = taskList.get(i);
-                if(t.contains(keyWord)) {
-                    tempTaskList.addTask(t);
-                }
-            }
-            this.ui.printMatchingTasks(tempTaskList);
-        } else {
-            throw new DukeException("invalid");
+            return true;
         }
+        return false;
     }
+
+    public boolean isFind(String input) throws DukeException{
+        String findRegex =
+                "(^(find)\\s+.*|.*\\s+(find)$|^(find))";
+        String withSearchTermRegex = "^(find)\\s+.*";
+        if(Pattern.matches(findRegex, input)) {
+            if(!Pattern.matches(withSearchTermRegex, input)) {
+                throw new DukeException("Search term must be provided!");
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public int getTaskIndex(String input) {
+        String[] splitInput = input.split("\\s+");
+        return Integer.parseInt(splitInput[splitInput.length - 1]);
+    }
+
+    public String getType(String input) {
+        return input.split("\\s+")[0];
+    }
+
+    public String getDescription(String input) {
+        int len = input.split("\\s+")[0].length();
+        return input.substring(len).trim();
+    }
+
+    public String getTaskName(String input, String regex) {
+        return input.split(regex)[0];
+    }
+
+    public String getSearchTerm(String input) {
+        return input.substring(5).trim();
+    }
+
+    public static LocalDate getDate(String dateTime) throws DukeException {
+        String date = dateTime.split(" ")[0].trim();
+        for (String pattern : Parser.dateRegexes) {
+            try {
+                return LocalDate.parse(date, DateTimeFormatter.ofPattern(pattern));
+            } catch (Exception err) {
+                continue;
+            }
+        }
+        throw new DukeException(
+                        "Missing time/date information %n please provide date then time separated by a space");
+    }
+
+    public static LocalTime getTime(String dateTime) throws DukeException {
+        String time;
+        try {
+            String[] split = dateTime.split(" ");
+            time = String.join(" ", Arrays.copyOfRange(split, 1, split.length))
+                    .trim()
+                    .toUpperCase();
+        } catch (Exception e) {
+            throw new DukeException(
+                    String.format(
+                            "Missing time/date information %n please provide date then time separated by a space"));
+        }
+
+        for (String pattern : Parser.timeRegexes) {
+            try {
+                return LocalTime.parse(time, DateTimeFormatter.ofPattern(pattern));
+            } catch (Exception err) {
+                continue;
+            }
+        }
+        throw new DukeException("Time"); //thrown if time input is formatted poorly
+    }
+
+    public static String getDateTime(String description, String regex) throws DukeException {
+        Matcher matcher = Pattern.compile(regex).matcher(description);
+        int index = matcher.find() ? matcher.start() : -1;
+        if (index == -1) {
+            throw new DukeException(String.format("Please provide %s for this event type", regex));
+        }
+        String dateTime = description.substring(index + regex.length()).trim();
+
+        if (dateTime.length() == 0) throw new DukeException("Please provide a time");
+
+        return dateTime;
+    }
+
 }

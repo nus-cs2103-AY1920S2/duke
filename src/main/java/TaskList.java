@@ -1,45 +1,46 @@
 import java.util.ArrayList;
 
-/**
- * The TaskList class contains the list of tasks. It has methods: addTask, deleteTask, size() and get.
- */
 public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
 
-    public TaskList() {
-
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    /**
-     * Adds the task to the list.
-     * @param t The task being added to the list
-     */
+
     public void addTask(Task t) {
         tasks.add(t);
     }
 
-    /**
-     * Delete task at index in the list.
-     * @param index the position of the task needed to be deleted
-     */
     public void deleteTask(int index) {
         tasks.remove(index);
     }
 
-    /**
-     * returns the size of the list.
-     * @return the size of the list
-     */
     public int size() {
         return this.tasks.size();
     }
 
-    /**
-     * returns the task at position index.
-     * @param index the position of the desired task
-     * @return the required task
-     */
     public Task get(int index) {
         return tasks.get(index);
+    }
+
+    public void markDone(int index) {
+        Task t = tasks.get(index);
+        t.markAsDone();
+    }
+
+    public Task removeTask(int index) {
+        return this.tasks.remove(index);
+    }
+
+    public ArrayList<String> search(String searchTerm) {
+        ArrayList<String> taskString = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task curr = this.tasks.get(i);
+            if (curr.contains(searchTerm)) {
+                taskString.add(String.format("%d.%s", i + 1, this.tasks.get(i)));
+            }
+        }
+        return taskString;
     }
 }

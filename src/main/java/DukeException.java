@@ -1,11 +1,4 @@
 public class DukeException extends Exception {
-    public DukeException() {
-    }
-
-    /** constructor for DukeExcpetion. Takes in the error message as input.
-     *
-     * @param message error message
-     */
     public DukeException(String message) {
         super(message);
     }
@@ -36,7 +29,7 @@ public class DukeException extends Exception {
             str = "Sorry~ There needs to be a timing!";
             break;
         default:
-            str = "Sorry~ This command is invalid";
+            str = msg;
             break;
         }
         return str;

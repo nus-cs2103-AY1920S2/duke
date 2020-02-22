@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
  * <p>The Event class contains a LocalDateTime object</p>
  */
 
-public class DeadLine extends Task {
+public class Deadline extends Task {
 
     protected LocalDateTime dateTime;
 
-    public DeadLine(String description, LocalDateTime dateTime) {
+    public Deadline(String description, LocalDateTime dateTime) {
         super(description);
         this.dateTime = dateTime;
     }

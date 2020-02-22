@@ -1,5 +1,5 @@
-T  | 0 | read book
 D  | 0 | do math homework | 2015-02-20T06:30
 E  | 1 | join swimming club | 2015-02-20T06:30
 T  | 0 | join sports club
-T  | 0 | Math homework
+E  | 0 | chicken | 2013-09-03T09:00
+T  | 0 | PP

@@ -1,86 +1,143 @@
 import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.stream.Collectors;
 
-/**
- * Duke class represents a chatbot that keeps tracks of tasks.
- * Three unique commands can be given to the chatbot: "todo", "event and "deadline"
- * After each command, a description must be given.
- * In the case of the "event" class, after the description, the timing and date must be given after inputting "/at".
- * eg. event sister's birthday /at 08/06/2020 1700./
- * Date and timing must be given in this specific format (dd/mm/yyyy hhmm).
- * The same applies to deadline, but changing the "/at" to "/by".
- * eg. deadline math homework /by 07/08/2020 2359.
- * Other function includes marking the task as done and removing it from the list.
- * eg. done 3
- * delete 3
- * use "list" to printout the exising tasks on the list
- */
 public class Duke {
-    /**
-     * This is the main class.
-     * @param args args
-     */
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+
+    private Ui ui;
+    private TaskList taskList;
+    private Boolean hasEnded = false;
+    private Parser parser;
+    private static Storage storage = new Storage("Data/Duke.txt");
+
+    public Duke() {
+        this.ui = new Ui();
+        this.taskList = new TaskList(this.storage.load());
+        this.parser = new Parser();
+    }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Konnichiwa! I am Duke the cat! What can I do for you? meow~ (^.___.^)");
-        Scanner sc = new Scanner(System.in);
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage(taskList);
-        Ui ui = new Ui(taskList);
-        Parser parser = new Parser(storage, ui, taskList, sc);
-
-        try {
-            storage.load();
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-
-        while (sc.hasNext()) {
+        Duke duke = new Duke();
+        System.out.println(duke.ui.printIntro());
+        while(!duke.ui.hasEnded()) {
+            String input = duke.ui.getInput();
             try {
-                String command = sc.next();
-                if (command.equals("bye")) {
-                    ui.printBye();
-                    break;
-                } else {
-                    parser.parse(command);
-                }
+                System.out.println(duke.start(input));
             } catch (DukeException e) {
-                System.out.println(e);
-            } catch (IOException e) {
-                System.out.println(e);
+                duke.ui.printErr(e);
             }
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    private String start(String input) throws DukeException {
+        switch (input) {
+            case "List":
+                return this.ui.printList(this.taskList);
+            case "list" :
+                return this.ui.printList(this.taskList);
+            case "bye":
+                this.hasEnded = true;
+                return this.ui.printBye();
+            default:
+                if (this.parser.isDoneOrDelete(input)) {
+                    int taskIndex = this.parser.getTaskIndex(input) - 1;
+                    if (taskIndex >= this.taskList.size()) {
+                        throw new DukeException("task index out of range!");
+                    }
+                    if (input.contains("done")) {
+                        this.taskList.markDone(taskIndex);
+
+                        try {
+                            this.storage.save(taskList);
+                        } catch (IOException err) {
+                            System.out.println(err.getMessage());
+                        }
+
+                        return this.ui.printMarkedTask(this.taskList.get(taskIndex));
+                    } else {
+                        Task removedTask = this.taskList.removeTask(taskIndex);
+
+                        try {
+                            this.storage.save(taskList);
+                        } catch (IOException err) {
+                            System.out.println(err.getMessage());
+                        }
+
+                        return this.ui.printRemovedTask(removedTask, taskList.size());
+                    }
+                } else if (this.parser.isFind(input)) {
+                    String searchTerm = this.parser.getSearchTerm(input);
+                    String searchResults =
+                            taskList.search(searchTerm)
+                                    .stream()
+                                    .collect(Collectors.joining(String.format("%n")));
+                    if (searchResults.isEmpty()) {
+                        return "No matching tasks!";
+                    }
+                    return this.ui.printSearchResult(searchResults);
+                } else {
+                    if (input.split("\\s+").length < 2) {
+                        throw new DukeException("Command not recognised!");
+                    }
+                    String taskType = this.parser.getType(input);
+                    String taskDesc = this.parser.getDescription(input);
+                    switch (taskType) {
+                        case "todo":
+                            ToDo todo = new ToDo(taskDesc);
+                            this.taskList.addTask(todo);
+                            try {
+                                this.storage.save(taskList);
+                            } catch (IOException e) {
+                                System.out.println(e.getMessage());
+                            }
+                            return this.ui.printTaskAdded(todo, this.taskList.size());
+                        case "event":
+                            String taskName = this.parser.getTaskName(taskDesc, "/at");
+                            String dT = this.parser.getDateTime(taskDesc, "/at");
+                            LocalDate date = this.parser.getDate(dT);
+                            LocalTime time = this.parser.getTime(dT);
+                            LocalDateTime dateTime = LocalDateTime.of(date, time);
+                            Event event = new Event(taskName, dateTime);
+                            this.taskList.addTask(event);
+                            try {
+                                this.storage.save(taskList);
+                            } catch (IOException e) {
+                                System.out.println(e.getMessage());
+                            }
+                            return this.ui.printTaskAdded(event, this.taskList.size());
+                        case "deadline":
+                            String taskNamee = this.parser.getTaskName(taskDesc, "/by");
+                            String dTT = this.parser.getDateTime(taskDesc, "/by");
+                            LocalDate datee = this.parser.getDate(dTT);
+                            LocalTime timee = this.parser.getTime(dTT);
+                            LocalDateTime dateTimee = LocalDateTime.of(datee, timee);
+                            Deadline t = new Deadline(taskNamee, dateTimee);
+                            this.taskList.addTask(t);
+                            try {
+                                this.storage.save(taskList);
+                            } catch (IOException e) {
+                                System.out.println(e.getMessage());
+                            }
+                            return this.ui.printTaskAdded(t, this.taskList.size());
+                        default:
+                            throw new DukeException("Task not recognised!");
+                    }
+                }
+        }
     }
 
+    public String getResponse(String input) {
+        try {
+            String output = start(input);
+            return output;
+        } catch (DukeException err ) {
+            return err.getMessage();
+            }
+    }
+
+    public boolean hasEnded() {
+        return this.hasEnded;
+    }
 }
