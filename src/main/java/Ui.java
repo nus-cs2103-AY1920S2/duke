@@ -20,7 +20,8 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";*/
-        String greetings = "Konnichiwassup! Got things I can do for ya?";
+        String greetings = "Konnichiwassup, you got things for me, the DUKE?? I'm soooooo busy ugh...\n";
+        greetings = greetings + "Oh ya, type your commands in lower case pls!!";
         return greetings;
     }
 
@@ -39,8 +40,8 @@ public class Ui {
      * @param taskNum Task number.
      */
     public String printMarkDone(int size, int taskNum, String task) {
-        String msg = "Got it. I've marked task #" + taskNum + ": 「" + task + "」 as done." + "\n"
-                + "You currently have " + size + " task(s) in your list.";
+        String msg = "Ugh ok. I've marked task #" + taskNum + ": \n「" + task + "」 as done." + "\n"
+                + "You currently have " + size + " task(s) in your list. You happy??";
         return msg;
     }
 
@@ -50,8 +51,8 @@ public class Ui {
      * @param task Specific task.
      */
     public String printTaskAdded(int size, String task) {
-        String msg = "Got it. I've added 「" + task + "」 to your task(s)." + "\n"
-                + "You currently have " + size + " task(s) in your list.";
+        String msg = "Ugh ok. I've added \n「" + task + "」 to your task(s)." + "\n"
+                + "You currently have " + size + " task(s) in your list. You happy??";
         return msg;
     }
 
@@ -62,8 +63,8 @@ public class Ui {
      * @param task Specific task.
      */
     public String printTaskRemoved(int size, int taskNum, String task) {
-        String msg = "Got it. I've removed task #" + taskNum + ": 「" + task + "」." + "\n"
-                + "You currently have " + size + " task(s) in your list.";
+        String msg = "Ugh ok. I've removed task #" + taskNum + ": \n「" + task + "」." + "\n"
+                + "You currently have " + size + " task(s) in your list. You happy??";
         return msg;
     }
 
@@ -74,10 +75,10 @@ public class Ui {
      */
     public String printMatchingTask(String list, String keyword) {
         if (list.equals("")) {
-            return "We have found nothing related to your search.";
+            return "Got nothing lah dun waste my time, I'm busy with building toys!!";
         } else {
-            String msg = "Here are some matching tasks in your list: 「" +
-                    keyword + "」" + "\n" + list;
+            String msg = "Matching task(s) in your list: \n「" +
+                    keyword + "」" + "\nList:\n" + list + "\nYou happy now??";
             return msg;
         }
     }
@@ -86,7 +87,7 @@ public class Ui {
      * Prints goodbye message to the user.
      */
     public String printGoodbye() {
-        return "さらbye. Hope to see you again soon! ( ﾟ▽ﾟ)/";
+        return "さらbye. Don't find me again, I'm busy building toys.";
     }
 
 }

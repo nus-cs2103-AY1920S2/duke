@@ -35,3 +35,6 @@ If Duke cannot understand your message, Duke will reply the respective message t
 
 ### Acknowledgement
 Special thanks to @nus-cs2103-AY1920S2 for creating JavaFX tutorial!
+
+### Images used in Duke chatbot
+All the images are done by me.

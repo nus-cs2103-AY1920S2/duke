@@ -57,7 +57,7 @@ public class Duke {
             switch (cmd) {
             case LIST:
                 if (tasks.getSize() == 0) {
-                    return "The list is empty.";
+                    return "List empty ok???";
                 } else {
                     String listOfTasks = "";
                     for (int i = 0; i < tasks.getDukeList().size(); i++) {
@@ -112,9 +112,9 @@ public class Duke {
 
                 return ui.printMatchingTask(taskList.trim(), find);
             case ENTERCOMMAND:
-                throw new DukeException("Please enter a command");
+                throw new DukeException("Enter a command!!!!! Don't waste my time!");
             default:
-                throw new DukeException("Sumimasen, I can't understand what chu talking about. Try again?");
+                throw new DukeException("I can't understand what chu talking about. Try again?");
             }
         } catch (DukeException e) {
             return e.toString();

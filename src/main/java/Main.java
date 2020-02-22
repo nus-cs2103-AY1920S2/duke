@@ -21,7 +21,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke chatbot");
+            stage.setTitle("Duke Chatbot");
+            scene.getStylesheets().add("/view/style.css");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().initialiseMsg();
             stage.show();

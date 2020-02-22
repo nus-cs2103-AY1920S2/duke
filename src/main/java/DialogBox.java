@@ -16,6 +16,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -44,7 +45,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        Circle circle = new Circle(50, 50, 45);
         displayPicture.setImage(img);
+        displayPicture.setClip(circle);
     }
 
     /**
@@ -79,7 +82,7 @@ public class DialogBox extends HBox {
         //@@author lohszeying-reused
         //Reused from https://stackoverflow.com/questions/22614758/issue-with-background-color-in-javafx-8/38537681
         //with minor modifications
-        db.setBackground(new Background(new BackgroundFill(Color.rgb(255, 232, 191), CornerRadii.EMPTY, Insets.EMPTY)));
+        //db.setBackground(new Background(new BackgroundFill(Color.rgb(226, 232, 236), CornerRadii.EMPTY, Insets.EMPTY)));
         //@@author
         return db;
     }

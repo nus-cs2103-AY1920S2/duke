@@ -73,8 +73,20 @@ public class MainWindow extends AnchorPane {
     /**
      * Closes the Duke application launcher.
      */
-    private void close(){
-        Platform.exit();
-        System.exit(0);
+    private void close() {
+
+        //@@author lohszeying-reused
+        //Reused from https://stackoverflow.com/questions/52602990/why-cant-we-call-threadsleep-directly-inside-a-lambda-function with minor modification
+        Thread t1 = new Thread() {
+            public void run(){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {}
+                Platform.exit();
+                System.exit(0);
+            }
+        };
+        t1.start();
+        //@author
     }
 }
