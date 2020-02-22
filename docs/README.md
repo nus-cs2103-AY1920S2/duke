@@ -46,7 +46,7 @@ Example of usage:
 Expected outcome:
 ```
 Got it. I've added this task:
-  [D][✘] have fun (by: June 1 2020)
+  [D][✘] have fun (by: Jun 1 2020)
 Now you have 2 tasks in the list.
 ```
 
@@ -82,9 +82,9 @@ Example of usage:
 Expected outcome:
 ```
 Here are the tasks in your list:
-1.[T][✘] do assignment
-2.[D][✘] have fun (by: June 1 2020)
-3.[E][✘] attend conference (at: Jan 1 2020)
+1 [T][✘] do assignment
+2 [D][✘] have fun (by: June 1 2020)
+3 [E][✘] attend conference (at: Jan 1 2020)
 ```
 
 ### 5. Marking a task as done: `done`
@@ -143,13 +143,13 @@ Here are the matching tasks in your list:
   [T][✓] do assignment
 ```
 
-### 8. Undoing previous command: `sortAsc`
+### 8. Sort deadlines and events: `sortAsc`
 Sort all events and deadlines by ascending dates.
 
 Format: `sortAsc`
 
-### 9. Redoing the previously undone command: `sortDes`
-Sort all events and deadlines by ascending dates.
+### 9. Sort deadline and events in reverse order: `sortDes`
+Sort all events and deadlines by descending dates.
 
 Format: `sortDes`
 
