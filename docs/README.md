@@ -17,7 +17,7 @@
 
 ### 1. Adding a todo task: `todo` 
 
-Adds a todo task to the task list. Duplicated todos will not be allowed to be added.
+Adds a todo task to the task list. Duplicated todos will not be allowed to add.
 
 Format: `todo DESCRIPTION`
 
@@ -35,7 +35,7 @@ Now you have 1 task in the list.
 ### 2. Adding a deadline task: `deadline` 
 
 Adds a deadline task to the task list. 
-The date follows `yyyy/MM/dd` format. Duplicated deadlines will not be allowed to be added.
+The date follows `yyyy/MM/dd` format. Duplicated deadlines will not be allowed to add.
 
 Format: `deadline DESCRIPTION /by DATE`
 
@@ -53,7 +53,7 @@ Now you have 2 tasks in the list.
 ### 3. Adding a event task: `event` 
 
 Adds a event task to the task list. All the dates follows 
-`yyyy/MM/dd` format. Duplicated events will not be allowed to be added.
+`yyyy/MM/dd` format. Duplicated events will not be allowed to add.
 
 Format 1: `event DESCRIPTION /at DATE`
 
