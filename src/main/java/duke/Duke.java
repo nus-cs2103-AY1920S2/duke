@@ -14,8 +14,6 @@ import duke.tasks.TaskList;
 import duke.parser.Parser;
 
 import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Duke {
 
