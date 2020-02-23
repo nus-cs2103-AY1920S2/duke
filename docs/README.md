@@ -6,7 +6,7 @@ A guide on how to use Duke.
 
 ## 2. Features 
 
-###Task Management
+### Task Management
 * #### Add task
     Adds a todo, event or deadline task to your task list. 
 * #### Remove duplicate task
