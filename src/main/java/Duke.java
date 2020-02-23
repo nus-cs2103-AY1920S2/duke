@@ -2,13 +2,9 @@ import duke.command.*;
 import duke.exception.CommandNotFoundException;
 import duke.exception.DukeException;
 import duke.exception.InvalidDukeArgumentException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
 import duke.util.*;
 
 import java.io.FileNotFoundException;
-import java.util.StringTokenizer;
 
 
 /**

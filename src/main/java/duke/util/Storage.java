@@ -9,8 +9,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /**
  * Handles loading tasks from the stored data file and saving tasks in the data file.
@@ -24,6 +27,19 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+
+        try {
+            if (!(new File(filePath)).exists()) {
+                String rootLocation = Paths.get("").toAbsolutePath().toString();
+                StringTokenizer st = new StringTokenizer(filePath);
+                String newDirectoryLocation = rootLocation + File.separator + st.nextToken("/");
+                String newFileLocation = newDirectoryLocation + File.separator + st.nextToken("/");
+                Files.createDirectories(Paths.get(newDirectoryLocation));
+                Files.createFile(Paths.get(newFileLocation));
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
     private Task parseTask(String str) {

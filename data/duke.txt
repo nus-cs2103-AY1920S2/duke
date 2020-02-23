@@ -2,4 +2,4 @@ T # 1 # read book
 D # 0 # return book # 2020-06-06
 E # 0 # project meeting # 2020-08-08
 T # 1 # join sports club
-T # 0 # finish CS2103 IP
+D # 0 # finish ip # 2020-03-01
