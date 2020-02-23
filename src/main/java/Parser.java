@@ -1,4 +1,5 @@
 import exception.InvalidCommandException;
+import exception.InvalidTaskIndexException;
 
 import java.time.LocalDate;
 
@@ -20,8 +21,24 @@ public class Parser {
      * @param wholeCommand The user command.
      * @return The task number.
      */
-    public int getTaskIndex(String wholeCommand) {
-        return Integer.parseInt(wholeCommand.split(" ")[1]);
+    public int getTaskIndex(String wholeCommand) throws InvalidTaskIndexException {
+        String str = wholeCommand.split(" ")[1];
+        if (isInteger(str)) {
+            return Integer.parseInt(wholeCommand.split(" ")[1]);
+        } else {
+            throw new InvalidTaskIndexException(":-( index provided should be an integer! :-(");
+        }
+    }
+
+    public boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -38,13 +55,21 @@ public class Parser {
      * @param wholeCommand The user command.
      * @return The description of the task.
      */
-    public String getDesc(String wholeCommand) {
+    public String getDesc(String wholeCommand) throws InvalidCommandException {
         String type = getType(wholeCommand);
         if (type.equals("todo")) {
             return wholeCommand.substring(5);
         } else if (type.equals("event")) {
+            if (wholeCommand.substring(6).split("/at").length == 1) {
+                throw new InvalidCommandException(":-( To create an event you should type something in this format:\n"
+                        + "event [event name] /at [yyyy-mm-dd]");
+            }
             return wholeCommand.substring(6).split(" /at ")[0];
         } else {
+            if (wholeCommand.substring(9).split("/by").length == 1) {
+                throw new InvalidCommandException(":-( To create a deadline you should type something in this format:\n"
+                        + "deadline [deadline name] /at [yyyy-mm-dd]");
+            }
             return wholeCommand.substring(9).split(" /by ")[0];
         }
     }
