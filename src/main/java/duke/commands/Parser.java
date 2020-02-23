@@ -97,8 +97,13 @@ public class Parser {
             } else if (command.startsWith("update")) {
                 ui.checkUpdate(command, taskList.size());
                 ui.checkTime(arr, "update");
-                return taskList.update(Integer.valueOf(command.split(" ")[1]) - 1,
-                        arr[1].split(" ", 2)[1], PARSER);
+                try {
+                    return taskList.update(Integer.valueOf(command.split(" ")[1]) - 1,
+                            arr[1].split(" ", 2)[1], PARSER);
+                } catch (DateTimeParseException e) {
+                    return "Please enter the time in the <dd-MM-yyyy HHmm> "
+                            + "format";
+                }
 
             } else {
                 throw new DukeException("I'm sorry, but I don't know "
