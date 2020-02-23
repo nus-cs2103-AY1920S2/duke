@@ -1,1 +1,3 @@
-D|X|Hunt For Demons|2020-12-30
+T|X|feed cat
+T|X|kiss cat
+D|X|train rectuits|2020-08-30
