@@ -34,6 +34,6 @@ public class EventTest {
 
     @Test
     public void toString_event_returnsStringRepresentation() {
-        assertEquals("[E][\u2718] duke (at: today)", new Event("duke", "today").toString());
+        assertEquals("[E][✘] duke (at: today)", new Event("duke", "today").toString());
     }
 }

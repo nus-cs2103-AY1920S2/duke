@@ -29,7 +29,7 @@ class Ui {
      * @return a welcome greeting
      */
     String sayHello() {
-        return("Hello, I'm Duke!\nWhat can I do for you?");
+        return "Hello, I'm Duke!\nWhat can I do for you?";
     }
 
     /** Returns a farewell greeting.

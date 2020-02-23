@@ -31,6 +31,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Set the <code>Duke</code> object being used.
+     *
+     * @param duke the <code>Duke</code> object to be used
+     */
     public void setDuke(Duke duke) {
         this.duke = duke;
         String greeting = duke.getGreeting();
