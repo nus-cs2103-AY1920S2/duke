@@ -3,7 +3,17 @@
  */
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddTodoCommand;
+import duke.commands.CommandType;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
+import duke.commands.ListCommand;
+import duke.commands.ScheduleCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.MissingDetailsException;
 import duke.exceptions.UnrecognizedCommandException;
@@ -30,7 +40,7 @@ public class Parser {
     public static String parse(String input, TaskList taskList, Storage storage) throws DukeException {
 
         String[] inputArr = input.split(" ",2);
-        String cmd = inputArr[0].toUpperCase();
+        String cmd = inputArr[0].trim().toUpperCase();
 
         CommandType commandType;
         try {
@@ -40,19 +50,24 @@ public class Parser {
             throw new UnrecognizedCommandException();
         }
 
+        switch(commandType) {
+        case BYE:
+            return ExitCommand.execute();
+        case LIST:
+            return ListCommand.execute(taskList);
+        case HELP:
+            return HelpCommand.execute();
+        }
+
+
         String commandDetails = "";
-        // Only BYE and LIST commands do not have further details
-        if (commandType != CommandType.BYE && commandType != CommandType.LIST && commandType != CommandType.HELP) {
-            try {
-                commandDetails = inputArr[1];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new MissingDetailsException();
-            }
+        try {
+            commandDetails = inputArr[1].trim();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MissingDetailsException();
         }
 
         switch (commandType) {
-        case BYE:
-            return ExitCommand.execute();
         case DEADLINE:
             return AddDeadlineCommand.execute(commandDetails, taskList, storage);
         case DELETE: case REMOVE:
@@ -63,10 +78,6 @@ public class Parser {
             return AddEventCommand.execute(commandDetails, taskList, storage);
         case FIND:
             return FindCommand.execute(commandDetails, taskList);
-        case HELP:
-            return HelpCommand.execute();
-        case LIST:
-            return ListCommand.execute(taskList);
         case SCHEDULE:
             return ScheduleCommand.execute(commandDetails, taskList);
         case TODO:
