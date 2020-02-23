@@ -17,6 +17,6 @@
                 <VBox fx:id="dialogContainer" prefWidth="388.0" style="-fx-background-color: #F4C2C2;" />
             </content>
         </ScrollPane>
-      <ImageView fitHeight="150.0" fitWidth="372.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="150.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>
