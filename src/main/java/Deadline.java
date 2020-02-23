@@ -20,7 +20,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "| by: " + time ;
+        return "[D]" + super.toString() + "| by: " + time;
     }
 
     /**

@@ -1,4 +1,4 @@
-public class DukeException{
+public class DukeException {
 
     public DukeException() {
     }
@@ -16,7 +16,7 @@ public class DukeException{
      * @return String for error message.
      */
     public String incorrectInputDeadline() {
-        return "OOPS!!! The description of a Deadline cannot be empty.\nPlease insert Action\n" ;
+        return "OOPS!!! The description of a Deadline cannot be empty.\nPlease insert Action\n";
     }
 
     /**
@@ -63,7 +63,7 @@ public class DukeException{
      * This method return the Error Message for Invalid Date Format.
      * @return String for error message.
      */
-    public String invalidDateFormat(){
+    public String invalidDateFormat() {
         return "Invalid Date Format! Enter in /by dd/mm/yyyy\n";
     }
 
@@ -71,7 +71,7 @@ public class DukeException{
      * This method return the Error Message for Invalid Time Format.
      * @return String for error message.
      */
-    public String invalidTimeFormat(){
+    public String invalidTimeFormat() {
         return "Invalid Date Format! Enter in hhmm\n";
     }
 
@@ -79,7 +79,7 @@ public class DukeException{
      * This method return Error Message for No Matched Found.
      * @return String for error message.
      */
-    public String noMatchesFound(){
+    public String noMatchesFound() {
         return "What you are looking for does not exist.\n";
     }
 

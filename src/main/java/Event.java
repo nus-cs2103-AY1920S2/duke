@@ -10,7 +10,7 @@ public class Event extends Task {
      * @param description This is the details for Event.
      * @param time This is the time for the Event.
      */
-    public Event (String description, String time, String[] dateTimes){
+    public Event(String description, String time, String[] dateTimes) {
         super(description);
         assert description != null : "Description cannot bve empty";
         assert time != null : "Time cannot be empty";
@@ -19,8 +19,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String toString(){
-        return "[E]" + super.toString() + "| at: " + time ;
+    public String toString() {
+        return "[E]" + super.toString() + "| at: " + time;
     }
 
     /**

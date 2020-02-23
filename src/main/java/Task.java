@@ -8,7 +8,7 @@ public abstract class Task {
     protected Date[] dateTimes = new Date[2];
 
 
-    public String output(){
+    public String output() {
         return "";
     }
 
@@ -19,7 +19,8 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.statusIcon = "\u2718";
+        //this.statusIcon = "\u2718";
+        this.statusIcon = "✗";
     }
 
     /**
@@ -27,9 +28,11 @@ public abstract class Task {
      */
     public void getStatusIcon() {
         if (isDone) {
-            this.statusIcon = "\u2713";
+            //this.statusIcon = "\u2713";
+            this.statusIcon = "✓";
         } else {
-            this.statusIcon = "\u2718";
+            //this.statusIcon = "\u2718";
+            this.statusIcon = "✗";
         }
     }
 
@@ -44,9 +47,10 @@ public abstract class Task {
         return dateTimes[1];
     }
 
-    public String getStrTime(){
+    public String getStrTime() {
         return "";
     }
+
     @Override
     public String toString() {
         return "[" + statusIcon + "] " + description;

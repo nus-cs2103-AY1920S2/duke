@@ -48,10 +48,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Setting for the user dialog boc display.
+     * @param text String to be displayed.
+     * @param img Image of the user
+     * @return Dislogbox of the user output.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, "-fx-background-color: #ffffcc");
     }
 
+    /**
+     * Setting for the duke dialog box display.
+     * @param text String to be displayed
+     * @param img Image of the duke
+     * @return Dialogbox of the duke output.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, "-fx-background-color: #ffff00");
         db.flip();

@@ -1,8 +1,12 @@
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -29,6 +33,9 @@ public class MainWindow extends AnchorPane {
     private Image dukeFind = new Image(this.getClass().getResourceAsStream("/images/gudetama-find.png"));
     private Image dukeTask = new Image(this.getClass().getResourceAsStream("/images/gudetama-meh.png"));
 
+    /**
+     * Initialize the dialogbox with the welcome message.
+     */
     @FXML
     public void initialize() {
         dialogContainer.getChildren().addAll(
@@ -59,18 +66,18 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeBye)
             );
             System.exit(0); //exits program
-        }   else if (response.contains("OOPS") || response.contains("Invalid")) {
+        } else if (response.contains("OOPS") || response.contains("Invalid")) {
             dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(cmd, userImage),
                 DialogBox.getDukeDialog(response, dukeTroubled)
             );
             userInput.clear();
         } else if (cmd.contains("done") || cmd.contains("delete")) {
-                dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(cmd, userImage),
-                    DialogBox.getDukeDialog(response, dukeDone)
-                );
-                userInput.clear();
+            dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(cmd, userImage),
+                DialogBox.getDukeDialog(response, dukeDone)
+            );
+            userInput.clear();
         } else if (response.contains("matching")) {
             dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(cmd, userImage),
@@ -87,7 +94,7 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(cmd, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
-        );
+            );
             userInput.clear();
         }
     }

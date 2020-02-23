@@ -1,4 +1,5 @@
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -28,7 +29,7 @@ public class Duke extends Application {
     private Store lib;
     private Ui ui = new Ui();
     private Scanner sn = new Scanner(System.in);
-    private DukeException DE;
+    private DukeException de;
     String[] checkInputs;
 
     /**
@@ -37,21 +38,21 @@ public class Duke extends Application {
      */
     public Duke() {
         String filepath = "D:/duke/data/d.txt";
-        DE = new DukeException();
+        de = new DukeException();
         File file = new File(filepath); //create a file obj with the given filepath.
         this.lib = new Store(file); //create store from absolute filepath
         try {
             boolean hasFile = file.exists();
-            if(!hasFile){
+            if (!hasFile) {
                 boolean isNewFile = file.createNewFile();
             } else {
                 Scanner newSN = new Scanner(file);
-                while(newSN.hasNextLine()){
+                while (newSN.hasNextLine()) {
                     String nxtLine = newSN.nextLine();
                     lib.load(nxtLine);
                 } //end while: for reading existing file
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     } //end Duke
@@ -107,7 +108,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Part 3. Add functionality to handle user input.
@@ -123,6 +124,7 @@ public class Duke extends Application {
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
+
     private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
@@ -135,6 +137,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+
     private void handleUserInput() {
     }
 
@@ -149,8 +152,8 @@ public class Duke extends Application {
             return lib.list();
         } else if (cmd.contains("done")) {
             String[] splits = cmd.split(" ");
-            if (splits.length < 2){
-                return DE.missingDoneIndex();
+            if (splits.length < 2) {
+                return de.missingDoneIndex();
             } else {
                 int index = Integer.parseInt(splits[1]);
                 return lib.done(index);
@@ -162,28 +165,28 @@ public class Duke extends Application {
         } else if (cmd.contains("todo")) {
             checkInputs = cmd.split(" ");
             if (checkInputs.length < 2) {
-                return DE.incorrectInputTodo();
+                return de.incorrectInputTodo();
             } else {
-                String NewInput = cmd.substring(5);
-                return lib.todo(NewInput);
+                String newInput = cmd.substring(5);
+                return lib.todo(newInput);
             }
         } else if (cmd.contains("deadline")) {
             checkInputs = cmd.split(" ");
             if (checkInputs.length < 2) {
-                return DE.incorrectInputDeadline();
+                return de.incorrectInputDeadline();
             } else if (!cmd.contains("/")) {
-                return DE.deadlineMissingDate();
+                return de.deadlineMissingDate();
             } else {
-                String NewInput = cmd.substring(9);
-                String[] ActionTime = NewInput.split("/", 2);
-                return lib.deadline(ActionTime);
+                String newInput = cmd.substring(9);
+                String[] actionTime = newInput.split("/", 2);
+                return lib.deadline(actionTime);
             }
         } else if (cmd.contains("event")) {
             checkInputs = cmd.split(" ");
             if (checkInputs.length < 2) {
-                return DE.incorrectInputEvent();
+                return de.incorrectInputEvent();
             } else if (!cmd.contains("/")) {
-                return DE.eventMissingDate();
+                return de.eventMissingDate();
             } else {
                 String newInput = cmd.substring(6);
                 String[] actionTime = newInput.split("/", 2);
@@ -192,13 +195,13 @@ public class Duke extends Application {
         } else if (cmd.contains("find")) {
             checkInputs = cmd.split(" ");
             if (checkInputs.length < 2) {
-                return DE.invalidInput();
+                return de.invalidInput();
             } else {
                 String newInput = cmd.substring(4).strip();
                 return lib.find(newInput);
             }
         } else {
-            return DE.invalidInput();
+            return de.invalidInput();
         }
     }
 }
