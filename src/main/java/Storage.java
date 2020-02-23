@@ -31,27 +31,25 @@ public class Storage {
         Scanner s = new Scanner(f);
         while (s.hasNextLine()) {
             String instruction = s.nextLine();
-            System.out.println(instruction);
-            String[] arr = instruction.split(" | ");
-            if (arr[0].equals("E")) {
-                Event e = new Event(arr[4], arr[6] + " " + arr[7]);
-                System.out.println(e);
-                if (Integer.parseInt(arr[2]) == 1) {
+            String[] arr = instruction.split("\\|");
+            if (arr[0].equals("E ")) {
+                Event e = new Event(arr[2].trim(), arr[3]);
+                if (Integer.parseInt(arr[1].trim()) == 1) {
                     e.markAsDone();
                 }
                 doneTasks.add(e);
             }
-            if (arr[0].equals("T")) {
-                Todo t = new Todo(arr[4]);
-                if (Integer.parseInt(arr[2]) == 1) {
-                    System.out.println(t);
+            if (arr[0].equals("T ")) {
+                Todo t = new Todo(arr[2].trim());
+                System.out.println(t);
+                if (Integer.parseInt(arr[1].trim()) == 1) {
                     t.markAsDone();
                 }
                 doneTasks.add(t);
             }
-            if (arr[0].equals("D")) {
-                Deadline d = new Deadline(arr[4], arr[6] + " " + arr[7]);
-                if (Integer.parseInt(arr[2]) == 1) {
+            if (arr[0].equals("D ")) {
+                Deadline d = new Deadline(arr[2].trim(), arr[3]);
+                if (Integer.parseInt(arr[1].trim()) == 1) {
                     d.markAsDone();
                 }
                 doneTasks.add(d);
@@ -85,14 +83,14 @@ public class Storage {
                 if (t instanceof  Deadline) {
                     Deadline d = (Deadline) t;
                     tasks += "D | " + t.getIsTaskDone() + " | "
-                            + t.getDescription() + " | "
+                            + t.getDescription() + "| "
                             + d.getBy() + System.lineSeparator();
                 }
 
                 if (t instanceof Event) {
                     Event e = (Event) t;
                     tasks += "E | " + t.getIsTaskDone() + " | "
-                            + t.getDescription() + " | "
+                            + t.getDescription() + "| "
                             + e.getAt() + System.lineSeparator();
                 }
             }
