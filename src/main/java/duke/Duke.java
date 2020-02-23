@@ -14,6 +14,8 @@ import duke.tasks.TaskList;
 import duke.parser.Parser;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Duke {
 
@@ -35,15 +37,17 @@ public class Duke {
 
         try {
             output.append(Parser.parse(input, tasks, storage));
+
+            // Exit system one second after Exit command.
+            // //@@author jadetayy-reused
+            if (output.toString().contains("Bye")) {
+                Executors.newSingleThreadScheduledExecutor()
+                        .schedule(() -> System.exit(0), 1, TimeUnit.SECONDS);
+            }
+            
+            return output.toString();
         } catch (DukeException e) {
             return e.toString();
         }
-
-        if (output.toString().equals("See you again!")) {
-            storage.saveAllTasks(tasks);
-            System.exit(0);
-        }
-
-        return output.toString();
     }
 }
