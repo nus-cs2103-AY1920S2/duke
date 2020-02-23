@@ -85,17 +85,20 @@ public class Ui {
         System.out.println("Now you have " + listOfTexts.size() + " tasks in the list.");
     }
 
-    static void printBeforeSearch() {
+    public static void printBeforeSearch() {
         System.out.println("Here are the matching tasks in your list:");
     }
 
-    static void printSearch(ArrayList<Task> searchList) {
+    public static void printSearch(ArrayList<Task> searchList) {
         assert (searchList.size() != 0) : "☹ OOPS!!! No match on your search! Are you sure you've added it? ☹ OOPS!!!";
         int counter = 1;
         for (int i = 0; i < searchList.size(); i++) {
             System.out.println(counter + ". " + searchList.get(i));
             counter++;
         }
+    }
+    public static void printEmptyToDoList() {
+        System.out.println("To Do List is empty! Congratulations!");
     }
 
 }

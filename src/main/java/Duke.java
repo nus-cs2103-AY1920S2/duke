@@ -13,32 +13,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for main class for the program to be run on the command line.
-     *
-     * @param filePath relative path of the file that the data of to do list is saved in.
-     */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            File file = new File("data");
-            if (!file.exists()) {
-                new File("data").mkdir();
-            }
-            try {
-                new File(filePath).createNewFile();
-            } catch (IOException IoError) {
-                System.out.println("Error in creating new file duke.txt " + IoError.getMessage());
-            }
-            tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Constructor for GUI.
+     * Constructor for main class for the program to be run
      * String filePath relative path of the file that the data of to do list is saved in.
      */
     public Duke() {
@@ -61,8 +36,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
-
 
     /**
      * Main driver for Duke program.
@@ -88,9 +61,9 @@ public class Duke {
     }
 
     /**
-     * Shows the welcome message for the GUI
+     * Shows the welcome message for the GUI.
      *
-     * @return String Welcome Message in the GUI
+     * @return String Welcome Message in the GUI.
      */
     //@@author garysyndromes-reused
     //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications
@@ -113,9 +86,9 @@ public class Duke {
 
 
     /**
-     * Shows the current tasks in Duke
+     * Shows the current tasks in Duke for the GUI.
      *
-     * @return String of current tasks in duke
+     * @return String of current tasks in duke for the GUI.
      */
     //@@author garysyndromes-reused
     //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications
@@ -137,9 +110,9 @@ public class Duke {
 
 
     /**
-     * Handles the responses of duke
+     * Handles the responses of Duke to display on the GUI.
      *
-     * @return String of current response to the input
+     * @return String of current response to the input on the GUI.
      */
     //@@author garysyndromes-reused
     //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications
@@ -149,10 +122,11 @@ public class Duke {
         PrintStream ps = new PrintStream(baos);
         PrintStream old = System.out;
         System.setOut(ps);
+
         Command c = Parser.parse(input);
-        assert (c != null) : "Input something correct into me! todo deadline (/by) event (/at) find list delete done";
         tasks.runCommand(c);
         this.storage.save(tasks);
+
         System.out.flush();
         System.setOut(old);
         //@@author
@@ -161,7 +135,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("./data/duke.txt");
+        Duke duke = new Duke();
         duke.run();
     }
 }

@@ -29,7 +29,7 @@ Duke allows you to Add, Mark and Delete to manage your Todo, Deadline, Event and
 ## Requirements
 You need to have the following installed to be able to use Duke.
 1. Java SE Development Kit 11
-2. 
+2. The `jar` file, which can be found [here](https://github.com/garysyndromes/duke/releases)
 <br>
 <br>
 <br>

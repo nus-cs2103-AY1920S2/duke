@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
  * Parser makes sense of the text that is being input to Duke.
  */
 public class Parser {
-    final static String exitInput = "bye";
+    private final static String exitInput = "bye";
 
     /**
      * Returns a Command for Duke to run on.
@@ -41,15 +41,14 @@ public class Parser {
         }
         if (splitStr[0].toLowerCase().equals("fixedtask")) {
             try {
-                 int neededHours = -1;
+                int neededHours = -1;
                 String fixedTaskDescription = "";
                 for (int i = 1; i < splitStr.length; i++) {
                     if ((splitStr[i].equals("/needs"))) {
-                            neededHours = Integer.parseInt(splitStr[i+1]);
+                        neededHours = Integer.parseInt(splitStr[i + 1]);
                         break;
-                    } else {
-                        fixedTaskDescription += splitStr[i] + " ";
                     }
+                    fixedTaskDescription += splitStr[i] + " ";
                 }
                 if (neededHours == -1) {
                     throw new DukeException("☹ OOPS!!! How long is this FixedDurationTask????? use /needs <hours> to tell me! ☹ OOPS!!!");
@@ -72,9 +71,8 @@ public class Parser {
                     if ((splitStr[i].equals("/by"))) {
                         date = LocalDate.parse(splitStr[i + 1]);
                         break;
-                    } else {
-                        deadline += splitStr[i] + " ";
                     }
+                    deadline += splitStr[i] + " ";
                 }
                 deadline = deadline.substring(0, deadline.length() - 1);
 
@@ -99,9 +97,8 @@ public class Parser {
                             at += splitStr[j] + " ";
                         }
                         break;
-                    } else {
-                        event += splitStr[i] + " ";
                     }
+                    event += splitStr[i] + " ";
                 }
                 if (at.equals("")) {
                     throw new DukeException("☹ OOPS!!! Where is this event????? use /at to tell me! ☹ OOPS!!!");

@@ -7,6 +7,11 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> listOfTexts;
 
+    /**
+     * Constructor for TaskList called when there is an existing task list to show
+     *
+     * @param listOfTasks is the list of tasks in duke.txt
+     */
     public TaskList(ArrayList<Task> listOfTasks) {
         this.listOfTexts = listOfTasks;
     }
@@ -29,7 +34,7 @@ public class TaskList {
     public void showCurrentTasks() {
         int counter = 1;
         if (listOfTexts.size() == 0) {
-            System.out.println("To Do List is empty! Congratulations!");
+            Ui.printEmptyToDoList();
         }
         for (int i = 0; i < listOfTexts.size(); i++) {
             System.out.println(counter + ". " + listOfTexts.get(i));
@@ -55,7 +60,7 @@ public class TaskList {
      * @param command Type of Command described by .getCommand() which return a <code>String</code> description.
      */
     public void runCommand(Command command) {
-        assert (command != null) : "Input something correct into me! todo/deadline(/by)/event(/at)/fixedtask(/needs)/find/list/delete/done";
+        assert (command != null) : "Input something correct into me or I will stop! todo/deadline(/by)/event(/at)/fixedtask(/needs)/find/list/delete/done";
         try {
             switch (command.getCommand()) {
                 case "bye": {
