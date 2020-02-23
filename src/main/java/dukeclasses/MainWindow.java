@@ -1,5 +1,6 @@
 package dukeclasses;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -57,5 +58,27 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        if (response.contains("bye")) {
+            printGoodbyeCommand();
+        }
+
     }
+
+    /**
+     * This method helps the user to quit GUI after clicking bye.
+     * Solution below is adapted from https://stackoverflow.com/questions/52393982/javafx-problem-with-platform-runlater-delayed-rendering-of-canvas-graphic
+     */
+    private void printGoodbyeCommand() {
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.exit();
+        }).start();
+    }
+
+
 }
