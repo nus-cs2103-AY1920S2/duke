@@ -7,8 +7,7 @@ public class UnrecognizedCommandException extends DukeException {
     public String toString() {
         StringBuilder output = new StringBuilder();
         output.append("Patrick, I don't recognize this command :(\n");
-        output.append("These are the commands you can use:\n");
-        output.append(Ui.printCommands());
+        output.append("Type 'help' if you need help!\n");
         return output.toString();
     }
 }
