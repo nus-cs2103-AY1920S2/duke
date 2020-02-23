@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.DialogBox;
+import duke.commands.CommandType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
@@ -18,5 +19,17 @@ public class Ui {
         String errorMsg = "Data found could not be found or created.\n"
                 + "Please restart Duke and check your file structure.\n";
         showMessage(dialogContainer, image, errorMsg);
+    }
+
+    public static String printCommands() {
+        StringBuilder output = new StringBuilder();
+
+        int idx = 1;
+        for (CommandType s : CommandType.values()) {
+            output.append("    " + idx + ". ");
+            output.append(s + "\n");
+            idx++;
+        }
+        return output.toString();
     }
 }
