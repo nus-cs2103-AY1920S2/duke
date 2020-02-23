@@ -227,7 +227,7 @@ public class Duke extends Application {
             try {
                 return parser.parse(command); //get strings from system.out
             } catch (DukeException e) {
-                return ("OOPS!!! " + e.getMessage() + "\n");
+                return (e.getMessage() + "\n");
             }
         }
     }

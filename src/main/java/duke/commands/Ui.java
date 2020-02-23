@@ -28,7 +28,9 @@ public class Ui {
      */
     public String start() {
         //String output = "Hello from\n" + LOGO;
-        String output = "Hello! I'm Duke\nWhat can I do for you?\n";
+        String output = "I'm Karen!\n" +
+                "Now you had better let me know what to do or I will speak to"
+                + " your manager!\n";
         return output;
     }
 
@@ -64,11 +66,14 @@ public class Ui {
                              int listSize) throws DukeException {
         String[] arr = command.split(" ");
         if (arr.length < 2) {
-            throw new DukeException("The task to be marked as " + insert
-                    + " must be specified");
+            throw new DukeException("You fool!\n" +
+                    "The task to be marked as " + insert + " must be specified.\n" +
+                    "I will speak to your manager about this!");
         }
         if (Integer.valueOf(arr[1]) - 1 >= listSize) {
-            throw new DukeException("Task " + arr[1] + " does not exist");
+            throw new DukeException("You fool!\n"
+                    + "Task " + arr[1] + " does not exist.\n"
+                    + "I will speak to your manager about this!");
         }
     }
 
@@ -82,8 +87,9 @@ public class Ui {
     public void checkDescription(String[] description, String insert)
             throws DukeException {
         if (description.length < 2) {
-            throw new DukeException("The description of a " + insert
-                    + " cannot be empty.");
+            throw new DukeException("You fool!\nThe description of a " + insert
+                    + " cannot be empty.\nI will speak to your manager about "
+                    + "this!");
         }
     }
 
@@ -97,13 +103,15 @@ public class Ui {
     public void checkTime(String[] arr, String insert)
             throws DukeException {
         if (arr.length < 2) {
-            throw new DukeException("The time of a " + insert
-                    + " cannot be empty.");
+            throw new DukeException("You fool\nThe time of a " + insert
+                    + " cannot be empty.\nI will speak to your manager about "
+                    + "this!");
         }
         String[] time = (arr[1].split(" ", 2));
         if (time.length < 2) {
-            throw new DukeException("The time of a " + insert
-                    + " cannot be empty.");
+            throw new DukeException("You fool!\nThe time of a " + insert
+                    + " cannot be empty.\nI will speak to your manager about "
+                    + "this!");
         }
     }
 
@@ -120,10 +128,12 @@ public class Ui {
         try {
             testIndex = Integer.parseInt(command.split(" ")[1]) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("The task to be updated must be specified");
+            throw new DukeException("You fool!\nThe task to be updated must be"
+                    + " specified.\nI will speak to your manager about this!");
         }
         if (testIndex >= listSize) {
-            throw new DukeException("Task " + arr[1] + " does not exist");
+            throw new DukeException("You fool!\nTask " + arr[1] + " does not "
+                    + "exist.\nI will speak to your manager about this!");
         }
     }
 }

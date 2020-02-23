@@ -25,6 +25,13 @@ public class Parser {
             .ofPattern("MMM d yyyy hhmma");
 
     /**
+     *
+     */
+    public static final String ERROR_MESSAGE = "You fool!\nYou have to enter "
+            + "the time in <dd-MM-yyyy HHmm> format.\nI will speak to your "
+            + "manager about this!";
+
+    /**
      * Creates a new Ui object to access functions.
      */
     private Ui ui = new Ui();
@@ -76,8 +83,7 @@ public class Parser {
                     return taskList.add(new Deadline(description[1],
                             arr[1].split(" ", 2)[1], PARSER), true);
                 } catch (DateTimeParseException e) {
-                    return "Please enter the time in the <dd-MM-yyyy HHmm>"
-                            + "format";
+                    return ERROR_MESSAGE;
                 }
 
             } else if (command.startsWith("event")) {
@@ -87,11 +93,15 @@ public class Parser {
                     return taskList.add(new Event(description[1],
                             arr[1].split(" ", 2)[1], PARSER), true);
                 } catch (DateTimeParseException e) {
-                    return "Please enter the time in the <dd-MM-yyyy HHmm> "
-                            + "format";
+                    return ERROR_MESSAGE;
                 }
 
             } else if (command.startsWith("find")) {
+                if (description.length < 2) {
+                    throw new DukeException("You fool!\nTell me what you want "
+                            + "me to find.\nI will speak to your manager about "
+                            + "this!");
+                }
                 return taskList.find(description[1]);
 
             } else if (command.startsWith("update")) {
@@ -101,13 +111,12 @@ public class Parser {
                     return taskList.update(Integer.valueOf(command.split(" ")[1]) - 1,
                             arr[1].split(" ", 2)[1], PARSER);
                 } catch (DateTimeParseException e) {
-                    return "Please enter the time in the <dd-MM-yyyy HHmm> "
-                            + "format";
+                    return ERROR_MESSAGE;
                 }
 
             } else {
-                throw new DukeException("I'm sorry, but I don't know "
-                        + "what that means :-(");
+                throw new DukeException("You fool!\nI don't know what that "
+                        + "means.\nI will speak to your manager about this!");
             }
 
         }

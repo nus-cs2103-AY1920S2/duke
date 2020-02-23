@@ -30,9 +30,11 @@ public class TaskList {
     public String list() {
         String output = "";
         if (newList.size() == 0) {
-            output += ("You currently have no tasks in your list\n");
+            output += ("You fool!\nYou currently have no tasks in your list.\n"
+                    + "I will speak to your manager about this!");
         } else {
-            output += "Here are the tasks in your list:\n";
+            output += "You and your manager shall be spared from my wrath.\n"
+                    + "Here are the tasks in your list:\n";
             for (int i = 0; i < newList.size(); i += 1) {
                 output += ((i + 1) + ". " + newList.get(i).toString() + "\n");
                 assert newList.get(i) != null : "No task to list out";
@@ -52,13 +54,15 @@ public class TaskList {
     public String done(int index) {
         assert newList.size() > 0 : "No tasks in list";
         if (newList.get(index).isDone()) {
-            return ("The task has already been marked as done.");
+            return ("You fool!\nThe task has already been marked as done.\n"
+                    + "I will speak to your manager about this!");
         }
         newList.get(index).markAsDone();
         assert newList.get(index) != null : "No task to mark as done";
         assert newList.get(index).getDescription() != null
                 : "No description for this task";
-        return ("Nice! I've marked this task as done: \n"
+        return ("You and your manager shall be spared from my wrath.\n"
+                + "I've marked this task as done: \n"
                 + newList.get(index).toString() + "\n");
     }
 
@@ -75,7 +79,8 @@ public class TaskList {
                 : "No description for this task";
         Task task = newList.get(index);
         newList.remove(index);
-        return ("Noted. I've removed this task:\n" + task.toString() + "\n"
+        return ("You and your manager shall be spared from my wrath.\nI've "
+                + "removed this task:\n" + task.toString() + "\n"
                 + "Now you have " + newList.size() + " tasks in the list.\n");
     }
 
@@ -93,9 +98,9 @@ public class TaskList {
         assert newTask.getDescription() != null
                 : "No description for this task";
         if (print) {
-            return ("Got it. I've added this task:\n"
-                    + newTask.toString() + "\n"
-                    + "Now you have " + newList.size() + " tasks in the list."
+            return ("You and your manager shall be spared from my wrath.\nI've "
+                    + "added this task:\n" + newTask.toString()
+                    + " Now you have " + newList.size() + " tasks in the list."
                     + "\n");
         } else {
             return null;
@@ -133,7 +138,8 @@ public class TaskList {
      */
     public String find(String pattern) {
         if (newList.size() == 0) {
-            return ("You currently have no tasks in your list\n");
+            return ("You fool!\nYou currently have no tasks in your list.\n"
+                    + "I will speak to your manager about this!");
         } else {
             String output = "";
             int count = 0;
@@ -146,9 +152,11 @@ public class TaskList {
                 }
             }
             if (count == 0) {
-                return ("There are no matching tasks in your list\n");
+                return ("You and your manager shall be spared from my wrath.\n"
+                        + "There are no matching tasks in your list\n");
             } else {
-                return "Here are the matching tasks in your list:\n" + output;
+                return "You and your manager shall be spared from my wrath.\n"
+                        + "Here are the matching tasks in your list:\n" + output;
             }
         }
     }
@@ -164,9 +172,11 @@ public class TaskList {
     public String update(int index, String time, DateTimeFormatter format) {
         Task task = newList.get(index);
         if (task.getClass().getSimpleName().equals("ToDo")) {
-            return ("Sorry, a ToDo does not have any timing to update.\n");
+            return ("You fool!\nA ToDo does not have any timing to update.\n"
+                    + "I will speak to your manager about this!");
         }
         task.update(time, format);
-        return ("Noted. I've updated this task:\n" + task.toString() + "\n");
+        return ("You and your manager shall be spared from my wrath.\n"
+                + "I've updated this task:\n" + task.toString() + "\n");
     }
 }
