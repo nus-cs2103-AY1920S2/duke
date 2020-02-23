@@ -20,7 +20,6 @@ public class Storage {
         this.filePath = filePath;
         this.file = new File(filePath);
         if (!this.file.exists()) {
-            this.file.getParentFile().mkdirs();
             this.file.createNewFile();
             this.file = new File(this.filePath);
         }
