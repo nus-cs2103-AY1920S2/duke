@@ -12,12 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 
 
 public class Duke extends Application {
@@ -35,8 +31,9 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Image user = new Image(this.getClass().getResourceAsStream("/main/resources/images/DaUser.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/main/resources/images/DaDuke.jpg"));
+    private Image user = new Image("/images/DaUser.jpg");
+    private Image duke = new Image("/images/DaDuke.jpg");
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -103,10 +100,11 @@ public class Duke extends Application {
 
 
         // create a input stream
-        FileInputStream input = new FileInputStream("marble.jpg");
+        InputStream input = this.getClass().getResourceAsStream("/images/marble.jpg");
 
         // create a image
         Image image = new Image(input);
+
 
         // create a background image
         BackgroundImage backgroundimage = new BackgroundImage(image,

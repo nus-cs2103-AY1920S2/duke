@@ -22,6 +22,7 @@ public class Task {
      * @return String description
      */
     public String getDescription() {
+
         return this.description;
     }
 
@@ -54,6 +55,7 @@ public class Task {
 
     
     public String toString() {
+
         return description;
     }
 

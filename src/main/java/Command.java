@@ -47,7 +47,7 @@ public class Command {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      * Deals with individual commands given by user
-     * @param String input
+     * @param input
      */
     protected String getResponse(String input) throws DukeException{
         assert FILEPATH.equals("main/java/data/list.txt") : "wrong filepath";
@@ -148,13 +148,6 @@ public class Command {
             } catch (Exception e) {
                 response = e.getMessage();
             }
-        } else if (command.equals("begin")) {
-            try {
-                tl.loadFromStorage();
-                isTaskListLoaded = true;
-            } catch (Exception e) {
-                e.getMessage();
-            }
         } else if (command.equals("viewschedule")) {
             try {
                 assert isTaskListLoaded : "TaskList not loaded from storage";
@@ -165,7 +158,7 @@ public class Command {
                 response = ("Here are the tasks scheduled for:" + sldt + "\n");
                 response += (tl.getTaskFromKeyword(sldt));
             } catch (Exception e) {
-
+                response = e.getMessage();
             }
         } else if (command.equals("help")) {
             response = ui.showHelp();
