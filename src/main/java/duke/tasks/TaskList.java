@@ -88,16 +88,22 @@ public class TaskList {
      */
     public String printSchedule(LocalDate date) throws DukeException {
         StringBuilder output = new StringBuilder();
-        if (size() == 0) {
+        if (schedule.size() == 0) {
             throw new NoTasksScheduledException();
         } else {
             int taskIdx = 1;
+            boolean scheduleContainsTask = false;
             for (Task task : schedule) {
                 if (task.getDate().toString().equals(date.toString())) {
                     output.append(taskIdx + ". ");
                     output.append(task.toString() + "\n");
-                    taskIdx++;
+                    scheduleContainsTask = true;
                 }
+            }
+
+            // If no task on this date, taskIdx remains at 1. Schedule is empty
+            if (!scheduleContainsTask) {
+                throw new NoTasksScheduledException();
             }
         }
         return output.toString();
