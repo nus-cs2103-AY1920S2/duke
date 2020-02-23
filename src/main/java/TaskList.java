@@ -126,7 +126,7 @@ public class TaskList {
      */
     public String addTask(String type, String input) {
         Task task = taskConvertor(type, input);
-        if (task == null) {
+        if (task.getDescription().equals("HELP THIS IS WRONG!")) {
             return "Invalid Task Request:(";
         }
         this.taskList.add(task);
@@ -161,7 +161,7 @@ public class TaskList {
                 return null;
             }
         } catch (StringIndexOutOfBoundsException e) {
-            return null;
+            return new Todo("HELP THIS IS WRONG!");
         }
     }
 
