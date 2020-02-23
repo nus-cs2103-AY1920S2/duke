@@ -41,7 +41,6 @@ public class Storage {
             }
             if (arr[0].equals("T ")) {
                 Todo t = new Todo(arr[2].trim());
-                System.out.println(t);
                 if (Integer.parseInt(arr[1].trim()) == 1) {
                     t.markAsDone();
                 }
