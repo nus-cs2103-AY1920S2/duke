@@ -47,6 +47,14 @@ public class Storage {
                         curr.setDone();
                     }
                     arr.add(curr);
+                } else if (line.split("\\s")[0].equals("[TH]")) {
+                    taskType = "todo";
+                    Task curr = new Task(taskType, taskName);
+                    if (Integer.parseInt(line.split("\\s")[2]) == 1) {
+                        curr.setDone();
+                    }
+                    curr.priority = 1;
+                    arr.add(curr);
                 } else if (line.split("\\s")[0].equals("[D]")) {
                     taskType = "deadline";
                     taskFormattedDate = line.split("by: ")[1].substring(0, line.split("by: ")[1].length() - 1);
@@ -54,12 +62,26 @@ public class Storage {
                     if (Integer.parseInt(line.split("\\s")[2]) == 1) {
                         curr.setDone();
                     }
-
-                    // TESTING LINE
-                    //System.out.println(taskFormattedDate);
-
-
                     curr.addProcessedDate(taskFormattedDate);
+                    arr.add(curr);
+                } else if (line.split("\\s")[0].equals("[DH]")) {
+                    taskType = "deadline";
+                    taskFormattedDate = line.split("by: ")[1].substring(0, line.split("by: ")[1].length() - 1);
+                    Task curr = new Task(taskType, taskName);
+                    if (Integer.parseInt(line.split("\\s")[2]) == 1) {
+                        curr.setDone();
+                    }
+                    curr.addProcessedDate(taskFormattedDate);
+                    curr.priority = 1;
+                    arr.add(curr);
+                } else if (line.split("\\s")[0].equals("[E]")) {
+                    taskType = "event";
+                    taskFormattedDate = line.split("at: ")[1].substring(0, line.split("at: ")[1].length() - 1);
+                    Task curr = new Task(taskType, taskName);
+                    if (Integer.parseInt(line.split("\\s")[2]) == 1) {
+                        curr.setDone();
+                    }
+                    curr.fileDate = taskFormattedDate;
                     arr.add(curr);
                 } else {
                     taskType = "event";
@@ -69,6 +91,7 @@ public class Storage {
                         curr.setDone();
                     }
                     curr.fileDate = taskFormattedDate;
+                    curr.priority = 1;
                     arr.add(curr);
                 }
             }

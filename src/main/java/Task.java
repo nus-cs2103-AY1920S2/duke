@@ -33,12 +33,18 @@ public class Task {
     }
 
     public String getIcon() {
-        if (this.type.equals("todo")) {
+        if (this.type.equals("todo") && this.priority == 0) {
             return "[T]";
-        } else if (this.type.equals("deadline")) {
+        } else if (this.type.equals("todo") && this.priority == 1) {
+            return "[TH]";
+        } else if (this.type.equals("deadline") && this.priority == 0) {
             return "[D]";
-        } else {                  // event
+        } else if (this.type.equals("deadline") && this.priority == 1) {
+            return "[DH]";
+        } else if (this.type.equals("event") && this.priority == 0){                  // event
             return "[E]";
+        } else {
+            return "[EH]";
         }
     }
 

@@ -1,8 +1,11 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import java.util.*;
 import javafx.scene.control.Button;
@@ -45,7 +48,6 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
         stage.setScene(scene);
         stage.show();
 
@@ -270,155 +272,28 @@ public class Duke extends Application {
                 }
                 return str;
             case ("priority"):
+                Task prioritisedTask = new Task("todo", "filler");
                 for (int i = 0; i < taskNames.size(); i++) {
-                    String[] currentTaskName = taskNames.get(i).split("\\s");
-                    for (int j = 0; j < currentTaskName.length; j++) {
-                        if (currentTaskName[j].equals(parser.getSearchQuery())) {
-                            foundTasks.add(arr.get(i));
-                        }
+                    String currentTaskName = taskNames.get(i);
+                    if (currentTaskName.equals(parser.getSearchQuery())) {
+                        prioritisedTask = arr.get(i);
+                        prioritisedTask.setPriority(1);                             // now need to send it to the txt file
+                        storage.fileUpdate(dataFile, arr);
+                        assert i >= taskNames.size() : "error";
+                        return "Priority Set to High!";
+                    } else if (i == taskNames.size() - 1){
+                        return "Task Not Found :(";
                     }
-                    assert i >= taskNames.size() : "error";
                 }
-                for (int i = 0; i < foundTasks.size(); i++) {
-                    foundTasks.get(i).setPriority(1);
-                }
-                return "Priority Set!";
+
+
+                return foundTasks.size() + "";
             case ("bye"):
-                return ("Bye. Hope to see you again soon!");
-            //break;
+                Platform.exit();
+                return "Bye, see you again soon!";
             default:
                 return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
-//        do {
-//            Parser parser = new Parser();
-//            String parserOutput = parser.parse(userInput);                // gives parser the user command
-//            ArrayList <Task> arr = tasks.getArraylist(); // returns the arraylist form of the tasklist
-//            ArrayList <String> taskNames = tasks.getNames(arr);
-//            ArrayList <Task> foundTasks = new ArrayList <Task>();
-//            switch (parserOutput) {
-//
-//                case ("list"):
-//                    return ("Here are the tasks in your list: " + tasks.print());
-//                    //break;
-//
-//                case ("done"):
-//                    int doneTask = Integer.parseInt(userInput.split("\\s")[1]);
-//                    arr.get(doneTask - 1).setDone();
-//                    storage.fileUpdate(this.dataFile, arr);
-//                    return ("Nice! I've marked this task as done: \n" + arr.get(doneTask - 1).status + " " + arr.get(doneTask - 1).getDescription());
-//                    //break;
-//                case ("todo"):
-//                    if (userInput.split("\\s").length == 1) {
-//                        return ("&#x2639; OOPS!!! The description of a todo cannot be empty.");
-//                    } else {
-//                        String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
-//                        String taskDescription = "";
-//                        for (int i = 0; i < taskRequest.length; i++) {
-//                            if (i == 0) {
-//                                taskDescription += taskRequest[i];
-//                            } else {
-//                                taskDescription += " " + taskRequest[i];
-//                            }
-//                        }
-//                        Task curr = new Task("todo", taskDescription);
-//                        arr.add(curr);
-//                        storage.fileUpdate(dataFile, arr);
-//
-//                        return ("Got it. I've added this task:\n" + curr.getIcon() + curr.status + " " + curr.getDescription() + "\n" + "Now you have " + arr.size() + " tasks in the list.");
-//
-//                    }
-//                    //break;
-//                case ("deadline"):
-//                    if (userInput.split("\\s").length == 1) {
-//                        return ("&#x2639; OOPS!!! The description of a deadline cannot be empty.");
-//                    }
-//                    else {
-//                        String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
-//                        String taskDescriptionDate = "";
-//                        for (int i = 0; i < taskRequest.length; i++) {
-//                            if (i == 0) {
-//                                taskDescriptionDate += taskRequest[i];
-//                            } else {
-//                                taskDescriptionDate += " " + taskRequest[i];
-//                            }
-//                        }
-//                        String taskDescription = taskDescriptionDate.split("/")[0];
-//                        Task curr = new Task("deadline", taskDescription);
-//                        curr.addDate(taskDescriptionDate.split("/")[1]);
-//                        arr.add(curr);
-//                        storage.fileUpdate(dataFile, arr);
-//                        return ("Got it. I've added this task:\n" + curr.getIcon() + curr.status + " " + curr.getDescription() + "\n" + "Now you have " + arr.size() + " tasks in the list.");
-//
-//                    }
-//                    //break;
-//                case ("event"):
-//                    if (userInput.split("\\s").length == 1) {
-//                        return ("&#x2639; OOPS!!! The description of an event cannot be empty.");
-//                    } else {
-//                        String[] taskRequest = Arrays.copyOfRange(userInput.split("\\s"), 1, userInput.split("\\s").length);    // e.g. [return, book]
-//                        String taskDescriptionDate = "";
-//                        for (int i = 0; i < taskRequest.length; i++) {
-//                            if (i == 0) {
-//                                taskDescriptionDate += taskRequest[i];
-//                            } else {
-//                                taskDescriptionDate += " " + taskRequest[i];
-//                            }
-//                        }
-//                        String taskDescription = taskDescriptionDate.split("/")[0];
-//                        Task curr = new Task("event", taskDescription);
-//                        curr.addDate(taskDescriptionDate.split("/")[1]);
-//                        arr.add(curr);
-//                        storage.fileUpdate(dataFile, arr);
-//
-//                        return ("Got it. I've added this task:\n" + curr.getIcon() + curr.status + " " + curr.getDescription() + "\n" + "Now you have " + arr.size() + " tasks in the list.");
-//
-//                    }
-//                    //break;
-//                case ("delete"):
-//                    int removedTask = Integer.parseInt(userInput.split("\\s")[1]);
-//                    Task removed = arr.get(removedTask - 1);
-//                    arr.remove(removedTask - 1);
-//                    storage.fileUpdate(dataFile, arr);
-//                    return ("Noted. I've removed this task:\n" + removed.getIcon() + removed.status + " " + removed.getDescription() + "\n" + "Now you have " + arr.size() + " tasks in the list.");
-//                    //break;
-//                case ("find"):
-//                    for (int i = 0; i < taskNames.size(); i++) {
-//                        String[] currentTaskName = taskNames.get(i).split("\\s");
-//                        for (int j = 0; j < currentTaskName.length; j++) {
-//                            if (currentTaskName[j].equals(parser.getSearchQuery())) {
-//                                foundTasks.add(arr.get(i));
-//                            }
-//                        }
-//                        assert i >= taskNames.size() : "error";
-//                    }
-//                    String str = "";
-//                    for (int i = 0; i < foundTasks.size(); i++) {
-//                        int j = i + 1;
-//                        str += (j + "." + foundTasks.get(i).getIcon() + foundTasks.get(i).status + " " + foundTasks.get(i).getDescription());
-//                    }
-//                    return str;
-//                case ("priority"):
-//                    for (int i = 0; i < taskNames.size(); i++) {
-//                        String[] currentTaskName = taskNames.get(i).split("\\s");
-//                        for (int j = 0; j < currentTaskName.length; j++) {
-//                            if (currentTaskName[j].equals(parser.getSearchQuery())) {
-//                                foundTasks.add(arr.get(i));
-//                            }
-//                        }
-//                        assert i >= taskNames.size() : "error";
-//                    }
-//                    for (int i = 0; i < foundTasks.size(); i++) {
-//                        foundTasks.get(i).setPriority(1);
-//                    }
-//                    return "Priority Set!";
-//                case ("bye"):
-//                    return ("Bye. Hope to see you again soon!");
-//                    //break;
-//                default:
-//                    return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
-//            }
-//        } while (!userInput.equals("bye"));
     }
 
 }
