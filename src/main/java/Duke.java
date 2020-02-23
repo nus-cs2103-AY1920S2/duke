@@ -2,7 +2,6 @@ package main.java;
 
 
 import javafx.application.Application;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,12 +10,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
+import java.io.IOException;
+import java.net.URL;
 
 
 public class Duke extends Application {
@@ -38,7 +39,7 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/main/resources/images/DaDuke.jpg"));
 
     @Override
-    public void start(Stage stage) throws FileNotFoundException {
+    public void start(Stage stage) throws IOException {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -100,8 +101,9 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 2.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+
         // create a input stream
-        FileInputStream input = new FileInputStream("main/java/marble.jpg");
+        FileInputStream input = new FileInputStream("marble.jpg");
 
         // create a image
         Image image = new Image(input);
@@ -204,13 +206,4 @@ public class Duke extends Application {
     }
 
 }
-/**
- *todo:
- * handle exceptions done
- * more oop
- * push to git
- * do this week tasks
- * close the program when input = bye
- * add instructions upon startup
- * add B-viewschedules
- */
+

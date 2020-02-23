@@ -30,11 +30,7 @@ public class Command {
 
     protected void loadList() {
         if(isTaskListLoaded) {
-            System.out.println(isTaskListLoaded);
-            System.out.println("load alr" +
-                    "");
         } else {
-            System.out.println(isTaskListLoaded);
             isTaskListLoaded = true;
             try {
                 tl.loadFromStorage();
