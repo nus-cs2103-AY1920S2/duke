@@ -143,6 +143,9 @@ Expected outcome:
 
 ### `bye` - Exit 
 
-Closes Spongebob Organiser
+Exits Spongebob Organiser
 
 Format: `bye`
+
+Expected outcome:
+![Exit](./images/exit.png)
