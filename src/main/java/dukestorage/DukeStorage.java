@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 public class DukeStorage {
-    private static final String DEFAULTPATH = "src/main/java/data/duke.txt";
+    private static final String DEFAULTPATH = "duke.txt";
 
     public final Path path;
 
