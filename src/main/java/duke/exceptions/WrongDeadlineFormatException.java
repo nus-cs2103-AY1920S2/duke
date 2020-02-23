@@ -3,7 +3,7 @@ package duke.exceptions;
 public class WrongDeadlineFormatException extends DukeException {
     @Override
     public String toString() {
-        return "Please enter your deadline in the following format:\n"
-                + "Description /by YYYY-MM-DD";
+        return "Patrick, your deadline needs to be in this format:\n"
+                + "Description /by YYYY-MM-DD\n";
     }
 }
