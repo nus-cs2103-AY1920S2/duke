@@ -6,12 +6,22 @@ A guide on how to use Duke.
 
 ## 2. Features 
 
+###Task Management
 * #### Add task
+    Adds a todo, event or deadline task to your task list. 
 * #### Remove duplicate task
-* #### Mark task as done
-* #### Delete task
+    Automatically detects and removes a duplicate task you have just added.
 * #### List tasks
+    Shows you the list of task you currently have.
+* #### Mark task as done
+    Marks a tasks as done after you have completed it.
+* #### Delete task
+    Deletes a task from your task list.
+* #### Find task
+    Finds a list of task using a keyword you have provided.
 * #### Auto-save task
+    Automatically saves your task list to your hard disk when you add, remove, mark a task as done or exit the application.
+    
 
 ## 3. Types of tasks
 * #### `todo` - a normal task
@@ -116,10 +126,24 @@ Expected outcome:
 Noted. I've removed this task:
 [T][✓] buy groceries
 Now you have 2 tasks in the list.
+```  
+  
+### 4.7 `find`
+
+Finds the task from the list of tasks from a keyword by typing, `find "keyword"`.
+
+Example of usage: 
+
+`find outing`
+
+Expected outcome:
+
 ```
-  
-  
-### 4.7 `bye`
+Here are the matching tasks in your list:
+1. [E][✗] family outing (at: Sep 20 2020)
+2. [E][✗] class outing (at: Oct 20 2020)
+```  
+### 4.8 `bye`
 
 Exit the application by typing, `bye`.
 
@@ -127,7 +151,5 @@ Example of usage:
 
 `bye`
 
-Expected outcome:
-
-Application closes.
+Expected outcome: application closes.
   
