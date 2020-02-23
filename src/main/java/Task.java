@@ -23,7 +23,7 @@ public class Task {
 
     public String toStore() {
         if (isDone) {
-            return "[\u2713] " + content;
+            return "[] " + content;
         } else {
             return "[\u2718] " + content;
         }

@@ -25,7 +25,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toStore() {
-        return "[D]" + super.toStore() + " (at: "
+        return "[D]" + super.toStore() + " (by: "
                 + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
     }
 

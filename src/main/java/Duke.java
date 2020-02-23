@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import javafx.application.Application;
 
 public class Duke {
 
@@ -49,7 +48,7 @@ public class Duke {
                 try {
                     int index = this.scanner.nextInt() - 1;
                     output = this.ui.showUpdate(this.tracker, index, this.scanner.next(),
-                            this.scanner.nextLine(), this.data);
+                            this.scanner.nextLine().substring(1), this.data);
                 } catch (DukeException exception) {
                     output = this.ui.showError(exception);
                 }
@@ -58,13 +57,12 @@ public class Duke {
                         || command.getCommand().equals("event") || command.getCommand().equals("deadline");
                 assert isRemainingCommands;
 
-                // InvocationTargetException
-
-                try {
+                if (this.scanner.hasNext()) {
                     content = new Parser(this.scanner.nextLine(), command);
                     output = this.ui.showAddedTask(this.tracker, content, this.data);
-                } catch (DukeException exception) {
-                    output = this.ui.showError(exception);
+                } else {
+                    output = this.ui.showError(new DukeException("OOPS!!! The description of a "
+                            + command.getCommand() + " cannot be empty."));
                 }
             }
         } catch (DukeException exception) {

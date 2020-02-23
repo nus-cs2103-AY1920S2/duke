@@ -110,3 +110,5 @@ Expected outcome:
 
 `Alright. I've updated this task:`<br/>
 `[E][✘] Mary's wedding (by: Jun 7 2019)`
+
+![example](./Ui.png)
