@@ -45,8 +45,12 @@ public class DukeParser {
         try {
             switch (dukeCommand) {
             case DELETE:
-                int deletedIndex = Integer.parseInt(splitS[1]);
-                returnCommand = new DeleteCommand(deletedIndex);
+                try {
+                    int deletedIndex = Integer.parseInt(splitS[1]);
+                    returnCommand = new DeleteCommand(deletedIndex);
+                } catch (NumberFormatException e) {
+                    throw new InvalidEntryException("Deleted Index must be a string!");
+            }
                 break;
             case HELP:
                 returnCommand = new HelpCommand();

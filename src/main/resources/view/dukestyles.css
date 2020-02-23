@@ -1,0 +1,5 @@
+.root {
+    -fx-font-size: 14px;
+    -fx-font-family: sans-serif;
+    -fx-border-radius: 50%;
+}

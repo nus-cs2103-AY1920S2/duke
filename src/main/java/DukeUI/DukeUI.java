@@ -16,12 +16,6 @@ public class DukeUI {
     private String currMessage = "";
     private final Scanner IN;
     private final PrintStream OUT;
-    private final String LOGO =
-              "     ____         _        \n"
-            + "    |  _ \\ _   _| | _____ \n"
-            + "    | | | | | | | |/ / _ \\\n"
-            + "    | |_| | |_| |   <  __/\n"
-            + "    |____/ \\__,_|_|\\_\\___|\n";
 
     public DukeUI() {
         this(System.in, System.out);
@@ -48,8 +42,7 @@ public class DukeUI {
      * @return String welcome message.
      */
     public String getWelcomeMessage() {
-        this.holdCurrentMessage(LOGO);
-        this.holdCurrentMessage("    Hello I'm Duke");
+        this.holdCurrentMessage("    Hello I'm Shinobu!");
         this.holdCurrentMessage("    What can I do for you?");
         return this.getCurrentMessage();
     }

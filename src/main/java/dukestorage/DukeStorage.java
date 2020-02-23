@@ -20,8 +20,7 @@ import java.util.List;
  */
 
 public class DukeStorage {
-    // try to change to relative path
-    private static final String DEFAULTPATH = "C:\\MinGW\\msys\\1.0\\JavaTestFile\\2103Codes\\duke\\src\\main\\java\\data\\duke.txt";
+    private static final String DEFAULTPATH = "src/main/java/data/duke.txt";
 
     public final Path path;
 
