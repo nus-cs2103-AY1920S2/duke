@@ -141,6 +141,16 @@ Expected outcome:
 
 ![Schedule](./images/schedule.png)
 
+### `help` - Provides list of available commands 
+
+Spongebob shows a list of all available commands
+
+Format: `help`
+
+Expected outcome:
+
+![Help](./images/help.png)
+
 ### `bye` - Exit 
 
 Exits Spongebob Organiser
@@ -148,4 +158,5 @@ Exits Spongebob Organiser
 Format: `bye`
 
 Expected outcome:
+
 ![Exit](./images/exit.png)
