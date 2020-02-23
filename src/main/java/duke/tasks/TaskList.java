@@ -46,11 +46,12 @@ public class TaskList {
      * Adds a task to the ArrayList
      * @param task Task to be added to ArrayList
      */
-    public void addTask(Task task) {
+    public void addTask(Storage storage, Task task) {
         tasks.add(task);
         if (task instanceof Deadline || task instanceof Event) {
             schedule.add(task);
         }
+        storage.saveTask(task);
     }
 
     /**

@@ -18,8 +18,7 @@ public class AddTodoCommand implements Command {
     public static String execute(String description, TaskList tasks, Storage storage) {
 
         Task task = new Todo(description);
-        tasks.addTask(task);
-        storage.saveTask(task);
+        tasks.addTask(storage, task);
 
         StringBuilder output = new StringBuilder();
         output.append("You've added this Todo task!\n"
