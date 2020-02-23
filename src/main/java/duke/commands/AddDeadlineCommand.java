@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.WrongDeadlineFormatException;
-import duke.parser.*;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
