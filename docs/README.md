@@ -70,4 +70,10 @@ Here are the matching tasks in your list:
 2. [D][✓] submit CS2103 project (by: Monday)
 ```
 
-#### Remove Duplicates
+#### Use Shortcuts
+
+You can also use shortcuts to create tasks. To activate shortcuts, simply send the `activate` command to Duke and 
+it will activate the shortcuts for you. With this, you can use the initial letter of each task type to create the 
+specific task. For example, `t` to create a `todo`, `d` for `deadline`, and `e` for `event`.
+
+To exit duke, you can simply enter `bye`. 
