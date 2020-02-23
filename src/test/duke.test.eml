@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component LANGUAGE_LEVEL="JDK_1_9" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/../../build/classes/java/test"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$/../../src/test">
+		<testFolder url="file://$MODULE_DIR$/../../src/test/java"/>
+	</contentEntry>
+	<lib name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.5.0" scope="RUNTIME"/>
+	<lib name="Gradle: org.junit.platform:junit-platform-engine:1.5.0" scope="RUNTIME"/>
+	<levels>
+		<level name="Gradle: org.openjfx:javafx-fxml:win:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-fxml:mac:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-fxml:linux:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-controls:win:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-controls:mac:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-controls:linux:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-controls:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-graphics:win:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-graphics:mac:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-graphics:linux:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-graphics:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-base:win:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-base:mac:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-base:linux:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-base:11" value="project"/>
+		<level name="Gradle: org.junit.jupiter:junit-jupiter:5.5.0" value="project"/>
+		<level name="Gradle: org.junit.jupiter:junit-jupiter-params:5.5.0" value="project"/>
+		<level name="Gradle: org.junit.jupiter:junit-jupiter-api:5.5.0" value="project"/>
+		<level name="Gradle: org.junit.platform:junit-platform-commons:1.5.0" value="project"/>
+		<level name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.5.0" value="project"/>
+		<level name="Gradle: org.apiguardian:apiguardian-api:1.1.0" value="project"/>
+		<level name="Gradle: org.opentest4j:opentest4j:1.2.0" value="project"/>
+		<level name="Gradle: org.junit.platform:junit-platform-engine:1.5.0" value="project"/>
+	</levels>
+</component>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component LANGUAGE_LEVEL="JDK_1_9" inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$/../../src/main"/>
+	<levels>
+		<level name="Gradle: org.openjfx:javafx-fxml:win:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-fxml:mac:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-fxml:linux:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-controls:win:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-controls:mac:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-controls:linux:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-controls:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-graphics:win:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-graphics:mac:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-graphics:linux:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-graphics:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-base:win:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-base:mac:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-base:linux:11" value="project"/>
+		<level name="Gradle: org.openjfx:javafx-base:11" value="project"/>
+	</levels>
+</component>

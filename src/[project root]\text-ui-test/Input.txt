@@ -1,0 +1,13 @@
+todo borrow book
+deadline return book /by: 22th June
+event basketball match /at: 6th April 2-4pm
+list
+todo
+running
+done 2
+done 2
+list
+delete 2
+list
+delete 3
+bye
