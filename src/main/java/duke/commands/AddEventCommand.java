@@ -20,28 +20,23 @@ public class AddEventCommand implements Command {
      * @throws DukeException If input format is wrong
      */
     public static String execute(String description, TaskList tasks, Storage storage) throws DukeException {
-
-        int slashIdx = description.indexOf("/");
-        if (slashIdx == -1) {
-            throw new WrongEventFormatException();
-        }
+        String[] input = description.split("/at", 2);
 
         Task task;
         try {
-            String taskTitle = description.substring(0, slashIdx).trim();
-            String[] dateTime = description.substring(slashIdx + 4).trim().split(" ");
+            String taskTitle = input[0].trim();
+            String[] dateTime = input[1].trim().split(" ", 2);
 
             String date = dateTime[0];
             String time = dateTime[1];
             task = new Event(taskTitle, Parser.parseDate(date), Parser.parseTime(time));
-        } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             throw new WrongEventFormatException();
         }
 
         StringBuilder output = new StringBuilder();
         if (task != null) {
-            tasks.addTask(task);
-            storage.saveTask(task);
+            tasks.addTask(storage, task);
 
             output.append("You've added this event!\n"
                     + task.toString() + "\n"

@@ -20,25 +20,20 @@ public class AddDeadlineCommand implements Command {
      * @throws DukeException If input format is wrong
      */
     public static String execute(String description, TaskList tasks, Storage storage) throws DukeException {
-
-        int slashIdx = description.indexOf("/");
-        if (slashIdx == -1) {
-            throw new WrongDeadlineFormatException();
-        }
+        String[] input = description.split("/by", 2);
 
         Task task;
         try {
-            String taskTitle = description.substring(0, slashIdx).trim();
-            String deadline = description.substring(slashIdx + 4).trim();
+            String taskTitle = input[0].trim();
+            String deadline = input[1].trim();
             task = new Deadline(taskTitle, Parser.parseDate(deadline));
-        } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             throw new WrongDeadlineFormatException();
         }
 
         StringBuilder output = new StringBuilder();
         if (task !=  null) {
-            tasks.addTask(task);
-            storage.saveTask(task);
+            tasks.addTask(storage, task);
 
             output.append("You've added this deadline!\n"
                     + task.toString() + "\n"
