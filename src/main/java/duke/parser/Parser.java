@@ -79,7 +79,7 @@ public class Parser {
         case TODO:
             return AddTodoCommand.execute(commandDetails, taskList, storage);
         default:
-            return "failed to understand command";
+            throw new UnrecognizedCommandException();
         }
     }
 
