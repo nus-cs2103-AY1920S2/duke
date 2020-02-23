@@ -37,14 +37,6 @@ public class Duke {
 
         try {
             output.append(Parser.parse(input, tasks, storage));
-
-            // Exit system one second after Exit command.
-            // //@@author jadetayy-reused
-            if (output.toString().contains("Bye")) {
-                Executors.newSingleThreadScheduledExecutor()
-                        .schedule(() -> System.exit(0), 1, TimeUnit.SECONDS);
-            }
-
             return output.toString();
         } catch (DukeException e) {
             return e.toString();
