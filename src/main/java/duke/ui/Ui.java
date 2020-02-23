@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 
 public class Ui {
 
-    public static String welcomeMsg = "Hello Patrick! This is Spongebob!\n" + "What can I do for you?\n";
+    public static String welcomeMsg = "Hello Patrick! This is Spongebob!\n" + "What shall we do today?\n";
 
     public static void showMessage(VBox dialogContainer, Image dukeImage, String msg) {
         dialogContainer.getChildren().addAll(
