@@ -24,17 +24,8 @@ public class Ui {
                 + space + "3. event xxxx /at YYYY-MM-DD\n" + "or enter 'list' to display all items\n"
                 + "or 'delete/done index' for deletion/marked as done\n"
                 + "or find xxxx for search\n"
-                + "or sort existing list by enter 'sortAsc' or 'sortDes'\n"
-                + "date of todo items assumed to be today";
+                + "or sort existing deadlines/events by enter 'sortAsc' or 'sortDes'";
         return instruction;
-    }
-
-    /**
-     * This method prints the string at the end of the program.
-     */
-    public String bye() {
-        String bye = " Bye. Hope to see you again soon!\n";
-        return bye;
     }
 
     public String removeTask(int count, String task) {
@@ -55,20 +46,15 @@ public class Ui {
         return "Nice! I've marked this task as done:\n" + space + item;
     }
 
-    public void printIOerr() {
-        System.err.println(space + "The format of io is wrong.");
+    public String printIOerr() {
+        return (space + "The format of io is wrong.");
     }
 
-    public void printDateErr() {
-        System.err.println(space + "OOPS!!! The format of date is wrong (yyyy-MM-dd).");
-    }
-
-    public void printLoad() {
-        System.out.println(space + "Past data successfully loaded.");
+    public String printDateErr() {
+        return (space + "OOPS!!! The format of date is wrong (yyyy-MM-dd).");
     }
     
-    public void printIndexErr() {
-        System.err.println(space + "OOPS!!! The format of index is wrong.");
+    public String printIndexErr() {
+        return (space + "OOPS!!! The format of index is wrong.");
     }
-
 }

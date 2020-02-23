@@ -27,6 +27,39 @@ public class TaskList {
     }
 
     /**
+     * This method check if an item already exits in the list.
+     */
+    public boolean isDuplicate(Item item) {
+        if (item instanceof Todo) {
+            Todo todo = (Todo)item;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).getName().equals(todo.getName()) && items.get(i).getDone() == todo.getDone()) {
+                    return true;
+                }
+            }
+        } else if (item instanceof Deadline) {
+            Deadline ddl = (Deadline)item;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) instanceof Deadline && items.get(i).getName().equals(ddl.getName())
+                        && items.get(i).getDone()
+                        == ddl.getDone() && items.get(i).getDate().equals(ddl.getDate())) {
+                    return true;
+                }
+            }
+        } else {
+            Event event = (Event)item;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i) instanceof Event && items.get(i).getName().equals(event.getName())
+                        && items.get(i).getDone()
+                        == event.getDone() && items.get(i).getDate().equals(event.getDate())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * This method delete an item from the list based on its index.
      */
     public TaskList delete(int index) {

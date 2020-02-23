@@ -1,20 +1,19 @@
-import java.io.IOException;
-import java.io.FileWriter;
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.nio.file.Path;
 import java.util.Scanner;
-import java.io.File;
 
 /**
  * This class loads, stores and updates user's todo-list in a local txt file.
  */
 
 public class Storage {
-    private File file = Path.of(System.getProperty("user.dir")).resolve("data/output.txt").toFile();
+    File file = new File("output.txt");
 
     public Storage() {
     }
@@ -23,14 +22,14 @@ public class Storage {
     /**
      * This method add a new item to the txt file.
      */
-    public void addTxt(String s, Ui ui) throws IOException {
+    public void addTxt(String s, Ui ui) {
         try {
-            FileWriter fileWriter = new FileWriter("data/output.txt", true);
+            FileWriter fileWriter = new FileWriter(file, true);
             fileWriter.append(s);
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
-            ui.printIOerr();
+            System.out.println(ui.printIOerr());
         }
     }
 
@@ -69,7 +68,6 @@ public class Storage {
                     list.addItem(new Todo(splitted[1], done));
                 }
             }
-            ui.printLoad();
         } catch (DateTimeParseException e) {
             ui.printDateErr();
         } catch (IOException e) {
@@ -83,7 +81,7 @@ public class Storage {
      */
     public void updateTxt(String prev, String now, Ui ui) throws IOException {
         try {
-            BufferedReader file = new BufferedReader(new FileReader("data/output.txt"));
+            BufferedReader file = new BufferedReader(new FileReader("output.txt"));
             StringBuffer inputBuffer = new StringBuffer();
             String line;
             while ((line = file.readLine()) != null) {
@@ -93,7 +91,7 @@ public class Storage {
             file.close();
             String inputStr = inputBuffer.toString();
             inputStr = inputStr.replace(prev, now);
-            FileOutputStream fileOut = new FileOutputStream("data/output.txt");
+            FileOutputStream fileOut = new FileOutputStream("output.txt");
             fileOut.write(inputStr.getBytes());
             fileOut.close();
         } catch (IOException e) {

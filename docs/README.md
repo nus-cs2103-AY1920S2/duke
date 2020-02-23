@@ -17,7 +17,7 @@
 
 ### 1. Adding a todo task: `todo` 
 
-Adds a todo task to the task list.
+Adds a todo task to the task list. Duplicated todos will not be allowed to be added.
 
 Format: `todo DESCRIPTION`
 
@@ -35,7 +35,7 @@ Now you have 1 task in the list.
 ### 2. Adding a deadline task: `deadline` 
 
 Adds a deadline task to the task list. 
-The date follows `yyyy/MM/dd` format 
+The date follows `yyyy/MM/dd` format. Duplicated deadlines will not be allowed to be added.
 
 Format: `deadline DESCRIPTION /by DATE`
 
@@ -53,7 +53,7 @@ Now you have 2 tasks in the list.
 ### 3. Adding a event task: `event` 
 
 Adds a event task to the task list. All the dates follows 
-`yyyy/MM/dd` format
+`yyyy/MM/dd` format. Duplicated events will not be allowed to be added.
 
 Format 1: `event DESCRIPTION /at DATE`
 
@@ -154,7 +154,7 @@ Sort all events and deadlines by descending dates.
 Format: `sortDes`
 
 ### 10. Saving the data
-The lists are automatically saved in a txt file and loaded everytime the programme starts.
+The tasks are automatically saved in a txt file and loaded everytime the programme starts.
 
 ### 10. Exit the programme
 The window will be closed if the user enters "bye".

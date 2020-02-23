@@ -62,6 +62,9 @@ public class Parser {
                     return "Description cannot be empty";
                 }
                 Todo todo = new Todo(task);
+                if (list.isDuplicate(todo)) {
+                    return "Duplicated task cannot be added";
+                }
                 list.addItem(todo);
                 storage.addTxt(todo.currentString(), ui);
                 return ui.addTask(list);
@@ -74,6 +77,9 @@ public class Parser {
                     return "Time or description cannot be empty";
                 }
                 Event event = new Event(e[0], LocalDate.parse(e[1]));
+                if (list.isDuplicate(event)) {
+                    return "Duplicated task cannot be added";
+                }
                 list.addItem(event);
                 storage.addTxt(event.currentString(), ui);
                 return ui.addTask(list);
@@ -86,6 +92,9 @@ public class Parser {
                     return "Time or description cannot be empty";
                 }
                 Deadline ddl = new Deadline(d[0], LocalDate.parse(d[1]));
+                if (list.isDuplicate(ddl)) {
+                    return "Duplicated task cannot be added";
+                }
                 list.addItem(ddl);
                 storage.addTxt(ddl.currentString(), ui);
                 return ui.addTask(list);
@@ -95,15 +104,14 @@ public class Parser {
                 return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (IllegalInstructionException e) {
-            System.err.println(e.getMessage());
+            return (e.getMessage());
         } catch (NumberFormatException e) {
-            ui.printIndexErr();
+            return ui.printIndexErr();
         } catch (IOException e) {
-            ui.printIOerr();
+            return ui.printIOerr();
         } catch (DateTimeParseException e) {
-            ui.printDateErr();
+            return ui.printDateErr();
         }
-        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     public static void main(String[] args) {
