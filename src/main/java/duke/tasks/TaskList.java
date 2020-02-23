@@ -125,6 +125,7 @@ public class TaskList {
         }
         Task task = tasks.get(taskNumber - 1);
         task.markAsDone();
+        storage.saveAllTasks(tasks);
         return task.toString();
     }
 
@@ -138,12 +139,14 @@ public class TaskList {
         if (taskNumber > tasks.size() || taskNumber < 1) {
             throw new UnknownTaskException();
         }
+
         Task task = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
-
         if (task instanceof Deadline || task instanceof Event) {
             schedule.remove(task);
         }
+
+        storage.saveAllTasks(tasks);
         return task.toString();
     }
 

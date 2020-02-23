@@ -100,12 +100,11 @@ public class Storage {
 
     /**
      * Updates existing task list when there is a completion or deletion
-     * @param taskList Existing task list
+     * @param saveList Existing ArrayList of tasks
      */
-    public void saveAllTasks(TaskList taskList) {
+    public void saveAllTasks(ArrayList<Task> saveList) {
         try {
             FileWriter fw = new FileWriter(filePath, false);
-            ArrayList<Task> saveList = taskList.getList();
             for (Task task : saveList) {
                 String toAdd = formatTaskForSaving(task);
                 fw.write(toAdd);
