@@ -7,6 +7,9 @@ Welcome to using Duke! Theres a music toggle if you like to have music on
 ### Contact Command
 Add someone's contact with name and phone number.
 
+### ContactDel Command
+Delete a contact from the address book.
+
 ### cList Command
 List all contacts.
 
@@ -58,6 +61,21 @@ Expected outcome:
 
 `Here are the contacts in your contact book:`
 `1.[C]Name: Tom Contact Number: 12345678`
+
+### `contactDel` - delete a contact
+
+Delete a contact in the address book.
+
+Example of usage: 
+
+`contactDel 1`
+
+Expected outcome:
+
+`Noted! I've removed this Contact:`
+`1.[C]Name: Tom Contact Number: 12345678`
+`Now you have 0 contacts in the address book`
+
 
 ### `Deadline` - Create a deadline
 

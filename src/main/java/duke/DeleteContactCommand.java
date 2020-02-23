@@ -3,14 +3,14 @@ package duke;
 /**
  * Delete Command class that inherits from Command.
  */
-public class DeleteCommand extends Command {
+public class DeleteContactCommand extends Command {
     protected String done;
 
     /**
      * Delete Command constructor.
-     * @param done index of task to remove
+     * @param done index of contact to remove
      */
-    public DeleteCommand(String done) {
+    public DeleteContactCommand(String done) {
         this.done = done;
     }
 
@@ -21,18 +21,17 @@ public class DeleteCommand extends Command {
      * @param taskList Pass in taskList class
      */
     public String execute(Ui ui, Storage storage, TaskList taskList) {
-        String num = getIndex();
-        String response = "Noted! I've removed this task:\n";
-        response += num + ". " + "[" + taskList.getTask(Integer.parseInt(num) - 1).getStatusIcon() + "] "
-                + taskList.getTask(Integer.parseInt(num) - 1).getDescription();
-        taskList.removeTask(Integer.parseInt(num) - 1);
-        storage.store(taskList.getEntireList());
-        response += "\nNow you have " + taskList.getTaskListSize() + " tasks in the list";
-        return response;
+        return "";
     }
 
     public String execute(Ui ui, Storage storage, ContactList contacts) {
-        return "";
+        String num = getIndex();
+        String response = "Noted! I've removed this Contact:\n";
+        response += num + ". " + contacts.getContact(Integer.parseInt(num) - 1);
+        contacts.removeContact(Integer.parseInt(num) - 1);
+        storage.storeC(contacts.getEntireList());
+        response += "\nNow you have " + contacts.getContactListSize() + " contacts in the address book";
+        return response;
     }
     /**
      * Method to return the index.

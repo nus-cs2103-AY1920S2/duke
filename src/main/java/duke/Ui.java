@@ -56,7 +56,7 @@ public class Ui {
      */
     public String printTodoComplete(Task t, int i) {
         return "Got it. I've added this task\n" + t.toString()
-                + "Now you have " + i + " tasks in the list";
+                + "\nNow you have " + i + " tasks in the list";
     }
 
     /**

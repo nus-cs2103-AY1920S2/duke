@@ -70,7 +70,7 @@ public class Duke extends Application{
         String reply;
         try {
             Command d = Parser.parse(input);
-            if (d instanceof ContactCommand || d instanceof ContactListCommand) {
+            if (d instanceof ContactCommand || d instanceof ContactListCommand || d instanceof DeleteContactCommand) {
                 reply = d.execute(ui, storagec, contacts);
             } else {
                 reply = d.execute(ui, storage, tasks);
@@ -82,6 +82,6 @@ public class Duke extends Application{
     }
 
     public String startUp() {
-        return ui.printLogo() + ui.showWelcome();
+        return Ui.printLogo() + Ui.showWelcome();
     }
 }

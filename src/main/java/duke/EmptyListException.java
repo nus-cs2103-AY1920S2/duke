@@ -10,6 +10,6 @@ public class EmptyListException extends DukeException {
      */
     @Override
     public String toString() {
-        return "☹ OOPS!!! The list cannot be empty.";
+        return "OOPS!!! The list cannot be empty.";
     }
 }

@@ -1,3 +1,5 @@
+import duke.Task;
+import duke.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -31,16 +35,16 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser2.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke2.jpg"));
-    public Media media = new Media(getClass().getResource("watashiwa.mp3").toString());
+    //public Media media = new Media(getClass().getResourceAsStream("/music/music.mp3").toString());
 
-    MediaPlayer mediaPlayer = new MediaPlayer(media);
+    //MediaPlayer mediaPlayer = new MediaPlayer(media);
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        /*dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.startUp(), dukeImage)
-        );*/
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -60,7 +64,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog("Duke says:\n" +response, dukeImage)
         );
         if (response.contains("Bye. Hope to see you again")) {
-            System.exit(0);
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            }, 500);
         }
         userInput.clear();
     }
@@ -69,9 +78,9 @@ public class MainWindow extends AnchorPane {
     private void stopMusic() {
         playing = !playing;
         if(playing) {
-            mediaPlayer.play();
+            //mediaPlayer.play();
         } else {
-            mediaPlayer.stop();
+            //mediaPlayer.stop();
         }
     }
 }
