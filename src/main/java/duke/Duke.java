@@ -48,10 +48,11 @@ public class Duke extends Application {
     }
     
     /**
-     * Parses and processes a command string.
+     * Parses and processes a command string, returning the repsonse text.
      * @param command Command string
+     * @return Response text
      */
-    public void processCommand(String command) {
+    public String processCommand(String command) {
         ui.startMessage();
         try {
             Optional<Command> c = new Parser(command).parse();
@@ -65,12 +66,14 @@ public class Duke extends Application {
         } catch (DukeException e) {
             ui.showError(e);
         }
-        ui.endMessage();
+        String response = ui.endMessage();
 
         //We have to move the cleanup code here because `Gui` doesn't use `Duke#run()`
         if (!isRunning) {
             cleanup();
         }
+
+        return response;
     }
     
     protected void cleanup() {

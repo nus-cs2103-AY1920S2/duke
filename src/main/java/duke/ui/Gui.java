@@ -9,6 +9,8 @@ import duke.exceptions.DukeException;
 import duke.util.PrintUtil;
 
 import java.util.ArrayList;
+import java.io.IOException;
+import java.lang.UnsupportedOperationException;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -20,7 +22,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
+
+import javafx.fxml.FXMLLoader;
+
 
 /**
  * Encapsulates a graphical user interface (GUI) frontend of Duke.
@@ -30,11 +34,9 @@ import javafx.scene.text.Font;
  */
 public class Gui implements Ui {
     private Stage stage;
-    private VBox dialogContainer;
-    private TextField userInput;
+    private MainWindow mainWindow;
     private Duke duke;
     private boolean isClosed = false;
-    private Font font = new Font("Liberation Mono", 15.0);
     private ArrayList<Message> messageBuffer;
     
     /**
@@ -50,93 +52,30 @@ public class Gui implements Ui {
     }
     
     /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        textToAdd.setFont(font);
-
-        return textToAdd;
-    }
-    
-    /**
      * Receives control of the JavaFX `Application` from `Duke`.
      * Sets up GUI components and callbacks, then runs the event loop until termination.
      * @param stage `Stage` object received from `Duke#start`
      */
     public void start(Stage stage) {
-        assert stage != null; //Precondition: `stage` is not null
-        
         this.stage = stage;
-        
-        //Step 1. Formatting the window to look as expected.
-        
-        //The container for the content of the chat to scroll.
-        ScrollPane scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        Button sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        Scene scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        //stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            stage.show();
+            mainWindow = fxmlLoader.<MainWindow>getController();
+            mainWindow.setGui(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         
-        mainLayout.setPrefSize(400.0, 600.0);
-        
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-        
-        // You will need to import `javafx.scene.layout.Region` for this. 
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        
-        userInput.setPrefWidth(325.0);
-        
-        sendButton.setPrefWidth(55.0);
-        
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-        
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-
         //Step 3. Add functionality to handle user input.
         startMessage();
         showGreeting();
-        endMessage();
-        
-        sendButton.setOnMouseClicked((event) -> {
-            duke.processCommand(readCommandString());
-        });
-
-        userInput.setOnAction((event) -> {
-            duke.processCommand(readCommandString());
-        });
-        
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        messageBuffer.add(new Message(endMessage()));
         
         //Finally, add pending messages to the `dialogContainer`.
         processMessageBuffer();
@@ -150,26 +89,20 @@ public class Gui implements Ui {
     
     /**
      * Denotes the end of a new message to be printed.
+     * @return Completed message
      */
-    public void endMessage() {
+    public String endMessage() {
         String buffer = PrintUtil.flushBuffer();
-        messageBuffer.add(new Message(String.format("%s", buffer)));
-        
-        if (this.stage != null) {
-            processMessageBuffer();
-        }
+        return String.format("%s", buffer);
     }
 
-    private void displayMessage(Message message) {
-        assert stage != null && dialogContainer != null;
-        
-        Label label = getDialogLabel(message.text);
-        dialogContainer.getChildren().add(label);
+    protected String getResponse(String input) {
+        return duke.processCommand(input);
     }
 
     private void processMessageBuffer() {
         for (Message m : messageBuffer) {
-            displayMessage(m);
+            mainWindow.displayDukeMessage(m.text);
         }
         messageBuffer.clear();
     }
@@ -179,10 +112,7 @@ public class Gui implements Ui {
      * @return command string
      */
     public String readCommandString() {
-        String command = userInput.getText();
-        displayMessage(new Message(String.format("> %s", command)));
-        userInput.clear();
-        return command;
+        throw new UnsupportedOperationException();
     }
     
     /**

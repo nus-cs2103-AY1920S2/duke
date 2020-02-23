@@ -22,8 +22,9 @@ public interface Ui {
     
     /**
      * Denotes the end of a new message to be printed.
+     * @return Completed message
      */
-    public void endMessage();
+    public String endMessage();
     
     /**
      * Reads a single-line command string from the user.

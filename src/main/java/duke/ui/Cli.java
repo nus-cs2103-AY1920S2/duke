@@ -36,10 +36,13 @@ public class Cli implements Ui {
     
     /**
      * Denotes the end of a new message to be printed.
+     * @return Completed message
      */
-    public void endMessage() {
+    public String endMessage() {
         PrintUtil.printHeaderLine();
-        System.out.print(PrintUtil.flushBuffer());
+        String message = PrintUtil.flushBuffer();
+        System.out.print(message);
+        return message;
     }
     
     /**
