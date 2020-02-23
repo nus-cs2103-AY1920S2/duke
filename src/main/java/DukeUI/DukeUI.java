@@ -43,7 +43,10 @@ public class DukeUI {
      */
     public String getWelcomeMessage() {
         this.holdCurrentMessage("    Hello I'm Shinobu!");
-        this.holdCurrentMessage("    What can I do for you?");
+        this.holdCurrentMessage("    I can help you track the tasks that you need to do!");
+        this.holdCurrentMessage("    What can I do for you today?\n");
+        this.holdCurrentMessage("    Use 'help' at any time to see the available commands.");
+
         return this.getCurrentMessage();
     }
 
