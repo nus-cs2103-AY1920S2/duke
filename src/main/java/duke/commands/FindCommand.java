@@ -15,7 +15,7 @@ public class FindCommand implements Command {
         StringBuilder output = new StringBuilder();
 
         TaskList matchingTasks = tasks.findKeyWord(keyword);
-        output.append("This is your lists of tasks that contain '"
+        output.append("Okay! These tasks contain '"
                 + keyword + "':\n");
         output.append(matchingTasks.printTaskList());
 

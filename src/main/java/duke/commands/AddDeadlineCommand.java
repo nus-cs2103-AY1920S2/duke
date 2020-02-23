@@ -40,7 +40,7 @@ public class AddDeadlineCommand implements Command {
             tasks.addTask(task);
             storage.saveTask(task);
 
-            output.append("This task has been added successfully:\n"
+            output.append("You've added this deadline!\n"
                     + task.toString() + "\n"
                     + "Now you have " + tasks.size() + " tasks in the list\n");
         } else {

@@ -17,6 +17,6 @@ public class DeleteCommand implements Command {
 
         int taskNumber = Integer.parseInt(taskNum);
         String deleted = tasks.deleteTask(storage, taskNumber);
-        return "This task has been deleted: \n" + deleted;
+        return "We've deleted this task! \n" + deleted;
     }
 }

@@ -22,7 +22,7 @@ public class AddTodoCommand implements Command {
         storage.saveTask(task);
 
         StringBuilder output = new StringBuilder();
-        output.append("This task has been added successfully:\n"
+        output.append("You've added this Todo task!\n"
                 + task.toString() + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list\n");
 

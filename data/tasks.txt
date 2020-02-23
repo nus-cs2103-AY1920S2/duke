@@ -1,4 +1,3 @@
 T | 0 | Feed Gary
-T | 1 | Walk Gary
-D | 1 | Annoy Squidward | Apr 3 2020
+D | 0 | Annoy Squidward | Apr 3 2020
 E | 0 | Buy party supplies | Apr 3 2020-15:00

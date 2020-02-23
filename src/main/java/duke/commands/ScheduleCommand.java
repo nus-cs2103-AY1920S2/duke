@@ -24,7 +24,7 @@ public class ScheduleCommand implements Command {
         }
 
         StringBuilder output = new StringBuilder();
-        output.append("This is your schedule on " + Parser.outputDateFormatter.format(taskDate) + ":\n");
+        output.append("Okay! We're doing these things on " + Parser.outputDateFormatter.format(taskDate) + ":\n");
         output.append(tasks.printSchedule(taskDate));
 
         return output.toString();

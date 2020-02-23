@@ -17,6 +17,6 @@ public class DoneCommand implements Command {
 
         int taskNumber = Integer.parseInt(taskNum);
         String completed = tasks.completeTask(storage, taskNumber);
-        return "This task has been marked as completed: \n" + completed;
+        return "We've completed this task! \n" + completed;
     }
 }
