@@ -33,6 +33,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+
+        assert scrollPane != null;
+        assert dialogContainer != null;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog("Hello! I'm Thanos. Should I snap my fingers?", dukeImage)

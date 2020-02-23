@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+
 
 /**
  * An example of a custom control using FXML.
@@ -24,8 +26,11 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    private static final Font FONTTYPE = new Font("Garamond", 12);
 
     private DialogBox(String text, Image img) {
+        assert dialog != null;
+        assert displayPicture != null;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -37,6 +42,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        dialog.setFont(FONTTYPE);
     }
 
     /**

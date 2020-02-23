@@ -9,7 +9,7 @@ public class Ui {
 
     protected boolean hasEnded;
     protected TaskManager manager;
-    protected String horizontalLine = "***************************************************";
+    protected String horizontalLine = "**************************************************";
 
     public Ui(TaskManager manager) {
         this.hasEnded = false;
