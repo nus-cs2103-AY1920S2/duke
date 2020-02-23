@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
     private static ArrayList<Task> instructions = new ArrayList<>(100);
@@ -50,12 +54,27 @@ public class Duke {
             printList();
         } else if (instruction.split(" ")[0].equals("done")) {
             doneTask(Integer.parseInt(instruction.split(" ")[1]));
+            try {
+                writeToFile();
+            } catch (IOException e) {
+                System.out.println("Oops! " + e.getMessage());
+            }
         } else if (instruction.split(" ")[0].equals("delete")) {
             deleteTask(Integer.parseInt(instruction.split(" ")[1]));
+            try {
+                writeToFile();
+            } catch (IOException e) {
+                System.out.println("Oops! " + e.getMessage());
+            }
         } else if (instruction.split(" ")[0].equals("todo")) {
             String task = instruction.replace("todo", "");
             if (!task.equals("")) {
                 addTask(new ToDo(task));
+                try {
+                    writeToFile();
+                } catch (IOException e) {
+                    System.out.println("Oops! " + e.getMessage());
+                }
             } else {
                 throw new DukeException("EmptyToDo");
             }
@@ -64,6 +83,11 @@ public class Duke {
             if (!task.equals("")) {
                 String time = instruction.split("/")[1].replace("by ", "");
                 addTask(new Deadline(task, time));
+                try {
+                    writeToFile();
+                } catch (IOException e) {
+                    System.out.println("Oops! " + e.getMessage());
+                }
             } else {
                 throw new DukeException("EmptyDeadline");
             }
@@ -72,6 +96,11 @@ public class Duke {
             if (!task.equals("")) {
                 String time = instruction.split("/")[1].replace("at ", "");
                 addTask(new Event(task, time));
+                try {
+                    writeToFile();
+                } catch (IOException e) {
+                    System.out.println("Oops! " + e.getMessage());
+                }
             } else {
                 throw new DukeException("EmptyEvent");
             }
@@ -80,8 +109,60 @@ public class Duke {
         }
     }
 
+    private static void readFile() throws FileNotFoundException {
+        File file = new File("C:\\Users\\h1430\\Documents\\CS2103T\\duke\\src\\main\\java\\data\\duke.txt");
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            String[] data = sc.nextLine().split(" \\| ");
+            if (data[0].equals("T")) {
+                ToDo todo = new ToDo(data[2]);
+                addTask(todo);
+                if (data[1].equals("1")) {
+                    todo.setDone();
+                }
+            } else if (data[0].equals("D")) {
+                Deadline deadline = new Deadline(data[2], data[3]);
+                addTask(deadline);
+                if (data[1].equals("1")) {
+                    deadline.setDone();
+                }
+            } else if (data[0].equals("E")) {
+                Event event = new Event(data[2], data[3]);
+                addTask(event);
+                if (data[1].equals("1")) {
+                    event.setDone();
+                }
+            }
+        }
+    }
+
+    private static void writeToFile() throws IOException {
+        FileWriter fileWriter = new FileWriter("C:\\Users\\h1430\\Documents\\CS2103T\\duke\\src\\main\\java\\data\\duke.txt");
+        for (int i = 0; i < instructions.size(); i++)  {
+            Task task = instructions.get(i);
+            if (task instanceof ToDo) {
+                String text = "T | " + (task.getStatus() ? "1" : "0") + " | " + task.getInstruction();
+                fileWriter.write(text + System.lineSeparator());
+            } else if (task instanceof Deadline) {
+                String text = "D | " + (task.getStatus() ? "1" : "0") + " | " + task.getInstruction()
+                        + " | " + ((Deadline) task).getTime();
+                fileWriter.write(text + System.lineSeparator());
+            } else if (task instanceof Event) {
+                String text = "E | " + (task.getStatus() ? "1" : "0") + " | " + task.getInstruction()
+                        + " | " + ((Event) task).getTime();
+                fileWriter.write(text + System.lineSeparator());
+            }
+        }
+        fileWriter.close();
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        try {
+            readFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
         greet();
         while (scanner.hasNextLine()) {
             String instruction = scanner.nextLine();
