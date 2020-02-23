@@ -1,8 +1,11 @@
 package duke.main;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -35,6 +38,10 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        if (text.equals("bye")) {
+            Platform.exit();
+        }
+
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -50,7 +57,9 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox d = new DialogBox(text, img);
+        d.setStyle("-fx-background-color: rgba(16,126,128,0.42)");
+        return d;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {

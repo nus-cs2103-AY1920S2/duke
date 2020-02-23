@@ -19,13 +19,21 @@ public class Storage {
 
     public static String dataPath = "data/duke.txt";
 
-//    public static void createFile() {
-//        File f = new File("data/duke.txt");
-//    }
 
-    public TaskList load() throws FileNotFoundException {
+    public TaskList load() throws IOException {
+
         File f = new File(dataPath);
-        Scanner s = new Scanner(f);
+
+        Scanner s;
+
+        try {
+            s = new Scanner(f);
+        } catch(FileNotFoundException e){
+            new File("data").mkdir();
+            f.createNewFile();
+            return new TaskList(new ArrayList<Task>());
+        }
+
         TaskList tasks = new TaskList(new ArrayList<Task>());
         while(s.hasNext()) {
             // convert string back to task
@@ -55,7 +63,6 @@ public class Storage {
                     Event event = new Event(desc, at);
                     tasks.add(event);
                     break;
-
             }
 
         }

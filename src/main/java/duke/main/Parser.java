@@ -83,11 +83,11 @@ public class Parser {
                     !input.equals("find") &&
                     !input.equals("list") &&
                     !input.equals("sort")) {
-                throw new DukeException("OOPS! I'm sorry but I dont know what that means :(");
+                throw new DukeException("Mister Excuse You, Command I Dont Understand!");
             } else {
                 // command is either not valid, or is list
                 if (!input.equals("list") && !input.equals("sort")) {
-                    throw new DukeException("OOPS! The description of a " + input + " cannot be empty");
+                    throw new DukeException("What is this! " + input + " cannot be empty okay?!");
                 } else {
                     return input;
                 }
@@ -100,7 +100,7 @@ public class Parser {
                     !input.substring(0, input.indexOf(' ')).equals("delete") &&
                     !input.substring(0, input.indexOf(' ')).equals("done") &&
                     !input.substring(0, input.indexOf(' ')).equals("find")) {
-                throw new DukeException("OOPS! I'm sorry but I dont't know what that means :(");
+                throw new DukeException("Mister Excuse You, Command I Dont Understand!");
             } else {
                 return input.substring(0, input.indexOf(' '));
             }

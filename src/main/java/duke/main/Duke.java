@@ -3,7 +3,7 @@ package duke.main;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-
+import java.util.concurrent.TimeUnit;
 
 
 public class Duke {
@@ -22,13 +22,12 @@ public class Duke {
 
         try {
             tasks = storage.load();
-            ui = new Ui(tasks);
 
-        } catch (FileNotFoundException e) {
-            tasks = new TaskList();
-            ui = new Ui(tasks);
+        } catch (IOException e) {
+
+            System.out.println(e);
         }
-
+        ui = new Ui(tasks);
     }
 
 
@@ -36,30 +35,29 @@ public class Duke {
      * Starts the whole program and get user input
      * @throws IOException if I/O error happens
      */
-    public void run() throws IOException {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        while (!input.equals("bye")) {
-            Parser parser = new Parser();
-            String output = parser.parse(input, ui, tasks);
-            storage.updateData(tasks);
-
-            input = sc.nextLine();
-        }
-
-        ui.printGoodbye();
-
-    }
+//    public void run() throws IOException {
+//        Scanner sc = new Scanner(System.in);
+//        String input = sc.nextLine();
+//
+//        while (!input.equals("bye")) {
+//            Parser parser = new Parser();
+//            String output = parser.parse(input, ui, tasks);
+//            storage.updateData(tasks);
+//
+//            input = sc.nextLine();
+//        }
+//
+//        ui.printGoodbye();
+//
+//    }
 
     public String getResponse(String input) throws IOException {
 
         Parser parser = new Parser();
         String output = parser.parse(input, ui, tasks);
         storage.updateData(tasks);
-
-        // this is like the system.in shit
         return output;
+
     }
 
 
@@ -69,9 +67,9 @@ public class Duke {
      * @param args no commmand line arguments are used explicitly
      * @throws IOException is thrown when there is I/O error
      */
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
-    }
+//    public static void main(String[] args) throws IOException {
+//        new Duke().run();
+//    }
 
 }
 

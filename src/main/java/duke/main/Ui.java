@@ -12,6 +12,9 @@ public class Ui {
         this.tasks = tasks;
     }
 
+    public static String getWelcomeMessage() {
+        return "Welcome to Kim Jong Un's Secret Chat. You can call me RocketMan and please let me know how to help!";
+    }
 
 
 
@@ -19,8 +22,8 @@ public class Ui {
     /**
      * Prints the basic goodbye message when user has no more input
      */
-    public void printGoodbye() {
-        System.out.println("GOODBYE!! MUAHAHHAHAHAHHAAHAHHAHAHA");
+    public static String getGoodbyeMessage() {
+        return "GOODBYE!! MUAHAHHAHAHAHHAAHAHHAHAHA";
     }
 
 
