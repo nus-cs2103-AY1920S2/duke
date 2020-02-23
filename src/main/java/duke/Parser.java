@@ -156,16 +156,34 @@ class Parser {
         return input.strip().split("\\s+", NUMBER_OF_COMMAND_SECTIONS)[ARGUMENT_POSITION];
     }
 
+    /**
+     * Parses the todo description from the arguments in the user input for the todo command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the todo description
+     */
     String parseTodoDescription(String arguments) {
         assert arguments != null;
         return arguments;
     }
 
+    /**
+     * Parses the deadline description from the arguments in the user input for the deadline command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the deadline description
+     */
     String parseDeadlineDescription(String arguments) {
         assert arguments != null;
         return arguments.split("\\s+/by\\s+", NUMBER_OF_DEADLINE_COMMAND_ARGUMENTS)[DEADLINE_DESCRIPTION_POSITION];
     }
 
+    /**
+     * Parses the date of the deadline from the arguments in the user input for the deadline command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the date of deadline
+     */
     LocalDate parseDeadlineDate(String arguments) throws InvalidCommandException {
         assert arguments != null;
         try {
@@ -179,6 +197,12 @@ class Parser {
         }
     }
 
+    /**
+     * Parses the time of the deadline from the arguments in the user input for the deadline command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the time of the deadline
+     */
     LocalTime parseDeadlineTime(String arguments) throws InvalidCommandException {
         assert arguments != null;
         try {
@@ -189,11 +213,23 @@ class Parser {
         }
     }
 
+    /**
+     * Parses the event description from the arguments in the user input for the event command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the event description
+     */
     String parseEventDescription(String arguments) {
         assert arguments != null;
         return arguments.split("\\s+/at\\s+", NUMBER_OF_EVENT_COMMAND_ARGUMENTS)[EVENT_DESCRIPTION_POSITION];
     }
 
+    /**
+     * Parses the time of the event from the arguments in the user input for the deadline command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the time of the event
+     */
     String parseEventTime(String arguments) throws InvalidCommandException {
         assert arguments != null;
         try {
@@ -203,11 +239,23 @@ class Parser {
         }
     }
 
+    /**
+     * Parses the search term from the arguments in the user input for the find command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the search term
+     */
     String parseFindSearchTerm(String arguments) {
         assert arguments != null;
         return arguments;
     }
 
+    /**
+     * Parses the task number from the arguments in the user input for the snooze command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the task number
+     */
     int parseSnoozeTaskNumber(String arguments) throws InvalidCommandException {
         assert arguments != null;
         try {
@@ -218,6 +266,12 @@ class Parser {
         }
     }
 
+    /**
+     * Parses the snooze duration from the arguments in the user input for the snooze command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the snooze duration
+     */
     TemporalAmount parseSnoozeDuration(String arguments) throws InvalidCommandException {
         assert arguments != null;
         try {
@@ -240,6 +294,12 @@ class Parser {
         }
     }
 
+    /**
+     * Parses the task number from the arguments in the user input for the done command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the task number
+     */
     int parseDoneTaskNumber(String arguments) throws InvalidCommandException {
         assert arguments != null;
         try {
@@ -249,6 +309,12 @@ class Parser {
         }
     }
 
+    /**
+     * Parses the task number from the arguments in the user input for the delete command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the task number
+     */
     int parseDeleteTaskNumber(String arguments) throws InvalidCommandException {
         assert arguments != null;
         try {
