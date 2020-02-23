@@ -1,14 +1,14 @@
 package duke;
 
 /**
- * Represents a To-do which inherits from Task and is stored/managed by Duke
+ * Represents a To-do which inherits from Task and is stored/managed by Duke.
  */
 public class ToDo extends Task {
 
     /**
      * Creates a To-Do object with given description.
      *
-     * @param description
+     * @param description of the task.
      */
     public ToDo(String description) {
         super(description);
@@ -19,7 +19,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Gives a string representation of the To-do by building upon parent's representation method
+     * Gives a string representation of the To-do by building upon parent's representation method.
      *
      * @return a string representation
      */

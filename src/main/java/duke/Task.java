@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Represents a Task to be managed/stored by the command line application Duke
+ * Represents a Task to be managed/stored by the command line application Duke.
  */
 public class Task {
 
@@ -9,9 +9,9 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Creates a new Task with the given description and sets isDone to false by default
+     * Creates a new Task with the given description and sets isDone to false by default.
      *
-     * @param description
+     * @param description of the Task
      */
     public Task(String description) {
         assert description.length() > 0 : "Description for todo provided by the user is empty";
@@ -19,6 +19,11 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Creates a new Task with given description and is Done status.
+     * @param description of the task.
+     * @param isDone of the task.
+     */
     public Task(String description, boolean isDone) {
         assert description.length() > 0 : "Description for todo in the file is empty";
         this.description = description;
@@ -26,7 +31,7 @@ public class Task {
     }
 
     /**
-     * Gets the status icon of this Task based on whether it is done or not
+     * Gets the status icon of this Task based on whether it is done or not.
      *
      * @return a String containing the status icon (tick-mark or cross)
      */
@@ -35,14 +40,14 @@ public class Task {
     }
 
     /**
-     * Marks this task as done by setting the isDone property to true
+     * Marks this task as done by setting the isDone property to true.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Gives a string representation of the Task including the status icon
+     * Gives a string representation of the Task including the status icon.
      *
      * @return a String representation of the task
      */
@@ -51,6 +56,10 @@ public class Task {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 
+    /**
+     * Outputs a string representation to be stored in file.
+     * @return a String representation of the task to be stored in file.
+     */
     public String toFile() {
         if (this.isDone) {
             return "1 | " + this.description;

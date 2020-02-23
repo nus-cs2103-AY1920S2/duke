@@ -30,16 +30,22 @@ public class TaskList {
     }
 
     /**
-     * Gets a Task object at the specified index in the Task List
+     * Gets a Task object at the specified index in the Task List.
      *
-     * @param index
-     * @return
+     * @param index of the task in the list
+     * @return a Task object
      */
     public Task getTaskByIndex(int index) {
         return this.taskArrayList.get(
                 index - 1); // -1 because indexing for user starts from 1, but 0 for arraylist.
     }
 
+    /**
+     * Adds task to the tasklist.
+     * @param type of the task to be added
+     * @param description of the task to be added
+     * @return a string message of confirmation
+     */
     public String addTask(String type, String description) {
         Task task = new Task("sample");
         String output = "";
@@ -76,7 +82,7 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as done and informs the user about the same
+     * Marks a task as done and informs the user about the same.
      */
     public String markDone(int index) {
         if (index > taskArrayList.size() || index < 0) {
@@ -90,7 +96,7 @@ public class TaskList {
     }
 
     /**
-     * Lists all the currently stored tasks on the system output
+     * Lists all the currently stored tasks on the system output.
      */
     public String printList() {
         int n = taskArrayList.size();
@@ -104,9 +110,9 @@ public class TaskList {
     }
 
     /**
-     * Finds all matching cases of a string and prints those cases to console
+     * Finds all matching cases of a string and prints those cases to console.
      *
-     * @param input
+     * @param input keyword
      */
     public String find(String input) {
         int n = taskArrayList.size();
@@ -128,7 +134,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task at specified index if it exists. Otherwise displays error message to user
+     * Deletes the task at specified index if it exists. Otherwise displays error message to user.
      */
     public String deleteTaskByIndex(int index) {
         if (index > taskArrayList.size() || index < 0) {

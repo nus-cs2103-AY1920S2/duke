@@ -55,7 +55,7 @@ public class Duke {
     /**
      * Gets a response from Duke based on a set of input.
      *
-     * @param input
+     * @param input from the user.
      * @return a String with Duke's message.
      */
     public String getResponse(String input) {

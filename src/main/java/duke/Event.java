@@ -5,14 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /**
- * Represents an Event which inherits from Task and is stored/managed by Duke
+ * Represents an Event which inherits from Task and is stored/managed by Duke.
  */
 public class Event extends Task {
 
     public static final String DESCRIPTION_ERROR = "Description of Event is empty";
     public static final String REGEX_DATE = "\\d{4}-\\d{2}-\\d{2}";
     /**
-     * Stores the time the event is supposed to take place
+     * Stores the time the event is supposed to take place.
      */
     protected String time;
 
@@ -20,10 +20,10 @@ public class Event extends Task {
     protected boolean timePresent;
 
     /**
-     * Creates an Event object with given description and time
+     * Creates an Event object with given description and time.
      *
-     * @param description
-     * @param time
+     * @param description of the event
+     * @param time of the event
      */
     public Event(String description, String time) {
         super(description);
@@ -38,11 +38,11 @@ public class Event extends Task {
 
     /**
      * Creates an Event object with given description, time and done status. Used when loading data
-     * from data.txt file
+     * from data.txt file.
      *
-     * @param description
-     * @param time
-     * @param isDone
+     * @param description of the event
+     * @param time of the event
+     * @param isDone of the event
      */
     public Event(String description, String time, boolean isDone) {
         super(description, isDone);
@@ -56,9 +56,9 @@ public class Event extends Task {
     }
 
     /**
-     * Gives a string representation of the Event by building upon parent's representation method
+     * Gives a string representation of the Event by building upon parent's representation method.
      *
-     * @return
+     * @return a String representation of the event
      */
     @Override
     public String toString() {
@@ -73,9 +73,9 @@ public class Event extends Task {
     }
 
     /**
-     * Gives a string representation of the Event object used for storing it in the data.txt file
+     * Gives a string representation of the Event object used for storing it in the data.txt file.
      *
-     * @return
+     * @return a String representation required for the file storage
      */
     public String toFile() {
         return "E | " + super.toFile() + " | " + time;

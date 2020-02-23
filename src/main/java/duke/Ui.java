@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Helps Duke interact with the user
+ * Helps Duke interact with the user.
  */
 public class Ui {
 

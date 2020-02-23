@@ -1,14 +1,22 @@
-# User Guide
+# User Guide for Duke 
+
+A versatile task manager every command-line user has been waiting for. 
 
 ## Features 
 
-1. Add Todo
-2. Add Deadline (with a specified deadline in Date Format)
-3. Add Event (with timing in Date Format)
-4. List all current tasks
-5. Auto-store data to hard disk upon program termination and auto-reloading of such data.
-6. Finding a task with a given keyword
-7. Finding duplicates 
+Duke allows you to add different types of Tasks, search for tasks using keywords, mark tasks as completed, 
+list all tasks and delete any task. Tasks are categorised into three categories:
+
+- ToDo: A simple todo task with just a description. 
+- Deadline: A task that allows you to specify a 'by' property, in addition to a description, to specify the date 
+you need to complete it. 
+- Event: A task that allows you to specify a 'at' property in addition to a description, to specify the 
+timing of the event 
+
+#### Add Tasks 
+
+- Add a todo using the command: `todo <description>`. For example, `todo write user guide for duke` will create 
+a todo description *write user guide for duke* to your list of tasks. 
 
 ### Feature 1 
 Description of feature.
