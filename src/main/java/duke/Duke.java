@@ -10,13 +10,13 @@ public class Duke {
 
     public static final String FILE_PATH = "data/data.txt";
     public static final String BYE_COMMAND = "bye";
-    public static final String DONE_COMMAND = "done";
-    public static final String DELETE_COMMAND = "delete";
-    public static final String FIND_COMMAND = "find";
-    public static final String TODO = "todo";
-    public static final String DEADLINE = "deadline";
-    public static final String EVENT = "event";
-    public static final String LIST = "list";
+    public static String DONE_COMMAND = "done";
+    public static String DELETE_COMMAND = "delete";
+    public static String FIND_COMMAND = "find";
+    public static String TODO = "todo";
+    public static String DEADLINE = "deadline";
+    public static String EVENT = "event";
+    public static String LIST = "list";
     public static final String TASK_DESCRIPTION_ERROR = "OOPS, task description cannot be empty";
     public static final String INPUT_ERROR_MESSAGE =
             "OOPS, I don't understand this input. Please use a known command " + "and try again";
@@ -80,6 +80,10 @@ public class Duke {
         } else if (input.startsWith(FIND_COMMAND)) {
             String[] parsedInput = parser.parse(input, 2);
             output = tasks.find(parsedInput[1]);
+        } else if (input.startsWith("activate")) {
+            output = activateAlias();
+        } else if (input.startsWith("deactivate")) {
+            output = deactivateAlias();
         } else {
             String[] parsedInput = parser.parse(input, 2);
             if (input.startsWith(TODO) || input.startsWith(DEADLINE) || input.startsWith(EVENT)) {
@@ -93,5 +97,29 @@ public class Duke {
             }
         }
         return output;
+    }
+
+    /**
+     * Activates shortcuts for task creation.
+     *
+     * @return String confirming the same to the user.
+     */
+    public String activateAlias() {
+        Duke.TODO = "t";
+        Duke.DEADLINE = "d";
+        Duke.EVENT = "e";
+        return "Alright. I've activated alias for task creation";
+    }
+
+    /**
+     * Deactivates shortcuts for task creation.
+     *
+     * @return String confirming the same to the user.
+     */
+    public String deactivateAlias() {
+        Duke.TODO = "todo";
+        Duke.DEADLINE = "deadline";
+        Duke.EVENT = "event";
+        return "Alright. I've deactivated alias for task creation";
     }
 }

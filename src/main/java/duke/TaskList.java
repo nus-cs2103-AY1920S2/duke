@@ -7,9 +7,6 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    public static final String EVENT = "event";
-    public static final String DEADLINE = "deadline";
-    public static final String TODO = "todo";
     private ArrayList<Task> taskArrayList;
     private Ui ui = new Ui();
 
@@ -49,7 +46,7 @@ public class TaskList {
     public String addTask(String type, String description) {
         Task task = new Task("sample");
         String output = "";
-        if (type.equals(EVENT)) {
+        if (type.equals(Duke.EVENT)) {
             try {
                 String[] args = description.split("/", 2);
                 task = new Event(args[0], args[1]);
@@ -57,7 +54,7 @@ public class TaskList {
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.timeErrorMessage();
             }
-        } else if (type.equals(DEADLINE)) {
+        } else if (type.equals(Duke.DEADLINE)) {
             try {
                 String[] args = description.split("/", 2);
                 task = new Deadline(args[0], args[1]);
@@ -65,7 +62,7 @@ public class TaskList {
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.timeErrorMessage();
             }
-        } else if (type.equals(TODO)) {
+        } else if (type.equals(Duke.TODO)) {
             task = new ToDo(description);
             taskArrayList.add(task);
         } else {
