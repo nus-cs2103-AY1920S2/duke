@@ -92,7 +92,8 @@ public class Duke {
 
         SNOOZE(false) {
             @Override
-            String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException, CannotSnoozeException, StorageException {
+            String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException,
+                    CannotSnoozeException, StorageException {
                 String arguments = duke.parser.parseArguments(input);
                 int taskNumber = duke.parser.parseSnoozeTaskNumber(arguments);
                 TemporalAmount duration = duke.parser.parseSnoozeDuration(arguments);
@@ -104,7 +105,8 @@ public class Duke {
 
         DONE(false) {
             @Override
-            String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException, StorageException {
+            String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException,
+                    StorageException {
                 String arguments = duke.parser.parseArguments(input);
                 int taskNumber = duke.parser.parseDoneTaskNumber(arguments);
                 Task completedTask = duke.tasks.complete(taskNumber);
@@ -115,7 +117,8 @@ public class Duke {
 
         DELETE(false) {
             @Override
-            String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException, StorageException {
+            String execute(Duke duke, String input) throws InvalidCommandException, TaskNumberOutOfBoundsException,
+                    StorageException {
                 String arguments = duke.parser.parseArguments(input);
                 int taskNumber = duke.parser.parseDeleteTaskNumber(arguments);
                 Task deletedTask = duke.tasks.delete(taskNumber);
@@ -216,6 +219,12 @@ public class Duke {
         return ui.sayHello();
     }
 
+    /**
+     * Returns the command indicated in the user input.
+     *
+     * @param input the user input
+     * @return the command indicated in the user input
+     */
     public Command getCommand(String input) throws InvalidCommandException {
         assert input != null;
         Command command = parser.parseCommand(input);
@@ -223,6 +232,13 @@ public class Duke {
         return command;
     }
 
+    /**
+     * Returns the response to the user.
+     *
+     * @param command the command
+     * @param input the user input
+     * @return the response to the user
+     */
     public String getResponse(Command command, String input) throws DukeException {
         assert command != null;
         assert input != null;

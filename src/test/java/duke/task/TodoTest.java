@@ -34,6 +34,6 @@ public class TodoTest {
 
     @Test
     public void toString_todo_returnsStringRepresentation() {
-        assertEquals("[T][\u2718] duke", new Todo("duke").toString());
+        assertEquals("[T][✘] duke", new Todo("duke").toString());
     }
 }

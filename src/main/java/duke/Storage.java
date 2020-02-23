@@ -54,37 +54,37 @@ class Storage {
             return new TaskList(Files.readAllLines(file)
                     .stream()
                     .flatMap(x -> {
-                            try {
-                                Task task;
-                                char taskType = x.charAt(TASK_TYPE_POSITION);
-                                boolean isDone = (x.charAt(COMPLETION_STATUS_POSITION) == '\u2713');
-                                x = x.substring(INFO_START_POSITION);
-                                String[] info;
-                                switch(taskType) {
-                                case 'T':
-                                    task = new Todo(x);
-                                    break;
-                                case 'D':
-                                    info = x.substring(0, x.length() - 1).split(" \\(by: ");
-                                    task = new Deadline(info[DESCRIPTION_POSITION],
-                                            LocalDateTime.parse(info[DATETIME_POSITION],
-                                                DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm")));
-                                    break;
-                                case 'E':
-                                    info = x.substring(0, x.length() - 1).split(" \\(at: ");
-                                    task = new Event(info[DESCRIPTION_POSITION], info[TIME_POSITION]);
-                                    break;
-                                default:
-                                    return Stream.empty();
-                                }
-                                if (isDone) {
-                                    task = task.complete();
-                                }
-                                return Stream.of(task);
-                            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                        try {
+                            Task task;
+                            char taskType = x.charAt(TASK_TYPE_POSITION);
+                            boolean isDone = (x.charAt(COMPLETION_STATUS_POSITION) == '✓');
+                            x = x.substring(INFO_START_POSITION);
+                            String[] info;
+                            switch (taskType) {
+                            case 'T':
+                                task = new Todo(x);
+                                break;
+                            case 'D':
+                                info = x.substring(0, x.length() - 1).split(" \\(by: ");
+                                task = new Deadline(info[DESCRIPTION_POSITION],
+                                        LocalDateTime.parse(info[DATETIME_POSITION],
+                                            DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm")));
+                                break;
+                            case 'E':
+                                info = x.substring(0, x.length() - 1).split(" \\(at: ");
+                                task = new Event(info[DESCRIPTION_POSITION], info[TIME_POSITION]);
+                                break;
+                            default:
                                 return Stream.empty();
                             }
-                        })
+                            if (isDone) {
+                                task = task.complete();
+                            }
+                            return Stream.of(task);
+                        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                            return Stream.empty();
+                        }
+                    })
                     .collect(Collectors.toList()));
         } catch (IOException e) {
             throw new StorageException("Unable to load tasks from " + file, e);
@@ -120,6 +120,7 @@ class Storage {
         }
 
         @Override
-        void save(TaskList tasks) {}
+        void save(TaskList tasks) {
+        }
     }
 }
