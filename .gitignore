@@ -12,3 +12,9 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# VS Code files
+.vscode
+
+# Data files
+/data/
