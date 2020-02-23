@@ -55,7 +55,7 @@ public class Parser {
             return ExitCommand.execute();
         case DEADLINE:
             return AddDeadlineCommand.execute(commandDetails, taskList, storage);
-        case DELETE:
+        case DELETE: case REMOVE:
             return DeleteCommand.execute(commandDetails, taskList, storage);
         case DONE:
             return DoneCommand.execute(commandDetails, taskList, storage);

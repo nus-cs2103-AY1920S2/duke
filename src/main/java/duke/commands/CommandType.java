@@ -9,6 +9,7 @@ public enum CommandType {
     FIND,
     HELP,
     LIST,
+    REMOVE,
     SCHEDULE,
     TODO
 }
