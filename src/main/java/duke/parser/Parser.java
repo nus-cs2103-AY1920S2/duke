@@ -3,16 +3,7 @@
  */
 package duke.parser;
 
-import duke.commands.AddDeadlineCommand;
-import duke.commands.CommandType;
-import duke.commands.DeleteCommand;
-import duke.commands.ExitCommand;
-import duke.commands.DoneCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.ScheduleCommand;
-import duke.commands.AddTodoCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.exceptions.MissingDetailsException;
 import duke.exceptions.UnrecognizedCommandException;
@@ -51,7 +42,7 @@ public class Parser {
 
         String commandDetails = "";
         // Only BYE and LIST commands do not have further details
-        if (commandType != CommandType.BYE && commandType != CommandType.LIST) {
+        if (commandType != CommandType.BYE && commandType != CommandType.LIST && commandType != CommandType.HELP) {
             try {
                 commandDetails = inputArr[1];
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -72,6 +63,8 @@ public class Parser {
             return AddEventCommand.execute(commandDetails, taskList, storage);
         case FIND:
             return FindCommand.execute(commandDetails, taskList);
+        case HELP:
+            return HelpCommand.execute();
         case LIST:
             return ListCommand.execute(taskList);
         case SCHEDULE:
