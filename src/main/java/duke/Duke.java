@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
@@ -78,17 +81,21 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        String output = "";
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(consoleOutput));
+
         try {
             Command c = Parser.parse(input);
-            output = c.execute(tasks, tags, ui, storage);
-            // TODO: If exit command, close application?
-            // if (c.isExit()) {
-            //     isActive = false;
-            // }
+            c.execute(tasks, tags, ui, storage);
         } catch (Exception e) {
-            output = e.getMessage();
+            ui.showError(e.getMessage());
         }
-        return output;
+
+        String dukeResponse = consoleOutput.toString();
+        if (dukeResponse.contains("Duke: ")) {
+            dukeResponse = dukeResponse.replace("Duke: ", "");
+        }
+        System.setOut(System.out);
+        return dukeResponse;
     }
 }

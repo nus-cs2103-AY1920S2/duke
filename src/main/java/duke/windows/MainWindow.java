@@ -1,5 +1,8 @@
 package duke.windows;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import duke.Duke;
 import duke.components.DialogBox;
 import javafx.fxml.FXML;
@@ -35,6 +38,9 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        String dukeWelcome = "Hey boss! Duke here, at your service. \nWhat do you need me to do?";
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(dukeWelcome, dukeImage));
     }
 
     /**

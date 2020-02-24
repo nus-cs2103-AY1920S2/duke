@@ -33,15 +33,11 @@ public class DoneCommand extends Command {
         } else {
             Task currentTask = tasks.setDone(this.index);
             ui.dukePrompt(new String[]{"Got it boss! Just to confirm, this is the one I marked as done",
-                "\n",
                 currentTask.toString(),
-                "\n",
                 tasks.printTasksTotal()});
             storage.save(tasks);
             return "Got it boss! Just to confirm, this is the one I marked as done"
-                + "\n"
                 + currentTask.toString()
-                + "\n"
                 + tasks.printTasksTotal();
         }
     }

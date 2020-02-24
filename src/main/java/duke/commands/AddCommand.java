@@ -72,15 +72,11 @@ public class AddCommand extends Command {
             tagList.addTag(tag);
         }
         ui.dukePrompt(new String[]{taskPrompt,
-            "\n",
             newTask.toString(),
-            "\n",
             tasks.printTasksTotal()});
         storage.save(tasks);
         return taskPrompt
-            + "\n"
             + newTask.toString()
-            + "\n"
             + tasks.printTasksTotal();
     }
 

@@ -33,18 +33,14 @@ public class DeleteCommand extends Command {
         } else {
             Task deletedTask = tasks.deleteTask(index);
             ui.dukePrompt(new String[]{"Aaaaand deleted! Don't kill me if it's the wrong one, boss",
-                "\n",
                 deletedTask.toString(),
-                "\n",
                 tasks.printTasksTotal()});
             for (Tag tag : deletedTask.getTags()) {
                 tagList.removeTag(tag);
             }
             storage.save(tasks);
             return "Aaaaand deleted! Don't kill me if it's the wrong one, boss"
-                + "\n"
                 + deletedTask.toString()
-                + "\n"
                 + tasks.printTasksTotal();
         }
     }
