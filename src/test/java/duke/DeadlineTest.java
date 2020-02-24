@@ -1,12 +1,10 @@
 package duke;
 
-import duke.parser.*;
+import duke.parser.Parser;
 import duke.tasks.Deadline;
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
-import java.time.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,7 +17,7 @@ public class DeadlineTest {
         StringBuilder expected = new StringBuilder();
         expected.append("[D]" + "[\u2718] ");
         expected.append("Assignment 1 (by: Aug 30 2020)");
-        assertEquals(expected.toString()
-                , new Deadline("Assignment 1", date).toString());
+        assertEquals(expected.toString(),
+                new Deadline("Assignment 1", date).toString());
     }
 }
