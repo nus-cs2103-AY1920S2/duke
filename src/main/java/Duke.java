@@ -6,7 +6,7 @@ import liaomeng.duke.TaskList;
 import liaomeng.duke.Ui;
 
 /**
- *
+ * The class that represents an instance of the task manager.
  */
 public class Duke {
     private boolean isClosed = false;
@@ -14,8 +14,14 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
     private Ui ui;
-    private static String readFileMessage;
+    private static String readFileResultMessage;
 
+    /**
+     * Initialises an instance of the task manager. During the initialisation,
+     * the task manager will attempt to read stored data. If there is stored data,
+     * the TaskList class will start with a task list containing the tasks stored.
+     * Otherwise, it starts with an empty task list.
+     */
     public Duke() {
         ui = new Ui();
         Storage storage = new Storage("NUS-Duke.txt", ui);
@@ -23,12 +29,12 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
             if (tasks.getList().size() == 0) {
-                readFileMessage = ui.returnFoundEmptyFile();
+                readFileResultMessage = ui.returnFoundEmptyFile();
             } else {
-                readFileMessage = ui.returnLoadingSuccess();
+                readFileResultMessage = ui.returnLoadingSuccess();
             }
         } catch (DukeException e) {
-            readFileMessage = ui.returnLoadingError();
+            readFileResultMessage = ui.returnLoadingError();
             tasks = new TaskList();
         } finally {
             logic = new Logic(storage, tasks, ui);
@@ -36,17 +42,18 @@ public class Duke {
         }
     }
 
-    public static String getReadFileMessage() {
-        return readFileMessage;
-    }
-
-    public static void main(String[] args) {
-        new Duke();
+    /**
+     * Returns the result message of the attempt at reading file which stores data about previous tasks.
+     */
+    public static String getReadFileResultMessage() {
+        return readFileResultMessage;
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the response of the task manager according to user input.
+     * The input is trimmed to ignore leading and trailing space before being parsed.
+     *
+     * @param input user input.
      */
     String getResponse(String input) {
         input = input.trim();
@@ -58,6 +65,10 @@ public class Duke {
         return logic.execute(instructionByWords);
     }
 
+    /**
+     * Returns the boolean indicating whether the application should be closed.
+     * The application should be closed when the user says goodbye.
+     */
     public boolean isClosed() {
         return isClosed;
     }

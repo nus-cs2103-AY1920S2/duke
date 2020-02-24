@@ -28,11 +28,15 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserNew.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeNew.png"));
 
+    /**
+     * Creates a dialog box containing the result of attempt at reading stored data
+     * and the greeting message from Duke.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Duke.getReadFileMessage()
-                        + Ui.greet() + Ui.showValidInstructions(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Duke.getReadFileResultMessage()
+                        + Ui.greet(), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -41,7 +45,8 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container. Clears the user input after processing. Closes the application in 1 second
+     * if the application should be closed as the user has said goodbye.
      */
     @FXML
     private void handleUserInput() {

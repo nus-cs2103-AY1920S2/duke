@@ -1,5 +1,8 @@
 package liaomeng.duke;
 
+/**
+ * An abstract class representing a task.
+ */
 public abstract class Task {
     static String DONE = "    Done   ";
     static String NOT_DONE = "Not Done";
@@ -7,6 +10,13 @@ public abstract class Task {
     private String task;
     private PriorityLevel level;
 
+    /**
+     * Create a task.
+     *
+     * @param isDone boolean indicating whether the task is marked as done.
+     * @param description string description of the task.
+     * @param level priority level of the task.
+     */
     public Task(boolean isDone, String description, PriorityLevel level) {
         this.isDone = isDone;
         task = description;
@@ -32,6 +42,8 @@ public abstract class Task {
             priorityIndication = "[     important!    ] ";
             break;
         case TOP:
+            priorityIndication = "[very important!!] ";
+            break;
         default:
             priorityIndication = "[      ordinary      ] ";
             break;
@@ -43,6 +55,10 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Returns a string representation of the task, which will be written
+     * into the file that stores tasks contained in the task list.
+     */
     public String toSimplerString() {
         String priorityIndication;
         switch (level) {

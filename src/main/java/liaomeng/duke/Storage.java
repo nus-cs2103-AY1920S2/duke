@@ -8,22 +8,36 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class that saves data into an external file, and load and convert data from it.
+ */
 public class Storage {
     private String path;
     private Ui ui;
 
+    /**
+     * Creates an instance of storage handler.
+     *
+     * @param filePath path where the data file is written into and read from.
+     * @param ui ui component of Duke
+     */
     public Storage(String filePath, Ui ui) {
         path = filePath;
         this.ui = ui;
     }
 
+    /**
+     * Reads the external data file and converts the data back to a list of Tasks.
+     *
+     * @throws DukeException exception indicating that IOException occurs when trying to read the file.
+     */
     public List<Task> load() throws DukeException {
         try {
             List<Task> list = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader(path));
             String line;
             while ((line = br.readLine()) != null) {
-                addEventToList(list, line);
+                addTasksToList(list, line);
             }
             return list;
         } catch (IOException e) {
@@ -31,7 +45,13 @@ public class Storage {
         }
     }
 
-    private static void addEventToList(List<Task> list, String line) {
+    /**
+     * Converts a line stored in the data file back into a Task and add all the task into the list of Tasks.
+     *
+     * @param list the list of Tasks.
+     * @param line a line stored in the data file, which should a simple String representation of a Task.
+     */
+    private static void addTasksToList(List<Task> list, String line) {
         String[] lineByWord = line.split("//");
         boolean isDone;
         isDone = lineByWord[1].equals("T");
@@ -67,6 +87,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts all the tasks contained in the list to simple String representations,
+     * and write these Strings into the data file. The file is cleared before it is written.
+     *
+     * @param list the list of Tasks
+     * @throws DukeException exception indicating that IOException occurs when trying to write into the file.
+     */
     public void writeToFile(List<Task> list) throws DukeException {
         try {
             FileWriter writer = new FileWriter("NUS-Duke.txt");
