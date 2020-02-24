@@ -1,12 +1,6 @@
 package duke.util;
 
-import duke.command.Command;
-import duke.command.FindCommand;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.AddCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.CommandNotFoundException;
 import duke.exception.InvalidDukeArgumentException;
 import duke.task.Deadline;
@@ -32,6 +26,7 @@ public class Parser {
         COMMAND_IDENTIFIERS.put("event", CommandIdentifier.EVENT);
         COMMAND_IDENTIFIERS.put("delete", CommandIdentifier.DELETE);
         COMMAND_IDENTIFIERS.put("find", CommandIdentifier.FIND);
+        COMMAND_IDENTIFIERS.put("sort", CommandIdentifier.SORT);
     }
 
     /**
@@ -53,6 +48,8 @@ public class Parser {
                 return new ExitCommand();
             case LIST:
                 return new ListCommand();
+            case SORT:
+                return new SortCommand();
             case DONE:
                 int doneIndex = getCommandIndex(st, tasklist);
                 return new DoneCommand(doneIndex);

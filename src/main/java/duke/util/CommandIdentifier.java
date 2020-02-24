@@ -11,5 +11,6 @@ public enum CommandIdentifier {
     DEADLINE,
     EVENT,
     DELETE,
-    FIND
+    FIND,
+    SORT
 }

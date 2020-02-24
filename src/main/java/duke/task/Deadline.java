@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline task that extends from the <code>Task</code> class. It contains one additional <code>by</code>
  * attribute which represents the due date of the task.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline> {
 
     protected LocalDate dueDate;
 
@@ -19,6 +19,23 @@ public class Deadline extends Task {
     public Deadline(String description, String dueDate) {
         super(description);
         this.dueDate = LocalDate.parse(dueDate);
+    }
+
+    private LocalDate getDueDate() {
+        return this.dueDate;
+    }
+
+    @Override
+    public int compareTo(Deadline deadline) {
+        LocalDate originalDate = getDueDate();
+        LocalDate comparedDate = deadline.getDueDate();
+        if (originalDate.isBefore(comparedDate)) {
+            return -1;
+        } else if (originalDate.isAfter(comparedDate)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     /**
