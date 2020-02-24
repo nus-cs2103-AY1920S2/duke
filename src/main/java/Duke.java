@@ -37,14 +37,14 @@ public class Duke extends Application {
      * If file exist, load the file. Otherwise create new file.
      */
     public Duke() {
-        String filepath = "D:/duke/data/d.txt";
+        String filepath = "out.txt";
         de = new DukeException();
         File file = new File(filepath); //create a file obj with the given filepath.
         this.lib = new Store(file); //create store from absolute filepath
         try {
             boolean hasFile = file.exists();
             if (!hasFile) {
-                boolean isNewFile = file.createNewFile();
+                file.createNewFile();
             } else {
                 Scanner newSN = new Scanner(file);
                 while (newSN.hasNextLine()) {

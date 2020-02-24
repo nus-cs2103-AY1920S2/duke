@@ -28,11 +28,11 @@ public abstract class Task {
      */
     public void getStatusIcon() {
         if (isDone) {
-            //this.statusIcon = "\u2713";
-            this.statusIcon = "✓";
+            this.statusIcon = "\u2713";
+            //this.statusIcon = "✓";
         } else {
-            //this.statusIcon = "\u2718";
-            this.statusIcon = "✗";
+            this.statusIcon = "\u2718";
+            //this.statusIcon = "✗";
         }
     }
 
