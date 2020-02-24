@@ -41,6 +41,7 @@ public class Duke {
             this.isLoadedFromStorage = true;
         } catch (DukeException e) {
             tasks = new TaskList();
+            tags = new TagList();
         }
     }
 
