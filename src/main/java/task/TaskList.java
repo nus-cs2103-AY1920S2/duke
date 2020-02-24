@@ -33,12 +33,21 @@ public class TaskList {
         tasks.clear();
     }
 
+    /**
+     * Represents a method to delete some tasks.
+     * @param idOfTaskListToBeDeleted tasks to be deleted.
+     */
     public void deleteSome(ArrayList<Integer> idOfTaskListToBeDeleted) {
         for (int i : idOfTaskListToBeDeleted) {
             tasks.remove(i - 1);
         }
     }
 
+    /**
+     * Represents a method to find tasks with keywords.
+     * @param keyword keyword to find tasks.
+     * @return return the list of tasks according to keyword.
+     */
     public TaskList find(String keyword) {
         ArrayList<Task> newList = new ArrayList<>();
         for (Task t : tasks) {

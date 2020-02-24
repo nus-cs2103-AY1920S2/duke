@@ -26,7 +26,7 @@ import java.util.Collections;
 public class Parser {
 
     /**
-     * Method to return if the string is actually an integer
+     * Method to return if the string is actually an integer.
      * @param string input string
      * @return boolean to determine if string is numeric
      */
@@ -41,6 +41,13 @@ public class Parser {
         }
         return true;
     }
+
+    /**
+     * Represents a method which takes in user input and parses it, then returning the appropriate command.
+     * @param userInput user input.
+     * @return returns a command based off input.
+     * @throws DukeException throws an exception when input is not aligned with format
+     */
     public static Command parseCommand(String userInput) throws DukeException {
         String[] split = userInput.split(" ", 2);
         String first = split[0];

@@ -14,6 +14,7 @@ public class DeleteSomeCommand extends Command {
     public DeleteSomeCommand(ArrayList idOfTaskListToBeDeleted) {
         this.idOfTaskListToBeDeleted = idOfTaskListToBeDeleted;
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.deleteSome(idOfTaskListToBeDeleted);

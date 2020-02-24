@@ -1,8 +1,8 @@
 package command;
 
-import storage.*;
-import task.*;
-import ui.*;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 import java.io.IOException;
 
 public class ListCommand extends Command {

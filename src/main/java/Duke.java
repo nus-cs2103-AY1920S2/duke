@@ -10,19 +10,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Duke {
     private Storage storage;
@@ -36,8 +29,11 @@ public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/nerd.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/dwayne.png"));
 
-
-    public Duke() throws IOException{
+    /**
+     * Represents a class Duke which runs the program.
+     * @throws IOException exception is thrown when file is not found
+     */
+    public Duke() throws IOException {
         String filePath = "data/duke.txt";
         ui = new Ui();
         storage = new Storage(filePath);
@@ -53,6 +49,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Represents a method which runs the program.
+     */
     public void run() {
         ui.displayIntro();
         boolean isExit = false;
@@ -105,7 +104,7 @@ public class Duke {
 
 
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         new Duke().run();
     }
 

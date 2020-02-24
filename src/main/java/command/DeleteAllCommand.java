@@ -6,8 +6,10 @@ import ui.Ui;
 
 import java.io.IOException;
 
-public class DeleteAllCommand extends Command{
-    public DeleteAllCommand() {}
+public class DeleteAllCommand extends Command {
+    public DeleteAllCommand() {
+
+    }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {

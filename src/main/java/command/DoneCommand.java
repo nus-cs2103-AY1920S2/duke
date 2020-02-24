@@ -1,8 +1,8 @@
 package command;
 
-import storage.*;
-import task.*;
-import ui.*;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 import java.io.IOException;
 
 /**
@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Returns whether it is an exit command
+     * Returns whether it is an exit command.
      * @return The result of whether this command causes an exit.
      */
     @Override

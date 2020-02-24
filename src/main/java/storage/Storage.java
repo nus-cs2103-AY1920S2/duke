@@ -21,7 +21,11 @@ public class Storage {
     }
 
 
-    // copy file into TaskList
+    /**
+     * Represents a method which copies file inputs into a new task list.
+     * @return returns a Task List in the form of an ArrayList.
+     * @throws IOException throws an exception when file is not found.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
@@ -62,6 +66,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Represents a method which saves the stored task list into a .txt file.
+     * @param taskList task list containing tasks to be saved.
+     * @throws IOException throws an exception when .txt file is not found.
+     */
     public void save(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task t : taskList.tasks) {

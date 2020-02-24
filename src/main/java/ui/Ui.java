@@ -18,7 +18,7 @@ public class Ui {
     }
 
     public String displayIntro() {
-        String hi = "Hello! I'm Dwayne\n" + "What can I do for you?" ;
+        String hi = "Hello! I'm Dwayne\n" + "What can I do for you?";
         return hi;
     }
 
@@ -43,6 +43,11 @@ public class Ui {
         System.out.println("Nice! I've marked this task as done:\n" + task.toString());
     }
 
+    /**
+     * Displays the task to the GUI when task is added.
+     * @param task task to be added
+     * @param taskList task list where task is added
+     */
     public void displayAddedTask(Task task, TaskList taskList) {
         int size = taskList.getSize();
         assert size > 0 : "Size cannot be less than 0!";
@@ -50,6 +55,11 @@ public class Ui {
                 + "Now you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Displays the deleted task and task list after.
+     * @param task task to be deleted
+     * @param taskList task list after deletion
+     */
     public void displayDeletedTask(Task task, TaskList taskList) {
         int size = taskList.getSize();
         assert size > 0 : "Size cannot be less than 0!";
@@ -61,6 +71,11 @@ public class Ui {
         System.out.println("Noted. I've deleted all tasks. Don't come crying later!");
     }
 
+    /**
+     * Displays the tasks that are to be deleted and task list after.
+     * @param taskList list of tasks after deletion
+     * @param idOfTaskListToBeDeleted list of tasks to be deleted
+     */
     public void displayDeleteSomeTask(TaskList taskList, ArrayList<Integer> idOfTaskListToBeDeleted) {
         int size = taskList.getSize();
         String string = "";
@@ -71,11 +86,15 @@ public class Ui {
                 + "Now you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Displays the current tasks available.
+     * @param taskList current tasklist
+     */
     public void displayTasks(TaskList taskList) {
         System.out.print("Here are your remaining tasks:\n");
         for (Task t: taskList.tasks) {
             int index = taskList.tasks.indexOf(t) + 1;
-            //assert index < 0 : "Index cannot be less than 0!";
+            assert index < 0 : "Index cannot be less than 0!";
             System.out.println("" + index + "." + t.toString());
         }
     }
