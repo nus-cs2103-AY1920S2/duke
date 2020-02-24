@@ -12,7 +12,7 @@ public abstract class Command {
      * Returns <code>true</code> if the the command is the exit command.
      * @return <code>true</code> if the command is the exit command.
      */
-    public abstract boolean isExit();
+    public abstract boolean isExitCommand();
 
     /**
      * Executes the command.
