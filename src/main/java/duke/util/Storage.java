@@ -61,6 +61,7 @@ public class Storage {
             task = new Event(description, time);
             break;
         default:
+            assert false : type;
             task = new Task("default");
         }
         if (isDone.equals("1")) {
