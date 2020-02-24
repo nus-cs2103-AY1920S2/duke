@@ -9,16 +9,16 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDate at;
+    protected LocalDate scheduledDate;
 
     /**
      * Constructs a event instance. The event is initialized as undone.
      * @param description The description of the event details.
-     * @param at The date of the event.
+     * @param scheduledDate The date of the event.
      */
-    public Event(String description, String at) {
+    public Event(String description, String scheduledDate) {
         super(description);
-        this.at = LocalDate.parse(at);
+        this.scheduledDate = LocalDate.parse(scheduledDate);
     }
 
     /**
@@ -27,11 +27,12 @@ public class Event extends Task {
      */
     @Override
     public String toStringInFile() {
-        return "E # " + (isDone ? "1" : "0") + " # " + description + " # " + at;
+        return "E # " + (isDone ? "1" : "0") + " # " + description + " # " + scheduledDate;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString()
+                + " (at: " + scheduledDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

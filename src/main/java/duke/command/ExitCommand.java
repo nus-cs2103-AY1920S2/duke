@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
      * @return <code>true</code> if the the command is the exit command.
      */
     @Override
-    public boolean isExit() {
+    public boolean isExitCommand() {
         return true;
     }
 
@@ -25,6 +25,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasklist, Ui ui, Storage storage) {
-        return "Hope to see you next time! xD\n";
+        String byeMessage = "Hope to see you next time! xD\n";
+        return byeMessage;
     }
 }

@@ -13,7 +13,7 @@ public class ListCommand extends Command {
      * @return <code>true</code> if the the command is the exit command.
      */
     @Override
-    public boolean isExit() {
+    public boolean isExitCommand() {
         return false;
     }
 

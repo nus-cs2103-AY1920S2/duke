@@ -9,16 +9,16 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDate by;
+    protected LocalDate dueDate;
 
     /**
      * Constructs a deadline task instance. The deadline task is initialized as undone.
      * @param description The description of the deadline task details.
-     * @param by The due date of the deadline task.
+     * @param dueDate The due date of the deadline task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dueDate) {
         super(description);
-        this.by = LocalDate.parse(by);
+        this.dueDate = LocalDate.parse(dueDate);
     }
 
     /**
@@ -27,11 +27,11 @@ public class Deadline extends Task {
      */
     @Override
     public String toStringInFile() {
-        return "D # " + (isDone ? "1" : "0" + " # ") + description + " # " + by;
+        return "D # " + (isDone ? "1" : "0" + " # ") + description + " # " + dueDate;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
