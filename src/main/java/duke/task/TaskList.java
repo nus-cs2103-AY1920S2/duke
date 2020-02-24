@@ -150,7 +150,7 @@ public class TaskList {
 
         int taskDone = Integer.parseInt(position);
 
-        this.storageData.get(taskDone - 1).taskDone();
+        this.storageData.get(taskDone - 1).markTaskAsDone();
         assert(this.storageData.get(taskDone - 1).isDone == true);
 
         String output = TASK_DONE_MESSAGE;

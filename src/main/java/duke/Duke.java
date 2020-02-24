@@ -32,12 +32,6 @@ public class Duke {
 
         String response = this.USER_INTERFACE.runDukeWithInterface(input);
 
-        if (input.equals("Greeting")) {
-            response = "Poyo! (Hi, I'm Kirby! :3 How may I help you?)";
-        } else if (input.equals("poyo")) {
-            response = "Poyo! :3";
-        }
-
         return response;
     }
 }
