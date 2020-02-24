@@ -36,7 +36,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-![todo pic][todo.png]
+![todo pic](todo.png)
 
 ### `event` - Adds an event task to the task list.
 
