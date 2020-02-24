@@ -102,8 +102,9 @@ public class Storage {
      * @throws DukeException DukeException thrown if any task cannot be written into the buffer before saving the file.
      */
     public void save(TaskList taskList) throws DukeException {
+        FileWriter writer;
         try {
-            FileWriter writer = new FileWriter(filePath);
+            writer = new FileWriter(filePath);
             for (Task task : taskList.getTaskList()) {
                 try {
                     writer.write(task.toFileString() + "\n");
@@ -113,7 +114,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            throw new DukeException(ErrorCodes.FILE_NOT_FOUND);
+            System.out.println(e.getMessage());
         }
     }
 }
