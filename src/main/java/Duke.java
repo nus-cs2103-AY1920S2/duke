@@ -119,7 +119,11 @@ public class Duke extends Application {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        dataFile = new File(filePath);
+        //dataFile = new File(filePath);
+        dataFile = new File("data");
+        if (!dataFile.exists()) {
+            new File("data").mkdir();
+        }
         try {
             tasks = new TaskList(storage.load());
         } catch (InstantiationError e) {
