@@ -12,13 +12,27 @@ public class TagList {
         this.tagsList = new ArrayList<Tag>();
         for (Task task: taskList.getTaskList()) {
             for (Tag tag: task.getTags()) {
-                tagsList.add(tag);
+                if (!tag.getTagName().equals(" ")) {
+                    tagsList.add(tag);
+                }
             }
         }
     }
 
     public TagList() {
         this.tagsList = new ArrayList<Tag>();
+    }
+
+    public int getSize() {
+        return this.tagsList.size();
+    }
+
+    public ArrayList<Tag> getAllTags() {
+        return this.tagsList;
+    }
+
+    public Tag getTagAt(int i) {
+        return this.tagsList.get(i);
     }
 
     public Tag addTag(Tag tag) {

@@ -7,6 +7,10 @@ public class Tag {
         this.tagName = tagName;
     }
 
+    public String getTagName() {
+        return this.tagName;
+    }
+
     @Override
     public boolean equals(Object obj) {
         return ((Tag) obj).tagName == this.tagName;
