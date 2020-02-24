@@ -72,6 +72,7 @@ public class Parser {
                 String keyword = getTaskDescription(st);
                 return new FindCommand(keyword);
             default:
+                assert false : commandIdentifier;
                 return new ExitCommand();
             }
         } catch (CommandNotFoundException | InvalidDukeArgumentException e) {

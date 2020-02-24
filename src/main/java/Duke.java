@@ -65,6 +65,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        assert !input.isBlank() : "The input should not be blank!";
         Duke duke = new Duke("./data/duke.txt");
         TaskList tasklist = duke.tasklist;
         Storage storage = duke.storage;
