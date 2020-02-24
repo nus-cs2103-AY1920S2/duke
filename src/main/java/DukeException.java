@@ -15,9 +15,7 @@ public class DukeException extends Exception {
     }
 
     public String toString() {
-        return "____________________________________________________________\n" +
-                "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                "____________________________________________________________\n";
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
     }
 
     public String fileErrorMessage(){
