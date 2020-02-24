@@ -7,11 +7,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * A controller for <code>MainWindow</code>, which provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final Image DUKE_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/duke.png"));
+    private static final Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/user.png"));
+    private static final Color DUKE_COLOR = Color.GHOSTWHITE;
+    private static final Color USER_COLOR = Color.ROYALBLUE;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -23,34 +29,33 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
-
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
     /**
-     * Set the <code>Duke</code> object being used.
+     * Set the <code>Duke</code> object to be used.
      *
      * @param duke the <code>Duke</code> object to be used
      */
     public void setDuke(Duke duke) {
         this.duke = duke;
         String greeting = duke.getGreeting();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getReceivedDialog(DUKE_IMAGE, greeting, DUKE_COLOR));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Reads the user input and gets Duke's response.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         String response;
         try {
+            if (input.length() == 0) {
+                return;
+            }
             Duke.Command command = duke.getCommand(input);
             response = duke.getResponse(command, input);
             updateScreen(input, response);
@@ -63,10 +68,14 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Creates two dialog boxes, one cantaining the user input and the other containing Duke's response, and appends
+     * them to the dialog container. Clears the user input after processing.
+     */
     private void updateScreen(String input, String response) {
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getSentDialog(USER_IMAGE, input, USER_COLOR),
+                DialogBox.getReceivedDialog(DUKE_IMAGE, response, DUKE_COLOR)
         );
         userInput.clear();
     }

@@ -12,22 +12,23 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * A controller for <code>DialogBox</code>, which consists of an <code>ImageView</code> of the person's display picture
+ * and a <code>Label</code> containing the person's text.
  */
 public class DialogBox extends HBox {
-    private static final int DIALOG_POSITION = 0;
-
-    @FXML
-    private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private Label dialog;
 
-    private DialogBox(String text, Image image) {
+    private DialogBox(Image image, String text, Color color) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -37,38 +38,43 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
-        dialog.setAlignment(Pos.BOTTOM_RIGHT);
         displayPicture.setImage(image);
-        setAlignment(Pos.BOTTOM_RIGHT);
-    }
-
-    public static DialogBox getUserDialog(String text, Image image) {
-        return new DialogBox(text, image);
+        dialog.setText(text);
+        dialog.setBackground(new Background(new BackgroundFill(color, new CornerRadii(10), null)));
+        setAlignment(Pos.BOTTOM_LEFT);
     }
 
     /**
-     * Returns the dialog box containing Duke's messages.
+     * Returns the dialog box containing the received messages.
      *
-     * @param text the messages from Duke to be displayed
-     * @param image the image of Duke
-     * @return the dialog box containing Duke's messages
+     * @param text the messages received by the user
+     * @param image the display picture of the other party
+     * @return the dialog box containing the received messages
      */
-    public static DialogBox getDukeDialog(String text, Image image) {
-        DialogBox db = new DialogBox(text, image);
-        db.flip();
-        return db;
+    public static DialogBox getReceivedDialog(Image image, String text, Color color) {
+        return new DialogBox(image, text, color);
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Returns the dialog box containing the sent messages.
+     *
+     * @param text the messages sent by the user
+     * @param image the display picture of the user
+     * @return the dialog box containing the sent messages
+     */
+    public static DialogBox getSentDialog(Image image, String text, Color color) {
+        DialogBox dialogBox = new DialogBox(image, text, color);
+        dialogBox.flip();
+        return dialogBox;
+    }
+
+    /**
+     * Flips the dialog box such that the display picture is on the right and text on the left.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        dialog.setAlignment(Pos.BOTTOM_LEFT);
-        tmp.set(DIALOG_POSITION, dialog);
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.BOTTOM_LEFT);
+        setAlignment(Pos.BOTTOM_RIGHT);
     }
 }
