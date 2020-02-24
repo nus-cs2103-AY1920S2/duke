@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
+import duke.tags.TagList;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -20,7 +21,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, TagList tagList, Ui ui, Storage storage) throws DukeException {
         ui.dukePrompt("Good bye, boss! Call me if you need me. I'll be waiting!");
         return "Good bye, boss! Call me if you need me. I'll be waiting!";
     }

@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
+import duke.tags.TagList;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -34,7 +35,7 @@ public abstract class Command {
      * @param storage Storage instance of Duke program.
      * @throws DukeException DukeException thrown when command cannot be executed successfully.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, TagList tagList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Check if the command is an exit command.

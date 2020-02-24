@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
+import duke.tags.TagList;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -19,7 +20,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, TagList tagList, Ui ui, Storage storage) throws DukeException {
         String[] temp;
         if (tasks.getSize() == 0) {
             temp = new String[]{"Boss, my notepad is empty. You sure you told me anything?"};

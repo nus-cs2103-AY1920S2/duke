@@ -3,6 +3,7 @@ package duke.commands;
 import duke.enums.ErrorCodes;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
+import duke.tags.TagList;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -25,7 +26,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, TagList tagList, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= tasks.getSize()) {
             throw new DukeException(ErrorCodes.INVALID_TASK_INDEX);
         } else {

@@ -2,10 +2,11 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.enums.ErrorCodes;
 import duke.exceptions.DukeException;
+import duke.tags.Tag;
 
 /**
  * Represents a Event task.
@@ -13,7 +14,6 @@ import duke.exceptions.DukeException;
  * @author Firzan Armani
  */
 public class Event extends Task {
-    private String eventDate;
     private LocalDate parsedDate;
 
     /**
@@ -22,16 +22,13 @@ public class Event extends Task {
      * @param eventArgs Joined string of the user input command arguements
      * @throws DukeException Incorrect format/missing date
      */
-    public Event(String eventArgs) throws DukeException {
-        super(eventArgs.split(" /at ")[0]);
-        try {
-            getTags(eventArgs);
-            this.eventDate = eventArgs.split(" /at ")[1];
-            this.parsedDate = LocalDate.parse(eventDate);
-        } catch (DateTimeParseException e) {
-            throw new DukeException(ErrorCodes.INVALID_DATE_FORMAT);
-        } catch (Exception e) {
+    public Event(String taskName, LocalDate taskDate, ArrayList<Tag> tags) throws DukeException {
+        super(taskName);
+        this.setTags(tags);
+        if (taskDate == null) {
             throw new DukeException(ErrorCodes.MISSING_EVENT_DATE);
+        } else {
+            this.parsedDate = taskDate;
         }
     }
 
@@ -49,6 +46,6 @@ public class Event extends Task {
 
     @Override
     public String toFileString() {
-        return "E" + super.toFileString() + " | " + eventDate;
+        return "E" + super.toFileString() + " | " + parsedDate.toString();
     }
 }

@@ -1,5 +1,9 @@
 package duke.tasks;
 
+import java.util.ArrayList;
+
+import duke.tags.Tag;
+
 /**
  * Represents a ToDo task.
  *
@@ -11,8 +15,9 @@ public class ToDo extends Task {
      *
      * @param todoName Name of the ToDo task
      */
-    public ToDo(String todoName) {
-        super(todoName);
+    public ToDo(String taskName, ArrayList<Tag> tags) {
+        super(taskName);
+        this.setTags(tags);
     }
 
     /**

@@ -66,6 +66,9 @@ public class DukeException extends Exception {
             message = "Oops boss, I've got trouble trying to save from this task ("
                 + this.errorInfo + ") onwards... \nI'll just stop here and save what I have";
             break;
+        case INVALID_TAG:
+            message = "Boss, tags should only be a single word!";
+            break;
         default:
             message = "Uh-oh boss, I don't feel so good...";
             break;

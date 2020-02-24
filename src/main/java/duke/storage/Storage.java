@@ -3,11 +3,13 @@ package duke.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.enums.ErrorCodes;
 import duke.exceptions.DukeException;
+import duke.tags.Tag;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -63,17 +65,16 @@ public class Storage {
      */
     private void loadTask(String taskString, int lineNo) throws DukeException {
         String[] splitString = taskString.split(" \\| ");
+        ArrayList<Tag> tags = loadTaskTags(splitString[3]);
         switch (splitString[0]) {
         case "T":
-            taskList.add(new ToDo(splitString[2]));
+            taskList.add(new ToDo(splitString[2], tags));
             break;
         case "D":
-            String deadlineArgs = splitString[2] + " /by " + splitString[3];
-            taskList.add(new Deadline(deadlineArgs));
+            taskList.add(new Deadline(splitString[2], LocalDate.parse(splitString[4]), tags));
             break;
         case "E":
-            String eventArgs = splitString[2] + " /at " + splitString[3];
-            taskList.add(new Event(eventArgs));
+            taskList.add(new Event(splitString[2], LocalDate.parse(splitString[4]), tags));
             break;
         default:
             assert splitString[0].equals("T")
@@ -84,6 +85,14 @@ public class Storage {
         if (splitString[1].equals("true")) {
             taskList.get(taskList.size() - 1).setTaskDone();
         }
+    }
+
+    private ArrayList<Tag> loadTaskTags(String tagsString) {
+        ArrayList<Tag> tags = new ArrayList<Tag>();
+        for (String tagName : tagsString.split(",\\s")) {
+            tags.add(new Tag(tagName));
+        }
+        return tags;
     }
 
     /**

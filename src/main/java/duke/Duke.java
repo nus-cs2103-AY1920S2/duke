@@ -4,6 +4,7 @@ import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.tags.TagList;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -15,6 +16,7 @@ import duke.ui.Ui;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
+    private TagList tags;
     private Ui ui;
     private boolean isLoadedFromStorage = false;
     private static final String FILE_PATH = "data/duke.txt";
@@ -32,6 +34,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            tags = new TagList(tasks);
             this.isLoadedFromStorage = true;
         } catch (DukeException e) {
             tasks = new TaskList();
@@ -51,7 +54,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readUserInput();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, tags, ui, storage);
                 if (c.isExit()) {
                     isActive = false;
                 }
@@ -78,7 +81,7 @@ public class Duke {
         String output = "";
         try {
             Command c = Parser.parse(input);
-            output = c.execute(tasks, ui, storage);
+            output = c.execute(tasks, tags, ui, storage);
             // TODO: If exit command, close application?
             // if (c.isExit()) {
             //     isActive = false;

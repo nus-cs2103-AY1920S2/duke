@@ -14,5 +14,6 @@ public enum ErrorCodes {
     INVALID_DATE_FORMAT,
     FILE_NOT_FOUND,
     LOADING_ERROR,
-    SAVING_ERROR
+    SAVING_ERROR,
+    INVALID_TAG
 }

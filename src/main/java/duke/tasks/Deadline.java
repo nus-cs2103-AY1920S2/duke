@@ -2,10 +2,11 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.enums.ErrorCodes;
 import duke.exceptions.DukeException;
+import duke.tags.Tag;
 
 /**
  * Represents a Deadline task.
@@ -13,7 +14,6 @@ import duke.exceptions.DukeException;
  * @author Firzan Armani
  */
 public class Deadline extends Task {
-    private String deadlineDate;
     private LocalDate parsedDate;
 
     /**
@@ -22,15 +22,13 @@ public class Deadline extends Task {
      * @param deadlineArgs Joined string of the user input command arguements
      * @throws DukeException Incorrect format/missing date
      */
-    public Deadline(String deadlineArgs) throws DukeException {
-        super(deadlineArgs.split(" /by ")[0]);
-        try {
-            this.deadlineDate = deadlineArgs.split(" /by ")[1];
-            this.parsedDate = LocalDate.parse(deadlineDate);
-        } catch (DateTimeParseException e) {
-            throw new DukeException(ErrorCodes.INVALID_DATE_FORMAT);
-        } catch (Exception e) {
+    public Deadline(String taskName, LocalDate taskDate, ArrayList<Tag> tags) throws DukeException {
+        super(taskName);
+        this.setTags(tags);
+        if (taskDate == null) {
             throw new DukeException(ErrorCodes.MISSING_DEADLINE_DATE);
+        } else {
+            this.parsedDate = taskDate;
         }
     }
 
@@ -48,6 +46,6 @@ public class Deadline extends Task {
 
     @Override
     public String toFileString() {
-        return "D" + super.toFileString() + " | " + deadlineDate;
+        return "D" + super.toFileString() + " | " + parsedDate.toString();
     }
 }
