@@ -170,9 +170,30 @@ public class Duke extends Application {
         return s.toString();
     }
 
+<<<<<<< HEAD
     static String printReply(Task task) {
         return "Got it! I've added the task: \n" + task.toString() + "\nNow you have " + tasks.getSize() +
                         " tasks in the list.\n";
+=======
+    static void printIntro() {
+        String introText = BORDER_LINE + "Hello! I'm Duke\nWhat can I do for you?\n" +
+                "If you need any assistance, type 'help' in the command line\n" + BORDER_LINE;
+
+        assert(introText == null): "Intro text should not be null";
+    }
+
+    static void printReply(Task task) {
+        System.out.print(
+                BORDER_LINE +
+                        "Got it! I've added the task: \n" + task.toString() + "\nNow you have " + tasks.getSize() +
+                        " tasks in the list.\n" + BORDER_LINE);
+    }
+
+    static void printGoodbye() {
+        String goodbyeText = BORDER_LINE + "\"Bye. Hope to see you again soon!\"n" + BORDER_LINE;
+        System.out.println(goodbyeText);
+        assert(goodbyeText == null): "Goodbye text should not be NULL";
+>>>>>>> 286c65c473c6c0b9ce4e1940ff9d2c6ecf2d1f3c
     }
 
     static String stringToTime(String s) throws DukeException {
@@ -234,6 +255,9 @@ public class Duke extends Application {
             if (input.split(" ")[STARTING_VARIABLE].toLowerCase().equals("delete")) {
                 reply = deleteTask(input);
                 storage.saveFile(taskToParse(tasks));
+            } else if (!input.toLowerCase().equals("help")){
+                Helper help = new Helper();
+                System.out.println(Helper.printHelp());
             } else {
                 reply = addTask(input);
             }
