@@ -31,10 +31,12 @@ Example of usage:
 
 Expected outcome:
 ```
-Got it. I've added this task:\  
+Got it. I've added this task:  
 [T][Not Done] swim later
 Now you have 1 tasks in the list.
 ```
+
+![todo pic][todo.png]
 
 ### `event` - Adds an event task to the task list.
 
@@ -47,7 +49,7 @@ Example of usage:
 
 Expected outcome:
 ```
-Got it. I've added this task:\  
+Got it. I've added this task:  
 [T][Not Done] swim later
 Now you have 2 tasks in the list.
 ```
@@ -64,7 +66,7 @@ Example of usage:
 
 Expected outcome:
 ```
-Got it. I've added this task:\  
+Got it. I've added this task:  
 [T][Not Done] swim later
 Now you have 3 tasks in the list.
 ```
@@ -88,11 +90,11 @@ Here are your remaining tasks:
 ### `delete` - Deletes a task.
 
 When the `delete` command is called, followed by the index of the task, a task from the task list is removed.
-
+When the `delete` command is called, followed by `all`, a task from the task list is removed.
 
 Example of usage: 
 
-`delete 1`
+`delete 4`
 
 Expected outcome:
 ```
@@ -101,6 +103,15 @@ Noted. I've removed this task:
 Now you have 3 tasks in the list.
 ```
 
+Example of usage: 
+
+`delete all`
+
+Expected outcome:
+```
+Noted. I've deleted all tasks. Don't come crying 
+later!
+```
 ### `done` - Marks tasks as done
 
 When the `done` command is called, followed by the index of the task, a task from the task list is marked as done.
