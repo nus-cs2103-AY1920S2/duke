@@ -28,7 +28,8 @@ public class DukeUserInterface {
             "    To add an Event Task:\n    event <description> /by <DD/MM/YYYY 2359>\n\n" +
             "    To delete a Task:\n    delete <index of task>\n\n" +
             "    To mark a Task as done:\n    done <index of task>\n\n" +
-            "    To find tasks of a certain keyword:\n    find <keyword>";
+            "    To find tasks of a certain keyword:\n    find <keyword>\n\n" +
+            "    To change the priority (high, medium, low) of a task:\n    priority <<index of task> <priority>>\n";
 
     private InputStreamReader stringReader;
     private BufferedReader commandReader;

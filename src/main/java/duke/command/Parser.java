@@ -73,6 +73,10 @@ public class Parser {
             // Finds task with keywords.
             return this.listOfTasks.find(commandSplit[1]);
 
+        } else if (basicCommand.equals("priority")) {
+
+            // Assigns priority to task.
+            return this.listOfTasks.priority(commandSplit[1], commandSplit[2]);
         }
 
         assert(!basicCommand.equals("list"));

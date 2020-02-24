@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import duke.DukeException;
 
@@ -21,6 +22,15 @@ public class TaskList {
     private final static String TASK_DONE_MESSAGE = "Nice! I've marked this task as done:";
     private final static String TASK_ADD_MESSAGE = "Got it. I've added this task:";
     private final static String DELETE_MESSAGE = "Noted. I've removed this task:";
+    private final static Comparator<Task> TASK_COMPARATOR = new Comparator<Task>() {
+        @Override
+        public int compare(Task o1, Task o2) {
+            int task1Priority = o1.priority;
+            int task2Priority = o2.priority;
+
+            return task1Priority - task2Priority;
+        }
+    };
 
     /**
      * TaskList holds the list of tasks that are in the Duke program.
@@ -31,6 +41,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> storageData) throws DukeException{
         this.storageData = storageData;
+        this.storageData.sort(TASK_COMPARATOR);
     }
 
     /**
@@ -155,6 +166,23 @@ public class TaskList {
 
         String output = TASK_DONE_MESSAGE;
         output += "\n" + this.storageData.get(taskDone - 1);
+
+        return output;
+    }
+
+    /**
+     * Assign priority to a specific task in the list.
+     *
+     * @param position Position of the task in the list.
+     * @param priority Priority that the user wants to set to.
+     * @return Message indicating success.
+     */
+    public String priority(String position, String priority) {
+
+        int task = Integer.parseInt(position);
+
+        String output = this.storageData.get(task - 1).assignPriority(priority);
+        this.storageData.sort(TASK_COMPARATOR);
 
         return output;
     }

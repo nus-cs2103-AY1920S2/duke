@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
 import duke.DukeException;
 
@@ -18,6 +19,7 @@ public class Task implements Serializable {
 
     String task;
     String type;
+    int priority;
     boolean isDone = false;
     static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
@@ -25,6 +27,13 @@ public class Task implements Serializable {
     private final static String TODO = "T";
     private final static String DEADLINE = "D";
     private final static String EVENT = "E";
+
+    private final static int HIGH_PRIORITY = 1;
+    private final static int MEDIUM_PRIORITY = 2;
+    private final static int LOW_PRIORITY = 3;
+
+    private final static String PRIORITY_ERROR = "Sorry! Input is now allowed. Indicate priority as 'high', 'medium' or 'low'.";
+    private final static String PRIORITY_SUCCESS = "Okay! I have changed the priority of the following event:\n";
 
     /**
      * Task is the representation of a task that someone inputs into Duke.
@@ -44,6 +53,7 @@ public class Task implements Serializable {
         }
 
         this.task = task;
+        this.priority = MEDIUM_PRIORITY;
     }
 
     /**
@@ -60,7 +70,7 @@ public class Task implements Serializable {
      * @return Formatted string representing the task in question.
      * @throws DukeException If any of the task classes do not have an appropriate command input.
      */
-    public String print_Format() throws DukeException {
+    public String printFormat() throws DukeException {
         try {
             String checkmark = "N";
 
@@ -87,6 +97,31 @@ public class Task implements Serializable {
         } catch (Exception e) {
             throw new DukeException(type);
         }
+    }
+
+    /**
+     * Assigns priority to the task.
+     *
+     * @param input Priority inputs: high, medium or low
+     * @return Message indicating success.
+     */
+    public String assignPriority(String input) {
+
+        if (input.equals("high")) {
+            this.priority = HIGH_PRIORITY;
+        } else if (input.equals("medium")) {
+            this.priority = MEDIUM_PRIORITY;
+        } else if (input.equals("low")) {
+            this.priority = LOW_PRIORITY;
+        } else {
+            String output = PRIORITY_ERROR;
+
+            return output;
+        }
+
+        String output = PRIORITY_SUCCESS + "    " + this.toString();
+
+        return output;
     }
 
     /**
@@ -122,7 +157,7 @@ public class Task implements Serializable {
         String output = "";
 
         try {
-            output += this.print_Format();
+            output += this.printFormat();
         } catch (DukeException e) {
             return e.toString();
         }
