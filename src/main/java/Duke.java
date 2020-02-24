@@ -144,7 +144,8 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String reply = run(input);
+        return reply;
     }
 
     /**
@@ -169,22 +170,9 @@ public class Duke extends Application {
         return s.toString();
     }
 
-    static void printIntro() {
-        String introText = BORDER_LINE + "Hello! I'm Duke\nWhat can I do for you?\n" + BORDER_LINE;
-        assert(introText == null): "Intro text should not be null";
-    }
-
-    static void printReply(Task task) {
-        System.out.print(
-                BORDER_LINE +
-                        "Got it! I've added the task: \n" + task.toString() + "\nNow you have " + tasks.getSize() +
-                        " tasks in the list.\n" + BORDER_LINE);
-    }
-
-    static void printGoodbye() {
-        String goodbyeText = BORDER_LINE + "\"Bye. Hope to see you again soon!\"n" + BORDER_LINE;
-        System.out.println(goodbyeText);
-        assert(goodbyeText == null): "Goodbye text should not be NULL";
+    static String printReply(Task task) {
+        return "Got it! I've added the task: \n" + task.toString() + "\nNow you have " + tasks.getSize() +
+                        " tasks in the list.\n";
     }
 
     static String stringToTime(String s) throws DukeException {
@@ -200,66 +188,61 @@ public class Duke extends Application {
         }
     }
 
-    static void addTask(String input) throws DukeException, TodoException {
-        try {
-            if (input.toLowerCase().equals("list")) {
-                tasks.printList();
-            } else if (input.split(" ")[STARTING_VARIABLE].equals("done")) {
-                int taskNumber = Integer.parseInt(input.split(" ")[VARIABLE_ENTRY_ONE]) - 1;
-                tasks.markTaskDone(taskNumber);
-                storage.saveFile(taskToParse(tasks));
-            } else if (input.split(" ")[STARTING_VARIABLE].equals("todo")) {
-                if (input.split(" ").length == 1) {
-                    throw new TodoException(input);
-                }
-                Task task = new Todo(input.split(" ", SPLIT_BY_TWO)[1]);
-                tasks.addTask(task);
-                storage.saveFile(taskToParse(tasks));
-                printReply(task);
-            } else if (input.split(" ")[STARTING_VARIABLE].equals("deadline")) {
-                Task task = new Deadline(input.split("/by ", SPLIT_BY_TWO)[STARTING_VARIABLE].split(" ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE], stringToTime(input.split("/by ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE]));
-                tasks.addTask(task);
-                storage.saveFile(taskToParse(tasks));
-                printReply(task);
-            } else if (input.split(" ")[STARTING_VARIABLE].equals("event")) {
-                Task task = new Event(input.split("/at", SPLIT_BY_TWO)[STARTING_VARIABLE].split(" ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE], stringToTime(input.split("/at ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE]));
-                tasks.addTask(task);
-                storage.saveFile(taskToParse(tasks));
-                printReply(task);
-            } else if (input.split(" ")[STARTING_VARIABLE].equals("find")){
-                tasks.search(input.split(" ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE]);
-            } else {
-                throw new DukeException(input);
+    static String addTask(String input) throws DukeException, TodoException {
+        String reply = "";
+        if (input.toLowerCase().equals("list")) {
+            reply = tasks.printList();
+        } else if (input.split(" ")[STARTING_VARIABLE].equals("done")) {
+            int taskNumber = Integer.parseInt(input.split(" ")[VARIABLE_ENTRY_ONE]) - 1;
+            reply = tasks.markTaskDone(taskNumber);
+            storage.saveFile(taskToParse(tasks));
+        } else if (input.split(" ")[STARTING_VARIABLE].equals("todo")) {
+            if (input.split(" ").length == 1) {
+                throw new TodoException(input);
             }
-        } catch (TodoException e) {
-            System.out.println(e.toString());
-        } catch (DukeException e) {
-            System.out.println(e.toString());
+            Task task = new Todo(input.split(" ", SPLIT_BY_TWO)[1]);
+            tasks.addTask(task);
+            storage.saveFile(taskToParse(tasks));
+            reply = printReply(task);
+        } else if (input.split(" ")[STARTING_VARIABLE].equals("deadline")) {
+            Task task = new Deadline(input.split("/by ", SPLIT_BY_TWO)[STARTING_VARIABLE].split(" ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE], stringToTime(input.split("/by ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE]));
+            tasks.addTask(task);
+            storage.saveFile(taskToParse(tasks));
+            reply = printReply(task);
+        } else if (input.split(" ")[STARTING_VARIABLE].equals("event")) {
+            Task task = new Event(input.split("/at", SPLIT_BY_TWO)[STARTING_VARIABLE].split(" ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE], stringToTime(input.split("/at ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE]));
+            tasks.addTask(task);
+            storage.saveFile(taskToParse(tasks));
+            reply = printReply(task);
+        } else if (input.split(" ")[STARTING_VARIABLE].equals("find")){
+            reply = tasks.search(input.split(" ", SPLIT_BY_TWO)[VARIABLE_ENTRY_ONE]);
+        } else {
+            throw new DukeException(input);
         }
+        return reply;
     }
 
-    static void deleteTask(String input) {
+    static String deleteTask(String input) {
         int pos = Integer.parseInt(input.split(" ")[VARIABLE_ENTRY_ONE]);
         Task task = tasks.removeTask(pos - 1);
-        System.out.println("____________________________________________________________\n"
-                + " Noted. I've removed this task: \n  "
-                + task.toString() + "\n Now you have " + tasks.getSize() + " tasks in the list.\n"
-                + "____________________________________________________________");
+        return " Noted. I've removed this task: \n  " + task.toString() + "\n Now you have " + tasks.getSize() + " tasks in the list.\n";
     }
 
-    public void run() throws DukeException {
-        printIntro();
-        String input = sc.nextLine();
-        while (!input.toLowerCase().equals("bye")) {
+    public String run(String input) {
+        String reply = "";
+        try {
             if (input.split(" ")[STARTING_VARIABLE].toLowerCase().equals("delete")) {
-                deleteTask(input);
+                reply = deleteTask(input);
                 storage.saveFile(taskToParse(tasks));
             } else {
-                addTask(input);
+                reply = addTask(input);
             }
-            input = sc.nextLine();
+        } catch (TodoException e) {
+            reply = (e.toString());
+        } catch (DukeException e) {
+            reply = (e.toString());
         }
-        printGoodbye();
+        return reply;
     }
 
     public Duke() {
@@ -275,7 +258,7 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) throws DukeException {
-        new Duke().run();
+        new Duke();
     }
 
 }

@@ -14,13 +14,12 @@ public class TaskList {
     /**
      * This method prints out the entire list in the given format.
      * */
-    public void printList() {
-        System.out.print("____________________________________________________________\n" +
-                "Here are the tasks in your list:\n");
+    public String printList() {
+        String reply = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(Integer.toString(i + 1) + ". " + tasks.get(i).toString());
+            reply += (Integer.toString(i + 1) + ". " + tasks.get(i).toString());
         }
-        System.out.print("____________________________________________________________\n");
+        return reply;
     }
 
     /**
@@ -29,11 +28,10 @@ public class TaskList {
      * @param index Takes in an integer that and marks the corresponding task in
      *              the TaskList as 'done'.
      * */
-    public void markTaskDone(int index) {
+    public String markTaskDone(int index) {
         tasks.get(index).markAsDone();
-        System.out.println("____________________________________________________________\n"
-                + "Nice! I've marked this task as done:\n" + tasks.get(index).toString()
-                + "\n____________________________________________________________\n");
+        String reply =  "Nice! I've marked this task as done:\n" + tasks.get(index).toString();
+        return reply;
     }
 
     /**
@@ -127,18 +125,18 @@ public class TaskList {
     }
 
 
-    public void search(String searchString){
+    public String search(String searchString){
+        String reply = "";
         ArrayList<Task> searchList = new ArrayList<>();
         for (Task t: tasks){
             if(t.getDescription().contains(searchString)){
                 searchList.add(t);
             }
         }
-        System.out.print("____________________________________________________________\n" +
-                "Here are the matching tasks in your list:\n");
+        reply += "Here are the matching tasks in your list:\n";
         for (int i = 0; i < searchList.size(); i++) {
-            System.out.println(Integer.toString(i + 1) + ". " + tasks.get(i).toString());
+            reply += (Integer.toString(i + 1) + ". " + tasks.get(i).toString());
         }
-        System.out.print("____________________________________________________________\n");
+        return reply;
     }
 }
