@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Duke extends Application { 
+public class Duke extends Application {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
