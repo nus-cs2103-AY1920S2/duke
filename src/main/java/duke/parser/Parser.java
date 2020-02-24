@@ -59,6 +59,10 @@ public class Parser {
             return HelpCommand.execute();
         }
 
+        // Assertion testing
+        assert commandType != CommandType.BYE;
+        assert commandType != CommandType.LIST;
+        assert commandType != CommandType.HELP;
 
         String commandDetails = "";
         try {
