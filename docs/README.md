@@ -1,4 +1,6 @@
 # User Guide
+### Ui
+![Ui](./Ui.png)
 
 ## Features 
 
@@ -8,33 +10,11 @@ Adds a task to current list
 
 Example of usage: 
 
-`todo sleep`
+`todo sleep`, `event wedding /at 2019-05-15`, `deadline submission /by 2019-04-22`
 
-Expected outcome:
+Expected outcome: 
 
-`Got it. I've added this task:`<br/>
-`[T][✘] sleep`<br/>
-`Now you have 1 task(s) in the list.`
-
-Example of usage: 
-
-`event wedding /at 2019-05-15`
-
-Expected outcome:
-
-`Got it. I've added this task:`<br/>
-`[E][✘] wedding (at: May 15 2019)`<br/>
-`Now you have 2 task(s) in the list.`
-
-Example of usage: 
-
-`event submission /by 2019-04-22`
-
-Expected outcome:
-
-`Got it. I've added this task:`<br/>
-`[D][✘] submission (at: Apr 22 2019)`<br/>
-`Now you have 3 task(s) in the list.`
+![add1](./add1.png) ![add2](./add2.png)
 
 ### Listing out Tasks: `list`
 
@@ -46,9 +26,7 @@ Example of usage:
 
 Expected outcome:
 
-`1.[T][✘] sleep`<br/>
-`2.[E][✘] wedding (at: May 15 2019)`<br/>
-`3.[D][✘] submission (by: Apr 22 2019)`
+![list](./list.png)
 
 ### Marking completed tasks: `done`
 
@@ -60,8 +38,8 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:`<br/>
-`[T][✓] sleep`
+![done](./done.png)
+
 
 ### Deleting tasks: `delete`
 
@@ -73,8 +51,7 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task`<br/>
-`[D][✘] submission (by: Apr 22 2019)`
+![delete](./delete.png)
 
 ### Searching for tasks: `find`
 
@@ -86,8 +63,7 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list`<br/>
-`1.[T][✓] sleep`
+![find](./find.png)
 
 ### Updating tasks: `update`
 
@@ -95,20 +71,8 @@ Update a task in the current list.
 
 Example of usage: 
 
-`update 2 description Mary's wedding`
+`update 2 description Mary's wedding`, `update 2 date 2019-06-07`
 
 Expected outcome:
 
-`Alright. I've updated this task:`<br/>
-`[E][✘] Mary's wedding (by: Apr 22 2019)`
-
-Example of usage: 
-
-`update 2 date 2019-06-07`
-
-Expected outcome:
-
-`Alright. I've updated this task:`<br/>
-`[E][✘] Mary's wedding (by: Jun 7 2019)`
-
-![example](./Ui.png)
+![update1](./update1.png) ![update2](./update2.png)

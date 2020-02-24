@@ -23,18 +23,18 @@ public class Task {
 
     public String toStore() {
         if (isDone) {
-            return "[] " + content;
+            return "[O] " + content;
         } else {
-            return "[\u2718] " + content;
+            return "[X] " + content;
         }
     }
 
     @Override
     public String toString() {
         if (isDone) {
-            return "[\u2713] " + content;
+            return "[O] " + content;
         } else {
-            return "[\u2718] " + content;
+            return "[X] " + content;
         }
     }
 }

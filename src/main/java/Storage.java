@@ -91,7 +91,7 @@ public class Storage {
                     break;
                 }
 
-                if (state.equals("\u2713")) {
+                if (state.equals("O")) {
                     taskList.markDone(index);
                 }
 
