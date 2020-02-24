@@ -65,60 +65,6 @@ public class Ui {
     }
 
     /**
-     * Throws a DukeException when there is an invalid input for the deadline command.
-     *
-     * @throws DukeException If there is an invalid input for the deadline command
-     */
-    public static void throwDeadlineInputError() throws DukeException {
-        throw new DukeException(deadlineInputError());
-    }
-
-    /**
-     * Throws a DukeException when there is an invalid input for the event command.
-     *
-     * @throws DukeException If there is an invalid input for the event command
-     */
-    public static void throwEventInputError() throws DukeException {
-        throw new DukeException(eventInputError());
-    }
-
-    /**
-     * Throws a DukeException when there is an invalid input for the todo command.
-     *
-     * @throws DukeException If there is an invalid input for the todo command
-     */
-    public static void throwTodoInputError() throws DukeException {
-        throw new DukeException(todoInputError());
-    }
-
-    /**
-     * Throws a DukeException when there is an invalid input for the date command.
-     *
-     * @throws DukeException If there is an invalid input for the date command
-     */
-    public static void throwDateInputError() throws DukeException {
-        throw new DukeException(dateInputError());
-    }
-
-    /**
-     * Throws a DukeException when there is an invalid input for the done command.
-     *
-     * @throws DukeException If there is an invalid input for the done command
-     */
-    public static void throwDoneInputError() throws DukeException {
-        throw new DukeException(doneInputError());
-    }
-
-    /**
-     * Throws a DukeException when there is an invalid input for the delete command.
-     *
-     * @throws DukeException If there is an invalid input for the delete command
-     */
-    public static void throwDeleteInputError() throws DukeException {
-        throw new DukeException(deleteInputError());
-    }
-
-    /**
      * Prints the border line.
      */
     public static void showLine() {

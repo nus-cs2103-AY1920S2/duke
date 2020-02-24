@@ -32,7 +32,10 @@ public class TodoCommand extends Command {
         for (int i = 0; i < replyArr.length; i++) {
             replyWoSpace += replyArr[i] + " ";
         }
-        if (!replyWoSpace.equals("")) {
+        System.out.println("THIS IS" + replyWoSpace.length() + "!!!");
+        System.out.println("THIS IS" + replyWoSpace.trim().length() + "!!!");
+
+        if (replyWoSpace.trim().length() != 0) {
             Todo toDo = new Todo(replyWoSpace, false, LocalDate.MAX);
             taskList.addTask(toDo);
             return Ui.showTaskAdded(toDo, taskList);

@@ -17,7 +17,7 @@ public class UnknownCommand extends Command {
      * @return Returns the response of the bot to this command
      */
     public String execute(TaskList taskList, Ui ui) {
-        String msg = "    Sorry! I don't understand what is " + instruction;
+        String msg = "    Sorry! I don't understand what is " + instruction + ". Try \"help\" to get started.";
         System.out.println(msg);
         return msg;
     }

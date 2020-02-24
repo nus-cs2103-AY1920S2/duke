@@ -73,6 +73,4 @@ public class Parser {
         }
         return details;
     }
-
-
 }
