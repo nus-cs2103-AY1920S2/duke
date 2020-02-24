@@ -5,7 +5,9 @@ import liaomeng.duke.Storage;
 import liaomeng.duke.TaskList;
 import liaomeng.duke.Ui;
 
-
+/**
+ *
+ */
 public class Duke {
     private boolean isClosed = false;
     private Logic logic;
@@ -16,7 +18,7 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
-        Storage storage = new Storage("duke.txt", ui);
+        Storage storage = new Storage("NUS-Duke.txt", ui);
         parser = new Parser();
         try {
             tasks = new TaskList(storage.load());

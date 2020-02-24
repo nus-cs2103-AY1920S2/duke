@@ -69,7 +69,7 @@ public class Storage {
 
     public void writeToFile(List<Task> list) throws DukeException {
         try {
-            FileWriter writer = new FileWriter("duke.txt");
+            FileWriter writer = new FileWriter("NUS-Duke.txt");
             for (Task t : list) {
                 writer.write(t.toSimplerString() + "\n");
             }
