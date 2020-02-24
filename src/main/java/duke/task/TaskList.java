@@ -78,7 +78,7 @@ public class TaskList {
             Task task = storageData.get(i);
             String taskFullInput = task.task;
             if(taskFullInput.contains(keyword)) {
-                output += "     " + counter + "." + task;
+                output += "     " + counter + "." + task + "\n";
                 counter++;
             }
         }
