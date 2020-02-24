@@ -1,7 +1,7 @@
 package duke.tasks;
 
 import java.io.Serializable;
-//Adapted from https://nus-cs2103-ay1920s2.github.io/website/schedule/week2/project.html
+//Solution below adapted from https://nus-cs2103-ay1920s2.github.io/website/schedule/week2/project.html
 
 /**
  * Encapsulates an abstract task of the user.

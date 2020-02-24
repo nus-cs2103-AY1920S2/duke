@@ -19,6 +19,8 @@ import javafx.fxml.FXMLLoader;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    //@@author {thetruevincentchow}-reused
+    //Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md with minor modifications
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -56,6 +58,7 @@ public class MainWindow extends AnchorPane {
         displayDukeMessage(response);
         userInput.clear();
     }
+    //@@author
 
     protected void displayUserInput(String input) {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));

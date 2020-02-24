@@ -1,6 +1,3 @@
-//Code for GUI is heavily adapted from the Duke JavaFX tutorials, available at
-//https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart1.md
-
 package duke.ui;
 
 import duke.Duke;
@@ -58,8 +55,12 @@ public class Gui implements Ui {
      */
     public void start(Stage stage) {
         this.stage = stage;
+        
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
+
+        //@@author {thetruevincentchow}-reused
+        //Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart3.md with minor modifications
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
@@ -71,8 +72,9 @@ public class Gui implements Ui {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //@@author
         
-        //Step 3. Add functionality to handle user input.
+        //Show greeting to user.
         startMessage();
         showGreeting();
         messageBuffer.add(new Message(endMessage()));

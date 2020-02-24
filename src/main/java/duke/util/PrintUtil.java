@@ -18,8 +18,12 @@ public class PrintUtil {
     }
     
     private static String indentString(String s) {
-        //https://stackoverflow.com/questions/15888934/how-to-indent-a-multi-line-paragraph-being-written-to-the-console-in-java
+        //@@author {thetruevincentchow}-reused
+        //Reused from https://stackoverflow.com/questions/15888934/how-to-indent-a-multi-line-paragraph-being-written-to-the-console-in-java with minor modifications
+        
         return s.replaceAll("(?m)^", " ".repeat(indentLevel));
+        
+        //@@author
     }
     
     /**

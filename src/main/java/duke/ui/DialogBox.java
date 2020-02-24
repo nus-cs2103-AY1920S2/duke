@@ -1,3 +1,6 @@
+//@@author {thetruevincentchow}-reused
+//Reused from https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md with minor modifications
+
 package duke.ui;
 
 import java.io.IOException;
@@ -61,3 +64,5 @@ public class DialogBox extends HBox {
         return db;
     }
 }
+
+//@@author

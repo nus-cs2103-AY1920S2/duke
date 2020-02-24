@@ -1,7 +1,6 @@
 package duke.tasks;
 
 import java.time.LocalDate;
-//Adapted from https://nus-cs2103-ay1920s2.github.io/website/schedule/week2/project.html
 
 /**
  * Encapsulates an abstract dated task of the user.
