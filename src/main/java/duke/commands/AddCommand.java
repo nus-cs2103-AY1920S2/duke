@@ -68,6 +68,9 @@ public class AddCommand extends Command {
             throw new DukeException(ErrorCodes.UNKNOWN_COMMAND);
         }
         tasks.addTask(newTask);
+        for (Tag tag : newTask.getTags()) {
+            tagList.addTag(tag);
+        }
         ui.dukePrompt(new String[]{taskPrompt,
             "\n",
             newTask.toString(),

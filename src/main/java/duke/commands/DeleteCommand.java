@@ -3,6 +3,7 @@ package duke.commands;
 import duke.enums.ErrorCodes;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
+import duke.tags.Tag;
 import duke.tags.TagList;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -36,6 +37,9 @@ public class DeleteCommand extends Command {
                 deletedTask.toString(),
                 "\n",
                 tasks.printTasksTotal()});
+            for (Tag tag : deletedTask.getTags()) {
+                tagList.removeTag(tag);
+            }
             storage.save(tasks);
             return "Aaaaand deleted! Don't kill me if it's the wrong one, boss"
                 + "\n"

@@ -134,7 +134,10 @@ public class Parser {
                 throw new DukeException(ErrorCodes.INVALID_TAG);
             }
             if (args.split("\\s")[0].equals("tag")) {
-                tags.add(new Tag(args.split("\\s")[1]));
+                // Prevent duplicate tags
+                if (!tags.contains(new Tag(args.split("\\s")[1]))) {
+                    tags.add(new Tag(args.split("\\s")[1]));
+                }
             }
         }
         return tags;
