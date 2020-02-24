@@ -74,7 +74,7 @@ public class Task {
                 tagsString += ", " + tag;
             }
         }
-        return tagsString;
+        return tagsString.equals(" ") ? "" : tagsString;
     }
 
     /**
@@ -85,7 +85,7 @@ public class Task {
      */
     public String toString() {
         String tagsString = tagsString();
-        if (!tagsString.equals(" ")) {
+        if (!tagsString.equals("")) {
             tagsString = " (Tagged with: "  + tagsString + ")";
         }
         return "[" + (getTaskDone()
