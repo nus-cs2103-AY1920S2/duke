@@ -21,6 +21,7 @@ public class DukeUserInterface {
     private static final String STARTUP_GREETING = "Poyo! (Hi, I'm Kirby! :3 How may I help you?)";
     private static final String POYO_GREETING = "Poyo!";
     private static final String PIKA_GREETING = "Poyo Poyo! (Pika Pika!)";
+    private static final String UWU_GREETING = "UwU";
     private static final String HELP_MESSAGE = "Here are the list of commands in KirbyLog:\n\n" +
             "    To view the list of tasks:\n    list\n\n" +
             "    To add a Todo Task:\n    todo <description>\n\n" +
@@ -109,6 +110,8 @@ public class DukeUserInterface {
                 responseMessage = POYO_GREETING;
             } else if (input.equals("pika")) {
                 responseMessage = PIKA_GREETING;
+            } else if (input.equals("uwu")) {
+                responseMessage = UWU_GREETING;
             } else {
                 responseMessage = commandParser.executeCommand(input);
                 this.internalStorage.save(this.listOfTasks.getData());
