@@ -1,0 +1,6 @@
+T|1|plant rice
+D|0|project|2020-03-16
+E|0|climb walls|2200-12-15
+T|0|harvest rice
+E|0|family outing|2020-12-12
+E|0|class outing|2020-12-12
