@@ -1,8 +1,10 @@
 package duke.util;
 
+import duke.task.Deadline;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents the list of tasks. Supports operations such as add task, delete task, list tasks and so on.
@@ -113,7 +115,18 @@ public class TaskList {
         return findMessage;
     }
 
-    private String tasksToString(ArrayList<Task> tasks) {
+    public String sortDeadline() {
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task instanceof Deadline) {
+                deadlines.add((Deadline) task);
+            }
+        }
+        Collections.sort(deadlines);
+        return "Here are your deadlines in chronologial order:\n" + tasksToString(deadlines);
+    }
+
+    private String tasksToString(ArrayList<? extends Task> tasks) {
         StringBuilder sb = new StringBuilder();
         int index = 0;
         for (Task task : tasks) {
