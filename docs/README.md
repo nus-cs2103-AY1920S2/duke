@@ -53,6 +53,7 @@ Got it. I've added this task:
 [T][Not Done] swim later
 Now you have 2 tasks in the list.
 ```
+![event pic](event.png)
 
 ### `deadline` - Adds a deadline task to the task list.
 
@@ -70,6 +71,7 @@ Got it. I've added this task:
 [T][Not Done] swim later
 Now you have 3 tasks in the list.
 ```
+![deadline pic](deadline.png)
 
 ### `list` - Displays a list of tasks recorded.
 
@@ -87,6 +89,8 @@ Here are your remaining tasks:
 3.[D][Not Done] IP  (by: Feb 2 2020)
 4.[T][Not Done] rub dwayne's head for good luck
 ```
+![list pic](list.png)
+
 ### `delete` - Deletes a task.
 
 When the `delete` command is called, followed by the index of the task, a task from the task list is removed.
@@ -102,6 +106,7 @@ Noted. I've removed this task:
 [T][Not Done] rub dwayne's head for good luck
 Now you have 3 tasks in the list.
 ```
+![delete pic](delete.png)
 
 Example of usage: 
 
@@ -112,6 +117,7 @@ Expected outcome:
 Noted. I've deleted all tasks. Don't come crying 
 later!
 ```
+![deleteall pic](deleteall.png)
 ### `done` - Marks tasks as done
 
 When the `done` command is called, followed by the index of the task, a task from the task list is marked as done.
@@ -126,6 +132,7 @@ Expected outcome:
 Nice! I've marked this task as done:
 [E][Done] IHG  (at: Feb 2 2020)
 ```
+![done pic](done.png)
 
 ### `find` - Finds a specific task in task list
 
@@ -142,6 +149,7 @@ Expected outcome:
 Here are your remaining tasks:
 1.[T][Not Done] swim
 ```
+![find pic](find.png)
 
 ### `bye` - Finds a specific task in task list
 
