@@ -23,7 +23,7 @@ public class TaskList {
      * Creates a TaskList object with an empty tasks ArrayList.
      */
     public TaskList() {
-        this.taskArrayList = new ArrayList<Task>();
+        this.taskArrayList = new ArrayList<>();
     }
 
     /**
@@ -39,7 +39,8 @@ public class TaskList {
 
     /**
      * Adds task to the tasklist.
-     * @param type of the task to be added
+     *
+     * @param type        of the task to be added
      * @param description of the task to be added
      * @return a string message of confirmation
      */
@@ -98,7 +99,7 @@ public class TaskList {
     public String printList() {
         int n = taskArrayList.size();
         String output = "";
-        output += "Here are the tasks in your list:";
+        output += "Here are the tasks in your list:" + "\n";
         for (int i = 0; i < n; i++) {
             String stringNew = String.format("%d. %s", i + 1, this.taskArrayList.get(i));
             output += stringNew + "\n";

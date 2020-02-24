@@ -23,7 +23,7 @@ public class Event extends Task {
      * Creates an Event object with given description and time.
      *
      * @param description of the event
-     * @param time of the event
+     * @param time        of the event
      */
     public Event(String description, String time) {
         super(description);
@@ -41,8 +41,8 @@ public class Event extends Task {
      * from data.txt file.
      *
      * @param description of the event
-     * @param time of the event
-     * @param isDone of the event
+     * @param time        of the event
+     * @param isDone      of the event
      */
     public Event(String description, String time, boolean isDone) {
         super(description, isDone);

@@ -26,10 +26,6 @@ public class Ui {
         promptUser("Event and Deadline tasks require a '/' character before specifying time");
     }
 
-    public String getInput() {
-        return this.sc.nextLine();
-    }
-
     public static void promptUser(String message) {
         System.out.println(message);
     }

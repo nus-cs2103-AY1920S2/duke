@@ -21,8 +21,9 @@ public class Task {
 
     /**
      * Creates a new Task with given description and is Done status.
+     *
      * @param description of the task.
-     * @param isDone of the task.
+     * @param isDone      of the task.
      */
     public Task(String description, boolean isDone) {
         assert description.length() > 0 : "Description for todo in the file is empty";
@@ -58,6 +59,7 @@ public class Task {
 
     /**
      * Outputs a string representation to be stored in file.
+     *
      * @return a String representation of the task to be stored in file.
      */
     public String toFile() {

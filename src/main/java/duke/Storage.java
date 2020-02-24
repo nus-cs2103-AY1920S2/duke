@@ -12,7 +12,6 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    public static final String FILE_PATH = "data/data.txt";
     public String filePath;
 
     Storage(String filePath) {
@@ -26,7 +25,7 @@ public class Storage {
      * @return an ArrayList of tasks
      * @throws FileNotFoundException an exception if the storage file is not found.
      */
-    public static ArrayList<Task> getPreviousTasks(String path) throws FileNotFoundException {
+    public ArrayList<Task> getPreviousTasks(String path) throws FileNotFoundException {
         File file = new File(path);
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner input = new Scanner(file);
@@ -58,12 +57,19 @@ public class Storage {
 
     /**
      * Stores the given tasks into the storage file.
+     *
      * @param tasks an array list containing tasks.
      * @throws IOException when file is not found.
      */
-    public static void fillFileWithTasks(ArrayList<Task> tasks) throws IOException {
-        assert tasks.size() > 1 : "Task list provided is empty";
-        FileWriter fw = new FileWriter(FILE_PATH);
+    public void fillFileWithTasks(ArrayList<Task> tasks) throws IOException {
+        //Create file and directory if they don't exist already
+        //@@author aakanksha-rai-reused
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        FileWriter fw = new FileWriter(filePath);
+        //@@author
         String accumulatedTasks = "";
         for (int i = 0; i < tasks.size(); i++) {
             accumulatedTasks = accumulatedTasks + tasks.get(i).toFile() + "\n";
@@ -74,6 +80,7 @@ public class Storage {
 
     /**
      * Generates a boolean value from a string representation of 0 or 1.
+     *
      * @param s the string input
      * @return true or false.
      */

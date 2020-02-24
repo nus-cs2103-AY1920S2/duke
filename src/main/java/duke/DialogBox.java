@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.OverrunStyle;
 
 /**
  * An example of a custom control using FXML. This control represents a dialog box consisting of an
@@ -37,6 +38,10 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        //@@author-souwmyaa-reuse
+        dialog.setTextOverrun(OverrunStyle.CLIP);
+        dialog.setMinSize(200, Label.USE_PREF_SIZE + 50);
+        //@@author
     }
 
     /**
@@ -51,9 +56,10 @@ public class DialogBox extends HBox {
 
     /**
      * Gets a user's dialog based on given text and img.
+     *
      * @param text to be used
-     * @param img to be used
-     * @return  a Dialog box object containing the text and image specified.
+     * @param img  to be used
+     * @return a Dialog box object containing the text and image specified.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
@@ -61,8 +67,9 @@ public class DialogBox extends HBox {
 
     /**
      * Gets a dialog box object.
+     *
      * @param text to be used
-     * @param img to be used
+     * @param img  to be used
      * @return a Dialog box object containing the text and image specified.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
