@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke_waving.svg.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke_waving.svg.png"), 80, 80, false, false);
 
     @FXML
     public void initialize() {
