@@ -60,7 +60,7 @@ public class Parser {
                 int deleteIndex = getCommandIndex(st, tasklist);
                 return new DeleteCommand(deleteIndex);
             case TODO:
-                String todoDescription = getTaskDescription(st);
+                String todoDescription = getNextCommandArgument(st);
                 return new AddCommand(new Todo(todoDescription));
             case DEADLINE:
                 String[] deadlineDescriptionAndTime = getTaskDescriptionAndTime(st);
@@ -69,7 +69,7 @@ public class Parser {
                 String[] eventDescriptionAndTime = getTaskDescriptionAndTime(st);
                 return new AddCommand(new Event(eventDescriptionAndTime[0], eventDescriptionAndTime[1]));
             case FIND:
-                String keyword = getTaskDescription(st);
+                String keyword = getNextCommandArgument(st);
                 return new FindCommand(keyword);
             default:
                 assert false : commandIdentifier;
@@ -106,7 +106,7 @@ public class Parser {
         return index;
     }
 
-    public String getTaskDescription(StringTokenizer st) throws InvalidDukeArgumentException {
+    public String getNextCommandArgument(StringTokenizer st) throws InvalidDukeArgumentException {
         String description = "";
         try {
             description = st.nextToken("").trim();
