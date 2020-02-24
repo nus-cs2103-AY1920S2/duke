@@ -50,7 +50,7 @@ Example of usage:
 Expected outcome:
 ```
 Got it. I've added this task:  
-[T][Not Done] swim later
+[E][Not Done] IHG semis (at: Jan 1 2020)
 Now you have 2 tasks in the list.
 ```
 ![event pic](event.png)
@@ -68,7 +68,7 @@ Example of usage:
 Expected outcome:
 ```
 Got it. I've added this task:  
-[T][Not Done] swim later
+[D][Not Done] IP (by: Feb 2 2020)
 Now you have 3 tasks in the list.
 ```
 ![deadline pic](deadline.png)
@@ -130,7 +130,7 @@ Example of usage:
 Expected outcome:
 ```
 Nice! I've marked this task as done:
-[E][Done] IHG  (at: Feb 2 2020)
+[E][Done] IHG semis (at: Feb 2 2020)
 ```
 ![done pic](done.png)
 
