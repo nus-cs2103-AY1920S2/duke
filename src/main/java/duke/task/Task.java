@@ -124,7 +124,7 @@ public class Task implements Serializable {
         try {
             output += this.print_Format();
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         }
 
         return output;

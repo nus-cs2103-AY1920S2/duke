@@ -63,8 +63,8 @@ public class Deadline extends Task {
 
         String output = "[" + this.type + "]" + "[" + checkmark + "] ";
 
-        String task_Name2 = task.substring(task.indexOf(" "), task.indexOf("/") - 1);
-        output += task_Name2 + " (by: " + deadlineDate.format(
+        String taskName = task.substring(task.indexOf(" "), task.indexOf("/") - 1);
+        output += taskName + " (by: " + deadlineDate.format(
                 DateTimeFormatter.ofPattern("dd MMM yyyy")) + " " + deadlineTime.format(
                             DateTimeFormatter.ofPattern("h:mm a")) + ")";
         return output;

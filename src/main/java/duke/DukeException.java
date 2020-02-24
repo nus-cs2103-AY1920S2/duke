@@ -3,7 +3,7 @@ package duke;
 /**
  * DukeException occurs when commands pertaining to the Duke program are invalid.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     private String error;
 

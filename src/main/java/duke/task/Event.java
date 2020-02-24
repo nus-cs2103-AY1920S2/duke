@@ -60,8 +60,8 @@ public class Event extends Task {
 
         String output = "[" + this.type + "]" + "[" + checkmark + "] ";
 
-        String task_Name2 = task.substring(task.indexOf(" "), task.indexOf("/") - 1);
-        output += task_Name2 + " (by: " + eventDate.format(
+        String taskName = task.substring(task.indexOf(" "), task.indexOf("/") - 1);
+        output += taskName + " (by: " + eventDate.format(
                 DateTimeFormatter.ofPattern("dd MMM yyyy")) + " " + eventTime.format(
                 DateTimeFormatter.ofPattern("h:mm a")) + ")";
         return output;

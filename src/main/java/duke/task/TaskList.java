@@ -102,7 +102,8 @@ public class TaskList {
                 assert(currentTaskSize + 1 == this.storageData.size());
             }
         } catch (DukeException dukeException) {
-            System.out.println(dukeException);
+            String output = dukeException.toString();
+            return output;
         } catch (Exception e) {
             System.out.println(e);
         }

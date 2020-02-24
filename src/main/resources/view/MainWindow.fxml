@@ -7,17 +7,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="783.0" prefWidth="544.0" style="-fx-background-color: #494949;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" textAlignment="CENTER">
-         <font>
-            <Font name="Caviar Dreams" size="18.0" />
-         </font></Button>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
-            <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
-            </content>
+        <ScrollPane fx:id="scrollPane" blendMode="SRC_ATOP" hbarPolicy="NEVER" hvalue="1.0" layoutX="1.0" pannable="true" prefHeight="732.0" prefWidth="544.0" style="-fx-background-color: darkslategray;" vvalue="1.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="0.0">
+         <content>
+                <VBox fx:id="dialogContainer" nodeOrientation="LEFT_TO_RIGHT" prefHeight="735.0" prefWidth="539.0" style="-fx-background-image: url(&quot;/images/Forest.jpg&quot;); -fx-background-color: darkslategray; -fx-border-style: solid;" />
+         </content>
         </ScrollPane>
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="50.0" prefWidth="466.0" style="-fx-background-color: #494949; -fx-border-color: transparent; -fx-font-family: Corbel; -fx-font-size: 20; -fx-text-inner-color: white;" AnchorPane.bottomAnchor="1.0">
+         <font>
+            <Font name="Corbel" size="16.0" />
+         </font></TextField>
+        <Button fx:id="sendButton" layoutX="471.0" layoutY="732.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="50.0" prefWidth="73.0" style="-fx-text-fill: white; -fx-background-radius: 100; -fx-background-color: #696969;" text="Send" textAlignment="CENTER">
+         <font>
+            <Font name="Calibri" size="14.0" />
+         </font></Button>
     </children>
 </AnchorPane>
