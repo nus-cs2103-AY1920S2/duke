@@ -6,6 +6,14 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.mypackage.Launcher'
+        )
+    }
+}
+
 checkstyle {
     toolVersion = '8.23'
 }
@@ -62,3 +70,4 @@ test {
 run {
     standardInput = System.in
 }
+apply plugin: 'com.github.johnrengelman.shadow'
