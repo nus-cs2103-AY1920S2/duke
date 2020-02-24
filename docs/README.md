@@ -13,7 +13,7 @@ Copy the file to the folder you want to use as the home folder for the tracker!
 
 Double-click the file to start the app. The GUI should appear in a few seconds.
 
-![](https://github.com/joshlay96/duke/blob/master/docs/Ui.png)
+![](https://raw.githubusercontent.com/joshlay96/duke/blob/master/docs/Ui.png)
 
 ## Features 
 
@@ -36,7 +36,7 @@ After the user has completed the task, he can set the task to be done
 and delete it. 
 
 ## Usage
-![](https://github.com/joshlay96/duke/blob/master/docs/Todo.png)
+![](https://raw.githubusercontent.com/joshlay96/duke/blob/master/docs/Todo.png)
 
 ### `To-Do` - Creates a new To-Do task
 After adding the To-Do Task, you will see your To-Do task displayed.
@@ -71,7 +71,7 @@ After the user has completed the task, he can set the task to be done
 and delete it. 
 
 ## Usage
-![](https://github.com/joshlay96/duke/blob/master/docs/Deadline.png)
+![](https://raw.githubusercontent.com/joshlay96/duke/blob/master/docs/Deadline.png)
 
 ### `Deadline` - To add a new Deadline
 After adding the Deadline, you will see your Deadline displayed.
@@ -157,7 +157,7 @@ After the user has completed the task, he can set the task to be done
 and delete it. 
 
 ## Usage
-![](https://github.com/joshlay96/duke/blob/master/docs/Event.png)
+![](https://raw.githubusercontent.com/joshlay96/duke/blob/master/docs/Event.png)
 
 ### `Event` - To add a new Event
 After adding the Event, you will see your Event displayed.
@@ -239,7 +239,7 @@ Refer to `Example of Usage` to know which type of outcome will be produced
 Allows a user to delete various kinds of tasks
 
 ## Usage
-![](https://github.com/joshlay96/duke/blob/master/docs/Delete2.png)
+![](https://raw.githubusercontent.com/joshlay96/duke/blob/master/docs/Delete2.png)
 
 ### `delete` - Deletes a task
 Deletes a task, according to its position in the list.
@@ -263,7 +263,7 @@ Expected outcome:
 Allows a user to set a task to be done
 
 ## Usage
-![](https://github.com/joshlay96/duke/blob/master/docs/Done.png)
+![](https://raw.githubusercontent.com/joshlay96/duke/blob/master/docs/Done.png)
 
 ### `done` - Marks a task as done
 Marks a task as done, according to its position in the list.
@@ -283,7 +283,7 @@ Expected outcome:
 
 
 ## Usage
-![](https://github.com/joshlay96/duke/blob/master/docs/List.png)
+![](https://raw.githubusercontent.com/joshlay96/duke/blob/master/docs/List.png)
 
 ### `list` - Shows the list
 Shows the user the remaining tasks in as a list
