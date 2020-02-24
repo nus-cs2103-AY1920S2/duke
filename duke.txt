@@ -1,5 +1,7 @@
-T | N | test
-D | N | test | Dec 20 1999 1159PM
-D | N | test | Dec 20 1999 1159PM
-E | N | test | Dec 20 1999 1159PM
-T | N | test
+T | Y | read book
+E | Y | project meeting | Dec 20 1999 1159PM
+T | Y | join sports club
+T | N | borrow book
+D | N | return book | Jun 5 2020 0200PM
+E | N | project meeting | Aug 17 2020 1000AM
+D | N | do homework | Oct 29 2020 1200PM

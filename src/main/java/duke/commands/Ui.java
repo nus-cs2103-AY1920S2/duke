@@ -103,7 +103,7 @@ public class Ui {
     public void checkTime(String[] arr, String insert)
             throws DukeException {
         if (arr.length < 2) {
-            throw new DukeException("You fool\nThe time of a " + insert
+            throw new DukeException("You fool!\nThe time of a " + insert
                     + " cannot be empty.\nI will speak to your manager about "
                     + "this!");
         }
@@ -127,7 +127,7 @@ public class Ui {
         int testIndex;
         try {
             testIndex = Integer.parseInt(command.split(" ")[1]) - 1;
-        } catch (NumberFormatException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("You fool!\nThe task to be updated must be"
                     + " specified.\nI will speak to your manager about this!");
         }
