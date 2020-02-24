@@ -97,7 +97,6 @@ public class Parser {
 
     public static String getTaskName(String command) throws DukeException {
         try {
-            System.out.println(command.split("\\s",2)[1]);
             return command.split("\\s", 2)[1];
         } catch (PatternSyntaxException e) {
             throw new DukeException(ErrorCodes.MISSING_TASK_NAME);
