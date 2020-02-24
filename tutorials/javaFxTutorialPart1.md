@@ -27,24 +27,31 @@ A JavaFX application is like a play you are directing. Instead of creating props
 
 Update your `build.gradle` to include the following lines:
 ```groovy
-plugins {
-    id 'java'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
-}
-
 repositories {
     mavenCentral()
 }
 
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+dependencies {
+    String javaFxVersion = '11'
+
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 ```
 
 ## Writing your first program
 
-As customary, let’s start off with a simple “Hello World” program. Modify your `Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
+As customary, let’s start off with a simple “Hello World” program. Modify your `Driver.duke.Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
 
 ```java
 import javafx.application.Application;
@@ -52,7 +59,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Duke extends Application {
+public class Driver.duke.Duke extends Application {
     
     // ...
 
@@ -73,7 +80,7 @@ Next, we create another Java class, `Launcher`, as an entry point to our applica
 The `Launcher` class is reproduced below in its entirety.
 
 ```java
-import javafx.application.Application;
+import duke.Duke;import javafx.application.Application;
 
 /**
  * A launcher class to workaround classpath issues.
