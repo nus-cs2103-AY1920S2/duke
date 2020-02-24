@@ -1,4 +1,1 @@
-T /X/draw
-E /X/shop /May 5 2019 18:00 PM
-D /X/shop /May 5 2019 18:00 PM
 D /X/shop /May 5 2019 18:00 PM
