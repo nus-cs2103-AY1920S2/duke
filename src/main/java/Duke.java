@@ -58,7 +58,7 @@ public class Duke {
                 int index = this.scanner.nextInt() - 1;
                 output = this.ui.showDelete(this.taskList, index, this.data);
             } else if (command.isFind()) {
-                String keyword = this.scanner.nextLine();
+                String keyword = this.scanner.nextLine().substring(1);
                 output = this.ui.showSearchResults(this.taskList, keyword);
             } else if (command.isUpdate()) {
                 try {
