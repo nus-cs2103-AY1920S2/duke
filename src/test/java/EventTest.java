@@ -7,7 +7,7 @@ public class EventTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[E][✘] drink tea (at: Nov 20 2019)",
-                new Event("drink coffee", "2019-11-20").toString());
+        assertEquals("[E][X] drink tea (at: Nov 20 2019)",
+                new Event("drink tea", "2019-11-20").toString());
     }
 }
