@@ -1,6 +1,10 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline object for tasks that need to be done before a specific date/time.
+ */
+
 public class Deadline extends Task {
     private LocalDate by;
 
@@ -13,6 +17,11 @@ public class Deadline extends Task {
         super(content);
         this.by = LocalDate.parse(by);
     }
+
+    /**
+     * Updates the deadline date.
+     * @param date New date to complete deadline by.
+     */
 
     @Override
     public void updateDate(String date) {

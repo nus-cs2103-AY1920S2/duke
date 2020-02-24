@@ -3,11 +3,14 @@ import java.io.*;
 import java.util.LinkedList;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.Files;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
+
+/**
+ * Class for handling the saving/loading of the task list for Duke.
+ */
 
 public class Storage {
     Path path;
@@ -56,9 +59,9 @@ public class Storage {
 
     /**
      * Loads previous list data from duke.txt, if any.
-     * @param tracker Tracker to add previous list data to.
+     * @param taskList Tracker to add previous list data to.
      */
-    public void loadData(Tracker tracker) {
+    public void loadData(TaskList taskList) {
         try (InputStream in = Files.newInputStream(this.path);
              BufferedReader reader = new BufferedReader(
                      new InputStreamReader(in))) {
@@ -72,24 +75,24 @@ public class Storage {
 
                 switch (taskType) {
                 case "T":
-                    tracker.add(new ToDo(content));
+                    taskList.add(new ToDo(content));
                     break;
                 case "E":
                     String[] eventArray = content.split(" \\(at: ");
                     int eContentLength = eventArray[1].length();
-                    tracker.add(new Event(eventArray[0],
+                    taskList.add(new Event(eventArray[0],
                             eventArray[1].substring(0, eContentLength - 1)));
                     break;
                 case "D":
                     String[] deadlineArray = content.split(" \\(by: ");
                     int dContentLength = deadlineArray[1].length();
-                    tracker.add(new Deadline(deadlineArray[0],
+                    taskList.add(new Deadline(deadlineArray[0],
                             deadlineArray[1].substring(0, dContentLength - 1)));
                     break;
                 }
 
                 if (state.equals("\u2713")) {
-                    tracker.markDone(index);
+                    taskList.markDone(index);
                 }
 
                 index++;

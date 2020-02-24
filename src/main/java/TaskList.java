@@ -1,13 +1,17 @@
 import java.util.LinkedList;
 
-public class Tracker {
+/**
+ * Class that contains the task list & operations that can be done to the list.
+ */
+
+public class TaskList {
     private LinkedList<Task> list;
     private int totalTasks;
 
     /**
      * Creates a new Tracker object for tracking tasks in a list.
      */
-    public Tracker() {
+    public TaskList() {
         this.list = new LinkedList();
         this.totalTasks = 0;
     }
@@ -31,7 +35,7 @@ public class Tracker {
     }
 
     /**
-     * Deletes the given task from the tracking list.
+     * Deletes the given task from the list.
      * @param index Index of the task to be deleted.
      */
     public void delete(int index) {
@@ -45,8 +49,8 @@ public class Tracker {
      * @param keyword Keyword to search for.
      * @return Tracker that tracks the tasks containing the keyword.
      */
-    public Tracker find(String keyword) {
-        Tracker matchingTasks = new Tracker();
+    public TaskList find(String keyword) {
+        TaskList matchingTasks = new TaskList();
 
         for (Task task : this.list) {
             String taskDescription = task.getContent();
@@ -58,6 +62,13 @@ public class Tracker {
         return matchingTasks;
     }
 
+    /**
+     * Updates the given task in the list.
+     * @param index Index of the task to be updated.
+     * @param type The portion of the task to be updated.
+     * @param content The new content of the portion to be updated.
+     * @throws DukeException If the specified portion of task is not valid/can not be updated.
+     */
     public void update(int index, String type, String content) throws DukeException {
         Task task = this.list.get(index);
 

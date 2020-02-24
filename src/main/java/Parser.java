@@ -1,5 +1,8 @@
+/**
+ * Class to make sense of the user command.
+ */
+
 public class Parser {
-    private int type;
     private String cmd;
     private Task task;
 
@@ -47,14 +50,6 @@ public class Parser {
                 assert false : command.getCommand();
             }
         }
-    }
-
-    public Parser(int index, String type, String content) {
-        if (type.equals("description")) {
-        } else if (type.equals("deadline")) {
-        } else {
-        }
-
     }
 
     public boolean isBye() {

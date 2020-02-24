@@ -1,6 +1,11 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event object for tasks that start and ends at a specific time.
+ */
+
+
 public class Event extends Task {
     private LocalDate at;
 
@@ -13,6 +18,11 @@ public class Event extends Task {
         super(content);
         this.at = LocalDate.parse(at);
     }
+
+    /**
+     * Updates the event date.
+     * @param date New date of when the event is held.
+     */
 
     @Override
     public void updateDate(String date) {

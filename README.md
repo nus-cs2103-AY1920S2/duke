@@ -35,5 +35,5 @@ Duke Increment | Tutorial
 
 # Feedback, Bug Reports
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
+* If you have feedback or bug reports, please post in [se-edu/duke issue taskList](https://github.com/se-edu/duke/issues).
 * We welcome pull requests too.
