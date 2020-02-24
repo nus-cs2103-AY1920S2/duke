@@ -49,7 +49,7 @@ public class Task implements Serializable {
     /**
      * Marks the task as done.
      */
-    public void taskDone() {
+    public void markTaskAsDone() {
         this.isDone = true;
     }
 
