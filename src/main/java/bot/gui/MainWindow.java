@@ -29,9 +29,9 @@ public class MainWindow extends AnchorPane {
     private Baron baron;
 
     private Image userImage = new Image(
-            this.getClass().getResourceAsStream("/images/DaUser.png"));
+            this.getClass().getResourceAsStream("/images/Human.png"));
     private Image botImage = new Image(
-            this.getClass().getResourceAsStream("/images/DaDuke.png"));
+            this.getClass().getResourceAsStream("/images/Bot.png"));
 
     /**
      * Initialises the MainWindow. This also sets the
