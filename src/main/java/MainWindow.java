@@ -29,6 +29,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         // set width to follow scroll pane
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.getStyleClass().addAll("scrollContent");
     }
 
     public void setDuke(GuiDuke d) {

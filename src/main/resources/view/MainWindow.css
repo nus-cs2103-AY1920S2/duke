@@ -3,12 +3,23 @@
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-border-style: solid;
-    -fx-border-color: #009999;
+    -fx-border-color: #000099;
+}
+
+.scrollContent {
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+    -fx-background-color: #FFCC99;
+    -fx-padding: 5;
 }
 
 #dialogContainer {
+    -fx-background-color: #FFCC99;
+    -fx-padding: 5;
 }
 
-#scrollPane {
-    -fx-fit-to-width: true;
+.mainWindow {
+    -fx-background-color: #CCCCFF;
+    -fx-border-style: solid;
+    -fx-border-color: #000099;
 }

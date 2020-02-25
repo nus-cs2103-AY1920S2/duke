@@ -11,6 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -22,6 +25,8 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private Rectangle padding;
 
     private DialogBox(String text, Image img) {
         try {
@@ -73,6 +78,7 @@ public class DialogBox extends HBox {
         db.flip();
         db.getStyleClass().addAll("duke-dialog");
         db.dialog.getStyleClass().addAll("dialog-text");
+        db.displayPicture.getStyleClass().addAll("profile-image");
         return db;
     }
 }

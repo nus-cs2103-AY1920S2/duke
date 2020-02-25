@@ -22,6 +22,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setMinWidth(388);
             stage.setMinHeight(400);
+            stage.setTitle("Duke ~ Your Abusive Chat Bot");
 
             stage.show();
         } catch (IOException e) {
