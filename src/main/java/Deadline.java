@@ -1,3 +1,9 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+
+
 /**
  * This Deadline class extends to Task class
  * @param by - to keep track of the time/date of a particular event
@@ -5,22 +11,24 @@
 
 public class Deadline extends Task {
 
-    protected String by;
-    public Deadline(String description, String by){
+    protected LocalDate by;
+    protected String details;
+    public Deadline(String description, String input){
         super(description);
-        this.by = by;
+        this.details =  input;
+        this.by = LocalDate.parse(input);
     }
 
     public String toString(){
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + extraInfo() + ")";
     }
 
     /**
      * This method is to the paremeter "when." It will override the parent's class of the same method.
      * @return a formated string, concat withe paremeter "when"
      */
-    public String getWhen(){
-        return "(by: " + this.by + ")";
+    public LocalDate getWhen(){
+        return by;
     }
 
     /**
@@ -28,6 +36,10 @@ public class Deadline extends Task {
      * @return by
      */
     public String extraInfo(){
-        return this.by;
+        return by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    public String getStringDate(){
+        return details;
     }
 }

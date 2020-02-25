@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 /**
  * This Task class is to store the details of a Task.
  * @param description - to store the description of a Task
@@ -7,18 +11,29 @@ public class Task{
     protected String description;
     protected boolean isDone;
     protected String priorityLevel;
+    protected String type;
 
     public Task(String description){
         this.description = description;
         this.isDone = false;
         this.priorityLevel = "Not-urgent";
+        this.type = "";
+    }
+    public Task(String description, String status){
+        this.description = description;
+        this.isDone = false;
+        this.priorityLevel = "Not-urgent";
+        if (status.contains("1")){
+            this.isDone = true;
+        }
+        this.type = "";
     }
      /**
      * This method is to validate the status of a task
      * @return tick symbol if its true, a X symbol if its false.
      */
     public String getStatus(){
-        return (isDone ? "Tick" : "Untick"); // return tick or X symbol
+        return (isDone ? "Y" : "X"); // return tick or X symbol
     }
 
     /**
@@ -63,8 +78,8 @@ public class Task{
      * This method is return an empty string
      * @return nothing
      */
-    public String getWhen() {
-        return "";
+    public LocalDate getWhen() {
+        return LocalDate.now();
     }
 
     /**
@@ -73,5 +88,15 @@ public class Task{
      */
     public String extraInfo(){
         return "";
+    }
+    public String getStringDate(){
+        return "";
+    }
+
+    public void setType(String type){
+        this.type = type;
+    }
+    public String getType(){
+        return this.type;
     }
 }
