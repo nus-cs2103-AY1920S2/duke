@@ -27,7 +27,6 @@ abstract class Task {
      */
     public Task(char taskType, boolean isDone, String taskName, LocalDateTime taskDateTime)
             throws DateTimeParseException {
-        assert taskDateTime != null;
 
         this.taskType = taskType;
         this.isDone = isDone;

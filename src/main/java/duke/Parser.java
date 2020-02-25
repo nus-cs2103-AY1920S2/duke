@@ -113,7 +113,6 @@ public class Parser {
      * @return a function call to create a new Todo object, or an error if the input line is invalid.
      */
     public static String todoCommand(String[] command, TaskList tasklist) {
-        assert command[0].equals("todo");
 
         if (command.length <= 1) {
             return Ui.TASK_NEEDS_NAME;
@@ -133,7 +132,6 @@ public class Parser {
      * @return a function call to create a new Event object, or an error if the input line is invalid.
      */
     public static String eventCommand(String[] command, TaskList tasklist) {
-        assert command[0].equals("event");
 
         if (command.length <= 2) {
             return (command.length == 2)
@@ -158,7 +156,6 @@ public class Parser {
      * @return a function call to create a new Deadline object, or an error if the input line is invalid.
      */
     public static String deadlineCommand(String[] command, TaskList tasklist) {
-        assert command[0].equals("deadline");
 
         if (command.length <= 2) {
             return (command.length == 2)
@@ -185,7 +182,6 @@ public class Parser {
      * @return a message displaying the number of tasks in the list.
      */
     public static String listCommand(String[] command, TaskList tasklist) {
-        assert command[0].equals("list");
 
         boolean listAll = command.length == 1 || command[1].equals("all");
         if (listAll) {
@@ -220,7 +216,6 @@ public class Parser {
      * @return a message displaying whether this command is successful.
      */
     public static String doneCommand(String[] command, TaskList tasklist) {
-        assert command[0].equals("done");
 
         try {
             int taskID = Integer.parseInt(command[1]);
@@ -239,7 +234,6 @@ public class Parser {
      * @return a message displaying whether this command is successful.
      */
     public static String deleteCommand(String[] command, TaskList tasklist) {
-        assert command[0].equals("delete");
 
         try {
             int taskID = Integer.parseInt(command[1]);
@@ -259,7 +253,6 @@ public class Parser {
      * @return the new TaskList containing a filtered list of tasks.
      */
     public static String findCommand(String[] command, TaskList tasklist) {
-        assert command[0].equals("find");
 
         if (command.length <= 1) {
             return Ui.INVALID_FIELD;
@@ -287,7 +280,6 @@ public class Parser {
      * @return a message displaying whether this command is successful.
      */
     public static String updateCommand(String[] command, TaskList tasklist) {
-        assert command[0].equals("update");
 
         if (command.length <= 1) {
             return Ui.NO_FIELD_TO_UPDATE;
@@ -314,7 +306,6 @@ public class Parser {
      * @return a list of Event and Deadline objects occurring the specified number of days.
      */
     public static String upcomingCommand(String[] command, TaskList tasklist) {
-        assert command[0].equals("upcoming");
 
         if (command.length <= 1) {
             return Ui.NEED_TO_SPECIFY_PERIOD;
@@ -351,7 +342,6 @@ public class Parser {
      * @return a list of Event and Deadline objects occurring on the specified day.
      */
     public static String viewCommand(String[] command, TaskList tasklist) {
-        assert command[0].equals("view");
 
         if (command.length <= 1) {
             return Ui.NEED_TO_SPECIFY_DATE;
