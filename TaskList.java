@@ -66,10 +66,15 @@ public class TaskList {
     public String toString (){
         String result = "";
         int i = 1;
-        for (Task t : taskList) {
-            result += i + "." + t + "\n";
-            i++;
+        if (taskList.size() == 0) {
+            result = "there is nothing in the list idiot";
+        } else {
+            for (Task t : taskList) {
+                result += i + "." + t + "\n";
+                i++;
+            }
         }
+
         return result;
     }
 

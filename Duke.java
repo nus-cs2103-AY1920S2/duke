@@ -1,12 +1,10 @@
 import com.sun.source.util.TaskListener;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.PrintWriter;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -44,19 +42,32 @@ public class Duke extends Application{
         ArrayList<Task> list = new ArrayList<>();
         TaskList taskList = new TaskList(list);
         ArrayList<String> tasksSaved = new ArrayList<>();
-        String fileName = "/Users/kerwei/Downloads/duke-master/src/main/tasks/task.txt";
+        String fileName = Paths.get(Paths.get(System.getProperty("user.dir")).toString(),
+                "/tasks.txt").toString();
+        System.out.println(fileName);
         Storage storage = new Storage(fileName, tasksSaved);
         String response;
 
         //read in saved tasks
         try {
+            //happy path
             taskList = storage.loadTask(fileName);
             tasksSaved = storage.copySavedTasks(fileName);
         } catch (FileNotFoundException e) {
-            System.out.println("no such file la idiot");
+            //create a file
+            try {
+                File newFile = new File("tasks.txt");
+                if (newFile.createNewFile()) {
+                    response = ("File created: " + newFile.getName());
+                } else {
+                    System.out.println("File already exists.");
+                }
+            } catch (IOException ioerror) {
+                System.out.println("An error occurred.");
+                ioerror.printStackTrace();
+            }
         }
-        //echo
-        //String input = sc.nextLine();
+
         UI ui = new UI(input);
         String[] inputDetails = ui.handleInput(input);
         Parser parser = new Parser(inputDetails, taskList, tasksSaved, previousTasks, previousInstructions, previousTaskIndex);
@@ -66,7 +77,7 @@ public class Duke extends Application{
         try {
             storage.saveTask(fileName, tasksSaved);
         } catch (FileNotFoundException error){
-            System.out.println("no file to write to leh");
+            response = ("no file to write to leh");
         }
 
         return response;
@@ -97,7 +108,7 @@ public class Duke extends Application{
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Task Manager");
+        stage.setTitle("Do or Do Not dododododo do");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

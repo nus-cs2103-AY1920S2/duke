@@ -25,7 +25,7 @@ public class UI {
 
         if (taskType.equals("list") || taskType.equals("undo")){
             //do nothing
-        } else {
+        } else if(splitInput.length > 1){
             if (taskType.equals("deadline")) {
                 String[] taskDetails = splitInput[1].split("by ");
                 taskDescription = taskDetails[0];
