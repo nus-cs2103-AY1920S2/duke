@@ -1,8 +1,7 @@
 package seedu.java.util;
 
 public enum Text {
-    HELPLIST, LOGO, TODO, DEADLINE, EVENT, DONE, LIST, DELETE, BYE, FIND;
-
+    Nothing;
     static String shortenedHelplist = "Here are the list of commands you can use."
             + "For more information, type 'help X', which X represents the command you need more information about :)."
             + "\n TODO -- Adds a to-do task."
@@ -12,7 +11,8 @@ public enum Text {
             + "\n" + "DELETE -- Deletes a task. "
             + "\n" + "LIST -- Gives a full view of your tasklist."
             + "\n" + "FIND -- Search for a task with that specific keyword."
-            + "\n" + "BYE -- Terminates.";
+            + "\n" + "BYE -- Terminates."
+            + "\n" + "MEOW -- If you're just bored :)";
 
     static String todo = "\nAdds a to-do task. Key in 'todo' and then whatever ridiculous task you desire.";
     static String deadline = "\nKey in 'deadline', the task, and then the date in the format YYYY-MM-DD.";
@@ -23,7 +23,7 @@ public enum Text {
     static String find = "\nKey in 'find' & a keyword of what you wish to find."
                             + "A list of task based on the keyword will be printed.";
     static String bye = "\nTerminates Program.";
-
+    static String meow = "\n If you want cuddles, just call meow.";
     static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -56,7 +56,9 @@ public enum Text {
             return find;
         } else if (text.equals(Command.BYE)) {
             return bye;
-        } else {
+        } else if (text.equals(Command.MEOW)) {
+            return meow;
+        }else {
             return logo;
         }
     }
