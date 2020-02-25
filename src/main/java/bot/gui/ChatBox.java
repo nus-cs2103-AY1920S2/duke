@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -56,6 +57,8 @@ public class ChatBox extends HBox {
         // give this ChatBox its text and image
         this.text.setText(text);
         this.displayPicture.setImage(img);
+        // make displayPicture round
+        this.displayPicture.setClip(new Circle(48, 48, 48));
     }
 
     /**

@@ -34,6 +34,8 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add(Main.class.getResource("/styles/main.css").toExternalForm());
+            stage.setTitle(GraphicalUi.VERSION);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setBaron(
                     new Baron(
@@ -55,7 +57,6 @@ public class Main extends Application {
                             ))
             );
             stage.show();
-            stage.setTitle(GraphicalUi.VERSION);
         } catch (IOException e) {
             e.printStackTrace();
         }
