@@ -5,7 +5,7 @@
 ## Adding Todo Tasks
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a Todo Task to the task list.
 
-### &nbsp;&nbsp;&nbsp;Usage
+### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example of usage: 
 
