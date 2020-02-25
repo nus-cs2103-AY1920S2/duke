@@ -7,8 +7,6 @@
 - [Credits](#credits)
 - [Feedback, Bug Reports](#feedback--bug-reports)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 # Welcome to Squirtle Manager!
 Squirtle Manager is a lightweight command line interface application built with Java and JavaFX, with a focus on object-oriented programming (OOP). Squirtle Manager makes use of local storage to remember your agenda, and is an _easy_, _quick_ and _fun_ way to stay on top of your tasks.
  
@@ -91,8 +89,11 @@ eg. to create a new deadline, called "download Squirtle Manager", due by 19 Febr
 # Credits
 Squirtle Manager is based on the popular [Duke][a2] software engineering tutorial, while this repository is forked from [this repo][a1], which contains modified code for instruction in module CS2103T taught by National University of Singapore.  
 
+Table of contents generated with [markdown-toc][a3].
+
 [a1]:https://github.com/nus-cs2103-AY1920S2/duke
 [a2]:https://github.com/se-edu/duke
+[a3]:http://ecotrust-canada.github.io/markdown-toc
 
 # Feedback, Bug Reports
 
