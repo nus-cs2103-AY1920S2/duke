@@ -332,7 +332,7 @@ public class Parser {
             int dayRangeUntil = Integer.parseInt(command[1]);
 
             for (Task task : tasklist.getList()) {
-                if (dateIsInRange(task, TODAY, task.getTaskDate(), dayRangeUntil)) {
+                if (taskIsInDateRange(task, TODAY, task.getTaskDate(), dayRangeUntil)) {
                     populate(task, upcomingEvents, upcomingDeadlines);
                 }
             }
@@ -373,7 +373,7 @@ public class Parser {
             int dayRangeUntil = 0;
 
             for (Task task : tasklist.getList()) {
-                if (dateIsInRange(task, targetDate, task.getTaskDate(), dayRangeUntil)) {
+                if (taskIsInDateRange(task, targetDate, task.getTaskDate(), dayRangeUntil)) {
                     populate(task, upcomingEvents, upcomingDeadlines);
                 }
             }
@@ -427,7 +427,7 @@ public class Parser {
      * @return True if the difference of endDate and startDate is between 0 and dayRangeUntil, both inclusive.
      *         False if it falls outside the specified range, or if the Task is an instance of Todo.
      */
-    public static boolean dateIsInRange(Task task, LocalDate startDate, LocalDate endDate, int dayRangeUntil) {
+    public static boolean taskIsInDateRange(Task task, LocalDate startDate, LocalDate endDate, int dayRangeUntil) {
         if (!(task instanceof Todo)) {
             long dateDifference = ChronoUnit.DAYS.between(startDate, endDate);
             return dateDifference >= 0 && dateDifference <= dayRangeUntil;
