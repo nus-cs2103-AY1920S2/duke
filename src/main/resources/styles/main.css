@@ -18,11 +18,11 @@
 }
 
 .scroll-pane {
-    -fx-background-color: linear-gradient(to bottom, #afb0cb, #73868e);
+    -fx-background-color: linear-gradient(to bottom, #c1c7d8, #a5bac2);
 }
 
 .chat-text-box {
-    -fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #dc143c, #32cd32);
+    -fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #99faff, #a5ffec);
     -fx-background-radius: 5;
     -fx-padding: 3 5 3 5;
 }

@@ -92,7 +92,7 @@ public class ChatBox extends HBox {
             if (id != null && id.equals("chat-text-box")) {
                 node.setStyle(
                         "-fx-background-color: linear-gradient("
-                        + "from 25% 25% to 100% 100%, #dc143c, #661a33)"
+                        + "from 25% 25% to 100% 100%, #ffeee9, #f9f8ff)"
                 );
             }
         });
