@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 
 public class Main extends Application {
-    private static final String filepath = "./src/main/java/savedTaskList.txt";
+    private static final String filepath = "/duke/src/main/resources/taskList/savedTaskList.txt";
     private Duke duke = new Duke(filepath);
 
     private ScrollPane scrollPane;

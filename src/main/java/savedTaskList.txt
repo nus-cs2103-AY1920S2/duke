@@ -1,8 +1,0 @@
-[T][+] cs2103 assignments
-[E][+] chienese new year (at: Jan 21 2021 10:01)
-[D][-] cs2103 Individual Project (by: Feb 18 2020 23:02)
-[T][-] cook lunch
-[E][-] prepare for examination (at: Mar 15 2020 10:03)
-[T][-] dinner
-[T][-] test
-[E][-] sleep maybe (at: Oct 23 2013 14:10)
