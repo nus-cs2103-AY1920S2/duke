@@ -13,7 +13,7 @@ Squirtle Manager is a lightweight command line interface application built with 
  
 <img src="Ui.png" width="400" height="600">
 
-## What Squirtle Can Do:
+## What Squirtle Can Do
 
 **1. Task tracking**
 
