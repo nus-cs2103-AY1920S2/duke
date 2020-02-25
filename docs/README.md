@@ -9,7 +9,7 @@ Adds a Todo Task to the task list.
 
 Example of usage: 
 
-`todo [task name]`<br/></br>
+`todo [task name]`<br/>
 
 
 ## Adding Deadline Tasks
