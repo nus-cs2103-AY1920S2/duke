@@ -31,6 +31,7 @@ public class Duke {
     public String getResponse(String input) {
 
         String response = this.USER_INTERFACE.runDukeWithInterface(input);
+        response += "\n";
 
         return response;
     }

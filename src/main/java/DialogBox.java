@@ -38,7 +38,11 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        this.group = new Group();
+    }
+
+    public Group getGroup() {
+
+        return this.group;
     }
 
     /**
