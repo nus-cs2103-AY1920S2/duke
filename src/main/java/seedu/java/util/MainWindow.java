@@ -27,18 +27,15 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/grumpycat.jpg"));
 
     /**
-     * Sets up initial screen.
+     * initializes Hooman with an intro.
      */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(DukeDialogBox.getDukeDialog("Hello I'm Hooman, your slave.\n"
-                + "What can I do for you? Cuddles please", dukeImage));
+        dialogContainer.getChildren().addAll(DukeDialogBox.getDukeDialog("Hello Cutie cat.\n"
+                + "What can I do for you, master? Send 'help' for instructions.", dukeImage));
     }
 
-    /**
-     * Sets up Duke.
-     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -47,14 +44,15 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+
     @FXML
     private void handleUserInput() {
+        String byeResponse = "Bye. See you later, Grumpy cat :)";
         String input = userInput.getText();
         String response = duke.getResponse(input);
-
         dialogContainer.getChildren().addAll(
-                UserDialogBox.getUserDialog(input, userImage),
-                DukeDialogBox.getDukeDialog(response, dukeImage)
+            UserDialogBox.getUserDialog(input, userImage),
+            DukeDialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }

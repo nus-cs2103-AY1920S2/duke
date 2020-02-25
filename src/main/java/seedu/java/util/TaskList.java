@@ -2,6 +2,8 @@ package seedu.java.util;
 
 import java.util.ArrayList;
 
+import static javafx.application.Platform.exit;
+
 /**
  * Handles Task and their operations.
  *  getTaskArr()
@@ -99,6 +101,11 @@ public class TaskList {
         }
     }
 
+    private String respondToBye() {
+        return "Bye. See you later, Grumpy cat :)";
+    }
+
+
     private String getHelp(String input) {
         String testForError = "";
         try {
@@ -108,6 +115,10 @@ public class TaskList {
             testForError += Text.printGeneralHelp();
         }
         return testForError;
+    }
+
+    private String respondToMeow() {
+        return "AWWWWWWWW SO CUUUTTEEEEEEEE!\nCome here kitty, let me give you a hug :)";
     }
 
     /**
@@ -132,11 +143,14 @@ public class TaskList {
             case LIST:
                 return listToPrint();
             case BYE:
-                return "0";
+                exit();
+                return respondToBye();
             case FIND:
                 return findTask(Parser.readTask(input));
             case HELP:
                 return getHelp(input);
+            case MEOW:
+                return respondToMeow();
             default:
                 return "Cannot compute. type wrongly? key in 'help' :)";
             }

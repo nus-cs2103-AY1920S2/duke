@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.java.util.MainWindow">
+<AnchorPane maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefHeight="500.0" prefWidth="610.0" style="-fx-background-color: #E8FFF1;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.java.util.MainWindow">
     <children>
         <TextField fx:id="userInput" layoutY="558.0" maxWidth="1000.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0">
          <padding>
@@ -16,7 +16,7 @@
         <Button fx:id="sendButton" layoutX="324.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send!" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="3.0" />
         <ScrollPane fx:id="scrollPane" fitToHeight="true" hbarPolicy="NEVER" hvalue="1.0" maxHeight="1.7976931348623157E308" prefHeight="557.0" prefWidth="400.0" vvalue="1.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="584.0" prefWidth="399.0" />
+                <VBox fx:id="dialogContainer" maxWidth="1.7976931348623157E308" prefHeight="456.0" prefWidth="610.0" style="-fx-background-color: #fffef5;" />
             </content>
         </ScrollPane>
     </children>

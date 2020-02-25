@@ -24,9 +24,9 @@ public class UserDialogBox extends DialogBox {
         dialog.setTextAlignment(TextAlignment.RIGHT);
     }
 
-        public static UserDialogBox getUserDialog (String text, Image img){
-            return new UserDialogBox(text, img);
-        }
+    public static UserDialogBox getUserDialog(String text, Image img) {
+        return new UserDialogBox(text, img);
+    }
 
 
 }

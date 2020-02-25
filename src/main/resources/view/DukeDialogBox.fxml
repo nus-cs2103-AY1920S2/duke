@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--credits to @wyt-sonia for providing the solution to auto resize the dialogbox-->
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root id="dialogRoot" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="580.0" minHeight="-Infinity" minWidth="570.0" opacity="0.9" prefWidth="580.0" style="-fx-background-insets: 5px; -fx-background-color: #ffd3c4;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="dialogRoot" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="580.0" minHeight="-Infinity" minWidth="570.0" opacity="0.9" prefWidth="580.0" style="-fx-background-insets: 5px; -fx-background-color: #ffd3c4;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
-            <HBox.margin>
-                <Insets left="10.0" right="10.0" />
-            </HBox.margin>
-        </ImageView>
-        <Label fx:id="dialog" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="89.0" prefWidth="427.0" text="Label" textFill="#362612" textOverrun="CLIP" wrapText="true">
+         <HBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </HBox.margin>
+      </ImageView>
+        <Label fx:id="dialog" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="Label" textFill="#362612" textOverrun="CLIP" wrapText="true" HBox.hgrow="ALWAYS">
             <HBox.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </HBox.margin>
@@ -23,7 +21,7 @@
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
-    <opaqueInsets>
-        <Insets />
-    </opaqueInsets>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </fx:root>

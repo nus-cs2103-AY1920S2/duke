@@ -1,7 +1,7 @@
 package seedu.java.util;
 
 public enum Command {
-    ERROR, TODO, DEADLINE, EVENT, DONE, LIST, DELETE, BYE, FIND, HELP;
+    ERROR, TODO, DEADLINE, EVENT, DONE, LIST, DELETE, BYE, FIND, HELP, MEOW;
 
     /**
      * Converts String input into Command enum.
@@ -27,6 +27,8 @@ public enum Command {
             return FIND;
         } else if (cmd.equals("help")) {
             return HELP;
+        } else if (cmd.equals("meow")) {
+            return MEOW;
         } else {
             return ERROR;
         }

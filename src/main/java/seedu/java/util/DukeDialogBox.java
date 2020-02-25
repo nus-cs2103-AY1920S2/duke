@@ -26,7 +26,7 @@ public class DukeDialogBox extends DialogBox {
 
     }
 
-    public static DukeDialogBox getDukeDialog (String text, Image img){
+    public static DukeDialogBox getDukeDialog(String text, Image img) {
         return new DukeDialogBox(text, img);
     }
 }
