@@ -152,7 +152,7 @@ public class TaskController {
     /**
      * Deletes an existing task from storage
      *
-     * @params  name            Tasks name
+     * @param   name            Tasks name
      * @return                  Deletion succeeded / failed
      */
     public boolean removeTask(String name) throws DeleteTaskException, TaskNotFoundException {
