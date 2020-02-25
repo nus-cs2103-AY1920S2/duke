@@ -4,6 +4,7 @@
 - Words in square brackets are user specified items e.g. [NAME] can be John.
 - All dates and times are given using the format YYYY-MM-DD HH:MM.
 - All parameters must be given in order.
+- Descriptions can consist of more than one word.
 
 ## Features 
 
