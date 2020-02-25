@@ -1,5 +1,5 @@
 /**
- * Processes user input
+ * Processes user input and also serves as primary UI for the application
  */
 public class Parser {
 

@@ -30,6 +30,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Lets the user know all the possible commands for the application
+     *
+     * @return A string of all possible input commands for the application
+     */
     public String commands() {
         return "Command list" +
                 "\n\n_______________________________" +
@@ -136,6 +141,13 @@ public class TaskList {
 
     }
 
+    /**
+     * Parses task inputs from user and converts them into task objects
+     *
+     * @param type What type of task, eg Todo, Deadline, Event
+     * @param input Task the user whats to input into the application
+     * @return
+     */
     public Task taskConvertor (String type, String input) {
         try {
             if (type.equals("T")) {
@@ -209,6 +221,11 @@ public class TaskList {
         return false;
     }
 
+    /**
+     * Empties all tasks from the list
+     *
+     * @return A string that informs the user that all the tasks have been cleared.
+     */
     public String clearList() {
         int size  = taskList.size();
         for (int i = 0; i < size; i++) {

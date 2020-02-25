@@ -27,13 +27,13 @@ import java.util.Scanner;
  * <p>
  * Command input formats:
  * list
+ * clear</space> list
  * done</space></taskNumber>
  * delete</space></taskNumber>
  * find</space></taskNumber>
  * todo</space></name of task>
  * deadline</space></name of task></backslash></Date in yyyy-mm-dd format>
  * event</space></name of task></backslash></Date in yyyy-mm-dd format><T></Time in hh:mm-hh:mm format>
- * bye
  */
 public class Duke extends Application {
 
@@ -52,15 +52,12 @@ public class Duke extends Application {
     /**
      * In charge of the interface the user sees
      */
-    private Ui ui;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Button exitButton;
     private Scene scene;
-    private Image user = new Image (this.getClass().getResourceAsStream ("/images/DaUser.png"));
-    private Image duke = new Image (this.getClass().getResourceAsStream ("/images/DaDuke.png"));
 
     /**
      * Creates a Duke bot
@@ -68,7 +65,6 @@ public class Duke extends Application {
      * @param filePath where to save and load files when Duke closes
      */
     public Duke (String filePath) {
-        ui = new Ui();
         storage = new Storage (filePath);
         try {
             tasks = new TaskList (storage.loadFiles());
@@ -82,28 +78,6 @@ public class Duke extends Application {
      */
     public Duke() {
 
-    }
-
-    public static void main (String[] args) throws Exception {
-        new Duke ().run();
-    }
-
-    /**
-     * Runs the Duke bot's processes
-     *
-     * @throws IOException if buffer reads a NULL input
-     */
-    public void run() throws Exception {
-        ui.printOpeningScreen();
-        Parser parser = new Parser (tasks);
-        String input = "";
-        while (! (input = sc.nextLine()).equals ("bye")) {
-            ui.printBreak();
-            parser.parse (input);
-            ui.printBreak();
-        }
-        storage.saveFiles (tasks);
-        ui.closeScreen();
     }
 
     /**
@@ -192,15 +166,30 @@ public class Duke extends Application {
         return textToAdd;
     }
 
-
+    /**
+     * Returns the TaskList attribute, which contains list of task, from Duke object
+     *
+     * @return a TaskList object
+     */
     public TaskList getTaskList() {
         return tasks;
     }
+
+    /**
+     * Saves the data to a text file when application closes
+     *
+     * @throws IOException When unable to find location to save into
+     */
 
     public void save() throws IOException {
         storage.saveFiles (tasks);
     }
 
+    /**
+     * Loads saved data from text file into application
+     *
+     * @throws IOException if unable to find location to load from
+     */
     public void load() throws IOException {
             tasks = new TaskList(storage.loadFiles());
     }

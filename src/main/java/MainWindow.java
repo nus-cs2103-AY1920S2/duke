@@ -64,8 +64,13 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Closes the application and saves data into text file
+     *
+     * @throws IOException if unable to find location to save file
+     */
     @FXML
-    private void exitAndSave() throws Exception {
+    private void exitAndSave() throws IOException {
         duke.save();
         Platform.exit();
     }

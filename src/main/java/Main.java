@@ -12,11 +12,6 @@ import java.io.IOException;
 public class Main extends Application {
 
     /**
-     * Creates a Duke instance
-     */
-    private Duke duke;
-
-    /**
      * Starts up the duke application
      *
      * @param stage Stage layout of duke application

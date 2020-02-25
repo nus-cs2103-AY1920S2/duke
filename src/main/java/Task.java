@@ -53,6 +53,11 @@ public class Task {
         }
     }
 
+    /**
+     * Gets the description of the task
+     *
+     * @return a string that describes the task
+     */
     public String getDescription() {
         return this.description;
     }
