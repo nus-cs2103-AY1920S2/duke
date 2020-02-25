@@ -1,0 +1,5 @@
+T | 0 | run
+T | 0 | I want to run
+E | 1 | attend CS2103T | Feb 02 2020
+E | 0 | attend CS2103T lecture | Feb 02 2020
+D | 0 | finish my CS2103T iP | Feb 02 2020
