@@ -1,4 +1,18 @@
-#chat-text{
-    -fx-font-family: Helvetica, Arial, sans-serif;
-    -fx-font-size: 16;
+.body {
+    -fx-background-color: #0e4d55;
+}
+
+.scroll-pane {
+    -fx-background-color: linear-gradient(to bottom, #ff7f50, #6a5acd);
+}
+
+.chat-text-box {
+    -fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #dc143c, #32cd32);
+    -fx-background-radius: 5;
+    -fx-padding: 3 5 3 5;
+}
+
+.image-circle {
+    -fx-border-color: SEAGREEN;
+    -fx-border-radius: 1;
 }

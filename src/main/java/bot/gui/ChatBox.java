@@ -10,8 +10,8 @@ import javafx.geometry.Pos;
 
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -34,7 +34,7 @@ public class ChatBox extends HBox {
     @FXML
     private Text text;
     @FXML
-    private ImageView displayPicture;
+    private Circle imageCircle;
 
     /**
      * Constructor for a custom HBox, for use
@@ -60,9 +60,23 @@ public class ChatBox extends HBox {
         this.text.fontProperty().set(
                 Font.font("Helvetica, Arial, Sans-Serif", 16)
         );
-        this.displayPicture.setImage(img);
-        // make displayPicture round
-        this.displayPicture.setClip(new Circle(48, 48, 48));
+        // give displayPicture a border
+        imageCircle.setFill(new ImagePattern(img));
+    }
+
+    /**
+     * Removes padding between image and edge
+     * (on the right, for a normal non-flipped ChatBox)
+     * Mainly to prevent the scroll bar in the app
+     * from moving the ChatBoxes out of the window
+     */
+    private void removePadding() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        tmp.removeIf(node -> {
+            String id = node.getId();
+            return id != null && id.equals("image-padding");
+        });
+        this.getChildren().setAll(tmp);
     }
 
     /**
@@ -92,7 +106,9 @@ public class ChatBox extends HBox {
      * @return A new ChatBox, formatted to the right
      */
     public static ChatBox getUserBox(String s) {
-        return new ChatBox(s, ChatBox.USER_IMAGE);
+        ChatBox chat = new ChatBox(s, ChatBox.USER_IMAGE);
+        chat.removePadding();
+        return chat;
     }
 
     /**
