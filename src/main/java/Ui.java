@@ -97,7 +97,8 @@ public class Ui {
      * Displays a closing message.
      */
     public void showBye() {
-        String message = "Bye. Please don't come back again or I'll call the cops.";
+        String message = "Bye. Please don't come back again or I'll call the cops.\n"
+                + "Closing in a few seconds...";
 
         say(message);
     }
