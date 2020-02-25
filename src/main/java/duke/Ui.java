@@ -3,6 +3,7 @@ package duke;
 public class Ui {
 
     static final String COMMAND_NOT_FOUND = "Oops! Command not found!";
+    static final String INVALID_FIELD = "Oops! Invalid field!";
     static final String TASK_NEEDS_NAME = "Oops! This task needs a name!";
     static final String TASK_NEEDS_DATE_TIME = "Oops! This task needs a date/time!";
     static final String WRONG_DATE_TIME_FORMAT = "Oops! The date needs to be DD/MM/YYYY and time needs to be HHMM (24hr) format!";
@@ -19,7 +20,9 @@ public class Ui {
     static final String UPDATED_TASK = "Updated this task to:\n    ";
     static final String NO_FIELD_TO_UPDATE = "No field to update!";
     static final String CANNOT_SET_DATE_TIME_TO_TODO = "Cannot set date or time to todo!";
-    static final String WELCOME_MESSAGE = "Welcome to Duke! What can I do for you today?";
+    static final String NEED_TO_SPECIFY_PERIOD = "Need to specify period!";
+    static final String NEED_TO_SPECIFY_DATE = "Need to specify date!";
+    static final String WELCOME_MESSAGE = "Welcome to Duke!\n";
 
     public static String readNextCommand(String input, TaskList tasklist) {
         String[] command = Parser.parseInput(input.strip());
@@ -31,54 +34,47 @@ public class Ui {
     }
 
     public static String displayUpcomingRange(int dayRangeUntil, TaskList upcomingDeadlines, TaskList upcomingEvents) {
-        if (upcomingDeadlines.isEmpty() && upcomingEvents.isEmpty()) {
-            return "You have no upcoming tasks for the next " + dayRangeUntil + " day(s).";
-
-        } else {
-            String output = "";
-            if (upcomingDeadlines.isEmpty()) {
-                output = output + "You have no upcoming deadlines for the next " + dayRangeUntil + " day(s)!\n";
-            } else {
-                upcomingDeadlines.sortTime();
-                output = output + "Your upcoming deadlines in the next " + dayRangeUntil + " day(s):\n";
-                output = output + upcomingDeadlines + "\n";
-            }
-
-            if (upcomingEvents.isEmpty()) {
-                output = output + "You have no upcoming events for the next " + dayRangeUntil + " day(s)!\n";
-            } else {
-                upcomingEvents.sortTime();
-                output = output + "Your upcoming events in the next " + dayRangeUntil + " day(s):\n";
-                output = output + upcomingEvents + "\n";
-            }
-            return output;
+        String deadlines = messageUpcomingDeadlines(upcomingDeadlines) + "for the next " + dayRangeUntil + " day(s).\n";;
+        if (!upcomingDeadlines.isEmpty()) {
+            deadlines = deadlines + upcomingDeadlines + "\n";
         }
+
+        String events = messageUpcomingEvents(upcomingEvents) + "for the next " + dayRangeUntil + " day(s).\n";;
+        if (!upcomingEvents.isEmpty()) {
+            events = events + upcomingEvents + "\n";
+        }
+        return deadlines + events;
     }
 
     public static String displayUpcomingDay(String targetDate, TaskList upcomingDeadlines, TaskList upcomingEvents) {
-        if (upcomingDeadlines.isEmpty() && upcomingEvents.isEmpty()) {
-            return "You have no upcoming tasks on " + targetDate;
-
-        } else {
-            String output = "";
-            if (upcomingDeadlines.isEmpty()) {
-                output = output + "You have no upcoming deadlines on " + targetDate + "!\n";
-            } else {
-                upcomingDeadlines.sortTime();
-                output = output + "Your upcoming deadlines on " + targetDate + ":\n";
-                output = output + upcomingDeadlines + "\n";
-            }
-
-            if (upcomingEvents.isEmpty()) {
-                output = output + "You have no upcoming events on " + targetDate + "!\n";
-            } else {
-                upcomingEvents.sortTime();
-                output = output + "Your upcoming events on " + targetDate + ":\n";
-                output = output + upcomingEvents + "\n";
-            }
-
-            return output;
+        String deadlines = messageUpcomingDeadlines(upcomingDeadlines) + "on " + targetDate + ".\n";
+        if (!upcomingDeadlines.isEmpty()) {
+            deadlines = deadlines + upcomingDeadlines + "\n";
         }
+
+        String events = messageUpcomingEvents(upcomingEvents) + "on " + targetDate + ".\n";
+        if (!upcomingEvents.isEmpty()) {
+            events = events + upcomingEvents + "\n";
+        }
+        return deadlines + events;
+    }
+
+
+
+    public static String messageUpcomingDeadlines(TaskList upcomingDeadlines) {
+        if (upcomingDeadlines.isEmpty()) {
+            return "You have no upcoming deadlines ";
+        }
+        upcomingDeadlines.sortTime();
+        return "Your upcoming deadlines ";
+    }
+
+    public static String messageUpcomingEvents(TaskList upcomingEvents) {
+        if (upcomingEvents.isEmpty()) {
+            return "You have no upcoming events ";
+        }
+        upcomingEvents.sortTime();
+        return "Your upcoming events ";
     }
 
 }

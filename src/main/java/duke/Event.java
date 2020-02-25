@@ -4,6 +4,8 @@
 
 package duke;
 
+import java.time.LocalDateTime;
+
 public class Event extends Task {
     /**
      * Constructor for a new Event object.
@@ -11,7 +13,7 @@ public class Event extends Task {
      * @param taskName the name of the Task.
      * @param taskDateTime the end time of the Task.
      */
-    public Event(boolean isDone, String taskName, String taskDateTime) {
+    public Event(boolean isDone, String taskName, LocalDateTime taskDateTime) {
         super('E', isDone, taskName, taskDateTime);
     }
 

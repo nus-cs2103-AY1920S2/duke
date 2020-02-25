@@ -6,6 +6,7 @@
 package duke;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -17,8 +18,6 @@ public class TaskList {
     public TaskList() {
         this.list = new ArrayList<Task>();
     }
-
-
 
     /**
      * Adds a new Task to this TaskList and saves the changes to the data file.
@@ -33,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a temporary Task to this TaskList but does not write to the data file.
+     * Adds a new Task to this TaskList but does not write to the data file.
      * This method should only be called when the 'find' or 'list ...' command is executed.
      * @param task the new Task to be added into this list.
      */
@@ -49,7 +48,8 @@ public class TaskList {
      * @throws IOException if the changes are unable to be saved into the data file.
      */
     public String newTodo(boolean isDone, String taskName) throws IOException {
-        return this.add(new Todo(isDone, taskName));
+        Task newTask = new Todo(isDone, taskName);
+        return this.add(newTask);
     }
 
     /**
@@ -60,8 +60,9 @@ public class TaskList {
      * @return a function call to the add() function.
      * @throws IOException if the changes are unable to be saved into the data file.
      */
-    public String newEvent(boolean isDone, String taskName, String taskDateTime) throws IOException {
-        return this.add(new Event(isDone, taskName, taskDateTime));
+    public String newEvent(boolean isDone, String taskName, LocalDateTime taskDateTime) throws IOException {
+        Task newTask = new Event(isDone, taskName, taskDateTime);
+        return this.add(newTask);
     }
 
     /**
@@ -72,8 +73,9 @@ public class TaskList {
      * @return a function call to the add() function.
      * @throws IOException if the changes are unable to be saved into the data file.
      */
-    public String newDeadline(boolean isDone, String taskName, String taskDateTime) throws IOException {
-        return this.add(new Deadline(isDone, taskName, taskDateTime));
+    public String newDeadline(boolean isDone, String taskName, LocalDateTime taskDateTime) throws IOException {
+        Task newTask = new Deadline(isDone, taskName, taskDateTime);
+        return this.add(newTask);
     }
 
     /**
@@ -112,31 +114,32 @@ public class TaskList {
      * @throws IOException if the changes are unable to be saved into the data file.
      */
     public String updateTask(int taskID, String parameter) throws IndexOutOfBoundsException, IOException {
+        Task targetTask = this.list.get(taskID - 1);
         String[] fields = parameter.split(", ");
         if (fields.length == 1) {
             return Ui.NO_FIELD_TO_UPDATE;
         }
 
-        Task targetTask = this.list.get(taskID - 1);
-
-        if (fields[0].equalsIgnoreCase("name")) {
-            targetTask.setTaskName(fields[1]);
-
-        } else if (fields[0].equalsIgnoreCase("date")) {
-            if (targetTask instanceof Deadline || targetTask instanceof Event) {
-                targetTask.setTaskDate(fields[1]);
-            } else {
-                return Ui.CANNOT_SET_DATE_TIME_TO_TODO;
-            }
-
-        } else if (fields[0].equalsIgnoreCase("time")) {
-            if (targetTask instanceof Deadline || targetTask instanceof Event) {
-                targetTask.setTaskTime(fields[1]);
-            } else {
-                return Ui.CANNOT_SET_DATE_TIME_TO_TODO;
-            }
-
+        boolean assigningDateTimeForTodo = targetTask instanceof Todo &&
+                (fields[0].equals("date") || fields[0].equals("time"));
+        if (assigningDateTimeForTodo) {
+            return Ui.CANNOT_SET_DATE_TIME_TO_TODO;
         }
+
+        switch(fields[0]) {
+        case "name":
+            targetTask.setTaskName(fields[1]);
+            break;
+        case "date":
+            targetTask.setTaskDate(fields[1]);
+            break;
+        case "time":
+            targetTask.setTaskTime(fields[1]);
+            break;
+        default:
+            return Ui.INVALID_FIELD;
+        }
+
         Storage.save(this);
         return Ui.UPDATED_TASK + targetTask;
     }
@@ -158,24 +161,10 @@ public class TaskList {
     }
 
     /**
-     * Sorts this list by task name in natural order.
-     */
-    public void sortName() {
-        this.list.sort((a,b) -> a.getTaskName().compareTo(b.getTaskName()));
-    }
-
-    /**
      * Sorts this list by task time in natural order.
      */
     public void sortTime() {
         this.list.sort((a,b) -> a.getTaskTime().compareTo(b.getTaskTime()));
-    }
-
-    /**
-     * Sorts this list by task date in natural order.
-     */
-    public void sortDate() {
-        this.list.sort((a,b) -> a.getTaskDate().compareTo(b.getTaskDate()));
     }
 
     @Override

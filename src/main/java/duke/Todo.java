@@ -4,6 +4,8 @@
 
 package duke;
 
+import java.time.LocalDateTime;
+
 public class Todo extends Task {
     /**
      * Constructor for a new Todo object.
@@ -11,7 +13,7 @@ public class Todo extends Task {
      * @param taskName the name of the Task.
      */
     public Todo(boolean isDone, String taskName) {
-        super('T', isDone, taskName, "");
+        super('T', isDone, taskName, LocalDateTime.MIN);
     }
 
     @Override

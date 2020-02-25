@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
+import java.time.format.DateTimeParseException;
 
 public class Storage {
     static final File savedData = new File("data/duke.txt");
@@ -44,23 +45,15 @@ public class Storage {
                     if (line == null) {
                         break;
                     }
-
-                    String[] taskContent = line.split(delimiter);
-                    boolean isDone = taskContent[1].equals("1");
-
-                    if (taskContent[0].equals("T")) {
-                        tasklist.newTodo(isDone, taskContent[2]);
-                    } else if (taskContent[0].equals("D")) {
-                        tasklist.newDeadline(isDone, taskContent[2], taskContent[3]);
-                    } else if (taskContent[0].equals("E")) {
-                        tasklist.newEvent(isDone, taskContent[2], taskContent[3]);
-                    }
+                    loadTaskIntoDuke(line, tasklist);
 
                 } catch (IOException e) {
                     System.out.println("Oops! Unable to read save file due to " + e + "!");
                     break;
+                } catch (DateTimeParseException e) {
+                    System.out.println(Ui.WRONG_DATE_TIME_FORMAT);
+                    break;
                 }
-
             }
             reader.close();
 
@@ -88,6 +81,27 @@ public class Storage {
             writer.write(taskStr);
         }
         writer.close();
+    }
+
+
+    /**
+     * Processes the line read from the data file and stores it into the main application.
+     * @param line The line read from the data file.
+     * @param tasklist The full tasklist.
+     * @throws IOException
+     * @throws DateTimeParseException
+     */
+    public static void loadTaskIntoDuke(String line, TaskList tasklist) throws IOException, DateTimeParseException {
+        String[] taskContent = line.split(delimiter);
+        boolean isDone = taskContent[1].equals("1");
+
+        if (taskContent[0].equals("T")) {
+            tasklist.newTodo(isDone, taskContent[2]);
+        } else if (taskContent[0].equals("D")) {
+            tasklist.newDeadline(isDone, taskContent[2], Parser.parseDateTime(taskContent[3]));
+        } else if (taskContent[0].equals("E")) {
+            tasklist.newEvent(isDone, taskContent[2], Parser.parseDateTime(taskContent[3]));
+        }
     }
 
 }

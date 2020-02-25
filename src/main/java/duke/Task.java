@@ -6,8 +6,8 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 abstract class Task {
@@ -17,9 +17,6 @@ abstract class Task {
     private LocalDate taskDate;
     private LocalTime taskTime;
 
-    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy");
-    static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
-
     /**
      * Constructor for a new generic Task object.
      * @param taskType defines the type of this Task.
@@ -28,30 +25,15 @@ abstract class Task {
      * @param taskDateTime the given date and/or time of the Task.
      * @throws DateTimeParseException if the date or time provided is in the wrong format.
      */
-    public Task(char taskType, boolean isDone, String taskName, String taskDateTime) throws DateTimeParseException {
+    public Task(char taskType, boolean isDone, String taskName, LocalDateTime taskDateTime)
+            throws DateTimeParseException {
+        assert taskDateTime != null;
+
         this.taskType = taskType;
         this.isDone = isDone;
         this.taskName = taskName;
-        this.taskDate = LocalDate.EPOCH;
-        this.taskTime = LocalTime.MAX;
-
-        parseDateTime(taskDateTime);
-
-    }
-
-    /**
-     * Parses the date and time given and stores it in the object.
-     * @param taskDateTime the given date and/or time of the Task.
-     * @throws DateTimeParseException if the date or time provided is in the wrong format.
-     */
-    public void parseDateTime(String taskDateTime) throws DateTimeParseException {
-        if (!taskDateTime.isEmpty()) {
-            String[] dateTime = taskDateTime.split(" ");
-            this.taskDate = LocalDate.parse(dateTime[0], DATE_FORMATTER);
-            if (dateTime.length > 1) {
-                this.taskTime = LocalTime.parse(dateTime[1], TIME_FORMATTER);
-            }
-        }
+        this.taskDate = taskDateTime.toLocalDate();
+        this.taskTime = taskDateTime.toLocalTime();
     }
 
     /**
@@ -91,7 +73,8 @@ abstract class Task {
      * @return the Date and Time of this Task.
      */
     public String getTaskDateTime() {
-        return this.getTaskDate().format(DATE_FORMATTER) + " " + this.getTaskTime().format(TIME_FORMATTER);
+        return this.getTaskDate().format(Parser.DATE_FORMATTER) + " "
+                + this.getTaskTime().format(Parser.TIME_FORMATTER);
     }
 
     /**
@@ -125,7 +108,7 @@ abstract class Task {
      * @throws DateTimeParseException if the Date is in the wrong format.
      */
     public void setTaskDate(String taskDate) throws DateTimeParseException {
-        this.taskDate = LocalDate.parse(taskDate, DATE_FORMATTER);
+        this.taskDate = LocalDate.parse(taskDate, Parser.DATE_FORMATTER);
     }
 
     /**
@@ -134,7 +117,7 @@ abstract class Task {
      * @throws DateTimeParseException if the Time is in the wrong format
      */
     public void setTaskTime(String taskTime) throws DateTimeParseException {
-        this.taskTime = LocalTime.parse(taskTime, TIME_FORMATTER);
+        this.taskTime = LocalTime.parse(taskTime, Parser.TIME_FORMATTER);
     }
 
     /**

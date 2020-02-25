@@ -178,9 +178,9 @@ Example of usage:
   
   
   
-  ### Save your data
-  While each function automatically saves your data for you, you can also manually save the data yourself.
-  #### Usages:
-  #### `save`
-  
-  Saves your data to the data file `duke.txt`.
+### Save your data
+While each function automatically saves your data for you, you can also manually save the data yourself.
+#### Usages:
+#### `save`
+
+Saves your data to the data file `duke.txt`.
