@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--credits to yuting for providing the solution to auto resize the dialogbox-->
+
+<!--credits to @wyt-sonia for providing the solution to auto resize the dialogbox-->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root id="dialogRoot" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="580.0" minHeight="-Infinity" minWidth="570.0" opacity="0.9" prefWidth="580.0" style="-fx-background-insets: 5px;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="dialogRoot" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="580.0" minHeight="-Infinity" minWidth="570.0" opacity="0.9" prefWidth="580.0" style="-fx-background-insets: 5px; -fx-background-color: #E8FFF1;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" minHeight="-Infinity" text="Label" textAlignment="RIGHT" textFill="#362612" textOverrun="CLIP" wrapText="true">
             <HBox.margin>

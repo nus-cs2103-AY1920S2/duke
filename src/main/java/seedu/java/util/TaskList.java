@@ -13,6 +13,7 @@ public class TaskList {
     private String path = "data/duke.txt";
 
     public TaskList() {
+        System.out.println("Tasklist created");
         this.taskArr = new ArrayList<>();
     }
 
