@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     private static ArrayList<Task> instructions = new ArrayList<>(100);
@@ -82,7 +85,8 @@ public class Duke {
             String task = instruction.split("/")[0].replace("deadline", "");
             if (!task.equals("")) {
                 String time = instruction.split("/")[1].replace("by ", "");
-                addTask(new Deadline(task, time));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                addTask(new Deadline(task, LocalDateTime.parse(time, formatter)));
                 try {
                     writeToFile();
                 } catch (IOException e) {
@@ -95,7 +99,8 @@ public class Duke {
             String task = instruction.split("/")[0].replace("event", "");
             if (!task.equals("")) {
                 String time = instruction.split("/")[1].replace("at ", "");
-                addTask(new Event(task, time));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                addTask(new Event(task, LocalDateTime.parse(time, formatter)));
                 try {
                     writeToFile();
                 } catch (IOException e) {
