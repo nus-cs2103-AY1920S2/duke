@@ -107,14 +107,12 @@ public class Parser {
             return new Command(CommandType.DEADLINE_CMD, new String[] { name, by });
         } else if (cmd.startsWith(CommandType.EVENT_CMD.toString())) {
             if (!canSplitStr(cmd, "event\\s+")) {
-                System.out.println("went here");
                 throw new DukeException("The description and timing of an event cannot be empty");
             }
 
             str1 = cmd.split("event\\s+")[1];
 
             if (!canSplitStr(str1, "\\s+/at\\s+")) {
-                System.out.println("went here 2");
                 throw new DukeException("Both the description and timing of an event cannot be empty");
             }
 
@@ -123,7 +121,7 @@ public class Parser {
             String name = strArr[0];
             String at = strArr[1];
 
-            return new Command(CommandType.DEADLINE_CMD, new String[] { name, at });
+            return new Command(CommandType.EVENT_CMD, new String[] { name, at });
         } else if (cmd.startsWith(CommandType.FIND_CMD.toString())) {
             if (!canSplitStr(cmd, "find\\s+")) {
                 throw new DukeException("The description of a todo cannot be empty");

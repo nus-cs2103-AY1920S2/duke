@@ -1,8 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 /**
  * Performs basic 'interaction' with the user.
