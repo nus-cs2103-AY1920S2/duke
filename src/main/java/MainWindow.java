@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -49,6 +50,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.isEmpty()) {
+            return;
+        }
+
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
@@ -56,8 +61,16 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (duke.isExit(input)) {
-            Platform.exit();
-        }
+        // quit the app in another thread to allow UI to update first
+        new Thread(() -> {
+            if (duke.isExit(input)) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    // suppress
+                }
+                Platform.exit();
+            }
+        }).start();
     }
 }
