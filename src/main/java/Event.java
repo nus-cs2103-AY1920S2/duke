@@ -25,7 +25,7 @@ public class Event extends Task {
         type = "Event";
         isSnoozeable = true;
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String[] times = timeRange.split(" to ");
 
         // check if two sets of time is present

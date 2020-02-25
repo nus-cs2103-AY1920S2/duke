@@ -25,7 +25,7 @@ public class Deadline extends Task {
         type = "Deadline";
         isSnoozeable = true;
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         this.deadline = format.parse(deadline, new ParsePosition(0));
 
         if (this.deadline == null) {
