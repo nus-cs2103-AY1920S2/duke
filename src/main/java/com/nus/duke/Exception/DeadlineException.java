@@ -1,4 +1,4 @@
-package com.nus.duke.Exception;
+package com.nus.duke.exception;
 
 public class DeadlineException extends Exception {
     public DeadlineException(String errorMsg) {

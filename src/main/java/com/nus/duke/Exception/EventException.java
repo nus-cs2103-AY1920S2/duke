@@ -1,4 +1,4 @@
-package com.nus.duke.Exception;
+package com.nus.duke.exception;
 
 public class EventException extends Exception {
     public EventException(String errorMsg) {

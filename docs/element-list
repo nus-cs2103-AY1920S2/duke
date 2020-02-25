@@ -1,1 +1,8 @@
+com.nus.duke
+com.nus.duke.controller
+com.nus.duke.dao
+com.nus.duke.exception
+com.nus.duke.parser
+com.nus.duke.storage
+com.nus.duke.tasks
 com.nus.duke.ui
