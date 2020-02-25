@@ -61,7 +61,10 @@ public class TaskList {
      *
      * @throws InvalidClassException when the task is not snoozeable
      */
-    public Task snoozeTask(int index, String time) throws InvalidClassException, InvalidPropertiesFormatException {
+    public Task snoozeTask(int index, String time) throws
+            InvalidClassException,
+            InvalidPropertiesFormatException,
+            IndexOutOfBoundsException {
         // check whether the index is within bounds
         assert index >= 0 && index < tasks.size();
 
@@ -84,11 +87,10 @@ public class TaskList {
      *
      * @param index the index of the task to be retrieved
      * @return the task at the index
+     *
+     * @throws IndexOutOfBoundsException when index is invalid
      */
-    public Task getTask(int index) {
-        // check whether index is within bounds
-        assert index >= 0 && index < tasks.size();
-
+    public Task getTask(int index) throws IndexOutOfBoundsException {
         return tasks.get(index);
     }
 

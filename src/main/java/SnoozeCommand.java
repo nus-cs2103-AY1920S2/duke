@@ -12,15 +12,20 @@ public class SnoozeCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task originalTask = tasks.getTask(index);
         try {
-            Task snoozedTask = tasks.snoozeTask(index, time);
-            ui.showSnoozedTask(snoozedTask);
-            storage.save(tasks);
-        } catch (InvalidClassException e) {
-            ui.showInvalidSnooze(originalTask);
-        } catch (InvalidPropertiesFormatException e) {
-            ui.showInvalidFormatMessage();
+            Task originalTask = tasks.getTask(index);
+
+            try {
+                Task snoozedTask = tasks.snoozeTask(index, time);
+                ui.showSnoozedTask(snoozedTask);
+                storage.save(tasks);
+            } catch (InvalidClassException e) {
+                ui.showInvalidSnooze(originalTask);
+            } catch (InvalidPropertiesFormatException e) {
+                ui.showInvalidFormatMessage();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            new InvalidIndexCommand().execute(tasks, ui, storage);
         }
     }
 }
