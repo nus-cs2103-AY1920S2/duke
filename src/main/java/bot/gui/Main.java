@@ -55,6 +55,7 @@ public class Main extends Application {
                             ))
             );
             stage.show();
+            stage.setTitle(GraphicalUi.VERSION);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -14,7 +14,6 @@ import javafx.scene.text.Font;
 public class GraphicalUi extends Ui {
     private static final String GREETINGS = "Hello world!";
     private static final String GREETINGS_MESSAGE = "Hello! I love you! <3";
-    private static final String VERSION = Ui.VERSION;
     private static final String LOAD = "LOADING ... ... ...";
     private static final String DELETED_MESSAGE =
             "Garbage cleared successfully."
@@ -118,6 +117,8 @@ public class GraphicalUi extends Ui {
             + "todo     | Creates a new to-do with\n"
             + "<text>   | description <text>\n"
             + "\n";
+
+    public static final String VERSION = Ui.VERSION;
 
     private ObservableList<Node> chatWindow;
 
