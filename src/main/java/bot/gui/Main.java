@@ -16,6 +16,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -35,6 +36,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             scene.getStylesheets().add(Main.class.getResource("/styles/main.css").toExternalForm());
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/icon.png")));
             stage.setTitle(GraphicalUi.VERSION);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setBaron(

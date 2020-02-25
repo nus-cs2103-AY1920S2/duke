@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
@@ -9,9 +10,14 @@
     Adapted from DialogBox.fxml in JavaFX tutorial found at
     https://github.com/se-edu/duke/tree/master/tutorials
 -->
+
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Text fx:id="text" text="Label" wrappingWidth="270.0" />
+      <BorderPane id="chat-text-box">
+         <top>
+              <Text fx:id="text" text="Label" wrappingWidth="270.0" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
     </children>
     <padding>
