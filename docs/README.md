@@ -1,6 +1,6 @@
 ### Table of Contents
 - [Welcome to Squirtle Manager!](#welcome-to-squirtle-manager-)
-  * [What Squirtle Can Do](#what-squirtle-can-do-)
+  * [What Squirtle Can Do](#what-squirtle-can-do)
   * [Setting up](#setting-up)
   * [Command List](#command-list)
   * [Sample Use](#sample-use)
