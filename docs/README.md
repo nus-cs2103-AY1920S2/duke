@@ -13,65 +13,65 @@
 
 
 ## Adding Deadline Tasks
-Adds a Deadline Task to the task list.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a Deadline Task to the task list.
 
-### Usage
+### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage
 
-Example of usage: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example of usage: 
 
-`deadline [task name] [date]`<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`deadline [task name] [date]`<br/><br/>
 
 ## Adding Event Tasks
-Adds a Event Task to the task list.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a Event Task to the task list.
 
-### Usage
+### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage
 
-Example of usage: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example of usage: 
 
-`event [task name] [date]`<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`event [task name] [date]`<br/><br/>
 
 ## Listing all Tasks 
-Displays all Tasks in the current task list.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays all Tasks in the current task list.
 
-### Usage
+### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage
 
-Example of usage: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example of usage: 
 
-`list`<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`list`<br/><br/>
 
 ## Marking a Task as Done
-Marks the current Task with the 'Done' status.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks the current Task with the 'Done' status.
 
-### Usage
+### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage
 
-Example of usage: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example of usage: 
 
-`done [task index]`<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`done [task index]`<br/><br/>
 
 ## Removing a current Task
-Deletes the current Task.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes the current Task.
 
-### Usage
+### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage
 
-Example of usage: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example of usage: 
 
-`delete [task index]`<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`delete [task index]`<br/><br/>
 
 ## Displaying Help Message
-Displays a help message listing all possible commands.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays a help message listing all possible commands.
 
-### Usage
+### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage
 
-Example of usage: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example of usage: 
 
-`help`<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`help`<br/><br/>
 
 ## Exiting the Application
-Terminates the program.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminates the program.
 
-### Usage
+### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage
 
-Example of usage: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example of usage: 
 
-`bye`<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`bye`<br/><br/>
 
