@@ -44,24 +44,18 @@ public class Duke extends Application{
         ArrayList<String> tasksSaved = new ArrayList<>();
         String fileName = Paths.get(Paths.get(System.getProperty("user.dir")).toString(),
                 "/tasks.txt").toString();
-        System.out.println(fileName);
         Storage storage = new Storage(fileName, tasksSaved);
         String response;
 
         //read in saved tasks
         try {
-            //happy path
             taskList = storage.loadTask(fileName);
             tasksSaved = storage.copySavedTasks(fileName);
         } catch (FileNotFoundException e) {
             //create a file
             try {
                 File newFile = new File("tasks.txt");
-                if (newFile.createNewFile()) {
-                    response = ("File created: " + newFile.getName());
-                } else {
-                    System.out.println("File already exists.");
-                }
+                newFile.createNewFile();
             } catch (IOException ioerror) {
                 System.out.println("An error occurred.");
                 ioerror.printStackTrace();
