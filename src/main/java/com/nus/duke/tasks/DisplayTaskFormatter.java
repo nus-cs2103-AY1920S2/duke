@@ -16,6 +16,13 @@ public class DisplayTaskFormatter {
         return String.format("%s (by: %s)", splittedExpr.getKey(), splittedExpr.getValue());
     }
 
+    /**
+     * Defines the string expression for a Task
+     *
+     * @param   task    Tasks class object
+     * @return  String  String representation of the class
+     * @see com.nus.duke.tasks.Tasks
+     */
     public static String stringify(Tasks task){
         StringBuilder strBldr = new StringBuilder();
         strBldr.append(String.format("[%s][%s] ", task.getStatus().toString(), task.getType().toString()));

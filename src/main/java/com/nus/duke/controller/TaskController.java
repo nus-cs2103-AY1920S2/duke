@@ -1,6 +1,6 @@
 package com.nus.duke.controller;
 
-import com.nus.duke.Exception.*;
+import com.nus.duke.exception.*;
 import com.nus.duke.dao.DAOFactory;
 import com.nus.duke.dao.DAOInterface;
 import com.nus.duke.storage.FileStorage;
@@ -31,28 +31,58 @@ public class TaskController {
         return formattedTasks;
     }
 
+    /**
+     * Initializes a new Tasks object
+     *
+     * @param   name    Task description
+     * @return          Tasks object
+     */
     public Tasks createNewTask(String name) {
         Tasks task = new Tasks(name);
         this.dataObj.add(task);
         return task;
     }
 
+    /**
+     * Getter method for seeking a task based on exact name matching
+     *
+     * @param   name    Task name
+     * @return  Tasks   Tasks object
+     */
     public Tasks getTask(String name) throws TaskNotFoundException {
         Tasks taskObj = dataObj.search(name);
         if (taskObj == null) throw new TaskNotFoundException("Error! Task does not exist");
         return taskObj;
     }
 
+    /**
+     * Searches for
+     *
+     * @param   filterString    Task description
+     * @return                  Tasks names as a list of strings
+     */
     public List<String> filterTasks(String filterString) {
         List<Tasks> tasks = dataObj.filter(filterString);
         return this.tasksToString(tasks);
     }
 
+    /**
+     * Returns a list of all tasks as their name
+     *
+     * @return                  Tasks names as a list of strings
+     */
     public List<String> getAllTasks() {
         List<Tasks> tasks = dataObj.getAll();
         return this.tasksToString(tasks);
     }
 
+    /**
+     * Marks / unmarks a task
+     *
+     * @param   name            Tasks name
+     * @param   isMark          Task is marked / unmarked
+     * @return                  Tasks names as a list of strings
+     */
     public boolean setMark(String name, boolean isMark) throws MarkException, TaskNotFoundException {
         if (name == null) {
             throw new MarkException("Error! Can only mark a defined task");
@@ -63,6 +93,12 @@ public class TaskController {
         }
     }
 
+    /**
+     * Creates a new TODO task
+     *
+     * @param   name            Tasks name
+     * @return                  Creation succeeded / failed
+     */
     public boolean newTodo(String name) throws TodoException {
         if (name == null) {
             throw new TodoException("Error! The description of a todo cannot be empty.");
@@ -72,6 +108,12 @@ public class TaskController {
         }
     }
 
+    /**
+     * Creates a new Deadline task
+     *
+     * @param   name            Tasks name
+     * @return                  Creation succeeded / failed
+     */
     public boolean newDeadline(String name) throws DeadlineException {
         if (name == null) {
             throw new DeadlineException("Error! The description of a todo cannot be empty.");
@@ -81,6 +123,12 @@ public class TaskController {
         }
     }
 
+    /**
+     * Creates a new Event task
+     *
+     * @param   name            Tasks name
+     * @return                  Creation succeeded / failed
+     */
     public boolean newEvent(String name) throws EventException {
         if (name == null) {
             throw new EventException("Error! The description of a todo cannot be empty.");
@@ -90,12 +138,23 @@ public class TaskController {
         }
     }
 
+    /**
+     * Saves stored tasks data out to a text file
+     *
+     * @return                  Persistance succeeded / failed
+     */
     public boolean persist() {
         final String fileLocation = "/Users/johan.kok/Desktop/nus/CS2103/duke/src/main/java/resources/storage/save.txt";
         storage.save(fileLocation);
         return true;
     }
 
+    /**
+     * Deletes an existing task from storage
+     *
+     * @param   name            Tasks name
+     * @return                  Deletion succeeded / failed
+     */
     public boolean removeTask(String name) throws DeleteTaskException, TaskNotFoundException {
         if (name == null) {
             throw new DeleteTaskException("Error! Can only mark a defined task");

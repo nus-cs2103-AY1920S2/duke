@@ -22,20 +22,33 @@ public class Greetings {
     private static final String UNDEFINED       = "-----------------------------\n"
                                                 + "Input is undefined. Try again\n"
                                                 + "-----------------------------\n";
-
+    /**
+     * <p> Welcome text logo and starting screen </p>
+     */
     public static void init() {
         System.out.println(WELCOME_LOGO);
         System.out.println(WELCOME_TEXT);
     }
 
+    /**
+     * <p> Give the user a nice exit </p>
+     */
     public static void tearDown() {
         System.out.println(EXIT_TEXT);
     }
 
+    /**
+     * <p> If the user gives an unknown input </p>
+     */
     public static void handleUndefined() {
         System.out.println(UNDEFINED);
     }
 
+    /**
+     * <p> Prettily formats a string with separators </p>
+     *
+     * @param s String argument
+     */
     public static void prettyPrint(String s) {
         String formattedString = String.format(   "-----------------------------\n"
                                                 + "%s\n"
@@ -43,6 +56,12 @@ public class Greetings {
         System.out.println(formattedString);
     }
 
+    /**
+     * <p> Prettily prints a list of strings with separators </p>
+     *
+     * @param strs  List of strings to be displayed
+     * @see com.nus.duke.ui.Greetings#prettyPrint(String)
+     */
     public static void prettyPrint(List<String> strs) {
         final AtomicInteger ctr = new AtomicInteger();
         StringBuilder strBldr = new StringBuilder();
