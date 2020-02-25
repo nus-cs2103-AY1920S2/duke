@@ -35,7 +35,7 @@ dependencies {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.1.7"
+    archiveVersion = "2.0.0"
     archiveClassifier = null
     archiveAppendix = null
 }
