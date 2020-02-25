@@ -1,6 +1,6 @@
 # User Guide
 
-# Features <br/>
+# Features<br/><br/>
 
 ## Adding Todo Tasks
 Adds a Todo Task to the task list.
@@ -9,7 +9,7 @@ Adds a Todo Task to the task list.
 
 Example of usage: 
 
-`todo [task name]`<br/>
+`todo [task name]`<br/><br/>
 
 
 ## Adding Deadline Tasks
@@ -19,7 +19,7 @@ Adds a Deadline Task to the task list.
 
 Example of usage: 
 
-`deadline [task name] [date]`
+`deadline [task name] [date]`<br/><br/>
 
 ## Adding Event Tasks
 Adds a Event Task to the task list.
@@ -28,7 +28,7 @@ Adds a Event Task to the task list.
 
 Example of usage: 
 
-`event [task name] [date]`
+`event [task name] [date]`<br/><br/>
 
 ## Listing all Tasks 
 Displays all Tasks in the current task list.
@@ -37,7 +37,7 @@ Displays all Tasks in the current task list.
 
 Example of usage: 
 
-`list`
+`list`<br/><br/>
 
 ## Marking a Task as Done
 Marks the current Task with the 'Done' status.
@@ -46,7 +46,7 @@ Marks the current Task with the 'Done' status.
 
 Example of usage: 
 
-`done [task index]`
+`done [task index]`<br/><br/>
 
 ## Removing a current Task
 Deletes the current Task.
@@ -55,7 +55,7 @@ Deletes the current Task.
 
 Example of usage: 
 
-`delete [task index]`
+`delete [task index]`<br/><br/>
 
 ## Displaying Help Message
 Displays a help message listing all possible commands.
@@ -64,7 +64,7 @@ Displays a help message listing all possible commands.
 
 Example of usage: 
 
-`help`
+`help`<br/><br/>
 
 ## Exiting the Application
 Terminates the program.
@@ -73,5 +73,5 @@ Terminates the program.
 
 Example of usage: 
 
-`bye`
+`bye`<br/><br/>
 
