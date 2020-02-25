@@ -35,17 +35,17 @@ public class Parser {
         String parsed;
         TaskType taskType = task.getTaskType();
         switch (taskType) {
-            case TODO:
-                parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription();
-                break;
-            case EVENT:
-                parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription() + "|" + ((Event) task).getTaskTime();
-                break;
-            case DEADLINE:
-                parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription() + "|" + ((Deadline) task).getTaskTime();
-                break;
-            default:
-                throw new DukeException(DukeError.TASKPARSE);
+        case TODO:
+            parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription();
+            break;
+        case EVENT:
+            parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription() + "|" + ((Event) task).getTaskTime();
+            break;
+        case DEADLINE:
+            parsed = taskType.toString() + "|" + task.getDoneInt() + "|" + task.getDescription() + "|" + ((Deadline) task).getTaskTime();
+            break;
+        default:
+            throw new DukeException(DukeError.TASKPARSE);
         }
         assert parsed != null : "parser unable to parse task, returns null";
         return parsed;
@@ -62,17 +62,17 @@ public class Parser {
         String[] split = line.split(Pattern.quote("|"));
         Task task;
         switch (split[0]) {
-            case "T":
-                task = new ToDo(split[1], split[2]);
-                break;
-            case "E":
-                task = new Event(split[1], split[2], split[3]);
-                break;
-            case "D":
-                task = new Deadline(split[1], split[2], split[3]);
-                break;
-            default:
-                throw new DukeException(DukeError.FILEPARSE);
+        case "T":
+            task = new ToDo(split[1], split[2]);
+            break;
+        case "E":
+            task = new Event(split[1], split[2], split[3]);
+            break;
+        case "D":
+            task = new Deadline(split[1], split[2], split[3]);
+            break;
+        default:
+            throw new DukeException(DukeError.FILEPARSE);
         }
         assert task != null : "error in parsing file to task object";
         return task;
@@ -128,23 +128,23 @@ public class Parser {
                 String taskDetails = split[1];
                 Task task;
                 switch (taskType) {
-                    case TODO:
-                        task = new ToDo("0", taskDetails);
-                        break;
-                    case EVENT:
-                        String[] eventDetails = taskDetails.split("/at");
-                        String eventDescription = eventDetails[0].trim();
-                        String eventTime = eventDetails[1].trim();
-                        task = new Event("0", eventDescription, eventTime);
-                        break;
-                    case DEADLINE:
-                        String[] deadlineDetails = taskDetails.split("/by");
-                        String deadlineDescription = deadlineDetails[0].trim();
-                        String deadline = deadlineDetails[1].trim();
-                        task = new Deadline("0", deadlineDescription, deadline);
-                        break;
-                    default:
-                        throw new DukeException(DukeError.COMMAND);
+                case TODO:
+                    task = new ToDo("0", taskDetails);
+                    break;
+                case EVENT:
+                    String[] eventDetails = taskDetails.split("/at");
+                    String eventDescription = eventDetails[0].trim();
+                    String eventTime = eventDetails[1].trim();
+                    task = new Event("0", eventDescription, eventTime);
+                    break;
+                case DEADLINE:
+                    String[] deadlineDetails = taskDetails.split("/by");
+                    String deadlineDescription = deadlineDetails[0].trim();
+                    String deadline = deadlineDetails[1].trim();
+                    task = new Deadline("0", deadlineDescription, deadline);
+                    break;
+                default:
+                    throw new DukeException(DukeError.COMMAND);
                 }
 
                 assert task != null : "task at the end of parseInput method cannot be null!";

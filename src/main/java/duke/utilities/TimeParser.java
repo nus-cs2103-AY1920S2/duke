@@ -22,15 +22,12 @@ public interface TimeParser {
     static LocalDate parseDate(String date) throws DateTimeParseException {
         if (date.equals("today")) {
             return LocalDate.now();
-        }
-        else if (date.equals("tomorrow")) {
+        } else if (date.equals("tomorrow")) {
             return LocalDate.now().plus(1, ChronoUnit.DAYS);
-        }
-        else {
+        } else {
             try {
                 return LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy"));
-            }
-            catch(DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 return LocalDate.parse(date);
             }
         }

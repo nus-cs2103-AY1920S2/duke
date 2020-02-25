@@ -88,13 +88,13 @@ public class Ui {
      */
     public String updateMsg(int updateStage, Task task) {
         switch (updateStage) {
-            case 1:
-                return "SQUIRTLE is changing: " + task.toString() + "\nWhat shall Squirtle change?\n('des' for description, 'date' for date)";
-            case 2:
-                return "SQUIRTLE! Changed to: " + task.toString();
-            default:
-                assert false;
-                return "";
+        case 1:
+            return "SQUIRTLE is changing: " + task.toString() + "\nWhat shall Squirtle change?\n('des' for description, 'date' for date)";
+        case 2:
+            return "SQUIRTLE! Changed to: " + task.toString();
+        default:
+            assert false;
+            return "";
         }
     }
 
@@ -165,25 +165,25 @@ public class Ui {
      */
     public String errorMsg(DukeException e) { // error responses
         switch (e.error) {
-            case NUMBER: // error in accessing list, no such task exists
-                return "SQUIRTLE cannot find task!";
-            case INSUFFICIENT:
-                return "SQUIRTLE needs more info!";
-            case COMMAND:
-                return "SQUIRTLE doesn't understand!";
-            case DATEFORMAT:
-                return "SQUIRTLE doesn't understand this date!\n\tFormat: d/M/YYYY or YYYY-MM-dd";
-            case KEYWORDS:
-                return "SQUIRTLE is confused! Give SQUIRTLE one keyword!";
-            case FILEPARSE:
-                return "SQUIRTLE cannot read your file!";
-            case TASKPARSE:
-                return "SQUIRTLE cannot write on your file!";
-            case UPDATE:
-                return "SQUIRTLE cannot understand your update! Check your update item!";
-            default:
-                assert false : "No exception that is not a duke exception should be caught in the main Duke class";
-                return "An error not included in DukeExceptions was thrown";
+        case NUMBER: // error in accessing list, no such task exists
+            return "SQUIRTLE cannot find task!";
+        case INSUFFICIENT:
+            return "SQUIRTLE needs more info!";
+        case COMMAND:
+            return "SQUIRTLE doesn't understand!";
+        case DATEFORMAT:
+            return "SQUIRTLE doesn't understand this date!\n\tFormat: d/M/YYYY or YYYY-MM-dd";
+        case KEYWORDS:
+            return "SQUIRTLE is confused! Give SQUIRTLE one keyword!";
+        case FILEPARSE:
+            return "SQUIRTLE cannot read your file!";
+        case TASKPARSE:
+            return "SQUIRTLE cannot write on your file!";
+        case UPDATE:
+            return "SQUIRTLE cannot understand your update! Check your update item!";
+        default:
+            assert false : "No exception that is not a duke exception should be caught in the main Duke class";
+            return "An error not included in DukeExceptions was thrown";
         }
     }
 
