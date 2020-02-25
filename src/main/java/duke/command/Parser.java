@@ -3,6 +3,8 @@ package duke.command;
 import duke.task.TaskList;
 import duke.DukeException;
 
+import java.util.Arrays;
+
 /**
  * Acts as the parser for Duke program commands.
  * Makes sense of user commands and helps to execute it in Duke.
@@ -65,7 +67,7 @@ public class Parser {
             }
         } else if (basicCommand.equals("delete")) {
 
-            // Deletes the task
+            // Deletes the task(s)
             return this.listOfTasks.delete(commandSplit[1]);
 
         } else if (basicCommand.equals("find")) {
@@ -77,6 +79,10 @@ public class Parser {
 
             // Assigns priority to task.
             return this.listOfTasks.priority(commandSplit[1], commandSplit[2]);
+        } else if (basicCommand.equals("clear")) {
+
+            // Clears the list.
+            return this.listOfTasks.clearAll();
         }
 
         assert(!basicCommand.equals("list"));

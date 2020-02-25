@@ -1,6 +1,8 @@
 package duke.task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 import duke.DukeException;
@@ -19,9 +21,10 @@ public class TaskList {
 
     private final static String LIST_HEADER = "Here are the tasks in your list:";
     private final static String FIND_HEADER = "Here are the matching tasks in your list:";
-    private final static String TASK_DONE_MESSAGE = "Nice! I've marked this task as done:";
-    private final static String TASK_ADD_MESSAGE = "Got it. I've added this task:";
-    private final static String DELETE_MESSAGE = "Noted. I've removed this task:";
+    private final static String TASK_DONE_MESSAGE = "UwU! Kirby has marked this task as done:";
+    private final static String TASK_ADD_MESSAGE = "Poyo! Kirby added this task:";
+    private final static String DELETE_MESSAGE = "OwO. Kirby has removed this task(s):";
+    private final static String CLEAR_ALL_MESSAGE = "Kirby has cleared all the tasks in the list UwU";
     private final static Comparator<Task> TASK_COMPARATOR = new Comparator<Task>() {
         @Override
         public int compare(Task o1, Task o2) {
@@ -152,6 +155,33 @@ public class TaskList {
         return output;
     }
 
+/*    public String delete(String ...a) {
+
+        String output = "";
+        ArrayList<Integer> positions = new ArrayList<Integer>();
+        ArrayList<Task> deletedTasks = new ArrayList<Task>();
+
+        for (String i: a) {
+            int position = Integer.parseInt(i);
+            positions.add(position);
+            deletedTasks.add(this.storageData.get(position));
+        }
+
+        Collections.sort(positions);
+        for (int i = positions.size(); i > 0; i--) {
+            this.storageData.remove(i - 1);
+        }
+
+        output += DELETE_MESSAGE + "\n";
+        for (int i = 0; i < deletedTasks.size(); i++) {
+            output += "       " + deletedTasks.get(i) + "\n";
+        }
+
+        output += "Now you have " + (this.storageData.size() - 1) + " task(s) in the list.";
+
+        return output;
+    }*/
+
     /**
      * Marks a task as done.
      *
@@ -183,6 +213,19 @@ public class TaskList {
 
         String output = this.storageData.get(task - 1).assignPriority(priority);
         this.storageData.sort(TASK_COMPARATOR);
+
+        return output;
+    }
+
+    /**
+     * Clears the list.
+     *
+     * @return Message indicating list cleared.
+     */
+    public String clearAll() {
+
+        this.storageData.clear();
+        String output = CLEAR_ALL_MESSAGE;
 
         return output;
     }

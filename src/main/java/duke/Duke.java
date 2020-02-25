@@ -9,12 +9,14 @@ package duke;
 public class Duke {
 
     private static DukeUserInterface USER_INTERFACE;
+    private boolean isDukeActive;
 
     private final static String filepath =
             "..\\..\\..\\duke.txt";
 
     public Duke() throws DukeException {
         this.USER_INTERFACE = new DukeUserInterface(filepath);
+        this.isDukeActive = true;
     }
 
     public static void main(String[] args) {
@@ -33,6 +35,14 @@ public class Duke {
         String response = this.USER_INTERFACE.runDukeWithInterface(input);
         response += "\n";
 
+        if (input.equals("bye")) {
+            this.isDukeActive = false;
+        }
+
         return response;
+    }
+
+    public boolean isActive() {
+        return this.isDukeActive;
     }
 }

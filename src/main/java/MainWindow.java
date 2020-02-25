@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -21,6 +23,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private final static String INTERRUPT_MESSAGE = "Please do not stop me from sleeping ><  :(   \n";
+
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/PikachuCircle.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/KirbyCircle2.png"));
@@ -51,5 +55,25 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if(!duke.isActive()) {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+                exit();
+            } catch (InterruptedException e) {
+                dialogContainer.getChildren().add(
+                        DialogBox.getDukeDialog(INTERRUPT_MESSAGE, userImage)
+                );
+            }
+        }
     }
+
+    /**
+     * Exits with status 0.
+     */
+    private void exit() {
+        System.exit(0);
+    }
+
+
 }
