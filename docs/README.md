@@ -1,6 +1,6 @@
 # User Guide
 
-# Features 
+# Features <br/>
 
 ## Adding Todo Tasks
 Adds a Todo Task to the task list.
@@ -9,7 +9,7 @@ Adds a Todo Task to the task list.
 
 Example of usage: 
 
-`todo [task name]`
+`todo [task name]`<br/></br>
 
 
 ## Adding Deadline Tasks
