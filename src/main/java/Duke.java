@@ -4,7 +4,7 @@ public class Duke {
     private Parser parser;
     private Storage storage;
     private TaskList taskList;
-    private static final String FILEPATH = "data/duke.txt";
+    private static final String FILEPATH = "tasks.txt";
 
     /**
      * Constructor for Duke class.
