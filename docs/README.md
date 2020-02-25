@@ -3,13 +3,13 @@
 # Features<br/><br/>
 
 ## Adding Todo Tasks
-   Adds a Todo Task to the task list.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a Todo Task to the task list.
 
-### Usage
+### &nbsp;&nbsp;&nbsp;Usage
 
-Example of usage: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example of usage: 
 
-`todo [task name]`<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`todo [task name]`<br/><br/>
 
 
 ## Adding Deadline Tasks
