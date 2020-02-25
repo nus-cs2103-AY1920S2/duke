@@ -68,9 +68,13 @@ public abstract class Task {
      */
     private String getDoneString() {
         if (this.isDone()) {
-            return "[✓]";
+            // Unicode escape sequence used to ensure character
+            // displays properly in JavaFX GUI window
+            // original character: ✓ (tick mark)
+            return "[\u2713]";
         } else {
-            return "[✗]";
+            // original character: ✗ (ballot cross)
+            return "[\u2717]";
         }
     }
 

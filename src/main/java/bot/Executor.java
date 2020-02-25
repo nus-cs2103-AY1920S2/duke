@@ -117,6 +117,7 @@ public class Executor {
         } catch (NumberFormatException e) {
             this.ui.showError(e);
         }
+        this.taskStorage.saveToDisk(this.taskStoreLocation);
         return true;
     }
 

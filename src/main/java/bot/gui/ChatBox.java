@@ -80,12 +80,22 @@ public class ChatBox extends HBox {
     }
 
     /**
-     * Moves this ChatBox to the left instead
+     * Moves this ChatBox to the left instead. Also
+     * set the background colour to something different
      */
-    private void flip() {
+    private void flipAndSetColour() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
+        tmp.forEach(node -> {
+            String id = node.getId();
+            if (id != null && id.equals("chat-text-box")) {
+                node.setStyle(
+                        "-fx-background-color: linear-gradient("
+                        + "from 25% 25% to 100% 100%, #dc143c, #661a33)"
+                );
+            }
+        });
         this.getChildren().setAll(tmp);
     }
 
@@ -120,7 +130,7 @@ public class ChatBox extends HBox {
      */
     public static ChatBox getBotBox(String s) {
         ChatBox chat = new ChatBox(s, ChatBox.BOT_IMAGE);
-        chat.flip();
+        chat.flipAndSetColour();
         return chat;
     }
 
