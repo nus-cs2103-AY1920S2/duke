@@ -1,11 +1,7 @@
 package duke.main;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
-
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -38,17 +34,11 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        if (text.equals("bye")) {
-            Platform.exit();
-        }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
+    //Flips the dialog box such that the ImageView is on the left and text on the right.
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
@@ -56,12 +46,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Displays the user's output text and its profile picture.
+     * @param text that the user outputs
+     * @param img is the profile image of user
+     * @return the box that for GUI display
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox d = new DialogBox(text, img);
         d.setStyle("-fx-background-color: rgba(16,126,128,0.42)");
         return d;
     }
 
+    /**
+     * Displays the Duke's output text and its profile picture.
+     * @param text that the Duke outputs
+     * @param img is the profile image of Duke
+     * @return the box that for GUI display
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
