@@ -11,6 +11,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+    private Storage storage;
+    private TaskList taskList;
+
     public static final int COMMAND_POSITION = 0;
     public static final int DESCRIPTION_POSITION = 1;
     public static final int MINIMUM_COMMAND_LENGTH = 2;
@@ -28,16 +31,24 @@ public class Parser {
     public static final int EVENT_TIME_POSITION = 1;
 
     /**
+     * Constructor for Parser class.
+     * @param storage Storage class that reads from/write to the specified file path.
+     * @param taskList User's list of Tasks.
+     */
+    public Parser(Storage storage, TaskList taskList) {
+        this.storage = storage;
+        this.taskList = taskList;
+    }
+
+    /**
      * Make sense of the user's command and execute their desired function(s).
      * @param command Input from the user.
-     * @param taskList User's TaskList.
-     * @param storage Storage class that reads from/write to a specified file.
      */
-    public String parseAndExecute(String command, TaskList taskList, Storage storage) {
+    public String parseAndExecute(String command) {
         String[] commandArray = command.split(" ", MINIMUM_COMMAND_LENGTH);
         try {
             if (command.toLowerCase().equals("bye")) {
-                return "I believe this is farewell, my friend.";
+                return Ui.sayBye();
             } else if (command.toLowerCase().equals("list")) {
                 return taskList.showList();
             } else if (commandArray[COMMAND_POSITION].toLowerCase().equals("done")) {
@@ -91,7 +102,7 @@ public class Parser {
      * @param type Type of Task ("T" for Todo, "D" for Deadline, "E" for Event).
      * @throws DukeTaskException Throws exception related to Duke Task class.
      */
-    public static String addTask(TaskList taskList, String input, String type) throws DukeTaskException {
+    public String addTask(TaskList taskList, String input, String type) throws DukeTaskException {
         String str = "\nCurrent number of task(s): ";
 
         switch (type) {
@@ -101,6 +112,7 @@ public class Parser {
                 return "This todo is already in your task list.";
             } else {
                 taskList.add(todo);
+                storage.writeTaskToMemory(taskList);
                 return "The following to-do has been added:\n    "
                         + todo.toString() + str + taskList.size();
             }
@@ -117,6 +129,7 @@ public class Parser {
                         return "This deadline is already in your task list.";
                     } else {
                         taskList.add(deadline);
+                        storage.writeTaskToMemory(taskList);
                         return "The following task has been added:\n"
                                 + "    " + deadline.toString() + str + taskList.size();
                     }
@@ -140,6 +153,7 @@ public class Parser {
                         return "This event is already in your task list.";
                     } else {
                         taskList.add(event);
+                        storage.writeTaskToMemory(taskList);
                         return "The following task has been added:\n"
                                 + "    " + event.toString() + str + taskList.size();
                     }
@@ -160,7 +174,7 @@ public class Parser {
      * @param input Input from user.
      * @return True if input can be parsed, false otherwise.
      */
-    public static boolean isLocalDate(String input) {
+    public boolean isLocalDate(String input) {
         try {
             LocalDate.parse(input);
         } catch (DateTimeParseException err) {
@@ -178,12 +192,13 @@ public class Parser {
     public String markTaskAsDone(TaskList taskList, String userIndex) throws DukeArgumentException {
         int index = Integer.parseInt(userIndex) - 1;
         if (taskList.isEmpty()) {
-            return Ui.sendReply("There is no task in your list to be marked as done.");
+            return "There is no task in your list to be marked as done.";
         } else if (index < taskList.size()) {
             Task t = taskList.get(index);
             t.markAsDone();
-            return Ui.sendReply("As per requested, the following task has been marked as done:\n"
-                    + "    " + t.toString());
+            storage.writeTaskToMemory(taskList);
+            return "As per requested, the following task has been marked as done:\n"
+                    + "    " + t.toString();
         } else {
             throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
         }
@@ -198,12 +213,13 @@ public class Parser {
     public String deleteTask(TaskList taskList, String userIndex) throws DukeArgumentException {
         int index = Integer.parseInt(userIndex) - 1;
         if (taskList.isEmpty()) {
-            return Ui.sendReply("There is no task in your list to be deleted.");
+            return "There is no task in your list to be deleted.";
         } else if (index < taskList.size()) {
             Task t = taskList.get(index);
             taskList.remove(index);
-            return Ui.sendReply("As per requested, the following task has been deleted:\n"
-                    + "    " + t.toString() + "\nCurrent number of task(s): " + taskList.size());
+            storage.writeTaskToMemory(taskList);
+            return "As per requested, the following task has been deleted:\n"
+                    + "    " + t.toString() + "\nCurrent number of task(s): " + taskList.size();
         } else {
             throw new DukeArgumentException("Please provide a number between 1 and " + taskList.size() + ".");
         }
@@ -235,7 +251,7 @@ public class Parser {
      * @param task New Task that is to be added.
      * @return True if a duplicated Task exists, false otherwise.
      */
-    public static boolean duplicatedTask(TaskList taskList, Task task) {
+    public boolean duplicatedTask(TaskList taskList, Task task) {
         boolean isDuplicate = false;
         for (int i = 0; i < taskList.size(); i++) {
             Task current = taskList.get(i);

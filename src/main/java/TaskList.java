@@ -65,7 +65,7 @@ public class TaskList {
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
                 int index = i + 1;
-                sb.append("\n" + index + "." + task.toString());
+                sb.append("\n" + index + ". " + task.toString());
             }
             return sb.toString();
         }

@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -11,11 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
 import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.image.WritableImage;
+import javafx.geometry.Insets;
 
 /**
  * An example of a custom control using FXML.
@@ -38,20 +36,20 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        Rectangle clip = new Rectangle(
-                100.0, 100.0
-        );
-
+        // Circular crop the display pictures.
+        Rectangle clip = new Rectangle(100, 100);
         clip.setArcWidth(100);
         clip.setArcHeight(100);
         displayPicture.setClip(clip);
-
-        SnapshotParameters parameters = new SnapshotParameters();
-        parameters.setFill(Color.TRANSPARENT);
-        WritableImage image = new ImageView(img).snapshot(parameters, null);
-
-        dialog.setText(text);
         displayPicture.setImage(img);
+
+        // Set padding for better text view.
+        Insets insets = new Insets(20, 20, 0, 20);
+        dialog.setPadding(insets);
+
+        // Set text fill to white.
+        dialog.setText(text);
+        dialog.setStyle("-fx-text-fill: white");
     }
 
     /**
@@ -65,11 +63,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: #101010;");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: #202020;");
         db.flip();
         return db;
     }

@@ -5,6 +5,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
+import javafx.application.Platform;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -20,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/3L0N.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/M4RC.jpg"));
 
     @FXML
     public void initialize() {
@@ -30,6 +34,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.sayHello(), dukeImage));
     }
 
     /**
@@ -45,5 +50,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        // Automatically closes the window after a delay upon receiving 'bye' command.
+        if (input.toLowerCase().equals("bye")) {
+            PauseTransition endDelay = new PauseTransition(Duration.seconds(2));
+            endDelay.setOnFinished(event -> Platform.exit());
+            endDelay.play();
+        }
     }
 }
