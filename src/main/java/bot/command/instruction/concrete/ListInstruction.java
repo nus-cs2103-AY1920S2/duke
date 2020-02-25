@@ -23,8 +23,13 @@ public class ListInstruction extends OneWordInstruction
     public void readStore(Storage<Task> store, Ui ui) {
         // Prints out all the stored items,
         // in order which they were stored
-        ui.showCustomMessage(IntStream.range(0, store.getSize())
-                .mapToObj(i -> store.retrieve(i + 1))
-                .collect(Collectors.joining("\n")));
+        int storeSize = store.getSize();
+        if (storeSize <= 0) {
+            ui.showNoTasksMessage();
+        } else {
+            ui.showCustomMessage(IntStream.range(0, storeSize)
+                    .mapToObj(i -> store.retrieve(i + 1))
+                    .collect(Collectors.joining("\n")));
+        }
     }
 }
