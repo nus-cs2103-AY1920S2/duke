@@ -1,3 +1,4 @@
+### Table of Contents
 - [Welcome to Squirtle Manager!](#welcome-to-squirtle-manager-)
   * [What Squirtle Can Do](#what-squirtle-can-do-)
   * [Setting up](#setting-up)
