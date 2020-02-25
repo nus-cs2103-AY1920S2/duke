@@ -1,3 +1,13 @@
+- [Welcome to Squirtle Manager!](#welcome-to-squirtle-manager-)
+  * [What Squirtle Can Do](#what-squirtle-can-do-)
+  * [Setting up](#setting-up)
+  * [Command List](#command-list)
+  * [Sample Use](#sample-use)
+- [Credits](#credits)
+- [Feedback, Bug Reports](#feedback--bug-reports)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 # Welcome to Squirtle Manager!
 Squirtle Manager is a lightweight command line interface application built with Java and JavaFX, with a focus on object-oriented programming (OOP). Squirtle Manager makes use of local storage to remember your agenda, and is an _easy_, _quick_ and _fun_ way to stay on top of your tasks.
  
