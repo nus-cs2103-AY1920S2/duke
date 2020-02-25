@@ -31,12 +31,10 @@ public class TaskList {
      *
      * @param index the index of the task to be deleted
      * @return the deleted task
+     *
+     * @throws IndexOutOfBoundsException when index is invalid
      */
-    public Task deleteTask(int index) {
-        // check whether the index is within bounds
-        assert index >= 0;
-        assert index < tasks.size();
-
+    public Task deleteTask(int index) throws IndexOutOfBoundsException {
         return tasks.remove(index);
     }
 
@@ -45,12 +43,10 @@ public class TaskList {
      *
      * @param index the index of the task to be completed
      * @return the completed task
+     *
+     * @throws IndexOutOfBoundsException when index is invalid
      */
-    public Task completeTask(int index) {
-        // check whether the index is within bounds
-        assert index >= 0;
-        assert index < tasks.size();
-
+    public Task completeTask(int index) throws IndexOutOfBoundsException {
         Task task = tasks.get(index);
         task.tick();
         return task;

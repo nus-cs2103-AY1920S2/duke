@@ -25,8 +25,12 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task deletedTask = tasks.deleteTask(index);
-        ui.showDeletedTask(deletedTask);
-        storage.save(tasks);
+        try {
+            Task deletedTask = tasks.deleteTask(index);
+            ui.showDeletedTask(deletedTask);
+            storage.save(tasks);
+        } catch (IndexOutOfBoundsException e) {
+            new InvalidIndexCommand().execute(tasks, ui, storage);
+        }
     }
 }

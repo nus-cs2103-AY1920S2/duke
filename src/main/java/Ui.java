@@ -138,6 +138,15 @@ public class Ui {
         say(message);
     }
 
+    /**
+     * Displays the index out of bounds message.
+     */
+    public void showInvalidIndexMessage() {
+        String message = "Invalid index. Go revise your maths.";
+
+        say(message);
+    }
+
 
     /**
      * Retrieves the user command from the interface.

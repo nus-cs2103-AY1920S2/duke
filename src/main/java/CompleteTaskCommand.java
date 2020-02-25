@@ -25,8 +25,12 @@ public class CompleteTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task completedTask = tasks.completeTask(index);
-        ui.showDoneTask(completedTask);
-        storage.save(tasks);
+        try {
+            Task completedTask = tasks.completeTask(index);
+            ui.showDoneTask(completedTask);
+            storage.save(tasks);
+        } catch (IndexOutOfBoundsException e) {
+            new InvalidIndexCommand().execute(tasks, ui, storage);
+        }
     }
 }
