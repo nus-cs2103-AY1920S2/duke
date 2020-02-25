@@ -1,0 +1,17 @@
+@startuml
+hide members
+hide circle
+skinparam shadowing false
+skinparam ClassFontSize 16
+skinparam ClassFontName Arial
+
+Class Stage
+Class Scene
+Class "Root Node" as RN
+Class Node
+
+Scene "1" -up-> Stage
+RN "1"-up-> Scene
+Node "0..*" -up-> RN
+Node *--> "0..*" Node
+@enduml

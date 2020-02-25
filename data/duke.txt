@@ -1,0 +1,8 @@
+D | 1 | submit project | 2018-07-19 2359
+D | 1 | read book | 2019-08-07 1400
+D | 1 | return book | 2019-12-10 1800
+E | 1 | project meeting | 2020-08-06 1400
+T | 0 | buy book
+T | 0 | buy groceries
+T | 0 | buy bread
+T | 0 | buy pens
