@@ -36,7 +36,7 @@ Lower value has higher priority.
 
 Example:
 
-`event read books /by 2020-03-25`
+`event read books /by 2020-03-25`\
 `event explore the world /by 2060-12-31`
 
 ### 3. deadline
@@ -53,7 +53,7 @@ Lower value has higher priority.
 
 Example:
 
-`deadline read books /by 2020-03-25`
+`deadline read books /by 2020-03-25`\
 `deadline explore the world /by 2060-12-31`
 
 ### 4. list
@@ -62,21 +62,85 @@ Example:
 
 Format : `list`
 
+Example response:
+
+    Here are the tasks in your list:
+    1. [E][✘] party (by: May 23 2020)
+    2. [T][✓] read book
+    
+### 5. done
+
+`done` : Do one of your task and be done with it. 
+
+Format : `done [index]`
+
+Remarks:
+
+- `[index]` is 1-indexing (starts with 1).
 
 Example:
 
-`deadline read books /by 2020-03-25`
-`deadline explore the world /by 2060-12-31`
+`list`
 
-### `Keyword` - Describe action
+    Here are the tasks in your list:
+    1. [E][✘] party (by: May 23 2020)
+    2. [T][✓] read book
+    
+`done 1`
 
-Describe action and its outcome.
+    Nice! I've marked this task as done:
+    [E][✓] party (by: May 23 2020)
+    
+`list`
 
-Example of usage: 
+    Here are the tasks in your list:
+    1. [E][✘] party (by: May 23 2020)
+    2. [T][✓] read book
+    
+### 6. delete
+
+`delete` : Delete your existing task from the list. 
+
+Format : `delete [index]`
+
+Remarks:
+- `[index]` is 1-indexing (starts with 1).
+
+Example:
+
+`list`
+
+    Here are the tasks in your list:
+    1. [E][✘] party (by: May 23 2020)
+    2. [T][✓] read book
+    
+`delete 1`
+
+    Noted. I've removed this task:
+    [E][✓] party (by: May 23 2020)
+    Now you have 1 tasks in the list.
+    
+`list`
+
+    Here are the tasks in your list:
+    1. [T][✓] read book
+    
+    
+### 7. bye
+
+`bye`: Exit from duke
+
+Format: `bye`
+
+### 8. help
+
+`help`: get list of instruction examples you can use. 
+
+Format: `help`
+
+Example:
 
 `help`
-
-Expected outcome:
 
     Here's a list of command examples you can use:
     1. todo read book 2
