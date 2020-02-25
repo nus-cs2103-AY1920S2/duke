@@ -62,19 +62,19 @@ eg. to create a new deadline, called "download Squirtle Manager", due by 19 Febr
 ```deadline download Squirtle Manager /by 19/2/2020```|
 
 ## Sample Use
-Creating different tasks:<br>
+**Creating different tasks:**<br>
 <img src="taskcreation.png" width="400" height="600">
 
-Deleting a task:<br>
+**Deleting a task:**<br>
 <img src="delete.png" width="400" height="600">
 
-Deleting multiple tasks at once:<br>
+**Deleting multiple tasks at once:**<br>
 <img src="multidelete.png" width="400" height="600">
 
-Updating a selected task:<br>
+**Updating a selected task:**<br>
 <img src="update.png" width="400" height="600">
 
-Finding a task:<br>
+**Finding a task:**<br>
 <img src="find.png" width="400" height="600">
 
 # Credits
