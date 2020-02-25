@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the window with the FXML file.
+     */
     @FXML
     public void initialize() {
         // set width to follow scroll pane
@@ -33,6 +36,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.getStyleClass().addAll("scrollContent");
     }
 
+    /**
+     * Sets the given Duke as the logic of the chatbot.
+     *
+     * @param d The instance of Duke to be used as the logic
+     */
     public void setDuke(GuiDuke d) {
         duke = d;
 

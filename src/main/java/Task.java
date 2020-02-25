@@ -25,7 +25,7 @@ public class Task {
      */
     protected String getType() {
         return type;
-    };
+    }
 
     /**
      * Constructor for Task that takes in the description of the task.
