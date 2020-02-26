@@ -17,3 +17,4 @@ bin/
 docs/*.*
 docs/jquery/
 docs/resources/
+!Ui.png
