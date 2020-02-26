@@ -4,9 +4,7 @@ import java.time.temporal.ChronoUnit;
 
 public class Event extends Task {
 
-    protected LocalDate by;
     public String type;
-
 
     /**
      * Constructor for Event class
@@ -14,19 +12,15 @@ public class Event extends Task {
      * define the task and when the due date is
      *
      * @param description description of the event task
-     * @param by date of event
+     * @param at date of event
      */
 
-    public Event(String description, LocalDate by) {
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
+        super.at = at;
         this.type = "event";
     }
 
-    @Override
-    public LocalDate getBy() {
-        return by;
-    }
 
     @Override
     public String getType() {
@@ -37,9 +31,12 @@ public class Event extends Task {
     public String toString() {
 
         if (super.getStatus() == 0) {
-            return "[E][✗]" + super.toString() + " (at: " + by + ")";
+
+                return "[E][✗]" + super.toString() + " (at: " + super.at.trim() + ")";
+
         } else {
-            return "[E][✓]" + super.toString() + " (at: " + by + ")";
+                return "[E][✓]" + super.toString() + " (at: " + super.at.trim() + ")";
+
         }
     }
 }

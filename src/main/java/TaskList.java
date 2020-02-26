@@ -42,7 +42,7 @@ public class TaskList {
 
     public static void deleteTask(int index) {
 
-        taskList.remove(index - 1);
+        taskList.remove(index);
 
     }
 

@@ -4,6 +4,8 @@ public class Task {
 
     public String description;
     public int status = 0;
+    public String tag = "";
+    public String at;
 
 
     /**
@@ -41,7 +43,7 @@ public class Task {
     }
 
     /**
-     * Method returns sets the task status to done,
+     * Method sets the task status to done,
      * which in this case is reflected as a 0 or 1.
      *
      */
@@ -52,7 +54,7 @@ public class Task {
     }
 
     /**
-     * Method returns sets the task status to undone,
+     * Method sets the task status to undone,
      * which in this case is reflected as a 0 or 1.
      *
      */
@@ -63,7 +65,7 @@ public class Task {
     }
 
     /**
-     * Method returns sets the task type, where in this
+     * Method sets the task type, where in this
      * Task class there is no type and this function is overridden
      * in the event, deadline and todo class.
      *
@@ -75,7 +77,7 @@ public class Task {
     }
 
     /**
-     * Method returns sets the task completion date, where in this
+     * Method sets the task completion date, where in this
      * Task class there is no completion date and this function is overridden
      * in the event, deadline and todo class.
      *
@@ -85,11 +87,56 @@ public class Task {
         return LocalDate.parse("0000-00-00");
     }
 
+    /**
+     * Method sets the location associated with
+     * the task.
+     *
+     */
+
+
+    public String getAt() {
+        return at;
+    }
+
+
+    /**
+     * Method sets the name of the tag associated with
+     * the task. Task tag will be displayed as #tagname
+     * in the display messages
+     *
+     */
+
+    public void setTag(String tagName) {
+
+        tag += tagName;
+    }
+
+    /**
+     * Method returns the name of the tag associated with
+     * the task. Task tag will be displayed as #tagname
+     * in the display messages
+     *
+     */
+
+    public String getTag() {
+
+        return tag;
+    }
+
 
     @Override
     public String toString() {
 
-        return description;
+        if (tag.trim().equals("")) {
+
+            return description;
+
+        } else {
+
+            return description + " [" + tag + "]";
+
+        }
+
     }
 
 }
