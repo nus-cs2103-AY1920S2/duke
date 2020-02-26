@@ -4,18 +4,18 @@ of users' todos, deadlines and events.
 
 ## Features
 
-###Feature 1 - Todos.
+### Feature 1 - Todos.
 Todos are a type of task that contain only an indicator to show if it is down, followed by a description.\
 Todos are tagged with [T]\
 eg. [T][X] Read finish chapter 3. 
 
-###Feature 2 - Deadlines.
+### Feature 2 - Deadlines.
 Deadlines are a type of task that contain only an indicator to show if it is down, followed by a description 
 and a date to show its deadline.\
 Deadlines are tagged with [D]\
 eg. [D][X] Quizzes for CS2103T (by: May 5 2019, 18:00 PM). 
 
-###Feature 3 - Deadlines.
+### Feature 3 - Deadlines.
 Events are a type of task that contain only an indicator to show if it is down, followed by a description 
 and a date to show its deadline.\
 Deadlines are tagged with [D]\
@@ -26,18 +26,18 @@ Whenever you make any changes to the database (ie. Adding, removing or marking t
 
 ## General Commands
 
-###`list` - Shows every todo, event and deadline in a list 
+`list` - Shows every todo, event and deadline in a list 
 Example of usage:
 `list`\
 Expected outcome:
 Returns all items printed in a list format.\
 ![list](List.png)
 
-###`delete` - Deletes the task from the index
+`delete` - Deletes the task from the index
 Example of usage:
 `delete 2`\
 Expected outcome:
-Removes the 2nd task from the list in the database.
+Removes the 2nd task from the list in the database.\
 ![delete](delete.png)
 
 ###`find` - Finds all tasks related to the keyword
