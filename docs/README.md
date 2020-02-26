@@ -22,7 +22,7 @@ These tasks will be recorded and stored in **MyNeckbeard**'s database
 
 ### Feature 2 - `Update Tasks`
 
-Users are able to update the status of their task by marking their tasks as completed, and view which ones are complete **[✓]** and incomplete **[✗]**.
+Users are able to update the status of their task by marking their tasks as completed, and view which ones are complete **[✓]** and incomplete **[✗]**. Also allows for tagging of tasks with a specific tag name
 
 ### Feature 3 - `Delete Tasks`
 
@@ -48,5 +48,6 @@ Command | Purpose | Example
 `list` | Displays all tasks in the database | `list`
 `done` | Marks specific task as complete | `done (integer value)`
 `delete` | Deletes specific task from database | `delete (integer value)`
+`tag` | Tags a task with a specific tag name | `tag (integer value) (keyword)`
 `find` | Finds all tasks with specified keyword | `find (keyword)`
 `bye` | Closes application window | `bye`
