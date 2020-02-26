@@ -32,6 +32,12 @@ Examples:
 ### Listing all tasks: `list`
 Format: `list`
 
+### Marking task as done: `done`
+Format: `done [INDEX]`
+
+### Deleting a task: `delete`
+Format: `delete [INDEX]`
+
 ### Finding relevant tasks: `find`
 Finds all the tasks containing an exact match of the string.  
 Format: `find [DESCRIPTION]`
