@@ -125,7 +125,8 @@ public class Ui {
      */
     public String showDateError() {
         return (format
-                + "      Please enter a date in this format: YYYY-MM-DD !\n"
+                + "      Please enter a valid date in this format:\n"
+                + "      YYYY-MM-DD !\n"
                 + format);
     }
 
@@ -134,7 +135,8 @@ public class Ui {
      */
     public String showDateTimeError() {
         return (format
-                + "      Please enter a date & time in this format: YYYY-MM-DDTHH:MM !\n"
+                + "      Please enter a valid date & time in this format:\n"
+                + "      YYYY-MM-DDTHH:MM !\n"
                 + format);
     }
 
@@ -171,6 +173,17 @@ public class Ui {
      * @return error message
      */
     public String showActionError() {
-        return format + "      Sorry, I didn't understand that :( Please try again.\n" + format;
+        return format + "      Sorry, I didn't understand that :(\n"
+                + "Please try again!\n" + format;
+    }
+
+    /**
+     * Returns error message when user has entered duplicate task
+     *
+     * @return error message
+     */
+    public String showDuplicateError() {
+        return format + "      You have this task in the list!\n"
+                + "      Please enter a different description\n" + format;
     }
 }

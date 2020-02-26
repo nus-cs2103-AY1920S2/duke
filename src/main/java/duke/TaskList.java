@@ -32,6 +32,7 @@ public class TaskList {
             String[] temp;
             String task = "";
             checkDescription(arr.length);
+            checkDuplicates(this.tasks, arr[1]);
             Task newTask = new Task("");
             String response = "";
             int initialSize = this.tasks.size();
@@ -40,6 +41,7 @@ public class TaskList {
             case "todo":
                 newTask = new ToDo(arr[1]);
                 this.tasks.add(newTask);
+                assert (this.tasks.size() - initialSize) == 1 : "Task list should increment by 1";
                 break;
 
             case "deadline":
@@ -50,6 +52,8 @@ public class TaskList {
                     LocalDate localDate = LocalDate.parse(date);
                     newTask = new Deadline(task, localDate);
                     this.tasks.add(newTask);
+                    assert (this.tasks.size() - initialSize) == 1 : "Task list should increment by 1";
+
                 } catch (DateTimeParseException ex) {
                     response = ui.showDateError();
                 }
@@ -63,6 +67,7 @@ public class TaskList {
                     LocalDateTime localDateTime = LocalDateTime.parse(time);
                     newTask = new Event(task, localDateTime);
                     this.tasks.add(newTask);
+                    assert (this.tasks.size() - initialSize) == 1 : "Task list should increment by 1";
 
                 } catch (DateTimeParseException ex) {
                     response = ui.showDateTimeError();
@@ -77,7 +82,6 @@ public class TaskList {
                 response = ui.showTaskAdded(newTask, this.tasks);
             }
 
-            assert (this.tasks.size() - initialSize) == 1 : "Task list should increment by 1";
             return response;
 
         } catch (DukeException ex) {
@@ -202,6 +206,25 @@ public class TaskList {
 
         if (size < 2) {
             throw new DukeException(ui.showNumError());
+        }
+    }
+
+    /**
+     * Checks if user has entered duplicate task description.
+     *
+     * @param tasks of current list
+     * @param input of task description from user
+     * @throws DukeException error
+     */
+    public static void checkDuplicates(ArrayList<Task> tasks, String input) throws DukeException {
+        Ui ui = new Ui();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            String current = tasks.get(i).description;
+
+            if (input.equals(current)) {
+                throw new DukeException(ui.showDuplicateError());
+            }
         }
     }
 }
