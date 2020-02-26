@@ -18,3 +18,4 @@ docs/*.*
 docs/jquery/
 docs/resources/
 !Ui.png
+!README.md
