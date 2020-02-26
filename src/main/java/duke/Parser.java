@@ -13,7 +13,7 @@ public class Parser {
     protected Ui ui = new Ui();
 
     /**
-     * Constructor that takes in user input and loaded task list.
+     * Takes in user input and loaded task list.
      *
      * @param input of user
      * @param taskList loaded from storage
@@ -24,7 +24,7 @@ public class Parser {
     }
 
     /**
-     * Method to determine action based on user input.
+     * Determines action based on user input.
      */
     public String readCommand() {
         String[] arr = this.input.split(" ", 2);
@@ -62,7 +62,7 @@ public class Parser {
     }
 
     /**
-     * Method to check if user enters a valid input.
+     * Checks if user enters a valid input.
      *
      * @param action Input of user
      * @throws DukeException error

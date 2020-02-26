@@ -13,7 +13,7 @@ public class TaskList {
     protected Ui ui = new Ui();
 
     /**
-     * Constructor that takes in list of tasks.
+     * Takes in list of tasks.
      *
      * @param tasks that user has
      */
@@ -22,7 +22,7 @@ public class TaskList {
     }
 
     /**
-     * Method to add task into task list.
+     * Adds task into task list.
      *
      * @param arr User input
      */
@@ -86,7 +86,7 @@ public class TaskList {
     }
 
     /**
-     * Method to delete task in task list.
+     * Deletes task in task list.
      *
      * @param arr User input
      */
@@ -116,7 +116,7 @@ public class TaskList {
     }
 
     /**
-     * Method to mark task as done.
+     * Marks task as done.
      *
      * @param arr User input
      */
@@ -145,7 +145,7 @@ public class TaskList {
     }
 
     /**
-     * Method to find tasks with matching keywords.
+     * Finds tasks with matching keywords.
      *
      * @param arr User input
      */
@@ -163,7 +163,7 @@ public class TaskList {
     }
 
     /**
-     * Method to check if user has entered task description.
+     * Checks if user has entered task description.
      *
      * @param size of String array of user input
      * @throws DukeException error
@@ -177,7 +177,7 @@ public class TaskList {
     }
 
     /**
-     * Method to check if user has entered only 1 task number.
+     * Checks if user has entered only 1 task number.
      *
      * @param input of user
      * @throws DukeException error
@@ -192,7 +192,7 @@ public class TaskList {
     }
 
     /**
-     * Method to check if user has entered a task number.
+     * Checks if user has entered a task number.
      *
      * @param size of String array of user input
      * @throws DukeException error
