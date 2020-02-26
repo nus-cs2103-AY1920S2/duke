@@ -32,8 +32,8 @@ public class MainWindow extends AnchorPane {
     private static final long delayDuration = 2000;
     private boolean disableInput = false;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/stormtrooper.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/luke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/StormTrooper.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Luke.png"));
 
 
     /**
@@ -42,6 +42,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         startUp();
+        userInput.setPromptText("Enter your command here.");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 

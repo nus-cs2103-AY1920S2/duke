@@ -1,0 +1,51 @@
+#vbox {
+    -fx-background-image: url(/images/Galaxy.png);
+    -fx-background-position: cover;
+}
+
+#dialog {
+    -fx-background-radius: 15 15 15 15;
+    -fx-padding: 7 12 7 12;
+    -fx-background-color: white;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+    -fx-opacity: 0.6;
+}
+
+#displayPicture {
+    -fx-background-radius: 40;
+    -fx-background-size: stretch, contain;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+
+.text-field {
+    -fx-background-color: black;
+    -fx-prompt-text-fill: gray;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-background-radius: 0;
+}
+
+#displayPicture {
+    -fx-background-radius: 15 15 15 15;
+}
+
+.button {
+    -fx-border-color: white;
+    -fx-background-radius: 0;
+    -fx-background-color: black;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: white;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:pressed, .button:default:hover:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
