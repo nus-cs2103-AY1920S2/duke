@@ -38,13 +38,13 @@ Example of usage:
 `delete 2`\
 Expected outcome:
 Removes the 2nd task from the list in the database.\
-![delete](delete.png)
+![delete](Delete.png)
 
-###`find` - Finds all tasks related to the keyword
+`find` - Finds all tasks related to the keyword
 Example of usage: 
 `find Draw`\
 Expected outcome:
-Returns all tasks with the keyword 'book'.
+Returns all tasks with the keyword 'book'.\
 ![find](Draw.png)
 
 ###`done` - Marks the task from index as done
