@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+    Adapted from MainWindow.fxml in JavaFX tutorial found at
+    https://github.com/se-edu/duke/tree/master/tutorials
+-->
+
+<AnchorPane id="body" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bot.gui.MainWindow">
+    <children>
+      <HBox alignment="CENTER_LEFT" layoutY="546.0" minHeight="40.0" prefHeight="64.0" prefWidth="441.0" styleClass="text-input-bar">
+         <children>
+            <VBox layoutX="361.0" layoutY="10.0" prefHeight="40.0" prefWidth="3.0" />
+              <TextField id="text-input-field" fx:id="userInput" onAction="#handleUserInput" prefHeight="28.0" prefWidth="351.0" styleClass="text-input-field" text="enter text here..." />
+            <VBox prefHeight="64.0" prefWidth="4.0" />
+              <Button fx:id="enterButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="28.0" prefWidth="68.0" styleClass="text-input-enter-button" text="Enter" />
+         </children>
+      </HBox>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="555.0" prefWidth="430.0" vvalue="1.0">
+         <content>
+                <VBox fx:id="chatContainer" alignment="TOP_CENTER" minWidth="-Infinity" prefHeight="553.0" prefWidth="428.0" styleClass="scroll-pane" />
+         </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
