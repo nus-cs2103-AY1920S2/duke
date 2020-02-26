@@ -48,8 +48,6 @@ public class Ui {
                 parser.parse(userInput);
             }
 
-            parser.setLatestCommand(userInput);
-
         }
     }
 

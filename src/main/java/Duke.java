@@ -1,6 +1,7 @@
 import java.io.*;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -183,6 +184,9 @@ public class Duke extends Application {
         String output = "";
         Parser parser = new Parser();
         output += parser.parse(input);
+        if (output.equals("UwU gone so fast? You're a fat bitch anyway.")) {
+            Platform.exit();
+        }
         return output;
     }
 

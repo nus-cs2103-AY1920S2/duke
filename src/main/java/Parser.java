@@ -2,10 +2,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Parser {
 
-    public String latestCommand;
+
 
 
     public Parser() {
@@ -274,41 +275,9 @@ public class Parser {
 
 
                 }
+                
 
-                case "undo": {
 
-                    String[] latestCommandArray = latestCommand.split(" ");
-
-                    switch (latestCommandArray[0]) {
-
-                        case "done" : {
-
-                            int indexOfDoneTask = Integer.parseInt(latestCommandArray[1]);
-                            TaskList.getTask(indexOfDoneTask - 1).setStatusUndone();
-
-                        }
-
-                        case "todo" : {
-
-                            TaskList.taskList.remove(TaskList.taskList.size() - 1);
-
-                        }
-
-                        case "event" : {
-
-                            TaskList.taskList.remove(TaskList.taskList.size() - 1);
-
-                        }
-
-                        case "deadline" : {
-
-                            TaskList.taskList.remove(TaskList.taskList.size() - 1);
-
-                        }
-
-                    }
-
-                }
 
                 default:
 
@@ -323,11 +292,7 @@ public class Parser {
         return "";
     }
 
-    public void setLatestCommand(String command) {
 
-        latestCommand.equals(command);
-
-    }
 
 
 
