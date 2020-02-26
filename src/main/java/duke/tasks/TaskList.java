@@ -24,6 +24,8 @@ public class TaskList {
             done(Integer.parseInt(s.substring(5)));
         } else if (s.length() > 6 && s.substring(0,6).equals("delete")) {
             delete(Integer.parseInt(s.substring(7)));
+        } else if (s.length() > 4 && s.substring(0,4).equals("find")) {
+            find(s);
         } else if (s.length() < 5 || !s.contains(" ") || s.stripTrailing().length() < 9) {
             error(s);
         } else {
@@ -99,6 +101,27 @@ public class TaskList {
             System.out.println(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         System.out.println(linedivider);
+    }
+
+    public void find(String s) {
+        String keyword = s.substring(5).strip();
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task t : this.tasks) {
+            if (t.getDescription().equals(keyword)) {
+                matchingTasks.add(t);
+            }
+        }
+        if (matchingTasks.isEmpty()) {
+            System.out.println(linedivider + "No matching tasks were found lol\n" + linedivider);
+        } else {
+            System.out.println(linedivider + "Here are the matching tasks in your list:");
+            int entryno = 1;
+            for (Task t : matchingTasks) {
+                System.out.println(entryno + ". " + t);
+                entryno++;
+            }
+            System.out.println(linedivider);
+        }
     }
 
 }
