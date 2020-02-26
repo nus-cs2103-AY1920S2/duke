@@ -11,6 +11,7 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private String file = "duke.txt";
 
     /**
      * Public no-argument constructor for Launcher to work.
@@ -19,7 +20,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Constructor that takes in path of file to be read.
+     * Takes in path of file to be read.
      * Initializes UI, Storage and TaskList classes.
      *
      * @param filePath of stored data
@@ -39,7 +40,7 @@ public class Duke extends Application {
     public String runDuke(String input) {
         try {
             String response = "";
-            storage = new Storage("duke.txt");
+            storage = new Storage(file);
             tasks = new TaskList(storage.load());
             Parser parser = new Parser(input, tasks);
             response = parser.readCommand();

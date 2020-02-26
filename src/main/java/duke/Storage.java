@@ -14,7 +14,7 @@ public class Storage {
     protected String filePath;
 
     /**
-     * Constructor that takes in path of txt tile.
+     * Takes in path of txt tile.
      *
      * @param filePath of stored data
      */
@@ -23,7 +23,7 @@ public class Storage {
     }
 
     /**
-     * Method to read data from txt file and put into ArrayList.
+     * Reads data from txt file and put into ArrayList.
      *
      * @return Data of ArrayList stored
      */
@@ -47,7 +47,7 @@ public class Storage {
     }
 
     /**
-     * Method to store TaskList into txt file.
+     * Stores TaskList into txt file.
      *
      * @param taskList of data to be stored
      */

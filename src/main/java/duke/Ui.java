@@ -13,28 +13,28 @@ public class Ui {
     public String format = "    ----------------------------------------------\n";
 
     /**
-     * Method prints greeting message.
+     * Returns greeting message.
      */
     public String showGreeting() {
         return (format + "      Aloha, I'm Stitch!\n      What can I do for you? :)\n" + format);
     }
 
     /**
-     * Method prints loading error if data loading error occurs.
+     * Returns loading error message if data loading error occurs.
      */
     public String showLoadingError() {
         return (format + "      Oops! Something went wrong :(\n" + format);
     }
 
     /**
-     * Method prints goodbye message when program terminates.
+     * Returns goodbye message when program terminates.
      */
     public String showGoodbye() {
         return (format + "      Aloha! Hope to see you again soon! :)\n" + format);
     }
 
     /**
-     * Method prints list of tasks in user's task list.
+     * Returns list of tasks in user's task list.
      *
      * @param taskList of user tasks
      */
@@ -51,7 +51,7 @@ public class Ui {
     }
 
     /**
-     * Method prints confirmation message when user marks a task as done.
+     * Returns confirmation message when user marks a task as done.
      *
      * @param task to be marked done
      */
@@ -63,7 +63,7 @@ public class Ui {
     }
 
     /**
-     * Method prints list of tasks found with matching keyword.
+     * Returns list of tasks found with matching keyword.
      *
      * @param taskList of found tasks
      */
@@ -86,14 +86,14 @@ public class Ui {
     }
 
     /**
-     * Method prints error message when user enters invalid task number.
+     * Returns error message when user enters invalid task number.
      */
     public String showTaskError() {
         return (format + "      Sorry, this task does not exist :(\n" + format);
     }
 
     /**
-     * Method prints confirmation message when user adds a new task.
+     * Returns confirmation message when user adds a new task.
      *
      * @param task added
      * @param tasks ArrayList of user tasks
@@ -107,7 +107,8 @@ public class Ui {
     }
 
     /**
-     * Method prints confirmation message when user deletes a task.
+     * Returns confirmation message when user deletes a task.
+     *
      * @param task deleted
      * @param tasks ArrayList of user tasks
      */
@@ -120,7 +121,7 @@ public class Ui {
     }
 
     /**
-     * Method prints error message when user enters invalid date format.
+     * Returns error message when user enters invalid date format.
      */
     public String showDateError() {
         return (format
@@ -129,7 +130,7 @@ public class Ui {
     }
 
     /**
-     * Method prints error message when user enters invalid date and time format.
+     * Returns error message when user enters invalid date and time format.
      */
     public String showDateTimeError() {
         return (format
@@ -138,7 +139,7 @@ public class Ui {
     }
 
     /**
-     * Method prints error message when user enters more than 1 task number.
+     * Returns error message when user enters more than 1 task number.
      *
      * @return error message
      */
@@ -147,7 +148,7 @@ public class Ui {
     }
 
     /**
-     * Method prints error message when user does not enter any task number.
+     * Returns error message when user does not enter any task number.
      *
      * @return error message
      */
@@ -156,7 +157,7 @@ public class Ui {
     }
 
     /**
-     * Method prints error message when user does not enter task description.
+     * Returns error message when user does not enter task description.
      *
      * @return error message
      */
@@ -165,7 +166,7 @@ public class Ui {
     }
 
     /**
-     * Method prints error message when user enters invalid action.
+     * Returns error message when user enters invalid action.
      *
      * @return error message
      */
