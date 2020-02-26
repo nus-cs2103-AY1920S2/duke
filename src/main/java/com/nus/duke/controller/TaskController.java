@@ -9,6 +9,7 @@ import com.nus.duke.tasks.DisplayTaskFormatter;
 import com.nus.duke.tasks.Tasks;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.nio.file.Paths;
 
 public class TaskController {
     private DAOInterface dataObj = DAOFactory.getOrCreate();
@@ -139,12 +140,16 @@ public class TaskController {
     }
 
     /**
-     * Saves stored tasks data out to a text file
+     * Saves stored tasks data out to a text file.
+     *
+     * @// TODO: 2020-02-26     Do not hard code path. The saved directory should be abstracted into a configuration
+     *                          file that the method uses to write the file.
      *
      * @return                  Persistance succeeded / failed
      */
     public boolean persist() {
-        final String fileLocation = "/Users/johan.kok/Desktop/nus/CS2103/duke/src/main/java/resources/storage/save.txt";
+        final String presentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+        final String fileLocation = presentPath + "/duke-saved-record.txt";
         storage.save(fileLocation);
         return true;
     }
