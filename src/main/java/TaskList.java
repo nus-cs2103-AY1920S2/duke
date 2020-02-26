@@ -129,22 +129,41 @@ public class TaskList {
             taskToReturn = new Deadline(descD);
             break;
         case 'E':
+            // case for Deadline
             StringBuilder sbe = new StringBuilder();
+            ArrayList<String> day = new ArrayList<>();
             for (int i = 1; i < temp.size(); i++) {
-                if (i != (temp.size() - 1))  {
+                if (i != (temp.size() - 1)) {
                     String curr = temp.get(i);
                     if (curr.equals("at:")) {
+                        //if equals to colon, replace it with /, don't add space behind
                         sbe.append("/at ");
                     } else {
-                        sbe.append(curr);
-                        sbe.append(" ");
+                        if (i >= (temp.size() - 3)) {
+                            day.add(temp.get(i));
+                        } else {
+                            sbe.append(curr);
+                            sbe.append(" ");
+                        }
                     }
                 } else {
-                    sbe.append(temp.get(i));
+                    // Reached the end of the temp array, means also that date array is complete
+                    day.add(temp.get(i));
+                    StringBuilder sb = new StringBuilder();
+                    for (int j = 0; j < day.size(); j++) {
+                        sb.append(day.get(j));
+                        if (j != (day.size() - 1)) {
+                            sb.append(" ");
+                        }
+                    }
+                    String dateString = sb.toString();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                    LocalDate d = LocalDate.parse(dateString, formatter);
+                    sbe.append(d.format(DateTimeFormatter.ofPattern("yyyy-MM-d")));
                 }
             }
-            String descE = sbe.toString();
-            taskToReturn = new Event(descE);
+            String descE =  sbe.toString();
+            taskToReturn = new Deadline(descE);
             break;
         default:
             break;

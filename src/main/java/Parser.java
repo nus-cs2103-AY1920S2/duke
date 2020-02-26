@@ -41,8 +41,6 @@ public class Parser {
             break;
         case "todo":
         case "event":
-            command = new AddTaskCommand(cmd, input);
-            break;
         case "deadline":
             Command cmdToReturn;
             if (inputValidDateFormat(input)) {
@@ -67,10 +65,16 @@ public class Parser {
     }
 
     private boolean inputValidDateFormat(String input) {
-        String[] arr = input.split("/by");
+        String[] arr;
+        if (input.contains("/by")) {
+            arr = input.split("/by");
+        } else {
+            arr = input.split("/at");
+        }
+
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
-            LocalDate deadline = LocalDate.parse(arr[1].trim(), formatter);
+            LocalDate date = LocalDate.parse(arr[1].trim(), formatter);
             return true;
         } catch (DateTimeParseException e) {
             return false;

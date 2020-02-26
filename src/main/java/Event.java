@@ -1,26 +1,38 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a Task object with a set location that the event is occurring at, denoted by the attribute String place.
  */
 class Event extends Task {
-    private String place;
+    private LocalDate time;
 
     public Event(String task) {
-        // Pass the description of the task as the argument to the parent constructor
+        // Split the input task string by the delimiter /by
+        // first element in arr will be the description of the task, second elem will be the deadline, both are String
+        // Pass the description as the argument to the constructor
         super(task.split("/at")[0]);
         String[] arr = task.split("/at");
-        this.place = arr[1].trim();
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+            this.time = LocalDate.parse(arr[1].trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
+
     }
 
-    public String getPlace() {
-        return this.place;
+    public String getTime() {
+        return this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
     public String toString() {
         String description = super.getDescription();
         String status = super.getStatusIcon();
-        String place = this.getPlace();
+        String time = this.getTime();
 
-        return "[E]" + "[" + status + "] " + description + "at: " + place;
+        return "[E]" + "[" + status + "] " + description + "at: " + time;
     }
 }
