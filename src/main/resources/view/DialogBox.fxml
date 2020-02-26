@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" prefWidth="984.0" spacing="10.0" style="-fx-background-color: #120310;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" lineSpacing="18.0" text="labellabellabelllabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabellabelabellabellabellabellabellabellabellabellabellabellabellabellabel" wrapText="true">
+         <padding>
+            <Insets bottom="10.0" top="15.0" />
+         </padding>
+         <font>
+            <Font name="PT Mono Bold" size="15.0" />
+         </font>
+         <HBox.margin>
+            <Insets bottom="25.0" left="5.0" right="5.0" top="25.0" />
+         </HBox.margin>
+         <textFill>
+            <LinearGradient cycleMethod="REFLECT" endX="0.9448441247002397" endY="0.39328537170263794" startX="0.14388489208633087" startY="0.7553956834532374">
+               <stops>
+                  <Stop color="#00fdff" />
+                  <Stop color="#00ff61" offset="0.9962335216572504" />
+                  <Stop color="#00ff61" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/110019499.jpg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <HBox.margin>
+            <Insets bottom="25.0" left="35.0" right="35.0" top="25.0" />
+         </HBox.margin></ImageView>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+   <effect>
+      <InnerShadow choke="0.43" color="#07d7a6" height="90.79" radius="47.0625" width="99.46" />
+   </effect>
+</fx:root>
