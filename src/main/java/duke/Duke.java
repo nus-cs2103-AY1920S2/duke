@@ -32,7 +32,6 @@ public class Duke {
         tasks = new TaskList();
 
         Ui.printGreetings();
-
             try{
                 Ui.readInput(list);
             } catch (IOException e) {
