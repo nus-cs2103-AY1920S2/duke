@@ -12,7 +12,7 @@ checkstyle {
 
 shadowJar {
     archivesBaseName = "duke"
-    archiveVersion = "0.1.2"
+    archiveVersion = "0.2"
     archiveClassifier = null
     archiveAppendix = null
 }
@@ -26,7 +26,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 run {
@@ -35,8 +35,8 @@ run {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
-
     String javaFxVersion = '11'
+
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -51,11 +51,12 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
+/*
 javafx {
     version = "11.0.2"
     modules = ['javafx.controls', 'javafx.fxml']
 }
-
+*/
 test {
     useJUnitPlatform()
 }

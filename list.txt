@@ -1,6 +1,2 @@
 [T][✓] sleep
-[T][✘] eat
-[T][✓] sleep early
-[T][✘] eat
-[D][✓] homework by: Oct 2 2020
-[E][✓] meeting at: smu
+[D][✘] homework by: Feb 28 2020
