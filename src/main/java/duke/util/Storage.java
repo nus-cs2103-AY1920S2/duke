@@ -25,6 +25,10 @@ public class Storage {
         this.dataPath = Paths.get(rootPath.toString(), "data", "duke.txt");
     }
 
+    /**
+     * Loads each line from .txt file
+     * @return returns a
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks =  new ArrayList<>();
         try {
@@ -41,6 +45,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * saves a list of tasks in a .txt file
+     * @param taskList to be saved in .txt file
+     */
     public void save(ArrayList<Task> taskList) {
         StringBuilder sb = new StringBuilder();
         for (Task t : taskList) {

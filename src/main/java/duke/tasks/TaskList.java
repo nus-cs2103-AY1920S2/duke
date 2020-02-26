@@ -12,11 +12,20 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
     private String linedivider = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    private Storage storage = new Storage();
+
+    /**
+     * Contructs a taskList object.
+     * @param t arrayList of tasks
+     */
     public TaskList(ArrayList<Task> t) {
         tasks = t;
     }
-    private Storage storage = new Storage();
 
+    /**
+     * Executes instructions based on user input from CLI.
+     * @param s String that is input by the user
+     */
     public void run(String s) {
         if (s.equals("list")) {
             list();
@@ -31,6 +40,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints out current list of tasks.
+     */
     public void list() {
         System.out.println(linedivider + "Here are the tasks in your list:");
         int entryno = 1;
@@ -41,6 +53,10 @@ public class TaskList {
         System.out.println(linedivider);
     }
 
+    /**
+     * Adds a task to the current taskList.
+     * @param s String that is input by the user
+     */
     public void add(String s) {
         int whitespaceidx = s.indexOf(" ");
         String taskType = s.substring(0, whitespaceidx);
@@ -70,13 +86,21 @@ public class TaskList {
         storage.save(tasks);
     }
 
+    /**
+     * Marks a task as done.
+     * @param n index of task in taskList to be marked as done
+     */
     public void done(int n) {
-        tasks.get(n-1).makeDone();
-        System.out.println(linedivider + "Nice! I've marked this task as done:\n" + tasks.get(n-1)
+        tasks.get(n - 1).makeDone();
+        System.out.println(linedivider + "Nice! I've marked this task as done:\n" + tasks.get(n - 1)
                 + "\n" + linedivider);
         storage.save(tasks);
     }
 
+    /**
+     * Deletes a task from the current taskList.
+     * @param n index of task to be deleted
+     */
     public void delete(int n) {
         Task rm = tasks.remove(n - 1);
         System.out.println(linedivider + "Noted. I've removed this task:\n" + rm + "\n"
@@ -84,6 +108,10 @@ public class TaskList {
         storage.save(tasks);
     }
 
+    /**
+     * Prints error messages for common errors based on invalid user input.
+     * @param s String that is input by user
+     */
     public void error(String s) {
         System.out.println(linedivider);
         if (s.length() >= 4 && (s.stripTrailing().equals("todo")
