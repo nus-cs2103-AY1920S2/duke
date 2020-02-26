@@ -9,12 +9,18 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a new Duke object.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Initialises execution of Duke application.
+     */
     public void run() {
         ui.welcome();
         while (true) {

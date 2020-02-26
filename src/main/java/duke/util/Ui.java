@@ -11,7 +11,9 @@ public class Ui {
         return sc.nextLine();
     }
 
-
+    /**
+     * prints welcome message when application is launched.
+     */
     public void welcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
