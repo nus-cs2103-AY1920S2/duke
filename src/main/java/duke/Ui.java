@@ -20,14 +20,20 @@ public class Ui {
     static final String UPDATED_TASK = "Updated this task to:\n    ";
     static final String NO_FIELD_TO_UPDATE = "No field to update!";
     static final String CANNOT_SET_DATE_TIME_TO_TODO = "Cannot set date or time to todo!";
+    static final String CANNOT_SORT_TODO_BY_DATE_TIME = "Cannot sort todo by date/time!";
     static final String NEED_TO_SPECIFY_PERIOD = "Need to specify period!";
     static final String NEED_TO_SPECIFY_DATE = "Need to specify date!";
     static final String WELCOME_MESSAGE = "Welcome to Duke!\n";
+    static final String NOT_ENOUGH_PARAMETERS = "Not enough information to process your request!";
+    static final String SORTED_BY_NAME = "Sorted your tasks by name.";
+    static final String SORTED_BY_DATE_TIME = "Sorted your tasks by date.";
 
-    public static String readNextCommand(String input, TaskList tasklist) {
+
+    public static String readNextCommand(String input, TaskList[] taskLists) {
         String[] command = Parser.parseInput(input.strip());
-        return Parser.processCommand(command, tasklist);
+        return Parser.processCommand(command, taskLists);
     }
+
 
     public static String taskCountMessage(int listSize) {
         return "\nNow you have "+ listSize + (listSize == 1 ? " task" : " tasks") + " in the list.";
@@ -65,7 +71,7 @@ public class Ui {
         if (upcomingDeadlines.isEmpty()) {
             return "You have no upcoming deadlines ";
         }
-        upcomingDeadlines.sortTime();
+        upcomingDeadlines.sortDateTime();
         return "Your upcoming deadlines ";
     }
 
@@ -73,7 +79,7 @@ public class Ui {
         if (upcomingEvents.isEmpty()) {
             return "You have no upcoming events ";
         }
-        upcomingEvents.sortTime();
+        upcomingEvents.sortDateTime();
         return "Your upcoming events ";
     }
 

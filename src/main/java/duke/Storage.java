@@ -21,13 +21,15 @@ public class Storage {
 
     /**
      * This method handles loading of an existing data file stored in the directory 'data', where the program is
-     * located, and populate a new TaskList object.
+     * located, and populate the respective TaskList with Tasks.
      * If the directory is absent, a new directory is created.
      * If the directory is created and the data file is absent, a new data file is created.
-     * @return a new TaskList object.
+     * @return a list of TaskList objects.
      */
-    public static TaskList load() {
-        TaskList tasklist = new TaskList();
+    public static TaskList[] load () {
+        TaskList todoList = new TaskList();
+        TaskList deadlineList = new TaskList();
+        TaskList eventList = new TaskList();
 
         try {
             // Checks if the directory exists, and creates it if it does not exist.
@@ -45,7 +47,14 @@ public class Storage {
                     if (line == null) {
                         break;
                     }
-                    loadTaskIntoDuke(line, tasklist);
+                    Task thisTask = createTaskFromFile(line);
+                    if (thisTask instanceof Todo) {
+                        todoList.add(thisTask);
+                    } else if (thisTask instanceof Deadline) {
+                        deadlineList.add(thisTask);
+                    } else if (thisTask instanceof Event) {
+                        eventList.add(thisTask);
+                    }
 
                 } catch (IOException e) {
                     System.out.println("Oops! Unable to read save file due to " + e + "!");
@@ -61,47 +70,49 @@ public class Storage {
             System.out.println("Oops! Unable to create or load save file due to " + e + "!");
         }
 
-        return tasklist;
+        return new TaskList[] {todoList, deadlineList, eventList};
     }
 
     /**
      * This method saves a current TaskList object into the data file in the directory 'data', where the program
      * is located, assuming that the file has already been created before or during the launch of the program.
-     * @param tasklist the TaskList object to parse into the data file.
+     * @param tasklists the task lists to parse into the data file.
      */
-    public static void save(TaskList tasklist) throws IOException {
+    public static void save(TaskList[] tasklists) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(savedData));
-        String delimiter = " ~ ";
-
-        for (Task thisTask : tasklist.getList()) {
-            String taskStr = thisTask.getTaskType() + delimiter
-                    + (thisTask.isDone() ? "1" : "0") + delimiter
-                    + thisTask.getTaskName() + delimiter
-                    + (thisTask instanceof Todo ? "" : thisTask.getTaskDateTime()) + "\n";
-            writer.write(taskStr);
+        for (TaskList thisList : tasklists) {
+            for (Task thisTask : thisList.getList()) {
+                String taskStr = thisTask.getTaskType() + delimiter
+                        + (thisTask.isDone() ? "1" : "0") + delimiter
+                        + thisTask.getTaskName() + delimiter
+                        + (thisTask instanceof Todo ? "" : thisTask.getTaskDateTime()) + "\n";
+                writer.write(taskStr);
+            }
         }
         writer.close();
     }
 
-
     /**
-     * Processes the line read from the data file and stores it into the main application.
-     * @param line The line read from the data file.
-     * @param tasklist The full tasklist.
-     * @throws IOException
-     * @throws DateTimeParseException
+     * Creates a new Task from each line in the data file.
+     * @param line The input line from the data file.
+     * @return a Task object.
+     * @throws DateTimeParseException If the Date/Time is in the wrong format.
      */
-    public static void loadTaskIntoDuke(String line, TaskList tasklist) throws IOException, DateTimeParseException {
+    public static Task createTaskFromFile(String line) throws DateTimeParseException {
         String[] taskContent = line.split(delimiter);
         boolean isDone = taskContent[1].equals("1");
-
-        if (taskContent[0].equals("T")) {
-            tasklist.newTodo(isDone, taskContent[2]);
-        } else if (taskContent[0].equals("D")) {
-            tasklist.newDeadline(isDone, taskContent[2], Parser.parseDateTime(taskContent[3]));
-        } else if (taskContent[0].equals("E")) {
-            tasklist.newEvent(isDone, taskContent[2], Parser.parseDateTime(taskContent[3]));
+        switch(taskContent[0]) {
+            case "T":
+                return new Todo(isDone, taskContent[2]);
+            case "D":
+                return new Deadline(isDone, taskContent[2], Parser.parseDateTime(taskContent[3]));
+            case"E":
+                return new Event(isDone, taskContent[2], Parser.parseDateTime(taskContent[3]));
+            default:
+                return null;
         }
     }
+
+
 
 }

@@ -6,11 +6,12 @@ import java.util.ArrayList;
 public class Duke {
 
     List<String> log;
-    TaskList masterList;
+    TaskList[] taskLists;
 
     public Duke() {
         this.log = new ArrayList<String>();
-        this.masterList = Storage.load();
+
+        this.taskLists = Storage.load();
     }
 
     /**
@@ -18,7 +19,7 @@ public class Duke {
      * @return the result after processing the user input.
      */
     public String getResponse(String input) {
-        return Ui.readNextCommand(input, this.masterList);
+        return Ui.readNextCommand(input, taskLists);
     }
 
 }

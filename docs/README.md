@@ -63,7 +63,6 @@ Views all items of the specified type in your to-do list.
 
 Example of usage: 
 
-* `list`
 * `list all`
 
 Lists all items regardless of type.
@@ -79,35 +78,35 @@ Lists todo, deadline, or event items respectively.
 ### Mark a task as done
 Mark any task as done.
 #### Usages:
-#### `done [position]`
+#### `done [task_type] [position]`
 
-Mark the task at the specific position in your full list as done.
+Mark the task at the specific position in any task list as done.
 
 Example of usage: 
 
-* `done 3`
+* `done todo 3`
 
-  Marks the 3rd task in your full list as done.
+  Marks the 3rd task in your todo list as done.
   
   
 
 ### Delete a task
 Delete any task from your list.
 #### Usages:
-#### `delete [position]`
+#### `delete [task_type] [position]`
 
-Deletes the task at the specific position in your full list
+Deletes the task at the specific position in any task list.
 
 Example of usage: 
 
-* `delete 3`
+* `delete event 3`
 
-  Deletes the 3rd task in your full list.
+  Deletes the 3rd task in your event list.
   
   
   
 ### Find a task
-Delete any task from your list.
+Finds any task from your list.
 #### Usages:
 #### `find [keyword]`
 
@@ -124,20 +123,39 @@ Example of usage:
 ### Update a task
 Update the fields of any task.
 #### Usages:
-#### `update [position] [field], [keyword]`
+#### `update [task_type] [position] [field] [keyword]`
 
 Updates the specified field of the event at the position to your new keyword.
 
 Example of usage:
 
-* `update 1 name, Finish Homework`
+* `update todo 1 name Finish Homework`
 
-  Updates the name of the 1st item in your list to `Finish Homework`.
+  Updates the name of the 1st item in your todo list to `Finish Homework`.
   
-* `update 4 time, 1500`
+* `update deadline 4 time 1500`
 
-  Updates the time of the 4th item in your list to `1500`.
+  Updates the time of the 4th item in your deadline list to `1500`.
   
+
+
+### Sort a list
+You can sort any list by either name in alphabetical order, or by date in earliest first.
+#### Usages:
+#### `sort [task_type] [sorting_type]`
+
+Sorts the specified list by the sorting type.
+
+Example of usage:
+
+* `sort todo name`
+
+Sorts the to-do list by name.
+
+* `sort event date`
+
+Sorts the event list by date and time, earliest first.
+
 
 
 ### View an overview of your tasks over a specified period
