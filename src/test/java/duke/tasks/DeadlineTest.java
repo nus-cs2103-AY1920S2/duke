@@ -3,10 +3,10 @@ package duke.tasks;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TodoTest {
+public class DeadlineTest {
 
     @Test
     public void testToSaveForm() {
-        assertEquals("T , N , test\n", new Todo("test").toSaveForm());
+        assertEquals("D , N , test , 2020-02-20\n", new Deadline("test", "2020-02-20").toSaveForm());
     }
 }
