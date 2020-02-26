@@ -77,9 +77,11 @@ public class Parser {
                     switch (oldTask.getType()) {
                         case "todo": {
 
+                            String oldTag = oldTask.getTag();
                             ToDo newTask = new ToDo(oldTask.getDescription());
                             newTask.setStatusDone();
                             assert newTask.getStatus() == 1 : "Status should be 1";
+                            newTask.setTag(oldTag);
                             TaskList.set(index - 1, newTask);
                             Storage.updateFile(TaskList.taskList);
                             return "I... I've marked this as done... notice me pls: \n" + newTask.toString();
@@ -87,9 +89,11 @@ public class Parser {
                         }
                         case "deadline": {
 
+                            String oldTag = oldTask.getTag();
                             Deadline newTask = new Deadline(oldTask.getDescription(), oldTask.getBy());
                             newTask.setStatusDone();
                             assert newTask.getStatus() == 1 : "Status should be 1";
+                            newTask.setTag(oldTag);
                             TaskList.set(index - 1, newTask);
                             Storage.updateFile(TaskList.taskList);
                             return "I... I've marked this as done... notice me pls: \n" + newTask.toString();
@@ -97,9 +101,11 @@ public class Parser {
                         }
                         case "event": {
 
-                            Event newTask = new Event(oldTask.getDescription(), oldTask.getBy());
+                            String oldTag = oldTask.getTag();
+                            Event newTask = new Event(oldTask.getDescription(), oldTask.getAt());
                             newTask.setStatusDone();
                             assert newTask.getStatus() == 1 : "Status should be 1";
+                            newTask.setTag(oldTag);
                             TaskList.set(index - 1, newTask);
                             Storage.updateFile(TaskList.taskList);
                             return "I... I've marked this as done... notice me pls: \n" + newTask.toString();
@@ -232,11 +238,10 @@ public class Parser {
                                 eventString += " " + taskDescription[i];
                             }
 
-                            LocalDate eventTiming = LocalDate.parse(eventString.trim());
-                            Event newEvent = new Event(taskDescriptionString, eventTiming);
+                            Event newEvent = new Event(taskDescriptionString, eventString);
                             TaskList.addTask(newEvent);
                             String taskMessage = "E | " + newEvent.getStatus() + " |" + newEvent.getDescription()
-                                    + " | " + eventTiming + "\n";
+                                    + " | " + eventString + "\n";
                             Storage.writeToFile(taskMessage);
                             return "Senpai I have added this event: \n" + "[E][✗]" +
                                     newEvent.getDescription() + " (at:" + eventString + ")" + "\n"
@@ -275,7 +280,21 @@ public class Parser {
 
 
                 }
-                
+
+                //tag will set the task's tag to the specific tag name
+
+                case "tag": {
+
+                    int taskNumber = Integer.parseInt(taskDescription[1]);
+                    String tagName = taskDescription[2];
+                    Task targetTask = TaskList.taskList.get(taskNumber - 1);
+                    targetTask.setTag("#" + tagName);
+                    TaskList.set(taskNumber - 1, targetTask);
+                    Storage.updateFile(TaskList.taskList);
+
+                    return "Tagged required task as #" + tagName;
+                }
+
 
 
 

@@ -6,6 +6,7 @@ public class Deadline extends Task {
 
     protected LocalDate by;
     public String type;
+    public String tag;
 
 
     /**
@@ -23,7 +24,7 @@ public class Deadline extends Task {
         this.type = "deadline";
     }
 
-    @Override
+
     public LocalDate getBy() {
 
         return by;

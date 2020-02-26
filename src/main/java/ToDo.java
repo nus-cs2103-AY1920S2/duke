@@ -3,6 +3,7 @@ import java.time.LocalDate;
 public class ToDo extends Task {
 
     public String type;
+    public String tag;
 
     /**
      * Constructor for ToDo class
@@ -15,6 +16,7 @@ public class ToDo extends Task {
         super(description);
         this.type = "todo";
     }
+
 
     @Override
     public LocalDate getBy() {

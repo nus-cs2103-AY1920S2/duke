@@ -59,9 +59,16 @@ public class Storage {
             switch (readTaskArray[0]) {
                 case "T": {
 
+                    int indexOfSlashForTag = 0;
+
                     String taskDescription = "";
                     for (int i = 4; i < readTaskArray.length; i++) { // Extract the description of the task
-                        taskDescription += " " + readTaskArray[i];
+                        if(readTaskArray[i].equals("|")) {
+                            indexOfSlashForTag = i;
+                            break;
+                        } else {
+                            taskDescription += " " + readTaskArray[i];
+                        }
                     }
 
 
@@ -69,6 +76,17 @@ public class Storage {
 
                     if (readTaskArray[2].equals("1")) { // Sets status as done if it is done
                         newTask.setStatusDone();
+                    }
+
+                    //Upload the tag
+
+                    if (indexOfSlashForTag != 0) {
+                        String uploadingTaskTag = "";
+                        for (int i = indexOfSlashForTag + 1; i < readTaskArray.length; i++) {
+                            uploadingTaskTag += readTaskArray[i];
+                        }
+                        newTask.setTag(uploadingTaskTag);
+
                     }
 
                     list.add(newTask);
@@ -79,20 +97,27 @@ public class Storage {
                 case "D": {
 
                     String taskDescription = "";
-                    int indexOfSlash = 0;
+                    int indexOfSlashForDescription = 0;
                     String timing = "";
+                    int indexOfSlashForTag = 0;
 
                     for (int i = 4; i < readTaskArray.length; i++) {
 
                         if (readTaskArray[i].equals("|")) {
-                            indexOfSlash += i;
+                            indexOfSlashForDescription += i;
                             break;
                         }
                         taskDescription += " " + readTaskArray[i];
                     }
 
-                    for (int i = indexOfSlash + 1; i < readTaskArray.length; i++) {
-                        timing += " " + readTaskArray[i];
+
+                    for (int i = indexOfSlashForDescription + 1; i < readTaskArray.length; i++) {
+                        if(readTaskArray[i].equals("|")) {
+                            indexOfSlashForTag = i;
+                            break;
+                        } else {
+                            timing += " " + readTaskArray[i];
+                        }
                     }
 
                     LocalDate timingLocalDate = LocalDate.parse(timing.trim());
@@ -103,6 +128,15 @@ public class Storage {
                         newTask.setStatusDone();
                     }
 
+                    if (indexOfSlashForTag != 0) {
+                        String uploadingTaskTag = "";
+                        for (int i = indexOfSlashForTag + 1; i < readTaskArray.length; i++) {
+                            uploadingTaskTag += readTaskArray[i];
+                        }
+                        newTask.setTag(uploadingTaskTag);
+
+                    }
+
                     list.add(newTask);
 
 
@@ -111,28 +145,42 @@ public class Storage {
                 case "E": {
 
                     String taskDescription = "";
-                    int indexOfSlash = 0;
-                    String timing = "";
+                    int indexOfSlashForDescription = 0;
+                    String location = "";
+                    int indexOfSlashForTag = 0;
 
                     for (int i = 4; i < readTaskArray.length; i++) {
 
                         if (readTaskArray[i].equals("|")) {
-                            indexOfSlash += i;
+                            indexOfSlashForDescription += i;
                             break;
                         }
                         taskDescription += " " + readTaskArray[i];
                     }
 
-                    for (int i = indexOfSlash + 1; i < readTaskArray.length; i++) {
-                        timing += " " + readTaskArray[i];
+                    for (int i = indexOfSlashForDescription + 1; i < readTaskArray.length; i++) {
+                        if(readTaskArray[i].equals("|")) {
+                            indexOfSlashForTag = i;
+                            break;
+                        } else {
+                            location += " " + readTaskArray[i];
+                        }
                     }
 
-                    LocalDate timingLocalDate = LocalDate.parse(timing.trim());
 
-                    Event newTask = new Event(taskDescription, timingLocalDate);
+                    Event newTask = new Event(taskDescription, location);
 
                     if (readTaskArray[2].equals("1")) { // Sets status as done if it is done
                         newTask.setStatusDone();
+                    }
+
+                    if (indexOfSlashForTag != 0) {
+                        String uploadingTaskTag = "";
+                        for (int i = indexOfSlashForTag + 1; i < readTaskArray.length; i++) {
+                            uploadingTaskTag += readTaskArray[i];
+                        }
+                        newTask.setTag(uploadingTaskTag);
+
                     }
 
                     list.add(newTask);
@@ -159,24 +207,39 @@ public class Storage {
             switch (t.getType()) {
                 case "todo": {
 
-                    String taskMessage = "T | " + t.getStatus() + " |" + t.getDescription() + "\n";
-                    writeToFile(taskMessage);
+                    String taskMessage = "T | " + t.getStatus() + " |" + t.getDescription();
+
+                    if (!t.getTag().equals("")) {
+                        taskMessage += " | " + t.getTag();
+                    }
+
+                    writeToFile(taskMessage + "\n");
 
                     break;
                 }
                 case "deadline": {
 
                     String taskMessage = "D | " + t.getStatus() + " |" + t.getDescription()
-                            + " | " + t.getBy() + "\n";
-                    writeToFile(taskMessage);
+                            + " | " + t.getBy();
+
+                    if (!t.getTag().equals("")) {
+                        taskMessage += " | " + t.getTag();
+                    }
+
+                    writeToFile(taskMessage + "\n");
 
                     break;
                 }
                 case "event": {
 
                     String taskMessage = "E | " + t.getStatus() + " |" + t.getDescription()
-                            + " | " + t.getBy() + "\n";
-                    writeToFile(taskMessage);
+                            + " | " + t.getAt();
+
+                    if (!t.getTag().equals("")) {
+                        taskMessage += " | " + t.getTag();
+                    }
+
+                    writeToFile(taskMessage + "\n");
 
                     break;
                 }
