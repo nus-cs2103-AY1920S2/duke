@@ -17,7 +17,7 @@ public class TaskList {
     public String printList() {
         String reply = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            reply += (Integer.toString(i + 1) + ". " + tasks.get(i).toString());
+            reply += (Integer.toString(i + 1) + ". " + tasks.get(i).toString()) + "\n";
         }
         return reply;
     }

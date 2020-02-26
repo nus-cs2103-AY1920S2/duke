@@ -154,7 +154,7 @@ public class Duke extends Application {
 
 
     static Scanner sc = new Scanner(System.in);
-    static final String FILEPATH = "../../data/duke.txt";
+    static final String FILEPATH = "duke.txt";
     static Ui ui;
     static TaskList tasks;
     static Storage storage;
@@ -234,7 +234,10 @@ public class Duke extends Application {
             if (input.split(" ")[STARTING_VARIABLE].toLowerCase().equals("delete")) {
                 reply = deleteTask(input);
                 storage.saveFile(taskToParse(tasks));
-            } else {
+            } else if (input.equals("help")){
+                reply = Helper.printHelp();
+            }
+            else {
                 reply = addTask(input);
             }
         } catch (TodoException e) {
