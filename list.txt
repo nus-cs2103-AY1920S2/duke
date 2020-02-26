@@ -1,6 +1,3 @@
-[T][✓] sleep
-[D][✘] homework by: Feb 28 2020
 [T][✘] eat
-[T][✘] buy groceries
-[D][✘] CS1231 Homework by: Feb 28 2020
-[E][✘] meeting at: COM1
+[D][✓] homework by: Feb 28 2020
+[E][✓] meeting at: Mar 10 2020

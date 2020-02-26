@@ -163,7 +163,7 @@ public class TaskList {
                 }
             }
             String descE =  sbe.toString();
-            taskToReturn = new Deadline(descE);
+            taskToReturn = new Event(descE);
             break;
         default:
             break;

@@ -40,6 +40,8 @@ public class Parser {
             command = new FindCommand(input);
             break;
         case "todo":
+            command = new AddTaskCommand(cmd, input);
+            break;
         case "event":
         case "deadline":
             Command cmdToReturn;
