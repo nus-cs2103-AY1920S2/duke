@@ -92,10 +92,17 @@ public class Task{
     public String getStringDate(){
         return "";
     }
-
+    /**
+     * This method is set the type of a Task e.g (T,E,D)
+     */
     public void setType(String type){
         this.type = type;
     }
+
+    /**
+     * This method is return the type of a Task e.g (T,E,D)
+     * @return type
+     */
     public String getType(){
         return this.type;
     }
