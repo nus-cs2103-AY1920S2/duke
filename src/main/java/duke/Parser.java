@@ -326,7 +326,7 @@ class Parser {
                 throw new InvalidCommandException("Hmm... I'm not sure how long you want to snooze the task for.");
             }
             return Duration.of(amount, chronoUnit);
-        } catch (NumberFormatException e) {
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidCommandException("Hmm... I'm not sure how long you want to snooze the task for.");
         }
     }
