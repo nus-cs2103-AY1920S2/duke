@@ -1,5 +1,7 @@
 package duke;
 
+// @@author j-lum-reused
+// Reused from JavaFX Tutorial Part 1 and JavaFX Tutorial Part 4 with minor modifications
 import javafx.application.Application;
 
 /**
@@ -10,3 +12,4 @@ public class Launcher {
         Application.launch(Main.class, args);
     }
 }
+//@@author

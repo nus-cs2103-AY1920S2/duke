@@ -1,5 +1,7 @@
 package duke;
 
+//@@author j-lum-reused
+//Reused from JavaFX Tutorial Part 4 with modifications
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -32,3 +34,4 @@ public class Main extends Application {
         }
     }
 }
+//@@author

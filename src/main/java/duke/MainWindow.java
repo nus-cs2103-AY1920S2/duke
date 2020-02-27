@@ -1,5 +1,7 @@
 package duke;
 
+//@@author j-lum-reused
+//Reused from JavaFX Tutorial Part 4 with modifications
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -13,6 +15,7 @@ import javafx.scene.paint.Color;
  * A controller for <code>MainWindow</code>, which provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    // Duke image taken from https://wiki.openjdk.java.net/display/duke/Gallery
     private static final Image DUKE_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/duke.png"));
     private static final Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/user.png"));
     private static final Color DUKE_COLOR = Color.GHOSTWHITE;
@@ -80,3 +83,4 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 }
+//@@author

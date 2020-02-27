@@ -1,5 +1,7 @@
 package duke;
 
+//@@author j-lum-reused
+//Reused from JavaFX Tutorial Part 4 with modifications
 import java.io.IOException;
 import java.util.Collections;
 
@@ -78,3 +80,4 @@ public class DialogBox extends HBox {
         setAlignment(Pos.BOTTOM_RIGHT);
     }
 }
+//@@author
