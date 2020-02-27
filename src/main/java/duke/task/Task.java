@@ -63,6 +63,10 @@ public abstract class Task {
      * @return number of tags, separated by |.
      */
     private String getTagsIcon() {
+        if (this.tags.size() == 0) {
+            return "";
+        }
+
         String str = "";
         if (hasTags()) {
             for (int i = 0; i < this.tags.size(); i++) {
@@ -80,8 +84,9 @@ public abstract class Task {
      */
     @Override
     public String toString() {
+        String tags = getTagsIcon();
         return "[" + getStatusIcon() + "] " + getDescription()
-                + " #<" + getTagsIcon() + ">";
+                + (tags.length() == 0 ? "" : "  #<" + getTagsIcon() + ">");
     }
 
     /**

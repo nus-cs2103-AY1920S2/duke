@@ -37,7 +37,6 @@ public class Storage {
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //System.out.println("Cannot open data file!");
             return new ArrayList<>();
         }
 

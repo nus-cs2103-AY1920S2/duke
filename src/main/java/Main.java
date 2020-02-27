@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -12,8 +11,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    //private String dir = System.getProperty("user.dir");
-    //private String path = dir + File.separator + "data" + File.separator + "duke.txt";
     private String path = "duke.txt";
 
     private Duke duke = new Duke(path);

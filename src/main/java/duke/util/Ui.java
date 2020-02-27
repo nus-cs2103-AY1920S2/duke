@@ -38,6 +38,9 @@ public class Ui {
      * @return A string that list our all tasks.
      */
     public String showList(TaskList tasks) {
+        if (tasks.getTaskNumber() == 0) {
+            return "OOPs! You don't have any task now. Try to add some!";
+        }
         String str = "Here are the tasks in your list:\n";
         for (int i = 1; i <= tasks.getTaskNumber(); i++) {
             Task currTask = tasks.getTask(i - 1);
@@ -79,7 +82,9 @@ public class Ui {
      */
     private String showTaskNumber(TaskList tasks) {
         return "Now you have "
-                + tasks.getTaskNumber() + " tasks in the list.\n";
+                + tasks.getTaskNumber()
+                + (tasks.getTaskNumber() == 1 ? " task" : " tasks")
+                +" in the list.\n";
     }
 
     /**
