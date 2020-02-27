@@ -34,12 +34,13 @@ public class Ui {
      * Shows the welcome message on start up.
      */
     public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String greetings = "Hello! I'm\n" + logo + "\nWhat can I do for you?\n";
+        String logo = " ______ _____  _____ _____ \n"
+                + "|  ____|  __ \\|_   _/ ____|\n"
+                + "| |__  | |__) | | || | \n"
+                + "|  __| |  _  /  | || | \n"
+                + "| |____| | \\ \\ _| || |__\n"
+                + "|______|_|  \\_\\_____\\_____|\n";
+        String greetings = "Hi Stan! This is\n" + logo + "\nGive me some things to do so I can lose some weight!\n";
         showMessage(greetings);
     }
 
