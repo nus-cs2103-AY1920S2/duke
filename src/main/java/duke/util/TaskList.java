@@ -148,8 +148,7 @@ public class TaskList {
             if (t.isDone) {
                 System.out.println("done");
                 sb.append("This task was already marked as done.\n");
-                t.markAsDone();
-                sb.append("Great job! I've marked this task as done:\n\t").append(t).append("\n");
+                sb.append(t).append("\n");
                 storage.clearAllData();
                 storage.updateData();
             } else {
@@ -175,7 +174,7 @@ public class TaskList {
                 storage.clearAllData();
                 storage.updateData();
             } else {
-                sb.append("This task has not yet been completed.\n\t");
+                sb.append("This task has not yet been completed.\n\t").append(t).append("\n");
             }
             return sb.toString();
         } else {
