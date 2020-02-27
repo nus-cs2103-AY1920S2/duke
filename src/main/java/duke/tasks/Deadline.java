@@ -9,11 +9,16 @@ public class Deadline extends Task {
     protected String by = "";
     protected LocalDate date;
 
+    /**
+     * Constructor for Deadline object.
+     * @param description The given description for this Deadline.
+     * @param by The given description for the deadline timing in String format.
+     */
     public Deadline(String description, String by) {
         super(description);
         try {
             this.date = LocalDate.parse(by);
-            assert this.date.isAfter(LocalDate.now()): "Invalid early date";
+            assert this.date.isAfter(LocalDate.now()) : "Invalid early date";
             getParsed_date_successfully();
         } catch (DateTimeParseException de) {
             this.by = by;
@@ -26,6 +31,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline class.
+     * 
      * @param strArr Array of String containing input for the Deadline class.
      * @return Created Deadline class.
      */

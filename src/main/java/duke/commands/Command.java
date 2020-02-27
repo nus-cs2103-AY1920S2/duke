@@ -1,6 +1,10 @@
 package duke.commands;
 
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.exception.DukeException;
@@ -25,16 +29,32 @@ public class Command {
     private String fullInput;
     private boolean isExit = false;
 
+    /**
+     * Constructs a Command object.
+     * @param fullInput The full input String that is used to construct the Command class.
+     */
     public Command(String fullInput) {
         this.elements = fullInput.split(" ");
         this.commandWord = elements[0];
         this.fullInput = fullInput;
     }
 
+    /**
+     * Returns the isExit boolean.
+     * @return
+     */
     public boolean isExit() {
         return this.isExit;
     }
 
+    /**
+     * Executes the task.
+     * @param taskList The current Task List.
+     * @param storage The Storage component to reference this execution.
+     * @param ui The Ui used in the execution.
+     * @return Returns the message supposed to be shown as a String.
+     * @throws DukeException The exception thrown by the execute command.
+     */
     public String execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         String result = "";
         switch (this.commandWord) {

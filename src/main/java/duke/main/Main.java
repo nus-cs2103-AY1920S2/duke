@@ -20,7 +20,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Aiyo! Exception.");
             e.printStackTrace();
         }

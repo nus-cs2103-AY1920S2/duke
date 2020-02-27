@@ -9,12 +9,16 @@ public class Event extends Task {
     protected String at = "";
     protected LocalDate date;
 
-
+    /**
+     * The constructor for Event object.
+     * @param description The given description for this Event.
+     * @param at The given description for the time this event starts in String.
+     */
     public Event(String description, String at) {
         super(description);
         try {
             date = LocalDate.parse(at);
-            assert this.date.isAfter(LocalDate.now()): "Invalid early date";
+            assert this.date.isAfter(LocalDate.now()) : "Invalid early date";
             System.out.println("Parsed date successfully");
         } catch (DateTimeParseException de) {
             this.at = at;
@@ -23,6 +27,7 @@ public class Event extends Task {
 
     /**
      * Creates an Event class.
+     * 
      * @param strArr Array of String containing input for the Event class.
      * @return Created Event class.
      */

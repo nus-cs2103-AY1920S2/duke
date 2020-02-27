@@ -37,6 +37,7 @@ public class Duke extends Application {
 
     /**
      * Constructs a Duke class.
+     * 
      * @param filePath Filepath of the storage file tasks.txt
      */
     public Duke(String filePath) {
@@ -51,6 +52,9 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Constructs a Duke object.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("./tasks.txt");
@@ -108,15 +112,15 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-//        sendButton.setOnMouseClicked((event) -> {
-//            handleUserInput();
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            handleUserInput();
-//        });
+        // sendButton.setOnMouseClicked((event) -> {
+        // handleUserInput();
+        // });
+        //
+        // userInput.setOnAction((event) -> {
+        // handleUserInput();
+        // });
 
-        //Scroll down to the end every time dialogContainer's height changes.
+        // Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
@@ -127,6 +131,11 @@ public class Duke extends Application {
         return textToAdd;
     }
 
+    /**
+     * Returns the response by Duke to the given input.
+     * @param fullCommand The full input given for the command.
+     * @return Response as a String based on the given input.
+     */
     public String getResponse(String fullCommand) {
         String response = ui.divider("") + "\n";
         try {

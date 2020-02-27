@@ -1,11 +1,11 @@
 package duke.tasks;
 
 public class Task {
+    protected static final int TASK_NAME_INDEX = 2;
+    protected static final int IS_DONE_BOOLEAN_INDEX = 1;
     protected String description;
     protected boolean isDone;
     protected String tag = "";
-    protected final static int TASK_NAME_INDEX = 2;
-    protected final static int IS_DONE_BOOLEAN_INDEX = 1;
 
     public Task(String s) {
         this.description = s;
@@ -37,6 +37,7 @@ public class Task {
 
     /**
      * Creates a Task class.
+     * 
      * @param strArr Array of String containing input for the Task class.
      * @return Created Task class.
      */

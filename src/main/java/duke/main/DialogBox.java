@@ -48,6 +48,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox customised for Duke.
+     * @param text The text to be placed in Duke's DialogBox.
+     * @param img The image to be displayed as Duke.
+     * @return
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

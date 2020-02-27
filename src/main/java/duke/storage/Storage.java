@@ -1,7 +1,11 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,6 +19,10 @@ import java.util.Scanner;
 public class Storage {
     private File data;
 
+    /**
+     * Constructor for Storage object.
+     * @param s The filepath as a String for the storage location.
+     */
     public Storage(String s) {
         try {
             this.data = new File(s);
@@ -25,9 +33,9 @@ public class Storage {
 
     /**
      * Builds a TaskList class from storage Filepath.
-     * 
+     *
      * @return Returns a TaskList class built according to storage Filepath. Returns
-     *         an empty TaskList class if there is no storage file.
+     *     an empty TaskList class if there is no storage file.
      * @throws DukeException Filepath not found.
      */
     public TaskList buildTaskList() throws DukeException {
@@ -63,7 +71,7 @@ public class Storage {
 
     /**
      * Saves given TaskList to the storage file.
-     * 
+     *
      * @param taskList The TaskList to be stored.
      */
     public void updateStorage(TaskList taskList) {
