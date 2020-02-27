@@ -63,6 +63,9 @@ class Parser {
         case "delete":
             command = Duke.Command.DELETE;
             break;
+        case "clear":
+            command = Duke.Command.CLEAR;
+            break;
         case "bye":
             command = Duke.Command.BYE;
             break;
@@ -122,6 +125,11 @@ class Parser {
         case DELETE:
             if (!hasArguments(input)) {
                 throw new InvalidCommandException("Oops! The task number is missing.");
+            }
+            break;
+        case CLEAR:
+            if (hasArguments(input)) {
+                throw new InvalidCommandException("Hmm... I don't understand. Try \"clear\" instead.");
             }
             break;
         case BYE:

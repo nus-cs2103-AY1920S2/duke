@@ -127,6 +127,15 @@ public class Duke {
             }
         },
 
+        CLEAR(false) {
+            @Override
+            String execute(Duke duke, String input) throws StorageException {
+                duke.tasks.clear();
+                duke.storage.save(duke.tasks);
+                return "Noted. I've removed all the tasks in your list.";
+            }
+        },
+
         BYE(true) {
             @Override
             String execute(Duke duke, String input) {

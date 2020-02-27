@@ -43,6 +43,22 @@ class TaskList {
     }
 
     /**
+     * Returns a task list with the tasks whose descriptions contain the specified search term.
+     *
+     * @param searchTerm the search term
+     * @return a task list containing tasks that match the search term
+     */
+    TaskList find(String searchTerm) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(searchTerm)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
+    /**
      * Snoozes the task with the specified task number by the specified duration.
      *
      * @param taskNumber the task number of the task to be snoozed
@@ -97,19 +113,13 @@ class TaskList {
     }
 
     /**
-     * Returns a task list with the tasks whose descriptions contain the specified search term.
+     * Removes all tasks from the task list.
      *
-     * @param searchTerm the search term
-     * @return a task list containing tasks that match the search term
+     * @return the empty task list
      */
-    TaskList find(String searchTerm) {
-        TaskList matchingTasks = new TaskList();
-        for (Task task : tasks) {
-            if (task.getDescription().contains(searchTerm)) {
-                matchingTasks.add(task);
-            }
-        }
-        return matchingTasks;
+    TaskList clear() {
+        tasks = new ArrayList<>();
+        return this;
     }
 
     /**
