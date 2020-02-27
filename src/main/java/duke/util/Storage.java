@@ -28,6 +28,7 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
 
+        // Solution below adapted from https://github.com/Kangwkk/duke/commit/512324ce4fbb6ef7aa5b54650a9ca1d5f872d76d
         try {
             if (!(new File(filePath)).exists()) {
                 String rootLocation = Paths.get("").toAbsolutePath().toString();
