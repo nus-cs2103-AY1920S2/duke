@@ -4,14 +4,14 @@
 - [1. Introduction](#1-introduction)
 - [2. Quick Start](#2-quick-start)
 - [3. Features](#3-features)
-  - [3.1 Create a todo](#3.2-create-an-event:-event)
-  - [3.2 Create an event](#32-create-event)
-  - [3.3 Create a deadline](#33-create-deadline)
-  - [3.4 List all added tasks](#34-list)
-  - [3.5 Search for an added task](#36-find-tasks)
-  - [3.6 Mark task as done](#37-done)
-  - [3.7 Delete a task](#38-delete)
-  - [3.8 Quit the program](#310-exit)
+  - [3.1 Create a todo](#31-create-a-todo-todo)
+  - [3.2 Create an event](#32-create-an-event-event)
+  - [3.3 Create a deadline](#33-create-a-deadline-deadline)
+  - [3.4 List all added tasks](#34-list-all-added-tasks-list)
+  - [3.5 Search for an added task](#35-search-for-an-added-task-find)
+  - [3.6 Mark task as done](#36-mark-task-as-done-done)
+  - [3.7 Delete a task](#37-delete-a-task-delete)
+  - [3.8 Quit the program](#38-quit-the-program-bye)
  
 ## 1. Introduction
 YATL is **Y**et **A**nother **T**odo **L**ist that helps a person to keep track of various things.
