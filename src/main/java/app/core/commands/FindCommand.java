@@ -3,6 +3,7 @@ package app.core.commands;
 import app.core.Messages;
 import app.core.tasks.TaskManager;
 import app.util.Pair;
+import app.exceptions.EmptyTaskListException;
 import app.exceptions.InvalidUsageException;
 
 final class FindCommand extends Command {
@@ -17,8 +18,9 @@ final class FindCommand extends Command {
     }
 
     @Override
-    public Pair execute(TaskManager taskManager) {
-        String output = taskManager.findMatchingTasks(this.toMatch);
+    public Pair execute(TaskManager taskManager) throws EmptyTaskListException {
+        String tasks = taskManager.findMatchingTasks(this.toMatch);
+        String output = String.format(Messages.FILTER_TASK_SUCCESS_MESSAGE, tasks);
         return new Pair(output, false);
     }
 }

@@ -1,10 +1,12 @@
 package app.core.commands;
 
 import app.core.Messages;
+import app.core.tasks.Task;
 import app.core.tasks.TaskManager;
 import app.util.Date;
 import app.util.Pair;
 import app.exceptions.StorageFileException;
+import app.exceptions.DuplicatedTaskException;
 import app.exceptions.InvalidDateTimeFormatException;
 import app.exceptions.InvalidUsageException;
 
@@ -25,8 +27,9 @@ final class DeadlineCommand extends Command {
     }
 
     @Override
-    public Pair execute(TaskManager taskManager) throws StorageFileException {
-        String output = taskManager.addDeadlineTask(this.description, this.deadline);
+    public Pair execute(TaskManager taskManager) throws StorageFileException, DuplicatedTaskException {
+        Task task = taskManager.addDeadlineTask(this.description, this.deadline);
+        String output = String.format(Messages.ADD_TASK_SUCCESS_MESSAGE, task, taskManager.getSize());
         return new Pair(output, false);
     }
 }

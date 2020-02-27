@@ -1,6 +1,7 @@
 package app.core.commands;
 
 import app.core.Messages;
+import app.core.tasks.Task;
 import app.core.tasks.TaskManager;
 import app.util.Pair;
 import app.exceptions.InvalidTaskIndexException;
@@ -21,7 +22,8 @@ final class DoneCommand extends Command {
     @Override
     public Pair execute(TaskManager taskManager) throws InvalidTaskIndexException, StorageFileException {
         try {
-            String output = taskManager.setTaskDone(this.taskIndex);
+            Task task = taskManager.setTaskDone(this.taskIndex);
+            String output = String.format(Messages.SET_TASK_DONE_SUCCESS_MESSAGE, task);
             return new Pair(output, false);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskIndexException(Messages.DONE_INVALID_TASK_INDEX_MESSAGE);

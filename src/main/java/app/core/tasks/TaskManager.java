@@ -7,6 +7,8 @@ import app.util.Date;
 import app.core.Messages;
 import app.core.StorageManager;
 import app.exceptions.StorageFileException;
+import app.exceptions.DuplicatedTaskException;
+import app.exceptions.EmptyTaskListException;
 
 /**
  * This class stores and handles all the data related to 
@@ -30,7 +32,7 @@ public class TaskManager {
      * @param description The description of the task
      * @return The output to be presented in the UI
      */
-    public String addTodoTask(String description) throws StorageFileException {
+    public Task addTodoTask(String description) throws StorageFileException, DuplicatedTaskException {
         return this.add(new Task(description));
     }
 
@@ -41,7 +43,7 @@ public class TaskManager {
      *     of the task
      * @return The output to be presented in the UI
      */
-    public String addDeadlineTask(String description, Date deadline) throws StorageFileException {
+    public Task addDeadlineTask(String description, Date deadline) throws StorageFileException, DuplicatedTaskException {
         return this.add(new DeadlineTask(description, deadline));
     }
 
@@ -52,18 +54,18 @@ public class TaskManager {
      *     the event
      * @return The output to be presented in the UI
      */
-    public String addEventTask(String description, Date when) throws StorageFileException {
+    public Task addEventTask(String description, Date when) throws StorageFileException, DuplicatedTaskException {
         return this.add(new EventTask(description, when));
     }
 
-    private String add(Task task) throws StorageFileException {
+    private Task add(Task task) throws StorageFileException, DuplicatedTaskException {
         if (this.taskList.contains(task)) {
-            return Messages.ADD_DUPLICATED_TASK_MESSAGE;
+            throw new DuplicatedTaskException(Messages.ADD_DUPLICATED_TASK_MESSAGE);
         }
 
         this.taskList.add(task);
         this.storageManager.save(this.taskList);
-        return String.format(Messages.ADD_TASK_SUCCESS_MESSAGE, task, this.taskList.size());
+        return task;
     }
 
     /**
@@ -73,12 +75,11 @@ public class TaskManager {
      * @throws IndexOutOfBoundsException If the index is out of the bounds
      *     of the task maanger
      */
-    public String setTaskDone(int index) throws IndexOutOfBoundsException, StorageFileException {
+    public Task setTaskDone(int index) throws IndexOutOfBoundsException, StorageFileException {
         Task task = this.taskList.get(index - 1);
         task.setDone();
         this.storageManager.save(this.taskList);
-
-        return String.format(Messages.SET_TASK_DONE_SUCCESS_MESSAGE, task);
+        return task;
     }
 
     /**
@@ -88,11 +89,10 @@ public class TaskManager {
      * @throws IndexOutOfBoundsException If the index is out of the bounds 
      *     of the task manager
      */
-    public String deleteTask(int index) throws IndexOutOfBoundsException, StorageFileException {
+    public Task deleteTask(int index) throws IndexOutOfBoundsException, StorageFileException {
         Task task = this.taskList.remove(index - 1);
         this.storageManager.save(this.taskList);
-
-        return String.format(Messages.DELETE_TASK_SUCCESS_MESSAGE, task, this.taskList.size());
+        return task;
     }
 
     /**
@@ -102,7 +102,7 @@ public class TaskManager {
      * @return The string representation of the list of filtered tasks
      *     that matches the input string
      */
-    public String findMatchingTasks(String toMatch) {
+    public String findMatchingTasks(String toMatch) throws EmptyTaskListException {
         List<Task> filteredTasks = new ArrayList<>();
         for (Task task : this.taskList) {
             if (task.getDescription().contains(toMatch)) {
@@ -111,30 +111,31 @@ public class TaskManager {
         }
 
         if (filteredTasks.size() == 0) {
-            return Messages.FILTER_TASK_NO_TASKS_MESSAGE;
+            throw new EmptyTaskListException(Messages.FILTER_TASK_NO_TASKS_MESSAGE);
         }
-
-        StringBuilder sb = new StringBuilder("Here are the matching tasks: \n");
-        for (int i = 0; i < filteredTasks.size(); i++) {
-            sb.append(String.format("%d. %s\n", i + 1, filteredTasks.get(i)));
-        }
-        return sb.toString();
+        return convertListToString(filteredTasks);
     }
 
     /**
      * Returns a String representation of the list of tasks.
      * @return The string representation of the list of tasks
      */
-    @Override
-    public String toString() {
+    public String getTasks() throws EmptyTaskListException {
         if (this.taskList.size() == 0) {
-            return "You have no tasks";
+            throw new EmptyTaskListException(Messages.LIST_NO_TASK_MESSAGE);
         }
+        return convertListToString(this.taskList);
+    }
 
-        StringBuilder sb = new StringBuilder("These are your tasks: \n");
-        for (int i = 0; i < this.taskList.size(); i++) {
-            sb.append(String.format("%d. %s\n", i + 1, this.taskList.get(i)));
+    private static String convertListToString(List<Task> taskList) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            sb.append(String.format("%d. %s\n", i + 1, taskList.get(i)));
         }
         return sb.toString();
+    }
+
+    public int getSize() {
+        return this.taskList.size();
     }
 }
