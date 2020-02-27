@@ -14,10 +14,12 @@ class Parser {
     private static final int NUMBER_OF_COMMAND_SECTIONS = 2;
     private static final int COMMAND_POSITION = 0;
     private static final int ARGUMENT_POSITION = 1;
+    private static final int NUMBER_OF_DATE_TIME_ARGUMENTS = 2;
+    private static final int DATE_POSITION = 0;
+    private static final int TIME_POSITION = 1;
     private static final int NUMBER_OF_DEADLINE_COMMAND_ARGUMENTS = 3;
     private static final int DEADLINE_DESCRIPTION_POSITION = 0;
-    private static final int DEADLINE_DATE_POSITION = 1;
-    private static final int DEADLINE_TIME_POSITION = 2;
+    private static final int DEADLINE_DUE_DATE_POSITION = 1;
     private static final int NUMBER_OF_EVENT_COMMAND_ARGUMENTS = 2;
     private static final int EVENT_DESCRIPTION_POSITION = 0;
     private static final int EVENT_TIME_POSITION = 1;
@@ -89,7 +91,7 @@ class Parser {
             break;
         case DEADLINE:
             if (!hasArguments(input)) {
-                throw new InvalidCommandException("Oops! The description and deadline are missing.");
+                throw new InvalidCommandException("Oops! The description and due date are missing.");
             }
             break;
         case EVENT:
@@ -187,8 +189,9 @@ class Parser {
     LocalDate parseDeadlineDate(String arguments) throws InvalidCommandException {
         assert arguments != null;
         try {
-            return LocalDate.parse(
-                    arguments.split("\\s+/by\\s+", NUMBER_OF_DEADLINE_COMMAND_ARGUMENTS)[DEADLINE_DATE_POSITION]);
+            String dateTime = arguments.split("\\s+/by\\s+",
+                    NUMBER_OF_DEADLINE_COMMAND_ARGUMENTS)[DEADLINE_DUE_DATE_POSITION];
+            return LocalDate.parse(dateTime.split("\\s+", NUMBER_OF_DATE_TIME_ARGUMENTS)[DATE_POSITION]);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCommandException("Oops! The date of the deadline is missing.");
         } catch (DateTimeParseException e) {
@@ -206,8 +209,9 @@ class Parser {
     LocalTime parseDeadlineTime(String arguments) throws InvalidCommandException {
         assert arguments != null;
         try {
-            return LocalTime.parse(
-                    arguments.split("\\s+/by\\s+", NUMBER_OF_DEADLINE_COMMAND_ARGUMENTS)[DEADLINE_TIME_POSITION]);
+            String dateTime = arguments.split("\\s+/by\\s+",
+                    NUMBER_OF_DEADLINE_COMMAND_ARGUMENTS)[DEADLINE_DUE_DATE_POSITION];
+            return LocalTime.parse(dateTime.split("\\s+", NUMBER_OF_DATE_TIME_ARGUMENTS)[TIME_POSITION]);
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             return LocalTime.parse("23:59");
         }
