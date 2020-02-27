@@ -1,3 +1,9 @@
+package duke;
+
+import duke.Task;
+import duke.DukeException;
+import java.io.IOException;
+
 public class Ui {
 
     public Ui() { }

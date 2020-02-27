@@ -1,3 +1,9 @@
+package duke;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.DukeException;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
