@@ -10,6 +10,11 @@ public class Search {
         this.tasks = tasks;
     }
 
+    /**
+     * Search for a match in tasks using the similarity ratio.
+     * @param searchTerm term to search for.
+     * @return All the tasks that matches the search term approximately.
+     */
     public TaskList search(String searchTerm) {
         TaskList results = new TaskList();
 

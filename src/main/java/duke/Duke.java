@@ -130,8 +130,8 @@ public class Duke extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing duke.
+     * Duke's reply and then appends them to the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         String input = userInput.getText();
@@ -148,7 +148,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-//        return "duke.Duke heard: " + input;
         Parser parse = new Parser(input, false);
 
         int index;

@@ -4,3 +4,4 @@
 0 deadline return book /by 2019-10-30
 0 event project meeting /at Mon 2-4pm
 0 todo Hello World
+0 event CS2103T project meeting /at 14:00 17/2/2020

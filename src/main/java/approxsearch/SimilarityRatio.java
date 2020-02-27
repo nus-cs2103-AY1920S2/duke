@@ -18,8 +18,8 @@ class SimilarityRatio {
                     levenshteinDist(a, b, i - 1, j, memo) + 1,
                     Math.min(
                             levenshteinDist(a, b, i, j - 1, memo) + 1,
-                            levenshteinDist(a, b, i - 1, j - 1, memo) +
-                                    (a.charAt(i - 1) == b.charAt(j - 1) ? 0 : 1)
+                            levenshteinDist(a, b, i - 1, j - 1, memo)
+                                    + (a.charAt(i - 1) == b.charAt(j - 1) ? 0 : 1)
                     )
             );
         }
@@ -36,8 +36,8 @@ class SimilarityRatio {
             }
         }
 
-        return ((double) (i + j) - levenshteinDist(a.toLowerCase(), b.toLowerCase(), i, j, memo)) /
-                (i + j);
+        return ((double) (i + j) - levenshteinDist(a.toLowerCase(), b.toLowerCase(), i, j, memo))
+                / (i + j);
     }
 
     private static Stream<String> getPhraseStream(int phraseLength, String sentence) {
