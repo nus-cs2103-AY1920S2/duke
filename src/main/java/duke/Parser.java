@@ -1,5 +1,4 @@
 package duke;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,30 +23,48 @@ public class Parser {
      * @param input This is the commandline input that user keyed in
      * @param list This is the ArrayList of Object
      */
-    public static void evaluateInput(String input, ArrayList<Task> list) throws IOException {
+    public static String evaluateInput(String input, ArrayList<Task> list) throws IOException {
 
+        String output ="Sorry, me stupid. Could you type it again? ";
         if(input.equals("bye")){
-            System.out.println( "Bye bye, Master! Please come back soon!");
+            output ="Bye bye, Master! Please come back soon!";
         }
         if(input.equals("list")){
-            TaskList.printList(list);
+            output = TaskList.printList(list);
         }
         if(input.contains("done")){
-            TaskList.markDone(list, input);
+            output = TaskList.markDone(list, input);
         }
         if(input.contains("todo") || input.contains("deadline") || input.contains("event")) {
-            TaskList.createObject(input, list);
+            output = TaskList.createObject(input, list);
         }
         if(input.contains("delete")){
-            TaskList.deleteTask(list,input);
+            output = TaskList.deleteTask(list,input);
+        }
+
+        if(input.equals("clear")){
+            output = "Sir, are you sure about it?";
+        }
+
+        if(input.equals("yes")){
+            TaskList.clearList(list);
+            output = "Alrighy, Sir. I have emptied the list.";
         }
 
         if(input.contains("search")){
-            TaskList.searchByDate(list, input);
-        }
-        if(!input.equals("bye")){
-            Ui.readInput(list);
+            output = TaskList.searchByDate(list, input);
         }
 
+        if(input.contains("find")){
+            output = TaskList.searchByName(list,input);
+        }
+
+
+        /*if(!input.equals("bye")){
+            Ui.readInput(list);
+        }
+        */
+
+        return output;
     }
 }

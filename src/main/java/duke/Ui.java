@@ -12,8 +12,8 @@ public class Ui {
     /**
      * This method is to print greetings to the user.
      */
-    public static void printGreetings(){
-        System.out.println("Hello! Call me sexy bot! \n" + "What can I do for you, Master?");
+    public static String printGreetings(){
+        return ("Hello! Call me sexy bot! \n" + "What can I do for you, Master?");
     }
 
     /**

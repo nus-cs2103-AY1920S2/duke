@@ -1,4 +1,3 @@
-
 package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -97,5 +96,11 @@ public class Storage {
         for(int i = 0 ; i <list.size(); i++){
             appendToFile(filePath, list.get(i));
         }
+    }
+
+    public static void clearContent(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write("");
+        fw.close();
     }
 }
