@@ -26,6 +26,11 @@ public class Parser {
      * @param userInput string enterd by user
      * @return Command object
      */
+
+
+    public Parser(){
+
+    }
     public Command parse(String userInput) {
 
         try {

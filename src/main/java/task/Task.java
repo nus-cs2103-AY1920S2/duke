@@ -51,6 +51,10 @@ public class Task {
         this.tag = "#" + tag;
     }
 
+    public String getTag(){
+        return tag;
+    }
+
     public boolean getDoneStatus(){
         return isDone;
     }

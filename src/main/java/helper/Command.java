@@ -19,11 +19,10 @@ public class Command {
     private String taskEntered;
     private Storage storage;
 
-    /**
-     * Command constructor without task (bye,list).
-     *
-     * @param command command entered by user like todo,event,deadline....
-     */
+
+    public Command(){
+
+    }
     public Command(String command) {
         this.command = command;
     }
@@ -74,7 +73,7 @@ public class Command {
                 String eventName = temp[0];
                 String eventDate = formatDate(temp[1].substring(3));
                 String eventTopMes = uiHelper.getTopTwoLine(); //  assign user interaction string message
-                taskList.add(new task.Deadline(eventName, eventDate)); // add deadline into arrayList of task.Task
+                taskList.add(new task.Event(eventName, eventDate)); // add deadline into arrayList of task.Task
                 String eventTaskMes = "     " + taskList.get(taskList.size() - 1).toString(); // assign return deadline message
                 String eventBotMess = uiHelper.getBottomTwoLine(taskList); // assign user interaction string message
                 return uiHelper.parserOutputMess(eventTopMes, eventTaskMes, eventBotMess); // parse
@@ -83,7 +82,7 @@ public class Command {
                 String deadlineName = deadlineTemp[0]; // assign task.Task name
                 String date = formatDate(deadlineTemp[1].substring(3)); // formating the date
                 String deadlineTopMess = uiHelper.getTopTwoLine(); //  assign user interaction string message
-                taskList.add(new task.Event(deadlineName, date));  // add deadline into arrayList of task.Task
+                taskList.add(new task.Deadline(deadlineName, date));  // add deadline into arrayList of task.Task
                 String deadlineMess = "     " + taskList.get(taskList.size() - 1).toString(); // assign return deadline message
                 String deadlineBotMess = uiHelper.getBottomTwoLine(taskList); // assign user interaction string message
                 return uiHelper.parserOutputMess(deadlineTopMess, deadlineMess, deadlineBotMess); // parse
@@ -111,7 +110,7 @@ public class Command {
                 } else {
                     return "there is no such task in your list ";
                 }
-                return uiHelper.parserOutputMess("", "The tag " + tag + "is successfully added to " + foundTask.getDescription(), "");
+                return uiHelper.parserOutputMess("", "The tag " + tag + " is successfully added to " + foundTask.getDescription(), "");
             case "done":
                 int doneArrPos = Integer.parseInt(taskEntered); // assign index
                 assert doneArrPos > 0 : "Please enter a positive index ";
