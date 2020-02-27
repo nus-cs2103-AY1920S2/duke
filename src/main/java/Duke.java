@@ -72,7 +72,7 @@ public class Duke {
         Parser parser = new Parser();
         try {
             Command c = parser.parse(input, tasklist);
-            return c.execute(tasklist, ui, storage);
+            return ui.formatMessage(c.execute(tasklist, ui, storage));
         } catch (InvalidDukeArgumentException | CommandNotFoundException e) {
             return e.getMessage();
         }

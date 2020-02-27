@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Represents the user interface of the duke chat bot.
  */
 public class Ui {
-    private static final String SEPERARION_LINE = "_".repeat(100) + "\n";
+    private static final String SEPERARION_LINE = "_".repeat(50) + "\n";
     private Scanner scanner;
 
     public Ui() {
@@ -18,7 +18,7 @@ public class Ui {
      * @param message The message to be formatted.
      * @return The formatted message.
      */
-    private String formatMessage(String message) {
+    public String formatMessage(String message) {
         return SEPERARION_LINE + message + SEPERARION_LINE;
     }
 
