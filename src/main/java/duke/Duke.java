@@ -32,11 +32,11 @@ public class Duke {
         tasks = new TaskList();
 
         Ui.printGreetings();
-            try{
-                Ui.readInput(list);
-            } catch (IOException e) {
-                e.printStackTrace();
-                }
+        try{
+            Ui.readInput(list);
+        } catch (IOException e) {
+            e.printStackTrace();
+            }
     }
     public static void main(String[] args) throws IOException {
         new Duke("C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt").run();

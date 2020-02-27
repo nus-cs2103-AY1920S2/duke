@@ -188,8 +188,8 @@ public class TaskList {
         }
     }
 
-    public static void searchByName(ArrayList<Task> list, String input) throws IOException {
-        String keyword = input.replaceAll("find ", "");
+    public static void searchByName(ArrayList<Task> list, String ...values) throws IOException {
+        String keyword = values[0].replaceAll("find ", "");
         boolean hasMatch = false;
         int [] matchFound = new int[100];
         int count = 0;
