@@ -57,8 +57,9 @@ public class Duke {
             String execute(Duke duke, String input) throws InvalidCommandException, StorageException {
                 String arguments = duke.parser.parseArguments(input);
                 String description = duke.parser.parseEventDescription(arguments);
-                String time = duke.parser.parseEventTime(arguments);
-                Event event = new Event(description, time);
+                LocalDate date = duke.parser.parseEventDate(arguments);
+                LocalTime time = duke.parser.parseEventTime(arguments);
+                Event event = new Event(description, LocalDateTime.of(date, time));
                 duke.tasks.add(event);
                 duke.storage.save(duke.tasks);
                 return duke.ui.outputTask(event, duke.tasks.size());

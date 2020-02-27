@@ -237,17 +237,42 @@ class Parser {
     }
 
     /**
-     * Parses the time of the event from the arguments in the user input for the deadline command.
+     * Parses the date of the event from the arguments in the user input for the event command.
+     *
+     * @param arguments the arguments from the user input
+     * @return the date of event
+     */
+    LocalDate parseEventDate(String arguments) throws InvalidCommandException {
+        assert arguments != null;
+        try {
+            String dateTime = arguments.split("\\s+/at\\s+",
+                    NUMBER_OF_EVENT_COMMAND_ARGUMENTS)[EVENT_TIME_POSITION];
+            return LocalDate.parse(dateTime.split("\\s+", NUMBER_OF_DATE_TIME_ARGUMENTS)[DATE_POSITION]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandException("Oops! The date of the event is missing.");
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandException(
+                    "I don't understand when the event is. Please provide the time in YYYY-MM-DD HH:mm format.");
+        }
+    }
+
+    /**
+     * Parses the time of the event from the arguments in the user input for the event command.
      *
      * @param arguments the arguments from the user input
      * @return the time of the event
      */
-    String parseEventTime(String arguments) throws InvalidCommandException {
+    LocalTime parseEventTime(String arguments) throws InvalidCommandException {
         assert arguments != null;
         try {
-            return arguments.split("\\s+/at\\s+", NUMBER_OF_EVENT_COMMAND_ARGUMENTS)[EVENT_TIME_POSITION];
+            String dateTime = arguments.split("\\s+/at\\s+",
+                    NUMBER_OF_EVENT_COMMAND_ARGUMENTS)[EVENT_TIME_POSITION];
+            return LocalTime.parse(dateTime.split("\\s+", NUMBER_OF_DATE_TIME_ARGUMENTS)[TIME_POSITION]);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCommandException("Oops! The time of the event is missing.");
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandException(
+                    "I don't understand when the event is. Please provide the time in YYYY-MM-DD HH:mm format.");
         }
     }
 

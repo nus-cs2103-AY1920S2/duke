@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
 /**
- * This class handles the storage and retrieval of {@code Duke} tasks in a database on the hard disk. 
+ * This class handles the storage and retrieval of {@code Duke} tasks in a database on the hard disk.
  */
 class Storage {
     private static final int TASK_TYPE_POSITION = 1;
@@ -23,7 +23,6 @@ class Storage {
     private static final int INFO_START_POSITION = 7;
     private static final int DESCRIPTION_POSITION = 0;
     private static final int DATETIME_POSITION = 1;
-    private static final int TIME_POSITION = 1;
 
     private Path file;
 
@@ -72,7 +71,9 @@ class Storage {
                                 break;
                             case 'E':
                                 info = x.substring(0, x.length() - 1).split(" \\(at: ");
-                                task = new Event(info[DESCRIPTION_POSITION], info[TIME_POSITION]);
+                                task = new Event(info[DESCRIPTION_POSITION],
+                                        LocalDateTime.parse(info[DATETIME_POSITION],
+                                            DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm")));
                                 break;
                             default:
                                 return Stream.empty();
