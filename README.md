@@ -20,7 +20,7 @@
 1. Ensure that your src folder is checked. Keep clicking `Next`.
 1. Click `Finish`.
 
-# Tutorials 
+# Tutorials
 
 Duke Increment | Tutorial
 ---------------|---------------
@@ -37,3 +37,6 @@ Duke Increment | Tutorial
 
 * If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
 * We welcome pull requests too.
+
+# Acknowledgements
+* Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://junit.org/junit5/)
