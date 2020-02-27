@@ -27,6 +27,7 @@ public class Parser {
         COMMAND_IDENTIFIERS.put("delete", CommandIdentifier.DELETE);
         COMMAND_IDENTIFIERS.put("find", CommandIdentifier.FIND);
         COMMAND_IDENTIFIERS.put("sort", CommandIdentifier.SORT);
+        COMMAND_IDENTIFIERS.put("hey", CommandIdentifier.HEY);
     }
 
     /**
@@ -68,6 +69,8 @@ public class Parser {
             case FIND:
                 String keyword = getNextCommandArgument(st);
                 return new FindCommand(keyword);
+            case HEY:
+                return new HeyCommand();
             default:
                 assert false : commandIdentifier;
                 return new ExitCommand();
