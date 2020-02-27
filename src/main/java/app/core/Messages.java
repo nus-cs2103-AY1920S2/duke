@@ -30,7 +30,9 @@ public class Messages {
         + "  %s\n"
         + "Now you have %d tasks in the list.\n";
     public static final String FILTER_TASK_NO_TASKS_MESSAGE = "There are no matching tasks";
+    public static final String FILTER_TASK_SUCCESS_MESSAGE = "Here are the matching tasks:\n%s";
     
+    public static final String LIST_NO_TASK_MESSAGE = "You have no tasks";
     
     public static final String STORAGE_SAVE_ERROR_MESSAGE = "An error was found while writing to the storage file!\n"
         + "The file may be corrupted. "
