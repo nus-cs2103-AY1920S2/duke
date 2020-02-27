@@ -14,14 +14,17 @@ public class Ui {
      * Prints the introductory message for Duke.
      */
     public String printIntro() {
-        return ("Hello! :) I'm Duke.\nHow can I help you today?");
+        return "I'm not Duke, I'm Cute!\n"
+        + "I'm feeling a lil hungry... ooh!\n"
+        + "Hi little fishy, what you up to?";
     }
 
     /**
      * Prints the goodbye message for Duke.
      */
     public String printGoodbye() {
-        return ("Goodbye. See you again soon!");
+        return "Cute lunges forward and snaps you up in a gulp.\n"
+        + "Oops, maybe she should've been named Hungry instead.";
     }
 
     /**

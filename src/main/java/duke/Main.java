@@ -22,7 +22,9 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            ap.setId("pane");
             Scene scene = new Scene(ap);
+            scene.getStylesheets().addAll(Main.class.getResource("/css/style.css").toExternalForm());
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

@@ -1,5 +1,6 @@
 package duke.javafx;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import duke.Duke;
+import duke.Ui;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -23,14 +25,16 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Ui ui;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaFish.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaCute.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        printIntro();
+        ui = new Ui();
+        this.printIntro();
     }
 
     public void setDuke(Duke d) {
@@ -39,7 +43,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void printIntro() {
-        String response = "Hello! :) I'm Duke.\nHow can I help you today?";
+        String response = ui.printIntro();
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(response, dukeImage)
         );
@@ -53,6 +57,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.compareTo("bye") == 0) {
+                Platform.exit();
+                System.exit(0);
+                
+        }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

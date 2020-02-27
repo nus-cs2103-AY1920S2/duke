@@ -10,11 +10,9 @@
 7. Update a task description and time
 8. Find a task by keyword
 
-### List all tasks
-## Usage
-`list`
-
-### `list` - Describe action
+## List all tasks
+### Usage
+### `list`
 
 Displays an indexed list of all tasks.
 

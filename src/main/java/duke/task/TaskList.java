@@ -36,7 +36,7 @@ public class TaskList {
     public String doTask(int idx) {
         Task task = this.tasks.get(idx);
         task.setIsDone(true);
-        return ("Good job, you completed a task!\n" + task.toString());
+        return "Mmm, Cute thinks your hardworkingness smells yummy!\n" + task.toString();
     }
 
     /**
@@ -45,8 +45,8 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.tasks.add(task);
-        return ("Added: " + task.toString() 
-            + "\nNow you have " + this.tasks.size() + " task(s) in the list.");
+        return "Wow, you add tasks faster than I eat fishes! Hmm...\n"
+            + "Now you have " + this.tasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -57,7 +57,7 @@ public class TaskList {
         try {
             Task task = this.tasks.get(idx);
             this.tasks.remove(idx);
-            return ("Noted. I've removed this task:\n"
+            return ("Noted. I've eaten - uhh, I mean, removed this task:\n"
                 + task.toString()
                 + "\nNow you have " + this.tasks.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
@@ -110,7 +110,7 @@ public class TaskList {
             int newTimeIndex = input.indexOf("" + (idx + 1));
             String newTime = Parser.reformatDateAndTime(input.substring(newTimeIndex + 2));
             task.setTime(newTime);
-            return "Noted. I've updated this task:\n"
+            return "Ooh, you updated the time, but is it time for me to eat yet?\n"
                 + newTime;
         } catch (IndexOutOfBoundsException e) {
             return ("Task index is invalid. Try again!");
