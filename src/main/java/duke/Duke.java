@@ -89,9 +89,7 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
-
-        // more code to be added here later
-
+        
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -130,7 +128,6 @@ public class Duke extends Application {
         Label Text = new Label(Ui.printGreetings());
         storage.load(list);
         tasks = new TaskList();
-
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Text, new ImageView(duke))
@@ -177,7 +174,6 @@ public class Duke extends Application {
 
         Label userText = new Label(input);
 
-
         Label dukeText = new Label(getResponse(output));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
@@ -191,9 +187,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-
         return  input;
     }
-
-
 }

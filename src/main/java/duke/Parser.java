@@ -43,12 +43,16 @@ public class Parser {
         }
 
         if(input.equals("clear")){
-            output = "Sir, are you sure about it?";
+            output = "Sir, are you sure about it? Please enter yes or no" ;
         }
 
         if(input.equals("yes")){
             TaskList.clearList(list);
             output = "Alrighy, Sir. I have emptied the list.";
+        }
+
+        if(input.equals("no")){
+            output = "Alrighty, Sir. The list remains at it is.";
         }
 
         if(input.contains("search")){
