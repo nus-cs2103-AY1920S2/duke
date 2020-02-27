@@ -12,7 +12,7 @@ public class HeyCommand extends Command {
 
     @Override
     public String execute(TaskList tasklist, Ui ui, Storage storage) {
-        String greetings = "Hi Stan! This is Eric! Give me some things to do so I can lose some weight!\n";
+        String greetings = "Hi Stan! This is Eric! Give me something to do so I can lose some weight!\n";
         return greetings;
     }
 }

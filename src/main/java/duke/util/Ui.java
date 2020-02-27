@@ -40,7 +40,7 @@ public class Ui {
                 + "|  __| |  _  /  | || | \n"
                 + "| |____| | \\ \\ _| || |__\n"
                 + "|______|_|  \\_\\_____\\_____|\n";
-        String greetings = "Hi Stan! This is\n" + logo + "\nGive me some things to do so I can lose some weight!\n";
+        String greetings = "Hi Stan! This is\n" + logo + "\nGive me something to do so I can lose some weight!\n";
         showMessage(greetings);
     }
 
