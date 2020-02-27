@@ -5,7 +5,7 @@ package duke;
  */
 class TaskNumberOutOfBoundsException extends DukeException {
     /**
-     * Constructs a <code>TaskNumberOutOfBoundsException</code> with the specified task number that is out of range.
+     * Constructs a {@code TaskNumberOutOfBoundsException} with the specified task number that is out of range.
      *
      * @param taskNumber the task number that is out of range
      */

@@ -1,11 +1,12 @@
 package duke;
 
 /**
- * DukeException is the superclass of those exceptions that can be thrown during the normal operation of Duke.
+ * {@code DukeException} is the superclass of those exceptions that can be thrown during the normal operation of
+ * {@code Duke}.
  */
 public class DukeException extends Exception {
     /**
-     * Constructs a <code>DukeException</code> with the specified detail message.
+     * Constructs a {@code DukeException} with the specified detail message.
      *
      * @param message the detail message
      */
@@ -14,7 +15,7 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Constructs a <code>DukeException</code> with the specified detail message and cause.
+     * Constructs a {@code DukeException} with the specified detail message and cause.
      *
      * @param message the detail message
      * @param cause the cause

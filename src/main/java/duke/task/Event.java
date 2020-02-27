@@ -1,15 +1,14 @@
 package duke.task;
 
 /**
- * Event is a subclass of Task. It represents a task with a description and
- * completion status, as well as the time of the event.
+ * {@code Event} is a subclass of {@code Task}. It represents a task with a description and completion status, as well
+ * as the time of the event.
  */
 public class Event extends Task {
     protected final String time;
 
     /**
-     * Constructs an Event object with the specified description and time,
-     * marked as incomplete.
+     * Constructs an {@code Event} object with the specified description and time, marked as incomplete.
      *
      * @param description the description of the event
      * @param time the time of the event
@@ -20,8 +19,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs an Event object with the specified description, time, and
-     * completion status.
+     * Constructs an {@code Event} object with the specified description, time, and completion status.
      *
      * @param description the description of the event
      * @param time the time of the event

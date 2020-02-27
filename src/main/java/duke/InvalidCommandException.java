@@ -5,7 +5,7 @@ package duke;
  */
 class InvalidCommandException extends DukeException {
     /**
-     * Constructs an <code>InvalidCommandException</code> with the specified detail message.
+     * Constructs an {@code InvalidCommandException} with the specified detail message.
      *
      * @param message the detail message
      */

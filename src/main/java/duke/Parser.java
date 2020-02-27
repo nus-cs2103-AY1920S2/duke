@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAmount;
 
 /**
- * A command parser for Duke.
+ * A command parser for {@code Duke}.
  */
 class Parser {
     private static final int NUMBER_OF_COMMAND_SECTIONS = 2;
@@ -27,10 +27,10 @@ class Parser {
     private static final int SNOOZE_TIME_UNIT_POSITION = 2;
 
     /**
-     * Returns the type of Duke command parsed from the user input.
+     * Returns the type of {@code Duke} command parsed from the user input.
      *
      * @param input the user input
-     * @return the type of Duke command
+     * @return the type of {@code Duke} command
      */
     Duke.Command parseCommand(String input) throws InvalidCommandException {
         assert input != null;
@@ -72,11 +72,11 @@ class Parser {
     }
 
     /**
-     * Returns <code>true</code> if the arguments in the user input can be parsed for the specified Duke command.
+     * Returns {@code true} if the arguments in the user input can be parsed for the specified {@code Duke} command.
      *
-     * @param command the type of Duke command
+     * @param command the type of {@code Duke} command
      * @param input the user input
-     * @return <code>true</code> if the arguments in the user input can be parsed for the specified Duke command
+     * @return {@code true} if the arguments in the user input can be parsed for the specified {@code Duke} command
      */
     boolean checkArguments(Duke.Command command, String input) throws InvalidCommandException {
         assert command != null;
@@ -134,10 +134,10 @@ class Parser {
     }
 
     /**
-     * Returns <code>true</code> if the user input contains arguments, <code>false</code> otherwise.
+     * Returns {@code true} if the user input contains arguments, {@code false} otherwise.
      *
      * @param input the user input
-     * @return <code>true</code> if the user input contains arguments, <code>false</code> otherwise
+     * @return {@code true} if the user input contains arguments, {@code false} otherwise
      */
     boolean hasArguments(String input) {
         return input.strip().split("\\s+", NUMBER_OF_COMMAND_SECTIONS).length == NUMBER_OF_COMMAND_SECTIONS;

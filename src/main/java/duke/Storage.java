@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
 /**
- * This class handles the storage and retrieval of tasks in a database on the hard disk.
+ * This class handles the storage and retrieval of {@code Duke} tasks in a database on the hard disk. 
  */
 class Storage {
     private static final int TASK_TYPE_POSITION = 1;
@@ -28,9 +28,9 @@ class Storage {
     private Path file;
 
     /**
-     * Constructs a new <code>Storage</code> object using the file at the specified URI as the database.
+     * Constructs a new {@code Storage} object using the file with the specified path as the database.
      *
-     * @param path the URI of the database
+     * @param path the path to the database
      */
     Storage(String path) {
         assert path != null;
@@ -38,14 +38,14 @@ class Storage {
     }
 
     /**
-     * Returns an empty <code>Storage</code> object with no database.
+     * Returns an empty {@code Storage} object with no reference to any database.
      */
     static Storage empty() {
         return new EmptyStorage();
     }
 
     /**
-     * Returns a <code>TaskList</code> containing the tasks in the database (if any).
+     * Returns a {@code TaskList} containing the tasks in the database (if any).
      *
      * @return the task list containing tasks in the database
      */
@@ -107,7 +107,7 @@ class Storage {
     }
 
     /**
-     * This represents a <code>Storage</code> object with no database.
+     * This represents a {@code Storage} object with no reference to any database.
      */
     private static class EmptyStorage extends Storage {
         EmptyStorage() {

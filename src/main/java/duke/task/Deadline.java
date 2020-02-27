@@ -5,15 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAmount;
 
 /**
- * Deadline is a subclass of Task. It represents a task with a description and
- * completion status, as well as a due date.
+ * {@code Deadline} is a subclass of {@code Task}. It represents a task with a description and completion status, as
+ * well as a due date.
  */
 public class Deadline extends Task implements Snoozable<Deadline> {
     protected final LocalDateTime deadline;
 
     /**
-     * Constructs a Deadline object with the specified description and due
-     * date, marked as incomplete.
+     * Constructs a {@code Deadline} object with the specified description and due date, marked as incomplete.
      *
      * @param description the description of the deadline
      * @param deadline the due date of the deadline
@@ -24,8 +23,7 @@ public class Deadline extends Task implements Snoozable<Deadline> {
     }
 
     /**
-     * Constructs a Deadline object with the specified description, due date,
-     * and completion status.
+     * Constructs a {@code Deadline} object with the specified description, due date, and completion status.
      *
      * @param description the description of the deadline
      * @param deadline the due date of the deadline

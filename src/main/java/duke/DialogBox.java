@@ -21,8 +21,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 /**
- * A controller for <code>DialogBox</code>, which consists of an <code>ImageView</code> of the person's display picture
- * and a <code>Label</code> containing the person's text.
+ * A controller for {@code DialogBox}, which consists of an {@code ImageView} of the person's display picture and a
+ * {@code Label} containing the person's text.
  */
 public class DialogBox extends HBox {
     @FXML

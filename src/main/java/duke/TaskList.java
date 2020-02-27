@@ -122,9 +122,9 @@ class TaskList {
     }
 
     /**
-     * Returns <code>true</code> if this task list contains no tasks, <code>false</code> otherwise.
+     * Returns {@code true} if this task list contains no tasks, {@code false} otherwise.
      *
-     * @return <code>true</code> if this task list contains no tasks, <code>false</code> otherwise
+     * @return {@code true} if this task list contains no tasks, {@code false} otherwise
      */
     boolean isEmpty() {
         return tasks.isEmpty();

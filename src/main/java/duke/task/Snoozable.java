@@ -3,7 +3,7 @@ package duke.task;
 import java.time.temporal.TemporalAmount;
 
 /**
- * Snoozable is an interface for tasks that can be snoozed or postponed.
+ * This interface imposes the ability to be snoozed or postponed on each Task subclass that implements it.
  */
 public interface Snoozable<T extends Task> {
     /**

@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
- * A controller for <code>MainWindow</code>, which provides the layout for the other controls.
+ * A controller for {@code MainWindow}, which provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     // Duke image taken from https://wiki.openjdk.java.net/display/duke/Gallery
@@ -38,9 +38,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Set the <code>Duke</code> object to be used.
+     * Set the {@code Duke} object to be used.
      *
-     * @param duke the <code>Duke</code> object to be used
+     * @param duke the {@code Duke} object to be used
      */
     public void setDuke(Duke duke) {
         this.duke = duke;
@@ -49,7 +49,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Reads the user input and gets Duke's response.
+     * Reads the user input and gets {@code Duke}'s response.
      */
     @FXML
     private void handleUserInput() {
@@ -72,8 +72,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one cantaining the user input and the other containing Duke's response, and appends
-     * them to the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one cantaining the user input and the other containing {@code Duke}'s response, and
+     * appends them to the dialog container. Clears the user input after processing.
      */
     private void updateScreen(String input, String response) {
         dialogContainer.getChildren().addAll(

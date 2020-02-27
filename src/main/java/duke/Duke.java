@@ -23,7 +23,7 @@ public class Duke {
     private Scanner sc;
 
     /**
-     * The commands that Duke can understand.
+     * The commands that {@code Duke} can understand.
      */
     enum Command {
         TODO(false) {
@@ -148,9 +148,9 @@ public class Duke {
         abstract String execute(Duke duke, String input) throws DukeException;
 
         /**
-         * Returns <code>true</code> if this command should terminate Duke, <code>false</code> otherwise.
+         * Returns {@code true} if this command should terminate {@code Duke}, {@code false} otherwise.
          *
-         * @return <code>true</code> if this command should terminate Duke, <code>false</code> otherwise
+         * @return {@code true} if this command should terminate {@code Duke}, {@code false} otherwise
          */
         boolean isTerminating() {
             return isTerminating;
@@ -158,7 +158,7 @@ public class Duke {
     }
 
     /**
-     * Constructs a new instance of <code>Duke</code> with no database.
+     * Constructs a new instance of {@code Duke} with no database.
      */
     public Duke() {
         storage = Storage.empty();
@@ -169,9 +169,9 @@ public class Duke {
     }
 
     /**
-     * Constructs a new instance of <code>Duke</code> using the file at the specified URI as the database.
+     * Constructs a new instance of {@code Duke} using the file with the specified path as the database.
      *
-     * @param path the URI of the database
+     * @param path the path to the database
      */
     public Duke(String path) {
         storage = new Storage(path);
@@ -187,16 +187,16 @@ public class Duke {
     }
 
     /**
-     * Constructs a new instance of <code>Duke</code> using <code>"./data/duke.txt"</code> as the database and runs it.
+     * Constructs a new instance of {@code Duke} using {@code "data/duke.txt"} as the database and runs it.
      *
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 
     /**
-     * Runs Duke.
+     * Runs {@code Duke}.
      */
     private void run() {
         printWelcomeMessage();

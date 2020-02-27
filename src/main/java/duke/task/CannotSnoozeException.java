@@ -7,7 +7,7 @@ import duke.DukeException;
  */
 public class CannotSnoozeException extends DukeException {
     /**
-     * Constructs a <code>CannotSnoozeException</code> with the specified detail message.
+     * Constructs a {@code CannotSnoozeException} with the specified detail message.
      *
      * @param message the detail message
      */

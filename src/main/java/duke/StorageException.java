@@ -5,7 +5,7 @@ package duke;
  */
 class StorageException extends DukeException {
     /**
-     * Constructs a <code>StorageException</code> with the specified detail message and cause.
+     * Constructs a {@code StorageException} with the specified detail message and cause.
      *
      * @param message the detail message
      * @param cause the cause

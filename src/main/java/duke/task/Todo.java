@@ -1,13 +1,11 @@
 package duke.task;
 
 /**
- * Todo is a subclass of Task. It represents a basic task with a description and
- * completion status.
+ * {@code Todo} is a subclass of {@code Task}. It represents a basic task with a description and completion status.
  */
 public class Todo extends Task {
     /**
-     * Constructs a Todo object with the specified description, marked as
-     * incomplete.
+     * Constructs a {@code Todo} object with the specified description, marked as incomplete.
      *
      * @param description the description of the todo
      */
@@ -16,8 +14,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Constructs a Todo object with the specified description and completion
-     * status.
+     * Constructs a {@code Todo} object with the specified description and completion status.
      *
      * @param description the description of the todo
      * @param isCompleted the completion status of the todo

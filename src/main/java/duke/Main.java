@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A Graphical User Interface for Duke.
+ * A Graphical User Interface for {@code Duke}.
  */
 public class Main extends Application {
     private Duke duke = new Duke("./data/duke.txt");

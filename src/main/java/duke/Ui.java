@@ -5,7 +5,7 @@ import duke.task.Task;
 import java.util.Scanner;
 
 /**
- * This class handles the command-line interface of Duke.
+ * This class handles the command-line interface of {@code Duke}.
  */
 class Ui {
     private static final int HORIZONTAL_LINE_LENGTH = 76;
@@ -13,7 +13,7 @@ class Ui {
     /**
      * Returns a string representation of the Duke logo.
      *
-     * @return the Duke logo
+     * @return the {@code Duke} logo
      */
     String getLogo() {
         String logo = " ____        _        \n"
@@ -40,7 +40,7 @@ class Ui {
         return "Goodbye. Hope to see you again soon!";
     }
 
-    /** Returns user input from the specified <code>Scanner</code>.
+    /** Returns user input from the specified {@code Scanner}.
      *
      * @param sc the scanner
      * @return the user input

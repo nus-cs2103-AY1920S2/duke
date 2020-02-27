@@ -1,9 +1,8 @@
 package duke.task;
 
 /**
- * Task is the abstract base class for all types of tasks. It encapsulates
- * information about the task, namely, a description of the task, and the
- * completion status of the task.
+ * {@code Task} is the abstract base class for all types of tasks. It encapsulates information about the task, namely,
+ * a description of the task, and the completion status of the task.
  */
 public abstract class Task {
     protected final String description;
@@ -31,7 +30,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns <code>true</code> if the task is completed, <code>false</code> otherwise.
+     * Returns {@code true} if the task is completed, {@code false} otherwise.
      *
      * @return the completion status of task
      */
