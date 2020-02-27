@@ -40,10 +40,9 @@ public final class StorageManager {
             }
             writer.close();
         } catch (IOException e) {
-            throw new StorageFileException(String.format("An error was found while writing to the storage file!\n"
-                + "The file may be corrupted. "
-                + "Please check the file at %s",
-            STORAGE_FILEPATH));
+            throw new StorageFileException(
+                String.format(Messages.STORAGE_SAVE_ERROR_MESSAGE, STORAGE_FILEPATH)
+            );
         }
     }
 

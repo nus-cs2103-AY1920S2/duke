@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 import app.Duke;
+import app.core.Messages;
 import app.exceptions.BaseException;
 import app.util.Pair;
 
@@ -32,7 +33,7 @@ public class MainWindow {
     @FXML
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        this.renderDuke(Duke.WELCOME_MESSAGE);
+        this.renderDuke(Messages.WELCOME_MESSAGE);
     }
 
     public void setDuke(Duke duke) {
@@ -53,7 +54,7 @@ public class MainWindow {
             boolean shutdown = (boolean) output.getSecondValue();
             
             if (shutdown) {
-                this.renderDuke(Duke.GOODBYE_MESSAGE);
+                this.renderDuke(Messages.GOODBYE_MESSAGE);
                 Platform.exit();
             } else {
                 this.renderUser(input);
@@ -64,7 +65,7 @@ public class MainWindow {
             this.renderDuke(e.getMessage());
         } catch (Exception e) {
             this.renderUser(input);
-            this.renderDuke(Duke.UNEXPECTED_ERROR_MESSAGE);
+            this.renderDuke(Messages.UNEXPECTED_ERROR_MESSAGE);
         } finally {
             userInput.clear();
         }

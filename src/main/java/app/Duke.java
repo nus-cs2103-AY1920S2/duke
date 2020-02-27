@@ -6,23 +6,13 @@ import app.core.ConsoleInterface;
 import app.core.commands.Command;
 import app.core.commands.CommandManager;
 import app.core.tasks.TaskManager;
+import app.core.Messages;
 
 /**
  * Main class for Duke. The class contains all the main components 
  * required for Duke to run properly.
  */
 public final class Duke {
-    /**
-     * Welcome message that is printed upon starting Duke.
-     */
-    public static final String WELCOME_MESSAGE = "Wussup Dawggg! I'm Dukeee\nWhat you want me do?";
-
-    /**
-     * Goodbye message that is printed right before the program exits.
-     */
-    public static final String GOODBYE_MESSAGE = "Bye!\nStay cool bruh! (((:";
-    public static final String UNEXPECTED_ERROR_MESSAGE = "Caught some other exception! Notify developer!";
-
     private CommandManager commandManager;
     private TaskManager taskManager;
 
@@ -39,7 +29,7 @@ public final class Duke {
      */
     public void start() {
         ConsoleInterface console = new ConsoleInterface();
-        console.render(WELCOME_MESSAGE);
+        console.render(Messages.WELCOME_MESSAGE);
           
         while (!console.isClosed()) {
             try {
@@ -59,12 +49,12 @@ public final class Duke {
             } catch (BaseException e) {
                 console.renderError(e.getMessage());
             } catch (Exception e) {
-                console.renderError(UNEXPECTED_ERROR_MESSAGE);
+                console.renderError(Messages.UNEXPECTED_ERROR_MESSAGE);
                 console.renderError(e.getMessage());
             }
         }
 
-        console.render(GOODBYE_MESSAGE);
+        console.render(Messages.GOODBYE_MESSAGE);
     }
 
     /**

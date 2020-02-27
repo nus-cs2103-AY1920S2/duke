@@ -1,5 +1,6 @@
 package app.core.commands;
 
+import app.core.Messages;
 import app.core.tasks.TaskManager;
 import app.util.Date;
 import app.util.Pair;
@@ -14,7 +15,7 @@ final class EventCommand extends Command {
     EventCommand(String args) throws InvalidUsageException, InvalidDateTimeFormatException {
         String[] splitArgs = args.split("/at");
         if (splitArgs.length != 2) {
-            throw new InvalidUsageException("Usage: event <description> /at <when>");
+            throw new InvalidUsageException(Messages.EVENT_WRONG_FORMAT_MESSAGE);
         }
 
         assert splitArgs.length == 2 : "There should only be 2 arguments in the split arguments";

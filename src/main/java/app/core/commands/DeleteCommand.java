@@ -1,5 +1,6 @@
 package app.core.commands;
 
+import app.core.Messages;
 import app.core.tasks.TaskManager;
 import app.util.Pair;
 import app.exceptions.InvalidTaskIndexException;
@@ -13,7 +14,7 @@ final class DeleteCommand extends Command {
         try {
             this.taskIndex = Integer.parseInt(args);
         } catch (NumberFormatException e) {
-            throw new InvalidUsageException("Usage: delete <task_index>");
+            throw new InvalidUsageException(Messages.DELETE_WRONG_FORMAT_MESSAGE);
         }
     }
 
@@ -23,9 +24,7 @@ final class DeleteCommand extends Command {
             String output = taskManager.deleteTask(this.taskIndex);
             return new Pair(output, false);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskIndexException(
-                "Invalid task index. Please refer to the 'list' command for available indices."
-            );
+            throw new InvalidTaskIndexException(Messages.DELETE_INVALID_TASK_INDEX_MESSAGE);
         }
     }
 }

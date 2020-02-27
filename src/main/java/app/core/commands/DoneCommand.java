@@ -1,5 +1,6 @@
 package app.core.commands;
 
+import app.core.Messages;
 import app.core.tasks.TaskManager;
 import app.util.Pair;
 import app.exceptions.InvalidTaskIndexException;
@@ -13,7 +14,7 @@ final class DoneCommand extends Command {
         try {
             this.taskIndex = Integer.parseInt(args);
         } catch (NumberFormatException e) {
-            throw new InvalidUsageException("Usage: done <task_index>");
+            throw new InvalidUsageException(Messages.DONE_WRONG_FORMAT_MESSAGE);
         }
     }
 
@@ -23,9 +24,7 @@ final class DoneCommand extends Command {
             String output = taskManager.setTaskDone(this.taskIndex);
             return new Pair(output, false);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskIndexException(
-                "Invalid task index. Please refer to the 'list' command for available indices."
-            );
+            throw new InvalidTaskIndexException(Messages.DONE_INVALID_TASK_INDEX_MESSAGE);
         }
     }
 }

@@ -1,5 +1,7 @@
 package app.core.commands;
 
+import app.core.Messages;
+
 import app.util.Parser;
 import app.util.StringPair;
 
@@ -43,9 +45,9 @@ public final class CommandManager {
         case "delete":
             return new DeleteCommand(args);
         case "":
-            throw new InvalidCommandException("The command should not be empty");
+            throw new InvalidCommandException(Messages.EMPTY_COMMAND_MESSAGE);
         default:
-            throw new InvalidCommandException(String.format("The command '%s' is not supported", command));
+            throw new InvalidCommandException(String.format(Messages.UNSUPPORTED_COMMAND_MESSAGE, command));
         }
     }
 }

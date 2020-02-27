@@ -1,5 +1,6 @@
 package app.core.commands;
 
+import app.core.Messages;
 import app.core.tasks.TaskManager;
 import app.util.Pair;
 import app.exceptions.InvalidUsageException;
@@ -9,7 +10,7 @@ final class FindCommand extends Command {
 
     FindCommand(String args) throws InvalidUsageException {
         if (args.equals("")) {
-            throw new InvalidUsageException("Usage: find <string_to_match>");
+            throw new InvalidUsageException(Messages.FIND_WRONG_FORMAT_MESSAGE);
         }
 
         this.toMatch = args;

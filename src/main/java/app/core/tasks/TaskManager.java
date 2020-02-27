@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import app.util.Date;
+import app.core.Messages;
 import app.core.StorageManager;
 import app.exceptions.StorageFileException;
 
@@ -56,18 +57,13 @@ public class TaskManager {
     }
 
     private String add(Task task) throws StorageFileException {
-        for (Task t : this.taskList) {
-            if (task.equals(t)) {
-                return "This task is duplicated!";
-            }
+        if (this.taskList.contains(task)) {
+            return Messages.ADD_DUPLICATED_TASK_MESSAGE;
         }
 
         this.taskList.add(task);
         this.storageManager.save(this.taskList);
-        return String.format("Got it. I've added this task:\n"
-            + "  %s\n"
-            + "Now you have %d tasks in the list.\n", task, this.taskList.size()
-        );
+        return String.format(Messages.ADD_TASK_SUCCESS_MESSAGE, task, this.taskList.size());
     }
 
     /**
@@ -82,9 +78,7 @@ public class TaskManager {
         task.setDone();
         this.storageManager.save(this.taskList);
 
-        return String.format(
-            "Nice! I've marked this task as done: \n%s", task
-        );
+        return String.format(Messages.SET_TASK_DONE_SUCCESS_MESSAGE, task);
     }
 
     /**
@@ -98,10 +92,7 @@ public class TaskManager {
         Task task = this.taskList.remove(index - 1);
         this.storageManager.save(this.taskList);
 
-        return String.format("Noted. I've removed this task: \n"
-            + "  %s\n"
-            + "Now you have %d tasks in the list.\n", task, this.taskList.size()
-        );
+        return String.format(Messages.DELETE_TASK_SUCCESS_MESSAGE, task, this.taskList.size());
     }
 
     /**
@@ -120,7 +111,7 @@ public class TaskManager {
         }
 
         if (filteredTasks.size() == 0) {
-            return "There are no matching tasks";
+            return Messages.FILTER_TASK_NO_TASKS_MESSAGE;
         }
 
         StringBuilder sb = new StringBuilder("Here are the matching tasks: \n");
