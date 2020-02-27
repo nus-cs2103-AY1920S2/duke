@@ -70,7 +70,6 @@ public class Parser {
 
     private String getDescAndDate(String cmd, String line) throws NoDescriptionProvidedException,
               NoDateProvidedException {
-        // TODO: throw NoDescriptionException when only date and task type is provided.
         String[] arr = line.split(" ", 2);
         if (arr.length < 2) {
             throw new NoDescriptionProvidedException();
@@ -79,13 +78,17 @@ public class Parser {
             return arr[1].trim();
         } else if (cmd.equals("event")) {
             String[] descAndDate = arr[1].split(" /at ");
-            if (descAndDate.length < 2) {
+            if (arr[1].indexOf("/at") == 0) {
+                throw new NoDescriptionProvidedException();
+            } else if (descAndDate.length < 2) {
                 throw new NoDateProvidedException("at");
             }
             return String.join(" | ", descAndDate);
         } else {
             String[] descAndDate = arr[1].split(" /by ");
-            if (descAndDate.length < 2) {
+            if (arr[1].indexOf("/by") == 0) {
+                throw new NoDescriptionProvidedException();
+            } else if (descAndDate.length < 2) {
                 throw new NoDateProvidedException("by");
             }
             return String.join(" | ", descAndDate);

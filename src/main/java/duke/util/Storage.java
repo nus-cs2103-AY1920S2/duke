@@ -94,7 +94,6 @@ public class Storage {
         String[] toSave = new String[4];
         toSave[1] = task.isDone ? "1" : "0";
         toSave[2] = task.getDescription();
-        System.out.println("file length: " + file.length());
         if (task instanceof Event) {
             toSave[0] = "E";
             toSave[3] = ((Event) task).getScheduledTime().toString();
