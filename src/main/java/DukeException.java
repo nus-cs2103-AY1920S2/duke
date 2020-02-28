@@ -1,5 +1,3 @@
-//package duke;
-
 /**
  * Represents exceptions that may happen while running Duke.
  */

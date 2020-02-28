@@ -1,6 +1,4 @@
-//package duke;
-
-import java.time.LocalDate;
+simport java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -32,6 +30,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + time.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        return "[D]" + super.toString() + "(by: "
+                + time.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }

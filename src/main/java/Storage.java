@@ -1,11 +1,3 @@
-/*package duke;
-
-import duke.Ui;
-import duke.Task;
-import duke.DukeException;
-import duke.Todo;
-import duke.Deadline;
-import duke.Event;*/
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -84,12 +76,12 @@ public class Storage {
                 String text = "T | " + (task.getStatus() ? "1" : "0") + " | " + task.getInstruction();
                 fileWriter.write(text + System.lineSeparator());
             } else if (task instanceof Deadline) {
-                String text = "D | " + (task.getStatus() ? "1" : "0") + " | " + task.getInstruction()
-                        + " | " + ((Deadline) task).getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                String text = "D | " + (task.getStatus() ? "1" : "0") + " | " + task.getInstruction() + " | "
+                        + ((Deadline) task).getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
                 fileWriter.write(text + System.lineSeparator());
             } else if (task instanceof Event) {
-                String text = "E | " + (task.getStatus() ? "1" : "0") + " | " + task.getInstruction()
-                        + " | " + ((Event) task).getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                String text = "E | " + (task.getStatus() ? "1" : "0") + " | " + task.getInstruction() + " | "
+                        + ((Event) task).getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
                 fileWriter.write(text + System.lineSeparator());
             }
         }

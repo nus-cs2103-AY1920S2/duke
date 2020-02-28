@@ -1,11 +1,3 @@
-/*package duke;
-
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.Parser;
-import duke.DukeException;
-*/
 import java.io.*;
 
 /**

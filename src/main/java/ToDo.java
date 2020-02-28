@@ -1,5 +1,3 @@
-//package duke;
-
 /**
  * Represents a todo object characterized by an instrution.
  */

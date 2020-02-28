@@ -1,7 +1,3 @@
-/*package duke;
-
-import duke.Task;
-import duke.DukeException;*/
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -41,14 +37,16 @@ public class Ui {
      * Marks a task as done for the user.
      */
     public void done(int n, ArrayList<Task> tasks) {
-        System.out.println("Nice! I've marked this task as done: \n" + tasks.get(n-1).toString());
+        System.out.println("Nice! I've marked this task as done: \n"
+                + tasks.get(n-1).toString());
     }
 
     /**
      * Deletes a task for the user.
      */
     public void delete(int n, ArrayList<Task> tasks) {
-        System.out.println("Noted. I've removed this task:\n" + tasks.get(n-1).toString());
+        System.out.println("Noted. I've removed this task:\n"
+                + tasks.get(n-1).toString());
     }
 
     /**
