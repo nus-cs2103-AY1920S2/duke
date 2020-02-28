@@ -236,8 +236,10 @@ public class TaskList {
         return output;
     }
 
-    public static String searchByName(ArrayList<Task> list, String input) throws IOException {
-        String keyword = input.replaceAll("find ", "");
+
+    public static String searchByName(ArrayList<Task> list, String ...values) throws IOException {
+        String keyword = values[0].replaceAll("find ", "");
+
         boolean hasMatch = false;
         String output = "";
         int [] matchFound = new int[100];
