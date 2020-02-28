@@ -36,7 +36,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setStyle("-fx-background-color: #327CF4; -fx-text-fill: white; -fx-background-radius: 15; -fx-label-padding: 10,0,10,0");
         displayPicture.setImage(img);
+        //displayPicture.setFitWidth(70);
     }
 
     /**
@@ -47,6 +49,8 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 15; -fx-label-padding: 10,0,10,0");
+        //displayPicture.setFitWidth(80);
     }
 
     /**
@@ -57,7 +61,8 @@ public class DialogBox extends HBox {
      * @return DialogBox of user
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDialog = new DialogBox(text, img);
+        return userDialog;
     }
 
     /**

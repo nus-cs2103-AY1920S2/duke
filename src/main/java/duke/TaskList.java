@@ -106,12 +106,12 @@ public class TaskList {
                 Task current = this.tasks.get(taskNum);
                 this.tasks.remove(taskNum);
                 response = ui.showTaskDeleted(current, this.tasks);
+                assert (initialSize - this.tasks.size()) == 1 : "Task list should decrease by 1";
 
             } else {
                 response = ui.showTaskError();
             }
 
-            assert (initialSize - this.tasks.size()) == 1 : "Task list should decrease by 1";
             return response;
 
         } catch (DukeException ex) {

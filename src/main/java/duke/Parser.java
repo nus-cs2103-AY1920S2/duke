@@ -30,7 +30,10 @@ public class Parser {
         String[] arr = this.input.split(" ", 2);
         String response = "";
 
-        if (input.equals("bye")) {
+        if (input.equals("Aloha") || input.equals("aloha")) {
+            response = ui.showGreeting();
+
+        } else if (input.equals("bye")) {
             response = ui.showGoodbye();
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(event -> Platform.exit());

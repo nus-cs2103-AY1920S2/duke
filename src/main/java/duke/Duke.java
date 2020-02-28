@@ -19,17 +19,6 @@ public class Duke extends Application {
     public Duke() {
     }
 
-    /**
-     * Takes in path of file to be read.
-     * Initializes UI, Storage and TaskList classes.
-     *
-     * @param filePath of stored data
-     */
-    private void loadDuke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.load());
-    }
 
     /**
      * Runs duke, loads and stores tasks.
