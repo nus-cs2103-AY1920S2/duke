@@ -1,5 +1,4 @@
-package duke;
-
+import duke.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -42,6 +41,9 @@ public class Duke extends Application {
     private Parser parser;
     ArrayList<Task> list;
 
+    public Duke(){
+
+    }
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -62,10 +64,6 @@ public class Duke extends Application {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-
-
-    }
 
     @Override
     public void start(Stage stage) {
@@ -163,13 +161,13 @@ public class Duke extends Application {
     private void handleUserInput() {
         String input = userInput.getText();
         String output = "";
+        Label userText = new Label(input);
+        input = input.toLowerCase();
         try {
             output = Parser.evaluateInput(input, list);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Label userText = new Label(input);
 
         Label dukeText = new Label(getResponse(output));
         dialogContainer.getChildren().addAll(

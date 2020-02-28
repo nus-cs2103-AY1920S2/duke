@@ -229,9 +229,9 @@ public class TaskList {
         }
 
         if (!flag){
-            System.out.println("Opps, there is no such task occurring for this date. ");
+            System.out.println("No, no, no, there is no such task occurring for this date. ");
             output = "These are the task(s) occurring at " + date + " : " + "\n"
-                    + "Opps, there is no such task occurring for this date. ";
+                    + "No, no, no..., no such task occurring for this date. ";
         }
         return output;
     }

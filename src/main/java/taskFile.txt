@@ -1,5 +1,1 @@
-D -0 -finish CS3230 programming assignment  -2020-03-06
-D -1 -return lib book  -2020-03-04
-E -0 -Singapore Night Festival  -2020-04-01
-E -1 -Fiona's Bday  -2020-04-04
-T -0 -buy medicine -
+T -0 -me -
