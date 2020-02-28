@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -61,6 +62,9 @@ public class Parser {
         } else if (instruction.split(" ")[0].equals("delete")) {
             tasks.deleteTask(Integer.parseInt(instruction.split(" ")[1]));
             storage.record(tasks.getTasks());
+        } else if (instruction.split(" ")[0].equals("find")) {
+            String keyword = instruction.replace("find ", "");
+            tasks.find(keyword);
         } else if (instruction.split(" ")[0].equals("todo")) {
             String task = instruction.replace("todo", "");
             if (!task.equals("")) {

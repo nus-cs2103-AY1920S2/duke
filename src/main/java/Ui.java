@@ -50,6 +50,19 @@ public class Ui {
     }
 
     /**
+     * Finds tasks that matches the given keyword for the user.
+     * @Param results The list of matching tasks.
+     */
+    public void findKeyword(ArrayList<Task> results) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < results.size(); i++) {
+            if (results.get(i) != null) {
+                System.out.println((i + 1) + ". " + results.get(i).toString());
+            }
+        }
+    }
+
+    /**
      * Counts the number of task in the current list for the user.
      */
     public void count(ArrayList<Task> tasks) {

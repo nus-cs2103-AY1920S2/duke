@@ -66,6 +66,20 @@ public class TaskList {
     }
 
     /**
+     * Finds tasks that matches the given keyword.
+     * @Param keyword The given keyword.
+     */
+    public void find(String keyword) {
+        ArrayList<Task> results = new ArrayList<Task>();
+        for (Task task: tasks) {
+            if (task.getInstruction().contains(keyword)) {
+                results.add(task);
+            }
+        }
+        ui.findKeyword(results);
+    }
+
+    /**
      * Prints the list of tasks.
      */
     public void printList() {
