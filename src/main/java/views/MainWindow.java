@@ -1,5 +1,6 @@
 package views;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-
+import javafx.util.Duration;
 import app.Duke;
 import app.core.Messages;
 import app.exceptions.BaseException;
@@ -55,7 +56,10 @@ public class MainWindow {
             
             if (shutdown) {
                 this.renderDuke(Messages.GOODBYE_MESSAGE);
-                Platform.exit();
+                
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(event -> Platform.exit());
+                pause.play();
             } else {
                 this.renderUser(input);
                 this.renderDuke(message);
