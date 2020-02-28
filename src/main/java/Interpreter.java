@@ -21,10 +21,18 @@ public class Interpreter {
 				+ "| |_| | |_| |   <  __/\n"
 				+ "|____/ \\__,_|_|\\_\\___|\n";
 	
+	/**
+	 * [printGreeting description]
+	 * @return [description]
+	 */
 	static public DukeResponse printGreeting() {
 		return new DukeResponse("Hello from\n" + logo);
 	}
 
+	/**
+	 * [printUsage of Duke]
+	 * @return [description]
+	 */
 	static public DukeResponse printUsage() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Usage of DUKE: \n")
@@ -37,6 +45,11 @@ public class Interpreter {
 		return new DukeResponse(sb.toString());
 	}
 
+	/**
+	 * [printMessage of a given message]
+	 * @param  message [a String]
+	 * @return         [description]
+	 */
 	static public DukeResponse printMessage(String message) {
 		return new DukeResponse(message);
 	}
@@ -53,6 +66,12 @@ public class Interpreter {
 		return new DukeResponse(sb.toString());
 	}
 
+	/**
+	 * [printAdd prints adding commands]
+	 * @param  task                 [a specific task]
+	 * @param  numberOfCurrentTasks [number of current tasks in the list]
+	 * @return                      [description]
+	 */
 	static public DukeResponse printAdd(Task task, int numberOfCurrentTasks) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Got it. I've added this task: ").append("\n");
@@ -64,6 +83,12 @@ public class Interpreter {
 		return new DukeResponse(sb.toString());
 	}
 
+	/**
+	 * [printDelete prints deleteting commands]
+	 * @param  task                 [a specific task]
+	 * @param  numberOfCurrentTasks [number of current tasks in the list]
+	 * @return                      [description]
+	 */
 	static public DukeResponse printDelete(Task task, int numberOfCurrentTasks) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Noted. I've removed this task:").append("\n");
@@ -75,6 +100,12 @@ public class Interpreter {
 		return new DukeResponse(sb.toString());
 	}
 
+	/**
+	 * [printMultipleDelete]
+	 * @param  tasks                [a list of tasks]
+	 * @param  numberOfCurrentTasks [number of current tasks in the list]
+	 * @return                      [description]
+	 */
 	static public DukeResponse printMultipleDelete(List<Task> tasks, int numberOfCurrentTasks) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Noted. I've removed these tasks:").append("\n");
@@ -88,6 +119,11 @@ public class Interpreter {
 		return new DukeResponse(sb.toString());
 	}
 
+	/**
+	 * [printDoneList print done list]
+	 * @param  list [description]
+	 * @return      [description]
+	 */
 	static public DukeResponse printDoneList(List<Task> list) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Nice! I've marked this task as done:").append("\n");
@@ -97,11 +133,21 @@ public class Interpreter {
 		return new DukeResponse(sb.toString());
 	}
 
-
+	/**
+	 * [printException print the exception throwed by Duke]
+	 * @param  e [an exception]
+	 * @return   [a duke response]
+	 */
 	static public DukeResponse printException(DukeException e) {
 		return new DukeResponse(e.getMessage());
 	}
 
+	/**
+	 * [printFind print finding command]
+	 * @param  tasks   [a list of tasks]
+	 * @param  indexes [list of pringing indexes]
+	 * @return         [description]
+	 */
 	static public DukeResponse printFind(List<Task> tasks, List<Integer> indexes) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Here are the matching tasks in your list: \n");

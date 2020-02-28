@@ -34,6 +34,13 @@ public class DoneCommand extends Command {
 		return result;
 	}
 
+	/**
+	 * [execute description]
+	 * @param  storage            [description]
+	 * @param  taskList           [description]
+	 * @return                    [description]
+	 * @throws DukeParseException [description]
+	 */
 	@Override
 	public DukeResponse execute(Storage storage, TaskList taskList) throws DukeParseException {
 		List<Integer> indexes = getDoneCommand(super.commandText);

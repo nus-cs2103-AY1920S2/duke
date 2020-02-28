@@ -18,6 +18,12 @@ public abstract class Task {
 	boolean isDone = false;
 	protected List<String> remainingTokens = new ArrayList<>();
 
+	/**
+	 * [Task a task receiving a plain command text]
+	 * @param  commandText        [a string typed by users]
+	 * @return                    [a new task]
+	 * @throws DukeParseException [throws exeption when cannot parse]
+	 */
 	public Task(String commandText) throws DukeParseException {
 		this.commandText = commandText;
 
@@ -48,6 +54,12 @@ public abstract class Task {
 		}
 	}	
 
+	/**
+	 * [Task description]
+	 * @param  data               [description]
+	 * @return                    [description]
+	 * @throws DukeParseException [description]
+	 */
 	public Task(JSONObject data) throws DukeParseException {
 		try {
 			this.description = (String) data.get("description");
@@ -65,18 +77,37 @@ public abstract class Task {
 		}
 	}
 
+	/**
+	 * [getStatusIcon description]
+	 * @return [description]
+	 */
 	public String getStatusIcon() {
 		return (isDone ? "[\u2713] " : "[\u2718] "); //return tick or X symbols
 	}
-
+	
+	/**
+	 * [markAsDone description]
+	 */
 	public void markAsDone() {
 		this.isDone = true;
 	}
 
+	/**
+	 * [getSignature description]
+	 * @return [description]
+	 */
 	public abstract String getSignature();
 
+	/**
+	 * [getSeparator description]
+	 * @return [description]
+	 */
 	public abstract String getSeparator();
 
+	/**
+	 * [parseToJson description]
+	 * @return [description]
+	 */
 	public JSONObject parseToJson() {
 		JSONObject result = new JSONObject();
 		result.put("type", this.getSignature());
@@ -92,7 +123,7 @@ public abstract class Task {
 		result.put("tokens", tokens);
 		return result;
 	}
-
+	
 	protected List<String> getListRemainingTokens() {
 		return this.remainingTokens;
 	}

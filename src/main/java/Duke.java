@@ -153,18 +153,20 @@ public class Duke extends Application {
         // more code to be added here later
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
         
         mainLayout.setPrefSize(400.0, 600.0);
         
         scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         
         scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
+        //scrollPane.setFitToWidth(true);
+        //scrollPane.setFitToHeight(true);
+        scrollPane.setPannable(true);
         
         // You will need to import `javafx.scene.layout.Region` for this. 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);

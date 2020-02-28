@@ -11,6 +11,13 @@ import com.duke.commands.*;
  * This class parse raw command string into commands. 
  */
 public class Parser {
+
+	/**
+	 * [parse description]
+	 * @param  commandText        [description]
+	 * @return                    [description]
+	 * @throws DukeParseException [description]
+	 */
 	public Command parse(String commandText) throws DukeParseException {
 		String[] tokens = commandText.split(" ");
 
