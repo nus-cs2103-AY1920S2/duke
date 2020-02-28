@@ -9,13 +9,15 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoUnit;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
     static final LocalDate TODAY = LocalDate.now();
-    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy");
+    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
     static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
     /**
@@ -533,7 +535,7 @@ public class Parser {
                 }
             }
 
-            return Ui.displayUpcomingDay(targetDate.format(DATE_FORMATTER), upcomingDeadlines, upcomingEvents);
+            return Ui.displayViewDay(targetDate.format(DATE_FORMATTER), upcomingDeadlines, upcomingEvents);
 
         } catch (DateTimeParseException e) {
             return Ui.WRONG_DATE_TIME_FORMAT;

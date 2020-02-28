@@ -35,13 +35,13 @@ public class TaskList {
         return Ui.ADDED_NEW_TASK + task + Ui.taskCountMessage(this.list.size());
     }
 
-
-
+    /**
+     * Appends otherList into this TaskList.
+     * @param otherList the taskList to append to this list.
+     */
     public void addAll(TaskList otherList) {
         this.list.addAll(otherList.getList());
     }
-
-
 
     /**
      * Adds a new Task of type Todo to this TaskList and saves the changes to the data file.

@@ -1,3 +1,7 @@
+/**
+ * The UI class handles all string messages to be shown by Duke.
+ */
+
 package duke;
 
 public class Ui {
@@ -6,7 +10,7 @@ public class Ui {
     static final String INVALID_FIELD = "Oops! Invalid field!";
     static final String TASK_NEEDS_NAME = "Oops! This task needs a name!";
     static final String TASK_NEEDS_DATE_TIME = "Oops! This task needs a date/time!";
-    static final String WRONG_DATE_TIME_FORMAT = "Oops! The date needs to be DD/MM/YYYY and time needs to be HHMM (24hr) format!";
+    static final String WRONG_DATE_TIME_FORMAT = "Oops! Invalid date/time format or invalid date!";
     static final String NO_TASK_FOUND = "Oops! Task not found in the list!";
     static final String NO_TASK_IN_LIST = "Yay! There are no tasks in your list!";
     static final String DISPLAY_TASK_LIST = "Here are all the tasks in your list:";
@@ -29,16 +33,34 @@ public class Ui {
     static final String SORTED_BY_DATE_TIME = "Sorted your tasks by date.";
 
 
+    /**
+     * Reads a String line, parses it and sends to the main logic for processing.
+     * @param input The full input by the user.
+     * @param taskLists An array of TaskLists
+     * @return The output message from passing the input into the main logic
+     */
     public static String readNextCommand(String input, TaskList[] taskLists) {
         String[] command = Parser.parseInput(input.strip());
         return Parser.processCommand(command, taskLists);
     }
 
-
+    /**
+     * Presents the number of tasks in any TaskList
+     * @param listSize The size of the list.
+     * @return A message containing the number of tasks in the list.
+     */
     public static String taskCountMessage(int listSize) {
         return "\nNow you have "+ listSize + (listSize == 1 ? " task" : " tasks") + " in the list.";
     }
 
+
+    /**
+     * The main message when the user types in an 'upcoming' command.
+     * @param dayRangeUntil The number of days in the range.
+     * @param upcomingDeadlines The list of upcoming deadlines occurring within the range.
+     * @param upcomingEvents The list of upcoming events occurring within the range.
+     * @return a string representation of an overview of deadlines and events.
+     */
     public static String displayUpcomingRange(int dayRangeUntil, TaskList upcomingDeadlines, TaskList upcomingEvents) {
         String deadlines = messageUpcomingDeadlines(upcomingDeadlines) + "for the next " + dayRangeUntil + " day(s).\n";;
         if (!upcomingDeadlines.isEmpty()) {
@@ -52,7 +74,14 @@ public class Ui {
         return deadlines + events;
     }
 
-    public static String displayUpcomingDay(String targetDate, TaskList upcomingDeadlines, TaskList upcomingEvents) {
+    /**
+     *
+     * @param targetDate The target date the user requests.
+     * @param upcomingDeadlines The list of deadlines happening on the targetDate.
+     * @param upcomingEvents The list of events happening on the targetDate.
+     * @return a string representation of an overview of deadlines and events.
+     */
+    public static String displayViewDay(String targetDate, TaskList upcomingDeadlines, TaskList upcomingEvents) {
         String deadlines = messageUpcomingDeadlines(upcomingDeadlines) + "on " + targetDate + ".\n";
         if (!upcomingDeadlines.isEmpty()) {
             deadlines = deadlines + upcomingDeadlines + "\n";
@@ -65,8 +94,12 @@ public class Ui {
         return deadlines + events;
     }
 
-
-
+    /**
+     * Returns the starting message of both 'upcoming' and 'view' commands for the deadline list. Also sorts the list
+     * by date/time.
+     * @param upcomingDeadlines the list of upcoming deadlines.
+     * @return a string message.
+     */
     public static String messageUpcomingDeadlines(TaskList upcomingDeadlines) {
         if (upcomingDeadlines.isEmpty()) {
             return "You have no upcoming deadlines ";
@@ -75,6 +108,12 @@ public class Ui {
         return "Your upcoming deadlines ";
     }
 
+    /**
+     * Returns the starting message of both 'upcoming' and 'view' commands for the event list. Also sorts the list
+     * by date/time.
+     * @param upcomingEvents the list of upcoming events.
+     * @return a string message.
+     */
     public static String messageUpcomingEvents(TaskList upcomingEvents) {
         if (upcomingEvents.isEmpty()) {
             return "You have no upcoming events ";
