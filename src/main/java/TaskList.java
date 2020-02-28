@@ -42,7 +42,6 @@ public class TaskList{
     }
 
     public ArrayList<Task> getTL() {
-
         return this.TL;
     }
 
@@ -62,5 +61,4 @@ public class TaskList{
         }
         return s;
     }
-
 }

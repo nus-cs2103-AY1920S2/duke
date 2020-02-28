@@ -28,6 +28,10 @@ public class Command {
      */
     public Command(){}
 
+    /**
+     *
+     * Loads tasks into Duke
+     */
     protected void loadList() {
         if(isTaskListLoaded) {
         } else {
@@ -38,9 +42,6 @@ public class Command {
                 e.getMessage();
             }
         }
-
-
-
     }
 
     /**
@@ -56,7 +57,6 @@ public class Command {
         String response = "";
         if (command.equals("todo")) {
             try {
-                //response = "todo";
                 assert isTaskListLoaded : "TaskList not loaded from storage";
                 Todo todo = new Todo(ui.getDescription());
                 tl.TL.add(todo);
@@ -66,7 +66,6 @@ public class Command {
             }
         } else if (command.equals("deadline")) {
             try {
-                //response = "deadline";
                 assert isTaskListLoaded : "TaskList not loaded from storage";
                 String desc = ui.getDescription();
                 String date = (desc.split("/by "))[1];
@@ -80,7 +79,6 @@ public class Command {
             }
         } else if (command.equals("event")) {
             try {
-                //response = "event";
                 assert isTaskListLoaded : "TaskList not loaded from storage";
                 String desc = ui.getDescription();
                 String date = (desc.split("/at "))[1];
@@ -94,7 +92,6 @@ public class Command {
             }
         } else if (command.equals("done")) {
             try {
-                //response = "done";
                 assert isTaskListLoaded : "TaskList not loaded from storage";
                 int taskNum = Integer.parseInt(ui.getNumber());
                 Task t = tl.TL.get(taskNum - 1);
@@ -104,7 +101,6 @@ public class Command {
             }
         } else if (command.equals("delete")) {
             try {
-                //response = "delete";
                 assert isTaskListLoaded : "TaskList not loaded from storage";
                 int taskNum = Integer.parseInt(ui.getNumber());
                 Task t = tl.TL.get(taskNum - 1);
@@ -115,7 +111,6 @@ public class Command {
             }
         } else if (command.equals("find")) {
             try {
-                //response = "find";
                 assert isTaskListLoaded : "TaskList not loaded from storage";
                 String rest = ui.getDescription();
                 response = ("Here are the tasks in your list that matches:" + rest + "\n");
@@ -124,22 +119,19 @@ public class Command {
                 response = e.getMessage();
             }
         } else if (command.equals("bye")) {
-            //response = "bye";
             try {
                 String S = "";
                 for (int i = 0; i < tl.getTL().size(); i++) {
                     S += tl.TL.get(i).toString() + '\n';
                 }
                 storage.writeToFile(FILEPATH, S);
-                //return ("bye see you soon");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         } else if (command.equals("list")) {
-            try {//response = "list";
+            try {
                 assert isTaskListLoaded : "TaskList not loaded from storage";
                 response = (ui.showList()+"\n");
-                //storage.printFileContents(FILEPATH);
 
                 for (int i = 0; i < tl.TL.size(); i++) {
                     int j = i + 1;
@@ -171,9 +163,5 @@ public class Command {
             }
         }
         return response;
-
-
     }
-
-
 }
