@@ -183,8 +183,6 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        AnchorPane.setHgrow(dialogContainer, Priority.ALWAYS);
-
         //Step 3. Add functionality to handle user input.
 
         printGreeting();

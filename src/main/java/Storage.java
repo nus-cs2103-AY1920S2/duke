@@ -2,6 +2,11 @@ package com.duke;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.net.URL;
+import java.io.File;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import com.duke.task.Task;
 import com.duke.task.Deadline;
 import com.duke.task.Event;
@@ -10,11 +15,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
-import java.net.URL;
-import java.io.File;
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 
 /**
  * Load data from and into files.
@@ -22,10 +22,20 @@ import java.io.FileWriter;
 public class Storage {
 	private String pathToData;
 
+	/**
+	 * [Storage description]
+	 * @param  pathToData [description]
+	 * @return            [description]
+	 */
 	public Storage(String pathToData) {
 		this.pathToData = pathToData;
 	}
 
+	/**
+	 * [encodeContainers description]
+	 * @param  containers [description]
+	 * @return            [description]
+	 */
 	public JSONObject encodeContainers(List<Task> containers) {
 		JSONObject result = new JSONObject();
 		JSONArray parsedContainers = new JSONArray();
@@ -35,7 +45,11 @@ public class Storage {
 		result.put("containers", parsedContainers);
 		return result;
 	}
-
+	
+	/**
+	 * [getData description]
+	 * @return [description]
+	 */
 	public List<Task> getData() {
 		try {
 			File file = new File(pathToData);
@@ -80,6 +94,10 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * [saveData description]
+	 * @param storage [description]
+	 */
 	public void saveData(TaskList storage) {
 		JSONObject data = this.encodeContainers(storage.getList());
 		String str = data.toString();
