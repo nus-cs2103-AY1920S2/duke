@@ -16,6 +16,7 @@ public class ToDo extends Task {
 	 * @return                    [description]
 	 * @throws DukeParseException [description]
 	 */
+	
 	public ToDo(String commandText) throws DukeParseException {
 		super(commandText);
 	}
