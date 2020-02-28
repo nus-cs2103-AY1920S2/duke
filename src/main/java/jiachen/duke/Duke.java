@@ -172,6 +172,10 @@ public class Duke extends Application {
             timestamp = taskInfo[1].trim();
         }
 
+        if (DateTimeUtil.getInstance().isNatualDate(timestamp)) {
+            timestamp = DateTimeUtil.getInstance().convertFromNatualDate(timestamp);
+        }
+
         Task task = new EventTask(desc, timestamp);
 
         tasks.add(task);
@@ -189,6 +193,11 @@ public class Duke extends Application {
         if (taskInfo.length > 1) {
             timestamp = taskInfo[1].trim();
         }
+
+        if (DateTimeUtil.getInstance().isNatualDate(timestamp)) {
+            timestamp = DateTimeUtil.getInstance().convertFromNatualDate(timestamp);
+        }
+
         Task task = new DeadlineTask(desc, timestamp);
         tasks.add(task);
         storage.save(tasks);

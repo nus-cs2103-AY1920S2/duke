@@ -56,29 +56,33 @@ Examples:
 
 * `todo clean my room`
 
-### Adding a todo: `event`
+### Adding a event: `event`
 
 Adds a event task to the duke +
 Format: `event DESCRIPTION /at DATETIME`
 
 [TIP]
 Datetime has to be in the form `dd/MM/yyyy HHmm`
+Datetime also support natural dates eg `mon` or `monday` which will be the next monday from today
 
 Examples:
 
-* `event sleep /by 01/01/2019 2130`
+* `event sleep /at 01/01/2019 2130`
+* `event meet duke /at tue`
 
-### Adding a todo: `deadline`
+### Adding a deadline: `deadline`
 
 Adds a deadline task to the duke +
 Format: `deadline DESCRIPTION /by DATETIME`
 
 [TIP]
 Datetime has to be in the form `dd/MM/yyyy HHmm`
+Datetime also support natural dates eg `mon` or `monday` which will be the next monday from today
 
 Examples:
 
 * `deadline do homework /by 01/01/2019 2359`
+* `deadline do math homework /by wed`
 
 ### Listing all tasks : `list`
 

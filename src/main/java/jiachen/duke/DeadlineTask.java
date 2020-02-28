@@ -1,7 +1,6 @@
 package jiachen.duke;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * The type Deadline task.
@@ -33,7 +32,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String format() {
-        LocalDateTime dateString = LocalDateTime.parse(this.toBeDoneBy, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        LocalDateTime dateString = LocalDateTime.parse(this.toBeDoneBy, DateTimeUtil.inputFormatter);
         return "D | " + super.format() + " | " + dateString;
     }
 }
