@@ -49,10 +49,10 @@ public class Task {
         String mark;
         if (this.isDone) {
             //mark = "[" + "\u2713" + "]";
-            mark = "[" + "✅" + "]";
+            mark = "[V]";
         } else {
             //mark = "[" + "\u2717" + "]";
-            mark = "[" + "❌" + "]";
+            mark = "[X]";
         }
         return mark + " " + this.name;
     }
