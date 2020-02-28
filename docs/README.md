@@ -7,7 +7,7 @@ Duke is for those who prefer to use a desktop app for managing their tasks and e
 ## 2. Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer
-2. Download the latest `duke-0.1.3.jar`
+2. Download the latest `duke-0.1.3.jar` [here](https://github.com/hhjoel/duke/releases/download/A-Release3/duke-0.1.3.jar)
 3. Copy the `jar` file to the folder you want to use as the home folder for your Duke Task Manager
 4. Double click the `jar` file to start the app. The GUI should appear in a few seconds.
 
