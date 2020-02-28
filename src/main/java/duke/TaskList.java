@@ -43,42 +43,6 @@ class TaskList {
     }
 
     /**
-     * Returns a task list with the tasks whose descriptions contain the specified search term.
-     *
-     * @param searchTerm the search term
-     * @return a task list containing tasks that match the search term
-     */
-    TaskList find(String searchTerm) {
-        TaskList matchingTasks = new TaskList();
-        for (Task task : tasks) {
-            if (task.getDescription().contains(searchTerm)) {
-                matchingTasks.add(task);
-            }
-        }
-        return matchingTasks;
-    }
-
-    /**
-     * Snoozes the task with the specified task number by the specified duration.
-     *
-     * @param taskNumber the task number of the task to be snoozed
-     * @param duration the duration to snooze the task for
-     * @return the snoozed task
-     */
-    Task snooze(int taskNumber, TemporalAmount duration) throws TaskNumberOutOfBoundsException, CannotSnoozeException {
-        try {
-            int taskIndex = taskNumber - 1;
-            Task snoozedTask = (Task) ((Snoozable) tasks.get(taskIndex)).snooze(duration);
-            tasks.set(taskIndex, snoozedTask);
-            return snoozedTask;
-        } catch (IndexOutOfBoundsException e) {
-            throw new TaskNumberOutOfBoundsException(taskNumber);
-        } catch (ClassCastException e) {
-            throw new CannotSnoozeException("Oops! This task cannot be snoozed.");
-        }
-    }
-
-    /**
      * Marks the task with the specified task number as completed.
      *
      * @param taskNumber the task number of the task to be completed
@@ -113,22 +77,71 @@ class TaskList {
     }
 
     /**
+     * Snoozes the task with the specified task number by the specified duration.
+     *
+     * @param taskNumber the task number of the task to be snoozed
+     * @param duration the duration to snooze the task for
+     * @return the snoozed task
+     */
+    Task snooze(int taskNumber, TemporalAmount duration) throws TaskNumberOutOfBoundsException, CannotSnoozeException {
+        try {
+            int taskIndex = taskNumber - 1;
+            Task snoozedTask = (Task) ((Snoozable) tasks.get(taskIndex)).snooze(duration);
+            tasks.set(taskIndex, snoozedTask);
+            return snoozedTask;
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskNumberOutOfBoundsException(taskNumber);
+        } catch (ClassCastException e) {
+            throw new CannotSnoozeException("Oops! This task cannot be snoozed.");
+        }
+    }
+
+    /** Returns the first duplicate of the specified task in this task list, if any.
+     *
+     * @param task the specified task
+     * @return the first duplicate of the specified task in this task list, if any
+     */
+    Task findDuplicate(Task task) {
+        for (Task t : tasks) {
+            if (t.equals(task)) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns a task list with the tasks whose descriptions contain the specified search term.
+     *
+     * @param searchTerm the search term
+     * @return a task list containing tasks that match the search term
+     */
+    TaskList find(String searchTerm) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(searchTerm)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
+    /**
      * Removes all tasks from the task list.
      *
      * @return the empty task list
      */
     TaskList clear() {
-        tasks = new ArrayList<>();
+        tasks.clear();
         return this;
     }
 
-    /**
-     * Returns the number of tasks in this task list.
+    /** Returns a list containing the tasks in the task list.
      *
-     * @return the number of tasks in this task list
+     * @return a list containing the tasks in the task list
      */
-    int size() {
-        return tasks.size();
+    List<Task> asList() {
+        return new ArrayList<>(tasks);
     }
 
     /**
@@ -140,12 +153,13 @@ class TaskList {
         return tasks.isEmpty();
     }
 
-    /* Returns a list containing the tasks in the task list.
+    /**
+     * Returns the number of tasks in this task list.
      *
-     * @return a list containing the tasks in the task list
+     * @return the number of tasks in this task list
      */
-    List<Task> asList() {
-        return new ArrayList<>(tasks);
+    int size() {
+        return tasks.size();
     }
 
     /**

@@ -28,10 +28,14 @@ public class Duke {
     enum Command {
         TODO(false) {
             @Override
-            String execute(Duke duke, String input) throws StorageException {
+            String execute(Duke duke, String input) throws DuplicateTaskException, StorageException {
                 String arguments = duke.parser.parseArguments(input);
                 String description = duke.parser.parseTodoDescription(arguments);
                 Todo todo = new Todo(description);
+                Task duplicate = duke.tasks.findDuplicate(todo);
+                if (duplicate != null) {
+                    throw new DuplicateTaskException(duplicate);
+                }
                 duke.tasks.add(todo);
                 duke.storage.save(duke.tasks);
                 return duke.ui.outputTask(todo, duke.tasks.size());
@@ -40,12 +44,17 @@ public class Duke {
 
         DEADLINE(false) {
             @Override
-            String execute(Duke duke, String input) throws InvalidCommandException, StorageException {
+            String execute(Duke duke, String input) throws InvalidCommandException,DuplicateTaskException,
+                    StorageException {
                 String arguments = duke.parser.parseArguments(input);
                 String description = duke.parser.parseDeadlineDescription(arguments);
                 LocalDate date = duke.parser.parseDeadlineDate(arguments);
                 LocalTime time = duke.parser.parseDeadlineTime(arguments);
                 Deadline deadline = new Deadline(description, LocalDateTime.of(date, time));
+                Task duplicate = duke.tasks.findDuplicate(deadline);
+                if (duplicate != null) {
+                    throw new DuplicateTaskException(duplicate);
+                }
                 duke.tasks.add(deadline);
                 duke.storage.save(duke.tasks);
                 return duke.ui.outputTask(deadline, duke.tasks.size());
@@ -54,12 +63,17 @@ public class Duke {
 
         EVENT(false) {
             @Override
-            String execute(Duke duke, String input) throws InvalidCommandException, StorageException {
+            String execute(Duke duke, String input) throws InvalidCommandException, DuplicateTaskException,
+                    StorageException {
                 String arguments = duke.parser.parseArguments(input);
                 String description = duke.parser.parseEventDescription(arguments);
                 LocalDate date = duke.parser.parseEventDate(arguments);
                 LocalTime time = duke.parser.parseEventTime(arguments);
                 Event event = new Event(description, LocalDateTime.of(date, time));
+                Task duplicate = duke.tasks.findDuplicate(event);
+                if (duplicate != null) {
+                    throw new DuplicateTaskException(duplicate);
+                }
                 duke.tasks.add(event);
                 duke.storage.save(duke.tasks);
                 return duke.ui.outputTask(event, duke.tasks.size());

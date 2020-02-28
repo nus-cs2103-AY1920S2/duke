@@ -50,4 +50,16 @@ public class Event extends Task implements Snoozable<Event> {
                 super.toString(),
                 time.format(DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm")));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof Event) {
+            Event t = (Event) obj;
+            return this.description.equals(t.description) && this.time.equals(t.time);
+        } else {
+            return false;
+        }
+    }
 }

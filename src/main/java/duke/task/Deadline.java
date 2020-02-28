@@ -50,4 +50,16 @@ public class Deadline extends Task implements Snoozable<Deadline> {
                 super.toString(),
                 deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm")));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof Deadline) {
+            Deadline t = (Deadline) obj;
+            return this.description.equals(t.description) && this.deadline.equals(t.deadline);
+        } else {
+            return false;
+        }
+    }
 }

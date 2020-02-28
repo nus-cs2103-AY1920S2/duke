@@ -49,4 +49,7 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", isCompleted ? "✓" : "✘", description);
     }
+
+    @Override
+    public abstract boolean equals(Object obj);
 }
