@@ -5,11 +5,14 @@
 ## Features 
 
 ### Task Management 
-- Manage various tasks such as Todo, Deadline, Event.
+- Manage various tasks such as TodDo, Deadline, Event.
 - Add and delete any task.
 - Mark tasks as completed.
 - Search for tasks easily.
 
+## Installation
+- Download .jar file from [release page](http:github.com/teriaiw/duke/releases)
+- Store downloaded file in existing or newly created directory
 
 ## Usage
 
