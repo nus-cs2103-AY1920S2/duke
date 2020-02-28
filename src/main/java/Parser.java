@@ -82,6 +82,7 @@ public class Parser {
                     if ((breakPos == -1) && (command.length() == 5)) throw new DukeException("No desc Event");
                     LocalDate date = LocalDate.parse(command.substring(breakPos + 4));
                     newTask = new Event(command.substring(6, breakPos - 1), date);
+                    currentList.addTask(newTask);
                     Ui.gotIt(newTask, currentList.getSize());
                 } catch (DukeException e) {
                     System.out.println("Event description cannot be empty");
