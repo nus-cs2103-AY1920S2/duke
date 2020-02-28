@@ -35,7 +35,7 @@ public class TaskManager {
      * @throws DuplicatedTaskException If the task is duplicated
      */
     public Task addTodoTask(String description) throws StorageFileException, DuplicatedTaskException {
-        return this.add(new Task(description));
+        return this.add(new TodoTask(description));
     }
 
     /**

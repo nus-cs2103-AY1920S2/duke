@@ -6,7 +6,7 @@ import app.exceptions.InvalidDateTimeFormatException;
 /**
  * This class contains the information of a Task.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -46,7 +46,7 @@ public class Task {
                 Date date = Date.fromStorage(parsedArgs[3]);
                 output = new EventTask(parsedArgs[1], date);
             } else {
-                output = new Task(parsedArgs[1]);
+                output = new TodoTask(parsedArgs[1]);
             }
 
             if (Boolean.parseBoolean(parsedArgs[2])) {
@@ -59,35 +59,7 @@ public class Task {
         }
     }
     
-    /**
-     * Returns a String in the format used to save the task in storage.
-     * @return a String in the storage format
-     */
-    public String toStorage() {
-        return String.format("T,%s,%b", this.description, this.isDone);
-    }
-
-    /**
-     * Returns a String representation of the Task.
-     * @return a String representation of the Task
-     */
-    @Override
-    public String toString() {
-        return String.format("[T][%s] %s", this.getStatusIcon(), this.description);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (other == null || other.getClass() != this.getClass()) {
-            return false;
-        }
-        
-        Task otherTask = (Task) other;
-        boolean hasSameDescription = this.description.equals(otherTask.description);
-        return hasSameDescription;
-    }
+    public abstract String toStorage();
+    public abstract String toString();
+    public abstract boolean equals(Object other);
 }
