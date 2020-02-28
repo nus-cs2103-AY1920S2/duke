@@ -12,7 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-
+/**
+ * <h1> DialogBox </h1>
+ */
 public class DialogBox extends HBox {
     @FXML
     private Text dialog;

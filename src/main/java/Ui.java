@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
-
+/**
+ * <h1> Ui </h1>
+ * The Ui class deals with the interaction with the User
+ */
 public class Ui {
     private String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";

@@ -1,4 +1,5 @@
 /**
+ * <h1> Task </h1>
  * The Task class represents the task the user inputs into the Duke program.
  * Its attributes contain a boolean value, which tracks whether the task has been completed.
  * And a String object, which contains the description of the task.

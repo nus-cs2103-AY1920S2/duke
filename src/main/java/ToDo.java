@@ -1,3 +1,8 @@
+/**
+ * <h1> ToDo </h1>
+ * The ToDo class extends the Task Class.
+ */
+
 public class ToDo extends Task {
 
     protected String at;

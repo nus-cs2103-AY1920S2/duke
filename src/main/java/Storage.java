@@ -8,8 +8,9 @@ import java.util.ArrayList;
 
 /**
  * <h1> Storage </h1>
- * The Storage class handles the loading of tasks from the disk and saving tasks to the disk. The Storage class contains
- * a TaskList object as its attribute. This class has two methods: load() and save().
+ * The Storage class handles the loading of tasks from the disk and saving tasks to the disk.
+ * This class has two methods: load() and save().
+ * <p> Storage contains a String attribute "filePath" which contains the filepath of the file that stores the data</p>
  */
 public class Storage {
     private String filePath;
@@ -19,6 +20,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * this method loads the data from the storage file and returns an arraylist containing the details of the tasks
+     * stored
+     * @return ArrayList of the stored tasks
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -51,6 +57,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * this method rewrites the storage file with the latest list of tasks
+     * @param taskList the latest tasklist
+     * @throws IOException thrown when there is an error with the file
+     */
     public void save(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         for (int i = 0; i < taskList.size(); i++) {

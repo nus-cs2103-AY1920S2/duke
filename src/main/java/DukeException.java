@@ -1,3 +1,7 @@
+/**
+ * <h1> DukeException </h1>
+ * DukeException is thrown whenever there is an error when executing the duke program
+ */
 public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);

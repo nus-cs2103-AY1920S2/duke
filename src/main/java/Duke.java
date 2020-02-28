@@ -107,6 +107,7 @@ public class Duke {
                                 System.out.println(e.getMessage());
                             }
                             return this.ui.printTaskAdded(event, this.taskList.size());
+                        1
                         case "deadline":
                             String taskNamee = this.parser.getTaskName(taskDesc, "/by");
                             String dTT = this.parser.getDateTime(taskDesc, "/by");
