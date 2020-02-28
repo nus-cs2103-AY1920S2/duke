@@ -2,17 +2,17 @@
 By: [Kevin Law](https://github.com/kevvvinn) Since: Feb 2020
 
 ## Table of content
-1.[Introduction](#introduction)
-1.[Features](#features)
-	1. [Adding Todo task](#adding-todo-task)
-	1. [Adding Event task](#adding-event-task)
-	1. [Adding Deadline task](#adding-deadline-task)
-	1. [List all tasks](#list-all-tasks)
-	1. [Mark task(s) as done](mark-task(s)-as-done)
-	1. [Delete task(s)](delete-task(s))
-	1. [Clear all tasks](clear-all-tasks)
-	1. [Exit the program](exit-the-program)
-*[Acknowledgements](#acknowledgements)
+1.[Introduction](#introduction)<br>
+2.[Features](#features)<br>
+	2.1 [Adding Todo task](#adding-todo-task)<br>
+	2.2 [Adding Event task](#adding-event-task)<br>
+	2.3 [Adding Deadline task](#adding-deadline-task)<br>
+	2.4 [List all tasks](#list-all-tasks)<br>
+	2.5 [Mark task(s) as done](mark-task(s)-as-done)<br>
+	2.6 [Delete task(s)](delete-task(s))<br>
+	2.7 [Clear all tasks](clear-all-tasks)<br>
+	2.8 [Exit the program](exit-the-program)<br>
+3. [Acknowledgements](#acknowledgements)<br>
 
 
 ## Introduction
@@ -31,8 +31,7 @@ These are features that Consuela will understand and help you out!
 
 ### Adding Todo task
 Consuela will add a given todo task that requires no date and will be categorised as a todo in your list of tasks.
->Format : todo TASK_DESCRIPTION
-<br>
+>Format : todo TASK_DESCRIPTION<br>
 >Example: todo Refill Water Bottle
 
 Expected outcome: 
@@ -40,8 +39,7 @@ Expected outcome:
 
 ### Adding Event task
 Consuela will add a given event task that requires a date and will be categorised as an event in your list of tasks.
->Format : event TASK_DESCRIPTION /at [Date YYYY-MM-DD]
-<br>
+>Format : event TASK_DESCRIPTION /at [Date YYYY-MM-DD]<br>
 >Example: event Singapore Night Festival /at 2020-08-01
 
 Expected outcome: 
@@ -49,8 +47,7 @@ Expected outcome:
 
 ### Adding Deadline task
 Consuela will add a given deadline task that requires a date and will be categorised as a deadline in your list of tasks.
->Format : deadline TASK_DESCRIPTION /by [Date YYYY-MM-DD]
-<br>
+>Format : deadline TASK_DESCRIPTION /by [Date YYYY-MM-DD]<br>
 >Example: deadline Submit Assignment /by 2020-08-01
 
 Expected outcome: 
@@ -67,36 +64,33 @@ Consuela will list down all the tasks in your list of tasks.
 <br>
 >2.[T][Y] Do Laundry
 
-Expected outcome: 
+Expected outcome:<br> 
 ![outcome4](images/outcome4.PNG)
 
 ### Mark task(s) as done
 Consuela allows you to change the status of task(s) to done.
->Format : done [TASK_NUMBER][Space][TASK_NUMBER]..
-<br>
+>Format : done [TASK_NUMBER][Space][TASK_NUMBER]..<br>
 >Example: done 2 4
 
-Expected outcome: 
+Expected outcome: <br>
 ![outcome5](images/outcome5.PNG)
 
 ### Delete task(s)
 Consuela allows you to delete task(s) from your list of tasks.
->Format : delete [TASK_NUMBER][Space][TASK_NUMBER]..
-<br>
+>Format : delete [TASK_NUMBER][Space][TASK_NUMBER]..<br>
 >Example: delete 2 4
 
-Expected outcome: 
+Expected outcome: <br>
 ![outcome6](images/outcome6.PNG)
 
 ### Clear all tasks
 Consuela allows you to clear and empty your list of tasks.
->Format : clear
-
->Expected outcome: 
+>Format : clear<br>
+>Expected outcome: <br>
 ![outcome7](images/outcome7.PNG)
 
 >Upon entering yes, <br>
->Outcome: Alrighty, Sir. I have emptied the list.
+>Outcome: Alrighty, Sir. I have emptied the list.<br>
 >Expected outcome: 
 ![outcome8](images/outcome8.PNG)
 
@@ -107,8 +101,8 @@ Consuela allows you to clear and empty your list of tasks.
 ### Exit the program
 Consuela allows you to exit the bot.
 >Format : bye<br>
->Outcome: Bye bye, Master! Please come back soon!
->Expected outcome: 
+>Outcome: Bye bye, Master! Please come back soon!<br>
+>Expected outcome: <br>
 ![outcome10](images/outcome10.PNG)
 
 
