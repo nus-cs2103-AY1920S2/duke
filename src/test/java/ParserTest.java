@@ -22,7 +22,7 @@ public class ParserTest {
         Exception expectedException = new DukeExceptionDescription("deadline");
         try {
             assertEquals(0, new Parser().parse("deadline", new TaskList()));
-        } catch (DukeException e ) {
+        } catch (DukeException e) {
             assertEquals(expectedException.toString(), e.toString());
         }
     }
@@ -32,7 +32,7 @@ public class ParserTest {
         Exception expectedException = new DukeExceptionDate("deadline");
         try {
             assertEquals(0, new Parser().parse("deadline prune leaves", new TaskList()));
-        } catch (DukeException e ) {
+        } catch (DukeException e) {
             assertEquals(expectedException.toString(), e.toString());
         }
     }
@@ -42,7 +42,7 @@ public class ParserTest {
         Exception expectedException = new DukeExceptionDateFormat();
         try {
             assertEquals(0, new Parser().parse("deadline prune leaves /by 19-09-2200", new TaskList()));
-        } catch (DukeException e ) {
+        } catch (DukeException e) {
             assertEquals(expectedException.toString(), e.toString());
         }
     }
