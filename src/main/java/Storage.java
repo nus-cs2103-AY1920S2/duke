@@ -60,7 +60,6 @@ public class Storage {
 			}
 			scan.close();
 			JSONParser parser = new JSONParser();
-			//System.out.println(sb.toString());
 			JSONObject result = (JSONObject) parser.parse(sb.toString());
 			JSONArray array = (JSONArray) result.get("containers");
 
