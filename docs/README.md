@@ -33,6 +33,8 @@ There are three types of tasks you can add:
 - Deadline: a task with a description and deadline
 - Event: a task with a description and time
 
+You can add tasks that are not on your list yet.
+
 
 #### 2.1.1 `todo` - Adds a todo item
 
