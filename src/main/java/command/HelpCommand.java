@@ -15,6 +15,9 @@ public class HelpCommand extends Command {
 
     protected ArrayList<String> commandList;
 
+    /**
+     * Constructor of the HelpCommand class.
+     */
     public HelpCommand() {
         super();
         commandList = new ArrayList<String>();
@@ -64,8 +67,8 @@ public class HelpCommand extends Command {
      * @param tasks A TaskList containing all tasks
      * @param textUi a TextUi object that handles user-system interaction
      * @param storage A Storage object which specifies the location of the data
-     * @return
-     * @throws DukeException
+     * @return a string representing the result of undoing the previous commmand
+     * @throws DukeException when invalid input is detected
      */
     public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
         return textUi.showError_Str(Message.MESSAGE_CANNOTUNDO);

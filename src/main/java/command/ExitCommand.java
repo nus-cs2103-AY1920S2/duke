@@ -33,8 +33,8 @@ public class ExitCommand extends Command {
      * @param tasks A TaskList containing all tasks
      * @param textUi a TextUi object that handles user-system interaction
      * @param storage A Storage object which specifies the location of the data
-     * @return
-     * @throws DukeException
+     * @return a string representing the result of undoing the previous command
+     * @throws DukeException when invalid input is detected
      */
     public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
         return textUi.showError_Str(Message.MESSAGE_CANNOTUNDO);

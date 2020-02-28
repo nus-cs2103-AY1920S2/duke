@@ -28,11 +28,10 @@ public class DisplayCommand extends Command {
 
     /**
      * Informs the user that display command cannot be undone.
-     *
      * @param tasks A TaskList containing all tasks
      * @param textUi a TextUi object that handles user-system interaction
      * @param storage A Storage object which specifies the location of the data
-     * @return
+     * @return a string representing the result of undoing a display command
      * @throws DukeException
      */
     public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {

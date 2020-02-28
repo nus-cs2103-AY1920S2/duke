@@ -26,7 +26,7 @@ public class Message {
     public static final String MESSAGE_NOTHING = "you have nothing left in the list.";
     public static final String MESSAGE_REMOVE = "     Got it. I've removed this task: ";
     public static final String MESSAGE_PREVIOUSINVALID = "     Sorry, the previous command was invalid\n"
-            +"     It cannot be undone.";
+            + "     It cannot be undone.";
     public static final String MESSAGE_CANNOTUNDO = "     Sorry, the previous command was\n"
             + "     not suitable to be undone";
     public static final String MESSAGE_STARTHELP = "Type 'help' if you are not sure what to say";

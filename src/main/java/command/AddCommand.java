@@ -32,6 +32,14 @@ public class AddCommand extends Command {
         return textUi.showAddingTask_Str(thisTask, tasks);
     }
 
+    /**
+     * Undoes the previous add command.
+     * @param tasks A TaskList containing all tasks
+     * @param textUi a TextUi object that handles user-system interaction
+     * @param storage A Storage object which specifies the location of the data
+     * @return a string representing the result of undoing the last add command
+     * @throws DukeException when invalid user input is detected
+     */
     public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
         tasks.remove(this.thisTask);
         storage.writeToFile(tasks.getList());

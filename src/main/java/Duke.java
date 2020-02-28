@@ -38,7 +38,7 @@ public class Duke {
         try {
             Command c;
             String commandResult;
-            if(text.trim().equalsIgnoreCase("undo")) {
+            if (text.trim().equalsIgnoreCase("undo")) {
                 if (commandStack.isEmpty()) {
                     c = new ErrorCommand();
                 } else {
@@ -52,7 +52,7 @@ public class Duke {
                 }
                 commandResult = c.execute(tasks, textUi, dukeStorage);
             }
-            if(commandResult.equals("     It is time to say goodbye :(")){
+            if (commandResult.equals("     It is time to say goodbye :(")) {
                 this.isFinished = true;
             }
             return commandResult;
@@ -83,8 +83,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-          new Duke().run();
-      }
+        new Duke().run();
+    }
 
     /**
      * Ends the conversation and exits the system.

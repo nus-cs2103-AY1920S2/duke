@@ -16,7 +16,11 @@ public class DoneCommand extends Command {
     protected Task doneTask;
     protected boolean isValid;
 
-    public DoneCommand(int index) {
+    /**
+     * Constructor of the DoneCommand class.
+     * @param index representing the position of the task being marked as done
+     */
+    public DoneCommand (int index) {
         super();
         this.index = index - 1;
         this.isValid = false;
@@ -35,7 +39,7 @@ public class DoneCommand extends Command {
             return textUi.showError_Str(Message.MESSAGE_INVALIDCOMMAND);
         }
         //add an assertion to check the range of this.index
-        assert (this.index <= tasks.getList().size() && this.index >= 0): "out of bound";
+        assert(this.index <= tasks.getList().size() && this.index >= 0): "out of bound";
         this.isValid = true;
         tasks.done(this.index);
         storage.writeToFile(tasks.getList());
@@ -51,10 +55,10 @@ public class DoneCommand extends Command {
      * @param textUi a TextUi object that handles user-system interaction
      * @param storage A Storage object which specifies the location of the data
      * @return a string representing the adding back command.
-     * @throws DukeException
+     * @throws DukeException when invalid user input is detected
      */
     public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
-        if(!this.isValid) {
+        if (!this.isValid) {
             return textUi.showError_Str(Message.MESSAGE_PREVIOUSINVALID);
         }
         tasks.unDone(this.doneTask);

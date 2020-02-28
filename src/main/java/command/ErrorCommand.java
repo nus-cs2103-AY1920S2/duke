@@ -17,7 +17,6 @@ public class ErrorCommand extends Command {
 
     /**
      * Executes the "error" type of commands.
-     *
      * @param tasks   A TaskList containing all tasks
      * @param textUi a TextUi object that handles user-system interaction
      * @param storage A Storage object which specifies the location of the data

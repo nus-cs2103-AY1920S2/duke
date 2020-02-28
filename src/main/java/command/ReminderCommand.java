@@ -29,15 +29,15 @@ public class ReminderCommand extends Command {
      * @param textUi a TextUi object that handles user-system interaction
      * @param storage A Storage object which specifies the location of the data
      * @return the execution result in terms of a string
-     * @throws DukeException
+     * @throws DukeException when invalid input is detected
      */
     public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
         assert this.filter == -1 || this.filter == 1 || this.filter == 2 || this.filter == 3 : "Wrong parameter.";
         if (this.filter == 1) {
             return textUi.remindTasks(tasks, 'T');
-        } else if(this.filter == 2) {
+        } else if (this.filter == 2) {
             return textUi.remindTasks(tasks, 'E');
-        } else if(this.filter == 3) {
+        } else if (this.filter == 3) {
             return textUi.remindTasks(tasks, 'D');
         } else {
             return textUi.remindTasks(tasks, 'A');
@@ -50,8 +50,8 @@ public class ReminderCommand extends Command {
      * @param tasks A TaskList containing all tasks
      * @param textUi a TextUi object that handles user-system interaction
      * @param storage A Storage object which specifies the location of the data
-     * @return
-     * @throws DukeException
+     * @return a string representing the result of undoing the previous command
+     * @throws DukeException when invalid input is detected
      */
     public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
         return textUi.showError_Str(Message.MESSAGE_CANNOTUNDO);

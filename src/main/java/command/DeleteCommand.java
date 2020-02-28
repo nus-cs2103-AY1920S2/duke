@@ -16,6 +16,10 @@ public class DeleteCommand extends Command {
     protected Task deletedTask;
     protected boolean isValid;
 
+    /**
+     * The constructor of class DeleteCommand.
+     * @param index representing the position of the task being deleted in the task list
+     */
     public DeleteCommand(int index) {
         super();
         this.index = index - 1;
@@ -49,10 +53,10 @@ public class DeleteCommand extends Command {
      * @param textUi a TextUi object that handles user-system interaction
      * @param storage A Storage object which specifies the location of the data
      * @return a string representing the adding back command.
-     * @throws DukeException
+     * @throws DukeException when invalid user input is detected
      */
     public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
-        if(!this.isValid) {
+        if (!this.isValid) {
             return textUi.showError_Str(Message.MESSAGE_PREVIOUSINVALID);
         }
         tasks.add(this.deletedTask);
