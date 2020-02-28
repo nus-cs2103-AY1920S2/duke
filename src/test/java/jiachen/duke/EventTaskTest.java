@@ -39,7 +39,7 @@ class EventTaskTest {
     void testToString() {
         try {
             EventTask task = new EventTask("hellololooloo there", "01/12/2020 0700");
-            assertEquals(task.toString(), "[E][✘] hellololooloo there (by: Dec 1 2020)");
+            assertEquals(task.toString(), "[E][✘] hellololooloo there (at: Dec 1 2020)");
         } catch (InvalidDukeFormatException e) {
             e.printStackTrace();
         }
