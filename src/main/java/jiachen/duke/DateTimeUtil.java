@@ -24,10 +24,13 @@ public class DateTimeUtil {
         aliasLookupTable.put("mon", DayOfWeek.MONDAY);
         aliasLookupTable.put("tuesday", DayOfWeek.TUESDAY);
         aliasLookupTable.put("tue", DayOfWeek.TUESDAY);
+        aliasLookupTable.put("tues", DayOfWeek.TUESDAY);
         aliasLookupTable.put("wednesday", DayOfWeek.WEDNESDAY);
         aliasLookupTable.put("wed", DayOfWeek.WEDNESDAY);
+        aliasLookupTable.put("weds", DayOfWeek.WEDNESDAY);
         aliasLookupTable.put("thursday", DayOfWeek.THURSDAY);
         aliasLookupTable.put("thur", DayOfWeek.THURSDAY);
+        aliasLookupTable.put("thurs", DayOfWeek.THURSDAY);
         aliasLookupTable.put("friday", DayOfWeek.FRIDAY);
         aliasLookupTable.put("fri", DayOfWeek.FRIDAY);
         aliasLookupTable.put("saturday", DayOfWeek.SATURDAY);
