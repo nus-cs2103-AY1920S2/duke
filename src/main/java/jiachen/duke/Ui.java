@@ -4,18 +4,16 @@ package jiachen.duke;
  * The Ui class handles the view and presentation layer of the app.
  */
 public class Ui {
+
     /**
-     * Format string.
+     * Format Hello message.
+     * Welcome message is sent to user when Duke is started.
      *
-     * @param message the message
-     * @return the string
+     * @return hello message as a string
      */
-    public String format(String message) {
-        return formatSeparator()
-            + "\t"
-            + message
-            + "\n"
-            + formatSeparator();
+    public static String formatWelcomeMessage() {
+        return "Hello there, my name is DUKE and I'm here to help you get organized! "
+            + "To see what I can help you with you could try the `help` command.";
     }
 
 
@@ -30,16 +28,23 @@ public class Ui {
     }
 
     /**
+     * Format string.
+     *
+     * @param message the message
+     * @return the string
+     */
+    public String format(String message) {
+        return message + "\n";
+    }
+
+    /**
      * Format remove task string.
      *
      * @param task the task
      * @return the string
      */
     public String formatRemoveTask(Task task) {
-        return formatSeparator()
-            + "\t Noted. I've removed this task:\t\t"
-            + task + "\n"
-            + formatSeparator();
+        return "Noted. I've removed this task for you.:\n  " + task;
     }
 
     /**
@@ -49,10 +54,7 @@ public class Ui {
      * @return the string
      */
     public String formatDoneTask(Task task) {
-        return formatSeparator()
-            + "\t Nice! I've marked this task as done: \n\t\t"
-            + task
-            + formatSeparator();
+        return "Nice! I've marked this task as done: \n  " + task;
     }
 
     /**
@@ -62,14 +64,12 @@ public class Ui {
      * @return the string
      */
     public String formatTasks(TaskList tasks) {
-        StringBuilder builder = new StringBuilder(formatSeparator());
+        StringBuilder builder = new StringBuilder("Here is your tasklist!\n");
         for (int i = 1; i <= tasks.getList().size(); i++) {
-            builder.append("\t ").append(i).append(". ").append(tasks.get(i - 1)).append("\n");
+            builder.append("  ").append(i).append(". ").append(tasks.get(i - 1)).append("\n");
         }
-        builder.append(formatSeparator());
         return builder.toString();
     }
-
 
     /**
      * Format new task string.
@@ -79,14 +79,13 @@ public class Ui {
      * @return the string
      */
     public String formatNewTask(Task task, int numOfTasks) {
-        return formatSeparator()
-            + "\t Got it. I've added this task: \n"
-            + "\t\t"
+        return "Got it. I've added this task:"
+            + "\n  "
             + task
             + "\n"
-            + "\t Now you have "
+            + "Now you have "
             + numOfTasks
-            + " tasks in the list.\n" + formatSeparator();
+            + " tasks in the list.\n";
     }
 
     /**
@@ -95,11 +94,7 @@ public class Ui {
      * @return the string
      */
     public String formatLoadingError() {
-        return "\tERR: unable to load file from disk!\n";
-    }
-
-    private String formatSeparator() {
-        return "\t_____________________________________________________";
+        return "Error: unable to load file from disk!\n";
     }
 
     /**
@@ -109,13 +104,12 @@ public class Ui {
      * @return the string
      */
     public String formatFilteredTasks(TaskList tasks) {
-        StringBuilder builder = new StringBuilder(formatSeparator());
-        builder.append("\n\tHere are the matching tasks in your list:\n");
+        StringBuilder builder = new StringBuilder();
+        builder.append("Here are the matching tasks in your list:\n");
 
         for (int i = 1; i <= tasks.getList().size(); i++) {
-            builder.append("\t ").append(i).append(". ").append(tasks.get(i - 1)).append("\n");
+            builder.append("  ").append(i).append(". ").append(tasks.get(i - 1)).append("\n");
         }
-        builder.append(formatSeparator());
         return builder.toString();
     }
 
@@ -126,25 +120,15 @@ public class Ui {
      */
     public String formatHelp() {
         return "Here are a list of commands you can try! "
-            + "\n\thello - say hello to duke"
-            + "\n\ttodo - to create a new todo task"
-            + "\n\tevent - to create a new event task"
-            + "\n\tdeadline - to create a new deadline task"
-            + "\n\tdone - to mark a task as done"
-            + "\n\tdelete - to delete am existing task"
-            + "\n\tlist - to list all tasks"
-            + "\n\tfind - find certain tasks"
-            + "\n\thelp - to get help information"
-            + "\n\texit - to leave duke";
-    }
-
-    /**
-     * Format Hello message.
-     *
-     * @return hello message as a string
-     */
-    public String formatHello() {
-        return "Hello there, my name is DUKE and I'm here to help you get organized! "
-            + "To see what I can help you with you could try the `help` command.";
+            + "\n  hello - say hello to duke"
+            + "\n  todo - to create a new todo task"
+            + "\n  event - to create a new event task"
+            + "\n  deadline - to create a new deadline task"
+            + "\n  done - to mark a task as done"
+            + "\n  delete - to delete an existing task"
+            + "\n  list - to list all tasks"
+            + "\n  find - find certain tasks"
+            + "\n  help - to get help information"
+            + "\n  exit - to leave duke";
     }
 }
