@@ -1,15 +1,20 @@
 /**
- * User interface class for DUke
+ * User interface class for Duke.
  */
 public class DukeUI {
 
     public DukeUI() {
     }
 
-    public static String showWelcomeMessage () {
+    /**
+     * welcome message for duke.
+     * ToDo: use ascii art
+     * @return welcome message
+     */
+    public static String showWelcomeMessage() {
         StringBuilder sb = new StringBuilder();
         sb.append("DEMOCRACY IS NON NEGOTIABLE\n\n");
-        sb.append( "HI I'M:\n\n LIBERTY PRIME" );
+        sb.append("HI I'M:\n\n LIBERTY PRIME");
 
         return sb.toString();
     }

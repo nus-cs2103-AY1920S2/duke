@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Handles all storage in duke
+ * Handles all storage in duke.
  */
 public class DukeStorage {
     private String filePath;
@@ -16,7 +16,7 @@ public class DukeStorage {
 
     /**
      * Saves tasks to a .txt file in the same directory
-     * @param tasks
+     * @param tasks saves tasks
      */
     public void saveTasks(TaskList tasks) {
         List<Task> allTasks = tasks.getAllTasks();

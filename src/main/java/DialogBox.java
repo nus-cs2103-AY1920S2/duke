@@ -11,8 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
 /**
@@ -61,6 +60,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * returns flipped dialogbox.
+     * @param text text in dialogbox
+     * @param img image of duke
+     * @return returns a flipped dialogbox
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Wrapper class for the list of Tasks
+ * Wrapper class for the list of Tasks.
  */
 public class TaskList {
     private List<Task> allTasks;
@@ -19,15 +19,11 @@ public class TaskList {
     }
 
     /**
-     * Prints current Task
+     * Prints current Task.
      * @return List of Current Task
      */
     public String printTasks() {
         return getString(allTasks);
-    }
-
-    public Task getTask(int n) {
-        return this.allTasks.get(n-1);
     }
 
     public List<Task> getAllTasks() {
@@ -42,13 +38,23 @@ public class TaskList {
         return allTasks.get(taskNo - 1).markAsDone();
     }
 
+    /**
+     * removes task from list.
+     * @param taskNo task number
+     * @return returns confirmation message
+     */
     public String removeTask(int taskNo) {
         Task tempTask = allTasks.remove(taskNo - 1);
-        return DukeUI.showDeleteMsg() + "\n" +
-                " " + tempTask + "\n" +
-                DukeUI.showCurrentListSize(allTasks.size());
+        return DukeUI.showDeleteMsg()
+                + "\n" + " " + tempTask + "\n"
+                + DukeUI.showCurrentListSize(allTasks.size());
     }
 
+    /**
+     * stores task in seperate list as archive.
+     * @param taskNo task number
+     * @return confirmation message
+     */
     public String archiveTask(int taskNo) {
         Task tempTask = allTasks.remove(taskNo - 1);
         archivedTasks.add(tempTask);
@@ -56,6 +62,10 @@ public class TaskList {
 
     }
 
+    /**
+     * archives all tasks.
+     * @return list of all archived tasks
+     */
     public String archiveAll() {
         String archiveMessage = "";
         for (int i = 1; i <= allTasks.size(); i++) {
@@ -65,7 +75,7 @@ public class TaskList {
     }
 
     /**
-     * Prints archived task
+     * Prints archived task.
      * @return List of archived task
      */
     public String showArchived() {

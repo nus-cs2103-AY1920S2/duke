@@ -1,5 +1,5 @@
 /**
- * Represents a Task object
+ * Represents a Task object.
  */
 public class Task {
     protected String description;
@@ -12,11 +12,11 @@ public class Task {
 
     /**
      * Creates a task using the .txt file at the start of the programme
-     * @param taskParams
+     * @param taskParams list of tasks as string of params
      * @return New task added to Task List
-     * @throws RuntimeException
+     * @throws RuntimeException esception
      */
-    public static Task createStartingTask(String[] taskParams) throws RuntimeException{
+    public static Task createStartingTask(String[] taskParams) throws RuntimeException {
         String type = taskParams[0];
         boolean isDone = taskParams[1].equals("true");
         String description = taskParams[2];
@@ -53,7 +53,7 @@ public class Task {
     }
 
     /**
-     * Marks a task as done
+     * Marks a task as done.
      */
     public Task markAsDone() {
         this.isDone = true;

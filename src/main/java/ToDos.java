@@ -1,5 +1,5 @@
 /**
- * Represents a to do object
+ * Represents a to do object.
  */
 public class ToDos extends Task {
 

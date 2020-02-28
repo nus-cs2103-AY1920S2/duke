@@ -27,7 +27,7 @@ repositories {
 }
 
 final def application = application {
-    mainClassName = "Main"
+    mainClassName = "Launcher"
 }
 application
 
