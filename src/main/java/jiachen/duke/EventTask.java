@@ -27,12 +27,12 @@ public class EventTask extends Task {
             throw new InvalidDukeFormatException("Missing /at clause or missing at when!");
         }
 
-        this.at = LocalDateTime.parse(at, DateTimeUtil.inputFormatter);
+        this.at = LocalDateTime.parse(at, DateTimeUtil.INPUT_FORMATTER);
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeUtil.eventFormatter;
+        DateTimeFormatter formatter = DateTimeUtil.EVENT_FORMATTER;
         return "[E]" + super.toString() + " (at: " + formatter.format(this.at) + ")";
     }
 
@@ -41,6 +41,6 @@ public class EventTask extends Task {
         return "E | "
             + super.format()
             + " | "
-            + DateTimeUtil.inputFormatter.format(this.at);
+            + DateTimeUtil.INPUT_FORMATTER.format(this.at);
     }
 }

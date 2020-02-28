@@ -14,8 +14,8 @@ public class DateTimeUtil {
     /**
      * This is the format input dates should come int. eg 24/07/1996 1200
      */
-    public static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    public static DateTimeFormatter eventFormatter = DateTimeFormatter.ofPattern("MMM d YYYY");
+    public static DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    public static DateTimeFormatter EVENT_FORMATTER = DateTimeFormatter.ofPattern("MMM d YYYY");
     private static DateTimeUtil _instance = null;
     private HashMap<String, DayOfWeek> aliasLookupTable = new HashMap<String, DayOfWeek>();
 
@@ -74,6 +74,6 @@ public class DateTimeUtil {
         DayOfWeek day = aliasLookupTable.get(timestamp);
         LocalDateTime now = LocalDateTime.now();
         now = now.with(TemporalAdjusters.next(day));
-        return now.format(inputFormatter);
+        return now.format(INPUT_FORMATTER);
     }
 }

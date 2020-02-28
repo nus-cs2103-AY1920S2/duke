@@ -32,7 +32,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String format() {
-        LocalDateTime dateString = LocalDateTime.parse(this.toBeDoneBy, DateTimeUtil.inputFormatter);
+        LocalDateTime dateString = LocalDateTime.parse(this.toBeDoneBy, DateTimeUtil.INPUT_FORMATTER);
         return "D | " + super.format() + " | " + dateString;
     }
 }

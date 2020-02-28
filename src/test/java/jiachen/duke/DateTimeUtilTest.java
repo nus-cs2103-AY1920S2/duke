@@ -22,7 +22,7 @@ class DateTimeUtilTest {
     @Test
     void convertFromNatualDate() {
         String datetime = DateTimeUtil.getInstance().convertFromNatualDate("mon");
-        LocalDateTime ldt = LocalDateTime.parse(datetime, DateTimeUtil.inputFormatter);
+        LocalDateTime ldt = LocalDateTime.parse(datetime, DateTimeUtil.INPUT_FORMATTER);
         assertEquals(ldt.getDayOfWeek(), DayOfWeek.MONDAY);
     }
 }
