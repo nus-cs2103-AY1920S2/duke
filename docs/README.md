@@ -23,7 +23,7 @@ Example of usage:
 ### Create a deadline task
 Adds an item with a deadline to your list.
 #### Usages:
-#### `deadline [task_name] /by [dd/m/yyyy] [hhmm]`
+#### `deadline [task_name] /by [d/m/yyyy] [hhmm]`
 
 Creates a deadline item in your to-do list. The `[hhmm]` time field can be excluded.
 
@@ -33,16 +33,16 @@ Example of usage:
 
   Expected outcome: Creates the task `Finish Homework` with the deadline on 26/2/2020 at the default time 11:59pm.
 
-* `deadline Finish Project /by 23/10/2020 1400`
+* `deadline Finish Project /by 3/10/2020 1400`
 
-  Expected outcome: Creates the task `Finish Project` with the deadline on 23/10/2020 at 2pm.
+  Expected outcome: Creates the task `Finish Project` with the deadline on 3/10/2020 at 2pm.
 
 
 
 ### Create an event
 Adds an event to your list.
 #### Usages:
-#### `event [task_name] /at [dd/m/yyyy] [hhmm]`
+#### `event [task_name] /at [d/m/yyyy] [hhmm]`
 
 Creates an event item in your to-do list.
 
@@ -144,7 +144,7 @@ You can sort any list by either name in alphabetical order, or by date in earlie
 #### Usages:
 #### `sort [task_type] [sorting_type]`
 
-Sorts the specified list by the sorting type.
+Sorts the specified list by the sorting type in ascending order.
 
 Example of usage:
 
@@ -201,4 +201,4 @@ While each function automatically saves your data for you, you can also manually
 #### Usages:
 #### `save`
 
-Saves your data to the data file `duke.txt`.
+Saves your data to the directory `data/duke.txt`, located at where you launched the application.

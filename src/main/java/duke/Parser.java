@@ -116,6 +116,9 @@ public class Parser {
             case "view":
                 return viewCommand(command, taskLists);
 
+            case "help":
+                return helpCommand();
+
             case "save":
                 return saveCommand(taskLists);
 
@@ -541,6 +544,14 @@ public class Parser {
             return Ui.WRONG_DATE_TIME_FORMAT;
         }
 
+    }
+
+    /**
+     * Gives a link to the main page for help.
+     * @return
+     */
+    public static String helpCommand() {
+        return "View the user guide here:\nhttps://lsjxavier.github.io/duke/";
     }
 
     /**
