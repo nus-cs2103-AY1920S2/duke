@@ -13,8 +13,8 @@ public class Ui {
      * This method is to print greetings to the user.
      */
     public static String printGreetings(){
-        System.out.println("No, no, no.. \n" +   "I clean for you." );
-        return ("No, no, no.. \n" +   "I clean for you.");
+        //System.out.println("No, no, no.. \n" +   "I clean for you." );
+        return ("No, no, no.. \n" +   "I clean for you." + "\nWhat do you want?");
     }
 
     /**
