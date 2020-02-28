@@ -111,7 +111,7 @@ public class TaskManager {
         }
 
         if (filteredTasks.size() == 0) {
-            throw new EmptyTaskListException(Messages.FILTER_TASK_NO_TASKS_MESSAGE);
+            throw new EmptyTaskListException(Messages.FIND_NO_TASKS_MESSAGE);
         }
         return convertListToString(filteredTasks);
     }

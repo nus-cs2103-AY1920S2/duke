@@ -23,7 +23,7 @@ final class DoneCommand extends Command {
     public Pair execute(TaskManager taskManager) throws InvalidTaskIndexException, StorageFileException {
         try {
             Task task = taskManager.setTaskDone(this.taskIndex);
-            String output = String.format(Messages.SET_TASK_DONE_SUCCESS_MESSAGE, task);
+            String output = String.format(Messages.DONE_SUCCESS_MESSAGE, task);
             return new Pair(output, false);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskIndexException(Messages.DONE_INVALID_TASK_INDEX_MESSAGE);

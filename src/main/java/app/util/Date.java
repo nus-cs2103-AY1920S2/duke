@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import app.core.Messages;
 import app.exceptions.InvalidDateTimeFormatException;
 
 /**
@@ -34,7 +35,7 @@ public final class Date {
             this.date = LocalDateTime.parse(dateTimeStr, formatter);
             this.formatter = DateTimeFormatter.ofPattern(DEFAULT_OUTPUT_FORMAT);
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeFormatException("Accepted Date Time Format: " + format);
+            throw new InvalidDateTimeFormatException(String.format(Messages.INVALID_DATE_FORMAT_MESSAGE, format));
         }
     }
 

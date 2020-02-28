@@ -20,7 +20,7 @@ final class FindCommand extends Command {
     @Override
     public Pair execute(TaskManager taskManager) throws EmptyTaskListException {
         String tasks = taskManager.findMatchingTasks(this.toMatch);
-        String output = String.format(Messages.FILTER_TASK_SUCCESS_MESSAGE, tasks);
+        String output = String.format(Messages.FIND_SUCCESS_MESSAGE, tasks);
         return new Pair(output, false);
     }
 }
