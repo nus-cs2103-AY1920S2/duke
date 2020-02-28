@@ -129,6 +129,7 @@
         </module>
         <module name="MemberName">
             <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9]*$"/>
+            <property name="applyToPrivate" value="false"/>
             <message key="name.invalidPattern"
                      value="Member name ''{0}'' must match pattern ''{1}''."/>
         </module>
@@ -188,7 +189,7 @@
             <property name="arrayInitIndent" value="4"/>
         </module>
         <module name="AbbreviationAsWordInName">
-            <property name="ignoreFinal" value="false"/>
+            <property name="ignoreFinal" value="true"/>
             <property name="allowedAbbreviationLength" value="1"/>
         </module>
         <module name="OverloadMethodsDeclarationOrder"/>

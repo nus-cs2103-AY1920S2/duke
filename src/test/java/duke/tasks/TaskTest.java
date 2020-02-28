@@ -8,9 +8,9 @@ public class TaskTest {
     @Test
     public void testStatus() {
         Task task = new TaskStub("test");
-        assertEquals("\u2718", task.getStatus());
+        assertEquals("\u2718", task.getStatus()); // Unicode cross
         task.markAsDone();
-        assertEquals("\u2713", task.getStatus());
+        assertEquals("\u2713", task.getStatus()); // Unicode tick
     }
 
     class TaskStub extends Task {

@@ -32,6 +32,6 @@ public abstract class Task {
      * @return A unicode tick or cross.
      */
     public String getStatus() {
-        return isDone ? "\u2713" : "\u2718";
+        return isDone ? "\u2713" : "\u2718"; // Unicode tick : cross
     }
 }
