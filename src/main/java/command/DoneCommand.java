@@ -20,7 +20,7 @@ public class DoneCommand extends Command {
      * Constructor of the DoneCommand class.
      * @param index representing the position of the task being marked as done
      */
-    public DoneCommand (int index) {
+    public DoneCommand(int index) {
         super();
         this.index = index - 1;
         this.isValid = false;
@@ -39,7 +39,7 @@ public class DoneCommand extends Command {
             return textUi.showError_Str(Message.MESSAGE_INVALIDCOMMAND);
         }
         //add an assertion to check the range of this.index
-        assert(this.index <= tasks.getList().size() && this.index >= 0): "out of bound";
+        assert (this.index <= tasks.getList().size() && this.index >= 0) : "out of bound";
         this.isValid = true;
         tasks.done(this.index);
         storage.writeToFile(tasks.getList());

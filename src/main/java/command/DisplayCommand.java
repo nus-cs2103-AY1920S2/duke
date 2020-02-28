@@ -32,7 +32,7 @@ public class DisplayCommand extends Command {
      * @param textUi a TextUi object that handles user-system interaction
      * @param storage A Storage object which specifies the location of the data
      * @return a string representing the result of undoing a display command
-     * @throws DukeException
+     * @throws DukeException when invalid input is detected
      */
     public String undo(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {
         return textUi.showError_Str(Message.MESSAGE_CANNOTUNDO);
