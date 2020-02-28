@@ -2,12 +2,13 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAmount;
 
 /**
  * {@code Event} is a subclass of {@code Task}. It represents a task with a description and completion status, as well
  * as the time of the event.
  */
-public class Event extends Task {
+public class Event extends Task implements Snoozable<Event> {
     protected final LocalDateTime time;
 
     /**
@@ -36,6 +37,11 @@ public class Event extends Task {
     @Override
     public Event complete() {
         return new Event(description, time, true);
+    }
+
+    @Override
+    public Event snooze(TemporalAmount duration) {
+        return new Event(description, time.plus(duration), isCompleted);
     }
 
     @Override

@@ -318,7 +318,7 @@ class Parser {
             ChronoUnit chronoUnit;
             if (timeUnit.matches("(min)(ute)?s?")) {
                 chronoUnit = ChronoUnit.MINUTES;
-            } else if (timeUnit.matches("h((our)|r)?s?")) {
+            } else if (timeUnit.matches("h(ou)?rs?")) {
                 chronoUnit = ChronoUnit.HOURS;
             } else if (timeUnit.matches("d(ay)?s?")) {
                 chronoUnit = ChronoUnit.DAYS;

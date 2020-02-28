@@ -119,10 +119,20 @@ Expected outcome:
 
 #### 2.3.1 `snooze` - Snoozes a task
 
-This command postpones of a task. Only deadlines can be snoozed.
+This command postpones of a task. Only deadlines and events can be snoozed.
 
 Usage:  
-`snooze [task number] [duration]`
+`snooze [task number] [duration]`  
+The duration should be of the form `[number] [minutes/hours/days]`. You can also use abbreviations such as `min`, `hr`, and `d`.
+Some acceptable durations are:
+- 15 minutes
+- 30 mins
+- 2 hours
+- 6 hrs
+- 12 hr
+- 1 day
+- 2 days
+- 3 d
 
 Example:  
 `snooze 2 1 day`
