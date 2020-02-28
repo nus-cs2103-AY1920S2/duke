@@ -11,11 +11,11 @@ public class DukeExceptionLoad extends DukeException {
     public DukeExceptionLoad(String type) {
         switch (type) {
         case "filetype":
-            super.errorMsg = "... What were the tasks? I cant seem to recall them.";
+            super.errorMsg = "The file type is wrong, I cant read the file.";
             break;
 
         case "path":
-            super.errorMsg = "Hmmm... I cant seem to locate where I have written the tasks at.";
+            super.errorMsg = "Hmmm... I cant seem to locate the path where I have written the tasks at.";
             break;
 
         case "format":

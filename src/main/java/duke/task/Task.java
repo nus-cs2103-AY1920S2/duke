@@ -8,7 +8,6 @@ public abstract class Task {
     protected String msg;
     protected String status;
     protected String type;
-    protected LocalDate time;
 
     /**
      * Creates a Task with the details of the task kept in msg.
@@ -31,6 +30,10 @@ public abstract class Task {
 
     public String getDetails() {
         return msg;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void setStatus(String status) {

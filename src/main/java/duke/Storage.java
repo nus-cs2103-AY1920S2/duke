@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Loads and Stores the TaskList to Path.
@@ -33,9 +35,19 @@ public class Storage {
      */
     public TaskList load() throws DukeException {
         TaskList tasks = new TaskList();
+
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path.getParent());
+                Files.write(path, new ArrayList<String>(), StandardCharsets.UTF_8);
+
+            } catch (IOException e) {
+                throw new DukeExceptionLoad("path");
+            }
+        }
+
         try {
             List<String> lines = Files.readAllLines(path);
-
             for (String curLine : lines) {
                 String[] components = curLine.split(" , ");
 

@@ -17,9 +17,9 @@ public class Duke {
      * Creates a new Duke object which initializes the TaskList, Ui and Storage.
      */
     public Duke() {
-        String homeDir = System.getProperty("user.home");
+        String programDir = System.getProperty("user.dir");
         String fileName = "duke.txt";
-        Path path  = Paths.get(homeDir, "duke", "data", fileName);
+        Path path  = Paths.get(programDir, "data", fileName);
 
         try {
             storage = new Storage(path);
@@ -29,7 +29,6 @@ public class Duke {
         } catch (DukeException error) {
             System.out.println(error);
         }
-        assert tasks != null : "TaskList should be instantiated.";
     }
 
 

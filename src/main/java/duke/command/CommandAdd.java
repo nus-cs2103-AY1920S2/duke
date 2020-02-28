@@ -21,7 +21,7 @@ import java.time.format.DateTimeParseException;
 public class CommandAdd implements Command {
 
     private StringBuilder appendedText;
-    Task taskToBeAdded;
+    private Task taskToBeAdded;
 
     /**
      * Creates the Todo Task and remembers it.
@@ -92,5 +92,9 @@ public class CommandAdd implements Command {
     @Override
     public String output() {
         return appendedText.toString();
+    }
+
+    public Task getTask() {
+        return taskToBeAdded;
     }
 }
