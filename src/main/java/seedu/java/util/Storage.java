@@ -87,7 +87,7 @@ public class Storage {
             } else if (x instanceof Event) {
                 type = "E";
                 Event e = (Event) x;
-                task += "/" + e.getTiming();
+                task += "/" + e.getDateAndTiming();
             }
             main += type + "/" + complete + "/" + task + "\n";
         }

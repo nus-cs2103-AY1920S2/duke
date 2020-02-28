@@ -16,7 +16,7 @@ public class Deadline extends Task {
     public Deadline(String task, String timing) {
         super(task);
         this.timing = timing;
-        convertTiming();
+        convertDate();
     }
 
     /**
@@ -28,10 +28,10 @@ public class Deadline extends Task {
     public Deadline(String task, String timing, boolean bool) {
         super(task, bool);
         this.timing = timing;
-        convertTiming();
+        convertDate();
     }
 
-    private void convertTiming() {
+    private void convertDate() {
         this.recordedDate = LocalDate.parse(timing.split(" ")[1]);
     }
 

@@ -15,7 +15,7 @@ public class Parser {
      * @throws DukeException your command got problem
      */
     public static Command readCommand(String input) throws DukeException {
-        return Command.convert(input.split(" ")[0]);
+        return Command.convert(input.split(" ")[0].toLowerCase());
     }
 
     /**
@@ -25,7 +25,7 @@ public class Parser {
      * @throws DukeException your help command got problem
      */
     public static Command readNextCommand(String input) throws DukeException {
-        return Command.convert(input.split(" ")[1]);
+        return Command.convert(input.split(" ")[1].toLowerCase());
     }
 
     /**

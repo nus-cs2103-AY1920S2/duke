@@ -1,7 +1,5 @@
 package seedu.java.util;
 
-import java.util.Scanner;
-
 /**
  * The Central class. Contains Storage, TaskList & Ui class. Relies on Parser class to handle user's input.
  * run()
