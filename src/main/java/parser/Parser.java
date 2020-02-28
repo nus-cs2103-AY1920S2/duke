@@ -31,7 +31,7 @@ public class Parser {
         String[] words = input.split(" ");
         String[] stamps = input.split("/");
         String keyword = words[0];
-        if(input.equals("")){
+        if (input.equals("")) {
             return new ErrorCommand();
         }
         if (keyword.equalsIgnoreCase("find")) {
@@ -46,7 +46,7 @@ public class Parser {
             return new HelpCommand();
         }
 
-        if(keyword.equalsIgnoreCase("reminders")) {
+        if (keyword.equalsIgnoreCase("reminders")) {
             return handleReminder(words);
         }
 
@@ -111,10 +111,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input to "reminders" command.
+     *
+     * @param words a string array representing user input
+     * @return a "reminders" command
+     */
     public static Command handleReminder(String[] words) {
-        if(words.length == 1){
+        if (words.length == 1) {
             return new ReminderCommand();
-        } else if (words.length == 2){
+        } else if (words.length == 2) {
             String taskType = words[1];
             if (taskType.equalsIgnoreCase("todo")) {
                 return new ReminderCommand(1);

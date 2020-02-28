@@ -49,7 +49,7 @@ public class TaskList {
         if (!isDuplicated) {
             this.list.add(addedTask);
         }
-     }
+    }
 
     /**
      * Removes a task from the task list.
@@ -58,7 +58,7 @@ public class TaskList {
      */
     public void remove(Task removedTask) {
         for (int i = 0; i < this.list.size(); i++) {
-            if(removedTask.toString().equals(this.list.get(i).toString())) {
+            if (removedTask.toString().equals(this.list.get(i).toString())) {
                 this.list.remove(i);
             }
         }
@@ -89,7 +89,7 @@ public class TaskList {
      */
     public void unDone(Task givenTask) {
         for (int i = 0; i < this.list.size(); i++) {
-            if(givenTask.toString().equals(this.list.get(i).toString())) {
+            if (givenTask.toString().equals(this.list.get(i).toString())) {
                 this.list.get(i).markAsUndone();
                 givenTask.markAsUndone();
             }
@@ -124,7 +124,7 @@ public class TaskList {
                 continue;
             }
             sb.append("     " + marker + ". " + this.list.get(i).toString() + "\n");
-            marker ++;
+            marker++;
         }
         return sb.toString();
     }

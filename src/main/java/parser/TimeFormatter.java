@@ -19,6 +19,10 @@ public class TimeFormatter {
         this.strDate = strDate.trim();
     }
 
+    /**
+     * Parses time string to a specific format.
+     * @Return a string representing a formatted LocalDate
+     */
     public String parseToFormat() {
         try {
             LocalDate thisLocalDate = LocalDate.parse(strDate);
@@ -27,5 +31,4 @@ public class TimeFormatter {
             return this.strDate;
         }
     }
-
 }

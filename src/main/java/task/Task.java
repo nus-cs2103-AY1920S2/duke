@@ -48,9 +48,11 @@ public class Task {
     public String toString() {
         String mark;
         if (this.isDone) {
-            mark = "[" + "\u2713" + "]";
+            //mark = "[" + "\u2713" + "]";
+            mark = "[" + "✅" + "]";
         } else {
-            mark = "[" + "\u2717" + "]";
+            //mark = "[" + "\u2717" + "]";
+            mark = "[" + "❌" + "]";
         }
         return mark + " " + this.name;
     }

@@ -78,7 +78,7 @@ public class TextUi {
      * @param givenTask the newly added task object
      * @param tasks the current task list
      */
-    public String showAddingTask_Str(Task givenTask, TaskList tasks){
+    public String showAddingTask_Str(Task givenTask, TaskList tasks) {
         StringBuilder sb = new StringBuilder();
         sb.append(Message.MESSAGE_LINE + "\n");
         sb.append(Message.MESSAGE_GOTIT + "\n");
@@ -91,9 +91,9 @@ public class TextUi {
     /**
      * Returns messages after removing a task from the task list.
      *
-     * @param givenTask
-     * @param tasks
-     * @return
+     * @param givenTask the newly added task object
+     * @param tasks the current task list
+     * @return a string representing the removed task
      */
     public String showRemovingTask(Task givenTask, TaskList tasks)  {
         StringBuilder sb = new StringBuilder();
@@ -250,7 +250,7 @@ public class TextUi {
         StringBuilder sb = new StringBuilder();
         sb.append(Message.MESSAGE_LINE + "\n");
         sb.append(Message.MESSAGE_SHOWRELATED + "\n");
-        if(taskType == 'A') {
+        if (taskType == 'A') {
             sb.append(tasks.toUndoneListString());
             sb.append("     Try to finish them soon ~" + "\n");
         } else {
