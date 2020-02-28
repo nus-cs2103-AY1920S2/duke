@@ -1,10 +1,18 @@
 plugins {
     id 'java'
     id 'application'
-
-
+    id "com.github.johnrengelman.shadow" version "5.1.0"
+    id 'checkstyle'
 }
-
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "2.0"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+checkstyle {
+    toolVersion = '8.23'
+}
 group 'seedu.duke'
 version '0.1.0'
 
@@ -37,3 +45,11 @@ application {
 run {
     standardInput = System.in
 }
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.mypackage.MyClass'
+        )
+    }
+}
+
