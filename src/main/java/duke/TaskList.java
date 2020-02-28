@@ -9,7 +9,6 @@ import java.lang.*;
 public class TaskList {
 
     public TaskList(){
-
     }
     /**
      * This Method is print out the items in the list parameter
@@ -21,7 +20,6 @@ public class TaskList {
         int headerNum = 0;
         if(list.isEmpty()) {
             System.out.println("Sorry, Master. The list is empty");
-
             output = "Sorry, Master. The list is empty";
         }
         else{
@@ -30,6 +28,7 @@ public class TaskList {
                 output = output +  headerNum +"." + list.get(i).toString() + "\n" ;
             }
         }
+        output = "As you wish, Master. Below are your task(s)," + "\n" + output;
         return output;
     }
 
@@ -47,12 +46,17 @@ public class TaskList {
             numOfWords++;
         }
 
+
+
         if (input.contains("todo")) {
             if (numOfWords > 1) {
 
                 try {
                     String taskDescription = input.replaceAll("todo ", "");
+
+
                     list = createTodo(taskDescription, list, "0");
+
                     System.out.println("Got it. I've added this task:");
                     System.out.println("[T][X] " + taskDescription);
                     System.out.println("Now you have " + (list.size()) + " tasks in the list.");
@@ -130,7 +134,7 @@ public class TaskList {
         }
         t.setType("T");
         list.add(t);
-        
+
         return list;
     }
 
@@ -165,15 +169,23 @@ public class TaskList {
      */
     public static String markDone(ArrayList<Task> list, String input) throws IOException {
         String filePath = "C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt";
-        int itemPos = Integer.parseInt(input.replaceAll("[^0-9]" , ""));
         String output ="";
-        itemPos = itemPos - 1;
-        list.get(itemPos).markDone();
 
+        input = input.replaceAll("done ", "");
+        String[] numberList = input.split(" ");
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[" + list.get(itemPos).getType() + "][" + list.get(itemPos).getStatus() + "] " + list.get(itemPos).getDescription());
-        output ="Nice! I've marked this task as done:";
-        output = output + "\n" + "[" + list.get(itemPos).getType() + "][" + list.get(itemPos).getStatus() + "] " + list.get(itemPos).getDescription();
+        output ="Nice! I've marked this task as done:" + "\n";
+        for(int i = 0 ; i < numberList.length ; i++){
+            list.get(Integer.parseInt(numberList[i])-1).markDone();
+
+            System.out.println("[" + list.get(Integer.parseInt(numberList[i])-1).getType() + "][" +
+                    list.get(Integer.parseInt(numberList[i])-1).getStatus() + "] " +
+                    list.get(Integer.parseInt(numberList[i])-1).getDescription());
+            output = output + "[" + list.get(Integer.parseInt(numberList[i])-1).getType() + "][" +
+                    list.get(Integer.parseInt(numberList[i])-1).getStatus() + "] " +
+                    list.get(Integer.parseInt(numberList[i])-1).getDescription() +"\n";
+
+        }
         Storage.updateFile(list, filePath);
         return output;
     }
@@ -187,18 +199,18 @@ public class TaskList {
         String filePath = "C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt";
         String output = "";
 
+        input = input.replaceAll("delete ", "");
+        String[] numberList = input.split(" ");
+
+        for(int i = numberList.length -1 ; i >= 0; i--){
+            System.out.println(numberList[i]);
+            output =  list.get(Integer.parseInt(numberList[i])-1).toString() +"\n" + output;
+            list.remove(Integer.parseInt(numberList[i])-1);
+        }
         System.out.println("As you wish, Master. I've removed this task: ");
-        output = output + "As you wish, Master. I've removed this task: ";
-        int itemPos = Integer.parseInt(input.replaceAll("[^0-9]" , ""));
-        itemPos-- ;
-        System.out.println("[" + list.get(itemPos).getType() + "][" + list.get(itemPos).getStatus() + "] " +
-                list.get(itemPos).getDescription() + list.get(itemPos).getWhen());
-        output = output + "\n" + "[" + list.get(itemPos).getType() + "][" + list.get(itemPos).getStatus() + "] " +
-                list.get(itemPos).getDescription() + list.get(itemPos).getWhen();
+        output = "As you wish, Master. I've removed the task(s): " + "\n" + output;
 
-        list.remove(itemPos);
         System.out.println("Now you have "+ list.size() + " tasks in the list.");
-
         output = output + "\n" + "Now you have "+ list.size() + " tasks in the list.";
         Storage.updateFile(list, filePath);
 
@@ -225,7 +237,6 @@ public class TaskList {
                 output = output + "\n" + list.get(i).toString();
             }
         }
-
         if (!flag){
             System.out.println("No, no, no, there is no such task occurring for this date. ");
             output = "These are the task(s) occurring at " + date + " : " + "\n"
@@ -248,7 +259,6 @@ public class TaskList {
                 matchFound[i] = i;
             }
         }
-
         if (!hasMatch){
             System.out.println("Sorry Master, there is no such task that has the keyword: " + keyword);
             output = "Sorry Master, there is no such task that has the keyword: " + keyword;

@@ -79,7 +79,7 @@ public class Task{
      * @return nothing
      */
     public LocalDate getWhen() {
-        return LocalDate.now();
+        return null;
     }
 
     /**

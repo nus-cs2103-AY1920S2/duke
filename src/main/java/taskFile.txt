@@ -1,1 +1,4 @@
-T -0 -add -
+T -1 -swim in the morning everyday -
+T -1 -read readings -
+D -1 -cs3230 assignment 1  -2020-03-05
+E -0 -night festival  -2020-05-01
