@@ -1,7 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
-
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -16,7 +14,7 @@ public class Task {
     public boolean getStatus() { return this.isDone; }
 
     public String getStatusIcon() {
-        return (isDone ? "Y" : "N"); //return tick or X symbols
+        return (isDone ? "O" : "X"); //return tick or X symbols
     }
 
     public void doAct() {

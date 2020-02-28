@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Parses through user input to execute command
+ */
 public class Parser {
     protected TaskList task;
     protected Storage storage;
@@ -11,6 +14,12 @@ public class Parser {
         this.ui = ui;
     };
 
+    /**
+     * Parses through user input to execute correct command
+     * @param str from user input
+     * @return Command to execute
+     * @throws DukeException
+     */
     public static Command parse(String str) throws DukeException {
         if  (str.length() == 0) {
             throw new DukeException("Command should not be empty");
@@ -18,6 +27,7 @@ public class Parser {
         String[] temp = str.split(" ");
         switch (temp[0]) {
         case "todo":
+            //System.out.println("Hi2");
             return new AddCommand(str);
         case "deadline":
             return new AddCommand(str);

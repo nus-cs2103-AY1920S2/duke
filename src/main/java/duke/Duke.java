@@ -1,58 +1,54 @@
 package duke;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.util.Arrays;
-import java.time.LocalDate;
-
+/**
+ * Creates Duke Object with filepath
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private TasksNum tasksnum;
 
     public Duke(String filePath) {
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-        int tasksnum = 0;
+        this.ui = new Ui();
+        this.storage = new Storage();
+        this.tasksnum = new TasksNum();
         try {
-            TaskList lst = new TaskList(storage.readFile());
-            tasksnum = lst.getSize() - 1;
-            lst.deleteTask(lst.getTask(tasksnum));
+            this.tasks = new TaskList(storage.readFile());
+            tasksnum.setNum(tasks.getSize() - 1);
+            tasks.deleteTask(tasks.getTask(tasksnum.getNum()));
         } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
+            System.out.println(ui.showLoadingError());
+            this.tasks = new TaskList();
         }
     }
 
+    /**
+     * Executes the Duke object
+     */
     public void run() {
-        ui.greet();
+        System.out.println(ui.greet());
         boolean isExit = false;
-        while (!isExit) {
+        while (isExit == false) {
             try {
-                int num = 0; //temp
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                System.out.println(ui.showLine()); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, storage, ui, num);
+                System.out.println(c.execute(tasks, storage, ui, tasksnum));
+                //System.out.println(tasksnum);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                System.out.println(ui.showError(e.getMessage()));
             } finally {
-                ui.showLine();
+                System.out.println(ui.showLine());
             }
         }
     }
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+        //System.out.println("Hi");
     }
 }
 

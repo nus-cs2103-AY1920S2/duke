@@ -7,7 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.text.ParseException;
 import java.text.DateFormat;
 
-
+/**
+ * Creates Deadline task
+ */
 public class Deadline extends Task {
     protected LocalDate date;
 
@@ -17,6 +19,10 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    /**
+     * Formats time to 12 hour mode for Deadline Task
+     * @param time for Deadline Task
+     */
     public void setTime(String time) {
         String newtime = time.substring(0,2) + ":" + time.substring(2);
         DateFormat df = new SimpleDateFormat("HH:mm");
@@ -34,16 +40,28 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Retrieves time
+     * @return time from Deadline Task
+     */
     public String getTime() {
         return this.timeD;
     }
 
+    /**
+     * Retrieves date
+     * @return date from Deadline Task
+     */
     public String getDate() {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Retrieves formatted time
+     * @return formatted time from Deadline Task
+     */
     public String getTimeStamp() {
-        return "(by: " +  date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))  + " " +  this.timeD + ")";
+        return "(by: " +  date.format(DateTimeFormatter.ofPattern("MMM d yy"))  + " " +  this.timeD + ")";
     }
 
     @Override

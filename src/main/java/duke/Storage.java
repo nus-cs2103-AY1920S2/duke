@@ -1,17 +1,18 @@
 package duke;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.time.LocalDate;
-import java.io.IOException;
-import java.time.LocalDate;
+import java.util.List;
 
+/**
+ * Creates Storage object
+ */
 public class Storage {
     private String directory = System.getProperty("user.dir");
     private String fileName = "filedata.txt";
@@ -20,6 +21,10 @@ public class Storage {
 
     public Storage() {};
 
+    /**
+     * Reads file stored in hard drive
+     * @return ArrayList of Tasks stored
+     */
     public ArrayList<Task> readFile() {//returns tasklist + task number (appended to the back)
         int tasks = 0;
         try {
@@ -57,6 +62,10 @@ public class Storage {
         return lst;
     }
 
+    /**
+     * Overwrites new data to stored file in hard drive
+     * @param lst from Tasklist from ByeCommand
+     */
     public void writeToFile(TaskList lst){
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
@@ -77,6 +86,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Formats command to fit date into LocalDate format
+     * @param temp String array that contains date
+     * @return LocalDate object or Deadline/Event object
+     */
     private LocalDate setDate(String[] temp) {
         String[] temp1 = temp[3].split(" ");
         String[] temp2 = temp1[1].split("/");
@@ -88,6 +102,11 @@ public class Storage {
         return localdate;
     }
 
+    /**
+     * Increase task number if Task is done
+     * @param task Task from file
+     * @param tasks integer containing task number
+     */
     private void addtask(Task task, int tasks) {
         if (task.getStatusIcon().equals("Y")) {
             task.doAct();

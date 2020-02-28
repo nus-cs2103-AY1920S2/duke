@@ -2,32 +2,53 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Creates TaskList object
+ */
 public class TaskList {
     ArrayList<Task> lst;
 
-    TaskList() {
+    public TaskList() {
         this.lst = new ArrayList<Task>();
     }
-    TaskList(ArrayList<Task> lst) {
+    public TaskList(ArrayList<Task> lst) {
         this.lst = lst;
     }
 
-    void addTask(Task task) {
+    /**
+     * Adds task to TaskList
+     * @param task from Task from Duke
+     */
+    public void addTask(Task task) {
         lst.add(task);
     }
 
-    void deleteTask(Task task) throws DukeException {
+    /**
+     * Deletes task from TaskList
+     * @param task from Task from Duke
+     * @throws DukeException when there is no Task to be deleted
+     */
+    public void deleteTask(Task task) throws DukeException {
         if (lst.size() == 0) {
             throw new DukeException("No task to delete");
         }
         lst.remove(task);
     }
 
-    Task getTask(int counter) {
+    /**
+     * Retrieves task from TaskList
+     * @param counter integer from Duke
+     * @return specified Task
+     */
+    public Task getTask(int counter) {
         return lst.get(counter);
     }
 
-    int getSize() {return lst.size();}
+    /**
+     * Retrieves size of TaskList
+     * @return integer size size of TaskList
+     */
+    public int getSize() {return lst.size();}
 
 }
 

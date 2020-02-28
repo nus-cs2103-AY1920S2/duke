@@ -2,16 +2,27 @@ package duke;
 
 import java.time.LocalDate;
 
-
+/**
+ * Adds the specified command to the tasklist from Duke
+ */
 public class AddCommand extends Command {
 
     AddCommand(String str) {
         super(str);
     }
 
+    /**
+     *
+     * @param lst from TaskList from Duke
+     * @param storage from Storage from Duke
+     * @param ui from UI from Duke from Duke
+     * @param tasks from TaskNum from Duke
+     * @return String containing the add command returned from ui
+     * @throws DukeException might throw DukeException when user input is incorrect
+     */
     @Override
-    String execute(TaskList lst,Storage storage,Ui ui,int tasks) throws DukeException {
-        tasks++;
+    String execute(TaskList lst,Storage storage,Ui ui,TasksNum tasks) throws DukeException {
+        tasks.addNum();
         String[] command = str.split(" ");
         switch (command[0]) {
             case "todo":
@@ -44,13 +55,18 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Formats command to separate info to put into Task object
+     * @param command String that contains user input
+     * @return String array hat contains date and time for Deadline/Event object
+     */
     String[] setData(String command) { //name and date and time
+        System.out.println(command);
         int slashtask = command.indexOf("/");
         String[] datetime = command.substring(slashtask + 4,command.length()).split(" "); //string containing date and time on
         String ddate = datetime[0];
         String time = datetime[1];
-        int slashdate = ddate.indexOf("/");
-        String name = command.substring(0,slashdate).split(" ")[1];
+        String name = command.substring(0,slashtask).split(" ")[1];
         String[] result = new String[3];
         result[0] = name;
         result[1] = ddate;
@@ -58,6 +74,11 @@ public class AddCommand extends Command {
         return result;
     }
 
+    /**
+     * Formats command to fit date into LocalDate format
+     * @param date1 String that contains date
+     * @return LocalDate object or Deadline/Event object
+     */
     LocalDate setDate(String date1) {
         System.out.println(date1);
         String[] date = date1.split("/");
