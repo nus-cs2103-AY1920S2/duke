@@ -2,16 +2,33 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 <fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308"
          maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox"
-         xmlns="http://javafx.com/javafx/8.0.171">
+         xmlns="http://javafx.com/javafx/">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true"/>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+        <Label fx:id="dialog" maxWidth="-Infinity" minHeight="-Infinity"
+               style="-fx-background-radius: 15; -fx-background-color: LIGHTPINK;" text="Label" wrapText="true">
+            <font>
+                <Font name="Comic Sans MS" size="14.0"/>
+            </font>
+            <padding>
+                <Insets bottom="7.0" left="7.0" right="7.0" top="7.0"/>
+            </padding>
+            <HBox.margin>
+                <Insets bottom="7.0" left="7.0" right="7.0" top="7.0"/>
+            </HBox.margin>
+        </Label>
+        <HBox>
+            <Circle fx:id="displayPicture" pickOnBounds="true" radius="30"/>
+            <padding>
+                <Insets bottom="0" left="8.0" right="8.0" top="0"/>
+            </padding>
+        </HBox>
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+        <Insets bottom="6.0" left="5.0" right="5.0" top="15"/>
     </padding>
 </fx:root>

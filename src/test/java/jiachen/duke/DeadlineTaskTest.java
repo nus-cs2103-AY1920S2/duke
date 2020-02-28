@@ -25,6 +25,24 @@ class DeadlineTaskTest {
     }
 
     @Test
+    void testEmptyDescription() {
+        Assertions.assertThrows(
+            InvalidDukeFormatException.class,
+            () -> {
+                new DeadlineTask("", "01/12/2020 0700");
+            });
+    }
+
+    @Test
+    void testInvalidTimestamp() {
+        Assertions.assertThrows(
+            InvalidDukeFormatException.class,
+            () -> {
+                new DeadlineTask("", "01/12/2020 0700");
+            });
+    }
+
+    @Test
     void testToString() {
         try {
             DeadlineTask task = new DeadlineTask("hellololooloo there", "01/12/2020 0700");
@@ -38,7 +56,7 @@ class DeadlineTaskTest {
     void format() {
         try {
             DeadlineTask task = new DeadlineTask("hellololooloo there", "01/12/2020 0700");
-            assertEquals("D | 0 | hellololooloo there | 2020-12-01T07:00", task.format());
+            assertEquals("D | 0 | hellololooloo there | 01/12/2020 0700", task.format());
         } catch (InvalidDukeFormatException e) {
             e.printStackTrace();
         }

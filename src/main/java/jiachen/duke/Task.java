@@ -18,9 +18,13 @@ public abstract class Task {
      *
      * @param description the description
      */
-    public Task(String description) {
+    public Task(String description) throws InvalidDukeFormatException {
         this.description = description;
         this.isDone = false;
+
+        if (description.equals("")) {
+            throw new InvalidDukeFormatException("description cannot be empty.");
+        }
     }
 
     /**

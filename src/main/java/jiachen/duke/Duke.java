@@ -27,6 +27,7 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
+    private Button sendButton;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -157,7 +158,7 @@ public class Duke extends Application {
     }
 
     private String handleHello() {
-        return ui.formatHello();
+        return Ui.formatWelcomeMessage();
     }
 
     private String handleEvent(String parameters) throws InvalidDukeFormatException {
@@ -264,13 +265,7 @@ public class Duke extends Application {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(userText.toString(), user),
-            DialogBox.getDukeDialog(dukeText.toString(), duke)
-        );
-        userInput.clear();
+
     }
 
     protected String getResponse(String input) {
@@ -286,12 +281,12 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        Button sendButton = new Button("Send");
+        sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        stage.setTitle("Duke");
+        stage.setTitle("DUKE");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

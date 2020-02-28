@@ -1,7 +1,6 @@
 package jiachen.duke;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -9,7 +8,7 @@ import java.time.format.DateTimeParseException;
  */
 public class EventTask extends Task {
 
-    private LocalDateTime at;
+    private String toBeDoneAt;
 
     /**
      * Instantiates a new Event task.
@@ -22,18 +21,24 @@ public class EventTask extends Task {
     public EventTask(String description, String at)
         throws InvalidDukeFormatException, DateTimeParseException {
         super(description);
+        this.toBeDoneAt = at;
 
         if (at.isEmpty()) {
             throw new InvalidDukeFormatException("Missing /at clause or missing at when!");
         }
 
-        this.at = LocalDateTime.parse(at, DateTimeUtil.inputFormatter);
+        try {
+            LocalDateTime.parse(this.toBeDoneAt, DateTimeUtil.INPUT_FORMATTER);
+        } catch (Exception e) {
+            throw new InvalidDukeFormatException("Invalid timestamp given!");
+        }
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeUtil.eventFormatter;
-        return "[E]" + super.toString() + " (at: " + formatter.format(this.at) + ")";
+        String formattedDateTime = LocalDateTime.parse(this.toBeDoneAt, DateTimeUtil.INPUT_FORMATTER)
+            .format(DateTimeUtil.EVENT_FORMATTER);
+        return "[E]" + super.toString() + " (at: " + formattedDateTime + ")";
     }
 
     @Override
@@ -41,6 +46,6 @@ public class EventTask extends Task {
         return "E | "
             + super.format()
             + " | "
-            + DateTimeUtil.inputFormatter.format(this.at);
+            + toBeDoneAt;
     }
 }

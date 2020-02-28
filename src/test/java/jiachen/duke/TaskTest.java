@@ -8,7 +8,12 @@ class TaskTest {
 
     @Test
     void getStatusIcon() {
-        Task task = new MockTask("this is a description");
+        Task task = null;
+        try {
+            task = new MockTask("this is a description");
+        } catch (InvalidDukeFormatException e) {
+            e.printStackTrace();
+        }
         assertEquals(task.getStatusIcon(), ("\u2718"));
         task.markAsDone();
         assertEquals(task.getStatusIcon(), "\u2713");
@@ -16,7 +21,12 @@ class TaskTest {
 
     @Test
     void markAsDone() {
-        Task task = new MockTask("this is a description");
+        Task task = null;
+        try {
+            task = new MockTask("this is a description");
+        } catch (InvalidDukeFormatException e) {
+            e.printStackTrace();
+        }
         assert (!task.isDone);
         task.markAsDone();
         assert (task.isDone);
@@ -24,13 +34,23 @@ class TaskTest {
 
     @Test
     void testToString() {
-        Task task = new MockTask("this is a description");
+        Task task = null;
+        try {
+            task = new MockTask("this is a description");
+        } catch (InvalidDukeFormatException e) {
+            e.printStackTrace();
+        }
         assertEquals(task.toString(), "[\u2718] this is a description");
     }
 
     @Test
     void format() {
-        Task task = new MockTask("this is a description");
+        Task task = null;
+        try {
+            task = new MockTask("this is a description");
+        } catch (InvalidDukeFormatException e) {
+            e.printStackTrace();
+        }
         assertEquals(task.format(), "0 | this is a description");
     }
 }

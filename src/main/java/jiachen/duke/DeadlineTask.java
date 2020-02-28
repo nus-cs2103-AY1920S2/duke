@@ -23,6 +23,12 @@ public class DeadlineTask extends Task {
         if (deadline.isEmpty()) {
             throw new InvalidDukeFormatException("Missing /by clause or missing by when!");
         }
+
+        try {
+            LocalDateTime.parse(this.toBeDoneBy, DateTimeUtil.INPUT_FORMATTER);
+        } catch (Exception e) {
+            throw new InvalidDukeFormatException("Invalid timestamp given!");
+        }
     }
 
     @Override
@@ -32,7 +38,6 @@ public class DeadlineTask extends Task {
 
     @Override
     public String format() {
-        LocalDateTime dateString = LocalDateTime.parse(this.toBeDoneBy, DateTimeUtil.inputFormatter);
-        return "D | " + super.format() + " | " + dateString;
+        return "D | " + super.format() + " | " + this.toBeDoneBy;
     }
 }
