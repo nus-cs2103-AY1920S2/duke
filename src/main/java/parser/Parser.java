@@ -8,6 +8,7 @@ import command.DisplayCommand;
 import command.ErrorCommand;
 import command.ExitCommand;
 import command.FindCommand;
+import command.HelpCommand;
 import command.ReminderCommand;
 import task.Todo;
 import task.Event;
@@ -39,6 +40,10 @@ public class Parser {
             }
             String searchingItem = input.substring(5).trim();
             return new FindCommand(searchingItem);
+        }
+
+        if (keyword.equalsIgnoreCase("help")) {
+            return new HelpCommand();
         }
 
         if(keyword.equalsIgnoreCase("reminders")) {

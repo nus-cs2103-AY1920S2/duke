@@ -62,6 +62,17 @@ public class TextUi {
     }
 
     /**
+     * Displays the helping page including all the basic commands.
+     * @return a string consists of all the basic commands
+     */
+    public String showHelpingPage(String content) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Message.MESSAGE_SHOWHELPINGPAGE + "\n");
+        sb.append(content + "\n");
+        return sb.toString();
+    }
+
+    /**
      * Returns messages after adding a task to the task list.
      *
      * @param givenTask the newly added task object
@@ -241,6 +252,7 @@ public class TextUi {
         sb.append(Message.MESSAGE_SHOWRELATED + "\n");
         if(taskType == 'A') {
             sb.append(tasks.toUndoneListString());
+            sb.append("     Try to finish them soon ~" + "\n");
         } else {
             int marker = 1;
             Task thisTask;

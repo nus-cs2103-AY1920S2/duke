@@ -29,4 +29,9 @@ public class Message {
             +"     It cannot be undone.";
     public static final String MESSAGE_CANNOTUNDO = "     Sorry, the previous command was\n"
             + "     not suitable to be undone";
+    public static final String MESSAGE_STARTHELP = "Type 'help' if you are not sure what to say";
+    public static final String MESSAGE_SHOWHELPINGPAGE = "Here are the basic commands that you can call:\n"
+            + "[] - for user-defined input\n";
+
 }
+
