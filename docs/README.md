@@ -2,17 +2,17 @@
 By: [Kevin Law](https://github.com/kevvvinn) Since: Feb 2020
 
 ## Table of content
-1.[Introduction](#introduction)<br>
-2.[Features](#features)<br>
-	+ 2.1 [Adding Todo task](#adding-todo-task)<br>
-	+ 2.2 [Adding Event task](#adding-event-task)<br>
-	+ 2.3 [Adding Deadline task](#adding-deadline-task)<br>
-	+ 2.4 [List all tasks](#list-all-tasks)<br>
-	+ 2.5 [Mark task(s) as done](mark-task(s)-as-done)<br>
-	+ 2.6 [Delete task(s)](delete-task(s))<br>
-	+ 2.7 [Clear all tasks](clear-all-tasks)<br>
-	+ 2.8 [Exit the program](exit-the-program)<br>
-3. [Acknowledgements](#acknowledgements)<br>
+1. [Introduction](#introduction)<br>
+1. [Features](#features)<br>
+	1. [Adding Todo task](#adding-todo-task)<br>
+	1. [Adding Event task](#adding-event-task)<br>
+	1. [Adding Deadline task](#adding-deadline-task)<br>
+	1. [List all tasks](#list-all-tasks)<br>
+	1. [Mark task(s) as done](mark-task(s)-as-done)<br>
+	1. [Delete task(s)](delete-task(s))<br>
+	1. [Clear all tasks](clear-all-tasks)<br>
+	1. [Exit the program](exit-the-program)<br>
+1. [Acknowledgements](#acknowledgements)<br>
 
 
 ## Introduction
