@@ -2,7 +2,7 @@ package app.core.tasks;
 
 import app.util.Date;
 
-final class DeadlineTask extends Task {
+class DeadlineTask extends Task {
     private Date deadline;
 
     DeadlineTask(String description, Date deadline) {

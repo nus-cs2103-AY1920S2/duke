@@ -2,7 +2,7 @@ package app.core.tasks;
 
 import app.util.Date;
 
-final class EventTask extends Task {
+class EventTask extends Task {
     private Date when;
 
     EventTask(String description, Date when) {
