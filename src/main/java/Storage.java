@@ -16,16 +16,32 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Storage. The Storage class deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
+    /**
+     * The filePath where tasks are loaded and saved.
+     */
     private String filePath;
+    /**
+     * The user interface.
+     */
     private Ui ui;
 
+    /**
+     * Creates a new Storage with the given filepath.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.ui = new Ui();
     }
 
-    private static ArrayList<Task> load() throws FileNotFoundException {
+    /**
+     * Loads tasks from the file.
+     * @throws FileNotFoundException when the filePath is invalid.
+     */
+    public ArrayList<Task> load() throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
         ArrayList<Task> tasks = new ArrayList<Task>(100);
@@ -56,7 +72,11 @@ public class Storage {
         return tasks;
     }
 
-    private static void writeToFile(ArrayList<Task> tasks) throws IOException {
+    /**
+     * Saves tasks to the file.
+     * @throws IOException.
+     */
+    public void writeToFile(ArrayList<Task> tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         for (int i = 0; i < tasks.size(); i++)  {
             Task task = tasks.get(i);
@@ -76,7 +96,10 @@ public class Storage {
         fileWriter.close();
     }
 
-    private static void record(ArrayList<Task> tasks) {
+    /**
+     * Tries to record the changes tasks to the file.
+     */
+    public void record(ArrayList<Task> tasks) {
         try {
             writeToFile(tasks);
         } catch (IOException e) {

@@ -3,37 +3,65 @@
 import duke.Task;
 import duke.DukeException;*/
 import java.io.IOException;
+import java.util.ArrayList;
 
+/**
+ * Represents the user interface. This Ui class outputs messages and interacts with the user.
+ */
 public class Ui {
 
+    /**
+     * Creates a new Ui.
+     */
     public Ui() { }
 
-    private static void greet() {
+    /**
+     * Greets to the user.
+     */
+    public void greet() {
         System.out.println("Hello! I'm Duke\n What can I do for you?");
     }
 
-    private static void exit() {
+    /**
+     * Farewell to the user.
+     */
+    public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    private static void add(Task task, ArrayList<Task> tasks) {
+    /**
+     * Adds a task for the user.
+     */
+    public void add(Task task, ArrayList<Task> tasks) {
         System.out.println("Got it. I've added this task:\n" + task.toString()
                 + "\n Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    private static void done(int n, ArrayList<Task> tasks) {
+    /**
+     * Marks a task as done for the user.
+     */
+    public void done(int n, ArrayList<Task> tasks) {
         System.out.println("Nice! I've marked this task as done: \n" + tasks.get(n-1).toString());
     }
 
-    private static void delete(int n, ArrayList<Task> tasks) {
-        SSystem.out.println("Noted. I've removed this task:\n" + tasks.get(n-1).toString());
+    /**
+     * Deletes a task for the user.
+     */
+    public void delete(int n, ArrayList<Task> tasks) {
+        System.out.println("Noted. I've removed this task:\n" + tasks.get(n-1).toString());
     }
 
-    private static void count(ArrayList<Task> tasks) {
+    /**
+     * Counts the number of task in the current list for the user.
+     */
+    public void count(ArrayList<Task> tasks) {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    private static void showCommandError(DukeException e) {
+    /**
+     * Shows command error for the user while catching duke exceptions.
+     */
+    public void showCommandError(DukeException e) {
         if (e.getType().equals("EmptyToDo")) {
             System.out.println("OOPS!!! The description of a todo cannot be empty.");
         }
@@ -48,11 +76,17 @@ public class Ui {
         }
     }
 
-    private static void showLoadingError() {
+    /**
+     * Shows loading error for the user while files are not found.
+     */
+    public void showLoadingError() {
         System.out.println("File not found");
     }
 
-    private static void showIOException(IOException e) {
+    /**
+     * Shows error for the user while catching IOExceptions.
+     */
+    public void showIOException(IOException e) {
         System.out.println("Oops! " + e.getMessage());
     }
 }

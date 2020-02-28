@@ -9,18 +9,36 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Parser. The Parser class deals with making sense of the user command and running the command.
+ */
 public class Parser {
+    /**
+     * The user interface.
+     */
     private Ui ui;
+    /**
+     * The list of task.
+     */
     private TaskList tasks;
+    /**
+     * The storage object used.
+     */
     private Storage storage;
 
+    /**
+     * Creates a new Parser with the given ui, tasklist and storage.
+     */
     public Parser(Ui ui, TaskList tasks, Storage storage) {
         this.ui = ui;
         this.tasks = tasks;
         this.storage = storage;
     }
 
-    private static void run() {
+    /**
+     * Greets and runs the user command line by line.
+     */
+    public void run() {
         Scanner scanner = new Scanner(System.in);
         ui.greet();
         while (scanner.hasNextLine()) {
@@ -33,22 +51,27 @@ public class Parser {
         }
     }
 
-    private static void handleInstruction(String instruction) throws DukeException {
+    /**
+     * Deals with the user command (instruction).
+     * @throws DukeException when the instruction has an invalid task type,
+     *                       or the task type is specified but content is empty.
+     */
+    public void handleInstruction(String instruction) throws DukeException {
         if (instruction.equals("bye")) {
             ui.exit();
         } else if (instruction.equals("list")) {
             tasks.printList();
         } else if (instruction.split(" ")[0].equals("done")) {
             tasks.doneTask(Integer.parseInt(instruction.split(" ")[1]));
-            storage.record(tasks);
+            storage.record(tasks.getTasks());
         } else if (instruction.split(" ")[0].equals("delete")) {
             tasks.deleteTask(Integer.parseInt(instruction.split(" ")[1]));
-            storage.record(tasks);
+            storage.record(tasks.getTasks());
         } else if (instruction.split(" ")[0].equals("todo")) {
             String task = instruction.replace("todo", "");
             if (!task.equals("")) {
                 tasks.addTask(new ToDo(task));
-                storage.record(tasks);
+                storage.record(tasks.getTasks());
             } else {
                 throw new DukeException("EmptyToDo");
             }
@@ -58,7 +81,7 @@ public class Parser {
                 String time = instruction.split("/")[1].replace("by ", "");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 tasks.addTask(new Deadline(task, LocalDateTime.parse(time, formatter)));
-                storage.record(tasks);
+                storage.record(tasks.getTasks());
             } else {
                 throw new DukeException("EmptyDeadline");
             }
@@ -68,7 +91,7 @@ public class Parser {
                 String time = instruction.split("/")[1].replace("at ", "");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 tasks.addTask(new Event(task, LocalDateTime.parse(time, formatter)));
-                storage.record(tasks);
+                storage.record(tasks.getTasks());
             } else {
                 throw new DukeException("EmptyEvent");
             }
