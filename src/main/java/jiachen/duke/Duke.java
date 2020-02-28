@@ -67,6 +67,8 @@ public class Duke extends Application {
         Command command;
         switch (commandStr) {
         case "bye":
+        case "exit":
+        case "quit":
             command = Command.EXIT_COMMAND;
             break;
         case "list":

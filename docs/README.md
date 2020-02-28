@@ -128,8 +128,8 @@ Deletes the 2nd task in duke's task list.
 
 ### Exiting the program : `exit`
 
-Exits the program. +
-Format: `exit`
+Exits the program.
+Format: `exit`, `quit` and `bye`
 
 ### Saving the data
 Duke task data are saved in the hard disk automatically after any command that changes the data. +
