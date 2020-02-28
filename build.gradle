@@ -1,8 +1,14 @@
 plugins {
+
+    id "com.github.johnrengelman.shadow" version "5.1.0"
     id 'java'
     id 'application'
-    id "com.github.johnrengelman.shadow" version "5.1.0"
-    id 'checkstyle'
+
+}
+
+application {
+    // Change this to your main class.
+    mainClassName = "Launcher"
 }
 shadowJar {
     archiveBaseName = "duke"
@@ -10,15 +16,14 @@ shadowJar {
     archiveClassifier = null
     archiveAppendix = null
 }
-checkstyle {
-    toolVersion = '8.23'
-}
+
 group 'seedu.duke'
 version '0.1.0'
 
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
     String javaFxVersion = '11'
@@ -37,10 +42,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-application {
-    // Change this to your main class.
-    mainClassName = "Duke"
-}
 
 run {
     standardInput = System.in

@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -36,8 +37,8 @@ public class Storage {
      */
     public void readFileContent(String filePath, ArrayList<Task> list ) throws FileNotFoundException, Exception {
         File f = new File(filePath); // create a file for the given file path
-        Scanner s = new Scanner(f);// create a scanner using the File as the source
-        while(s.hasNext()){
+        Scanner s = new Scanner(f); // create a scanner using the File as the source
+        while (s.hasNext()){
 
             String input = s.nextLine();
             String [] strArray = input.split(" -");
@@ -67,6 +68,7 @@ public class Storage {
      * @param t This parameter is the Task Object
      */
     public static void appendToFile(String filePath, Task t) throws IOException {
+
         FileWriter fw = new FileWriter(filePath , true);
         int typeCount = 0 ;
         if (t.getStatus().equals("Y")){

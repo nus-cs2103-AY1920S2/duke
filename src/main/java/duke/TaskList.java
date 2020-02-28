@@ -75,9 +75,7 @@ public class TaskList {
             if (numOfWords > 1)  {
                 try {
                     String taskDescription = input.replaceAll("deadline ", "");
-
                     String[] strArray = taskDescription.split("/by ");
-
                     list =  createDeadline(strArray[0], strArray[1], list, "0" );
                     System.out.println("Got it. I've added this task:");
                     System.out.println(list.get(list.size()-1).toString());
@@ -132,7 +130,7 @@ public class TaskList {
         }
         t.setType("T");
         list.add(t);
-
+        
         return list;
     }
 

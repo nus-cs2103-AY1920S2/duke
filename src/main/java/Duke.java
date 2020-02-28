@@ -7,11 +7,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -22,7 +19,7 @@ import java.util.ArrayList;
  * 2) Able to  list down all the tasks in sequence
  * 3) Able to delete the tasks
  * 4) Able to find the task by it's name
- */
+ **/
 
 public class Duke extends Application {
 
@@ -80,6 +77,7 @@ public class Duke extends Application {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
+
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
@@ -117,12 +115,14 @@ public class Duke extends Application {
 
         //Step 3. Add functionality to handle user input.
         ui = new Ui();
-        storage = new Storage("C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt");
+        storage = new Storage(
+                "C:\\Users\\User\\Documents\\CS2103T Projects\\repo\\duke\\src\\main\\java\\taskFile.txt");
         parser = new Parser();
         list = new ArrayList<Task>();
         Label Text = new Label(Ui.printGreetings());
         storage.load(list);
         tasks = new TaskList();
+
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Text, new ImageView(duke))
@@ -159,10 +159,12 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+
         String input = userInput.getText();
         String output = "";
         Label userText = new Label(input);
         input = input.toLowerCase();
+
         try {
             output = Parser.evaluateInput(input, list);
         } catch (IOException e) {
