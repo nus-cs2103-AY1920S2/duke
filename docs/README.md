@@ -4,14 +4,14 @@ By: [Kevin Law](https://github.com/kevvvinn) Since: Feb 2020
 ## Table of content
 1.[Introduction](#introduction)<br>
 2.[Features](#features)<br>
-	2.1 [Adding Todo task](#adding-todo-task)<br>
-	2.2 [Adding Event task](#adding-event-task)<br>
-	2.3 [Adding Deadline task](#adding-deadline-task)<br>
-	2.4 [List all tasks](#list-all-tasks)<br>
-	2.5 [Mark task(s) as done](mark-task(s)-as-done)<br>
-	2.6 [Delete task(s)](delete-task(s))<br>
-	2.7 [Clear all tasks](clear-all-tasks)<br>
-	2.8 [Exit the program](exit-the-program)<br>
+	+ 2.1 [Adding Todo task](#adding-todo-task)<br>
+	+ 2.2 [Adding Event task](#adding-event-task)<br>
+	+ 2.3 [Adding Deadline task](#adding-deadline-task)<br>
+	+ 2.4 [List all tasks](#list-all-tasks)<br>
+	+ 2.5 [Mark task(s) as done](mark-task(s)-as-done)<br>
+	+ 2.6 [Delete task(s)](delete-task(s))<br>
+	+ 2.7 [Clear all tasks](clear-all-tasks)<br>
+	+ 2.8 [Exit the program](exit-the-program)<br>
 3. [Acknowledgements](#acknowledgements)<br>
 
 
@@ -55,14 +55,11 @@ Expected outcome:
 
 ### List all tasks
 Consuela will list down all the tasks in your list of tasks.
->Format : list
-<br>
->Outcome:
->As you wish, Master. Below are your task(s),
-<br>
->1.[E][Y] Night Festival (at: Mar 7 2020)
-<br>
->2.[T][Y] Do Laundry
+>Format : list<br>
+>Outcome:<br>
+>As you wish, Master. Below are your task(s),<br>
+>1.[E][Y] Night Festival (at: Mar 7 2020)<br>
+>2.[T][Y] Do Laundry<br>
 
 Expected outcome:<br> 
 ![outcome4](images/outcome4.PNG)
@@ -86,16 +83,16 @@ Expected outcome: <br>
 ### Clear all tasks
 Consuela allows you to clear and empty your list of tasks.
 >Format : clear<br>
->Expected outcome: <br>
+Expected outcome: <br>
 ![outcome7](images/outcome7.PNG)
 
->Upon entering yes, <br>
->Outcome: Alrighty, Sir. I have emptied the list.<br>
+Upon entering yes, <br>
+Outcome: Alrighty, Sir. I have emptied the list.<br>
 >Expected outcome: 
 ![outcome8](images/outcome8.PNG)
 
->Upon enter no, <br>
->Outcome: Alrighty, Sir. The list remains at it is.
+Upon enter no, <br>
+Outcome: Alrighty, Sir. The list remains at it is.
 ![outcome9](images/outcome9.PNG)
 
 ### Exit the program
