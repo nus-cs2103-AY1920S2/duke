@@ -19,6 +19,11 @@ test {
     useJUnitPlatform()
 }
 
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = configurations.compile
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveVersion = "0.1.3"

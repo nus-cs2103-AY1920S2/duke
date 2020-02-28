@@ -7,13 +7,28 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * This class handles all input and output from file
+ */
+
 public class Storage {
     private Path filePath;
+
+    /**
+     * Creates a new instance of the Storage class
+     * @param filePath The path of the input file
+     */
 
     public Storage(String filePath) {
         String home = System.getProperty("user.home");
         this.filePath = Paths.get(home, filePath);
     }
+
+    /**
+     * Loads all information from the input file
+     * @return The ArrayList of all tasks read from the input file
+     * @throws DukeException This is the DukeException
+     */
 
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> inputTasks = new ArrayList<>();
@@ -53,6 +68,12 @@ public class Storage {
         }
         return inputTasks;
     }
+
+    /**
+     * Writes back the remaining tasks to the output file
+     * @param dir This is the directory of the output file
+     * @param list This is the TaskList to be written to the output file
+     */
 
     public void writeBack(String dir, TaskList list) {
         String output = "";

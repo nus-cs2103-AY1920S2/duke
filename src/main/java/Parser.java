@@ -4,16 +4,34 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * This class handles all input from the user
+ */
+
 public class Parser {
     public static boolean isBye = false;
     private static TaskList currentList;
 
+    /**
+     * Creates a new instance of the class Parser
+     */
+
     public Parser() {
     }
+
+    /**
+     * Associates a parser with a task list
+     * @param tasks This is the TaskList to be associated with the current parser
+     */
 
     public static void addList(TaskList tasks) {
         currentList = tasks;
     }
+
+    /**
+     * Parses the command from user input
+     * @param command The command line that the user input
+     */
 
     public static void parse(String command) {
         if (command.equals("bye")) {
