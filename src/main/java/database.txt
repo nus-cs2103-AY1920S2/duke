@@ -2,5 +2,5 @@ T | 0 | read book
 D | 0 | return book | 2020-11-11
 E | 0 | project meeting | 2020-06-06
 T | 0 | join sports club
-T | 0 | helloworld
+T | 0 | cs2103 exam | 2020-04-25
 E | 0 | wedding | 2020-04-02
