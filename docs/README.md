@@ -33,7 +33,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 ## Features
 
-###
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add DESCRIPTION`
@@ -58,7 +57,8 @@ Examples:
 
 ### Adding a event: `event`
 
-Adds a event task to the duke +
+Adds a event task to the duke
+
 Format: `event DESCRIPTION /at DATETIME`
 
 [TIP]
@@ -72,7 +72,8 @@ Examples:
 
 ### Adding a deadline: `deadline`
 
-Adds a deadline task to the duke +
+Adds a deadline task to the duke
+
 Format: `deadline DESCRIPTION /by DATETIME`
 
 [TIP]
@@ -86,12 +87,14 @@ Examples:
 
 ### Listing all tasks : `list`
 
-Shows a list of all task in duke. +
+Shows a list of all task in duke.
+
 Format: `list`
 
 ### Searching for tasks: `find`
 
-Finds persons whose names contain any of the given keywords. +
+Finds persons whose names contain any of the given keywords.
+
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -103,14 +106,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find John` returns both task with `john` and `John Doe` as their description.
+* `find Betsy Tim John` returns any person having names `Betsy`, `Tim`, or `John`
 
 ### Deleting a task : `delete`
 
-Deletes the specified task from duke. +
+Deletes the specified task from duke at a specific index.
+
 Format: `delete INDEX`
 
 ****
@@ -121,8 +123,7 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list` +
-`delete 2` +
+*`delete 2`*
 Deletes the 2nd task in duke's task list.
 
 ### Exiting the program : `exit`
@@ -131,12 +132,10 @@ Exits the program. +
 Format: `exit`
 
 ### Saving the data
-
 Duke task data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 ## FAQ
-
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Duke folder.
 
