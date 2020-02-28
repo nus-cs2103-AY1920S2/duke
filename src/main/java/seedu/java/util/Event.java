@@ -20,7 +20,7 @@ public class Event extends Task {
      * @param eventName name of the event.
      * @param timing includes date and time.
      */
-    public Event(String eventName, String timing) throws DateTimeParseException {
+    public Event(String eventName, String timing) throws DateTimeParseException, AssertionError {
         super(eventName);
         this.timing = timing;
         convertDateAndTiming();
@@ -32,7 +32,7 @@ public class Event extends Task {
      * @param timing includes date and time.
      * @param bool whether the event is completed or not.
      */
-    public Event(String eventName, String timing, boolean bool) throws DateTimeParseException {
+    public Event(String eventName, String timing, boolean bool) throws DateTimeParseException, AssertionError {
         super(eventName, bool);
         this.timing = timing;
         convertDateAndTiming();
@@ -54,7 +54,7 @@ public class Event extends Task {
     /**
      * Converts String into LocalDate & Time.
      */
-    private void convertDateAndTiming() throws DateTimeParseException {
+    private void convertDateAndTiming() throws DateTimeParseException, AssertionError {
         String[] timingAsArray  = timing.split(" ");
         String dateAsString = timingAsArray[1];
         String startTimeAsString = timingAsArray[2].split("-")[0];
@@ -62,6 +62,7 @@ public class Event extends Task {
         this.date = LocalDate.parse(dateAsString);
         this.startTime = LocalTime.parse(startTimeAsString);
         this.endTime = LocalTime.parse(endTimeAsString);
+        assert startTime.isBefore(endTime) : "start SHOULD BE before end time.";
     }
 
 

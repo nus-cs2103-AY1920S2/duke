@@ -40,10 +40,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Boots the program, interacts with the user & auto-save to storage.
-     */
-
     public String getResponse(String input) {
         return tasks.read(input);
     }
