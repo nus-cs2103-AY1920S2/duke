@@ -3,8 +3,6 @@ package jiachen.duke;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.format.DateTimeParseException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EventTaskTest {
@@ -21,7 +19,7 @@ class EventTaskTest {
     @Test
     void testInvalidDateConstructor() {
         Assertions.assertThrows(
-            DateTimeParseException.class,
+            InvalidDukeFormatException.class,
             () -> {
                 new EventTask("desc", "invalid date");
             });
@@ -36,10 +34,28 @@ class EventTaskTest {
     }
 
     @Test
+    void testEmptyDescription() {
+        Assertions.assertThrows(
+            InvalidDukeFormatException.class,
+            () -> {
+                new DeadlineTask("", "01/12/2020 0700");
+            });
+    }
+
+    @Test
+    void testInvalidTimestamp() {
+        Assertions.assertThrows(
+            InvalidDukeFormatException.class,
+            () -> {
+                new DeadlineTask("", "01/12/2020 0700");
+            });
+    }
+
+    @Test
     void testToString() {
         try {
             EventTask task = new EventTask("hellololooloo there", "01/12/2020 0700");
-            assertEquals(task.toString(), "[E][✘] hellololooloo there (at: Dec 1 2020)");
+            assertEquals("[E][✘] hellololooloo there (at: Dec 1 2020)", task.toString());
         } catch (InvalidDukeFormatException e) {
             e.printStackTrace();
         }
