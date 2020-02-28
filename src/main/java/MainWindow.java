@@ -55,7 +55,10 @@ public class MainWindow extends AnchorPane {
 
         if (response.equals("Bye. Hope to see you again soon!")) {
             new Timer().schedule(new TimerTask() {
-                public void run () { Platform.exit(); }
+                public void run () {
+                    Platform.exit();
+                    System.exit(0);
+                }
             }, 3000);
         }
     }

@@ -28,23 +28,23 @@ public class TaskList {
         try {
             for (String str : contents) {
                 char type = str.charAt(0);
-                boolean done = Boolean.parseBoolean(str.substring(4, 5));
+                boolean isDone = Boolean.parseBoolean(str.substring(4, 5));
                 String description;
                 String byAt;
 
                 // To Do
                 if (type == 'T') {
                     description = str.substring(8);
-                    list.add(new ToDo(description, done));
-                } else {
+                    list.add(new ToDo(description, isDone));
+                } else { // Deadline or Event
                     int lastIndex = findThirdStrike(str) - 1;
                     description = str.substring(8, lastIndex);
                     byAt = str.substring(lastIndex + 3);
 
                     if (type == 'D') {
-                        list.add(new Deadline(description, done, LocalDate.parse(byAt)));
+                        list.add(new Deadline(description, isDone, LocalDate.parse(byAt)));
                     } else if (type == 'E') {
-                        list.add(new Event(description, done, LocalDate.parse(byAt)));
+                        list.add(new Event(description, isDone, LocalDate.parse(byAt)));
                     }
                 }
             }
@@ -53,10 +53,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Writes back to the database
+     *
+     * @param storage class representing the storage database
+     * @throws IOException if unable to write back
+     */
     public void save(Storage storage) throws IOException {
         storage.save(list);
     }
 
+    /**
+     * Finds the index of the 3rd "|" in the database file
+     *
+     * @param str each line of input in the database
+     * @return the index of the 3rd "|" in the database file
+     */
     private int findThirdStrike(String str) {
         int count = 3;
 
@@ -73,6 +85,11 @@ public class TaskList {
         return -1;
     }
 
+    /**
+     * Returns the string of the list of tasks
+     *
+     * @return the string of the list of tasks
+     */
     public String displayGUI() {
         StringBuilder ret = new StringBuilder("Here are the tasks in your list:\n");
 
@@ -83,6 +100,12 @@ public class TaskList {
         return ret.toString();
     }
 
+    /**
+     * Returns the string of the list of tasks sorted by certain order
+     *
+     * @param key indicator of what criteria to sort by
+     * @return the string of the sorted list of tasks
+     */
     public String displayGUI(char key) {
         if (key == 'n') {
             list.sort(new NameComp());
@@ -99,6 +122,12 @@ public class TaskList {
         return ret.toString();
     }
 
+    /**
+     * Returns the matching lists of tasks when user searches by keyword
+     *
+     * @param indices array of indices of the tasks that should be displayed
+     * @return the matching list of tasks when user searches by keyword
+     */
     public String displayGUI(ArrayList<Integer> indices) {
         StringBuilder ret = new StringBuilder("Here are the matching tasks in your list:\n");
 
@@ -109,10 +138,24 @@ public class TaskList {
         return ret.toString();
     }
 
+    /**
+     * Adds a new Todo task
+     *
+     * @param description description of the task
+     * @param isDone whether the task is done or not
+     */
     public void add(String description, boolean isDone) {
         list.add(new ToDo(description, isDone));
     }
 
+    /**
+     * Adds a new Deadline or Event task
+     *
+     * @param type indicator of whether is the task a Deadline or Event task
+     * @param description description of the task
+     * @param isDone whether the task is done or not
+     * @param date date of the task (by or at)
+     */
     public void add(char type, String description, boolean isDone, LocalDate date) {
         if (type == 'D') {
             list.add(new Deadline(description, isDone, date));
@@ -139,6 +182,12 @@ public class TaskList {
         return list.remove(index);
     }
 
+    /**
+     * Finds all tasks that matches a given keyword and returns a String representation of all these tasks
+     *
+     * @param key the keyword the user searches for
+     * @return a String of all the matching tasks
+     */
     public String find(String key) {
         ArrayList<Integer> indices = new ArrayList<>();
 

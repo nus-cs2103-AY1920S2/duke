@@ -27,23 +27,6 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke("C:/Users/Joel/Desktop/duke/src/main/java/database.txt");
-        duke.run();
-    }
-
-    /**
-     * Starts running the Duke object
-     */
-    public void run() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
     public String intro() {
         return " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

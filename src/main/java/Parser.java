@@ -10,7 +10,7 @@ public class Parser {
     }
 
     /**
-     * Returns a String of the first token input by the user
+     * Returns a String of the first token of the input by the user
      *
      * @param input the string the user types
      * @return String of first token input by user
@@ -51,7 +51,7 @@ public class Parser {
     }
 
     /**
-     * Returns description of the task given an input and the starting index of the description
+     * Returns description of the task, given an input and the starting index of the description
      *
      * @param input the string the user types
      * @param start the index of the first character of the description in the string

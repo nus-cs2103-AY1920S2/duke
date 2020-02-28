@@ -61,7 +61,17 @@ public class Task {
     }
 }
 
+/**
+ * Class that implements Comparator to sort tasks by name
+ */
 class NameComp implements Comparator<Task> {
+    /**
+     * Returns comparison of description of each task based on lexicographic order
+     *
+     * @param t1 the first task
+     * @param t2 the second task
+     * @return a comparison of the description of each task
+     */
     public int compare(Task t1, Task t2) {
         return t1.description.compareTo(t2.getDescription());
     }
@@ -71,7 +81,19 @@ class NameComp implements Comparator<Task> {
     }
 }
 
+/**
+ * Class that implements Comparator to sort tasks by date
+ * ToDo tasks that have no deadline will be sorted after all those with dates
+ */
 class DateComp implements Comparator<Task> {
+    /**
+     * Returns comparison of each task based on date
+     * Tasks with no date are considered to be infinitely late, and sorted based on its description among such tasks
+     *
+     * @param t1 the first task
+     * @param t2 the second task
+     * @return 1, 0, or -1 if the first task is later, same time, or before the first task
+     */
     public int compare(Task t1, Task t2) {
         if (t1 instanceof ToDo && t2 instanceof ToDo) {
             return t1.description.compareTo(t2.getDescription());

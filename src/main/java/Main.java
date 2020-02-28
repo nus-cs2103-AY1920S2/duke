@@ -10,7 +10,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private Duke duke = new Duke("./database.txt");
-    //private Duke duke = new Duke("C:/Users/Joel/Desktop/duke/src/main/java/database.txt");
 
     @Override
     public void start(Stage stage) {
