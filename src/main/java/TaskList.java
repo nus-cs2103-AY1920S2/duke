@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
 /**
- * Represents a list of all tasks
+ * Represents a list of all tasks.
  */
 
 public class TaskList {
     private ArrayList<Task> taskList;
 
     /**
-     * Creates a new task list with no task
+     * Creates a new task list with no task.
      */
 
     public TaskList() {
@@ -16,20 +16,23 @@ public class TaskList {
     }
 
     /**
-     * Creates a new task list with the input tasks
-     * @param list This is the list of the tasks to be put inside the task list
-     * @throws DukeException This is the DukeException
+     * Creates a new task list with the input tasks.
+     * @param list This is the list of the tasks to be put inside the task list.
+     * @throws DukeException This is the DukeException.
      */
 
     public TaskList(ArrayList<Task> list) throws DukeException {
-        if (list.isEmpty()) throw new DukeException("Wrong input");
-        else this.taskList = list;
+        if (list.isEmpty()) {
+            throw new DukeException("Wrong input");
+        } else {
+            this.taskList = list;
+        }
     }
 
     /**
-     * Adds a new task to the task list
-     * @param task This is the task to be added to the list
-     * @return The task that had been added to the list
+     * Adds a new task to the task list.
+     * @param task This is the task to be added to the list.
+     * @return The task that had been added to the list.
      */
 
     public Task addTask(Task task) {
@@ -38,8 +41,8 @@ public class TaskList {
     }
 
     /**
-     * Returns the task list as an ArrayList of tasks
-     * @return The task list as an ArrayList
+     * Returns the task list as an ArrayList of tasks.
+     * @return The task list as an ArrayList.
      */
 
     public ArrayList<Task> getList() {
@@ -47,8 +50,8 @@ public class TaskList {
     }
 
     /**
-     * Returns the size of the current task list
-     * @return the size of the current task list
+     * Returns the size of the current task list.
+     * @return the size of the current task list.
      */
 
     public int getSize() {
@@ -56,9 +59,9 @@ public class TaskList {
     }
 
     /**
-     * Retrieves a task from the task list
-     * @param index This is the index of the task from the task list
-     * @return The task at the index specified
+     * Retrieves a task from the task list.
+     * @param index This is the index of the task from the task list.
+     * @return The task at the index specified.
      */
 
     public Task getTask(int index) {
@@ -66,9 +69,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the task list
-     * @param index This is the index of the task from the task list
-     * @return The task deleted at the index specified
+     * Deletes a task from the task list.
+     * @param index This is the index of the task from the task list.
+     * @return The task deleted at the index specified.
      */
 
     public Task removeTask(int index) {

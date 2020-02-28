@@ -8,15 +8,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * This class handles all input and output from file
+ * This class handles all input and output from file.
  */
 
 public class Storage {
     private Path filePath;
 
     /**
-     * Creates a new instance of the Storage class
-     * @param filePath The path of the input file
+     * Creates a new instance of the Storage class.
+     * @param filePath The path of the input file.
      */
 
     public Storage(String filePath) {
@@ -25,14 +25,14 @@ public class Storage {
     }
 
     /**
-     * Loads all information from the input file
-     * @return The ArrayList of all tasks read from the input file
-     * @throws DukeException This is the DukeException
+     * Loads all information from the input file.
+     * @return The ArrayList of all tasks read from the input file.
+     * @throws DukeException This is the DukeException.
      */
 
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> inputTasks = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(filePath, Charset.forName("UTF-8"))){
+        try (BufferedReader reader = Files.newBufferedReader(filePath, Charset.forName("UTF-8"))) {
             String currentLine = null;
             while ((currentLine = reader.readLine()) != null) {
                 Task newTask;
@@ -64,15 +64,15 @@ public class Storage {
                 }
             }
         } catch (IOException ex) {
-
+            ex.printStackTrace();
         }
         return inputTasks;
     }
 
     /**
-     * Writes back the remaining tasks to the output file
-     * @param dir This is the directory of the output file
-     * @param list This is the TaskList to be written to the output file
+     * Writes back the remaining tasks to the output file.
+     * @param dir This is the directory of the output file.
+     * @param list This is the TaskList to be written to the output file.
      */
 
     public void writeBack(String dir, TaskList list) {
@@ -81,13 +81,16 @@ public class Storage {
         for (int i = 0; i < taskList.size(); i++) {
             Task outputTask = taskList.get(i);
             if (outputTask instanceof ToDo) {
-                output += "T" + "|" + outputTask.getDone() + "|" + outputTask.getDescription();
+                output += "T" + "|" + outputTask.getDone()
+                        + "|" + outputTask.getDescription();
             }
             if (outputTask instanceof Deadline) {
-                output += "D" + "|" + outputTask.getDone() + "|" + outputTask.getDescription() + "|" + ((Deadline) outputTask).getBy();
+                output += "D" + "|" + outputTask.getDone()
+                        + "|" + outputTask.getDescription() + "|" + ((Deadline) outputTask).getBy();
             }
             if (outputTask instanceof Event) {
-                output += "E" + "|" + outputTask.getDone() + "|" + outputTask.getDescription() + "|" + ((Event) outputTask).getAt();
+                output += "E" + "|" + outputTask.getDone()
+                        + "|" + outputTask.getDescription() + "|" + ((Event) outputTask).getAt();
             }
             if (i < taskList.size() - 1) {
                 output += System.lineSeparator();

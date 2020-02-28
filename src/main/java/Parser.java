@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
- * This class handles all input from the user
+ * This class handles all input from the user.
  */
 
 public class Parser {
@@ -13,15 +13,15 @@ public class Parser {
     private static TaskList currentList;
 
     /**
-     * Creates a new instance of the class Parser
+     * Creates a new instance of the class Parser.
      */
 
     public Parser() {
     }
 
     /**
-     * Associates a parser with a task list
-     * @param tasks This is the TaskList to be associated with the current parser
+     * Associates a parser with a task list.
+     * @param tasks This is the TaskList to be associated with the current parser.
      */
 
     public static void addList(TaskList tasks) {
@@ -29,8 +29,8 @@ public class Parser {
     }
 
     /**
-     * Parses the command from user input
-     * @param command The command line that the user input
+     * Parses the command from user input.
+     * @param command The command line that the user input.
      */
 
     public static void parse(String command) {
@@ -82,7 +82,9 @@ public class Parser {
             } else if (command.contains("deadline")) {
                 try {
                     int breakPos = command.indexOf("/");
-                    if ((breakPos == -1) && (command.length() == 8)) throw new DukeException("No desc Deadline");
+                    if ((breakPos == -1) && (command.length() == 8)) {
+                        throw new DukeException("No desc Deadline");
+                    }
                     LocalDate date = LocalDate.parse(command.substring(breakPos + 4));
                     newTask = new Deadline(command.substring(9, breakPos - 1), date);
                     currentList.addTask(newTask);
@@ -97,7 +99,9 @@ public class Parser {
             } else if (command.contains("event")) {
                 try {
                     int breakPos = command.indexOf("/");
-                    if ((breakPos == -1) && (command.length() == 5)) throw new DukeException("No desc Event");
+                    if ((breakPos == -1) && (command.length() == 5)) {
+                        throw new DukeException("No desc Event");
+                    }
                     LocalDate date = LocalDate.parse(command.substring(breakPos + 4));
                     newTask = new Event(command.substring(6, breakPos - 1), date);
                     currentList.addTask(newTask);

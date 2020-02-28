@@ -12,6 +12,11 @@ public class Duke {
     private Ui ui;
     private Parser parser = new Parser();
 
+    /**
+     * Creates a new instance of the class Duke.
+     * @param filePath This is the path of the input file.
+     */
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +27,10 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Runs Duke.
+     */
 
     public void run() {
         ui.greetUser();

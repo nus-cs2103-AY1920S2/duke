@@ -1,5 +1,5 @@
 /**
- * Represents a task
+ * Represents a task.
  */
 
 public class Task {
@@ -7,8 +7,8 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Creates a new task
-     * @param description This is the description of the task
+     * Creates a new task.
+     * @param description This is the description of the task.
      */
 
     public Task(String description) {
@@ -17,7 +17,7 @@ public class Task {
     }
 
     /**
-     * Marks the current task as done
+     * Marks the current task as done.
      */
 
     public void markAsDone() {
@@ -25,8 +25,8 @@ public class Task {
     }
 
     /**
-     * Returns the status icon of the task
-     * @return Returns tick if done or cross if not done
+     * Returns the status icon of the task.
+     * @return Returns tick if done or cross if not done.
      */
 
     public String getStatusIcon() {
@@ -34,8 +34,8 @@ public class Task {
     }
 
     /**
-     * Returns the description of the current task
-     * @return The description of the current task
+     * Returns the description of the current task.
+     * @return The description of the current task.
      */
 
     public String getDescription() {
@@ -43,8 +43,8 @@ public class Task {
     }
 
     /**
-     * Returns the status of the current task
-     * @return Returns 1 if done or 0 if not done
+     * Returns the status of the current task.
+     * @return Returns 1 if done or 0 if not done.
      */
 
     public String getDone() {

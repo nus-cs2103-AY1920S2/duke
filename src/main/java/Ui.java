@@ -1,11 +1,11 @@
 /**
- * This class handles all displays
+ * This class handles all displays.
  */
 
 public class Ui {
 
     /**
-     * Creates a new instance of the class Ui
+     * Creates a new instance of the class Ui.
      */
 
     public Ui() {
@@ -13,7 +13,7 @@ public class Ui {
     }
 
     /**
-     * Shows loading error when the input file is empty
+     * Shows loading error when the input file is empty.
      */
 
     public void showLoadingError() {
@@ -21,7 +21,7 @@ public class Ui {
     }
 
     /**
-     * Shows input error when the user added an invalid input
+     * Shows input error when the user added an invalid input.
      */
 
     public void showInputError() {
@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /**
-     * Shows the greeting message when the user starts Duke
+     * Shows the greeting message when the user starts Duke.
      */
 
     public void greetUser() {
@@ -45,9 +45,9 @@ public class Ui {
     }
 
     /**
-     * Shows the confirmation message after the task is successfully added
-     * @param task This is the task that was successfully added to the task list
-     * @param size This is the new size of the task list after the new task is added
+     * Shows the confirmation message after the task is successfully added.
+     * @param task This is the task that was successfully added to the task list.
+     * @param size This is the new size of the task list after the new task is added.
      */
 
     public static void gotIt(Task task, int size) {
