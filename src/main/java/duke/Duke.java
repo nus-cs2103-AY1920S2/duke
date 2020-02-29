@@ -3,7 +3,6 @@ package duke;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UiText;
-import duke.ui.Ui;
 
 public class Duke implements Copyable {
     public Storage storage;
@@ -30,7 +29,7 @@ public class Duke implements Copyable {
             try {
                 this.tasks = TaskList.fromCSVList(storage.loadCSVList());
             } catch (Exception e) {
-                this.ui.respond(Ui.loadingErrorMsg);
+                this.ui.respond(this.ui.loadingErrorMsg);
                 this.tasks = new TaskList();
             }
         } else {

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.ScrollPane?>
+
+<?import javafx.scene.layout.Region?>
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+         title="Duke" minWidth="400" minHeight="600">
+    <scene>
+        <Scene>
+            <AnchorPane fx:id="mainLayout" prefHeight="600"
+                        prefWidth="400">
+                <ScrollPane fx:id="chatArea" prefHeight="555" prefWidth="400" hbarPolicy="NEVER" vbarPolicy="ALWAYS"
+                            vvalue="1.0"
+                            fitToWidth="true" AnchorPane.topAnchor="1.0"/>
+            </AnchorPane>
+        </Scene>
+    </scene>
+</fx:root>

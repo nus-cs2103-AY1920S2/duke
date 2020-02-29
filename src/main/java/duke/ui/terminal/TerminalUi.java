@@ -1,4 +1,6 @@
-package duke.ui;
+package duke.ui.terminal;
+
+import duke.ui.UiText;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -6,24 +8,47 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.util.List;
 
-public class Ui implements UiText {
-    private boolean isOpen = false;
+public class TerminalUi implements UiText {
     protected Scanner sc;
 
-    public Ui(InputStream is) {
+    public TerminalUi(InputStream is) {
         this.sc = new Scanner(is);
     }
 
-    public Ui(Scanner inputSc) {
+    public TerminalUi(Scanner inputSc) {
         this.sc = inputSc;
     }
+
+    /**
+     * User has next input line?
+     *
+     * @return User has next input line?
+     */
+    public boolean hasNextLine() {
+        return this.sc.hasNextLine();
+    }
+
+    /**
+     * Similar to Scanner nextLine();
+     *
+     * @return Next line from input
+     */
+    public String nextLine() {
+        return this.sc.nextLine();
+    }
+
+    public void clearUserInput() {
+    }
+
+
+    private boolean isOpen = false;
 
     /**
      * To start responding to user, open the responding window
      *
      * @param initials = optional imitial respond to user
      */
-    public void start(String... initials) {
+    public void startRespond(String... initials) {
         assert !this.isOpen : "illegal usage of responder";
         System.out.print(resSpace);
         System.out.println(line);
@@ -89,28 +114,8 @@ public class Ui implements UiText {
      * @param respondStr = strings to respond
      */
     public void respond(List<String> respondStr) {
-        start();
+        startRespond();
         respondLine(respondStr);
         over();
     }
-
-    /**
-     * User has next input line?
-     *
-     * @return User has next input line?
-     */
-    public boolean hasNextLine() {
-        return this.sc.hasNextLine();
-    }
-
-    /**
-     * Similar to Scanner nextLine();
-     *
-     * @return Next line from input
-     */
-    public String nextLine() {
-        return this.sc.nextLine();
-    }
-
-    public void clearUserInput() {}
 }

@@ -15,7 +15,7 @@ public interface UiText {
     public static String revertSuccess = "Yay! I have nullified your previous command!";
     public static String revertError = "No history available";
 
-    public void start(String... initials);
+    public void startRespond(String... initials);
     public void respondLine(List<String> respondStr);
     public void respondLine(String... respondStr);
     public void over(String... remarks);

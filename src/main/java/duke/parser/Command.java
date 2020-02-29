@@ -26,11 +26,11 @@ public class Command {
      * @param main = DukeMain object
      * @return task successfully executed?
      */
-    public boolean execute(Duke main) {
+    public Duke execute(Duke main) throws CommandExecutionExeption {
         assert !this.isExecuted : Command.CMD_EXECUTED;
         this.isExecuted = true;
         main.ui.respond(UiText.dunno);
-        return false;
+        return main;
     }
 }
 
@@ -44,9 +44,10 @@ class AddTaskCommand extends Command {
     }
 
     @Override
-    public boolean execute(Duke main) {
-        TaskList tasks = main.tasks;
-        UiText ui = main.ui;
+    public Duke execute(Duke main) throws CommandExecutionExeption{
+        Duke next = main.getCopy();
+        TaskList tasks = next.tasks;
+        UiText ui = next.ui;
         assert !this.isExecuted : Command.CMD_EXECUTED;
         this.isExecuted = true;
         try {
@@ -66,17 +67,17 @@ class AddTaskCommand extends Command {
             }
         } catch (Exception e) {
             ui.respond("☹ OOPS!!! The description of a " + firstPhrase + " cannot be empty.");
-            return true;
+            throw new CommandExecutionExeption();
         }
         if (this.task != null) {
             tasks.add(this.task);
             ui.respond("Got it. I've added this task:", "  " + this.task.toString(),
                     "Now you have " + tasks.count() + " tasks in the list.");
             DukeHistory.progress(main);
-            return true;
+            return next;
         } else {
             ui.respond(UiText.dunno);
-            return false;
+            throw new CommandExecutionExeption();
         }
     }
 }
@@ -87,7 +88,7 @@ class ListCommand extends Command {
     }
 
     @Override
-    public boolean execute(Duke main) {
+    public Duke execute(Duke main) throws CommandExecutionExeption {
         TaskList tasks = main.tasks;
         UiText ui = main.ui;
         assert !this.isExecuted : Command.CMD_EXECUTED;
@@ -99,13 +100,13 @@ class ListCommand extends Command {
             } else {
                 lst = tasks.getTaskList();
             }
-            ui.start("Here are the tasks in your list:");
+            ui.startRespond("Here are the tasks in your list:");
             ui.respondLine(lst.stream().map(x -> "" + (lst.indexOf(x) + 1) + "." + x).collect(Collectors.toList()));
             ui.over();
-            return true;
+            return main;
         } catch (Exception e) {
             ui.respond(UiText.dunno);
-            return false;
+            throw new CommandExecutionExeption();
         }
     }
 }
@@ -116,13 +117,13 @@ class StatCommand extends Command {
     }
 
     @Override
-    public boolean execute(Duke main) {
+    public Duke execute(Duke main) {
         TaskList tasks = main.tasks;
         UiText ui = main.ui;
-        ui.start("total tasks due: ");
+        ui.startRespond("total tasks due: ");
         ui.respondLine(Integer.toString((int) tasks.stream().filter(x -> !x.isDone()).count()));
         ui.over();
-        return true;
+        return main;
     }
 }
 
@@ -132,20 +133,20 @@ class FindCommand extends Command {
     }
 
     @Override
-    public boolean execute(Duke main) {
+    public Duke execute(Duke main) throws CommandExecutionExeption {
         TaskList tasks = main.tasks;
         UiText ui = main.ui;
         assert !this.isExecuted : Command.CMD_EXECUTED;
         this.isExecuted = true;
         try {
             List<Task> lst = tasks.find(this.terms.next());
-            ui.start("Here are the matching tasks in your list:");
+            ui.startRespond("Here are the matching tasks in your list:");
             ui.respondLine(lst.stream().map(x -> "" + (lst.indexOf(x) + 1) + "." + x).collect(Collectors.toList()));
             ui.over();
-            return true;
+            return main;
         } catch (Exception e) {
             ui.respond(UiText.dunno);
-            return false;
+            throw new CommandExecutionExeption();
         }
     }
 }
@@ -159,9 +160,10 @@ class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean execute(Duke main) {
-        TaskList tasks = main.tasks;
-        UiText ui = main.ui;
+    public Duke execute(Duke main) throws CommandExecutionExeption {
+        Duke next = main.getCopy();
+        TaskList tasks = next.tasks;
+        UiText ui = next.ui;
         assert !this.isExecuted : Command.CMD_EXECUTED;
         this.isExecuted = true;
         try {
@@ -170,10 +172,10 @@ class DeleteCommand extends Command {
             ui.respond("Got it. I've removed this task:", "  " + this.task.toString(),
                     "Now you have " + tasks.count() + " tasks in the list.");
             DukeHistory.progress(main);
-            return true;
+            return next;
         } catch (Exception e) {
             ui.respond(UiText.dunno);
-            return false;
+            throw new CommandExecutionExeption();
         }
     }
 }
@@ -186,9 +188,10 @@ class MarkAsDoneCommand extends Command {
     }
 
     @Override
-    public boolean execute(Duke main) {
-        TaskList tasks = main.tasks;
-        UiText ui = main.ui;
+    public Duke execute(Duke main) throws CommandExecutionExeption {
+        Duke next = main.getCopy();
+        TaskList tasks = next.tasks;
+        UiText ui = next.ui;
         assert !this.isExecuted : Command.CMD_EXECUTED;
         this.isExecuted = true;
         try {
@@ -196,11 +199,10 @@ class MarkAsDoneCommand extends Command {
             this.task = tasks.get(num);
             this.task.setToDone();
             ui.respond(UiText.taskDoneNote, tasks.get(num).toString());
-            DukeHistory.progress(main);
-            return true;
+            return next;
         } catch (Exception e) {
             ui.respond(UiText.dunno);
-            return false;
+            throw new CommandExecutionExeption();
         }
     }
 }
@@ -211,15 +213,15 @@ class ExitCommand extends Command {
     }
 
     @Override
-    public boolean execute(Duke main) {
+    public Duke execute(Duke main) throws CommandExecutionExeption {
         UiText ui = main.ui;
         try {
             ui.respond(UiText.bye);
             System.exit(0);
-            return true;
+            return main;
         } catch (Exception e) {
             ui.respond(UiText.dunno);
-            return false;
+            throw new CommandExecutionExeption();
         }
     }
 }
@@ -230,7 +232,7 @@ class ReverseCommand extends Command {
     }
 
     @Override
-    public boolean execute(Duke main) {
+    public Duke execute(Duke main) throws CommandExecutionExeption {
         UiText ui = main.ui;
         try {
             if(DukeHistory.revert()) {
@@ -239,10 +241,10 @@ class ReverseCommand extends Command {
                 ui.respond(UiText.revertError);
             }
 
-            return false;
+            return DukeHistory.getCurrent();
         } catch (Exception e) {
             ui.respond(UiText.dunno);
-            return false;
+            throw new CommandExecutionExeption();
         }
     }
 }

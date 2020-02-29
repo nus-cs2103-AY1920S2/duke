@@ -18,8 +18,10 @@ public class DukeHistory {
     }
 
     public static void progress(Duke next) {
-        history.push(next);
-        save(next);
+        if (empty() || getCurrent() != next) {
+            history.push(next);
+            save(next);
+        }
     }
 
     public static Duke getCurrent() {
@@ -35,7 +37,7 @@ public class DukeHistory {
     }
 
     public static void clearHistory() {
-        if(!empty()) {
+        if (!empty()) {
             Stack<Duke> newHis = new Stack<>();
             newHis.push(history.peek());
             history = newHis;
