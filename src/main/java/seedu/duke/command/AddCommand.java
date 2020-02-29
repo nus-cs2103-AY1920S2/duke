@@ -17,7 +17,7 @@ import seedu.duke.task.Todo;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Represents a command object to add task to the list.
@@ -66,15 +66,11 @@ public class AddCommand extends Command {
 
                 String deadlineDesc = deadlineDescs[0].trim();
                 String deadlineDate = deadlineDescs[1].trim();
-                if (deadlineDate.length() != 10) {
+                LocalDate formattedDeadlineDate = null;
+                if (deadlineDate.length() == 10 && isValidDate(deadlineDate)) {
+                    formattedDeadlineDate = LocalDate.parse(deadlineDate);
+                } else {
                     throw new InvalidDateException();
-                }
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date formattedDeadlineDate = null;
-                try {
-                    formattedDeadlineDate = dateFormat.parse(deadlineDate);
-                } catch (ParseException ex) {
-                    ex.printStackTrace();
                 }
 
 
@@ -87,15 +83,11 @@ public class AddCommand extends Command {
                 }
                 String eventDesc = eventDescs[0].trim();
                 String eventDate = eventDescs[1].trim();
-                if (eventDate.length() != 10) {
+                LocalDate formattedEventDate = null;
+                if (eventDate.length() == 10 && isValidDate(eventDate)) {
+                    formattedEventDate = LocalDate.parse(eventDate);
+                } else {
                     throw new InvalidDateException();
-                }
-                dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date formattedEventDate = null;
-                try {
-                    formattedEventDate = dateFormat.parse(eventDate);
-                } catch (ParseException ex) {
-                    ex.printStackTrace();
                 }
 
                 task = new Event(eventDesc, formattedEventDate);

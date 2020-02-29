@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -170,11 +171,11 @@ public class Storage {
             throw new InvalidDateException();
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date formattedDeadlineDate = null;
-        try {
-            formattedDeadlineDate = dateFormat.parse(deadlineDate);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
+        LocalDate formattedDeadlineDate = null;
+        if (deadlineDate.length() == 10 && isValidDate(deadlineDate)) {
+            formattedDeadlineDate = LocalDate.parse(deadlineDate);
+        } else {
+            throw new InvalidDateException();
         }
 
         Task deadline = new Deadline(deadlineDesc, formattedDeadlineDate);
@@ -201,15 +202,12 @@ public class Storage {
         }
         String eventDesc = descs[0].trim();
         String eventDate = descs[1].trim();
-        if (eventDate.length() != 10) {
+
+        LocalDate formattedEventDate = null;
+        if (eventDate.length() == 10 && isValidDate(eventDate)) {
+            formattedEventDate = LocalDate.parse(eventDate);
+        } else {
             throw new InvalidDateException();
-        }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date formattedEventDate = null;
-        try {
-            formattedEventDate = dateFormat.parse(eventDate);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
         }
         Task event = new Event(eventDesc, formattedEventDate);
 

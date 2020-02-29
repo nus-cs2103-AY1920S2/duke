@@ -28,7 +28,7 @@ public class Duke {
      * @throws IOException If an input or output exception occurred.
      */
     public Duke() {
-        String filePath = "data/duke.txt";
+        String filePath = "duke.txt";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
