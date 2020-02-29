@@ -152,6 +152,9 @@ public class Duke {
             }
         } else if (userInput.startsWith("sort deadlines")) {
             return tasks.sortDeadlinesByTime();
+        } else if (userInput.startsWith("blah")) {
+            final String BLAH_MESSAGE = "blah";
+            return BLAH_MESSAGE;
         } else {
             return ui.showCommandNotFound() + ui.showLineOfUnderscores();
         }

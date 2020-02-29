@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private Duke duke = new Duke();
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/smallLogo.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("images/smallLogo.png"));
 
     @Override
     public void start(Stage stage) {

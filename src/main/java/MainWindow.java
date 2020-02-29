@@ -5,6 +5,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -26,6 +28,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Ui().showWelcomeMessage(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -39,6 +44,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+
+        // Solution below adapted from
+        // https://stackoverflow.com/questions/13567019/close-fxml-window-by-code-javafx
+        // close GUI when messaged "bye"
+        if (input.trim().equals("bye")) {
+            Stage stage = (Stage) sendButton.getScene().getWindow();
+            stage.close();
+        }
+
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

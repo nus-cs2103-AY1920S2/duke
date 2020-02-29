@@ -3,17 +3,13 @@
  * Currently, Ui is mainly responsible for System.out.println statements to our output.
  */
 public class Ui {
-    private final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
 
     public Ui() {
     }
 
     public String showWelcomeMessage() {
-        return "Hello from\n" + LOGO + "I am here to help you with anything you need!";
+        return "Welcome to the Task Manager! \n"
+               + "Fight your way up the bell curve using this efficient task planning application!";
     }
 
     public String showLineOfUnderscores() {
