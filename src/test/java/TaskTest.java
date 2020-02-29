@@ -1,7 +1,7 @@
-package duke.task;
+package com.duke.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import duke.dukeException.DukeParseException;
+import com.duke.dukeException.DukeParseException;
 
 public class TaskTest { 
 	@Test
