@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.core.Storage;
 import duke.core.Ui;
+import duke.exception.TaskIndexException;
 import duke.task.TaskList;
 
 public class DoneCommand extends Command {
@@ -9,7 +10,7 @@ public class DoneCommand extends Command {
         super(input, isExit);
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskIndexException {
         String[] split = this.input.split(" ");
         int idx = Integer.parseInt(split[1]);
         storage.doTask(idx);

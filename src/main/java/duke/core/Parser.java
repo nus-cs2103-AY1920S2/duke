@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidTimeFormatException;
 
 /**
  * Represents a parser to parse commands from input strings.
@@ -67,6 +68,8 @@ public class Parser {
                 result = new UpdateDescriptionCommand(input, false);
             } else if (secondCommand.compareTo("time") == 0) {
                 result = new UpdateTimeCommand(input, false);
+            } else {
+                throw new InvalidCommandException(Message.COMMAND_ERROR);
             }
             break;
 
@@ -94,23 +97,24 @@ public class Parser {
      * @param time The given user input.
      * @return The reformatted string.
      */
-    public static String reformatDateAndTime(String time) {
+    public static String reformatDateAndTime(String time) throws InvalidTimeFormatException {
         String result = "";
         String dateRegex = "\\d{4}-\\d{2}-\\d{2}";
         String timeRegex = "([0-1][0-9]|2[0-3])[0-5][0-9]";
-        String[] split = time.split(" ");
-        for (String str : split) {
-            Boolean dateMatches = str.matches(dateRegex);
-            Boolean timeMatches = str.matches(timeRegex);
-            if (dateMatches) {
-                result += parseDate(str) + " ";
-            } else if (timeMatches) {
-                result += parseTime(str) + " ";
-            } else {
-                result += str + " ";
-            }
+        String[] split = time.trim().split(" ");
+        if (split.length != 2) {
+            throw new InvalidTimeFormatException(Message.TIME_ERROR);
         }
-        return result.trim();
+
+        Boolean dateMatches = split[0].matches(dateRegex);
+        Boolean timeMatches = split[1].matches(timeRegex);
+        if (dateMatches && timeMatches) {
+            result += parseDate(split[0]) + " ";
+            result += parseTime(split[1]);
+        } else {
+            throw new InvalidTimeFormatException(Message.TIME_ERROR);
+        }
+        return result;
     }
 
     private static String parseDate(String date) {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Event;
+import duke.exception.InvalidTimeFormatException;
 import duke.task.Deadline;
 
 /**
@@ -201,7 +202,7 @@ public class Storage {
         }
     }
 
-    public void updateTime(int idx, String input) {
+    public void updateTime(int idx, String input) throws InvalidTimeFormatException {
         File originalFile = new File(FILEPATH);
         File tempFile = new File(TEMP_FILEPATH);
 
@@ -216,7 +217,7 @@ public class Storage {
                     String[] splitTask = originalTask.split("~");
 
                     int newTimeIndex = input.indexOf("" + idx);
-                    String newTime = Parser.reformatDateAndTime(input.substring(newTimeIndex+ 2));
+                    String newTime = Parser.reformatDateAndTime(input.substring(newTimeIndex + 2));
 
                     splitTask[3] = newTime;
                     String modifiedTask = "";

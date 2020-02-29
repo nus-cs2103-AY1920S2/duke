@@ -22,9 +22,13 @@ public class Message {
 
     public static final String DESCRIPTION_ERROR = "Oops! The description of a task can't be empty!";
 
-    public static final String INDEX_ERROR = "Task index is invalid. Try again!";
+    public static final String INDEX_ERROR = "Sounds like you have the wrong task index, I can't really hear you through your water bowl.";
 
-    public static final String EVENT_TIME_ERROR = "Your time format is incorrect.\nTry: /at yyyy-mm-dd HHmm";
+    public static final String TIME_ERROR = "Your date time format is incorrect.\nTry: yyyy-mm-dd HHmm";
+
+    public static final String EVENT_TIME_ERROR = "Your date time format is incorrect.\nTry: /at yyyy-mm-dd HHmm";
     
-    public static final String DEADLINE_TIME_ERROR = "Your time format is incorrect.\nTry: /by yyyy-mm-dd HHmm";
+    public static final String DEADLINE_TIME_ERROR = "Your date time format is incorrect.\nTry: /by yyyy-mm-dd HHmm";
+
+    public static final String KEYWORD_ERROR = "Aww, Cute couldn't fish up any results from that keyword.";
 }

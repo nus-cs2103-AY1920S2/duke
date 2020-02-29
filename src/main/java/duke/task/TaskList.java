@@ -7,6 +7,7 @@ import duke.core.Message;
 import duke.core.Parser;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidTimeFormatException;
+import duke.exception.KeywordNotFoundException;
 import duke.exception.TaskIndexException;
 
 /**
@@ -34,10 +35,14 @@ public class TaskList {
      * Marks a given task as done.
      * @param idx The index of the task in the task list.
      */
-    public String doTask(int idx) {
-        Task task = this.tasks.get(idx);
-        task.setIsDone(true);
-        return Message.DO_TASK + task.toString();
+    public String doTask(int idx) throws TaskIndexException {
+        try {
+            Task task = this.tasks.get(idx);
+            task.setIsDone(true);
+            return Message.DO_TASK + task.toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskIndexException(Message.INDEX_ERROR);
+        }
     }
 
     /**
@@ -69,7 +74,7 @@ public class TaskList {
      * @param input User input containing the keyword.
      * @return String containing all tasks matching the keyword.
      */
-    public String findKeyword(String input) {
+    public String findKeyword(String input) throws KeywordNotFoundException {
         String keyword = input.substring(5).trim();
         ArrayList<String> searchResults = new ArrayList<>();
         for (Task task : tasks) {
@@ -78,16 +83,20 @@ public class TaskList {
             }
         }
         
-        String results = "";
-        for (int i = 0; i < searchResults.size(); i++) {
-            String result = searchResults.get(i);
-            results += (i + 1) + ".";
-            results += result;
-            if (i < searchResults.size() - 1) {
-                results += "\n" + "     ";
+        if (!searchResults.isEmpty()) {
+            String results = "";
+            for (int i = 0; i < searchResults.size(); i++) {
+                String result = searchResults.get(i);
+                results += (i + 1) + ".";
+                results += result;
+                if (i < searchResults.size() - 1) {
+                    results += "\n";
+                }
             }
+            return results;
+        } else {
+            throw new KeywordNotFoundException(Message.KEYWORD_ERROR);
         }
-        return results;
     }
 
     public String updateDescription(int idx, String input) throws TaskIndexException {
@@ -102,7 +111,7 @@ public class TaskList {
         }
     }
 
-    public String updateTime(int idx, String input) throws TaskIndexException {
+    public String updateTime(int idx, String input) throws TaskIndexException, InvalidTimeFormatException {
         try {
             Task task = this.tasks.get(idx);
             int newTimeIndex = input.indexOf("" + (idx + 1));
@@ -150,7 +159,8 @@ public class TaskList {
             String[] split = remaining.split(" ");
 
             if (split[0].compareTo("at") == 0) {
-                String time = Parser.reformatDateAndTime(input.substring(input.indexOf("/") + 4));
+                String rawDateTime = input.substring(input.indexOf("/") + 4);
+                String time = Parser.reformatDateAndTime(rawDateTime);
                 Event event = new Event(description, false, time);
                 String result = "E~0~" + description + "~" + time;
                 storage.writeToFile(result);
@@ -178,7 +188,8 @@ public class TaskList {
             String[] split = remaining.split(" ");
 
             if (split[0].compareTo("by") == 0) {
-                String time = Parser.reformatDateAndTime(input.substring(input.indexOf("/") + 4));
+                String rawDateTime = input.substring(input.indexOf("/") + 4);
+                String time = Parser.reformatDateAndTime(rawDateTime);
                 Deadline deadline = new Deadline(description, false, time);
                 String result = "D~0~" + description + "~" + time;
                 storage.writeToFile(result);
