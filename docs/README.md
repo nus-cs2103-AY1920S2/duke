@@ -163,3 +163,12 @@ Example of usage:
 
 `bye`
 
+<img src = "Ui.png">`
+
+### Acknowledgements
+Code adapted from: https://github.com/se-edu/duke
+
+JavaFX and Gradle tutorials: https://github.com/nus-cs2103-AY1920S2/duke/tree/master/tutorials
+
+
+
