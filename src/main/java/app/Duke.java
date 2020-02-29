@@ -12,7 +12,7 @@ import app.core.Messages;
  * Main class for Duke. The class contains all the main components 
  * required for Duke to run properly.
  */
-public final class Duke {
+public class Duke {
     private CommandManager commandManager;
     private TaskManager taskManager;
 

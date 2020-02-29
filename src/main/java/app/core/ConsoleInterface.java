@@ -7,7 +7,7 @@ import java.util.Scanner;
  * program. The class provides methods to render text on 
  * a custom output.
  */
-public final class ConsoleInterface {
+public class ConsoleInterface {
     /**
      * The maximum length of the string before word wrapping
      * occurs.

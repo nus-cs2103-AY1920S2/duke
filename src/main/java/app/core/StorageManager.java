@@ -14,7 +14,7 @@ import app.exceptions.StorageFileException;
 /**
  * This class manages all storage related tasks in Duke.
  */
-public final class StorageManager {
+public class StorageManager {
     /**
      * Default Storage Directory.
      */
