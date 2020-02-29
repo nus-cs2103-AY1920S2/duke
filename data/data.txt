@@ -1,4 +1,2 @@
-dukeClasses.ToDo|1|123|0
-dukeClasses.ToDo|0|homework|0
-dukeClasses.Deadline|0|kill |2020-04-11|1
-dukeClasses.Event|0|go kill |sunday|0
+dukeClasses.ToDo|0|first|0
+dukeClasses.Deadline|0|second |2020-04-11|1

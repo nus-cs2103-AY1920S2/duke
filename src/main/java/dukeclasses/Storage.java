@@ -102,7 +102,7 @@ public class Storage {
                     if (temporary[1].contains("1")) {
                         t.markAsDone();
                     }
-                    if (temporary[3].contains("1")) {
+                    if (temporary[4].contains("1")) {
                         t.markAsHighPriority();
                     }
                     listOfTasks.add(t);
@@ -111,7 +111,7 @@ public class Storage {
                     if (temporary[1].contains("1")) {
                         t.markAsDone();
                     }
-                    if (temporary[3].contains("1")) {
+                    if (temporary[4].contains("1")) {
                         t.markAsHighPriority();
                     }
                     listOfTasks.add(t);
