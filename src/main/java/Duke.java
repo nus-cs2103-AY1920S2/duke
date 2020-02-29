@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -17,9 +18,9 @@ public class Duke {
      * @param filePath This is the path of the input file.
      */
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("/duke/out/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -28,28 +29,12 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs Duke.
-     */
-
-    public void run() {
-        ui.greetUser();
-        //Read input
-        Scanner s = new Scanner(System.in);
-
-        //Parse the input command
-        String command = "";
-        while (!Parser.isBye) {
-            command = s.nextLine();
-            Parser.addList(tasks);
-            Parser.parse(command);
-        }
-
-        storage.writeBack("/duke/out/duke.txt", tasks);
+    String getResponse(String input) {
+        Parser.addList(tasks);
+        return Parser.parse(input);
     }
 
-    public static void main(String[] args) throws DukeException {
-        Duke duke = new Duke("/duke/out/duke.txt");
-        duke.run();
+    public void saveFile() {
+        storage.writeBack("/duke/out/duke.txt", tasks);
     }
 }
