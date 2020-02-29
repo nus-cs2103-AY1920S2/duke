@@ -10,7 +10,7 @@ version '0.1.0'
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "src.main.java.Launcher"
 }
 
 run {
