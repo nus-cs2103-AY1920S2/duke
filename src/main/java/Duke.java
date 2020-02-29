@@ -30,6 +30,8 @@ public class Duke {
      */
     public String run(String input) {
         String result = "";
+        assert !result.equals("") : "There's no result.";
+
         result = Parser.handleTasks(input, tasks, ui);
         // storage.save(tasks);
         return result;
