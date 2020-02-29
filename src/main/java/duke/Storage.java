@@ -1,10 +1,8 @@
 package duke;
 
-import java.io.ObjectOutputStream;
-import java.io.ObjectInputStream;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
-import java.io.File;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -34,8 +32,32 @@ public class Storage {
         try {
             if (file.length() != 0) {
                 FileInputStream fin = new FileInputStream(file);
-                ObjectInputStream oit = new ObjectInputStream(fin);
-                taskList = (ArrayList<Task>) oit.readObject();
+                BufferedReader br = new BufferedReader(new InputStreamReader(fin));
+                String task = br.readLine();
+
+                while (task != null) {
+                    String[] temp = task.split("/");
+                    Task newTask = new Task("");
+
+                    if (temp[2].equals("T")) {
+                        newTask = new ToDo(temp[1]);
+
+                    } else if (temp[2].equals("D")) {
+                        LocalDate localDate = LocalDate.parse(temp[3]);
+                        newTask = new Deadline(temp[1], localDate);
+
+                    } else if (temp[2].equals("E")) {
+                        LocalDateTime localDateTime = LocalDateTime.parse(temp[3]);
+                        newTask = new Event(temp[1], localDateTime);
+                    }
+
+                    if (temp[0].equals("\u2713")) {
+                        newTask.isDone = true;
+                    }
+
+                    taskList.add(newTask);
+                    task = br.readLine();
+                }
             }
 
         } catch (Exception ex) {
@@ -53,10 +75,26 @@ public class Storage {
      */
     public void store(TaskList taskList) {
         try {
-            FileOutputStream fout = new FileOutputStream(this.filePath);
-            ObjectOutputStream oot = new ObjectOutputStream(fout);
-            oot.writeObject(taskList.tasks);
-            oot.close();
+            FileOutputStream fo = new FileOutputStream(this.filePath);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fo));
+
+            for (int i = 0; i < taskList.tasks.size(); i++) {
+                Task task = taskList.tasks.get(i);
+                String save = task.getStatusIcon() + "/" + task.description + "/";
+
+                if (task instanceof ToDo) {
+                    save += "T";
+                } else if (task instanceof Deadline) {
+                    save += "D" + "/" + ((Deadline) task).by;
+                } else if (task instanceof Event) {
+                    save += "E" + "/" + ((Event) task).at;
+                }
+
+                bw.write(save);
+                bw.newLine();
+            }
+
+            bw.close();
 
         } catch (Exception ex) {
             ex.printStackTrace();
