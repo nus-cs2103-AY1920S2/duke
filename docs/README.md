@@ -144,7 +144,7 @@ delete <task-number>
 ```
 Noted. I've removed this task:
     <task-info>
-Now you have %d tasks in the list.
+Now you have <number-of-tasks> tasks in the list.
 ```
 Invalid Task Index Output
 ```
