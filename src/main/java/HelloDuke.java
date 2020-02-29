@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class HelloDuke {
-    private static  String  WELCOME_LOGO = " ";
+    private static  String  WELCOME_LOGO = " Hello! This is Duke.";
 
-    private static  String EXIT_LOGO = " ";
+    private static  String EXIT_LOGO = "Bye! See you again. ";
 
-    private  static String ERROR_INFORM = " ";
+    private  static String ERROR_INFORM = "It seems sth is going wrong... ";
 
     public static void Start(){
         System.out.println(WELCOME_LOGO);

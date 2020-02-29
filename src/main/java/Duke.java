@@ -1,30 +1,25 @@
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.util.Pair;
+import tasks.TaskManager;
 import ui.HelloDuke;
-import ui.UI;
+
 
 import java.util.Scanner;
 
-public class Duke {
-    private void start_duke(String args[]){
+public class Duke{
+    TaskManager taskManager = new TaskManager();
 
-    }
-
-    public static void main(){
-        HelloDuke.Start();
+    public void handle_input(Stage primaryStage){
         Scanner sc = new Scanner((System.in));
-        String str = new String();
-        str = sc.nextLine();
         boolean exit_flag = true;
 
         while (exit_flag){
-            if (str == 'list'){
-
-
+            String str_input = sc.nextLine();
+            taskManager.Input_Solver(str_input);
             }
         }
 
     }
-
-
-}
 
 
