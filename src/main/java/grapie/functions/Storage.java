@@ -28,28 +28,16 @@ public class Storage {
     public Storage(String filePath, List<Task> storingList) throws IOException {
         // deals with loading tasks from the file and saving tasks in the dukeStorage.txt file.
 
-        //OS independent
-        //String home = System.getProperty("user.home");
-
-        // inserts correct file path separator on *nix and Windows
-        // works on *nix
-        // works on Windows
-        //java.nio.file.Path path = java.nio.file.Paths.get(home, "data", "dukeStorage.txt");
-        //boolean directoryExists = java.nio.file.Files.exists(path);
-
         this.filePath = filePath;
-        File file = new File(filePath);
-        File dataFile = new File("./data");
-
-        //File file = new File("c:\\data\\input-file.txt");
-
-        boolean fileExists = dataFile.exists();
-
-        if (!fileExists) {
-            boolean dirCreated = dataFile.mkdir();
+        try {
+            File taskFile = new File("data/dukeStorage.txt");
+            if (!taskFile.exists()) {
+                taskFile.getParentFile().mkdirs();
+                taskFile.createNewFile();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        file.createNewFile();
         this.storingList = storingList;
     }
 
@@ -219,8 +207,9 @@ public class Storage {
 
     /**
      * Store the tags into the hard disk.
+     *
      * @param lineNumber The line number to store the tag at.
-     * @param tag The tag to be stored.
+     * @param tag        The tag to be stored.
      * @throws IOException Throw away exception.
      */
     public void addTagToDisk(int lineNumber, String tag) throws IOException {
