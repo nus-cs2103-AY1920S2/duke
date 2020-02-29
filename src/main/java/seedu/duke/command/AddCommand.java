@@ -17,7 +17,7 @@ import seedu.duke.task.Todo;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Represents a command object to add task to the list.
@@ -66,12 +66,18 @@ public class AddCommand extends Command {
 
                 String deadlineDesc = deadlineDescs[0].trim();
                 String deadlineDate = deadlineDescs[1].trim();
-                LocalDate formattedDeadlineDate = null;
-                if (isValidDate(deadlineDate)) {
-                    formattedDeadlineDate = LocalDate.parse(deadlineDate);
-                } else {
+                if (deadlineDate.length() != 10) {
                     throw new InvalidDateException();
                 }
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date formattedDeadlineDate = null;
+                try {
+                    formattedDeadlineDate = dateFormat.parse(deadlineDate);
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+
+
                 task = new Deadline(deadlineDesc, formattedDeadlineDate);
                 break;
             case EVENT:
@@ -81,12 +87,17 @@ public class AddCommand extends Command {
                 }
                 String eventDesc = eventDescs[0].trim();
                 String eventDate = eventDescs[1].trim();
-                LocalDate formattedEventDate = null;
-                if (isValidDate(eventDate)) {
-                    formattedEventDate = LocalDate.parse(eventDate);
-                } else {
+                if (eventDate.length() != 10) {
                     throw new InvalidDateException();
                 }
+                dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date formattedEventDate = null;
+                try {
+                    formattedEventDate = dateFormat.parse(eventDate);
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+
                 task = new Event(eventDesc, formattedEventDate);
                 break;
             default:
@@ -120,7 +131,7 @@ public class AddCommand extends Command {
      * @return true if the input date is written in a valid date format.
      */
     private boolean isValidDate(String inDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         try {
             dateFormat.parse(inDate.trim());

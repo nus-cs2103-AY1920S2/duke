@@ -17,9 +17,9 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -165,12 +165,16 @@ public class Storage {
 
         String deadlineDesc = descs[0].trim();
         String deadlineDate = descs[1].trim();
-        LocalDate formattedDeadlineDate = null;
 
-        if (isValidDate(deadlineDate)) {
-            formattedDeadlineDate = LocalDate.parse(deadlineDate);
-        } else {
+        if (deadlineDate.length() != 10) {
             throw new InvalidDateException();
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date formattedDeadlineDate = null;
+        try {
+            formattedDeadlineDate = dateFormat.parse(deadlineDate);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
         }
 
         Task deadline = new Deadline(deadlineDesc, formattedDeadlineDate);
@@ -197,11 +201,15 @@ public class Storage {
         }
         String eventDesc = descs[0].trim();
         String eventDate = descs[1].trim();
-        LocalDate formattedEventDate = null;
-        if (isValidDate(eventDate)) {
-            formattedEventDate = LocalDate.parse(eventDate);
-        } else {
+        if (eventDate.length() != 10) {
             throw new InvalidDateException();
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date formattedEventDate = null;
+        try {
+            formattedEventDate = dateFormat.parse(eventDate);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
         }
         Task event = new Event(eventDesc, formattedEventDate);
 
@@ -222,7 +230,7 @@ public class Storage {
      * @return true if the input date is written in a valid date format.
      */
     public static boolean isValidDate(String inDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         try {
             dateFormat.parse(inDate.trim());

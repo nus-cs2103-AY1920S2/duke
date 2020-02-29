@@ -1,13 +1,13 @@
 package seedu.duke.task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Represents a Deadline Object.
  */
 public class Deadline extends Task {
-    protected LocalDate deadlineDate;
+    protected Date deadlineDate;
 
     /**
      * Represents a Deadline Object.
@@ -15,19 +15,21 @@ public class Deadline extends Task {
      * @param description The details of the deadline.
      * @param deadlineDate The date for the deadline.
      */
-    public Deadline(String description, LocalDate deadlineDate) {
+    public Deadline(String description, Date deadlineDate) {
         super(description);
         this.deadlineDate = deadlineDate;
     }
 
     @Override
     public String toString() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d yyyy");
+        String dateString = simpleDateFormat.format(deadlineDate);
         String formattedDeadlineTime = " (by: "
-                + deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + dateString + ")";
         return "[D]" + super.toString() + formattedDeadlineTime;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return deadlineDate;
     }
 
