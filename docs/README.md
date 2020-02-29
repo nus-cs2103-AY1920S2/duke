@@ -26,9 +26,14 @@ Deadline tasks are tasks that have to be done by a particular date and time. In 
 Event tasks are tasks that have to be done on a particular date and time. In Duke, you are allowed to set an Event task with a description and a date.
 
 #### Command
-`todo <description>` - Creates a new To-Do task \
-`deadline <description> /by <date>` - Creates a new Deadline task \
-`event <description> /at <date>` - Creates a new Event task
+Creating a new To-Do Task
+```todo <description>```
+
+Creating a new Deadline Task
+```deadline <description> /by <date>```
+
+Creating a new Event Task
+```event <description> /at <date>```
 
 ### Listing Tasks
 After creating your tasks, you may view the list of tasks that you have added into Duke.
