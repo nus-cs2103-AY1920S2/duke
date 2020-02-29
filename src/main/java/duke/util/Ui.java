@@ -26,7 +26,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(setBorder("Hello! I'm Duke\nWhat can I do for you?"));
+        System.out.println(setBorder("Hello! I'm Johnny\nWhat can I do for you?"));
     }
 
     public static void bye() {
