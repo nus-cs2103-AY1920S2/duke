@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -19,19 +20,20 @@ public class Duke {
     public static Scanner lineScanner;
     public static Scanner sc;
 
-    private final String FILE_NAME = "./data/duke.txt";
     private Ui ui = new Ui();
-    private Storage storage = new Storage(FILE_NAME);
+
+    private Storage storage = new Storage();
+
     private TaskList tasks = new TaskList(storage);
 
     private final int DATE_LENGTH = 10;
 
     // Empty constructor required for Launcher
-    public Duke() {
+    public Duke() throws IOException {
     }
 
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         new Duke().run();
     }
 

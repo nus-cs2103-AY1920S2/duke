@@ -11,9 +11,11 @@ import java.io.IOException;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
     private Duke duke = new Duke();
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("images/smallLogo.png"));
+    private Image dukeImage = new Image(String.valueOf(this.getClass().getResource("/images/smallLogo.png")));
+
+    public Main() throws IOException {
+    }
 
     @Override
     public void start(Stage stage) {

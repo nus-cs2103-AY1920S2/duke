@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class TaskList {
         this.tasks = new ArrayList<>(tasks);
     }
 
-    public TaskList(Storage storage) {
+    public TaskList(Storage storage) throws FileNotFoundException {
         this.tasks = storage.getAllTasksFromFile();
     }
 
