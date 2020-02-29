@@ -17,9 +17,12 @@ bin/
 .classpath
 .project
 .vscode
+.settings
 
 *.class
 *.txt
 
 !./tests/**/expected.txt
 !./tests/**/input.txt
+
+lib/*
