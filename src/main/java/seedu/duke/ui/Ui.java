@@ -68,6 +68,10 @@ public class Ui {
         System.out.println("Good job! One off your chest!");
     }
 
+    public void printTaskAlrDone() {
+        System.out.println("Task is already done!");
+    }
+
     public void printDuplicateFile() {
         System.out.println("File already exists.");
     }

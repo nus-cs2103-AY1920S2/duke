@@ -50,10 +50,14 @@ public class TaskList {
      */
     public void markTaskAsDone(int index) throws IOException {
         Task task = tasks.get(index - 1);
-        task.markAsDone();
-        assert task.isDone();
-        storage.changeToStorage(index);
-        ui.printTaskDone();
+        if (task.isDone()) {
+            ui.printTaskAlrDone();
+        } else {
+            task.markAsDone();
+            assert task.isDone();
+            storage.changeToStorage(index);
+            ui.printTaskDone();
+        }
         ui.print(task.toString());
     }
 

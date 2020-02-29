@@ -52,6 +52,10 @@ public class AddCommand extends Command {
                 throw new EmptyDescriptionException();
             }
             String desc = inputs[1];
+            if (desc.isBlank()) { // if description is just white space
+                throw new EmptyDescriptionException();
+            }
+
             Task task = null;
 
             switch (taskType) {
@@ -66,6 +70,11 @@ public class AddCommand extends Command {
 
                 String deadlineDesc = deadlineDescs[0].trim();
                 String deadlineDate = deadlineDescs[1].trim();
+
+                if (deadlineDesc.isBlank()) { // if description is just white space
+                    throw new EmptyDescriptionException();
+                }
+
                 LocalDate formattedDeadlineDate = null;
                 if (deadlineDate.length() == 10 && isValidDate(deadlineDate)) {
                     formattedDeadlineDate = LocalDate.parse(deadlineDate);
@@ -83,6 +92,11 @@ public class AddCommand extends Command {
                 }
                 String eventDesc = eventDescs[0].trim();
                 String eventDate = eventDescs[1].trim();
+
+                if (eventDesc.isBlank()) { // if description is just white space
+                    throw new EmptyDescriptionException();
+                }
+
                 LocalDate formattedEventDate = null;
                 if (eventDate.length() == 10 && isValidDate(eventDate)) {
                     formattedEventDate = LocalDate.parse(eventDate);
