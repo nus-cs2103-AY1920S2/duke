@@ -5,19 +5,19 @@
 
 public class TodoWithinPeriod extends Todo {
     protected String betweenDate;
-    protected String toDate;
+    protected String AndDate;
 
-    public TodoWithinPeriod(String description, String fromDate, String toDate) {
+    public TodoWithinPeriod(String description, String fromDate, String AndDate) {
         super(description);
         this.betweenDate = Parser.parseTime(fromDate);
-        this.toDate = Parser.parseTime(toDate);
+        this.AndDate = Parser.parseTime(AndDate);
     }
 
     public String getBetweenDate() {
         return betweenDate;
     }
 
-    public String getToDate() {
-        return toDate;
+    public String getAndDate() {
+        return AndDate;
     }
 }

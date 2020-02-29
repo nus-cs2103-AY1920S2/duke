@@ -1,9 +1,11 @@
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -24,10 +26,11 @@ public class Main extends Application {
     public void start(Stage stage) {
         ui = new Ui();
         storage = new Storage(dataFilePath);
+        taskList = new TaskList(ui, storage);
         try {
             taskList.setList(storage.getList());
         } catch (Exception e) {
-            taskList = new TaskList(ui, storage);
+            taskList.setList(new ArrayList<>());
         }
         parser = new Parser(taskList);
         duke.linkResources(ui, parser);
@@ -38,6 +41,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Duck - a smart animal assistant");
+            stage.getIcons().add(new Image("/images/duck_logo.png"));
             stage.show();
             fxmlLoader.<MainWindow>getController().showWelcomeMessage();
         } catch (IOException e) {

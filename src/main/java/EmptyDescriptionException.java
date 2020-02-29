@@ -5,6 +5,6 @@ public class EmptyDescriptionException extends DukeException {
 
     @Override
     public String getMessage(){
-        return "\u2639 OOPS!!! The description cannot be empty.";
+        return "QUACK!!! The description cannot be empty, master :-(";
     }
 }

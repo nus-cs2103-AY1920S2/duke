@@ -16,7 +16,6 @@ public class TaskList {
     public TaskList(Ui ui, Storage storage) {
         this.ui = ui;
         this.storage = storage;
-        taskList = new ArrayList<>();
     }
 
     /**
@@ -44,10 +43,10 @@ public class TaskList {
                     toAdd = new Todo(taskInfo[0]);
                 } else {
                     String task = taskInfo[0];
-                    String[] betweenToDates = taskInfo[1].split(" /to ");
-                    String betweenDate = betweenToDates[0];
-                    String toDate = betweenToDates[1];
-                    toAdd = new TodoWithinPeriod(task, betweenDate, toDate);
+                    String[] betweenAndDates = taskInfo[1].split(" /and ");
+                    String betweenDate = betweenAndDates[0];
+                    String AndDate = betweenAndDates[1];
+                    toAdd = new TodoWithinPeriod(task, betweenDate, AndDate);
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new EmptyDescriptionException();
@@ -68,9 +67,9 @@ public class TaskList {
             }
         }
         taskList.add(toAdd);
-        String msg = "Gotcha! Added this task:\n"
+        String msg = "Quack! Added this task:\n"
                 + "  " + toAdd + "\n"
-                + "Now you have " + taskList.size() + " tasks in the list.";
+                + "You now have " + taskList.size() + " tasks in the list, master.";
         try {
             storage.writeTaskList(taskList);
         } catch (IOException e) {
@@ -87,9 +86,9 @@ public class TaskList {
      */
     public String delete(int i) {
         Task t = taskList.remove(i-1);
-        String msg = "Poof! This task is gone:\n"
+        String msg = "Quack-poof! This task is now gone:\n"
                 +  "  " + t + "\n"
-                + "Now you have " + taskList.size() + " tasks in the list.";
+                + "You now have " + taskList.size() + " tasks in the list, master.";
         try {
             storage.writeTaskList(taskList);
         } catch (IOException e) {
@@ -104,7 +103,7 @@ public class TaskList {
      * @return Display message.
      */
     public String showList() {
-        String msg = "Here are the tasks in your list:";
+        String msg = "Here are the tasks in your list, master:";
         int count = 1;
         for (Task t : taskList) {
             msg += "\n" + count + "." + t;
@@ -120,7 +119,7 @@ public class TaskList {
      * @return Display message.
      */
     public String find(String query) {
-        String msg = "Here are the matching tasks in your list:";
+        String msg = "Here's what I found in your list, master:";
         int count = 1;
         for (Task t : taskList) {
             if (t.toString().contains(query)) {
@@ -139,7 +138,7 @@ public class TaskList {
      */
     public String done(int i) {
         taskList.get(i-1).markAsDone();
-        String msg = "Nice! I've marked this task as done: \n" +
+        String msg = "Quack! I've marked this task as done, master: \n" +
                 "  " + taskList.get(i-1);
         try {
             storage.writeTaskList(taskList);

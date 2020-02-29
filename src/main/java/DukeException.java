@@ -5,6 +5,6 @@ public class DukeException extends Exception {
 
     @Override
     public String getMessage(){
-        return "\u2639 OOPS!!! I'm sorry, but I don't recognise that command :-(";
+        return "QUACK!!! I'm sorry, but I don't understand :-(";
     }
 }

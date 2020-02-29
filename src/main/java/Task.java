@@ -49,7 +49,7 @@ public class Task {
         if (this instanceof TodoWithinPeriod) {
             toReturn = "[T][" + getStatusIcon() + "] " + description
                      + " (between " + ((TodoWithinPeriod) this).getBetweenDate()
-                     + " to " + ((TodoWithinPeriod) this).getToDate() +")";
+                     + " and " + ((TodoWithinPeriod) this).getAndDate() +")";
         } else if (this instanceof Todo) {
             toReturn = "[T][" + getStatusIcon() + "] " + description;
         } else if (this instanceof Event) {

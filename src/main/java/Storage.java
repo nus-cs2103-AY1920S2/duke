@@ -71,14 +71,14 @@ public class Storage {
         String str = "";
         int done = t.getIsDone() ? 1 : 0;
         if (t instanceof TodoWithinPeriod)
-            str = "T | " + done + " | " + t.getDescription() + " | " + ((TodoWithinPeriod) t).getBetweenDate()
-                    + " | " + ((TodoWithinPeriod) t).getToDate();
+            str = "T | " + done + " | " + t.getDescription() + " | " + Parser.formatTime(((TodoWithinPeriod) t).getBetweenDate())
+                    + " | " + Parser.formatTime(((TodoWithinPeriod) t).getAndDate());
         if (t instanceof Todo)
             str = "T | " + done + " | " + t.getDescription();
         if (t instanceof Event)
-            str = "E | " + done + " | " + t.getDescription() + " | " + ((Event) t).getDayTime();
+            str = "E | " + done + " | " + t.getDescription() + " | " + Parser.formatTime(((Event) t).getDayTime());
         if (t instanceof Deadline)
-            str = "D | " + done + " | " + t.getDescription() + " | " + ((Deadline) t).getDayTime();
+            str = "D | " + done + " | " + t.getDescription() + " | " + Parser.formatTime(((Deadline) t).getDayTime());
         assert ! str.equals("") : "String has information";
         return str + "\n";
     }

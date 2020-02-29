@@ -51,15 +51,18 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     protected void showWelcomeMessage() {
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        String msg = "Hello from\n" + logo + "\n"
-                    + "NOTE: For all date/time input, please use the DD-MM-YYYY HH:MM format.\n"
-                    + "Hello! I'm Duke the dude.\n"
-                    + "How can I serve you?";
+        String logo =  "/$$$$$$$                      /$$\n"
+                + "| $$__  $$                    | $$\n"
+                + "| $$  \\ $$ /$$   /$$  /$$$$$$$| $$   /$$\n"
+                + "| $$  | $$| $$  | $$ /$$_____/| $$  /$$/\n"
+                + "| $$  | $$| $$  | $$| $$      | $$$$$$/\n"
+                + "| $$  | $$| $$  | $$| $$      | $$_  $$\n"
+                + "| $$$$$$$/|  $$$$$$/|  $$$$$$$| $$ \\  $$\n"
+                + "|_______/  \\______/  \\_______/|__/  \\__/\n";
+        String msg = logo + "\n"
+                    + "Quack! I'm Duck.\n"
+                    + "How can I serve my master?\n\n"
+                    + "NOTE: For all date/time input, please use the DD-MM-YYYY HH:MM format.\n";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(msg, dukeImage));
     }
 }

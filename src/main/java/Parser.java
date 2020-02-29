@@ -40,7 +40,7 @@ public class Parser {
             String query = inputParts[1];
             msg = taskList.find(query);
         } else if (command.equals("bye")) {
-            msg = "Bye. Hope to serve you again soon!";
+            msg = "Quack... Hope to serve you again soon, master!";
         } else {
             throw new UnrecognisedCommandException();
         }
@@ -66,5 +66,15 @@ public class Parser {
             s = d.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
         }
         return s;
+    }
+
+    public static String formatTime(String dayTime) {
+        if (dayTime.split(" ").length > 3) {
+            LocalDateTime ldt = LocalDateTime.parse(dayTime, DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
+            return ldt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        } else {
+            LocalDate ld = LocalDate.parse(dayTime, DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+            return ld.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        }
     }
 }

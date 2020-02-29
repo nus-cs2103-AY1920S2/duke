@@ -1,0 +1,5 @@
+T | 0 | Eat
+T | 0 | Eat more
+E | 0 | Eating competition | 04-03-2020
+D | 0 | Stop eating | 05-03-2020
+T | 0 | Eat more
