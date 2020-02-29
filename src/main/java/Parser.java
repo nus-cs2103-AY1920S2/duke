@@ -28,22 +28,27 @@ public class Parser {
     }
 
     /**
-     * Parses the command from user input.
-     * @param command The command line that the user input.
+     * Parses the command string.
+     * @param command The command string that the user input.
+     * @return The response of Duke to the user
      */
 
     public static String parse(String command) {
         String output = "";
-        if (command.equals("bye")) {
+        if (command.equals("hi")) {
             //Exit
-            output += "Bye. Hope to see you again soon!";
+            output += "What's up my dude???";
         } else if (command.equals("list")) {
             //List all tasks
-            output += "Here are the tasks in your list:"
-                    + System.lineSeparator();
-            for (int i = 0; i < currentList.getSize(); i++) {
-                output += i + 1 + ". " + currentList.getTask(i)
+            if (currentList.getSize() == 0) {
+                output += "Your list is empty";
+            } else {
+                output += "Here are the tasks in your list:"
                         + System.lineSeparator();
+                for (int i = 0; i < currentList.getSize(); i++) {
+                    output += i + 1 + ". " + currentList.getTask(i)
+                            + System.lineSeparator();
+                }
             }
         } else if ((command.length() > 3) && (command.substring(0, 4).equals("done"))) {
             //Mark task as done
@@ -55,11 +60,9 @@ public class Parser {
                 output += currentList.getTask(taskNumber - 1)
                         + System.lineSeparator();
             } catch (StringIndexOutOfBoundsException e) {
-                output += "Done cannot be empty. Please add a valid task number to mark as done"
-                        + System.lineSeparator();
+                output += Ui.emptyError("Done");
             } catch (IndexOutOfBoundsException e) {
-                output += "Please enter a valid task number to mark as done"
-                        + System.lineSeparator();
+                output += Ui.invalidNumber("mark as done");
             }
         } else if ((command.length() > 5) && (command.substring(0, 6).equals("delete"))) {
             //Delete task
@@ -70,11 +73,9 @@ public class Parser {
                         + System.lineSeparator();
                 output += temp + System.lineSeparator();
             } catch (StringIndexOutOfBoundsException e) {
-                output += "Delete cannot be empty. Please add a valid task number to delete"
-                        + System.lineSeparator();
+                output += Ui.emptyError("Delete");
             } catch (IndexOutOfBoundsException e) {
-                output += "Please enter a valid task number to delete"
-                        + System.lineSeparator();
+                output += Ui.invalidNumber("delete");
             }
         } else if ((command.length() > 3) && (command.substring(0, 4).equals("find"))) {
             //Find task
@@ -104,8 +105,7 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();
             } catch (DukeException e) {
-                output += "Find description cannot be empty"
-                        + System.lineSeparator();
+                output += Ui.emptyError("Find");
             }
         } else {
             //Add task
@@ -115,12 +115,9 @@ public class Parser {
                     newTask = new ToDo(command.substring(5));
                     currentList.addTask(newTask);
                     assert (currentList.getSize() != 0);
-                    output += "Got it. I've added this task: \n" + newTask
-                            + System.lineSeparator();
-                    output += "Now you have " + currentList.getSize() + " tasks in the list"
-                            + System.lineSeparator();                } catch (IndexOutOfBoundsException e) {
-                    output += "ToDo description cannot be empty"
-                            + System.lineSeparator();
+                    output += Ui.gotIt(newTask, currentList.getSize());
+                } catch (IndexOutOfBoundsException e) {
+                    output += Ui.emptyError("ToDo");
                 }
             } else if (command.contains("deadline")) {
                 try {
@@ -132,19 +129,14 @@ public class Parser {
                     newTask = new Deadline(command.substring(9, breakPos - 1), date);
                     currentList.addTask(newTask);
                     assert (currentList.getSize() != 0);
-                    output += "Got it. I've added this task: \n" + newTask
-                            + System.lineSeparator();
-                    output += "Now you have " + currentList.getSize() + " tasks in the list"
-                            + System.lineSeparator();
+                    output += Ui.gotIt(newTask, currentList.getSize());
+
                 } catch (DukeException e) {
-                    output += "Deadline description cannot be empty"
-                            + System.lineSeparator();
+                    output += Ui.emptyError("Deadline");
                 } catch (IndexOutOfBoundsException e) {
-                    output += "Please re-enter the date for Deadline"
-                            + System.lineSeparator();
+                    output += Ui.reEnterDate("Deadline");
                 } catch (DateTimeParseException e) {
-                    output += "Please enter a valid date format in the form of YYYY-MM-DD"
-                            + System.lineSeparator();
+                    output += Ui.wrongDate();
                 }
             } else if (command.contains("event")) {
                 try {
@@ -156,23 +148,16 @@ public class Parser {
                     newTask = new Event(command.substring(6, breakPos - 1), date);
                     currentList.addTask(newTask);
                     assert (currentList.getSize() != 0);
-                    output += "Got it. I've added this task: \n" + newTask
-                            + System.lineSeparator();
-                    output += "Now you have " + currentList.getSize() + " tasks in the list"
-                            + System.lineSeparator();
+                    output += Ui.gotIt(newTask, currentList.getSize());
                 } catch (DukeException e) {
-                    output += "Event description cannot be empty"
-                            + System.lineSeparator();
+                    output += Ui.emptyError("Event");
                 } catch (IndexOutOfBoundsException e) {
-                    output += "Please re-enter the date for Event"
-                            + System.lineSeparator();
+                    output += Ui.reEnterDate("Event");
                 } catch (DateTimeParseException e) {
-                    output += "Please enter a valid date format in the form of YYYY-MM-DD"
-                            + System.lineSeparator();
+                    output += Ui.wrongDate();
                 }
             } else {
-                output += "Please input a valid command"
-                        + System.lineSeparator();
+                output += Ui.showInputError();
             }
         }
         assert (!output.equals(""));

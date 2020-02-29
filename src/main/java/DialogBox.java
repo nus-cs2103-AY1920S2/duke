@@ -58,15 +58,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeGreeting(Image img) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String text = "";
-        text += "Hello from\n" + logo;
-        text += "Hello! I'm Duke\n";
-        text += "What can I do for you?";
+        String text = Ui.greetUser();
         var db = new DialogBox(text, img);
         db.flip();
         return db;
