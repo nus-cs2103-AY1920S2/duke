@@ -50,6 +50,33 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please enter a valid task number to delete");
             }
+        } else if ((command.length() > 3) && (command.substring(0, 4).equals("find"))) {
+            //Find task
+            try {
+                if (command.length() == 4) throw new DukeException("No info find");
+                boolean isMatch = false;
+                String keyWord = command.substring(5);
+                ArrayList<Task> matchedTask = new ArrayList<Task>();
+                for (int i = 0; i < currentList.getSize(); i++) {
+                    Task currentTask = currentList.getTask(i);
+                    if (currentTask.toString().contains(keyWord)) {
+                        matchedTask.add(currentTask);
+                        isMatch = true;
+                    }
+                }
+                if (isMatch) {
+                    System.out.println("Here are the matching tasks in your list:");
+                    for (int j = 0; j < matchedTask.size(); j++) {
+                        System.out.println((j + 1) + "." + matchedTask.get(j));
+                    }
+                } else {
+                    System.out.println("There are no tasks that match your description");
+                }
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+            } catch (DukeException e) {
+                System.out.println("Find description cannot be empty");
+            }
         } else {
             //Add task
             Task newTask = new Task("placeholder");
