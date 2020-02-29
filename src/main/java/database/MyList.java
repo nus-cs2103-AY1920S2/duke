@@ -69,13 +69,16 @@ public class MyList {
 
     /**
      * Prints number of items in tasks.
+     * @return An int of the number of items in list
      */
-    public static void printCount() {
+    public static int printCount() {
         System.out.println("Now you have " + listOfTasks.size() + " things in your bloody list..");
+        return listOfTasks.size();
+
     }
 
     /**
-     * Mark list item as done.
+     * Mark list item as done
      *
      * @param ID the id
      * @throws DukeException the duke exception

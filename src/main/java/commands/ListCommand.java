@@ -14,6 +14,6 @@ public class ListCommand extends UserCommand {
     }
     @Override
     public String reply() {
-        return MyList.printList();
+        return MyList.printList() +"\n You have a total of " + MyList.printCount() +" things in your list\n";
     }
 }

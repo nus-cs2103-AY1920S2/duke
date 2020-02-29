@@ -246,3 +246,8 @@ Update 1-1
 Fix bug where bot dont save memory when closed
 Fix bug where cannot see past certain amount of items
 
+29/02/20
+Made changes to some of the more recent java docs
+
+Update 1-2
+Yuri now displayes the number of items in list when adding/deleting and listing

@@ -42,7 +42,7 @@ public class AddCommand extends UserCommand {
 
     @Override
     public String reply() {
-        return UI.getReply("add");
+        return UI.getReply("add") +"\nYou have a total of " + (MyList.printCount()) +" things in your list\n";
     }
 
     @Override

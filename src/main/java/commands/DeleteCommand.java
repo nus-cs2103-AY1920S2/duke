@@ -32,7 +32,7 @@ public class DeleteCommand extends UserCommand {
 
     @Override
     public String reply() {
-        return UI.getReply("delete");
+        return UI.getReply("delete") +"\nYou have a total of " + (MyList.printCount()) +" things in your list\n";
     }
 
 
