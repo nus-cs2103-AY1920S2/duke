@@ -62,6 +62,7 @@ public class Duke {
      * @return string to be printed onto chat box GUI.
      */
     public String getResponse(String input) {
+        assert !input.isEmpty() : "blank input is nono";
         if (input.equals("bye")) {
             System.exit(0);
             return "See ya, chum.";
