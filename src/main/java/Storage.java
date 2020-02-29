@@ -44,6 +44,9 @@ public class Storage {
                     if (input[1].equals("1")) {
                         newTask.markAsDone();
                     }
+                    if (input.length == 4) {
+                        newTask.updateTag(input[3]);
+                    }
                     inputTasks.add(newTask);
                 }
                 if (firstChar == 'D') {
@@ -52,6 +55,9 @@ public class Storage {
                     if (input[1].equals("1")) {
                         newTask.markAsDone();
                     }
+                    if (input.length == 5) {
+                        newTask.updateTag(input[4]);
+                    }
                     inputTasks.add(newTask);
                 }
                 if (firstChar == 'E') {
@@ -59,6 +65,9 @@ public class Storage {
                     newTask = new Event(input[2], date);
                     if (input[1].equals("1")) {
                         newTask.markAsDone();
+                    }
+                    if (input.length == 5) {
+                        newTask.updateTag(input[4]);
                     }
                     inputTasks.add(newTask);
                 }
@@ -82,15 +91,20 @@ public class Storage {
             Task outputTask = taskList.get(i);
             if (outputTask instanceof ToDo) {
                 output += "T" + "|" + outputTask.getDone()
-                        + "|" + outputTask.getDescription();
+                        + "|" + outputTask.getDescription()
+                        + "|" + outputTask.getTag();
             }
             if (outputTask instanceof Deadline) {
                 output += "D" + "|" + outputTask.getDone()
-                        + "|" + outputTask.getDescription() + "|" + ((Deadline) outputTask).getBy();
+                        + "|" + outputTask.getDescription()
+                        + "|" + ((Deadline) outputTask).getBy()
+                        + "|" + outputTask.getTag();
             }
             if (outputTask instanceof Event) {
                 output += "E" + "|" + outputTask.getDone()
-                        + "|" + outputTask.getDescription() + "|" + ((Event) outputTask).getAt();
+                        + "|" + outputTask.getDescription()
+                        + "|" + ((Event) outputTask).getAt()
+                        + "|" + outputTask.getTag();
             }
             if (i < taskList.size() - 1) {
                 output += System.lineSeparator();

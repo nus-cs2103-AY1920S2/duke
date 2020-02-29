@@ -5,6 +5,8 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String tag;
+    protected boolean isTagged;
 
     /**
      * Creates a new task.
@@ -14,6 +16,8 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = "";
+        this.isTagged = false;
     }
 
     /**
@@ -51,8 +55,22 @@ public class Task {
         return (isDone ? "1" : "0");
     }
 
+    public void updateTag(String tag) {
+        this.tag = tag;
+        this.isTagged = true;
+    }
+
+    public String getTag() {
+        return this.tag;
+    }
+
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        String s = "[" + this.getStatusIcon() + "] "
+                + this.description;
+        if (this.isTagged) {
+            s += " #" + this.tag;
+        }
+        return s;
     }
 }

@@ -107,6 +107,24 @@ public class Parser {
             } catch (DukeException e) {
                 output += Ui.emptyError("Find");
             }
+        } else if ((command.length() > 2) && (command.substring(0, 3).equals("tag"))) {
+            //Tag a task
+            try {
+                if (command.length() == 3) throw new DukeException("No tag found");
+                int breakPos = command.indexOf("/");
+                String keyword = command.substring(4, breakPos - 1).replaceAll("\\s","");
+                int taskPos = Integer.parseInt(command.substring(breakPos + 4));
+                currentList.getTask(taskPos - 1).updateTag(keyword);
+                output += "Nice! I have tagged this task:"
+                        + System.lineSeparator();
+                output += currentList.getTask(taskPos - 1);
+            } catch (DukeException e) {
+                output += Ui.emptyError("Tag");
+            } catch (StringIndexOutOfBoundsException e) {
+                output += "Please re-enter a valid tag";
+            } catch (IndexOutOfBoundsException e) {
+                output += Ui.invalidNumber("tag");
+            }
         } else {
             //Add task
             Task newTask = new Task("placeholder");
