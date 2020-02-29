@@ -7,6 +7,7 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,14 +22,24 @@ public class Storage {
     protected Path rootPath;
     protected Path dataPath;
 
-    public Storage() {
+    public Storage() throws IOException, DukeException {
+        /*
         this.rootPath = Paths.get(home);
         this.dataPath = Paths.get(rootPath.toString(), "data", "duke.txt");
+         */
+        String home = System.getProperty("user.dir");
+        this.dataPath = Paths.get(home, "duke.txt");
+        if (!Files.exists(dataPath)) {
+            File dataFile = new File(dataPath.toString());          // create new file
+            if (!dataFile.createNewFile()) {
+                throw new DukeException("File could not be created :|");
+            }
+        }
     }
 
     /**
      * Loads each line from .txt file
-     * @return returns a
+     * @return returns a list of tasks
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks =  new ArrayList<>();

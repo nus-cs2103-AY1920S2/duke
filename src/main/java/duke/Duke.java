@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -32,6 +34,8 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             System.out.println(e.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

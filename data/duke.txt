@@ -1,5 +1,3 @@
-D , N , death , 2020-10-12
 E , N , party , 2020-05-14
 E , N , go hell , 2020-06-06
 D , N , complete 2105 , 2020-03-01
-E , N , hgfd , 2020-02-01

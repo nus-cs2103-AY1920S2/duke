@@ -8,6 +8,7 @@ import duke.tasks.Todo;
 import duke.util.Storage;
 import duke.util.Ui;
 
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class TaskList {
      * Contructs a taskList object.
      * @param t arrayList of tasks
      */
-    public TaskList(ArrayList<Task> t) {
+    public TaskList(ArrayList<Task> t) throws IOException, DukeException {
         tasks = t;
     }
 
