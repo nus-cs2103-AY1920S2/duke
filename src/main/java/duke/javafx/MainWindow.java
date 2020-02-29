@@ -34,6 +34,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         ui = new Ui();
+        dialogContainer.setId("background");
         this.printIntro();
     }
 
