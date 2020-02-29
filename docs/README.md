@@ -1,6 +1,6 @@
 # User Guide for CatDuke
 
-![Image of Yaktocat](./UI.png)
+![Image of Yaktocat](./Ui.png)
 
 ## Features 
 
