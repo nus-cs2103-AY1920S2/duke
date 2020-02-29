@@ -76,6 +76,7 @@ public class Interpreter {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Got it. I've added this task: ").append("\n");
 		sb.append(task.toString())
+		  .append("\n")
 		  .append("Now you have ")
 		  .append(Integer.toString(numberOfCurrentTasks))
 		  .append(" in the list!")
