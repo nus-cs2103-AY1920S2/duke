@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
@@ -30,7 +31,7 @@ public class Duke {
 
             // Since we can successfully load it, we save all in duke.main.TaskList
             storage.writeTasks(tasks);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             tasks = new TaskList();
             Ui.printLine();
             Ui.indent("It seems that there is no save file in: " + filePath);

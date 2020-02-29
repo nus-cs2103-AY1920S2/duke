@@ -58,9 +58,17 @@ public class Storage {
      * @return The List<List<String>> version of the file being read.
      * @throws FileNotFoundException If file is not found.
      */
-    public List<List<String>> loadTasksFromSaveFile() throws FileNotFoundException {
+    public List<List<String>> loadTasksFromSaveFile() throws IOException {
         List<List<String>> tasks = new ArrayList<>();
         File f = new File(storagePath);
+        if (!f.exists()) {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+
+            // early termination because we know that the file never existed
+            return tasks;
+        }
+
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
             String line = sc.nextLine();
