@@ -35,14 +35,11 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dialog.setStyle("-fx-background-color:skyblue");
         dialog.setText(text);
-        dialog.setTextFill(Color.CRIMSON);
         displayPicture.setImage(img);
         Circle circle = new Circle(35, 40, 35);
         displayPicture.setImage(img);
         displayPicture.setClip(circle);
-        displayPicture.setStyle("-fx-border-color: #ff4567");
     }
 
     /**

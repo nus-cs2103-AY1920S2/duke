@@ -83,7 +83,7 @@ public class Storage {
                     destination.add(new Task(tempArray[1],tempArray[2]));
                 } else if (action.equals("Deadlines")) {
                     destination.add(new Deadlines(tempArray[2], tempArray[3],tempArray[1]));
-                } else if(action.equals("Event")){
+                } else if (action.equals("Event")) {
                     destination.add(new Events(tempArray[2], tempArray[3],tempArray[1]));
                 }
                 line = br.readLine();

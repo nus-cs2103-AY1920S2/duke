@@ -16,6 +16,10 @@ public class Main extends Application {
 
     private Duke duke = new Duke("Data/Duke.txt");
 
+    /**
+     * To start the GUI for Duke.
+     */
+
     @Override
     public void start(Stage stage) {
         try {

@@ -57,8 +57,7 @@ public class MainWindow extends AnchorPane {
         Parser parser = new Parser(input.split(" "));
         String command = parser.getCommand();
         String response = this.getResponse(this.duke.run(input));
-
-       this.dialogContainer.setStyle("-fx-border-color:GREEN;-fx-background-color:#ffb508");
+        this.dialogContainer.setStyle("-fx-background-color:#ffb508");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

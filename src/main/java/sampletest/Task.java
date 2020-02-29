@@ -1,5 +1,6 @@
 package sampletest;
 
+
 /**
  * CS2103 Individual Project.
  * Task correspond to the actions depending on the command given by the user.
@@ -38,7 +39,7 @@ public class Task implements Comparable<Task> {
      */
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗");
+        return (isDone ? "Done:)" : "Not Done:(");
     }
 
     /**

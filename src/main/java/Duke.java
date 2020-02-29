@@ -48,8 +48,10 @@ public class Duke  {
     }
 
     /**
-     * To run the conversation with the user.
+     * To run the conversation with the user based on the different commands of the user.
+     * Exception will be thrown when the user give an invalid input.
      */
+
     public String run(String input) {
         String[] userInput = input.split(" ", 2);
         Parser parser = new Parser(userInput);
@@ -62,48 +64,55 @@ public class Duke  {
                 int taskNo = Integer.parseInt(parser.getDescription());
                 this.tasks.getTask(taskNo - 1).markAsDone();
                 Integer numbOfTask = this.tasks.taskStorage.size();
+                this.updateData(this.tasks.taskStorage);
                 return ("Nice! I've marked this task as done:\n "
                         + this.tasks.getTask(taskNo - 1).toString()
                         + "\nNow you have " + numbOfTask.toString() + " tasks in the list.");
             case "delete":
                 taskNo = Integer.parseInt(userInput[1]) - 1;
-                Task removedTask = this.tasks.getTask(taskNo);
+                final Task removedTask = this.tasks.getTask(taskNo);
                 this.tasks.removeTask(taskNo);
                 numbOfTask = this.tasks.taskStorage.size();
-                return ("Noted. I've removed this task:\n"
-                        + removedTask.toString()
+                this.updateData(this.tasks.taskStorage);
+                return ("Noted. I've removed this task:\n" + removedTask.toString()
                         + "\nNow you have " + numbOfTask.toString() + " tasks in the list.");
-                //break;
             case "list":
                 numbOfTask = this.tasks.taskStorage.size();
                 return this.printText() + ("\nNow you have " + numbOfTask.toString() + " tasks in the list.");
             case "todo":
                 String description = parser.getDescription();
+                ExceptionGenerator.checkDescription(description);
                 Task task = new Task(description);
                 this.tasks.add(task);
                 numbOfTask = this.tasks.taskStorage.size();
+                this.updateData(this.tasks.taskStorage);
                 return ("Got it. I've added this task:\n" + task.toString()
                         + "\nNow you have " + numbOfTask + " tasks in the list.");
                 //break;
             case "deadline":
                 String[] tokens = parser.getDescription().split(" /by ");
                 ExceptionGenerator.checkDeadlinesInput(tokens);
+                ExceptionGenerator.checkDescription(tokens[0]);
                 Deadlines deadlines = new Deadlines(tokens[0], tokens[1]);
                 this.tasks.add(deadlines);
+                this.updateData(this.tasks.taskStorage);
                 numbOfTask = this.tasks.taskStorage.size();
                 return ("Got it. I've added this task:\n" + (deadlines.getDate()).toString()
                         + "\nNow you have " + numbOfTask.toString() + " tasks in the list.");
             case "event":
                 tokens = parser.getDescription().split(" /at ");
                 ExceptionGenerator.checkEventInput(tokens);
+                ExceptionGenerator.checkDescription(tokens[0]);
                 Events event = new Events(tokens[0], tokens[1]);
                 this.tasks.add(event);
+                this.updateData(this.tasks.taskStorage);
                 numbOfTask = this.tasks.taskStorage.size();
                 return ("Got it. I've added this task:\n" + event.toString()
                         + "\nNow you have " + numbOfTask.toString() + " tasks in the list.");
             case "sort":
                 Collections.sort(this.tasks.taskStorage);
                 numbOfTask = this.tasks.taskStorage.size();
+                this.updateData(this.tasks.taskStorage);
                 return this.printText() + ("\nNow you have " + numbOfTask.toString() + " tasks in the list.");
 
             case "find":

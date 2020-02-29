@@ -47,7 +47,7 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Give a particular instance deadline priority over other tasks
+     * Give a particular instance deadline priority over other tasks.
      * @return boolean variable
      */
 

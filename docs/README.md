@@ -1,4 +1,5 @@
 # User Guide
+
 ![](Ui.png)
 
 ## Features 
@@ -78,7 +79,8 @@ Expected outcome:
 
 `todo Homework`
 
-
+### sort
+Duke would sort the task and print out all the tasks, deadlines and events.
 
 
 
