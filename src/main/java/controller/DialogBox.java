@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.geometry.Insets;
 
 /**
  * An example of a custom control using FXML. This control represents a dialog box consisting of an
@@ -21,6 +22,7 @@ import javafx.scene.text.TextAlignment;
 public class DialogBox extends HBox {
     @FXML public Text dialog;
     @FXML private ImageView displayPicture;
+    @FXML public HBox dialogContainer;
 
     private DialogBox(String text, Image img, Boolean isUser) {
         try {
@@ -35,6 +37,8 @@ public class DialogBox extends HBox {
         dialog.setWrappingWidth(200);
         dialog.setTextAlignment(isUser ? TextAlignment.RIGHT : TextAlignment.LEFT);
         displayPicture.setImage(img);
+        dialogContainer.setMargin(dialog, new Insets(0, 10, 0, 10));
+
     }
 
     /** Flips the dialog box such that the ImageView is on the left and text on the right. */
