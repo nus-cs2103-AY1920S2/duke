@@ -8,6 +8,7 @@ import duke.core.Parser;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidTimeFormatException;
 import duke.exception.KeywordNotFoundException;
+import duke.exception.TaskFormatException;
 import duke.exception.TaskIndexException;
 
 /**
@@ -167,7 +168,7 @@ public class TaskList {
 
                 return addTask(event);
             } else {
-                throw new InvalidTimeFormatException(Message.EVENT_TIME_ERROR);
+                throw new InvalidTimeFormatException(Message.TIME_ERROR);
             }
         }
     }
@@ -196,7 +197,7 @@ public class TaskList {
 
                 return addTask(deadline);
             } else {
-                throw new InvalidTimeFormatException(Message.DEADLINE_TIME_ERROR);
+                throw new InvalidTimeFormatException(Message.TIME_ERROR);
             }
         }
     }

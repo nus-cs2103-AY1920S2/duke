@@ -26,9 +26,9 @@ public class Message {
 
     public static final String TIME_ERROR = "Your date time format is incorrect.\nTry: yyyy-mm-dd HHmm";
 
-    public static final String EVENT_TIME_ERROR = "Your date time format is incorrect.\nTry: /at yyyy-mm-dd HHmm";
+    public static final String EVENT_FORMAT_ERROR = "Your event format is incorrect.\nTry: /at <date and time>";
     
-    public static final String DEADLINE_TIME_ERROR = "Your date time format is incorrect.\nTry: /by yyyy-mm-dd HHmm";
+    public static final String DEADLINE_FORMAT_ERROR = "Your event format is incorrect.\nTry: /by <date and time>";
 
     public static final String KEYWORD_ERROR = "Aww, Cute couldn't fish up any results from that keyword.";
 }

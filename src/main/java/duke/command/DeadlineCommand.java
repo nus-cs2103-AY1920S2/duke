@@ -4,6 +4,7 @@ import duke.core.Storage;
 import duke.core.Ui;
 import duke.task.TaskList;
 import duke.exception.EmptyDescriptionException;
+import duke.exception.TaskFormatException;
 import duke.exception.InvalidTimeFormatException;
 
 public class DeadlineCommand extends Command {
@@ -11,7 +12,7 @@ public class DeadlineCommand extends Command {
         super(input, isExit);
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException, InvalidTimeFormatException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException, TaskFormatException, InvalidTimeFormatException {
         return tasks.manageDeadline(storage, input);
     }
 }

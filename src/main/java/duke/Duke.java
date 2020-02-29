@@ -68,7 +68,8 @@ public class Duke {
             } catch (DukeException e) {
                 result = e.getMessage();
             } catch (Exception e) {
-                result = "Sorry, invalid syntax or command. Please try again!";
+                result = "Sorry, a mysterious unknown error occured:\n"
+                + e.getClass().getCanonicalName() + "\nPlease try again!";
             } 
 
         return result;

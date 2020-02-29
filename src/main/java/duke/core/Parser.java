@@ -14,6 +14,7 @@ import duke.command.DeadlineCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTimeFormatException;
@@ -117,10 +118,14 @@ public class Parser {
         return result;
     }
 
-    private static String parseDate(String date) {
-        LocalDate localDate = LocalDate.parse(date);
-        String result = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return result;
+    private static String parseDate(String date) throws InvalidTimeFormatException {
+        try {
+            LocalDate localDate = LocalDate.parse(date);
+            String result = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return result;
+        } catch (DateTimeParseException e) {
+            throw new InvalidTimeFormatException(Message.TIME_ERROR);
+        }
     }
 
     private static String parseTime(String time) {
