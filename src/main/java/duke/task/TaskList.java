@@ -3,6 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 
 import duke.core.Storage;
+import duke.core.Message;
 import duke.core.Parser;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidTimeFormatException;
@@ -36,7 +37,7 @@ public class TaskList {
     public String doTask(int idx) {
         Task task = this.tasks.get(idx);
         task.setIsDone(true);
-        return "Mmm, Cute thinks your hardworkingness smells yummy!\n" + task.toString();
+        return Message.DO_TASK + task.toString();
     }
 
     /**
@@ -45,8 +46,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.tasks.add(task);
-        return "Wow, you add tasks faster than I eat fishes! Hmm...\n"
-            + "Now you have " + this.tasks.size() + " task(s) in the list.";
+        return Message.ADD_TASK + "Now you have " + this.tasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -57,11 +57,10 @@ public class TaskList {
         try {
             Task task = this.tasks.get(idx);
             this.tasks.remove(idx);
-            return ("Noted. I've eaten - uhh, I mean, removed this task:\n"
-                + task.toString()
-                + "\nNow you have " + this.tasks.size() + " tasks in the list.");
+            return Message.DELETE_TASK + task.toString()
+                + "\nNow you have " + this.tasks.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskIndexException("Task index is invalid. Try again!");
+            throw new TaskIndexException(Message.INDEX_ERROR);
         }
     }
 
@@ -97,10 +96,9 @@ public class TaskList {
             int newDescriptionIndex = input.indexOf("" + (idx + 1));
             String newDescription = input.substring(newDescriptionIndex + 2);
             task.setDescription(newDescription);
-            return "Noted. I've updated this task:\n"
-                + task.toString();
+            return Message.UPDATE_DESCRIPTION + task.toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskIndexException("Task index is invalid. Try again!");
+            throw new TaskIndexException(Message.INDEX_ERROR);
         }
     }
 
@@ -110,10 +108,9 @@ public class TaskList {
             int newTimeIndex = input.indexOf("" + (idx + 1));
             String newTime = Parser.reformatDateAndTime(input.substring(newTimeIndex + 2));
             task.setTime(newTime);
-            return "Ooh, you updated the time, but is it time for me to eat yet?\n"
-                + newTime;
+            return Message.UPDATE_TIME + newTime;
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskIndexException("Task index is invalid. Try again!");
+            throw new TaskIndexException(Message.INDEX_ERROR);
         }
     }
 
@@ -125,7 +122,7 @@ public class TaskList {
      */
     public String manageTodo(Storage storage, String input) throws EmptyDescriptionException {
         if (input.split(" ").length == 1) {
-            throw new EmptyDescriptionException("Oops! The description of a todo cannot be empty.");
+            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
         } else {
             String description = input.substring(input.indexOf(" ") + 1);
             Todo todo = new Todo(description, false);
@@ -145,7 +142,7 @@ public class TaskList {
      */
     public String manageEvent(Storage storage, String input) throws EmptyDescriptionException, InvalidTimeFormatException {
         if (input.split(" ").length == 1) {
-            throw new EmptyDescriptionException("Oops! The description of an event cannot be empty.");
+            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
         } else {
             String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
 
@@ -160,7 +157,7 @@ public class TaskList {
 
                 return addTask(event);
             } else {
-                throw new InvalidTimeFormatException("Your time format is incorrect.\nTry: /at yyyy-mm-dd HHmm");
+                throw new InvalidTimeFormatException(Message.EVENT_TIME_ERROR);
             }
         }
     }
@@ -173,7 +170,7 @@ public class TaskList {
      */
     public String manageDeadline(Storage storage, String input) throws EmptyDescriptionException, InvalidTimeFormatException {
         if (input.split(" ").length == 1) {
-            throw new EmptyDescriptionException("Oops! The description of a deadline cannot be empty.");
+            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
         } else {
             String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
             
@@ -188,7 +185,7 @@ public class TaskList {
 
                 return addTask(deadline);
             } else {
-                throw new InvalidTimeFormatException("Your time format is incorrect.\nTry: /by yyyy-mm-dd HHmm");
+                throw new InvalidTimeFormatException(Message.DEADLINE_TIME_ERROR);
             }
         }
     }

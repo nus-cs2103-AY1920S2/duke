@@ -83,7 +83,7 @@ public class Parser {
             break;
 
         default:
-            throw new InvalidCommandException("Sorry, invalid command. Try again with the following:\ntodo, deadline, event");
+            throw new InvalidCommandException(Message.COMMAND_ERROR);
         }
 
         return result;
