@@ -84,7 +84,6 @@ public class TaskList {
 	 */
 	public void markAsDone(List<Integer> needy) {
 		for (Integer index: needy) {
-			assert(0 <= index);
 			this.containers.get(index).markAsDone();
 		}
 	}

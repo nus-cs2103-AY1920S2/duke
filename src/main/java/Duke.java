@@ -75,12 +75,12 @@ public class Duke extends Application {
 	            DialogBox.getUserDialog(userText, new ImageView(user)),
 	            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
 	    );
-
+	    userInput.clear();
 	    if (userCommand.equals("bye")) {
 	    	Platform.exit();
 	    	System.exit(0);
 	    }
-	    userInput.clear();
+	    
 	}
 
 	private void printGreeting() {
@@ -140,6 +140,7 @@ public class Duke extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
+
         userInput = new TextField();
         sendButton = new Button("Send");
      
@@ -159,14 +160,12 @@ public class Duke extends Application {
         
         mainLayout.setPrefSize(400.0, 600.0);
         
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setPrefSize(385.0, 535.0);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         
         scrollPane.setVvalue(1.0);
-        //scrollPane.setFitToWidth(true);
-        //scrollPane.setFitToHeight(true);
-        scrollPane.setPannable(true);
+        scrollPane.setFitToWidth(true);
         
         // You will need to import `javafx.scene.layout.Region` for this. 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
@@ -183,6 +182,8 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
         //Step 3. Add functionality to handle user input.
 
         printGreeting();
@@ -197,11 +198,12 @@ public class Duke extends Application {
 
 	    stage.setOnCloseRequest(e -> {
 	    	storage.saveData(taskList);
+	    	stage.close();
        	    Platform.exit();
             System.exit(0);
         });
 
-	    dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+	    
     }
 
     /**
