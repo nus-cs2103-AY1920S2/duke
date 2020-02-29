@@ -32,7 +32,7 @@ todo <description>
 ```
 Okie! I've added this task:
     <task-info>
-You have <number-of-tasks> tasks in the list!"
+You have <number-of-tasks> tasks in the list!
 ```
 *Duplicated Task Output*
 ```
@@ -50,7 +50,7 @@ deadline <description> /by <date>
 ```
 Okie! I've added this task:
     <task-info>
-You have <number-of-tasks> tasks in the list!"
+You have <number-of-tasks> tasks in the list!
 ```
 *Duplicated Task Output*
 ```
@@ -68,7 +68,7 @@ event <description> /at <date>
 ```
 Okie! I've added this task:
     <description>
-You have <number-of-tasks> tasks in the list!"
+You have <number-of-tasks> tasks in the list!
 ```
 *Duplicated Task Output*
 ```
@@ -161,5 +161,5 @@ bye
 ```
 *Expected Output*
 ```
-Bye Chidi! "Enjoy your stay in The Bad Place! (hehe)
+Bye Chidi! Enjoy your stay in The Bad Place! (hehe)
 ```
