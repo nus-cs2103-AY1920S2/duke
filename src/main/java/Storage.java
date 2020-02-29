@@ -31,7 +31,6 @@ public class Storage {
 
             for (Task task : taskList.tasks) {
                 String data = taskParser(task);
-                System.out.println(data);
                 writer.write(data + "\n");
             }
 
