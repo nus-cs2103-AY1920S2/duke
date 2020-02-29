@@ -13,6 +13,10 @@ public class Ui {
 
     }
 
+    /**
+     * Greets the user when the GUI first starts and displays the available commands.
+     * @return greetings and available commands format.
+     */
     public String greet() {
         String greetings = "Hi there, I'm Dodo!\n"
                 + "How may I help you today?\n"

@@ -75,12 +75,14 @@ All tasks must be input in the correct format to be added successfully. Don't wo
 ```
 Invalid input format!
 Format:
-- deadline [description] /by [due date in yyyy-mm-dd]
-- event [description] /at [date in yyyy-mm-dd]
-- todo [description]
-- done [index]
-- delete [index]
-- find [keyword]
+- To list all tasks: list
+- To add new deadline: deadline [description] /by [due date in yyyy-mm-dd]
+- To add new event: event [description] /at [date in yyyy-mm-dd]
+- To add new todo: todo [description]
+- To mark task as done: done [index]
+- To delete a task: delete [index]
+- To find a task: find [keyword]
+- To exit: bye
 ```
 
 #### 4.1.1. `todo [description]`
