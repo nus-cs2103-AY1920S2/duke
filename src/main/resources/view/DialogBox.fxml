@@ -11,6 +11,6 @@
         <ImageView fx:id="displayPicture" fitWidth="80.0" pickOnBounds="true" preserveRatio="true"/>
     </children>
     <padding>
-        <Insets bottom="15.0" left="10.0" right="5.0" top="15.0" />
+        <Insets bottom="15.0" left="12.0" right="5.0" top="15.0" />
     </padding>
 </fx:root>

@@ -11,8 +11,11 @@
 - Search for tasks easily.
 
 ## Installation
-- Download .jar file from [release page](http:github.com/teriaiw/duke/releases)
-- Store downloaded file in existing or newly created directory
+- Download .jar file from [release page](http:github.com/teriaiw/duke/releases).
+- Store downloaded file in any existing or newly created directory.
+- Double-click file to begin using.
+
+****Java 11** is needed to use application*
 
 ## Usage
 

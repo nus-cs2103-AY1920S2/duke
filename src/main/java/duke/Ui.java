@@ -40,7 +40,7 @@ public class Ui {
         String response = "You have no tasks currently! Hooray!\n";
 
         if (taskList.tasks.size() != 0) {
-            response = "Here are the tasks in your list:\n";
+            response = "Here are the task(s) in your list:\n";
 
             for (int i = 1; i < taskList.tasks.size() + 1; i++) {
                 Task current = taskList.tasks.get(i - 1);
@@ -71,7 +71,7 @@ public class Ui {
         if (taskList.isEmpty()) {
             response = "Sorry, there are no matching tasks :(\n";
         } else {
-            response = "Here are the matching tasks in your list:\n";
+            response = "Here are the matching task(s) in your list:\n";
 
             for (int i = 1; i < taskList.size() + 1; i++) {
                 Task current = taskList.get(i - 1);
@@ -98,7 +98,7 @@ public class Ui {
     public String showTaskAdded(Task task, ArrayList<Task> tasks) {
         return "Got it. I've added this task:\n"
                 + task + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.\n";
+                + "Now you have " + tasks.size() + " task(s) in the list.\n";
     }
 
     /**
@@ -110,7 +110,7 @@ public class Ui {
     public String showTaskDeleted(Task task, ArrayList<Task> tasks) {
         return "I've removed this task:\n "
                 + task + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.\n";
+                + "Now you have " + tasks.size() + " task(s) in the list.\n";
     }
 
     /**

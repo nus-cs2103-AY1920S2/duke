@@ -8,8 +8,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  * Controller for duke.MainWindow. Provides the layout for the other controls.
@@ -38,6 +39,13 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String greeting = "Aloha, I'm Stitch!\nWhat can I do for you? :)";
+        Image image = new Image("/images/background.png");
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT,
+                                                                    BackgroundRepeat.REPEAT,
+                                                                    BackgroundPosition.DEFAULT,
+                                                                    BackgroundSize.DEFAULT);
+        Background background = new Background(backgroundImage);
+        dialogContainer.setBackground(background);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
     }
 
