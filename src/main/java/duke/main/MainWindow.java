@@ -31,6 +31,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        greet();
     }
 
     public void setDuke(Duke d) {
@@ -39,6 +40,15 @@ public class MainWindow extends AnchorPane {
 
     public void setStage(Stage s) {
         stage = s;
+    }
+
+    private void greet() {
+        String greetings = "Greetings! I am honoured to have been graced by your presence.\n"
+                + "Welcome to Duke!";
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greetings, dukeImage)
+        );
     }
 
     private void handleBye() {
