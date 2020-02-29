@@ -22,15 +22,16 @@ public class Storage {
     protected Path rootPath;
     protected Path dataPath;
 
+    /**
+     * constructs a Storage object.
+     * @throws IOException file not found
+     * @throws DukeException prints specific error message
+     */
     public Storage() throws IOException, DukeException {
-        /*
-        this.rootPath = Paths.get(home);
-        this.dataPath = Paths.get(rootPath.toString(), "data", "duke.txt");
-         */
         String home = System.getProperty("user.dir");
         this.dataPath = Paths.get(home, "duke.txt");
         if (!Files.exists(dataPath)) {
-            File dataFile = new File(dataPath.toString());          // create new file
+            File dataFile = new File(dataPath.toString());
             if (!dataFile.createNewFile()) {
                 throw new DukeException("File could not be created :|");
             }

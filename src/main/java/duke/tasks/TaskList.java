@@ -185,15 +185,19 @@ public class TaskList {
         return outputFind;
     }
 
+    /**
+     * displays a help page to user.
+     * @return String comprising the help page to be displayed to user
+     */
     public String help() {
-        String outputHelp = Ui.setBorder("These are my available commands:\n\n" +
-                "list\nDisplay the current list of tasks.\nFormat: list\n\n" +
-                "delete\nDelete a chosen task based on a given index.\nFormat: delete [INDEX NUMBER]\n\n" +
-                "done\nMark a chosen task as complete based on a given index.\nFormat: done [INDEX NUMBER]\n\n" +
-                "find\nFind task(s) that fully match a given description.\nFormat: find [DESCRIPTION]\n\n" +
-                "todo\nCreate a TODO task.\nFormat: todo [DESCRIPTION]\n\n" +
-                "deadline\nCreate a DEADLINE task.\nFormat: deadline [DESCRIPTION] /[YYYY-MM-DD]\n\n" +
-                "event\nCreate an EVENT task.\nFormat: event [DESCRIPTION] /[YYYY-MM-DD]");
+        String outputHelp = Ui.setBorder("These are my available commands:\n\n"
+                + "list\nDisplay the current list of tasks.\nFormat: list\n\n"
+                + "delete\nDelete a chosen task based on a given index.\nFormat: delete [INDEX NUMBER]\n\n"
+                + "done\nMark a chosen task as complete based on a given index.\nFormat: done [INDEX NUMBER]\n\n"
+                + "find\nFind task(s) that fully match a given description.\nFormat: find [DESCRIPTION]\n\n"
+                + "todo\nCreate a TODO task.\nFormat: todo [DESCRIPTION]\n\n"
+                + "deadline\nCreate a DEADLINE task.\nFormat: deadline [DESCRIPTION] /[YYYY-MM-DD]\n\n"
+                + "event\nCreate an EVENT task.\nFormat: event [DESCRIPTION] /[YYYY-MM-DD]");
         return outputHelp;
     }
 

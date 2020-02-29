@@ -54,10 +54,10 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * creates dialogbox for duke
-     * @param text
-     * @param img
-     * @return
+     * creates dialogbox for duke.
+     * @param text String to be displayed by Duke
+     * @param img image to be displayed by Duke
+     * @return Dialogbox object to show user
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
