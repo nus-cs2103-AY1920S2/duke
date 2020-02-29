@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import duke.command.Command;
 import duke.task.TaskList;
-import duke.exception.InvalidCommandException;
+import duke.exception.DukeException;
 
 /**
  * Main class for the Duke chatbot application.
@@ -44,8 +44,9 @@ public class Duke {
             try {
                 Command command = parser.parseCommand(input);
                 result += command.execute(tasks, ui, storage);
-            } catch (InvalidCommandException e) {
-                result = "Sorry, invalid command. Try again with the following:\ntodo, deadline, event";
+            } catch (DukeException e) {
+                result = e.getMessage();
+                // result = "Sorry, invalid command. Try again with the following:\ntodo, deadline, event";
             } catch (ArrayIndexOutOfBoundsException e) {
                 result = "Sorry, invalid syntax or command. Please try again!";
             }

@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.task.TaskList;
 import duke.Ui;
+import duke.exception.EmptyDescriptionException;
 import duke.Storage;
 
 public class TodoCommand extends Command {
@@ -9,7 +10,7 @@ public class TodoCommand extends Command {
         super(input, isExit);
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException {
         return tasks.manageTodo(storage, input, storage.getFileName());
     }
 }

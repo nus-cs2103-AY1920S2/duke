@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import duke.Ui;
 import duke.Storage;
 import duke.Parser;
+import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidTimeFormatException;
 
@@ -123,21 +124,17 @@ public class TaskList {
      * @param input The given user input.
      * @param fileName The path to the task list file.
      */
-    public String manageTodo(Storage storage, String input, String fileName) {
-        try {
-            if (input.split(" ").length == 1) {
-                throw new EmptyDescriptionException("todo");
-            } else {
-                String description = input.substring(input.indexOf(" ") + 1);
-                Todo todo = new Todo(description, false);
+    public String manageTodo(Storage storage, String input, String fileName) throws EmptyDescriptionException {
+        if (input.split(" ").length == 1) {
+            throw new EmptyDescriptionException("Oops! The description of a todo cannot be empty.");
+        } else {
+            String description = input.substring(input.indexOf(" ") + 1);
+            Todo todo = new Todo(description, false);
 
-                String result = "T~0~" + description;
-                storage.writeToFile(fileName, result);
+            String result = "T~0~" + description;
+            storage.writeToFile(fileName, result);
 
-                return (addTask(todo));
-            }
-        } catch (EmptyDescriptionException e) {
-            return ("Oops! The description of a " + e.getMessage() + " cannot be empty.");
+            return (addTask(todo));
         }
     }
 
@@ -147,33 +144,25 @@ public class TaskList {
      * @param input The given user input.
      * @param fileName The path to the task list file.
      */
-    public String manageEvent(Storage storage, String input, String fileName) {
-        try {
-            if (input.split(" ").length == 1) {
-                throw new EmptyDescriptionException("event");
+    public String manageEvent(Storage storage, String input, String fileName) throws EmptyDescriptionException, InvalidTimeFormatException {
+        if (input.split(" ").length == 1) {
+            throw new EmptyDescriptionException("Oops! The description of an event cannot be empty.");
+        } else {
+            String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
+
+            String remaining = input.substring(input.indexOf("/") + 1);
+            String[] split = remaining.split(" ");
+
+            if (split[0].compareTo("at") == 0) {
+                String time = Parser.reformatDateAndTime(input.substring(input.indexOf("/") + 4));
+                Event event = new Event(description, false, time);
+                String result = "E~0~" + description + "~" + time;
+                storage.writeToFile(fileName, result);
+
+                return addTask(event);
             } else {
-                String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
-
-                String remaining = input.substring(input.indexOf("/") + 1);
-                String[] split = remaining.split(" ");
-
-                if (split[0].compareTo("at") == 0) {
-                    String time = Parser.reformatDateAndTime(input.substring(input.indexOf("/") + 4));
-                    Event event = new Event(description, false, time);
-                    String result = "E~0~" + description + "~" + time;
-                    storage.writeToFile(fileName, result);
-
-                    return addTask(event);
-                } else {
-                    throw new InvalidTimeFormatException();
-                }
+                throw new InvalidTimeFormatException("Your time format is incorrect.\nTry: /at yyyy-mm-dd HHmm");
             }
-        } catch (EmptyDescriptionException e) {
-            return "Oops! The description of an " + e.getMessage() + " cannot be empty.";
-        } catch (InvalidTimeFormatException e) {
-            return "Your time format is incorrect. Try: /at yyyy-mm-dd 2300";
-        } catch (Exception e) {
-            return "Sorry, invalid syntax or command. Please try again!";
         }
     }
 
@@ -183,33 +172,25 @@ public class TaskList {
      * @param input The given user input.
      * @param fileName The path to the task list file.
      */
-    public String manageDeadline(Storage storage, String input, String fileName) {
-        try {
-            if (input.split(" ").length == 1) {
-                throw new EmptyDescriptionException("deadline");
+    public String manageDeadline(Storage storage, String input, String fileName) throws EmptyDescriptionException, InvalidTimeFormatException {
+        if (input.split(" ").length == 1) {
+            throw new EmptyDescriptionException("Oops! The description of a deadline cannot be empty.");
+        } else {
+            String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
+            
+            String remaining = input.substring(input.indexOf("/") + 1);
+            String[] split = remaining.split(" ");
+
+            if (split[0].compareTo("by") == 0) {
+                String time = Parser.reformatDateAndTime(input.substring(input.indexOf("/") + 4));
+                Deadline deadline = new Deadline(description, false, time);
+                String result = "D~0~" + description + "~" + time;
+                storage.writeToFile(fileName, result);
+
+                return addTask(deadline);
             } else {
-                String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
-                
-                String remaining = input.substring(input.indexOf("/") + 1);
-                String[] split = remaining.split(" ");
-
-                if (split[0].compareTo("by") == 0) {
-                    String time = Parser.reformatDateAndTime(input.substring(input.indexOf("/") + 4));
-                    Deadline deadline = new Deadline(description, false, time);
-                    String result = "D~0~" + description + "~" + time;
-                    storage.writeToFile(fileName, result);
-
-                    return addTask(deadline);
-                } else {
-                    throw new InvalidTimeFormatException();
-                }
+                throw new InvalidTimeFormatException("Your time format is incorrect.\nTry: /by yyyy-mm-dd HHmm");
             }
-        } catch (EmptyDescriptionException e) {
-            return "Oops! The description of a " + e.getMessage() + " cannot be empty.";
-        } catch (InvalidTimeFormatException e) {
-            return "Your time format is incorrect. Try: /by [time]";
-        } catch (Exception e) {
-            return "Sorry, invalid syntax or command. Please try again!";
         }
     }
 
