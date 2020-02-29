@@ -101,8 +101,8 @@ We will get to that later.
 
 ## Using Controllers
 
-As part of the effort to separate the code handling Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
-We call these UI classes _controllers_. 
+As part of the effort to separate the code handling Duke's logic and dukeui, let's _refactor_ the dukeui-related code to its own class.
+We call these dukeui classes _controllers_. 
 
 Let's implement the `MainWindow` controller class that we specified in `MainWindow.fxml`.
 
@@ -160,7 +160,7 @@ public class MainWindow extends AnchorPane {
 ```
 
 The `@FXML` annotation marks a `private` or `protected` member and makes it accessible to FXML despite its modifier.
-Without the annotation, we will have to make everything `public` and expose our UI to unwanted changes.
+Without the annotation, we will have to make everything `public` and expose our dukeui to unwanted changes.
 
 The `FXMLLoader` will map the a control with a `fx:id` defined in FXML to a variable with the same name in its controller.
 Notice how in `MainWindow`, we can invoke `TextField#clear()` on `userInput` and access its content just as we did in the previous example.
@@ -168,7 +168,7 @@ Similarly, methods like private methods like `handleUserInput` can be used in FX
 
 ## Using FXML in our application
 
-Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
+Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the dukeui in `MainWindow`.
 
 **Main.java**
 ```java

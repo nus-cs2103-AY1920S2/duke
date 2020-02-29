@@ -66,7 +66,7 @@ Verify that the `ScrollPane` scrolls as intended.
 
 ## Iteration 2 – Adding Dialog Boxes
 
-In the mockup of the UI, notice that the dialog boxes are composed of two different controls (`ImageView` and `Label`) and reused multiple times. In situations like this, it is often beneficial to create our own custom control.
+In the mockup of the dukeui, notice that the dialog boxes are composed of two different controls (`ImageView` and `Label`) and reused multiple times. In situations like this, it is often beneficial to create our own custom control.
 
 Let’s create our custom control `DialogBox`:
 ```java
