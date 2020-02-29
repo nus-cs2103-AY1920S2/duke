@@ -10,4 +10,5 @@
 [E]|N|as|2020-12-10|04:00
 [D]|Y|do all my work|2020-12-10|02:00
 [T]|N|cs2103T project
-[T]|N|burger king foot lettuce
+[T]|Y|burger king foot lettuce
+[D]|N|2103T iP|2020-03-02|23:59
