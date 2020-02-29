@@ -5,10 +5,15 @@ import java.util.Scanner;
 public class Ui {
     Scanner sc = new Scanner(System.in);
     String entry = "";
-    final String linedivider = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    public static final String LINE_DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    public static final String welcomeText = setBorder("Hello! I'm Johnny\nWhat can I do for you?");
 
     public String input() {
         return sc.nextLine();
+    }
+
+    public static String setBorder(String s) {
+        return LINE_DIVIDER + s + "\n" + LINE_DIVIDER;
     }
 
     /**
@@ -21,10 +26,10 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(linedivider + "Hello! I'm Duke.Duke\nWhat can I do for you?\n" + linedivider);
+        System.out.println(setBorder("Hello! I'm Duke\nWhat can I do for you?"));
     }
 
-    public void bye() {
-        System.out.println(linedivider + "Bye. Hope to see you again soon!" + "\n" + linedivider);
+    public static void bye() {
+        System.out.println(setBorder("Bye! Hope to see you again soon."));
     }
 }

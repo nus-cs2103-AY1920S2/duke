@@ -1,8 +1,21 @@
 package duke;
 
+import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Duke {
     private Storage storage;
@@ -13,9 +26,13 @@ public class Duke {
      * Constructs a new Duke object.
      */
     public Duke() {
-        ui = new Ui();
-        storage = new Storage();
-        tasks = new TaskList(storage.load());
+        try {
+            ui = new Ui();
+            storage = new Storage();
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            System.out.println(e.toString());
+        }
     }
 
     /**
@@ -23,6 +40,7 @@ public class Duke {
      */
     public void run() {
         ui.welcome();
+
         while (true) {
             String entry = ui.input();
             if (entry.equals("bye")) {
@@ -32,6 +50,20 @@ public class Duke {
             tasks.run(entry);
         }
 
+    }
+
+    /**
+     * Processes user input and returns a string containing response of Duke program.
+     * @param input user input.
+     * @return string to be printed onto chat box GUI.
+     */
+    public String getResponse(String input) {
+        if (input.equals("bye")) {
+            System.exit(0);
+            return "See ya, chum.";
+        } else {
+            return tasks.run(input);
+        }
     }
 
     public static void main(String[] args) {

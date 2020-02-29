@@ -1,5 +1,6 @@
 package duke.util;
 
+import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -29,7 +30,7 @@ public class Storage {
      * Loads each line from .txt file
      * @return returns a
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks =  new ArrayList<>();
         try {
             List<String> dataLines = Files.readAllLines(dataPath);

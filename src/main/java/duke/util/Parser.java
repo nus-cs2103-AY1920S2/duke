@@ -1,5 +1,6 @@
 package duke.util;
 
+import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -12,7 +13,7 @@ public class Parser {
      * @param s String in standardised saved form
      * @return task object that can be subsequently manipulated in program
      */
-    public static Task parseDataFromFile(String s) {
+    public static Task parseDataFromFile(String s) throws DukeException {
         String taskType = s.substring(0, 1);
         String isTaskDone = s.substring(4, 5);
         String taskDesc = s.substring(8);
@@ -41,5 +42,7 @@ public class Parser {
         }
         return parsedTask;
     }
+
+
 
 }
