@@ -76,7 +76,10 @@ public class MainWindow {
 
             if (shutdown) {
                 PauseTransition pause = new PauseTransition(Duration.seconds(1));
-                pause.setOnFinished(event -> Platform.exit());
+                pause.setOnFinished(event -> {
+                    Platform.exit();
+                    System.exit(0);
+                });
                 pause.play();
             }
         }
