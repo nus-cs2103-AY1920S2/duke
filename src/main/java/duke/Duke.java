@@ -106,7 +106,7 @@ public class Duke extends Application {
                     Task newTask = Task.newTask(input);
                     this.taskList.addTask(newTask);
                     return String.format(
-                            "Got it. I've added this task:%n%s%nNow you have %d %s in the list,",
+                            "Got it. I've added this task:%n%s%nNow you have %d %s in your list.",
                             newTask.toString(),
                             this.taskList.size(),
                             this.taskList.size() > 1 ? "tasks" : "task");
