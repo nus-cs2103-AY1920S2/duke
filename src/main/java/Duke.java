@@ -30,6 +30,8 @@ public class Duke {
      */
     public String run(String input) {
         String result = "";
+
+        // For making PR
         assert !result.equals("") : "There's no result.";
 
         result = Parser.handleTasks(input, tasks, ui);
