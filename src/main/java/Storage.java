@@ -68,7 +68,10 @@ public class Storage {
                                 + lineSplit[0]);
                 }
 
-                if (lineSplit[1].equals("1")) {task.markAsDone();}
+                if (lineSplit[1].equals("1")) {
+                    task.markAsDone();
+                }
+
                 taskList.add(task);
             }
             scanner.close();
