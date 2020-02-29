@@ -34,6 +34,7 @@ public class TaskList {
         boolean isDoneCommand = s.length() > 5 && s.substring(0, 4).equals("done");
         boolean isDeleteCommand = s.length() > 6 && s.substring(0, 6).equals("delete");
         boolean isFindCommand = s.length() > 4 && s.substring(0, 4).equals("find");
+        boolean isHelpCommand = s.equals("help");
         boolean isError = s.length() < 5 || !s.contains(" ") || s.stripTrailing().length() < 9;
         try {
             if (isListCommand) {
@@ -44,6 +45,8 @@ public class TaskList {
                 return delete(Integer.parseInt(s.substring(7)));
             } else if (isFindCommand) {
                 return find(s);
+            } else if (isHelpCommand) {
+                return help();
             } else if (isError) {
                 return error(s);
             } else {
@@ -182,6 +185,18 @@ public class TaskList {
         return outputFind;
     }
 
+    public String help() {
+        String outputHelp = Ui.setBorder("These are my available commands:\n\n" +
+                "list\nDisplay the current list of tasks.\nFormat: list\n\n" +
+                "delete\nDelete a chosen task based on a given index.\nFormat: delete [INDEX NUMBER]\n\n" +
+                "done\nMark a chosen task as complete based on a given index.\nFormat: done [INDEX NUMBER]\n\n" +
+                "find\nFind task(s) that fully match a given description.\nFormat: find [DESCRIPTION]\n\n" +
+                "todo\nCreate a TODO task.\nFormat: todo [DESCRIPTION]\n\n" +
+                "deadline\nCreate a DEADLINE task.\nFormat: deadline [DESCRIPTION] /[YYYY-MM-DD]\n\n" +
+                "event\nCreate an EVENT task.\nFormat: event [DESCRIPTION] /[YYYY-MM-DD]");
+        return outputHelp;
+    }
+
     /**
      * Prints error messages for common errors based on invalid user input.
      * @param s String that is input by user
@@ -202,8 +217,7 @@ public class TaskList {
                 System.out.println(outputError);
             }
         } else {
-            outputError = Ui.setBorder("BRUH I only understand these commands:"
-                    + "\nlist\ndelete\ndone\nfind\ntodo\ndeadline\nevent");
+            outputError = Ui.setBorder("Please enter [help] command if you require assistance");
             System.out.println(outputError);
         }
         return outputError;
