@@ -29,7 +29,7 @@ public final class CommandManager {
 
         switch (command) {
         case "bye":
-            return new ByeCommand();
+            return new ByeCommand(args);
         case "todo":
             return new TodoCommand(args);
         case "event":
@@ -37,7 +37,7 @@ public final class CommandManager {
         case "deadline":
             return new DeadlineCommand(args);
         case "list":
-            return new ListCommand();
+            return new ListCommand(args);
         case "find":
             return new FindCommand(args);
         case "done":

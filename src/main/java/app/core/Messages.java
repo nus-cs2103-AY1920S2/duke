@@ -13,6 +13,9 @@ public class Messages {
     public static final String UNSUPPORTED_COMMAND_MESSAGE = "Woopsies! I don't understand '%s'";
     
     // Commands
+    public static final String BYE_WRONG_FORMAT_MESSAGE = "Usage: bye";
+
+    public static final String LIST_WRONG_FORMAT_MESSAGE = "Usage: list";
     public static final String LIST_NO_TASK_MESSAGE = "You have no tasks";
     public static final String LIST_SUCCESS_MESSAGE = "Okay Chidi, listen properly...\n"
             + "These are your tasks:\n%s";
