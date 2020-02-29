@@ -60,6 +60,8 @@ public abstract class Task {
     }
     
     public abstract String toStorage();
+
     public abstract String toString();
+
     public abstract boolean equals(Object other);
 }
