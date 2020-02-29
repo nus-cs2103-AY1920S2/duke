@@ -1,50 +1,48 @@
 package duke.commands;
 
-import java.io.IOException;
+import java.time.LocalDateTime;
 
 import duke.ui.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.Deadline;
 import duke.storage.Storage;
-import duke.parsers.DateTimeParser;
+import duke.parsers.CommandParser;
 import duke.exceptions.DukeException;
 
 /**
  * Creates a Deadline Task and adds it to the TaskList.
  */
-class CreateDeadline extends TimedCommand {
+class CreateDeadline extends Command {
 
-    public CreateDeadline(DateTimeParser dtParser) {
-        super(dtParser);
+    public CreateDeadline(CommandParser commandParser) {
+        super(commandParser);
     }
 
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        // Perform parsing of arguments
-        String[] args = arg.split("/by");
-        if (args.length < 2) {
-            throw new DukeException("Usage: deadline [task name] /by [datetime]");
-        }
+        // Obtain command arguments from argument string
+        String[] args = split(arg, "/by");
+        String taskName = getTaskName(args);
+        LocalDateTime dateTime = getDateTime(args);
 
-        String taskName = args[0].strip();
-        String dateTime = args[1].strip();
-        if (taskName.length() == 0 || dateTime.length() == 0) {
-            throw new DukeException("Usage: deadline [task name] /by [datetime]");
-        }
-
-        // Create parsed Deadline
-        Task newTask = new Deadline(taskName, dtParser.parse(dateTime));
+        Task newTask = new Deadline(taskName, dateTime);
         tasks.add(newTask);
 
-        // Save new Deadline to disk
-        try {
-            storage.save(tasks.getAllTasks());
-        } catch (IOException e) {
-            throw new DukeException("Error when saving to disk!");
-        }
+        save(storage, tasks);
 
-        // Display reply
         ui.showReply(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", newTask,
                 tasks.size()));
+    }
+
+    private String getTaskName(String[] args) throws DukeException {
+        String taskName = args[0].strip();
+        if (args.length < 2 || taskName.length() == 0) {
+            throw new DukeException("Usage: deadline [task name] /by [due date]");
+        }
+        return taskName;
+    }
+
+    private LocalDateTime getDateTime(String[] args) throws DukeException {
+        return commandParser.parse(args[1].strip());
     }
 }

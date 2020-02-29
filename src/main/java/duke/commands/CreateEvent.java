@@ -1,50 +1,56 @@
 package duke.commands;
 
-import java.io.IOException;
+import java.time.LocalDateTime;
 
 import duke.ui.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.Event;
 import duke.storage.Storage;
-import duke.parsers.DateTimeParser;
+import duke.parsers.CommandParser;
 import duke.exceptions.DukeException;
 
 /**
  * Creates an Event Task and adds it to the TaskList.
  */
-class CreateEvent extends TimedCommand {
+class CreateEvent extends Command {
 
-    public CreateEvent(DateTimeParser dtParser) {
-        super(dtParser);
+    public CreateEvent(CommandParser commandParser) {
+        super(commandParser);
     }
 
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        // Perform parsing of arguments
-        String[] args = arg.split("/at");
-        if (args.length < 2) {
-            throw new DukeException("Usage: event [task name] /at [start datetime] to [end datetime]");
-        }
+        // Obtain command arguments from argument string
+        String[] args = split(arg, "/at");
+        String taskName = getTaskName(args);
+        LocalDateTime[] dateTimes = getDateTimes(args);
 
-        String taskName = args[0].strip();
-        String[] dateTimes = args[1].strip().split("to");
-        if (taskName.length() == 0 || dateTimes.length < 2) {
-            throw new DukeException("Usage: event [task name] /at [start datetime] to [end datetime]");
-        }
-
-        // Create parsed Event
-        Task newTask = new Event(taskName, dtParser.parse(dateTimes[0].strip()), dtParser.parse(dateTimes[1].strip()));
+        Task newTask = new Event(taskName, dateTimes[0], dateTimes[1]);
         tasks.add(newTask);
 
-        // Save new Event to disk
-        try {
-            storage.save(tasks.getAllTasks());
-        } catch (IOException e) {
-            throw new DukeException("Error when saving to disk!");
-        }
+        save(storage, tasks);
 
-        // Display reply
         ui.showReply(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", newTask,
                 tasks.size()));
+    }
+
+    private String getTaskName(String[] args) throws DukeException {
+        String taskName = args[0].strip();
+        if (args.length < 2 || taskName.length() == 0) {
+            throw new DukeException("Usage: event [task name] /at [start datetime] to [end datetime]");
+        }
+        return taskName;
+    }
+
+    private LocalDateTime[] getDateTimes(String[] args) throws DukeException {
+        String[] dateTimeStrings = split(args[1].strip(), "to");
+        if (dateTimeStrings.length < 2) {
+            throw new DukeException("Usage: event [task name] /at [start datetime] to [end datetime]");
+        }
+        LocalDateTime[] dateTimes = new LocalDateTime[2];
+        for (int i = 0; i < 2; i++) {
+            dateTimes[i] = commandParser.parse(dateTimeStrings[i].strip());
+        }
+        return dateTimes;
     }
 }

@@ -1,84 +1,80 @@
 package duke.commands;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 import duke.ui.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.tasks.TimedTask;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.storage.Storage;
-import duke.parsers.DateTimeParser;
+import duke.parsers.CommandParser;
 import duke.exceptions.DukeException;
 
 /**
  * Reschedules an existing Task.
  */
-class RescheduleTask extends TimedCommand {
-    private final int NOT_FOUND = -1;
+class RescheduleTask extends Command {
 
-    public RescheduleTask(DateTimeParser dtParser) {
-        super(dtParser);
+    public RescheduleTask(CommandParser commandParser) {
+        super(commandParser);
     }
 
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        // Split string into taskNo and datetimes
-        int taskNo;
-        String dateTimeInfo;
-        int spaceIndex = arg.indexOf(" ");
-        if (spaceIndex == NOT_FOUND) {
-            // No spaces found, so must be invalid usage
-            throw new DukeException("Usage for Deadline: reschedule [task number] [due date]\n"
-                    + "Usage for Event: reschedule [task number] [start time] to [end time]");
-        } else {
-            // Split string into taskNo and rest of string
-            try {
-                taskNo = Integer.parseInt(arg.substring(0, spaceIndex));
-            } catch (NumberFormatException e) {
-                throw new DukeException("Task number provided is invalid!");
-            }
-            dateTimeInfo = arg.substring(spaceIndex + 1);
-        }
+        // Extrack the task and datetime information
+        String[] args = split(arg, " ");
+        Task task = getTask(tasks, args);
+        String dateTimeInfo = getDateTimeInfo(args);
 
-        // Check if task number is in range
-        Task task;
+        reschedule(task, dateTimeInfo);
+
+        save(storage, tasks);
+
+        ui.showReply(String.format("I've rescheduled this task:\n  %s", task));
+    }
+
+    private Task getTask(TaskList tasks, String[] args) throws DukeException {
+        // Check if task number is valid
+        int taskNo;
         try {
-            task = tasks.get(taskNo);
+            taskNo = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Usage for Deadline: reschedule [task number] [due date]\n"
+            + "Usage for Event: reschedule [task number] [start time] to [end time]");
+        }
+        // Check if task number is in range
+        try {
+            return tasks.get(taskNo);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number provided is out of bounds!");
         }
+    }
 
-        // Check for valid task type
-        if (!(task instanceof TimedTask)) {
-            throw new DukeException("This task cannot be rescheduled!");
+    private String getDateTimeInfo(String[] args) throws DukeException {
+        if (args.length < 2 || args[1].isEmpty()) {
+            throw new DukeException("Usage for Deadline: reschedule [task number] [due date]\n"
+                    + "Usage for Event: reschedule [task number] [start time] to [end time]");
         }
+        return args[1];
+    }
 
-        // Perform rescheduling
+    private void reschedule(Task task, String dateTimeInfo) throws DukeException {
         if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
-            LocalDateTime newDateTime = dtParser.parse(dateTimeInfo);
+            LocalDateTime newDateTime = commandParser.parse(dateTimeInfo);
             deadline.reschedule(newDateTime);
         } else if (task instanceof Event) {
-            String[] dateTimes = dateTimeInfo.split("to");
+            String[] dateTimes = commandParser.splitByDelimiter(dateTimeInfo, "to");
             if (dateTimes.length < 2) {
                 throw new DukeException("Usage for Event: reschedule [task number] [start time] to [end time]");
             }
             Event event = (Event) task;
-            LocalDateTime newStart = dtParser.parse(dateTimes[0].trim());
-            LocalDateTime newEnd = dtParser.parse(dateTimes[1].trim());
+            LocalDateTime newStart = commandParser.parse(dateTimes[0].strip());
+            LocalDateTime newEnd = commandParser.parse(dateTimes[1].strip());
             event.reschedule(newStart, newEnd);
+        } else {
+            // If it is neither Deadline nor Event, it cannot be rescheduled
+            throw new DukeException("This task cannot be rescheduled!");
         }
-
-        // Save changes to disk
-        try {
-            storage.save(tasks.getAllTasks());
-        } catch (IOException e) {
-            throw new DukeException("Error when saving to disk!");
-        }
-
-        // Display reply
-        ui.showReply(String.format("I've rescheduled this task:\n  %s", task));
     }
 }

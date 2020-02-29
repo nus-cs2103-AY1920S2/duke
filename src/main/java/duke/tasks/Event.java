@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
  * Represents a Task that has a specific start time and end time.
  */
 public class Event extends TimedTask {
-    protected LocalDateTime start;
-    protected LocalDateTime end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
     /**
      * Initialises an Event with the given name, start time and end time.

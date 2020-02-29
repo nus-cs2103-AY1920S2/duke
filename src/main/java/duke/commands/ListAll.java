@@ -5,17 +5,23 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.storage.Storage;
 import duke.exceptions.DukeException;
+import duke.parsers.CommandParser;
 
 /**
  * Displays all Tasks in the TaskList.
  */
-class ListAll implements Command {
+class ListAll extends Command {
+
+    public ListAll(CommandParser commandParser) {
+        super(commandParser);
+    }
+
     public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.size() == 0) {
             throw new DukeException("There are currently no tasks.");
         }
 
-        // Concat String representations of tasks
+        // Generate the list of tasks for the user
         int counter = 1;
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
@@ -26,8 +32,7 @@ class ListAll implements Command {
             sb.append("\n");
             counter += 1;
         }
-        
-        // Display reply
+
         ui.showReply(sb.toString());
     }
 }

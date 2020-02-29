@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * Represents a Task that has a specific deadline to be met.
  */
 public class Deadline extends TimedTask {
-    protected LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     public Deadline(String name, LocalDateTime dateTime) {
         super(name);
