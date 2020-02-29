@@ -1,10 +1,31 @@
+import java.io.FileNotFoundException;
+
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    private Parser parser;
+    private Storage storage;
+    private TaskList taskList;
+    private static final String FILEPATH = "tasks.txt";
+
+    /**
+     * Constructor for Duke class.
+     */
+    public Duke() {
+        storage = new Storage(FILEPATH);
+
+        try {
+            taskList = storage.getTaskFromMemory();
+        } catch (FileNotFoundException e) {
+            taskList = new TaskList();
+        }
+
+        parser = new Parser(storage, taskList);
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return parser.parseAndExecute(input);
     }
 }
