@@ -1,0 +1,20 @@
+Hello! I'm Duke
+     What can I do for you?
+Got it. I've added this task:
+[T][✘]read book
+now you have 1 tasks in the list.
+Got it. I've added this task:
+[D][✘]return book (by: June 6th)
+now you have 2 tasks in the list.
+Got it. I've added this task:
+[E][✘]project meeting (at: Aug 6th 2-4pm)
+now you have 3 tasks in the list.
+1. [T][✘]read book
+2. [D][✘]return book (by: June 6th)
+3. [E][✘]project meeting (at: Aug 6th 2-4pm)
+Nice! Congratulations for completing this task:
+[D][✓]return book (by: June 6th)
+1. [T][✘]read book
+2. [D][✓]return book (by: June 6th)
+3. [E][✘]project meeting (at: Aug 6th 2-4pm)
+See you next time! xD

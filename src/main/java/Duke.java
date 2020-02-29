@@ -1,10 +1,80 @@
+import duke.command.*;
+import duke.exception.CommandNotFoundException;
+import duke.exception.DukeException;
+import duke.exception.InvalidDukeArgumentException;
+import duke.util.*;
+
+import java.io.FileNotFoundException;
+
+
+/**
+ * Represents a Duke chat bot, which supports basic todo list features such as adding and deleting tasks,
+ * marking a task as done or list out all the tasks.
+ */
 public class Duke {
+
+    private Storage storage;
+    private TaskList tasklist;
+    private Ui ui;
+
+    public Duke() {
+
+    }
+
+    /**
+     * Constructs a Duke chat bot instance.
+     * @param filePath the file path of the data file in which the existing tasks are stored.
+     */
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasklist = storage.loadTasks();
+        } catch (FileNotFoundException e) {
+            ui.showLoadingError();
+            tasklist = new TaskList();
+        }
+    }
+
+    /**
+     * Starts the chat bot, exits when encountering the "bye" command.
+     */
+    public void run() {
+        ui.showWelcome();
+        boolean shouldExit = false;
+        while (!shouldExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Parser parser = new Parser();
+                Command command = parser.parse(fullCommand, tasklist);
+                String response = command.execute(tasklist, ui, storage);
+                ui.showMessage(response);
+                shouldExit = command.isExitCommand();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        new Duke("./data/duke.txt").run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        assert !input.isBlank() : "The input should not be blank!";
+        Duke duke = new Duke("./data/duke.txt");
+        TaskList tasklist = duke.tasklist;
+        Storage storage = duke.storage;
+        Parser parser = new Parser();
+        try {
+            Command c = parser.parse(input, tasklist);
+            return ui.formatMessage(c.execute(tasklist, ui, storage));
+        } catch (InvalidDukeArgumentException | CommandNotFoundException e) {
+            return e.getMessage();
+        }
     }
 }
