@@ -27,7 +27,9 @@ Event tasks are tasks that have to be done on a particular date and time. In Duk
 
 #### Command
 Creating a new To-Do Task
-```todo <description>```
+```
+todo <description>
+```
 
 Creating a new Deadline Task
 ```deadline <description> /by <date>```
