@@ -2,8 +2,8 @@ package duke.task;
 
 import java.util.ArrayList;
 
-import duke.Storage;
-import duke.Parser;
+import duke.core.Storage;
+import duke.core.Parser;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidTimeFormatException;
 import duke.exception.TaskIndexException;

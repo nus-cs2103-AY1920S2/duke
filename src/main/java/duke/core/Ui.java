@@ -1,4 +1,4 @@
-package duke;
+package duke.core;
 
 /**
  * Represents a manager for user interaction related functions.

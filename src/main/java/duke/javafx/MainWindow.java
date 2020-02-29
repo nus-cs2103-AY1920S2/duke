@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import duke.Duke;
-import duke.Ui;
+import duke.core.Ui;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */

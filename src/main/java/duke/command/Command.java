@@ -1,9 +1,9 @@
 package duke.command;
 
+import duke.core.Ui;
+import duke.core.Storage;
 import duke.task.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
-import duke.Storage;
 
 public abstract class Command {
     String input;

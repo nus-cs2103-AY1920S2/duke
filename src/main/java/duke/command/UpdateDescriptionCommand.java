@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.Ui;
+import duke.core.Ui;
 import duke.exception.TaskIndexException;
-import duke.Storage;
+import duke.core.Storage;
 
 public class UpdateDescriptionCommand extends Command {
     public UpdateDescriptionCommand(String input, boolean isExit) {

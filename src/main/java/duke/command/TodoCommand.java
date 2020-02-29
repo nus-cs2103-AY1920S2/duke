@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.Ui;
+import duke.core.Ui;
 import duke.exception.EmptyDescriptionException;
-import duke.Storage;
+import duke.core.Storage;
 
 public class TodoCommand extends Command {
     public TodoCommand(String input, boolean isExit) {

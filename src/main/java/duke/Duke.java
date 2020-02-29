@@ -1,9 +1,12 @@
 package duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.Exception;
 
+import duke.core.Parser;
+import duke.core.Storage;
+import duke.core.Ui;
 import duke.command.Command;
 import duke.task.TaskList;
 import duke.exception.DukeException;
@@ -64,8 +67,7 @@ public class Duke {
                 result += command.execute(tasks, ui, storage);
             } catch (DukeException e) {
                 result = e.getMessage();
-                // result = "Sorry, invalid command. Try again with the following:\ntodo, deadline, event";
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (Exception e) {
                 result = "Sorry, invalid syntax or command. Please try again!";
             } 
 

@@ -1,4 +1,4 @@
-package duke;
+package duke.core;
 
 import duke.command.Command;
 import duke.command.ListCommand;
