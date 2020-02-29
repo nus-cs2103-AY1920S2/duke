@@ -30,31 +30,32 @@ public final class Duke {
     public void start() {
         ConsoleInterface console = new ConsoleInterface();
         console.render(Messages.WELCOME_MESSAGE);
+
+        String input = "";
+        String output = "";
+        boolean shutdown = false;
           
         while (!console.isClosed()) {
+            input = console.listen();
+            
             try {
-                String input = console.listen();
-                Pair output = this.executeInput(input);
-                String message = (String) output.getFirstValue();
-                Boolean shutdown = (boolean) output.getSecondValue();
+                Pair result = this.executeInput(input);
+                output = (String) result.getFirstValue();
+                shutdown = (boolean) result.getSecondValue();
+                assert output != null : "Output message should not be null";
 
-                assert message != null : "Output message should not be null";
-                assert shutdown != null : "Shutdown status should not be null";
-
-                if (!shutdown) {
-                    console.render(message);
-                } else {
-                    console.close();
-                }
+                console.render(output);
             } catch (BaseException e) {
                 console.renderError(e.getMessage());
             } catch (Exception e) {
                 console.renderError(Messages.UNEXPECTED_ERROR_MESSAGE);
                 console.renderError(e.getMessage());
+            } finally {
+                if (shutdown) {
+                    console.close();
+                }
             }
         }
-
-        console.render(Messages.GOODBYE_MESSAGE);
     }
 
     /**
