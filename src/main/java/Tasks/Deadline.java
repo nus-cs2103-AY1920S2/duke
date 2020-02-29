@@ -1,15 +1,16 @@
 package com.duke.task;
-import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import com.duke.dukeException.DukeParseException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.FormatStyle;
 import java.util.Locale;
+import java.util.List;
+import com.duke.dukeException.DukeParseException;
 
 public class Deadline extends Task {
 	private LocalDate date;
@@ -25,6 +26,7 @@ public class Deadline extends Task {
 			if (remainingTokens.size() > 1) {
 				throw new DukeParseException("Events requires only one string");
 			}
+			assert(remainingTokens.size() == 1);
 			this.date = LocalDate.parse(remainingTokens.get(0));
 		} catch (Exception e) {
 			throw new DukeParseException("Events time format error");

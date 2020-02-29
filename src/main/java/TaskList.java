@@ -48,6 +48,7 @@ public class TaskList {
 	 * @param position [position of the task in the list]
 	 */
 	public void deleteAction(int position) {
+		assert(position >= 0);
 		containers.remove(position);
 	}
 
@@ -83,7 +84,7 @@ public class TaskList {
 	 */
 	public void markAsDone(List<Integer> needy) {
 		for (Integer index: needy) {
-			assert(index >= 0);
+			assert(0 <= index);
 			this.containers.get(index).markAsDone();
 		}
 	}
