@@ -13,47 +13,41 @@ import storage.Storage;
 import task.Task;
 
 public class Duke extends Application {
-    private UserInterface UI;
     private TaskList taskList;
     private Boolean isClosed = false;
 
     // storage path is set to root_folder/storage/file.txt
     private static Storage storage = new Storage(Paths.get("storage", "file.txt"));
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
-
     public Duke() {
-        this.UI = new UserInterface();
         this.taskList = new TaskList(Duke.storage.getTasksFromStorage());
     }
 
     public static void main(String[] args) {
-        Duke bot = new Duke();
-        bot.start();
     }
 
     /**
-     * Keeps scanning for user input until bye command is input Also handles all DukeExceptions and
-     * outputs it
+     * duke's start function for JavaFX
      */
-    public void start() {
-        while (!UI.isExit()) {
-            String input = UI.getInput();
-            UI.showSep();
-            try {
-                dispatch(input);
-            } catch (DukeException err) {
-                UI.showErr(err.getMessage());
-            } finally {
-                UI.showSep();
-            }
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); 
+        Scene scene = new Scene(helloWorld); 
+
+        stage.setScene(scene); 
+        stage.show(); 
+    }
+
+    /**
+     * @param input user input
+     * @return String duke's response to user input
+     */
+    public String getResponse(String input) {
+        try {
+            String output = dispatch(input.trim());
+            Duke.storage.update(this.taskList.getAllTask());
+            return output;
+        } catch (DukeException err) {
+            return err.getMessage();
         }
     }
 
@@ -79,16 +73,10 @@ public class Duke extends Application {
                 if (Parser.isDoneOrDelete(input)) {
                     if (this.taskList.isEmpty()) {
                         throw new TaskListException();
-                        // throw new DukeException("Task list is empty!");
                     }
                     int taskIndex = Parser.getTaskIndex(input) - 1;
                     if (taskIndex >= this.taskList.size()) {
                         throw new TaskListException(this.taskList.size());
-                        // throw new DukeException(
-                        //         String.format(
-                        //                 "Please choose an index that is between 1 and %d
-                        // (inclusive)",
-                        //                 this.taskList.size()));
                     }
                     if (input.contains("done")) {
                         this.taskList.markDone(taskIndex);
@@ -104,7 +92,6 @@ public class Duke extends Application {
                 } else if (Parser.isFind(input)) {
                     if (this.taskList.isEmpty()) {
                         throw new TaskListException();
-                        // throw new DukeException("Task list is empty!");
                     }
                     String searchTerm = Parser.getSearchTerm(input);
                     String searchResults =
@@ -124,20 +111,6 @@ public class Duke extends Application {
                             this.taskList.size(),
                             this.taskList.size() > 1 ? "tasks" : "task");
                 }
-        }
-    }
-
-    /**
-     * @param input user input
-     * @return String duke's response to user input
-     */
-    public String getResponse(String input) {
-        try {
-            String output = dispatch(input);
-            Duke.storage.update(this.taskList.getAllTask());
-            return output;
-        } catch (DukeException err) {
-            return err.getMessage();
         }
     }
 
