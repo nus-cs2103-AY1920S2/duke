@@ -50,15 +50,15 @@ public class CommandParser {
         } else if (nextLine[0].equals("find")) {
             return new FindCommand(nextLine[1]);
         } else {
-            if (nextLine[0].equals("todo")) {
+            if (nextLine[0].equals("todo") || nextLine[0].equals("t")) {
                 return new AddCommand(new Todo(command.substring(5)));
-            } else if (nextLine[0].equals("event")) {
+            } else if (nextLine[0].equals("event") || nextLine[0].equals("e")) {
                 if (breakPoint != -1) {
                     return new AddCommand(new Event(command.substring(6, breakPoint - 1), command.substring(breakPoint + 4)));
                 } else {
                     ui.missingDetails();
                 }
-            } else if (nextLine[0].equals("deadline")) {
+            } else if (nextLine[0].equals("deadline") || nextLine[0].equals("d")) {
                 if (breakPoint != -1) {
                     return new AddCommand(new Deadline(command.substring(9, breakPoint - 1), command.substring(breakPoint + 4)));
                 } else {

@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Main-Class: duke.gui.Launcher
+Class-Path: javafx-graphics-11.jar javafx-base-11.jar javafx-controls-11
+ .jar javafx-fxml-11-win.jar javafx-graphics-11-win.jar javafx-base-11-w
+ in.jar javafx-controls-11-win.jar
+
