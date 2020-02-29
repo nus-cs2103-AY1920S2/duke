@@ -1,11 +1,8 @@
 package app.util;
 
 import org.junit.jupiter.api.Test;
-
 import app.exceptions.InvalidDateTimeFormatException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class DateTest {
     @Test
@@ -17,9 +14,9 @@ public class DateTest {
     @Test
     public void createDate_wrongDefaultFormat_exceptionThrown() {
         try {
-            Date output = Date.from("2019-01-01");
+            Date.from("2019-01-01");
         } catch (InvalidDateTimeFormatException e) {
-            assertEquals("Accepted Date Time Format: yyyy-MM-dd HHmm", e.getMessage());
+            assertEquals("Ah! I can only understand this format: yyyy-MM-dd HHmm", e.getMessage());
         }
     }
 
@@ -32,9 +29,9 @@ public class DateTest {
     @Test
     public void createDate_wrongAlternateFormat_exceptionThrown() {
         try {
-            Date output = Date.fromFormat("2019-01-1", "dd-MM-yyyy HHmm");
+            Date.fromFormat("2019-01-1", "dd-MM-yyyy HHmm");
         } catch (InvalidDateTimeFormatException e) {
-            assertEquals("Accepted Date Time Format: dd-MM-yyyy HHmm", e.getMessage());
+            assertEquals("Ah! I can only understand this format: dd-MM-yyyy HHmm", e.getMessage());
         }
     }
 
