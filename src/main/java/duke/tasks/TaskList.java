@@ -59,7 +59,6 @@ public class TaskList {
      */
     public String list() {
         String outputList = Ui.LINE_DIVIDER + "Here are the tasks in your list:\n";
-        System.out.println(outputList);
         int entryno = 1;
         for (Task ls : tasks) {
             outputList = outputList + entryno + ". " + ls + "\n";
@@ -81,6 +80,7 @@ public class TaskList {
         if (taskType.equals("todo")) {
             String theTask = s.substring(whitespaceidx + 1);
             Todo t = new Todo(theTask);
+
             tasks.add(t);
             outputAdd = Ui.LINE_DIVIDER + "Got it. I've added this task:\n " + t
                     + "\nNow you have " + tasks.size() + " tasks in the list.\n" + Ui.LINE_DIVIDER;
@@ -187,10 +187,10 @@ public class TaskList {
             }
         }
         if (matchingTasks.isEmpty()) {
-            outputFind = Ui.LINE_DIVIDER + "No matching tasks were found lol\n" + Ui.LINE_DIVIDER;
-            System.out.println(outputFind);
+            outputFind = Ui.LINE_DIVIDER + "No matching tasks were found lol\n";
+            System.out.println(outputFind + Ui.LINE_DIVIDER);
         } else {
-            outputFind = Ui.LINE_DIVIDER + "Here are the matching tasks in your list:";
+            outputFind = Ui.LINE_DIVIDER + "Here are the matching tasks in your list:\n";
             System.out.println(outputFind);
             int entryno = 1;
             for (Task t : matchingTasks) {
