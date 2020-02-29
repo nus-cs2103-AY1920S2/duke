@@ -1,6 +1,8 @@
-package duke;
+package duke.core;
 
 import org.junit.jupiter.api.Test;
+
+import duke.command.TodoCommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,7 +15,7 @@ public class ParserTest {
      */
     @Test
     public void testCommandParsing() {
-        assertEquals(true, new Parser().parseCommand("delete", "delete"));
+        assertEquals(new TodoCommand("todo task", false), new Parser().parseCommand("todo task"));
     }
 
     /**
