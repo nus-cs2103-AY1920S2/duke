@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import duke.command.Command;
@@ -13,7 +14,6 @@ import duke.exception.DukeException;
 public class Duke {
     private TaskList tasks;
     private Storage storage;
-    private String fileName;
     private Parser parser;
     private Ui ui;
 
@@ -21,13 +21,12 @@ public class Duke {
      * Constructs a fresh Duke instance with a supplied file storing the task list.
      * @param fileName Path to the file storing the task list.
      */
-    public Duke(String fileName) {
-        this.fileName = fileName;
-        storage = new Storage(fileName);
+    public Duke() {
+        storage = new Storage();
         tasks = new TaskList(storage.loadTasks());
         parser = new Parser();
         ui = new Ui();
-        File file = new File(this.fileName);
+        File file = new File(Storage.FILEPATH);
 
         try {
             file.createNewFile();
@@ -35,6 +34,25 @@ public class Duke {
             Ui.printLines("File creation failed.");
         }
     }
+
+    // public Duke(String fileName) {
+    //     this.fileName = fileName;
+    //     storage = new Storage();
+    //     try {
+    //         tasks = new TaskList(storage.loadTasks());
+    //     } catch (FileNotFoundException e) {
+    //         Ui.printLines("File not found. Try again!");
+    //     }
+    //     parser = new Parser();
+    //     ui = new Ui();
+    //     File file = new File(this.fileName);
+
+    //     try {
+    //         file.createNewFile();
+    //     } catch (IOException e) {
+    //         Ui.printLines("File creation failed.");
+    //     }
+    // }
 
     public String getResponse(String input) {
         assert input.length() > 0 : "Input cannot be empty";
@@ -49,7 +67,7 @@ public class Duke {
                 // result = "Sorry, invalid command. Try again with the following:\ntodo, deadline, event";
             } catch (ArrayIndexOutOfBoundsException e) {
                 result = "Sorry, invalid syntax or command. Please try again!";
-            }
+            } 
 
         return result;
     }

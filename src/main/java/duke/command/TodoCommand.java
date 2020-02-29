@@ -11,6 +11,6 @@ public class TodoCommand extends Command {
     }
 
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException {
-        return tasks.manageTodo(storage, input, storage.getFileName());
+        return tasks.manageTodo(storage, input);
     }
 }

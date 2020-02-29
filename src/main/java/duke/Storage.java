@@ -16,18 +16,24 @@ import duke.task.Deadline;
  * Represents a manager to handle all storage related functionality.
  */
 public class Storage {
-    private String fileName;
+    public static final String DIRECTORY = "./data/";
+    public static final String FILENAME = "tasks.txt";
+    public static final String FILEPATH = "./data/tasks.txt";
+    public static final String TEMP_FILEPATH = "./data/temp.txt";
 
     /**
      * Constructs a fresh Storage instance, with a supplied path for the file storing the task list.
      * @param fileName The file path for the task list file.
      */
-    public Storage(String fileName) {
-        this.fileName = fileName;
+    public Storage() {
+        File dir = new File(DIRECTORY);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
     }
 
-    public String getFileName() {
-        return this.fileName;
+    public String getFilePath() {
+        return FILEPATH;
     }
 
     /**
@@ -36,7 +42,7 @@ public class Storage {
      */
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
-        File file = new File(fileName);
+        File file = new File(FILEPATH);
 
         try {
             Scanner sc = new Scanner(file);
@@ -60,7 +66,7 @@ public class Storage {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            Ui.printLines("File not found. Try again!");
+            System.out.println("File not found");
         }
 
         return tasks;
@@ -71,9 +77,9 @@ public class Storage {
      * @param fileName The file containing all tasks.
      * @param data The data to be written.
      */
-    public void writeToFile(String fileName, String data) {
+    public void writeToFile(String data) {
         try {
-            FileWriter fw = new FileWriter(fileName, true);
+            FileWriter fw = new FileWriter(FILEPATH, true);
             fw.write(data);
             fw.write("\n");
             fw.close();
@@ -87,11 +93,11 @@ public class Storage {
      * @param idx The index of the task in the task list.
      */
     public void doTask(int idx) {
-        File originalFile = new File(this.fileName);
-        File tempFile = new File("src/main/data/temp.txt");
+        File originalFile = new File(FILEPATH);
+        File tempFile = new File(TEMP_FILEPATH);
 
         try {
-            FileWriter fw = new FileWriter("src/main/data/temp.txt", false);
+            FileWriter fw = new FileWriter(TEMP_FILEPATH, false);
             Scanner sc = new Scanner(originalFile);
             int i = 1;
 
@@ -123,11 +129,11 @@ public class Storage {
      * @param idx The index of the task in the task list.
      */
     public void deleteTask(int idx) {
-        File originalFile = new File(this.fileName);
-        File tempFile = new File("src/main/data/temp.txt");
+        File originalFile = new File(FILEPATH);
+        File tempFile = new File(TEMP_FILEPATH);
 
         try {
-            FileWriter fw = new FileWriter("src/main/data/temp.txt", false);
+            FileWriter fw = new FileWriter(TEMP_FILEPATH, false);
             Scanner sc = new Scanner(originalFile);
             int i = 1;
 
@@ -152,11 +158,11 @@ public class Storage {
     }
 
     public void updateDescription(int idx, String input) {
-        File originalFile = new File(this.fileName);
-        File tempFile = new File("src/main/data/temp.txt");
+        File originalFile = new File(FILEPATH);
+        File tempFile = new File(TEMP_FILEPATH);
 
         try {
-            FileWriter fw = new FileWriter("src/main/data/temp.txt", false);
+            FileWriter fw = new FileWriter(TEMP_FILEPATH, false);
             Scanner sc = new Scanner(originalFile);
             int i = 1;
 
@@ -196,11 +202,11 @@ public class Storage {
     }
 
     public void updateTime(int idx, String input) {
-        File originalFile = new File(this.fileName);
-        File tempFile = new File("src/main/data/temp.txt");
+        File originalFile = new File(FILEPATH);
+        File tempFile = new File(TEMP_FILEPATH);
 
         try {
-            FileWriter fw = new FileWriter("src/main/data/temp.txt", false);
+            FileWriter fw = new FileWriter(TEMP_FILEPATH, false);
             Scanner sc = new Scanner(originalFile);
             int i = 1;
 

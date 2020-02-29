@@ -2,12 +2,11 @@ package duke.task;
 
 import java.util.ArrayList;
 
-import duke.Ui;
 import duke.Storage;
 import duke.Parser;
-import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidTimeFormatException;
+import duke.exception.TaskIndexException;
 
 /**
  * Represents a list of tasks to be done.
@@ -54,7 +53,7 @@ public class TaskList {
      * Deletes a task from the task list.
      * @param idx The index of the task to be deleted.
      */
-    public String deleteTask(int idx) {
+    public String deleteTask(int idx) throws TaskIndexException {
         try {
             Task task = this.tasks.get(idx);
             this.tasks.remove(idx);
@@ -62,7 +61,7 @@ public class TaskList {
                 + task.toString()
                 + "\nNow you have " + this.tasks.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
-            return ("Task index is invalid. Try again!");
+            throw new TaskIndexException("Task index is invalid. Try again!");
         }
     }
 
@@ -92,7 +91,7 @@ public class TaskList {
         return results;
     }
 
-    public String updateDescription(int idx, String input) {
+    public String updateDescription(int idx, String input) throws TaskIndexException {
         try {
             Task task = this.tasks.get(idx);
             int newDescriptionIndex = input.indexOf("" + (idx + 1));
@@ -101,11 +100,11 @@ public class TaskList {
             return "Noted. I've updated this task:\n"
                 + task.toString();
         } catch (IndexOutOfBoundsException e) {
-            return ("Task index is invalid. Try again!");
+            throw new TaskIndexException("Task index is invalid. Try again!");
         }
     }
 
-    public String updateTime(int idx, String input) {
+    public String updateTime(int idx, String input) throws TaskIndexException {
         try {
             Task task = this.tasks.get(idx);
             int newTimeIndex = input.indexOf("" + (idx + 1));
@@ -114,7 +113,7 @@ public class TaskList {
             return "Ooh, you updated the time, but is it time for me to eat yet?\n"
                 + newTime;
         } catch (IndexOutOfBoundsException e) {
-            return ("Task index is invalid. Try again!");
+            throw new TaskIndexException("Task index is invalid. Try again!");
         }
     }
 
@@ -124,7 +123,7 @@ public class TaskList {
      * @param input The given user input.
      * @param fileName The path to the task list file.
      */
-    public String manageTodo(Storage storage, String input, String fileName) throws EmptyDescriptionException {
+    public String manageTodo(Storage storage, String input) throws EmptyDescriptionException {
         if (input.split(" ").length == 1) {
             throw new EmptyDescriptionException("Oops! The description of a todo cannot be empty.");
         } else {
@@ -132,7 +131,7 @@ public class TaskList {
             Todo todo = new Todo(description, false);
 
             String result = "T~0~" + description;
-            storage.writeToFile(fileName, result);
+            storage.writeToFile(result);
 
             return (addTask(todo));
         }
@@ -144,7 +143,7 @@ public class TaskList {
      * @param input The given user input.
      * @param fileName The path to the task list file.
      */
-    public String manageEvent(Storage storage, String input, String fileName) throws EmptyDescriptionException, InvalidTimeFormatException {
+    public String manageEvent(Storage storage, String input) throws EmptyDescriptionException, InvalidTimeFormatException {
         if (input.split(" ").length == 1) {
             throw new EmptyDescriptionException("Oops! The description of an event cannot be empty.");
         } else {
@@ -157,7 +156,7 @@ public class TaskList {
                 String time = Parser.reformatDateAndTime(input.substring(input.indexOf("/") + 4));
                 Event event = new Event(description, false, time);
                 String result = "E~0~" + description + "~" + time;
-                storage.writeToFile(fileName, result);
+                storage.writeToFile(result);
 
                 return addTask(event);
             } else {
@@ -172,7 +171,7 @@ public class TaskList {
      * @param input The given user input.
      * @param fileName The path to the task list file.
      */
-    public String manageDeadline(Storage storage, String input, String fileName) throws EmptyDescriptionException, InvalidTimeFormatException {
+    public String manageDeadline(Storage storage, String input) throws EmptyDescriptionException, InvalidTimeFormatException {
         if (input.split(" ").length == 1) {
             throw new EmptyDescriptionException("Oops! The description of a deadline cannot be empty.");
         } else {
@@ -185,7 +184,7 @@ public class TaskList {
                 String time = Parser.reformatDateAndTime(input.substring(input.indexOf("/") + 4));
                 Deadline deadline = new Deadline(description, false, time);
                 String result = "D~0~" + description + "~" + time;
-                storage.writeToFile(fileName, result);
+                storage.writeToFile(result);
 
                 return addTask(deadline);
             } else {

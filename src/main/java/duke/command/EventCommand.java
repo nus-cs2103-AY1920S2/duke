@@ -12,6 +12,6 @@ public class EventCommand extends Command {
     }
 
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException, InvalidTimeFormatException {
-        return tasks.manageEvent(storage, input, storage.getFileName());
+        return tasks.manageEvent(storage, input);
     }
 }

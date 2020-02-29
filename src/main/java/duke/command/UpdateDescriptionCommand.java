@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.task.TaskList;
 import duke.Ui;
+import duke.exception.TaskIndexException;
 import duke.Storage;
 
 public class UpdateDescriptionCommand extends Command {
@@ -9,7 +10,7 @@ public class UpdateDescriptionCommand extends Command {
         super(input, isExit);
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskIndexException {
         String[] split = this.input.split(" ");
         int idx = Integer.parseInt(split[2]);
         storage.updateDescription(idx, input);

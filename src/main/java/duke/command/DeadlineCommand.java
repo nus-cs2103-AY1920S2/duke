@@ -14,6 +14,6 @@ public class DeadlineCommand extends Command {
     }
 
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException, InvalidTimeFormatException {
-        return tasks.manageDeadline(storage, input, storage.getFileName());
+        return tasks.manageDeadline(storage, input);
     }
 }
