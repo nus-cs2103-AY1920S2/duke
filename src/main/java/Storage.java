@@ -99,6 +99,7 @@ public class Storage {
         try {
             String home = System.getProperty("user.home");
             Path path = Paths.get(home, dir);
+            assert (!output.equals(""));
             Files.write(path, output.getBytes());
         } catch (IOException e) {
             e.printStackTrace();

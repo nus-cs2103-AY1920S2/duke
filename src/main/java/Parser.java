@@ -114,6 +114,7 @@ public class Parser {
                 try {
                     newTask = new ToDo(command.substring(5));
                     currentList.addTask(newTask);
+                    assert (currentList.getSize() != 0);
                     output += "Got it. I've added this task: \n" + newTask
                             + System.lineSeparator();
                     output += "Now you have " + currentList.getSize() + " tasks in the list"
@@ -130,6 +131,7 @@ public class Parser {
                     LocalDate date = LocalDate.parse(command.substring(breakPos + 4));
                     newTask = new Deadline(command.substring(9, breakPos - 1), date);
                     currentList.addTask(newTask);
+                    assert (currentList.getSize() != 0);
                     output += "Got it. I've added this task: \n" + newTask
                             + System.lineSeparator();
                     output += "Now you have " + currentList.getSize() + " tasks in the list"
@@ -153,6 +155,7 @@ public class Parser {
                     LocalDate date = LocalDate.parse(command.substring(breakPos + 4));
                     newTask = new Event(command.substring(6, breakPos - 1), date);
                     currentList.addTask(newTask);
+                    assert (currentList.getSize() != 0);
                     output += "Got it. I've added this task: \n" + newTask
                             + System.lineSeparator();
                     output += "Now you have " + currentList.getSize() + " tasks in the list"
@@ -172,6 +175,7 @@ public class Parser {
                         + System.lineSeparator();
             }
         }
+        assert (!output.equals(""));
         return output;
     }
 }
