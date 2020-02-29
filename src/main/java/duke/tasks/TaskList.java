@@ -30,16 +30,21 @@ public class TaskList {
      * @param s String that is input by the user
      */
     public String run(String s) {
+        boolean isListCommand = s.equals("list");
+        boolean isDoneCommand = s.length() > 5 && s.substring(0, 4).equals("done");
+        boolean isDeleteCommand = s.length() > 6 && s.substring(0, 6).equals("delete");
+        boolean isFindCommand = s.length() > 4 && s.substring(0, 4).equals("find");
+        boolean isError = s.length() < 5 || !s.contains(" ") || s.stripTrailing().length() < 9;
         try {
-            if (s.equals("list")) {
+            if (isListCommand) {
                 return list();
-            } else if (s.length() > 5 && s.substring(0, 4).equals("done")) {
+            } else if (isDoneCommand) {
                 return done(Integer.parseInt(s.substring(5)));
-            } else if (s.length() > 6 && s.substring(0, 6).equals("delete")) {
+            } else if (isDeleteCommand) {
                 return delete(Integer.parseInt(s.substring(7)));
-            } else if (s.length() > 4 && s.substring(0, 4).equals("find")) {
+            } else if (isFindCommand) {
                 return find(s);
-            } else if (s.length() < 5 || !s.contains(" ") || s.stripTrailing().length() < 9) {
+            } else if (isError) {
                 return error(s);
             } else {
                 return add(s);
@@ -55,6 +60,50 @@ public class TaskList {
     }
 
     /**
+     * Adds a task to the current taskList.
+     * @param s String that is input by the user
+     */
+    public String add(String s) {
+        int whitespaceIndex = s.indexOf(" ");
+        String taskType = s.substring(0, whitespaceIndex);
+        String outputAdd = "";
+        if (taskType.equals("todo")) {
+            String taskDescription = s.substring(whitespaceIndex + 1);
+            Todo t = new Todo(taskDescription);
+            tasks.add(t);
+            outputAdd = Ui.LINE_DIVIDER + "Got it. I've added this task:\n " + t
+                    + "\nNow you have " + tasks.size() + " tasks in the list.\n" + Ui.LINE_DIVIDER;
+            System.out.println(outputAdd);
+        } else {
+            try {
+                int taskIdx = s.indexOf("/");
+                String taskDescription = s.substring(whitespaceIndex + 1, taskIdx - 1);
+                String date = s.substring(taskIdx + 1);
+                if (taskType.equals("deadline")) {
+                    Deadline t = new Deadline(taskDescription, date);
+                    tasks.add(t);
+                    outputAdd = Ui.LINE_DIVIDER + "Got it. I've added this task:\n " + t
+                            + "\nNow you have " + tasks.size() + " tasks in the list.\n" + Ui.LINE_DIVIDER;
+                    System.out.println(outputAdd);
+                } else if (taskType.equals("event")) {
+                    Event t = new Event(taskDescription, date);
+                    tasks.add(t);
+                    outputAdd = Ui.LINE_DIVIDER + "Got it. I've added this task:\n " + t
+                            + "\nNow you have " + tasks.size() + " tasks in the list.\n" + Ui.LINE_DIVIDER;
+                    System.out.println(outputAdd);
+                } else {
+                    error(s);
+                }
+            } catch (DukeException e) {
+                System.out.println(e.toString());
+                return e.toString();
+            }
+        }
+        storage.save(tasks);
+        return outputAdd;
+    }
+
+    /**
      * Prints out current list of tasks.
      */
     public String list() {
@@ -67,49 +116,6 @@ public class TaskList {
         outputList = outputList + Ui.LINE_DIVIDER;
         System.out.println(outputList);
         return outputList;
-    }
-
-    /**
-     * Adds a task to the current taskList.
-     * @param s String that is input by the user
-     */
-    public String add(String s) {
-        int whitespaceidx = s.indexOf(" ");
-        String taskType = s.substring(0, whitespaceidx);
-        String outputAdd = "";
-        if (taskType.equals("todo")) {
-            String theTask = s.substring(whitespaceidx + 1);
-            Todo t = new Todo(theTask);
-
-            tasks.add(t);
-            outputAdd = Ui.LINE_DIVIDER + "Got it. I've added this task:\n " + t
-                    + "\nNow you have " + tasks.size() + " tasks in the list.\n" + Ui.LINE_DIVIDER;
-            System.out.println(outputAdd);
-        } else {
-            try {
-                int taskIdx = s.indexOf("/");
-                String theTask = s.substring(whitespaceidx + 1, taskIdx - 1);
-                String date = s.substring(taskIdx + 1);
-                if (taskType.equals("deadline")) {
-                    Deadline t = new Deadline(theTask, date);
-                    tasks.add(t);
-                    outputAdd = Ui.LINE_DIVIDER + "Got it. I've added this task:\n " + t
-                            + "\nNow you have " + tasks.size() + " tasks in the list.\n" + Ui.LINE_DIVIDER;
-                    System.out.println(outputAdd);
-                } else if (taskType.equals("event")) {
-                    Event t = new Event(theTask, date);
-                    tasks.add(t);
-                    outputAdd = Ui.LINE_DIVIDER + "Got it. I've added this task:\n " + t
-                            + "\nNow you have " + tasks.size() + " tasks in the list.\n" + Ui.LINE_DIVIDER;
-                    System.out.println(outputAdd);
-                }
-            } catch (DukeException e) {
-                System.out.println(e.toString());
-                return e.toString();
-            }
-        }
-        storage.save(tasks);
-        return outputAdd;
     }
 
     /**
@@ -147,6 +153,36 @@ public class TaskList {
     }
 
     /**
+     * finds matching task(s) in taskList given a keyword.
+     * @param s keyword given to find matching taskList entries
+     */
+    public String find(String s) {
+        String keyword = s.substring(5).strip(); //check if
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        String outputFind = "";
+        for (Task t : this.tasks) {
+            if (t.getDescription().equals(keyword)) {
+                matchingTasks.add(t);
+            }
+        }
+        if (matchingTasks.isEmpty()) {
+            outputFind = Ui.LINE_DIVIDER + "No matching tasks were found lol\n";
+            System.out.println(outputFind + Ui.LINE_DIVIDER);
+        } else {
+            outputFind = Ui.LINE_DIVIDER + "Here are the matching tasks in your list:\n";
+            System.out.println(outputFind);
+            int entryno = 1;
+            for (Task t : matchingTasks) {
+                outputFind = outputFind + entryno + ". " + t + "\n";
+                System.out.println(entryno + ". " + t);
+                entryno++;
+            }
+        }
+        outputFind = outputFind + Ui.LINE_DIVIDER;
+        return outputFind;
+    }
+
+    /**
      * Prints error messages for common errors based on invalid user input.
      * @param s String that is input by user
      */
@@ -172,35 +208,4 @@ public class TaskList {
         }
         return outputError;
     }
-
-    /**
-     * finds matching task(s) in taskList given a keyword.
-     * @param s keyword given to find matching taskList entries
-     */
-    public String find(String s) {
-        String keyword = s.substring(5).strip();
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        String outputFind = "";
-        for (Task t : this.tasks) {
-            if (t.getDescription().equals(keyword)) {
-                matchingTasks.add(t);
-            }
-        }
-        if (matchingTasks.isEmpty()) {
-            outputFind = Ui.LINE_DIVIDER + "No matching tasks were found lol\n";
-            System.out.println(outputFind + Ui.LINE_DIVIDER);
-        } else {
-            outputFind = Ui.LINE_DIVIDER + "Here are the matching tasks in your list:\n";
-            System.out.println(outputFind);
-            int entryno = 1;
-            for (Task t : matchingTasks) {
-                outputFind = outputFind + entryno + ". " + t + "\n";
-                System.out.println(entryno + ". " + t);
-                entryno++;
-            }
-        }
-        outputFind = outputFind + Ui.LINE_DIVIDER;
-        return outputFind;
-    }
-
 }
