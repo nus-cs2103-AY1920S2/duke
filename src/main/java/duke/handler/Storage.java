@@ -31,7 +31,7 @@ public class Storage {
             this.filePath = filePath;
             this.fileName = fileName;
         } else {
-            throw new DirectoryNotFoundException();
+            //throw new DirectoryNotFoundException();
         }
     }
 
