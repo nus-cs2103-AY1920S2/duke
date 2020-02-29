@@ -31,48 +31,9 @@ public class MainWindow {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Janet.jpg"));
 
-    @FXML
-    public void initialize() {
-        this.scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        this.renderDuke(Messages.WELCOME_MESSAGE);
-    }
-
+    // -----------------------------------------------------------------------------------------
     public void setDuke(Duke duke) {
         this.duke = duke;
-    }
-
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    @FXML
-    private void handleUserInput() {
-        String input = this.userInput.getText();
-        
-        try {
-            Pair output = this.duke.executeInput(input);
-            String message = (String) output.getFirstValue();
-            boolean shutdown = (boolean) output.getSecondValue();
-            
-            if (shutdown) {
-                this.renderDuke(Messages.GOODBYE_MESSAGE);
-                
-                PauseTransition pause = new PauseTransition(Duration.seconds(1));
-                pause.setOnFinished(event -> Platform.exit());
-                pause.play();
-            } else {
-                this.renderUser(input);
-                this.renderDuke(message);
-            }
-        } catch (BaseException e) {
-            this.renderUser(input);
-            this.renderDuke(e.getMessage());
-        } catch (Exception e) {
-            this.renderUser(input);
-            this.renderDuke(Messages.UNEXPECTED_ERROR_MESSAGE);
-        } finally {
-            userInput.clear();
-        }
     }
 
     private void renderUser(String message) {
@@ -85,5 +46,39 @@ public class MainWindow {
         this.dialogContainer.getChildren().add(
             ChatBox.getDukeDialog(message, this.dukeImage)
         );
+    }
+
+    // -----------------------------------------------------------------------------------------
+    @FXML
+    public void initialize() {
+        this.scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        this.renderDuke(Messages.WELCOME_MESSAGE);
+    }
+
+    @FXML
+    private void handleUserInput() {
+        String input = this.userInput.getText();
+        String output = "";
+        boolean shutdown = false;
+        
+        try {
+            Pair result = this.duke.executeInput(input);
+            output = (String) result.getFirstValue();
+            shutdown = (boolean) result.getSecondValue();
+        } catch (BaseException e) {
+            output = e.getMessage();
+        } catch (Exception e) {
+            output = Messages.UNEXPECTED_ERROR_MESSAGE;
+        } finally {
+            this.renderUser(input);
+            this.renderDuke(output);
+            userInput.clear();
+
+            if (shutdown) {
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(event -> Platform.exit());
+                pause.play();
+            }
+        }
     }
 }
