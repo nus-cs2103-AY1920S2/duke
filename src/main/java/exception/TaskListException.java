@@ -2,9 +2,7 @@ package exception;
 
 public class TaskListException extends DukeException {
     public TaskListException() {
-        super(
-                String.format(
-                        "it appears you've made a happy accident. Your list is empty!"));
+        super(String.format("it appears you've made a happy accident. Your list is empty!"));
     }
 
     public TaskListException(int index) {

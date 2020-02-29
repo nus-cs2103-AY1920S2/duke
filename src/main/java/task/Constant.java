@@ -14,7 +14,7 @@ public enum Constant {
     public static int timeIndex = 4;
     public static int endDateIndex = 5;
     public static int endTimeIndex = 6;
-    
+
     private final String type;
     private final String[] timeDelimiter;
 

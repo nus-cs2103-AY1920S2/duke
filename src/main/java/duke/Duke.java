@@ -23,18 +23,15 @@ public class Duke extends Application {
         this.taskList = new TaskList(Duke.storage.getTasksFromStorage());
     }
 
-    public static void main(String[] args) {
-    }
+    public static void main(String[] args) {}
 
-    /**
-     * duke's start function for JavaFX
-     */
+    /** duke's start function for JavaFX */
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); 
-        Scene scene = new Scene(helloWorld); 
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
 
-        stage.setScene(scene); 
-        stage.show(); 
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
@@ -60,57 +57,63 @@ public class Duke extends Application {
      */
     private String dispatch(String input) throws DukeException {
         switch (input) {
-            case "list":
-                return this.taskList
-                        .getAllTasksAsString()
-                        .stream()
-                        .collect(Collectors.joining(String.format("%n")));
-            case "bye":
-                isClosed = true;
-                return "Bye see you again soon!";
-            default:
-                // as long as done/delete inside
-                if (Parser.isDoneOrDelete(input)) {
-                    if (this.taskList.isEmpty()) {
-                        throw new TaskListException();
-                    }
-                    int taskIndex = Parser.getTaskIndex(input) - 1;
-                    if (taskIndex >= this.taskList.size()) {
-                        throw new TaskListException(this.taskList.size());
-                    }
-                    if (input.contains("done")) {
-                        this.taskList.markDone(taskIndex);
-                        return String.format(
-                                "Nice! I've marked this task as done:%n%s",
-                                this.taskList.getTask(taskIndex));
-                    } else {
-                        Task removedTask = this.taskList.popTask(taskIndex);
-                        return String.format(
-                                "Noted. I've removed this task:%n%s%nNow you have %d tasks in the list.",
-                                removedTask.toString(), this.taskList.size());
-                    }
-                } else if (Parser.isFind(input)) {
-                    if (this.taskList.isEmpty()) {
-                        throw new TaskListException();
-                    }
-                    String searchTerm = Parser.getSearchTerm(input);
-                    String searchResults =
-                            taskList.search(searchTerm)
-                                    .stream()
-                                    .collect(Collectors.joining(String.format("%n")));
-                    if (searchResults.isEmpty()) {
-                        return "No matching tasks!";
-                    }
-                    return searchResults;
-                } else {
-                    Task newTask = Task.newTask(input);
-                    this.taskList.addTask(newTask);
-                    return String.format(
-                            "Got it. I've added this task:%n%s%nNow you have %d %s in your list.",
-                            newTask.toString(),
-                            this.taskList.size(),
-                            this.taskList.size() > 1 ? "tasks" : "task");
+        case "list":
+            if (this.taskList.isEmpty()) {
+                return "Hi user! You currently have no tasks!";
+            }
+            return this.taskList
+                    .getAllTasksAsString()
+                    .stream()
+                    .collect(Collectors.joining(String.format("%n")));
+        case "bye":
+            isClosed = true;
+            return "Bye see you again soon!";
+        default:
+            // as long as done/delete inside
+            if (Parser.isDoneOrDelete(input)) {
+                if (this.taskList.isEmpty()) {
+                    throw new TaskListException();
                 }
+
+                int taskIndex = Parser.getTaskIndex(input) - 1;
+                if (taskIndex >= this.taskList.size()) {
+                    throw new TaskListException(this.taskList.size());
+                }
+
+                if (input.contains("done")) {
+                    this.taskList.markDone(taskIndex);
+                    return String.format(
+                            "Nice! I've marked this task as done:%n%s",
+                            this.taskList.getTask(taskIndex));
+                } else {
+                    Task removedTask = this.taskList.popTask(taskIndex);
+                    return String.format(
+                            "Noted. I've removed this task:%n%s%nNow you have %d tasks in the list.",
+                            removedTask.toString(), this.taskList.size());
+                }
+            } else if (Parser.isFind(input)) {
+                if (this.taskList.isEmpty()) {
+                    throw new TaskListException();
+                }
+                
+                String searchTerm = Parser.getSearchTerm(input);
+                String searchResults =
+                        taskList.search(searchTerm)
+                                .stream()
+                                .collect(Collectors.joining(String.format("%n")));
+                if (searchResults.isEmpty()) {
+                    return "No matching tasks!";
+                }
+                return searchResults;
+            } else {
+                Task newTask = Task.newTask(input);
+                this.taskList.addTask(newTask);
+                return String.format(
+                        "Got it. I've added this task:%n%s%nNow you have %d %s in your list.",
+                        newTask.toString(),
+                        this.taskList.size(),
+                        this.taskList.size() > 1 ? "tasks" : "task");
+            }
         }
     }
 

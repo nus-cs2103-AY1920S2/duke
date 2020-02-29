@@ -14,6 +14,7 @@ public class TimeTask extends Task {
         this.time = Parser.getTime(dateTime);
         this.date = Parser.getDate(dateTime);
     }
+
     public TimeTask(String type, String[] fromMemory) {
         super(type, fromMemory[Constant.isDoneIndex], fromMemory[Constant.descriptionIndex]);
         this.date = LocalDate.parse(fromMemory[Constant.dateIndex]);

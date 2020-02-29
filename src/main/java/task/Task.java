@@ -31,16 +31,16 @@ public class Task {
         String typeLess = description.substring(type.length()).trim();
 
         switch (type) {
-            case "todo":
-                return new Todo(typeLess);
-            case "event":
-                return new Event(typeLess);
-            case "deadline":
-                return new Deadline(typeLess);
-            case "period":
-                return new PeriodTask(typeLess);
-            default:
-                throw new UIException("Task not recognized");
+        case "todo":
+            return new Todo(typeLess);
+        case "event":
+            return new Event(typeLess);
+        case "deadline":
+            return new Deadline(typeLess);
+        case "period":
+            return new PeriodTask(typeLess);
+        default:
+            throw new UIException("Task not recognized");
         }
     }
 
@@ -55,16 +55,16 @@ public class Task {
         String[] splitEntry = entry.split("\\|");
         String type = splitEntry[0];
         switch (type) {
-            case "[T]":
-                return new Todo(splitEntry);
-            case "[E]":
-                return new Event(splitEntry);
-            case "[D]":
-                return new Deadline(splitEntry);
-            case "[P]":
-                return new PeriodTask(splitEntry);
-            default:
-                throw new UIException("Task not recognized");
+        case "[T]":
+            return new Todo(splitEntry);
+        case "[E]":
+            return new Event(splitEntry);
+        case "[D]":
+            return new Deadline(splitEntry);
+        case "[P]":
+            return new PeriodTask(splitEntry);
+        default:
+            throw new UIException("Task not recognized");
         }
     }
 
