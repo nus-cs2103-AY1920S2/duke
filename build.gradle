@@ -36,7 +36,7 @@ dependencies {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.gui.Launcher"
 
 }
 sourceSets.main.resources {

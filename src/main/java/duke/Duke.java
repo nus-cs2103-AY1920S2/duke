@@ -109,7 +109,6 @@ public class Duke extends Application {
 
     public Duke() {
 
-
         ui = new Ui();
         uiController = new UiController();
         commandParser = new CommandParser();
@@ -156,6 +155,4 @@ public class Duke extends Application {
 
         return uiController.showLine() + command.execute(tasks, ui, storage, taskData, uiController) + uiController.showLine();
     }
-
-
 }
