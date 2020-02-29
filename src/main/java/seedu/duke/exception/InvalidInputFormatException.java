@@ -5,11 +5,13 @@ public class InvalidInputFormatException extends DukeException {
     public String toString() {
         return "Invalid input format!\n"
                 + "Format:\n"
-                + "- deadline <description> /by <due date in yyyy-mm-dd>\n"
-                + "- event <description> /at <date in yyyy-mm-dd>\n"
-                + "- todo <description>\n"
-                + "- done <index>\n"
-                + "- delete <index>\n"
-                + "- find <keyword>";
+                + "- To list all tasks: list\n"
+                + "- To add new deadline: deadline [description] /by [due date in yyyy-mm-dd]\n"
+                + "- To add new event: event [description] /at [date in yyyy-mm-dd]\n"
+                + "- To add new todo: todo [description]\n"
+                + "- To mark task as done: done [index]\n"
+                + "- To delete a task: delete [index]\n"
+                + "- To find a task: find [keyword]\n"
+                + "- To exit: bye";
     }
 }

@@ -55,8 +55,12 @@ Dodo can display the list of tasks (todo, deadline, and event) that you have sav
 ### 3.5. Mark task as done
 All tasks are initially marked as undone. When you have accomplished your task, don't forget to inform Dodo, by marking your task as done. Before ticking off your task, remember to type `list` to check your task's index, as the index may change if you have previously added or deleted a task.
 
+If the command `done [index]` is done after `find [keywords]`, the command `done [index]` will operate on the **full** list instead of the items filtered out by the `find [keyword]` command.
+
 ### 3.6. Delete a task
 If you accidentally add a new task, or simply want to reduce your task clutter, you can delete your task according to its index. Remember  to type `list` to check your task's index, as the index may change if you have previously added or deleted a task.
+
+If the command `delete [index]` is done after `find [keywords]`, the command `delete [index]` will operate on the **full** list instead of the items filtered out by the `find [keyword]` command.
 
 ### 3.7. Find a task
 Want to find a task with a specified keyword? Fret not, Dodo got your back. Dodo can display a list of tasks which contain the keyword you input.

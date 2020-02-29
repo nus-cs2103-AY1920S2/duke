@@ -14,7 +14,18 @@ public class Ui {
     }
 
     public String greet() {
-        return "Hi there, I'm Dodo!\nHow may I help you today?";
+        String greetings = "Hi there, I'm Dodo!\n"
+                + "How may I help you today?\n"
+                + "Available commands:\n"
+                + "- To list all tasks: list\n"
+                + "- To add new deadline: deadline [description] /by [due date in yyyy-mm-dd]\n"
+                + "- To add new event: event [description] /at [date in yyyy-mm-dd]\n"
+                + "- To add new todo: todo [description]\n"
+                + "- To mark task as done: done [index]\n"
+                + "- To delete a task: delete [index]\n"
+                + "- To find a task: find [keyword]\n"
+                + "- To exit: bye";
+        return greetings;
     }
 
     public void showLoadingError() {
