@@ -23,16 +23,16 @@ public class EmptyDescriptionError extends Exceptions {
 
         if (super.type.equals("T")) {
 
-            return "OPPS! The description of a todo task cannot be empty";
+            return "The description of a todo task cannot be empty";
 
         } else if (super.type.equals("D")) {
 
-            return "OPPS! The description of a deadline task cannot be empty";
+            return "The description of a deadline task cannot be empty";
 
         }
 
         assert super.type.equals("E") : "Wrong task type!";
 
-        return "OPPS! The description of a event task cannot be empty";
+        return "The description of a event task cannot be empty";
     }
 }

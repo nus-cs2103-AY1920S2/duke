@@ -15,7 +15,7 @@ public class Task {
     protected Status isDone;
 
     public enum Types {
-       T, D, E;
+        T, D, E;
     }
 
     public enum Status {
@@ -24,7 +24,8 @@ public class Task {
 
     /**
      * Constructor.
-     * @param dateTime refers to the date and time of the task.
+     *
+     * @param dateTime        refers to the date and time of the task.
      * @param taskDescription refers to the contents of the task.
      */
     public Task(LocalDateTime[] dateTime, String taskDescription) {

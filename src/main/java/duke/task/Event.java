@@ -14,7 +14,8 @@ public class Event extends Task {
 
     /**
      * Constructor.
-     * @param dateTime refers to the date and time of the task.
+     *
+     * @param dateTime        refers to the date and time of the task.
      * @param taskDescription refers to the contents of the task.
      */
     public Event(LocalDateTime[] dateTime, String taskDescription) {

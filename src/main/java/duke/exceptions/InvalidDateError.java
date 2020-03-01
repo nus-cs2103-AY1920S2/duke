@@ -16,7 +16,7 @@ public class InvalidDateError extends Exceptions {
     /**
      * Constructor.
      *
-     * @param type refers to the type of task.
+     * @param type  refers to the type of task.
      * @param issue refers to the reason date input is wrong.
      */
     public InvalidDateError(String type, String issue) {

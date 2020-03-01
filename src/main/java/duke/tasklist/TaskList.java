@@ -63,8 +63,8 @@ public class TaskList {
      * Adds task into taskList and calls method to update file storage.
      *
      * @param taskDescription refers to the contents of the task.
-     * @param dateTime refers to the date and time of the task.
-     * @param type refers to the type of the task.
+     * @param dateTime        refers to the date and time of the task.
+     * @param type            refers to the type of the task.
      * @return Task added to taskList and Storage.
      * @throws IOException as a result of updateFile throwing exception.
      */
@@ -101,14 +101,14 @@ public class TaskList {
      * Adds tasks from file storage to taskList.
      *
      * @param taskDescription refers to the contents of the task.
-     * @param dateTimeStart refers to the start date and time of the task.
-     * @param dateTimeEnd   refers to the end date and time of the task.
-     * @param type refers to the type of the task.
-     * @param status refers to the status of the task.
+     * @param dateTimeStart   refers to the start date and time of the task.
+     * @param dateTimeEnd     refers to the end date and time of the task.
+     * @param type            refers to the type of the task.
+     * @param status          refers to the status of the task.
      * @return Task added to taskList.
      */
     public Task addTask(String taskDescription, LocalDateTime dateTimeStart,
-                        LocalDateTime dateTimeEnd, Task.Types type, Task.Status status)  {
+                        LocalDateTime dateTimeEnd, Task.Types type, Task.Status status) {
 
         LocalDateTime[] dateTime = new LocalDateTime[2];
         dateTime[0] = dateTimeStart;

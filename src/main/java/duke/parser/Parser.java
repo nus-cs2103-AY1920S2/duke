@@ -136,8 +136,8 @@ public class Parser {
      * @param input refers to user input.
      * @return String[] containing parsed input.
      * @throws EmptyDescriptionError is thrown when task is missing task description.
-     * @throws EmptyDateError is thrown when task is missing start or end date or both.
-     * @throws InvalidDateError is thrown when date has incorrect format or has already past.
+     * @throws EmptyDateError        is thrown when task is missing start or end date or both.
+     * @throws InvalidDateError      is thrown when date has incorrect format or has already past.
      */
     String[] parseAddCommand(String input) throws Exception {
 
@@ -156,7 +156,7 @@ public class Parser {
                 throw new EmptyDescriptionError(Task.Types.T.toString());
             }
 
-            if(whiteSpaceIndex != 4) {
+            if (whiteSpaceIndex != 4) {
 
                 throw new InvalidInputError();
             }
@@ -202,7 +202,7 @@ public class Parser {
 
                     throw new EmptyDescriptionError(Task.Types.E.toString());
 
-                } else if(whiteSpaceIndex != 5) {
+                } else if (whiteSpaceIndex != 5) {
 
                     throw new InvalidInputError();
 

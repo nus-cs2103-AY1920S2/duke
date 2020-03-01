@@ -39,7 +39,7 @@ public class DoneCommand extends Command {
         try {
 
             if (taskList.getList().size() < Integer.parseInt(taskDescriptionArr[1])
-            || Integer.parseInt(taskDescriptionArr[1]) <= 0) {
+                    || Integer.parseInt(taskDescriptionArr[1]) <= 0) {
 
                 throw new InvalidIndexError(taskList.getList().size());
             }
@@ -55,7 +55,7 @@ public class DoneCommand extends Command {
 
         } catch (Exception e) {
 
-            if(e instanceof Exceptions) {
+            if (e instanceof Exceptions) {
 
                 return e.toString();
 

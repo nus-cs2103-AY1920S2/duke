@@ -24,17 +24,17 @@ public class DuplicateTaskError extends Exceptions {
 
         if (super.type.equals("T")) {
 
-            return "OPPS! The todo task already exists!";
+            return "The todo task already exists!";
 
         } else if (super.type.equals("D")) {
 
-            return "OPPS! The deadline task already exists!";
+            return "The deadline task already exists!";
 
         }
 
         assert super.type.equals("E") : "Wrong task type!";
 
-        return "OPPS! The event task already exists!";
+        return "The event task already exists!";
 
     }
 

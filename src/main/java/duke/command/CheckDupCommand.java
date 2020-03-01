@@ -32,9 +32,8 @@ public class CheckDupCommand extends Command {
      * @param taskDescriptionArr is a parsed task description which
      *                           contains information such as date
      *                           of task.
-     *
-     * @param dateTime is a an array containing date and time
-     *                 of the task.
+     * @param dateTime           is a an array containing date and time
+     *                           of the task.
      * @return true if there is duplicate and false otherwise.
      */
     public boolean executeCommand(String[] taskDescriptionArr, LocalDateTime[] dateTime) {

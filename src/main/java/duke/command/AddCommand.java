@@ -72,7 +72,7 @@ public class AddCommand extends Command {
 
         } catch (Exception e) {
 
-            if(e instanceof Exceptions) {
+            if (e instanceof Exceptions) {
 
                 return e.toString();
 

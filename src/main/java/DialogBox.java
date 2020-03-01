@@ -38,7 +38,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        Circle circle = new Circle(40,22,22);
+        Circle circle = new Circle(40, 22, 22);
 
         dialog.setText(text);
         displayPicture.setImage(img);
@@ -64,7 +64,7 @@ public class DialogBox extends HBox {
      * Gets dialog for duke.
      *
      * @param text refers to duke's response.
-     * @param img refers to duke's image.
+     * @param img  refers to duke's image.
      * @return DialogBox for duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {

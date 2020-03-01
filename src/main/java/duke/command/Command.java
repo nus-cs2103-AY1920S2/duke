@@ -34,7 +34,7 @@ public class Command {
      *                           contains information such as date
      *                           of task.
      */
-    public String executeCommand(String[] taskDescriptionArr)  {
+    public String executeCommand(String[] taskDescriptionArr) {
 
         return this.executeCommand(taskDescriptionArr);
 

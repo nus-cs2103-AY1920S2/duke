@@ -23,12 +23,12 @@ public class EmptyDateError extends Exceptions {
 
         if (super.type.equals("D")) {
 
-            return "OPPS! The date of a deadline task cannot be empty.";
+            return "The date of a deadline task cannot be empty.";
 
         }
 
         assert super.type.equals("E") : "Wrong task type!";
 
-        return "OPPS! The date of a event task cannot be empty.";
+        return "The date of a event task cannot be empty.";
     }
 }

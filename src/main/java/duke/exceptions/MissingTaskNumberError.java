@@ -25,6 +25,6 @@ public class MissingTaskNumberError extends Exceptions {
     @Override
     public String toString() {
 
-        return "OOPS! I'm sorry, the task number is missing.";
+        return "I'm sorry, the task number is missing.";
     }
 }

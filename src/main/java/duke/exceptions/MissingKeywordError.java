@@ -26,6 +26,6 @@ public class MissingKeywordError extends Exceptions {
     @Override
     public String toString() {
 
-        return "OOPS! I'm sorry, the keyword is missing.";
+        return "I'm sorry, the keyword is missing.";
     }
 }
