@@ -26,6 +26,7 @@ public class Parser {
     private static final String EVENT_KEY = "(event)(.*)/at\\s*" + DATE_TIME_KEY;
     private static final String FIND_KEY = "(find)\\s*(\\S+)";
     private static final String VIEW_SCHEDULE_KEY = "(view schedule)\\s*" + DATE_TIME_KEY;
+    private static final String HELP_KEY = "help";
 
     static final Pattern DELETE_PATTERN = Pattern.compile(DELETE_KEY);
     static final Pattern FINISH_PATTERN = Pattern.compile(FINISH_KEY);
@@ -34,6 +35,7 @@ public class Parser {
     static final Pattern EVENT_PATTERN = Pattern.compile(EVENT_KEY);
     static final Pattern FIND_PATTERN = Pattern.compile(FIND_KEY);
     static final Pattern VIEW_SCHEDULE_PATTERN = Pattern.compile(VIEW_SCHEDULE_KEY);
+    static final Pattern HELP_PATTERN = Pattern.compile(HELP_KEY);
 
     /**
      * static method converts string to date time object.
@@ -79,6 +81,8 @@ public class Parser {
     private static boolean isViewListKey(String input) {
         return VIEW_LIST_KEY.equals(input);
     }
+
+    private static boolean isHelpKey(String input) { return HELP_KEY.equals(input); }
 
     private static boolean isDeleteKey(String input) {
         Matcher deleteMatcher = DELETE_PATTERN.matcher(input);
@@ -142,6 +146,8 @@ public class Parser {
             return new FindCommand(userInput);
         } else if (Parser.isViewScheduleKey(userInput)) {
             return new ViewScheduleCommand(userInput);
+        } else if (Parser.isHelpKey(userInput)) {
+            return new HelpCommand();
         } else {
             throw new NoCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }

@@ -3,9 +3,8 @@
 import exceptions.*;
 import parser.Command;
 import parser.Parser;
-
+import parser.HelpCommand;
 import model.TaskList;
-
 import storage.Storage;
 
 import java.io.IOException;
@@ -15,6 +14,8 @@ import java.io.IOException;
  * manage the schedule.
  */
 public class Duke {
+
+    private static final String GREET_INPUT = "help";
 
     protected String userName;
     protected Storage storage;
@@ -35,6 +36,10 @@ public class Duke {
 
     public static boolean isExitKey(String input) {
         return Parser.isExitKey(input);
+    }
+
+    public String greet() {
+        return HelpCommand.HELP_TEXT;
     }
 
     public void start() throws
