@@ -130,6 +130,7 @@ public class Parser {
                     break;
                 case "snooze":
                     tasks.getTask(getIndex() - 1).snooze(timing);
+                    toReturn = ui.printOutSnoozed(tasks, getIndex() - 1, timing);
                     break;
                 case "event":
                     tasks.newEvent(getDescription(), getTiming());

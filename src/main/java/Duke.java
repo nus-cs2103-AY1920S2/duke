@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.time.format.DateTimeParseException;
 import javafx.application.Platform;
 
@@ -18,7 +19,7 @@ public class Duke {
         storage = new Storage(filepath);
         try {
             tasks = new TaskList(storage.loadData());
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | ParseException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }

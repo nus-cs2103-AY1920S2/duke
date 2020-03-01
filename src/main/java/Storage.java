@@ -2,8 +2,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Date;
 
 public class Storage {
     private String path;
@@ -60,7 +64,7 @@ public class Storage {
      * @return ArrayList of tasks.
      * @throws FileNotFoundException when the data cannot be read from the filepath.
      */
-    public ArrayList<Task> loadData() throws FileNotFoundException {
+    public ArrayList<Task> loadData() throws FileNotFoundException, ParseException {
         File dataBank = new File(path);
         Scanner reader = new Scanner(dataBank);
 
@@ -81,11 +85,9 @@ public class Storage {
 
             } else if (initial == 'D') {
                 String[] subStringy = desc.split(" \\(by: ");
-                String day = subStringy[1].substring(0, 2);
-                String month = subStringy[1].substring(3, 5);
-                String year = subStringy[1].substring(6, 10);
-                String timing = subStringy[1].substring(11, 15);
-                String reString = year + "-" + month + "-" + day + " " + timing;
+                Date dueDate = new SimpleDateFormat("dd MMM yyyy HHmm").parse(subStringy[1]);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HHmm");
+                String reString = dateFormat.format(dueDate);
                 listOfTasks.add(new Deadline(subStringy[0], reString));
             }
 

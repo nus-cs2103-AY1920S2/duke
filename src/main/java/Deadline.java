@@ -46,7 +46,7 @@ public class Deadline extends Task {
     public String toString() {
         assert (dueDate != null): "There is no date provided for this deadline!";
         assert (timing != null): "This deadline has no timing assigned!";
-        return "[D]" + super.toString() + " (by: " + dueDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+        return "[D]" + super.toString() + " (by: " + dueDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
                 + " " + timing.format(DateTimeFormatter.ofPattern("HHmm")) + ")";
     }
 }

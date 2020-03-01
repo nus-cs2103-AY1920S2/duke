@@ -11,7 +11,7 @@ public class ToDo extends Task {
 
     @Override
     public void snooze(String by) throws DukeException {
-        throw new DukeException("A todo does not have a deadline, and therefore cannot be snoozed!");
+        throw new DukeException("A todo does not have any timing, and therefore cannot be snoozed!");
     }
 
     @Override
