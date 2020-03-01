@@ -22,6 +22,7 @@ public class StateController {
      * @param taskList an ArrayList of Task objects
      */
     public StateController(ArrayList<Task> taskList) {
+        // Makes initial state which we set current to
         this.stateStack.push(new State(null, taskList));
         current = stateStack.peek();
     }
