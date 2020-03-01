@@ -1,15 +1,15 @@
 package duke.ui;
 
-import duke.exception.DuchessException;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.util.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import duke.exception.DuchessException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.Pair;
 
 /**
  * The {@code Ui} class helps to manage all inputs and outputs to the System
@@ -17,6 +17,12 @@ import java.util.stream.IntStream;
  */
 public class Ui {
     private Scanner scanner;
+    public static final String logo = " _____             _\n"
+            + "|  __ \\           | |\n"
+            + "| |  | |_   _  ___| |__   ___  ___ ___\n"
+            + "| |  | | | | |/ __| '_ \\ / _ \\/ __/ __|\n"
+            + "| |__| | |_| | (__| | | |  __/\\__ \\__ \\\n"
+            + "|_____/ \\__,_|\\___|_| |_|\\___||___/___/";
 
     /**
      * Initialises a {@code Ui} instance.
@@ -72,9 +78,10 @@ public class Ui {
      *                          in index out of bounds.
      */
     public String printTaskList(TaskList taskList) throws DuchessException {
-        if (taskList.size() > 0) {
+        int size = taskList.size();
+        if (size > 0) {
             // Solution below adapted from https://stackoverflow.com/a/18552071
-            List<String> result = IntStream.range(0, taskList.size())
+            List<String> result = IntStream.range(0, size)
                     .mapToObj(i -> (i + 1) + ".\t" + taskList.getTask(i)).collect(Collectors.toList());
             result.add(0, "Sighs... you never remember what you say, don't you.");
             result.add(1, "You said these:");
@@ -97,7 +104,6 @@ public class Ui {
             return this.print("Couldn't find anything that matches what you want.",
                     "I sure hope you're not testing me!");
         } else {
-            this.print("Not bad, I found the following:");
             // Solution below adapted from https://stackoverflow.com/a/18552071
             List<String> result = IntStream.range(0, filteredTaskList.size()).mapToObj(i -> {
                 Pair<Task, Integer> pair = filteredTaskList.get(i);
@@ -272,18 +278,9 @@ public class Ui {
     }
 
     /**
-     * Returns the console welcome message.
-     *
-     * @return The welcome message {@code String}.
+     * Prints the console welcome message to console for console mode.
      */
-    public String printConsoleWelcome() {
-        String logo = " _____             _\n"
-                + "|  __ \\           | |\n"
-                + "| |  | |_   _  ___| |__   ___  ___ ___\n"
-                + "| |  | | | | |/ __| '_ \\ / _ \\/ __/ __|\n"
-                + "| |__| | |_| | (__| | | |  __/\\__ \\__ \\\n"
-                + "|_____/ \\__,_|\\___|_| |_|\\___||___/___/";
-        return this.print("Hello from", logo, "My name is Duchess, as you can see above.",
-                "How may I help you?");
+    public void printConsoleWelcome() {
+        this.printToConsole("Hello from\n" + logo + "\nMy name is Duchess, as you can see above.\nHow may I help you?");
     }
 }

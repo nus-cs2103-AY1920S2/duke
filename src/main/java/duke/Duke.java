@@ -78,7 +78,7 @@ public class Duke {
      * the run() method, the user can begin to interact with the program.
      */
     public void run() {
-        this.ui.printToConsole(this.ui.printConsoleWelcome());
+        this.ui.printConsoleWelcome();
         ui.printLine();
         boolean isRunning = true;
         while (isRunning) {
