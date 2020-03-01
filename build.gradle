@@ -6,7 +6,7 @@ plugins {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Stitch"
     archiveVersion = "1.1"
     archiveClassifier = null
     archiveAppendix = null
