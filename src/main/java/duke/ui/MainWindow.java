@@ -25,7 +25,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    // Image retrieved from https://gallery.yopriceville.com/Free-Clipart-Pictures/Cartoons-PNG/
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/charlie.png"));
+    // Image retrieved from https://gallery.yopriceville.com/Free-Clipart-Pictures/Cartoons-PNG/
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/lucy.png"));
 
     @FXML
