@@ -1,8 +1,6 @@
-T | 1 | read books
-D | 1 | do your job | 2013-03-12T13:00
-E | 1 | do nothing | 1204-04-23T12:03
-T | 1 | take a break
-E | 1 | cancelled | 2012-03-20T20:32
 E | 1 | submission | 2021-01-12T21:43
 T | 1 | wake up
-T | 0 | abc
+T | 1 | abc
+T | 0 | cdf
+D | 0 | homework | 2013-02-20T20:13
+E | 0 | nothing | 1973-12-25T22:12
