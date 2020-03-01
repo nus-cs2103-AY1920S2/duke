@@ -312,6 +312,9 @@ Shorthands / Alternatives for this command:
 
 ### External Packages Used
 * [Gson by Google](https://github.com/google/gson) - For saving tasks into a JSON file.
+* [JUnit by JUnit Team](https://github.com/junit-team/junit5/) - For testing classes and components in Duchess.
+* [Mockito by Mockito](https://github.com/mockito/mockito) - For creating mocks in JUnit tests.
+* [JavaFX by OpenJDK](https://github.com/openjdk/jfx) - For creating user interfaces.
 
 ### Other Licenses
 All images used in this project have been properly licensed for use. The photos are namely:
