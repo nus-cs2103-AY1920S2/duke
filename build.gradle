@@ -1,15 +1,21 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'org.openjfx.javafxplugin' version '0.0.8'
     id 'org.beryx.jlink' version '2.12.0'
 }
 
-
-
-
 group 'Duke'
 version '0.1.0'
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.2"
+    archiveClassifier = null
+    archiveAppendix = null
+}
 
 repositories {
     mavenCentral()
@@ -31,6 +37,7 @@ test {
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
 
