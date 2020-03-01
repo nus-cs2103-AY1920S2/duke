@@ -140,7 +140,7 @@ public class Parser {
      */
     public int parseStringToInt(String indexStr) {
         try {
-            return Integer.parseInt(indexStr) - 1;
+            return Integer.parseInt(indexStr.trim()) - 1;
         } catch (NumberFormatException e) {
             throw new InvalidIndexException(indexStr);
         }

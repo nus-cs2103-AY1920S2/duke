@@ -66,23 +66,3 @@ public class DialogBox extends HBox {
     }
 }
 
-class InputDialogBox extends HBox {
-    @FXML
-    private Label dialog;
-    @FXML
-    private ImageView displayPicture;
-
-    public InputDialogBox(String text, Image img) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/InputDialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        dialog.setText(text);
-        displayPicture.setImage(img);
-    }
-}
-

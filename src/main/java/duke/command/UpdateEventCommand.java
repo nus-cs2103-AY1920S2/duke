@@ -24,8 +24,8 @@ public class UpdateEventCommand extends UpdateTimedTaskCommand {
 
     @Override
     public String execute(TaskList taskList, Gui gui) {
-        if (!(super.getTask(taskList) instanceof Deadline)) {
-            throw new DukeException("Task is not an Deadline");
+        if (!(super.getTask(taskList) instanceof Event)) {
+            throw new DukeException("Task is not an Event");
         }
         return super.execute(taskList, gui);
     }

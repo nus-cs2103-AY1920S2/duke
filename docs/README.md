@@ -11,7 +11,7 @@
 3. Copy the file to the folder you want to use as the home folder for duke.
 4. Open terminal
 5. `cd` into home folder of duke.
-6. Run `java -jar duke-0.1.3.jar`
+6. Run `java -jar duke-0.2.jar` 
 
 ## Features 
 
