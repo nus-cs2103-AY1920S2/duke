@@ -14,6 +14,11 @@ import java.time.format.DateTimeParseException;
 public class EventCommand extends Command {
     private String[] eventArgs;
 
+    /**
+     * Initialises a new EventCommand object.
+     * @param cmdArgs The arguments passed into the EventCommand object
+     * @throws DukeException If an insufficient number of arguments is provided
+     */
     public EventCommand(String[] cmdArgs) throws DukeException {
         if (!hasValidNumOfArgs(cmdArgs.length)) {
             throw new InsufficientArgumentsException("☹ OOPS!!! The description of a EVENT cannot be empty!");

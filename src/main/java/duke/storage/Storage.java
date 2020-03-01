@@ -26,6 +26,10 @@ public class Storage {
         return status.equals("1") ? true : false;
     }
 
+    /**
+     * Retrieves stored tasks from a save file and adds them to a list.
+     * @return A list of the tasks stored in a save file
+     */
     public List<Task> loadTasks() {
         List<Task> retrievedTasks = new ArrayList<Task>();
 
@@ -57,6 +61,10 @@ public class Storage {
         return retrievedTasks;
     }
 
+    /**
+     * Saves the tasks from a list into a save file.
+     * @param tasks The list of tasks
+     */
     public void storeTasks(List<Task> tasks) {
         StringBuilder result = new StringBuilder();
         for (Task task : tasks) {

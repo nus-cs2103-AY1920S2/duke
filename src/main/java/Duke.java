@@ -8,6 +8,10 @@ import duke.ui.Ui;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+/**
+ * The main class for the Duke chat bot.
+ * Instantiates a storage, tasks and ui object for the runtime of the program.
+ */
 public class Duke {
 
     public Storage storage;
@@ -16,8 +20,6 @@ public class Duke {
 
     /**
      * Instantiates a Duke instance with a path to a save file.
-     *
-     * @param filePath The save file location relative to the project root
      */
     public Duke() {
         this.ui = new Ui();
@@ -64,6 +66,11 @@ public class Duke {
         Ui.printMessage("Bye! Hope you visit again soon!");
     }
 
+    /**
+     * Retrieves a response from the Duke chat bot after sending it a command.
+     * @param input command sent to Duke
+     * @return the response from Duke
+     */
     public String getResponse(String input) {
         String response;
 

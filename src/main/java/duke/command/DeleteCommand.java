@@ -10,6 +10,11 @@ import duke.ui.Ui;
 public class DeleteCommand extends Command {
     private int index;
 
+    /**
+     * Initialises a new DeleteCommand object.
+     * @param cmdArgs The arguments passed into the DeleteCommand object
+     * @throws DukeException If an insufficient number of arguments is provided or non-integer argument is provided
+     */
     public DeleteCommand(String[] cmdArgs) throws DukeException {
         // TODO: add varargs (etc: delete 4 2 1)
         if (!hasValidNumOfArgs(cmdArgs.length)) {

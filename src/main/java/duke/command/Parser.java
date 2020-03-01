@@ -7,10 +7,9 @@ public class Parser {
 
     /**
      * Parses user input to determine what action to take.
-     *
-     * @param fullCommand The command entered by the user.
-     * @return The Command corresponding to the command entered.
-     * @throws DukeException
+     * @param fullCommand The command entered by the user
+     * @return The Command corresponding to the command entered
+     * @throws DukeException If an invalid command is provided
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] cmdArgs = fullCommand.split(" ", 2);

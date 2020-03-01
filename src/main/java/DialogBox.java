@@ -41,6 +41,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialog box which contains a message and an image.
+     * @param text the message to be displayed
+     * @param img the image to be displayed
+     * @return a dialog box object
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

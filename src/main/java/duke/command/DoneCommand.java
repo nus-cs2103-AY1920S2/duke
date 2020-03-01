@@ -10,6 +10,11 @@ import duke.ui.Ui;
 public class DoneCommand extends Command {
     private int index;
 
+    /**
+     * Initialises a new DoneCommand object.
+     * @param cmdArgs The arguments passed into the DoneCommand object
+     * @throws DukeException If an insufficient number of arguments is provided or non-integer arg is provided
+     */
     public DoneCommand(String[] cmdArgs) throws DukeException {
         // TODO: add varargs (etc: done 4 2 1)
         if (!hasValidNumOfArgs(cmdArgs.length)) {

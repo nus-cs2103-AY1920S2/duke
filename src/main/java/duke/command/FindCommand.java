@@ -9,6 +9,11 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
     private String searchTerm;
 
+    /**
+     * Initialises a new FindCommand object.
+     * @param cmdArgs The arguments passed into the FindCommand object
+     * @throws DukeException If an insufficient number of arguments is provided
+     */
     public FindCommand(String[] cmdArgs) throws DukeException {
         if (!hasValidNumOfArgs(cmdArgs.length)) {
             throw new InsufficientArgumentsException("☹ OOPS!!! FIND command expects a search term!");

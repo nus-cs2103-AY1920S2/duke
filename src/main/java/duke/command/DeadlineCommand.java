@@ -14,6 +14,11 @@ import java.time.format.DateTimeParseException;
 public class DeadlineCommand extends Command {
     private String[] deadlineArgs;
 
+    /**
+     * Initialises a new DeadlineCommand.
+     * @param cmdArgs The command arguments passed to the DeadlineCommand object
+     * @throws DukeException If an insufficient number of arguments is provided
+     */
     public DeadlineCommand(String[] cmdArgs) throws DukeException {
         if (!hasValidNumOfArgs(cmdArgs.length)) {
             throw new InsufficientArgumentsException("OOPS!!! The description of a DEADLINE cannot be empty!");

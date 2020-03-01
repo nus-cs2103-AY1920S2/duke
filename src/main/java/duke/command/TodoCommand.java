@@ -11,6 +11,11 @@ import duke.ui.Ui;
 public class TodoCommand extends Command {
     private String description;
 
+    /**
+     * Initialises a new TodoCommand.
+     * @param cmdArgs The arguments passed into the TodoCommand object
+     * @throws DukeException If an insufficient number of arguments is provided
+     */
     public TodoCommand(String[] cmdArgs) throws DukeException {
         if (!hasValidNumOfArgs(cmdArgs.length)) {
             throw new InsufficientArgumentsException("OOPS!!! The description of a TODO cannot be empty!");

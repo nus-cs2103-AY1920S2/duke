@@ -15,10 +15,11 @@ public class Ui {
         System.out.println(msg);
     }
 
+    /**
+     * Creates the welcome message to be displayed on Duke's startup.
+     * @return the welcome message
+     */
     public static String printWelcomeMessage() {
-        //System.out.println("Hello from\n" + logo + "\n");
-        //Ui.printMessage("Greetings! I'm Duke!\n\tPlease enter location of save file (default: data/duke.txt): ");
-
         StringBuilder result = new StringBuilder();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -26,7 +27,6 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        //result.append("Greetings from\n" + logo + "\nHow can I help you?");
         result.append("Greetings from Duke! How can I help you?");
         return result.toString();
     }

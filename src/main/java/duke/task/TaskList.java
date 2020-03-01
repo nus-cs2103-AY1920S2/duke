@@ -25,6 +25,12 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Retrieves the Task at the index.
+     * @param index the task index
+     * @return the Task at the specified index
+     * @throws OutOfRangeException If the provided index is out of range
+     */
     public Task getTask(int index) throws OutOfRangeException {
         if (isValidTask(index)) {
             return tasks.get(index);
@@ -37,6 +43,11 @@ public class TaskList {
         this.tasks.add(task);
     }
 
+    /**
+     * Marks the Task at the specified index as done.
+     * @param index The index of the Task
+     * @throws OutOfRangeException If the provided index is out of range
+     */
     public void markTaskAsDone(int index) throws OutOfRangeException {
         assert tasks.size() > 0 : "TaskList should not be empty.";
         if (isValidTask(index)) {
@@ -46,6 +57,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the Task at the specified index.
+     * @param index The index of the Task
+     * @throws OutOfRangeException If the provided index is out of range
+     */
     public void deleteTask(int index) throws OutOfRangeException {
         if (isValidTask(index)) {
             this.tasks.remove(index);
@@ -54,6 +70,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Displays the tasks currently in Duke's database.
+     */
     public void displayTasks() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -66,6 +85,11 @@ public class TaskList {
         Ui.printMessage(result.toString());
     }
 
+    /**
+     * Finds tasks that contains the specified input.
+     * @param searchTerm The term to search for
+     * @return Tasks that contain the search term in their description
+     */
     public String findTask(String searchTerm) {
         int i = 0;
         StringBuilder result = new StringBuilder("Here's the matching tasks in your list:");
@@ -80,6 +104,12 @@ public class TaskList {
         return result.toString();
     }
 
+    /**
+     * Checks if the specified index corresponds to a valid Task.
+     * @param index The index of the Task
+     * @return True if the task exists, false otherwise
+     * @throws OutOfRangeException If the provided index is out of range
+     */
     public boolean isValidTask(int index) throws OutOfRangeException {
         if (index < 0 || index >= tasks.size()) {
             throw new OutOfRangeException();

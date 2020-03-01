@@ -12,6 +12,11 @@ public abstract class Command {
 
     public abstract boolean isByeCommand();
 
+    /**
+     * Checks if the command contains a valid number of arguments.
+     * @param numOfArgs the valid number of arguments
+     * @return true if the comamnd contains the valid number of args, false otherwise
+     */
     public boolean hasValidNumOfArgs(int numOfArgs) {
         boolean result;
         if (numOfArgs < validNumOfArgs) {

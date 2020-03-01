@@ -2,15 +2,17 @@ package duke.command;
 
 import duke.exception.InvalidCommandException;
 
+/**
+ * Keywords that Duke responds to.
+ */
 public enum Keyword {
     BYE, FIND, LIST, DONE, DELETE, DEADLINE, EVENT, TODO;
 
     /**
-     * The Keyword enum represents the various commands Duke can respond to.
-     *
+     * Retrieves the Keyword enum from provided input string.
      * @param cmd The input string
      * @return A Keyword enum
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException If an invalid command is provided
      */
     public static Keyword getKeyword(String cmd) throws InvalidCommandException {
         cmd = cmd.toLowerCase();
