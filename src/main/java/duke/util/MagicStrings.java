@@ -46,6 +46,8 @@ public class MagicStrings {
     public static final String ERROR_TASK_CREATED_BEFORE = "You have an existing task with the same information!";
     public static final String ERROR_TODO_MISSING_CONTENT = "Your todo content cannot be empty! "
             + "Type help if you need help.";
+    public static final String ERROR_USED_FOR_TESTING = "This error message is purely for testing purposes. If you "
+            + "see this in production, something is wrong.";
     public static final String ERROR_WRONG_DATE_FORMAT = "Your date is of the wrong format.\n"
             + "Type help to view the accepted formats.";
     public static final String ERROR_WRONG_FREQUENCY_FORMAT = "Your frequency is of the wrong format.\n"

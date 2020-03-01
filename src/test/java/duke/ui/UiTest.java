@@ -1,11 +1,12 @@
 package duke.ui;
 
-import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
+import static duke.util.MagicStrings.ERROR_USED_FOR_TESTING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
@@ -116,6 +117,8 @@ public class UiTest {
                 testUi.printTaskCompleted(taskMock));
         assertEquals("Behind schedule as always... I've pushed back the deadline for you by 5 days.\nTask info\n",
                 testUi.printTaskSnoozed(taskMock, "5 days"));
+        verify(taskMock, times(1)).isCompleted();
+        verifyNoMoreInteractions(taskMock);
     }
 
     /**
@@ -140,6 +143,7 @@ public class UiTest {
         verify(taskListMock, times(1)).size();
         verify(taskListMock, times(1)).getTask(0);
         verify(taskListMock, times(1)).getTask(1);
+        verifyNoMoreInteractions(taskListMock);
     }
 
     /**
@@ -158,6 +162,7 @@ public class UiTest {
                 testUi.printTaskList(taskListMock));
 
         verify(taskListMock, times(1)).size();
+        verifyNoMoreInteractions(taskListMock);
     }
 
     /**
@@ -168,7 +173,7 @@ public class UiTest {
         // Mocking the classes
         TaskList taskListMock = mock(TaskList.class);
         when(taskListMock.size()).thenReturn(1);
-        when(taskListMock.getTask(0)).thenThrow(new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS));
+        when(taskListMock.getTask(0)).thenThrow(new DuchessException(ERROR_USED_FOR_TESTING));
 
         Ui testUi = new Ui();
 
@@ -177,9 +182,10 @@ public class UiTest {
             testUi.printTaskList(taskListMock);
             fail();
         } catch (DuchessException e) {
-            assertEquals(ERROR_INDEX_OUT_OF_BOUNDS, e.getMessage());
+            assertEquals(ERROR_USED_FOR_TESTING, e.getMessage());
             verify(taskListMock, times(1)).size();
             verify(taskListMock, times(1)).getTask(0);
+            verifyNoMoreInteractions(taskListMock);
         }
     }
 
