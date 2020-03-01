@@ -1,0 +1,4 @@
+T | 1 | read book
+D | 0 | return book | Jun 6 2020 1100
+E | 0 | project meeting | Aug 6 2020 1400
+T | 1 | join sports club

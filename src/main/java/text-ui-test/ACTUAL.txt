@@ -1,0 +1,18 @@
+Hello! I'm Duke
+ What can I do for you?
+Got it. I've added this task:
+[T][✘] borrow book
+ Now you have 1 tasks in the list.
+Got it. I've added this task:
+[D][✘] return book (by: Sunday)
+ Now you have 2 tasks in the list.
+Got it. I've added this task:
+[E][✘] meeting (at: 1200)
+ Now you have 3 tasks in the list.
+OOPS!!! I'm sorry, but I don't know what that means :-(
+1. [T][✘] borrow book
+2. [D][✘] return book (by: Sunday)
+3. [E][✘] meeting (at: 1200)
+Nice! I've marked this task as done: 
+[E][✓] meeting (at: 1200)
+Bye. Hope to see you again soon!
