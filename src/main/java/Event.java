@@ -10,6 +10,8 @@ public class Event extends Task {
 
     /**
      * Creates a new Event with the given instruction and time.
+     * @param instruction Task content.
+     * @param time Deadline for the task.
      */
     public Event (String instruction, LocalDateTime time) {
         super(instruction);

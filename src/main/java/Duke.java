@@ -64,6 +64,10 @@ public class Duke extends Application{
         new Duke("C:\\Users\\h1430\\Documents\\CS2103T\\duke\\src\\main\\java\\data\\duke.txt").run();
     }
 
+    /**
+     * A GUI for Duke.
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {

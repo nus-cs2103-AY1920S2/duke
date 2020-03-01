@@ -5,6 +5,7 @@ public class ToDo extends Task {
 
     /**
      * Creates a new ToDo with the given instruction.
+     * @param instruction Task content.
      */
     public ToDo (String instruction) {
         super(instruction);

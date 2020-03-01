@@ -10,6 +10,8 @@ public class Deadline extends Task{
 
     /**
      * Creates a new Deadline with the given instruction and time.
+     * @param instruction Task content.
+     * @param time Time when the task starts.
      */
     public Deadline (String instruction, LocalDateTime time) {
         super(instruction);

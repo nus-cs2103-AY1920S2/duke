@@ -14,6 +14,7 @@ public class Task {
     /**
      * Creates a new Task with the given instruction.
      * Initially the task is not done.
+     * @param instruction The user command to initiate a task.
      */
     public Task (String instruction) {
         this.instruction = instruction;
