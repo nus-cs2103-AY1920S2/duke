@@ -32,7 +32,7 @@ public class Duke {
         String result = "";
 
         // For making PR
-        assert !result.equals("") : "There's no result.";
+        assert result.equals("") : "There's no result.";
 
         result = Parser.handleTasks(input, tasks, ui);
         // storage.save(tasks);
