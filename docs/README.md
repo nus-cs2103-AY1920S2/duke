@@ -1,6 +1,18 @@
 # User Guide
 
-## Features 
+## Introduction
+This is a Task Manager application called Duke. You may interact with it by entering commands as shown in the sections below.
+Interested? Jump right ahead to Quick Start!
+
+## Quick Start
+1. Ensure you have Java 11 or above installed in your computer.
+2. Download the latest `duke-0.2.jar` [here](https://github.com/chrisjwelly/duke/releases/tag/0.2)
+3. Copy the file to the folder you want to use as the home folder for the application.
+4. Double-click the file to start the app. The GUI should appear with a greeting.
+   - Alternatively, run `java -jar duke-0.2.jar` in the terminal in the folder where you saved the jar file.
+
+## Features
+### IMPORTANT: Please follow the command format exactly.
 Summary of the features:
 * `list`
 * `deadline`
@@ -109,4 +121,4 @@ Format: `bye`
 
 Example usage: `bye`
 
-Expected outcome: `bye!`
+Expected outcome: The application exits.
