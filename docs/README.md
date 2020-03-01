@@ -19,12 +19,9 @@
 ## 3. Quick start
 
 1. Ensure you have installed  [Java 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) 
-
 2. Download the latest jar file to your local computer
-
 3. Run the application in your terminal by command: `java -jar PATH_OF_DDDUKE`.
-
-   If you run correctly, you will see this page:
+4. Or you can run the application by double click on the jar file.
 
 ## 4. Usage
 
