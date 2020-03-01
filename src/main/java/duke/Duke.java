@@ -55,8 +55,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input from the GUI.
+     *
+     * @param input Raw input command entered by user.
+     * @return Respond by the Duke chatbot application.
      */
     public String getResponse(String input) throws IOException {
         Task t;
@@ -115,5 +117,14 @@ public class Duke {
         }
 
         return "error";
+    }
+
+    /**
+     * Generates a welcome response as the application starts up, from the GUI.
+     *
+     * @return Welcome response by the Duke chatbot application.
+     */
+    public String getWelcomeResponse() {
+        return ui.printWelcomeMsg();
     }
 }
