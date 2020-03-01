@@ -26,7 +26,7 @@ public class Duke {
 
     private TaskList tasks = new TaskList(storage);
 
-    private final int DATE_LENGTH = 10;
+    private static final int LENGTH_DATE = 10;
 
     // Empty constructor required for Launcher
     public Duke() throws IOException {
@@ -49,6 +49,9 @@ public class Duke {
         return textToAdd;
     }
 
+    /**
+     * Gets the response from Duke bot.
+     */
     public String getResponse(String userInput) {
         if (userInput.equals("bye")) {
             return ui.showGoodbyeMessage();
@@ -90,7 +93,7 @@ public class Duke {
                 String date = theRest.split("/")[1].trim();
 
                 // date must be in format YYYY-MM-DD
-                assert (date.length() == DATE_LENGTH && date.charAt(4) == '-' && date.charAt(7) == '-');
+                assert (date.length() == LENGTH_DATE && date.charAt(4) == '-' && date.charAt(7) == '-');
                 Task task = new Deadline(title, date);
                 tasks.addTask(task);
                 storage.saveAllTasksToFile(tasks);
@@ -109,7 +112,7 @@ public class Duke {
                 String date = theRest.split("/")[1].trim();
 
                 // date must be in format YYYY-MM-DD
-                assert (date.length() == DATE_LENGTH && date.charAt(4) == '-' && date.charAt(7) == '-');
+                assert (date.length() == LENGTH_DATE && date.charAt(4) == '-' && date.charAt(7) == '-');
                 Task task = new Event(title, date);
                 tasks.addTask(task);
                 storage.saveAllTasksToFile(tasks);
@@ -155,8 +158,8 @@ public class Duke {
         } else if (userInput.startsWith("sort deadlines")) {
             return tasks.sortDeadlinesByTime();
         } else if (userInput.startsWith("blah")) {
-            final String BLAH_MESSAGE = "blah";
-            return BLAH_MESSAGE;
+            final String BLAH = "blah";
+            return BLAH;
         } else {
             return ui.showCommandNotFound();
         }

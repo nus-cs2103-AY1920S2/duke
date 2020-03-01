@@ -55,9 +55,13 @@ abstract class Task {
     }
 
     public abstract String getTypeName();
+
     public abstract String getTimeOutput();
+
     public abstract String getTimeToDatabase();
+
     public abstract LocalDate getDate();
+
     /**
      * returns a String representation of a Task instance.
      *

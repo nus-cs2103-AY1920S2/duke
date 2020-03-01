@@ -12,7 +12,8 @@ public class Todo extends Task {
      * @param description the description/details of our task
      */
 
-    protected LocalDate DEFAULT_DATE = LocalDate.parse("2099-12-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    protected static LocalDate DEFAULT_DATE = LocalDate.parse("2099-12-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
     public Todo(String description) {
         super(description);
     } // time attribute is not needed in this class

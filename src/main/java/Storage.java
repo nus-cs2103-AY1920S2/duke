@@ -9,15 +9,19 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.OutputStreamWriter;
+
 /**
  * Storage class is for database I/O.
  * Methods to load Tasks from database and save Tasks to database are available.
  */
+
 public class Storage {
 
     private Path filePath;
 
+    /**
+     * Initialises database.
+     */
     // Solution below adapted from
     // https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
     public Storage() throws IOException {
@@ -26,12 +30,13 @@ public class Storage {
         Path filePath = Paths.get(home, "duke-database.txt");
 
         if (Files.exists(dirPath)) {
-            if (Files.notExists(filePath))
+            if (Files.notExists(filePath)) {
                 try {
                     Files.createFile(filePath);
                 } catch (IOException e) {
                     System.err.println("File cannot be created. Please check your permissions");
                 }
+            }
         } else {
             try {
                 Files.createDirectories(dirPath);
@@ -42,6 +47,9 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Generates all Tasks of the TaskList from the database.
+     */
     public List<Task> getAllTasksFromFile() throws FileNotFoundException {
         List<Task> tasks = new ArrayList<>();
         File file = new File(String.valueOf(filePath));
@@ -72,6 +80,9 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves all Tasks of the TaskList to the database.
+     */
     public void saveAllTasksToFile(TaskList tasks) throws FileNotFoundException {
         PrintWriter pw = new PrintWriter(new File(String.valueOf(filePath)));
         for (Task task : tasks.getTasks()) {

@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task implements Comparable {
     protected LocalDate endTime; // this will be startTime or endTime depending on the underlying class.
+
     /**
      * Creates a new Deadline with {@code description} and specified {@code endTime}.
      *
@@ -42,6 +43,7 @@ public class Deadline extends Task implements Comparable {
     public LocalDate getDate() {
         return endTime;
     }
+
     /**
      * returns a String representation of a Deadline instance.
      *

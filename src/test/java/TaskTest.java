@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskTest {
 
     @Test
-    public void createNewTask_notYetDone(){
+    public void createNewTask_notYetDone() {
         assertEquals(false, new Deadline("description", "2020-01-01").isTaskDone());
     }
 

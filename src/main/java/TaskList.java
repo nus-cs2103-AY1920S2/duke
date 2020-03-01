@@ -9,49 +9,49 @@ import java.util.stream.Collectors;
  * TaskList is a wrapper class for a List of Tasks.
  */
 public class TaskList {
-    protected LocalDate DEFAULT_DATE = LocalDate.parse("2099-12-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    private static LocalDate DEFAULT_DATE = LocalDate.parse("2099-12-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
     private List<Task> tasks;
 
-    public TaskList() {
+    private TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    public TaskList(List<Task> tasks) {
+    protected TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
     }
 
-    public TaskList(Storage storage) throws FileNotFoundException {
+    protected TaskList(Storage storage) throws FileNotFoundException {
         this.tasks = storage.getAllTasksFromFile();
     }
 
-    public List<Task> getTasks() {
+    protected List<Task> getTasks() {
         return tasks;
     }
 
-    public int getTasksLength() {
+    protected int getTasksLength() {
         return tasks.size();
     }
 
-    public Task getTask(int taskNumber) {
+    protected Task getTask(int taskNumber) {
         return tasks.get(taskNumber);
     }
 
-    public String makeTaskDone(int taskNumber) {
+    protected String makeTaskDone(int taskNumber) {
         tasks.get(taskNumber).markAsDone();
         return "Nice! I've marked this task as done: " + "\n" + tasks.get(taskNumber);
     }
 
-    public String deleteTask(int taskNumber) {
+    protected String deleteTask(int taskNumber) {
         StringBuilder message = new StringBuilder();
         message.append("Noted. I've removed this task: \n");
-        message.append(tasks.get(taskNumber)+"\n");
+        message.append(tasks.get(taskNumber) + "\n");
         tasks.remove(taskNumber);
         message.append("Now you have " + tasks.size() + " tasks in the list. \n");
         return message.toString();
     }
 
-    public String addTask(Task task) {
+    protected String addTask(Task task) {
         StringBuilder message = new StringBuilder();
         tasks.add(task);
         message.append("Got it. I've added this task: \n");
@@ -60,11 +60,11 @@ public class TaskList {
         return message.toString();
     }
 
-    public String printListTasks() {
+    protected String printListTasks() {
         return "Here are the tasks in your list: " + this.printTasks();
     }
 
-    public String printTasks() {
+    protected String printTasks() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             result.append((i + 1) + ". " + tasks.get(i).toString() + "\n");
@@ -72,7 +72,7 @@ public class TaskList {
         return result.toString();
     }
 
-    public String showFilteredBySpecificDate(String date) {
+    protected String showFilteredBySpecificDate(String date) {
         TaskList filteredTasks = new TaskList(tasks.stream()
                 .filter(task -> !task.getDate().equals(DEFAULT_DATE))
                 .filter(task -> task.getDate().equals(LocalDate.parse(date)))
@@ -80,7 +80,7 @@ public class TaskList {
         return "Here are the tasks on date " + date + "\n" + filteredTasks.printTasks();
     }
 
-    public String showFilteredBySpecificYear(int year) {
+    protected String showFilteredBySpecificYear(int year) {
         TaskList filteredTasks = new TaskList(tasks.stream()
                 .filter(task -> !task.getDate().equals(DEFAULT_DATE))
                 .filter(task -> task.getDate().getYear() == year)
@@ -88,7 +88,7 @@ public class TaskList {
         return "Here are the tasks in the year " + year + "\n" + filteredTasks.printTasks();
     }
 
-    public String showFilteredBySpecificMonth(int month) {
+    protected String showFilteredBySpecificMonth(int month) {
         TaskList filteredTasks = new TaskList(tasks.stream()
                 .filter(task -> !task.getDate().equals(DEFAULT_DATE))
                 .filter(task -> task.getDate().getMonthValue() == month)
@@ -96,7 +96,7 @@ public class TaskList {
         return "Here are the tasks in the month " + month + "\n" + filteredTasks.printTasks();
     }
 
-    public String showFilteredByName(String word) {
+    protected String showFilteredByName(String word) {
         TaskList filteredTasks = new TaskList(tasks.stream()
                 .filter(task -> !task.getDate().equals(DEFAULT_DATE))
                 .filter(task -> task.getDescription().contains(word))
@@ -104,7 +104,7 @@ public class TaskList {
         return "Here are the matching tasks in your list:" + "\n" + filteredTasks.printTasks();
     }
 
-    public String sortDeadlinesByTime() {
+    protected String sortDeadlinesByTime() {
         TaskList filteredTasks = new TaskList(tasks.stream()
                 .filter(task -> task.getTypeName() == "D")
                 .filter(task -> task.getDate().compareTo(LocalDate.now()) > 0)
