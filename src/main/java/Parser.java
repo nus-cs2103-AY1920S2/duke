@@ -100,6 +100,8 @@ public class Parser {
             } else {
                 throw new DukeException("EmptyEvent");
             }
+        } else if (instruction.equals("viewstats")) {
+            ui.printStats(tasks.getStats());
         } else {
             throw new DukeException("invalid");
         }

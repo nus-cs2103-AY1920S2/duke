@@ -12,6 +12,7 @@ public class TaskList {
      * The user interface.
      */
     private Ui ui;
+    private Statistics stats;
 
     /**
      * Creates a new TaskList with the given arraylist that contains tasks.
@@ -19,6 +20,7 @@ public class TaskList {
     public TaskList (ArrayList<Task> tasks) {
         this.tasks = tasks;
         this.ui = new Ui();
+        this.stats = new Statistics();
     }
 
     /**
@@ -37,12 +39,25 @@ public class TaskList {
         return this.tasks;
     }
 
+    public Statistics getStats() {
+        return this.stats;
+    }
+
     /**
      * Adds a task to this tasklist.
      * @param task The task to be added.
      */
     public void addTask (Task task) {
         tasks.add(task);
+        if (task instanceof Event) {
+            stats.eventIncrement();
+        }
+        if (task instanceof Deadline) {
+            stats.deadlineIncrement();
+        }
+        if (task instanceof ToDo) {
+            stats.todoIncrement();
+        }
         ui.add(task, tasks);
     }
 
@@ -52,6 +67,7 @@ public class TaskList {
      */
     public void doneTask (int n) {
         tasks.get(n-1).setDone();
+        stats.completeTask();
         ui.done(n, tasks);
     }
 

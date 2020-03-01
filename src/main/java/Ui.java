@@ -106,4 +106,12 @@ public class Ui {
     public void showAssertionError() {
         System.out.println("Oops! The index is invalid.");
     }
+
+    public void printStats (Statistics stats) {
+        int numberOfTasks = stats.getNumberOfTasks();
+        int numberOfEvents = stats.getNumberOfEvents();
+        int numberOfDeadlines = stats.getNumberOfDeadlines();
+        int numberOfTodos = stats.getNumberOfTodos();
+        int numberOfCompletedTasks = stats.getNumberOfCompletedTasks();
+    }
 }
