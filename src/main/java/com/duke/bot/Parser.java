@@ -41,7 +41,6 @@ public class Parser {
      * @throws DukeException When the command issued is invalid.
      */
     public static String parse(String userCommand, DukeUi ui, Storage storage, TaskList tasks) throws DukeException {
-
         switch(userCommand) {
 
             case "list":
@@ -74,6 +73,7 @@ public class Parser {
 
                 ui.setToken("\\p{javaWhitespace}+");
                 storage.saveToFile(tasks.printList());
+
                 return printSuccessMsg(todoTask, tasks);
 
             case "deadline":
@@ -146,7 +146,7 @@ public class Parser {
                 return String.format("Deleted: %s\n\n", delTask.toString());
 
             case "archive":
-                storage.archive();
+                //storage.archive();
                 return "Task list archived.";
 
             default:

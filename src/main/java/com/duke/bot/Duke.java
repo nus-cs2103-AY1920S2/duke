@@ -1,5 +1,6 @@
 package com.duke.bot;
 
+import java.io.IOException;
 import java.lang.String;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -28,8 +29,8 @@ import javafx.scene.image.ImageView;
 /**
  * Represents the Duke bot that manages the tasks of the users.
  */
-public class Duke extends Application {
-    private TaskList tasks;
+public class Duke {
+    //private TaskList tasks;
     private DukeUi ui;
     private Storage storage;
 
@@ -46,7 +47,7 @@ public class Duke extends Application {
      * Creates a Duke Bot object.
      */
     public Duke() {
-        this.tasks = TaskList.createTaskList();
+        //this.tasks = TaskList.createTaskList();
         storage = Storage.createSrorageFile();
         this.ui = new DukeUi(System.in, System.out);
     }
@@ -56,6 +57,7 @@ public class Duke extends Application {
      * Greet the user with a welcome message.
      */
 
+    /*
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -118,11 +120,14 @@ public class Duke extends Application {
         });
     }
 
+     */
+
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+    /*
     private void handleUserInput() {
         //Label userText = new Label(userInput.getText());
         //Label dukeText = new Label(getResponse(userInput.getText()));
@@ -143,6 +148,8 @@ public class Duke extends Application {
         return label;
     }
 
+     */
+
     public String getResponse(String input) {
         String output = "";
         assert output.isEmpty() : "output should be empty initially";
@@ -150,7 +157,7 @@ public class Duke extends Application {
         String commandWord = sc.next();
         String restOfStr = sc.hasNext() ? sc.nextLine() : "";
         try {
-            output = Parser.parse(commandWord, new DukeUi(restOfStr), storage, tasks);
+            output = Parser.parse(commandWord, new DukeUi(restOfStr), storage, storage.getTasks());
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -158,13 +165,14 @@ public class Duke extends Application {
         return output;
     }
 
+
     /**
      * Creates a Duke object.
      *
      * @param ui the UI that duke will be running on
      */
     public Duke(DukeUi ui) {
-        this.tasks = TaskList.createTaskList();
+        //this.tasks = TaskList.createTaskList();
         storage = Storage.createSrorageFile();
         this.ui = ui;
     }
@@ -175,7 +183,7 @@ public class Duke extends Application {
     public void echo() throws DukeException {
         String userCommand = ui.getNext();
         assert !userCommand.equals("") : "user command cannot be empty";
-        String output = Parser.parse(userCommand, ui, storage, tasks);
+        String output = Parser.parse(userCommand, ui, storage, storage.getTasks());
         ui.print(output);
         if (!userCommand.equals("bye")) {
             echo();
@@ -187,6 +195,7 @@ public class Duke extends Application {
      *
      * @param args The arguments written by the user in the command line.
      */
+    /*
     public static void main(String[] args) {
         Duke duke  = new Duke(new DukeUi());
 
@@ -200,6 +209,11 @@ public class Duke extends Application {
         }
 
         System.exit(0);
+    }
+    */
+
+    public void loadData() throws IOException{
+        this.storage.loadData();
     }
 
 }

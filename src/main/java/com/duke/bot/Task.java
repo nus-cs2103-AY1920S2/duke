@@ -74,6 +74,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] [%s]%s", getTaskIcon(), getStatusIcon(), taskName);
+        return String.format("%s | %s | %s", getTaskIcon(), getStatusIcon(), taskName);
     }
 }

@@ -41,9 +41,9 @@ public class DukeUi {
     /**
      * Prints a message that greets the user when DukeBot starts.
      */
-    public String greet() {
+    public static String greet() {
         return "Hello! I'm duke.Duke\n"
-        + "By default, your list of tasks will be saved to \"tasks.txt\".\n"
+        + "By default, your list of tasks will be saved to<YOUR_DUKE_FOLDER>/\"tasks.txt\"\n"
         + "What can I do for you?\n\n";
     }
 

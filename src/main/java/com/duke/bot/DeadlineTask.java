@@ -29,7 +29,7 @@ public class DeadlineTask extends Task {
     public String toString() {
         assert getTaskIcon().equals("D") : "Deadline task icon should be D";
         return super.toString().concat(String.format(
-                " by %s", due.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"))));
+                " | %s", due.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"))));
     }
 
     /**
