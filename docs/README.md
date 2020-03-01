@@ -12,7 +12,6 @@ There are total of 3 images that can represent the Duke.
 Firstly, there is the image used on loadup.
 This image is only used for the first inteaction with the user and  serves as an introduction to the Duke.
 
-
 The image looks like this:
 
 
@@ -20,14 +19,12 @@ The image looks like this:
 
 Next, there is the image used when the Duke successfully carries out a command from the user.
 
-
 This image looks like this:
 
 
 <img src = "NewDuke.png" width = "100">
 
 Lastly, there is the image used when the Duke is unable to carry out a command from the user.
-
 
 The image looks like this:
 
@@ -42,7 +39,7 @@ There is only 1 image that represents the User.
 The image looks like this:
 
 
-<img src = "NewUser.png" width = "250">
+<img src = "NewUser.png" width = "100">
 
 ## Features 
 
