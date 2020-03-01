@@ -1,3 +1,5 @@
+![Duke UI](Ui.png)
+
 # Duke User Guide
 
 ##Overview
