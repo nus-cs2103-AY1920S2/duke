@@ -52,14 +52,20 @@ public class Duke extends Application {
     }
 
 
+    /**
+     * Greet the user with a welcome message.
+     */
+
     @Override
     public void start(Stage stage) throws Exception {
 
+        System.out.println("flag 1");
         // Step 1
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
-        Label dukeText = new Label(ui.greet());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage)));
+        //Label dukeText = new Label(ui.greet());
+        String dukeText = ui.greet();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, dukeImage));
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -118,11 +124,13 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        //Label userText = new Label(userInput.getText());
+        //Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(userImage)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
+                DialogBox.getUserDialog(userText, (userImage)),
+                DialogBox.getDukeDialog(dukeText, (dukeImage))
         );
         userInput.clear();
     }
@@ -135,7 +143,7 @@ public class Duke extends Application {
         return label;
     }
 
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         String output = "";
         assert output.isEmpty() : "output should be empty initially";
         Scanner sc = new Scanner(input);

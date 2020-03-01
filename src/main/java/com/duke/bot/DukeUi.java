@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
  */
 public class DukeUi {
     public static final String BYE_MESSAGE = "Bye. Hope to see you again soon! :)";
+    public static final String GREET_MESSAGE = "Hello! I'm duke.Duke\n"
+                + "By default, your list of tasks will be saved to \"tasks.txt\".\n"
+                + "What can I do for you?\n\n";
 
     private Scanner in;
     private PrintStream out;
