@@ -79,21 +79,26 @@ Expected outcome: ![List UI](List.png)
 
 ### 5. Find by Keyword
 By providing a keyword, all tasks containing that keyword will be found and listed out.
-find <description>
-find Towers
+
+Format: `find <description>`
+
+Example: `find Towers`
 
 Expected outcome: ![Find UI](Find.png)
 
 ### 6. Tag task
 By providing an index and a phrase, the task with that index will be tagged with the phrase.
-tag <index> <tag details>
-tag 4 sea monster
+
+Format: `tag <index> <tag details>`
+
+Example: `tag 4 sea monster`
 
 Expected outcome: ![Tag UI](Tag.png)
 
 ### 7. Exit Duke
 Once you're done, you can exit Duke. Any task data in Duke will be saved, so next time you run Duke you can continue where you left off!
-bye
+
+Format: `bye`
 
 Expected outcome: ![Bye UI](Bye.png)
 
