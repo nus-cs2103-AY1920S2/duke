@@ -2,3 +2,6 @@ T | 1 | x
 T | 1 | y
 T | 1 | r
 T | 0 | submit project
+T | 0 | laundry
+E | 0 | item | 2020-01-01
+E | 0 | x | 2020-03-03
