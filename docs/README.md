@@ -9,23 +9,20 @@ Below is a sample interaction with the Duke Program.
 ### Duke's Images
 There are total of 3 images that can represent the Duke.
 
-Firstly, there is the image used on loadup.
-This image is only used for the first inteaction with the user and  serves as an introduction to the Duke.
-
+Firstly, there is the image used on loadup.  
+This image is only used for the first inteaction with the user and serves as an introduction to the Duke.  
 The image looks like this:
 
 
 <img src = "IntroDuke.png" width = "100">
 
-Next, there is the image used when the Duke successfully carries out a command from the user.
-
-This image looks like this:
+Next, there is the image used when the Duke successfully carries out a command from the user.  
+The image looks like this:
 
 
 <img src = "NewDuke.png" width = "100">
 
-Lastly, there is the image used when the Duke is unable to carry out a command from the user.
-
+Lastly, there is the image used when the Duke is unable to carry out a command from the user.  
 The image looks like this:
 
 
@@ -33,9 +30,7 @@ The image looks like this:
 
 
 ### User's Image
-There is only 1 image that represents the User.
-
-
+There is only 1 image that is used to represent the User.  
 The image looks like this:
 
 
@@ -63,7 +58,6 @@ I've added this task:
 [T][N] CS2103 Quiz
 Now you have 1 task in the list.  
 ```
-#
 
 ### Feature 2
 Event
@@ -85,8 +79,6 @@ I've added this task:
 [E][N] xyz (at: tomorrow)
 Now you have 1 task in the list.
 ```
-
-#
 
 ### Feature 3
 Deadline
@@ -113,9 +105,6 @@ Now you have 1 task in the list.
 ```
 
 
-
-#
-
 ### Feature 4
 List
 
@@ -138,7 +127,6 @@ Here are the tasks in your list:
 3. [D][N] watch webcast (by: 28-01-2020 1600)
 ```
 
-#
 
 ### Feature 5
 find
@@ -160,7 +148,6 @@ Here are the matching keywords in your list:
 1. [T][N] learn java
 ```
 
-#
 
 ### Feature 6
 Delete 
@@ -183,7 +170,6 @@ I've removed this task:
 you now have 2 tasks in the list.
 ```
 
-#
 
 ### Feature 7
 done
@@ -205,7 +191,6 @@ Nice! I've marked this task as done:
 [T][Y] learn java
 ```
 
-#
 
 ### Feature 8
 snooze
@@ -227,9 +212,6 @@ Got it, the updated deadline looks like:
 ```
 
 
-
-
-#
 
 ### Feature 9
 
