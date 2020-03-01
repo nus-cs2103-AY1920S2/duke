@@ -1,4 +1,22 @@
-# User Guide
+# Cute User Guide
+
+![Duke Screenshot](./Ui.png)
+Product Screenshot
+
+## Description
+Cute is an adorable, innocent little kitten that would never hurt you! She'll help you manage all your tasks, well, as long as she gets some food in return...
+
+## Technology
+1. Java 11
+2. JavaFX 11
+3. Gradle
+
+## Usage
+
+### Starting up Cute
+Firstly, ensure you have the relevant technologies installed.
+To start the application, simply double click on the .jar file to run it.
+Alternatively, you may run `java -jar cute.jar` in command line.
 
 ## Features 
 1. List all tasks
@@ -10,16 +28,14 @@
 7. Update a task description and time
 8. Find a task by keyword
 
-## List all tasks
-### Usage
-### `list`
+###  Task Management
+## 1. Listing Tasks
 
 Displays an indexed list of all tasks.
 
-Example of usage: 
-
+*Command Usage*:
 `list`
 
-Expected outcome:
+*Expected Output*:
 
 `1. [D][X] Assignment (by: 20 Apr 2019)`
