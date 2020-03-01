@@ -1,11 +1,12 @@
 package duke.save;
 
-import duke.task.TaskList;
-
 import java.util.ArrayList;
+
+import duke.task.TaskList;
 
 public class SaveStateStack {
     private ArrayList<SaveState> saveStates;
+    public static final int MAX_SAVE_STATE_CAPACITY = 10;
 
     /**
      * Initialises a {@code SaveStateStack} that can hold up to 10 saves.
@@ -14,7 +15,7 @@ public class SaveStateStack {
      * taking up too much space.
      */
     public SaveStateStack() {
-        this.saveStates = new ArrayList<>(10);
+        this.saveStates = new ArrayList<>(MAX_SAVE_STATE_CAPACITY);
     }
 
     /**
@@ -23,7 +24,7 @@ public class SaveStateStack {
      * @param saveState Save state to push.
      */
     public void push(SaveState saveState) {
-        if (this.saveStates.size() == 10) {
+        if (this.saveStates.size() == MAX_SAVE_STATE_CAPACITY) {
             this.saveStates.remove(0);
         }
         this.saveStates.add(saveState);
