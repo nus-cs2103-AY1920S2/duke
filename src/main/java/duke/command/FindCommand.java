@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exceptions.InvalidIndexError;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 

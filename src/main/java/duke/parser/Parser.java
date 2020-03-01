@@ -30,6 +30,7 @@ public class Parser {
      */
     public String[] parseUserInput(String input) throws Exception {
 
+
         boolean isValidInput = checkValidInput(input);
 
         if (!isValidInput) {
@@ -65,7 +66,6 @@ public class Parser {
      * @throws InvalidDateError is an error thrown when date has incorrect format.
      */
     public LocalDateTime[] parseDateTime(String dateTime, String type) throws InvalidDateError {
-
 
         String[] split = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
@@ -139,11 +139,13 @@ public class Parser {
      * @throws EmptyDateError is thrown when task is missing start or end date or both.
      * @throws InvalidDateError is thrown when date has incorrect format or has already past.
      */
-    String[] parseAddCommand(String input) throws EmptyDescriptionError, EmptyDateError, InvalidDateError {
+    String[] parseAddCommand(String input) throws Exception {
+
 
         String[] outputArr = new String[3];
 
         int whiteSpaceIndex = input.indexOf(" ");
+
 
         if (input.startsWith("todo")) {
 
@@ -154,13 +156,17 @@ public class Parser {
                 throw new EmptyDescriptionError(Task.Types.T.toString());
             }
 
+            if(whiteSpaceIndex != 4) {
+
+                throw new InvalidInputError();
+            }
+
             outputArr[0] = Task.Types.T.toString();
             outputArr[1] = input.substring(whiteSpaceIndex + 1);
             outputArr[2] = "";
 
         } else {
 
-            int indexOfSlash = input.indexOf("/");
             String trimWhiteSpace = input.trim();
 
             if (input.startsWith("deadline")) {
@@ -171,19 +177,19 @@ public class Parser {
 
                     throw new EmptyDescriptionError(Task.Types.D.toString());
 
-                } else if (indexOfSlash == -1) {
+                } else if (whiteSpaceIndex != 8) {
 
-                    throw new EmptyDateError(Task.Types.D.toString());
+                    throw new InvalidInputError();
 
                 } else if (indexBy == -1) {
 
-                    throw new InvalidDateError(Task.Types.D.toString(), "format");
+                    throw new EmptyDateError(Task.Types.D.toString());
 
                 } else {
 
                     outputArr[0] = Task.Types.D.toString();
-                    outputArr[1] = input.substring(whiteSpaceIndex + 1, indexOfSlash);
-                    outputArr[2] = input.substring(indexOfSlash + 4);
+                    outputArr[1] = input.substring(whiteSpaceIndex + 1, indexBy);
+                    outputArr[2] = input.substring(indexBy + 4);
                 }
 
             } else {
@@ -196,19 +202,19 @@ public class Parser {
 
                     throw new EmptyDescriptionError(Task.Types.E.toString());
 
-                } else if (indexOfSlash == -1) {
+                } else if(whiteSpaceIndex != 5) {
 
-                    throw new EmptyDateError(Task.Types.E.toString());
+                    throw new InvalidInputError();
 
                 } else if (indexAt == -1) {
 
-                    throw new InvalidDateError(Task.Types.E.toString(), "format");
+                    throw new EmptyDateError(Task.Types.E.toString());
 
                 } else {
 
                     outputArr[0] = Task.Types.E.toString();
-                    outputArr[1] = input.substring(whiteSpaceIndex + 1, indexOfSlash);
-                    outputArr[2] = input.substring(indexOfSlash + 4);
+                    outputArr[1] = input.substring(whiteSpaceIndex + 1, indexAt);
+                    outputArr[2] = input.substring(indexAt + 4);
                 }
             }
         }
@@ -225,7 +231,7 @@ public class Parser {
      * @throws MissingTaskNumberError is thrown when command is missing task index.
      * @throws MissingKeywordError    is thrown when command is missing keyword.
      */
-    String[] parseCommand(String input) throws MissingTaskNumberError, MissingKeywordError {
+    String[] parseCommand(String input) throws Exception {
 
         String[] outputArr = new String[3];
 
@@ -280,10 +286,11 @@ public class Parser {
 
         boolean isList = input.equals("list");
         boolean isBye = input.equals("bye");
-        boolean isDone = input.startsWith("done");
-        boolean isDelete = input.startsWith("delete");
-        boolean isFind = input.startsWith("find");
+        boolean isDone = input.startsWith("done ");
+        boolean isDelete = input.startsWith("delete ");
+        boolean isFind = input.startsWith("find ");
         boolean isEvent = input.startsWith("todo") || input.startsWith("event") || input.startsWith("deadline");
+
 
         return isList || isBye || isDone || isDelete || isFind || isEvent;
 
@@ -331,9 +338,9 @@ public class Parser {
 
         boolean isList = input.equals("list");
         boolean isBye = input.equals("bye");
-        boolean isDone = input.startsWith("done");
-        boolean isDelete = input.startsWith("delete");
-        boolean isFind = input.startsWith("find");
+        boolean isDone = input.startsWith("done ");
+        boolean isDelete = input.startsWith("delete ");
+        boolean isFind = input.startsWith("find ");
         boolean isEvent = input.startsWith("todo") || input.startsWith("event") || input.startsWith("deadline");
 
         if (isEvent) {

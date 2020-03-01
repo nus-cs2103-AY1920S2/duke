@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exceptions.Exceptions;
 import duke.exceptions.InvalidIndexError;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -35,7 +36,8 @@ public class DeleteCommand extends Command {
 
         try {
 
-            if (taskList.getList().size() < Integer.parseInt(taskDescriptionArr[1])) {
+            if (taskList.getList().size() < Integer.parseInt(taskDescriptionArr[1])
+                    || Integer.parseInt(taskDescriptionArr[1]) <= 0) {
 
                 throw new InvalidIndexError(taskList.getList().size());
             }
@@ -47,7 +49,14 @@ public class DeleteCommand extends Command {
 
         } catch (Exception e) {
 
-            return e.toString();
+            if(e instanceof Exceptions) {
+
+                return e.toString();
+
+            } else {
+
+                return "Error encountered when deleting event. Please try again!";
+            }
 
         }
     }

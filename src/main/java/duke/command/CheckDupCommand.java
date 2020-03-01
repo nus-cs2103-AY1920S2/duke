@@ -42,7 +42,6 @@ public class CheckDupCommand extends Command {
         ArrayList taskList = super.taskList.getList();
 
         for (int i = 0; i < taskList.size(); i++) {
-
             Task current = (Task) taskList.get(i);
             String type = current.getType().toString();
             String taskDes = current.getTaskDescription();

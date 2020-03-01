@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.exceptions.Exceptions;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -83,7 +84,14 @@ public class Ui {
 
         } catch (Exception e) {
 
-            return e.toString();
+            if(e instanceof Exceptions) {
+
+                return e.toString();
+
+            } else {
+
+                return "Error!";
+            }
 
         }
 

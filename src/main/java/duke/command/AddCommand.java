@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exceptions.DuplicateTaskError;
+import duke.exceptions.Exceptions;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -71,7 +72,14 @@ public class AddCommand extends Command {
 
         } catch (Exception e) {
 
-            return e.toString();
+            if(e instanceof Exceptions) {
+
+                return e.toString();
+
+            } else {
+
+                return "Error encountered when adding event. Please try again!";
+            }
 
         }
 

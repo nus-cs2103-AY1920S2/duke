@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.exceptions.Exceptions;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
@@ -48,7 +49,7 @@ public class Storage {
     /**
      * Interprets content of file and calls method to add it into taskList.
      */
-    public void loadFile() {
+    public String loadFile() {
 
         try {
             File f = new File(path);
@@ -128,10 +129,19 @@ public class Storage {
             }
 
             assert lines == taskList.getList().size() : "Number of tasks in file and taskList don't match";
+            return "File loaded";
 
         } catch (Exception e) {
 
-            System.out.println(e);
+            if (e instanceof Exceptions) {
+
+                return e.toString();
+
+            } else {
+
+                return "Error encountered when loading file. Please restart the app!";
+
+            }
 
         }
     }
