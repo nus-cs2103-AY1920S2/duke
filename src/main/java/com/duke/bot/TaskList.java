@@ -18,7 +18,9 @@ public class TaskList {
     }
 
     /**
-     * Creates a TaskList object.
+     * Factory method for creating a TaskList object.
+     *
+     * @return A TaskList object.
      */
     public static TaskList createTaskList() {
         return new TaskList();

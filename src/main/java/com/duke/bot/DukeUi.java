@@ -13,6 +13,7 @@ public class DukeUi {
 
     private Scanner in;
     private PrintStream out;
+
     /**
      * Constructs a DukeUi object.
      *
@@ -52,14 +53,24 @@ public class DukeUi {
         out.print(BYE_MESSAGE);
     }
 
+    /**
+     * Prints a string onto the output.
+     * @param output The String being printed.
+     */
     public void print(String output) {
         out.println(output);
     }
 
+    /**
+     * Prints an empty line onto the output.
+     */
     public void printEmptyLine() {
         out.println();
     }
 
+    /**
+     * Resets the properties of the input to default settings.
+     */
     public void resetScanner() {
         in.reset();
     }
@@ -76,14 +87,29 @@ public class DukeUi {
         System.err.println(message);
     }
 
+    /**
+     * Gets the next output in the input stream.
+     *
+     * @return The next string in the input stream.
+     */
     public String getNext() {
         return in.next();
     }
 
+    /**
+     * Gets the next integer in the input stream.
+     *
+     * @return The next integer in the input stream.
+     */
     public int getNextInt() {
         return in.nextInt();
     }
 
+    /**
+     * Gets the next string in the input stream, delimited by a newline character.
+     *
+     * @return The next line in the input stream.
+     */
     public String getNextLine() {
         return in.nextLine();
     }

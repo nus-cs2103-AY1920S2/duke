@@ -25,6 +25,8 @@ public class Task {
 
     /**
      * Returns the name of the task.
+     *
+     * @return The task name.
      */
     public String getTaskName() {
         return taskName;
@@ -50,7 +52,7 @@ public class Task {
     /**
      * Returns the icon that represents the type of task.
      *
-     * @return A character 'O'..
+     * @return A character 'O'.
      */
     public String getTaskIcon() {
         return "O";

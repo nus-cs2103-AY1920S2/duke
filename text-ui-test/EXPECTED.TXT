@@ -1,0 +1,29 @@
+Hello! I'm Duke
+What can I do for you?
+
+Added: [T] [✘] eat fish
+Now you have 1 task(s) on your list.
+
+Added: [D] [✘] eat fish by tonight
+Now you have 2 task(s) on your list.
+
+Added: [E] [✘] eat fish at my house
+Now you have 3 task(s) on your list.
+
+Here is your list of tasks:
+1. [T] [✘] eat fish
+2. [D] [✘] eat fish by tonight
+3. [E] [✘] eat fish at my house
+
+Good job! I've marked this task as done:
+2. [D] [✓] eat fish by tonight
+
+Good job! I've marked this task as done:
+3. [E] [✓] eat fish at my house
+
+Here is your list of tasks:
+1. [T] [✘] eat fish
+2. [D] [✓] eat fish by tonight
+3. [E] [✓] eat fish at my house
+
+Bye. Hope to see you again soon! :)

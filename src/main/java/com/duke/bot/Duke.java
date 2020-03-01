@@ -5,7 +5,9 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,10 +17,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 /**
  * Represents the Duke bot that manages the tasks of the users.
  */
@@ -45,6 +51,7 @@ public class Duke extends Application {
         this.ui = new DukeUi(System.in, System.out);
     }
 
+
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -52,7 +59,7 @@ public class Duke extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         Label dukeText = new Label(ui.greet());
-        dialogContainer.getChildren().add(new DialogBox(dukeText, new ImageView(dukeImage)));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage)));
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -114,8 +121,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(userImage)),
-                new DialogBox(dukeText, new ImageView(dukeImage))
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
         userInput.clear();
     }
@@ -130,7 +137,7 @@ public class Duke extends Application {
 
     private String getResponse(String input) {
         String output = "";
-        assert output == "" : "output should be empty initially";
+        assert output.isEmpty() : "output should be empty initially";
         Scanner sc = new Scanner(input);
         String commandWord = sc.next();
         String restOfStr = sc.hasNext() ? sc.nextLine() : "";
@@ -143,6 +150,11 @@ public class Duke extends Application {
         return output;
     }
 
+    /**
+     * Creates a Duke object.
+     *
+     * @param ui the UI that duke will be running on
+     */
     public Duke(DukeUi ui) {
         this.tasks = TaskList.createTaskList();
         storage = Storage.createSrorageFile();

@@ -14,7 +14,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = 'com.duke.bot.Duke'
+    mainClassName = 'com.duke.bot.Launcher'
 }
 
 run {
