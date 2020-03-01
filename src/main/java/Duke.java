@@ -12,7 +12,7 @@ public class Duke {
      * Constructor for the Duke Class.
      */
     public Duke() {
-        String filepath = "data/duke.txt";
+        String filepath = "duke.txt";
         ui = new Gui();
         //ui.printStartUp();
         storage = new Storage(filepath);

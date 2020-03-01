@@ -5,7 +5,7 @@ public class Gui {
      */
     public String printStartUp() {
 
-        return ("Hello, I'm Duke\nWhat can I do for you?\n\n");
+        return ("Hello, I'm Duke\nWhat can I do for you?\n");
     }
 
     /**
@@ -79,12 +79,14 @@ public class Gui {
      *
      * @param listOfTasks List of all saved tasks.
      */
-    public String printOutAdded(TaskList listOfTasks) {
+    public String printOutAdded(TaskList listOfTasks) throws DukeException {
         String toReturn = "Got it, I've added this task:\n";
-        if (listOfTasks.getNumOfTasks() < 2) {
-            toReturn += "Now you have 1 task in the list.\n";
+        int num = listOfTasks.getNumOfTasks();
+        toReturn += listOfTasks.getTask(num - 1);
+        if (num < 2) {
+            toReturn += "\nNow you have 1 task in the list.\n";
         } else {
-            toReturn += String.format("Now you have %d tasks in the list.\n", listOfTasks.getNumOfTasks());
+            toReturn += String.format("\nNow you have %d tasks in the list.\n", listOfTasks.getNumOfTasks());
         }
         return toReturn;
     }

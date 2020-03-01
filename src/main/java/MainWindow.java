@@ -22,8 +22,8 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private Gui gui = new Gui();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/NewUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/IntroDuke.png"));
 
     @FXML
     public void initialize() {
@@ -43,6 +43,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        if(response.substring(0,2).equals(":(")) {
+            dukeImage = new Image(this.getClass().getResourceAsStream("/images/Fail.png"));
+        }
+        else {
+            dukeImage = new Image(this.getClass().getResourceAsStream("/images/NewDuke.png"));
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
