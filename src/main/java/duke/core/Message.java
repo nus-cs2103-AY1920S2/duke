@@ -2,10 +2,13 @@ package duke.core;
 
 public class Message {
     public static final String INTRO = "I'm not Duke, I'm Cute!\n"
-            + "I'm feeling a lil hungry... ooh!\n" + "Hi little fishy, what you up to?";
+            + "I'm feeling a lil hungry... ooh!\n" + "Hi little fishy, what you up to?\n\n"
+            + "Type 'help' if you need any!";
 
     public static final String EXIT = "Cute lunges forward and snaps you up in a gulp.\n" 
             + "She's grateful you swam by!";
+
+    public static final String HELP = "Here's a list of Cute commands to try:\n";
 
     public static final String DO_TASK = "Mmm, Cute thinks your hardworkingness smells yummy!\n";
 

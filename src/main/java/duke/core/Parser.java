@@ -3,11 +3,15 @@ package duke.core;
 import duke.command.Command;
 import duke.command.ListCommand;
 import duke.command.ByeCommand;
-import duke.command.DeleteCommand;
+import duke.command.HelpCommand;
+
 import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
 import duke.command.FindCommand;
+
 import duke.command.UpdateDescriptionCommand;
 import duke.command.UpdateTimeCommand;
+
 import duke.command.TodoCommand;
 import duke.command.EventCommand;
 import duke.command.DeadlineCommand;
@@ -49,6 +53,10 @@ public class Parser {
         
         case "bye":
             result = new ByeCommand(input, true);
+            break;
+
+        case "help":
+            result = new HelpCommand(input, false);
             break;
 
         case "delete":
