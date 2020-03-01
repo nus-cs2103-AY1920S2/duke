@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Creates a new Storage with the given filepath.
+     * @param filePath The filepath where to load from and write to.
      */
     public Storage(String filePath) {
         this.filePath = filePath;

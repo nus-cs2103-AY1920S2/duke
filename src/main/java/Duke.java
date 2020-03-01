@@ -1,5 +1,4 @@
-import java.io.*;
-//import java.io.FileNotFoundException;
+import java.io.FileNotFoundException;
 
 /**
  * Represents a Duke robot that deal with multiple tasks.
@@ -25,7 +24,7 @@ public class Duke {
     /**
      * Creates a new Duke with the given filePath.
      */
-    public Duke(String filePath) {
+    public Duke (String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {

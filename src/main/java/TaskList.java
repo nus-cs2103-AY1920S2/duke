@@ -16,7 +16,7 @@ public class TaskList {
     /**
      * Creates a new TaskList with the given arraylist that contains tasks.
      */
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList (ArrayList<Task> tasks) {
         this.tasks = tasks;
         this.ui = new Ui();
     }
@@ -41,7 +41,7 @@ public class TaskList {
      * Adds a task to this tasklist.
      * @param task The task to be added.
      */
-    public void addTask(Task task) {
+    public void addTask (Task task) {
         tasks.add(task);
         ui.add(task, tasks);
     }
@@ -50,7 +50,7 @@ public class TaskList {
      * Marks a task in this list as done.
      * @param n Index of the task that is done.
      */
-    public void doneTask(int n) {
+    public void doneTask (int n) {
         tasks.get(n-1).setDone();
         ui.done(n, tasks);
     }
@@ -59,7 +59,7 @@ public class TaskList {
      * Deletes a task in this list.
      * @param n Index of the task to be deleted.
      */
-    public void deleteTask(int n) {
+    public void deleteTask (int n) {
         ui.delete(n, tasks);
         tasks.remove(n-1);
         ui.count(tasks);
@@ -69,7 +69,7 @@ public class TaskList {
      * Finds tasks that matches the given keyword.
      * @Param keyword The given keyword.
      */
-    public void find(String keyword) {
+    public void find (String keyword) {
         ArrayList<Task> results = new ArrayList<Task>();
         for (Task task: tasks) {
             if (task.getInstruction().contains(keyword)) {

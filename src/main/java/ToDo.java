@@ -6,7 +6,7 @@ public class ToDo extends Task {
     /**
      * Creates a new ToDo with the given instruction.
      */
-    public ToDo(String instruction){
+    public ToDo (String instruction) {
         super(instruction);
     }
 
@@ -15,7 +15,7 @@ public class ToDo extends Task {
      * @return the string representation of this todo.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 }

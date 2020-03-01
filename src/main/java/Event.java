@@ -11,7 +11,7 @@ public class Event extends Task {
     /**
      * Creates a new Event with the given instruction and time.
      */
-    public Event(String instruction, LocalDateTime time) {
+    public Event (String instruction, LocalDateTime time) {
         super(instruction);
         this.time = time;
     }

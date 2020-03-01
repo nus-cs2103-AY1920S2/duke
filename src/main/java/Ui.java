@@ -9,7 +9,9 @@ public class Ui {
     /**
      * Creates a new Ui.
      */
-    public Ui() { }
+    public Ui() {
+
+    }
 
     /**
      * Greets to the user.
@@ -28,7 +30,7 @@ public class Ui {
     /**
      * Adds a task for the user.
      */
-    public void add(Task task, ArrayList<Task> tasks) {
+    public void add (Task task, ArrayList<Task> tasks) {
         System.out.println("Got it. I've added this task:\n" + task.toString()
                 + "\n Now you have " + tasks.size() + " tasks in the list.");
     }
@@ -36,7 +38,7 @@ public class Ui {
     /**
      * Marks a task as done for the user.
      */
-    public void done(int n, ArrayList<Task> tasks) {
+    public void done (int n, ArrayList<Task> tasks) {
         System.out.println("Nice! I've marked this task as done: \n"
                 + tasks.get(n-1).toString());
     }
@@ -44,7 +46,7 @@ public class Ui {
     /**
      * Deletes a task for the user.
      */
-    public void delete(int n, ArrayList<Task> tasks) {
+    public void delete (int n, ArrayList<Task> tasks) {
         System.out.println("Noted. I've removed this task:\n"
                 + tasks.get(n-1).toString());
     }
@@ -53,7 +55,7 @@ public class Ui {
      * Finds tasks that matches the given keyword for the user.
      * @Param results The list of matching tasks.
      */
-    public void findKeyword(ArrayList<Task> results) {
+    public void findKeyword (ArrayList<Task> results) {
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < results.size(); i++) {
             if (results.get(i) != null) {
@@ -65,14 +67,14 @@ public class Ui {
     /**
      * Counts the number of task in the current list for the user.
      */
-    public void count(ArrayList<Task> tasks) {
+    public void count (ArrayList<Task> tasks) {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     /**
      * Shows command error for the user while catching duke exceptions.
      */
-    public void showCommandError(DukeException e) {
+    public void showCommandError (DukeException e) {
         if (e.getType().equals("EmptyToDo")) {
             System.out.println("OOPS!!! The description of a todo cannot be empty.");
         }
@@ -97,7 +99,7 @@ public class Ui {
     /**
      * Shows error for the user while catching IOExceptions.
      */
-    public void showIOException(IOException e) {
+    public void showIOException (IOException e) {
         System.out.println("Oops! " + e.getMessage());
     }
 }

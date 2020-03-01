@@ -11,7 +11,7 @@ public class Deadline extends Task{
     /**
      * Creates a new Deadline with the given instruction and time.
      */
-    public Deadline(String instruction, LocalDateTime time) {
+    public Deadline (String instruction, LocalDateTime time) {
         super(instruction);
         this.time = time;
     }

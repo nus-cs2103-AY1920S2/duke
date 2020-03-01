@@ -15,7 +15,7 @@ public class Task {
      * Creates a new Task with the given instruction.
      * Initially the task is not done.
      */
-    public Task(String instruction){
+    public Task (String instruction) {
         this.instruction = instruction;
         this.isDone = false;
     }

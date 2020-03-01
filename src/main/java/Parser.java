@@ -24,7 +24,7 @@ public class Parser {
     /**
      * Creates a new Parser with the given ui, tasklist and storage.
      */
-    public Parser(Ui ui, TaskList tasks, Storage storage) {
+    public Parser (Ui ui, TaskList tasks, Storage storage) {
         this.ui = ui;
         this.tasks = tasks;
         this.storage = storage;
