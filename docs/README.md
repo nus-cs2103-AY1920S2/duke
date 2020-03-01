@@ -140,7 +140,7 @@ Example of usage:
 
 `bye`
 
-<img src = "Ui.png">`
+<img src = "UI.png">`
 
 ### Acknowledgements
 Code adapted from: https://github.com/se-edu/duke
