@@ -43,5 +43,7 @@ public class SaveStateTest {
         assertEquals(saveState.getLastCommand(), "Test command");
         assertEquals(0, saveState.getTasksFromSave().size());
         assertNotNull(saveState.getTasksFromSave());
+        verify(taskListMock, times(1)).getImmutableDeepCopy();
+        verifyNoMoreInteractions(taskListMock);
     }
 }

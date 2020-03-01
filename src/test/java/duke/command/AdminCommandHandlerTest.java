@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class AdminCommandHandlerTest {
         assertEquals("Help message.", AdminCommandHandler.handleHelpCommand(command, dummyTaskList, uiMock,
                 dummyStorageMock, dummySaveStateStack));
         verify(uiMock, times(1)).printHelpMessage();
+        verifyNoMoreInteractions(uiMock);
     }
 
     /**
@@ -65,6 +67,7 @@ public class AdminCommandHandlerTest {
         assertEquals("Goodbye.", AdminCommandHandler.handleByeCommand(command, dummyTaskList, uiMock,
                 dummyStorageMock, dummySaveStateStack));
         verify(uiMock, times(1)).printGoodbye();
+        verifyNoMoreInteractions(uiMock);
     }
 
     /**
@@ -96,10 +99,19 @@ public class AdminCommandHandlerTest {
         // Testing
         assertEquals("Undone.", AdminCommandHandler.handleUndoCommand(command, taskListMock, uiMock,
                 storageMock, saveStateStackMock));
+
         verify(saveStateStackMock, times(1)).pop();
         verify(taskListMock, times(1)).replaceTaskList(dummyTaskArray);
         verify(storageMock, times(1)).save(taskListMock);
         verify(uiMock, times(1)).printUndoMessage(previousCommand);
+        verify(saveStateMock, times(1)).getTasksFromSave();
+        verify(saveStateMock, times(1)).getLastCommand();
+
+        verifyNoMoreInteractions(saveStateStackMock);
+        verifyNoMoreInteractions(taskListMock);
+        verifyNoMoreInteractions(storageMock);
+        verifyNoMoreInteractions(uiMock);
+        verifyNoMoreInteractions(saveStateMock);
     }
 
     /**
@@ -121,6 +133,7 @@ public class AdminCommandHandlerTest {
         } catch (DuchessException e) {
             assertEquals(ERROR_NO_MORE_UNDOS, e.getMessage());
             verify(saveStateStackMock, times(1)).pop();
+            verifyNoMoreInteractions(saveStateStackMock);
         }
     }
 }
