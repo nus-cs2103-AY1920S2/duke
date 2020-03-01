@@ -102,4 +102,8 @@ public class Ui {
     public void showIOException (IOException e) {
         System.out.println("Oops! " + e.getMessage());
     }
+
+    public void showAssertionError() {
+        System.out.println("Oops! The index is invalid.");
+    }
 }

@@ -42,6 +42,8 @@ public class Parser {
                 handleInstruction(usercommand);
             } catch (DukeException e) {
                 ui.showCommandError(e);
+            } catch (AssertionError e) {
+                ui.showAssertionError();
             }
         }
     }
@@ -57,10 +59,15 @@ public class Parser {
         } else if (instruction.equals("list")) {
             tasks.printList();
         } else if (instruction.split(" ")[0].equals("done")) {
-            tasks.doneTask(Integer.parseInt(instruction.split(" ")[1]));
+            int index = Integer.parseInt(instruction.split(" ")[1]);
+            assert index < 0 : "invalid index";
+            tasks.doneTask(index);
             storage.record(tasks.getTasks());
+
         } else if (instruction.split(" ")[0].equals("delete")) {
-            tasks.deleteTask(Integer.parseInt(instruction.split(" ")[1]));
+            int index = Integer.parseInt(instruction.split(" ")[1]);
+            assert index < 0 : "invalid index";
+            tasks.deleteTask(index);
             storage.record(tasks.getTasks());
         } else if (instruction.split(" ")[0].equals("find")) {
             String keyword = instruction.replace("find ", "");
