@@ -6,7 +6,7 @@ Kirby is now here to help you by being your very own chat bot task manager!
 
 Kirby will help you keep track of your tasks. Give him secret commands for an easter egg response Uwu
 
-![Kirby Logo](UI.png)
+![Kirby Logo](Ui.png)
 
 ### 1. Add `todo`
 Add a `todo` task into the list of tasks with its description.
