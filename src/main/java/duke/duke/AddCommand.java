@@ -38,6 +38,7 @@ public class AddCommand extends Command {
             String[] commandD = setData(str);
             LocalDate dateD = setDate(commandD[1]);
             Deadline deadline = new Deadline(commandD[0], dateD);
+            deadline.setRawDate(commandD[1]);
             deadline.setTime(commandD[2]);
             lst.addTask(deadline);
             return ui.taskAdd(deadline, tasks);
@@ -46,6 +47,7 @@ public class AddCommand extends Command {
             String[] commandE = setData(str);
             LocalDate dateE = setDate(commandE[1]);
             Event event = new Event(commandE[0], dateE);
+            event.setRawDate(commandE[1]);
             event.setTime(commandE[2]);
             lst.addTask(event);
             return ui.taskAdd(event, tasks);

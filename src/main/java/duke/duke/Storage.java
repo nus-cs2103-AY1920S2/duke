@@ -43,7 +43,7 @@ public class Storage {
                 String[] temp = input.get(i).split("\\|");
                 //is there a way to add different child class instances without 3 diff if-else statement
                 if (temp[0].equals("T")) {
-                    System.out.println("YO");
+                    //System.out.println("YO");
                     Todo todo = new Todo(temp[2]);
                     addtask(todo, temp[1], tasks);
                     lst.add(todo);
@@ -52,16 +52,16 @@ public class Storage {
                     //System.out.println(temp[0] + "HHEY");
                     //System.out.println(temp[1]);
                     //System.out.println(temp[2]);
-                    LocalDate localdate = setDate(temp);
+                    LocalDate localdate = setDate(temp[3]);
                     if (temp[0].equals("D")) {
                         Deadline deadline = new Deadline(temp[2], localdate);
                         addtask(deadline, temp[1], tasks);
-                        deadline.setTime(temp[3]);
+                        deadline.setTime(temp[4]);
                         lst.add(deadline);
                     } else {
                         Event event = new Event(temp[2], localdate);
                         addtask(event, temp[1], tasks);
-                        event.setTime(temp[3]);
+                        event.setTime(temp[4]);
                         lst.add(event);
                     }
                 }
@@ -93,7 +93,7 @@ public class Storage {
                     writer.newLine();
                 } else {
                     writer.write(task.getType() + "|" + task.getStatusIcon() + "|"
-                            + task.getD() + "|" + task.getTime());
+                            + task.getD() + "|" + task.getRawDate() + "|" + task.getRawTime());
                     writer.newLine();
                 }
             }
@@ -110,13 +110,12 @@ public class Storage {
      * @param temp String array that contains date
      * @return LocalDate object or Deadline/Event object
      */
-    private LocalDate setDate(String[] temp) {
-        String[] temp1 = temp[3].split(" ");
-        String[] temp2 = temp1[1].split("/");
+    private LocalDate setDate(String date) {
+        String[] temp2 = date.split("/");
+        //System.out.print(date);
         int year = Integer.parseInt(temp2[2]);
         int month = Integer.parseInt(temp2[1]);
         int day = Integer.parseInt(temp2[0]);
-        int time = Integer.parseInt(temp1[2]);
         LocalDate localdate = LocalDate.of(year, month, day);
         return localdate;
     }

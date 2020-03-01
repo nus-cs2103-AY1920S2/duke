@@ -41,6 +41,8 @@ public class Parser {
             return new DoneCommand(str);
         case "bye":
             return new ByeCommand(str);
+        case "find":
+            return new FindCommand(str);
         default:
             throw new DukeException("Please like pass in an input");
         }

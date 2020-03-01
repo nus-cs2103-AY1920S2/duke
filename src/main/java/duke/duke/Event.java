@@ -20,12 +20,17 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public void setRawDate(String date) {
+        this.rawDate = date;
+    }
+
     /**
      * Sets time for Event Task.
      * @param time for Event Task
      */
     public void setTime(String time) {
         this.timeD = time;
+        this.rawTime = time;
     }
 
     /**
@@ -48,6 +53,7 @@ public class Event extends Task {
      * Retrieves formatted time.
      * @return formatted time from Event Task
      */
+    @Override
     public String getTimeStamp() {
         return "(at: " +  date.format(DateTimeFormatter.ofPattern("MMM d yy"))  + " " +  this.timeD + ")";
     }

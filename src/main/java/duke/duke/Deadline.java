@@ -24,11 +24,16 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public void setRawDate(String date) {
+        this.rawDate = date;
+    }
+
     /**
      * Formats time to 12 hour mode for Deadline Task.
      * @param time for Deadline Task
      */
     public void setTime(String time) {
+        this.rawTime = time;
         String newtime = time.substring(0,2) + ":" + time.substring(2);
         DateFormat df = new SimpleDateFormat("HH:mm");
         DateFormat outputdf = new SimpleDateFormat("hh:mm aa");
@@ -65,6 +70,7 @@ public class Deadline extends Task {
      * Retrieves formatted time.
      * @return formatted time from Deadline Task
      */
+    @Override
     public String getTimeStamp() {
         return "(by: " +  date.format(DateTimeFormatter.ofPattern("MMM d yy"))  + " " +  this.timeD + ")";
     }

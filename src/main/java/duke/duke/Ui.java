@@ -124,4 +124,19 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Displays tasks user is finding for.
+     * @param tasks from FindCommand containing tasks user wants
+     * @return display of tasks that user wants
+     */
+    public String findTasks(TaskList tasks) {
+        System.out.print(showLine());
+        System.out.print("Here are the matching tasks in your list:");
+        output = "";
+        for (int i = 0; i < tasks.getSize(); i++) {
+            output += ((i + 1) + ". " + tasks.getTask(i) + '\n');
+        }
+        return output;
+    }
+
 }
