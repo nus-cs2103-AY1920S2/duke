@@ -19,7 +19,9 @@ public class Duke extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            
             AnchorPane ap = fxmlLoader.load();
+            
             Scene scene = new Scene(ap);
             scene.getStylesheets().add("view/style.css");
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/DaIcon.png")));
