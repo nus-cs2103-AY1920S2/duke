@@ -117,4 +117,5 @@ Eevee is your personal task manager, specially catered towards busy SoC students
 ## Acknowledgements
 - Some parts of this sample application were inspired by the excellent [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by
   _Marco Jakob_.
+- This product is based on the starter code from the Duke project created by https://se-education.org[SE-EDU] initiative
 - Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
