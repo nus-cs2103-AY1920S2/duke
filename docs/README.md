@@ -1,6 +1,8 @@
 # User Guide
 ## Sample Interaction
 Below is a sample interaction with the Duke Program.
+
+
 <img src="Ui.png" width="250">
 
 ## Images
@@ -9,22 +11,28 @@ There are total of 3 images that can represent the Duke.
 
 Firstly, there is the image used on loadup.
 This image is only used for the first inteaction with the user and  serves as an introduction to the Duke.
+
+
 The image looks like this:
 
 
-<img src = "IntroDuke.png" width = "250">
+<img src = "IntroDuke.png" width = "100">
 
 Next, there is the image used when the Duke successfully carries out a command from the user.
+
+
 This image looks like this:
 
 
-<img src = "NewDuke.png" width = "250">
+<img src = "NewDuke.png" width = "100">
 
 Lastly, there is the image used when the Duke is unable to carry out a command from the user.
+
+
 The image looks like this:
 
 
-<img src = "Fail.png" width = "250">
+<img src = "Fail.png" width = "100">
 
 
 ### User's Image
