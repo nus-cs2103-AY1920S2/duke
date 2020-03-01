@@ -4,24 +4,11 @@
       "type": "todo",
       "description": "run",
       "isDone": false,
-      "tags": []
-    },
-    {
-      "type": "event",
-      "dateAt": {
-        "year": 2020,
-        "month": 2,
-        "day": 2
-      },
-      "description": "run",
-      "isDone": false,
-      "tags": []
-    },
-    {
-      "type": "todo",
-      "description": "run",
-      "isDone": false,
-      "tags": []
+      "tags": [
+        {
+          "tagName": "tired"
+        }
+      ]
     }
   ]
 }

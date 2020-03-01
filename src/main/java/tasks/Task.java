@@ -31,6 +31,10 @@ public class Task {
         this.tags = tags;
     }
 
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
     /**
      * Returns the description of the task.
      *
@@ -51,7 +55,7 @@ public class Task {
     }
 
     public boolean checkTags(String tag) {
-        return tags.contains(tag);
+        return tags.contains(new Tag(tag));
     }
 
     /**

@@ -46,9 +46,6 @@ public class TaskList {
      * @return deleted task.
      */
     public void deleteTask(int taskNumber) {
-        if (taskNumber > list.size()) {
-            throw new DukeException("☹ OOPS!!! There is no such task.");
-        }
         list.remove(taskNumber);
     }
 
@@ -110,7 +107,7 @@ public class TaskList {
 
     public TaskList findTaskContainingTag(String tag) {
         ArrayList<Task> filteredByTag = (ArrayList<Task>) list.stream()
-                .filter(task -> StringUtil.containsWordIgnoreCase(task.getDescription(), tag))
+                .filter(task -> task.checkTags(tag))
                 .collect(Collectors.toList());
         return new TaskList(filteredByTag);
     }
