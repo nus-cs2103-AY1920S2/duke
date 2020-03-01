@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Rubik';
+    src: url('../fonts/Rubik-Regular.ttf');
+}
+
+#dialog-text {
+    -fx-background-color: #fff;
+    -fx-background-radius: 6px;
+    -fx-padding: 12px;
+    -fx-background-insets: 4px;
+    -fx-border-insets: 4px;
+    -fx-border-radius: 6px;
+    -fx-font-family: "Rubik";
+}
+
+#background {
+    -fx-background-color: #EDBFBF;
+}
+
+.text {
+    -fx-font-family: "Rubik";
+}

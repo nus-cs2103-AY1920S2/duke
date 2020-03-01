@@ -16,7 +16,7 @@ prefHeight="600.0" prefWidth="400.0" stylesheets="@../css/style.css" xmlns="http
 
     <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" pannable="true" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
       <content>
-        <VBox id="pane" fx:id="dialogContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="388.0" stylesheets="@../../../../build/resources/main/css/style.css" />
+        <VBox id="pane" fx:id="dialogContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="388.0" stylesheets="@../css/style.css" />
       </content>
     </ScrollPane>
 
