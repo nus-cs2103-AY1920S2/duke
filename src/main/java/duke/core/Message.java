@@ -20,8 +20,10 @@ public class Message {
 
     public static final String UPDATE_TIME = "Ooh, you updated the time, but is it time for me to eat yet?\n";
 
-    public static final String COMMAND_ERROR = "Sorry, invalid command. Try again with the following:\n"
-            + "todo, deadline, event";
+    public static final String COMMAND_ERROR = "Sorry, invalid command.\n" 
+            + "View a list of Cute commands by typing 'help'.";
+        
+    public static final String LIST_ERROR = "Sorry, that command isn't Cute. Try just 'list'?";
 
     public static final String DESCRIPTION_ERROR = "Oops! The description of a task can't be empty!";
 
