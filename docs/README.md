@@ -22,7 +22,8 @@ really love this app. Try it out!
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 5. Type the command in the command box and press `Enter` or the "Send" button to execute it.
 6. Some example commands you can try:
-Note: It would be better to type these commands below, since copy pasting does not guarantee correctness e.g. missing spaces.
+Please exercise caution when copy-pasting the commands below. There might be missing spaces,
+so re-check before you paste these commands to the application. The best way is to type out the commands by yourself.
 * **`todo`**`pray to the bell curve god`: adds a Todo Task called "pray to bell curve god". A Todo has no timestamp.
 Why need a timestamp when you can "pray to the bell curve god" everyday?
 * **`list`** : lists all tasks. For now, you should see the task "pray to the bell curve god" above.
