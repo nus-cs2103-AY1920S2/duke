@@ -1,6 +1,8 @@
 package duke.util;
 
-import duke.exception.DuchessException;
+import static duke.util.MagicStrings.ERROR_INVALID_SNOOZE_DURATION;
+import static duke.util.MagicStrings.ERROR_INVALID_UNIT_OF_TIME;
+import static duke.util.StringCleaner.cleanString;
 
 import java.time.Duration;
 import java.time.Period;
@@ -8,9 +10,7 @@ import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static duke.util.MagicStrings.ERROR_INVALID_SNOOZE_DURATION;
-import static duke.util.MagicStrings.ERROR_INVALID_UNIT_OF_TIME;
-import static duke.util.StringCleaner.cleanString;
+import duke.exception.DuchessException;
 
 /**
  * The {@code DurationParser} is a helper class with static methods to parse
@@ -63,8 +63,7 @@ public class DurationParser {
     /**
      * Returns a {@code String} object based on the given {@code userInput}.
      *
-     * <p>Allowed formats for {@code TemporalAmount} are durations such as "1 hour",
-     * "3 weeks", "4 days", "1 month", "2 years", etc.
+     * <p>Allowed formats are durations such as "1 hour", "3 weeks", "4 days", "1 month", "2 years", etc.
      *
      * @param userInput User provided input in {@code String} format.
      * @return {@code String} object based on given {@code userInput}.
