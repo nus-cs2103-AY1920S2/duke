@@ -34,12 +34,12 @@ public class MainWindow extends GuiComponent<Stage> {
     DcommandBox flowPaneController;
 
     void fillAreas() {
-        VBoxController = new DdialogSection();
-        VBoxController.setDimension(300.0);
-        chatArea.setContent(VBoxController.getRoot());
+        this.VBoxController = new DdialogSection(this.chatArea);
+        this.VBoxController.setDimension(300.0);
+        this.chatArea.setContent(VBoxController.getRoot());
 
-        flowPaneController = new DcommandBox(this::feedCommandToLogic);
-        mainLayout.getChildren().add(flowPaneController.getRoot());
+        this.flowPaneController = new DcommandBox(this::feedCommandToLogic, this.mainLayout);
+        this.mainLayout.getChildren().add(flowPaneController.getRoot());
     }
 
     private void feedCommandToLogic(String cmd) {

@@ -8,14 +8,19 @@ import javafx.scene.layout.VBox;
 
 import java.net.URL;
 
-public class DdialogSection extends GuiComponent<ScrollPane> {
+public class DdialogSection extends GuiComponent<Region> {
     private static final String FXML = "dialogwindow.fxml";
 
     @FXML
     private VBox dialogContainer;
 
-    public DdialogSection() {
+    public DdialogSection(Region root) {
         super(FXML);
+        setAttr(root);
+    }
+
+    private void setAttr(Region root) {
+        this.dialogContainer.prefHeightProperty().bind(root.heightProperty());
     }
 
     public void addRightDialogBox(String text) {

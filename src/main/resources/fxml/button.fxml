@@ -4,4 +4,4 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Button xmlns:fx="http://javafx.com/fxml/1" fx:id="button" AnchorPane.rightAnchor="1.0" AnchorPane.bottomAnchor="1.0"/>
+<Button xmlns:fx="http://javafx.com/fxml/1" fx:id="button" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" prefWidth="55.0"/>

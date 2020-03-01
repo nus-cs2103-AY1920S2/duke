@@ -1,8 +1,7 @@
 package duke.ui.gui.parts;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
 
@@ -11,12 +10,17 @@ public class DcommandBox extends GuiComponent<Region> {
     private CommandFeeder feeder;
 
     @FXML
-    private FlowPane commandArea;
+    private AnchorPane commandArea;
 
-    public DcommandBox(CommandFeeder cmdFeeder) {
+    public DcommandBox(CommandFeeder cmdFeeder, Region root) {
         super(FXML);
         this.feeder = cmdFeeder;
+        setAttr(root);
         fillAreas();
+    }
+
+    private void setAttr(Region root) {
+        this.commandArea.prefWidthProperty().bind(root.widthProperty());
     }
 
     DDtextBar textRegionController;
