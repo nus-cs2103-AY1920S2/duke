@@ -15,7 +15,7 @@
 - Store downloaded file in any existing or newly created directory.
 - Double-click file to begin using.
 
-****Java 11** is needed to use application*
+***Java 11** is needed to use application
 
 ## Usage
 

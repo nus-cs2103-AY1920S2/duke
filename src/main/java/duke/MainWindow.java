@@ -1,16 +1,17 @@
 package duke;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Background;
 
 /**
  * Controller for duke.MainWindow. Provides the layout for the other controls.
@@ -47,6 +48,7 @@ public class MainWindow extends AnchorPane {
         Background background = new Background(backgroundImage);
         dialogContainer.setBackground(background);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
+        sendButton.setStyle("-fx-background-color: blanchedalmond; -fx-border-color: skyblue");
     }
 
     public void setDuke(Duke d) {

@@ -35,7 +35,7 @@ public class Parser {
 
         } else if (input.equals("bye")) {
             response = ui.showGoodbye();
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            PauseTransition delay = new PauseTransition(Duration.seconds(5));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
 

@@ -1,6 +1,12 @@
 package duke;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -51,7 +57,7 @@ public class Storage {
                         newTask = new Event(temp[1], localDateTime);
                     }
 
-                    if (temp[0].equals("\u2713")) {
+                    if (temp[0].equals("Y")) {
                         newTask.isDone = true;
                     }
 
@@ -80,7 +86,7 @@ public class Storage {
 
             for (int i = 0; i < taskList.tasks.size(); i++) {
                 Task task = taskList.tasks.get(i);
-                String save = task.getStatusIcon() + "/" + task.description + "/";
+                String save = task.getStatus() + "/" + task.description + "/";
 
                 if (task instanceof ToDo) {
                     save += "T";

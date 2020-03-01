@@ -29,6 +29,15 @@ public class Task implements Serializable {
     }
 
     /**
+     * Returns status of task.
+     *
+     * @return status of whether a task is done
+     */
+    public String getStatus() {
+        return (isDone ? "Y" : "N"); //return tick or X symbols
+    }
+
+    /**
      * Changes status of task to done.
      */
     public void markDone() {

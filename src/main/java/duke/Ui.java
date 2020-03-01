@@ -28,7 +28,7 @@ public class Ui {
      * Returns goodbye message when program terminates.
      */
     public String showGoodbye() {
-        return "Aloha! Hope to see you again soon! :)\n";
+        return "Aloha! Ohana means Family.\nFamily means nobody gets left behind.\n";
     }
 
     /**
@@ -166,7 +166,7 @@ public class Ui {
     }
 
     /**
-     * Returns error message when user has entered duplicate task
+     * Returns error message when user has entered duplicate task.
      *
      * @return error message
      */
