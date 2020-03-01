@@ -6,6 +6,9 @@ import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Creates different responses for Duke to show in the main window.
+ */
 public class Ui {
     /** The logo for Duke. */
     private static final String HEADER = ""
@@ -132,7 +135,6 @@ public class Ui {
      * @param taskIds the list of ids in the task list matching the search criteria.
      */
     public void showFind(TaskList tasks, List<Integer> taskIds) {
-        // TODO: exception if taskIds contains duplicate elements
         String title = "Aren't I great for helping you find these tasks?:\n\n";
 
         StringBuilder foundTasks = new StringBuilder();

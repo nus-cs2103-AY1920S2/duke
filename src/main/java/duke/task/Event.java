@@ -2,6 +2,9 @@ package duke.task;
 
 import java.util.Objects;
 
+/**
+ * Represents an event with a start and end time.
+ */
 public class Event extends Task {
     /** The date of this event. */
     protected final String at;

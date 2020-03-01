@@ -8,6 +8,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a Parser that parses user input into Duke tasks.
+ */
 class TaskParser extends Parser {
     static AddCommand parseDeadline(String[] input) throws MissingParserArgumentsException,
             DateFormatException {

@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a generic task with no time frame.
+ */
 public class Todo extends Task {
     /**
      * Constructs a new to-do.

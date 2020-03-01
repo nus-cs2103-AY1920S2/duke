@@ -9,7 +9,7 @@ import duke.parser.exception.MissingParserArgumentsException;
 import duke.parser.exception.ParseException;
 
 /**
- * Represents a Parser to parse user input into Duke commands.
+ * Represents a Parser that parses user input into Duke commands.
  */
 class CommandParser extends Parser {
     static ExitCommand parseExit(String[] input)

@@ -8,9 +8,11 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The main top-level manager for Duke.
+ */
 public class Duke {
     // Duke components
-
     /** The save/loading mechanism. */
     private Storage storage;
     /** The list of tasks. */

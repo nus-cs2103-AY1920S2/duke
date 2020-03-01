@@ -44,6 +44,10 @@ public class MainWindow extends AnchorPane {
         this.duke = duke;
     }
 
+    /**
+     * Initialises the chat-bot with a welcome message. It also informs the user
+     * when creating a new save file (when using Duke for the first time).
+     */
     public void init() {
         if (!this.duke.isLoaded()) {
             addDialogBox(DialogBox.getDukeDialog(duke.getLoadingError(), dukeImage));

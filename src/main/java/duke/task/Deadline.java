@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * Represents a task with a deadline.
+ */
 public class Deadline extends Task {
     /** The cut-off date for this deadline. */
     protected final LocalDate by;

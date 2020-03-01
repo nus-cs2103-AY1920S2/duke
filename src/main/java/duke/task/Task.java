@@ -2,6 +2,9 @@ package duke.task;
 
 import java.util.Objects;
 
+/**
+ * Represents a template for creating tasks in Duke.
+ */
 public abstract class Task implements Serializable {
     /** Details about the task. */
     protected final String description;

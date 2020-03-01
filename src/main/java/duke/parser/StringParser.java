@@ -7,6 +7,9 @@ import java.time.format.DateTimeParseException;
 import duke.parser.exception.DateFormatException;
 import duke.parser.exception.ParseException;
 
+/**
+ * Represents a Parser that parses user input into common values.
+ */
 public class StringParser extends Parser {
     /**
      * Parses an integer from a string.

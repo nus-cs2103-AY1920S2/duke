@@ -8,6 +8,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a Parser that reads serialized tasks in a save file.
+ */
 public class StorageParser extends Parser {
     /** Separates a line of text for file IO processing. */
     private static final String DELIMITER = " \\s*\\|\\s*";

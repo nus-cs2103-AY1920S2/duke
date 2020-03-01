@@ -8,6 +8,7 @@ import duke.DukeException;
 public class StorageException extends DukeException {
     /** The name of the file that caused the error. */
     private String filePath;
+
     /**
      * Constructs a new {@code StorageException} when performing read/write operations in Duke.
      *
