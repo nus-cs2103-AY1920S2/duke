@@ -17,7 +17,7 @@ import javafx.scene.layout.HBox;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+public class    DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
@@ -48,11 +48,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db =  new DialogBox(text, img);
+        db.setStyle("-fx-background-color:DARKORANGE");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color:TURQUOISE");
         db.flip();
         return db;
     }
