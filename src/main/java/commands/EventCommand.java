@@ -3,6 +3,7 @@ package commands;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import exception.DukeException;
 import storage.Storage;
 import task.Event;
 import task.TaskList;
@@ -18,6 +19,16 @@ public class EventCommand extends Command {
         this.eventDate = eventDate;
     }
 
+    /**
+     *
+     * Executes the event command.
+     *
+     * @param tasks is task list for in-memory.
+     * @param ui is ui to display to user.
+     * @param storage is file where data is written to and read from.
+     * @return added event response.
+     * @throws IOException is exception for file.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Event event = new Event(taskAction, eventDate);

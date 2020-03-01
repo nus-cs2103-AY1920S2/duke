@@ -46,6 +46,11 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Removes the indexed tasks from the task list.
+     *
+     * @param taskIndexes indexes of tasks to be removed.
+     */
     public void removeTasks(int[] taskIndexes) {
         List<Task> tasksToDelete = IntStream.of(taskIndexes)
                                             .mapToObj(index -> this.tasks.get(index))
@@ -53,6 +58,11 @@ public class TaskList {
         this.tasks.removeAll(tasksToDelete);
     }
 
+    /**
+     * Gets a list of task actions for all tasks.
+     *
+     * @return list of task actions.
+     */
     public List<String> getAllTasksAction() {
         List<String> taskActions = this.tasks.stream()
                                              .map(task -> task.getTaskAction())
@@ -60,6 +70,12 @@ public class TaskList {
         return taskActions;
     }
 
+    /**
+     * Checks whether a task has already existed in the task list.
+     *
+     * @param newTask task to check whether it has existed.
+     * @return boolean.
+     */
     public boolean checkDuplicate(Task newTask) {
         List<String> taskActions = this.tasks.stream()
                                              .map(task -> task.getTaskAction())

@@ -14,18 +14,37 @@ public class Task {
         this.taskDuplicatesNumber = 1;
     }
 
+    /**
+     * Marks this task as done.
+     *
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Gets the current status of the task.
+     *
+     * @return boolean.
+     */
     public boolean getStatus() {
         return this.isDone;
     }
 
+    /**
+     * Gets the taskAction of the task.
+     *
+     * @return String.
+     */
     public String getTaskAction() {
         return this.taskAction;
     }
 
+    /**
+     * Represents task as a string.
+     *
+     * @return a string representation of the task.
+     */
     @Override
     public String toString() {
         if (isDone) {

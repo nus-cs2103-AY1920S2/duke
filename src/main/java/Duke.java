@@ -1,5 +1,6 @@
 import commands.Command;
 import exception.DukeException;
+import exception.EmptyDescriptionException;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;

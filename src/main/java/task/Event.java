@@ -12,16 +12,22 @@ public class Event extends Task {
         this.eventTime = event;
     }
 
-    public LocalDateTime getEventTime() {
-        return this.eventTime;
-    }
-
+    /**
+     * Returns String representation of an event.
+     *
+     * @return String.
+     */
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(),
                 this.eventTime.format(DateTimeFormatter.ofPattern("" + "MMM d yyyy, h:mm a")));
     }
 
+    /**
+     * Returns String representation of an event in the file.
+     *
+     * @return String.
+     */
     @Override
     public String toStringForFileStorage() {
         return super.getStatus() ? String.format("E | 1 | %s | %s", super.getTaskAction(), this.eventTime)

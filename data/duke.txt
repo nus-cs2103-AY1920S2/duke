@@ -1,6 +1,1 @@
-E | 1 | submission | 2021-01-12T21:43
-T | 1 | wake up
-T | 1 | abc
-T | 0 | cdf
-D | 0 | homework | 2013-02-20T20:13
-E | 0 | nothing | 1973-12-25T22:12
+T | 1 | zxcv

@@ -9,11 +9,26 @@ import ui.Ui;
 
 public class TodoCommand extends Command {
     private String taskAction;
+
+    /**
+     * Constructs a TodoCommand instance.
+     *
+     * @param taskAction is the task action.
+     */
     public TodoCommand(String taskAction) {
         super();
         this.taskAction = taskAction;
     }
 
+    /**
+     * Executes the todo command.
+     *
+     * @param tasks is task list for in-memory.
+     * @param ui is ui to display to user.
+     * @param storage is file where data is written to and read from.
+     * @return added todo task response.
+     * @throws IOException
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Todo todo = new Todo(taskAction);

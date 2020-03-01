@@ -9,7 +9,6 @@ import commands.ExitCommand;
 import commands.FindCommand;
 import commands.ListCommand;
 import commands.TodoCommand;
-import exception.CommandNotFoundException;
 import exception.EmptyDescriptionException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -32,6 +31,12 @@ public class Parser {
         this.userInput = userInput;
     }
 
+    /**
+     * Parse user input to extract different components out.
+     *
+     * @return a Command object corresponding to the command type inputted by user.
+     * @throws EmptyDescriptionException is thrown when "done" and "delete" command does not specify index.
+     */
     public Command parse() throws EmptyDescriptionException {
         String command = this.getCommand();
         String taskAction = this.getTaskAction();
@@ -112,7 +117,7 @@ public class Parser {
     }
 
     /**
-     * Returns an array of task indexes that user requests to delete.
+     * Returns an array of task indexes that user requests.
      *
      * @return an array of task indexes.
      * @throws EmptyDescriptionException throws exception of index is not provided.
