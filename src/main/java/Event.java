@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Event extends Task{
     public Event(String description, LocalDate date) {
