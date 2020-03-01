@@ -1,26 +1,5 @@
 package duke.storage;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import duke.exception.DuchessException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.RecurringDeadline;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
-import duke.util.Frequency;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 import static duke.util.MagicStrings.ERROR_FAIL_TO_LOAD;
 import static duke.util.MagicStrings.ERROR_FAIL_TO_LOAD_AND_SAVE;
 import static duke.util.MagicStrings.ERROR_FAIL_TO_SAVE;
@@ -30,6 +9,28 @@ import static duke.util.MagicStrings.GSON_ATTR_FREQUENCY;
 import static duke.util.MagicStrings.GSON_ATTR_IS_COMPLETED;
 import static duke.util.MagicStrings.GSON_ATTR_REPEAT_END_TIME;
 import static duke.util.MagicStrings.GSON_ATTR_TIME_FRAME;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import duke.exception.DuchessException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.RecurringDeadline;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.util.Frequency;
 
 /**
  * The {@code Storage} class helps to save and load @{code ArrayList}s of
@@ -105,14 +106,13 @@ public class Storage {
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_FREQUENCY), Frequency.class),
-                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_REPEAT_END_TIME), LocalDateTime.class)
-                    ));
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_REPEAT_END_TIME), LocalDateTime.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
                 } else {
                     result.add(new RecurringDeadline(
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
-                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_FREQUENCY), Frequency.class)
-                    ));
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_FREQUENCY), Frequency.class)));
                 }
             } else if (taskToCheck.has(GSON_ATTR_DEADLINE)) {
                 // Task is a Deadline

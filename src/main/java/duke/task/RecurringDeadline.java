@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.exception.DuchessException;
-import duke.util.Frequency;
+import static duke.util.MagicStrings.ERROR_RECURRING_TASK_MISSING_DEADLINE;
 
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAmount;
 
-import static duke.util.MagicStrings.ERROR_RECURRING_TASK_MISSING_DEADLINE;
+import duke.exception.DuchessException;
+import duke.util.Frequency;
 
 public class RecurringDeadline extends Deadline {
     private Frequency frequency;
@@ -14,7 +14,7 @@ public class RecurringDeadline extends Deadline {
 
     /**
      * Initialises the {@code RecurringDeadline} instance with its description, deadline and
-     * completion status.
+     * frequency.
      *
      * @param description Written description of the task.
      * @param deadline    {@code LocalDateTime} object indicating the deadline of
@@ -39,6 +39,24 @@ public class RecurringDeadline extends Deadline {
     public RecurringDeadline(String description, LocalDateTime deadline, Frequency frequency,
                              LocalDateTime repeatEndTime) {
         super(description, deadline);
+        this.frequency = frequency;
+        this.repeatEndTime = repeatEndTime;
+    }
+
+    /**
+     * Initialises the {@code RecurringDeadline} instance with its description, deadline and
+     * completion status.
+     *
+     * @param description   Written description of the task.
+     * @param deadline      {@code LocalDateTime} object indicating the deadline of
+     *                      the task.
+     * @param frequency     {@code Frequency} of the deadline.
+     * @param repeatEndTime {@code LocalDateTime} object indicating the time to stop repeating.
+     * @param isCompleted   State of completion of the deadline.
+     */
+    public RecurringDeadline(String description, LocalDateTime deadline, Frequency frequency,
+                             LocalDateTime repeatEndTime, boolean isCompleted) {
+        super(description, deadline, isCompleted);
         this.frequency = frequency;
         this.repeatEndTime = repeatEndTime;
     }
@@ -89,6 +107,16 @@ public class RecurringDeadline extends Deadline {
             this.repeatEndTime = this.repeatEndTime.plus(snoozePeriod);
         }
     }
+
+    /**
+     * Returns the {@code repeatEndTime} of the {@code RecurringDeadline}.
+     *
+     * @return Repeat end time in {@code LocalDateTime} format.
+     */
+    public LocalDateTime getRepeatEndTime() {
+        return this.repeatEndTime;
+    }
+
 
     private String getFrequency() throws DuchessException {
         switch (this.frequency) {
