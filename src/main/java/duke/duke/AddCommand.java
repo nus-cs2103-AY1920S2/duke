@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 
 /**
- * Adds the specified command to the tasklist from Duke
+ * Adds the specified command to the tasklist from Duke.
  */
 public class AddCommand extends Command {
 
@@ -12,7 +12,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     *
+     *Executes the add command and adds correct Task object to Tasklist.
      * @param lst from TaskList from Duke
      * @param storage from Storage from Duke
      * @param ui from UI from Duke from Duke
@@ -25,45 +25,45 @@ public class AddCommand extends Command {
         tasks.addNum();
         String[] command = str.split(" ");
         switch (command[0]) {
-            case "todo":
-                String name = "";
-                for (int i = 1; i < command.length; i++) {
-                    name += (command[i] + " ");
-                }
-                Todo todo = new Todo(name);
-                lst.addTask(todo);
-                return ui.taskAdd(todo, tasks);
+        case "todo":
+            String name = "";
+            for (int i = 1; i < command.length; i++) {
+                name += (command[i] + " ");
+            }
+            Todo todo = new Todo(name);
+            lst.addTask(todo);
+            return ui.taskAdd(todo, tasks);
 
-            case "deadline":
-                String[] commandD = setData(str);
-                LocalDate dateD = setDate(commandD[1]);
-                Deadline deadline = new Deadline(commandD[0], dateD);
-                deadline.setTime(commandD[2]);
-                lst.addTask(deadline);
-                return ui.taskAdd(deadline, tasks);
+        case "deadline":
+            String[] commandD = setData(str);
+            LocalDate dateD = setDate(commandD[1]);
+            Deadline deadline = new Deadline(commandD[0], dateD);
+            deadline.setTime(commandD[2]);
+            lst.addTask(deadline);
+            return ui.taskAdd(deadline, tasks);
 
-            case "event":
-                String[] commandE = setData(str);
-                LocalDate dateE = setDate(commandE[1]);
-                Event event = new Event(commandE[0], dateE);
-                event.setTime(commandE[2]);
-                lst.addTask(event);
-                return ui.taskAdd(event, tasks);
+        case "event":
+            String[] commandE = setData(str);
+            LocalDate dateE = setDate(commandE[1]);
+            Event event = new Event(commandE[0], dateE);
+            event.setTime(commandE[2]);
+            lst.addTask(event);
+            return ui.taskAdd(event, tasks);
 
-            default:
-                return ui.errormsg();
+        default:
+            return ui.errormsg();
         }
     }
 
     /**
-     * Formats command to separate info to put into Task object
+     * Formats command to separate info to put into Task object.
      * @param command String that contains user input
      * @return String array hat contains date and time for Deadline/Event object
      */
     String[] setData(String command) { //name and date and time
         System.out.println(command);
         int slashtask = command.indexOf("/");
-        String[] datetime = command.substring(slashtask + 4,command.length()).split(" "); //string containing date and time on
+        String[] datetime = command.substring(slashtask + 4,command.length()).split(" ");
         String ddate = datetime[0];
         String time = datetime[1];
         String name = command.substring(0,slashtask).split(" ")[1];
@@ -75,7 +75,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Formats command to fit date into LocalDate format
+     * Formats command to fit date into LocalDate format.
      * @param date1 String that contains date
      * @return LocalDate object or Deadline/Event object
      */

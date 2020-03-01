@@ -4,18 +4,24 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Creates Event Task
+ * Creates Event Task.
  */
 public class Event extends Task {
     protected LocalDate date;
 
+    /**
+     * Initialise description, time and date.
+     * @param description of task
+     * @param date of task
+     */
     public Event(String description, LocalDate date) {
         super(description);
         this.typeD = "E";
         this.date = date;
     }
+
     /**
-     * Sets time for Event Task
+     * Sets time for Event Task.
      * @param time for Event Task
      */
     public void setTime(String time) {
@@ -23,7 +29,7 @@ public class Event extends Task {
     }
 
     /**
-     * Retrieves time
+     * Retrieves time.
      * @return time from Event Task
      */
     public String getTime() {
@@ -31,7 +37,7 @@ public class Event extends Task {
     }
 
     /**
-     * Retrieves date
+     * Retrieves date.
      * @return date from Event Task
      */
     public String getDate() {
@@ -39,11 +45,11 @@ public class Event extends Task {
     }
 
     /**
-     * Retrieves formatted time
+     * Retrieves formatted time.
      * @return formatted time from Event Task
      */
     public String getTimeStamp() {
-        return "(at: " +  date.format(DateTimeFormatter.ofPattern("MMM d yy"))  + " " +  this.timeD +")";
+        return "(at: " +  date.format(DateTimeFormatter.ofPattern("MMM d yy"))  + " " +  this.timeD + ")";
     }
 
     @Override

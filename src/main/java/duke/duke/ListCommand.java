@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Lists the tasks from tasklist from Duke
+ * Lists the tasks from tasklist from Duke.
  */
 public class ListCommand extends Command {
 
@@ -10,7 +10,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     *
+     *Lists out the tasks from tasklist.
      * @param lst from TaskList from Duke
      * @param storage from Storage from Duke
      * @param ui from UI from Duke from Duke

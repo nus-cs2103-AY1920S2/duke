@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Parses through user input to execute command
+ * Parses through user input to execute command.
  */
 public class Parser {
     protected TaskList task;
@@ -12,13 +12,13 @@ public class Parser {
         this.task = task;
         this.storage = storage;
         this.ui = ui;
-    };
+    }
 
     /**
-     * Parses through user input to execute correct command
+     * Parses through user input to execute correct command.
      * @param str from user input
      * @return Command to execute
-     * @throws DukeException
+     * @throws DukeException when command is empty
      */
     public static Command parse(String str) throws DukeException {
         if  (str.length() == 0) {
