@@ -2,7 +2,7 @@ package app.exceptions;
 
 /**
  * This class represents the exception that is thrown
- * when the user tries to use an unsupported command.
+ * when the user a duplicated task is added.
  */
 public class DuplicatedTaskException extends BaseException {
     /**

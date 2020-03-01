@@ -2,7 +2,7 @@ package app.exceptions;
 
 /**
  * This class represents the exception that is thrown
- * when the user tries to use an unsupported command.
+ * when the task list is empty.
  */
 public class EmptyTaskListException extends BaseException {
     /**
