@@ -21,7 +21,9 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             //getController returns MainWindow class.
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            MainWindow mainWindow = fxmlLoader.<MainWindow>getController();
+            mainWindow.setDuke(duke);
+            mainWindow.dukeSpeak(duke.greet());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

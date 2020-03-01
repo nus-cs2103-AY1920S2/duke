@@ -2,6 +2,7 @@ import exceptions.IllegalDateTimeFormatException;
 import exceptions.InvalidStorageFilePathException;
 import exceptions.NoDescriptionException;
 import exceptions.StorageOperationException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -11,6 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -47,7 +50,7 @@ public class MainWindow extends AnchorPane {
         }
     }
 
-    private void dukeSpeak(String input) {
+    public void dukeSpeak(String input) {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(input, dukeImage)
         );
@@ -63,6 +66,7 @@ public class MainWindow extends AnchorPane {
      * exit with status 0.
      */
     private void exit() {
+        Platform.exit();
         System.exit(0);
     }
 
@@ -87,8 +91,12 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (Duke.isExitKey(input)) {
-            halt(1);
-            exit();
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    exit();
+                }
+            }, 1000);
         }
     }
 }
