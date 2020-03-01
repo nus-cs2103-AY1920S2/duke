@@ -1,4 +1,4 @@
-package ui;
+package duke;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
