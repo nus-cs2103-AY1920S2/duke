@@ -10,7 +10,7 @@ Deadline is a task that need to be done before a specific date/time e.g., submit
 Event is a task that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm.
 ## Usage
 
-### `todo [activity]`
+## `todo [activity]`
 
 Adds a todo task to the task list, with *[activity]* as the description
 
@@ -26,7 +26,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### `deadline [activity] /by [year]-[month]-[day] [hour]:[minute]`
+## `deadline [activity] /by [year]-[month]-[day] [hour]:[minute]`
 
 Adds a deadline task to the task list, with *[activity]* as the description,
 and *[year]-[month]-[day] [hour]:[minute]* as the datetime.
@@ -45,7 +45,7 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
 
-### `event [activity] /at [year]-[month]-[day] [hour]:[minute] to [year]-[month]-[day] [hour]:[minute]`
+## `event [activity] /at [year]-[month]-[day] [hour]:[minute] to [year]-[month]-[day] [hour]:[minute]`
 
 Adds an event task to the task list, with *[activity]* as the description,
 and *[year]-[month]-[day] [hour]:[minute] to [year]-[month]-[day] [hour]:[minute]* as the datetime.
@@ -63,7 +63,7 @@ Got it. I've added this task:
   [E][X] fireworks (at: 01 Dec. 2020 09:00HRS to 01 Dec. 2020 10:00HRS)
 Now you have 3 tasks in the list.
 ```
-### `list`
+## `list`
 
 Lists the task list
 
@@ -80,7 +80,7 @@ Here are the tasks in your list:
      3.[E][X] fireworks (at: 01 Dec. 2020 09:00HRS to 01 Dec. 2020 10:00HRS)
 ```
 
-### `sort [type]`
+## `sort [type]`
 
 Sorts the task list by *[type]*.
 *[type]* can be *description* or *datetime*.
@@ -98,7 +98,7 @@ Successfully sorted your tasks list according to description. Here are the tasks
      3.[D][X] rush my homework again (by: 20 Mar. 2020 09:00HRS)
 ```
 
-### `find [keyword]`
+## `find [keyword]`
 
 Finds a list of tasks from the task list which contains *[keyword]*.
 
@@ -114,7 +114,7 @@ Here are the matching tasks in your list:
      2.[D][X] rush my homework again (by: 20 Mar. 2020 09:00HRS)
 ```
 
-### `done [number]`
+## `done [number]`
 
 Marks a task from the task list as done, with *[number]* as the task number, and 1 as the first task.
 
@@ -129,7 +129,7 @@ Nice! I've marked this task as done:
   [T][V] borrow book
 ```
 
-### `delete [number]`
+## `delete [number]`
 
 Removes a task from the task list, with *[number]* as the task number, and 1 as the first task.
 
@@ -145,7 +145,7 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 ```
 
-### `bye`
+## `bye`
 
 Say bye to Duke and terminates the application
 
