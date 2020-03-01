@@ -1,11 +1,10 @@
 package duke.ui;
 
-import duke.DukeException;
+import java.util.List;
 
+import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.List;
 
 public class Ui {
     /** The logo for Duke. */

@@ -1,13 +1,11 @@
 package duke.command;
 
-import duke.storage.Storage;
-
-import duke.task.TaskList;
-
-import duke.ui.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Finds tasks within Duke that match a keyword.

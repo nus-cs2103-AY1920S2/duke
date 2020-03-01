@@ -1,21 +1,18 @@
 package duke.storage;
 
-import duke.parser.StorageParser;
-
-import duke.storage.exception.StorageException;
-
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.parser.StorageParser;
 import duke.parser.exception.ParseException;
+import duke.storage.exception.StorageException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 /**
  * Stores the list of tasks in Duke in a save file.
  */

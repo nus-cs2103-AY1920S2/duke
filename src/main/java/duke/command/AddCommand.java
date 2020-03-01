@@ -2,13 +2,10 @@ package duke.command;
 
 import duke.command.exception.DuplicateTaskException;
 import duke.command.exception.SaveException;
-
-import duke.storage.exception.StorageException;
 import duke.storage.Storage;
-
+import duke.storage.exception.StorageException;
 import duke.task.Task;
 import duke.task.TaskList;
-
 import duke.ui.Ui;
 
 /**

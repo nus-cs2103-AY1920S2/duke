@@ -1,12 +1,12 @@
 package duke;
 
+import java.nio.file.Paths;
+
 import duke.command.Command;
 import duke.parser.Parsers;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.nio.file.Paths;
 
 public class Duke {
     // Duke components

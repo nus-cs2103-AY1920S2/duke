@@ -1,10 +1,8 @@
 package duke.parser;
 
 import duke.command.AddCommand;
-
 import duke.parser.exception.DateFormatException;
 import duke.parser.exception.MissingParserArgumentsException;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

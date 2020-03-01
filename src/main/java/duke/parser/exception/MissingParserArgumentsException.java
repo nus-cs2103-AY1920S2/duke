@@ -1,7 +1,5 @@
 package duke.parser.exception;
 
-import duke.DukeException;
-
 /**
  * Represents a parse error encountered because of insufficient arguments.
  */
