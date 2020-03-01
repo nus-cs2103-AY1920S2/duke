@@ -3,7 +3,8 @@ package duke;
 /**
  * Follows command to exit programme
  */
-public class ByeCommand extends Command {
+public class
+ByeCommand extends Command {
 
     ByeCommand(String str) {
         super(str);

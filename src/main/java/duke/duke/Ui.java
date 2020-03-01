@@ -30,6 +30,14 @@ public class Ui {
     }
 
     /**
+     * Formats interface with blanklines
+     * @return newline
+     */
+    public String blankLine() {
+        output = "/n";
+        return output;
+    }
+    /**
      * Display loading error to user
      * @return String of loading error
      */
@@ -67,7 +75,7 @@ public class Ui {
     public String taskAdd(Task task, TasksNum tasks) {
         //System.out.println("Hi3");
         output =  "Got it. I've added this task: \n" + task + "\n" + "Now you have "
-                + tasks + " tasks in the list.\n";
+                + tasks.getNum() + " tasks in the list.\n";
         return output;
     }
 
@@ -79,7 +87,7 @@ public class Ui {
      */
     public String taskDone(Task task, TasksNum tasks) {
         output = "Nice! I've marked this task as done: \n" + task + "\n" + "Now you have "
-                + tasks + " tasks in the list.\n";
+                + tasks.getNum() + " tasks in the list.\n";
         return output;
     }
 
@@ -91,7 +99,7 @@ public class Ui {
      */
     public String taskDelete(Task task, TasksNum tasks) {
         output = "Noted, I've removed this task: \n" + task + "\n" + "Now you have "
-                + tasks + " tasks in the list.\n";
+                + tasks.getNum() + " tasks in the list.\n";
         return output;
     }
 

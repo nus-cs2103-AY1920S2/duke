@@ -40,6 +40,5 @@ run {
     standardInput = System.in
 }
 
-group 'seedu.duke'
-version '0.1.0'
+
 

@@ -28,11 +28,12 @@ public class TaskList {
      * @param task from Task from Duke
      * @throws DukeException when there is no Task to be deleted
      */
-    public void deleteTask(Task task) throws DukeException {
+    public void deleteTask(Task task, TasksNum tasks) throws DukeException {
         if (lst.size() == 0) {
             throw new DukeException("No task to delete");
         }
         lst.remove(task);
+        if (!task.getStatus()) {tasks.subNum();}
     }
 
     /**

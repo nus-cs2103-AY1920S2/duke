@@ -16,8 +16,10 @@ public class Duke {
         this.tasksnum = new TasksNum();
         try {
             this.tasks = new TaskList(storage.readFile());
-            tasksnum.setNum(tasks.getSize() - 1);
-            tasks.deleteTask(tasks.getTask(tasksnum.getNum()));
+            //System.out.println(tasks.getSize());
+            tasksnum.setNum(Integer.parseInt(tasks.getTask(tasks.getSize() - 1).getD()));
+            //System.out.println(tasksnum.getNum());
+            tasks.deleteTask(tasks.getTask(tasks.getSize()-1),tasksnum);
         } catch (DukeException e) {
             System.out.println(ui.showLoadingError());
             this.tasks = new TaskList();
@@ -30,13 +32,15 @@ public class Duke {
     public void run() {
         System.out.println(ui.greet());
         boolean isExit = false;
-        while (isExit == false) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 System.out.println(ui.showLine()); // show the divider line ("_______")
+                //System.out.println(tasksnum.getNum());
                 Command c = Parser.parse(fullCommand);
+                //System.out.println(tasks.getSize());
+                //System.out.println(tasks.getTask(0) + "HEY");
                 System.out.println(c.execute(tasks, storage, ui, tasksnum));
-                //System.out.println(tasksnum);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 System.out.println(ui.showError(e.getMessage()));
@@ -47,8 +51,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("...duke/data/tasks.txt").run();
         //System.out.println("Hi");
     }
 }
+
 

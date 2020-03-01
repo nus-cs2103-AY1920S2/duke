@@ -3,8 +3,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import duke.TaskList;
-import duke.Todo;
-import duke.Task;
 
 public class TaskListTest {
 

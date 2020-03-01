@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
         int i = Integer.parseInt(str.split(" ")[1]) - 1;
         Task task = lst.getTask(i);
         try {
-            lst.deleteTask(task);
+            lst.deleteTask(task, tasks);
         } catch (DukeException e) {
             System.out.println(e);
         }
