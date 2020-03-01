@@ -52,7 +52,7 @@ public abstract class Task {
      */
 
     public String getStatusIcon() {
-        return (this.isDone ? "✓" : "✗");
+        return (this.isDone ? "V" : "X");
     }
 
     /**
