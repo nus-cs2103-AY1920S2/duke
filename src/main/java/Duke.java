@@ -35,7 +35,7 @@ public class Duke {
         assert result.equals("") : "There's no result.";
 
         result = Parser.handleTasks(input, tasks, ui);
-        // storage.save(tasks);
+        storage.save(tasks);
         return result;
     }
 
