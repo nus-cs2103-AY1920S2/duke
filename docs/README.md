@@ -31,14 +31,14 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Format: `list`<br/><br/>
 
 ## Marking a Task as Done
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks the current Task with the 'Done' status (0-based indexing for the Tasks).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks the current Task with the 'Done' status (1-based indexing for the Tasks).
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Format: `done [task index]`<br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example of usage: `done 1`<br/><br/>
 
 ## Removing a current Task
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes the current Task (0-based indexing for the Tasks).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes the current Task (1-based indexing for the Tasks).
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usage
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Format: `delete [task index]`<br/><br/>
