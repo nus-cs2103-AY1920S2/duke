@@ -111,6 +111,8 @@ public class Duke {
      * @return the os-dependent directory to the default save file location.
      */
     private static String getDefaultPath() {
+        // Solution below adapted from
+        // https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
         return Paths.get(System.getProperty("user.dir"), "data", "tasks.txt").toString();
     }
 }

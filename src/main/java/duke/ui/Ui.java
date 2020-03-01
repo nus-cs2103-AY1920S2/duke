@@ -166,6 +166,10 @@ public class Ui {
                 + " of indentation, not " + indentWidth;
 
         String indent = " ".repeat(indentWidth);
+
+        // @@author PotatoCombat-reused
+        // Reused from https://stackoverflow.com/questions/15888934/
         return text.replaceAll("(?m)^", indent);
+        // @@author
     }
 }

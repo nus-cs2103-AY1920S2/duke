@@ -141,7 +141,11 @@ public class TaskList {
             String indent = "      ";
 
             String parameters = description.substring(paramIndex + 1);
+
+            // @@author PotatoCombat-reused
+            // Reused from https://stackoverflow.com/questions/15888934/
             parameters = parameters.replaceAll("(?m)^", indent);
+            // @@author
 
             description = description.substring(0, paramIndex);
 
