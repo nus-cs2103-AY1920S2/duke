@@ -57,7 +57,7 @@ Syntax | Example
 -------|---------
 `todo [DESCRIPTION]`| `todo finish math assignment`
 
-![Adding todo task](images/add_todo.png)
+![Adding todo task](./images/add_todo.PNG)
 
 When the `todo` task is added successfully, ***Johnny*** will
 display a confirmation message that the task has been added
@@ -76,7 +76,7 @@ Syntax | Example
 `deadline [DESCRIPTION] /[DATE]`| `deadline philo essay /2020-03-12`
 
 
-![Adding deadline task](images/add_deadline.png)
+![Adding deadline task](images/add_deadline.PNG)
 
 When the `deadline` task is added successfully, ***Johnny*** will
 display a confirmation message that the task has been added
@@ -94,7 +94,7 @@ Syntax | Example
 -------|---------
 `event [DESCRIPTION] /[DATE]`| `event Shermaine's wedding /2020-06-24`
 
-![Adding deadline task](images/add_event.png)
+![Adding deadline task](images/add_event.PNG)
 
 When the `event` task is added successfully, ***Johnny*** will
 display a confirmation message that the task has been added
@@ -111,7 +111,7 @@ Syntax | Example
 -------|---------
 `delete [INDEX]` | `delete 2`
 
-![Deleting a task](images/delete.png)
+![Deleting a task](images/delete.PNG)
 
 When the chosen task has been successfully deleted, ***Johnny*** will display a 
 confirmation message.
@@ -122,7 +122,7 @@ confirmation message.
 
 - This command does not take any additional parameters
 
-![Displaying current task list](images/list1.png)
+![Displaying current task list](images/list1.PNG)
 
 ### iv. Marking tasks as complete
 
@@ -136,7 +136,7 @@ Syntax | Example
 -------|---------
 `done [INDEX]` | `done 1`
 
-![Marking a task as done](images/done.png)
+![Marking a task as done](images/done.PNG)
 
 When the chosen task has been successfully marked as done, ***Johnny*** will 
 display a confirmation message.
@@ -154,7 +154,7 @@ Syntax | Example
 -------|---------
 `find [SEARCH_TERM]` | `find Shermaine's wedding`
 
-![Finding a task](images/find.png)
+![Finding a task](images/find.PNG)
 
 If a matching task(s) is found, ***Johnny*** will display the found task(s).
 If no matches are found, ***Johnny*** will display a message stating as such.
@@ -169,7 +169,7 @@ Syntax | Example
 -------|---------
 `help`|`help`
 
-![Help page](images/help.png)
+![Help page](images/help.PNG)
 
 ### vii. Exiting the application
 
