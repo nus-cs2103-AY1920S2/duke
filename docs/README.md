@@ -1,6 +1,8 @@
 # User Guide for Duchess
 _Zhu Hanming A0196737L_
 
+<p align=center><img width=80% src="./Ui-both.png" /></p>
+
 Welcome to Duchess, the task manager app who just can't wait for you to go away!  
 
 Track your todos, deadlines and events meticulously, and have fun while doing so!
