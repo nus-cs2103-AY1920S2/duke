@@ -1,9 +1,23 @@
 import java.io.FileNotFoundException;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**
  * Represents a Duke robot that deal with multiple tasks.
  */
-public class Duke {
+public class Duke extends Application{
     /**
      * The Storage used.
      */
@@ -48,5 +62,18 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("C:\\Users\\h1430\\Documents\\CS2103T\\duke\\src\\main\\java\\data\\duke.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader l = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = (AnchorPane) l.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
