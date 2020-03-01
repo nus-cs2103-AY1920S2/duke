@@ -86,8 +86,8 @@ public class Duke {
             lineScanner.next();
             String theRest = lineScanner.nextLine();
             try {
-                String title = theRest.split("/")[0].substring(1);
-                String date = theRest.split("/")[1];
+                String title = theRest.split("/")[0].substring(1).trim();
+                String date = theRest.split("/")[1].trim();
 
                 // date must be in format YYYY-MM-DD
                 assert (date.length() == DATE_LENGTH && date.charAt(4) == '-' && date.charAt(7) == '-');
@@ -105,8 +105,8 @@ public class Duke {
             lineScanner.next();
             String theRest = lineScanner.nextLine();
             try {
-                String title = theRest.split("/")[0].substring(1);
-                String date = theRest.split("/")[1];
+                String title = theRest.split("/")[0].substring(1).trim();
+                String date = theRest.split("/")[1].trim();
 
                 // date must be in format YYYY-MM-DD
                 assert (date.length() == DATE_LENGTH && date.charAt(4) == '-' && date.charAt(7) == '-');

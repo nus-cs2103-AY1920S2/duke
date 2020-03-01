@@ -30,7 +30,7 @@ MM-DD anyways? *ahem*
 * **`deadline`**`Buy present/2020-03-08`: adds another deadline.
 * **`sort deadlines`**: Ta-da! Now you can see the nearest deadlines that you have. Never worried about
 missing a deadline anymore!
-* *`exit`* : exits the app. Bye bye!
+* **`exit`** : exits the app. Bye bye!
 
 ## 3. Screenshot
 ![Screenshot of Ui](Ui.png)
@@ -47,14 +47,14 @@ missing a deadline anymore!
 * Example: `todo cs3230 assignment 1`
 
 ### 2. `deadline`
-* Format: `deadline <ACTIVITY>/ <YYYY-MM-DD>`
+* Format: `deadline <ACTIVITY>/<YYYY-MM-DD>`
 * Adds a **Deadline** task to the task list.
-* Example: `deadline CS2105 Assignment 1/ 2020-03-01`
+* Example: `deadline CS2105 Assignment 1/2020-03-01`
 
 ### 3. `event`
-* Format: `event <ACTIVITY>/ <YYYY-MM-DD>`
+* Format: `event <ACTIVITY>/<YYYY-MM-DD>`
 * Adds an **Event** task to the task list.
-* Example: `event mid-term CS3243/ 2020-03-07`
+* Example: `event mid-term CS3243/2020-03-07`
 
 ### 5. `done`
 * Format: `done <INDEX>`
