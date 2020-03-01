@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5c0a9eed-1e23-4a0c-8848-26d647142623" name="Default Changelist" comment="M">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/Deadline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/DukeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/DukeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/TaskList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/ToDo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/ToDo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/Ui.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="duke" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="1YLPZ5vJWQkhBqwoReTel1r3y0k" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../test" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="CompoundRunConfigurationType">
+      <toRun name="Unnamed" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="CompoundRunConfigurationType">
+      <toRun name="Unnamed" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5c0a9eed-1e23-4a0c-8848-26d647142623" name="Default Changelist" comment="" />
+      <created>1582718953288</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582718953288</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="228" y="5" key="#Unnamed" timestamp="1582840577292">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="228" y="5" key="#Unnamed/0.0.1280.680@0.0.1280.680" timestamp="1582840577292" />
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582840861866">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1582840861866" />
+    <state x="492" y="233" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1582720625342">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="492" y="233" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1280.680@0.0.1280.680" timestamp="1582720625342" />
+    <state x="273" y="0" key="CommitChangelistDialog2" timestamp="1582839589886">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="273" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1582839589886" />
+    <state x="421" y="99" key="FileChooserDialogImpl" timestamp="1582844127588">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="99" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1582844127588" />
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1582839912129">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1582839912129" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1582839912129">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1582839912129" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1582839912129">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1582839912129" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1582839912129">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1582839912129" />
+    <state x="288" y="44" key="NewModule_or_Project.wizard" timestamp="1582844146073">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="288" y="44" key="NewModule_or_Project.wizard/0.0.1280.680@0.0.1280.680" timestamp="1582844146073" />
+    <state x="357" y="43" width="566" height="591" key="RefactorJ.ExtractClass" timestamp="1582831051047">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="357" y="43" width="566" height="591" key="RefactorJ.ExtractClass/0.0.1280.680@0.0.1280.680" timestamp="1582831051047" />
+    <state x="384" y="54" key="RollbackChangesDialog" timestamp="1582720952736">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="384" y="54" key="RollbackChangesDialog/0.0.1280.680@0.0.1280.680" timestamp="1582720952736" />
+    <state x="144" y="0" key="SettingsEditor" timestamp="1582720257226">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="144" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1582720257226" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1582845400695">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1280.680@0.0.1280.680" timestamp="1582845400695" />
+    <state x="337" y="169" key="com.intellij.ide.util.TipDialog" timestamp="1582845124678">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="337" y="169" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1582845124678" />
+    <state x="297" y="151" key="run.anything.popup" timestamp="1582839710211">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1582839710211" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1582839538860">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1582839538860" />
+  </component>
+</project>
