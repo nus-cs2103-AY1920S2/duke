@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class UndoCommand extends Command {
     /**
-     * Executes an undo command
+     * Executes an undo command.
      *
      * @param stateController   a StateController object that stores states and facilitates the operation.
      * @param storageController a Storage object

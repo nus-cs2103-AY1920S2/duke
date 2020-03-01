@@ -1,13 +1,21 @@
 package duke;
 
 // Wildcard import is used because all classes in the package are imported
-import duke.command.*;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.UndoCommand;
 import duke.task.Task;
 
 import java.util.Optional;
 
 /**
- * The Parser class that parses user inputs
+ * The Parser class that parses user inputs.
  */
 public class Parser {
     /**

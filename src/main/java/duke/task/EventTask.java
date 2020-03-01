@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-/***
+/**
  * A task that has a time attribute that it occurs at.
  */
 class EventTask extends Task {

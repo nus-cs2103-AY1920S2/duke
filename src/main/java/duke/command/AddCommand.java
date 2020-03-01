@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class AddCommand extends Command {
     private Task task;
+
     /**
      * Constructs an AddCommand object with a specified Task object.
      * @param task a Task object to be added by Duke.

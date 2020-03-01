@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 /**
- * The Duke program
+ * The Duke program.
  */
 public class Duke extends Application {
     private Controller controller;
@@ -38,7 +38,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Constructs a Duke instance with the specified file path
+     * Constructs a Duke instance with the specified file path.
      *
      * @param filePath a String value of the file path.
      */
@@ -79,7 +79,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts rendering process by JavaFX
+     * Starts rendering process by JavaFX.
      *
      * @param stage a Stage object for JavaFX
      */
@@ -147,7 +147,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Handles user input
+     * Handles user input.
      *
      * @param userInput       a TextField object containing a String user input.
      * @param dialogContainer a VBox object that will contain the dialogue boxes for Duke and the user characters.

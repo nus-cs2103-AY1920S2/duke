@@ -1,4 +1,5 @@
 package duke.task;
+
 /**
  * Am abstract representation of a task issued to the Duke program.
  */
@@ -32,7 +33,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns the description of the Task object
+     * Returns the description of the Task object.
      *
      * @return description of the Task object with type String.
      */
@@ -41,7 +42,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns the status of the Task object
+     * Returns the status of the Task object.
      *
      * @return status of the Task object with type String.
      */
@@ -62,7 +63,7 @@ public abstract class Task {
     }
 
     /**
-     *
+     * Sets the attribute isDone of this Task object to false.
      */
     public void setUndone() {
         assert this.isDone;
@@ -91,10 +92,7 @@ public abstract class Task {
         default:
             throw new Exception(" You might have not chosen a valid task type or command!");
         }
-
-
     }
-
 }
 
 

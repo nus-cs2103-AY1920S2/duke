@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.state.StateController;
 
 /**
- * The Controller class that facilitates execution of the Duke program
+ * The Controller class that facilitates execution of the Duke program.
  */
 public class Controller {
     protected Storage storageController;
@@ -12,7 +12,7 @@ public class Controller {
     private boolean hasReachedExit = false;
 
     /**
-     * Constructs a Controller object with the specified Storage object
+     * Constructs a Controller object with the specified Storage object.
      *
      * @param storageController the Storage object
      */

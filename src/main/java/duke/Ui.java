@@ -1,4 +1,5 @@
 package duke;
+
 public class Ui {
     private static String content;
 
@@ -31,35 +32,35 @@ public class Ui {
      * @param size the number of Task objects in the current list after the addition.
      */
     public static void printAdd(String str, int size) {
-        content = String.format(" Added:\t %s\nYou now have %d tasks in your list\n", str, size);
+        content = String.format(" Added:\t %s\n You now have %d tasks in your list\n", str, size);
         System.out.println(content);
     }
 
     /**
-     * Prints a message when a deletion command is completed
+     * Prints a message when a deletion command is completed.
      *
      * @param str  a String description of the task.
      * @param size the number of Task objects in the current list after the deletion.
      */
     public static void printDel(String str, int size) {
-        content = String.format(" Your burden has been lifted, removed: \n\t %s\nYou now have %d tasks in your list\n"
-                , str, size);
+        content = String.format(" Your burden has been lifted, removed: \n\t %s\nYou now have %d tasks in your list\n",
+                str, size);
         System.out.println(content);
     }
 
     /**
-     * Prints a message when a done command is completed
+     * Prints a message when a done command is completed.
      *
      * @param str  a String description of the task
      * @param size the number of Task objects in the current list after the completion.
      */
     public static void printDone(String str, int size) {
-        content = String.format(" Task successfully completed: \n\t %s\nYou now have %d tasks in your list\n"
-                , str, size);
+        content = String.format(" Task successfully completed: \n\t %s\nYou now have %d tasks in your list\n",
+                str, size);
         System.out.println(content);
     }
 
-    /*
+    /**
      * Prints a message when a find command is initiated.
      * @param str the keyword provided
      */
@@ -110,7 +111,7 @@ public class Ui {
      * Prints a message when an undo command has been executed.
      */
     public static void printUndo() {
-        content = " Undo successfully, but you will not be able to restore that which has been reverted. ";
+        content = " Undo successfully.";
         System.out.println(content);
     }
 

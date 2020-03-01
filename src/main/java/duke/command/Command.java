@@ -7,7 +7,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * An abstract object representing a command to the Duke program
+ * An abstract object representing a command to the Duke program.
  */
 public abstract class Command {
     /**
@@ -17,6 +17,7 @@ public abstract class Command {
      * @param storage           an ArrayList collection of Task objects for processing in-program.
      * @return true if the Command is an ExitCommand, false otherwise.
      */
-    public abstract boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage);
+    public abstract boolean execute(StateController stateController, Storage storageController,
+                                    ArrayList<Task> storage);
 }
 

@@ -14,7 +14,7 @@ public class State {
     ArrayList<Task> taskList;
 
     /**
-     * Constructs a new State object
+     * Constructs a new State object.
      *
      * @param command  a Command that results in the state. When the program, and its StateController are initialized,
      *                 a State object with this field set to null will be used to represent the initial state.
