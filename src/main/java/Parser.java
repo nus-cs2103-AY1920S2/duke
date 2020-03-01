@@ -87,7 +87,8 @@ public class Parser {
         int dateIndex = this.getDateIndex() + 1;
 
         if (dateIndex == (inputs.length + 1) || dateIndex == inputs.length) {
-            throw new DukeException("\u2639" + " OOPS!!! This task requires a date\n");
+            throw new DukeException("\u2639" + " OOPS!!! This task requires a date. Please input a date in this " +
+                    "format: YYYY-MM-DD HH:MM\n");
         }
 
         LocalDate localDate = LocalDate.parse(inputs[dateIndex]);

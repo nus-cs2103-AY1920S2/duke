@@ -26,8 +26,10 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private GuiUi ui = new GuiUi();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("images/DaUser.jpg"));
-    private Image dukeImage  = new Image(this.getClass().getResourceAsStream("images/DaDuke.jpg"));
+    private Image startUpImage = new Image(this.getClass().getResourceAsStream("images/startUp.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
+    private Image invalidImage  = new Image(this.getClass().getResourceAsStream("images/wrongCommand.png"));
 
     @FXML
     public void initialize() {
@@ -46,10 +48,19 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
+        if (response.contains("OOPS!!!")) {
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog(response, invalidImage)
+                );
+        } else {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        }
+
         userInput.clear();
 
         if (response.contains("Bye")) {
@@ -75,6 +86,6 @@ public class MainWindow extends AnchorPane {
         }
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(output, dukeImage));
+                DialogBox.getUserDialog(output, startUpImage));
     }
 }
