@@ -1,4 +1,4 @@
-package com.duke.bot;
+package com.duke.bot.task;
 
 /**
  * Represents tasks that neither has a deadline nor event date.

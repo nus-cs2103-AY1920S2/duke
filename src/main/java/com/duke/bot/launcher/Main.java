@@ -1,4 +1,4 @@
-package com.duke.bot;
+package com.duke.bot.launcher;
 
 import java.io.IOException;
 

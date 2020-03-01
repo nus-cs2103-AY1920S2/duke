@@ -1,4 +1,10 @@
-package com.duke.bot;
+package com.duke.bot.component;
+
+import com.duke.bot.exception.DukeException;
+import com.duke.bot.task.DeadlineTask;
+import com.duke.bot.task.EventTask;
+import com.duke.bot.task.Task;
+import com.duke.bot.task.TodoTask;
 
 import java.time.LocalDate;
 

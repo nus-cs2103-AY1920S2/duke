@@ -1,8 +1,9 @@
-package com.duke.bot;
+package com.duke.bot.component;
 
 import java.io.IOException;
 import java.util.Collections;
 
+import com.duke.bot.launcher.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

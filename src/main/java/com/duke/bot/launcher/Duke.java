@@ -1,8 +1,12 @@
-package com.duke.bot;
+package com.duke.bot.launcher;
+
+import com.duke.bot.component.DukeUi;
+import com.duke.bot.component.Parser;
+import com.duke.bot.component.Storage;
+import com.duke.bot.exception.DukeException;
 
 import java.io.IOException;
 import java.lang.String;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 /**

@@ -1,4 +1,4 @@
-package com.duke.bot;
+package com.duke.bot.task;
 
 /**
  * Represents the tasks that can be managed by Duke Bot.

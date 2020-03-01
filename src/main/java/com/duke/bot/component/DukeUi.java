@@ -1,4 +1,4 @@
-package com.duke.bot;
+package com.duke.bot.component;
 
 import java.io.InputStream;
 import java.io.PrintStream;

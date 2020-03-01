@@ -1,4 +1,4 @@
-package com.duke.bot;
+package com.duke.bot.exception;
 
 /**
  * Represents the exceptions that occur due to invalid commands being parsed to Duke Bot.

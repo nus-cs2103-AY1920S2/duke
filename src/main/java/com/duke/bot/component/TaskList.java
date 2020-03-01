@@ -1,4 +1,6 @@
-package com.duke.bot;
+package com.duke.bot.component;
+
+import com.duke.bot.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;

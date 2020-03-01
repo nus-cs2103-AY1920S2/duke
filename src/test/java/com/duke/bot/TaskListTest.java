@@ -1,5 +1,8 @@
 package com.duke.bot;
 
+import com.duke.bot.component.TaskList;
+import com.duke.bot.task.DeadlineTask;
+import com.duke.bot.task.Task;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

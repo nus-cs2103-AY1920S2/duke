@@ -1,4 +1,10 @@
-package com.duke.bot;
+package com.duke.bot.component;
+
+import com.duke.bot.exception.DukeException;
+import com.duke.bot.task.DeadlineTask;
+import com.duke.bot.task.EventTask;
+import com.duke.bot.task.Task;
+import com.duke.bot.task.TodoTask;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,8 +17,8 @@ import java.util.Scanner;
  * Represents the permanent storage of the list of tasks managed by Duke Bot into the hard drive.
  */
 public class Storage {
-    private static final String DESTINATION_PATH = new File(".").getPath() + "/tasks.txt";
-    private static final String ARCHIVE_PATH = new File(".").getPath()  + "/archive.txt";
+    private static final String DESTINATION_PATH = new File(".").getPath() + "/data/tasks.txt";
+    private static final String ARCHIVE_PATH = new File(".").getPath()  + "/data/archive.txt";
     private TaskList tasks;
 
     private Storage() {
