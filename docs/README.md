@@ -1,5 +1,9 @@
 # User Guide
+Duke is a personalised chat bot designed to help you keep track of your day-to-day task.
 
+![The GUI of duke](./Ui.png)
+
+**_[Link to the repo](https://github.com/kschiew/duke)_**
 ## Features 
 
 ### Quit and Save
