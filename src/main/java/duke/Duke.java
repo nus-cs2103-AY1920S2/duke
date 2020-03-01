@@ -32,7 +32,7 @@ public class Duke extends Application {
      * Constructs a Duke instance with file path set to src/data/data.csv. This is primarily for the sake of GUI.
      */
     public Duke() {
-        this("src/data/data.csv");
+        this("data/data.csv");
 
 
     }
@@ -50,7 +50,7 @@ public class Duke extends Application {
 
 
     public static void main(String[] args) {
-        Duke bot = new Duke("src/data/data.csv");
+        Duke bot = new Duke();
         bot.run();
     }
 
@@ -102,12 +102,12 @@ public class Duke extends Application {
 
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(800.0);
-        stage.setMinWidth(500.0);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(625.0);
 
-        mainLayout.setPrefSize(500.0, 800.0);
+        mainLayout.setPrefSize(625.0, 535.0);
 
-        scrollPane.setPrefSize(485, 735);
+        scrollPane.setPrefSize(610, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -117,9 +117,9 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(425.0);
+        userInput.setPrefWidth(523.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(85.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -138,13 +138,9 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(new Label(initialLine), new ImageView(duke))
         );
 
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput(userInput, dialogContainer);
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput(userInput, dialogContainer));
 
-        userInput.setOnAction((event) -> {
-            handleUserInput(userInput, dialogContainer);
-        });
+        userInput.setOnAction((event) -> handleUserInput(userInput, dialogContainer));
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
