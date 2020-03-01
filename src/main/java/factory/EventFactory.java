@@ -1,10 +1,9 @@
 package factory;
 
-import command.Parser;
+import logic.Parser;
 import tasks.Event;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 /**
  * Generates event objects based on user input.

@@ -1,8 +1,7 @@
 package factory;
 
-import command.DukeException;
 import tasks.Deadline;
-import command.Parser;
+import logic.Parser;
 
 import java.time.LocalDate;
 

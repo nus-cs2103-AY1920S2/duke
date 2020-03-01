@@ -1,8 +1,8 @@
-package command;
+package commons;
 
-import java.util.HashMap;
-import java.util.Scanner;
-
+import commons.FriendlierSyntax;
+import logic.Controller;
+import storage.Storage;
 import tasks.TaskList;
 
 /**

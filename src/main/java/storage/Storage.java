@@ -1,4 +1,4 @@
-package command;
+package storage;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,8 +7,8 @@ import java.io.IOException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
+import commons.Duke;
+import commons.FriendlierSyntax;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;

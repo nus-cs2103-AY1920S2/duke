@@ -1,9 +1,7 @@
 package factory;
 
-import command.Parser;
+import logic.Parser;
 import tasks.Todo;
-
-import java.time.LocalDate;
 
 /**
  * Generates todo objects based on user input.

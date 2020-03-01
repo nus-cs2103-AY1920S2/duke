@@ -1,4 +1,8 @@
-package command;
+package logic;
+
+import commons.Duke;
+import commons.DukeException;
+import commons.FriendlierSyntax;
 
 public class Parser {
     private FriendlierSyntax friendlierSyntax;

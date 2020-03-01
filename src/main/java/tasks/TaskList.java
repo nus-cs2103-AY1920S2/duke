@@ -1,7 +1,7 @@
 package tasks;
 
-import command.DukeException;
-import command.UI;
+import commons.DukeException;
+import commons.UI;
 
 import java.util.ArrayList;
 

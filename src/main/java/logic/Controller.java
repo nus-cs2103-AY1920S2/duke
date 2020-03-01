@@ -1,5 +1,9 @@
-package command;
+package logic;
 
+import commons.Duke;
+import commons.DukeException;
+import commons.FriendlierSyntax;
+import commons.UI;
 import factory.DeadlineFactory;
 import factory.EventFactory;
 import factory.TodoFactory;

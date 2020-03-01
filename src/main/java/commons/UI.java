@@ -1,4 +1,4 @@
-package command;
+package commons;
 
 /**
  * Stores magic strings as constants to be returned as output.
