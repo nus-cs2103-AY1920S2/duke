@@ -15,6 +15,12 @@ public abstract class Task {
         this.tagList = new ArrayList<>();
     }
 
+    public Task(String description, ArrayList<Tag> tags) {
+        this.description = description;
+        this.isDone = false;
+        this.tagList = tags;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }

@@ -1,6 +1,14 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
+        this.type = "T";
+    }
+
+    public Todo(String description, ArrayList<Tag> tags) {
+        super(description, tags);
         this.type = "T";
     }
 
@@ -8,7 +16,6 @@ public class Todo extends Task {
     public String toString() {
         StringBuilder tags = new StringBuilder();
         if (!tagList.isEmpty()) {
-            tags.append(" | ");
             tagList.forEach(tag -> tags.append(tag.getDetails()));
         }
 

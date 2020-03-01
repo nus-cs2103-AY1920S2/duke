@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -8,12 +9,19 @@ public class Event extends Task{
         this.date = date;
     }
 
+    public Event(String description, LocalDate date, ArrayList<Tag> tags) {
+        super(description, tags);
+        this.type = "E";
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         StringBuilder tags = new StringBuilder();
         if (!tagList.isEmpty()) {
-            tags.append(" | ");
             tagList.forEach(tag -> tags.append(tag.getDetails()));
+        } else {
+            tags.append("|");
         }
 
         return String.format(

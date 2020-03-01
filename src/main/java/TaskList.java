@@ -72,7 +72,7 @@ public class TaskList {
 
     public String tagTask(int taskIndex, String tagDetails) {
         Task task = tasks.get(taskIndex - 1);
-        Tag tag = new Tag(tagDetails);
+        Tag tag = new Tag("|" + tagDetails);
 
         task.tagList.add(tag);
         return String.format("Added: %s to %s", tag.getDetails(), task);

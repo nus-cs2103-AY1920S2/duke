@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Deadline extends Task {
     public Deadline(String description, LocalDate date) {
@@ -7,12 +8,19 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public Deadline(String description, LocalDate date, ArrayList<Tag> tags) {
+        super(description, tags);
+        this.type = "D";
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         StringBuilder tags = new StringBuilder();
         if (!tagList.isEmpty()) {
-            tags.append(" | ");
             tagList.forEach(tag -> tags.append(tag.getDetails()));
+        } else {
+            tags.append("|");
         }
 
         return String.format(

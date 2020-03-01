@@ -17,10 +17,23 @@ public class Storage {
     public static String taskParser(Task task) {
         String taskString;
         String isDone = task.getIsDone() ? "1" : "0";
+
+        StringBuilder tags = new StringBuilder();
+
+
         taskString = String.format(
                 "%s|%s|%s|%s",
                 task.getType(), isDone,
                 task.getDescription(), task.getDate());
+        /*
+        if (!task.tagList.isEmpty()) {
+            task.tagList.forEach(tag -> tags.append("|" + tag.getDetails()));
+            taskString = String.format("%s%s", taskString, tags);
+        } else {
+            taskString = String.format("%s|", taskString);
+        }
+        */
+
         return taskString;
     }
 
@@ -31,7 +44,6 @@ public class Storage {
 
             for (Task task : taskList.tasks) {
                 String data = taskParser(task);
-                System.out.println(data);
                 writer.write(data + "\n");
             }
 
@@ -51,7 +63,7 @@ public class Storage {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] lineSplit = line.split("\\|");
+                String[] lineSplit = line.split("\\|", 5);
                 Task task;
 
                 switch (lineSplit[0]) {

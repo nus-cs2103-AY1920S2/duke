@@ -1,5 +1,7 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -52,6 +54,16 @@ public class Parser {
 
     public static LocalDate parseDate(String stringDate) {
         return LocalDate.parse(stringDate);
+    }
+
+    public static ArrayList<Tag> parseTag(String tags) {
+        List<String> tagDetailsList = new ArrayList<String>();
+        tagDetailsList = Arrays.asList(tags.split("|"));
+
+        ArrayList<Tag> tagList = new ArrayList<Tag>();
+        tagDetailsList.forEach(detail -> tagList.add(new Tag(detail)));
+
+        return tagList;
     }
 
     /**
