@@ -41,7 +41,9 @@ public class Task {
         return this.typeD;
     }
 
-    public String getTimeStamp() { return ""; }
+    public String getTimeStamp() {
+        return "";
+    }
 
     public String getRawDate() {
         return this.rawDate;
