@@ -27,10 +27,13 @@ features such as add and delete.
 - *deadline* - add deadline task
 
       deadline [task description] /by [d/MM/yyyy HH:mm]
+      **avoid** using /by in task description
+      
       
 - *event* - add event task
      
       event [task description] /at [d/MM/yyyy HH:mm to d/MM/yyyy HH:mm]
+      **avoid** using /at in task description
   
 ### 2. Delete task
 
