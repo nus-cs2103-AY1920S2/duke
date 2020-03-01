@@ -158,7 +158,7 @@ public class Duke {
             final String BLAH_MESSAGE = "blah";
             return BLAH_MESSAGE;
         } else {
-            return ui.showCommandNotFound() + ui.showLineOfUnderscores();
+            return ui.showCommandNotFound();
         }
         return "I don't understand what you are saying";
     }

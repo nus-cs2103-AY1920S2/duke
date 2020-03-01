@@ -29,10 +29,10 @@ public class Ui {
     }
 
     public String showCommandNotFound() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "Sorry, I didn't get that. Please try again.";
     }
 
     public String showMissingParemeters() {
-        return "☹ OOPS!!! Either filter criterion (date/month/year) or its value is missing. Please try again.";
+        return "OOPS!!! Either filter criterion (date/month/year) or its value is missing. Please try again.";
     }
 }

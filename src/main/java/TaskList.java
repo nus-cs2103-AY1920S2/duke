@@ -67,7 +67,7 @@ public class TaskList {
     public String printTasks() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            result.append((i + 1) + "." + tasks.get(i).toString() + "\n");
+            result.append((i + 1) + ". " + tasks.get(i).toString() + "\n");
         }
         return result.toString();
     }
