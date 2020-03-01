@@ -26,6 +26,8 @@ Interface (CLI) for user input.
 1. __To-Dos__: Tasks with no due date
 2. __Deadlines__: Tasks to be completed by a certain date
 3. __Events__: Activities/appointments to attend on a certain date
+
+
 ### ii. Task List
 ***Johnny*** keeps track of your tasks using a list which offers the
 following commands:
@@ -35,6 +37,8 @@ following commands:
 3. **Displaying**: display the current list
 4. **Marking as complete**: marks chosen tasks as complete
 5. **Finding**: search for tasks in the list using keyword(s)
+
+
 ### iii. Saving/Loading
 ***Johnny*** automatically saves the list of tasks whenever a task 
 is added, deleted, or marked as complete. 
