@@ -17,7 +17,7 @@ public class Duke {
      * Creates a new Duke object which initializes the TaskList, Ui and Storage.
      */
     public Duke() {
-        String programDir = System.getProperty("user.dir");
+        String programDir = System.getProperty("user.home");
         String fileName = "duke.txt";
         Path path  = Paths.get(programDir, "data", fileName);
 
