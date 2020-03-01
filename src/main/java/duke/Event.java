@@ -23,6 +23,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (by: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mma")) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mma")) + ")";
     }
 }
