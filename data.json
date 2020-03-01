@@ -4,6 +4,12 @@
       "type": "todo",
       "description": "run",
       "isDone": false,
+      "tags": []
+    },
+    {
+      "type": "todo",
+      "description": "run",
+      "isDone": false,
       "tags": [
         {
           "tagName": "tired"

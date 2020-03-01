@@ -99,7 +99,7 @@ public class MainWindow extends AnchorPane {
             }
             return result.getFeedbackToUser();
         } catch (CommandException | ParserException e) {
-            return "";
+            return e.getMessage();
         }
     }
 }

@@ -39,19 +39,30 @@ public class Storage {
     }
 
     /**
-     * Searches for an existing file with a previous task list and alias store.
-     * If no such file found, create a new task list.
+     * Searches for an existing file with a previous alias store.
+     * If no such file found, reinitialise alias.
      */
-    public void readFromFile(Duke duke) {
+    public void readAlias(Duke duke) {
         try {
-            FileReader task = new FileReader(userDirectory + "/data.json");
             FileReader fileReader = new FileReader(userDirectory + "/alias.json");
-            duke.setTaskList(gson.fromJson(task, TaskList.class));
             duke.setFriendlierSyntax(gson.fromJson(fileReader, FriendlierSyntax.class));
         } catch (FileNotFoundException e) {
-            System.err.println(e);
-            duke.setFriendlierSyntax(new FriendlierSyntax(new HashMap<String, String>()));
-            duke.setTaskList(new TaskList(new ArrayList<Task>()));
+            System.err.println(e.getMessage());
+            duke.setFriendlierSyntax(new FriendlierSyntax(new HashMap<>()));
+        }
+    }
+
+    /**
+     * Searches for an existing file with a previous task list store.
+     * If no such file found, reinitialise task list.
+     */
+    public void readTaskList(Duke duke) {
+        try {
+            FileReader task = new FileReader(userDirectory + "/data.json");
+            duke.setTaskList(gson.fromJson(task, TaskList.class));
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+            duke.setTaskList(new TaskList(new ArrayList<>()));
         }
     }
 
@@ -62,10 +73,8 @@ public class Storage {
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException io) {
-            System.err.println(io);
+            System.err.println(io.getMessage());
         }
-
-
     }
 
     /**
@@ -78,7 +87,7 @@ public class Storage {
             aliasFile.flush();
             aliasFile.close();
         } catch (IOException io) {
-            System.err.println(io);
+            System.err.println(io.getMessage());
         }
     }
 }

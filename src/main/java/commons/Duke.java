@@ -22,7 +22,8 @@ public class Duke {
      */
     public void start() {
         storage = new Storage();
-        storage.readFromFile(this);
+        storage.readAlias(this);
+        storage.readTaskList(this);
         logicManager = new LogicManager(this, storage);
     }
 

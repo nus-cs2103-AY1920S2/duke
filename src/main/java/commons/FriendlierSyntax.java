@@ -3,14 +3,14 @@ package commons;
 import java.util.HashMap;
 
 public class FriendlierSyntax {
-    public HashMap<String, String> friendlierSyntax = new HashMap<>();
+    public HashMap<String, String> friendlierSyntax;
 
     /**
      * Instantiates the list of friendlier syntax which includes shortcuts for each command.
      */
     public FriendlierSyntax(HashMap<String, String> friendlierSyntax) {
         if (friendlierSyntax == null) {
-            System.out.println("haiz");
+            friendlierSyntax = new HashMap<>();
             friendlierSyntax.put("a", "alias");
             friendlierSyntax.put("alias", "alias");
             friendlierSyntax.put("b", "bye");
@@ -23,7 +23,6 @@ public class FriendlierSyntax {
             friendlierSyntax.put("done", "done");
             friendlierSyntax.put("c", "clear");
             friendlierSyntax.put("clear", "clear");
-            friendlierSyntax.put("dn", "done");
             friendlierSyntax.put("f", "find");
             friendlierSyntax.put("find", "find");
             friendlierSyntax.put("t", "todo");
@@ -70,7 +69,7 @@ public class FriendlierSyntax {
     /**
      * Returns the list of friendlier syntax mappings.
      *
-     * @return
+     * @return list of friendlier syntax.
      */
     public HashMap<String, String> getFriendlierSyntax() {
         return this.friendlierSyntax;
