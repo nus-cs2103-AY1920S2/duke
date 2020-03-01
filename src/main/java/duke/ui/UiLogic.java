@@ -1,6 +1,5 @@
 package duke.ui;
 
-import duke.Duke;
 import duke.DukeHistory;
 import duke.parser.CommandExecutionExeption;
 import duke.parser.Parser;

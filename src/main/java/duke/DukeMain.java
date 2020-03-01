@@ -27,7 +27,6 @@ public class DukeMain extends Application {
         Duke main = DukeHistory.getCurrent();
         if (main.ui.hasNextLine()) {
             String cmd = main.ui.nextLine();
-            main.ui.clearUserInput();
             try {
                 DukeHistory.progress(Parser.parse(cmd).execute(main));
             } catch (CommandExecutionExeption cmde) {

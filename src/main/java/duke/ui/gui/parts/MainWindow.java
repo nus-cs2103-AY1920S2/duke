@@ -43,12 +43,15 @@ public class MainWindow extends GuiComponent<Stage> {
     }
 
     private void feedCommandToLogic(String cmd) {
-        try {
-            this.logic.executeCommand(cmd);
-        } catch (CommandExecutionExeption cmde) {
+        if(!cmd.isEmpty()) {
+            addUserDialog(cmd);
+            try {
+                this.logic.executeCommand(cmd);
+            } catch (CommandExecutionExeption cmde) {
 
+            }
+            clearUserInput();
         }
-        clearUserInput();
     }
 
     /**
@@ -65,8 +68,11 @@ public class MainWindow extends GuiComponent<Stage> {
         return this.flowPaneController.textRegionController.getText();
     }
 
-    public void addDialogLabel(String text) {
-        this.VBoxController.addDialogLabel(text);
+    public void addUserDialog(String text) {
+        this.VBoxController.addRightDialogBox(text);
+    }
+    public void addDukeDialog(String text) {
+        this.VBoxController.addLeftDialogBox(text);
     }
 
 }

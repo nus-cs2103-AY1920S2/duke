@@ -104,28 +104,24 @@ public class MainGui implements Gui {
         }
         outPrint(resSpace);
         outPrintln();
-        this.mainWindow.addDialogLabel(this.tempText.toString());
+        this.mainWindow.addDukeDialog(this.tempText.toString());
         this.isOpen = false;
-    }
-
-    /**
-     * Clears user input box
-     */
-    public void clearUserInput() {
-        this.mainWindow.clearUserInput();
     }
 
     /**
      * Get input by user
      */
     public String nextLine() {
-        return this.mainWindow.nextLine();
+        String str = this.mainWindow.nextLine();
+        this.mainWindow.clearUserInput();
+        this.mainWindow.addUserDialog(str);
+        return str;
     }
 
     /**
      * user inputted string?
      */
     public boolean hasNextLine() {
-        return !nextLine().isEmpty();
+        return !this.mainWindow.nextLine().isEmpty();
     }
 }

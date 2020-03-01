@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.Label?>
+
+<FlowPane alignment="TOP_LEFT" prefWidth="400.0"
+          xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="dialog" wrapText="true" prefWidth="300.0"/>
+    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+</FlowPane>

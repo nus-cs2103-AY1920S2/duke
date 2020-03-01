@@ -24,6 +24,4 @@ public interface UiText {
 
     public boolean hasNextLine();
     public String nextLine();
-
-    public void clearUserInput();
 }
