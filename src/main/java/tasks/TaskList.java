@@ -136,6 +136,7 @@ public class TaskList {
         boolean noTasksWithTag = true;
         for (Task task : list) {
             if (task.checkTags(tag)) {
+                noTasksWithTag = false;
                 printedList = printedList + "\n\t\t" + taskNumber + ". \t" + task;
                 taskNumber++;
             }

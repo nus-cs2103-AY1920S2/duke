@@ -1,17 +1,19 @@
 {
   "list": [
     {
-      "dateBy": {
-        "year": 2020,
-        "month": 2,
-        "day": 19
-      },
-      "description": "ip ",
+      "type": "todo",
+      "description": "run",
       "isDone": false,
       "tags": []
     },
     {
-      "description": "run",
+      "type": "event",
+      "dateAt": {
+        "year": 2020,
+        "month": 2,
+        "day": 2
+      },
+      "description": "run ",
       "isDone": false,
       "tags": []
     }

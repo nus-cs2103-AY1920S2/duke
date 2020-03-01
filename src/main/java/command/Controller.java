@@ -35,7 +35,8 @@ public class Controller {
      * @param input input received from user.
      * @return output to be displayed to user.
      */
-    public String readInput(String input, TaskList taskList, FriendlierSyntax friendlierSyntax) throws DukeException {
+    public String readInput(
+            String input, TaskList taskList, FriendlierSyntax friendlierSyntax) throws DukeException {
         try {
             input = input.toLowerCase();
             parser.validateInput(input);

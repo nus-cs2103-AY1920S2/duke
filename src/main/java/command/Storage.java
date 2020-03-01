@@ -4,8 +4,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
 import tasks.TaskList;
+import tasks.Todo;
 
 /**
  * Handles the loading and saving of task lists to the hard disk.
@@ -13,12 +21,17 @@ import tasks.TaskList;
 public class Storage {
     private Gson gson;
     private String userDirectory;
+    final RuntimeTypeAdapterFactory<Task> typeFactory = RuntimeTypeAdapterFactory
+            .of(Task.class, "type")
+            .registerSubtype(Todo.class, "todo")
+            .registerSubtype(Deadline.class, "deadline")
+            .registerSubtype(Event.class, "event");
 
     /**
      * Initialises a storage object with gson and user directory.
      */
     public Storage() {
-        gson = new Gson();
+        gson = new GsonBuilder().registerTypeAdapterFactory(typeFactory).create();
         userDirectory = System.getProperty("user.dir");
     }
 

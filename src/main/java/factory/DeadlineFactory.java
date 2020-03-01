@@ -25,8 +25,8 @@ public class DeadlineFactory implements Factory<Deadline> {
     public Deadline create(String input) {
         String[] by = input.split("/");
         if (parser.checkForTags(input)) {
-            String[] tags = by[1].split(" ", 2);
-            return new Deadline(by[0], LocalDate.parse(tags[0]), tags[1]);
+            String[] tags = by[1].split("/t", 2);
+            return new Deadline(by[0], LocalDate.parse(by[1]), tags[1]);
         } else {
             return new Deadline(by[0], LocalDate.parse(by[1]));
         }

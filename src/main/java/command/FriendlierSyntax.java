@@ -17,6 +17,8 @@ public class FriendlierSyntax {
         friendlierSyntax.put("list", "list");
         friendlierSyntax.put("dlt", "delete");
         friendlierSyntax.put("delete", "delete");
+        friendlierSyntax.put("dn", "done");
+        friendlierSyntax.put("done", "done");
         friendlierSyntax.put("c", "clear");
         friendlierSyntax.put("clear", "clear");
         friendlierSyntax.put("dn", "done");
@@ -45,7 +47,6 @@ public class FriendlierSyntax {
         if (friendlierSyntax.get(alias) != null) {
             return friendlierSyntax.get(alias);
         } else {
-            System.out.println("not found");
             return "error";
         }
     }

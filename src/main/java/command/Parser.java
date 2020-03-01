@@ -98,17 +98,21 @@ public class Parser {
                 }
             case "deadline":
                 if (parsedInput.length < 2) {
-                    throw new DukeException("Pawdon me, I think you furgot to include the description of the deadline.");
+                    throw new DukeException("Pawdon me, "
+                            + " I think you furgot to include the description of the deadline.");
                 } else if (parsedInput[1].split("/").length < 1) {
-                    throw new DukeException("Pawdon me, I think you fur-got to include the date of the deadline");
+                    throw new DukeException("Pawdon me, "
+                            + "I think you fur-got to include the date of the deadline");
                 } else {
                     return;
                 }
             case "event":
                 if (parsedInput.length < 2) {
-                    throw new DukeException("Pawdon me, I think you furgot to include the description of the event.");
+                    throw new DukeException("Pawdon me, "
+                            + "I think you furgot to include the description of the event.");
                 } else if (!parsedInput[1].contains("/")) {
-                    throw new DukeException("Pawdon me, I think you furgot to include the date of the event.");
+                    throw new DukeException("Pawdon me, "
+                            + "I think you furgot to include the date of the event.");
                 } else {
                     return;
                 }
@@ -124,6 +128,6 @@ public class Parser {
      * @return true if user input tags and false otherwise.
      */
     public boolean checkForTags(String input) {
-        return input.split(" ").length > 2;
+        return input.contains("/t");
     }
 }
