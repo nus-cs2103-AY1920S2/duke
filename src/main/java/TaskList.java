@@ -108,7 +108,7 @@ public class TaskList {
                 foundTasks.tasks.add(task);
             }
         }
-        foundTasks.tasks.forEach(task -> output.append(task));
+        foundTasks.tasks.forEach(task -> output.append(task + "\n"));
 
         return output.toString();
     }
