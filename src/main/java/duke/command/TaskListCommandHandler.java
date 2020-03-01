@@ -174,7 +174,7 @@ public class TaskListCommandHandler {
     }
 
     private static Integer getIntegerFromCommand(String command) throws DuchessException {
-        ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s")));
         checkSizeOfCommands(commands);
         try {
             return Integer.parseInt(commands.get(1).trim());
