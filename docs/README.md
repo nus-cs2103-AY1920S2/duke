@@ -86,7 +86,7 @@ Example: `find Towers`
 
 Expected outcome: ![Find UI](Find.png)
 
-### 6. Tag task
+### 6. Add Tag to a Task
 By providing an index and a phrase, the task with that index will be tagged with the phrase.
 
 Format: `tag <index> <tag details>`
