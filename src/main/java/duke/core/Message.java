@@ -27,7 +27,7 @@ public class Message {
 
     public static final String DESCRIPTION_ERROR = "Oops! The description of a task can't be empty!";
 
-    public static final String INDEX_ERROR = "Sounds like you have the wrong task index,"
+    public static final String INDEX_ERROR = "Sounds like you have the wrong task index, "
             + "I can't really hear you through your water bowl!";
 
     public static final String TIME_ERROR = "Your date time format is incorrect.\n"
@@ -40,4 +40,16 @@ public class Message {
             + "Try: /by <date and time>";
 
     public static final String KEYWORD_ERROR = "Aww, Cute couldn't fish up any results from that keyword.";
+
+    public static final String UPDATE_GENERAL_ERROR = "Wrong command format! Try:\n"
+            + "'update description <index> <new description>' or 'update time <index> <new time>";
+
+    public static final String UPDATE_DESC_INDEX_ERROR = "Try: update description <index> <date time>";
+
+    public static final String UPDATE_TIME_INDEX_ERROR = "Try: update time <index> <date time>";
+
+    public static final String UPDATE_TIME_ERROR = "Oops! Wrong command format.\n" 
+            + "Try: update time <index> <date time>"; 
+
+    public static final String TODO_TIME_ERROR = "Oops, a todo doesn't have a time! Try again.";
 }

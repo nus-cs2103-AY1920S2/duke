@@ -219,6 +219,7 @@ public class Storage {
                     String[] splitTask = originalTask.split("~");
 
                     int newTimeIndex = input.indexOf("" + idx);
+                    
                     String newTime = Parser.reformatDateAndTime(input.substring(newTimeIndex + 2));
 
                     splitTask[3] = newTime;
@@ -241,6 +242,8 @@ public class Storage {
             originalFile.delete();
       
             tempFile.renameTo(originalFile);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidTimeFormatException(Message.TIME_ERROR);
         } catch (FileNotFoundException e) {
             Ui.printLines("File not found. Try again!");
         } catch (IOException e) {

@@ -72,14 +72,7 @@ public class Parser {
             break;
 
         case "update" :
-            String secondCommand = split[1];
-            if (secondCommand.compareTo("description") == 0) {
-                result = new UpdateDescriptionCommand(input, false);
-            } else if (secondCommand.compareTo("time") == 0) {
-                result = new UpdateTimeCommand(input, false);
-            } else {
-                throw new InvalidCommandException(Message.COMMAND_ERROR);
-            }
+            result = parseUpdateCommand(split, input);
             break;
 
         case "todo":
@@ -99,6 +92,21 @@ public class Parser {
         }
 
         return result;
+    }
+
+    private Command parseUpdateCommand(String[] split, String input) throws InvalidCommandException {
+        try {
+            String secondCommand = split[1];
+            if (secondCommand.compareTo("description") == 0) {
+                return new UpdateDescriptionCommand(input, false);
+            } else if (secondCommand.compareTo("time") == 0) {
+                return new UpdateTimeCommand(input, false);
+            } else {
+                throw new InvalidCommandException(Message.COMMAND_ERROR);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandException(Message.UPDATE_GENERAL_ERROR);
+        }
     }
 
     /**

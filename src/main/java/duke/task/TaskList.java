@@ -5,6 +5,7 @@ import duke.core.Message;
 import duke.core.Parser;
 
 import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTimeFormatException;
 import duke.exception.KeywordNotFoundException;
 import duke.exception.TaskIndexException;
@@ -30,6 +31,10 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public Task getTask(int index) {
+        return this.tasks.get(index);
     }
 
     /**
@@ -100,7 +105,7 @@ public class TaskList {
         }
     }
 
-    public String updateDescription(int idx, String input) throws TaskIndexException {
+    public String updateDescription(int idx, String input) throws TaskIndexException, InvalidCommandException{
         try {
             Task task = this.tasks.get(idx);
             int newDescriptionIndex = input.indexOf("" + (idx + 1));
@@ -109,6 +114,8 @@ public class TaskList {
             return Message.UPDATE_DESCRIPTION + task.toString();
         } catch (IndexOutOfBoundsException e) {
             throw new TaskIndexException(Message.INDEX_ERROR);
+        } catch (Exception e) {
+            throw new InvalidCommandException(Message.UPDATE_GENERAL_ERROR);
         }
     }
 
