@@ -18,29 +18,6 @@ Duke is a **smart** bot which assist you to manage tasks.
 
 ## Usage
 
-Example of usage: 
-
-`help`
-
-Expected outcome:
-
-````
-1. help - lists out available commands
-2. list - lists out all the tasks
-3. todo <task name> - adds a ToDo task
-4. event <task name> /by <event date: YYYY-MM-DD> - adds an Event task
-5. deadline <task name> /by <event date: YYYY-MM-DD> - adds a Deadline task
-6. done <task number> - marks indicated task as complete
-7. delete <task number> - deletes the indicated task
-8. find <keyword> - searches for tasks with <keyword>
-9. bye - saves and closes the program
-````
-
-Example:
-![help](help.png)
-
-___
-
 ### `todo` : add a task of type TODO with description. 
 
 `todo [description]` add a task of type TODO with description. 
