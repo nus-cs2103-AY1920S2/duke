@@ -35,6 +35,10 @@ public class DeleteCommand extends Command {
     public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
         try {
             int storageSize = storage.size();
+            if (index + 1 > storageSize) {
+                Controller.raiseException(new Exception("Sorry pal such index is way beyond my list."));
+                return false;
+            }
             Ui.printDel(storage.get(index).toString(), storageSize - 1);
             storage.remove(index);
             storageController.writeTask(storage);

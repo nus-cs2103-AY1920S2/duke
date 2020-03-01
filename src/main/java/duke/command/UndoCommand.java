@@ -26,7 +26,6 @@ public class UndoCommand extends Command {
         try {
             stateController.undo();
             State state = stateController.getCurrent();
-            System.out.println(state.getTaskList().get(state.getTaskList().size() - 1));
             storageController.writeTask(state.getTaskList());
             Ui.printUndo();
         } catch (Exception e) {

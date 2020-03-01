@@ -38,6 +38,10 @@ public class DoneCommand extends Command {
     public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
         try {
             int storageSize = storage.size();
+            if (index > storageSize) {
+                Controller.raiseException(new Exception("This is beyond the scope of my ability, sadly."));
+                return false;
+            }
             storage.get(index).setDone();
             Ui.printDone(storage.get(index).toString(), storageSize);
             storageController.writeTask(storage);

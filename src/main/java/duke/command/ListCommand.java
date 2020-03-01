@@ -27,7 +27,7 @@ public class ListCommand extends Command {
         try {
             String lst = "";
             for (int i = 0; i < storage.size(); i++) {
-                lst += String.format("\t%d -%s\n", i + 1, storage.get(i));
+                lst += String.format(" %d -%s\n", i + 1, storage.get(i));
             }
             Ui.printList(lst);
 
