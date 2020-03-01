@@ -1,0 +1,12 @@
+T | 1 | project for week 2
+D | 1 | be born | 1997-08-05
+E | 1 | project meeting  |  bayfront
+E | 0 | cny dinner  |  saturday 6pm
+T | 0 | project for week 2
+T | 0 | project 4
+T | 0 | project 5
+E | 0 | finish ip  |  sunday 2359
+D | 0 | finsih ip | 2020-03-02
+D | 0 | finish ip | 2020-03-02 2359
+D | 0 | learn piano | 2020-03-02 0900
+D | 0 | finish ip | 2020-03-01 2359

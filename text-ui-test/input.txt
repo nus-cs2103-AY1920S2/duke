@@ -1,0 +1,13 @@
+todo project for week 2
+deadline celebrate cny /by 29/02/2020 1800
+deadline be born /by 1997-08-05
+event project meeting /at bayfront
+event cny dinner /at saturday 6pm
+list
+done 1
+list
+delete 2
+list
+todo project for week 2
+list
+bye

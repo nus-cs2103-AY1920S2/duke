@@ -1,0 +1,82 @@
+Hi! I'm
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+************************************************************
+Hi! I'm
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+What can I do for you?
+************************************************************
+todo
+************************************************************
+Got it! I've added this task:
+     [T][?] project for week 2
+Now you have 1 tasks in the list.
+************************************************************
+************************************************************
+Got it! I've added this task:
+     [E][?] project meeting (at: saturday 3-6pm)
+Now you have 2 tasks in the list.
+************************************************************
+************************************************************
+Got it! I've added this task:
+     [D][?] drop modules (by: this sunday)
+Now you have 3 tasks in the list.
+************************************************************
+************************************************************
+Got it! I've added this task:
+     [E][?] cny dinner (at: friday 6pm)
+Now you have 4 tasks in the list.
+************************************************************
+************************************************************
+Here are the tasks in your list:
+1.     [T][?] project for week 2
+2.     [E][?] project meeting (at: saturday 3-6pm)
+3.     [D][?] drop modules (by: this sunday)
+4.     [E][?] cny dinner (at: friday 6pm)
+************************************************************
+************************************************************
+Nice! I've marked this task as done:
+     [T][?] project for week 2
+************************************************************
+************************************************************
+Here are the tasks in your list:
+1.     [T][?] project for week 2
+2.     [E][?] project meeting (at: saturday 3-6pm)
+3.     [D][?] drop modules (by: this sunday)
+4.     [E][?] cny dinner (at: friday 6pm)
+************************************************************
+************************************************************
+Noted. I've removed this task:
+     [E][?] project meeting (at: saturday 3-6pm)
+Now you have 3 tasks in the list.
+************************************************************
+************************************************************
+Here are the tasks in your list:
+1.     [T][?] project for week 2
+2.     [D][?] drop modules (by: this sunday)
+3.     [E][?] cny dinner (at: friday 6pm)
+************************************************************
+************************************************************
+Got it! I've added this task:
+     [T][?] project for week 2
+Now you have 4 tasks in the list.
+************************************************************
+************************************************************
+Here are the tasks in your list:
+1.     [T][?] project for week 2
+2.     [D][?] drop modules (by: this sunday)
+3.     [E][?] cny dinner (at: friday 6pm)
+4.     [T][?] project for week 2
+************************************************************
+************************************************************
+Bye! :) Hope to see you again soon!
+************************************************************
