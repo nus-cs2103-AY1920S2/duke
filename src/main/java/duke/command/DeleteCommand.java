@@ -1,31 +1,38 @@
 package duke.command;
 
-import duke.Storage;
-import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.command.exception.SaveException;
+import duke.command.exception.UnknownTaskIndexException;
 
-import duke.exception.DukeException;
+import duke.storage.exception.StorageException;
+import duke.storage.Storage;
 
 import duke.task.Task;
+import duke.task.TaskList;
 
+import duke.ui.Ui;
+
+/**
+ * Deletes a task from Duke.
+ */
 public class DeleteCommand extends Command {
-    /** The id number of the task to delete from a task list. */
+    /** The id number of the task to delete. */
     private int taskId;
 
     /**
-     * Constructs a new command that deletes a task from a task list.
+     * Constructs a {@code DeleteCommand} to deletes a {@code Task} from Duke.
      *
-     * @param taskId the id number of the task to delete from a list.
+     * @param taskId the id number of the task to delete.
      */
     public DeleteCommand(int taskId) {
         this.taskId = taskId;
     }
 
     @Override
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage)
+            throws SaveException, UnknownTaskIndexException {
         // Invalid task number
         if (taskId <= 0 || taskId > tasks.getNumTasks()) {
-            throw new DukeException("I can't find that task number!");
+            throw new UnknownTaskIndexException();
         }
 
         // Extract the deleted task
@@ -37,7 +44,11 @@ public class DeleteCommand extends Command {
         ui.showTaskCount(newTasks);
 
         // Save immediately
-        storage.save(newTasks);
+        try {
+            storage.save(newTasks);
+        } catch (StorageException e) {
+            throw new SaveException(e.getFilePath());
+        }
 
         return newTasks;
     }

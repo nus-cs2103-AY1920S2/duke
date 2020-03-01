@@ -1,9 +1,14 @@
 package duke.command;
 
-import duke.Storage;
+import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
+/**
+ * Exits Duke.
+ */
 public class ExitCommand extends Command {
     @Override
     public TaskList execute(TaskList tasks, Ui ui, Storage storage) {

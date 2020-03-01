@@ -1,33 +1,36 @@
 package duke.command;
 
-import duke.Storage;
-import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.storage.Storage;
 
-import duke.exception.DukeException;
+import duke.task.TaskList;
+
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Finds tasks within Duke that match a keyword.
+ */
 public class FindCommand extends Command {
     /**
-     * The keyword used to find tasks in a task list.
-     * Note that the search is case insensitive. */
+     * The keyword used to find tasks in Duke. Note that the search
+     * is case-insensitive.
+     */
     private String keyword;
 
     /**
-     * Constructs a new command that finds tasks in a task list
-     * that contain a specific keyword.
-     * Note that the search is case insensitive.
+     * Constructs a new {@code FindCommand} to find tasks in Duke that contain
+     * a specific keyword. Note that the search is case-insensitive.
      *
-     * @param keyword the keyword used to find tasks in a task list.
+     * @param keyword the keyword used to find tasks.
      */
     public FindCommand(String keyword) {
         this.keyword = keyword.toLowerCase();
     }
 
     @Override
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage) {
         List<Integer> taskIds = new ArrayList<>();
 
         // Find all task descriptions containing the keyword

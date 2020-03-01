@@ -1,29 +1,37 @@
 package duke.command;
 
-import duke.Storage;
+import duke.command.exception.SaveException;
+import duke.command.exception.UnknownTaskIndexException;
+
+import duke.storage.exception.StorageException;
+import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
-import duke.exception.DukeException;
-
+/**
+ * Marks a task in Duke as done.
+ */
 public class DoneCommand extends Command {
-    /** The id number of the task to mark as done in a list. */
+    /** The id number of the task to mark as done. */
     private int taskId;
 
     /**
-     * Constructs a new command that marks a task as done in a task list.
+     * Constructs a new {@code DoneCommand} that marks a task as done in Duke.
      *
-     * @param taskId the id number of the task to mark as done in a list.
+     * @param taskId the id number of the task to mark as done.
      */
     public DoneCommand(int taskId) {
         this.taskId = taskId;
     }
 
     @Override
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage)
+            throws SaveException, UnknownTaskIndexException {
         // Invalid task number
         if (taskId <= 0 || taskId > tasks.getNumTasks()) {
-            throw new DukeException("I can't find that task number!");
+            throw new UnknownTaskIndexException();
         }
 
         // Mark task as done
@@ -32,7 +40,11 @@ public class DoneCommand extends Command {
         ui.showDone(newTasks.get(taskId));
 
         // Save immediately
-        storage.save(newTasks);
+        try {
+            storage.save(newTasks);
+        } catch (StorageException e) {
+            throw new SaveException(e.getFilePath());
+        }
 
         return newTasks;
     }

@@ -1,11 +1,16 @@
 package duke.command;
 
-import duke.Storage;
+import duke.command.exception.CommandException;
+
+import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
-import duke.exception.DukeException;
-
+/**
+ * Represents a command to handle user interactions within Duke.
+ */
 public abstract class Command {
 
     /**
@@ -17,9 +22,10 @@ public abstract class Command {
      * @param ui a user interface for console outputting.
      * @param storage a save/loading mechanism.
      * @return an updated task list after performing a specific command.
-     * @throws DukeException if command encounters an issue when executing.
+     * @throws CommandException if command encounters an issue when executing.
      */
-    public abstract TaskList execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract TaskList execute(TaskList tasks, Ui ui, Storage storage)
+            throws CommandException;
 
     /**
      * Returns whether the command will exit the program.

@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 public interface Serializable {
     /**
