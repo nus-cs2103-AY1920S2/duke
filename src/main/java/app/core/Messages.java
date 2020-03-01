@@ -55,4 +55,6 @@ public class Messages {
             + "The file may be corrupted. Please check the file at %s!";
     
     public static final String INVALID_DATE_FORMAT_MESSAGE = "Ah! I can only understand this format: %s";
+    public static final String INVALID_CHARACTER_MESSAGE = "Hey... "
+            + "I think you used an invalid character (%s) in your input...";
 }

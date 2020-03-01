@@ -2,6 +2,7 @@ package app.core.commands;
 
 import app.core.Messages;
 
+import app.util.InputValidator;
 import app.util.Parser;
 import app.util.StringPair;
 
@@ -20,6 +21,7 @@ public final class CommandManager {
      *     of the user input
      */
     public Command getCommand(String userInput) throws BaseException {
+        InputValidator.validate(userInput);
         StringPair tokens = Parser.parse(userInput);
         String command = tokens.getFirstValue();
         String args = tokens.getSecondValue();
