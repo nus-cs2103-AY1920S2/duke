@@ -11,7 +11,8 @@
     3. Displaying tasks
     4. Marking tasks as done
     5. Finding tasks
-    6. Exiting the application
+    6. Help page
+    7. Exiting the application
 ## 1. About
 ***Johnny*** is a chat bot cum task manager to assist you in keeping 
 track of important tasks in a neat and organised manner. It features
@@ -153,7 +154,19 @@ Syntax | Example
 If a matching task(s) is found, ***Johnny*** will display the found task(s).
 If no matches are found, ***Johnny*** will display a message stating as such.
 
-### vi. Exiting the application
+### vi. Help page
+
+`help` - Displays a summary of available commands
+
+- This command does not take any additional parameters
+
+Syntax | Example
+-------|---------
+`help`|`help`
+
+![Help page](./images/help.png)
+
+### vii. Exiting the application
 
 `bye` - Closes the application
 
