@@ -95,7 +95,7 @@ Expected outcome: ![Tag UI](Tag.png)
 Once you're done, you can exit Duke. Any task data in Duke will be saved, so next time you run Duke you can continue where you left off!
 bye
 
-Expected outcome: ![Exit UI](Exit.png)
+Expected outcome: ![Bye UI](Bye.png)
 
 
 
