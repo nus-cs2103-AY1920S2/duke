@@ -25,11 +25,6 @@ public class Storage {
             storageFolder.mkdir();
         }
         this.path = "./data/" + path;
-        File dataLog = new File(path);
-        if(!(dataLog.exists())) {
-            dataLog.mkdir();
-        }
-
     }
 
 
