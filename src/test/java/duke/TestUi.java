@@ -19,9 +19,9 @@ public class TestUi {
     @Test
     public void testShowGoodbye() {
         ui.showGoodbye();
-        String expectedOutput = String.format("Bye! Please give a review if you like this program!");
+        String expectedOutput = String.format("Five cents, please!");
 
-        assertEquals(ui.getResponse().toString(), expectedOutput);
+        assertEquals(ui.getResponse(), expectedOutput);
     }
 
     @AfterEach
