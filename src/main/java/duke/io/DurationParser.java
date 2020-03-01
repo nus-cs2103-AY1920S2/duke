@@ -1,4 +1,4 @@
-package duke.util;
+package duke.io;
 
 import static duke.util.MagicStrings.ERROR_INVALID_SNOOZE_DURATION;
 import static duke.util.MagicStrings.ERROR_INVALID_UNIT_OF_TIME;

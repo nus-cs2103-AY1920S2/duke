@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import duke.exception.DuchessException;
+import duke.io.DurationParser;
 import duke.save.SaveStateStack;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.util.DurationParser;
 import duke.util.Pair;
 
 /**

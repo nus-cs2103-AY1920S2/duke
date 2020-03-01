@@ -1,8 +1,11 @@
-package duke.util;
+package duke.io;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import duke.util.Frequency;
 
 /**
  * JUnit test class for {@code FrequencyParser}.
@@ -14,7 +17,7 @@ public class FrequencyParserTest {
     @Test
     public void testFrequencyParser() {
         // Assumption is that the input is already cleaned and lowered.
-        assertEquals(Frequency.DAILY, FrequencyParser.parseFrequency("every day"));
+        Assertions.assertEquals(Frequency.DAILY, FrequencyParser.parseFrequency("every day"));
         assertEquals(Frequency.DAILY, FrequencyParser.parseFrequency("day"));
         assertEquals(Frequency.DAILY, FrequencyParser.parseFrequency("daily"));
         assertEquals(Frequency.FORTNIGHTLY, FrequencyParser.parseFrequency("every 2 weeks"));

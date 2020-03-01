@@ -1,8 +1,9 @@
-package duke.util;
+package duke.io;
 
 import static duke.util.MagicStrings.ERROR_WRONG_FREQUENCY_FORMAT;
 
 import duke.exception.DuchessException;
+import duke.util.Frequency;
 
 /**
  * The {@code FrequencyParser} is a helper class with static methods to parse

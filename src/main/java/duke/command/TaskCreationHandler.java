@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import duke.exception.DuchessException;
+import duke.io.DateTimeParser;
+import duke.io.FrequencyParser;
 import duke.save.SaveStateStack;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -23,9 +25,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
-import duke.util.DateTimeParser;
 import duke.util.Frequency;
-import duke.util.FrequencyParser;
 
 /**
  * The {@code TaskCreationHandler} class contains all static methods

@@ -1,4 +1,4 @@
-package duke.util;
+package duke.io;
 
 import static duke.util.MagicStrings.ERROR_WRONG_DATE_FORMAT;
 import static duke.util.StringCleaner.cleanAndLowerString;
