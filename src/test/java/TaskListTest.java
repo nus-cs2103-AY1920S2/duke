@@ -6,14 +6,6 @@ import duke.TaskList;
 
 public class TaskListTest {
 
-    //@Test
-   // public void getTaskTest() {
-        TaskList tasks = new TaskList();
-        //Todo todo = new Todo("Mark papers");
-        //tasks.addTask(todo);
-        //assertEquals(todo, tasks.getTask(0));
-    //}
-
     @Test
     public void getSizeTest() {
         TaskList tasks = new TaskList();

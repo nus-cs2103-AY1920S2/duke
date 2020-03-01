@@ -7,7 +7,7 @@ public abstract class Command {
         this.str = str;
     }
 
-    abstract String execute(TaskList task,Storage storage,Ui ui, TasksNum tasks) throws DukeException ;
+    abstract String execute(TaskList task,Storage storage,Ui ui, TasksNum tasks) throws DukeException;
 
     boolean isExit() {
         return false;

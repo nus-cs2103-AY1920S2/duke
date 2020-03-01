@@ -3,15 +3,17 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Displays textual cues to user
+ * Displays textual cues to user.
  */
 public class Ui {
     private String output;
 
-    Ui() {this.output = "";}
+    Ui() {
+        this.output = "";
+    }
 
     /**
-     * Read user input
+     * Read user input.
      * @return String of user input
      */
     public String readCommand() {
@@ -21,7 +23,7 @@ public class Ui {
     }
 
     /**
-     * Formats interface with lines
+     * Formats interface with lines.
      * @return String of lines
      */
     public String showLine() {
@@ -30,15 +32,16 @@ public class Ui {
     }
 
     /**
-     * Formats interface with blanklines
+     * Formats interface with blanklines.
      * @return newline
      */
     public String blankLine() {
         output = "/n";
         return output;
     }
+
     /**
-     * Display loading error to user
+     * Display loading error to user.
      * @return String of loading error
      */
     public String showLoadingError() {
@@ -47,7 +50,7 @@ public class Ui {
     }
 
     /**
-     * Display error specified to user
+     * Display error specified to user.
      * @param err from Exception thrown
      * @return String of error specified
      */
@@ -56,7 +59,7 @@ public class Ui {
     }
 
     /**
-     * Display greeting to user
+     * Display greeting to user.
      * @return String of greeting
      */
     public String greet() {
@@ -67,7 +70,7 @@ public class Ui {
     }
 
     /**
-     * Display add command
+     * Display add command.
      * @param task Task from Duke
      * @param tasks TaskList from Duke
      * @return String for add command
@@ -80,7 +83,7 @@ public class Ui {
     }
 
     /**
-     * Display done command
+     * Display done command.
      * @param task Task from Duke
      * @param tasks TaskList from Duke
      * @return String for done command
@@ -92,7 +95,7 @@ public class Ui {
     }
 
     /**
-     * Display delete command
+     * Display delete command.
      * @param task Task from Duke
      * @param tasks TaskList from Duke
      * @return String for delete command
@@ -104,9 +107,7 @@ public class Ui {
     }
 
     /**
-     * Display farewell to user
-     * @param task Task from Duke
-     * @param tasks TaskList from Duke
+     * Display farewell to user.
      * @return String for bye command
      */
     public String saybye() {
@@ -115,7 +116,7 @@ public class Ui {
     }
 
     /**
-     * Display invalid command error message to user
+     * Display invalid command error message to user.
      * @return String for invalid command message
      */
     public String errormsg() {

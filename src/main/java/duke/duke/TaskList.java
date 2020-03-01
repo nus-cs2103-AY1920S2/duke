@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Creates TaskList object
+ * Creates TaskList object.
  */
 public class TaskList {
     ArrayList<Task> lst;
@@ -11,12 +11,13 @@ public class TaskList {
     public TaskList() {
         this.lst = new ArrayList<Task>();
     }
+
     public TaskList(ArrayList<Task> lst) {
         this.lst = lst;
     }
 
     /**
-     * Adds task to TaskList
+     * Adds task to TaskList.
      * @param task from Task from Duke
      */
     public void addTask(Task task) {
@@ -24,7 +25,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes task from TaskList
+     * Deletes task from TaskList.
      * @param task from Task from Duke
      * @throws DukeException when there is no Task to be deleted
      */
@@ -33,11 +34,13 @@ public class TaskList {
             throw new DukeException("No task to delete");
         }
         lst.remove(task);
-        if (!task.getStatus()) {tasks.subNum();}
+        if (!task.getStatus()) {
+            tasks.subNum();
+        }
     }
 
     /**
-     * Retrieves task from TaskList
+     * Retrieves task from TaskList.
      * @param counter integer from Duke
      * @return specified Task
      */
@@ -46,10 +49,12 @@ public class TaskList {
     }
 
     /**
-     * Retrieves size of TaskList
+     * Retrieves size of TaskList.
      * @return integer size size of TaskList
      */
-    public int getSize() {return lst.size();}
+    public int getSize() {
+        return lst.size();
+    }
 
 }
 

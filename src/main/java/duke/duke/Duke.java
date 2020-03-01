@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Creates Duke Object with filepath
+ * Creates Duke Object with filepath.
  */
 public class Duke {
 
@@ -10,6 +10,10 @@ public class Duke {
     private Ui ui;
     private TasksNum tasksnum;
 
+    /**
+     * Initialise Duke object.
+     * @param filePath of saved file
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -19,7 +23,7 @@ public class Duke {
             //System.out.println(tasks.getSize());
             tasksnum.setNum(Integer.parseInt(tasks.getTask(tasks.getSize() - 1).getD()));
             //System.out.println(tasksnum.getNum());
-            tasks.deleteTask(tasks.getTask(tasks.getSize()-1),tasksnum);
+            tasks.deleteTask(tasks.getTask(tasks.getSize() - 1),tasksnum);
         } catch (DukeException e) {
             System.out.println(ui.showLoadingError());
             this.tasks = new TaskList();
@@ -27,7 +31,7 @@ public class Duke {
     }
 
     /**
-     * Executes the Duke object
+     * Executes the Duke object.
      */
     public void run() {
         System.out.println(ui.greet());

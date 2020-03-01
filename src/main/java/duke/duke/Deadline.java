@@ -8,19 +8,24 @@ import java.text.ParseException;
 import java.text.DateFormat;
 
 /**
- * Creates Deadline task
+ * Creates Deadline task.
  */
 public class Deadline extends Task {
     protected LocalDate date;
 
+    /**
+     * Initialise type and date and description.
+     * @param description of task
+     * @param date of task
+     */
     public Deadline(String description, LocalDate date) {
         super(description);
-        this.typeD = "E";
+        this.typeD = "D";
         this.date = date;
     }
 
     /**
-     * Formats time to 12 hour mode for Deadline Task
+     * Formats time to 12 hour mode for Deadline Task.
      * @param time for Deadline Task
      */
     public void setTime(String time) {
@@ -41,7 +46,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Retrieves time
+     * Retrieves time.
      * @return time from Deadline Task
      */
     public String getTime() {
@@ -49,7 +54,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Retrieves date
+     * Retrieves date.
      * @return date from Deadline Task
      */
     public String getDate() {
@@ -57,7 +62,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Retrieves formatted time
+     * Retrieves formatted time.
      * @return formatted time from Deadline Task
      */
     public String getTimeStamp() {

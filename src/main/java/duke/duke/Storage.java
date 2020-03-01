@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Creates Storage object
+ * Creates Storage object.
  */
 public class Storage {
     private String directory = System.getProperty("user.dir");
@@ -18,13 +18,14 @@ public class Storage {
     private Path path = Paths.get(directory, "data", fileName);
     private ArrayList<Task> lst = new ArrayList<Task>();
 
-    public Storage() {};
+    public Storage() {
+    }
 
     /**
-     * Reads file stored in hard drive
+     * Reads file stored in hard drive.
      * @return ArrayList of Tasks stored
      */
-    public ArrayList<Task> readFile() {//returns tasklist + task number (appended to the back)
+    public ArrayList<Task> readFile() { //returns tasklist + task number (appended to the back)
         int tasks = 0;
         if (!Files.exists(path)) {
             try {
@@ -76,10 +77,10 @@ public class Storage {
     }
 
     /**
-     * Overwrites new data to stored file in hard drive
+     * Overwrites new data to stored file in hard drive.
      * @param lst from Tasklist from ByeCommand
      */
-    public void writeToFile(TaskList lst){
+    public void writeToFile(TaskList lst) {
         //System.out.println("HEYY");
         try {
             BufferedWriter writer = Files.newBufferedWriter(path);;
@@ -91,7 +92,8 @@ public class Storage {
                     //System.out.println("HEYY");
                     writer.newLine();
                 } else {
-                    writer.write(task.getType() + "|" + task.getStatusIcon() + "|" + task.getD() + "|" + task.getTime());
+                    writer.write(task.getType() + "|" + task.getStatusIcon() + "|"
+                            + task.getD() + "|" + task.getTime());
                     writer.newLine();
                 }
             }
@@ -104,7 +106,7 @@ public class Storage {
     }
 
     /**
-     * Formats command to fit date into LocalDate format
+     * Formats command to fit date into LocalDate format.
      * @param temp String array that contains date
      * @return LocalDate object or Deadline/Event object
      */
@@ -120,7 +122,7 @@ public class Storage {
     }
 
     /**
-     * Increase task number if Task is done
+     * Increase task number if Task is done.
      * @param task Task from file
      * @param tasks integer containing task number
      */

@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Deletes task from tasklist from Duke
+ * Deletes task from tasklist from Duke.
  */
 public class DeleteCommand extends Command {
 
@@ -10,7 +10,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     *
+     * Removes task from tasklist and displays delete command.
      * @param lst from TaskList from Duke
      * @param storage from Storage from Duke
      * @param ui from UI from Duke from Duke

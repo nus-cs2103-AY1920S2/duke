@@ -1,17 +1,17 @@
 package duke;
 
 /**
- * Follows command to exit programme
+ * Follows command to exit programme.
  */
 public class
-ByeCommand extends Command {
+    ByeCommand extends Command {
 
     ByeCommand(String str) {
         super(str);
     }
 
     /**
-     *
+     *Dislays farewell greeting and saves data to harddrive.
      * @param lst from TaskList from Duke
      * @param storage from Storage from Duke
      * @param ui from UI from Duke from Duke
