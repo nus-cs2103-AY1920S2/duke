@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -47,24 +50,33 @@ public class Storage {
             duke.setFriendlierSyntax(gson.fromJson(fileReader, FriendlierSyntax.class));
         } catch (FileNotFoundException e) {
             System.err.println(e);
-            duke.setFriendlierSyntax(new FriendlierSyntax());
-            duke.setTaskList(new TaskList());
+            duke.setFriendlierSyntax(new FriendlierSyntax(new HashMap<String, String>()));
+            duke.setTaskList(new TaskList(new ArrayList<Task>()));
         }
     }
 
-    /**
-     * Writes task list and alias into hard drive.
-     */
-    public void saveFile(TaskList taskList, FriendlierSyntax alias) {
+    public void saveTaskList(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(userDirectory + "/data.json");
-            FileWriter aliasFile = new FileWriter(userDirectory + "/alias.json");
             gson.toJson(taskList, fileWriter);
-            gson.toJson(alias, aliasFile);
             fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException io) {
+            System.err.println(io);
+        }
+
+
+    }
+
+    /**
+     * Writes alias into hard drive.
+     */
+    public void saveFile(FriendlierSyntax alias) {
+        try {
+            FileWriter aliasFile = new FileWriter(userDirectory + "/alias.json");
+            gson.toJson(alias, aliasFile);
             aliasFile.flush();
             aliasFile.close();
-            fileWriter.close();
         } catch (IOException io) {
             System.err.println(io);
         }

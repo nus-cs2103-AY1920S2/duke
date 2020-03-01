@@ -8,29 +8,35 @@ public class FriendlierSyntax {
     /**
      * Instantiates the list of friendlier syntax which includes shortcuts for each command.
      */
-    public FriendlierSyntax() {
-        friendlierSyntax.put("a", "alias");
-        friendlierSyntax.put("alias", "alias");
-        friendlierSyntax.put("b", "bye");
-        friendlierSyntax.put("bye", "bye");
-        friendlierSyntax.put("l", "list");
-        friendlierSyntax.put("list", "list");
-        friendlierSyntax.put("dlt", "delete");
-        friendlierSyntax.put("delete", "delete");
-        friendlierSyntax.put("dn", "done");
-        friendlierSyntax.put("done", "done");
-        friendlierSyntax.put("c", "clear");
-        friendlierSyntax.put("clear", "clear");
-        friendlierSyntax.put("dn", "done");
-        friendlierSyntax.put("f", "find");
-        friendlierSyntax.put("find", "find");
-        friendlierSyntax.put("t", "todo");
-        friendlierSyntax.put("todo", "todo");
-        friendlierSyntax.put("ddln", "deadline");
-        friendlierSyntax.put("deadline", "deadline");
-        friendlierSyntax.put("e", "event");
-        friendlierSyntax.put("event", "event");
-        friendlierSyntax.put("tag", "tag");
+    public FriendlierSyntax(HashMap<String, String> friendlierSyntax) {
+        if (friendlierSyntax == null) {
+            System.out.println("haiz");
+            friendlierSyntax.put("a", "alias");
+            friendlierSyntax.put("alias", "alias");
+            friendlierSyntax.put("b", "bye");
+            friendlierSyntax.put("bye", "bye");
+            friendlierSyntax.put("l", "list");
+            friendlierSyntax.put("list", "list");
+            friendlierSyntax.put("dlt", "delete");
+            friendlierSyntax.put("delete", "delete");
+            friendlierSyntax.put("dn", "done");
+            friendlierSyntax.put("done", "done");
+            friendlierSyntax.put("c", "clear");
+            friendlierSyntax.put("clear", "clear");
+            friendlierSyntax.put("dn", "done");
+            friendlierSyntax.put("f", "find");
+            friendlierSyntax.put("find", "find");
+            friendlierSyntax.put("t", "todo");
+            friendlierSyntax.put("todo", "todo");
+            friendlierSyntax.put("ddln", "deadline");
+            friendlierSyntax.put("deadline", "deadline");
+            friendlierSyntax.put("e", "event");
+            friendlierSyntax.put("event", "event");
+            friendlierSyntax.put("hello", "hello");
+            friendlierSyntax.put("tag", "tag");
+        } else {
+            this.friendlierSyntax = friendlierSyntax;
+        }
     }
 
     public void setFriendlierSyntax(HashMap<String, String> friendlierSyntax) {

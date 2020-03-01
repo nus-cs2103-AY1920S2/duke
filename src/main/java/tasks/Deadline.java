@@ -2,6 +2,9 @@ package tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
+
+import tasks.Tag;
 
 /**
  * Task that need to be done before a specific date/time.
@@ -21,7 +24,7 @@ public class Deadline extends Task {
         this.dateBy = dateBy;
     }
 
-    public Deadline(String description, LocalDate dateBy, String tags) {
+    public Deadline(String description, LocalDate dateBy, Set<Tag> tags) {
         super(description, tags);
         this.dateBy = dateBy;
     }

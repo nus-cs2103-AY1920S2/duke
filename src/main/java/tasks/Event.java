@@ -2,6 +2,9 @@ package tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
+
+import tasks.Tag;
 
 /**
  * Task that start at a specific time and ends at a specific time.
@@ -21,7 +24,7 @@ public class Event extends Task {
         this.dateAt = dateAt;
     }
 
-    public Event(String description, LocalDate dateAt, String tags) {
+    public Event(String description, LocalDate dateAt, Set<Tag> tags) {
         super(description, tags);
         this.dateAt = dateAt;
     }

@@ -1,8 +1,11 @@
 package tasks;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import tasks.Tag;
 
 /**
  * Specifies main attributes and methods for tasks.
@@ -10,7 +13,7 @@ import java.util.Collections;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected ArrayList<String> tags = new ArrayList<>();
+    protected Set<Tag> tags = new HashSet<>();
 
     /**
      * Creates a task object with a description.
@@ -22,10 +25,10 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task(String description, String tags) {
+    public Task(String description, Set<Tag> tags) {
         this.description = description;
         this.isDone = false;
-        this.tags.addAll(Arrays.asList(tags.split(" ")));
+        this.tags = tags;
     }
 
     /**

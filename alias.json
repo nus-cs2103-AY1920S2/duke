@@ -1,5 +1,13 @@
 {
   "friendlierSyntax": {
+    "hi": "hello",
+    "dn": "done",
+    "delete": "delete",
+    "find": "find",
+    "alias": "alias",
+    "tag": "tag",
+    "deadline": "deadline",
+    "event": "event",
     "add": "todo",
     "a": "alias",
     "b": "bye",
@@ -8,21 +16,15 @@
     "f": "find",
     "clear": "clear",
     "h": "help",
-    "dn": "done",
     "l": "list",
     "list": "list",
     "ddln": "deadline",
     "done": "done",
     "dlt": "delete",
-    "delete": "delete",
     "bye": "bye",
     "todo": "todo",
     "help": "help",
     "t": "todo",
-    "find": "find",
-    "alias": "alias",
-    "tag": "tag",
-    "deadline": "deadline",
-    "event": "event"
+    "hello": "hello"
   }
 }

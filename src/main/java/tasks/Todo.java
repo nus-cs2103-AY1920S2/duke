@@ -1,5 +1,9 @@
 package tasks;
 
+import tasks.Tag;
+
+import java.util.Set;
+
 /**
  * Task without any date/time attached to it.
  */
@@ -14,7 +18,7 @@ public class Todo extends Task {
         super(description);
     }
 
-    public Todo(String description, String tags) {
+    public Todo(String description, Set<Tag> tags) {
         super(description, tags);
     }
 

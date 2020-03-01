@@ -1,9 +1,10 @@
 package tasks;
 
 import commons.DukeException;
-import commons.UI;
+import commons.StringUtil;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * TaskList stores a list of tasks and contains operations to add, retrieve
@@ -16,8 +17,8 @@ public class TaskList {
     /**
      * Initializes the task list.
      */
-    public TaskList() {
-        list = new ArrayList<Task>();
+    public TaskList(ArrayList<Task> taskList) {
+        list = taskList;
     }
 
     /**
@@ -25,7 +26,7 @@ public class TaskList {
      *
      * @return this task list.
      */
-    public ArrayList<Task> getList() {
+    public ArrayList<Task> getTaskList() {
         return list;
     }
 
@@ -48,7 +49,7 @@ public class TaskList {
         if (taskNumber > list.size()) {
             throw new DukeException("☹ OOPS!!! There is no such task.");
         }
-        list.remove(taskNumber - 1);
+        list.remove(taskNumber);
     }
 
     /**
@@ -64,10 +65,7 @@ public class TaskList {
      * @param taskNumber task to be marked as done.
      */
     public void markAsDone(int taskNumber) {
-        if (taskNumber > list.size()) {
-            throw new DukeException("☹ OOPS!!! There is no such task.");
-        }
-        list.get(taskNumber - 1).setDone();
+        list.get(taskNumber).setDone();
     }
 
     /**
@@ -77,7 +75,7 @@ public class TaskList {
      * @return task with the corresponding task number.
      */
     public Task getTask(int taskNumber) {
-        return list.get(taskNumber - 1);
+        return list.get(taskNumber);
     }
 
     /**
@@ -99,53 +97,22 @@ public class TaskList {
     }
 
     /**
-     * Returns information on the number of tasks in the list.
-     *
-     * @return the string of the total number of tasks in the list.
-     */
-    public String printTotalTasks() {
-        if (getTotalTasks() == 0) {
-            return "\n\tNow you have no tasks in the list.";
-        } else if (getTotalTasks() == 1) {
-            return String.format("\n\tNow you have %d task in the list.", getTotalTasks());
-        } else {
-            return String.format("\n\tNow you have %d tasks in the list.", getTotalTasks());
-        }
-    }
-
-    /**
      * Prints all tasks in this task list containing the keyword in a numbered order.
      *
      * @return the string of all tasks containing the keyword in this task list.
      */
-    public String findTaskContainingKeyword(String keyword) {
-        String printedList = "";
-        int taskNumber = 1;
-        for (Task task : list) {
-            if (task.getDescription().contains(keyword)) {
-                printedList = printedList + "\n\t\t" + taskNumber + ". \t" + task;
-                taskNumber++;
-            }
-        }
-        return printedList;
+    public TaskList findTaskContainingKeyword(String keyword) {
+        ArrayList<Task> filteredByKeyword = (ArrayList<Task>) list.stream()
+                .filter(task -> StringUtil.containsWordIgnoreCase(task.getDescription(), keyword))
+                .collect(Collectors.toList());
+        return new TaskList(filteredByKeyword);
     }
 
-    public String findTaskContainingTag(String tag) {
-        String printedList = "";
-        int taskNumber = 1;
-        boolean noTasksWithTag = true;
-        for (Task task : list) {
-            if (task.checkTags(tag)) {
-                noTasksWithTag = false;
-                printedList = printedList + "\n\t\t" + taskNumber + ". \t" + task;
-                taskNumber++;
-            }
-        }
-        if (noTasksWithTag) {
-            return UI.NO_TAGS;
-        } else {
-            return printedList;
-        }
+    public TaskList findTaskContainingTag(String tag) {
+        ArrayList<Task> filteredByTag = (ArrayList<Task>) list.stream()
+                .filter(task -> StringUtil.containsWordIgnoreCase(task.getDescription(), tag))
+                .collect(Collectors.toList());
+        return new TaskList(filteredByTag);
     }
 
     /**
@@ -161,5 +128,9 @@ public class TaskList {
             taskNumber++;
         }
         return printedList;
+    }
+
+    public void setTaskList(ArrayList<Task> taskList) {
+        this.list = taskList;
     }
 }

@@ -1,7 +1,7 @@
 package commons;
 
 import commons.FriendlierSyntax;
-import logic.Controller;
+import logic.LogicManager;
 import storage.Storage;
 import tasks.TaskList;
 
@@ -13,7 +13,7 @@ public class Duke {
 
     private TaskList taskList;
     private FriendlierSyntax friendlierSyntax;
-    private Controller controller;
+    private LogicManager logicManager;
     private Storage storage;
 
     /**
@@ -23,14 +23,15 @@ public class Duke {
     public void start() {
         storage = new Storage();
         storage.readFromFile(this);
-        controller = new Controller(this);
+        logicManager = new LogicManager(this, storage);
     }
 
     /**
      * Saves the task list into the storage file when user terminates the programme.
      */
     public void end() {
-        storage.saveFile(taskList, friendlierSyntax);
+        storage.saveTaskList(taskList);
+        storage.saveFile(friendlierSyntax);
     }
 
     /**
@@ -47,8 +48,8 @@ public class Duke {
      *
      * @return the controller.
      */
-    public Controller getController() {
-        return controller;
+    public LogicManager getLogicManager() {
+        return logicManager;
     }
 
     public void setTaskList(TaskList taskList) {

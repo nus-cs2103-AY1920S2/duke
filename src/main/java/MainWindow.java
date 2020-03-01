@@ -1,5 +1,5 @@
-import commons.UI;
 import commons.Duke;
+import commons.Messages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import logic.LogicManager;
+import logic.command.CommandException;
+import logic.command.CommandResult;
+import logic.command.ExitCommand;
+import logic.parser.ParserException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -22,6 +27,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private LogicManager logicManager;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
@@ -36,16 +42,21 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        logicManager = d.getLogicManager();
+    }
+
+    public void setLogicManager(LogicManager logicManager) {
+        this.logicManager = logicManager;
     }
 
     public void start() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(UI.START, dukeImage)
+                DialogBox.getDukeDialog(Messages.START, dukeImage)
         );
     }
 
     @FXML
-    public void exit() {
+    public void handleExit() {
         duke.end();
         System.exit(0);
     }
@@ -58,7 +69,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void help() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(UI.HELP, dukeImage)
+                DialogBox.getDukeDialog(Messages.HELP, dukeImage)
         );
     }
 
@@ -70,8 +81,8 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = getResponse(input, duke);
-        if (response.equals(UI.BYE)) {
-            exit();
+        if (response.equals(ExitCommand.COMMAND_WORD)) {
+            handleExit();
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
@@ -81,6 +92,14 @@ public class MainWindow extends AnchorPane {
     }
 
     private String getResponse(String input, Duke duke) {
-        return duke.getController().readInput(input, duke.getTaskList(), duke.getFriendlierSyntax());
+        try {
+            CommandResult result = logicManager.execute(input);
+            if (result.isExit()) {
+                handleExit();
+            }
+            return result.getFeedbackToUser();
+        } catch (CommandException | ParserException e) {
+            return "";
+        }
     }
 }
