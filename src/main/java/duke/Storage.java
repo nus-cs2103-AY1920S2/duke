@@ -5,6 +5,8 @@ import duke.task.Task;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -22,6 +24,16 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+        File f = new File("filePath");
+        if (!f.exists()) {
+            try {
+                Path newPath = Path.of(filePath);
+                Files.createDirectory(newPath.getParent());
+                Files.createFile(Path.of(filePath));
+            } catch (IOException e) {
+                Controller.raiseException(e);
+            }
+        }
     }
 
     /**
@@ -67,5 +79,6 @@ public class Storage {
         } catch (IOException e) {
             Controller.raiseException(e);
         }
+
     }
 }
