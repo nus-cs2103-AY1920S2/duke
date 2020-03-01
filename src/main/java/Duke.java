@@ -35,7 +35,7 @@ public class Duke {
         switch (input) {
             case "List":
                 return this.ui.printList(this.taskList);
-            case "list" :
+            case "list":
                 return this.ui.printList(this.taskList);
             case "bye":
                 this.hasEnded = true;
@@ -58,7 +58,6 @@ public class Duke {
                         return this.ui.printMarkedTask(this.taskList.get(taskIndex));
                     } else {
                         Task removedTask = this.taskList.removeTask(taskIndex);
-
                         try {
                             this.storage.save(taskList);
                         } catch (IOException err) {
@@ -77,6 +76,23 @@ public class Duke {
                         return "No matching tasks!";
                     }
                     return this.ui.printSearchResult(searchResults);
+                } else if (this.parser.isEdit(input)) {
+                    int editTaskIndex = Integer.parseInt(input.split("\\s+")[1]) - 1;
+                    Task t = this.taskList.get(editTaskIndex);
+                    if (t.getType().equals("todo")) {
+                        throw new DukeException("Todo tasks do not have date and time! Only Events and Deadline " +
+                                "tasks can be edited!");
+                    }
+                    if (input.split("\\s+").length < 4) {
+                        throw new DukeException("Please provide Date and Time");
+                    }
+                    String taskDesc = this.parser.getDescription(input);
+                    String dateTime = this.parser.getDateTime(taskDesc, "\\d+");
+                    LocalDate date = this.parser.getDate(dateTime);
+                    LocalTime time = this.parser.getTime(dateTime);
+                    LocalDateTime dT= LocalDateTime.of(date, time);
+                    t.edit(dT);
+                    return this.ui.printEdited(this.taskList);
                 } else {
                     if (input.split("\\s+").length < 2) {
                         throw new DukeException("Command not recognised!");
@@ -107,7 +123,6 @@ public class Duke {
                                 System.out.println(e.getMessage());
                             }
                             return this.ui.printTaskAdded(event, this.taskList.size());
-                        1
                         case "deadline":
                             String taskNamee = this.parser.getTaskName(taskDesc, "/by");
                             String dTT = this.parser.getDateTime(taskDesc, "/by");

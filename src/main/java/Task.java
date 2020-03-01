@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * <h1> Task </h1>
  * The Task class represents the task the user inputs into the Duke program.
@@ -42,4 +44,7 @@ public class Task {
         int status = (isDone ? 1 : 0);
         return " | " + status + " | " + this.description;
     }
+
+    public String getType() {return "";};
+    public void edit(LocalDateTime dt){};
 }

@@ -80,4 +80,12 @@ public class Ui {
         return String.format("%s%n%s%n%s", separator, str, separator);
     }
 
+    public String printAskForDateTime() {
+        return String.format("Please enter new date and time![^._.^]ﾉ");
+    }
+
+    public String printEdited(TaskList tasks) {
+        return String.format("Your task has been edited!%n%s", this.printList(tasks));
+    }
+
 }

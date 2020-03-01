@@ -27,4 +27,12 @@ public class Event extends Task {
     public String toFileString() {
         return "E " + super.toFileString() + " | " + this.dateTime;
     }
+
+    public String getType() {
+        return "event";
+    }
+
+    public void edit(LocalDateTime dt) {
+        this.dateTime = dt;
+    }
 }

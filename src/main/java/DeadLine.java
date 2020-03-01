@@ -26,4 +26,12 @@ public class Deadline extends Task {
     public String toFileString() {
         return "D " + super.toFileString() + " | " + this.dateTime;
     }
+
+    public String getType(){
+        return "deadline";
+    }
+
+    public void edit(LocalDateTime dt) {
+        this.dateTime = dt;
+    }
 }

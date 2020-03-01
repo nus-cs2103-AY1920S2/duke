@@ -62,6 +62,19 @@ public class Parser {
         return false;
     }
 
+    public boolean isEdit(String input) throws DukeException{
+        String editRegex =
+                "(^(edit)\\s+.*|.*\\s+(find)$|^(edit))";
+        String withEditTerm = "^(edit)\\s+.*";
+        if(Pattern.matches(editRegex, input)) {
+            if(!Pattern.matches(withEditTerm,input)) {
+                throw new DukeException("Desired Task number should be provided!");
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * This method returns the task index in a user command string
      * @param input user command string
@@ -158,7 +171,7 @@ public class Parser {
                 continue;
             }
         }
-        throw new DukeException("Time"); //thrown if time input is formatted poorly
+        throw new DukeException("Time input is formatted poorly");
     }
 
     /**
