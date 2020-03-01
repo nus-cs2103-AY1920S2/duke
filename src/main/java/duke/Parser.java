@@ -131,7 +131,6 @@ public class Parser {
 
             try {
                 note = instruction.trim().split("note ")[1];
-                System.out.println(note);
             } catch (Exception e) {
                 throw new InvalidNoteException();
             }
