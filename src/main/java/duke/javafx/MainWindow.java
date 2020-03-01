@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+import javafx.animation.PauseTransition;
 
 import duke.Duke;
 import duke.core.Ui;
@@ -59,9 +61,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         if (input.compareTo("bye") == 0) {
-                Platform.exit();
-                System.exit(0);
-                
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(event -> Platform.exit());
+            pause.play();
         }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
