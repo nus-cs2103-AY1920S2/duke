@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +26,22 @@ public class DeadlineTest {
         testDeadline.completeTask();
         assertTrue(testDeadline.isCompleted());
         assertTrue(new Deadline("Already completed", LocalDateTime.now(), true).isCompleted());
+    }
+
+    /**
+     * Tests the snoozing of {@code Deadline}.
+     */
+    @Test
+    public void testSnooze() {
+        LocalDateTime startTime = LocalDateTime.now();
+        Deadline testDeadline = new Deadline("This is going to be snoozed!", startTime);
+        assertEquals(startTime.toString(), testDeadline.getDeadline().toString());
+        testDeadline.snooze(Duration.ofHours(3));
+        startTime = startTime.plus(Duration.ofHours(3));
+        assertEquals(startTime.toString(), testDeadline.getDeadline().toString());
+        testDeadline.snooze(Period.ofMonths(5));
+        startTime = startTime.plus(Period.ofMonths(5));
+        assertEquals(startTime.toString(), testDeadline.getDeadline().toString());
     }
 
     /**
