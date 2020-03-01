@@ -17,8 +17,9 @@ public class DukeUserInterface {
 
     private static final String LINE = "    ____________________________________________________________";
     private static final String OPENING_GREETING = "     Hello! I'm Duke\n" + "     What can I do for you?";
-    private static final String FAREWELL_CLOSING = "Poyo! (Bye. Hope to see you again soon! UwU)";
-    private static final String STARTUP_GREETING = "Poyo! (Hi, I'm Kirby! :3 How may I help you?)";
+    private static final String FAREWELL_CLOSING = "Bye. Hope to see you again soon! UwU";
+    private static final String STARTUP_GREETING = "Hi, I'm Kirby!\n" +
+            "For a list of available commands, enter 'help' :3" + "\n";
     private static final String POYO_GREETING = "Poyo!";
     private static final String PIKA_GREETING = "Poyo Poyo! (Pika Pika!)";
     private static final String UWU_GREETING = "UwU";
@@ -30,7 +31,8 @@ public class DukeUserInterface {
             "    To delete a Task:\n    delete <index of task>\n\n" +
             "    To mark a Task as done:\n    done <index of task>\n\n" +
             "    To find tasks of a certain keyword:\n    find <keyword>\n\n" +
-            "    To change the priority (high, medium, low) of a task:\n    priority <<index of task> <priority>>\n";
+            "    To change the priority (high, medium, low) of a task:\n    priority <<index of task> <priority>>\n\n" +
+            "    To clear all the tasks in the list:\n    clear\n";
 
     private InputStreamReader stringReader;
     private BufferedReader commandReader;

@@ -195,7 +195,7 @@ public class TaskList {
         assert(this.storageData.get(taskDone - 1).isDone == true);
 
         String output = TASK_DONE_MESSAGE;
-        output += "\n" + this.storageData.get(taskDone - 1);
+        output += "\n" + this.storageData.get(taskDone - 1) + "\n";
 
         return output;
     }
@@ -211,7 +211,10 @@ public class TaskList {
 
         int task = Integer.parseInt(position);
 
+        String taskName = this.storageData.get(task - 1).toString();
         String output = this.storageData.get(task - 1).assignPriority(priority);
+        output += "    " + taskName + "\n";
+
         this.storageData.sort(TASK_COMPARATOR);
 
         return output;

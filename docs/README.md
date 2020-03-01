@@ -86,4 +86,26 @@ Finds and lists all tasks with the input keyword.
 > Here are the matching tasks in your list:
 >    1.[T][N] read book
 
+### 7. `clear` a `task`
+Clears all the tasks in the list.
 
+**Example of usage**
+> clear
+
+**Expected outcome**
+> Kirby has cleared all the tasks in the list UwU
+
+### 8. Assign `priority` to a `task`
+Assigns a priority to a task and changes their order in the `list`.
+3 Levels:
+1. `high`
+2. `medium`
+3. `low`
+
+Tasks with `priority` set to `high` appear at the top of the list, followed by `medium` and `low`.
+
+**Example of usage**
+> priority 2 high
+
+**Expected outcome**
+> Okay! I have change the priority of the following task: <task>

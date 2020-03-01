@@ -32,7 +32,7 @@ public class Task implements Serializable {
     private final static int LOW_PRIORITY = 3;
 
     private final static String PRIORITY_ERROR = "Sorry! Input is now allowed. Indicate priority as 'high', 'medium' or 'low'.";
-    private final static String PRIORITY_SUCCESS = "Okay! I have changed the priority of the following event:\n";
+    private final static String PRIORITY_SUCCESS = "Okay! Kirby has changed the priority of the following task:\n";
 
     /**
      * Task is the representation of a task that someone inputs into Duke.
@@ -118,7 +118,7 @@ public class Task implements Serializable {
             return output;
         }
 
-        String output = PRIORITY_SUCCESS + "    " + this.toString();
+        String output = PRIORITY_SUCCESS;
 
         return output;
     }
