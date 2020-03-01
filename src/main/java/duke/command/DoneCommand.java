@@ -2,8 +2,9 @@ package duke.command;
 
 import duke.core.Storage;
 import duke.core.Ui;
-import duke.exception.TaskIndexException;
 import duke.task.TaskList;
+
+import duke.exception.TaskIndexException;
 
 public class DoneCommand extends Command {
     public DoneCommand(String input, boolean isExit) {

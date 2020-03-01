@@ -1,15 +1,16 @@
 package duke;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.Exception;
-
 import duke.core.Parser;
 import duke.core.Storage;
 import duke.core.Ui;
 import duke.command.Command;
 import duke.task.TaskList;
+
 import duke.exception.DukeException;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.Exception;
 
 /**
  * Main class for the Duke chatbot application.
@@ -37,25 +38,6 @@ public class Duke {
             Ui.printLines("File creation failed.");
         }
     }
-
-    // public Duke(String fileName) {
-    //     this.fileName = fileName;
-    //     storage = new Storage();
-    //     try {
-    //         tasks = new TaskList(storage.loadTasks());
-    //     } catch (FileNotFoundException e) {
-    //         Ui.printLines("File not found. Try again!");
-    //     }
-    //     parser = new Parser();
-    //     ui = new Ui();
-    //     File file = new File(this.fileName);
-
-    //     try {
-    //         file.createNewFile();
-    //     } catch (IOException e) {
-    //         Ui.printLines("File creation failed.");
-    //     }
-    // }
 
     public String getResponse(String input) {
         assert input.length() > 0 : "Input cannot be empty";

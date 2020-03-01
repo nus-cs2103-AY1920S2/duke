@@ -12,12 +12,12 @@ import duke.command.TodoCommand;
 import duke.command.EventCommand;
 import duke.command.DeadlineCommand;
 
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidTimeFormatException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import duke.exception.InvalidCommandException;
-import duke.exception.InvalidTimeFormatException;
 
 /**
  * Represents a parser to parse commands from input strings.

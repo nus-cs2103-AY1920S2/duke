@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.task.TaskList;
 import duke.core.Ui;
 import duke.core.Storage;
+import duke.task.TaskList;
+
 import duke.exception.InvalidTimeFormatException;
 import duke.exception.TaskIndexException;
 

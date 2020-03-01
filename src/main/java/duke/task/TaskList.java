@@ -1,15 +1,15 @@
 package duke.task;
 
-import java.util.ArrayList;
-
 import duke.core.Storage;
 import duke.core.Message;
 import duke.core.Parser;
+
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidTimeFormatException;
 import duke.exception.KeywordNotFoundException;
-import duke.exception.TaskFormatException;
 import duke.exception.TaskIndexException;
+
+import java.util.ArrayList;
 
 /**
  * Represents a list of tasks to be done.

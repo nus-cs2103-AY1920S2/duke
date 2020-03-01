@@ -1,17 +1,19 @@
 package duke.core;
 
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+
+import duke.exception.InvalidTimeFormatException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
-
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
-import duke.exception.InvalidTimeFormatException;
-import duke.task.Deadline;
 
 /**
  * Represents a manager to handle all storage related functionality.
