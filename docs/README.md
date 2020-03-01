@@ -9,7 +9,7 @@ Duke is a personal chatbot, meant to keep track of *your* personal tasks! For th
 1. Download and locate the Duke program's jar file in File Explorer.
 2. Open command line (via typing "cmd" in Windows search). Alternatively, run Terminal if you are on MacOS.
 3. Locate the jar file in command line or Terminal, and run the following command:
-    > java -jar duke-0.1.3.jar
+    > java -jar duke-0.2.0.jar
 
 ## Features
 1. Add a Task
