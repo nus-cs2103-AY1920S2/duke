@@ -1,9 +1,6 @@
 package duke.tool;
 
-import duke.command.Deadlines;
-import duke.command.Events;
-import duke.command.Task;
-import duke.command.ToDos;
+import duke.command.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -47,6 +44,24 @@ public class Command {
                 outputString.append(ui.print("Here are the tasks in your list:"));
                 for (int i = 0; i < taskList.size(); i++) {
                     outputString.append(ui.print((i + 1) + "." + taskList.get(i)));
+                }
+                return outputString.toString();
+            case "sort":
+                if (!arguments.equals("description") && !arguments.equals("datetime")){
+                    // handle exception here
+                    outputString.append(ui.printError("=( OOPS!!! Enter 'sort description' or 'sort datetime'."));
+                } else if (arguments.equals("description")) {
+                    taskList.sort(new TaskDescriptionComparator());
+                    outputString.append(ui.print("Successfully sorted your tasks list according to description. Here are the tasks in your list:"));
+                    for (int i = 0; i < taskList.size(); i++) {
+                        outputString.append(ui.print((i + 1) + "." + taskList.get(i)));
+                    }
+                } else {
+                    taskList.sort(new TaskDatetimeComparator());
+                    outputString.append(ui.print("Successfully sorted your tasks list according to datetime. Here are the tasks in your list:"));
+                    for (int i = 0; i < taskList.size(); i++) {
+                        outputString.append(ui.print((i + 1) + "." + taskList.get(i)));
+                    }
                 }
                 return outputString.toString();
             case "find":
@@ -103,7 +118,8 @@ public class Command {
                 }
                 return outputString.toString();
             case "help":
-                outputString.append(ui.print("List of available commands: todo, event, deadline, list, find, done, delete, bye"));
+                outputString.append(ui.print("List of available commands: todo, event, deadline, list, sort, find, done, delete, bye\n\n" +
+                        "Detailed user guide is at: https://shengxue97.github.io/duke/"));
                 return outputString.toString();
             case "todo":
                 if (arguments.equals("todo")){

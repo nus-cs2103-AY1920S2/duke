@@ -1,10 +1,2 @@
-T|V|hi
-E|X|fireworks|12 Oct. 2019 20:00pm to 12 Oct. 2019 21:00pm
-D|X|fireworks|12 Oct. 2019 20:00pm
-E|X|fireworks|12 Oct. 2019 20:00 to 12 Oct. 2019 21:00
-E|X|fireworks|12 Oct. 2019 20:00HRS to 12 Oct. 2019 21:00HRS
-E|X|fireworks|12 Oct. 2019 20:00HRS to 12 Oct. 2019 21:00HRS
-D|X|sleep|09 Oct. 2019 09:00HRS
-T|X|study 24 hours
-D|X|get six packs|29 Feb. 2020 09:00HRS
-E|X|holidaysss|01 May 2020 20:00HRS to 01 Aug. 2020 20:00HRS
+E|X|fireworks|01 Dec. 2020 09:00HRS to 01 Dec. 2020 10:00HRS
+D|X|rush my homework again|20 Mar. 2020 09:00HRS

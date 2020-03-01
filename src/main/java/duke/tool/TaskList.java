@@ -3,6 +3,8 @@ package duke.tool;
 import duke.command.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -33,6 +35,10 @@ public class TaskList {
 
     public void clear() {
         this.toDo.clear();
+    }
+
+    public void sort(Comparator<Task> comparator){
+        this.toDo.sort(comparator);
     }
 
     public List<Task> getToDo() {

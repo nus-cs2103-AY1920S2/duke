@@ -186,7 +186,8 @@ public class DukeTest {
         }
 
         String actual = outputString.toString();
-        String expected = "List of available commands: todo, event, deadline, list, find, done, delete, bye\n";
+        String expected = "List of available commands: todo, event, deadline, list, sort, find, done, delete, bye\n\n" +
+                "Detailed user guide is at: https://shengxue97.github.io/duke/\n";
 
         System.out.println("Actual: " + actual);
         System.out.println("Expected: " + expected);

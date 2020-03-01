@@ -10,7 +10,7 @@
     <children>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="Infinity" maxWidth="Infinity" prefHeight="557.0" prefWidth="400.0" vvalue="1.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <VBox fx:id="dialogContainer" maxHeight="Infinity" maxWidth="Infinity" prefHeight="552.0" prefWidth="388.0" />
+                <VBox fx:id="dialogContainer" maxHeight="Infinity" maxWidth="Infinity" prefHeight="552.0" prefWidth="388.0"/>
             </content>
         </ScrollPane>
         <TextField fx:id="userInput" layoutY="558.0" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleUserInput" prefHeight="41.0" prefWidth="289.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="109.0" />

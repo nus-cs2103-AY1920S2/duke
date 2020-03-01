@@ -16,6 +16,8 @@ public class Parser {
                 return new Command("bye");
             } else if (input.equals("list")) {
                 return new Command("list");
+            } else if (input.split(" ")[0].equals("sort")) {
+                return new Command("sort", input.replaceFirst("sort ", ""));
             } else if (input.split(" ")[0].equals("find")) {
                 return new Command("find", input.replaceFirst("find ", ""));
             } else if (input.split(" ")[0].equals("done")) {
