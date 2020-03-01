@@ -125,8 +125,8 @@ I have sorted the tasks chronologically.
 You can use the list command to view it.
  
 
-### Feature #7 - Exit 
-This feature allows the user to exit the application and Duke will save the tasks to file.
+### Feature #7 - Saving
+This feature saves all the data to the hard disk and allows the user to exit the application if the want to. They can still continue to use the application after this.
  
 #### Format to exit 
 "bye"
