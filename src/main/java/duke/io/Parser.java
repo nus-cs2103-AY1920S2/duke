@@ -1,10 +1,10 @@
 package duke.io;
 
-import duke.command.Command;
-import duke.exception.DuchessException;
-
 import static duke.util.MagicStrings.ERROR_INVALID_COMMAND;
 import static duke.util.StringCleaner.cleanAndLowerString;
+
+import duke.command.Command;
+import duke.exception.DuchessException;
 
 /**
  * The {@code Parser} class helps to parse given user inputs into a

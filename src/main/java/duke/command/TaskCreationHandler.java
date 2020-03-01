@@ -27,7 +27,6 @@ import duke.util.DateTimeParser;
 import duke.util.Frequency;
 import duke.util.FrequencyParser;
 
-
 /**
  * The {@code TaskCreationHandler} class contains all static methods
  * to handle task creation commands given the same arguments of

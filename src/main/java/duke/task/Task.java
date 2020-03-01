@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.DuchessException;
-
 import static duke.util.MagicStrings.ERROR_CANNOT_UNDO;
+
+import duke.exception.DuchessException;
 
 /**
  * The {@code Task} class creates a task with a description and isCompleted state.

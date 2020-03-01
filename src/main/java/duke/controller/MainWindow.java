@@ -1,5 +1,9 @@
 package duke.controller;
 
+import static duke.util.StringCleaner.cleanString;
+
+import java.io.IOException;
+
 import duke.Duke;
 import duke.Main;
 import duke.command.Command;
@@ -12,10 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
-
-import static duke.util.StringCleaner.cleanString;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

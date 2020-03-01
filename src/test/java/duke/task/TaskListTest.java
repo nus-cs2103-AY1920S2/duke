@@ -1,15 +1,16 @@
 package duke.task;
 
-import duke.exception.DuchessException;
-import duke.util.Pair;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DuchessException;
+import duke.util.Pair;
 
 /**
  * JUnit test class for {@code TaskList}.

@@ -1,5 +1,18 @@
 package duke.command;
 
+import static duke.util.MagicStrings.ERROR_COMMAND_MISSING_INDEX;
+import static duke.util.MagicStrings.ERROR_COMMAND_TOO_MANY_INDICES;
+import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
+import static duke.util.MagicStrings.ERROR_INVALID_COMMAND;
+import static duke.util.MagicStrings.ERROR_INVALID_SNOOZE_DURATION;
+import static duke.util.MagicStrings.ERROR_SNOOZING_NON_DEADLINE;
+import static duke.util.MagicStrings.ERROR_SORTING_EMPTY_LIST;
+import static duke.util.StringCleaner.cleanAndLowerString;
+
+import java.time.temporal.TemporalAmount;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.exception.DuchessException;
 import duke.save.SaveStateStack;
 import duke.storage.Storage;
@@ -9,19 +22,6 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.DurationParser;
 import duke.util.Pair;
-
-import java.time.temporal.TemporalAmount;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static duke.util.MagicStrings.ERROR_COMMAND_MISSING_INDEX;
-import static duke.util.MagicStrings.ERROR_COMMAND_TOO_MANY_INDICES;
-import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
-import static duke.util.MagicStrings.ERROR_INVALID_COMMAND;
-import static duke.util.MagicStrings.ERROR_INVALID_SNOOZE_DURATION;
-import static duke.util.MagicStrings.ERROR_SNOOZING_NON_DEADLINE;
-import static duke.util.MagicStrings.ERROR_SORTING_EMPTY_LIST;
-import static duke.util.StringCleaner.cleanAndLowerString;
 
 /**
  * The {@code CommandHandler} class contains all static methods to handle

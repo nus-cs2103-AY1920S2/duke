@@ -1,6 +1,7 @@
 package duke.util;
 
-import duke.exception.DuchessException;
+import static duke.util.MagicStrings.ERROR_WRONG_DATE_FORMAT;
+import static duke.util.StringCleaner.cleanAndLowerString;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -10,8 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
 
-import static duke.util.MagicStrings.ERROR_WRONG_DATE_FORMAT;
-import static duke.util.StringCleaner.cleanAndLowerString;
+import duke.exception.DuchessException;
 
 /**
  * The {@code DateTimeParser} is a helper class with static methods to parse

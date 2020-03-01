@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.save.SaveStateStack;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.QuintFunction;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * The {@code Command} enum contains all of the different types of commands

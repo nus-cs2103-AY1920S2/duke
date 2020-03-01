@@ -1,10 +1,10 @@
 package duke.save;
 
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * The {@code SaveState} class helps to store a immutable state.

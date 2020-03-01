@@ -1,14 +1,8 @@
 package duke.storage;
 
-import com.google.gson.Gson;
-import duke.exception.DuchessException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,9 +16,17 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
+
+import com.google.gson.Gson;
+
+import duke.exception.DuchessException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * JUnit test class for {@code Storage}.

@@ -1,14 +1,14 @@
 package duke.command;
 
+import static duke.util.MagicStrings.ERROR_NO_MORE_UNDOS;
+import static duke.util.StringCleaner.cleanAndLowerString;
+
 import duke.exception.DuchessException;
 import duke.save.SaveState;
 import duke.save.SaveStateStack;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import static duke.util.MagicStrings.ERROR_NO_MORE_UNDOS;
-import static duke.util.StringCleaner.cleanAndLowerString;
 
 /**
  * The {@code AdminCommandHandler} class contains all static methods to handle

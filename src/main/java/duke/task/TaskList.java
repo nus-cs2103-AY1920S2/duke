@@ -1,7 +1,9 @@
 package duke.task;
 
-import duke.exception.DuchessException;
-import duke.util.Pair;
+import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
+import static duke.util.MagicStrings.ERROR_TASK_ALREADY_COMPLETED;
+import static duke.util.MagicStrings.ERROR_TASK_CREATED_BEFORE;
+import static duke.util.StringCleaner.cleanAndLowerString;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
-import static duke.util.MagicStrings.ERROR_TASK_ALREADY_COMPLETED;
-import static duke.util.MagicStrings.ERROR_TASK_CREATED_BEFORE;
-import static duke.util.StringCleaner.cleanAndLowerString;
+import duke.exception.DuchessException;
+import duke.util.Pair;
 
 /**
  * The {@code TaskList} object helps to store and manage {@code Task}s.

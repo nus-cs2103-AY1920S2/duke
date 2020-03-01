@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DuchessException;
-import duke.util.DateTimeStringFormatter;
-
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAmount;
+
+import duke.exception.DuchessException;
+import duke.util.DateTimeStringFormatter;
 
 /**
  * The {@code Deadline} class extends from {@code Task} to allow the setting of

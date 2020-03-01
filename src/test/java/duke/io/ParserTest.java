@@ -1,11 +1,12 @@
 package duke.io;
 
-import duke.command.Command;
-import duke.exception.DuchessException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.command.Command;
+import duke.exception.DuchessException;
 
 /**
  * JUnit test class for {@code Parser}.
