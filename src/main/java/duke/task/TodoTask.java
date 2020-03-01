@@ -29,6 +29,6 @@ class TodoTask extends Task {
      */
     @Override
     public String toString() {
-        return " TODO" + super.toString();
+        return " TODO       :" + super.toString();
     }
 }

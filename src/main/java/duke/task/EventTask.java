@@ -21,7 +21,7 @@ class EventTask extends Task {
     public EventTask(String[] inputArr) throws Exception {
         this.type = "event";
         if (inputArr.length < 2) {
-            throw new Exception("Event tasks must have a non-empty description!");
+            throw new Exception(" Event tasks must have a non-empty description!");
         }
         this.description = Arrays.stream(inputArr)
                 .map(str -> str.toLowerCase().equals("event") ? "" : str.equals("/at") ? "at" : str)
@@ -29,7 +29,7 @@ class EventTask extends Task {
 
         int lastAt = description.lastIndexOf(" at ");
         if (lastAt == -1) {
-            throw new Exception("Keyword \"at\" missing");
+            throw new Exception(" Keyword \"at\" missing");
         } else {
             /*
                 The second try clause handles when a task is read from data.csv, wherein its date format is
@@ -43,7 +43,7 @@ class EventTask extends Task {
                     this.time = LocalDateTime.parse(this.description.substring(lastAt + 4),
                             DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
                 } catch (DateTimeParseException e2) {
-                    throw new Exception("Error: unable to decipher date & time input.");
+                    throw new Exception(" Error: unable to decipher date & time input.");
                 }
             }
             this.description = this.description.substring(0, lastAt + 3) + ' '
@@ -59,6 +59,6 @@ class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return " EVENT" + super.toString();
+        return " EVENT      :" + super.toString();
     }
 }

@@ -21,14 +21,14 @@ class DeadlineTask extends Task {
     public DeadlineTask(String[] inputArr) throws Exception {
         this.type = "deadline";
         if (inputArr.length < 2) {
-            throw new Exception("Deadline tasks must have a non-empty description!");
+            throw new Exception(" Deadline tasks must have a non-empty description!");
         }
         this.description = Arrays.stream(inputArr)
                 .map(str -> str.toLowerCase().equals("deadline") ? "" : str.equals("/by") ? "by" : str)
                 .collect(Collectors.joining(" "));
         int lastBy = description.lastIndexOf(" by ");
         if (lastBy == -1) {
-            throw new Exception("Keyword \"by\" missing");
+            throw new Exception(" Keyword \"by\" missing");
         } else {
             /*
                 The second try clause handles when a task is read from data.csv, wherein its date format is
@@ -43,7 +43,7 @@ class DeadlineTask extends Task {
                     this.time = LocalDateTime.parse(this.description.substring(lastBy + 4),
                             DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
                 } catch (DateTimeParseException e2) {
-                    throw new Exception("Error: unable to decipher date & time input.");
+                    throw new Exception(" Error: unable to decipher date & time input.");
                 }
             }
             this.description = this.description.substring(0, lastBy + 3) + ' '
@@ -57,6 +57,6 @@ class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return " DEADLINE" + super.toString();
+        return " DEADLINE:" + super.toString();
     }
 }

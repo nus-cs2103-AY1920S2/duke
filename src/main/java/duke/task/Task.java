@@ -19,7 +19,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("%s%s", this.isDone ? "[completed]" : "[uncompleted]", this.description);
+        return String.format("%s%s", this.description, this.isDone ? " (Completed)" : " (Uncompleted)");
     }
 
     /**
@@ -56,7 +56,7 @@ public abstract class Task {
      */
     public void setDone() throws Exception {
         if (isDone) {
-            throw new Exception("You might have been mistaken. This task has already been completed.");
+            throw new Exception(" You might have been mistaken. This task has already been completed.");
         }
         isDone = true;
     }
@@ -89,8 +89,7 @@ public abstract class Task {
             return new DeadlineTask(inputAsArray);
         }
         default:
-            throw new Exception("You might have not chosen a valid task type! " +
-                    "Valid types are events, todos, and deadlines");
+            throw new Exception(" You might have not chosen a valid task type or command!");
         }
 
 
