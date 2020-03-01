@@ -5,6 +5,8 @@ public class Task {
     protected boolean isDone;
     protected String typeD;
     protected String timeD;
+    protected String rawDate;
+    protected String rawTime;
 
     public Task(String description) {
         this.description = description;
@@ -39,4 +41,13 @@ public class Task {
         return this.typeD;
     }
 
+    public String getTimeStamp() { return ""; }
+
+    public String getRawDate() {
+        return this.rawDate;
+    }
+
+    public String getRawTime() {
+        return this.rawTime;
+    }
 }

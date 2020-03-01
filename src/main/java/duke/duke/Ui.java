@@ -124,4 +124,14 @@ public class Ui {
         return output;
     }
 
+    public String findTasks(TaskList tasks) {
+        System.out.print(showLine());
+        System.out.print("Here are the matching tasks in your list:");
+        output = "";
+        for (int i = 0; i < tasks.getSize(); i++) {
+            output += ((i + 1) + ". " + tasks.getTask(i) + '\n');
+        }
+        return output;
+    }
+
 }

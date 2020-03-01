@@ -21,7 +21,6 @@ public class ListCommand extends Command {
         for (int i = 0; i < lst.getSize(); i++) {
             str += lst.getTask(i) + "\n";
         }
-        System.out.println(tasks.getNum() + "undone");
         return str;
     }
 
