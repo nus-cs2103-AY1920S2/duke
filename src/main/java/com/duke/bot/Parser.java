@@ -1,9 +1,6 @@
 package com.duke.bot;
 
-import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * Represents the parser that reads and decipher meanings from user commands.
@@ -27,7 +24,6 @@ public class Parser {
         String output = "Added: " + task.toString() + "\n";
         output = output.concat(String.format("Now you have %d task(s) on your list.\n\n", tasks.getSize()));
         return output;
-        //echo(new Scanner(System.in);
     }
 
     /**
@@ -146,13 +142,13 @@ public class Parser {
                 return String.format("Deleted: %s\n\n", delTask.toString());
 
             case "archive":
-                //storage.archive();
-                return "Task list archived.";
+                storage.archive();
+                return "Task list archived to data/archive.txt";
 
             default:
                 throw new DukeException(
                         "Oops! Invalid commmand word, perhaps you would want to try on of the following: "
-                                + "1. todo 2.deadline 3.event 4.list 5.done 6.bye");
+                                + "1.todo 2.deadline 3.event 4.list 5.done 6.delete 7.archive 8.bye");
 
         }
     }

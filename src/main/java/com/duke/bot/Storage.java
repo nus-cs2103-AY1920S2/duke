@@ -27,6 +27,11 @@ public class Storage {
         return new Storage();
     }
 
+    /**
+     * Returns the task list.
+     *
+     * @return The task list.
+     */
     public TaskList getTasks() {
         return tasks;
     }
@@ -52,7 +57,6 @@ public class Storage {
      *
      * @throws DukeException When the archive process is unsuccessful.
      */
-    /*
     public void archive() throws DukeException{
         try {
             File archiveFile = new File(ARCHIVE_PATH);
@@ -66,12 +70,12 @@ public class Storage {
             }
 
             boolean success = oldFile.renameTo(archiveFile);
+            oldFile.delete();
+            tasks = TaskList.createTaskList();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
-
-     */
 
     /**
      * Retrieves all the tasks entered previously by the user from duke.txt and
@@ -87,6 +91,10 @@ public class Storage {
         }
 
         Scanner scanner = new Scanner(data);
+        if (!scanner.hasNext()) {
+            return;
+        }
+
         String dummy = scanner.nextLine();
         while (scanner.hasNextLine()) {
             String[] arr  = scanner.nextLine().split("[|]|[.]");

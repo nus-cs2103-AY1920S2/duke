@@ -65,8 +65,8 @@ public class TaskList {
     public void deleteTask(int delIdx) throws IndexOutOfBoundsException {
         if (delIdx >= tasks.size() || delIdx <= -1) {
             throw new IndexOutOfBoundsException("Oops! Target object is out of bounds!\n"
-            + String.format("Task size: %d\n", tasks.size())
-            + String.format("final Index size: %d\n", delIdx));
+                    + String.format("Task size: %d\n", tasks.size())
+                    + String.format("final Index size: %d\n", delIdx));
         }
         tasks.remove(delIdx);
     }

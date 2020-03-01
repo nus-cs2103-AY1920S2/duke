@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 public class DukeUi {
     public static final String BYE_MESSAGE = "Bye. Hope to see you again soon! :)";
     public static final String GREET_MESSAGE = "Hello! I'm duke.Duke\n"
-                + "By default, your list of tasks will be saved to \"tasks.txt\".\n"
-                + "What can I do for you?\n\n";
+            + "By default, your list of tasks will be saved to \"tasks.txt\".\n"
+            + "What can I do for you?\n\n";
 
     private Scanner in;
     private PrintStream out;
@@ -33,18 +33,13 @@ public class DukeUi {
         this.out = System.out;
     }
 
-    public DukeUi() {
-        this.in = new Scanner(System.in);
-        this.out = System.out;
-    }
-
     /**
      * Prints a message that greets the user when DukeBot starts.
      */
     public static String greet() {
         return "Hello! I'm duke.Duke\n"
-        + "By default, your list of tasks will be saved to<YOUR_DUKE_FOLDER>/\"tasks.txt\"\n"
-        + "What can I do for you?\n\n";
+                + "By default, your list of tasks will be saved to \"data/tasks.txt\"\n"
+                + "What can I do for you?\n\n";
     }
 
 
@@ -78,16 +73,13 @@ public class DukeUi {
         in.reset();
     }
 
-    public void setToken(Pattern pattern) {
-        in.useDelimiter(pattern);
-    }
-
+    /**
+     * Set the delimiter when reading in data.
+     *
+     * @param pattern The regex delimiter pattern used.
+     */
     public void setToken(String pattern) {
         in.useDelimiter(pattern);
-    }
-
-    public void printError(String message) {
-        System.err.println(message);
     }
 
     /**
