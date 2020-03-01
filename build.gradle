@@ -10,34 +10,14 @@ plugins {
 group 'Duke'
 version '0.1.0'
 
-shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.2"
-    archiveClassifier = null
-    archiveAppendix = null
-}
-
-repositories {
-    mavenCentral()
-}
-
 application {
     // Change this to your main class.
     mainClassName = "duke.gui.Launcher"
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+checkstyle {
+    toolVersion = '8.23'
 }
-
-test {
-    useJUnitPlatform()
-}
-
-repositories {
-    mavenCentral()
-}
-
 
 dependencies {
 
@@ -56,12 +36,8 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 
-}
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 
-jlink {
-    launcher {
-        name = 'Duke'
-    }
 }
 
 jar {
@@ -72,6 +48,26 @@ jar {
     }
 }
 
+jlink {
+    launcher {
+        name = 'Duke'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenCentral()
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.2"
+    archiveClassifier = null
+    archiveAppendix = null
+}
 
 run {
     standardInput = System.in
