@@ -1,5 +1,5 @@
 # User Guide
-Duke is a Personal Assistant Chatbot that helps the user to keep track of various tasks.
+Karen is a Personal Assistant Chatbot that helps the user to keep track of various tasks.
 
 ## Features 
 
