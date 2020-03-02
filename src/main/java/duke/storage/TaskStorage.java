@@ -84,7 +84,9 @@ public class TaskStorage {
     }
 
     public void deleteFromTaskList(int taskNumber) {
+        System.out.println(this.taskList.size());
         this.taskList.remove(taskNumber - 1);
+        System.out.println(this.taskList.size());
         // Add all lines except line to be removed in an auxillary array
         ArrayList<String> tempArray = new ArrayList<>();
         int tempCounter = 0;
@@ -93,6 +95,13 @@ public class TaskStorage {
             scanner = new Scanner(this.file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
+
+        // guard condition
+        if (this.taskList.size() == 0) {
+            System.out.println("entered guard clause");
+            replaceTasksInFile(tempArray);
+            return;
         }
 
         while (scanner.hasNextLine()) {
@@ -121,6 +130,10 @@ public class TaskStorage {
             }
             fw.close();
         } catch (IOException e) {
+            // default behavior is that nothing happens
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("detected an error");
+            return;
             // default behavior is that nothing happens
         }
     }
