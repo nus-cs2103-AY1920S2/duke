@@ -151,18 +151,16 @@ public class Ui {
      * Prints the starting message when Duke starts.
      */
     public String getGreeting() {
-        return DELIMITER + "\n" +
-        "> Hello! I'm Duchess\n" +
-        "> What can I do for you?\n" +
-        DELIMITER +
-        "> ";
+        return
+        "Hello! I'm Peach\n" +
+        "What can I do for you?";
     }
 
     /**
      * Prints the exit message when user ends a Duke session.
      */
     public String getExitMessage() {
-        return "> Bye! Hope you don't come back!";
+        return "Bye! Hope you don't come back!";
     }
 
     /**
@@ -172,11 +170,9 @@ public class Ui {
      * @param task The task the user added into the list of tasks.
      */
     public String getAddedTask(TaskList tasks, Task task) {
-        return DELIMITER +
-        "> Alrighty, you added:\n" +
+        return "Alrighty, you added:\n" +
         "  " + task.toString() + "\n" +
-        String.format("> Now you have %d tasks in your list.\n", tasks.getSize()) +
-        DELIMITER;
+        String.format("Now you have %d tasks in your list.\n", tasks.getSize());
     }
 
     /**
@@ -186,11 +182,9 @@ public class Ui {
      * @param task The task the user deleted from the list of tasks.
      */
     public String getDeletedTask(TaskList tasks, Task task) {
-        return DELIMITER +
-        "> Do you really want to remove this?\n" +
-        "> Fine. I've removed:\n>    " + task.description + "\n" +
-        String.format("> Now you have %d tasks in your list\n", tasks.getSize()) +
-        DELIMITER;
+        return "Do you really want to remove this?\n" +
+        "Fine. I've removed:\n>    " + task.description + "\n" +
+        String.format("> Now you have %d tasks in your list\n", tasks.getSize());
     }
 
     /**
@@ -199,10 +193,8 @@ public class Ui {
      * @param task The task the user marked as done.
      */
     public String getDoneTask(Task task) {
-        return DELIMITER + "\n" +
-        "> I've finally done this task: \n" +
-        task + "\n" +
-        DELIMITER;
+        return "You've finally done this task: \n" +
+        task;
     }
 
     /**
@@ -210,10 +202,8 @@ public class Ui {
      * @param tasks The task(s) that the user searched for
      */
     public String getFoundTasks(TaskList tasks) {
-        return DELIMITER + "\n" +
-        "Here are the matching tasks in your list: \n" +
-        tasks + "\n" +
-        DELIMITER;
+        return "Here are the matching tasks in your list: \n" +
+        tasks;
     }
 
     /**
@@ -241,10 +231,8 @@ public class Ui {
      * @param tasks List of tasks.
      */
     public static String getTaskList(TaskList tasks) {
-        return DELIMITER + "\n" +
-        "Here are the tasks that you will never complete: \n" +
-        tasks + "\n" +
-        DELIMITER;
+        return "Here are the tasks that you will never complete: \n" +
+        tasks;
     }
 
     /**
@@ -252,9 +240,6 @@ public class Ui {
      * @param tasks List of tasks.
      */
     public String getArchiveMessage(TaskList tasks) {
-        return DELIMITER + "\n" +
-        "Here are the tasks that you have archived: \n" +
-        tasks + "\n" +
-        DELIMITER;
+        return "Here are the tasks that you have archived: \n" + tasks;
     }
 }

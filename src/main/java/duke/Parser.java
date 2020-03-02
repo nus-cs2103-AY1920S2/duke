@@ -103,6 +103,8 @@ public class Parser {
                 return Command.DELETE;
             case "find":
                 return Command.FIND;
+            case "archive":
+                return Command.ARCHIVE;
             default:
                 throw new DukeException("Invalid Command.");
         }
