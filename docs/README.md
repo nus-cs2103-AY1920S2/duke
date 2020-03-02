@@ -22,7 +22,7 @@ Summary of the features:
 * `find`
 * `bye`
 
-### **Feature 1**
+### **Feature 1**: Listing tasks
 `list` : Lists all the tasks that you currently have.
 
 Format: `list`
@@ -36,7 +36,7 @@ Possible Expected Outcome:
     4. [E][✘] CS3230 Midterm (at: 07 Mar 20)
 ```
 
-### **Feature 2**
+### **Feature 2**: Adding Deadlines
 `deadline` : Adds a deadline task to the application.
 
 Format: `deadline [name] /by YYYY-MM-DD`
@@ -48,7 +48,7 @@ Example usage: `deadline CS2103T homework /by 2020-02-20`
 
 Expected outcome: `I have added that deadline!`
 
-### **Feature 3**
+### **Feature 3**: Adding Events
 `event` : Adds an event task to the application.
 
 Format: `event [name] /at YYYY-MM-DD`
@@ -60,7 +60,7 @@ Example usage: `event CS3243 Midterm /at 2020-03-07`
 
 Expected outcome: `I have added that event!`
 
-### **Feature 4**
+### **Feature 4**: Adding Todos
 `todo` : Adds a todo task to the application.
 
 Format: `todo [name]`
@@ -72,7 +72,7 @@ Example usage: `todo Laundry`
 
 Expected outcome: `I have added that todo!`
 
-### **Feature 5**
+### **Feature 5**: Indicating that a task is done
 `done`: Indicates that a task is done
 
 Format: `done [index]`
@@ -93,7 +93,7 @@ to:
     1. [T][✓] CS2103T Team Project
 ```
 
-### Feature 6
+### Feature 6: Finding tasks
 `find`: Finds the tasks which matches they keyword supplied to the command.
 
 Format: `find [keywords]`
@@ -114,7 +114,7 @@ Possible expected outcome:
     5. [D][✘] CS2103T homework (by: 20 Feb 20)
 ```
 
-### Feature 8
+### Feature 8: Exiting the application
 `bye`: Exits the application.
 
 Format: `bye`
