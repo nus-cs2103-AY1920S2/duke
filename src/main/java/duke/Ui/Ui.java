@@ -3,7 +3,9 @@ package duke.Ui;
 public class Ui {
 
     public static String showWelcomeMessage() {
-        String welcomeMessage = "Hello! I'm Duke\n" + "What can I do for you?";
+        String welcomeMessage = " Hello! I'm Alfred.\n"
+                + " What can I do for you, master?\n\n"
+                + " When in doubt, type \"help\"";
         return welcomeMessage;
     }
 
