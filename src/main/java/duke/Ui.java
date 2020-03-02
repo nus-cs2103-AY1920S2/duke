@@ -205,8 +205,8 @@ public class Ui {
      */
     public String getDeletedTask(TaskList tasks, Task task) {
         return "Do you really want to remove this?\n" +
-        "Fine. I've removed:\n>    " + task.description + "\n" +
-        String.format("> Now you have %d tasks in your list\n", tasks.getSize());
+        "Fine. I've removed:\n    " + task.description + "\n" +
+        String.format("Now you have %d tasks in your list\n", tasks.getSize());
     }
 
     /**
@@ -216,7 +216,7 @@ public class Ui {
      * @return Message showing task marked as done.
      */
     public String getDoneTask(Task task) {
-        return "You've finally done this task: \n" +
+        return "You've finally done this task: \n" + "  " +
         task;
     }
 
@@ -227,7 +227,7 @@ public class Ui {
      * @return Message showing the task the user searched for.
      */
     public String getFoundTasks(TaskList tasks) {
-        return "Here are the matching tasks in your list: \n" +
+        return "Here are the matching tasks in your list: \n" + "  " +
         tasks;
     }
 
@@ -248,7 +248,7 @@ public class Ui {
      * @return Error message.
      */
     public String getLoadingError(Exception e) {
-        return "Can't load saved data\n" +
+        return "Can't load saved data\n" + "  " +
         e.getMessage();
     }
 
@@ -259,7 +259,7 @@ public class Ui {
      * @returns Message showing all tasks from task list.
      */
     public static String getTaskList(TaskList tasks) {
-        return "Here are the tasks that you will never complete: \n" +
+        return "Here are the tasks that you will never complete: \n" + "  " +
         tasks;
     }
 
