@@ -36,6 +36,9 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaCute.png"));
     private Image exitImage = new Image(this.getClass().getResourceAsStream("/images/DaCuteFish.png"));
 
+    /**
+     * Initializes the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -44,10 +47,17 @@ public class MainWindow extends AnchorPane {
         this.printIntro();
     }
 
+    /**
+     * Sets a Duke instance to be attached to the main window.
+     * @param d Duke instance to be attached.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
+    /**
+     * Displays an introductory message upon the startup of the main window.
+     */
     @FXML
     private void printIntro() {
         String response = ui.introMessage();
