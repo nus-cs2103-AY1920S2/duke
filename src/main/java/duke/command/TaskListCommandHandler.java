@@ -12,6 +12,7 @@ import static duke.util.StringCleaner.cleanAndLowerString;
 import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import duke.exception.DuchessException;
 import duke.io.DurationParser;
@@ -219,7 +220,8 @@ public class TaskListCommandHandler {
     private static String handleShowArchive(String command, TaskList taskList, Ui ui) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s")));
         String secondaryCommand = cleanAndLowerString(commands.get(1));
-        if (!secondaryCommand.equals("show") && !secondaryCommand.equals("list")) {
+        ArrayList<String> validShowCommands = new ArrayList<>(List.of("show", "view", "list"));
+        if (!validShowCommands.contains(secondaryCommand)) {
             throw new DuchessException(ERROR_INVALID_COMMAND);
         }
         return ui.printArchive(taskList);
