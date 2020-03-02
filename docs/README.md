@@ -13,9 +13,9 @@ Duke is a personal chatbot, meant to keep track of *your* personal tasks! For th
 
 ## Features
 1. Add a Task
-2. Mark as Done
+2. Mark a Task as Done
 3. Delete a Task
-4. List All Tasks
+4. List all Tasks
 5. Find by Keyword
 6. Add Tag to a Task
 7. Exit Duke
@@ -27,7 +27,7 @@ There are three types of tasks available, with the following commands:
 2. event
 3. deadline
 
-### 1. `todo` - add a todo task
+### 1. `todo` - Add a todo task
 A to-do task is one with only task details.
 
 Format: `todo <description>`
@@ -36,14 +36,14 @@ Example of usage:`todo retrieve the Transistor`
 
 Expected outcome: ![Todo UI](Todo.png)
 
-### 2. `event` - add an event task
+### 2. `event` - Add an event task
 An event task is one with task details as well as a "do at" date. Note that the backslash "/" is required.
 
 Format: `event <details> </yyyy-mm-dd>`
 
 Example of usage: `event Performance at the Empty Set/2020-05-18`
 
-### 3. `deadline` - add a deadline task
+### 3. `deadline` - Add a deadline task
 A deadline task is one with task details as well as a "do by" date. Note that the backslash "/" is required.
 
 Format: `deadline <details> </yyyy-mm-dd>`
@@ -52,7 +52,7 @@ Example of usage: `deadline Climb Bracket Towers /2020-05-20`
 
 Expected outcome: ![Event UI](Event.png)
 
-### 2. Mark as Done
+### 2. Mark a Task as Done
 By providing an index, the task with that index will be marked as done, indicated with a tick symbol.
 
 Format: `done <index>`
