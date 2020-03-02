@@ -24,7 +24,7 @@ public class TodoCommand extends Command {
      * @param ui Ui for Duke.
      * @param storage Storage for Duke
      * @return A String containing the response from the executed method.
-     * @throws InvalidCommandException An exception telling ifthe command is invalid.
+     * @throws EmptyDescriptionException The exception when an empty description is provided.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException {
         return tasks.manageTodo(storage, input);

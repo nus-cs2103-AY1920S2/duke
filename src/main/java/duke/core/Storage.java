@@ -80,7 +80,6 @@ public class Storage {
 
     /**
      * Writes data to the file.
-     * @param fileName The file containing all tasks.
      * @param data The data to be written.
      */
     public void writeToFile(String data) {
@@ -189,7 +188,7 @@ public class Storage {
                     String modifiedTask = "";
                     for (int j = 0; j < splitTask.length; j++) {
                         modifiedTask += splitTask[j];
-                        if (j != splitTask.length -1) {
+                        if (j != splitTask.length - 1) {
                             modifiedTask += "~";
                         }
                     }
@@ -240,7 +239,7 @@ public class Storage {
                     String modifiedTask = "";
                     for (int j = 0; j < splitTask.length; j++) {
                         modifiedTask += splitTask[j];
-                        if (j != splitTask.length -1) {
+                        if (j != splitTask.length - 1) {
                             modifiedTask += "~";
                         }
                     }

@@ -23,7 +23,6 @@ public class Duke {
 
     /**
      * Constructs a fresh Duke instance with a supplied file storing the task list.
-     * @param fileName Path to the file storing the task list.
      */
     public Duke() {
         storage = new Storage();
@@ -49,15 +48,15 @@ public class Duke {
 
         String result = "";
 
-            try {
-                Command command = parser.parseCommand(input);
-                result += command.execute(tasks, ui, storage);
-            } catch (DukeException e) {
-                result = e.getMessage();
-            } catch (Exception e) {
-                result = "Sorry, a mysterious unknown error occured:\n"
-                + e.getClass().getCanonicalName() + "\nPlease try again!";
-            } 
+        try {
+            Command command = parser.parseCommand(input);
+            result += command.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            result = e.getMessage();
+        } catch (Exception e) {
+            result = "Sorry, a mysterious unknown error occured:\n"
+                    + e.getClass().getCanonicalName() + "\nPlease try again!";
+        } 
 
         return result;
     }

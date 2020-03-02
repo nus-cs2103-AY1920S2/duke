@@ -8,7 +8,7 @@ public class TaskIndexException extends DukeException {
      * Constructs a fresh instance of the task index exception.
      * @param message The exception message.
      */
-    public TaskIndexException(String message){
+    public TaskIndexException(String message) {
         super(message);
     }
 }

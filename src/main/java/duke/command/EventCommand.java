@@ -15,7 +15,7 @@ import duke.exception.TaskFormatException;
 public class EventCommand extends Command {
     /**
      * Constructs a fresh instance of the event command.
-     * @param input
+     * @param input The user input.
      */
     public EventCommand(String input) {
         super(input);
@@ -32,7 +32,8 @@ public class EventCommand extends Command {
      * @throws TaskFormatException An exception if the task format is invalid.
      * @throws InvalidTimeFormatException An exception if the time format is invalid.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidCommandException, EmptyDescriptionException, TaskFormatException, InvalidTimeFormatException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) 
+            throws InvalidCommandException, EmptyDescriptionException, TaskFormatException, InvalidTimeFormatException {
         return tasks.manageEvent(storage, input);
     }
 }

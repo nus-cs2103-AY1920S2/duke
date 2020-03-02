@@ -5,7 +5,7 @@ package duke.core;
  */
 public class Message {
     public static final String RESERVED_SYMBOL_ERROR = "Sorry, please refrain from using '~' in your message.\n"
-            +"It's Cute's special reserved symbol!";
+            + "It's Cute's special reserved symbol!";
 
     public static final String INTRO = "I'm not Duke, I'm Cute!\n"
             + "I'm feeling a lil hungry... ooh!\n" + "Hi little fishy, what you up to?\n\n"

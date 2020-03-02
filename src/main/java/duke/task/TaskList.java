@@ -45,8 +45,8 @@ public class TaskList {
     /**
      * Marks a given task as done.
      * @param idx The index of the task in the task list.
-     * @throws TaskIndexException Exception when the specified task index is invalid.
      * @return Confirmation message if successful.
+     * @throws TaskIndexException Exception when the specified task index is invalid.
      */
     public String doTask(int idx) throws TaskIndexException {
         try {
@@ -72,6 +72,7 @@ public class TaskList {
      * Deletes a task from the task list.
      * @param idx The index of the task to be deleted.
      * @return Confirmation message if successful.
+     * @throws TaskIndexException The exception when the specified task index is invalid.
      */
     public String deleteTask(int idx) throws TaskIndexException {
         try {
@@ -88,6 +89,7 @@ public class TaskList {
      * Finds tasks with descriptions containing the specified keyword.
      * @param input User input containing the keyword.
      * @return String containing all tasks matching the keyword.
+     * @throws KeywordNotFoundException The exception when the keyword is not found.
      */
     public String findKeyword(String input) throws KeywordNotFoundException {
         String keyword = input.substring(5).trim();

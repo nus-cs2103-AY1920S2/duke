@@ -8,7 +8,7 @@ public class KeywordNotFoundException extends DukeException {
      * Constructs a fresh instance of a keyword not found exception.
      * @param message The exception message.
      */
-    public KeywordNotFoundException(String message){
+    public KeywordNotFoundException(String message) {
         super(message);
     }
 }

@@ -28,7 +28,8 @@ public class FindCommand extends Command {
      * @throws InvalidCommandException An exception telling ifthe command is invalid.
      * @throws KeywordNotFoundException An exception if the keyword provided can't be found.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidCommandException, KeywordNotFoundException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) 
+            throws InvalidCommandException, KeywordNotFoundException {
         String[] split = input.split(" ");
         if (split.length != 2) {
             throw new InvalidCommandException(Message.FIND_ERROR);
