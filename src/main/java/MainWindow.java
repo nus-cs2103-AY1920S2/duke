@@ -57,6 +57,8 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        //@@author AdarshChugani-reused
+        //Reused from ElysiaTanZY with permission alongside some minor modifications
         if (response.equals("Bye. Hope to see you again soon!\n")) {
             new Timer().schedule(new TimerTask() {
                 public void run() {
@@ -65,6 +67,7 @@ public class MainWindow extends AnchorPane {
                 }
             }, 1000);
         }
+        //@@author
     }
 
 }
