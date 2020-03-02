@@ -1,7 +1,7 @@
 # User Guide for Duchess
 _Zhu Hanming A0196737L_
 
-<p align=center><img width=80% src="./Ui-both.png" /></p>
+<p align="center"><img width="80%" src="Ui-both.png"/></p>
 
 Welcome to Duchess, the task manager app who just can't wait for you to go away!  
 
