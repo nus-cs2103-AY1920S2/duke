@@ -8,7 +8,7 @@ class DeadlineTest {
 
     @Test
     void testToString() {
-        assertEquals("[D][✘] Blah (by: Oct 10 2019)", new Deadline("Blah", "2019-10-10").toString());
+        assertEquals("[D][X] Blah (by: Oct 10 2019)", new Deadline("Blah", "2019-10-10").toString());
     }
 
     @Test

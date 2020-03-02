@@ -8,6 +8,6 @@ class TodoTest {
 
     @Test
     void testToString() {
-        assertEquals("[T][✓] Blah", new Todo("Blah", true).toString());
+        assertEquals("[T][O] Blah", new Todo("Blah", true).toString());
     }
 }

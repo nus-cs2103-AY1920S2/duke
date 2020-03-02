@@ -85,6 +85,14 @@ public class Storage {
         for (Task datum : data) {
             s.append(datum.saveFormat()).append("\n");
         }
+        File file = new File(this.fp);
+        if (!file.exists()) {
+            int index = this.fp.lastIndexOf('/');
+            String dirs = this.fp.substring(0,index);
+            File dir = new File(dirs);
+            dir.mkdirs();
+            file.createNewFile();
+        }
         FileWriter fileWriter = new FileWriter(this.fp);
         PrintWriter printWriter = new PrintWriter(fileWriter);
         printWriter.print(s);
