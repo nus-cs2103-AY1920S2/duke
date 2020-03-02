@@ -38,11 +38,6 @@ test {
     useJUnitPlatform()
 }
 
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
 group 'jiachen.duke'
 version '0.4.0'
 
