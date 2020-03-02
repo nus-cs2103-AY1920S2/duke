@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Represents a custom Error caused by Illegal Commands entered by the User
+ */
 public class IllegalCommandException extends Exception {
 
     @Override
