@@ -27,7 +27,6 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/andrew.png"));
     private Image user = new Image(this.getClass().getResourceAsStream("/images/ricky.png"));
 
-
     /**
      * Constructs a Duke instance with file path set to src/data/data.csv. This is primarily for the sake of GUI.
      */
@@ -47,8 +46,6 @@ public class Duke extends Application {
         this.controller = new Controller(storageController);
     }
 
-
-
     public static void main(String[] args) {
         Duke bot = new Duke();
         bot.run();
@@ -59,7 +56,7 @@ public class Duke extends Application {
      */
     private void run() {
         Scanner scan = new Scanner(System.in);
-        Ui.greet();
+        Ui.printGreet();
         Ui.printTaskList();
         while (scan.hasNext()) {
             try {
@@ -130,7 +127,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         String initialLine = "";
-        Ui.greet();
+        Ui.printGreet();
         initialLine += Ui.getContent() + "\n";
         Ui.printTaskList();
         initialLine += Ui.getContent();
@@ -170,7 +167,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Returns a response for a text user input in the text fjeld.
+     * Returns a response for a text user input in the text field.
      *
      * @param text a String-form user input
      * @return a String response for the given user input

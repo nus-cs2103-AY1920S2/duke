@@ -3,8 +3,19 @@ package duke;
 public class Ui {
     private static String content;
 
-    public static void greet() {
+    /**
+     * Prints a greeting message.
+     */
+    public static void printGreet() {
         content = " Greeting, traveler. My name is Andrew. What can I do for you?";
+        System.out.println(content);
+    }
+
+    /**
+     * Prints a goodbye message.
+     */
+    public static void printGoodbye() {
+        content = " I shall not trouble you anymore. Farewell, partner.";
         System.out.println(content);
     }
 
@@ -15,14 +26,6 @@ public class Ui {
      */
     public static String getContent() {
         return content;
-    }
-
-    /**
-     * Prints a goodbye message.
-     */
-    public static void printGoodbye() {
-        content = " I shall not trouble you anymore. Farewell, partner.";
-        System.out.println(content);
     }
 
     /**
@@ -79,7 +82,6 @@ public class Ui {
         System.out.println(content);
     }
 
-
     /**
      * Prints a message error.
      *
@@ -114,7 +116,6 @@ public class Ui {
         content = " Undo successfully.";
         System.out.println(content);
     }
-
 
     /**
      * Prints the list of tasks currently stored.

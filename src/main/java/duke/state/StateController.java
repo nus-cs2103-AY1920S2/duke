@@ -1,6 +1,5 @@
 package duke.state;
 
-
 import duke.command.Command;
 import duke.command.DoneCommand;
 import duke.task.Task;
