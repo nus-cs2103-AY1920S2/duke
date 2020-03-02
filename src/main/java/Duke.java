@@ -30,6 +30,8 @@ public class Duke {
             }
         }
     }
+    //@@author BransonNg -reused
+    //heavily referenced to BransonNg's code
 
     private String start(String input) throws DukeException {
         switch (input) {
@@ -143,6 +145,8 @@ public class Duke {
                 }
         }
     }
+
+    //@@author
 
     public String getResponse(String input) {
         try {

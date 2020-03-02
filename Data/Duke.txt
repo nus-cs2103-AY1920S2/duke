@@ -1,4 +1,5 @@
-D  | 0 | do math homework | 2020-09-09T09:00
-E  | 1 | join swimming club | 2020-09-04T09:00
-D  | 0 | finish Science Howework | 2022-05-03T23:59
+D  | 0 | math homework | 2020-09-09T09:00
+E  | 1 | join club | 2020-09-04T09:00
+D  | 0 | Science Howework | 2022-05-03T23:59
 T  | 0 | make dinner
+E  | 0 | ip  | 2020-07-09T09:00

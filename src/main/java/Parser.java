@@ -26,6 +26,10 @@ public class Parser {
      * @return a boolean value of whether it is a Done or Detele command
      * @throws DukeException if there is any error in the user command
      */
+    //@@author BransonNg - reused
+    // Previously written code by me did not abide single responsibility principle. Thus, referred to BransonNg's code
+    //for how to re-write it and also how to implement regex.
+
     public boolean isDoneOrDelete(String input) throws DukeException {
         String doneRegex =
                 "(^(done|delete)\\s+.*|.*\\s+(done|delete)$)";
@@ -194,4 +198,5 @@ public class Parser {
         return dateTime;
     }
 
+    //@@author
 }
