@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.util.DateTimeUtil;
+
 /**
  * Represents a generic task with no time frame.
  */
@@ -24,7 +26,7 @@ public class Todo extends Task {
 
     @Override
     public String serialize() {
-        return serialize("T");
+        return TaskSerializer.serialize(this, "T");
     }
 
     @Override

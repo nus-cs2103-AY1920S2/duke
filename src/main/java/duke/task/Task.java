@@ -73,32 +73,6 @@ public abstract class Task implements Serializable {
      */
     public abstract String serialize();
 
-    /**
-     * Returns a text representation of this task for storage purposes.
-     *
-     * @param taskId the unique id for the type of this task.
-     * @param args optional arguments for tasks with additional serializable parameters.
-     * @return a text representation of this task for storage purposes.
-     */
-    protected String serialize(String taskId, String... args) {
-        String delimiter = " | ";
-        StringBuilder serial = new StringBuilder();
-
-        serial.append(taskId)
-                .append(delimiter)
-                .append(isDone ? "1" : "0")
-                .append(delimiter)
-                .append(description);
-
-        for (int i = 0; i < args.length; i++) {
-            serial.append(delimiter).append(args[i]);
-        }
-
-        // TODO: potential for assertion here
-
-        return serial.toString();
-    }
-
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);

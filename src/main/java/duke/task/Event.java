@@ -44,7 +44,11 @@ public class Event extends Task {
 
     @Override
     public String serialize() {
-        return serialize("E", at, timeInterval);
+        return TaskSerializer.serialize(this,
+                "E",
+                at.format(DateTimeUtil.FORMAT_DATE_NUMERIC),
+                startTime.format(DateTimeUtil.FORMAT_TIME_24H),
+                endTime.format(DateTimeUtil.FORMAT_TIME_24H));
     }
 
     @Override
