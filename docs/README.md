@@ -267,7 +267,7 @@ Format: `bye`
 
 **Expected outcome:**
 ```
-Bye, hope to see you again soon!
+Bye. Hope to see you again soon!
 ```
 
 
