@@ -1,10 +1,10 @@
 # Cute User Guide
 
 ## Product Screenshot
-![Duke Screenshot](./Ui.png)
+<img src="./Ui.png" width="200">
 
 ## Description
-Cute is an adorable, innocent little kitten that would never hurt you! She'll help you manage all your tasks, well, as long as she gets some food in return...
+Cute is an adorable, innocent little kitten that would never hurt you! She'll eagerly help you manage all your tasks! Well, as long as she gets <i>some<</i> food in return...
 
 ## Technology
 1. Java 11
@@ -104,7 +104,7 @@ Adds an event task to the list.
 
 *Expected Output*:<br>
 Wow, you add tasks faster than I eat fishes! Hmm...<br>
-`1. [E][X] Party (/at: 20 Apr 2019 11.59pm)`
+`1. [E][X] Party (at: 20 Apr 2019 11.59pm)`
 
 ### 3. Adding A Deadline
 Adds a deadline task to the list.
@@ -117,7 +117,7 @@ Adds a deadline task to the list.
 
 *Expected Output*:<br>
 Wow, you add tasks faster than I eat fishes! Hmm...<br>
-`1. [D][X] Work (/by: 20 Apr 2019 11.59pm)`
+`1. [D][X] Work (by: 20 Apr 2019 11.59pm)`
 
 ## Additional Functions
 ### 1. Searching Tasks By Keyword
@@ -158,4 +158,4 @@ Updates the time of a task.
 
 *Expected Output*:<br>
 Ooh, you updated the time, but is it time for me to eat yet?<br>
-`1. [E][O] Party at house (/at: 20 Apr 2019 8pm)`
+`1. [E][O] Party at house (at: 20 Apr 2019 8pm)`
