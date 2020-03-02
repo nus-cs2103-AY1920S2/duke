@@ -15,4 +15,4 @@ src/text-ui/text/*
 bin/
 
 # Text file for Persistent Storage of app Data
-data/*
+# data/*
