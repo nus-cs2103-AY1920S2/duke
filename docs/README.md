@@ -1,44 +1,44 @@
 # User Guide
 
-1. [Description](#1.-description)
+1. Description
 <br/>
-2. [Features](#2-features)
+2. Features
 <br/>
-2.1. [Add task](#21-add-task)
+2.1. Add task
 <br/>
-2.2. [List task](#22-list-task)
+2.2. List task
 <br/>
-2.3. [Mark task as done](#23-mark-task-as-done)
+2.3. Mark task as done
 <br/>
-2.4. [Find task](#24-find-task)
+2.4. Find task
 <br/>
-2.5. [Delete task](#25-delete-task)
+2.5. Delete task
 <br/>
-2.6. [Update description of task](#26-update-description-of-task)
+2.6. Update description of task
 <br/>
-2.7. [Exit from application](#27-exit-from-application)
+2.7. Exit from application
 <br/>
-3. [Usage](#3-usage)
+3. Usage
 <br/>
-3.1. [`todo` - Adds a Todo task to the task list](#31-todo---adds-a-todo-task-to-the-task-list)
+3.1. `todo` - Adds a Todo task to the task list
 <br/>
-3.2. [`deadline` - Adds a Deadline task to the task list](#32-deadline---adds-a-deadline-task-to-the-task-list)
+3.2. `deadline` - Adds a Deadline task to the task list
 <br/>
-3.3. [`event` - Adds a Event task to the task list](#33-event---adds-a-event-task-to-the-task-list)
+3.3. `event` - Adds a Event task to the task list
 <br/>
-3.4. [`list` - Lists all tasks in the task list](#34-list---lists-all-tasks-in-the-task-list)
+3.4. `list` - Lists all tasks in the task list
 <br/>
-3.5. [`done` - Marks a task as done](#35-done---marks-a-task-as-done)
+3.5. `done` - Marks a task as done
 <br/>
-3.6. [`find` - Looks for a particular task](#36-find---looks-for-a-particular-task)
+3.6. `find` - Looks for a particular task
 <br/>
-3.7. [`delete` - Deletes a task from the task list](#37-delete---deletes-a-task-from-the-task-list)
+3.7. `delete` - Deletes a task from the task list
 <br/>
-3.8. [`update` - Updates the description of a task](#38-update---updates-the-description-of-a-task)
+3.8. `update` - Updates the description of a task
 <br/>
-3.9. [`manual` - Shows the different commands](#39-manual---shows-the-different-commands)
+3.9. `manual` - Shows the different commands
 <br/>
-4. [Acknowledgements](#4-acknowledgements)
+4. Acknowledgements
 
 
 ## 1. Description
