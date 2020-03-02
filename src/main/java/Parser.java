@@ -9,7 +9,7 @@ public class Parser {
     /**
      * Parses user input to return a command.
      * @param command user's input to specify command.
-     * @return Command.
+     * @return Command command specified by user.
      * @throws DukeException if user input does not follow input format.
      */
     public static Command parse(String command) throws DukeException {
@@ -34,6 +34,8 @@ public class Parser {
             checkInputException(split, commandType);
             return new FindCommand(split[1]);
         case "update":
+            assert split[1] != null : "The index of task should be entered to update tasks.";
+            checkInputException(split, commandType);
             return new UpdateCommand(split[1]);
         case "todo":
         case "deadline":
@@ -58,6 +60,7 @@ public class Parser {
             switch (commandType) {
             case "done":
             case "delete":
+            case "update":
                 throw new DukeException("☹ OOPS!!! Task number cannot be empty.");
             case "todo":
             case "deadline":

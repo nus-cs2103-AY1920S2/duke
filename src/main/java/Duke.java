@@ -46,8 +46,8 @@ public class Duke extends Application {
 
     /**
      * Creates a Duke object.
-     * @param filePath The file path to Duke.txt.
-     * @throws IOException If Duke.txt is not found.
+     * @param filePath the file path to Duke.txt.
+     * @throws IOException tf Duke.txt is not found.
      */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
@@ -127,7 +127,7 @@ public class Duke extends Application {
             userInput.clear();
         });
 
-        //Scroll down to the end every time dialogContainer's height changes.
+        // Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         sendButton.setOnMouseClicked((event) -> {
@@ -169,10 +169,14 @@ public class Duke extends Application {
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     * @throws DukeException if user input does not follow input format.
+     * @throws IOException named file exists but is a directory rather than a regular file,
+     *      does not exist but cannot be created, or cannot be open for any other reason.
      */
     private void handleUserInput() throws IOException, DukeException {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getDukeDialog(dukeText, duke)
@@ -181,21 +185,25 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a string containing Duke's response.
+     * @param input user's input.
+     * @return string string that contains Duke's response.
+     * @throws DukeException if user input does not follow input format.
+     * @throws IOException named file exists but is a directory rather than a regular file,
+     *      does not exist but cannot be created, or cannot be open for any other reason.
      */
     String getResponse(String input) throws DukeException, IOException {
         String result = "";
         try {
             Command command = Parser.parse(input);
             result = command.execute(tasks, ui, storage);
-            if (result.equals("Bye. Hope to see you again soon!")) {
-                Platform.exit();
-            }
         } catch (DukeException e) {
             result = e.getMessage();
         }
 
+        if (result.equals("Bye. Hope to see you again soon!")) {
+            Platform.exit();
+        }
         return result;
     }
 

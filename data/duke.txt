@@ -1,4 +1,5 @@
 D | 1 | cs3230 assignment | Feb 6 2020
-E | 1 | dance | Feb 16 2020
+E | 1 | haha | Feb 16 2020
 D | 1 | borrow book | Feb 19 2020
-T | 1 | books
+E | 0 | asfd | Feb 3 0230
+T | 0 | asdf
