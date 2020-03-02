@@ -169,7 +169,7 @@ Marks a saved task as done.
 
 Format: `done INDEX`
 
-- `INDEX`: positive number which corresponds to the desired task (can be obtained from the `list` command seen [here](/docs/README.md#34-list-all-tasks-list))
+- `INDEX`: positive number corresponding to the desired task (can be obtained from the `list` command as seen [here](/docs/README.md#34-list-all-tasks-list))
 
 **Example of usage:** 
 
@@ -188,7 +188,7 @@ Deletes saved task from Duke.
 
 Format: `delete INDEX`
 
-- `INDEX`: index number of the desired task (can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list))
+- `INDEX`: positive number corresponding to the desired task (can be obtained from the `list` command as seen [here](/docs/README.md#34-list-all-tasks-list))
 
 **Example of usage:** 
 
@@ -231,7 +231,7 @@ todo tasks cannot be snoozed.
 
 Format: `snooze INDEX /to TASK_FORMAT`
 
-- `INDEX`: index number of the desired task (can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list))
+- `INDEX`: positive number corresponding to the desired task (can be obtained from the `list` command as seen [here](/docs/README.md#34-list-all-tasks-list))
 - The format for `TASK_FORMAT` must be appropriate for the type of task being rescheduled.
   - Case 1: Rescheduled task is a deadline. 
 Format: `snooze INDEX /to DATE TIME`
