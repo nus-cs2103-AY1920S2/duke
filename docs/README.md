@@ -36,7 +36,7 @@ Possible Expected Outcome:
     4. [E][✘] CS3230 Midterm (at: 07 Mar 20)
 ```
 
-### **Feature 2**: Adding Deadlines
+### **Feature 2**: Adding deadlines
 `deadline` : Adds a deadline task to the application.
 
 Format: `deadline [name] /by YYYY-MM-DD`
@@ -48,7 +48,7 @@ Example usage: `deadline CS2103T homework /by 2020-02-20`
 
 Expected outcome: `I have added that deadline!`
 
-### **Feature 3**: Adding Events
+### **Feature 3**: Adding events
 `event` : Adds an event task to the application.
 
 Format: `event [name] /at YYYY-MM-DD`
@@ -60,7 +60,7 @@ Example usage: `event CS3243 Midterm /at 2020-03-07`
 
 Expected outcome: `I have added that event!`
 
-### **Feature 4**: Adding Todos
+### **Feature 4**: Adding todos
 `todo` : Adds a todo task to the application.
 
 Format: `todo [name]`
