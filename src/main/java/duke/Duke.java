@@ -39,6 +39,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Retrieves Duke's response to the user input.
+     * @param input The user input.
+     * @return Duke's response.
+     */
     public String getResponse(String input) {
         assert input.length() > 0 : "Input cannot be empty";
 
