@@ -22,7 +22,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteCommand(index);
         } catch (ParserException pe) {
-            throw new ParserException("Pawdon me, I think you furgot to include the task number."
+            throw new ParserException("Pawdon me, I think you furgot to include the task number.\n"
                     + String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
     }

@@ -11,6 +11,7 @@ import logic.LogicManager;
 import logic.command.CommandException;
 import logic.command.CommandResult;
 import logic.command.ExitCommand;
+import logic.command.HelpCommand;
 import logic.parser.exceptions.ParserException;
 
 import java.io.IOException;
@@ -90,7 +91,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void help() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Messages.HELP, dukeImage)
+                DialogBox.getDukeDialog(HelpCommand.HELP, dukeImage)
         );
     }
 
@@ -101,7 +102,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = getResponse(input, duke);
+        String response = getResponse(input);
         if (response.equals(ExitCommand.COMMAND_WORD)) {
             handleExit();
         }
@@ -112,7 +113,13 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    private String getResponse(String input, Duke duke) {
+    /**
+     * Passes input to logic manager and retrieves response.
+     *
+     * @param input user input.
+     * @return response from logic manager.
+     */
+    private String getResponse(String input) {
         try {
             CommandResult result = logicManager.execute(input);
             if (result.isExit()) {

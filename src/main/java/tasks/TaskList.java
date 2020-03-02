@@ -1,12 +1,11 @@
 package tasks;
 
 import commons.StringUtil;
-
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 /**
- * TaskList stores a list of tasks and contains operations to add, retrieve
+ * TaskList stores a list of tasks and contains operations to add, retrieve, find
  * and delete tasks.
  */
 public class TaskList {
@@ -59,7 +58,7 @@ public class TaskList {
      * @param taskNumber task to be marked as done.
      */
     public void markAsDone(int taskNumber) {
-        list.get(taskNumber).setDone();
+        getTask(taskNumber).setDone();
     }
 
     /**
@@ -129,9 +128,5 @@ public class TaskList {
             taskNumber++;
         }
         return printedList;
-    }
-
-    public void setTaskList(ArrayList<Task> taskList) {
-        this.list = taskList;
     }
 }

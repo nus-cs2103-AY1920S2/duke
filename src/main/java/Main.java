@@ -13,6 +13,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Initialises duke and GUI.
+     *
+     * @param stage for JavaFX .
+     */
     @Override
     public void start(Stage stage) {
         try {

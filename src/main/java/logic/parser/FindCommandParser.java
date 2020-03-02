@@ -19,7 +19,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format("Pawdon me, I think you furgot to include the keyword."
                             + MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        //String[] nameKeywords = trimmedArgs.split("\\s+");
         return new FindCommand(trimmedArgs);
     }
 }

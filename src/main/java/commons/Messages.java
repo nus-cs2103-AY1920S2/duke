@@ -14,16 +14,6 @@ public class Messages {
             + "| |_|  | |_| |   <    __/\n"
             + "|____/ \\__,|_|\\_\\___|\n";
     public static final String START = "Hello from\n" + LOGO;
-    public static final String HELP = "alias: creates shortcut\n\t[alias] [command]\n"
-            + "bye: exits the programme\n"
-            + "clear: clears list\n"
-            + "deadline: creates task with a deadline \n\t[description] [date] [tags]\n"
-            + "delete: deletes task with task number\n\t[task number\n"
-            + "done: marks task with task number as done\n\t[task number]\n"
-            + "event: creates task that is an event \n\t[description] [date] [tags]\n"
-            + "find: returns list of tasks with keyword in name\n\t[keyword]\n"
-            + "tag: returns list of tasks containing tag\n\t [tag]\n"
-            + "todo: creates task \n\t[description] [tags]\n";
 
     /**
      * Returns information on the number of tasks in the list.

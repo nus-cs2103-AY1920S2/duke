@@ -44,9 +44,9 @@ public class Duke {
     }
 
     /**
-     * Returns the controller.
+     * Returns the logic manager.
      *
-     * @return the controller.
+     * @return the logic manager.
      */
     public LogicManager getLogicManager() {
         return logicManager;

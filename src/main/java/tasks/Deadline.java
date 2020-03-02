@@ -1,8 +1,6 @@
 package tasks;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Set;
-
 import tasks.Tag;
 
 /**
@@ -17,6 +15,7 @@ public class Deadline extends Task {
      *
      * @param name   task with a deadline to be completed.
      * @param dateBy date the task needs to be completed by.
+     * @param tags   tags if present.
      */
     public Deadline(Name name, Date dateBy, Set<Tag> tags) {
         super(name, tags);

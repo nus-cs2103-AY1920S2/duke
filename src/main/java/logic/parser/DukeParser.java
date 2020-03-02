@@ -15,10 +15,8 @@ import logic.command.ListCommand;
 import logic.command.TagCommand;
 import logic.command.TodoCommand;
 import logic.parser.exceptions.ParserException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import static commons.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static commons.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -31,8 +29,6 @@ public class DukeParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-
-    //private FriendlierSyntax friendlierSyntax;
 
     /**
      * Parses user input into command for execution.

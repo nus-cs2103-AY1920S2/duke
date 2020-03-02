@@ -37,10 +37,6 @@ public class LogicManager implements Logic {
         return commandSyntax;
     }
 
-    public void setCommandSyntax(CommandSyntax commandSyntax) {
-        this.commandSyntax = commandSyntax;
-    }
-
     /**
      * Parses user input and determine specified instructions to execute.
      *
@@ -60,33 +56,6 @@ public class LogicManager implements Logic {
         }
         return commandResult;
     }
-
-    /*
-    @Override
-    public ReadOnlyTaskList getTaskList() {
-        return taskList.getTaskList();
-    }
-
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return taskList.getFilteredPersonList();
-    }
-
-    @Override
-    public Path getTaskListFilePath() {
-        return taskList.getTaskListFilePath();
-    }
-
-    @Override
-    public GuiSettings getGuiSettings() {
-        return taskList.getGuiSettings();
-    }
-
-    @Override
-    public void setGuiSettings(GuiSettings guiSettings) {
-        taskList.setGuiSettings(guiSettings);
-    }
-    */
 }
 
 

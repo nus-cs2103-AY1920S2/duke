@@ -18,7 +18,7 @@ Tag tasks using the command tag.
 [alias] [command]
 
 Example of usage: 
-alias b bye
+alias a/b c/bye
 
 Expected outcome:
 Alias added.
@@ -46,7 +46,7 @@ List cleared.
 [description] [date] [tags]
 
 Example of usage: 
-deadline iP /2020-02-19
+deadline n/iP d/2020-02-19
 
 Expected outcome:
 [D] IP (by Feb 19 2020)
@@ -76,7 +76,7 @@ Noted. I've marked this task as done.
 [description] [date] [tags]
 
 Example of usage: 
-event CS2103T tutorial /2020-02-20
+event n/CS2103T tutorial d/2020-02-20
 
 Expected outcome:
 [E] CS2103T tutorial (at Feb 20 2020)    
@@ -99,14 +99,15 @@ Example of usage:
 tag cs2103T
 
 Expected outcome:
+Here are the tasks 
 [E] CS2103T tutorial (at Feb 20 2020)            
           
-### `Todo` - Creates task.
+### `Todo` - Creates todo task.
  
- [description] [tags]
+ n/task name [tags]
  
  Example of usage: 
- todo read notes
+ todo n/read notes
  
  Expected outcome:
  [T] read notes 

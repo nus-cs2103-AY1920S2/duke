@@ -50,7 +50,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String alias} into a {@code command}.
+     * Parses a {@code String alias} into a {@code alias}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParserException if the given {@code alias} is invalid.

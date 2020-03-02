@@ -18,6 +18,7 @@ public class Task {
      * Creates a task object with a name.
      *
      * @param name of the task.
+     * @param tags tags if present.
      */
     public Task(Name name, Set<Tag> tags) {
         this.name = name;

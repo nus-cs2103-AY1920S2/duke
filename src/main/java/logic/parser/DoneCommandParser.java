@@ -19,7 +19,7 @@ public class DoneCommandParser implements Parser<DoneCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new DoneCommand(index);
         } catch (ParserException pe) {
-            throw new ParserException("Pawdon me, I think you furgot to include the task number."
+            throw new ParserException("Pawdon me, I think you furgot to include the task number.\n"
                     + String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE), pe);
         }
     }

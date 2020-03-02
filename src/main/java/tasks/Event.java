@@ -18,6 +18,7 @@ public class Event extends Task {
      *
      * @param name   task that is an event to be completed.
      * @param dateAt date the event is at.
+     * @oaram tags if present.
      */
     public Event(Name name, Date dateAt, Set<Tag> tags) {
         super(name, tags);

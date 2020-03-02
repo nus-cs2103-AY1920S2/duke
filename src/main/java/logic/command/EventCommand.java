@@ -21,10 +21,10 @@ public class EventCommand extends Command {
             + "[" + PREFIX_DATE + "DATE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "iP"
-            + PREFIX_DATE + "2020-03-02"
-            + PREFIX_TAG + "CS2103T"
-            + PREFIX_TAG + "Submission";
+            + PREFIX_NAME + "tutorial "
+            + PREFIX_DATE + "2020-03-06 "
+            + PREFIX_TAG + "CS2103T  "
+            + PREFIX_TAG + "Tutorial";
 
     public static final String MESSAGE_SUCCESS = "New task added: \n\t%1$s";
 

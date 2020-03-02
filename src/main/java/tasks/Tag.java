@@ -4,7 +4,7 @@ import static commons.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the task list.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
@@ -50,6 +50,5 @@ public class Tag {
     public String toString() {
         return '[' + tagName + ']';
     }
-
 }
 

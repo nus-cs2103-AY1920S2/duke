@@ -1,5 +1,8 @@
 package logic.parser;
 
+import logic.command.Command;
+import logic.command.CommandException;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,7 +12,7 @@ public class CommandSyntax {
     public HashSet<String> defaultCommands = new HashSet<>();
 
     /**
-     * Instantiates the list of friendlier syntax which includes shortcuts for each command.
+     * Instantiates the command syntax which includes default commands and shortcuts for each command.
      */
     public CommandSyntax() {
         String[] commandList = {"alias", "clear", "deadline", "delete", "done", "event", "bye", "find",
@@ -43,7 +46,7 @@ public class CommandSyntax {
     }
 
     /**
-     * Checks the hashmap for the command that the alias corresponds to.
+     * Checks if command is a default command. If not check if command is an alias.
      *
      * @param command alias input by the user.
      * @return the command which the alias corresponds to.
@@ -54,10 +57,16 @@ public class CommandSyntax {
         } else if (syntax.get(command) != null) {
             return syntax.get(command);
         } else {
-            return "error";
+            return "No such command";
         }
     }
 
+    /**
+     * Checls if alias is being used for another command.
+     *
+     * @param alias alias to be checked.
+     * @return true if alias is unique.
+     */
     public boolean isAliasUnique(String alias) {
         return !syntax.containsKey(alias);
     }

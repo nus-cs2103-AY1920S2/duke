@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import logic.parser.CommandSyntax;
@@ -42,7 +40,7 @@ public class Storage {
      */
     public CommandSyntax readAlias() {
         try {
-            FileReader fileReader = new FileReader(userDirectory + "/data/alias.json");
+            FileReader fileReader = new FileReader(userDirectory + "/alias.json");
             return gson.fromJson(fileReader, CommandSyntax.class);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
@@ -58,7 +56,7 @@ public class Storage {
      */
     public TaskList readTaskList() {
         try {
-            FileReader task = new FileReader(userDirectory + "/data/taskList.json");
+            FileReader task = new FileReader(userDirectory + "/taskList.json");
             return gson.fromJson(task, TaskList.class);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
@@ -71,7 +69,7 @@ public class Storage {
      */
     public void saveTaskList(TaskList taskList) throws IOException {
         try {
-            FileWriter fileWriter = new FileWriter(userDirectory + "/data/taskList.json");
+            FileWriter fileWriter = new FileWriter(userDirectory + "/taskList.json");
             gson.toJson(taskList, fileWriter);
             fileWriter.flush();
             fileWriter.close();
@@ -85,7 +83,7 @@ public class Storage {
      */
     public void saveFile(CommandSyntax alias) {
         try {
-            FileWriter aliasFile = new FileWriter(userDirectory + "/data/alias.json");
+            FileWriter aliasFile = new FileWriter(userDirectory + "/alias.json");
             gson.toJson(alias, aliasFile);
             aliasFile.flush();
             aliasFile.close();

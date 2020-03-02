@@ -4,7 +4,7 @@ import static commons.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Tasks's Alias in the taskList.
+ * Represents an alias for a default command.
  * Guarantees: immutable; is valid as declared in {@link #isValidFriendlierSyntax(String)}
  */
 public class FriendlierSyntax {
@@ -27,7 +27,7 @@ public class FriendlierSyntax {
      */
     public FriendlierSyntax(String alias, String command) {
         requireNonNull(alias);
-        checkArgument(isValidFriendlierSyntax(alias), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAlias(alias), MESSAGE_CONSTRAINTS);
         this.alias = alias;
         this.command = command;
     }
@@ -36,10 +36,22 @@ public class FriendlierSyntax {
         return alias;
     }
 
+    /**
+     * Checks if alias is in valid format.
+     *
+     * @param test alias to test.
+     * @return true if alias has a valid format
+     */
     public static boolean isValidAlias(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if command is in valid format.
+     *
+     * @param test command to test.
+     * @return true if command has a valid format
+     */
     public static boolean isValidCommand(String test) {
         return test.matches(VALIDATION_REGEX);
     }
@@ -47,14 +59,6 @@ public class FriendlierSyntax {
     public String getCommand() {
         return command;
     }
-
-    /**
-     * Returns true if a given string is a valid Alias.
-     */
-    public static boolean isValidFriendlierSyntax(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
-
 
     @Override
     public String toString() {
