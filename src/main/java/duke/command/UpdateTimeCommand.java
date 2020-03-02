@@ -41,7 +41,7 @@ public class UpdateTimeCommand extends Command {
         } catch (NumberFormatException e) {
             throw new TaskIndexException(Message.INDEX_ERROR);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidCommandException(Message.UPDATE_TIME_GENERAL_ERROR);
+            throw new InvalidCommandException(Message.UPDATE_TIME_ERROR);
         } 
 
         try {

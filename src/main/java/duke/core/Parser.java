@@ -129,7 +129,7 @@ public class Parser {
 
         String[] split = time.trim().split(" ");
         if (split.length != 2) {
-            throw new InvalidTimeFormatException(Message.TIME_ERROR);
+            throw new InvalidTimeFormatException(Message.TIME_FORMAT_ERROR);
         }
 
         Boolean dateMatches = split[0].matches(dateRegex);
@@ -138,7 +138,7 @@ public class Parser {
             result += parseDate(split[0]) + " ";
             result += parseTime(split[1]);
         } else {
-            throw new InvalidTimeFormatException(Message.TIME_ERROR);
+            throw new InvalidTimeFormatException(Message.TIME_FORMAT_ERROR);
         }
         return result;
     }
@@ -149,7 +149,7 @@ public class Parser {
             String result = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return result;
         } catch (DateTimeParseException e) {
-            throw new InvalidTimeFormatException(Message.TIME_ERROR);
+            throw new InvalidTimeFormatException(Message.TIME_FORMAT_ERROR);
         }
     }
 

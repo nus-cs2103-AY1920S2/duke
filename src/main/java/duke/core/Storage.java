@@ -205,7 +205,7 @@ public class Storage {
       
             tempFile.renameTo(originalFile);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidCommandException(Message.UPDATE_DESC_GENERAL_ERROR);
+            throw new InvalidCommandException(Message.UPDATE_DESC_ERROR);
         } catch (FileNotFoundException e) {
             Ui.printLines("File not found. Try again!");
         } catch (IOException e) {
@@ -258,7 +258,7 @@ public class Storage {
       
             tempFile.renameTo(originalFile);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidTimeFormatException(Message.TIME_ERROR);
+            throw new InvalidTimeFormatException(Message.TIME_FORMAT_ERROR);
         } catch (FileNotFoundException e) {
             Ui.printLines("File not found. Try again!");
         } catch (IOException e) {

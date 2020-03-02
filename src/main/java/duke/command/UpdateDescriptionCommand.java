@@ -37,7 +37,7 @@ public class UpdateDescriptionCommand extends Command {
         } catch (NumberFormatException e) {
             throw new TaskIndexException(Message.INDEX_ERROR);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidCommandException(Message.UPDATE_DESC_GENERAL_ERROR);
+            throw new InvalidCommandException(Message.UPDATE_DESC_ERROR);
         } 
     }
 }

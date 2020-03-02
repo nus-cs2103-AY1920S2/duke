@@ -37,12 +37,12 @@ public class Message {
 
     public static final String DELETE_ERROR = "Sorry, invalid command!\nTry: delete <task index>";
 
-    public static final String DESCRIPTION_ERROR = "Oops! The description of a task can't be empty!";
+    public static final String EMPTY_DESCRIPTION_ERROR = "Oops! The description of a task can't be empty!";
 
     public static final String INDEX_ERROR = "Sounds like you have the wrong task index, "
             + "I can't really hear you through your water bowl!";
 
-    public static final String TIME_ERROR = "Your date time format is incorrect.\n"
+    public static final String TIME_FORMAT_ERROR = "Your date time format is incorrect.\n"
             + "Try: yyyy-mm-dd HHmm";
 
     public static final String EVENT_FORMAT_ERROR = "Your event format is incorrect.\n"
@@ -51,17 +51,17 @@ public class Message {
     public static final String DEADLINE_FORMAT_ERROR = "Your deadline format is incorrect.\n"
             + "Try: deadline <description> /by <date time>";
 
-    public static final String FIND_ERROR = "Sorry, that format isn't right!\nTry: find <keyword>";
+    public static final String FIND_FORMAT_ERROR = "Sorry, that format isn't right!\nTry: find <keyword>";
 
     public static final String KEYWORD_ERROR = "Aww, Cute couldn't fish up any results from that keyword.";
 
     public static final String UPDATE_GENERAL_ERROR = "Wrong command format! Try:\n"
             + "'update description <index> <new description>' or 'update time <index> <new time>";
 
-    public static final String UPDATE_DESC_GENERAL_ERROR = "Wrong command format! Try:\n"
+    public static final String UPDATE_DESC_ERROR = "Wrong command format! Try:\n"
             + "update description <index> <new description>";
 
-    public static final String UPDATE_TIME_GENERAL_ERROR = "Wrong command format! Try:\n"
+    public static final String UPDATE_TIME_ERROR = "Wrong command format! Try:\n"
             + "update time <index> <new time>";
 
     public static final String TODO_TIME_ERROR = "Oops, a todo doesn't have a time! Try again.";

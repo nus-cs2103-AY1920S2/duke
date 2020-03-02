@@ -158,7 +158,7 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new TaskIndexException(Message.INDEX_ERROR);
         } catch (Exception e) {
-            throw new InvalidCommandException(Message.UPDATE_TIME_GENERAL_ERROR);
+            throw new InvalidCommandException(Message.UPDATE_TIME_ERROR);
         }
     }
 
@@ -171,7 +171,7 @@ public class TaskList {
      */
     public String manageTodo(Storage storage, String input) throws EmptyDescriptionException {
         if (input.split(" ").length == 1) {
-            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
+            throw new EmptyDescriptionException(Message.EMPTY_DESCRIPTION_ERROR);
         } else {
             String description = input.substring(input.indexOf(" ") + 1);
             Todo todo = new Todo(description, false);
@@ -271,7 +271,7 @@ public class TaskList {
             int end = input.indexOf("/") - 1;
             result = input.substring(start, end);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
+            throw new EmptyDescriptionException(Message.EMPTY_DESCRIPTION_ERROR);
         }
 
         return result;
