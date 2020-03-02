@@ -1,0 +1,8 @@
+todo first task
+list
+deadline second task /by today
+event third task
+event third task /at this place
+list
+done 3
+bye
