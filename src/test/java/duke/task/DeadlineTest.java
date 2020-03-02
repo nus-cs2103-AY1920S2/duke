@@ -25,7 +25,8 @@ public class DeadlineTest {
         assertFalse(testDeadline.isCompleted());
         testDeadline.completeTask();
         assertTrue(testDeadline.isCompleted());
-        assertTrue(new Deadline("Already completed", LocalDateTime.now(), true).isCompleted());
+        assertTrue(new Deadline("Already completed", LocalDateTime.now(), true,
+                LocalDateTime.now(), true).isCompleted());
     }
 
     /**
@@ -52,6 +53,7 @@ public class DeadlineTest {
         assertEquals("[D][\u2718] Deadline!! (by: Dec 30 1900 6:00 pm [OVERDUE])", // cross mark
                 new Deadline("Deadline!!", LocalDateTime.of(1900, 12, 30, 18, 0)).toString());
         assertEquals("[D][\u2713] brunch (by: Today 11:59 pm)", // tick mark
-                new Deadline("brunch", LocalDate.now().atTime(23, 59), true).toString());
+                new Deadline("brunch", LocalDate.now().atTime(23, 59), true,
+                        LocalDateTime.now(), true).toString());
     }
 }

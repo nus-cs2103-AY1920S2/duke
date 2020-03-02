@@ -2,6 +2,8 @@ package duke.task;
 
 import static duke.util.MagicStrings.ERROR_CANNOT_UNDO;
 
+import java.time.LocalDateTime;
+
 import duke.exception.DuchessException;
 
 /**
@@ -10,6 +12,8 @@ import duke.exception.DuchessException;
 public class Task implements Cloneable {
     protected boolean isCompleted;
     protected String description;
+
+    protected LocalDateTime completionTime;
 
     /**
      * Initialises the {@code Task} instance with its description.
@@ -24,12 +28,15 @@ public class Task implements Cloneable {
     /**
      * Initialises the {@code Task} instance with its description and completion status.
      *
-     * @param description Written description of the task.
-     * @param isCompleted {@code boolean} value indicating whether the task is completed.
+     * @param description    Written description of the task.
+     * @param isCompleted    {@code boolean} value indicating whether the task is completed.
+     * @param completionTime {@code LocalDateTime} object indicating the time of
+     *                       completion of the task.
      */
-    public Task(String description, boolean isCompleted) {
+    public Task(String description, boolean isCompleted, LocalDateTime completionTime) {
         this.description = description;
         this.isCompleted = isCompleted;
+        this.completionTime = completionTime;
     }
 
     private String getStatusIcon() {
@@ -43,7 +50,7 @@ public class Task implements Cloneable {
 
     @Override
     protected Object clone() throws DuchessException {
-        Task clonedTask = null;
+        Task clonedTask;
         try {
             clonedTask = (Task) super.clone();
             clonedTask.description = this.description; // Safe due to immutability of strings.
@@ -59,6 +66,7 @@ public class Task implements Cloneable {
      */
     public void completeTask() {
         this.isCompleted = true;
+        this.completionTime = LocalDateTime.now();
     }
 
     /**
@@ -77,5 +85,14 @@ public class Task implements Cloneable {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Returns the completion time of the task.
+     *
+     * @return Time of completion.
+     */
+    public LocalDateTime getCompletionTime() {
+        return completionTime;
     }
 }
