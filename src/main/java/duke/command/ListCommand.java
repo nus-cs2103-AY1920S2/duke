@@ -10,6 +10,14 @@ public class ListCommand extends Command {
     public ExecuteResult execute(List<Task> tasks) {
         assert tasks != null;
 
+        if (tasks.size() == 0) {
+            return new ExecuteResult(
+                tasks,
+                "You don't have any tasks for the moment!\n",
+                true
+            );
+        }
+
         return new ExecuteResult(
                 tasks,
                 "Here are the tasks in your list:\n"
