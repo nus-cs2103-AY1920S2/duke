@@ -1,7 +1,14 @@
 package duke.Ui;
 
+/**
+ * Scans input from the user and prints text feedback to the user.
+ */
 public class Ui {
 
+    /**
+     * Returns welcome message to be displayed on app start up.
+     * @return welcome message.
+     */
     public static String showWelcomeMessage() {
         String welcomeMessage = " Hello! I'm Alfred.\n"
                 + " What can I do for you, master?\n\n"
@@ -9,14 +16,27 @@ public class Ui {
         return welcomeMessage;
     }
 
+    /**
+     * Returns goodbye message to be displayed on app closure.
+     * @return goodbye message.
+     */
     public String showByeMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
-    public String showErrorMessage(Exception e) {
-        return e.getMessage();
+    /**
+     * Returns the error message to be displayed to the user.
+     * @param exception
+     * @return Error Message.
+     */
+    public String showErrorMessage(Exception exception) {
+        return exception.getMessage();
     }
 
+    /**
+     * Returns help message to be displayed when user types help command.
+     * @return Help Message.
+     */
     public String showHelpMessage() {
         String helpMessage = " Commands Available:\n"
                 + "  >\"list\" - Lists all the current Tasks\n"
