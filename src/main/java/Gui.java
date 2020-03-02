@@ -31,20 +31,29 @@ public class Gui {
         String toReturn = "Here are the tasks in your list:\n";
         int i = 1;
         for (Task task : listOfTasks.getTaskList()) {
-            toReturn += String.format("% d.%s\n", i, task.toString());
+            toReturn += String.format("%d. %s\n", i, task.toString());
             i++;
         }
         return toReturn;
     }
 
+    /**
+     * Prints out the task that has been snoozed.
+     *
+     * @param listOfTasks List of all saved tasks.
+     * @param index index number of snoozed task.
+     * @param timing new timing of snoozed task.
+     * @return new task.
+     * @throws DukeException when new timing is incompatible with task.
+     */
     public String printOutSnoozed(TaskList listOfTasks, int index, String timing) throws DukeException {
         String taskType = "deadline";
-        if(listOfTasks.getTask(index) instanceof Event) {
+        if (listOfTasks.getTask(index) instanceof Event) {
             taskType = "event";
         }
         String toReturn = "Got it. The updated ";
         toReturn += taskType;
-        toReturn += "looks like:\n";
+        toReturn += " looks like:\n";
         toReturn += listOfTasks.getTask(index);
         return toReturn;
 
@@ -79,7 +88,7 @@ public class Gui {
         if (index >= listOfTasks.getNumOfTasks() || index < 0) {
             throw new DukeException("Index out of bounds!");
         }
-        String toReturn = "Nice, I've marked this task as done:\n  ";
+        String toReturn = "Nice, I've marked this task as done:\n";
         toReturn += (listOfTasks.getTask(index));
 
         return toReturn;
@@ -114,7 +123,7 @@ public class Gui {
         String toReturn = "Here are the matching tasks in your list:\n";
         int i = 1;
         for (Task task : listOfTasks.getTaskList()) {
-            toReturn += String.format("%d.%s\n", i, task);
+            toReturn += String.format("%d. %s\n", i, task);
             i++;
         }
         return toReturn;

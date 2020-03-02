@@ -101,7 +101,8 @@ public class Parser {
 
     /**
      * returns a String of the parsed command.
-     * @param ui the GUI used.
+     *
+     * @param ui    the GUI used.
      * @param tasks the list of tasks provided.
      * @return a string of the parsed command.
      */
@@ -110,47 +111,47 @@ public class Parser {
 
         try {
             switch (command) {
-                case "bye":
-                    toReturn = ui.terminateGui();
-                    break;
-                case "list":
-                    toReturn = ui.printOutTasks(tasks);
-                    break;
-                case "delete":
-                    toReturn = ui.printOutDeleted(tasks, getIndex() - 1);
-                    tasks.removeTask(getIndex() - 1);
-                    break;
-                case "done":
-                    tasks.getTask(getIndex() - 1).doTask();
-                    toReturn = (ui.printOutDoneTask(tasks, getIndex() - 1));
-                    break;
-                case "find":
-                    toReturn = (ui.printOutFound(tasks.getMatches(getDescription())));
-                    break;
-                case "snooze":
-                    tasks.getTask(getIndex() - 1).snooze(timing);
-                    toReturn = ui.printOutSnoozed(tasks, getIndex() - 1, timing);
-                    break;
-                case "event":
-                    tasks.newEvent(getDescription(), getTiming());
+            case "bye":
+                toReturn = ui.terminateGui();
+                break;
+            case "list":
+                toReturn = ui.printOutTasks(tasks);
+                break;
+            case "delete":
+                toReturn = ui.printOutDeleted(tasks, getIndex() - 1);
+                tasks.removeTask(getIndex() - 1);
+                break;
+            case "done":
+                tasks.getTask(getIndex() - 1).doTask();
+                toReturn = (ui.printOutDoneTask(tasks, getIndex() - 1));
+                break;
+            case "find":
+                toReturn = (ui.printOutFound(tasks.getMatches(getDescription())));
+                break;
+            case "snooze":
+                tasks.getTask(getIndex() - 1).snooze(timing);
+                toReturn = ui.printOutSnoozed(tasks, getIndex() - 1, timing);
+                break;
+            case "event":
+                tasks.newEvent(getDescription(), getTiming());
+                toReturn = ui.printOutAdded(tasks);
+                break;
+            case "todo":
+                tasks.newToDo(getDescription());
+                toReturn = ui.printOutAdded(tasks);
+                break;
+            case "deadline":
+                try {
+                    tasks.newDeadline(getDescription(), getTiming());
                     toReturn = ui.printOutAdded(tasks);
                     break;
-                case "todo":
-                    tasks.newToDo(getDescription());
-                    toReturn = ui.printOutAdded(tasks);
-                    break;
-                case "deadline":
-                    try {
-                        tasks.newDeadline(getDescription(), getTiming());
-                        toReturn = ui.printOutAdded(tasks);
-                        break;
-                    } catch (DateTimeParseException e) {
-                        throw new DukeException("Invalid date format for deadline used! "
-                                + "Please re-try using the date format 'yyyy-mm-dd HHMM'");
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("Invalid date format for deadline used! "
+                            + "Please re-try using the date format 'yyyy-mm-dd HHMM'");
 
-                    }
-                default:
-                    throw new DukeException("I'm sorry, I do not understand what that means!");
+                }
+            default:
+                throw new DukeException("I'm sorry, I do not understand what that means!");
             }
         } catch (DukeException e) {
             toReturn = e.toString();

@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
+
 import javafx.application.Platform;
 
 public class Duke {
@@ -37,14 +38,14 @@ public class Duke {
     public String getResponse(String in) {
         String response = "";
         Parser parser = new Parser(in);
-        
+
         String toReturn = parser.parseCommand(ui, tasks);
         try {
             storage.saveData(tasks);
         } catch (IOException e) {
             toReturn += "\nAn error occurred while saving, please try again!";
         }
-        assert !(toReturn.equals("")): "Duke's response is empty!";
+        assert !(toReturn.equals("")) : "Duke's response is empty!";
         return toReturn;
     }
 }

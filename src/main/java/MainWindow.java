@@ -49,10 +49,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        if(response.substring(0,2).equals(":(")) {
+        if (response.substring(0, 2).equals(":(")) {
             dukeImage = new Image(this.getClass().getResourceAsStream("/images/Fail.png"));
-        }
-        else {
+        } else {
             dukeImage = new Image(this.getClass().getResourceAsStream("/images/NewDuke.png"));
         }
         dialogContainer.getChildren().addAll(
@@ -61,10 +60,11 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if(response.equals("Bye. Hope to see you again soon!\n")) {
+        if (response.equals("Bye. Hope to see you again soon!\n")) {
             new Timer().schedule(new TimerTask() {
                 public void run() {
                     Platform.exit();
+                    System.exit(0);
                 }
             }, 1000);
         }

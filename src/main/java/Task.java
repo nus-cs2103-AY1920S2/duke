@@ -21,7 +21,8 @@ public class Task {
     }
 
     /**
-     * Snoozes the task
+     * Snoozes the task.
+     *
      * @param by String of new timing
      * @throws DukeException if task cannot be snoozed.
      */

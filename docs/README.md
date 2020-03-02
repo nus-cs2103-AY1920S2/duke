@@ -31,7 +31,7 @@ When started up, Duke will introduce itself.
 
 
 After the introduction, the user may input any command, which Duke will try to execute.  
-Duke will then inform the user if their command was successfully executed. Depending on wheter or not the command was executed successfully, Duke will react differently.
+Duke will then inform the user if their command was successfully executed. Depending on whether or not the command was executed successfully, Duke will react differently.
 
 
 After informing the user if their command was successfully executed, Duke will wait for the user's next command.  

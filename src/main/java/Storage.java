@@ -21,7 +21,7 @@ public class Storage {
         this.path = path;
         File storageFolder = new File("./data");
 
-        if(!(storageFolder.exists())) {
+        if (!(storageFolder.exists())) {
             storageFolder.mkdir();
         }
         this.path = "./data/" + path;
