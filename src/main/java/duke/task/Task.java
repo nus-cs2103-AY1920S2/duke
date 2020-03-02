@@ -38,10 +38,18 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Sets a new description for the task.
+     * @param newDescription The new description specified by the user.
+     */
     public void setDescription(String newDescription) {
         this.description = newDescription;
     }
 
+    /**
+     * Sets a new time for the event task.
+     * @param newTime The new time specified by the user.
+     */
     public abstract void setTime(String newTime);
 
     /**

@@ -26,6 +26,10 @@ public class Deadline extends Task {
         return this.time;
     }
 
+    /**
+     * Sets a new time for the event task.
+     * @param newTime The new time specified by the user.
+     */
     public void setTime(String newTime) {
         this.time = newTime;
     }

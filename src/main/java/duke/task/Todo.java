@@ -14,6 +14,10 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+    /**
+     * Sets a new time for the todo task.
+     * @param newTime The new time specified by the user.
+     */
     public void setTime(String newTime) {
     }
 

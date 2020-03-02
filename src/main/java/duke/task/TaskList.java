@@ -33,6 +33,11 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Retrieves a task from the list by index.
+     * @param index The task index.
+     * @return The requested Task object.
+     */
     public Task getTask(int index) {
         return this.tasks.get(index);
     }
@@ -40,6 +45,8 @@ public class TaskList {
     /**
      * Marks a given task as done.
      * @param idx The index of the task in the task list.
+     * @throws TaskIndexException Exception when the specified task index is invalid.
+     * @return Confirmation message if successful.
      */
     public String doTask(int idx) throws TaskIndexException {
         try {
@@ -54,6 +61,7 @@ public class TaskList {
     /**
      * Adds a task to the task list.
      * @param task The task to be added.
+     * @return Confirmation message if successful.
      */
     public String addTask(Task task) {
         this.tasks.add(task);
@@ -63,6 +71,7 @@ public class TaskList {
     /**
      * Deletes a task from the task list.
      * @param idx The index of the task to be deleted.
+     * @return Confirmation message if successful.
      */
     public String deleteTask(int idx) throws TaskIndexException {
         try {
@@ -105,7 +114,16 @@ public class TaskList {
         }
     }
 
-    public String updateDescription(int idx, String input) throws TaskIndexException, InvalidCommandException{
+    /**
+     * Updates the description of a task.
+     * @param idx The task index.
+     * @param input The user input.
+     * @return Confirmation message if successful.
+     * @throws TaskIndexException The exception when the specified task index is invalid.
+     * @throws InvalidCommandException The exception when the user inputs an invalid command.
+     */
+    public String updateDescription(int idx, String input) 
+            throws TaskIndexException, InvalidCommandException {
         try {
             Task task = this.tasks.get(idx);
             int newDescriptionIndex = input.indexOf("" + (idx + 1));
@@ -119,7 +137,16 @@ public class TaskList {
         }
     }
 
-    public String updateTime(int idx, String input) throws TaskIndexException, InvalidTimeFormatException {
+    /**
+     * Updates the time of a task.
+     * @param idx The task index.
+     * @param input The user input.
+     * @return Confirmation message if successful.
+     * @throws TaskIndexException The exception when the specified task index is invalid.
+     * @throws InvalidTimeFormatException The exception when the time format is invalid.
+     */
+    public String updateTime(int idx, String input) 
+            throws TaskIndexException, InvalidTimeFormatException {
         try {
             Task task = this.tasks.get(idx);
             int newTimeIndex = input.indexOf("" + (idx + 1));
@@ -135,7 +162,8 @@ public class TaskList {
      * Manages a Todo task by parsing user input and storing it into the task list.
      * @param storage The Storage instance used to write the task into the task list file.
      * @param input The given user input.
-     * @param fileName The path to the task list file.
+     * @return Confirmation message if successful.
+     * @throws EmptyDescriptionException The exception when an empty description is provided.
      */
     public String manageTodo(Storage storage, String input) throws EmptyDescriptionException {
         if (input.split(" ").length == 1) {
@@ -155,9 +183,13 @@ public class TaskList {
      * Manages an Event task by parsing user input and storing it into the task list.
      * @param storage The Storage instance used to write the task into the task list file.
      * @param input The given user input.
-     * @param fileName The path to the task list file.
+     * @return Confirmation message if successful.
+     * @throws InvalidCommandException The exception when the user inputs an invalid command.
+     * @throws EmptyDescriptionException The exception when an empty description is provided.
+     * @throws InvalidTimeFormatException The exception when the user inputs an invalid time format.
      */
-    public String manageEvent(Storage storage, String input) throws InvalidCommandException, EmptyDescriptionException, InvalidTimeFormatException {
+    public String manageEvent(Storage storage, String input) 
+            throws InvalidCommandException, EmptyDescriptionException, InvalidTimeFormatException {
         String description = "";
         String remaining = "";
         String[] split = new String[]{};
@@ -192,9 +224,13 @@ public class TaskList {
      * Manages a Deadline task by parsing user input and storing it into the task list.
      * @param storage The Storage instance used to write the task into the task list file.
      * @param input The given user input.
-     * @param fileName The path to the task list file.
+     * @return Confirmation message if successful.
+     * @throws InvalidCommandException The exception when the user inputs an invalid command.
+     * @throws EmptyDescriptionException The exception when an empty description is provided.
+     * @throws InvalidTimeFormatException The exception when the user inputs an invalid time format.
      */
-    public String manageDeadline(Storage storage, String input) throws InvalidCommandException, EmptyDescriptionException, InvalidTimeFormatException {
+    public String manageDeadline(Storage storage, String input) 
+            throws InvalidCommandException, EmptyDescriptionException, InvalidTimeFormatException {
         String description = "";
         String remaining = "";
         String[] split = new String[]{};
