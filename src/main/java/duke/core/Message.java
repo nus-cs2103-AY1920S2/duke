@@ -45,6 +45,8 @@ public class Message {
     public static final String DEADLINE_FORMAT_ERROR = "Your event format is incorrect.\n"
             + "Try: /by <date and time>";
 
+    public static final String FIND_ERROR = "Sorry, that format isn't right!\nTry: find <keyword>";
+
     public static final String KEYWORD_ERROR = "Aww, Cute couldn't fish up any results from that keyword.";
 
     public static final String UPDATE_GENERAL_ERROR = "Wrong command format! Try:\n"
