@@ -25,14 +25,6 @@ public class Storage {
                 "%s|%s|%s|%s",
                 task.getType(), isDone,
                 task.getDescription(), task.getDate());
-        /*
-        if (!task.tagList.isEmpty()) {
-            task.tagList.forEach(tag -> tags.append("|" + tag.getDetails()));
-            taskString = String.format("%s%s", taskString, tags);
-        } else {
-            taskString = String.format("%s|", taskString);
-        }
-        */
 
         return taskString;
     }
