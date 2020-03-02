@@ -49,7 +49,7 @@ public class Deadline extends Task {
     public String toFormatString() {
         // Date format is MMM d yyyy
         String formatDate = by.format(DateTimeUtil.FORMAT_DATE_MONTHNAME);
-        return String.format("[D]%s\nby:\n%s", super.toString(), formatDate);
+        return String.format("[D]%s\nby: %s", super.toString(), formatDate);
     }
 
     @Override

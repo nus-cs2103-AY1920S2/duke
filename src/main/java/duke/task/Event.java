@@ -74,7 +74,7 @@ public class Event extends Task {
         String formatStartTime = startTime.format(DateTimeUtil.FORMAT_TIME_24H);
         String formatEndTime = endTime.format(DateTimeUtil.FORMAT_TIME_24H);
 
-        return String.format("[E]%s\nat:\n%s\n%s-%s",
+        return String.format("[E]%s\nat: %s\n    %s-%s",
                 super.toString(),
                 formatDate,
                 formatStartTime,
