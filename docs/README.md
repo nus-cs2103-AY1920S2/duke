@@ -200,12 +200,12 @@ Format: `snooze INDEX /to TASK_FORMAT`
 - The format for `TASK_FORMAT` must be appropriate for the type of task being rescheduled.
   - Case 1: rescheduled task is a deadline. 
     Format: `snooze INDEX /to DATE TIME`
-    format details can be found [here](src/README.md#32-add-an-even-task)
+    format details can be found [here](src/README.md#32-add-an-event-task-event)
     
 
   - Case 2: Rescheduled task is an event. 
 Format: `snooze INDEX /to TEXT` 
-format details can be found [here](src/README.md#33-add-a-deadline-task)
+format details can be found [here](src/README.md#33-add-a-deadline-task-deadline)
 
 Example of usage: 
 
