@@ -29,7 +29,7 @@ public class Gui {
      */
     public String printOutTasks(TaskList listOfTasks) {
         String toReturn = "Here are the tasks in your list:\n";
-        if(listOfTasks.getNumOfTasks() == 0) {
+        if (listOfTasks.getNumOfTasks() == 0) {
             toReturn = "There are no tasks in your list!\n";
         }
         int i = 1;

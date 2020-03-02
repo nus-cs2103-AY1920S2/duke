@@ -136,7 +136,7 @@ Format: `deadline DESCRIPTION /by DATE TIME`
 
 **Example of usage:** 
 
-`deadline CS2343 Assigment /by 2020-02-19`
+`deadline CS3243 Assigment /by 2020-02-19`
 
 **Expected outcome:**
 
@@ -179,7 +179,7 @@ Format: `done INDEX`
 **Expected outcome:**
 
 ```
-Nice! I've marked this task as done:
+Nice, I've marked this task as done:
 [T][Y] CS2103 Quiz
 ```
 
@@ -201,7 +201,7 @@ Format: `delete INDEX`
 ```
 Noted. I've removed this task:
 [T][Y] CS2103 Quiz
-you now have 2 tasks in the list.
+Now you have 2 tasks in the list.
 ```
 
 
@@ -223,7 +223,7 @@ Format: `find KEYWORD`
 
 ```
 Here are the matching tasks in your list:
-1. [D][N] CS3243 Assignment (by: 19-02-2020 0000) 
+1. [D][N] CS3243 Assignment (by: 19 Feb 2020 0000) 
 ```
 
 
@@ -256,8 +256,8 @@ Got it, the updated deadline looks like:
 ```
 
 ### 3.9 Exit Duke: `bye`
-Exits Duke.  
-The program will close shortly after the command is entered.
+Exits the Duke Application.  
+The Duke Application will close shortly after the command is entered.
 
 Format: `bye`
 

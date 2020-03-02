@@ -38,6 +38,7 @@ public class Storage {
         FileWriter wr = new FileWriter(path);
         wr.write("");
         wr.close();
+        //wr prevents the same task from being saved multiple times in the same instance.
         if (listOfTasks.getNumOfTasks() < 1) {
             return;
         }
