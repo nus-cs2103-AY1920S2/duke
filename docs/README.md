@@ -73,7 +73,7 @@ I've added this task:
 Now you have 1 task in the list.  
 ```
 
-### 3.2 Add an Event: `event`
+### 3.2 Add an Event task: `event`
 Adds an event task to Duke.
 
 Format: `event DESCRIPTION /at DETAILS`
@@ -156,7 +156,7 @@ Deletes a currently saved task or event from Duke.
 
 Format: `delete INDEX`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#3.4)
+- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list)
 
 **Example of usage:** 
 
@@ -196,16 +196,16 @@ Changes the date and timing for a deadline or the details for an event.
 
 Format: `snooze INDEX /to TASK_FORMAT`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/README.md#3.4)
+- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list)
 - The format for `TASK_FORMAT` must be appropriate for the type of task being rescheduled.
   - Case 1: rescheduled task is a deadline. 
     Format: `snooze INDEX /to DATE TIME`
-    format details can be found [here](src/README.md#3.2)
+    format details can be found [here](src/README.md#32-add-an-even-task)
     
 
   - Case 2: Rescheduled task is an event. 
 Format: `snooze INDEX /to TEXT` 
-format details can be found [here](src/README.md#3.3)
+format details can be found [here](src/README.md#33-add-a-deadline-task)
 
 Example of usage: 
 
