@@ -12,12 +12,35 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the Storage object for user's Tasks.
+ * Consists of an ArrayList representing in-app memory as well as methods to
+ * write to a file for persistent memory, simulating the hard disk.
+ */
 public class TaskStorage {
-    // Attributes
+    /**
+     * Represents the hard disk to which reads and writes occur.
+     */
     private File file;
+
+    /**
+     * Represents the path to the text file used for persistent storage
+     */
     private String filePath;
+
+    /**
+     * Represents the in-memory task list.
+     */
     private ArrayList<Task> taskList;
 
+    /**
+     * Constructor for a Storage object.
+     * The Storage object is initialised such that on start up, its in-memory
+     * ArrayList gets populated by the persisted data from previous sessions.
+     *
+     * @param filePath the path of the text file, as a string.
+     * @throws FileNotFoundException
+     */
     public TaskStorage(String filePath) throws FileNotFoundException {
         this.taskList = new ArrayList<Task>();
         this.file = new File(filePath);
@@ -25,6 +48,12 @@ public class TaskStorage {
         populateTaskList();
     }
 
+    /**
+     * Reads all the Tasks stored in persistent memory, and clones them into
+     * in-memory storage.
+     *
+     * @throws FileNotFoundException
+     */
     private void populateTaskList() throws FileNotFoundException {
         Scanner scanner = new Scanner(this.file);
         while (scanner.hasNext()) {
@@ -38,11 +67,20 @@ public class TaskStorage {
         }
     }
 
-    // Getter and Setter for taskList
+    /**
+     * Returns a snapshot of the tasks in memory as a list.
+     *
+     * @return tasks in memory as an ArrayList.
+     */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
+    /**
+     * Adds a new Task to the list of tasks in the memory and persistent storage.
+     *
+     * @param newTask new task.
+     */
     public void addToTaskList(Task newTask) {
         this.taskList.add(newTask);
         try {
@@ -57,6 +95,11 @@ public class TaskStorage {
         }
     }
 
+    /**
+     * Marks a task as done from both in-memory and persistent storage.
+     *
+     * @param taskNumber task number as it appears in the list order.
+     */
     public void markTaskAsDone(int taskNumber) {
         this.taskList.get(taskNumber - 1).markAsDone();
         ArrayList<String> tempArray = new ArrayList<>();
@@ -83,6 +126,12 @@ public class TaskStorage {
 
     }
 
+    /**
+     * Deletes the task corresponding to the taskNumber from both the in-memory
+     * and persistent storage.
+     *
+     * @param taskNumber task number of the task to be deleted, in list order.
+     */
     public void deleteFromTaskList(int taskNumber) {
         System.out.println(this.taskList.size());
         this.taskList.remove(taskNumber - 1);
@@ -117,6 +166,11 @@ public class TaskStorage {
         replaceTasksInFile(tempArray);
     }
 
+    /**
+     * Replace the contents of the File with new contents.
+     *
+     * @param tasksArray an ArrayList containing the tasks to rewrite the file.
+     */
     private void replaceTasksInFile(ArrayList<String> tasksArray) {
         try {
             FileWriter fw = new FileWriter(filePath, false);
@@ -138,6 +192,13 @@ public class TaskStorage {
         }
     }
 
+    /**
+     * Updates the priority of the task corresponding to the given taskNumber,
+     * with a new priority.
+     *
+     * @param priority
+     * @param taskNumber
+     */
     public void updateTaskPriority(Priority priority, int taskNumber) {
         this.taskList.get(taskNumber - 1).setPriority(priority);
         ArrayList<String> tempArray = new ArrayList<>();
