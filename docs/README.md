@@ -31,8 +31,7 @@ When started up, Duke will introduce itself.
 
 
 After the introduction, the user may input any command, which Duke will try to execute.  
-Duke will then inform the user if their command was successfully executed.  
-Duke's expression will also change depending on whether or not the user's input was successfully executed.  
+Duke will then inform the user if their command was successfully executed. Depending on wheter or not the command was executed successfully, Duke will react differently.
 
 
 After informing the user if their command was successfully executed, Duke will wait for the user's next command.  
@@ -41,8 +40,8 @@ After informing the user if their command was successfully executed, Duke will w
 It should be noted that Duke's image and dialog box are always on the left, while the user's image and dialog box are always on the right.
 
 ### 2.2 Images
-As mentioned in 2.1, Duke's expressions change depending on whether or not the user's command was successfully executed.  
-This is done by having a different image correspond to a different case.  
+As mentioned in section 2.1, Duke's will react differently based on whether or not the user's command was successfully executed.  
+This is done by having a different image correspond to the various case.  
 
 
 Below are a list of possible images used in the Duke Application.
@@ -58,9 +57,7 @@ There is only one image used to represent the user. The image looks like this:
 There are three possible images used to represent the Duke.
 
 
-Firstly, there is a unique image that is only used during the first interaction with the user. This serves as an introduction to the Duke.  
-
-
+Firstly, there is a unique image that is only used during the first interaction with the user. It is used to introduce the Duke.  
 The image looks like this:  
 
 <img src = "IntroDuke.png" width = "100">
@@ -80,6 +77,7 @@ The image looks like this:
 
 ### 2.3 Sample Interaction with the Duke Application
 Below is a sample interaction with the Duke Application.  
+
 
 <img src = "Ui.png" width = "350">
 
@@ -110,8 +108,8 @@ Adds an event task to Duke.
 
 Format: `event DESCRIPTION /at DETAILS`
 
-- `DESCRIPTION`: any sequence of characters that are found on a standard keyboard
-- `DETAILS`: any sequence of characters that are found on a standard keyboard
+- `DESCRIPTION`: any sequence of ASCII printable characters (for reference, click [here](https://en.wikipedia.org/wiki/ASCII#Printable_characters))
+- `DETAILS`: any sequence of ASCII printable characters (for reference, click [here](https://en.wikipedia.org/wiki/ASCII#Printable_characters))
 
 **Example of usage:** 
 
@@ -131,7 +129,7 @@ Adds a deadline task to Duke.
 
 Format: `deadline DESCRIPTION /by DATE TIME`
 
-- `DESCRIPTION`: any sequence of characters that are found on a standard keyboard
+- `DESCRIPTION`: any sequence of ASCII printable characters (for reference, click [here](https://en.wikipedia.org/wiki/ASCII#Printable_characters))
 - `DATE`: yyyy-MM-dd
 - `TIME`: HHmm (Time is optional. If no time is provided, it is assumed to be 0000)
 
@@ -210,7 +208,7 @@ you now have 2 tasks in the list.
 ### 3.7 Find tasks using a keyword: `find`
 Finds all tasks that contain a specific keyword.
 
-- `KEYWORD`: any sequence of characters that are found on a standard keyboard
+- `KEYWORD`: any sequence of ASCII printable characters (for reference, click [here](https://en.wikipedia.org/wiki/ASCII#Printable_characters))
 
 Format: `find KEYWORD`
 
@@ -236,19 +234,19 @@ Format: `snooze INDEX /to TASK_FORMAT`
 - `INDEX`: index number of the desired task (can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list))
 - The format for `TASK_FORMAT` must be appropriate for the type of task being rescheduled.
   - Case 1: Rescheduled task is a deadline. 
-    Format: `snooze INDEX /to DATE TIME`
-    (format details can be found [here](/docs/README.md#32-add-an-event-task-event))
+Format: `snooze INDEX /to DATE TIME`
+(format details can be found [here](/docs/README.md#32-add-an-event-task-event))
     
 
   - Case 2: Rescheduled task is an event. 
 Format: `snooze INDEX /to DETAILS` 
 (format details can be found [here](/docs/README.md#33-add-a-deadline-task-deadline))
 
-Example of usage: 
+**Example of usage:** 
 
 `snooze 2 /to 2020-03-16`
 
-Expected outcome:
+**Expected outcome:**
 
 ```
 Got it, the updated deadline looks like:
