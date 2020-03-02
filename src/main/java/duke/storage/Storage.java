@@ -4,6 +4,7 @@ import static duke.util.MagicStrings.ERROR_FAIL_TO_LOAD;
 import static duke.util.MagicStrings.ERROR_FAIL_TO_LOAD_AND_SAVE;
 import static duke.util.MagicStrings.ERROR_FAIL_TO_SAVE;
 import static duke.util.MagicStrings.GSON_ATTR_COMPLETION_TIME;
+import static duke.util.MagicStrings.GSON_ATTR_CREATION_TIME;
 import static duke.util.MagicStrings.GSON_ATTR_DEADLINE;
 import static duke.util.MagicStrings.GSON_ATTR_DESCRIPTION;
 import static duke.util.MagicStrings.GSON_ATTR_FREQUENCY;
@@ -115,6 +116,7 @@ public class Storage {
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_FREQUENCY), Frequency.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_REPEAT_END_TIME), LocalDateTime.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_CREATION_TIME), LocalDateTime.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_COMPLETION_TIME), LocalDateTime.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED_ON_TIME), boolean.class)));
                 } else {
@@ -128,6 +130,7 @@ public class Storage {
                 tasks.add(new Deadline(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_CREATION_TIME), LocalDateTime.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_COMPLETION_TIME), LocalDateTime.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED_ON_TIME), boolean.class)));
             } else if (taskToCheck.has(GSON_ATTR_TIME_FRAME)) {
@@ -135,11 +138,13 @@ public class Storage {
                 tasks.add(new Event(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_TIME_FRAME), String.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_CREATION_TIME), LocalDateTime.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_COMPLETION_TIME), LocalDateTime.class)));
             } else {
                 // Task is a ToDo
                 tasks.add(new ToDo(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_CREATION_TIME), LocalDateTime.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_COMPLETION_TIME), LocalDateTime.class)));
             }
         }
