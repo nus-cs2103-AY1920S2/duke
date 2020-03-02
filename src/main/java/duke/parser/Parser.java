@@ -15,6 +15,8 @@ public class Parser {
         switch (commandType.toLowerCase()) {
         case "bye":
             return new ByeCommand();
+        case "help":
+            return new HelpCommand();
         case "list":
             return new ListCommand();
         case "done":
