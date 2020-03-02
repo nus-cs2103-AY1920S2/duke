@@ -13,38 +13,40 @@ Alternatively, you can open Terminal, `cd` into the home folder of Duke, and run
 ## 3. Features
 
 ### 3.1 `help` - Opening Guide
-Displays all supported commands and their usage.  
+Displays all supported commands and their usage.
+
 Format: `help`
 
 ### 3.2 `list` - Listing all saved tasks
-Displays all saved tasks in the application.  
+Displays all saved tasks in the application.
+
 Format: `list`
 
 ### 3.3 `todo` - Adding a new to-do
-Adds a new `Todo` task with the specified description.  
-The task will be marked as '✗' (undone) by default.  
+Adds a new `Todo` task with the specified description.   The task will be marked as '✗' (undone) by default.
+ 
 Format: `todo DESCRIPTION`  
 
 Example: `todo ST2132 Homework`  
 
-Expected outcome:  
-The application successfully adds a `Todo` with description `ST2132 Homework`
+Expected outcome: The application successfully adds a `Todo` with description `ST2132 Homework`  
+
 `Got it dude! I've added this task:`  
 `[T][✘] ST2132 Homework`  
 `Now you have 5 task(s) in the list.`  
 
-Remark:  Tasks with the same `description` will be considered as duplicate and will not be allowed.  
+Remark: Tasks with the same `description` will be considered as duplicate and will not be allowed.  
 
 ### 3.4 `event` - Adding a new event
-Adds a new `Event` task with the specified description and time.
-The task will be marked as '✗' (undone) by default.  
+Adds a new `Event` task with the specified description and date and time. The task will be marked as '✗' (undone) by default.  
+
 Format: `event DESCRIPTION /at YYYY-MM-DD HHMM`
 
 Example: `event project meeting /at 2020-02-21 1800`
 
-Expected outcome:  
-The application successfully adds an `Event` with description `project meeting`
+Expected outcome: The application successfully adds an `Event` with description `project meeting`
 and time `21 Feb 2020 18:00`  
+
 `Got it dude! I've added this task:`  
 `[E][✘] project meeting (at: 21 Feb 2020 18:00)`  
 `Now you have 5 task(s) in the list.`  
@@ -59,29 +61,28 @@ Example: `deadline CS2102 Assignment /by 2020-02-21 1800`
 
 Expected outcome:
 The application successfully added a `Deadline` with description `Cs2102 Assignment`
-and deadline date and time `21 Feb 2020 18:00`  
+and deadline date and time `21 Feb 2020 18:00`
+
 `Got it dude! I've added this task:`  
 `[D][✘] CS2102 Assignment (by: 21 Feb 2020 18:00)`  
 `Now you have 5 task(s) in the list.`
 
 ### 3.6 `delete` - Deleting a task
-Deletes a `Task` at the specified index in the full task list.  
-The index must be a positive integer and must exists within the range of the list length.
+Deletes a `Task` at the specified index in the full task list. The index must be a positive integer and must exists within the range of the list length.
 
 Format: `delete INDEX`  
 
 Example: `delete 2`
 
-Expected outcome: 
-The application successfully deleted a `Task` at index 2 of the current list.
+Expected outcome: The application successfully deleted a `Task` at index 2 of the current list.
+
 `Got it dude! I've deleted this task:`  
 `[E][✘] project meeting (at: 21 Feb 2020 18:00)`  
 `Now you have 4 task(s) in the list.`
 
 
 ### 3.7 `done` - Marking a task as done
-Marks a `Task` at the specified index in the list as `done`.  
-The index must be a positive integer and must exists within the range of the list length.
+Marks a `Task` at the specified index in the list as `done`. The index must be a positive integer and must exists within the range of the list length.
 
 Format: `done INDEX`  
 
@@ -89,6 +90,7 @@ Example of usage: `done 2`
 
 Expected outcome: 
 The application successfully marked the `Task` at index 2 of the current list as `done`.  
+
 `Got it dude! I've marked this task as done:`  
 `[T][✓] ST2132 Homework`
 
@@ -102,6 +104,7 @@ Example: `find Homework`
 
 Expected outcome:
 The application found some tasks whose description contains the keyword `Homework`, and return a list of those tasks.  
+
 `Okay dude here are what I found:`  
 `2. [T][✓] ST2132 Homework`
 
