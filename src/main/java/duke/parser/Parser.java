@@ -44,7 +44,13 @@ public class Parser {
 
         switch (commandType) {
         case "list":
-            command = new ListCommand();
+            otherArgs = Arrays.copyOfRange(splitCommand, 1, splitCommand.length);
+            String tag = getTagName(otherArgs);
+            if (tag.isEmpty()) {
+                command = new ListCommand();
+            } else {
+                command = new ListCommand(tag);
+            }
             break;
         case "tags":
             command = new TagsCommand();
@@ -140,5 +146,19 @@ public class Parser {
             }
         }
         return tags;
+    }
+
+    public static String getTagName(String[] otherArgs) throws DukeException {
+        String tagName = "";
+        for (String args : otherArgs) {
+            if (args.split("\\s")[0].equals("tag")) {
+                if (!tagName.isEmpty()) {
+                    throw new DukeException(ErrorCodes.LIST_ONE_TAG);
+                } else {
+                    tagName = args.split("\\s")[1];
+                }
+            }
+        }
+        return tagName;
     }
 }

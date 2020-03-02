@@ -2,6 +2,8 @@ package duke.tasks;
 
 import java.util.ArrayList;
 
+import duke.tags.Tag;
+
 /**
  * Represents the current list of tasks.
  *
@@ -107,6 +109,12 @@ public class TaskList {
     public ArrayList<Task> filterTasks(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<Task>(this.taskList);
         filteredTasks.removeIf((task) -> !task.getTaskName().toLowerCase().contains(keyword.toLowerCase()));
+        return filteredTasks;
+    }
+
+    public ArrayList<Task> getTaggedTasks(String tagName) {
+        ArrayList<Task> filteredTasks = new ArrayList<Task>(this.taskList);
+        filteredTasks.removeIf((task) -> !task.getTags().contains(new Tag(tagName)));
         return filteredTasks;
     }
 }

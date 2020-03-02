@@ -13,7 +13,7 @@ public class TagList {
         for (Task task: taskList.getTaskList()) {
             for (Tag tag: task.getTags()) {
                 if (!tag.getTagName().equals(" ")) {
-                    tagsList.add(tag);
+                    this.addTag(tag);
                 }
             }
         }

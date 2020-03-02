@@ -69,6 +69,9 @@ public class DukeException extends Exception {
         case INVALID_TAG:
             message = "Boss, tags should only be a single word!";
             break;
+        case LIST_ONE_TAG:
+            message = "I can't list tasks from more than 1 tag, boss. Try again?";
+            break;
         default:
             message = "Uh-oh boss, I don't feel so good...";
             break;

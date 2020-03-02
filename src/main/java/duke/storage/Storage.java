@@ -90,7 +90,9 @@ public class Storage {
     private ArrayList<Tag> loadTaskTags(String tagsString) {
         ArrayList<Tag> tags = new ArrayList<Tag>();
         for (String tagName : tagsString.split(",\\s")) {
-            tags.add(new Tag(tagName));
+            if (!tagName.isEmpty()) {
+                tags.add(new Tag(tagName));
+            }
         }
         return tags;
     }

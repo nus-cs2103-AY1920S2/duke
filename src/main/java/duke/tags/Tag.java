@@ -13,7 +13,7 @@ public class Tag {
 
     @Override
     public boolean equals(Object obj) {
-        return ((Tag) obj).tagName.equals(this.tagName);
+        return ((Tag) obj).getTagName().equals(this.getTagName());
     }
 
     @Override

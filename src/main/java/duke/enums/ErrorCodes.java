@@ -15,5 +15,6 @@ public enum ErrorCodes {
     FILE_NOT_FOUND,
     LOADING_ERROR,
     SAVING_ERROR,
-    INVALID_TAG
+    INVALID_TAG,
+    LIST_ONE_TAG
 }
