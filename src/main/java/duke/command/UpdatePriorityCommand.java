@@ -19,10 +19,13 @@ public class UpdatePriorityCommand extends Command {
         switch (updatePriorityArgs[1]) {
             case "HIGH":
                 this.priority = Priority.HIGH;
+                break;
             case "MEDIUM":
                 this.priority = Priority.MEDIUM;
+                break;
             case "LOW":
                 this.priority = Priority.LOW;
+                break;
         }
         assert this.priority!=null : "Invalid priority was passed to UpdatePriorityCommand constructor";
     }
