@@ -20,7 +20,6 @@
 <br/> 3.7. `delete` - Deletes a task from the task list
 <br/> 3.8. `update` - Updates the description of a task
 <br/> 3.9. `manual` - Shows the different commands
-<br/>
 4. Acknowledgements
 
 
