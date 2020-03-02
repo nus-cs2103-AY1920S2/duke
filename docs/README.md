@@ -1,43 +1,25 @@
 # User Guide
 
-## Tables of contents
+## Table of Contents
 1. Description
-<br/>
 2. Features
-<br/>
-2.1. Add task
-<br/>
-2.2. List task
-<br/>
-2.3. Mark task as done
-<br/>
-2.4. Find task
-<br/>
-2.5. Delete task
-<br/>
-2.6. Update description of task
-<br/>
-2.7. Exit from application
-<br/>
+<br/> 2.1. Add task
+<br/> 2.2. List task
+<br/> 2.3. Mark task as done
+<br/> 2.4. Find task
+<br/> 2.5. Delete task
+<br/> 2.6. Update description of task
+<br/> 2.7. Exit from application
 3. Usage
-<br/>
-3.1. `todo` - Adds a Todo task to the task list
-<br/>
-3.2. `deadline` - Adds a Deadline task to the task list
-<br/>
-3.3. `event` - Adds a Event task to the task list
-<br/>
-3.4. `list` - Lists all tasks in the task list
-<br/>
-3.5. `done` - Marks a task as done
-<br/>
-3.6. `find` - Looks for a particular task
-<br/>
-3.7. `delete` - Deletes a task from the task list
-<br/>
-3.8. `update` - Updates the description of a task
-<br/>
-3.9. `manual` - Shows the different commands
+<br/> 3.1. `todo` - Adds a Todo task to the task list
+<br/> 3.2. `deadline` - Adds a Deadline task to the task list
+<br/> 3.3. `event` - Adds a Event task to the task list
+<br/> 3.4. `list` - Lists all tasks in the task list
+<br/> 3.5. `done` - Marks a task as done
+<br/> 3.6. `find` - Looks for a particular task
+<br/> 3.7. `delete` - Deletes a task from the task list
+<br/> 3.8. `update` - Updates the description of a task
+<br/> 3.9. `manual` - Shows the different commands
 <br/>
 4. Acknowledgements
 
