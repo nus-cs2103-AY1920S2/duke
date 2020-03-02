@@ -1,8 +1,5 @@
 package duke.windows;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import duke.Duke;
 import duke.components.DialogBox;
 import javafx.fxml.FXML;
