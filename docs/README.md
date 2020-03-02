@@ -207,7 +207,7 @@ Now you have 2 tasks in the list.
 
 
 ### 3.7 Find tasks using a keyword: `find`
-Lists out all tasks that contain a specific keyword.
+Lists out all tasks that contain a specific keyword.  
 Note: keyword is case specific.
 
 Format: `find KEYWORD`
