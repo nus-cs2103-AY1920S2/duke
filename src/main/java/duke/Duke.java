@@ -2,6 +2,7 @@ package duke;
 
 import duke.Ui.Ui;
 import duke.command.Command;
+import duke.command.PriorityCommand;
 import duke.parser.Parser;
 import duke.storage.TaskStorage;
 import duke.task.Task;

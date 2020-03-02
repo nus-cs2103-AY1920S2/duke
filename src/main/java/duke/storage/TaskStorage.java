@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.task.Priority;
 import exception.IllegalCommandException;
 import duke.task.Task;
 import duke.task.TaskDispatch;
@@ -122,5 +123,31 @@ public class TaskStorage {
         } catch (IOException e) {
             // default behavior is that nothing happens
         }
+    }
+
+    public void updateTaskPriority(Priority priority, int taskNumber) {
+        this.taskList.get(taskNumber - 1).setPriority(priority);
+        ArrayList<String> tempArray = new ArrayList<>();
+        int tempCounter = 0;
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(this.file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (scanner.hasNextLine()) {
+            tempCounter++;
+            if (tempCounter == taskNumber) {
+                String lineToModify = scanner.nextLine();
+                tempArray.add(lineToModify.replace(Task.CROSS, Task.TICK));
+                continue;
+            }
+            tempArray.add(scanner.nextLine());
+        }
+
+        // add the contents of auxillary array to the file
+        replaceTasksInFile(tempArray);
+
     }
 }

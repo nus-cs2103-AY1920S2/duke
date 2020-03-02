@@ -16,10 +16,13 @@ public class PriorityCommand extends Command {
         switch (priority) {
         case "HIGH":
             this.priority = Priority.HIGH;
+            break;
         case "MEDIUM":
             this.priority = Priority.MEDIUM;
+            break;
         case "LOW":
             this.priority = Priority.LOW;
+            break;
         }
     }
 
@@ -50,5 +53,9 @@ public class PriorityCommand extends Command {
         } else {
             return "You do not have any tasks with priority " + this.priority;
         }
+    }
+
+    public Priority getPriority() {
+        return this.priority;
     }
 }

@@ -2,3 +2,4 @@
 [E][?] project meeting  (at:  mon 2-4pm)
 [T][?] borrow book
 [D][?] return book  (by:  Sunday)
+[T][?] kill bill
