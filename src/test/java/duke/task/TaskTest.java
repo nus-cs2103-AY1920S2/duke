@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -16,7 +18,7 @@ public class TaskTest {
     @Test
     public void testGetDescription() {
         assertEquals("This is a test description", new Task("This is a test description").getDescription());
-        assertEquals("Same here", new Task("Same here", true).getDescription());
+        assertEquals("Same here", new Task("Same here", true, LocalDateTime.now()).getDescription());
     }
 
     /**
@@ -25,7 +27,7 @@ public class TaskTest {
     @Test
     public void testIsCompleted() {
         assertFalse(new Task("Test description").isCompleted());
-        assertTrue(new Task("Hello world", true).isCompleted());
+        assertTrue(new Task("Hello world", true, LocalDateTime.now()).isCompleted());
     }
 
     /**

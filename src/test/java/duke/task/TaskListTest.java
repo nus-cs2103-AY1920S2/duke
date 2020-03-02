@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -33,8 +34,12 @@ public class TaskListTest {
         ArrayList<Task> taskArrayList = new ArrayList<>();
         taskArrayList.add(new ToDo("Item 1"));
         taskArrayList.add(new ToDo("Item 2"));
-        TaskList testTaskList = new TaskList(taskArrayList);
+        ArrayList<Task> archiveArrayList = new ArrayList<>();
+        archiveArrayList.add(new ToDo("Archived item 1"));
+        archiveArrayList.add(new ToDo("Archived item 2"));
+        TaskList testTaskList = new TaskList(taskArrayList, archiveArrayList);
         assertEquals(2, testTaskList.size());
+        assertEquals(2, testTaskList.archiveSize());
     }
 
     /**
@@ -132,7 +137,7 @@ public class TaskListTest {
     public void completeTask_taskAlreadyCompleted_exceptionThrown() {
         try {
             TaskList testTaskList = new TaskList();
-            Task testTask = new ToDo("Testing using this!", true);
+            Task testTask = new ToDo("Testing using this!", true, LocalDateTime.now());
             testTaskList.addTask(testTask);
             assertTrue(testTask.isCompleted());
             testTaskList.completeTask(0);
@@ -149,8 +154,19 @@ public class TaskListTest {
     public void testGetTaskArray() {
         ArrayList<Task> taskArrayList = new ArrayList<>();
         taskArrayList.add(new ToDo("No!!"));
-        TaskList testTaskList = new TaskList(taskArrayList);
+        TaskList testTaskList = new TaskList(taskArrayList, new ArrayList<>());
         assertEquals(taskArrayList, testTaskList.getTaskArray());
+    }
+
+    /**
+     * Tests the {@code getArchiveArray()} method of {@code TaskList}.
+     */
+    @Test
+    public void testGetArchiveArray() {
+        ArrayList<Task> archiveArrayList = new ArrayList<>();
+        archiveArrayList.add(new ToDo("No!!"));
+        TaskList testTaskList = new TaskList(new ArrayList<>(), archiveArrayList);
+        assertEquals(archiveArrayList, testTaskList.getArchiveArray());
     }
 
     /**

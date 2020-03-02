@@ -81,6 +81,7 @@ public class AdminCommandHandlerTest {
         SaveState saveStateMock = mock(SaveState.class);
         ArrayList<Task> dummyTaskArray = new ArrayList<>();
         when(saveStateMock.getTasksFromSave()).thenReturn(dummyTaskArray);
+        when(saveStateMock.getArchiveFromSave()).thenReturn(dummyTaskArray);
         when(saveStateMock.getLastCommand()).thenReturn(previousCommand);
 
         SaveStateStack saveStateStackMock = mock(SaveStateStack.class);
@@ -102,9 +103,11 @@ public class AdminCommandHandlerTest {
 
         verify(saveStateStackMock, times(1)).pop();
         verify(taskListMock, times(1)).replaceTaskList(dummyTaskArray);
+        verify(taskListMock, times(1)).replaceArchive(dummyTaskArray);
         verify(storageMock, times(1)).save(taskListMock);
         verify(uiMock, times(1)).printUndoMessage(previousCommand);
         verify(saveStateMock, times(1)).getTasksFromSave();
+        verify(saveStateMock, times(1)).getArchiveFromSave();
         verify(saveStateMock, times(1)).getLastCommand();
 
         verifyNoMoreInteractions(saveStateStackMock);

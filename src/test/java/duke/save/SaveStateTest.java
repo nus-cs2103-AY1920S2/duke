@@ -24,10 +24,12 @@ public class SaveStateTest {
     @Test
     public void testConstructor() {
         TaskList taskListMock = mock(TaskList.class);
-        when(taskListMock.getImmutableDeepCopy()).thenReturn(new ArrayList<>());
+        when(taskListMock.getImmutableDeepCopyOfTasks()).thenReturn(new ArrayList<>());
+        when(taskListMock.getImmutableDeepCopyOfArchive()).thenReturn(new ArrayList<>());
 
         new SaveState(taskListMock, "Test command");
-        verify(taskListMock, times(1)).getImmutableDeepCopy();
+        verify(taskListMock, times(1)).getImmutableDeepCopyOfTasks();
+        verify(taskListMock, times(1)).getImmutableDeepCopyOfArchive();
         verifyNoMoreInteractions(taskListMock);
     }
 
@@ -37,13 +39,16 @@ public class SaveStateTest {
     @Test
     public void testGetters() {
         TaskList taskListMock = mock(TaskList.class);
-        when(taskListMock.getImmutableDeepCopy()).thenReturn(new ArrayList<>());
+        when(taskListMock.getImmutableDeepCopyOfTasks()).thenReturn(new ArrayList<>());
+        when(taskListMock.getImmutableDeepCopyOfArchive()).thenReturn(new ArrayList<>());
 
         SaveState saveState = new SaveState(taskListMock, "Test command");
         assertEquals(saveState.getLastCommand(), "Test command");
         assertEquals(0, saveState.getTasksFromSave().size());
+        assertEquals(0, saveState.getArchiveFromSave().size());
         assertNotNull(saveState.getTasksFromSave());
-        verify(taskListMock, times(1)).getImmutableDeepCopy();
+        verify(taskListMock, times(1)).getImmutableDeepCopyOfTasks();
+        verify(taskListMock, times(1)).getImmutableDeepCopyOfArchive();
         verifyNoMoreInteractions(taskListMock);
     }
 }

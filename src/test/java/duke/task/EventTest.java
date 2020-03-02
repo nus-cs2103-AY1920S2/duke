@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -20,7 +22,7 @@ public class EventTest {
         assertFalse(testEvent.isCompleted());
         testEvent.completeTask();
         assertTrue(testEvent.isCompleted());
-        assertTrue(new Event("Already completed", "Random time", true).isCompleted());
+        assertTrue(new Event("Already completed", "Random time", true, LocalDateTime.now()).isCompleted());
     }
 
     /**
@@ -31,6 +33,6 @@ public class EventTest {
         assertEquals("[E][\u2718] New Event (at: Home)", // cross mark
                 new Event("New Event", "Home").toString());
         assertEquals("[E][\u2713] Go for a run (at: 3-5pm)", // tick mark
-                new Event("Go for a run", "3-5pm", true).toString());
+                new Event("Go for a run", "3-5pm", true, LocalDateTime.now()).toString());
     }
 }

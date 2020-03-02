@@ -86,26 +86,54 @@ public class StorageTest {
                 throw new DuchessException("Folder failed to be created!");
             }
         }
+        // Preparing list of active tasks
         Task[] taskArray = new Task[3];
         taskArray[0] = new ToDo("Task number 1");
-        taskArray[1] = new Event("Task number 2", "2-4pm", true);
+        taskArray[1] = new Event("Task number 2", "2-4pm", true, LocalDateTime.now());
         taskArray[2] = new Deadline("Task number 3", LocalDateTime.now());
+
+        // Preparing list of archived tasks
+        Task[] archiveArray = new Task[3];
+        archiveArray[0] = new ToDo("Archived task number 1", true, LocalDateTime.now());
+        archiveArray[1] = new Event("Archived task number 2", "2-4pm", true, LocalDateTime.now());
+        archiveArray[2] = new Deadline("Archived Task number 3", LocalDateTime.now(), true, LocalDateTime.now(), true);
+
+        // Writing the files
         FileWriter fileWriter = new FileWriter("storageTestThree/data.json");
         Gson gson = new Gson();
-        fileWriter.write(gson.toJson(taskArray, Task[].class));
+        StorageContainer storageContainer = new StorageContainer(taskArray, archiveArray);
+        fileWriter.write(gson.toJson(storageContainer, StorageContainer.class));
         fileWriter.close();
+
+        // Testing
         Storage storageThree = new Storage("storageTestThree/data.json");
-        ArrayList<Task> taskArrayList = storageThree.load();
+        ArrayList<ArrayList<Task>> loadedTasks = storageThree.load();
+
+        // Checking if all active tasks are correctly retrieved
+        ArrayList<Task> taskArrayList = loadedTasks.get(0);
         assertEquals(3, taskArrayList.size());
         for (int i = 0; i < 3; i++) {
             assertEquals(taskArray[i].getDescription(), taskArrayList.get(i).getDescription());
             assertEquals(taskArray[i].isCompleted(), taskArrayList.get(i).isCompleted());
+            assertEquals(taskArray[i].getCompletionTime(), taskArrayList.get(i).getCompletionTime());
         }
         assertTrue(taskArrayList.get(1) instanceof Event);
         assertEquals(((Event) taskArray[1]).getTimeFrame(), ((Event) taskArrayList.get(1)).getTimeFrame());
         assertTrue(taskArrayList.get(2) instanceof Deadline);
-        assertEquals(((Deadline) taskArray[2]).getDeadline(),
-                ((Deadline) taskArrayList.get(2)).getDeadline());
+        assertEquals(((Deadline) taskArray[2]).getDeadline(), ((Deadline) taskArrayList.get(2)).getDeadline());
+
+        // Checking if all archived tasks are correctly retrieved
+        ArrayList<Task> archiveArrayList = loadedTasks.get(1);
+        assertEquals(3, archiveArrayList.size());
+        for (int i = 0; i < 3; i++) {
+            assertEquals(archiveArray[i].getDescription(), archiveArrayList.get(i).getDescription());
+            assertEquals(archiveArray[i].isCompleted(), archiveArrayList.get(i).isCompleted());
+            assertEquals(archiveArray[i].getCompletionTime(), archiveArrayList.get(i).getCompletionTime());
+        }
+        assertTrue(archiveArrayList.get(1) instanceof Event);
+        assertEquals(((Event) archiveArray[1]).getTimeFrame(), ((Event) archiveArrayList.get(1)).getTimeFrame());
+        assertTrue(archiveArrayList.get(2) instanceof Deadline);
+        assertEquals(((Deadline) archiveArray[2]).getDeadline(), ((Deadline) archiveArrayList.get(2)).getDeadline());
     }
 
     /**
@@ -118,7 +146,7 @@ public class StorageTest {
     public void loadAndSave_longFilePathWithoutFolder_exceptionThrown() throws DuchessException {
         TaskList taskList = new TaskList();
         taskList.addTask(new ToDo("Task number 1"));
-        taskList.addTask(new Event("Task number 2", "2-4pm", true));
+        taskList.addTask(new Event("Task number 2", "2-4pm", true, LocalDateTime.now()));
         taskList.addTask(new Deadline("Task number 3", LocalDateTime.now()));
         Storage storageFour = new Storage("storageTestFour/oneMoreFolder/data.json");
         try {
@@ -164,10 +192,11 @@ public class StorageTest {
         TaskList taskList = new TaskList();
         taskList.addTask(new ToDo("Go for a run"));
         taskList.addTask(new Event("Movie", "5-7pm"));
-        taskList.addTask(new Deadline("Exercise", LocalDateTime.now(), true));
+        taskList.addTask(new Deadline("Exercise", LocalDateTime.now(), true, LocalDateTime.now(), true));
         Storage storageSix = new Storage("storageTestSix/data.json");
         storageSix.save(taskList);
-        TaskList loadedTaskList = new TaskList(storageSix.load());
+        ArrayList<ArrayList<Task>> loadedTasks = storageSix.load();
+        TaskList loadedTaskList = new TaskList(loadedTasks.get(0), loadedTasks.get(1));
         assertEquals(3, loadedTaskList.size());
         for (int i = 0; i < 3; i++) {
             assertEquals(taskList.getTask(i).getDescription(), loadedTaskList.getTask(i).getDescription());
