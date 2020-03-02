@@ -38,6 +38,7 @@ public class Parser {
                 break;
             case "delete":
                 index = Integer.parseInt(arr[1]) - 1;
+
                 if (arr.length > 2) {
                     Controller.raiseException(new Exception(" More content than needed for delete task."));
                 } else {
@@ -81,7 +82,9 @@ public class Parser {
                     Controller.raiseException(e);
                 }
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (NumberFormatException e1) {
+            throw new Exception(" Nice try but index must be a whole number, alright?");
+        } catch (ArrayIndexOutOfBoundsException e2) {
             throw new Exception(" A tad too few words, innit? ");
         }
         return Optional.empty();
