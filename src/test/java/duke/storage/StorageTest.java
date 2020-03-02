@@ -4,8 +4,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
+import duke.tags.Tag;
+import duke.tags.TagList;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
 import duke.tasks.Event;
@@ -16,6 +21,7 @@ public class StorageTest {
     private static Storage storage = new Storage("data/duke.txt");
     private static Ui ui = new Ui();
     private static TaskList tasks = new TaskList();
+    private static TagList tags;
 
     /**
      * Initialise the test environment with seed data.
@@ -25,9 +31,10 @@ public class StorageTest {
     @BeforeAll
     public static void initAll() throws DukeException {
         // Load duke.txt with correct seed data
-        tasks.addTask(new ToDo("Todo 1"));
-        tasks.addTask(new Deadline("Deadline 1 /by 2020-02-03"));
-        tasks.addTask(new Event("Event 1 /at 2020-05-01"));
+        tasks.addTask(new ToDo("Todo 1", new ArrayList<Tag>()));
+        tasks.addTask(new Deadline("Deadline 1", LocalDate.parse("2020-02-03"), new ArrayList<Tag>()));
+        tasks.addTask(new Event("Event 1", LocalDate.parse("2020-05-01"), new ArrayList<Tag>()));
+        tags = new TagList(tasks);
     }
 
     /**
