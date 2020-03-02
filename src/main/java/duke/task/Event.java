@@ -25,17 +25,20 @@ public class Event extends Task {
     }
 
     /**
-     * Initialises the {@code Event} instance with its description, timeFrame
-     * and completion status.
+     * Initialises the {@code Event} instance with all of its information. Mainly used
+     * by {@code Storage} to regenerate instances.
      *
      * @param description    Written description of the task.
      * @param timeFrame      {@code String} indicating the timeFrame of the task.
      * @param isCompleted    {@code boolean} value indicating whether the task is completed.
+     * @param creationTime   {@code LocalDateTime} object indicating the time of creation of
+     *                       the task.
      * @param completionTime {@code LocalDateTime} object indicating the time of
      *                       completion of the task.
      */
-    public Event(String description, String timeFrame, boolean isCompleted, LocalDateTime completionTime) {
-        super(description, isCompleted, completionTime);
+    public Event(String description, String timeFrame, boolean isCompleted,
+                 LocalDateTime creationTime, LocalDateTime completionTime) {
+        super(description, isCompleted, creationTime, completionTime);
         this.timeFrame = timeFrame;
     }
 

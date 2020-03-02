@@ -44,8 +44,8 @@ public class RecurringDeadline extends Deadline {
     }
 
     /**
-     * Initialises the {@code RecurringDeadline} instance with its description, deadline and
-     * completion status.
+     * Initialises the {@code RecurringDeadline} instance with all of its information. Mainly used
+     * by {@code Storage} to regenerate instances.
      *
      * @param description    Written description of the task.
      * @param deadline       {@code LocalDateTime} object indicating the deadline of
@@ -57,9 +57,9 @@ public class RecurringDeadline extends Deadline {
      *                       completion of the task.
      */
     public RecurringDeadline(String description, LocalDateTime deadline, Frequency frequency,
-                             LocalDateTime repeatEndTime, boolean isCompleted,
+                             LocalDateTime repeatEndTime, boolean isCompleted, LocalDateTime creationTime,
                              LocalDateTime completionTime, boolean isCompletedOnTime) {
-        super(description, deadline, isCompleted, completionTime, isCompletedOnTime);
+        super(description, deadline, isCompleted, creationTime, completionTime, isCompletedOnTime);
         this.frequency = frequency;
         this.repeatEndTime = repeatEndTime;
     }

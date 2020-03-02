@@ -28,20 +28,22 @@ public class Deadline extends Task {
     }
 
     /**
-     * Initialises the {@code Deadline} instance with its description, deadline and
-     * completion status.
+     * Initialises the {@code Deadline} instance with all of its information. Mainly used
+     * by {@code Storage} to regenerate instances.
      *
      * @param description    Written description of the task.
      * @param deadline       {@code LocalDateTime} object indicating the deadline of
      *                       the task.
      * @param isCompleted    {@code boolean} value indicating whether the task is
      *                       completed.
+     * @param creationTime   {@code LocalDateTime} object indicating the time of creation of
+     *                       the task.
      * @param completionTime {@code LocalDateTime} object indicating the time of
      *                       completion of the task.
      */
-    public Deadline(String description, LocalDateTime deadline, boolean isCompleted,
+    public Deadline(String description, LocalDateTime deadline, boolean isCompleted, LocalDateTime creationTime,
                     LocalDateTime completionTime, boolean isCompletedOnTime) {
-        super(description, isCompleted, completionTime);
+        super(description, isCompleted, creationTime, completionTime);
         this.deadline = deadline;
         this.isCompletedOnTime = isCompletedOnTime;
     }
@@ -74,6 +76,7 @@ public class Deadline extends Task {
     protected Object clone() throws DuchessException {
         Deadline clonedDeadline = (Deadline) super.clone();
         clonedDeadline.deadline = this.deadline; // as LocalDateTime is immutable
+        clonedDeadline.isCompletedOnTime = this.isCompletedOnTime;
         return clonedDeadline;
     }
 
