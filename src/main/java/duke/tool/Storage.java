@@ -28,6 +28,16 @@ public class Storage {
      */
     public Storage(String filePath, TaskList taskList) {
         this.filePath = filePath;
+        try {
+            File taskFile = new File("data/dukeStorage.txt");
+            if (!taskFile.exists()) {
+                taskFile.getParentFile().mkdirs();
+                taskFile.createNewFile();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.taskList = taskList;
     }
 
