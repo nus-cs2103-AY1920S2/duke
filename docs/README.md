@@ -51,7 +51,7 @@ The image looks like this:
 ### 2.3 Sample Interaction
 Below is a sample interaction with the Duke Application.  
 
-<img src = "Ui.png" width = "250">
+<img src = "Ui.png" width = "300">
 
 
 ## 3. Features
@@ -113,7 +113,7 @@ I've added this task:
 Now you have 1 task in the list.
 ```
 
-### 3.4 List all tasks: `list`(#3.4)
+### 3.4 List all tasks: `list`
 List all tasks saved in Duke.
 
 Format: `list`
@@ -137,7 +137,7 @@ Mark a currently saved task or event as done.
 
 Format: `done INDEX`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#3.4)
+- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list)
 
 **Example of usage:** 
 
