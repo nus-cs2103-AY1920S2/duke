@@ -258,6 +258,7 @@ Got it, the updated deadline looks like:
 ### 3.9 Exit Duke: `bye`
 Exits the Duke Application.  
 The Duke Application will close shortly after the command is entered.
+The buffer betweeen the entering of the command and the closing of the program is approximately 1 second to ensure the User can see Duke's response.
 
 Format: `bye`
 
