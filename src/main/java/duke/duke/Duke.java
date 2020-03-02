@@ -12,9 +12,8 @@ public class Duke {
 
     /**
      * Initialise Duke object.
-     * @param filePath of saved file
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
         this.tasksnum = new TasksNum();
@@ -33,30 +32,13 @@ public class Duke {
     /**
      * Executes the Duke object.
      */
-    public void run() {
-        System.out.println(ui.greet());
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                System.out.println(ui.showLine()); // show the divider line ("_______")
-                //System.out.println(tasksnum.getNum());
-                Command c = Parser.parse(fullCommand);
-                //System.out.println(tasks.getSize());
-                //System.out.println(tasks.getTask(0) + "HEY");
-                System.out.println(c.execute(tasks, storage, ui, tasksnum));
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                System.out.println(ui.showError(e.getMessage()));
-            } finally {
-                System.out.println(ui.showLine());
-            }
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage, ui, tasksnum);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("...duke/data/tasks.txt").run();
-        //System.out.println("Hi");
     }
 }
 

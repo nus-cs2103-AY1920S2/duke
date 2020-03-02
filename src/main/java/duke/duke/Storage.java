@@ -69,6 +69,7 @@ public class Storage {
             Todo todo = new Todo(Integer.toString(tasks)); //dummy Todo for tasksnum
             todo.doAct();
             lst.add(todo);//add in tasknum
+            System.out.println("Added");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,7 +108,7 @@ public class Storage {
 
     /**
      * Formats command to fit date into LocalDate format.
-     * @param temp String array that contains date
+     * @param date String array that contains date
      * @return LocalDate object or Deadline/Event object
      */
     private LocalDate setDate(String date) {
