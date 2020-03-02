@@ -95,7 +95,7 @@ Here are the tasks containing cs2103t
            
 ### `Tag` - Returns list of tasks containing tag.
 
-[tag]
+tag tagname
 
 Example of usage: 
 tag cs2103T
