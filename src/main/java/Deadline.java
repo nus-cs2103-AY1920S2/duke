@@ -21,7 +21,7 @@ public class Deadline extends Task{
         return desc;
     }
 
-    public static String getDate(String input) {
+    public static String getDate(String input) { //YYYY-MM-DD
         String[] tmp = input.split(" /by ");
         String[] inputs = tmp[1].split(" ");
         return inputs[0];

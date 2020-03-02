@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class Task implements Serializable {
     protected String description;
@@ -164,14 +163,7 @@ public class Task implements Serializable {
         return date;
     }
 
-    public static void viewSchedule(String input) {
-        LocalDate date = LocalDate.parse(input);
-        int counter = 1;
-        for(Task t : taskArrList) {
-            if(t.getDate().equals(date)) {
-                System.out.println(counter + "." + t.toString());
-            }
-            counter++;
-        }
+    public void doTask() {
+        this.isDone = true;
     }
 }

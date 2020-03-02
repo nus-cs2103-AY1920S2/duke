@@ -1,5 +1,3 @@
-import java.io.*;
-import java.util.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,13 +5,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Duke extends Application{
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui = new Ui();
+    private Parser parser = new Parser();
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -23,67 +28,65 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.loadSavedData());
+        } catch (IOException e) {
+            tasks = new TaskList();
+            System.out.println(e);
+            ui.noExistingSaveFile();
+        }
+    }
+
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        Task[] arr = new Task[100];
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("    Hello! I'm Duke\n" + "  What can I do for you?");
-        Task.loadSavedData(); //check if there is previous list avail and load if avail
-        while (sc.hasNext()) {
+        new Duke("data/saved.txt").run();
+    }
+
+    public void run() {
+        ui.sayHi();
+        while (parser.hasNext()) {
             try {
-                String input = sc.nextLine();
-                String[] inputs = input.split(" ", 2);
-                String command = inputs[0];
-                char[] inputArr = input.toCharArray();
-                if (command.equals("todo") || command.equals("t")) { //create todo
-                    if (inputs.length == 1) {
+                String input = parser.scanLine();
+                if (parser.commandEquals(parser.getCommand(input), "todo")) {
+                    if (!parser.hasDetails(input)) {
                         throw new EmptyDescriptionException();
                     }
                     ;
-                    String info = Todo.generateTodoDesc(inputArr);
-                    Todo task = new Todo(info);
-                    Task.addTask(task);
-                } else if (command.equals("event") || command.equals("e")) { //create event
-                    if (inputs.length == 1) {
+                    tasks.addTask(new Todo(parser.getInfo(input)));
+                } else if (parser.commandEquals(parser.getCommand(input), "event")) {
+                    if (!parser.hasDetails(input)) {
                         throw new EmptyDescriptionException();
                     }
                     ;
-                    String date, desc;
-                    date = Event.getEventDate(inputs[1]);
-                    desc = Event.getEventDesc(inputArr);
-                    Event task = new Event(desc, date);
-                    Task.addTask(task);
-                } else if (command.equals("deadline") || command.equals("d")) { //create deadline
-                    if (inputs.length == 1) {
+                    tasks.addTask(new Event(Event.getEventDesc(input.toCharArray()), Event.getEventDate(parser.
+                            getInfo(input))));
+                } else if (parser.commandEquals(parser.getCommand(input), "deadline")) {
+                    if (!parser.hasDetails(input)) {
                         throw new EmptyDescriptionException();
                     }
                     ;
-                    String by, desc;
-                    by = Deadline.getDate(inputs[1]);
-                    desc = Deadline.getDesc(inputArr);
-                    Deadline task = new Deadline(desc, by);
-                    Task.addTask(task);
-                } else if (command.equals("list") || command.equals ("l")) { //list command
-                    Task.showTasks();
-                } else if (command.equals("done") || command.equals("do")) { //done command
-                    Task.taskDone(input);
-                } else if (command.equals("bye") || command.equals("b")) { //bye command
-                    Task.saveToFile();
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
-                } else if (command.equals("delete") || command.equals("del")) { //delete command
-                    Task.deleteTask(inputs[1]);
-                } else if (command.equals("find") || command.equals("f")) { //find command
-                    Task.find(inputs[1]);
-                } else if (command.equals("view") || command.equals("v")) { //view schedules
-                    Task.viewSchedule(inputs[1]);
-                } else if(command.equals("contact") || command.equals("c")) {
-                    Contact.addToContacts(inputs[1]);
+                    tasks.addTask(new Deadline(Deadline.getDesc(input.toCharArray()), Deadline.getDate(parser.
+                            getInfo(input))));
+                } else if (parser.commandEquals(parser.getCommand(input), "list")) {
+                    tasks.showTasks();
+                } else if (parser.commandEquals(parser.getCommand(input), "done")) {
+                    tasks.taskDone(parser.getTaskNum(input));
+                } else if (parser.commandEquals(parser.getCommand(input), "bye")) {
+                    try {
+                        storage.saveToFile(tasks.getTaskArrList());
+                        ui.sayBye();
+                        break;
+                    } catch (FileNotFoundException e) {
+
+                    }
+                } else if (parser.commandEquals(parser.getCommand(input), "delete")) {
+                    tasks.deleteTask(parser.getTaskNum(input));
+                } else if (parser.commandEquals(parser.getCommand(input), "find")) {
+                    tasks.find(parser.getInfo(input));
+                } else if (parser.commandEquals(parser.getCommand(input), "view")) {
+                    tasks.viewSchedule(parser.getInfo(input));
                 } else {
                     throw new InvalidCommandException();
                 }
@@ -92,6 +95,7 @@ public class Duke extends Application{
             }
         }
     }
+
 
     @Override
     public void start(Stage stage){

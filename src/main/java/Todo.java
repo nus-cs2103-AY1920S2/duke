@@ -1,7 +1,8 @@
-import java.time.LocalDate;
 import java.util.*;
+import java.time.LocalDate;
 
 public class Todo extends Task{
+    LocalDate date = null;
 
     public Todo(String description) {
         super(description);
@@ -17,9 +18,8 @@ public class Todo extends Task{
 
     @Override
     public LocalDate getDate() {
-        return null;
+        return this.date;
     }
-
     @Override
     public String saveToText() {
         String output;
