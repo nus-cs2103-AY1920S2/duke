@@ -162,7 +162,6 @@ public class Duke extends Application {
         userInput.clear();
         if (controller.getStatus()) {
             try {
-                Thread.sleep(1500);
                 System.exit(0);
             } catch (Exception e) {
                 Controller.raiseException(e);
