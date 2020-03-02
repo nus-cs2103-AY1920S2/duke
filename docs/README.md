@@ -1,5 +1,6 @@
 # User Guide
 
+## Tables of contents
 1. Description
 <br/>
 2. Features
