@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.stream.Collectors;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 
 public class Duke {
 
@@ -10,7 +12,9 @@ public class Duke {
     private TaskList taskList;
     private Boolean hasEnded = false;
     private Parser parser;
-    private static Storage storage = new Storage("Data/Duke.txt");
+    private static Path filePath = Paths.get("Data", "Duke.txt");
+    private static Storage storage = new Storage(filePath.toString());
+
 
     public Duke() {
         this.ui = new Ui();
