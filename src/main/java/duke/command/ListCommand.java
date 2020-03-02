@@ -25,11 +25,11 @@ public class ListCommand extends Command {
     @Override
     public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
         try {
-            String lst = "";
+            StringBuilder lst = new StringBuilder();
             for (int i = 0; i < storage.size(); i++) {
-                lst += String.format(" %d -%s\n", i + 1, storage.get(i));
+                lst.append(String.format("\t%d -%s\n", i + 1, storage.get(i)));
             }
-            Ui.printList(lst);
+            Ui.printList(lst.toString());
 
         } catch (Exception e) {
             Controller.raiseException(e);

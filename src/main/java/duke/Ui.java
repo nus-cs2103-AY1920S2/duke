@@ -35,7 +35,7 @@ public class Ui {
      * @param size the number of Task objects in the current list after the addition.
      */
     public static void printAdd(String str, int size) {
-        content = String.format(" Added:\t %s\n You now have %d tasks in your list\n", str, size);
+        content = String.format(" Added:\n\t %s\n You now have %d tasks in your list\n", str, size);
         System.out.println(content);
     }
 
@@ -46,7 +46,7 @@ public class Ui {
      * @param size the number of Task objects in the current list after the deletion.
      */
     public static void printDel(String str, int size) {
-        content = String.format(" Your burden has been lifted, removed: \n\t %s\n You now have %d tasks in your list.\n",
+        content = String.format(" Your burden has been lifted, removed: \n\t%s\n You now have %d tasks in your list.\n",
                 str, size);
         System.out.println(content);
     }
@@ -58,7 +58,7 @@ public class Ui {
      * @param numberOfUndone the number of uncompleted Task objects left in the current list after the completion.
      */
     public static void printDone(String str, int numberOfUndone) {
-        content = String.format(" Task successfully completed: \n\t %s\n You still have %d tasks to complete.\n",
+        content = String.format(" Task successfully completed: \n\t%s\n You still have %d tasks to complete.\n",
                 str, numberOfUndone);
         System.out.println(content);
     }
