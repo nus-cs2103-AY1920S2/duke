@@ -11,7 +11,7 @@ store up to 1TB of tasks!! (for all you busy bees out there)
 have your lists from previous sessions stored and restored on reboots
 
 ### How many types of tasks? THREE **GEEZ**
-Create at least three types of tasks (todo, deadline, event AND period)
+Create at least three types of tasks (todo, deadline, event AND BONUS: period)
 
 ### Flexible datetime
 use a multitude of datetime formats when entering *wow*
@@ -25,9 +25,9 @@ catch up on the funny things that millenials are laughing on the internet (to th
 
 * `list` - lists all tasks 
 * `todo {task detail}` - creates task with task detail as the description of the task
-* `event {task detail /at datetime}` - creates task with task detail as the description of the task
-* `event {task detail /by datetime}` - creates task with task detail as the description of the task
-* `period {task detail /start datetime /end datetime*}` - creates task with task detail as the description of the task
+* `event {task detail /at datetime}` - creates task with task detail as the description of the task with a datetime
+* `deadline {task detail /by datetime}` - creates task with task detail as the description of the task with a datetime
+* `period {task detail /start datetime /end datetime*}` - creates task with task detail as the description of the task with start and end datetimes
 * `delete {task index}` - delete task
 * `done {task index}` - mark task as done
 * `bye` - closes duke
