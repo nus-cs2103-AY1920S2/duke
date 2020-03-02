@@ -65,7 +65,12 @@ public class Storage {
      */
     private void loadTask(String taskString, int lineNo) throws DukeException {
         String[] splitString = taskString.split(" \\| ");
-        ArrayList<Tag> tags = loadTaskTags(splitString[3]);
+        ArrayList<Tag> tags;
+        if (splitString.length < 4) {
+            tags = new ArrayList<Tag>();
+        } else {
+            tags = loadTaskTags(splitString[3]);
+        }
         switch (splitString[0]) {
         case "T":
             taskList.add(new ToDo(splitString[2], tags));
