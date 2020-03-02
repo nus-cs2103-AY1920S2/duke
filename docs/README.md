@@ -113,7 +113,7 @@ I've added this task:
 Now you have 1 task in the list.
 ```
 
-### 3.4 List all tasks: `list`
+### 3.4 List all tasks: `list`(#3.4)
 List all tasks saved in Duke.
 
 Format: `list`
@@ -137,7 +137,7 @@ Mark a currently saved task or event as done.
 
 Format: `done INDEX`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](src/README.md#3.4)
+- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/README.md#3.4)
 
 **Example of usage:** 
 
@@ -156,7 +156,7 @@ Deletes a currently saved task or event from Duke.
 
 Format: `delete INDEX`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](src/README.md#3.4)
+- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/README.md#3.4)
 
 **Example of usage:** 
 
@@ -196,7 +196,7 @@ Changes the date and timing for a deadline or the details for an event.
 
 Format: `snooze INDEX /to TASK_FORMAT`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](src/README.md#3.4)
+- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/README.md#3.4)
 - The format for `TASK_FORMAT` must be appropriate for the type of task being rescheduled.
   - Case 1: rescheduled task is a deadline. 
     Format: `snooze INDEX /to DATE TIME`
