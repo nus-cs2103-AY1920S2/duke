@@ -41,28 +41,28 @@ public class Parser {
         String command = this.getCommand();
         String taskAction = this.getTaskAction();
         switch (command) {
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ListCommand();
-            case "done":
-                int[] arrayOfDoneIndexes = this.getTaskIndexArray();
-                return new DoneCommand(arrayOfDoneIndexes);
-            case "delete":
-                int[] arrayOfDeleteIndexes = this.getTaskIndexArray();
-                return new DeleteCommand(arrayOfDeleteIndexes);
-            case "find":
-                return new FindCommand(taskAction);
-            case "todo":
-                return new TodoCommand(taskAction);
-            case "deadline":
-                LocalDateTime deadlineDate = this.getTaskDate();
-                return new DeadlineCommand(taskAction, deadlineDate);
-            case "event":
-                LocalDateTime eventDate = this.getTaskDate();
-                return new EventCommand(taskAction, eventDate);
-            default:
-                return null;
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "done":
+            int[] arrayOfDoneIndexes = this.getTaskIndexArray();
+            return new DoneCommand(arrayOfDoneIndexes);
+        case "delete":
+            int[] arrayOfDeleteIndexes = this.getTaskIndexArray();
+            return new DeleteCommand(arrayOfDeleteIndexes);
+        case "find":
+            return new FindCommand(taskAction);
+        case "todo":
+            return new TodoCommand(taskAction);
+        case "deadline":
+            LocalDateTime deadlineDate = this.getTaskDate();
+            return new DeadlineCommand(taskAction, deadlineDate);
+        case "event":
+            LocalDateTime eventDate = this.getTaskDate();
+            return new EventCommand(taskAction, eventDate);
+        default:
+            return null;
         }
     }
 

@@ -2,8 +2,6 @@ package commands;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-
-import exception.DukeException;
 import storage.Storage;
 import task.Event;
 import task.TaskList;
@@ -13,6 +11,12 @@ public class EventCommand extends Command {
     private String taskAction;
     private LocalDateTime eventDate;
 
+    /**
+     * Constructs an event command.
+     *
+     * @param taskAction is the task action.
+     * @param eventDate is the time and date of the event.
+     */
     public EventCommand(String taskAction, LocalDateTime eventDate) {
         super();
         this.taskAction = taskAction;
@@ -20,7 +24,6 @@ public class EventCommand extends Command {
     }
 
     /**
-     *
      * Executes the event command.
      *
      * @param tasks is task list for in-memory.

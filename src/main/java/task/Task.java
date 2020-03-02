@@ -1,13 +1,16 @@
 package task;
 
-import java.time.LocalDateTime;
-
 public class Task {
 
     private String taskAction;
     private boolean isDone;
     protected int taskDuplicatesNumber;
 
+    /**
+     * Constructs a task instance.
+     *
+     * @param taskAction is the task action.
+     */
     public Task(String taskAction) {
         this.taskAction = taskAction;
         this.isDone = false;

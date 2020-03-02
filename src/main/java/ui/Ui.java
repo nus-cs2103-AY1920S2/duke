@@ -13,7 +13,8 @@ import java.util.stream.IntStream;
 
 public class Ui {
 
-    public Ui() {}
+    public Ui() {
+    }
 
 
     public void showLoadingError() {
@@ -35,8 +36,8 @@ public class Ui {
     /**
      * Prints out error message.
      *
-     * @param message
-     * @return
+     * @param message is the error message.
+     * @return String response.
      */
     public String showCommandError(String message) {
         return "Error: " + message;
@@ -103,22 +104,24 @@ public class Ui {
      * @throws InvalidIndexException is exception thrown when the indexes are invalid.
      */
     public String acknowledgeDone(TaskList tasks, int[] arrayOfDoneIndexes) throws InvalidIndexException {
-        if (arrayOfDoneIndexes.length == 0) { throw new InvalidIndexException("Index does not match any task!\n"); }
+        if (arrayOfDoneIndexes.length == 0) { 
+            throw new InvalidIndexException("Index does not match any task!\n"); 
+        }
 
         String s = "Nice! I've marked this task(s) as done:\n";
 
-        List<String> listOFPrintedDoneTasks =
+        List<String> listOfPrintedDoneTasks =
                 IntStream.of(arrayOfDoneIndexes)
                          .mapToObj(index -> String.format("%d.  %s\n", index + 1, tasks.getTask(index)))
                          .collect(Collectors.toList());
 
         String taskSizeMessage = this.currentTaskListSize(tasks);
 
-        listOFPrintedDoneTasks.add(0, s);
+        listOfPrintedDoneTasks.add(0, s);
 
-        listOFPrintedDoneTasks.add(taskSizeMessage);
+        listOfPrintedDoneTasks.add(taskSizeMessage);
 
-        return String.join("", listOFPrintedDoneTasks);
+        return String.join("", listOfPrintedDoneTasks);
     }
 
     /**
@@ -132,16 +135,18 @@ public class Ui {
     public String acknowledgeDelete(TaskList tasks, int[] arrayOfDeleteIndexes) throws InvalidIndexException {
         String s = "Noted. I've removed this task(s):\n";
 
-        if (arrayOfDeleteIndexes.length == 0) { throw new InvalidIndexException("Index does not match any task!\n"); }
+        if (arrayOfDeleteIndexes.length == 0) {
+            throw new InvalidIndexException("Index does not match any task!\n");
+        }
 
-        List<String> listOFPrintedDeleteTasks =
+        List<String> listOfPrintedDeleteTasks =
                 IntStream.of(arrayOfDeleteIndexes)
                          .mapToObj(index -> String.format("%d.  %s\n", index + 1, tasks.getTask(index)))
                          .collect(Collectors.toList());
 
-        listOFPrintedDeleteTasks.add(0, s);
+        listOfPrintedDeleteTasks.add(0, s);
 
-        return String.join("", listOFPrintedDeleteTasks);
+        return String.join("", listOfPrintedDeleteTasks);
     }
 
     /**

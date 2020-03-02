@@ -50,6 +50,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a dialog box consisting of text and image.
+     *
+     * @param text is the text.
+     * @param img is the avatar image.
+     * @return a dialog box.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

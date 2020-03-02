@@ -27,7 +27,7 @@ public class TodoCommand extends Command {
      * @param ui is ui to display to user.
      * @param storage is file where data is written to and read from.
      * @return added todo task response.
-     * @throws IOException
+     * @throws IOException is the exception when dealing with file.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
