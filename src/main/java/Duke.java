@@ -7,6 +7,7 @@ import task.TaskList;
 import ui.Ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.time.DateTimeException;
 
 public class Duke {
@@ -50,7 +51,8 @@ public class Duke {
                 System.exit(0);
             }
             response = c.execute(tasks, ui, storage);
-        } catch (DukeException | IOException | DateTimeException | AssertionError | IndexOutOfBoundsException ex) {
+        } catch (DukeException | IOException | DateTimeException | AssertionError | IndexOutOfBoundsException
+                | NumberFormatException ex) {
             response = ui.showCommandError(ex.getMessage());
         }
         return response;

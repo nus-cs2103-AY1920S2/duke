@@ -82,15 +82,27 @@ public class Parser {
      *
      * @return String representing task.
      */
-    public String getTaskAction() {
+    public String getTaskAction() throws EmptyDescriptionException {
         switch (taskCommand) {
         case "todo":
+            if (userInput.split(" ").length == 1) {
+                throw new EmptyDescriptionException("You forgot to mention the index!");
+            }
             return inputAsArray[1];
         case "find":
+            if (userInput.split(" ").length == 1) {
+                throw new EmptyDescriptionException("You forgot to mention the index!");
+            }
             return inputAsArray[1];
         case "deadline":
+            if (userInput.split(" ").length == 1) {
+                throw new EmptyDescriptionException("You forgot to mention the index!");
+            }
             return userInput.split(" /by")[0].split(" ", 2)[1];
         case "event":
+            if (userInput.split(" ").length == 1) {
+                throw new EmptyDescriptionException("You forgot to mention the index!");
+            }
             return userInput.split(" /at")[0].split(" ", 2)[1];
         default:
             return "";
