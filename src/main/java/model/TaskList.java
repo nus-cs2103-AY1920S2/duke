@@ -161,6 +161,10 @@ public class TaskList implements Iterable<Task> {
         return internalList.size();
     }
 
+    public Task getTask(int index) {
+        return internalList.get(index);
+    }
+
     /**
      * Converts the task list to a string by looping through the tasks and concatenate
      * all the string representation of tasks.
