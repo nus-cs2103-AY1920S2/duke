@@ -106,10 +106,10 @@ public class TaskCreationHandler {
     private static Task getTaskFromCommand(String command) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         String type = cleanAndLowerString(commands.get(0));
+        assert Command.TODO.commands.contains(type);
         if (commands.size() < 2) {
             handleMissingContent(type);
         }
-        assert Command.TODO.commands.contains(type);
         return new ToDo(cleanString(commands.get(1)));
     }
 
@@ -126,7 +126,7 @@ public class TaskCreationHandler {
     private static Task getTaskFromCommand(String command, String detailsKeyword) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         String type = cleanAndLowerString(commands.get(0));
-        if (commands.size() < 2) {
+        if (commands.size() < 2 || cleanAndLowerString(commands.get(1)).startsWith(detailsKeyword)) {
             handleMissingContent(type);
         }
         ArrayList<String> details = new ArrayList<>(Arrays.asList(commands.get(1).split(detailsKeyword)));
