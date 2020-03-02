@@ -5,7 +5,7 @@ Welcome to Duke, a task management application.
 The application allows users to create, store, and mark done multiple tasks. Other functionalities are also included. 
 ### Quick Start
 To launch the program: 
-1. Ensure that Java 11 or later version is installed on your computer.
+1. Ensure that Java 11 or a later version is installed on your computer.
 2. Download the latest `duke-0.2.jar` file from [this page](https://github.com/wardetu/duke/releases/tag/v0.2).
 3. Move `duke-0.2.jar` to a folder you want to use as the home folder for the program. 
 *Note: the first time Duke runs a new storage folder will be created. The program data is stored in a `data.csv` file. 
@@ -104,7 +104,7 @@ Format: `delete <index>`
 The `<index>` field is mandatory and has to be a whole number. Indices are consistent with the indexing
 shown when the command `list` is used. 
 
-Indices will be updated after the command is successfully executed. Be careful with successive deletion.
+Indices will be updated after the command is successfully executed. Be careful with successive deletions.
 
 E.g: `delete 3`
 
@@ -120,7 +120,7 @@ Finds all tasks that contain a specified keyword.
 Format: `find <keyword>`
 
 The `<keyword>` field is mandatory and has to be a single word (i.e. without spacing).
-This is not case sensitive does not require matching of whole word, so `find egg` will match 
+This is not case sensitive and does not require matching of whole word, so `find egg` will match 
 both *"buy more eggs"* and *"Throw rotten Egg away"*.
 
 
@@ -136,7 +136,7 @@ A possible expected outcome:
 ### `list` - Listing all tasks
 
 Shows all tasks currently present in the list. Also shows their status and index which
-can be used for the purpose of `delete` and `done` command.
+can be used for the purpose of the `delete` and `done` command.
 
 Format: `list`
 
