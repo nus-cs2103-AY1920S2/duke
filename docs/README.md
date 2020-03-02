@@ -41,8 +41,7 @@ After informing the User if their command was successfully executed, Duke will w
 Duke's image and dialog box are always on the left, while the User's image and dialog box are always on the right.
 
 ### 2.2 Images
-As mentioned in Section 2.1, Duke will react differently based on whether or not the User's command was successfully executed.  
-This is done by having a different image correspond to the various case.  
+As mentioned in Section 2.1, Duke will react differently based on whether or not the User's command was successfully executed. This is done by having a different image correspond to the various case.  
 
 
 Below are a list of possible images used in the Duke Application.
