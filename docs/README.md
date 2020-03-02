@@ -1,7 +1,7 @@
 # Cute User Guide
 
 ## Product Screenshot
-<img src="./Ui.png" width="200">
+<img src="./Ui.png" width="400">
 
 ## Description
 Cute is an adorable, innocent little kitten that would never hurt you! She'll eagerly help you manage all your tasks! Well, as long as she gets <i>some<</i> food in return...
