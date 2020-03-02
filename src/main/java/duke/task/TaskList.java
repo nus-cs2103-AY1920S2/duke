@@ -69,11 +69,13 @@ public class TaskList {
      * Adds a {@code Task} to the {@code TaskList}.
      *
      * @param task {@code Task} to be added.
+     * @throws DuchessException When a task with identical details is currently in the list.
      */
     public void addTask(Task task) throws DuchessException {
         if (this.taskDescriptions.containsKey(hashTaskToString(task))) {
             throw new DuchessException(ERROR_TASK_CREATED_BEFORE);
         }
+        taskDescriptions.put(hashTaskToString(task), true);
         this.tasks.add(task);
     }
 
@@ -216,6 +218,7 @@ public class TaskList {
         for (int i = 0; i < this.tasks.size(); i++) {
             if (this.tasks.get(i).isCompleted) {
                 Task taskToArchive = this.tasks.remove(i);
+                this.taskDescriptions.remove(hashTaskToString(taskToArchive));
                 this.archive.add(taskToArchive);
             }
         }
