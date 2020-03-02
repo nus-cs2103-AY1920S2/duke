@@ -114,7 +114,7 @@ public class TaskList {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+            sb.append(String.format("    %d. %s\n", i + 1, tasks.get(i)));
         }
         return sb.toString();
     }

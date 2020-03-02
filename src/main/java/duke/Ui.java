@@ -259,7 +259,7 @@ public class Ui {
      * @returns Message showing all tasks from task list.
      */
     public static String getTaskList(TaskList tasks) {
-        return "Here are the tasks that you will never complete: \n" + "  " +
+        return "Here are the tasks that you will never complete: \n" +
         tasks;
     }
 
