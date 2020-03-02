@@ -1,17 +1,18 @@
 package duke;
 
-import duke.command.Command;
+import java.nio.file.Paths;
 
-import duke.exception.DukeException;
+import duke.command.Command;
 import duke.parser.Parsers;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.nio.file.Paths;
-
+/**
+ * The main top-level manager for Duke.
+ */
 public class Duke {
     // Duke components
-
     /** The save/loading mechanism. */
     private Storage storage;
     /** The list of tasks. */
@@ -112,6 +113,8 @@ public class Duke {
      * @return the os-dependent directory to the default save file location.
      */
     private static String getDefaultPath() {
+        // Solution below adapted from
+        // https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
         return Paths.get(System.getProperty("user.dir"), "data", "tasks.txt").toString();
     }
 }

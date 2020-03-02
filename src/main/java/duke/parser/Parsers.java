@@ -1,20 +1,24 @@
 package duke.parser;
 
 import duke.command.Command;
+import duke.parser.exception.BlankInputException;
+import duke.parser.exception.InvalidCommandException;
+import duke.parser.exception.ParseException;
 
-import duke.exception.DukeException;
-
+/**
+ * Contains a collection of Parser classes to handle the logic of Duke.
+ */
 public class Parsers {
     /**
      * Returns a valid user command.
      *
      * @param fullCommand a line of user input.
      * @return a valid user command.
-     * @throws DukeException if command is empty.
-     * @throws DukeException if command could not be parsed.
-     * @throws DukeException if input arguments do not match.
+     * @throws ParseException if command is empty.
+     * @throws ParseException if command could not be parsed.
+     * @throws ParseException if input arguments do not match.
      */
-    public static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) throws ParseException {
 
         String[] input = fullCommand.stripTrailing().split("\\s+", 2);
         String command = input[0];
@@ -48,10 +52,10 @@ public class Parsers {
         default:
             if (command.strip().isEmpty()) {
                 // Blank input
-                throw new DukeException("Speak up! I can't hear you.");
+                throw new BlankInputException();
             } else {
                 // Unknown command
-                throw new DukeException("What on earth does that mean?");
+                throw new InvalidCommandException();
             }
         }
     }

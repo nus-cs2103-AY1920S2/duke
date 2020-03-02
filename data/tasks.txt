@@ -1,3 +1,5 @@
 T | 0 | Wash clothes
-D | 0 | Submit tP | 2020-12-04
-E | 0 | CS2103T exam | 2020-08-15 | 4-6pm
+D | 0 | Submit iP | 2020-03-02
+E | 1 | Piano Concert | 2020-08-15 | 16:00 | 18:00
+E | 0 | Christmas party | 2020-12-25 | 09:00 | 15:00
+E | 1 | Snoopy's Party | 2020-09-20 | 12:00 | 16:00

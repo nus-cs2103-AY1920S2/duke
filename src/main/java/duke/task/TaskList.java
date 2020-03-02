@@ -1,11 +1,12 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Stores a list of tasks.
+ */
 public class TaskList {
     /** Stores a list of tasks. */
     private final List<Task> tasks;
@@ -64,10 +65,7 @@ public class TaskList {
      * @param task the task to add into the list.
      * @return a copy of this TaskList with the newly added task.
      */
-    public TaskList addTask(Task task) throws DukeException {
-        if (taskCounters.contains(task)) {
-            throw new DukeException("Don't make me remember the same thing!");
-        }
+    public TaskList addTask(Task task) {
         List<Task> newTasks = new ArrayList<>(tasks);
         newTasks.add(task);
 
@@ -75,6 +73,17 @@ public class TaskList {
         newTaskCounters.add(task);
 
         return new TaskList(newTasks, newTaskCounters);
+    }
+
+    /**
+     * Checks if a task of the same type and description already exists
+     * in the TaskList.
+     *
+     * @param task the task to find in the list.
+     * @return true if the task exists, false otherwise.
+     */
+    public boolean containsTask(Task task) {
+        return taskCounters.contains(task);
     }
 
     /**
@@ -132,7 +141,11 @@ public class TaskList {
             String indent = "      ";
 
             String parameters = description.substring(paramIndex + 1);
+
+            // @@author PotatoCombat-reused
+            // Reused from https://stackoverflow.com/questions/15888934/
             parameters = parameters.replaceAll("(?m)^", indent);
+            // @@author
 
             description = description.substring(0, paramIndex);
 

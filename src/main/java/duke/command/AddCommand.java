@@ -1,19 +1,22 @@
 package duke.command;
 
-import duke.Storage;
+import duke.command.exception.DuplicateTaskException;
+import duke.command.exception.SaveException;
+import duke.storage.Storage;
+import duke.storage.exception.StorageException;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import duke.exception.DukeException;
-
-import duke.task.Task;
-
+/**
+ * Adds a task into Duke.
+ */
 public class AddCommand extends Command {
-    /** The task to add to a task list. */
+    /** The task to add. */
     private Task task;
 
     /**
-     * Constructs a new command that adds a task to a task list.
+     * Constructs an {@code AddCommand} to add a {@code Task} into Duke.
      *
      * @param task the task to add.
      */
@@ -22,7 +25,14 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage)
+            throws SaveException, DuplicateTaskException {
+
+        // Check if the task is a duplicate
+        if (tasks.containsTask(task)) {
+            throw new DuplicateTaskException();
+        }
+
         // Add task to the list
         TaskList newTasks = tasks.addTask(task);
 
@@ -31,7 +41,11 @@ public class AddCommand extends Command {
         ui.showTaskCount(newTasks);
 
         // Save immediately
-        storage.save(newTasks);
+        try {
+            storage.save(newTasks);
+        } catch (StorageException e) {
+            throw new SaveException(e.getFilePath());
+        }
 
         return newTasks;
     }

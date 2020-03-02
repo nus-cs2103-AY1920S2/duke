@@ -1,9 +1,13 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import duke.util.DateTimeUtil;
+
+/**
+ * Represents a task with a deadline.
+ */
 public class Deadline extends Task {
     /** The cut-off date for this deadline. */
     protected final LocalDate by;
@@ -31,21 +35,21 @@ public class Deadline extends Task {
     @Override
     public String serialize() {
         // Date format is yyyy-mm-dd
-        return serialize("D", by.format(DateTimeFormatter.ISO_LOCAL_DATE));
+        return TaskSerializer.serialize(this, "D", by.format(DateTimeUtil.FORMAT_DATE_NUMERIC));
     }
 
     @Override
     public String toString() {
         // Date format is MMM d yyyy
-        String formatDate = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formatDate = by.format(DateTimeUtil.FORMAT_DATE_MONTHNAME);
         return String.format("[D]%s (by: %s)", super.toString(), formatDate);
     }
 
     @Override
     public String toFormatString() {
         // Date format is MMM d yyyy
-        String formatDate = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return String.format("[D]%s\nby:\n%s", super.toString(), formatDate);
+        String formatDate = by.format(DateTimeUtil.FORMAT_DATE_MONTHNAME);
+        return String.format("[D]%s\nby: %s", super.toString(), formatDate);
     }
 
     @Override

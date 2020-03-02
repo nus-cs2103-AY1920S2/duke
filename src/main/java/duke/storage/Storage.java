@@ -1,19 +1,21 @@
-package duke;
-
-import duke.exception.DukeException;
-
-import duke.parser.StorageParser;
-import duke.task.Task;
-import duke.task.TaskList;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.parser.StorageParser;
+import duke.parser.exception.ParseException;
+import duke.storage.exception.StorageException;
+import duke.task.Task;
+import duke.task.TaskList;
+
+/**
+ * Stores the list of tasks in Duke in a save file.
+ */
 public class Storage {
 
     /** Relative directory of the save file for this storage object. */
@@ -32,15 +34,20 @@ public class Storage {
      * Returns a list of tasks generated from a save file.
      *
      * @return a list of tasks generated from a save file.
-     * @throws DukeException if file could not be found or opened.
+     * @throws StorageException if file could not be found or opened.
      */
-    public List<Task> load() throws DukeException {
+    public List<Task> load() throws StorageException {
         try {
             File saveFile = new File(filePath);
+            System.out.println(filePath);
 
+            // @@author PotatoCombat-reused
+            // Solution adapted from GitHub user @aakanksha-rai
             if (!saveFile.exists()) {
-                saveFile.mkdirs(); // Create a new save file
+                saveFile.getParentFile().mkdirs(); // Create the save file directory
+                saveFile.createNewFile(); // Create a new save file
             }
+            // @@author
 
             Scanner sc = new Scanner(saveFile);
 
@@ -50,15 +57,15 @@ public class Storage {
                 try {
                     Task task = StorageParser.readTask(sc.nextLine());
                     tasks.add(task);
-                } catch (DukeException e) {
-                    throw new DukeException("I can't read everything in the file!");
+                } catch (ParseException e) {
+                    throw new StorageException("Could not read everything in the file", filePath);
                 }
             }
 
             return tasks;
 
         } catch (IOException e) {
-            throw new DukeException("I can't write to this file!: " + filePath);
+            throw new StorageException("Could not write to the file", filePath);
         }
     }
 
@@ -66,9 +73,9 @@ public class Storage {
      * Writes a list of tasks into a save file.
      *
      * @param tasks the list of tasks to write to a save file.
-     * @throws DukeException if file could not be found or opened.
+     * @throws StorageException if file could not be found or opened.
      */
-    public void save(TaskList tasks) throws DukeException {
+    public void save(TaskList tasks) throws StorageException {
         // Setup file output resources with auto-closing
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -82,7 +89,7 @@ public class Storage {
             fw.close();
 
         } catch (IOException e) {
-            throw new DukeException("I can't write to this file!: " + filePath);
+            throw new StorageException("Could not write to the file", filePath);
         }
     }
 }

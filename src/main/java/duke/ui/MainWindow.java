@@ -1,14 +1,14 @@
 package duke.ui;
 
-import duke.Duke;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import duke.Duke;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -25,7 +25,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    // Image retrieved from https://gallery.yopriceville.com/Free-Clipart-Pictures/Cartoons-PNG/
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/charlie.png"));
+    // Image retrieved from https://gallery.yopriceville.com/Free-Clipart-Pictures/Cartoons-PNG/
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/lucy.png"));
 
     @FXML
@@ -42,6 +44,10 @@ public class MainWindow extends AnchorPane {
         this.duke = duke;
     }
 
+    /**
+     * Initialises the chat-bot with a welcome message. It also informs the user
+     * when creating a new save file (when using Duke for the first time).
+     */
     public void init() {
         if (!this.duke.isLoaded()) {
             addDialogBox(DialogBox.getDukeDialog(duke.getLoadingError(), dukeImage));
