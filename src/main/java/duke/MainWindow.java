@@ -74,6 +74,8 @@ public class MainWindow extends AnchorPane {
      * Handle the exit operation with 1 second delay then exit the application.
      */
     private void handleExit() {
+        //@@author sheexiong-reused
+        //Reused from https://stackoverflow.com/questions/52393982 with minor modifications
         new Thread(() -> {
             try {
                 Thread.sleep(1000);

@@ -42,6 +42,7 @@ public class Duke {
      * @return return the response from the system
      */
     public String getResponse(String input) {
+        //Solution below adapted from https://stackoverflow.com/questions/8708342
         ByteArrayOutputStream respond = new ByteArrayOutputStream();
         PrintStream uiOutput = new PrintStream(respond);
         final PrintStream systemOutput = System.out;

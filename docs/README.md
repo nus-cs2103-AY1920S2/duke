@@ -185,5 +185,7 @@ Bye!!! See you again :)
 ![Duke Ui](bye.png)
 
 ## Acknowledgements
-Credit to Jeffry Lum for the fxml and java files for JAVAFX GUI -  [JavaFx TutorialPart 4](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md).  
-Credit to Software Engineering Education addressbook-level2 for code Organization - [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)
+Credit to Jeffry Lum for the fxml and java files for JAVAFX GUI -  [JavaFx TutorialPart 4](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md)  
+Credit to Software Engineering Education addressbook-level2 for code Organization - [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2)  
+Credit to MintBerryCrunch for the solution to close GUI window - [stackOverflow](https://stackoverflow.com/questions/52393982)  
+Credit to Ernest Friedman-Hill for the solution to redirect console output to string in java - [stackOverflow](https://stackoverflowcom/questions/8708342)  
