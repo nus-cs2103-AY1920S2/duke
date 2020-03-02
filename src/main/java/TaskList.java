@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +16,7 @@ public class TaskList {
      * To instantiate the task list from storage, loading all tasks that are currently in the data.txt.
      * @param taskStorage storage where the copy of the task file is stored.
      */
-    public TaskList(Storage taskStorage) {
+    public TaskList(Storage taskStorage) throws DukeException {
 
         this.tasks = new ArrayList<Task>();
         this.taskStorage = taskStorage;

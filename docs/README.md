@@ -56,7 +56,7 @@ Expected outcome:
 
 `Got it, I've added this task:
 
-[T][✗] running
+[T][NOT-DONE] running
 
 Now you have 1 task(s) in the list.`
 
@@ -77,7 +77,7 @@ Expected outcome:
 
 `Got it, I've added this task:
 
-[D][✗] return book (by: Dec 1 2020 06:00)
+[D][NOT-DONE] return book (by: Dec 1 2020 06:00)
 
 Now you have 1 task(s) in the list.`
 
@@ -99,7 +99,7 @@ Expected outcome:
 
 `Got it, I've added this task:
 
-[E][✗] Concert (at: Stadium)
+[E][NOT-DONE] Concert (at: Stadium)
 
 Now you have 1 task(s) in the list.` 
 
@@ -120,7 +120,7 @@ Expected outcome:
 
 `Alright, I've added this task:
 
-[E][✗] Concert (at: Stadium)
+[E][NOT-DONE] Concert (at: Stadium)
 
 Now you have 0 task(s) in the list.`
 
@@ -141,7 +141,7 @@ Expected outcome:
 
 `Nice! I've marked this task as done:
 
-[T][✓] running`
+[T][DONE] running`
 
 ### 6.`find` - Find a task 
 
@@ -159,7 +159,7 @@ Expected outcome:
 
 `Here are the matching tasks in your list: 
 
-3.[T][✗] Have lunch
+3.[T][NOT-DONE] Have lunch
 
 `
 
@@ -179,9 +179,9 @@ Expected outcome:
 
 `Here are the tasks in your list: 
 
-1.[T][✓] running
-2.[T][✗] return book
-3.[T][✗] Have lunch 
+1.[T][DONE] running
+2.[T][NOT-DONE] return book
+3.[T][NOT-DONE] Have lunch 
 
 `
 ### 8.`reminders` - reminder for deadlines
@@ -200,8 +200,8 @@ Expected outcome:
 
 `Here are the upcoming deadline tasks in your list: 
 
-1.[D][✗] submit essay (by: Feb 10 2020 11:59PM)
-2.[D][✗] Return book (by: Jun 25 2020 06:00PM)
+1.[D][NOT-DONE] submit essay (by: Feb 10 2020 11:59PM)
+2.[D][NOT-DONE] Return book (by: Jun 25 2020 06:00PM)
 
 `
 

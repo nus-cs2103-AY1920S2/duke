@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 /**
@@ -37,47 +38,15 @@ public class Duke extends Application {
     public Duke() {
 
         this.taskStorage = new Storage();
-        this.tasks = new TaskList(taskStorage);
+        try {
+            this.tasks = new TaskList(taskStorage);
+        } catch (DukeException e) {
+            ui.showError(e);
+        }
         this.ui = new Ui(tasks);
         this.parser = new Parser();
     }
 
-    /**
-     * to run the chat bot.
-     */
-    public void run() {
-
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readLine();
-                ui.printFormatting();
-                Command c = parser.parse(fullCommand);
-                c.execute(taskStorage, tasks, ui);
-                isExit = c.isExit();
-                taskStorage.storeToStorage(tasks.getList());
-
-            } catch (DukeException ex) {
-
-                ui.showError(ex);
-
-            } finally {
-                ui.printFormatting();
-
-            }
-        }
-
-    }
-
-    /**
-     * Main method.
-     *
-     * @param args arguments
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
 
     @Override
     public void start(Stage stage) {
@@ -195,15 +164,6 @@ public class Duke extends Application {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
 
     }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
 
 }
 

@@ -1,1 +1,2 @@
-T | 0 | eat 
+T | 1 | run 
+T | 1 | run 

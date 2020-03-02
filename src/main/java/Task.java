@@ -54,9 +54,9 @@ public class Task {
     public String toString() {
 
         if (this.isCompleted) {
-            return ("[✔] " + this.description);
+            return ("[DONE] " + this.description);
         } else {
-            return ("[✘] " + this.description);
+            return ("[NOT-DONE] " + this.description);
         }
 
     }

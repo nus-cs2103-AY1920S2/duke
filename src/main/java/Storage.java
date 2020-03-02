@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.FileWriter;
@@ -26,14 +27,24 @@ public class Storage {
      * Method invoked to retrieve all information from storage to the program.
      * @return an ArrayList of tasks that was stored in the hard disk.
      */
-    public ArrayList<String> startupStorage() {
+    public ArrayList<String> startupStorage() throws DukeException {
 
         try {
             return readFile(this.path);
         } catch (IOException e) {
-            System.out.println("File not found");
+            File file = new File("data");
+            if (!file.exists()) {
+                new File("data").mkdir();
+            }
+            try {
+                new File("data/duke.txt").createNewFile();
+            } catch (IOException ex) {
+                throw new DukeException(ex.getMessage());
+            }
+
+            return new ArrayList<String>();
         }
-        return new ArrayList<String>();
+
 
     }
 
@@ -46,7 +57,8 @@ public class Storage {
         try {
             writeToHardDisk(list);
         } catch (IOException e) {
-            System.out.println("File not found");
+            File newFile = new File("./data/duke.txt");
+            System.out.println("File created");
         }
     }
 
