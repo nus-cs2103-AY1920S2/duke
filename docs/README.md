@@ -147,7 +147,7 @@ Updates the description of a task.
 Updating a description? Forgetful fishy, are we?<br>
 `1. [T][O] Assignment Number 2`
 
-### 2. Update Task Time
+### 3. Update Task Time
 Updates the time of a task.
 
 *Command Usage*:
