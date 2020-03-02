@@ -138,7 +138,7 @@ public class Parser {
     public static LocalDate getDate(String input) throws DukeException {
         String[] tryGetDate = input.split(" /");
         if (tryGetDate.length == 1) {
-            throw new DukeException("☹ Why did you not provide the time?");
+            throw new DukeException("Why did you not provide the date?\n Date should be in format DD/MM/YYYY");
         }
         String time = tryGetDate[1];
         String[] timeArr = time.split(" ");

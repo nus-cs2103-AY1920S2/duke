@@ -27,7 +27,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String newdate = String.format("%d %s %d", this.date.getDayOfMonth(), this.date.getMonth(), this.date.getYear());
-        return "[D]" + super.toString() + " (date: " + newdate + ")";
+        return "[D]" + super.toString() + " (by: " + newdate + ")";
     }
 
     /**
