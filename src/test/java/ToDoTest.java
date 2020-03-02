@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
- * Tests the ToDo Class
+ * Tests the ToDo Class.
  */
 public class ToDoTest {
 
