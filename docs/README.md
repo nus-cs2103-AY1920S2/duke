@@ -30,13 +30,21 @@ Delete a task from the task list.
 List all tasks in the task list.   
 
 ![list task](./ListTask.png)
+
 ### 6. Find a task by keyword
 Find a task by keyword  
 ![find task](./FindTask.png)
+
 ### 7. View schedule on certain day
 View the schedule on a selected day.
 
 ![view schedule](./ViewSchedule.png)
+
+### 8. View schedule on certain day
+View the schedule on a selected day.
+
+![view schedule](./ViewSchedule.png)
+
 ## Usage
 
 ### `todo` - Add a todo task

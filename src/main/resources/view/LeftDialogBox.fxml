@@ -25,7 +25,7 @@
                 </Group>
             </children>
             <HBox.margin>
-                <Insets right="80.0" top="30.0" />
+                <Insets right="80.0" top="20.0" />
             </HBox.margin>
             <padding>
                 <Insets bottom="5.0" right="10.0" top="5.0" />
