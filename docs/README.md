@@ -4,6 +4,11 @@ Duke
 
 ![screenshoot](./Ui.png)
 
+## Download 
+The binary file can be downloaded [here](https://github.com/YingxuH/duke/releases/download/v0.3.0/duke-0.3.0.jar). 
+For running the duke application, java need to be installed on your machine. 
+* Tutorial: [how to run jar file on windows](https://stackoverflow.com/questions/394616/running-jar-file-on-windows).
+
 ## Features 
 
 ### 1. Add a todo task 
@@ -44,6 +49,11 @@ View the schedule on a selected day.
 View the schedule on a selected day.
 
 ![view schedule](./ViewSchedule.png)
+
+### 9. Help 
+Look for instruction on using duke.
+
+![view schedule](./Help.png)
 
 ## Usage
 
@@ -136,6 +146,12 @@ Example of usage:
 Expected outcome:
 > Here are the tasks on Date: 2020-02-02:
 > 1. [E][&#9745;] career fair (at: 2020-02-02 23:59)
+
+### `help` - short instruction.
+
+View the instruction for running duke.  
+Example of usage:   
+> help
 
 ### `bye` - exit from the application.
 
