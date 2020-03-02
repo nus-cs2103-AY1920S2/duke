@@ -97,7 +97,7 @@ public class Parser {
     private static String removeActionKeyword(String stringToParse, String commandType) throws IllegalTextException {
         try {
             return stringToParse.split(" ", 2)[1];
-        } catch (PatternSyntaxException e) {
+        } catch (Exception e) {
             throw new IllegalTextException(commandType + " command must have a valid description.");
         }
     }
