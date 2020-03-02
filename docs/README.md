@@ -31,7 +31,8 @@ When started up, Duke will introduce itself.
 
 
 After the introduction, the User may input any command, which Duke will try to execute.  
-Duke will then inform the User if their command was successfully executed. Depending on whether or not the command was executed successfully, Duke will react differently.
+Duke will then inform the User if their command was successfully executed.  
+Depending on whether or not the command was executed successfully, Duke will react differently.
 
 
 After informing the User if their command was successfully executed, Duke will wait for the User's next command.  
@@ -40,7 +41,7 @@ After informing the User if their command was successfully executed, Duke will w
 It should be noted that Duke's image and dialog box are always on the left, while the User's image and dialog box are always on the right.
 
 ### 2.2 Images
-As mentioned in section 2.1, Duke's will react differently based on whether or not the User's command was successfully executed.  
+As mentioned in Section 2.1, Duke will react differently based on whether or not the User's command was successfully executed.  
 This is done by having a different image correspond to the various case.  
 
 
