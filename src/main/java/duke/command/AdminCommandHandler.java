@@ -66,6 +66,7 @@ public class AdminCommandHandler {
             throw new DuchessException(ERROR_NO_MORE_UNDOS);
         }
         taskList.replaceTaskList(lastSaveState.getTasksFromSave());
+        taskList.replaceArchive(lastSaveState.getArchiveFromSave());
         storage.save(taskList);
         return ui.printUndoMessage(lastSaveState.getLastCommand());
     }

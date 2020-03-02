@@ -1,10 +1,13 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.command.Command;
 import duke.exception.DuchessException;
 import duke.io.Parser;
 import duke.save.SaveStateStack;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -39,7 +42,8 @@ public class Duke {
         this.storage = new Storage(filePath);
         this.saveStateStack = new SaveStateStack();
         try {
-            this.taskList = new TaskList(this.storage.load());
+            ArrayList<ArrayList<Task>> savedData = this.storage.load();
+            this.taskList = new TaskList(savedData.get(0), savedData.get(1));
         } catch (DuchessException e) {
             this.ui.printToConsole(e.getMessage());
             this.taskList = new TaskList();
@@ -62,7 +66,8 @@ public class Duke {
         this.saveStateStack = new SaveStateStack();
         try {
             this.storage = new Storage(filePath);
-            this.taskList = new TaskList(this.storage.load());
+            ArrayList<ArrayList<Task>> savedData = this.storage.load();
+            this.taskList = new TaskList(savedData.get(0), savedData.get(1));
         } catch (DuchessException e) {
             if (isGui) {
                 this.loadingErrorMessage = this.ui.printLoadingError(e.getMessage());
