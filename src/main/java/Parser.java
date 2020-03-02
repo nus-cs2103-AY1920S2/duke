@@ -112,7 +112,6 @@ public class Parser {
             switch (command) {
                 case "bye":
                     toReturn = ui.terminateGui();
-                    Platform.exit();
                     break;
                 case "list":
                     toReturn = ui.printOutTasks(tasks);
