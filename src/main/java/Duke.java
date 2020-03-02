@@ -1,5 +1,3 @@
-//package java;
-
 import exceptions.IllegalPositionException;
 import exceptions.IllegalDateTimeFormatException;
 import exceptions.InvalidStorageFilePathException;
@@ -21,9 +19,6 @@ import java.io.IOException;
  */
 public class Duke {
 
-    private static final String GREET_INPUT = "help";
-
-    protected String userName;
     protected Storage storage;
     protected TaskList taskList;
     protected Parser parser;

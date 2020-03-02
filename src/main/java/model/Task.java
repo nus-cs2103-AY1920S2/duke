@@ -3,9 +3,7 @@ package model;
 import exceptions.NoDescriptionException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 
