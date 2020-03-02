@@ -49,7 +49,7 @@ public class PriorityCommand extends Command {
 
     private String getPrependedString(TaskStorage storage) {
         if (storage.getTaskList().size() != 0) {
-            return "    Here are the " + this.priority + " tasks in your list:" + System.lineSeparator();
+            return "    Here are the " + this.priority + " priority tasks in your list:" + System.lineSeparator();
         } else {
             return "You do not have any tasks with priority " + this.priority;
         }
