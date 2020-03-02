@@ -4,7 +4,7 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Event;
 import duke.task.Deadline;
-
+import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTimeFormatException;
 
 import java.io.File;
@@ -167,7 +167,7 @@ public class Storage {
      * @param idx The index of the task to be updated.
      * @param input The user input.
      */
-    public void updateDescription(int idx, String input) {
+    public void updateDescription(int idx, String input) throws InvalidCommandException {
         File originalFile = new File(FILEPATH);
         File tempFile = new File(TEMP_FILEPATH);
 
@@ -204,6 +204,8 @@ public class Storage {
             originalFile.delete();
       
             tempFile.renameTo(originalFile);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidCommandException(Message.UPDATE_DESC_GENERAL_ERROR);
         } catch (FileNotFoundException e) {
             Ui.printLines("File not found. Try again!");
         } catch (IOException e) {
@@ -217,7 +219,7 @@ public class Storage {
      * @param input The user input.
      * @throws InvalidTimeFormatException Exception when the time format is invalid.
      */
-    public void updateTime(int idx, String input) throws InvalidTimeFormatException {
+    public void updateTime(int idx, String input) throws InvalidCommandException, InvalidTimeFormatException {
         File originalFile = new File(FILEPATH);
         File tempFile = new File(TEMP_FILEPATH);
 

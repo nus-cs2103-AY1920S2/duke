@@ -35,11 +35,9 @@ public class UpdateDescriptionCommand extends Command {
             storage.updateDescription(idx, input);
             return tasks.updateDescription(idx - 1, input);
         } catch (NumberFormatException e) {
-            throw new TaskIndexException(Message.INDEX_ERROR + "\n" + Message.UPDATE_DESC_INDEX_ERROR);
+            throw new TaskIndexException(Message.INDEX_ERROR);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidCommandException(Message.UPDATE_DESC_INDEX_ERROR);
-        } catch (Exception e) {
-            throw new InvalidCommandException(Message.UPDATE_GENERAL_ERROR);
-        }
+            throw new InvalidCommandException(Message.UPDATE_DESC_GENERAL_ERROR);
+        } 
     }
 }

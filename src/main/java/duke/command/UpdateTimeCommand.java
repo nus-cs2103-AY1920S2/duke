@@ -34,10 +34,17 @@ public class UpdateTimeCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) 
             throws TaskIndexException, InvalidTimeFormatException, InvalidCommandException {
+        int idx = 0;
         try {
             String[] split = this.input.split(" ");
-            int idx = Integer.parseInt(split[2]);
+            idx = Integer.parseInt(split[2]);
+        } catch (NumberFormatException e) {
+            throw new TaskIndexException(Message.INDEX_ERROR);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandException(Message.UPDATE_TIME_GENERAL_ERROR);
+        } 
 
+        try {
             Task task = tasks.getTask(idx - 1);
             if (task instanceof Todo) {
                 throw new InvalidCommandException(Message.TODO_TIME_ERROR);
@@ -45,10 +52,10 @@ public class UpdateTimeCommand extends Command {
 
             storage.updateTime(idx, input);
             return tasks.updateTime(idx - 1, input);
-        } catch (NumberFormatException e) {
-            throw new TaskIndexException(Message.INDEX_ERROR + "\n" + Message.UPDATE_TIME_INDEX_ERROR);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidCommandException(Message.UPDATE_TIME_INDEX_ERROR);
-        } 
+            throw new InvalidCommandException(Message.INDEX_ERROR);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskIndexException(Message.INDEX_ERROR);
+        }
     }
 }

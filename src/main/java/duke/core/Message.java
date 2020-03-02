@@ -58,12 +58,11 @@ public class Message {
     public static final String UPDATE_GENERAL_ERROR = "Wrong command format! Try:\n"
             + "'update description <index> <new description>' or 'update time <index> <new time>";
 
-    public static final String UPDATE_DESC_INDEX_ERROR = "Try: update description <index> <date time>";
+    public static final String UPDATE_DESC_GENERAL_ERROR = "Wrong command format! Try:\n"
+            + "update description <index> <new description>";
 
-    public static final String UPDATE_TIME_INDEX_ERROR = "Try: update time <index> <date time>";
-
-    public static final String UPDATE_TIME_ERROR = "Oops! Wrong command format.\n" 
-            + "Try: update time <index> <date time>"; 
+    public static final String UPDATE_TIME_GENERAL_ERROR = "Wrong command format! Try:\n"
+            + "update time <index> <new time>";
 
     public static final String TODO_TIME_ERROR = "Oops, a todo doesn't have a time! Try again.";
 }

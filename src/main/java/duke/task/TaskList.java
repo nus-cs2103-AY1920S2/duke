@@ -148,7 +148,7 @@ public class TaskList {
      * @throws InvalidTimeFormatException The exception when the time format is invalid.
      */
     public String updateTime(int idx, String input) 
-            throws TaskIndexException, InvalidTimeFormatException {
+            throws TaskIndexException, InvalidTimeFormatException, InvalidCommandException {
         try {
             Task task = this.tasks.get(idx);
             int newTimeIndex = input.indexOf("" + (idx + 1));
@@ -157,6 +157,8 @@ public class TaskList {
             return Message.UPDATE_TIME + newTime;
         } catch (IndexOutOfBoundsException e) {
             throw new TaskIndexException(Message.INDEX_ERROR);
+        } catch (Exception e) {
+            throw new InvalidCommandException(Message.UPDATE_TIME_GENERAL_ERROR);
         }
     }
 

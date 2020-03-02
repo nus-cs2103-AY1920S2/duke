@@ -101,29 +101,32 @@ public class Parser {
     }
 
     private Command parseUpdateCommand(String[] split, String input) throws InvalidCommandException {
+        String secondCommand = "";
         try {
-            String secondCommand = split[1];
-            if (secondCommand.compareTo("description") == 0) {
-                return new UpdateDescriptionCommand(input);
-            } else if (secondCommand.compareTo("time") == 0) {
-                return new UpdateTimeCommand(input);
-            } else {
-                throw new InvalidCommandException(Message.COMMAND_ERROR);
-            }
+            secondCommand = split[1];
         } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandException(Message.UPDATE_GENERAL_ERROR);
+        }
+
+        if (secondCommand.compareTo("description") == 0) {
+            return new UpdateDescriptionCommand(input);
+        } else if (secondCommand.compareTo("time") == 0) {
+            return new UpdateTimeCommand(input);
+        } else {
             throw new InvalidCommandException(Message.UPDATE_GENERAL_ERROR);
         }
     }
 
     /**
-     * Reformats the input string into the right date and time format.
+     * Reformatsx the input string into the right date and time format.
      * @param time The given unfromatted user input.
      * @return The reformatted string.
      */
-    public static String reformatDateAndTime(String time) throws InvalidTimeFormatException {
+    public static String reformatDateAndTime(String time) throws InvalidCommandException, InvalidTimeFormatException {
         String result = "";
         String dateRegex = "\\d{4}-\\d{2}-\\d{2}";
         String timeRegex = "([0-1][0-9]|2[0-3])[0-5][0-9]";
+
         String[] split = time.trim().split(" ");
         if (split.length != 2) {
             throw new InvalidTimeFormatException(Message.TIME_ERROR);
