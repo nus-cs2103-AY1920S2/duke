@@ -1,5 +1,5 @@
-[T][?] borrow book
-[E][?] project meeting  (at:  mon 2-4pm)
-[T][?] borrow book
-[D][?] return book  (by:  Sunday)
-[T][?] kill bill
+[T][N] borrow book
+[E][N] project meeting  (at:  mon 2-4pm)
+[T][N] borrow book
+[D][N] return book  (by:  Sunday)
+[T][Y] hello

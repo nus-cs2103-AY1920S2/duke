@@ -1,8 +1,8 @@
 package duke.task;
 
 public class Task {
-    public static final char TICK = '\u2713';
-    public static final char CROSS = '\u2718';
+    public static final char TICK = 'Y';
+    public static final char CROSS = 'N';
 
     protected String description;
     protected boolean isDone;
