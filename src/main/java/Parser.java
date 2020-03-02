@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,16 +110,23 @@ public class Parser {
      * @throws InvalidDeadlineException DukeException for invalid Deadline task.
      */
     private static String[] prepareDeadline(String[] input) throws InvalidDeadlineException {
-        String[] fieldDetails = input[1].split("/", 2);
+         try {
+             String[] fieldDetails = input[1].split("/", 2);
 
-        if (!isValidDeadline(fieldDetails)) {
-            throw new InvalidDeadlineException(
-                    "We're running short of time, so make sure you note it down."
-                            + "Give a description of what we gotta do,"
-                            + "and the date as /YYYY-MM-DD");
-        } else {
-            return fieldDetails;
-        }
+             if (!isValidDeadline(fieldDetails)) {
+                 throw new InvalidDeadlineException(
+                         "We're running short of time, so make sure you note it down."
+                         + "Give a description of what we gotta do,"
+                         + "and the date as /YYYY-MM-DD");
+             } else {
+                 return fieldDetails;
+             }
+         } catch (ArrayIndexOutOfBoundsException ex) {
+             throw new InvalidDeadlineException(
+                     "We're running short of time, so make sure you note it down."
+                     + "Give a description of what we gotta do,"
+                     + "and the date as /YYYY-MM-DD");
+         }
     }
 
     /**
@@ -128,15 +136,22 @@ public class Parser {
      * @throws InvalidEventException DukeException for invalid Event task.
      */
     private static String[] prepareEvent(String[] input) throws InvalidEventException {
-        String[] fieldDetails = input[1].split("/", 2);
+        try {
+            String[] fieldDetails = input[1].split("/", 2);
 
-        if (!isValidEvent(fieldDetails)) {
+            if (!isValidEvent(fieldDetails)) {
+                throw new InvalidEventException(
+                        "We're running short of time, so make sure you note it down."
+                                + "Give a description of what we gotta do,"
+                                + "and the date as /YYYY-MM-DD");
+            } else {
+                return fieldDetails;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
             throw new InvalidEventException(
                     "We're running short of time, so make sure you note it down."
                             + "Give a description of what we gotta do,"
                             + "and the date as /YYYY-MM-DD");
-        } else {
-            return fieldDetails;
         }
     }
 
@@ -193,8 +208,20 @@ public class Parser {
      * @param input String array containing task's type, description, and do by date.
      * @return boolean dictating if array has enough elements for a valid Deadline task.
      */
-    private static boolean isValidDeadline(String[] input) {
-        return input.length == 2;
+    private static boolean isValidDeadline(String[] input) throws InvalidDeadlineException {
+        try {
+            if (input.length == 2) {
+                parseDate(input[1]);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (DateTimeException dte) {
+            throw new InvalidDeadlineException(
+                    "We're running short of time, so make sure you note it down."
+                    + "Give a description of what we gotta do,"
+                    + "and the date as /YYYY-MM-DD");
+        }
     }
 
     /**
@@ -203,8 +230,20 @@ public class Parser {
      * @param input String array containing task's type, description, and do at date.
      * @return boolean dictating if array has enough elements for a valid Event task.
      */
-    private static boolean isValidEvent(String[] input) {
-        return input.length == 2;
+    private static boolean isValidEvent(String[] input) throws InvalidEventException {
+        try {
+            if (input.length == 2) {
+                parseDate(input[1]);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (DateTimeException dte) {
+            throw new InvalidEventException(
+                    "We're running short of time, so make sure you note it down."
+                    + "Give a description of what we gotta do,"
+                    + "and the date as /YYYY-MM-DD");
+        }
     }
 }
 
