@@ -186,15 +186,20 @@ public class TaskList {
      * @param input The given user input.
      * @param fileName The path to the task list file.
      */
-    public String manageDeadline(Storage storage, String input) throws EmptyDescriptionException, InvalidTimeFormatException {
-        if (input.split(" ").length == 1) {
-            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
-        } else {
-            String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
-            
-            String remaining = input.substring(input.indexOf("/") + 1);
-            String[] split = remaining.split(" ");
+    public String manageDeadline(Storage storage, String input) throws InvalidCommandException, EmptyDescriptionException, InvalidTimeFormatException {
+        String description = "";
+        String remaining = "";
+        String[] split = new String[]{};
 
+        try {
+            description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
+        }
+
+        try {
+            remaining = input.substring(input.indexOf("/") + 1);
+            split = remaining.split(" ");
             if (split[0].compareTo("by") == 0) {
                 String rawDateTime = input.substring(input.indexOf("/") + 4);
                 String time = Parser.reformatDateAndTime(rawDateTime);
@@ -206,6 +211,8 @@ public class TaskList {
             } else {
                 throw new InvalidTimeFormatException(Message.TIME_ERROR);
             }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidCommandException(Message.DEADLINE_FORMAT_ERROR);
         }
     }
 

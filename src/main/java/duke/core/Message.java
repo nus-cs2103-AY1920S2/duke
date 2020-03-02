@@ -42,8 +42,8 @@ public class Message {
     public static final String EVENT_FORMAT_ERROR = "Your event format is incorrect.\n"
             + "Try: /at <date and time>";
     
-    public static final String DEADLINE_FORMAT_ERROR = "Your event format is incorrect.\n"
-            + "Try: /by <date and time>";
+    public static final String DEADLINE_FORMAT_ERROR = "Your deadline format is incorrect.\n"
+            + "Try: deadline <description> /by <date and time>";
 
     public static final String FIND_ERROR = "Sorry, that format isn't right!\nTry: find <keyword>";
 
