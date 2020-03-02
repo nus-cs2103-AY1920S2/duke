@@ -4,7 +4,7 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -59,11 +59,14 @@ public class Duke {
                 System.out.println(tab + eventTask);
                 System.out.println(tab + "Now you have " + list.size() + " tasks in the list.\n" + line);
             } else {
-                Task t = new Task(next);
-                System.out.println(line + "     added: " + t.getDescription() + "\n" + line);
-                list.add(t);
+//                Task t = new Task(next);
+//                System.out.println(line + "     added: " + t.getDescription() + "\n" + line);
+//                list.add(t);
+                throw new DukeException("    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "    ____________________________________________________________\n");
             }
-        }
+            }
         System.out.println(line + "     Bye. Hope to see you again soon!\n" + line);
     }
 }
