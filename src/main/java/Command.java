@@ -51,7 +51,7 @@ public class Command {
      * @param input
      */
     protected String getResponse(String input) throws DukeException{
-        assert FILEPATH.equals("main/java/data/list.txt") : "wrong filepath";
+        assert FILEPATH.equals("list.txt") : "wrong filepath";
         Ui ui = new Ui(input);
         String command = ui.getCommand();
         String response = "";
@@ -63,6 +63,15 @@ public class Command {
                 response = ui.addedTask(todo);
             } catch (Exception e) {
                 response = e.getMessage();
+            }
+            try {
+                String S = "";
+                for (int i = 0; i < tl.getTL().size(); i++) {
+                    S += tl.TL.get(i).toString() + '\n';
+                }
+                storage.writeToFile(FILEPATH, S);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         } else if (command.equals("deadline")) {
             try {
@@ -77,6 +86,15 @@ public class Command {
             } catch (Exception e) {
                 response = e.getMessage();
             }
+            try {
+                String S = "";
+                for (int i = 0; i < tl.getTL().size(); i++) {
+                    S += tl.TL.get(i).toString() + '\n';
+                }
+                storage.writeToFile(FILEPATH, S);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         } else if (command.equals("event")) {
             try {
                 assert isTaskListLoaded : "TaskList not loaded from storage";
@@ -89,6 +107,14 @@ public class Command {
                 response = ui.addedTask(event);
             } catch (Exception e) {
                 response = e.getMessage();
+            } try {
+                String S = "";
+                for (int i = 0; i < tl.getTL().size(); i++) {
+                    S += tl.TL.get(i).toString() + '\n';
+                }
+                storage.writeToFile(FILEPATH, S);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         } else if (command.equals("done")) {
             try {
@@ -98,6 +124,14 @@ public class Command {
                 response = t.markAsDone();
             } catch (Exception e) {
                 response = e.getMessage();
+            } try {
+                String S = "";
+                for (int i = 0; i < tl.getTL().size(); i++) {
+                    S += tl.TL.get(i).toString() + '\n';
+                }
+                storage.writeToFile(FILEPATH, S);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         } else if (command.equals("delete")) {
             try {
@@ -108,6 +142,14 @@ public class Command {
                 tl.TL.remove(taskNum - 1);
             } catch (Exception e) {
                 response = e.getMessage();
+            } try {
+                String S = "";
+                for (int i = 0; i < tl.getTL().size(); i++) {
+                    S += tl.TL.get(i).toString() + '\n';
+                }
+                storage.writeToFile(FILEPATH, S);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         } else if (command.equals("find")) {
             try {
