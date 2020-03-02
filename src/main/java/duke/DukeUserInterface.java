@@ -21,8 +21,13 @@ public class DukeUserInterface {
     private static final String STARTUP_GREETING = "Hi, I'm Kirby!\n" +
             "For a list of available commands, enter 'help' :3" + "\n";
     private static final String POYO_GREETING = "Poyo!";
-    private static final String PIKA_GREETING = "Poyo Poyo! (Pika Pika!)";
+    private static final String PIKA_GREETING = "Pika Pika :3";
     private static final String UWU_GREETING = "UwU";
+    private static final String HELLO_GREETING = "Hello :3";
+    private static final String BADWORD_GREETING = "BAD WORD! >:(";
+    private static final String BENG_GREETING = "eh nbcb knn use app properly lah oi";
+    private static final String PCK_GREETING = "SARS is the virus, that I just want to minus.\n" +
+            "Aiyah, it's not SARS anymore.\nDon't pray pray please wash your hands with soap hor!!\n";
     private static final String HELP_MESSAGE = "Here are the list of commands in KirbyLog:\n\n" +
             "    To view the list of tasks:\n    list\n\n" +
             "    To add a Todo Task:\n    todo <description>\n\n" +
@@ -102,18 +107,26 @@ public class DukeUserInterface {
 
         try {
 
-            if (input.equals("bye")) {
+            if (input.toLowerCase().equals("bye")) {
                 responseMessage = FAREWELL_CLOSING;
-            } else if (input.equals("help")) {
+            } else if (input.toLowerCase().equals("help")) {
                 responseMessage = HELP_MESSAGE;
             } else if (input.equals("Greeting")) {
                 responseMessage = STARTUP_GREETING;
-            } else if (input.equals("poyo")) {
+            } else if (input.toLowerCase().equals("poyo")) {
                 responseMessage = POYO_GREETING;
-            } else if (input.equals("pika")) {
+            } else if (input.toLowerCase().equals("pika")) {
                 responseMessage = PIKA_GREETING;
-            } else if (input.equals("uwu")) {
+            } else if (input.toLowerCase().equals("uwu")) {
                 responseMessage = UWU_GREETING;
+            } else if (input.toLowerCase().equals("hello")) {
+                responseMessage = HELLO_GREETING;
+            } else if (input.toLowerCase().equals("fuck")) {
+                responseMessage = BADWORD_GREETING;
+            } else if (input.toLowerCase().equals("nbcb")) {
+                responseMessage = BENG_GREETING;
+            } else if (input.toLowerCase().equals("wuhan") || input.toLowerCase().equals("coronavirus")) {
+                responseMessage = PCK_GREETING;
             } else {
                 responseMessage = commandParser.executeCommand(input);
                 this.internalStorage.save(this.listOfTasks.getData());

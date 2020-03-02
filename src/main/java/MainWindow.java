@@ -26,9 +26,10 @@ public class MainWindow extends AnchorPane {
     private final static String INTERRUPT_MESSAGE = "Please do not stop me from sleeping ><  :(   \n";
 
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/PikachuCircle.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/PikachuCircle2.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/KirbyCircle2.png"));
-    private Image uwuImage = new Image(this.getClass().getResourceAsStream("/images/uwu.png"));
+    private Image bengImage = new Image(this.getClass().getResourceAsStream("/images/AhBeng2.png"));
+    private Image pckImage = new Image(this.getClass().getResourceAsStream("/images/PCK2.png"));
 
     @FXML
     public void initialize() {
@@ -50,10 +51,23 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+
+        if(input.toLowerCase().equals("nbcb")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, bengImage)
+            );
+        } else if (input.toLowerCase().equals("wuhan") || input.toLowerCase().equals("coronavirus")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, pckImage)
+            );
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
         userInput.clear();
 
         if(!duke.isActive()) {

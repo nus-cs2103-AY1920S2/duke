@@ -155,33 +155,6 @@ public class TaskList {
         return output;
     }
 
-/*    public String delete(String ...a) {
-
-        String output = "";
-        ArrayList<Integer> positions = new ArrayList<Integer>();
-        ArrayList<Task> deletedTasks = new ArrayList<Task>();
-
-        for (String i: a) {
-            int position = Integer.parseInt(i);
-            positions.add(position);
-            deletedTasks.add(this.storageData.get(position));
-        }
-
-        Collections.sort(positions);
-        for (int i = positions.size(); i > 0; i--) {
-            this.storageData.remove(i - 1);
-        }
-
-        output += DELETE_MESSAGE + "\n";
-        for (int i = 0; i < deletedTasks.size(); i++) {
-            output += "       " + deletedTasks.get(i) + "\n";
-        }
-
-        output += "Now you have " + (this.storageData.size() - 1) + " task(s) in the list.";
-
-        return output;
-    }*/
-
     /**
      * Marks a task as done.
      *

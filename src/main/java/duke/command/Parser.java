@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.task.TaskList;
 import duke.DukeException;
 
@@ -78,7 +79,11 @@ public class Parser {
         } else if (basicCommand.equals("priority")) {
 
             // Assigns priority to task.
-            return this.listOfTasks.priority(commandSplit[1], commandSplit[2]);
+            try {
+                return this.listOfTasks.priority(commandSplit[1], commandSplit[2]);
+            } catch (Exception e) {
+                return new DukeException("priority input").toString();
+            }
         } else if (basicCommand.equals("clear")) {
 
             // Clears the list.
