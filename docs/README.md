@@ -51,7 +51,7 @@ The image looks like this:
 ### 2.3 Sample Interaction
 Below is a sample interaction with the Duke Application.  
 
-<img src = "Ui.png" width = "100">
+<img src = "Ui.png" width = "250">
 
 
 ## 3. Features
@@ -137,7 +137,7 @@ Mark a currently saved task or event as done.
 
 Format: `done INDEX`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/README.md#3.4)
+- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#3.4)
 
 **Example of usage:** 
 
@@ -156,7 +156,7 @@ Deletes a currently saved task or event from Duke.
 
 Format: `delete INDEX`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/README.md#3.4)
+- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#3.4)
 
 **Example of usage:** 
 
