@@ -1,0 +1,10 @@
+todo sleep
+todo borrow book
+todo read book
+deadline return book /by 2020-02-01 1100
+deadline revise for test /by 2020-02-02 0000
+list
+event meeting /at Sunday 10am
+done 3
+list
+bye

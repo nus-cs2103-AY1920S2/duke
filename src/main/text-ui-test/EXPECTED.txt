@@ -1,0 +1,36 @@
+Task list not found! Creating one now...
+Task list created!
+Hi! I am Duke! What would you like to tell me today?:)
+Okay! I have taken note of the following:
+[T][✗] sleep
+Now you have 1 tasks in the list.
+Okay! I have taken note of the following:
+[T][✗] borrow book
+Now you have 2 tasks in the list.
+Okay! I have taken note of the following:
+[T][✗] read book
+Now you have 3 tasks in the list.
+Okay! I have taken note of the following:
+[D][✗] return book (by: Feb 1 2020 1100 am)
+Now you have 4 tasks in the list.
+Okay! I have taken note of the following:
+[D][✗] revise for test (by: Feb 2 2020 1200 am)
+Now you have 5 tasks in the list.
+The below is what you have told me so far. Have you completed them?
+[T][✗] sleep
+[T][✗] borrow book
+[T][✗] read book
+[D][✗] return book (by: Feb 1 2020 1100 am)
+[D][✗] revise for test (by: Feb 2 2020 1200 am)
+Okay! I have taken note of the following:
+[E][✗] meeting (at: Sunday 10am)
+Now you have 6 tasks in the list.
+Okay noted! You have completed the below task:
+[T][✓] read book
+The below is what you have told me so far. Have you completed them?
+[T][✗] sleep
+[T][✗] borrow book
+[T][✓] read book
+[D][✗] return book (by: Feb 1 2020 1100 am)
+[D][✗] revise for test (by: Feb 2 2020 1200 am)
+[E][✗] meeting (at: Sunday 10am)
