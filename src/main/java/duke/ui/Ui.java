@@ -261,7 +261,8 @@ public class Ui {
                 "snooze INDEX /for DURATION: Pushes back deadline by given duration.",
                 "undo: Undo your last command that changed your tasks",
                 "archive: Archive all of your completed tasks",
-                "archive view/show : See your list of archived tasks",
+                "archive view/show: See your list of archived tasks",
+                "stats [today/this week/this month/this year]: Get stats",
                 "bye: Bid farewell (sounds great!).",
                 "help: See this message again.",
                 new String(new char[45]).replace("\0", "-"),
@@ -298,7 +299,6 @@ public class Ui {
      */
     public String printStats(Integer[] stats, TemporalAmount statsPeriod) {
         String period;
-        System.out.println(statsPeriod);
         switch (statsPeriod.toString()) {
         case "P0D":
             period = "today";
