@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -25,7 +24,7 @@ public class Ui {
     public void showGreeting() {
         System.out.println(DELIMITER);
         System.out.println("> Hello! I'm Duchess");
-        System.out.println("> What can I do for you?");\
+        System.out.println("> What can I do for you?");
         System.out.println(">Type \"help\" to see the list of commands you can do!");
         System.out.println(DELIMITER);
         System.out.print("> ");
@@ -239,7 +238,7 @@ public class Ui {
      * @return Error message.
      */
     public String getError(DukeException e) {
-        return String.format("Error: %s.", e.getMessage());
+        return String.format("Error: %s", e.getMessage());
     }
 
     /**
@@ -250,7 +249,7 @@ public class Ui {
      */
     public String getLoadingError(Exception e) {
         return "Can't load saved data\n" +
-        e.toString();
+        e.getMessage();
     }
 
     /**
