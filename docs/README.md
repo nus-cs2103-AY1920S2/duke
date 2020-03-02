@@ -128,7 +128,7 @@ Format: `deadline DESCRIPTION /by DATE TIME`
 
 - `DESCRIPTION`: any sequence of characters that are found on a standard keyboard.
 - `DATE`: yyyy-MM-dd
-- `TIME`: HHmm (time is optional, if no time is provided, it is assumed to be 0000)
+- `TIME`: HHmm (Time is optional. If no time is provided, it is assumed to be 0000)
 
 **Example of usage:** 
 
@@ -230,12 +230,12 @@ Format: `snooze INDEX /to TASK_FORMAT`
 - The format for `TASK_FORMAT` must be appropriate for the type of task being rescheduled.
   - Case 1: rescheduled task is a deadline. 
     Format: `snooze INDEX /to DATE TIME`
-    format details can be found [here](/docs/README.md#32-add-an-event-task-event)
+    (format details can be found [here](/docs/README.md#32-add-an-event-task-event))
     
 
   - Case 2: Rescheduled task is an event. 
 Format: `snooze INDEX /to TEXT` 
-format details can be found [here](/docs/README.md#33-add-a-deadline-task-deadline)
+(format details can be found [here](/docs/README.md#33-add-a-deadline-task-deadline))
 
 Example of usage: 
 
