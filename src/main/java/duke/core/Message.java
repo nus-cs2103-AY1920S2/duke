@@ -29,6 +29,8 @@ public class Message {
 
     public static final String DONE_ERROR = "Sorry, invalid command!\nTry: done <task index>";
 
+    public static final String DELETE_ERROR = "Sorry, invalid command!\nTry: delete <task index>";
+
     public static final String DESCRIPTION_ERROR = "Oops! The description of a task can't be empty!";
 
     public static final String INDEX_ERROR = "Sounds like you have the wrong task index, "

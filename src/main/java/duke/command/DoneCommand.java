@@ -19,8 +19,13 @@ public class DoneCommand extends Command {
         } else if (split.length > 2) {
             throw new InvalidCommandException(Message.DONE_ERROR);
         }
-        int idx = Integer.parseInt(split[1]);
-        storage.doTask(idx);
-        return tasks.doTask(idx - 1);
+
+        try {
+            int idx = Integer.parseInt(split[1]);
+            storage.doTask(idx);
+            return tasks.doTask(idx - 1);
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException(Message.DONE_ERROR);
+        }
     }
 }
