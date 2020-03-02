@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.command.*;
+import duke.task.Priority;
 import exception.IllegalTextException;
 
 import java.util.regex.PatternSyntaxException;
@@ -11,23 +12,58 @@ public class Parser {
         stringToParse = removeExtraWhitespaces(stringToParse);
         String commandType = parseCommandType(stringToParse);
 
-        switch (commandType) {
+        switch (commandType.toLowerCase()) {
         case "bye":
             return new ByeCommand();
         case "list":
             return new ListCommand();
         case "done":
-            return new doneCommand(parseItemNumber(stringToParse));
+            return new DoneCommand(parseItemNumber(stringToParse));
         case "delete":
-            return new deleteCommand(parseItemNumber(stringToParse));
+            return new DeleteCommand(parseItemNumber(stringToParse));
         case "todo":
             return new TodoCommand(parseTodoArgs(stringToParse));
         case "event":
             return new EventCommand(parseEventArgs(stringToParse));
         case "deadline":
             return new DeadlineCommand(parseDeadlineArgs(stringToParse));
+        case "priority":
+            return new PriorityCommand(parsePriorityArgs(stringToParse));
+        case "update":
+            return new UpdatePriorityCommand(parseUpdateArgs(stringToParse));
         }
         return null;
+    }
+
+    private static String[] parseUpdateArgs(String stringToParse) throws IllegalTextException {
+        // e.g. "update 2 HIGH"
+        try {
+            String[] splittedString = stringToParse.split("\\s+");
+            if (splittedString.length < 3) {
+                throw new IllegalTextException("Wrong Format, please follow this format: "
+                        + System.lineSeparator() + "update [command number from list] [priority]");
+            } else if (!Priority.isValidPriority(splittedString[2])) {
+                throw new IllegalTextException("You typed an invalid priority level");
+            }
+            System.out.printf("%s %s", splittedString[1].trim(), splittedString[2].trim());
+            return new String[] {splittedString[1].trim(), splittedString[2].trim()};
+        } catch (IllegalTextException e) {
+            throw e;
+        }
+    }
+
+    private static String parsePriorityArgs(String stringToParse) throws IllegalTextException {
+        try {
+            String[] splittedString = stringToParse.split("\\s+");
+            if (splittedString.length <= 1) {
+                throw new IllegalTextException("Specify LOW, MEDIUM or HIGH priority");
+            } else if (!Priority.isValidPriority(splittedString[1])) {
+                throw new IllegalTextException("You typed an invalid priority level");
+            }
+            return splittedString[1];
+        } catch (IllegalTextException e) {
+            throw e;
+        }
     }
 
     private static String[] parseDeadlineArgs(String stringToParse) throws IllegalTextException {

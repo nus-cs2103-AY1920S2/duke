@@ -17,7 +17,7 @@ public class ListCommand extends Command {
 
         String prependedString = getPrependedString(storage);
 
-        return prependedString + text.trim();
+        return prependedString + "    " + text.trim();
     }
 
     private String getPrependedString(TaskStorage storage) {

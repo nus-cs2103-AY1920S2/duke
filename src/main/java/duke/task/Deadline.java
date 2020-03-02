@@ -15,7 +15,7 @@ public class Deadline extends Task {
 
         int toggle = 0;
         for (int i = 0; i < commandArgs.length; i++) {
-            if (commandArgs[i].equals("/by")) {
+            if (commandArgs[i].equals("(by:")) {
                 toggle = 1;
                 continue;
             }
@@ -29,7 +29,10 @@ public class Deadline extends Task {
             }
         }
 
-        return new Deadline(description.trim(), by.trim());
+        by = by.trim();
+        by = by.substring(0, by.length() - 1);
+
+        return new Deadline(description.trim(), by);
     }
 
     @Override

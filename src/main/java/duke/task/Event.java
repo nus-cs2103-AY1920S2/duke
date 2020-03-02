@@ -16,7 +16,7 @@ public class Event extends Task {
 
         int toggle = 0;
         for (int i = 0; i < commandArgs.length; i++) {
-            if (commandArgs[i].equals("/at")) {
+            if (commandArgs[i].equals("(at:")) {
                 toggle = 1;
                 continue;
             }
@@ -30,7 +30,10 @@ public class Event extends Task {
             }
         }
 
-        return new Event(description.trim(), at.trim());
+        at = at.trim();
+        at = at.substring(0, at.length() - 1);
+
+        return new Event(description.trim(), at);
     }
 
     @Override

@@ -17,8 +17,8 @@ public class TodoCommand extends Command {
         Todo newTodo = new Todo(this.taskDescription);
         storage.addToTaskList(newTodo);
         String text = "";
-        text += "    Got it. I've added this task:\n" + "      " + newTodo + "    Now you have "
-                + storage.getTaskList().size() + " tasks in the list.";
+        text += "    Got it. I've added this task:\n" + "      " + newTodo + System.lineSeparator()
+                + "    Now you have " + storage.getTaskList().size() + " tasks in the list.";
         return text;
     }
 }

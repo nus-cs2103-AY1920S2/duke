@@ -3,11 +3,11 @@ package duke.command;
 import duke.Ui.Ui;
 import duke.storage.TaskStorage;
 
-public class deleteCommand extends Command {
+public class DeleteCommand extends Command {
 
     private int taskNumber;
 
-    public deleteCommand(int taskNumber) {
+    public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 

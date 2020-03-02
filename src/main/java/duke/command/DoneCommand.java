@@ -3,11 +3,11 @@ package duke.command;
 import duke.Ui.Ui;
 import duke.storage.TaskStorage;
 
-public class doneCommand extends Command {
+public class DoneCommand extends Command {
 
     private int taskNumber;
 
-    public doneCommand(int taskNumber) {
+    public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 

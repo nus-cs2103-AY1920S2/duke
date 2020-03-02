@@ -6,6 +6,7 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    protected Priority priority = Priority.LOW;
 
     public Task(String description) {
         this.description = description;
@@ -38,12 +39,19 @@ public class Task {
         this.isDone = true;
     }
 
-    // Getter
     public String getDescription() {
         return this.description;
     }
 
     public boolean getTaskCompletionStatus() {
         return this.isDone;
+    }
+
+    public Priority getPriority() {
+        return this.priority;
+    }
+
+    public void setPriority(Priority p) {
+        this.priority = p;
     }
 }
