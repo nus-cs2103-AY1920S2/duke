@@ -105,6 +105,8 @@ public class Parser {
                 return Command.FIND;
             case "archive":
                 return Command.ARCHIVE;
+            case "help":
+                return Command.HELP;
             default:
                 throw new DukeException("Invalid Command.");
         }

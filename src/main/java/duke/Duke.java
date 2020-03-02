@@ -89,6 +89,9 @@ public class Duke {
                     ui.showArchiveMessage(tasks);
                     tasks.clean();
                     break;
+                case HELP:
+                    ui.showHelp();
+                    break;
                 default:
                     ;
                 }
@@ -148,6 +151,8 @@ public class Duke {
                     String message = ui.getArchiveMessage(tasks);
                     tasks.clean();
                     return message;
+                case HELP:
+                    return ui.getHelp();
                 default:
                     ;
             }

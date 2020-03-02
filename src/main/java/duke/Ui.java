@@ -25,7 +25,8 @@ public class Ui {
     public void showGreeting() {
         System.out.println(DELIMITER);
         System.out.println("> Hello! I'm Duchess");
-        System.out.println("> What can I do for you?");
+        System.out.println("> What can I do for you?");\
+        System.out.println(">Type \"help\" to see the list of commands you can do!");
         System.out.println(DELIMITER);
         System.out.print("> ");
     }
@@ -92,6 +93,7 @@ public class Ui {
 
     /**
      * Prints out message showing task(s) that the user searched for.
+     *
      * @param tasks The task(s) that the user searched for
      */
     public void showFoundTasks(TaskList tasks) {
@@ -137,6 +139,7 @@ public class Ui {
 
     /**
      * Prints out all the tasks from the task list that got archived.
+     *
      * @param tasks List of tasks.
      */
     public void showArchiveMessage(TaskList tasks) {
@@ -148,26 +151,45 @@ public class Ui {
     }
 
     /**
-     * Prints the starting message when Duke starts.
+     * Prints out all the possible commands and their correct format
      */
-    public String getGreeting() {
-        return
-        "Hello! I'm Peach\n" +
-        "What can I do for you?";
+    public void showHelp() {
+        System.out.println("Here are all the commands you can enter:");
+        System.out.println("bye - terminates me");
+        System.out.println("list - displays all tasks in your task list");
+        System.out.println("delete <N> - deletes the N-th task in the task list. N must be a positive integer~");
+        System.out.println("done <N> - marks the N-th task in the task list as done! N must be a positive integer~");
+        System.out.println("todo <description> - adds a to-do task into the task list");
+        System.out.println("event <description> /at <dd/mm/yyyy> - adds an event into the task list");
+        System.out.println("deadline <description> /by <dd/mm/yyyy HHmm> - adds a deadline into the task list");
+        System.out.println("find <keyword> - finds tasks(s) with description matching the keyword");
     }
 
     /**
-     * Prints the exit message when user ends a Duke session.
+     * Returns the starting message when Duke starts.
+     *
+     * @return Welcome message.
+     */
+    public String getGreeting() {
+        return
+        "Hello! I'm Peach\n" + "What can I do for you?\n" + "Type \"help\" to see the list of commands you can do!";
+    }
+
+    /**
+     * Returns the exit message when user ends a Duke session.
+     *
+     * @return Exit message.
      */
     public String getExitMessage() {
         return "Bye! Hope you don't come back!";
     }
 
     /**
-     * Prints out message showing the task the user added into the task list.
+     * Returns the message showing the task the user added into the task list.
      *
      * @param tasks List of tasks.
      * @param task The task the user added into the list of tasks.
+     * @return Message showing added task.
      */
     public String getAddedTask(TaskList tasks, Task task) {
         return "Alrighty, you added:\n" +
@@ -176,10 +198,11 @@ public class Ui {
     }
 
     /**
-     * Prints out message showing the task the user deleted from the task list.
+     * Returns the message showing the task the user deleted from the task list.
      *
      * @param tasks List of tasks.
      * @param task The task the user deleted from the list of tasks.
+     * @return Message showing deleted task.
      */
     public String getDeletedTask(TaskList tasks, Task task) {
         return "Do you really want to remove this?\n" +
@@ -188,9 +211,10 @@ public class Ui {
     }
 
     /**
-     * Prints out message showing the task the user marked as done.
+     * Returns the message showing the task the user marked as done.
      *
      * @param task The task the user marked as done.
+     * @return Message showing task marked as done.
      */
     public String getDoneTask(Task task) {
         return "You've finally done this task: \n" +
@@ -198,8 +222,10 @@ public class Ui {
     }
 
     /**
-     * Prints out message showing task(s) that the user searched for.
-     * @param tasks The task(s) that the user searched for
+     * Returns the message showing task(s) that the user searched for.
+     *
+     * @param tasks The task(s) that the user searched for.
+     * @return Message showing the task the user searched for.
      */
     public String getFoundTasks(TaskList tasks) {
         return "Here are the matching tasks in your list: \n" +
@@ -207,18 +233,20 @@ public class Ui {
     }
 
     /**
-     * Prints out an error message from any kind of DukeException caught.
+     * Returns an error message from any kind of DukeException caught.
      *
      * @param e DukeException caught.
+     * @return Error message.
      */
     public String getError(DukeException e) {
-        return e.toString();
+        return String.format("Error: %s.", e.getMessage());
     }
 
     /**
-     * Prints out an error message arising from reading in tasks from saved file.
+     * Returns an error message arising from reading in tasks from saved file.
      *
      * @param e Exception caught from trying to read the save file.
+     * @return Error message.
      */
     public String getLoadingError(Exception e) {
         return "Can't load saved data\n" +
@@ -226,9 +254,10 @@ public class Ui {
     }
 
     /**
-     * Prints out all the tasks from the task list.
+     * Returns all the tasks from the task list.
      *
      * @param tasks List of tasks.
+     * @returns Message showing all tasks from task list.
      */
     public static String getTaskList(TaskList tasks) {
         return "Here are the tasks that you will never complete: \n" +
@@ -236,10 +265,31 @@ public class Ui {
     }
 
     /**
-     * Prints out all the tasks from the task list that got archived.
+     * Returns all the tasks from the task list that got archived.
+     *
      * @param tasks List of tasks.
+     * @return Message showing tasks which got archived
      */
     public String getArchiveMessage(TaskList tasks) {
         return "Here are the tasks that you have archived: \n" + tasks;
+    }
+
+    /**
+     * Returns all possible commands and their correct format.
+     *
+     * @return Message to help user
+     */
+    public String getHelp() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are all the commands you can enter:\n");
+        sb.append("bye - terminates me~\n");
+        sb.append("list - displays all tasks in your task list~\n");
+        sb.append("delete <N> - deletes the N-th task in the task list~\n");
+        sb.append("done <N> - marks the N-th task in the task list as done!\n");
+        sb.append("todo <description> - adds a to-do task into the task list~\n");
+        sb.append("event <description> /at <dd/mm/yyyy> - adds an event into the task list~\n");
+        sb.append("deadline <description> /by <dd/mm/yyyy HHmm> - adds a deadline into the task list~\n");
+        sb.append("find <keyword> - finds tasks(s) with description matching the keyword~\n");
+        return sb.toString();
     }
 }
