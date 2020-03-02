@@ -18,6 +18,7 @@ import duke.command.DeadlineCommand;
 
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTimeFormatException;
+import duke.exception.ReservedSymbolException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -39,7 +40,11 @@ public class Parser {
      * @param command The command to check against.
      * @return
      */
-    public Command parseCommand(String input) throws InvalidCommandException {
+    public Command parseCommand(String input) throws ReservedSymbolException, InvalidCommandException {
+        if (input.contains("~")) {
+            throw new ReservedSymbolException(Message.RESERVED_SYMBOL_ERROR);
+        }
+
         Command result = new ByeCommand(input, true);
         String[] split = input.split(" ");
         String command = split[0];
