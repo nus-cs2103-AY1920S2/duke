@@ -54,7 +54,7 @@ public abstract class Command {
         matcher.find();
 
         String index = matcher.group(POSITION_TARGET_INDEX);
-        assert index != null: "cannot find index";
+        assert index != null : "cannot find index";
         return Integer.parseInt(index) - DIFFERENCE_IN_START_INDEX;
     }
 
@@ -69,7 +69,7 @@ public abstract class Command {
         matcher.find();
 
         String description = matcher.group(POSITION_DESCRIPTION);
-        assert description != null: "cannot find index";
+        assert description != null : "cannot find index";
         return description.trim();
     }
 
@@ -86,16 +86,24 @@ public abstract class Command {
         String dateString = matcher.group(POSITION_DATE);
         String timeString = matcher.group(POSITION_TIME);
 
-        assert dateString != null: "cannot find date string";
+        assert dateString != null : "cannot find date string";
         return parseDateTime(dateString, timeString);
     }
 
+    /**
+     * Finds the date string from the user input by regex.
+     * Converts the date string to LocalDate object.
+     * @param pattern Regex used to parse user input.
+     * @param input user input.
+     * @return parse LocalDate object.
+     * @throws IllegalDateTimeFormatException if the date string is in invalid format.
+     */
     public LocalDate findDate(Pattern pattern, String input) throws IllegalDateTimeFormatException {
         Matcher matcher = pattern.matcher(input);
         matcher.find();
         String dateString = matcher.group(POSITION_VIEW_SCHEDULE_DATE);
 
-        assert dateString != null: "cannot find date string";
+        assert dateString != null : "cannot find date string";
         return parseDate(dateString);
     }
 
@@ -110,7 +118,7 @@ public abstract class Command {
         matcher.find();
 
         String keyWord = matcher.group(POSITION_KEYWORD);
-        assert keyWord != null: "cannot find keyword";
+        assert keyWord != null : "cannot find keyword";
         return matcher.group(POSITION_KEYWORD);
     }
 

@@ -45,6 +45,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * assign a Duke object to the variable duke.
+     * @param d a duke instance.
+     */
     public void setDuke(Duke d) {
         try {
             duke = d;
@@ -56,6 +60,10 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Generates duke dialog box.
+     * @param input String to be displayed on screen.
+     */
     public void dukeSpeak(String input) {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(input, dukeImage)

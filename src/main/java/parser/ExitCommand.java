@@ -17,6 +17,7 @@ public class ExitCommand extends Command {
     }
 
     /**
+     * Returns exit response.
      * @return farewell response as a string.
      */
     @Override

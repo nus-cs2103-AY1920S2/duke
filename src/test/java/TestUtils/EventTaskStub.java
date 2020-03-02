@@ -1,4 +1,4 @@
-package TestUtils;
+package testutils;
 
 import model.EventTask;
 
@@ -10,6 +10,9 @@ public class EventTaskStub extends EventTask {
     //set the at as a string as the LocalDateTime object is only tested in task object.
     private String at;
 
+    /**
+     * Constructs an event stub.
+     */
     public EventTaskStub() {
         description = DEFAULT_DESCRIPTION;
         at = DEFAULT_TIME;

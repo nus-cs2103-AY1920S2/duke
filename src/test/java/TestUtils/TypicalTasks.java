@@ -1,8 +1,11 @@
-package TestUtils;
+package testutils;
 
 public class TypicalTasks {
 
-    public static final ToDoTaskStub TODO_TOPICS = new ToDoTaskStub().withDescription("go through topics for this week");
+    public static final ToDoTaskStub TODO_TOPICS = new ToDoTaskStub().withDescription(
+            "go through topics for this week"
+    );
+
     public static final ToDoTaskStub TODO_IP = new ToDoTaskStub().withDescription("submit week 2 ip");
 
     public static final EventTaskStub EVENT_W3LECTURE = new EventTaskStub().withDescription("week 3 lecture")

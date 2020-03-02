@@ -37,7 +37,7 @@ public class TaskListDecoder {
 
     private static final int POSITION_TASK_IS_DONE = 1;
     private static final int POSITION_TASK_DESCRIPTION = 2;
-    private static final int POSITION_DATE =3;
+    private static final int POSITION_DATE = 3;
     private static final int POSITION_TIME = 4;
 
     /**

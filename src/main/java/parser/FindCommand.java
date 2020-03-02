@@ -2,7 +2,7 @@ package parser;
 
 import static parser.Parser.FIND_PATTERN;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String keyWord;
 
     FindCommand(String userInput) {
