@@ -29,6 +29,9 @@ public class Gui {
      */
     public String printOutTasks(TaskList listOfTasks) {
         String toReturn = "Here are the tasks in your list:\n";
+        if(listOfTasks.getNumOfTasks() == 0) {
+            toReturn = "There are no tasks in your list!\n";
+        }
         int i = 1;
         for (Task task : listOfTasks.getTaskList()) {
             toReturn += String.format("%d. %s\n", i, task.toString());
@@ -51,7 +54,7 @@ public class Gui {
         if (listOfTasks.getTask(index) instanceof Event) {
             taskType = "event";
         }
-        String toReturn = "Got it. The updated ";
+        String toReturn = "Got it, The updated ";
         toReturn += taskType;
         toReturn += " looks like:\n";
         toReturn += listOfTasks.getTask(index);
@@ -121,6 +124,9 @@ public class Gui {
      */
     public String printOutFound(TaskList listOfTasks) {
         String toReturn = "Here are the matching tasks in your list:\n";
+        if (listOfTasks.getNumOfTasks() == 0) {
+            toReturn = "There are no matching tasks in your list!\n";
+        }
         int i = 1;
         for (Task task : listOfTasks.getTaskList()) {
             toReturn += String.format("%d. %s\n", i, task);

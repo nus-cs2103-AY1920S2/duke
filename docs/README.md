@@ -99,7 +99,7 @@ Format: `todo DESCRIPTION`
 **Expected outcome:**
 
 ```
-I've added this task:
+Got it, I've added this task:
 [T][N] CS2103 Quiz
 Now you have 1 task in the list.  
 ```
@@ -119,7 +119,7 @@ Format: `event DESCRIPTION /at DETAILS`
 **Expected outcome:**
 
 ```
-I've added this task:
+Got it, I've added this task:
 [E][N] Steamboat dinner (at: Bugis, 15 Mar 2020 8PM)
 Now you have 2 tasks in the list.
 ```
@@ -141,7 +141,7 @@ Format: `deadline DESCRIPTION /by DATE TIME`
 **Expected outcome:**
 
 ```
-I've added this task:
+Got it, I've added this task:
 [D][N] CS3243 Assignment (by: 19 Feb 2020 0000)
 Now you have 3 tasks in the list.
 ```
@@ -160,7 +160,7 @@ Format: `list`
 ```
 Here are the tasks in your list:
 1. [T][N] CS2103 Quiz
-2. [E][N] Steamboat dinner (at: Bugis, 15 Mar 2020, 8PM)
+2. [E][N] Steamboat dinner (at: Bugis, 15 Mar 2020 8PM)
 3. [D][N] CS3243 Assignment (by: 19 Feb 2020 0000)
 ```
 
@@ -207,7 +207,8 @@ you now have 2 tasks in the list.
 
 
 ### 3.7 Find tasks using a keyword: `find`
-Finds all tasks that contain a specific keyword.
+Lists out all tasks that contain a specific keyword.
+Note: keyword is case specific.
 
 Format: `find KEYWORD`
 
@@ -228,7 +229,7 @@ Here are the matching tasks in your list:
 
 ### 3.8 Reschedule a deadline or event: `snooze`
 Changes the date and timing for a deadline or the details for an event.  
-todo tasks cannot be snoozed.
+Note: todo tasks cannot be snoozed.
 
 Format: `snooze INDEX /to TASK_FORMAT`
 
