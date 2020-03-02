@@ -28,6 +28,7 @@ Summary of the features:
 Format: `list`
 
 Example usage: `list`
+
 Possible Expected Outcome:
 ```
     1. [T][✓] CS2103T Team Project
