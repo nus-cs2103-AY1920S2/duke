@@ -1,24 +1,24 @@
 # User Guide for Duke Chatbot
 
 ## TABLE OF CONTENTS
-1. [Introduction](/docs/README.md#1-introduction)
-2. [Interacting with Duke](/docs/README.md#2-interacting-with-duke)  
-    2.1. [General Guideline](/docs/README.md#21-general-guideline)  
-    2.2. [Images](/docs/README.md#22-images)  
-    2.3. [Sample Interaction with the Duke Application](/docs/README.md#23-sample-interaction-with-the-duke-application)  
-3. [Features](/docs/README.md#3-features)  
-     3.1. [Add a todo task](/docs/README.md#31-add-a-todo-task-todo)  
-     3.2. [Add an event task](/docs/README.md#32-add-an-event-task-event)  
-     3.3. [Add a deadline task](/docs/README.md#33-add-a-deadline-task-deadline)  
-     3.4. [List all tasks](/docs/README.md#34-list-all-tasks-list)  
-     3.5. [Mark task as done](/docs/README.md#35-mark-task-as-done-done)  
-     3.6. [Delete task](/docs/README.md#36-delete-task-delete)  
-     3.7. [Find tasks using a keyword](/docs/README.md#37-find-tasks-using-a-keyword-find)  
-     3.8. [Reschedule a deadline or event](/docs/README.md#38-reschedule-a-deadline-or-event-snooze)  
-     3.9. [Exit Duke](/docs/README.md#39-exit-duke-bye)  
-     3.10. [Storing Data](/docs/README.md#310-storing-data)  
-4. [Command Overview](/docs/README.md#4-command-overview)  
-5. [Acknowledgements](/docs/README.md#5-acknowledgements)
+1. [Introduction](#1-introduction)
+2. [Interacting with Duke](#2-interacting-with-duke)  
+    2.1. [General Guideline](#21-general-guideline)  
+    2.2. [Images](#22-images)  
+    2.3. [Sample Interaction with the Duke Application](#23-sample-interaction-with-the-duke-application)  
+3. [Features](#3-features)  
+     3.1. [Add a todo task](#31-add-a-todo-task-todo)  
+     3.2. [Add an event task](#32-add-an-event-task-event)  
+     3.3. [Add a deadline task](#33-add-a-deadline-task-deadline)  
+     3.4. [List all tasks](#34-list-all-tasks-list)  
+     3.5. [Mark task as done](#35-mark-task-as-done-done)  
+     3.6. [Delete task](#36-delete-task-delete)  
+     3.7. [Find tasks using a keyword](#37-find-tasks-using-a-keyword-find)  
+     3.8. [Reschedule a deadline or event](#38-reschedule-a-deadline-or-event-snooze)  
+     3.9. [Exit Duke](#39-exit-duke-bye)  
+     3.10. [Storing Data](#310-storing-data)  
+4. [Command Overview](#4-command-overview)  
+5. [Acknowledgements](#5-acknowledgements)
 
 
 ## 1. Introduction
@@ -170,7 +170,7 @@ Marks a saved task as done.
 
 Format: `done INDEX`
 
-- `INDEX`: positive number corresponding to the desired task (can be obtained from the `list` command as seen [here](/docs/README.md#34-list-all-tasks-list))
+- `INDEX`: positive number corresponding to the desired task (can be obtained from the `list` command as seen [here](#34-list-all-tasks-list))
 
 **Example of usage:** 
 
@@ -189,7 +189,7 @@ Deletes saved task from Duke.
 
 Format: `delete INDEX`
 
-- `INDEX`: positive number corresponding to the desired task (can be obtained from the `list` command as seen [here](/docs/README.md#34-list-all-tasks-list))
+- `INDEX`: positive number corresponding to the desired task (can be obtained from the `list` command as seen [here](#34-list-all-tasks-list))
 
 **Example of usage:** 
 
@@ -233,16 +233,16 @@ Note: todo tasks cannot be snoozed.
 
 Format: `snooze INDEX /to TASK_FORMAT`
 
-- `INDEX`: positive number corresponding to the desired task (can be obtained from the `list` command as seen [here](/docs/README.md#34-list-all-tasks-list))
+- `INDEX`: positive number corresponding to the desired task (can be obtained from the `list` command as seen [here](#34-list-all-tasks-list))
 - The format for `TASK_FORMAT` must be appropriate for the type of task being rescheduled.
   - Case 1: Rescheduled task is a deadline. 
 Format: `snooze INDEX /to DATE TIME`
-(format details can be found [here](/docs/README.md#32-add-an-event-task-event))
+(format details can be found [here](#32-add-an-event-task-event))
     
 
   - Case 2: Rescheduled task is an event. 
 Format: `snooze INDEX /to DETAILS` 
-(format details can be found [here](/docs/README.md#33-add-a-deadline-task-deadline))
+(format details can be found [here](#33-add-a-deadline-task-deadline))
 
 **Example of usage:** 
 
