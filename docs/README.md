@@ -4,18 +4,31 @@
 
 ## Contents
 1. Overview
+
 2. Starting Duke
+
 3. Features Overview
+
 4. Usage
+
     4.1. Add a Task
-        4.1.1. `todo` - Add a todo task
-        4.1.2. `deadline` - Add a deadline task
-        4.1.3. `event` - Add a event task
+
+        4.1.1. todo - Add a todo task
+        
+        4.1.2. deadline - Add a deadline task
+        
+        4.1.3. event - Add a event task
+        
     4.2. Mark a Task as Done
+    
     4.3. Delete a Task
+    
     4.4. List all Tasks
+    
     4.5. Find by Keyword
+    
     4.6. Add Tag to a Task
+    
     4.7. Exit Duke
 
 ## 1. Overview
