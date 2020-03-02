@@ -11,7 +11,7 @@ import static logic.parser.CliSyntax.PREFIX_DATE;
 import static logic.parser.CliSyntax.PREFIX_NAME;
 import static logic.parser.CliSyntax.PREFIX_TAG;
 
-public class DeadlineCommand implements Command {
+public class DeadlineCommand extends Command {
 
     public static final String COMMAND_WORD = "deadline";
 
@@ -29,12 +29,12 @@ public class DeadlineCommand implements Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: \n\t%1$s";
 
-    private final Task deadlineToAdd;
+    private final Deadline deadlineToAdd;
 
     /**
-     * Creates an DeadlineCommand to add the specified {@code Deadline}
+     * Creates an DeadlineCommand to add the specified {@code Deadline}.
      */
-    public DeadlineCommand(Task task) {
+    public DeadlineCommand(Deadline task) {
         requireNonNull(task);
         deadlineToAdd = task;
     }

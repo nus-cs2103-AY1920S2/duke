@@ -13,6 +13,8 @@ import logic.command.CommandResult;
 import logic.command.ExitCommand;
 import logic.parser.exceptions.ParserException;
 
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -32,11 +34,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
+    /**
+     * Set scroll pane nodes to be resized to match the height and width of the ScrollPane's viewport.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
         start();
     }
 
@@ -49,23 +54,39 @@ public class MainWindow extends AnchorPane {
         this.logicManager = logicManager;
     }
 
+    /**
+     * Displays a welcome message when the programme starts.
+     */
     public void start() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Messages.START, dukeImage)
         );
     }
 
+    /**
+     * Exits the programme after saving file.
+     */
     @FXML
     public void handleExit() {
-        duke.end();
-        System.exit(0);
+        try {
+            duke.end();
+            System.exit(0);
+        } catch (IOException ioe) {
+            System.err.println(ioe.getMessage());
+        }
     }
 
+    /**
+     * Clears chat history.
+     */
     @FXML
     public void clear() {
         dialogContainer.getChildren().clear();
     }
 
+    /**
+     * Displays command list and usage to user.
+     */
     @FXML
     public void help() {
         dialogContainer.getChildren().addAll(

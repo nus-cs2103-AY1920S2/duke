@@ -7,7 +7,7 @@ import logic.parser.exceptions.ParserException;
 import java.text.ParseException;
 
 /**
- * API of the Logic component
+ * API of the Logic component.
  */
 public interface Logic {
     /**

@@ -4,7 +4,7 @@ import commons.Duke;
 
 import static java.util.Objects.requireNonNull;
 
-public class ClearCommand implements Command {
+public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Task list has been cleared!";
 

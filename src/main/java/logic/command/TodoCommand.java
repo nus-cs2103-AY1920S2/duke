@@ -9,7 +9,10 @@ import static java.util.Objects.requireNonNull;
 import static logic.parser.CliSyntax.PREFIX_NAME;
 import static logic.parser.CliSyntax.PREFIX_TAG;
 
-public class TodoCommand implements Command {
+/**
+ * Adds a todo task to the task list.
+ */
+public class TodoCommand extends Command {
 
     public static final String COMMAND_WORD = "todo";
 
@@ -28,7 +31,7 @@ public class TodoCommand implements Command {
     private final Todo todoToAdd;
 
     /**
-     * Creates an TodoCommand to add the specified {@code Todo}
+     * Creates an TodoCommand to add the specified {@code Todo}.
      */
     public TodoCommand(Todo todo) {
         requireNonNull(todo);

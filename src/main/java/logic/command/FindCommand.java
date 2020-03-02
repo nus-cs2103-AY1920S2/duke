@@ -8,8 +8,7 @@ import java.awt.event.KeyEvent;
 
 import static java.util.Objects.requireNonNull;
 
-public class FindCommand implements Command {
-
+public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String MESSAGE_SUCCESS = "Here are the tasks in your list containing %s";
     public static final String NO_TASKS = "No tasks with this keyword found :o";
@@ -31,7 +30,7 @@ public class FindCommand implements Command {
         if (taskList.isEmpty()) {
             return new CommandResult(NO_TASKS);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, keyword) +
-                taskList.printList());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, keyword)
+                + taskList.printList());
     }
 }

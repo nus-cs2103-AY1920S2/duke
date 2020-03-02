@@ -6,10 +6,10 @@ import static java.util.Objects.requireNonNull;
 import javafx.scene.image.Image;
 
 /**
- * A container for App specific utility functions
+ * A container for App specific utility functions.
  */
 public class AppUtil {
-/*
+    /*
     public static Image getImage(String imagePath) {
         requireNonNull(imagePath);
         return new Image(MainApp.class.getResourceAsStream(imagePath));

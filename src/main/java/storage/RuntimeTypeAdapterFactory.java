@@ -41,6 +41,7 @@ import com.google.gson.stream.JsonWriter;
  *     Shape topShape;
  *   }
  * }</pre>
+ *
  * <p>Without additional type information, the serialized JSON is ambiguous. Is
  * the bottom shape in this drawing a rectangle or a diamond? <pre>   {@code
  *   {
@@ -188,6 +189,14 @@ public final class RuntimeTypeAdapterFactory<T> implements TypeAdapterFactory {
         return registerSubtype(type, type.getSimpleName());
     }
 
+    /**
+     * Creates TypeAdaptor.
+     *
+     * @param gson gson
+     * @param type type
+     * @param <R>  type
+     * @return TypeAdapter
+     */
     public <R> TypeAdapter<R> create(Gson gson, TypeToken<R> type) {
         if (type.getRawType() != baseType) {
             return null;
@@ -231,7 +240,7 @@ public final class RuntimeTypeAdapterFactory<T> implements TypeAdapterFactory {
             @Override
             public void write(JsonWriter out, R value) throws IOException {
                 Class<?> srcType = value.getClass();
-                String label = subtypeToLabel.get(srcType);
+                final String label = subtypeToLabel.get(srcType);
                 @SuppressWarnings("unchecked") // registration requires that subtype extends T
                         TypeAdapter<R> delegate = (TypeAdapter<R>) subtypeToDelegate.get(srcType);
                 if (delegate == null) {

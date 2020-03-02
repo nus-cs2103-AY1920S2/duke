@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 public class TaskList {
     public ArrayList<Task> list;
 
-
     /**
      * Initializes the task list.
      */
@@ -92,9 +91,10 @@ public class TaskList {
     }
 
     /**
-     * Prints all tasks in this task list containing the keyword in a numbered order.
+     * Filters through task list and returns tasks containing keyword in name.
      *
-     * @return the string of all tasks containing the keyword in this task list.
+     * @param keyword keyword specified by user.
+     * @return filtered task list.
      */
     public TaskList findTaskContainingKeyword(String keyword) {
         ArrayList<Task> filteredByKeyword = (ArrayList<Task>) list.stream()
@@ -103,6 +103,12 @@ public class TaskList {
         return new TaskList(filteredByKeyword);
     }
 
+    /**
+     * Filters through task list and returns tasks containing tag in tags.
+     *
+     * @param tag tag specified by user.
+     * @return filtered task list.
+     */
     public TaskList findTaskContainingTag(String tag) {
         ArrayList<Task> filteredByTag = (ArrayList<Task>) list.stream()
                 .filter(task -> task.checkTags(tag))

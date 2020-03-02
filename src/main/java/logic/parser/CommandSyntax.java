@@ -12,8 +12,8 @@ public class CommandSyntax {
      * Instantiates the list of friendlier syntax which includes shortcuts for each command.
      */
     public CommandSyntax() {
-        String[] commandList = {"alias", "clear", "deadline", "delete", "done",
-                "event", "bye", "find", "hello", "help", "list", "tag", "todo"
+        String[] commandList = {"alias", "clear", "deadline", "delete", "done", "event", "bye", "find",
+                "hello", "help", "list", "tag", "todo"
         };
         defaultCommands.addAll(Arrays.asList(commandList));
         syntax.put("a", "alias");

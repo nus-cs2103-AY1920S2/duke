@@ -11,7 +11,7 @@ import static logic.parser.CliSyntax.PREFIX_DATE;
 import static logic.parser.CliSyntax.PREFIX_NAME;
 import static logic.parser.CliSyntax.PREFIX_TAG;
 
-public class EventCommand implements Command {
+public class EventCommand extends Command {
 
     public static final String COMMAND_WORD = "event";
 
@@ -31,7 +31,7 @@ public class EventCommand implements Command {
     private final Task eventToAdd;
 
     /**
-     * Creates an EventCommand to add the specified {@code Event}
+     * Creates an EventCommand to add the specified {@code Event}.
      */
     public EventCommand(Task task) {
         requireNonNull(task);

@@ -10,7 +10,7 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class DoneCommand implements Command {
+public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
 
@@ -19,8 +19,8 @@ public class DoneCommand implements Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DONE_TASK_SUCCESS = "\"Nice! I've marked this task as done:" +
-            "\n\tTask marked as done %1$s";
+    public static final String MESSAGE_DONE_TASK_SUCCESS = "Nice! I've marked this task as done:"
+            + "\n\tTask marked as done %1$s";
 
     private final Index targetIndex;
 
@@ -34,7 +34,8 @@ public class DoneCommand implements Command {
         TaskList taskList = duke.getTaskList();
         List<Task> lastShownList = taskList.getTaskList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            throw new CommandException("Oh no... there is no such task :(\n"
+                    + Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         Task taskMarkedAsDone = lastShownList.get(targetIndex.getZeroBased());
         taskList.markAsDone(targetIndex.getZeroBased());

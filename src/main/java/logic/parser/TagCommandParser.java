@@ -7,7 +7,7 @@ import logic.parser.exceptions.ParserException;
 import static commons.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
- * Parses input arguments and creates a new TagCommand object
+ * Parses input arguments and creates a new TagCommand object.
  */
 public class TagCommandParser implements Parser<TagCommand> {
 

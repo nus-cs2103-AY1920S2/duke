@@ -4,6 +4,8 @@ import logic.LogicManager;
 import storage.Storage;
 import tasks.TaskList;
 
+import java.io.IOException;
+
 /**
  * The project is a product named Duke, a Personal Assistant Chatbot
  * that helps a person to keep track of various things.
@@ -27,7 +29,7 @@ public class Duke {
     /**
      * Saves the task list into the storage file when user terminates the programme.
      */
-    public void end() {
+    public void end() throws IOException {
         storage.saveTaskList(taskList);
         storage.saveFile(logicManager.getCommandSyntax());
     }

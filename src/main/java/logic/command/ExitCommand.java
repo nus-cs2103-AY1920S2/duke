@@ -2,12 +2,12 @@ package logic.command;
 
 import commons.Duke;
 
-public class ExitCommand implements Command {
+public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";
 
-    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Bye. Hope to see you again soon!\n" +
-            "Exiting duke as requested...";
+    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Bye. Hope to see you again soon!\n"
+            + "Exiting duke as requested...";
 
     @Override
     public CommandResult execute(Duke duke) {

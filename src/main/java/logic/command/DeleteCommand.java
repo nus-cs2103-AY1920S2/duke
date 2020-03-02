@@ -10,7 +10,7 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -19,8 +19,7 @@ public class DeleteCommand implements Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Noted. I've removed this task:" +
-            "\n\t\t%1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Noted. I've removed this task:\n\t\t%1$s";
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {

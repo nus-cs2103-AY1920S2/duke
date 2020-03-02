@@ -17,7 +17,7 @@ import tasks.TaskList;
 import tasks.Todo;
 
 /**
- * Handles the loading and saving of task lists to the hard disk.
+ * Handles the loading and saving of task lists and alias to the hard disk.
  */
 public class Storage {
     private Gson gson;
@@ -42,7 +42,7 @@ public class Storage {
      */
     public CommandSyntax readAlias() {
         try {
-            FileReader fileReader = new FileReader(userDirectory + "/alias.json");
+            FileReader fileReader = new FileReader(userDirectory + "/data/alias.json");
             return gson.fromJson(fileReader, CommandSyntax.class);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
@@ -51,12 +51,14 @@ public class Storage {
     }
 
     /**
-     * Searches for an existing file with a previous task list store.
-     * If no such file found, reinitialise task list.
+     * Searches for an existing file named alias.json with a previous task list store.
+     * If no such file found, initialise a new task list.
+     *
+     * @return Task list from existing file or new task list.
      */
     public TaskList readTaskList() {
         try {
-            FileReader task = new FileReader(userDirectory + "/data.json");
+            FileReader task = new FileReader(userDirectory + "/data/taskList.json");
             return gson.fromJson(task, TaskList.class);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
@@ -64,9 +66,12 @@ public class Storage {
         }
     }
 
-    public void saveTaskList(TaskList taskList) {
+    /**
+     * Saves task list into taskList.json
+     */
+    public void saveTaskList(TaskList taskList) throws IOException {
         try {
-            FileWriter fileWriter = new FileWriter(userDirectory + "/data.json");
+            FileWriter fileWriter = new FileWriter(userDirectory + "/data/taskList.json");
             gson.toJson(taskList, fileWriter);
             fileWriter.flush();
             fileWriter.close();
@@ -76,11 +81,11 @@ public class Storage {
     }
 
     /**
-     * Writes alias into hard drive.
+     * Saves alias into alias.json.
      */
     public void saveFile(CommandSyntax alias) {
         try {
-            FileWriter aliasFile = new FileWriter(userDirectory + "/alias.json");
+            FileWriter aliasFile = new FileWriter(userDirectory + "/data/alias.json");
             gson.toJson(alias, aliasFile);
             aliasFile.flush();
             aliasFile.close();

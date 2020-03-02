@@ -29,7 +29,7 @@ public class Event extends Task {
      * then date of the event in MMM d yyyy.
      *
      * @return the string of the task that is an event indicating [E] for event followed by the name
-     * then date of the event in MMM d yyyy.
+     *     hen date of the event in MMM d yyyy.
      */
     @Override
     public String toString() {

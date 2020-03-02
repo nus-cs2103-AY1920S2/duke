@@ -42,6 +42,7 @@ public class ArgumentTokenizer {
     }
 
     /**
+     * Find prefix position.
      * {@see findAllPrefixPositions}
      */
     private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
@@ -68,6 +69,7 @@ public class ArgumentTokenizer {
      * occurrences of "p/" with whitespace before it. However, if
      * {@code argsString} = "e/hi p/900", {@code prefix} = "p/" and
      * {@code fromIndex} = 0, this method returns 5.
+     * </p>
      */
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
         int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);

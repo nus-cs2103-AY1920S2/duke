@@ -9,6 +9,8 @@ import logic.parser.DukeParser;
 import storage.Storage;
 import logic.parser.exceptions.ParserException;
 
+import java.io.IOException;
+
 /**
  * The main LogicManager of the app.
  */
@@ -51,16 +53,15 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = dukeParser.parseCommand(commandText, commandSyntax);
         commandResult = command.execute(duke);
-        storage.saveTaskList(duke.getTaskList());
-        return commandResult;
-    }
-    //try {
-    //}
-        /*catch (IOException ioe) {
+        try {
+            storage.saveTaskList(duke.getTaskList());
+        } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
-         */
-/*
+        return commandResult;
+    }
+
+    /*
     @Override
     public ReadOnlyTaskList getTaskList() {
         return taskList.getTaskList();
@@ -85,8 +86,7 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         taskList.setGuiSettings(guiSettings);
     }
-
- */
+    */
 }
 
 

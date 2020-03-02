@@ -4,7 +4,7 @@ import commons.Duke;
 
 import static java.util.Objects.requireNonNull;
 
-public class ListCommand implements Command {
+public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_SUCCESS = "Here are the tasks in your list";

@@ -4,7 +4,7 @@ import commons.Duke;
 
 import static java.util.Objects.requireNonNull;
 
-public class HelloCommand implements Command {
+public class HelloCommand extends Command {
     public static final String COMMAND_WORD = "hello";
     public static final String MESSAGE_SUCCESS = "Hello! I'm Duke\n\tWhat can I do for you?";
 

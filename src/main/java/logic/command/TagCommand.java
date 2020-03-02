@@ -5,7 +5,7 @@ import tasks.TaskList;
 
 import static java.util.Objects.requireNonNull;
 
-public class TagCommand implements Command {
+public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
     public static final String MESSAGE_SUCCESS = "Here are the tasks in your list containing %s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose name contain any of "
@@ -27,7 +27,6 @@ public class TagCommand implements Command {
         if (taskList.isEmpty()) {
             return new CommandResult(NO_TAGS);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tag) +
-                taskList.printList());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tag) + taskList.printList());
     }
 }

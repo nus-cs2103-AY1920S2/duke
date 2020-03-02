@@ -29,8 +29,8 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParserException(String.format("Pawdon me, I think you furgot to include the description or date" +
-                    " of the deadline." + MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE));
+            throw new ParserException(String.format("Pawdon me, I think you furgot to include the description or date"
+                    + " of the deadline." + MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());

@@ -2,6 +2,6 @@ package logic.command;
 
 import commons.Duke;
 
-public interface Command {
-    CommandResult execute(Duke duke) throws CommandException;
+public abstract class Command {
+    public abstract CommandResult execute(Duke duke) throws CommandException;
 }

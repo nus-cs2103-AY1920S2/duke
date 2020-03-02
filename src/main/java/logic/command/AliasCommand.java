@@ -6,7 +6,7 @@ import logic.parser.FriendlierSyntax;
 
 import static java.util.Objects.requireNonNull;
 
-public class AliasCommand implements Command {
+public class AliasCommand extends Command {
     public static final String COMMAND_WORD = "alias";
     public static final String MESSAGE_SUCCESS = "Alias added.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an alias for command.";

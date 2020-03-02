@@ -7,7 +7,7 @@ import logic.parser.exceptions.ParserException;
 import static commons.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteCommand object.
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
@@ -22,8 +22,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteCommand(index);
         } catch (ParserException pe) {
-            throw new ParserException("Pawdon me, I think you furgot to include the task number." +
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParserException("Pawdon me, I think you furgot to include the task number."
+                    + String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
 

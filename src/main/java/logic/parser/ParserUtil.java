@@ -6,11 +6,7 @@ import logic.parser.exceptions.ParserException;
 import tasks.Date;
 import tasks.Name;
 import tasks.Tag;
-
 import static java.util.Objects.requireNonNull;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,8 +19,6 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    //DukeException("Pawdon me, I think you furgot to include the task number.");
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -34,7 +28,8 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParserException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParserException(MESSAGE_INVALID_INDEX);
+            throw new ParserException("Pawdon me, I think you furgot to include the task number\n"
+                    + MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -45,7 +40,6 @@ public class ParserUtil {
      *
      * @throws ParserException if the given {@code name} is invalid.
      */
-
     public static Name parseName(String name) throws ParserException {
         requireNonNull(name);
         String trimmedName = name.trim();
@@ -55,6 +49,12 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    /**
+     * Parses a {@code String alias} into a {@code command}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParserException if the given {@code alias} is invalid.
+     */
     public static String parseAlias(String alias) throws ParserException {
         requireNonNull(alias);
         String trimmedAlias = alias.trim();
@@ -65,6 +65,12 @@ public class ParserUtil {
         return trimmedAlias;
     }
 
+    /**
+     * Parses a {@code String command} into a {@code command}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParserException if the given {@code command} is invalid.
+     */
     public static String parseCommand(String command) throws ParserException {
         requireNonNull(command);
         String trimmedCommand = command.trim();

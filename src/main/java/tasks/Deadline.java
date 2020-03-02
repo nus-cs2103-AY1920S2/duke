@@ -28,7 +28,7 @@ public class Deadline extends Task {
      * then do by date in MMM d yyyy.
      *
      * @return the string of the deadline task indicating [D] for deadline followed by the name
-     * then do by date in MMM d yyyy.
+     *     then do by date in MMM d yyyy.
      */
     @Override
     public String toString() {

@@ -9,7 +9,7 @@ import static commons.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Tasks's name in the taskList.
+ * Represents a Deadline or Event's date in the taskList for tasks.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
