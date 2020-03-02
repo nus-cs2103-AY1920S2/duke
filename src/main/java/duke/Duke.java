@@ -21,8 +21,10 @@ public class Duke {
     private TaskList tasks;
     private TagList tags;
     private Ui ui;
-    private boolean isLoadedFromStorage = false;
     private static final String FILE_PATH = "data/duke.txt";
+
+    public boolean isLoadedFromStorage = false;
+    public int noLoadedTasks = 0;
 
     /**
      * Duke constructor.
@@ -39,6 +41,7 @@ public class Duke {
             tasks = new TaskList(storage.load());
             tags = new TagList(tasks);
             this.isLoadedFromStorage = true;
+            this.noLoadedTasks = tasks.getSize();
         } catch (DukeException e) {
             tasks = new TaskList();
             tags = new TagList();
@@ -99,4 +102,5 @@ public class Duke {
         System.setOut(System.out);
         return dukeResponse;
     }
+
 }

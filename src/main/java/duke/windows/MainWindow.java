@@ -39,6 +39,9 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         String dukeWelcome = "Hey boss! Duke here, at your service. \nWhat do you need me to do?";
+        if (d.isLoadedFromStorage) {
+            dukeWelcome += "\n\nBy the way, I've got " + d.noLoadedTasks + " tasks in my notebook.";
+        }
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(dukeWelcome, dukeImage));
     }
