@@ -11,16 +11,18 @@ public class Ui {
     }
 
     /**
-     * Prints the introductory message for Duke.
+     * Returns the introductory message for Duke.
+     * @return The introductory message.
      */
-    public String printIntro() {
+    public String introMessage() {
         return Message.INTRO;
     }
 
     /**
-     * Prints the goodbye message for Duke.
+     * Returns the goodbye message for Duke.
+     * @return The goodbye message.
      */
-    public String printGoodbye() {
+    public String goodbyeMessage() {
         return Message.EXIT;
     }
 

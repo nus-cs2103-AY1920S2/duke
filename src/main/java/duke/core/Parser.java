@@ -37,8 +37,9 @@ public class Parser {
     /**
      * Parses the input string into a command.
      * @param input The given user input.
-     * @param command The command to check against.
-     * @return
+     * @return The resultant Command that has been parsed.
+     * @throws ReservedSymbolException Exception when the input contains a reserved symbol.
+     * @throws InvalidCommandException Exception when the user inputs an invalid command.
      */
     public Command parseCommand(String input) throws ReservedSymbolException, InvalidCommandException {
         if (input.contains("~")) {
@@ -115,8 +116,8 @@ public class Parser {
     }
 
     /**
-     * Parses the input string into the right date and time format.
-     * @param time The given user input.
+     * Reformats the input string into the right date and time format.
+     * @param time The given unfromatted user input.
      * @return The reformatted string.
      */
     public static String reformatDateAndTime(String time) throws InvalidTimeFormatException {

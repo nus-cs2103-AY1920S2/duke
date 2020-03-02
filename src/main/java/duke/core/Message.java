@@ -1,5 +1,8 @@
 package duke.core;
 
+/**
+ * Represents a place to store all the messages to be displayed in Duke.
+ */
 public class Message {
     public static final String RESERVED_SYMBOL_ERROR = "Sorry, please refrain from using '~' in your message.\n"
             +"It's Cute's special reserved symbol!";

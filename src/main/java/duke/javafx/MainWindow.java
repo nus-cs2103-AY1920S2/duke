@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void printIntro() {
-        String response = ui.printIntro();
+        String response = ui.introMessage();
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(response, dukeImage)
         );

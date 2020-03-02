@@ -25,8 +25,7 @@ public class Storage {
     public static final String TEMP_FILEPATH = "./data/temp.txt";
 
     /**
-     * Constructs a fresh Storage instance, with a supplied path for the file storing the task list.
-     * @param fileName The file path for the task list file.
+     * Constructs a fresh Storage instance.
      */
     public Storage() {
         File dir = new File(DIRECTORY);
@@ -35,6 +34,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Gets the filepath of the storage.
+     * @return The filepath.
+     */
     public String getFilePath() {
         return FILEPATH;
     }
@@ -160,6 +163,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the description of a specified task.
+     * @param idx The index of the task to be updated.
+     * @param input The user input.
+     */
     public void updateDescription(int idx, String input) {
         File originalFile = new File(FILEPATH);
         File tempFile = new File(TEMP_FILEPATH);
@@ -204,6 +212,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the time of a specified task.
+     * @param idx The index of the task to be updated.
+     * @param input The user input.
+     * @throws InvalidTimeFormatException Exception when the time format is invalid.
+     */
     public void updateTime(int idx, String input) throws InvalidTimeFormatException {
         File originalFile = new File(FILEPATH);
         File tempFile = new File(TEMP_FILEPATH);

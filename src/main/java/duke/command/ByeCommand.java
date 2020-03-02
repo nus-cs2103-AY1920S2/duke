@@ -29,7 +29,7 @@ public class ByeCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidCommandException {
         if (input.trim().compareTo("bye") == 0) {
-            return ui.printGoodbye();
+            return ui.goodbyeMessage();
         } else {
             throw new InvalidCommandException(Message.COMMAND_ERROR);
         }
