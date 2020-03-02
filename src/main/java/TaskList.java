@@ -12,6 +12,9 @@ public class TaskList {
      * The user interface.
      */
     private Ui ui;
+    /**
+     * The task statistics.
+     */
     private Statistics stats;
 
     /**

@@ -103,15 +103,27 @@ public class Ui {
         System.out.println("Oops! " + e.getMessage());
     }
 
+    /**
+     * Shows assertion error while catching invalid index.
+     */
     public void showAssertionError() {
         System.out.println("Oops! The index is invalid.");
     }
 
+    /**
+     * Prints statistics for the user.
+     * @param stats The task statistics.
+     */
     public void printStats (Statistics stats) {
         int numberOfTasks = stats.getNumberOfTasks();
         int numberOfEvents = stats.getNumberOfEvents();
         int numberOfDeadlines = stats.getNumberOfDeadlines();
         int numberOfTodos = stats.getNumberOfTodos();
         int numberOfCompletedTasks = stats.getNumberOfCompletedTasks();
+        double progress = (double) numberOfCompletedTasks / (double) numberOfTasks;
+        System.out.println("You have " + numberOfTasks + " tasks in total, including " + numberOfEvents + " events, "
+                + numberOfDeadlines + " deadlines, and " + numberOfTodos " todos."
+                + "You have completed " + numberOfCompletedTasks + " tasks. "
+                + (progress * 100) + "% progress has been made!")
     }
 }
