@@ -1,4 +1,5 @@
 # Duke User Guide
+The project is a product named Duke, a Personal Assistant Chatbot that helps a person to keep track of various things.
 
 ## Features 
 
@@ -53,7 +54,7 @@ Expected outcome:
 
 ### `Delete` - deletes task at index.
 
-delete [index]
+delete index
  
 Example of usage: 
 delete 1
@@ -63,7 +64,7 @@ Noted. I've removed this task
 
 ### `Done` - marks task with at index as done.
 
-done task number
+done index
  
 Example of usage: 
 done 1
@@ -83,7 +84,7 @@ Expected outcome:
       
 ### `Find` - Returns list of tasks with keyword in name.
 
-[keyword]
+find keyword
 
 Example of usage: 
 keyword cs2103t
