@@ -12,13 +12,26 @@ checkstyle {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.3.0"
+    archiveVersion = "0.4.0"
     archiveClassifier = null
     archiveAppendix = null
 }
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    String javaFxVersion = '11'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation  group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
 test {
@@ -31,7 +44,7 @@ javafx {
 }
 
 group 'jiachen.duke'
-version '0.3.0'
+version '0.4.0'
 
 repositories {
     mavenCentral()
