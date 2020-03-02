@@ -20,7 +20,7 @@ public class Ui {
     /**
      * Prints a goodbye message.
      */
-    public static void goodbye() {
+    public static void printGoodbye() {
         content = " I shall not trouble you anymore. Farewell, partner.";
         System.out.println(content);
     }
@@ -61,24 +61,24 @@ public class Ui {
     }
 
     /**
-     * Prints a message when a find command is initiated.
-     * @param str the keyword provided
+     * Prints the result of a find command. Informs the user if no match is found.
+     *
+     * @param keyword a String keyword
+     * @param result  a String representation of the list of tasks that contain the keyword
+     * @param count   the number of tasks that contain the keyword.
      */
-    public static void printFindPre(String str) {
-        content = String.format(" Tasks that contain %s in your list\n", str);
-
+    public static void printFind(String keyword, String result, int count) {
+        content = "";
+        if (count > 0) {
+            content += String.format(" Tasks that contain \"%s\" in your list:\n", keyword);
+            content += result;
+            content += String.format(" %d %s in total.\n", count, count > 1 ? "entries" : "entry");
+        } else {
+            content = String.format(" Eh, I can't find anything that matches \"%s\".", keyword);
+        }
         System.out.println(content);
     }
 
-    /**
-     * Prints a message showing the number of matches found.
-     * @param size the number of matches
-     */
-    public static void printFindPost(int size) {
-        content = String.format(" %d %s in total.\n", size, size > 1 ? "entries" : "entry");
-
-        System.out.println(content);
-    }
 
     /**
      * Prints a message error.

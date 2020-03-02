@@ -37,11 +37,16 @@ public class FindCommand extends Command {
     public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
         try {
             AtomicInteger index = new AtomicInteger(1);
-            Ui.printFindPre(keyword);
-            storage.stream()
-                    .filter(task -> task.getDescription().toLowerCase().contains(this.keyword.toLowerCase()))
-                    .forEach(task -> System.out.printf("\t%d -%s\n", index.getAndIncrement(), task.toString()));
-            Ui.printFindPost(index.get() - 1);
+            StringBuilder result = new StringBuilder();
+            int count = 0;
+            for (Task task : storage) {
+                if (task.getDescription().toLowerCase().contains(this.keyword.toLowerCase())) {
+                    count += 1;
+                    result.append(String.format("\t%d -%s\n", count, task.toString()));
+                }
+            }
+            Ui.printFind(keyword, result.toString(), count);
+
         } catch (Exception e) {
             Controller.raiseException(e);
         }

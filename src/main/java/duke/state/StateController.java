@@ -53,7 +53,7 @@ public class StateController {
             stateStack.pop();
             current = stateStack.peek();
         } else {
-            throw new Exception("Sorry I cannot find a past state.");
+            throw new Exception(" Sorry I cannot find a past state.");
         }
     }
 

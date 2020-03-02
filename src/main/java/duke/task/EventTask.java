@@ -29,7 +29,10 @@ class EventTask extends Task {
 
         int lastAt = description.lastIndexOf(" at ");
         if (lastAt == -1) {
-            throw new Exception(" Keyword \"at\" missing");
+            if (description.contains("at")) {
+                throw new Exception((" Date & time missing."));
+            }
+            throw new Exception(" Keyword \"at\" missing.");
         } else {
             /*
                 The second try clause handles when a task is read from data.csv, wherein its date format is

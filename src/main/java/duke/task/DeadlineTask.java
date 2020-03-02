@@ -28,7 +28,10 @@ class DeadlineTask extends Task {
                 .collect(Collectors.joining(" "));
         int lastBy = description.lastIndexOf(" by ");
         if (lastBy == -1) {
-            throw new Exception(" Keyword \"by\" missing");
+            if (description.contains("by")) {
+                throw new Exception((" Date & time missing."));
+            }
+            throw new Exception(" Keyword \"by\" missing.");
         } else {
             /*
                 The second try clause handles when a task is read from data.csv, wherein its date format is

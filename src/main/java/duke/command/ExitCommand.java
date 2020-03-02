@@ -22,7 +22,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
-        Ui.goodbye();
+        Ui.printGoodbye();
         return true;
     }
 }
