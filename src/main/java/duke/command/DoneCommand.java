@@ -38,12 +38,12 @@ public class DoneCommand extends Command {
     public boolean execute(StateController stateController, Storage storageController, ArrayList<Task> storage) {
         try {
             int storageSize = storage.size();
-            if (index > storageSize) {
+            if (index > storage.size()) {
                 Controller.raiseException(new Exception("This is beyond the scope of my ability, sadly."));
                 return false;
             }
             storage.get(index).setDone();
-            Ui.printDone(storage.get(index).toString(), storageSize);
+            Ui.printDone(storage.get(index).toString(), storageSize - Controller.getNumberOfDoneTasks(storage));
             storageController.writeTask(storage);
             stateController.commit(this, storage);
         } catch (Exception e) {

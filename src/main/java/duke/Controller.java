@@ -2,6 +2,9 @@ package duke;
 
 import duke.command.Command;
 import duke.state.StateController;
+import duke.task.Task;
+
+import java.util.ArrayList;
 
 /**
  * The Controller class that facilitates execution of the Duke program.
@@ -10,6 +13,10 @@ public class Controller {
     protected Storage storageController;
     private StateController stateController;
     private boolean hasReachedExit = false;
+
+    public static int getNumberOfDoneTasks(ArrayList<Task> storage) {
+        return (int) storage.stream().filter(task -> task.getStatus().equals("T")).count();
+    }
 
     /**
      * Constructs a Controller object with the specified Storage object.
