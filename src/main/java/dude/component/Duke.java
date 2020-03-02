@@ -25,15 +25,6 @@ public class Duke {
     }
 
     /**
-     * Saves the current TaskList by calling saveSession from the IStorage class used.
-     *
-     * @throws SecurityException if a security violation occurs while attempting to create the directory or save file.
-     */
-    public void saveState() {
-        this.storage.saveSession(ui, tasks);
-    }
-
-    /**
      * Takes user input and responds to commands appropriately.
      * Closes app when "bye" is given as input.
      */
@@ -41,7 +32,7 @@ public class Duke {
         try {
             String msg = ui.readCommand();
             Command command = Parser.parse(msg);
-            command.execute(tasks, ui);
+            command.execute(tasks, ui, storage);
             if (command.isExit()) {
                 ui.close();
             }

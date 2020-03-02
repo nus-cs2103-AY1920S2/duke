@@ -40,15 +40,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
-    /**
-     * Saves state (calls duke#saveState which calls IStorage#saveSession) before quitting.
-     * However, since UI could already be closed when this method is called, unlikely to report errors
-     * while saving state.
-     * Does not throw exception.
-     */
-    @Override
-    public void stop() {
-        this.duke.saveState();
-    }
 }

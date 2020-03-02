@@ -3,6 +3,7 @@ package dude.command;
 import dude.parser.IDateParser;
 import dude.parser.Parser;
 
+import dude.component.IStorage;
 import dude.component.IUserInterface;
 import dude.component.TaskList;
 
@@ -50,10 +51,11 @@ public class HelpCommand extends Command {
      *
      * @param tasks the current TaskList before the command is executed. Can be modified by execute.
      * @param ui the IUserInterface to report results of successful commands.
+     * @param storage the IStorage to save changes to the task list to disk. Not used by HelpCommand.
      * @throws CommandExecutionException if helpTopic is not a command or -date.
      */
     @Override
-    public void execute(TaskList tasks, IUserInterface ui) throws CommandExecutionException {
+    public void execute(TaskList tasks, IUserInterface ui, IStorage storage) throws CommandExecutionException {
         switch (helpTopic) {
         case "all":
             helpAll(ui);

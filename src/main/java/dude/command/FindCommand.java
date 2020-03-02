@@ -1,5 +1,6 @@
 package dude.command;
 
+import dude.component.IStorage;
 import dude.component.IUserInterface;
 import dude.component.TaskList;
 
@@ -21,9 +22,10 @@ public class FindCommand extends Command {
      *
      * @param tasks the current TaskList before the command is executed. Can be modified by execute.
      * @param ui the IUserInterface to report results of successful commands.
+     * @param storage the IStorage to save changes to the task list to disk. Not used by FindCommand.
      */
     @Override
-    public void execute(TaskList tasks, IUserInterface ui) {
+    public void execute(TaskList tasks, IUserInterface ui, IStorage storage) {
         ui.respond(() -> {
             ui.speak("These are the matching tasks I found:");
             tasks.showFilteredTasks(task -> task.getDetails().contains(keyword))
