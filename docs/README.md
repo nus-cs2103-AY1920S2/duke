@@ -24,15 +24,15 @@ really love this app. Try it out!
 6. Some example commands you can try:
 Please exercise caution when copy-pasting the commands below. There might be missing spaces,
 so re-check before you paste these commands to the application. The best way is to type out the commands by yourself.
-* **`todo`**`pray to the bell curve god`: adds a Todo Task called "pray to bell curve god". A Todo has no timestamp.
+* `todo pray to the bell curve god`: adds a Todo Task called "pray to bell curve god". A Todo has no timestamp.
 Why need a timestamp when you can "pray to the bell curve god" everyday?
-* **`list`** : lists all tasks. For now, you should see the task "pray to the bell curve god" above.
-* **`deadline`**`CS3230 Assignment 1/2020-03-07`: adds a deadline with a date in format YYYY-MM-DD. Who uses
+* `list` : lists all tasks. For now, you should see the task "pray to the bell curve god" above.
+* `deadline CS3230 Assignment 1/2020-03-07`: adds a deadline with a date in format YYYY-MM-DD. Who uses
 MM-DD anyways? *ahem*
-* **`deadline`**`Buy present/2020-03-08`: adds another deadline.
-* **`sort deadlines`**: Ta-da! Now you can see the nearest deadlines that you have. Never worried about
+* `deadline Buy present/2020-03-08`: adds another deadline.
+* `sort deadlines`: Ta-da! Now you can see the nearest deadlines that you have. Never worried about
 missing a deadline anymore!
-* **`bye`** : exits the app. Bye bye!
+* `bye` : exits the app. Bye bye!
 
 ## 3. Screenshot
 ![Screenshot of Ui](Ui.png)
