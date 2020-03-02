@@ -132,7 +132,8 @@ public class TaskCreationHandlerTest {
         String input = "event Run";
 
         try {
-            TaskCreationHandler.handleEventCommand(input, dummyTaskList, dummyUi, dummyStorageMock, dummySaveStateStack);
+            TaskCreationHandler.handleEventCommand(input, dummyTaskList, dummyUi,
+                    dummyStorageMock, dummySaveStateStack);
             fail();
         } catch (DuchessException e) {
             assertEquals(ERROR_EVENT_MISSING_TIME_FRAME, e.getMessage());
@@ -147,7 +148,8 @@ public class TaskCreationHandlerTest {
         // Missing description only
         String input = "event /at Home";
         try {
-            TaskCreationHandler.handleEventCommand(input, dummyTaskList, dummyUi, dummyStorageMock, dummySaveStateStack);
+            TaskCreationHandler.handleEventCommand(input, dummyTaskList, dummyUi,
+                    dummyStorageMock, dummySaveStateStack);
             fail();
         } catch (DuchessException e) {
             assertEquals(ERROR_EVENT_MISSING_CONTENT, e.getMessage());
