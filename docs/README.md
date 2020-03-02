@@ -1,13 +1,35 @@
 # Duke User Guide
 
-## 1. Features
+![](Ui.png)
 
-### 1.1. View all tasks
-View a list of all saved tasks.
+## 1. About Duke
+Duke is your companion who helps you to keep track of your tasks at hand. Some of Duke's key features include:
+- Storing tasks
+  - Todos
+  - Deadlines
+  - Events
+- Add tags to tasks
+- View tasks with a specific tag
+- Search for tasks containing a keyword
 
-## Usage
+## 2. Quick Start
+1. Ensure that you have Java 11 or above set up on your computer.
+2. Download the latest release [here](https://github.com/firzanarmani/duke/releases).
+3. Start the app by simply double-clicking.
+4. Type in your command (refer to 3 for usage details) and hit `enter` to submit the command to Duke.
+  > Try these commands out!
+  > - `todo Clean room` to add a Todo task called "Clean room"
+  > - `list` to show all tasks currently Duke knows
+  > - `done 1` to mark the first task as done
 
-### `list`
+## 3. Features
+
+### 3.1. View all tasks
+View a list of all saved tasks or view a list of saved tasks that are tagged with a specific tag.
+
+### Usage
+
+### `list [/tag <tag name>]`
 Format: `list`
 
 Example of usage:
@@ -16,22 +38,26 @@ Example of usage:
 
 Expected outcome:
 
-```
-Duke: Here's what I've written down, boss.
-      1. [T][✓] Todo 1
-      2. [D][✓] Deadline 1 (by: Feb 3 2020)
-      3. [E][✗] Event 1 (at: May 1 2020)
-```
+![](list.png)
+
+Example of usage:
+
+`list /tag personal`
+
+Expected outcome:
+
+![](list_tag.png)
+
 
 ---
 
-### 1.2. Add a Todo
-Add a todo task to the list of saved tasks.
+### 3.2. Add a Todo
+Add a todo task to the list of saved tasks (with an option to add many single-word tags).
 
-## Usage
+### Usage
 
 ### `todo`
-Format: `todo <task description>`
+Format: `todo <task description> [/tag <single-word tag name>]`
 
 Example of usage:
 
@@ -39,47 +65,35 @@ Example of usage:
 
 Expected outcome:
 
-```
-Duke: Got it, boss. I'll write this one down
-
-      [T][✗] homework
-
-      Now you have 1 task in the list
-```
+![](todo.png)
 
 ---
 
-### 1.3. Add an Event
-Add an event task with event date to the list of saved tasks.
+### 3.3. Add an Event
+Add an event task with event date to the list of saved tasks (with an option to add many single-word tags).
 
-## Usage
+### Usage
 
 ### `event`
-Format: `event <description> /at <Event date in YYYY-MM-DD>`
+Format: `event <description> /at <Event date in YYYY-MM-DD> [/tag <single-word tag name>]`
 
 Example of usage:
 
-`event My birthday /at 2020-02-26`
+`event My birthday /at 2020-02-26 /tag personal /tag birthdays`
 
 Expected outcome:
 
-```
-Duke: A special event I see. Don't worry boss, I'll remind you
-
-      [E][✗] My birthday (at: Feb 26 2020)
-
-      Now you have 2 tasks in the list
-```
+![](event.png)
 
 ---
 
-### 1.4. Add a Deadline
-Add a deadline task to the list of saved tasks.
+### 3.4. Add a Deadline
+Add a deadline task to the list of saved tasks (with an option to add many single-word tags).
 
-## Usage
+### Usage
 
 ### `deadline`
-Format: `deadline <description> /by <Deadline in YYYY-MM-DD format>`
+Format: `deadline <description> /by <Deadline in YYYY-MM-DD format> [/tag <single-word tag name>]`
 
 Example of usage:
 
@@ -87,20 +101,14 @@ Example of usage:
 
 Expected outcome:
 
-```
-Duke: Oooh, important deadline eh, boss? Don't worry, I got it
-
-      [D][✗] Group project (by: Feb 25 2020)
-
-      Now you have 3 tasks in the list
-```
+![](deadline.png)
 
 ---
 
-### 1.5. Delete task
+### 3.5. Delete task
 Delete a task from the list of saved tasks.
 
-## Usage
+### Usage
 
 ### `delete`
 Format: `delete <Task number>`
@@ -111,20 +119,14 @@ Example of usage:
 
 Expected outcome:
 
-```
-Duke: Aaaaand deleted! Don't kill me if it's the wrong one, boss
-
-      [T][✗] homework
-
-      Now you have 2 tasks in the list
-```
+![](delete.png)
 
 ---
 
-### 1.6. Mark task as done
+### 3.6. Mark task as done
 Set a specified task in the list of saved tasks, to done.
 
-## Usage
+### Usage
 
 ### `done`
 Format: `done <Task number>`
@@ -135,32 +137,40 @@ Example of usage:
 
 Expected outcome:
 
-```
-Duke: Got it boss! Just to confirm, this is the one I marked as done
-
-      [D][✓] Group project (by: Feb 25 2020)
-
-      Now you have 2 tasks in the list
-```
+![](done.png)
 
 ---
 
-### 1.7. Find tasks
+### 3.7. Find tasks
 Find tasks with descriptions that contain the specified keyword, in the list of saved tasks.
 
-## Usage
+### Usage
 
 ### `find`
 Format: `find <Keyword to find>`
 
 Example of usage:
 
-`search group`
+`find project`
 
 Expected outcome:
 
-```
-Duke: I found these tasks that match what you might be looking for, boss!
+![](find.png)
 
-      1. [D][✓] Group project (by: Feb 25 2020)
-```
+---
+
+### 3.8. Show all tags
+List all tags that are currently in use.
+
+### Usage
+
+### `tags`
+Format: `tags`
+
+Example of usage:
+
+`tags`
+
+Expected outcome:
+
+![](tags.png)
