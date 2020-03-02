@@ -15,7 +15,11 @@ public class ParserTest {
      */
     @Test
     public void testCommandParsing() {
-        assertEquals(new TodoCommand("todo task", false), new Parser().parseCommand("todo task"));
+        try {
+            assertEquals(new TodoCommand("todo task"), new Parser().parseCommand("todo task"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -23,6 +27,10 @@ public class ParserTest {
      */
     @Test
     public void testTimeParsing() {
-        assertEquals("Jan 1 2019", Parser.reformatDateAndTime("2019-01-01"));
+        try {
+            assertEquals("Jan 1 2019", Parser.reformatDateAndTime("2019-01-01"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
