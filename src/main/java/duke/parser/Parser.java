@@ -34,10 +34,10 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         Command command = null;
-        String[] splitCommand = fullCommand.split("\\s\\/"); // First element is the command (and the taskName/taskNumber)
-        String commandType = getCommandWord(splitCommand[0]); // Get the command keyword
+        String[] splitCommand = fullCommand.split("\\s\\/");
+        String commandType = getCommandWord(splitCommand[0]);
         String taskName = null;
-        String otherArgs[] = null;
+        String[] otherArgs = null;
         LocalDate date = null;
         ArrayList<Tag> tags;
         int taskIndex = -1;
@@ -97,10 +97,23 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Get the command word from the command input given by user.
+     *
+     * @param command Command input given by user
+     * @return The command word
+     */
     public static String getCommandWord(String command) {
         return command.split("\\s", 2)[0];
     }
 
+    /**
+     * Get the name of the task from the command input given by user.
+     *
+     * @param command The input given by the user
+     * @return The task name specified by the user
+     * @throws DukeException DukeException thrown when the task name is not specified
+     */
     public static String getTaskName(String command) throws DukeException {
         try {
             return command.split("\\s", 2)[1];
@@ -109,6 +122,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Get the task index from the input given by the user.
+     * @param command The input given by the user
+     * @return The index of the task as specified by user
+     * @throws DukeException DukeException thrown when the index is not specified
+     */
     public static int getTaskIndex(String command) throws DukeException {
         try {
             return Integer.parseInt(command.split("\\s", 2)[1]) - 1;
@@ -117,6 +136,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Get and parse the input date into a LocalDate object.
+     *
+     * @param otherArgs Input arguments that have been split into an array
+     * @return A LocalDate object of the parsed input date
+     * @throws DukeException DukeException thrown when the date is of an invalid format
+     */
     public static LocalDate getDate(String[] otherArgs) throws DukeException {
         LocalDate date = null;
         try {
@@ -132,6 +158,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Get the tags as specified in the input arguments.
+     *
+     * @param otherArgs Input arguments that have been split into an array
+     * @return An ArrayList of Tag objects
+     * @throws DukeException DukeException thrown when the tag is more than a single word
+     */
     public static ArrayList<Tag> getTags(String[] otherArgs) throws DukeException {
         ArrayList<Tag> tags = new ArrayList<Tag>();
         for (String args : otherArgs) {
@@ -148,6 +181,13 @@ public class Parser {
         return tags;
     }
 
+    /**
+     * Get the name of the tag (for ListCommand).
+     *
+     * @param otherArgs Input arguments that have been split into an array
+     * @return The name of tag given by the user
+     * @throws DukeException DukeException thrown when multiple tags are input for the ListCommand
+     */
     public static String getTagName(String[] otherArgs) throws DukeException {
         String tagName = "";
         for (String args : otherArgs) {

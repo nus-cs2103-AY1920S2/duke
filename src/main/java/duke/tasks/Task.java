@@ -59,10 +59,20 @@ public class Task {
         this.tags = tags;
     }
 
+    /**
+     * Get the tags of the current task.
+     *
+     * @return An ArrayList of Tags assigned to the Task
+     */
     public ArrayList<Tag> getTags() {
         return this.tags;
     }
 
+    /**
+     * Creates a string representation of all the tags assigned to the Task.
+     *
+     * @return A String representation of the tags
+     */
     public String tagsString() {
         String tagsString = " ";
         boolean first = true;

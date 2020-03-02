@@ -33,6 +33,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Set the program's Duke instance.
+     *
+     * @param d Instance of Duke
+     */
     public void setDuke(Duke d) {
         duke = d;
         String dukeWelcome = "Hey boss! Duke here, at your service. \nWhat do you need me to do?";

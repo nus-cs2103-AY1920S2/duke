@@ -19,7 +19,9 @@ public class Event extends Task {
     /**
      * Event constructor.
      *
-     * @param eventArgs Joined string of the user input command arguements
+     * @param taskName Name of the task
+     * @param taskDate LocalDate object of the event
+     * @param tags ArrayList of Tags for the task
      * @throws DukeException Incorrect format/missing date
      */
     public Event(String taskName, LocalDate taskDate, ArrayList<Tag> tags) throws DukeException {

@@ -24,6 +24,11 @@ public class ListCommand extends Command {
         super();
     }
 
+    /**
+     * ListCommand constructor.
+     *
+     * @param filterString A string to filter the list (currently to be used to filter tagged tasks)
+     */
     public ListCommand(String filterString) {
         super();
         this.filterString = filterString;

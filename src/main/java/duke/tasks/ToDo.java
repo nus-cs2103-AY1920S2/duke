@@ -13,7 +13,8 @@ public class ToDo extends Task {
     /**
      * ToDo constructor.
      *
-     * @param todoName Name of the ToDo task
+     * @param taskName Name of the ToDo task
+     * @param tags ArrayList of Tags for the task
      */
     public ToDo(String taskName, ArrayList<Tag> tags) {
         super(taskName);

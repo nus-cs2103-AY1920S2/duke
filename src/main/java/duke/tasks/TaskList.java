@@ -112,6 +112,12 @@ public class TaskList {
         return filteredTasks;
     }
 
+    /**
+     * Get Tasks that are tagged with the specified tag name.
+     *
+     * @param tagName Input tag name
+     * @return ArrayList of Task that are tagged with the tagName
+     */
     public ArrayList<Task> getTaggedTasks(String tagName) {
         ArrayList<Task> filteredTasks = new ArrayList<Task>(this.taskList);
         filteredTasks.removeIf((task) -> !task.getTags().contains(new Tag(tagName)));

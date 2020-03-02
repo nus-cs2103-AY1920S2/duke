@@ -19,7 +19,9 @@ public class Deadline extends Task {
     /**
      * Deadline constructor.
      *
-     * @param deadlineArgs Joined string of the user input command arguements
+     * @param taskName Name of the task
+     * @param taskDate LocalDate object of the deadline
+     * @param tags ArrayList of Tags for the task
      * @throws DukeException Incorrect format/missing date
      */
     public Deadline(String taskName, LocalDate taskDate, ArrayList<Tag> tags) throws DukeException {

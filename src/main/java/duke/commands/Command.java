@@ -31,6 +31,7 @@ public abstract class Command {
      * Executes the current command.
      *
      * @param tasks TaskList instance of Duke program.
+     * @param tagList TagList instance of the Duke program.
      * @param ui UI instance of Duke program.
      * @param storage Storage instance of Duke program.
      * @throws DukeException DukeException thrown when command cannot be executed successfully.

@@ -31,7 +31,8 @@ public class AddCommand extends Command {
      * AddCommand constructor.
      *
      * @param taskType TaskTypes enum representing the type of task to be added
-     * @param inputArgs The combined arguments of the input task
+     * @param taskName The name of the task
+     * @param tags An ArrayList of the tags to be added to the task
      */
     public AddCommand(TaskTypes taskType, String taskName, ArrayList<Tag> tags) throws DukeException {
         this.taskType = taskType;
@@ -39,7 +40,16 @@ public class AddCommand extends Command {
         this.tags = tags;
     }
 
-    public AddCommand(TaskTypes taskType, String taskName, ArrayList<Tag> tags, LocalDate taskDate) throws DukeException {
+    /**
+     * AddCommand constructor.
+     *
+     * @param taskType TaskTypes enum representing the type of task to be added
+     * @param taskName The name of the task
+     * @param tags An ArrayList of the tags to be added to the task
+     * @param taskDate A LocalDate object of the date expected of the task
+     */ 
+    public AddCommand(TaskTypes taskType, String taskName, ArrayList<Tag> tags, LocalDate taskDate)
+        throws DukeException {
         this.taskType = taskType;
         this.taskName = taskName;
         this.taskDate = taskDate;
