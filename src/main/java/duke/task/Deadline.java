@@ -13,6 +13,7 @@ import duke.util.DateTimeStringFormatter;
 public class Deadline extends Task {
     protected static final String DEADLINE_SYMBOL = "[D]";
     protected LocalDateTime deadline;
+    protected boolean isCompletedOnTime;
 
     /**
      * Initialises the {@code Deadline} instance with its description and deadline.
@@ -30,15 +31,19 @@ public class Deadline extends Task {
      * Initialises the {@code Deadline} instance with its description, deadline and
      * completion status.
      *
-     * @param description Written description of the task.
-     * @param deadline    {@code LocalDateTime} object indicating the deadline of
-     *                    the task.
-     * @param isCompleted {@code boolean} value indicating whether the task is
-     *                    completed.
+     * @param description    Written description of the task.
+     * @param deadline       {@code LocalDateTime} object indicating the deadline of
+     *                       the task.
+     * @param isCompleted    {@code boolean} value indicating whether the task is
+     *                       completed.
+     * @param completionTime {@code LocalDateTime} object indicating the time of
+     *                       completion of the task.
      */
-    public Deadline(String description, LocalDateTime deadline, boolean isCompleted) {
-        super(description, isCompleted);
+    public Deadline(String description, LocalDateTime deadline, boolean isCompleted,
+                    LocalDateTime completionTime, boolean isCompletedOnTime) {
+        super(description, isCompleted, completionTime);
         this.deadline = deadline;
+        this.isCompletedOnTime = isCompletedOnTime;
     }
 
     /**
@@ -70,5 +75,11 @@ public class Deadline extends Task {
         Deadline clonedDeadline = (Deadline) super.clone();
         clonedDeadline.deadline = this.deadline; // as LocalDateTime is immutable
         return clonedDeadline;
+    }
+
+    @Override
+    public void completeTask() {
+        super.completeTask();
+        this.isCompletedOnTime = this.completionTime.isAfter(this.deadline);
     }
 }

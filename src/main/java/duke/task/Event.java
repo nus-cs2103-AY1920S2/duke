@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.exception.DuchessException;
 
 /**
@@ -26,12 +28,14 @@ public class Event extends Task {
      * Initialises the {@code Event} instance with its description, timeFrame
      * and completion status.
      *
-     * @param description Written description of the task.
-     * @param timeFrame   {@code String} indicating the timeFrame of the task.
-     * @param isCompleted {@code boolean} value indicating whether the task is completed.
+     * @param description    Written description of the task.
+     * @param timeFrame      {@code String} indicating the timeFrame of the task.
+     * @param isCompleted    {@code boolean} value indicating whether the task is completed.
+     * @param completionTime {@code LocalDateTime} object indicating the time of
+     *                       completion of the task.
      */
-    public Event(String description, String timeFrame, boolean isCompleted) {
-        super(description, isCompleted);
+    public Event(String description, String timeFrame, boolean isCompleted, LocalDateTime completionTime) {
+        super(description, isCompleted, completionTime);
         this.timeFrame = timeFrame;
     }
 
