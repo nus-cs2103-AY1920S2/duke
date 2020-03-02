@@ -45,7 +45,7 @@ public class Parser {
             throw new ReservedSymbolException(Message.RESERVED_SYMBOL_ERROR);
         }
 
-        Command result = new ByeCommand(input, true);
+        Command result = new ByeCommand(input);
         String[] split = input.split(" ");
         String command = split[0];
 
@@ -53,27 +53,27 @@ public class Parser {
 
         switch (command) {
         case "list":
-            result = new ListCommand(input, false);
+            result = new ListCommand(input);
             break;
         
         case "bye":
-            result = new ByeCommand(input, true);
+            result = new ByeCommand(input);
             break;
 
         case "help":
-            result = new HelpCommand(input, false);
+            result = new HelpCommand(input);
             break;
 
         case "delete":
-            result = new DeleteCommand(input, false);
+            result = new DeleteCommand(input);
             break;
 
         case "done":
-            result = new DoneCommand(input, false);
+            result = new DoneCommand(input);
             break;
 
         case "find":
-            result = new FindCommand(input, false);
+            result = new FindCommand(input);
             break;
 
         case "update" :
@@ -81,15 +81,15 @@ public class Parser {
             break;
 
         case "todo":
-            result = new TodoCommand(input, false);
+            result = new TodoCommand(input);
             break;
 
         case "event":
-            result = new EventCommand(input, false);
+            result = new EventCommand(input);
             break;
 
         case "deadline":
-            result = new DeadlineCommand(input, false);
+            result = new DeadlineCommand(input);
             break;
 
         default:
@@ -103,9 +103,9 @@ public class Parser {
         try {
             String secondCommand = split[1];
             if (secondCommand.compareTo("description") == 0) {
-                return new UpdateDescriptionCommand(input, false);
+                return new UpdateDescriptionCommand(input);
             } else if (secondCommand.compareTo("time") == 0) {
-                return new UpdateTimeCommand(input, false);
+                return new UpdateTimeCommand(input);
             } else {
                 throw new InvalidCommandException(Message.COMMAND_ERROR);
             }

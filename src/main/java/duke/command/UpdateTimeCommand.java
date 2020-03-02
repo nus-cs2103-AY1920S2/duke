@@ -10,12 +10,30 @@ import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTimeFormatException;
 import duke.exception.TaskIndexException;
 
+/**
+ * Represents an update time command.
+ */
 public class UpdateTimeCommand extends Command {
-    public UpdateTimeCommand(String input, boolean isExit) {
-        super(input, isExit);
+    /**
+     * Constructs a fresh instance of an update time command.
+     * @param input The user input.
+     */
+    public UpdateTimeCommand(String input) {
+        super(input);
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskIndexException, InvalidTimeFormatException, InvalidCommandException {
+    /**
+     * Executes the Update Time command for the program to update the time of a task.
+     * @param tasks Tasklist for Duke.
+     * @param ui Ui for Duke.
+     * @param storage Storage for Duke
+     * @return A String containing the response from the executed method.
+     * @throws InvalidCommandException An exception telling ifthe command is invalid.
+     * @throws TaskIndexException An exception if the task index is invalid.
+     * @throws InvalidTimeFormatException An exception if the time format is invalid.
+     */
+    public String execute(TaskList tasks, Ui ui, Storage storage) 
+            throws TaskIndexException, InvalidTimeFormatException, InvalidCommandException {
         try {
             String[] split = this.input.split(" ");
             int idx = Integer.parseInt(split[2]);

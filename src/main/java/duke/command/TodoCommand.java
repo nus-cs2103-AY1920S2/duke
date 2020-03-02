@@ -6,11 +6,26 @@ import duke.core.Storage;
 
 import duke.exception.EmptyDescriptionException;
 
+/**
+ * Represents a todo task command.
+ */
 public class TodoCommand extends Command {
-    public TodoCommand(String input, boolean isExit) {
-        super(input, isExit);
+    /**
+     * Constructs a fresh instance of a todo command.
+     * @param input The user input.
+     */
+    public TodoCommand(String input) {
+        super(input);
     }
 
+    /**
+     * Executes the Todo command for the program to create a todo.
+     * @param tasks Tasklist for Duke.
+     * @param ui Ui for Duke.
+     * @param storage Storage for Duke
+     * @return A String containing the response from the executed method.
+     * @throws InvalidCommandException An exception telling ifthe command is invalid.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException {
         return tasks.manageTodo(storage, input);
     }
