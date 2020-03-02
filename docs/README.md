@@ -49,7 +49,8 @@ their tasks to any desktop platform!
     eg. `2020-12-25` for 25 December 2020.
 
 - `START_TIME` and `END_TIME` are time parameters that must be
-    supplied in the following 24-hour format: `HH:mm`. eg. `08:30` for 8:30am.
+    supplied in the following 24-hour format: `HH:mm`.  eg. `08:30` for 8:30am.  
+    
     Also, when a command has a `START_TIME` and `END_TIME`,
     `START_TIME` must be before `END_TIME`.
 
@@ -74,7 +75,7 @@ Example of usage:
 
 ![deadline](deadline.png)
 
-In blue: Adding a todo with `Buy Christmas presents` as the `DESCRIPTION`,
+In blue: Adding a todo with `Buy Christmas presents` as the `DESCRIPTION`, and
 `2020-12-24` as the `DATE`.  
 
 In red: A message confirming that the deadline was added successfully.
@@ -95,7 +96,7 @@ Example of usage:
 In blue: Adding a todo with `Christmas party` as the `DESCRIPTION`,
 `2020-12-25` as the `DATE`,
 `09:00` as the `START_TIME`, and
-'15:00' as the `END_TIME`.  
+`15:00` as the `END_TIME`.  
 
 In red: A message confirming that the event was added successfully.
 
@@ -153,16 +154,17 @@ In red: A message confirming that the task was successfully marked as done.
 ---
 ### `find` - Find tasks by keyword
 
-Searches through the list of tasks, and displays all tasks that contain
-all the keywords in their description. The keyword used to search is `CASE_INSENSITVE`, meaning that
-all the task descriptions and the keyword will be compared in `LOWER_CASE`.  
+Searches through the list of tasks, and displays all tasks that contain the exact keyword (or phrase) in their description. The keyword used to search is `CASE_INSENSITVE`, meaning that all the task descriptions and the keyword will be compared in `LOWER_CASE`.  
 
-Format: `find KEYWORD1 KEYWORD2 ...`
-- There is no limit to the number of `KEYWORDS`
+Format: `find KEYWORD`
 
 Example of usage: 
 
 ![find](find.png)
+
+In blue: Finding all tasks that have the keyword `christmas`.  
+
+In red: A message showing a list of tasks containing the `CASE_INSENSITIVE` keyword `christmas`.
 
 ---
 ### `list` - Display the task list
