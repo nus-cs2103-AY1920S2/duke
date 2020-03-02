@@ -34,13 +34,19 @@ Deadlines can also be recurring / repeated. More information on how to maximise 
 A variety of commands has been provided to enable quicker management and handling of tasks. Do check out the list below!
 
 ### Easy on Your Eyes
+
+<p align="center"><img src="javafx.gif" width="40%"/></p>
+
 Say no to light mode. Simply click the Theme Toggle to turn on Dark Mode and save your eyes some pain.
 
 ### Averse to GUI? No problem.
+
+<p align="center"><img src="cli.png" width="50%"/></p>
+
 If you don't want to use my GUI (which is a pity), simply download the `.jar` file and run the following command on
  your command line or terminal:  
 ```
-java -jar duke-0.2.0.jar -mode console
+java -jar duke-0.2.2.jar -mode console
 ```
 
 With the `-mode console` flag, rest assured that you'll be having a **console-ing** experience.
