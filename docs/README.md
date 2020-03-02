@@ -30,10 +30,8 @@
      3.5. [Done](/docs/README.md#35-mark-task-as-done-done)
      
      
-     3.6. [Delete](/docs/README.md#36-delete-task-delete)
-     
-     
-     3.7. [Find](/docs/README.md#37-find-tasks-containing-a-keyword-find)
+     3.6. [Delete](/docs/README.md#36-delete-task-delete)  
+     3.7. [Find](/docs/README.md#37-find-tasks-using-a-keyword-find)
      
      
      3.8. [Snooze](/docs/README.md#38-reschedule-a-deadline-or-event-snooze)
