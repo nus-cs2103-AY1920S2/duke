@@ -28,8 +28,8 @@ their tasks to any desktop platform!
 * Marking completed tasks
 * Deleting tasks
 * Finding tasks by keyword
-* Automatically saving the task list in a save file
-* Automatically Loading a task list from a save file
+* Automatically saving the task list in a save file (located in ./data/tasks.txt)
+* Automatically Loading a task list from a save file  (located in ./data/tasks.txt)
 
 
 ## 3. Usage

@@ -39,11 +39,13 @@ public class Storage {
     public List<Task> load() throws StorageException {
         try {
             File saveFile = new File(filePath);
+            System.out.println(filePath);
 
             // @@author PotatoCombat-reused
             // Solution adapted from GitHub user @aakanksha-rai
             if (!saveFile.exists()) {
-                saveFile.mkdirs(); // Create a new save file
+                saveFile.getParentFile().mkdirs(); // Create the save file directory
+                saveFile.createNewFile(); // Create a new save file
             }
             // @@author
 
