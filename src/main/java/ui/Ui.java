@@ -40,10 +40,10 @@ public class Ui {
      * @return String response.
      */
     public String showCommandError(String message) {
-        String s = "Error: " + message + "\n";
-        String reminder = "Remember to follow these command formats: \n1. `bye`\n2. `todo wake up`" +
-                "\n3. `deadline return book /by 20/02/2020 2020`\n4. `event book sharing /at 20/02/2020 2040`" +
-                "\n5. `list`\n6. `find book`\n7. `done 1 2`\n8. `delete 1 2`\n";
+        String s = "Error: " + message + "\n\n";
+        String reminder = "Remember to follow these command formats: \n1. `bye`\n2. `todo wake up`"
+                + "\n3. `deadline return book /by 20/02/2020 2020`\n4. `event book sharing /at 20/02/2020 2040`"
+                + "\n5. `list`\n6. `find book`\n7. `done 1 2`\n8. `delete 1 2`\n";
         return s + reminder;
     }
 
