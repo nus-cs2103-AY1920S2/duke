@@ -1,0 +1,2 @@
+T | true | homework
+E | false | meeting | 2020-12-20 1800

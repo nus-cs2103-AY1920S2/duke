@@ -35,17 +35,10 @@ public class Duke {
     /**
      * Constructor for <code>Duke</code>.
      */
-    public Duke() {
+    public Duke() throws IOException {
         ui = new Ui();
-        storage = new Storage("data/tasks.txt");
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            storage.initialiseData();
-        } catch (IOException e) {
-            ui.showLoadingError(e.getMessage());
-            tasks = new TaskList();
-        }
+        storage = new Storage(".//tasks.txt");
+        tasks = storage.load();
     }
 
     /**

@@ -6,13 +6,8 @@ import duke.commons.Task;
 import duke.commons.Todo;
 import duke.logic.TaskList;
 
+import java.io.*;
 import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -35,9 +30,15 @@ public class Storage {
      * @return an <code>ArrayList</code> of <code>Task</code> objects loaded from the data file.
      * @throws IOException If the <code>Task</code> objects could not be loaded.
      */
-    public ArrayList<Task> load() throws IOException {
+    public TaskList load() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(filePath));
+        } catch (FileNotFoundException e) {
+            initialiseData();
+            reader = new BufferedReader(new FileReader(filePath));
+        }
         String line = "";
         line = reader.readLine();
 
@@ -67,7 +68,7 @@ public class Storage {
         }
 
         reader.close();
-        return taskList;
+        return new TaskList(taskList);
     }
 
     /**
@@ -92,7 +93,7 @@ public class Storage {
      * Creates a new data file called "tasks.txt" if such file does not exist when the program first starts.
      */
     public void initialiseData() {
-        File file = new File("data/tasks.txt");
+        File file = new File(".//tasks.txt");
         try {
             file.createNewFile();
         } catch (IOException e) {
