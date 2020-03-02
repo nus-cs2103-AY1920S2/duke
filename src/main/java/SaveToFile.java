@@ -21,8 +21,7 @@ public class SaveToFile {
             FileWriter fileWriter = new FileWriter("./out.txt");
             fileWriter.write(list);
             fileWriter.close();
-        }
-        else{
+        } else {
             file.createNewFile();
             FileWriter fileWriter = new FileWriter("./out.txt");
             fileWriter.write(list);
