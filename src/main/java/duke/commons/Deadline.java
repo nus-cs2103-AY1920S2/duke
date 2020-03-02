@@ -41,7 +41,8 @@ public class Deadline extends Task {
      *
      * @return the <code>String</code> "D".
      */
-    public String getTypeSymbol() {
+    @Override
+    public String getTypeIcon() {
         return "D";
     }
 
@@ -53,7 +54,7 @@ public class Deadline extends Task {
     @Override
     public String[] toDataTokens() {
         String isDoneString = String.valueOf(super.isDone);
-        return new String[] {getTypeSymbol(), isDoneString, super.description, this.byString};
+        return new String[] {getTypeIcon(), isDoneString, super.description, this.byString};
     }
 
     /**
@@ -68,6 +69,6 @@ public class Deadline extends Task {
         if (this.time != null) {
             dateTime += " " + this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
         }
-        return "[" + getTypeSymbol() + "]" + super.toString() + " (by: " + dateTime + ")";
+        return super.toString() + " (by: " + dateTime + ")";
     }
 }

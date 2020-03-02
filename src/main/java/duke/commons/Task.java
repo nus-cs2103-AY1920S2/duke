@@ -54,21 +54,20 @@ public class Task {
     }
 
     /**
+     * Returns a <code>String</code> object representing the type of this <code>Task</code>.
+     *
+     * @return the <code>String</code> "D", "E", or "T" correspondingly.
+     */
+    public String getTypeIcon() {
+        return "";
+    }
+
+    /**
      * Marks the <code>Task</code> as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
-
-    /**
-     * Adds tag to the <code>Task</code>.
-     *
-     * @param tag the <code>Tag</code> to be added to the <code>Task</code>.
-     */
-    public void addTag(String tag) {
-        this.tagList.add(tag);
-    }
-
 
     /**
      * Returns an array of <code>String</code> objects representing this <code>Task</code>.
@@ -87,6 +86,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + " " + this.description;
+        return "[ " + this.getTypeIcon() + " ] [ " + this.getStatusIcon() + " ] " + this.description;
     }
 }

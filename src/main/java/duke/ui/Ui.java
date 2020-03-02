@@ -1,10 +1,6 @@
 package duke.ui;
-
 import duke.commons.Task;
 import duke.logic.TaskList;
-
-import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * Represents the Ui Manager of the program that outputs different <code>String</code> messages.
@@ -94,7 +90,8 @@ public class Ui {
     }
 
     public String printTask(int i, Task task) {
-        return i + ". " + task;
+        String index = String.format("%1$5d", i);
+        return index + ". " + task;
     }
 
     public String exit() {

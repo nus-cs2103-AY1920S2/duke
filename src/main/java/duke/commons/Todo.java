@@ -24,7 +24,8 @@ public class Todo extends Task {
      *
      * @return the <code>String</code> "T".
      */
-    public String getTypeSymbol() {
+    @Override
+    public String getTypeIcon() {
         return "T";
     }
 
@@ -36,7 +37,7 @@ public class Todo extends Task {
     @Override
     public String[] toDataTokens() {
         String isDoneString = String.valueOf(super.isDone);
-        return new String[] {getTypeSymbol(), isDoneString, super.description};
+        return new String[] {getTypeIcon(), isDoneString, super.description};
     }
 
     /**
@@ -46,6 +47,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[" + getTypeSymbol() + "]" + super.toString();
+        return super.toString();
     }
 }

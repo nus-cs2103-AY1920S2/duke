@@ -37,9 +37,9 @@ public class Main extends Application {
 
     private void setupStage(Stage stage) {
         stage.setTitle("My Dude");
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
-        stage.setMaximized(true);
+        stage.setMaximized(false);
     }
 }

@@ -8,9 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 /**
  * Represents the dialog box component of the GUI of the program.
@@ -18,7 +18,7 @@ import javafx.scene.layout.HBox;
 public class DialogBox extends HBox {
 
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -28,7 +28,7 @@ public class DialogBox extends HBox {
      * @param text <code>String</code> text to be put inside the dialog box.
      * @param image profile picture to be put inside the dialog box.
      */
-    public DialogBox(Label text, ImageView image) {
+    public DialogBox(String text, ImageView image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -38,7 +38,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text.getText());
+        dialog.setText(text);
         displayPicture.setImage(image.getImage());
     }
 
@@ -60,7 +60,7 @@ public class DialogBox extends HBox {
      * @param image profile picture of the user.
      * @return a <code>DialogBox</code> object representing the user, with the specified text and profile image.
      */
-    public static DialogBox getUserDialog(Label text, ImageView image) {
+    public static DialogBox getUserDialog(String text, ImageView image) {
         return new DialogBox(text, image);
     }
 
@@ -72,7 +72,7 @@ public class DialogBox extends HBox {
      * @param image profile picture of Duke.
      * @return a <code>DialogBox</code> object representing Duke, with the specified text and profile image.
      */
-    public static DialogBox getDukeDialog(Label text, ImageView image) {
+    public static DialogBox getDukeDialog(String text, ImageView image) {
         var db = new DialogBox(text, image);
         db.flip();
         return db;

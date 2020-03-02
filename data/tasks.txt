@@ -1,4 +1,9 @@
-E | true | group meeting | 2020-02-21 1000
 T | true | laundry
-T | false | c
-T | false | d
+T | true | a
+T | false | 3
+T | false | 4
+E | false | adsdivjsod | 2020-12-20 1500
+T | false | 5
+T | false | 6
+T | false | 8
+T | false | 9

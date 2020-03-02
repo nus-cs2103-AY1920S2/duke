@@ -37,12 +37,8 @@ public class Event extends Task {
         }
     }
 
-    /**
-     * Returns a <code>String</code> object representing the type of this <code>Task</code>.
-     *
-     * @return the <code>String</code> "E".
-     */
-    public String getTypeSymbol() {
+    @Override
+    public String getTypeIcon() {
         return "E";
     }
 
@@ -54,7 +50,7 @@ public class Event extends Task {
     @Override
     public String[] toDataTokens() {
         String isDoneString = String.valueOf(super.isDone);
-        return new String[] {getTypeSymbol(), isDoneString, super.description, this.atString};
+        return new String[] {getTypeIcon(), isDoneString, super.description, this.atString};
     }
 
     /**
@@ -69,6 +65,6 @@ public class Event extends Task {
         if (this.time != null) {
             dateTime += " " + this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
         }
-        return "[" + getTypeSymbol() + "]" + super.toString() + " (at: " + dateTime + ")";
+        return super.toString() + " (at: " + dateTime + ")";
     }
 }
