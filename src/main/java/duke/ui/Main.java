@@ -27,6 +27,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            setupStage(stage);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
@@ -34,4 +35,11 @@ public class Main extends Application {
         }
     }
 
+    private void setupStage(Stage stage) {
+        stage.setTitle("My Dude");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+        stage.setMaximized(true);
+    }
 }

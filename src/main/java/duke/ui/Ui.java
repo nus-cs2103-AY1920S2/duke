@@ -12,7 +12,10 @@ import java.util.ArrayList;
 public class Ui {
 
     public Ui() {
+    }
 
+    public static String greeting() {
+        return "Hello my dude! Tell me what you have been procrastinating recently...";
     }
 
     public String showLoadingError(String message) {
