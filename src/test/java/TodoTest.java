@@ -12,7 +12,7 @@ public class TodoTest {
 
     @Test
     public void testToString() {
-        assertEquals("[T][✗] return book", new Todo("return book", 1).toString());
+        assertEquals("[T][✘] return book", new Todo("return book", 1).toString());
     }
 
 }

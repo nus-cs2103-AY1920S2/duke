@@ -65,9 +65,9 @@ public class Event extends Task {
     public String toString() {
         String crosstick = "";
         if (this.done) {
-            crosstick = "✓";
+            crosstick = "✔";
         } else {
-            crosstick = "✗";
+            crosstick = "✘";
         }
         if (this.date1 != null) {
             String dateFormatted = this.date1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

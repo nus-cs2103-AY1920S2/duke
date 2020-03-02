@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -20,10 +21,11 @@ import java.util.TreeMap;
  * @author Lua Jia Zheng.
  */
 public class Storage {
-    private java.nio.file.Path path;
 
-    public Storage(Path path) {
-        this.path = path;
+    Path path;
+
+    public Storage() {
+        this.path = Paths.get("data", "duke.txt");
     }
 
     /**
@@ -58,7 +60,16 @@ public class Storage {
             }
             return tasksTemp;
         } catch (IOException e) {
-            throw new DukeException("There was a error when loading the data");
+            File file = new File("data");
+            if (!file.exists()) {
+                new File("data").mkdir();
+            }
+            try {
+                new File("data/duke.txt").createNewFile();
+            } catch (IOException ex) {
+                throw new DukeException(ex.getMessage());
+            }
+            return new TreeMap<Integer, Task>();
         }
     }
 

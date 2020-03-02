@@ -7,6 +7,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -25,9 +26,8 @@ public class Duke {
      * Empty constructor so that Launcher works.
      */
     public Duke() {
-        Path filePath = java.nio.file.Paths.get("data","data.txt");
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -44,7 +44,7 @@ public class Duke {
      */
     public Duke(Path filePath) {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -86,13 +86,16 @@ public class Duke {
             CommandResult commandResult = c.execute(tasks, ui, storage);
             System.out.flush();
             System.setOut(old);
-            assert commandResult.toString().equals("Sgituccess") : "Command not executed successfully.";
+            if (commandResult.toString().equals("bye")) {
+                Platform.exit();
+            }
         } catch (AssertionError e) {
             ui.showError("AssertError");
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
         return baos.toString();
+
     }
 
     /**

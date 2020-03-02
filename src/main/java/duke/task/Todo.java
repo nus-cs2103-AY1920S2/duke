@@ -31,9 +31,9 @@ public class Todo extends Task {
     public String toString() {
         String crosstick = "";
         if (this.done) {
-            crosstick = "✓";
+            crosstick = "✔";
         } else {
-            crosstick = "✗";
+            crosstick = "✘";
         }
         return String.format("[%s][%s] %s", this.symbol, crosstick, this.title);
     }

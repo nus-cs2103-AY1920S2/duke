@@ -78,6 +78,9 @@ public class Parser {
         switch (symbol) {
         case T:
             String[] tempArr = Arrays.copyOfRange(arrMessage,1,arrMessage.length);
+            if (tempArr.length == 0) {
+                throw new DukeException("  ☹ OOPS!!! The description of a todo cannot be empty.");
+            }
             String newMessage = String.join(" ", tempArr);
             task = new Todo(newMessage, TaskList.index);
             break;

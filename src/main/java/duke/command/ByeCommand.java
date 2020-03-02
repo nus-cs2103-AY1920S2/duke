@@ -32,7 +32,7 @@ public class ByeCommand extends Command {
         try {
             ui.printGoodBye();
             storage.saveTask(tasklist);
-            return new CommandResult("Successfully Executed");
+            return new CommandResult("bye");
         } catch (IOException ex) {
             return new CommandResult("IO Exception");
         }
