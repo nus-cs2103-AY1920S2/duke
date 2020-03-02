@@ -6,18 +6,42 @@
 
 
     2.1. [General Guideline](/docs/README.md#21-general-guideline)
+    
+    
     2.2. [Images](/docs/README.md#22-images)
+    
+    
     2.3. [Sample Interaction with the Duke Application](/docs/README.md#23-sample-interaction-with-the-duke-application)
 3. [Features](/docs/README.md#3-features)
+
+
      3.1. [Todo](/docs/README.md#31-add-a-todo-task-todo)
+     
+     
      3.2. [Event](/docs/README.md#32-add-an-event-task-event)
+     
+     
      3.3. [Deadline](/docs/README.md#33-add-a-deadline-task-deadline)
+     
+     
      3.4. [List](/docs/README.md#34-list-all-tasks-list)
+     
+     
      3.5. [Done](/docs/README.md#35-mark-task-as-done-done)
+     
+     
      3.6. [Delete](/docs/README.md#36-delete-task-delete)
+     
+     
      3.7. [Find](/docs/README.md#37-find-tasks-containing-a-keyword-find)
+     
+     
      3.8. [Snooze](/docs/README.md#38-reschedule-a-deadline-or-event-snooze)
+     
+     
      3.9. [Bye](/docs/README.md#39-exit-duke-bye)
+     
+     
      3.10. [Storing Data](/docs/README.md#310-storing-data)
 4. [Command Overview](/docs/README.md#4-command-overview)
 5. [Acknowledgements](/docs/README.md#5-acknowledgements)
