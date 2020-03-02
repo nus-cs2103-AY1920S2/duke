@@ -16,6 +16,8 @@ public class Message {
 
     public static final String DELETE_TASK = "Noted. I've eaten - uhh, I mean, removed this task:\n";
 
+    public static final String FIND_KEYWORD = "Cute has fished up these results for you!\n";
+
     public static final String UPDATE_DESCRIPTION = "Updating a description? Forgetful fishy, are we?\n";
 
     public static final String UPDATE_TIME = "Ooh, you updated the time, but is it time for me to eat yet?\n";

@@ -90,7 +90,7 @@ public class TaskList {
         }
         
         if (!searchResults.isEmpty()) {
-            String results = "";
+            String results = Message.FIND_KEYWORD;
             for (int i = 0; i < searchResults.size(); i++) {
                 String result = searchResults.get(i);
                 results += (i + 1) + ".";

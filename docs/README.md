@@ -121,7 +121,7 @@ Wow, you add tasks faster than I eat fishes! Hmm...<br>
 
 ## Additional Functions
 ### 1. Searching Tasks By Keyword
-Returns a list of tasks that match the keyword. The search is case-sensitive, but can have partial matching.
+Returns a list of tasks that match the keyword. The search is case-sensitive. The search also returns tasks whereby the keyword is a substring of the description.
 
 *Command Usage*:
 `find <keyword>`
