@@ -6,7 +6,7 @@ import exceptions.IllegalDateTimeFormatException;
 
 import java.time.LocalDate;
 
-public class ViewScheduleCommand extends Command{
+public class ViewScheduleCommand extends Command {
     private LocalDate targetDate;
 
     ViewScheduleCommand(String userInput) throws IllegalDateTimeFormatException {

@@ -82,7 +82,9 @@ public class Parser {
         return VIEW_LIST_KEY.equals(input);
     }
 
-    private static boolean isHelpKey(String input) { return HELP_KEY.equals(input); }
+    private static boolean isHelpKey(String input) {
+        return HELP_KEY.equals(input);
+    }
 
     private static boolean isDeleteKey(String input) {
         Matcher deleteMatcher = DELETE_PATTERN.matcher(input);

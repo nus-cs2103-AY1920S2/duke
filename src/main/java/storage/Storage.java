@@ -17,12 +17,12 @@ import java.util.List;
  * such that the program can load data from local disk or save data to files.
  */
 public class Storage {
-    private final static String DEFAULT_STORAGE_PATH = "tasks.txt";
+    private static final String DEFAULT_STORAGE_PATH = "tasks.txt";
     private Path path;
 
     /**
      * Default constructor with the default path of local data file.
-     * @throws InvalidStorageFilePathException
+     * @throws InvalidStorageFilePathException If path is not valid.
      */
     public Storage() throws InvalidStorageFilePathException {
         this(DEFAULT_STORAGE_PATH);
@@ -32,7 +32,7 @@ public class Storage {
      * Set the path of the data file to the customized path.
      * Throws exception if the path is not valid. E.g. Doesn't end with ".txt"
      * @param filePath customized file path.
-     * @throws InvalidStorageFilePathException
+     * @throws InvalidStorageFilePathException  If the path points non-existing directory.
      */
     public Storage(String filePath) throws InvalidStorageFilePathException {
         path = Paths.get(filePath);
@@ -43,8 +43,8 @@ public class Storage {
 
     /**
      * Returns true if the inputted path ends with ".txt"
-     * @param filePath
-     * @return
+     * @param filePath user input file path.
+     * @return true if the file path is valid, false otherwise.
      */
     private static boolean isValidPath(Path filePath) {
         return filePath.toString().endsWith(".txt");
@@ -55,7 +55,7 @@ public class Storage {
      * write the list to a local file.
      *
      * @param taskList inner-list of the program.
-     * @throws IOException
+     * @throws IOException If there is exception regarding writing files.
      */
     public void save(TaskList taskList) throws IOException {
         List<String> encodedTaskList = TaskListEncoder.encodeTask(taskList);

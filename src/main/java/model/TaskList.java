@@ -55,7 +55,7 @@ public class TaskList implements Iterable<Task> {
 
         String addTaskEndStr = addTaskEnd.insert(13, this.internalList.size()).toString();
 
-        assert this.internalList.size() > 0: "task not added";
+        assert this.internalList.size() > 0 : "task not added";
         return ECHO_ADD_TASK
                 + task.toString()
                 + "\n"
@@ -68,7 +68,7 @@ public class TaskList implements Iterable<Task> {
      * @return response of the remove action.
      */
     public String remove(int position) throws IllegalPositionException {
-        assert this.internalList.size() > 0: "task list is empty, cannot delete";
+        assert this.internalList.size() > 0 : "task list is empty, cannot delete";
 
 
         if (position < 0 || position >= internalList.size()) {
@@ -93,7 +93,7 @@ public class TaskList implements Iterable<Task> {
      * @return response of the mark action.
      */
     public String markTaskAsDone(int position) throws IllegalPositionException {
-        assert this.internalList.size() > 0: "task list is empty, cannot mark";
+        assert this.internalList.size() > 0 : "task list is empty, cannot mark";
 
         if (position < 0 || position >= internalList.size()) {
             throw new IllegalPositionException("Oops!!! The input position "
@@ -108,13 +108,18 @@ public class TaskList implements Iterable<Task> {
                 + "\n";
     }
 
+    /**
+     * Filters tasks by checking whether the description contains a specific keyword.
+     * @param keyWord user input keyword.
+     * @return string representations of matched tasks.
+     */
     public String findByKeyWord(String keyWord) {
         StringBuilder matchedTasks = new StringBuilder();
         matchedTasks.append(ECHO_FIND_TASK);
 
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
-                assert false: "element in arraylist is null";
+                assert false : "element in arraylist is null";
                 continue;
             }
             Task currentTask = this.internalList.get(i);
@@ -129,6 +134,11 @@ public class TaskList implements Iterable<Task> {
         return matchedTasks.toString();
     }
 
+    /**
+     * Filters tasks by date. Ignore todo tasks.
+     * @param targetDate user input date.
+     * @return string representation of matches tasks.
+     */
     public String findTasksOnDate(LocalDate targetDate) {
         StringBuilder tasksOnDate = new StringBuilder();
         tasksOnDate.append(ECHO_VIEW_SCHEDULE);
@@ -138,7 +148,7 @@ public class TaskList implements Iterable<Task> {
 
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
-                assert false: "element in arraylist is null";
+                assert false : "element in arraylist is null";
                 continue;
             }
             Task currentTask = this.internalList.get(i);
@@ -174,7 +184,7 @@ public class TaskList implements Iterable<Task> {
         StringBuilder listOverView = new StringBuilder(ECHO_VIEW_TASK_LIST);
         for (int i = 0; i < this.internalList.size(); i++) {
             if (this.internalList.get(i) == null) {
-                assert false: "element in arraylist is null";
+                assert false : "element in arraylist is null";
                 continue;
             }
             listOverView.append(Integer.toString(i + 1));

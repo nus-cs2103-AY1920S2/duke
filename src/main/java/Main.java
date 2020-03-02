@@ -13,8 +13,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final String APP_NAME = "Duke";
-    private final Image APP_ICON = new Image(
+    private final String appName = "Duke";
+    private final Image appIcon = new Image(
             this.getClass().getResourceAsStream("/images/DukeIcon.png"),
             80,
             80,
@@ -36,8 +36,8 @@ public class Main extends Application {
             mainWindow.setDuke(duke);
             mainWindow.dukeSpeak(duke.greet());
 
-            stage.setTitle(APP_NAME);
-            stage.getIcons().add(APP_ICON);
+            stage.setTitle(appName);
+            stage.getIcons().add(appIcon);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package TestUtils;
+package testutils;
 
 import model.ToDoTask;
 

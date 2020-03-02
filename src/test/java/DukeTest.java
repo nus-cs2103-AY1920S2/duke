@@ -12,7 +12,7 @@ public class DukeTest {
 
     @Test
     public void noDescription_ToDoTask_ExceptionThrown() {
-        try{
+        try {
             Task newTask = new ToDoTask("");
             fail();
         } catch (NoDescriptionException e) {

@@ -50,8 +50,8 @@ public class EventTask extends Task {
      */
     @Override
     public ArrayList<String> getDetails() {
-        assert description != null: "task description not assigned";
-        assert description.length() > 0: "task description is empty";
+        assert description != null : "task description not assigned";
+        assert description.length() > 0 : "task description is empty";
 
         return new ArrayList<String>(Arrays.asList(
                 this.description,
@@ -70,7 +70,7 @@ public class EventTask extends Task {
 
     @Override
     public boolean isOnDate(LocalDate targetDate) {
-        assert at != null: "the value of 'at' not assigned";
+        assert at != null : "the value of 'at' not assigned";
         return at.toLocalDate().equals(targetDate);
     }
 
@@ -80,7 +80,7 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        assert at != null: "the value of 'at' not assigned";
+        assert at != null : "the value of 'at' not assigned";
         return "[" + TASK_TYPE_CHA + "]"  + super.toString() + " (at: " + at.format(DATE_TIME_FORMAT) + ")";
     }
 }

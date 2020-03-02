@@ -61,7 +61,8 @@ public class ParserTest {
             Command command = parser.parseCommand("event career fair /at 2020-03-40");
         } catch (Exception e) {
             assertEquals(e.getMessage(),
-                    "Text '2020-03-40' could not be parsed: Invalid value for DayOfMonth (valid values 1 - 28/31): 40\n");
+                    "Text '2020-03-40' could not be parsed: Invalid value for DayOfMonth "
+                            + "(valid values 1 - 28/31): 40\n");
         }
     }
 

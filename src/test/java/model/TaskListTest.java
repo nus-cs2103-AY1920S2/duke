@@ -9,7 +9,10 @@ import static TestUtils.TypicalTasks.EVENT_W3LECTURE;
 import static TestUtils.TypicalTasks.EVENT_W4LECTURE;
 import static TestUtils.TypicalTasks.DL_ASSIGNMENT_1;
 import static TestUtils.TypicalTasks.DL_ASSIGNMENT_2;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskListTest {
 
