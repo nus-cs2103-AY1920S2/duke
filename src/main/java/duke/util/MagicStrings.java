@@ -37,6 +37,7 @@ public class MagicStrings {
     public static final String ERROR_FAIL_TO_LOAD_AND_SAVE = "Failed to load save file! "
             + "You will also not be able to save.";
     public static final String ERROR_FAIL_TO_SAVE = "Facing difficulties saving your tasks right now.";
+    public static final String ERROR_NO_COMPLETED_TASKS = "You don't have any completed tasks in your main list!";
     public static final String ERROR_NO_MORE_UNDOS = "Sorry, you're all out of undos!";
     public static final String ERROR_RECURRING_TASK_MISSING_DEADLINE = "This recurring task "
             + "seem to have no deadline!";
@@ -54,10 +55,12 @@ public class MagicStrings {
             + "Type help to view the accepted formats.";
 
     // GSON helper strings.
+    public static final String GSON_ATTR_COMPLETION_TIME = "completionTime";
     public static final String GSON_ATTR_DEADLINE = "deadline";
     public static final String GSON_ATTR_DESCRIPTION = "description";
     public static final String GSON_ATTR_FREQUENCY = "frequency";
     public static final String GSON_ATTR_IS_COMPLETED = "isCompleted";
+    public static final String GSON_ATTR_IS_COMPLETED_ON_TIME = "isCompletedOnTime";
     public static final String GSON_ATTR_TIME_FRAME = "timeFrame";
     public static final String GSON_ATTR_REPEAT_END_TIME = "repeatEndTime";
 }

@@ -74,7 +74,7 @@ public class Ui {
      *
      * @param taskList The taskList to print.
      * @return The {@code TaskList} formatted {@code String}.
-     * @throws DuchessException If the task changes size during printing, resulting
+     * @throws DuchessException If the task list changes size during printing, resulting
      *                          in index out of bounds.
      */
     public String printTaskList(TaskList taskList) throws DuchessException {
@@ -89,6 +89,29 @@ public class Ui {
             return this.print(result.toArray(resultToPrint));
         } else {
             return this.print("Is this a trick question? You have not told me anything about 'tasks'.");
+        }
+    }
+
+    /**
+     * Returns out the given {@code TaskList}'s archive formatted, task by task.
+     *
+     * @param taskList The taskList containing the archive to print.
+     * @return The {@code TaskList}'s archive formatted {@code String}.
+     * @throws DuchessException If the archive changes size during printing, resulting
+     *                          in index out of bounds.
+     */
+    public String printArchive(TaskList taskList) throws DuchessException {
+        int size = taskList.archiveSize();
+        if (size > 0) {
+            // Solution below adapted from https://stackoverflow.com/a/18552071
+            List<String> result = IntStream.range(0, size)
+                    .mapToObj(i -> (i + 1) + ".\t" + taskList.getArchivedTask(i)).collect(Collectors.toList());
+            result.add(0, "I'm impressed you actually have tasks completed and archived.");
+            result.add(1, "Colour me surprised:");
+            String[] resultToPrint = new String[result.size()];
+            return this.print(result.toArray(resultToPrint));
+        } else {
+            return this.print("You have yet to archive any tasks... Get working!");
         }
     }
 
@@ -188,6 +211,15 @@ public class Ui {
     }
 
     /**
+     * Returns a {@code TaskList} sorted success message formatted appropriately.
+     *
+     * @return The success message {@code String}.
+     */
+    public String printTaskListArchived() {
+        return this.print("Your completed tasks have been archived.", "Type 'list' to see your pending tasks.");
+    }
+
+    /**
      * Returns an error message formatted appropriately.
      *
      * @param errorMessage ErrorMessage to print.
@@ -227,6 +259,8 @@ public class Ui {
                 "sort: Sorts your list of tasks.",
                 "snooze INDEX /for DURATION: Pushes back deadline by given duration.",
                 "undo: Undo your last command that changed your tasks",
+                "archive: Archive all of your completed tasks",
+                "archive view/show : See your list of archived tasks",
                 "bye: Bid farewell (sounds great!).",
                 "help: See this message again.",
                 new String(new char[45]).replace("\0", "-"),
