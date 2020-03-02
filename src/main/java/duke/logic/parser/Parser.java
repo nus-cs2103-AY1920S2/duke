@@ -3,13 +3,7 @@ package duke.logic.parser;
 import duke.commons.exceptions.DukeException;
 import duke.commons.exceptions.EmptyDescriptionException;
 import duke.commons.exceptions.InvalidCommandException;
-import duke.logic.commands.Command;
-import duke.logic.commands.AddCommand;
-import duke.logic.commands.DeleteCommand;
-import duke.logic.commands.DoneCommand;
-import duke.logic.commands.FindCommand;
-import duke.logic.commands.ListCommand;
-import duke.logic.commands.ExitCommand;
+import duke.logic.commands.*;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -20,7 +14,7 @@ import java.util.ArrayList;
 public class Parser {
 
     private static ArrayList<String> validCommands = new ArrayList<>(
-            Arrays.asList("list", "done", "delete", "find", "todo", "event", "deadline", "bye"));
+            Arrays.asList("help", "list", "done", "delete", "find", "todo", "event", "deadline", "bye"));
 
     public Parser() {
     }
@@ -39,6 +33,8 @@ public class Parser {
         switch (commandWord) {
         case "bye":
             return new ExitCommand(commandWord);
+        case "help":
+            return new HelpCommand(commandWord);
         case "list":
             return new ListCommand(commandWord);
         case "done":
@@ -64,10 +60,10 @@ public class Parser {
      */
     public static void checkCommand(String commandWord, String[] commands) throws DukeException {
         checkCommandWord(commandWord);
-        if (!commandWord.equals("list") && !commandWord.equals("bye")) {
+        if (!commandWord.equals("list") && !commandWord.equals("bye") && !commandWord.equals("help")) {
             checkDetails(commands);
         } else {
-            // commandWord is either "list" or "bye", with no arguments required
+            // commandWord is either "list", "help" or "bye", with no arguments required
             assert commands.length == 1 : "invalid arguments";
         }
     }
@@ -94,6 +90,9 @@ public class Parser {
      * @throws EmptyDescriptionException If there number of arguments provided by the user is invalid.
      */
     public static void checkDetails(String[] commands) throws EmptyDescriptionException {
+        if (commands[0].equals("help")) {
+            return;
+        }
         if (commands.length < 2) {
             throw new EmptyDescriptionException("Sorry dude but I can't deal with empty index :(");
         } else if (commands.length > 2) {

@@ -64,7 +64,7 @@ public class Duke {
                 isTerminated = true;
             }
         } catch (DukeException e) {
-            output = ui.showCommandError(e.getMessage());
+            output = ui.showCommandError(e.getMessage()) + "\n" + ui.suggestHelp();
         }
         return output;
     }

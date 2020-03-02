@@ -30,6 +30,20 @@ public class Ui {
         return "You could try your luck again... or type \"help\" instead :)";
     }
 
+    public static String printHelp() {
+        return "Dude, you must be so desperate that you are here. But don't worry, I got you!\n" +
+                "Here are the commands that I support:\n\n" +
+                "1. help: umm you are already here dude, so I guess you know how to use this one..\n" +
+                "2. list: list\n" +
+                "3. add todo: todo [description]\n" +
+                "4. add event: event [description] /at [yyyy-mm-dd hhmm]\n" +
+                "5. add deadline: deadline [description] /by [yyyy-mm-dd hhmm]\n" +
+                "6. delete: delete [index]\n" +
+                "7. mark done: done [index]\n" +
+                "8. find: find [keyword]\n" +
+                "9. say sayonara to me: bye";
+    }
+
     /**
      * Returns a <code>String</code> message to confirm successful addition of task.
      *
