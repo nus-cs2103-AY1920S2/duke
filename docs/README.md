@@ -32,7 +32,7 @@ MM-DD anyways? *ahem*
 * **`deadline`**`Buy present/2020-03-08`: adds another deadline.
 * **`sort deadlines`**: Ta-da! Now you can see the nearest deadlines that you have. Never worried about
 missing a deadline anymore!
-* **`exit`** : exits the app. Bye bye!
+* **`bye`** : exits the app. Bye bye!
 
 ## 3. Screenshot
 ![Screenshot of Ui](Ui.png)
