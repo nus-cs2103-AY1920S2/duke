@@ -1,11 +1,13 @@
 package duke.parser;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 import duke.parser.exception.DateFormatException;
 import duke.parser.exception.ParseException;
+import duke.parser.exception.TimeFormatException;
+import duke.util.DateTimeUtil;
 
 /**
  * Represents a Parser that parses user input into common values.
@@ -52,16 +54,32 @@ public class StringParser extends Parser {
     /**
      * Parses a date from a string.
      *
-     * @param input a string to convert into a date, in yyyy-mm-dd format.
+     * @param input a string to convert into a date, in yyyy-MM-dd format.
      * @return the date representation of the string.
-     * @throws ParseException if input cannot be parsed as a date object.
+     * @throws DateFormatException if input cannot be parsed as a date object.
      */
     public static LocalDate parseDate(String input) throws DateFormatException {
         try {
-            return LocalDate.parse(input, DateTimeFormatter.ISO_LOCAL_DATE);
+            return LocalDate.parse(input, DateTimeUtil.FORMAT_DATE_NUMERIC);
 
         } catch (DateTimeParseException e) {
             throw new DateFormatException();
+        }
+    }
+
+    /**
+     * Parses a 24-hour time from a string.
+     *
+     * @param input a string to convert into a time, in HH:mm format.
+     * @return the time representation of the string.
+     * @throws TimeFormatException if input cannot be parsed as a time object.
+     */
+    public static LocalTime parseTime(String input) throws TimeFormatException {
+        try {
+            return LocalTime.parse(input, DateTimeUtil.FORMAT_TIME_24H);
+
+        } catch (DateTimeParseException e) {
+            throw new TimeFormatException();
         }
     }
 }

@@ -3,6 +3,7 @@ package duke.parser;
 import duke.parser.exception.DateFormatException;
 import duke.parser.exception.MissingParserArgumentsException;
 import duke.parser.exception.ParseException;
+import duke.parser.exception.TimeFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -103,12 +104,19 @@ public class StorageParser extends Parser {
      * @param args tokens read from a file input.
      * @return an event read from file input.
      * @throws MissingParserArgumentsException if the file input contains invalid arguments.
+     * @throws DateFormatException if the date input is in an invalid format.
+     * @throws TimeFormatException if the start and/or end time is in an invalid format.
      */
-    static Event readEvent(String[] args) throws MissingParserArgumentsException {
-        if (!hasNumArguments(args, 5)) {
+    static Event readEvent(String[] args) throws MissingParserArgumentsException,
+            DateFormatException, TimeFormatException {
+
+        if (!hasNumArguments(args, 6)) {
             throw new MissingParserArgumentsException();
         }
 
-        return new Event(args[2], args[3], args[4]);
+        return new Event(args[2],
+                StringParser.parseDate(args[3]),
+                StringParser.parseTime(args[4]),
+                StringParser.parseTime(args[5]));
     }
 }
