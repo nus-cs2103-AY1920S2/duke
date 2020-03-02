@@ -6,9 +6,10 @@ The application allows users to create, store, and mark done multiple tasks. Oth
 ### Quick Start
 To launch the program: 
 1. Ensure that Java 11 or later version is installed on your computer.
-2. Download the latest `duke-0.2.jar` file from [this page](https://github.com/wardetu/duke/releases/tag/0.2).
+2. Download the latest `duke-0.2.jar` file from [this page](https://github.com/wardetu/duke/releases/tag/v0.2).
 3. Move `duke-0.2.jar` to a folder you want to use as the home folder for the program. 
-*Note: the first time Duke runs a new storage folder will be created. The program data is stored in a `data.csv` file. Do not modify it.*
+*Note: the first time Duke runs a new storage folder will be created. The program data is stored in a `data.csv` file. 
+Do not modify it.*
 4. Double-click on the file icon to run. Alternatively, start up a Terminal program, navigate to the directory
 that contains `duke-0.2.jar` and run the following command: `java -jar duke-0.2.jar`
 
