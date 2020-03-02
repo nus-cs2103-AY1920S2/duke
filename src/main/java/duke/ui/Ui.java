@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -277,9 +278,48 @@ public class Ui {
                 "[number] hours/days/weeks/months/years");
     }
 
+    /**
+     * Returns the default undo success message.
+     *
+     * @param lastCommand The last command that was undone.
+     * @return Undo success message.
+     */
     public String printUndoMessage(String lastCommand) {
         return this.print("I've helped to fix your mistakes again. Your last command:",
                 lastCommand, "has been undone.");
+    }
+
+    /**
+     * Returns the statistics found from the task list.
+     *
+     * @param stats       Statistics to print.
+     * @param statsPeriod Period over which the statistics were gathered.
+     * @return Stats message.
+     */
+    public String printStats(Integer[] stats, TemporalAmount statsPeriod) {
+        String period;
+        System.out.println(statsPeriod);
+        switch (statsPeriod.toString()) {
+        case "P0D":
+            period = "today";
+            break;
+        case "P7D":
+            period = "this week";
+            break;
+        case "P1M":
+            period = "this month";
+            break;
+        case "P1Y":
+            period = "this year";
+            break;
+        default:
+            period = "the period you asked for";
+            break;
+        }
+        return this.print("The following data is for " + period + ":", "You created " + stats[0]
+                + (stats[0] == 1 ? " task." : " tasks."), "You completed " + stats[1]
+                + (stats[1] == 1 ? " task." : " tasks."), "Out of those, " + stats[2]
+                + (stats[2] == 1 ? " was " : " were ") + "completed on time.", "Interesting!");
     }
 
     // Console Mode Specific Methods

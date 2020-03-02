@@ -28,6 +28,7 @@ public enum Command {
     HELP(AdminCommandHandler::handleHelpCommand, "help", "h"),
     UNDO(AdminCommandHandler::handleUndoCommand, "undo"),
     ARCHIVE(TaskListCommandHandler::handleArchiveCommand, "archive", "arc", "a"),
+    STATISTICS(AdminCommandHandler::handleStatsCommand, "statistics", "statistic", "stat", "stats"),
     BYE(AdminCommandHandler::handleByeCommand, "bye", "exit", "quit");
 
     /**

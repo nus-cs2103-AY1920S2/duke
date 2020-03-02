@@ -6,9 +6,11 @@ import static duke.util.MagicStrings.ERROR_TASK_ALREADY_COMPLETED;
 import static duke.util.MagicStrings.ERROR_TASK_CREATED_BEFORE;
 import static duke.util.StringCleaner.cleanAndLowerString;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -193,7 +195,7 @@ public class TaskList {
                 return -1;
             } else if (isBActiveDeadline && !isAActiveDeadline) {
                 return 1;
-            } else if (isAActiveDeadline && isBActiveDeadline) {
+            } else if (isAActiveDeadline) {
                 return ((Deadline) a).getDeadline().compareTo(((Deadline) b).getDeadline());
             } else if (a.isCompleted && !b.isCompleted) {
                 return 1;
@@ -234,12 +236,11 @@ public class TaskList {
         // Reused from https://howtodoinjava.com/java/collections/arraylist/arraylist-clone-deep-copy/
         // Point 3 with minor modifications
         ArrayList<Task> tasksClone = new ArrayList<>();
-        Iterator<Task> iterator = tasks.iterator();
-        while (iterator.hasNext()) {
-            tasksClone.add((Task) iterator.next().clone());
+        for (Task task : tasks) {
+            tasksClone.add((Task) task.clone());
         }
         // @@author
-        return List.<Task>of(tasksClone.toArray(new Task[tasksClone.size()]));
+        return List.of(tasksClone.toArray(new Task[0]));
     }
 
     /**
@@ -252,12 +253,11 @@ public class TaskList {
         // Reused from https://howtodoinjava.com/java/collections/arraylist/arraylist-clone-deep-copy/
         // Point 3 with minor modifications
         ArrayList<Task> tasksClone = new ArrayList<>();
-        Iterator<Task> iterator = archive.iterator();
-        while (iterator.hasNext()) {
-            tasksClone.add((Task) iterator.next().clone());
+        for (Task task : archive) {
+            tasksClone.add((Task) task.clone());
         }
         // @@author
-        return List.<Task>of(tasksClone.toArray(new Task[tasksClone.size()]));
+        return List.of(tasksClone.toArray(new Task[0]));
     }
 
     /**
@@ -282,6 +282,36 @@ public class TaskList {
      */
     public void replaceArchive(ArrayList<Task> archive) {
         this.archive = archive;
+    }
+
+    /**
+     * Returns stats for tasks created, tasks completed, tasks completed on time.
+     *
+     * @param statsPeriod Period to check back.
+     * @return An array of {@code String}s containing the above numbers.
+     */
+    public Integer[] getStats(TemporalAmount statsPeriod) {
+        LocalDateTime startTime = LocalDate.now().atTime(0, 0).minus(statsPeriod);
+        int numOfTasksCreated = 0;
+        int numOfTasksCompleted = 0;
+        int numOfTasksCompletedOnTime = 0;
+        ArrayList<Task> allTasks = new ArrayList<>();
+        allTasks.addAll(this.tasks);
+        allTasks.addAll(this.archive);
+        for (Task task : allTasks) {
+            if (task.creationTime.isAfter(startTime)) {
+                numOfTasksCreated += 1;
+            }
+            if (task.isCompleted) {
+                if (task.completionTime.isAfter(startTime)) {
+                    numOfTasksCompleted += 1;
+                }
+                if (task instanceof Deadline && ((Deadline) task).isCompletedOnTime) {
+                    numOfTasksCompletedOnTime += 1;
+                }
+            }
+        }
+        return new Integer[]{numOfTasksCreated, numOfTasksCompleted, numOfTasksCompletedOnTime};
     }
 
 

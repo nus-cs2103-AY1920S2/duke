@@ -1,7 +1,13 @@
 package duke.command;
 
 import static duke.util.MagicStrings.ERROR_NO_MORE_UNDOS;
+import static duke.util.MagicStrings.ERROR_STATS_INVALID_TIME;
 import static duke.util.StringCleaner.cleanAndLowerString;
+
+import java.time.Period;
+import java.time.temporal.TemporalAmount;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.exception.DuchessException;
 import duke.save.SaveState;
@@ -69,5 +75,40 @@ public class AdminCommandHandler {
         taskList.replaceArchive(lastSaveState.getArchiveFromSave());
         storage.save(taskList);
         return ui.printUndoMessage(lastSaveState.getLastCommand());
+    }
+
+    static String handleStatsCommand(String command, TaskList taskList, Ui ui, Storage storage,
+                                     SaveStateStack saveStateStack) throws DuchessException {
+        ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        if (commands.size() < 2) {
+            throw new DuchessException(ERROR_STATS_INVALID_TIME);
+        }
+        TemporalAmount statsPeriod;
+        switch (cleanAndLowerString(commands.get(1))) {
+        case "day":
+            // Fallthrough
+        case "today":
+            statsPeriod = Period.ofDays(0);
+            break;
+        case "week":
+            // Fallthrough
+        case "this week":
+            statsPeriod = Period.ofWeeks(1);
+            break;
+        case "month":
+            // Fallthrough
+        case "this month":
+            statsPeriod = Period.ofMonths(1);
+            break;
+        case "year":
+            // Fallthrough
+        case "this year":
+            statsPeriod = Period.ofYears(1);
+            break;
+        default:
+            throw new DuchessException(ERROR_STATS_INVALID_TIME);
+        }
+        Integer[] stats = taskList.getStats(statsPeriod);
+        return ui.printStats(stats, statsPeriod);
     }
 }
