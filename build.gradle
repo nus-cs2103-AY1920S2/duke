@@ -44,7 +44,7 @@ dependencies {
 }
 
 group 'duke'
-version '0.1'
+version '1.0'
 
 // JUnit configuration
 test {
@@ -58,7 +58,7 @@ repositories {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.8"
+    archiveVersion = "1.0"
     archiveClassifier = null
     archiveAppendix = null
 }
