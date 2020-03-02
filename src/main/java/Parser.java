@@ -1,5 +1,3 @@
-import javafx.application.Platform;
-
 import java.time.format.DateTimeParseException;
 
 public class Parser {

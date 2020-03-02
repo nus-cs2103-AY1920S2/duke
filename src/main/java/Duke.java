@@ -1,9 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
-import java.time.format.DateTimeParseException;
-
-import javafx.application.Platform;
 
 public class Duke {
     private Storage storage;
@@ -27,16 +24,10 @@ public class Duke {
     }
 
 
-
-    /*public static void main(String[] args) {
-        new Duke().run();
-    }*/
-
     /**
      * Runs the code for the Duke program.
      */
     public String getResponse(String in) {
-        String response = "";
         Parser parser = new Parser(in);
 
         String toReturn = parser.parseCommand(ui, tasks);

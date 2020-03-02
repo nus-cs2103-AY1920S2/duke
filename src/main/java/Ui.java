@@ -75,7 +75,6 @@ public class Ui {
             throw new DukeException("Index out of bounds!");
         }
         System.out.println("Nice, I've marked this task as done:\n  " + listOfTasks.getTask(index));
-        //System.out.println(" " + listOfTasks.getTask(index));
     }
 
     /**

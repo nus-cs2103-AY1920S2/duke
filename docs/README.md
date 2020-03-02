@@ -48,7 +48,8 @@ Below are a list of possible images used in the Duke Application.
 
 #### Images used for the User:
 
-There is only one image used to represent the user. The image looks like this:  
+There is only one image used to represent the User.  
+The image looks like this:  
 
 <img src = "NewUser.png" width = "100">
 
@@ -198,7 +199,7 @@ Format: `delete INDEX`
 
 
 ```
-I've removed this task:
+Noted. I've removed this task:
 [T][Y] CS2103 Quiz
 you now have 2 tasks in the list.
 ```
@@ -269,13 +270,7 @@ Bye, hope to see you again soon!
 
 
 ### 3.10 Storing Data
-Data in duke is automatically saved after using any of the following commands:
-- todo
-- event
-- deadline
-- done
-- delete
-- snooze
+Data in duke is automatically saved onto the hard disk after the use of any command. (Even when the command cannot be executed!) 
 
 
 
