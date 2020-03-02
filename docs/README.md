@@ -1,5 +1,26 @@
 # User Guide for Duke Chatbot
 
+## TABLE OF CONTENTS
+1. [Introduction](/docs/README.md#1-introduction)
+2. [Interacting with Duke](/docs/README.md#2-interacting-with-duke) 
+     2.1. [General Guideline](/docs/README.md#21-general-guideline)
+     2.2. [Images](/docs/README.md#22-images)
+     2.3. [Sample Interaction with the Duke Application](/docs/README.md#23-sample-interaction-with-the-duke-application)
+3. [Features](/docs/README.md#3-features)
+     3.1. [Todo](/docs/README.md#31-add-a-todo-task-todo)
+     3.2. [Event](/docs/README.md#32-add-an-event-task-event)
+     3.3. [Deadline](/docs/README.md#33-add-a-deadline-task-deadline)
+     3.4. [List](/docs/README.md#34-list-all-tasks-list)
+     3.5. [Done](/docs/README.md#35-mark-task-as-done-done)
+     3.6. [Delete](/docs/README.md#36-delete-task-delete)
+     3.7. [Find](/docs/README.md#37-find-tasks-containing-a-keyword-find)
+     3.8. [Snooze](/docs/README.md#38-reschedule-a-deadline-or-event-snooze)
+     3.9. [Bye](/docs/README.md#39-exit-duke-bye)
+     3.10. [Storing Data](/docs/README.md#310-storing-data)
+4. [Command Overview](/docs/README.md#4-command-overview)
+5. [Acknowledgements](/docs/README.md#5-acknowledgements)
+
+
 ## 1. Introduction
 Duke is a Personal Assistant Chatbot which assists in tracking tasks.
 
@@ -10,11 +31,7 @@ When started up, Duke will introduce itself.
 
 
 After the introduction, the user may input any command, which Duke will try to execute.  
-
-
 Duke will then inform the user if their command was successfully executed.  
-
-
 Duke's expression will also change depending on whether or not the user's input was successfully executed.  
 
 
@@ -24,20 +41,15 @@ After informing the user if their command was successfully executed, Duke will w
 It should be noted that Duke's image and dialog box are always on the left, while the user's image and dialog box are always on the right.
 
 ### 2.2 Images
-As mentioned in 2.2, Duke's expressions change depending on whether or not the user's command was successfully executed.  
-
-
+As mentioned in 2.1, Duke's expressions change depending on whether or not the user's command was successfully executed.  
 This is done by having a different image correspond to a different case.  
 
 
 Below are a list of possible images used in the Duke Application.
 
-#### Images used for the user:
+#### Images used for the User:
 
-There is only one image used to represent the user.  
-
-
-It looks like this:  
+There is only one image used to represent the user. The image looks like this:  
 
 <img src = "NewUser.png" width = "100">
 
@@ -46,10 +58,7 @@ It looks like this:
 There are three possible images used to represent the Duke.
 
 
-Firstly, there is a unique image that is only used during the first interaction with the user. 
-
- 
-This serves as an introduction to the Duke.  
+Firstly, there is a unique image that is only used during the first interaction with the user. This serves as an introduction to the Duke.  
 
 
 The image looks like this:  
@@ -58,25 +67,21 @@ The image looks like this:
 
 
 Next, there is the image used when the Duke successfully carries out a command from the user.  
-
-
 The image looks like this:
 
 
 <img src = "NewDuke.png" width = "100">
 
 Lastly, there is the image used when the Duke is unable to carry out a command from the user.  
-
-
 The image looks like this:
 
 
 <img src = "Fail.png" width = "100">
 
-### 2.3 Sample Interaction
+### 2.3 Sample Interaction with the Duke Application
 Below is a sample interaction with the Duke Application.  
 
-<img src = "Ui.png" width = "300">
+<img src = "Ui.png" width = "350">
 
 
 ## 3. Features
