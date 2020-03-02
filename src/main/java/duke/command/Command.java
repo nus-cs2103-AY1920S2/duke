@@ -27,6 +27,7 @@ public enum Command {
     SORT(TaskListCommandHandler::handleSortCommand, "sort", "s"),
     HELP(AdminCommandHandler::handleHelpCommand, "help", "h"),
     UNDO(AdminCommandHandler::handleUndoCommand, "undo"),
+    ARCHIVE(TaskListCommandHandler::handleArchiveCommand, "archive", "arc", "a"),
     BYE(AdminCommandHandler::handleByeCommand, "bye", "exit", "quit");
 
     /**

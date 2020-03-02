@@ -103,6 +103,7 @@ public class TaskListCommandHandler {
     static String handleDeleteCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                       SaveStateStack saveStateStack) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        assert Command.DELETE.hasCommand(cleanAndLowerString(commands.get(0))); // pre-condition
         if (commands.size() == 2 && cleanAndLowerString(commands.get(1)).equals("all")) {
             saveStateStack.saveState(command, taskList);
             taskList.removeAllTasks();
@@ -137,6 +138,7 @@ public class TaskListCommandHandler {
         if (commands.size() < 2) {
             throw new DuchessException(ERROR_INVALID_SNOOZE_DURATION);
         }
+        assert Command.SNOOZE.hasCommand(cleanAndLowerString(commands.get(0))); // pre-condition
         int index = getIntegerFromCommand(commands.get(0));
         checkBoundsOfIndex(index, taskList);
         Task taskToSnooze = taskList.getTask(index - 1);
@@ -164,6 +166,7 @@ public class TaskListCommandHandler {
      */
     static String handleSortCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                     SaveStateStack saveStateStack) throws DuchessException {
+        assert Command.SORT.hasCommand(cleanAndLowerString(command)); // pre-condition
         if (taskList.size() == 0) {
             throw new DuchessException(ERROR_SORTING_EMPTY_LIST);
         }
@@ -171,6 +174,19 @@ public class TaskListCommandHandler {
         taskList.sort();
         storage.save(taskList);
         return ui.printTaskListSorted();
+    }
+
+    static String handleArchiveCommand(String command, TaskList taskList, Ui ui, Storage storage,
+                                       SaveStateStack saveStateStack) throws DuchessException {
+        ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
+        assert Command.ARCHIVE.hasCommand(cleanAndLowerString(commands.get(0))); // pre-condition
+        if (commands.size() == 2) {
+            return handleShowArchive(command, taskList, ui);
+        }
+        saveStateStack.saveState(command, taskList);
+        taskList.archive();
+        storage.save(taskList);
+        return ui.printTaskListArchived();
     }
 
     private static Integer getIntegerFromCommand(String command) throws DuchessException {
@@ -198,5 +214,14 @@ public class TaskListCommandHandler {
         if (isIndexTooLow || isIndexTooHigh) {
             throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);
         }
+    }
+
+    private static String handleShowArchive(String command, TaskList taskList, Ui ui) throws DuchessException {
+        ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s")));
+        String secondaryCommand = cleanAndLowerString(commands.get(1));
+        if (!secondaryCommand.equals("show") && !secondaryCommand.equals("list")) {
+            throw new DuchessException(ERROR_INVALID_COMMAND);
+        }
+        return ui.printArchive(taskList);
     }
 }
