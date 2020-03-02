@@ -2,11 +2,9 @@ package duke;
 
 import duke.Ui.Ui;
 import duke.command.Command;
-import duke.command.PriorityCommand;
 import duke.parser.Parser;
 import duke.storage.TaskStorage;
 import duke.task.Task;
-import exception.IllegalTextException;
 
 import java.io.FileNotFoundException;
 
@@ -42,56 +40,6 @@ public class Duke {
         }
 
     }
-
-    // Carry out Add, List, Done commands if entered by user
-    // Terminates when user gives exit signal
-    /*
-    private void runDuke() {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            String nextInput = scanner.nextLine();
-            // Validation check
-            if (nextInput.equals("bye")) {
-                stopDuke();
-                break;
-            }
-            // Handle List command if any
-            if (nextInput.equals("list")) {
-                handleCommandList();
-                continue;
-            }
-
-            // Check and Handle Done command
-            // Possible source of error
-            String[] commandArgs = nextInput.split(" ");
-
-            if (commandArgs[0].equals("done")) {
-                // duke.task.Todo: Add exception handling
-                handleCommandDone(Integer.parseInt(commandArgs[1]));
-                continue;
-            }
-
-            if (commandArgs[0].equals("delete")) {
-                // duke.task.Todo: Add exception handling
-                handleCommandDelete(Integer.parseInt(commandArgs[1]));
-                continue;
-            }
-
-            // Handle Add Command
-            Task t = null;
-            try {
-                t = TaskDispatch.dispatchTaskFromInput(commandArgs);
-            } catch (IllegalArgumentException e1){
-                System.out.println("    " + e1.getMessage());
-                continue;
-            } catch (IllegalCommandException e2) {
-                System.out.println("    " + e2.getMessage());
-                continue;
-            }
-
-            handleCommandAdd(t, nextInput);
-        }
-    }*/
 
     // Print a closing message before stopping duke.Duke
     private static String stopDuke() {
