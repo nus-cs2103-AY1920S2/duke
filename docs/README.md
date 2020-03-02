@@ -1,51 +1,92 @@
 # User Guide
 
-## Description
-DukeBot is a personal chat bot to help a user keep track of tasks to be done by storing them in a task list.
+1. [Description](#1.-description)
+<br/>
+2. [Features](#2-features)
+<br/>
+2.1. [Add task](#21-add-task)
+<br/>
+2.2. [List task](#22-list-task)
+<br/>
+2.3. [Mark task as done](#23-mark-task-as-done)
+<br/>
+2.4. [Find task](#24-find-task)
+<br/>
+2.5. [Delete task](#25-delete-task)
+<br/>
+2.6. [Update description of task](#26-update-description-of-task)
+<br/>
+2.7. [Exit from application](#27-exit-from-application)
+<br/>
+3. [Usage](#3-usage)
+<br/>
+3.1. [`todo` - Adds a Todo task to the task list](#31-todo---adds-a-todo-task-to-the-task-list)
+<br/>
+3.2. [`deadline` - Adds a Deadline task to the task list](#32-deadline---adds-a-deadline-task-to-the-task-list)
+<br/>
+3.3. [`event` - Adds a Event task to the task list](#33-event---adds-a-event-task-to-the-task-list)
+<br/>
+3.4. [`list` - Lists all tasks in the task list](#34-list---lists-all-tasks-in-the-task-list)
+<br/>
+3.5. [`done` - Marks a task as done](#35-done---marks-a-task-as-done)
+<br/>
+3.6. [`find` - Looks for a particular task](#36-find---looks-for-a-particular-task)
+<br/>
+3.7. [`delete` - Deletes a task from the task list](#37-delete---deletes-a-task-from-the-task-list)
+<br/>
+3.8. [`update` - Updates the description of a task](#38-update---updates-the-description-of-a-task)
+<br/>
+3.9. [`manual` - Shows the different commands](#39-manual---shows-the-different-commands)
+<br/>
+4. [Acknowledgements](#4-acknowledgements)
+
+
+## 1. Description
+DukeBot is a personal chat bot to help you keep track of tasks to be done by storing them in a task list.
 ![Github Logo](./UG/Start-up.png)
 
-## Features 
+## 2. Features 
 
-### Add task
-* There are 3 kinds of tasks that a user can add to the task list: Todo, Deadline and Event.
-
-<br/>
-
-### List task
-* The user can list out all tasks in the task list.
+### 2.1. Add task
+* There are 3 kinds of tasks that you can add to the task list: Todo, Deadline and Event.
 
 <br/>
 
-### Mark task as done
-* The user can mark a task as completed.
+### 2.2. List task
+* You can list out all tasks in the task list.
 
 <br/>
 
-### Find task
-* The user can look for a particular task by inputting a keyword.
+### 2.3. Mark task as done
+* You can mark a task as completed.
 
 <br/>
 
-### Delete task
-* The user can remove a task from the task list.
+### 2.4. Find task
+* You can look for a particular task by inputting a keyword.
 
 <br/>
 
-### Update description of task
-* The user can update the description of a Todo task, the deadline date and time of a Deadline task or the timing details
-of an event.
+### 2.5. Delete task
+* You can remove a task from the task list.
 
 <br/>
 
-### Exit from application
-* The user can close the application by inputting `bye` and the application will store the tasks in the task list to a 
+### 2.6. Update description of task
+* You can update the description of a Todo task, the deadline date and time of a Deadline task or the timing details
+of an Event task.
+
+<br/>
+
+### 2.7. Exit from application
+* You can close the application by inputting `bye` and the application will store the tasks in the task list to a 
 `duke.txt` file.
 
-## Usage
+## 3. Usage
 
-### `todo` - Adds a Todo task to the task list
+### 3.1. `todo` - Adds a Todo task to the task list
 
-With this command, DukeBot will add a Todo task with the command inputted by the user, and update the task list.
+With this command, DukeBot will add a Todo task with the command inputted by you, and update the task list accordingly.
 
 Example of usage: 
 
@@ -61,10 +102,10 @@ Now you have 1 tasks in the list.
 
 <br/>
 
-### `deadline` - Adds a Deadline task to the task list
+### 3.2. `deadline` - Adds a Deadline task to the task list
 
 With this command, DukeBot will add a Deadline task with the command as well as the date and time at which the task is 
-due which are inputted by the user, and update the task list.
+due which are inputted by you, and update the task list accordingly.
 
 Example of usage: 
 
@@ -80,10 +121,10 @@ Now you have 1 tasks in the list.
 
 <br/> 
 
-### `event` - Adds a Event task to the task list
+### 3.3. `event` - Adds a Event task to the task list
 
 With this command, DukeBot will add a Event task with the command as well as the timing details of the event which are
-inputted by the user, and update the task list.
+inputted by you, and update the task list accordingly.
 
 Example of usage: 
 
@@ -99,7 +140,7 @@ Now you have 1 tasks in the list.
 
 <br/> 
 
-### `list` - Lists all tasks in the task list
+### 3.4. `list` - Lists all tasks in the task list
 
 With this command, DukeBot will list all tasks in the task list.
 
@@ -119,7 +160,7 @@ Have you completed them?
 
 <br/> 
 
-### `done` - Marks a task as done
+### 3.5. `done` - Marks a task as done
 
 With this command, DukeBot will mark a task as completed.
 
@@ -136,9 +177,9 @@ Okay noted! You have completed the below task:
 
 <br/> 
 
-### `find` - Looks for a particular task
+### 3.6. `find` - Looks for a particular task
 
-With this command, DukeBot will tell the user which tasks present in the task list fit the keyword that the user has 
+With this command, DukeBot will tell you which tasks present in the task list fit the keyword that you have
 inputted.
 
 Example of usage: 
@@ -163,7 +204,7 @@ I have found these matching items from your task list:
 
 <br/> 
 
-### `delete` - Deletes a task from the task list
+### 3.7. `delete` - Deletes a task from the task list
 
 With this command, DukeBot will delete the task at the specified index of the task list.
 
@@ -181,7 +222,7 @@ Now you have 4 tasks in the list.
 
 <br/>
 
-### `update` - Updates the information of a task
+### 3.8. `update` - Updates the description of a task
 
 * For a Todo task, inputting the exact description of the task previously entered followed by the new description 
 updates the task information.
@@ -200,7 +241,7 @@ Updating done! Key 'list' again to check:)
 <br/>
 
 * For a Deadline task, inputting the exact description of the task previously entered followed by a new deadline and 
-time updates the task information. Both the date and time has to be inputted, even if one of it did not change.
+time updates the task information. You have to input both the date and time, even if one of it did not change.
 
 Example of usage: 
 
@@ -231,9 +272,9 @@ Updating done! Key 'list' again to check:)
 
 <br/>
 
-### `manual` - Shows the different commands 
+### 3.9. `manual` - Shows the different commands 
 
-With this command, DukeBot will show all the different commands that a user can input as well as example inputs.
+With this command, DukeBot will show all the different commands that you can input as well as example inputs.
 
 Example of usage: 
 
@@ -278,3 +319,5 @@ e.g. 'update borrow book /borrow children's book for YRO' (given that 'todo borr
 ```
 ![Github Logo](./UG/Manual.png)
 
+## 4. Acknowledgements
+Credits to Jeffrey Lum for [JavaFX tutorials](https://github.com/nus-cs2103-AY1920S2/duke/tree/master/tutorials)
