@@ -38,7 +38,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
         UI.UIString = "";
         taskList = new TaskList();
-        storage = new Storage("tasks.txt", taskList);
+        String filePath = "./data/dukeStorage.txt";
+        storage = new Storage(filePath, taskList);
         ui = new UI();
 
         storage.readFromFile();
