@@ -22,7 +22,7 @@
 
 
 ## 1. Introduction
-Duke is a Personal Assistant Chatbot which assists in tracking tasks.
+Duke is a chatbot which assists in tracking tasks.
 
 ## 2. Interacting with Duke
 
@@ -30,17 +30,17 @@ Duke is a Personal Assistant Chatbot which assists in tracking tasks.
 When started up, Duke will introduce itself.  
 
 
-After the introduction, the user may input any command, which Duke will try to execute.  
-Duke will then inform the user if their command was successfully executed. Depending on whether or not the command was executed successfully, Duke will react differently.
+After the introduction, the User may input any command, which Duke will try to execute.  
+Duke will then inform the User if their command was successfully executed. Depending on whether or not the command was executed successfully, Duke will react differently.
 
 
-After informing the user if their command was successfully executed, Duke will wait for the user's next command.  
+After informing the User if their command was successfully executed, Duke will wait for the User's next command.  
 
 
-It should be noted that Duke's image and dialog box are always on the left, while the user's image and dialog box are always on the right.
+It should be noted that Duke's image and dialog box are always on the left, while the User's image and dialog box are always on the right.
 
 ### 2.2 Images
-As mentioned in section 2.1, Duke's will react differently based on whether or not the user's command was successfully executed.  
+As mentioned in section 2.1, Duke's will react differently based on whether or not the User's command was successfully executed.  
 This is done by having a different image correspond to the various case.  
 
 
@@ -58,19 +58,19 @@ The image looks like this:
 There are three possible images used to represent the Duke.
 
 
-Firstly, there is a unique image that is only used during the first interaction with the user. It is used to introduce the Duke.  
+Firstly, there is a unique image that is only used during the first interaction with the User. It is used to introduce the Duke.  
 The image looks like this:  
 
 <img src = "IntroDuke.png" width = "100">
 
 
-Next, there is the image used when the Duke successfully carries out a command from the user.  
+Next, there is the image used when the Duke successfully carries out a command from the User.  
 The image looks like this:
 
 
 <img src = "NewDuke.png" width = "100">
 
-Lastly, there is the image used when the Duke is unable to carry out a command from the user.  
+Lastly, there is the image used when the Duke is unable to carry out a command from the User.  
 The image looks like this:
 
 
@@ -270,7 +270,8 @@ Bye, hope to see you again soon!
 
 
 ### 3.10 Storing Data
-Data in duke is automatically saved onto the hard disk after the use of any command. (Even when the command cannot be executed!) 
+Data in duke is automatically saved onto the hard disk after the use of any command.  
+(Even when the command cannot be executed!) 
 
 
 
