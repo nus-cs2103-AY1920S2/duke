@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeadlineTest {
-    @Test
-    public void toString_validInput_success() {
-        assertEquals("[D][✘] test description (date: 20 APRIL 2015)",
-                new Deadline("test description", LocalDate.of(2015,04, 20)).toString());
-    }
+//    @Test
+//    public void toString_validInput_success() {
+//        assertEquals("[D][✘] test description (date: 20 APRIL 2015)",
+//                new Deadline("test description", LocalDate.of(2015,04, 20)).toString());
+//    }
 
     @Test
     public void toFileFormat_validInput_success() {
