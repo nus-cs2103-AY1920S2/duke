@@ -266,6 +266,10 @@ public class Gui implements Ui {
             PrintUtil.indentedPrintln("Usage: todo [task description]");
             PrintUtil.indentedPrintln("Adds a new ToDo task into the task list.");
             break;
+        case "help":
+            PrintUtil.indentedPrintln("Usage: help [command]");
+            PrintUtil.indentedPrintln("Displays help for the specified command.");
+            break;
         default:
             PrintUtil.indentedPrintf("Unknown command \"%s\"\n", commandName);
         }
