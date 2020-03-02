@@ -3,10 +3,12 @@ package duke.storage;
 import static duke.util.MagicStrings.ERROR_FAIL_TO_LOAD;
 import static duke.util.MagicStrings.ERROR_FAIL_TO_LOAD_AND_SAVE;
 import static duke.util.MagicStrings.ERROR_FAIL_TO_SAVE;
+import static duke.util.MagicStrings.GSON_ATTR_COMPLETION_TIME;
 import static duke.util.MagicStrings.GSON_ATTR_DEADLINE;
 import static duke.util.MagicStrings.GSON_ATTR_DESCRIPTION;
 import static duke.util.MagicStrings.GSON_ATTR_FREQUENCY;
 import static duke.util.MagicStrings.GSON_ATTR_IS_COMPLETED;
+import static duke.util.MagicStrings.GSON_ATTR_IS_COMPLETED_ON_TIME;
 import static duke.util.MagicStrings.GSON_ATTR_REPEAT_END_TIME;
 import static duke.util.MagicStrings.GSON_ATTR_TIME_FRAME;
 
@@ -17,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -63,7 +66,9 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
             Task[] taskArray = tasks.getTaskArray().toArray(new Task[tasks.size()]);
-            fileWriter.write(this.gson.toJson(taskArray, Task[].class));
+            Task[] archiveArray = tasks.getArchiveArray().toArray(new Task[tasks.archiveSize()]);
+            StorageContainer storageContainer = new StorageContainer(taskArray, archiveArray);
+            fileWriter.write(this.gson.toJson(storageContainer, StorageContainer.class));
             fileWriter.close();
         } catch (IOException e) {
             throw new DuchessException(ERROR_FAIL_TO_SAVE);
@@ -76,10 +81,11 @@ public class Storage {
      * @return Loaded list of tasks from given file path.
      * @throws DuchessException If it fails to load from the file path.
      */
-    public ArrayList<Task> load() throws DuchessException {
+    public ArrayList<ArrayList<Task>> load() throws DuchessException {
         try {
-            JsonArray jsonArray = readDataFromFilePath();
-            return readTaskArrayFromJsonArray(jsonArray);
+            JsonObject jsonObject = readDataFromFilePath();
+            return new ArrayList<>(List.of(readTasksFromJsonObject(jsonObject, "tasks"),
+                    readTasksFromJsonObject(jsonObject, "archive")));
         } catch (IOException e) {
             if (!isAbleToSave()) {
                 throw new DuchessException(ERROR_FAIL_TO_LOAD_AND_SAVE);
@@ -90,47 +96,54 @@ public class Storage {
 
     // Private helper methods
 
-    private JsonArray readDataFromFilePath() throws IOException {
+    private JsonObject readDataFromFilePath() throws IOException {
         String fileContent = Files.readString(Path.of(this.filePath));
-        return JsonParser.parseString(fileContent).getAsJsonArray();
+        return JsonParser.parseString(fileContent).getAsJsonObject();
     }
 
-    private ArrayList<Task> readTaskArrayFromJsonArray(JsonArray jsonArray) {
-        ArrayList<Task> result = new ArrayList<>();
-        for (int i = 0; i < jsonArray.size(); i++) {
-            JsonObject taskToCheck = (JsonObject) jsonArray.get(i);
+    private ArrayList<Task> readTasksFromJsonObject(JsonObject jsonArray, String keyword) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        JsonArray tasksJsonArray = jsonArray.getAsJsonArray(keyword);
+        for (int i = 0; i < tasksJsonArray.size(); i++) {
+            JsonObject taskToCheck = (JsonObject) tasksJsonArray.get(i);
             if (taskToCheck.has(GSON_ATTR_FREQUENCY) && taskToCheck.has(GSON_ATTR_DEADLINE)) {
                 // Task is a RecurringDeadline
                 if (taskToCheck.has(GSON_ATTR_REPEAT_END_TIME)) {
-                    result.add(new RecurringDeadline(
+                    tasks.add(new RecurringDeadline(
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_FREQUENCY), Frequency.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_REPEAT_END_TIME), LocalDateTime.class),
-                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_COMPLETION_TIME), LocalDateTime.class),
+                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED_ON_TIME), boolean.class)));
                 } else {
-                    result.add(new RecurringDeadline(
+                    tasks.add(new RecurringDeadline(
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
                             this.gson.fromJson(taskToCheck.get(GSON_ATTR_FREQUENCY), Frequency.class)));
                 }
             } else if (taskToCheck.has(GSON_ATTR_DEADLINE)) {
                 // Task is a Deadline
-                result.add(new Deadline(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                tasks.add(new Deadline(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),
-                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_COMPLETION_TIME), LocalDateTime.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED_ON_TIME), boolean.class)));
             } else if (taskToCheck.has(GSON_ATTR_TIME_FRAME)) {
                 // Task is an Event
-                result.add(new Event(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                tasks.add(new Event(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
                         this.gson.fromJson(taskToCheck.get(GSON_ATTR_TIME_FRAME), String.class),
-                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_COMPLETION_TIME), LocalDateTime.class)));
             } else {
                 // Task is a ToDo
-                result.add(new ToDo(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
-                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));
+                tasks.add(new ToDo(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class),
+                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_COMPLETION_TIME), LocalDateTime.class)));
             }
         }
-        return result;
+        return tasks;
     }
 
     private boolean isAbleToSave() throws DuchessException {
