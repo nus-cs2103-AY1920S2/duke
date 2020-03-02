@@ -38,7 +38,7 @@ Depending on whether or not the command was executed successfully, Duke will rea
 After informing the User if their command was successfully executed, Duke will wait for the User's next command.  
 
 
-It should be noted that Duke's image and dialog box are always on the left, while the User's image and dialog box are always on the right.
+Duke's image and dialog box are always on the left, while the User's image and dialog box are always on the right.
 
 ### 2.2 Images
 As mentioned in Section 2.1, Duke will react differently based on whether or not the User's command was successfully executed.  
