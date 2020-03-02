@@ -19,17 +19,19 @@ public class Storage {
      * @param xs
      * @throws FileNotFoundException
      */
-    public void saveToFile(ArrayList<Task> xs) throws FileNotFoundException {
+    public String saveToFile(ArrayList<Task> xs) throws FileNotFoundException {
+        String output = "";
         StringBuilder sb = new StringBuilder();
         for(Task t : xs) {
             sb.append(t.saveToText() + "\n");
         }
         try (PrintStream out = new PrintStream(new FileOutputStream(this.filePath))) {
             out.print(sb.toString());
-            System.out.println("Your tasks have been saved to the hard disk");
+            output = "Your tasks have been saved to the hard disk";
         } catch (IOException e){
             System.out.println(e);
         }
+        return output;
     }
 
     /**

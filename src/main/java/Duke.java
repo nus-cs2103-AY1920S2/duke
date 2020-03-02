@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Duke extends Application{
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -98,7 +98,7 @@ public class Duke extends Application{
 
 
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -193,6 +193,57 @@ public class Duke extends Application{
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        String output = "";
+        try {
+            if (parser.commandEquals(parser.getCommand(input), "todo")) {
+                if (!parser.hasDetails(input)) {
+                    throw new EmptyDescriptionException();
+                }
+                ;
+                Todo t = new Todo(parser.getInfo(input));
+                tasks.addTask(t);
+                output += "Got it. I've added this task: \n  " + t.toString() + "\n" + tasks.numOfTasks();
+            } else if (parser.commandEquals(parser.getCommand(input), "event")) {
+                if (!parser.hasDetails(input)) {
+                    throw new EmptyDescriptionException();
+                }
+                ;
+                Event e = new Event(Event.getEventDesc(input.toCharArray()), Event.getEventDate(parser.
+                        getInfo(input)));
+                tasks.addTask(e);
+                output += "Got it. I've added this task: \n  " + e.toString() + "\n" + tasks.numOfTasks();
+            } else if (parser.commandEquals(parser.getCommand(input), "deadline")) {
+                if (!parser.hasDetails(input)) {
+                    throw new EmptyDescriptionException();
+                }
+                ;
+                Deadline d = new Deadline(Deadline.getDesc(input.toCharArray()), Deadline.getDate(parser.
+                        getInfo(input)));
+                tasks.addTask(d);
+                output += "Got it. I've added this task: \n  " + d.toString() + "\n" + tasks.numOfTasks();
+            } else if (parser.commandEquals(parser.getCommand(input), "list")) {
+                output = tasks.showTasks();
+            } else if (parser.commandEquals(parser.getCommand(input), "done")) {
+                output = tasks.taskDone(parser.getTaskNum(input));
+            } else if (parser.commandEquals(parser.getCommand(input), "bye")) {
+                try {
+                    output += storage.saveToFile(tasks.getTaskArrList()) + "\n" + ui.sayBye();
+                } catch (FileNotFoundException e) {
+
+                }
+            } else if (parser.commandEquals(parser.getCommand(input), "delete")) {
+                output += tasks.deleteTask(parser.getTaskNum(input));
+            } else if (parser.commandEquals(parser.getCommand(input), "find")) {
+                output += tasks.find(parser.getInfo(input));
+            } else if (parser.commandEquals(parser.getCommand(input), "view")) {
+                output += tasks.viewSchedule(parser.getInfo(input));
+            } else {
+                throw new InvalidCommandException();
+            }
+            return output;
+        } catch (DukeException e) {
+            output = e.toString();
+            return output;
+        }
     }
 }

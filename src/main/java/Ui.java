@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Ui {
 
     /**
@@ -18,8 +16,8 @@ public class Ui {
     /**
      * Prints termination message to user
      */
-    public static void sayBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String sayBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -32,7 +30,8 @@ public class Ui {
 //        }
 //    }
 
-    public static void noExistingSaveFile() {
-        System.out.println("WUBBA LUBBA DUB DUB");
+    public static String noExistingSaveFile() {
+        return ("WUBBA LUBBA DUB DUB");
     }
+
 }

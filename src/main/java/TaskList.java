@@ -72,73 +72,93 @@ public class TaskList {
     /**
      * Prints out string representation of task array list
      */
-    public void showTasks() {
+    public String showTasks() {
+        String output = "";
         if (taskArrList.size() == 1) {
-            System.out.println("Here is the task in your list: ");
+            output += "Here is the task in your list:\n";
         } else if (taskArrList.size() == 0) {
-            System.out.println("You have no tasks in your list :(");
+            output += "You have no tasks in your list :(";
         } else {
-            System.out.println("Here are the tasks in your list: ");
+            output += "Here are the tasks in your list:\n";
         }
         int i = 1;
         for (Task t : taskArrList) {
-            System.out.println((i) + "." + taskArrList.get(i-1).toString());
-            i += 1;
+            if(i < taskArrList.size()) {
+                output += ((i) + "." + taskArrList.get(i - 1).toString()) + "\n";
+                i += 1;
+            } else {
+                output += ((i) + "." + taskArrList.get(i - 1).toString());
+            }
         }
+        return output;
     }
 
     /**
      * complete a task by changing boolean isDone to true
      * @param n - int representing task number
      */
-    public void taskDone(int n) {
+    public String taskDone(int n) {
+        String output = "";
         n -= 1;
         Task t = taskArrList.get(n);
         t.doTask();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  [" + taskArrList.get(n).getStatusIcon() + "] " + taskArrList.get(n).getDescription());
+        output += "Nice! I've marked this task as done: \n  [" + taskArrList.get(n).getStatusIcon() + "] " + taskArrList.get(n).getDescription();
+        return output;
     }
 
     /**
      * removes task of index (n - 1) from task list
      * @param n - int representing task number in task list
      */
-    public void deleteTask(int n) {
+    public String deleteTask(int n) {
+        String output = "";
         n -= 1;
         Task t = taskArrList.get(n);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  [" + t.getStatusIcon() + "] " + t.getDescription());
+        output += "Noted. I've removed this task:\n [" + t.getStatusIcon() + "] " + t.getDescription() + "\n";
         taskArrList.remove(n);
         Task.taskCounter--;
         if (taskArrList.size() == 1) {
-            System.out.println("Now you have " + taskArrList.size() + " task in the list.");
+            output += "Now you have " + taskArrList.size() + " task in the list.";
         } else {
-            System.out.println("Now you have " + taskArrList.size() + " tasks in the list.");
+            output += "Now you have " + taskArrList.size() + " tasks in the list.";
         }
+        return output;
     }
 
     /**
      * displays all instances of tasks matching or containing user's search description
      * @param desc - a string representing partial/complete data of user's search
      */
-    public void find(String desc) {
+    public String find(String desc) {
+        String output = "";
         int counter = 1;
         for(Task t : taskArrList) {
             if(t.description.contains(desc)) {
-                System.out.println(counter + "." + t.toString());
+                output += (counter + "." + t.toString() + "\n");
             }
             counter++;
         }
+        return output.stripTrailing();
     }
 
-    public void viewSchedule(String input) {
+    public String viewSchedule(String input) {
+        String output = "";
         LocalDate date = LocalDate.parse(input);
         int counter = 1;
         for(Task t : taskArrList) {
             if(date.equals(t.getDate())) {
-                System.out.println(counter + "." + t.toString());
+                output += (counter + "." + t.toString()) + "\n";
             }
             counter++;
+        }
+        return output.stripTrailing();
+    }
+
+    public String numOfTasks() {
+        if(taskArrList.size() == 1) {
+            return "Now you have " + taskArrList.size() + " task in the list.";
+        } else {
+            return "Now you have " + taskArrList.size() + " tasks in the list.";
         }
     }
 }
