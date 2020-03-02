@@ -38,9 +38,7 @@ public class DukeWorker {
                 List<Task> tasks = Parser.storageToTask(data);
                 taskList = new TaskList(tasks);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (IOException | ParseException | IllegalStateException e) {
             e.printStackTrace();
         }
     }
