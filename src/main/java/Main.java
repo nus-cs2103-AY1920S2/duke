@@ -13,10 +13,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main extends Application {
 
-    private Duke duke;
+    private Duke duke = new Duke();
 
     public Main() throws IOException {
-        duke = new Duke("data/duke.txt");
     }
 
     @Override
@@ -26,6 +25,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Tinga");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
@@ -33,6 +33,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Terminates scene builder.
+     * @throws Exception if the program fails to terminate.
+     */
     @Override
     public void stop() throws Exception {
         TimeUnit.MILLISECONDS.sleep(50);
