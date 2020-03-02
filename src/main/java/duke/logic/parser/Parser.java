@@ -94,7 +94,7 @@ public class Parser {
             return;
         }
         if (commands.length < 2) {
-            throw new EmptyDescriptionException("Sorry dude but I can't deal with empty index :(");
+            throw new EmptyDescriptionException("Sorry dude but I can't deal with missing information :(");
         } else if (commands.length > 2) {
             throw new EmptyDescriptionException("Sorry dude but I can only deal with one index at a time :(");
         }
