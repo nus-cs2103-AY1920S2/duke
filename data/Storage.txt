@@ -1,1 +1,4 @@
 [T][Y] kill bill
+[D][N] return book  (by:  Sunday)
+[E][N] project meeting  (at:  Mon 2-4pm)
+[T][N] kill sally

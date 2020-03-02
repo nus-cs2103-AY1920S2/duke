@@ -114,7 +114,7 @@ public class Duke {
         this.taskStorage.addToTaskList(newTask);
         System.out.println("    Got it. I've added this task:\n"
                 + "      " + newTask);
-        System.out.println("    Now you have " + this.taskStorage.getTaskList().size() + " tasks in the list.");
+        System.out.println("\n    Now you have " + this.taskStorage.getTaskList().size() + " tasks in the list.");
     }
 
     private void handleCommandDone(int taskNumber) {
