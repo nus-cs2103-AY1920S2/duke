@@ -24,7 +24,7 @@ public class Deadline extends Task {
      * Returns the Deadline task object, if successful, based on the input.
      * If incorrect arguments were specified, throws an IllegalArgumentException.
      * @param commandArgs the arguments after the command keyword as input by the user.
-     * @return DeadlineTask object, if successful.
+     * @return Deadline task object, if successful.
      * @throws IllegalArgumentException if user entered incorrect arguments.
      */
     public static Task createTask(String[] commandArgs) throws IllegalArgumentException {
