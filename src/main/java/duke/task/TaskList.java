@@ -1,6 +1,7 @@
 package duke.task;
 
 import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;
+import static duke.util.MagicStrings.ERROR_NO_COMPLETED_TASKS;
 import static duke.util.MagicStrings.ERROR_TASK_ALREADY_COMPLETED;
 import static duke.util.MagicStrings.ERROR_TASK_CREATED_BEFORE;
 import static duke.util.StringCleaner.cleanAndLowerString;
@@ -20,6 +21,7 @@ import duke.util.Pair;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+    private ArrayList<Task> archive;
     private HashMap<String, Boolean> taskDescriptions;
 
     /**
@@ -27,6 +29,7 @@ public class TaskList {
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
+        this.archive = new ArrayList<>();
         this.taskDescriptions = new HashMap<>();
     }
 
@@ -35,8 +38,9 @@ public class TaskList {
      *
      * @param tasks List of existing tasks to be included in the {@code TaskList}.
      */
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks, ArrayList<Task> archive) {
         this.tasks = tasks;
+        this.archive = archive;
         this.taskDescriptions = new HashMap<>();
         for (Task task : this.tasks) {
             this.taskDescriptions.put(hashTaskToString(task), true);
@@ -50,6 +54,15 @@ public class TaskList {
      */
     public int size() {
         return this.tasks.size();
+    }
+
+    /**
+     * Returns the number of {@code Task}s in the {@code archive}.
+     *
+     * @return Number of tasks in {@code archive}.
+     */
+    public int archiveSize() {
+        return this.archive.size();
     }
 
     /**
@@ -101,6 +114,21 @@ public class TaskList {
     }
 
     /**
+     * Returns a {@code Task} from the {@code TaskList}'s archive based on its {@code index}.
+     *
+     * @param index Index of {@code Task} to be retrieved.
+     * @return {@code Task} at index given.
+     * @throws DuchessException If the index is out of bounds.
+     */
+    public Task getArchivedTask(int index) throws DuchessException {
+        try {
+            return this.archive.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);
+        }
+    }
+
+    /**
      * Completes a {@code Task} at {@code index} in the {@code TaskList}.
      *
      * @param index Index of {@code Task} in the {@code TaskList}.
@@ -123,6 +151,15 @@ public class TaskList {
      */
     public ArrayList<Task> getTaskArray() {
         return this.tasks;
+    }
+
+    /**
+     * Returns the entire {@code archive}.
+     *
+     * @return The archive in {@code ArrayList<Task>}.
+     */
+    public ArrayList<Task> getArchiveArray() {
+        return this.archive;
     }
 
     /**
@@ -167,16 +204,52 @@ public class TaskList {
     }
 
     /**
-     * Returns an immutable deep copy of the {@code TaskList}.
+     * Archives completed tasks into the archive.
+     *
+     * @throws DuchessException No tasks to archive.
+     */
+    public void archive() throws DuchessException {
+        long numOfCompletedTasks = this.tasks.stream().filter(x -> x.isCompleted).count();
+        if (numOfCompletedTasks == 0) {
+            throw new DuchessException(ERROR_NO_COMPLETED_TASKS);
+        }
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.tasks.get(i).isCompleted) {
+                Task taskToArchive = this.tasks.remove(i);
+                this.archive.add(taskToArchive);
+            }
+        }
+    }
+
+    /**
+     * Returns an immutable deep copy of the active tasks in {@code TaskList}.
      *
      * @return Immutable deep copy.
      */
-    public List<Task> getImmutableDeepCopy() {
+    public List<Task> getImmutableDeepCopyOfTasks() {
         // @@author zhuhanming-reused
         // Reused from https://howtodoinjava.com/java/collections/arraylist/arraylist-clone-deep-copy/
         // Point 3 with minor modifications
         ArrayList<Task> tasksClone = new ArrayList<>();
         Iterator<Task> iterator = tasks.iterator();
+        while (iterator.hasNext()) {
+            tasksClone.add((Task) iterator.next().clone());
+        }
+        // @@author
+        return List.<Task>of(tasksClone.toArray(new Task[tasksClone.size()]));
+    }
+
+    /**
+     * Returns an immutable deep copy of the archived tasks in {@code TaskList}.
+     *
+     * @return Immutable deep copy.
+     */
+    public List<Task> getImmutableDeepCopyOfArchive() {
+        // @@author zhuhanming-reused
+        // Reused from https://howtodoinjava.com/java/collections/arraylist/arraylist-clone-deep-copy/
+        // Point 3 with minor modifications
+        ArrayList<Task> tasksClone = new ArrayList<>();
+        Iterator<Task> iterator = archive.iterator();
         while (iterator.hasNext()) {
             tasksClone.add((Task) iterator.next().clone());
         }
@@ -197,6 +270,17 @@ public class TaskList {
             this.taskDescriptions.put(hashTaskToString(task), true);
         }
     }
+
+    /**
+     * Replaces the existing archive with a new one. This is only relevant when
+     * undoing.
+     *
+     * @param archive New archive to replace current archive.
+     */
+    public void replaceArchive(ArrayList<Task> archive) {
+        this.archive = archive;
+    }
+
 
     private String hashTaskToString(Task task) {
         String description = task.description.trim().toLowerCase();
