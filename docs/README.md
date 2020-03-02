@@ -3,9 +3,9 @@
 ## TABLE OF CONTENTS
 1. [Introduction](/docs/README.md#1-introduction)
 2. [Interacting with Duke](/docs/README.md#2-interacting-with-duke) 
-     2.1. [General Guideline](/docs/README.md#21-general-guideline)
-     2.2. [Images](/docs/README.md#22-images)
-     2.3. [Sample Interaction with the Duke Application](/docs/README.md#23-sample-interaction-with-the-duke-application)
+    2.1. [General Guideline](/docs/README.md#21-general-guideline)
+    2.2. [Images](/docs/README.md#22-images)
+    2.3. [Sample Interaction with the Duke Application](/docs/README.md#23-sample-interaction-with-the-duke-application)
 3. [Features](/docs/README.md#3-features)
      3.1. [Todo](/docs/README.md#31-add-a-todo-task-todo)
      3.2. [Event](/docs/README.md#32-add-an-event-task-event)
@@ -122,7 +122,7 @@ Format: `event DESCRIPTION /at DETAILS`
 ```
 I've added this task:
 [E][N] Steamboat dinner (at: Bugis, 15 Mar 2020 8PM)
-Now you have 1 task in the list.
+Now you have 2 tasks in the list.
 ```
 
 
@@ -144,7 +144,7 @@ Format: `deadline DESCRIPTION /by DATE TIME`
 ```
 I've added this task:
 [D][N] CS3243 Assignment (by: 19 Feb 2020 0000)
-Now you have 1 task in the list.
+Now you have 3 tasks in the list.
 ```
 
 ### 3.4 List all tasks: `list`
@@ -220,7 +220,7 @@ Format: `find KEYWORD`
 
 
 ```
-Here are the matching keywords in your list:
+Here are the matching tasks in your list:
 1. [D][N] CS3243 Assignment (by: 19-02-2020 0000) 
 ```
 
@@ -239,7 +239,7 @@ Format: `snooze INDEX /to TASK_FORMAT`
     
 
   - Case 2: Rescheduled task is an event. 
-Format: `snooze INDEX /to TEXT` 
+Format: `snooze INDEX /to DETAILS` 
 (format details can be found [here](/docs/README.md#33-add-a-deadline-task-deadline))
 
 Example of usage: 
