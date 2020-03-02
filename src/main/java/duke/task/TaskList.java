@@ -179,7 +179,7 @@ public class TaskList {
             String result = "T~0~" + description;
             storage.writeToFile(result);
 
-            return (addTask(todo));
+            return addTask(todo);
         }
     }
 
@@ -198,23 +198,19 @@ public class TaskList {
         String remaining = "";
         String[] split = new String[]{};
 
-        try {
-            description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
-        }
+        description = extractDescription(input, "event");
 
         try {
             remaining = input.substring(input.indexOf("/") + 1);
             split = remaining.split(" ");
 
             if (split[0].compareTo("at") == 0) {
-                String rawDateTime = input.substring(input.indexOf("/") + 4);
-                String time = Parser.reformatDateAndTime(rawDateTime);
+                String time = extractTime(input, "event");
+
                 Event event = new Event(description, false, time);
                 String result = "E~0~" + description + "~" + time;
+                
                 storage.writeToFile(result);
-
                 return addTask(event);
             } else {
                 throw new InvalidCommandException(Message.EVENT_FORMAT_ERROR);
@@ -235,32 +231,64 @@ public class TaskList {
      */
     public String manageDeadline(Storage storage, String input) 
             throws InvalidCommandException, EmptyDescriptionException, InvalidTimeFormatException {
-        String description = "";
         String remaining = "";
         String[] split = new String[]{};
-
-        try {
-            description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
-        }
+        String description = "";
+        
+        description = extractDescription(input, "deadline");
 
         try {
             remaining = input.substring(input.indexOf("/") + 1);
             split = remaining.split(" ");
+
             if (split[0].compareTo("by") == 0) {
-                String rawDateTime = input.substring(input.indexOf("/") + 4);
-                String time = Parser.reformatDateAndTime(rawDateTime);
+                String time = extractTime(input, "deadline");
                 Deadline deadline = new Deadline(description, false, time);
                 String result = "D~0~" + description + "~" + time;
-                storage.writeToFile(result);
 
+                storage.writeToFile(result);
                 return addTask(deadline);
             } else {
                 throw new InvalidCommandException(Message.DEADLINE_FORMAT_ERROR);
             }
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidCommandException(Message.DEADLINE_FORMAT_ERROR);
+        }
+    }
+
+    private String extractDescription(String input, String taskType) 
+            throws InvalidCommandException, EmptyDescriptionException {
+        String result = "";
+        
+        if (!input.contains("/at") && taskType.compareTo("event") == 0) {
+            throw new InvalidCommandException(Message.EVENT_FORMAT_ERROR);
+        } else if (!input.contains("/by") && taskType.compareTo("deadline") == 0) {
+            throw new InvalidCommandException(Message.DEADLINE_FORMAT_ERROR);
+        }
+
+        try {
+            int start = input.indexOf(" ") + 1;
+            int end = input.indexOf("/") - 1;
+            result = input.substring(start, end);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
+        }
+
+        return result;
+    } 
+
+    private String extractTime(String input, String taskType) 
+            throws InvalidCommandException, InvalidTimeFormatException {
+        try {
+            String rawDateTime = input.substring(input.indexOf("/") + 4);
+            String time = Parser.reformatDateAndTime(rawDateTime);
+            return time;
+        } catch (StringIndexOutOfBoundsException e) {
+            if (taskType.compareTo("event") == 0) {
+                throw new InvalidCommandException(Message.EVENT_FORMAT_ERROR);
+            } else {
+                throw new InvalidCommandException(Message.DEADLINE_FORMAT_ERROR);
+            }
         }
     }
 
