@@ -1,20 +1,13 @@
 package logic;
 
 import commons.Duke;
-import commons.FriendlierSyntax;
-import javafx.collections.ObservableList;
+import logic.parser.CommandSyntax;
 import logic.command.Command;
 import logic.command.CommandException;
 import logic.command.CommandResult;
 import logic.parser.DukeParser;
 import storage.Storage;
-import tasks.TaskList;
-import logic.parser.ParserException;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.text.ParseException;
-import java.util.logging.Logger;
+import logic.parser.exceptions.ParserException;
 
 /**
  * The main LogicManager of the app.
@@ -26,7 +19,7 @@ public class LogicManager implements Logic {
     private final Duke duke;
     private final Storage storage;
     private final DukeParser dukeParser;
-    private final FriendlierSyntax friendlierSyntax;
+    private CommandSyntax commandSyntax;
 
     /**
      * Constructor for the logic manager object which controls commands.
@@ -34,8 +27,16 @@ public class LogicManager implements Logic {
     public LogicManager(Duke duke, Storage storage) {
         this.duke = duke;
         this.storage = storage;
-        friendlierSyntax = duke.getFriendlierSyntax();
+        commandSyntax = storage.readAlias();
         dukeParser = new DukeParser();
+    }
+
+    public CommandSyntax getCommandSyntax() {
+        return commandSyntax;
+    }
+
+    public void setCommandSyntax(CommandSyntax commandSyntax) {
+        this.commandSyntax = commandSyntax;
     }
 
     /**
@@ -48,7 +49,7 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParserException {
         //logger.info("----------------[USER COMMAND][" + commandText + "]");
         CommandResult commandResult;
-        Command command = dukeParser.parseCommand(commandText, friendlierSyntax);
+        Command command = dukeParser.parseCommand(commandText, commandSyntax);
         commandResult = command.execute(duke);
         storage.saveTaskList(duke.getTaskList());
         return commandResult;

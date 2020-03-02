@@ -1,6 +1,8 @@
 package logic.parser;
 
 import logic.command.TodoCommand;
+import logic.parser.exceptions.ParserException;
+import tasks.Name;
 import tasks.Tag;
 import tasks.Todo;
 
@@ -27,7 +29,7 @@ public class TodoCommandParser implements Parser<TodoCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParserException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TodoCommand.MESSAGE_USAGE));
         }
-        String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Todo todoTask = new Todo(name, tagList);

@@ -1,6 +1,5 @@
 package tasks;
 
-import commons.DukeException;
 import commons.StringUtil;
 
 import java.util.ArrayList;
@@ -43,7 +42,6 @@ public class TaskList {
      * Deletes task with the specified task number from this task list.
      *
      * @param taskNumber task to be deleted.
-     * @return deleted task.
      */
     public void deleteTask(int taskNumber) {
         list.remove(taskNumber);
@@ -100,7 +98,7 @@ public class TaskList {
      */
     public TaskList findTaskContainingKeyword(String keyword) {
         ArrayList<Task> filteredByKeyword = (ArrayList<Task>) list.stream()
-                .filter(task -> StringUtil.containsWordIgnoreCase(task.getDescription(), keyword))
+                .filter(task -> StringUtil.containsWordIgnoreCase(task.getName().toString(), keyword))
                 .collect(Collectors.toList());
         return new TaskList(filteredByKeyword);
     }

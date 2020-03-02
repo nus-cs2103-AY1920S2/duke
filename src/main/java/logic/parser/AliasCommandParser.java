@@ -1,6 +1,7 @@
 package logic.parser;
 
 import logic.command.AliasCommand;
+import logic.parser.exceptions.ParserException;
 
 import java.util.stream.Stream;
 
@@ -26,7 +27,9 @@ public class AliasCommandParser implements Parser<AliasCommand> {
         }
         String alias = ParserUtil.parseAlias(argMultimap.getValue(PREFIX_ALIAS).get());
         String command = ParserUtil.parseCommand(argMultimap.getValue(PREFIX_COMMAND).get());
-        return new AliasCommand(alias, command);
+
+        FriendlierSyntax syntax = new FriendlierSyntax(alias, command);
+        return new AliasCommand(syntax);
     }
 
     /**

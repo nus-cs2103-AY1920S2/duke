@@ -1,6 +1,5 @@
 package commons;
 
-import commons.FriendlierSyntax;
 import logic.LogicManager;
 import storage.Storage;
 import tasks.TaskList;
@@ -12,7 +11,6 @@ import tasks.TaskList;
 public class Duke {
 
     private TaskList taskList;
-    private FriendlierSyntax friendlierSyntax;
     private LogicManager logicManager;
     private Storage storage;
 
@@ -22,8 +20,7 @@ public class Duke {
      */
     public void start() {
         storage = new Storage();
-        storage.readAlias(this);
-        storage.readTaskList(this);
+        taskList = storage.readTaskList();
         logicManager = new LogicManager(this, storage);
     }
 
@@ -32,7 +29,7 @@ public class Duke {
      */
     public void end() {
         storage.saveTaskList(taskList);
-        storage.saveFile(friendlierSyntax);
+        storage.saveFile(logicManager.getCommandSyntax());
     }
 
     /**
@@ -55,14 +52,6 @@ public class Duke {
 
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;
-    }
-
-    public FriendlierSyntax getFriendlierSyntax() {
-        return friendlierSyntax;
-    }
-
-    public void setFriendlierSyntax(FriendlierSyntax friendlierSyntax) {
-        this.friendlierSyntax = friendlierSyntax;
     }
 }
 

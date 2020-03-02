@@ -1,12 +1,9 @@
 package logic;
 
-import javafx.collections.ObservableList;
 import logic.command.CommandException;
 import logic.command.CommandResult;
-import logic.parser.ParserException;
-import tasks.Task;
+import logic.parser.exceptions.ParserException;
 
-import java.nio.file.Path;
 import java.text.ParseException;
 
 /**

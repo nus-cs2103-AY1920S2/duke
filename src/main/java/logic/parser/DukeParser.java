@@ -1,6 +1,5 @@
 package logic.parser;
 
-import commons.FriendlierSyntax;
 import logic.command.AliasCommand;
 import logic.command.ClearCommand;
 import logic.command.Command;
@@ -15,6 +14,7 @@ import logic.command.HelpCommand;
 import logic.command.ListCommand;
 import logic.command.TagCommand;
 import logic.command.TodoCommand;
+import logic.parser.exceptions.ParserException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,20 +37,19 @@ public class DukeParser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput        full user input string
-     * @param friendlierSyntax to check for alias.
+     * @param userInput     full user input string
+     * @param commandSyntax to check for alias.
      * @return the command based on the user input
      * @throws ParserException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput, FriendlierSyntax friendlierSyntax) throws ParserException {
+    public Command parseCommand(String userInput, CommandSyntax commandSyntax) throws ParserException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParserException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (friendlierSyntax.findCommand(commandWord.toLowerCase())) {
+        switch (commandSyntax.lookUpCommand(commandWord.toLowerCase())) {
             case DeadlineCommand.COMMAND_WORD:
                 return new DeadlineCommandParser().parse(arguments);
 

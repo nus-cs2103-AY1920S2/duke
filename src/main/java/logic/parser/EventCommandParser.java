@@ -1,12 +1,12 @@
 package logic.parser;
 
-import logic.command.DeadlineCommand;
 import logic.command.EventCommand;
-import tasks.Deadline;
+import logic.parser.exceptions.ParserException;
+import tasks.Date;
 import tasks.Event;
+import tasks.Name;
 import tasks.Tag;
 
-import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -32,8 +32,8 @@ public class EventCommandParser implements Parser<EventCommand> {
                     + String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventCommand.MESSAGE_USAGE));
         }
 
-        String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Event eventTask = new Event(name, date, tagList);

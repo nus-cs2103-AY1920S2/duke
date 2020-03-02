@@ -1,7 +1,10 @@
 package logic.parser;
 
 import logic.command.DeadlineCommand;
+import logic.parser.exceptions.ParserException;
+import tasks.Date;
 import tasks.Deadline;
+import tasks.Name;
 import tasks.Tag;
 
 import java.time.LocalDate;
@@ -30,8 +33,8 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand> {
                     " of the deadline." + MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE));
         }
 
-        String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Deadline deadlineTask = new Deadline(name, date, tagList);

@@ -1,6 +1,6 @@
-package logic.parser;
+package logic.parser.exceptions;
 
-import commons.IllegalValueException;
+import commons.exceptions.IllegalValueException;
 
 public class ParserException extends IllegalValueException {
     public ParserException(String message) {

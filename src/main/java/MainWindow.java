@@ -11,7 +11,7 @@ import logic.LogicManager;
 import logic.command.CommandException;
 import logic.command.CommandResult;
 import logic.command.ExitCommand;
-import logic.parser.ParserException;
+import logic.parser.exceptions.ParserException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

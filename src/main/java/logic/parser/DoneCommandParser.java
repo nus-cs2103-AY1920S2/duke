@@ -2,6 +2,7 @@ package logic.parser;
 
 import commons.Index;
 import logic.command.DoneCommand;
+import logic.parser.exceptions.ParserException;
 
 import static commons.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 

@@ -4,29 +4,23 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
 import tasks.Tag;
 
 /**
  * Specifies main attributes and methods for tasks.
  */
 public class Task {
-    protected String description;
+    protected Name name;
     protected boolean isDone;
-    protected Set<Tag> tags = new HashSet<>();
+    protected Set<Tag> tags;
 
     /**
-     * Creates a task object with a description.
+     * Creates a task object with a name.
      *
-     * @param description of the task.
+     * @param name of the task.
      */
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    public Task(String description, Set<Tag> tags) {
-        this.description = description;
+    public Task(Name name, Set<Tag> tags) {
+        this.name = name;
         this.isDone = false;
         this.tags = tags;
     }
@@ -36,12 +30,12 @@ public class Task {
     }
 
     /**
-     * Returns the description of the task.
+     * Returns the name of the task.
      *
-     * @return task description.
+     * @return task name.
      */
-    public String getDescription() {
-        return description;
+    public Name getName() {
+        return name;
     }
 
 
@@ -67,6 +61,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        return String.format("[%s] %s", getStatusIcon(), name);
     }
 }

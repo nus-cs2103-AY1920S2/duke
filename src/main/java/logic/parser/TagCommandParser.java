@@ -2,6 +2,7 @@ package logic.parser;
 
 import logic.command.FindCommand;
 import logic.command.TagCommand;
+import logic.parser.exceptions.ParserException;
 
 import static commons.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 

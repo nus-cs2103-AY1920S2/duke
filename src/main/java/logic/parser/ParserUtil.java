@@ -2,11 +2,15 @@ package logic.parser;
 
 import commons.Index;
 import commons.StringUtil;
+import logic.parser.exceptions.ParserException;
+import tasks.Date;
+import tasks.Name;
 import tasks.Tag;
 
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,51 +44,49 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParserException if the given {@code name} is invalid.
-     *                         <p>
-     *                         public static Name parseName(String name) throws ParseException {
-     *                         requireNonNull(name);
-     *                         String trimmedName = name.trim();
-     *                         if (!Name.isValidName(trimmedName)) {
-     *                         throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-     *                         }
-     *                         return new Name(trimmedName);
-     *                         }
      */
 
-    public static String parseName(String name) throws ParserException {
+    public static Name parseName(String name) throws ParserException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (false /*!String.isValidName(trimmedName)*/) {
-            throw new ParserException(""/*.MESSAGE_CONSTRAINTS*/);
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParserException(Name.MESSAGE_CONSTRAINTS);
         }
-        return name;
+        return new Name(trimmedName);
     }
 
     public static String parseAlias(String alias) throws ParserException {
         requireNonNull(alias);
-        String trimmedName = alias.trim();
-        if (false /*!String.isValidName(trimmedName)*/) {
-            throw new ParserException(""/*.MESSAGE_CONSTRAINTS*/);
+        String trimmedAlias = alias.trim();
+        boolean t = FriendlierSyntax.isValidAlias(trimmedAlias);
+        if (!FriendlierSyntax.isValidAlias(trimmedAlias)) {
+            throw new ParserException(FriendlierSyntax.MESSAGE_CONSTRAINTS);
         }
-        return alias;
+        return trimmedAlias;
     }
 
     public static String parseCommand(String command) throws ParserException {
         requireNonNull(command);
-        String trimmedName = command.trim();
-        if (false /*!String.isValidName(trimmedName)*/) {
-            throw new ParserException(""/*.MESSAGE_CONSTRAINTS*/);
+        String trimmedCommand = command.trim();
+        if (!FriendlierSyntax.isValidCommand(trimmedCommand)) {
+            throw new ParserException(FriendlierSyntax.MESSAGE_CONSTRAINTS);
         }
-        return command;
+        return trimmedCommand;
     }
 
-    public static LocalDate parseDate(String dateInput) throws ParserException {
-        requireNonNull(dateInput);
-        LocalDate date = LocalDate.parse(dateInput);
-        if (false /*!String.isValidName(trimmedName)*/) {
-            throw new ParserException(""/*.MESSAGE_CONSTRAINTS*/);
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParserException if the given {@code tag} is invalid.
+     */
+    public static Date parseDate(String date) throws ParserException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParserException(Date.MESSAGE_CONSTRAINTS);
         }
-        return date;
+        return new Date(trimmedDate);
     }
 
     /**

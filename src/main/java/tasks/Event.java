@@ -11,33 +11,28 @@ import tasks.Tag;
  */
 public class Event extends Task {
 
-    protected LocalDate dateAt;
+    protected Date dateAt;
 
     /**
      * Creates a task that is an event.
      *
-     * @param description task that is an event to be completed.
-     * @param dateAt      date the event is at.
+     * @param name   task that is an event to be completed.
+     * @param dateAt date the event is at.
      */
-    public Event(String description, LocalDate dateAt) {
-        super(description);
-        this.dateAt = dateAt;
-    }
-
-    public Event(String description, LocalDate dateAt, Set<Tag> tags) {
-        super(description, tags);
+    public Event(Name name, Date dateAt, Set<Tag> tags) {
+        super(name, tags);
         this.dateAt = dateAt;
     }
 
     /**
-     * Returns the string of the task that is an event indicating [E] for event followed by the description
+     * Returns the string of the task that is an event indicating [E] for event followed by the name
      * then date of the event in MMM d yyyy.
      *
-     * @return the string of the task that is an event indicating [E] for event followed by the description
+     * @return the string of the task that is an event indicating [E] for event followed by the name
      * then date of the event in MMM d yyyy.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateAt.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + dateAt + ")";
     }
 }

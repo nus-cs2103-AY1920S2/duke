@@ -26,7 +26,7 @@ public class EventCommand implements Command {
             + PREFIX_TAG + "CS2103T"
             + PREFIX_TAG + "Submission";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New task added: \n\t%1$s";
 
     private final Task eventToAdd;
 

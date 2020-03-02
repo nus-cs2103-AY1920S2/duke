@@ -6,12 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import commons.Duke;
-import commons.FriendlierSyntax;
+import logic.parser.CommandSyntax;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -42,13 +40,13 @@ public class Storage {
      * Searches for an existing file with a previous alias store.
      * If no such file found, reinitialise alias.
      */
-    public void readAlias(Duke duke) {
+    public CommandSyntax readAlias() {
         try {
             FileReader fileReader = new FileReader(userDirectory + "/alias.json");
-            duke.setFriendlierSyntax(gson.fromJson(fileReader, FriendlierSyntax.class));
+            return gson.fromJson(fileReader, CommandSyntax.class);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
-            duke.setFriendlierSyntax(new FriendlierSyntax(new HashMap<>()));
+            return new CommandSyntax();
         }
     }
 
@@ -56,13 +54,13 @@ public class Storage {
      * Searches for an existing file with a previous task list store.
      * If no such file found, reinitialise task list.
      */
-    public void readTaskList(Duke duke) {
+    public TaskList readTaskList() {
         try {
             FileReader task = new FileReader(userDirectory + "/data.json");
-            duke.setTaskList(gson.fromJson(task, TaskList.class));
+            return gson.fromJson(task, TaskList.class);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
-            duke.setTaskList(new TaskList(new ArrayList<>()));
+            return new TaskList(new ArrayList<>());
         }
     }
 
@@ -80,7 +78,7 @@ public class Storage {
     /**
      * Writes alias into hard drive.
      */
-    public void saveFile(FriendlierSyntax alias) {
+    public void saveFile(CommandSyntax alias) {
         try {
             FileWriter aliasFile = new FileWriter(userDirectory + "/alias.json");
             gson.toJson(alias, aliasFile);

@@ -12,20 +12,17 @@ public class Todo extends Task {
     /**
      * Creates a task without any date/time attached to it.
      *
-     * @param description task to be completed.
+     * @param name task to be completed.
      */
-    public Todo(String description) {
-        super(description);
-    }
 
-    public Todo(String description, Set<Tag> tags) {
-        super(description, tags);
+    public Todo(Name name, Set<Tag> tags) {
+        super(name, tags);
     }
 
     /**
-     * Returns the string of the task containing the description.
+     * Returns the string of the task containing the name.
      *
-     * @return the string of the task containing the description.
+     * @return the string of the task containing the name.
      */
     @Override
     public String toString() {
