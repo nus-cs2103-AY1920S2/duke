@@ -1,0 +1,4 @@
+language: java
+matrix:
+  include:
+    - jdk: openjdk11

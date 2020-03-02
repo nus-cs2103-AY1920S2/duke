@@ -3,6 +3,11 @@
 /out/
 /*.iml
 
+# VS Code files
+/.classpath
+/.project
+/.settings/
+
 # Gradle build files
 /.gradle/
 /build/
@@ -12,3 +17,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Temp files
+data/duke.txt
