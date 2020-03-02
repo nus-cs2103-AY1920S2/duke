@@ -86,6 +86,8 @@ Adds a todo task to Duke.
 
 Format: `todo DESCRIPTION`
 
+- `DESCRIPTION`: any sequence of characters that are found on a standard keyboard.
+
 **Example of usage:** 
 
 `todo CS2103 Quiz`
@@ -103,7 +105,8 @@ Adds an event task to Duke.
 
 Format: `event DESCRIPTION /at DETAILS`
 
-- `DETAILS`: any sequence of ASCII Characters.
+- `DESCRIPTION`: any sequence of characters that are found on a standard keyboard.
+- `DETAILS`: any sequence of characters that are found on a standard keyboard.
 
 **Example of usage:** 
 
@@ -123,6 +126,7 @@ Adds a deadline task to Duke.
 
 Format: `deadline DESCRIPTION /by DATE TIME`
 
+- `DESCRIPTION`: any sequence of characters that are found on a standard keyboard.
 - `DATE`: yyyy-MM-dd
 - `TIME`: HHmm (time is optional, if no time is provided, it is assumed to be 0000)
 
@@ -162,7 +166,7 @@ Marks a saved task as done.
 
 Format: `done INDEX`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list)
+- `INDEX`: index number of the desired task (can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list))
 
 **Example of usage:** 
 
@@ -181,7 +185,7 @@ Deletes saved task from Duke.
 
 Format: `delete INDEX`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list)
+- `INDEX`: index number of the desired task (can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list))
 
 **Example of usage:** 
 
@@ -221,7 +225,7 @@ Changes the date and timing for a deadline or the details for an event.
 
 Format: `snooze INDEX /to TASK_FORMAT`
 
-- `INDEX` can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list)
+- `INDEX`: index number of the desired task (can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list))
 - todo tasks cannot be snoozed, only event tasks and deadline tasks can be snoozed.
 - The format for `TASK_FORMAT` must be appropriate for the type of task being rescheduled.
   - Case 1: rescheduled task is a deadline. 
