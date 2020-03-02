@@ -34,7 +34,7 @@ public class FindCommand extends Command {
         if (filteredTasks.size() == 0) {
             temp = new String[]{"I couldn't find any tasks containing that keyword, boss. Try something else?"};
         } else {
-            temp = new String[tasks.getTaskList().size() + 1];
+            temp = new String[filteredTasks.size() + 1];
             temp[0] = "I found these tasks that match what you might be looking for, boss!";
             for (int i = 0; i < filteredTasks.size(); i++) {
                 temp[i + 1] = (i + 1) + ". " + filteredTasks.get(i).toString();
