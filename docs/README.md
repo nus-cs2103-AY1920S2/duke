@@ -292,6 +292,69 @@ has been undone.
 Shorthands / Alternatives for this command:  
 None
 
+### `archive` - archive completed tasks or view your archived tasks
+
+This command can be used to both archive your tasks and view currently archived tasks.
+
+*To archive tasks:*  
+Example of usage: 
+
+`archive`
+
+Expected outcome:
+```
+Your completed tasks have been archived.
+Type 'list' to see your pending tasks.
+``` 
+
+*To view archived tasks:*
+Example of usage:  
+
+`archive view`  
+`archive show`  
+`archive list`
+
+Expected outcome:
+```
+I'm impressed you actually have tasks completed and archived.
+Colour me surprised:
+1.  [T][✓] Jog
+``` 
+
+Shorthands / Alternatives for this command:  
+`arc`  
+`a`
+
+### `stats` - view stats
+
+This command can be used to view statistics about your progress with your tasks. Tasks in both your main list and
+ archive are taken into consideration. Deleted tasks are not considered, and only deadlines are considered towards
+  tasks completed on time.
+
+*To archive tasks:*  
+Example of usage: 
+
+`stats this week`
+
+Expected outcome:
+```
+The following data is for this week:
+You created 2 tasks.
+You completed 1 task.
+Out of those, 0 were completed on time.
+Interesting!
+``` 
+
+*Other possible options include:*  
+`stats today`  
+`stats this month`  
+`stats this year`
+
+Shorthands / Alternatives for this command:  
+`stat`  
+`statistics`
+`statistic`
+
 ### `bye` - terminates the program
 
 Closes the GUI window
