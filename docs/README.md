@@ -1,5 +1,7 @@
 # User Guide for Nyanko Duke-San
 
+![Image of cat](./Ui.png)
+
 ## Features 
 
 ### Never forgets! 
@@ -14,7 +16,7 @@ DateTime entered maybe not necessarily be in the format of dd/mm/yyyy hhmm
 
 ## Usage
 
-### `List` - Prints out the list of current tasks.
+### `list` - Prints out the list of current tasks.
 
 ### `delete` {task index} - Deletes task 
 
