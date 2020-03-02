@@ -15,7 +15,7 @@ Tag tasks using the command tag.
 
 ### `Alias` - Create shortcut for commands.
 
-[alias] [command]
+alias a/alias c/command
 
 Example of usage: 
 alias a/b c/bye
@@ -39,21 +39,21 @@ Example of usage:
 clear
 
 Expected outcome:
-List cleared.
+List cleared!
 
 ### `Deadline` - Creates task with a deadline.
 
-[description] [date] [tags]
+deadline n/name d/date [t/tag]
 
 Example of usage: 
-deadline n/iP d/2020-02-19
+deadline n/iP d/2020-02-19 t/cs2103t
 
 Expected outcome:
 [D] IP (by Feb 19 2020)
 
-### `Delete` - deletes task with task number
+### `Delete` - deletes task at index.
 
-[task number]
+delete [index]
  
 Example of usage: 
 delete 1
@@ -61,9 +61,9 @@ delete 1
 Expected outcome:
 Noted. I've removed this task
 
-### `Done` - marks task with task number as done.
+### `Done` - marks task with at index as done.
 
-[task number]
+done task number
  
 Example of usage: 
 done 1
@@ -73,10 +73,10 @@ Noted. I've marked this task as done.
   
 ### `Event` - Creates task that is an event.
 
-[description] [date] [tags]
+event n/name d/date [t/tag]
 
 Example of usage: 
-event n/CS2103T tutorial d/2020-02-20
+event n/CS2103T tutorial d/2020-02-20 t/tutorial
 
 Expected outcome:
 [E] CS2103T tutorial (at Feb 20 2020)    
@@ -89,6 +89,7 @@ Example of usage:
 keyword cs2103t
 
 Expected outcome:
+Here are the tasks containing cs2103t
 [E] CS2103T tutorial (at Feb 20 2020)               
            
 ### `Tag` - Returns list of tasks containing tag.
@@ -99,16 +100,19 @@ Example of usage:
 tag cs2103T
 
 Expected outcome:
-Here are the tasks 
+Here are the tasks containing cs2103t
 [E] CS2103T tutorial (at Feb 20 2020)            
           
 ### `Todo` - Creates todo task.
  
- n/task name [tags]
+ todo n/name [t/tags]
  
  Example of usage: 
- todo n/read notes
+ todo n/read notes t/hobby
  
  Expected outcome:
  [T] read notes 
+ 
+ ### Acknowledgements
+ Software architecture and structure inspired by AddressBook 3.
            
