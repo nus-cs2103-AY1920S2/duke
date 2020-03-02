@@ -155,9 +155,15 @@ public class Logic {
         return indexOfByOrAt;
     }
 
+    /**
+     * Checks if the index of /by or /at is valid. If not, a DukeException is thrown.
+     * The index of /by or /at cannot be -1, as that means the user input does not contain /by or /at.
+     * The index cannot be 1 either, as that means the input does not contain a string description of the task.
+     * Furthermore, /by or /at should be the second last string of the user input, as the last string is the date.
+     */
     private void checkIfFormatIsValid(String typeOfTask, int lengthOfArray, int indexOfByOrAt) throws DukeException {
         assert typeOfTask.equals("deadline") || typeOfTask.equals("event");
-        if (indexOfByOrAt == -1 || indexOfByOrAt == 1 || indexOfByOrAt == (lengthOfArray - 1)) {
+        if (indexOfByOrAt == -1 || indexOfByOrAt == 1 || indexOfByOrAt != (lengthOfArray - 2)) {
             if (typeOfTask.equals("deadline")) {
                 ui.throwWrongFormatException("\n\"deadline a_string_describing_the_task /by YYYY-MM-DD\"");
             } else {
