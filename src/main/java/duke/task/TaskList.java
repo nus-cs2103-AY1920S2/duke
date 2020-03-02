@@ -157,14 +157,20 @@ public class TaskList {
      * @param input The given user input.
      * @param fileName The path to the task list file.
      */
-    public String manageEvent(Storage storage, String input) throws EmptyDescriptionException, InvalidTimeFormatException {
-        if (input.split(" ").length == 1) {
-            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
-        } else {
-            String description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
+    public String manageEvent(Storage storage, String input) throws InvalidCommandException, EmptyDescriptionException, InvalidTimeFormatException {
+        String description = "";
+        String remaining = "";
+        String[] split = new String[]{};
 
-            String remaining = input.substring(input.indexOf("/") + 1);
-            String[] split = remaining.split(" ");
+        try {
+            description = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new EmptyDescriptionException(Message.DESCRIPTION_ERROR);
+        }
+
+        try {
+            remaining = input.substring(input.indexOf("/") + 1);
+            split = remaining.split(" ");
 
             if (split[0].compareTo("at") == 0) {
                 String rawDateTime = input.substring(input.indexOf("/") + 4);
@@ -175,8 +181,10 @@ public class TaskList {
 
                 return addTask(event);
             } else {
-                throw new InvalidTimeFormatException(Message.TIME_ERROR);
+                throw new InvalidCommandException(Message.EVENT_FORMAT_ERROR);
             }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidCommandException(Message.EVENT_FORMAT_ERROR);
         }
     }
 
@@ -209,7 +217,7 @@ public class TaskList {
 
                 return addTask(deadline);
             } else {
-                throw new InvalidTimeFormatException(Message.TIME_ERROR);
+                throw new InvalidCommandException(Message.DEADLINE_FORMAT_ERROR);
             }
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidCommandException(Message.DEADLINE_FORMAT_ERROR);
