@@ -1,5 +1,6 @@
 package duke.task;
 
+import static duke.util.MagicStrings.ERROR_TASK_CREATED_BEFORE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -46,11 +47,33 @@ public class TaskListTest {
      * Tests the {@code addTask} method of {@code TaskList}.
      */
     @Test
-    public void testAddTask() {
+    public void addTask_validTask_success() {
         TaskList testTaskList = new TaskList();
         assertEquals(0, testTaskList.size());
         testTaskList.addTask(new ToDo("Hello World"));
         assertEquals(1, testTaskList.size());
+    }
+
+    /**
+     * Tests the {@code addTask} method with an already existing task.
+     */
+    @Test
+    public void addTask_existingTask_exceptionThrown() {
+        TaskList testTaskList = new TaskList();
+        assertEquals(0, testTaskList.size());
+        testTaskList.addTask(new ToDo("Hello World"));
+        assertEquals(1, testTaskList.size());
+        try {
+            testTaskList.addTask(new ToDo("Hello World"));
+            fail();
+        } catch (DuchessException e) {
+            assertEquals(ERROR_TASK_CREATED_BEFORE, e.getMessage());
+            testTaskList.completeTask(0);
+            testTaskList.archive();
+            assertEquals(0, testTaskList.size());
+            testTaskList.addTask(new ToDo("Hello World"));
+            assertEquals(1, testTaskList.size());
+        }
     }
 
     /**
@@ -183,5 +206,21 @@ public class TaskListTest {
         assertEquals(0, positiveResults.get(0).getSecond());
         ArrayList<Pair<Task, Integer>> negativeResults = testTaskList.find("hello");
         assertEquals(0, negativeResults.size());
+    }
+
+    /**
+     * Tests the {@code archive} method of {@code TaskList}.
+     */
+    @Test
+    public void testArchive() {
+        TaskList testTaskList = new TaskList();
+        Task testTask = new ToDo("Placeholder");
+        testTaskList.addTask(testTask);
+        assertEquals(1, testTaskList.size());
+        assertEquals(0, testTaskList.archiveSize());
+        testTask.completeTask();
+        testTaskList.archive();
+        assertEquals(0, testTaskList.size());
+        assertEquals(1, testTaskList.archiveSize());
     }
 }
