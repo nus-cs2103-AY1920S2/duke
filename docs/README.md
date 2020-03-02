@@ -1,19 +1,21 @@
 # User Guide
 
-## Introduction
+## 1. Introduction
 
 **duke** is a task management application for busy people who prefer typing.
 
-## Getting Started
+## 2. Getting Started
 
 1. Ensure you have Java 11 or above installed in your computer.
 2. Download the latest version of duke.jar (duke-0.2.jar) [here](https://github.com/helloImHai/duke/releases/tag/v2.0).
 3. Copy the file to the folder you want to use as the home folder for duke.
-4. Open terminal
-5. `cd` into home folder of duke.
-6. Run `java -jar duke-0.2.jar` 
+4. Run the file:
+    
+    4.1 For Windows: Double click the file and you're done!
+    
+    4.2 For Mac: Open Terminal, `cd` into home folder of duke. Run `java -jar duke-0.2.jar` 
 
-## Features 
+## 3. Features 
 
 > Command format
 > * Words in `UPPER_CASE` are the parameters to be supplied by the user, 
@@ -22,6 +24,7 @@
 > * `DATETIME` refers to date time in the format of `yyyy-MM-dd hhmm`, 
 > e.g. for the format command`deadline DESCRIPTION /by DATETIME`, 
 > `event CS2103 homework /by 2020-02-12 2359` would be a valid command.
+> * All `INDEX` parameters refers to the numbering of the item when `list` is used.
 
 List of features:
 * Listing all tasks: `list`
@@ -31,76 +34,83 @@ List of features:
 * Deleting a task: `delete`
 * Setting a task as done: `done`
 * Searching for task: `search`
-* Updating a todo task: `updatetodo`
-* Updating a deadline task: `updatedeadline`
-* Updating an event task: `updateevent`
+* Updating a task: 
+    * Updating a todo task: `updatetodo`
+    * Updating a deadline task: `updatedeadline`
+    * Updating an event task: `updateevent`
 * Saving
 * Exiting the program: `bye`
 
-### Listing all tasks: `list`
+### 3.1 Listing all tasks: `list`
 Displays all tasks in the task list.
 
 Format: `list`
 
-### Adding a todo task: `todo`
-Creates a todo task and adds it to the task list.
+### 3.2 Adding a todo task: `todo`
+Creates a todo task with description and adds it to the task list.
 
 Format: `todo DESCRIPTION`
 
-### Adding a deadline task: `deadline`
-Creates a deadline task and adds it to the task list.
+### 3.3 Adding a deadline task: `deadline`
+Creates a deadline task with description and time and adds it to the task list.
 
 Format: `deadline DESCRIPTION /by DATETIME`
 
-### Adding a event task: `event`
-Creates a event task and adds it to the task list.
+### 3.4 Adding a event task: `event`
+Creates a event task with description and time and adds it to the task list.
 
 Format: `event DESCRIPTION /at DATETIME`
 
-### Deleting a task: `delete`
+### 3.5 Deleting a task: `delete`
 Deletes a task at a particular index in the task list.
 
 Format: `delete INDEX`
 
-### Marking a task as done: `done`
+### 3.6 Marking a task as done: `done`
 Set a task at a particular index in the task list as done.
 
 Format: `done INDEX`
 
-### Searching for tasks: `search`
+### 3.7 Searching for tasks: `search`
 Displays the list where each tasks matches the keywords (case sensitive). 
 It is also possible to search tasks by date and time as long as it matches formatted
-date time.
+date time. Note that despite some items may have different numbering from the list 
+provided be `list`, `INDEX` for subsequent calls still refers to the numbering 
+provided by list.
 
 Format: `search KEYWORDS`
 
-### Updating a Todo task: `updatetodo`
-Updates description of a certain todo task.
+### 3.8 Updating a task:
 
-Format: `updatetodo desc/DESCRIPTION`
+#### 3.8.1 Updating a Todo task: `updatetodo`
+Updates description of a certain todo task description.
 
-### Updating a Deadline task: `updatedeadline`
-Updates description of a certain deadline task.
+Format: `updatetodo INDEX desc/DESCRIPTION`
 
-Format: `updatedeadline desc/DESCRIPTION time/DATETIME`
+#### 3.8.2 Updating a Deadline task: `updatedeadline`
+Updates description and time of a certain deadline task. 
+Both description and time fields must be present.
 
-### Updating a Event task: `updateevent`
-Updates description of a certain event task.
+Format: `updatedeadline INDEX desc/DESCRIPTION time/DATETIME`
 
-Format: `updateevent desc/DESCRIPTION time/DATETIME`
+#### 3.8.3 Updating a Event task: `updateevent`
+Updates description and time of a certain event tas. 
+Both description and time fields must be present.
 
-### Saving the tasks: 
+Format: `updateevent INDEX desc/DESCRIPTION time/DATETIME`
+
+### 3.9 Saving the tasks: 
 Tasks are automatically saved upon actions that affect the task list and tasks.
 
-### Exiting the program: `bye`
+### 3.10 Exiting the program: `bye`
 Exits the program.
 
-Format: `updateevent desc/DESCRIPTION time/DATETIME`
+Format: `bye`
 
 
-## Usage
+## 4. Usage
 
-### Adding tasks
+### 4.1 Adding tasks
 
 Adding tasks by using `deadline`, `event`, and `todo`:
 
@@ -125,7 +135,7 @@ Adding tasks by using `deadline`, `event`, and `todo`:
 >     Now you have 3 tasks in the list.
 >```
 
-### Listing tasks
+### 4.2 Listing tasks
 Listing all tasks using `list`:
 
 `list`
@@ -135,7 +145,7 @@ Listing all tasks using `list`:
 >    3. [E][✗] CS2103 tutorial (at: 10:00, Jul 7 2020)
 > ```
 
-### Setting a task as done
+### 4.3 Setting tasks as done
 Listing all tasks using `done`:
 
 `done 1`
@@ -144,7 +154,7 @@ Listing all tasks using `done`:
 >    [T][✓] eat dinner
 >```
 
-### Searching for tasks 
+### 4.4 Searching for tasks 
 Search for task by name using: `search`
 
 `search eat`
@@ -166,7 +176,7 @@ Remarks:
  * `search` is case sensitive, this means that, `search cs2103` will not 
 return any result despite having `[D][✗] CS2103 homework (by: 23:59, Mar 15 2020)`.
 
-### Updating a task
+### 4.5 Updating tasks
 Update a task using: `updatetodo`, `updateevent`, and `updatedeadline`
 
 `updateevent 3 desc/ CS2103 tutorial time/ 2020-07-07 1300` 
@@ -175,7 +185,7 @@ Update a task using: `updatetodo`, `updateevent`, and `updatedeadline`
 >    [E][✗] CS2103 tutorial (at: 13:00, Jul 7 2020)
 >```
 
-### Exiting the program:
+### 4.6 Exiting the program:
 Exit the program using: `bye`
 
 The window will automatically close.
