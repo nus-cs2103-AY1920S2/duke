@@ -22,7 +22,7 @@ public class ToDoTest {
         assertFalse(testToDo.isCompleted());
         testToDo.completeTask();
         assertTrue(testToDo.isCompleted());
-        assertTrue(new ToDo("Already completed", true, LocalDateTime.now()).isCompleted());
+        assertTrue(new ToDo("Already completed", true, LocalDateTime.now(), LocalDateTime.now()).isCompleted());
     }
 
     /**
@@ -33,6 +33,6 @@ public class ToDoTest {
         assertEquals("[T][\u2718] Another test ToDo", // cross mark
                 new ToDo("Another test ToDo").toString());
         assertEquals("[T][\u2713] Go for a run", // tick mark
-                new ToDo("Go for a run", true, LocalDateTime.now()).toString());
+                new ToDo("Go for a run", true, LocalDateTime.now(), LocalDateTime.now()).toString());
     }
 }

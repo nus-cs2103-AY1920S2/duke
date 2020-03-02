@@ -89,14 +89,16 @@ public class StorageTest {
         // Preparing list of active tasks
         Task[] taskArray = new Task[3];
         taskArray[0] = new ToDo("Task number 1");
-        taskArray[1] = new Event("Task number 2", "2-4pm", true, LocalDateTime.now());
+        taskArray[1] = new Event("Task number 2", "2-4pm", true, LocalDateTime.now(), LocalDateTime.now());
         taskArray[2] = new Deadline("Task number 3", LocalDateTime.now());
 
         // Preparing list of archived tasks
         Task[] archiveArray = new Task[3];
-        archiveArray[0] = new ToDo("Archived task number 1", true, LocalDateTime.now());
-        archiveArray[1] = new Event("Archived task number 2", "2-4pm", true, LocalDateTime.now());
-        archiveArray[2] = new Deadline("Archived Task number 3", LocalDateTime.now(), true, LocalDateTime.now(), true);
+        archiveArray[0] = new ToDo("Archived task number 1", true, LocalDateTime.now(), LocalDateTime.now());
+        archiveArray[1] = new Event("Archived task number 2", "2-4pm", true, LocalDateTime.now(),
+                LocalDateTime.now());
+        archiveArray[2] = new Deadline("Archived Task number 3", LocalDateTime.now(), true,
+                LocalDateTime.now(), LocalDateTime.now(), true);
 
         // Writing the files
         FileWriter fileWriter = new FileWriter("storageTestThree/data.json");
@@ -146,7 +148,7 @@ public class StorageTest {
     public void loadAndSave_longFilePathWithoutFolder_exceptionThrown() throws DuchessException {
         TaskList taskList = new TaskList();
         taskList.addTask(new ToDo("Task number 1"));
-        taskList.addTask(new Event("Task number 2", "2-4pm", true, LocalDateTime.now()));
+        taskList.addTask(new Event("Task number 2", "2-4pm", true, LocalDateTime.now(), LocalDateTime.now()));
         taskList.addTask(new Deadline("Task number 3", LocalDateTime.now()));
         Storage storageFour = new Storage("storageTestFour/oneMoreFolder/data.json");
         try {
@@ -192,7 +194,8 @@ public class StorageTest {
         TaskList taskList = new TaskList();
         taskList.addTask(new ToDo("Go for a run"));
         taskList.addTask(new Event("Movie", "5-7pm"));
-        taskList.addTask(new Deadline("Exercise", LocalDateTime.now(), true, LocalDateTime.now(), true));
+        taskList.addTask(new Deadline("Exercise", LocalDateTime.now(), true, LocalDateTime.now(),
+                LocalDateTime.now(), true));
         Storage storageSix = new Storage("storageTestSix/data.json");
         storageSix.save(taskList);
         ArrayList<ArrayList<Task>> loadedTasks = storageSix.load();

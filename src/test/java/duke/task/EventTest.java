@@ -22,7 +22,8 @@ public class EventTest {
         assertFalse(testEvent.isCompleted());
         testEvent.completeTask();
         assertTrue(testEvent.isCompleted());
-        assertTrue(new Event("Already completed", "Random time", true, LocalDateTime.now()).isCompleted());
+        assertTrue(new Event("Already completed", "Random time", true, LocalDateTime.now(),
+                LocalDateTime.now()).isCompleted());
     }
 
     /**
@@ -33,6 +34,6 @@ public class EventTest {
         assertEquals("[E][\u2718] New Event (at: Home)", // cross mark
                 new Event("New Event", "Home").toString());
         assertEquals("[E][\u2713] Go for a run (at: 3-5pm)", // tick mark
-                new Event("Go for a run", "3-5pm", true, LocalDateTime.now()).toString());
+                new Event("Go for a run", "3-5pm", true, LocalDateTime.now(), LocalDateTime.now()).toString());
     }
 }

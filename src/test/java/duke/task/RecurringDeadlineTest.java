@@ -71,6 +71,7 @@ public class RecurringDeadlineTest {
                         Frequency.WEEKLY).toString());
         assertEquals("[D][\u2713] brunch (by: Today 11:59 pm) (Daily)", // tick mark
                 new RecurringDeadline("brunch", LocalDate.now().atTime(23, 59), Frequency.DAILY,
-                        LocalDate.now().atTime(18, 0), true, LocalDateTime.now(), true).toString());
+                        LocalDate.now().atTime(18, 0), true, LocalDateTime.now(),
+                        LocalDateTime.now(), true).toString());
     }
 }

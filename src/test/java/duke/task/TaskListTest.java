@@ -160,7 +160,7 @@ public class TaskListTest {
     public void completeTask_taskAlreadyCompleted_exceptionThrown() {
         try {
             TaskList testTaskList = new TaskList();
-            Task testTask = new ToDo("Testing using this!", true, LocalDateTime.now());
+            Task testTask = new ToDo("Testing using this!", true, LocalDateTime.now(), LocalDateTime.now());
             testTaskList.addTask(testTask);
             assertTrue(testTask.isCompleted());
             testTaskList.completeTask(0);

@@ -18,7 +18,8 @@ public class TaskTest {
     @Test
     public void testGetDescription() {
         assertEquals("This is a test description", new Task("This is a test description").getDescription());
-        assertEquals("Same here", new Task("Same here", true, LocalDateTime.now()).getDescription());
+        assertEquals("Same here",
+                new Task("Same here", true, LocalDateTime.now(), LocalDateTime.now()).getDescription());
     }
 
     /**
@@ -27,7 +28,7 @@ public class TaskTest {
     @Test
     public void testIsCompleted() {
         assertFalse(new Task("Test description").isCompleted());
-        assertTrue(new Task("Hello world", true, LocalDateTime.now()).isCompleted());
+        assertTrue(new Task("Hello world", true, LocalDateTime.now(), LocalDateTime.now()).isCompleted());
     }
 
     /**
