@@ -17,7 +17,7 @@ public class Ui {
      * Greets to the user.
      */
     public void greet() {
-        System.out.println("Hello! I'm Duke\n What can I do for you?");
+        System.out.println("Hello! I'm Duke.\n What can I do for you?");
     }
 
     /**
