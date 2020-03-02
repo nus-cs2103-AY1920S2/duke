@@ -169,7 +169,7 @@ Marks a saved task as done.
 
 Format: `done INDEX`
 
-- `INDEX`: index number of the desired task (can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list))
+- `INDEX`: positive number which corresponds to the desired task (can be obtained from the `list` command seen [here](/docs/README.md#34-list-all-tasks-list))
 
 **Example of usage:** 
 
@@ -208,9 +208,9 @@ you now have 2 tasks in the list.
 ### 3.7 Find tasks using a keyword: `find`
 Finds all tasks that contain a specific keyword.
 
-- `KEYWORD`: any sequence of ASCII printable characters (for reference, click [here](https://en.wikipedia.org/wiki/ASCII#Printable_characters))
-
 Format: `find KEYWORD`
+
+- `KEYWORD`: any sequence of ASCII printable characters (for reference, click [here](https://en.wikipedia.org/wiki/ASCII#Printable_characters))
 
 **Example of usage:** 
 
