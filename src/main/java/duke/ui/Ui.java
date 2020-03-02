@@ -15,23 +15,19 @@ public class Ui {
     }
 
     public String showLoadingError(String message) {
-        return "Loading error: " + message;
+        return "!!! [LOADING]:\n" + message;
     }
 
     public String showCommandError(String message) {
-        return "Command error: " + message;
+        return  "!!! [COMMAND]:\n" + message;
     }
 
-    public String showAddingError(String message) {
-        return "Adding error: " + message;
+    public String showDuplicateError(String message) {
+        return "!!! [ADDING]:\n" + message;
     }
 
-    public String showDeletingError(String message) {
-        return "Deleting error: " + message;
-    }
-
-    public String showMarkingAsDoneError(String message) {
-        return "Marking as done error: " + message;
+    public String suggestHelp() {
+        return "You could try your luck again... or type \"help\" instead :)";
     }
 
     /**
@@ -83,10 +79,6 @@ public class Ui {
 
     public String printNotFoundTaskMessage() {
         return "Sorry dude but I found nothing :(";
-    }
-
-    public String printDuplicateMessage() {
-        return "Hey you already have this task dude!";
     }
 
     public String printTask(int i, Task task) {

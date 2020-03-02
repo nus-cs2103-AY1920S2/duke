@@ -95,7 +95,9 @@ public class Parser {
      */
     public static void checkDetails(String[] commands) throws EmptyDescriptionException {
         if (commands.length < 2) {
-            throw new EmptyDescriptionException("Sorry dude but where are the arguments???");
+            throw new EmptyDescriptionException("Sorry dude but I can't deal with empty index :(");
+        } else if (commands.length > 2) {
+            throw new EmptyDescriptionException("Sorry dude but I can only deal with one index at a time :(");
         }
     }
 }

@@ -41,7 +41,7 @@ public class DoneCommand extends Command {
         try {
             storage.update(tasks);
         } catch (IOException e) {
-            output += ui.showMarkingAsDoneError(e.getMessage());
+            output += ui.showCommandError(e.getMessage());
         }
         return output;
     }

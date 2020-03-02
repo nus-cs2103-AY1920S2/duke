@@ -40,7 +40,7 @@ public class AddCommand extends Command {
         try {
             storage.update(tasks);
         } catch (IOException e) {
-            output += ui.showAddingError(e.getMessage());
+            output += ui.showDuplicateError(e.getMessage());
         }
         return output;
     }

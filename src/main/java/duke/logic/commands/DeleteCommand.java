@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
         try {
             storage.update(tasks);
         } catch (IOException e) {
-            output += ui.showDeletingError(e.getMessage());
+            output += ui.showCommandError(e.getMessage());
         }
         return output;
     }
