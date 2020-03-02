@@ -3,6 +3,8 @@
 ## TABLE OF CONTENTS
 1. [Introduction](/docs/README.md#1-introduction)
 2. [Interacting with Duke](/docs/README.md#2-interacting-with-duke) 
+
+
     2.1. [General Guideline](/docs/README.md#21-general-guideline)
     2.2. [Images](/docs/README.md#22-images)
     2.3. [Sample Interaction with the Duke Application](/docs/README.md#23-sample-interaction-with-the-duke-application)
