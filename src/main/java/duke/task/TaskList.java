@@ -100,6 +100,7 @@ public class TaskList {
      */
     public void removeAllTasks() {
         this.tasks.clear();
+        this.archive.clear();
     }
 
     /**
@@ -266,22 +267,13 @@ public class TaskList {
      *
      * @param taskList New task list to replace current task list.
      */
-    public void replaceTaskList(ArrayList<Task> taskList) {
+    public void replaceLists(ArrayList<Task> taskList, ArrayList<Task> archiveList) {
         this.tasks = taskList;
+        this.archive = archiveList;
         this.taskDescriptions = new HashMap<>();
         for (Task task : this.tasks) {
             this.taskDescriptions.put(hashTaskToString(task), true);
         }
-    }
-
-    /**
-     * Replaces the existing archive with a new one. This is only relevant when
-     * undoing.
-     *
-     * @param archive New archive to replace current archive.
-     */
-    public void replaceArchive(ArrayList<Task> archive) {
-        this.archive = archive;
     }
 
     /**

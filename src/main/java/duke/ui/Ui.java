@@ -256,7 +256,7 @@ public class Ui {
                 "deadline DESC /by TIME [/every FREQ] [/stop TIME]: Create Deadline.",
                 "done INDEX: Complete task at index.",
                 "find WORD(S): Find tasks with said word(s) in name.",
-                "delete INDEX / all: Delete task at index / delete all tasks.",
+                "delete INDEX / all: Delete task at index / delete all tasks + archive.",
                 "sort: Sorts your list of tasks.",
                 "snooze INDEX /for DURATION: Pushes back deadline by given duration.",
                 "undo: Undo your last command that changed your tasks",

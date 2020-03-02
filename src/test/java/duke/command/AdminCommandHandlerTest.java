@@ -102,8 +102,7 @@ public class AdminCommandHandlerTest {
                 storageMock, saveStateStackMock));
 
         verify(saveStateStackMock, times(1)).pop();
-        verify(taskListMock, times(1)).replaceTaskList(dummyTaskArray);
-        verify(taskListMock, times(1)).replaceArchive(dummyTaskArray);
+        verify(taskListMock, times(1)).replaceLists(dummyTaskArray, dummyTaskArray);
         verify(storageMock, times(1)).save(taskListMock);
         verify(uiMock, times(1)).printUndoMessage(previousCommand);
         verify(saveStateMock, times(1)).getTasksFromSave();

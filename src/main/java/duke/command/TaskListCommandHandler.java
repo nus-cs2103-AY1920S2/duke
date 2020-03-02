@@ -62,7 +62,8 @@ public class TaskListCommandHandler {
                                     SaveStateStack saveStateStack) throws DuchessException {
         int index = getIntegerFromCommand(command);
         checkBoundsOfIndex(index, taskList);
-        saveStateStack.saveState(command, taskList);
+
+        saveStateStack.saveState(command, taskList); // An immutable copy is made of current state.
         Task taskCompleted = taskList.completeTask(index - 1);
         storage.save(taskList);
         return ui.printTaskCompleted(taskCompleted);
@@ -105,6 +106,8 @@ public class TaskListCommandHandler {
                                       SaveStateStack saveStateStack) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         assert Command.DELETE.hasCommand(cleanAndLowerString(commands.get(0))); // pre-condition
+
+        // Handle delete all case
         if (commands.size() == 2 && cleanAndLowerString(commands.get(1)).equals("all")) {
             saveStateStack.saveState(command, taskList);
             taskList.removeAllTasks();
@@ -113,9 +116,11 @@ public class TaskListCommandHandler {
         }
         int index = getIntegerFromCommand(command);
         checkBoundsOfIndex(index, taskList);
-        final Task taskToDelete = taskList.getTask(index - 1);
-        saveStateStack.saveState(command, taskList);
+        saveStateStack.saveState(command, taskList); // An immutable copy is made of current state.
+
+        Task taskToDelete = taskList.getTask(index - 1);
         taskList.removeTask(index - 1);
+
         storage.save(taskList);
         return ui.printTaskDeleted(taskToDelete, taskList.size());
     }
@@ -139,16 +144,20 @@ public class TaskListCommandHandler {
         if (commands.size() < 2) {
             throw new DuchessException(ERROR_INVALID_SNOOZE_DURATION);
         }
+
         assert Command.SNOOZE.hasCommand(cleanAndLowerString(commands.get(0))); // pre-condition
+
         int index = getIntegerFromCommand(commands.get(0));
         checkBoundsOfIndex(index, taskList);
+
         Task taskToSnooze = taskList.getTask(index - 1);
         if (!(taskToSnooze instanceof Deadline)) {
             throw new DuchessException(ERROR_SNOOZING_NON_DEADLINE);
         }
+
         String duration = cleanAndLowerString(commands.get(1));
         TemporalAmount snoozePeriod = DurationParser.parseDuration(duration);
-        saveStateStack.saveState(command, taskList);
+        saveStateStack.saveState(command, taskList); // An immutable copy is made of current state.
         ((Deadline) taskToSnooze).snooze(snoozePeriod);
         storage.save(taskList);
         return ui.printTaskSnoozed(taskToSnooze, DurationParser.parseDurationToString(duration));
@@ -168,15 +177,28 @@ public class TaskListCommandHandler {
     static String handleSortCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                     SaveStateStack saveStateStack) throws DuchessException {
         assert Command.SORT.hasCommand(cleanAndLowerString(command)); // pre-condition
+
         if (taskList.size() == 0) {
             throw new DuchessException(ERROR_SORTING_EMPTY_LIST);
         }
-        saveStateStack.saveState(command, taskList);
+
+        saveStateStack.saveState(command, taskList); // An immutable copy is made of current state.
         taskList.sort();
         storage.save(taskList);
         return ui.printTaskListSorted();
     }
 
+    /**
+     * Archives the completed tasks in the current list.
+     *
+     * @param command        Full user command string.
+     * @param taskList       List of tasks.
+     * @param ui             Ui instance.
+     * @param storage        Storage instance.
+     * @param saveStateStack Collection of save states.
+     * @return Archive success message.
+     * @throws DuchessException Invalid command given.
+     */
     static String handleArchiveCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                        SaveStateStack saveStateStack) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
@@ -184,6 +206,7 @@ public class TaskListCommandHandler {
         if (commands.size() == 2) {
             return handleShowArchive(command, taskList, ui);
         }
+
         saveStateStack.saveState(command, taskList);
         taskList.archive();
         storage.save(taskList);

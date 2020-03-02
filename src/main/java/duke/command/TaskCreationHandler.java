@@ -48,7 +48,7 @@ public class TaskCreationHandler {
     static String handleTodoCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                     SaveStateStack saveStateStack) throws DuchessException {
         Task newTask = getTaskFromCommand(command);
-        saveStateStack.saveState(command, taskList);
+        saveStateStack.saveState(command, taskList); // An immutable copy is made of current state.
         return saveTask(newTask, taskList, storage, ui);
     }
 
@@ -68,7 +68,7 @@ public class TaskCreationHandler {
     static String handleEventCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                      SaveStateStack saveStateStack) throws DuchessException {
         Task newTask = getTaskFromCommand(command, "/at");
-        saveStateStack.saveState(command, taskList);
+        saveStateStack.saveState(command, taskList); // An immutable copy is made of current state.
         return saveTask(newTask, taskList, storage, ui);
     }
 
@@ -88,7 +88,7 @@ public class TaskCreationHandler {
     static String handleDeadlineCommand(String command, TaskList taskList, Ui ui, Storage storage,
                                         SaveStateStack saveStateStack) throws DuchessException {
         Task newTask = getTaskFromCommand(command, "/by");
-        saveStateStack.saveState(command, taskList);
+        saveStateStack.saveState(command, taskList); // An immutable copy is made of current state.
         return saveTask(newTask, taskList, storage, ui);
     }
 
@@ -106,7 +106,9 @@ public class TaskCreationHandler {
     private static Task getTaskFromCommand(String command) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         String type = cleanAndLowerString(commands.get(0));
-        assert Command.TODO.commands.contains(type);
+
+        assert Command.TODO.commands.contains(type); // pre-condition as only handleTodoCommand would call this
+
         if (commands.size() < 2) {
             handleMissingContent(type);
         }
@@ -126,17 +128,25 @@ public class TaskCreationHandler {
     private static Task getTaskFromCommand(String command, String detailsKeyword) throws DuchessException {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s", 2)));
         String type = cleanAndLowerString(commands.get(0));
+
+        // Check if description of the task is missing.
         if (commands.size() < 2 || cleanAndLowerString(commands.get(1)).startsWith(detailsKeyword)) {
             handleMissingContent(type);
         }
+
+        // Check for details such as deadline and time frame.
         ArrayList<String> details = new ArrayList<>(Arrays.asList(commands.get(1).split(detailsKeyword)));
         if (details.size() < 2) {
             handleMissingDetails(type);
         }
+
         if (Command.EVENT.hasCommand(type)) {
+            // User is creating an Event
             return new Event(cleanString(details.get(0)), cleanString(details.get(1)));
         }
-        assert Command.DEADLINE.commands.contains(type);
+
+        assert Command.DEADLINE.commands.contains(type); // pre-condition
+
         return getDeadlineFromDetails(commands.get(1));
     }
 
@@ -150,9 +160,13 @@ public class TaskCreationHandler {
      */
     private static Deadline getDeadlineFromDetails(String command) throws DuchessException {
         ArrayList<String> details = new ArrayList<>(Arrays.asList(command.split("/")));
+
+        // Details to catch
         Frequency frequency = null;
         LocalDateTime deadline = null;
         LocalDateTime recurrenceEndTime = null;
+
+        // Going in reverse order to handle default case
         for (int i = details.size() - 1; i > -1; i--) {
             String detail = details.get(i);
             String[] commands = detail.split("\\s", 2);
@@ -175,9 +189,11 @@ public class TaskCreationHandler {
                 break;
             }
         }
+
         if (deadline == null) {
             throw new DuchessException(ERROR_DEADLINE_MISSING_DEADLINE);
         }
+
         String description = cleanString(details.get(0));
         if (frequency == null) {
             return new Deadline(description, deadline);
