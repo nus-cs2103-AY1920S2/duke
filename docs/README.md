@@ -12,24 +12,12 @@
     
     
     2.3. [Sample Interaction with the Duke Application](/docs/README.md#23-sample-interaction-with-the-duke-application)
-3. [Features](/docs/README.md#3-features)
-
-
-     3.1. [Todo](/docs/README.md#31-add-a-todo-task-todo)
-     
-     
-     3.2. [Event](/docs/README.md#32-add-an-event-task-event)
-     
-     
-     3.3. [Deadline](/docs/README.md#33-add-a-deadline-task-deadline)
-     
-     
-     3.4. [List](/docs/README.md#34-list-all-tasks-list)
-     
-     
-     3.5. [Done](/docs/README.md#35-mark-task-as-done-done)
-     
-     
+3. [Features](/docs/README.md#3-features)  
+     3.1. [Todo](/docs/README.md#31-add-a-todo-task-todo)  
+     3.2. [Event](/docs/README.md#32-add-an-event-task-event)  
+     3.3. [Deadline](/docs/README.md#33-add-a-deadline-task-deadline)  
+     3.4. [List](/docs/README.md#34-list-all-tasks-list)  
+     3.5. [Done](/docs/README.md#35-mark-task-as-done-done)  
      3.6. [Delete](/docs/README.md#36-delete-task-delete)  
      3.7. [Find](/docs/README.md#37-find-tasks-using-a-keyword-find)
      
