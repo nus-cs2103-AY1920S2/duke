@@ -7,15 +7,15 @@
     2.2. [Images](/docs/README.md#22-images)  
     2.3. [Sample Interaction with the Duke Application](/docs/README.md#23-sample-interaction-with-the-duke-application)  
 3. [Features](/docs/README.md#3-features)  
-     3.1. [Todo](/docs/README.md#31-add-a-todo-task-todo)  
-     3.2. [Event](/docs/README.md#32-add-an-event-task-event)  
-     3.3. [Deadline](/docs/README.md#33-add-a-deadline-task-deadline)  
-     3.4. [List](/docs/README.md#34-list-all-tasks-list)  
-     3.5. [Done](/docs/README.md#35-mark-task-as-done-done)  
-     3.6. [Delete](/docs/README.md#36-delete-task-delete)  
-     3.7. [Find](/docs/README.md#37-find-tasks-using-a-keyword-find)  
-     3.8. [Snooze](/docs/README.md#38-reschedule-a-deadline-or-event-snooze)  
-     3.9. [Bye](/docs/README.md#39-exit-duke-bye)  
+     3.1. [Add a todo task](/docs/README.md#31-add-a-todo-task-todo)  
+     3.2. [Add an event task](/docs/README.md#32-add-an-event-task-event)  
+     3.3. [Add a deadline task](/docs/README.md#33-add-a-deadline-task-deadline)  
+     3.4. [List all tasks](/docs/README.md#34-list-all-tasks-list)  
+     3.5. [Mark task as done](/docs/README.md#35-mark-task-as-done-done)  
+     3.6. [Delete task](/docs/README.md#36-delete-task-delete)  
+     3.7. [Find tasks using a keyword](/docs/README.md#37-find-tasks-using-a-keyword-find)  
+     3.8. [Reschedule a deadline or event](/docs/README.md#38-reschedule-a-deadline-or-event-snooze)  
+     3.9. [Exit Duke](/docs/README.md#39-exit-duke-bye)  
      3.10. [Storing Data](/docs/README.md#310-storing-data)  
 4. [Command Overview](/docs/README.md#4-command-overview)  
 5. [Acknowledgements](/docs/README.md#5-acknowledgements)
@@ -91,7 +91,7 @@ Adds a todo task to Duke.
 
 Format: `todo DESCRIPTION`
 
-- `DESCRIPTION`: any sequence of characters that are found on a standard keyboard.
+- `DESCRIPTION`: any sequence of ASCII printable characters (for reference, click [here](https://en.wikipedia.org/wiki/ASCII#Printable_characters))
 
 **Example of usage:** 
 
@@ -110,8 +110,8 @@ Adds an event task to Duke.
 
 Format: `event DESCRIPTION /at DETAILS`
 
-- `DESCRIPTION`: any sequence of characters that are found on a standard keyboard.
-- `DETAILS`: any sequence of characters that are found on a standard keyboard.
+- `DESCRIPTION`: any sequence of characters that are found on a standard keyboard
+- `DETAILS`: any sequence of characters that are found on a standard keyboard
 
 **Example of usage:** 
 
@@ -131,7 +131,7 @@ Adds a deadline task to Duke.
 
 Format: `deadline DESCRIPTION /by DATE TIME`
 
-- `DESCRIPTION`: any sequence of characters that are found on a standard keyboard.
+- `DESCRIPTION`: any sequence of characters that are found on a standard keyboard
 - `DATE`: yyyy-MM-dd
 - `TIME`: HHmm (Time is optional. If no time is provided, it is assumed to be 0000)
 
@@ -210,6 +210,8 @@ you now have 2 tasks in the list.
 ### 3.7 Find tasks using a keyword: `find`
 Finds all tasks that contain a specific keyword.
 
+- `KEYWORD`: any sequence of characters that are found on a standard keyboard
+
 Format: `find KEYWORD`
 
 **Example of usage:** 
@@ -226,14 +228,14 @@ Here are the matching tasks in your list:
 
 
 ### 3.8 Reschedule a deadline or event: `snooze`
-Changes the date and timing for a deadline or the details for an event.
+Changes the date and timing for a deadline or the details for an event.  
+todo tasks cannot be snoozed.
 
 Format: `snooze INDEX /to TASK_FORMAT`
 
 - `INDEX`: index number of the desired task (can be obtained from the `list` command in section 3.4 as seen [here](/docs/README.md#34-list-all-tasks-list))
-- todo tasks cannot be snoozed, only event tasks and deadline tasks can be snoozed.
 - The format for `TASK_FORMAT` must be appropriate for the type of task being rescheduled.
-  - Case 1: rescheduled task is a deadline. 
+  - Case 1: Rescheduled task is a deadline. 
     Format: `snooze INDEX /to DATE TIME`
     (format details can be found [here](/docs/README.md#32-add-an-event-task-event))
     
