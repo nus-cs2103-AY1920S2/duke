@@ -2,7 +2,12 @@
 
 ![Import docs](Ui.png)
 
-## Features 
+##Table of Contents
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Usage](#usage)
+
+## Features <a name="features"></a>
 
 ### Task Management 
 - Manage various tasks such as TodDo, Deadline, Event.
@@ -10,14 +15,13 @@
 - Mark tasks as completed.
 - Search for tasks easily.
 
-## Installation
-- Download .jar file from [release page](http:github.com/teriaiw/duke/releases).
+## Installation <a name="installation"></a>
+- **Java 11** or later is needed to use application
+- Download .jar file from this [release page](http:github.com/teriaiw/duke/releases).
 - Store downloaded file in any existing or newly created directory.
 - Double-click file to begin using.
 
-***Java 11** is needed to use application
-
-## Usage
+## Usage <a name="usage"></a>
 
 ### `Aloha`/`aloha` - Say Hi!
 Say Hi to Stitch!
@@ -34,7 +38,7 @@ Example of usage:
 ### `deadline` - Adds Deadline to Task List
  
 Add a Deadline with specific **date** to Task List.
-Date has to be entered in `YYYY-MM-DD` format.
+Date has to be entered in `YYYY-MM-DD` format. e.g. `2020-02-02`
 
 Example of usage:
 
@@ -43,7 +47,7 @@ Example of usage:
 ### `event` - Adds Event to Task List
 
 Add an Event with specific **date** and **time** to Task List. 
-Date and time has to be entered in `YYYY-MM-DDTHH:MM` format
+Date and time has to be entered in `YYYY-MM-DDTHH:MM` format, with time being 24hr format. e.g. `2020-02-02T18:00`
 
 Example of usage:
 
