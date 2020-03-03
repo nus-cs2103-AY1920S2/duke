@@ -13,8 +13,8 @@ Describe action and its outcome.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo borrow book`
 
 Expected outcome:
 
-`outcome`
+`adds a new todo
