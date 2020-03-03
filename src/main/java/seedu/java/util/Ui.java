@@ -14,7 +14,7 @@ public class Ui {
      * Prints an error. Intended for storage if it fails to load
      */
     public void showLoadingError() {
-        System.out.println("System failed to load file. Opening with a new blank file");
+        System.out.println("Opening with a new blank file");
     }
 
     /**

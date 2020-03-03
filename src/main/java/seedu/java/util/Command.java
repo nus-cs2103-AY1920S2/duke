@@ -27,7 +27,7 @@ public enum Command {
             return FIND;
         } else if (cmd.equals("help")) {
             return HELP;
-        } else if (cmd.equals("meow")) {
+        } else if (cmd.equals("meow")||cmd.contains("meow")) {
             return MEOW;
         } else {
             return ERROR;

@@ -39,21 +39,21 @@ public class Storage {
                 try {
                     arr.add(new Todo(task, isCompleted));
                 } catch (Exception e) {
-                    System.out.println("load fail todo");
+                    System.out.println("Storage.load() fail todo");
                 }
                 break;
             case DEADLINE:
                 try {
                     arr.add(new Deadline(task, taskArr[3], isCompleted));
                 } catch (Exception e) {
-                    System.out.println("load fail deadline");
+                    System.out.println("Storage.load() fail deadline");
                 }
                 break;
             case EVENT:
                 try {
                     arr.add(new Event(task, taskArr[3], isCompleted));
                 } catch (Exception e) {
-                    System.out.println("load fail event");
+                    System.out.println("Storage.load() fail event");
                 }
                 break;
             default:

@@ -17,7 +17,7 @@ public enum Text {
     static String todo = "\nAdds a to-do task. Key in 'todo' and then whatever ridiculous task you desire.";
     static String deadline = "\nKey in 'deadline', the task, '/by' and then the date in the format YYYY-MM-DD.";
     static String event = "\nKey in 'event', the event description, '/on', the date in YYYY-MM-DD,"
-                            + "then start & end timing in format HH:MM-HH:MM. ";
+                            + " then start & end timing in format HH:MM-HH:MM. ";
     static String done = "\nType 'done' & a task number to complete that specific task.";
     static String delete = "\nType 'delete' & a task number to delete that task.";
     static String list = "\nIf you want to view what's on your tasklist, key in 'list'.";

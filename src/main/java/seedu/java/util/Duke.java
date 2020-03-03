@@ -25,7 +25,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
     /**
      * Constructor with no parameters: intended for launcher class.
      */
