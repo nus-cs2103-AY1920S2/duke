@@ -3,9 +3,9 @@ install: true
 
 os: linux
 dist: trusty
-jdk:
-  - oraclejdk11
-  - openjdk11
+matrix:
+  include:
+    - jdk: openjdk11
 
 before_script:
   - export TZ=Asia/Singapore
@@ -20,4 +20,7 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - ./gradlew clean checkstyleMain checkstyleTest test coverage coveralls
+  - ./gradlew build -s
+
+after_success:
+  - ./gradlew jacocoTestReport coveralls
