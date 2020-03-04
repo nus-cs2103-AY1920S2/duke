@@ -14,6 +14,14 @@ public class Ui {
     }
 
     /**
+     * Greeting message user on app start up
+     * @return String representing greeting
+     */
+    public static String greet() {
+        return "I'm Mr. Meeseeks! Look at me!";
+    }
+
+    /**
      * Prints termination message to user
      */
     public static String sayBye() {
