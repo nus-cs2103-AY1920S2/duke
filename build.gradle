@@ -64,6 +64,15 @@ test {
     }
 }
 
+task appVeyorTest(type: Test) {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "short"
+    }
+    exclude 'duke/ui/UiTest.class'
+}
+
 tasks.withType(Test) {
     enableAssertions = true
 }
