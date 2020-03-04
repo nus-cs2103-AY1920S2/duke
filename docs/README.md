@@ -11,7 +11,6 @@
 1. `View Schedules`
 1. `Bye`
 
-
 ### Feature 1: `List`
 `list` : List all tasks recorded
 
@@ -29,7 +28,7 @@ Here are the tasks in your list:
 3.[E][] celebrate completion of iP (at: 2-Mar-2020)
 ```
 
-###Feature 2: `Adding a Todo task`
+####Feature 2: `Adding a Todo task`
 `Todo`: Creates a Todo task
 
 Format: `todo [description]`
@@ -50,7 +49,7 @@ Now you have 1 task in the list.
 ```
 
 
-###Feature 3: `Adding a Deadline task`
+#####Feature 3: `Adding a Deadline task`
 `Deadline`: Creates a Deadline task
 
 Format: `deadline [description] /by YYYY-MM-DD`
@@ -72,7 +71,7 @@ Now you have 1 task in the list.
 ```
 
 
-###Feature 4: `Adding an Event task`
+#######Feature 4: `Adding an Event task`
 `Deadline`: Creates a Event task
 
 Format: `event [description] /at YYYY-MM-DD`
@@ -94,7 +93,7 @@ Now you have 1 task in the list.
 ```
 
 
-###Feature 5: `Doing a task`
+########Feature 5: `Doing a task`
 `Done`: Marks a task as complete
 
 Format: `do [index]`
@@ -113,7 +112,7 @@ Nice! I've marked this task as done:
 ```
 
 
-###Feature 6: `Deleting a task`
+#########Feature 6: `Deleting a task`
 `Delete`: Deletes a task
 
 Format: `delete [index]`
@@ -133,7 +132,7 @@ Now you have 1 task in the list.
 ```
 
 
-###Feature 7: `Finding a task`
+##########Feature 7: `Finding a task`
 `Find`: Finds any task that matches or has a partial match to the input
 
 Format: `find [description]`
@@ -153,7 +152,7 @@ Expected Outcome:
 ```
 
 
-###Feature 8: `Viewing Schedules`
+###########Feature 8: `Viewing Schedules`
 `View Schedules`: Displays tasks occurring on input date 
 
 Format: `view [date]`
@@ -172,7 +171,7 @@ Expected Outcome:
 ```
 
 
-###Feature 9: `Bye`
+############Feature 9: `Bye`
 `Bye`: Exits Duke
 
 Format: `bye`
@@ -185,5 +184,3 @@ Expected Outcome:
 ```
 Bye. Hope to see you again soon!
 ```
-
-#### End of User Guide
