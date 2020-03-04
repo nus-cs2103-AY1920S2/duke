@@ -1,0 +1,26 @@
+hi
+list
+todo
+todo read book
+list
+deadline
+deadline return book
+deadline return book /by tmr
+deadline return book /by 2020-01-30
+list
+event
+event project meeting
+event project meeting /at Monday 2-3pm
+list
+done
+done 0
+done 2
+done 4
+list
+delete
+delete -1
+delete 1
+list
+delete 2
+delete 1
+bye
