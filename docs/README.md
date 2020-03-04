@@ -21,7 +21,7 @@ Example of usage: `list`
 
 Expected Outcome:
 
-!(/docs/list.png)
+![](/docs/list.png)
 
 ###Feature 2: `Adding a Todo task`
 `Todo`: Creates a Todo task
@@ -32,7 +32,8 @@ Remark: [description] can have spaces
 
 Example of usage: `todo Complete CS2103 iP`
 
-![Expected outcome:](/docs/todo.png) 
+Expected Outcome:
+![](/docs/todo.png) 
 
 ```
 Got it. I've added this task:
@@ -52,6 +53,7 @@ Remarks:
 
 Example of usage: `deadline Complete CS2103 iP /by 2020-03-01`
 
+Expected Outcome:
 ![Expected outcome:](/docs/deadline.png)
 ```
 Got it. I've added this task:
@@ -71,6 +73,7 @@ Remarks:
 
 Example of usage: `event Celebrate completion of CS2103 iP /at 2020-03-02`
 
+Expected Outcome:
 ![Expected outcome:](/docs/event.png)
 ```
 Got it. I've added this task:
@@ -88,6 +91,7 @@ Remarks:
 
 Example of usage: `done 1`
 
+Expected Outcome:
 ![Expected outcome:](/docs/done.png)
 ```
 Nice! I've marked this task as done:
@@ -104,6 +108,7 @@ Remarks:
 
 Example of usage: `delete 1`
 
+Expected Outcome:
 ![Expected outcome:](/docs/delete.png)
 ```
 Noted. I've removed this task:
@@ -121,6 +126,7 @@ Remarks:
 
 Example of usage: `find book`
 
+Expected Outcome:
 ![Expected outcome:](/docs/find.png)
 ```
 1.[T][✘] find a book
@@ -138,6 +144,7 @@ Remarks:
 
 Example of usage: `view 2020-12-25`
 
+Expected Outcome:
 ![Expected outcome:](/docs/view.png)
 ```
 2.[D][✘] delete the e-book (by: 25-Dec-2020)
@@ -152,6 +159,7 @@ Format: `bye`
 
 Example of usage: `bye`
 
+Expected Outcome:
 ![Expected outcome:](/docs/bye.png)
 ```
 Bye. Hope to see you again soon!
