@@ -20,4 +20,4 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - ./gradlew build -s
+  - ./gradlew clean checkstyleMain checkstyleTest test coverage coveralls
