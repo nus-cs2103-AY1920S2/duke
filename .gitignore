@@ -12,3 +12,14 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Project files
+/.settings/
+.classpath
+.project
+
+# Data files
+/data/
+
+# Actual test file
+/text-ui-test/ACTUAL.TXT
