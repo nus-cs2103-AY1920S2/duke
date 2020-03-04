@@ -19,7 +19,9 @@ Format: `list`
 
 Example of usage: `list`
 
-![Expected Outcome:](/docs/list.png)
+Expected Outcome:
+
+!(/docs/list.png)
 
 ###Feature 2: `Adding a Todo task`
 `Todo`: Creates a Todo task
