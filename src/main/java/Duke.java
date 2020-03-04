@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -17,8 +16,6 @@ public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui = new Ui();
-    private Parser parser = new Parser();
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -29,14 +26,14 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke(String filePath) {
-        ui = new Ui();
+        Ui ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadSavedData());
         } catch (IOException e) {
             tasks = new TaskList();
             System.out.println(e);
-            ui.noExistingSaveFile();
+            Ui.noExistingSaveFile();
         }
     }
 
@@ -45,48 +42,41 @@ public class Duke extends Application {
     }
 
     public void run() {
-        ui.sayHi();
-        while (parser.hasNext()) {
+        Ui.sayHi();
+        while (Parser.hasNext()) {
             try {
-                String input = parser.scanLine();
-                if (parser.commandEquals(parser.getCommand(input), "todo")) {
-                    if (!parser.hasDetails(input)) {
+                String input = Parser.scanLine();
+                if (Parser.commandEquals(Parser.getCommand(input), "todo")) {
+                    if (!Parser.hasDetails(input)) {
                         throw new EmptyDescriptionException();
                     }
-                    ;
-                    tasks.addTask(new Todo(parser.getInfo(input)));
-                } else if (parser.commandEquals(parser.getCommand(input), "event")) {
-                    if (!parser.hasDetails(input)) {
+                    tasks.addTask(new Todo(Parser.getInfo(input)));
+                } else if (Parser.commandEquals(Parser.getCommand(input), "event")) {
+                    if (!Parser.hasDetails(input)) {
                         throw new EmptyDescriptionException();
                     }
-                    ;
-                    tasks.addTask(new Event(Event.getEventDesc(input.toCharArray()), Event.getEventDate(parser.
+                    tasks.addTask(new Event(Event.getEventDesc(input.toCharArray()), Event.getEventDate(Parser.
                             getInfo(input))));
-                } else if (parser.commandEquals(parser.getCommand(input), "deadline")) {
-                    if (!parser.hasDetails(input)) {
+                } else if (Parser.commandEquals(Parser.getCommand(input), "deadline")) {
+                    if (!Parser.hasDetails(input)) {
                         throw new EmptyDescriptionException();
                     }
-                    ;
-                    tasks.addTask(new Deadline(Deadline.getDesc(input.toCharArray()), Deadline.getDate(parser.
+                    tasks.addTask(new Deadline(Deadline.getDesc(input.toCharArray()), Deadline.getDate(Parser.
                             getInfo(input))));
-                } else if (parser.commandEquals(parser.getCommand(input), "list")) {
+                } else if (Parser.commandEquals(Parser.getCommand(input), "list")) {
                     tasks.showTasks();
-                } else if (parser.commandEquals(parser.getCommand(input), "done")) {
-                    tasks.taskDone(parser.getTaskNum(input));
-                } else if (parser.commandEquals(parser.getCommand(input), "bye")) {
-                    try {
-                        storage.saveToFile(tasks.getTaskArrList());
-                        ui.sayBye();
-                        break;
-                    } catch (FileNotFoundException e) {
-
-                    }
-                } else if (parser.commandEquals(parser.getCommand(input), "delete")) {
-                    tasks.deleteTask(parser.getTaskNum(input));
-                } else if (parser.commandEquals(parser.getCommand(input), "find")) {
-                    tasks.find(parser.getInfo(input));
-                } else if (parser.commandEquals(parser.getCommand(input), "view")) {
-                    tasks.viewSchedule(parser.getInfo(input));
+                } else if (Parser.commandEquals(Parser.getCommand(input), "done")) {
+                    tasks.taskDone(Parser.getTaskNum(input));
+                } else if (Parser.commandEquals(Parser.getCommand(input), "bye")) {
+                    storage.saveToDoc(tasks.getTaskArrList());
+                    Ui.sayBye();
+                    break;
+                } else if (Parser.commandEquals(Parser.getCommand(input), "delete")) {
+                    tasks.deleteTask(Parser.getTaskNum(input));
+                } else if (Parser.commandEquals(Parser.getCommand(input), "find")) {
+                    tasks.find(Parser.getInfo(input));
+                } else if (Parser.commandEquals(Parser.getCommand(input), "view")) {
+                    tasks.viewSchedule(Parser.getInfo(input));
                 } else {
                     throw new InvalidCommandException();
                 }
@@ -195,48 +185,42 @@ public class Duke extends Application {
     protected String getResponse(String input) {
         String output = "";
         try {
-            if (parser.commandEquals(parser.getCommand(input), "todo")) {
-                if (!parser.hasDetails(input)) {
+            if (Parser.commandEquals(Parser.getCommand(input), "todo")) {
+                if (!Parser.hasDetails(input)) {
                     throw new EmptyDescriptionException();
                 }
-                ;
-                Todo t = new Todo(parser.getInfo(input));
+                Todo t = new Todo(Parser.getInfo(input));
                 tasks.addTask(t);
                 output += "Got it. I've added this task: \n  " + t.toString() + "\n" + tasks.numOfTasks();
-            } else if (parser.commandEquals(parser.getCommand(input), "event")) {
-                if (!parser.hasDetails(input)) {
+            } else if (Parser.commandEquals(Parser.getCommand(input), "event")) {
+                if (!Parser.hasDetails(input)) {
                     throw new EmptyDescriptionException();
                 }
-                ;
-                Event e = new Event(Event.getEventDesc(input.toCharArray()), Event.getEventDate(parser.
+                Event e = new Event(Event.getEventDesc(input.toCharArray()), Event.getEventDate(Parser.
                         getInfo(input)));
                 tasks.addTask(e);
                 output += "Got it. I've added this task: \n  " + e.toString() + "\n" + tasks.numOfTasks();
-            } else if (parser.commandEquals(parser.getCommand(input), "deadline")) {
-                if (!parser.hasDetails(input)) {
+            } else if (Parser.commandEquals(Parser.getCommand(input), "deadline")) {
+                if (!Parser.hasDetails(input)) {
                     throw new EmptyDescriptionException();
                 }
-                ;
-                Deadline d = new Deadline(Deadline.getDesc(input.toCharArray()), Deadline.getDate(parser.
+                Deadline d = new Deadline(Deadline.getDesc(input.toCharArray()), Deadline.getDate(Parser.
                         getInfo(input)));
                 tasks.addTask(d);
                 output += "Got it. I've added this task: \n  " + d.toString() + "\n" + tasks.numOfTasks();
-            } else if (parser.commandEquals(parser.getCommand(input), "list")) {
+            } else if (Parser.commandEquals(Parser.getCommand(input), "list")) {
                 output = tasks.showTasks();
-            } else if (parser.commandEquals(parser.getCommand(input), "done")) {
-                output = tasks.taskDone(parser.getTaskNum(input));
-            } else if (parser.commandEquals(parser.getCommand(input), "bye")) {
-                try {
-                    output += storage.saveToFile(tasks.getTaskArrList()) + "\n" + ui.sayBye();
-                } catch (FileNotFoundException e) {
-
-                }
-            } else if (parser.commandEquals(parser.getCommand(input), "delete")) {
-                output += tasks.deleteTask(parser.getTaskNum(input));
-            } else if (parser.commandEquals(parser.getCommand(input), "find")) {
-                output += tasks.find(parser.getInfo(input));
-            } else if (parser.commandEquals(parser.getCommand(input), "view")) {
-                output += tasks.viewSchedule(parser.getInfo(input));
+            } else if (Parser.commandEquals(Parser.getCommand(input), "done")) {
+                output = tasks.taskDone(Parser.getTaskNum(input));
+            } else if (Parser.commandEquals(Parser.getCommand(input), "bye")) {
+                storage.saveToDoc(tasks.getTaskArrList());
+                output += "Your tasks have been saved to the hard disk \n" + Ui.sayBye();
+            } else if (Parser.commandEquals(Parser.getCommand(input), "delete")) {
+                output += tasks.deleteTask(Parser.getTaskNum(input));
+            } else if (Parser.commandEquals(Parser.getCommand(input), "find")) {
+                output += tasks.find(Parser.getInfo(input));
+            } else if (Parser.commandEquals(Parser.getCommand(input), "view")) {
+                output += tasks.viewSchedule(Parser.getInfo(input));
             } else {
                 throw new InvalidCommandException();
             }

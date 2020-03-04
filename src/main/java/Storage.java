@@ -14,24 +14,37 @@ public class Storage {
         this.filePath = filePath;
     }
 
+
+//    public String saveToFile(ArrayList<Task> xs) throws FileNotFoundException {
+//        String output = "";
+//        StringBuilder sb = new StringBuilder();
+//        for(Task t : xs) {
+//            sb.append(t.saveToText() + "\n");
+//        }
+//        try (PrintStream out = new PrintStream(new FileOutputStream(this.filePath))) {
+//            out.print(sb.toString());
+//            output = "Your tasks have been saved to the hard disk";
+//        } catch (IOException e){
+//            System.out.println(e);
+//        }
+//        return output;
+//    }
+
     /**
      * Converts array list of tasks to String and saves to hard disk
      * @param xs
      * @throws FileNotFoundException
      */
-    public String saveToFile(ArrayList<Task> xs) throws FileNotFoundException {
-        String output = "";
+    public void saveToDoc(ArrayList<Task> xs) {
         StringBuilder sb = new StringBuilder();
         for(Task t : xs) {
             sb.append(t.saveToText() + "\n");
         }
         try (PrintStream out = new PrintStream(new FileOutputStream(this.filePath))) {
             out.print(sb.toString());
-            output = "Your tasks have been saved to the hard disk";
         } catch (IOException e){
             System.out.println(e);
         }
-        return output;
     }
 
     /**
@@ -49,6 +62,9 @@ public class Storage {
             while (sc.hasNext()) {
                 data.add(sc.nextLine());
             }
+        } else {
+            tmpDir.getParentFile().mkdirs();
+            tmpDir.createNewFile();
         }
         return data;
     }
