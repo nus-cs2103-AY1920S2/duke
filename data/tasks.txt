@@ -1,0 +1,5 @@
+TODO^_^0^_^todo
+EVENT^_^1^_^event^_^03/02/2020 1800 to 04/02/2020 1800
+DEADLINE^_^1^_^deadline^_^20/02/2020 1800
+EVENT^_^0^_^Celebrate end of the world^_^20/12/2012 1800 to 20/12/2012 2359
+TODO^_^0^_^End the world
