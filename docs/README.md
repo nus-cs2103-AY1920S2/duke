@@ -28,7 +28,7 @@ Here are the tasks in your list:
 3.[E][] celebrate completion of iP (at: 2-Mar-2020)
 ```
 
-####Feature 2: `Adding a Todo task`
+Feature 2: `Adding a Todo task`
 `Todo`: Creates a Todo task
 
 Format: `todo [description]`
