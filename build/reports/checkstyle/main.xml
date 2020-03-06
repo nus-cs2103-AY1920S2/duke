@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.23">
+<file name="/Users/xpxp/Desktop/duke/src/main/java/DialogBox.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/Duke.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/Launcher.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/Main.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/MainWindow.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/AddCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/CheckDupCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/Command.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/DeleteCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/DoneCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/ExitCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/FindCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/command/ListCommand.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/DuplicateTaskError.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/EmptyDateError.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/EmptyDescriptionError.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/Exceptions.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/InvalidDateError.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/InvalidIndexError.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/InvalidInputError.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/MissingKeywordError.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/exceptions/MissingTaskNumberError.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/parser/Parser.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/storage/Storage.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/task/Deadline.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/task/Event.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/task/Task.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/task/ToDo.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/tasklist/TaskList.java">
+</file>
+<file name="/Users/xpxp/Desktop/duke/src/main/java/duke/ui/Ui.java">
+</file>
+</checkstyle>
