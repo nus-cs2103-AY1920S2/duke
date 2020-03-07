@@ -1,0 +1,8 @@
+T|1|Call mum|important,
+D|0|CS2106 Lecture|2020-02-10|
+E|0|Arts Festival|2020-02-13|
+E|0|Valentine's Day|2020-02-14|
+T|0|Do homework|
+D|0|CS2106 homework x2|2020-12-01|
+T|0|Meet my friend Bob|
+T|0|call Mummy|
