@@ -23,7 +23,7 @@ Kim's Secret Chat is a helpful tool that you can talk to to keep track of your t
 
 ## 2. Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest release here
+2. Download the latest release of `Kim's Secret Chat` [here](https://github.com/jeremylow97/duke/releases/tag/A-Release)
 3. Copy the file to the folder you want to use as the home folder for the tool.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 ![UI](Ui.png)
@@ -120,11 +120,11 @@ Example of usage: <br/>
 `done 1`
 
 Expected outcome:<br/>
-Marks the first task in the task lis as done
+Marks the first task in the task list as done
 
 ### 3.8 `sort` - Sorting the task list 
 
-Sorts the tasklist by alphabetical order
+Sorts the task list by alphabetical order
 
 Format: `sort`
 
