@@ -3,7 +3,7 @@
 ## Features 
 * Create, show and delete tasks
 * Save tasks and load past tasks
-* Mark tasks as done
+* Mark tasks as done or not done
 * Find tasks
 * Get help
 * Exit application
@@ -31,7 +31,7 @@ Users can leave the application and close the GUI.
 
 ## Usage
 
-### `list` - Shows list of tasks created and saved
+### 1. `list` - Shows list of tasks created and saved
 
 Describe action and its outcome.
 
@@ -43,7 +43,7 @@ Expected outcome:
 
 ![](./list.PNG)
 
-### `todo <task description>` - Creates a task of todo type
+### 2. `todo <task description>` - Creates a task of todo type
 
 Describe action and its outcome.
 
@@ -55,7 +55,7 @@ Expected outcome:
 
 ![](./todo.PNG)
 
-### `deadline <task description> /by <YYYY-MM-DD>` - Creates a task of deadline type
+### 3. `deadline <task description> /by <YYYY-MM-DD>` - Creates a task of deadline type
 
 Describe action and its outcome.
 
@@ -67,7 +67,7 @@ Expected outcome:
 
 ![](./deadline.PNG)
 
-### `event <task description> /at <YYYY-MM-DD>` - Creates a task of event type
+### 4. `event <task description> /at <YYYY-MM-DD>` - Creates a task of event type
 
 Describe action and its outcome.
 
@@ -79,7 +79,7 @@ Expected outcome:
 
 ![](./event.PNG)
 
-### `done <task id>` - Marks task as completed
+### 5. `done <task id>` - Marks task as completed
 
 Marks task with matching task id as completed.
 
@@ -91,7 +91,7 @@ Expected outcome:
 
 ![](./done.PNG)
 
-### `unmark <task id>` - Marks a done task as not done
+### 6. `unmark <task id>` - Marks a done task as not done
 
 Marks a done task with matching task id as not completed.
 
@@ -103,7 +103,7 @@ Expected outcome:
 
 ![](./unmark.PNG)
 
-### `delete <task id>` - Deletes a task
+### 7. `delete <task id>` - Deletes a task
 
 Deletes the task with matching task id.
 
@@ -115,7 +115,7 @@ Expected outcome:
 
 ![](./delete.PNG)
 
-### `find <keyword>` - Finds tasks with matching keyword
+### 8. `find <keyword>` - Finds tasks with matching keyword
 
 Finds all tasks that have descriptions matching the provided keyword
 
@@ -127,7 +127,7 @@ Expected outcome:
 
 ![](./find.PNG)
 
-### `help` - Lists commands user can use in Duke
+### 9. `help` - Lists commands user can use in Duke
 
 Displays all commands including expected input parameters sequence for user to use. 
 
@@ -139,7 +139,7 @@ Expected outcome:
 
 ![](./help.PNG)
 
-### `bye` - Leaves application
+### 10. `bye` - Leaves application
 
 Automatically closes Graphical User Interface of Duke application.
 
