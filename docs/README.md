@@ -125,7 +125,7 @@ Updates the priority level of a specified task with the specified priority level
 
 Example of usage: 
 
-`update <Task Number>`
+`update <Task Number> <New Priority Level>`
 
 Expected outcome:
 
