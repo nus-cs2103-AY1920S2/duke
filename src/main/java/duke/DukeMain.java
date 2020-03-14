@@ -40,12 +40,12 @@ public class DukeMain extends Application {
     @Override
     public void init() throws Exception {
         this.gui = new MainGui();
-        DukeHistory.progress(new Duke(this.gui));
     }
 
     @Override
     public void start(Stage primaryStage) {
         this.gui.start(primaryStage);
+        DukeHistory.progress(new Duke(this.gui));
         this.gui.respond(this.gui.greetings);
     }
 
