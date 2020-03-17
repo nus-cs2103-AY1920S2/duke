@@ -9,7 +9,7 @@ While we have produced a fully functional prototype, there are a few major probl
    Every small change requires us to rebuild and run the application.  
 
 1. Components are heavily dependent on each other:
-   Why does `Main` need to know that `DialogBox` needs a `Label`? 
+   Why does `duke.main.Main` need to know that `duke.main.DialogBox` needs a `Label`? 
    What happens if we change the `Label` to a custom `ColoredLabel` in the future?  
     
     We need to minimize the amount of information each control needs to know about another.
@@ -18,7 +18,7 @@ While we have produced a fully functional prototype, there are a few major probl
 1. The code is untidy and long:
    Why is all the code in one place?
 
-   The `Main` class attempts to do it all. 
+   The `duke.main.Main` class attempts to do it all. 
    Code for visual tweaks, listeners and even utility methods are all in one file.
    This makes it difficult to find and make changes to existing code.
 
@@ -29,7 +29,7 @@ FXML is a XML-based language that allows us to define our user interface. Proper
 
 The FXML snippet define a TextField similar to the one that we programmatically defined previous in Tutorial 2. Notice how concise FXML is compared to the plain Java version.
 
-Let's return to Duke and convert it to use FXML instead.
+Let's return to duke.main.Duke and convert it to use FXML instead.
 
 # Rebuilding the Scene using FXML
 
@@ -37,7 +37,7 @@ Scene Builder is a tool developed by Oracle and currently maintained by Gluon. I
 
 Create the following files in `src/main/resources/view`:
 
-**MainWindow.fxml**
+**duke.main.MainWindow.fxml**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -47,7 +47,7 @@ Create the following files in `src/main/resources/view`:
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.main.MainWindow">
   <children>
     <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
     <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
@@ -60,7 +60,7 @@ Create the following files in `src/main/resources/view`:
 </AnchorPane>
 ```
 
-**DialogBox.fxml**
+**duke.main.DialogBox.fxml**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -83,30 +83,30 @@ Create the following files in `src/main/resources/view`:
 1. Let’s explore the provided FXML files in Scene Builder. 
     
     Running the tool brings up the main screen.
-    Select `Open Project` > `src/main/resources/view/MainWindow.fxml`. Inspect each control and its properties.
+    Select `Open Project` > `src/main/resources/view/duke.main.MainWindow.fxml`. Inspect each control and its properties.
 
-   ![SceneBuilder opening MainWindow.fxml](assets/SceneBuilder.png)
+   ![SceneBuilder opening duke.main.MainWindow.fxml](assets/SceneBuilder.png)
 
 1. On the right accordion pane, you can modify the properties of the control that you have selected. Try changing the various settings and see what they do!
  
-1. On the left accordion, you can see that we have set the controller class to `MainWindow`. 
+1. On the left accordion, you can see that we have set the controller class to `duke.main.MainWindow`. 
 We will get to that later.
  
-   ![Controller for MainWindow](assets/MainWindowController.png)
+   ![Controller for duke.main.MainWindow](assets/MainWindowController.png)
 
-1. Let’s repeat the process for `DialogBox`.
-   The main difference here is that DialogBox checks `Use fx:root construct` and _does not define a controller class_. 
+1. Let’s repeat the process for `duke.main.DialogBox`.
+   The main difference here is that duke.main.DialogBox checks `Use fx:root construct` and _does not define a controller class_. 
 
-   ![Settings for DialogBox](assets/DialogBoxController.png)
+   ![Settings for duke.main.DialogBox](assets/DialogBoxController.png)
 
 ## Using Controllers
 
-As part of the effort to separate the code handling Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
+As part of the effort to separate the code handling duke.main.Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
 We call these UI classes _controllers_. 
 
-Let's implement the `MainWindow` controller class that we specified in `MainWindow.fxml`.
+Let's implement the `duke.main.MainWindow` controller class that we specified in `duke.main.MainWindow.fxml`.
 
-**MainWindow.java**
+**duke.main.MainWindow.java**
 ```java
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -116,9 +116,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for duke.main.MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends AnchorPane {
+public class duke.main.MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -128,7 +128,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private duke.main.Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -138,12 +138,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
+    public void setDuke(duke.main.Duke d) {
         duke = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.main.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -151,8 +151,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                duke.main.DialogBox.getUserDialog(input, userImage),
+                duke.main.DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }
@@ -163,14 +163,14 @@ The `@FXML` annotation marks a `private` or `protected` member and makes it acce
 Without the annotation, we will have to make everything `public` and expose our UI to unwanted changes.
 
 The `FXMLLoader` will map the a control with a `fx:id` defined in FXML to a variable with the same name in its controller.
-Notice how in `MainWindow`, we can invoke `TextField#clear()` on `userInput` and access its content just as we did in the previous example.
+Notice how in `duke.main.MainWindow`, we can invoke `TextField#clear()` on `userInput` and access its content just as we did in the previous example.
 Similarly, methods like private methods like `handleUserInput` can be used in FXML when annotated by `@FXML`. 
 
 ## Using FXML in our application
 
-Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
+Let's create a new `duke.main.Main` class as the bridge between the existing logic in `duke.main.Duke` and the UI in `duke.main.MainWindow`.
 
-**Main.java**
+**duke.main.Main.java**
 ```java
 @Override
 import java.io.IOException;
@@ -182,20 +182,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for duke.main.Duke using FXML.
  */
-public class Main extends Application {
+public class duke.main.Main extends Application {
 
-    private Duke duke = new Duke();
+    private duke.main.Duke duke = new duke.main.Duke();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(duke.main.Main.class.getResource("/view/duke.main.MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<duke.main.MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -206,9 +206,9 @@ public class Main extends Application {
 
 Again, we can interact with the `AnchorPane` defined in the FXML as we would have if we created the `AnchorPane` ourselves.
 
-For our custom `DialogBox`, we did not define a controller so let's create a controller for it.
+For our custom `duke.main.DialogBox`, we did not define a controller so let's create a controller for it.
 
-**DialogBox.java**
+**duke.main.DialogBox.java**
 ```java
 import java.io.IOException;
 import java.util.Collections;
@@ -229,15 +229,15 @@ import javafx.scene.layout.HBox;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+public class duke.main.DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private duke.main.DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(duke.main.MainWindow.class.getResource("/view/duke.main.DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -259,34 +259,34 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static duke.main.DialogBox getUserDialog(String text, Image img) {
+        return new duke.main.DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static duke.main.DialogBox getDukeDialog(String text, Image img) {
+        var db = new duke.main.DialogBox(text, img);
         db.flip();
         return db;
     }
 }
 ```
 
-When we create a new instance of `DialogBox`, we set both the controller and root Node to `DialogBox`. 
-From this point onwards we can interact with `DialogBox` as we have in the previous tutorials.
+When we create a new instance of `duke.main.DialogBox`, we set both the controller and root Node to `duke.main.DialogBox`. 
+From this point onwards we can interact with `duke.main.DialogBox` as we have in the previous tutorials.
 
 The last change that we have to make is to point our `Launcher` class in the right direction:
 In `Launcher.java`
 ```java
 //...    
-Application.launch(Main.class, args);
+Application.launch(duke.main.Main.class, args);
 //...
 ```
 [todo]: # (Discussion on the fx:root pattern.)
 
 ## Exercises
 
-1. Convert `MainWindow` to use the `fx:root` construct.
-1. Extend `MainWindow` to have a `Stage` as a root Node.
+1. Convert `duke.main.MainWindow` to use the `fx:root` construct.
+1. Extend `duke.main.MainWindow` to have a `Stage` as a root Node.
 1. Customize the appearance of the application further with CSS.
 
 --------------------------------------------------------------------------------
