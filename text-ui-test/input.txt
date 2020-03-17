@@ -1,0 +1,8 @@
+todo borrow money
+list
+deadline return money /by Sunday
+event project conference /at Mon 2-4pm
+done 2
+list
+bye
+
