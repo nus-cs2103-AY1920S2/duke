@@ -1,0 +1,31 @@
+**************************************************************
+ _____        .      _     |
+|         |  | |   _| |_   |
+|_____   _|  | |  |_   _|  |__
+|_____  |_|  |_|    |_|    |  |
+Connecting to Stark's secure database...
+Data file found! Proceeding to load existing data!
+Hello!! My name is Edith. Tony Stark's Personal Assistant
+What can I do for you?
+**************************************************************
+**************************************************************
+DukeException: I'm sorry, but I don't know what that means :-(
+**************************************************************
+**************************************************************
+DukeException: I'm sorry, but I don't know what that means :-(
+**************************************************************
+**************************************************************
+Here are your tasks in your list: 
+  1. [D][?] CS2103T duke (by: Apr 11 2020 SATURDAY)
+  2. [T][?] CS2103T duke
+  3. [E][?] CS2101 CA component 1 (at: Thursday 08:00)
+  4. [D][?] CS2103T duke (by: Apr 11 2020 SATURDAY)
+  5. [T][?] CS2103T duke
+  6. [E][?] CS2101 CA component 1 (at: Thursday 08:00)
+  7. [D][?] CS2103T duke (by: Apr 11 2020 SATURDAY)
+  8. [T][?] CS2103T duke
+  9. [E][?] CS2101 CA component 1 (at: Thursday 08:00)
+**************************************************************
+**************************************************************
+Data has been saved! Goodbye Mr.Stark!!!!
+**************************************************************
