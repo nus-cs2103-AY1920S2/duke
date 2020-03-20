@@ -1,0 +1,26 @@
+todo eat breakfast
+deadline finish Duke /by Thurs 2359
+todo eat lunch
+event brother's birthday /at 23/1/2020 3-5pm
+event attend mass /at Thurs 5.30-6.30pm
+deadline find internship /by 31/1/2020
+todo eat dinner
+todo go sleep
+list
+done 1
+list
+done 3
+list
+done 2
+list
+done 7
+list
+done 4
+list
+done 8
+list
+done 5
+list
+done 6
+list
+bye

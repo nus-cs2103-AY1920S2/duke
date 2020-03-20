@@ -1,0 +1,265 @@
+    Hello from
+     ____        _        
+    |  _ \ _   _| | _____ 
+    | | | | | | | |/ / _ \
+    | |_| | |_| |   <  __/
+    |____/ \__,_|_|\_\___|
+
+    ------------------------------------------------------------
+     Hey there! I'm Duke
+     Your word is my command!
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Okie! I've added this task:
+       [T][✘] eat breakfast
+     There are now 1 tasks in the list.
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Okie! I've added this task:
+       [D][✘] finish Duke (by: Thurs 2359)
+     There are now 2 tasks in the list.
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Okie! I've added this task:
+       [T][✘] eat lunch
+     There are now 3 tasks in the list.
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Okie! I've added this task:
+       [E][✘] brother's birthday (at: 23/1/2020 3-5pm)
+     There are now 4 tasks in the list.
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Okie! I've added this task:
+       [E][✘] attend mass (at: Thurs 5.30-6.30pm)
+     There are now 5 tasks in the list.
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Okie! I've added this task:
+       [D][✘] find internship (by: 31/1/2020)
+     There are now 6 tasks in the list.
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Okie! I've added this task:
+       [T][✘] eat dinner
+     There are now 7 tasks in the list.
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Okie! I've added this task:
+       [T][✘] go sleep
+     There are now 8 tasks in the list.
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Here are the tasks in your list:
+      1.[T][✘] eat breakfast
+      2.[D][✘] finish Duke (by: Thurs 2359)
+      3.[T][✘] eat lunch
+      4.[E][✘] brother's birthday (at: 23/1/2020 3-5pm)
+      5.[E][✘] attend mass (at: Thurs 5.30-6.30pm)
+      6.[D][✘] find internship (by: 31/1/2020)
+      7.[T][✘] eat dinner
+      8.[T][✘] go sleep
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Good job completing this task! Here's a tick for completing it!
+       [T][✓] eat breakfast
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Here are the tasks in your list:
+      1.[T][✓] eat breakfast
+      2.[D][✘] finish Duke (by: Thurs 2359)
+      3.[T][✘] eat lunch
+      4.[E][✘] brother's birthday (at: 23/1/2020 3-5pm)
+      5.[E][✘] attend mass (at: Thurs 5.30-6.30pm)
+      6.[D][✘] find internship (by: 31/1/2020)
+      7.[T][✘] eat dinner
+      8.[T][✘] go sleep
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Good job completing this task! Here's a tick for completing it!
+       [T][✓] eat lunch
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Here are the tasks in your list:
+      1.[T][✓] eat breakfast
+      2.[D][✘] finish Duke (by: Thurs 2359)
+      3.[T][✓] eat lunch
+      4.[E][✘] brother's birthday (at: 23/1/2020 3-5pm)
+      5.[E][✘] attend mass (at: Thurs 5.30-6.30pm)
+      6.[D][✘] find internship (by: 31/1/2020)
+      7.[T][✘] eat dinner
+      8.[T][✘] go sleep
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Good job completing this task! Here's a tick for completing it!
+       [D][✓] finish Duke (by: Thurs 2359)
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Here are the tasks in your list:
+      1.[T][✓] eat breakfast
+      2.[D][✓] finish Duke (by: Thurs 2359)
+      3.[T][✓] eat lunch
+      4.[E][✘] brother's birthday (at: 23/1/2020 3-5pm)
+      5.[E][✘] attend mass (at: Thurs 5.30-6.30pm)
+      6.[D][✘] find internship (by: 31/1/2020)
+      7.[T][✘] eat dinner
+      8.[T][✘] go sleep
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Good job completing this task! Here's a tick for completing it!
+       [T][✓] eat dinner
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Here are the tasks in your list:
+      1.[T][✓] eat breakfast
+      2.[D][✓] finish Duke (by: Thurs 2359)
+      3.[T][✓] eat lunch
+      4.[E][✘] brother's birthday (at: 23/1/2020 3-5pm)
+      5.[E][✘] attend mass (at: Thurs 5.30-6.30pm)
+      6.[D][✘] find internship (by: 31/1/2020)
+      7.[T][✓] eat dinner
+      8.[T][✘] go sleep
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Good job completing this task! Here's a tick for completing it!
+       [E][✓] brother's birthday (at: 23/1/2020 3-5pm)
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Here are the tasks in your list:
+      1.[T][✓] eat breakfast
+      2.[D][✓] finish Duke (by: Thurs 2359)
+      3.[T][✓] eat lunch
+      4.[E][✓] brother's birthday (at: 23/1/2020 3-5pm)
+      5.[E][✘] attend mass (at: Thurs 5.30-6.30pm)
+      6.[D][✘] find internship (by: 31/1/2020)
+      7.[T][✓] eat dinner
+      8.[T][✘] go sleep
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Good job completing this task! Here's a tick for completing it!
+       [T][✓] go sleep
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Here are the tasks in your list:
+      1.[T][✓] eat breakfast
+      2.[D][✓] finish Duke (by: Thurs 2359)
+      3.[T][✓] eat lunch
+      4.[E][✓] brother's birthday (at: 23/1/2020 3-5pm)
+      5.[E][✘] attend mass (at: Thurs 5.30-6.30pm)
+      6.[D][✘] find internship (by: 31/1/2020)
+      7.[T][✓] eat dinner
+      8.[T][✓] go sleep
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Good job completing this task! Here's a tick for completing it!
+       [E][✓] attend mass (at: Thurs 5.30-6.30pm)
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Here are the tasks in your list:
+      1.[T][✓] eat breakfast
+      2.[D][✓] finish Duke (by: Thurs 2359)
+      3.[T][✓] eat lunch
+      4.[E][✓] brother's birthday (at: 23/1/2020 3-5pm)
+      5.[E][✓] attend mass (at: Thurs 5.30-6.30pm)
+      6.[D][✘] find internship (by: 31/1/2020)
+      7.[T][✓] eat dinner
+      8.[T][✓] go sleep
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Good job completing this task! Here's a tick for completing it!
+       [D][✓] find internship (by: 31/1/2020)
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Here are the tasks in your list:
+      1.[T][✓] eat breakfast
+      2.[D][✓] finish Duke (by: Thurs 2359)
+      3.[T][✓] eat lunch
+      4.[E][✓] brother's birthday (at: 23/1/2020 3-5pm)
+      5.[E][✓] attend mass (at: Thurs 5.30-6.30pm)
+      6.[D][✓] find internship (by: 31/1/2020)
+      7.[T][✓] eat dinner
+      8.[T][✓] go sleep
+
+    ------------------------------------------------------------
+
+
+    ------------------------------------------------------------
+     Bye! Please give a review if you like this program!
+
+    ------------------------------------------------------------
+
