@@ -107,8 +107,8 @@ For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent
 
 Image|Filename
 ---|---
-![DaDuke](assets/DaUser.png) | `DaUser.png`
-![DaUser](assets/DaDuke.png) | `DaDuke.png`
+![DaDuke](../src/main/resources/images/DaUser.png) | `DaUser.png`
+![DaUser](../src/main/resources/images/DaDuke.png) | `DaDuke.png`
 
 
 ```java
