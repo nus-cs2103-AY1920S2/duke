@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.parser.Parser;
 import duke.storage.TaskStorage;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
@@ -29,14 +30,14 @@ public class Duke {
     public Duke() {
         try {
             this.ui = new Ui();
-            this.taskStorage = new TaskStorage("./data/Storage.txt");
-
+            this.taskStorage = new TaskStorage("text.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            this.taskStorage = new TaskStorage();
+            System.out.println("Creating text.txt file");
+        } finally {
             assert this.ui != null : "ui instance in duke is null";
             assert this.taskStorage != null : "taskStorage instance in duke is null";
-
-        } catch (FileNotFoundException e) {
-            System.out.println("./data/Storage.txt");
-            System.out.println("File not found");
         }
     }
 

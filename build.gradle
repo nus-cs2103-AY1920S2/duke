@@ -35,18 +35,13 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
 repositories {
     mavenCentral()
 }
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.2.0"
+    archiveVersion = "0.2.1"
     archiveClassifier = null
     archiveAppendix = null
 }

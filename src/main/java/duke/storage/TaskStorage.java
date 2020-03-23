@@ -48,6 +48,16 @@ public class TaskStorage {
         populateTaskList();
     }
 
+    public TaskStorage() {
+        this.taskList = new ArrayList<Task>();
+        this.file = new File("text.txt");
+        this.filePath = "text.txt";
+        try {
+            populateTaskList();
+        } catch (FileNotFoundException e) {
+        }
+    }
+
     /**
      * Reads all the Tasks stored in persistent memory, and clones them into
      * in-memory storage.
