@@ -50,8 +50,8 @@ public class TaskStorage {
 
     public TaskStorage() {
         this.taskList = new ArrayList<Task>();
-        this.file = new File("text.txt");
-        this.filePath = "text.txt";
+        this.file = new File("textDukeIP.txt");
+        this.filePath = "textDukeIP.txt";
         try {
             populateTaskList();
         } catch (FileNotFoundException e) {

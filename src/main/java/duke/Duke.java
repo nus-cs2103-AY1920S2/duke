@@ -30,11 +30,11 @@ public class Duke {
     public Duke() {
         try {
             this.ui = new Ui();
-            this.taskStorage = new TaskStorage("text.txt");
+            this.taskStorage = new TaskStorage("textDukeIP.txt");
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
             this.taskStorage = new TaskStorage();
-            System.out.println("Creating text.txt file");
+            System.out.println("Creating text file");
         } finally {
             assert this.ui != null : "ui instance in duke is null";
             assert this.taskStorage != null : "taskStorage instance in duke is null";
