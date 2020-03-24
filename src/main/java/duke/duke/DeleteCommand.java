@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 /**
  * Deletes task from tasklist from Duke.

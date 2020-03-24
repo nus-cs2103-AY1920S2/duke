@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 /**
  * Lists the tasks from tasklist from Duke.
@@ -18,10 +18,11 @@ public class ListCommand extends Command {
      * @return empty string
      */
     String execute(TaskList lst,Storage storage,Ui ui,TasksNum tasks) {
+        String result = "";
         for (int i = 0; i < lst.getSize(); i++) {
-            str += lst.getTask(i) + "\n";
+            result += lst.getTask(i) + "\n";
         }
-        return str;
+        return result;
     }
 
 }

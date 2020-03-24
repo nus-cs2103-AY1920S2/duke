@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 /**
  * Parses through user input to execute command.
@@ -27,7 +27,6 @@ public class Parser {
         String[] temp = str.split(" ");
         switch (temp[0]) {
         case "todo":
-            //System.out.println("Hi2");
             return new AddCommand(str);
         case "deadline":
             return new AddCommand(str);

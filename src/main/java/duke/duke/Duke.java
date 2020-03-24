@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 /**
  * Creates Duke Object with filepath.

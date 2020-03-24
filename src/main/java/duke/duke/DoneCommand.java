@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 /**
  * Changes status of Task inside tasklist from Duke.

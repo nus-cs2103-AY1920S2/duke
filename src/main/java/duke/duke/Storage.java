@@ -1,7 +1,8 @@
-package duke;
+package duke.duke;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,7 +14,7 @@ import java.util.List;
  * Creates Storage object.
  */
 public class Storage {
-    private String directory = System.getProperty("user.dir");
+    private String directory = System.getProperty("user.home");
     private String fileName = "tasks.txt";
     private Path path = Paths.get(directory, "data", fileName);
     private ArrayList<Task> lst = new ArrayList<Task>();
@@ -29,29 +30,24 @@ public class Storage {
         int tasks = 0;
         if (!Files.exists(path)) {
             try {
-                Files.createFile(path);
+                Files.createDirectories(path.getParent());
+                Files.write(path, new ArrayList<String>(), StandardCharsets.UTF_8);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         try {
             List<String> input = Files.readAllLines(path);
-            //System.out.println(input.size());
             for (int i = 0; i < input.size(); i++) {
                 //System.out.println(i);
                 tasks++;
                 String[] temp = input.get(i).split("\\|");
                 //is there a way to add different child class instances without 3 diff if-else statement
                 if (temp[0].equals("T")) {
-                    //System.out.println("YO");
                     Todo todo = new Todo(temp[2]);
                     addtask(todo, temp[1], tasks);
                     lst.add(todo);
-                    //System.out.println(lst.get(0));
                 } else {
-                    //System.out.println(temp[0] + "HHEY");
-                    //System.out.println(temp[1]);
-                    //System.out.println(temp[2]);
                     LocalDate localdate = setDate(temp[3]);
                     if (temp[0].equals("D")) {
                         Deadline deadline = new Deadline(temp[2], localdate);
@@ -69,11 +65,9 @@ public class Storage {
             Todo todo = new Todo(Integer.toString(tasks)); //dummy Todo for tasksnum
             todo.doAct();
             lst.add(todo);//add in tasknum
-            System.out.println("Added");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //System.out.println(lst.get(0));
         return lst;
     }
 
@@ -82,15 +76,12 @@ public class Storage {
      * @param lst from Tasklist from ByeCommand
      */
     public void writeToFile(TaskList lst) {
-        //System.out.println("HEYY");
         try {
             BufferedWriter writer = Files.newBufferedWriter(path);;
             for (int i = 0; i < lst.getSize(); i++) {
-                //System.out.println("HEYY");
                 Task task = lst.getTask(i);
                 if (task instanceof Todo) {
                     writer.write("T" + "|" + task.getStatusIcon() + "|" + task.getD());
-                    //System.out.println("HEYY");
                     writer.newLine();
                 } else {
                     writer.write(task.getType() + "|" + task.getStatusIcon() + "|"
@@ -100,7 +91,6 @@ public class Storage {
             }
             writer.flush();
             writer.close();
-            //System.out.println("HEYY");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -128,10 +118,8 @@ public class Storage {
      */
     private void addtask(Task task, String status, int tasks) {
         if (status.equals("O")) {
-            System.out.println("Done");
             task.doAct();
             tasks--;
-            System.out.println(tasks + "fuck");
         }
     }
 }

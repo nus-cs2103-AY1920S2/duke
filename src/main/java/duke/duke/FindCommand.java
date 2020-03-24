@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 public class FindCommand extends Command {
 

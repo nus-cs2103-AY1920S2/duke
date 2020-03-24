@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 /**
  * Follows command to exit programme.

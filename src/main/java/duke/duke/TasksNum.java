@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 /**
  * Stores number of tasks remaining for users.

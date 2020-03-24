@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 public abstract class Command {
     String str;
