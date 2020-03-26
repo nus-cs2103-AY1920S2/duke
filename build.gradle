@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'checkstyle'
+}
+
+repositories {
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+application {
+    mainClassName = "com.nus.duke.Duke"
+}
+
+javafx {
+    version = '11'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+checkstyle {
+    toolVersion = '8.23'
+    configFile rootProject.file('config/checkstyle/checkstyle.xml')
+    checkstyleTest.enabled = false
+    checkstyleMain.enabled = false
+}
+
+checkstyleMain {
+    source ='src/main/java'
+}
+checkstyleTest {
+    source ='src/test/java'
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.destination rootProject.file("build/reports/checkstyle.html")
+    }
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.0.1"
+    archiveClassifier = null
+    archiveAppendix = null
+}

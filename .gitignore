@@ -12,3 +12,10 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Java docs
+docs/*.*
+docs/jquery/
+docs/resources/
+!Ui.png
+!README.md
