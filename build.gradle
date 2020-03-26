@@ -1,0 +1,65 @@
+plugins {
+  id 'java'
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.0.7'
+  id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+group 'seedu.duke'
+version '0.1.0'
+
+task fatJar(type: Jar) {
+  manifest {
+    attributes 'Implementation-Title': 'Gradle Jar File Example',
+            'Implementation-Version': version,
+            'Main-Class': 'Launcher'
+  }
+  baseName = project.name + '-all'
+  from {
+    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+  with jar
+}
+
+repositories {
+  mavenCentral()
+  jcenter()
+}
+
+dependencies {
+  compile 'org.junit.jupiter:junit-jupiter:5.6.0'
+  testCompile 'org.junit.jupiter:junit-jupiter:5.6.0'
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.6.0'
+
+  String javaFxVersion = '11.0.1'
+
+  implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+  implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+  implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+  implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+  implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+  implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+  implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+  implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+  implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+  implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+  implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+  implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+}
+
+sourceSets.main.java.srcDirs = ['src']
+application {
+  mainClassName = "Launcher"
+}
+
+run {
+  standardInput = System.in
+}
+
+shadowJar {
+    baseName = "duke"
+    version = "0.2"
+    classifier = null
+    appendix = null
+}
+
