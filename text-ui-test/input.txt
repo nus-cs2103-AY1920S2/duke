@@ -1,0 +1,10 @@
+list
+todo eat
+deadline submit stuff /by 2020-02-20
+event jlpt /at sunday
+todo more stuff
+list
+done 3
+todo hello/
+find o
+bye
