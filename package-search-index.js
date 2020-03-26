@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"Backend"},{"l":"Backend.Constants"},{"l":"Backend.Exceptions"},{"l":"Backend.Objects.Task"},{"l":"Backend.Parsers"},{"l":"Frontend"},{"l":"Frontend.Components"},{"l":"Frontend.Components.DialogBox"},{"l":"Frontend.Constants"},{"l":"Frontend.Objects"}]

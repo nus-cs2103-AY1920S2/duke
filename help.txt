@@ -1,0 +1,5 @@
+Duke v1.0
+
+The user manual can be found at https://github.com/waynewee/duke/wiki/Duke-User-Guide.
+
+Copy and paste this url or click the link at the bottom left of this window.

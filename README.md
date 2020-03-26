@@ -8,7 +8,7 @@
 
 **Importing the project into IntelliJ**
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
+1. Open IntelliJ (if you are not in the welcome screen, click `FileManager` > `Close Project` to close the existing project dialog first).
 1. Set up the correct JDK version.
    * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
    * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
@@ -22,11 +22,11 @@
 
 # Tutorials 
 
-Duke Increment | Tutorial
+Frontend.Main Increment | Tutorial
 ---------------|---------------
 `A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
 `A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Frontend.Main][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
 
 [fx1]: <tutorials/javaFxTutorialPart1.md>
 [fx2]: <tutorials/javaFxTutorialPart2.md>
