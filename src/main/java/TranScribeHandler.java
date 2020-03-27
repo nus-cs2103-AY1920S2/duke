@@ -25,12 +25,12 @@ public class TranScribeHandler {
                     "capable of voice chat, email, station navigation and inventory management.\n";
             docs = docs + "Here are the things you can do with the TranScribe:\n";
 
-            docs = docs + "View all notes: view\n";
-            docs = docs + "Display a note: display <index of note>\n";
-            docs = docs + "Modify note: modify <index of note> <new message>\n";
-            docs = docs + "Add note: add <message>\n";
-            docs = docs + "Delete note: delete <index of note>\n";
-            docs = docs + "Change note title: change <index of note> <new note title>\n";
+            docs = docs + "View all notes: notes view\n";
+            docs = docs + "Display a note: notes display <index of note>\n";
+            docs = docs + "Modify note: notes modify <index of note> <new message>\n";
+            docs = docs + "Add note: notes add <message>\n";
+            docs = docs + "Delete note: notes delete <index of note>\n";
+            docs = docs + "Change note title: notes change <index of note> <new note title>\n";
 
             docs = docs + "Welcome aboard Talos I, Dr. Yu.\n";
             return docs;
@@ -55,6 +55,7 @@ public class TranScribeHandler {
             }
             int index = Integer.parseInt(split_str[1]);
             String message = ts.getNote(index).getMessage();
+            ts.deleteNote(index);
             return "TranScribe updated. Your note has been deleted with the following message:\n" + message + "\n";
         }
         else if (split_str[0].equals("display")) { // DISPLAYS ONE NOTE.

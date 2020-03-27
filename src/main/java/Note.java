@@ -38,6 +38,7 @@ public class Note {
      */
     public void setNoteTitle(String newTitle) {
         this.noteTitle = newTitle;
+        numModifications++;
     }
 
     /**
@@ -47,6 +48,7 @@ public class Note {
     public void modify(String newMessage) {
         this.message = newMessage;
         this.lastModified = LocalDateTime.now();
+        numModifications++;
     }
 
     /**

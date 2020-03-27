@@ -28,7 +28,7 @@ public class TranScribe {
     }
 
     /**
-     * Displays the notes. This may be buggy? Test first
+     * Displays the notes
      * @return A string with all the notes, displayed.
      */
     public String displayNotes() {
@@ -37,5 +37,12 @@ public class TranScribe {
             display = display + i + ". " + notes.get(i-1).getInformation();
         }
         return display;
+    }
+
+    /**
+     * @param index Index at which we want to delete the note.
+     */
+    public void deleteNote(int index) {
+        notes.remove(index - 1);
     }
 }

@@ -121,9 +121,9 @@ public class Duke {
                 catch (DukeException exception) {
                     return ui.printExceptionMessage(exception);
                 }
-            } else {
-                return "Good to see you, Mr. Yu!";
             }
+
+            return "Good to see you, Mr. Yu!"; // means I don't understand
         }
 
         storage.updateFile(tasks);

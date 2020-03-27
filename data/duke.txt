@@ -4,3 +4,4 @@
 [✘] - [T] - join sports club
 [✘] - [E] - dance party - 2020-01-01
 [✘] - [D] - do cs3244 - 2019-12-29
+[✘] - [T] - homework
