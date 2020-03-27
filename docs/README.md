@@ -23,7 +23,7 @@ Format: `list`
 
 ## 2.2 Done
 Marks a specified task as completed. 
-Format: `list INDEX`
+Format: `done INDEX`
 
 - Index is the specific index of each task, as shown when you `list` the tasks out using the `list` function above.  
 
@@ -70,29 +70,29 @@ Welcome to the TranScribe function! The TranScribe is a portable communication d
 Allows you to view help for the notes function. 
 Format: `notes documentation`
 
-### 2.8.2 Viewing all notes
+### 2.8.2 Adding a note
+Adds a note.
+Format: `notes add MESSAGE`
+
+Example: `notes add Add in an extra slide later!`
+
+### 2.8.3 Viewing all notes
 Allows you to view all notes taken down.
 Format: `notes view`
 
-### 2.8.3 Displaying a note
+### 2.8.4 Displaying a note
 Allows you to view a single note. This displays information such as the date of conception of the note, number of modifications since the date of inception and the last date and time of modification.
 Format: `notes display INDEX`
 
 - `INDEX` is the index of the specified note as shown in the `display` function when you `display` all notes.
 - Prerequisite for the command to be run: There must be at least 1 note in the TranScribe function. 
 
-### 2.8.4 Modifying a note
+### 2.8.5 Modifying a note
 Modifies the message of a single note. 
 Format: `notes modify INDEX NEW_MESSAGE`
 
 - `INDEX` is the index of the specified note as shown in the `display` function when you `display` all notes.
 - `NEW_MESSAGE` is the new message which you want to change to.
-
-### 2.8.5 Adding a note
-Adds a note.
-Format: `notes add MESSAGE`
-
-Example: `notes add Add in an extra slide later!`
 
 ### 2.8.6 Deleting a note
 Deletes a note.
