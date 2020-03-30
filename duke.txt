@@ -1,0 +1,5 @@
+T , N , finish math assignment
+E , N , Shermaine's wedding , 2020-06-24
+D , N , Research proposal , 2020-03-02
+E , N , JB trip , 2020-04-04
+T , Y , buy deodorant
