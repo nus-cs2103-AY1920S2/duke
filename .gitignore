@@ -7,8 +7,18 @@
 /.gradle/
 /build/
 src/main/resources/docs/
+gradle/wrapper/gradle-wrapper.properties
 
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
+
+# VS Code files 
+.vscode/
+.classpath
+.project
+.settings/
+
+# Program data
+data/
