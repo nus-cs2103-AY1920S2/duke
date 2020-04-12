@@ -30,12 +30,6 @@ public void start(Stage stage) {
     });
 }
 
-/**
- * Iteration 1:
- * Creates a label with the specified text and adds it to the dialog container.
- * @param text String containing text to add
- * @return a label with the specified text that has word wrap enabled.
- */
 private Label getDialogLabel(String text) {
     // You will need to import `javafx.scene.control.Label`.
     Label textToAdd = new Label(text);
@@ -102,7 +96,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 ```
 
-Next, add two images to the `main/resources/images` folder.
+Next, add two images to the `main/resources/images` folder.Log
 For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and Duke's avatar respectively but you can use any image you want.
 
 Image|Filename

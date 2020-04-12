@@ -1,0 +1,327 @@
+[33mcommit 13fcef048ed0d4500388fc93adf0bd9e19f6903b[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Merge: b59dd61 3202d2e
+Author: dinhnhobao <nhobao2000@gmail.com>
+Date:   Thu Feb 6 20:37:48 2020 +0800
+
+    Merge branch 'branch-A-JavaDoc'
+
+[33mcommit b59dd614f5cfad0d391a5f40e38e17cbdfb686b9[m
+Merge: adf88d9 a035657
+Author: dinhnhobao <nhobao2000@gmail.com>
+Date:   Thu Feb 6 20:32:37 2020 +0800
+
+    Merge branch 'A-CodingStandard'
+
+[33mcommit adf88d9a2e29515e12c78c59dc87e64db878d57c[m
+Merge: c24e83b 451acf5
+Author: dinhnhobao <nhobao2000@gmail.com>
+Date:   Thu Feb 6 20:27:02 2020 +0800
+
+    Merge branch 'branch-Level-9', find operation
+
+[33mcommit 3202d2ea55ee66454b11cea6111cb956be6f1a3a[m[33m ([m[1;31morigin/branch-A-JavaDoc[m[33m, [m[1;32mbranch-A-JavaDoc[m[33m)[m
+Author: dinhnhobao <nhobao2000@gmail.com>
+Date:   Thu Feb 6 20:26:14 2020 +0800
+
+    update some JavaDoc documentations
+
+[33mcommit a03565708aafdb5033baae721c480c0d96a3d9c7[m[33m ([m[1;32mbranch-A-CodingStandard[m[33m, [m[1;32mA-CodingStandard[m[33m)[m
+Author: dinhnhobao <nhobao2000@gmail.com>
+Date:   Thu Feb 6 19:49:23 2020 +0800
+
+    fix styling and indentations, A-CodingStandard
+
+[33mcommit 451acf5bed717f9bf22972b3c3eb967b9d9646b8[m[33m ([m[1;31morigin/branch-Level-9[m[33m, [m[1;32mbranch-Level-9[m[33m)[m
+Author: dinhnhobao <nhobao2000@gmail.com>
+Date:   Thu Feb 6 19:40:40 2020 +0800
+
+    add find tasks, Level-9
+
+[33mcommit c24e83b88fefd2d364303c8d73b1da091062efd9[m[33m ([m[1;33mtag: A-Jar[m[33m, [m[1;33mtag: A-JUnit[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Feb 4 15:59:34 2020 +0800
+
+    add JUnit tests, A-JUnit
+
+[33mcommit 8010e5c6a1a84d7a8e9b227a025450f361a41911[m[33m ([m[1;33mtag: A-MoreOOP[m[33m)[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Feb 4 14:27:05 2020 +0800
+
+    create Ui class for println, A-MoreOOP
+
+[33mcommit c2b42fa3785d64cf8bbb2df506738fae09af02a1[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Feb 4 02:01:45 2020 +0800
+
+    remodularise, create Storage and TaskList class
+
+[33mcommit 9a08dba90aee6c19de15629780db91d248a4d405[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Feb 4 00:56:53 2020 +0800
+
+    update database with Dates
+
+[33mcommit 5c67d74c4d49a7c42c49a4f6a4f5ced2472858d8[m
+Merge: 0105a05 a66bfd0
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Feb 4 00:55:26 2020 +0800
+
+    Merge branch 'branch-Level-8'
+
+[33mcommit 0105a05b597688dfe2531d5d57718741e501f387[m
+Merge: 67cd955 80cb0aa
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Feb 4 00:46:07 2020 +0800
+
+    Merge branch 'branch-Level-7'
+
+[33mcommit a66bfd019a31733e48b2c44709004f46808828d2[m[33m ([m[1;33mtag: Level-8[m[33m, [m[1;31morigin/branch-Level-8[m[33m, [m[1;32mbranch-Level-8[m[33m)[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Feb 4 00:35:51 2020 +0800
+
+    update dates and times, Level-8
+
+[33mcommit 80cb0aa37de75ee9aa7981594545cb2592e8c296[m[33m ([m[1;33mtag: Level-7[m[33m, [m[1;31morigin/branch-Level-7[m[33m, [m[1;32mbranch-Level-7[m[33m)[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Mon Feb 3 22:19:48 2020 +0800
+
+    save in database, Level-7
+
+[33mcommit 67cd9559e9ccee43fff6fa60d5d9ff399b47e7ef[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Jan 21 20:59:40 2020 +0800
+
+    update testing scripts
+
+[33mcommit c27b58c33b4ddd73951473fe1a97985cc078b1e1[m[33m ([m[1;33mtag: Level-6[m[33m)[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Jan 21 20:50:59 2020 +0800
+
+    update delete operation
+
+[33mcommit 700800992444920c6f64668ee26ef9553a4eaa54[m[33m ([m[1;33mtag: Level-5[m[33m)[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Jan 21 20:46:39 2020 +0800
+
+    handle errors and exceptions
+
+[33mcommit fad511add7c027ea1fb9b38cd679f2485069e0e8[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Jan 21 20:20:16 2020 +0800
+
+    add ChatBot class
+
+[33mcommit ccc307b92fa9947a93080742f897f280ca3a2297[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Jan 21 19:32:51 2020 +0800
+
+    implement testing
+
+[33mcommit 70a836f6f7a9516c7144f9e74e29280ac32ef7c8[m[33m ([m[1;33mtag: Level-4[m[33m)[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Jan 21 17:40:30 2020 +0800
+
+    extend Task class
+
+[33mcommit c0d7283ba52fafd948e1681b3869cebd1c2938bf[m[33m ([m[1;33mtag: Level-3[m[33m)[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Jan 21 17:06:37 2020 +0800
+
+    create Task class with operations
+
+[33mcommit a74891ad354d603ae98dae6b8c8e7906c992674d[m[33m ([m[1;33mtag: Level-2[m[33m)[m
+Author: dinhnhobao <e0313562@u.nus.edu>
+Date:   Tue Jan 21 16:49:52 2020 +0800
+
+    update bot add, list styling
+
+[33mcommit 59c15307f204d6a9b62d01f43031b313f2080784[m
+Author: dinhnhobao <=>
+Date:   Tue Jan 21 16:43:06 2020 +0800
+
+    update bot add, list
+
+[33mcommit 3548e43273783cdd3201efd2bd6f5ce770ef664b[m[33m ([m[1;33mtag: Level-1[m[33m)[m
+Author: dinhnhobao <nhobao2000@gmail.com>
+Date:   Tue Jan 21 16:23:51 2020 +0800
+
+    update bot greetings
+
+[33mcommit fae28ab89ea8846e56f2e6df33fbd6f9dd7fbea0[m[33m ([m[1;31mupstream/master[m[33m)[m
+Merge: baa18a5 26a5013
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Sat Aug 31 16:43:08 2019 +0800
+
+    Merge pull request #14 from j-lum/fxml-indent
+    
+    Change indentation in FXML samples to match AB-3
+
+[33mcommit 26a5013d00ef2201cd6433f308f53dc52e277b76[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Sat Aug 31 16:40:20 2019 +0800
+
+    Change indentation in FXML samples to match AB-3
+
+[33mcommit baa18a5b60aee205f3593787bac4dc4a98a7687c[m
+Merge: 999fa98 5df56a8
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Fri Aug 16 16:59:58 2019 +0800
+
+    Merge pull request #8 from j-lum/tutorial-fix
+    
+    Remove references to DukeStub
+
+[33mcommit 5df56a8908679dfc9efc6fcca655b1f9de85d51e[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Fri Aug 16 16:58:43 2019 +0800
+
+    Remove references to DukeStub
+
+[33mcommit 999fa98979ab5be8233b7838451650d8345bb520[m
+Merge: d2ffa00 8d6d6f4
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Thu Aug 15 15:18:12 2019 +0800
+
+    Merge pull request #7 from j-lum/tutorial-fix
+    
+    Address issues #5 and #6
+
+[33mcommit 8d6d6f4b95dd028ee97ba3df4d36b38ffc92d343[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Thu Aug 15 14:05:46 2019 +0800
+
+    Add images to JavaFX tutorial 3
+
+[33mcommit b6df1a32827a0d318ba241a10bfded88101daca3[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Thu Aug 15 13:59:56 2019 +0800
+
+    Fix typo referring to `HelloWorld`
+
+[33mcommit d2ffa00dbe45016b1c087a9a26e2d5be1d595ee4[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Wed Aug 14 15:35:46 2019 +0800
+
+    Update Gradle tutorial to reflect new checkstyle config
+
+[33mcommit f20d61019a2ea5ce166440b47e9a37a8bd373bb0[m
+Merge: 5c47c23 bad66fc
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Wed Aug 14 15:30:37 2019 +0800
+
+    Merge pull request #3 from j-lum/inline-javafx-tutorials
+    
+    Inline JavaFX tutorials
+
+[33mcommit bad66fc459bc2173e26be31598e04c4315df7933[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Mon Aug 12 14:24:27 2019 +0800
+
+    Adapt JavaFX tutorial for Duke
+    
+    Rather than to have distinct tutorials building up to a Duke-like
+    application, let's merge the tutorials into Duke's tutorials
+    to enhance cohesiveness in the course material.
+    
+    We also merge the gradle/gradleless tutorials into one by providing a
+    universal entry point to JavaFX in the style of AddressBook
+    applications.
+    
+    Fix header levels in JavaFX Tutorial 1.
+    
+    Change code samples to use Duke.
+    
+    Add hints on required import statements.
+    
+    Add location hints to code snippets to help students find where to copy
+    and paste them.
+    
+    Remove nitpicks to make the development process smoother.
+    
+    Fix usage of `Collections` to `FXCollections`.
+    
+    Replace image for JavaFX tutorial 3.
+    
+    Specify location to place images.
+    
+    Replace a screenshot that referred to the outdated package structure.
+    
+    Remove reference to DukeStub.
+
+[33mcommit 5c47c238cef0369657cea1f3023dcc053aabe733[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Tue Aug 6 20:38:08 2019 +0800
+
+    Specify checkstyle version
+    
+    Not specifying the checkstyle version causes it to fail with a cryptic
+    error.
+
+[33mcommit a2150c17028761c775b44368ede448060a7ce44e[m
+Author: damithc <damith@gmail.com>
+Date:   Tue Aug 6 20:10:10 2019 +0800
+
+    textUiTestingTutorial.md: mention updating java/javac commands
+
+[33mcommit 2d06f90400a17fd0ad95c0a68edf4917d12ee7ff[m
+Author: damithc <damith@gmail.com>
+Date:   Tue Aug 6 19:54:03 2019 +0800
+
+    textUiTestingTutorial.md: add missing <br>
+
+[33mcommit 5c491d3de4822b43f1db4c3bf806f81eae0c64a0[m
+Author: damithc <damith@gmail.com>
+Date:   Tue Aug 6 19:50:20 2019 +0800
+
+    Add a tutorial on text UI testing
+
+[33mcommit 53c04603712fd4132acd73091ffa37e29b7c0e70[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Tue Aug 6 15:15:04 2019 +0800
+
+    Update list of contributors
+
+[33mcommit 21af6a13f93c15964b20eb0ead90ef50ef70a42b[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Tue Aug 6 15:06:11 2019 +0800
+
+    Fix typo in link to checkstyle config files
+
+[33mcommit 8fe8afd9397509e450f821bc1f5524a3519ab488[m
+Author: damithc <damith@gmail.com>
+Date:   Mon Aug 5 19:29:40 2019 +0800
+
+    README: use numbered list for steps
+
+[33mcommit f20bff25cfb935b211b47aa3bcb5e690bbe614c0[m
+Author: damithc <damith@gmail.com>
+Date:   Mon Aug 5 19:26:04 2019 +0800
+
+    Tweak tutorial text
+
+[33mcommit 6a7120cbb6568134aef5d1d35e9596e4862acae4[m
+Author: damithc <damith@gmail.com>
+Date:   Mon Aug 5 19:08:53 2019 +0800
+
+    Move Duke.java out of the package
+
+[33mcommit 6bb6b9f6c525f5343fdc6dd3a43a086a11e9708e[m
+Author: damithc <damith@gmail.com>
+Date:   Mon Aug 5 19:08:08 2019 +0800
+
+    .gitignore: add *.iml
+
+[33mcommit 946f3bb509aa0710d45d820855ea3aa6cf096071[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Mon Jul 29 17:14:46 2019 +0800
+
+    Import base branch for students to start off
+    
+    As student may not have learnt about branching, let's include a copy of
+    the base branch into the main repository.
+
+[33mcommit 245013d3ac98862fe7c5f52fee9a7b5c389fb7ab[m
+Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
+Date:   Mon Jul 29 17:14:46 2019 +0800
+
+    Initial commit
