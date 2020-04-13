@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root alignment="TOP_RIGHT" style="-fx-border-color: #d3d3d3; -fx-border-radius: 20; -fx-background-color: white;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <Text fx:id="dialog" fill="#107896" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font>
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin>
+         <effect>
+            <Blend />
+         </effect></Text>
+        <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </HBox.margin>
+         <viewport>
+            <Rectangle2D />
+         </viewport></ImageView>
+    </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</fx:root>

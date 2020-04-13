@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="584.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+    <children>
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="42.0" prefWidth="582.0" promptText="Say something to Ding Ding!" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.bottomAnchor="1.0">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font></TextField>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="558.0" prefWidth="582.0" style="-fx-background-color: white;" vvalue="1.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="558.0" prefWidth="570.0" style="-fx-spacing: 10; -fx-background-color: white; -fx-padding: 5 10;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></VBox>
+            </content>
+        </ScrollPane>
+        <Button fx:id="sendButton" layoutX="499.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="42.0" prefWidth="84.0" style="-fx-background-color: white; -fx-border-color: black;" text="Send" textFill="#107896">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+    </children>
+</AnchorPane>

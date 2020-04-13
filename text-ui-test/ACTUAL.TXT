@@ -1,0 +1,46 @@
+    ###################################
+    Hey there! I'm DingDing!
+    What's up today? ;D
+    ###################################
+
+    ###################################
+    Alright! Task added:
+      [T][X]  borrow book
+    Now you have 1 task(s) in your list!
+    ###################################
+
+    ###################################
+    Alright! Task added:
+      [D][X]  return book (by: Sunday)
+    Now you have 2 task(s) in your list!
+    ###################################
+
+    ###################################
+    Alright! Task added:
+      [E][X]  project meeting (at: Mon 2-4pm)
+    Now you have 3 task(s) in your list!
+    ###################################
+
+    ###################################
+    Alright! Task added:
+      [D][X]  do homework (by: no idea :-p)
+    Now you have 4 task(s) in your list!
+    ###################################
+
+    ###################################
+    Task(s) in your list:
+    1.[T][X]  borrow book
+    2.[D][X]  return book (by: Sunday)
+    3.[E][X]  project meeting (at: Mon 2-4pm)
+    4.[D][X]  do homework (by: no idea :-p)
+    ###################################
+
+    ###################################
+    Nice! Task marked as done: 
+     [Y]  project meeting
+    ###################################
+
+    ###################################
+    Bye! See ya later, alligator!
+    ###################################
+
