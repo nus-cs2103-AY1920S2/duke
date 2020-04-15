@@ -1,13 +1,25 @@
-# Setting up
+# Project Duke
+
+Project Duke is a educational software project written to hone my incremental software development skills, while applying as many Java and SE techniques as possible along the way.
+
+The project aims to build a product named Duke, a Personal Assistant Chatbot that helps a person to keep track of various things. The name Duke was chosen in honor of Duke, the Java Mascot.
+
+## Features
+
+A simple user guide, which outlines the key features of duke, is available through the [product website](https://hemanshugandhi.github.io/duke/)
+
+## Setting up
 
 **Prerequisites**
 
 * JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
 
-**Importing the project into IntelliJ**
+**Trying out Duke on your machine**
+1. Download the latest release of this project made available through GitHub.
+  * via a CLI, navigate to the directory containing the executable. 
+  * Run the command `java -jar duke.jar`
 
+**Tinkering with Duke's source code**
 1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
 1. Set up the correct JDK version.
    * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
@@ -19,21 +31,3 @@
 1. Rename the project if you want. Click `Next`.
 1. Ensure that your src folder is checked. Keep clicking `Next`.
 1. Click `Finish`.
-
-# Tutorials 
-
-duke.Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for duke.Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
-
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
-
-# Feedback, Bug Reports
-
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
