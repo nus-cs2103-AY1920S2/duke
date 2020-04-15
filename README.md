@@ -6,7 +6,7 @@ The project aims to build a product named Duke, a Personal Assistant Chatbot tha
 
 ## Features
 
-A simple user guide, which outlines the key features of duke, is available through the [product website](https://hemanshugandhi.github.io/duke/)
+A simple user guide, which outlines the key features of duke, is available through the [product website](https://hemanshugandhi.github.io/duke/).
 
 ## Setting up
 
