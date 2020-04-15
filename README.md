@@ -16,8 +16,8 @@ A simple user guide, which outlines the key features of duke, is available throu
 
 **Trying out Duke on your machine**
 1. Download the latest release of this project made available through GitHub.
-  * via a CLI, navigate to the directory containing the executable. 
-  * Run the command `java -jar duke.jar`
+1. via a CLI, navigate to the directory containing the executable. 
+1. Run the command `java -jar duke.jar`
 
 **Tinkering with Duke's source code**
 1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
