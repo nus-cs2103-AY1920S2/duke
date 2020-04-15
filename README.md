@@ -10,16 +10,16 @@ A simple user guide, which outlines the key features of duke, is available throu
 
 ## Setting up
 
-**### Prerequisites**
+### **Prerequisites**
 
 * JDK 11
 
-**### Trying out Duke on your machine**
+### **Trying out Duke on your machine**
 1. Download the latest release of this project made available through GitHub.
 1. via a CLI, navigate to the directory containing the executable. 
 1. Run the command `java -jar duke.jar`
 
-**### Tinkering with Duke's source code**
+### **Tinkering with Duke's source code**
 1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
 1. Set up the correct JDK version.
    * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
