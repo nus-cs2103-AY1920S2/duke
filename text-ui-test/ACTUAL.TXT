@@ -1,0 +1,27 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+[T][?] apply for job
+Now you have 1 task in the list
+Got it. I've added this task:
+[E][?] revise CS2100 (at: 2359)
+Now you have 2 tasks in the list
+Got it. I've added this task:
+[D][?] submit IP (by: thursday)
+Now you have 3 tasks in the list
+1.[T][?] apply for job
+2.[E][?] revise CS2100 (at: 2359)
+3.[D][?] submit IP (by: thursday)
+Got it. I've added this task:
+[E][?] revise CS3243 (at: 2359)
+Now you have 4 tasks in the list
+Nice! I've marked this task as done:
+[E][?] revise CS2100 (at: 2359)
+Bye. Hope to see you again soon!

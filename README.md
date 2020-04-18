@@ -1,3 +1,5 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0b3ba0aec1ab488c936a7bddd93950e2)](https://www.codacy.com/manual/yapdianhao/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yapdianhao/main&amp;utm_campaign=Badge_Grade)
+
 # Setting up
 
 **Prerequisites**

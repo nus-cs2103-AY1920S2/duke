@@ -1,0 +1,7 @@
+todo apply for job
+event revise CS2100 /at 2359
+deadline submit IP /by thursday
+list
+event revise CS3243 /at 2359
+done 2
+bye

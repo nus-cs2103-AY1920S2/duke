@@ -1,0 +1,4 @@
+E | 1 | sleep | tmr
+E | 1 | meet orbital prof | Jan 31 2020
+D | 1 | apply NOC | Jan 31 2020
+T | 0 | submit 3230
