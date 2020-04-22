@@ -1,0 +1,3 @@
+T | true | homework
+E | false | meeting | 2020-12-20 1800
+D | true | Submission | 2020-03-12 2359

@@ -1,0 +1,8 @@
+T | true | laundry
+T | true | a
+T | false | 3
+T | false | 4
+E | false | adsdivjsod | 2020-12-20 1500
+T | false | 5
+T | false | 6
+T | false | 8

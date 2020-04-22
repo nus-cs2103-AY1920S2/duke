@@ -1,0 +1,15 @@
+Dude: Dude now you have even more things to do:
+      [T][x]  borrow book
+      Now you have 1 tasks in the list.
+dude:
+Dude: Here's your list of tasks dude:
+      1. [T][x]  borrow book
+dude:
+Dude: That's strange dude your pile of deadlines suddenly grew:
+      [D][x]  return book  (by: Sunday)
+      Now you have 2 tasks in the list.
+dude:
+Dude: Woohoo what an eventful life:
+      [E][x]  project meeting  (at: Mon 2-4pm)
+      Now you have 3 tasks in the list.
+dude:
