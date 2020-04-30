@@ -1,0 +1,10 @@
+T | 0 | read book
+T | 0 | read article
+T | 0 | read mindfulness stuff
+T | 0 | cry
+E | 0 | send friend off | 2020-02-16 2000-2100
+D | 0 | CS2101 Reflection | 2020-02-16 2359
+T | 0 | week 5 ip
+T | 0 | edit readme
+T | 0 | submit assignment
+T | 0 | submit assignment

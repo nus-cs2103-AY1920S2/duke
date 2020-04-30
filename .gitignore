@@ -3,6 +3,9 @@
 /out/
 /*.iml
 
+# Class files created for local testing
+*.class
+
 # Gradle build files
 /.gradle/
 /build/
