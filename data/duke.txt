@@ -1,0 +1,2 @@
+T|true|read book
+E|false|party|at 2020-02-06 1400
