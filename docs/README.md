@@ -1,3 +1,8 @@
+# Mr Robot
+
+[![Build Status](https://travis-ci.com/JeremyLoh/duke.svg?branch=master)](https://travis-ci.com/JeremyLoh/duke)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd6f84251f874eb7ad0e2a944755e4df)](https://www.codacy.com/manual/JeremyLoh/duke?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JeremyLoh/duke&amp;utm_campaign=Badge_Grade)
+
 # User Guide
 
 ## Introduction
