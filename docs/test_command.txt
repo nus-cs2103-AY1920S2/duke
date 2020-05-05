@@ -1,0 +1,178 @@
+CS2103 IP Test commands
+Project name: Hakuna Matata
+Author: Wang Yuting
+
+============ List Test ===========
+- With Radom text at the end
+List 123
+
+- With Radom space
+list
+        list
+
+- All Small letter
+list
+
+- With Capital letter
+LisT
+
+=========== Help Test ============
+- With Radom text at the end
+Help 123
+
+- With Radom space
+Help
+       Help
+
+- All Small letter
+help
+
+- With Capital letter
+HelP
+
+=========== Todo Test ===========
+- Missing description
+Todo
+
+- With description and random space
+Todo     desc
+Todo desc2
+       Todo desc3
+Todo      desc   4
+
+=========== Deadline Test ===========
+- Missing desc
+Deadline /by 20:00 20/12/2020
+
+- Missing /by
+Deadline ddl 20:00 20/12/2020
+
+- Missing time
+Deadline ddl /by
+
+- Missing desc + by
+Deadline 20:00 20/12/2020
+
+- Missing desc + time
+Deadline /by
+
+- Missing by + time
+Deadline ddl
+
+- Missing all
+Deadline
+
+= Wrong time format =
+- Wrong format
+deadline ddl /by wrongFormat
+deadline ddl /by 20:00      20/12/2020
+
+- Past time
+deadline ddl /by 20:00 20/01/2020
+
+- Correct comment
+Deadline ddl /by 20:00 20/12/2020
+deadline ddl /by 20:00 20/12/2020
+
+=========== Event Test ===========
+- Missing desc
+Event /at 14:00 20/03/2020-16:00 20/03/2020
+
+- Missing /at
+Event event 14:00 20/03/2020-16:00 20/03/2020
+
+- Missing time
+Event event /at
+
+- Missing desc + at
+Event 14:00 20/03/2020-16:00 20/03/2020
+
+- Missing desc + time
+Event /at
+
+- Missing at+ time
+Event event
+
+- Missing all
+Event
+
+= Wrong time format =
+- Wrong format
+Event event /at 14:00 20/03/2020 16:00 20/03/2020
+Event event /at wrongFormat-wrongFormat
+
+- Only 1 time term
+Event event /at 14:00 20/03/2020
+
+- End before start
+Event event /at 18:00 20/03/2020-16:00 20/03/2020
+
+- Past time
+Event event /at 14:00 20/01/2020-16:00 20/01/2020
+
+- Correct comment
+Event event /at 14:00 20/03/2020-16:00 20/03/2020
+event event2 /at 14:00 20/03/2020-16:00 20/03/2020
+
+=========== Done Test ===========
+- Missing index
+Done
+
+= Wrong index =
+- Wrong format
+Done wrongFormat
+
+- Negative index
+Done -1
+
+- Out of range index
+Done 100000000
+Done 0
+
+- Correct command
+Done 1
+done 1
+
+=========== Delete Test ===========
+- Missing index
+Delete
+
+= Wrong index =
+- Wrong format
+Delete wrongFormat
+
+- Negative index
+Delete -1
+
+- Out of range index
+Delete 100000000
+Delete 0
+
+- Correct command
+Delete 1
+delete 1
+
+=========== Find Test ===========
+- Missing desc
+Find
+
+- Correct command
+find t
+Find noSuchTaskInList
+
+=========== Sort Test ===========
+- Missing sortTerm
+Sort
+
+- Sort description
+Sort description
+sort description
+
+- Sort deadline
+Sort deadline
+sort deadline
+
+=========== Bye Test ===========
+Bye
+bye
+

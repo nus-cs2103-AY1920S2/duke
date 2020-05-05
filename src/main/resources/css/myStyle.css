@@ -1,0 +1,12 @@
+#dialogContainer{
+   -fx-background-image: url('../images/bananas.png');
+   -fx-background-repeat: repeat;
+   -fx-background-position: center center;
+}
+
+#dialogRoot{
+   -fx-background-color: #ffffff;
+   -fx-background-repeat: repeat;
+   -fx-background-position: center center;
+   -fx-background-radius:10;
+}

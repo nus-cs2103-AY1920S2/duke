@@ -1,0 +1,197 @@
+= Hakuna Matata Task Chatbot - User Guide
+:site-section: UserGuide
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:imagesDir: docs/images
+:stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: https://github.com/wyt-sonia/duke
+:test_planURL: https://github.com/wyt-sonia/duke/blob/master/docs/test_command.txt
+
+By: `Wang Yuting`      Since: `Feb 2020`
+
+== Introduction
+
+Hakuna Matata is a task management chat bot for people who is comfortable with *Command Line Interface* (CLI),
+which allows users to keep track of their different types of tasks (`*Todo, Deadline and Event*`).
+Besides some basic functions (`Browse, Create, Delete, Change Status`), it also provides functions as `Find` and `Sort`.
+
+More importantly, even though Hakuna Matata mainly relys on CLI command, it also provides a nice *Graphical User Interface*
+(GUI) design.
+
+Jump to the <<Quick Start>> to get started. Enjoy!
+
+== Quick Start
+
+.  Ensure you have Java `11` or above installed in your Computer.
+.  Download the latest `hakunamatata.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your tasks.
+.  Double-click the file to start the app. The GUI should appear in a few seconds.
++
+image::Ui.png[width="601"]
++
+.  Type the command in the command box and press kbd:[Enter] or click btn:[Send] to execute it. +
+.  Available command and valid examples (link:{test_planURL}[more test commands]) :
+
+* *`list`* : lists all tasks.
+* **`todo homework`**: add a new todo task with homework as description.
+* **`deadline assignment /by 20:00 20/02/2020`**: add a new deadline task with description: assignment,
+due by: 20:20 20/02/2020.
+* **`event team meeting /at 15:00 18/02/2020 17:00 18/02/2020`**: add a new event task with description: team meeting,
+start at: 15:00 18/02/2020, and end at : 17:00 18/02/2020/.
+* **`done 1`**: mark the 1st task in the task list as completed.
+* **`delete 2`** : deletes the 2nd task from the task list.
+* **`find ass`** : filter and show all tasks contains "ass" in its description.
+* **`sort description`** : sort and show task list base on tasks' description.
+* **`sort deadline`** : sort and show task list base on tasks' deadline.
+* *`bye`* : exits the app
+
+.  Refer to <<Features>> for details of each command.
+
+[[Features]]
+== Features
+
+====
+*Command Format Tips*
+
+* Date&Time format `hh:mm dd/mm/yyyy` e.g. 15:00 18/02/2020
+* Index range:  start from 1
+* Case insensitive: the keywords are not case sensitive. e.g. List, list and LIST will performs the same action.
+====
+
+=== Viewing all tasks : `list`
+
+Format: `list`
+
+=== Adding a todo task: `todo`
+
+Add a new +++<u>todo</u>+++  task with certain description in your task list.
+Format: `todo _desc_`
+
+
+[TIP]
+The description is compulsory
+
+Examples:
+
+* `todo homework`
+* `Todo homework`
+
+image::todo_demo.gif[width="400", title="todo command demo"]
+
+=== Adding a deadline task: `deadline`
+
+Add a new +++<u>deadline</u>+++ task with certain description and the date&time of its deadline in your task list. +
+Format: `deadline _desc_ /by _date&time_`
+
+[TIP]
+The description and date&time are compulsory +
+The `/by` keyword is used to divide the description and date&time +
+Date&time format : hh:mm dd/mm/yyyy
+
+Examples:
+
+* `deadline CS2103T IP tag A-UserGuid /by 23:59 18/02/2020`
+* `deadline CS2101 presentation reflection /by 23:59 18/02/2020`
+
+=== Adding an event task: `event`
+
+Add a new +++<u>event</u>+++ task with certain description and the start and end date&time to your task list. +
+Format: `event _desc_ /at _date&time_ _date&time_`
+
+[TIP]
+The description and date&time are compulsory +
+The `/at` keyword is used to divide the description and date&time +
+The 1st date&time is the start date, the 2nd date&time is the end date +
+Date&time format : hh:mm dd/mm/yyyy
+
+Examples:
+
+* `event CS2103T team meeting /at 15:00 18/02/2020 17:00 18/02/2020`
+* `event CS2101 team meeting /at 17:00 18/02/2020 19:00 18/02/2020`
+
+=== Marking a task as done : `done`
+
+Mark a pending task as completed. +
+Format: `done _index_`
+
+[TIP]
+The index is compulsory +
+The index of a task starts from 1 +
+Cannot mark a completed task as done
+
+Example:
+
+* `done 1`
+
+=== Deleting a task: `delete`
+
+Delete an existing task from task list. +
+Format: `delete _index_`
+
+[TIP]
+The index is compulsory +
+The index of a task starts from 1
+
+Example:
+
+* `delete 1`
+
+image::delete_demo.gif[width="400", title="delete command demo"]
+
+****
+Once a task is deleted from the task list successfully, the rest of tasks will automatically update
+their index number to make sure their indexes are consecutive.
+****
+
+=== Finding a task: `find`
+
+Filter and show tasks base on their description using custom search keyword. +
+Format: `find _searchTerm_`
+
+[TIP]
+The search term is compulsory
+
+Example:
+
+* `find assignment`
+
+=== Sorting tasks: `sort`
+
+Sort the tasks by its deadline/description. +
+Format: `sort deadline` or `sort description`
+
+[TIP]
+Sort will not update the index number of each tasks. +
+Their index only reflects the order of creation.
+
+image::sort_deadline_demo.gif[width="400", title="sort deadline command demo"]
+
+=== Exiting the program : `bye`
+
+Exits the program. +
+Format: `bye`
+
+[TIP]
+Press kbd:[enter] again the window will automatically close after the exit command.
+
+image::bye_demo.gif[width="400", title="bye command demo"]
+
+== Command Summary
+
+* *`list`*
+* **`todo _desc_`**
+* **`deadline _desc_ /by _hh:mm dd/mm/yyyy_`**
+* **`event _desc_ /at _hh:mm dd/mm/yyyy_ _hh:mm dd/mm/yyyy_`**
+* **`done _index_`**
+* **`delete _index_`**
+* **`find _searchTerm_`**
+* **`sort description` or `sort deadline`**
+* *`bye`*

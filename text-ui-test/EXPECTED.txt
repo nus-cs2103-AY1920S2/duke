@@ -1,0 +1,20 @@
+    ____________________________________________________________
+     Hello! I'm hakunamatata.HakunaMatata, a task list chat box
+     You can key in your tasks and I'll keep track of them for you.
+
+     ============================== Guide ==============================
+     There are three types of tasks I'm able to keep track of.
+         Todo: use "todo + description" to create (e.g. todo taskInfo).
+         Deadline: use "deadline + description + /by + date" to create (e.g. deadline taskInfo /by June 6th).
+         Event: use "event + description + /at + date" to create (e.g. event taskInfo /at Mon 2-4pm).
+
+     You can also use "list" to check the recorded tasks.
+     Or use "done + task index" to mark the task as done.
+
+     To terminate me, please use "bye".
+
+     What can I do for you?
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+    ____________________________________________________________
