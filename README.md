@@ -1,3 +1,11 @@
+# Try it out
+1. Go to https://github.com/teikjun/duke/releases
+2. Under the v0.2 release, simply download and run duke-0.2.jar file! 
+
+User Guide: https://teikjun.github.io/duke/
+
+Enjoy!
+
 # Setting up
 
 **Prerequisites**
