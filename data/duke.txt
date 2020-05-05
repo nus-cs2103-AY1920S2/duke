@@ -1,0 +1,6 @@
+D|0|return book|02/12/2019 1800
+T|0|borrow book
+E|0|meeting|02/12/2019 1800
+T|1|read book
+E|1|project meeting|02/12/2019 1800
+E|1|project meeting|02/12/2019 1800
