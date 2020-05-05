@@ -1,0 +1,11 @@
+Here are the list of commands you can use.For more information, type 'help X', which X represents the command you need more information about :)
+TODO -- Adds a to-do task.
+DEADLINE -- Adds a task with a deadline. 
+EVENT -- Adds an event with a spanning timeline. 
+DONE -- Completes an event/task. 
+DELETE -- Deletes a task. 
+LIST -- Gives a full view of your tasklist.
+FIND -- Search for a task with that specific keyword.
+BYE -- Terminates.
+MEOW -- If you're just bored :)
+Key in 'event', the event description, '/on', the date in YYYY-MM-DD, then start & end timing in format HH:MM-HH:MM.
