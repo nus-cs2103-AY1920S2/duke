@@ -1,0 +1,71 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
+
+/** Handles storing and loading of TaskList to and from persistent storage. */
+public class Storage {
+
+    protected Path filePath;
+
+    /**
+     * Constructor for Storage class.
+     *
+     * @param filepath path where TaskList is stored.
+     */
+    public Storage(Path filepath) {
+        this.filePath = filepath;
+    }
+
+    /**
+     * Retrieves a stored file from persistent storage if there is one, if not retrieve a new TaskList.
+     *
+     * @return stored TaskList if available, else empty TaskList.
+     */
+    public TaskList load() {
+        TaskList res = new TaskList();
+
+        try {
+            File savedData = new File(String.valueOf(filePath));
+            if (!savedData.exists()) {
+                File newFile = new File("data");
+                newFile.mkdir();
+                savedData = new File(String.valueOf(filePath));
+            }
+            FileInputStream fis = new FileInputStream(savedData);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            TaskList lstSaved = (TaskList) ois.readObject();
+            ois.close();
+            System.out.println("Retrieving my little boy's history..");
+            res = lstSaved;
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Initialising new list for my little boy..");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    /**
+     * Stores a TaskList to persistent storage.
+     *
+     * @param lst TaskList to be stored.
+     */
+    public void save(TaskList lst) {
+        try {
+            FileOutputStream fos = new FileOutputStream(String.valueOf(filePath));
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(lst);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
