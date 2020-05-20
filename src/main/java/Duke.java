@@ -1,10 +1,24 @@
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    /**
+     * This method reads user input and process it.
+     */
+    static TaskList list;
+    static Storage storage;
+    static Ui ui;
+    Parser parser;
+
+    Duke() {
+        this.storage = new Storage();
+        this.ui = new Ui();
+        this.parser = new Parser();
+        this.list = storage.loadTxt(ui);
     }
+
+    String getResponse(String input) {
+        return parser.parse(ui, list, storage, input);
+    }
+
 }
