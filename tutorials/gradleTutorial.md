@@ -24,7 +24,7 @@ As a developer, you write a _build file_ that describes the project. A build fil
 
 ## Adding Gradle Support to Your Project 
 
-1. Pull the branch named `gradle`. Merge it to the `master` branch. This will add the Gradle wrapper to your project.
+1. Pull the branch named `gradle`. Merge it to the `master` branch. This willadd the Gradle wrapper to your project.
    ```
    git checkout --track origin/gradle
    git checkout master
@@ -43,7 +43,7 @@ As a developer, you write a _build file_ that describes the project. A build fil
 * `gradlew run`: runs the main class of your project
 
 :bulb: Some plugins may add more helpful tasks so be sure to check their documentation!
-
+                                                                                                                                                                                                              
 #### Using Gradle from within Intellij
 
 1. After adding support for Gradle, Intellij might automatically ask you (via a pop-up at the bottom right corner of the Window) whether to import the project as a Gradle project. In that case, go ahead and say yes.
