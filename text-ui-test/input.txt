@@ -1,0 +1,16 @@
+list
+todo borrow book
+list
+deadline return book /by 2000-01-02
+event project meeting /at 2001-02-03
+deadline do homework /by 2002-03-04
+done 1
+done 3
+blah blah
+list
+todo
+event
+deadline
+event something something
+deadline something something
+bye
