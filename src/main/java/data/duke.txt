@@ -1,0 +1,4 @@
+T | 0 | read book
+D | 0 | finish cs3230 assignment | Feb 6 2020
+T | 1 | complete ger quiz
+E | 0 | hello | Apr 3 2020
