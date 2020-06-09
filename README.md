@@ -1,3 +1,6 @@
+# Download
+https://github.com/gerhean/duke/releases/tag/v-final
+
 # Setting up
 
 **Prerequisites**
