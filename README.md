@@ -1,39 +1,165 @@
-# Setting up
+# Duke User Guide
 
-**Prerequisites**
+![Duke Screenshot](./docs/images/Ui.png)
+Product Screenshot
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+## Description
+Duke is a simple and interactive task manager that is targeted for users who prefer typing commands. This program is created for the sake of CS2103T. Also, this program is inspired by *The Good Place*.
 
-**Importing the project into IntelliJ**
+## Technology
+1. Java 11
+2. JavaFX 11
+3. Gradle
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+## Usage
 
-# Tutorials 
+### Starting Duke
+To start Duke, you can double-click on the application. If it does not work, you may enter `java -jar <duke-filename>` into your computer's terminal. If it still does not work, please make sure that you have Java 11 installed.
 
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+Upon starting Duke, the application will attempt to load the previous task history from `./data/tasks.txt`. If the file is missing, Duke will create a new storage file there.
 
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+### Creating Tasks
+Tasks in Duke are categorised into: To-Do, Deadline and Event tasks.
 
-# Feedback, Bug Reports
+#### Creating To-Do Tasks
+To-Do tasks form the basic tasks in Duke. In Duke, you are allowed to set a To-Do task with a description.
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+*Command*
+```
+todo <description>
+```
+*Expected Output*
+```
+Okie! I've added this task:
+    <task-info>
+You have <number-of-tasks> tasks in the list!
+```
+*Duplicated Task Output*
+```
+This task is duplicated!
+```
+
+#### Creating Deadline Tasks
+Deadline tasks are tasks that have to be done by a particular date and time. In Duke, you are allowed to set a Deadline task with a description and a date (format: `yyyy-MM-dd HHmm`).
+
+*Command*
+```
+deadline <description> /by <date>
+```
+*Expected Output*
+```
+Okie! I've added this task:
+    <task-info>
+You have <number-of-tasks> tasks in the list!
+```
+*Duplicated Task Output*
+```
+This task is duplicated!
+```
+
+#### Creating Event Tasks
+Event tasks are tasks that have to be done on a particular date and time. In Duke, you are allowed to set an Event task with a description and a date (format: `yyyy-MM-dd HHmm`).
+
+*Command*
+```
+event <description> /at <date>
+```
+*Expected Output*
+```
+Okie! I've added this task:
+    <description>
+You have <number-of-tasks> tasks in the list!
+```
+*Duplicated Task Output*
+```
+This task is duplicated!
+```
+
+### Listing Tasks
+After creating your tasks, you may view the list of tasks that you have added into Duke. The list of tasks are also stored in an editable text file at `./data/tasks.txt`.
+
+*Command*
+```
+list
+```
+*Expected Output*
+```
+Okay Chidi, listen properly...
+These are your tasks:
+1. <task-info>
+...
+```
+*Empty Task List Output*
+```
+You have no tasks
+```
+
+### Searching Tasks
+After creating your tasks, you can search for tasks that contain a particular string in its description.
+
+*Command*
+```
+find <string-to-match>
+```
+*Expected Output*
+```
+Alrighty, I found some tasks! Here they are:
+1. <task-info>
+...
+```
+*No Matching Tasks Output*
+```
+Ah dang it! There are no matching tasks ):
+```
+
+### Completing Tasks
+Once you have finished your task, you can update the task and mark it as done. Refer to the task number that is given in the `list` command.
+
+*Command*
+```
+done <task-number>
+```
+*Expected Output*
+```
+Well done Chidi! I've marked this task as done:
+    <task-info>
+Give yourself a pat on the back!
+```
+*Invalid Task Index Output*
+```
+Oops Chidi! I think you gave me the wrong task index!
+Please refer to the 'list' command for available indices.
+```
+
+### Deleting Tasks
+If your list of tasks get too lengthy, you can also choose to delete any task from Duke at any time. Refer to the task number that is given in the `list` command. 
+
+Alternatively, you may also delete the tasks from the storage file in `./data/tasks.txt`. Be careful when editing this file, as it may crash the application.
+
+*Command*
+```
+delete <task-number>
+```
+*Expected Output*
+```
+Noted. I've removed this task:
+    <task-info>
+Now you have <number-of-tasks> tasks in the list.
+```
+Invalid Task Index Output
+```
+Oops Chidi! I think you gave me the wrong task index!
+Please refer to the 'list' command for available indices.
+```
+
+### Closing Duke
+When you are finished with using Duke, you can exit the application. Duke's storage is persistent, so your previous task list will be automatically loaded upon the next startup.
+
+*Command*
+```
+bye
+```
+*Expected Output*
+```
+Bye Chidi! Enjoy your stay in The Bad Place! (hehe)
+```
