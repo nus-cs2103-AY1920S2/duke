@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<javafx.scene.layout.HBox alignment="TOP_RIGHT" maxHeight="600.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="390.0" spacing="10.0" style="-fx-background-color: #1b262c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.ChatBox">
+  <children>
+      <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
+    <Label fx:id="dialog" maxWidth="500.0" minHeight="60.0" minWidth="-Infinity" prefWidth="200.0" style="-fx-background-color: #bbe1fa; -fx-background-radius: 5;" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed fringilla mi. Donec mattis, turpis aliquam auctor cursus, lacus magna bibendum lectus, sollicitudin luctus neque eros sed ex. Vestibulum at ipsum vel tellus aliquet pulvinar. Phasellus nisl elit, mattis in posuere sit amet, tincidunt posuere eros. In eu pulvinar libero. Phasellus elementum libero risus, in vulputate diam consectetur id. Praesent ut felis at massa auctor cursus vel id nisi. Etiam feugiat commodo arcu vel sodales. Phasellus non eros quis mauris facilisis pharetra at at massa. Sed placerat tellus ac erat gravida euismod. Etiam varius augue diam, eget tempor mi eleifend nec. Mauris imperdiet ante malesuada, volutpat ex eu, vestibulum ante.Aliquam a volutpat magna. Morbi interdum finibus sem, id condimentum nulla malesuada egestas. Sed tortor sapien, consectetur id nibh at, imperdiet iaculis dui. Aenean sit amet turpis pellentesque, porta est vitae, egestas leo. Cras consectetur in ligula vel faucibus. Pellentesque consequat interdum accumsan. Mauris feugiat ex vel elementum bibendum." textOverrun="WORD_ELLIPSIS" wrapText="true" HBox.hgrow="ALWAYS">
+         <font>
+            <Font size="12.0" />
+         </font>
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></Label>
+    <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" smooth="false" HBox.hgrow="NEVER">
+         <image>
+            <Image url="@../images/UserPlaceholder.jpg" />
+         </image></ImageView>
+  </children>
+  <padding>
+    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+  </padding>
+</javafx.scene.layout.HBox>

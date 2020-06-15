@@ -12,3 +12,17 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# VSCode Files
+.classpath
+.project
+.vscode
+.settings
+
+*.class
+*.txt
+
+!./tests/**/expected.txt
+!./tests/**/input.txt
+
+lib/*
