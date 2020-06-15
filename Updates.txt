@@ -1,0 +1,253 @@
+Here is the list of updates written for each commit:
+
+20/1/20 Level 1-1:
+Created:
+Your basic level 1 echo
+Added personality
+Added Dictionary for commands(Hash)
+Created commands.CommandHub
+Created Invoker to invoke the commands
+Used interface to define usercommands
+
+21/1/20
+Level 2
+Created:
+Your basic level 2 code
+Added list
+Made task as objects
+Commandhub now returns add as default
+Added list as a valid command to commandhub
+
+database.MyList:
+Added additem function
+Changed strings to tasks
+Print list made static
+
+Level 3
+Created:
+Done command
+Edited commandhub to notice done events
+Set tasks to have done ticks
+
+Changes:
+Commandhub:
+notice done events now
+
+Mylist:
+Added markdone function
+Added delete function (Incomplete)
+Added push function (Incomplete)
+
+Level 4
+Added events, todo, deadline undertask
+
+Changes:
+commands.CommandHub:
+Allow seperation of commands
+
+
+Add_Commands:
+Added types
+
+Level 5
+Created exceptions.DukeException
+
+Changes:
+Main:
+Added catching of exception
+CommandHUb:
+Throw Exception for empty todo and invalid command
+Throws Exception for empty or missing /by or /at command
+Possible: Check for missing desc for event and deadline commands and non integer for delete and done
+
+Level 6
+Added Delete function
+
+26/1/20
+Level 7:
+Added load command
+Added botmemory
+Now bot has init
+
+Level 7-1:
+Fixed markdone
+May have issues with formatting
+
+Git Note:
+Bot does not check commit tags.
+
+
+Level 8-1:
+Added dateTime class - Returns date/time objects
+Added dateTime handler -handles parsing of data and time, able to print and return proper datetime objects.. returns null if not correct
+
+Changes:
+Changed event/deadline tasks strings to localdatetime class objects
+Change event/deadline tostring method to print localdatetime objects
+
+Issues:
+Memory does not sync
+
+Updates:
+- Possible for duke to accept non time/date sentences? (Not implemented)
+
+
+2/2/20
+
+Level 8-2:
+Merged master with branch 8 and 7
+
+Issues
+Memory does not print properly - editied parsedesc
+Does not accepts date with no time (memory  save error
+     -Error messgae:
+	       Exception in thread "main" java.time.format.DateTimeParseException: Text '20 Mar 2040' could not be parsed at index 11
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2046)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1948)
+	at java.base/java.time.LocalDateTime.parse(LocalDateTime.java:492)
+	at resources.DateTimeHandler.revertDateTime(resources.DateTimeHandler.java:72)
+	at Bot_Memory.parseDesc(Bot_Memory.java:107)
+	at Bot_Memory.saveMemory(Bot_Memory.java:65)
+	at Bye_Command.action(Bye_Command.java:15)
+	at commands.CommandInvoker.Invoke(commands.CommandInvoker.java:17)
+	at duke.duke.main(duke.duke.java:12)
+     - Fixed by return localdate due to function not acceepting non time (LocalDateTime)
+	 - Fixed by accepting single digit numbers
+	
+Datetime does not recognise if user type in single digit dates (3/03/2020)
+
+
+3/2/20
+A-More OOP
+Added duke.UI class
+
+
+
+A-JavaDocs
+Added Java Docs
+
+
+A-Packages
+Sorted files based on packages
+
+Issues:
+Does not update file if list is empty 
+    - Edited the savememory function to append "wow much empty" to file if lsit is empty
+	- Edited the load memory to ignore "wow much emptiness"
+	 
+	
+Level-9
+Added findcommand
+
+Changes:
+Edited CommandHub to accept find commands
+
+Issues:
+Find command unable to detect dates in english format
+
+
+8/2/20
+A-CodingStandards
+Fixed some coding standards formats
+
+
+A-Gradle
+Added Gradle support
+Included Shadow Jar
+
+
+9/2/20
+
+A-GUI
+Added GUI (Tutorial)
+
+Stage 2:
+added some sort of integration to bot
+
+Issues:
+Majority function is not working
+    Known issues:
+	== Commands ==
+	- bye command: How to fix?
+	    Needs to save the memory
+		Turn off application
+	- list command: Unable to print out list
+	- Find command: Unable to print "Here are task found"
+	- Added Command: Does not show the number of list printed
+	== Features ==
+	- Memory not saved
+	- Some part of bot speech is not printed
+	
+	
+Update 2-1:
+Fixes to issues
+
+Fixes:
+- ByeCommand/ListCommand:
+     Fix by initialising bot (Forgot)
+- ListCommand: 
+     Corrected the print
+- Bye_Command:
+     Fixed save memory
+     Application can now turn off : System.exit(0)
+     Suggested implementation: Bot does not print good bye statement
+	 
+Update 2-2:
+Added welcome message from bot
+Added Background image
+Added button(red)
+
+Issues:
+Some formating errors:
+    - List does not display nicely
+	
+Unfixed Issus:
+    - Does not show some output for commands (Speech not print)
+
+Update 2-3
+Added icon
+Changed Pics (Duke and user)
+Added instructions
+
+Fixes: 
+- Fixed find event
+
+10/02/20
+A-Statistics
+
+
+Show what is done in this week
+
+
+Remember to save all these into memory
+
+Issues:
+Remind user to say bye to save memory (Not fixed)
+
+A-CodeQuality
+Added java docs
+Fixed some code format error
+
+
+C-Statistics/A-Sort
+Update 1-1
+Added stats for showing number of types (inputs)
+Count the number of task done today
+Number of task deleted in session
+Get Expired Tasks
+
+Things maybe wanted to implement
+2. Time bot has been running 
+Seperate usercommands
+
+
+Bug fixes
+Update 1-1
+Fix bug where bot dont save memory when closed
+Fix bug where cannot see past certain amount of items
+
+29/02/20
+Made changes to some of the more recent java docs
+
+Update 1-2
+Yuri now displayes the number of items in list when adding/deleting and listing
