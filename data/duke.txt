@@ -1,0 +1,10 @@
+[T][Y] learn java
+[D][N] CS2103 project (by: 01 Feb 2020 0000)
+[E][N] Team Meeting (at: now)
+[E][Y] gathering (at: 2020-01-09)
+[D][N] read notes (by: 29 Jan 2020 1400)
+[D][Y] AI quiz (by: 27 Jan 2020 0000)
+[E][N] lunch (at: 13 Feb 2pm)
+[D][Y] test bugs (by: 27 Jan 2020 2000)
+[E][N] Steamboat dinner (at: Bugis, 15 Mar 2020 8PM)
+[D][N] CS3243 Assignment (by: 16 Mar 2020 0000)

@@ -1,0 +1,38 @@
+Hello, I'm Duke
+What can I do for you?
+
+Got it. I've added this task:
+  [T][N] Learn about Java
+Now you have 1 task in the list.
+Got it. I've added this task:
+  [D][N] Java quiz (by: Jan 26th)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+  [D][N] Individual project (by: Jan 23rd)
+Now you have 3 tasks in the list.
+Got it. I've added this task:
+  [E][N] CS2101 Tutorial (at: Thursday Jan 23rd 2-4pm)
+Now you have 4 tasks in the list.
+Got it. I've added this task:
+  [T][N] set up meeting for project
+Now you have 5 tasks in the list.
+Here are the tasks in your list:
+1.[T][N] Learn about Java
+2.[D][N] Java quiz (by: Jan 26th)
+3.[D][N] Individual project (by: Jan 23rd)
+4.[E][N] CS2101 Tutorial (at: Thursday Jan 23rd 2-4pm)
+5.[T][N] set up meeting for project
+Nice, I've marked this task as done:
+  [T][Y] Learn about Java
+Nice, I've marked this task as done:
+  [D][Y] Individual project (by: Jan 23rd)
+Here are the tasks in your list:
+1.[T][Y] Learn about Java
+2.[D][N] Java quiz (by: Jan 26th)
+3.[D][Y] Individual project (by: Jan 23rd)
+4.[E][N] CS2101 Tutorial (at: Thursday Jan 23rd 2-4pm)
+5.[T][N] set up meeting for project
+Got it. I've added this task:
+  [D][N] fix my life (by: ASAP!)
+Now you have 6 tasks in the list.
+Bye. Hope to see you again soon!

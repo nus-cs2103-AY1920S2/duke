@@ -1,0 +1,10 @@
+[T][N] learn java
+[E][N] Team Meeting (at: Monday 2-4pm)
+[D][N] read notes (by: 29-01-2020 1400)
+[E][Y] gathering (at: 25 Jan 2019 5pm)
+[D][Y] AI quiz (by: 27-01-2020 0000)
+[E][N] lunch (at: 13 Feb 2pm)
+[D][N] revise for CS3243 (by: 27-01-2020 0910)
+[D][Y] test bugs (by: 27-01-2020 2000)
+[T][N] make a new face
+[D][N] die (by: 02-03-2020 0000)
