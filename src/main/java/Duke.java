@@ -1,11 +1,34 @@
+import java.util.Scanner;
+
 public class Duke {
 
     //Function prints a simple welcome message
     public static void welcomeMessage() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        System.out.println("");
+
+
+
+    }
+
+    public static void goodbyeMessage() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    //function echo user input
+    public static void echo() {
+
+        Scanner in  = new Scanner(System.in);
+        String command = " ";
+
+        while (true) {
+
+            command = in.nextLine();
+            if (command.equals("bye")) {
+                break;
+            }
+            System.out.println(command);
+        }
 
     }
 
@@ -18,5 +41,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         welcomeMessage();
+        echo();
+        goodbyeMessage();
     }
 }
