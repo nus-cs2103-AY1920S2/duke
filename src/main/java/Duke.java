@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -19,15 +21,21 @@ public class Duke {
     public static void echo() {
 
         Scanner in  = new Scanner(System.in);
-        String command = " ";
+        String command;
+        myList items = new myList();
 
         while (true) {
 
             command = in.nextLine();
+
             if (command.equals("bye")) {
                 break;
+            } else if (command.equals("list")) {
+                items.printList();
+            } else {
+                items.addItem(command);
             }
-            System.out.println(command);
+            //System.out.println(command);
         }
 
     }
