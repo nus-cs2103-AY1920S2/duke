@@ -14,6 +14,7 @@ public class Duke {
     }
 
     public static void goodbyeMessage() {
+
         System.out.println("Bye. Hope to see you again soon!");
     }
 
@@ -32,8 +33,22 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 items.printList();
+
+            } else if (command.contains("done")) {
+                String[] info = command.split(" ");
+                int index;
+
+                if (info.length == 1){
+                    items.addItem(new Task(command));
+                }
+
+                index = Integer.parseInt(info[1]);
+                items.completeTask(index);
+
+
             } else {
-                items.addItem(command);
+
+                items.addItem(new Task(command));
             }
             //System.out.println(command);
         }
