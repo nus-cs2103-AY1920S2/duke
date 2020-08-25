@@ -1,15 +1,14 @@
 package main.java;
 
-public class myList {
+public class MyList {
 
     private String[] things;
     private int size;
 
 
-    public myList(){
+    public MyList(){
         this.size = 0;
         this.things = new String[100];
-
     }
 
     public void addItem(String item) {

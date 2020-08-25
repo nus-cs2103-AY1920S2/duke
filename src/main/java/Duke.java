@@ -22,7 +22,7 @@ public class Duke {
 
         Scanner in  = new Scanner(System.in);
         String command;
-        myList items = new myList();
+        MyList items = new MyList();
 
         while (true) {
 
