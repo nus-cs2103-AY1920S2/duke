@@ -1,0 +1,5 @@
+T,true,book me
+T,true,borrow book
+T,true,have fun
+T,false,run
+T,true,read
