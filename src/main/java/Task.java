@@ -11,14 +11,17 @@ public class Task {
     }
 
     public String getName(){
+
         return this.name;
     }
 
     public boolean getStatus(){
+
         return this.isDone;
     }
 
     public void setStatus(boolean state){
+
         this.isDone = state;
     }
 }
