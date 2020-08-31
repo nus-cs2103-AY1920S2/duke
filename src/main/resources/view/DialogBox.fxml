@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="450.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" style="-fx-background-color: #5db6f8#99ddf8; -fx-background-radius: 8; -fx-padding: 10px; -fx-border-radius: 8; -fx-border-color: #fbf3f3#fbf3f3;" text="Label" textAlignment="JUSTIFY">
+            <font>
+                <Font name="Euphemia UCAS" size="12.0" />
+            </font>
+            <padding>
+                <Insets left="30.0" right="30.0" />
+            </padding>
+            <effect>
+                <DropShadow />
+            </effect>
+        </Label>
+        <ImageView fx:id="displayPicture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 10px;-fx-border-radius: 8; -fx-border-color: #fbf3f3#fbf3f3;" />
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>

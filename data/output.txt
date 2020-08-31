@@ -1,0 +1,6 @@
+   [T][0] sth
+   [T][0] sth else
+   [T][1] check
+   [T][0] sth
+   [D][0] sth (by: 2020-01-08)
+   [E][0] st (by: 2020-09-20)
