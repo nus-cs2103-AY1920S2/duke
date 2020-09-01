@@ -13,6 +13,7 @@ public class Duke {
 
         while(programIsRunning){
             String commands[] = new String[2];
+
             commands = getInputSeparateCommands();
             CommandStatus commandResult = CommandStatus.FAIL;
 
@@ -68,6 +69,7 @@ public class Duke {
 
     public static CommandStatus handleListCommand() {
         int entryNum = 1;
+
         printLineSeparator();
 
         for (Task task : taskList) {
@@ -79,6 +81,7 @@ public class Duke {
                 entryNum++;
             }
         }
+
         printLineSeparator();
 
         return CommandStatus.SUCCESS;
@@ -86,6 +89,9 @@ public class Duke {
 
 
     public static CommandStatus handleDoneCommand(String commands[]) {
+        if (commands.length < 2){
+            return CommandStatus.FAIL;
+        }
         String taskDescription = commands[1];
 
         // Looks for the matching description task to mark as done
@@ -93,51 +99,29 @@ public class Duke {
         for (Task task : taskList) {
             if (task == null) {
                 taskFinished = false;
-            } else if (task.description.equals(taskDescription)) {
+            } else if (task.description.equals(taskDescription) && task.isDone == false) {
                 task.isDone = true;
-
                 taskFinished =  true;
+
                 System.out.print("Nice! I've marked this task as done:\n\t");
                 System.out.println(task);
                 printLineSeparator();
+
+                break;
             }
         }
 
-        return taskFinished ? CommandStatus.SUCCESS : CommandStatus.FAIL;
+        if (taskFinished){
+            return CommandStatus.SUCCESS;
+        } else {
+            return CommandStatus.FAIL;
+        }
     }
 
     public static CommandStatus handleAddCommand(String[] commands) {
-        String taskDescription = commands[1];
-        String taskDetails[] = new String[2];
-
-        Task newTask;
-        switch (commands[0]) {
-            case "todo" :
-                newTask = new Todo(taskDescription);
-                break;
-
-            case "deadline" :
-                taskDetails = taskDescription.split(" /by ");
-
-                if (taskDetails.length < 2){
-                    return CommandStatus.FAIL;
-                }
-
-                newTask = new Deadlines(taskDetails[0], taskDetails[1]);
-                break;
-
-            case "event" :
-                taskDetails = taskDescription.split(" /at ");
-
-                if (taskDetails.length < 2){
-                    return CommandStatus.FAIL;
-                }
-
-                newTask = new Event(taskDetails[0], taskDetails[1]);
-                break;
-
-            default:
-                return CommandStatus.FAIL;
+        Task newTask = createTask(commands);
+        if (newTask == null){
+            return  CommandStatus.FAIL;
         }
 
         taskList[taskListIndex] = newTask;
@@ -148,12 +132,45 @@ public class Duke {
         return CommandStatus.SUCCESS;
     }
 
+    public static Task createTask(String[] commands){
+        String taskDescription = commands[1];
+        String[] taskDetails = new String[2];
+
+        Task newTask;
+        switch (commands[0]) {
+            case "todo" :
+                newTask = new Todo(taskDescription);
+                break;
+            case "deadline" :
+                taskDetails = taskDescription.split(" /by ");
+                if (taskDetails.length < 2){
+                    return null;
+                }
+
+                newTask = new Deadlines(taskDetails[0], taskDetails[1]);
+                break;
+            case "event" :
+                taskDetails = taskDescription.split(" /at ");
+                if (taskDetails.length < 2){
+                    return null;
+                }
+
+                newTask = new Event(taskDetails[0], taskDetails[1]);
+                break;
+            default:
+                return null;
+        }
+
+        return newTask;
+    }
     public static void printSuccessfulAddEntry(Task newTask) {
         printLineSeparator();
         System.out.println("Got it. I've added this task:\n\t" + newTask);
-        System.out.println("Now you have " + taskListIndex + " task"
-                + ((taskListIndex > 1) ? "s" : "")
-                + " in the list.");
+        System.out.print("Now you have " + taskListIndex + " task");
+        if (taskListIndex > 1) {
+            System.out.print("s");
+        }
+        System.out.println(" in the list.");
         printLineSeparator();
     }
 }
