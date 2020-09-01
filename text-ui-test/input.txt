@@ -1,0 +1,13 @@
+badcommand
+list
+todo 123
+list
+event 123 /at 12pm
+deadline study /by Sleeptime
+done 123
+list
+done study
+list
+done
+list
+bye
