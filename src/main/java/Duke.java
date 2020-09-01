@@ -1,84 +1,159 @@
 import java.util.Scanner;
 
 public class Duke {
+    public enum CommandStatus{ SUCCESS, FAIL }
+
     static Scanner scanner = new Scanner(System.in);
-    static int taskListIndex = 0;
     static Task taskList[] = new Task[100];
+    static int taskListIndex = 0;
+    static boolean programIsRunning = true;
 
     public static void main(String[] args) {
-        System.out.println("---------------------------------------");
+        printHomeScreen();
+
+        while(programIsRunning){
+            String commands[] = new String[2];
+            commands = getInputSeparateCommands();
+            CommandStatus commandResult = CommandStatus.FAIL;
+
+            if  (commands[0].equals("bye")) {
+                commandResult =  handleByeCommand();
+            } else if (commands[0].equals("list")) {
+                commandResult = handleListCommand();
+            } else if (commands[0].equals("done")) {
+                commandResult = handleDoneCommand (commands);
+            } else if (commands[0].equals("todo") || commands[0].equals("deadline") || commands[0].equals("event")){
+                commandResult = handleAddCommand(commands);
+            } else {
+                System.out.println("I don't understand that command");
+            }
+
+            if  (commandResult == CommandStatus.FAIL){
+                System.out.println("Command Failed");
+            }
+        }
+        printExitScreen();
+    }
+
+    public static void printHomeScreen(){
+        printLineSeparator();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        System.out.println("---------------------------------------");
+        printLineSeparator();
+    }
 
-        boolean isRunning = true;
-        while(isRunning){
-            String input = scanner.nextLine();
-
-            if  (input.equals("bye")) {
-                isRunning = false;
-            } else if (input.equals("list")){
-                listTaskList();
-            } else if (input.matches("done.*")) {
-                input = input.substring(5); // removes the "done " part of the string
-                Task task = finishTask(input);
-                if (task != null){
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.print("\t");
-                    printTaskStatus(task);
-                    System.out.println("---------------------------------------");
-                }
-            } else {
-                addInput(input);
-            }
-        }
-
+    public static void printExitScreen() {
         System.out.println("Bye. Hope to see you again soon!");
+        printLineSeparator();
+    }
+
+    public static void printLineSeparator(){
         System.out.println("---------------------------------------");
     }
 
-    public static void listTaskList(){
-        int i = 1;
-        for (Task task : taskList){
+    public static CommandStatus handleByeCommand(){
+        programIsRunning = false;
+        return CommandStatus.SUCCESS;
+    }
+
+    public static String[] getInputSeparateCommands(){
+        String input = scanner.nextLine();
+        input = input.trim();
+
+        String commands[] = new String[2];
+        commands = input.split(" ", 2);
+
+        return commands;
+    }
+
+    public static CommandStatus handleListCommand() {
+        int entryNum = 1;
+        printLineSeparator();
+
+        for (Task task : taskList) {
             if (task == null) {
-                if (i == 1){
-                    System.out.println("---------------------------------------");
-                }
                 break;
-            }
-            else {
-                System.out.print(String.valueOf(i) + ".");
-                printTaskStatus(task);
-                i++;
+            } else {
+                System.out.print(String.valueOf(entryNum) + ".");
+                System.out.println(task);
+                entryNum++;
             }
         }
-        System.out.println("---------------------------------------");
+        printLineSeparator();
+
+        return CommandStatus.SUCCESS;
     }
 
-    public static void printTaskStatus(Task task){
-        System.out.println("[" + task.getStatusIcon() +"]" +
-                " " + task.description);
-    }
 
-    public static Task finishTask(String taskName){
-        for (Task task : taskList){
-            if (task != null && task.description.equals(taskName)) {
+    public static CommandStatus handleDoneCommand(String commands[]) {
+        String taskDescription = commands[1];
+
+        // Looks for the matching description task to mark as done
+        boolean taskFinished = false;
+        for (Task task : taskList) {
+            if (task == null) {
+                taskFinished = false;
+            } else if (task.description.equals(taskDescription)) {
                 task.isDone = true;
-                return task;
+
+                taskFinished =  true;
+                System.out.print("Nice! I've marked this task as done:\n\t");
+                System.out.println(task);
+                printLineSeparator();
             }
         }
 
-        return null;
+        return taskFinished ? CommandStatus.SUCCESS : CommandStatus.FAIL;
     }
 
-    public static String addInput(String input){
-        System.out.println("added: " + input);
-        System.out.println("---------------------------------------");
+    public static CommandStatus handleAddCommand(String[] commands) {
+        String taskDescription = commands[1];
+        String taskDetails[] = new String[2];
 
-        Task newTask =  new Task(input);
+        Task newTask;
+        switch (commands[0]) {
+            case "todo" :
+                newTask = new Todo(taskDescription);
+                break;
+
+            case "deadline" :
+                taskDetails = taskDescription.split(" /by ");
+
+                if (taskDetails.length < 2){
+                    return CommandStatus.FAIL;
+                }
+
+                newTask = new Deadlines(taskDetails[0], taskDetails[1]);
+                break;
+
+            case "event" :
+                taskDetails = taskDescription.split(" /at ");
+
+                if (taskDetails.length < 2){
+                    return CommandStatus.FAIL;
+                }
+
+                newTask = new Event(taskDetails[0], taskDetails[1]);
+                break;
+
+            default:
+                return CommandStatus.FAIL;
+        }
+
         taskList[taskListIndex] = newTask;
         taskListIndex++;
 
-        return input;
+        printSuccessfulAddEntry(newTask);
+
+        return CommandStatus.SUCCESS;
+    }
+
+    public static void printSuccessfulAddEntry(Task newTask) {
+        printLineSeparator();
+        System.out.println("Got it. I've added this task:\n\t" + newTask);
+        System.out.println("Now you have " + taskListIndex + " task"
+                + ((taskListIndex > 1) ? "s" : "")
+                + " in the list.");
+        printLineSeparator();
     }
 }
