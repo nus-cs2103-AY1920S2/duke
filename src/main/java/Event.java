@@ -1,12 +1,12 @@
 public class Event extends Task {
-    String time_frame;
-    public Event(String description, String time_frame) {
+    String timeFrame;
+    public Event(String description, String timeFrame) {
         super(description);
-        this.time_frame = time_frame;
+        this.timeFrame = timeFrame;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time_frame + ")";
+        return "[E]" + super.toString() + " (at: " + timeFrame + ")";
     }
 }

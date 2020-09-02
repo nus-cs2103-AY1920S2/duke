@@ -3,9 +3,12 @@ import java.util.Scanner;
 public class Duke {
     public enum CommandStatus{ SUCCESS, FAIL }
 
+    static final int NUM_ARGS_DEADLINE = 2;
+    static final int NUM_ARGS_EVENT = 2;
+
     static Scanner scanner = new Scanner(System.in);
-    static Task taskList[] = new Task[100];
-    static int taskListIndex = 0;
+    static Task tasksList[] = new Task[100];
+    static int tasksListIndex = 0;
     static boolean programIsRunning = true;
 
     public static void main(String[] args) {
@@ -72,7 +75,7 @@ public class Duke {
 
         printLineSeparator();
 
-        for (Task task : taskList) {
+        for (Task task : tasksList) {
             if (task == null) {
                 break;
             } else {
@@ -94,14 +97,14 @@ public class Duke {
         }
         String taskDescription = commands[1];
 
-        // Looks for the matching description task to mark as done
-        boolean taskFinished = false;
-        for (Task task : taskList) {
+        // Looks for a task with a matching description task to mark as done
+        boolean taskIsFinished = false;
+        for (Task task : tasksList) {
             if (task == null) {
-                taskFinished = false;
+                taskIsFinished = false;
             } else if (task.description.equals(taskDescription) && task.isDone == false) {
                 task.isDone = true;
-                taskFinished =  true;
+                taskIsFinished =  true;
 
                 System.out.print("Nice! I've marked this task as done:\n\t");
                 System.out.println(task);
@@ -111,7 +114,7 @@ public class Duke {
             }
         }
 
-        if (taskFinished){
+        if (taskIsFinished){
             return CommandStatus.SUCCESS;
         } else {
             return CommandStatus.FAIL;
@@ -124,8 +127,8 @@ public class Duke {
             return  CommandStatus.FAIL;
         }
 
-        taskList[taskListIndex] = newTask;
-        taskListIndex++;
+        tasksList[tasksListIndex] = newTask;
+        tasksListIndex++;
 
         printSuccessfulAddEntry(newTask);
 
@@ -143,7 +146,7 @@ public class Duke {
                 break;
             case "deadline" :
                 taskDetails = taskDescription.split(" /by ");
-                if (taskDetails.length < 2){
+                if (taskDetails.length < NUM_ARGS_DEADLINE){
                     return null;
                 }
 
@@ -151,7 +154,7 @@ public class Duke {
                 break;
             case "event" :
                 taskDetails = taskDescription.split(" /at ");
-                if (taskDetails.length < 2){
+                if (taskDetails.length < NUM_ARGS_EVENT){
                     return null;
                 }
 
@@ -166,8 +169,8 @@ public class Duke {
     public static void printSuccessfulAddEntry(Task newTask) {
         printLineSeparator();
         System.out.println("Got it. I've added this task:\n\t" + newTask);
-        System.out.print("Now you have " + taskListIndex + " task");
-        if (taskListIndex > 1) {
+        System.out.print("Now you have " + tasksListIndex + " task");
+        if (tasksListIndex > 1) {
             System.out.print("s");
         }
         System.out.println(" in the list.");
