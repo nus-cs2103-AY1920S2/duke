@@ -4,6 +4,7 @@ public class Deadlines extends Task {
         super(description);
         this.dueDate = dueDate;
     }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dueDate + ")";

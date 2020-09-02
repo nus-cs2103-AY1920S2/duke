@@ -15,12 +15,17 @@ public class Duke {
         printHomeScreen();
 
         while(programIsRunning){
-            String[] commands = new String[2];
+            String[] input = new String[2];
+            input = getInputSeparateCommandAndDescription();
 
-            commands = getInputSeparateCommands();
+            String command = input[0];
+            String description = "";
+            if (input.length == 2)
+               description = input[1];
+
             CommandStatus commandResult = CommandStatus.FAIL;
 
-            switch(commands[0]) {
+            switch(command) {
             case "bye" :
                 commandResult = handleByeCommand();
                 break;
@@ -28,12 +33,12 @@ public class Duke {
                 commandResult = handleListCommand();
                 break;
             case "done" :
-                commandResult = handleDoneCommand(commands);
+                commandResult = handleDoneCommand(command, description);
                 break;
             case "todo" : // Fallthrough
             case "deadline" : // Fallthrough
             case "event" :
-                commandResult = handleAddCommand(commands);
+                commandResult = handleAddCommand(command, description);
                 break;
             default :
                 System.out.println("I don't understand that command");
@@ -68,7 +73,7 @@ public class Duke {
         return CommandStatus.SUCCESS;
     }
 
-    public static String[] getInputSeparateCommands(){
+    public static String[] getInputSeparateCommandAndDescription(){
         String input = scanner.nextLine();
         input = input.trim();
 
@@ -99,38 +104,46 @@ public class Duke {
     }
 
 
-    public static CommandStatus handleDoneCommand(String[] commands) {
-        if (commands.length < 2){
+        public static CommandStatus handleDoneCommand(String command, String description) {
+        if (description == null){
             return CommandStatus.FAIL;
         }
-        String taskDescription = commands[1];
-
         // Looks for a task with a matching description task to mark as done
-        boolean taskIsFinished = false;
         for (Task task : tasksList) {
             if (task == null) {
-                taskIsFinished = false;
-            } else if (task.description.equals(taskDescription) && task.isDone == false) {
+                return CommandStatus.FAIL;
+            } else if (task.description.equals(description) && task.isDone == false) {
                 task.isDone = true;
-                taskIsFinished =  true;
+
 
                 System.out.print("Nice! I've marked this task as done:\n\t");
                 System.out.println(task);
                 printLineSeparator();
 
-                break;
+                return CommandStatus.SUCCESS;
             }
         }
 
-        if (taskIsFinished){
-            return CommandStatus.SUCCESS;
-        } else {
-            return CommandStatus.FAIL;
-        }
+        return CommandStatus.FAIL;
     }
 
-    public static CommandStatus handleAddCommand(String[] commands) {
-        Task newTask = createTask(commands);
+    public static CommandStatus handleAddCommand(String command, String description) {
+        Task newTask = null;
+
+        switch (command){
+        case "todo" :
+            newTask = createToDo(description);
+            break;
+        case "deadline" :
+            newTask = createDeadline(description);
+            break;
+        case "event":
+            newTask = createEvent(description);
+            break;
+        default:
+            break;
+        }
+
         if (newTask == null){
             return  CommandStatus.FAIL;
         }
@@ -143,45 +156,41 @@ public class Duke {
         return CommandStatus.SUCCESS;
     }
 
-    public static Task createTask(String[] commands){
-        String taskDescription = commands[1];
-        String[] taskDetails = new String[2];
+    public static Todo createToDo(String description){
+        return new Todo(description);
+    }
 
-        Task newTask;
-        switch (commands[0]) {
-        case "todo" :
-            newTask = new Todo(taskDescription);
-            break;
-        case "deadline" :
-            taskDetails = taskDescription.split(" /by ");
-            if (taskDetails.length < NUM_ARGS_DEADLINE){
-                return null;
-            }
-
-            newTask = new Deadlines(taskDetails[0], taskDetails[1]);
-            break;
-        case "event" :
-            taskDetails = taskDescription.split(" /at ");
-            if (taskDetails.length < NUM_ARGS_EVENT){
-                return null;
-            }
-
-            newTask = new Event(taskDetails[0], taskDetails[1]);
-            break;
-        default:
+    public static Deadlines createDeadline(String description){
+        String[] taskDetails = description.split(" /by ");
+        if (taskDetails.length < NUM_ARGS_DEADLINE){
             return null;
         }
 
-        return newTask;
+        return new Deadlines(taskDetails[0], taskDetails[1]);
     }
+
+    public static Event createEvent(String description){
+        String[] taskDetails = description.split(" /at ");
+        if (taskDetails.length < NUM_ARGS_DEADLINE){
+            return null;
+        }
+
+        return new Event(taskDetails[0], taskDetails[1]);
+    }
+    
     public static void printSuccessfulAddEntry(Task newTask) {
         printLineSeparator();
-        System.out.println("Got it. I've added this task:\n\t" + newTask);
-        System.out.print("Now you have " + tasksListIndex + " task");
-        if (tasksListIndex > 1) { 
+
+        System.out.print("Got it. I've added this task:" + System.lineSeparator() +
+                "\t" + newTask + System.lineSeparator()
+                +"Now you have " + tasksListIndex + " task");
+
+        if (tasksListIndex > 1) {
             System.out.print("s");
         }
+
         System.out.println(" in the list.");
+
         printLineSeparator();
     }
 }
