@@ -3,33 +3,41 @@ import java.util.Scanner;
 public class Duke {
     public enum CommandStatus{ SUCCESS, FAIL }
 
-    static final int NUM_ARGS_DEADLINE = 2;
-    static final int NUM_ARGS_EVENT = 2;
+    public static final int NUM_ARGS_DEADLINE = 2;
+    public static final int NUM_ARGS_EVENT = 2;
 
-    static Scanner scanner = new Scanner(System.in);
-    static Task tasksList[] = new Task[100];
-    static int tasksListIndex = 0;
-    static boolean programIsRunning = true;
+    public static Scanner scanner = new Scanner(System.in);
+    public static Task[] tasksList = new Task[100];
+    public static int tasksListIndex = 0;
+    public static boolean programIsRunning = true;
 
     public static void main(String[] args) {
         printHomeScreen();
 
         while(programIsRunning){
-            String commands[] = new String[2];
+            String[] commands = new String[2];
 
             commands = getInputSeparateCommands();
             CommandStatus commandResult = CommandStatus.FAIL;
 
-            if  (commands[0].equals("bye")) {
-                commandResult =  handleByeCommand();
-            } else if (commands[0].equals("list")) {
+            switch(commands[0]) {
+            case "bye" :
+                commandResult = handleByeCommand();
+                break;
+            case "list" :
                 commandResult = handleListCommand();
-            } else if (commands[0].equals("done")) {
-                commandResult = handleDoneCommand (commands);
-            } else if (commands[0].equals("todo") || commands[0].equals("deadline") || commands[0].equals("event")){
+                break;
+            case "done" :
+                commandResult = handleDoneCommand(commands);
+                break;
+            case "todo" : // Fallthrough
+            case "deadline" : // Fallthrough
+            case "event" :
                 commandResult = handleAddCommand(commands);
-            } else {
+                break;
+            default :
                 System.out.println("I don't understand that command");
+                break;
             }
 
             if  (commandResult == CommandStatus.FAIL){
@@ -64,7 +72,7 @@ public class Duke {
         String input = scanner.nextLine();
         input = input.trim();
 
-        String commands[] = new String[2];
+        String[] commands = new String[2];
         commands = input.split(" ", 2);
 
         return commands;
@@ -91,7 +99,7 @@ public class Duke {
     }
 
 
-    public static CommandStatus handleDoneCommand(String commands[]) {
+    public static CommandStatus handleDoneCommand(String[] commands) {
         if (commands.length < 2){
             return CommandStatus.FAIL;
         }
@@ -141,27 +149,27 @@ public class Duke {
 
         Task newTask;
         switch (commands[0]) {
-            case "todo" :
-                newTask = new Todo(taskDescription);
-                break;
-            case "deadline" :
-                taskDetails = taskDescription.split(" /by ");
-                if (taskDetails.length < NUM_ARGS_DEADLINE){
-                    return null;
-                }
-
-                newTask = new Deadlines(taskDetails[0], taskDetails[1]);
-                break;
-            case "event" :
-                taskDetails = taskDescription.split(" /at ");
-                if (taskDetails.length < NUM_ARGS_EVENT){
-                    return null;
-                }
-
-                newTask = new Event(taskDetails[0], taskDetails[1]);
-                break;
-            default:
+        case "todo" :
+            newTask = new Todo(taskDescription);
+            break;
+        case "deadline" :
+            taskDetails = taskDescription.split(" /by ");
+            if (taskDetails.length < NUM_ARGS_DEADLINE){
                 return null;
+            }
+
+            newTask = new Deadlines(taskDetails[0], taskDetails[1]);
+            break;
+        case "event" :
+            taskDetails = taskDescription.split(" /at ");
+            if (taskDetails.length < NUM_ARGS_EVENT){
+                return null;
+            }
+
+            newTask = new Event(taskDetails[0], taskDetails[1]);
+            break;
+        default:
+            return null;
         }
 
         return newTask;
@@ -170,7 +178,7 @@ public class Duke {
         printLineSeparator();
         System.out.println("Got it. I've added this task:\n\t" + newTask);
         System.out.print("Now you have " + tasksListIndex + " task");
-        if (tasksListIndex > 1) {
+        if (tasksListIndex > 1) { 
             System.out.print("s");
         }
         System.out.println(" in the list.");
