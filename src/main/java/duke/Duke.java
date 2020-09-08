@@ -1,4 +1,8 @@
+package duke;
+
 import java.util.Scanner;
+import duke.task.*;
+import duke.exception.DukeException;
 
 public class Duke {
     public static final int NUM_ARGS_DEADLINE = 2;
@@ -118,7 +122,7 @@ public class Duke {
         // Looks for a task with matching the description task and marks it as done
         for(Task task : tasksList) {
             if(task == null) {
-                return;
+                throw new DukeException("Task not found");
             } else if(task.description.equals(description) && !task.isDone ) {
                 task.isDone = true;
 
@@ -172,7 +176,7 @@ public class Duke {
     public static Deadlines createDeadline(String description) throws DukeException{
         String[] taskDetails = description.split(" /by ");
         if(taskDetails.length < NUM_ARGS_DEADLINE){
-            throw new DukeException("The deadline format is: deadline <desc> \\by <time>");
+            throw new DukeException("The deadline format is: deadline <desc> /by <time>");
         }
 
         return new Deadlines(taskDetails[0], taskDetails[1]);
@@ -181,7 +185,7 @@ public class Duke {
     public static Event createEvent(String description) throws DukeException{
         String[] taskDetails = description.split(" /at ");
         if(taskDetails.length < NUM_ARGS_EVENT){
-            throw new DukeException("The event format is: event <desc> \\at <time>");
+            throw new DukeException("The event format is: event <desc> /at <time>");
         }
 
         return new Event(taskDetails[0], taskDetails[1]);
