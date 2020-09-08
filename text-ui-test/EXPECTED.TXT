@@ -2,8 +2,8 @@
 Hello! I'm Duke
 What can I do for you?
 ---------------------------------------
-I don't understand that command
-Command Failed
+Exception!
+	Duke does not understand that command
 ---------------------------------------
 ---------------------------------------
 ---------------------------------------
@@ -40,7 +40,8 @@ Nice! I've marked this task as done:
 2.[E][✘] 123 (at: 12pm)
 3.[D][✓] study (by: Sleeptime)
 ---------------------------------------
-Command Failed
+Exception!
+	The done command format is: done <taskDescription>
 ---------------------------------------
 1.[T][✓] 123
 2.[E][✘] 123 (at: 12pm)
