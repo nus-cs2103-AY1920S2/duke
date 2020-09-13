@@ -1,18 +1,28 @@
 package duke;
 
-import java.util.Scanner;
+
 import duke.task.*;
 import duke.exception.DukeException;
 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
+    public static final String TASKS_LIST_SAVE_PATH = "data/taskList.txt";
+    public static final int SAVE_FILE_ELEMENTS_PER_ROW = 3;
+
     public static final int NUM_ARGS_DEADLINE = 2;
     public static final int NUM_ARGS_EVENT = 2;
 
     public static Scanner scanner = new Scanner(System.in);
-    public static Task[] tasksList = new Task[100];
-    public static int tasksListIndex = 0;
+    public static ArrayList<Task> tasksList = new ArrayList<>();
     public static boolean programIsRunning = true;
 
+    // MAIN LOOP //////////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
         printHomeScreen();
 
@@ -41,6 +51,8 @@ public class Duke {
                 case "event":
                     handleAddCommand(command, description);
                     break;
+                case "delete":
+                    handleDeleteCommand(description);
                 default:
                     throw new DukeException("Duke does not understand that command");
                 }
@@ -51,42 +63,7 @@ public class Duke {
         printExitScreen();
     }
 
-    public static void printHomeScreen(){
-        printLineSeparator();
-        System.out.println("Hello! I'm Duke" + System.lineSeparator() +
-                            "What can I do for you?");
-        printLineSeparator();
-    }
-
-    public static void printExitScreen() {
-        System.out.println("Bye. Hope to see you again soon!");
-        printLineSeparator();
-    }
-
-    public static void printLineSeparator(){
-        System.out.println("---------------------------------------");
-    }
-
-    public static void printSuccessfulAddEntry(Task newTask) {
-        printLineSeparator();
-
-        System.out.print("Got it. I've added this task:" + System.lineSeparator() +
-                "\t" + newTask + System.lineSeparator()
-                +"Now you have " + tasksListIndex + " task");
-
-        if(tasksListIndex > 1) {
-            System.out.print("s");
-        }
-
-        System.out.println(" in the list.");
-
-        printLineSeparator();
-    }
-
-    public static void handleByeCommand(){
-        programIsRunning = false;
-    }
-
+    // GENERAL HELPERS //////////////////////////////////////////////////////////////////////////
     public static String[] getInputSeparateCommandAndDescription(){
         String input = scanner.nextLine();
         input = input.trim();
@@ -95,6 +72,62 @@ public class Duke {
         commands = input.split(" ", 2);
 
         return commands;
+    }
+
+    // PRINT HELPERS //////////////////////////////////////////////////////////////////////////
+    public static void print(String text){
+        System.out.println(text);
+    }
+    public static void printHomeScreen(){
+        printLineSeparator();
+        print("Hello! I'm Duke" + System.lineSeparator() +
+                            "What can I do for you?");
+        printLineSeparator();
+    }
+
+    public static void printExitScreen() {
+        print("Bye. Hope to see you again soon!");
+        printLineSeparator();
+    }
+
+    public static void printNumOfTasks() {
+        int numOfTasks = tasksList.size();
+        System.out.print("Now you have " + numOfTasks + " task");
+
+        if(numOfTasks > 1) {
+            System.out.print("s");
+        }
+
+        print(" in the list.");
+    }
+    public static void printLineSeparator(){
+        print("---------------------------------------");
+    }
+
+    public static void printSuccessfulAddEntry(Task newTask) {
+        printLineSeparator();
+
+        System.out.print("Got it. I've added this task:" + System.lineSeparator() +
+                "\t" + newTask + System.lineSeparator());
+        printNumOfTasks();
+
+        printLineSeparator();
+    }
+
+    public static void printSuccessfulRemoveEntry(Task deletedTask) {
+        printLineSeparator();
+
+        System.out.print("Got it. I've deleted this task:" + System.lineSeparator() +
+                "\t" + deletedTask + System.lineSeparator());
+        printNumOfTasks();
+
+        printLineSeparator();
+    }
+
+
+    // COMMAND HANDLERS //////////////////////////////////////////////////////////////////////////
+    public static void handleByeCommand(){
+        programIsRunning = false;
     }
 
     public static void handleListCommand() {
@@ -106,7 +139,7 @@ public class Duke {
             if(task == null) {
                 break;
             } else {
-                System.out.println(entryNum + "." + task);
+                print(entryNum + "." + task);
                 entryNum++;
             }
         }
@@ -126,7 +159,7 @@ public class Duke {
             } else if(task.description.equals(description) && !task.isDone ) {
                 task.isDone = true;
 
-                System.out.println("Nice! I've marked this task as done:" + System.lineSeparator() +
+                print("Nice! I've marked this task as done:" + System.lineSeparator() +
                                     "\t" + task);
                 printLineSeparator();
 
@@ -135,7 +168,38 @@ public class Duke {
         }
     }
 
-    public static void handleAddCommand(String command, String description) throws DukeException {
+    public static Task handleAddCommand(String command, String description) throws DukeException {
+        Task newTask = createTask(command, description);
+
+        if(newTask == null){
+            throw new DukeException("Unable to create the new Task");
+        }
+
+        tasksList.add(newTask);
+        printSuccessfulAddEntry(newTask);
+
+        return newTask;
+    }
+
+    public static void handleDeleteCommand(String description) throws DukeException{
+        for (Task task: tasksList){
+            if (task.description.equals(description)){
+                tasksList.remove(task);
+                printSuccessfulRemoveEntry(task);
+                return;
+            }
+        }
+
+        throw new DukeException("Task not found");
+    }
+
+    public static void handleException(DukeException exception){
+        print("Exception!" + System.lineSeparator() +
+                            "\t" + exception.description);
+    }
+
+    // TASK CREATION /////////////////////////////////////////////////////////////////////////////
+    public static Task createTask(String command, String description) throws DukeException {
         Task newTask = null;
 
         switch(command){
@@ -151,35 +215,25 @@ public class Duke {
         default:
             break;
         }
-
-        if(newTask == null){
-            throw new DukeException("Unable to create the new Task");
-        }
-
-        tasksList[tasksListIndex] = newTask;
-        tasksListIndex++;
-
-        printSuccessfulAddEntry(newTask);
+        
+        return newTask;
     }
 
-    public static void handleException(DukeException exception){
-        System.out.println("Exception!" + System.lineSeparator() +
-                            "\t" + exception.description);
-    }
     public static Todo createToDo(String description) throws DukeException{
         if (description.equals("")){
             throw new DukeException("The todo format is: todo <desc>");
         }
+
         return new Todo(description);
     }
 
-    public static Deadlines createDeadline(String description) throws DukeException{
+    public static Deadline createDeadline(String description) throws DukeException{
         String[] taskDetails = description.split(" /by ");
         if(taskDetails.length < NUM_ARGS_DEADLINE){
             throw new DukeException("The deadline format is: deadline <desc> /by <time>");
         }
 
-        return new Deadlines(taskDetails[0], taskDetails[1]);
+        return new Deadline(taskDetails[0], taskDetails[1]);
     }
 
     public static Event createEvent(String description) throws DukeException{
@@ -190,5 +244,4 @@ public class Duke {
 
         return new Event(taskDetails[0], taskDetails[1]);
     }
-
 }
