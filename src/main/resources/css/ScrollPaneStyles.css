@@ -1,0 +1,12 @@
+.scroll-pane .viewport {
+    -fx-background-image: url('/images/Background.jpg');
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: black;
+    -fx-border-color: black;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: cyan;
+}
