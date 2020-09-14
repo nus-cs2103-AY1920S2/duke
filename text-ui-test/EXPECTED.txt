@@ -1,0 +1,48 @@
+Hello! I'm Duke
+What can I do for you?
+
+Got it. I've added this task:
+  [T][X] read book
+Now you have 1 task in the list.
+
+Got it. I've added this task:
+  [D][X] return book (by: June 6th)
+Now you have 2 tasks in the list.
+
+Got it. I've added this task:
+  [E][X] project meeting (at: Aug 6th 2-4pm)
+Now you have 3 tasks in the list.
+
+Got it. I've added this task:
+  [T][X] join sports club
+Now you have 4 tasks in the list.
+
+Got it. I've added this task:
+  [T][X] borrow book
+Now you have 5 tasks in the list.
+
+Here are the tasks in your list:
+1.[T][X] read book
+2.[D][X] return book (by: June 6th)
+3.[E][X] project meeting (at: Aug 6th 2-4pm)
+4.[T][X] join sports club
+5.[T][X] borrow book
+
+Nice! I've marked this task as done:
+  [T][Y] read book
+
+Nice! I've marked this task as done:
+  [T][Y] join sports club
+
+Here are the tasks in your list:
+1.[T][Y] read book
+2.[D][X] return book (by: June 6th)
+3.[E][X] project meeting (at: Aug 6th 2-4pm)
+4.[T][Y] join sports club
+5.[T][X] borrow book
+
+Got it. I've added this task:
+  [D][X] return book (by: Sunday)
+Now you have 6 tasks in the list.
+
+Bye. Hope to see you again soon!
