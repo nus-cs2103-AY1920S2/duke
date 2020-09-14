@@ -1,8 +1,8 @@
 package duke.task;
 
-public class Deadlines extends Task {
+public class Deadline extends Task {
     String dueDate;
-    public Deadlines(String description, String dueDate) {
+    public Deadline(String description, String dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
