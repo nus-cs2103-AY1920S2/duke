@@ -61,7 +61,6 @@ public class Duke {
                     break;
                 case "delete":
                     handleDeleteCommand(description);
-                    saveTasksList();
                 default:
                     throw new DukeException("Duke does not understand that command");
                 }
@@ -90,7 +89,11 @@ public class Duke {
     public static void printHomeScreen(){
         printLineSeparator();
         print("Hello! I'm Duke" + System.lineSeparator() +
+<<<<<<< HEAD
+                            "What can I do for you?");
+=======
                 "What can I do for you?");
+>>>>>>> branch-Level-7
         printLineSeparator();
     }
 
@@ -122,10 +125,17 @@ public class Duke {
 
         printLineSeparator();
     }
+<<<<<<< HEAD
 
     public static void printSuccessfulRemoveEntry(Task deletedTask) {
         printLineSeparator();
 
+=======
+
+    public static void printSuccessfulRemoveEntry(Task deletedTask) {
+        printLineSeparator();
+
+>>>>>>> branch-Level-7
         System.out.print("Got it. I've deleted this task:" + System.lineSeparator() +
                 "\t" + deletedTask + System.lineSeparator());
         printNumOfTasks();
@@ -133,6 +143,14 @@ public class Duke {
         printLineSeparator();
     }
 
+<<<<<<< HEAD
+
+    // COMMAND HANDLERS //////////////////////////////////////////////////////////////////////////
+    public static void handleByeCommand(){
+        programIsRunning = false;
+    }
+
+=======
     // READ WRITE//////////////////////////////////////////////////////////////////////////
     public static void loadTasksList() throws DukeException{
         try {
@@ -194,6 +212,7 @@ public class Duke {
         programIsRunning = false;
     }
 
+>>>>>>> branch-Level-7
     public static void handleListCommand() {
         int entryNum = 1;
 
@@ -224,7 +243,11 @@ public class Duke {
                 task.isDone = true;
 
                 print("Nice! I've marked this task as done:" + System.lineSeparator() +
+<<<<<<< HEAD
+                                    "\t" + task);
+=======
                         "\t" + task);
+>>>>>>> branch-Level-7
                 printLineSeparator();
 
                 return;
@@ -245,6 +268,7 @@ public class Duke {
         return newTask;
     }
 
+<<<<<<< HEAD
     public static void handleDeleteCommand(String description) throws DukeException{
         for (Task task: tasksList){
             if (task.description.equals(description)){
@@ -259,10 +283,17 @@ public class Duke {
 
     public static void handleException(DukeException exception){
         print("Exception!" + System.lineSeparator() +
+                            "\t" + exception.description);
+    }
+
+=======
+    public static void handleException(DukeException exception){
+        print("Exception!" + System.lineSeparator() +
                 "\t" + exception.description);
     }
 
 
+>>>>>>> branch-Level-7
     // TASK CREATION /////////////////////////////////////////////////////////////////////////////
     public static Task createTask(String command, String description) throws DukeException {
         Task newTask = null;
@@ -280,7 +311,11 @@ public class Duke {
         default:
             break;
         }
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> branch-Level-7
         return newTask;
     }
 
