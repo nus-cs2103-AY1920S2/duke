@@ -37,3 +37,45 @@ Duke Increment | Tutorial
 
 * If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
 * We welcome pull requests too.
+
+# User Guide
+This is a simple user guide to Duke.
+
+## Features 
+A personal chat-bot to manage your todo-list.
+
+## Usage
+### list - Views your current list of tasks.
+### todo - Adds a task that is to be done.
+### deadline - Adds a task that is to be done by a certain date and time.
+### event - Adds a task that to be done in a certain date and time.
+### done - Marks task as done.
+### delete - Deletes a task from the list.
+### viewstats - Views the stats of your past tasks.
+### bye - Exits the app.
+
+####Example of usage: 
+
+todo read book
+deadline return book /by 2000-01-01 2350
+done 1
+list
+
+Expected outcome:
+
+Hello! I'm Duke.
+What can I do for you?
+
+Got it. I've added this task:
+[T][✘]read book
+Now you have 1 tasks in the list.
+
+Got it. I've added this task:
+[D][✘]return book(by: Jan 1 2000 23:50)
+Now you have 2 tasks in the list.
+
+Nice! I've marked this task as done:
+[T][✓]read book
+
+[T][✓]read book
+[D][✘]return book(by: Jan 1 2000 23:50)
