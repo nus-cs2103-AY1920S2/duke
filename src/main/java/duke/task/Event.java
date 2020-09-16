@@ -1,7 +1,7 @@
 package duke.task;
 
 public class Event extends Task {
-    String timeFrame;
+    public String timeFrame;
     public Event(String description, String timeFrame) {
         super(description);
         this.timeFrame = timeFrame;

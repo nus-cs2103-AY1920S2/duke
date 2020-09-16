@@ -1,6 +1,5 @@
 package duke;
 
-
 import duke.task.*;
 import duke.exception.DukeException;
 
@@ -13,33 +12,41 @@ import java.io.IOException;
 
 public class Duke {
     public static final String TASKS_LIST_SAVE_PATH = "data/taskList.txt";
-    public static final int SAVE_FILE_ELEMENTS_PER_ROW = 3;
 
     public static final int NUM_ARGS_DEADLINE = 2;
     public static final int NUM_ARGS_EVENT = 2;
 
-    public static Scanner scanner = new Scanner(System.in);
     public static ArrayList<Task> tasksList = new ArrayList<>();
     public static boolean programIsRunning = true;
 
     // MAIN LOOP //////////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
+        enter();
+        mainLoop();
+        exit();
+    }
+
+    public static void enter() {
         printHomeScreen();
 
+        // Load save file
         try {
             loadTasksList();
         } catch (DukeException exception){
             handleException(exception);
         }
+    }
 
+    public static void mainLoop() {
         while(programIsRunning){
-            String[] input;
-            input = getInputSeparateCommandAndDescription();
+            String input = getInput();
+            String[] separatedInput = separateCommandAndArguments(input);
 
-            String command = input[0];
-            String description = "";
-            if(input.length == 2)
-                description = input[1];
+            String command = separatedInput[0];
+            String arguments = null;
+            if (separatedInput.length > 1){
+                arguments = separatedInput[1];
+            }
 
             try {
                 switch(command) {
@@ -50,18 +57,16 @@ public class Duke {
                     handleListCommand();
                     break;
                 case "done":
-                    handleDoneCommand(description);
-                    saveTasksList();
+                    handleDoneCommand(arguments);
                     break;
                 case "todo": // Fallthrough
                 case "deadline": // Fallthrough
                 case "event":
-                    handleAddCommand(command, description);
-                    saveTasksList();
+                    handleAddCommand(command, arguments);
                     break;
                 case "delete":
-                    handleDeleteCommand(description);
-                    saveTasksList();
+                    handleDeleteCommand(arguments);
+                    break;
                 default:
                     throw new DukeException("Duke does not understand that command");
                 }
@@ -69,55 +74,60 @@ public class Duke {
                 handleException(exception);
             }
         }
+    }
+
+    public static void exit() {
         printExitScreen();
     }
 
-    // GENERAL HELPERS //////////////////////////////////////////////////////////////////////////
-    public static String[] getInputSeparateCommandAndDescription(){
-        String input = scanner.nextLine();
+
+    // INPUT PARSING ////// //////////////////////////////////////////////////////////////////////////
+    public static String getInput(){
+        Scanner inputScanner = new Scanner(System.in);
+        String input = inputScanner.nextLine();
         input = input.trim();
 
-        String[] commands;
-        commands = input.split(" ", 2);
+        return input;
+    }
 
-        return commands;
+    public static String[] separateCommandAndArguments(String input) {
+        return input.split(" ", 2);
     }
 
     // PRINT HELPERS //////////////////////////////////////////////////////////////////////////
     public static void print(String text){
         System.out.println(text);
     }
+
+    public static void printLineSeparator(){
+        print("---------------------------------------");
+    }
+
+    public static void printNumOfTasks() {
+        int numOfTasks = tasksList.size();
+        print("Now you have " + numOfTasks + " task(s)in the list.");
+    }
+
     public static void printHomeScreen(){
         printLineSeparator();
+
         print("Hello! I'm Duke" + System.lineSeparator() +
                 "What can I do for you?");
+
         printLineSeparator();
     }
 
     public static void printExitScreen() {
         print("Bye. Hope to see you again soon!");
+
         printLineSeparator();
-    }
-
-    public static void printNumOfTasks() {
-        int numOfTasks = tasksList.size();
-        System.out.print("Now you have " + numOfTasks + " task");
-
-        if(numOfTasks > 1) {
-            System.out.print("s");
-        }
-
-        print(" in the list.");
-    }
-    public static void printLineSeparator(){
-        print("---------------------------------------");
     }
 
     public static void printSuccessfulAddEntry(Task newTask) {
         printLineSeparator();
 
-        System.out.print("Got it. I've added this task:" + System.lineSeparator() +
-                "\t" + newTask + System.lineSeparator());
+        print("Got it. I've added this task:" + System.lineSeparator() +
+                "\t" + newTask);
         printNumOfTasks();
 
         printLineSeparator();
@@ -126,9 +136,26 @@ public class Duke {
     public static void printSuccessfulRemoveEntry(Task deletedTask) {
         printLineSeparator();
 
-        System.out.print("Got it. I've deleted this task:" + System.lineSeparator() +
-                "\t" + deletedTask + System.lineSeparator());
+        print("Got it. I've deleted this task:" + System.lineSeparator() +
+                "\t" + deletedTask);
         printNumOfTasks();
+
+        printLineSeparator();
+    }
+
+    public static void printList() {
+        int entryNum = 1;
+
+        printLineSeparator();
+
+        for(Task task : tasksList) {
+            if(task == null) {
+                break;
+            }
+
+            print(entryNum + "." + task);
+            entryNum++;
+        }
 
         printLineSeparator();
     }
@@ -136,51 +163,71 @@ public class Duke {
     // READ WRITE//////////////////////////////////////////////////////////////////////////
     public static void loadTasksList() throws DukeException{
         try {
-            File saveFile = new File(TASKS_LIST_SAVE_PATH); // create a File for the given file path
-            Scanner saveFileScanner = new Scanner(saveFile); // create a Scanner using the File as the source
+            File saveFile = new File(TASKS_LIST_SAVE_PATH);
+            Scanner saveFileScanner = new Scanner(saveFile);
 
             while (saveFileScanner.hasNext()) {
                 String curLine = saveFileScanner.nextLine();
-                String[] taskDesc = curLine.split(" \\| ");
+                String[] taskDesc = curLine.split("\\|");
 
-                if (taskDesc.length != SAVE_FILE_ELEMENTS_PER_ROW){
-                    throw new DukeException("Incorrect formatting in save file");
+                String command = taskDesc[0];
+                String taskArgs = "";
+                switch (command) {
+                case "todo":
+                    taskArgs = taskDesc[2];
+                    break;
+                case "deadline":
+                    taskArgs = taskDesc[2] + " /by " + taskDesc[3];
+                    break;
+                case "event":
+                    taskArgs = taskDesc[2] + " /at " + taskDesc[3];
+                    break;
                 }
-                Task newTask = createTask(taskDesc[0].toLowerCase(), taskDesc[2]);
-                tasksList.add(newTask);
+
+                Task newTask = createTask(taskDesc[0], taskArgs);
                 newTask.isDone = Boolean.parseBoolean(taskDesc[1]);
+                tasksList.add(newTask);
             }
         } catch (FileNotFoundException e) {
             throw new DukeException("Unable to read save File");
         }
 
         printLineSeparator();
-        print("Succesfully loaded Data!");
+        print("Successfully loaded Data!");
         printLineSeparator();
     }
 
     public static void saveTasksList() throws DukeException {
         File saveFile = new File(TASKS_LIST_SAVE_PATH);
+        createDirectories(saveFile);
+        createSaveFile();
+    }
+
+    public static void createDirectories(File saveFile) throws DukeException {
         boolean fileExists = saveFile.exists();
 
-        try {
-            if (!fileExists) {
+        if (!fileExists) {
+            try {
                 saveFile.getParentFile().mkdirs();
                 saveFile.createNewFile();
+            } catch (IOException exception) {
+                throw new DukeException("Cannot create directories and files");
             }
-
-        } catch (IOException exception) {
-            throw new DukeException("Cannot create directories and files");
         }
+    }
 
+    public static void createSaveFile() throws DukeException {
         try {
             FileWriter saveFileWriter = new FileWriter(TASKS_LIST_SAVE_PATH);
 
-            for (Task task : tasksList){
-                String textLineToAdd = task.getClass().getSimpleName() + " | " +
-                        task.isDone + " | " +
-                        task.description + "\n";
-                saveFileWriter.write(textLineToAdd);
+            for (Task task : tasksList) {
+                if (task instanceof  Todo){
+                    storeLine(saveFileWriter, "todo", Boolean.toString(task.isDone), task.description);
+                }else if (task instanceof Deadline) {
+                    storeLine(saveFileWriter, "deadline", Boolean.toString(task.isDone), task.description, ((Deadline) task).dueDate);
+                } else if (task instanceof Event) {
+                    storeLine(saveFileWriter, "event", Boolean.toString(task.isDone), task.description, ((Event) task).timeFrame);
+                }
             }
 
             saveFileWriter.close();
@@ -189,50 +236,47 @@ public class Duke {
         }
     }
 
+    public static void storeLine(FileWriter saveFileWriter, String ... elements) throws IOException {
+        StringBuilder lineToStore = new StringBuilder();
+        for (String element : elements) {
+            lineToStore.append(element).append("|");
+        }
+        lineToStore.append("\n");
+        saveFileWriter.write(lineToStore.toString());
+    }
+
     // COMMAND HANDLERS //////////////////////////////////////////////////////////////////////////
     public static void handleByeCommand(){
         programIsRunning = false;
     }
 
     public static void handleListCommand() {
-        int entryNum = 1;
-
-        printLineSeparator();
-
-        for(Task task : tasksList) {
-            if(task == null) {
-                break;
-            } else {
-                print(entryNum + "." + task);
-                entryNum++;
-            }
-        }
-
-        printLineSeparator();
+        printList();
     }
 
     public static void handleDoneCommand(String description) throws DukeException{
-        if(description.equals("")){
+        if(description == null){
             throw new DukeException("The done command format is: done <taskDescription>");
         }
 
         // Looks for a task with matching the description task and marks it as done
         for(Task task : tasksList) {
-            if(task == null) {
-                throw new DukeException("Task not found");
-            } else if(task.description.equals(description) && !task.isDone ) {
+           if(task.description.equals(description) && !task.isDone ) {
                 task.isDone = true;
 
                 print("Nice! I've marked this task as done:" + System.lineSeparator() +
                         "\t" + task);
                 printLineSeparator();
 
+                saveTasksList();
                 return;
             }
         }
+
+        throw new DukeException("Task not found");
     }
 
-    public static Task handleAddCommand(String command, String description) throws DukeException {
+    public static void handleAddCommand(String command, String description) throws DukeException {
         Task newTask = createTask(command, description);
 
         if(newTask == null){
@@ -242,7 +286,7 @@ public class Duke {
         tasksList.add(newTask);
         printSuccessfulAddEntry(newTask);
 
-        return newTask;
+        saveTasksList();
     }
 
     public static void handleDeleteCommand(String description) throws DukeException{
@@ -250,6 +294,8 @@ public class Duke {
             if (task.description.equals(description)){
                 tasksList.remove(task);
                 printSuccessfulRemoveEntry(task);
+
+                saveTasksList();
                 return;
             }
         }
@@ -262,22 +308,19 @@ public class Duke {
                 "\t" + exception.description);
     }
 
-
     // TASK CREATION /////////////////////////////////////////////////////////////////////////////
     public static Task createTask(String command, String description) throws DukeException {
         Task newTask = null;
 
-        switch(command){
-        case "todo" :
+        switch (command) {
+        case "todo":
             newTask = createToDo(description);
             break;
-        case "deadline" :
+        case "deadline":
             newTask = createDeadline(description);
             break;
         case "event":
             newTask = createEvent(description);
-            break;
-        default:
             break;
         }
 
@@ -285,7 +328,7 @@ public class Duke {
     }
 
     public static Todo createToDo(String description) throws DukeException{
-        if (description.equals("")){
+        if (description == null){
             throw new DukeException("The todo format is: todo <desc>");
         }
 
