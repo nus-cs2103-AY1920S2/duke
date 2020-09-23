@@ -43,19 +43,19 @@ public class Duke {
         // Load save file
         try {
             loadTasksList();
-        } catch (DukeException exception){
+        } catch (DukeException exception) {
             handleException(exception);
         }
     }
 
     public static void mainLoop() {
-        while(programIsRunning){
+        while(programIsRunning) {
             String input = getInput();
             String[] separatedInput = separateCommandAndArguments(input);
 
             String command = separatedInput[0];
             String arguments = null;
-            if (separatedInput.length > 1){
+            if (separatedInput.length > 1) {
                 arguments = separatedInput[1];
             }
 
@@ -93,7 +93,7 @@ public class Duke {
 
 
     // INPUT PARSING ////// //////////////////////////////////////////////////////////////////////////
-    public static String getInput(){
+    public static String getInput() {
         Scanner inputScanner = new Scanner(System.in);
         String input = inputScanner.nextLine();
         input = input.trim();
@@ -106,11 +106,11 @@ public class Duke {
     }
 
     // PRINT HELPERS //////////////////////////////////////////////////////////////////////////
-    public static void print(String text){
+    public static void print(String text) {
         System.out.println(text);
     }
 
-    public static void printLineSeparator(){
+    public static void printLineSeparator() {
         print("---------------------------------------");
     }
 
@@ -119,7 +119,7 @@ public class Duke {
         print("Now you have " + numOfTasks + " task(s)in the list.");
     }
 
-    public static void printHomeScreen(){
+    public static void printHomeScreen() {
         printLineSeparator();
 
         print("Hello! I'm Duke" + System.lineSeparator() +
@@ -154,6 +154,12 @@ public class Duke {
         printLineSeparator();
     }
 
+    public static void printDataLoadSuccess() {
+        printLineSeparator();
+        print("Successfully loaded Data!");
+        printLineSeparator();
+    }
+
     public static void printList() {
         int entryNum = 1;
 
@@ -171,12 +177,13 @@ public class Duke {
         printLineSeparator();
     }
 
-    // READ WRITE//////////////////////////////////////////////////////////////////////////
+    // READ FILE//////////////////////////////////////////////////////////////////////////
     public static void loadTasksList() throws DukeException{
         try {
             File saveFile = new File(TASKS_LIST_SAVE_PATH);
             Scanner saveFileScanner = new Scanner(saveFile);
 
+            // parses each line in the save file, add them to the taskList one by one.
             while (saveFileScanner.hasNext()) {
                 String curLine = saveFileScanner.nextLine();
                 String[] taskDesc = curLine.split("\\|");
@@ -203,11 +210,10 @@ public class Duke {
             throw new DukeException(CANNOT_READ_SAVE_FILE);
         }
 
-        printLineSeparator();
-        print("Successfully loaded Data!");
-        printLineSeparator();
+        printDataLoadSuccess();
     }
 
+    // WRITE FILE//////////////////////////////////////////////////////////////////////////
     public static void saveTasksList() throws DukeException {
         File saveFile = new File(TASKS_LIST_SAVE_PATH);
         createDirectories(saveFile);
@@ -231,8 +237,9 @@ public class Duke {
         try {
             FileWriter saveFileWriter = new FileWriter(TASKS_LIST_SAVE_PATH);
 
+            // write each task as its own line in the save file
             for (Task task : tasksList) {
-                if (task instanceof  Todo){
+                if (task instanceof  Todo) {
                     storeLine(saveFileWriter, "todo", Boolean.toString(task.isDone), task.description);
                 }else if (task instanceof Deadline) {
                     storeLine(saveFileWriter, "deadline", Boolean.toString(task.isDone), task.description, ((Deadline) task).dueDate);
@@ -257,7 +264,7 @@ public class Duke {
     }
 
     // COMMAND HANDLERS //////////////////////////////////////////////////////////////////////////
-    public static void handleByeCommand(){
+    public static void handleByeCommand() {
         programIsRunning = false;
     }
 
@@ -266,7 +273,7 @@ public class Duke {
     }
 
     public static void handleDoneCommand(String description) throws DukeException{
-        if(description == null){
+        if(description == null) {
             throw new DukeException(DONE_COMMAND_FORMAT);
         }
 
@@ -290,7 +297,7 @@ public class Duke {
     public static void handleAddCommand(String command, String description) throws DukeException {
         Task newTask = createTask(command, description);
 
-        if(newTask == null){
+        if(newTask == null) {
             throw new DukeException(CANNOT_CREATE_TASK);
         }
 
@@ -301,8 +308,8 @@ public class Duke {
     }
 
     public static void handleDeleteCommand(String description) throws DukeException{
-        for (Task task: tasksList){
-            if (task.description.equals(description)){
+        for (Task task: tasksList) {
+            if (task.description.equals(description)) {
                 tasksList.remove(task);
                 printSuccessfulRemoveEntry(task);
 
@@ -314,7 +321,7 @@ public class Duke {
         throw new DukeException(TASK_NOT_FOUND);
     }
 
-    public static void handleException(DukeException exception){
+    public static void handleException(DukeException exception) {
         print("Exception!" + System.lineSeparator() +
                 "\t" + exception.description);
     }
@@ -339,7 +346,7 @@ public class Duke {
     }
 
     public static Todo createToDo(String description) throws DukeException{
-        if (description == null){
+        if (description == null) {
             throw new DukeException(TODO_FORMAT);
         }
 
@@ -348,7 +355,7 @@ public class Duke {
 
     public static Deadline createDeadline(String description) throws DukeException{
         String[] taskDetails = description.split(" /by ");
-        if(taskDetails.length < NUM_ARGS_DEADLINE){
+        if(taskDetails.length < NUM_ARGS_DEADLINE) {
             throw new DukeException(DEADLINE_FORMAT);
         }
 
@@ -357,7 +364,7 @@ public class Duke {
 
     public static Event createEvent(String description) throws DukeException{
         String[] taskDetails = description.split(" /at ");
-        if(taskDetails.length < NUM_ARGS_EVENT){
+        if(taskDetails.length < NUM_ARGS_EVENT) {
             throw new DukeException(EVENT_FORMAT);
         }
 
