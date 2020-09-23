@@ -12,9 +12,20 @@ import java.io.IOException;
 
 public class Duke {
     public static final String TASKS_LIST_SAVE_PATH = "data/taskList.txt";
-
     public static final int NUM_ARGS_DEADLINE = 2;
     public static final int NUM_ARGS_EVENT = 2;
+
+    // Error Messages
+    public static final String BAD_COMMAND = "Duke does not understand that command";
+    public static final String CANNOT_READ_SAVE_FILE = "Cannot to read save File";
+    public static final String CANNOT_CREATE_DIRECTORIES_AND_FILES = "Cannot create directories and files";
+    public static final String CANNOT_WRITE_TO_TASK_LIST_SAVE_FILE = "Cannot write to task list save file";
+    public static final String CANNOT_CREATE_TASK = "Unable to create the new Task";
+    public static final String TASK_NOT_FOUND = "Task not found";
+    public static final String DONE_COMMAND_FORMAT = "The done command format is: done <taskDescription>";
+    public static final String TODO_FORMAT = "The todo format is: todo <desc>";
+    public static final String EVENT_FORMAT = "The event format is: event <desc> /at <time>";
+    public static final String DEADLINE_FORMAT = "The deadline format is: deadline <desc> /by <time>";
 
     public static ArrayList<Task> tasksList = new ArrayList<>();
     public static boolean programIsRunning = true;
@@ -68,7 +79,7 @@ public class Duke {
                     handleDeleteCommand(arguments);
                     break;
                 default:
-                    throw new DukeException("Duke does not understand that command");
+                    throw new DukeException(BAD_COMMAND);
                 }
             } catch(DukeException exception) {
                 handleException(exception);
@@ -189,7 +200,7 @@ public class Duke {
                 tasksList.add(newTask);
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("Unable to read save File");
+            throw new DukeException(CANNOT_READ_SAVE_FILE);
         }
 
         printLineSeparator();
@@ -211,7 +222,7 @@ public class Duke {
                 saveFile.getParentFile().mkdirs();
                 saveFile.createNewFile();
             } catch (IOException exception) {
-                throw new DukeException("Cannot create directories and files");
+                throw new DukeException(CANNOT_CREATE_DIRECTORIES_AND_FILES);
             }
         }
     }
@@ -232,7 +243,7 @@ public class Duke {
 
             saveFileWriter.close();
         } catch (IOException exception) {
-            throw new DukeException("Cannot write to task list save file");
+            throw new DukeException(CANNOT_WRITE_TO_TASK_LIST_SAVE_FILE);
         }
     }
 
@@ -256,7 +267,7 @@ public class Duke {
 
     public static void handleDoneCommand(String description) throws DukeException{
         if(description == null){
-            throw new DukeException("The done command format is: done <taskDescription>");
+            throw new DukeException(DONE_COMMAND_FORMAT);
         }
 
         // Looks for a task with matching the description task and marks it as done
@@ -273,14 +284,14 @@ public class Duke {
             }
         }
 
-        throw new DukeException("Task not found");
+        throw new DukeException(TASK_NOT_FOUND);
     }
 
     public static void handleAddCommand(String command, String description) throws DukeException {
         Task newTask = createTask(command, description);
 
         if(newTask == null){
-            throw new DukeException("Unable to create the new Task");
+            throw new DukeException(CANNOT_CREATE_TASK);
         }
 
         tasksList.add(newTask);
@@ -300,7 +311,7 @@ public class Duke {
             }
         }
 
-        throw new DukeException("Task not found");
+        throw new DukeException(TASK_NOT_FOUND);
     }
 
     public static void handleException(DukeException exception){
@@ -329,7 +340,7 @@ public class Duke {
 
     public static Todo createToDo(String description) throws DukeException{
         if (description == null){
-            throw new DukeException("The todo format is: todo <desc>");
+            throw new DukeException(TODO_FORMAT);
         }
 
         return new Todo(description);
@@ -338,7 +349,7 @@ public class Duke {
     public static Deadline createDeadline(String description) throws DukeException{
         String[] taskDetails = description.split(" /by ");
         if(taskDetails.length < NUM_ARGS_DEADLINE){
-            throw new DukeException("The deadline format is: deadline <desc> /by <time>");
+            throw new DukeException(DEADLINE_FORMAT);
         }
 
         return new Deadline(taskDetails[0], taskDetails[1]);
@@ -347,7 +358,7 @@ public class Duke {
     public static Event createEvent(String description) throws DukeException{
         String[] taskDetails = description.split(" /at ");
         if(taskDetails.length < NUM_ARGS_EVENT){
-            throw new DukeException("The event format is: event <desc> /at <time>");
+            throw new DukeException(EVENT_FORMAT);
         }
 
         return new Event(taskDetails[0], taskDetails[1]);
