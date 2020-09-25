@@ -9,9 +9,20 @@ import duke.command.ByeCommand;
 
 import duke.exception.DukeException;
 
+/**
+ * This class delegates a specific command subclass based on used input by
+ * instancing the correct subclass.
+ */
 public class CommandParser {
     public static final String BAD_COMMAND = "Duke does not understand that command";
 
+    /**
+     * Derives the correct Command object base on the description received.
+     *
+     * @param commandDesc describes the type of command as well as additional details it may need.
+     * @return A Command object that can be run
+     * @throws  DukeException unable to generate command as the description not recognized
+     */
     public static Command parseCommand(String[] commandDesc) throws DukeException {
         String commandName = commandDesc[0];
         String arguments = null;
