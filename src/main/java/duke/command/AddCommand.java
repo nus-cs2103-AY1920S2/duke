@@ -9,12 +9,8 @@ import duke.task.*;
  * handles the add command
  */
 public class AddCommand extends Command {
-    public static final String CANNOT_CREATE_TASK = "Unable to create the new Task";
-    private static final int NUM_ARGS_DEADLINE = 2;
-    private static final int NUM_ARGS_EVENT = 2;
-
-    private String command;
-    private String description;
+    private final String command;
+    private final String description;
 
     /**
      * Constructs a AddCommand and sets command type and description.

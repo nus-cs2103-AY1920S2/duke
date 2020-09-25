@@ -118,7 +118,8 @@ public class TasksList {
         Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}"); // Looks for YYYY-MM-DD or YYYY-DD-MM formatting
         Matcher matcher = pattern.matcher(str);
 
-        Boolean isDateFound = matcher.find();
+        boolean isDateFound = matcher.find();
+
         if (isDateFound) {
             try {
                 String match = matcher.group();

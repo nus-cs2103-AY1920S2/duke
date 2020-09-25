@@ -1,11 +1,6 @@
 package duke.io;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ByeCommand;
+import duke.command.*;
 
 import duke.exception.DukeException;
 
@@ -48,6 +43,9 @@ public class CommandParser {
             break;
         case "delete":
             command = new DeleteCommand(arguments);
+            break;
+        case "find":
+            command = new FindCommand(arguments);
             break;
         default:
             throw new DukeException(BAD_COMMAND);

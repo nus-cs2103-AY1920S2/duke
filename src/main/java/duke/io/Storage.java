@@ -2,7 +2,6 @@ package duke.io;
 
 import duke.exception.DukeException;
 import duke.task.*;
-import duke.task.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;

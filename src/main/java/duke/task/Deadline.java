@@ -20,7 +20,6 @@ public class Deadline extends Task {
           this.endDate = endDate;
      }
 
-
     /**
      * Returns us a String representation of the Deadline
      * useful for printing our task details.
