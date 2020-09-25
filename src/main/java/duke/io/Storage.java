@@ -119,9 +119,9 @@ public class Storage {
                 if (task instanceof Todo) {
                     storeLine(saveFileWriter, "todo", Boolean.toString(task.isDone), task.description);
                 }else if (task instanceof Deadline) {
-                    storeLine(saveFileWriter, "deadline", Boolean.toString(task.isDone), task.description, ((Deadline) task).endDate.toString());
+                    storeLine(saveFileWriter, "deadline", Boolean.toString(task.isDone), task.description, ((Deadline) task).dueDate.toString());
                 } else if (task instanceof Event) {
-                    storeLine(saveFileWriter, "event", Boolean.toString(task.isDone), task.description, ((Event) task).endDate.toString());
+                    storeLine(saveFileWriter, "event", Boolean.toString(task.isDone), task.description, ((Event) task).startDate.toString());
                 }
             }
 

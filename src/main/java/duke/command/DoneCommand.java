@@ -6,7 +6,6 @@ import duke.io.Ui;
 import duke.task.Task;
 import duke.task.TasksList;
 
-
 /**
  * The handler for the done command
  */

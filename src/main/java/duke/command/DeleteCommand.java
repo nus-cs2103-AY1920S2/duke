@@ -21,7 +21,6 @@ public class DeleteCommand extends Command {
         this.description = description;
     }
 
-
     /**
      * Deletes the first instance of a task with a matching description to 'description'
      *

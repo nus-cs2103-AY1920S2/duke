@@ -140,14 +140,6 @@ public class Ui {
         printLineSeparator();
     }
 
-    /**
-     * Prints the each task and its details in the taskList
-     * as well as a numbering in order from first element(top) to last (bottom)
-     * @param tasksList  the taskList to print tasks from
-     */
-    public void printList(TasksList tasksList) {
-        int entryNum = 1;
-    }
 
     public void printFoundItems(ArrayList<Task> foundTasks){
         printLineSeparator();
@@ -162,6 +154,12 @@ public class Ui {
         printLineSeparator();
     }
 
+
+    /**
+     * Prints the each task and its details in the taskList
+     * as well as a numbering in order from first element(top) to last (bottom)
+     * @param tasksList  the taskList to print tasks from
+     */
     public void printTasksList(TasksList tasksList) {
         printLineSeparator();
         printTasks(tasksList.tasks);

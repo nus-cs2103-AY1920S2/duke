@@ -18,7 +18,7 @@ public class AddCommand extends Command {
      * @param command the type of command subclass that this.execute() produces
      * @param description  additional data the command may need to execute.
      */
-    public AddCommand(String command, String description) throws DukeException {
+    public AddCommand(String command, String description) {
         this.command = command;
         this.description = description;
     }
