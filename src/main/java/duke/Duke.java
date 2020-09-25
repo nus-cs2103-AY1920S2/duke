@@ -18,12 +18,13 @@ public class Duke {
     public static boolean programIsRunning = true;
 
     public static void main(String[] args) {
-        new Duke(TASKS_LIST_SAVE_PATH).run();
+        enter();
+        mainLoop();
+        exit();
     }
-
-    public Duke(String filePath) {
+    public static void enter() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(TASKS_LIST_SAVE_PATH);
         try {
             tasks = storage.loadTasksList();
             ui.printDataLoadSuccess();
@@ -31,28 +32,21 @@ public class Duke {
             ui.handleException(e);
             tasks = new TasksList();
         }
-    }
 
-    public static void run(){
-        enter();
-        mainLoop();
-        exit();
-    }
-    public static void enter() {
         ui.printHomeScreen();
     }
 
     public static void mainLoop() {
         while(programIsRunning) {
             try{
-            String input = ui.getInput();
-            String[] separatedInput = ui.separateCommandAndArguments(input);
-            Command command = CommandParser.parseCommand(separatedInput);
-            command.execute(tasks, ui ,storage);
+                String input = ui.getInput();
+                String[] separatedInput = ui.separateCommandAndArguments(input);
+                Command command = CommandParser.parseCommand(separatedInput);
+                command.execute(tasks, ui ,storage);
 
-            if (command.isExit) {
-                break;
-            }
+                if (command.isExit) {
+                    break;
+                }
             } catch(DukeException exception) {
                 ui.handleException(exception);
             }

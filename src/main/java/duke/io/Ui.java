@@ -3,6 +3,8 @@ package duke.io;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TasksList;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -80,20 +82,37 @@ public class Ui {
         printLineSeparator();
     }
 
-    public void printList(TasksList tasksList) {
-        int entryNum = 1;
 
+
+    public void printFoundItems(ArrayList<Task> foundTasks){
         printLineSeparator();
 
-        for(Task task : tasksList.tasks) {
-            if(task == null) {
+        print("Here are the matching tasks in your list");
+        printTasks(foundTasks);
+        printLineSeparator();
+    }
+    public void printNoFoundItems(){
+        printLineSeparator();
+        print("No matching tasks");
+        printLineSeparator();
+    }
+
+    public void printTasksList(TasksList tasksList) {
+        printLineSeparator();
+        printTasks(tasksList.tasks);
+        printLineSeparator();
+    }
+
+    public void printTasks(ArrayList<Task> tasks) {
+        int entryNum = 1;
+        for (Task task : tasks) {
+            if (task == null) {
                 break;
             }
 
             print(entryNum + "." + task);
             entryNum++;
         }
-
-        printLineSeparator();
     }
+
 }

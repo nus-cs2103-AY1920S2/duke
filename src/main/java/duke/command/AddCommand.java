@@ -6,12 +6,8 @@ import duke.io.Ui;
 import duke.task.*;
 
 public class AddCommand extends Command {
-    public static final String CANNOT_CREATE_TASK = "Unable to create the new Task";
-    private static final int NUM_ARGS_DEADLINE = 2;
-    private static final int NUM_ARGS_EVENT = 2;
-
-    private String command;
-    private String description;
+    private final String command;
+    private final String description;
 
     public AddCommand(String command, String description) throws DukeException {
         this.command = command;
@@ -34,6 +30,7 @@ public class AddCommand extends Command {
         }
 
         ui.printSuccessfulAddEntry(tasksList, newTask);
+        storage.saveTasksList(tasksList);
     }
 
 }
