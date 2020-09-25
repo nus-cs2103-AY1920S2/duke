@@ -1,13 +1,12 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+<<<<<<< HEAD
 
 /**
  * A subclass of Task that has a start time
  */
 public class Event extends Task {
-    public LocalDate endDate;
+    public String timeStart;
 
     /**
      * Constructs a Event with a description and marks it if it is done
@@ -16,17 +15,32 @@ public class Event extends Task {
      * @param timeStart The time the Event begins or starts.
      * @param isDone A Event can be marked as done or finished.
      */
+    public Event(String description, String timeStart, boolean isDone) {
+        super(description, isDone);
+        this.timeStart = timeStart;
+=======
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class Event extends Task {
+    public LocalDate endDate;
+
     public Event(String description, LocalDate endDate, boolean isDone) {
         super(description, isDone);
         this.endDate = endDate;
+>>>>>>> 43849b1ebf23ea86fb743e2ea82eb9927b7a1313
     }
 
     /**
-     * Returns us a String representation of the Event 
+     * Returns us a String representation of the Event
      * useful for printing our task details.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + endDate.format(DateTimeFormatter.ofPattern("MM dd yyyy")) + ")";
+<<<<<<< HEAD
+        return "[E]" + super.toString() + " (at: " + timeStart + ")";
+=======
+        return "[E]" + super.toString() + " (at: " + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+>>>>>>> 43849b1ebf23ea86fb743e2ea82eb9927b7a1313
     }
 }

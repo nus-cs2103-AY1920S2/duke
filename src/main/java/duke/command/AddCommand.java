@@ -51,6 +51,7 @@ public class AddCommand extends Command {
         }
 
         ui.printSuccessfulAddEntry(tasksList, newTask);
+        storage.saveTasksList(tasksList);
     }
 
 }
