@@ -74,6 +74,7 @@ public class TasksList {
         return newTask;
     }
 
+<<<<<<< HEAD
     /**
      * Creates and adds a Event to the ArrayList with specified details in the arguments.
      *
@@ -83,6 +84,10 @@ public class TasksList {
      * @throws DukeException  If the format add command is wrong
      */
     public Event addEvent(String description, boolean isDone) throws DukeException{
+=======
+    public Event addEvent(String description, boolean isDone) throws DukeException {
+
+>>>>>>> 43849b1ebf23ea86fb743e2ea82eb9927b7a1313
         String[] taskDetails = description.split(" /at ");
         if (taskDetails.length < NUM_ARGS_EVENT) {
             throw new DukeException(EVENT_FORMAT);
