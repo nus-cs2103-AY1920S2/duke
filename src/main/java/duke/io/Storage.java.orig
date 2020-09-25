@@ -122,7 +122,11 @@ public class Storage {
                 }else if (task instanceof Deadline) {
                     storeLine(saveFileWriter, "deadline", Boolean.toString(task.isDone), task.description, ((Deadline) task).endDate.toString());
                 } else if (task instanceof Event) {
+<<<<<<< HEAD
+                    storeLine(saveFileWriter, "event", Boolean.toString(task.isDone), task.description, ((Event) task).timeStart);
+=======
                     storeLine(saveFileWriter, "event", Boolean.toString(task.isDone), task.description, ((Event) task).endDate.toString());
+>>>>>>> 43849b1ebf23ea86fb743e2ea82eb9927b7a1313
                 }
             }
 
