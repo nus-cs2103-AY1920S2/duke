@@ -6,7 +6,7 @@
 ### Duke is a platform to  compile and organize your tasks.
 Keeping track of todos, event and deadlines that you add. Duke can show a list of all the tasks that you need to do and provide useful  commands to mark them as done, delete or find tasks.
 
-### Duke automattically saves and loads your tasks
+### Duke automatically saves and loads your tasks
 You can always come back later to find your last session automatically loaded without having to type additional commands. Tasks are also stored in plaintext for easy manipulation.
 
 ## Usage
