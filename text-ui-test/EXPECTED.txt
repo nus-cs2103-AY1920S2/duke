@@ -1,0 +1,36 @@
+Hello from
+ ____        _
+|  _ \ _   _| | _____
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [D][✘] assignment (by: next week)
+Now you have 1 task in the list.
+Got it. I've added this task:
+  [D][✘] project (by: 2359)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+  [T][✘] individual project
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1.[D][✘] assignment (by: next week)
+2.[D][✘] project (by: 2359)
+3.[T][✘] individual project
+Got it. I've added this task:
+  [E][✘] meeting with group members (at: SOC)
+Now you have 4 tasks in the list.
+Got it. I've added this task:
+  [T][✘] teamProject
+Now you have 5 tasks in the list.
+Nice! I've marked this task as done:
+  [T][✓] individual project
+Here are the tasks in your list:
+1.[D][✘] assignment (by: next week)
+2.[D][✘] project (by: 2359)
+3.[T][✓] individual project
+4.[E][✘] meeting with group members (at: SOC)
+5.[T][✘] teamProject
+Bye. Hope to see you again soon!
