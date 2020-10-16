@@ -12,3 +12,11 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+/text-ui-test/ACTUAL.txt
+text-ui-test/EXPECTED-UNIX.TXT
+
+# Vim files
+*.swp
+*.un~
+

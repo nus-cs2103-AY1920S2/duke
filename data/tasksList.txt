@@ -1,0 +1,8 @@
+event|true|asds|2222-12-13|
+deadline|false|asddssssssss|2222-10-23|
+event|false|asdads|1231-12-22|
+deadline|false|asdadssaas|1225-12-12|
+todo|true|123|
+todo|true|find my dog|
+event|false|visit my cat|2021-11-12|
+deadline|false|adopt a cat|2021-11-11|
