@@ -172,7 +172,6 @@ Let's create a new `Main` class as the bridge between the existing logic in `Duk
 
 **Main.java**
 ```java
-@Override
 import java.io.IOException;
 
 import javafx.application.Application;
