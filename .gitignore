@@ -12,3 +12,10 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+.settings/
+.classpath
+.project
+
+.vscode/
+libraries/
