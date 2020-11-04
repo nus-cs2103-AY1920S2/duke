@@ -1,0 +1,12 @@
+todo read book
+deadline return book /by June 6th
+event project meeting /at Aug 6 2-4pm
+todo join sports club
+todo borrow book
+done 4
+list
+delete 3
+list
+delete 2
+list
+bye
