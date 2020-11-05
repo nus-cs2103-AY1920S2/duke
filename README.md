@@ -1,39 +1,62 @@
-# Setting up
+# Features
+ 
+* Create Tasks (todo, deadline, and event)
+* Mark Completed Tasks as Done
+* Delete Tasks
+* Find Tasks
+* Set Task Priority
 
-**Prerequisites**
+# Commands
+**list**
+```
+list
+```
+* lists out all the tasks
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+**todo**
+```
+todo pick up delivery
+```
+* adds a new "todo" task to be done
 
-**Importing the project into IntelliJ**
+**deadline**
+```
+deadline send flowers /by 2020-02-14
+```
+* adds a new "deadline" task to be done by a specified deadline
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+**event**
+```
+event celebrate Valentines Day with Angela /at TPC
+```
+* adds a new "event" task to be done at a specified location
 
-# Tutorials 
+**done**
+```
+done 2
+```
+* sets the task status for the task at the specified index as completed
 
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+**delete**
+```
+delete 3
+```
+* deletes the task at the specified index
 
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+**priority**
+```
+priority cut grass 
+```
+* sets the task with the specified task name to be of high priority
 
-# Feedback, Bug Reports
+**find**
+```
+find flowers
+```
+* returns a list of tasks with the specified keyword in the task name
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+**bye**
+```
+bye
+```
+* terminates the program
