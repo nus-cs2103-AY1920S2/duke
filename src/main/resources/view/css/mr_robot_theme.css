@@ -1,44 +1,44 @@
 /* Declare variables */
 * {
-    dark-primary-color: #1e505f;
-    default-primary-color: #000000;
-    light-primary-color: #7aecff;
-    text-primary-color: #41FF00;
-    accent-color: #607D8B;
-    primary-text-color: #212121;
-    secondary-text-color: #757575;
-    divider-color: #BDBDBD;
-    white: #FFFFFF;
-    black: #000000;
+  dark-primary-color: #1e505f;
+  default-primary-color: #000000;
+  light-primary-color: #7aecff;
+  text-primary-color: #41ff00;
+  accent-color: #607d8b;
+  primary-text-color: #212121;
+  secondary-text-color: #757575;
+  divider-color: #bdbdbd;
+  white: #ffffff;
+  black: #000000;
 }
 
 .root {
-    -fx-focus-color: transparent;
+  -fx-focus-color: transparent;
 }
 
 /* Chat style */
 VBox {
-    -fx-background-color: dark-primary-color;
+  -fx-background-color: dark-primary-color;
 }
 
 /* DialogBox Label style */
 .label {
-    -fx-text-fill: white;
-    -fx-font-family: 'Consolas';
-    -fx-font-size: 15;
+  -fx-text-fill: white;
+  -fx-font-family: "Consolas";
+  -fx-font-size: 15;
 }
 
 .button {
-    -fx-font-family: 'Consolas';
-    -fx-text-fill: black;
-    -fx-font-size: 16;
+  -fx-font-family: "Consolas";
+  -fx-text-fill: black;
+  -fx-font-size: 16;
 }
 
 .button:hover {
-    -fx-font-style: oblique;
+  -fx-font-style: oblique;
 }
 
 DialogBox {
-    -fx-border-color: divider-color;
-    -fx-border-width: 0.2;
+  -fx-border-color: divider-color;
+  -fx-border-width: 0.2;
 }
