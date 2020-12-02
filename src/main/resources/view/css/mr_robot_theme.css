@@ -1,15 +1,15 @@
 /* Declare variables */
 * {
   dark-primary-color: #1e505f;
-  default-primary-color: #000000;
+  default-primary-color: #000;
   light-primary-color: #7aecff;
   text-primary-color: #41ff00;
   accent-color: #607d8b;
   primary-text-color: #212121;
   secondary-text-color: #757575;
   divider-color: #bdbdbd;
-  white: #ffffff;
-  black: #000000;
+  white: #fff;
+  black: #000;
 }
 
 .root {
