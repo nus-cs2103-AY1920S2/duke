@@ -1,0 +1,11 @@
+/*@author lohszeying-reused
+Reused solution from https://stackoverflow.com/questions/17540137/javafx-scrollpane-border-and-background */
+.scroll-pane {
+    -fx-background-image: url("/images/cielBG.jpg");
+    -fx-background-size: 100% 100%;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+/*@author*/

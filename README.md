@@ -1,39 +1,44 @@
-# Setting up
+# Duke Chatbot User Guide
 
-**Prerequisites**
+### Introduction 
+Duke Chatbot is a personalized chatbot that enables user to store tasks in the form of todo, event and deadline tasks. This enables the user to organize his or her tasks in a neat way.
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+This is how Duke Chatbot look like.
 
-**Importing the project into IntelliJ**
+<img src="Ui.png" height="400">
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+### Commands
+* `todo` or `t` - Creates a todo task.
+    
+    Example: `todo read book`
+    
+* `event` or `e` - Creates an event task.
 
-# Tutorials 
+    Example: `event read book /by Sunday` or `event read book /by 2020-02-25`
+    
+    Note: `event` accepts date format in `YYYY-MM-DD`, and can convert the date to `DD MMM YYYY`.
+    
+* `deadline` or `dl` - Creates a deadline task.
 
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+    Example: `deadline read book /by Sunday` or `deadline read book /by 2020-02-25`
+    
+    Note: `event` accepts date format in `YYYY-MM-DD`, and can convert the date to `DD MMM YYYY`.
+    
+* `list` or `l` - Show tasks.
 
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+* `done` or `d` - Mark a task as done.
 
-# Feedback, Bug Reports
+* `delete` or `del` - Delete a task.
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+* `find` or `f` - Find a keyword in your task list.
+
+* `bye` `goodbye` - Saves task and exit application.
+
+### Exceptions
+If Duke cannot understand your message, Duke will reply the respective message to your command.
+
+### Acknowledgement
+Special thanks to @nus-cs2103-AY1920S2 for creating JavaFX tutorial!
+
+### Images used in Duke Chatbot
+All the images are done by me.
