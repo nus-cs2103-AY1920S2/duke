@@ -1,0 +1,9 @@
+hi
+todo hi
+todo hey
+event 1 /at 1
+deadline 2 /by 2
+list
+done 3
+list
+bye
