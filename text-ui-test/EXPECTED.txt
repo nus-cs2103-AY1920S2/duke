@@ -1,0 +1,82 @@
+
+______________________________________ 
+Hello! I'm Duke 
+What can I do for you?
+______________________________________ 
+
+
+______________________________________ 
+Got it. I've added this task: 
+[T][✘] borrow book
+Now you have 1 task(s) in the list.
+______________________________________ 
+
+
+______________________________________ 
+Got it. I've added this task: 
+[E][✘] meeting  (at: whenever)
+Now you have 2 task(s) in the list.
+______________________________________ 
+
+
+______________________________________ 
+Got it. I've added this task: 
+[D][✘] task  (by: tmr)
+Now you have 3 task(s) in the list.
+______________________________________ 
+
+
+______________________________________ 
+Got it. I've added this task: 
+[T][✘] eat
+Now you have 4 task(s) in the list.
+______________________________________ 
+
+
+______________________________________ 
+1. [T][✘] borrow book
+2. [E][✘] meeting  (at: whenever)
+3. [D][✘] task  (by: tmr)
+4. [T][✘] eat
+
+______________________________________ 
+
+
+______________________________________ 
+Nice! I've marked this task as done: 
+[E][✓] meeting  (at: whenever)
+______________________________________ 
+
+
+______________________________________ 
+1. [T][✘] borrow book
+2. [E][✓] meeting  (at: whenever)
+3. [D][✘] task  (by: tmr)
+4. [T][✘] eat
+
+______________________________________ 
+
+
+______________________________________ 
+Noted. I've removed this task: 
+[E][✓] meeting  (at: whenever)
+Now you have 3 task(s) in the list
+______________________________________ 
+
+
+______________________________________ 
+☹ OOPS!!! The description of a todo cannot be empty. 
+
+______________________________________ 
+
+
+______________________________________ 
+☹ OOPS!!! I'm sorry, but I don't know what that means :-( 
+
+______________________________________ 
+
+
+______________________________________ 
+Bye. Hope to see you again soon!
+______________________________________ 
+

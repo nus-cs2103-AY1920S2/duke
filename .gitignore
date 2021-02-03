@@ -12,3 +12,11 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Java class files
+*.class
+
+# VSC files
+.classpath
+.project
+org.eclipse.buildship.core.prefs

@@ -1,0 +1,11 @@
+todo borrow book
+event meeting /at whenever
+deadline task /by tmr
+todo eat
+list
+done 2
+list
+delete 2
+todo
+jjjkk
+bye
