@@ -1,0 +1,4 @@
+[T][✓] Workout
+[T][✘] Complete website UI design
+[D][✘] Analysis report (by: 2020-02-20)
+[E][✘] Annual dinner (at: 2020-03-12)
