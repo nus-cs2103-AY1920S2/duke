@@ -2,7 +2,7 @@
 <h3 align="center">A JavaFX-Powered Task Management App</h3>
 <p align="center"><em>Zhu Hanming&nbsp;&nbsp;</em>|<em>&nbsp;&nbsp;A0196737L</em></p>
 
-<p align="center"><a href="https://travis-ci.com/zhuhanming/duke" target="_blank"><img src="https://travis-ci.com/zhuhanming/duke.svg?branch=master" alt="Travis Build Status"/></a>&nbsp;<a href="https://ci.appveyor.com/project/zhuhanming/duke/branch/master" target="_blank"><img src="https://ci.appveyor.com/api/projects/status/uu8um6iq9mp4l37l/branch/master?svg=true" alt="AppVeyor Build Status"/></a>&nbsp;<a href="https://coveralls.io/github/zhuhanming/duke?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/zhuhanming/duke/badge.svg?branch=master" alt="Coveralls Coverage Status"/></a></p>
+<p align="center"><a href="https://travis-ci.com/zhuhanming/duchess" target="_blank"><img src="https://travis-ci.com/zhuhanming/duchess.svg?branch=master" alt="Travis Build Status"/></a>&nbsp;<a href="https://ci.appveyor.com/project/zhuhanming/duke/branch/master" target="_blank"><img src="https://ci.appveyor.com/api/projects/status/uu8um6iq9mp4l37l/branch/master?svg=true" alt="AppVeyor Build Status"/></a>&nbsp;<a href="https://coveralls.io/github/zhuhanming/duke?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/zhuhanming/duke/badge.svg?branch=master" alt="Coveralls Coverage Status"/></a></p>
 
 <p align="center"><img src="docs/Ui-both.png" width="70%"/></p>
 
