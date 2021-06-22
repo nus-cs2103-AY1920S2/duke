@@ -1,0 +1,85 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'jacoco'
+    id 'com.github.kt3k.coveralls' version '2.8.4'
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    testImplementation 'org.mockito:mockito-core:3.2.4'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    String javaFxVersion = '11.0.1'
+
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.2.3"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
+group 'main.java.duke'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+application {
+    // Change this to your main class.
+    mainClassName = "duke.Launcher"
+}
+
+run {
+    standardInput = System.in
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "short"
+    }
+}
+
+task appVeyorTest(type: Test) {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "short"
+    }
+    exclude 'duke/ui/UiTest.class'
+}
+
+tasks.withType(Test) {
+    enableAssertions = true
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}

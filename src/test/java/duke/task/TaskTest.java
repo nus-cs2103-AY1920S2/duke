@@ -1,0 +1,57 @@
+package duke.task;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+/**
+ * JUnit test class for {@code Task}.
+ */
+public class TaskTest {
+    /**
+     * Tests the {@code getDescription()} method.
+     */
+    @Test
+    public void testGetDescription() {
+        assertEquals("This is a test description", new Task("This is a test description").getDescription());
+        assertEquals("Same here",
+                new Task("Same here", true, LocalDateTime.now(), LocalDateTime.now()).getDescription());
+    }
+
+    /**
+     * Tests the {@code isCompleted()} method.
+     */
+    @Test
+    public void testIsCompleted() {
+        assertFalse(new Task("Test description").isCompleted());
+        assertTrue(new Task("Hello world", true, LocalDateTime.now(), LocalDateTime.now()).isCompleted());
+    }
+
+    /**
+     * Tests the {@code toggleIsCompleted()} method.
+     */
+    @Test
+    public void testToggleIsCompleted() {
+        Task testTask = new Task("Task description");
+        assertFalse(testTask.isCompleted());
+        testTask.completeTask();
+        assertTrue(testTask.isCompleted());
+    }
+
+    /**
+     * Tests the overridden {@code toString()} method.
+     */
+    @Test
+    public void testToString() {
+        Task testTask = new Task("What's up world!");
+        assertEquals("[\u2718] What's up world!", testTask.toString()); // cross mark
+        testTask.completeTask();
+        assertEquals("[\u2713] What's up world!", testTask.toString()); // tick mark
+
+    }
+
+}

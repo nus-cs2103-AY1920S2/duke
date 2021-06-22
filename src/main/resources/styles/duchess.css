@@ -1,0 +1,23 @@
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.speech-bubble {
+    -fx-background-color: white;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+.user-speech-bubble {
+    -fx-background-color: lightgreen;
+}
+
+.theme-toggle:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.window-top-bar {
+    -fx-background-color: #e3e3e3;
+}
