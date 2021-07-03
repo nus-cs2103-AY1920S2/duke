@@ -7,8 +7,12 @@
 /.gradle/
 /build/
 src/main/resources/docs/
+src/text-ui/text/*
 
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
+
+# Text file for Persistent Storage of app Data
+# data/*
