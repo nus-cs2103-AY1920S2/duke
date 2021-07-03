@@ -1,0 +1,48 @@
+TextField {
+    -fx-background-color : #121212;
+    -fx-text-inner-color: #BB86FC;
+    -fx-border-color: #3700B3;
+}
+
+AnchorPane {
+    -fx-background-color: #3700B3;
+    -fx-border-color: #3700B3;
+}
+
+Button {
+    -fx-background-color: #121212;
+    -fx-border-color: #3700B3;
+}
+
+ScrollPane {
+    -fx-background: #121212;
+    -fx-background-color: #3700B3
+}
+
+.scroll-bar {
+    -fx-background-color: #333333;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #3700B3;
+    -fx-background-insets: 0 4 0 4;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 2em;
+    -fx-padding: 5;
+}
+
+.scroll-bar:vertical .increment-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 2em;
+    -fx-padding: 5;
+}

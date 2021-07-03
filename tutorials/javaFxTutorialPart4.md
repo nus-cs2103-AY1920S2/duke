@@ -29,7 +29,7 @@ FXML is a XML-based language that allows us to define our user interface. Proper
 
 The FXML snippet define a TextField similar to the one that we programmatically defined previous in Tutorial 2. Notice how concise FXML is compared to the plain Java version.
 
-Let's return to Duke and convert it to use FXML instead.
+Let's return to duke.Duke and convert it to use FXML instead.
 
 # Rebuilding the Scene using FXML
 
@@ -101,14 +101,14 @@ We will get to that later.
 
 ## Using Controllers
 
-As part of the effort to separate the code handling Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
-We call these UI classes _controllers_. 
+As part of the effort to separate the code handling duke.Duke's logic and duke.ui.Ui, let's _refactor_ the duke.ui.Ui-related code to its own class.
+We call these duke.ui.Ui classes _controllers_. 
 
 Let's implement the `MainWindow` controller class that we specified in `MainWindow.fxml`.
 
 **MainWindow.java**
 ```java
-import javafx.fxml.FXML;
+import duke.Duke;import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -143,7 +143,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -160,7 +160,7 @@ public class MainWindow extends AnchorPane {
 ```
 
 The `@FXML` annotation marks a `private` or `protected` member and makes it accessible to FXML despite its modifier.
-Without the annotation, we will have to make everything `public` and expose our UI to unwanted changes.
+Without the annotation, we will have to make everything `public` and expose our duke.ui.Ui to unwanted changes.
 
 The `FXMLLoader` will map the a control with a `fx:id` defined in FXML to a variable with the same name in its controller.
 Notice how in `MainWindow`, we can invoke `TextField#clear()` on `userInput` and access its content just as we did in the previous example.
@@ -168,7 +168,7 @@ Similarly, methods like private methods like `handleUserInput` can be used in FX
 
 ## Using FXML in our application
 
-Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
+Let's create a new `Main` class as the bridge between the existing logic in `duke.Duke` and the duke.ui.Ui in `MainWindow`.
 
 **Main.java**
 ```java
@@ -182,7 +182,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for duke.Duke using FXML.
  */
 public class Main extends Application {
 
