@@ -1,0 +1,5 @@
+T , 0 , read book
+T , 0 , mow lawn
+T , 0 , feed dogs
+E , 1 , book fair  , 25 Jan 07
+D , 0 , quiz  , 2020-11-02
