@@ -1,5 +1,5 @@
 # Setting up
-
+[![Build Status](https://travis-ci.com/jiachen247/duke.svg?branch=master)](https://travis-ci.org/jiachen247/duke)
 **Prerequisites**
 
 * JDK 11
@@ -20,7 +20,7 @@
 1. Ensure that your src folder is checked. Keep clicking `Next`.
 1. Click `Finish`.
 
-# Tutorials 
+# Tutorials
 
 Duke Increment | Tutorial
 ---------------|---------------
