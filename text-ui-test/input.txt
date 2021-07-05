@@ -1,0 +1,9 @@
+hi
+list
+todo stay alive
+deadline return the Transistor /by this Sunday midnight
+event concert at the Empty Set /at this Saturday 6pm-9pm
+list
+done 3
+list
+bye
