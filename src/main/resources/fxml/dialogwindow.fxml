@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Region?>
+<StackPane fx:id="dialogWindow" xmlns:fx="http://javafx.com/fxml/1" minHeight="550.0">
+    <Region fx:id="backgroundRegion"/>
+    <VBox fx:id="dialogContainer" layoutX="10.0" layoutY="10.0" prefWidth="400.0"
+          spacing="10"/>
+</StackPane>

@@ -1,0 +1,4 @@
+#dialogWindow #backgroundRegion {
+    -fx-background-color: red;
+    -fx-opacity: 0.3;
+}

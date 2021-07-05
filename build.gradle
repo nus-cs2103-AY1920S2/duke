@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    //Shadow is a plugin that packages an application into an executable jar file
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    implementation 'org.testng:testng:6.9.6'
+
+    String javaFxVersion = '11'
+
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+
+}
+
+group 'duke'
+version '0.2.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    // Change this to your main class.
+    mainClassName = "duke.Launcher"
+}
+
+run {
+    standardInput = System.in
+}
+
+test {
+    useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "2.1.0"
+    archiveClassifier = null
+    archiveAppendix = null
+}
