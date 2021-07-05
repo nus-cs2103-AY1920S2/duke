@@ -9,7 +9,7 @@ While we have produced a fully functional prototype, there are a few major probl
    Every small change requires us to rebuild and run the application.  
 
 1. Components are heavily dependent on each other:
-   Why does `Main` need to know that `DialogBox` needs a `Label`? 
+   Why does `sample.Main` need to know that `gui.DialogBox` needs a `Label`? 
    What happens if we change the `Label` to a custom `ColoredLabel` in the future?  
     
     We need to minimize the amount of information each control needs to know about another.
@@ -18,7 +18,7 @@ While we have produced a fully functional prototype, there are a few major probl
 1. The code is untidy and long:
    Why is all the code in one place?
 
-   The `Main` class attempts to do it all. 
+   The `sample.Main` class attempts to do it all. 
    Code for visual tweaks, listeners and even utility methods are all in one file.
    This makes it difficult to find and make changes to existing code.
 
@@ -60,7 +60,7 @@ Create the following files in `src/main/resources/view`:
 </AnchorPane>
 ```
 
-**DialogBox.fxml**
+**gui.DialogBox.fxml**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -94,10 +94,10 @@ We will get to that later.
  
    ![Controller for MainWindow](assets/MainWindowController.png)
 
-1. Let’s repeat the process for `DialogBox`.
-   The main difference here is that DialogBox checks `Use fx:root construct` and _does not define a controller class_. 
+1. Let’s repeat the process for `gui.DialogBox`.
+   The main difference here is that gui.DialogBox checks `Use fx:root construct` and _does not define a controller class_. 
 
-   ![Settings for DialogBox](assets/DialogBoxController.png)
+   ![Settings for gui.DialogBox](assets/DialogBoxController.png)
 
 ## Using Controllers
 
@@ -128,7 +128,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duke taskManager;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -139,7 +139,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        duke = d;
+        taskManager = d;
     }
 
     /**
@@ -149,10 +149,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = taskManager.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                gui.DialogBox.getUserDialog(input, userImage),
+                gui.DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }
@@ -168,9 +168,9 @@ Similarly, methods like private methods like `handleUserInput` can be used in FX
 
 ## Using FXML in our application
 
-Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
+Let's create a new `sample.Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
 
-**Main.java**
+**sample.Main.java**
 ```java
 @Override
 import java.io.IOException;
@@ -184,18 +184,18 @@ import javafx.stage.Stage;
 /**
  * A GUI for Duke using FXML.
  */
-public class Main extends Application {
+public class sample.Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke taskManager = new Duke();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(sample.Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(taskManager);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -206,9 +206,9 @@ public class Main extends Application {
 
 Again, we can interact with the `AnchorPane` defined in the FXML as we would have if we created the `AnchorPane` ourselves.
 
-For our custom `DialogBox`, we did not define a controller so let's create a controller for it.
+For our custom `gui.DialogBox`, we did not define a controller so let's create a controller for it.
 
-**DialogBox.java**
+**gui.DialogBox.java**
 ```java
 import java.io.IOException;
 import java.util.Collections;
@@ -229,15 +229,15 @@ import javafx.scene.layout.HBox;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+public class gui.DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private gui.DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/gui.DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -259,26 +259,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static gui.DialogBox getUserDialog(String text, Image img) {
+        return new gui.DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static gui.DialogBox getDukeDialog(String text, Image img) {
+        var db = new gui.DialogBox(text, img);
         db.flip();
         return db;
     }
 }
 ```
 
-When we create a new instance of `DialogBox`, we set both the controller and root Node to `DialogBox`. 
-From this point onwards we can interact with `DialogBox` as we have in the previous tutorials.
+When we create a new instance of `gui.DialogBox`, we set both the controller and root Node to `gui.DialogBox`. 
+From this point onwards we can interact with `gui.DialogBox` as we have in the previous tutorials.
 
-The last change that we have to make is to point our `Launcher` class in the right direction:
-In `Launcher.java`
+The last change that we have to make is to point our `gui.Launcher` class in the right direction:
+In `gui.Launcher.java`
 ```java
 //...    
-Application.launch(Main.class, args);
+Application.launch(sample.Main.class, args);
 //...
 ```
 [todo]: # (Discussion on the fx:root pattern.)

@@ -1,0 +1,74 @@
+plugins {
+    id 'java'
+    id 'application'
+    //id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+//checkstyle {
+//    toolVersion = '8.23'
+//}
+
+shadowJar {
+    archiveBaseName = "kuri"
+    archiveVersion = "v1.1"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+    baseName = 'all-in-one-jar'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+group 'seedu.duke'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    String testFxVersion = '4.0.15-alpha'
+    String jUnitVersion = '5.4.0'
+    String javaFxVersion = '11'
+
+    //config the jar to Mavern library
+    implementation 'org.fusesource.jansi:jansi:1.18'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'linux'
+}
+
+application {
+    // Change this to your main class.
+    mainClassName = 'sample.Main'
+}
+
+run {
+    standardInput = System.in
+}
+
+configurations {
+    runtimeLibraries
+}
