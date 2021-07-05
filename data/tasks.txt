@@ -1,0 +1,6 @@
+T,true, read book
+D,true, return book,2019-10-15
+E,true, project meeting,Mon 2-4pm
+E,false,project meeting,Mon 2-4pm
+D,false,return book,2019-10-15
+T,false,save cats
