@@ -8,9 +8,9 @@ Rather than to do everything in one try, let’s iterate and build up towards ou
 
 JavaFX has an _event-driven architecture style_. As such, we programmatically define _handler_ methods to execute as a response to certain _events_. When an event is detected, JavaFX will call the respective handlers.
 
-For Duke, there are two events that we want to respond to, namely the user pressing `Enter` in the `TextField` and left-clicking the `Button`. These are the `onAction` event for the `TextField` and the `onMouseClicked` event for the `Button`.
+For dukeApp.duke.Duke, there are two events that we want to respond to, namely the user pressing `Enter` in the `TextField` and left-clicking the `Button`. These are the `onAction` event for the `TextField` and the `onMouseClicked` event for the `Button`.
 
-For now, let’s have the application add a new `Label` with the text from the `TextField`. Update the `Main` class as follows. You'll need to add an `import javafx.scene.control.Label;` too.
+For now, let’s have the application add a new `Label` with the text from the `TextField`. Update the `dukeApp.duke.Main` class as follows. You'll need to add an `import javafx.scene.control.Label;` too.
 ```java
 @Override
 public void start(Stage stage) {
@@ -68,19 +68,19 @@ Verify that the `ScrollPane` scrolls as intended.
 
 In the mockup of the UI, notice that the dialog boxes are composed of two different controls (`ImageView` and `Label`) and reused multiple times. In situations like this, it is often beneficial to create our own custom control.
 
-Let’s create our custom control `DialogBox`:
+Let’s create our custom control `dukeApp.duke.DialogBox`:
 ```java
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-public class DialogBox extends HBox {
+public class dukeApp.duke.DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
+    public dukeApp.duke.DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
 
@@ -94,7 +94,7 @@ public class DialogBox extends HBox {
 }
 ```
 
-We use the code in our main class just like any other control. Here are the steps to update the code to use the custom control in `Main.java`.
+We use the code in our main class just like any other control. Here are the steps to update the code to use the custom control in `dukeApp.duke.Main.java`.
 
 First, add these imports:
 ```java
@@ -103,7 +103,7 @@ import javafx.scene.image.ImageView;
 ```
 
 Next, add two images to the `main/resources/images` folder.
-For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and Duke's avatar respectively but you can use any image you want.
+For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and dukeApp.duke.Duke's avatar respectively but you can use any image you want.
 
 Image|Filename
 ---|---
@@ -112,10 +112,10 @@ Image|Filename
 
 
 ```java
-public class Duke extends Application {
+public class dukeApp.duke.Duke extends Application {
     // ...
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeApp.duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     // ...
 }
 ```
@@ -124,15 +124,15 @@ Add a new method to handle user input:
 ```java
 /**
  * Iteration 2:
- * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+ * Creates two dialog boxes, one echoing user input and the other containing dukeApp.duke.Duke's reply and then appends them to
  * the dialog container. Clears the user input after processing.
  */
 private void handleUserInput() {
     Label userText = new Label(userInput.getText());
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
-            new DialogBox(userText, new ImageView(user)),
-            new DialogBox(dukeText, new ImageView(duke))
+            new dukeApp.duke.DialogBox(userText, new ImageView(user)),
+            new dukeApp.duke.DialogBox(dukeText, new ImageView(dukeApp.duke))
     );
     userInput.clear();
 }
@@ -142,7 +142,7 @@ private void handleUserInput() {
  * Replace this stub with your completed method.
  */
 private String getResponse(String input) {
-    return "Duke heard: " + input;
+    return "dukeApp.duke.Duke heard: " + input;
 }
 ```
 
@@ -168,9 +168,9 @@ Run the program and see how it works.
 
 ![DialogBoxes Iteration 2](assets/DialogBoxesIteration2.png) 
 
-## Iteration 3 – Adding custom behavior to DialogBox
+## Iteration 3 – Adding custom behavior to dukeApp.duke.DialogBox
 
-One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and Duke’s output.
+One additional benefit of defining a custom control is that we can add behavior specific to our `dukeApp.duke.DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and dukeApp.duke.Duke’s output.
 
 ```java
 /**
@@ -183,12 +183,12 @@ private void flip() {
     this.getChildren().setAll(tmp);
 }
 
-public static DialogBox getUserDialog(Label l, ImageView iv) {
-    return new DialogBox(l, iv);
+public static dukeApp.duke.DialogBox getUserDialog(Label l, ImageView iv) {
+    return new dukeApp.duke.DialogBox(l, iv);
 }
 
-public static DialogBox getDukeDialog(Label l, ImageView iv) {
-    var db = new DialogBox(l, iv);
+public static dukeApp.duke.DialogBox getDukeDialog(Label l, ImageView iv) {
+    var db = new dukeApp.duke.DialogBox(l, iv);
     db.flip();
     return db;
 }
@@ -205,15 +205,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 ```
 
-Now, we can go back to the `Main` class and change the event handler to use our new `DialogBox`. 
+Now, we can go back to the `dukeApp.duke.Main` class and change the event handler to use our new `dukeApp.duke.DialogBox`. 
 
 ```java
 private void handleUserInput() {
     Label userText = new Label(userInput.getText());
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(userText, new ImageView(user)),
-            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            dukeApp.duke.DialogBox.getUserDialog(userText, new ImageView(user)),
+            dukeApp.duke.DialogBox.getDukeDialog(dukeText, new ImageView(dukeApp.duke))
     );
     userInput.clear();
 }
@@ -224,12 +224,12 @@ Run the application and play around with it.
 ![DialogBoxes Iteration 3](assets/DialogBoxesIteration3.png)
 
 Congratulations! 
-You have successfully implemented a fully functional GUI for Duke!  
+You have successfully implemented a fully functional GUI for dukeApp.duke.Duke!  
 
 ## Exercises
 
 1. While the GUI looks similar to the mockup, there are still parts that need to be refined. Try your hand at some of these tasks:
-   * Add padding between each DialogBox
+   * Add padding between each dukeApp.duke.DialogBox
    * Add padding between each ImageView and its Label
    * Clip the ImageView into a circle
    * Add background color to each dialog box
