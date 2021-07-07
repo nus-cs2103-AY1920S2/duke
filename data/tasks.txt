@@ -1,0 +1,6 @@
+T | 1 | borrow book
+T | 1 | buy bread
+E | 0 | project meeting | Mar 5 2020
+T | 1 | read book
+D | 0 | return book | May 3 2020
+D | 1 | watch webcast | Mar 5 2020
