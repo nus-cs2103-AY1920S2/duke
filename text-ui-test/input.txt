@@ -1,0 +1,8 @@
+todo read book
+deadline homework /by Sunday, 26 Jan 2020
+event CNY gathering /at Monday, 12pm
+list
+done 2
+done 3
+list
+bye
