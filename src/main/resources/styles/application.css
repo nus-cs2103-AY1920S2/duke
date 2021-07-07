@@ -1,0 +1,7 @@
+#displayPicture {
+}
+
+#dialog {
+    -fx-text-wrap: true;
+    -fx-font-size: 20px;
+}

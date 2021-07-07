@@ -1,0 +1,4 @@
+[T]=[o]= helloworld
+[T]=[o]= getamped2
+[D]=[o]= helloworld (by: Jun 01 2019)
+[T]=[x]= get something to do

@@ -1,10 +1,34 @@
+import packagedirectory.test.ChatBox;
+import packagedirectory.test.Message;
+
+import java.io.File;
+
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    private ChatBox chatBox = new ChatBox("data/duke.txt");
+
+    public String initialize() {
+        String initMsg = chatBox.initialise();
+        return initMsg;
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        String output;
+        output = chatBox.reply(new Message(input));
+        return output;
+    }
+
+    public void getResponse(String type, String detail) {
+        String input = type + " " + detail;
+        Message response = new Message(input);
+        chatBox.reply(response);
+    }
+
+    public boolean isClose() {
+        return chatBox.isClose();
     }
 }

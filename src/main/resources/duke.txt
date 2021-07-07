@@ -1,0 +1,3 @@
+[T]=[o]= hello world
+[T]=[o]= test
+[T]=[o]= gg
