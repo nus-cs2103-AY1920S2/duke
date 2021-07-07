@@ -1,0 +1,5 @@
+deadline homework /by Thursday-2359
+event birthday /at 17-Jan
+todo shopping
+list
+bye

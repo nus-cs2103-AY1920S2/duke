@@ -1,0 +1,35 @@
+++++++++++++++++++++++
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__._|_|\_\___|
+
+++++++++++++++++++++++
+
+Duke: Hey boss! Duke here, at your service.
+      What do you need me to do?
+
+You:  
+Duke: Oooh, this one's important eh, boss? I got it
+      [D][✗] homework (by: Thursday-2359)
+      Now you have 1 tasks in the list
+
+You:  
+Duke: A special event I see. Don't worry boss, I'll remind you
+      [E][✗] birthday (at: 17-Jan)
+      Now you have 2 tasks in the list
+
+You:  
+Duke: Got it, boss. I'll write this one down
+      [T][✗] shopping
+      Now you have 3 tasks in the list
+
+You:  
+Duke: Here's what I've written down, boss.
+      1. [D][✗] homework (by: Thursday-2359)
+      2. [E][✗] birthday (at: 17-Jan)
+      3. [T][✗] shopping
+
+You:  
+Duke: Good bye, boss! Call me if you need me. I'll be waiting!
