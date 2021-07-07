@@ -1,0 +1,4 @@
+E | 1 | project meeting  | Mon 2-4pm
+T | 1 | redbook
+D | 1 | finish hw  | by Sunday
+T | 1 | read book
