@@ -1,0 +1,7 @@
+T | 1 | read book
+T | 0 | take a nap
+T | 1 | look for mushrooms
+T | 0 | read a book
+E | 0 | meeting | 14:00 | 2020-02-17
+D | 0 | submit quiz | 16:00 | 2020-02-18
+D | 0 | submit quiz | 16:00 | 2020-02-19
