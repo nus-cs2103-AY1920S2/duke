@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="650.0" prefWidth="450.0" AnchorPane.leftAnchor="0.0"
+            AnchorPane.rightAnchor="0.0" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="duke.MainWindow">
+    <children>
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" maxHeight="-Infinity"
+                    maxWidth="-Infinity" minHeight="-Infinity" prefHeight="557.0" prefWidth="400.0" vvalue="1.0"
+                    AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.0"
+                    AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox fx:id="dialogContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                      prefHeight="552.0" prefWidth="388.0"/>
+            </content>
+        </ScrollPane>
+        <SplitPane dividerPositions="0.7688442211055276" layoutX="-2.0" layoutY="558.0" prefHeight="60.0"
+                   prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                   AnchorPane.rightAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="60.0">
+                    <children>
+                        <TextField fx:id="userInput" maxHeight="1.7976931348623157E308"
+                                   maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
+                                   onAction="#handleUserInput" prefHeight="43.0" prefWidth="400.0"
+                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="100.0"
+                            SplitPane.resizableWithParent="false">
+                    <children>
+                        <Button fx:id="sendButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                onAction="#handleUserInput" prefHeight="43.0" prefWidth="76.0" text="Send"
+                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                AnchorPane.topAnchor="0.0"/>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>
