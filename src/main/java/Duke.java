@@ -1,10 +1,11 @@
-public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
+import java.nio.file.Paths;
+
+/**
+ * Represents a chatbot, which takes in commands related to tasks and tracks a list of tasks.
+ */
+public abstract class Duke {
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
+    protected static final String expectedStoragePath = Paths.get("data", "duke.txt").toString();
 }

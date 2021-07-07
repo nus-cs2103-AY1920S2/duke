@@ -1,0 +1,21 @@
+.dialog-text {
+    -fx-padding: 10;
+    -fx-background-color: #CCFFCC;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+}
+
+.user-dialog {
+    -fx-alignment: center-right;
+    -fx-background-color: #FFCC99;
+}
+
+.duke-dialog {
+    -fx-alignment: center-left;
+    -fx-background-color: #FFCC99;
+}
+
+.profile-image {
+    -fx-background-radius: 50%;
+}
