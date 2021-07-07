@@ -1,0 +1,14 @@
+1 || deadline || HELLO WORLD || 2020-03-03 1500
+1 || event || eat dinner || 2020-03-01 2000
+0 || todo || eat dinner
+1 || todo || def
+0 || event || 4 cry || 2020-01-01 1300
+0 || deadline || CS2103 homework || 2020-03-15 2359
+0 || event || CS2103 tutorial || 2020-07-07 1300
+0 || todo || add more tasks 
+0 || todo || make this UI look better
+0 || todo || I think I won't have time to make my UI look better
+0 || todo || LONG LIST BABY
+1 || event || done? || 2020-05-05 1500
+1 || deadline || this thing || 2020-02-28 2359
+1 || todo || done plz 

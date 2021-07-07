@@ -1,0 +1,36 @@
+delete 1
+delete 1
+delete 1
+event read book no time
+deadline dead line no time
+done 1
+todo borrow book
+blah
+
+list
+event
+todo
+deadline
+deadline return book /by Sunday
+deadline return book /by 2020-03-15 1530
+event project meeting /at Mon 2-4pm
+event project meeting /at 2020-07-07 0707
+list
+done 2
+deadline do homework /by no idea :-p
+list
+done a
+done 4
+list
+delete 1
+list
+delete 4
+todo your butt
+search book
+search
+search
+updatedeadline 1 desc/ say hello time/ 2020-01-01 1300
+updatetodo 3 desc/ your mom
+updateevent 3 desc/ say hello time/ 2020-01-01 1300
+list
+bye

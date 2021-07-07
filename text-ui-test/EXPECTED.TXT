@@ -1,0 +1,157 @@
+----------------------------
+Hello I'm your task manager!
+----------------------------
+
+    -----
+    Tasks loaded from disk:
+    1. [D][✓] say hello (by: 13:00, Jan 1 2020)
+    2. [E][✗] project meeting (at: 07:07, Jul 7 2020)
+    3. [T][✗] your mom
+    -----
+
+----------------------------
+What tasks do you have dude?
+----------------------------
+    -----
+    Nice! I've deleted this task:
+    [D][✓] say hello (by: 13:00, Jan 1 2020)
+    Now you have 2 tasks in the list.
+    -----
+    -----
+    Nice! I've deleted this task:
+    [E][✗] project meeting (at: 07:07, Jul 7 2020)
+    Now you have 1 tasks in the list.
+    -----
+    -----
+    Nice! I've deleted this task:
+    [T][✗] your mom
+    Now you have 0 tasks in the list.
+    -----
+    -----
+    duke.exception.MissingTimeException: Event is missing time!
+    -----
+    -----
+    duke.exception.MissingTimeException: Deadline is missing time!
+    -----
+    -----
+    duke.exception.InvalidIndexException: '1' is an invalid index!
+    -----
+    -----
+    Got it. I've added this task:
+    [T][✗] borrow book
+    Now you have 1 tasks in the list.
+    -----
+    -----
+    duke.exception.UnknownCommandException: Sorry my guy, I don't know the command: 'blah'
+    -----
+    -----
+    duke.exception.UnknownCommandException: Sorry my guy, I don't know the command: ''
+    -----
+    -----
+    Here are the tasks in your list:
+    1. [T][✗] borrow book
+    -----
+    -----
+    duke.exception.MissingParameterException: Missing parameters for Event
+    -----
+    -----
+    duke.exception.MissingParameterException: Missing parameters for Todo
+    -----
+    -----
+    duke.exception.MissingParameterException: Missing parameters for Deadline
+    -----
+    -----
+    duke.exception.TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
+    -----
+    -----
+    Got it. I've added this task:
+    [D][✗] return book (by: 15:30, Mar 15 2020)
+    Now you have 2 tasks in the list.
+    -----
+    -----
+    duke.exception.TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
+    -----
+    -----
+    Got it. I've added this task:
+    [E][✗] project meeting (at: 07:07, Jul 7 2020)
+    Now you have 3 tasks in the list.
+    -----
+    -----
+    Here are the tasks in your list:
+    1. [T][✗] borrow book
+    2. [D][✗] return book (by: 15:30, Mar 15 2020)
+    3. [E][✗] project meeting (at: 07:07, Jul 7 2020)
+    -----
+    -----
+    Nice! I've marked this task as done:
+    [D][✓] return book (by: 15:30, Mar 15 2020)
+    -----
+    -----
+    duke.exception.TimeFormatException: Please enter date in the format yyyy-MM-dd HHmm
+    -----
+    -----
+    Here are the tasks in your list:
+    1. [T][✗] borrow book
+    2. [D][✓] return book (by: 15:30, Mar 15 2020)
+    3. [E][✗] project meeting (at: 07:07, Jul 7 2020)
+    -----
+    -----
+    duke.exception.InvalidIndexException: 'a' is an invalid index!
+    -----
+    -----
+    duke.exception.InvalidIndexException: '4' is an invalid index!
+    -----
+    -----
+    Here are the tasks in your list:
+    1. [T][✗] borrow book
+    2. [D][✓] return book (by: 15:30, Mar 15 2020)
+    3. [E][✗] project meeting (at: 07:07, Jul 7 2020)
+    -----
+    -----
+    Nice! I've deleted this task:
+    [T][✗] borrow book
+    Now you have 2 tasks in the list.
+    -----
+    -----
+    Here are the tasks in your list:
+    1. [D][✓] return book (by: 15:30, Mar 15 2020)
+    2. [E][✗] project meeting (at: 07:07, Jul 7 2020)
+    -----
+    -----
+    duke.exception.InvalidIndexException: '4' is an invalid index!
+    -----
+    -----
+    Got it. I've added this task:
+    [T][✗] your butt
+    Now you have 3 tasks in the list.
+    -----
+    -----
+    Here are the tasks that contains 'book' in your list:
+    1. [D][✓] return book (by: 15:30, Mar 15 2020)
+    -----
+    -----
+    duke.exception.MissingParameterException: Missing parameters for Search
+    -----
+    -----
+    duke.exception.MissingParameterException: Missing parameters for Search
+    -----
+    -----
+	Got it. I've changed this task to:
+	[D][✓] say hello (by: 13:00, Jan 1 2020)
+    -----
+    -----
+	Got it. I've changed this task to:
+	[T][✗] your mom
+    -----
+    -----
+    duke.exception.DukeException: Task is not an Event
+    -----
+    -----
+    Here are the tasks in your list:
+    1. [D][✓] say hello (by: 13:00, Jan 1 2020)
+    2. [E][✗] project meeting (at: 07:07, Jul 7 2020)
+    3. [T][✗] your mom
+    -----
+    -----
+    Bye bye friend!
+    -----

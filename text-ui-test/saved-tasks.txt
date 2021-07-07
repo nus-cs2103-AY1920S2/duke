@@ -1,0 +1,3 @@
+1 || deadline || say hello || 2020-01-01 1300
+0 || event || project meeting || 2020-07-07 0707
+0 || todo || your mom
