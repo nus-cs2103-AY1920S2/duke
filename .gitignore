@@ -12,3 +12,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Ignore changes to save and load
+data/duke.txt
