@@ -1,0 +1,30 @@
+{
+  "syntax": {
+    "a": "alias",
+    "hi": "hello",
+    "b": "bye",
+    "c": "clear",
+    "t": "todo",
+    "e": "event",
+    "f": "find",
+    "dn": "done",
+    "l": "list",
+    "ddln": "deadline",
+    "dlt": "delete"
+  },
+  "defaultCommands": [
+    "clear",
+    "list",
+    "delete",
+    "done",
+    "bye",
+    "todo",
+    "help",
+    "find",
+    "alias",
+    "hello",
+    "tag",
+    "deadline",
+    "event"
+  ]
+}
