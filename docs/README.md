@@ -1,20 +1,33 @@
-# User Guide
+# User Guide for CatDuke
+
+![Image of Yaktocat](./Ui.png)
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### UNLIMITED TASK STORAGE
+store up to 1TB of tasks!! (for all you busy bees out there)
+
+### Storable, **WOW**
+have your lists from previous sessions stored and restored on reboots
+
+### How many types of tasks? THREE **GEEZ**
+Create at least three types of tasks (todo, deadline, event AND BONUS: period)
+
+### Flexible datetime
+use a multitude of datetime formats when entering *wow*
+
+### mEmEs
+catch up on the funny things that millenials are laughing on the internet (to themselves) as they get further dettached from society because of those mobile phones
 
 ## Usage
 
 ### `Keyword` - Describe action
 
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+* `list` - lists all tasks 
+* `todo {task detail}` - creates task with task detail as the description of the task
+* `event {task detail /at datetime}` - creates task with task detail as the description of the task with a datetime
+* `deadline {task detail /by datetime}` - creates task with task detail as the description of the task with a datetime
+* `period {task detail /start datetime /end datetime*}` - creates task with task detail as the description of the task with start and end datetimes
+* `delete {task index}` - delete task
+* `done {task index}` - mark task as done
+* `bye` - closes duke
