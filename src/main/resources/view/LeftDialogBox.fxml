@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root opacity="0.81" prefWidth="430.0" style="-fx-border-radius: 30 30 0 0; -fx-background-position: center;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+          <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+              <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+              </HBox.margin>
+          </ImageView>
+        <HBox minWidth="-Infinity" opacity="0.85" prefWidth="340.0" style="-fx-background-color: #5598AA; -fx-background-radius: 0 30 30 30;" HBox.hgrow="ALWAYS">
+            <children>
+                <Group>
+                    <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </HBox.margin>
+               <children>
+                        <Label fx:id="dialog" maxWidth="330.0" text="Label" textFill="WHITE" wrapText="true" />
+               </children>
+                </Group>
+            </children>
+            <HBox.margin>
+                <Insets right="80.0" top="20.0" />
+            </HBox.margin>
+            <padding>
+                <Insets bottom="5.0" right="10.0" top="5.0" />
+            </padding>
+        </HBox>
+    </children>
+    <padding>
+        <Insets left="5.0" right="5.0" />
+    </padding>
+</fx:root>
