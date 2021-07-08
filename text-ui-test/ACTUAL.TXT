@@ -1,0 +1,10 @@
+___________________________________________________
+Hello! I'm Duchess
+What can I do for you?
+___________________________________________________
+
+Error: ☹ Why did you not provide any description?
+
+Error: No such command
+
+Bye! Hope you don't come back!
