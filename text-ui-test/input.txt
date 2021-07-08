@@ -1,0 +1,8 @@
+todo a
+deadline b /by q
+event c /at w
+list
+done 1
+done 3
+list
+bye

@@ -1,3 +1,6 @@
+# Download
+https://github.com/gerhean/duke/releases/tag/v-final
+
 # Setting up
 
 **Prerequisites**
@@ -37,3 +40,12 @@ Duke Increment | Tutorial
 
 * If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
 * We welcome pull requests too.
+
+#Acknowledgements
+
+**Resources**
+
+* Background: https://wallpapersafari.com/w/SQfFKk
+* Duke Images: https://liah0227.itch.io/female-student-1
+* User Image: https://www.uihere.com/free-cliparts/koyomi-araragi-counter-strike-nexon-zombies-monogatari-series-anime-others-6828824
+* Duke Voice: https://cicifyre.itch.io/free-voice-clips-pack-bright-female

@@ -1,0 +1,58 @@
+
+Hi hi I'm 
+*******   **     ** **   ** ********
+/**////** /**    /**/**  ** /**/////
+/**    /**/**    /**/** **  /**
+/**    /**/**    /**/****   /*******
+/**    /**/**    /**/**/**  /**////
+/**    ** /**    /**/**//** /**
+/*******  //******* /** //**/********
+///////    ///////  //   // //////// 
+
+Duke: Master! I'm so glad you used me!
+      What will you do today?
+
+Master: 
+
+Duke: So Master has Todo: a...
+
+Master: 
+
+Duke: So Master has Deadline: b (by: q)...
+
+Master: 
+
+Duke: So Master has Event: c (at: w)...
+
+Master: 
+
+Duke: Master already forgotten what Master wanted to do?!
+      Duke has no choice but to remind Master then!
+      These are the tasks which Master forgot:
+      1. a [Todo]
+      2. b (by: q) [Deadline]
+      3. c (at: w) [Event]
+
+Master: 
+
+Duke: So Master finally completed a?
+      Duke's really proud of Master!
+
+Master: 
+
+Duke: So Master finally completed c (at: w)?
+      Duke's really proud of Master!
+
+Master: 
+
+Duke: Master already forgotten what Master wanted to do?!
+      Duke has no choice but to remind Master then!
+      These are the tasks which Master forgot:
+      1. a [Todo] [Done!]
+      2. b (by: q) [Deadline]
+      3. c (at: w) [Event] [Done!]
+
+Master: 
+
+Duke: Are you leaving already?
+      Please come back and play with Duke soon...
